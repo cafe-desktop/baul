@@ -63,7 +63,7 @@ env:
 ##########################################################
 requires:
   archlinux:
-    # Useful URL: https://git.archlinux.org/svntogit/community.git/tree/caja
+    # Useful URL: https://git.archlinux.org/svntogit/community.git/tree/baul
     - clang
     - gcc
     - git
@@ -83,7 +83,7 @@ requires:
 
   debian:
     # Useful URL: https://github.com/mate-desktop/debian-packages
-    # Useful URL: https://salsa.debian.org/debian-mate-team/caja
+    # Useful URL: https://salsa.debian.org/debian-mate-team/baul
     - autopoint
     - clang
     - clang-tools
@@ -112,7 +112,7 @@ requires:
     - shared-mime-info
 
   fedora:
-    # Useful URL: https://src.fedoraproject.org/cgit/rpms/caja.git/
+    # Useful URL: https://src.fedoraproject.org/cgit/rpms/baul.git/
     - clang-analyzer
     - clang
     - cppcheck-htmlreport
@@ -220,7 +220,7 @@ releases:
   prerelease: false
   checksum: true
   file_glob: true
-  files: caja-*.tar.xz
+  files: baul-*.tar.xz
   github_release:
     tags: true
     overwrite: true

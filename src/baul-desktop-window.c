@@ -33,16 +33,16 @@
 #include <eel/eel-background.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-icon-names.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-icon-names.h>
 
-#include "caja-desktop-window.h"
-#include "caja-window-private.h"
-#include "caja-actions.h"
+#include "baul-desktop-window.h"
+#include "baul-window-private.h"
+#include "baul-actions.h"
 
 /* Tell screen readers that this is a desktop window */
 
-G_DEFINE_TYPE (CajaDesktopWindowAccessible, caja_desktop_window_accessible,
+G_DEFINE_TYPE (CajaDesktopWindowAccessible, baul_desktop_window_accessible,
                GTK_TYPE_WINDOW_ACCESSIBLE);
 
 static AtkAttributeSet *
@@ -51,7 +51,7 @@ desktop_get_attributes (AtkObject *accessible)
     AtkAttributeSet *attributes;
     AtkAttribute *is_desktop;
 
-    attributes = ATK_OBJECT_CLASS (caja_desktop_window_accessible_parent_class)->get_attributes (accessible);
+    attributes = ATK_OBJECT_CLASS (baul_desktop_window_accessible_parent_class)->get_attributes (accessible);
 
     is_desktop = g_malloc (sizeof (AtkAttribute));
     is_desktop->name = g_strdup ("is-desktop");
@@ -63,12 +63,12 @@ desktop_get_attributes (AtkObject *accessible)
 }
 
 static void
-caja_desktop_window_accessible_init (CajaDesktopWindowAccessible *window)
+baul_desktop_window_accessible_init (CajaDesktopWindowAccessible *window)
 {
 }
 
 static void
-caja_desktop_window_accessible_class_init (CajaDesktopWindowAccessibleClass *klass)
+baul_desktop_window_accessible_class_init (CajaDesktopWindowAccessibleClass *klass)
 {
     AtkObjectClass *aclass = ATK_OBJECT_CLASS (klass);
 
@@ -82,21 +82,21 @@ struct _CajaDesktopWindowPrivate
     gboolean loaded;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaDesktopWindow, caja_desktop_window,
+G_DEFINE_TYPE_WITH_PRIVATE (CajaDesktopWindow, baul_desktop_window,
                CAJA_TYPE_SPATIAL_WINDOW);
 
 static void
-caja_desktop_window_init (CajaDesktopWindow *window)
+baul_desktop_window_init (CajaDesktopWindow *window)
 {
     GtkAction *action;
     AtkObject *accessible;
 
-    window->details = caja_desktop_window_get_instance_private (window);
+    window->details = baul_desktop_window_get_instance_private (window);
 
     GtkStyleContext *context;
 
     context = gtk_widget_get_style_context (GTK_WIDGET (window));
-    gtk_style_context_add_class (context, "caja-desktop-window");
+    gtk_style_context_add_class (context, "baul-desktop-window");
 
     gtk_window_move (GTK_WINDOW (window), 0, 0);
 
@@ -128,28 +128,28 @@ caja_desktop_window_init (CajaDesktopWindow *window)
 }
 
 static gint
-caja_desktop_window_delete_event (CajaDesktopWindow *window)
+baul_desktop_window_delete_event (CajaDesktopWindow *window)
 {
     /* Returning true tells GTK+ not to delete the window. */
     return TRUE;
 }
 
 void
-caja_desktop_window_update_directory (CajaDesktopWindow *window)
+baul_desktop_window_update_directory (CajaDesktopWindow *window)
 {
     GFile *location;
 
     g_assert (CAJA_IS_DESKTOP_WINDOW (window));
 
     location = g_file_new_for_uri (EEL_DESKTOP_URI);
-    caja_window_go_to (CAJA_WINDOW (window), location);
+    baul_window_go_to (CAJA_WINDOW (window), location);
     window->details->loaded = TRUE;
 
     g_object_unref (location);
 }
 
 static void
-caja_desktop_window_screen_size_changed (GdkScreen             *screen,
+baul_desktop_window_screen_size_changed (GdkScreen             *screen,
         CajaDesktopWindow *window)
 {
     int width_request, height_request;
@@ -167,7 +167,7 @@ caja_desktop_window_screen_size_changed (GdkScreen             *screen,
 }
 
 CajaDesktopWindow *
-caja_desktop_window_new (CajaApplication *application,
+baul_desktop_window_new (CajaApplication *application,
                          GdkScreen           *screen)
 {
     CajaDesktopWindow *window;
@@ -180,7 +180,7 @@ caja_desktop_window_new (CajaApplication *application,
     height_request = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
 
     window = CAJA_DESKTOP_WINDOW
-             (gtk_widget_new (caja_desktop_window_get_type(),
+             (gtk_widget_new (baul_desktop_window_get_type(),
                               "app", application,
                               "width_request", width_request,
                               "height_request", height_request,
@@ -206,12 +206,12 @@ caja_desktop_window_new (CajaApplication *application,
 
     gdk_window_set_title (gdkwin, _("Desktop"));
 
-    g_signal_connect (window, "delete_event", G_CALLBACK (caja_desktop_window_delete_event), NULL);
+    g_signal_connect (window, "delete_event", G_CALLBACK (baul_desktop_window_delete_event), NULL);
 
     /* Point window at the desktop folder.
-     * Note that caja_desktop_window_init is too early to do this.
+     * Note that baul_desktop_window_init is too early to do this.
      */
-    caja_desktop_window_update_directory (window);
+    baul_desktop_window_update_directory (window);
 
     return window;
 }
@@ -220,7 +220,7 @@ static void
 map (GtkWidget *widget)
 {
     /* Chain up to realize our children */
-    GTK_WIDGET_CLASS (caja_desktop_window_parent_class)->map (widget);
+    GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->map (widget);
     gdk_window_lower (gtk_widget_get_window (widget));
 }
 
@@ -246,7 +246,7 @@ unrealize (GtkWidget *widget)
         details->size_changed_id = 0;
     }
 
-    GTK_WIDGET_CLASS (caja_desktop_window_parent_class)->unrealize (widget);
+    GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->unrealize (widget);
 }
 
 static void
@@ -294,7 +294,7 @@ realize (GtkWidget *widget)
     gtk_widget_set_events (widget, gtk_widget_get_events (widget)
                            | GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
     /* Do the work of realizing. */
-    GTK_WIDGET_CLASS (caja_desktop_window_parent_class)->realize (widget);
+    GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->realize (widget);
 
     /* This is the new way to set up the desktop window */
     set_wmspec_desktop_hint (gtk_widget_get_window (widget));
@@ -303,7 +303,7 @@ realize (GtkWidget *widget)
 
     details->size_changed_id =
         g_signal_connect (gtk_window_get_screen (GTK_WINDOW (window)), "size_changed",
-                          G_CALLBACK (caja_desktop_window_screen_size_changed), window);
+                          G_CALLBACK (baul_desktop_window_screen_size_changed), window);
 }
 
 static gboolean
@@ -312,7 +312,7 @@ draw (GtkWidget *widget,
 {
     eel_background_draw (widget, cr);
 
-    return GTK_WIDGET_CLASS (caja_desktop_window_parent_class)->draw (widget, cr);
+    return GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->draw (widget, cr);
 }
 
 static CajaIconInfo *
@@ -320,11 +320,11 @@ real_get_icon (CajaWindow *window,
                CajaWindowSlot *slot)
 {
     gint scale = gtk_widget_get_scale_factor (GTK_WIDGET (window));
-    return caja_icon_info_lookup_from_name (CAJA_ICON_DESKTOP, 48, scale);
+    return baul_icon_info_lookup_from_name (CAJA_ICON_DESKTOP, 48, scale);
 }
 
 static void
-caja_desktop_window_class_init (CajaDesktopWindowClass *klass)
+baul_desktop_window_class_init (CajaDesktopWindowClass *klass)
 {
     GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
     CajaWindowClass *nclass = CAJA_WINDOW_CLASS (klass);
@@ -341,7 +341,7 @@ caja_desktop_window_class_init (CajaDesktopWindowClass *klass)
 }
 
 gboolean
-caja_desktop_window_loaded (CajaDesktopWindow *window)
+baul_desktop_window_loaded (CajaDesktopWindow *window)
 {
     return window->details->loaded;
 }

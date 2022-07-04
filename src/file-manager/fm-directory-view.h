@@ -33,13 +33,13 @@
 
 #include <eel/eel-background.h>
 
-#include <libcaja-private/caja-directory.h>
-#include <libcaja-private/caja-file.h>
-#include <libcaja-private/caja-icon-container.h>
-#include <libcaja-private/caja-link.h>
-#include <libcaja-private/caja-view.h>
-#include <libcaja-private/caja-window-info.h>
-#include <libcaja-private/caja-window-slot-info.h>
+#include <libbaul-private/baul-directory.h>
+#include <libbaul-private/baul-file.h>
+#include <libbaul-private/baul-icon-container.h>
+#include <libbaul-private/baul-link.h>
+#include <libbaul-private/baul-view.h>
+#include <libbaul-private/baul-window-info.h>
+#include <libbaul-private/baul-window-slot-info.h>
 
 typedef struct FMDirectoryView FMDirectoryView;
 typedef struct FMDirectoryViewClass FMDirectoryViewClass;
@@ -345,8 +345,8 @@ GType               fm_directory_view_get_type                         (void);
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (FMDirectoryView, g_object_unref);
 
 /* Functions callable from the user interface and elsewhere. */
-CajaWindowInfo *fm_directory_view_get_caja_window              (FMDirectoryView  *view);
-CajaWindowSlotInfo *fm_directory_view_get_caja_window_slot     (FMDirectoryView  *view);
+CajaWindowInfo *fm_directory_view_get_baul_window              (FMDirectoryView  *view);
+CajaWindowSlotInfo *fm_directory_view_get_baul_window_slot     (FMDirectoryView  *view);
 char *              fm_directory_view_get_uri                          (FMDirectoryView  *view);
 char *              fm_directory_view_get_backing_uri                  (FMDirectoryView  *view);
 gboolean            fm_directory_view_can_accept_item                  (CajaFile     *target_item,

@@ -1,6 +1,6 @@
 NULL=
 
-backdir = $(datadir)/caja/patterns
+backdir = $(datadir)/baul/patterns
 
 back_DATA = \
 	blue_gray_rough.png \

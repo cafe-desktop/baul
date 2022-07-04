@@ -3,9 +3,9 @@ include $(top_srcdir)/Makefile.shared
 SUBDIRS = \
 	po \
 	eel \
-	libcaja-extension \
+	libbaul-extension \
 	libegg \
-	libcaja-private \
+	libbaul-private \
 	src \
 	test \
 	data \

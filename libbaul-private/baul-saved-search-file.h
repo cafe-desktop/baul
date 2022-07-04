@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-saved-search-file.h: Subclass of CajaVFSFile to implement the
+   baul-saved-search-file.h: Subclass of CajaVFSFile to implement the
    the case of a Saved Search file.
 
    Copyright (C) 2005 Red Hat, Inc
@@ -26,9 +26,9 @@
 #ifndef CAJA_SAVED_SEARCH_FILE_H
 #define CAJA_SAVED_SEARCH_FILE_H
 
-#include "caja-vfs-file.h"
+#include "baul-vfs-file.h"
 
-#define CAJA_TYPE_SAVED_SEARCH_FILE caja_saved_search_file_get_type()
+#define CAJA_TYPE_SAVED_SEARCH_FILE baul_saved_search_file_get_type()
 #define CAJA_SAVED_SEARCH_FILE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFile))
 #define CAJA_SAVED_SEARCH_FILE_CLASS(klass) \
@@ -53,6 +53,6 @@ typedef struct
     CajaFileClass parent_slot;
 } CajaSavedSearchFileClass;
 
-GType   caja_saved_search_file_get_type (void);
+GType   baul_saved_search_file_get_type (void);
 
 #endif /* CAJA_SAVED_SEARCH_FILE_H */

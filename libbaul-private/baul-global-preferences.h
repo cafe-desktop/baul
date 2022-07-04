@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-global-preferences.h - Caja specific preference keys and
+/* baul-global-preferences.h - Caja specific preference keys and
                                    functions.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
@@ -131,7 +131,7 @@ typedef enum
         CAJA_DEFAULT_FOLDER_VIEWER_OTHER
     };
 
-    /* These IIDs are used by the preferences code and in caja-application.c */
+    /* These IIDs are used by the preferences code and in baul-application.c */
 #define CAJA_ICON_VIEW_IID		"OAFIID:Caja_File_Manager_Icon_View"
 #define CAJA_COMPACT_VIEW_IID	"OAFIID:Caja_File_Manager_Compact_View"
 #define CAJA_LIST_VIEW_IID		"OAFIID:Caja_File_Manager_List_View"
@@ -209,18 +209,18 @@ typedef enum
 #define CAJA_PREFERENCES_LOCKDOWN_COMMAND_LINE         "disable-command-line"
 #define CAJA_PREFERENCES_DISABLED_EXTENSIONS           "disabled-extensions"
 
-void caja_global_preferences_init                      (void);
-char *caja_global_preferences_get_default_folder_viewer_preference_as_iid (void);
+void baul_global_preferences_init                      (void);
+char *baul_global_preferences_get_default_folder_viewer_preference_as_iid (void);
 
-extern GSettings *caja_preferences;
-extern GSettings *caja_media_preferences;
-extern GSettings *caja_window_state;
-extern GSettings *caja_icon_view_preferences;
-extern GSettings *caja_desktop_preferences;
-extern GSettings *caja_tree_sidebar_preferences;
-extern GSettings *caja_compact_view_preferences;
-extern GSettings *caja_list_view_preferences;
-extern GSettings *caja_extension_preferences;
+extern GSettings *baul_preferences;
+extern GSettings *baul_media_preferences;
+extern GSettings *baul_window_state;
+extern GSettings *baul_icon_view_preferences;
+extern GSettings *baul_desktop_preferences;
+extern GSettings *baul_tree_sidebar_preferences;
+extern GSettings *baul_compact_view_preferences;
+extern GSettings *baul_list_view_preferences;
+extern GSettings *baul_extension_preferences;
 
 extern GSettings *mate_background_preferences;
 extern GSettings *mate_lockdown_preferences;

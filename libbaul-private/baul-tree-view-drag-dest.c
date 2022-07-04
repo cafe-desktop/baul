@@ -24,7 +24,7 @@
  * XDS support: Benedikt Meurer <benny@xfce.org> (adapted by Amos Brocco <amos.brocco@unifr.ch>)
  */
 
-/* caja-tree-view-drag-dest.c: Handles drag and drop for treeviews which
+/* baul-tree-view-drag-dest.c: Handles drag and drop for treeviews which
  *                                 contain a hierarchy of files
  */
 
@@ -36,13 +36,13 @@
 
 #include <eel/eel-gtk-macros.h>
 
-#include "caja-tree-view-drag-dest.h"
-#include "caja-file-dnd.h"
-#include "caja-file-changes-queue.h"
-#include "caja-icon-dnd.h"
-#include "caja-link.h"
-#include "caja-marshal.h"
-#include "caja-debug-log.h"
+#include "baul-tree-view-drag-dest.h"
+#include "baul-file-dnd.h"
+#include "baul-file-changes-queue.h"
+#include "baul-icon-dnd.h"
+#include "baul-link.h"
+#include "baul-marshal.h"
+#include "baul-debug-log.h"
 
 #define AUTO_SCROLL_MARGIN 20
 
@@ -80,10 +80,10 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (CajaTreeViewDragDest, caja_tree_view_drag_dest,
+G_DEFINE_TYPE (CajaTreeViewDragDest, baul_tree_view_drag_dest,
                G_TYPE_OBJECT);
 
-#define parent_class caja_tree_view_drag_dest_parent_class
+#define parent_class baul_tree_view_drag_dest_parent_class
 
 static const GtkTargetEntry drag_types [] =
 {
@@ -311,7 +311,7 @@ free_drag_data (CajaTreeViewDragDest *dest)
 
     if (dest->details->drag_list)
     {
-        caja_drag_destroy_selection_list (dest->details->drag_list);
+        baul_drag_destroy_selection_list (dest->details->drag_list);
         dest->details->drag_list = NULL;
     }
 
@@ -347,7 +347,7 @@ file_for_path (CajaTreeViewDragDest *dest, GtkTreePath *path)
         file = NULL;
         if (uri != NULL)
         {
-            file = caja_file_get_by_uri (uri);
+            file = baul_file_get_by_uri (uri);
         }
 
         g_free (uri);
@@ -373,7 +373,7 @@ get_drop_path (CajaTreeViewDragDest *dest,
 
     /* Go up the tree until we find a file that can accept a drop */
     while (file == NULL /* dummy row */ ||
-            !caja_drag_can_accept_info (file,
+            !baul_drag_can_accept_info (file,
                                         dest->details->drag_type,
                                         dest->details->drag_list))
     {
@@ -387,11 +387,11 @@ get_drop_path (CajaTreeViewDragDest *dest,
         {
             gtk_tree_path_up (ret);
 
-            caja_file_unref (file);
+            baul_file_unref (file);
             file = file_for_path (dest, ret);
         }
     }
-    caja_file_unref (file);
+    baul_file_unref (file);
 
     return ret;
 }
@@ -409,8 +409,8 @@ get_drop_target_uri_for_path (CajaTreeViewDragDest *dest,
         return NULL;
     }
 
-    target = caja_file_get_drop_target_uri (file);
-    caja_file_unref (file);
+    target = baul_file_get_drop_target_uri (file);
+    baul_file_unref (file);
 
     return target;
 }
@@ -440,7 +440,7 @@ get_drop_action (CajaTreeViewDragDest *dest,
             return 0;
         }
 
-        caja_drag_default_drop_action_for_icons
+        baul_drag_default_drop_action_for_icons
         (context,
          drop_target,
          dest->details->drag_list,
@@ -458,7 +458,7 @@ get_drop_action (CajaTreeViewDragDest *dest,
             return 0;
         }
 
-        action = caja_drag_default_drop_action_for_netscape_url (context);
+        action = baul_drag_default_drop_action_for_netscape_url (context);
 
         g_free (drop_target);
 
@@ -663,7 +663,7 @@ receive_uris (CajaTreeViewDragDest *dest,
 
     if (real_action == GDK_ACTION_ASK)
     {
-        if (caja_drag_selection_includes_special_link (dest->details->drag_list))
+        if (baul_drag_selection_includes_special_link (dest->details->drag_list))
         {
             /* We only want to move the trash */
             action = GDK_ACTION_MOVE;
@@ -672,7 +672,7 @@ receive_uris (CajaTreeViewDragDest *dest,
         {
             action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK;
         }
-        real_action = caja_drag_drop_action_ask
+        real_action = baul_drag_drop_action_ask
                       (GTK_WIDGET (dest->details->tree_view), action);
     }
 
@@ -684,7 +684,7 @@ receive_uris (CajaTreeViewDragDest *dest,
 
     if (real_action > 0)
     {
-        if (!caja_drag_uris_local (drop_target, source_uris)
+        if (!baul_drag_uris_local (drop_target, source_uris)
                 || real_action != GDK_ACTION_MOVE)
         {
             g_signal_emit (dest, signals[MOVE_COPY_ITEMS], 0,
@@ -842,13 +842,13 @@ receive_dropped_keyword (CajaTreeViewDragDest *dest,
     drop_target_uri = get_drop_target_uri_at_pos (dest, x, y);
     g_assert (drop_target_uri != NULL);
 
-    drop_target_file = caja_file_get_by_uri (drop_target_uri);
+    drop_target_file = baul_file_get_by_uri (drop_target_uri);
 
     if (drop_target_file != NULL)
     {
-        caja_drag_file_receive_dropped_keyword (drop_target_file,
+        baul_drag_file_receive_dropped_keyword (drop_target_file,
                                                 (char *) gtk_selection_data_get_data (dest->details->drag_data));
-        caja_file_unref (drop_target_file);
+        baul_file_unref (drop_target_file);
     }
 
     g_free (drop_target_uri);
@@ -887,8 +887,8 @@ receive_xds (CajaTreeViewDragDest *dest,
         g_assert (dest->details->direct_save_uri != NULL);
         location = g_file_new_for_uri (dest->details->direct_save_uri);
 
-        caja_file_changes_queue_file_added (location);
-        caja_file_changes_consume_changes (TRUE);
+        baul_file_changes_queue_file_added (location);
+        baul_file_changes_consume_changes (TRUE);
 
         g_object_unref (location);
     }
@@ -920,7 +920,7 @@ drag_data_received_callback (GtkWidget *widget,
         if (info == CAJA_ICON_DND_MATE_ICON_LIST)
         {
             dest->details->drag_list =
-                caja_drag_build_selection_list (selection_data);
+                baul_drag_build_selection_list (selection_data);
         }
     }
 
@@ -1004,7 +1004,7 @@ get_direct_save_filename (GdkDragContext *context)
     if (*prop_text == '\0' ||
             strchr ((const gchar *) prop_text, G_DIR_SEPARATOR) != NULL)
     {
-        caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
                         "Invalid filename provided by XDS drag site");
         g_free (prop_text);
         return NULL;
@@ -1055,13 +1055,13 @@ set_direct_save_uri (CajaTreeViewDragDest *dest,
         }
         else
         {
-            caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+            baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
                             "Invalid filename provided by XDS drag site");
         }
     }
     else
     {
-        caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
                         "Could not retrieve XDS drop destination");
     }
 
@@ -1129,7 +1129,7 @@ tree_view_weak_notify (gpointer user_data,
 }
 
 static void
-caja_tree_view_drag_dest_dispose (GObject *object)
+baul_tree_view_drag_dest_dispose (GObject *object)
 {
     CajaTreeViewDragDest *dest;
 
@@ -1149,7 +1149,7 @@ caja_tree_view_drag_dest_dispose (GObject *object)
 }
 
 static void
-caja_tree_view_drag_dest_finalize (GObject *object)
+baul_tree_view_drag_dest_finalize (GObject *object)
 {
     CajaTreeViewDragDest *dest;
 
@@ -1163,20 +1163,20 @@ caja_tree_view_drag_dest_finalize (GObject *object)
 }
 
 static void
-caja_tree_view_drag_dest_init (CajaTreeViewDragDest *dest)
+baul_tree_view_drag_dest_init (CajaTreeViewDragDest *dest)
 {
     dest->details = g_new0 (CajaTreeViewDragDestDetails, 1);
 }
 
 static void
-caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
+baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
 {
     GObjectClass *gobject_class;
 
     gobject_class = G_OBJECT_CLASS (class);
 
-    gobject_class->dispose = caja_tree_view_drag_dest_dispose;
-    gobject_class->finalize = caja_tree_view_drag_dest_finalize;
+    gobject_class->dispose = baul_tree_view_drag_dest_dispose;
+    gobject_class->finalize = baul_tree_view_drag_dest_finalize;
 
     signals[GET_ROOT_URI] =
         g_signal_new ("get_root_uri",
@@ -1185,7 +1185,7 @@ caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
                       G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
                                        get_root_uri),
                       NULL, NULL,
-                      caja_marshal_STRING__VOID,
+                      baul_marshal_STRING__VOID,
                       G_TYPE_STRING, 0);
     signals[GET_FILE_FOR_PATH] =
         g_signal_new ("get_file_for_path",
@@ -1194,7 +1194,7 @@ caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
                       G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
                                        get_file_for_path),
                       NULL, NULL,
-                      caja_marshal_OBJECT__BOXED,
+                      baul_marshal_OBJECT__BOXED,
                       CAJA_TYPE_FILE, 1,
                       GTK_TYPE_TREE_PATH);
     signals[MOVE_COPY_ITEMS] =
@@ -1205,7 +1205,7 @@ caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
                                        move_copy_items),
                       NULL, NULL,
 
-                      caja_marshal_VOID__POINTER_STRING_ENUM_INT_INT,
+                      baul_marshal_VOID__POINTER_STRING_ENUM_INT_INT,
                       G_TYPE_NONE, 5,
                       G_TYPE_POINTER,
                       G_TYPE_STRING,
@@ -1219,7 +1219,7 @@ caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
                       G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
                                        handle_netscape_url),
                       NULL, NULL,
-                      caja_marshal_VOID__STRING_STRING_ENUM_INT_INT,
+                      baul_marshal_VOID__STRING_STRING_ENUM_INT_INT,
                       G_TYPE_NONE, 5,
                       G_TYPE_STRING,
                       G_TYPE_STRING,
@@ -1233,7 +1233,7 @@ caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
                       G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
                                        handle_uri_list),
                       NULL, NULL,
-                      caja_marshal_VOID__STRING_STRING_ENUM_INT_INT,
+                      baul_marshal_VOID__STRING_STRING_ENUM_INT_INT,
                       G_TYPE_NONE, 5,
                       G_TYPE_STRING,
                       G_TYPE_STRING,
@@ -1247,7 +1247,7 @@ caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
                       G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
                                        handle_text),
                       NULL, NULL,
-                      caja_marshal_VOID__STRING_STRING_ENUM_INT_INT,
+                      baul_marshal_VOID__STRING_STRING_ENUM_INT_INT,
                       G_TYPE_NONE, 5,
                       G_TYPE_STRING,
                       G_TYPE_STRING,
@@ -1261,7 +1261,7 @@ caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
                       G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
                                        handle_raw),
                       NULL, NULL,
-                      caja_marshal_VOID__POINTER_INT_STRING_STRING_ENUM_INT_INT,
+                      baul_marshal_VOID__POINTER_INT_STRING_STRING_ENUM_INT_INT,
                       G_TYPE_NONE, 7,
                       G_TYPE_POINTER,
                       G_TYPE_INT,
@@ -1275,7 +1275,7 @@ caja_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
 
 
 CajaTreeViewDragDest *
-caja_tree_view_drag_dest_new (GtkTreeView *tree_view)
+baul_tree_view_drag_dest_new (GtkTreeView *tree_view)
 {
     CajaTreeViewDragDest *dest;
     GtkTargetList *targets;

@@ -4,7 +4,7 @@
 AUTOMAKE_OPTIONS = 1.6
 
 # The name of the module, e.g. 'glib'.
-DOC_MODULE=libcaja-extension
+DOC_MODULE=libbaul-extension
 
 # The top-level SGML file.
 DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.xml
@@ -12,8 +12,8 @@ DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.xml
 # The directory containing the source code. Relative to $(srcdir).
 # gtk-doc will search all .c & .h files beneath here for inline comments
 # documenting the functions and macros.
-# e.g. DOC_SOURCE_DIR=../../../libcaja-extension
-DOC_SOURCE_DIR=$(top_srcdir)/libcaja-extension
+# e.g. DOC_SOURCE_DIR=../../../libbaul-extension
+DOC_SOURCE_DIR=$(top_srcdir)/libbaul-extension
 
 # Extra options to supply to gtkdoc-scan.
 # e.g. SCAN_OPTIONS=--deprecated-guards="GTK_DISABLE_DEPRECATED" 
@@ -31,13 +31,13 @@ MKTMPL_OPTIONS=
 FIXXREF_OPTIONS=
 
 # Used for dependencies. The docs will be rebuilt if any of these change.
-HFILE_GLOB=$(top_srcdir)/libcaja-extension/*.h
-CFILE_GLOB=$(top_srcdir)/libcaja-extension/*.c
+HFILE_GLOB=$(top_srcdir)/libbaul-extension/*.h
+CFILE_GLOB=$(top_srcdir)/libbaul-extension/*.c
 
 # Header files to ignore when scanning.
 IGNORE_HFILES = \
 	config.h \
-	caja-extension-i18n.h \
+	baul-extension-i18n.h \
 	$(NULL)
 
 # Images to copy into HTML directory
@@ -62,14 +62,14 @@ GTKDOC_CFLAGS = \
 	$(GTK_DEBUG_FLAGS)                         \
 	-I$(srcdir)                                \
 	-I$(top_srcdir)                            \
-	-I$(top_srcdir)/libcaja-extension      \
+	-I$(top_srcdir)/libbaul-extension      \
 	-I$(top_builddir)                          \
-	-I$(top_builddir)/libcaja-extension    \
+	-I$(top_builddir)/libbaul-extension    \
 	$(LIBCAJA_EXTENSION_CFLAGS)            \
 	$(NULL)
 
 GTKDOC_LIBS = \
-	$(top_builddir)/libcaja-extension/libcaja-extension.la       \
+	$(top_builddir)/libbaul-extension/libbaul-extension.la       \
 	$(LIBCAJA_EXTENSION_LIBS)                                        \
 	$(NULL)
 

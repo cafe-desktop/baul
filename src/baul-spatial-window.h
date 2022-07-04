@@ -22,15 +22,15 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
-/* caja-window.h: Interface of the main window object */
+/* baul-window.h: Interface of the main window object */
 
 #ifndef CAJA_SPATIAL_WINDOW_H
 #define CAJA_SPATIAL_WINDOW_H
 
-#include "caja-window.h"
-#include "caja-window-private.h"
+#include "baul-window.h"
+#include "baul-window-private.h"
 
-#define CAJA_TYPE_SPATIAL_WINDOW caja_spatial_window_get_type()
+#define CAJA_TYPE_SPATIAL_WINDOW baul_spatial_window_get_type()
 #define CAJA_SPATIAL_WINDOW(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SPATIAL_WINDOW, CajaSpatialWindow))
 #define CAJA_SPATIAL_WINDOW_CLASS(klass) \
@@ -62,8 +62,8 @@ struct _CajaSpatialWindowClass
 };
 
 
-GType            caja_spatial_window_get_type			(void);
-void             caja_spatial_window_set_location_button		(CajaSpatialWindow *window,
+GType            baul_spatial_window_get_type			(void);
+void             baul_spatial_window_set_location_button		(CajaSpatialWindow *window,
         GFile                 *location);
 
 #endif

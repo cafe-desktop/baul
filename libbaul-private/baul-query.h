@@ -26,7 +26,7 @@
 
 #include <glib-object.h>
 
-#define CAJA_TYPE_QUERY		(caja_query_get_type ())
+#define CAJA_TYPE_QUERY		(baul_query_get_type ())
 #define CAJA_QUERY(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_QUERY, CajaQuery))
 #define CAJA_QUERY_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_QUERY, CajaQueryClass))
 #define CAJA_IS_QUERY(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_QUERY))
@@ -46,36 +46,36 @@ typedef struct
     GObjectClass parent_class;
 } CajaQueryClass;
 
-GType          caja_query_get_type (void);
-gboolean       caja_query_enabled  (void);
+GType          baul_query_get_type (void);
+gboolean       baul_query_enabled  (void);
 
-CajaQuery* caja_query_new      (void);
+CajaQuery* baul_query_new      (void);
 
-char *         caja_query_get_text           (CajaQuery *query);
-void           caja_query_set_text           (CajaQuery *query, const char *text);
+char *         baul_query_get_text           (CajaQuery *query);
+void           baul_query_set_text           (CajaQuery *query, const char *text);
 
-char *         caja_query_get_location       (CajaQuery *query);
-void           caja_query_set_location       (CajaQuery *query, const char *uri);
+char *         baul_query_get_location       (CajaQuery *query);
+void           baul_query_set_location       (CajaQuery *query, const char *uri);
 
-GList *        caja_query_get_tags           (CajaQuery *query);
-void           caja_query_set_tags           (CajaQuery *query, GList *tags);
-void           caja_query_add_tag            (CajaQuery *query, const char *tag);
+GList *        baul_query_get_tags           (CajaQuery *query);
+void           baul_query_set_tags           (CajaQuery *query, GList *tags);
+void           baul_query_add_tag            (CajaQuery *query, const char *tag);
 
-GList *        caja_query_get_mime_types     (CajaQuery *query);
-void           caja_query_set_mime_types     (CajaQuery *query, GList *mime_types);
-void           caja_query_add_mime_type      (CajaQuery *query, const char *mime_type);
+GList *        baul_query_get_mime_types     (CajaQuery *query);
+void           baul_query_set_mime_types     (CajaQuery *query, GList *mime_types);
+void           baul_query_add_mime_type      (CajaQuery *query, const char *mime_type);
 
-char *         caja_query_to_readable_string (CajaQuery *query);
-CajaQuery *    caja_query_load               (char *file);
-gboolean       caja_query_save               (CajaQuery *query, char *file);
+char *         baul_query_to_readable_string (CajaQuery *query);
+CajaQuery *    baul_query_load               (char *file);
+gboolean       baul_query_save               (CajaQuery *query, char *file);
 
-gint64         caja_query_get_timestamp      (CajaQuery *query);
-void           caja_query_set_timestamp      (CajaQuery *query, gint64 sec);
+gint64         baul_query_get_timestamp      (CajaQuery *query);
+void           baul_query_set_timestamp      (CajaQuery *query, gint64 sec);
 
-gint64         caja_query_get_size           (CajaQuery *query);
-void           caja_query_set_size           (CajaQuery *query, gint64 size);
+gint64         baul_query_get_size           (CajaQuery *query);
+void           baul_query_set_size           (CajaQuery *query, gint64 size);
 
-char *         caja_query_get_contained_text (CajaQuery *query);
-void           caja_query_set_contained_text (CajaQuery *query, const char *text);
+char *         baul_query_get_contained_text (CajaQuery *query);
+void           baul_query_set_contained_text (CajaQuery *query, const char *text);
 
 #endif /* CAJA_QUERY_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-directory-private.h: Caja directory model.
+   baul-directory-private.h: Caja directory model.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -27,12 +27,12 @@
 
 #include <eel/eel-vfs-extensions.h>
 
-#include <libcaja-extension/caja-info-provider.h>
+#include <libbaul-extension/baul-info-provider.h>
 
-#include "caja-directory.h"
-#include "caja-file-queue.h"
-#include "caja-file.h"
-#include "caja-monitor.h"
+#include "baul-directory.h"
+#include "baul-file-queue.h"
+#include "baul-file.h"
+#include "baul-monitor.h"
 
 typedef struct LinkInfoReadState LinkInfoReadState;
 typedef struct TopLeftTextReadState TopLeftTextReadState;
@@ -143,98 +143,98 @@ struct _CajaDirectoryPrivate
     time_t free_space_read; /* The time free_space was updated, or 0 for never */
 };
 
-CajaDirectory *caja_directory_get_existing                    (GFile                     *location);
+CajaDirectory *baul_directory_get_existing                    (GFile                     *location);
 
 /* async. interface */
-void               caja_directory_async_state_changed             (CajaDirectory         *directory);
-void               caja_directory_call_when_ready_internal        (CajaDirectory         *directory,
+void               baul_directory_async_state_changed             (CajaDirectory         *directory);
+void               baul_directory_call_when_ready_internal        (CajaDirectory         *directory,
         CajaFile              *file,
         CajaFileAttributes     file_attributes,
         gboolean                   wait_for_file_list,
         CajaDirectoryCallback  directory_callback,
         CajaFileCallback       file_callback,
         gpointer                   callback_data);
-gboolean           caja_directory_check_if_ready_internal         (CajaDirectory         *directory,
+gboolean           baul_directory_check_if_ready_internal         (CajaDirectory         *directory,
         CajaFile              *file,
         CajaFileAttributes     file_attributes);
-void               caja_directory_cancel_callback_internal        (CajaDirectory         *directory,
+void               baul_directory_cancel_callback_internal        (CajaDirectory         *directory,
         CajaFile              *file,
         CajaDirectoryCallback  directory_callback,
         CajaFileCallback       file_callback,
         gpointer                   callback_data);
-void               caja_directory_monitor_add_internal            (CajaDirectory         *directory,
+void               baul_directory_monitor_add_internal            (CajaDirectory         *directory,
         CajaFile              *file,
         gconstpointer              client,
         gboolean                   monitor_hidden_files,
         CajaFileAttributes     attributes,
         CajaDirectoryCallback  callback,
         gpointer                   callback_data);
-void               caja_directory_monitor_remove_internal         (CajaDirectory         *directory,
+void               baul_directory_monitor_remove_internal         (CajaDirectory         *directory,
         CajaFile              *file,
         gconstpointer              client);
-void               caja_directory_get_info_for_new_files          (CajaDirectory         *directory,
+void               baul_directory_get_info_for_new_files          (CajaDirectory         *directory,
         GList                     *vfs_uris);
-CajaFile *     caja_directory_get_existing_corresponding_file (CajaDirectory         *directory);
-void               caja_directory_invalidate_count_and_mime_list  (CajaDirectory         *directory);
-gboolean           caja_directory_is_file_list_monitored          (CajaDirectory         *directory);
-gboolean           caja_directory_is_anyone_monitoring_file_list  (CajaDirectory         *directory);
-gboolean           caja_directory_has_active_request_for_file     (CajaDirectory         *directory,
+CajaFile *     baul_directory_get_existing_corresponding_file (CajaDirectory         *directory);
+void               baul_directory_invalidate_count_and_mime_list  (CajaDirectory         *directory);
+gboolean           baul_directory_is_file_list_monitored          (CajaDirectory         *directory);
+gboolean           baul_directory_is_anyone_monitoring_file_list  (CajaDirectory         *directory);
+gboolean           baul_directory_has_active_request_for_file     (CajaDirectory         *directory,
         CajaFile              *file);
-void               caja_directory_remove_file_monitor_link        (CajaDirectory         *directory,
+void               baul_directory_remove_file_monitor_link        (CajaDirectory         *directory,
         GList                     *link);
-void               caja_directory_schedule_dequeue_pending        (CajaDirectory         *directory);
-void               caja_directory_stop_monitoring_file_list       (CajaDirectory         *directory);
-void               caja_directory_cancel                          (CajaDirectory         *directory);
-void               caja_async_destroying_file                     (CajaFile              *file);
-void               caja_directory_force_reload_internal           (CajaDirectory         *directory,
+void               baul_directory_schedule_dequeue_pending        (CajaDirectory         *directory);
+void               baul_directory_stop_monitoring_file_list       (CajaDirectory         *directory);
+void               baul_directory_cancel                          (CajaDirectory         *directory);
+void               baul_async_destroying_file                     (CajaFile              *file);
+void               baul_directory_force_reload_internal           (CajaDirectory         *directory,
         CajaFileAttributes     file_attributes);
-void               caja_directory_cancel_loading_file_attributes  (CajaDirectory         *directory,
+void               baul_directory_cancel_loading_file_attributes  (CajaDirectory         *directory,
         CajaFile              *file,
         CajaFileAttributes     file_attributes);
 
 /* Calls shared between directory, file, and async. code. */
-void               caja_directory_emit_files_added                (CajaDirectory         *directory,
+void               baul_directory_emit_files_added                (CajaDirectory         *directory,
         GList                     *added_files);
-void               caja_directory_emit_files_changed              (CajaDirectory         *directory,
+void               baul_directory_emit_files_changed              (CajaDirectory         *directory,
         GList                     *changed_files);
-void               caja_directory_emit_change_signals             (CajaDirectory         *directory,
+void               baul_directory_emit_change_signals             (CajaDirectory         *directory,
         GList                     *changed_files);
 void               emit_change_signals_for_all_files		      (CajaDirectory	 *directory);
 void               emit_change_signals_for_all_files_in_all_directories (void);
-void               caja_directory_emit_done_loading               (CajaDirectory         *directory);
-void               caja_directory_emit_load_error                 (CajaDirectory         *directory,
+void               baul_directory_emit_done_loading               (CajaDirectory         *directory);
+void               baul_directory_emit_load_error                 (CajaDirectory         *directory,
         GError                    *error);
-CajaDirectory *caja_directory_get_internal                    (GFile                     *location,
+CajaDirectory *baul_directory_get_internal                    (GFile                     *location,
         gboolean                   create);
-char *             caja_directory_get_name_for_self_as_new_file   (CajaDirectory         *directory);
-Request            caja_directory_set_up_request                  (CajaFileAttributes     file_attributes);
+char *             baul_directory_get_name_for_self_as_new_file   (CajaDirectory         *directory);
+Request            baul_directory_set_up_request                  (CajaFileAttributes     file_attributes);
 
 /* Interface to the file list. */
-CajaFile *     caja_directory_find_file_by_name               (CajaDirectory         *directory,
+CajaFile *     baul_directory_find_file_by_name               (CajaDirectory         *directory,
         const char                *filename);
 
-void               caja_directory_add_file                        (CajaDirectory         *directory,
+void               baul_directory_add_file                        (CajaDirectory         *directory,
         CajaFile              *file);
-void               caja_directory_remove_file                     (CajaDirectory         *directory,
+void               baul_directory_remove_file                     (CajaDirectory         *directory,
         CajaFile              *file);
-FileMonitors *     caja_directory_remove_file_monitors            (CajaDirectory         *directory,
+FileMonitors *     baul_directory_remove_file_monitors            (CajaDirectory         *directory,
         CajaFile              *file);
-void               caja_directory_add_file_monitors               (CajaDirectory         *directory,
+void               baul_directory_add_file_monitors               (CajaDirectory         *directory,
         CajaFile              *file,
         FileMonitors              *monitors);
-GList *            caja_directory_begin_file_name_change          (CajaDirectory         *directory,
+GList *            baul_directory_begin_file_name_change          (CajaDirectory         *directory,
         CajaFile              *file);
-void               caja_directory_end_file_name_change            (CajaDirectory         *directory,
+void               baul_directory_end_file_name_change            (CajaDirectory         *directory,
         CajaFile              *file,
         GList                     *node);
-void               caja_directory_moved                           (const char                *from_uri,
+void               baul_directory_moved                           (const char                *from_uri,
         const char                *to_uri);
 /* Interface to the work queue. */
 
-void               caja_directory_add_file_to_work_queue          (CajaDirectory *directory,
+void               baul_directory_add_file_to_work_queue          (CajaDirectory *directory,
         CajaFile *file);
-void               caja_directory_remove_file_from_work_queue     (CajaDirectory *directory,
+void               baul_directory_remove_file_from_work_queue     (CajaDirectory *directory,
         CajaFile *file);
 
 /* debugging functions */
-int                caja_directory_number_outstanding              (void);
+int                baul_directory_number_outstanding              (void);

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-program-choosing.c - functions for selecting and activating
+/* baul-program-choosing.c - functions for selecting and activating
  				 programs for opening/viewing particular files.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -36,12 +36,12 @@
 #include <eel/eel-mate-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 
-#include "caja-program-choosing.h"
-#include "caja-mime-actions.h"
-#include "caja-global-preferences.h"
-#include "caja-icon-info.h"
-#include "caja-recent.h"
-#include "caja-desktop-icon-file.h"
+#include "baul-program-choosing.h"
+#include "baul-mime-actions.h"
+#include "baul-global-preferences.h"
+#include "baul-icon-info.h"
+#include "baul-recent.h"
+#include "baul-desktop-icon-file.h"
 
 /**
  * application_cannot_open_location
@@ -68,9 +68,9 @@ application_cannot_open_location (GAppInfo *application,
     char *message;
     char *file_name;
 
-    file_name = caja_file_get_display_name (file);
+    file_name = baul_file_get_display_name (file);
 
-    if (caja_mime_has_any_applications_for_file (file))
+    if (baul_mime_has_any_applications_for_file (file))
     {
         GtkDialog *message_dialog;
         int response;
@@ -105,7 +105,7 @@ application_cannot_open_location (GAppInfo *application,
             LaunchParameters *launch_parameters;
 
             launch_parameters = launch_parameters_new (file, parent_window);
-            caja_choose_application_for_file
+            baul_choose_application_for_file
             (file,
              parent_window,
              launch_application_callback,
@@ -143,7 +143,7 @@ application_cannot_open_location (GAppInfo *application,
 }
 
 /**
- * caja_launch_application:
+ * baul_launch_application:
  *
  * Fork off a process to launch an application with a given file as a
  * parameter. Provide a parent window for error dialogs.
@@ -153,7 +153,7 @@ application_cannot_open_location (GAppInfo *application,
  * @parent_window: A window to use as the parent for any error dialogs.
  */
 void
-caja_launch_application (GAppInfo *application,
+baul_launch_application (GAppInfo *application,
                          GList *files,
                          GtkWindow *parent_window)
 {
@@ -162,10 +162,10 @@ caja_launch_application (GAppInfo *application,
     uris = NULL;
     for (l = files; l != NULL; l = l->next)
     {
-        uris = g_list_prepend (uris, caja_file_get_activation_uri (l->data));
+        uris = g_list_prepend (uris, baul_file_get_activation_uri (l->data));
     }
     uris = g_list_reverse (uris);
-    caja_launch_application_by_uri (application, uris,
+    baul_launch_application_by_uri (application, uris,
                                     parent_window);
     g_list_free_full (uris, g_free);
 }
@@ -190,7 +190,7 @@ gather_pid_callback (GDesktopAppInfo *appinfo,
 }
 
 void
-caja_launch_application_by_uri (GAppInfo *application,
+baul_launch_application_by_uri (GAppInfo *application,
                                 GList *uris,
                                 GtkWindow *parent_window)
 {
@@ -237,15 +237,15 @@ caja_launch_application_by_uri (GAppInfo *application,
                                            gtk_window_get_screen (parent_window));
     }
 
-    file = caja_file_get_by_uri (uris->data);
-    icon = caja_file_get_icon (file,
+    file = baul_file_get_by_uri (uris->data);
+    icon = baul_file_get_icon (file,
                                48, gtk_widget_get_scale_factor (GTK_WIDGET (parent_window)),
                                0);
-    caja_file_unref (file);
+    baul_file_unref (file);
     if (icon)
     {
         gdk_app_launch_context_set_icon_name (launch_context,
-                                              caja_icon_info_get_used_name (icon));
+                                              baul_icon_info_get_used_name (icon));
         g_object_unref (icon);
     }
 
@@ -278,7 +278,7 @@ caja_launch_application_by_uri (GAppInfo *application,
         else
         {
 #ifdef NEW_MIME_COMPLETE
-            caja_program_chooser_show_invalid_message
+            baul_program_chooser_show_invalid_message
             (MATE_VFS_MIME_ACTION_TYPE_APPLICATION, file, parent_window);
 #else
             g_warning ("Cannot open app: %s\n", error->message);
@@ -290,9 +290,9 @@ caja_launch_application_by_uri (GAppInfo *application,
     {
         for (l = uris; l != NULL; l = l->next)
         {
-            file = caja_file_get_by_uri (l->data);
-            caja_recent_add_file (file, application);
-            caja_file_unref (file);
+            file = baul_file_get_by_uri (l->data);
+            baul_recent_add_file (file, application);
+            baul_file_unref (file);
         }
     }
 
@@ -300,7 +300,7 @@ caja_launch_application_by_uri (GAppInfo *application,
 }
 
 /**
- * caja_launch_application_from_command:
+ * baul_launch_application_from_command:
  *
  * Fork off a process to launch an application with a given uri as
  * a parameter.
@@ -310,7 +310,7 @@ caja_launch_application_by_uri (GAppInfo *application,
  * @...: Passed as parameters to the application after quoting each of them.
  */
 void
-caja_launch_application_from_command (GdkScreen  *screen,
+baul_launch_application_from_command (GdkScreen  *screen,
                                       const char *name,
                                       const char *command_string,
                                       gboolean use_terminal,
@@ -368,7 +368,7 @@ caja_launch_application_from_command (GdkScreen  *screen,
 }
 
 /**
- * caja_launch_application_from_command:
+ * baul_launch_application_from_command:
  *
  * Fork off a process to launch an application with a given uri as
  * a parameter.
@@ -378,7 +378,7 @@ caja_launch_application_from_command (GdkScreen  *screen,
  * @parameters: Passed as parameters to the application after quoting each of them.
  */
 void
-caja_launch_application_from_command_array (GdkScreen  *screen,
+baul_launch_application_from_command_array (GdkScreen  *screen,
         const char *name,
         const char *command_string,
         gboolean use_terminal,
@@ -434,7 +434,7 @@ caja_launch_application_from_command_array (GdkScreen  *screen,
 }
 
 void
-caja_launch_desktop_file (GdkScreen   *screen,
+baul_launch_desktop_file (GdkScreen   *screen,
                           const char  *desktop_file_uri,
                           const GList *parameter_uris,
                           GtkWindow   *parent_window)

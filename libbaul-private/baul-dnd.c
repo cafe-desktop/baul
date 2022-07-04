@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-dnd.c - Common Drag & drop handling code shared by the icon container
+/* baul-dnd.c - Common Drag & drop handling code shared by the icon container
    and the list view.
 
    Copyright (C) 2000, 2001 Eazel, Inc.
@@ -37,13 +37,13 @@
 #include <eel/eel-string.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include "caja-dnd.h"
-#include "caja-program-choosing.h"
-#include "caja-link.h"
-#include "caja-window-slot-info.h"
-#include "caja-window-info.h"
-#include "caja-view.h"
-#include "caja-file-utilities.h"
+#include "baul-dnd.h"
+#include "baul-program-choosing.h"
+#include "baul-link.h"
+#include "baul-window-slot-info.h"
+#include "baul-window-info.h"
+#include "baul-view.h"
+#include "baul-file-utilities.h"
 
 /* a set of defines stolen from the eel-icon-dnd.c file.
  * These are in microseconds.
@@ -65,7 +65,7 @@
 #define MAX_AUTOSCROLL_DELTA 50
 
 void
-caja_drag_init (CajaDragInfo     *drag_info,
+baul_drag_init (CajaDragInfo     *drag_info,
                 const GtkTargetEntry *drag_types,
                 int                   drag_type_count,
                 gboolean              add_text_targets)
@@ -84,10 +84,10 @@ caja_drag_init (CajaDragInfo     *drag_info,
 }
 
 void
-caja_drag_finalize (CajaDragInfo *drag_info)
+baul_drag_finalize (CajaDragInfo *drag_info)
 {
     gtk_target_list_unref (drag_info->target_list);
-    caja_drag_destroy_selection_list (drag_info->selection_list);
+    baul_drag_destroy_selection_list (drag_info->selection_list);
 
     g_free (drag_info);
 }
@@ -96,7 +96,7 @@ caja_drag_finalize (CajaDragInfo *drag_info)
 /* Functions to deal with CajaDragSelectionItems.  */
 
 CajaDragSelectionItem *
-caja_drag_selection_item_new (void)
+baul_drag_selection_item_new (void)
 {
     return g_new0 (CajaDragSelectionItem, 1);
 }
@@ -109,7 +109,7 @@ drag_selection_item_destroy (CajaDragSelectionItem *item)
 }
 
 void
-caja_drag_destroy_selection_list (GList *list)
+baul_drag_destroy_selection_list (GList *list)
 {
     GList *p;
 
@@ -123,7 +123,7 @@ caja_drag_destroy_selection_list (GList *list)
 }
 
 GList *
-caja_drag_uri_list_from_selection_list (const GList *selection_list)
+baul_drag_uri_list_from_selection_list (const GList *selection_list)
 {
     GList *uri_list;
     const GList *l;
@@ -143,7 +143,7 @@ caja_drag_uri_list_from_selection_list (const GList *selection_list)
 }
 
 GList *
-caja_drag_uri_list_from_array (const char **uris)
+baul_drag_uri_list_from_array (const char **uris)
 {
     GList *uri_list;
     int i;
@@ -164,7 +164,7 @@ caja_drag_uri_list_from_array (const char **uris)
 }
 
 GList *
-caja_drag_build_selection_list (GtkSelectionData *data)
+baul_drag_build_selection_list (GtkSelectionData *data)
 {
     GList *result;
     const guchar *p, *oldp;
@@ -193,7 +193,7 @@ caja_drag_build_selection_list (GtkSelectionData *data)
             break;
         }
 
-        item = caja_drag_selection_item_new ();
+        item = baul_drag_selection_item_new ();
 
         len = p - oldp;
 
@@ -257,7 +257,7 @@ caja_drag_build_selection_list (GtkSelectionData *data)
 }
 
 static gboolean
-caja_drag_file_local_internal (const char *target_uri_string,
+baul_drag_file_local_internal (const char *target_uri_string,
                                const char *first_source_uri)
 {
     /* check if the first item on the list has target_uri_string as a parent
@@ -289,28 +289,28 @@ caja_drag_file_local_internal (const char *target_uri_string,
 }
 
 gboolean
-caja_drag_uris_local (const char *target_uri,
+baul_drag_uris_local (const char *target_uri,
                       const GList *source_uri_list)
 {
     /* must have at least one item */
     g_assert (source_uri_list);
 
-    return caja_drag_file_local_internal (target_uri, source_uri_list->data);
+    return baul_drag_file_local_internal (target_uri, source_uri_list->data);
 }
 
 gboolean
-caja_drag_items_local (const char *target_uri_string,
+baul_drag_items_local (const char *target_uri_string,
                        const GList *selection_list)
 {
     /* must have at least one item */
     g_assert (selection_list);
 
-    return caja_drag_file_local_internal (target_uri_string,
+    return baul_drag_file_local_internal (target_uri_string,
                                           ((CajaDragSelectionItem *)selection_list->data)->uri);
 }
 
 gboolean
-caja_drag_items_on_desktop (const GList *selection_list)
+baul_drag_items_on_desktop (const GList *selection_list)
 {
     char *uri;
     GFile *desktop, *item, *parent;
@@ -327,7 +327,7 @@ caja_drag_items_on_desktop (const GList *selection_list)
         return TRUE;
     }
 
-    desktop = caja_get_desktop_location ();
+    desktop = baul_get_desktop_location ();
 
     item = g_file_new_for_uri (uri);
     parent = g_file_get_parent (item);
@@ -347,7 +347,7 @@ caja_drag_items_on_desktop (const GList *selection_list)
 }
 
 GdkDragAction
-caja_drag_default_drop_action_for_netscape_url (GdkDragContext *context)
+baul_drag_default_drop_action_for_netscape_url (GdkDragContext *context)
 {
     /* Mozilla defaults to copy, but unless thats the
        only allowed thing (enforced by ctrl) we want to ASK */
@@ -377,8 +377,8 @@ check_same_fs (CajaFile *file1,
     {
         char *id1, *id2;
 
-        id1 = caja_file_get_filesystem_id (file1);
-        id2 = caja_file_get_filesystem_id (file2);
+        id1 = baul_file_get_filesystem_id (file1);
+        id2 = baul_file_get_filesystem_id (file2);
 
         if (id1 != NULL && id2 != NULL)
         {
@@ -399,20 +399,20 @@ source_is_deletable (GFile *file)
     gboolean ret;
 
     /* if there's no a cached CajaFile, it returns NULL */
-    naut_file = caja_file_get_existing (file);
+    naut_file = baul_file_get_existing (file);
     if (naut_file == NULL)
     {
         return FALSE;
     }
 
-    ret = caja_file_can_delete (naut_file);
-    caja_file_unref (naut_file);
+    ret = baul_file_can_delete (naut_file);
+    baul_file_unref (naut_file);
 
     return ret;
 }
 
 void
-caja_drag_default_drop_action_for_icons (GdkDragContext *context,
+baul_drag_default_drop_action_for_icons (GdkDragContext *context,
         const char *target_uri_string, const GList *items,
         int *action)
 {
@@ -446,8 +446,8 @@ caja_drag_default_drop_action_for_icons (GdkDragContext *context,
     }
 
     dropped_uri = ((CajaDragSelectionItem *)items->data)->uri;
-    dropped_file = caja_file_get_existing_by_uri (dropped_uri);
-    target_file = caja_file_get_existing_by_uri (target_uri_string);
+    dropped_file = baul_file_get_existing_by_uri (dropped_uri);
+    target_file = baul_file_get_existing_by_uri (target_uri_string);
 
     /*
      * Check for trash URI.  We do a find_directory for any Trash directory.
@@ -462,27 +462,27 @@ caja_drag_default_drop_action_for_icons (GdkDragContext *context,
             *action = GDK_ACTION_MOVE;
         }
 
-        caja_file_unref (dropped_file);
-        caja_file_unref (target_file);
+        baul_file_unref (dropped_file);
+        baul_file_unref (target_file);
         return;
 
     }
-    else if (dropped_file != NULL && caja_file_is_launcher (dropped_file))
+    else if (dropped_file != NULL && baul_file_is_launcher (dropped_file))
     {
         if (actions & GDK_ACTION_MOVE)
         {
             *action = GDK_ACTION_MOVE;
         }
-        caja_file_unref (dropped_file);
-        caja_file_unref (target_file);
+        baul_file_unref (dropped_file);
+        baul_file_unref (target_file);
         return;
     }
     else if (eel_uri_is_desktop (target_uri_string))
     {
-        target = caja_get_desktop_location ();
+        target = baul_get_desktop_location ();
 
-        caja_file_unref (target_file);
-        target_file = caja_file_get (target);
+        baul_file_unref (target_file);
+        target_file = baul_file_get (target);
 
         if (eel_uri_is_desktop (dropped_uri))
         {
@@ -493,17 +493,17 @@ caja_drag_default_drop_action_for_icons (GdkDragContext *context,
             }
 
             g_object_unref (target);
-            caja_file_unref (dropped_file);
-            caja_file_unref (target_file);
+            baul_file_unref (dropped_file);
+            baul_file_unref (target_file);
             return;
         }
     }
-    else if (target_file != NULL && caja_file_is_archive (target_file))
+    else if (target_file != NULL && baul_file_is_archive (target_file))
     {
         *action = GDK_ACTION_COPY;
 
-        caja_file_unref (dropped_file);
-        caja_file_unref (target_file);
+        baul_file_unref (dropped_file);
+        baul_file_unref (target_file);
         return;
     }
     else
@@ -513,8 +513,8 @@ caja_drag_default_drop_action_for_icons (GdkDragContext *context,
 
     same_fs = check_same_fs (target_file, dropped_file);
 
-    caja_file_unref (dropped_file);
-    caja_file_unref (target_file);
+    baul_file_unref (dropped_file);
+    baul_file_unref (target_file);
 
     /* Compare the first dropped uri with the target uri for same fs match. */
     dropped = g_file_new_for_uri (dropped_uri);
@@ -561,7 +561,7 @@ caja_drag_default_drop_action_for_icons (GdkDragContext *context,
 }
 
 GdkDragAction
-caja_drag_default_drop_action_for_uri_list (GdkDragContext *context,
+baul_drag_default_drop_action_for_uri_list (GdkDragContext *context,
         const char *target_uri_string)
 {
     if (eel_uri_is_trash (target_uri_string) && (gdk_drag_context_get_actions (context) & GDK_ACTION_MOVE))
@@ -688,7 +688,7 @@ add_one_uri (const char *uri, int x, int y, int w, int h, gpointer data)
 /* Common function for drag_data_get_callback calls.
  * Returns FALSE if it doesn't handle drag data */
 gboolean
-caja_drag_drag_data_get (GtkWidget *widget,
+baul_drag_drag_data_get (GtkWidget *widget,
                          GdkDragContext *context,
                          GtkSelectionData *selection_data,
                          guint info,
@@ -782,7 +782,7 @@ append_drop_action_menu_item (GtkWidget          *menu,
 
 /* Pops up a menu of actions to perform on dropped files */
 GdkDragAction
-caja_drag_drop_action_ask (GtkWidget *widget,
+baul_drag_drop_action_ask (GtkWidget *widget,
                            GdkDragAction actions)
 {
     GtkWidget *menu;
@@ -845,7 +845,7 @@ caja_drag_drop_action_ask (GtkWidget *widget,
 }
 
 GdkDragAction
-caja_drag_drop_background_ask (GtkWidget *widget,
+baul_drag_drop_background_ask (GtkWidget *widget,
                                GdkDragAction actions)
 {
     GtkWidget *menu;
@@ -898,18 +898,18 @@ caja_drag_drop_background_ask (GtkWidget *widget,
 }
 
 gboolean
-caja_drag_autoscroll_in_scroll_region (GtkWidget *widget)
+baul_drag_autoscroll_in_scroll_region (GtkWidget *widget)
 {
     float x_scroll_delta, y_scroll_delta;
 
-    caja_drag_autoscroll_calculate_delta (widget, &x_scroll_delta, &y_scroll_delta);
+    baul_drag_autoscroll_calculate_delta (widget, &x_scroll_delta, &y_scroll_delta);
 
     return x_scroll_delta != 0 || y_scroll_delta != 0;
 }
 
 
 void
-caja_drag_autoscroll_calculate_delta (GtkWidget *widget, float *x_scroll_delta, float *y_scroll_delta)
+baul_drag_autoscroll_calculate_delta (GtkWidget *widget, float *x_scroll_delta, float *y_scroll_delta)
 {
     GtkAllocation allocation;
     GdkDisplay *display;
@@ -998,12 +998,12 @@ caja_drag_autoscroll_calculate_delta (GtkWidget *widget, float *x_scroll_delta, 
 
 
 void
-caja_drag_autoscroll_start (CajaDragInfo *drag_info,
+baul_drag_autoscroll_start (CajaDragInfo *drag_info,
                             GtkWidget        *widget,
                             GSourceFunc       callback,
                             gpointer          user_data)
 {
-    if (caja_drag_autoscroll_in_scroll_region (widget))
+    if (baul_drag_autoscroll_in_scroll_region (widget))
     {
         if (drag_info->auto_scroll_timeout_id == 0)
         {
@@ -1028,7 +1028,7 @@ caja_drag_autoscroll_start (CajaDragInfo *drag_info,
 }
 
 void
-caja_drag_autoscroll_stop (CajaDragInfo *drag_info)
+baul_drag_autoscroll_stop (CajaDragInfo *drag_info)
 {
     if (drag_info->auto_scroll_timeout_id != 0)
     {
@@ -1038,7 +1038,7 @@ caja_drag_autoscroll_stop (CajaDragInfo *drag_info)
 }
 
 gboolean
-caja_drag_selection_includes_special_link (GList *selection_list)
+baul_drag_selection_includes_special_link (GList *selection_list)
 {
     GList *node;
 
@@ -1109,12 +1109,12 @@ slot_proxy_drag_motion (GtkWidget          *widget,
         }
         else
         {
-            target_slot = caja_window_info_get_active_slot (CAJA_WINDOW_INFO (window));
+            target_slot = baul_window_info_get_active_slot (CAJA_WINDOW_INFO (window));
         }
 
         if (target_slot != NULL)
         {
-            target_uri = caja_window_slot_info_get_current_location (target_slot);
+            target_uri = baul_window_slot_info_get_current_location (target_slot);
         }
     }
 
@@ -1123,17 +1123,17 @@ slot_proxy_drag_motion (GtkWidget          *widget,
     {
         if (drag_info->info == CAJA_ICON_DND_MATE_ICON_LIST)
         {
-            caja_drag_default_drop_action_for_icons (context, target_uri,
+            baul_drag_default_drop_action_for_icons (context, target_uri,
                     drag_info->data.selection_list,
                     &action);
         }
         else if (drag_info->info == CAJA_ICON_DND_URI_LIST)
         {
-            action = caja_drag_default_drop_action_for_uri_list (context, target_uri);
+            action = baul_drag_default_drop_action_for_uri_list (context, target_uri);
         }
         else if (drag_info->info == CAJA_ICON_DND_NETSCAPE_URL)
         {
-            action = caja_drag_default_drop_action_for_netscape_url (context);
+            action = baul_drag_default_drop_action_for_netscape_url (context);
         }
     }
 
@@ -1164,7 +1164,7 @@ drag_info_clear (CajaDragSlotProxyInfo *drag_info)
 
     if (drag_info->info == CAJA_ICON_DND_MATE_ICON_LIST)
     {
-        caja_drag_destroy_selection_list (drag_info->data.selection_list);
+        baul_drag_destroy_selection_list (drag_info->data.selection_list);
     }
     else if (drag_info->info == CAJA_ICON_DND_URI_LIST)
     {
@@ -1247,7 +1247,7 @@ slot_proxy_handle_drop (GtkWidget                *widget,
     }
     else
     {
-        target_slot = caja_window_info_get_active_slot (CAJA_WINDOW_INFO (window));
+        target_slot = baul_window_info_get_active_slot (CAJA_WINDOW_INFO (window));
     }
 
     target_uri = NULL;
@@ -1257,13 +1257,13 @@ slot_proxy_handle_drop (GtkWidget                *widget,
     }
     else if (target_slot != NULL)
     {
-        target_uri = caja_window_slot_info_get_current_location (target_slot);
+        target_uri = baul_window_slot_info_get_current_location (target_slot);
     }
 
     target_view = NULL;
     if (target_slot != NULL)
     {
-        target_view = caja_window_slot_info_get_current_view (target_slot);
+        target_view = baul_window_slot_info_get_current_view (target_slot);
     }
 
     if (target_slot != NULL && target_view != NULL)
@@ -1272,10 +1272,10 @@ slot_proxy_handle_drop (GtkWidget                *widget,
         {
             GList *uri_list;
 
-            uri_list = caja_drag_uri_list_from_selection_list (drag_info->data.selection_list);
+            uri_list = baul_drag_uri_list_from_selection_list (drag_info->data.selection_list);
             g_assert (uri_list != NULL);
 
-            caja_view_drop_proxy_received_uris (target_view,
+            baul_view_drop_proxy_received_uris (target_view,
                                                 uri_list,
                                                 target_uri,
                                                 gdk_drag_context_get_selected_action (context));
@@ -1283,14 +1283,14 @@ slot_proxy_handle_drop (GtkWidget                *widget,
         }
         else if (drag_info->info == CAJA_ICON_DND_URI_LIST)
         {
-            caja_view_drop_proxy_received_uris (target_view,
+            baul_view_drop_proxy_received_uris (target_view,
                                                 drag_info->data.uri_list,
                                                 target_uri,
                                                 gdk_drag_context_get_selected_action (context));
         }
         if (drag_info->info == CAJA_ICON_DND_NETSCAPE_URL)
         {
-            caja_view_drop_proxy_received_netscape_url (target_view,
+            baul_view_drop_proxy_received_netscape_url (target_view,
                     drag_info->data.netscape_url,
                     target_uri,
                     gdk_drag_context_get_selected_action (context));
@@ -1342,14 +1342,14 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
 
     if (info == CAJA_ICON_DND_MATE_ICON_LIST)
     {
-        drag_info->data.selection_list = caja_drag_build_selection_list (data);
+        drag_info->data.selection_list = baul_drag_build_selection_list (data);
 
         drag_info->have_valid_data = drag_info->data.selection_list != NULL;
     }
     else if (info == CAJA_ICON_DND_URI_LIST)
     {
         uris = gtk_selection_data_get_uris (data);
-        drag_info->data.uri_list = caja_drag_uri_list_from_array ((const char **) uris);
+        drag_info->data.uri_list = baul_drag_uri_list_from_array ((const char **) uris);
         g_strfreev (uris);
 
         drag_info->have_valid_data = drag_info->data.uri_list != NULL;
@@ -1368,7 +1368,7 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
 }
 
 void
-caja_drag_slot_proxy_init (GtkWidget *widget,
+baul_drag_slot_proxy_init (GtkWidget *widget,
                            CajaDragSlotProxyInfo *drag_info)
 {
     const GtkTargetEntry targets[] =

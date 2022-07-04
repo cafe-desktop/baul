@@ -27,7 +27,7 @@
 
 #include <eel/eel-gtk-macros.h>
 
-#include "caja-search-engine-tracker.h"
+#include "baul-search-engine-tracker.h"
 
 typedef struct _TrackerClient TrackerClient;
 
@@ -188,7 +188,7 @@ struct CajaSearchEngineTrackerDetails
 };
 
 G_DEFINE_TYPE (CajaSearchEngineTracker,
-               caja_search_engine_tracker,
+               baul_search_engine_tracker,
                CAJA_TYPE_SEARCH_ENGINE);
 
 static CajaSearchEngineClass *parent_class = NULL;
@@ -253,7 +253,7 @@ search_callback (gpointer results, GError *error, gpointer user_data)
 
     if (error)
     {
-        caja_search_engine_error (CAJA_SEARCH_ENGINE (tracker), error->message);
+        baul_search_engine_error (CAJA_SEARCH_ENGINE (tracker), error->message);
         g_error_free (error);
         return;
     }
@@ -303,14 +303,14 @@ search_callback (gpointer results, GError *error, gpointer user_data)
         g_strfreev ((gchar **)results);
     }
 
-    caja_search_engine_hits_added (CAJA_SEARCH_ENGINE (tracker), hit_uris);
-    caja_search_engine_finished (CAJA_SEARCH_ENGINE (tracker));
+    baul_search_engine_hits_added (CAJA_SEARCH_ENGINE (tracker), hit_uris);
+    baul_search_engine_finished (CAJA_SEARCH_ENGINE (tracker));
     g_list_free_full (hit_uris, g_free);
 }
 
 
 static void
-caja_search_engine_tracker_start (CajaSearchEngine *engine)
+baul_search_engine_tracker_start (CajaSearchEngine *engine)
 {
     CajaSearchEngineTracker *tracker;
     GList 	*mimetypes, *l;
@@ -332,11 +332,11 @@ caja_search_engine_tracker_start (CajaSearchEngine *engine)
         return;
     }
 
-    search_text = caja_query_get_text (tracker->details->query);
+    search_text = baul_query_get_text (tracker->details->query);
 
-    mimetypes = caja_query_get_mime_types (tracker->details->query);
+    mimetypes = baul_query_get_mime_types (tracker->details->query);
 
-    location_uri = caja_query_get_location (tracker->details->query);
+    location_uri = baul_query_get_location (tracker->details->query);
 
     if (location_uri)
     {
@@ -463,7 +463,7 @@ caja_search_engine_tracker_start (CajaSearchEngine *engine)
 }
 
 static void
-caja_search_engine_tracker_stop (CajaSearchEngine *engine)
+baul_search_engine_tracker_stop (CajaSearchEngine *engine)
 {
     CajaSearchEngineTracker *tracker;
 
@@ -477,13 +477,13 @@ caja_search_engine_tracker_stop (CajaSearchEngine *engine)
 }
 
 static gboolean
-caja_search_engine_tracker_is_indexed (CajaSearchEngine *engine)
+baul_search_engine_tracker_is_indexed (CajaSearchEngine *engine)
 {
     return TRUE;
 }
 
 static void
-caja_search_engine_tracker_set_query (CajaSearchEngine *engine, CajaQuery *query)
+baul_search_engine_tracker_set_query (CajaSearchEngine *engine, CajaQuery *query)
 {
     CajaSearchEngineTracker *tracker;
 
@@ -503,7 +503,7 @@ caja_search_engine_tracker_set_query (CajaSearchEngine *engine, CajaQuery *query
 }
 
 static void
-caja_search_engine_tracker_class_init (CajaSearchEngineTrackerClass *class)
+baul_search_engine_tracker_class_init (CajaSearchEngineTrackerClass *class)
 {
     GObjectClass *gobject_class;
     CajaSearchEngineClass *engine_class;
@@ -514,21 +514,21 @@ caja_search_engine_tracker_class_init (CajaSearchEngineTrackerClass *class)
     gobject_class->finalize = finalize;
 
     engine_class = CAJA_SEARCH_ENGINE_CLASS (class);
-    engine_class->set_query = caja_search_engine_tracker_set_query;
-    engine_class->start = caja_search_engine_tracker_start;
-    engine_class->stop = caja_search_engine_tracker_stop;
-    engine_class->is_indexed = caja_search_engine_tracker_is_indexed;
+    engine_class->set_query = baul_search_engine_tracker_set_query;
+    engine_class->start = baul_search_engine_tracker_start;
+    engine_class->stop = baul_search_engine_tracker_stop;
+    engine_class->is_indexed = baul_search_engine_tracker_is_indexed;
 }
 
 static void
-caja_search_engine_tracker_init (CajaSearchEngineTracker *engine)
+baul_search_engine_tracker_init (CajaSearchEngineTracker *engine)
 {
     engine->details = g_new0 (CajaSearchEngineTrackerDetails, 1);
 }
 
 
 CajaSearchEngine *
-caja_search_engine_tracker_new (void)
+baul_search_engine_tracker_new (void)
 {
     CajaSearchEngineTracker *engine;
     TrackerClient *tracker_client;

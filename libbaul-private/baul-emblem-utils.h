@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-emblem-utils.h: Utilities for handling emblems
+   baul-emblem-utils.h: Utilities for handling emblems
 
    Copyright (C) 2002 Red Hat, Inc.
 
@@ -27,27 +27,27 @@
 #include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-GList *    caja_emblem_list_available             (void);
-void       caja_emblem_refresh_list               (void);
-gboolean   caja_emblem_should_show_in_list        (const char *emblem);
-gboolean   caja_emblem_verify_keyword             (GtkWindow *parent_window,
+GList *    baul_emblem_list_available             (void);
+void       baul_emblem_refresh_list               (void);
+gboolean   baul_emblem_should_show_in_list        (const char *emblem);
+gboolean   baul_emblem_verify_keyword             (GtkWindow *parent_window,
         const char *keyword,
         const char *display_name);
-void       caja_emblem_install_custom_emblem      (GdkPixbuf  *pixbuf,
+void       baul_emblem_install_custom_emblem      (GdkPixbuf  *pixbuf,
         const char *keyword,
         const char *display_name,
         GtkWindow  *parent_window);
 
-gboolean   caja_emblem_remove_emblem              (const char *keyword);
-gboolean   caja_emblem_rename_emblem              (const char *keyword,
+gboolean   baul_emblem_remove_emblem              (const char *keyword);
+gboolean   baul_emblem_rename_emblem              (const char *keyword,
         const char *display_name);
 
-GdkPixbuf *caja_emblem_load_pixbuf_for_emblem     (GFile      *emblem);
-char *     caja_emblem_get_keyword_from_icon_name (const char *emblem);
-char *     caja_emblem_get_icon_name_from_keyword (const char *keyword);
+GdkPixbuf *baul_emblem_load_pixbuf_for_emblem     (GFile      *emblem);
+char *     baul_emblem_get_keyword_from_icon_name (const char *emblem);
+char *     baul_emblem_get_icon_name_from_keyword (const char *keyword);
 
-gboolean   caja_emblem_can_remove_emblem          (const char *keyword);
-gboolean   caja_emblem_can_rename_emblem          (const char *keyword);
+gboolean   baul_emblem_can_remove_emblem          (const char *keyword);
+gboolean   baul_emblem_can_rename_emblem          (const char *keyword);
 
-char *     caja_emblem_create_unique_keyword      (const char *base);
+char *     baul_emblem_create_unique_keyword      (const char *base);
 

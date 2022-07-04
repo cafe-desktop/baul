@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-thumbnails.h: Thumbnail code for icon factory.
+   baul-thumbnails.h: Thumbnail code for icon factory.
 
    Copyright (C) 2000 Eazel, Inc.
 
@@ -27,18 +27,18 @@
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#include "caja-file.h"
+#include "baul-file.h"
 
 /* Returns NULL if there's no thumbnail yet. */
-void       caja_create_thumbnail                (CajaFile *file);
-gboolean   caja_can_thumbnail                   (CajaFile *file);
-gboolean   caja_can_thumbnail_internally        (CajaFile *file);
-gboolean   caja_thumbnail_is_mimetype_limited_by_size
+void       baul_create_thumbnail                (CajaFile *file);
+gboolean   baul_can_thumbnail                   (CajaFile *file);
+gboolean   baul_can_thumbnail_internally        (CajaFile *file);
+gboolean   baul_thumbnail_is_mimetype_limited_by_size
 (const char *mime_type);
 
 /* Queue handling: */
-void       caja_thumbnail_remove_from_queue     (const char   *file_uri);
-void       caja_thumbnail_prioritize            (const char   *file_uri);
+void       baul_thumbnail_remove_from_queue     (const char   *file_uri);
+void       baul_thumbnail_prioritize            (const char   *file_uri);
 
 
 #endif /* CAJA_THUMBNAILS_H */

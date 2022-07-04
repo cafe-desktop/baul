@@ -27,9 +27,9 @@
 #ifndef CAJA_LOCATION_ENTRY_H
 #define CAJA_LOCATION_ENTRY_H
 
-#include <libcaja-private/caja-entry.h>
+#include <libbaul-private/baul-entry.h>
 
-#define CAJA_TYPE_LOCATION_ENTRY caja_location_entry_get_type()
+#define CAJA_TYPE_LOCATION_ENTRY baul_location_entry_get_type()
 #define CAJA_LOCATION_ENTRY(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_LOCATION_ENTRY, CajaLocationEntry))
 #define CAJA_LOCATION_ENTRY_CLASS(klass) \
@@ -60,13 +60,13 @@ typedef enum
     CAJA_LOCATION_ENTRY_ACTION_CLEAR
 } CajaLocationEntryAction;
 
-GType      caja_location_entry_get_type     	(void);
-GtkWidget* caja_location_entry_new          	(void);
-void       caja_location_entry_set_special_text     (CajaLocationEntry *entry,
+GType      baul_location_entry_get_type     	(void);
+GtkWidget* baul_location_entry_new          	(void);
+void       baul_location_entry_set_special_text     (CajaLocationEntry *entry,
         const char            *special_text);
-void       caja_location_entry_set_secondary_action (CajaLocationEntry *entry,
+void       baul_location_entry_set_secondary_action (CajaLocationEntry *entry,
         CajaLocationEntryAction secondary_action);
-void       caja_location_entry_update_current_location (CajaLocationEntry *entry,
+void       baul_location_entry_update_current_location (CajaLocationEntry *entry,
         const char *path);
 
 #endif /* CAJA_LOCATION_ENTRY_H */

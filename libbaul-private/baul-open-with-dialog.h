@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
-   caja-open-with-dialog.c: an open-with dialog
+   baul-open-with-dialog.c: an open-with dialog
 
    Copyright (C) 2004 Novell, Inc.
 
@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
-#define CAJA_TYPE_OPEN_WITH_DIALOG         (caja_open_with_dialog_get_type ())
+#define CAJA_TYPE_OPEN_WITH_DIALOG         (baul_open_with_dialog_get_type ())
 #define CAJA_OPEN_WITH_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_OPEN_WITH_DIALOG, CajaOpenWithDialog))
 #define CAJA_OPEN_WITH_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_OPEN_WITH_DIALOG, CajaOpenWithDialogClass))
 #define CAJA_IS_OPEN_WITH_DIALOG(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_OPEN_WITH_DIALOG)
@@ -52,13 +52,13 @@ struct _CajaOpenWithDialogClass
                                   GAppInfo *application);
 };
 
-GType      caja_open_with_dialog_get_type (void);
-GtkWidget* caja_open_with_dialog_new      (const char *uri,
+GType      baul_open_with_dialog_get_type (void);
+GtkWidget* baul_open_with_dialog_new      (const char *uri,
         const char *mime_type,
         const char *extension);
-GtkWidget* caja_add_application_dialog_new (const char *uri,
+GtkWidget* baul_add_application_dialog_new (const char *uri,
         const char *mime_type);
-GtkWidget* caja_add_application_dialog_new_for_multiple_files (const char *extension,
+GtkWidget* baul_add_application_dialog_new_for_multiple_files (const char *extension,
         const char *mime_type);
 
 

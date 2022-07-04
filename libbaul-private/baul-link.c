@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-link.c: .desktop link files.
+   baul-link.c: .desktop link files.
 
    Copyright (C) 2001 Red Hat, Inc.
 
@@ -32,20 +32,20 @@
 
 #include <eel/eel-vfs-extensions.h>
 
-#include "caja-link.h"
-#include "caja-directory-notify.h"
-#include "caja-directory.h"
-#include "caja-file-utilities.h"
-#include "caja-file.h"
-#include "caja-program-choosing.h"
-#include "caja-icon-names.h"
+#include "baul-link.h"
+#include "baul-directory-notify.h"
+#include "baul-directory.h"
+#include "baul-file-utilities.h"
+#include "baul-file.h"
+#include "baul-program-choosing.h"
+#include "baul-icon-names.h"
 
 #define MAIN_GROUP "Desktop Entry"
 
 #define CAJA_LINK_GENERIC_TAG	"Link"
-#define CAJA_LINK_TRASH_TAG 	"X-caja-trash"
+#define CAJA_LINK_TRASH_TAG 	"X-baul-trash"
 #define CAJA_LINK_MOUNT_TAG 	"FSDevice"
-#define CAJA_LINK_HOME_TAG 		"X-caja-home"
+#define CAJA_LINK_HOME_TAG 		"X-baul-home"
 
 static gboolean
 is_link_mime_type (const char *mime_type)
@@ -190,7 +190,7 @@ slurp_key_string (const char *uri,
 }
 
 gboolean
-caja_link_local_create (const char     *directory_uri,
+baul_link_local_create (const char     *directory_uri,
                         const char     *base_name,
                         const char     *display_name,
                         const char     *image,
@@ -218,7 +218,7 @@ caja_link_local_create (const char     *directory_uri,
 
     if (eel_uri_is_desktop (directory_uri))
     {
-        real_directory_uri = caja_get_desktop_directory_uri ();
+        real_directory_uri = baul_get_desktop_directory_uri ();
     }
     else
     {
@@ -229,7 +229,7 @@ caja_link_local_create (const char     *directory_uri,
     {
         char *uri;
 
-        uri = caja_ensure_unique_file_name (real_directory_uri,
+        uri = baul_ensure_unique_file_name (real_directory_uri,
                                             base_name, ".desktop");
         if (uri == NULL)
         {
@@ -285,7 +285,7 @@ caja_link_local_create (const char     *directory_uri,
     dummy_list.data = file;
     dummy_list.next = NULL;
     dummy_list.prev = NULL;
-    caja_directory_notify_files_added (&dummy_list);
+    baul_directory_notify_files_added (&dummy_list);
 
     if (point != NULL)
     {
@@ -298,7 +298,7 @@ caja_link_local_create (const char     *directory_uri,
         dummy_list.next = NULL;
         dummy_list.prev = NULL;
 
-        caja_directory_schedule_position_set (&dummy_list);
+        baul_directory_schedule_position_set (&dummy_list);
     }
 
     g_object_unref (file);
@@ -324,7 +324,7 @@ get_language (void)
 }
 
 static gboolean
-caja_link_local_set_key (const char *uri,
+baul_link_local_set_key (const char *uri,
                          const char *key,
                          const char *value,
                          gboolean    localize)
@@ -362,28 +362,28 @@ caja_link_local_set_key (const char *uri,
 }
 
 gboolean
-caja_link_local_set_text (const char *uri,
+baul_link_local_set_text (const char *uri,
                           const char *text)
 {
-    return caja_link_local_set_key (uri, "Name", text, TRUE);
+    return baul_link_local_set_key (uri, "Name", text, TRUE);
 }
 
 
 gboolean
-caja_link_local_set_icon (const char        *uri,
+baul_link_local_set_icon (const char        *uri,
                           const char        *icon)
 {
-    return caja_link_local_set_key (uri, "Icon", icon, FALSE);
+    return baul_link_local_set_key (uri, "Icon", icon, FALSE);
 }
 
 char *
-caja_link_local_get_text (const char *path)
+baul_link_local_get_text (const char *path)
 {
     return slurp_key_string (path, "Name", TRUE);
 }
 
 char *
-caja_link_local_get_additional_text (const char *path)
+baul_link_local_get_additional_text (const char *path)
 {
     /* The comment field of current .desktop files is often bad.
      * It just contains a copy of the name. This is probably because the
@@ -418,7 +418,7 @@ caja_link_local_get_additional_text (const char *path)
 }
 
 static char *
-caja_link_get_link_uri_from_desktop (GKeyFile *key_file, const char *desktop_file_uri)
+baul_link_get_link_uri_from_desktop (GKeyFile *key_file, const char *desktop_file_uri)
 {
     char *type = g_key_file_get_string (key_file, MAIN_GROUP, "Type", NULL);
     if (type == NULL)
@@ -475,13 +475,13 @@ caja_link_get_link_uri_from_desktop (GKeyFile *key_file, const char *desktop_fil
 }
 
 static char *
-caja_link_get_link_name_from_desktop (GKeyFile *key_file)
+baul_link_get_link_name_from_desktop (GKeyFile *key_file)
 {
     return g_key_file_get_locale_string (key_file, MAIN_GROUP, "Name", NULL, NULL);
 }
 
 static char *
-caja_link_get_link_icon_from_desktop (GKeyFile *key_file)
+baul_link_get_link_icon_from_desktop (GKeyFile *key_file)
 {
     char *icon_uri, *icon, *type;
 
@@ -547,7 +547,7 @@ caja_link_get_link_icon_from_desktop (GKeyFile *key_file)
 }
 
 char *
-caja_link_local_get_link_uri (const char *uri)
+baul_link_local_get_link_uri (const char *uri)
 {
     GKeyFile *key_file;
     char *retval;
@@ -563,7 +563,7 @@ caja_link_local_get_link_uri (const char *uri)
         return NULL;
     }
 
-    retval = caja_link_get_link_uri_from_desktop (key_file, uri);
+    retval = baul_link_get_link_uri_from_desktop (key_file, uri);
     g_key_file_free (key_file);
 
     return retval;
@@ -588,7 +588,7 @@ string_array_contains (char **array,
 }
 
 void
-caja_link_get_link_info_given_file_contents (const char  *file_contents,
+baul_link_get_link_info_given_file_contents (const char  *file_contents,
         int          link_file_size,
         const char  *file_uri,
         char       **uri,
@@ -613,9 +613,9 @@ caja_link_get_link_info_given_file_contents (const char  *file_contents,
         return;
     }
 
-    *uri = caja_link_get_link_uri_from_desktop (key_file, file_uri);
-    *name = caja_link_get_link_name_from_desktop (key_file);
-    *icon = caja_link_get_link_icon_from_desktop (key_file);
+    *uri = baul_link_get_link_uri_from_desktop (key_file, file_uri);
+    *name = baul_link_get_link_name_from_desktop (key_file);
+    *icon = baul_link_get_link_icon_from_desktop (key_file);
 
     *is_launcher = FALSE;
     type = g_key_file_get_string (key_file, MAIN_GROUP, "Type", NULL);

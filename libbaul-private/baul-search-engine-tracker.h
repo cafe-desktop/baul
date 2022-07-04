@@ -24,9 +24,9 @@
 #ifndef CAJA_SEARCH_ENGINE_TRACKER_H
 #define CAJA_SEARCH_ENGINE_TRACKER_H
 
-#include "caja-search-engine.h"
+#include "baul-search-engine.h"
 
-#define CAJA_TYPE_SEARCH_ENGINE_TRACKER		(caja_search_engine_tracker_get_type ())
+#define CAJA_TYPE_SEARCH_ENGINE_TRACKER		(baul_search_engine_tracker_get_type ())
 #define CAJA_SEARCH_ENGINE_TRACKER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_ENGINE_TRACKER, CajaSearchEngineTracker))
 #define CAJA_SEARCH_ENGINE_TRACKER_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SEARCH_ENGINE_TRACKER, CajaSearchEngineTrackerClass))
 #define CAJA_IS_SEARCH_ENGINE_TRACKER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SEARCH_ENGINE_TRACKER))
@@ -46,8 +46,8 @@ typedef struct
     CajaSearchEngineClass parent_class;
 } CajaSearchEngineTrackerClass;
 
-GType caja_search_engine_tracker_get_type (void);
+GType baul_search_engine_tracker_get_type (void);
 
-CajaSearchEngine* caja_search_engine_tracker_new (void);
+CajaSearchEngine* baul_search_engine_tracker_new (void);
 
 #endif /* CAJA_SEARCH_ENGINE_TRACKER_H */

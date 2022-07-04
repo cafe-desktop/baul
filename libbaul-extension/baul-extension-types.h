@@ -1,5 +1,5 @@
 /*
- *  caja-info-provider.h - Type definitions for Caja extensions
+ *  baul-info-provider.h - Type definitions for Caja extensions
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -33,7 +33,7 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_OPERATION_RESULT (caja_operation_result_get_type ())
+#define CAJA_TYPE_OPERATION_RESULT (baul_operation_result_get_type ())
 
 /**
  * CajaOperationHandle:
@@ -68,22 +68,22 @@ typedef enum {
     CAJA_OPERATION_IN_PROGRESS
 } CajaOperationResult;
 
-GType caja_operation_result_get_type (void);
+GType baul_operation_result_get_type (void);
 
 /**
- * SECTION:caja-extension-types
+ * SECTION:baul-extension-types
  * @title: CajaModule
  * @short_description: Initialize an extension
- * @include: libcaja-extension/caja-extension-types.h
+ * @include: libbaul-extension/baul-extension-types.h
  *
  * Methods that each extension implements.
  */
 
-void caja_module_initialize  (GTypeModule  *module);
-void caja_module_shutdown    (void);
-void caja_module_list_types  (const GType **types,
+void baul_module_initialize  (GTypeModule  *module);
+void baul_module_shutdown    (void);
+void baul_module_list_types  (const GType **types,
                               int          *num_types);
-void caja_module_list_pyfiles (GList      **pyfiles);
+void baul_module_list_pyfiles (GList      **pyfiles);
 
 G_END_DECLS
 

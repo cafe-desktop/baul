@@ -1,6 +1,6 @@
 /* vi: set sw=4 ts=4 wrap ai: */
 /*
- * caja-widget-view-provider.c: This file is part of caja.
+ * baul-widget-view-provider.c: This file is part of baul.
  *
  * Copyright (C) 2019 Wu Xiaotian <yetist@gmail.com>
  *
@@ -20,34 +20,34 @@
  * */
 
 #include <config.h>
-#include "caja-widget-view-provider.h"
+#include "baul-widget-view-provider.h"
 
 #include <glib-object.h>
 
 /**
- * SECTION:caja-widget-view-provider
+ * SECTION:baul-widget-view-provider
  * @title: CajaWidgetViewProvider
  * @short_description: Interface to provide widgets view.
- * @include: libcaja-extension/caja-widget-view-provider.h
+ * @include: libbaul-extension/baul-widget-view-provider.h
  *
  * #CajaWidgetViewProvider allows extension to provide widgets view
  * in the file manager.
  */
 
 static void
-caja_widget_view_provider_base_init (gpointer g_class)
+baul_widget_view_provider_base_init (gpointer g_class)
 {
 }
 
 GType
-caja_widget_view_provider_get_type (void)
+baul_widget_view_provider_get_type (void)
 {
     static GType type = 0;
 
     if (!type) {
         const GTypeInfo info = {
             sizeof (CajaWidgetViewProviderIface),
-            caja_widget_view_provider_base_init,
+            baul_widget_view_provider_base_init,
             NULL,
             NULL,
             NULL,
@@ -67,7 +67,7 @@ caja_widget_view_provider_get_type (void)
 }
 
 /**
- * caja_widget_view_provider_get_widget:
+ * baul_widget_view_provider_get_widget:
  * @provider: a #CajaWidgetViewProvider
  *
  * Return a #GtkWidget to show the current location content.
@@ -75,7 +75,7 @@ caja_widget_view_provider_get_type (void)
  * Returns: The #GtkWidget used to show the contents.
  **/
 GtkWidget *
-caja_widget_view_provider_get_widget (CajaWidgetViewProvider *provider)
+baul_widget_view_provider_get_widget (CajaWidgetViewProvider *provider)
 {
     g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider), NULL);
     g_return_val_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_widget != NULL, NULL);
@@ -84,14 +84,14 @@ caja_widget_view_provider_get_widget (CajaWidgetViewProvider *provider)
 }
 
 /**
- * caja_widget_view_provider_add_file:
+ * baul_widget_view_provider_add_file:
  * @provider: a #CajaWidgetViewProvider
  * @file: add a #CajaFile into the widget view.
  * @directory: the directory of the file.
  *
  * Add a file of this location into the widget view.
  **/
-void caja_widget_view_provider_add_file (CajaWidgetViewProvider *provider, CajaFile *file, CajaFile *directory)
+void baul_widget_view_provider_add_file (CajaWidgetViewProvider *provider, CajaFile *file, CajaFile *directory)
 {
     g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider));
     g_return_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->add_file != NULL);
@@ -100,13 +100,13 @@ void caja_widget_view_provider_add_file (CajaWidgetViewProvider *provider, CajaF
 }
 
 /**
- * caja_widget_view_provider_set_location:
+ * baul_widget_view_provider_set_location:
  * @provider: a #CajaWidgetViewProvider
  * @uri: the URI of the location
  *
  * Set the location of this #CajaWidgetViewProvider.
  **/
-void caja_widget_view_provider_set_location (CajaWidgetViewProvider *provider, const char *location)
+void baul_widget_view_provider_set_location (CajaWidgetViewProvider *provider, const char *location)
 {
     g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider));
     g_return_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_location != NULL);
@@ -115,13 +115,13 @@ void caja_widget_view_provider_set_location (CajaWidgetViewProvider *provider, c
 }
 
 /**
- * caja_widget_view_provider_set_window:
+ * baul_widget_view_provider_set_window:
  * @provider: a #CajaWidgetViewProvider
  * @window: parent #GtkWindow
  *
  * Set parent #GtkWindow of this #CajaWidgetViewProvider.
  **/
-void caja_widget_view_provider_set_window (CajaWidgetViewProvider *provider, GtkWindow *window)
+void baul_widget_view_provider_set_window (CajaWidgetViewProvider *provider, GtkWindow *window)
 {
     g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider));
     g_return_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_window != NULL);
@@ -130,12 +130,12 @@ void caja_widget_view_provider_set_window (CajaWidgetViewProvider *provider, Gtk
 }
 
 /**
- * caja_widget_view_provider_get_item_count:
+ * baul_widget_view_provider_get_item_count:
  * @provider: a #CajaWidgetViewProvider
  *
  * Return value: The item count of this #CajaWidgetViewProvider
  **/
-guint caja_widget_view_provider_get_item_count (CajaWidgetViewProvider *provider)
+guint baul_widget_view_provider_get_item_count (CajaWidgetViewProvider *provider)
 {
     g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider), 0);
     g_return_val_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_item_count != NULL, 0);
@@ -144,15 +144,15 @@ guint caja_widget_view_provider_get_item_count (CajaWidgetViewProvider *provider
 }
 
 /**
- * caja_widget_view_provider_get_first_visible_file:
+ * baul_widget_view_provider_get_first_visible_file:
  * @provider: a #CajaWidgetViewProvider
  *
- * Return the first visible file. When use start visit the location, the caja's status is waiting, until
+ * Return the first visible file. When use start visit the location, the baul's status is waiting, until
  * get the first visible file.
  *
  * Return value: the first visible file.
  **/
-gchar* caja_widget_view_provider_get_first_visible_file (CajaWidgetViewProvider *provider)
+gchar* baul_widget_view_provider_get_first_visible_file (CajaWidgetViewProvider *provider)
 {
     g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider), NULL);
     g_return_val_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_first_visible_file != NULL, NULL);
@@ -161,12 +161,12 @@ gchar* caja_widget_view_provider_get_first_visible_file (CajaWidgetViewProvider 
 }
 
 /**
- * caja_widget_view_provider_clear:
+ * baul_widget_view_provider_clear:
  * @provider: a #CajaWidgetViewProvider
  *
  * Clear the content of this widget view.
  **/
-void caja_widget_view_provider_clear (CajaWidgetViewProvider *provider)
+void baul_widget_view_provider_clear (CajaWidgetViewProvider *provider)
 {
     g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider));
     g_return_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->clear != NULL);
@@ -175,7 +175,7 @@ void caja_widget_view_provider_clear (CajaWidgetViewProvider *provider)
 }
 
 /**
- * caja_widget_view_provider_supports_uri:
+ * baul_widget_view_provider_supports_uri:
  * @provider: a #CajaWidgetViewProvider
  * @uri: the location to visit.
  * @file_type: The #GFileType for the uri
@@ -183,9 +183,9 @@ void caja_widget_view_provider_clear (CajaWidgetViewProvider *provider)
  *
  * Whether this widget view works for the uri.
  *
- * Return value: True to use custom widget view, False to ignore, and caja use normal view.
+ * Return value: True to use custom widget view, False to ignore, and baul use normal view.
  **/
-gboolean caja_widget_view_provider_supports_uri (CajaWidgetViewProvider *provider,
+gboolean baul_widget_view_provider_supports_uri (CajaWidgetViewProvider *provider,
                                                  const char *uri,
                                                  GFileType file_type,
                                                  const char *mime_type)

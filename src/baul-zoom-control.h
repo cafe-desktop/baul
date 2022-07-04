@@ -30,9 +30,9 @@
 
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-icon-info.h> /* For CajaZoomLevel */
+#include <libbaul-private/baul-icon-info.h> /* For CajaZoomLevel */
 
-#define CAJA_TYPE_ZOOM_CONTROL caja_zoom_control_get_type()
+#define CAJA_TYPE_ZOOM_CONTROL baul_zoom_control_get_type()
 #define CAJA_ZOOM_CONTROL(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ZOOM_CONTROL, CajaZoomControl))
 #define CAJA_ZOOM_CONTROL_CLASS(klass) \
@@ -69,24 +69,24 @@ struct CajaZoomControlClass
                              GtkScrollType scroll);
 };
 
-GType             caja_zoom_control_get_type           (void);
-GtkWidget *       caja_zoom_control_new                (void);
-void              caja_zoom_control_set_zoom_level     (CajaZoomControl *zoom_control,
+GType             baul_zoom_control_get_type           (void);
+GtkWidget *       baul_zoom_control_new                (void);
+void              baul_zoom_control_set_zoom_level     (CajaZoomControl *zoom_control,
         CajaZoomLevel    zoom_level);
-void              caja_zoom_control_set_parameters     (CajaZoomControl *zoom_control,
+void              baul_zoom_control_set_parameters     (CajaZoomControl *zoom_control,
         CajaZoomLevel    min_zoom_level,
         CajaZoomLevel    max_zoom_level,
         gboolean             has_min_zoom_level,
         gboolean             has_max_zoom_level,
         GList               *zoom_levels);
-CajaZoomLevel caja_zoom_control_get_zoom_level     (CajaZoomControl *zoom_control);
-CajaZoomLevel caja_zoom_control_get_min_zoom_level (CajaZoomControl *zoom_control);
-CajaZoomLevel caja_zoom_control_get_max_zoom_level (CajaZoomControl *zoom_control);
-gboolean          caja_zoom_control_has_min_zoom_level (CajaZoomControl *zoom_control);
-gboolean          caja_zoom_control_has_max_zoom_level (CajaZoomControl *zoom_control);
-gboolean          caja_zoom_control_can_zoom_in        (CajaZoomControl *zoom_control);
-gboolean          caja_zoom_control_can_zoom_out       (CajaZoomControl *zoom_control);
+CajaZoomLevel baul_zoom_control_get_zoom_level     (CajaZoomControl *zoom_control);
+CajaZoomLevel baul_zoom_control_get_min_zoom_level (CajaZoomControl *zoom_control);
+CajaZoomLevel baul_zoom_control_get_max_zoom_level (CajaZoomControl *zoom_control);
+gboolean          baul_zoom_control_has_min_zoom_level (CajaZoomControl *zoom_control);
+gboolean          baul_zoom_control_has_max_zoom_level (CajaZoomControl *zoom_control);
+gboolean          baul_zoom_control_can_zoom_in        (CajaZoomControl *zoom_control);
+gboolean          baul_zoom_control_can_zoom_out       (CajaZoomControl *zoom_control);
 
-void              caja_zoom_control_set_active_appearance (CajaZoomControl *zoom_control, gboolean is_active);
+void              baul_zoom_control_set_active_appearance (CajaZoomControl *zoom_control, gboolean is_active);
 
 #endif /* CAJA_ZOOM_CONTROL_H */

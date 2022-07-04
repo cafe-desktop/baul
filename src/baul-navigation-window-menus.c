@@ -22,7 +22,7 @@
  * Author: John Sullivan <sullivan@eazel.com>
  */
 
-/* caja-window-menus.h - implementation of caja window menu operations,
+/* baul-window-menus.h - implementation of baul window menu operations,
  *                           split into separate file just for convenience.
  */
 #include <config.h>
@@ -37,26 +37,26 @@
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-string.h>
 
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-ui-utilities.h>
-#include <libcaja-private/caja-search-engine.h>
-#include <libcaja-private/caja-signaller.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-ui-utilities.h>
+#include <libbaul-private/baul-search-engine.h>
+#include <libbaul-private/baul-signaller.h>
 
-#include "caja-actions.h"
-#include "caja-notebook.h"
-#include "caja-navigation-action.h"
-#include "caja-zoom-action.h"
-#include "caja-view-as-action.h"
-#include "caja-application.h"
-#include "caja-bookmark-list.h"
-#include "caja-bookmarks-window.h"
-#include "caja-file-management-properties.h"
-#include "caja-property-browser.h"
-#include "caja-window-manage-views.h"
-#include "caja-window-private.h"
-#include "caja-window-bookmarks.h"
-#include "caja-navigation-window-pane.h"
+#include "baul-actions.h"
+#include "baul-notebook.h"
+#include "baul-navigation-action.h"
+#include "baul-zoom-action.h"
+#include "baul-view-as-action.h"
+#include "baul-application.h"
+#include "baul-bookmark-list.h"
+#include "baul-bookmarks-window.h"
+#include "baul-file-management-properties.h"
+#include "baul-property-browser.h"
+#include "baul-window-manage-views.h"
+#include "baul-window-private.h"
+#include "baul-window-bookmarks.h"
+#include "baul-navigation-window-pane.h"
 
 #define MENU_PATH_HISTORY_PLACEHOLDER			"/MenuBar/Other Menus/Go/History Placeholder"
 
@@ -73,7 +73,7 @@ action_close_all_windows_callback (GtkAction *action,
     CajaApplication *app;
 
     app = CAJA_APPLICATION (g_application_get_default ());
-    caja_application_close_all_navigation_windows (app);
+    baul_application_close_all_navigation_windows (app);
 }
 
 static gboolean
@@ -103,7 +103,7 @@ static void
 action_back_callback (GtkAction *action,
                       gpointer user_data)
 {
-    caja_navigation_window_back_or_forward (CAJA_NAVIGATION_WINDOW (user_data),
+    baul_navigation_window_back_or_forward (CAJA_NAVIGATION_WINDOW (user_data),
                                             TRUE, 0, should_open_in_new_tab ());
 }
 
@@ -111,7 +111,7 @@ static void
 action_forward_callback (GtkAction *action,
                          gpointer user_data)
 {
-    caja_navigation_window_back_or_forward (CAJA_NAVIGATION_WINDOW (user_data),
+    baul_navigation_window_back_or_forward (CAJA_NAVIGATION_WINDOW (user_data),
                                             FALSE, 0, should_open_in_new_tab ());
 }
 
@@ -120,7 +120,7 @@ forget_history_if_yes (GtkDialog *dialog, int response, gpointer callback_data)
 {
     if (response == RESPONSE_FORGET)
     {
-        caja_forget_history ();
+        baul_forget_history ();
     }
     gtk_widget_destroy (GTK_WIDGET (dialog));
 }
@@ -156,7 +156,7 @@ static void
 action_split_view_switch_next_pane_callback(GtkAction *action,
         gpointer user_data)
 {
-    caja_window_pane_switch_to (caja_window_get_next_pane (CAJA_WINDOW (user_data)));
+    baul_window_pane_switch_to (baul_window_get_next_pane (CAJA_WINDOW (user_data)));
 }
 
 static void
@@ -168,16 +168,16 @@ action_split_view_same_location_callback (GtkAction *action,
     GFile *location;
 
     window = CAJA_WINDOW (user_data);
-    next_pane = caja_window_get_next_pane (window);
+    next_pane = baul_window_get_next_pane (window);
 
     if (!next_pane)
     {
         return;
     }
-    location = caja_window_slot_get_location (next_pane->active_slot);
+    location = baul_window_slot_get_location (next_pane->active_slot);
     if (location)
     {
-        caja_window_slot_go_to (window->details->active_pane->active_slot, location, FALSE);
+        baul_window_slot_go_to (window->details->active_pane->active_slot, location, FALSE);
         g_object_unref (location);
     }
 }
@@ -193,11 +193,11 @@ action_show_hide_toolbar_callback (GtkAction *action,
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
-        caja_navigation_window_show_toolbar (window);
+        baul_navigation_window_show_toolbar (window);
     }
     else
     {
-        caja_navigation_window_hide_toolbar (window);
+        baul_navigation_window_hide_toolbar (window);
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -215,11 +215,11 @@ action_show_hide_sidebar_callback (GtkAction *action,
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
-        caja_navigation_window_show_sidebar (window);
+        baul_navigation_window_show_sidebar (window);
     }
     else
     {
-        caja_navigation_window_hide_sidebar (window);
+        baul_navigation_window_hide_sidebar (window);
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -227,15 +227,15 @@ action_show_hide_sidebar_callback (GtkAction *action,
 static void
 pane_show_hide_location_bar (CajaNavigationWindowPane *pane, gboolean is_active)
 {
-    if (caja_navigation_window_pane_location_bar_showing (pane) != is_active)
+    if (baul_navigation_window_pane_location_bar_showing (pane) != is_active)
     {
         if (is_active)
         {
-            caja_navigation_window_pane_show_location_bar (pane, TRUE);
+            baul_navigation_window_pane_show_location_bar (pane, TRUE);
         }
         else
         {
-            caja_navigation_window_pane_hide_location_bar (pane, TRUE);
+            baul_navigation_window_pane_hide_location_bar (pane, TRUE);
         }
     }
 }
@@ -275,11 +275,11 @@ action_show_hide_statusbar_callback (GtkAction *action,
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
-        caja_navigation_window_show_status_bar (window);
+        baul_navigation_window_show_status_bar (window);
     }
     else
     {
-        caja_navigation_window_hide_status_bar (window);
+        baul_navigation_window_hide_status_bar (window);
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -296,28 +296,28 @@ action_split_view_callback (GtkAction *action,
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     is_active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
-    if (is_active != caja_navigation_window_split_view_showing (window))
+    if (is_active != baul_navigation_window_split_view_showing (window))
     {
-        CajaWindow *caja_window;
+        CajaWindow *baul_window;
 
         if (is_active)
         {
-            caja_navigation_window_split_view_on (window);
+            baul_navigation_window_split_view_on (window);
         }
         else
         {
-            caja_navigation_window_split_view_off (window);
+            baul_navigation_window_split_view_off (window);
         }
-        caja_window = CAJA_WINDOW (window);
-        if (caja_window->details->active_pane && caja_window->details->active_pane->active_slot)
+        baul_window = CAJA_WINDOW (window);
+        if (baul_window->details->active_pane && baul_window->details->active_pane->active_slot)
         {
-            caja_view_update_menus (caja_window->details->active_pane->active_slot->content_view);
+            baul_view_update_menus (baul_window->details->active_pane->active_slot->content_view);
         }
     }
 }
 
 void
-caja_navigation_window_update_show_hide_menu_items (CajaNavigationWindow *window)
+baul_navigation_window_update_show_hide_menu_items (CajaNavigationWindow *window)
 {
     GtkAction *action;
 
@@ -327,32 +327,32 @@ caja_navigation_window_update_show_hide_menu_items (CajaNavigationWindow *window
     action = gtk_action_group_get_action (window->details->navigation_action_group,
                                           CAJA_ACTION_SHOW_HIDE_TOOLBAR);
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                  caja_navigation_window_toolbar_showing (window));
+                                  baul_navigation_window_toolbar_showing (window));
 
     action = gtk_action_group_get_action (window->details->navigation_action_group,
                                           CAJA_ACTION_SHOW_HIDE_SIDEBAR);
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                  caja_navigation_window_sidebar_showing (window));
+                                  baul_navigation_window_sidebar_showing (window));
 
     action = gtk_action_group_get_action (window->details->navigation_action_group,
                                           CAJA_ACTION_SHOW_HIDE_LOCATION_BAR);
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                  caja_navigation_window_pane_location_bar_showing (CAJA_NAVIGATION_WINDOW_PANE (CAJA_WINDOW (window)->details->active_pane)));
+                                  baul_navigation_window_pane_location_bar_showing (CAJA_NAVIGATION_WINDOW_PANE (CAJA_WINDOW (window)->details->active_pane)));
 
     action = gtk_action_group_get_action (window->details->navigation_action_group,
                                           CAJA_ACTION_SHOW_HIDE_STATUSBAR);
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                  caja_navigation_window_status_bar_showing (window));
+                                  baul_navigation_window_status_bar_showing (window));
 
     action = gtk_action_group_get_action (window->details->navigation_action_group,
                                           CAJA_ACTION_SHOW_HIDE_EXTRA_PANE);
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                  caja_navigation_window_split_view_showing (window));
+                                  baul_navigation_window_split_view_showing (window));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 void
-caja_navigation_window_update_spatial_menu_item (CajaNavigationWindow *window)
+baul_navigation_window_update_spatial_menu_item (CajaNavigationWindow *window)
 {
     GtkAction *action;
 
@@ -362,7 +362,7 @@ caja_navigation_window_update_spatial_menu_item (CajaNavigationWindow *window)
     action = gtk_action_group_get_action (window->details->navigation_action_group,
                                           CAJA_ACTION_FOLDER_WINDOW);
     gtk_action_set_visible (action,
-                            !g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER));
+                            !g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -370,18 +370,18 @@ static void
 action_add_bookmark_callback (GtkAction *action,
                               gpointer user_data)
 {
-    caja_window_add_bookmark_for_current_location (CAJA_WINDOW (user_data));
+    baul_window_add_bookmark_for_current_location (CAJA_WINDOW (user_data));
 }
 
 static void
 action_edit_bookmarks_callback (GtkAction *action,
                                 gpointer user_data)
 {
-    caja_window_edit_bookmarks (CAJA_WINDOW (user_data));
+    baul_window_edit_bookmarks (CAJA_WINDOW (user_data));
 }
 
 void
-caja_navigation_window_remove_go_menu_callback (CajaNavigationWindow *window)
+baul_navigation_window_remove_go_menu_callback (CajaNavigationWindow *window)
 {
     if (window->details->refresh_go_menu_idle_id != 0)
     {
@@ -391,11 +391,11 @@ caja_navigation_window_remove_go_menu_callback (CajaNavigationWindow *window)
 }
 
 void
-caja_navigation_window_remove_go_menu_items (CajaNavigationWindow *window)
+baul_navigation_window_remove_go_menu_items (CajaNavigationWindow *window)
 {
     GtkUIManager *ui_manager;
 
-    ui_manager = caja_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
     if (window->details->go_menu_merge_id != 0)
     {
         gtk_ui_manager_remove_ui (ui_manager,
@@ -418,7 +418,7 @@ show_bogus_history_window (CajaWindow *window,
     char *uri_for_display;
     char *detail;
 
-    file = caja_bookmark_get_location (bookmark);
+    file = baul_bookmark_get_location (bookmark);
     uri_for_display = g_file_get_parse_name (file);
 
     detail = g_strdup_printf (_("The location \"%s\" does not exist."), uri_for_display);
@@ -466,12 +466,12 @@ refresh_go_menu (CajaNavigationWindow *window)
     g_assert (CAJA_IS_NAVIGATION_WINDOW (window));
 
     /* Unregister any pending call to this function. */
-    caja_navigation_window_remove_go_menu_callback (window);
+    baul_navigation_window_remove_go_menu_callback (window);
 
     /* Remove old set of history items. */
-    caja_navigation_window_remove_go_menu_items (window);
+    baul_navigation_window_remove_go_menu_items (window);
 
-    ui_manager = caja_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
 
     window->details->go_menu_merge_id = gtk_ui_manager_new_merge_id (ui_manager);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -486,11 +486,11 @@ refresh_go_menu (CajaNavigationWindow *window)
     g_object_unref (window->details->go_menu_action_group);
 
     /* Add in a new set of history items. */
-    for (node = caja_get_history_list (), index = 0;
+    for (node = baul_get_history_list (), index = 0;
             node != NULL && index < 10;
             node = node->next, index++)
     {
-        caja_menus_append_bookmark_to_menu
+        baul_menus_append_bookmark_to_menu
         (CAJA_WINDOW (window),
          CAJA_BOOKMARK (node->data),
          MENU_PATH_HISTORY_PLACEHOLDER,
@@ -528,21 +528,21 @@ schedule_refresh_go_menu (CajaNavigationWindow *window)
 }
 
 /**
- * caja_navigation_window_initialize_go_menu
+ * baul_navigation_window_initialize_go_menu
  *
  * Wire up signals so we'll be notified when history list changes.
  */
 static void
-caja_navigation_window_initialize_go_menu (CajaNavigationWindow *window)
+baul_navigation_window_initialize_go_menu (CajaNavigationWindow *window)
 {
     /* Recreate bookmarks part of menu if history list changes
      */
-    g_signal_connect_object (caja_signaller_get_current (), "history_list_changed",
+    g_signal_connect_object (baul_signaller_get_current (), "history_list_changed",
                              G_CALLBACK (schedule_refresh_go_menu), window, G_CONNECT_SWAPPED);
 }
 
 void
-caja_navigation_window_update_split_view_actions_sensitivity (CajaNavigationWindow *window)
+baul_navigation_window_update_split_view_actions_sensitivity (CajaNavigationWindow *window)
 {
     CajaWindow *win;
     GtkActionGroup *action_group;
@@ -562,16 +562,16 @@ caja_navigation_window_update_split_view_actions_sensitivity (CajaNavigationWind
     have_multiple_panes = (win->details->panes && win->details->panes->next);
     if (win->details->active_pane->active_slot)
     {
-        active_pane_location = caja_window_slot_get_location (win->details->active_pane->active_slot);
+        active_pane_location = baul_window_slot_get_location (win->details->active_pane->active_slot);
     }
     else
     {
         active_pane_location = NULL;
     }
-    next_pane = caja_window_get_next_pane (win);
+    next_pane = baul_window_get_next_pane (win);
     if (next_pane && next_pane->active_slot)
     {
-        next_pane_location = caja_window_slot_get_location (next_pane->active_slot);
+        next_pane_location = baul_window_slot_get_location (next_pane->active_slot);
         next_pane_is_in_same_location = (active_pane_location && next_pane_location &&
                                          g_file_equal (active_pane_location, next_pane_location));
     }
@@ -609,7 +609,7 @@ action_new_window_callback (GtkAction *action,
     CajaWindow *current_window;
 
     current_window = CAJA_WINDOW (user_data);   
-    caja_window_new_window (current_window);
+    baul_window_new_window (current_window);
 }
 
 
@@ -620,7 +620,7 @@ action_new_tab_callback (GtkAction *action,
     CajaWindow *window;
 
     window = CAJA_WINDOW (user_data);
-    caja_window_new_tab (window);
+    baul_window_new_tab (window);
 }
 
 static void
@@ -633,8 +633,8 @@ action_folder_window_callback (GtkAction *action,
 
     current_window = CAJA_WINDOW (user_data);
     slot = current_window->details->active_pane->active_slot;
-    current_location = caja_window_slot_get_location (slot);
-    window = caja_application_get_spatial_window
+    current_location = baul_window_slot_get_location (slot);
+    window = baul_application_get_spatial_window
             (current_window->application,
              current_window,
              NULL,
@@ -642,7 +642,7 @@ action_folder_window_callback (GtkAction *action,
              gtk_window_get_screen (GTK_WINDOW (current_window)),
              NULL);
 
-    caja_window_go_to (window, current_location);
+    baul_window_go_to (window, current_location);
 
     if (current_location != NULL)
     {
@@ -658,7 +658,7 @@ action_go_to_location_callback (GtkAction *action,
 
     window = CAJA_WINDOW (user_data);
 
-    caja_window_prompt_for_location (window, NULL);
+    baul_window_prompt_for_location (window, NULL);
 }
 
 /* The ctrl-f Keyboard shortcut always enables, rather than toggles
@@ -680,7 +680,7 @@ action_show_search_callback (GtkAction *action,
     if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (search_action)))
     {
         /* Already visible, just show it */
-        caja_navigation_window_show_search (window);
+        baul_navigation_window_show_search (window);
     }
     else
     {
@@ -713,7 +713,7 @@ action_show_hide_search_callback (GtkAction *action,
 
     if (var_action)
     {
-        caja_navigation_window_show_search (window);
+        baul_navigation_window_show_search (window);
     }
     else
     {
@@ -725,19 +725,19 @@ action_show_hide_search_callback (GtkAction *action,
         /* Use the location bar as the return location */
         if (slot->query_editor == NULL)
         {
-            location = caja_window_slot_get_location (slot);
+            location = baul_window_slot_get_location (slot);
             /* Use the search location as the return location */
         }
         else
         {
             CajaQuery *query;
 
-            query = caja_query_editor_get_query (slot->query_editor);
+            query = baul_query_editor_get_query (slot->query_editor);
             if (query != NULL)
             {
                 char *uri;
 
-                uri = caja_query_get_location (query);
+                uri = baul_query_get_location (query);
                 if (uri != NULL)
                 {
                     location = g_file_new_for_uri (uri);
@@ -753,10 +753,10 @@ action_show_hide_search_callback (GtkAction *action,
             location = g_file_new_for_path (g_get_home_dir ());
         }
 
-        caja_window_go_to (CAJA_WINDOW (window), location);
+        baul_window_go_to (CAJA_WINDOW (window), location);
         g_object_unref (location);
 
-        caja_navigation_window_hide_search (window);
+        baul_navigation_window_hide_search (window);
     }
 }
 
@@ -767,7 +767,7 @@ action_tabs_previous_callback (GtkAction *action,
     CajaNavigationWindowPane *pane;
 
     pane = CAJA_NAVIGATION_WINDOW_PANE (CAJA_WINDOW (user_data)->details->active_pane);
-    caja_notebook_set_current_page_relative (CAJA_NOTEBOOK (pane->notebook), -1);
+    baul_notebook_set_current_page_relative (CAJA_NOTEBOOK (pane->notebook), -1);
 }
 
 static void
@@ -777,7 +777,7 @@ action_tabs_next_callback (GtkAction *action,
     CajaNavigationWindowPane *pane;
 
     pane = CAJA_NAVIGATION_WINDOW_PANE (CAJA_WINDOW (user_data)->details->active_pane);
-    caja_notebook_set_current_page_relative (CAJA_NOTEBOOK (pane->notebook), 1);
+    baul_notebook_set_current_page_relative (CAJA_NOTEBOOK (pane->notebook), 1);
 }
 
 static void
@@ -787,7 +787,7 @@ action_tabs_move_left_callback (GtkAction *action,
     CajaNavigationWindowPane *pane;
 
     pane = CAJA_NAVIGATION_WINDOW_PANE (CAJA_WINDOW (user_data)->details->active_pane);
-    caja_notebook_reorder_current_child_relative (CAJA_NOTEBOOK (pane->notebook), -1);
+    baul_notebook_reorder_current_child_relative (CAJA_NOTEBOOK (pane->notebook), -1);
 }
 
 static void
@@ -797,7 +797,7 @@ action_tabs_move_right_callback (GtkAction *action,
     CajaNavigationWindowPane *pane;
 
     pane = CAJA_NAVIGATION_WINDOW_PANE (CAJA_WINDOW (user_data)->details->active_pane);
-    caja_notebook_reorder_current_child_relative (CAJA_NOTEBOOK (pane->notebook), 1);
+    baul_notebook_reorder_current_child_relative (CAJA_NOTEBOOK (pane->notebook), 1);
 }
 
 static void
@@ -937,7 +937,7 @@ static const GtkToggleActionEntry navigation_toggle_entries[] =
 };
 
 void
-caja_navigation_window_initialize_actions (CajaNavigationWindow *window)
+baul_navigation_window_initialize_actions (CajaNavigationWindow *window)
 {
     GtkActionGroup *action_group;
     GtkUIManager *ui_manager;
@@ -1011,7 +1011,7 @@ caja_navigation_window_initialize_actions (CajaNavigationWindow *window)
     g_object_unref (action);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    ui_manager = caja_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
 
     /* Alt+N for the first 10 tabs */
     for (i = 0; i < 10; ++i)
@@ -1051,32 +1051,32 @@ caja_navigation_window_initialize_actions (CajaNavigationWindow *window)
     g_object_unref (action_group); /* owned by ui_manager */
 
     g_signal_connect (window, "loading_uri",
-                      G_CALLBACK (caja_navigation_window_update_split_view_actions_sensitivity),
+                      G_CALLBACK (baul_navigation_window_update_split_view_actions_sensitivity),
                       NULL);
 
-    caja_navigation_window_update_split_view_actions_sensitivity (window);
+    baul_navigation_window_update_split_view_actions_sensitivity (window);
 }
 
 
 /**
- * caja_window_initialize_menus
+ * baul_window_initialize_menus
  *
  * Create and install the set of menus for this window.
  * @window: A recently-created CajaWindow.
  */
 void
-caja_navigation_window_initialize_menus (CajaNavigationWindow *window)
+baul_navigation_window_initialize_menus (CajaNavigationWindow *window)
 {
     GtkUIManager *ui_manager;
     const char *ui;
 
-    ui_manager = caja_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
 
-    ui = caja_ui_string_get ("caja-navigation-window-ui.xml");
+    ui = baul_ui_string_get ("baul-navigation-window-ui.xml");
     gtk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
 
-    caja_navigation_window_update_show_hide_menu_items (window);
-    caja_navigation_window_update_spatial_menu_item (window);
+    baul_navigation_window_update_show_hide_menu_items (window);
+    baul_navigation_window_update_spatial_menu_item (window);
 
-    caja_navigation_window_initialize_go_menu (window);
+    baul_navigation_window_initialize_go_menu (window);
 }

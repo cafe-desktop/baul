@@ -1,5 +1,5 @@
 /*
- *  caja-extension-types.c - Type definitions for Caja extensions
+ *  baul-extension-types.c - Type definitions for Caja extensions
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -22,10 +22,10 @@
  */
 
 #include <config.h>
-#include "caja-extension-types.h"
+#include "baul-extension-types.h"
 
 GType
-caja_operation_result_get_type (void)
+baul_operation_result_get_type (void)
 {
     static GType type = 0;
     if (type == 0) {

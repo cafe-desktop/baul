@@ -36,14 +36,14 @@
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 
-#include "caja-icon-info.h"
-#include "caja-global-preferences.h"
-#include "caja-file-operations.h"
-#include "caja-autorun.h"
-#include "caja-program-choosing.h"
-#include "caja-open-with-dialog.h"
-#include "caja-desktop-icon-file.h"
-#include "caja-file-utilities.h"
+#include "baul-icon-info.h"
+#include "baul-global-preferences.h"
+#include "baul-file-operations.h"
+#include "baul-autorun.h"
+#include "baul-program-choosing.h"
+#include "baul-open-with-dialog.h"
+#include "baul-desktop-icon-file.h"
+#include "baul-file-utilities.h"
 
 enum
 {
@@ -65,10 +65,10 @@ enum
 
 static gboolean should_autorun_mount (GMount *mount);
 
-static void caja_autorun_rebuild_combo_box (GtkWidget *combo_box);
+static void baul_autorun_rebuild_combo_box (GtkWidget *combo_box);
 
 void
-caja_autorun_get_preferences (const char *x_content_type,
+baul_autorun_get_preferences (const char *x_content_type,
                               gboolean *pref_start_app,
                               gboolean *pref_ignore,
                               gboolean *pref_open_folder)
@@ -84,9 +84,9 @@ caja_autorun_get_preferences (const char *x_content_type,
     *pref_start_app = FALSE;
     *pref_ignore = FALSE;
     *pref_open_folder = FALSE;
-    x_content_start_app = g_settings_get_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_START_APP);
-    x_content_ignore = g_settings_get_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_IGNORE);
-    x_content_open_folder = g_settings_get_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
+    x_content_start_app = g_settings_get_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_START_APP);
+    x_content_ignore = g_settings_get_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_IGNORE);
+    x_content_open_folder = g_settings_get_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
     if (x_content_start_app != NULL)
     {
         *pref_start_app = eel_g_strv_find (x_content_start_app, x_content_type) != -1;
@@ -149,7 +149,7 @@ add_elem_to_str_array (char **v, const char *s)
 
 
 void
-caja_autorun_set_preferences (const char *x_content_type,
+baul_autorun_set_preferences (const char *x_content_type,
                               gboolean pref_start_app,
                               gboolean pref_ignore,
                               gboolean pref_open_folder)
@@ -160,30 +160,30 @@ caja_autorun_set_preferences (const char *x_content_type,
 
     g_assert (x_content_type != NULL);
 
-    x_content_start_app = g_settings_get_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_START_APP);
-    x_content_ignore = g_settings_get_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_IGNORE);
-    x_content_open_folder = g_settings_get_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
+    x_content_start_app = g_settings_get_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_START_APP);
+    x_content_ignore = g_settings_get_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_IGNORE);
+    x_content_open_folder = g_settings_get_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
 
     remove_elem_from_str_array (x_content_start_app, x_content_type);
     if (pref_start_app)
     {
         x_content_start_app = add_elem_to_str_array (x_content_start_app, x_content_type);
     }
-    g_settings_set_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_START_APP, (const gchar * const*) x_content_start_app);
+    g_settings_set_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_START_APP, (const gchar * const*) x_content_start_app);
 
     remove_elem_from_str_array (x_content_ignore, x_content_type);
     if (pref_ignore)
     {
         x_content_ignore = add_elem_to_str_array (x_content_ignore, x_content_type);
     }
-    g_settings_set_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_IGNORE, (const gchar * const*) x_content_ignore);
+    g_settings_set_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_IGNORE, (const gchar * const*) x_content_ignore);
 
     remove_elem_from_str_array (x_content_open_folder, x_content_type);
     if (pref_open_folder)
     {
         x_content_open_folder = add_elem_to_str_array (x_content_open_folder, x_content_type);
     }
-    g_settings_set_strv (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER, (const gchar * const*) x_content_open_folder);
+    g_settings_set_strv (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER, (const gchar * const*) x_content_open_folder);
 
     g_strfreev (x_content_open_folder);
     g_strfreev (x_content_ignore);
@@ -226,7 +226,7 @@ typedef struct
 } CajaAutorunComboBoxData;
 
 static void
-caja_autorun_combobox_data_destroy (CajaAutorunComboBoxData *data)
+baul_autorun_combobox_data_destroy (CajaAutorunComboBoxData *data)
 {
     /* signal handler may be automatically disconnected by destroying the widget */
     if (g_signal_handler_is_connected (G_OBJECT (data->combo_box), data->changed_signal_id))
@@ -248,7 +248,7 @@ other_application_selected (CajaOpenWithDialog *dialog,
     }
     if (data->update_settings)
     {
-        caja_autorun_set_preferences (data->x_content_type, TRUE, FALSE, FALSE);
+        baul_autorun_set_preferences (data->x_content_type, TRUE, FALSE, FALSE);
         g_app_info_set_as_default_for_type (app_info,
                                             data->x_content_type,
                                             NULL);
@@ -256,7 +256,7 @@ other_application_selected (CajaOpenWithDialog *dialog,
     }
 
     /* rebuild so we include and select the new application in the list */
-    caja_autorun_rebuild_combo_box (data->combo_box);
+    baul_autorun_rebuild_combo_box (data->combo_box);
 }
 
 static void
@@ -265,7 +265,7 @@ handle_dialog_closure (CajaAutorunComboBoxData *data)
     if (!data->other_application_selected)
     {
         /* reset combo box so we don't linger on "Open with other Application..." */
-        caja_autorun_rebuild_combo_box (data->combo_box);
+        baul_autorun_rebuild_combo_box (data->combo_box);
     }
 }
 
@@ -324,7 +324,7 @@ combo_box_changed (GtkComboBox *combo_box,
         }
         if (data->update_settings)
         {
-            caja_autorun_set_preferences (x_content_type, FALSE, FALSE, FALSE);
+            baul_autorun_set_preferences (x_content_type, FALSE, FALSE, FALSE);
         }
         break;
     case AUTORUN_IGNORE:
@@ -334,7 +334,7 @@ combo_box_changed (GtkComboBox *combo_box,
         }
         if (data->update_settings)
         {
-            caja_autorun_set_preferences (x_content_type, FALSE, TRUE, FALSE);
+            baul_autorun_set_preferences (x_content_type, FALSE, TRUE, FALSE);
         }
         break;
     case AUTORUN_OPEN_FOLDER:
@@ -344,7 +344,7 @@ combo_box_changed (GtkComboBox *combo_box,
         }
         if (data->update_settings)
         {
-            caja_autorun_set_preferences (x_content_type, FALSE, FALSE, TRUE);
+            baul_autorun_set_preferences (x_content_type, FALSE, FALSE, TRUE);
         }
         break;
 
@@ -356,7 +356,7 @@ combo_box_changed (GtkComboBox *combo_box,
         }
         if (data->update_settings)
         {
-            caja_autorun_set_preferences (x_content_type, TRUE, FALSE, FALSE);
+            baul_autorun_set_preferences (x_content_type, TRUE, FALSE, FALSE);
             g_app_info_set_as_default_for_type (app_info,
                                                 x_content_type,
                                                 NULL);
@@ -369,7 +369,7 @@ combo_box_changed (GtkComboBox *combo_box,
 
         data->other_application_selected = FALSE;
 
-        dialog = caja_add_application_dialog_new (NULL, x_content_type);
+        dialog = baul_add_application_dialog_new (NULL, x_content_type);
         gtk_window_set_transient_for (GTK_WINDOW (dialog),
                                       GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (combo_box))));
         g_signal_connect (dialog, "application_selected",
@@ -395,20 +395,20 @@ out:
 }
 
 static void
-caja_autorun_rebuild_combo_box (GtkWidget *combo_box)
+baul_autorun_rebuild_combo_box (GtkWidget *combo_box)
 {
     CajaAutorunComboBoxData *data;
     char *x_content_type;
 
-    data = g_object_get_data (G_OBJECT (combo_box), "caja_autorun_combobox_data");
+    data = g_object_get_data (G_OBJECT (combo_box), "baul_autorun_combobox_data");
     if (data == NULL)
     {
-        g_warning ("no 'caja_autorun_combobox_data' data!");
+        g_warning ("no 'baul_autorun_combobox_data' data!");
         return;
     }
 
     x_content_type = g_strdup (data->x_content_type);
-    caja_autorun_prepare_combo_box (combo_box,
+    baul_autorun_prepare_combo_box (combo_box,
                                     x_content_type,
                                     data->include_ask,
                                     data->include_open_with_other_app,
@@ -459,7 +459,7 @@ caja_autorun_rebuild_combo_box (GtkWidget *combo_box)
  */
 
 void
-caja_autorun_prepare_combo_box (GtkWidget *combo_box,
+baul_autorun_prepare_combo_box (GtkWidget *combo_box,
                                 const char *x_content_type,
                                 gboolean include_ask,
                                 gboolean include_open_with_other_app,
@@ -484,10 +484,10 @@ caja_autorun_prepare_combo_box (GtkWidget *combo_box,
     GtkCellRenderer *renderer;
     gboolean new_data;
 
-    caja_autorun_get_preferences (x_content_type, &pref_start_app, &pref_ignore, &pref_open_folder);
+    baul_autorun_get_preferences (x_content_type, &pref_start_app, &pref_ignore, &pref_open_folder);
     pref_ask = !pref_start_app && !pref_ignore && !pref_open_folder;
 
-    icon_size = caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+    icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
     icon_scale = gtk_widget_get_scale_factor (combo_box);
 
     set_active = -1;
@@ -608,8 +608,8 @@ caja_autorun_prepare_combo_box (GtkWidget *combo_box,
              */
 
             icon = g_app_info_get_icon (app_info);
-            icon_info = caja_icon_info_lookup (icon, icon_size, icon_scale);
-            surface = caja_icon_info_get_surface_at_size (icon_info, icon_size);
+            icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
+            surface = baul_icon_info_get_surface_at_size (icon_info, icon_size);
             g_object_unref (icon_info);
 
             open_string = g_strdup_printf (_("Open %s"), g_app_info_get_display_name (app_info));
@@ -717,7 +717,7 @@ caja_autorun_prepare_combo_box (GtkWidget *combo_box,
         }
 
         /* See if we have an old data around */
-        data = g_object_get_data (G_OBJECT (combo_box), "caja_autorun_combobox_data");
+        data = g_object_get_data (G_OBJECT (combo_box), "baul_autorun_combobox_data");
         if (data)
         {
             new_data = FALSE;
@@ -747,9 +747,9 @@ caja_autorun_prepare_combo_box (GtkWidget *combo_box,
     if (new_data)
     {
         g_object_set_data_full (G_OBJECT (combo_box),
-                                "caja_autorun_combobox_data",
+                                "baul_autorun_combobox_data",
                                 data,
-                                (GDestroyNotify) caja_autorun_combobox_data_destroy);
+                                (GDestroyNotify) baul_autorun_combobox_data_destroy);
     }
 }
 
@@ -803,17 +803,17 @@ typedef struct
 
 
 void
-caja_autorun_launch_for_mount (GMount *mount, GAppInfo *app_info)
+baul_autorun_launch_for_mount (GMount *mount, GAppInfo *app_info)
 {
     GFile *root;
     CajaFile *file;
     GList *files;
 
     root = g_mount_get_root (mount);
-    file = caja_file_get (root);
+    file = baul_file_get (root);
     g_object_unref (root);
     files = g_list_append (NULL, file);
-    caja_launch_application (app_info,
+    baul_launch_application (app_info,
                              files,
                              NULL); /* TODO: what to set here? */
     g_object_unref (file);
@@ -852,7 +852,7 @@ autorun_dialog_response (GtkDialog *dialog, gint response, AutorunDialogData *da
     switch (response)
     {
     case AUTORUN_DIALOG_RESPONSE_EJECT:
-        caja_file_operations_unmount_mount (GTK_WINDOW (dialog),
+        baul_file_operations_unmount_mount (GTK_WINDOW (dialog),
                                             data->mount,
                                             data->should_eject,
                                             FALSE);
@@ -869,7 +869,7 @@ autorun_dialog_response (GtkDialog *dialog, gint response, AutorunDialogData *da
         if (data->remember)
         {
             /* make sure we don't ask again */
-            caja_autorun_set_preferences (data->x_content_type, TRUE, data->selected_ignore, data->selected_open_folder);
+            baul_autorun_set_preferences (data->x_content_type, TRUE, data->selected_ignore, data->selected_open_folder);
             if (!data->selected_ignore && !data->selected_open_folder && data->selected_app != NULL)
             {
                 g_app_info_set_as_default_for_type (data->selected_app,
@@ -880,12 +880,12 @@ autorun_dialog_response (GtkDialog *dialog, gint response, AutorunDialogData *da
         else
         {
             /* make sure we do ask again */
-            caja_autorun_set_preferences (data->x_content_type, FALSE, FALSE, FALSE);
+            baul_autorun_set_preferences (data->x_content_type, FALSE, FALSE, FALSE);
         }
 
         if (!data->selected_ignore && !data->selected_open_folder && data->selected_app != NULL)
         {
-            caja_autorun_launch_for_mount (data->mount, data->selected_app);
+            baul_autorun_launch_for_mount (data->mount, data->selected_app);
         }
         else if (!data->selected_ignore && data->selected_open_folder)
         {
@@ -977,7 +977,7 @@ do_autorun_for_content_type (GMount *mount, const char *x_content_type, CajaAuto
 
     user_forced_dialog = is_shift_pressed ();
 
-    caja_autorun_get_preferences (x_content_type, &pref_start_app, &pref_ignore, &pref_open_folder);
+    baul_autorun_get_preferences (x_content_type, &pref_start_app, &pref_ignore, &pref_open_folder);
     pref_ask = !pref_start_app && !pref_ignore && !pref_open_folder;
 
     if (user_forced_dialog)
@@ -991,7 +991,7 @@ do_autorun_for_content_type (GMount *mount, const char *x_content_type, CajaAuto
         app_info = g_app_info_get_default_for_type (x_content_type, FALSE);
         if (app_info != NULL)
         {
-            caja_autorun_launch_for_mount (mount, app_info);
+            baul_autorun_launch_for_mount (mount, app_info);
         }
         goto out;
     }
@@ -1018,11 +1018,11 @@ show_dialog:
     gtk_container_set_border_width (GTK_CONTAINER (hbox), 12);
 
     icon = g_mount_get_icon (mount);
-    icon_size = caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_DIALOG);
+    icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_DIALOG);
     icon_scale = gtk_widget_get_scale_factor (dialog);
-    icon_info = caja_icon_info_lookup (icon, icon_size, icon_scale);
-    pixbuf = caja_icon_info_get_pixbuf_at_size (icon_info, icon_size);
-    surface = caja_icon_info_get_surface_at_size (icon_info, icon_size);
+    icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
+    pixbuf = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
+    surface = baul_icon_info_get_surface_at_size (icon_info, icon_size);
     g_object_unref (icon_info);
     g_object_unref (icon);
     image = gtk_image_new_from_surface (surface);
@@ -1134,7 +1134,7 @@ show_dialog:
     data->user_data = user_data;
 
     combo_box = gtk_combo_box_new ();
-    caja_autorun_prepare_combo_box (combo_box, x_content_type, FALSE, TRUE, FALSE, autorun_combo_changed, data);
+    baul_autorun_prepare_combo_box (combo_box, x_content_type, FALSE, TRUE, FALSE, autorun_combo_changed, data);
     g_signal_connect (G_OBJECT (combo_box),
                       "key-press-event",
                       G_CALLBACK (combo_box_enter_ok),
@@ -1168,7 +1168,7 @@ show_dialog:
         eject_button = gtk_button_new_with_mnemonic (_("_Eject"));
         surface = gtk_icon_theme_load_surface (gtk_icon_theme_get_default (),
                                                "media-eject",
-                                               caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_BUTTON),
+                                               baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_BUTTON),
                                                icon_scale,
                                                NULL,
                                                0,
@@ -1226,7 +1226,7 @@ autorun_guessed_content_type_callback (GObject *source_object,
     error = NULL;
     guessed_content_type = g_mount_guess_content_type_finish (G_MOUNT (source_object), res, &error);
     g_object_set_data_full (source_object,
-                            "caja-content-type-cache",
+                            "baul-content-type-cache",
                             g_strdupv (guessed_content_type),
                             (GDestroyNotify)g_strfreev);
     if (error != NULL)
@@ -1251,7 +1251,7 @@ autorun_guessed_content_type_callback (GObject *source_object,
         }
         else
         {
-            if (g_settings_get_boolean (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTOMOUNT_OPEN))
+            if (g_settings_get_boolean (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTOMOUNT_OPEN))
                 open_folder = TRUE;
         }
     }
@@ -1267,12 +1267,12 @@ autorun_guessed_content_type_callback (GObject *source_object,
 }
 
 void
-caja_autorun (GMount *mount, CajaAutorunOpenWindow open_window_func, gpointer user_data)
+baul_autorun (GMount *mount, CajaAutorunOpenWindow open_window_func, gpointer user_data)
 {
     AutorunData *data;
 
     if (!should_autorun_mount (mount) ||
-            g_settings_get_boolean (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_NEVER))
+            g_settings_get_boolean (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_NEVER))
     {
         return;
     }
@@ -1307,7 +1307,7 @@ get_types_cb (GObject *source_object,
     types = g_mount_guess_content_type_finish (G_MOUNT (source_object), res, NULL);
 
     g_object_set_data_full (source_object,
-                            "caja-content-type-cache",
+                            "baul-content-type-cache",
                             g_strdupv (types),
                             (GDestroyNotify)g_strfreev);
 
@@ -1320,7 +1320,7 @@ get_types_cb (GObject *source_object,
 }
 
 void
-caja_autorun_get_x_content_types_for_mount_async (GMount *mount,
+baul_autorun_get_x_content_types_for_mount_async (GMount *mount,
         CajaAutorunGetContent callback,
         GCancellable *cancellable,
         gpointer user_data)
@@ -1337,7 +1337,7 @@ caja_autorun_get_x_content_types_for_mount_async (GMount *mount,
         return;
     }
 
-    cached = g_object_get_data (G_OBJECT (mount), "caja-content-type-cache");
+    cached = g_object_get_data (G_OBJECT (mount), "baul-content-type-cache");
     if (cached != NULL)
     {
         if (callback)
@@ -1360,7 +1360,7 @@ caja_autorun_get_x_content_types_for_mount_async (GMount *mount,
 
 
 char **
-caja_autorun_get_cached_x_content_types_for_mount (GMount      *mount)
+baul_autorun_get_cached_x_content_types_for_mount (GMount      *mount)
 {
     char **cached;
 
@@ -1369,7 +1369,7 @@ caja_autorun_get_cached_x_content_types_for_mount (GMount      *mount)
         return NULL;
     }
 
-    cached = g_object_get_data (G_OBJECT (mount), "caja-content-type-cache");
+    cached = g_object_get_data (G_OBJECT (mount), "baul-content-type-cache");
     if (cached != NULL)
     {
         return g_strdupv (cached);
@@ -1383,22 +1383,22 @@ remove_allow_volume (gpointer data)
 {
     GVolume *volume = data;
 
-    g_object_set_data (G_OBJECT (volume), "caja-allow-autorun", NULL);
+    g_object_set_data (G_OBJECT (volume), "baul-allow-autorun", NULL);
     return FALSE;
 }
 
 void
-caja_allow_autorun_for_volume (GVolume *volume)
+baul_allow_autorun_for_volume (GVolume *volume)
 {
-    g_object_set_data (G_OBJECT (volume), "caja-allow-autorun", GINT_TO_POINTER (1));
+    g_object_set_data (G_OBJECT (volume), "baul-allow-autorun", GINT_TO_POINTER (1));
 }
 
 #define INHIBIT_AUTORUN_SECONDS 10
 
 void
-caja_allow_autorun_for_volume_finish (GVolume *volume)
+baul_allow_autorun_for_volume_finish (GVolume *volume)
 {
-    if (g_object_get_data (G_OBJECT (volume), "caja-allow-autorun") != NULL)
+    if (g_object_get_data (G_OBJECT (volume), "baul-allow-autorun") != NULL)
     {
         g_timeout_add_seconds_full (0,
                                     INHIBIT_AUTORUN_SECONDS,
@@ -1433,10 +1433,10 @@ should_autorun_mount (GMount *mount)
     enclosing_volume = g_mount_get_volume (mount);
     if (enclosing_volume != NULL)
     {
-        if (g_object_get_data (G_OBJECT (enclosing_volume), "caja-allow-autorun") != NULL)
+        if (g_object_get_data (G_OBJECT (enclosing_volume), "baul-allow-autorun") != NULL)
         {
             ignore_autorun = FALSE;
-            g_object_set_data (G_OBJECT (enclosing_volume), "caja-allow-autorun", NULL);
+            g_object_set_data (G_OBJECT (enclosing_volume), "baul-allow-autorun", NULL);
         }
     }
 

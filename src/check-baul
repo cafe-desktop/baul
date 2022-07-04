@@ -1,2 +1,2 @@
 #!/bin/sh
-./caja --check --g-fatal-warnings
+./baul --check --g-fatal-warnings

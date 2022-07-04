@@ -1,5 +1,5 @@
 /*
- *  caja-extension-private.h - Type definitions for Caja extensions
+ *  baul-extension-private.h - Type definitions for Caja extensions
  *
  *  Copyright (C) 2009 Red Hat, Inc.
  *
@@ -24,13 +24,13 @@
 #ifndef CAJA_EXTENSION_PRIVATE_H
 #define CAJA_EXTENSION_PRIVATE_H
 
-#include "caja-file-info.h"
+#include "baul-file-info.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-    extern CajaFileInfo *(*caja_file_info_getter) (GFile *location, gboolean create);
+    extern CajaFileInfo *(*baul_file_info_getter) (GFile *location, gboolean create);
 
 #ifdef __cplusplus
 }

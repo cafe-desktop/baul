@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-connect-server-main.c - Start the "Connect to Server" dialog.
+/* baul-connect-server-main.c - Start the "Connect to Server" dialog.
  * Caja
  *
  * Copyright (C) 2005 Vincent Untz
@@ -34,10 +34,10 @@
 
 #include <eel/eel-stock-dialogs.h>
 
-#include <libcaja-private/caja-icon-names.h>
-#include <libcaja-private/caja-global-preferences.h>
+#include <libbaul-private/baul-icon-names.h>
+#include <libbaul-private/baul-global-preferences.h>
 
-#include "caja-connect-server-dialog.h"
+#include "baul-connect-server-dialog.h"
 
 static GSimpleAsyncResult *display_location_res = NULL;
 
@@ -52,7 +52,7 @@ main_dialog_destroyed (GtkWidget *widget,
 }
 
 gboolean
-caja_connect_server_dialog_display_location_finish (CajaConnectServerDialog *self,
+baul_connect_server_dialog_display_location_finish (CajaConnectServerDialog *self,
 						    GAsyncResult *res,
 						    GError **error)
 {
@@ -64,7 +64,7 @@ caja_connect_server_dialog_display_location_finish (CajaConnectServerDialog *sel
 }
 
 void
-caja_connect_server_dialog_display_location_async (CajaConnectServerDialog *self,
+baul_connect_server_dialog_display_location_async (CajaConnectServerDialog *self,
 						   CajaApplication *application,
 						   GFile *location,
 						   GAsyncReadyCallback callback,
@@ -76,7 +76,7 @@ caja_connect_server_dialog_display_location_async (CajaConnectServerDialog *self
 
     display_location_res = g_simple_async_result_new (G_OBJECT (self),
     			    callback, user_data,
-    			    caja_connect_server_dialog_display_location_async);
+    			    baul_connect_server_dialog_display_location_async);
 
     error = NULL;
     uri = g_file_get_uri (location);
@@ -130,11 +130,11 @@ main (int argc, char *argv[])
 
     g_option_context_free (context);
 
-    caja_global_preferences_init ();
+    baul_global_preferences_init ();
 
     gtk_window_set_default_icon_name (CAJA_ICON_FOLDER);
 
-    dialog = caja_connect_server_dialog_new (NULL);
+    dialog = baul_connect_server_dialog_new (NULL);
 
     g_signal_connect (dialog, "destroy",
                       G_CALLBACK (main_dialog_destroyed), NULL);

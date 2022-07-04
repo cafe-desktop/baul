@@ -28,7 +28,7 @@
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_ZOOM_ACTION            (caja_zoom_action_get_type ())
+#define CAJA_TYPE_ZOOM_ACTION            (baul_zoom_action_get_type ())
 #define CAJA_ZOOM_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ZOOM_ACTION, CajaZoomAction))
 #define CAJA_ZOOM_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_ZOOM_ACTION, CajaZoomActionClass))
 #define CAJA_IS_ZOOM_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_ZOOM_ACTION))
@@ -52,6 +52,6 @@ struct _CajaZoomActionClass
     GtkActionClass parent_class;
 };
 
-GType    caja_zoom_action_get_type   (void);
+GType    baul_zoom_action_get_type   (void);
 
 #endif

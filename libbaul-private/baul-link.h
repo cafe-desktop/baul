@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-link.h: .
+   baul-link.h: .
 
    Copyright (C) 2001 Red Hat, Inc.
 
@@ -27,7 +27,7 @@
 
 #include <gdk/gdk.h>
 
-gboolean         caja_link_local_create                      (const char        *directory_uri,
+gboolean         baul_link_local_create                      (const char        *directory_uri,
         const char        *base_name,
         const char        *display_name,
         const char        *image,
@@ -35,14 +35,14 @@ gboolean         caja_link_local_create                      (const char        
         const GdkPoint    *point,
         int                screen,
         gboolean           unique_filename);
-gboolean         caja_link_local_set_text                    (const char        *uri,
+gboolean         baul_link_local_set_text                    (const char        *uri,
         const char        *text);
-gboolean         caja_link_local_set_icon                    (const char        *uri,
+gboolean         baul_link_local_set_icon                    (const char        *uri,
         const char        *icon);
-char *           caja_link_local_get_text                    (const char        *uri);
-char *           caja_link_local_get_additional_text         (const char        *uri);
-char *           caja_link_local_get_link_uri                (const char        *uri);
-void             caja_link_get_link_info_given_file_contents (const char        *file_contents,
+char *           baul_link_local_get_text                    (const char        *uri);
+char *           baul_link_local_get_additional_text         (const char        *uri);
+char *           baul_link_local_get_link_uri                (const char        *uri);
+void             baul_link_get_link_info_given_file_contents (const char        *file_contents,
         int                link_file_size,
         const char        *file_uri,
         char             **uri,

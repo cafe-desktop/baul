@@ -31,22 +31,22 @@
 /* This makes this editable or text view put clipboard commands into
  * the passed UI manager when the editable/text view is in focus.
  * Callers in Caja normally get the UI manager from
- * caja_window_get_ui_manager. */
+ * baul_window_get_ui_manager. */
 /* The shares selection changes argument should be set to true if the
  * widget uses the signal "selection_changed" to tell others about
  * text selection changes.  The CajaEntry widget
- * is currently the only editable in caja that shares selection
+ * is currently the only editable in baul that shares selection
  * changes. */
-void caja_clipboard_set_up_editable            (GtkEditable        *target,
+void baul_clipboard_set_up_editable            (GtkEditable        *target,
         GtkUIManager       *ui_manager,
         gboolean            shares_selection_changes);
-void caja_clipboard_set_up_text_view           (GtkTextView        *target,
+void baul_clipboard_set_up_text_view           (GtkTextView        *target,
         GtkUIManager       *ui_manager);
-void caja_clipboard_clear_if_colliding_uris    (GtkWidget          *widget,
+void baul_clipboard_clear_if_colliding_uris    (GtkWidget          *widget,
         const GList        *item_uris,
         GdkAtom             copied_files_atom);
-GtkClipboard* caja_clipboard_get                (GtkWidget          *widget);
-GList* caja_clipboard_get_uri_list_from_selection_data
+GtkClipboard* baul_clipboard_get                (GtkWidget          *widget);
+GList* baul_clipboard_get_uri_list_from_selection_data
 (GtkSelectionData   *selection_data,
  gboolean           *cut,
  GdkAtom             copied_files_atom);

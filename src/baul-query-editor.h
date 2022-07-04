@@ -26,12 +26,12 @@
 
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-query.h>
-#include <libcaja-private/caja-window-info.h>
+#include <libbaul-private/baul-query.h>
+#include <libbaul-private/baul-window-info.h>
 
-#include "caja-search-bar.h"
+#include "baul-search-bar.h"
 
-#define CAJA_TYPE_QUERY_EDITOR caja_query_editor_get_type()
+#define CAJA_TYPE_QUERY_EDITOR baul_query_editor_get_type()
 #define CAJA_QUERY_EDITOR(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_QUERY_EDITOR, CajaQueryEditor))
 #define CAJA_QUERY_EDITOR_CLASS(klass) \
@@ -61,23 +61,23 @@ typedef struct
     void (* cancel)   (CajaQueryEditor *editor);
 } CajaQueryEditorClass;
 
-GType      caja_query_editor_get_type     	   (void);
-GtkWidget* caja_query_editor_new          	   (gboolean start_hidden,
+GType      baul_query_editor_get_type     	   (void);
+GtkWidget* baul_query_editor_new          	   (gboolean start_hidden,
         gboolean is_indexed);
-GtkWidget* caja_query_editor_new_with_bar      (gboolean start_hidden,
+GtkWidget* baul_query_editor_new_with_bar      (gboolean start_hidden,
         gboolean is_indexed,
         gboolean start_attached,
         CajaSearchBar *bar,
         CajaWindowSlot *slot);
-void       caja_query_editor_set_default_query (CajaQueryEditor *editor);
+void       baul_query_editor_set_default_query (CajaQueryEditor *editor);
 
-void	   caja_query_editor_grab_focus (CajaQueryEditor *editor);
-void       caja_query_editor_clear_query (CajaQueryEditor *editor);
+void	   baul_query_editor_grab_focus (CajaQueryEditor *editor);
+void       baul_query_editor_clear_query (CajaQueryEditor *editor);
 
-CajaQuery *caja_query_editor_get_query   (CajaQueryEditor *editor);
-void           caja_query_editor_set_query   (CajaQueryEditor *editor,
+CajaQuery *baul_query_editor_get_query   (CajaQueryEditor *editor);
+void           baul_query_editor_set_query   (CajaQueryEditor *editor,
         CajaQuery       *query);
-void           caja_query_editor_set_visible (CajaQueryEditor *editor,
+void           baul_query_editor_set_visible (CajaQueryEditor *editor,
         gboolean             visible);
 
 #endif /* CAJA_QUERY_EDITOR_H */

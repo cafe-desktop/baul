@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-file-utilities.c - implementation of file manipulation routines.
+/* baul-file-utilities.c - implementation of file manipulation routines.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -34,14 +34,14 @@
 #include <eel/eel-string.h>
 #include <eel/eel-debug.h>
 
-#include "caja-file-utilities.h"
-#include "caja-global-preferences.h"
-#include "caja-lib-self-check-functions.h"
-#include "caja-metadata.h"
-#include "caja-file.h"
-#include "caja-file-operations.h"
-#include "caja-search-directory.h"
-#include "caja-signaller.h"
+#include "baul-file-utilities.h"
+#include "baul-global-preferences.h"
+#include "baul-lib-self-check-functions.h"
+#include "baul-metadata.h"
+#include "baul-file.h"
+#include "baul-file-operations.h"
+#include "baul-search-directory.h"
+#include "baul-signaller.h"
 
 #define DEFAULT_CAJA_DIRECTORY_MODE (0755)
 
@@ -53,7 +53,7 @@ static void schedule_user_dirs_changed (void);
 static void desktop_dir_changed (void);
 
 char *
-caja_compute_title_for_location (GFile *location)
+baul_compute_title_for_location (GFile *location)
 {
     char *title;
 
@@ -65,13 +65,13 @@ caja_compute_title_for_location (GFile *location)
     {
         CajaFile *file;
 
-        file = caja_file_get (location);
-        title = caja_file_get_description (file);
+        file = baul_file_get (location);
+        title = baul_file_get_description (file);
         if (title == NULL)
         {
-            title = caja_file_get_display_name (file);
+            title = baul_file_get_display_name (file);
         }
-        caja_file_unref (file);
+        baul_file_unref (file);
     }
 
     if (title == NULL)
@@ -84,17 +84,17 @@ caja_compute_title_for_location (GFile *location)
 
 
 /**
- * caja_get_user_directory:
+ * baul_get_user_directory:
  *
- * Get the path for the directory containing caja settings.
+ * Get the path for the directory containing baul settings.
  *
  * Return value: the directory path.
  **/
-char* caja_get_user_directory(void)
+char* baul_get_user_directory(void)
 {
 	/* FIXME bugzilla.gnome.org 41286:
 	 * How should we handle the case where this mkdir fails?
-	 * Note that caja_application_startup will refuse to launch if this
+	 * Note that baul_application_startup will refuse to launch if this
 	 * directory doesn't get created, so that case is OK. But the directory
 	 * could be deleted after Caja was launched, and perhaps
 	 * there is some bad side-effect of not handling that case.
@@ -102,7 +102,7 @@ char* caja_get_user_directory(void)
 	 * Si alguien tiene tiempo, puede enviar este codigo a Nautilus.
 	 * Obviamente, con los comentarios traducidos al Inglés.
 	 */
-	char* user_directory = g_build_filename(g_get_user_config_dir(), "caja", NULL);
+	char* user_directory = g_build_filename(g_get_user_config_dir(), "baul", NULL);
 	/* Se necesita que esta dirección sea una carpeta, con los permisos
 	 * DEFAULT_CAJA_DIRECTORY_MODE. Pero si es un archivo, el programa intentará
 	 * eliminar el archivo silenciosamente. */
@@ -155,7 +155,7 @@ char* caja_get_user_directory(void)
 				GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_ERROR,
 				GTK_BUTTONS_CLOSE,
-				"The path for the directory containing caja settings need read and write permissions: %s",
+				"The path for the directory containing baul settings need read and write permissions: %s",
 				user_directory);
 
 			gtk_dialog_run(GTK_DIALOG(dialog));
@@ -169,16 +169,16 @@ char* caja_get_user_directory(void)
 }
 
 /**
- * caja_get_accel_map_file:
+ * baul_get_accel_map_file:
  *
- * Get the path for the filename containing caja accelerator map.
+ * Get the path for the filename containing baul accelerator map.
  * The filename need not exist.
  *
  * Return value: the filename path
  **/
-char* caja_get_accel_map_file(void)
+char* baul_get_accel_map_file(void)
 {
-	return g_build_filename (g_get_user_config_dir (), "caja", "accels", NULL);
+	return g_build_filename (g_get_user_config_dir (), "baul", "accels", NULL);
 }
 
 typedef struct {
@@ -299,7 +299,7 @@ xdg_dir_changed (CajaFile *file,
     GFile *location, *dir_location;
     char *path;
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     dir_location = g_file_new_for_path (dir->path);
     if (!g_file_equal (location, dir_location))
     {
@@ -335,7 +335,7 @@ xdg_dir_changed (CajaFile *file,
             schedule_user_dirs_changed ();
             desktop_dir_changed ();
             /* Icon might have changed */
-            caja_file_invalidate_attributes (file, CAJA_FILE_ATTRIBUTE_INFO);
+            baul_file_invalidate_attributes (file, CAJA_FILE_ATTRIBUTE_INFO);
         }
     }
     g_object_unref (location);
@@ -360,7 +360,7 @@ static int user_dirs_changed_tag = 0;
 static gboolean
 emit_user_dirs_changed_idle (gpointer data)
 {
-    g_signal_emit_by_name (caja_signaller_get_current (),
+    g_signal_emit_by_name (baul_signaller_get_current (),
                            "user_dirs_changed");
     user_dirs_changed_tag = 0;
     return FALSE;
@@ -396,12 +396,12 @@ free_xdg_dir_cache (void)
         {
             if (cached_xdg_dirs[i].file != NULL)
             {
-                caja_file_monitor_remove (cached_xdg_dirs[i].file,
+                baul_file_monitor_remove (cached_xdg_dirs[i].file,
                                           &cached_xdg_dirs[i]);
                 g_signal_handlers_disconnect_by_func (cached_xdg_dirs[i].file,
                                                       G_CALLBACK (xdg_dir_changed),
                                                       &cached_xdg_dirs[i]);
-                caja_file_unref (cached_xdg_dirs[i].file);
+                baul_file_unref (cached_xdg_dirs[i].file);
             }
             g_free (cached_xdg_dirs[i].type);
             g_free (cached_xdg_dirs[i].path);
@@ -443,8 +443,8 @@ update_xdg_dir_cache (void)
         if (strcmp (cached_xdg_dirs[i].path, g_get_home_dir ()) != 0)
         {
             uri = g_filename_to_uri (cached_xdg_dirs[i].path, NULL, NULL);
-            cached_xdg_dirs[i].file = caja_file_get_by_uri (uri);
-            caja_file_monitor_add (cached_xdg_dirs[i].file,
+            cached_xdg_dirs[i].file = baul_file_get_by_uri (uri);
+            baul_file_monitor_add (cached_xdg_dirs[i].file,
                                    &cached_xdg_dirs[i],
                                    CAJA_FILE_ATTRIBUTE_INFO);
             g_signal_connect (cached_xdg_dirs[i].file,
@@ -472,7 +472,7 @@ update_xdg_dir_cache (void)
 }
 
 char *
-caja_get_xdg_dir (const char *type)
+baul_get_xdg_dir (const char *type)
 {
     int i;
 
@@ -503,39 +503,39 @@ caja_get_xdg_dir (const char *type)
 static char *
 get_desktop_path (void)
 {
-    if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR))
+    if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR))
     {
         return g_strdup (g_get_home_dir());
     }
     else
     {
-        return caja_get_xdg_dir ("DESKTOP");
+        return baul_get_xdg_dir ("DESKTOP");
     }
 }
 
 /**
- * caja_get_desktop_directory:
+ * baul_get_desktop_directory:
  *
  * Get the path for the directory containing files on the desktop.
  *
  * Return value: the directory path.
  **/
 char *
-caja_get_desktop_directory (void)
+baul_get_desktop_directory (void)
 {
     char *desktop_directory;
 
     desktop_directory = get_desktop_path ();
 
     /* Don't try to create a home directory */
-    if (!g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR))
+    if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR))
     {
         if (!g_file_test (desktop_directory, G_FILE_TEST_EXISTS))
         {
             g_mkdir (desktop_directory, DEFAULT_DESKTOP_DIRECTORY_MODE);
             /* FIXME bugzilla.gnome.org 41286:
              * How should we handle the case where this mkdir fails?
-             * Note that caja_application_startup will refuse to launch if this
+             * Note that baul_application_startup will refuse to launch if this
              * directory doesn't get created, so that case is OK. But the directory
              * could be deleted after Caja was launched, and perhaps
              * there is some bad side-effect of not handling that case.
@@ -547,7 +547,7 @@ caja_get_desktop_directory (void)
 }
 
 GFile *
-caja_get_desktop_location (void)
+baul_get_desktop_location (void)
 {
     char *desktop_directory;
     GFile *res;
@@ -561,19 +561,19 @@ caja_get_desktop_location (void)
 
 
 /**
- * caja_get_desktop_directory_uri:
+ * baul_get_desktop_directory_uri:
  *
  * Get the uri for the directory containing files on the desktop.
  *
  * Return value: the directory path.
  **/
 char *
-caja_get_desktop_directory_uri (void)
+baul_get_desktop_directory_uri (void)
 {
     char *desktop_path;
     char *desktop_uri;
 
-    desktop_path = caja_get_desktop_directory ();
+    desktop_path = baul_get_desktop_directory ();
     desktop_uri = g_filename_to_uri (desktop_path, NULL, NULL);
     g_free (desktop_path);
 
@@ -581,36 +581,36 @@ caja_get_desktop_directory_uri (void)
 }
 
 char *
-caja_get_home_directory_uri (void)
+baul_get_home_directory_uri (void)
 {
     return  g_filename_to_uri (g_get_home_dir (), NULL, NULL);
 }
 
 
 gboolean
-caja_should_use_templates_directory (void)
+baul_should_use_templates_directory (void)
 {
     char *dir;
     gboolean res;
 
-    dir = caja_get_xdg_dir ("TEMPLATES");
+    dir = baul_get_xdg_dir ("TEMPLATES");
     res = strcmp (dir, g_get_home_dir ()) != 0;
     g_free (dir);
     return res;
 }
 
 char *
-caja_get_templates_directory (void)
+baul_get_templates_directory (void)
 {
-    return caja_get_xdg_dir ("TEMPLATES");
+    return baul_get_xdg_dir ("TEMPLATES");
 }
 
 void
-caja_create_templates_directory (void)
+baul_create_templates_directory (void)
 {
     char *dir;
 
-    dir = caja_get_templates_directory ();
+    dir = baul_get_templates_directory ();
     if (!g_file_test (dir, G_FILE_TEST_EXISTS))
     {
         g_mkdir (dir, DEFAULT_CAJA_DIRECTORY_MODE);
@@ -619,11 +619,11 @@ caja_create_templates_directory (void)
 }
 
 char *
-caja_get_templates_directory_uri (void)
+baul_get_templates_directory_uri (void)
 {
     char *directory, *uri;
 
-    directory = caja_get_templates_directory ();
+    directory = baul_get_templates_directory ();
     uri = g_filename_to_uri (directory, NULL, NULL);
     g_free (directory);
     return uri;
@@ -676,7 +676,7 @@ update_desktop_dir (void)
 }
 
 gboolean
-caja_is_home_directory_file (GFile *dir,
+baul_is_home_directory_file (GFile *dir,
                              const char *filename)
 {
     static GFile *home_dir_dir = NULL;
@@ -697,7 +697,7 @@ caja_is_home_directory_file (GFile *dir,
 }
 
 gboolean
-caja_is_home_directory (GFile *dir)
+baul_is_home_directory (GFile *dir)
 {
     static GFile *home_dir = NULL;
 
@@ -710,7 +710,7 @@ caja_is_home_directory (GFile *dir)
 }
 
 gboolean
-caja_is_root_directory (GFile *dir)
+baul_is_root_directory (GFile *dir)
 {
     static GFile *root_dir = NULL;
 
@@ -724,13 +724,13 @@ caja_is_root_directory (GFile *dir)
 
 
 gboolean
-caja_is_desktop_directory_file (GFile *dir,
+baul_is_desktop_directory_file (GFile *dir,
                                 const char *file)
 {
 
     if (!desktop_dir_changed_callback_installed)
     {
-        g_signal_connect_swapped (caja_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+        g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
                                   G_CALLBACK(desktop_dir_changed_callback),
                                   NULL);
         desktop_dir_changed_callback_installed = TRUE;
@@ -746,12 +746,12 @@ caja_is_desktop_directory_file (GFile *dir,
 }
 
 gboolean
-caja_is_desktop_directory (GFile *dir)
+baul_is_desktop_directory (GFile *dir)
 {
 
     if (!desktop_dir_changed_callback_installed)
     {
-        g_signal_connect_swapped (caja_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+        g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
                                   G_CALLBACK(desktop_dir_changed_callback),
                                   NULL);
         desktop_dir_changed_callback_installed = TRUE;
@@ -766,7 +766,7 @@ caja_is_desktop_directory (GFile *dir)
 }
 
 GMount *
-caja_get_mounted_mount_for_root (GFile *location)
+baul_get_mounted_mount_for_root (GFile *location)
 {
 	GVolumeMonitor *volume_monitor;
 	GList *mounts;
@@ -808,16 +808,16 @@ caja_get_mounted_mount_for_root (GFile *location)
 }
 
 /**
- * caja_get_pixmap_directory
+ * baul_get_pixmap_directory
  *
  * Get the path for the directory containing Caja pixmaps.
  *
  * Return value: the directory path.
  **/
 char *
-caja_get_pixmap_directory (void)
+baul_get_pixmap_directory (void)
 {
-    return g_strdup (DATADIR "/pixmaps/caja");
+    return g_strdup (DATADIR "/pixmaps/baul");
 }
 
 /* FIXME bugzilla.gnome.org 42423:
@@ -825,11 +825,11 @@ caja_get_pixmap_directory (void)
  * pixmaps are missing. That is lame.
  */
 char *
-caja_pixmap_file (const char *partial_path)
+baul_pixmap_file (const char *partial_path)
 {
     char *path;
 
-    path = g_build_filename (DATADIR "/pixmaps/caja", partial_path, NULL);
+    path = g_build_filename (DATADIR "/pixmaps/baul", partial_path, NULL);
     if (g_file_test (path, G_FILE_TEST_EXISTS))
     {
         return path;
@@ -837,7 +837,7 @@ caja_pixmap_file (const char *partial_path)
     else
     {
         char *tmp;
-        tmp = caja_get_pixmap_directory ();
+        tmp = baul_get_pixmap_directory ();
         g_debug ("Failed to locate \"%s\" in Caja pixmap path \"%s\". Incomplete installation?", partial_path, tmp);
         g_free (tmp);
     }
@@ -846,13 +846,13 @@ caja_pixmap_file (const char *partial_path)
 }
 
 char *
-caja_get_data_file_path (const char *partial_path)
+baul_get_data_file_path (const char *partial_path)
 {
     char *path;
     char *user_directory;
 
     /* first try the user's home directory */
-    user_directory = caja_get_user_directory ();
+    user_directory = baul_get_user_directory ();
     path = g_build_filename (user_directory, partial_path, NULL);
     g_free (user_directory);
     if (g_file_test (path, G_FILE_TEST_EXISTS))
@@ -873,7 +873,7 @@ caja_get_data_file_path (const char *partial_path)
 }
 
 char *
-caja_ensure_unique_file_name (const char *directory_uri,
+baul_ensure_unique_file_name (const char *directory_uri,
                               const char *base_name,
                               const char *extension)
 {
@@ -923,7 +923,7 @@ caja_ensure_unique_file_name (const char *directory_uri,
 }
 
 GFile *
-caja_find_existing_uri_in_hierarchy (GFile *location)
+baul_find_existing_uri_in_hierarchy (GFile *location)
 {
     GFileInfo *info = NULL;
     GFile *tmp = NULL;
@@ -950,7 +950,7 @@ caja_find_existing_uri_in_hierarchy (GFile *location)
 }
 
 gboolean
-caja_is_engrampa_installed (void)
+baul_is_engrampa_installed (void)
 {
     static int installed = -1;
 
@@ -996,7 +996,7 @@ get_dbus_connection (void)
 }
 
 /**
- * caja_inhibit_power_manager:
+ * baul_inhibit_power_manager:
  * @message: a human readable message for the reason why power management
  *       is being suspended.
  *
@@ -1004,11 +1004,11 @@ get_dbus_connection (void)
  * (e.g. whenever Caja is doing file operations).
  *
  * Returns: an integer cookie, which must be passed to
- *    caja_uninhibit_power_manager() to resume
+ *    baul_uninhibit_power_manager() to resume
  *    normal power management.
  */
 int
-caja_inhibit_power_manager (const char *message)
+baul_inhibit_power_manager (const char *message)
 {
     GDBusConnection *connection;
     GVariant *result;
@@ -1054,15 +1054,15 @@ caja_inhibit_power_manager (const char *message)
 }
 
 /**
- * caja_uninhibit_power_manager:
- * @cookie: the cookie value returned by caja_inhibit_power_manager()
+ * baul_uninhibit_power_manager:
+ * @cookie: the cookie value returned by baul_inhibit_power_manager()
  *
  * Uninhibits power management. This function must be called after the task
  * which inhibited power management has finished, or the system will not
  * return to normal power management.
  */
 void
-caja_uninhibit_power_manager (gint cookie)
+baul_uninhibit_power_manager (gint cookie)
 {
     GDBusConnection *connection;
     GVariant *result;
@@ -1102,7 +1102,7 @@ caja_uninhibit_power_manager (gint cookie)
 /* Returns TRUE if the file is in XDG_DATA_DIRS. This is used for
    deciding if a desktop file is "trusted" based on the path */
 gboolean
-caja_is_in_system_dir (GFile *file)
+baul_is_in_system_dir (GFile *file)
 {
     const char * const * data_dirs;
     char *path;
@@ -1135,7 +1135,7 @@ caja_is_in_system_dir (GFile *file)
 }
 
 GHashTable *
-caja_trashed_files_get_original_directories (GList *files,
+baul_trashed_files_get_original_directories (GList *files,
         GList **unhandled_files)
 {
     GHashTable *directories;
@@ -1154,12 +1154,12 @@ caja_trashed_files_get_original_directories (GList *files,
     for (l = files; l != NULL; l = l->next)
     {
         file = CAJA_FILE (l->data);
-        original_file = caja_file_get_trash_original_file (file);
+        original_file = baul_file_get_trash_original_file (file);
 
         original_dir = NULL;
         if (original_file != NULL)
         {
-            original_dir = caja_file_get_parent (original_file);
+            original_dir = baul_file_get_parent (original_file);
         }
 
         if (original_dir != NULL)
@@ -1167,32 +1167,32 @@ caja_trashed_files_get_original_directories (GList *files,
             if (directories == NULL)
             {
                 directories = g_hash_table_new_full (g_direct_hash, g_direct_equal,
-                                                     (GDestroyNotify) caja_file_unref,
-                                                     (GDestroyNotify) caja_file_list_unref);
+                                                     (GDestroyNotify) baul_file_unref,
+                                                     (GDestroyNotify) baul_file_list_unref);
             }
-            caja_file_ref (original_dir);
+            baul_file_ref (original_dir);
             m = g_hash_table_lookup (directories, original_dir);
             if (m != NULL)
             {
                 g_hash_table_steal (directories, original_dir);
-                caja_file_unref (original_dir);
+                baul_file_unref (original_dir);
             }
-            m = g_list_append (m, caja_file_ref (file));
+            m = g_list_append (m, baul_file_ref (file));
             g_hash_table_insert (directories, original_dir, m);
         }
         else if (unhandled_files != NULL)
         {
-            *unhandled_files = g_list_append (*unhandled_files, caja_file_ref (file));
+            *unhandled_files = g_list_append (*unhandled_files, baul_file_ref (file));
         }
 
         if (original_file != NULL)
         {
-            caja_file_unref (original_file);
+            baul_file_unref (original_file);
         }
 
         if (original_dir != NULL)
         {
-            caja_file_unref (original_dir);
+            baul_file_unref (original_dir);
         }
     }
 
@@ -1210,14 +1210,14 @@ locations_from_file_list (GList *file_list)
     for (l = file_list; l != NULL; l = l->next)
     {
         file = CAJA_FILE (l->data);
-        ret = g_list_prepend (ret, caja_file_get_location (file));
+        ret = g_list_prepend (ret, baul_file_get_location (file));
     }
 
     return g_list_reverse (ret);
 }
 
 void
-caja_restore_files_from_trash (GList *files,
+baul_restore_files_from_trash (GList *files,
                                GtkWindow *parent_window)
 {
     GHashTable *original_dirs_hash;
@@ -1225,14 +1225,14 @@ caja_restore_files_from_trash (GList *files,
     GList *l;
     CajaFile *file = NULL;
 
-    original_dirs_hash = caja_trashed_files_get_original_directories (files, &unhandled_files);
+    original_dirs_hash = baul_trashed_files_get_original_directories (files, &unhandled_files);
 
     for (l = unhandled_files; l != NULL; l = l->next)
     {
         char *message, *file_name;
 
         file = CAJA_FILE (l->data);
-        file_name = caja_file_get_display_name (file);
+        file_name = baul_file_get_display_name (file);
         message = g_strdup_printf (_("Could not determine original location of \"%s\" "), file_name);
         g_free (file_name);
 
@@ -1252,12 +1252,12 @@ caja_restore_files_from_trash (GList *files,
         for (l = original_dirs; l != NULL; l = l->next)
         {
             original_dir = CAJA_FILE (l->data);
-            original_dir_location = caja_file_get_location (original_dir);
+            original_dir_location = baul_file_get_location (original_dir);
 
             files = g_hash_table_lookup (original_dirs_hash, original_dir);
             locations = locations_from_file_list (files);
 
-            caja_file_operations_move
+            baul_file_operations_move
             (locations, NULL,
              original_dir_location,
              parent_window,
@@ -1271,13 +1271,13 @@ caja_restore_files_from_trash (GList *files,
         g_hash_table_destroy (original_dirs_hash);
     }
 
-    caja_file_list_unref (unhandled_files);
+    baul_file_list_unref (unhandled_files);
 }
 
 #if !defined (CAJA_OMIT_SELF_CHECK)
 
 void
-caja_self_check_file_utilities (void)
+baul_self_check_file_utilities (void)
 {
 }
 

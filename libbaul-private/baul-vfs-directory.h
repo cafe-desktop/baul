@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-vfs-directory.h: Subclass of CajaDirectory to implement the
+   baul-vfs-directory.h: Subclass of CajaDirectory to implement the
    the case of a VFS directory.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
@@ -26,9 +26,9 @@
 #ifndef CAJA_VFS_DIRECTORY_H
 #define CAJA_VFS_DIRECTORY_H
 
-#include "caja-directory.h"
+#include "baul-directory.h"
 
-#define CAJA_TYPE_VFS_DIRECTORY caja_vfs_directory_get_type()
+#define CAJA_TYPE_VFS_DIRECTORY baul_vfs_directory_get_type()
 #define CAJA_VFS_DIRECTORY(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_VFS_DIRECTORY, CajaVFSDirectory))
 #define CAJA_VFS_DIRECTORY_CLASS(klass) \
@@ -52,6 +52,6 @@ typedef struct
     CajaDirectoryClass parent_slot;
 } CajaVFSDirectoryClass;
 
-GType   caja_vfs_directory_get_type (void);
+GType   baul_vfs_directory_get_type (void);
 
 #endif /* CAJA_VFS_DIRECTORY_H */

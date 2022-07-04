@@ -21,7 +21,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-/* caja-application.h
+/* baul-application.h
  */
 
 #ifndef CAJA_APPLICATION_H
@@ -37,7 +37,7 @@
 #define CAJA_DESKTOP_ICON_VIEW_IID "OAFIID:Caja_File_Manager_Desktop_Icon_View"
 
 #define CAJA_TYPE_APPLICATION \
-	caja_application_get_type()
+	baul_application_get_type()
 #define CAJA_APPLICATION(obj) \
 	(G_TYPE_CHECK_INSTANCE_CAST((obj), CAJA_TYPE_APPLICATION, CajaApplication))
 #define CAJA_APPLICATION_CLASS(klass) \
@@ -80,24 +80,24 @@ typedef struct
 	GtkApplicationClass parent_class;
 } CajaApplicationClass;
 
-GType caja_application_get_type (void);
+GType baul_application_get_type (void);
 
-CajaApplication *caja_application_new (void);
+CajaApplication *baul_application_new (void);
 
-CajaWindow *     caja_application_get_spatial_window     (CajaApplication *application,
+CajaWindow *     baul_application_get_spatial_window     (CajaApplication *application,
         CajaWindow      *requesting_window,
         const char      *startup_id,
         GFile           *location,
         GdkScreen       *screen,
         gboolean        *existing);
 
-CajaWindow *     caja_application_create_navigation_window     (CajaApplication *application,
+CajaWindow *     baul_application_create_navigation_window     (CajaApplication *application,
         GdkScreen           *screen);
-void caja_application_close_all_navigation_windows (CajaApplication *self);
-void caja_application_close_parent_windows     (CajaSpatialWindow *window);
-void caja_application_close_all_spatial_windows  (void);
+void baul_application_close_all_navigation_windows (CajaApplication *self);
+void baul_application_close_parent_windows     (CajaSpatialWindow *window);
+void baul_application_close_all_spatial_windows  (void);
 
-void caja_application_open_location (CajaApplication *application,
+void baul_application_open_location (CajaApplication *application,
         GFile *location,
         GFile *selection,
         const char *startup_id,

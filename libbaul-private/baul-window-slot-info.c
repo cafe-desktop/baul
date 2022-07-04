@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-window-slot-info.c: Interface for caja window slots
+   baul-window-slot-info.c: Interface for baul window slots
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -21,7 +21,7 @@
 
    Author: Christian Neumair <cneumair@gnome.org>
 */
-#include "caja-window-slot-info.h"
+#include "baul-window-slot-info.h"
 
 enum
 {
@@ -30,16 +30,16 @@ enum
     LAST_SIGNAL
 };
 
-static guint caja_window_slot_info_signals[LAST_SIGNAL] = { 0 };
+static guint baul_window_slot_info_signals[LAST_SIGNAL] = { 0 };
 
 static void
-caja_window_slot_info_base_init (gpointer g_class)
+baul_window_slot_info_base_init (gpointer g_class)
 {
     static gboolean initialized = FALSE;
 
     if (!initialized)
     {
-        caja_window_slot_info_signals[ACTIVE] =
+        baul_window_slot_info_signals[ACTIVE] =
             g_signal_new ("active",
                           CAJA_TYPE_WINDOW_SLOT_INFO,
                           G_SIGNAL_RUN_LAST,
@@ -48,7 +48,7 @@ caja_window_slot_info_base_init (gpointer g_class)
                           g_cclosure_marshal_VOID__VOID,
                           G_TYPE_NONE, 0);
 
-        caja_window_slot_info_signals[INACTIVE] =
+        baul_window_slot_info_signals[INACTIVE] =
             g_signal_new ("inactive",
                           CAJA_TYPE_WINDOW_SLOT_INFO,
                           G_SIGNAL_RUN_LAST,
@@ -62,7 +62,7 @@ caja_window_slot_info_base_init (gpointer g_class)
 }
 
 GType
-caja_window_slot_info_get_type (void)
+baul_window_slot_info_get_type (void)
 {
     static GType type = 0;
 
@@ -71,7 +71,7 @@ caja_window_slot_info_get_type (void)
         const GTypeInfo info =
         {
             sizeof (CajaWindowSlotInfoIface),
-            caja_window_slot_info_base_init,
+            baul_window_slot_info_base_init,
             NULL,
             NULL,
             NULL,
@@ -91,7 +91,7 @@ caja_window_slot_info_get_type (void)
 }
 
 void
-caja_window_slot_info_set_status (CajaWindowSlotInfo *slot,
+baul_window_slot_info_set_status (CajaWindowSlotInfo *slot,
                                   const char             *status)
 {
     g_assert (CAJA_IS_WINDOW_SLOT_INFO (slot));
@@ -101,14 +101,14 @@ caja_window_slot_info_set_status (CajaWindowSlotInfo *slot,
 }
 
 void
-caja_window_slot_info_make_hosting_pane_active (CajaWindowSlotInfo *slot)
+baul_window_slot_info_make_hosting_pane_active (CajaWindowSlotInfo *slot)
 {
     g_assert (CAJA_IS_WINDOW_SLOT_INFO (slot));
     (* CAJA_WINDOW_SLOT_INFO_GET_IFACE (slot)->make_hosting_pane_active) (slot);
 }
 
 void
-caja_window_slot_info_open_location_full (CajaWindowSlotInfo  *slot,
+baul_window_slot_info_open_location_full (CajaWindowSlotInfo  *slot,
                                      GFile                   *location,
                                      CajaWindowOpenMode       mode,
                                      CajaWindowOpenFlags      flags,
@@ -128,7 +128,7 @@ caja_window_slot_info_open_location_full (CajaWindowSlotInfo  *slot,
 }
 
 char *
-caja_window_slot_info_get_title (CajaWindowSlotInfo *slot)
+baul_window_slot_info_get_title (CajaWindowSlotInfo *slot)
 {
     g_assert (CAJA_IS_WINDOW_SLOT_INFO (slot));
 
@@ -136,7 +136,7 @@ caja_window_slot_info_get_title (CajaWindowSlotInfo *slot)
 }
 
 char *
-caja_window_slot_info_get_current_location (CajaWindowSlotInfo *slot)
+baul_window_slot_info_get_current_location (CajaWindowSlotInfo *slot)
 {
     g_assert (CAJA_IS_WINDOW_SLOT_INFO (slot));
 
@@ -144,7 +144,7 @@ caja_window_slot_info_get_current_location (CajaWindowSlotInfo *slot)
 }
 
 CajaView *
-caja_window_slot_info_get_current_view (CajaWindowSlotInfo *slot)
+baul_window_slot_info_get_current_view (CajaWindowSlotInfo *slot)
 {
     g_assert (CAJA_IS_WINDOW_SLOT_INFO (slot));
 
@@ -152,7 +152,7 @@ caja_window_slot_info_get_current_view (CajaWindowSlotInfo *slot)
 }
 
 CajaWindowInfo *
-caja_window_slot_info_get_window (CajaWindowSlotInfo *slot)
+baul_window_slot_info_get_window (CajaWindowSlotInfo *slot)
 {
     g_assert (CAJA_IS_WINDOW_SLOT_INFO (slot));
 

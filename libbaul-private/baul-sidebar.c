@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-sidebar.c: Interface for caja sidebar plugins
+   baul-sidebar.c: Interface for baul sidebar plugins
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -23,7 +23,7 @@
 */
 
 #include <config.h>
-#include "caja-sidebar.h"
+#include "baul-sidebar.h"
 
 enum
 {
@@ -33,16 +33,16 @@ enum
     LAST_SIGNAL
 };
 
-static guint caja_sidebar_signals[LAST_SIGNAL] = { 0 };
+static guint baul_sidebar_signals[LAST_SIGNAL] = { 0 };
 
 static void
-caja_sidebar_base_init (gpointer g_class)
+baul_sidebar_base_init (gpointer g_class)
 {
     static gboolean initialized = FALSE;
 
     if (! initialized)
     {
-        caja_sidebar_signals[TAB_ICON_CHANGED] =
+        baul_sidebar_signals[TAB_ICON_CHANGED] =
             g_signal_new ("tab_icon_changed",
                           CAJA_TYPE_SIDEBAR,
                           G_SIGNAL_RUN_LAST,
@@ -56,7 +56,7 @@ caja_sidebar_base_init (gpointer g_class)
 }
 
 GType
-caja_sidebar_get_type (void)
+baul_sidebar_get_type (void)
 {
     static GType type = 0;
 
@@ -65,7 +65,7 @@ caja_sidebar_get_type (void)
         const GTypeInfo info =
         {
             sizeof (CajaSidebarIface),
-            caja_sidebar_base_init,
+            baul_sidebar_base_init,
             NULL,
             NULL,
             NULL,
@@ -86,7 +86,7 @@ caja_sidebar_get_type (void)
 
 
 const char *
-caja_sidebar_get_sidebar_id (CajaSidebar *sidebar)
+baul_sidebar_get_sidebar_id (CajaSidebar *sidebar)
 {
     g_return_val_if_fail (CAJA_IS_SIDEBAR (sidebar), NULL);
 
@@ -94,7 +94,7 @@ caja_sidebar_get_sidebar_id (CajaSidebar *sidebar)
 }
 
 char *
-caja_sidebar_get_tab_label (CajaSidebar *sidebar)
+baul_sidebar_get_tab_label (CajaSidebar *sidebar)
 {
     g_return_val_if_fail (CAJA_IS_SIDEBAR (sidebar), NULL);
 
@@ -102,7 +102,7 @@ caja_sidebar_get_tab_label (CajaSidebar *sidebar)
 }
 
 char *
-caja_sidebar_get_tab_tooltip (CajaSidebar *sidebar)
+baul_sidebar_get_tab_tooltip (CajaSidebar *sidebar)
 {
     g_return_val_if_fail (CAJA_IS_SIDEBAR (sidebar), NULL);
 
@@ -110,7 +110,7 @@ caja_sidebar_get_tab_tooltip (CajaSidebar *sidebar)
 }
 
 GdkPixbuf *
-caja_sidebar_get_tab_icon (CajaSidebar *sidebar)
+baul_sidebar_get_tab_icon (CajaSidebar *sidebar)
 {
     g_return_val_if_fail (CAJA_IS_SIDEBAR (sidebar), NULL);
 
@@ -118,7 +118,7 @@ caja_sidebar_get_tab_icon (CajaSidebar *sidebar)
 }
 
 void
-caja_sidebar_is_visible_changed (CajaSidebar *sidebar,
+baul_sidebar_is_visible_changed (CajaSidebar *sidebar,
                                  gboolean         is_visible)
 {
     g_return_if_fail (CAJA_IS_SIDEBAR (sidebar));

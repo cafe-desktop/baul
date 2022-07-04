@@ -23,11 +23,11 @@
 */
 
 #include <config.h>
-#include "caja-default-file-icon.h"
+#include "baul-default-file-icon.h"
 
-const int caja_default_file_icon_width = 48;
-const int caja_default_file_icon_height = 48;
-const unsigned char caja_default_file_icon[] =
+const int baul_default_file_icon_width = 48;
+const int baul_default_file_icon_height = 48;
+const unsigned char baul_default_file_icon[] =
     /* This is from text-x-preview.svg in the mate icon theme */
     "\377\377\377\0\377\377\377\0\377\377\377\0\377\377\377\0\377\377\377"
     "\0\377\377\377\0\377\377\377\0\377\377\377\0\377\377\377\0\377\377\377"

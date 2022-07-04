@@ -28,14 +28,14 @@
 #ifndef CAJA_WINDOW_PRIVATE_H
 #define CAJA_WINDOW_PRIVATE_H
 
-#include <libcaja-private/caja-directory.h>
+#include <libbaul-private/baul-directory.h>
 
-#include "caja-window.h"
-#include "caja-window-slot.h"
-#include "caja-window-pane.h"
-#include "caja-spatial-window.h"
-#include "caja-navigation-window.h"
-#include "caja-bookmark-list.h"
+#include "baul-window.h"
+#include "baul-window-slot.h"
+#include "baul-window-pane.h"
+#include "baul-spatial-window.h"
+#include "baul-navigation-window.h"
+#include "baul-bookmark-list.h"
 
 struct _CajaNavigationWindowPane;
 
@@ -164,15 +164,15 @@ struct _CajaNavigationWindowPrivate
 typedef void (*CajaBookmarkFailedCallback) (CajaWindow *window,
         CajaBookmark *bookmark);
 
-void               caja_window_set_status                            (CajaWindow    *window,
+void               baul_window_set_status                            (CajaWindow    *window,
         CajaWindowSlot *slot,
         const char        *status);
-void               caja_window_load_view_as_menus                    (CajaWindow    *window);
-void               caja_window_load_extension_menus                  (CajaWindow    *window);
-void               caja_window_initialize_menus                      (CajaWindow    *window);
-void               caja_window_finalize_menus                        (CajaWindow    *window);
-CajaWindowPane *caja_window_get_next_pane                        (CajaWindow *window);
-void               caja_menus_append_bookmark_to_menu                (CajaWindow    *window,
+void               baul_window_load_view_as_menus                    (CajaWindow    *window);
+void               baul_window_load_extension_menus                  (CajaWindow    *window);
+void               baul_window_initialize_menus                      (CajaWindow    *window);
+void               baul_window_finalize_menus                        (CajaWindow    *window);
+CajaWindowPane *baul_window_get_next_pane                        (CajaWindow *window);
+void               baul_menus_append_bookmark_to_menu                (CajaWindow    *window,
         CajaBookmark  *bookmark,
         const char        *parent_path,
         const char        *parent_id,
@@ -181,70 +181,70 @@ void               caja_menus_append_bookmark_to_menu                (CajaWindow
         guint              merge_id,
         GCallback          refresh_callback,
         CajaBookmarkFailedCallback failed_callback);
-void               caja_window_update_find_menu_item                 (CajaWindow    *window);
-void               caja_window_zoom_in                               (CajaWindow    *window);
-void               caja_window_zoom_out                              (CajaWindow    *window);
-void               caja_window_zoom_to_level                         (CajaWindow    *window,
+void               baul_window_update_find_menu_item                 (CajaWindow    *window);
+void               baul_window_zoom_in                               (CajaWindow    *window);
+void               baul_window_zoom_out                              (CajaWindow    *window);
+void               baul_window_zoom_to_level                         (CajaWindow    *window,
         CajaZoomLevel  level);
-void               caja_window_zoom_to_default                       (CajaWindow    *window);
+void               baul_window_zoom_to_default                       (CajaWindow    *window);
 
-CajaWindowSlot *caja_window_open_slot                            (CajaWindowPane *pane,
+CajaWindowSlot *baul_window_open_slot                            (CajaWindowPane *pane,
         CajaWindowOpenSlotFlags flags);
-void                caja_window_close_slot                           (CajaWindowSlot *slot);
+void                baul_window_close_slot                           (CajaWindowSlot *slot);
 
-CajaWindowSlot *caja_window_get_slot_for_view                    (CajaWindow *window,
+CajaWindowSlot *baul_window_get_slot_for_view                    (CajaWindow *window,
         CajaView   *view);
 
-GList *              caja_window_get_slots                           (CajaWindow    *window);
-CajaWindowSlot * caja_window_get_active_slot                     (CajaWindow    *window);
-CajaWindowSlot * caja_window_get_extra_slot                      (CajaWindow    *window);
-void                 caja_window_set_active_slot                     (CajaWindow    *window,
+GList *              baul_window_get_slots                           (CajaWindow    *window);
+CajaWindowSlot * baul_window_get_active_slot                     (CajaWindow    *window);
+CajaWindowSlot * baul_window_get_extra_slot                      (CajaWindow    *window);
+void                 baul_window_set_active_slot                     (CajaWindow    *window,
         CajaWindowSlot *slot);
-void                 caja_window_set_active_pane                     (CajaWindow *window,
+void                 baul_window_set_active_pane                     (CajaWindow *window,
         CajaWindowPane *new_pane);
-CajaWindowPane * caja_window_get_active_pane                     (CajaWindow *window);
+CajaWindowPane * baul_window_get_active_pane                     (CajaWindow *window);
 
-void               caja_send_history_list_changed                    (void);
-void               caja_remove_from_history_list_no_notify           (GFile             *location);
-gboolean           caja_add_bookmark_to_history_list                 (CajaBookmark  *bookmark);
-gboolean           caja_add_to_history_list_no_notify                (GFile             *location,
+void               baul_send_history_list_changed                    (void);
+void               baul_remove_from_history_list_no_notify           (GFile             *location);
+gboolean           baul_add_bookmark_to_history_list                 (CajaBookmark  *bookmark);
+gboolean           baul_add_to_history_list_no_notify                (GFile             *location,
         const char        *name,
         gboolean           has_custom_name,
         GIcon            *icon);
-GList *            caja_get_history_list                             (void);
-void               caja_window_bookmarks_preference_changed_callback (gpointer           user_data);
+GList *            baul_get_history_list                             (void);
+void               baul_window_bookmarks_preference_changed_callback (gpointer           user_data);
 
 
 /* sync window GUI with current slot. Used when changing slots,
  * and when updating the slot state.
  */
-void caja_window_sync_status           (CajaWindow *window);
-void caja_window_sync_allow_stop       (CajaWindow *window,
+void baul_window_sync_status           (CajaWindow *window);
+void baul_window_sync_allow_stop       (CajaWindow *window,
                                         CajaWindowSlot *slot);
-void caja_window_sync_title            (CajaWindow *window,
+void baul_window_sync_title            (CajaWindow *window,
                                         CajaWindowSlot *slot);
-void caja_window_sync_zoom_widgets     (CajaWindow *window);
+void baul_window_sync_zoom_widgets     (CajaWindow *window);
 
 /* Navigation window menus */
-void               caja_navigation_window_initialize_actions                    (CajaNavigationWindow    *window);
-void               caja_navigation_window_initialize_menus                      (CajaNavigationWindow    *window);
-void               caja_navigation_window_remove_bookmarks_menu_callback        (CajaNavigationWindow    *window);
+void               baul_navigation_window_initialize_actions                    (CajaNavigationWindow    *window);
+void               baul_navigation_window_initialize_menus                      (CajaNavigationWindow    *window);
+void               baul_navigation_window_remove_bookmarks_menu_callback        (CajaNavigationWindow    *window);
 
-void               caja_navigation_window_remove_bookmarks_menu_items           (CajaNavigationWindow    *window);
-void               caja_navigation_window_update_show_hide_menu_items           (CajaNavigationWindow     *window);
-void               caja_navigation_window_update_spatial_menu_item              (CajaNavigationWindow     *window);
-void               caja_navigation_window_remove_go_menu_callback    (CajaNavigationWindow    *window);
-void               caja_navigation_window_remove_go_menu_items       (CajaNavigationWindow    *window);
+void               baul_navigation_window_remove_bookmarks_menu_items           (CajaNavigationWindow    *window);
+void               baul_navigation_window_update_show_hide_menu_items           (CajaNavigationWindow     *window);
+void               baul_navigation_window_update_spatial_menu_item              (CajaNavigationWindow     *window);
+void               baul_navigation_window_remove_go_menu_callback    (CajaNavigationWindow    *window);
+void               baul_navigation_window_remove_go_menu_items       (CajaNavigationWindow    *window);
 
 /* Navigation window toolbar */
-void               caja_navigation_window_activate_spinner                     (CajaNavigationWindow    *window);
-void               caja_navigation_window_initialize_toolbars                   (CajaNavigationWindow    *window);
-void               caja_navigation_window_load_extension_toolbar_items          (CajaNavigationWindow    *window);
-void               caja_navigation_window_set_spinner_active                   (CajaNavigationWindow    *window,
+void               baul_navigation_window_activate_spinner                     (CajaNavigationWindow    *window);
+void               baul_navigation_window_initialize_toolbars                   (CajaNavigationWindow    *window);
+void               baul_navigation_window_load_extension_toolbar_items          (CajaNavigationWindow    *window);
+void               baul_navigation_window_set_spinner_active                   (CajaNavigationWindow    *window,
         gboolean                     active);
-void               caja_navigation_window_go_back                               (CajaNavigationWindow    *window);
-void               caja_navigation_window_go_forward                            (CajaNavigationWindow    *window);
-void               caja_window_close_pane                                       (CajaWindowPane *pane);
-void               caja_navigation_window_update_split_view_actions_sensitivity (CajaNavigationWindow    *window);
+void               baul_navigation_window_go_back                               (CajaNavigationWindow    *window);
+void               baul_navigation_window_go_forward                            (CajaNavigationWindow    *window);
+void               baul_window_close_pane                                       (CajaWindowPane *pane);
+void               baul_navigation_window_update_split_view_actions_sensitivity (CajaNavigationWindow    *window);
 
 #endif /* CAJA_WINDOW_PRIVATE_H */

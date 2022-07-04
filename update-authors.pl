@@ -50,7 +50,7 @@ sub ReplaceAuthors {
 
 sub GetCurrentAuthors {
   my @authors;
-  open(FILE,"src/caja.about") or die "Can't open src/caja.about";
+  open(FILE,"src/baul.about") or die "Can't open src/baul.about";
   while (<FILE>) {
     if (/^Authors=*(.+)$/) {
       @authors=split(";",$1);

@@ -26,11 +26,11 @@
 
 #include <config.h>
 
-#include "caja-desktop-metadata.h"
+#include "baul-desktop-metadata.h"
 
-#include "caja-directory-notify.h"
-#include "caja-file-private.h"
-#include "caja-file-utilities.h"
+#include "baul-directory-notify.h"
+#include "baul-file-private.h"
+#include "baul-file-utilities.h"
 
 #include <glib/gstdio.h>
 
@@ -45,7 +45,7 @@ get_keyfile_path (void)
 {
     gchar *xdg_dir, *retval;
 
-    xdg_dir = caja_get_user_directory ();
+    xdg_dir = baul_get_user_directory ();
     retval = g_build_filename (xdg_dir, "desktop-metadata", NULL);
 
     g_free (xdg_dir);
@@ -140,7 +140,7 @@ get_keyfile (void)
 }
 
 void
-caja_desktop_set_metadata_string (CajaFile *file,
+baul_desktop_set_metadata_string (CajaFile *file,
                                       const gchar *name,
                                       const gchar *key,
                                       const gchar *string)
@@ -174,15 +174,15 @@ caja_desktop_set_metadata_string (CajaFile *file,
 
     save_in_idle (keyfile);
 
-    if (caja_desktop_update_metadata_from_keyfile (file, name)) {
-        caja_file_changed (file);
+    if (baul_desktop_update_metadata_from_keyfile (file, name)) {
+        baul_file_changed (file);
     }
 }
 
-#define STRV_TERMINATOR "@x-caja-desktop-metadata-term@"
+#define STRV_TERMINATOR "@x-baul-desktop-metadata-term@"
 
 void
-caja_desktop_set_metadata_stringv (CajaFile *file,
+baul_desktop_set_metadata_stringv (CajaFile *file,
                                        const char *name,
                                        const char *key,
                                        const char * const *stringv)
@@ -220,8 +220,8 @@ caja_desktop_set_metadata_stringv (CajaFile *file,
 
     save_in_idle (keyfile);
 
-    if (caja_desktop_update_metadata_from_keyfile (file, name)) {
-        caja_file_changed (file);
+    if (baul_desktop_update_metadata_from_keyfile (file, name)) {
+        baul_file_changed (file);
     }
 
     if (free_strv) {
@@ -230,7 +230,7 @@ caja_desktop_set_metadata_stringv (CajaFile *file,
 }
 
 gboolean
-caja_desktop_update_metadata_from_keyfile (CajaFile *file,
+baul_desktop_update_metadata_from_keyfile (CajaFile *file,
                            const gchar *name)
 {
     gchar **keys, **values;
@@ -305,7 +305,7 @@ caja_desktop_update_metadata_from_keyfile (CajaFile *file,
         g_strfreev (values);
     }
 
-    res = caja_file_update_metadata_from_info (file, info);
+    res = baul_file_update_metadata_from_info (file, info);
 
     g_strfreev (keys);
     g_object_unref (info);

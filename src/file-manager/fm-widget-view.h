@@ -1,6 +1,6 @@
 /* vi: set sw=4 ts=4 wrap ai: */
 /*
- * fm-widget-view.h: This file is part of caja.
+ * fm-widget-view.h: This file is part of baul.
  *
  * Copyright (C) 2019 Wu Xiaotian <yetist@gmail.com>
  *

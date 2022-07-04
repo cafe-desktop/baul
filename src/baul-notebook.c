@@ -6,7 +6,7 @@
  *    (ephy-notebook.c)
  *
  *  Copyright © 2008 Free Software Foundation, Inc.
- *    (caja-notebook.c)
+ *    (baul-notebook.c)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,23 +30,23 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-dnd.h>
+#include <libbaul-private/baul-dnd.h>
 
-#include "caja-notebook.h"
-#include "caja-navigation-window.h"
-#include "caja-window-manage-views.h"
-#include "caja-window-private.h"
-#include "caja-window-slot.h"
-#include "caja-navigation-window-pane.h"
+#include "baul-notebook.h"
+#include "baul-navigation-window.h"
+#include "baul-window-manage-views.h"
+#include "baul-window-private.h"
+#include "baul-window-slot.h"
+#include "baul-navigation-window-pane.h"
 
 #define AFTER_ALL_TABS -1
 
-static int  caja_notebook_insert_page	 (GtkNotebook *notebook,
+static int  baul_notebook_insert_page	 (GtkNotebook *notebook,
         GtkWidget *child,
         GtkWidget *tab_label,
         GtkWidget *menu_label,
         int position);
-static void caja_notebook_remove	 (GtkContainer *container,
+static void baul_notebook_remove	 (GtkContainer *container,
                                       GtkWidget *tab_widget);
 
 enum
@@ -57,18 +57,18 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (CajaNotebook, caja_notebook, GTK_TYPE_NOTEBOOK);
+G_DEFINE_TYPE (CajaNotebook, baul_notebook, GTK_TYPE_NOTEBOOK);
 
 static void
-caja_notebook_class_init (CajaNotebookClass *klass)
+baul_notebook_class_init (CajaNotebookClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
     GtkNotebookClass *notebook_class = GTK_NOTEBOOK_CLASS (klass);
 
-    container_class->remove = caja_notebook_remove;
+    container_class->remove = baul_notebook_remove;
 
-    notebook_class->insert_page = caja_notebook_insert_page;
+    notebook_class->insert_page = baul_notebook_insert_page;
 
     signals[TAB_CLOSE_REQUEST] =
         g_signal_new ("tab-close-request",
@@ -162,12 +162,12 @@ button_press_cb (CajaNotebook *notebook,
 }
 
 static void
-caja_notebook_init (CajaNotebook *notebook)
+baul_notebook_init (CajaNotebook *notebook)
 {
     GtkStyleContext *context;
 
     context = gtk_widget_get_style_context (GTK_WIDGET (notebook));
-    gtk_style_context_add_class (context, "caja-notebook");
+    gtk_style_context_add_class (context, "baul-notebook");
 
     gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
     gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
@@ -178,7 +178,7 @@ caja_notebook_init (CajaNotebook *notebook)
 }
 
 void
-caja_notebook_sync_loading (CajaNotebook *notebook,
+baul_notebook_sync_loading (CajaNotebook *notebook,
                             CajaWindowSlot *slot)
 {
     GtkWidget *tab_label, *spinner, *icon;
@@ -216,7 +216,7 @@ caja_notebook_sync_loading (CajaNotebook *notebook,
 }
 
 void
-caja_notebook_sync_tab_label (CajaNotebook *notebook,
+baul_notebook_sync_tab_label (CajaNotebook *notebook,
                               CajaWindowSlot *slot)
 {
     GtkWidget *hbox, *label;
@@ -305,7 +305,7 @@ build_tab_label (CajaNotebook *nb, CajaWindowSlot *slot)
     /* don't allow focus on the close button */
     gtk_widget_set_focus_on_click (close_button, FALSE);
 
-    gtk_widget_set_name (close_button, "caja-tab-close-button");
+    gtk_widget_set_name (close_button, "baul-tab-close-button");
 
     image = gtk_image_new_from_icon_name ("window-close", GTK_ICON_SIZE_MENU);
     gtk_widget_set_tooltip_text (close_button, _("Close tab"));
@@ -323,7 +323,7 @@ build_tab_label (CajaNotebook *nb, CajaWindowSlot *slot)
     g_object_set_data_full (G_OBJECT (hbox), "proxy-drag-info",
                             drag_info, (GDestroyNotify) g_free);
 
-    caja_drag_slot_proxy_init (hbox, drag_info);
+    baul_drag_slot_proxy_init (hbox, drag_info);
 
     g_object_set_data (G_OBJECT (hbox), "label", label);
     g_object_set_data (G_OBJECT (hbox), "spinner", spinner);
@@ -334,7 +334,7 @@ build_tab_label (CajaNotebook *nb, CajaWindowSlot *slot)
 }
 
 static int
-caja_notebook_insert_page (GtkNotebook *gnotebook,
+baul_notebook_insert_page (GtkNotebook *gnotebook,
                            GtkWidget *tab_widget,
                            GtkWidget *tab_label,
                            GtkWidget *menu_label,
@@ -342,7 +342,7 @@ caja_notebook_insert_page (GtkNotebook *gnotebook,
 {
     g_assert (GTK_IS_WIDGET (tab_widget));
 
-    position = GTK_NOTEBOOK_CLASS (caja_notebook_parent_class)->insert_page (gnotebook,
+    position = GTK_NOTEBOOK_CLASS (baul_notebook_parent_class)->insert_page (gnotebook,
                tab_widget,
                tab_label,
                menu_label,
@@ -356,7 +356,7 @@ caja_notebook_insert_page (GtkNotebook *gnotebook,
 }
 
 int
-caja_notebook_add_tab (CajaNotebook *notebook,
+baul_notebook_add_tab (CajaNotebook *notebook,
                        CajaWindowSlot *slot,
                        int position,
                        gboolean jump_to)
@@ -379,8 +379,8 @@ caja_notebook_add_tab (CajaNotebook *notebook,
                              "tab-expand", TRUE,
                              NULL);
 
-    caja_notebook_sync_tab_label (notebook, slot);
-    caja_notebook_sync_loading (notebook, slot);
+    baul_notebook_sync_tab_label (notebook, slot);
+    baul_notebook_sync_loading (notebook, slot);
 
 
     /* FIXME gtk bug! */
@@ -398,11 +398,11 @@ caja_notebook_add_tab (CajaNotebook *notebook,
 }
 
 static void
-caja_notebook_remove (GtkContainer *container,
+baul_notebook_remove (GtkContainer *container,
                       GtkWidget *tab_widget)
 {
     GtkNotebook *gnotebook = GTK_NOTEBOOK (container);
-    GTK_CONTAINER_CLASS (caja_notebook_parent_class)->remove (container, tab_widget);
+    GTK_CONTAINER_CLASS (baul_notebook_parent_class)->remove (container, tab_widget);
 
     gtk_notebook_set_show_tabs (gnotebook,
                                 gtk_notebook_get_n_pages (gnotebook) > 1);
@@ -410,7 +410,7 @@ caja_notebook_remove (GtkContainer *container,
 }
 
 void
-caja_notebook_reorder_current_child_relative (CajaNotebook *notebook,
+baul_notebook_reorder_current_child_relative (CajaNotebook *notebook,
         int offset)
 {
     GtkNotebook *gnotebook;
@@ -419,7 +419,7 @@ caja_notebook_reorder_current_child_relative (CajaNotebook *notebook,
 
     g_return_if_fail (CAJA_IS_NOTEBOOK (notebook));
 
-    if (!caja_notebook_can_reorder_current_child_relative (notebook, offset))
+    if (!baul_notebook_can_reorder_current_child_relative (notebook, offset))
     {
         return;
     }
@@ -432,7 +432,7 @@ caja_notebook_reorder_current_child_relative (CajaNotebook *notebook,
 }
 
 void
-caja_notebook_set_current_page_relative (CajaNotebook *notebook,
+baul_notebook_set_current_page_relative (CajaNotebook *notebook,
         int offset)
 {
     GtkNotebook *gnotebook;
@@ -440,7 +440,7 @@ caja_notebook_set_current_page_relative (CajaNotebook *notebook,
 
     g_return_if_fail (CAJA_IS_NOTEBOOK (notebook));
 
-    if (!caja_notebook_can_set_current_page_relative (notebook, offset))
+    if (!baul_notebook_can_set_current_page_relative (notebook, offset))
     {
         return;
     }
@@ -453,7 +453,7 @@ caja_notebook_set_current_page_relative (CajaNotebook *notebook,
 }
 
 static gboolean
-caja_notebook_is_valid_relative_position (CajaNotebook *notebook,
+baul_notebook_is_valid_relative_position (CajaNotebook *notebook,
         int offset)
 {
     GtkNotebook *gnotebook;
@@ -475,20 +475,20 @@ caja_notebook_is_valid_relative_position (CajaNotebook *notebook,
 }
 
 gboolean
-caja_notebook_can_reorder_current_child_relative (CajaNotebook *notebook,
+baul_notebook_can_reorder_current_child_relative (CajaNotebook *notebook,
         int offset)
 {
     g_return_val_if_fail (CAJA_IS_NOTEBOOK (notebook), FALSE);
 
-    return caja_notebook_is_valid_relative_position (notebook, offset);
+    return baul_notebook_is_valid_relative_position (notebook, offset);
 }
 
 gboolean
-caja_notebook_can_set_current_page_relative (CajaNotebook *notebook,
+baul_notebook_can_set_current_page_relative (CajaNotebook *notebook,
         int offset)
 {
     g_return_val_if_fail (CAJA_IS_NOTEBOOK (notebook), FALSE);
 
-    return caja_notebook_is_valid_relative_position (notebook, offset);
+    return baul_notebook_is_valid_relative_position (notebook, offset);
 }
 

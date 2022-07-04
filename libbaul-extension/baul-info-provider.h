@@ -1,5 +1,5 @@
 /*
- *  caja-info-provider.h - Interface for Caja extensions that
+ *  baul-info-provider.h - Interface for Caja extensions that
  *                             provide info about files.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -31,12 +31,12 @@
 #define CAJA_INFO_PROVIDER_H
 
 #include <glib-object.h>
-#include "caja-extension-types.h"
-#include "caja-file-info.h"
+#include "baul-extension-types.h"
+#include "baul-file-info.h"
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_INFO_PROVIDER           (caja_info_provider_get_type ())
+#define CAJA_TYPE_INFO_PROVIDER           (baul_info_provider_get_type ())
 #define CAJA_INFO_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_INFO_PROVIDER, CajaInfoProvider))
 #define CAJA_IS_INFO_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_INFO_PROVIDER))
 #define CAJA_INFO_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_INFO_PROVIDER, CajaInfoProviderIface))
@@ -53,9 +53,9 @@ typedef void (*CajaInfoProviderUpdateComplete) (CajaInfoProvider    *provider,
  * CajaInfoProviderIface:
  * @g_iface: The parent interface.
  * @update_file_info: Returns a #CajaOperationResult.
- *   See caja_info_provider_update_file_info() for details.
- * @cancel_update: Cancels a previous call to caja_info_provider_update_file_info().
- *   See caja_info_provider_cancel_update() for details.
+ *   See baul_info_provider_update_file_info() for details.
+ * @cancel_update: Cancels a previous call to baul_info_provider_update_file_info().
+ *   See baul_info_provider_cancel_update() for details.
  *
  * Interface for extensions to provide additional information about files.
  */
@@ -72,18 +72,18 @@ struct _CajaInfoProviderIface {
 };
 
 /* Interface Functions */
-GType               caja_info_provider_get_type               (void);
-CajaOperationResult caja_info_provider_update_file_info       (CajaInfoProvider     *provider,
+GType               baul_info_provider_get_type               (void);
+CajaOperationResult baul_info_provider_update_file_info       (CajaInfoProvider     *provider,
                                                                CajaFileInfo         *file,
                                                                GClosure             *update_complete,
                                                                CajaOperationHandle **handle);
-void                caja_info_provider_cancel_update          (CajaInfoProvider     *provider,
+void                baul_info_provider_cancel_update          (CajaInfoProvider     *provider,
                                                                CajaOperationHandle  *handle);
 
 
 
 /* Helper functions for implementations */
-void                caja_info_provider_update_complete_invoke (GClosure             *update_complete,
+void                baul_info_provider_update_complete_invoke (GClosure             *update_complete,
                                                                CajaInfoProvider     *provider,
                                                                CajaOperationHandle  *handle,
                                                                CajaOperationResult   result);

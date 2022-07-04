@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-icon-dnd.c - Drag & drop handling for the icon container widget.
+/* baul-icon-dnd.c - Drag & drop handling for the icon container widget.
 
    Copyright (C) 1999, 2000 Free Software Foundation
    Copyright (C) 2000 Eazel, Inc.
@@ -53,14 +53,14 @@
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-canvas-rect-ellipse.h>
 
-#include "caja-icon-dnd.h"
-#include "caja-debug-log.h"
-#include "caja-file-dnd.h"
-#include "caja-icon-private.h"
-#include "caja-link.h"
-#include "caja-metadata.h"
-#include "caja-file-utilities.h"
-#include "caja-file-changes-queue.h"
+#include "baul-icon-dnd.h"
+#include "baul-debug-log.h"
+#include "baul-file-dnd.h"
+#include "baul-icon-private.h"
+#include "baul-link.h"
+#include "baul-metadata.h"
+#include "baul-file-utilities.h"
+#include "baul-file-changes-queue.h"
 
 static const GtkTargetEntry drag_types [] =
 {
@@ -89,7 +89,7 @@ static void     dnd_highlight_queue_redraw (GtkWidget      *widget);
 static GtkTargetList *drop_types_list = NULL;
 static GtkTargetList *drop_types_list_root = NULL;
 
-static char * caja_icon_container_find_drop_target (CajaIconContainer *container,
+static char * baul_icon_container_find_drop_target (CajaIconContainer *container,
         GdkDragContext *context,
         int x, int y, gboolean *icon_hit,
         gboolean rewrite_desktop);
@@ -243,11 +243,11 @@ icon_get_data_binder (CajaIcon *icon, gpointer data)
 
     container = CAJA_ICON_CONTAINER (context->iterator_context);
 
-    world_rect = caja_icon_canvas_item_get_icon_rectangle (icon->item);
+    world_rect = baul_icon_canvas_item_get_icon_rectangle (icon->item);
 
     canvas_rect_world_to_widget (EEL_CANVAS (container), &world_rect, &widget_rect);
 
-    uri = caja_icon_container_get_icon_uri (container, icon);
+    uri = baul_icon_container_get_icon_uri (container, icon);
     if (uri == NULL)
     {
         g_warning ("no URI for one of the iterated icons");
@@ -278,7 +278,7 @@ icon_get_data_binder (CajaIcon *icon, gpointer data)
  * calling each_function on each.
  */
 static void
-caja_icon_container_each_selected_icon (CajaIconContainer *container,
+baul_icon_container_each_selected_icon (CajaIconContainer *container,
                                         gboolean (*each_function) (CajaIcon *, gpointer), gpointer data)
 {
     GList *p;
@@ -298,7 +298,7 @@ caja_icon_container_each_selected_icon (CajaIconContainer *container,
     }
 }
 
-/* Adaptor function used with caja_icon_container_each_selected_icon
+/* Adaptor function used with baul_icon_container_each_selected_icon
  * to help iterate over all selected items, passing uris, x, y, w and h
  * values to the iteratee
  */
@@ -315,7 +315,7 @@ each_icon_get_data_binder (CajaDragEachSelectedItemDataGet iteratee,
     context.iterator_context = iterator_context;
     context.iteratee = iteratee;
     context.iteratee_data = data;
-    caja_icon_container_each_selected_icon (container, icon_get_data_binder, &context);
+    baul_icon_container_each_selected_icon (container, icon_get_data_binder, &context);
 }
 
 /* Called when the data for drag&drop is needed */
@@ -331,11 +331,11 @@ drag_data_get_callback (GtkWidget *widget,
     g_assert (CAJA_IS_ICON_CONTAINER (widget));
     g_return_if_fail (context != NULL);
 
-    /* Call common function from caja-drag that set's up
+    /* Call common function from baul-drag that set's up
      * the selection data in the right format. Pass it means to
      * iterate all the selected icons.
      */
-    caja_drag_drag_data_get (widget, context, selection_data,
+    baul_drag_drag_data_get (widget, context, selection_data,
                              info, time, widget, each_icon_get_data_binder);
 }
 
@@ -343,7 +343,7 @@ drag_data_get_callback (GtkWidget *widget,
 /* Target-side handling of the drag.  */
 
 static void
-caja_icon_container_position_shadow (CajaIconContainer *container,
+baul_icon_container_position_shadow (CajaIconContainer *container,
                                      int x, int y)
 {
     EelCanvasItem *shadow;
@@ -363,7 +363,7 @@ caja_icon_container_position_shadow (CajaIconContainer *container,
 }
 
 static void
-caja_icon_container_dropped_icon_feedback (GtkWidget *widget,
+baul_icon_container_dropped_icon_feedback (GtkWidget *widget,
         GtkSelectionData *data,
         int x, int y)
 {
@@ -374,7 +374,7 @@ caja_icon_container_dropped_icon_feedback (GtkWidget *widget,
     dnd_info = container->details->dnd_info;
 
     /* Delete old selection list. */
-    caja_drag_destroy_selection_list (dnd_info->drag_info.selection_list);
+    baul_drag_destroy_selection_list (dnd_info->drag_info.selection_list);
     dnd_info->drag_info.selection_list = NULL;
 
     /* Delete old shadow if any. */
@@ -386,9 +386,9 @@ caja_icon_container_dropped_icon_feedback (GtkWidget *widget,
     }
 
     /* Build the selection list and the shadow. */
-    dnd_info->drag_info.selection_list = caja_drag_build_selection_list (data);
+    dnd_info->drag_info.selection_list = baul_drag_build_selection_list (data);
     dnd_info->shadow = create_selection_shadow (container, dnd_info->drag_info.selection_list);
-    caja_icon_container_position_shadow (container, x, y);
+    baul_icon_container_position_shadow (container, x, y);
 }
 
 static char *
@@ -412,7 +412,7 @@ get_direct_save_filename (GdkDragContext *context)
     if (*prop_text == '\0' ||
             strchr ((const gchar *) prop_text, G_DIR_SEPARATOR) != NULL)
     {
-        caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
                         "Invalid filename provided by XDS drag site");
         g_free (prop_text);
         return NULL;
@@ -433,7 +433,7 @@ set_direct_save_uri (GtkWidget *widget, GdkDragContext *context, CajaDragInfo *d
     uri = NULL;
 
     filename = get_direct_save_filename (context);
-    drop_target = caja_icon_container_find_drop_target (CAJA_ICON_CONTAINER (widget),
+    drop_target = baul_icon_container_find_drop_target (CAJA_ICON_CONTAINER (widget),
                   context, x, y, NULL, TRUE);
 
     if (drop_target && eel_uri_is_trash (drop_target))
@@ -487,7 +487,7 @@ get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context,
         gtk_target_list_add_text_targets (drop_types_list_root, CAJA_ICON_DND_TEXT);
     }
 
-    if (caja_icon_container_get_is_desktop (CAJA_ICON_CONTAINER (widget)))
+    if (baul_icon_container_get_is_desktop (CAJA_ICON_CONTAINER (widget)))
     {
         list = drop_types_list_root;
     }
@@ -531,7 +531,7 @@ get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context,
 }
 
 static void
-caja_icon_container_ensure_drag_data (CajaIconContainer *container,
+baul_icon_container_ensure_drag_data (CajaIconContainer *container,
                                       GdkDragContext *context,
                                       guint32 time)
 {
@@ -556,12 +556,12 @@ drag_end_callback (GtkWidget *widget,
     container = CAJA_ICON_CONTAINER (widget);
     dnd_info = container->details->dnd_info;
 
-    caja_drag_destroy_selection_list (dnd_info->drag_info.selection_list);
+    baul_drag_destroy_selection_list (dnd_info->drag_info.selection_list);
     dnd_info->drag_info.selection_list = NULL;
 }
 
 static CajaIcon *
-caja_icon_container_item_at (CajaIconContainer *container,
+baul_icon_container_item_at (CajaIconContainer *container,
                              int x, int y)
 {
     GList *p;
@@ -594,7 +594,7 @@ caja_icon_container_item_at (CajaIconContainer *container,
                         point.y1,
                         &canvas_point.x1,
                         &canvas_point.y1);
-        if (caja_icon_canvas_item_hit_test_rectangle (icon->item, canvas_point))
+        if (baul_icon_canvas_item_hit_test_rectangle (icon->item, canvas_point))
         {
             return icon;
         }
@@ -615,7 +615,7 @@ get_container_uri (CajaIconContainer *container)
 }
 
 static gboolean
-caja_icon_container_selection_items_local (CajaIconContainer *container,
+baul_icon_container_selection_items_local (CajaIconContainer *container,
         GList *items)
 {
     char *container_uri_string;
@@ -631,11 +631,11 @@ caja_icon_container_selection_items_local (CajaIconContainer *container,
 
     if (eel_uri_is_desktop (container_uri_string))
     {
-        result = caja_drag_items_on_desktop (items);
+        result = baul_drag_items_on_desktop (items);
     }
     else
     {
-        result = caja_drag_items_local (container_uri_string, items);
+        result = baul_drag_items_local (container_uri_string, items);
     }
     g_free (container_uri_string);
 
@@ -647,7 +647,7 @@ get_background_drag_action (CajaIconContainer *container,
                             GdkDragAction action)
 {
     /* FIXME: This function is very FMDirectoryView specific, and
-     * should be moved out of caja-icon-dnd.c */
+     * should be moved out of baul-icon-dnd.c */
     GdkDragAction valid_actions;
 
     if (action == GDK_ACTION_ASK)
@@ -658,7 +658,7 @@ get_background_drag_action (CajaIconContainer *container,
             valid_actions |= CAJA_DND_ACTION_SET_AS_GLOBAL_BACKGROUND;
         }
 
-        action = caja_drag_drop_background_ask
+        action = baul_drag_drop_background_ask
                  (GTK_WIDGET (container), valid_actions);
     }
 
@@ -678,7 +678,7 @@ receive_dropped_color (CajaIconContainer *container,
         char *uri;
 
         uri = get_container_uri (container);
-        caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
                         "dropped color on icon container displaying %s", uri);
         g_free (uri);
 
@@ -701,7 +701,7 @@ receive_dropped_tile_image (CajaIconContainer *container, GdkDragAction action, 
         char *uri;
 
         uri = get_container_uri (container);
-        caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
                         "dropped tile image on icon container displaying %s", uri);
         g_free (uri);
 
@@ -724,7 +724,7 @@ receive_dropped_keyword (CajaIconContainer *container, const char *keyword, int 
 
     /* find the item we hit with our drop, if any */
     canvas_widget_to_world (EEL_CANVAS (container), x, y, &world_x, &world_y);
-    drop_target_icon = caja_icon_container_item_at (container, world_x, world_y);
+    drop_target_icon = baul_icon_container_item_at (container, world_x, world_y);
     if (drop_target_icon == NULL)
     {
         return;
@@ -737,19 +737,19 @@ receive_dropped_keyword (CajaIconContainer *container, const char *keyword, int 
      * But luckily there's no issue of not getting a file object,
      * so we don't have to worry about async. issues here.
      */
-    uri = caja_icon_container_get_icon_uri (container, drop_target_icon);
+    uri = baul_icon_container_get_icon_uri (container, drop_target_icon);
 
-    caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
                     "dropped emblem '%s' on icon container URI: %s",
                     keyword, uri);
 
-    file = caja_file_get_by_uri (uri);
+    file = baul_file_get_by_uri (uri);
     g_free (uri);
 
-    caja_drag_file_receive_dropped_keyword (file, keyword);
+    baul_drag_file_receive_dropped_keyword (file, keyword);
 
-    caja_file_unref (file);
-    caja_icon_container_update_icon (container, drop_target_icon);
+    baul_file_unref (file);
+    baul_icon_container_update_icon (container, drop_target_icon);
 }
 
 /* handle dropped url */
@@ -763,7 +763,7 @@ receive_dropped_netscape_url (CajaIconContainer *container, const char *encoded_
         return;
     }
 
-    drop_target = caja_icon_container_find_drop_target (container, context, x, y, NULL, TRUE);
+    drop_target = baul_icon_container_find_drop_target (container, context, x, y, NULL, TRUE);
 
     g_signal_emit_by_name (container, "handle_netscape_url",
                            encoded_url,
@@ -785,7 +785,7 @@ receive_dropped_uri_list (CajaIconContainer *container, const char *uri_list, Gd
         return;
     }
 
-    drop_target = caja_icon_container_find_drop_target (container, context, x, y, NULL, TRUE);
+    drop_target = baul_icon_container_find_drop_target (container, context, x, y, NULL, TRUE);
 
     g_signal_emit_by_name (container, "handle_uri_list",
                            uri_list,
@@ -807,7 +807,7 @@ receive_dropped_text (CajaIconContainer *container, const char *text, GdkDragCon
         return;
     }
 
-    drop_target = caja_icon_container_find_drop_target (container, context, x, y, NULL, TRUE);
+    drop_target = baul_icon_container_find_drop_target (container, context, x, y, NULL, TRUE);
 
     g_signal_emit_by_name (container, "handle_text",
                            text,
@@ -829,7 +829,7 @@ receive_dropped_raw (CajaIconContainer *container, const char *raw_data, int len
         return;
     }
 
-    drop_target = caja_icon_container_find_drop_target (container, context, x, y, NULL, TRUE);
+    drop_target = baul_icon_container_find_drop_target (container, context, x, y, NULL, TRUE);
 
     g_signal_emit_by_name (container, "handle_raw",
                            raw_data,
@@ -864,7 +864,7 @@ auto_scroll_timeout_callback (gpointer data)
 
     container->details->dnd_info->drag_info.waiting_to_autoscroll = FALSE;
 
-    caja_drag_autoscroll_calculate_delta (widget, &x_scroll_delta, &y_scroll_delta);
+    baul_drag_autoscroll_calculate_delta (widget, &x_scroll_delta, &y_scroll_delta);
     if (x_scroll_delta == 0 && y_scroll_delta == 0)
     {
         /* no work */
@@ -874,7 +874,7 @@ auto_scroll_timeout_callback (gpointer data)
     /* Clear the old dnd highlight frame */
     dnd_highlight_queue_redraw (widget);
 
-    if (!caja_icon_container_scroll (container, (int)x_scroll_delta, (int)y_scroll_delta))
+    if (!baul_icon_container_scroll (container, (int)x_scroll_delta, (int)y_scroll_delta))
     {
         /* the scroll value got pinned to a min or max adjustment value,
          * we ended up not scrolling
@@ -933,7 +933,7 @@ auto_scroll_timeout_callback (gpointer data)
 static void
 set_up_auto_scroll_if_needed (CajaIconContainer *container)
 {
-    caja_drag_autoscroll_start (&container->details->dnd_info->drag_info,
+    baul_drag_autoscroll_start (&container->details->dnd_info->drag_info,
                                 GTK_WIDGET (container),
                                 auto_scroll_timeout_callback,
                                 container);
@@ -942,7 +942,7 @@ set_up_auto_scroll_if_needed (CajaIconContainer *container)
 static void
 stop_auto_scroll (CajaIconContainer *container)
 {
-    caja_drag_autoscroll_stop (&container->details->dnd_info->drag_info);
+    baul_drag_autoscroll_stop (&container->details->dnd_info->drag_info);
 }
 
 static void
@@ -970,7 +970,7 @@ handle_local_move (CajaIconContainer *container,
     {
         item = p->data;
 
-        icon = caja_icon_container_get_icon_by_uri
+        icon = baul_icon_container_get_icon_by_uri
                (container, item->uri);
 
         if (icon == NULL)
@@ -979,26 +979,26 @@ handle_local_move (CajaIconContainer *container,
              * this screen
              */
 
-            file = caja_file_get_by_uri (item->uri);
+            file = baul_file_get_by_uri (item->uri);
 
             screen = gtk_widget_get_screen (GTK_WIDGET (container));
             g_snprintf (screen_string, sizeof (screen_string), "%d",
                         gdk_x11_screen_get_screen_number (screen));
-            caja_file_set_metadata (file,
+            baul_file_set_metadata (file,
                                     CAJA_METADATA_KEY_SCREEN,
                                     NULL, screen_string);
-            caja_file_set_time_metadata (file,
+            baul_file_set_time_metadata (file,
                                          CAJA_METADATA_KEY_ICON_POSITION_TIMESTAMP, now);
 
-            caja_icon_container_add (container, CAJA_ICON_CONTAINER_ICON_DATA (file));
+            baul_icon_container_add (container, CAJA_ICON_CONTAINER_ICON_DATA (file));
 
-            icon = caja_icon_container_get_icon_by_uri
+            icon = baul_icon_container_get_icon_by_uri
                    (container, item->uri);
         }
 
         if (item->got_icon_position)
         {
-            caja_icon_container_move_icon
+            baul_icon_container_move_icon
             (container, icon,
              world_x + item->icon_x, world_y + item->icon_y,
              icon->scale,
@@ -1006,10 +1006,10 @@ handle_local_move (CajaIconContainer *container,
         }
         moved_icons = g_list_prepend (moved_icons, icon);
     }
-    caja_icon_container_select_list_unselect_others
+    baul_icon_container_select_list_unselect_others
     (container, moved_icons);
     /* Might have been moved in a way that requires adjusting scroll region. */
-    caja_icon_container_update_scroll_region (container);
+    baul_icon_container_update_scroll_region (container);
     g_list_free (moved_icons);
 }
 
@@ -1038,7 +1038,7 @@ handle_nonlocal_move (CajaIconContainer *container,
     }
     source_uris = g_list_reverse (source_uris);
 
-    is_rtl = caja_icon_container_is_layout_rtl (container);
+    is_rtl = baul_icon_container_is_layout_rtl (container);
 
     source_item_locations = g_array_new (FALSE, TRUE, sizeof (GdkPoint));
     if (!icon_hit)
@@ -1069,7 +1069,7 @@ handle_nonlocal_move (CajaIconContainer *container,
     /* Rewrite internal desktop URIs to the normal target uri */
     if (eel_uri_is_desktop (target_uri))
     {
-        target_uri = caja_get_desktop_directory_uri ();
+        target_uri = baul_get_desktop_directory_uri ();
         free_target_uri = TRUE;
     }
 
@@ -1097,7 +1097,7 @@ handle_nonlocal_move (CajaIconContainer *container,
 }
 
 static char *
-caja_icon_container_find_drop_target (CajaIconContainer *container,
+baul_icon_container_find_drop_target (CajaIconContainer *container,
                                       GdkDragContext *context,
                                       int x, int y,
                                       gboolean *icon_hit,
@@ -1125,19 +1125,19 @@ caja_icon_container_find_drop_target (CajaIconContainer *container,
      */
 
     /* Find the item we hit with our drop, if any */
-    drop_target_icon = caja_icon_container_item_at (container, world_x, world_y);
+    drop_target_icon = baul_icon_container_item_at (container, world_x, world_y);
     if (drop_target_icon != NULL)
     {
         char *icon_uri;
 
-        icon_uri = caja_icon_container_get_icon_uri (container, drop_target_icon);
+        icon_uri = baul_icon_container_get_icon_uri (container, drop_target_icon);
         if (icon_uri != NULL)
         {
             CajaFile *file;
 
-            file = caja_file_get_by_uri (icon_uri);
+            file = baul_file_get_by_uri (icon_uri);
 
-            if (!caja_drag_can_accept_info (file,
+            if (!baul_drag_can_accept_info (file,
                                             container->details->dnd_info->drag_info.data_type,
                                             container->details->dnd_info->drag_info.selection_list))
             {
@@ -1148,7 +1148,7 @@ caja_icon_container_find_drop_target (CajaIconContainer *container,
             }
 
             g_free (icon_uri);
-            caja_file_unref (file);
+            baul_file_unref (file);
         }
     }
 
@@ -1168,7 +1168,7 @@ caja_icon_container_find_drop_target (CajaIconContainer *container,
                 eel_uri_is_desktop (container_uri))
         {
             g_free (container_uri);
-            container_uri = caja_get_desktop_directory_uri ();
+            container_uri = baul_get_desktop_directory_uri ();
         }
 
         return container_uri;
@@ -1178,7 +1178,7 @@ caja_icon_container_find_drop_target (CajaIconContainer *container,
     {
         *icon_hit = TRUE;
     }
-    return caja_icon_container_get_icon_drop_target_uri (container, drop_target_icon);
+    return baul_icon_container_get_icon_drop_target_uri (container, drop_target_icon);
 }
 
 static gboolean
@@ -1223,7 +1223,7 @@ selection_is_image_file (GList *selection_list)
 
 
 static void
-caja_icon_container_receive_dropped_icons (CajaIconContainer *container,
+baul_icon_container_receive_dropped_icons (CajaIconContainer *container,
         GdkDragContext *context,
         int x, int y)
 {
@@ -1246,7 +1246,7 @@ caja_icon_container_receive_dropped_icons (CajaIconContainer *container,
     {
         /* FIXME bugzilla.gnome.org 42485: This belongs in FMDirectoryView, not here. */
         /* Check for special case items in selection list */
-        if (caja_drag_selection_includes_special_link (container->details->dnd_info->drag_info.selection_list))
+        if (baul_drag_selection_includes_special_link (container->details->dnd_info->drag_info.selection_list))
         {
             /* We only want to move the trash */
             action = GDK_ACTION_MOVE;
@@ -1260,7 +1260,7 @@ caja_icon_container_receive_dropped_icons (CajaIconContainer *container,
                 action |= CAJA_DND_ACTION_SET_AS_BACKGROUND;
             }
         }
-        real_action = caja_drag_drop_action_ask (GTK_WIDGET (container), action);
+        real_action = baul_drag_drop_action_ask (GTK_WIDGET (container), action);
     }
 
     if (real_action == (GdkDragAction) CAJA_DND_ACTION_SET_AS_BACKGROUND)
@@ -1280,7 +1280,7 @@ caja_icon_container_receive_dropped_icons (CajaIconContainer *container,
     				    y + gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container))),
                                     &world_x, &world_y);
 
-        drop_target = caja_icon_container_find_drop_target (container,
+        drop_target = baul_icon_container_find_drop_target (container,
                       context, x, y, &icon_hit, FALSE);
 
         local_move_only = FALSE;
@@ -1289,7 +1289,7 @@ caja_icon_container_receive_dropped_icons (CajaIconContainer *container,
             /* we can just move the icon positions if the move ended up in
              * the item's parent container
              */
-            local_move_only = caja_icon_container_selection_items_local
+            local_move_only = baul_icon_container_selection_items_local
                               (container, container->details->dnd_info->drag_info.selection_list);
         }
 
@@ -1304,12 +1304,12 @@ caja_icon_container_receive_dropped_icons (CajaIconContainer *container,
     }
 
     g_free (drop_target);
-    caja_drag_destroy_selection_list (container->details->dnd_info->drag_info.selection_list);
+    baul_drag_destroy_selection_list (container->details->dnd_info->drag_info.selection_list);
     container->details->dnd_info->drag_info.selection_list = NULL;
 }
 
 static void
-caja_icon_container_get_drop_action (CajaIconContainer *container,
+baul_icon_container_get_drop_action (CajaIconContainer *container,
                                      GdkDragContext *context,
                                      int x, int y,
                                      int *action)
@@ -1329,7 +1329,7 @@ caja_icon_container_get_drop_action (CajaIconContainer *container,
     /* find out if we're over an icon */
     canvas_widget_to_world (EEL_CANVAS (container), x, y, &world_x, &world_y);
 
-    icon = caja_icon_container_item_at (container, world_x, world_y);
+    icon = baul_icon_container_item_at (container, world_x, world_y);
 
     *action = 0;
 
@@ -1341,21 +1341,21 @@ caja_icon_container_get_drop_action (CajaIconContainer *container,
         {
             return;
         }
-        drop_target = caja_icon_container_find_drop_target (container,
+        drop_target = baul_icon_container_find_drop_target (container,
                       context, x, y, &icon_hit, FALSE);
         if (!drop_target)
         {
             return;
         }
-        caja_drag_default_drop_action_for_icons (context, drop_target,
+        baul_drag_default_drop_action_for_icons (context, drop_target,
                 container->details->dnd_info->drag_info.selection_list,
                 action);
         g_free (drop_target);
         break;
     case CAJA_ICON_DND_URI_LIST:
-        drop_target = caja_icon_container_find_drop_target (container,
+        drop_target = baul_icon_container_find_drop_target (container,
                       context, x, y, &icon_hit, FALSE);
-        *action = caja_drag_default_drop_action_for_uri_list (context, drop_target);
+        *action = baul_drag_default_drop_action_for_uri_list (context, drop_target);
 
         g_free (drop_target);
         break;
@@ -1369,7 +1369,7 @@ caja_icon_container_get_drop_action (CajaIconContainer *container,
         break;
 
     case CAJA_ICON_DND_NETSCAPE_URL:
-        *action = caja_drag_default_drop_action_for_netscape_url (context);
+        *action = baul_drag_default_drop_action_for_netscape_url (context);
         break;
 
     case CAJA_ICON_DND_COLOR:
@@ -1404,12 +1404,12 @@ set_drop_target (CajaIconContainer *container,
 
     /* Remember the new drop target for the next round. */
     container->details->drop_target = icon;
-    caja_icon_container_update_icon (container, old_icon);
-    caja_icon_container_update_icon (container, icon);
+    baul_icon_container_update_icon (container, old_icon);
+    baul_icon_container_update_icon (container, icon);
 }
 
 static void
-caja_icon_dnd_update_drop_target (CajaIconContainer *container,
+baul_icon_dnd_update_drop_target (CajaIconContainer *container,
                                   GdkDragContext *context,
                                   int x, int y)
 {
@@ -1421,7 +1421,7 @@ caja_icon_dnd_update_drop_target (CajaIconContainer *container,
     canvas_widget_to_world (EEL_CANVAS (container), x, y, &world_x, &world_y);
 
     /* Find the item we hit with our drop, if any. */
-    icon = caja_icon_container_item_at (container, world_x, world_y);
+    icon = baul_icon_container_item_at (container, world_x, world_y);
 
     /* FIXME bugzilla.gnome.org 42485:
      * These "can_accept_items" tests need to be done by
@@ -1435,25 +1435,25 @@ caja_icon_dnd_update_drop_target (CajaIconContainer *container,
         CajaFile *file;
         char *uri;
 
-        uri = caja_icon_container_get_icon_uri (container, icon);
-        file = caja_file_get_by_uri (uri);
+        uri = baul_icon_container_get_icon_uri (container, icon);
+        file = baul_file_get_by_uri (uri);
         g_free (uri);
 
-        if (!caja_drag_can_accept_info (file,
+        if (!baul_drag_can_accept_info (file,
                                         container->details->dnd_info->drag_info.data_type,
                                         container->details->dnd_info->drag_info.selection_list))
         {
             icon = NULL;
         }
 
-        caja_file_unref (file);
+        baul_file_unref (file);
     }
 
     set_drop_target (container, icon);
 }
 
 static void
-caja_icon_container_free_drag_data (CajaIconContainer *container)
+baul_icon_container_free_drag_data (CajaIconContainer *container)
 {
     CajaIconDndInfo *dnd_info;
 
@@ -1497,7 +1497,7 @@ drag_leave_callback (GtkWidget *widget,
 
     set_drop_target (CAJA_ICON_CONTAINER (widget), NULL);
     stop_auto_scroll (CAJA_ICON_CONTAINER (widget));
-    caja_icon_container_free_drag_data(CAJA_ICON_CONTAINER (widget));
+    baul_icon_container_free_drag_data(CAJA_ICON_CONTAINER (widget));
 }
 
 static void
@@ -1519,7 +1519,7 @@ drag_begin_callback (GtkWidget      *widget,
     	gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
 
     /* create a pixmap and mask to drag with */
-    surface = caja_icon_canvas_item_get_drag_surface (container->details->drag_icon->item);
+    surface = baul_icon_canvas_item_get_drag_surface (container->details->drag_icon->item);
 
     /* compute the image's offset */
     eel_canvas_item_get_bounds (EEL_CANVAS_ITEM (container->details->drag_icon->item),
@@ -1535,7 +1535,7 @@ drag_begin_callback (GtkWidget      *widget,
 }
 
 void
-caja_icon_dnd_begin_drag (CajaIconContainer *container,
+baul_icon_dnd_begin_drag (CajaIconContainer *container,
                           GdkDragAction actions,
                           int button,
                           GdkEventMotion *event,
@@ -1682,15 +1682,15 @@ drag_motion_callback (GtkWidget *widget,
 {
     int action;
 
-    caja_icon_container_ensure_drag_data (CAJA_ICON_CONTAINER (widget), context, time);
-    caja_icon_container_position_shadow (CAJA_ICON_CONTAINER (widget), x, y);
-    caja_icon_dnd_update_drop_target (CAJA_ICON_CONTAINER (widget), context, x, y);
+    baul_icon_container_ensure_drag_data (CAJA_ICON_CONTAINER (widget), context, time);
+    baul_icon_container_position_shadow (CAJA_ICON_CONTAINER (widget), x, y);
+    baul_icon_dnd_update_drop_target (CAJA_ICON_CONTAINER (widget), context, x, y);
     set_up_auto_scroll_if_needed (CAJA_ICON_CONTAINER (widget));
     /* Find out what the drop actions are based on our drag selection and
      * the drop target.
      */
     action = 0;
-    caja_icon_container_get_drop_action (CAJA_ICON_CONTAINER (widget), context, x, y,
+    baul_icon_container_get_drop_action (CAJA_ICON_CONTAINER (widget), context, x, y,
                                          &action);
     if (action != 0)
     {
@@ -1727,7 +1727,7 @@ drag_drop_callback (GtkWidget *widget,
 }
 
 void
-caja_icon_dnd_end_drag (CajaIconContainer *container)
+baul_icon_dnd_end_drag (CajaIconContainer *container)
 {
     CajaIconDndInfo *dnd_info;
 
@@ -1770,7 +1770,7 @@ drag_data_received_callback (GtkWidget *widget,
     switch (info)
     {
     case CAJA_ICON_DND_MATE_ICON_LIST:
-        caja_icon_container_dropped_icon_feedback (widget, data, x, y);
+        baul_icon_container_dropped_icon_feedback (widget, data, x, y);
         break;
     case CAJA_ICON_DND_COLOR:
     case CAJA_ICON_DND_BGIMAGE:
@@ -1815,7 +1815,7 @@ drag_data_received_callback (GtkWidget *widget,
         switch (info)
         {
         case CAJA_ICON_DND_MATE_ICON_LIST:
-            caja_icon_container_receive_dropped_icons
+            baul_icon_container_receive_dropped_icons
             (CAJA_ICON_CONTAINER (widget),
              context, x, y);
             break;
@@ -1907,16 +1907,16 @@ drag_data_received_callback (GtkWidget *widget,
 
                 location = g_file_new_for_uri (drag_info->direct_save_uri);
 
-                caja_file_changes_queue_file_added (location);
+                baul_file_changes_queue_file_added (location);
                 p.x = x;
                 p.y = y;
-                caja_file_changes_queue_schedule_position_set (
+                baul_file_changes_queue_schedule_position_set (
                     location,
                     p,
                     gdk_x11_screen_get_screen_number (
                         gtk_widget_get_screen (widget)));
                 g_object_unref (location);
-                caja_file_changes_consume_changes (TRUE);
+                baul_file_changes_consume_changes (TRUE);
                 success = TRUE;
             }
             break;
@@ -1924,7 +1924,7 @@ drag_data_received_callback (GtkWidget *widget,
         }
         gtk_drag_finish (context, success, FALSE, time);
 
-        caja_icon_container_free_drag_data (CAJA_ICON_CONTAINER (widget));
+        baul_icon_container_free_drag_data (CAJA_ICON_CONTAINER (widget));
 
         set_drop_target (CAJA_ICON_CONTAINER (widget), NULL);
 
@@ -1935,7 +1935,7 @@ drag_data_received_callback (GtkWidget *widget,
 }
 
 void
-caja_icon_dnd_init (CajaIconContainer *container)
+baul_icon_dnd_init (CajaIconContainer *container)
 {
     GtkTargetList *targets;
     int n_elements;
@@ -1945,7 +1945,7 @@ caja_icon_dnd_init (CajaIconContainer *container)
 
 
     container->details->dnd_info = g_new0 (CajaIconDndInfo, 1);
-    caja_drag_init (&container->details->dnd_info->drag_info,
+    baul_drag_init (&container->details->dnd_info->drag_info,
                     drag_types, G_N_ELEMENTS (drag_types), TRUE);
 
     /* Set up the widget as a drag destination.
@@ -1953,7 +1953,7 @@ caja_icon_dnd_init (CajaIconContainer *container)
          * implemented by dealing with events manually.)
      */
     n_elements = G_N_ELEMENTS (drop_types);
-    if (!caja_icon_container_get_is_desktop (container))
+    if (!baul_icon_container_get_is_desktop (container))
     {
         /* Don't set up rootwindow drop */
         n_elements -= 1;
@@ -1987,7 +1987,7 @@ caja_icon_dnd_init (CajaIconContainer *container)
 }
 
 void
-caja_icon_dnd_fini (CajaIconContainer *container)
+baul_icon_dnd_fini (CajaIconContainer *container)
 {
     g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
 
@@ -1995,7 +1995,7 @@ caja_icon_dnd_fini (CajaIconContainer *container)
     {
         stop_auto_scroll (container);
 
-        caja_drag_finalize (&container->details->dnd_info->drag_info);
+        baul_drag_finalize (&container->details->dnd_info->drag_info);
         container->details->dnd_info = NULL;
     }
 }

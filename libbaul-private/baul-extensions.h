@@ -1,5 +1,5 @@
 /*
- *  caja-extension.c - extension management functions
+ *  baul-extension.c - extension management functions
  *
  *  Copyright (C) 2014 MATE Desktop.
  *
@@ -42,12 +42,12 @@ typedef struct _Extension {
 
 #define EXTENSION(x) ((Extension*)x)
 
-void caja_extension_register (gchar *filename, GObject *module);
+void baul_extension_register (gchar *filename, GObject *module);
 
-GList *caja_extensions_get_list (void);
-GList *caja_extensions_get_for_type (GType type);
+GList *baul_extensions_get_list (void);
+GList *baul_extensions_get_for_type (GType type);
 
-gboolean caja_extension_set_state (Extension *ext, gboolean new_state);
+gboolean baul_extension_set_state (Extension *ext, gboolean new_state);
 
 #endif // CAJA_EXTENSIONS_H
 

@@ -29,10 +29,10 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include <libcaja-extension/caja-extension-types.h>
-#include <libcaja-extension/caja-file-info.h>
-#include <libcaja-private/caja-file.h>
-#include <libcaja-private/caja-file-attributes.h>
+#include <libbaul-extension/baul-extension-types.h>
+#include <libbaul-extension/baul-file-info.h>
+#include <libbaul-private/baul-file.h>
+#include <libbaul-private/baul-file-attributes.h>
 
 #include "fm-ditem-page.h"
 
@@ -218,13 +218,13 @@ fm_ditem_page_exec_drag_data_received (GtkWidget *widget, GdkDragContext *contex
         return;
     }
 
-    file = caja_file_get_by_uri (uris[0]);
+    file = baul_file_get_by_uri (uris[0]);
     g_strfreev (uris);
 
     g_return_if_fail (file != NULL);
 
-    uri = caja_file_get_uri (file);
-    if (caja_file_is_mime_type (file, "application/x-desktop"))
+    uri = baul_file_get_uri (file);
+    if (baul_file_is_mime_type (file, "application/x-desktop"))
     {
         GKeyFile *key_file;
 
@@ -254,7 +254,7 @@ fm_ditem_page_exec_drag_data_received (GtkWidget *widget, GdkDragContext *contex
 
     g_free (uri);
 
-    caja_file_unref (file);
+    baul_file_unref (file);
 }
 
 static void
@@ -536,7 +536,7 @@ fm_ditem_page_make_box (GtkSizeGroup *label_size_group,
 
     info = CAJA_FILE_INFO (files->data);
 
-    uri = caja_file_info_get_uri (info);
+    uri = baul_file_info_get_uri (info);
     fm_ditem_page_create_begin (uri, box);
     g_free (uri);
 
@@ -555,7 +555,7 @@ fm_ditem_page_should_show (GList *files)
 
     info = CAJA_FILE_INFO (files->data);
 
-    if (!caja_file_info_is_mime_type (info, "application/x-desktop"))
+    if (!baul_file_info_is_mime_type (info, "application/x-desktop"))
     {
         return FALSE;
     }

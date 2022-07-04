@@ -22,19 +22,19 @@
  * Authors: Darin Adler <darin@bentspoon.com>
  */
 
-/* caja-desktop-window.h
+/* baul-desktop-window.h
  */
 
 #ifndef CAJA_DESKTOP_WINDOW_H
 #define CAJA_DESKTOP_WINDOW_H
 
-#include "caja-window.h"
-#include "caja-application.h"
-#include "caja-spatial-window.h"
+#include "baul-window.h"
+#include "baul-application.h"
+#include "baul-spatial-window.h"
 
 #include <gtk/gtk-a11y.h>
 
-#define CAJA_TYPE_DESKTOP_WINDOW caja_desktop_window_get_type()
+#define CAJA_TYPE_DESKTOP_WINDOW baul_desktop_window_get_type()
 #define CAJA_DESKTOP_WINDOW(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_WINDOW, CajaDesktopWindow))
 #define CAJA_DESKTOP_WINDOW_CLASS(klass) \
@@ -60,13 +60,13 @@ typedef struct
     CajaSpatialWindowClass parent_spot;
 } CajaDesktopWindowClass;
 
-GType                  caja_desktop_window_get_type            (void);
-CajaDesktopWindow *caja_desktop_window_new                 (CajaApplication *application,
+GType                  baul_desktop_window_get_type            (void);
+CajaDesktopWindow *baul_desktop_window_new                 (CajaApplication *application,
         GdkScreen           *screen);
-void                   caja_desktop_window_update_directory    (CajaDesktopWindow *window);
-gboolean               caja_desktop_window_loaded              (CajaDesktopWindow *window);
+void                   baul_desktop_window_update_directory    (CajaDesktopWindow *window);
+gboolean               baul_desktop_window_loaded              (CajaDesktopWindow *window);
 
-#define CAJA_TYPE_DESKTOP_WINDOW_ACCESSIBLE caja_desktop_window_accessible_get_type()
+#define CAJA_TYPE_DESKTOP_WINDOW_ACCESSIBLE baul_desktop_window_accessible_get_type()
 
 typedef struct
 {

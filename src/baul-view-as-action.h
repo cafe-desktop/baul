@@ -28,7 +28,7 @@
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_VIEW_AS_ACTION            (caja_view_as_action_get_type ())
+#define CAJA_TYPE_VIEW_AS_ACTION            (baul_view_as_action_get_type ())
 #define CAJA_VIEW_AS_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_VIEW_AS_ACTION, CajaViewAsAction))
 #define CAJA_VIEW_AS_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_VIEW_AS_ACTION, CajaViewAsActionClass))
 #define CAJA_IS_VIEW_AS_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_VIEW_AS_ACTION))
@@ -52,6 +52,6 @@ struct _CajaViewAsActionClass
     GtkActionClass parent_class;
 };
 
-GType    caja_view_as_action_get_type   (void);
+GType    baul_view_as_action_get_type   (void);
 
 #endif

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-icon-dnd.h - Drag & drop handling for the icon container widget.
+/* baul-icon-dnd.h - Drag & drop handling for the icon container widget.
 
    Copyright (C) 1999, 2000 Free Software Foundation
    Copyright (C) 2000 Eazel, Inc.
@@ -28,8 +28,8 @@
 #ifndef CAJA_ICON_DND_H
 #define CAJA_ICON_DND_H
 
-#include "caja-icon-container.h"
-#include "caja-dnd.h"
+#include "baul-icon-container.h"
+#include "baul-dnd.h"
 
 /* DnD-related information. */
 typedef struct
@@ -44,14 +44,14 @@ typedef struct
 } CajaIconDndInfo;
 
 
-void   caja_icon_dnd_init                  (CajaIconContainer *container);
-void   caja_icon_dnd_fini                  (CajaIconContainer *container);
-void   caja_icon_dnd_begin_drag            (CajaIconContainer *container,
+void   baul_icon_dnd_init                  (CajaIconContainer *container);
+void   baul_icon_dnd_fini                  (CajaIconContainer *container);
+void   baul_icon_dnd_begin_drag            (CajaIconContainer *container,
         GdkDragAction          actions,
         gint                   button,
         GdkEventMotion        *event,
         int                    start_x,
         int                    start_y);
-void   caja_icon_dnd_end_drag              (CajaIconContainer *container);
+void   baul_icon_dnd_end_drag              (CajaIconContainer *container);
 
 #endif /* CAJA_ICON_DND_H */

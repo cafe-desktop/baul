@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-view-factory.h: register and create CajaViews
+   baul-view-factory.h: register and create CajaViews
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -29,8 +29,8 @@
 
 #include <gio/gio.h>
 
-#include "caja-view.h"
-#include "caja-window-slot-info.h"
+#include "baul-view.h"
+#include "baul-window-slot-info.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,15 +55,15 @@ extern "C" {
     };
 
 
-    void                    caja_view_factory_register          (CajaViewInfo   *view_info);
-    const CajaViewInfo *caja_view_factory_lookup            (const char         *id);
-    CajaView *          caja_view_factory_create            (const char         *id,
+    void                    baul_view_factory_register          (CajaViewInfo   *view_info);
+    const CajaViewInfo *baul_view_factory_lookup            (const char         *id);
+    CajaView *          baul_view_factory_create            (const char         *id,
             CajaWindowSlotInfo *slot);
-    gboolean                caja_view_factory_view_supports_uri (const char         *id,
+    gboolean                baul_view_factory_view_supports_uri (const char         *id,
             GFile              *location,
             GFileType          file_type,
             const char         *mime_type);
-    GList *                 caja_view_factory_get_views_for_uri (const char         *uri,
+    GList *                 baul_view_factory_get_views_for_uri (const char         *uri,
             GFileType          file_type,
             const char         *mime_type);
 

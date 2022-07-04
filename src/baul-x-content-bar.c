@@ -28,10 +28,10 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-autorun.h>
-#include <libcaja-private/caja-icon-info.h>
+#include <libbaul-private/baul-autorun.h>
+#include <libbaul-private/baul-icon-info.h>
 
-#include "caja-x-content-bar.h"
+#include "baul-x-content-bar.h"
 
 struct _CajaXContentBarPrivate
 {
@@ -49,10 +49,10 @@ enum
     PROP_X_CONTENT_TYPE,
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaXContentBar, caja_x_content_bar, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaXContentBar, baul_x_content_bar, GTK_TYPE_BOX)
 
 void
-caja_x_content_bar_set_x_content_type (CajaXContentBar *bar, const char *x_content_type)
+baul_x_content_bar_set_x_content_type (CajaXContentBar *bar, const char *x_content_type)
 {
     char *message;
     char *description;
@@ -131,10 +131,10 @@ caja_x_content_bar_set_x_content_type (CajaXContentBar *bar, const char *x_conte
             GdkPixbuf *pixbuf;
             int icon_size, icon_scale;
             CajaIconInfo *icon_info;
-            icon_size = caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_BUTTON);
+            icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_BUTTON);
             icon_scale = gtk_widget_get_scale_factor (GTK_WIDGET (bar));
-            icon_info = caja_icon_info_lookup (icon, icon_size, icon_scale);
-            pixbuf = caja_icon_info_get_pixbuf_at_size (icon_info, icon_size);
+            icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
+            pixbuf = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
             image = gtk_image_new_from_pixbuf (pixbuf);
             g_object_unref (pixbuf);
             g_object_unref (icon_info);
@@ -163,19 +163,19 @@ caja_x_content_bar_set_x_content_type (CajaXContentBar *bar, const char *x_conte
 }
 
 const char *
-caja_x_content_bar_get_x_content_type (CajaXContentBar *bar)
+baul_x_content_bar_get_x_content_type (CajaXContentBar *bar)
 {
     return bar->priv->x_content_type;
 }
 
 GMount *
-caja_x_content_bar_get_mount (CajaXContentBar *bar)
+baul_x_content_bar_get_mount (CajaXContentBar *bar)
 {
     return bar->priv->mount != NULL ? g_object_ref (bar->priv->mount) : NULL;
 }
 
 void
-caja_x_content_bar_set_mount (CajaXContentBar *bar, GMount *mount)
+baul_x_content_bar_set_mount (CajaXContentBar *bar, GMount *mount)
 {
     if (bar->priv->mount != NULL)
     {
@@ -186,7 +186,7 @@ caja_x_content_bar_set_mount (CajaXContentBar *bar, GMount *mount)
 
 
 static void
-caja_x_content_bar_set_property (GObject      *object,
+baul_x_content_bar_set_property (GObject      *object,
                                  guint         prop_id,
                                  const GValue *value,
                                  GParamSpec   *pspec)
@@ -198,10 +198,10 @@ caja_x_content_bar_set_property (GObject      *object,
     switch (prop_id)
     {
     case PROP_MOUNT:
-        caja_x_content_bar_set_mount (bar, G_MOUNT (g_value_get_object (value)));
+        baul_x_content_bar_set_mount (bar, G_MOUNT (g_value_get_object (value)));
         break;
     case PROP_X_CONTENT_TYPE:
-        caja_x_content_bar_set_x_content_type (bar, g_value_get_string (value));
+        baul_x_content_bar_set_x_content_type (bar, g_value_get_string (value));
         break;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -210,7 +210,7 @@ caja_x_content_bar_set_property (GObject      *object,
 }
 
 static void
-caja_x_content_bar_get_property (GObject    *object,
+baul_x_content_bar_get_property (GObject    *object,
                                  guint       prop_id,
                                  GValue     *value,
                                  GParamSpec *pspec)
@@ -234,7 +234,7 @@ caja_x_content_bar_get_property (GObject    *object,
 }
 
 static void
-caja_x_content_bar_finalize (GObject *object)
+baul_x_content_bar_finalize (GObject *object)
 {
     CajaXContentBar *bar = CAJA_X_CONTENT_BAR (object);
 
@@ -242,18 +242,18 @@ caja_x_content_bar_finalize (GObject *object)
     if (bar->priv->mount != NULL)
         g_object_unref (bar->priv->mount);
 
-    G_OBJECT_CLASS (caja_x_content_bar_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_x_content_bar_parent_class)->finalize (object);
 }
 
 static void
-caja_x_content_bar_class_init (CajaXContentBarClass *klass)
+baul_x_content_bar_class_init (CajaXContentBarClass *klass)
 {
     GObjectClass *object_class;
 
     object_class = G_OBJECT_CLASS (klass);
-    object_class->get_property = caja_x_content_bar_get_property;
-    object_class->set_property = caja_x_content_bar_set_property;
-    object_class->finalize = caja_x_content_bar_finalize;
+    object_class->get_property = baul_x_content_bar_get_property;
+    object_class->set_property = baul_x_content_bar_set_property;
+    object_class->finalize = baul_x_content_bar_finalize;
 
     g_object_class_install_property (object_class,
                                      PROP_MOUNT,
@@ -286,17 +286,17 @@ button_clicked_callback (GtkWidget *button, CajaXContentBar *bar)
     default_app = g_app_info_get_default_for_type (bar->priv->x_content_type, FALSE);
     if (default_app != NULL)
     {
-        caja_autorun_launch_for_mount (bar->priv->mount, default_app);
+        baul_autorun_launch_for_mount (bar->priv->mount, default_app);
         g_object_unref (default_app);
     }
 }
 
 static void
-caja_x_content_bar_init (CajaXContentBar *bar)
+baul_x_content_bar_init (CajaXContentBar *bar)
 {
     GtkWidget *hbox;
 
-    bar->priv = caja_x_content_bar_get_instance_private (bar);
+    bar->priv = baul_x_content_bar_get_instance_private (bar);
 
     hbox = GTK_WIDGET (bar);
 
@@ -318,7 +318,7 @@ caja_x_content_bar_init (CajaXContentBar *bar)
 }
 
 GtkWidget *
-caja_x_content_bar_new (GMount *mount,
+baul_x_content_bar_new (GMount *mount,
                         const char *x_content_type)
 {
     GObject *bar;

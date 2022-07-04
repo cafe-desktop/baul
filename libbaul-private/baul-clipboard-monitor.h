@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-clipboard-monitor.h: lets you notice clipboard changes.
+   baul-clipboard-monitor.h: lets you notice clipboard changes.
 
    Copyright (C) 2004 Red Hat, Inc.
 
@@ -27,7 +27,7 @@
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_CLIPBOARD_MONITOR caja_clipboard_monitor_get_type()
+#define CAJA_TYPE_CLIPBOARD_MONITOR baul_clipboard_monitor_get_type()
 #define CAJA_CLIPBOARD_MONITOR(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitor))
 #define CAJA_CLIPBOARD_MONITOR_CLASS(klass) \
@@ -64,17 +64,17 @@ struct CajaClipboardInfo
     gboolean cut;
 };
 
-GType   caja_clipboard_monitor_get_type (void);
+GType   baul_clipboard_monitor_get_type (void);
 
-CajaClipboardMonitor *   caja_clipboard_monitor_get (void);
-void caja_clipboard_monitor_set_clipboard_info (CajaClipboardMonitor *monitor,
+CajaClipboardMonitor *   baul_clipboard_monitor_get (void);
+void baul_clipboard_monitor_set_clipboard_info (CajaClipboardMonitor *monitor,
         CajaClipboardInfo *info);
-CajaClipboardInfo * caja_clipboard_monitor_get_clipboard_info (CajaClipboardMonitor *monitor);
-void caja_clipboard_monitor_emit_changed (void);
+CajaClipboardInfo * baul_clipboard_monitor_get_clipboard_info (CajaClipboardMonitor *monitor);
+void baul_clipboard_monitor_emit_changed (void);
 
-void caja_clear_clipboard_callback (GtkClipboard *clipboard,
+void baul_clear_clipboard_callback (GtkClipboard *clipboard,
                                     gpointer      user_data);
-void caja_get_clipboard_callback   (GtkClipboard     *clipboard,
+void baul_get_clipboard_callback   (GtkClipboard     *clipboard,
                                     GtkSelectionData *selection_data,
                                     guint             info,
                                     gpointer          user_data);

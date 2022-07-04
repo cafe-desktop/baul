@@ -1,5 +1,5 @@
 /*
- *  caja-menu.h - Menus exported by CajaMenuProvider objects.
+ *  baul-menu.h - Menus exported by CajaMenuProvider objects.
  *
  *  Copyright (C) 2005 Raffaele Sandrini
  *  Copyright (C) 2003 Novell, Inc.
@@ -27,19 +27,19 @@
 #define CAJA_MENU_H
 
 #include <glib-object.h>
-#include "caja-extension-types.h"
+#include "baul-extension-types.h"
 
 G_BEGIN_DECLS
 
 /* CajaMenu defines */
-#define CAJA_TYPE_MENU         (caja_menu_get_type ())
+#define CAJA_TYPE_MENU         (baul_menu_get_type ())
 #define CAJA_MENU(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_MENU, CajaMenu))
 #define CAJA_MENU_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_MENU, CajaMenuClass))
 #define CAJA_IS_MENU(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_MENU))
 #define CAJA_IS_MENU_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_MENU))
 #define CAJA_MENU_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_MENU, CajaMenuClass))
 /* CajaMenuItem defines */
-#define CAJA_TYPE_MENU_ITEM            (caja_menu_item_get_type())
+#define CAJA_TYPE_MENU_ITEM            (baul_menu_item_get_type())
 #define CAJA_MENU_ITEM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_MENU_ITEM, CajaMenuItem))
 #define CAJA_MENU_ITEM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_MENU_ITEM, CajaMenuItemClass))
 #define CAJA_MENU_IS_ITEM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_MENU_ITEM))
@@ -79,23 +79,23 @@ struct _CajaMenuItemClass {
 };
 
 /* CajaMenu methods */
-GType     caja_menu_get_type       (void);
-CajaMenu *caja_menu_new            (void);
+GType     baul_menu_get_type       (void);
+CajaMenu *baul_menu_new            (void);
 
-void      caja_menu_append_item    (CajaMenu     *menu,
+void      baul_menu_append_item    (CajaMenu     *menu,
                                     CajaMenuItem *item);
-GList    *caja_menu_get_items      (CajaMenu *menu);
-void      caja_menu_item_list_free (GList *item_list);
+GList    *baul_menu_get_items      (CajaMenu *menu);
+void      baul_menu_item_list_free (GList *item_list);
 
 /* CajaMenuItem methods */
-GType         caja_menu_item_get_type    (void);
-CajaMenuItem *caja_menu_item_new         (const char   *name,
+GType         baul_menu_item_get_type    (void);
+CajaMenuItem *baul_menu_item_new         (const char   *name,
                                           const char   *label,
                                           const char   *tip,
                                           const char   *icon);
 
-void          caja_menu_item_activate    (CajaMenuItem *item);
-void          caja_menu_item_set_submenu (CajaMenuItem *item,
+void          baul_menu_item_activate    (CajaMenuItem *item);
+void          baul_menu_item_set_submenu (CajaMenuItem *item,
                                           CajaMenu     *menu);
 
 /* CajaMenuItem has the following properties:

@@ -4,7 +4,7 @@
 requires:
   debian:
     # Useful URL: https://github.com/mate-desktop/debian-packages
-    # Useful URL: https://salsa.debian.org/debian-mate-team/caja
+    # Useful URL: https://salsa.debian.org/debian-mate-team/baul
     - aptitude
     - autopoint
     - clang

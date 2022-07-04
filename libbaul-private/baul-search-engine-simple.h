@@ -24,9 +24,9 @@
 #ifndef CAJA_SEARCH_ENGINE_SIMPLE_H
 #define CAJA_SEARCH_ENGINE_SIMPLE_H
 
-#include "caja-search-engine.h"
+#include "baul-search-engine.h"
 
-#define CAJA_TYPE_SEARCH_ENGINE_SIMPLE		(caja_search_engine_simple_get_type ())
+#define CAJA_TYPE_SEARCH_ENGINE_SIMPLE		(baul_search_engine_simple_get_type ())
 #define CAJA_SEARCH_ENGINE_SIMPLE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_ENGINE_SIMPLE, CajaSearchEngineSimple))
 #define CAJA_SEARCH_ENGINE_SIMPLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SEARCH_ENGINE_SIMPLE, CajaSearchEngineSimpleClass))
 #define CAJA_IS_SEARCH_ENGINE_SIMPLE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SEARCH_ENGINE_SIMPLE))
@@ -46,8 +46,8 @@ typedef struct
     CajaSearchEngineClass parent_class;
 } CajaSearchEngineSimpleClass;
 
-GType          caja_search_engine_simple_get_type  (void);
+GType          baul_search_engine_simple_get_type  (void);
 
-CajaSearchEngine* caja_search_engine_simple_new       (void);
+CajaSearchEngine* baul_search_engine_simple_new       (void);
 
 #endif /* CAJA_SEARCH_ENGINE_SIMPLE_H */

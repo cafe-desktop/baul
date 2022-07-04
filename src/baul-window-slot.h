@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-window-slot.h: Caja window slot
+   baul-window-slot.h: Caja window slot
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -25,11 +25,11 @@
 #ifndef CAJA_WINDOW_SLOT_H
 #define CAJA_WINDOW_SLOT_H
 
-#include "caja-window-pane.h"
-#include "caja-query-editor.h"
+#include "baul-window-pane.h"
+#include "baul-query-editor.h"
 #include <glib/gi18n.h>
 
-#define CAJA_TYPE_WINDOW_SLOT	 (caja_window_slot_get_type())
+#define CAJA_TYPE_WINDOW_SLOT	 (baul_window_slot_get_type())
 #define CAJA_WINDOW_SLOT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_WINDOW_SLOT, CajaWindowSlotClass))
 #define CAJA_WINDOW_SLOT(obj)	 (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW_SLOT, CajaWindowSlot))
 #define CAJA_IS_WINDOW_SLOT(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW_SLOT))
@@ -117,79 +117,79 @@ struct CajaWindowSlot
     gboolean visible;
 };
 
-GType   caja_window_slot_get_type (void);
+GType   baul_window_slot_get_type (void);
 
-char *  caja_window_slot_get_title			   (CajaWindowSlot *slot);
-void    caja_window_slot_update_title		   (CajaWindowSlot *slot);
-void    caja_window_slot_update_icon		   (CajaWindowSlot *slot);
-void    caja_window_slot_update_query_editor	   (CajaWindowSlot *slot);
+char *  baul_window_slot_get_title			   (CajaWindowSlot *slot);
+void    baul_window_slot_update_title		   (CajaWindowSlot *slot);
+void    baul_window_slot_update_icon		   (CajaWindowSlot *slot);
+void    baul_window_slot_update_query_editor	   (CajaWindowSlot *slot);
 
-GFile * caja_window_slot_get_location		   (CajaWindowSlot *slot);
-char *  caja_window_slot_get_location_uri		   (CajaWindowSlot *slot);
+GFile * baul_window_slot_get_location		   (CajaWindowSlot *slot);
+char *  baul_window_slot_get_location_uri		   (CajaWindowSlot *slot);
 
-void    caja_window_slot_close			   (CajaWindowSlot *slot);
-void    caja_window_slot_reload			   (CajaWindowSlot *slot);
+void    baul_window_slot_close			   (CajaWindowSlot *slot);
+void    baul_window_slot_reload			   (CajaWindowSlot *slot);
 
-void			caja_window_slot_open_location	      (CajaWindowSlot	*slot,
+void			baul_window_slot_open_location	      (CajaWindowSlot	*slot,
         GFile			*location,
         gboolean			 close_behind);
-void			caja_window_slot_open_location_with_selection (CajaWindowSlot	    *slot,
+void			baul_window_slot_open_location_with_selection (CajaWindowSlot	    *slot,
         GFile		    *location,
         GList		    *selection,
         gboolean		     close_behind);
-void			caja_window_slot_open_location_full       (CajaWindowSlot	*slot,
+void			baul_window_slot_open_location_full       (CajaWindowSlot	*slot,
         GFile			*location,
         CajaWindowOpenMode	 mode,
         CajaWindowOpenFlags	 flags,
         GList			*new_selection,
         CajaWindowGoToCallback   callback,
         gpointer		 user_data);
-void			caja_window_slot_stop_loading	      (CajaWindowSlot	*slot);
+void			baul_window_slot_stop_loading	      (CajaWindowSlot	*slot);
 
-void			caja_window_slot_set_content_view	      (CajaWindowSlot	*slot,
+void			baul_window_slot_set_content_view	      (CajaWindowSlot	*slot,
         const char		*id);
-const char	       *caja_window_slot_get_content_view_id      (CajaWindowSlot	*slot);
-gboolean		caja_window_slot_content_view_matches_iid (CajaWindowSlot	*slot,
+const char	       *baul_window_slot_get_content_view_id      (CajaWindowSlot	*slot);
+gboolean		baul_window_slot_content_view_matches_iid (CajaWindowSlot	*slot,
         const char		*iid);
 
-void                    caja_window_slot_connect_content_view     (CajaWindowSlot       *slot,
+void                    baul_window_slot_connect_content_view     (CajaWindowSlot       *slot,
         CajaView             *view);
-void                    caja_window_slot_disconnect_content_view  (CajaWindowSlot       *slot,
+void                    baul_window_slot_disconnect_content_view  (CajaWindowSlot       *slot,
         CajaView             *view);
 
-#define caja_window_slot_go_to(slot,location, new_tab) \
-	caja_window_slot_open_location_full(slot, location, CAJA_WINDOW_OPEN_ACCORDING_TO_MODE, \
+#define baul_window_slot_go_to(slot,location, new_tab) \
+	baul_window_slot_open_location_full(slot, location, CAJA_WINDOW_OPEN_ACCORDING_TO_MODE, \
 						(new_tab ? CAJA_WINDOW_OPEN_FLAG_NEW_TAB : 0), \
 						NULL, NULL, NULL)
 
-#define caja_window_slot_go_to_full(slot, location, new_tab, callback, user_data) \
-	caja_window_slot_open_location_full(slot, location, CAJA_WINDOW_OPEN_ACCORDING_TO_MODE, \
+#define baul_window_slot_go_to_full(slot, location, new_tab, callback, user_data) \
+	baul_window_slot_open_location_full(slot, location, CAJA_WINDOW_OPEN_ACCORDING_TO_MODE, \
 						(new_tab ? CAJA_WINDOW_OPEN_FLAG_NEW_TAB : 0), \
 						NULL, callback, user_data)
 
-#define caja_window_slot_go_to_with_selection(slot,location,new_selection) \
-	caja_window_slot_open_location_with_selection(slot, location, new_selection, FALSE)
+#define baul_window_slot_go_to_with_selection(slot,location,new_selection) \
+	baul_window_slot_open_location_with_selection(slot, location, new_selection, FALSE)
 
-void    caja_window_slot_go_home			   (CajaWindowSlot *slot,
+void    baul_window_slot_go_home			   (CajaWindowSlot *slot,
         gboolean            new_tab);
-void    caja_window_slot_go_up			   (CajaWindowSlot *slot,
+void    baul_window_slot_go_up			   (CajaWindowSlot *slot,
         gboolean           close_behind);
 
-void    caja_window_slot_set_content_view_widget	   (CajaWindowSlot *slot,
+void    baul_window_slot_set_content_view_widget	   (CajaWindowSlot *slot,
         CajaView       *content_view);
-void    caja_window_slot_set_viewed_file		   (CajaWindowSlot *slot,
+void    baul_window_slot_set_viewed_file		   (CajaWindowSlot *slot,
         CajaFile      *file);
-void    caja_window_slot_set_allow_stop		   (CajaWindowSlot *slot,
+void    baul_window_slot_set_allow_stop		   (CajaWindowSlot *slot,
         gboolean	    allow_stop);
-void    caja_window_slot_set_status			   (CajaWindowSlot *slot,
+void    baul_window_slot_set_status			   (CajaWindowSlot *slot,
         const char	 *status);
 
-void    caja_window_slot_add_extra_location_widget     (CajaWindowSlot *slot,
+void    baul_window_slot_add_extra_location_widget     (CajaWindowSlot *slot,
         GtkWidget       *widget);
-void    caja_window_slot_remove_extra_location_widgets (CajaWindowSlot *slot);
+void    baul_window_slot_remove_extra_location_widgets (CajaWindowSlot *slot);
 
-void    caja_window_slot_add_current_location_to_history_list (CajaWindowSlot *slot);
+void    baul_window_slot_add_current_location_to_history_list (CajaWindowSlot *slot);
 
-void    caja_window_slot_is_in_active_pane (CajaWindowSlot *slot, gboolean is_active);
+void    baul_window_slot_is_in_active_pane (CajaWindowSlot *slot, gboolean is_active);
 
 #endif /* CAJA_WINDOW_SLOT_H */

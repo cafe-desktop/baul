@@ -24,9 +24,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "caja-undostack-manager.h"
-#include "caja-file-operations.h"
-#include "caja-file.h"
+#include "baul-undostack-manager.h"
+#include "baul-file-operations.h"
+#include "baul-file.h"
 #include <gio/gio.h>
 #include <glib/gprintf.h>
 #include <glib-object.h>
@@ -112,23 +112,23 @@ enum
   PROP_UNDOSTACK_MANAGER_0, PROP_UNDO_LEVELS, PROP_CONFIRM_DELETE
 };
 
-static void caja_undostack_manager_set_property (GObject * object,
+static void baul_undostack_manager_set_property (GObject * object,
     guint prop_id, const GValue * value, GParamSpec * pspec);
 
-static void caja_undostack_manager_get_property (GObject * object,
+static void baul_undostack_manager_get_property (GObject * object,
     guint prop_id, GValue * value, GParamSpec * pspec);
 
 /* *****************************************************************
  Destructors prototypes
  ***************************************************************** */
-static void caja_undostack_manager_finalize (GObject * object);
+static void baul_undostack_manager_finalize (GObject * object);
 
-static void caja_undostack_manager_dispose (GObject * object);
+static void baul_undostack_manager_dispose (GObject * object);
 
 /* *****************************************************************
  Type definition
  ***************************************************************** */
-G_DEFINE_TYPE_WITH_PRIVATE (CajaUndoStackManager, caja_undostack_manager,
+G_DEFINE_TYPE_WITH_PRIVATE (CajaUndoStackManager, baul_undostack_manager,
     G_TYPE_OBJECT);
 
 /* *****************************************************************
@@ -209,7 +209,7 @@ static GHashTable *retrieve_files_to_restore (GHashTable * trashed);
  Base functions
  ***************************************************************** */
 static void
-caja_undostack_manager_class_init (CajaUndoStackManagerClass * klass)
+baul_undostack_manager_class_init (CajaUndoStackManagerClass * klass)
 {
   GParamSpec *undo_levels;
   GParamSpec *confirm_delete;
@@ -228,8 +228,8 @@ caja_undostack_manager_class_init (CajaUndoStackManagerClass * klass)
   /* Set properties get/set methods */
   g_object_class = G_OBJECT_CLASS (klass);
 
-  g_object_class->set_property = caja_undostack_manager_set_property;
-  g_object_class->get_property = caja_undostack_manager_get_property;
+  g_object_class->set_property = baul_undostack_manager_set_property;
+  g_object_class->get_property = baul_undostack_manager_get_property;
 
   /* Install properties */
   g_object_class_install_property (g_object_class, PROP_UNDO_LEVELS,
@@ -246,16 +246,16 @@ caja_undostack_manager_class_init (CajaUndoStackManagerClass * klass)
       g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE, 1, G_TYPE_POINTER);
 
   /* Hook deconstructors */
-  g_object_class->dispose = caja_undostack_manager_dispose;
-  g_object_class->finalize = caja_undostack_manager_finalize;
+  g_object_class->dispose = baul_undostack_manager_dispose;
+  g_object_class->finalize = baul_undostack_manager_finalize;
 }
 
 static void
-caja_undostack_manager_init (CajaUndoStackManager * self)
+baul_undostack_manager_init (CajaUndoStackManager * self)
 {
   CajaUndoStackManagerPrivate *priv;
 
-  priv = caja_undostack_manager_get_instance_private (self);
+  priv = baul_undostack_manager_get_instance_private (self);
 
   self->priv = priv;
 
@@ -269,7 +269,7 @@ caja_undostack_manager_init (CajaUndoStackManager * self)
 }
 
 static void
-caja_undostack_manager_dispose (GObject * object)
+baul_undostack_manager_dispose (GObject * object)
 {
   CajaUndoStackManager *self = CAJA_UNDOSTACK_MANAGER (object);
   CajaUndoStackManagerPrivate *priv = self->priv;
@@ -287,20 +287,20 @@ caja_undostack_manager_dispose (GObject * object)
 
   priv->dispose_has_run = TRUE;
 
-  G_OBJECT_CLASS (caja_undostack_manager_parent_class)->dispose (object);
+  G_OBJECT_CLASS (baul_undostack_manager_parent_class)->dispose (object);
 }
 
 static void
-caja_undostack_manager_finalize (GObject * object)
+baul_undostack_manager_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (caja_undostack_manager_parent_class)->finalize (object);
+  G_OBJECT_CLASS (baul_undostack_manager_parent_class)->finalize (object);
 }
 
 /* *****************************************************************
  Property management
  ***************************************************************** */
 static void
-caja_undostack_manager_set_property (GObject * object, guint prop_id,
+baul_undostack_manager_set_property (GObject * object, guint prop_id,
     const GValue * value, GParamSpec * pspec)
 {
   g_return_if_fail (IS_CAJA_UNDOSTACK_MANAGER (object));
@@ -330,7 +330,7 @@ caja_undostack_manager_set_property (GObject * object, guint prop_id,
 }
 
 static void
-caja_undostack_manager_get_property (GObject * object, guint prop_id,
+baul_undostack_manager_get_property (GObject * object, guint prop_id,
     GValue * value, GParamSpec * pspec)
 {
   g_return_if_fail (IS_CAJA_UNDOSTACK_MANAGER (object));
@@ -357,7 +357,7 @@ caja_undostack_manager_get_property (GObject * object, guint prop_id,
  * Returns the undo stack manager instance (singleton pattern)
  ** ****************************************************************/
 CajaUndoStackManager *
-caja_undostack_manager_instance (void)
+baul_undostack_manager_instance (void)
 {
   static CajaUndoStackManager *manager = NULL;
 
@@ -373,7 +373,7 @@ caja_undostack_manager_instance (void)
  * True if undoing / redoing
  ** ****************************************************************/
 gboolean
-caja_undostack_manager_is_undo_redo (CajaUndoStackManager * manager)
+baul_undostack_manager_is_undo_redo (CajaUndoStackManager * manager)
 {
   CajaUndoStackManagerPrivate *priv = manager->priv;
   if (priv->undo_redo_flag) {
@@ -384,7 +384,7 @@ caja_undostack_manager_is_undo_redo (CajaUndoStackManager * manager)
 }
 
 void
-caja_undostack_manager_request_menu_update (CajaUndoStackManager *
+baul_undostack_manager_request_menu_update (CajaUndoStackManager *
     manager)
 {
   do_menu_update (manager);
@@ -394,7 +394,7 @@ caja_undostack_manager_request_menu_update (CajaUndoStackManager *
  * Redoes the last file operation
  ** ****************************************************************/
 void
-caja_undostack_manager_redo (CajaUndoStackManager * manager,
+baul_undostack_manager_redo (CajaUndoStackManager * manager,
     GtkWidget * parent_view, CajaUndostackFinishCallback cb)
 {
   CajaUndoStackManagerPrivate *priv = manager->priv;
@@ -421,7 +421,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
         GList *uris;
 
         uris = construct_gfile_list (action->sources, action->src_dir);
-        caja_file_operations_copy (uris, NULL,
+        baul_file_operations_copy (uris, NULL,
             action->dest_dir, NULL, undo_redo_done_transfer_callback, action);
     	g_list_free_full (uris, g_object_unref);
         break;
@@ -433,7 +433,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
 
         puri = get_uri_parent (action->target_uri);
         new_name = get_uri_basename (action->target_uri);
-        caja_file_operations_new_file_from_template (NULL,
+        baul_file_operations_new_file_from_template (NULL,
             NULL,
             puri,
             new_name, action->template, undo_redo_done_create_callback, action);
@@ -446,7 +446,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
         GList *uris;
 
         uris = construct_gfile_list (action->sources, action->src_dir);
-        caja_file_operations_duplicate (uris, NULL, NULL,
+        baul_file_operations_duplicate (uris, NULL, NULL,
             undo_redo_done_transfer_callback, action);
     	g_list_free_full (uris, g_object_unref);
         break;
@@ -457,7 +457,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
         GList *uris;
 
         uris = construct_gfile_list (action->sources, action->src_dir);
-        caja_file_operations_move (uris, NULL,
+        baul_file_operations_move (uris, NULL,
             action->dest_dir, NULL, undo_redo_done_transfer_callback, action);
     	g_list_free_full (uris, g_object_unref);
         break;
@@ -468,8 +468,8 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
         char *new_name;
 
         new_name = get_uri_basename (action->new_uri);
-        file = caja_file_get_by_uri (action->old_uri);
-        caja_file_rename (file, new_name,
+        file = baul_file_get_by_uri (action->old_uri);
+        baul_file_rename (file, new_name,
             undo_redo_done_rename_callback, action);
         g_object_unref (file);
         g_free (new_name);
@@ -482,7 +482,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
 
         puri = get_uri_parent (action->target_uri);
         new_name = get_uri_basename (action->target_uri);
-        caja_file_operations_new_file (NULL, NULL, puri,
+        baul_file_operations_new_file (NULL, NULL, puri,
             new_name,
             action->template,
             0, undo_redo_done_create_callback, action);
@@ -495,7 +495,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
         char *puri;
 
         puri = get_uri_parent (action->target_uri);
-        caja_file_operations_new_folder (NULL, NULL, puri,
+        baul_file_operations_new_folder (NULL, NULL, puri,
             undo_redo_done_create_callback, action);
         g_free (puri);
         break;
@@ -507,7 +507,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
           GList *uri_to_trash = g_hash_table_get_keys (action->trashed);
           uris = uri_list_to_gfile_list (uri_to_trash);
           priv->undo_redo_flag = TRUE;
-          caja_file_operations_trash_or_delete
+          baul_file_operations_trash_or_delete
               (uris, NULL, undo_redo_done_delete_callback, action);
           g_list_free (uri_to_trash);
     	  g_list_free_full (uris, g_object_unref);
@@ -518,7 +518,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
         GList *uris;
 
         uris = construct_gfile_list (action->sources, action->src_dir);
-        caja_file_operations_link (uris, NULL,
+        baul_file_operations_link (uris, NULL,
             action->dest_dir, NULL, undo_redo_done_transfer_callback, action);
     	g_list_free_full (uris, g_object_unref);
         break;
@@ -527,8 +527,8 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
       {
         CajaFile *file;
 
-        file = caja_file_get_by_uri (action->target_uri);
-        caja_file_set_permissions (file,
+        file = baul_file_get_by_uri (action->target_uri);
+        baul_file_set_permissions (file,
             action->new_permissions, undo_redo_done_rename_callback, action);
         g_object_unref (file);
         break;
@@ -538,7 +538,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
         char *puri;
 
         puri = g_file_get_uri (action->dest_dir);
-        caja_file_set_permissions_recursive (puri,
+        baul_file_set_permissions_recursive (puri,
             action->file_permissions,
             action->file_mask,
             action->dir_permissions,
@@ -550,8 +550,8 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
       {
         CajaFile *file;
 
-        file = caja_file_get_by_uri (action->target_uri);
-        caja_file_set_group (file,
+        file = baul_file_get_by_uri (action->target_uri);
+        baul_file_set_group (file,
             action->new_group_name_or_id,
             undo_redo_done_rename_callback, action);
         g_object_unref (file);
@@ -561,8 +561,8 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
       {
         CajaFile *file;
 
-        file = caja_file_get_by_uri (action->target_uri);
-        caja_file_set_owner (file,
+        file = baul_file_get_by_uri (action->target_uri);
+        baul_file_set_owner (file,
             action->new_user_name_or_id,
             undo_redo_done_rename_callback, action);
         g_object_unref (file);
@@ -582,7 +582,7 @@ caja_undostack_manager_redo (CajaUndoStackManager * manager,
  * Undoes the last file operation
  ** ****************************************************************/
 void
-caja_undostack_manager_undo (CajaUndoStackManager * manager,
+baul_undostack_manager_undo (CajaUndoStackManager * manager,
     GtkWidget * parent_view, CajaUndostackFinishCallback cb)
 {
   CajaUndoStackManagerPrivate *priv = manager->priv;
@@ -615,7 +615,7 @@ caja_undostack_manager_undo (CajaUndoStackManager * manager,
           uris = g_list_reverse (uris); // Deleting must be done in reverse
         }
         if (priv->confirm_delete) {
-          caja_file_operations_delete (uris, NULL,
+          baul_file_operations_delete (uris, NULL,
               undo_redo_done_delete_callback, action);
     	  g_list_free_full (uris, g_object_unref);
         } else {
@@ -636,7 +636,7 @@ caja_undostack_manager_undo (CajaUndoStackManager * manager,
         break;
       case CAJA_UNDOSTACK_RESTOREFROMTRASH:
         uris = construct_gfile_list (action->destinations, action->dest_dir);
-        caja_file_operations_trash_or_delete (uris, NULL,
+        baul_file_operations_trash_or_delete (uris, NULL,
             undo_redo_done_delete_callback, action);
     	g_list_free_full (uris, g_object_unref);
         break;
@@ -671,7 +671,7 @@ caja_undostack_manager_undo (CajaUndoStackManager * manager,
       }
       case CAJA_UNDOSTACK_MOVE:
         uris = construct_gfile_list (action->destinations, action->dest_dir);
-        caja_file_operations_move (uris, NULL,
+        baul_file_operations_move (uris, NULL,
             action->src_dir, NULL, undo_redo_done_transfer_callback, action);
     	g_list_free_full (uris, g_object_unref);
         break;
@@ -681,8 +681,8 @@ caja_undostack_manager_undo (CajaUndoStackManager * manager,
         char *new_name;
 
         new_name = get_uri_basename (action->old_uri);
-        file = caja_file_get_by_uri (action->new_uri);
-        caja_file_rename (file, new_name,
+        file = baul_file_get_by_uri (action->new_uri);
+        baul_file_rename (file, new_name,
             undo_redo_done_rename_callback, action);
         g_object_unref (file);
         g_free (new_name);
@@ -692,8 +692,8 @@ caja_undostack_manager_undo (CajaUndoStackManager * manager,
       {
         CajaFile *file;
 
-        file = caja_file_get_by_uri (action->target_uri);
-        caja_file_set_permissions (file,
+        file = baul_file_get_by_uri (action->target_uri);
+        baul_file_set_permissions (file,
             action->current_permissions,
             undo_redo_done_rename_callback, action);
         g_object_unref (file);
@@ -729,8 +729,8 @@ caja_undostack_manager_undo (CajaUndoStackManager * manager,
       {
         CajaFile *file;
 
-        file = caja_file_get_by_uri (action->target_uri);
-        caja_file_set_group (file,
+        file = baul_file_get_by_uri (action->target_uri);
+        baul_file_set_group (file,
             action->original_group_name_or_id,
             undo_redo_done_rename_callback, action);
         g_object_unref (file);
@@ -740,8 +740,8 @@ caja_undostack_manager_undo (CajaUndoStackManager * manager,
       {
         CajaFile *file;
 
-        file = caja_file_get_by_uri (action->target_uri);
-        caja_file_set_owner (file,
+        file = baul_file_get_by_uri (action->target_uri);
+        baul_file_set_owner (file,
             action->original_user_name_or_id,
             undo_redo_done_rename_callback, action);
         g_object_unref (file);
@@ -761,7 +761,7 @@ caja_undostack_manager_undo (CajaUndoStackManager * manager,
  * Adds an operation to the stack
  ** ****************************************************************/
 void
-caja_undostack_manager_add_action (CajaUndoStackManager * manager,
+baul_undostack_manager_add_action (CajaUndoStackManager * manager,
     CajaUndoStackActionData * action)
 {
   CajaUndoStackManagerPrivate *priv = manager->priv;
@@ -828,7 +828,7 @@ is_destination_uri_action_partof_trashed(GList *trash, GList *g)
  * Callback after emptying the trash
  ** ****************************************************************/
 void
-caja_undostack_manager_trash_has_emptied (CajaUndoStackManager *
+baul_undostack_manager_trash_has_emptied (CajaUndoStackManager *
     manager)
 {
   CajaUndoStackManagerPrivate *priv = manager->priv;
@@ -869,7 +869,7 @@ caja_undostack_manager_trash_has_emptied (CajaUndoStackManager *
  * Returns the modification time for the given file (used for undo trash)
  ** ****************************************************************/
 guint64
-caja_undostack_manager_get_file_modification_time (GFile * file)
+baul_undostack_manager_get_file_modification_time (GFile * file)
 {
   GFileInfo *info;
   guint64 mtime;
@@ -892,7 +892,7 @@ caja_undostack_manager_get_file_modification_time (GFile * file)
  * Returns a new undo data container
  ** ****************************************************************/
 CajaUndoStackActionData *
-caja_undostack_manager_data_new (CajaUndoStackActionType type,
+baul_undostack_manager_data_new (CajaUndoStackActionType type,
     gint items_count)
 {
   CajaUndoStackActionData *data =
@@ -915,7 +915,7 @@ caja_undostack_manager_data_new (CajaUndoStackActionType type,
  * Sets the source directory
  ** ****************************************************************/
 void
-caja_undostack_manager_data_set_src_dir (CajaUndoStackActionData *
+baul_undostack_manager_data_set_src_dir (CajaUndoStackActionData *
     data, GFile * src)
 {
   if (!data)
@@ -928,7 +928,7 @@ caja_undostack_manager_data_set_src_dir (CajaUndoStackActionData *
  * Sets the destination directory
  ** ****************************************************************/
 void
-caja_undostack_manager_data_set_dest_dir (CajaUndoStackActionData *
+baul_undostack_manager_data_set_dest_dir (CajaUndoStackActionData *
     data, GFile * dest)
 {
   if (!data)
@@ -940,7 +940,7 @@ caja_undostack_manager_data_set_dest_dir (CajaUndoStackActionData *
 /** ****************************************************************
  * Pushes an origin, target pair in an existing undo data container
  ** ****************************************************************/
-void caja_undostack_manager_data_add_origin_target_pair
+void baul_undostack_manager_data_add_origin_target_pair
     (CajaUndoStackActionData * data, GFile * origin, GFile * target)
 {
 
@@ -959,7 +959,7 @@ void caja_undostack_manager_data_add_origin_target_pair
  * Pushes an trashed file with modification time in an existing undo data container
  ** ****************************************************************/
 void
-caja_undostack_manager_data_add_trashed_file (CajaUndoStackActionData
+baul_undostack_manager_data_add_trashed_file (CajaUndoStackActionData
     * data, GFile * file, guint64 mtime)
 {
 
@@ -980,7 +980,7 @@ caja_undostack_manager_data_add_trashed_file (CajaUndoStackActionData
 /** ****************************************************************
  * Pushes a recursive permission change data in an existing undo data container
  ** ****************************************************************/
-void caja_undostack_manager_data_add_file_permissions
+void baul_undostack_manager_data_add_file_permissions
     (CajaUndoStackActionData * data, GFile * file, guint32 permission)
 {
 
@@ -1002,7 +1002,7 @@ void caja_undostack_manager_data_add_file_permissions
 /** ****************************************************************
  * Sets the original file permission in an existing undo data container
  ** ****************************************************************/
-void caja_undostack_manager_data_set_file_permissions
+void baul_undostack_manager_data_set_file_permissions
     (CajaUndoStackActionData * data, char *uri,
     guint32 current_permissions, guint32 new_permissions)
 {
@@ -1021,7 +1021,7 @@ void caja_undostack_manager_data_set_file_permissions
 /** ****************************************************************
  * Sets the change owner information in an existing undo data container
  ** ****************************************************************/
-void caja_undostack_manager_data_set_owner_change_information
+void baul_undostack_manager_data_set_owner_change_information
     (CajaUndoStackActionData * data, char *uri,
     const char *current_user, const char *new_user)
 {
@@ -1040,7 +1040,7 @@ void caja_undostack_manager_data_set_owner_change_information
 /** ****************************************************************
  * Sets the change group information in an existing undo data container
  ** ****************************************************************/
-void caja_undostack_manager_data_set_group_change_information
+void baul_undostack_manager_data_set_group_change_information
     (CajaUndoStackActionData * data, char *uri,
     const char *current_group, const char *new_group)
 {
@@ -1059,7 +1059,7 @@ void caja_undostack_manager_data_set_group_change_information
 /** ****************************************************************
  * Sets the permission change mask
  ** ****************************************************************/
-void caja_undostack_manager_data_set_recursive_permissions
+void baul_undostack_manager_data_set_recursive_permissions
     (CajaUndoStackActionData * data, guint32 file_permissions,
     guint32 file_mask, guint32 dir_permissions, guint32 dir_mask)
 {
@@ -1079,7 +1079,7 @@ void caja_undostack_manager_data_set_recursive_permissions
  * Sets create file information
  ** ****************************************************************/
 void
-caja_undostack_manager_data_set_create_data (CajaUndoStackActionData *
+baul_undostack_manager_data_set_create_data (CajaUndoStackActionData *
     data, char *target_uri, char *template)
 {
 
@@ -1095,7 +1095,7 @@ caja_undostack_manager_data_set_create_data (CajaUndoStackActionData *
 /** ****************************************************************
  * Sets rename information
  ** ****************************************************************/
-void caja_undostack_manager_data_set_rename_information
+void baul_undostack_manager_data_set_rename_information
     (CajaUndoStackActionData * data, GFile * old_file, GFile * new_file)
 {
 

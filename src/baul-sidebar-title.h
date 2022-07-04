@@ -33,9 +33,9 @@
 
 #include <eel/eel-background.h>
 
-#include <libcaja-private/caja-file.h>
+#include <libbaul-private/baul-file.h>
 
-#define CAJA_TYPE_SIDEBAR_TITLE caja_sidebar_title_get_type()
+#define CAJA_TYPE_SIDEBAR_TITLE baul_sidebar_title_get_type()
 #define CAJA_SIDEBAR_TITLE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SIDEBAR_TITLE, CajaSidebarTitle))
 #define CAJA_SIDEBAR_TITLE_CLASS(klass) \
@@ -60,18 +60,18 @@ typedef struct
     GtkBoxClass parent_class;
 } CajaSidebarTitleClass;
 
-GType      caja_sidebar_title_get_type          (void);
-GtkWidget *caja_sidebar_title_new               (void);
-void       caja_sidebar_title_set_file          (CajaSidebarTitle *sidebar_title,
+GType      baul_sidebar_title_get_type          (void);
+GtkWidget *baul_sidebar_title_new               (void);
+void       baul_sidebar_title_set_file          (CajaSidebarTitle *sidebar_title,
         CajaFile         *file,
         const char           *initial_text);
-void       caja_sidebar_title_set_text          (CajaSidebarTitle *sidebar_title,
+void       baul_sidebar_title_set_text          (CajaSidebarTitle *sidebar_title,
         const char           *new_title);
-char *     caja_sidebar_title_get_text          (CajaSidebarTitle *sidebar_title);
-gboolean   caja_sidebar_title_hit_test_icon     (CajaSidebarTitle *sidebar_title,
+char *     baul_sidebar_title_get_text          (CajaSidebarTitle *sidebar_title);
+gboolean   baul_sidebar_title_hit_test_icon     (CajaSidebarTitle *sidebar_title,
         int                   x,
         int                   y);
-void       caja_sidebar_title_select_text_color (CajaSidebarTitle *sidebar_title,
+void       baul_sidebar_title_select_text_color (CajaSidebarTitle *sidebar_title,
         					 EelBackground        *background);
 
 #endif /* CAJA_SIDEBAR_TITLE_H */

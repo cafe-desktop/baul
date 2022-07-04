@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2014 MATE team <mate-dev@ml.mate-desktop.org> -->
 <component type="desktop">
- <id>caja.desktop</id>
+ <id>baul.desktop</id>
  <metadata_license>CC0-1.0</metadata_license>
  <project_license>GPL-2.0+</project_license>
  <name>Caja</name>
@@ -21,17 +21,17 @@
  <screenshots>
   <screenshot type="default">
    <image width="960" height="540">
-    https://alexpl.fedorapeople.org/AppData/caja/screens/caja_01.png
+    https://alexpl.fedorapeople.org/AppData/baul/screens/baul_01.png
    </image>
   </screenshot>
   <screenshot>
    <image width="960" height="540">
-    https://alexpl.fedorapeople.org/AppData/caja/screens/caja_02.png
+    https://alexpl.fedorapeople.org/AppData/baul/screens/baul_02.png
    </image>
   </screenshot>
   <screenshot>
    <image width="960" height="540">
-    https://alexpl.fedorapeople.org/AppData/caja/screens/caja_03.png
+    https://alexpl.fedorapeople.org/AppData/baul/screens/baul_03.png
    </image>
   </screenshot>
  </screenshots>

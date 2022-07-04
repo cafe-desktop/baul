@@ -26,7 +26,7 @@
 
 #include <eel/eel-gtk-macros.h>
 
-#include "caja-search-engine-beagle.h"
+#include "baul-search-engine-beagle.h"
 
 typedef struct _BeagleHit BeagleHit;
 typedef struct _BeagleQuery BeagleQuery;
@@ -167,7 +167,7 @@ beagle_client_new (const char *client_name)
 }
 
 G_DEFINE_TYPE (CajaSearchEngineBeagle,
-               caja_search_engine_beagle,
+               baul_search_engine_beagle,
                CAJA_TYPE_SEARCH_ENGINE);
 
 static CajaSearchEngineClass *parent_class = NULL;
@@ -233,7 +233,7 @@ beagle_hits_added (BeagleQuery *query,
         hit_uris = g_list_prepend (hit_uris, (char *)uri);
     }
 
-    caja_search_engine_hits_added (CAJA_SEARCH_ENGINE (engine), hit_uris);
+    baul_search_engine_hits_added (CAJA_SEARCH_ENGINE (engine), hit_uris);
     g_list_free (hit_uris);
 }
 
@@ -254,7 +254,7 @@ beagle_hits_subtracted (BeagleQuery *query,
         hit_uris = g_list_prepend (hit_uris, (char *)list->data);
     }
 
-    caja_search_engine_hits_subtracted (CAJA_SEARCH_ENGINE (engine), hit_uris);
+    baul_search_engine_hits_subtracted (CAJA_SEARCH_ENGINE (engine), hit_uris);
     g_list_free (hit_uris);
 }
 
@@ -271,7 +271,7 @@ beagle_finished (BeagleQuery *query,
     }
 
     engine->details->query_finished = TRUE;
-    caja_search_engine_finished (CAJA_SEARCH_ENGINE (engine));
+    baul_search_engine_finished (CAJA_SEARCH_ENGINE (engine));
 }
 
 static void
@@ -279,11 +279,11 @@ beagle_error (BeagleQuery *query,
               GError *error,
               CajaSearchEngineBeagle *engine)
 {
-    caja_search_engine_error (CAJA_SEARCH_ENGINE (engine), error->message);
+    baul_search_engine_error (CAJA_SEARCH_ENGINE (engine), error->message);
 }
 
 static void
-caja_search_engine_beagle_start (CajaSearchEngine *engine)
+baul_search_engine_beagle_start (CajaSearchEngine *engine)
 {
     CajaSearchEngineBeagle *beagle;
     GError *error;
@@ -315,11 +315,11 @@ caja_search_engine_beagle_start (CajaSearchEngine *engine)
     beagle_query_set_max_hits (beagle->details->current_query,
                                1000);
 
-    text = caja_query_get_text (beagle->details->query);
+    text = baul_query_get_text (beagle->details->query);
     beagle_query_add_text (beagle->details->current_query,
                            text);
 
-    mimetypes = caja_query_get_mime_types (beagle->details->query);
+    mimetypes = baul_query_get_mime_types (beagle->details->query);
     for (l = mimetypes; l != NULL; l = l->next)
     {
         char* temp;
@@ -331,12 +331,12 @@ caja_search_engine_beagle_start (CajaSearchEngine *engine)
         g_free (temp);
     }
 
-    beagle->details->current_query_uri_prefix = caja_query_get_location (beagle->details->query);
+    beagle->details->current_query_uri_prefix = baul_query_get_location (beagle->details->query);
 
     if (!beagle_client_send_request_async (beagle->details->client,
                                            BEAGLE_REQUEST (beagle->details->current_query), &error))
     {
-        caja_search_engine_error (engine, error->message);
+        baul_search_engine_error (engine, error->message);
         g_error_free (error);
     }
 
@@ -346,7 +346,7 @@ caja_search_engine_beagle_start (CajaSearchEngine *engine)
 }
 
 static void
-caja_search_engine_beagle_stop (CajaSearchEngine *engine)
+baul_search_engine_beagle_stop (CajaSearchEngine *engine)
 {
     CajaSearchEngineBeagle *beagle;
 
@@ -362,13 +362,13 @@ caja_search_engine_beagle_stop (CajaSearchEngine *engine)
 }
 
 static gboolean
-caja_search_engine_beagle_is_indexed (CajaSearchEngine *engine)
+baul_search_engine_beagle_is_indexed (CajaSearchEngine *engine)
 {
     return TRUE;
 }
 
 static void
-caja_search_engine_beagle_set_query (CajaSearchEngine *engine, CajaQuery *query)
+baul_search_engine_beagle_set_query (CajaSearchEngine *engine, CajaQuery *query)
 {
     CajaSearchEngineBeagle *beagle;
 
@@ -388,7 +388,7 @@ caja_search_engine_beagle_set_query (CajaSearchEngine *engine, CajaQuery *query)
 }
 
 static void
-caja_search_engine_beagle_class_init (CajaSearchEngineBeagleClass *class)
+baul_search_engine_beagle_class_init (CajaSearchEngineBeagleClass *class)
 {
     GObjectClass *gobject_class;
     CajaSearchEngineClass *engine_class;
@@ -399,21 +399,21 @@ caja_search_engine_beagle_class_init (CajaSearchEngineBeagleClass *class)
     gobject_class->finalize = finalize;
 
     engine_class = CAJA_SEARCH_ENGINE_CLASS (class);
-    engine_class->set_query = caja_search_engine_beagle_set_query;
-    engine_class->start = caja_search_engine_beagle_start;
-    engine_class->stop = caja_search_engine_beagle_stop;
-    engine_class->is_indexed = caja_search_engine_beagle_is_indexed;
+    engine_class->set_query = baul_search_engine_beagle_set_query;
+    engine_class->start = baul_search_engine_beagle_start;
+    engine_class->stop = baul_search_engine_beagle_stop;
+    engine_class->is_indexed = baul_search_engine_beagle_is_indexed;
 }
 
 static void
-caja_search_engine_beagle_init (CajaSearchEngineBeagle *engine)
+baul_search_engine_beagle_init (CajaSearchEngineBeagle *engine)
 {
     engine->details = g_new0 (CajaSearchEngineBeagleDetails, 1);
 }
 
 
 CajaSearchEngine *
-caja_search_engine_beagle_new (void)
+baul_search_engine_beagle_new (void)
 {
     CajaSearchEngineBeagle *engine;
     BeagleClient *client;

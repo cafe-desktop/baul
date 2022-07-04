@@ -33,8 +33,8 @@
 #include <eel/eel-gdk-extensions.h>
 #include <eel/eel-gtk-macros.h>
 
-#include "caja-entry.h"
-#include "caja-global-preferences.h"
+#include "baul-entry.h"
+#include "baul-global-preferences.h"
 
 struct CajaEntryDetails
 {
@@ -52,16 +52,16 @@ enum
 };
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static void caja_entry_editable_init (GtkEditableInterface *iface);
+static void baul_entry_editable_init (GtkEditableInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CajaEntry, caja_entry, GTK_TYPE_ENTRY,
+G_DEFINE_TYPE_WITH_CODE (CajaEntry, baul_entry, GTK_TYPE_ENTRY,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
-                                 caja_entry_editable_init));
+                                 baul_entry_editable_init));
 
 static GtkEditableInterface *parent_editable_interface = NULL;
 
 static void
-caja_entry_init (CajaEntry *entry)
+baul_entry_init (CajaEntry *entry)
 {
     entry->details = g_new0 (CajaEntryDetails, 1);
 
@@ -69,13 +69,13 @@ caja_entry_init (CajaEntry *entry)
 }
 
 GtkWidget *
-caja_entry_new (void)
+baul_entry_new (void)
 {
     return gtk_widget_new (CAJA_TYPE_ENTRY, NULL);
 }
 
 static void
-caja_entry_finalize (GObject *object)
+baul_entry_finalize (GObject *object)
 {
     CajaEntry *entry;
 
@@ -88,11 +88,11 @@ caja_entry_finalize (GObject *object)
 
     g_free (entry->details);
 
-    G_OBJECT_CLASS (caja_entry_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_entry_parent_class)->finalize (object);
 }
 
 static gboolean
-caja_entry_key_press (GtkWidget *widget, GdkEventKey *event)
+baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
 {
     CajaEntry *entry;
     GtkEditable *editable;
@@ -132,7 +132,7 @@ caja_entry_key_press (GtkWidget *widget, GdkEventKey *event)
 
     old_has = gtk_editable_get_selection_bounds (editable, NULL, NULL);
 
-    result = GTK_WIDGET_CLASS (caja_entry_parent_class)->key_press_event (widget, event);
+    result = GTK_WIDGET_CLASS (baul_entry_parent_class)->key_press_event (widget, event);
 
     /* Pressing a key usually changes the selection if there is a selection.
      * If there is not selection, we can save work by not emitting a signal.
@@ -151,7 +151,7 @@ caja_entry_key_press (GtkWidget *widget, GdkEventKey *event)
 }
 
 static gboolean
-caja_entry_motion_notify (GtkWidget *widget, GdkEventMotion *event)
+baul_entry_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 {
     int result;
     gboolean old_had, new_had;
@@ -162,7 +162,7 @@ caja_entry_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 
     old_had = gtk_editable_get_selection_bounds (editable, &old_start, &old_end);
 
-    result = GTK_WIDGET_CLASS (caja_entry_parent_class)->motion_notify_event (widget, event);
+    result = GTK_WIDGET_CLASS (baul_entry_parent_class)->motion_notify_event (widget, event);
 
     /* Send a signal if dragging the mouse caused the selection to change. */
     if (result)
@@ -178,14 +178,14 @@ caja_entry_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 }
 
 /**
- * caja_entry_select_all
+ * baul_entry_select_all
  *
  * Select all text, leaving the text cursor position at the end.
  *
  * @entry: A CajaEntry
  **/
 void
-caja_entry_select_all (CajaEntry *entry)
+baul_entry_select_all (CajaEntry *entry)
 {
     g_return_if_fail (CAJA_IS_ENTRY (entry));
 
@@ -200,7 +200,7 @@ select_all_at_idle (gpointer callback_data)
 
     entry = CAJA_ENTRY (callback_data);
 
-    caja_entry_select_all (entry);
+    baul_entry_select_all (entry);
 
     entry->details->select_idle_id = 0;
 
@@ -208,7 +208,7 @@ select_all_at_idle (gpointer callback_data)
 }
 
 /**
- * caja_entry_select_all_at_idle
+ * baul_entry_select_all_at_idle
  *
  * Select all text at the next idle, not immediately.
  * This is useful when reacting to a key press, because
@@ -218,7 +218,7 @@ select_all_at_idle (gpointer callback_data)
  * @entry: A CajaEntry
  **/
 void
-caja_entry_select_all_at_idle (CajaEntry *entry)
+baul_entry_select_all_at_idle (CajaEntry *entry)
 {
     g_return_if_fail (CAJA_IS_ENTRY (entry));
 
@@ -234,7 +234,7 @@ caja_entry_select_all_at_idle (CajaEntry *entry)
 }
 
 /**
- * caja_entry_set_text
+ * baul_entry_set_text
  *
  * This function wraps gtk_entry_set_text.  It sets undo_registered
  * to TRUE and preserves the old value for a later restore.  This is
@@ -246,7 +246,7 @@ caja_entry_select_all_at_idle (CajaEntry *entry)
  **/
 
 void
-caja_entry_set_text (CajaEntry *entry, const gchar *text)
+baul_entry_set_text (CajaEntry *entry, const gchar *text)
 {
     g_return_if_fail (CAJA_IS_ENTRY (entry));
 
@@ -258,7 +258,7 @@ caja_entry_set_text (CajaEntry *entry, const gchar *text)
 }
 
 static void
-caja_entry_set_selection_bounds (GtkEditable *editable,
+baul_entry_set_selection_bounds (GtkEditable *editable,
                                  int start_pos,
                                  int end_pos)
 {
@@ -268,12 +268,12 @@ caja_entry_set_selection_bounds (GtkEditable *editable,
 }
 
 static gboolean
-caja_entry_button_press (GtkWidget *widget,
+baul_entry_button_press (GtkWidget *widget,
                          GdkEventButton *event)
 {
     gboolean result;
 
-    result = GTK_WIDGET_CLASS (caja_entry_parent_class)->button_press_event (widget, event);
+    result = GTK_WIDGET_CLASS (baul_entry_parent_class)->button_press_event (widget, event);
 
     if (result)
     {
@@ -284,12 +284,12 @@ caja_entry_button_press (GtkWidget *widget,
 }
 
 static gboolean
-caja_entry_button_release (GtkWidget *widget,
+baul_entry_button_release (GtkWidget *widget,
                            GdkEventButton *event)
 {
     gboolean result;
 
-    result = GTK_WIDGET_CLASS (caja_entry_parent_class)->button_release_event (widget, event);
+    result = GTK_WIDGET_CLASS (baul_entry_parent_class)->button_release_event (widget, event);
 
     if (result)
     {
@@ -300,7 +300,7 @@ caja_entry_button_release (GtkWidget *widget,
 }
 
 static void
-caja_entry_insert_text (GtkEditable *editable, const gchar *text,
+baul_entry_insert_text (GtkEditable *editable, const gchar *text,
                         int length, int *position)
 {
     CajaEntry *entry;
@@ -319,7 +319,7 @@ caja_entry_insert_text (GtkEditable *editable, const gchar *text,
 }
 
 static void
-caja_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
+baul_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
 {
     CajaEntry *entry;
 
@@ -345,7 +345,7 @@ caja_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
  * gtk+/gtkselection.c, gtk_selection_clear.
  */
 static gboolean
-caja_entry_selection_clear (GtkWidget *widget,
+baul_entry_selection_clear (GtkWidget *widget,
                             GdkEventSelection *event)
 {
     g_assert (CAJA_IS_ENTRY (widget));
@@ -355,17 +355,17 @@ caja_entry_selection_clear (GtkWidget *widget,
         return FALSE;
     }
 
-    return GTK_WIDGET_CLASS (caja_entry_parent_class)->selection_clear_event (widget, event);
+    return GTK_WIDGET_CLASS (baul_entry_parent_class)->selection_clear_event (widget, event);
 }
 
 static void
-caja_entry_editable_init (GtkEditableInterface *iface)
+baul_entry_editable_init (GtkEditableInterface *iface)
 {
     parent_editable_interface = g_type_interface_peek_parent (iface);
 
-    iface->insert_text = caja_entry_insert_text;
-    iface->delete_text = caja_entry_delete_text;
-    iface->set_selection_bounds = caja_entry_set_selection_bounds;
+    iface->insert_text = baul_entry_insert_text;
+    iface->delete_text = baul_entry_delete_text;
+    iface->set_selection_bounds = baul_entry_set_selection_bounds;
 
     /* Otherwise we might need some memcpy loving */
     g_assert (iface->do_insert_text != NULL);
@@ -374,7 +374,7 @@ caja_entry_editable_init (GtkEditableInterface *iface)
 }
 
 static void
-caja_entry_class_init (CajaEntryClass *class)
+baul_entry_class_init (CajaEntryClass *class)
 {
     GtkWidgetClass *widget_class;
     GObjectClass *gobject_class;
@@ -382,13 +382,13 @@ caja_entry_class_init (CajaEntryClass *class)
     widget_class = GTK_WIDGET_CLASS (class);
     gobject_class = G_OBJECT_CLASS (class);
 
-    widget_class->button_press_event = caja_entry_button_press;
-    widget_class->button_release_event = caja_entry_button_release;
-    widget_class->key_press_event = caja_entry_key_press;
-    widget_class->motion_notify_event = caja_entry_motion_notify;
-    widget_class->selection_clear_event = caja_entry_selection_clear;
+    widget_class->button_press_event = baul_entry_button_press;
+    widget_class->button_release_event = baul_entry_button_release;
+    widget_class->key_press_event = baul_entry_key_press;
+    widget_class->motion_notify_event = baul_entry_motion_notify;
+    widget_class->selection_clear_event = baul_entry_selection_clear;
 
-    gobject_class->finalize = caja_entry_finalize;
+    gobject_class->finalize = baul_entry_finalize;
 
     /* Set up signals */
     signals[USER_CHANGED] = g_signal_new
@@ -410,7 +410,7 @@ caja_entry_class_init (CajaEntryClass *class)
 }
 
 void
-caja_entry_set_special_tab_handling (CajaEntry *entry,
+baul_entry_set_special_tab_handling (CajaEntry *entry,
                                      gboolean special_tab_handling)
 {
     g_return_if_fail (CAJA_IS_ENTRY (entry));

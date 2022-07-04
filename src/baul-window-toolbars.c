@@ -22,7 +22,7 @@
  * Author: John Sullivan <sullivan@eazel.com>
  */
 
-/* caja-window-toolbars.c - implementation of caja window toolbar operations,
+/* baul-window-toolbars.c - implementation of baul window toolbar operations,
  * split into separate file just for convenience.
  */
 
@@ -37,29 +37,29 @@
 #include <eel/eel-gtk-extensions.h>
 #include <eel/eel-string.h>
 
-#include <libcaja-extension/caja-menu-provider.h>
-#include <libcaja-private/caja-bookmark.h>
-#include <libcaja-private/caja-extensions.h>
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-ui-utilities.h>
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-module.h>
+#include <libbaul-extension/baul-menu-provider.h>
+#include <libbaul-private/baul-bookmark.h>
+#include <libbaul-private/baul-extensions.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-ui-utilities.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-module.h>
 
-#include "caja-application.h"
-#include "caja-window-manage-views.h"
-#include "caja-window-private.h"
-#include "caja-window.h"
+#include "baul-application.h"
+#include "baul-window-manage-views.h"
+#include "baul-window-private.h"
+#include "baul-window.h"
 
 /* FIXME bugzilla.gnome.org 41243:
  * We should use inheritance instead of these special cases
  * for the desktop window.
  */
-#include "caja-desktop-window.h"
+#include "baul-desktop-window.h"
 
 #define TOOLBAR_PATH_EXTENSION_ACTIONS "/Toolbar/Extra Buttons Placeholder/Extension Actions"
 
 void
-caja_navigation_window_set_spinner_active (CajaNavigationWindow *window,
+baul_navigation_window_set_spinner_active (CajaNavigationWindow *window,
         gboolean allow)
 {
     if (( window->details->spinner_active &&  allow) ||
@@ -77,7 +77,7 @@ caja_navigation_window_set_spinner_active (CajaNavigationWindow *window,
 }
 
 void
-caja_navigation_window_activate_spinner (CajaNavigationWindow *window)
+baul_navigation_window_activate_spinner (CajaNavigationWindow *window)
 {
     GtkToolItem *item;
     GtkWidget *spinner;
@@ -107,9 +107,9 @@ caja_navigation_window_activate_spinner (CajaNavigationWindow *window)
 }
 
 void
-caja_navigation_window_initialize_toolbars (CajaNavigationWindow *window)
+baul_navigation_window_initialize_toolbars (CajaNavigationWindow *window)
 {
-    caja_navigation_window_activate_spinner (window);
+    baul_navigation_window_activate_spinner (window);
 }
 
 
@@ -121,7 +121,7 @@ get_extension_toolbar_items (CajaNavigationWindow *window)
     GList *providers;
     GList *l;
 
-    providers = caja_extensions_get_for_type (CAJA_TYPE_MENU_PROVIDER);
+    providers = baul_extensions_get_for_type (CAJA_TYPE_MENU_PROVIDER);
     items = NULL;
 
     slot = CAJA_WINDOW (window)->details->active_pane->active_slot;
@@ -132,20 +132,20 @@ get_extension_toolbar_items (CajaNavigationWindow *window)
         GList *file_items;
 
         provider = CAJA_MENU_PROVIDER (l->data);
-        file_items = caja_menu_provider_get_toolbar_items
+        file_items = baul_menu_provider_get_toolbar_items
                      (provider,
                       GTK_WIDGET (window),
                       slot->viewed_file);
         items = g_list_concat (items, file_items);
     }
 
-    caja_module_extension_list_free (providers);
+    baul_module_extension_list_free (providers);
 
     return items;
 }
 
 void
-caja_navigation_window_load_extension_toolbar_items (CajaNavigationWindow *window)
+baul_navigation_window_load_extension_toolbar_items (CajaNavigationWindow *window)
 {
     GtkUIManager *ui_manager;
     GList *items;
@@ -156,7 +156,7 @@ caja_navigation_window_load_extension_toolbar_items (CajaNavigationWindow *windo
     CajaMenuItem *item = NULL;
     const gchar *action_name = NULL;
 
-    ui_manager = caja_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
     if (window->details->extensions_toolbar_merge_id != 0)
     {
         gtk_ui_manager_remove_ui (ui_manager,
@@ -187,7 +187,7 @@ caja_navigation_window_load_extension_toolbar_items (CajaNavigationWindow *windo
     {
         item = CAJA_MENU_ITEM (l->data);
 
-        action = caja_toolbar_action_from_menu_item (item, GTK_WIDGET (window));
+        action = baul_toolbar_action_from_menu_item (item, GTK_WIDGET (window));
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         gtk_action_group_add_action (action_group,

@@ -25,13 +25,13 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-file-operations.h>
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-file.h>
-#include <libcaja-private/caja-trash-monitor.h>
+#include <libbaul-private/baul-file-operations.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-file.h>
+#include <libbaul-private/baul-trash-monitor.h>
 
-#include "caja-trash-bar.h"
-#include "caja-window.h"
+#include "baul-trash-bar.h"
+#include "baul-window.h"
 
 #define CAJA_TRASH_BAR_GET_PRIVATE(o)\
 	(G_TYPE_INSTANCE_GET_PRIVATE ((o), CAJA_TYPE_TRASH_BAR, CajaTrashBarPrivate))
@@ -51,7 +51,7 @@ struct _CajaTrashBarPrivate
     gulong selection_handler_id;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaTrashBar, caja_trash_bar, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (CajaTrashBar, baul_trash_bar, GTK_TYPE_BOX);
 
 static void
 restore_button_clicked_cb (GtkWidget *button,
@@ -59,17 +59,17 @@ restore_button_clicked_cb (GtkWidget *button,
 {
     GList *locations, *files, *l;
 
-    locations = caja_window_info_get_selection (CAJA_WINDOW_INFO  (bar->priv->window));
+    locations = baul_window_info_get_selection (CAJA_WINDOW_INFO  (bar->priv->window));
     files = NULL;
 
     for (l = locations; l != NULL; l = l->next)
     {
-        files = g_list_prepend (files, caja_file_get (l->data));
+        files = g_list_prepend (files, baul_file_get (l->data));
     }
 
-    caja_restore_files_from_trash (files, GTK_WINDOW (gtk_widget_get_toplevel (button)));
+    baul_restore_files_from_trash (files, GTK_WINDOW (gtk_widget_get_toplevel (button)));
 
-    caja_file_list_free (files);
+    baul_file_list_free (files);
     g_list_free_full (locations, g_object_unref);
 }
 
@@ -79,7 +79,7 @@ selection_changed_cb (CajaWindow *window,
 {
     int count;
 
-    count = caja_window_info_get_selection_count (CAJA_WINDOW_INFO (window));
+    count = baul_window_info_get_selection_count (CAJA_WINDOW_INFO (window));
 
     gtk_widget_set_sensitive (bar->priv->restore_button, (count > 0));
 }
@@ -95,7 +95,7 @@ connect_window_and_update_button (CajaTrashBar *bar)
 }
 
 static void
-caja_trash_bar_set_property (GObject      *object,
+baul_trash_bar_set_property (GObject      *object,
                              guint         prop_id,
                              const GValue *value,
                              GParamSpec   *pspec)
@@ -117,7 +117,7 @@ caja_trash_bar_set_property (GObject      *object,
 }
 
 static void
-caja_trash_bar_finalize (GObject *obj)
+baul_trash_bar_finalize (GObject *obj)
 {
     CajaTrashBar *bar;
 
@@ -128,11 +128,11 @@ caja_trash_bar_finalize (GObject *obj)
         g_signal_handler_disconnect (bar->priv->window, bar->priv->selection_handler_id);
     }
 
-    G_OBJECT_CLASS (caja_trash_bar_parent_class)->finalize (obj);
+    G_OBJECT_CLASS (baul_trash_bar_parent_class)->finalize (obj);
 }
 
 static void
-caja_trash_bar_trash_state_changed (CajaTrashMonitor *trash_monitor,
+baul_trash_bar_trash_state_changed (CajaTrashMonitor *trash_monitor,
                                     gboolean              state,
                                     gpointer              data)
 {
@@ -141,18 +141,18 @@ caja_trash_bar_trash_state_changed (CajaTrashMonitor *trash_monitor,
     bar = CAJA_TRASH_BAR (data);
 
     gtk_widget_set_sensitive (bar->priv->empty_button,
-                              !caja_trash_monitor_is_empty ());
+                              !baul_trash_monitor_is_empty ());
 }
 
 static void
-caja_trash_bar_class_init (CajaTrashBarClass *klass)
+baul_trash_bar_class_init (CajaTrashBarClass *klass)
 {
     GObjectClass *object_class;
 
     object_class = G_OBJECT_CLASS (klass);
 
-    object_class->set_property = caja_trash_bar_set_property;
-    object_class->finalize = caja_trash_bar_finalize;
+    object_class->set_property = baul_trash_bar_set_property;
+    object_class->finalize = baul_trash_bar_finalize;
 
     g_object_class_install_property (object_class,
                                      PROP_WINDOW,
@@ -172,16 +172,16 @@ empty_trash_callback (GtkWidget *button, gpointer data)
 
     window = gtk_widget_get_toplevel (button);
 
-    caja_file_operations_empty_trash (window);
+    baul_file_operations_empty_trash (window);
 }
 
 static void
-caja_trash_bar_init (CajaTrashBar *bar)
+baul_trash_bar_init (CajaTrashBar *bar)
 {
     GtkWidget *label;
     GtkWidget *hbox;
 
-    bar->priv = caja_trash_bar_get_instance_private (bar);
+    bar->priv = baul_trash_bar_get_instance_private (bar);
 
     hbox = GTK_WIDGET (bar);
 
@@ -197,7 +197,7 @@ caja_trash_bar_init (CajaTrashBar *bar)
     gtk_box_pack_end (GTK_BOX (hbox), bar->priv->empty_button, FALSE, FALSE, 0);
 
     gtk_widget_set_sensitive (bar->priv->empty_button,
-                              !caja_trash_monitor_is_empty ());
+                              !baul_trash_monitor_is_empty ());
     gtk_widget_set_tooltip_text (bar->priv->empty_button,
                                  _("Delete all items in the Trash"));
 
@@ -219,15 +219,15 @@ caja_trash_bar_init (CajaTrashBar *bar)
                       G_CALLBACK (restore_button_clicked_cb),
                       bar);
 
-    g_signal_connect_object (caja_trash_monitor_get (),
+    g_signal_connect_object (baul_trash_monitor_get (),
                              "trash_state_changed",
-                             G_CALLBACK (caja_trash_bar_trash_state_changed),
+                             G_CALLBACK (baul_trash_bar_trash_state_changed),
                              bar,
                              0);
 }
 
 GtkWidget *
-caja_trash_bar_new (CajaWindow *window)
+baul_trash_bar_new (CajaWindow *window)
 {
     GObject *bar;
 

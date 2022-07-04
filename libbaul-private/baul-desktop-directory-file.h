@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-desktop-directory-file.h: Subclass of CajaFile to implement the
+   baul-desktop-directory-file.h: Subclass of CajaFile to implement the
    the case of the desktop directory
 
    Copyright (C) 2003 Red Hat, Inc.
@@ -26,9 +26,9 @@
 #ifndef CAJA_DESKTOP_DIRECTORY_FILE_H
 #define CAJA_DESKTOP_DIRECTORY_FILE_H
 
-#include "caja-file.h"
+#include "baul-file.h"
 
-#define CAJA_TYPE_DESKTOP_DIRECTORY_FILE caja_desktop_directory_file_get_type()
+#define CAJA_TYPE_DESKTOP_DIRECTORY_FILE baul_desktop_directory_file_get_type()
 #define CAJA_DESKTOP_DIRECTORY_FILE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_DIRECTORY_FILE, CajaDesktopDirectoryFile))
 #define CAJA_DESKTOP_DIRECTORY_FILE_CLASS(klass) \
@@ -53,6 +53,6 @@ typedef struct
     CajaFileClass parent_slot;
 } CajaDesktopDirectoryFileClass;
 
-GType    caja_desktop_directory_file_get_type    (void);
+GType    baul_desktop_directory_file_get_type    (void);
 
 #endif /* CAJA_DESKTOP_DIRECTORY_FILE_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-file-drag.c - Drag & drop handling code that operated on
+/* baul-file-drag.c - Drag & drop handling code that operated on
    CajaFile objects.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -24,26 +24,26 @@
 */
 
 #include <config.h>
-#include "caja-file-dnd.h"
-#include "caja-desktop-icon-file.h"
+#include "baul-file-dnd.h"
+#include "baul-desktop-icon-file.h"
 
-#include "caja-dnd.h"
-#include "caja-directory.h"
-#include "caja-file-utilities.h"
+#include "baul-dnd.h"
+#include "baul-directory.h"
+#include "baul-file-utilities.h"
 #include <string.h>
 
 static gboolean
-caja_drag_can_accept_files (CajaFile *drop_target_item)
+baul_drag_can_accept_files (CajaFile *drop_target_item)
 {
-    if (caja_file_is_directory (drop_target_item))
+    if (baul_file_is_directory (drop_target_item))
     {
         CajaDirectory *directory;
         gboolean res;
 
         /* target is a directory, accept if editable */
-        directory = caja_directory_get_for_file (drop_target_item);
-        res = caja_directory_is_editable (directory);
-        caja_directory_unref (directory);
+        directory = baul_directory_get_for_file (drop_target_item);
+        res = baul_directory_is_editable (directory);
+        baul_directory_unref (directory);
         return res;
     }
 
@@ -58,13 +58,13 @@ caja_drag_can_accept_files (CajaFile *drop_target_item)
      * errors when the actual copy is attempted due to
      * permissions.
      */
-    if (caja_file_is_caja_link (drop_target_item))
+    if (baul_file_is_baul_link (drop_target_item))
     {
         return TRUE;
     }
 
-    if (caja_is_engrampa_installed () &&
-            caja_file_is_archive (drop_target_item))
+    if (baul_is_engrampa_installed () &&
+            baul_file_is_archive (drop_target_item))
     {
         return TRUE;
     }
@@ -73,20 +73,20 @@ caja_drag_can_accept_files (CajaFile *drop_target_item)
 }
 
 gboolean
-caja_drag_can_accept_item (CajaFile *drop_target_item,
+baul_drag_can_accept_item (CajaFile *drop_target_item,
                            const char *item_uri)
 {
-    if (caja_file_matches_uri (drop_target_item, item_uri))
+    if (baul_file_matches_uri (drop_target_item, item_uri))
     {
         /* can't accept itself */
         return FALSE;
     }
 
-    return caja_drag_can_accept_files (drop_target_item);
+    return baul_drag_can_accept_files (drop_target_item);
 }
 
 gboolean
-caja_drag_can_accept_items (CajaFile *drop_target_item,
+baul_drag_can_accept_items (CajaFile *drop_target_item,
                             const GList *items)
 {
     int max;
@@ -102,7 +102,7 @@ caja_drag_can_accept_items (CajaFile *drop_target_item,
      */
     for (max = 100; items != NULL && max >= 0; items = items->next, max--)
     {
-        if (!caja_drag_can_accept_item (drop_target_item,
+        if (!baul_drag_can_accept_item (drop_target_item,
                                         ((CajaDragSelectionItem *)items->data)->uri))
         {
             return FALSE;
@@ -113,23 +113,23 @@ caja_drag_can_accept_items (CajaFile *drop_target_item,
 }
 
 gboolean
-caja_drag_can_accept_info (CajaFile *drop_target_item,
+baul_drag_can_accept_info (CajaFile *drop_target_item,
                            CajaIconDndTargetType drag_type,
                            const GList *items)
 {
     switch (drag_type)
     {
     case CAJA_ICON_DND_MATE_ICON_LIST:
-        return caja_drag_can_accept_items (drop_target_item, items);
+        return baul_drag_can_accept_items (drop_target_item, items);
 
     case CAJA_ICON_DND_URI_LIST:
     case CAJA_ICON_DND_NETSCAPE_URL:
     case CAJA_ICON_DND_TEXT:
-        return caja_drag_can_accept_files (drop_target_item);
+        return baul_drag_can_accept_files (drop_target_item);
 
     case CAJA_ICON_DND_XDNDDIRECTSAVE:
     case CAJA_ICON_DND_RAW:
-        return caja_drag_can_accept_files (drop_target_item); /* Check if we can accept files at this location */
+        return baul_drag_can_accept_files (drop_target_item); /* Check if we can accept files at this location */
 
     case CAJA_ICON_DND_KEYWORD:
         return TRUE;
@@ -150,7 +150,7 @@ caja_drag_can_accept_info (CajaFile *drop_target_item,
 }
 
 void
-caja_drag_file_receive_dropped_keyword (CajaFile *file,
+baul_drag_file_receive_dropped_keyword (CajaFile *file,
                                         const char *keyword)
 {
     GList *keywords;
@@ -167,7 +167,7 @@ caja_drag_file_receive_dropped_keyword (CajaFile *file,
     {
         GList *word;
 
-        keywords = caja_file_get_keywords (file);
+        keywords = baul_file_get_keywords (file);
         word = g_list_find_custom (keywords, keyword, (GCompareFunc) strcmp);
         if (word == NULL)
         {
@@ -181,6 +181,6 @@ caja_drag_file_receive_dropped_keyword (CajaFile *file,
         }
     }
 
-    caja_file_set_keywords (file, keywords);
+    baul_file_set_keywords (file, keywords);
     g_list_free_full (keywords, g_free);
 }

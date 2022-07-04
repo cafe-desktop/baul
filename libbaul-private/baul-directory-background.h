@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
-   caja-directory-background.h: Helper for the background of a widget
+   baul-directory-background.h: Helper for the background of a widget
                                     that is viewing a particular directory.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -28,11 +28,11 @@
 
 #include <eel/eel-background.h>
 
-#include "caja-file.h"
-#include "caja-icon-container.h"
+#include "baul-file.h"
+#include "baul-icon-container.h"
 
-void     caja_connect_background_to_file_metadata    (GtkWidget         *widget,
+void     baul_connect_background_to_file_metadata    (GtkWidget         *widget,
                                                       CajaFile          *file,
                                                       GdkDragAction      default_drag_action);
 
-void     caja_connect_desktop_background_to_settings (CajaIconContainer *icon_container);
+void     baul_connect_desktop_background_to_settings (CajaIconContainer *icon_container);

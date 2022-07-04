@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-mime-actions.h - uri-specific versions of mime action functions
+/* baul-mime-actions.h - uri-specific versions of mime action functions
 
    Copyright (C) 2000 Eazel, Inc.
 
@@ -27,30 +27,30 @@
 
 #include <gio/gio.h>
 
-#include "caja-file.h"
-#include "caja-window-info.h"
-#include "caja-window-slot-info.h"
+#include "baul-file.h"
+#include "baul-window-info.h"
+#include "baul-window-slot-info.h"
 
-CajaFileAttributes caja_mime_actions_get_required_file_attributes (void);
+CajaFileAttributes baul_mime_actions_get_required_file_attributes (void);
 
-GAppInfo *             caja_mime_get_default_application_for_file     (CajaFile            *file);
-GList *                caja_mime_get_applications_for_file            (CajaFile            *file);
+GAppInfo *             baul_mime_get_default_application_for_file     (CajaFile            *file);
+GList *                baul_mime_get_applications_for_file            (CajaFile            *file);
 
-GAppInfo *             caja_mime_get_default_application_for_files    (GList                   *files);
-GList *                caja_mime_get_applications_for_files           (GList                   *file);
+GAppInfo *             baul_mime_get_default_application_for_files    (GList                   *files);
+GList *                baul_mime_get_applications_for_files           (GList                   *file);
 
-gboolean               caja_mime_has_any_applications_for_file        (CajaFile            *file);
+gboolean               baul_mime_has_any_applications_for_file        (CajaFile            *file);
 
-gboolean               caja_mime_file_opens_in_view                   (CajaFile            *file);
-gboolean               caja_mime_file_opens_in_external_app           (CajaFile            *file);
-void                   caja_mime_activate_files                       (GtkWindow               *parent_window,
+gboolean               baul_mime_file_opens_in_view                   (CajaFile            *file);
+gboolean               baul_mime_file_opens_in_external_app           (CajaFile            *file);
+void                   baul_mime_activate_files                       (GtkWindow               *parent_window,
         CajaWindowSlotInfo  *slot_info,
         GList                   *files,
         const char              *launch_directory,
         CajaWindowOpenMode   mode,
         CajaWindowOpenFlags  flags,
         gboolean                 user_confirmation);
-void                   caja_mime_activate_file                        (GtkWindow               *parent_window,
+void                   baul_mime_activate_file                        (GtkWindow               *parent_window,
         CajaWindowSlotInfo  *slot_info,
         CajaFile            *file,
         const char              *launch_directory,

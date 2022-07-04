@@ -43,10 +43,10 @@
 #include <eel/eel-graphic-effects.h>
 #include <eel/eel-gtk-extensions.h>
 
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-global-preferences.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-global-preferences.h>
 
-#include "caja-zoom-control.h"
+#include "baul-zoom-control.h"
 
 enum
 {
@@ -80,21 +80,21 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 static gpointer accessible_parent_class;
 
-static const char * const caja_zoom_control_accessible_action_names[] =
+static const char * const baul_zoom_control_accessible_action_names[] =
 {
     N_("Zoom In"),
     N_("Zoom Out"),
     N_("Zoom to Default"),
 };
 
-static const int caja_zoom_control_accessible_action_signals[] =
+static const int baul_zoom_control_accessible_action_signals[] =
 {
     ZOOM_IN,
     ZOOM_OUT,
     ZOOM_TO_DEFAULT,
 };
 
-static const char * const caja_zoom_control_accessible_action_descriptions[] =
+static const char * const baul_zoom_control_accessible_action_descriptions[] =
 {
     N_("Increase the view size"),
     N_("Decrease the view size"),
@@ -103,21 +103,21 @@ static const char * const caja_zoom_control_accessible_action_descriptions[] =
 
 static GtkMenu *create_zoom_menu (CajaZoomControl *zoom_control);
 
-static GType caja_zoom_control_accessible_get_type (void);
+static GType baul_zoom_control_accessible_get_type (void);
 
 /* button assignments */
 #define CONTEXTUAL_MENU_BUTTON 3
 
-#define NUM_ACTIONS ((int)G_N_ELEMENTS (caja_zoom_control_accessible_action_names))
+#define NUM_ACTIONS ((int)G_N_ELEMENTS (baul_zoom_control_accessible_action_names))
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaZoomControl, caja_zoom_control, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (CajaZoomControl, baul_zoom_control, GTK_TYPE_BOX);
 
 static void
-caja_zoom_control_finalize (GObject *object)
+baul_zoom_control_finalize (GObject *object)
 {
     g_list_free (CAJA_ZOOM_CONTROL (object)->details->preferred_zoom_levels);
 
-    G_OBJECT_CLASS (caja_zoom_control_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_zoom_control_parent_class)->finalize (object);
 }
 
 static void
@@ -156,7 +156,7 @@ zoom_popup_menu (GtkWidget *widget, CajaZoomControl *zoom_control)
 
 /* handle button presses */
 static gboolean
-caja_zoom_control_button_press_event (GtkWidget *widget,
+baul_zoom_control_button_press_event (GtkWidget *widget,
                                       GdkEventButton *event,
                                       CajaZoomControl *zoom_control)
 {
@@ -175,8 +175,8 @@ caja_zoom_control_button_press_event (GtkWidget *widget,
        The zoomable will call back with the new level.
        Actually, the callback goes to the viewframe containing the
        zoomable which, in turn, emits zoom_level_changed,
-       which someone (e.g. caja_window) picks up and handles by
-       calling into is - caja_zoom_control_set_zoom_level.
+       which someone (e.g. baul_window) picks up and handles by
+       calling into is - baul_zoom_control_set_zoom_level.
     */
 
     return FALSE;
@@ -186,7 +186,7 @@ static void
 zoom_out_clicked (GtkButton *button,
                   CajaZoomControl *zoom_control)
 {
-    if (caja_zoom_control_can_zoom_out (zoom_control))
+    if (baul_zoom_control_can_zoom_out (zoom_control))
     {
         g_signal_emit (G_OBJECT (zoom_control), signals[ZOOM_OUT], 0);
     }
@@ -196,7 +196,7 @@ static void
 zoom_in_clicked (GtkButton *button,
                  CajaZoomControl *zoom_control)
 {
-    if (caja_zoom_control_can_zoom_in (zoom_control))
+    if (baul_zoom_control_can_zoom_in (zoom_control))
     {
         g_signal_emit (G_OBJECT (zoom_control), signals[ZOOM_IN], 0);
     }
@@ -228,12 +228,12 @@ label_style_set_callback (GtkWidget *label,
 }
 
 static void
-caja_zoom_control_init (CajaZoomControl *zoom_control)
+baul_zoom_control_init (CajaZoomControl *zoom_control)
 {
     GtkWidget *image;
     int i;
 
-    zoom_control->details = caja_zoom_control_get_instance_private (zoom_control);
+    zoom_control->details = baul_zoom_control_get_instance_private (zoom_control);
 
     zoom_control->details->zoom_level = CAJA_ZOOM_LEVEL_STANDARD;
     zoom_control->details->min_zoom_level = CAJA_ZOOM_LEVEL_SMALLEST;
@@ -280,7 +280,7 @@ caja_zoom_control_init (CajaZoomControl *zoom_control)
 
     g_signal_connect (G_OBJECT (zoom_control->details->zoom_button),
                       "button-press-event",
-                      G_CALLBACK (caja_zoom_control_button_press_event),
+                      G_CALLBACK (baul_zoom_control_button_press_event),
                       zoom_control);
 
     g_signal_connect (G_OBJECT (zoom_control->details->zoom_button),
@@ -325,23 +325,23 @@ caja_zoom_control_init (CajaZoomControl *zoom_control)
 
 /* Allocate a new zoom control */
 GtkWidget *
-caja_zoom_control_new (void)
+baul_zoom_control_new (void)
 {
-    return gtk_widget_new (caja_zoom_control_get_type (), NULL);
+    return gtk_widget_new (baul_zoom_control_get_type (), NULL);
 }
 
 static void
-caja_zoom_control_redraw (CajaZoomControl *zoom_control)
+baul_zoom_control_redraw (CajaZoomControl *zoom_control)
 {
     int percent;
     char *num_str;
 
     gtk_widget_set_sensitive (zoom_control->details->zoom_in,
-                              caja_zoom_control_can_zoom_in (zoom_control));
+                              baul_zoom_control_can_zoom_in (zoom_control));
     gtk_widget_set_sensitive (zoom_control->details->zoom_out,
-                              caja_zoom_control_can_zoom_out (zoom_control));
+                              baul_zoom_control_can_zoom_out (zoom_control));
 
-    percent = floor ((100.0 * caja_get_relative_icon_size_for_zoom_level (zoom_control->details->zoom_level)) + .2);
+    percent = floor ((100.0 * baul_get_relative_icon_size_for_zoom_level (zoom_control->details->zoom_level)) + .2);
     num_str = g_strdup_printf ("%d%%", percent);
     gtk_label_set_text (GTK_LABEL (zoom_control->details->zoom_label), num_str);
     g_free (num_str);
@@ -403,7 +403,7 @@ create_zoom_menu_item (CajaZoomControl *zoom_control, GtkMenu *menu,
      */
     zoom_control->details->marking_menu_items = TRUE;
 
-    percent = floor ((100.0 * caja_get_relative_icon_size_for_zoom_level (zoom_level)) + .5);
+    percent = floor ((100.0 * baul_get_relative_icon_size_for_zoom_level (zoom_level)) + .5);
     item_text = g_strdup_printf ("%d%%", percent);
 
     radio_item_group = previous_radio_item == NULL
@@ -447,19 +447,19 @@ create_zoom_menu (CajaZoomControl *zoom_control)
 }
 
 static void
-caja_zoom_control_change_value (CajaZoomControl *zoom_control,
+baul_zoom_control_change_value (CajaZoomControl *zoom_control,
                                 GtkScrollType scroll)
 {
     switch (scroll)
     {
     case GTK_SCROLL_STEP_DOWN :
-        if (caja_zoom_control_can_zoom_out (zoom_control))
+        if (baul_zoom_control_can_zoom_out (zoom_control))
         {
             g_signal_emit (zoom_control, signals[ZOOM_OUT], 0);
         }
         break;
     case GTK_SCROLL_STEP_UP :
-        if (caja_zoom_control_can_zoom_in (zoom_control))
+        if (baul_zoom_control_can_zoom_in (zoom_control))
         {
             g_signal_emit (zoom_control, signals[ZOOM_IN], 0);
         }
@@ -470,15 +470,15 @@ caja_zoom_control_change_value (CajaZoomControl *zoom_control,
 }
 
 void
-caja_zoom_control_set_zoom_level (CajaZoomControl *zoom_control,
+baul_zoom_control_set_zoom_level (CajaZoomControl *zoom_control,
                                   CajaZoomLevel zoom_level)
 {
     zoom_control->details->zoom_level = zoom_level;
-    caja_zoom_control_redraw (zoom_control);
+    baul_zoom_control_redraw (zoom_control);
 }
 
 void
-caja_zoom_control_set_parameters (CajaZoomControl *zoom_control,
+baul_zoom_control_set_parameters (CajaZoomControl *zoom_control,
                                   CajaZoomLevel min_zoom_level,
                                   CajaZoomLevel max_zoom_level,
                                   gboolean has_min_zoom_level,
@@ -495,41 +495,41 @@ caja_zoom_control_set_parameters (CajaZoomControl *zoom_control,
     g_list_free (zoom_control->details->preferred_zoom_levels);
     zoom_control->details->preferred_zoom_levels = zoom_levels;
 
-    caja_zoom_control_redraw (zoom_control);
+    baul_zoom_control_redraw (zoom_control);
 }
 
 CajaZoomLevel
-caja_zoom_control_get_zoom_level (CajaZoomControl *zoom_control)
+baul_zoom_control_get_zoom_level (CajaZoomControl *zoom_control)
 {
     return zoom_control->details->zoom_level;
 }
 
 CajaZoomLevel
-caja_zoom_control_get_min_zoom_level (CajaZoomControl *zoom_control)
+baul_zoom_control_get_min_zoom_level (CajaZoomControl *zoom_control)
 {
     return zoom_control->details->min_zoom_level;
 }
 
 CajaZoomLevel
-caja_zoom_control_get_max_zoom_level (CajaZoomControl *zoom_control)
+baul_zoom_control_get_max_zoom_level (CajaZoomControl *zoom_control)
 {
     return zoom_control->details->max_zoom_level;
 }
 
 gboolean
-caja_zoom_control_has_min_zoom_level (CajaZoomControl *zoom_control)
+baul_zoom_control_has_min_zoom_level (CajaZoomControl *zoom_control)
 {
     return zoom_control->details->has_min_zoom_level;
 }
 
 gboolean
-caja_zoom_control_has_max_zoom_level (CajaZoomControl *zoom_control)
+baul_zoom_control_has_max_zoom_level (CajaZoomControl *zoom_control)
 {
     return zoom_control->details->has_max_zoom_level;
 }
 
 gboolean
-caja_zoom_control_can_zoom_in (CajaZoomControl *zoom_control)
+baul_zoom_control_can_zoom_in (CajaZoomControl *zoom_control)
 {
     return !zoom_control->details->has_max_zoom_level ||
            (zoom_control->details->zoom_level
@@ -537,7 +537,7 @@ caja_zoom_control_can_zoom_in (CajaZoomControl *zoom_control)
 }
 
 gboolean
-caja_zoom_control_can_zoom_out (CajaZoomControl *zoom_control)
+baul_zoom_control_can_zoom_out (CajaZoomControl *zoom_control)
 {
     return !zoom_control->details->has_min_zoom_level ||
            (zoom_control->details->zoom_level
@@ -545,7 +545,7 @@ caja_zoom_control_can_zoom_out (CajaZoomControl *zoom_control)
 }
 
 static gboolean
-caja_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
+baul_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
 {
     CajaZoomControl *zoom_control;
 
@@ -557,12 +557,12 @@ caja_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
     }
 
     if (event->direction == GDK_SCROLL_DOWN &&
-            caja_zoom_control_can_zoom_out (zoom_control))
+            baul_zoom_control_can_zoom_out (zoom_control))
     {
         g_signal_emit (widget, signals[ZOOM_OUT], 0);
     }
     else if (event->direction == GDK_SCROLL_UP &&
-             caja_zoom_control_can_zoom_in (zoom_control))
+             baul_zoom_control_can_zoom_in (zoom_control))
     {
         g_signal_emit (widget, signals[ZOOM_IN], 0);
     }
@@ -570,8 +570,8 @@ caja_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
     /* We don't change our state (to reflect the new zoom) here. The zoomable will
      * call back with the new level. Actually, the callback goes to the view-frame
      * containing the zoomable which, in turn, emits zoom_level_changed, which
-     * someone (e.g. caja_window) picks up and handles by calling into us -
-     * caja_zoom_control_set_zoom_level.
+     * someone (e.g. baul_window) picks up and handles by calling into us -
+     * baul_zoom_control_set_zoom_level.
      */
     return TRUE;
 }
@@ -579,22 +579,22 @@ caja_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
 
 
 static void
-caja_zoom_control_class_init (CajaZoomControlClass *class)
+baul_zoom_control_class_init (CajaZoomControlClass *class)
 {
     GtkWidgetClass *widget_class;
     GtkBindingSet *binding_set;
 
-    G_OBJECT_CLASS (class)->finalize = caja_zoom_control_finalize;
+    G_OBJECT_CLASS (class)->finalize = baul_zoom_control_finalize;
 
     widget_class = GTK_WIDGET_CLASS (class);
 
 
     gtk_widget_class_set_accessible_type (widget_class,
-                                          caja_zoom_control_accessible_get_type ());
+                                          baul_zoom_control_accessible_get_type ());
 
-    widget_class->scroll_event = caja_zoom_control_scroll_event;
+    widget_class->scroll_event = baul_zoom_control_scroll_event;
 
-    class->change_value = caja_zoom_control_change_value;
+    class->change_value = baul_zoom_control_change_value;
 
     signals[ZOOM_IN] =
         g_signal_new ("zoom_in",
@@ -683,7 +683,7 @@ caja_zoom_control_class_init (CajaZoomControlClass *class)
 }
 
 static gboolean
-caja_zoom_control_accessible_do_action (AtkAction *accessible, int i)
+baul_zoom_control_accessible_do_action (AtkAction *accessible, int i)
 {
     GtkWidget *widget;
 
@@ -696,43 +696,43 @@ caja_zoom_control_accessible_do_action (AtkAction *accessible, int i)
     }
 
     g_signal_emit (widget,
-                   signals[caja_zoom_control_accessible_action_signals [i]],
+                   signals[baul_zoom_control_accessible_action_signals [i]],
                    0);
 
     return TRUE;
 }
 
 static int
-caja_zoom_control_accessible_get_n_actions (AtkAction *accessible)
+baul_zoom_control_accessible_get_n_actions (AtkAction *accessible)
 {
 
     return NUM_ACTIONS;
 }
 
-static const char* caja_zoom_control_accessible_action_get_description(AtkAction* accessible, int i)
+static const char* baul_zoom_control_accessible_action_get_description(AtkAction* accessible, int i)
 {
     g_assert(i >= 0 && i < NUM_ACTIONS);
 
-    return _(caja_zoom_control_accessible_action_descriptions[i]);
+    return _(baul_zoom_control_accessible_action_descriptions[i]);
 }
 
-static const char* caja_zoom_control_accessible_action_get_name(AtkAction* accessible, int i)
+static const char* baul_zoom_control_accessible_action_get_name(AtkAction* accessible, int i)
 {
     g_assert (i >= 0 && i < NUM_ACTIONS);
 
-    return _(caja_zoom_control_accessible_action_names[i]);
+    return _(baul_zoom_control_accessible_action_names[i]);
 }
 
-static void caja_zoom_control_accessible_action_interface_init(AtkActionIface* iface)
+static void baul_zoom_control_accessible_action_interface_init(AtkActionIface* iface)
 {
-    iface->do_action = caja_zoom_control_accessible_do_action;
-    iface->get_n_actions = caja_zoom_control_accessible_get_n_actions;
-    iface->get_description = caja_zoom_control_accessible_action_get_description;
-    iface->get_name = caja_zoom_control_accessible_action_get_name;
+    iface->do_action = baul_zoom_control_accessible_do_action;
+    iface->get_n_actions = baul_zoom_control_accessible_get_n_actions;
+    iface->get_description = baul_zoom_control_accessible_action_get_description;
+    iface->get_name = baul_zoom_control_accessible_action_get_name;
 }
 
 static void
-caja_zoom_control_accessible_get_current_value (AtkValue *accessible,
+baul_zoom_control_accessible_get_current_value (AtkValue *accessible,
         GValue *value)
 {
     CajaZoomControl *control;
@@ -750,7 +750,7 @@ caja_zoom_control_accessible_get_current_value (AtkValue *accessible,
 }
 
 static void
-caja_zoom_control_accessible_get_maximum_value (AtkValue *accessible,
+baul_zoom_control_accessible_get_maximum_value (AtkValue *accessible,
         GValue *value)
 {
     CajaZoomControl *control;
@@ -768,7 +768,7 @@ caja_zoom_control_accessible_get_maximum_value (AtkValue *accessible,
 }
 
 static void
-caja_zoom_control_accessible_get_minimum_value (AtkValue *accessible,
+baul_zoom_control_accessible_get_minimum_value (AtkValue *accessible,
         GValue *value)
 {
     CajaZoomControl *control;
@@ -819,7 +819,7 @@ nearest_preferred (CajaZoomControl *zoom_control, CajaZoomLevel value)
 }
 
 static gboolean
-caja_zoom_control_accessible_set_current_value (AtkValue *accessible,
+baul_zoom_control_accessible_set_current_value (AtkValue *accessible,
         const GValue *value)
 {
     CajaZoomControl *control;
@@ -839,26 +839,26 @@ caja_zoom_control_accessible_set_current_value (AtkValue *accessible,
 }
 
 static void
-caja_zoom_control_accessible_value_interface_init (AtkValueIface *iface)
+baul_zoom_control_accessible_value_interface_init (AtkValueIface *iface)
 {
-    iface->get_current_value = caja_zoom_control_accessible_get_current_value;
-    iface->get_maximum_value = caja_zoom_control_accessible_get_maximum_value;
-    iface->get_minimum_value = caja_zoom_control_accessible_get_minimum_value;
-    iface->set_current_value = caja_zoom_control_accessible_set_current_value;
+    iface->get_current_value = baul_zoom_control_accessible_get_current_value;
+    iface->get_maximum_value = baul_zoom_control_accessible_get_maximum_value;
+    iface->get_minimum_value = baul_zoom_control_accessible_get_minimum_value;
+    iface->set_current_value = baul_zoom_control_accessible_set_current_value;
 }
 
-static const char* caja_zoom_control_accessible_get_name(AtkObject* accessible)
+static const char* baul_zoom_control_accessible_get_name(AtkObject* accessible)
 {
     return _("Zoom");
 }
 
-static const char* caja_zoom_control_accessible_get_description(AtkObject* accessible)
+static const char* baul_zoom_control_accessible_get_description(AtkObject* accessible)
 {
     return _("Set the zoom level of the current view");
 }
 
 static void
-caja_zoom_control_accessible_initialize (AtkObject *accessible,
+baul_zoom_control_accessible_initialize (AtkObject *accessible,
         gpointer  data)
 {
     if (ATK_OBJECT_CLASS (accessible_parent_class)->initialize != NULL)
@@ -882,30 +882,30 @@ struct _CajaZoomControlAccessibleClass
 };
 
 G_DEFINE_TYPE_WITH_CODE (CajaZoomControlAccessible,
-                         caja_zoom_control_accessible,
+                         baul_zoom_control_accessible,
                          GTK_TYPE_CONTAINER_ACCESSIBLE,
                          G_IMPLEMENT_INTERFACE (ATK_TYPE_ACTION,
-                                                caja_zoom_control_accessible_action_interface_init)
+                                                baul_zoom_control_accessible_action_interface_init)
                          G_IMPLEMENT_INTERFACE (ATK_TYPE_VALUE,
-                                                caja_zoom_control_accessible_value_interface_init));
+                                                baul_zoom_control_accessible_value_interface_init));
 static void
-caja_zoom_control_accessible_class_init (CajaZoomControlAccessibleClass *klass)
+baul_zoom_control_accessible_class_init (CajaZoomControlAccessibleClass *klass)
 {
     AtkObjectClass *atk_class = ATK_OBJECT_CLASS (klass);
     accessible_parent_class = g_type_class_peek_parent (klass);
 
-    atk_class->get_name = caja_zoom_control_accessible_get_name;
-    atk_class->get_description = caja_zoom_control_accessible_get_description;
-    atk_class->initialize = caja_zoom_control_accessible_initialize;
+    atk_class->get_name = baul_zoom_control_accessible_get_name;
+    atk_class->get_description = baul_zoom_control_accessible_get_description;
+    atk_class->initialize = baul_zoom_control_accessible_initialize;
 }
 
 static void
-caja_zoom_control_accessible_init (CajaZoomControlAccessible *accessible)
+baul_zoom_control_accessible_init (CajaZoomControlAccessible *accessible)
 {
 }
 
 void
-caja_zoom_control_set_active_appearance (CajaZoomControl *zoom_control, gboolean is_active)
+baul_zoom_control_set_active_appearance (CajaZoomControl *zoom_control, gboolean is_active)
 {
     gtk_widget_set_sensitive (gtk_bin_get_child (GTK_BIN (zoom_control->details->zoom_in)), is_active);
     gtk_widget_set_sensitive (gtk_bin_get_child (GTK_BIN (zoom_control->details->zoom_out)), is_active);

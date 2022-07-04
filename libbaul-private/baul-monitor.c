@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-monitor.c: file and directory change monitoring for caja
+   baul-monitor.c: file and directory change monitoring for baul
 
    Copyright (C) 2000, 2001 Eazel, Inc.
 
@@ -25,9 +25,9 @@
 */
 
 #include <config.h>
-#include "caja-monitor.h"
-#include "caja-file-changes-queue.h"
-#include "caja-file-utilities.h"
+#include "baul-monitor.h"
+#include "baul-file-changes-queue.h"
+#include "baul-file-utilities.h"
 
 #include <gio/gio.h>
 
@@ -40,7 +40,7 @@ struct CajaMonitor
 };
 
 gboolean
-caja_monitor_active (void)
+baul_monitor_active (void)
 {
     static gboolean tried_monitor = FALSE;
     static gboolean monitor_success;
@@ -71,7 +71,7 @@ static gboolean call_consume_changes_idle_id = 0;
 static gboolean
 call_consume_changes_idle_cb (gpointer not_used)
 {
-    caja_file_changes_consume_changes (TRUE);
+    baul_file_changes_consume_changes (TRUE);
     call_consume_changes_idle_id = 0;
     return FALSE;
 }
@@ -92,7 +92,7 @@ mount_removed (GVolumeMonitor *volume_monitor,
 {
     CajaMonitor *monitor = user_data;
     if (mount == monitor->mount) {
-        caja_file_changes_queue_file_removed (monitor->location);
+        baul_file_changes_queue_file_removed (monitor->location);
         schedule_call_consume_changes ();
     }
 }
@@ -121,13 +121,13 @@ dir_changed (GFileMonitor* monitor,
         break;
     case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
     case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-        caja_file_changes_queue_file_changed (child);
+        baul_file_changes_queue_file_changed (child);
         break;
     case G_FILE_MONITOR_EVENT_DELETED:
-        caja_file_changes_queue_file_removed (child);
+        baul_file_changes_queue_file_removed (child);
         break;
     case G_FILE_MONITOR_EVENT_CREATED:
-        caja_file_changes_queue_file_added (child);
+        baul_file_changes_queue_file_added (child);
         break;
 
     case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
@@ -144,7 +144,7 @@ dir_changed (GFileMonitor* monitor,
 }
 
 CajaMonitor *
-caja_monitor_directory (GFile *location)
+baul_monitor_directory (GFile *location)
 {
     GFileMonitor *dir_monitor;
     CajaMonitor *ret;
@@ -157,7 +157,7 @@ caja_monitor_directory (GFile *location)
     }
     /*This caused a crash on umounting remote shares
     else if (!g_file_is_native (location)) {
-        ret->mount = caja_get_mounted_mount_for_root (location);
+        ret->mount = baul_get_mounted_mount_for_root (location);
         ret->location = g_object_ref (location);
         ret->volume_monitor = g_volume_monitor_get ();
     }
@@ -181,7 +181,7 @@ caja_monitor_directory (GFile *location)
 }
 
 void
-caja_monitor_cancel (CajaMonitor *monitor)
+baul_monitor_cancel (CajaMonitor *monitor)
 {
     if (monitor->monitor != NULL)
     {

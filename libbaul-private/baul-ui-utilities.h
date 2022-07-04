@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-ui-utilities.h - helper functions for GtkUIManager stuff
+/* baul-ui-utilities.h - helper functions for GtkUIManager stuff
 
    Copyright (C) 2004 Red Hat, Inc.
 
@@ -26,20 +26,20 @@
 
 #include <gtk/gtk.h>
 
-#include <libcaja-extension/caja-menu-item.h>
+#include <libbaul-extension/baul-menu-item.h>
 
-char *      caja_get_ui_directory              (void);
-char *      caja_ui_file                       (const char        *partial_path);
-void        caja_ui_unmerge_ui                 (GtkUIManager      *ui_manager,
+char *      baul_get_ui_directory              (void);
+char *      baul_ui_file                       (const char        *partial_path);
+void        baul_ui_unmerge_ui                 (GtkUIManager      *ui_manager,
         guint             *merge_id,
         GtkActionGroup   **action_group);
-void        caja_ui_prepare_merge_ui           (GtkUIManager      *ui_manager,
+void        baul_ui_prepare_merge_ui           (GtkUIManager      *ui_manager,
         const char        *name,
         guint             *merge_id,
         GtkActionGroup   **action_group);
-GtkAction * caja_action_from_menu_item         (CajaMenuItem  *item, GtkWidget *parent_widget);
-GtkAction * caja_toolbar_action_from_menu_item (CajaMenuItem  *item, GtkWidget *parent_widget);
-const char *caja_ui_string_get                 (const char        *filename);
-void   caja_ui_frame_image                     (GdkPixbuf        **pixbuf);
+GtkAction * baul_action_from_menu_item         (CajaMenuItem  *item, GtkWidget *parent_widget);
+GtkAction * baul_toolbar_action_from_menu_item (CajaMenuItem  *item, GtkWidget *parent_widget);
+const char *baul_ui_string_get                 (const char        *filename);
+void   baul_ui_frame_image                     (GdkPixbuf        **pixbuf);
 
 #endif /* CAJA_UI_UTILITIES_H */

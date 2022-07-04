@@ -28,10 +28,10 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#include "caja-connect-server-dialog.h"
+#include "baul-connect-server-dialog.h"
 
 #define CAJA_TYPE_CONNECT_SERVER_OPERATION\
-	(caja_connect_server_operation_get_type ())
+	(baul_connect_server_operation_get_type ())
 #define CAJA_CONNECT_SERVER_OPERATION(obj)\
   (G_TYPE_CHECK_INSTANCE_CAST ((obj),\
 			       CAJA_TYPE_CONNECT_SERVER_OPERATION,\
@@ -54,10 +54,10 @@ typedef struct {
 	GtkMountOperationClass parent_class;
 } CajaConnectServerOperationClass;
 
-GType caja_connect_server_operation_get_type (void);
+GType baul_connect_server_operation_get_type (void);
 
 GMountOperation *
-caja_connect_server_operation_new (CajaConnectServerDialog *dialog);
+baul_connect_server_operation_new (CajaConnectServerDialog *dialog);
 
 
 #endif /* __CAJA_CONNECT_SERVER_OPERATION_H__ */

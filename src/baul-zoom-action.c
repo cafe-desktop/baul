@@ -29,11 +29,11 @@
 
 #include <eel/eel-gtk-extensions.h>
 
-#include "caja-zoom-action.h"
-#include "caja-zoom-control.h"
-#include "caja-navigation-window.h"
-#include "caja-window-private.h"
-#include "caja-navigation-window-slot.h"
+#include "baul-zoom-action.h"
+#include "baul-zoom-control.h"
+#include "baul-navigation-window.h"
+#include "baul-window-private.h"
+#include "baul-navigation-window-slot.h"
 
 static GObjectClass *parent_class = NULL;
 
@@ -49,7 +49,7 @@ enum
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (CajaZoomAction, caja_zoom_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaZoomAction, baul_zoom_action, GTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 static void
@@ -67,7 +67,7 @@ zoom_changed_callback (CajaWindow *window,
         gtk_widget_show (zoom_control);
         if (can_zoom)
         {
-            caja_zoom_control_set_zoom_level (CAJA_ZOOM_CONTROL (zoom_control),
+            baul_zoom_control_set_zoom_level (CAJA_ZOOM_CONTROL (zoom_control),
                                               zoom_level);
         }
     }
@@ -88,21 +88,21 @@ connect_proxy (GtkAction *action,
         CajaNavigationWindow *window = zaction->priv->window;
         GtkWidget *zoom_control;
 
-        zoom_control = caja_zoom_control_new ();
+        zoom_control = baul_zoom_control_new ();
         gtk_container_add (GTK_CONTAINER (item),  zoom_control);
         gtk_widget_show (zoom_control);
 
         g_signal_connect_object (zoom_control, "zoom_in",
-                                 G_CALLBACK (caja_window_zoom_in),
+                                 G_CALLBACK (baul_window_zoom_in),
                                  window, G_CONNECT_SWAPPED);
         g_signal_connect_object (zoom_control, "zoom_out",
-                                 G_CALLBACK (caja_window_zoom_out),
+                                 G_CALLBACK (baul_window_zoom_out),
                                  window, G_CONNECT_SWAPPED);
         g_signal_connect_object (zoom_control, "zoom_to_level",
-                                 G_CALLBACK (caja_window_zoom_to_level),
+                                 G_CALLBACK (baul_window_zoom_to_level),
                                  window, G_CONNECT_SWAPPED);
         g_signal_connect_object (zoom_control, "zoom_to_default",
-                                 G_CALLBACK (caja_window_zoom_to_default),
+                                 G_CALLBACK (baul_window_zoom_to_default),
                                  window, G_CONNECT_SWAPPED);
 
         g_signal_connect (window, "zoom-changed",
@@ -138,13 +138,13 @@ disconnect_proxy (GtkAction *action,
 }
 
 static void
-caja_zoom_action_finalize (GObject *object)
+baul_zoom_action_finalize (GObject *object)
 {
     (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 static void
-caja_zoom_action_set_property (GObject *object,
+baul_zoom_action_set_property (GObject *object,
                                guint prop_id,
                                const GValue *value,
                                GParamSpec *pspec)
@@ -162,7 +162,7 @@ caja_zoom_action_set_property (GObject *object,
 }
 
 static void
-caja_zoom_action_get_property (GObject *object,
+baul_zoom_action_get_property (GObject *object,
                                guint prop_id,
                                GValue *value,
                                GParamSpec *pspec)
@@ -180,16 +180,16 @@ caja_zoom_action_get_property (GObject *object,
 }
 
 static void
-caja_zoom_action_class_init (CajaZoomActionClass *class)
+baul_zoom_action_class_init (CajaZoomActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     GtkActionClass *action_class = GTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    object_class->finalize = caja_zoom_action_finalize;
-    object_class->set_property = caja_zoom_action_set_property;
-    object_class->get_property = caja_zoom_action_get_property;
+    object_class->finalize = baul_zoom_action_finalize;
+    object_class->set_property = baul_zoom_action_set_property;
+    object_class->get_property = baul_zoom_action_get_property;
 
     parent_class = g_type_class_peek_parent (class);
 
@@ -207,7 +207,7 @@ caja_zoom_action_class_init (CajaZoomActionClass *class)
 }
 
 static void
-caja_zoom_action_init (CajaZoomAction *action)
+baul_zoom_action_init (CajaZoomAction *action)
 {
-    action->priv = caja_zoom_action_get_instance_private (action);
+    action->priv = baul_zoom_action_get_instance_private (action);
 }

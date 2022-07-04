@@ -22,7 +22,7 @@
  *           Darin Adler <darin@bentspoon.com>
  *
  */
-/* caja-window.h: Interface of the main window object */
+/* baul-window.h: Interface of the main window object */
 
 #ifndef CAJA_WINDOW_H
 #define CAJA_WINDOW_H
@@ -31,16 +31,16 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include <libcaja-private/caja-bookmark.h>
-#include <libcaja-private/caja-entry.h>
-#include <libcaja-private/caja-window-info.h>
-#include <libcaja-private/caja-search-directory.h>
+#include <libbaul-private/baul-bookmark.h>
+#include <libbaul-private/baul-entry.h>
+#include <libbaul-private/baul-window-info.h>
+#include <libbaul-private/baul-search-directory.h>
 
-#include "caja-application.h"
-#include "caja-information-panel.h"
-#include "caja-side-pane.h"
+#include "baul-application.h"
+#include "baul-information-panel.h"
+#include "baul-side-pane.h"
 
-#define CAJA_TYPE_WINDOW caja_window_get_type()
+#define CAJA_TYPE_WINDOW baul_window_get_type()
 #define CAJA_WINDOW(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW, CajaWindow))
 #define CAJA_WINDOW_CLASS(klass) \
@@ -126,44 +126,44 @@ struct CajaWindow
     CajaApplication *application;
 };
 
-GType            caja_window_get_type             (void);
-void             caja_window_show_window          (CajaWindow    *window);
-void             caja_window_close                (CajaWindow    *window);
+GType            baul_window_get_type             (void);
+void             baul_window_show_window          (CajaWindow    *window);
+void             baul_window_close                (CajaWindow    *window);
 
-void             caja_window_connect_content_view (CajaWindow    *window,
+void             baul_window_connect_content_view (CajaWindow    *window,
         CajaView      *view);
-void             caja_window_disconnect_content_view (CajaWindow    *window,
+void             baul_window_disconnect_content_view (CajaWindow    *window,
         CajaView      *view);
 
-void             caja_window_go_to                (CajaWindow    *window,
+void             baul_window_go_to                (CajaWindow    *window,
         GFile             *location);
-void             caja_window_go_to_tab            (CajaWindow    *window,
+void             baul_window_go_to_tab            (CajaWindow    *window,
         GFile             *location);
-void             caja_window_go_to_full           (CajaWindow    *window,
+void             baul_window_go_to_full           (CajaWindow    *window,
         GFile             *location,
         CajaWindowGoToCallback callback,
         gpointer           user_data);
-void             caja_window_go_to_with_selection (CajaWindow    *window,
+void             baul_window_go_to_with_selection (CajaWindow    *window,
         GFile             *location,
         GList             *new_selection);
-void             caja_window_go_home              (CajaWindow    *window);
-void             caja_window_new_tab              (CajaWindow    *window);
-void             caja_window_new_window           (CajaWindow    *window);
-void             caja_window_go_up                (CajaWindow    *window,
+void             baul_window_go_home              (CajaWindow    *window);
+void             baul_window_new_tab              (CajaWindow    *window);
+void             baul_window_new_window           (CajaWindow    *window);
+void             baul_window_go_up                (CajaWindow    *window,
         gboolean           close_behind,
         gboolean           new_tab);
-void             caja_window_prompt_for_location  (CajaWindow    *window,
+void             baul_window_prompt_for_location  (CajaWindow    *window,
         const char        *initial);
-void             caja_window_display_error        (CajaWindow    *window,
+void             baul_window_display_error        (CajaWindow    *window,
         const char        *error_msg);
-void		 caja_window_reload		      (CajaWindow	 *window);
+void		 baul_window_reload		      (CajaWindow	 *window);
 
-void             caja_window_allow_reload         (CajaWindow    *window,
+void             baul_window_allow_reload         (CajaWindow    *window,
         gboolean           allow);
-void             caja_window_allow_up             (CajaWindow    *window,
+void             baul_window_allow_up             (CajaWindow    *window,
         gboolean           allow);
-void             caja_window_allow_stop           (CajaWindow    *window,
+void             baul_window_allow_stop           (CajaWindow    *window,
         gboolean           allow);
-GtkUIManager *   caja_window_get_ui_manager       (CajaWindow    *window);
+GtkUIManager *   baul_window_get_ui_manager       (CajaWindow    *window);
 
 #endif

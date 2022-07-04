@@ -1,5 +1,5 @@
 /*
- *  caja-module.h - Interface to caja extensions
+ *  baul-module.h - Interface to baul extensions
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -27,10 +27,10 @@
 #include <eel/eel-gtk-macros.h>
 #include <eel/eel-debug.h>
 
-#include "caja-module.h"
-#include "caja-extensions.h"
+#include "baul-module.h"
+#include "baul-extensions.h"
 
-#define CAJA_TYPE_MODULE    	(caja_module_get_type ())
+#define CAJA_TYPE_MODULE    	(baul_module_get_type ())
 #define CAJA_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_MODULE, CajaModule))
 #define CAJA_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_MODULE, CajaModule))
 #define CAJA_IS_MODULE(obj)		(G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_MODULE))
@@ -63,13 +63,13 @@ struct _CajaModuleClass
 
 static GList *module_objects = NULL;
 
-static GType caja_module_get_type (void);
+static GType baul_module_get_type (void);
 
-G_DEFINE_TYPE (CajaModule, caja_module, G_TYPE_TYPE_MODULE);
-#define parent_class caja_module_parent_class
+G_DEFINE_TYPE (CajaModule, baul_module, G_TYPE_TYPE_MODULE);
+#define parent_class baul_module_parent_class
 
 static gboolean
-caja_module_load (GTypeModule *gmodule)
+baul_module_load (GTypeModule *gmodule)
 {
     CajaModule *module;
 
@@ -84,13 +84,13 @@ caja_module_load (GTypeModule *gmodule)
     }
 
     if (!g_module_symbol (module->library,
-                          "caja_module_initialize",
+                          "baul_module_initialize",
                           (gpointer *)&module->initialize) ||
             !g_module_symbol (module->library,
-                              "caja_module_shutdown",
+                              "baul_module_shutdown",
                               (gpointer *)&module->shutdown) ||
             !g_module_symbol (module->library,
-                              "caja_module_list_types",
+                              "baul_module_list_types",
                               (gpointer *)&module->list_types))
     {
 
@@ -101,7 +101,7 @@ caja_module_load (GTypeModule *gmodule)
     }
 
     g_module_symbol (module->library,
-                     "caja_module_list_pyfiles",
+                     "baul_module_list_pyfiles",
                      (gpointer *)&module->list_pyfiles);
 
     module->initialize (gmodule);
@@ -110,7 +110,7 @@ caja_module_load (GTypeModule *gmodule)
 }
 
 static void
-caja_module_unload (GTypeModule *gmodule)
+baul_module_unload (GTypeModule *gmodule)
 {
     CajaModule *module;
 
@@ -126,7 +126,7 @@ caja_module_unload (GTypeModule *gmodule)
 }
 
 static void
-caja_module_finalize (GObject *object)
+baul_module_finalize (GObject *object)
 {
     CajaModule *module;
 
@@ -138,16 +138,16 @@ caja_module_finalize (GObject *object)
 }
 
 static void
-caja_module_init (CajaModule *module)
+baul_module_init (CajaModule *module)
 {
 }
 
 static void
-caja_module_class_init (CajaModuleClass *class)
+baul_module_class_init (CajaModuleClass *class)
 {
-    G_OBJECT_CLASS (class)->finalize = caja_module_finalize;
-    G_TYPE_MODULE_CLASS (class)->load = caja_module_load;
-    G_TYPE_MODULE_CLASS (class)->unload = caja_module_unload;
+    G_OBJECT_CLASS (class)->finalize = baul_module_finalize;
+    G_TYPE_MODULE_CLASS (class)->load = baul_module_load;
+    G_TYPE_MODULE_CLASS (class)->unload = baul_module_unload;
 }
 
 static void
@@ -169,7 +169,7 @@ add_module_objects (CajaModule *module)
     module->list_types (&types, &num_types);
     filename = g_path_get_basename (module->path);
 
-    /* fetch extensions details loaded through python-caja module */
+    /* fetch extensions details loaded through python-baul module */
     if (module->list_pyfiles)
     {
         module->list_pyfiles(&pyfiles);
@@ -187,13 +187,13 @@ add_module_objects (CajaModule *module)
             filename = g_strconcat(g_list_nth_data(pyfiles, i), ".py", NULL);
         }
 
-        object = caja_module_add_type (types[i]);
-        caja_extension_register (filename, object);
+        object = baul_module_add_type (types[i]);
+        baul_extension_register (filename, object);
     }
 }
 
 static CajaModule *
-caja_module_load_file (const char *filename)
+baul_module_load_file (const char *filename)
 {
     CajaModule *module;
 
@@ -233,7 +233,7 @@ load_module_dir (const char *dirname)
                 filename = g_build_filename (dirname,
                                              name,
                                              NULL);
-                caja_module_load_file (filename);
+                baul_module_load_file (filename);
             }
         }
         g_dir_close (dir);
@@ -255,7 +255,7 @@ free_module_objects (void)
 }
 
 void
-caja_module_setup (void)
+baul_module_setup (void)
 {
     static gboolean initialized = FALSE;
 
@@ -270,7 +270,7 @@ caja_module_setup (void)
 }
 
 GList *
-caja_module_get_extensions_for_type (GType type)
+baul_module_get_extensions_for_type (GType type)
 {
     GList *l;
     GList *ret = NULL;
@@ -289,7 +289,7 @@ caja_module_get_extensions_for_type (GType type)
 }
 
 void
-caja_module_extension_list_free (GList *extensions)
+baul_module_extension_list_free (GList *extensions)
 {
     GList *l, *next;
 
@@ -302,7 +302,7 @@ caja_module_extension_list_free (GList *extensions)
 }
 
 GObject *
-caja_module_add_type (GType type)
+baul_module_add_type (GType type)
 {
     GObject *object;
 

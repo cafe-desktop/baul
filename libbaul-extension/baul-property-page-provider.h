@@ -1,5 +1,5 @@
 /*
- *  caja-property-page-provider.h - Interface for Caja extensions
+ *  baul-property-page-provider.h - Interface for Caja extensions
  *                                      that provide property pages.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -32,13 +32,13 @@
 #define CAJA_PROPERTY_PAGE_PROVIDER_H
 
 #include <glib-object.h>
-#include "caja-extension-types.h"
-#include "caja-file-info.h"
-#include "caja-property-page.h"
+#include "baul-extension-types.h"
+#include "baul-file-info.h"
+#include "baul-property-page.h"
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_PROPERTY_PAGE_PROVIDER           (caja_property_page_provider_get_type ())
+#define CAJA_TYPE_PROPERTY_PAGE_PROVIDER           (baul_property_page_provider_get_type ())
 #define CAJA_PROPERTY_PAGE_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PROPERTY_PAGE_PROVIDER, CajaPropertyPageProvider))
 #define CAJA_IS_PROPERTY_PAGE_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_PROPERTY_PAGE_PROVIDER))
 #define CAJA_PROPERTY_PAGE_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_PROPERTY_PAGE_PROVIDER, CajaPropertyPageProviderIface))
@@ -50,7 +50,7 @@ typedef struct _CajaPropertyPageProviderIface  CajaPropertyPageProviderIface;
  * CajaPropertyPageProviderIface:
  * @g_iface: The parent interface.
  * @get_pages: Returns a #GList of #CajaPropertyPage.
- *   See caja_property_page_provider_get_pages() for details.
+ *   See baul_property_page_provider_get_pages() for details.
  *
  * Interface for extensions to provide additional property pages.
  */
@@ -63,8 +63,8 @@ struct _CajaPropertyPageProviderIface {
 };
 
 /* Interface Functions */
-GType  caja_property_page_provider_get_type  (void);
-GList *caja_property_page_provider_get_pages (CajaPropertyPageProvider *provider,
+GType  baul_property_page_provider_get_type  (void);
+GList *baul_property_page_provider_get_pages (CajaPropertyPageProvider *provider,
                                               GList                    *files);
 
 G_END_DECLS

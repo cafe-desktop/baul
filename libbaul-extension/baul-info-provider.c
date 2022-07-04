@@ -1,5 +1,5 @@
 /*
- *  caja-info-provider.c - Interface for Caja extensions that
+ *  baul-info-provider.c - Interface for Caja extensions that
  *                             provide info about files.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -23,36 +23,36 @@
  */
 
 #include <config.h>
-#include "caja-info-provider.h"
+#include "baul-info-provider.h"
 
 #include <glib-object.h>
 
 /**
- * SECTION:caja-info-provider
+ * SECTION:baul-info-provider
  * @title: CajaInfoProvider
  * @short_description: Interface to provide additional information about files
- * @include: libcaja-extension/caja-column-provider.h
+ * @include: libbaul-extension/baul-column-provider.h
  *
  * #CajaInfoProvider allows extension to provide additional information about
- * files. When caja_info_provider_update_file_info() is called by the application,
+ * files. When baul_info_provider_update_file_info() is called by the application,
  * extensions will know that it's time to add extra information to the provided
  * #CajaFileInfo.
  */
 
 static void
-caja_info_provider_base_init (gpointer g_class)
+baul_info_provider_base_init (gpointer g_class)
 {
 }
 
 GType
-caja_info_provider_get_type (void)
+baul_info_provider_get_type (void)
 {
     static GType type = 0;
 
     if (!type) {
         const GTypeInfo info = {
             sizeof (CajaInfoProviderIface),
-            caja_info_provider_base_init,
+            baul_info_provider_base_init,
             NULL,
             NULL,
             NULL,
@@ -72,7 +72,7 @@ caja_info_provider_get_type (void)
 }
 
 CajaOperationResult
-caja_info_provider_update_file_info (CajaInfoProvider     *provider,
+baul_info_provider_update_file_info (CajaInfoProvider     *provider,
                                      CajaFileInfo         *file,
                                      GClosure             *update_complete,
                                      CajaOperationHandle **handle)
@@ -90,7 +90,7 @@ caja_info_provider_update_file_info (CajaInfoProvider     *provider,
 }
 
 void
-caja_info_provider_cancel_update (CajaInfoProvider    *provider,
+baul_info_provider_cancel_update (CajaInfoProvider    *provider,
                                   CajaOperationHandle *handle)
 {
     g_return_if_fail (CAJA_IS_INFO_PROVIDER (provider));
@@ -102,7 +102,7 @@ caja_info_provider_cancel_update (CajaInfoProvider    *provider,
 }
 
 void
-caja_info_provider_update_complete_invoke (GClosure            *update_complete,
+baul_info_provider_update_complete_invoke (GClosure            *update_complete,
                                            CajaInfoProvider    *provider,
                                            CajaOperationHandle *handle,
                                            CajaOperationResult  result)

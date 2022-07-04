@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-vfs-file.h: Subclass of CajaFile to implement the
+   baul-vfs-file.h: Subclass of CajaFile to implement the
    the case of a VFS file.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
@@ -26,9 +26,9 @@
 #ifndef CAJA_VFS_FILE_H
 #define CAJA_VFS_FILE_H
 
-#include "caja-file.h"
+#include "baul-file.h"
 
-#define CAJA_TYPE_VFS_FILE caja_vfs_file_get_type()
+#define CAJA_TYPE_VFS_FILE baul_vfs_file_get_type()
 #define CAJA_VFS_FILE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_VFS_FILE, CajaVFSFile))
 #define CAJA_VFS_FILE_CLASS(klass) \
@@ -52,6 +52,6 @@ typedef struct
     CajaFileClass parent_slot;
 } CajaVFSFileClass;
 
-GType   caja_vfs_file_get_type (void);
+GType   baul_vfs_file_get_type (void);
 
 #endif /* CAJA_VFS_FILE_H */

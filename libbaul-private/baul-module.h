@@ -1,5 +1,5 @@
 /*
- *  caja-module.h - Interface to caja extensions
+ *  baul-module.h - Interface to baul extensions
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -30,14 +30,14 @@
 extern "C" {
 #endif
 
-    void   caja_module_setup                   (void);
-    GList *caja_module_get_extensions_for_type (GType  type);
-    void   caja_module_extension_list_free     (GList *list);
+    void   baul_module_setup                   (void);
+    GList *baul_module_get_extensions_for_type (GType  type);
+    void   baul_module_extension_list_free     (GList *list);
 
 
-    /* Add a type to the module interface - allows caja to add its own modules
+    /* Add a type to the module interface - allows baul to add its own modules
      * without putting them in separate shared libraries */
-    GObject *caja_module_add_type              (GType  type);
+    GObject *baul_module_add_type              (GType  type);
 
 #ifdef __cplusplus
 }

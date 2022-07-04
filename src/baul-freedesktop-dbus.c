@@ -1,5 +1,5 @@
 /*
- * caja-freedesktop-dbus: Implementation for the org.freedesktop DBus file-management interfaces
+ * baul-freedesktop-dbus: Implementation for the org.freedesktop DBus file-management interfaces
  *
  * Caja is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -25,13 +25,13 @@
 
 #include <gio/gio.h>
 
-#include <libcaja-private/caja-debug-log.h>
+#include <libbaul-private/baul-debug-log.h>
 
 #include "file-manager/fm-properties-window.h"
 
-#include "caja-application.h"
-#include "caja-freedesktop-dbus.h"
-#include "caja-freedesktop-generated.h"
+#include "baul-application.h"
+#include "baul-freedesktop-dbus.h"
+#include "baul-freedesktop-generated.h"
 
 struct _CajaFreedesktopDBus {
     GObject parent;
@@ -53,7 +53,7 @@ struct _CajaFreedesktopDBusClass {
     GObjectClass parent_class;
 };
 
-G_DEFINE_TYPE (CajaFreedesktopDBus, caja_freedesktop_dbus, G_TYPE_OBJECT);
+G_DEFINE_TYPE (CajaFreedesktopDBus, baul_freedesktop_dbus, G_TYPE_OBJECT);
 
 static gboolean
 skeleton_handle_show_items_cb (CajaFreedesktopFileManager1 *object,
@@ -75,16 +75,16 @@ skeleton_handle_show_items_cb (CajaFreedesktopFileManager1 *object,
         parent = g_file_get_parent (file);
 
         if (parent != NULL) {
-            caja_application_open_location (application, parent, file, startup_id, 0);
+            baul_application_open_location (application, parent, file, startup_id, 0);
             g_object_unref (parent);
         } else {
-            caja_application_open_location (application, file, NULL, startup_id, 0);
+            baul_application_open_location (application, file, NULL, startup_id, 0);
         }
 
         g_object_unref (file);
     }
 
-    caja_freedesktop_file_manager1_complete_show_items (object, invocation);
+    baul_freedesktop_file_manager1_complete_show_items (object, invocation);
     return TRUE;
 }
 
@@ -105,12 +105,12 @@ skeleton_handle_show_folders_cb (CajaFreedesktopFileManager1 *object,
 
         file = g_file_new_for_uri (uris[i]);
 
-        caja_application_open_location (application, file, NULL, startup_id, 0);
+        baul_application_open_location (application, file, NULL, startup_id, 0);
 
         g_object_unref (file);
     }
 
-    caja_freedesktop_file_manager1_complete_show_folders (object, invocation);
+    baul_freedesktop_file_manager1_complete_show_folders (object, invocation);
     return TRUE;
 }
 
@@ -129,7 +129,7 @@ skeleton_handle_show_item_properties_cb (CajaFreedesktopFileManager1 *object,
     files = NULL;
 
     for (i = 0; uris[i] != NULL; i++) {
-        files = g_list_prepend (files, caja_file_get_by_uri (uris[i]));
+        files = g_list_prepend (files, baul_file_get_by_uri (uris[i]));
     }
 
     files = g_list_reverse (files);
@@ -139,7 +139,7 @@ skeleton_handle_show_item_properties_cb (CajaFreedesktopFileManager1 *object,
         CajaWindow *window;
 
         file = g_file_new_for_uri (uris[i]);
-        window = caja_application_get_spatial_window (application,
+        window = baul_application_get_spatial_window (application,
                                                       NULL,
                                                       startup_id,
                                                       file,
@@ -149,9 +149,9 @@ skeleton_handle_show_item_properties_cb (CajaFreedesktopFileManager1 *object,
         g_object_unref (file);
     }
 
-    caja_file_list_free (files);
+    baul_file_list_free (files);
 
-    caja_freedesktop_file_manager1_complete_show_item_properties (object, invocation);
+    baul_freedesktop_file_manager1_complete_show_item_properties (object, invocation);
     return TRUE;
 }
 
@@ -162,11 +162,11 @@ bus_acquired_cb (GDBusConnection *conn,
 {
     CajaFreedesktopDBus *fdb = user_data;
 
-    caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Bus acquired at %s", name);
+    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Bus acquired at %s", name);
 
     fdb->object_manager = g_dbus_object_manager_server_new (CAJA_FDO_DBUS_PATH);
 
-    fdb->skeleton = caja_freedesktop_file_manager1_skeleton_new ();
+    fdb->skeleton = baul_freedesktop_file_manager1_skeleton_new ();
 
     g_signal_connect (fdb->skeleton, "handle-show-items",
                       G_CALLBACK (skeleton_handle_show_items_cb), fdb);
@@ -185,7 +185,7 @@ name_acquired_cb (GDBusConnection *connection,
                   const gchar     *name,
                   gpointer         user_data)
 {
-    caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Acquired the name %s on the session message bus\n", name);
+    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Acquired the name %s on the session message bus\n", name);
 }
 
 static void
@@ -193,11 +193,11 @@ name_lost_cb (GDBusConnection *connection,
               const gchar     *name,
               gpointer         user_data)
 {
-    caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Lost (or failed to acquire) the name %s on the session message bus\n", name);
+    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Lost (or failed to acquire) the name %s on the session message bus\n", name);
 }
 
 static void
-caja_freedesktop_dbus_dispose (GObject *object)
+baul_freedesktop_dbus_dispose (GObject *object)
 {
     CajaFreedesktopDBus *fdb = (CajaFreedesktopDBus *) object;
 
@@ -214,19 +214,19 @@ caja_freedesktop_dbus_dispose (GObject *object)
 
     g_clear_object (&fdb->object_manager);
 
-    G_OBJECT_CLASS (caja_freedesktop_dbus_parent_class)->dispose (object);
+    G_OBJECT_CLASS (baul_freedesktop_dbus_parent_class)->dispose (object);
 }
 
 static void
-caja_freedesktop_dbus_class_init (CajaFreedesktopDBusClass *klass)
+baul_freedesktop_dbus_class_init (CajaFreedesktopDBusClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-    object_class->dispose = caja_freedesktop_dbus_dispose;
+    object_class->dispose = baul_freedesktop_dbus_dispose;
 }
 
 static void
-caja_freedesktop_dbus_init (CajaFreedesktopDBus *fdb)
+baul_freedesktop_dbus_init (CajaFreedesktopDBus *fdb)
 {
     fdb->owner_id = g_bus_own_name (G_BUS_TYPE_SESSION,
                                     CAJA_FDO_DBUS_NAME,
@@ -240,9 +240,9 @@ caja_freedesktop_dbus_init (CajaFreedesktopDBus *fdb)
 
 /* Tries to own the org.freedesktop.FileManager1 service name */
 CajaFreedesktopDBus *
-caja_freedesktop_dbus_new (CajaApplication *application)
+baul_freedesktop_dbus_new (CajaApplication *application)
 {
-    CajaFreedesktopDBus *fdb = g_object_new (caja_freedesktop_dbus_get_type (), NULL);
+    CajaFreedesktopDBus *fdb = g_object_new (baul_freedesktop_dbus_get_type (), NULL);
     fdb->application = application;
     return fdb;
 }

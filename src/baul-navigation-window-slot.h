@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-navigation-window-slot.h: Caja navigation window slot
+   baul-navigation-window-slot.h: Caja navigation window slot
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -25,13 +25,13 @@
 #ifndef CAJA_NAVIGATION_WINDOW_SLOT_H
 #define CAJA_NAVIGATION_WINDOW_SLOT_H
 
-#include "caja-window-slot.h"
+#include "baul-window-slot.h"
 
 typedef struct CajaNavigationWindowSlot CajaNavigationWindowSlot;
 typedef struct CajaNavigationWindowSlotClass CajaNavigationWindowSlotClass;
 
 
-#define CAJA_TYPE_NAVIGATION_WINDOW_SLOT         (caja_navigation_window_slot_get_type())
+#define CAJA_TYPE_NAVIGATION_WINDOW_SLOT         (baul_navigation_window_slot_get_type())
 #define CAJA_NAVIGATION_WINDOW_SLOT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_NAVIGATION_WINDOW_SLOT_CLASS, CajaNavigationWindowSlotClass))
 #define CAJA_NAVIGATION_WINDOW_SLOT(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NAVIGATION_WINDOW_SLOT, CajaNavigationWindowSlot))
 #define CAJA_IS_NAVIGATION_WINDOW_SLOT(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_NAVIGATION_WINDOW_SLOT))
@@ -67,12 +67,12 @@ struct CajaNavigationWindowSlotClass
     CajaWindowSlotClass parent;
 };
 
-GType caja_navigation_window_slot_get_type (void);
+GType baul_navigation_window_slot_get_type (void);
 
-gboolean caja_navigation_window_slot_should_close_with_mount (CajaNavigationWindowSlot *slot,
+gboolean baul_navigation_window_slot_should_close_with_mount (CajaNavigationWindowSlot *slot,
         GMount *mount);
 
-void caja_navigation_window_slot_clear_forward_list (CajaNavigationWindowSlot *slot);
-void caja_navigation_window_slot_clear_back_list    (CajaNavigationWindowSlot *slot);
+void baul_navigation_window_slot_clear_forward_list (CajaNavigationWindowSlot *slot);
+void baul_navigation_window_slot_clear_back_list    (CajaNavigationWindowSlot *slot);
 
 #endif /* CAJA_NAVIGATION_WINDOW_SLOT_H */

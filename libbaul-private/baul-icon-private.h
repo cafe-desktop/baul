@@ -27,9 +27,9 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include "caja-icon-canvas-item.h"
-#include "caja-icon-container.h"
-#include "caja-icon-dnd.h"
+#include "baul-icon-canvas-item.h"
+#include "baul-icon-container.h"
+#include "baul-icon-dnd.h"
 
 /* An Icon. */
 
@@ -48,7 +48,7 @@ typedef struct
      * In RTL mode x is RTL x position, we use saved_ltr_x for
      * keeping track of x value before it gets converted into
      * RTL value, this is used for saving the icon position
-     * to the caja metafile.
+     * to the baul metafile.
      */
     double saved_ltr_x;
 
@@ -289,9 +289,9 @@ struct CajaIconContainerDetails
 };
 
 /* Private functions shared by mutiple files. */
-CajaIcon *caja_icon_container_get_icon_by_uri             (CajaIconContainer *container,
+CajaIcon *baul_icon_container_get_icon_by_uri             (CajaIconContainer *container,
         const char            *uri);
-void          caja_icon_container_move_icon                   (CajaIconContainer *container,
+void          baul_icon_container_move_icon                   (CajaIconContainer *container,
         CajaIcon          *icon,
         int                    x,
         int                    y,
@@ -299,22 +299,22 @@ void          caja_icon_container_move_icon                   (CajaIconContainer
         gboolean               raise,
         gboolean               snap,
         gboolean		  update_position);
-void          caja_icon_container_select_list_unselect_others (CajaIconContainer *container,
+void          baul_icon_container_select_list_unselect_others (CajaIconContainer *container,
         GList                 *icons);
-char *        caja_icon_container_get_icon_uri                (CajaIconContainer *container,
+char *        baul_icon_container_get_icon_uri                (CajaIconContainer *container,
         CajaIcon          *icon);
-char *        caja_icon_container_get_icon_drop_target_uri    (CajaIconContainer *container,
+char *        baul_icon_container_get_icon_drop_target_uri    (CajaIconContainer *container,
         CajaIcon          *icon);
-void          caja_icon_container_update_icon                 (CajaIconContainer *container,
+void          baul_icon_container_update_icon                 (CajaIconContainer *container,
         CajaIcon          *icon);
-gboolean      caja_icon_container_has_stored_icon_positions   (CajaIconContainer *container);
-gboolean      caja_icon_container_emit_preview_signal         (CajaIconContainer *view,
+gboolean      baul_icon_container_has_stored_icon_positions   (CajaIconContainer *container);
+gboolean      baul_icon_container_emit_preview_signal         (CajaIconContainer *view,
         CajaIcon          *icon,
         gboolean               start_flag);
-gboolean      caja_icon_container_scroll                      (CajaIconContainer *container,
+gboolean      baul_icon_container_scroll                      (CajaIconContainer *container,
         int                    delta_x,
         int                    delta_y);
-void          caja_icon_container_update_scroll_region        (CajaIconContainer *container);
+void          baul_icon_container_update_scroll_region        (CajaIconContainer *container);
 
 
 

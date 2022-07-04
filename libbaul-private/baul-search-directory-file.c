@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-search-directory-file.c: Subclass of CajaFile to help implement the
+   baul-search-directory-file.c: Subclass of CajaFile to help implement the
    searches
 
    Copyright (C) 2005 Novell, Inc.
@@ -31,20 +31,20 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include "caja-search-directory-file.h"
-#include "caja-directory-notify.h"
-#include "caja-directory-private.h"
-#include "caja-file-attributes.h"
-#include "caja-file-private.h"
-#include "caja-file-utilities.h"
-#include "caja-search-directory.h"
+#include "baul-search-directory-file.h"
+#include "baul-directory-notify.h"
+#include "baul-directory-private.h"
+#include "baul-file-attributes.h"
+#include "baul-file-private.h"
+#include "baul-file-utilities.h"
+#include "baul-search-directory.h"
 
 struct CajaSearchDirectoryFileDetails
 {
     CajaSearchDirectory *search_directory;
 };
 
-G_DEFINE_TYPE(CajaSearchDirectoryFile, caja_search_directory_file, CAJA_TYPE_FILE);
+G_DEFINE_TYPE(CajaSearchDirectoryFile, baul_search_directory_file, CAJA_TYPE_FILE);
 
 
 static void
@@ -56,7 +56,7 @@ search_directory_file_monitor_add (CajaFile *file,
        are added/removed, and no other metadata changes */
 
     /* Update display name, in case this didn't happen yet */
-    caja_search_directory_file_update_display_name (CAJA_SEARCH_DIRECTORY_FILE (file));
+    baul_search_directory_file_update_display_name (CAJA_SEARCH_DIRECTORY_FILE (file));
 }
 
 static void
@@ -74,7 +74,7 @@ search_directory_file_call_when_ready (CajaFile *file,
 
 {
     /* Update display name, in case this didn't happen yet */
-    caja_search_directory_file_update_display_name (CAJA_SEARCH_DIRECTORY_FILE (file));
+    baul_search_directory_file_update_display_name (CAJA_SEARCH_DIRECTORY_FILE (file));
 
     /* All data for directory-as-file is always uptodate */
     (* callback) (file, callback_data);
@@ -104,11 +104,11 @@ search_directory_file_get_item_count (CajaFile *file,
     {
         GList *file_list;
 
-        file_list = caja_directory_get_file_list (file->details->directory);
+        file_list = baul_directory_get_file_list (file->details->directory);
 
         *count = g_list_length (file_list);
 
-        caja_file_list_free (file_list);
+        baul_file_list_free (file_list);
     }
 
     return TRUE;
@@ -127,13 +127,13 @@ search_directory_file_get_deep_counts (CajaFile *file,
     GFileType type;
     CajaFile *dir_file = NULL;
 
-    file_list = caja_directory_get_file_list (file->details->directory);
+    file_list = baul_directory_get_file_list (file->details->directory);
 
     dirs = files = 0;
     for (l = file_list; l != NULL; l = l->next)
     {
         dir_file = CAJA_FILE (l->data);
-        type = caja_file_get_file_type (dir_file);
+        type = baul_file_get_file_type (dir_file);
         if (type == G_FILE_TYPE_DIRECTORY)
         {
             dirs++;
@@ -167,7 +167,7 @@ search_directory_file_get_deep_counts (CajaFile *file,
         *total_size_on_disk = 0;
     }
 
-    caja_file_list_free (file_list);
+    baul_file_list_free (file_list);
 
     return CAJA_REQUEST_DONE;
 }
@@ -179,7 +179,7 @@ search_directory_file_get_where_string (CajaFile *file)
 }
 
 void
-caja_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_file)
+baul_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_file)
 {
     CajaFile *file;
     char *display_name;
@@ -194,11 +194,11 @@ caja_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_
         CajaQuery *query;
 
         search_dir = CAJA_SEARCH_DIRECTORY (file->details->directory);
-        query = caja_search_directory_get_query (search_dir);
+        query = baul_search_directory_get_query (search_dir);
 
         if (query != NULL)
         {
-            display_name = caja_query_to_readable_string (query);
+            display_name = baul_query_to_readable_string (query);
             g_object_unref (query);
         }
     }
@@ -208,15 +208,15 @@ caja_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_
         display_name = g_strdup (_("Search"));
     }
 
-    changed = caja_file_set_display_name (file, display_name, NULL, TRUE);
+    changed = baul_file_set_display_name (file, display_name, NULL, TRUE);
     if (changed)
     {
-        caja_file_emit_changed (file);
+        baul_file_emit_changed (file);
     }
 }
 
 static void
-caja_search_directory_file_init (CajaSearchDirectoryFile *search_file)
+baul_search_directory_file_init (CajaSearchDirectoryFile *search_file)
 {
     CajaFile *file;
 
@@ -238,11 +238,11 @@ caja_search_directory_file_init (CajaSearchDirectoryFile *search_file)
     file->details->got_directory_count = TRUE;
     file->details->directory_count_is_up_to_date = TRUE;
 
-    caja_file_set_display_name (file, _("Search"), NULL, TRUE);
+    baul_file_set_display_name (file, _("Search"), NULL, TRUE);
 }
 
 static void
-caja_search_directory_file_class_init (CajaSearchDirectoryFileClass *klass)
+baul_search_directory_file_class_init (CajaSearchDirectoryFileClass *klass)
 {
     CajaFileClass *file_class;
 

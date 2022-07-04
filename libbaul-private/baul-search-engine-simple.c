@@ -29,7 +29,7 @@
 
 #include <eel/eel-gtk-macros.h>
 
-#include "caja-search-engine-simple.h"
+#include "baul-search-engine-simple.h"
 
 #define BATCH_SIZE 500
 
@@ -65,7 +65,7 @@ struct CajaSearchEngineSimpleDetails
 };
 
 G_DEFINE_TYPE (CajaSearchEngineSimple,
-               caja_search_engine_simple,
+               baul_search_engine_simple,
                CAJA_TYPE_SEARCH_ENGINE);
 
 static CajaSearchEngineClass *parent_class = NULL;
@@ -101,7 +101,7 @@ search_thread_data_new (CajaSearchEngineSimple *engine,
     data->engine = engine;
     data->directories = g_queue_new ();
     data->visited = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-    uri = caja_query_get_location (query);
+    uri = baul_query_get_location (query);
     location = NULL;
     if (uri != NULL)
     {
@@ -114,7 +114,7 @@ search_thread_data_new (CajaSearchEngineSimple *engine,
     }
     g_queue_push_tail (data->directories, location);
 
-    text = caja_query_get_text (query);
+    text = baul_query_get_text (query);
     normalized = g_utf8_normalize (text, -1, G_NORMALIZE_NFD);
     lower = g_utf8_strdown (normalized, -1);
     data->words = g_strsplit (lower, " ", -1);
@@ -122,11 +122,11 @@ search_thread_data_new (CajaSearchEngineSimple *engine,
     g_free (lower);
     g_free (normalized);
 
-    data->tags = caja_query_get_tags (query);
-    data->mime_types = caja_query_get_mime_types (query);
-    data->timestamp = caja_query_get_timestamp (query);
-    data->size = caja_query_get_size (query);
-    data->contained_text = caja_query_get_contained_text (query);
+    data->tags = baul_query_get_tags (query);
+    data->mime_types = baul_query_get_mime_types (query);
+    data->timestamp = baul_query_get_timestamp (query);
+    data->size = baul_query_get_size (query);
+    data->contained_text = baul_query_get_contained_text (query);
 
     data->cancellable = g_cancellable_new ();
 
@@ -158,7 +158,7 @@ search_thread_done_idle (gpointer user_data)
 
     if (!g_cancellable_is_cancelled (data->cancellable))
     {
-        caja_search_engine_finished (CAJA_SEARCH_ENGINE (data->engine));
+        baul_search_engine_finished (CAJA_SEARCH_ENGINE (data->engine));
         data->engine->details->active_search = NULL;
     }
 
@@ -183,7 +183,7 @@ search_thread_add_hits_idle (gpointer user_data)
 
     if (!g_cancellable_is_cancelled (hits->thread_data->cancellable))
     {
-        caja_search_engine_hits_added (CAJA_SEARCH_ENGINE (hits->thread_data->engine),
+        baul_search_engine_hits_added (CAJA_SEARCH_ENGINE (hits->thread_data->engine),
                                        hits->uris);
     }
 
@@ -659,7 +659,7 @@ search_thread_func (gpointer user_data)
 }
 
 static void
-caja_search_engine_simple_start (CajaSearchEngine *engine)
+baul_search_engine_simple_start (CajaSearchEngine *engine)
 {
     CajaSearchEngineSimple *simple;
     SearchThreadData *data;
@@ -679,14 +679,14 @@ caja_search_engine_simple_start (CajaSearchEngine *engine)
 
     data = search_thread_data_new (simple, simple->details->query);
 
-    thread = g_thread_new ("caja-search-simple", search_thread_func, data);
+    thread = g_thread_new ("baul-search-simple", search_thread_func, data);
     simple->details->active_search = data;
 
     g_thread_unref (thread);
 }
 
 static void
-caja_search_engine_simple_stop (CajaSearchEngine *engine)
+baul_search_engine_simple_stop (CajaSearchEngine *engine)
 {
     CajaSearchEngineSimple *simple;
 
@@ -700,13 +700,13 @@ caja_search_engine_simple_stop (CajaSearchEngine *engine)
 }
 
 static gboolean
-caja_search_engine_simple_is_indexed (CajaSearchEngine *engine)
+baul_search_engine_simple_is_indexed (CajaSearchEngine *engine)
 {
     return FALSE;
 }
 
 static void
-caja_search_engine_simple_set_query (CajaSearchEngine *engine, CajaQuery *query)
+baul_search_engine_simple_set_query (CajaSearchEngine *engine, CajaQuery *query)
 {
     CajaSearchEngineSimple *simple;
 
@@ -726,7 +726,7 @@ caja_search_engine_simple_set_query (CajaSearchEngine *engine, CajaQuery *query)
 }
 
 static void
-caja_search_engine_simple_class_init (CajaSearchEngineSimpleClass *class)
+baul_search_engine_simple_class_init (CajaSearchEngineSimpleClass *class)
 {
     GObjectClass *gobject_class;
     CajaSearchEngineClass *engine_class;
@@ -737,21 +737,21 @@ caja_search_engine_simple_class_init (CajaSearchEngineSimpleClass *class)
     gobject_class->finalize = finalize;
 
     engine_class = CAJA_SEARCH_ENGINE_CLASS (class);
-    engine_class->set_query = caja_search_engine_simple_set_query;
-    engine_class->start = caja_search_engine_simple_start;
-    engine_class->stop = caja_search_engine_simple_stop;
-    engine_class->is_indexed = caja_search_engine_simple_is_indexed;
+    engine_class->set_query = baul_search_engine_simple_set_query;
+    engine_class->start = baul_search_engine_simple_start;
+    engine_class->stop = baul_search_engine_simple_stop;
+    engine_class->is_indexed = baul_search_engine_simple_is_indexed;
 }
 
 static void
-caja_search_engine_simple_init (CajaSearchEngineSimple *engine)
+baul_search_engine_simple_init (CajaSearchEngineSimple *engine)
 {
     engine->details = g_new0 (CajaSearchEngineSimpleDetails, 1);
 }
 
 
 CajaSearchEngine *
-caja_search_engine_simple_new (void)
+baul_search_engine_simple_new (void)
 {
     CajaSearchEngine *engine;
 

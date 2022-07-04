@@ -21,7 +21,7 @@
 */
 
 #include <config.h>
-#include "caja-file-queue.h"
+#include "baul-file-queue.h"
 
 #include <glib.h>
 
@@ -33,7 +33,7 @@ struct CajaFileQueue
 };
 
 CajaFileQueue *
-caja_file_queue_new (void)
+baul_file_queue_new (void)
 {
     CajaFileQueue *queue;
 
@@ -44,15 +44,15 @@ caja_file_queue_new (void)
 }
 
 void
-caja_file_queue_destroy (CajaFileQueue *queue)
+baul_file_queue_destroy (CajaFileQueue *queue)
 {
     g_hash_table_destroy (queue->item_to_link_map);
-    caja_file_list_free (queue->head);
+    baul_file_list_free (queue->head);
     g_free (queue);
 }
 
 void
-caja_file_queue_enqueue (CajaFileQueue *queue,
+baul_file_queue_enqueue (CajaFileQueue *queue,
                          CajaFile      *file)
 {
     if (g_hash_table_lookup (queue->item_to_link_map, file) != NULL)
@@ -72,24 +72,24 @@ caja_file_queue_enqueue (CajaFileQueue *queue,
         queue->tail = queue->tail->next;
     }
 
-    caja_file_ref (file);
+    baul_file_ref (file);
     g_hash_table_insert (queue->item_to_link_map, file, queue->tail);
 }
 
 CajaFile *
-caja_file_queue_dequeue (CajaFileQueue *queue)
+baul_file_queue_dequeue (CajaFileQueue *queue)
 {
     CajaFile *file;
 
-    file = caja_file_queue_head (queue);
-    caja_file_queue_remove (queue, file);
+    file = baul_file_queue_head (queue);
+    baul_file_queue_remove (queue, file);
 
     return file;
 }
 
 
 void
-caja_file_queue_remove (CajaFileQueue *queue,
+baul_file_queue_remove (CajaFileQueue *queue,
                         CajaFile *file)
 {
     GList *link;
@@ -112,11 +112,11 @@ caja_file_queue_remove (CajaFileQueue *queue,
     g_list_free (link);
     g_hash_table_remove (queue->item_to_link_map, file);
 
-    caja_file_unref (file);
+    baul_file_unref (file);
 }
 
 CajaFile *
-caja_file_queue_head (CajaFileQueue *queue)
+baul_file_queue_head (CajaFileQueue *queue)
 {
     if (queue->head == NULL)
     {
@@ -127,7 +127,7 @@ caja_file_queue_head (CajaFileQueue *queue)
 }
 
 gboolean
-caja_file_queue_is_empty (CajaFileQueue *queue)
+baul_file_queue_is_empty (CajaFileQueue *queue)
 {
     return (queue->head == NULL);
 }

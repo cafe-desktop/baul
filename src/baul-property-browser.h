@@ -37,7 +37,7 @@
 typedef struct CajaPropertyBrowser CajaPropertyBrowser;
 typedef struct CajaPropertyBrowserClass  CajaPropertyBrowserClass;
 
-#define CAJA_TYPE_PROPERTY_BROWSER caja_property_browser_get_type()
+#define CAJA_TYPE_PROPERTY_BROWSER baul_property_browser_get_type()
 #define CAJA_PROPERTY_BROWSER(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PROPERTY_BROWSER, CajaPropertyBrowser))
 #define CAJA_PROPERTY_BROWSER_CLASS(klass) \
@@ -62,10 +62,10 @@ struct CajaPropertyBrowserClass
     GtkWindowClass parent_class;
 };
 
-GType                    caja_property_browser_get_type (void);
-CajaPropertyBrowser *caja_property_browser_new      (GdkScreen               *screen);
-void                     caja_property_browser_show     (GdkScreen               *screen);
-void                     caja_property_browser_set_path (CajaPropertyBrowser *panel,
+GType                    baul_property_browser_get_type (void);
+CajaPropertyBrowser *baul_property_browser_new      (GdkScreen               *screen);
+void                     baul_property_browser_show     (GdkScreen               *screen);
+void                     baul_property_browser_set_path (CajaPropertyBrowser *panel,
         const char              *new_path);
 
 #endif /* CAJA_PROPERTY_BROWSER_H */

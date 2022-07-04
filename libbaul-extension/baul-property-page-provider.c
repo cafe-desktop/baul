@@ -1,5 +1,5 @@
 /*
- *  caja-property-page-provider.c - Interface for Caja extensions
+ *  baul-property-page-provider.c - Interface for Caja extensions
  *                                      that provide property pages for
  *                                      files.
  *
@@ -24,34 +24,34 @@
  */
 
 #include <config.h>
-#include "caja-property-page-provider.h"
+#include "baul-property-page-provider.h"
 
 #include <glib-object.h>
 
 /**
- * SECTION:caja-property-page-provider
+ * SECTION:baul-property-page-provider
  * @title: CajaPropertyPageProvider
  * @short_description: Interface to provide additional property pages
- * @include: libcaja-extension/caja-property-page-provider.h
+ * @include: libbaul-extension/baul-property-page-provider.h
  *
  * #CajaPropertyPageProvider allows extension to provide additional pages
  * for the file properties dialog.
  */
 
 static void
-caja_property_page_provider_base_init (gpointer g_class)
+baul_property_page_provider_base_init (gpointer g_class)
 {
 }
 
 GType
-caja_property_page_provider_get_type (void)
+baul_property_page_provider_get_type (void)
 {
     static GType type = 0;
 
     if (!type) {
         const GTypeInfo info = {
             sizeof (CajaPropertyPageProviderIface),
-            caja_property_page_provider_base_init,
+            baul_property_page_provider_base_init,
             NULL,
             NULL,
             NULL,
@@ -71,7 +71,7 @@ caja_property_page_provider_get_type (void)
 }
 
 /**
- * caja_property_page_provider_get_pages:
+ * baul_property_page_provider_get_pages:
  * @provider: a #CajaPropertyPageProvider
  * @files: (element-type CajaFileInfo): a #GList of #CajaFileInfo
  *
@@ -84,7 +84,7 @@ caja_property_page_provider_get_type (void)
  * Returns: (element-type CajaPropertyPage) (transfer full): A #GList of allocated #CajaPropertyPage items.
  */
 GList *
-caja_property_page_provider_get_pages (CajaPropertyPageProvider *provider,
+baul_property_page_provider_get_pages (CajaPropertyPageProvider *provider,
                                        GList *files)
 {
     g_return_val_if_fail (CAJA_IS_PROPERTY_PAGE_PROVIDER (provider), NULL);

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-file-conflict-dialog: dialog that handles file conflicts
+/* baul-file-conflict-dialog: dialog that handles file conflicts
    during transfer operations.
 
    Copyright (C) 2008, Cosimo Cecchi
@@ -31,7 +31,7 @@
 #include <gtk/gtk.h>
 
 #define CAJA_TYPE_FILE_CONFLICT_DIALOG \
-	(caja_file_conflict_dialog_get_type ())
+	(baul_file_conflict_dialog_get_type ())
 #define CAJA_FILE_CONFLICT_DIALOG(o) \
 	(G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_FILE_CONFLICT_DIALOG,\
 				     CajaFileConflictDialog))
@@ -68,13 +68,13 @@ enum
     CONFLICT_RESPONSE_RENAME = 3,
 };
 
-GType caja_file_conflict_dialog_get_type (void) G_GNUC_CONST;
+GType baul_file_conflict_dialog_get_type (void) G_GNUC_CONST;
 
-GtkWidget* caja_file_conflict_dialog_new              (GtkWindow *parent,
+GtkWidget* baul_file_conflict_dialog_new              (GtkWindow *parent,
         GFile *source,
         GFile *destination,
         GFile *dest_dir);
-char*      caja_file_conflict_dialog_get_new_name     (CajaFileConflictDialog *dialog);
-gboolean   caja_file_conflict_dialog_get_apply_to_all (CajaFileConflictDialog *dialog);
+char*      baul_file_conflict_dialog_get_new_name     (CajaFileConflictDialog *dialog);
+gboolean   baul_file_conflict_dialog_get_apply_to_all (CajaFileConflictDialog *dialog);
 
 #endif /* CAJA_FILE_CONFLICT_DIALOG_H */

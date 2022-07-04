@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-desktop-link-monitor.c: singleton thatn manages the links
+   baul-desktop-link-monitor.c: singleton thatn manages the links
 
    Copyright (C) 2003 Red Hat, Inc.
 
@@ -34,13 +34,13 @@
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 
-#include "caja-desktop-link-monitor.h"
-#include "caja-desktop-link.h"
-#include "caja-desktop-icon-file.h"
-#include "caja-directory.h"
-#include "caja-desktop-directory.h"
-#include "caja-global-preferences.h"
-#include "caja-trash-monitor.h"
+#include "baul-desktop-link-monitor.h"
+#include "baul-desktop-link.h"
+#include "baul-desktop-icon-file.h"
+#include "baul-directory.h"
+#include "baul-desktop-directory.h"
+#include "baul-global-preferences.h"
+#include "baul-trash-monitor.h"
 
 struct CajaDesktopLinkMonitorDetails
 {
@@ -60,12 +60,12 @@ struct CajaDesktopLinkMonitorDetails
 };
 
 
-static void caja_desktop_link_monitor_init       (gpointer              object,
+static void baul_desktop_link_monitor_init       (gpointer              object,
         gpointer              klass);
-static void caja_desktop_link_monitor_class_init (gpointer              klass);
+static void baul_desktop_link_monitor_class_init (gpointer              klass);
 
 EEL_CLASS_BOILERPLATE (CajaDesktopLinkMonitor,
-                       caja_desktop_link_monitor,
+                       baul_desktop_link_monitor,
                        G_TYPE_OBJECT)
 
 static CajaDesktopLinkMonitor *the_link_monitor = NULL;
@@ -80,7 +80,7 @@ destroy_desktop_link_monitor (void)
 }
 
 CajaDesktopLinkMonitor *
-caja_desktop_link_monitor_get (void)
+baul_desktop_link_monitor_get (void)
 {
     if (the_link_monitor == NULL)
     {
@@ -101,7 +101,7 @@ volume_file_name_used (CajaDesktopLinkMonitor *monitor,
     {
         char *other_name;
 
-        other_name = caja_desktop_link_get_file_name (l->data);
+        other_name = baul_desktop_link_get_file_name (l->data);
         same = strcmp (name, other_name) == 0;
         g_free (other_name);
 
@@ -115,7 +115,7 @@ volume_file_name_used (CajaDesktopLinkMonitor *monitor,
 }
 
 char *
-caja_desktop_link_monitor_make_filename_unique (CajaDesktopLinkMonitor *monitor,
+baul_desktop_link_monitor_make_filename_unique (CajaDesktopLinkMonitor *monitor,
         const char *filename)
 {
     char *unique_name;
@@ -143,7 +143,7 @@ has_mount (CajaDesktopLinkMonitor *monitor,
 
     for (l = monitor->details->mount_links; l != NULL; l = l->next)
     {
-        other_mount = caja_desktop_link_get_mount (l->data);
+        other_mount = baul_desktop_link_get_mount (l->data);
         if (mount == other_mount)
         {
             g_object_unref (other_mount);
@@ -164,11 +164,11 @@ create_mount_link (CajaDesktopLinkMonitor *monitor,
         return;
 
     if ((!g_mount_is_shadowed (mount)) &&
-            g_settings_get_boolean (caja_desktop_preferences, CAJA_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
+            g_settings_get_boolean (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
     {
         CajaDesktopLink *link;
 
-        link = caja_desktop_link_new_from_mount (mount);
+        link = baul_desktop_link_new_from_mount (mount);
         monitor->details->mount_links = g_list_prepend (monitor->details->mount_links, link);
     }
 }
@@ -184,7 +184,7 @@ remove_mount_link (CajaDesktopLinkMonitor *monitor,
     link = NULL;
     for (l = monitor->details->mount_links; l != NULL; l = l->next)
     {
-        other_mount = caja_desktop_link_get_mount (l->data);
+        other_mount = baul_desktop_link_get_mount (l->data);
         if (mount == other_mount)
         {
             g_object_unref (other_mount);
@@ -240,11 +240,11 @@ update_link_visibility (CajaDesktopLinkMonitor *monitor,
                         CajaDesktopLinkType     link_type,
                         const char                 *preference_key)
 {
-    if (g_settings_get_boolean (caja_desktop_preferences, preference_key))
+    if (g_settings_get_boolean (baul_desktop_preferences, preference_key))
     {
         if (*link_ref == NULL)
         {
-            *link_ref = caja_desktop_link_new (link_type);
+            *link_ref = baul_desktop_link_new (link_type);
         }
     }
     else
@@ -317,7 +317,7 @@ desktop_volumes_visible_changed (gpointer callback_data)
 
     monitor = CAJA_DESKTOP_LINK_MONITOR (callback_data);
 
-    if (g_settings_get_boolean (caja_desktop_preferences, CAJA_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
+    if (g_settings_get_boolean (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
     {
         if (monitor->details->mount_links == NULL)
         {
@@ -347,20 +347,20 @@ create_link_and_add_preference (CajaDesktopLink   **link_ref,
 {
     gchar *detailed_signal;
 
-    if (g_settings_get_boolean (caja_desktop_preferences, preference_key))
+    if (g_settings_get_boolean (baul_desktop_preferences, preference_key))
     {
-        *link_ref = caja_desktop_link_new (link_type);
+        *link_ref = baul_desktop_link_new (link_type);
     }
 
     detailed_signal = g_strconcat ("changed::", preference_key, NULL);
-    g_signal_connect_swapped (caja_desktop_preferences,
+    g_signal_connect_swapped (baul_desktop_preferences,
                               detailed_signal,
                               callback, callback_data);
     g_free (detailed_signal);
 }
 
 static void
-caja_desktop_link_monitor_init (gpointer object, gpointer klass)
+baul_desktop_link_monitor_init (gpointer object, gpointer klass)
 {
     CajaDesktopLinkMonitor *monitor;
     GList *l, *mounts;
@@ -375,7 +375,7 @@ caja_desktop_link_monitor_init (gpointer object, gpointer klass)
     monitor->details->volume_monitor = g_volume_monitor_get ();
 
     /* We keep around a ref to the desktop dir */
-    monitor->details->desktop_dir = caja_directory_get_by_uri (EEL_DESKTOP_URI);
+    monitor->details->desktop_dir = baul_directory_get_by_uri (EEL_DESKTOP_URI);
 
     /* Default links */
 
@@ -414,7 +414,7 @@ caja_desktop_link_monitor_init (gpointer object, gpointer klass)
     }
     g_list_free (mounts);
 
-    g_signal_connect_swapped (caja_desktop_preferences,
+    g_signal_connect_swapped (baul_desktop_preferences,
                               "changed::" CAJA_PREFERENCES_DESKTOP_VOLUMES_VISIBLE,
                               G_CALLBACK (desktop_volumes_visible_changed),
                               monitor);
@@ -443,7 +443,7 @@ remove_link_and_preference (CajaDesktopLink       **link_ref,
         *link_ref = NULL;
     }
 
-    g_signal_handlers_disconnect_by_func (caja_desktop_preferences,
+    g_signal_handlers_disconnect_by_func (baul_desktop_preferences,
                                           callback, callback_data);
 }
 
@@ -484,10 +484,10 @@ desktop_link_monitor_finalize (GObject *object)
     g_list_free (monitor->details->mount_links);
     monitor->details->mount_links = NULL;
 
-    caja_directory_unref (monitor->details->desktop_dir);
+    baul_directory_unref (monitor->details->desktop_dir);
     monitor->details->desktop_dir = NULL;
 
-    g_signal_handlers_disconnect_by_func (caja_desktop_preferences,
+    g_signal_handlers_disconnect_by_func (baul_desktop_preferences,
                                           desktop_volumes_visible_changed,
                                           monitor);
 
@@ -511,7 +511,7 @@ desktop_link_monitor_finalize (GObject *object)
 }
 
 static void
-caja_desktop_link_monitor_class_init (gpointer klass)
+baul_desktop_link_monitor_class_init (gpointer klass)
 {
     GObjectClass *object_class;
 

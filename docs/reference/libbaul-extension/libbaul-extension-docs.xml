@@ -16,18 +16,18 @@
 
     <chapter>
       <title>Extension Interfaces</title>
-      <xi:include href="xml/caja-column-provider.xml" />
-      <xi:include href="xml/caja-column.xml" />
-      <xi:include href="xml/caja-extension-types.xml" />
-      <xi:include href="xml/caja-file-info.xml" />
-      <xi:include href="xml/caja-info-provider.xml" />
-      <xi:include href="xml/caja-location-widget-provider.xml" />
-      <xi:include href="xml/caja-menu-provider.xml" />
-      <xi:include href="xml/caja-menu.xml" />
-      <xi:include href="xml/caja-menu-item.xml" />
-      <xi:include href="xml/caja-widget-view-provider.xml" />
-      <xi:include href="xml/caja-property-page-provider.xml" />
-      <xi:include href="xml/caja-property-page.xml" />
+      <xi:include href="xml/baul-column-provider.xml" />
+      <xi:include href="xml/baul-column.xml" />
+      <xi:include href="xml/baul-extension-types.xml" />
+      <xi:include href="xml/baul-file-info.xml" />
+      <xi:include href="xml/baul-info-provider.xml" />
+      <xi:include href="xml/baul-location-widget-provider.xml" />
+      <xi:include href="xml/baul-menu-provider.xml" />
+      <xi:include href="xml/baul-menu.xml" />
+      <xi:include href="xml/baul-menu-item.xml" />
+      <xi:include href="xml/baul-widget-view-provider.xml" />
+      <xi:include href="xml/baul-property-page-provider.xml" />
+      <xi:include href="xml/baul-property-page.xml" />
     </chapter>
 
   </part>

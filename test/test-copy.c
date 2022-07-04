@@ -1,5 +1,5 @@
-#include <libcaja-private/caja-file-operations.h>
-#include <libcaja-private/caja-progress-info.h>
+#include <libbaul-private/baul-file-operations.h>
+#include <libbaul-private/baul-progress-info.h>
 
 #include "test.h"
 
@@ -14,8 +14,8 @@ changed_cb (CajaProgressInfo *info,
 	    gpointer data)
 {
 	g_print ("Changed: %s -- %s\n",
-		 caja_progress_info_get_status (info),
-		 caja_progress_info_get_details (info));
+		 baul_progress_info_get_status (info),
+		 baul_progress_info_get_details (info));
 }
 
 static void
@@ -23,7 +23,7 @@ progress_changed_cb (CajaProgressInfo *info,
 		     gpointer data)
 {
 	g_print ("Progress changed: %f\n",
-		 caja_progress_info_get_progress (info));
+		 baul_progress_info_get_progress (info));
 }
 
 static void
@@ -65,13 +65,13 @@ main (int argc, char* argv[])
 
 	gtk_widget_show (window);
 
-	caja_file_operations_copy (sources,
+	baul_file_operations_copy (sources,
 				       NULL /* GArray *relative_item_points */,
 				       dest,
 				       GTK_WINDOW (window),
 				       copy_done, NULL);
 
-	infos = caja_get_all_progress_info ();
+	infos = baul_get_all_progress_info ();
 
 	if (infos == NULL) {
 		return 0;

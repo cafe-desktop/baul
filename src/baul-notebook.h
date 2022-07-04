@@ -5,7 +5,7 @@
  *    (ephy-notebook.c)
  *
  *  Copyright © 2008 Free Software Foundation, Inc.
- *    (caja-notebook.c)
+ *    (baul-notebook.c)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
- *  $Id: caja-notebook.h 8210 2008-04-11 20:05:25Z chpe $
+ *  $Id: baul-notebook.h 8210 2008-04-11 20:05:25Z chpe $
  */
 
 #ifndef CAJA_NOTEBOOK_H
@@ -30,13 +30,13 @@
 #include <glib.h>
 
 #include <gtk/gtk.h>
-#include "caja-window-slot.h"
+#include "baul-window-slot.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define CAJA_TYPE_NOTEBOOK		(caja_notebook_get_type ())
+#define CAJA_TYPE_NOTEBOOK		(baul_notebook_get_type ())
 #define CAJA_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_NOTEBOOK, CajaNotebook))
 #define CAJA_NOTEBOOK_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_NOTEBOOK, CajaNotebookClass))
 #define CAJA_IS_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_NOTEBOOK))
@@ -64,31 +64,31 @@ extern "C" {
                                          CajaWindowSlot *slot);
     };
 
-    GType		caja_notebook_get_type		(void);
+    GType		baul_notebook_get_type		(void);
 
-    int		caja_notebook_add_tab	(CajaNotebook *nb,
+    int		baul_notebook_add_tab	(CajaNotebook *nb,
                                      CajaWindowSlot *slot,
                                      int position,
                                      gboolean jump_to);
 
-    void		caja_notebook_set_show_tabs	(CajaNotebook *nb,
+    void		baul_notebook_set_show_tabs	(CajaNotebook *nb,
             gboolean show_tabs);
 
-    void		caja_notebook_set_dnd_enabled (CajaNotebook *nb,
+    void		baul_notebook_set_dnd_enabled (CajaNotebook *nb,
             gboolean enabled);
-    void		caja_notebook_sync_tab_label (CajaNotebook *nb,
+    void		baul_notebook_sync_tab_label (CajaNotebook *nb,
             CajaWindowSlot *slot);
-    void		caja_notebook_sync_loading   (CajaNotebook *nb,
+    void		baul_notebook_sync_loading   (CajaNotebook *nb,
             CajaWindowSlot *slot);
 
-    void		caja_notebook_reorder_current_child_relative (CajaNotebook *notebook,
+    void		baul_notebook_reorder_current_child_relative (CajaNotebook *notebook,
             int offset);
-    void		caja_notebook_set_current_page_relative (CajaNotebook *notebook,
+    void		baul_notebook_set_current_page_relative (CajaNotebook *notebook,
             int offset);
 
-    gboolean        caja_notebook_can_reorder_current_child_relative (CajaNotebook *notebook,
+    gboolean        baul_notebook_can_reorder_current_child_relative (CajaNotebook *notebook,
             int offset);
-    gboolean        caja_notebook_can_set_current_page_relative (CajaNotebook *notebook,
+    gboolean        baul_notebook_can_set_current_page_relative (CajaNotebook *notebook,
             int offset);
 
 #ifdef __cplusplus

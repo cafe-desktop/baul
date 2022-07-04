@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-window-slot-info.h: Interface for caja window slots
+   baul-window-slot-info.h: Interface for baul window slots
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -25,11 +25,11 @@
 #ifndef CAJA_WINDOW_SLOT_INFO_H
 #define CAJA_WINDOW_SLOT_INFO_H
 
-#include "caja-window-info.h"
-#include "caja-view.h"
+#include "baul-window-info.h"
+#include "baul-view.h"
 
 
-#define CAJA_TYPE_WINDOW_SLOT_INFO           (caja_window_slot_info_get_type ())
+#define CAJA_TYPE_WINDOW_SLOT_INFO           (baul_window_slot_info_get_type ())
 #define CAJA_WINDOW_SLOT_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW_SLOT_INFO, CajaWindowSlotInfo))
 #define CAJA_IS_WINDOW_SLOT_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW_SLOT_INFO))
 #define CAJA_WINDOW_SLOT_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_WINDOW_SLOT_INFO, CajaWindowSlotInfoIface))
@@ -79,13 +79,13 @@ struct _CajaWindowSlotInfoIface
 };
 
 
-GType                             caja_window_slot_info_get_type            (void);
-CajaWindowInfo *              caja_window_slot_info_get_window          (CajaWindowSlotInfo            *slot);
-#define caja_window_slot_info_open_location(slot, location, mode, flags, selection) \
-	caja_window_slot_info_open_location_full(slot, location, mode, \
+GType                             baul_window_slot_info_get_type            (void);
+CajaWindowInfo *              baul_window_slot_info_get_window          (CajaWindowSlotInfo            *slot);
+#define baul_window_slot_info_open_location(slot, location, mode, flags, selection) \
+	baul_window_slot_info_open_location_full(slot, location, mode, \
 						 flags, selection, NULL, NULL)
 
-void                              caja_window_slot_info_open_location_full
+void                              baul_window_slot_info_open_location_full
 	(CajaWindowSlotInfo *slot,
         GFile                             *location,
         CajaWindowOpenMode                 mode,
@@ -93,14 +93,14 @@ void                              caja_window_slot_info_open_location_full
         GList                             *selection,
         CajaWindowGoToCallback		   callback,
         gpointer			   user_data);
-void                              caja_window_slot_info_set_status          (CajaWindowSlotInfo            *slot,
+void                              baul_window_slot_info_set_status          (CajaWindowSlotInfo            *slot,
         const char *status);
-void                              caja_window_slot_info_make_hosting_pane_active (CajaWindowSlotInfo       *slot);
+void                              baul_window_slot_info_make_hosting_pane_active (CajaWindowSlotInfo       *slot);
 
-char *                            caja_window_slot_info_get_current_location (CajaWindowSlotInfo           *slot);
-CajaView *                    caja_window_slot_info_get_current_view     (CajaWindowSlotInfo           *slot);
-int                               caja_window_slot_info_get_selection_count  (CajaWindowSlotInfo           *slot);
-GList *                           caja_window_slot_info_get_selection        (CajaWindowSlotInfo           *slot);
-char *                            caja_window_slot_info_get_title            (CajaWindowSlotInfo           *slot);
+char *                            baul_window_slot_info_get_current_location (CajaWindowSlotInfo           *slot);
+CajaView *                    baul_window_slot_info_get_current_view     (CajaWindowSlotInfo           *slot);
+int                               baul_window_slot_info_get_selection_count  (CajaWindowSlotInfo           *slot);
+GList *                           baul_window_slot_info_get_selection        (CajaWindowSlotInfo           *slot);
+char *                            baul_window_slot_info_get_title            (CajaWindowSlotInfo           *slot);
 
 #endif /* CAJA_WINDOW_SLOT_INFO_H */

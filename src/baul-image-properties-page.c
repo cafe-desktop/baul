@@ -41,10 +41,10 @@
 
 #include <eel/eel-vfs-extensions.h>
 
-#include <libcaja-extension/caja-property-page-provider.h>
-#include <libcaja-private/caja-module.h>
+#include <libbaul-extension/baul-property-page-provider.h>
+#include <libbaul-private/baul-module.h>
 
-#include "caja-image-properties-page.h"
+#include "baul-image-properties-page.h"
 
 #define LOAD_BUFFER_SIZE 8192
 
@@ -92,17 +92,17 @@ typedef struct
 } CajaImagePropertiesPageProviderClass;
 
 
-static GType caja_image_properties_page_provider_get_type (void);
+static GType baul_image_properties_page_provider_get_type (void);
 static void  property_page_provider_iface_init                (CajaPropertyPageProviderIface *iface);
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaImagePropertiesPage, caja_image_properties_page, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (CajaImagePropertiesPage, baul_image_properties_page, GTK_TYPE_BOX);
 
-G_DEFINE_TYPE_WITH_CODE (CajaImagePropertiesPageProvider, caja_image_properties_page_provider, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (CajaImagePropertiesPageProvider, baul_image_properties_page_provider, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (CAJA_TYPE_PROPERTY_PAGE_PROVIDER,
                                  property_page_provider_iface_init));
 
 static void
-caja_image_properties_page_finalize (GObject *object)
+baul_image_properties_page_finalize (GObject *object)
 {
     CajaImagePropertiesPage *page;
 
@@ -115,7 +115,7 @@ caja_image_properties_page_finalize (GObject *object)
         page->details->cancellable = NULL;
     }
 
-    G_OBJECT_CLASS (caja_image_properties_page_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_image_properties_page_parent_class)->finalize (object);
 }
 
 static void
@@ -629,19 +629,19 @@ load_location (CajaImagePropertiesPage *page,
 }
 
 static void
-caja_image_properties_page_class_init (CajaImagePropertiesPageClass *class)
+baul_image_properties_page_class_init (CajaImagePropertiesPageClass *class)
 {
     GObjectClass *object_class;
 
     object_class = G_OBJECT_CLASS (class);
 
-    object_class->finalize = caja_image_properties_page_finalize;
+    object_class->finalize = baul_image_properties_page_finalize;
 }
 
 static void
-caja_image_properties_page_init (CajaImagePropertiesPage *page)
+baul_image_properties_page_init (CajaImagePropertiesPage *page)
 {
-    page->details = caja_image_properties_page_get_instance_private (page);
+    page->details = baul_image_properties_page_get_instance_private (page);
 
     gtk_orientable_set_orientation (GTK_ORIENTABLE (page), GTK_ORIENTATION_VERTICAL);
 
@@ -678,32 +678,32 @@ get_property_pages (CajaPropertyPageProvider *provider,
     file = CAJA_FILE_INFO (files->data);
 
     if (!
-            (caja_file_info_is_mime_type (file, "image/x-bmp") ||
-             caja_file_info_is_mime_type (file, "image/x-ico") ||
-             caja_file_info_is_mime_type (file, "image/jpeg") ||
-             caja_file_info_is_mime_type (file, "image/gif") ||
-             caja_file_info_is_mime_type (file, "image/png") ||
-             caja_file_info_is_mime_type (file, "image/pnm") ||
-             caja_file_info_is_mime_type (file, "image/ras") ||
-             caja_file_info_is_mime_type (file, "image/tga") ||
-             caja_file_info_is_mime_type (file, "image/tiff") ||
-             caja_file_info_is_mime_type (file, "image/wbmp") ||
-             caja_file_info_is_mime_type (file, "image/x-xbitmap") ||
-             caja_file_info_is_mime_type (file, "image/x-xpixmap")))
+            (baul_file_info_is_mime_type (file, "image/x-bmp") ||
+             baul_file_info_is_mime_type (file, "image/x-ico") ||
+             baul_file_info_is_mime_type (file, "image/jpeg") ||
+             baul_file_info_is_mime_type (file, "image/gif") ||
+             baul_file_info_is_mime_type (file, "image/png") ||
+             baul_file_info_is_mime_type (file, "image/pnm") ||
+             baul_file_info_is_mime_type (file, "image/ras") ||
+             baul_file_info_is_mime_type (file, "image/tga") ||
+             baul_file_info_is_mime_type (file, "image/tiff") ||
+             baul_file_info_is_mime_type (file, "image/wbmp") ||
+             baul_file_info_is_mime_type (file, "image/x-xbitmap") ||
+             baul_file_info_is_mime_type (file, "image/x-xpixmap")))
     {
         return NULL;
     }
 
     pages = NULL;
 
-    uri = caja_file_info_get_uri (file);
+    uri = baul_file_info_get_uri (file);
 
-    page = g_object_new (caja_image_properties_page_get_type (), NULL);
+    page = g_object_new (baul_image_properties_page_get_type (), NULL);
     load_location (page, uri);
 
     g_free (uri);
 
-    real_page = caja_property_page_new
+    real_page = baul_property_page_new
                 ("CajaImagePropertiesPage::property_page",
                  gtk_label_new (_("Image")),
                  GTK_WIDGET (page));
@@ -720,18 +720,18 @@ property_page_provider_iface_init (CajaPropertyPageProviderIface *iface)
 
 
 static void
-caja_image_properties_page_provider_init (CajaImagePropertiesPageProvider *sidebar)
+baul_image_properties_page_provider_init (CajaImagePropertiesPageProvider *sidebar)
 {
 }
 
 static void
-caja_image_properties_page_provider_class_init (CajaImagePropertiesPageProviderClass *class)
+baul_image_properties_page_provider_class_init (CajaImagePropertiesPageProviderClass *class)
 {
 }
 
 void
-caja_image_properties_page_register (void)
+baul_image_properties_page_register (void)
 {
-    caja_module_add_type (caja_image_properties_page_provider_get_type ());
+    baul_module_add_type (baul_image_properties_page_provider_get_type ());
 }
 

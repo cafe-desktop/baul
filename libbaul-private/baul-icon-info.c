@@ -1,5 +1,5 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
-/* caja-icon-info.c
+/* baul-icon-info.c
  * Copyright (C) 2007  Red Hat, Inc.,  Alexander Larsson <alexl@redhat.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,9 +20,9 @@
 
 #include <config.h>
 #include <string.h>
-#include "caja-icon-info.h"
-#include "caja-icon-names.h"
-#include "caja-default-file-icon.h"
+#include "baul-icon-info.h"
+#include "baul-icon-names.h"
+#include "baul-default-file-icon.h"
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
@@ -52,18 +52,18 @@ struct _CajaIconInfoClass
 static void schedule_reap_cache (void);
 
 G_DEFINE_TYPE (CajaIconInfo,
-               caja_icon_info,
+               baul_icon_info,
                G_TYPE_OBJECT);
 
 static void
-caja_icon_info_init (CajaIconInfo *icon)
+baul_icon_info_init (CajaIconInfo *icon)
 {
     icon->last_use_time = g_get_monotonic_time ();
     icon->sole_owner = TRUE;
 }
 
 gboolean
-caja_icon_info_is_fallback (CajaIconInfo  *icon)
+baul_icon_info_is_fallback (CajaIconInfo  *icon)
 {
     return icon->pixbuf == NULL;
 }
@@ -87,7 +87,7 @@ pixbuf_toggle_notify (gpointer      info,
 }
 
 static void
-caja_icon_info_finalize (GObject *object)
+baul_icon_info_finalize (GObject *object)
 {
     CajaIconInfo *icon;
 
@@ -108,22 +108,22 @@ caja_icon_info_finalize (GObject *object)
     g_free (icon->display_name);
     g_free (icon->icon_name);
 
-    G_OBJECT_CLASS (caja_icon_info_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_icon_info_parent_class)->finalize (object);
 }
 
 static void
-caja_icon_info_class_init (CajaIconInfoClass *icon_info_class)
+baul_icon_info_class_init (CajaIconInfoClass *icon_info_class)
 {
     GObjectClass *gobject_class;
 
     gobject_class = (GObjectClass *) icon_info_class;
 
-    gobject_class->finalize = caja_icon_info_finalize;
+    gobject_class->finalize = baul_icon_info_finalize;
 
 }
 
 CajaIconInfo *
-caja_icon_info_new_for_pixbuf (GdkPixbuf *pixbuf,
+baul_icon_info_new_for_pixbuf (GdkPixbuf *pixbuf,
                                gint       scale)
 {
     CajaIconInfo *icon;
@@ -141,7 +141,7 @@ caja_icon_info_new_for_pixbuf (GdkPixbuf *pixbuf,
 }
 
 static CajaIconInfo *
-caja_icon_info_new_for_icon_info (GtkIconInfo *icon_info,
+baul_icon_info_new_for_icon_info (GtkIconInfo *icon_info,
                                   gint         scale)
 {
     CajaIconInfo *icon;
@@ -271,7 +271,7 @@ schedule_reap_cache (void)
 }
 
 void
-caja_icon_info_clear_caches (void)
+baul_icon_info_clear_caches (void)
 {
     if (loadable_icon_cache)
     {
@@ -321,7 +321,7 @@ icon_key_free (IconKey *key)
 }
 
 CajaIconInfo *
-caja_icon_info_lookup (GIcon *icon,
+baul_icon_info_lookup (GIcon *icon,
                        int size,
                        int scale)
 {
@@ -379,7 +379,7 @@ caja_icon_info_lookup (GIcon *icon,
         }
 
 
-        icon_info = caja_icon_info_new_for_pixbuf (pixbuf, scale);
+        icon_info = baul_icon_info_new_for_pixbuf (pixbuf, scale);
 
         key = icon_key_new (icon, scale, size);
         g_hash_table_insert (loadable_icon_cache, key, icon_info);
@@ -420,7 +420,7 @@ caja_icon_info_lookup (GIcon *icon,
                                                                  GTK_ICON_LOOKUP_FORCE_SIZE);
         }
 
-        icon_info = caja_icon_info_new_for_icon_info (gtkicon_info, scale);
+        icon_info = baul_icon_info_new_for_icon_info (gtkicon_info, scale);
         g_object_unref (gtkicon_info);
 
         key = icon_key_new (icon,scale, size);
@@ -432,7 +432,7 @@ caja_icon_info_lookup (GIcon *icon,
 }
 
 CajaIconInfo *
-caja_icon_info_lookup_from_name (const char *name,
+baul_icon_info_lookup_from_name (const char *name,
                                  int size,
                                  int scale)
 {
@@ -440,13 +440,13 @@ caja_icon_info_lookup_from_name (const char *name,
     CajaIconInfo *info;
 
     icon = g_themed_icon_new (name);
-    info = caja_icon_info_lookup (icon, size, scale);
+    info = baul_icon_info_lookup (icon, size, scale);
     g_object_unref (icon);
     return info;
 }
 
 CajaIconInfo *
-caja_icon_info_lookup_from_path (const char *path,
+baul_icon_info_lookup_from_path (const char *path,
                                  int size,
                                  int scale)
 {
@@ -456,14 +456,14 @@ caja_icon_info_lookup_from_path (const char *path,
 
     icon_file = g_file_new_for_path (path);
     icon = g_file_icon_new (icon_file);
-    info = caja_icon_info_lookup (icon, size, scale);
+    info = baul_icon_info_lookup (icon, size, scale);
     g_object_unref (icon);
     g_object_unref (icon_file);
     return info;
 }
 
 GdkPixbuf *
-caja_icon_info_get_pixbuf_nodefault (CajaIconInfo  *icon)
+baul_icon_info_get_pixbuf_nodefault (CajaIconInfo  *icon)
 {
     GdkPixbuf *res;
 
@@ -488,12 +488,12 @@ caja_icon_info_get_pixbuf_nodefault (CajaIconInfo  *icon)
 }
 
 cairo_surface_t *
-caja_icon_info_get_surface_nodefault (CajaIconInfo *icon)
+baul_icon_info_get_surface_nodefault (CajaIconInfo *icon)
 {
     GdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
-    pixbuf = caja_icon_info_get_pixbuf_nodefault (icon);
+    pixbuf = baul_icon_info_get_pixbuf_nodefault (icon);
     surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, icon->orig_scale, NULL);
     g_object_unref (pixbuf);
 
@@ -501,20 +501,20 @@ caja_icon_info_get_surface_nodefault (CajaIconInfo *icon)
 }
 
 GdkPixbuf *
-caja_icon_info_get_pixbuf (CajaIconInfo *icon)
+baul_icon_info_get_pixbuf (CajaIconInfo *icon)
 {
     GdkPixbuf *res;
 
-    res = caja_icon_info_get_pixbuf_nodefault (icon);
+    res = baul_icon_info_get_pixbuf_nodefault (icon);
     if (res == NULL)
     {
-        res = gdk_pixbuf_new_from_data (caja_default_file_icon,
+        res = gdk_pixbuf_new_from_data (baul_default_file_icon,
                                         GDK_COLORSPACE_RGB,
                                         TRUE,
                                         8,
-                                        caja_default_file_icon_width,
-                                        caja_default_file_icon_height,
-                                        caja_default_file_icon_width * 4, /* stride */
+                                        baul_default_file_icon_width,
+                                        baul_default_file_icon_height,
+                                        baul_default_file_icon_width * 4, /* stride */
                                         NULL, /* don't destroy info */
                                         NULL);
     }
@@ -523,12 +523,12 @@ caja_icon_info_get_pixbuf (CajaIconInfo *icon)
 }
 
 cairo_surface_t *
-caja_icon_info_get_surface (CajaIconInfo *icon)
+baul_icon_info_get_surface (CajaIconInfo *icon)
 {
     GdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
-    pixbuf = caja_icon_info_get_pixbuf (icon);
+    pixbuf = baul_icon_info_get_pixbuf (icon);
     surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, icon->orig_scale, NULL);
     g_object_unref (pixbuf);
 
@@ -536,14 +536,14 @@ caja_icon_info_get_surface (CajaIconInfo *icon)
 }
 
 GdkPixbuf *
-caja_icon_info_get_pixbuf_nodefault_at_size (CajaIconInfo  *icon,
+baul_icon_info_get_pixbuf_nodefault_at_size (CajaIconInfo  *icon,
         gsize              forced_size)
 {
     GdkPixbuf *pixbuf, *scaled_pixbuf;
     int w, h, s;
     double scale;
 
-    pixbuf = caja_icon_info_get_pixbuf_nodefault (icon);
+    pixbuf = baul_icon_info_get_pixbuf_nodefault (icon);
 
     if (pixbuf == NULL)
         return NULL;
@@ -565,14 +565,14 @@ caja_icon_info_get_pixbuf_nodefault_at_size (CajaIconInfo  *icon,
 }
 
 cairo_surface_t *
-caja_icon_info_get_surface_nodefault_at_size (CajaIconInfo *icon,
+baul_icon_info_get_surface_nodefault_at_size (CajaIconInfo *icon,
                                               gsize         forced_size)
 {
     GdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
-    pixbuf = caja_icon_info_get_pixbuf_nodefault_at_size (icon, forced_size);
-    /*catch the case of caja_icon_info_get_pixbuf_nodefault_at_size returning NULL */
+    pixbuf = baul_icon_info_get_pixbuf_nodefault_at_size (icon, forced_size);
+    /*catch the case of baul_icon_info_get_pixbuf_nodefault_at_size returning NULL */
     if (!pixbuf)
         return NULL;
     surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, icon->orig_scale, NULL);
@@ -582,14 +582,14 @@ caja_icon_info_get_surface_nodefault_at_size (CajaIconInfo *icon,
 }
 
 GdkPixbuf *
-caja_icon_info_get_pixbuf_at_size (CajaIconInfo  *icon,
+baul_icon_info_get_pixbuf_at_size (CajaIconInfo  *icon,
                                    gsize              forced_size)
 {
     GdkPixbuf *pixbuf, *scaled_pixbuf;
     int w, h, s;
     double scale;
 
-    pixbuf = caja_icon_info_get_pixbuf (icon);
+    pixbuf = baul_icon_info_get_pixbuf (icon);
 
     if (pixbuf == NULL)
         return NULL;
@@ -611,13 +611,13 @@ caja_icon_info_get_pixbuf_at_size (CajaIconInfo  *icon,
 }
 
 cairo_surface_t *
-caja_icon_info_get_surface_at_size (CajaIconInfo *icon,
+baul_icon_info_get_surface_at_size (CajaIconInfo *icon,
                                     gsize         forced_size)
 {
     GdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
-    pixbuf = caja_icon_info_get_pixbuf_at_size (icon, forced_size);
+    pixbuf = baul_icon_info_get_pixbuf_at_size (icon, forced_size);
     surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, icon->orig_scale, NULL);
     g_object_unref (pixbuf);
 
@@ -625,7 +625,7 @@ caja_icon_info_get_surface_at_size (CajaIconInfo *icon,
 }
 
 gboolean
-caja_icon_info_get_embedded_rect (CajaIconInfo  *icon,
+baul_icon_info_get_embedded_rect (CajaIconInfo  *icon,
                                   GdkRectangle      *rectangle)
 {
     *rectangle = icon->embedded_rect;
@@ -633,7 +633,7 @@ caja_icon_info_get_embedded_rect (CajaIconInfo  *icon,
 }
 
 gboolean
-caja_icon_info_get_attach_points (CajaIconInfo  *icon,
+baul_icon_info_get_attach_points (CajaIconInfo  *icon,
                                   GdkPoint         **points,
                                   gint              *n_points)
 {
@@ -642,12 +642,12 @@ caja_icon_info_get_attach_points (CajaIconInfo  *icon,
     return icon->n_attach_points != 0;
 }
 
-const char* caja_icon_info_get_display_name(CajaIconInfo* icon)
+const char* baul_icon_info_get_display_name(CajaIconInfo* icon)
 {
     return icon->display_name;
 }
 
-const char* caja_icon_info_get_used_name(CajaIconInfo* icon)
+const char* baul_icon_info_get_used_name(CajaIconInfo* icon)
 {
     return icon->icon_name;
 }
@@ -659,7 +659,7 @@ const char* caja_icon_info_get_used_name(CajaIconInfo* icon)
  * CAJA_ICON_SIZE_LARGEST, inclusive.
  */
 guint
-caja_get_icon_size_for_zoom_level (CajaZoomLevel zoom_level)
+baul_get_icon_size_for_zoom_level (CajaZoomLevel zoom_level)
 {
     switch (zoom_level)
     {
@@ -682,13 +682,13 @@ caja_get_icon_size_for_zoom_level (CajaZoomLevel zoom_level)
 }
 
 float
-caja_get_relative_icon_size_for_zoom_level (CajaZoomLevel zoom_level)
+baul_get_relative_icon_size_for_zoom_level (CajaZoomLevel zoom_level)
 {
-    return (float)caja_get_icon_size_for_zoom_level (zoom_level) / CAJA_ICON_SIZE_STANDARD;
+    return (float)baul_get_icon_size_for_zoom_level (zoom_level) / CAJA_ICON_SIZE_STANDARD;
 }
 
 guint
-caja_icon_get_larger_icon_size (guint size)
+baul_icon_get_larger_icon_size (guint size)
 {
     if (size < CAJA_ICON_SIZE_SMALLEST)
     {
@@ -718,7 +718,7 @@ caja_icon_get_larger_icon_size (guint size)
 }
 
 guint
-caja_icon_get_smaller_icon_size (guint size)
+baul_icon_get_smaller_icon_size (guint size)
 {
     if (size > CAJA_ICON_SIZE_LARGEST)
     {
@@ -748,7 +748,7 @@ caja_icon_get_smaller_icon_size (guint size)
 }
 
 gint
-caja_get_icon_size_for_stock_size (GtkIconSize size)
+baul_get_icon_size_for_stock_size (GtkIconSize size)
 {
     gint w, h;
 
@@ -761,7 +761,7 @@ caja_get_icon_size_for_stock_size (GtkIconSize size)
 
 
 guint
-caja_icon_get_emblem_size_for_icon_size (guint size)
+baul_icon_get_emblem_size_for_icon_size (guint size)
 {
     if (size >= 96)
         return 48;
@@ -778,7 +778,7 @@ caja_icon_get_emblem_size_for_icon_size (guint size)
 }
 
 gboolean
-caja_icon_theme_can_render (GThemedIcon *icon)
+baul_icon_theme_can_render (GThemedIcon *icon)
 {
 	GtkIconTheme *icon_theme;
 	const gchar * const *names;
@@ -798,7 +798,7 @@ caja_icon_theme_can_render (GThemedIcon *icon)
 }
 
 GIcon *
-caja_user_special_directory_get_gicon (GUserDirectory directory)
+baul_user_special_directory_get_gicon (GUserDirectory directory)
 {
 
 	#define ICON_CASE(x) \

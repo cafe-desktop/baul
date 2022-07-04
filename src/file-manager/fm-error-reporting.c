@@ -31,8 +31,8 @@
 #include <eel/eel-string.h>
 #include <eel/eel-stock-dialogs.h>
 
-#include <libcaja-private/caja-debug-log.h>
-#include <libcaja-private/caja-file.h>
+#include <libbaul-private/baul-debug-log.h>
+#include <libbaul-private/baul-file.h>
 
 #include "fm-error-reporting.h"
 
@@ -62,7 +62,7 @@ fm_report_error_loading_directory (CajaFile *file,
         return;
     }
 
-    file_name = caja_file_get_display_name (file);
+    file_name = baul_file_get_display_name (file);
 
     if (error->domain == G_IO_ERROR)
     {
@@ -105,7 +105,7 @@ fm_report_error_renaming_file (CajaFile *file,
     /* Truncate names for display since very long file names with no spaces
      * in them won't get wrapped, and can create insanely wide dialog boxes.
      */
-    original_name = caja_file_get_display_name (file);
+    original_name = baul_file_get_display_name (file);
     original_name_truncated = eel_str_middle_truncate (original_name, MAXIMUM_DISPLAYED_FILE_NAME_LENGTH);
     g_free (original_name);
 
@@ -180,7 +180,7 @@ fm_report_error_setting_group (CajaFile *file,
         return;
     }
 
-    file_name = caja_file_get_display_name (file);
+    file_name = baul_file_get_display_name (file);
 
     message = NULL;
     if (error->domain == G_IO_ERROR)
@@ -226,7 +226,7 @@ fm_report_error_setting_owner (CajaFile *file,
         return;
     }
 
-    file_name = caja_file_get_display_name (file);
+    file_name = baul_file_get_display_name (file);
 
     message = g_strdup_printf (_("Sorry, could not change the owner of \"%s\": %s"), file_name, error->message);
 
@@ -249,7 +249,7 @@ fm_report_error_setting_permissions (CajaFile *file,
         return;
     }
 
-    file_name = caja_file_get_display_name (file);
+    file_name = baul_file_get_display_name (file);
 
     message = g_strdup_printf (_("Sorry, could not change the permissions of \"%s\": %s"), file_name, error->message);
 
@@ -317,7 +317,7 @@ finish_rename (CajaFile *file, gboolean stop_timer, GError *error)
     }
 
     /* Cancel both the rename and the timed wait. */
-    caja_file_cancel (file, rename_callback, NULL);
+    baul_file_cancel (file, rename_callback, NULL);
     if (stop_timer)
     {
         eel_timed_wait_stop (cancel_rename_callback, file);
@@ -362,7 +362,7 @@ fm_rename_file (CajaFile *file,
                             data, (GDestroyNotify)fm_rename_data_free);
 
     /* Start the timed wait to cancel the rename. */
-    old_name = caja_file_get_display_name (file);
+    old_name = baul_file_get_display_name (file);
     wait_message = g_strdup_printf (_("Renaming \"%s\" to \"%s\"."),
                                     old_name,
                                     new_name);
@@ -371,13 +371,13 @@ fm_rename_file (CajaFile *file,
                           NULL); /* FIXME bugzilla.gnome.org 42395: Parent this? */
     g_free (wait_message);
 
-    uri = caja_file_get_uri (file);
-    caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    uri = baul_file_get_uri (file);
+    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
                     "rename file old=\"%s\", new=\"%s\"",
                     uri, new_name);
     g_free (uri);
 
     /* Start the rename. */
-    caja_file_rename (file, new_name,
+    baul_file_rename (file, new_name,
                       rename_callback, NULL);
 }

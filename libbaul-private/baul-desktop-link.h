@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-desktop-link.h: Class that handles the links on the desktop
+   baul-desktop-link.h: Class that handles the links on the desktop
 
    Copyright (C) 2003 Red Hat, Inc.
 
@@ -27,9 +27,9 @@
 
 #include <gio/gio.h>
 
-#include "caja-file.h"
+#include "baul-file.h"
 
-#define CAJA_TYPE_DESKTOP_LINK caja_desktop_link_get_type()
+#define CAJA_TYPE_DESKTOP_LINK baul_desktop_link_get_type()
 #define CAJA_DESKTOP_LINK(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_LINK, CajaDesktopLink))
 #define CAJA_DESKTOP_LINK_CLASS(klass) \
@@ -63,22 +63,22 @@ typedef enum
     CAJA_DESKTOP_LINK_NETWORK
 } CajaDesktopLinkType;
 
-GType   caja_desktop_link_get_type (void);
+GType   baul_desktop_link_get_type (void);
 
-CajaDesktopLink *   caja_desktop_link_new                     (CajaDesktopLinkType  type);
-CajaDesktopLink *   caja_desktop_link_new_from_mount          (GMount                 *mount);
-CajaDesktopLinkType caja_desktop_link_get_link_type           (CajaDesktopLink     *link);
-char *                  caja_desktop_link_get_file_name           (CajaDesktopLink     *link);
-char *                  caja_desktop_link_get_display_name        (CajaDesktopLink     *link);
-GIcon *                 caja_desktop_link_get_icon                (CajaDesktopLink     *link);
-GFile *                 caja_desktop_link_get_activation_location (CajaDesktopLink     *link);
-char *                  caja_desktop_link_get_activation_uri      (CajaDesktopLink     *link);
-gboolean                caja_desktop_link_get_date                (CajaDesktopLink     *link,
+CajaDesktopLink *   baul_desktop_link_new                     (CajaDesktopLinkType  type);
+CajaDesktopLink *   baul_desktop_link_new_from_mount          (GMount                 *mount);
+CajaDesktopLinkType baul_desktop_link_get_link_type           (CajaDesktopLink     *link);
+char *                  baul_desktop_link_get_file_name           (CajaDesktopLink     *link);
+char *                  baul_desktop_link_get_display_name        (CajaDesktopLink     *link);
+GIcon *                 baul_desktop_link_get_icon                (CajaDesktopLink     *link);
+GFile *                 baul_desktop_link_get_activation_location (CajaDesktopLink     *link);
+char *                  baul_desktop_link_get_activation_uri      (CajaDesktopLink     *link);
+gboolean                baul_desktop_link_get_date                (CajaDesktopLink     *link,
         CajaDateType         date_type,
         time_t                  *date);
-GMount *                caja_desktop_link_get_mount               (CajaDesktopLink     *link);
-gboolean                caja_desktop_link_can_rename              (CajaDesktopLink     *link);
-gboolean                caja_desktop_link_rename                  (CajaDesktopLink     *link,
+GMount *                baul_desktop_link_get_mount               (CajaDesktopLink     *link);
+gboolean                baul_desktop_link_can_rename              (CajaDesktopLink     *link);
+gboolean                baul_desktop_link_rename                  (CajaDesktopLink     *link,
         const char              *name);
 
 

@@ -34,11 +34,11 @@
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-gtk-extensions.h>
 
-#include "caja-actions.h"
-#include "caja-bookmark-list.h"
-#include "caja-bookmarks-window.h"
-#include "caja-window-bookmarks.h"
-#include "caja-window-private.h"
+#include "baul-actions.h"
+#include "baul-bookmark-list.h"
+#include "baul-bookmarks-window.h"
+#include "baul-window-bookmarks.h"
+#include "baul-window-private.h"
 
 #define MENU_ITEM_MAX_WIDTH_CHARS 32
 
@@ -61,7 +61,7 @@ remove_bookmarks_for_uri_if_yes (GtkDialog *dialog, int response, gpointer callb
         const char *uri;
 
         uri = g_object_get_data (G_OBJECT (dialog), "uri");
-        caja_bookmark_list_delete_items_with_uri (window->details->bookmark_list, uri);
+        baul_bookmark_list_delete_items_with_uri (window->details->bookmark_list, uri);
     }
 
     gtk_widget_destroy (GTK_WIDGET (dialog));
@@ -77,7 +77,7 @@ show_bogus_bookmark_window (CajaWindow *window,
     char *prompt;
     char *detail;
 
-    location = caja_bookmark_get_location (bookmark);
+    location = baul_bookmark_get_location (bookmark);
     uri_for_display = g_file_get_parse_name (location);
 
     prompt = _("Do you want to remove any bookmarks with the "
@@ -117,17 +117,17 @@ get_or_create_bookmarks_window (CajaWindow *window)
 }
 
 /**
- * caja_bookmarks_exiting:
+ * baul_bookmarks_exiting:
  *
  * Last chance to save state before app exits.
  * Called when application exits; don't call from anywhere else.
  **/
 void
-caja_bookmarks_exiting (void)
+baul_bookmarks_exiting (void)
 {
     if (bookmarks_window != NULL)
     {
-        caja_bookmarks_window_save_geometry (bookmarks_window);
+        baul_bookmarks_window_save_geometry (bookmarks_window);
         gtk_widget_destroy (GTK_WIDGET (bookmarks_window));
     }
 }
@@ -139,7 +139,7 @@ caja_bookmarks_exiting (void)
  * Does nothing if there's already a bookmark for the displayed location.
  */
 void
-caja_window_add_bookmark_for_current_location (CajaWindow *window)
+baul_window_add_bookmark_for_current_location (CajaWindow *window)
 {
     CajaBookmark *bookmark;
     CajaWindowSlot *slot;
@@ -151,14 +151,14 @@ caja_window_add_bookmark_for_current_location (CajaWindow *window)
     bookmark = slot->current_location_bookmark;
     list = window->details->bookmark_list;
 
-    if (!caja_bookmark_list_contains (list, bookmark))
+    if (!baul_bookmark_list_contains (list, bookmark))
     {
-        caja_bookmark_list_append (list, bookmark);
+        baul_bookmark_list_append (list, bookmark);
     }
 }
 
 void
-caja_window_edit_bookmarks (CajaWindow *window)
+baul_window_edit_bookmarks (CajaWindow *window)
 {
     GtkWindow *dialog;
 
@@ -174,7 +174,7 @@ remove_bookmarks_menu_items (CajaWindow *window)
 {
     GtkUIManager *ui_manager;
 
-    ui_manager = caja_window_get_ui_manager (window);
+    ui_manager = baul_window_get_ui_manager (window);
     if (window->details->bookmarks_merge_id != 0)
     {
         gtk_ui_manager_remove_ui (ui_manager,
@@ -222,12 +222,12 @@ update_bookmarks (CajaWindow *window)
 
     if (window->details->bookmark_list == NULL)
     {
-        window->details->bookmark_list = caja_bookmark_list_new ();
+        window->details->bookmark_list = baul_bookmark_list_new ();
     }
 
     bookmarks = window->details->bookmark_list;
 
-    ui_manager = caja_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
 
     window->details->bookmarks_merge_id = gtk_ui_manager_new_merge_id (ui_manager);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -242,17 +242,17 @@ update_bookmarks (CajaWindow *window)
     g_object_unref (window->details->bookmarks_action_group);
 
     /* append new set of bookmarks */
-    bookmark_count = caja_bookmark_list_length (bookmarks);
+    bookmark_count = baul_bookmark_list_length (bookmarks);
     for (index = 0; index < bookmark_count; ++index)
     {
-        bookmark = caja_bookmark_list_item_at (bookmarks, index);
+        bookmark = baul_bookmark_list_item_at (bookmarks, index);
 
-        if (caja_bookmark_uri_known_not_to_exist (bookmark))
+        if (baul_bookmark_uri_known_not_to_exist (bookmark))
         {
             continue;
         }
 
-        caja_menus_append_bookmark_to_menu
+        baul_menus_append_bookmark_to_menu
         (CAJA_WINDOW (window),
          bookmark,
          CAJA_WINDOW_GET_CLASS (window)->bookmarks_placeholder,
@@ -275,13 +275,13 @@ refresh_bookmarks_menu (CajaWindow *window)
 }
 
 /**
- * caja_window_initialize_bookmarks_menu
+ * baul_window_initialize_bookmarks_menu
  *
  * Fill in bookmarks menu with stored bookmarks, and wire up signals
  * so we'll be notified when bookmark list changes.
  */
 void
-caja_window_initialize_bookmarks_menu (CajaWindow *window)
+baul_window_initialize_bookmarks_menu (CajaWindow *window)
 {
     g_assert (CAJA_IS_WINDOW (window));
 

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-progress-info.h: file operation progress info.
+   baul-progress-info.h: file operation progress info.
 
    Copyright (C) 2007 Red Hat, Inc.
 
@@ -32,8 +32,8 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include "caja-progress-info.h"
-#include "caja-global-preferences.h"
+#include "baul-progress-info.h"
+#include "baul-global-preferences.h"
 
 enum
 {
@@ -101,10 +101,10 @@ static void update_status_icon_and_window (void);
 
 G_LOCK_DEFINE_STATIC(progress_info);
 
-G_DEFINE_TYPE (CajaProgressInfo, caja_progress_info, G_TYPE_OBJECT)
+G_DEFINE_TYPE (CajaProgressInfo, baul_progress_info, G_TYPE_OBJECT)
 
 GList *
-caja_get_all_progress_info (void)
+baul_get_all_progress_info (void)
 {
     GList *l;
 
@@ -118,7 +118,7 @@ caja_get_all_progress_info (void)
 }
 
 static void
-caja_progress_info_finalize (GObject *object)
+baul_progress_info_finalize (GObject *object)
 {
     CajaProgressInfo *info;
 
@@ -128,14 +128,14 @@ caja_progress_info_finalize (GObject *object)
     g_free (info->details);
     g_object_unref (info->cancellable);
 
-    if (G_OBJECT_CLASS (caja_progress_info_parent_class)->finalize)
+    if (G_OBJECT_CLASS (baul_progress_info_parent_class)->finalize)
     {
-        (*G_OBJECT_CLASS (caja_progress_info_parent_class)->finalize) (object);
+        (*G_OBJECT_CLASS (baul_progress_info_parent_class)->finalize) (object);
     }
 }
 
 static void
-caja_progress_info_dispose (GObject *object)
+baul_progress_info_dispose (GObject *object)
 {
     CajaProgressInfo *info;
 
@@ -160,12 +160,12 @@ caja_progress_info_dispose (GObject *object)
 }
 
 static void
-caja_progress_info_class_init (CajaProgressInfoClass *klass)
+baul_progress_info_class_init (CajaProgressInfoClass *klass)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
-    gobject_class->finalize = caja_progress_info_finalize;
-    gobject_class->dispose = caja_progress_info_dispose;
+    gobject_class->finalize = baul_progress_info_finalize;
+    gobject_class->dispose = baul_progress_info_dispose;
 
     signals[CHANGED] =
         g_signal_new ("changed",
@@ -311,7 +311,7 @@ update_data (ProgressWidgetData *data)
     char *status, *details, *curstat;
     char *markup;
 
-    status = caja_progress_info_get_status (data->info);
+    status = baul_progress_info_get_status (data->info);
 
     switch (data->state) {
         case STATE_PAUSED:
@@ -341,7 +341,7 @@ update_data (ProgressWidgetData *data)
     gtk_label_set_text (data->status, status);
     g_free (status);
 
-    details = caja_progress_info_get_details (data->info);
+    details = baul_progress_info_get_details (data->info);
     markup = g_markup_printf_escaped ("<span size='small'>%s</span>", details);
     gtk_label_set_markup (data->details, markup);
     g_free (details);
@@ -588,7 +588,7 @@ update_progress (ProgressWidgetData *data)
 {
     double progress;
 
-    progress = caja_progress_info_get_progress (data->info);
+    progress = baul_progress_info_get_progress (data->info);
     if (progress < 0)
     {
         gtk_progress_bar_pulse (data->progress_bar);
@@ -622,12 +622,12 @@ update_status_icon_and_window (void)
 
         if (window_shown)
         {
-            if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_SHOW_NOTIFICATIONS) &&
+            if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_NOTIFICATIONS) &&
                 !gtk_window_is_active (GTK_WINDOW (get_progress_window ())))
             {
                 NotifyNotification *notification;
 
-                notification = notify_notification_new ("caja",
+                notification = notify_notification_new ("baul",
                                                         _("Process completed"),
                                                         "system-file-manager");
 
@@ -671,7 +671,7 @@ do_disable_pause (CajaProgressInfo *info)
 }
 
 void
-caja_progress_info_disable_pause (CajaProgressInfo *info)
+baul_progress_info_disable_pause (CajaProgressInfo *info)
 {
     GSource *source = g_idle_source_new ();
     g_source_set_callback (source, (GSourceFunc)do_disable_pause, info, NULL);
@@ -682,7 +682,7 @@ static void
 cancel_clicked (GtkWidget *button,
                 ProgressWidgetData *data)
 {
-    caja_progress_info_cancel (data->info);
+    baul_progress_info_cancel (data->info);
     gtk_widget_set_sensitive (button, FALSE);
     do_disable_pause(data->info);
 }
@@ -707,7 +707,7 @@ widget_state_notify_paused_callback (ProgressWidgetData *data)
 }
 
 void
-caja_progress_info_get_ready (CajaProgressInfo *info)
+baul_progress_info_get_ready (CajaProgressInfo *info)
 {
     if (info->waiting) {
         G_LOCK (progress_info);
@@ -935,11 +935,11 @@ handle_new_progress_info (CajaProgressInfo *info)
 static gboolean
 delayed_window_showup (CajaProgressInfo *info)
 {
-    if (caja_progress_info_get_is_paused (info))
+    if (baul_progress_info_get_is_paused (info))
     {
         return TRUE;
     }
-    if (!caja_progress_info_get_is_finished (info))
+    if (!baul_progress_info_get_is_finished (info))
     {
         update_status_icon_and_window ();
     }
@@ -952,7 +952,7 @@ new_op_started (CajaProgressInfo *info)
 {
     g_signal_handlers_disconnect_by_func (info, (GCallback)new_op_started, NULL);
 
-    if (!caja_progress_info_get_is_finished (info)) {
+    if (!baul_progress_info_get_is_finished (info)) {
         handle_new_progress_info (info);
 
         /* Start the job when no other job is running */
@@ -969,7 +969,7 @@ new_op_started (CajaProgressInfo *info)
 }
 
 static void
-caja_progress_info_init (CajaProgressInfo *info)
+baul_progress_info_init (CajaProgressInfo *info)
 {
     info->cancellable = g_cancellable_new ();
 
@@ -981,7 +981,7 @@ caja_progress_info_init (CajaProgressInfo *info)
 }
 
 CajaProgressInfo *
-caja_progress_info_new (gboolean should_start, gboolean can_pause)
+baul_progress_info_new (gboolean should_start, gboolean can_pause)
 {
     CajaProgressInfo *info;
 
@@ -992,7 +992,7 @@ caja_progress_info_new (gboolean should_start, gboolean can_pause)
 }
 
 char *
-caja_progress_info_get_status (CajaProgressInfo *info)
+baul_progress_info_get_status (CajaProgressInfo *info)
 {
     char *res;
 
@@ -1013,7 +1013,7 @@ caja_progress_info_get_status (CajaProgressInfo *info)
 }
 
 char *
-caja_progress_info_get_details (CajaProgressInfo *info)
+baul_progress_info_get_details (CajaProgressInfo *info)
 {
     char *res;
 
@@ -1034,7 +1034,7 @@ caja_progress_info_get_details (CajaProgressInfo *info)
 }
 
 double
-caja_progress_info_get_progress (CajaProgressInfo *info)
+baul_progress_info_get_progress (CajaProgressInfo *info)
 {
     double res;
 
@@ -1055,7 +1055,7 @@ caja_progress_info_get_progress (CajaProgressInfo *info)
 }
 
 void
-caja_progress_info_cancel (CajaProgressInfo *info)
+baul_progress_info_cancel (CajaProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1067,7 +1067,7 @@ caja_progress_info_cancel (CajaProgressInfo *info)
 }
 
 GCancellable *
-caja_progress_info_get_cancellable (CajaProgressInfo *info)
+baul_progress_info_get_cancellable (CajaProgressInfo *info)
 {
     GCancellable *c;
 
@@ -1081,7 +1081,7 @@ caja_progress_info_get_cancellable (CajaProgressInfo *info)
 }
 
 gboolean
-caja_progress_info_get_is_started (CajaProgressInfo *info)
+baul_progress_info_get_is_started (CajaProgressInfo *info)
 {
     gboolean res;
 
@@ -1095,7 +1095,7 @@ caja_progress_info_get_is_started (CajaProgressInfo *info)
 }
 
 gboolean
-caja_progress_info_get_is_finished (CajaProgressInfo *info)
+baul_progress_info_get_is_finished (CajaProgressInfo *info)
 {
     gboolean res;
 
@@ -1109,7 +1109,7 @@ caja_progress_info_get_is_finished (CajaProgressInfo *info)
 }
 
 gboolean
-caja_progress_info_get_is_paused (CajaProgressInfo *info)
+baul_progress_info_get_is_paused (CajaProgressInfo *info)
 {
     gboolean res;
 
@@ -1232,7 +1232,7 @@ queue_idle (CajaProgressInfo *info, gboolean now)
 }
 
 void
-caja_progress_info_pause (CajaProgressInfo *info)
+baul_progress_info_pause (CajaProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1245,7 +1245,7 @@ caja_progress_info_pause (CajaProgressInfo *info)
 }
 
 void
-caja_progress_info_resume (CajaProgressInfo *info)
+baul_progress_info_resume (CajaProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1258,7 +1258,7 @@ caja_progress_info_resume (CajaProgressInfo *info)
 }
 
 void
-caja_progress_info_start (CajaProgressInfo *info)
+baul_progress_info_start (CajaProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1274,7 +1274,7 @@ caja_progress_info_start (CajaProgressInfo *info)
 }
 
 void
-caja_progress_info_finish (CajaProgressInfo *info)
+baul_progress_info_finish (CajaProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1290,7 +1290,7 @@ caja_progress_info_finish (CajaProgressInfo *info)
 }
 
 void
-caja_progress_info_take_status (CajaProgressInfo *info,
+baul_progress_info_take_status (CajaProgressInfo *info,
                                 char *status)
 {
     G_LOCK (progress_info);
@@ -1312,7 +1312,7 @@ caja_progress_info_take_status (CajaProgressInfo *info,
 }
 
 void
-caja_progress_info_set_status (CajaProgressInfo *info,
+baul_progress_info_set_status (CajaProgressInfo *info,
                                const char *status)
 {
     G_LOCK (progress_info);
@@ -1331,7 +1331,7 @@ caja_progress_info_set_status (CajaProgressInfo *info,
 
 
 void
-caja_progress_info_take_details (CajaProgressInfo *info,
+baul_progress_info_take_details (CajaProgressInfo *info,
                                  char           *details)
 {
     G_LOCK (progress_info);
@@ -1353,7 +1353,7 @@ caja_progress_info_take_details (CajaProgressInfo *info,
 }
 
 void
-caja_progress_info_set_details (CajaProgressInfo *info,
+baul_progress_info_set_details (CajaProgressInfo *info,
                                 const char           *details)
 {
     G_LOCK (progress_info);
@@ -1371,7 +1371,7 @@ caja_progress_info_set_details (CajaProgressInfo *info,
 }
 
 void
-caja_progress_info_pulse_progress (CajaProgressInfo *info)
+baul_progress_info_pulse_progress (CajaProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1384,7 +1384,7 @@ caja_progress_info_pulse_progress (CajaProgressInfo *info)
 }
 
 void
-caja_progress_info_set_progress (CajaProgressInfo *info,
+baul_progress_info_set_progress (CajaProgressInfo *info,
                                  double                current,
                                  double                total)
 {

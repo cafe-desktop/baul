@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-column-choose.h - A column chooser widget
+/* baul-column-choose.h - A column chooser widget
 
    Copyright (C) 2004 Novell, Inc.
 
@@ -27,9 +27,9 @@
 
 #include <gtk/gtk.h>
 
-#include "caja-file.h"
+#include "baul-file.h"
 
-#define CAJA_TYPE_COLUMN_CHOOSER caja_column_chooser_get_type()
+#define CAJA_TYPE_COLUMN_CHOOSER baul_column_chooser_get_type()
 #define CAJA_COLUMN_CHOOSER(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_COLUMN_CHOOSER, CajaColumnChooser))
 #define CAJA_COLUMN_CHOOSER_CLASS(klass) \
@@ -58,12 +58,12 @@ typedef struct
     void (*use_default) (CajaColumnChooser *chooser);
 } CajaColumnChooserClass;
 
-GType      caja_column_chooser_get_type            (void);
-GtkWidget *caja_column_chooser_new                 (CajaFile *file);
-void       caja_column_chooser_set_settings    (CajaColumnChooser   *chooser,
+GType      baul_column_chooser_get_type            (void);
+GtkWidget *baul_column_chooser_new                 (CajaFile *file);
+void       baul_column_chooser_set_settings    (CajaColumnChooser   *chooser,
         char                   **visible_columns,
         char                   **column_order);
-void       caja_column_chooser_get_settings    (CajaColumnChooser *chooser,
+void       baul_column_chooser_get_settings    (CajaColumnChooser *chooser,
         char                  ***visible_columns,
         char                  ***column_order);
 

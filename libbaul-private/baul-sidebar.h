@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-sidebar.h: Interface for caja sidebar plugins
+   baul-sidebar.h: Interface for baul sidebar plugins
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-#define CAJA_TYPE_SIDEBAR           (caja_sidebar_get_type ())
+#define CAJA_TYPE_SIDEBAR           (baul_sidebar_get_type ())
 #define CAJA_SIDEBAR(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SIDEBAR, CajaSidebar))
 #define CAJA_IS_SIDEBAR(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SIDEBAR))
 #define CAJA_SIDEBAR_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_SIDEBAR, CajaSidebarIface))
@@ -68,13 +68,13 @@ extern "C" {
         void (*_reserved8) (void);
     };
 
-    GType             caja_sidebar_get_type             (void);
+    GType             baul_sidebar_get_type             (void);
 
-    const char *caja_sidebar_get_sidebar_id     (CajaSidebar *sidebar);
-    char *      caja_sidebar_get_tab_label      (CajaSidebar *sidebar);
-    char *      caja_sidebar_get_tab_tooltip    (CajaSidebar *sidebar);
-    GdkPixbuf * caja_sidebar_get_tab_icon       (CajaSidebar *sidebar);
-    void        caja_sidebar_is_visible_changed (CajaSidebar *sidebar,
+    const char *baul_sidebar_get_sidebar_id     (CajaSidebar *sidebar);
+    char *      baul_sidebar_get_tab_label      (CajaSidebar *sidebar);
+    char *      baul_sidebar_get_tab_tooltip    (CajaSidebar *sidebar);
+    GdkPixbuf * baul_sidebar_get_tab_icon       (CajaSidebar *sidebar);
+    void        baul_sidebar_is_visible_changed (CajaSidebar *sidebar,
             gboolean         is_visible);
 
 #ifdef __cplusplus

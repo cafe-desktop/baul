@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-*/
 
-/* caja-metadata.c - metadata utils
+/* baul-metadata.c - metadata utils
  *
  * Copyright (C) 2009 Red Hatl, Inc.
  *
@@ -21,7 +21,7 @@
  */
 
 #include <config.h>
-#include "caja-metadata.h"
+#include "baul-metadata.h"
 #include <glib.h>
 
 static char *used_metadata_names[] =
@@ -63,7 +63,7 @@ static char *used_metadata_names[] =
 };
 
 guint
-caja_metadata_get_id (const char *metadata)
+baul_metadata_get_id (const char *metadata)
 {
     static GHashTable *hash;
 

@@ -1,5 +1,5 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
-/* caja-file-drag.h - Drag & drop handling code that operated on
+/* baul-file-drag.h - Drag & drop handling code that operated on
    CajaFile objects.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -25,19 +25,19 @@
 #ifndef CAJA_FILE_DND_H
 #define CAJA_FILE_DND_H
 
-#include "caja-dnd.h"
-#include "caja-file.h"
+#include "baul-dnd.h"
+#include "baul-file.h"
 
 #define CAJA_FILE_DND_ERASE_KEYWORD "erase"
 
-gboolean caja_drag_can_accept_item              (CajaFile *drop_target_item,
+gboolean baul_drag_can_accept_item              (CajaFile *drop_target_item,
         const char   *item_uri);
-gboolean caja_drag_can_accept_items             (CajaFile *drop_target_item,
+gboolean baul_drag_can_accept_items             (CajaFile *drop_target_item,
         const GList  *items);
-gboolean caja_drag_can_accept_info              (CajaFile *drop_target_item,
+gboolean baul_drag_can_accept_info              (CajaFile *drop_target_item,
         CajaIconDndTargetType drag_type,
         const GList *items);
-void     caja_drag_file_receive_dropped_keyword (CajaFile *file,
+void     baul_drag_file_receive_dropped_keyword (CajaFile *file,
         const char   *keyword);
 
 #endif /* CAJA_FILE_DND_H */

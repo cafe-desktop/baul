@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-cell-renderer-text-ellipsized.c: Cell renderer for text which
+   baul-cell-renderer-text-ellipsized.c: Cell renderer for text which
    will use pango ellipsization but deactivate it temporarily for the size
    calculation to get the size based on the actual text length.
 
@@ -24,13 +24,13 @@
    Author: Martin Wehner <martin.wehner@gmail.com>
 */
 
-#include "caja-cell-renderer-text-ellipsized.h"
+#include "baul-cell-renderer-text-ellipsized.h"
 
-G_DEFINE_TYPE (CajaCellRendererTextEllipsized, caja_cell_renderer_text_ellipsized,
+G_DEFINE_TYPE (CajaCellRendererTextEllipsized, baul_cell_renderer_text_ellipsized,
                GTK_TYPE_CELL_RENDERER_TEXT);
 
 static void
-caja_cell_renderer_text_ellipsized_init (CajaCellRendererTextEllipsized *cell)
+baul_cell_renderer_text_ellipsized_init (CajaCellRendererTextEllipsized *cell)
 {
     g_object_set (cell,
                   "ellipsize", PANGO_ELLIPSIZE_END,
@@ -39,7 +39,7 @@ caja_cell_renderer_text_ellipsized_init (CajaCellRendererTextEllipsized *cell)
 }
 
 static void
-caja_cell_renderer_text_ellipsized_get_preferred_width (GtkCellRenderer *cell,
+baul_cell_renderer_text_ellipsized_get_preferred_width (GtkCellRenderer *cell,
         						    GtkWidget       *widget,
         						    gint            *minimum_size,
         						    gint            *natural_size)
@@ -50,7 +50,7 @@ caja_cell_renderer_text_ellipsized_get_preferred_width (GtkCellRenderer *cell,
                   NULL);
 
     GTK_CELL_RENDERER_CLASS
-            (caja_cell_renderer_text_ellipsized_parent_class)->get_preferred_width (cell, widget,
+            (baul_cell_renderer_text_ellipsized_parent_class)->get_preferred_width (cell, widget,
         										minimum_size, natural_size);
 
     g_object_set (cell,
@@ -60,15 +60,15 @@ caja_cell_renderer_text_ellipsized_get_preferred_width (GtkCellRenderer *cell,
 }
 
 static void
-caja_cell_renderer_text_ellipsized_class_init (CajaCellRendererTextEllipsizedClass *klass)
+baul_cell_renderer_text_ellipsized_class_init (CajaCellRendererTextEllipsizedClass *klass)
 {
     GtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (klass);
-    cell_class->get_preferred_width = caja_cell_renderer_text_ellipsized_get_preferred_width;
+    cell_class->get_preferred_width = baul_cell_renderer_text_ellipsized_get_preferred_width;
 
 }
 
 GtkCellRenderer *
-caja_cell_renderer_text_ellipsized_new (void)
+baul_cell_renderer_text_ellipsized_new (void)
 {
     return g_object_new (CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, NULL);
 }

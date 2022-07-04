@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-file-operations: execute file operations.
+/* baul-file-operations: execute file operations.
 
    Copyright (C) 1999, 2000 Free Software Foundation
    Copyright (C) 2000, 2001 Eazel, Inc.
@@ -44,20 +44,20 @@ typedef void (* CajaUnmountCallback)   (gpointer    callback_data);
 
 /* FIXME: int copy_action should be an enum */
 
-void caja_file_operations_copy_move   (const GList               *item_uris,
+void baul_file_operations_copy_move   (const GList               *item_uris,
                                        GArray                    *relative_item_points,
                                        const char                *target_dir_uri,
                                        GdkDragAction              copy_action,
                                        GtkWidget                 *parent_view,
                                        CajaCopyCallback       done_callback,
                                        gpointer                   done_callback_data);
-void caja_file_operations_empty_trash (GtkWidget                 *parent_view);
-void caja_file_operations_new_folder  (GtkWidget                 *parent_view,
+void baul_file_operations_empty_trash (GtkWidget                 *parent_view);
+void baul_file_operations_new_folder  (GtkWidget                 *parent_view,
                                        GdkPoint                  *target_point,
                                        const char                *parent_dir_uri,
                                        CajaCreateCallback     done_callback,
                                        gpointer                   done_callback_data);
-void caja_file_operations_new_file    (GtkWidget                 *parent_view,
+void baul_file_operations_new_file    (GtkWidget                 *parent_view,
                                        GdkPoint                  *target_point,
                                        const char                *parent_dir,
                                        const char                *target_filename,
@@ -65,7 +65,7 @@ void caja_file_operations_new_file    (GtkWidget                 *parent_view,
                                        int                        length,
                                        CajaCreateCallback     done_callback,
                                        gpointer                   data);
-void caja_file_operations_new_file_from_template (GtkWidget               *parent_view,
+void baul_file_operations_new_file_from_template (GtkWidget               *parent_view,
         GdkPoint                *target_point,
         const char              *parent_dir,
         const char              *target_filename,
@@ -73,16 +73,16 @@ void caja_file_operations_new_file_from_template (GtkWidget               *paren
         CajaCreateCallback   done_callback,
         gpointer                 data);
 
-void caja_file_operations_delete          (GList                  *files,
+void baul_file_operations_delete          (GList                  *files,
         GtkWindow              *parent_window,
         CajaDeleteCallback  done_callback,
         gpointer                done_callback_data);
-void caja_file_operations_trash_or_delete (GList                  *files,
+void baul_file_operations_trash_or_delete (GList                  *files,
         GtkWindow              *parent_window,
         CajaDeleteCallback  done_callback,
         gpointer                done_callback_data);
 
-void caja_file_set_permissions_recursive (const char                     *directory,
+void baul_file_set_permissions_recursive (const char                     *directory,
         guint32                         file_permissions,
         guint32                         file_mask,
         guint32                         folder_permissions,
@@ -90,54 +90,54 @@ void caja_file_set_permissions_recursive (const char                     *direct
         CajaOpCallback              callback,
         gpointer                        callback_data);
 
-void caja_file_operations_unmount_mount (GtkWindow                      *parent_window,
+void baul_file_operations_unmount_mount (GtkWindow                      *parent_window,
         GMount                         *mount,
         gboolean                        eject,
         gboolean                        check_trash);
-void caja_file_operations_unmount_mount_full (GtkWindow                 *parent_window,
+void baul_file_operations_unmount_mount_full (GtkWindow                 *parent_window,
         GMount                    *mount,
         gboolean                   eject,
         gboolean                   check_trash,
         CajaUnmountCallback    callback,
         gpointer                   callback_data);
-void caja_file_operations_mount_volume  (GtkWindow                      *parent_window,
+void baul_file_operations_mount_volume  (GtkWindow                      *parent_window,
         GVolume                        *volume,
         gboolean                        allow_autorun);
-void caja_file_operations_mount_volume_full (GtkWindow                      *parent_window,
+void baul_file_operations_mount_volume_full (GtkWindow                      *parent_window,
         GVolume                        *volume,
         gboolean                        allow_autorun,
         CajaMountCallback           mount_callback,
         GObject                        *mount_callback_data_object);
 
-void caja_file_operations_copy      (GList                *files,
+void baul_file_operations_copy      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
                                      GtkWindow            *parent_window,
                                      CajaCopyCallback  done_callback,
                                      gpointer              done_callback_data);
-void caja_file_operations_move      (GList                *files,
+void baul_file_operations_move      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
                                      GtkWindow            *parent_window,
                                      CajaCopyCallback  done_callback,
                                      gpointer              done_callback_data);
-void caja_file_operations_duplicate (GList                *files,
+void baul_file_operations_duplicate (GList                *files,
                                      GArray               *relative_item_points,
                                      GtkWindow            *parent_window,
                                      CajaCopyCallback  done_callback,
                                      gpointer              done_callback_data);
-void caja_file_operations_link      (GList                *files,
+void baul_file_operations_link      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
                                      GtkWindow            *parent_window,
                                      CajaCopyCallback  done_callback,
                                      gpointer              done_callback_data);
-void caja_file_mark_desktop_file_trusted (GFile           *file,
+void baul_file_mark_desktop_file_trusted (GFile           *file,
         GtkWindow        *parent_window,
         gboolean          interactive,
         CajaOpCallback done_callback,
         gpointer          done_callback_data);
 
-void caja_application_notify_unmount_show (const gchar *message);
+void baul_application_notify_unmount_show (const gchar *message);
 
 #endif /* CAJA_FILE_OPERATIONS_H */

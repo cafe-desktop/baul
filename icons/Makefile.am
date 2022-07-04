@@ -1,6 +1,6 @@
 NULL=
 
-icondir = $(datadir)/pixmaps/caja
+icondir = $(datadir)/pixmaps/baul
 
 icon_DATA =\
 	audio.svg \

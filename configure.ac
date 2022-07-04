@@ -18,10 +18,10 @@ m4_define(notify_minver,               0.7.0)
 dnl 1. If the library code has changed at all since last release, then increment revision.
 dnl 2. If any interfaces have been added, then increment current and set revision to 0.
 dnl Interface break is not allowed.
-m4_define(caja_extension_current,  5)
-m4_define(caja_extension_revision, 0)
+m4_define(baul_extension_current,  5)
+m4_define(baul_extension_revision, 0)
 
-AC_INIT([caja], [1.24.0], [https://mate-desktop.org])
+AC_INIT([baul], [1.24.0], [https://mate-desktop.org])
 
 dnl ---------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ AC_SUBST(GAIL_REQUIRED, [gail_minver])
 
 dnl We need to decrement current by one in the calculation of the age because
 dnl the library was started with version "1:0:0" instead of "0:0:0"
-AC_SUBST(CAJA_EXTENSION_VERSION_INFO, [caja_extension_current]:[caja_extension_revision]:`expr [caja_extension_current] - 1`)
+AC_SUBST(CAJA_EXTENSION_VERSION_INFO, [baul_extension_current]:[baul_extension_revision]:`expr [baul_extension_current] - 1`)
 
 AC_C_BIGENDIAN
 AC_C_CONST
@@ -80,7 +80,7 @@ PKG_CHECK_MODULES(ALL, [
 ])
 dnl ==========================================================================
 
-GETTEXT_PACKAGE=caja
+GETTEXT_PACKAGE=baul
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",
     [the gettext translation domain])
@@ -197,7 +197,7 @@ msg_self_check=yes
 if test "x$enable_self_check" = "xno"; then
     msg_self_check=no
     AC_DEFINE(EEL_OMIT_SELF_CHECK, 1, [define to disable eel self check])
-    AC_DEFINE(CAJA_OMIT_SELF_CHECK, 1, [define to disable caja self check])
+    AC_DEFINE(CAJA_OMIT_SELF_CHECK, 1, [define to disable baul self check])
 fi
 AM_CONDITIONAL(ENABLE_SELF_CHECK, test "x$msg_self_check" = "xyes")
 
@@ -268,14 +268,14 @@ AC_SUBST(LIBEGG_CFLAGS)
 LIBEGG_LIBS="`$PKG_CONFIG --libs $LIBEGG_MODULES`"
 AC_SUBST(LIBEGG_LIBS)
 
-dnl libcaja-extension
+dnl libbaul-extension
 LIBCAJA_EXTENSION_MODULES="glib-2.0 gtk+-3.0"
 LIBCAJA_EXTENSION_CFLAGS="`$PKG_CONFIG --cflags $LIBCAJA_EXTENSION_MODULES`"
 AC_SUBST(LIBCAJA_EXTENSION_CFLAGS)
 LIBCAJA_EXTENSION_LIBS="`$PKG_CONFIG --libs $LIBCAJA_EXTENSION_MODULES`"
 AC_SUBST(LIBCAJA_EXTENSION_LIBS)
 
-dnl core caja
+dnl core baul
 PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])
 CORE_MODULES="glib-2.0 $GMODULE_ADD mate-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 gail-3.0 libxml-2.0 $EXTRA_CORE_MODULES gtk+-3.0 x11"
 CORE_CFLAGS="`$PKG_CONFIG --cflags $CORE_MODULES`"
@@ -325,14 +325,14 @@ data/icons/Makefile
 data/patterns/Makefile
 docs/Makefile
 docs/reference/Makefile
-docs/reference/libcaja-extension/Makefile
-docs/reference/libcaja-extension/version.xml
+docs/reference/libbaul-extension/Makefile
+docs/reference/libbaul-extension/version.xml
 eel/Makefile
 icons/Makefile
-libcaja-private/Makefile
-libcaja-extension/Makefile
-libcaja-extension/libcaja-extension.pc
-libcaja-extension/libcaja-extension-uninstalled.pc
+libbaul-private/Makefile
+libbaul-extension/Makefile
+libbaul-extension/libbaul-extension.pc
+libbaul-extension/libbaul-extension-uninstalled.pc
 po/Makefile.in
 src/Makefile
 src/file-manager/Makefile
@@ -344,7 +344,7 @@ AC_OUTPUT
 dnl ==========================================================================
 
 echo "
-caja-$VERSION:
+baul-$VERSION:
 
     prefix:                       ${prefix}
     source code location:         ${srcdir}
@@ -355,6 +355,6 @@ caja-$VERSION:
     PackageKit support:           $msg_packagekit
     Self check:                   $msg_self_check
 
-    caja-extension documentation: ${enable_gtk_doc}
-    caja-extension introspection: ${found_introspection}
+    baul-extension documentation: ${enable_gtk_doc}
+    baul-extension introspection: ${found_introspection}
 "
