@@ -1,17 +1,17 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 1999, 2000, 2001 Eazel, Inc.
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public
  *  License as published by the Free Software Foundation; either
  *  version 2 of the License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -71,7 +71,7 @@
 #define SPATIAL_ACTION_CLOSE_ALL_FOLDERS    "Close All Folders"
 #define MENU_PATH_SPATIAL_BOOKMARKS_PLACEHOLDER	"/MenuBar/Other Menus/Places/Bookmarks Placeholder"
 
-struct _CajaSpatialWindowPrivate
+struct _BaulSpatialWindowPrivate
 {
     GtkActionGroup *spatial_action_group; /* owned by ui_manager */
     char *last_geometry;
@@ -90,16 +90,16 @@ static const GtkTargetEntry location_button_drag_types[] =
     { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaSpatialWindow, baul_spatial_window, BAUL_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulSpatialWindow, baul_spatial_window, BAUL_TYPE_WINDOW)
 
-static void baul_spatial_window_save_geometry (CajaSpatialWindow *window,
-						   CajaFile *viewed_file);
+static void baul_spatial_window_save_geometry (BaulSpatialWindow *window,
+						   BaulFile *viewed_file);
 
 static gboolean
 save_window_geometry_timeout (gpointer callback_data)
 {
-    CajaSpatialWindow *window;
-    CajaWindowSlot *slot;
+    BaulSpatialWindow *window;
+    BaulWindowSlot *slot;
 
     window = BAUL_SPATIAL_WINDOW (callback_data);
     slot = baul_window_get_active_slot (BAUL_WINDOW (window));
@@ -118,7 +118,7 @@ static gboolean
 baul_spatial_window_configure_event (GtkWidget *widget,
                                      GdkEventConfigure *event)
 {
-    CajaSpatialWindow *window;
+    BaulSpatialWindow *window;
 
     window = BAUL_SPATIAL_WINDOW (widget);
 
@@ -141,8 +141,8 @@ baul_spatial_window_configure_event (GtkWidget *widget,
 static void
 baul_spatial_window_unrealize (GtkWidget *widget)
 {
-    CajaSpatialWindow *window;
-    CajaWindowSlot *slot;
+    BaulSpatialWindow *window;
+    BaulWindowSlot *slot;
 
     window = BAUL_SPATIAL_WINDOW (widget);
     slot = baul_window_get_active_slot (BAUL_WINDOW (window));
@@ -165,9 +165,9 @@ static gboolean
 baul_spatial_window_state_event (GtkWidget *widget,
                                  GdkEventWindowState *event)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
-    CajaFile *viewed_file;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
+    BaulFile *viewed_file;
 
     window = BAUL_WINDOW (widget);
     slot = window->details->active_pane->active_slot;
@@ -216,7 +216,7 @@ baul_spatial_window_state_event (GtkWidget *widget,
 static void
 baul_spatial_window_finalize (GObject *object)
 {
-    CajaSpatialWindow *window;
+    BaulSpatialWindow *window;
 
     window = BAUL_SPATIAL_WINDOW (object);
 
@@ -226,8 +226,8 @@ baul_spatial_window_finalize (GObject *object)
 }
 
 static void
-baul_spatial_window_save_geometry (CajaSpatialWindow *window,
-        		   CajaFile *viewed_file)
+baul_spatial_window_save_geometry (BaulSpatialWindow *window,
+        		   BaulFile *viewed_file)
 {
     char *geometry_string;
 
@@ -261,8 +261,8 @@ baul_spatial_window_save_geometry (CajaSpatialWindow *window,
 }
 
 static void
-baul_spatial_window_save_scroll_position (CajaSpatialWindow *window,
-					  CajaWindowSlot *slot)
+baul_spatial_window_save_scroll_position (BaulSpatialWindow *window,
+					  BaulWindowSlot *slot)
 {
     char *scroll_string;
 
@@ -281,10 +281,10 @@ baul_spatial_window_save_scroll_position (CajaSpatialWindow *window,
 }
 
 static void
-baul_spatial_window_save_show_hidden_files_mode (CajaSpatialWindow *window,
-						 CajaFile *viewed_file)
+baul_spatial_window_save_show_hidden_files_mode (BaulSpatialWindow *window,
+						 BaulFile *viewed_file)
 {
-    CajaWindowShowHiddenFilesMode mode;
+    BaulWindowShowHiddenFilesMode mode;
 
     if (viewed_file == NULL) {
         return;
@@ -310,8 +310,8 @@ baul_spatial_window_save_show_hidden_files_mode (CajaSpatialWindow *window,
 static void
 baul_spatial_window_show (GtkWidget *widget)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
     GFile *location;
 
     window = BAUL_WINDOW (widget);
@@ -328,7 +328,7 @@ baul_spatial_window_show (GtkWidget *widget)
     g_return_if_fail (location != NULL);
 
     while (location != NULL) {
-        CajaFile *file;
+        BaulFile *file;
 
         file = baul_file_get (location);
 
@@ -362,7 +362,7 @@ action_close_all_folders_callback (GtkAction *action,
 }
 
 static void
-real_prompt_for_location (CajaWindow *window,
+real_prompt_for_location (BaulWindow *window,
                           const char     *initial)
 {
     GtkWidget *dialog;
@@ -377,9 +377,9 @@ real_prompt_for_location (CajaWindow *window,
     gtk_widget_show (dialog);
 }
 
-static CajaIconInfo *
-real_get_icon (CajaWindow *window,
-               CajaWindowSlot *slot)
+static BaulIconInfo *
+real_get_icon (BaulWindow *window,
+               BaulWindowSlot *slot)
 {
     return baul_file_get_icon (slot->viewed_file,
                                48, gtk_widget_get_scale_factor (GTK_WIDGET (window)),
@@ -388,9 +388,9 @@ real_get_icon (CajaWindow *window,
 }
 
 static void
-sync_window_title (CajaWindow *window)
+sync_window_title (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     slot = baul_window_get_active_slot (window);
 
@@ -400,7 +400,7 @@ sync_window_title (CajaWindow *window)
 
     if (slot->title == NULL || slot->title[0] == '\0')
     {
-        gtk_window_set_title (GTK_WINDOW (window), _("Caja"));
+        gtk_window_set_title (GTK_WINDOW (window), _("Baul"));
     }
     else
     {
@@ -413,8 +413,8 @@ sync_window_title (CajaWindow *window)
 }
 
 static void
-real_sync_title (CajaWindow *window,
-                 CajaWindowSlot *slot)
+real_sync_title (BaulWindow *window,
+                 BaulWindowSlot *slot)
 {
     g_assert (slot == baul_window_get_active_slot (window));
 
@@ -422,7 +422,7 @@ real_sync_title (CajaWindow *window,
 }
 
 static void
-real_get_min_size (CajaWindow *window,
+real_get_min_size (BaulWindow *window,
                    guint *min_width, guint *min_height)
 {
     if (min_width)
@@ -436,7 +436,7 @@ real_get_min_size (CajaWindow *window,
 }
 
 static void
-real_get_default_size (CajaWindow *window,
+real_get_default_size (BaulWindow *window,
                        guint *default_width, guint *default_height)
 {
     if (default_width)
@@ -450,15 +450,15 @@ real_get_default_size (CajaWindow *window,
 }
 
 static void
-real_sync_allow_stop (CajaWindow *window,
-                      CajaWindowSlot *slot)
+real_sync_allow_stop (BaulWindow *window,
+                      BaulWindowSlot *slot)
 {
 }
 
 static void
-real_set_allow_up (CajaWindow *window, gboolean allow)
+real_set_allow_up (BaulWindow *window, gboolean allow)
 {
-    CajaSpatialWindow *spatial;
+    BaulSpatialWindow *spatial;
     GtkAction *action;
 
     spatial = BAUL_SPATIAL_WINDOW (window);
@@ -472,11 +472,11 @@ real_set_allow_up (CajaWindow *window, gboolean allow)
     BAUL_WINDOW_CLASS (baul_spatial_window_parent_class)->set_allow_up (window, allow);
 }
 
-static CajaWindowSlot *
-real_open_slot (CajaWindowPane *pane,
-                CajaWindowOpenSlotFlags flags)
+static BaulWindowSlot *
+real_open_slot (BaulWindowPane *pane,
+                BaulWindowOpenSlotFlags flags)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GList *slots;
 
     g_assert (baul_window_get_active_slot (pane->window) == NULL);
@@ -494,8 +494,8 @@ real_open_slot (CajaWindowPane *pane,
 }
 
 static void
-save_spatial_data (CajaSpatialWindow *window,
-		   CajaWindowSlot *slot)
+save_spatial_data (BaulSpatialWindow *window,
+		   BaulWindowSlot *slot)
 {
     baul_spatial_window_save_geometry (window, slot->viewed_file);
     baul_spatial_window_save_scroll_position (window, slot);
@@ -503,10 +503,10 @@ save_spatial_data (CajaSpatialWindow *window,
 }
 
 static void
-real_close_slot (CajaWindowPane *pane,
-                 CajaWindowSlot *slot)
+real_close_slot (BaulWindowPane *pane,
+                 BaulWindowSlot *slot)
 {
-    CajaSpatialWindow *window;
+    BaulSpatialWindow *window;
 
     window = BAUL_SPATIAL_WINDOW (pane->window);
 
@@ -519,10 +519,10 @@ real_close_slot (CajaWindowPane *pane,
 }
 
 static void
-real_window_close (CajaWindow *window)
+real_window_close (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
-    CajaSpatialWindow *self;
+    BaulWindowSlot *slot;
+    BaulSpatialWindow *self;
 
     self = BAUL_SPATIAL_WINDOW (window);
 
@@ -545,9 +545,9 @@ real_window_close (CajaWindow *window)
 
 static void
 location_menu_item_activated_callback (GtkWidget *menu_item,
-                                       CajaWindow *window)
+                                       BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GFile *current;
     GFile *dest;
     GdkEvent *event;
@@ -608,10 +608,10 @@ menu_deactivate_callback (GtkWidget *menu,
 static gboolean
 location_button_pressed_callback (GtkWidget      *widget,
                                   GdkEventButton *event,
-                                  CajaWindow *window)
+                                  BaulWindow *window)
 {
-	CajaWindowSlot *slot;
-    CajaView *view;
+	BaulWindowSlot *slot;
+    BaulView *view;
 
 	slot = baul_window_get_active_slot (window);
 	view = slot->content_view;
@@ -626,9 +626,9 @@ location_button_pressed_callback (GtkWidget      *widget,
 
 static void
 location_button_clicked_callback (GtkWidget         *widget,
-                                  CajaSpatialWindow *window)
+                                  BaulSpatialWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GtkWidget *popup, *menu_item, *first_item = NULL;
     cairo_surface_t *surface = NULL;
     GFile *location;
@@ -648,7 +648,7 @@ location_button_clicked_callback (GtkWidget         *widget,
 
     child_location = NULL;
     while (location != NULL) {
-        CajaFile *file;
+        BaulFile *file;
         char *name;
 
         file = baul_file_get (location);
@@ -734,11 +734,11 @@ location_button_clicked_callback (GtkWidget         *widget,
 }
 
 static int
-get_dnd_icon_size (CajaSpatialWindow *window)
+get_dnd_icon_size (BaulSpatialWindow *window)
 {
-	CajaWindowSlot *active_slot;
-    CajaView *view;
-    CajaZoomLevel zoom_level;
+	BaulWindowSlot *active_slot;
+    BaulView *view;
+    BaulZoomLevel zoom_level;
 
 	active_slot = baul_window_get_active_slot (BAUL_WINDOW (window));
 	view = active_slot->content_view;
@@ -757,9 +757,9 @@ get_dnd_icon_size (CajaSpatialWindow *window)
 static void
 location_button_drag_begin_callback (GtkWidget             *widget,
                                      GdkDragContext        *context,
-                                     CajaSpatialWindow *window)
+                                     BaulSpatialWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     cairo_surface_t *surface;
 
     slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
@@ -779,12 +779,12 @@ location_button_drag_begin_callback (GtkWidget             *widget,
  * If we just used URIs, moving the folder to trash
  * wouldn't work */
 static void
-get_data_binder (CajaDragEachSelectedItemDataGet iteratee,
+get_data_binder (BaulDragEachSelectedItemDataGet iteratee,
                  gpointer                            iterator_context,
                  gpointer                            data)
 {
-    CajaSpatialWindow *window;
-    CajaWindowSlot *slot;
+    BaulSpatialWindow *window;
+    BaulWindowSlot *slot;
     char *location;
     int icon_size;
 
@@ -812,19 +812,19 @@ location_button_drag_data_get_callback (GtkWidget             *widget,
                                         GtkSelectionData      *selection_data,
                                         guint                  info,
                                         guint                  time,
-                                        CajaSpatialWindow *window)
+                                        BaulSpatialWindow *window)
 {
     baul_drag_drag_data_get (widget, context, selection_data,
                              info, time, window, get_data_binder);
 }
 
 void
-baul_spatial_window_set_location_button  (CajaSpatialWindow *window,
+baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
         GFile                 *location)
 {
     if (location != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
         char *name;
         GError *error;
 
@@ -874,7 +874,7 @@ static void
 action_go_to_location_callback (GtkAction *action,
                                 gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (user_data);
 
@@ -885,7 +885,7 @@ static void
 action_add_bookmark_callback (GtkAction *action,
                               gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (user_data);
 
@@ -906,7 +906,7 @@ static void
 action_search_callback (GtkAction *action,
                         gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     char *uri;
     GFile *f;
 
@@ -952,7 +952,7 @@ static const GtkActionEntry spatial_entries[] =
 };
 
 static void
-baul_spatial_window_init (CajaSpatialWindow *window)
+baul_spatial_window_init (BaulSpatialWindow *window)
 {
     GtkWidget *arrow;
     GtkWidget *hbox, *vbox;
@@ -960,8 +960,8 @@ baul_spatial_window_init (CajaSpatialWindow *window)
     GtkUIManager *ui_manager;
     GtkTargetList *targets;
     const char *ui;
-    CajaWindow *win;
-    CajaWindowPane *pane;
+    BaulWindow *win;
+    BaulWindowPane *pane;
 
     window->details = baul_spatial_window_get_instance_private (window);
 
@@ -1063,10 +1063,10 @@ baul_spatial_window_init (CajaSpatialWindow *window)
 }
 
 static void
-baul_spatial_window_class_init (CajaSpatialWindowClass *klass)
+baul_spatial_window_class_init (BaulSpatialWindowClass *klass)
 {
     GtkBindingSet *binding_set;
-	CajaWindowClass *nclass = BAUL_WINDOW_CLASS (klass);
+	BaulWindowClass *nclass = BAUL_WINDOW_CLASS (klass);
 	GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
 
 	nclass->window_type = BAUL_WINDOW_SPATIAL;

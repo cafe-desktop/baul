@@ -31,39 +31,39 @@
 
 #define BAUL_TYPE_COLUMN_CHOOSER baul_column_chooser_get_type()
 #define BAUL_COLUMN_CHOOSER(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN_CHOOSER, CajaColumnChooser))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN_CHOOSER, BaulColumnChooser))
 #define BAUL_COLUMN_CHOOSER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_COLUMN_CHOOSER, CajaColumnChooserClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_COLUMN_CHOOSER, BaulColumnChooserClass))
 #define BAUL_IS_COLUMN_CHOOSER(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_COLUMN_CHOOSER))
 #define BAUL_IS_COLUMN_CHOOSER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_COLUMN_CHOOSER))
 #define BAUL_COLUMN_CHOOSER_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_COLUMN_CHOOSER, CajaColumnChooserClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_COLUMN_CHOOSER, BaulColumnChooserClass))
 
-typedef struct _CajaColumnChooserPrivate CajaColumnChooserPrivate;
+typedef struct _BaulColumnChooserPrivate BaulColumnChooserPrivate;
 
 typedef struct
 {
     GtkBox parent;
 
-    CajaColumnChooserPrivate *details;
-} CajaColumnChooser;
+    BaulColumnChooserPrivate *details;
+} BaulColumnChooser;
 
 typedef struct
 {
     GtkBoxClass parent_slot;
 
-    void (*changed) (CajaColumnChooser *chooser);
-    void (*use_default) (CajaColumnChooser *chooser);
-} CajaColumnChooserClass;
+    void (*changed) (BaulColumnChooser *chooser);
+    void (*use_default) (BaulColumnChooser *chooser);
+} BaulColumnChooserClass;
 
 GType      baul_column_chooser_get_type            (void);
-GtkWidget *baul_column_chooser_new                 (CajaFile *file);
-void       baul_column_chooser_set_settings    (CajaColumnChooser   *chooser,
+GtkWidget *baul_column_chooser_new                 (BaulFile *file);
+void       baul_column_chooser_set_settings    (BaulColumnChooser   *chooser,
         char                   **visible_columns,
         char                   **column_order);
-void       baul_column_chooser_get_settings    (CajaColumnChooser *chooser,
+void       baul_column_chooser_get_settings    (BaulColumnChooser *chooser,
         char                  ***visible_columns,
         char                  ***column_order);
 

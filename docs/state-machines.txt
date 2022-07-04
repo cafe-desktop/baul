@@ -20,7 +20,7 @@ X: this stimulus is guaranteed impossible in this state
 
 Things I was unsure about:
 
-?2: Once a load has failed at some stage, should it be OK for Caja
+?2: Once a load has failed at some stage, should it be OK for Baul
 to try to make further calls of any kind?
 
 Missing:

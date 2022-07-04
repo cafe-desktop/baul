@@ -300,8 +300,8 @@ msgstr "Izbriši"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -309,23 +309,23 @@ msgstr "Upravljalnik datotek za namizno okolje MATE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
 msgstr ""
-"Caja je uradni upravljalnik datotek za MATE namizje. Omogoča brskanje po "
+"Baul je uradni upravljalnik datotek za MATE namizje. Omogoča brskanje po "
 "mapah, kot tudi predogled datotek in zagon aplikacij, ki so povezane z "
 "njimi. Odgovoren je tudi za upravljanje ikon v MATE namizju. Deluje na "
 "lokalnik in oddaljeni datotečni sistemih."
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 "Cajo je mogoče razširiti prekov sistema vtičnikov, ki je podoben tistim za "
-"GNOME Nautilus, katerega priredba je Caja."
+"GNOME Nautilus, katerega priredba je Baul."
 
 #: data/baul-autorun-software.desktop.in.in:3
 msgid "Autorun Prompt"
@@ -3078,29 +3078,29 @@ msgstr ""
 "[ctrl+shift+tab]."
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Caja se konča, ko je zaprto zadnje okno."
+msgid "Baul will exit when last window destroyed."
+msgstr "Baul se konča, ko je zaprto zadnje okno."
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
-"Izbrana možnost določa, da se program Caja ugasne, ko je zaprto zadnje okno."
+"Izbrana možnost določa, da se program Baul ugasne, ko je zaprto zadnje okno."
 " To je privzeta možnost. Neizbrana možnost pa omogoča, da je program mogoče "
 "zagnati brez odprtih oken in tako deluje kot ozadnji program za nadzor "
 "samodejnega zaganjanja programov oziroma drugih opravil."
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
-"Omogoča običajno delovanje Cajaa, tako da so vsa okna namenjena tudi "
+"Omogoča običajno delovanje Baula, tako da so vsa okna namenjena tudi "
 "brskanju."
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
@@ -3114,10 +3114,10 @@ msgstr "Vedno uporabi vnosno polje mesta namesto gumbov s potjo"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
-"Izbrana možnost omogoča, da Cajaova okna za brskanje vedno uporabljajo polje"
+"Izbrana možnost omogoča, da Baulova okna za brskanje vedno uporabljajo polje"
 " za besedilni vnos mesta namesto gumbov s potjo."
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
@@ -3128,10 +3128,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
-"Izbrana možnost omogoča, da program Caja pred brisanjem ali prestavljanjem "
+"Izbrana možnost omogoča, da program Baul pred brisanjem ali prestavljanjem "
 "predmetov v smeti vedno vpraša za potrditev."
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
@@ -3140,10 +3140,10 @@ msgstr "Ali naj program zahteva potrditev pred premikanjem datotek v smeti"
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
-"Izbrana možnost omogoča, da program Caja pred premikom datotek vedno vpraša "
+"Izbrana možnost omogoča, da program Baul pred premikom datotek vedno vpraša "
 "za potrditev."
 
 #: libbaul-private/org.mate.baul.gschema.xml:111
@@ -3152,11 +3152,11 @@ msgstr "Ali naj bo omogočen neposreden izbris datotek"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"Izbrana možnost omogoči, neposredno brisanje datoteke v Cajau namesto "
+"Izbrana možnost omogoči, neposredno brisanje datoteke v Baulu namesto "
 "premika v smeti. Ta možnost je lahko nevarna, zato jo uporabljajte previdno."
 
 #: libbaul-private/org.mate.baul.gschema.xml:117
@@ -3236,16 +3236,16 @@ msgstr ""
 "upravljanje neznane vrste mime."
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
-msgstr "Uporabi dodatna dejanja gumbov miške v oknu brskalnika Caja"
+msgid "Use extra mouse button events in Baul' browser window"
+msgstr "Uporabi dodatna dejanja gumbov miške v oknu brskalnika Baul"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "Za uporabnike, ki imajo na miški gumba \"Naprej\" in \"Nazaj\", določilo "
-"določi katero dejanje je povezano z delovanjem programa Caja."
+"določi katero dejanje je povezano z delovanjem programa Baul."
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
@@ -3332,10 +3332,10 @@ msgstr "V pogovornemu oknu lastnosti datotek pokaži napredna dovoljenja"
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"Izbrana možnost omogoča, da Caja omogoči urejanje in prikaz dovoljenj "
+"Izbrana možnost omogoča, da Baul omogoči urejanje in prikaz dovoljenj "
 "datotek v \"unix\" načinu."
 
 #: libbaul-private/org.mate.baul.gschema.xml:180
@@ -3344,10 +3344,10 @@ msgstr "V oknih najprej pokaži mape"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Izbrana možnost omogoča, da Caja v seznamskem prikazu in prikazu ikon "
+"Izbrana možnost omogoča, da Baul v seznamskem prikazu in prikazu ikon "
 "prikaže mape pred datotekami."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3380,15 +3380,15 @@ msgstr ""
 "večji."
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja naj uporabnikovo domačo mapo uporabi kot namizje"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul naj uporabnikovo domačo mapo uporabi kot namizje"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Izbrana možnost določi, da Caja za namizje uporabi uporabnikovo domačo mapo."
+"Izbrana možnost določi, da Baul za namizje uporabi uporabnikovo domačo mapo."
 " Sicer bo za namizje uporabil mapo ~/Namizje."
 
 #: libbaul-private/org.mate.baul.gschema.xml:203
@@ -3531,8 +3531,8 @@ msgid "Whether to show desktop notifications"
 msgstr "Ali naj se prikažejo namizna obvestila"
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
-msgstr "Če je omogočeno, bo program Caja prikazoval namizna obvestila."
+msgid "If set to true, Baul will show desktop notifications."
+msgstr "Če je omogočeno, bo program Baul prikazoval namizna obvestila."
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
 msgid "List of possible captions on icons"
@@ -3676,10 +3676,10 @@ msgstr "Mape pokaži le v drevesu stranskega pladnja"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Izbrana možnost določi, da Caja v drevesu stranskega pladnja prikaže le "
+"Izbrana možnost določi, da Baul v drevesu stranskega pladnja prikaže le "
 "mape. Sicer so prikazane tudi datoteke."
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
@@ -3895,7 +3895,7 @@ msgstr "Ali naj se medij samodejno priklopi"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
 "Izbrana možnost omogoča samodejen priklop naprav kot so uporabniku vidni "
@@ -3907,7 +3907,7 @@ msgstr "Ali naj se za samodejno priklopljen medij samodejno odpre mapa"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
@@ -3922,10 +3922,10 @@ msgstr "Nikoli ne vprašaj ali samodejno zaženi programe ob vstavitvi medija"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
-"Izbrana možnost določi, da program Caja ne sprašuje kaj storiti ob vstavitvi"
+"Izbrana možnost določi, da program Baul ne sprašuje kaj storiti ob vstavitvi"
 " medija."
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
@@ -4035,29 +4035,29 @@ msgstr "Pokaži možnosti upravljanja seje"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Caja ni mogel ustvariti zahtevane mape \"%s\"."
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Baul ni mogel ustvariti zahtevane mape \"%s\"."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"Pred uporabo Cajaa ustvarite to mapo ali spremenite dovoljenja, tako da jo "
-"bo Caja lahko ustvaril."
+"Pred uporabo Baula ustvarite to mapo ali spremenite dovoljenja, tako da jo "
+"bo Baul lahko ustvaril."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja ni mogel ustvariti naslednjih zahtevanih map: %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul ni mogel ustvariti naslednjih zahtevanih map: %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Pred uporabo Cajaa ustvarite te mape ali spremenite dovoljenja, tako da jih "
-"bo Caja lahko ustvaril."
+"Pred uporabo Baula ustvarite te mape ali spremenite dovoljenja, tako da jih "
+"bo Baul lahko ustvaril."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -4119,8 +4119,8 @@ msgid "Open a browser window."
 msgstr "Odpri okno brskalnika."
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Končaj Caja."
+msgid "Quit Baul."
+msgstr "Končaj Baul."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -5135,8 +5135,8 @@ msgid "New _Window"
 msgstr "Novo o_kno"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "Odpre še eno Cajaovo okno za prikazano mesto"
+msgid "Open another Baul window for the displayed location"
+msgstr "Odpre še eno Baulovo okno za prikazano mesto"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -5955,8 +5955,8 @@ msgid "View of the current folder"
 msgstr "Pogled trenutne mape"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja nima nameščenega pregledovalnika za prikaz mape."
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul nima nameščenega pregledovalnika za prikaz mape."
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5973,12 +5973,12 @@ msgstr "Preverite črkovanje in poskusite znova."
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "S programom Caja ni mogoče upravljati mest \"%s\"."
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "S programom Baul ni mogoče upravljati mest \"%s\"."
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "S programom Caja ni mogoče upravljati s to vrsto mesta."
+msgid "Baul cannot handle this kind of location."
+msgstr "S programom Baul ni mogoče upravljati s to vrsto mesta."
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -6014,31 +6014,31 @@ msgstr "Pojdi na mesto, ki ga določa zaznamek"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja spada med prosto programje; lahko ga razširjate in/ali spreminjate pod "
+"Baul spada med prosto programje; lahko ga razširjate in/ali spreminjate pod "
 "pogoji Splošnega dovoljenja GNU (GNU General PublicLicense), kot ga je "
 "objavila ustanova Free Software Foundation; ali različice 2 ali (po vaši "
 "izbiri) katerekoli poznejše različice."
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Caja se razširja v upanju, da bo uporaben, vendar BREZ VSAKRŠNEGA JAMSTVA; "
+"Baul se razširja v upanju, da bo uporaben, vendar BREZ VSAKRŠNEGA JAMSTVA; "
 "tudi brez posredne zagotovitve CENOVNE VREDNOSTI ali PRIMERNOSTI ZA DOLOČEN "
 "NAMEN.  Za podrobnosti glejte besedilo GNU General Public License."
 
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "Skupaj s programom bi morali prejeti kopijo GNU Splošne javne licence. V "
@@ -6046,20 +6046,20 @@ msgstr ""
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
-msgstr "O programu Caja"
+msgid "About Baul"
+msgstr "O programu Baul"
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
-"Z Cajaom je mogoče upravljati z datotekami in mapami tako na računalniku kot"
+"Z Baulom je mogoče upravljati z datotekami in mapami tako na računalniku kot"
 " na omrežju."
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -6103,8 +6103,8 @@ msgid "Prefere_nces"
 msgstr "_Lastnosti"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Uredi nastavitve Cajaa"
+msgid "Edit Baul preferences"
+msgstr "Uredi nastavitve Baula"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -6131,16 +6131,16 @@ msgid "_Contents"
 msgstr "_Vsebina"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Pokaži pomoč za Caja"
+msgid "Display Baul help"
+msgstr "Pokaži pomoč za Baul"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "_O programu"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Pokaže zasluge ustvarjalcev programa Caja"
+msgid "Display credits for the creators of Baul"
+msgstr "Pokaže zasluge ustvarjalcev programa Baul"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6539,7 +6539,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6559,7 +6559,7 @@ msgstr ""
 "\n"
 "Kadar bodo zagnane iz krajevne mape, bodo skriptom dodeljena vsa imena izbranih datotek. Kadar bodo izvedene iz oddaljene mape (na primer mape, ki pokaže spletno stran ali vsebino ftp), jim ne bo podan noben parameter.\n"
 "\n"
-"V vseh primerih bo Caja nastavil naslednje okoljske spremenljivke, ki jih lahko skripti uporabijo:\n"
+"V vseh primerih bo Baul nastavil naslednje okoljske spremenljivke, ki jih lahko skripti uporabijo:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: poti do izbranih datotek, ločene z novimi vrsticami (le krajevne)\n"
 "\n"

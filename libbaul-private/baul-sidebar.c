@@ -46,7 +46,7 @@ baul_sidebar_base_init (gpointer g_class)
             g_signal_new ("tab_icon_changed",
                           BAUL_TYPE_SIDEBAR,
                           G_SIGNAL_RUN_LAST,
-                          G_STRUCT_OFFSET (CajaSidebarIface, tab_icon_changed),
+                          G_STRUCT_OFFSET (BaulSidebarIface, tab_icon_changed),
                           NULL, NULL,
                           g_cclosure_marshal_VOID__VOID,
                           G_TYPE_NONE, 0);
@@ -64,7 +64,7 @@ baul_sidebar_get_type (void)
     {
         const GTypeInfo info =
         {
-            sizeof (CajaSidebarIface),
+            sizeof (BaulSidebarIface),
             baul_sidebar_base_init,
             NULL,
             NULL,
@@ -76,7 +76,7 @@ baul_sidebar_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaSidebar",
+                                       "BaulSidebar",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, GTK_TYPE_WIDGET);
     }
@@ -86,7 +86,7 @@ baul_sidebar_get_type (void)
 
 
 const char *
-baul_sidebar_get_sidebar_id (CajaSidebar *sidebar)
+baul_sidebar_get_sidebar_id (BaulSidebar *sidebar)
 {
     g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);
 
@@ -94,7 +94,7 @@ baul_sidebar_get_sidebar_id (CajaSidebar *sidebar)
 }
 
 char *
-baul_sidebar_get_tab_label (CajaSidebar *sidebar)
+baul_sidebar_get_tab_label (BaulSidebar *sidebar)
 {
     g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);
 
@@ -102,7 +102,7 @@ baul_sidebar_get_tab_label (CajaSidebar *sidebar)
 }
 
 char *
-baul_sidebar_get_tab_tooltip (CajaSidebar *sidebar)
+baul_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
 {
     g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);
 
@@ -110,7 +110,7 @@ baul_sidebar_get_tab_tooltip (CajaSidebar *sidebar)
 }
 
 GdkPixbuf *
-baul_sidebar_get_tab_icon (CajaSidebar *sidebar)
+baul_sidebar_get_tab_icon (BaulSidebar *sidebar)
 {
     g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);
 
@@ -118,7 +118,7 @@ baul_sidebar_get_tab_icon (CajaSidebar *sidebar)
 }
 
 void
-baul_sidebar_is_visible_changed (CajaSidebar *sidebar,
+baul_sidebar_is_visible_changed (BaulSidebar *sidebar,
                                  gboolean         is_visible)
 {
     g_return_if_fail (BAUL_IS_SIDEBAR (sidebar));

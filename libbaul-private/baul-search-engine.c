@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Novell, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -30,7 +30,7 @@
 #include "baul-search-engine-simple.h"
 #include "baul-search-engine-tracker.h"
 
-struct CajaSearchEngineDetails
+struct BaulSearchEngineDetails
 {
     int none;
 };
@@ -46,7 +46,7 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_ABSTRACT_TYPE (CajaSearchEngine,
+G_DEFINE_ABSTRACT_TYPE (BaulSearchEngine,
                         baul_search_engine,
                         G_TYPE_OBJECT);
 
@@ -55,7 +55,7 @@ static GObjectClass *parent_class = NULL;
 static void
 finalize (GObject *object)
 {
-    CajaSearchEngine *engine;
+    BaulSearchEngine *engine;
 
     engine = BAUL_SEARCH_ENGINE (object);
 
@@ -65,7 +65,7 @@ finalize (GObject *object)
 }
 
 static void
-baul_search_engine_class_init (CajaSearchEngineClass *class)
+baul_search_engine_class_init (BaulSearchEngineClass *class)
 {
     GObjectClass *gobject_class;
 
@@ -78,7 +78,7 @@ baul_search_engine_class_init (CajaSearchEngineClass *class)
         g_signal_new ("hits-added",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaSearchEngineClass, hits_added),
+                      G_STRUCT_OFFSET (BaulSearchEngineClass, hits_added),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__POINTER,
                       G_TYPE_NONE, 1,
@@ -88,7 +88,7 @@ baul_search_engine_class_init (CajaSearchEngineClass *class)
         g_signal_new ("hits-subtracted",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaSearchEngineClass, hits_subtracted),
+                      G_STRUCT_OFFSET (BaulSearchEngineClass, hits_subtracted),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__POINTER,
                       G_TYPE_NONE, 1,
@@ -98,7 +98,7 @@ baul_search_engine_class_init (CajaSearchEngineClass *class)
         g_signal_new ("finished",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaSearchEngineClass, finished),
+                      G_STRUCT_OFFSET (BaulSearchEngineClass, finished),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -107,7 +107,7 @@ baul_search_engine_class_init (CajaSearchEngineClass *class)
         g_signal_new ("error",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaSearchEngineClass, error),
+                      G_STRUCT_OFFSET (BaulSearchEngineClass, error),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__STRING,
                       G_TYPE_NONE, 1,
@@ -116,15 +116,15 @@ baul_search_engine_class_init (CajaSearchEngineClass *class)
 }
 
 static void
-baul_search_engine_init (CajaSearchEngine *engine)
+baul_search_engine_init (BaulSearchEngine *engine)
 {
-    engine->details = g_new0 (CajaSearchEngineDetails, 1);
+    engine->details = g_new0 (BaulSearchEngineDetails, 1);
 }
 
-CajaSearchEngine *
+BaulSearchEngine *
 baul_search_engine_new (void)
 {
-    CajaSearchEngine *engine;
+    BaulSearchEngine *engine;
 
     engine = baul_search_engine_tracker_new ();
     if (engine)
@@ -143,7 +143,7 @@ baul_search_engine_new (void)
 }
 
 void
-baul_search_engine_set_query (CajaSearchEngine *engine, CajaQuery *query)
+baul_search_engine_set_query (BaulSearchEngine *engine, BaulQuery *query)
 {
     g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
     g_return_if_fail (BAUL_SEARCH_ENGINE_GET_CLASS (engine)->set_query != NULL);
@@ -152,7 +152,7 @@ baul_search_engine_set_query (CajaSearchEngine *engine, CajaQuery *query)
 }
 
 void
-baul_search_engine_start (CajaSearchEngine *engine)
+baul_search_engine_start (BaulSearchEngine *engine)
 {
     g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
     g_return_if_fail (BAUL_SEARCH_ENGINE_GET_CLASS (engine)->start != NULL);
@@ -162,7 +162,7 @@ baul_search_engine_start (CajaSearchEngine *engine)
 
 
 void
-baul_search_engine_stop (CajaSearchEngine *engine)
+baul_search_engine_stop (BaulSearchEngine *engine)
 {
     g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
     g_return_if_fail (BAUL_SEARCH_ENGINE_GET_CLASS (engine)->stop != NULL);
@@ -171,7 +171,7 @@ baul_search_engine_stop (CajaSearchEngine *engine)
 }
 
 gboolean
-baul_search_engine_is_indexed (CajaSearchEngine *engine)
+baul_search_engine_is_indexed (BaulSearchEngine *engine)
 {
     g_return_val_if_fail (BAUL_IS_SEARCH_ENGINE (engine), FALSE);
     g_return_val_if_fail (BAUL_SEARCH_ENGINE_GET_CLASS (engine)->is_indexed != NULL, FALSE);
@@ -180,7 +180,7 @@ baul_search_engine_is_indexed (CajaSearchEngine *engine)
 }
 
 void
-baul_search_engine_hits_added (CajaSearchEngine *engine, GList *hits)
+baul_search_engine_hits_added (BaulSearchEngine *engine, GList *hits)
 {
     g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
 
@@ -189,7 +189,7 @@ baul_search_engine_hits_added (CajaSearchEngine *engine, GList *hits)
 
 
 void
-baul_search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits)
+baul_search_engine_hits_subtracted (BaulSearchEngine *engine, GList *hits)
 {
     g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
 
@@ -198,7 +198,7 @@ baul_search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits)
 
 
 void
-baul_search_engine_finished (CajaSearchEngine *engine)
+baul_search_engine_finished (BaulSearchEngine *engine)
 {
     g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
 
@@ -206,7 +206,7 @@ baul_search_engine_finished (CajaSearchEngine *engine)
 }
 
 void
-baul_search_engine_error (CajaSearchEngine *engine, const char *error_message)
+baul_search_engine_error (BaulSearchEngine *engine, const char *error_message)
 {
     g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
 

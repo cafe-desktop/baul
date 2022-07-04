@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
-   baul-trash-monitor.c: Caja trash state watcher.
+   baul-trash-monitor.c: Baul trash state watcher.
 
    Copyright (C) 2000, 2001 Eazel, Inc.
 
@@ -36,7 +36,7 @@
 #include "baul-file-attributes.h"
 #include "baul-icon-names.h"
 
-struct _CajaTrashMonitorPrivate
+struct _BaulTrashMonitorPrivate
 {
     gboolean empty;
     GIcon *icon;
@@ -50,14 +50,14 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-static CajaTrashMonitor *baul_trash_monitor = NULL;
+static BaulTrashMonitor *baul_trash_monitor = NULL;
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaTrashMonitor, baul_trash_monitor, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulTrashMonitor, baul_trash_monitor, G_TYPE_OBJECT)
 
 static void
 baul_trash_monitor_finalize (GObject *object)
 {
-    CajaTrashMonitor *trash_monitor;
+    BaulTrashMonitor *trash_monitor;
 
     trash_monitor = BAUL_TRASH_MONITOR (object);
 
@@ -74,7 +74,7 @@ baul_trash_monitor_finalize (GObject *object)
 }
 
 static void
-baul_trash_monitor_class_init (CajaTrashMonitorClass *klass)
+baul_trash_monitor_class_init (BaulTrashMonitorClass *klass)
 {
     GObjectClass *object_class;
 
@@ -86,7 +86,7 @@ baul_trash_monitor_class_init (CajaTrashMonitorClass *klass)
                                    ("trash_state_changed",
                                     G_TYPE_FROM_CLASS (object_class),
                                     G_SIGNAL_RUN_LAST,
-                                    G_STRUCT_OFFSET (CajaTrashMonitorClass, trash_state_changed),
+                                    G_STRUCT_OFFSET (BaulTrashMonitorClass, trash_state_changed),
                                     NULL, NULL,
                                     g_cclosure_marshal_VOID__BOOLEAN,
                                     G_TYPE_NONE, 1,
@@ -98,7 +98,7 @@ update_info_cb (GObject *source_object,
                 GAsyncResult *res,
                 gpointer user_data)
 {
-    CajaTrashMonitor *trash_monitor;
+    BaulTrashMonitor *trash_monitor;
     GFileInfo *info;
     gboolean empty;
 
@@ -150,7 +150,7 @@ update_info_cb (GObject *source_object,
 }
 
 static void
-schedule_update_info (CajaTrashMonitor *trash_monitor)
+schedule_update_info (BaulTrashMonitor *trash_monitor)
 {
     GFile *location;
 
@@ -171,7 +171,7 @@ file_changed (GFileMonitor* monitor,
               GFileMonitorEvent event_type,
               gpointer user_data)
 {
-    CajaTrashMonitor *trash_monitor;
+    BaulTrashMonitor *trash_monitor;
 
     trash_monitor = BAUL_TRASH_MONITOR (user_data);
 
@@ -179,7 +179,7 @@ file_changed (GFileMonitor* monitor,
 }
 
 static void
-baul_trash_monitor_init (CajaTrashMonitor *trash_monitor)
+baul_trash_monitor_init (BaulTrashMonitor *trash_monitor)
 {
     GFile *location;
 
@@ -206,7 +206,7 @@ unref_trash_monitor (void)
     g_object_unref (baul_trash_monitor);
 }
 
-CajaTrashMonitor *
+BaulTrashMonitor *
 baul_trash_monitor_get (void)
 {
     if (baul_trash_monitor == NULL)
@@ -224,7 +224,7 @@ baul_trash_monitor_get (void)
 gboolean
 baul_trash_monitor_is_empty (void)
 {
-    CajaTrashMonitor *monitor;
+    BaulTrashMonitor *monitor;
 
     monitor = baul_trash_monitor_get ();
     return monitor->details->empty;
@@ -233,7 +233,7 @@ baul_trash_monitor_is_empty (void)
 GIcon *
 baul_trash_monitor_get_icon (void)
 {
-    CajaTrashMonitor *monitor;
+    BaulTrashMonitor *monitor;
 
     monitor = baul_trash_monitor_get ();
     if (monitor->details->icon)

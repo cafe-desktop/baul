@@ -6,8 +6,8 @@
 
 <book id="index" xmlns:xi="http://www.w3.org/2003/XInclude">
   <bookinfo>
-    <title>Caja Extension Reference Manual</title>
-    <releaseinfo>For Caja-Extension &version;</releaseinfo>
+    <title>Baul Extension Reference Manual</title>
+    <releaseinfo>For Baul-Extension &version;</releaseinfo>
 
     </bookinfo>
 

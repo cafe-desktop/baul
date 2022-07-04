@@ -12,7 +12,7 @@
 # #-#-#-#-#  am.po (baul)  #-#-#-#-#
 # Translations into the Amharic Language.
 # Copyright (C) 2002 Free Software Foundation, Inc.
-# This file is distributed under the same license as the Caja package.
+# This file is distributed under the same license as the Baul package.
 # Ge'ez Frontier Foundation <locales@geez.org>, 2002.
 #
 #
@@ -116,8 +116,8 @@
 
 
 ========== be@latin.po ==========
-# Biełaruski pierakład Cajaa.
-# Copyright (C) 2007 THE Caja'S COPYRIGHT HOLDER
+# Biełaruski pierakład Baula.
+# Copyright (C) 2007 THE Baul'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the marco.mate package.
 # Alaksandar Navicki <zolak@lacinka.org> & Łacinka.org 2007.
 #
@@ -142,9 +142,9 @@
 
 
 ========== bn.po ==========
-# Bengali Translation of the Caja.
-# Copyright (C) 2003-2006 The Caja Authors.
-# This file is distributed under the same license as the Caja package.
+# Bengali Translation of the Baul.
+# Copyright (C) 2003-2006 The Baul Authors.
+# This file is distributed under the same license as the Baul package.
 #
 # Progga <progga@BengaLinux.Org>, 2003-2006.
 # Runa Bhattacharjee <runabh@gmail.com>, 2006.
@@ -160,9 +160,9 @@
 ========== bn_IN.po ==========
 # #-#-#-#-#  bn_IN.po (bn_IN)  #-#-#-#-#
 # translation of bn_IN.po to Bengali INDIA
-# Bengali India Translation of the Caja.
-# Copyright (C) 2003-2006 The Caja Authors.
-# This file is distributed under the same license as the Caja package.
+# Bengali India Translation of the Baul.
+# Copyright (C) 2003-2006 The Baul Authors.
+# This file is distributed under the same license as the Baul package.
 #
 # Progga <progga@BengaLinux.Org>, 2003-2006.
 # Runa Bhattacharjee <runabh@gmail.com>, 2006.
@@ -243,8 +243,8 @@
 
 
 ========== cs.po ==========
-# Czech translation of Caja merged with the translation of eel.
-# Copyright (C) 2001, 2003, 2006, 2007, 2008, 2009 the author(s) of Caja.
+# Czech translation of Baul merged with the translation of eel.
+# Copyright (C) 2001, 2003, 2006, 2007, 2008, 2009 the author(s) of Baul.
 # Copyright (C) 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>.
 # Copyright (C) 2006 Lukas Novotny <lukasnov@cvs.gnome.org>.
 # This file is distributed under the same license as the baul package.
@@ -281,7 +281,7 @@
 # "copïo" nid "copio"
 # "directory" -> "cyfeiriadur"
 # "folder" -> "plygell"
-# angen penderfynu: "rheolwr" ai "trefnydd" ffeiliau yw Caja?
+# angen penderfynu: "rheolwr" ai "trefnydd" ffeiliau yw Baul?
 # "caiff ... e[iu]" yn hytrach na "bydd ... yn cael e[iu]"
 # "sicrhewch" yn hytrach na "gwnewch yn siŵr"
 # "sefydlu" yn hytrach na "gosod"
@@ -289,7 +289,7 @@
 # "rhaglen" yn hytrach na "cymhwysiad" neu "cymhwysiant"
 #
 # rhysj:
-# - *trefnydd* ffeiliau yw Caja erbyn hyn
+# - *trefnydd* ffeiliau yw Baul erbyn hyn
 # - "anghymeradwyo" yn hytrach na "gwrthddeisyfu" am "deprecate"
 #   (is deprecated -> "anghymeradwyir")
 # - Berf yw "rhagosod", nid enw: felly cyfieithir, e.e. "default theme"
@@ -323,7 +323,7 @@
 
 
 ========== da.po ==========
-# Danish translation of Caja.
+# Danish translation of Baul.
 # Copyright (C) 2000-2009
 # This file is distributed under the same license as the baul package.
 # Kenneth Christiansen <kenneth@gnu.org>, 2000, 2001.
@@ -367,7 +367,7 @@
 
 
 ========== de.po ==========
-# German Caja translation
+# German Baul translation
 # Copyright (C) 2000-2004, 2007 Free Software Foundation, Inc.
 #
 # Benedikt Roth <Benedikt.Roth@gmx.net>, 2000, 2001.
@@ -428,9 +428,9 @@
 
 
 ========== el.po ==========
-# Greek translation of Caja
+# Greek translation of Baul
 # Copyright (C) 2000 - 2009 Free Software Foundation, Inc.
-# This file is distributed under the same license as the Caja package.
+# This file is distributed under the same license as the Baul package.
 #
 # simos: 652 messages, 19Feb2001, more messages remaining.
 # simos: 713 messages, 20Feb2001, more messages remaining.
@@ -499,7 +499,7 @@
 # Shavian translation for baul.
 # Copyright (C) 2010 The Mate Foundation.
 # Thomas Thurman <tthurman@gnome.org>, 2010.
-# Transliterate Caja as ·𐑯𐑷𐑑𐑦𐑤𐑩𐑕
+# Transliterate Baul as ·𐑯𐑷𐑑𐑦𐑤𐑩𐑕
 
 
 
@@ -578,8 +578,8 @@
 
 
 ========== et.po ==========
-# Cajae eesti tõlge.
-# Estonian translation of Caja.
+# Baule eesti tõlge.
+# Estonian translation of Baul.
 #
 # Copyright (C) 2002-2006 Free Software Foundation, Inc.
 # Copyright (C) 2007-2010 The MATE Project.
@@ -631,7 +631,7 @@
 
 
 ========== fi.po ==========
-# Caja Finnish translation.
+# Baul Finnish translation.
 # Copyright (C) 2002-2009 Free Software Foundation, Inc.
 # Pauli Virtanen <pauli.virtanen@hut.fi>, 2000-2005.
 # Ilkka Tuohela <hile@iki.fi>, 2005-2009.
@@ -869,9 +869,9 @@
 
 
 ========== id.po ==========
-# Indonesia translation of Caja.
-# Copyright (C) 2004 THE Caja'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the Caja package.
+# Indonesia translation of Baul.
+# Copyright (C) 2004 THE Baul'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Baul package.
 #
 # Mohammad DAMT <mdamt@bisnisweb.com>
 # Yohanes Nugroho <yohanes@opensource.or.id>, 2004.
@@ -900,7 +900,7 @@
 
 
 ========== is.po ==========
-# Icelandic Translation of Caja.
+# Icelandic Translation of Baul.
 # This file is distributed under the same license as the MATE package.
 # The translations are Copyright (C) of the contributing translators.
 # Copyright (C) 2009 Free Software Foundation, Inc.
@@ -913,7 +913,7 @@
 
 
 ========== it.po ==========
-# Italian translation of Caja
+# Italian translation of Baul
 # This file is distributed under the same license as baul package
 # Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 # Christopher R. Gabriel <cgabriel@cgabriel.org>, 2000.
@@ -947,7 +947,7 @@
 ========== ka.po ==========
 # #-#-#-#-#  ka.po (ka)  #-#-#-#-#
 # Copyright © 2007 Mate i18n Project for Georgia, 2008.
-# Georgian Translation for Caja, 2008, 2008.
+# Georgian Translation for Baul, 2008, 2008.
 #
 # Vladimer Sichinava  ვლადიმერ სიჭინავა <vsichi@gnome.org>, 2008.
 # #-#-#-#-#  ka.po (eel.HEAD)  #-#-#-#-#
@@ -1008,7 +1008,7 @@
 # 새로 번역하시는 분은 아래 "translator-credits"에 추가하세요.
 #
 # 주의:
-# - 이 프로그램의 이름인 Caja는 "노틸러스"로 음역.
+# - 이 프로그램의 이름인 Baul는 "노틸러스"로 음역.
 #
 
 
@@ -1035,13 +1035,13 @@
 
 
 ========== li.po ==========
-# #-#-#-#-#  li.po (Caja)  #-#-#-#-#
-# Limburgish Translation of Caja
+# #-#-#-#-#  li.po (Baul)  #-#-#-#-#
+# Limburgish Translation of Baul
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Mathieu van Woerkom <mathieu@brabants.org>, 2003
 #
 # #-#-#-#-#  li.po (eel HEAD)  #-#-#-#-#
-# Limburgish Translation of Caja
+# Limburgish Translation of Baul
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Mathieu van Woerkom <mathieu@brabants.org>, 2003.
 #
@@ -1050,7 +1050,7 @@
 
 
 ========== lt.po ==========
-# Lithuanian translation of Caja.
+# Lithuanian translation of Baul.
 # Copyright (C) 2001-2010 Free Software Foundation, Inc.
 # Mantas Kriaučiūnas <mantas@akl.lt>, 2001-2004.
 # Eglė Girinaitė <egle@akl.lt>, 2001-2003.
@@ -1094,7 +1094,7 @@
 
 ========== mi.po ==========
 # Māori translation of baul.
-# Copyright © 2001, 2004 Caja
+# Copyright © 2001, 2004 Baul
 # Distributed under the same licence as the baul package
 # John C Barstow <jbowtie@amathaine.com>, 2004.
 #
@@ -1206,7 +1206,7 @@
 
 
 ========== ms.po ==========
-# Caja Bahasa Melayu (ms)
+# Baul Bahasa Melayu (ms)
 # Jika takut risiko, Jangan bicara tentang Perjuangan
 # Hasbullah Bin Pit (sebol) <sebol@ikhlas.com>, 2002
 #
@@ -1219,7 +1219,7 @@
 
 
 ========== nb.po ==========
-# Norwegian Bokmål translation of Caja.
+# Norwegian Bokmål translation of Baul.
 # Copyright (C) 2000-2005 Free Software Foundation, Inc.
 # Kjartan Maraas <kmaraas@gnome.org>, 2000-2010.
 # Åsmund Skjæveland <aasmunds@fys.uio.no>, 2003.
@@ -1274,9 +1274,9 @@
 
 
 ========== nl.po ==========
-# Dutch Translation for Caja
+# Dutch Translation for Baul
 #
-# This file is distributed under the same license as the Caja package.
+# This file is distributed under the same license as the Baul package.
 #
 # Op 15 september 2006 is het cd/dvd-gedoe definitief beslist: het is vanaf
 # heden "cd/dvd branden". (Wouter Bolsterlee)
@@ -1304,7 +1304,7 @@
 ========== nn.po ==========
 # #-#-#-#-#  nn.po (nn)  #-#-#-#-#
 # translation of baul.po to Norwegian Nynorsk
-# Norwegian nynorsk translation of Caja
+# Norwegian nynorsk translation of Baul
 # Copyright (C) 2001, 2003, 2004, 2006, 2008 Free Software Foundation, Inc.
 # Copyright (C) 2005 Yahoo! Inc.
 #
@@ -1415,7 +1415,7 @@
 
 ========== pt.po ==========
 # baul's Portuguese Translation
-# Copyright © 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Caja
+# Copyright © 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Baul
 # Distributed under the same licence as the baul package
 # Duarte Loreto <happyguy_pt@hotmail.com>, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
 #
@@ -1528,7 +1528,7 @@
 
 
 ========== sk.po ==========
-# Caja Slovak translation.
+# Baul Slovak translation.
 # Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2007, 2008 Free Software Foundation, Inc.
 # Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000,2001,2002,2003, 2004.
 # Stanislav Visnovsky <visnovsky@kde.org>, 2003.
@@ -1689,7 +1689,7 @@
 
 
 ========== tr.po ==========
-# Turkish translation of Caja.
+# Turkish translation of Baul.
 # Copyright (C) 2000-2003, 2004, 2005, 2006, 2008 Free Software Foundation, Inc.
 #
 # Ömer Fadıl USTA <omer_fad@hotmail.com>, 2002.
@@ -1744,7 +1744,7 @@
 
 
 ========== vi.po ==========
-# Vietnamese Translation for Caja.
+# Vietnamese Translation for Baul.
 # Copyright © 2009 MATE i18n Project for Vietnamese.
 # Hoang Ngoc Tu <hntu@gmx.de>, 2001-2002.
 # Joern v. Kattchee <kattchee@gmx.net>, 2001-2002.
@@ -1758,7 +1758,7 @@
 
 
 ========== wa.po ==========
-# #-#-#-#-#  wa.po (Caja 2.2.0.2)  #-#-#-#-#
+# #-#-#-#-#  wa.po (Baul 2.2.0.2)  #-#-#-#-#
 # Translation into the walloon language.
 #
 # Si vos voloz donner on côp di spale pol ratournaedje di Mate (ou des
@@ -1814,7 +1814,7 @@
 
 
 ========== zh_CN.po ==========
-# zh_CN translation for Caja.
+# zh_CN translation for Baul.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as baul package.
 # Wang Jian <lark@linux.net.cn>, 2001

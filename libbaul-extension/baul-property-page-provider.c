@@ -1,5 +1,5 @@
 /*
- *  baul-property-page-provider.c - Interface for Caja extensions
+ *  baul-property-page-provider.c - Interface for Baul extensions
  *                                      that provide property pages for
  *                                      files.
  *
@@ -30,11 +30,11 @@
 
 /**
  * SECTION:baul-property-page-provider
- * @title: CajaPropertyPageProvider
+ * @title: BaulPropertyPageProvider
  * @short_description: Interface to provide additional property pages
  * @include: libbaul-extension/baul-property-page-provider.h
  *
- * #CajaPropertyPageProvider allows extension to provide additional pages
+ * #BaulPropertyPageProvider allows extension to provide additional pages
  * for the file properties dialog.
  */
 
@@ -50,7 +50,7 @@ baul_property_page_provider_get_type (void)
 
     if (!type) {
         const GTypeInfo info = {
-            sizeof (CajaPropertyPageProviderIface),
+            sizeof (BaulPropertyPageProviderIface),
             baul_property_page_provider_base_init,
             NULL,
             NULL,
@@ -62,7 +62,7 @@ baul_property_page_provider_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaPropertyPageProvider",
+                                       "BaulPropertyPageProvider",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -72,19 +72,19 @@ baul_property_page_provider_get_type (void)
 
 /**
  * baul_property_page_provider_get_pages:
- * @provider: a #CajaPropertyPageProvider
- * @files: (element-type CajaFileInfo): a #GList of #CajaFileInfo
+ * @provider: a #BaulPropertyPageProvider
+ * @files: (element-type BaulFileInfo): a #GList of #BaulFileInfo
  *
- * This function is called by Caja when it wants property page
+ * This function is called by Baul when it wants property page
  * items from the extension.
  *
  * This function is called in the main thread before a property page
  * is shown, so it should return quickly.
  *
- * Returns: (element-type CajaPropertyPage) (transfer full): A #GList of allocated #CajaPropertyPage items.
+ * Returns: (element-type BaulPropertyPage) (transfer full): A #GList of allocated #BaulPropertyPage items.
  */
 GList *
-baul_property_page_provider_get_pages (CajaPropertyPageProvider *provider,
+baul_property_page_provider_get_pages (BaulPropertyPageProvider *provider,
                                        GList *files)
 {
     g_return_val_if_fail (BAUL_IS_PROPERTY_PAGE_PROVIDER (provider), NULL);

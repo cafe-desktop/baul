@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-vfs-file.h: Subclass of CajaFile to implement the
+   baul-vfs-file.h: Subclass of BaulFile to implement the
    the case of a VFS file.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
@@ -30,27 +30,27 @@
 
 #define BAUL_TYPE_VFS_FILE baul_vfs_file_get_type()
 #define BAUL_VFS_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VFS_FILE, CajaVFSFile))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VFS_FILE, BaulVFSFile))
 #define BAUL_VFS_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_VFS_FILE, CajaVFSFileClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_VFS_FILE, BaulVFSFileClass))
 #define BAUL_IS_VFS_FILE(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_VFS_FILE))
 #define BAUL_IS_VFS_FILE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_VFS_FILE))
 #define BAUL_VFS_FILE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_VFS_FILE, CajaVFSFileClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_VFS_FILE, BaulVFSFileClass))
 
-typedef struct CajaVFSFileDetails CajaVFSFileDetails;
-
-typedef struct
-{
-    CajaFile parent_slot;
-} CajaVFSFile;
+typedef struct BaulVFSFileDetails BaulVFSFileDetails;
 
 typedef struct
 {
-    CajaFileClass parent_slot;
-} CajaVFSFileClass;
+    BaulFile parent_slot;
+} BaulVFSFile;
+
+typedef struct
+{
+    BaulFileClass parent_slot;
+} BaulVFSFileClass;
 
 GType   baul_vfs_file_get_type (void);
 

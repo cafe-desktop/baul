@@ -1,5 +1,5 @@
 /*
- *  baul-info-provider.c - Interface for Caja extensions that
+ *  baul-info-provider.c - Interface for Baul extensions that
  *                             provide info about files.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -29,14 +29,14 @@
 
 /**
  * SECTION:baul-info-provider
- * @title: CajaInfoProvider
+ * @title: BaulInfoProvider
  * @short_description: Interface to provide additional information about files
  * @include: libbaul-extension/baul-column-provider.h
  *
- * #CajaInfoProvider allows extension to provide additional information about
+ * #BaulInfoProvider allows extension to provide additional information about
  * files. When baul_info_provider_update_file_info() is called by the application,
  * extensions will know that it's time to add extra information to the provided
- * #CajaFileInfo.
+ * #BaulFileInfo.
  */
 
 static void
@@ -51,7 +51,7 @@ baul_info_provider_get_type (void)
 
     if (!type) {
         const GTypeInfo info = {
-            sizeof (CajaInfoProviderIface),
+            sizeof (BaulInfoProviderIface),
             baul_info_provider_base_init,
             NULL,
             NULL,
@@ -63,7 +63,7 @@ baul_info_provider_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaInfoProvider",
+                                       "BaulInfoProvider",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -71,11 +71,11 @@ baul_info_provider_get_type (void)
     return type;
 }
 
-CajaOperationResult
-baul_info_provider_update_file_info (CajaInfoProvider     *provider,
-                                     CajaFileInfo         *file,
+BaulOperationResult
+baul_info_provider_update_file_info (BaulInfoProvider     *provider,
+                                     BaulFileInfo         *file,
                                      GClosure             *update_complete,
-                                     CajaOperationHandle **handle)
+                                     BaulOperationHandle **handle)
 {
     g_return_val_if_fail (BAUL_IS_INFO_PROVIDER (provider),
                           BAUL_OPERATION_FAILED);
@@ -90,8 +90,8 @@ baul_info_provider_update_file_info (CajaInfoProvider     *provider,
 }
 
 void
-baul_info_provider_cancel_update (CajaInfoProvider    *provider,
-                                  CajaOperationHandle *handle)
+baul_info_provider_cancel_update (BaulInfoProvider    *provider,
+                                  BaulOperationHandle *handle)
 {
     g_return_if_fail (BAUL_IS_INFO_PROVIDER (provider));
     g_return_if_fail (BAUL_INFO_PROVIDER_GET_IFACE (provider)->cancel_update != NULL);
@@ -103,9 +103,9 @@ baul_info_provider_cancel_update (CajaInfoProvider    *provider,
 
 void
 baul_info_provider_update_complete_invoke (GClosure            *update_complete,
-                                           CajaInfoProvider    *provider,
-                                           CajaOperationHandle *handle,
-                                           CajaOperationResult  result)
+                                           BaulInfoProvider    *provider,
+                                           BaulOperationHandle *handle,
+                                           BaulOperationResult  result)
 {
     GValue args[3] = { { 0, } };
     GValue return_val = { 0, };

@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Caja
+Name=Baul
 GenericName=File Manager
 Exec=@bindir@/baul
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!

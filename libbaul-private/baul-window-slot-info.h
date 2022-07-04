@@ -30,13 +30,13 @@
 
 
 #define BAUL_TYPE_WINDOW_SLOT_INFO           (baul_window_slot_info_get_type ())
-#define BAUL_WINDOW_SLOT_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_WINDOW_SLOT_INFO, CajaWindowSlotInfo))
+#define BAUL_WINDOW_SLOT_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_WINDOW_SLOT_INFO, BaulWindowSlotInfo))
 #define BAUL_IS_WINDOW_SLOT_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_WINDOW_SLOT_INFO))
-#define BAUL_WINDOW_SLOT_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_WINDOW_SLOT_INFO, CajaWindowSlotInfoIface))
+#define BAUL_WINDOW_SLOT_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_WINDOW_SLOT_INFO, BaulWindowSlotInfoIface))
 
-typedef struct _CajaWindowSlotInfoIface CajaWindowSlotInfoIface;
+typedef struct _BaulWindowSlotInfoIface BaulWindowSlotInfoIface;
 
-struct _CajaWindowSlotInfoIface
+struct _BaulWindowSlotInfoIface
 {
     GTypeInterface g_iface;
 
@@ -46,61 +46,61 @@ struct _CajaWindowSlotInfoIface
      * Views should connect to this signal and merge their UI
      * into the main window.
      */
-    void  (* active)  (CajaWindowSlotInfo *slot);
+    void  (* active)  (BaulWindowSlotInfo *slot);
     /* emitted right before this slot becomes inactive.
      * Views should connect to this signal and unmerge their UI
      * from the main window.
      */
-    void  (* inactive) (CajaWindowSlotInfo *slot);
+    void  (* inactive) (BaulWindowSlotInfo *slot);
 
     /* returns the window info associated with this slot */
-    CajaWindowInfo * (* get_window) (CajaWindowSlotInfo *slot);
+    BaulWindowInfo * (* get_window) (BaulWindowSlotInfo *slot);
 
     /* Returns the number of selected items in the view */
-    int  (* get_selection_count)  (CajaWindowSlotInfo    *slot);
+    int  (* get_selection_count)  (BaulWindowSlotInfo    *slot);
 
     /* Returns a list of uris for th selected items in the view, caller frees it */
-    GList *(* get_selection)      (CajaWindowSlotInfo    *slot);
+    GList *(* get_selection)      (BaulWindowSlotInfo    *slot);
 
-    char * (* get_current_location)  (CajaWindowSlotInfo *slot);
-    CajaView * (* get_current_view) (CajaWindowSlotInfo *slot);
-    void   (* set_status)            (CajaWindowSlotInfo *slot,
+    char * (* get_current_location)  (BaulWindowSlotInfo *slot);
+    BaulView * (* get_current_view) (BaulWindowSlotInfo *slot);
+    void   (* set_status)            (BaulWindowSlotInfo *slot,
                                       const char *status);
-    char * (* get_title)             (CajaWindowSlotInfo *slot);
+    char * (* get_title)             (BaulWindowSlotInfo *slot);
 
-    void   (* open_location)      (CajaWindowSlotInfo *slot,
+    void   (* open_location)      (BaulWindowSlotInfo *slot,
                                    GFile *location,
-                                   CajaWindowOpenMode mode,
-                                   CajaWindowOpenFlags flags,
+                                   BaulWindowOpenMode mode,
+                                   BaulWindowOpenFlags flags,
                                    GList *selection,
-                                   CajaWindowGoToCallback callback,
+                                   BaulWindowGoToCallback callback,
                                    gpointer user_data);
-    void   (* make_hosting_pane_active) (CajaWindowSlotInfo *slot);
+    void   (* make_hosting_pane_active) (BaulWindowSlotInfo *slot);
 };
 
 
 GType                             baul_window_slot_info_get_type            (void);
-CajaWindowInfo *              baul_window_slot_info_get_window          (CajaWindowSlotInfo            *slot);
+BaulWindowInfo *              baul_window_slot_info_get_window          (BaulWindowSlotInfo            *slot);
 #define baul_window_slot_info_open_location(slot, location, mode, flags, selection) \
 	baul_window_slot_info_open_location_full(slot, location, mode, \
 						 flags, selection, NULL, NULL)
 
 void                              baul_window_slot_info_open_location_full
-	(CajaWindowSlotInfo *slot,
+	(BaulWindowSlotInfo *slot,
         GFile                             *location,
-        CajaWindowOpenMode                 mode,
-        CajaWindowOpenFlags                flags,
+        BaulWindowOpenMode                 mode,
+        BaulWindowOpenFlags                flags,
         GList                             *selection,
-        CajaWindowGoToCallback		   callback,
+        BaulWindowGoToCallback		   callback,
         gpointer			   user_data);
-void                              baul_window_slot_info_set_status          (CajaWindowSlotInfo            *slot,
+void                              baul_window_slot_info_set_status          (BaulWindowSlotInfo            *slot,
         const char *status);
-void                              baul_window_slot_info_make_hosting_pane_active (CajaWindowSlotInfo       *slot);
+void                              baul_window_slot_info_make_hosting_pane_active (BaulWindowSlotInfo       *slot);
 
-char *                            baul_window_slot_info_get_current_location (CajaWindowSlotInfo           *slot);
-CajaView *                    baul_window_slot_info_get_current_view     (CajaWindowSlotInfo           *slot);
-int                               baul_window_slot_info_get_selection_count  (CajaWindowSlotInfo           *slot);
-GList *                           baul_window_slot_info_get_selection        (CajaWindowSlotInfo           *slot);
-char *                            baul_window_slot_info_get_title            (CajaWindowSlotInfo           *slot);
+char *                            baul_window_slot_info_get_current_location (BaulWindowSlotInfo           *slot);
+BaulView *                    baul_window_slot_info_get_current_view     (BaulWindowSlotInfo           *slot);
+int                               baul_window_slot_info_get_selection_count  (BaulWindowSlotInfo           *slot);
+GList *                           baul_window_slot_info_get_selection        (BaulWindowSlotInfo           *slot);
+char *                            baul_window_slot_info_get_title            (BaulWindowSlotInfo           *slot);
 
 #endif /* BAUL_WINDOW_SLOT_INFO_H */

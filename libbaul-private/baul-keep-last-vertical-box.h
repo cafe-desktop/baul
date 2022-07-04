@@ -30,25 +30,25 @@
 
 #define BAUL_TYPE_KEEP_LAST_VERTICAL_BOX baul_keep_last_vertical_box_get_type()
 #define BAUL_KEEP_LAST_VERTICAL_BOX(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBox))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, BaulKeepLastVerticalBox))
 #define BAUL_KEEP_LAST_VERTICAL_BOX_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBoxClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, BaulKeepLastVerticalBoxClass))
 #define BAUL_IS_KEEP_LAST_VERTICAL_BOX(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX))
 #define BAUL_IS_KEEP_LAST_VERTICAL_BOX_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX))
 #define BAUL_KEEP_LAST_VERTICAL_BOX_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBoxClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, BaulKeepLastVerticalBoxClass))
 
-typedef struct CajaKeepLastVerticalBox CajaKeepLastVerticalBox;
-typedef struct CajaKeepLastVerticalBoxClass CajaKeepLastVerticalBoxClass;
+typedef struct BaulKeepLastVerticalBox BaulKeepLastVerticalBox;
+typedef struct BaulKeepLastVerticalBoxClass BaulKeepLastVerticalBoxClass;
 
-struct CajaKeepLastVerticalBox
+struct BaulKeepLastVerticalBox
 {
     GtkBox parent;
 };
 
-struct CajaKeepLastVerticalBoxClass
+struct BaulKeepLastVerticalBoxClass
 {
     GtkBoxClass parent_class;
 };

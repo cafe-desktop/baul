@@ -293,8 +293,8 @@ msgstr "Phumola"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -302,7 +302,7 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -310,8 +310,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -2917,25 +2917,25 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
+msgid "Baul will exit when last window destroyed."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
-"E kgontšha boitshwaro bjo phagamego bja Caja, moo mafesetere ka moka e lego "
+"E kgontšha boitshwaro bjo phagamego bja Baul, moo mafesetere ka moka e lego "
 "difetleki"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
@@ -2946,7 +2946,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
 
@@ -2956,7 +2956,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
 
@@ -2966,7 +2966,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
@@ -2976,11 +2976,11 @@ msgstr "Ge eba go swanetše go kgontšhwa go phumola ga kapejana"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"Ge eba e beakantšwe e le therešo, gona Caja e tla ba le sebopego seo se go "
+"Ge eba e beakantšwe e le therešo, gona Baul e tla ba le sebopego seo se go "
 "dumelelago go phumola faele kapejana le yeo e lego boemong bja yona, go e na"
 " le go e šuthišetša ditlakaleng. Sebopego se se ka ba kotsi, ka gona diriša "
 "temogo."
@@ -3053,13 +3053,13 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
+msgid "Use extra mouse button events in Baul' browser window"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
@@ -3132,7 +3132,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
 
@@ -3142,10 +3142,10 @@ msgstr "Bontšha diphuthedi pele mafesetereng"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Ge eba e beakantšwe e le therešo, gona Caja e bontšha diphuthedi pele ga go "
+"Ge eba e beakantšwe e le therešo, gona Baul e bontšha diphuthedi pele ga go "
 "bontšha difaele leswaong le dipono tša lelokelelo."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3177,15 +3177,15 @@ msgstr ""
 "bogolo."
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja e diriša sephuthedi sa gae sa badiriši bjalo ka teseke"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul e diriša sephuthedi sa gae sa badiriši bjalo ka teseke"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Ge eba e beakantšwe e le therešo, gona Caja e tla diriša sephuthedi sa gae "
+"Ge eba e beakantšwe e le therešo, gona Baul e tla diriša sephuthedi sa gae "
 "sa modiriši bjalo ka teseke. Ge e ba e le maaka, gona e tla diriša ~/Teseke "
 "bjalo ka teseke."
 
@@ -3315,7 +3315,7 @@ msgid "Whether to show desktop notifications"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3447,10 +3447,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Ge eba e beakantšwe e le therešo, Caja e tla bontšha feela diphuthedi "
+"Ge eba e beakantšwe e le therešo, Baul e tla bontšha feela diphuthedi "
 "sešireletšing sa ka thoko sa mohlare. Go sego bjalo e tla bontšha bobedi "
 "diphuthedi le difaele."
 
@@ -3666,7 +3666,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
 
@@ -3676,7 +3676,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
@@ -3688,7 +3688,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
 
@@ -3787,29 +3787,29 @@ msgstr ""
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Caja e ka se hlame sephuthedi se nyakegago sa \"%s\"."
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Baul e ka se hlame sephuthedi se nyakegago sa \"%s\"."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"Pele o diriša Caja, hle hlama sephuthedi se latelago, goba o beakanye "
-"ditumelelo ka tsela yeo ka yona Caja e ka di hlamago."
+"Pele o diriša Baul, hle hlama sephuthedi se latelago, goba o beakanye "
+"ditumelelo ka tsela yeo ka yona Baul e ka di hlamago."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja e ka se hlame diphuthedi tše latelago tšeo di nyakegago: %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul e ka se hlame diphuthedi tše latelago tšeo di nyakegago: %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Pele o diriša Caja, hle hlama diphuthedi tše, goba o beakanye ditumelelo ka "
-"tsela yeo ka yona Caja e ka di hlamago."
+"Pele o diriša Baul, hle hlama diphuthedi tše, goba o beakanye ditumelelo ka "
+"tsela yeo ka yona Baul e ka di hlamago."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -3872,8 +3872,8 @@ msgid "Open a browser window."
 msgstr ""
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Tlogela Caja."
+msgid "Quit Baul."
+msgstr "Tlogela Baul."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -4876,8 +4876,8 @@ msgid "New _Window"
 msgstr ""
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "Bula lefesetere le lengwe la Caja bakeng sa lefelo le bontšhitšwego"
+msgid "Open another Baul window for the displayed location"
+msgstr "Bula lefesetere le lengwe la Baul bakeng sa lefelo le bontšhitšwego"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -5705,7 +5705,7 @@ msgid "View of the current folder"
 msgstr ""
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
+msgid "Baul has no installed viewer capable of displaying the folder."
 msgstr ""
 
 #: src/baul-window-manage-views.c:2145
@@ -5723,11 +5723,11 @@ msgstr "Hle lekola mopeleto gomme o leke gape."
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
+msgid "Baul cannot handle \"%s\" locations."
 msgstr ""
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
+msgid "Baul cannot handle this kind of location."
 msgstr ""
 
 #: src/baul-window-manage-views.c:2178
@@ -5763,7 +5763,7 @@ msgstr "Eya lefelong le laeditšwego ke puku-tshwayo ye"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
@@ -5771,7 +5771,7 @@ msgstr ""
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
@@ -5780,23 +5780,23 @@ msgstr ""
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -5842,9 +5842,9 @@ msgid "Prefere_nces"
 msgstr "Tše ratw_ago"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
+msgid "Edit Baul preferences"
 msgstr ""
-"Caja ke legapi la seswantšho bakeng sa MATE yeo e dirago gore go be bonolo "
+"Baul ke legapi la seswantšho bakeng sa MATE yeo e dirago gore go be bonolo "
 "go laola difaele tša gago le tshepedišo ya gago ka moka."
 
 #: src/baul-window-menus.c:870
@@ -5872,16 +5872,16 @@ msgid "_Contents"
 msgstr "_Dikagare"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Bontšha thušo ya Caja"
+msgid "Display Baul help"
+msgstr "Bontšha thušo ya Baul"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "_Ka ga"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Bontšha ditheto bakeng sa bahlami ba Caja"
+msgid "Display credits for the creators of Baul"
+msgstr "Bontšha ditheto bakeng sa bahlami ba Baul"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6267,7 +6267,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"

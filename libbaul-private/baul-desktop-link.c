@@ -37,15 +37,15 @@
 #include "baul-trash-monitor.h"
 #include "baul-global-preferences.h"
 
-struct _CajaDesktopLinkPrivate
+struct _BaulDesktopLinkPrivate
 {
-    CajaDesktopLinkType type;
+    BaulDesktopLinkType type;
     char *filename;
     char *display_name;
     GFile *activation_location;
     GIcon *icon;
 
-    CajaDesktopIconFile *icon_file;
+    BaulDesktopIconFile *icon_file;
 
     GObject *signal_handler_obj;
     gulong signal_handler;
@@ -54,16 +54,16 @@ struct _CajaDesktopLinkPrivate
     GMount *mount;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaDesktopLink, baul_desktop_link, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulDesktopLink, baul_desktop_link, G_TYPE_OBJECT)
 
 static void
-create_icon_file (CajaDesktopLink *link)
+create_icon_file (BaulDesktopLink *link)
 {
     link->details->icon_file = baul_desktop_icon_file_new (link);
 }
 
 static void
-baul_desktop_link_changed (CajaDesktopLink *link)
+baul_desktop_link_changed (BaulDesktopLink *link)
 {
     if (link->details->icon_file != NULL)
     {
@@ -72,7 +72,7 @@ baul_desktop_link_changed (CajaDesktopLink *link)
 }
 
 static void
-mount_changed_callback (GMount *mount, CajaDesktopLink *link)
+mount_changed_callback (GMount *mount, BaulDesktopLink *link)
 {
     g_free (link->details->display_name);
     if (link->details->activation_location)
@@ -92,7 +92,7 @@ mount_changed_callback (GMount *mount, CajaDesktopLink *link)
 }
 
 static void
-baul_desktop_link_ensure_display_name (CajaDesktopLink *link)
+baul_desktop_link_ensure_display_name (BaulDesktopLink *link)
 {
     if (link->details->display_name[0] == 0) {
         g_free (link->details->display_name);
@@ -127,11 +127,11 @@ baul_desktop_link_ensure_display_name (CajaDesktopLink *link)
 }
 
 static void
-trash_state_changed_callback (CajaTrashMonitor *trash_monitor,
+trash_state_changed_callback (BaulTrashMonitor *trash_monitor,
                               gboolean state,
                               gpointer callback_data)
 {
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
 
     link = BAUL_DESKTOP_LINK (callback_data);
     g_assert (link->details->type == BAUL_DESKTOP_LINK_TRASH);
@@ -148,7 +148,7 @@ trash_state_changed_callback (CajaTrashMonitor *trash_monitor,
 static void
 home_name_changed (gpointer callback_data)
 {
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
 
     link = BAUL_DESKTOP_LINK (callback_data);
     g_assert (link->details->type == BAUL_DESKTOP_LINK_HOME);
@@ -165,7 +165,7 @@ home_name_changed (gpointer callback_data)
 static void
 computer_name_changed (gpointer callback_data)
 {
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
 
     link = BAUL_DESKTOP_LINK (callback_data);
     g_assert (link->details->type == BAUL_DESKTOP_LINK_COMPUTER);
@@ -180,7 +180,7 @@ computer_name_changed (gpointer callback_data)
 static void
 trash_name_changed (gpointer callback_data)
 {
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
 
     link = BAUL_DESKTOP_LINK (callback_data);
     g_assert (link->details->type == BAUL_DESKTOP_LINK_TRASH);
@@ -195,7 +195,7 @@ trash_name_changed (gpointer callback_data)
 static void
 network_name_changed (gpointer callback_data)
 {
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
 
     link = BAUL_DESKTOP_LINK (callback_data);
     g_assert (link->details->type == BAUL_DESKTOP_LINK_NETWORK);
@@ -207,10 +207,10 @@ network_name_changed (gpointer callback_data)
     baul_desktop_link_changed (link);
 }
 
-CajaDesktopLink *
-baul_desktop_link_new (CajaDesktopLinkType type)
+BaulDesktopLink *
+baul_desktop_link_new (BaulDesktopLinkType type)
 {
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
 
     link = BAUL_DESKTOP_LINK (g_object_new (BAUL_TYPE_DESKTOP_LINK, NULL));
 
@@ -283,10 +283,10 @@ baul_desktop_link_new (CajaDesktopLinkType type)
     return link;
 }
 
-CajaDesktopLink *
+BaulDesktopLink *
 baul_desktop_link_new_from_mount (GMount *mount)
 {
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
     GVolume *volume;
     char *name, *filename;
 
@@ -333,7 +333,7 @@ baul_desktop_link_new_from_mount (GMount *mount)
 }
 
 GMount *
-baul_desktop_link_get_mount (CajaDesktopLink *link)
+baul_desktop_link_get_mount (BaulDesktopLink *link)
 {
     if (link->details->mount)
     {
@@ -342,26 +342,26 @@ baul_desktop_link_get_mount (CajaDesktopLink *link)
     return NULL;
 }
 
-CajaDesktopLinkType
-baul_desktop_link_get_link_type (CajaDesktopLink *link)
+BaulDesktopLinkType
+baul_desktop_link_get_link_type (BaulDesktopLink *link)
 {
     return link->details->type;
 }
 
 char *
-baul_desktop_link_get_file_name (CajaDesktopLink *link)
+baul_desktop_link_get_file_name (BaulDesktopLink *link)
 {
     return g_strdup (link->details->filename);
 }
 
 char *
-baul_desktop_link_get_display_name (CajaDesktopLink *link)
+baul_desktop_link_get_display_name (BaulDesktopLink *link)
 {
     return g_strdup (link->details->display_name);
 }
 
 GIcon *
-baul_desktop_link_get_icon (CajaDesktopLink *link)
+baul_desktop_link_get_icon (BaulDesktopLink *link)
 {
     if (link->details->icon != NULL)
     {
@@ -371,7 +371,7 @@ baul_desktop_link_get_icon (CajaDesktopLink *link)
 }
 
 GFile *
-baul_desktop_link_get_activation_location (CajaDesktopLink *link)
+baul_desktop_link_get_activation_location (BaulDesktopLink *link)
 {
     if (link->details->activation_location)
     {
@@ -381,7 +381,7 @@ baul_desktop_link_get_activation_location (CajaDesktopLink *link)
 }
 
 char *
-baul_desktop_link_get_activation_uri (CajaDesktopLink *link)
+baul_desktop_link_get_activation_uri (BaulDesktopLink *link)
 {
     if (link->details->activation_location)
     {
@@ -392,15 +392,15 @@ baul_desktop_link_get_activation_uri (CajaDesktopLink *link)
 
 
 gboolean
-baul_desktop_link_get_date (CajaDesktopLink *link,
-                            CajaDateType     date_type,
+baul_desktop_link_get_date (BaulDesktopLink *link,
+                            BaulDateType     date_type,
                             time_t               *date)
 {
     return FALSE;
 }
 
 gboolean
-baul_desktop_link_can_rename (CajaDesktopLink     *link)
+baul_desktop_link_can_rename (BaulDesktopLink     *link)
 {
     return (link->details->type == BAUL_DESKTOP_LINK_HOME ||
             link->details->type == BAUL_DESKTOP_LINK_TRASH ||
@@ -409,7 +409,7 @@ baul_desktop_link_can_rename (CajaDesktopLink     *link)
 }
 
 gboolean
-baul_desktop_link_rename (CajaDesktopLink     *link,
+baul_desktop_link_rename (BaulDesktopLink     *link,
                           const char              *name)
 {
     switch (link->details->type)
@@ -445,7 +445,7 @@ baul_desktop_link_rename (CajaDesktopLink     *link,
 }
 
 static void
-baul_desktop_link_init (CajaDesktopLink *link)
+baul_desktop_link_init (BaulDesktopLink *link)
 {
     link->details = baul_desktop_link_get_instance_private (link);
 }
@@ -453,7 +453,7 @@ baul_desktop_link_init (CajaDesktopLink *link)
 static void
 desktop_link_finalize (GObject *object)
 {
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
 
     link = BAUL_DESKTOP_LINK (object);
 
@@ -521,7 +521,7 @@ desktop_link_finalize (GObject *object)
 }
 
 static void
-baul_desktop_link_class_init (CajaDesktopLinkClass *klass)
+baul_desktop_link_class_init (BaulDesktopLinkClass *klass)
 {
     GObjectClass *object_class;
 

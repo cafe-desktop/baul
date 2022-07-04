@@ -1,17 +1,17 @@
 /* -*- Mode: C; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 1999, 2000, 2001 Eazel, Inc.
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public
  *  License as published by the Free Software Foundation; either
  *  version 2 of the License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -85,36 +85,36 @@
  */
 #define MAX_URI_IN_DIALOG_LENGTH 60
 
-static void begin_location_change                     (CajaWindowSlot         *slot,
+static void begin_location_change                     (BaulWindowSlot         *slot,
         GFile                      *location,
         GFile                      *previous_location,
         GList                      *new_selection,
-        CajaLocationChangeType      type,
+        BaulLocationChangeType      type,
         guint                       distance,
         const char                 *scroll_pos,
-        CajaWindowGoToCallback      callback,
+        BaulWindowGoToCallback      callback,
         gpointer                    user_data);
-static void free_location_change                      (CajaWindowSlot         *slot);
-static void end_location_change                       (CajaWindowSlot         *slot);
-static void cancel_location_change                    (CajaWindowSlot         *slot);
-static void got_file_info_for_view_selection_callback (CajaFile               *file,
+static void free_location_change                      (BaulWindowSlot         *slot);
+static void end_location_change                       (BaulWindowSlot         *slot);
+static void cancel_location_change                    (BaulWindowSlot         *slot);
+static void got_file_info_for_view_selection_callback (BaulFile               *file,
         gpointer                    callback_data);
-static void create_content_view                       (CajaWindowSlot         *slot,
+static void create_content_view                       (BaulWindowSlot         *slot,
         const char                 *view_id);
-static void display_view_selection_failure            (CajaWindow             *window,
-        CajaFile               *file,
+static void display_view_selection_failure            (BaulWindow             *window,
+        BaulFile               *file,
         GFile                      *location,
         GError                     *error);
-static void load_new_location                         (CajaWindowSlot         *slot,
+static void load_new_location                         (BaulWindowSlot         *slot,
         GFile                      *location,
         GList                      *selection,
         gboolean                    tell_current_content_view,
         gboolean                    tell_new_content_view);
-static void location_has_really_changed               (CajaWindowSlot         *slot);
-static void update_for_new_location                   (CajaWindowSlot         *slot);
+static void location_has_really_changed               (BaulWindowSlot         *slot);
+static void update_for_new_location                   (BaulWindowSlot         *slot);
 
 void
-baul_window_report_selection_changed (CajaWindowInfo *window)
+baul_window_report_selection_changed (BaulWindowInfo *window)
 {
     if (window->details->temporarily_ignore_view_signals)
     {
@@ -127,7 +127,7 @@ baul_window_report_selection_changed (CajaWindowInfo *window)
 /* set_displayed_location:
  */
 static void
-set_displayed_location (CajaWindowSlot *slot, GFile *location)
+set_displayed_location (BaulWindowSlot *slot, GFile *location)
 {
     gboolean recreate;
 
@@ -162,7 +162,7 @@ set_displayed_location (CajaWindowSlot *slot, GFile *location)
 }
 
 static void
-check_bookmark_location_matches (CajaBookmark *bookmark, GFile *location)
+check_bookmark_location_matches (BaulBookmark *bookmark, GFile *location)
 {
     GFile *bookmark_location;
 
@@ -185,20 +185,20 @@ check_bookmark_location_matches (CajaBookmark *bookmark, GFile *location)
  * Back or Forward list.
  */
 static void
-check_last_bookmark_location_matches_slot (CajaWindowSlot *slot)
+check_last_bookmark_location_matches_slot (BaulWindowSlot *slot)
 {
     check_bookmark_location_matches (slot->last_location_bookmark,
                                      slot->location);
 }
 
 static void
-handle_go_back (CajaNavigationWindowSlot *navigation_slot,
+handle_go_back (BaulNavigationWindowSlot *navigation_slot,
                 GFile *location)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     guint i;
     GList *link;
-    CajaBookmark *bookmark = NULL;
+    BaulBookmark *bookmark = NULL;
 
     slot = BAUL_WINDOW_SLOT (navigation_slot);
 
@@ -236,13 +236,13 @@ handle_go_back (CajaNavigationWindowSlot *navigation_slot,
 }
 
 static void
-handle_go_forward (CajaNavigationWindowSlot *navigation_slot,
+handle_go_forward (BaulNavigationWindowSlot *navigation_slot,
                    GFile *location)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     guint i;
     GList *link;
-    CajaBookmark *bookmark = NULL;
+    BaulBookmark *bookmark = NULL;
 
     slot = BAUL_WINDOW_SLOT (navigation_slot);
 
@@ -279,11 +279,11 @@ handle_go_forward (CajaNavigationWindowSlot *navigation_slot,
 }
 
 static void
-handle_go_elsewhere (CajaWindowSlot *slot, GFile *location)
+handle_go_elsewhere (BaulWindowSlot *slot, GFile *location)
 {
     if (BAUL_IS_NAVIGATION_WINDOW_SLOT (slot))
     {
-        CajaNavigationWindowSlot *navigation_slot;
+        BaulNavigationWindowSlot *navigation_slot;
 
         navigation_slot = BAUL_NAVIGATION_WINDOW_SLOT (slot);
 
@@ -310,9 +310,9 @@ handle_go_elsewhere (CajaWindowSlot *slot, GFile *location)
 }
 
 void
-baul_window_update_up_button (CajaWindow *window)
+baul_window_update_up_button (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     gboolean allowed;
     GFile *parent;
 
@@ -333,10 +333,10 @@ baul_window_update_up_button (CajaWindow *window)
 }
 
 static void
-viewed_file_changed_callback (CajaFile *file,
-                              CajaWindowSlot *slot)
+viewed_file_changed_callback (BaulFile *file,
+                              BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GFile *new_location;
     gboolean is_in_trash, was_in_trash;
 
@@ -402,7 +402,7 @@ viewed_file_changed_callback (CajaFile *file,
                      * inexistant children to show up anymore */
                     if (slot == slot->pane->active_slot)
                     {
-                        /* multiview-TODO also update CajaWindowSlot
+                        /* multiview-TODO also update BaulWindowSlot
                          * [which as of writing doesn't save/store any path bar state]
                          */
                         baul_path_bar_clear_buttons (BAUL_PATH_BAR (BAUL_NAVIGATION_WINDOW_PANE (slot->pane)->path_bar));
@@ -451,8 +451,8 @@ viewed_file_changed_callback (CajaFile *file,
 }
 
 static void
-update_history (CajaWindowSlot *slot,
-                CajaLocationChangeType type,
+update_history (BaulWindowSlot *slot,
+                BaulLocationChangeType type,
                 GFile *new_location)
 {
     switch (type)
@@ -481,9 +481,9 @@ update_history (CajaWindowSlot *slot,
 }
 
 static void
-cancel_viewed_file_changed_callback (CajaWindowSlot *slot)
+cancel_viewed_file_changed_callback (BaulWindowSlot *slot)
 {
-    CajaFile *file;
+    BaulFile *file;
 
     file = slot->viewed_file;
     if (file != NULL)
@@ -499,7 +499,7 @@ static void
 new_window_show_callback (GtkWidget *widget,
                           gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (user_data);
 
@@ -512,19 +512,19 @@ new_window_show_callback (GtkWidget *widget,
 
 
 void
-baul_window_slot_open_location_full (CajaWindowSlot *slot,
+baul_window_slot_open_location_full (BaulWindowSlot *slot,
                                      GFile *location,
-                                     CajaWindowOpenMode mode,
-                                     CajaWindowOpenFlags flags,
+                                     BaulWindowOpenMode mode,
+                                     BaulWindowOpenFlags flags,
                                      GList *new_selection,
-                                     CajaWindowGoToCallback callback,
+                                     BaulWindowGoToCallback callback,
                                      gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindow *target_window;
-    CajaWindowPane *pane;
-    CajaWindowSlot *target_slot;
-    CajaWindowOpenFlags slot_flags;
+    BaulWindow *window;
+    BaulWindow *target_window;
+    BaulWindowPane *pane;
+    BaulWindowSlot *target_slot;
+    BaulWindowOpenFlags slot_flags;
     gboolean existing = FALSE;
     GFile *old_location;
     char *old_uri, *new_uri;
@@ -719,11 +719,11 @@ baul_window_slot_open_location_full (CajaWindowSlot *slot,
 }
 
 void
-baul_window_slot_open_location (CajaWindowSlot *slot,
+baul_window_slot_open_location (BaulWindowSlot *slot,
                                 GFile *location,
                                 gboolean close_behind)
 {
-    CajaWindowOpenFlags flags;
+    BaulWindowOpenFlags flags;
 
     flags = 0;
     if (close_behind)
@@ -737,12 +737,12 @@ baul_window_slot_open_location (CajaWindowSlot *slot,
 }
 
 void
-baul_window_slot_open_location_with_selection (CajaWindowSlot *slot,
+baul_window_slot_open_location_with_selection (BaulWindowSlot *slot,
         GFile *location,
         GList *selection,
         gboolean close_behind)
 {
-    CajaWindowOpenFlags flags;
+    BaulWindowOpenFlags flags;
 
     flags = 0;
     if (close_behind)
@@ -756,10 +756,10 @@ baul_window_slot_open_location_with_selection (CajaWindowSlot *slot,
 
 
 void
-baul_window_slot_go_home (CajaWindowSlot *slot, gboolean new_tab)
+baul_window_slot_go_home (BaulWindowSlot *slot, gboolean new_tab)
 {
     GFile *home;
-    CajaWindowOpenFlags flags;
+    BaulWindowOpenFlags flags;
 
     g_return_if_fail (BAUL_IS_WINDOW_SLOT (slot));
 
@@ -780,9 +780,9 @@ baul_window_slot_go_home (CajaWindowSlot *slot, gboolean new_tab)
 }
 
 static char *
-baul_window_slot_get_view_error_label (CajaWindowSlot *slot)
+baul_window_slot_get_view_error_label (BaulWindowSlot *slot)
 {
-    const CajaViewInfo *info;
+    const BaulViewInfo *info;
 
     info = baul_view_factory_lookup (baul_window_slot_get_content_view_id (slot));
 
@@ -790,9 +790,9 @@ baul_window_slot_get_view_error_label (CajaWindowSlot *slot)
 }
 
 static char *
-baul_window_slot_get_view_startup_error_label (CajaWindowSlot *slot)
+baul_window_slot_get_view_startup_error_label (BaulWindowSlot *slot)
 {
-    const CajaViewInfo *info;
+    const BaulViewInfo *info;
 
     info = baul_view_factory_lookup (baul_window_slot_get_content_view_id (slot));
 
@@ -800,9 +800,9 @@ baul_window_slot_get_view_startup_error_label (CajaWindowSlot *slot)
 }
 
 static void
-report_current_content_view_failure_to_user (CajaWindowSlot *slot)
+report_current_content_view_failure_to_user (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     char *message;
 
     window = slot->pane->window;
@@ -815,10 +815,10 @@ report_current_content_view_failure_to_user (CajaWindowSlot *slot)
 }
 
 static void
-report_nascent_content_view_failure_to_user (CajaWindowSlot *slot,
-        CajaView *view)
+report_nascent_content_view_failure_to_user (BaulWindowSlot *slot,
+        BaulView *view)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     char *message;
 
     window = slot->pane->window;
@@ -835,7 +835,7 @@ report_nascent_content_view_failure_to_user (CajaWindowSlot *slot,
 
 
 const char *
-baul_window_slot_get_content_view_id (CajaWindowSlot *slot)
+baul_window_slot_get_content_view_id (BaulWindowSlot *slot)
 {
     if (slot->content_view == NULL)
     {
@@ -845,7 +845,7 @@ baul_window_slot_get_content_view_id (CajaWindowSlot *slot)
 }
 
 gboolean
-baul_window_slot_content_view_matches_iid (CajaWindowSlot *slot,
+baul_window_slot_content_view_matches_iid (BaulWindowSlot *slot,
         const char *iid)
 {
     if (slot->content_view == NULL)
@@ -856,7 +856,7 @@ baul_window_slot_content_view_matches_iid (CajaWindowSlot *slot,
 }
 
 static gboolean
-report_callback (CajaWindowSlot *slot,
+report_callback (BaulWindowSlot *slot,
                  GError *error)
 {
     if (slot->open_callback != NULL) {
@@ -874,7 +874,7 @@ report_callback (CajaWindowSlot *slot,
  * begin_location_change
  *
  * Change a window's location.
- * @window: The CajaWindow whose location should be changed.
+ * @window: The BaulWindow whose location should be changed.
  * @location: A url specifying the location to load
  * @previous_location: The url that was previously shown in the window that initialized the change, if any
  * @new_selection: The initial selection to present after loading the location
@@ -889,18 +889,18 @@ report_callback (CajaWindowSlot *slot,
  * location begins here.
  */
 static void
-begin_location_change (CajaWindowSlot *slot,
+begin_location_change (BaulWindowSlot *slot,
                        GFile *location,
                        GFile *previous_location,
                        GList *new_selection,
-                       CajaLocationChangeType type,
+                       BaulLocationChangeType type,
                        guint distance,
                        const char *scroll_pos,
-                       CajaWindowGoToCallback callback,
+                       BaulWindowGoToCallback callback,
                        gpointer user_data)
 {
-    CajaWindow *window;
-    CajaDirectory *directory;
+    BaulWindow *window;
+    BaulDirectory *directory;
     gboolean force_reload;
     GFile *parent;
 
@@ -975,7 +975,7 @@ begin_location_change (CajaWindowSlot *slot,
 
     if (force_reload)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         baul_directory_force_reload (directory);
         file = baul_directory_get_corresponding_file (directory);
@@ -1015,9 +1015,9 @@ begin_location_change (CajaWindowSlot *slot,
 }
 
 static void
-setup_new_spatial_window (CajaWindowSlot *slot, CajaFile *file)
+setup_new_spatial_window (BaulWindowSlot *slot, BaulFile *file)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     char *scroll_string;
     gboolean maximized, sticky, above;
 
@@ -1132,7 +1132,7 @@ setup_new_spatial_window (CajaWindowSlot *slot, CajaFile *file)
 typedef struct
 {
     GCancellable *cancellable;
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 } MountNotMountedData;
 
 static void
@@ -1141,7 +1141,7 @@ mount_not_mounted_callback (GObject *source_object,
                             gpointer user_data)
 {
     MountNotMountedData *data;
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GError *error;
     GCancellable *cancellable;
 
@@ -1182,13 +1182,13 @@ mount_not_mounted_callback (GObject *source_object,
 }
 
 static void
-got_file_info_for_view_selection_callback (CajaFile *file,
+got_file_info_for_view_selection_callback (BaulFile *file,
         gpointer callback_data)
 {
     GError *error;
     char *view_id;
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
     GFile *location;
     MountNotMountedData *data;
     slot = callback_data;
@@ -1316,7 +1316,7 @@ got_file_info_for_view_selection_callback (CajaFile *file,
 
         if (!gtk_widget_get_visible (GTK_WIDGET (window)))
         {
-            CajaApplication *app;
+            BaulApplication *app;
 
             /* Destroy never-had-a-chance-to-be-seen window. This case
              * happens when a new window cannot display its initial URI.
@@ -1374,7 +1374,7 @@ got_file_info_for_view_selection_callback (CajaFile *file,
             }
             else
             {
-                CajaFile *viewed_file;
+                BaulFile *viewed_file;
 
                 /* We disconnected this, so we need to re-connect it */
                 viewed_file = baul_file_get (slot->location);
@@ -1404,11 +1404,11 @@ got_file_info_for_view_selection_callback (CajaFile *file,
  * view, and the current location will be used.
  */
 static void
-create_content_view (CajaWindowSlot *slot,
+create_content_view (BaulWindowSlot *slot,
                      const char *view_id)
 {
-    CajaWindow *window;
-    CajaView *view;
+    BaulWindow *window;
+    BaulView *view;
     GList *selection;
 
     window = slot->pane->window;
@@ -1481,15 +1481,15 @@ create_content_view (CajaWindowSlot *slot,
 }
 
 static void
-load_new_location (CajaWindowSlot *slot,
+load_new_location (BaulWindowSlot *slot,
                    GFile *location,
                    GList *selection,
                    gboolean tell_current_content_view,
                    gboolean tell_new_content_view)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GList *selection_copy;
-    CajaView *view;
+    BaulView *view;
     char *uri;
 
     g_assert (slot != NULL);
@@ -1535,10 +1535,10 @@ load_new_location (CajaWindowSlot *slot,
  * a matching load_compete later
  */
 void
-baul_window_report_load_underway (CajaWindow *window,
-                                  CajaView *view)
+baul_window_report_load_underway (BaulWindow *window,
+                                  BaulView *view)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1561,7 +1561,7 @@ baul_window_report_load_underway (CajaWindow *window,
 }
 
 static void
-baul_window_emit_location_change (CajaWindow *window,
+baul_window_emit_location_change (BaulWindow *window,
                                   GFile *location)
 {
     char *uri;
@@ -1576,9 +1576,9 @@ baul_window_emit_location_change (CajaWindow *window,
  * location, or the existing location if none is pending.
  */
 void
-baul_window_report_location_change (CajaWindow *window)
+baul_window_report_location_change (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GFile *location;
 
     g_assert (BAUL_IS_WINDOW (window));
@@ -1606,9 +1606,9 @@ baul_window_report_location_change (CajaWindow *window)
 
 /* This is called when we have decided we can actually change to the new view/location situation. */
 static void
-location_has_really_changed (CajaWindowSlot *slot)
+location_has_really_changed (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GFile *location_copy;
 
     window = slot->pane->window;
@@ -1657,7 +1657,7 @@ location_has_really_changed (CajaWindowSlot *slot)
 }
 
 static void
-slot_add_extension_extra_widgets (CajaWindowSlot *slot)
+slot_add_extension_extra_widgets (BaulWindowSlot *slot)
 {
     GList *providers, *l;
     char *uri;
@@ -1668,7 +1668,7 @@ slot_add_extension_extra_widgets (CajaWindowSlot *slot)
     uri = g_file_get_uri (slot->location);
     for (l = providers; l != NULL; l = l->next)
     {
-        CajaLocationWidgetProvider *provider;
+        BaulLocationWidgetProvider *provider;
 
         provider = BAUL_LOCATION_WIDGET_PROVIDER (l->data);
         widget = baul_location_widget_provider_get_widget (provider, uri, GTK_WIDGET (slot->pane->window));
@@ -1683,7 +1683,7 @@ slot_add_extension_extra_widgets (CajaWindowSlot *slot)
 }
 
 static void
-baul_window_slot_show_x_content_bar (CajaWindowSlot *slot, GMount *mount, const char **x_content_types)
+baul_window_slot_show_x_content_bar (BaulWindowSlot *slot, GMount *mount, const char **x_content_types)
 {
     unsigned int n;
 
@@ -1719,8 +1719,8 @@ baul_window_slot_show_x_content_bar (CajaWindowSlot *slot, GMount *mount, const 
 }
 
 static void
-baul_window_slot_show_trash_bar (CajaWindowSlot *slot,
-                                 CajaWindow *window)
+baul_window_slot_show_trash_bar (BaulWindowSlot *slot,
+                                 BaulWindow *window)
 {
     GtkWidget *bar;
 
@@ -1732,7 +1732,7 @@ baul_window_slot_show_trash_bar (CajaWindowSlot *slot,
 
 typedef struct
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GCancellable *cancellable;
     GMount *mount;
 } FindMountData;
@@ -1740,7 +1740,7 @@ typedef struct
 static void
 found_content_type_cb (const char **x_content_types, FindMountData *data)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     if (g_cancellable_is_cancelled (data->cancellable))
     {
@@ -1782,7 +1782,7 @@ found_mount_cb (GObject *source_object,
     {
         data->mount = mount;
         baul_autorun_get_x_content_types_for_mount_async (mount,
-                (CajaAutorunGetContent)found_content_type_cb,
+                (BaulAutorunGetContent)found_content_type_cb,
                 data->cancellable,
                 data);
         return;
@@ -1795,13 +1795,13 @@ out:
     g_free (data);
 }
 
-/* Handle the changes for the CajaWindow itself. */
+/* Handle the changes for the BaulWindow itself. */
 static void
-update_for_new_location (CajaWindowSlot *slot)
+update_for_new_location (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GFile *new_location;
-    CajaFile *file;
+    BaulFile *file;
     gboolean location_really_changed;
     FindMountData *data;
 
@@ -1825,7 +1825,7 @@ update_for_new_location (CajaWindowSlot *slot)
     }
     slot->location = new_location;
 
-    /* Create a CajaFile for this location, so we can catch it
+    /* Create a BaulFile for this location, so we can catch it
      * if it goes away.
      */
     cancel_viewed_file_changed_callback (slot);
@@ -1854,7 +1854,7 @@ update_for_new_location (CajaWindowSlot *slot)
 
     if (location_really_changed)
     {
-        CajaDirectory *directory;
+        BaulDirectory *directory;
 
         baul_window_slot_remove_extra_location_widgets (slot);
 
@@ -1914,10 +1914,10 @@ update_for_new_location (CajaWindowSlot *slot)
 /* A location load previously announced by load_underway
  * has been finished */
 void
-baul_window_report_load_complete (CajaWindow *window,
-                                  CajaView *view)
+baul_window_report_load_complete (BaulWindow *window,
+                                  BaulView *view)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1943,9 +1943,9 @@ baul_window_report_load_complete (CajaWindow *window,
 }
 
 static void
-end_location_change (CajaWindowSlot *slot)
+end_location_change (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     char *uri;
 
     window = slot->pane->window;
@@ -1970,9 +1970,9 @@ end_location_change (CajaWindowSlot *slot)
 }
 
 static void
-free_location_change (CajaWindowSlot *slot)
+free_location_change (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = slot->pane->window;
     g_assert (BAUL_IS_WINDOW (window));
@@ -2017,7 +2017,7 @@ free_location_change (CajaWindowSlot *slot)
 }
 
 static void
-cancel_location_change (CajaWindowSlot *slot)
+cancel_location_change (BaulWindowSlot *slot)
 {
     if (slot->pending_location != NULL
             && slot->location != NULL
@@ -2043,10 +2043,10 @@ cancel_location_change (CajaWindowSlot *slot)
 }
 
 void
-baul_window_report_view_failed (CajaWindow *window,
-                                CajaView *view)
+baul_window_report_view_failed (BaulWindow *window,
+                                BaulView *view)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     gboolean do_close_window;
     GFile *fallback_load_location;
 
@@ -2105,7 +2105,7 @@ baul_window_report_view_failed (CajaWindow *window,
 }
 
 static void
-display_view_selection_failure (CajaWindow *window, CajaFile *file,
+display_view_selection_failure (BaulWindow *window, BaulFile *file,
                                 GFile *location, GError *error)
 {
     char *full_uri_for_display;
@@ -2134,7 +2134,7 @@ display_view_selection_failure (CajaWindow *window, CajaFile *file,
                             (_("Could not display \"%s\"."),
                              uri_for_display);
             detail_message = g_strdup
-                             (_("Caja has no installed viewer capable of displaying the folder."));
+                             (_("Baul has no installed viewer capable of displaying the folder."));
         }
         else
         {
@@ -2163,12 +2163,12 @@ display_view_selection_failure (CajaWindow *window, CajaFile *file,
                                              uri_for_display);
             if (scheme_string != NULL)
             {
-                detail_message = g_strdup_printf (_("Caja cannot handle \"%s\" locations."),
+                detail_message = g_strdup_printf (_("Baul cannot handle \"%s\" locations."),
                                                   scheme_string);
             }
             else
             {
-                detail_message = g_strdup (_("Caja cannot handle this kind of location."));
+                detail_message = g_strdup (_("Baul cannot handle this kind of location."));
             }
             g_free (scheme_string);
             break;
@@ -2220,9 +2220,9 @@ display_view_selection_failure (CajaWindow *window, CajaFile *file,
 
 
 void
-baul_window_slot_stop_loading (CajaWindowSlot *slot)
+baul_window_slot_stop_loading (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (slot->pane->window);
     g_assert (BAUL_IS_WINDOW (window));
@@ -2240,11 +2240,11 @@ baul_window_slot_stop_loading (CajaWindowSlot *slot)
 }
 
 void
-baul_window_slot_set_content_view (CajaWindowSlot *slot,
+baul_window_slot_set_content_view (BaulWindowSlot *slot,
                                    const char *id)
 {
-    CajaWindow *window;
-    CajaFile *file;
+    BaulWindow *window;
+    BaulFile *file;
     char *uri;
 
     g_assert (slot != NULL);
@@ -2286,8 +2286,8 @@ baul_window_slot_set_content_view (CajaWindowSlot *slot,
 }
 
 void
-baul_window_manage_views_close_slot (CajaWindowPane *pane,
-                                     CajaWindowSlot *slot)
+baul_window_manage_views_close_slot (BaulWindowPane *pane,
+                                     BaulWindowSlot *slot)
 {
     if (slot->content_view != NULL)
     {
@@ -2299,18 +2299,18 @@ baul_window_manage_views_close_slot (CajaWindowPane *pane,
 }
 
 void
-baul_navigation_window_back_or_forward (CajaNavigationWindow *window,
+baul_navigation_window_back_or_forward (BaulNavigationWindow *window,
                                         gboolean back, guint distance, gboolean new_tab)
 {
-    CajaWindowSlot *slot;
-    CajaNavigationWindowSlot *navigation_slot;
+    BaulWindowSlot *slot;
+    BaulNavigationWindowSlot *navigation_slot;
     GList *list;
     GFile *location;
     guint len;
-    CajaBookmark *bookmark;
+    BaulBookmark *bookmark;
 
     slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
-    navigation_slot = (CajaNavigationWindowSlot *) slot;
+    navigation_slot = (BaulNavigationWindowSlot *) slot;
     list = back ? navigation_slot->back_list : navigation_slot->forward_list;
 
     len = (guint) g_list_length (list);
@@ -2361,7 +2361,7 @@ baul_navigation_window_back_or_forward (CajaNavigationWindow *window,
 
 /* reload the contents of the window */
 void
-baul_window_slot_reload (CajaWindowSlot *slot)
+baul_window_slot_reload (BaulWindowSlot *slot)
 {
     GFile *location;
     char *current_pos;
@@ -2395,7 +2395,7 @@ baul_window_slot_reload (CajaWindowSlot *slot)
 }
 
 void
-baul_window_reload (CajaWindow *window)
+baul_window_reload (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 

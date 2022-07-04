@@ -23,23 +23,23 @@
 #include "baul-file-info.h"
 #include "baul-extension-private.h"
 
-CajaFileInfo *(*baul_file_info_getter) (GFile *location, gboolean create);
+BaulFileInfo *(*baul_file_info_getter) (GFile *location, gboolean create);
 
 /**
  * SECTION:baul-file-info
- * @title: CajaFileInfo
+ * @title: BaulFileInfo
  * @short_description: File interface for baul extensions
  * @include: libbaul-extension/baul-file-info.h
  *
- * #CajaFileInfo provides methods to get and modify information
+ * #BaulFileInfo provides methods to get and modify information
  * about file objects in the file manager.
  */
 
 /**
  * baul_file_info_list_copy:
- * @files: (element-type CajaFileInfo): the files to copy
+ * @files: (element-type BaulFileInfo): the files to copy
  *
- * Returns: (element-type CajaFileInfo) (transfer full): a copy of @files.
+ * Returns: (element-type BaulFileInfo) (transfer full): a copy of @files.
  *  Use #baul_file_info_list_free to free the list and unref its contents.
  */
 GList *
@@ -59,7 +59,7 @@ baul_file_info_list_copy (GList *files)
 
 /**
  * baul_file_info_list_free:
- * @files: (element-type CajaFileInfo): a list created with
+ * @files: (element-type BaulFileInfo): a list created with
  *   #baul_file_info_list_copy
  *
  */
@@ -88,7 +88,7 @@ baul_file_info_get_type (void)
 
     if (!type) {
         const GTypeInfo info = {
-            sizeof (CajaFileInfoIface),
+            sizeof (BaulFileInfoIface),
             baul_file_info_base_init,
             NULL,
             NULL,
@@ -100,7 +100,7 @@ baul_file_info_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaFileInfo",
+                                       "BaulFileInfo",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -109,7 +109,7 @@ baul_file_info_get_type (void)
 }
 
 gboolean
-baul_file_info_is_gone (CajaFileInfo *file)
+baul_file_info_is_gone (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), FALSE);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->is_gone != NULL, FALSE);
@@ -118,7 +118,7 @@ baul_file_info_is_gone (CajaFileInfo *file)
 }
 
 GFileType
-baul_file_info_get_file_type (CajaFileInfo *file)
+baul_file_info_get_file_type (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), G_FILE_TYPE_UNKNOWN);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_file_type != NULL, G_FILE_TYPE_UNKNOWN);
@@ -127,7 +127,7 @@ baul_file_info_get_file_type (CajaFileInfo *file)
 }
 
 char *
-baul_file_info_get_name (CajaFileInfo *file)
+baul_file_info_get_name (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_name != NULL, NULL);
@@ -137,12 +137,12 @@ baul_file_info_get_name (CajaFileInfo *file)
 
 /**
  * baul_file_info_get_location:
- * @file: a #CajaFileInfo
+ * @file: a #BaulFileInfo
  *
  * Returns: (transfer full): a #GFile for the location of @file
  */
 GFile *
-baul_file_info_get_location (CajaFileInfo *file)
+baul_file_info_get_location (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_location != NULL, NULL);
@@ -151,7 +151,7 @@ baul_file_info_get_location (CajaFileInfo *file)
 }
 
 char *
-baul_file_info_get_uri (CajaFileInfo *file)
+baul_file_info_get_uri (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_uri != NULL, NULL);
@@ -160,7 +160,7 @@ baul_file_info_get_uri (CajaFileInfo *file)
 }
 
 char *
-baul_file_info_get_activation_uri (CajaFileInfo *file)
+baul_file_info_get_activation_uri (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_activation_uri != NULL, NULL);
@@ -170,13 +170,13 @@ baul_file_info_get_activation_uri (CajaFileInfo *file)
 
 /**
  * baul_file_info_get_parent_location:
- * @file: a #CajaFileInfo
+ * @file: a #BaulFileInfo
  *
  * Returns: (allow-none) (transfer full): a #GFile for the parent location of @file,
  *   or %NULL if @file has no parent
  */
 GFile *
-baul_file_info_get_parent_location (CajaFileInfo *file)
+baul_file_info_get_parent_location (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_parent_location != NULL, NULL);
@@ -185,7 +185,7 @@ baul_file_info_get_parent_location (CajaFileInfo *file)
 }
 
 char *
-baul_file_info_get_parent_uri (CajaFileInfo *file)
+baul_file_info_get_parent_uri (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_parent_uri != NULL, NULL);
@@ -195,13 +195,13 @@ baul_file_info_get_parent_uri (CajaFileInfo *file)
 
 /**
  * baul_file_info_get_parent_info:
- * @file: a #CajaFileInfo
+ * @file: a #BaulFileInfo
  *
- * Returns: (allow-none) (transfer full): a #CajaFileInfo for the parent of @file,
+ * Returns: (allow-none) (transfer full): a #BaulFileInfo for the parent of @file,
  *   or %NULL if @file has no parent
  */
-CajaFileInfo *
-baul_file_info_get_parent_info (CajaFileInfo *file)
+BaulFileInfo *
+baul_file_info_get_parent_info (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_parent_info != NULL, NULL);
@@ -211,13 +211,13 @@ baul_file_info_get_parent_info (CajaFileInfo *file)
 
 /**
  * baul_file_info_get_mount:
- * @file: a #CajaFileInfo
+ * @file: a #BaulFileInfo
  *
  * Returns: (allow-none) (transfer full): a #GMount for the mount of @file,
  *   or %NULL if @file has no mount
  */
 GMount *
-baul_file_info_get_mount (CajaFileInfo *file)
+baul_file_info_get_mount (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_mount != NULL, NULL);
@@ -226,7 +226,7 @@ baul_file_info_get_mount (CajaFileInfo *file)
 }
 
 char *
-baul_file_info_get_uri_scheme (CajaFileInfo *file)
+baul_file_info_get_uri_scheme (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_uri_scheme != NULL, NULL);
@@ -235,7 +235,7 @@ baul_file_info_get_uri_scheme (CajaFileInfo *file)
 }
 
 char *
-baul_file_info_get_mime_type (CajaFileInfo *file)
+baul_file_info_get_mime_type (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_mime_type != NULL, NULL);
@@ -244,7 +244,7 @@ baul_file_info_get_mime_type (CajaFileInfo *file)
 }
 
 gboolean
-baul_file_info_is_mime_type (CajaFileInfo *file,
+baul_file_info_is_mime_type (BaulFileInfo *file,
                              const char *mime_type)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), FALSE);
@@ -256,7 +256,7 @@ baul_file_info_is_mime_type (CajaFileInfo *file,
 }
 
 gboolean
-baul_file_info_is_directory (CajaFileInfo *file)
+baul_file_info_is_directory (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), FALSE);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->is_directory != NULL, FALSE);
@@ -265,7 +265,7 @@ baul_file_info_is_directory (CajaFileInfo *file)
 }
 
 gboolean
-baul_file_info_can_write (CajaFileInfo *file)
+baul_file_info_can_write (BaulFileInfo *file)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), FALSE);
     g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->can_write != NULL, FALSE);
@@ -274,7 +274,7 @@ baul_file_info_can_write (CajaFileInfo *file)
 }
 
 void
-baul_file_info_add_emblem (CajaFileInfo *file,
+baul_file_info_add_emblem (BaulFileInfo *file,
                            const char *emblem_name)
 {
     g_return_if_fail (BAUL_IS_FILE_INFO (file));
@@ -284,7 +284,7 @@ baul_file_info_add_emblem (CajaFileInfo *file,
 }
 
 char *
-baul_file_info_get_string_attribute (CajaFileInfo *file,
+baul_file_info_get_string_attribute (BaulFileInfo *file,
                                      const char *attribute_name)
 {
     g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
@@ -296,7 +296,7 @@ baul_file_info_get_string_attribute (CajaFileInfo *file,
 }
 
 void
-baul_file_info_add_string_attribute (CajaFileInfo *file,
+baul_file_info_add_string_attribute (BaulFileInfo *file,
                                      const char *attribute_name,
                                      const char *value)
 {
@@ -310,7 +310,7 @@ baul_file_info_add_string_attribute (CajaFileInfo *file,
 }
 
 void
-baul_file_info_invalidate_extension_info (CajaFileInfo *file)
+baul_file_info_invalidate_extension_info (BaulFileInfo *file)
 {
     g_return_if_fail (BAUL_IS_FILE_INFO (file));
     g_return_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->invalidate_extension_info != NULL);
@@ -322,9 +322,9 @@ baul_file_info_invalidate_extension_info (CajaFileInfo *file)
  * baul_file_info_lookup:
  * @location: the location to lookup the file info for
  *
- * Returns: (transfer full): a #CajaFileInfo
+ * Returns: (transfer full): a #BaulFileInfo
  */
-CajaFileInfo *
+BaulFileInfo *
 baul_file_info_lookup (GFile *location)
 {
     return baul_file_info_getter (location, FALSE);
@@ -334,9 +334,9 @@ baul_file_info_lookup (GFile *location)
  * baul_file_info_create:
  * @location: the location to create the file info for
  *
- * Returns: (transfer full): a #CajaFileInfo
+ * Returns: (transfer full): a #BaulFileInfo
  */
-CajaFileInfo *
+BaulFileInfo *
 baul_file_info_create (GFile *location)
 {
     return baul_file_info_getter (location, TRUE);
@@ -346,13 +346,13 @@ baul_file_info_create (GFile *location)
  * baul_file_info_lookup_for_uri:
  * @uri: the URI to lookup the file info for
  *
- * Returns: (transfer full): a #CajaFileInfo
+ * Returns: (transfer full): a #BaulFileInfo
  */
-CajaFileInfo *
+BaulFileInfo *
 baul_file_info_lookup_for_uri (const char *uri)
 {
     GFile *location;
-    CajaFile *file;
+    BaulFile *file;
 
     location = g_file_new_for_uri (uri);
     file = baul_file_info_lookup (location);
@@ -365,13 +365,13 @@ baul_file_info_lookup_for_uri (const char *uri)
  * baul_file_info_create_for_uri:
  * @uri: the URI to lookup the file info for
  *
- * Returns: (transfer full): a #CajaFileInfo
+ * Returns: (transfer full): a #BaulFileInfo
  */
-CajaFileInfo *
+BaulFileInfo *
 baul_file_info_create_for_uri (const char *uri)
 {
     GFile *location;
-    CajaFile *file;
+    BaulFile *file;
 
     location = g_file_new_for_uri (uri);
     file = baul_file_info_create (location);

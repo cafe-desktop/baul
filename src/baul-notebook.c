@@ -57,10 +57,10 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (CajaNotebook, baul_notebook, GTK_TYPE_NOTEBOOK);
+G_DEFINE_TYPE (BaulNotebook, baul_notebook, GTK_TYPE_NOTEBOOK);
 
 static void
-baul_notebook_class_init (CajaNotebookClass *klass)
+baul_notebook_class_init (BaulNotebookClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
@@ -74,7 +74,7 @@ baul_notebook_class_init (CajaNotebookClass *klass)
         g_signal_new ("tab-close-request",
                       G_OBJECT_CLASS_TYPE (object_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaNotebookClass, tab_close_request),
+                      G_STRUCT_OFFSET (BaulNotebookClass, tab_close_request),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__OBJECT,
                       G_TYPE_NONE,
@@ -83,7 +83,7 @@ baul_notebook_class_init (CajaNotebookClass *klass)
 }
 
 static gint
-find_tab_num_at_pos (CajaNotebook *notebook, gint abs_x, gint abs_y)
+find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
 {
     GtkPositionType tab_pos;
     int page_num = 0;
@@ -134,7 +134,7 @@ find_tab_num_at_pos (CajaNotebook *notebook, gint abs_x, gint abs_y)
 }
 
 static gboolean
-button_press_cb (CajaNotebook *notebook,
+button_press_cb (BaulNotebook *notebook,
                  GdkEventButton *event,
                  gpointer data)
 {
@@ -162,7 +162,7 @@ button_press_cb (CajaNotebook *notebook,
 }
 
 static void
-baul_notebook_init (CajaNotebook *notebook)
+baul_notebook_init (BaulNotebook *notebook)
 {
     GtkStyleContext *context;
 
@@ -178,8 +178,8 @@ baul_notebook_init (CajaNotebook *notebook)
 }
 
 void
-baul_notebook_sync_loading (CajaNotebook *notebook,
-                            CajaWindowSlot *slot)
+baul_notebook_sync_loading (BaulNotebook *notebook,
+                            BaulWindowSlot *slot)
 {
     GtkWidget *tab_label, *spinner, *icon;
     gboolean active;
@@ -216,8 +216,8 @@ baul_notebook_sync_loading (CajaNotebook *notebook,
 }
 
 void
-baul_notebook_sync_tab_label (CajaNotebook *notebook,
-                              CajaWindowSlot *slot)
+baul_notebook_sync_tab_label (BaulNotebook *notebook,
+                              BaulWindowSlot *slot)
 {
     GtkWidget *hbox, *label;
 
@@ -252,7 +252,7 @@ baul_notebook_sync_tab_label (CajaNotebook *notebook,
 
 static void
 close_button_clicked_cb (GtkWidget *widget,
-                         CajaWindowSlot *slot)
+                         BaulWindowSlot *slot)
 {
     GtkWidget *notebook;
 
@@ -264,9 +264,9 @@ close_button_clicked_cb (GtkWidget *widget,
 }
 
 static GtkWidget *
-build_tab_label (CajaNotebook *nb, CajaWindowSlot *slot)
+build_tab_label (BaulNotebook *nb, BaulWindowSlot *slot)
 {
-    CajaDragSlotProxyInfo *drag_info;
+    BaulDragSlotProxyInfo *drag_info;
     GtkWidget *hbox, *label, *close_button, *image, *spinner, *icon;
 
     /* set hbox spacing and label padding (see below) so that there's an
@@ -318,7 +318,7 @@ build_tab_label (CajaNotebook *nb, CajaWindowSlot *slot)
     gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
     gtk_widget_show (close_button);
 
-    drag_info = g_new0 (CajaDragSlotProxyInfo, 1);
+    drag_info = g_new0 (BaulDragSlotProxyInfo, 1);
     drag_info->target_slot = slot;
     g_object_set_data_full (G_OBJECT (hbox), "proxy-drag-info",
                             drag_info, (GDestroyNotify) g_free);
@@ -356,8 +356,8 @@ baul_notebook_insert_page (GtkNotebook *gnotebook,
 }
 
 int
-baul_notebook_add_tab (CajaNotebook *notebook,
-                       CajaWindowSlot *slot,
+baul_notebook_add_tab (BaulNotebook *notebook,
+                       BaulWindowSlot *slot,
                        int position,
                        gboolean jump_to)
 {
@@ -410,7 +410,7 @@ baul_notebook_remove (GtkContainer *container,
 }
 
 void
-baul_notebook_reorder_current_child_relative (CajaNotebook *notebook,
+baul_notebook_reorder_current_child_relative (BaulNotebook *notebook,
         int offset)
 {
     GtkNotebook *gnotebook;
@@ -432,7 +432,7 @@ baul_notebook_reorder_current_child_relative (CajaNotebook *notebook,
 }
 
 void
-baul_notebook_set_current_page_relative (CajaNotebook *notebook,
+baul_notebook_set_current_page_relative (BaulNotebook *notebook,
         int offset)
 {
     GtkNotebook *gnotebook;
@@ -453,7 +453,7 @@ baul_notebook_set_current_page_relative (CajaNotebook *notebook,
 }
 
 static gboolean
-baul_notebook_is_valid_relative_position (CajaNotebook *notebook,
+baul_notebook_is_valid_relative_position (BaulNotebook *notebook,
         int offset)
 {
     GtkNotebook *gnotebook;
@@ -475,7 +475,7 @@ baul_notebook_is_valid_relative_position (CajaNotebook *notebook,
 }
 
 gboolean
-baul_notebook_can_reorder_current_child_relative (CajaNotebook *notebook,
+baul_notebook_can_reorder_current_child_relative (BaulNotebook *notebook,
         int offset)
 {
     g_return_val_if_fail (BAUL_IS_NOTEBOOK (notebook), FALSE);
@@ -484,7 +484,7 @@ baul_notebook_can_reorder_current_child_relative (CajaNotebook *notebook,
 }
 
 gboolean
-baul_notebook_can_set_current_page_relative (CajaNotebook *notebook,
+baul_notebook_can_set_current_page_relative (BaulNotebook *notebook,
         int offset)
 {
     g_return_val_if_fail (BAUL_IS_NOTEBOOK (notebook), FALSE);

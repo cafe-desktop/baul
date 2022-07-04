@@ -29,21 +29,21 @@
 #include <gtk/gtk.h>
 
 #define BAUL_TYPE_MIME_APPLICATION_CHOOSER         (baul_mime_application_chooser_get_type ())
-#define BAUL_MIME_APPLICATION_CHOOSER(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MIME_APPLICATION_CHOOSER, CajaMimeApplicationChooser))
-#define BAUL_MIME_APPLICATION_CHOOSER_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MIME_APPLICATION_CHOOSER, CajaMimeApplicationChooserClass))
+#define BAUL_MIME_APPLICATION_CHOOSER(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MIME_APPLICATION_CHOOSER, BaulMimeApplicationChooser))
+#define BAUL_MIME_APPLICATION_CHOOSER_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MIME_APPLICATION_CHOOSER, BaulMimeApplicationChooserClass))
 #define BAUL_IS_MIME_APPLICATION_CHOOSER(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_MIME_APPLICATION_CHOOSER)
 
-typedef struct _CajaMimeApplicationChooser        CajaMimeApplicationChooser;
-typedef struct _CajaMimeApplicationChooserClass   CajaMimeApplicationChooserClass;
-typedef struct _CajaMimeApplicationChooserDetails CajaMimeApplicationChooserDetails;
+typedef struct _BaulMimeApplicationChooser        BaulMimeApplicationChooser;
+typedef struct _BaulMimeApplicationChooserClass   BaulMimeApplicationChooserClass;
+typedef struct _BaulMimeApplicationChooserDetails BaulMimeApplicationChooserDetails;
 
-struct _CajaMimeApplicationChooser
+struct _BaulMimeApplicationChooser
 {
     GtkBox parent;
-    CajaMimeApplicationChooserDetails *details;
+    BaulMimeApplicationChooserDetails *details;
 };
 
-struct _CajaMimeApplicationChooserClass
+struct _BaulMimeApplicationChooserClass
 {
     GtkBoxClass parent_class;
 };

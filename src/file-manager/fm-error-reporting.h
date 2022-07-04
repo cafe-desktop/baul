@@ -30,27 +30,27 @@
 
 #include <libbaul-private/baul-file.h>
 
-void fm_report_error_loading_directory	 (CajaFile   *file,
+void fm_report_error_loading_directory	 (BaulFile   *file,
         GError         *error,
         GtkWindow	 *parent_window);
-void fm_report_error_renaming_file       (CajaFile   *file,
+void fm_report_error_renaming_file       (BaulFile   *file,
         const char     *new_name,
         GError         *error,
         GtkWindow	 *parent_window);
-void fm_report_error_setting_permissions (CajaFile   *file,
+void fm_report_error_setting_permissions (BaulFile   *file,
         GError         *error,
         GtkWindow	 *parent_window);
-void fm_report_error_setting_owner       (CajaFile   *file,
+void fm_report_error_setting_owner       (BaulFile   *file,
         GError         *error,
         GtkWindow	 *parent_window);
-void fm_report_error_setting_group       (CajaFile   *file,
+void fm_report_error_setting_group       (BaulFile   *file,
         GError         *error,
         GtkWindow	 *parent_window);
 
 /* FIXME bugzilla.gnome.org 42394: Should this file be renamed or should this function be moved? */
-void fm_rename_file                      (CajaFile   *file,
+void fm_rename_file                      (BaulFile   *file,
         const char     *new_name,
-        CajaFileOperationCallback callback,
+        BaulFileOperationCallback callback,
         gpointer callback_data);
 
 #endif /* FM_ERROR_REPORTING_H */

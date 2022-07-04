@@ -1,17 +1,17 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 2004 Red Hat, Inc.
  *  Copyright (C) 2003 Marco Pesenti Gritti
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of the
  *  License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -38,10 +38,10 @@
 #include "baul-window-private.h"
 #include "baul-navigation-window-slot.h"
 
-struct _CajaNavigationActionPrivate
+struct _BaulNavigationActionPrivate
 {
-    CajaNavigationWindow *window;
-    CajaNavigationDirection direction;
+    BaulNavigationWindow *window;
+    BaulNavigationDirection direction;
     char *arrow_tooltip;
 };
 
@@ -54,7 +54,7 @@ enum
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (CajaNavigationAction, baul_navigation_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulNavigationAction, baul_navigation_action, GTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 static gboolean
@@ -76,7 +76,7 @@ should_open_in_new_tab (void)
 
 static void
 activate_back_or_forward_menu_item (GtkMenuItem *menu_item,
-                                    CajaNavigationWindow *window,
+                                    BaulNavigationWindow *window,
                                     gboolean back)
 {
     int index;
@@ -90,23 +90,23 @@ activate_back_or_forward_menu_item (GtkMenuItem *menu_item,
 }
 
 static void
-activate_back_menu_item_callback (GtkMenuItem *menu_item, CajaNavigationWindow *window)
+activate_back_menu_item_callback (GtkMenuItem *menu_item, BaulNavigationWindow *window)
 {
     activate_back_or_forward_menu_item (menu_item, window, TRUE);
 }
 
 static void
-activate_forward_menu_item_callback (GtkMenuItem *menu_item, CajaNavigationWindow *window)
+activate_forward_menu_item_callback (GtkMenuItem *menu_item, BaulNavigationWindow *window)
 {
     activate_back_or_forward_menu_item (menu_item, window, FALSE);
 }
 
 static void
-fill_menu (CajaNavigationWindow *window,
+fill_menu (BaulNavigationWindow *window,
            GtkWidget *menu,
            gboolean back)
 {
-    CajaNavigationWindowSlot *slot;
+    BaulNavigationWindowSlot *slot;
     int index;
     GList *list;
     gboolean list_void;
@@ -160,10 +160,10 @@ fill_menu (CajaNavigationWindow *window,
 
 static void
 show_menu_callback (GtkMenuToolButton *button,
-                    CajaNavigationAction *action)
+                    BaulNavigationAction *action)
 {
-    CajaNavigationActionPrivate *p;
-    CajaNavigationWindow *window;
+    BaulNavigationActionPrivate *p;
+    BaulNavigationWindow *window;
     GtkWidget *menu;
     GList *children;
     GList *li;
@@ -225,7 +225,7 @@ connect_proxy (GtkAction *action, GtkWidget *proxy)
 {
     if (GTK_IS_MENU_TOOL_BUTTON (proxy))
     {
-        CajaNavigationAction *naction = BAUL_NAVIGATION_ACTION (action);
+        BaulNavigationAction *naction = BAUL_NAVIGATION_ACTION (action);
         GtkMenuToolButton *button = GTK_MENU_TOOL_BUTTON (proxy);
         GtkWidget *menu;
         GtkWidget *child;
@@ -277,7 +277,7 @@ disconnect_proxy (GtkAction *action, GtkWidget *proxy)
 static void
 baul_navigation_action_finalize (GObject *object)
 {
-    CajaNavigationAction *action = BAUL_NAVIGATION_ACTION (object);
+    BaulNavigationAction *action = BAUL_NAVIGATION_ACTION (object);
 
     g_free (action->priv->arrow_tooltip);
 
@@ -290,7 +290,7 @@ baul_navigation_action_set_property (GObject *object,
                                      const GValue *value,
                                      GParamSpec *pspec)
 {
-    CajaNavigationAction *nav;
+    BaulNavigationAction *nav;
 
     nav = BAUL_NAVIGATION_ACTION (object);
 
@@ -315,7 +315,7 @@ baul_navigation_action_get_property (GObject *object,
                                      GValue *value,
                                      GParamSpec *pspec)
 {
-    CajaNavigationAction *nav;
+    BaulNavigationAction *nav;
 
     nav = BAUL_NAVIGATION_ACTION (object);
 
@@ -334,7 +334,7 @@ baul_navigation_action_get_property (GObject *object,
 }
 
 static void
-baul_navigation_action_class_init (CajaNavigationActionClass *class)
+baul_navigation_action_class_init (BaulNavigationActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -375,7 +375,7 @@ baul_navigation_action_class_init (CajaNavigationActionClass *class)
 }
 
 static void
-baul_navigation_action_init (CajaNavigationAction *action)
+baul_navigation_action_init (BaulNavigationAction *action)
 {
     action->priv = baul_navigation_action_get_instance_private (action);
 }

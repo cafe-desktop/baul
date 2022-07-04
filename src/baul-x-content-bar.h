@@ -31,36 +31,36 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_X_CONTENT_BAR         (baul_x_content_bar_get_type ())
-#define BAUL_X_CONTENT_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_X_CONTENT_BAR, CajaXContentBar))
-#define BAUL_X_CONTENT_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_X_CONTENT_BAR, CajaXContentBarClass))
+#define BAUL_X_CONTENT_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_X_CONTENT_BAR, BaulXContentBar))
+#define BAUL_X_CONTENT_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_X_CONTENT_BAR, BaulXContentBarClass))
 #define BAUL_IS_X_CONTENT_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_X_CONTENT_BAR))
 #define BAUL_IS_X_CONTENT_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_X_CONTENT_BAR))
-#define BAUL_X_CONTENT_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_X_CONTENT_BAR, CajaXContentBarClass))
+#define BAUL_X_CONTENT_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_X_CONTENT_BAR, BaulXContentBarClass))
 
-    typedef struct _CajaXContentBarPrivate CajaXContentBarPrivate;
+    typedef struct _BaulXContentBarPrivate BaulXContentBarPrivate;
 
     typedef struct
     {
         GtkBox	box;
 
-        CajaXContentBarPrivate *priv;
-    } CajaXContentBar;
+        BaulXContentBarPrivate *priv;
+    } BaulXContentBar;
 
     typedef struct
     {
         GtkBoxClass	    parent_class;
-    } CajaXContentBarClass;
+    } BaulXContentBarClass;
 
     GType		 baul_x_content_bar_get_type	(void) G_GNUC_CONST;
 
     GtkWidget	*baul_x_content_bar_new		   (GMount              *mount,
             const char          *x_content_type);
-    const char      *baul_x_content_bar_get_x_content_type (CajaXContentBar *bar);
-    void             baul_x_content_bar_set_x_content_type (CajaXContentBar *bar,
+    const char      *baul_x_content_bar_get_x_content_type (BaulXContentBar *bar);
+    void             baul_x_content_bar_set_x_content_type (BaulXContentBar *bar,
             const char          *x_content_type);
-    void             baul_x_content_bar_set_mount          (CajaXContentBar *bar,
+    void             baul_x_content_bar_set_mount          (BaulXContentBar *bar,
             GMount              *mount);
-    GMount          *baul_x_content_bar_get_mount          (CajaXContentBar *bar);
+    GMount          *baul_x_content_bar_get_mount          (BaulXContentBar *bar);
 
 G_END_DECLS
 

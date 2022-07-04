@@ -31,26 +31,26 @@
 
 #define BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED baul_cell_renderer_text_ellipsized_get_type()
 #define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsized))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, BaulCellRendererTextEllipsized))
 #define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsizedClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, BaulCellRendererTextEllipsizedClass))
 #define BAUL_IS_CELL_RENDERER_TEXT_ELLIPSIZED(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED))
 #define BAUL_IS_CELL_RENDERER_TEXT_ELLIPSIZED_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED))
 #define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsizedClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, BaulCellRendererTextEllipsizedClass))
 
 
-typedef struct _CajaCellRendererTextEllipsized CajaCellRendererTextEllipsized;
-typedef struct _CajaCellRendererTextEllipsizedClass CajaCellRendererTextEllipsizedClass;
+typedef struct _BaulCellRendererTextEllipsized BaulCellRendererTextEllipsized;
+typedef struct _BaulCellRendererTextEllipsizedClass BaulCellRendererTextEllipsizedClass;
 
-struct _CajaCellRendererTextEllipsized
+struct _BaulCellRendererTextEllipsized
 {
     GtkCellRendererText parent;
 };
 
-struct _CajaCellRendererTextEllipsizedClass
+struct _BaulCellRendererTextEllipsizedClass
 {
     GtkCellRendererTextClass parent_class;
 };

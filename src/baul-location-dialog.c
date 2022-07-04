@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2003 Ximian, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -35,16 +35,16 @@
 #include "baul-location-entry.h"
 #include "baul-desktop-window.h"
 
-struct _CajaLocationDialogDetails
+struct _BaulLocationDialogDetails
 {
     GtkWidget *entry;
-    CajaWindow *window;
+    BaulWindow *window;
 };
 
-static void  baul_location_dialog_class_init       (CajaLocationDialogClass *class);
-static void  baul_location_dialog_init             (CajaLocationDialog      *dialog);
+static void  baul_location_dialog_class_init       (BaulLocationDialogClass *class);
+static void  baul_location_dialog_init             (BaulLocationDialog      *dialog);
 
-EEL_CLASS_BOILERPLATE (CajaLocationDialog,
+EEL_CLASS_BOILERPLATE (BaulLocationDialog,
                        baul_location_dialog,
                        GTK_TYPE_DIALOG)
 enum
@@ -55,7 +55,7 @@ enum
 static void
 baul_location_dialog_finalize (GObject *object)
 {
-    CajaLocationDialog *dialog;
+    BaulLocationDialog *dialog;
 
     dialog = BAUL_LOCATION_DIALOG (object);
 
@@ -65,7 +65,7 @@ baul_location_dialog_finalize (GObject *object)
 }
 
 static void
-open_current_location (CajaLocationDialog *dialog)
+open_current_location (BaulLocationDialog *dialog)
 {
     GFile *location;
     char *user_location;
@@ -78,7 +78,7 @@ open_current_location (CajaLocationDialog *dialog)
 }
 
 static void
-response_callback (CajaLocationDialog *dialog,
+response_callback (BaulLocationDialog *dialog,
                    int response_id,
                    gpointer data)
 {
@@ -116,7 +116,7 @@ static void
 entry_activate_callback (GtkEntry *entry,
                          gpointer user_data)
 {
-    CajaLocationDialog *dialog;
+    BaulLocationDialog *dialog;
 
     dialog = BAUL_LOCATION_DIALOG (user_data);
 
@@ -127,7 +127,7 @@ entry_activate_callback (GtkEntry *entry,
 }
 
 static void
-baul_location_dialog_class_init (CajaLocationDialogClass *class)
+baul_location_dialog_class_init (BaulLocationDialogClass *class)
 {
     G_OBJECT_CLASS (class)->finalize = baul_location_dialog_finalize;
 }
@@ -135,7 +135,7 @@ baul_location_dialog_class_init (CajaLocationDialogClass *class)
 static void
 entry_text_changed (GObject *object, GParamSpec *spec, gpointer user_data)
 {
-    CajaLocationDialog *dialog;
+    BaulLocationDialog *dialog;
 
     dialog = BAUL_LOCATION_DIALOG (user_data);
 
@@ -150,12 +150,12 @@ entry_text_changed (GObject *object, GParamSpec *spec, gpointer user_data)
 }
 
 static void
-baul_location_dialog_init (CajaLocationDialog *dialog)
+baul_location_dialog_init (BaulLocationDialog *dialog)
 {
     GtkWidget *box;
     GtkWidget *label;
 
-    dialog->details = g_new0 (CajaLocationDialogDetails, 1);
+    dialog->details = g_new0 (BaulLocationDialogDetails, 1);
 
     gtk_window_set_title (GTK_WINDOW (dialog), _("Open Location"));
     gtk_window_set_default_size (GTK_WINDOW (dialog), 300, -1);
@@ -215,9 +215,9 @@ baul_location_dialog_init (CajaLocationDialog *dialog)
 }
 
 GtkWidget *
-baul_location_dialog_new (CajaWindow *window)
+baul_location_dialog_new (BaulWindow *window)
 {
-    CajaLocationDialog *loc_dialog;
+    BaulLocationDialog *loc_dialog;
     GtkWidget *dialog;
     GFile *location;
 
@@ -258,7 +258,7 @@ baul_location_dialog_new (CajaWindow *window)
 }
 
 void
-baul_location_dialog_set_location (CajaLocationDialog *dialog,
+baul_location_dialog_set_location (BaulLocationDialog *dialog,
                                    const char *location)
 {
     baul_location_entry_update_current_location (BAUL_LOCATION_ENTRY (dialog->details->entry),

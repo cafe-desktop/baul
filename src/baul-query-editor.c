@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Red Hat, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -60,33 +60,33 @@ typedef enum
     BAUL_QUERY_EDITOR_ROW_CONTAINED_TEXT,
 
     BAUL_QUERY_EDITOR_ROW_LAST
-} CajaQueryEditorRowType;
+} BaulQueryEditorRowType;
 
 typedef struct
 {
-    CajaQueryEditorRowType type;
-    CajaQueryEditor *editor;
+    BaulQueryEditorRowType type;
+    BaulQueryEditor *editor;
     GtkWidget *hbox;
     GtkWidget *combo;
 
     GtkWidget *type_widget;
 
     void *data;
-} CajaQueryEditorRow;
+} BaulQueryEditorRow;
 
 
 typedef struct
 {
     const char *name;
-    GtkWidget * (*create_widgets)      (CajaQueryEditorRow *row);
-    void        (*add_to_query)        (CajaQueryEditorRow *row,
-                                        CajaQuery          *query);
-    void        (*free_data)           (CajaQueryEditorRow *row);
-    void        (*add_rows_from_query) (CajaQueryEditor *editor,
-                                        CajaQuery *query);
-} CajaQueryEditorRowOps;
+    GtkWidget * (*create_widgets)      (BaulQueryEditorRow *row);
+    void        (*add_to_query)        (BaulQueryEditorRow *row,
+                                        BaulQuery          *query);
+    void        (*free_data)           (BaulQueryEditorRow *row);
+    void        (*add_rows_from_query) (BaulQueryEditor *editor,
+                                        BaulQuery *query);
+} BaulQueryEditorRowOps;
 
-struct CajaQueryEditorDetails
+struct BaulQueryEditorDetails
 {
     gboolean is_indexed;
     GtkWidget *entry;
@@ -99,8 +99,8 @@ struct CajaQueryEditorDetails
     GList *rows;
     char *last_set_query_text;
 
-    CajaSearchBar *bar;
-    CajaWindowSlot *slot;
+    BaulSearchBar *bar;
+    BaulWindowSlot *slot;
 };
 
 enum
@@ -112,60 +112,60 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static void  baul_query_editor_class_init       (CajaQueryEditorClass *class);
-static void  baul_query_editor_init             (CajaQueryEditor      *editor);
+static void  baul_query_editor_class_init       (BaulQueryEditorClass *class);
+static void  baul_query_editor_init             (BaulQueryEditor      *editor);
 
-static void go_search_cb (GtkButton *clicked_button, CajaQueryEditor *editor);
+static void go_search_cb (GtkButton *clicked_button, BaulQueryEditor *editor);
 
-static void entry_activate_cb (GtkWidget *entry, CajaQueryEditor *editor);
-static void entry_changed_cb  (GtkWidget *entry, CajaQueryEditor *editor);
-static void baul_query_editor_changed_force (CajaQueryEditor *editor,
+static void entry_activate_cb (GtkWidget *entry, BaulQueryEditor *editor);
+static void entry_changed_cb  (GtkWidget *entry, BaulQueryEditor *editor);
+static void baul_query_editor_changed_force (BaulQueryEditor *editor,
         gboolean             force);
-static void baul_query_editor_changed (CajaQueryEditor *editor);
-static CajaQueryEditorRow * baul_query_editor_add_row (CajaQueryEditor *editor,
-        CajaQueryEditorRowType type);
+static void baul_query_editor_changed (BaulQueryEditor *editor);
+static BaulQueryEditorRow * baul_query_editor_add_row (BaulQueryEditor *editor,
+        BaulQueryEditorRowType type);
 
-static GtkWidget *location_row_create_widgets  (CajaQueryEditorRow *row);
-static void       location_row_add_to_query    (CajaQueryEditorRow *row,
-        CajaQuery          *query);
-static void       location_row_free_data       (CajaQueryEditorRow *row);
-static void       location_add_rows_from_query (CajaQueryEditor    *editor,
-        CajaQuery          *query);
+static GtkWidget *location_row_create_widgets  (BaulQueryEditorRow *row);
+static void       location_row_add_to_query    (BaulQueryEditorRow *row,
+        BaulQuery          *query);
+static void       location_row_free_data       (BaulQueryEditorRow *row);
+static void       location_add_rows_from_query (BaulQueryEditor    *editor,
+        BaulQuery          *query);
 
-static GtkWidget *tags_row_create_widgets      (CajaQueryEditorRow *row);
-static void       tags_row_add_to_query        (CajaQueryEditorRow *row,
-                                                CajaQuery          *query);
-static void       tags_row_free_data           (CajaQueryEditorRow *row);
-static void       tags_add_rows_from_query     (CajaQueryEditor    *editor,
-                                                CajaQuery          *query);
+static GtkWidget *tags_row_create_widgets      (BaulQueryEditorRow *row);
+static void       tags_row_add_to_query        (BaulQueryEditorRow *row,
+                                                BaulQuery          *query);
+static void       tags_row_free_data           (BaulQueryEditorRow *row);
+static void       tags_add_rows_from_query     (BaulQueryEditor    *editor,
+                                                BaulQuery          *query);
 
-static GtkWidget *type_row_create_widgets      (CajaQueryEditorRow *row);
-static void       type_row_add_to_query        (CajaQueryEditorRow *row,
-        CajaQuery          *query);
-static void       type_row_free_data           (CajaQueryEditorRow *row);
-static void       type_add_rows_from_query     (CajaQueryEditor    *editor,
-        CajaQuery          *query);
-static GtkWidget   *modtime_row_create_widgets(CajaQueryEditorRow *row);
-static void         modtime_row_add_to_query(CajaQueryEditorRow *row,
-                                             CajaQuery *query);
-static void         modtime_row_free_data(CajaQueryEditorRow *row);
-static void         modtime_add_rows_from_query(CajaQueryEditor *editor,
-                                                CajaQuery *query);
-static GtkWidget   *size_row_create_widgets(CajaQueryEditorRow *row);
-static void         size_row_add_to_query(CajaQueryEditorRow *row,
-                                          CajaQuery *query);
-static void         size_row_free_data(CajaQueryEditorRow *row);
-static void         size_add_rows_from_query(CajaQueryEditor *editor,
-                                             CajaQuery *query);
+static GtkWidget *type_row_create_widgets      (BaulQueryEditorRow *row);
+static void       type_row_add_to_query        (BaulQueryEditorRow *row,
+        BaulQuery          *query);
+static void       type_row_free_data           (BaulQueryEditorRow *row);
+static void       type_add_rows_from_query     (BaulQueryEditor    *editor,
+        BaulQuery          *query);
+static GtkWidget   *modtime_row_create_widgets(BaulQueryEditorRow *row);
+static void         modtime_row_add_to_query(BaulQueryEditorRow *row,
+                                             BaulQuery *query);
+static void         modtime_row_free_data(BaulQueryEditorRow *row);
+static void         modtime_add_rows_from_query(BaulQueryEditor *editor,
+                                                BaulQuery *query);
+static GtkWidget   *size_row_create_widgets(BaulQueryEditorRow *row);
+static void         size_row_add_to_query(BaulQueryEditorRow *row,
+                                          BaulQuery *query);
+static void         size_row_free_data(BaulQueryEditorRow *row);
+static void         size_add_rows_from_query(BaulQueryEditor *editor,
+                                             BaulQuery *query);
 
-static GtkWidget   *contained_text_row_create_widgets(CajaQueryEditorRow *row);
-static void         contained_text_row_add_to_query(CajaQueryEditorRow *row,
-                                             CajaQuery *query);
-static void         contained_text_row_free_data(CajaQueryEditorRow *row);
-static void         contained_text_add_rows_from_query(CajaQueryEditor *editor,
-                                                CajaQuery *query);
+static GtkWidget   *contained_text_row_create_widgets(BaulQueryEditorRow *row);
+static void         contained_text_row_add_to_query(BaulQueryEditorRow *row,
+                                             BaulQuery *query);
+static void         contained_text_row_free_data(BaulQueryEditorRow *row);
+static void         contained_text_add_rows_from_query(BaulQueryEditor *editor,
+                                                BaulQuery *query);
 
-static CajaQueryEditorRowOps row_type[] =
+static BaulQueryEditorRowOps row_type[] =
 {
     {
         N_("Location"),
@@ -211,14 +211,14 @@ static CajaQueryEditorRowOps row_type[] =
     }
 };
 
-EEL_CLASS_BOILERPLATE (CajaQueryEditor,
+EEL_CLASS_BOILERPLATE (BaulQueryEditor,
                        baul_query_editor,
                        GTK_TYPE_BOX)
 
 static void
 baul_query_editor_finalize (GObject *object)
 {
-    CajaQueryEditor *editor;
+    BaulQueryEditor *editor;
 
     editor = BAUL_QUERY_EDITOR (object);
 
@@ -230,7 +230,7 @@ baul_query_editor_finalize (GObject *object)
 static void
 baul_query_editor_dispose (GObject *object)
 {
-    CajaQueryEditor *editor;
+    BaulQueryEditor *editor;
 
     editor = BAUL_QUERY_EDITOR (object);
 
@@ -257,7 +257,7 @@ baul_query_editor_dispose (GObject *object)
 }
 
 static void
-baul_query_editor_class_init (CajaQueryEditorClass *class)
+baul_query_editor_class_init (BaulQueryEditorClass *class)
 {
     GObjectClass *gobject_class;
     GtkBindingSet *binding_set;
@@ -270,7 +270,7 @@ baul_query_editor_class_init (CajaQueryEditorClass *class)
         g_signal_new ("changed",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaQueryEditorClass, changed),
+                      G_STRUCT_OFFSET (BaulQueryEditorClass, changed),
                       NULL, NULL,
                       baul_src_marshal_VOID__OBJECT_BOOLEAN,
                       G_TYPE_NONE, 2, BAUL_TYPE_QUERY, G_TYPE_BOOLEAN);
@@ -279,7 +279,7 @@ baul_query_editor_class_init (CajaQueryEditorClass *class)
         g_signal_new ("cancel",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-                      G_STRUCT_OFFSET (CajaQueryEditorClass, cancel),
+                      G_STRUCT_OFFSET (BaulQueryEditorClass, cancel),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -289,7 +289,7 @@ baul_query_editor_class_init (CajaQueryEditorClass *class)
 }
 
 static void
-entry_activate_cb (GtkWidget *entry, CajaQueryEditor *editor)
+entry_activate_cb (GtkWidget *entry, BaulQueryEditor *editor)
 {
     if (editor->details->typing_timeout_id)
     {
@@ -303,7 +303,7 @@ entry_activate_cb (GtkWidget *entry, CajaQueryEditor *editor)
 static gboolean
 typing_timeout_cb (gpointer user_data)
 {
-    CajaQueryEditor *editor;
+    BaulQueryEditor *editor;
 
     editor = BAUL_QUERY_EDITOR (user_data);
 
@@ -317,7 +317,7 @@ typing_timeout_cb (gpointer user_data)
 #define TYPING_TIMEOUT 750
 
 static void
-entry_changed_cb (GtkWidget *entry, CajaQueryEditor *editor)
+entry_changed_cb (GtkWidget *entry, BaulQueryEditor *editor)
 {
     if (editor->details->change_frozen)
     {
@@ -336,7 +336,7 @@ entry_changed_cb (GtkWidget *entry, CajaQueryEditor *editor)
 }
 
 static void
-edit_clicked (GtkButton *button, CajaQueryEditor *editor)
+edit_clicked (GtkButton *button, BaulQueryEditor *editor)
 {
     baul_query_editor_set_visible (editor, TRUE);
     baul_query_editor_grab_focus (editor);
@@ -345,7 +345,7 @@ edit_clicked (GtkButton *button, CajaQueryEditor *editor)
 /* Location */
 
 static GtkWidget *
-location_row_create_widgets (CajaQueryEditorRow *row)
+location_row_create_widgets (BaulQueryEditorRow *row)
 {
     GtkWidget *chooser;
 
@@ -366,8 +366,8 @@ location_row_create_widgets (CajaQueryEditorRow *row)
 }
 
 static void
-location_row_add_to_query (CajaQueryEditorRow *row,
-                           CajaQuery          *query)
+location_row_add_to_query (BaulQueryEditorRow *row,
+                           BaulQuery          *query)
 {
     char *folder, *uri;
 
@@ -387,15 +387,15 @@ location_row_add_to_query (CajaQueryEditorRow *row,
 }
 
 static void
-location_row_free_data (CajaQueryEditorRow *row)
+location_row_free_data (BaulQueryEditorRow *row)
 {
 }
 
 static void
-location_add_rows_from_query (CajaQueryEditor    *editor,
-                              CajaQuery          *query)
+location_add_rows_from_query (BaulQueryEditor    *editor,
+                              BaulQuery          *query)
 {
-    CajaQueryEditorRow *row;
+    BaulQueryEditorRow *row;
     char *uri, *folder;
 
     uri = baul_query_get_location (query);
@@ -440,7 +440,7 @@ tags_entry_changed_cb (GtkWidget *entry, gpointer *data)
 #define MAX_TAGS_ENTRY_LEN 4096 // arbitrary value.
 
 static GtkWidget *
-tags_row_create_widgets (CajaQueryEditorRow *row)
+tags_row_create_widgets (BaulQueryEditorRow *row)
 {
     GtkWidget *entry = gtk_entry_new();
     gtk_entry_set_max_length (GTK_ENTRY (entry), MAX_TAGS_ENTRY_LEN);
@@ -461,8 +461,8 @@ tags_row_create_widgets (CajaQueryEditorRow *row)
 }
 
 static void
-tags_row_add_to_query (CajaQueryEditorRow *row,
-                           CajaQuery      *query)
+tags_row_add_to_query (BaulQueryEditorRow *row,
+                           BaulQuery      *query)
 {
     GtkEntry *entry = GTK_ENTRY (row->type_widget);
     const gchar *tags = gtk_entry_get_text (entry);
@@ -481,7 +481,7 @@ tags_row_add_to_query (CajaQueryEditorRow *row,
 }
 
 static void
-tags_row_free_data (CajaQueryEditorRow *row)
+tags_row_free_data (BaulQueryEditorRow *row)
 {
 }
 
@@ -508,15 +508,15 @@ xattr_tags_list_to_str (const GList *tags)
 }
 
 static void
-tags_add_rows_from_query (CajaQueryEditor *editor,
-                              CajaQuery   *query)
+tags_add_rows_from_query (BaulQueryEditor *editor,
+                              BaulQuery   *query)
 {
     GList *tags = baul_query_get_tags (query);
     if (tags == NULL) {
         return;
     }
 
-    CajaQueryEditorRow *row;
+    BaulQueryEditorRow *row;
     row = baul_query_editor_add_row (editor, BAUL_QUERY_EDITOR_ROW_TAGS);
 
     gchar *tags_str = xattr_tags_list_to_str (tags);
@@ -692,7 +692,7 @@ struct
 };
 
 static void
-type_add_custom_type (CajaQueryEditorRow *row,
+type_add_custom_type (BaulQueryEditorRow *row,
                       const char *mime_type,
                       const char *description,
                       GtkTreeIter *iter)
@@ -712,7 +712,7 @@ type_add_custom_type (CajaQueryEditorRow *row,
 
 
 static void
-type_combo_changed (GtkComboBox *combo_box, CajaQueryEditorRow *row)
+type_combo_changed (GtkComboBox *combo_box, BaulQueryEditorRow *row)
 {
     GtkTreeIter iter;
     gboolean other;
@@ -839,7 +839,7 @@ type_combo_changed (GtkComboBox *combo_box, CajaQueryEditorRow *row)
 }
 
 static GtkWidget *
-type_row_create_widgets (CajaQueryEditorRow *row)
+type_row_create_widgets (BaulQueryEditorRow *row)
 {
     GtkWidget *combo;
     GtkCellRenderer *cell;
@@ -893,8 +893,8 @@ type_row_create_widgets (CajaQueryEditorRow *row)
 }
 
 static void
-type_row_add_to_query (CajaQueryEditorRow *row,
-                       CajaQuery          *query)
+type_row_add_to_query (BaulQueryEditorRow *row,
+                       BaulQuery          *query)
 {
     GtkTreeIter iter;
     char **mimetypes;
@@ -926,7 +926,7 @@ type_row_add_to_query (CajaQueryEditorRow *row,
 }
 
 static void
-type_row_free_data (CajaQueryEditorRow *row)
+type_row_free_data (BaulQueryEditorRow *row)
 {
 }
 
@@ -993,12 +993,12 @@ remove_group_types_from_list (char **group_types, GList *mime_types)
 
 
 static void
-type_add_rows_from_query (CajaQueryEditor    *editor,
-                          CajaQuery          *query)
+type_add_rows_from_query (BaulQueryEditor    *editor,
+                          BaulQuery          *query)
 {
     GList *mime_types;
     char *mime_type;
-    CajaQueryEditorRow *row;
+    BaulQueryEditorRow *row;
     GtkTreeIter iter;
     int i;
     GtkTreeModel *model;
@@ -1057,7 +1057,7 @@ type_add_rows_from_query (CajaQueryEditor    *editor,
 /* End of row types */
 
 
-static GtkWidget *modtime_row_create_widgets(CajaQueryEditorRow *row)
+static GtkWidget *modtime_row_create_widgets(BaulQueryEditorRow *row)
 {
     GtkWidget *hbox = NULL;
     GtkWidget *combo = NULL;
@@ -1117,7 +1117,7 @@ static GtkWidget *modtime_row_create_widgets(CajaQueryEditorRow *row)
     return hbox;
 }
 
-static void modtime_row_add_to_query(CajaQueryEditorRow *row, CajaQuery *query)
+static void modtime_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
 {
     GList *children = NULL;
     GtkWidget *combo = NULL;
@@ -1187,16 +1187,16 @@ static void modtime_row_add_to_query(CajaQueryEditorRow *row, CajaQuery *query)
     baul_query_set_timestamp(query, is_greater ? timestamp: -timestamp);
 }
 
-static void modtime_row_free_data(CajaQueryEditorRow *row)
+static void modtime_row_free_data(BaulQueryEditorRow *row)
 {
 }
 
-static void modtime_add_rows_from_query(CajaQueryEditor *editor, CajaQuery *query)
+static void modtime_add_rows_from_query(BaulQueryEditor *editor, BaulQuery *query)
 {
 }
 
 
-static GtkWidget *size_row_create_widgets(CajaQueryEditorRow *row)
+static GtkWidget *size_row_create_widgets(BaulQueryEditorRow *row)
 {
     GtkWidget *hbox = NULL;
     GtkWidget *combo = NULL;
@@ -1292,7 +1292,7 @@ static GtkWidget *size_row_create_widgets(CajaQueryEditorRow *row)
     return hbox;
 }
 
-static void size_row_add_to_query(CajaQueryEditorRow *row, CajaQuery *query)
+static void size_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
 {
     GList *children = NULL;
     GtkWidget *combo = NULL;
@@ -1330,16 +1330,16 @@ static void size_row_add_to_query(CajaQueryEditorRow *row, CajaQuery *query)
     baul_query_set_size(query, is_greater ? size : -size);
 }
 
-static void size_row_free_data(CajaQueryEditorRow *row)
+static void size_row_free_data(BaulQueryEditorRow *row)
 {
 }
 
-static void size_add_rows_from_query(CajaQueryEditor *editor, CajaQuery *query)
+static void size_add_rows_from_query(BaulQueryEditor *editor, BaulQuery *query)
 {
 }
 
 static GtkWidget *
-contained_text_row_create_widgets (CajaQueryEditorRow *row)
+contained_text_row_create_widgets (BaulQueryEditorRow *row)
 {
     GtkWidget *entry = gtk_entry_new();
     gtk_widget_set_tooltip_text (entry,
@@ -1356,7 +1356,7 @@ contained_text_row_create_widgets (CajaQueryEditorRow *row)
 }
 
 static void
-contained_text_row_add_to_query (CajaQueryEditorRow *row, CajaQuery *query)
+contained_text_row_add_to_query (BaulQueryEditorRow *row, BaulQuery *query)
 {
     GtkEntry *entry = GTK_ENTRY (row->type_widget);
     const gchar *text = gtk_entry_get_text (entry);
@@ -1365,20 +1365,20 @@ contained_text_row_add_to_query (CajaQueryEditorRow *row, CajaQuery *query)
 }
 
 static void
-contained_text_row_free_data (CajaQueryEditorRow *row)
+contained_text_row_free_data (BaulQueryEditorRow *row)
 {
 }
 
 static void
-contained_text_add_rows_from_query (CajaQueryEditor *editor, CajaQuery *query)
+contained_text_add_rows_from_query (BaulQueryEditor *editor, BaulQuery *query)
 {
 }
 
-static CajaQueryEditorRowType
-get_next_free_type (CajaQueryEditor *editor)
+static BaulQueryEditorRowType
+get_next_free_type (BaulQueryEditor *editor)
 {
-    CajaQueryEditorRow *row;
-    CajaQueryEditorRowType type;
+    BaulQueryEditorRow *row;
+    BaulQueryEditorRowType type;
     gboolean found;
     GList *l;
 
@@ -1404,9 +1404,9 @@ get_next_free_type (CajaQueryEditor *editor)
 }
 
 static void
-remove_row_cb (GtkButton *clicked_button, CajaQueryEditorRow *row)
+remove_row_cb (GtkButton *clicked_button, BaulQueryEditorRow *row)
 {
-    CajaQueryEditor *editor;
+    BaulQueryEditor *editor;
 
     editor = row->editor;
     gtk_container_remove (GTK_CONTAINER (editor->details->visible_vbox),
@@ -1421,15 +1421,15 @@ remove_row_cb (GtkButton *clicked_button, CajaQueryEditorRow *row)
 }
 
 static void
-create_type_widgets (CajaQueryEditorRow *row)
+create_type_widgets (BaulQueryEditorRow *row)
 {
     row->type_widget = row_type[row->type].create_widgets (row);
 }
 
 static void
-row_type_combo_changed_cb (GtkComboBox *combo_box, CajaQueryEditorRow *row)
+row_type_combo_changed_cb (GtkComboBox *combo_box, BaulQueryEditorRow *row)
 {
-    CajaQueryEditorRowType type;
+    BaulQueryEditorRowType type;
 
     type = gtk_combo_box_get_active (combo_box);
 
@@ -1454,15 +1454,15 @@ row_type_combo_changed_cb (GtkComboBox *combo_box, CajaQueryEditorRow *row)
     baul_query_editor_changed (row->editor);
 }
 
-static CajaQueryEditorRow *
-baul_query_editor_add_row (CajaQueryEditor *editor,
-                           CajaQueryEditorRowType type)
+static BaulQueryEditorRow *
+baul_query_editor_add_row (BaulQueryEditor *editor,
+                           BaulQueryEditorRowType type)
 {
     GtkWidget *hbox, *button, *image, *combo;
-    CajaQueryEditorRow *row;
+    BaulQueryEditorRow *row;
     int i;
 
-    row = g_new0 (CajaQueryEditorRow, 1);
+    row = g_new0 (BaulQueryEditorRow, 1);
     row->editor = editor;
     row->type = type;
 
@@ -1508,25 +1508,25 @@ baul_query_editor_add_row (CajaQueryEditor *editor,
 }
 
 static void
-go_search_cb (GtkButton *clicked_button, CajaQueryEditor *editor)
+go_search_cb (GtkButton *clicked_button, BaulQueryEditor *editor)
 {
     baul_query_editor_changed_force (editor, TRUE);
 }
 
 static void
-add_new_row_cb (GtkButton *clicked_button, CajaQueryEditor *editor)
+add_new_row_cb (GtkButton *clicked_button, BaulQueryEditor *editor)
 {
     baul_query_editor_add_row (editor, get_next_free_type (editor));
     baul_query_editor_changed (editor);
 }
 
 static void
-baul_query_editor_init (CajaQueryEditor *editor)
+baul_query_editor_init (BaulQueryEditor *editor)
 {
     GtkWidget *hbox, *label, *button;
     char *label_markup;
 
-    editor->details = g_new0 (CajaQueryEditorDetails, 1);
+    editor->details = g_new0 (BaulQueryEditorDetails, 1);
     editor->details->is_visible = TRUE;
 
     editor->details->invisible_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
@@ -1565,7 +1565,7 @@ baul_query_editor_init (CajaQueryEditor *editor)
 }
 
 void
-baul_query_editor_set_default_query (CajaQueryEditor *editor)
+baul_query_editor_set_default_query (BaulQueryEditor *editor)
 {
     if (!editor->details->is_indexed)
     {
@@ -1575,7 +1575,7 @@ baul_query_editor_set_default_query (CajaQueryEditor *editor)
 }
 
 static void
-finish_first_line (CajaQueryEditor *editor, GtkWidget *hbox, gboolean use_go)
+finish_first_line (BaulQueryEditor *editor, GtkWidget *hbox, gboolean use_go)
 {
     GtkWidget *button, *image;
 
@@ -1618,7 +1618,7 @@ finish_first_line (CajaQueryEditor *editor, GtkWidget *hbox, gboolean use_go)
 }
 
 static void
-setup_internal_entry (CajaQueryEditor *editor)
+setup_internal_entry (BaulQueryEditor *editor)
 {
     GtkWidget *hbox, *label;
     char *label_markup;
@@ -1649,7 +1649,7 @@ setup_internal_entry (CajaQueryEditor *editor)
 }
 
 static void
-setup_external_entry (CajaQueryEditor *editor, GtkWidget *entry)
+setup_external_entry (BaulQueryEditor *editor, GtkWidget *entry)
 {
     GtkWidget *hbox, *label;
 
@@ -1673,7 +1673,7 @@ setup_external_entry (CajaQueryEditor *editor, GtkWidget *entry)
 }
 
 void
-baul_query_editor_set_visible (CajaQueryEditor *editor,
+baul_query_editor_set_visible (BaulQueryEditor *editor,
                                gboolean visible)
 {
     editor->details->is_visible = visible;
@@ -1690,7 +1690,7 @@ baul_query_editor_set_visible (CajaQueryEditor *editor,
 }
 
 static gboolean
-query_is_valid (CajaQueryEditor *editor)
+query_is_valid (BaulQueryEditor *editor)
 {
     const char *text;
 
@@ -1700,7 +1700,7 @@ query_is_valid (CajaQueryEditor *editor)
 }
 
 static void
-baul_query_editor_changed_force (CajaQueryEditor *editor, gboolean force_reload)
+baul_query_editor_changed_force (BaulQueryEditor *editor, gboolean force_reload)
 {
     if (editor->details->change_frozen)
     {
@@ -1709,7 +1709,7 @@ baul_query_editor_changed_force (CajaQueryEditor *editor, gboolean force_reload)
 
     if (query_is_valid (editor))
     {
-        CajaQuery *query;
+        BaulQuery *query;
 
         query = baul_query_editor_get_query (editor);
         g_signal_emit (editor, signals[CHANGED], 0,
@@ -1719,13 +1719,13 @@ baul_query_editor_changed_force (CajaQueryEditor *editor, gboolean force_reload)
 }
 
 static void
-baul_query_editor_changed (CajaQueryEditor *editor)
+baul_query_editor_changed (BaulQueryEditor *editor)
 {
     baul_query_editor_changed_force (editor, FALSE);
 }
 
 void
-baul_query_editor_grab_focus (CajaQueryEditor *editor)
+baul_query_editor_grab_focus (BaulQueryEditor *editor)
 {
     if (editor->details->is_visible)
     {
@@ -1733,13 +1733,13 @@ baul_query_editor_grab_focus (CajaQueryEditor *editor)
     }
 }
 
-CajaQuery *
-baul_query_editor_get_query (CajaQueryEditor *editor)
+BaulQuery *
+baul_query_editor_get_query (BaulQueryEditor *editor)
 {
     const char *query_text;
-    CajaQuery *query;
+    BaulQuery *query;
     GList *l;
-    CajaQueryEditorRow *row = NULL;
+    BaulQueryEditorRow *row = NULL;
 
     if (editor == NULL || editor->details == NULL || editor->details->entry == NULL)
     {
@@ -1768,7 +1768,7 @@ baul_query_editor_get_query (CajaQueryEditor *editor)
 }
 
 void
-baul_query_editor_clear_query (CajaQueryEditor *editor)
+baul_query_editor_clear_query (BaulQueryEditor *editor)
 {
     editor->details->change_frozen = TRUE;
     gtk_entry_set_text (GTK_ENTRY (editor->details->entry), "");
@@ -1798,7 +1798,7 @@ baul_query_editor_new (gboolean start_hidden,
 }
 
 static void
-detach_from_external_entry (CajaQueryEditor *editor)
+detach_from_external_entry (BaulQueryEditor *editor)
 {
     if (editor->details->bar != NULL)
     {
@@ -1813,7 +1813,7 @@ detach_from_external_entry (CajaQueryEditor *editor)
 }
 
 static void
-attach_to_external_entry (CajaQueryEditor *editor)
+attach_to_external_entry (BaulQueryEditor *editor)
 {
     if (editor->details->bar != NULL)
     {
@@ -1836,11 +1836,11 @@ GtkWidget*
 baul_query_editor_new_with_bar (gboolean start_hidden,
                                 gboolean is_indexed,
                                 gboolean start_attached,
-                                CajaSearchBar *bar,
-                                CajaWindowSlot *slot)
+                                BaulSearchBar *bar,
+                                BaulWindowSlot *slot)
 {
     GtkWidget *entry;
-    CajaQueryEditor *editor;
+    BaulQueryEditor *editor;
 
     editor = BAUL_QUERY_EDITOR (g_object_new (BAUL_TYPE_QUERY_EDITOR, NULL));
     editor->details->is_indexed = is_indexed;
@@ -1870,9 +1870,9 @@ baul_query_editor_new_with_bar (gboolean start_hidden,
 }
 
 void
-baul_query_editor_set_query (CajaQueryEditor *editor, CajaQuery *query)
+baul_query_editor_set_query (BaulQueryEditor *editor, BaulQuery *query)
 {
-    CajaQueryEditorRowType type;
+    BaulQueryEditorRowType type;
     char *text;
 
     if (!query)

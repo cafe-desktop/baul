@@ -48,7 +48,7 @@
 
 #define LOAD_BUFFER_SIZE 8192
 
-struct _CajaImagePropertiesPagePrivate
+struct _BaulImagePropertiesPagePrivate
 {
     GCancellable *cancellable;
     GtkWidget *vbox;
@@ -84,27 +84,27 @@ enum
 typedef struct
 {
     GObject parent;
-} CajaImagePropertiesPageProvider;
+} BaulImagePropertiesPageProvider;
 
 typedef struct
 {
     GObjectClass parent;
-} CajaImagePropertiesPageProviderClass;
+} BaulImagePropertiesPageProviderClass;
 
 
 static GType baul_image_properties_page_provider_get_type (void);
-static void  property_page_provider_iface_init                (CajaPropertyPageProviderIface *iface);
+static void  property_page_provider_iface_init                (BaulPropertyPageProviderIface *iface);
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaImagePropertiesPage, baul_image_properties_page, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulImagePropertiesPage, baul_image_properties_page, GTK_TYPE_BOX);
 
-G_DEFINE_TYPE_WITH_CODE (CajaImagePropertiesPageProvider, baul_image_properties_page_provider, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (BaulImagePropertiesPageProvider, baul_image_properties_page_provider, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_PROPERTY_PAGE_PROVIDER,
                                  property_page_provider_iface_init));
 
 static void
 baul_image_properties_page_finalize (GObject *object)
 {
-    CajaImagePropertiesPage *page;
+    BaulImagePropertiesPage *page;
 
     page = BAUL_IMAGE_PROPERTIES_PAGE (object);
 
@@ -123,7 +123,7 @@ file_close_callback (GObject      *object,
                      GAsyncResult *res,
                      gpointer      data)
 {
-    CajaImagePropertiesPage *page;
+    BaulImagePropertiesPage *page;
     GInputStream *stream;
 
     page = BAUL_IMAGE_PROPERTIES_PAGE (data);
@@ -241,7 +241,7 @@ exifdata_get_tag_value_utf8 (ExifData *data, ExifTag tag)
 }
 
 static gboolean
-append_tag_value_pair (CajaImagePropertiesPage *page,
+append_tag_value_pair (BaulImagePropertiesPage *page,
                        ExifData *data,
                        ExifTag   tag,
                        char     *description)
@@ -271,7 +271,7 @@ append_tag_value_pair (CajaImagePropertiesPage *page,
 }
 
 static void
-append_exifdata_string (ExifData *exifdata, CajaImagePropertiesPage *page)
+append_exifdata_string (ExifData *exifdata, BaulImagePropertiesPage *page)
 {
     if (exifdata && exifdata->ifd[0] && exifdata->ifd[0]->count)
     {
@@ -301,7 +301,7 @@ append_exifdata_string (ExifData *exifdata, CajaImagePropertiesPage *page)
 
 #ifdef HAVE_EXEMPI
 static void
-append_xmp_value_pair (CajaImagePropertiesPage *page,
+append_xmp_value_pair (BaulImagePropertiesPage *page,
                        XmpPtr      xmp,
                        const char *ns,
                        const char *propname,
@@ -360,7 +360,7 @@ append_xmp_value_pair (CajaImagePropertiesPage *page,
 }
 
 static void
-append_xmpdata_string (XmpPtr xmp, CajaImagePropertiesPage *page)
+append_xmpdata_string (XmpPtr xmp, BaulImagePropertiesPage *page)
 {
     if (xmp != NULL)
     {
@@ -376,7 +376,7 @@ append_xmpdata_string (XmpPtr xmp, CajaImagePropertiesPage *page)
 #endif /*HAVE EXEMPI*/
 
 static void
-load_finished (CajaImagePropertiesPage *page)
+load_finished (BaulImagePropertiesPage *page)
 {
     gtk_widget_destroy (page->details->loading_label);
 
@@ -456,7 +456,7 @@ file_read_callback (GObject      *object,
                     GAsyncResult *res,
                     gpointer      data)
 {
-    CajaImagePropertiesPage *page;
+    BaulImagePropertiesPage *page;
     GInputStream *stream;
     gssize count_read;
     GError *error;
@@ -533,7 +533,7 @@ size_prepared_callback (GdkPixbufLoader *loader,
                         int              height,
                         gpointer         callback_data)
 {
-    CajaImagePropertiesPage *page;
+    BaulImagePropertiesPage *page;
 
     page = BAUL_IMAGE_PROPERTIES_PAGE (callback_data);
 
@@ -548,7 +548,7 @@ file_open_callback (GObject      *object,
                     GAsyncResult *res,
                     gpointer      data)
 {
-    CajaImagePropertiesPage *page;
+    BaulImagePropertiesPage *page;
     GFile *file;
     GFileInputStream *stream;
     GError *error;
@@ -586,7 +586,7 @@ file_open_callback (GObject      *object,
 }
 
 static void
-load_location (CajaImagePropertiesPage *page,
+load_location (BaulImagePropertiesPage *page,
                const char                  *location)
 {
     GFile *file;
@@ -629,7 +629,7 @@ load_location (CajaImagePropertiesPage *page,
 }
 
 static void
-baul_image_properties_page_class_init (CajaImagePropertiesPageClass *class)
+baul_image_properties_page_class_init (BaulImagePropertiesPageClass *class)
 {
     GObjectClass *object_class;
 
@@ -639,7 +639,7 @@ baul_image_properties_page_class_init (CajaImagePropertiesPageClass *class)
 }
 
 static void
-baul_image_properties_page_init (CajaImagePropertiesPage *page)
+baul_image_properties_page_init (BaulImagePropertiesPage *page)
 {
     page->details = baul_image_properties_page_get_instance_private (page);
 
@@ -660,14 +660,14 @@ baul_image_properties_page_init (CajaImagePropertiesPage *page)
 }
 
 static GList *
-get_property_pages (CajaPropertyPageProvider *provider,
+get_property_pages (BaulPropertyPageProvider *provider,
                     GList *files)
 {
     GList *pages;
-    CajaPropertyPage *real_page;
-    CajaFileInfo *file;
+    BaulPropertyPage *real_page;
+    BaulFileInfo *file;
     char *uri;
-    CajaImagePropertiesPage *page;
+    BaulImagePropertiesPage *page;
 
     /* Only show the property page if 1 file is selected */
     if (!files || files->next != NULL)
@@ -704,7 +704,7 @@ get_property_pages (CajaPropertyPageProvider *provider,
     g_free (uri);
 
     real_page = baul_property_page_new
-                ("CajaImagePropertiesPage::property_page",
+                ("BaulImagePropertiesPage::property_page",
                  gtk_label_new (_("Image")),
                  GTK_WIDGET (page));
     pages = g_list_append (pages, real_page);
@@ -713,19 +713,19 @@ get_property_pages (CajaPropertyPageProvider *provider,
 }
 
 static void
-property_page_provider_iface_init (CajaPropertyPageProviderIface *iface)
+property_page_provider_iface_init (BaulPropertyPageProviderIface *iface)
 {
     iface->get_pages = get_property_pages;
 }
 
 
 static void
-baul_image_properties_page_provider_init (CajaImagePropertiesPageProvider *sidebar)
+baul_image_properties_page_provider_init (BaulImagePropertiesPageProvider *sidebar)
 {
 }
 
 static void
-baul_image_properties_page_provider_class_init (CajaImagePropertiesPageProviderClass *class)
+baul_image_properties_page_provider_class_init (BaulImagePropertiesPageProviderClass *class)
 {
 }
 

@@ -3,7 +3,7 @@
 #include <libbaul-private/baul-search-engine.h>
 
 static void
-hits_added_cb (CajaSearchEngine *engine, GSList *hits)
+hits_added_cb (BaulSearchEngine *engine, GSList *hits)
 {
 	g_print ("hits added\n");
 	while (hits) {
@@ -13,7 +13,7 @@ hits_added_cb (CajaSearchEngine *engine, GSList *hits)
 }
 
 static void
-hits_subtracted_cb (CajaSearchEngine *engine, GSList *hits)
+hits_subtracted_cb (BaulSearchEngine *engine, GSList *hits)
 {
 	g_print ("hits subtracted\n");
 	while (hits) {
@@ -23,7 +23,7 @@ hits_subtracted_cb (CajaSearchEngine *engine, GSList *hits)
 }
 
 static void
-finished_cb (CajaSearchEngine *engine)
+finished_cb (BaulSearchEngine *engine)
 {
 	g_print ("finished!\n");
 //	gtk_main_quit ();
@@ -32,8 +32,8 @@ finished_cb (CajaSearchEngine *engine)
 int
 main (int argc, char* argv[])
 {
-	CajaSearchEngine *engine;
-	CajaQuery *query;
+	BaulSearchEngine *engine;
+	BaulQuery *query;
 
 	gtk_init (&argc, &argv);
 

@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -35,11 +35,11 @@
 
 #define RESET_IMAGE_NAME "reset.png"
 
-typedef struct CajaCustomizationData CajaCustomizationData;
+typedef struct BaulCustomizationData BaulCustomizationData;
 
 
 
-CajaCustomizationData* baul_customization_data_new                          (const char *customization_name,
+BaulCustomizationData* baul_customization_data_new                          (const char *customization_name,
         gboolean show_public_customizations,
         int maximum_icon_height,
         int maximum_icon_width);
@@ -50,13 +50,13 @@ CajaCustomizationData* baul_customization_data_new                          (con
  * object_pixbuf - Pixbuf for graphical display of the object.
  * object_label  - Textual label display of the object.
  */
-gboolean                   baul_customization_data_get_next_element_for_display (CajaCustomizationData *data,
+gboolean                   baul_customization_data_get_next_element_for_display (BaulCustomizationData *data,
         char **object_name,
         GdkPixbuf **object_pixbuf,
         char **object_label);
-gboolean                   baul_customization_data_private_data_was_displayed   (CajaCustomizationData *data);
+gboolean                   baul_customization_data_private_data_was_displayed   (BaulCustomizationData *data);
 
-void                       baul_customization_data_destroy                      (CajaCustomizationData *data);
+void                       baul_customization_data_destroy                      (BaulCustomizationData *data);
 
 
 

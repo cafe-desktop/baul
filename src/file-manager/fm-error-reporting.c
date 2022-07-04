@@ -36,13 +36,13 @@
 
 #include "fm-error-reporting.h"
 
-#define NEW_NAME_TAG "Caja: new name"
+#define NEW_NAME_TAG "Baul: new name"
 #define MAXIMUM_DISPLAYED_FILE_NAME_LENGTH	50
 
-static void finish_rename (CajaFile *file, gboolean stop_timer, GError *error);
+static void finish_rename (BaulFile *file, gboolean stop_timer, GError *error);
 
 void
-fm_report_error_loading_directory (CajaFile *file,
+fm_report_error_loading_directory (BaulFile *file,
                                    GError *error,
                                    GtkWindow *parent_window)
 {
@@ -93,7 +93,7 @@ fm_report_error_loading_directory (CajaFile *file,
 }
 
 void
-fm_report_error_renaming_file (CajaFile *file,
+fm_report_error_renaming_file (BaulFile *file,
                                const char *new_name,
                                GError *error,
                                GtkWindow *parent_window)
@@ -168,7 +168,7 @@ fm_report_error_renaming_file (CajaFile *file,
 }
 
 void
-fm_report_error_setting_group (CajaFile *file,
+fm_report_error_setting_group (BaulFile *file,
                                GError *error,
                                GtkWindow *parent_window)
 {
@@ -214,7 +214,7 @@ fm_report_error_setting_group (CajaFile *file,
 }
 
 void
-fm_report_error_setting_owner (CajaFile *file,
+fm_report_error_setting_owner (BaulFile *file,
                                GError *error,
                                GtkWindow *parent_window)
 {
@@ -237,7 +237,7 @@ fm_report_error_setting_owner (CajaFile *file,
 }
 
 void
-fm_report_error_setting_permissions (CajaFile *file,
+fm_report_error_setting_permissions (BaulFile *file,
                                      GError *error,
                                      GtkWindow *parent_window)
 {
@@ -262,7 +262,7 @@ fm_report_error_setting_permissions (CajaFile *file,
 typedef struct _FMRenameData
 {
     char *name;
-    CajaFileOperationCallback callback;
+    BaulFileOperationCallback callback;
     gpointer callback_data;
 } FMRenameData;
 
@@ -274,7 +274,7 @@ fm_rename_data_free (FMRenameData *data)
 }
 
 static void
-rename_callback (CajaFile *file, GFile *result_location,
+rename_callback (BaulFile *file, GFile *result_location,
                  GError *error, gpointer callback_data)
 {
     FMRenameData *data;
@@ -306,7 +306,7 @@ cancel_rename_callback (gpointer callback_data)
 }
 
 static void
-finish_rename (CajaFile *file, gboolean stop_timer, GError *error)
+finish_rename (BaulFile *file, gboolean stop_timer, GError *error)
 {
     FMRenameData *data;
 
@@ -333,9 +333,9 @@ finish_rename (CajaFile *file, gboolean stop_timer, GError *error)
 }
 
 void
-fm_rename_file (CajaFile *file,
+fm_rename_file (BaulFile *file,
                 const char *new_name,
-                CajaFileOperationCallback callback,
+                BaulFileOperationCallback callback,
                 gpointer callback_data)
 {
     char *old_name, *wait_message;

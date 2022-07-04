@@ -298,8 +298,8 @@ msgstr "Dzēšana"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -307,7 +307,7 @@ msgstr "Failu pārvaldnieks MATE darbvirsmai"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -315,8 +315,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -3011,27 +3011,27 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Caja izies pēc pēdējā loga aizvēršanas."
+msgid "Baul will exit when last window destroyed."
+msgstr "Baul izies pēc pēdējā loga aizvēršanas."
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
-msgstr "Aktivizē Caja klasisko uzvedību, kurā visi logi ir pārlūki"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
+msgstr "Aktivizē Baul klasisko uzvedību, kurā visi logi ir pārlūki"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
-"Ja iestatīts uz \"true\", patiess, visi Caja logi būs pārlūka logi. Šādi "
+"Ja iestatīts uz \"true\", patiess, visi Baul logi būs pārlūka logi. Šādi "
 "Nautilus uzvedās pirms 2.6 versijas, un dažiem lietotājiem šāda uzvedība "
 "patīk labāk."
 
@@ -3041,10 +3041,10 @@ msgstr "Vienmēr lietot vietas ievadlauku, nevis ceļa joslu"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja pārlūka logi vienmēr lietos teksta "
+"Ja iestatīts uz \"true\" (patiess), Baul pārlūka logi vienmēr lietos teksta "
 "ievada lauku adreses rīkjoslai, nevis ceļa joslai."
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
@@ -3053,10 +3053,10 @@ msgstr "Vai vaicāt pēc apstiprinājuma dzēšot failus un tukšojot miskasti"
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja pārjautās, kad mēģināsiet dzēst "
+"Ja iestatīts uz \"true\" (patiess), Baul pārjautās, kad mēģināsiet dzēst "
 "failus vai iztukšot miskasti."
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
@@ -3065,7 +3065,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
@@ -3075,7 +3075,7 @@ msgstr "Vai aktivizēt tūlītēju dzēšanu"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
@@ -3155,16 +3155,16 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
-msgstr "Izmantot papildus peles pogu notikumus Caja pārlūka logā"
+msgid "Use extra mouse button events in Baul' browser window"
+msgstr "Izmantot papildus peles pogu notikumus Baul pārlūka logā"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "Lietotājiem ar pelēm, kurām ir \"Uz priekšu\" un \"Atpakaļ\" pogas, šī "
-"atslēga noteikts, vai jebkāda darbība tiek veikta Caja, ja kaut viena no šīm"
+"atslēga noteikts, vai jebkāda darbība tiek veikta Baul, ja kaut viena no šīm"
 " pogām ir nospiesta."
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
@@ -3248,10 +3248,10 @@ msgstr "Rādīt paplašinātās atļaujas faila īpašību logā"
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja ļaus jums apskatīt un rediģēt failu"
+"Ja iestatīts uz \"true\" (patiess), Baul ļaus jums apskatīt un rediģēt failu"
 " atļaujas vairāk Unix-iskā veidā, piekļūstot dažām ezotēriskākām iespējām."
 
 #: libbaul-private/org.mate.baul.gschema.xml:180
@@ -3260,10 +3260,10 @@ msgstr "Pārlūka logos mapes rādīt pirmās"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja ikonu un saraksta skatos rāda mapes"
+"Ja iestatīts uz \"true\" (patiess), Baul ikonu un saraksta skatos rāda mapes"
 " pirms failiem."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3294,15 +3294,15 @@ msgstr ""
 "secībā."
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja lieto mājas mapi kā darbvirsmu"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul lieto mājas mapi kā darbvirsmu"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja lietos mājas mapi kā darbvirsmu. "
+"Ja iestatīts uz \"true\" (patiess), Baul lietos mājas mapi kā darbvirsmu. "
 "Citādi par darbvirsmu tiks lietota mape ~/Darbvirsma."
 
 #: libbaul-private/org.mate.baul.gschema.xml:203
@@ -3437,7 +3437,7 @@ msgid "Whether to show desktop notifications"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3582,10 +3582,10 @@ msgstr "koka sānu rūtī rādīt tikai mapes"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja sānu rūtī rādīs tikai mapes. Citādi"
+"Ja iestatīts uz \"true\" (patiess), Baul sānu rūtī rādīs tikai mapes. Citādi"
 " rādīs gan failus, gan mapes."
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
@@ -3804,10 +3804,10 @@ msgstr "Vai automātiski piemontēt datu nesējus"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja startējoties automātiski piemontēs "
+"Ja iestatīts uz \"true\" (patiess), Baul startējoties automātiski piemontēs "
 "datu nesējus, kā, piemēram, lietotāju cietos diskus vai noņemamos datu "
 "nesējus."
 
@@ -3817,12 +3817,12 @@ msgstr "Vai automātiski atvērt piemontētā datu nesēja mapi"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja automātiski atvērs mapi piemontējot"
+"Ja iestatīts uz \"true\" (patiess), Baul automātiski atvērs mapi piemontējot"
 " datu nesēju. Šis attiecas vienīgi uz datiem, kam nav noteikts zināms "
 "x-content/* tips. Datiem ar zināmu x-content tipu, tiks izpildīta lietotāja "
 "definētā darbība."
@@ -3833,10 +3833,10 @@ msgstr "Nejautāt un nepalaist automātiski programmas ievietojot datu nesējus"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
-"Ja iestatīts uz \"true\" (patiess), Caja nekad neprasīs automātiski palaist "
+"Ja iestatīts uz \"true\" (patiess), Baul nekad neprasīs automātiski palaist "
 "programmas no tikko ievietotiem datu nesējiem."
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
@@ -3942,29 +3942,29 @@ msgstr "Rādīt sesijas pārvaldības opcijas"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Caja nevarēja izveidot pieprasīto mapi \"%s\"."
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Baul nevarēja izveidot pieprasīto mapi \"%s\"."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"Pirms Caja palaišanas, lūdzu, izveidojiet sekojošo mapi vai iestatiet tādas "
-"atļaujas, ka Caja var to izveidot."
+"Pirms Baul palaišanas, lūdzu, izveidojiet sekojošo mapi vai iestatiet tādas "
+"atļaujas, ka Baul var to izveidot."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja nevarēja izveidot šīs pieprasītās mapes: %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul nevarēja izveidot šīs pieprasītās mapes: %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Pirms Caja palaišanas, lūdzu, izveidojiet šīs mapes vai iestatiet tādas "
-"atļaujas, ka Caja var tās izveidot."
+"Pirms Baul palaišanas, lūdzu, izveidojiet šīs mapes vai iestatiet tādas "
+"atļaujas, ka Baul var tās izveidot."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -4026,8 +4026,8 @@ msgid "Open a browser window."
 msgstr "Atvērt parlūka logu."
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Iziet no Caja."
+msgid "Quit Baul."
+msgstr "Iziet no Baul."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -5043,8 +5043,8 @@ msgid "New _Window"
 msgstr "Jauns _logs"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "Atvērt vēl vienu Caja logu ar attēloto atrašanās vietu"
+msgid "Open another Baul window for the displayed location"
+msgstr "Atvērt vēl vienu Baul logu ar attēloto atrašanās vietu"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -5863,8 +5863,8 @@ msgid "View of the current folder"
 msgstr "Skats pašreizējai mapei"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja nav iestatīts skatītājs, kas spētu parādīt šo mapi."
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul nav iestatīts skatītājs, kas spētu parādīt šo mapi."
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5881,12 +5881,12 @@ msgstr "Lūdzu, pārbaudiet, vai rakstība ir pareiza un mēģiniet vēlreiz."
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "Caja neprot strādāt ar \"%s\" vietām."
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "Baul neprot strādāt ar \"%s\" vietām."
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Caja nespēj strādāt ar šāda tipa vietām."
+msgid "Baul cannot handle this kind of location."
+msgstr "Baul nespēj strādāt ar šāda tipa vietām."
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -5923,24 +5923,24 @@ msgstr "Iet uz atrašanās vietu, kas norādīta šajā grāmatzīmē"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja ir brīva programma; jūs to varat brīvi izplatīt un/vai modificēt "
+"Baul ir brīva programma; jūs to varat brīvi izplatīt un/vai modificēt "
 "saskaņā ar Free Software Foundation publicētās GNU Vispārējās Publiskās "
 "Licences noteikumiem. Derīgi ir licences otrās versijas vai (pēc jūsu "
 "vēlmes) kādas vēlākas versijas redakcija."
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Caja tiek izplatīts ar cerību, ka tas būs noderīgs, tas tiek izplatīts BEZ "
+"Baul tiek izplatīts ar cerību, ka tas būs noderīgs, tas tiek izplatīts BEZ "
 "JEBKĀDAS GARANTIJAS; pat bez iekļautām garantijām KA TAS IR DERĪGS KĀDAM "
 "KONKRĒTAM MĒRĶIM.  Sīkāku informāciju meklējiet GNU Vispārējās Publiskās "
 "Licences tekstā."
@@ -5948,28 +5948,28 @@ msgstr ""
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "Jums būtu bijis jāsaņem GNU Vispārējās publiskās licences kopiju kopā ar "
-"Caja; ja tā nav noticis rakstiet Free Software Foundation, Inc., 51 Franklin"
+"Baul; ja tā nav noticis rakstiet Free Software Foundation, Inc., 51 Franklin"
 " Street, Fifth Floor, Boston, MA 02110-1301, USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
-"Caja ļauj jums darboties ar failiem un mapēm gan jūsu datorā. gan "
+"Baul ļauj jums darboties ar failiem un mapēm gan jūsu datorā. gan "
 "tiešsaistē."
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -6015,8 +6015,8 @@ msgid "Prefere_nces"
 msgstr "Prefere_nces"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Rediģēt Caja iestatījumus"
+msgid "Edit Baul preferences"
+msgstr "Rediģēt Baul iestatījumus"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -6043,16 +6043,16 @@ msgid "_Contents"
 msgstr "_Saturs"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Rādīt Caja palīdzību"
+msgid "Display Baul help"
+msgstr "Rādīt Baul palīdzību"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "P_ar"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Rādīt Caja veidotājus"
+msgid "Display credits for the creators of Baul"
+msgstr "Rādīt Baul veidotājus"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6443,7 +6443,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6463,7 +6463,7 @@ msgstr ""
 "\n"
 "Izpildot no lokālās mapes, skriptiem tiks padoti izvēlētie failu nosaukumi. Izpildot no attālinātas mapes (piem., mapes, kas rāda tīmekļa vai ftp saturu), skriptam netiks padoti parametri.\n"
 "\n"
-"Jebkurā gadījumā Caja būs iestatījis sekojošus vides mainīgos izmantošanai skriptos:\n"
+"Jebkurā gadījumā Baul būs iestatījis sekojošus vides mainīgos izmantošanai skriptos:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: ar jaunu rindu atdalītie ceļi izvēlētajiem failiem (tikai, ja lokālie)\n"
 "\n"

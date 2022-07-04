@@ -1,5 +1,5 @@
 /*
- *  baul-info-provider.h - Type definitions for Caja extensions
+ *  baul-info-provider.h - Type definitions for Baul extensions
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -21,9 +21,9 @@
  *
  */
 
-/* This interface is implemented by Caja extensions that want to
- * provide information about files.  Extensions are called when Caja
- * needs information about a file.  They are passed a CajaFileInfo
+/* This interface is implemented by Baul extensions that want to
+ * provide information about files.  Extensions are called when Baul
+ * needs information about a file.  They are passed a BaulFileInfo
  * object which should be filled with relevant information */
 
 #ifndef BAUL_EXTENSION_TYPES_H
@@ -36,16 +36,16 @@ G_BEGIN_DECLS
 #define BAUL_TYPE_OPERATION_RESULT (baul_operation_result_get_type ())
 
 /**
- * CajaOperationHandle:
+ * BaulOperationHandle:
  *
  * Handle for asynchronous interfaces. These are opaque handles that must
  * be unique within an extension object. These are returned by operations
  * that return BAUL_OPERATION_IN_PROGRESS.
  */
-typedef struct _CajaOperationHandle CajaOperationHandle;
+typedef struct _BaulOperationHandle BaulOperationHandle;
 
 /**
- * CajaOperationResult:
+ * BaulOperationResult:
  * @BAUL_OPERATION_COMPLETE: the operation succeeded, and the extension
  *  is done with the request.
  * @BAUL_OPERATION_FAILED: the operation failed.
@@ -66,13 +66,13 @@ typedef enum {
      * parameter and call the callback closure when the
      * operation is complete. */
     BAUL_OPERATION_IN_PROGRESS
-} CajaOperationResult;
+} BaulOperationResult;
 
 GType baul_operation_result_get_type (void);
 
 /**
  * SECTION:baul-extension-types
- * @title: CajaModule
+ * @title: BaulModule
  * @short_description: Initialize an extension
  * @include: libbaul-extension/baul-extension-types.h
  *

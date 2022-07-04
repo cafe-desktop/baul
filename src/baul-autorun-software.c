@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* Caja
+/* Baul
 
    Copyright (C) 2008 Red Hat, Inc.
 
@@ -200,7 +200,7 @@ present_autorun_for_software_dialog (GMount *mount)
 {
     GIcon *icon;
     int icon_size;
-    CajaIconInfo *icon_info;
+    BaulIconInfo *icon_info;
     GdkPixbuf *pixbuf;
     GtkWidget *image;
     char *mount_name;

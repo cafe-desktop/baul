@@ -29,36 +29,36 @@
 
 #define BAUL_TYPE_CLIPBOARD_MONITOR baul_clipboard_monitor_get_type()
 #define BAUL_CLIPBOARD_MONITOR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitor))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CLIPBOARD_MONITOR, BaulClipboardMonitor))
 #define BAUL_CLIPBOARD_MONITOR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitorClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CLIPBOARD_MONITOR, BaulClipboardMonitorClass))
 #define BAUL_IS_CLIPBOARD_MONITOR(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_CLIPBOARD_MONITOR))
 #define BAUL_IS_CLIPBOARD_MONITOR_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_CLIPBOARD_MONITOR))
 #define BAUL_CLIPBOARD_MONITOR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitorClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_CLIPBOARD_MONITOR, BaulClipboardMonitorClass))
 
-typedef struct _CajaClipboardMonitorPrivate CajaClipboardMonitorPrivate;
-typedef struct CajaClipboardInfo CajaClipboardInfo;
+typedef struct _BaulClipboardMonitorPrivate BaulClipboardMonitorPrivate;
+typedef struct BaulClipboardInfo BaulClipboardInfo;
 
 typedef struct
 {
     GObject parent_slot;
 
-    CajaClipboardMonitorPrivate *details;
-} CajaClipboardMonitor;
+    BaulClipboardMonitorPrivate *details;
+} BaulClipboardMonitor;
 
 typedef struct
 {
     GObjectClass parent_slot;
 
-    void (* clipboard_changed) (CajaClipboardMonitor *monitor);
-    void (* clipboard_info) (CajaClipboardMonitor *monitor,
-                             CajaClipboardInfo *info);
-} CajaClipboardMonitorClass;
+    void (* clipboard_changed) (BaulClipboardMonitor *monitor);
+    void (* clipboard_info) (BaulClipboardMonitor *monitor,
+                             BaulClipboardInfo *info);
+} BaulClipboardMonitorClass;
 
-struct CajaClipboardInfo
+struct BaulClipboardInfo
 {
     GList *files;
     gboolean cut;
@@ -66,10 +66,10 @@ struct CajaClipboardInfo
 
 GType   baul_clipboard_monitor_get_type (void);
 
-CajaClipboardMonitor *   baul_clipboard_monitor_get (void);
-void baul_clipboard_monitor_set_clipboard_info (CajaClipboardMonitor *monitor,
-        CajaClipboardInfo *info);
-CajaClipboardInfo * baul_clipboard_monitor_get_clipboard_info (CajaClipboardMonitor *monitor);
+BaulClipboardMonitor *   baul_clipboard_monitor_get (void);
+void baul_clipboard_monitor_set_clipboard_info (BaulClipboardMonitor *monitor,
+        BaulClipboardInfo *info);
+BaulClipboardInfo * baul_clipboard_monitor_get_clipboard_info (BaulClipboardMonitor *monitor);
 void baul_clipboard_monitor_emit_changed (void);
 
 void baul_clear_clipboard_callback (GtkClipboard *clipboard,

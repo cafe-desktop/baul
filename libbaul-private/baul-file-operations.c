@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* baul-file-operations.c - Caja file operations.
+/* baul-file-operations.c - Baul file operations.
 
    Copyright (C) 1999, 2000 Free Software Foundation
    Copyright (C) 2000, 2001 Eazel, Inc.
@@ -74,7 +74,7 @@ typedef struct {
 	GtkWindow *parent_window;
 	int screen_num;
 	int inhibit_cookie;
-	CajaProgressInfo *progress;
+	BaulProgressInfo *progress;
 	GCancellable *cancellable;
 	GHashTable *skip_files;
 	GHashTable *skip_readdir_error;
@@ -83,7 +83,7 @@ typedef struct {
 	gboolean merge_all;
 	gboolean replace_all;
 	gboolean delete_all;
-	CajaUndoStackActionData* undo_redo_data;
+	BaulUndoStackActionData* undo_redo_data;
 } CommonJob;
 
 typedef struct {
@@ -95,7 +95,7 @@ typedef struct {
 	GdkPoint *icon_positions;
 	int n_icon_positions;
 	GHashTable *debuting_files;
-	CajaCopyCallback  done_callback;
+	BaulCopyCallback  done_callback;
 	gpointer done_callback_data;
 } CopyMoveJob;
 
@@ -104,7 +104,7 @@ typedef struct {
 	GList *files;
 	gboolean try_trash;
 	gboolean user_cancel;
-	CajaDeleteCallback done_callback;
+	BaulDeleteCallback done_callback;
 	gpointer done_callback_data;
 } DeleteJob;
 
@@ -119,7 +119,7 @@ typedef struct {
 	GdkPoint position;
 	gboolean has_position;
 	GFile *created_file;
-	CajaCreateCallback done_callback;
+	BaulCreateCallback done_callback;
 	gpointer done_callback_data;
 } CreateJob;
 
@@ -128,7 +128,7 @@ typedef struct {
 	CommonJob common;
 	GList *trash_dirs;
 	gboolean should_confirm;
-	CajaOpCallback done_callback;
+	BaulOpCallback done_callback;
 	gpointer done_callback_data;
 } EmptyTrashJob;
 
@@ -136,14 +136,14 @@ typedef struct {
 	CommonJob common;
 	GFile *file;
 	gboolean interactive;
-	CajaOpCallback done_callback;
+	BaulOpCallback done_callback;
 	gpointer done_callback_data;
 } MarkTrustedJob;
 
 typedef struct {
 	CommonJob common;
 	GFile *file;
-	CajaOpCallback done_callback;
+	BaulOpCallback done_callback;
 	gpointer done_callback_data;
 	guint32 file_permissions;
 	guint32 file_mask;
@@ -2072,7 +2072,7 @@ static void
 trash_or_delete_internal (GList                  *files,
 			  GtkWindow              *parent_window,
 			  gboolean                try_trash,
-			  CajaDeleteCallback  done_callback,
+			  BaulDeleteCallback  done_callback,
 			  gpointer                done_callback_data)
 {
 	DeleteJob *job;
@@ -2111,7 +2111,7 @@ trash_or_delete_internal (GList                  *files,
 void
 baul_file_operations_trash_or_delete (GList                  *files,
 					  GtkWindow              *parent_window,
-					  CajaDeleteCallback  done_callback,
+					  BaulDeleteCallback  done_callback,
 					  gpointer                done_callback_data)
 {
 	trash_or_delete_internal (files, parent_window,
@@ -2122,7 +2122,7 @@ baul_file_operations_trash_or_delete (GList                  *files,
 void
 baul_file_operations_delete (GList                  *files,
 				 GtkWindow              *parent_window,
-				 CajaDeleteCallback  done_callback,
+				 BaulDeleteCallback  done_callback,
 				 gpointer                done_callback_data)
 {
 	trash_or_delete_internal (files, parent_window,
@@ -2136,7 +2136,7 @@ typedef struct {
 	gboolean eject;
 	GMount *mount;
 	GtkWindow *parent_window;
-	CajaUnmountCallback callback;
+	BaulUnmountCallback callback;
 	gpointer callback_data;
 } UnmountData;
 
@@ -2371,7 +2371,7 @@ baul_file_operations_unmount_mount_full (GtkWindow                      *parent_
 					     GMount                         *mount,
 					     gboolean                        eject,
 					     gboolean                        check_trash,
-					     CajaUnmountCallback         callback,
+					     BaulUnmountCallback         callback,
 					     gpointer                        callback_data)
 {
 	UnmountData *data;
@@ -2398,7 +2398,7 @@ baul_file_operations_unmount_mount_full (GtkWindow                      *parent_
 			job = op_job_new (EmptyTrashJob, parent_window, TRUE, FALSE);
 			job->should_confirm = FALSE;
 			job->trash_dirs = get_trash_dirs_for_mount (mount);
-			job->done_callback = (CajaOpCallback)do_unmount;
+			job->done_callback = (BaulOpCallback)do_unmount;
 			job->done_callback_data = data;
 			g_io_scheduler_push_job (empty_trash_job,
 					   job,
@@ -2446,7 +2446,7 @@ volume_mount_cb (GObject *source_object,
 		 GAsyncResult *res,
 		 gpointer user_data)
 {
-	CajaMountCallback mount_callback;
+	BaulMountCallback mount_callback;
 	GObject *mount_callback_data_object;
 	GMountOperation *mount_op = user_data;
 	GError *error;
@@ -2469,7 +2469,7 @@ volume_mount_cb (GObject *source_object,
 		g_error_free (error);
 	}
 
-	mount_callback = (CajaMountCallback)
+	mount_callback = (BaulMountCallback)
 		g_object_get_data (G_OBJECT (mount_op), "mount-callback");
 	mount_callback_data_object =
 		g_object_get_data (G_OBJECT (mount_op), "mount-callback-data");
@@ -2502,7 +2502,7 @@ void
 baul_file_operations_mount_volume_full (GtkWindow *parent_window,
 					    GVolume *volume,
 					    gboolean allow_autorun,
-					    CajaMountCallback mount_callback,
+					    BaulMountCallback mount_callback,
 					    GObject *mount_callback_data_object)
 {
 	GMountOperation *mount_op;
@@ -4735,7 +4735,7 @@ baul_file_operations_copy (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
 			       GtkWindow *parent_window,
-			       CajaCopyCallback  done_callback,
+			       BaulCopyCallback  done_callback,
 			       gpointer done_callback_data)
 {
 	CopyMoveJob *job;
@@ -5278,7 +5278,7 @@ baul_file_operations_move (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
 			       GtkWindow *parent_window,
-			       CajaCopyCallback  done_callback,
+			       BaulCopyCallback  done_callback,
 			       gpointer done_callback_data)
 {
 	CopyMoveJob *job;
@@ -5598,7 +5598,7 @@ baul_file_operations_link (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
 			       GtkWindow *parent_window,
-			       CajaCopyCallback  done_callback,
+			       BaulCopyCallback  done_callback,
 			       gpointer done_callback_data)
 {
 	CopyMoveJob *job;
@@ -5639,7 +5639,7 @@ void
 baul_file_operations_duplicate (GList *files,
 				    GArray *relative_item_points,
 				    GtkWindow *parent_window,
-				    CajaCopyCallback  done_callback,
+				    BaulCopyCallback  done_callback,
 				    gpointer done_callback_data)
 {
 	CopyMoveJob *job;
@@ -5812,7 +5812,7 @@ baul_file_set_permissions_recursive (const char *directory,
 					 guint32         file_mask,
 					 guint32         dir_permissions,
 					 guint32         dir_mask,
-					 CajaOpCallback  callback,
+					 BaulOpCallback  callback,
 					 gpointer  callback_data)
 {
 	SetPermissionsJob *job;
@@ -5859,7 +5859,7 @@ location_list_from_uri_list (const GList *uris)
 }
 
 typedef struct {
-	CajaCopyCallback real_callback;
+	BaulCopyCallback real_callback;
 	gpointer real_data;
 } MoveTrashCBData;
 
@@ -5879,7 +5879,7 @@ baul_file_operations_copy_move (const GList *item_uris,
 				    const char *target_dir,
 				    GdkDragAction copy_action,
 				    GtkWidget *parent_view,
-				    CajaCopyCallback  done_callback,
+				    BaulCopyCallback  done_callback,
 				    gpointer done_callback_data)
 {
 	GList *locations;
@@ -5951,7 +5951,7 @@ baul_file_operations_copy_move (const GList *item_uris,
 			cb_data->real_data = done_callback_data;
 			baul_file_operations_trash_or_delete (locations,
 								  parent_window,
-								  (CajaDeleteCallback) callback_for_move_to_trash,
+								  (BaulDeleteCallback) callback_for_move_to_trash,
 								  cb_data);
 		} else {
 			baul_file_operations_move (locations,
@@ -6276,7 +6276,7 @@ void
 baul_file_operations_new_folder (GtkWidget *parent_view,
 				     GdkPoint *target_point,
 				     const char *parent_dir,
-				     CajaCreateCallback done_callback,
+				     BaulCreateCallback done_callback,
 				     gpointer done_callback_data)
 {
 	CreateJob *job;
@@ -6316,7 +6316,7 @@ baul_file_operations_new_file_from_template (GtkWidget *parent_view,
 						 const char *parent_dir,
 						 const char *target_filename,
 						 const char *template_uri,
-						 CajaCreateCallback done_callback,
+						 BaulCreateCallback done_callback,
 						 gpointer done_callback_data)
 {
 	CreateJob *job;
@@ -6361,7 +6361,7 @@ baul_file_operations_new_file (GtkWidget *parent_view,
 				   const char *target_filename,
 				   const char *initial_contents,
 				   int length,
-				   CajaCreateCallback done_callback,
+				   BaulCreateCallback done_callback,
 				   gpointer done_callback_data)
 {
 	CreateJob *job;
@@ -6730,7 +6730,7 @@ void
 baul_file_mark_desktop_file_trusted (GFile *file,
 					 GtkWindow *parent_window,
 					 gboolean interactive,
-					 CajaOpCallback done_callback,
+					 BaulOpCallback done_callback,
 					 gpointer done_callback_data)
 {
 	MarkTrustedJob *job;

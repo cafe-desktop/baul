@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Red Hat, Inc
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -27,27 +27,27 @@
 #include "baul-search-engine.h"
 
 #define BAUL_TYPE_SEARCH_ENGINE_SIMPLE		(baul_search_engine_simple_get_type ())
-#define BAUL_SEARCH_ENGINE_SIMPLE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_ENGINE_SIMPLE, CajaSearchEngineSimple))
-#define BAUL_SEARCH_ENGINE_SIMPLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_ENGINE_SIMPLE, CajaSearchEngineSimpleClass))
+#define BAUL_SEARCH_ENGINE_SIMPLE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_ENGINE_SIMPLE, BaulSearchEngineSimple))
+#define BAUL_SEARCH_ENGINE_SIMPLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_ENGINE_SIMPLE, BaulSearchEngineSimpleClass))
 #define BAUL_IS_SEARCH_ENGINE_SIMPLE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_ENGINE_SIMPLE))
 #define BAUL_IS_SEARCH_ENGINE_SIMPLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_ENGINE_SIMPLE))
-#define BAUL_SEARCH_ENGINE_SIMPLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_ENGINE_SIMPLE, CajaSearchEngineSimpleClass))
+#define BAUL_SEARCH_ENGINE_SIMPLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_ENGINE_SIMPLE, BaulSearchEngineSimpleClass))
 
-typedef struct CajaSearchEngineSimpleDetails CajaSearchEngineSimpleDetails;
+typedef struct BaulSearchEngineSimpleDetails BaulSearchEngineSimpleDetails;
 
-typedef struct CajaSearchEngineSimple
+typedef struct BaulSearchEngineSimple
 {
-    CajaSearchEngine parent;
-    CajaSearchEngineSimpleDetails *details;
-} CajaSearchEngineSimple;
+    BaulSearchEngine parent;
+    BaulSearchEngineSimpleDetails *details;
+} BaulSearchEngineSimple;
 
 typedef struct
 {
-    CajaSearchEngineClass parent_class;
-} CajaSearchEngineSimpleClass;
+    BaulSearchEngineClass parent_class;
+} BaulSearchEngineSimpleClass;
 
 GType          baul_search_engine_simple_get_type  (void);
 
-CajaSearchEngine* baul_search_engine_simple_new       (void);
+BaulSearchEngine* baul_search_engine_simple_new       (void);
 
 #endif /* BAUL_SEARCH_ENGINE_SIMPLE_H */

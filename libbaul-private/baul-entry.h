@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* CajaEntry: one-line text editing widget. This consists of bug fixes
+/* BaulEntry: one-line text editing widget. This consists of bug fixes
  * and other improvements to GtkEntry, and all the changes could be rolled
  * into GtkEntry some day.
  *
@@ -35,39 +35,39 @@ extern "C" {
 
 #define BAUL_TYPE_ENTRY baul_entry_get_type()
 #define BAUL_ENTRY(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ENTRY, CajaEntry))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ENTRY, BaulEntry))
 #define BAUL_ENTRY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ENTRY, CajaEntryClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ENTRY, BaulEntryClass))
 #define BAUL_IS_ENTRY(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_ENTRY))
 #define BAUL_IS_ENTRY_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_ENTRY))
 #define BAUL_ENTRY_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ENTRY, CajaEntryClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ENTRY, BaulEntryClass))
 
-    typedef struct CajaEntryDetails CajaEntryDetails;
+    typedef struct BaulEntryDetails BaulEntryDetails;
 
     typedef struct
     {
         GtkEntry parent;
-        CajaEntryDetails *details;
-    } CajaEntry;
+        BaulEntryDetails *details;
+    } BaulEntry;
 
     typedef struct
     {
         GtkEntryClass parent_class;
 
-        void (*user_changed)      (CajaEntry *entry);
-        void (*selection_changed) (CajaEntry *entry);
-    } CajaEntryClass;
+        void (*user_changed)      (BaulEntry *entry);
+        void (*selection_changed) (BaulEntry *entry);
+    } BaulEntryClass;
 
     GType       baul_entry_get_type                 (void);
     GtkWidget  *baul_entry_new                      (void);
-    void        baul_entry_set_text                 (CajaEntry *entry,
+    void        baul_entry_set_text                 (BaulEntry *entry,
             const char    *text);
-    void        baul_entry_select_all               (CajaEntry *entry);
-    void        baul_entry_select_all_at_idle       (CajaEntry *entry);
-    void        baul_entry_set_special_tab_handling (CajaEntry *entry,
+    void        baul_entry_select_all               (BaulEntry *entry);
+    void        baul_entry_select_all_at_idle       (BaulEntry *entry);
+    void        baul_entry_set_special_tab_handling (BaulEntry *entry,
             gboolean       special_tab_handling);
 
 #ifdef __cplusplus

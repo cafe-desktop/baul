@@ -1,8 +1,8 @@
-		Caja dnd code.
+		Baul dnd code.
 		------------------
 
 
-Caja dnd code is pretty compilcated, it has a lot of entry points and exit points.
+Baul dnd code is pretty compilcated, it has a lot of entry points and exit points.
 Trying to clarify this now.
 
 You have to implement:

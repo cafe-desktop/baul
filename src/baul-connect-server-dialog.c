@@ -1,17 +1,17 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2003 Red Hat, Inc.
  * Copyright (C) 2010 Cosimo Cecchi <cosimoc@gnome.org>
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -45,9 +45,9 @@
  * - NetworkManager integration
  */
 
-struct _CajaConnectServerDialogPrivate
+struct _BaulConnectServerDialogPrivate
 {
-    CajaApplication *application;
+    BaulApplication *application;
 
     GtkWidget *primary_grid;
     GtkWidget *user_details;
@@ -79,13 +79,13 @@ struct _CajaConnectServerDialogPrivate
     gboolean should_destroy;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaConnectServerDialog, baul_connect_server_dialog,
+G_DEFINE_TYPE_WITH_PRIVATE (BaulConnectServerDialog, baul_connect_server_dialog,
 	       GTK_TYPE_DIALOG)
 
 static void sensitive_entry_changed_callback (GtkEditable *editable,
 					      GtkWidget *widget);
 static void iconized_entry_changed_cb (GtkEditable *entry,
-				       CajaConnectServerDialog *dialog);
+				       BaulConnectServerDialog *dialog);
 
 enum
 {
@@ -155,7 +155,7 @@ get_method_description (struct MethodInfo *meth)
 }
 
 static void
-connect_dialog_restore_info_bar (CajaConnectServerDialog *dialog,
+connect_dialog_restore_info_bar (BaulConnectServerDialog *dialog,
 				 GtkMessageType message_type)
 {
 	if (dialog->details->info_bar_content != NULL) {
@@ -168,7 +168,7 @@ connect_dialog_restore_info_bar (CajaConnectServerDialog *dialog,
 }
 
 static void
-connect_dialog_set_connecting (CajaConnectServerDialog *dialog)
+connect_dialog_set_connecting (BaulConnectServerDialog *dialog)
 {
 	GtkWidget *hbox;
 	GtkWidget *widget;
@@ -201,7 +201,7 @@ connect_dialog_set_connecting (CajaConnectServerDialog *dialog)
 }
 
 static void
-connect_dialog_gvfs_error (CajaConnectServerDialog *dialog)
+connect_dialog_gvfs_error (BaulConnectServerDialog *dialog)
 {
 	GtkWidget *hbox, *image, *content_area, *label;
 
@@ -233,7 +233,7 @@ iconized_entry_restore (gpointer data,
 			gpointer user_data)
 {
 	GtkEntry *entry;
-	CajaConnectServerDialog *dialog;
+	BaulConnectServerDialog *dialog;
 
 	entry = data;
 	dialog = user_data;
@@ -249,7 +249,7 @@ iconized_entry_restore (gpointer data,
 
 static void
 iconized_entry_changed_cb (GtkEditable *entry,
-			   CajaConnectServerDialog *dialog)
+			   BaulConnectServerDialog *dialog)
 {
 	dialog->details->iconized_entries =
 		g_list_remove (dialog->details->iconized_entries, entry);
@@ -258,7 +258,7 @@ iconized_entry_changed_cb (GtkEditable *entry,
 }
 
 static void
-iconize_entry (CajaConnectServerDialog *dialog,
+iconize_entry (BaulConnectServerDialog *dialog,
 	       GtkWidget *entry)
 {
 	if (!g_list_find (dialog->details->iconized_entries, entry)) {
@@ -277,7 +277,7 @@ iconize_entry (CajaConnectServerDialog *dialog,
 }
 
 static void
-connect_dialog_set_info_bar_error (CajaConnectServerDialog *dialog,
+connect_dialog_set_info_bar_error (BaulConnectServerDialog *dialog,
 				   GError *error)
 {
 	GtkWidget *content_area, *label, *entry, *hbox, *icon;
@@ -345,7 +345,7 @@ connect_dialog_set_info_bar_error (CajaConnectServerDialog *dialog,
 }
 
 static void
-connect_dialog_finish_fill (CajaConnectServerDialog *dialog)
+connect_dialog_finish_fill (BaulConnectServerDialog *dialog)
 {
 	GAskPasswordFlags flags;
 	GMountOperation *op;
@@ -383,7 +383,7 @@ connect_dialog_finish_fill (CajaConnectServerDialog *dialog)
 }
 
 static void
-connect_dialog_request_additional_details (CajaConnectServerDialog *self,
+connect_dialog_request_additional_details (BaulConnectServerDialog *self,
 					   GAskPasswordFlags flags,
 					   const gchar *default_user,
 					   const gchar *default_domain)
@@ -453,7 +453,7 @@ display_location_async_cb (GObject *source,
 			   GAsyncResult *res,
 			   gpointer user_data)
 {
-	CajaConnectServerDialog *dialog;
+	BaulConnectServerDialog *dialog;
 	GError *error;
 
 	dialog = BAUL_CONNECT_SERVER_DIALOG (source);
@@ -476,7 +476,7 @@ mount_enclosing_ready_cb (GObject *source,
 			  gpointer user_data)
 {
 	GFile *location;
-	CajaConnectServerDialog *dialog;
+	BaulConnectServerDialog *dialog;
 	GError *error;
 
 	error = NULL;
@@ -504,8 +504,8 @@ mount_enclosing_ready_cb (GObject *source,
 }
 
 static void
-connect_dialog_present_uri_async (CajaConnectServerDialog *self,
-				  CajaApplication *application,
+connect_dialog_present_uri_async (BaulConnectServerDialog *self,
+				  BaulApplication *application,
 				  GFile *location)
 {
 	GMountOperation *op;
@@ -518,7 +518,7 @@ connect_dialog_present_uri_async (CajaConnectServerDialog *self,
 }
 
 static void
-connect_dialog_connect_to_server (CajaConnectServerDialog *dialog)
+connect_dialog_connect_to_server (BaulConnectServerDialog *dialog)
 {
     struct MethodInfo *meth;
     GFile *location;
@@ -625,8 +625,8 @@ connect_dialog_connect_to_server (CajaConnectServerDialog *dialog)
     if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->details->bookmark_checkbox)))
     {
         char *name;
-        CajaBookmark *bookmark;
-        CajaBookmarkList *list;
+        BaulBookmark *bookmark;
+        BaulBookmarkList *list;
         GIcon *icon;
 
         name = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->name_entry), 0, -1);
@@ -650,7 +650,7 @@ connect_dialog_connect_to_server (CajaConnectServerDialog *dialog)
 }
 
 static void
-connect_to_server_or_finish_fill (CajaConnectServerDialog *dialog)
+connect_to_server_or_finish_fill (BaulConnectServerDialog *dialog)
 {
     if (dialog->details->fill_details_res != NULL) {
 		connect_dialog_finish_fill (dialog);
@@ -660,7 +660,7 @@ connect_to_server_or_finish_fill (CajaConnectServerDialog *dialog)
 }
 
 static gboolean
-connect_dialog_abort_mount_operation (CajaConnectServerDialog *dialog)
+connect_dialog_abort_mount_operation (BaulConnectServerDialog *dialog)
 {
     if (dialog->details->fill_details_res != NULL) {
     	g_simple_async_result_set_op_res_gboolean (dialog->details->fill_details_res, FALSE);
@@ -681,7 +681,7 @@ connect_dialog_abort_mount_operation (CajaConnectServerDialog *dialog)
 }
 
 static void
-connect_dialog_destroy (CajaConnectServerDialog *dialog)
+connect_dialog_destroy (BaulConnectServerDialog *dialog)
 {
 	if (connect_dialog_abort_mount_operation (dialog)) {
     	dialog->details->should_destroy = TRUE;
@@ -691,7 +691,7 @@ connect_dialog_destroy (CajaConnectServerDialog *dialog)
 }
 
 static void
-connect_dialog_response_cb (CajaConnectServerDialog *dialog,
+connect_dialog_response_cb (BaulConnectServerDialog *dialog,
 			    int response_id,
 			    gpointer data)
 {
@@ -725,7 +725,7 @@ connect_dialog_response_cb (CajaConnectServerDialog *dialog,
 }
 
 static void
-connect_dialog_cleanup (CajaConnectServerDialog *dialog)
+connect_dialog_cleanup (BaulConnectServerDialog *dialog)
 {
 	/* hide the infobar */
 	gtk_widget_hide (dialog->details->info_bar);
@@ -757,7 +757,7 @@ connect_dialog_cleanup (CajaConnectServerDialog *dialog)
 }
 
 static void
-connect_dialog_setup_for_type (CajaConnectServerDialog *dialog)
+connect_dialog_setup_for_type (BaulConnectServerDialog *dialog)
 {
     struct MethodInfo *meth;
     int index;
@@ -826,7 +826,7 @@ sensitive_entry_changed_callback (GtkEditable *editable,
 }
 
 static void
-bind_visibility (CajaConnectServerDialog *dialog,
+bind_visibility (BaulConnectServerDialog *dialog,
 		 GtkWidget *source,
 		 GtkWidget *dest)
 {
@@ -838,7 +838,7 @@ bind_visibility (CajaConnectServerDialog *dialog,
 }
 
 static void
-baul_connect_server_dialog_init (CajaConnectServerDialog *dialog)
+baul_connect_server_dialog_init (BaulConnectServerDialog *dialog)
 {
     GtkWidget *label;
     GtkWidget *content_area;
@@ -1143,7 +1143,7 @@ baul_connect_server_dialog_init (CajaConnectServerDialog *dialog)
 static void
 baul_connect_server_dialog_finalize (GObject *object)
 {
-	CajaConnectServerDialog *dialog;
+	BaulConnectServerDialog *dialog;
 
 	dialog = BAUL_CONNECT_SERVER_DIALOG (object);
 
@@ -1158,7 +1158,7 @@ baul_connect_server_dialog_finalize (GObject *object)
 }
 
 static void
-baul_connect_server_dialog_class_init (CajaConnectServerDialogClass *class)
+baul_connect_server_dialog_class_init (BaulConnectServerDialogClass *class)
 {
 	GObjectClass *oclass;
 
@@ -1167,9 +1167,9 @@ baul_connect_server_dialog_class_init (CajaConnectServerDialogClass *class)
 }
 
 GtkWidget *
-baul_connect_server_dialog_new (CajaWindow *window)
+baul_connect_server_dialog_new (BaulWindow *window)
 {
-    CajaConnectServerDialog *conndlg;
+    BaulConnectServerDialog *conndlg;
     GtkWidget *dialog;
 
     dialog = gtk_widget_new (BAUL_TYPE_CONNECT_SERVER_DIALOG, NULL);
@@ -1186,14 +1186,14 @@ baul_connect_server_dialog_new (CajaWindow *window)
 }
 
 gboolean
-baul_connect_server_dialog_fill_details_finish (CajaConnectServerDialog *self,
+baul_connect_server_dialog_fill_details_finish (BaulConnectServerDialog *self,
 						    GAsyncResult *result)
 {
 	return g_simple_async_result_get_op_res_gboolean (G_SIMPLE_ASYNC_RESULT (result));
 }
 
 void
-baul_connect_server_dialog_fill_details_async (CajaConnectServerDialog *self,
+baul_connect_server_dialog_fill_details_async (BaulConnectServerDialog *self,
 						   GMountOperation *operation,
 						   const gchar *default_user,
 						   const gchar *default_domain,

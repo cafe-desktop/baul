@@ -30,28 +30,28 @@ G_BEGIN_DECLS
 
 #define BAUL_TYPE_IMAGE_PROPERTIES_PAGE baul_image_properties_page_get_type()
 #define BAUL_IMAGE_PROPERTIES_PAGE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPage))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, BaulImagePropertiesPage))
 #define BAUL_IMAGE_PROPERTIES_PAGE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPageClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, BaulImagePropertiesPageClass))
 #define BAUL_IS_IMAGE_PROPERTIES_PAGE(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_IMAGE_PROPERTIES_PAGE))
 #define BAUL_IS_IMAGE_PROPERTIES_PAGE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_IMAGE_PROPERTIES_PAGE))
 #define BAUL_IMAGE_PROPERTIES_PAGE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPageClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, BaulImagePropertiesPageClass))
 
-typedef struct _CajaImagePropertiesPagePrivate CajaImagePropertiesPagePrivate;
+typedef struct _BaulImagePropertiesPagePrivate BaulImagePropertiesPagePrivate;
 
 typedef struct
 {
     GtkBox parent;
-    CajaImagePropertiesPagePrivate *details;
-} CajaImagePropertiesPage;
+    BaulImagePropertiesPagePrivate *details;
+} BaulImagePropertiesPage;
 
 typedef struct
 {
     GtkBoxClass parent;
-} CajaImagePropertiesPageClass;
+} BaulImagePropertiesPageClass;
 
 GType baul_image_properties_page_get_type (void);
 void  baul_image_properties_page_register (void);

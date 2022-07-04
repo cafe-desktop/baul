@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000, 2001 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -63,14 +63,14 @@
 #define RESPONSE_FORGET		1000
 #define MENU_ITEM_MAX_WIDTH_CHARS 32
 
-static void                  schedule_refresh_go_menu                      (CajaNavigationWindow   *window);
+static void                  schedule_refresh_go_menu                      (BaulNavigationWindow   *window);
 
 
 static void
 action_close_all_windows_callback (GtkAction *action,
                                    gpointer user_data)
 {
-    CajaApplication *app;
+    BaulApplication *app;
 
     app = BAUL_APPLICATION (g_application_get_default ());
     baul_application_close_all_navigation_windows (app);
@@ -126,7 +126,7 @@ forget_history_if_yes (GtkDialog *dialog, int response, gpointer callback_data)
 }
 
 static void
-forget_history_if_confirmed (CajaWindow *window)
+forget_history_if_confirmed (BaulWindow *window)
 {
     GtkDialog *dialog;
 
@@ -163,8 +163,8 @@ static void
 action_split_view_same_location_callback (GtkAction *action,
         gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindowPane *next_pane;
+    BaulWindow *window;
+    BaulWindowPane *next_pane;
     GFile *location;
 
     window = BAUL_WINDOW (user_data);
@@ -186,7 +186,7 @@ static void
 action_show_hide_toolbar_callback (GtkAction *action,
                                    gpointer user_data)
 {
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
@@ -208,7 +208,7 @@ static void
 action_show_hide_sidebar_callback (GtkAction *action,
                                    gpointer user_data)
 {
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
@@ -225,7 +225,7 @@ action_show_hide_sidebar_callback (GtkAction *action,
 }
 
 static void
-pane_show_hide_location_bar (CajaNavigationWindowPane *pane, gboolean is_active)
+pane_show_hide_location_bar (BaulNavigationWindowPane *pane, gboolean is_active)
 {
     if (baul_navigation_window_pane_location_bar_showing (pane) != is_active)
     {
@@ -244,7 +244,7 @@ static void
 action_show_hide_location_bar_callback (GtkAction *action,
                                         gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GList *walk;
     gboolean is_active;
 
@@ -268,7 +268,7 @@ static void
 action_show_hide_statusbar_callback (GtkAction *action,
                                      gpointer user_data)
 {
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
@@ -288,7 +288,7 @@ static void
 action_split_view_callback (GtkAction *action,
                             gpointer user_data)
 {
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
     gboolean is_active;
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
@@ -298,7 +298,7 @@ action_split_view_callback (GtkAction *action,
     G_GNUC_END_IGNORE_DEPRECATIONS;
     if (is_active != baul_navigation_window_split_view_showing (window))
     {
-        CajaWindow *baul_window;
+        BaulWindow *baul_window;
 
         if (is_active)
         {
@@ -317,7 +317,7 @@ action_split_view_callback (GtkAction *action,
 }
 
 void
-baul_navigation_window_update_show_hide_menu_items (CajaNavigationWindow *window)
+baul_navigation_window_update_show_hide_menu_items (BaulNavigationWindow *window)
 {
     GtkAction *action;
 
@@ -352,7 +352,7 @@ baul_navigation_window_update_show_hide_menu_items (CajaNavigationWindow *window
 }
 
 void
-baul_navigation_window_update_spatial_menu_item (CajaNavigationWindow *window)
+baul_navigation_window_update_spatial_menu_item (BaulNavigationWindow *window)
 {
     GtkAction *action;
 
@@ -381,7 +381,7 @@ action_edit_bookmarks_callback (GtkAction *action,
 }
 
 void
-baul_navigation_window_remove_go_menu_callback (CajaNavigationWindow *window)
+baul_navigation_window_remove_go_menu_callback (BaulNavigationWindow *window)
 {
     if (window->details->refresh_go_menu_idle_id != 0)
     {
@@ -391,7 +391,7 @@ baul_navigation_window_remove_go_menu_callback (CajaNavigationWindow *window)
 }
 
 void
-baul_navigation_window_remove_go_menu_items (CajaNavigationWindow *window)
+baul_navigation_window_remove_go_menu_items (BaulNavigationWindow *window)
 {
     GtkUIManager *ui_manager;
 
@@ -411,8 +411,8 @@ baul_navigation_window_remove_go_menu_items (CajaNavigationWindow *window)
 }
 
 static void
-show_bogus_history_window (CajaWindow *window,
-                           CajaBookmark *bookmark)
+show_bogus_history_window (BaulWindow *window,
+                           BaulBookmark *bookmark)
 {
     GFile *file;
     char *uri_for_display;
@@ -454,10 +454,10 @@ connect_proxy_cb (GtkActionGroup *action_group,
  * refresh_go_menu:
  *
  * Refresh list of bookmarks at end of Go menu to match centralized history list.
- * @window: The CajaWindow whose Go menu will be refreshed.
+ * @window: The BaulWindow whose Go menu will be refreshed.
  **/
 static void
-refresh_go_menu (CajaNavigationWindow *window)
+refresh_go_menu (BaulNavigationWindow *window)
 {
     GtkUIManager *ui_manager;
     GList *node;
@@ -515,7 +515,7 @@ refresh_go_menu_idle_callback (gpointer data)
 }
 
 static void
-schedule_refresh_go_menu (CajaNavigationWindow *window)
+schedule_refresh_go_menu (BaulNavigationWindow *window)
 {
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
@@ -533,7 +533,7 @@ schedule_refresh_go_menu (CajaNavigationWindow *window)
  * Wire up signals so we'll be notified when history list changes.
  */
 static void
-baul_navigation_window_initialize_go_menu (CajaNavigationWindow *window)
+baul_navigation_window_initialize_go_menu (BaulNavigationWindow *window)
 {
     /* Recreate bookmarks part of menu if history list changes
      */
@@ -542,16 +542,16 @@ baul_navigation_window_initialize_go_menu (CajaNavigationWindow *window)
 }
 
 void
-baul_navigation_window_update_split_view_actions_sensitivity (CajaNavigationWindow *window)
+baul_navigation_window_update_split_view_actions_sensitivity (BaulNavigationWindow *window)
 {
-    CajaWindow *win;
+    BaulWindow *win;
     GtkActionGroup *action_group;
     GtkAction *action;
     gboolean have_multiple_panes;
     gboolean next_pane_is_in_same_location;
     GFile *active_pane_location;
     GFile *next_pane_location;
-    CajaWindowPane *next_pane;
+    BaulWindowPane *next_pane;
 
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
@@ -606,7 +606,7 @@ static void
 action_new_window_callback (GtkAction *action,
                             gpointer user_data)
 {
-    CajaWindow *current_window;
+    BaulWindow *current_window;
 
     current_window = BAUL_WINDOW (user_data);   
     baul_window_new_window (current_window);
@@ -617,7 +617,7 @@ static void
 action_new_tab_callback (GtkAction *action,
                          gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (user_data);
     baul_window_new_tab (window);
@@ -627,8 +627,8 @@ static void
 action_folder_window_callback (GtkAction *action,
                                gpointer user_data)
 {
-    CajaWindow *current_window, *window;
-    CajaWindowSlot *slot;
+    BaulWindow *current_window, *window;
+    BaulWindowSlot *slot;
     GFile *current_location;
 
     current_window = BAUL_WINDOW (user_data);
@@ -654,7 +654,7 @@ static void
 action_go_to_location_callback (GtkAction *action,
                                 gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (user_data);
 
@@ -668,7 +668,7 @@ action_show_search_callback (GtkAction *action,
                              gpointer user_data)
 {
     GtkAction *search_action;
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
@@ -696,7 +696,7 @@ action_show_hide_search_callback (GtkAction *action,
                                   gpointer user_data)
 {
     gboolean var_action;
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
 
     /* This is used when toggling the action for updating the UI
        state only, not actually activating the action */
@@ -717,7 +717,7 @@ action_show_hide_search_callback (GtkAction *action,
     }
     else
     {
-        CajaWindowSlot *slot;
+        BaulWindowSlot *slot;
         GFile *location = NULL;
 
         slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
@@ -730,7 +730,7 @@ action_show_hide_search_callback (GtkAction *action,
         }
         else
         {
-            CajaQuery *query;
+            BaulQuery *query;
 
             query = baul_query_editor_get_query (slot->query_editor);
             if (query != NULL)
@@ -764,7 +764,7 @@ static void
 action_tabs_previous_callback (GtkAction *action,
                                gpointer user_data)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (BAUL_WINDOW (user_data)->details->active_pane);
     baul_notebook_set_current_page_relative (BAUL_NOTEBOOK (pane->notebook), -1);
@@ -774,7 +774,7 @@ static void
 action_tabs_next_callback (GtkAction *action,
                            gpointer user_data)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (BAUL_WINDOW (user_data)->details->active_pane);
     baul_notebook_set_current_page_relative (BAUL_NOTEBOOK (pane->notebook), 1);
@@ -784,7 +784,7 @@ static void
 action_tabs_move_left_callback (GtkAction *action,
                                 gpointer user_data)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (BAUL_WINDOW (user_data)->details->active_pane);
     baul_notebook_reorder_current_child_relative (BAUL_NOTEBOOK (pane->notebook), -1);
@@ -794,7 +794,7 @@ static void
 action_tabs_move_right_callback (GtkAction *action,
                                  gpointer user_data)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (BAUL_WINDOW (user_data)->details->active_pane);
     baul_notebook_reorder_current_child_relative (BAUL_NOTEBOOK (pane->notebook), 1);
@@ -803,7 +803,7 @@ action_tabs_move_right_callback (GtkAction *action,
 static void
 action_tab_change_action_activate_callback (GtkAction *action, gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (user_data);
     if (window && window->details->active_pane)
@@ -828,7 +828,7 @@ static const GtkActionEntry navigation_entries[] =
     /* name, icon name, label */ { "Bookmarks", NULL, N_("_Bookmarks") },
     /* name, icon name, label */ { "Tabs", NULL, N_("_Tabs") },
     /* name, icon name, label */ { "New Window", "window-new", N_("New _Window"),
-        "<control>N", N_("Open another Caja window for the displayed location"),
+        "<control>N", N_("Open another Baul window for the displayed location"),
         G_CALLBACK (action_new_window_callback)
     },
     /* name, icon name, label */ { "New Tab", "tab-new", N_("New _Tab"),
@@ -937,7 +937,7 @@ static const GtkToggleActionEntry navigation_toggle_entries[] =
 };
 
 void
-baul_navigation_window_initialize_actions (CajaNavigationWindow *window)
+baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
 {
     GtkActionGroup *action_group;
     GtkUIManager *ui_manager;
@@ -1062,10 +1062,10 @@ baul_navigation_window_initialize_actions (CajaNavigationWindow *window)
  * baul_window_initialize_menus
  *
  * Create and install the set of menus for this window.
- * @window: A recently-created CajaWindow.
+ * @window: A recently-created BaulWindow.
  */
 void
-baul_navigation_window_initialize_menus (CajaNavigationWindow *window)
+baul_navigation_window_initialize_menus (BaulNavigationWindow *window)
 {
     GtkUIManager *ui_manager;
     const char *ui;

@@ -49,7 +49,7 @@ enum
 
 static guint tree_model_signals[LAST_SIGNAL] = { 0 };
 
-typedef gboolean (* FilePredicate) (CajaFile *);
+typedef gboolean (* FilePredicate) (BaulFile *);
 
 /* The user_data of the GtkTreeIter is the TreeNode pointer.
  * It's NULL for the dummy node. If it's NULL, then user_data2
@@ -64,7 +64,7 @@ struct TreeNode
     /* part of this node for the file itself */
     int ref_count;
 
-    CajaFile *file;
+    BaulFile *file;
     char *display_name;
     GIcon *icon;
     GMount *mount;
@@ -81,7 +81,7 @@ struct TreeNode
     int dummy_child_ref_count;
     int all_children_ref_count;
 
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     guint done_loading_id;
     guint files_added_id;
     guint files_changed_id;
@@ -121,7 +121,7 @@ struct FMTreeModelRoot
 
 typedef struct
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     FMTreeModel *model;
 } DoneLoadingParameters;
 
@@ -165,7 +165,7 @@ tree_model_root_new (FMTreeModel *model)
 }
 
 static TreeNode *
-tree_node_new (CajaFile *file, FMTreeModelRoot *root)
+tree_node_new (BaulFile *file, FMTreeModelRoot *root)
 {
     TreeNode *node;
 
@@ -264,7 +264,7 @@ tree_node_parent (TreeNode *node, TreeNode *parent)
 static cairo_surface_t *
 get_menu_icon (GIcon *icon)
 {
-    CajaIconInfo *info;
+    BaulIconInfo *info;
     cairo_surface_t *surface;
     int size, scale;
 
@@ -280,10 +280,10 @@ get_menu_icon (GIcon *icon)
 
 static cairo_surface_t *
 get_menu_icon_for_file (TreeNode *node,
-                        CajaFile *file,
-                        CajaFileIconFlags flags)
+                        BaulFile *file,
+                        BaulFileIconFlags flags)
 {
-    CajaIconInfo *info;
+    BaulIconInfo *info;
     GEmblem *emblem;
     cairo_surface_t *surface, *retval;
     gboolean highlight;
@@ -359,7 +359,7 @@ get_menu_icon_for_file (TreeNode *node,
 
 static cairo_surface_t *
 tree_node_get_surface (TreeNode *node,
-                       CajaFileIconFlags flags)
+                       BaulFileIconFlags flags)
 {
     if (node->parent == NULL)
     {
@@ -371,7 +371,7 @@ tree_node_get_surface (TreeNode *node,
 static gboolean
 tree_node_update_surface (TreeNode *node,
                          cairo_surface_t **surface_storage,
-                         CajaFileIconFlags flags)
+                         BaulFileIconFlags flags)
 {
     cairo_surface_t *surface;
 
@@ -530,15 +530,15 @@ make_iter_for_dummy_row (TreeNode *parent, GtkTreeIter *iter, int stamp)
 }
 
 static TreeNode *
-get_node_from_file (FMTreeModelRoot *root, CajaFile *file)
+get_node_from_file (FMTreeModelRoot *root, BaulFile *file)
 {
     return g_hash_table_lookup (root->file_to_node_map, file);
 }
 
 static TreeNode *
-get_parent_node_from_file (FMTreeModelRoot *root, CajaFile *file)
+get_parent_node_from_file (FMTreeModelRoot *root, BaulFile *file)
 {
-    CajaFile *parent_file;
+    BaulFile *parent_file;
     TreeNode *parent_node;
 
     parent_file = baul_file_get_parent (file);
@@ -548,7 +548,7 @@ get_parent_node_from_file (FMTreeModelRoot *root, CajaFile *file)
 }
 
 static TreeNode *
-create_node_for_file (FMTreeModelRoot *root, CajaFile *file)
+create_node_for_file (FMTreeModelRoot *root, BaulFile *file)
 {
     TreeNode *node;
 
@@ -959,7 +959,7 @@ reparent_node (FMTreeModel *model, TreeNode *node)
 }
 
 static gboolean
-should_show_file (FMTreeModel *model, CajaFile *file)
+should_show_file (FMTreeModel *model, BaulFile *file)
 {
     gboolean should;
     TreeNode *node;
@@ -1048,7 +1048,7 @@ update_node (FMTreeModel *model, TreeNode *node)
 
 static void
 process_file_change (FMTreeModelRoot *root,
-                     CajaFile *file)
+                     BaulFile *file)
 {
     TreeNode *node, *parent;
 
@@ -1074,7 +1074,7 @@ process_file_change (FMTreeModelRoot *root,
 }
 
 static void
-files_changed_callback (CajaDirectory *directory,
+files_changed_callback (BaulDirectory *directory,
                         GList *changed_files,
                         gpointer callback_data)
 {
@@ -1132,10 +1132,10 @@ set_done_loading (FMTreeModel *model, TreeNode *node, gboolean done_loading)
 }
 
 static void
-done_loading_callback (CajaDirectory *directory,
+done_loading_callback (BaulDirectory *directory,
                        FMTreeModelRoot *root)
 {
-    CajaFile *file;
+    BaulFile *file;
     TreeNode *node;
     GtkTreeIter iter;
 
@@ -1159,10 +1159,10 @@ done_loading_callback (CajaDirectory *directory,
                    &iter);
 }
 
-static CajaFileAttributes
+static BaulFileAttributes
 get_tree_monitor_attributes (void)
 {
-    CajaFileAttributes attributes;
+    BaulFileAttributes attributes;
 
     attributes =
         BAUL_FILE_ATTRIBUTES_FOR_ICON |
@@ -1175,8 +1175,8 @@ get_tree_monitor_attributes (void)
 static void
 start_monitoring_directory (FMTreeModel *model, TreeNode *node)
 {
-    CajaDirectory *directory;
-    CajaFileAttributes attributes;
+    BaulDirectory *directory;
+    BaulFileAttributes attributes;
 
     if (node->done_loading_id != 0)
     {
@@ -1721,7 +1721,7 @@ fm_tree_model_unref_node (GtkTreeModel *model, GtkTreeIter *iter)
 void
 fm_tree_model_add_root_uri (FMTreeModel *model, const char *root_uri, const char *display_name, GIcon *icon, GMount *mount)
 {
-    CajaFile *file;
+    BaulFile *file;
     TreeNode *node, *cnode;
     FMTreeModelRoot *newroot;
 
@@ -1756,7 +1756,7 @@ fm_tree_model_add_root_uri (FMTreeModel *model, const char *root_uri, const char
 }
 
 GMount *
-fm_tree_model_get_mount_for_root_node_file (FMTreeModel *model, CajaFile *file)
+fm_tree_model_get_mount_for_root_node_file (FMTreeModel *model, BaulFile *file)
 {
     TreeNode *node;
 
@@ -1780,7 +1780,7 @@ void
 fm_tree_model_remove_root_uri (FMTreeModel *model, const char *uri)
 {
     TreeNode *node;
-    CajaFile *file;
+    BaulFile *file;
 
     file = baul_file_get_by_uri (uri);
     for (node = model->details->root_node; node != NULL; node = node->next)
@@ -1865,7 +1865,7 @@ fm_tree_model_set_show_hidden_files (FMTreeModel *model,
 }
 
 static gboolean
-file_is_not_directory (CajaFile *file)
+file_is_not_directory (BaulFile *file)
 {
     return !baul_file_is_directory (file);
 }
@@ -1891,7 +1891,7 @@ fm_tree_model_set_show_only_directories (FMTreeModel *model,
     schedule_monitoring_update (model);
 }
 
-CajaFile *
+BaulFile *
 fm_tree_model_iter_get_file (FMTreeModel *model, GtkTreeIter *iter)
 {
     TreeNode *node;
@@ -1962,7 +1962,7 @@ fm_tree_model_iter_is_root (FMTreeModel *model, GtkTreeIter *iter)
 gboolean
 fm_tree_model_file_get_iter (FMTreeModel *model,
                              GtkTreeIter *iter,
-                             CajaFile *file,
+                             BaulFile *file,
                              GtkTreeIter *current_iter)
 {
     TreeNode *node, *root_node;
@@ -1985,7 +1985,7 @@ fm_tree_model_file_get_iter (FMTreeModel *model,
 }
 
 static void
-do_update_node (CajaFile *file,
+do_update_node (BaulFile *file,
                 FMTreeModel *model)
 {
     TreeNode *root, *node = NULL;

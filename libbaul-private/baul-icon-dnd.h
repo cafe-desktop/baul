@@ -35,23 +35,23 @@
 typedef struct
 {
     /* inherited drag info context */
-    CajaDragInfo drag_info;
+    BaulDragInfo drag_info;
 
     gboolean highlighted;
 
     /* Shadow for the icons being dragged.  */
     EelCanvasItem *shadow;
-} CajaIconDndInfo;
+} BaulIconDndInfo;
 
 
-void   baul_icon_dnd_init                  (CajaIconContainer *container);
-void   baul_icon_dnd_fini                  (CajaIconContainer *container);
-void   baul_icon_dnd_begin_drag            (CajaIconContainer *container,
+void   baul_icon_dnd_init                  (BaulIconContainer *container);
+void   baul_icon_dnd_fini                  (BaulIconContainer *container);
+void   baul_icon_dnd_begin_drag            (BaulIconContainer *container,
         GdkDragAction          actions,
         gint                   button,
         GdkEventMotion        *event,
         int                    start_x,
         int                    start_y);
-void   baul_icon_dnd_end_drag              (CajaIconContainer *container);
+void   baul_icon_dnd_end_drag              (BaulIconContainer *container);
 
 #endif /* BAUL_ICON_DND_H */

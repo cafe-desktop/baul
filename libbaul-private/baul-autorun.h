@@ -1,11 +1,11 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2008 Red Hat, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
@@ -46,32 +46,32 @@
 
 #include "baul-file.h"
 
-typedef void (*CajaAutorunComboBoxChanged) (gboolean selected_ask,
+typedef void (*BaulAutorunComboBoxChanged) (gboolean selected_ask,
         gboolean selected_ignore,
         gboolean selected_open_folder,
         GAppInfo *selected_app,
         gpointer user_data);
 
-typedef void (*CajaAutorunOpenWindow) (GMount *mount, gpointer user_data);
-typedef void (*CajaAutorunGetContent) (char **content, gpointer user_data);
+typedef void (*BaulAutorunOpenWindow) (GMount *mount, gpointer user_data);
+typedef void (*BaulAutorunGetContent) (char **content, gpointer user_data);
 
 void baul_autorun_prepare_combo_box (GtkWidget *combo_box,
                                      const char *x_content_type,
                                      gboolean include_ask,
                                      gboolean include_open_with_other_app,
                                      gboolean update_settings,
-                                     CajaAutorunComboBoxChanged changed_cb,
+                                     BaulAutorunComboBoxChanged changed_cb,
                                      gpointer user_data);
 
 void baul_autorun_set_preferences (const char *x_content_type, gboolean pref_ask, gboolean pref_ignore, gboolean pref_open_folder);
 void baul_autorun_get_preferences (const char *x_content_type, gboolean *pref_ask, gboolean *pref_ignore, gboolean *pref_open_folder);
 
-void baul_autorun (GMount *mount, CajaAutorunOpenWindow open_window_func, gpointer user_data);
+void baul_autorun (GMount *mount, BaulAutorunOpenWindow open_window_func, gpointer user_data);
 
 char **baul_autorun_get_cached_x_content_types_for_mount (GMount       *mount);
 
 void baul_autorun_get_x_content_types_for_mount_async (GMount *mount,
-        CajaAutorunGetContent callback,
+        BaulAutorunGetContent callback,
         GCancellable *cancellable,
         gpointer user_data);
 

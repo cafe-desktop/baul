@@ -80,9 +80,9 @@ struct FMListViewDetails
     GList *cells;
     GtkCellEditable *editable_widget;
 
-    CajaZoomLevel zoom_level;
+    BaulZoomLevel zoom_level;
 
-    CajaTreeViewDragDest *drag_dest;
+    BaulTreeViewDragDest *drag_dest;
 
     GtkTreePath *double_click_path[2]; /* Both clicks in a double click need to be on the same row */
 
@@ -107,7 +107,7 @@ struct FMListViewDetails
 
     char *original_name;
 
-    CajaFile *renaming_file;
+    BaulFile *renaming_file;
     gboolean rename_done;
     guint renaming_file_activate_timeout;
 
@@ -136,9 +136,9 @@ struct SelectionForeachData
 #define WAIT_FOR_RENAME_ON_ACTIVATE 200
 
 static int                      click_policy_auto_value;
-static CajaFileSortType         default_sort_order_auto_value;
+static BaulFileSortType         default_sort_order_auto_value;
 static gboolean			default_sort_reversed_auto_value;
-static CajaZoomLevel        default_zoom_level_auto_value;
+static BaulZoomLevel        default_zoom_level_auto_value;
 static char **                  default_visible_columns_auto_value;
 static char **                  default_column_order_auto_value;
 static GdkCursor *              hand_cursor = NULL;
@@ -148,14 +148,14 @@ static GtkTargetList *          source_target_list = NULL;
 static GList *fm_list_view_get_selection                   (FMDirectoryView   *view);
 static GList *fm_list_view_get_selection_for_file_transfer (FMDirectoryView   *view);
 static void   fm_list_view_set_zoom_level                  (FMListView        *view,
-        CajaZoomLevel  new_level,
+        BaulZoomLevel  new_level,
         gboolean           always_set_level);
 static void   fm_list_view_scale_font_size                 (FMListView        *view,
-        CajaZoomLevel  new_level);
+        BaulZoomLevel  new_level);
 static void   fm_list_view_scroll_to_file                  (FMListView        *view,
-        CajaFile      *file);
-static void   fm_list_view_iface_init                      (CajaViewIface *iface);
-static void   fm_list_view_rename_callback                 (CajaFile      *file,
+        BaulFile      *file);
+static void   fm_list_view_iface_init                      (BaulViewIface *iface);
+static void   fm_list_view_rename_callback                 (BaulFile      *file,
         GFile             *result_location,
         GError            *error,
         gpointer           callback_data);
@@ -179,7 +179,7 @@ static const char * default_trash_columns_order[] =
 #define parent_class fm_list_view_parent_class
 
 static const gchar*
-get_default_sort_order (CajaFile *file, gboolean *reversed)
+get_default_sort_order (BaulFile *file, gboolean *reversed)
 {
     const gchar *retval;
     const char *attributes[] = {
@@ -283,11 +283,11 @@ activate_selected_items (FMListView *view)
 
 static void
 activate_selected_items_alternate (FMListView *view,
-                                   CajaFile *file,
+                                   BaulFile *file,
                                    gboolean open_in_tab)
 {
     GList *file_list;
-    CajaWindowOpenFlags flags;
+    BaulWindowOpenFlags flags;
 
     flags = BAUL_WINDOW_OPEN_FLAG_CLOSE_BEHIND;
 
@@ -770,7 +770,7 @@ button_press_callback (GtkWidget *widget, GdkEventButton *event, gpointer callba
                 else if (event->button == 1 &&
                          (event->state & GDK_SHIFT_MASK) != 0)
                 {
-                    CajaFile *file;
+                    BaulFile *file;
                     file = fm_list_model_file_for_path (view->details->model, path);
                     if (file != NULL)
                     {
@@ -942,7 +942,7 @@ popup_menu_callback (GtkWidget *widget, gpointer callback_data)
 }
 
 static void
-subdirectory_done_loading_callback (CajaDirectory *directory, FMListView *view)
+subdirectory_done_loading_callback (BaulDirectory *directory, FMListView *view)
 {
     fm_list_model_subdirectory_done_loading (view->details->model, directory);
 }
@@ -951,7 +951,7 @@ static void
 row_expanded_callback (GtkTreeView *treeview, GtkTreeIter *iter, GtkTreePath *path, gpointer callback_data)
 {
     FMListView *view;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     view = FM_LIST_VIEW (callback_data);
 
@@ -986,8 +986,8 @@ row_expanded_callback (GtkTreeView *treeview, GtkTreeIter *iter, GtkTreePath *pa
 
 struct UnloadDelayData
 {
-    CajaFile *file;
-    CajaDirectory *directory;
+    BaulFile *file;
+    BaulDirectory *directory;
     FMListView *view;
 };
 
@@ -1036,8 +1036,8 @@ static void
 row_collapsed_callback (GtkTreeView *treeview, GtkTreeIter *iter, GtkTreePath *path, gpointer callback_data)
 {
     FMListView *view;
-    CajaFile *file;
-    CajaDirectory *directory;
+    BaulFile *file;
+    BaulDirectory *directory;
     GtkTreeIter parent;
     struct UnloadDelayData *unload_data;
     GtkTreeModel *model;
@@ -1087,7 +1087,7 @@ row_activated_callback (GtkTreeView *treeview, GtkTreePath *path,
 
 static void
 subdirectory_unloaded_callback (FMListModel *model,
-                                CajaDirectory *directory,
+                                BaulDirectory *directory,
                                 gpointer callback_data)
 {
     FMListView *view;
@@ -1224,7 +1224,7 @@ fm_list_view_reveal_selection (FMDirectoryView *view)
     if (selection != NULL)
     {
         FMListView *list_view;
-        CajaFile *file;
+        BaulFile *file;
         GtkTreeIter iter;
 
         list_view = FM_LIST_VIEW (view);
@@ -1277,7 +1277,7 @@ static void
 sort_column_changed_callback (GtkTreeSortable *sortable,
                               FMListView *view)
 {
-    CajaFile *file;
+    BaulFile *file;
     gint sort_column_id, default_sort_column_id;
     GtkSortType reversed;
     GQuark sort_attr, default_sort_attr;
@@ -1372,7 +1372,7 @@ cell_renderer_edited (GtkCellRendererText *cell,
                       FMListView          *view)
 {
     GtkTreePath *path;
-    CajaFile *file;
+    BaulFile *file;
     GtkTreeIter iter;
 
     view->details->editable_widget = NULL;
@@ -1422,7 +1422,7 @@ cell_renderer_edited (GtkCellRendererText *cell,
 }
 
 static char *
-get_root_uri_callback (CajaTreeViewDragDest *dest,
+get_root_uri_callback (BaulTreeViewDragDest *dest,
                        gpointer user_data)
 {
     FMListView *view;
@@ -1432,8 +1432,8 @@ get_root_uri_callback (CajaTreeViewDragDest *dest,
     return fm_directory_view_get_uri (FM_DIRECTORY_VIEW (view));
 }
 
-static CajaFile *
-get_file_for_path_callback (CajaTreeViewDragDest *dest,
+static BaulFile *
+get_file_for_path_callback (BaulTreeViewDragDest *dest,
                             GtkTreePath *path,
                             gpointer user_data)
 {
@@ -1446,7 +1446,7 @@ get_file_for_path_callback (CajaTreeViewDragDest *dest,
 
 /* Handles an URL received from Mozilla */
 static void
-list_view_handle_netscape_url (CajaTreeViewDragDest *dest, const char *encoded_url,
+list_view_handle_netscape_url (BaulTreeViewDragDest *dest, const char *encoded_url,
                                const char *target_uri, GdkDragAction action, int x, int y, FMListView *view)
 {
     fm_directory_view_handle_netscape_url_drop (FM_DIRECTORY_VIEW (view),
@@ -1454,7 +1454,7 @@ list_view_handle_netscape_url (CajaTreeViewDragDest *dest, const char *encoded_u
 }
 
 static void
-list_view_handle_uri_list (CajaTreeViewDragDest *dest, const char *item_uris,
+list_view_handle_uri_list (BaulTreeViewDragDest *dest, const char *item_uris,
                            const char *target_uri,
                            GdkDragAction action, int x, int y, FMListView *view)
 {
@@ -1463,7 +1463,7 @@ list_view_handle_uri_list (CajaTreeViewDragDest *dest, const char *item_uris,
 }
 
 static void
-list_view_handle_text (CajaTreeViewDragDest *dest, const char *text,
+list_view_handle_text (BaulTreeViewDragDest *dest, const char *text,
                        const char *target_uri,
                        GdkDragAction action, int x, int y, FMListView *view)
 {
@@ -1472,7 +1472,7 @@ list_view_handle_text (CajaTreeViewDragDest *dest, const char *text,
 }
 
 static void
-list_view_handle_raw (CajaTreeViewDragDest *dest, const char *raw_data,
+list_view_handle_raw (BaulTreeViewDragDest *dest, const char *raw_data,
                       int length, const char *target_uri, const char *direct_save_uri,
                       GdkDragAction action, int x, int y, FMListView *view)
 {
@@ -1482,7 +1482,7 @@ list_view_handle_raw (CajaTreeViewDragDest *dest, const char *raw_data,
 }
 
 static void
-move_copy_items_callback (CajaTreeViewDragDest *dest,
+move_copy_items_callback (BaulTreeViewDragDest *dest,
                           const GList *item_uris,
                           const char *target_uri,
                           guint action,
@@ -1510,7 +1510,7 @@ apply_columns_settings (FMListView *list_view,
                         char **visible_columns)
 {
     GList *all_columns;
-    CajaFile *file;
+    BaulFile *file;
     GList *old_view_columns, *view_columns;
     GHashTable *visible_columns_hash;
     GtkTreeViewColumn *prev_view_column;
@@ -1639,7 +1639,7 @@ filename_cell_data_func (GtkTreeViewColumn *column,
 static gboolean
 focus_in_event_callback (GtkWidget *widget, GdkEventFocus *event, gpointer user_data)
 {
-    CajaWindowSlotInfo *slot_info;
+    BaulWindowSlotInfo *slot_info;
     FMListView *list_view = FM_LIST_VIEW (user_data);
 
     /* make the corresponding slot (and the pane that contains it) active */
@@ -1754,7 +1754,7 @@ create_and_set_up_tree_view (FMListView *view)
 
     for (l = baul_columns; l != NULL; l = l->next)
     {
-        CajaColumn *baul_column;
+        BaulColumn *baul_column;
         int column_num;
         char *name;
         char *label;
@@ -1862,7 +1862,7 @@ create_and_set_up_tree_view (FMListView *view)
 }
 
 static void
-fm_list_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_list_view_add_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
     FMListModel *model;
 
@@ -1873,7 +1873,7 @@ fm_list_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *dir
 static char **
 get_visible_columns (FMListView *list_view)
 {
-    CajaFile *file;
+    BaulFile *file;
     GList *visible_columns;
     char **ret;
 
@@ -1914,7 +1914,7 @@ get_visible_columns (FMListView *list_view)
 static char **
 get_column_order (FMListView *list_view)
 {
-    CajaFile *file;
+    BaulFile *file;
     GList *column_order;
     char **ret;
 
@@ -1972,7 +1972,7 @@ set_sort_order_from_metadata_and_preferences (FMListView *list_view)
 {
     char *sort_attribute;
     int sort_column_id;
-    CajaFile *file;
+    BaulFile *file;
     gboolean sort_reversed, default_sort_reversed;
     const gchar *default_sort_order;
 
@@ -2012,10 +2012,10 @@ list_view_changed_foreach (GtkTreeModel *model,
     return FALSE;
 }
 
-static CajaZoomLevel
+static BaulZoomLevel
 get_default_zoom_level (void)
 {
-    CajaZoomLevel default_zoom_level;
+    BaulZoomLevel default_zoom_level;
 
     default_zoom_level = default_zoom_level_auto_value;
 
@@ -2033,7 +2033,7 @@ set_zoom_level_from_metadata_and_preferences (FMListView *list_view)
 {
     if (fm_directory_view_supports_zooming (FM_DIRECTORY_VIEW (list_view)))
     {
-        CajaFile *file;
+        BaulFile *file;
         int level;
 
         file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (list_view));
@@ -2092,7 +2092,7 @@ fm_list_view_clear (FMDirectoryView *view)
 }
 
 static void
-fm_list_view_rename_callback (CajaFile *file,
+fm_list_view_rename_callback (BaulFile *file,
                               GFile *result_location,
                               GError *error,
                               gpointer callback_data)
@@ -2121,7 +2121,7 @@ fm_list_view_rename_callback (CajaFile *file,
 
 
 static void
-fm_list_view_file_changed (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_list_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
     FMListView *listview;
     GtkTreeIter iter;
@@ -2164,7 +2164,7 @@ static void
 fm_list_view_get_selection_foreach_func (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
     GList **list;
-    CajaFile *file;
+    BaulFile *file;
 
     list = data;
 
@@ -2194,7 +2194,7 @@ fm_list_view_get_selection (FMDirectoryView *view)
 static void
 fm_list_view_get_selection_for_file_transfer_foreach_func (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-    CajaFile *file;
+    BaulFile *file;
     struct SelectionForeachData *selection_data;
     GtkTreeIter parent, child;
 
@@ -2276,7 +2276,7 @@ fm_list_view_end_file_changes (FMDirectoryView *view)
 }
 
 static void
-fm_list_view_remove_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_list_view_remove_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
     GtkTreePath *path;
     GtkTreeIter iter;
@@ -2351,7 +2351,7 @@ fm_list_view_set_selection (FMDirectoryView *view, GList *selection)
     GtkTreeSelection *tree_selection;
     GList *node;
     GList *iters, *l;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     list_view = FM_LIST_VIEW (view);
     tree_selection = gtk_tree_view_get_selection (list_view->details->tree_view);
@@ -2384,7 +2384,7 @@ fm_list_view_invert_selection (FMDirectoryView *view)
     GtkTreeSelection *tree_selection;
     GList *node;
     GList *iters, *l;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
     GList *selection = NULL;
 
     list_view = FM_LIST_VIEW (view);
@@ -2431,10 +2431,10 @@ column_editor_response_callback (GtkWidget *dialog,
 }
 
 static void
-column_chooser_changed_callback (CajaColumnChooser *chooser,
+column_chooser_changed_callback (BaulColumnChooser *chooser,
                                  FMListView *view)
 {
-    CajaFile *file;
+    BaulFile *file;
     char **visible_columns;
     char **column_order;
     GList *list;
@@ -2475,7 +2475,7 @@ column_chooser_changed_callback (CajaColumnChooser *chooser,
 }
 
 static void
-column_chooser_set_from_arrays (CajaColumnChooser *chooser,
+column_chooser_set_from_arrays (BaulColumnChooser *chooser,
                                 FMListView *view,
                                 char **visible_columns,
                                 char **column_order)
@@ -2492,7 +2492,7 @@ column_chooser_set_from_arrays (CajaColumnChooser *chooser,
 }
 
 static void
-column_chooser_set_from_settings (CajaColumnChooser *chooser,
+column_chooser_set_from_settings (BaulColumnChooser *chooser,
                                   FMListView *view)
 {
     char **visible_columns;
@@ -2509,10 +2509,10 @@ column_chooser_set_from_settings (CajaColumnChooser *chooser,
 }
 
 static void
-column_chooser_use_default_callback (CajaColumnChooser *chooser,
+column_chooser_use_default_callback (BaulColumnChooser *chooser,
                                      FMListView *view)
 {
-    CajaFile *file;
+    BaulFile *file;
     char **default_columns;
     char **default_order;
 
@@ -2548,7 +2548,7 @@ create_column_editor (FMListView *view)
     GtkWidget *label;
     GtkWidget *box;
     GtkWidget *column_chooser;
-    CajaFile *file;
+    BaulFile *file;
     char *str;
     char *name;
     const char *label_text;
@@ -2710,7 +2710,7 @@ fm_list_view_update_menus (FMDirectoryView *view)
 static void
 fm_list_view_reset_to_defaults (FMDirectoryView *view)
 {
-    CajaFile *file;
+    BaulFile *file;
     const gchar *default_sort_order;
     gboolean default_sort_reversed;
 
@@ -2736,7 +2736,7 @@ fm_list_view_reset_to_defaults (FMDirectoryView *view)
 
 static void
 fm_list_view_scale_font_size (FMListView *view,
-                              CajaZoomLevel new_level)
+                              BaulZoomLevel new_level)
 {
     GList *l;
     static gboolean first_time = TRUE;
@@ -2777,7 +2777,7 @@ fm_list_view_scale_font_size (FMListView *view,
 
 static void
 fm_list_view_set_zoom_level (FMListView *view,
-                             CajaZoomLevel new_level,
+                             BaulZoomLevel new_level,
                              gboolean always_emit)
 {
     int icon_size;
@@ -2846,7 +2846,7 @@ fm_list_view_bump_zoom_level (FMDirectoryView *view, int zoom_increment)
     }
 }
 
-static CajaZoomLevel
+static BaulZoomLevel
 fm_list_view_get_zoom_level (FMDirectoryView *view)
 {
     FMListView *list_view;
@@ -2860,7 +2860,7 @@ fm_list_view_get_zoom_level (FMDirectoryView *view)
 
 static void
 fm_list_view_zoom_to_level (FMDirectoryView *view,
-                            CajaZoomLevel zoom_level)
+                            BaulZoomLevel zoom_level)
 {
     FMListView *list_view;
 
@@ -2901,7 +2901,7 @@ fm_list_view_can_zoom_out (FMDirectoryView *view)
 
 static void
 fm_list_view_start_renaming_file (FMDirectoryView *view,
-                                  CajaFile *file,
+                                  BaulFile *file,
                                   gboolean select_all)
 {
     FMListView *list_view;
@@ -3065,7 +3065,7 @@ fm_list_view_sort_directories_first_changed (FMDirectoryView *view)
 }
 
 static int
-fm_list_view_compare_files (FMDirectoryView *view, CajaFile *file1, CajaFile *file2)
+fm_list_view_compare_files (FMDirectoryView *view, BaulFile *file1, BaulFile *file2)
 {
     FMListView *list_view;
 
@@ -3182,9 +3182,9 @@ fm_list_view_emblems_changed (FMDirectoryView *directory_view)
 }
 
 static char *
-fm_list_view_get_first_visible_file (CajaView *view)
+fm_list_view_get_first_visible_file (BaulView *view)
 {
-    CajaFile *file;
+    BaulFile *file;
     GtkTreePath *path;
     GtkTreeIter iter;
     FMListView *list_view;
@@ -3221,7 +3221,7 @@ fm_list_view_get_first_visible_file (CajaView *view)
 
 static void
 fm_list_view_scroll_to_file (FMListView *view,
-                             CajaFile *file)
+                             BaulFile *file)
 {
     GtkTreePath *path;
     GtkTreeIter iter;
@@ -3241,12 +3241,12 @@ fm_list_view_scroll_to_file (FMListView *view,
 }
 
 static void
-list_view_scroll_to_file (CajaView *view,
+list_view_scroll_to_file (BaulView *view,
                           const char *uri)
 {
     if (uri != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         /* Only if existing, since we don't want to add the file to
            the directory if it has been removed since then */
@@ -3261,8 +3261,8 @@ list_view_scroll_to_file (CajaView *view,
 }
 
 static void
-list_view_notify_clipboard_info (CajaClipboardMonitor *monitor,
-                                 CajaClipboardInfo *info,
+list_view_notify_clipboard_info (BaulClipboardMonitor *monitor,
+                                 BaulClipboardInfo *info,
                                  FMListView *view)
 {
     /* this could be called as a result of _end_loading() being
@@ -3287,8 +3287,8 @@ static void
 fm_list_view_end_loading (FMDirectoryView *view,
                           gboolean all_files_seen)
 {
-    CajaClipboardMonitor *monitor;
-    CajaClipboardInfo *info;
+    BaulClipboardMonitor *monitor;
+    BaulClipboardInfo *info;
 
     monitor = baul_clipboard_monitor_get ();
     info = baul_clipboard_monitor_get_clipboard_info (monitor);
@@ -3394,14 +3394,14 @@ fm_list_view_class_init (FMListViewClass *class)
 }
 
 static const char *
-fm_list_view_get_id (CajaView *view)
+fm_list_view_get_id (BaulView *view)
 {
     return FM_LIST_VIEW_ID;
 }
 
 
 static void
-fm_list_view_iface_init (CajaViewIface *iface)
+fm_list_view_iface_init (BaulViewIface *iface)
 {
     fm_directory_view_init_view_iface (iface);
 
@@ -3454,8 +3454,8 @@ fm_list_view_init (FMListView *list_view)
                           G_CALLBACK (list_view_notify_clipboard_info), list_view);
 }
 
-static CajaView *
-fm_list_view_create (CajaWindowSlotInfo *slot)
+static BaulView *
+fm_list_view_create (BaulWindowSlotInfo *slot)
 {
     FMListView *view;
 
@@ -3490,7 +3490,7 @@ fm_list_view_supports_uri (const char *uri,
     return FALSE;
 }
 
-static CajaViewInfo fm_list_view =
+static BaulViewInfo fm_list_view =
 {
     .id = FM_LIST_VIEW_ID,
     /* Translators: this is used in the view selection dropdown

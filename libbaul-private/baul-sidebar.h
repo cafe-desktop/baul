@@ -33,27 +33,27 @@ extern "C" {
 #endif
 
 #define BAUL_TYPE_SIDEBAR           (baul_sidebar_get_type ())
-#define BAUL_SIDEBAR(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR, CajaSidebar))
+#define BAUL_SIDEBAR(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR, BaulSidebar))
 #define BAUL_IS_SIDEBAR(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SIDEBAR))
-#define BAUL_SIDEBAR_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_SIDEBAR, CajaSidebarIface))
+#define BAUL_SIDEBAR_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_SIDEBAR, BaulSidebarIface))
 
-    typedef struct _CajaSidebar CajaSidebar; /* dummy typedef */
-    typedef struct _CajaSidebarIface CajaSidebarIface;
+    typedef struct _BaulSidebar BaulSidebar; /* dummy typedef */
+    typedef struct _BaulSidebarIface BaulSidebarIface;
 
     /* Must also be a GtkWidget */
-    struct _CajaSidebarIface
+    struct _BaulSidebarIface
     {
         GTypeInterface g_iface;
 
         /* Signals: */
-        void           (* tab_icon_changed)       (CajaSidebar *sidebar);
+        void           (* tab_icon_changed)       (BaulSidebar *sidebar);
 
         /* VTable: */
-        const char *   (* get_sidebar_id)         (CajaSidebar *sidebar);
-        char *         (* get_tab_label)          (CajaSidebar *sidebar);
-        char *         (* get_tab_tooltip)        (CajaSidebar *sidebar);
-        GdkPixbuf *    (* get_tab_icon)           (CajaSidebar *sidebar);
-        void           (* is_visible_changed)     (CajaSidebar *sidebar,
+        const char *   (* get_sidebar_id)         (BaulSidebar *sidebar);
+        char *         (* get_tab_label)          (BaulSidebar *sidebar);
+        char *         (* get_tab_tooltip)        (BaulSidebar *sidebar);
+        GdkPixbuf *    (* get_tab_icon)           (BaulSidebar *sidebar);
+        void           (* is_visible_changed)     (BaulSidebar *sidebar,
                 gboolean         is_visible);
 
 
@@ -70,11 +70,11 @@ extern "C" {
 
     GType             baul_sidebar_get_type             (void);
 
-    const char *baul_sidebar_get_sidebar_id     (CajaSidebar *sidebar);
-    char *      baul_sidebar_get_tab_label      (CajaSidebar *sidebar);
-    char *      baul_sidebar_get_tab_tooltip    (CajaSidebar *sidebar);
-    GdkPixbuf * baul_sidebar_get_tab_icon       (CajaSidebar *sidebar);
-    void        baul_sidebar_is_visible_changed (CajaSidebar *sidebar,
+    const char *baul_sidebar_get_sidebar_id     (BaulSidebar *sidebar);
+    char *      baul_sidebar_get_tab_label      (BaulSidebar *sidebar);
+    char *      baul_sidebar_get_tab_tooltip    (BaulSidebar *sidebar);
+    GdkPixbuf * baul_sidebar_get_tab_icon       (BaulSidebar *sidebar);
+    void        baul_sidebar_is_visible_changed (BaulSidebar *sidebar,
             gboolean         is_visible);
 
 #ifdef __cplusplus

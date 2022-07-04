@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /* baul-file-drag.c - Drag & drop handling code that operated on
-   CajaFile objects.
+   BaulFile objects.
 
    Copyright (C) 2000 Eazel, Inc.
 
@@ -33,11 +33,11 @@
 #include <string.h>
 
 static gboolean
-baul_drag_can_accept_files (CajaFile *drop_target_item)
+baul_drag_can_accept_files (BaulFile *drop_target_item)
 {
     if (baul_file_is_directory (drop_target_item))
     {
-        CajaDirectory *directory;
+        BaulDirectory *directory;
         gboolean res;
 
         /* target is a directory, accept if editable */
@@ -52,7 +52,7 @@ baul_drag_can_accept_files (CajaFile *drop_target_item)
         return TRUE;
     }
 
-    /* All Caja links are assumed to be links to directories.
+    /* All Baul links are assumed to be links to directories.
      * Therefore, they all can accept drags, like all other
      * directories to. As with other directories, there can be
      * errors when the actual copy is attempted due to
@@ -73,7 +73,7 @@ baul_drag_can_accept_files (CajaFile *drop_target_item)
 }
 
 gboolean
-baul_drag_can_accept_item (CajaFile *drop_target_item,
+baul_drag_can_accept_item (BaulFile *drop_target_item,
                            const char *item_uri)
 {
     if (baul_file_matches_uri (drop_target_item, item_uri))
@@ -86,7 +86,7 @@ baul_drag_can_accept_item (CajaFile *drop_target_item,
 }
 
 gboolean
-baul_drag_can_accept_items (CajaFile *drop_target_item,
+baul_drag_can_accept_items (BaulFile *drop_target_item,
                             const GList *items)
 {
     int max;
@@ -103,7 +103,7 @@ baul_drag_can_accept_items (CajaFile *drop_target_item,
     for (max = 100; items != NULL && max >= 0; items = items->next, max--)
     {
         if (!baul_drag_can_accept_item (drop_target_item,
-                                        ((CajaDragSelectionItem *)items->data)->uri))
+                                        ((BaulDragSelectionItem *)items->data)->uri))
         {
             return FALSE;
         }
@@ -113,8 +113,8 @@ baul_drag_can_accept_items (CajaFile *drop_target_item,
 }
 
 gboolean
-baul_drag_can_accept_info (CajaFile *drop_target_item,
-                           CajaIconDndTargetType drag_type,
+baul_drag_can_accept_info (BaulFile *drop_target_item,
+                           BaulIconDndTargetType drag_type,
                            const GList *items)
 {
     switch (drag_type)
@@ -150,7 +150,7 @@ baul_drag_can_accept_info (CajaFile *drop_target_item,
 }
 
 void
-baul_drag_file_receive_dropped_keyword (CajaFile *file,
+baul_drag_file_receive_dropped_keyword (BaulFile *file,
                                         const char *keyword)
 {
     GList *keywords;

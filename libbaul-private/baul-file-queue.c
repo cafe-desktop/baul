@@ -25,26 +25,26 @@
 
 #include <glib.h>
 
-struct CajaFileQueue
+struct BaulFileQueue
 {
     GList *head;
     GList *tail;
     GHashTable *item_to_link_map;
 };
 
-CajaFileQueue *
+BaulFileQueue *
 baul_file_queue_new (void)
 {
-    CajaFileQueue *queue;
+    BaulFileQueue *queue;
 
-    queue = g_new0 (CajaFileQueue, 1);
+    queue = g_new0 (BaulFileQueue, 1);
     queue->item_to_link_map = g_hash_table_new (g_direct_hash, g_direct_equal);
 
     return queue;
 }
 
 void
-baul_file_queue_destroy (CajaFileQueue *queue)
+baul_file_queue_destroy (BaulFileQueue *queue)
 {
     g_hash_table_destroy (queue->item_to_link_map);
     baul_file_list_free (queue->head);
@@ -52,8 +52,8 @@ baul_file_queue_destroy (CajaFileQueue *queue)
 }
 
 void
-baul_file_queue_enqueue (CajaFileQueue *queue,
-                         CajaFile      *file)
+baul_file_queue_enqueue (BaulFileQueue *queue,
+                         BaulFile      *file)
 {
     if (g_hash_table_lookup (queue->item_to_link_map, file) != NULL)
     {
@@ -76,10 +76,10 @@ baul_file_queue_enqueue (CajaFileQueue *queue,
     g_hash_table_insert (queue->item_to_link_map, file, queue->tail);
 }
 
-CajaFile *
-baul_file_queue_dequeue (CajaFileQueue *queue)
+BaulFile *
+baul_file_queue_dequeue (BaulFileQueue *queue)
 {
-    CajaFile *file;
+    BaulFile *file;
 
     file = baul_file_queue_head (queue);
     baul_file_queue_remove (queue, file);
@@ -89,8 +89,8 @@ baul_file_queue_dequeue (CajaFileQueue *queue)
 
 
 void
-baul_file_queue_remove (CajaFileQueue *queue,
-                        CajaFile *file)
+baul_file_queue_remove (BaulFileQueue *queue,
+                        BaulFile *file)
 {
     GList *link;
 
@@ -115,8 +115,8 @@ baul_file_queue_remove (CajaFileQueue *queue,
     baul_file_unref (file);
 }
 
-CajaFile *
-baul_file_queue_head (CajaFileQueue *queue)
+BaulFile *
+baul_file_queue_head (BaulFileQueue *queue)
 {
     if (queue->head == NULL)
     {
@@ -127,7 +127,7 @@ baul_file_queue_head (CajaFileQueue *queue)
 }
 
 gboolean
-baul_file_queue_is_empty (CajaFileQueue *queue)
+baul_file_queue_is_empty (BaulFileQueue *queue)
 {
     return (queue->head == NULL);
 }

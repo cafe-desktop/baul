@@ -31,35 +31,35 @@
 
 #define BAUL_TYPE_DESKTOP_LINK_MONITOR baul_desktop_link_monitor_get_type()
 #define BAUL_DESKTOP_LINK_MONITOR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitor))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_LINK_MONITOR, BaulDesktopLinkMonitor))
 #define BAUL_DESKTOP_LINK_MONITOR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitorClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_LINK_MONITOR, BaulDesktopLinkMonitorClass))
 #define BAUL_IS_DESKTOP_LINK_MONITOR(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_DESKTOP_LINK_MONITOR))
 #define BAUL_IS_DESKTOP_LINK_MONITOR_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_DESKTOP_LINK_MONITOR))
 #define BAUL_DESKTOP_LINK_MONITOR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitorClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_LINK_MONITOR, BaulDesktopLinkMonitorClass))
 
-typedef struct CajaDesktopLinkMonitorDetails CajaDesktopLinkMonitorDetails;
+typedef struct BaulDesktopLinkMonitorDetails BaulDesktopLinkMonitorDetails;
 
 typedef struct
 {
     GObject parent_slot;
-    CajaDesktopLinkMonitorDetails *details;
-} CajaDesktopLinkMonitor;
+    BaulDesktopLinkMonitorDetails *details;
+} BaulDesktopLinkMonitor;
 
 typedef struct
 {
     GObjectClass parent_slot;
-} CajaDesktopLinkMonitorClass;
+} BaulDesktopLinkMonitorClass;
 
 GType   baul_desktop_link_monitor_get_type (void);
 
-CajaDesktopLinkMonitor *   baul_desktop_link_monitor_get (void);
+BaulDesktopLinkMonitor *   baul_desktop_link_monitor_get (void);
 
 /* Used by baul-desktop-link.c */
-char * baul_desktop_link_monitor_make_filename_unique (CajaDesktopLinkMonitor *monitor,
+char * baul_desktop_link_monitor_make_filename_unique (BaulDesktopLinkMonitor *monitor,
         const char *filename);
 
 #endif /* BAUL_DESKTOP_LINK_MONITOR_H */

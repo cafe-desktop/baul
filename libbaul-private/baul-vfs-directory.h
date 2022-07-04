@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-vfs-directory.h: Subclass of CajaDirectory to implement the
+   baul-vfs-directory.h: Subclass of BaulDirectory to implement the
    the case of a VFS directory.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
@@ -30,27 +30,27 @@
 
 #define BAUL_TYPE_VFS_DIRECTORY baul_vfs_directory_get_type()
 #define BAUL_VFS_DIRECTORY(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VFS_DIRECTORY, CajaVFSDirectory))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VFS_DIRECTORY, BaulVFSDirectory))
 #define BAUL_VFS_DIRECTORY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_VFS_DIRECTORY, CajaVFSDirectoryClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_VFS_DIRECTORY, BaulVFSDirectoryClass))
 #define BAUL_IS_VFS_DIRECTORY(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_VFS_DIRECTORY))
 #define BAUL_IS_VFS_DIRECTORY_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_VFS_DIRECTORY))
 #define BAUL_VFS_DIRECTORY_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_VFS_DIRECTORY, CajaVFSDirectoryClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_VFS_DIRECTORY, BaulVFSDirectoryClass))
 
-typedef struct CajaVFSDirectoryDetails CajaVFSDirectoryDetails;
-
-typedef struct
-{
-    CajaDirectory parent_slot;
-} CajaVFSDirectory;
+typedef struct BaulVFSDirectoryDetails BaulVFSDirectoryDetails;
 
 typedef struct
 {
-    CajaDirectoryClass parent_slot;
-} CajaVFSDirectoryClass;
+    BaulDirectory parent_slot;
+} BaulVFSDirectory;
+
+typedef struct
+{
+    BaulDirectoryClass parent_slot;
+} BaulVFSDirectoryClass;
 
 GType   baul_vfs_directory_get_type (void);
 

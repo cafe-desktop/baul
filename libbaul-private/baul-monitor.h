@@ -29,10 +29,10 @@
 #include <glib.h>
 #include <gio/gio.h>
 
-typedef struct CajaMonitor CajaMonitor;
+typedef struct BaulMonitor BaulMonitor;
 
 gboolean         baul_monitor_active    (void);
-CajaMonitor *baul_monitor_directory (GFile *location);
-void             baul_monitor_cancel    (CajaMonitor *monitor);
+BaulMonitor *baul_monitor_directory (GFile *location);
+void             baul_monitor_cancel    (BaulMonitor *monitor);
 
 #endif /* BAUL_MONITOR_H */

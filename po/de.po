@@ -312,8 +312,8 @@ msgstr "Löschen"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -321,7 +321,7 @@ msgstr "Dateiverwaltung für die Mate-Arbeitsumgebung"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -329,8 +329,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -3028,34 +3028,34 @@ msgstr ""
 " zu wechseln."
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Caja wird beendet, wenn das letzte Fenster geschlossen wird."
+msgid "Baul will exit when last window destroyed."
+msgstr "Baul wird beendet, wenn das letzte Fenster geschlossen wird."
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
-"Falls aktiviert, wird Caja beendet, wenn alle Fenster geschlossen wurden. "
+"Falls aktiviert, wird Baul beendet, wenn alle Fenster geschlossen wurden. "
 "Das ist die Voreinstellung. Wenn der Schlüssel auf »falsch« gestellt ist, "
-"kann Caja ohne irgendein Fenster gestartet werden, sodass Caja als Dienst "
+"kann Baul ohne irgendein Fenster gestartet werden, sodass Baul als Dienst "
 "zur Überwachung automatisch eingehangener Medien oder ähnliche Aufgaben "
 "genutzt werden kann."
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
-"Das klassische Caja-Verhalten aktivieren. Hierbei sind alle Fenster Browser"
+"Das klassische Baul-Verhalten aktivieren. Hierbei sind alle Fenster Browser"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
-"Falls aktiviert, sind alle Caja-Fenster Browser-Fenster. So verhielt sich "
-"Caja vor Version 2.6 und manche Anwender bevorzugen dieses Verhalten."
+"Falls aktiviert, sind alle Baul-Fenster Browser-Fenster. So verhielt sich "
+"Baul vor Version 2.6 und manche Anwender bevorzugen dieses Verhalten."
 
 #: libbaul-private/org.mate.baul.gschema.xml:96
 msgid "Always use the location entry, instead of the pathbar"
@@ -3063,10 +3063,10 @@ msgstr "Immer das Adressfeld anstatt der Pfadleiste verwenden"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
-"Falls aktiviert, verwenden Caja Browser-Fenster immer ein Texteingabefeld "
+"Falls aktiviert, verwenden Baul Browser-Fenster immer ein Texteingabefeld "
 "für die Adressleiste anstatt der Pfadleiste."
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
@@ -3077,10 +3077,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
-"Falls aktiviert, fragt Caja beim Versuch nach, Dateien zu löschen oder den "
+"Falls aktiviert, fragt Baul beim Versuch nach, Dateien zu löschen oder den "
 "Papierkorb zu leeren."
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
@@ -3091,10 +3091,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
-"Falls aktiviert, fragt Caja nach einer Bestätigung, wenn Dateien in den "
+"Falls aktiviert, fragt Baul nach einer Bestätigung, wenn Dateien in den "
 "Papierkorb verschoben werden."
 
 #: libbaul-private/org.mate.baul.gschema.xml:111
@@ -3103,11 +3103,11 @@ msgstr "Legt fest, ob das sofortige Löschen verwendet werden soll."
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"Falls aktiviert, stellt Caja eine Funktion bereit, die es Ihnen ermöglicht, "
+"Falls aktiviert, stellt Baul eine Funktion bereit, die es Ihnen ermöglicht, "
 "eine Datei unmittelbar zu löschen, wobei der Papierkorb umgangen wird. Diese"
 " Funktion kann Gefahren mit sich bringen, verwenden Sie sie daher mit "
 "Vorsicht."
@@ -3190,17 +3190,17 @@ msgstr ""
 "Anwendung zu suchen, die damit umgehen kann."
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
+msgid "Use extra mouse button events in Baul' browser window"
 msgstr "Zusätzliche Maustastenereignisse im Browser-Fenster nutzen"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "Bei Benutzern, deren Maus über »Vorwärts«- und »Zurück«-Tasten verfügt, wird"
 " dieser Schlüssel verwendet, um zu entscheiden, ob eine Aktion innerhalb von"
-" Caja ausgelöst werden soll, wenn eine dieser Tasten betätigt wird."
+" Baul ausgelöst werden soll, wenn eine dieser Tasten betätigt wird."
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
@@ -3288,10 +3288,10 @@ msgstr "Erweiterte Zugriffsrechte im Dateieigenschaftsdialog anzeigen"
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"Falls aktiviert, lässt Sie Caja die Zugriffsrechte auf die Art und Weise von"
+"Falls aktiviert, lässt Sie Baul die Zugriffsrechte auf die Art und Weise von"
 " Unix festlegen und bietet Zugriff auf die etwas komplexeren Einstellungen."
 
 #: libbaul-private/org.mate.baul.gschema.xml:180
@@ -3300,10 +3300,10 @@ msgstr "Ordner in Fenstern zuerst anzeigen?"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Falls dieser Schlüssel wahr ist, zeigt Caja in der Symbol- und Listenansicht"
+"Falls dieser Schlüssel wahr ist, zeigt Baul in der Symbol- und Listenansicht"
 " Ordner vor Dateien an."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3336,15 +3336,15 @@ msgstr ""
 "angezeigt."
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja verwendet den persönlichen Ordner als Schreibtisch"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul verwendet den persönlichen Ordner als Schreibtisch"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Falls aktiviert, verwendet Caja den persönlichen Ordner des Benutzers als "
+"Falls aktiviert, verwendet Baul den persönlichen Ordner des Benutzers als "
 "Schreibtisch. Andernfalls wird »~/Schreibtisch« als Schreibtisch verwendet."
 
 #: libbaul-private/org.mate.baul.gschema.xml:203
@@ -3487,7 +3487,7 @@ msgid "Whether to show desktop notifications"
 msgstr "Legt fest, ob Schreibtischbenachrichtigungen angezeigt werden sollen"
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3638,10 +3638,10 @@ msgstr "Ausschließlich Ordner in der Baum-Seitenleiste anzeigen"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Falls aktiviert, zeigt Caja in der Baumseitenleiste ausschließlich Ordner "
+"Falls aktiviert, zeigt Baul in der Baumseitenleiste ausschließlich Ordner "
 "an. Andernfalls werden sowohl Ordner als auch Dateien angezeigt."
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
@@ -3862,7 +3862,7 @@ msgstr "Legt fest, ob Datenträger automatisch eingehangen werden sollen"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
 "Falls aktiviert, werden Datenträger wie z.B. für den Benutzer sichtbare "
@@ -3877,13 +3877,13 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
 "Falls aktiviert, wird beim automatischen Einhängen eines Datenträgers "
-"automatisch ein Caja-Fenster geöffnet. Das betrifft nur Datenträger, auf "
+"automatisch ein Baul-Fenster geöffnet. Das betrifft nur Datenträger, auf "
 "denen kein bekannter »x-content/*«-Typ gefunden wird. Wird ein bekannter Typ"
 " entdeckt, so wird die vom Benutzer eingestellte Aktion durchgeführt."
 
@@ -3894,7 +3894,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
 "Falls aktiviert, werden beim Einlegen eines Datenträgers weder automatisch "
@@ -4011,29 +4011,29 @@ msgstr "Optionen der Sitzungsverwaltung anzeigen"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Caja konnte den erforderlichen Ordner »%s« nicht anlegen."
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Baul konnte den erforderlichen Ordner »%s« nicht anlegen."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"Bitte legen Sie folgenden Ordner vor dem Starten von Caja an oder ändern Sie"
-" die Zugriffsrechte so, dass Caja ihn anlegen kann."
+"Bitte legen Sie folgenden Ordner vor dem Starten von Baul an oder ändern Sie"
+" die Zugriffsrechte so, dass Baul ihn anlegen kann."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja konnte folgende, erforderliche Ordner nicht anlegen: %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul konnte folgende, erforderliche Ordner nicht anlegen: %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Bitte legen Sie folgende Ordner vor dem Starten von Caja an oder ändern Sie "
-"die Zugriffsrechte so, dass Caja sie anlegen kann."
+"Bitte legen Sie folgende Ordner vor dem Starten von Baul an oder ändern Sie "
+"die Zugriffsrechte so, dass Baul sie anlegen kann."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -4098,8 +4098,8 @@ msgid "Open a browser window."
 msgstr "Ein Browserfenster öffnen."
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Caja beenden."
+msgid "Quit Baul."
+msgstr "Baul beenden."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -5125,7 +5125,7 @@ msgid "New _Window"
 msgstr "Neues _Fenster"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
+msgid "Open another Baul window for the displayed location"
 msgstr "Ein weiteres Fenster für diesen Ort öffnen"
 
 #: src/baul-navigation-window-menus.c:834
@@ -5958,9 +5958,9 @@ msgid "View of the current folder"
 msgstr "Ansicht des aktuellen Ordners"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
+msgid "Baul has no installed viewer capable of displaying the folder."
 msgstr ""
-"Es ist keine Caja-Ansicht installiert, die diesen Ordner anzeigen kann."
+"Es ist keine Baul-Ansicht installiert, die diesen Ordner anzeigen kann."
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5977,12 +5977,12 @@ msgstr "Bitte prüfen Sie die Rechtschreibung und versuchen Sie es erneut."
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
+msgid "Baul cannot handle \"%s\" locations."
 msgstr "»%s«-Orte können nicht verwendet werden."
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Caja kann mit dieser Art von Orten nicht umgehen."
+msgid "Baul cannot handle this kind of location."
+msgstr "Baul kann mit dieser Art von Orten nicht umgehen."
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -6021,24 +6021,24 @@ msgstr "Zum Ort gehen, den dieses Lesezeichen angibt"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja ist eine freie Anwendung. Sie können sie unter den Bedingungen der GNU "
+"Baul ist eine freie Anwendung. Sie können sie unter den Bedingungen der GNU "
 "General Public License, wie von der Free Software Foundation veröffentlicht,"
 " weitergeben und/oder modifizieren, entweder gemäß Version 2 der Lizenz oder"
 " (nach Ihrer Wahl) jeder neueren Version."
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Die Veröffentlichung von Caja erfolgt in der Hoffnung, von Nutzen zu sein, "
+"Die Veröffentlichung von Baul erfolgt in der Hoffnung, von Nutzen zu sein, "
 "aber OHNE IRGENDEINE GARANTIE, sogar ohne die implizite Garantie der "
 "MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details "
 "finden Sie in der GNU General Public License."
@@ -6046,28 +6046,28 @@ msgstr ""
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
-"Sie sollten ein Exemplar der GNU General Public License zusammen mit Caja "
+"Sie sollten ein Exemplar der GNU General Public License zusammen mit Baul "
 "erhalten haben. Falls nicht, schreiben Sie an die Free Software Foundation, "
 "Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1307 USA."
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
-msgstr "Über Caja"
+msgid "About Baul"
+msgstr "Über Baul"
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
-"Caja hilft Ihnen beim Organisieren Ihrer Dateien und Ordner, egal ob diese "
+"Baul hilft Ihnen beim Organisieren Ihrer Dateien und Ordner, egal ob diese "
 "lokal gespeichert oder online sind."
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -6118,8 +6118,8 @@ msgid "Prefere_nces"
 msgstr "_Einstellungen"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Die Caja-Einstellungen bearbeiten"
+msgid "Edit Baul preferences"
+msgstr "Die Baul-Einstellungen bearbeiten"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -6146,16 +6146,16 @@ msgid "_Contents"
 msgstr "_Inhalt"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Hilfe zu Caja anzeigen"
+msgid "Display Baul help"
+msgstr "Hilfe zu Baul anzeigen"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "_Über"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Danksagung an die Schöpfer von Caja anzeigen"
+msgid "Display credits for the creators of Baul"
+msgstr "Danksagung an die Schöpfer von Baul anzeigen"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6539,7 +6539,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6559,7 +6559,7 @@ msgstr ""
 "\n"
 "Beim Ausführen aus einem lokalen Ordner werden dem Skript die Namen der gewählten Dateien übergeben. Wird es in einem entfernten Ordner (z.B. einem mit Web- oder FTP-Ordner) ausgeführt, werden keine Parameter übergeben.\n"
 "\n"
-"In jedem Fall setzt Caja folgende Umgebungsvariablen, die in jedem Skript verwendet werden können:\n"
+"In jedem Fall setzt Baul folgende Umgebungsvariablen, die in jedem Skript verwendet werden können:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: Durch Zeilenvorlauf getrennte Pfade der gewählten Dateien (nur im lokalen Fall)\n"
 "\n"

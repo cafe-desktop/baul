@@ -37,8 +37,8 @@ void        baul_ui_prepare_merge_ui           (GtkUIManager      *ui_manager,
         const char        *name,
         guint             *merge_id,
         GtkActionGroup   **action_group);
-GtkAction * baul_action_from_menu_item         (CajaMenuItem  *item, GtkWidget *parent_widget);
-GtkAction * baul_toolbar_action_from_menu_item (CajaMenuItem  *item, GtkWidget *parent_widget);
+GtkAction * baul_action_from_menu_item         (BaulMenuItem  *item, GtkWidget *parent_widget);
+GtkAction * baul_toolbar_action_from_menu_item (BaulMenuItem  *item, GtkWidget *parent_widget);
 const char *baul_ui_string_get                 (const char        *filename);
 void   baul_ui_frame_image                     (GdkPixbuf        **pixbuf);
 

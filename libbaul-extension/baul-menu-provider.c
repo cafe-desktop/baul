@@ -1,5 +1,5 @@
 /*
- *  baul-property-page-provider.c - Interface for Caja extensions
+ *  baul-property-page-provider.c - Interface for Baul extensions
  *                                      that provide context menu items
  *                                      for files.
  *
@@ -30,11 +30,11 @@
 
 /**
  * SECTION:baul-menu-provider
- * @title: CajaMenuProvider
+ * @title: BaulMenuProvider
  * @short_description: Interface to provide additional menu items
  * @include: libbaul-extension/baul-menu-provider.h
  *
- * #CajaMenuProvider allows extension to provide additional menu items
+ * #BaulMenuProvider allows extension to provide additional menu items
  * in the file manager menus.
  */
 
@@ -63,7 +63,7 @@ baul_menu_provider_get_type (void)
 
     if (!type) {
         const GTypeInfo info = {
-            sizeof (CajaMenuProviderIface),
+            sizeof (BaulMenuProviderIface),
             baul_menu_provider_base_init,
             NULL,
             NULL,
@@ -75,7 +75,7 @@ baul_menu_provider_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaMenuProvider",
+                                       "BaulMenuProvider",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -85,14 +85,14 @@ baul_menu_provider_get_type (void)
 
 /**
  * baul_menu_provider_get_file_items:
- * @provider: a #CajaMenuProvider
+ * @provider: a #BaulMenuProvider
  * @window: the parent #GtkWidget window
- * @files: (element-type CajaFileInfo): a list of #CajaFileInfo
+ * @files: (element-type BaulFileInfo): a list of #BaulFileInfo
  *
- * Returns: (element-type CajaMenuItem) (transfer full): the provided list of #CajaMenuItem
+ * Returns: (element-type BaulMenuItem) (transfer full): the provided list of #BaulMenuItem
  */
 GList *
-baul_menu_provider_get_file_items (CajaMenuProvider *provider,
+baul_menu_provider_get_file_items (BaulMenuProvider *provider,
                                    GtkWidget        *window,
                                    GList            *files)
 {
@@ -108,16 +108,16 @@ baul_menu_provider_get_file_items (CajaMenuProvider *provider,
 
 /**
  * baul_menu_provider_get_background_items:
- * @provider: a #CajaMenuProvider
+ * @provider: a #BaulMenuProvider
  * @window: the parent #GtkWidget window
  * @current_folder: the folder for which background items are requested
  *
- * Returns: (element-type CajaMenuItem) (transfer full): the provided list of #CajaMenuItem
+ * Returns: (element-type BaulMenuItem) (transfer full): the provided list of #BaulMenuItem
  */
 GList *
-baul_menu_provider_get_background_items (CajaMenuProvider *provider,
+baul_menu_provider_get_background_items (BaulMenuProvider *provider,
                                          GtkWidget        *window,
-                                         CajaFileInfo     *current_folder)
+                                         BaulFileInfo     *current_folder)
 {
     g_return_val_if_fail (BAUL_IS_MENU_PROVIDER (provider), NULL);
     g_return_val_if_fail (BAUL_IS_FILE_INFO (current_folder), NULL);
@@ -132,16 +132,16 @@ baul_menu_provider_get_background_items (CajaMenuProvider *provider,
 
 /**
  * baul_menu_provider_get_toolbar_items:
- * @provider: a #CajaMenuProvider
+ * @provider: a #BaulMenuProvider
  * @window: the parent #GtkWidget window
  * @current_folder: the folder for which toolbar items are requested
  *
- * Returns: (element-type CajaMenuItem) (transfer full): the provided list of #CajaMenuItem
+ * Returns: (element-type BaulMenuItem) (transfer full): the provided list of #BaulMenuItem
  */
 GList *
-baul_menu_provider_get_toolbar_items (CajaMenuProvider *provider,
+baul_menu_provider_get_toolbar_items (BaulMenuProvider *provider,
                                       GtkWidget        *window,
-                                      CajaFileInfo     *current_folder)
+                                      BaulFileInfo     *current_folder)
 {
     g_return_val_if_fail (BAUL_IS_MENU_PROVIDER (provider), NULL);
     g_return_val_if_fail (BAUL_IS_FILE_INFO (current_folder), NULL);
@@ -156,7 +156,7 @@ baul_menu_provider_get_toolbar_items (CajaMenuProvider *provider,
 
 /* This function emit a signal to inform baul that its item list has changed */
 void
-baul_menu_provider_emit_items_updated_signal (CajaMenuProvider* provider)
+baul_menu_provider_emit_items_updated_signal (BaulMenuProvider* provider)
 {
     g_return_if_fail (BAUL_IS_MENU_PROVIDER (provider));
 

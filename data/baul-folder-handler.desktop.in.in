@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Caja
+Name=Baul
 GenericName=Open Folder
 TryExec=@bindir@/baul
 Exec=@bindir@/baul --no-desktop %U

@@ -30,9 +30,9 @@
 #include "baul-file.h"
 
 /* Returns NULL if there's no thumbnail yet. */
-void       baul_create_thumbnail                (CajaFile *file);
-gboolean   baul_can_thumbnail                   (CajaFile *file);
-gboolean   baul_can_thumbnail_internally        (CajaFile *file);
+void       baul_create_thumbnail                (BaulFile *file);
+gboolean   baul_can_thumbnail                   (BaulFile *file);
+gboolean   baul_can_thumbnail_internally        (BaulFile *file);
 gboolean   baul_thumbnail_is_mimetype_limited_by_size
 (const char *mime_type);
 

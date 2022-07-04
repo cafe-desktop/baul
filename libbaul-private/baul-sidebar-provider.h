@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-sidebar-provider.h: register and create CajaSidebars
+   baul-sidebar-provider.h: register and create BaulSidebars
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -33,25 +33,25 @@ extern "C" {
 #endif
 
 #define BAUL_TYPE_SIDEBAR_PROVIDER           (baul_sidebar_provider_get_type ())
-#define BAUL_SIDEBAR_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR_PROVIDER, CajaSidebarProvider))
+#define BAUL_SIDEBAR_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR_PROVIDER, BaulSidebarProvider))
 #define BAUL_IS_SIDEBAR_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SIDEBAR_PROVIDER))
-#define BAUL_SIDEBAR_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_SIDEBAR_PROVIDER, CajaSidebarProviderIface))
+#define BAUL_SIDEBAR_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_SIDEBAR_PROVIDER, BaulSidebarProviderIface))
 
-    typedef struct _CajaSidebarProvider       CajaSidebarProvider;
-    typedef struct _CajaSidebarProviderIface  CajaSidebarProviderIface;
+    typedef struct _BaulSidebarProvider       BaulSidebarProvider;
+    typedef struct _BaulSidebarProviderIface  BaulSidebarProviderIface;
 
-    struct _CajaSidebarProviderIface
+    struct _BaulSidebarProviderIface
     {
         GTypeInterface g_iface;
 
-        CajaSidebar * (*create) (CajaSidebarProvider *provider,
-                                 CajaWindowInfo *window);
+        BaulSidebar * (*create) (BaulSidebarProvider *provider,
+                                 BaulWindowInfo *window);
     };
 
     /* Interface Functions */
     GType                   baul_sidebar_provider_get_type  (void);
-    CajaSidebar *       baul_sidebar_provider_create (CajaSidebarProvider *provider,
-            CajaWindowInfo  *window);
+    BaulSidebar *       baul_sidebar_provider_create (BaulSidebarProvider *provider,
+            BaulWindowInfo  *window);
     GList *                 baul_list_sidebar_providers (void);
 
 #ifdef __cplusplus

@@ -1,5 +1,5 @@
 /*
- *  baul-menu.h - Menus exported by CajaMenuProvider objects.
+ *  baul-menu.h - Menus exported by BaulMenuProvider objects.
  *
  *  Copyright (C) 2005 Raffaele Sandrini
  *  Copyright (C) 2003 Novell, Inc.
@@ -31,74 +31,74 @@
 
 G_BEGIN_DECLS
 
-/* CajaMenu defines */
+/* BaulMenu defines */
 #define BAUL_TYPE_MENU         (baul_menu_get_type ())
-#define BAUL_MENU(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_MENU, CajaMenu))
-#define BAUL_MENU_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_MENU, CajaMenuClass))
+#define BAUL_MENU(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_MENU, BaulMenu))
+#define BAUL_MENU_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_MENU, BaulMenuClass))
 #define BAUL_IS_MENU(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_MENU))
 #define BAUL_IS_MENU_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_MENU))
-#define BAUL_MENU_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_MENU, CajaMenuClass))
-/* CajaMenuItem defines */
+#define BAUL_MENU_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_MENU, BaulMenuClass))
+/* BaulMenuItem defines */
 #define BAUL_TYPE_MENU_ITEM            (baul_menu_item_get_type())
-#define BAUL_MENU_ITEM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MENU_ITEM, CajaMenuItem))
-#define BAUL_MENU_ITEM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MENU_ITEM, CajaMenuItemClass))
+#define BAUL_MENU_ITEM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MENU_ITEM, BaulMenuItem))
+#define BAUL_MENU_ITEM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MENU_ITEM, BaulMenuItemClass))
 #define BAUL_MENU_IS_ITEM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_MENU_ITEM))
 #define BAUL_MENU_IS_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), BAUL_TYPE_MENU_ITEM))
-#define BAUL_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_MENU_ITEM, CajaMenuItemClass))
+#define BAUL_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_MENU_ITEM, BaulMenuItemClass))
 
-/* CajaMenu types */
-typedef struct _CajaMenu		CajaMenu;
-typedef struct _CajaMenuPrivate	CajaMenuPrivate;
-typedef struct _CajaMenuClass	CajaMenuClass;
-/* CajaMenuItem types */
-typedef struct _CajaMenuItem        CajaMenuItem;
-typedef struct _CajaMenuItemDetails CajaMenuItemDetails;
-typedef struct _CajaMenuItemClass   CajaMenuItemClass;
+/* BaulMenu types */
+typedef struct _BaulMenu		BaulMenu;
+typedef struct _BaulMenuPrivate	BaulMenuPrivate;
+typedef struct _BaulMenuClass	BaulMenuClass;
+/* BaulMenuItem types */
+typedef struct _BaulMenuItem        BaulMenuItem;
+typedef struct _BaulMenuItemDetails BaulMenuItemDetails;
+typedef struct _BaulMenuItemClass   BaulMenuItemClass;
 
-/* CajaMenu structs */
-struct _CajaMenu {
+/* BaulMenu structs */
+struct _BaulMenu {
     GObject parent;
-    CajaMenuPrivate *priv;
+    BaulMenuPrivate *priv;
 };
 
-struct _CajaMenuClass {
+struct _BaulMenuClass {
     GObjectClass parent_class;
 };
 
-/* CajaMenuItem structs */
-struct _CajaMenuItem {
+/* BaulMenuItem structs */
+struct _BaulMenuItem {
     GObject parent;
 
-    CajaMenuItemDetails *details;
+    BaulMenuItemDetails *details;
 };
 
-struct _CajaMenuItemClass {
+struct _BaulMenuItemClass {
     GObjectClass parent;
 
-    void (*activate) (CajaMenuItem *item);
+    void (*activate) (BaulMenuItem *item);
 };
 
-/* CajaMenu methods */
+/* BaulMenu methods */
 GType     baul_menu_get_type       (void);
-CajaMenu *baul_menu_new            (void);
+BaulMenu *baul_menu_new            (void);
 
-void      baul_menu_append_item    (CajaMenu     *menu,
-                                    CajaMenuItem *item);
-GList    *baul_menu_get_items      (CajaMenu *menu);
+void      baul_menu_append_item    (BaulMenu     *menu,
+                                    BaulMenuItem *item);
+GList    *baul_menu_get_items      (BaulMenu *menu);
 void      baul_menu_item_list_free (GList *item_list);
 
-/* CajaMenuItem methods */
+/* BaulMenuItem methods */
 GType         baul_menu_item_get_type    (void);
-CajaMenuItem *baul_menu_item_new         (const char   *name,
+BaulMenuItem *baul_menu_item_new         (const char   *name,
                                           const char   *label,
                                           const char   *tip,
                                           const char   *icon);
 
-void          baul_menu_item_activate    (CajaMenuItem *item);
-void          baul_menu_item_set_submenu (CajaMenuItem *item,
-                                          CajaMenu     *menu);
+void          baul_menu_item_activate    (BaulMenuItem *item);
+void          baul_menu_item_set_submenu (BaulMenuItem *item,
+                                          BaulMenu     *menu);
 
-/* CajaMenuItem has the following properties:
+/* BaulMenuItem has the following properties:
  *   name (string)        - the identifier for the menu item
  *   label (string)       - the user-visible label of the menu item
  *   tip (string)         - the tooltip of the menu item
@@ -106,7 +106,7 @@ void          baul_menu_item_set_submenu (CajaMenuItem *item,
  *   sensitive (boolean)  - whether the menu item is sensitive or not
  *   priority (boolean)   - used for toolbar items, whether to show priority
  *                          text.
- *   menu (CajaMenu)      - The menu belonging to this item. May be null.
+ *   menu (BaulMenu)      - The menu belonging to this item. May be null.
  */
 
 G_END_DECLS

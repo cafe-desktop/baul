@@ -43,9 +43,9 @@ struct FMEmptyViewDetails
 
 static GList *fm_empty_view_get_selection                   (FMDirectoryView   *view);
 static GList *fm_empty_view_get_selection_for_file_transfer (FMDirectoryView   *view);
-static void   fm_empty_view_scroll_to_file                  (CajaView      *view,
+static void   fm_empty_view_scroll_to_file                  (BaulView      *view,
         const char        *uri);
-static void   fm_empty_view_iface_init                      (CajaViewIface *iface);
+static void   fm_empty_view_iface_init                      (BaulViewIface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (FMEmptyView, fm_empty_view, FM_TYPE_DIRECTORY_VIEW,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_VIEW,
@@ -55,7 +55,7 @@ G_DEFINE_TYPE_WITH_CODE (FMEmptyView, fm_empty_view, FM_TYPE_DIRECTORY_VIEW,
 #define parent_class fm_empty_view_parent_class
 
 static void
-fm_empty_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_empty_view_add_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
     static GTimer *timer = NULL;
     static gdouble cumu = 0, elaps;
@@ -90,7 +90,7 @@ fm_empty_view_clear (FMDirectoryView *view)
 
 
 static void
-fm_empty_view_file_changed (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_empty_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
 }
 
@@ -131,7 +131,7 @@ fm_empty_view_end_file_changes (FMDirectoryView *view)
 }
 
 static void
-fm_empty_view_remove_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_empty_view_remove_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
     FM_EMPTY_VIEW (view)->details->number_of_files--;
     g_assert (FM_EMPTY_VIEW (view)->details->number_of_files >= 0);
@@ -176,7 +176,7 @@ fm_empty_view_bump_zoom_level (FMDirectoryView *view, int zoom_increment)
 {
 }
 
-static CajaZoomLevel
+static BaulZoomLevel
 fm_empty_view_get_zoom_level (FMDirectoryView *view)
 {
     return BAUL_ZOOM_LEVEL_STANDARD;
@@ -184,7 +184,7 @@ fm_empty_view_get_zoom_level (FMDirectoryView *view)
 
 static void
 fm_empty_view_zoom_to_level (FMDirectoryView *view,
-                             CajaZoomLevel zoom_level)
+                             BaulZoomLevel zoom_level)
 {
 }
 
@@ -207,7 +207,7 @@ fm_empty_view_can_zoom_out (FMDirectoryView *view)
 
 static void
 fm_empty_view_start_renaming_file (FMDirectoryView *view,
-                                   CajaFile *file,
+                                   BaulFile *file,
                                    gboolean select_all)
 {
 }
@@ -219,7 +219,7 @@ fm_empty_view_click_policy_changed (FMDirectoryView *directory_view)
 
 
 static int
-fm_empty_view_compare_files (FMDirectoryView *view, CajaFile *file1, CajaFile *file2)
+fm_empty_view_compare_files (FMDirectoryView *view, BaulFile *file1, BaulFile *file2)
 {
     if (file1 < file2)
     {
@@ -263,19 +263,19 @@ fm_empty_view_emblems_changed (FMDirectoryView *directory_view)
 }
 
 static char *
-fm_empty_view_get_first_visible_file (CajaView *view)
+fm_empty_view_get_first_visible_file (BaulView *view)
 {
     return NULL;
 }
 
 static void
-fm_empty_view_scroll_to_file (CajaView *view,
+fm_empty_view_scroll_to_file (BaulView *view,
                               const char *uri)
 {
 }
 
 static void
-fm_empty_view_grab_focus (CajaView *view)
+fm_empty_view_grab_focus (BaulView *view)
 {
     gtk_widget_grab_focus (GTK_WIDGET (view));
 }
@@ -327,14 +327,14 @@ fm_empty_view_class_init (FMEmptyViewClass *class)
 }
 
 static const char *
-fm_empty_view_get_id (CajaView *view)
+fm_empty_view_get_id (BaulView *view)
 {
     return FM_EMPTY_VIEW_ID;
 }
 
 
 static void
-fm_empty_view_iface_init (CajaViewIface *iface)
+fm_empty_view_iface_init (BaulViewIface *iface)
 {
     fm_directory_view_init_view_iface (iface);
 
@@ -352,8 +352,8 @@ fm_empty_view_init (FMEmptyView *empty_view)
     empty_view->details = g_new0 (FMEmptyViewDetails, 1);
 }
 
-static CajaView *
-fm_empty_view_create (CajaWindowSlotInfo *slot)
+static BaulView *
+fm_empty_view_create (BaulWindowSlotInfo *slot)
 {
     FMEmptyView *view;
 
@@ -391,7 +391,7 @@ fm_empty_view_supports_uri (const char *uri,
     return FALSE;
 }
 
-static CajaViewInfo fm_empty_view =
+static BaulViewInfo fm_empty_view =
 {
     .id = FM_EMPTY_VIEW_ID,
     .view_combo_label = N_("Empty View"),

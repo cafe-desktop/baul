@@ -9,7 +9,7 @@
 int
 main (int argc, char* argv[])
 {
-	CajaCustomizationData *customization_data;
+	BaulCustomizationData *customization_data;
 	GtkWidget *window;
 	GtkWidget *emblems_table, *button, *scroller;
 	char *emblem_name, *stripped_name;

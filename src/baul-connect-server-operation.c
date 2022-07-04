@@ -1,15 +1,15 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2010 Cosimo Cecchi <cosimoc@gnome.org>
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -33,11 +33,11 @@ enum {
 	NUM_PROPERTIES
 };
 
-struct _CajaConnectServerOperationPrivate {
-	CajaConnectServerDialog *dialog;
+struct _BaulConnectServerOperationPrivate {
+	BaulConnectServerDialog *dialog;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaConnectServerOperation,
+G_DEFINE_TYPE_WITH_PRIVATE (BaulConnectServerOperation,
 	       baul_connect_server_operation, GTK_TYPE_MOUNT_OPERATION);
 
 static void
@@ -45,8 +45,8 @@ fill_details_async_cb (GObject *source,
 		       GAsyncResult *result,
 		       gpointer user_data)
 {
-	CajaConnectServerDialog *dialog;
-	CajaConnectServerOperation *self;
+	BaulConnectServerDialog *dialog;
+	BaulConnectServerOperation *self;
 	gboolean res;
 
 	self = user_data;
@@ -68,7 +68,7 @@ baul_connect_server_operation_ask_password (GMountOperation *op,
 						const gchar *default_domain,
 						GAskPasswordFlags flags)
 {
-	CajaConnectServerOperation *self;
+	BaulConnectServerOperation *self;
 
 	self = BAUL_CONNECT_SERVER_OPERATION (op);
 
@@ -87,7 +87,7 @@ baul_connect_server_operation_set_property (GObject *object,
 						const GValue *value,
 						GParamSpec *pspec)
 {
-	CajaConnectServerOperation *self;
+	BaulConnectServerOperation *self;
 
 	self = BAUL_CONNECT_SERVER_OPERATION (object);
 
@@ -102,7 +102,7 @@ baul_connect_server_operation_set_property (GObject *object,
 }
 
 static void
-baul_connect_server_operation_class_init (CajaConnectServerOperationClass *klass)
+baul_connect_server_operation_class_init (BaulConnectServerOperationClass *klass)
 {
 	GMountOperationClass *mount_op_class;
 	GObjectClass *object_class;
@@ -122,13 +122,13 @@ baul_connect_server_operation_class_init (CajaConnectServerOperationClass *klass
 }
 
 static void
-baul_connect_server_operation_init (CajaConnectServerOperation *self)
+baul_connect_server_operation_init (BaulConnectServerOperation *self)
 {
 	self->details = baul_connect_server_operation_get_instance_private (self);
 }
 
 GMountOperation *
-baul_connect_server_operation_new (CajaConnectServerDialog *dialog)
+baul_connect_server_operation_new (BaulConnectServerDialog *dialog)
 {
 	return g_object_new (BAUL_TYPE_CONNECT_SERVER_OPERATION,
 			     "dialog", dialog,

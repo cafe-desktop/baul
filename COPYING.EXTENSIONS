@@ -1,4 +1,4 @@
-Caja extensions link against the libbaul-extenstions library which is
+Baul extensions link against the libbaul-extenstions library which is
 is under the LGPL license. However, they also get loaded into the main
 baul program which is licensed under the GPL. So, extensions should not
 be incompatible with the LGPL or GPL.

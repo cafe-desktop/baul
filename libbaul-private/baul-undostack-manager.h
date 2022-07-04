@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* CajaUndoStackManager - Manages undo of file operations (header)
+/* BaulUndoStackManager - Manages undo of file operations (header)
  *
  * Copyright (C) 2007-2010 Amos Brocco
  * Copyright (C) 2011 Stefano Karapetsas
@@ -51,13 +51,13 @@ typedef enum
   BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS,
   BAUL_UNDOSTACK_CHANGEOWNER,
   BAUL_UNDOSTACK_CHANGEGROUP
-} CajaUndoStackActionType;
+} BaulUndoStackActionType;
 
-typedef struct _CajaUndoStackActionData CajaUndoStackActionData;
+typedef struct _BaulUndoStackActionData BaulUndoStackActionData;
 
-typedef struct _CajaUndoStackMenuData CajaUndoStackMenuData;
+typedef struct _BaulUndoStackMenuData BaulUndoStackMenuData;
 
-struct _CajaUndoStackMenuData {
+struct _BaulUndoStackMenuData {
   char* undo_label;
   char* undo_description;
   char* redo_label;
@@ -67,31 +67,31 @@ struct _CajaUndoStackMenuData {
 /* End action structures */
 
 typedef void
-(*CajaUndostackFinishCallback)(gpointer data);
+(*BaulUndostackFinishCallback)(gpointer data);
 
-typedef struct _CajaUndoStackManagerPrivate CajaUndoStackManagerPrivate;
+typedef struct _BaulUndoStackManagerPrivate BaulUndoStackManagerPrivate;
 
-typedef struct _CajaUndoStackManager
+typedef struct _BaulUndoStackManager
 {
   GObject parent_instance;
 
-  CajaUndoStackManagerPrivate* priv;
+  BaulUndoStackManagerPrivate* priv;
 
-} CajaUndoStackManager;
+} BaulUndoStackManager;
 
-typedef struct _CajaUndoStackManagerClass
+typedef struct _BaulUndoStackManagerClass
 {
   GObjectClass parent_class;
 
-} CajaUndoStackManagerClass;
+} BaulUndoStackManagerClass;
 
 #define TYPE_BAUL_UNDOSTACK_MANAGER (baul_undostack_manager_get_type())
 
 #define BAUL_UNDOSTACK_MANAGER(object) \
- (G_TYPE_CHECK_INSTANCE_CAST((object), TYPE_BAUL_UNDOSTACK_MANAGER, CajaUndoStackManager))
+ (G_TYPE_CHECK_INSTANCE_CAST((object), TYPE_BAUL_UNDOSTACK_MANAGER, BaulUndoStackManager))
 
 #define BAUL_UNDOSTACK_MANAGER_CLASS(klass) \
- (G_TYPE_CHECK_CLASS_CAST((klass), TYPE_BAUL_UNDOSTACK_MANAGER, CajaUndoStackManagerClass))
+ (G_TYPE_CHECK_CLASS_CAST((klass), TYPE_BAUL_UNDOSTACK_MANAGER, BaulUndoStackManagerClass))
 
 #define IS_BAUL_UNDOSTACK_MANAGER(object) \
  (G_TYPE_CHECK_INSTANCE_TYPE((object), TYPE_BAUL_UNDOSTACK_MANAGER))
@@ -100,85 +100,85 @@ typedef struct _CajaUndoStackManagerClass
  (G_TYPE_CHECK_CLASS_TYPE((klass), TYPE_BAUL_UNDOSTACK_MANAGER))
 
 #define BAUL_UNDOSTACK_MANAGER_GET_CLASS(object) \
- (G_TYPE_INSTANCE_GET_CLASS((object), TYPE_BAUL_UNDOSTACK_MANAGER, CajaUndoStackManagerClass))
+ (G_TYPE_INSTANCE_GET_CLASS((object), TYPE_BAUL_UNDOSTACK_MANAGER, BaulUndoStackManagerClass))
 
 GType
 baul_undostack_manager_get_type (void);
 
 void
-baul_undostack_manager_add_action(CajaUndoStackManager* manager,
-    CajaUndoStackActionData* action);
+baul_undostack_manager_add_action(BaulUndoStackManager* manager,
+    BaulUndoStackActionData* action);
 
 void
-baul_undostack_manager_undo(CajaUndoStackManager* manager,
-    GtkWidget *parent_view, CajaUndostackFinishCallback cb);
+baul_undostack_manager_undo(BaulUndoStackManager* manager,
+    GtkWidget *parent_view, BaulUndostackFinishCallback cb);
 
 void
-baul_undostack_manager_redo(CajaUndoStackManager* manager,
-    GtkWidget *parent_view, CajaUndostackFinishCallback cb);
+baul_undostack_manager_redo(BaulUndoStackManager* manager,
+    GtkWidget *parent_view, BaulUndostackFinishCallback cb);
 
-CajaUndoStackActionData*
-baul_undostack_manager_data_new(CajaUndoStackActionType type,
+BaulUndoStackActionData*
+baul_undostack_manager_data_new(BaulUndoStackActionType type,
     gint items_count);
 
 gboolean
-baul_undostack_manager_is_undo_redo(CajaUndoStackManager* manager);
+baul_undostack_manager_is_undo_redo(BaulUndoStackManager* manager);
 
 void
-baul_undostack_manager_trash_has_emptied(CajaUndoStackManager* manager);
+baul_undostack_manager_trash_has_emptied(BaulUndoStackManager* manager);
 
-CajaUndoStackManager*
+BaulUndoStackManager*
 baul_undostack_manager_instance(void);
 
 void
-baul_undostack_manager_data_set_src_dir(CajaUndoStackActionData* data,
+baul_undostack_manager_data_set_src_dir(BaulUndoStackActionData* data,
     GFile* src);
 
 void
-baul_undostack_manager_data_set_dest_dir(CajaUndoStackActionData* data,
+baul_undostack_manager_data_set_dest_dir(BaulUndoStackActionData* data,
     GFile* dest);
 
 void
 baul_undostack_manager_data_add_origin_target_pair(
-    CajaUndoStackActionData* data, GFile* origin, GFile* target);
+    BaulUndoStackActionData* data, GFile* origin, GFile* target);
 
 void
 baul_undostack_manager_data_set_create_data(
-    CajaUndoStackActionData* data, char* target_uri, char* template_uri);
+    BaulUndoStackActionData* data, char* target_uri, char* template_uri);
 
 void
 baul_undostack_manager_data_set_rename_information(
-    CajaUndoStackActionData* data, GFile* old_file, GFile* new_file);
+    BaulUndoStackActionData* data, GFile* old_file, GFile* new_file);
 
 guint64
 baul_undostack_manager_get_file_modification_time(GFile* file);
 
 void
 baul_undostack_manager_data_add_trashed_file(
-    CajaUndoStackActionData* data, GFile* file, guint64 mtime);
+    BaulUndoStackActionData* data, GFile* file, guint64 mtime);
 
 void
-baul_undostack_manager_request_menu_update(CajaUndoStackManager* manager);
+baul_undostack_manager_request_menu_update(BaulUndoStackManager* manager);
 
 void
 baul_undostack_manager_data_add_file_permissions(
-    CajaUndoStackActionData* data, GFile* file, guint32 permission);
+    BaulUndoStackActionData* data, GFile* file, guint32 permission);
 
 void
 baul_undostack_manager_data_set_recursive_permissions(
-    CajaUndoStackActionData* data, guint32 file_permissions, guint32 file_mask,
+    BaulUndoStackActionData* data, guint32 file_permissions, guint32 file_mask,
 	guint32 dir_permissions, guint32 dir_mask);
 
 void
 baul_undostack_manager_data_set_file_permissions(
-    CajaUndoStackActionData* data, char* uri, guint32 current_permissions, guint32 new_permissions);
+    BaulUndoStackActionData* data, char* uri, guint32 current_permissions, guint32 new_permissions);
 
 void
 baul_undostack_manager_data_set_owner_change_information(
-    CajaUndoStackActionData* data, char* uri, const char* current_user, const char* new_user);
+    BaulUndoStackActionData* data, char* uri, const char* current_user, const char* new_user);
 
 void
 baul_undostack_manager_data_set_group_change_information(
-    CajaUndoStackActionData* data, char* uri, const char* current_group, const char* new_group);
+    BaulUndoStackActionData* data, char* uri, const char* current_group, const char* new_group);
 
 #endif /* BAUL_UNDOSTACK_MANAGER_H */

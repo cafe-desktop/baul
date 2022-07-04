@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2002 Sun Microsystems, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful, but
+ * Baul is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -48,7 +48,7 @@
 
 #define HOVER_EXPAND_TIMEOUT 1
 
-struct _CajaTreeViewDragDestDetails
+struct _BaulTreeViewDragDestDetails
 {
     GtkTreeView *tree_view;
 
@@ -80,7 +80,7 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (CajaTreeViewDragDest, baul_tree_view_drag_dest,
+G_DEFINE_TYPE (BaulTreeViewDragDest, baul_tree_view_drag_dest,
                G_TYPE_OBJECT);
 
 #define parent_class baul_tree_view_drag_dest_parent_class
@@ -150,7 +150,7 @@ scroll_timeout (gpointer data)
 }
 
 static void
-remove_scroll_timeout (CajaTreeViewDragDest *dest)
+remove_scroll_timeout (BaulTreeViewDragDest *dest)
 {
     if (dest->details->scroll_id)
     {
@@ -179,7 +179,7 @@ expand_timeout (gpointer data)
 }
 
 static void
-remove_expand_timeout (CajaTreeViewDragDest *dest)
+remove_expand_timeout (BaulTreeViewDragDest *dest)
 {
     if (dest->details->expand_id)
     {
@@ -219,7 +219,7 @@ highlight_draw (GtkWidget *widget,
 }
 
 static void
-set_widget_highlight (CajaTreeViewDragDest *dest, gboolean highlight)
+set_widget_highlight (BaulTreeViewDragDest *dest, gboolean highlight)
 {
     if (!highlight && dest->details->highlight_id)
     {
@@ -241,7 +241,7 @@ set_widget_highlight (CajaTreeViewDragDest *dest, gboolean highlight)
 }
 
 static void
-set_drag_dest_row (CajaTreeViewDragDest *dest,
+set_drag_dest_row (BaulTreeViewDragDest *dest,
                    GtkTreePath *path)
 {
     if (path)
@@ -262,14 +262,14 @@ set_drag_dest_row (CajaTreeViewDragDest *dest,
 }
 
 static void
-clear_drag_dest_row (CajaTreeViewDragDest *dest)
+clear_drag_dest_row (BaulTreeViewDragDest *dest)
 {
     gtk_tree_view_set_drag_dest_row (dest->details->tree_view, NULL, 0);
     set_widget_highlight (dest, FALSE);
 }
 
 static gboolean
-get_drag_data (CajaTreeViewDragDest *dest,
+get_drag_data (BaulTreeViewDragDest *dest,
                GdkDragContext *context,
                guint32 time)
 {
@@ -299,7 +299,7 @@ get_drag_data (CajaTreeViewDragDest *dest,
 }
 
 static void
-free_drag_data (CajaTreeViewDragDest *dest)
+free_drag_data (BaulTreeViewDragDest *dest)
 {
     dest->details->have_drag_data = FALSE;
 
@@ -320,7 +320,7 @@ free_drag_data (CajaTreeViewDragDest *dest)
 }
 
 static char *
-get_root_uri (CajaTreeViewDragDest *dest)
+get_root_uri (BaulTreeViewDragDest *dest)
 {
     char *uri;
 
@@ -329,10 +329,10 @@ get_root_uri (CajaTreeViewDragDest *dest)
     return uri;
 }
 
-static CajaFile *
-file_for_path (CajaTreeViewDragDest *dest, GtkTreePath *path)
+static BaulFile *
+file_for_path (BaulTreeViewDragDest *dest, GtkTreePath *path)
 {
-    CajaFile *file;
+    BaulFile *file;
 
     if (path)
     {
@@ -357,10 +357,10 @@ file_for_path (CajaTreeViewDragDest *dest, GtkTreePath *path)
 }
 
 static GtkTreePath *
-get_drop_path (CajaTreeViewDragDest *dest,
+get_drop_path (BaulTreeViewDragDest *dest,
                GtkTreePath *path)
 {
-    CajaFile *file;
+    BaulFile *file;
     GtkTreePath *ret;
 
     if (!path || !dest->details->have_drag_data)
@@ -397,10 +397,10 @@ get_drop_path (CajaTreeViewDragDest *dest,
 }
 
 static char *
-get_drop_target_uri_for_path (CajaTreeViewDragDest *dest,
+get_drop_target_uri_for_path (BaulTreeViewDragDest *dest,
                               GtkTreePath *path)
 {
-    CajaFile *file;
+    BaulFile *file;
     char *target;
 
     file = file_for_path (dest, path);
@@ -416,7 +416,7 @@ get_drop_target_uri_for_path (CajaTreeViewDragDest *dest,
 }
 
 static guint
-get_drop_action (CajaTreeViewDragDest *dest,
+get_drop_action (BaulTreeViewDragDest *dest,
                  GdkDragContext *context,
                  GtkTreePath *path)
 {
@@ -502,7 +502,7 @@ drag_motion_callback (GtkWidget *widget,
                       guint32 time,
                       gpointer data)
 {
-    CajaTreeViewDragDest *dest;
+    BaulTreeViewDragDest *dest;
     GtkTreePath *path;
     GtkTreePath *drop_path, *old_drop_path;
     GtkTreeIter drop_iter;
@@ -607,7 +607,7 @@ drag_leave_callback (GtkWidget *widget,
                      guint32 time,
                      gpointer data)
 {
-    CajaTreeViewDragDest *dest;
+    BaulTreeViewDragDest *dest;
 
     dest = BAUL_TREE_VIEW_DRAG_DEST (data);
 
@@ -620,7 +620,7 @@ drag_leave_callback (GtkWidget *widget,
 }
 
 static char *
-get_drop_target_uri_at_pos (CajaTreeViewDragDest *dest, int x, int y)
+get_drop_target_uri_at_pos (BaulTreeViewDragDest *dest, int x, int y)
 {
     char *drop_target;
     GtkTreePath *path;
@@ -648,7 +648,7 @@ get_drop_target_uri_at_pos (CajaTreeViewDragDest *dest, int x, int y)
 }
 
 static void
-receive_uris (CajaTreeViewDragDest *dest,
+receive_uris (BaulTreeViewDragDest *dest,
               GdkDragContext *context,
               GList *source_uris,
               int x, int y)
@@ -699,7 +699,7 @@ receive_uris (CajaTreeViewDragDest *dest,
 }
 
 static void
-receive_dropped_icons (CajaTreeViewDragDest *dest,
+receive_dropped_icons (BaulTreeViewDragDest *dest,
                        GdkDragContext *context,
                        int x, int y)
 {
@@ -717,7 +717,7 @@ receive_dropped_icons (CajaTreeViewDragDest *dest,
     for (l = dest->details->drag_list; l != NULL; l = l->next)
     {
         source_uris = g_list_prepend (source_uris,
-                                      ((CajaDragSelectionItem *)l->data)->uri);
+                                      ((BaulDragSelectionItem *)l->data)->uri);
     }
 
     source_uris = g_list_reverse (source_uris);
@@ -728,7 +728,7 @@ receive_dropped_icons (CajaTreeViewDragDest *dest,
 }
 
 static void
-receive_dropped_uri_list (CajaTreeViewDragDest *dest,
+receive_dropped_uri_list (BaulTreeViewDragDest *dest,
                           GdkDragContext *context,
                           int x, int y)
 {
@@ -752,7 +752,7 @@ receive_dropped_uri_list (CajaTreeViewDragDest *dest,
 }
 
 static void
-receive_dropped_text (CajaTreeViewDragDest *dest,
+receive_dropped_text (BaulTreeViewDragDest *dest,
                       GdkDragContext *context,
                       int x, int y)
 {
@@ -778,7 +778,7 @@ receive_dropped_text (CajaTreeViewDragDest *dest,
 }
 
 static void
-receive_dropped_raw (CajaTreeViewDragDest *dest,
+receive_dropped_raw (BaulTreeViewDragDest *dest,
                      const char *raw_data, int length,
                      GdkDragContext *context,
                      int x, int y)
@@ -803,7 +803,7 @@ receive_dropped_raw (CajaTreeViewDragDest *dest,
 }
 
 static void
-receive_dropped_netscape_url (CajaTreeViewDragDest *dest,
+receive_dropped_netscape_url (BaulTreeViewDragDest *dest,
                               GdkDragContext *context,
                               int x, int y)
 {
@@ -827,12 +827,12 @@ receive_dropped_netscape_url (CajaTreeViewDragDest *dest,
 }
 
 static void
-receive_dropped_keyword (CajaTreeViewDragDest *dest,
+receive_dropped_keyword (BaulTreeViewDragDest *dest,
                          GdkDragContext *context,
                          int x, int y)
 {
     char *drop_target_uri;
-    CajaFile *drop_target_file;
+    BaulFile *drop_target_file;
 
     if (!dest->details->drag_data)
     {
@@ -855,7 +855,7 @@ receive_dropped_keyword (CajaTreeViewDragDest *dest,
 }
 
 static gboolean
-receive_xds (CajaTreeViewDragDest *dest,
+receive_xds (BaulTreeViewDragDest *dest,
              GtkWidget *widget,
              guint32 time,
              GdkDragContext *context,
@@ -906,7 +906,7 @@ drag_data_received_callback (GtkWidget *widget,
                              guint32 time,
                              gpointer data)
 {
-    CajaTreeViewDragDest *dest;
+    BaulTreeViewDragDest *dest;
     gboolean success, finished;
 
     dest = BAUL_TREE_VIEW_DRAG_DEST (data);
@@ -1014,7 +1014,7 @@ get_direct_save_filename (GdkDragContext *context)
 }
 
 static gboolean
-set_direct_save_uri (CajaTreeViewDragDest *dest,
+set_direct_save_uri (BaulTreeViewDragDest *dest,
                      GdkDragContext *context,
                      int x, int y)
 {
@@ -1076,7 +1076,7 @@ drag_drop_callback (GtkWidget *widget,
                     guint32 time,
                     gpointer data)
 {
-    CajaTreeViewDragDest *dest;
+    BaulTreeViewDragDest *dest;
     guint info;
     GdkAtom target;
 
@@ -1118,7 +1118,7 @@ static void
 tree_view_weak_notify (gpointer user_data,
                        GObject *object)
 {
-    CajaTreeViewDragDest *dest;
+    BaulTreeViewDragDest *dest;
 
     dest = BAUL_TREE_VIEW_DRAG_DEST (user_data);
 
@@ -1131,7 +1131,7 @@ tree_view_weak_notify (gpointer user_data,
 static void
 baul_tree_view_drag_dest_dispose (GObject *object)
 {
-    CajaTreeViewDragDest *dest;
+    BaulTreeViewDragDest *dest;
 
     dest = BAUL_TREE_VIEW_DRAG_DEST (object);
 
@@ -1151,7 +1151,7 @@ baul_tree_view_drag_dest_dispose (GObject *object)
 static void
 baul_tree_view_drag_dest_finalize (GObject *object)
 {
-    CajaTreeViewDragDest *dest;
+    BaulTreeViewDragDest *dest;
 
     dest = BAUL_TREE_VIEW_DRAG_DEST (object);
 
@@ -1163,13 +1163,13 @@ baul_tree_view_drag_dest_finalize (GObject *object)
 }
 
 static void
-baul_tree_view_drag_dest_init (CajaTreeViewDragDest *dest)
+baul_tree_view_drag_dest_init (BaulTreeViewDragDest *dest)
 {
-    dest->details = g_new0 (CajaTreeViewDragDestDetails, 1);
+    dest->details = g_new0 (BaulTreeViewDragDestDetails, 1);
 }
 
 static void
-baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
+baul_tree_view_drag_dest_class_init (BaulTreeViewDragDestClass *class)
 {
     GObjectClass *gobject_class;
 
@@ -1182,7 +1182,7 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
         g_signal_new ("get_root_uri",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
+                      G_STRUCT_OFFSET (BaulTreeViewDragDestClass,
                                        get_root_uri),
                       NULL, NULL,
                       baul_marshal_STRING__VOID,
@@ -1191,7 +1191,7 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
         g_signal_new ("get_file_for_path",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
+                      G_STRUCT_OFFSET (BaulTreeViewDragDestClass,
                                        get_file_for_path),
                       NULL, NULL,
                       baul_marshal_OBJECT__BOXED,
@@ -1201,7 +1201,7 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
         g_signal_new ("move_copy_items",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
+                      G_STRUCT_OFFSET (BaulTreeViewDragDestClass,
                                        move_copy_items),
                       NULL, NULL,
 
@@ -1216,7 +1216,7 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
         g_signal_new ("handle_netscape_url",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
+                      G_STRUCT_OFFSET (BaulTreeViewDragDestClass,
                                        handle_netscape_url),
                       NULL, NULL,
                       baul_marshal_VOID__STRING_STRING_ENUM_INT_INT,
@@ -1230,7 +1230,7 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
         g_signal_new ("handle_uri_list",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
+                      G_STRUCT_OFFSET (BaulTreeViewDragDestClass,
                                        handle_uri_list),
                       NULL, NULL,
                       baul_marshal_VOID__STRING_STRING_ENUM_INT_INT,
@@ -1244,7 +1244,7 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
         g_signal_new ("handle_text",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
+                      G_STRUCT_OFFSET (BaulTreeViewDragDestClass,
                                        handle_text),
                       NULL, NULL,
                       baul_marshal_VOID__STRING_STRING_ENUM_INT_INT,
@@ -1258,7 +1258,7 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
         g_signal_new ("handle_raw",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaTreeViewDragDestClass,
+                      G_STRUCT_OFFSET (BaulTreeViewDragDestClass,
                                        handle_raw),
                       NULL, NULL,
                       baul_marshal_VOID__POINTER_INT_STRING_STRING_ENUM_INT_INT,
@@ -1274,10 +1274,10 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
 
 
 
-CajaTreeViewDragDest *
+BaulTreeViewDragDest *
 baul_tree_view_drag_dest_new (GtkTreeView *tree_view)
 {
-    CajaTreeViewDragDest *dest;
+    BaulTreeViewDragDest *dest;
     GtkTargetList *targets;
 
     dest = g_object_new (BAUL_TYPE_TREE_VIEW_DRAG_DEST, NULL);

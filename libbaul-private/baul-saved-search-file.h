@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-saved-search-file.h: Subclass of CajaVFSFile to implement the
+   baul-saved-search-file.h: Subclass of BaulVFSFile to implement the
    the case of a Saved Search file.
 
    Copyright (C) 2005 Red Hat, Inc
@@ -30,28 +30,28 @@
 
 #define BAUL_TYPE_SAVED_SEARCH_FILE baul_saved_search_file_get_type()
 #define BAUL_SAVED_SEARCH_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFile))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SAVED_SEARCH_FILE, BaulSavedSearchFile))
 #define BAUL_SAVED_SEARCH_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFileClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SAVED_SEARCH_FILE, BaulSavedSearchFileClass))
 #define BAUL_IS_SAVED_SEARCH_FILE(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SAVED_SEARCH_FILE))
 #define BAUL_IS_SAVED_SEARCH_FILE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SAVED_SEARCH_FILE))
 #define BAUL_SAVED_SEARCH_FILE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFileClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SAVED_SEARCH_FILE, BaulSavedSearchFileClass))
 
 
-typedef struct CajaSavedSearchFileDetails CajaSavedSearchFileDetails;
-
-typedef struct
-{
-    CajaFile parent_slot;
-} CajaSavedSearchFile;
+typedef struct BaulSavedSearchFileDetails BaulSavedSearchFileDetails;
 
 typedef struct
 {
-    CajaFileClass parent_slot;
-} CajaSavedSearchFileClass;
+    BaulFile parent_slot;
+} BaulSavedSearchFile;
+
+typedef struct
+{
+    BaulFileClass parent_slot;
+} BaulSavedSearchFileClass;
 
 GType   baul_saved_search_file_get_type (void);
 

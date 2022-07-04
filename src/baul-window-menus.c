@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000, 2001 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -67,17 +67,17 @@
 /* Struct that stores all the info necessary to activate a bookmark. */
 typedef struct
 {
-    CajaBookmark *bookmark;
-    CajaWindow *window;
+    BaulBookmark *bookmark;
+    BaulWindow *window;
     guint changed_handler_id;
-    CajaBookmarkFailedCallback failed_callback;
+    BaulBookmarkFailedCallback failed_callback;
 } BookmarkHolder;
 
 static BookmarkHolder *
-bookmark_holder_new (CajaBookmark *bookmark,
-                     CajaWindow *window,
+bookmark_holder_new (BaulBookmark *bookmark,
+                     BaulWindow *window,
                      GCallback refresh_callback,
-                     CajaBookmarkFailedCallback failed_callback)
+                     BaulBookmarkFailedCallback failed_callback)
 {
     BookmarkHolder *new_bookmark_holder;
 
@@ -151,7 +151,7 @@ activate_bookmark_in_menu_item (GtkAction *action, gpointer user_data)
     }
     else
     {
-        CajaWindowSlot *slot;
+        BaulWindowSlot *slot;
         GFile *location;
 
         location = baul_bookmark_get_location (holder->bookmark);
@@ -164,15 +164,15 @@ activate_bookmark_in_menu_item (GtkAction *action, gpointer user_data)
 }
 
 void
-baul_menus_append_bookmark_to_menu (CajaWindow *window,
-                                    CajaBookmark *bookmark,
+baul_menus_append_bookmark_to_menu (BaulWindow *window,
+                                    BaulBookmark *bookmark,
                                     const char *parent_path,
                                     const char *parent_id,
                                     guint index_in_parent,
                                     GtkActionGroup *action_group,
                                     guint merge_id,
                                     GCallback refresh_callback,
-                                    CajaBookmarkFailedCallback failed_callback)
+                                    BaulBookmarkFailedCallback failed_callback)
 {
     BookmarkHolder *bookmark_holder;
     char action_name[128];
@@ -239,8 +239,8 @@ static void
 action_close_window_slot_callback (GtkAction *action,
                                    gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
 
     window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
@@ -252,7 +252,7 @@ static void
 action_connect_to_server_callback (GtkAction *action,
                                    gpointer user_data)
 {
-    CajaWindow *window = BAUL_WINDOW (user_data);
+    BaulWindow *window = BAUL_WINDOW (user_data);
     GtkWidget *dialog;
 
     dialog = baul_connect_server_dialog_new (window);
@@ -264,8 +264,8 @@ static void
 action_stop_callback (GtkAction *action,
                       gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
 
     window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
@@ -277,8 +277,8 @@ static void
 action_home_callback (GtkAction *action,
                       gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
 
     window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
@@ -291,8 +291,8 @@ static void
 action_go_to_computer_callback (GtkAction *action,
                                 gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
     GFile *computer;
 
     window = BAUL_WINDOW (user_data);
@@ -309,8 +309,8 @@ static void
 action_go_to_network_callback (GtkAction *action,
                                gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
     GFile *network;
 
     window = BAUL_WINDOW (user_data);
@@ -327,8 +327,8 @@ static void
 action_go_to_templates_callback (GtkAction *action,
                                  gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
     char *path;
     GFile *location;
 
@@ -348,8 +348,8 @@ static void
 action_go_to_trash_callback (GtkAction *action,
                              gpointer user_data)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
     GFile *trash;
 
     window = BAUL_WINDOW (user_data);
@@ -394,8 +394,8 @@ static void
 action_show_hidden_files_callback (GtkAction *action,
                                    gpointer callback_data)
 {
-    CajaWindow *window;
-    CajaWindowShowHiddenFilesMode mode;
+    BaulWindow *window;
+    BaulWindowShowHiddenFilesMode mode;
 
     window = BAUL_WINDOW (callback_data);
 
@@ -417,8 +417,8 @@ static void
 action_show_backup_files_callback (GtkAction *action,
                                    gpointer callback_data)
 {
-    CajaWindow *window;
-    CajaWindowShowBackupFilesMode mode;
+    BaulWindow *window;
+    BaulWindowShowBackupFilesMode mode;
 
     window = BAUL_WINDOW (callback_data);
 
@@ -439,7 +439,7 @@ action_show_backup_files_callback (GtkAction *action,
 static void
 show_hidden_files_preference_callback (gpointer callback_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (callback_data);
 
@@ -467,7 +467,7 @@ show_hidden_files_preference_callback (gpointer callback_data)
 static void
 show_backup_files_preference_callback (gpointer callback_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (callback_data);
 
@@ -532,16 +532,16 @@ action_about_baul_callback (GtkAction *action,
 {
     const gchar *license[] =
     {
-        N_("Caja is free software; you can redistribute it and/or modify "
+        N_("Baul is free software; you can redistribute it and/or modify "
         "it under the terms of the GNU General Public License as published by "
         "the Free Software Foundation; either version 2 of the License, or "
         "(at your option) any later version."),
-        N_("Caja is distributed in the hope that it will be useful, "
+        N_("Baul is distributed in the hope that it will be useful, "
         "but WITHOUT ANY WARRANTY; without even the implied warranty of "
         "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
         "GNU General Public License for more details."),
         N_("You should have received a copy of the GNU General Public License "
-        "along with Caja; if not, write to the Free Software Foundation, Inc., "
+        "along with Baul; if not, write to the Free Software Foundation, Inc., "
         "51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA")
     };
     gchar *license_trans;
@@ -571,14 +571,14 @@ action_about_baul_callback (GtkAction *action,
     license_trans = g_strjoin ("\n\n", _(license[0]), _(license[1]), _(license[2]), NULL);
 
     gtk_show_about_dialog (GTK_WINDOW (user_data),
-                           "program-name", _("Caja"),
-                           "title", _("About Caja"),
+                           "program-name", _("Baul"),
+                           "title", _("About Baul"),
                            "version", VERSION,
-                           "comments", _("Caja lets you organize "
+                           "comments", _("Baul lets you organize "
                                          "files and folders, both on "
                                          "your computer and online."),
                            "copyright", _("Copyright \xC2\xA9 1999-2009 The Nautilus authors\n"
-                                          "Copyright \xC2\xA9 2011-2020 The Caja authors"),
+                                          "Copyright \xC2\xA9 2011-2020 The Baul authors"),
                            "license", license_trans,
                            "wrap-license", TRUE,
                            "authors", authors,
@@ -606,7 +606,7 @@ static void
 action_baul_manual_callback (GtkAction *action,
                              gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GError *error;
 
     error = NULL;
@@ -640,7 +640,7 @@ action_baul_manual_callback (GtkAction *action,
 
 static void
 menu_item_select_cb (GtkMenuItem *proxy,
-                     CajaWindow *window)
+                     BaulWindow *window)
 {
     GtkAction *action;
     char *message;
@@ -661,7 +661,7 @@ menu_item_select_cb (GtkMenuItem *proxy,
 
 static void
 menu_item_deselect_cb (GtkMenuItem *proxy,
-                       CajaWindow *window)
+                       BaulWindow *window)
 {
     gtk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar),
                        window->details->help_message_cid);
@@ -734,7 +734,7 @@ static void
 disconnect_proxy_cb (GtkUIManager *manager,
                      GtkAction *action,
                      GtkWidget *proxy,
-                     CajaWindow *window)
+                     BaulWindow *window)
 {
     GtkWidget *widget;
 
@@ -763,7 +763,7 @@ static void
 connect_proxy_cb (GtkUIManager *manager,
                   GtkAction *action,
                   GtkWidget *proxy,
-                  CajaWindow *window)
+                  BaulWindow *window)
 {
     cairo_surface_t *icon;
     GtkWidget *widget;
@@ -809,9 +809,9 @@ connect_proxy_cb (GtkUIManager *manager,
 }
 
 static void
-trash_state_changed_cb (CajaTrashMonitor *monitor,
+trash_state_changed_cb (BaulTrashMonitor *monitor,
                         gboolean state,
-                        CajaWindow *window)
+                        BaulWindow *window)
 {
     GtkActionGroup *action_group;
     GtkAction *action;
@@ -832,9 +832,9 @@ trash_state_changed_cb (CajaTrashMonitor *monitor,
 }
 
 static void
-baul_window_initialize_trash_icon_monitor (CajaWindow *window)
+baul_window_initialize_trash_icon_monitor (BaulWindow *window)
 {
-    CajaTrashMonitor *monitor;
+    BaulTrashMonitor *monitor;
 
     monitor = baul_trash_monitor_get ();
 
@@ -864,7 +864,7 @@ static const GtkActionEntry main_entries[] =
     {
         "Preferences", "preferences-desktop",
         N_("Prefere_nces"),
-        NULL, N_("Edit Caja preferences"),
+        NULL, N_("Edit Baul preferences"),
         G_CALLBACK (action_preferences_callback)
     },
     /* name, icon name, label */ { "Up", "go-up", N_("Open _Parent"),
@@ -885,14 +885,14 @@ static const GtkActionEntry main_entries[] =
         /* tooltip */                  N_("Reload the current location"),
         G_CALLBACK (action_reload_callback)
     },
-    /* name, icon name */        { "Caja Manual", "help-browser",
+    /* name, icon name */        { "Baul Manual", "help-browser",
         /* label, accelerator */       N_("_Contents"), "F1",
-        /* tooltip */                  N_("Display Caja help"),
+        /* tooltip */                  N_("Display Baul help"),
         G_CALLBACK (action_baul_manual_callback)
     },
-    /* name, icon name */        { "About Caja", "help-about",
+    /* name, icon name */        { "About Baul", "help-about",
         /* label, accelerator */       N_("_About"), NULL,
-        /* tooltip */                  N_("Display credits for the creators of Caja"),
+        /* tooltip */                  N_("Display credits for the creators of Baul"),
         G_CALLBACK (action_about_baul_callback)
     },
     /* name, icon name */        { "Zoom In", "zoom-in",
@@ -978,10 +978,10 @@ static const GtkToggleActionEntry main_toggle_entries[] =
  * baul_window_initialize_menus
  *
  * Create and install the set of menus for this window.
- * @window: A recently-created CajaWindow.
+ * @window: A recently-created BaulWindow.
  */
 void
-baul_window_initialize_menus (CajaWindow *window)
+baul_window_initialize_menus (BaulWindow *window)
 {
     GtkActionGroup *action_group;
     GtkUIManager *ui_manager;
@@ -1045,9 +1045,9 @@ baul_window_initialize_menus (CajaWindow *window)
 }
 
 void
-baul_window_finalize_menus (CajaWindow *window)
+baul_window_finalize_menus (BaulWindow *window)
 {
-    CajaTrashMonitor *monitor;
+    BaulTrashMonitor *monitor;
 
     monitor = baul_trash_monitor_get ();
 
@@ -1062,9 +1062,9 @@ baul_window_finalize_menus (CajaWindow *window)
 }
 
 static GList *
-get_extension_menus (CajaWindow *window)
+get_extension_menus (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GList *providers;
     GList *items;
     GList *l;
@@ -1076,7 +1076,7 @@ get_extension_menus (CajaWindow *window)
 
     for (l = providers; l != NULL; l = l->next)
     {
-        CajaMenuProvider *provider;
+        BaulMenuProvider *provider;
         GList *file_items;
 
         provider = BAUL_MENU_PROVIDER (l->data);
@@ -1092,7 +1092,7 @@ get_extension_menus (CajaWindow *window)
 }
 
 static void
-add_extension_menu_items (CajaWindow *window,
+add_extension_menu_items (BaulWindow *window,
                           guint merge_id,
                           GtkActionGroup *action_group,
                           GList *menu_items,
@@ -1105,8 +1105,8 @@ add_extension_menu_items (CajaWindow *window,
 
     for (l = menu_items; l; l = l->next)
     {
-        CajaMenuItem *item;
-        CajaMenu *menu;
+        BaulMenuItem *item;
+        BaulMenu *menu;
         GtkAction *action;
         char *path;
         const gchar *action_name;
@@ -1165,7 +1165,7 @@ add_extension_menu_items (CajaWindow *window,
 }
 
 void
-baul_window_load_extension_menus (CajaWindow *window)
+baul_window_load_extension_menus (BaulWindow *window)
 {
     GtkActionGroup *action_group;
     GList *items;

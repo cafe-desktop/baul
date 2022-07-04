@@ -301,7 +301,7 @@ baul_file_management_properties_dialog_response_cb (GtkDialog *parent,
 }
 
 static void
-columns_changed_callback (CajaColumnChooser *chooser,
+columns_changed_callback (BaulColumnChooser *chooser,
                           gpointer callback_data)
 {
     char **visible_columns;
@@ -344,7 +344,7 @@ create_icon_caption_combo_box_items (GtkComboBoxText *combo_box,
 
     for (l = columns; l != NULL; l = l->next)
     {
-        CajaColumn *column;
+        BaulColumn *column;
         char *name;
         char *label;
 
@@ -537,7 +537,7 @@ create_date_format_menu (GtkBuilder *builder)
 }
 
 static void
-set_columns_from_settings (CajaColumnChooser *chooser)
+set_columns_from_settings (BaulColumnChooser *chooser)
 {
     char **visible_columns;
     char **column_order;
@@ -556,7 +556,7 @@ set_columns_from_settings (CajaColumnChooser *chooser)
 }
 
 static void
-use_default_callback (CajaColumnChooser *chooser,
+use_default_callback (BaulColumnChooser *chooser,
                       gpointer user_data)
 {
     g_settings_reset (baul_list_view_preferences,
@@ -796,7 +796,7 @@ baul_file_management_properties_dialog_setup_media_page (GtkBuilder *builder)
         char *content_type = l->data;
         char *description;
         GIcon *icon;
-        CajaIconInfo *icon_info;
+        BaulIconInfo *icon_info;
         cairo_surface_t *surface;
         int icon_size, icon_scale;
 

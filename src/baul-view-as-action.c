@@ -1,16 +1,16 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 2009 Red Hat, Inc.
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of the
  *  License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -38,13 +38,13 @@
 
 static GObjectClass *parent_class = NULL;
 
-struct _CajaViewAsActionPrivate
+struct _BaulViewAsActionPrivate
 {
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (CajaViewAsAction, baul_view_as_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulViewAsAction, baul_view_as_action, GTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 enum
@@ -55,9 +55,9 @@ enum
 
 
 static void
-activate_nth_short_list_item (CajaWindow *window, guint index)
+activate_nth_short_list_item (BaulWindow *window, guint index)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -69,9 +69,9 @@ activate_nth_short_list_item (CajaWindow *window, guint index)
 }
 
 static void
-activate_extra_viewer (CajaWindow *window)
+activate_extra_viewer (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -82,7 +82,7 @@ activate_extra_viewer (CajaWindow *window)
 }
 
 static void
-view_as_menu_switch_views_callback (GtkComboBox *combo_box, CajaNavigationWindow *window)
+view_as_menu_switch_views_callback (GtkComboBox *combo_box, BaulNavigationWindow *window)
 {
     int active;
 
@@ -106,16 +106,16 @@ view_as_menu_switch_views_callback (GtkComboBox *combo_box, CajaNavigationWindow
 }
 
 static void
-view_as_changed_callback (CajaWindow *window,
+view_as_changed_callback (BaulWindow *window,
                           GtkComboBox *combo_box)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GList *node;
     int index;
     int selected_index = -1;
     GtkTreeModel *model;
     GtkListStore *store;
-    const CajaViewInfo *info;
+    const BaulViewInfo *info;
 
     /* Clear the contents of ComboBox in a wacky way because there
      * is no function to clear all items and also no function to obtain
@@ -175,8 +175,8 @@ connect_proxy (GtkAction *action,
     if (GTK_IS_TOOL_ITEM (proxy))
     {
         GtkToolItem *item = GTK_TOOL_ITEM (proxy);
-        CajaViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
-        CajaNavigationWindow *window = vaction->priv->window;
+        BaulViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
+        BaulNavigationWindow *window = vaction->priv->window;
         GtkWidget *view_as_menu_vbox;
         GtkWidget *view_as_combo_box;
 
@@ -212,8 +212,8 @@ disconnect_proxy (GtkAction *action,
 {
     if (GTK_IS_TOOL_ITEM (proxy))
     {
-        CajaViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
-        CajaNavigationWindow *window = vaction->priv->window;
+        BaulViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
+        BaulNavigationWindow *window = vaction->priv->window;
 
         g_signal_handlers_disconnect_matched (window,
                                               G_SIGNAL_MATCH_FUNC,
@@ -237,7 +237,7 @@ baul_view_as_action_set_property (GObject *object,
                                   const GValue *value,
                                   GParamSpec *pspec)
 {
-    CajaViewAsAction *zoom;
+    BaulViewAsAction *zoom;
 
     zoom = BAUL_VIEW_AS_ACTION (object);
 
@@ -255,7 +255,7 @@ baul_view_as_action_get_property (GObject *object,
                                   GValue *value,
                                   GParamSpec *pspec)
 {
-    CajaViewAsAction *zoom;
+    BaulViewAsAction *zoom;
 
     zoom = BAUL_VIEW_AS_ACTION (object);
 
@@ -268,7 +268,7 @@ baul_view_as_action_get_property (GObject *object,
 }
 
 static void
-baul_view_as_action_class_init (CajaViewAsActionClass *class)
+baul_view_as_action_class_init (BaulViewAsActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -295,7 +295,7 @@ baul_view_as_action_class_init (CajaViewAsActionClass *class)
 }
 
 static void
-baul_view_as_action_init (CajaViewAsAction *action)
+baul_view_as_action_init (BaulViewAsAction *action)
 {
     action->priv = baul_view_as_action_get_instance_private (action);
 }

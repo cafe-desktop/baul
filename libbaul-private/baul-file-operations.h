@@ -30,17 +30,17 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
-typedef void (* CajaCopyCallback)      (GHashTable *debuting_uris,
+typedef void (* BaulCopyCallback)      (GHashTable *debuting_uris,
                                         gpointer    callback_data);
-typedef void (* CajaCreateCallback)    (GFile      *new_file,
+typedef void (* BaulCreateCallback)    (GFile      *new_file,
                                         gpointer    callback_data);
-typedef void (* CajaOpCallback)        (gpointer    callback_data);
-typedef void (* CajaDeleteCallback)    (GHashTable *debuting_uris,
+typedef void (* BaulOpCallback)        (gpointer    callback_data);
+typedef void (* BaulDeleteCallback)    (GHashTable *debuting_uris,
                                         gboolean    user_cancel,
                                         gpointer    callback_data);
-typedef void (* CajaMountCallback)     (GVolume    *volume,
+typedef void (* BaulMountCallback)     (GVolume    *volume,
                                         GObject    *callback_data_object);
-typedef void (* CajaUnmountCallback)   (gpointer    callback_data);
+typedef void (* BaulUnmountCallback)   (gpointer    callback_data);
 
 /* FIXME: int copy_action should be an enum */
 
@@ -49,13 +49,13 @@ void baul_file_operations_copy_move   (const GList               *item_uris,
                                        const char                *target_dir_uri,
                                        GdkDragAction              copy_action,
                                        GtkWidget                 *parent_view,
-                                       CajaCopyCallback       done_callback,
+                                       BaulCopyCallback       done_callback,
                                        gpointer                   done_callback_data);
 void baul_file_operations_empty_trash (GtkWidget                 *parent_view);
 void baul_file_operations_new_folder  (GtkWidget                 *parent_view,
                                        GdkPoint                  *target_point,
                                        const char                *parent_dir_uri,
-                                       CajaCreateCallback     done_callback,
+                                       BaulCreateCallback     done_callback,
                                        gpointer                   done_callback_data);
 void baul_file_operations_new_file    (GtkWidget                 *parent_view,
                                        GdkPoint                  *target_point,
@@ -63,23 +63,23 @@ void baul_file_operations_new_file    (GtkWidget                 *parent_view,
                                        const char                *target_filename,
                                        const char                *initial_contents,
                                        int                        length,
-                                       CajaCreateCallback     done_callback,
+                                       BaulCreateCallback     done_callback,
                                        gpointer                   data);
 void baul_file_operations_new_file_from_template (GtkWidget               *parent_view,
         GdkPoint                *target_point,
         const char              *parent_dir,
         const char              *target_filename,
         const char              *template_uri,
-        CajaCreateCallback   done_callback,
+        BaulCreateCallback   done_callback,
         gpointer                 data);
 
 void baul_file_operations_delete          (GList                  *files,
         GtkWindow              *parent_window,
-        CajaDeleteCallback  done_callback,
+        BaulDeleteCallback  done_callback,
         gpointer                done_callback_data);
 void baul_file_operations_trash_or_delete (GList                  *files,
         GtkWindow              *parent_window,
-        CajaDeleteCallback  done_callback,
+        BaulDeleteCallback  done_callback,
         gpointer                done_callback_data);
 
 void baul_file_set_permissions_recursive (const char                     *directory,
@@ -87,7 +87,7 @@ void baul_file_set_permissions_recursive (const char                     *direct
         guint32                         file_mask,
         guint32                         folder_permissions,
         guint32                         folder_mask,
-        CajaOpCallback              callback,
+        BaulOpCallback              callback,
         gpointer                        callback_data);
 
 void baul_file_operations_unmount_mount (GtkWindow                      *parent_window,
@@ -98,7 +98,7 @@ void baul_file_operations_unmount_mount_full (GtkWindow                 *parent_
         GMount                    *mount,
         gboolean                   eject,
         gboolean                   check_trash,
-        CajaUnmountCallback    callback,
+        BaulUnmountCallback    callback,
         gpointer                   callback_data);
 void baul_file_operations_mount_volume  (GtkWindow                      *parent_window,
         GVolume                        *volume,
@@ -106,36 +106,36 @@ void baul_file_operations_mount_volume  (GtkWindow                      *parent_
 void baul_file_operations_mount_volume_full (GtkWindow                      *parent_window,
         GVolume                        *volume,
         gboolean                        allow_autorun,
-        CajaMountCallback           mount_callback,
+        BaulMountCallback           mount_callback,
         GObject                        *mount_callback_data_object);
 
 void baul_file_operations_copy      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
                                      GtkWindow            *parent_window,
-                                     CajaCopyCallback  done_callback,
+                                     BaulCopyCallback  done_callback,
                                      gpointer              done_callback_data);
 void baul_file_operations_move      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
                                      GtkWindow            *parent_window,
-                                     CajaCopyCallback  done_callback,
+                                     BaulCopyCallback  done_callback,
                                      gpointer              done_callback_data);
 void baul_file_operations_duplicate (GList                *files,
                                      GArray               *relative_item_points,
                                      GtkWindow            *parent_window,
-                                     CajaCopyCallback  done_callback,
+                                     BaulCopyCallback  done_callback,
                                      gpointer              done_callback_data);
 void baul_file_operations_link      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
                                      GtkWindow            *parent_window,
-                                     CajaCopyCallback  done_callback,
+                                     BaulCopyCallback  done_callback,
                                      gpointer              done_callback_data);
 void baul_file_mark_desktop_file_trusted (GFile           *file,
         GtkWindow        *parent_window,
         gboolean          interactive,
-        CajaOpCallback done_callback,
+        BaulOpCallback done_callback,
         gpointer          done_callback_data);
 
 void baul_application_notify_unmount_show (const gchar *message);

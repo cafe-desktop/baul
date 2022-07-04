@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-desktop-directory-file.c: Subclass of CajaFile to help implement the
+   baul-desktop-directory-file.c: Subclass of BaulFile to help implement the
    virtual desktop.
 
    Copyright (C) 2003 Red Hat, Inc.
@@ -41,11 +41,11 @@
 #include "baul-desktop-directory.h"
 #include "baul-metadata.h"
 
-struct CajaDesktopDirectoryFileDetails
+struct BaulDesktopDirectoryFileDetails
 {
-    CajaDesktopDirectory *desktop_directory;
+    BaulDesktopDirectory *desktop_directory;
 
-    CajaFile *real_dir_file;
+    BaulFile *real_dir_file;
 
     GHashTable *callbacks;
     GHashTable *monitors;
@@ -53,12 +53,12 @@ struct CajaDesktopDirectoryFileDetails
 
 typedef struct
 {
-    CajaDesktopDirectoryFile *desktop_file;
-    CajaFileCallback callback;
+    BaulDesktopDirectoryFile *desktop_file;
+    BaulFileCallback callback;
     gpointer callback_data;
 
-    CajaFileAttributes delegated_attributes;
-    CajaFileAttributes non_delegated_attributes;
+    BaulFileAttributes delegated_attributes;
+    BaulFileAttributes non_delegated_attributes;
 
     GList *non_ready_files;
 
@@ -67,10 +67,10 @@ typedef struct
 
 typedef struct
 {
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectoryFile *desktop_file;
 
-    CajaFileAttributes delegated_attributes;
-    CajaFileAttributes non_delegated_attributes;
+    BaulFileAttributes delegated_attributes;
+    BaulFileAttributes non_delegated_attributes;
 } DesktopMonitor;
 
 
@@ -78,7 +78,7 @@ static void baul_desktop_directory_file_init       (gpointer   object,
         gpointer   klass);
 static void baul_desktop_directory_file_class_init (gpointer   klass);
 
-EEL_CLASS_BOILERPLATE (CajaDesktopDirectoryFile,
+EEL_CLASS_BOILERPLATE (BaulDesktopDirectoryFile,
                        baul_desktop_directory_file,
                        BAUL_TYPE_FILE)
 
@@ -107,16 +107,16 @@ desktop_callback_equal (gconstpointer desktop_callback_as_pointer,
 
 
 static void
-real_file_changed_callback (CajaFile *real_file,
+real_file_changed_callback (BaulFile *real_file,
                             gpointer callback_data)
 {
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectoryFile *desktop_file;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (callback_data);
     baul_file_changed (BAUL_FILE (desktop_file));
 }
 
-static CajaFileAttributes
+static BaulFileAttributes
 get_delegated_attributes_mask (void)
 {
     return BAUL_FILE_ATTRIBUTE_DEEP_COUNTS |
@@ -125,11 +125,11 @@ get_delegated_attributes_mask (void)
 }
 
 static void
-partition_attributes (CajaFileAttributes attributes,
-                      CajaFileAttributes *delegated_attributes,
-                      CajaFileAttributes *non_delegated_attributes)
+partition_attributes (BaulFileAttributes attributes,
+                      BaulFileAttributes *delegated_attributes,
+                      BaulFileAttributes *non_delegated_attributes)
 {
-    CajaFileAttributes mask;
+    BaulFileAttributes mask;
 
     mask = get_delegated_attributes_mask ();
 
@@ -138,11 +138,11 @@ partition_attributes (CajaFileAttributes attributes,
 }
 
 static void
-desktop_directory_file_monitor_add (CajaFile *file,
+desktop_directory_file_monitor_add (BaulFile *file,
                                     gconstpointer client,
-                                    CajaFileAttributes attributes)
+                                    BaulFileAttributes attributes)
 {
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectoryFile *desktop_file;
     DesktopMonitor *monitor;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
@@ -180,10 +180,10 @@ desktop_directory_file_monitor_add (CajaFile *file,
 }
 
 static void
-desktop_directory_file_monitor_remove (CajaFile *file,
+desktop_directory_file_monitor_remove (BaulFile *file,
                                        gconstpointer client)
 {
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectoryFile *desktop_file;
     DesktopMonitor *monitor;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
@@ -242,7 +242,7 @@ desktop_callback_check_done (DesktopCallback *desktop_callback)
 
 static void
 desktop_callback_remove_file (DesktopCallback *desktop_callback,
-                              CajaFile *file)
+                              BaulFile *file)
 {
     desktop_callback->non_ready_files = g_list_remove
                                         (desktop_callback->non_ready_files, file);
@@ -250,7 +250,7 @@ desktop_callback_remove_file (DesktopCallback *desktop_callback,
 }
 
 static void
-ready_callback (CajaFile *file,
+ready_callback (BaulFile *file,
                 gpointer callback_data)
 {
     DesktopCallback *desktop_callback;
@@ -265,13 +265,13 @@ ready_callback (CajaFile *file,
 }
 
 static void
-desktop_directory_file_call_when_ready (CajaFile *file,
-                                        CajaFileAttributes attributes,
-                                        CajaFileCallback callback,
+desktop_directory_file_call_when_ready (BaulFile *file,
+                                        BaulFileAttributes attributes,
+                                        BaulFileCallback callback,
                                         gpointer callback_data)
 
 {
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectoryFile *desktop_file;
     DesktopCallback search_key, *desktop_callback;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
@@ -327,11 +327,11 @@ desktop_directory_file_call_when_ready (CajaFile *file,
 }
 
 static void
-desktop_directory_file_cancel_call_when_ready (CajaFile *file,
-        CajaFileCallback callback,
+desktop_directory_file_cancel_call_when_ready (BaulFile *file,
+        BaulFileCallback callback,
         gpointer callback_data)
 {
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectoryFile *desktop_file;
     DesktopCallback search_key, *desktop_callback;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
@@ -361,8 +361,8 @@ desktop_directory_file_cancel_call_when_ready (CajaFile *file,
 }
 
 static gboolean
-real_check_if_ready (CajaFile *file,
-                     CajaFileAttributes attributes)
+real_check_if_ready (BaulFile *file,
+                     BaulFileAttributes attributes)
 {
     return baul_directory_check_if_ready_internal
            (file->details->directory, file,
@@ -370,11 +370,11 @@ real_check_if_ready (CajaFile *file,
 }
 
 static gboolean
-desktop_directory_file_check_if_ready (CajaFile *file,
-                                       CajaFileAttributes attributes)
+desktop_directory_file_check_if_ready (BaulFile *file,
+                                       BaulFileAttributes attributes)
 {
-    CajaFileAttributes delegated_attributes, non_delegated_attributes;
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulFileAttributes delegated_attributes, non_delegated_attributes;
+    BaulDesktopDirectoryFile *desktop_file;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
@@ -388,11 +388,11 @@ desktop_directory_file_check_if_ready (CajaFile *file,
 }
 
 static gboolean
-desktop_directory_file_get_item_count (CajaFile *file,
+desktop_directory_file_get_item_count (BaulFile *file,
                                        guint *count,
                                        gboolean *count_unreadable)
 {
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectoryFile *desktop_file;
     gboolean got_count;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
@@ -409,16 +409,16 @@ desktop_directory_file_get_item_count (CajaFile *file,
     return got_count;
 }
 
-static CajaRequestStatus
-desktop_directory_file_get_deep_counts (CajaFile *file,
+static BaulRequestStatus
+desktop_directory_file_get_deep_counts (BaulFile *file,
                                         guint *directory_count,
                                         guint *file_count,
                                         guint *unreadable_directory_count,
                                         goffset *total_size,
                                         goffset *total_size_on_disk)
 {
-    CajaDesktopDirectoryFile *desktop_file;
-    CajaRequestStatus status;
+    BaulDesktopDirectoryFile *desktop_file;
+    BaulRequestStatus status;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
@@ -439,11 +439,11 @@ desktop_directory_file_get_deep_counts (CajaFile *file,
 }
 
 static gboolean
-desktop_directory_file_get_date (CajaFile *file,
-                                 CajaDateType date_type,
+desktop_directory_file_get_date (BaulFile *file,
+                                 BaulDateType date_type,
                                  time_t *date)
 {
-    CajaDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectoryFile *desktop_file;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
@@ -453,7 +453,7 @@ desktop_directory_file_get_date (CajaFile *file,
 }
 
 static char *
-desktop_directory_file_get_where_string (CajaFile *file)
+desktop_directory_file_get_where_string (BaulFile *file)
 {
     return g_strdup (_("on the desktop"));
 }
@@ -470,7 +470,7 @@ monitor_destroy (gpointer data)
 }
 
 static void
-baul_desktop_directory_file_set_metadata (CajaFile           *file,
+baul_desktop_directory_file_set_metadata (BaulFile           *file,
         const char             *key,
         const char             *value)
 {
@@ -478,7 +478,7 @@ baul_desktop_directory_file_set_metadata (CajaFile           *file,
 }
 
 static void
-baul_desktop_directory_file_set_metadata_as_list (CajaFile           *file,
+baul_desktop_directory_file_set_metadata_as_list (BaulFile           *file,
         const char             *key,
         char                  **value)
 {
@@ -488,16 +488,16 @@ baul_desktop_directory_file_set_metadata_as_list (CajaFile           *file,
 static void
 baul_desktop_directory_file_init (gpointer object, gpointer klass)
 {
-    CajaDesktopDirectoryFile *desktop_file;
-    CajaDesktopDirectory *desktop_directory;
-    CajaDirectory *real_dir;
-    CajaFile *real_dir_file;
+    BaulDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectory *desktop_directory;
+    BaulDirectory *real_dir;
+    BaulFile *real_dir_file;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (object);
 
     desktop_directory = BAUL_DESKTOP_DIRECTORY (baul_directory_get_by_uri (EEL_DESKTOP_URI));
 
-    desktop_file->details = g_new0 (CajaDesktopDirectoryFileDetails, 1);
+    desktop_file->details = g_new0 (BaulDesktopDirectoryFileDetails, 1);
     desktop_file->details->desktop_directory = desktop_directory;
 
     desktop_file->details->callbacks = g_hash_table_new
@@ -529,8 +529,8 @@ desktop_callback_remove_file_cover (gpointer key,
 static void
 desktop_finalize (GObject *object)
 {
-    CajaDesktopDirectoryFile *desktop_file;
-    CajaDesktopDirectory *desktop_directory;
+    BaulDesktopDirectoryFile *desktop_file;
+    BaulDesktopDirectory *desktop_directory;
 
     desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (object);
     desktop_directory = desktop_file->details->desktop_directory;
@@ -562,7 +562,7 @@ static void
 baul_desktop_directory_file_class_init (gpointer klass)
 {
     GObjectClass *object_class;
-    CajaFileClass *file_class;
+    BaulFileClass *file_class;
 
     object_class = G_OBJECT_CLASS (klass);
     file_class = BAUL_FILE_CLASS (klass);

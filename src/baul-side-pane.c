@@ -4,12 +4,12 @@
  *
  *  Copyright (C) 2002 Ximian Inc.
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of the
  *  License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -42,7 +42,7 @@ typedef struct
     GtkWidget *shortcut;
 } SidePanel;
 
-struct _CajaSidePanePrivate
+struct _BaulSidePanePrivate
 {
     GtkWidget *notebook;
     GtkWidget *menu;
@@ -65,10 +65,10 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaSidePane, baul_side_pane, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulSidePane, baul_side_pane, GTK_TYPE_BOX)
 
 static SidePanel *
-panel_for_widget (CajaSidePane *side_pane, GtkWidget *widget)
+panel_for_widget (BaulSidePane *side_pane, GtkWidget *widget)
 {
     GList *l;
     SidePanel *panel = NULL;
@@ -99,7 +99,7 @@ switch_page_callback (GtkWidget *notebook,
                       guint page_num,
                       gpointer user_data)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
     SidePanel *panel;
 
     side_pane = BAUL_SIDE_PANE (user_data);
@@ -119,7 +119,7 @@ switch_page_callback (GtkWidget *notebook,
 }
 
 static void
-select_panel (CajaSidePane *side_pane, SidePanel *panel)
+select_panel (BaulSidePane *side_pane, SidePanel *panel)
 {
     int page_num;
 
@@ -131,7 +131,7 @@ select_panel (CajaSidePane *side_pane, SidePanel *panel)
 
 /* initializing the class object by installing the operations we override */
 static void
-baul_side_pane_class_init (CajaSidePaneClass *klass)
+baul_side_pane_class_init (BaulSidePaneClass *klass)
 {
     GObjectClass *gobject_class;
 
@@ -144,7 +144,7 @@ baul_side_pane_class_init (CajaSidePaneClass *klass)
                                ("close_requested",
                                 G_TYPE_FROM_CLASS (klass),
                                 G_SIGNAL_RUN_LAST,
-                                G_STRUCT_OFFSET (CajaSidePaneClass,
+                                G_STRUCT_OFFSET (BaulSidePaneClass,
                                         close_requested),
                                 NULL, NULL,
                                 g_cclosure_marshal_VOID__VOID,
@@ -153,7 +153,7 @@ baul_side_pane_class_init (CajaSidePaneClass *klass)
                            ("switch_page",
                             G_TYPE_FROM_CLASS (klass),
                             G_SIGNAL_RUN_LAST,
-                            G_STRUCT_OFFSET (CajaSidePaneClass,
+                            G_STRUCT_OFFSET (BaulSidePaneClass,
                                     switch_page),
                             NULL, NULL,
                             g_cclosure_marshal_VOID__OBJECT,
@@ -164,7 +164,7 @@ static void
 panel_item_activate_callback (GtkMenuItem *item,
                               gpointer user_data)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
     SidePanel *panel;
 
     side_pane = BAUL_SIDE_PANE (user_data);
@@ -179,7 +179,7 @@ select_button_press_callback (GtkWidget *widget,
                               GdkEventButton *event,
                               gpointer user_data)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
 
     side_pane = BAUL_SIDE_PANE (user_data);
 
@@ -215,7 +215,7 @@ select_button_key_press_callback (GtkWidget *widget,
                                   GdkEventKey *event,
                                   gpointer user_data)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
 
     side_pane = BAUL_SIDE_PANE (user_data);
 
@@ -240,7 +240,7 @@ static void
 close_clicked_callback (GtkWidget *widget,
                         gpointer user_data)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
 
     side_pane = BAUL_SIDE_PANE (user_data);
 
@@ -262,7 +262,7 @@ static void
 menu_detach_callback (GtkWidget *widget,
                       GtkMenu *menu)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
 
     side_pane = BAUL_SIDE_PANE (widget);
 
@@ -270,7 +270,7 @@ menu_detach_callback (GtkWidget *widget,
 }
 
 static void
-baul_side_pane_init (CajaSidePane *side_pane)
+baul_side_pane_init (BaulSidePane *side_pane)
 {
     GtkWidget *hbox;
     GtkWidget *close_button;
@@ -384,7 +384,7 @@ baul_side_pane_init (CajaSidePane *side_pane)
 static void
 baul_side_pane_dispose (GObject *object)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
 
     side_pane = BAUL_SIDE_PANE (object);
 
@@ -400,7 +400,7 @@ baul_side_pane_dispose (GObject *object)
 static void
 baul_side_pane_finalize (GObject *object)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
     GList *l;
 
     side_pane = BAUL_SIDE_PANE (object);
@@ -415,14 +415,14 @@ baul_side_pane_finalize (GObject *object)
     G_OBJECT_CLASS (baul_side_pane_parent_class)->finalize (object);
 }
 
-CajaSidePane *
+BaulSidePane *
 baul_side_pane_new (void)
 {
     return BAUL_SIDE_PANE (gtk_widget_new (baul_side_pane_get_type (), NULL));
 }
 
 void
-baul_side_pane_add_panel (CajaSidePane *side_pane,
+baul_side_pane_add_panel (BaulSidePane *side_pane,
                           GtkWidget *widget,
                           const char *title,
                           const char *tooltip)
@@ -464,7 +464,7 @@ baul_side_pane_add_panel (CajaSidePane *side_pane,
 }
 
 void
-baul_side_pane_remove_panel (CajaSidePane *side_pane,
+baul_side_pane_remove_panel (BaulSidePane *side_pane,
                              GtkWidget *widget)
 {
     SidePanel *panel;
@@ -498,7 +498,7 @@ baul_side_pane_remove_panel (CajaSidePane *side_pane,
 }
 
 void
-baul_side_pane_show_panel (CajaSidePane *side_pane,
+baul_side_pane_show_panel (BaulSidePane *side_pane,
                            GtkWidget        *widget)
 {
     SidePanel *panel;
@@ -524,7 +524,7 @@ static void
 shortcut_clicked_callback (GtkWidget *button,
                            gpointer user_data)
 {
-    CajaSidePane *side_pane;
+    BaulSidePane *side_pane;
     GtkWidget *page;
 
     side_pane = BAUL_SIDE_PANE (user_data);
@@ -535,7 +535,7 @@ shortcut_clicked_callback (GtkWidget *button,
 }
 
 static GtkWidget *
-create_shortcut (CajaSidePane *side_pane,
+create_shortcut (BaulSidePane *side_pane,
                  SidePanel *panel,
                  GdkPixbuf *pixbuf)
 {
@@ -559,7 +559,7 @@ create_shortcut (CajaSidePane *side_pane,
 }
 
 void
-baul_side_pane_set_panel_image (CajaSidePane *side_pane,
+baul_side_pane_set_panel_image (BaulSidePane *side_pane,
                                 GtkWidget *widget,
                                 GdkPixbuf *pixbuf)
 {
@@ -603,7 +603,7 @@ baul_side_pane_set_panel_image (CajaSidePane *side_pane,
 }
 
 GtkWidget *
-baul_side_pane_get_current_panel (CajaSidePane *side_pane)
+baul_side_pane_get_current_panel (BaulSidePane *side_pane)
 {
     int index;
 
@@ -612,7 +612,7 @@ baul_side_pane_get_current_panel (CajaSidePane *side_pane)
 }
 
 GtkWidget *
-baul_side_pane_get_title (CajaSidePane *side_pane)
+baul_side_pane_get_title (BaulSidePane *side_pane)
 {
     return side_pane->details->title_hbox;
 }

@@ -293,8 +293,8 @@ msgstr "Sil"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -302,7 +302,7 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -310,8 +310,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -2949,25 +2949,25 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Soñki pencere yoq etilgeninde Caja terk etecek."
+msgid "Baul will exit when last window destroyed."
+msgstr "Soñki pencere yoq etilgeninde Baul terk etecek."
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
-"Tüm pencerelerin tarayıcı halinde olduğu, klasik Caja işleyişini "
+"Tüm pencerelerin tarayıcı halinde olduğu, klasik Baul işleyişini "
 "etkinleştirir"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
@@ -2978,7 +2978,7 @@ msgstr "Yol çubuğu yerine er zaman konum girişini kullan"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
 "Eğer seçiliyse, Nautilüş tarayıcı pencereleri er zaman yol çubuğu yerine "
@@ -2990,10 +2990,10 @@ msgstr "Dosyaların silinirken ya da Çöp boşaltılırken onay için sorulmas�
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
-"Eğer seçiliyse, Caja bir dosyayı silerken ya da Çöp'u boşaltırken onay için "
+"Eğer seçiliyse, Baul bir dosyayı silerken ya da Çöp'u boşaltırken onay için "
 "size soracaktır."
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
@@ -3002,7 +3002,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
@@ -3012,11 +3012,11 @@ msgstr "Dosyanın anında silinmesi"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"Eğer seçiliyse, bir dosya silinirken Caja bunu çöpe göndermeksizin diskten "
+"Eğer seçiliyse, bir dosya silinirken Baul bunu çöpe göndermeksizin diskten "
 "silecektir. Bu özellik tehlikeli olabilir, bu nedenle dikkatli kullanın."
 
 #: libbaul-private/org.mate.baul.gschema.xml:117
@@ -3083,13 +3083,13 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
-msgstr "Caja kezici penceresinde ziyade sıçan dögmeleri vaqiaları"
+msgid "Use extra mouse button events in Baul' browser window"
+msgstr "Baul kezici penceresinde ziyade sıçan dögmeleri vaqiaları"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "\"İleri\" ve \"Keri\" dögmelerine saip sıçanları olğan qullanıcılar içün, bu"
 " tuş olarnıñ biri basılğanında er angi bir amelniñ yapılıp yapılmaycağını "
@@ -3168,10 +3168,10 @@ msgstr "Dosya özelliği penceresinde gelişmiş izinleri göster"
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"Eğer seçiliyse, Caja dosya tercihleri penceresinde unix yoluyla "
+"Eğer seçiliyse, Baul dosya tercihleri penceresinde unix yoluyla "
 "düzenlemenizi sağlayarak, az bilinen dosya özelliklerine erişmenize olanak "
 "verir."
 
@@ -3181,10 +3181,10 @@ msgstr "Pencere içinde önce klasörleri göster"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Eğer seçiliyse, Caja simge ve liste görünümlerinde klasörleri dosyalardan "
+"Eğer seçiliyse, Baul simge ve liste görünümlerinde klasörleri dosyalardan "
 "önce gösterir."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3214,15 +3214,15 @@ msgstr ""
 "boyut yerine azalan boyutta sıralanacak."
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja'un kullanıcıların ev klasörlerini masaüstü olarak kullanması"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul'un kullanıcıların ev klasörlerini masaüstü olarak kullanması"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Eğer seçiliyse, Caja kullanıcının ev klasörünü masaüstü olarak kullanacak. "
+"Eğer seçiliyse, Baul kullanıcının ev klasörünü masaüstü olarak kullanacak. "
 "Eğer seçili değilse, o zaman ~/Desktop masaüstü olacak."
 
 #: libbaul-private/org.mate.baul.gschema.xml:203
@@ -3350,7 +3350,7 @@ msgid "Whether to show desktop notifications"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3491,10 +3491,10 @@ msgstr "Ağaç kenar panelinde sadece klasörleri göster"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Eğer seçiliyse, Caja klasörleri sadece ağaç yan panelinde gösterir. Aksi "
+"Eğer seçiliyse, Baul klasörleri sadece ağaç yan panelinde gösterir. Aksi "
 "halde em klasörleri em de dosyaları gösterir."
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
@@ -3704,10 +3704,10 @@ msgstr "Ortamın kendiliğinden bağlanması"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
-"Eğer seçiliyse, Caja kullanıcının görebileceği sabit diskleri ve ayrılabilir"
+"Eğer seçiliyse, Baul kullanıcının görebileceği sabit diskleri ve ayrılabilir"
 " ortamları başlangıçta ve ortam takıldığında kendiliğinden bağlayacak."
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:10
@@ -3716,12 +3716,12 @@ msgstr "Kendiliğinden bağlanan ortam için bir klasörün kendiliğinden açı
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
-"Eğer seçiliyse, Caja ortam kendiliğinden bağlandığında bir klasörü "
+"Eğer seçiliyse, Baul ortam kendiliğinden bağlandığında bir klasörü "
 "kendiliğindnden açacak. Bu sadece hiçbir bilinen x-content/* türü tespit "
 "edilmediğinde uygulanır; bilinen x-content türü tespit edildiğinde kullanıcı"
 " tarafından yapılandırılabilen eylem gerçekleştirilir."
@@ -3734,10 +3734,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
-"Eğer seçiliyse, Caja ortam eklendiğinden kullanıcıya ne programları "
+"Eğer seçiliyse, Baul ortam eklendiğinden kullanıcıya ne programları "
 "kendiliğinden çalıştırma ne de kendiliğinden başlatma soracak."
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
@@ -3845,28 +3845,28 @@ msgstr "Oturım idaresi ihtiyariyatını köster"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
+msgid "Baul could not create the required folder \"%s\"."
 msgstr "Natutilus gerekli \"%s\" klasörünü oluşturamadı."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"Caja'u çalıştırmadan önce, lütfen aşağıdaki klasörü oluşturun, ya da Caja'un"
+"Baul'u çalıştırmadan önce, lütfen aşağıdaki klasörü oluşturun, ya da Baul'un"
 " oluşturabileceği şekilde erişim haklarını ayarlayın."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja aşağıdaki gereken klasörleri oluşturamadı: %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul aşağıdaki gereken klasörleri oluşturamadı: %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Caja'u çalıştırmadan önce, lütfen aşağıdaki klasörü oluşturun, ya da Caja'un"
+"Baul'u çalıştırmadan önce, lütfen aşağıdaki klasörü oluşturun, ya da Baul'un"
 " oluşturabileceği şekilde erişim haklarını ayarlayın."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
@@ -3889,7 +3889,7 @@ msgstr ""
 
 #: src/baul-application.c:1869
 msgid "Perform a quick set of self-check tests."
-msgstr "Caja'un hızlı iç testini gerçekleştir."
+msgstr "Baul'un hızlı iç testini gerçekleştir."
 
 #: src/baul-application.c:1872
 msgid "Show the version of the program."
@@ -3928,8 +3928,8 @@ msgid "Open a browser window."
 msgstr ""
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Caja'tan Çıq."
+msgid "Quit Baul."
+msgstr "Baul'tan Çıq."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -4938,8 +4938,8 @@ msgid "New _Window"
 msgstr "Yañı _Pencere"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "Gösterilen konum için başka bir Caja penceresi aç"
+msgid "Open another Baul window for the displayed location"
+msgstr "Gösterilen konum için başka bir Baul penceresi aç"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -5760,8 +5760,8 @@ msgid "View of the current folder"
 msgstr "Mevcut klasörün görünümü"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja'e klasörü gösterebilecek yetenekte bir görüntüleyici kurulmamış."
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul'e klasörü gösterebilecek yetenekte bir görüntüleyici kurulmamış."
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5778,12 +5778,12 @@ msgstr "Lütfen, yazım hatalarını kontrol edip tekrar deneyin."
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "Caja \"%s\" konumlarını işleyemiyor."
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "Baul \"%s\" konumlarını işleyemiyor."
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Caja bu tür qonumlarnı qollayalmay."
+msgid "Baul cannot handle this kind of location."
+msgstr "Baul bu tür qonumlarnı qollayalmay."
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -5818,31 +5818,31 @@ msgstr "Bu yer-imi tarafından belirtilgen qonumğa bar"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja serbest yazılımdır; onı Serbest Yazılım Vaqfı (FSF) tarafından neşir "
+"Baul serbest yazılımdır; onı Serbest Yazılım Vaqfı (FSF) tarafından neşir "
 "etilgeni kibi GNU Umumiy Aleniy Litsenziyası şartları altında kene "
 "dağıtabilir ve/yaki deñiştirebilirsiñiz; ya Litsenziyanıñ 2-nci sürümi, ya "
 "da (ihtiyarıñızğa köre) er angi soñraki sürümi."
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Caja faydalı olacağı ümüti ile, lâkin ER ANGİ KEFALET OLMADAN dağıtıla; atta"
+"Baul faydalı olacağı ümüti ile, lâkin ER ANGİ KEFALET OLMADAN dağıtıla; atta"
 " zımniy ALIP-VERİLEBİLİRLİK yaki BELLİ MURATQA LİYAQAT kefaleti olmadan. "
 "Daha çoq tafsilât içün GNU Umumiy Aleniy Litsenziyasını körüñiz."
 
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "Bu program ile beraber bir GNU Umumiy Aleniy Litsenziyası kopiyasını "
@@ -5851,20 +5851,20 @@ msgstr ""
 "02110-1301, USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
-"Caja sizge dosyeleriñizni ve cilbentleriñizni tertiplemege imkân berir, em "
+"Baul sizge dosyeleriñizni ve cilbentleriñizni tertiplemege imkân berir, em "
 "bilgisayarıñızda em de devre-içi."
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -5910,8 +5910,8 @@ msgid "Prefere_nces"
 msgstr "_Tercihler"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Caja tercihlerini tarir et"
+msgid "Edit Baul preferences"
+msgstr "Baul tercihlerini tarir et"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -5938,16 +5938,16 @@ msgid "_Contents"
 msgstr "_İçindekiler"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Caja yardımını köster"
+msgid "Display Baul help"
+msgstr "Baul yardımını köster"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "_Aqqında"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Caja mücitleri aqqında itimatlarnı köster"
+msgid "Display credits for the creators of Baul"
+msgstr "Baul mücitleri aqqında itimatlarnı köster"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6330,7 +6330,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6350,7 +6350,7 @@ msgstr ""
 "\n"
 "Yerli bir cilbentten çaptırılğanında, bitiklerge saylanğan dosye adları keçirilir. Uzaqtaki bir cilbentten çaptırılğanında (meselâ, ağ yaki ftp mündericesini köstergen bir cilbent), bitikler parametr almaycaqlardır.\n"
 "\n"
-"Er hal-ü-kârda, bitiklerniñ qullanabilecegi aşağıdaki çevre deñişkenleri Caja tarafından tesbit etilecektir:\n"
+"Er hal-ü-kârda, bitiklerniñ qullanabilecegi aşağıdaki çevre deñişkenleri Baul tarafından tesbit etilecektir:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: Seçilen dosyalar için satır sonu çıkarılmış konumlar (sadece yerel ise)\n"
 "\n"

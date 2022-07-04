@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 1999, 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -47,19 +47,19 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 static char *window_geometry;
-static CajaBookmarkList *singleton = NULL;
+static BaulBookmarkList *singleton = NULL;
 
 /* forward declarations */
 
-static void        baul_bookmark_list_load_file     (CajaBookmarkList *bookmarks);
-static void        baul_bookmark_list_save_file     (CajaBookmarkList *bookmarks);
+static void        baul_bookmark_list_load_file     (BaulBookmarkList *bookmarks);
+static void        baul_bookmark_list_save_file     (BaulBookmarkList *bookmarks);
 
-G_DEFINE_TYPE(CajaBookmarkList, baul_bookmark_list, G_TYPE_OBJECT)
+G_DEFINE_TYPE(BaulBookmarkList, baul_bookmark_list, G_TYPE_OBJECT)
 
-static CajaBookmark *
+static BaulBookmark *
 new_bookmark_from_uri (const char *uri, const char *label)
 {
-    CajaBookmark *new_bookmark;
+    BaulBookmark *new_bookmark;
     char *name;
     gboolean has_label;
     GFile *location;
@@ -86,7 +86,7 @@ new_bookmark_from_uri (const char *uri, const char *label)
 
     if (uri)
     {
-        CajaFile *file;
+        BaulFile *file;
         GIcon *icon;
 
         native = g_file_is_native (location);
@@ -153,8 +153,8 @@ baul_bookmark_list_get_file (void)
 /* Initialization.  */
 
 static void
-bookmark_in_list_changed_callback (CajaBookmark     *bookmark,
-                                   CajaBookmarkList *bookmarks)
+bookmark_in_list_changed_callback (BaulBookmark     *bookmark,
+                                   BaulBookmarkList *bookmarks)
 {
     g_assert (BAUL_IS_BOOKMARK (bookmark));
     g_assert (BAUL_IS_BOOKMARK_LIST (bookmarks));
@@ -164,8 +164,8 @@ bookmark_in_list_changed_callback (CajaBookmark     *bookmark,
 }
 
 static void
-stop_monitoring_bookmark (CajaBookmarkList *bookmarks,
-                          CajaBookmark     *bookmark)
+stop_monitoring_bookmark (BaulBookmarkList *bookmarks,
+                          BaulBookmark     *bookmark)
 {
     g_signal_handlers_disconnect_by_func (bookmark,
                                           bookmark_in_list_changed_callback,
@@ -183,7 +183,7 @@ stop_monitoring_one (gpointer data, gpointer user_data)
 }
 
 static void
-clear (CajaBookmarkList *bookmarks)
+clear (BaulBookmarkList *bookmarks)
 {
     g_list_foreach (bookmarks->list, stop_monitoring_one, bookmarks);
     g_list_free_full (bookmarks->list, g_object_unref);
@@ -229,7 +229,7 @@ do_constructor (GType type,
 
 
 static void
-baul_bookmark_list_class_init (CajaBookmarkListClass *class)
+baul_bookmark_list_class_init (BaulBookmarkListClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
 
@@ -240,7 +240,7 @@ baul_bookmark_list_class_init (CajaBookmarkListClass *class)
         g_signal_new ("contents_changed",
                       G_TYPE_FROM_CLASS (object_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaBookmarkListClass,
+                      G_STRUCT_OFFSET (BaulBookmarkListClass,
                                        contents_changed),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
@@ -263,7 +263,7 @@ bookmark_monitor_changed_cb (GFileMonitor      *monitor,
 }
 
 static void
-baul_bookmark_list_init (CajaBookmarkList *bookmarks)
+baul_bookmark_list_init (BaulBookmarkList *bookmarks)
 {
     GFile *file;
 
@@ -282,8 +282,8 @@ baul_bookmark_list_init (CajaBookmarkList *bookmarks)
 }
 
 static void
-insert_bookmark_internal (CajaBookmarkList *bookmarks,
-                          CajaBookmark     *bookmark,
+insert_bookmark_internal (BaulBookmarkList *bookmarks,
+                          BaulBookmark     *bookmark,
                           int                   index)
 {
     bookmarks->list = g_list_insert (bookmarks->list, bookmark, index);
@@ -296,12 +296,12 @@ insert_bookmark_internal (CajaBookmarkList *bookmarks,
  * baul_bookmark_list_append:
  *
  * Append a bookmark to a bookmark list.
- * @bookmarks: CajaBookmarkList to append to.
+ * @bookmarks: BaulBookmarkList to append to.
  * @bookmark: Bookmark to append a copy of.
  **/
 void
-baul_bookmark_list_append (CajaBookmarkList *bookmarks,
-                           CajaBookmark     *bookmark)
+baul_bookmark_list_append (BaulBookmarkList *bookmarks,
+                           BaulBookmark     *bookmark)
 {
     g_return_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks));
     g_return_if_fail (BAUL_IS_BOOKMARK (bookmark));
@@ -317,14 +317,14 @@ baul_bookmark_list_append (CajaBookmarkList *bookmarks,
  * baul_bookmark_list_contains:
  *
  * Check whether a bookmark with matching name and url is already in the list.
- * @bookmarks: CajaBookmarkList to check contents of.
- * @bookmark: CajaBookmark to match against.
+ * @bookmarks: BaulBookmarkList to check contents of.
+ * @bookmark: BaulBookmark to match against.
  *
  * Return value: TRUE if matching bookmark is in list, FALSE otherwise
  **/
 gboolean
-baul_bookmark_list_contains (CajaBookmarkList *bookmarks,
-                             CajaBookmark     *bookmark)
+baul_bookmark_list_contains (BaulBookmarkList *bookmarks,
+                             BaulBookmark     *bookmark)
 {
     g_return_val_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks), FALSE);
     g_return_val_if_fail (BAUL_IS_BOOKMARK (bookmark), FALSE);
@@ -343,7 +343,7 @@ baul_bookmark_list_contains (CajaBookmarkList *bookmarks,
  * @index: index, must be less than length of list.
  **/
 void
-baul_bookmark_list_delete_item_at (CajaBookmarkList *bookmarks,
+baul_bookmark_list_delete_item_at (BaulBookmarkList *bookmarks,
                                    guint                 index)
 {
     GList *doomed;
@@ -373,7 +373,7 @@ baul_bookmark_list_delete_item_at (CajaBookmarkList *bookmarks,
  * @destination: the index of the second bookmark.
  **/
 void
-baul_bookmark_list_move_item (CajaBookmarkList *bookmarks,
+baul_bookmark_list_move_item (BaulBookmarkList *bookmarks,
                               guint index,
                               guint destination)
 {
@@ -414,7 +414,7 @@ baul_bookmark_list_move_item (CajaBookmarkList *bookmarks,
  * @uri: The uri to match.
  **/
 void
-baul_bookmark_list_delete_items_with_uri (CajaBookmarkList *bookmarks,
+baul_bookmark_list_delete_items_with_uri (BaulBookmarkList *bookmarks,
         const char           *uri)
 {
     GList *node, *next;
@@ -459,7 +459,7 @@ baul_bookmark_list_delete_items_with_uri (CajaBookmarkList *bookmarks,
  * no window geometry has yet been saved for this bookmark list.
  **/
 const char *
-baul_bookmark_list_get_window_geometry (CajaBookmarkList *bookmarks)
+baul_bookmark_list_get_window_geometry (BaulBookmarkList *bookmarks)
 {
     return window_geometry;
 }
@@ -473,8 +473,8 @@ baul_bookmark_list_get_window_geometry (CajaBookmarkList *bookmarks)
  * @new_bookmark: the bookmark to insert a copy of.
  **/
 void
-baul_bookmark_list_insert_item (CajaBookmarkList *bookmarks,
-                                CajaBookmark     *new_bookmark,
+baul_bookmark_list_insert_item (BaulBookmarkList *bookmarks,
+                                BaulBookmark     *new_bookmark,
                                 guint                 index)
 {
     g_return_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks));
@@ -496,8 +496,8 @@ baul_bookmark_list_insert_item (CajaBookmarkList *bookmarks,
  *
  * Return value: the bookmark at position @index in @bookmarks.
  **/
-CajaBookmark *
-baul_bookmark_list_item_at (CajaBookmarkList *bookmarks, guint index)
+BaulBookmark *
+baul_bookmark_list_item_at (BaulBookmarkList *bookmarks, guint index)
 {
     g_return_val_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks), NULL);
     g_return_val_if_fail (index < g_list_length (bookmarks->list), NULL);
@@ -514,7 +514,7 @@ baul_bookmark_list_item_at (CajaBookmarkList *bookmarks, guint index)
  * Return value: the length of the bookmark list.
  **/
 guint
-baul_bookmark_list_length (CajaBookmarkList *bookmarks)
+baul_bookmark_list_length (BaulBookmarkList *bookmarks)
 {
     g_return_val_if_fail (BAUL_IS_BOOKMARK_LIST(bookmarks), 0);
 
@@ -522,7 +522,7 @@ baul_bookmark_list_length (CajaBookmarkList *bookmarks)
 }
 
 static void
-load_file_finish (CajaBookmarkList *bookmarks,
+load_file_finish (BaulBookmarkList *bookmarks,
                   GObject *source,
                   GAsyncResult *res)
 {
@@ -574,7 +574,7 @@ load_file_finish (CajaBookmarkList *bookmarks,
 }
 
 static void
-load_file_async (CajaBookmarkList *self,
+load_file_async (BaulBookmarkList *self,
                  GAsyncReadyCallback callback)
 {
     GFile *file;
@@ -595,7 +595,7 @@ load_file_async (CajaBookmarkList *self,
 }
 
 static void
-save_file_finish (CajaBookmarkList *bookmarks,
+save_file_finish (BaulBookmarkList *bookmarks,
                   GObject *source,
                   GAsyncResult *res)
 {
@@ -624,7 +624,7 @@ save_file_finish (CajaBookmarkList *bookmarks,
 }
 
 static void
-save_file_async (CajaBookmarkList *bookmarks,
+save_file_async (BaulBookmarkList *bookmarks,
                  GAsyncReadyCallback callback)
 {
     GFile *file;
@@ -645,7 +645,7 @@ save_file_async (CajaBookmarkList *bookmarks,
 
     for (l = bookmarks->list; l; l = l->next)
     {
-        CajaBookmark *bookmark;
+        BaulBookmark *bookmark;
 
         bookmark = BAUL_BOOKMARK (l->data);
 
@@ -687,14 +687,14 @@ save_file_async (CajaBookmarkList *bookmarks,
 }
 
 static void
-process_next_op (CajaBookmarkList *bookmarks);
+process_next_op (BaulBookmarkList *bookmarks);
 
 static void
 op_processed_cb (GObject *source,
                  GAsyncResult *res,
                  gpointer user_data)
 {
-    CajaBookmarkList *self = user_data;
+    BaulBookmarkList *self = user_data;
     int op;
 
     op = GPOINTER_TO_INT (g_queue_pop_tail (self->pending_ops));
@@ -718,7 +718,7 @@ op_processed_cb (GObject *source,
 }
 
 static void
-process_next_op (CajaBookmarkList *bookmarks)
+process_next_op (BaulBookmarkList *bookmarks)
 {
     gint op;
 
@@ -741,7 +741,7 @@ process_next_op (CajaBookmarkList *bookmarks)
  * @bookmarks: the list of bookmarks to fill with file contents.
  **/
 static void
-baul_bookmark_list_load_file (CajaBookmarkList *bookmarks)
+baul_bookmark_list_load_file (BaulBookmarkList *bookmarks)
 {
     g_queue_push_head (bookmarks->pending_ops, GINT_TO_POINTER (LOAD_JOB));
 
@@ -758,7 +758,7 @@ baul_bookmark_list_load_file (CajaBookmarkList *bookmarks)
  * @bookmarks: the list of bookmarks to save.
  **/
 static void
-baul_bookmark_list_save_file (CajaBookmarkList *bookmarks)
+baul_bookmark_list_save_file (BaulBookmarkList *bookmarks)
 {
     g_signal_emit (bookmarks, signals[CONTENTS_CHANGED], 0);
 
@@ -777,10 +777,10 @@ baul_bookmark_list_save_file (CajaBookmarkList *bookmarks)
  *
  * Return value: A pointer to the new widget.
  **/
-CajaBookmarkList *
+BaulBookmarkList *
 baul_bookmark_list_new (void)
 {
-    CajaBookmarkList *list;
+    BaulBookmarkList *list;
 
     list = BAUL_BOOKMARK_LIST (g_object_new (BAUL_TYPE_BOOKMARK_LIST, NULL));
 
@@ -797,7 +797,7 @@ baul_bookmark_list_new (void)
  * @geometry: the new window geometry string.
  **/
 void
-baul_bookmark_list_set_window_geometry (CajaBookmarkList *bookmarks,
+baul_bookmark_list_set_window_geometry (BaulBookmarkList *bookmarks,
                                         const char           *geometry)
 {
     g_return_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks));

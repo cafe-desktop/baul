@@ -275,7 +275,7 @@ baul_debug_log_with_file_list (gboolean is_milestone, const char *domain, GList 
     count = 0;
     for (l = files; l; l = l->next)
     {
-        CajaFile *file;
+        BaulFile *file;
         char *uri;
 
         file = BAUL_FILE (l->data);

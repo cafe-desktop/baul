@@ -31,28 +31,28 @@
 
 #define BAUL_TYPE_DESKTOP_LINK baul_desktop_link_get_type()
 #define BAUL_DESKTOP_LINK(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_LINK, CajaDesktopLink))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_LINK, BaulDesktopLink))
 #define BAUL_DESKTOP_LINK_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_LINK, CajaDesktopLinkClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_LINK, BaulDesktopLinkClass))
 #define BAUL_IS_DESKTOP_LINK(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_DESKTOP_LINK))
 #define BAUL_IS_DESKTOP_LINK_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_DESKTOP_LINK))
 #define BAUL_DESKTOP_LINK_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_LINK, CajaDesktopLinkClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_LINK, BaulDesktopLinkClass))
 
-typedef struct _CajaDesktopLinkPrivate CajaDesktopLinkPrivate;
+typedef struct _BaulDesktopLinkPrivate BaulDesktopLinkPrivate;
 
 typedef struct
 {
     GObject parent_slot;
-    CajaDesktopLinkPrivate *details;
-} CajaDesktopLink;
+    BaulDesktopLinkPrivate *details;
+} BaulDesktopLink;
 
 typedef struct
 {
     GObjectClass parent_slot;
-} CajaDesktopLinkClass;
+} BaulDesktopLinkClass;
 
 typedef enum
 {
@@ -61,24 +61,24 @@ typedef enum
     BAUL_DESKTOP_LINK_TRASH,
     BAUL_DESKTOP_LINK_MOUNT,
     BAUL_DESKTOP_LINK_NETWORK
-} CajaDesktopLinkType;
+} BaulDesktopLinkType;
 
 GType   baul_desktop_link_get_type (void);
 
-CajaDesktopLink *   baul_desktop_link_new                     (CajaDesktopLinkType  type);
-CajaDesktopLink *   baul_desktop_link_new_from_mount          (GMount                 *mount);
-CajaDesktopLinkType baul_desktop_link_get_link_type           (CajaDesktopLink     *link);
-char *                  baul_desktop_link_get_file_name           (CajaDesktopLink     *link);
-char *                  baul_desktop_link_get_display_name        (CajaDesktopLink     *link);
-GIcon *                 baul_desktop_link_get_icon                (CajaDesktopLink     *link);
-GFile *                 baul_desktop_link_get_activation_location (CajaDesktopLink     *link);
-char *                  baul_desktop_link_get_activation_uri      (CajaDesktopLink     *link);
-gboolean                baul_desktop_link_get_date                (CajaDesktopLink     *link,
-        CajaDateType         date_type,
+BaulDesktopLink *   baul_desktop_link_new                     (BaulDesktopLinkType  type);
+BaulDesktopLink *   baul_desktop_link_new_from_mount          (GMount                 *mount);
+BaulDesktopLinkType baul_desktop_link_get_link_type           (BaulDesktopLink     *link);
+char *                  baul_desktop_link_get_file_name           (BaulDesktopLink     *link);
+char *                  baul_desktop_link_get_display_name        (BaulDesktopLink     *link);
+GIcon *                 baul_desktop_link_get_icon                (BaulDesktopLink     *link);
+GFile *                 baul_desktop_link_get_activation_location (BaulDesktopLink     *link);
+char *                  baul_desktop_link_get_activation_uri      (BaulDesktopLink     *link);
+gboolean                baul_desktop_link_get_date                (BaulDesktopLink     *link,
+        BaulDateType         date_type,
         time_t                  *date);
-GMount *                baul_desktop_link_get_mount               (CajaDesktopLink     *link);
-gboolean                baul_desktop_link_can_rename              (CajaDesktopLink     *link);
-gboolean                baul_desktop_link_rename                  (CajaDesktopLink     *link,
+GMount *                baul_desktop_link_get_mount               (BaulDesktopLink     *link);
+gboolean                baul_desktop_link_can_rename              (BaulDesktopLink     *link);
+gboolean                baul_desktop_link_rename                  (BaulDesktopLink     *link,
         const char              *name);
 
 

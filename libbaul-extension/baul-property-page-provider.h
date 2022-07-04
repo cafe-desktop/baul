@@ -1,5 +1,5 @@
 /*
- *  baul-property-page-provider.h - Interface for Caja extensions
+ *  baul-property-page-provider.h - Interface for Baul extensions
  *                                      that provide property pages.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -22,10 +22,10 @@
  *
  */
 
-/* This interface is implemented by Caja extensions that want to
+/* This interface is implemented by Baul extensions that want to
  * add property page to property dialogs.  Extensions are called when
- * Caja needs property pages for a selection.  They are passed a
- * list of CajaFileInfo objects for which information should
+ * Baul needs property pages for a selection.  They are passed a
+ * list of BaulFileInfo objects for which information should
  * be displayed  */
 
 #ifndef BAUL_PROPERTY_PAGE_PROVIDER_H
@@ -39,32 +39,32 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_PROPERTY_PAGE_PROVIDER           (baul_property_page_provider_get_type ())
-#define BAUL_PROPERTY_PAGE_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PROPERTY_PAGE_PROVIDER, CajaPropertyPageProvider))
+#define BAUL_PROPERTY_PAGE_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PROPERTY_PAGE_PROVIDER, BaulPropertyPageProvider))
 #define BAUL_IS_PROPERTY_PAGE_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_PROPERTY_PAGE_PROVIDER))
-#define BAUL_PROPERTY_PAGE_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_PROPERTY_PAGE_PROVIDER, CajaPropertyPageProviderIface))
+#define BAUL_PROPERTY_PAGE_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_PROPERTY_PAGE_PROVIDER, BaulPropertyPageProviderIface))
 
-typedef struct _CajaPropertyPageProvider       CajaPropertyPageProvider;
-typedef struct _CajaPropertyPageProviderIface  CajaPropertyPageProviderIface;
+typedef struct _BaulPropertyPageProvider       BaulPropertyPageProvider;
+typedef struct _BaulPropertyPageProviderIface  BaulPropertyPageProviderIface;
 
 /**
- * CajaPropertyPageProviderIface:
+ * BaulPropertyPageProviderIface:
  * @g_iface: The parent interface.
- * @get_pages: Returns a #GList of #CajaPropertyPage.
+ * @get_pages: Returns a #GList of #BaulPropertyPage.
  *   See baul_property_page_provider_get_pages() for details.
  *
  * Interface for extensions to provide additional property pages.
  */
 
-struct _CajaPropertyPageProviderIface {
+struct _BaulPropertyPageProviderIface {
     GTypeInterface g_iface;
 
-    GList *(*get_pages) (CajaPropertyPageProvider *provider,
+    GList *(*get_pages) (BaulPropertyPageProvider *provider,
                          GList                    *files);
 };
 
 /* Interface Functions */
 GType  baul_property_page_provider_get_type  (void);
-GList *baul_property_page_provider_get_pages (CajaPropertyPageProvider *provider,
+GList *baul_property_page_provider_get_pages (BaulPropertyPageProvider *provider,
                                               GList                    *files);
 
 G_END_DECLS

@@ -29,14 +29,14 @@
 #include <gio/gio.h>
 
 #define BAUL_TYPE_PROGRESS_INFO         (baul_progress_info_get_type ())
-#define BAUL_PROGRESS_INFO(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_PROGRESS_INFO, CajaProgressInfo))
-#define BAUL_PROGRESS_INFO_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_PROGRESS_INFO, CajaProgressInfoClass))
+#define BAUL_PROGRESS_INFO(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_PROGRESS_INFO, BaulProgressInfo))
+#define BAUL_PROGRESS_INFO_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_PROGRESS_INFO, BaulProgressInfoClass))
 #define BAUL_IS_PROGRESS_INFO(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_PROGRESS_INFO))
 #define BAUL_IS_PROGRESS_INFO_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_PROGRESS_INFO))
-#define BAUL_PROGRESS_INFO_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_PROGRESS_INFO, CajaProgressInfoClass))
+#define BAUL_PROGRESS_INFO_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_PROGRESS_INFO, BaulProgressInfoClass))
 
-typedef struct _CajaProgressInfo      CajaProgressInfo;
-typedef struct _CajaProgressInfoClass CajaProgressInfoClass;
+typedef struct _BaulProgressInfo      BaulProgressInfo;
+typedef struct _BaulProgressInfoClass BaulProgressInfoClass;
 
 GType baul_progress_info_get_type (void) G_GNUC_CONST;
 
@@ -50,37 +50,37 @@ GType baul_progress_info_get_type (void) G_GNUC_CONST;
    All methods are threadsafe.
  */
 
-CajaProgressInfo *baul_progress_info_new (gboolean should_start, gboolean can_pause);
-void baul_progress_info_get_ready (CajaProgressInfo *info);
-void baul_progress_info_disable_pause (CajaProgressInfo *info);
+BaulProgressInfo *baul_progress_info_new (gboolean should_start, gboolean can_pause);
+void baul_progress_info_get_ready (BaulProgressInfo *info);
+void baul_progress_info_disable_pause (BaulProgressInfo *info);
 
 GList *       baul_get_all_progress_info (void);
 
-char *        baul_progress_info_get_status      (CajaProgressInfo *info);
-char *        baul_progress_info_get_details     (CajaProgressInfo *info);
-double        baul_progress_info_get_progress    (CajaProgressInfo *info);
-GCancellable *baul_progress_info_get_cancellable (CajaProgressInfo *info);
-void          baul_progress_info_cancel          (CajaProgressInfo *info);
-gboolean      baul_progress_info_get_is_started  (CajaProgressInfo *info);
-gboolean      baul_progress_info_get_is_finished (CajaProgressInfo *info);
-gboolean      baul_progress_info_get_is_paused   (CajaProgressInfo *info);
+char *        baul_progress_info_get_status      (BaulProgressInfo *info);
+char *        baul_progress_info_get_details     (BaulProgressInfo *info);
+double        baul_progress_info_get_progress    (BaulProgressInfo *info);
+GCancellable *baul_progress_info_get_cancellable (BaulProgressInfo *info);
+void          baul_progress_info_cancel          (BaulProgressInfo *info);
+gboolean      baul_progress_info_get_is_started  (BaulProgressInfo *info);
+gboolean      baul_progress_info_get_is_finished (BaulProgressInfo *info);
+gboolean      baul_progress_info_get_is_paused   (BaulProgressInfo *info);
 
-void          baul_progress_info_start           (CajaProgressInfo *info);
-void          baul_progress_info_finish          (CajaProgressInfo *info);
-void          baul_progress_info_pause           (CajaProgressInfo *info);
-void          baul_progress_info_resume          (CajaProgressInfo *info);
-void          baul_progress_info_set_status      (CajaProgressInfo *info,
+void          baul_progress_info_start           (BaulProgressInfo *info);
+void          baul_progress_info_finish          (BaulProgressInfo *info);
+void          baul_progress_info_pause           (BaulProgressInfo *info);
+void          baul_progress_info_resume          (BaulProgressInfo *info);
+void          baul_progress_info_set_status      (BaulProgressInfo *info,
         const char           *status);
-void          baul_progress_info_take_status     (CajaProgressInfo *info,
+void          baul_progress_info_take_status     (BaulProgressInfo *info,
         char                 *status);
-void          baul_progress_info_set_details     (CajaProgressInfo *info,
+void          baul_progress_info_set_details     (BaulProgressInfo *info,
         const char           *details);
-void          baul_progress_info_take_details    (CajaProgressInfo *info,
+void          baul_progress_info_take_details    (BaulProgressInfo *info,
         char                 *details);
-void          baul_progress_info_set_progress    (CajaProgressInfo *info,
+void          baul_progress_info_set_progress    (BaulProgressInfo *info,
         double                current,
         double                total);
-void          baul_progress_info_pulse_progress  (CajaProgressInfo *info);
+void          baul_progress_info_pulse_progress  (BaulProgressInfo *info);
 
 
 #endif /* BAUL_PROGRESS_INFO_H */

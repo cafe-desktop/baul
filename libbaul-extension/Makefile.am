@@ -72,15 +72,15 @@ if HAVE_INTROSPECTION
 introspection_files = \
 	$(libbaul_extension_include_HEADERS) \
 	$(libbaul_extension_la_SOURCES)
-Caja-2.0.gir: libbaul-extension.la Makefile
-Caja_2_0_gir_INCLUDES = Gtk-3.0 Gio-2.0 GLib-2.0
-Caja_2_0_gir_CFLAGS = \
+Baul-2.0.gir: libbaul-extension.la Makefile
+Baul_2_0_gir_INCLUDES = Gtk-3.0 Gio-2.0 GLib-2.0
+Baul_2_0_gir_CFLAGS = \
 	-I$(top_srcdir) \
 	-I$(top_builddir) \
 	$(LIBBAUL_EXTENSION_CFLAGS)
-Caja_2_0_gir_LIBS = libbaul-extension.la
-Caja_2_0_gir_FILES = $(addprefix $(srcdir)/, $(introspection_files))
-INTROSPECTION_GIRS += Caja-2.0.gir
+Baul_2_0_gir_LIBS = libbaul-extension.la
+Baul_2_0_gir_FILES = $(addprefix $(srcdir)/, $(introspection_files))
+INTROSPECTION_GIRS += Baul-2.0.gir
 
 girdir = $(datadir)/gir-1.0/
 gir_DATA = $(INTROSPECTION_GIRS)

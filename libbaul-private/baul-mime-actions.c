@@ -58,7 +58,7 @@ typedef enum
 
 typedef struct
 {
-    CajaFile *file;
+    BaulFile *file;
     char *uri;
 } LaunchLocation;
 
@@ -70,7 +70,7 @@ typedef struct
 
 typedef struct
 {
-    CajaWindowSlotInfo *slot_info;
+    BaulWindowSlotInfo *slot_info;
     gpointer window_info;
     GtkWindow *parent_window;
     GCancellable *cancellable;
@@ -78,11 +78,11 @@ typedef struct
     GList *mountables;
     GList *start_mountables;
     GList *not_mounted;
-    CajaWindowOpenMode mode;
-    CajaWindowOpenFlags flags;
+    BaulWindowOpenMode mode;
+    BaulWindowOpenFlags flags;
     char *timed_wait_prompt;
     gboolean timed_wait_active;
-    CajaFileListHandle *files_handle;
+    BaulFileListHandle *files_handle;
     gboolean tried_mounting;
     char *activation_directory;
     gboolean user_confirmation;
@@ -149,7 +149,7 @@ get_file_list_for_launch_locations (GList *locations)
 
 
 static LaunchLocation *
-launch_location_from_file (CajaFile *file)
+launch_location_from_file (BaulFile *file)
 {
     LaunchLocation *location;
     location = g_new (LaunchLocation, 1);
@@ -161,7 +161,7 @@ launch_location_from_file (CajaFile *file)
 
 static void
 launch_location_update_from_file (LaunchLocation *location,
-                                  CajaFile *file)
+                                  BaulFile *file)
 {
     baul_file_unref (location->file);
     g_free (location->uri);
@@ -181,7 +181,7 @@ launch_location_update_from_uri (LaunchLocation *location,
 
 static LaunchLocation *
 find_launch_location_for_file (GList *list,
-                               CajaFile *file)
+                               BaulFile *file)
 {
     GList *l;
     LaunchLocation *location = NULL;
@@ -287,9 +287,9 @@ filter_non_uri_apps (GList *apps)
 
 
 static gboolean
-baul_mime_actions_check_if_required_attributes_ready (CajaFile *file)
+baul_mime_actions_check_if_required_attributes_ready (BaulFile *file)
 {
-    CajaFileAttributes attributes;
+    BaulFileAttributes attributes;
     gboolean ready;
 
     attributes = baul_mime_actions_get_required_file_attributes ();
@@ -298,7 +298,7 @@ baul_mime_actions_check_if_required_attributes_ready (CajaFile *file)
     return ready;
 }
 
-CajaFileAttributes
+BaulFileAttributes
 baul_mime_actions_get_required_file_attributes (void)
 {
     return BAUL_FILE_ATTRIBUTE_INFO |
@@ -306,7 +306,7 @@ baul_mime_actions_get_required_file_attributes (void)
 }
 
 static gboolean
-file_has_local_path (CajaFile *file)
+file_has_local_path (BaulFile *file)
 {
     GFile *location;
     char *path;
@@ -334,7 +334,7 @@ file_has_local_path (CajaFile *file)
 }
 
 GAppInfo *
-baul_mime_get_default_application_for_file (CajaFile *file)
+baul_mime_get_default_application_for_file (BaulFile *file)
 {
     GAppInfo *app;
     char *mime_type;
@@ -364,8 +364,8 @@ baul_mime_get_default_application_for_file (CajaFile *file)
 }
 
 static int
-file_compare_by_mime_type (CajaFile *file_a,
-                           CajaFile *file_b)
+file_compare_by_mime_type (BaulFile *file_a,
+                           BaulFile *file_b)
 {
     char *mime_type_a, *mime_type_b;
     int ret;
@@ -382,8 +382,8 @@ file_compare_by_mime_type (CajaFile *file_a,
 }
 
 static int
-file_compare_by_parent_uri (CajaFile *file_a,
-                            CajaFile *file_b)
+file_compare_by_parent_uri (BaulFile *file_a,
+                            BaulFile *file_b)
 {
     char *parent_uri_a, *parent_uri_b;
     int ret;
@@ -444,7 +444,7 @@ application_compare_by_id (const GAppInfo *app_a,
 }
 
 GList *
-baul_mime_get_applications_for_file (CajaFile *file)
+baul_mime_get_applications_for_file (BaulFile *file)
 {
     char *mime_type;
     char *uri_scheme;
@@ -483,7 +483,7 @@ baul_mime_get_applications_for_file (CajaFile *file)
 }
 
 gboolean
-baul_mime_has_any_applications_for_file (CajaFile *file)
+baul_mime_has_any_applications_for_file (BaulFile *file)
 {
     GList *apps;
     char *mime_type;
@@ -534,7 +534,7 @@ baul_mime_get_default_application_for_files (GList *files)
 {
     GList *l, *sorted_files;
     GAppInfo *app, *one_app;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     g_assert (files != NULL);
 
@@ -641,7 +641,7 @@ baul_mime_get_applications_for_files (GList *files)
 {
     GList *l, *sorted_files;
     GList *one_ret, *ret;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     g_assert (files != NULL);
 
@@ -695,7 +695,7 @@ trash_or_delete_files (GtkWindow *parent_window,
     for (node = files; node != NULL; node = node->next)
     {
         locations = g_list_prepend (locations,
-                                    baul_file_get_location ((CajaFile *) node->data));
+                                    baul_file_get_location ((BaulFile *) node->data));
     }
 
     locations = g_list_reverse (locations);
@@ -707,7 +707,7 @@ trash_or_delete_files (GtkWindow *parent_window,
 }
 
 static void
-report_broken_symbolic_link (GtkWindow *parent_window, CajaFile *file)
+report_broken_symbolic_link (GtkWindow *parent_window, BaulFile *file)
 {
     char *target_path;
     char *display_name;
@@ -780,7 +780,7 @@ out:
 }
 
 static ActivationAction
-get_executable_text_file_action (GtkWindow *parent_window, CajaFile *file)
+get_executable_text_file_action (GtkWindow *parent_window, BaulFile *file)
 {
     GtkDialog *dialog;
     char *file_name;
@@ -870,13 +870,13 @@ get_default_executable_text_file_action (void)
 }
 
 gboolean
-baul_mime_file_opens_in_view (CajaFile *file)
+baul_mime_file_opens_in_view (BaulFile *file)
 {
     return (baul_file_is_directory (file));
 }
 
 static ActivationAction
-get_activation_action (CajaFile *file)
+get_activation_action (BaulFile *file)
 {
     ActivationAction action;
     char *activation_uri;
@@ -928,7 +928,7 @@ get_activation_action (CajaFile *file)
 }
 
 gboolean
-baul_mime_file_opens_in_external_app (CajaFile *file)
+baul_mime_file_opens_in_external_app (BaulFile *file)
 {
     ActivationAction activation_action;
 
@@ -971,7 +971,7 @@ list_to_parameters_foreach (GAppInfo *application,
 /**
  * make_activation_parameters
  *
- * Construct a list of ApplicationLaunchParameters from a list of CajaFiles,
+ * Construct a list of ApplicationLaunchParameters from a list of BaulFiles,
  * where files that have the same default application are put into the same
  * launch parameter, and others are put into the unhandled_files list.
  *
@@ -988,7 +988,7 @@ make_activation_parameters (GList *uris,
     GHashTable *app_table;
     GAppInfo *old_app;
     GAppInfo *app = NULL;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     ret = NULL;
     *unhandled_uris = NULL;
@@ -1054,7 +1054,7 @@ make_activation_parameters (GList *uris,
 }
 
 static gboolean
-file_was_cancelled (CajaFile *file)
+file_was_cancelled (BaulFile *file)
 {
     GError *error;
 
@@ -1066,7 +1066,7 @@ file_was_cancelled (CajaFile *file)
 }
 
 static gboolean
-file_was_not_mounted (CajaFile *file)
+file_was_not_mounted (BaulFile *file)
 {
     GError *error;
 
@@ -1211,12 +1211,12 @@ confirm_multiple_windows (GtkWindow *parent_window,
 
 typedef struct
 {
-    CajaWindowSlotInfo *slot_info;
+    BaulWindowSlotInfo *slot_info;
     GtkWindow *parent_window;
-    CajaFile *file;
+    BaulFile *file;
     GList *files;
-    CajaWindowOpenMode mode;
-    CajaWindowOpenFlags flags;
+    BaulWindowOpenMode mode;
+    BaulWindowOpenFlags flags;
     char *activation_directory;
     gboolean user_confirmation;
     char *uri;
@@ -1249,7 +1249,7 @@ activate_parameters_install_free (ActivateParametersInstall *parameters_install)
 }
 
 static char *
-get_application_no_mime_type_handler_message (CajaFile *file, char *uri)
+get_application_no_mime_type_handler_message (BaulFile *file, char *uri)
 {
     char *uri_for_display;
     char *nice_uri;
@@ -1281,12 +1281,12 @@ get_application_no_mime_type_handler_message (CajaFile *file, char *uri)
 }
 
 static void
-application_selected_cb (CajaOpenWithDialog *dialog,
+application_selected_cb (BaulOpenWithDialog *dialog,
                          GAppInfo *app,
                          gpointer user_data)
 {
     GtkWindow *parent_window;
-    CajaFile *file;
+    BaulFile *file;
     GList files;
 
     parent_window = GTK_WINDOW (user_data);
@@ -1305,7 +1305,7 @@ choose_program (GtkDialog *message_dialog, int response, gpointer callback_data)
     GtkWidget *dialog;
     char *uri;
     char *mime_type;
-    CajaFile *file;
+    BaulFile *file;
 
     if (response != GTK_RESPONSE_ACCEPT)
     {
@@ -1571,7 +1571,7 @@ application_unhandled_uri (ActivateParameters *parameters, char *uri)
 {
     gboolean show_install_mime;
     char *mime_type;
-    CajaFile *file;
+    BaulFile *file;
     ActivateParametersInstall *parameters_install;
 
     file = baul_file_get_by_uri (uri);
@@ -1638,7 +1638,7 @@ out:
 typedef struct
 {
     GtkWindow *parent_window;
-    CajaFile *file;
+    BaulFile *file;
 } ActivateParametersDesktop;
 
 static void
@@ -1692,7 +1692,7 @@ untrusted_launcher_response_callback (GtkDialog *dialog,
 
 static void
 activate_desktop_file (ActivateParameters *parameters,
-                       CajaFile *file)
+                       BaulFile *file)
 {
     ActivateParametersDesktop *parameters_desktop;
     GdkScreen *screen;
@@ -1768,9 +1768,9 @@ activate_desktop_file (ActivateParameters *parameters,
 static void
 activate_files (ActivateParameters *parameters)
 {
-    CajaWindowInfo *window_info;
-    CajaWindowOpenFlags flags;
-    CajaFile *file;
+    BaulWindowInfo *window_info;
+    BaulWindowOpenFlags flags;
+    BaulFile *file;
     GList *launch_desktop_files;
     GList *launch_files;
     GList *launch_in_terminal_files;
@@ -2023,7 +2023,7 @@ activation_mount_not_mounted_callback (GObject *source_object,
 {
     ActivateParameters *parameters = user_data;
     GError *error;
-    CajaFile *file;
+    BaulFile *file;
 
     file = parameters->not_mounted->data;
 
@@ -2072,7 +2072,7 @@ activation_mount_not_mounted (ActivateParameters *parameters)
 
     if (parameters->not_mounted != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
         GFile *location;
         GMountOperation *mount_op;
 
@@ -2123,7 +2123,7 @@ activate_callback (GList *files, gpointer callback_data)
     ActivateParameters *parameters = callback_data;
     GList *l, *next;
     LaunchLocation *location;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     parameters->files_handle = NULL;
 
@@ -2174,7 +2174,7 @@ activate_activation_uris_ready_callback (GList *files_ignore,
     ActivateParameters *parameters = callback_data;
     GList *l, *next, *files;
     LaunchLocation *location;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     parameters->files_handle = NULL;
 
@@ -2252,7 +2252,7 @@ activation_get_activation_uris (ActivateParameters *parameters)
 {
     GList *l, *files;
     LaunchLocation *location;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     /* link target info might be stale, re-read it */
     for (l = parameters->locations; l != NULL; l = l->next)
@@ -2293,7 +2293,7 @@ activation_get_activation_uris (ActivateParameters *parameters)
 }
 
 static void
-activation_mountable_mounted (CajaFile  *file,
+activation_mountable_mounted (BaulFile  *file,
                               GFile         *result_location,
                               GError        *error,
                               gpointer       callback_data)
@@ -2308,7 +2308,7 @@ activation_mountable_mounted (CajaFile  *file,
 
     if (error == NULL)
     {
-        CajaFile *target_file;
+        BaulFile *target_file;
 
         /* Replace file with the result of the mount */
         target_file = baul_file_get (result_location);
@@ -2366,7 +2366,7 @@ activation_mount_mountables (ActivateParameters *parameters)
 {
     if (parameters->mountables != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
         GMountOperation *mount_op;
 
         file = parameters->mountables->data;
@@ -2389,7 +2389,7 @@ activation_mount_mountables (ActivateParameters *parameters)
 
 
 static void
-activation_mountable_started (CajaFile  *file,
+activation_mountable_started (BaulFile  *file,
                               GFile         *gfile_of_file,
                               GError        *error,
                               gpointer       callback_data)
@@ -2453,7 +2453,7 @@ activation_start_mountables (ActivateParameters *parameters)
 {
     if (parameters->start_mountables != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
         GMountOperation *start_op;
 
         file = parameters->start_mountables->data;
@@ -2479,23 +2479,23 @@ activation_start_mountables (ActivateParameters *parameters)
  * Activate a list of files. Each one might launch with an application or
  * with a component. This is normally called only by subclasses.
  * @view: FMDirectoryView in question.
- * @files: A GList of CajaFiles to activate.
+ * @files: A GList of BaulFiles to activate.
  *
  **/
 void
 baul_mime_activate_files (GtkWindow *parent_window,
-                          CajaWindowSlotInfo *slot_info,
+                          BaulWindowSlotInfo *slot_info,
                           GList *files,
                           const char *launch_directory,
-                          CajaWindowOpenMode mode,
-                          CajaWindowOpenFlags flags,
+                          BaulWindowOpenMode mode,
+                          BaulWindowOpenFlags flags,
                           gboolean user_confirmation)
 {
     ActivateParameters *parameters;
     int file_count;
     GList *l, *next;
     LaunchLocation *location;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     if (files == NULL)
     {
@@ -2573,18 +2573,18 @@ baul_mime_activate_files (GtkWindow *parent_window,
  * Activate a file in this view. This might involve switching the displayed
  * location for the current window, or launching an application.
  * @view: FMDirectoryView in question.
- * @file: A CajaFile representing the file in this view to activate.
+ * @file: A BaulFile representing the file in this view to activate.
  * @use_new_window: Should this item be opened in a new window?
  *
  **/
 
 void
 baul_mime_activate_file (GtkWindow *parent_window,
-                         CajaWindowSlotInfo *slot_info,
-                         CajaFile *file,
+                         BaulWindowSlotInfo *slot_info,
+                         BaulFile *file,
                          const char *launch_directory,
-                         CajaWindowOpenMode mode,
-                         CajaWindowOpenFlags flags)
+                         BaulWindowOpenMode mode,
+                         BaulWindowOpenFlags flags)
 {
     GList *files;
 

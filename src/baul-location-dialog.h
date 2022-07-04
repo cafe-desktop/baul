@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2003 Ximian, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -28,28 +28,28 @@
 #include "baul-window.h"
 
 #define BAUL_TYPE_LOCATION_DIALOG         (baul_location_dialog_get_type ())
-#define BAUL_LOCATION_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_LOCATION_DIALOG, CajaLocationDialog))
-#define BAUL_LOCATION_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_LOCATION_DIALOG, CajaLocationDialogClass))
+#define BAUL_LOCATION_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_LOCATION_DIALOG, BaulLocationDialog))
+#define BAUL_LOCATION_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_LOCATION_DIALOG, BaulLocationDialogClass))
 #define BAUL_IS_LOCATION_DIALOG(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_LOCATION_DIALOG)
 
-typedef struct _CajaLocationDialog        CajaLocationDialog;
-typedef struct _CajaLocationDialogClass   CajaLocationDialogClass;
-typedef struct _CajaLocationDialogDetails CajaLocationDialogDetails;
+typedef struct _BaulLocationDialog        BaulLocationDialog;
+typedef struct _BaulLocationDialogClass   BaulLocationDialogClass;
+typedef struct _BaulLocationDialogDetails BaulLocationDialogDetails;
 
-struct _CajaLocationDialog
+struct _BaulLocationDialog
 {
     GtkDialog parent;
-    CajaLocationDialogDetails *details;
+    BaulLocationDialogDetails *details;
 };
 
-struct _CajaLocationDialogClass
+struct _BaulLocationDialogClass
 {
     GtkDialogClass parent_class;
 };
 
 GType      baul_location_dialog_get_type     (void);
-GtkWidget* baul_location_dialog_new          (CajaWindow         *window);
-void       baul_location_dialog_set_location (CajaLocationDialog *dialog,
+GtkWidget* baul_location_dialog_new          (BaulWindow         *window);
+void       baul_location_dialog_set_location (BaulLocationDialog *dialog,
         const char             *location);
 
 #endif /* BAUL_LOCATION_DIALOG_H */

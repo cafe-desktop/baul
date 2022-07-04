@@ -1,5 +1,5 @@
 /*
- *  baul-column-provider.h - Interface for Caja extensions that
+ *  baul-column-provider.h - Interface for Baul extensions that
  *                               provide column descriptions.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -22,11 +22,11 @@
  *
  */
 
-/* This interface is implemented by Caja extensions that want to
+/* This interface is implemented by Baul extensions that want to
  * add columns to the list view and details to the icon view.
  * Extensions are asked for a list of columns to display.  Each
  * returned column refers to a string attribute which can be filled in
- * by CajaInfoProvider */
+ * by BaulInfoProvider */
 
 #ifndef BAUL_COLUMN_PROVIDER_H
 #define BAUL_COLUMN_PROVIDER_H
@@ -38,31 +38,31 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_COLUMN_PROVIDER           (baul_column_provider_get_type ())
-#define BAUL_COLUMN_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN_PROVIDER, CajaColumnProvider))
+#define BAUL_COLUMN_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN_PROVIDER, BaulColumnProvider))
 #define BAUL_IS_COLUMN_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_COLUMN_PROVIDER))
-#define BAUL_COLUMN_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_COLUMN_PROVIDER, CajaColumnProviderIface))
+#define BAUL_COLUMN_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_COLUMN_PROVIDER, BaulColumnProviderIface))
 
-typedef struct _CajaColumnProvider       CajaColumnProvider;
-typedef struct _CajaColumnProviderIface  CajaColumnProviderIface;
+typedef struct _BaulColumnProvider       BaulColumnProvider;
+typedef struct _BaulColumnProviderIface  BaulColumnProviderIface;
 
 /**
- * CajaColumnProviderIface:
+ * BaulColumnProviderIface:
  * @g_iface: The parent interface.
- * @get_columns: Returns a #GList of #CajaColumn.
+ * @get_columns: Returns a #GList of #BaulColumn.
  *   See baul_column_provider_get_columns() for details.
  *
  * Interface for extensions to provide additional list view columns.
  */
 
-struct _CajaColumnProviderIface {
+struct _BaulColumnProviderIface {
     GTypeInterface g_iface;
 
-    GList *(*get_columns) (CajaColumnProvider *provider);
+    GList *(*get_columns) (BaulColumnProvider *provider);
 };
 
 /* Interface Functions */
 GType  baul_column_provider_get_type    (void);
-GList *baul_column_provider_get_columns (CajaColumnProvider *provider);
+GList *baul_column_provider_get_columns (BaulColumnProvider *provider);
 
 G_END_DECLS
 

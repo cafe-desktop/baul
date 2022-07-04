@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-desktop-directory-file.h: Subclass of CajaFile to implement the
+   baul-desktop-directory-file.h: Subclass of BaulFile to implement the
    the case of the desktop directory
 
    Copyright (C) 2003 Red Hat, Inc.
@@ -30,28 +30,28 @@
 
 #define BAUL_TYPE_DESKTOP_DIRECTORY_FILE baul_desktop_directory_file_get_type()
 #define BAUL_DESKTOP_DIRECTORY_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_DIRECTORY_FILE, CajaDesktopDirectoryFile))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_DIRECTORY_FILE, BaulDesktopDirectoryFile))
 #define BAUL_DESKTOP_DIRECTORY_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_DIRECTORY_FILE, CajaDesktopDirectoryFileClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_DIRECTORY_FILE, BaulDesktopDirectoryFileClass))
 #define BAUL_IS_DESKTOP_DIRECTORY_FILE(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_DESKTOP_DIRECTORY_FILE))
 #define BAUL_IS_DESKTOP_DIRECTORY_FILE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_DESKTOP_DIRECTORY_FILE))
 #define BAUL_DESKTOP_DIRECTORY_FILE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_DIRECTORY_FILE, CajaDesktopDirectoryFileClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_DIRECTORY_FILE, BaulDesktopDirectoryFileClass))
 
-typedef struct CajaDesktopDirectoryFileDetails CajaDesktopDirectoryFileDetails;
-
-typedef struct
-{
-    CajaFile parent_slot;
-    CajaDesktopDirectoryFileDetails *details;
-} CajaDesktopDirectoryFile;
+typedef struct BaulDesktopDirectoryFileDetails BaulDesktopDirectoryFileDetails;
 
 typedef struct
 {
-    CajaFileClass parent_slot;
-} CajaDesktopDirectoryFileClass;
+    BaulFile parent_slot;
+    BaulDesktopDirectoryFileDetails *details;
+} BaulDesktopDirectoryFile;
+
+typedef struct
+{
+    BaulFileClass parent_slot;
+} BaulDesktopDirectoryFileClass;
 
 GType    baul_desktop_directory_file_get_type    (void);
 

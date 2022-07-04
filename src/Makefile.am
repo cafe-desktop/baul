@@ -45,7 +45,7 @@ dbus_freedesktop_built_sources =			\
 $(dbus_freedesktop_built_sources) : Makefile.am $(top_srcdir)/data/freedesktop-dbus-interfaces.xml
 	gdbus-codegen									\
 		--interface-prefix org.freedesktop.					\
-		--c-namespace CajaFreedesktop					\
+		--c-namespace BaulFreedesktop					\
 		--c-generate-object-manager						\
 		--generate-c-code baul-freedesktop-generated			\
 		$(top_srcdir)/data/freedesktop-dbus-interfaces.xml			\

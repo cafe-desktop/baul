@@ -300,8 +300,8 @@ msgstr "Odstrániť"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -309,7 +309,7 @@ msgstr "Správca súborov pre prostredie MATE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -317,8 +317,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -3085,33 +3085,33 @@ msgstr ""
 "tab] a [ctrl + shift + tab]."
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Caja bude ukončená po zatvorení posledného okna."
+msgid "Baul will exit when last window destroyed."
+msgstr "Baul bude ukončená po zatvorení posledného okna."
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja bude zatvorená ak sú všetky okná zatvorené."
+"Ak je táto možnosť vybraná, Baul bude zatvorená ak sú všetky okná zatvorené."
 " Toto je predvolené nastavenie. Ak táto možnosť vybraná nie je, môže byť "
-"Caja otvorená aj bez otvorenia nejakého okna, tým môže byť použitá ako "
+"Baul otvorená aj bez otvorenia nejakého okna, tým môže byť použitá ako "
 "nástroj na monitorovanie pripojenia médií, alebo na podobné účely."
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
-"Povoliť klasické správanie programu Caja, kedy sú všetky okná prehliadačmi"
+"Povoliť klasické správanie programu Baul, kedy sú všetky okná prehliadačmi"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
-"Ak je táto možnosť vybraná, všetky okná Caja budú oknami prehliadača. Takto "
-"bola Caja používaná pred verziou 2.6 a niektorí ľudia uprednostňujú takéto "
+"Ak je táto možnosť vybraná, všetky okná Baul budú oknami prehliadača. Takto "
+"bola Baul používaná pred verziou 2.6 a niektorí ľudia uprednostňujú takéto "
 "správanie."
 
 #: libbaul-private/org.mate.baul.gschema.xml:96
@@ -3120,10 +3120,10 @@ msgstr "Vždy použiť pole umiestnenia, namiesto panelu s cestou"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
-"Ak je táto možnosť vybraná, okná prehliadača Caja budú vždy používať textové"
+"Ak je táto možnosť vybraná, okná prehliadača Baul budú vždy používať textové"
 " vstupné pole pre panel nástrojov Umiestnenie, namiesto panelu Cesta."
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
@@ -3134,10 +3134,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja bude vyžadovať potvrdenie pri pokuse o "
+"Ak je táto možnosť vybraná, Baul bude vyžadovať potvrdenie pri pokuse o "
 "vymazanie súborov, alebo vyprázdnenie Koša."
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
@@ -3146,10 +3146,10 @@ msgstr "Určuje, či si pýtať potvrdenie pri presune súborov do Koša"
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
-"Ak je táto možnosť vybraná, program Caja si bude pýtať potvrdenie pri pokuse"
+"Ak je táto možnosť vybraná, program Baul si bude pýtať potvrdenie pri pokuse"
 " o presun súborov do Koša."
 
 #: libbaul-private/org.mate.baul.gschema.xml:111
@@ -3158,11 +3158,11 @@ msgstr "Určuje, či povoliť okamžité vymazanie"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja umožní vymazať súbor okamžite bez presunu "
+"Ak je táto možnosť vybraná, Baul umožní vymazať súbor okamžite bez presunu "
 "do Koša. Táto funkcia je nebezpečná, zaobchádzajte s ňou opatrne."
 
 #: libbaul-private/org.mate.baul.gschema.xml:117
@@ -3240,16 +3240,16 @@ msgstr ""
 "otvorenie."
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
-msgstr "Používať udalosti ďalších tlačidiel myši v okne prehliadača Caja"
+msgid "Use extra mouse button events in Baul' browser window"
+msgstr "Používať udalosti ďalších tlačidiel myši v okne prehliadača Baul"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "Pre používateľov s myšou, ktorá má tlačidlá „dopredu“ a „dozadu“, určí tento"
-" kľúč, či sa pri stlačení niektorého z nich vykoná v Caja nejaká operácia."
+" kľúč, či sa pri stlačení niektorého z nich vykoná v Baul nejaká operácia."
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
@@ -3333,10 +3333,10 @@ msgstr "Zobraziť pokročilé oprávnenia v dialógu vlastností súboru"
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja umožní upravovať aj oprávnenia súborov "
+"Ak je táto možnosť vybraná, Baul umožní upravovať aj oprávnenia súborov "
 "spôsobom, ktorý je bližší filozofii UNIX. Dostanete sa tak ku niektorým "
 "ezoterickým možnostiam."
 
@@ -3346,10 +3346,10 @@ msgstr "Zobraziť v oknách najprv priečinky"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Ak je táto možnosť vybraná, v zobrazení s ikonami a zoznamom Caja zobrazí "
+"Ak je táto možnosť vybraná, v zobrazení s ikonami a zoznamom Baul zobrazí "
 "priečinky pred súbormi."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3380,15 +3380,15 @@ msgstr ""
 "veľkosti budú radené zostupne."
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja používa domovský priečinok používateľa ako pracovnú plochu"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul používa domovský priečinok používateľa ako pracovnú plochu"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja bude používať domovský priečinok "
+"Ak je táto možnosť vybraná, Baul bude používať domovský priečinok "
 "používateľa ako pracovnú plochu. Ak táto možnosť vybraná nie je, ako "
 "pracovná plocha sa použije ~/Plocha (~/Desktop)."
 
@@ -3525,7 +3525,7 @@ msgid "Whether to show desktop notifications"
 msgstr "Určuje, či majú byť zobrazené oznámenia na pracovnej ploche"
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3668,10 +3668,10 @@ msgstr "Zobraziť v strome bočného panelu len priečinky"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja bude zobrazovať v strome bočného panela iba"
+"Ak je táto možnosť vybraná, Baul bude zobrazovať v strome bočného panela iba"
 " priečinky. Inak zobrazí aj priečinky, aj súbory."
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
@@ -3887,10 +3887,10 @@ msgstr "Určuje, či automaticky pripájať médiá"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja bude automaticky pripájať médiá, ako napr. "
+"Ak je táto možnosť vybraná, Baul bude automaticky pripájať médiá, ako napr. "
 "pevné disky viditeľné používateľom, odstrániteľné médiá pri spustení a pri "
 "vložení média."
 
@@ -3900,12 +3900,12 @@ msgstr "Určuje, či sa má priečinok pripojeného média automaticky otvoriť"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja automaticky otvorí priečinok pripojeného "
+"Ak je táto možnosť vybraná, Baul automaticky otvorí priečinok pripojeného "
 "média. To platí len pre médiá, kde nebola zistená prítomnosť typu "
 "x-content/*. Ak bola zistená prítomnosť známeho typu x-content, bude "
 "prevedená činnosť nastaviteľná používateľom."
@@ -3917,10 +3917,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
-"Ak je táto možnosť vybraná, Caja sa nikdy nebude pýtať, ani automaticky "
+"Ak je táto možnosť vybraná, Baul sa nikdy nebude pýtať, ani automaticky "
 "spúšťať programy po pripojení média."
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
@@ -4027,29 +4027,29 @@ msgstr "Zobraziť možnosti správy relácie"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
+msgid "Baul could not create the required folder \"%s\"."
 msgstr "Caji sa nepodarilo vytvoriť požadovaný priečinok: „%s“."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"Pred spustením Caja prosím vytvorte tento priečinok, alebo nastavte "
-"oprávnenia tak, aby ho Caja mohol vytvoriť."
+"Pred spustením Baul prosím vytvorte tento priečinok, alebo nastavte "
+"oprávnenia tak, aby ho Baul mohol vytvoriť."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Programu Caja sa nepodarilo vytvoriť tieto požadované priečinky: %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Programu Baul sa nepodarilo vytvoriť tieto požadované priečinky: %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Pred spustením Caja prosím vytvorte tieto priečinky, alebo nastavte "
-"oprávnenia tak, aby ich Caja mohol vytvoriť."
+"Pred spustením Baul prosím vytvorte tieto priečinky, alebo nastavte "
+"oprávnenia tak, aby ich Baul mohol vytvoriť."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -4113,8 +4113,8 @@ msgid "Open a browser window."
 msgstr "Otvorí okno prehliadača."
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Ukončiť program Caja."
+msgid "Quit Baul."
+msgstr "Ukončiť program Baul."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -5132,8 +5132,8 @@ msgid "New _Window"
 msgstr "Nové _okno"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "Otvoriť ďalšie okno Caja pre zobrazené umiestnenie"
+msgid "Open another Baul window for the displayed location"
+msgstr "Otvoriť ďalšie okno Baul pre zobrazené umiestnenie"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -5157,7 +5157,7 @@ msgstr "Z_atvoriť všetky okná"
 
 #: src/baul-navigation-window-menus.c:843
 msgid "Close all Navigation windows"
-msgstr "Zatvoriť všetky okná programu Caja"
+msgstr "Zatvoriť všetky okná programu Baul"
 
 #: src/baul-navigation-window-menus.c:846
 msgid "_Location..."
@@ -5953,9 +5953,9 @@ msgid "View of the current folder"
 msgstr "Zobrazenie aktuálneho priečinka"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
+msgid "Baul has no installed viewer capable of displaying the folder."
 msgstr ""
-"Caja nemá nainštalovaný žiadny prehliadač schopný zobraziť tento priečinok."
+"Baul nemá nainštalovaný žiadny prehliadač schopný zobraziť tento priečinok."
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5972,12 +5972,12 @@ msgstr "Prosím, skontrolujte preklepy a skúste to znovu."
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "Program Caja nie je schopný pracovať s „%s“ umiestneniami."
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "Program Baul nie je schopný pracovať s „%s“ umiestneniami."
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Program Caja nie je schopný pracovať s týmto druhom umiestnenia."
+msgid "Baul cannot handle this kind of location."
+msgstr "Program Baul nie je schopný pracovať s týmto druhom umiestnenia."
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -6012,52 +6012,52 @@ msgstr "Prejsť na miesto definované touto záložkou"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja je voľný softvér. Môžete ho ďalej šíriť a/alebo upravovať podľa "
+"Baul je voľný softvér. Môžete ho ďalej šíriť a/alebo upravovať podľa "
 "ustanovení GNU General Public License (Všeobecná zverejňovacia licencia) "
 "tak, ako ju vydala organizácia Free Software Foundation, a to buď verzie 2 "
 "tejto licencie alebo (podľa vášho uváženia) ktorejkoľvek neskoršej."
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Program Caja je šírený v nádeji, že bude užitočný, ale BEZ AKEJKOĽVEK "
+"Program Baul je šírený v nádeji, že bude užitočný, ale BEZ AKEJKOĽVEK "
 "ZÁRUKY, dokonca bez predpokladanej záruky PREDAJNOSTI alebo VHODNOSTI NA "
 "KONKRÉTNY ÚČEL. Ďalšie podrobnosti sa dočítate v GNU General Public License."
 
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
-"Spolu s programom Caja ste mali obdržať kópiu Všeobecnej verejnej licencie "
+"Spolu s programom Baul ste mali obdržať kópiu Všeobecnej verejnej licencie "
 "GNU. Ak sa tak nestalo, napíšte na Free Software Foundation, Inc., 51 "
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
-"Caja vám umožní organizovať súbory a priečinky tak na vašom počítači, ako aj"
+"Baul vám umožní organizovať súbory a priečinky tak na vašom počítači, ako aj"
 " online."
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -6105,8 +6105,8 @@ msgid "Prefere_nces"
 msgstr "_Nastavenia"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Upraviť nastavenia programu Caja"
+msgid "Edit Baul preferences"
+msgstr "Upraviť nastavenia programu Baul"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -6133,16 +6133,16 @@ msgid "_Contents"
 msgstr "Ob_sah"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Zobraziť Pomocníka Caja"
+msgid "Display Baul help"
+msgstr "Zobraziť Pomocníka Baul"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "O progr_ame"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Zobraziť zoznam tvorcov programu Caja"
+msgid "Display credits for the creators of Baul"
+msgstr "Zobraziť zoznam tvorcov programu Baul"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6541,7 +6541,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6561,7 +6561,7 @@ msgstr ""
 "\n"
 "Keď bude spustený v lokálnom priečinku, skriptu budú odovzdané názvy vybraných súborov. Pri spustení vo vzdialenom priečinku (napr. priečinku na WWW alebo FTP serveri), skript nedostane žiadne parametre.\n"
 "\n"
-"V každom prípade budú programom Caja nastavené nasledovné premenné prostredia, ktoré môže skript používať:\n"
+"V každom prípade budú programom Baul nastavené nasledovné premenné prostredia, ktoré môže skript používať:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: cesty k vybraným súborom oddelené novými riadkami (len pre lokálne súbory)\n"
 "\n"

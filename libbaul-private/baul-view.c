@@ -45,7 +45,7 @@ baul_view_base_init (gpointer g_class)
             g_signal_new ("title_changed",
                           BAUL_TYPE_VIEW,
                           G_SIGNAL_RUN_LAST,
-                          G_STRUCT_OFFSET (CajaViewIface, title_changed),
+                          G_STRUCT_OFFSET (BaulViewIface, title_changed),
                           NULL, NULL,
                           g_cclosure_marshal_VOID__VOID,
                           G_TYPE_NONE, 0);
@@ -54,7 +54,7 @@ baul_view_base_init (gpointer g_class)
             g_signal_new ("zoom_level_changed",
                           BAUL_TYPE_VIEW,
                           G_SIGNAL_RUN_LAST,
-                          G_STRUCT_OFFSET (CajaViewIface, zoom_level_changed),
+                          G_STRUCT_OFFSET (BaulViewIface, zoom_level_changed),
                           NULL, NULL,
                           g_cclosure_marshal_VOID__VOID,
                           G_TYPE_NONE, 0);
@@ -72,7 +72,7 @@ baul_view_get_type (void)
     {
         const GTypeInfo info =
         {
-            sizeof (CajaViewIface),
+            sizeof (BaulViewIface),
             baul_view_base_init,
             NULL,
             NULL,
@@ -84,7 +84,7 @@ baul_view_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaView",
+                                       "BaulView",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -93,7 +93,7 @@ baul_view_get_type (void)
 }
 
 const char *
-baul_view_get_view_id (CajaView *view)
+baul_view_get_view_id (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), NULL);
 
@@ -101,7 +101,7 @@ baul_view_get_view_id (CajaView *view)
 }
 
 GtkWidget *
-baul_view_get_widget (CajaView *view)
+baul_view_get_widget (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), NULL);
 
@@ -109,7 +109,7 @@ baul_view_get_widget (CajaView *view)
 }
 
 void
-baul_view_load_location (CajaView *view,
+baul_view_load_location (BaulView *view,
                          const char   *location_uri)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
@@ -120,7 +120,7 @@ baul_view_load_location (CajaView *view,
 }
 
 void
-baul_view_stop_loading (CajaView *view)
+baul_view_stop_loading (BaulView *view)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
 
@@ -128,7 +128,7 @@ baul_view_stop_loading (CajaView *view)
 }
 
 int
-baul_view_get_selection_count (CajaView *view)
+baul_view_get_selection_count (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), 0);
 
@@ -136,7 +136,7 @@ baul_view_get_selection_count (CajaView *view)
 }
 
 GList *
-baul_view_get_selection (CajaView *view)
+baul_view_get_selection (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), NULL);
 
@@ -144,7 +144,7 @@ baul_view_get_selection (CajaView *view)
 }
 
 void
-baul_view_set_selection (CajaView *view,
+baul_view_set_selection (BaulView *view,
                          GList        *list)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
@@ -154,7 +154,7 @@ baul_view_set_selection (CajaView *view,
 }
 
 void
-baul_view_set_is_active (CajaView *view,
+baul_view_set_is_active (BaulView *view,
                          gboolean is_active)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
@@ -164,7 +164,7 @@ baul_view_set_is_active (CajaView *view,
 }
 
 void
-baul_view_invert_selection (CajaView *view)
+baul_view_invert_selection (BaulView *view)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
 
@@ -172,7 +172,7 @@ baul_view_invert_selection (CajaView *view)
 }
 
 char *
-baul_view_get_first_visible_file (CajaView *view)
+baul_view_get_first_visible_file (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), NULL);
 
@@ -180,7 +180,7 @@ baul_view_get_first_visible_file (CajaView *view)
 }
 
 void
-baul_view_scroll_to_file (CajaView *view,
+baul_view_scroll_to_file (BaulView *view,
                           const char   *uri)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
@@ -189,7 +189,7 @@ baul_view_scroll_to_file (CajaView *view,
 }
 
 char *
-baul_view_get_title (CajaView *view)
+baul_view_get_title (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), NULL);
 
@@ -205,7 +205,7 @@ baul_view_get_title (CajaView *view)
 
 
 gboolean
-baul_view_supports_zooming (CajaView *view)
+baul_view_supports_zooming (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), FALSE);
 
@@ -213,7 +213,7 @@ baul_view_supports_zooming (CajaView *view)
 }
 
 void
-baul_view_bump_zoom_level (CajaView *view,
+baul_view_bump_zoom_level (BaulView *view,
                            int zoom_increment)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
@@ -223,8 +223,8 @@ baul_view_bump_zoom_level (CajaView *view,
 }
 
 void
-baul_view_zoom_to_level (CajaView      *view,
-                         CajaZoomLevel  level)
+baul_view_zoom_to_level (BaulView      *view,
+                         BaulZoomLevel  level)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
 
@@ -233,7 +233,7 @@ baul_view_zoom_to_level (CajaView      *view,
 }
 
 void
-baul_view_restore_default_zoom_level (CajaView *view)
+baul_view_restore_default_zoom_level (BaulView *view)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
 
@@ -241,7 +241,7 @@ baul_view_restore_default_zoom_level (CajaView *view)
 }
 
 gboolean
-baul_view_can_zoom_in (CajaView *view)
+baul_view_can_zoom_in (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), FALSE);
 
@@ -249,15 +249,15 @@ baul_view_can_zoom_in (CajaView *view)
 }
 
 gboolean
-baul_view_can_zoom_out (CajaView *view)
+baul_view_can_zoom_out (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), FALSE);
 
     return (* BAUL_VIEW_GET_IFACE (view)->can_zoom_out) (view);
 }
 
-CajaZoomLevel
-baul_view_get_zoom_level (CajaView *view)
+BaulZoomLevel
+baul_view_get_zoom_level (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), BAUL_ZOOM_LEVEL_STANDARD);
 
@@ -265,7 +265,7 @@ baul_view_get_zoom_level (CajaView *view)
 }
 
 void
-baul_view_grab_focus (CajaView   *view)
+baul_view_grab_focus (BaulView   *view)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
 
@@ -276,7 +276,7 @@ baul_view_grab_focus (CajaView   *view)
 }
 
 void
-baul_view_update_menus (CajaView *view)
+baul_view_update_menus (BaulView *view)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
 
@@ -287,7 +287,7 @@ baul_view_update_menus (CajaView *view)
 }
 
 void
-baul_view_pop_up_location_context_menu (CajaView   *view,
+baul_view_pop_up_location_context_menu (BaulView   *view,
                                         GdkEventButton *event,
                                         const char     *location)
 {
@@ -300,7 +300,7 @@ baul_view_pop_up_location_context_menu (CajaView   *view,
 }
 
 void
-baul_view_drop_proxy_received_uris   (CajaView         *view,
+baul_view_drop_proxy_received_uris   (BaulView         *view,
                                       GList                *uris,
                                       const char           *target_location,
                                       GdkDragAction         action)
@@ -314,7 +314,7 @@ baul_view_drop_proxy_received_uris   (CajaView         *view,
 }
 
 void
-baul_view_drop_proxy_received_netscape_url (CajaView         *view,
+baul_view_drop_proxy_received_netscape_url (BaulView         *view,
         const char           *source_url,
         const char           *target_location,
         GdkDragAction         action)

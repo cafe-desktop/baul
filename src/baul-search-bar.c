@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Novell, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -33,7 +33,7 @@
 
 #include "baul-search-bar.h"
 
-struct CajaSearchBarDetails
+struct BaulSearchBarDetails
 {
     GtkWidget *entry;
     gboolean entry_borrowed;
@@ -49,10 +49,10 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static void  baul_search_bar_class_init       (CajaSearchBarClass *class);
-static void  baul_search_bar_init             (CajaSearchBar      *bar);
+static void  baul_search_bar_class_init       (BaulSearchBarClass *class);
+static void  baul_search_bar_init             (BaulSearchBar      *bar);
 
-EEL_CLASS_BOILERPLATE (CajaSearchBar,
+EEL_CLASS_BOILERPLATE (BaulSearchBar,
                        baul_search_bar,
                        GTK_TYPE_EVENT_BOX)
 
@@ -60,7 +60,7 @@ EEL_CLASS_BOILERPLATE (CajaSearchBar,
 static void
 finalize (GObject *object)
 {
-    CajaSearchBar *bar;
+    BaulSearchBar *bar;
 
     bar = BAUL_SEARCH_BAR (object);
 
@@ -70,7 +70,7 @@ finalize (GObject *object)
 }
 
 static void
-baul_search_bar_class_init (CajaSearchBarClass *class)
+baul_search_bar_class_init (BaulSearchBarClass *class)
 {
     GObjectClass *gobject_class;
     GtkBindingSet *binding_set;
@@ -82,7 +82,7 @@ baul_search_bar_class_init (CajaSearchBarClass *class)
         g_signal_new ("activate",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaSearchBarClass, activate),
+                      G_STRUCT_OFFSET (BaulSearchBarClass, activate),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -91,7 +91,7 @@ baul_search_bar_class_init (CajaSearchBarClass *class)
         g_signal_new ("focus-in",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaSearchBarClass, focus_in),
+                      G_STRUCT_OFFSET (BaulSearchBarClass, focus_in),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -100,7 +100,7 @@ baul_search_bar_class_init (CajaSearchBarClass *class)
         g_signal_new ("cancel",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-                      G_STRUCT_OFFSET (CajaSearchBarClass, cancel),
+                      G_STRUCT_OFFSET (BaulSearchBarClass, cancel),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -110,7 +110,7 @@ baul_search_bar_class_init (CajaSearchBarClass *class)
 }
 
 static gboolean
-entry_has_text (CajaSearchBar *bar)
+entry_has_text (BaulSearchBar *bar)
 {
     const char *text;
 
@@ -123,13 +123,13 @@ static void
 entry_icon_release_cb (GtkEntry *entry,
                        GtkEntryIconPosition position,
                        GdkEvent *event,
-                       CajaSearchBar *bar)
+                       BaulSearchBar *bar)
 {
     g_signal_emit_by_name (entry, "activate", 0);
 }
 
 static void
-entry_activate_cb (GtkWidget *entry, CajaSearchBar *bar)
+entry_activate_cb (GtkWidget *entry, BaulSearchBar *bar)
 {
     if (entry_has_text (bar) && !bar->details->entry_borrowed)
     {
@@ -142,7 +142,7 @@ focus_in_event_callback (GtkWidget *widget,
                          GdkEventFocus *event,
                          gpointer user_data)
 {
-    CajaSearchBar *bar;
+    BaulSearchBar *bar;
 
     bar = BAUL_SEARCH_BAR (user_data);
 
@@ -152,7 +152,7 @@ focus_in_event_callback (GtkWidget *widget,
 }
 
 static void
-baul_search_bar_init (CajaSearchBar *bar)
+baul_search_bar_init (BaulSearchBar *bar)
 {
     GtkWidget *hbox;
     GtkWidget *label;
@@ -161,7 +161,7 @@ baul_search_bar_init (CajaSearchBar *bar)
     context = gtk_widget_get_style_context (GTK_WIDGET (bar));
     gtk_style_context_add_class (context, "baul-search-bar");
 
-    bar->details = g_new0 (CajaSearchBarDetails, 1);
+    bar->details = g_new0 (BaulSearchBarDetails, 1);
 
     gtk_event_box_set_visible_window (GTK_EVENT_BOX (bar), FALSE);
 
@@ -193,7 +193,7 @@ baul_search_bar_init (CajaSearchBar *bar)
 }
 
 GtkWidget *
-baul_search_bar_borrow_entry (CajaSearchBar *bar)
+baul_search_bar_borrow_entry (BaulSearchBar *bar)
 {
     GtkBindingSet *binding_set;
 
@@ -205,7 +205,7 @@ baul_search_bar_borrow_entry (CajaSearchBar *bar)
 }
 
 void
-baul_search_bar_return_entry (CajaSearchBar *bar)
+baul_search_bar_return_entry (BaulSearchBar *bar)
 {
     GtkBindingSet *binding_set;
 
@@ -216,10 +216,10 @@ baul_search_bar_return_entry (CajaSearchBar *bar)
 }
 
 GtkWidget *
-baul_search_bar_new (CajaWindow *window)
+baul_search_bar_new (BaulWindow *window)
 {
     GtkWidget *bar;
-    CajaSearchBar *search_bar;
+    BaulSearchBar *search_bar;
 
     bar = g_object_new (BAUL_TYPE_SEARCH_BAR, NULL);
     search_bar = BAUL_SEARCH_BAR(bar);
@@ -233,11 +233,11 @@ baul_search_bar_new (CajaWindow *window)
     return bar;
 }
 
-CajaQuery *
-baul_search_bar_get_query (CajaSearchBar *bar)
+BaulQuery *
+baul_search_bar_get_query (BaulSearchBar *bar)
 {
     const char *query_text;
-    CajaQuery *query;
+    BaulQuery *query;
 
     query_text = gtk_entry_get_text (GTK_ENTRY (bar->details->entry));
 
@@ -254,13 +254,13 @@ baul_search_bar_get_query (CajaSearchBar *bar)
 }
 
 void
-baul_search_bar_grab_focus (CajaSearchBar *bar)
+baul_search_bar_grab_focus (BaulSearchBar *bar)
 {
     gtk_widget_grab_focus (bar->details->entry);
 }
 
 void
-baul_search_bar_clear (CajaSearchBar *bar)
+baul_search_bar_clear (BaulSearchBar *bar)
 {
     gtk_entry_set_text (GTK_ENTRY (bar->details->entry), "");
 }

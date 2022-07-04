@@ -1,15 +1,15 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2010 Cosimo Cecchi <cosimoc@gnome.org>
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -35,29 +35,29 @@
 #define BAUL_CONNECT_SERVER_OPERATION(obj)\
   (G_TYPE_CHECK_INSTANCE_CAST ((obj),\
 			       BAUL_TYPE_CONNECT_SERVER_OPERATION,\
-			       CajaConnectServerOperation))
+			       BaulConnectServerOperation))
 #define BAUL_CONNECT_SERVER_OPERATION_CLASS(klass)\
   (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CONNECT_SERVER_OPERATION,\
-			    CajaConnectServerOperationClass))
+			    BaulConnectServerOperationClass))
 #define BAUL_IS_CONNECT_SERVER_OPERATION(obj)\
   (G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_CONNECT_SERVER_OPERATION)
 
-typedef struct _CajaConnectServerOperationPrivate
-  CajaConnectServerOperationPrivate;
+typedef struct _BaulConnectServerOperationPrivate
+  BaulConnectServerOperationPrivate;
 
 typedef struct {
 	GtkMountOperation parent;
-	CajaConnectServerOperationPrivate *details;
-} CajaConnectServerOperation;
+	BaulConnectServerOperationPrivate *details;
+} BaulConnectServerOperation;
 
 typedef struct {
 	GtkMountOperationClass parent_class;
-} CajaConnectServerOperationClass;
+} BaulConnectServerOperationClass;
 
 GType baul_connect_server_operation_get_type (void);
 
 GMountOperation *
-baul_connect_server_operation_new (CajaConnectServerDialog *dialog);
+baul_connect_server_operation_new (BaulConnectServerDialog *dialog);
 
 
 #endif /* __BAUL_CONNECT_SERVER_OPERATION_H__ */

@@ -1,5 +1,5 @@
 /*
- *  baul-column.c - Info columns exported by CajaColumnProvider
+ *  baul-column.c - Info columns exported by BaulColumnProvider
  *                      objects.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -37,7 +37,7 @@ enum {
     LAST_PROP
 };
 
-struct _CajaColumnDetails {
+struct _BaulColumnDetails {
     char *name;
     GQuark attribute;
     char *label;
@@ -45,17 +45,17 @@ struct _CajaColumnDetails {
     float xalign;
 };
 
-G_DEFINE_TYPE (CajaColumn, baul_column, G_TYPE_OBJECT);
+G_DEFINE_TYPE (BaulColumn, baul_column, G_TYPE_OBJECT);
 
 /**
  * SECTION:baul-column
- * @title: CajaColumn
+ * @title: BaulColumn
  * @short_description: List view column descriptor object
  * @include: libbaul-extension/baul-column.h
  *
- * #CajaColumn is an object that describes a column in the file manager
- * list view. Extensions can provide #CajaColumn by registering a
- * #CajaColumnProvider and returning them from
+ * #BaulColumn is an object that describes a column in the file manager
+ * list view. Extensions can provide #BaulColumn by registering a
+ * #BaulColumnProvider and returning them from
  * baul_column_provider_get_columns(), which will be called by the main
  * application when creating a view.
  */
@@ -69,15 +69,15 @@ G_DEFINE_TYPE (CajaColumn, baul_column, G_TYPE_OBJECT);
  *
  * Creates a new column
  *
- * Returns: a newly created #CajaColumn
+ * Returns: a newly created #BaulColumn
  */
-CajaColumn *
+BaulColumn *
 baul_column_new (const char *name,
                  const char *attribute,
                  const char *label,
                  const char *description)
 {
-    CajaColumn *column;
+    BaulColumn *column;
 
     g_return_val_if_fail (name != NULL, NULL);
     g_return_val_if_fail (attribute != NULL, NULL);
@@ -100,7 +100,7 @@ baul_column_get_property (GObject *object,
                           GValue *value,
                           GParamSpec *pspec)
 {
-    CajaColumn *column;
+    BaulColumn *column;
 
     column = BAUL_COLUMN (object);
 
@@ -135,7 +135,7 @@ baul_column_set_property (GObject *object,
                           const GValue *value,
                           GParamSpec *pspec)
 {
-    CajaColumn *column;
+    BaulColumn *column;
 
     column = BAUL_COLUMN (object);
 
@@ -173,7 +173,7 @@ baul_column_set_property (GObject *object,
 static void
 baul_column_finalize (GObject *object)
 {
-    CajaColumn *column;
+    BaulColumn *column;
 
     column = BAUL_COLUMN (object);
 
@@ -187,14 +187,14 @@ baul_column_finalize (GObject *object)
 }
 
 static void
-baul_column_init (CajaColumn *column)
+baul_column_init (BaulColumn *column)
 {
-    column->details = g_new0 (CajaColumnDetails, 1);
+    column->details = g_new0 (BaulColumnDetails, 1);
     column->details->xalign = 0.0;
 }
 
 static void
-baul_column_class_init (CajaColumnClass *class)
+baul_column_class_init (BaulColumnClass *class)
 {
     G_OBJECT_CLASS (class)->finalize = baul_column_finalize;
     G_OBJECT_CLASS (class)->get_property = baul_column_get_property;

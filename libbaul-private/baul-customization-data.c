@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -51,7 +51,7 @@ typedef enum
     READ_PRIVATE_CUSTOMIZATIONS
 } CustomizationReadingMode;
 
-struct CajaCustomizationData
+struct BaulCustomizationData
 {
     char *customization_name;
 
@@ -74,10 +74,10 @@ struct CajaCustomizationData
 /* The Property here should be one of "emblems", "colors" or "patterns" */
 static char *            get_global_customization_path       (const char *customization_name);
 static char *            get_private_customization_path      (const char *customization_name);
-static char *            get_file_path_for_mode              (const CajaCustomizationData *data,
+static char *            get_file_path_for_mode              (const BaulCustomizationData *data,
         const char *file_name);
-static char*             format_name_for_display             (CajaCustomizationData *data, const char *name);
-static void		 load_name_map_hash_table	     (CajaCustomizationData *data);
+static char*             format_name_for_display             (BaulCustomizationData *data, const char *name);
+static void		 load_name_map_hash_table	     (BaulCustomizationData *data);
 
 
 static gboolean
@@ -117,17 +117,17 @@ read_all_children (char *filename,
 }
 
 
-CajaCustomizationData*
+BaulCustomizationData*
 baul_customization_data_new (const char *customization_name,
                              gboolean show_public_customizations,
                              int maximum_icon_height,
                              int maximum_icon_width)
 {
-    CajaCustomizationData *data;
+    BaulCustomizationData *data;
     char *private_directory_path;
     gboolean public_result, private_result;
 
-    data = g_new0 (CajaCustomizationData, 1);
+    data = g_new0 (BaulCustomizationData, 1);
 
     public_result = TRUE;
 
@@ -194,7 +194,7 @@ baul_customization_data_new (const char *customization_name,
 }
 
 gboolean
-baul_customization_data_get_next_element_for_display (CajaCustomizationData *data,
+baul_customization_data_get_next_element_for_display (BaulCustomizationData *data,
         char **emblem_name,
         GdkPixbuf **pixbuf_out,
         char **label_out)
@@ -293,13 +293,13 @@ baul_customization_data_get_next_element_for_display (CajaCustomizationData *dat
 }
 
 gboolean
-baul_customization_data_private_data_was_displayed (CajaCustomizationData *data)
+baul_customization_data_private_data_was_displayed (BaulCustomizationData *data)
 {
     return data->private_data_was_displayed;
 }
 
 void
-baul_customization_data_destroy (CajaCustomizationData *data)
+baul_customization_data_destroy (BaulCustomizationData *data)
 {
     g_assert (data->public_file_list != NULL ||
               data->private_file_list != NULL);
@@ -362,7 +362,7 @@ get_private_customization_path (const char *customization_name)
 
 
 static char *
-get_file_path_for_mode (const CajaCustomizationData *data,
+get_file_path_for_mode (const BaulCustomizationData *data,
                         const char *file_name)
 {
     char *directory_path, *file;
@@ -426,7 +426,7 @@ baul_customization_make_pattern_chit (GdkPixbuf *pattern_tile, GdkPixbuf *frame,
    and capitalizing as necessary */
 
 static char*
-format_name_for_display (CajaCustomizationData *data, const char* name)
+format_name_for_display (BaulCustomizationData *data, const char* name)
 {
     char *formatted_str;
 
@@ -457,7 +457,7 @@ format_name_for_display (CajaCustomizationData *data, const char* name)
  * name mapping data from the browser xml file
  */
 static void
-load_name_map_hash_table (CajaCustomizationData *data)
+load_name_map_hash_table (BaulCustomizationData *data)
 {
     char *xml_path;
 

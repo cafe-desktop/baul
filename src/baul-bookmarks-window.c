@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 1999, 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -46,8 +46,8 @@
  * class fields.
  */
 static int		     bookmark_list_changed_signal_id;
-static CajaBookmarkList *bookmarks = NULL;
-static GtkTreeView	    *bookmark_list_widget = NULL; /* awkward name to distinguish from CajaBookmarkList */
+static BaulBookmarkList *bookmarks = NULL;
+static GtkTreeView	    *bookmark_list_widget = NULL; /* awkward name to distinguish from BaulBookmarkList */
 static GtkListStore	    *bookmark_list_store = NULL;
 static GtkListStore	    *bookmark_empty_list_store = NULL;
 static GtkTreeSelection     *bookmark_selection = NULL;
@@ -66,15 +66,15 @@ static int                   row_activated_signal_id;
 static int                   button_pressed_signal_id;
 static int                   key_pressed_signal_id;
 static int                   jump_button_signal_id;
-static CajaApplication  *application;
+static BaulApplication  *application;
 static gboolean              parent_is_browser_window;
 
 /* forward declarations */
 static guint    get_selected_row                            (void);
 static gboolean get_selection_exists                        (void);
-static void     name_or_uri_field_activate                  (CajaEntry        *entry);
+static void     name_or_uri_field_activate                  (BaulEntry        *entry);
 static void     baul_bookmarks_window_restore_geometry  (GtkWidget            *window);
-static void     on_bookmark_list_changed                    (CajaBookmarkList *list,
+static void     on_bookmark_list_changed                    (BaulBookmarkList *list,
         gpointer              user_data);
 static void     on_name_field_changed                       (GtkEditable          *editable,
         gpointer              user_data);
@@ -250,12 +250,12 @@ edit_bookmarks_dialog_reset_signals (gpointer data,
  * create_bookmarks_window:
  *
  * Create a new bookmark-editing window.
- * @list: The CajaBookmarkList that this window will edit.
+ * @list: The BaulBookmarkList that this window will edit.
  *
  * Return value: A pointer to the new window.
  **/
 GtkWindow *
-create_bookmarks_window (CajaBookmarkList *list, CajaWindow *window_source)
+create_bookmarks_window (BaulBookmarkList *list, BaulWindow *window_source)
 {
     GtkWidget         *window;
     GtkTreeViewColumn *col;
@@ -416,7 +416,7 @@ create_bookmarks_window (CajaBookmarkList *list, CajaWindow *window_source)
 }
 
 void
-edit_bookmarks_dialog_set_signals (CajaWindow *window)
+edit_bookmarks_dialog_set_signals (BaulWindow *window)
 {
 
     g_signal_handler_disconnect (jump_button,
@@ -435,7 +435,7 @@ edit_bookmarks_dialog_set_signals (CajaWindow *window)
                        window);
 }
 
-static CajaBookmark *
+static BaulBookmark *
 get_selected_bookmark (void)
 {
     g_return_val_if_fail(BAUL_IS_BOOKMARK_LIST(bookmarks), NULL);
@@ -530,7 +530,7 @@ baul_bookmarks_window_save_geometry (GtkWindow *window)
 }
 
 static void
-on_bookmark_list_changed (CajaBookmarkList *bookmarks, gpointer data)
+on_bookmark_list_changed (BaulBookmarkList *bookmarks, gpointer data)
 {
     g_return_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks));
 
@@ -567,8 +567,8 @@ on_name_field_changed (GtkEditable *editable,
 static void
 open_selected_bookmark (gpointer user_data, GdkScreen *screen)
 {
-    CajaBookmark *selected;
-    CajaWindow *window;
+    BaulBookmark *selected;
+    BaulWindow *window;
     GFile *location;
 
     selected = get_selected_bookmark ();
@@ -684,7 +684,7 @@ on_row_changed (GtkListStore *store,
                 GtkTreeIter *iter,
                 gpointer user_data)
 {
-    CajaBookmark *bookmark = NULL;
+    BaulBookmark *bookmark = NULL;
     gint *indices, row;
     gboolean insert_bookmark = TRUE;
 
@@ -700,7 +700,7 @@ on_row_changed (GtkListStore *store,
        have been dragged here, so we insert it into the list. */
     if (row < (gint) baul_bookmark_list_length (bookmarks))
     {
-        CajaBookmark *bookmark_in_list;
+        BaulBookmark *bookmark_in_list;
 
         bookmark_in_list = baul_bookmark_list_item_at (bookmarks,
                            row);
@@ -797,7 +797,7 @@ static void
 on_selection_changed (GtkTreeSelection *treeselection,
                       gpointer user_data)
 {
-    CajaBookmark *selected;
+    BaulBookmark *selected;
     char *name = NULL, *entry_text = NULL;
 
     g_assert (GTK_IS_ENTRY (name_field));
@@ -845,7 +845,7 @@ update_bookmark_from_text (void)
 {
     if (text_changed)
     {
-        CajaBookmark *bookmark, *bookmark_in_list;
+        BaulBookmark *bookmark, *bookmark_in_list;
         char *name;
         cairo_surface_t *surface;
         guint selected_row;
@@ -920,7 +920,7 @@ on_text_field_focus_out_event (GtkWidget *widget,
 }
 
 static void
-name_or_uri_field_activate (CajaEntry *entry)
+name_or_uri_field_activate (BaulEntry *entry)
 {
     g_assert (BAUL_IS_ENTRY (entry));
 
@@ -980,7 +980,7 @@ on_window_destroy_event (GtkWidget *widget,
 static void
 repopulate (void)
 {
-    CajaBookmark *selected;
+    BaulBookmark *selected;
     GtkListStore *store;
     GtkTreeRowReference *reference;
     guint index;
@@ -1024,7 +1024,7 @@ repopulate (void)
 
     for (index = 0; index < baul_bookmark_list_length (bookmarks); ++index)
     {
-        CajaBookmark *bookmark;
+        BaulBookmark *bookmark;
         char             *bookmark_name;
         cairo_surface_t  *bookmark_surface;
         GtkTreeIter       iter;

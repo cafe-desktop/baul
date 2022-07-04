@@ -101,7 +101,7 @@ desktop_directory_changed_callback (gpointer callback_data)
     desktop_directory = baul_get_desktop_directory ();
 }
 
-static CajaIconContainer *
+static BaulIconContainer *
 get_icon_container (FMDesktopIconView *icon_view)
 {
     g_return_val_if_fail (FM_IS_DESKTOP_ICON_VIEW (icon_view), NULL);
@@ -111,7 +111,7 @@ get_icon_container (FMDesktopIconView *icon_view)
 }
 
 static void
-icon_container_set_workarea (CajaIconContainer *icon_container,
+icon_container_set_workarea (BaulIconContainer *icon_container,
                              GdkScreen             *screen,
                              long                  *workareas,
                              int                    n_items)
@@ -158,7 +158,7 @@ net_workarea_changed (FMDesktopIconView *icon_view,
     GdkAtom type_returned;
     int format_returned;
     int length_returned;
-    CajaIconContainer *icon_container;
+    BaulIconContainer *icon_container;
 
     g_return_if_fail (FM_IS_DESKTOP_ICON_VIEW (icon_view));
 
@@ -318,7 +318,7 @@ fm_desktop_icon_view_class_init (FMDesktopIconViewClass *class)
 }
 
 static void
-fm_desktop_icon_view_handle_middle_click (CajaIconContainer *icon_container,
+fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
         GdkEventButton *event,
         FMDesktopIconView *desktop_icon_view)
 {
@@ -423,11 +423,11 @@ realized_callback (GtkWidget *widget, FMDesktopIconView *desktop_icon_view)
 
 }
 
-static CajaZoomLevel
+static BaulZoomLevel
 get_default_zoom_level (void)
 {
     static gboolean auto_storage_added = FALSE;
-    static CajaZoomLevel default_zoom_level = BAUL_ZOOM_LEVEL_STANDARD;
+    static BaulZoomLevel default_zoom_level = BAUL_ZOOM_LEVEL_STANDARD;
 
     if (!auto_storage_added)
     {
@@ -443,7 +443,7 @@ get_default_zoom_level (void)
 static void
 default_zoom_level_changed (gpointer user_data)
 {
-    CajaZoomLevel new_level;
+    BaulZoomLevel new_level;
     FMDesktopIconView *desktop_icon_view;
 
     desktop_icon_view = FM_DESKTOP_ICON_VIEW (user_data);
@@ -484,7 +484,7 @@ do_desktop_rescan (gpointer data)
 }
 
 static void
-done_loading (CajaDirectory *model,
+done_loading (BaulDirectory *model,
 	      FMDesktopIconView *desktop_icon_view)
 {
     struct stat buf;
@@ -498,7 +498,7 @@ done_loading (CajaDirectory *model,
     desktop_dir_modify_time = buf.st_ctime;
 }
 
-/* This function is used because the CajaDirectory model does not
+/* This function is used because the BaulDirectory model does not
  * exist always in the desktop_icon_view, so we wait until it has been
  * instantiated.
  */
@@ -531,7 +531,7 @@ font_changed_callback (gpointer callback_data)
 static void
 fm_desktop_icon_view_update_icon_container_fonts (FMDesktopIconView *icon_view)
 {
-    CajaIconContainer *icon_container;
+    BaulIconContainer *icon_container;
     char *font;
 
     icon_container = get_icon_container (icon_view);
@@ -547,7 +547,7 @@ fm_desktop_icon_view_update_icon_container_fonts (FMDesktopIconView *icon_view)
 static void
 fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 {
-    CajaIconContainer *icon_container;
+    BaulIconContainer *icon_container;
     GtkAllocation allocation;
     GtkAdjustment *hadj, *vadj;
 
@@ -691,7 +691,7 @@ trash_link_is_selection (FMDirectoryView *view)
     if (eel_g_list_exactly_one_item (selection) &&
             BAUL_IS_DESKTOP_ICON_FILE (selection->data))
     {
-        CajaDesktopLink *link;
+        BaulDesktopLink *link;
 
         link = baul_desktop_icon_file_get_link (BAUL_DESKTOP_ICON_FILE (selection->data));
         /* link may be NULL if the link was recently removed (unmounted) */
@@ -856,8 +856,8 @@ real_supports_zooming (FMDirectoryView *view)
     return FALSE;
 }
 
-static CajaView *
-fm_desktop_icon_view_create (CajaWindowSlotInfo *slot)
+static BaulView *
+fm_desktop_icon_view_create (BaulWindowSlotInfo *slot)
 {
     FMIconView *view;
 
@@ -880,7 +880,7 @@ fm_desktop_icon_view_supports_uri (const char *uri,
     return FALSE;
 }
 
-static CajaViewInfo fm_desktop_icon_view =
+static BaulViewInfo fm_desktop_icon_view =
 {
     .id = FM_DESKTOP_ICON_VIEW_ID,
     .view_combo_label = N_("Desktop View"),

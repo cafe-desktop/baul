@@ -10,7 +10,7 @@ copy_done (GHashTable *debuting_uris, gpointer data)
 }
 
 static void
-changed_cb (CajaProgressInfo *info,
+changed_cb (BaulProgressInfo *info,
 	    gpointer data)
 {
 	g_print ("Changed: %s -- %s\n",
@@ -19,7 +19,7 @@ changed_cb (CajaProgressInfo *info,
 }
 
 static void
-progress_changed_cb (CajaProgressInfo *info,
+progress_changed_cb (BaulProgressInfo *info,
 		     gpointer data)
 {
 	g_print ("Progress changed: %f\n",
@@ -27,7 +27,7 @@ progress_changed_cb (CajaProgressInfo *info,
 }
 
 static void
-finished_cb (CajaProgressInfo *info,
+finished_cb (BaulProgressInfo *info,
 	     gpointer data)
 {
 	g_print ("Finished\n");
@@ -43,7 +43,7 @@ main (int argc, char* argv[])
 	GFile *source;
 	int i;
 	GList *infos;
-	CajaProgressInfo *progress_info;
+	BaulProgressInfo *progress_info;
 
 	test_init (&argc, &argv);
 

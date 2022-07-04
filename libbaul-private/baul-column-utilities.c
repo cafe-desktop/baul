@@ -164,7 +164,7 @@ get_extension_columns (void)
 
     for (l = providers; l != NULL; l = l->next)
     {
-        CajaColumnProvider *provider;
+        BaulColumnProvider *provider;
         GList *provider_columns;
 
         provider = BAUL_COLUMN_PROVIDER (l->data);
@@ -229,7 +229,7 @@ baul_get_all_columns (void)
 }
 
 GList *
-baul_get_columns_for_file (CajaFile *file)
+baul_get_columns_for_file (BaulFile *file)
 {
     GList *columns;
 
@@ -288,7 +288,7 @@ strv_index (char **strv, const char *str)
 }
 
 static int
-column_compare (CajaColumn *a, CajaColumn *b, char **column_order)
+column_compare (BaulColumn *a, BaulColumn *b, char **column_order)
 {
     int index_a;
     int index_b;

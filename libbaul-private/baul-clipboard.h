@@ -30,11 +30,11 @@
 
 /* This makes this editable or text view put clipboard commands into
  * the passed UI manager when the editable/text view is in focus.
- * Callers in Caja normally get the UI manager from
+ * Callers in Baul normally get the UI manager from
  * baul_window_get_ui_manager. */
 /* The shares selection changes argument should be set to true if the
  * widget uses the signal "selection_changed" to tell others about
- * text selection changes.  The CajaEntry widget
+ * text selection changes.  The BaulEntry widget
  * is currently the only editable in baul that shares selection
  * changes. */
 void baul_clipboard_set_up_editable            (GtkEditable        *target,

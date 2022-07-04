@@ -4,18 +4,18 @@
  <id>baul.desktop</id>
  <metadata_license>CC0-1.0</metadata_license>
  <project_license>GPL-2.0+</project_license>
- <name>Caja</name>
+ <name>Baul</name>
  <summary>File manager for the MATE desktop environment</summary>
  <description>
   <p>
-   Caja is the official file manager for the MATE desktop. It allows for
+   Baul is the official file manager for the MATE desktop. It allows for
    browsing directories, as well as previewing files and launching applications
    associated with them. It is also responsible for handling the icons on
    the MATE desktop. It works on local and remote file systems.
   </p>
   <p>
-   Caja is extensible through a plugin system, similar to that of GNOME Nautilus,
-   of which Caja is a fork.
+   Baul is extensible through a plugin system, similar to that of GNOME Nautilus,
+   of which Baul is a fork.
   </p>
  </description>
  <screenshots>

@@ -31,7 +31,7 @@
 
 #include "baul-file.h"
 
-typedef void (*CajaApplicationChoiceCallback) (GAppInfo                      *application,
+typedef void (*BaulApplicationChoiceCallback) (GAppInfo                      *application,
         gpointer			  callback_data);
 
 void baul_launch_application                 (GAppInfo                          *application,

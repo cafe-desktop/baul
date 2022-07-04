@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Red Hat, Inc
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -35,7 +35,7 @@
 
 typedef struct
 {
-    CajaSearchEngineSimple *engine;
+    BaulSearchEngineSimple *engine;
     GCancellable *cancellable;
 
     char *contained_text;
@@ -55,25 +55,25 @@ typedef struct
 } SearchThreadData;
 
 
-struct CajaSearchEngineSimpleDetails
+struct BaulSearchEngineSimpleDetails
 {
-    CajaQuery *query;
+    BaulQuery *query;
 
     SearchThreadData *active_search;
 
     gboolean query_finished;
 };
 
-G_DEFINE_TYPE (CajaSearchEngineSimple,
+G_DEFINE_TYPE (BaulSearchEngineSimple,
                baul_search_engine_simple,
                BAUL_TYPE_SEARCH_ENGINE);
 
-static CajaSearchEngineClass *parent_class = NULL;
+static BaulSearchEngineClass *parent_class = NULL;
 
 static void
 finalize (GObject *object)
 {
-    CajaSearchEngineSimple *simple;
+    BaulSearchEngineSimple *simple;
 
     simple = BAUL_SEARCH_ENGINE_SIMPLE (object);
 
@@ -89,8 +89,8 @@ finalize (GObject *object)
 }
 
 static SearchThreadData *
-search_thread_data_new (CajaSearchEngineSimple *engine,
-                        CajaQuery *query)
+search_thread_data_new (BaulSearchEngineSimple *engine,
+                        BaulQuery *query)
 {
     SearchThreadData *data;
     char *text, *lower, *normalized, *uri;
@@ -659,9 +659,9 @@ search_thread_func (gpointer user_data)
 }
 
 static void
-baul_search_engine_simple_start (CajaSearchEngine *engine)
+baul_search_engine_simple_start (BaulSearchEngine *engine)
 {
-    CajaSearchEngineSimple *simple;
+    BaulSearchEngineSimple *simple;
     SearchThreadData *data;
     GThread *thread;
 
@@ -686,9 +686,9 @@ baul_search_engine_simple_start (CajaSearchEngine *engine)
 }
 
 static void
-baul_search_engine_simple_stop (CajaSearchEngine *engine)
+baul_search_engine_simple_stop (BaulSearchEngine *engine)
 {
-    CajaSearchEngineSimple *simple;
+    BaulSearchEngineSimple *simple;
 
     simple = BAUL_SEARCH_ENGINE_SIMPLE (engine);
 
@@ -700,15 +700,15 @@ baul_search_engine_simple_stop (CajaSearchEngine *engine)
 }
 
 static gboolean
-baul_search_engine_simple_is_indexed (CajaSearchEngine *engine)
+baul_search_engine_simple_is_indexed (BaulSearchEngine *engine)
 {
     return FALSE;
 }
 
 static void
-baul_search_engine_simple_set_query (CajaSearchEngine *engine, CajaQuery *query)
+baul_search_engine_simple_set_query (BaulSearchEngine *engine, BaulQuery *query)
 {
-    CajaSearchEngineSimple *simple;
+    BaulSearchEngineSimple *simple;
 
     simple = BAUL_SEARCH_ENGINE_SIMPLE (engine);
 
@@ -726,10 +726,10 @@ baul_search_engine_simple_set_query (CajaSearchEngine *engine, CajaQuery *query)
 }
 
 static void
-baul_search_engine_simple_class_init (CajaSearchEngineSimpleClass *class)
+baul_search_engine_simple_class_init (BaulSearchEngineSimpleClass *class)
 {
     GObjectClass *gobject_class;
-    CajaSearchEngineClass *engine_class;
+    BaulSearchEngineClass *engine_class;
 
     parent_class = g_type_class_peek_parent (class);
 
@@ -744,16 +744,16 @@ baul_search_engine_simple_class_init (CajaSearchEngineSimpleClass *class)
 }
 
 static void
-baul_search_engine_simple_init (CajaSearchEngineSimple *engine)
+baul_search_engine_simple_init (BaulSearchEngineSimple *engine)
 {
-    engine->details = g_new0 (CajaSearchEngineSimpleDetails, 1);
+    engine->details = g_new0 (BaulSearchEngineSimpleDetails, 1);
 }
 
 
-CajaSearchEngine *
+BaulSearchEngine *
 baul_search_engine_simple_new (void)
 {
-    CajaSearchEngine *engine;
+    BaulSearchEngine *engine;
 
     engine = g_object_new (BAUL_TYPE_SEARCH_ENGINE_SIMPLE, NULL);
 

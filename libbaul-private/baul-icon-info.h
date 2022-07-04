@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-    /* Names for Caja's different zoom levels, from tiniest items to largest items */
+    /* Names for Baul's different zoom levels, from tiniest items to largest items */
     typedef enum {
         BAUL_ZOOM_LEVEL_SMALLEST,
         BAUL_ZOOM_LEVEL_SMALLER,
@@ -21,11 +21,11 @@ extern "C" {
         BAUL_ZOOM_LEVEL_LARGER,
         BAUL_ZOOM_LEVEL_LARGEST
     }
-    CajaZoomLevel;
+    BaulZoomLevel;
 
 #define BAUL_ZOOM_LEVEL_N_ENTRIES (BAUL_ZOOM_LEVEL_LARGEST + 1)
 
-    /* Nominal icon sizes for each Caja zoom level.
+    /* Nominal icon sizes for each Baul zoom level.
      * This scheme assumes that icons are designed to
      * fit in a square space, though each image needn't
      * be square. Since individual icons can be stretched,
@@ -42,57 +42,57 @@ extern "C" {
     /* Maximum size of an icon that the icon factory will ever produce */
 #define BAUL_ICON_MAXIMUM_SIZE     320
 
-    typedef struct _CajaIconInfo      CajaIconInfo;
-    typedef struct _CajaIconInfoClass CajaIconInfoClass;
+    typedef struct _BaulIconInfo      BaulIconInfo;
+    typedef struct _BaulIconInfoClass BaulIconInfoClass;
 
 
 #define BAUL_TYPE_ICON_INFO                 (baul_icon_info_get_type ())
-#define BAUL_ICON_INFO(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ICON_INFO, CajaIconInfo))
-#define BAUL_ICON_INFO_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ICON_INFO, CajaIconInfoClass))
+#define BAUL_ICON_INFO(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ICON_INFO, BaulIconInfo))
+#define BAUL_ICON_INFO_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ICON_INFO, BaulIconInfoClass))
 #define BAUL_IS_ICON_INFO(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_ICON_INFO))
 #define BAUL_IS_ICON_INFO_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_ICON_INFO))
-#define BAUL_ICON_INFO_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ICON_INFO, CajaIconInfoClass))
+#define BAUL_ICON_INFO_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ICON_INFO, BaulIconInfoClass))
 
 
     GType    baul_icon_info_get_type (void) G_GNUC_CONST;
 
-    CajaIconInfo *    baul_icon_info_new_for_pixbuf               (GdkPixbuf         *pixbuf,
+    BaulIconInfo *    baul_icon_info_new_for_pixbuf               (GdkPixbuf         *pixbuf,
             int                scale);
-    CajaIconInfo *    baul_icon_info_lookup                       (GIcon             *icon,
+    BaulIconInfo *    baul_icon_info_lookup                       (GIcon             *icon,
             int                size,
             int                scale);
-    CajaIconInfo *    baul_icon_info_lookup_from_name             (const char        *name,
+    BaulIconInfo *    baul_icon_info_lookup_from_name             (const char        *name,
             int                size,
             int                scale);
-    CajaIconInfo *    baul_icon_info_lookup_from_path             (const char        *path,
+    BaulIconInfo *    baul_icon_info_lookup_from_path             (const char        *path,
             int                size,
             int                scale);
-    gboolean              baul_icon_info_is_fallback                  (CajaIconInfo  *icon);
-    GdkPixbuf *           baul_icon_info_get_pixbuf                   (CajaIconInfo  *icon);
-    cairo_surface_t *     baul_icon_info_get_surface                  (CajaIconInfo  *icon);
-    GdkPixbuf *           baul_icon_info_get_pixbuf_nodefault         (CajaIconInfo  *icon);
-    cairo_surface_t *     baul_icon_info_get_surface_nodefault        (CajaIconInfo  *icon);
-    GdkPixbuf *           baul_icon_info_get_pixbuf_nodefault_at_size (CajaIconInfo  *icon,
+    gboolean              baul_icon_info_is_fallback                  (BaulIconInfo  *icon);
+    GdkPixbuf *           baul_icon_info_get_pixbuf                   (BaulIconInfo  *icon);
+    cairo_surface_t *     baul_icon_info_get_surface                  (BaulIconInfo  *icon);
+    GdkPixbuf *           baul_icon_info_get_pixbuf_nodefault         (BaulIconInfo  *icon);
+    cairo_surface_t *     baul_icon_info_get_surface_nodefault        (BaulIconInfo  *icon);
+    GdkPixbuf *           baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
             gsize              forced_size);
-    cairo_surface_t *     baul_icon_info_get_surface_nodefault_at_size(CajaIconInfo  *icon,
+    cairo_surface_t *     baul_icon_info_get_surface_nodefault_at_size(BaulIconInfo  *icon,
             gsize              forced_size);
-    GdkPixbuf *           baul_icon_info_get_pixbuf_at_size           (CajaIconInfo  *icon,
+    GdkPixbuf *           baul_icon_info_get_pixbuf_at_size           (BaulIconInfo  *icon,
             gsize              forced_size);
-    cairo_surface_t *     baul_icon_info_get_surface_at_size(CajaIconInfo  *icon,
+    cairo_surface_t *     baul_icon_info_get_surface_at_size(BaulIconInfo  *icon,
             gsize              forced_size);
-    gboolean              baul_icon_info_get_embedded_rect            (CajaIconInfo  *icon,
+    gboolean              baul_icon_info_get_embedded_rect            (BaulIconInfo  *icon,
             GdkRectangle      *rectangle);
-    gboolean              baul_icon_info_get_attach_points            (CajaIconInfo  *icon,
+    gboolean              baul_icon_info_get_attach_points            (BaulIconInfo  *icon,
             GdkPoint         **points,
             gint              *n_points);
-    const char* baul_icon_info_get_display_name(CajaIconInfo* icon);
-    const char* baul_icon_info_get_used_name(CajaIconInfo* icon);
+    const char* baul_icon_info_get_display_name(BaulIconInfo* icon);
+    const char* baul_icon_info_get_used_name(BaulIconInfo* icon);
 
     void                  baul_icon_info_clear_caches                 (void);
 
     /* Relationship between zoom levels and icons sizes. */
-    guint baul_get_icon_size_for_zoom_level          (CajaZoomLevel  zoom_level);
-    float baul_get_relative_icon_size_for_zoom_level (CajaZoomLevel  zoom_level);
+    guint baul_get_icon_size_for_zoom_level          (BaulZoomLevel  zoom_level);
+    float baul_get_relative_icon_size_for_zoom_level (BaulZoomLevel  zoom_level);
 
     guint baul_icon_get_larger_icon_size             (guint              size);
     guint baul_icon_get_smaller_icon_size            (guint              size);

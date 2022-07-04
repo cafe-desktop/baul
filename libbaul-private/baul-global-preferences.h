@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* baul-global-preferences.h - Caja specific preference keys and
+/* baul-global-preferences.h - Baul specific preference keys and
                                    functions.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
@@ -80,13 +80,13 @@ typedef enum
     BAUL_DATE_FORMAT_LOCALE,
     BAUL_DATE_FORMAT_ISO,
     BAUL_DATE_FORMAT_INFORMAL
-} CajaDateFormat;
+} BaulDateFormat;
 
 typedef enum
 {
     BAUL_NEW_TAB_POSITION_AFTER_CURRENT_TAB,
     BAUL_NEW_TAB_POSITION_END,
-} CajaNewTabPosition;
+} BaulNewTabPosition;
 
 /* Sidebar panels  */
 #define BAUL_PREFERENCES_TREE_SHOW_ONLY_DIRECTORIES         "show-only-directories"
@@ -132,9 +132,9 @@ typedef enum
     };
 
     /* These IIDs are used by the preferences code and in baul-application.c */
-#define BAUL_ICON_VIEW_IID		"OAFIID:Caja_File_Manager_Icon_View"
-#define BAUL_COMPACT_VIEW_IID	"OAFIID:Caja_File_Manager_Compact_View"
-#define BAUL_LIST_VIEW_IID		"OAFIID:Caja_File_Manager_List_View"
+#define BAUL_ICON_VIEW_IID		"OAFIID:Baul_File_Manager_Icon_View"
+#define BAUL_COMPACT_VIEW_IID	"OAFIID:Baul_File_Manager_Compact_View"
+#define BAUL_LIST_VIEW_IID		"OAFIID:Baul_File_Manager_List_View"
 
 
     /* Icon View */
@@ -182,7 +182,7 @@ typedef enum
         BAUL_SPEED_TRADEOFF_ALWAYS,
         BAUL_SPEED_TRADEOFF_LOCAL_ONLY,
         BAUL_SPEED_TRADEOFF_NEVER
-    } CajaSpeedTradeoffValue;
+    } BaulSpeedTradeoffValue;
 
 #define BAUL_PREFERENCES_SHOW_TEXT_IN_ICONS		    "show-icon-text"
 #define BAUL_PREFERENCES_SHOW_DIRECTORY_ITEM_COUNTS "show-directory-item-counts"
@@ -194,7 +194,7 @@ typedef enum
     {
         BAUL_COMPLEX_SEARCH_BAR,
         BAUL_SIMPLE_SEARCH_BAR
-    } CajaSearchBarMode;
+    } BaulSearchBarMode;
 
 #define BAUL_PREFERENCES_DESKTOP_FONT                  "font"
 #define BAUL_PREFERENCES_DESKTOP_HOME_VISIBLE          "home-icon-visible"

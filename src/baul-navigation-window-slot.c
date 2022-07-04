@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-navigation-window-slot.c: Caja navigation window slot
+   baul-navigation-window-slot.c: Baul navigation window slot
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -33,15 +33,15 @@
 #include "baul-search-bar.h"
 #include "baul-navigation-window-pane.h"
 
-G_DEFINE_TYPE (CajaNavigationWindowSlot, baul_navigation_window_slot, BAUL_TYPE_WINDOW_SLOT)
+G_DEFINE_TYPE (BaulNavigationWindowSlot, baul_navigation_window_slot, BAUL_TYPE_WINDOW_SLOT)
 
 #define parent_class baul_navigation_window_slot_parent_class
 
 gboolean
-baul_navigation_window_slot_should_close_with_mount (CajaNavigationWindowSlot *slot,
+baul_navigation_window_slot_should_close_with_mount (BaulNavigationWindowSlot *slot,
         GMount *mount)
 {
-    CajaBookmark *bookmark;
+    BaulBookmark *bookmark;
     GFile *mount_location, *bookmark_location;
     GList *l;
     gboolean close_with_mount;
@@ -84,7 +84,7 @@ baul_navigation_window_slot_should_close_with_mount (CajaNavigationWindowSlot *s
 }
 
 void
-baul_navigation_window_slot_clear_forward_list (CajaNavigationWindowSlot *slot)
+baul_navigation_window_slot_clear_forward_list (BaulNavigationWindowSlot *slot)
 {
     g_assert (BAUL_IS_NAVIGATION_WINDOW_SLOT (slot));
 
@@ -93,7 +93,7 @@ baul_navigation_window_slot_clear_forward_list (CajaNavigationWindowSlot *slot)
 }
 
 void
-baul_navigation_window_slot_clear_back_list (CajaNavigationWindowSlot *slot)
+baul_navigation_window_slot_clear_back_list (BaulNavigationWindowSlot *slot)
 {
     g_assert (BAUL_IS_NAVIGATION_WINDOW_SLOT (slot));
 
@@ -102,12 +102,12 @@ baul_navigation_window_slot_clear_back_list (CajaNavigationWindowSlot *slot)
 }
 
 static void
-query_editor_changed_callback (CajaSearchBar *bar,
-                               CajaQuery *query,
+query_editor_changed_callback (BaulSearchBar *bar,
+                               BaulQuery *query,
                                gboolean reload,
-                               CajaWindowSlot *slot)
+                               BaulWindowSlot *slot)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     g_assert (BAUL_IS_FILE (slot->viewed_file));
 
@@ -126,10 +126,10 @@ query_editor_changed_callback (CajaSearchBar *bar,
 
 
 static void
-baul_navigation_window_slot_update_query_editor (CajaWindowSlot *slot)
+baul_navigation_window_slot_update_query_editor (BaulWindowSlot *slot)
 {
-    CajaDirectory *directory;
-    CajaSearchDirectory *search_directory;
+    BaulDirectory *directory;
+    BaulSearchDirectory *search_directory;
     GtkWidget *query_editor;
 
     g_assert (slot->pane->window != NULL);
@@ -160,7 +160,7 @@ baul_navigation_window_slot_update_query_editor (CajaWindowSlot *slot)
 
     if (query_editor != NULL)
     {
-        CajaQuery *query;
+        BaulQuery *query;
 
         g_signal_connect_object (query_editor, "changed",
                                  G_CALLBACK (query_editor_changed_callback), slot, 0);
@@ -186,10 +186,10 @@ baul_navigation_window_slot_update_query_editor (CajaWindowSlot *slot)
 }
 
 static void
-baul_navigation_window_slot_active (CajaWindowSlot *slot)
+baul_navigation_window_slot_active (BaulWindowSlot *slot)
 {
-    CajaNavigationWindow *window;
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindow *window;
+    BaulNavigationWindowPane *pane;
     int page_num;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (slot->pane);
@@ -212,7 +212,7 @@ baul_navigation_window_slot_active (CajaWindowSlot *slot)
 static void
 baul_navigation_window_slot_dispose (GObject *object)
 {
-    CajaNavigationWindowSlot *slot;
+    BaulNavigationWindowSlot *slot;
 
     slot = BAUL_NAVIGATION_WINDOW_SLOT (object);
 
@@ -223,12 +223,12 @@ baul_navigation_window_slot_dispose (GObject *object)
 }
 
 static void
-baul_navigation_window_slot_init (CajaNavigationWindowSlot *slot)
+baul_navigation_window_slot_init (BaulNavigationWindowSlot *slot)
 {
 }
 
 static void
-baul_navigation_window_slot_class_init (CajaNavigationWindowSlotClass *class)
+baul_navigation_window_slot_class_init (BaulNavigationWindowSlotClass *class)
 {
     BAUL_WINDOW_SLOT_CLASS (class)->active = baul_navigation_window_slot_active;
     BAUL_WINDOW_SLOT_CLASS (class)->update_query_editor = baul_navigation_window_slot_update_query_editor;

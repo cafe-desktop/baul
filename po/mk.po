@@ -295,8 +295,8 @@ msgstr "Избриши"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -304,7 +304,7 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -312,8 +312,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -2953,25 +2953,25 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
+msgid "Baul will exit when last window destroyed."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
-"Овозможи го класичното однесување на Caja, каде што сите прозорци се "
+"Овозможи го класичното однесување на Baul, каде што сите прозорци се "
 "разгледувачи"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
@@ -2982,10 +2982,10 @@ msgstr "Секогаш користи го записот на локација 
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
-"Ако е точно тогаш Caja секогаш ќе користи текстуален записи за локалцијата "
+"Ако е точно тогаш Baul секогаш ќе користи текстуален записи за локалцијата "
 "на лентата со алатки."
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
@@ -2996,10 +2996,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
-"Ако е поставено на true, Caja ќе побара потврда кога ќе се обидете да "
+"Ако е поставено на true, Baul ќе побара потврда кога ќе се обидете да "
 "ставите датотека во ѓубрето или пак да го испразните ѓубрето."
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
@@ -3008,7 +3008,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
@@ -3018,11 +3018,11 @@ msgstr "Дали да дозволи моментно бришење."
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"Ако е поставено на true,Caja ќе дозволи бришење на датотеки веднаш на самото"
+"Ако е поставено на true,Baul ќе дозволи бришење на датотеки веднаш на самото"
 " место наместо да ги премести во ѓубре.Ова може да биде опасно па затоа "
 "користете го внимателно"
 
@@ -3090,13 +3090,13 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
+msgid "Use extra mouse button events in Baul' browser window"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
@@ -3166,10 +3166,10 @@ msgstr "Покажи напредни пермисии во дијалогот �
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"Ако е пооставено на true, тогаш Caja ве остава да ги уредувате и прикажувате"
+"Ако е пооставено на true, тогаш Baul ве остава да ги уредувате и прикажувате"
 " дозволите на по unix-оиден начин, пристапувајќи некои по езотерични опции."
 
 #: libbaul-private/org.mate.baul.gschema.xml:180
@@ -3178,10 +3178,10 @@ msgstr "Покажи ги прво папките во прозорците"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Ако е поставено на true, тогаш Caja ги покажува папките пред датотеките во "
+"Ако е поставено на true, тогаш Baul ги покажува папките пред датотеките во "
 "прегледот на икони и листи."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3211,15 +3211,15 @@ msgstr ""
 "големина, наместо во растечки ќе бидат во опаѓачки редослед "
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja ја користи домашната папка како работна површина"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul ја користи домашната папка како работна површина"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Ако е вклучено, тогаш Caja ќе ја користи домашната папка на корисникот како "
+"Ако е вклучено, тогаш Baul ќе ја користи домашната папка на корисникот како "
 "работна површина. Ако исклучено, тогаш ќе го користи ~/Desktop како работна "
 "површина."
 
@@ -3348,7 +3348,7 @@ msgid "Whether to show desktop notifications"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3489,10 +3489,10 @@ msgstr "Покажи ги само папките во страничната л
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Ако е поставено на true, Caja ќе ги покаже само папките во дрвото на "
+"Ако е поставено на true, Baul ќе ги покаже само папките во дрвото на "
 "страничната површина. Инаку ќе ги покаже и папките и датотеките."
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
@@ -3712,10 +3712,10 @@ msgstr "Дали автоматски да го монтира медиумот"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
-"Ако е „true“, тогаш Caja автоматски ќе ги монтира медиумите какошто се "
+"Ако е „true“, тогаш Baul автоматски ќе ги монтира медиумите какошто се "
 "тврдите дискови и преносливите медиуми при нивното внесување и подигнување "
 "на системот."
 
@@ -3725,12 +3725,12 @@ msgstr "Дали автоматски да отвора папка за авто
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
-"Ако е штиклирано, тогаш Caja автоматски ќе отвора папка при монтирањето на "
+"Ако е штиклирано, тогаш Baul автоматски ќе отвора папка при монтирањето на "
 "медиум. Ова се применува само со медиумите каде што не е е препознаен познат"
 " тип на x-содржина/*.; за медиуми кадешто ќе биде препознаен типот на "
 "x-содржина ќе се примени дејствотокое што е конфигурабилно од страна на "
@@ -3744,10 +3744,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
-"Ако е true, тогаш Caja никогаш нема автоматски да ги подигнува програмите "
+"Ако е true, тогаш Baul никогаш нема автоматски да ги подигнува програмите "
 "кога ќе биде внесен медиум."
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
@@ -3855,29 +3855,29 @@ msgstr "Покажи ги опции за управување со сесии"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Caja не може да ја креира бараната папка %s."
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Baul не може да ја креира бараната папка %s."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"Пред да го отворите Caja, креирајте ја следнава папка или поставете ги "
-"пермисиите за да може Caja да ја креира."
+"Пред да го отворите Baul, креирајте ја следнава папка или поставете ги "
+"пермисиите за да може Baul да ја креира."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja не може да ги направи следните задолжителни папки: %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul не може да ги направи следните задолжителни папки: %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Пред да го отворите Caja, Ве молам креирајте ги овие папки или променете ги "
-"пермисиите за да може Caja да ги креира."
+"Пред да го отворите Baul, Ве молам креирајте ги овие папки или променете ги "
+"пермисиите за да може Baul да ги креира."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -3940,8 +3940,8 @@ msgid "Open a browser window."
 msgstr ""
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Напушти Caja."
+msgid "Quit Baul."
+msgstr "Напушти Baul."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -4926,7 +4926,7 @@ msgstr "%s - Прелистувач на датотеки"
 #: src/baul-navigation-window-menus.c:133
 msgid "Are you sure you want to clear the list of locations you have visited?"
 msgstr ""
-"Сигурно ли сакате Caja да ги заборави сите локации кои сте ги посетиле?"
+"Сигурно ли сакате Baul да ги заборави сите локации кои сте ги посетиле?"
 
 #: src/baul-navigation-window-menus.c:424 src/baul-window-bookmarks.c:85
 #, c-format
@@ -4954,7 +4954,7 @@ msgid "New _Window"
 msgstr "Нов _прозорец"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
+msgid "Open another Baul window for the displayed location"
 msgstr "Отвори уште еден прозорец за прикажаната локација"
 
 #: src/baul-navigation-window-menus.c:834
@@ -5775,8 +5775,8 @@ msgid "View of the current folder"
 msgstr "Поглед од тековната папка"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja нема инсталиран прегледувач за прикажување на папката."
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul нема инсталиран прегледувач за прикажување на папката."
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5793,11 +5793,11 @@ msgstr "Проверете го спелувањето и пробајте по�
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "Caja не може да се справи со локациите „%s“."
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "Baul не може да се справи со локациите „%s“."
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
+msgid "Baul cannot handle this kind of location."
 msgstr ""
 
 #: src/baul-window-manage-views.c:2178
@@ -5834,49 +5834,49 @@ msgstr "Оди до локацијата одредена од овој обел
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja е слободен софтвер; можете да го редистрибуирате и/или менувате во "
+"Baul е слободен софтвер; можете да го редистрибуирате и/или менувате во "
 "согласност со општата јавна ГНУ лиценца објавена од страна наФондацијата за "
 "слободен софтвер; можете да ја разгледате втората или пак некоја понова "
 "верзија."
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Caja се дистрибуира со надеж дека ќе биде корисен,но без БИЛО КАКВИ "
+"Baul се дистрибуира со надеж дека ќе биде корисен,но без БИЛО КАКВИ "
 "ГАРАНЦИИ.  За повеќе погледнете ја општата јавна ГНУ лиценца."
 
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
-"Заедно со Caja треба да добиете и копија од општата и јавнаГНУ лиценца; "
+"Заедно со Baul треба да добиете и копија од општата и јавнаГНУ лиценца; "
 "доколку ја нема лиценцата пишете и на Фондацијата заслободен софтвер на "
 "следнава адреса: 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -5919,8 +5919,8 @@ msgid "Prefere_nces"
 msgstr "Префе_ренци"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Уреди ги преференциите за Caja"
+msgid "Edit Baul preferences"
+msgstr "Уреди ги преференциите за Baul"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -5947,16 +5947,16 @@ msgid "_Contents"
 msgstr "_Содржина"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Прикажи помош за Caja"
+msgid "Display Baul help"
+msgstr "Прикажи помош за Baul"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "_За"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Прикажи заслуги за создавачите на Caja"
+msgid "Display credits for the creators of Baul"
+msgstr "Прикажи заслуги за создавачите на Baul"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6341,7 +6341,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"

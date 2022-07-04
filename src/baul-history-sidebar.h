@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000, 2001 Eazel, Inc.
@@ -36,14 +36,14 @@
 
 #define BAUL_TYPE_HISTORY_SIDEBAR baul_history_sidebar_get_type()
 #define BAUL_HISTORY_SIDEBAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_HISTORY_SIDEBAR, CajaHistorySidebar))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_HISTORY_SIDEBAR, BaulHistorySidebar))
 
 typedef struct
 {
     GtkScrolledWindow parent;
     GtkTreeView *tree_view;
-    CajaWindowInfo *window;
-} CajaHistorySidebar;
+    BaulWindowInfo *window;
+} BaulHistorySidebar;
 
 GType baul_history_sidebar_get_type (void);
 void baul_history_sidebar_register (void);

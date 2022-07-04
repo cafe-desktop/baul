@@ -33,7 +33,7 @@
 
 #include "baul-x-content-bar.h"
 
-struct _CajaXContentBarPrivate
+struct _BaulXContentBarPrivate
 {
     GtkWidget *label;
     GtkWidget *button;
@@ -49,10 +49,10 @@ enum
     PROP_X_CONTENT_TYPE,
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaXContentBar, baul_x_content_bar, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulXContentBar, baul_x_content_bar, GTK_TYPE_BOX)
 
 void
-baul_x_content_bar_set_x_content_type (CajaXContentBar *bar, const char *x_content_type)
+baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_content_type)
 {
     char *message;
     char *description;
@@ -130,7 +130,7 @@ baul_x_content_bar_set_x_content_type (CajaXContentBar *bar, const char *x_conte
         {
             GdkPixbuf *pixbuf;
             int icon_size, icon_scale;
-            CajaIconInfo *icon_info;
+            BaulIconInfo *icon_info;
             icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_BUTTON);
             icon_scale = gtk_widget_get_scale_factor (GTK_WIDGET (bar));
             icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
@@ -163,19 +163,19 @@ baul_x_content_bar_set_x_content_type (CajaXContentBar *bar, const char *x_conte
 }
 
 const char *
-baul_x_content_bar_get_x_content_type (CajaXContentBar *bar)
+baul_x_content_bar_get_x_content_type (BaulXContentBar *bar)
 {
     return bar->priv->x_content_type;
 }
 
 GMount *
-baul_x_content_bar_get_mount (CajaXContentBar *bar)
+baul_x_content_bar_get_mount (BaulXContentBar *bar)
 {
     return bar->priv->mount != NULL ? g_object_ref (bar->priv->mount) : NULL;
 }
 
 void
-baul_x_content_bar_set_mount (CajaXContentBar *bar, GMount *mount)
+baul_x_content_bar_set_mount (BaulXContentBar *bar, GMount *mount)
 {
     if (bar->priv->mount != NULL)
     {
@@ -191,7 +191,7 @@ baul_x_content_bar_set_property (GObject      *object,
                                  const GValue *value,
                                  GParamSpec   *pspec)
 {
-    CajaXContentBar *bar;
+    BaulXContentBar *bar;
 
     bar = BAUL_X_CONTENT_BAR (object);
 
@@ -215,7 +215,7 @@ baul_x_content_bar_get_property (GObject    *object,
                                  GValue     *value,
                                  GParamSpec *pspec)
 {
-    CajaXContentBar *bar;
+    BaulXContentBar *bar;
 
     bar = BAUL_X_CONTENT_BAR (object);
 
@@ -236,7 +236,7 @@ baul_x_content_bar_get_property (GObject    *object,
 static void
 baul_x_content_bar_finalize (GObject *object)
 {
-    CajaXContentBar *bar = BAUL_X_CONTENT_BAR (object);
+    BaulXContentBar *bar = BAUL_X_CONTENT_BAR (object);
 
     g_free (bar->priv->x_content_type);
     if (bar->priv->mount != NULL)
@@ -246,7 +246,7 @@ baul_x_content_bar_finalize (GObject *object)
 }
 
 static void
-baul_x_content_bar_class_init (CajaXContentBarClass *klass)
+baul_x_content_bar_class_init (BaulXContentBarClass *klass)
 {
     GObjectClass *object_class;
 
@@ -275,7 +275,7 @@ baul_x_content_bar_class_init (CajaXContentBarClass *klass)
 }
 
 static void
-button_clicked_callback (GtkWidget *button, CajaXContentBar *bar)
+button_clicked_callback (GtkWidget *button, BaulXContentBar *bar)
 {
     GAppInfo *default_app;
 
@@ -292,7 +292,7 @@ button_clicked_callback (GtkWidget *button, CajaXContentBar *bar)
 }
 
 static void
-baul_x_content_bar_init (CajaXContentBar *bar)
+baul_x_content_bar_init (BaulXContentBar *bar)
 {
     GtkWidget *hbox;
 

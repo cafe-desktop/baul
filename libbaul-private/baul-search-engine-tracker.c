@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Mr Jamie McCracken
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -179,24 +179,24 @@ open_libtracker (void)
 }
 
 
-struct CajaSearchEngineTrackerDetails
+struct BaulSearchEngineTrackerDetails
 {
-    CajaQuery 	*query;
+    BaulQuery 	*query;
     TrackerClient 	*client;
     gboolean 	query_pending;
     TrackerVersion	version;
 };
 
-G_DEFINE_TYPE (CajaSearchEngineTracker,
+G_DEFINE_TYPE (BaulSearchEngineTracker,
                baul_search_engine_tracker,
                BAUL_TYPE_SEARCH_ENGINE);
 
-static CajaSearchEngineClass *parent_class = NULL;
+static BaulSearchEngineClass *parent_class = NULL;
 
 static void
 finalize (GObject *object)
 {
-    CajaSearchEngineTracker *tracker;
+    BaulSearchEngineTracker *tracker;
 
     tracker = BAUL_SEARCH_ENGINE_TRACKER (object);
 
@@ -241,7 +241,7 @@ sparql_append_string_literal (GString     *sparql,
 static void
 search_callback (gpointer results, GError *error, gpointer user_data)
 {
-    CajaSearchEngineTracker *tracker;
+    BaulSearchEngineTracker *tracker;
     GList *hit_uris;
     gint i;
     char *uri;
@@ -310,9 +310,9 @@ search_callback (gpointer results, GError *error, gpointer user_data)
 
 
 static void
-baul_search_engine_tracker_start (CajaSearchEngine *engine)
+baul_search_engine_tracker_start (BaulSearchEngine *engine)
 {
-    CajaSearchEngineTracker *tracker;
+    BaulSearchEngineTracker *tracker;
     GList 	*mimetypes, *l;
     char 	*search_text, *location, *location_uri;
     char 	**mimes;
@@ -463,9 +463,9 @@ baul_search_engine_tracker_start (CajaSearchEngine *engine)
 }
 
 static void
-baul_search_engine_tracker_stop (CajaSearchEngine *engine)
+baul_search_engine_tracker_stop (BaulSearchEngine *engine)
 {
-    CajaSearchEngineTracker *tracker;
+    BaulSearchEngineTracker *tracker;
 
     tracker = BAUL_SEARCH_ENGINE_TRACKER (engine);
 
@@ -477,15 +477,15 @@ baul_search_engine_tracker_stop (CajaSearchEngine *engine)
 }
 
 static gboolean
-baul_search_engine_tracker_is_indexed (CajaSearchEngine *engine)
+baul_search_engine_tracker_is_indexed (BaulSearchEngine *engine)
 {
     return TRUE;
 }
 
 static void
-baul_search_engine_tracker_set_query (CajaSearchEngine *engine, CajaQuery *query)
+baul_search_engine_tracker_set_query (BaulSearchEngine *engine, BaulQuery *query)
 {
-    CajaSearchEngineTracker *tracker;
+    BaulSearchEngineTracker *tracker;
 
     tracker = BAUL_SEARCH_ENGINE_TRACKER (engine);
 
@@ -503,10 +503,10 @@ baul_search_engine_tracker_set_query (CajaSearchEngine *engine, CajaQuery *query
 }
 
 static void
-baul_search_engine_tracker_class_init (CajaSearchEngineTrackerClass *class)
+baul_search_engine_tracker_class_init (BaulSearchEngineTrackerClass *class)
 {
     GObjectClass *gobject_class;
-    CajaSearchEngineClass *engine_class;
+    BaulSearchEngineClass *engine_class;
 
     parent_class = g_type_class_peek_parent (class);
 
@@ -521,16 +521,16 @@ baul_search_engine_tracker_class_init (CajaSearchEngineTrackerClass *class)
 }
 
 static void
-baul_search_engine_tracker_init (CajaSearchEngineTracker *engine)
+baul_search_engine_tracker_init (BaulSearchEngineTracker *engine)
 {
-    engine->details = g_new0 (CajaSearchEngineTrackerDetails, 1);
+    engine->details = g_new0 (BaulSearchEngineTrackerDetails, 1);
 }
 
 
-CajaSearchEngine *
+BaulSearchEngine *
 baul_search_engine_tracker_new (void)
 {
-    CajaSearchEngineTracker *engine;
+    BaulSearchEngineTracker *engine;
     TrackerClient *tracker_client;
     TrackerVersion version;
 

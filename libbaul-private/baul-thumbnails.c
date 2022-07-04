@@ -72,7 +72,7 @@ typedef struct
     char *image_uri;
     char *mime_type;
     time_t original_file_mtime;
-} CajaThumbnailInfo;
+} BaulThumbnailInfo;
 
 /*
  * Thumbnail thread state.
@@ -91,7 +91,7 @@ static GMutex thumbnails_mutex;
    start more than one. Lock thumbnails_mutex when accessing this. */
 static volatile gboolean thumbnail_thread_is_running = FALSE;
 
-/* The list of CajaThumbnailInfo structs containing information about the
+/* The list of BaulThumbnailInfo structs containing information about the
    thumbnails we are making. Lock thumbnails_mutex when accessing this. */
 static volatile GQueue thumbnails_to_make = G_QUEUE_INIT;
 
@@ -100,7 +100,7 @@ static GHashTable *thumbnails_to_make_hash = NULL;
 
 /* The currently thumbnailed icon. it also exists in the thumbnails_to_make list
  * to avoid adding it again. Lock thumbnails_mutex when accessing this. */
-static CajaThumbnailInfo *currently_thumbnailing = NULL;
+static BaulThumbnailInfo *currently_thumbnailing = NULL;
 
 static MateDesktopThumbnailFactory *thumbnail_factory = NULL;
 
@@ -132,7 +132,7 @@ get_file_mtime (const char *file_uri, time_t* mtime)
 }
 
 static void
-free_thumbnail_info (CajaThumbnailInfo *info)
+free_thumbnail_info (BaulThumbnailInfo *info)
 {
     g_free (info->image_uri);
     g_free (info->mime_type);
@@ -271,7 +271,7 @@ baul_thumbnail_prioritize (const char *file_uri)
 static gboolean
 thumbnail_thread_notify_file_changed (gpointer image_uri)
 {
-    CajaFile *file;
+    BaulFile *file;
 
     file = baul_file_get_by_uri ((char *) image_uri);
 #ifdef DEBUG_THUMBNAILS
@@ -342,7 +342,7 @@ pixbuf_can_load_type (const char *mime_type)
 }
 
 gboolean
-baul_can_thumbnail_internally (CajaFile *file)
+baul_can_thumbnail_internally (BaulFile *file)
 {
     char *mime_type;
     gboolean res;
@@ -360,7 +360,7 @@ baul_thumbnail_is_mimetype_limited_by_size (const char *mime_type)
 }
 
 gboolean
-baul_can_thumbnail (CajaFile *file)
+baul_can_thumbnail (BaulFile *file)
 {
     MateDesktopThumbnailFactory *factory;
     gboolean res;
@@ -384,19 +384,19 @@ baul_can_thumbnail (CajaFile *file)
 }
 
 void
-baul_create_thumbnail (CajaFile *file)
+baul_create_thumbnail (BaulFile *file)
 {
     time_t file_mtime = 0;
-    CajaThumbnailInfo *info;
+    BaulThumbnailInfo *info;
     GList *existing;
 
     baul_file_set_is_thumbnailing (file, TRUE);
 
-    info = g_new0 (CajaThumbnailInfo, 1);
+    info = g_new0 (BaulThumbnailInfo, 1);
     info->image_uri = baul_file_get_uri (file);
     info->mime_type = baul_file_get_mime_type (file);
 
-    /* Hopefully the CajaFile will already have the image file mtime,
+    /* Hopefully the BaulFile will already have the image file mtime,
        so we can just use that. Otherwise we have to get it ourselves. */
     if (file->details->got_file_info &&
             file->details->file_info_is_up_to_date &&
@@ -455,7 +455,7 @@ baul_create_thumbnail (CajaFile *file)
     }
     else
     {
-        CajaThumbnailInfo *existing_info;
+        BaulThumbnailInfo *existing_info;
 
 #ifdef DEBUG_THUMBNAILS
         g_message ("(Main Thread) Updating non-current mtime: %s\n",
@@ -484,7 +484,7 @@ thumbnail_thread_func (GTask        *task,
                        gpointer      task_data,
                        GCancellable *cancellable)
 {
-    CajaThumbnailInfo *info = NULL;
+    BaulThumbnailInfo *info = NULL;
     GdkPixbuf *pixbuf;
     time_t current_orig_mtime = 0;
     time_t current_time;

@@ -42,22 +42,22 @@
 struct _FMWidgetView
 {
     FMDirectoryView         object;
-    CajaWidgetViewProvider *provider;
+    BaulWidgetViewProvider *provider;
 };
 
 static GList *fm_widget_view_get_selection                   (FMDirectoryView   *view);
 static GList *fm_widget_view_get_selection_for_file_transfer (FMDirectoryView   *view);
-static void   fm_widget_view_scroll_to_file                  (CajaView *view, const char *uri);
-static void   fm_widget_view_iface_init                      (CajaViewIface *iface);
+static void   fm_widget_view_scroll_to_file                  (BaulView *view, const char *uri);
+static void   fm_widget_view_iface_init                      (BaulViewIface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (FMWidgetView, fm_widget_view, FM_TYPE_DIRECTORY_VIEW,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_VIEW, fm_widget_view_iface_init));
 
 static void
-fm_widget_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_widget_view_add_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
     FMWidgetView *widget_view;
-    CajaFile *file_dir;
+    BaulFile *file_dir;
 
     widget_view = FM_WIDGET_VIEW (view);
     g_return_if_fail (FM_IS_WIDGET_VIEW(view));
@@ -72,7 +72,7 @@ static void
 fm_widget_view_begin_loading (FMDirectoryView *view)
 {
     GtkWindow *window;
-    CajaFile *file;
+    BaulFile *file;
     gchar *uri;
     GList *providers, *l;
     char *mimetype;
@@ -88,7 +88,7 @@ fm_widget_view_begin_loading (FMDirectoryView *view)
     providers = baul_extensions_get_for_type (BAUL_TYPE_WIDGET_VIEW_PROVIDER);
     for (l = providers; l != NULL; l = l->next)
     {
-        CajaWidgetViewProvider *provider;
+        BaulWidgetViewProvider *provider;
 
         provider = BAUL_WIDGET_VIEW_PROVIDER (l->data);
         if (baul_widget_view_provider_supports_uri (provider, uri,
@@ -130,7 +130,7 @@ fm_widget_view_clear (FMDirectoryView *view)
 }
 
 static void
-fm_widget_view_file_changed (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_widget_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
 }
 
@@ -182,7 +182,7 @@ fm_widget_view_end_file_changes (FMDirectoryView *view)
 }
 
 static void
-fm_widget_view_remove_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
+fm_widget_view_remove_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
 }
 
@@ -225,7 +225,7 @@ fm_widget_view_bump_zoom_level (FMDirectoryView *view, int zoom_increment)
 {
 }
 
-static CajaZoomLevel
+static BaulZoomLevel
 fm_widget_view_get_zoom_level (FMDirectoryView *view)
 {
     return BAUL_ZOOM_LEVEL_STANDARD;
@@ -233,7 +233,7 @@ fm_widget_view_get_zoom_level (FMDirectoryView *view)
 
 static void
 fm_widget_view_zoom_to_level (FMDirectoryView *view,
-                              CajaZoomLevel zoom_level)
+                              BaulZoomLevel zoom_level)
 {
 }
 
@@ -256,7 +256,7 @@ fm_widget_view_can_zoom_out (FMDirectoryView *view)
 
 static void
 fm_widget_view_start_renaming_file (FMDirectoryView *view,
-                                    CajaFile *file,
+                                    BaulFile *file,
                                     gboolean select_all)
 {
 }
@@ -267,7 +267,7 @@ fm_widget_view_click_policy_changed (FMDirectoryView *directory_view)
 }
 
 static int
-fm_widget_view_compare_files (FMDirectoryView *view, CajaFile *file1, CajaFile *file2)
+fm_widget_view_compare_files (FMDirectoryView *view, BaulFile *file1, BaulFile *file2)
 {
     if (file1 < file2)
     {
@@ -306,7 +306,7 @@ fm_widget_view_emblems_changed (FMDirectoryView *directory_view)
 }
 
 static char *
-fm_widget_view_get_first_visible_file (CajaView *view)
+fm_widget_view_get_first_visible_file (BaulView *view)
 {
     FMWidgetView *widget_view;
 
@@ -318,12 +318,12 @@ fm_widget_view_get_first_visible_file (CajaView *view)
 }
 
 static void
-fm_widget_view_scroll_to_file (CajaView *view, const char *uri)
+fm_widget_view_scroll_to_file (BaulView *view, const char *uri)
 {
 }
 
 static void
-fm_widget_view_grab_focus (CajaView *view)
+fm_widget_view_grab_focus (BaulView *view)
 {
     gtk_widget_grab_focus (GTK_WIDGET (view));
 }
@@ -375,14 +375,14 @@ fm_widget_view_class_init (FMWidgetViewClass *class)
 }
 
 static const char *
-fm_widget_view_get_id (CajaView *view)
+fm_widget_view_get_id (BaulView *view)
 {
     return FM_WIDGET_VIEW_ID;
 }
 
 
 static void
-fm_widget_view_iface_init (CajaViewIface *iface)
+fm_widget_view_iface_init (BaulViewIface *iface)
 {
     fm_directory_view_init_view_iface (iface);
 
@@ -400,8 +400,8 @@ fm_widget_view_init (FMWidgetView *widget_view)
     widget_view->provider = NULL;
 }
 
-static CajaView *
-fm_widget_view_create (CajaWindowSlotInfo *slot)
+static BaulView *
+fm_widget_view_create (BaulWindowSlotInfo *slot)
 {
     FMWidgetView *view;
     g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
@@ -425,7 +425,7 @@ fm_widget_view_supports_uri (const char *uri,
 
     for (l = providers; l != NULL; l = l->next)
     {
-        CajaWidgetViewProvider *provider;
+        BaulWidgetViewProvider *provider;
 
         provider = BAUL_WIDGET_VIEW_PROVIDER (l->data);
         if (baul_widget_view_provider_supports_uri (provider, uri, file_type, mime_type)) {
@@ -437,7 +437,7 @@ fm_widget_view_supports_uri (const char *uri,
     return result;
 }
 
-static CajaViewInfo fm_widget_view =
+static BaulViewInfo fm_widget_view =
 {
     .id = FM_WIDGET_VIEW_ID,
     .view_combo_label = N_("Widget View"),

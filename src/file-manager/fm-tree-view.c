@@ -77,17 +77,17 @@ typedef struct
 
 struct FMTreeViewDetails
 {
-    CajaWindowInfo *window;
+    BaulWindowInfo *window;
     GtkTreeView *tree_widget;
     GtkTreeModelSort *sort_model;
     FMTreeModel *child_model;
 
     GVolumeMonitor *volume_monitor;
 
-    CajaFile *activation_file;
-    CajaWindowOpenFlags activation_flags;
+    BaulFile *activation_file;
+    BaulWindowOpenFlags activation_flags;
 
-    CajaTreeViewDragDest *drag_dest;
+    BaulTreeViewDragDest *drag_dest;
 
     char *selection_location;
     gboolean selecting;
@@ -109,7 +109,7 @@ struct FMTreeViewDetails
     GtkWidget *popup_unmount_separator;
     GtkWidget *popup_unmount;
     GtkWidget *popup_eject;
-    CajaFile *popup_file;
+    BaulFile *popup_file;
     guint popup_file_idle_handler;
 
     guint selection_changed_timer;
@@ -123,11 +123,11 @@ typedef struct
 
 static GdkAtom copied_files_atom;
 
-static void  fm_tree_view_iface_init        (CajaSidebarIface         *iface);
-static void  sidebar_provider_iface_init    (CajaSidebarProviderIface *iface);
+static void  fm_tree_view_iface_init        (BaulSidebarIface         *iface);
+static void  sidebar_provider_iface_init    (BaulSidebarProviderIface *iface);
 static void  fm_tree_view_activate_file     (FMTreeView *view,
-        CajaFile *file,
-        CajaWindowOpenFlags flags);
+        BaulFile *file,
+        BaulWindowOpenFlags flags);
 static GType fm_tree_view_provider_get_type (void);
 static GtkWindow *fm_tree_view_get_containing_window (FMTreeView *view);
 
@@ -143,8 +143,8 @@ G_DEFINE_TYPE_WITH_CODE (FMTreeViewProvider, fm_tree_view_provider, G_TYPE_OBJEC
                                  sidebar_provider_iface_init));
 
 static void
-notify_clipboard_info (CajaClipboardMonitor *monitor,
-                       CajaClipboardInfo *info,
+notify_clipboard_info (BaulClipboardMonitor *monitor,
+                       BaulClipboardInfo *info,
                        FMTreeView *view)
 {
     if (info != NULL && info->cut)
@@ -159,10 +159,10 @@ notify_clipboard_info (CajaClipboardMonitor *monitor,
 
 
 static gboolean
-show_iter_for_file (FMTreeView *view, CajaFile *file, GtkTreeIter *iter)
+show_iter_for_file (FMTreeView *view, BaulFile *file, GtkTreeIter *iter)
 {
     GtkTreeModel *model;
-    CajaFile *parent_file;
+    BaulFile *parent_file;
     GtkTreeIter parent_iter;
     GtkTreePath *path, *sort_path;
     GtkTreeIter cur_iter;
@@ -223,8 +223,8 @@ show_iter_for_file (FMTreeView *view, CajaFile *file, GtkTreeIter *iter)
 static void
 refresh_highlight (FMTreeView *view)
 {
-    CajaClipboardMonitor *monitor;
-    CajaClipboardInfo *info;
+    BaulClipboardMonitor *monitor;
+    BaulClipboardInfo *info;
 
     monitor = baul_clipboard_monitor_get ();
     info = baul_clipboard_monitor_get_clipboard_info (monitor);
@@ -236,7 +236,7 @@ static gboolean
 show_selection_idle_callback (gpointer callback_data)
 {
     FMTreeView *view;
-    CajaFile *file;
+    BaulFile *file;
     GtkTreeIter iter;
     GtkTreePath *path, *sort_path;
 
@@ -252,7 +252,7 @@ show_selection_idle_callback (gpointer callback_data)
 
     if (!baul_file_is_directory (file))
     {
-        CajaFile *old_file;
+        BaulFile *old_file;
 
         old_file = file;
         file = baul_file_get_parent (file);
@@ -313,7 +313,7 @@ row_loaded_callback (GtkTreeModel     *tree_model,
                      GtkTreeIter      *iter,
                      FMTreeView *view)
 {
-    CajaFile *file, *tmp_file, *selection_file;
+    BaulFile *file, *tmp_file, *selection_file;
 
     if (view->details->selection_location == NULL
             || !view->details->selecting
@@ -352,7 +352,7 @@ row_loaded_callback (GtkTreeModel     *tree_model,
     baul_file_unref (file);
 }
 
-static CajaFile *
+static BaulFile *
 sort_model_iter_to_file (FMTreeView *view, GtkTreeIter *iter)
 {
     GtkTreeIter child_iter;
@@ -361,7 +361,7 @@ sort_model_iter_to_file (FMTreeView *view, GtkTreeIter *iter)
     return fm_tree_model_iter_get_file (view->details->child_model, &child_iter);
 }
 
-static CajaFile *
+static BaulFile *
 sort_model_path_to_file (FMTreeView *view, GtkTreePath *path)
 {
     GtkTreeIter iter;
@@ -374,13 +374,13 @@ sort_model_path_to_file (FMTreeView *view, GtkTreePath *path)
 }
 
 static void
-got_activation_uri_callback (CajaFile *file, gpointer callback_data)
+got_activation_uri_callback (BaulFile *file, gpointer callback_data)
 {
     char *uri, *file_uri;
     FMTreeView *view;
     GdkScreen *screen;
     GFile *location;
-    CajaWindowSlotInfo *slot;
+    BaulWindowSlotInfo *slot;
     gboolean open_in_same_slot;
 
     view = FM_TREE_VIEW (callback_data);
@@ -506,7 +506,7 @@ row_activated_callback (GtkTreeView *treeview, GtkTreePath *path,
 static gboolean
 selection_changed_timer_callback(FMTreeView *view)
 {
-    CajaFileAttributes attributes;
+    BaulFileAttributes attributes;
     GtkTreeIter iter;
     GtkTreeSelection *selection;
 
@@ -574,7 +574,7 @@ selection_changed_callback (GtkTreeSelection *selection,
 static int
 compare_rows (GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer callback_data)
 {
-    CajaFile *file_a, *file_b;
+    BaulFile *file_a, *file_b;
     int result;
 
     /* Dummy rows are always first */
@@ -624,15 +624,15 @@ compare_rows (GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer call
 
 
 static char *
-get_root_uri_callback (CajaTreeViewDragDest *dest,
+get_root_uri_callback (BaulTreeViewDragDest *dest,
                        gpointer user_data)
 {
     /* Don't allow drops on background */
     return NULL;
 }
 
-static CajaFile *
-get_file_for_path_callback (CajaTreeViewDragDest *dest,
+static BaulFile *
+get_file_for_path_callback (BaulTreeViewDragDest *dest,
                             GtkTreePath *path,
                             gpointer user_data)
 {
@@ -644,7 +644,7 @@ get_file_for_path_callback (CajaTreeViewDragDest *dest,
 }
 
 static void
-move_copy_items_callback (CajaTreeViewDragDest *dest,
+move_copy_items_callback (BaulTreeViewDragDest *dest,
                           const GList *item_uris,
                           const char *target_uri,
                           GdkDragAction action,
@@ -738,9 +738,9 @@ clipboard_contents_received_callback (GtkClipboard     *clipboard,
 }
 
 static gboolean
-is_parent_writable (CajaFile *file)
+is_parent_writable (BaulFile *file)
 {
-    CajaFile *parent;
+    BaulFile *parent;
     gboolean result;
 
     parent = baul_file_get_parent (file);
@@ -876,7 +876,7 @@ button_pressed_callback (GtkTreeView *treeview, GdkEventButton *event,
     }
     else if (event->button == 2 && event->type == GDK_BUTTON_PRESS)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         if (!gtk_tree_view_get_path_at_pos (treeview, event->x, event->y,
                                             &path, NULL, NULL, NULL))
@@ -904,10 +904,10 @@ button_pressed_callback (GtkTreeView *treeview, GdkEventButton *event,
 
 static void
 fm_tree_view_activate_file (FMTreeView *view,
-                            CajaFile *file,
-                            CajaWindowOpenFlags flags)
+                            BaulFile *file,
+                            BaulWindowOpenFlags flags)
 {
-    CajaFileAttributes attributes;
+    BaulFileAttributes attributes;
 
     cancel_activation (view);
 
@@ -982,7 +982,7 @@ copy_or_cut_files (FMTreeView *view,
                    gboolean cut)
 {
     char *status_string, *name;
-    CajaClipboardInfo info;
+    BaulClipboardInfo info;
     GtkTargetList *target_list;
     GtkTargetEntry *targets;
     int n_targets;
@@ -1174,7 +1174,7 @@ static void
 fm_tree_view_unmount_cb (GtkWidget *menu_item,
                          FMTreeView *view)
 {
-    CajaFile *file = view->details->popup_file;
+    BaulFile *file = view->details->popup_file;
     GMount *mount;
 
     if (file == NULL)
@@ -1195,7 +1195,7 @@ static void
 fm_tree_view_eject_cb (GtkWidget *menu_item,
                        FMTreeView *view)
 {
-    CajaFile *file = view->details->popup_file;
+    BaulFile *file = view->details->popup_file;
     GMount *mount;
 
     if (file == NULL)
@@ -1400,7 +1400,7 @@ create_tree (FMTreeView *view)
     GList *mounts, *l;
     char *location;
     GIcon *icon;
-    CajaWindowSlotInfo *slot;
+    BaulWindowSlotInfo *slot;
 
     view->details->child_model = fm_tree_model_new ();
     view->details->sort_model = GTK_TREE_MODEL_SORT
@@ -1506,7 +1506,7 @@ create_tree (FMTreeView *view)
 static void
 update_filtering_from_preferences (FMTreeView *view)
 {
-    CajaWindowShowHiddenFilesMode mode;
+    BaulWindowShowHiddenFilesMode mode;
 
     if (view->details->child_model == NULL)
     {
@@ -1555,7 +1555,7 @@ filtering_changed_callback (gpointer callback_data)
 }
 
 static void
-loading_uri_callback (CajaWindowInfo *window,
+loading_uri_callback (BaulWindowInfo *window,
                       char *location,
                       gpointer callback_data)
 {
@@ -1701,45 +1701,45 @@ fm_tree_view_class_init (FMTreeViewClass *class)
 }
 
 static const char *
-fm_tree_view_get_sidebar_id (CajaSidebar *sidebar)
+fm_tree_view_get_sidebar_id (BaulSidebar *sidebar)
 {
     return TREE_SIDEBAR_ID;
 }
 
 static char *
-fm_tree_view_get_tab_label (CajaSidebar *sidebar)
+fm_tree_view_get_tab_label (BaulSidebar *sidebar)
 {
     return g_strdup (_("Tree"));
 }
 
 static char *
-fm_tree_view_get_tab_tooltip (CajaSidebar *sidebar)
+fm_tree_view_get_tab_tooltip (BaulSidebar *sidebar)
 {
     return g_strdup (_("Show Tree"));
 }
 
 static GdkPixbuf *
-fm_tree_view_get_tab_icon (CajaSidebar *sidebar)
+fm_tree_view_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;
 }
 
 static void
-fm_tree_view_is_visible_changed (CajaSidebar *sidebar,
+fm_tree_view_is_visible_changed (BaulSidebar *sidebar,
                                  gboolean         is_visible)
 {
     /* Do nothing */
 }
 
 static void
-hidden_files_mode_changed_callback (CajaWindowInfo *window,
+hidden_files_mode_changed_callback (BaulWindowInfo *window,
                                     FMTreeView *view)
 {
     update_filtering_from_preferences (view);
 }
 
 static void
-fm_tree_view_iface_init (CajaSidebarIface *iface)
+fm_tree_view_iface_init (BaulSidebarIface *iface)
 {
     iface->get_sidebar_id = fm_tree_view_get_sidebar_id;
     iface->get_tab_label = fm_tree_view_get_tab_label;
@@ -1750,10 +1750,10 @@ fm_tree_view_iface_init (CajaSidebarIface *iface)
 
 static void
 fm_tree_view_set_parent_window (FMTreeView *sidebar,
-                                CajaWindowInfo *window)
+                                BaulWindowInfo *window)
 {
     char *location;
-    CajaWindowSlotInfo *slot;
+    BaulWindowSlotInfo *slot;
 
     sidebar->details->window = window;
 
@@ -1770,9 +1770,9 @@ fm_tree_view_set_parent_window (FMTreeView *sidebar,
 
 }
 
-static CajaSidebar *
-fm_tree_view_create (CajaSidebarProvider *provider,
-                     CajaWindowInfo *window)
+static BaulSidebar *
+fm_tree_view_create (BaulSidebarProvider *provider,
+                     BaulWindowInfo *window)
 {
     FMTreeView *sidebar;
 
@@ -1784,7 +1784,7 @@ fm_tree_view_create (CajaSidebarProvider *provider,
 }
 
 static void
-sidebar_provider_iface_init (CajaSidebarProviderIface *iface)
+sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 {
     iface->create = fm_tree_view_create;
 }

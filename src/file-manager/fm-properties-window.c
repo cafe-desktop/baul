@@ -109,10 +109,10 @@ struct _FMPropertiesWindowPrivate {
 	GList *emblem_buttons;
 	GHashTable *initial_emblems;
 
-	CajaFile *group_change_file;
+	BaulFile *group_change_file;
 	char         *group_change_group;
 	unsigned int  group_change_timeout;
-	CajaFile *owner_change_file;
+	BaulFile *owner_change_file;
 	char         *owner_change_owner;
 	unsigned int  owner_change_timeout;
 
@@ -194,7 +194,7 @@ static const GtkTargetEntry target_table[] = {
 #define CHOWN_CHGRP_TIMEOUT			300 /* milliseconds */
 
 static void directory_contents_value_field_update (FMPropertiesWindow *window);
-static void file_changed_callback                 (CajaFile       *file,
+static void file_changed_callback                 (BaulFile       *file,
 						   gpointer            user_data);
 static void permission_button_update              (FMPropertiesWindow *window,
 						   GtkToggleButton    *button);
@@ -204,7 +204,7 @@ static void value_field_update                    (FMPropertiesWindow *window,
 						   GtkLabel           *field);
 static void properties_window_update              (FMPropertiesWindow *window,
 						   GList              *files);
-static void is_directory_ready_callback           (CajaFile       *file,
+static void is_directory_ready_callback           (BaulFile       *file,
 						   gpointer            data);
 static void cancel_group_change_callback          (FMPropertiesWindow *window);
 static void cancel_owner_change_callback          (FMPropertiesWindow *window);
@@ -220,10 +220,10 @@ static void remove_pending                        (StartupData        *data,
 						   gboolean            cancel_destroy_handler);
 static void append_extension_pages                (FMPropertiesWindow *window);
 
-static gboolean name_field_focus_out              (CajaEntry *name_field,
+static gboolean name_field_focus_out              (BaulEntry *name_field,
 						   GdkEventFocus *event,
 						   gpointer callback_data);
-static void name_field_activate                   (CajaEntry *name_field,
+static void name_field_activate                   (BaulEntry *name_field,
 						   gpointer callback_data);
 static GtkLabel *attach_ellipsizing_value_label   (GtkGrid *grid,
                                                    GtkWidget *sibling,
@@ -271,7 +271,7 @@ get_not_gone_original_file_count (FMPropertiesWindow *window)
 	return count;
 }
 
-static CajaFile *
+static BaulFile *
 get_original_file (FMPropertiesWindow *window)
 {
 	g_return_val_if_fail (!is_multi_file_window (window), NULL);
@@ -283,14 +283,14 @@ get_original_file (FMPropertiesWindow *window)
 	return BAUL_FILE (window->details->original_files->data);
 }
 
-static CajaFile *
-get_target_file_for_original_file (CajaFile *file)
+static BaulFile *
+get_target_file_for_original_file (BaulFile *file)
 {
-	CajaFile *target_file;
+	BaulFile *target_file;
 
 	target_file = NULL;
 	if (BAUL_IS_DESKTOP_ICON_FILE (file)) {
-		CajaDesktopLink *link;
+		BaulDesktopLink *link;
 
 		link = baul_desktop_icon_file_get_link (BAUL_DESKTOP_ICON_FILE (file));
 
@@ -327,7 +327,7 @@ get_target_file_for_original_file (CajaFile *file)
 	return file;
 }
 
-static CajaFile *
+static BaulFile *
 get_target_file (FMPropertiesWindow *window)
 {
 	return BAUL_FILE (window->details->target_files->data);
@@ -367,7 +367,7 @@ get_image_for_properties_window (FMPropertiesWindow *window,
 				 char **icon_name,
 				 GdkPixbuf **icon_pixbuf)
 {
-	CajaIconInfo *icon, *new_icon;
+	BaulIconInfo *icon, *new_icon;
 	GList *l;
 	gint icon_scale;
 
@@ -375,7 +375,7 @@ get_image_for_properties_window (FMPropertiesWindow *window,
 	icon_scale = gtk_widget_get_scale_factor (GTK_WIDGET (window->details->notebook));
 
 	for (l = window->details->original_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -468,7 +468,7 @@ reset_icon (FMPropertiesWindow *properties_window)
 	GList *l;
 
 	for (l = properties_window->details->original_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -639,7 +639,7 @@ set_name_field (FMPropertiesWindow *window,
 static void
 update_name_field (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 
 	gtk_label_set_text_with_mnemonic (window->details->name_label,
 					  ngettext ("_Name:", "_Names:",
@@ -708,7 +708,7 @@ update_name_field (FMPropertiesWindow *window)
 }
 
 static void
-name_field_restore_original_name (CajaEntry *name_field)
+name_field_restore_original_name (BaulEntry *name_field)
 {
 	const char *original_name;
 	char *displayed_name;
@@ -731,7 +731,7 @@ name_field_restore_original_name (CajaEntry *name_field)
 }
 
 static void
-rename_callback (CajaFile *file, GFile *res_loc, GError *error, gpointer callback_data)
+rename_callback (BaulFile *file, GFile *res_loc, GError *error, gpointer callback_data)
 {
 	FMPropertiesWindow *window;
 
@@ -759,9 +759,9 @@ set_pending_name (FMPropertiesWindow *window, const char *name)
 }
 
 static void
-name_field_done_editing (CajaEntry *name_field, FMPropertiesWindow *window)
+name_field_done_editing (BaulEntry *name_field, FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 	char *new_name;
 
 	g_return_if_fail (BAUL_IS_ENTRY (name_field));
@@ -805,7 +805,7 @@ name_field_done_editing (CajaEntry *name_field, FMPropertiesWindow *window)
 }
 
 static gboolean
-name_field_focus_out (CajaEntry *name_field,
+name_field_focus_out (BaulEntry *name_field,
 		      GdkEventFocus *event,
 		      gpointer callback_data)
 {
@@ -819,7 +819,7 @@ name_field_focus_out (CajaEntry *name_field,
 }
 
 static void
-name_field_activate (CajaEntry *name_field, gpointer callback_data)
+name_field_activate (BaulEntry *name_field, gpointer callback_data)
 {
 	g_assert (BAUL_IS_ENTRY (name_field));
 	g_assert (FM_IS_PROPERTIES_WINDOW (callback_data));
@@ -831,7 +831,7 @@ name_field_activate (CajaEntry *name_field, gpointer callback_data)
 }
 
 static gboolean
-file_has_keyword (CajaFile *file, const char *keyword)
+file_has_keyword (BaulFile *file, const char *keyword)
 {
 	GList *keywords, *word;
 
@@ -916,7 +916,7 @@ emblem_button_toggled (GtkToggleButton *button,
 					   window);
 
 	for (l = files_on; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -931,7 +931,7 @@ emblem_button_toggled (GtkToggleButton *button,
 	}
 
 	for (l = files_off; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -965,7 +965,7 @@ emblem_button_update (FMPropertiesWindow *window,
 	all_unset = TRUE;
 	for (l = window->details->original_files; l != NULL; l = l->next) {
 		gboolean has_keyword;
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -1001,7 +1001,7 @@ update_properties_window_title (FMPropertiesWindow *window)
 	title = g_strdup_printf (_("Properties"));
 
 	if (!is_multi_file_window (window)) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = get_original_file (window);
 
@@ -1052,13 +1052,13 @@ refresh_extension_pages (FMPropertiesWindow *window)
 
 static void
 remove_from_dialog (FMPropertiesWindow *window,
-		    CajaFile *file)
+		    BaulFile *file)
 {
 	int index;
 	GList *original_link;
 	GList *target_link;
-	CajaFile *original_file;
-	CajaFile *target_file;
+	BaulFile *original_file;
+	BaulFile *target_file;
 
 	index = g_list_index (window->details->target_files, file);
 	if (index == -1) {
@@ -1133,7 +1133,7 @@ properties_window_update (FMPropertiesWindow *window,
 	GList *l;
 	GList *mime_list;
 	GList *tmp;
-	CajaFile *changed_file = NULL;
+	BaulFile *changed_file = NULL;
 	gboolean dirty_original = FALSE;
 	gboolean dirty_target = FALSE;
 
@@ -1252,7 +1252,7 @@ file_list_attributes_identical (GList *file_list, const char *attribute_name)
 	identical = TRUE;
 
 	for (l = file_list; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -1287,7 +1287,7 @@ file_list_get_string_attribute (GList *file_list,
 		GList *l;
 
 		for (l = file_list; l != NULL; l = l->next) {
-			CajaFile *file;
+			BaulFile *file;
 
 			file = BAUL_FILE (l->data);
 			if (!baul_file_is_gone (file)) {
@@ -1484,7 +1484,7 @@ attach_ellipsizing_value_field (FMPropertiesWindow *window,
 }
 
 static void
-group_change_callback (CajaFile *file,
+group_change_callback (BaulFile *file,
 		       GFile *res_loc,
 		       GError *error,
 		       FMPropertiesWindow *window)
@@ -1512,7 +1512,7 @@ group_change_callback (CajaFile *file,
 static void
 cancel_group_change_callback (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 	char *group;
 
 	file = window->details->group_change_file;
@@ -1521,7 +1521,7 @@ cancel_group_change_callback (FMPropertiesWindow *window)
 	group = window->details->group_change_group;
 	g_assert (group != NULL);
 
-	baul_file_cancel (file, (CajaFileOperationCallback) group_change_callback, window);
+	baul_file_cancel (file, (BaulFileOperationCallback) group_change_callback, window);
 
 	g_free (group);
 	baul_file_unref (file);
@@ -1534,7 +1534,7 @@ cancel_group_change_callback (FMPropertiesWindow *window)
 static gboolean
 schedule_group_change_timeout (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 	char *group;
 
 	g_assert (FM_IS_PROPERTIES_WINDOW (window));
@@ -1553,7 +1553,7 @@ schedule_group_change_timeout (FMPropertiesWindow *window)
 
 	baul_file_set_group
 		(file,  group,
-		 (CajaFileOperationCallback) group_change_callback, window);
+		 (BaulFileOperationCallback) group_change_callback, window);
 
 	window->details->group_change_timeout = 0;
 	return FALSE;
@@ -1561,7 +1561,7 @@ schedule_group_change_timeout (FMPropertiesWindow *window)
 
 static void
 schedule_group_change (FMPropertiesWindow *window,
-		       CajaFile       *file,
+		       BaulFile       *file,
 		       const char         *group)
 {
 	g_assert (FM_IS_PROPERTIES_WINDOW (window));
@@ -1581,7 +1581,7 @@ schedule_group_change (FMPropertiesWindow *window,
 static void
 unschedule_or_cancel_group_change (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 	char *group;
 
 	g_assert (FM_IS_PROPERTIES_WINDOW (window));
@@ -1597,7 +1597,7 @@ unschedule_or_cancel_group_change (FMPropertiesWindow *window)
 
 		if (window->details->group_change_timeout == 0) {
 			baul_file_cancel (file,
-					      (CajaFileOperationCallback) group_change_callback, window);
+					      (BaulFileOperationCallback) group_change_callback, window);
 			eel_timed_wait_stop ((EelCancelCallback) cancel_group_change_callback, window);
 		}
 
@@ -1617,7 +1617,7 @@ unschedule_or_cancel_group_change (FMPropertiesWindow *window)
 }
 
 static void
-changed_group_callback (GtkComboBox *combo_box, CajaFile *file)
+changed_group_callback (GtkComboBox *combo_box, BaulFile *file)
 {
 	char *group;
 	char *cur_group;
@@ -1751,7 +1751,7 @@ tree_model_get_entry_index (GtkTreeModel *model,
 
 
 static void
-synch_groups_combo_box (GtkComboBox *combo_box, CajaFile *file)
+synch_groups_combo_box (GtkComboBox *combo_box, BaulFile *file)
 {
 	GList *groups;
 	GList *node;
@@ -1878,7 +1878,7 @@ attach_combo_box (GtkGrid *grid,
 static GtkComboBox*
 attach_group_combo_box (GtkGrid *grid,
                         GtkWidget *sibling,
-                        CajaFile *file)
+                        BaulFile *file)
 {
 	GtkComboBox *combo_box;
 
@@ -1899,7 +1899,7 @@ attach_group_combo_box (GtkGrid *grid,
 }
 
 static void
-owner_change_callback (CajaFile *file,
+owner_change_callback (BaulFile *file,
                        GFile 	    *result_location,
 		       GError        *error,
 		       FMPropertiesWindow *window)
@@ -1927,7 +1927,7 @@ owner_change_callback (CajaFile *file,
 static void
 cancel_owner_change_callback (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 	char *owner;
 
 	file = window->details->owner_change_file;
@@ -1936,7 +1936,7 @@ cancel_owner_change_callback (FMPropertiesWindow *window)
 	owner = window->details->owner_change_owner;
 	g_assert (owner != NULL);
 
-	baul_file_cancel (file, (CajaFileOperationCallback) owner_change_callback, window);
+	baul_file_cancel (file, (BaulFileOperationCallback) owner_change_callback, window);
 
 	baul_file_unref (file);
 	g_free (owner);
@@ -1949,7 +1949,7 @@ cancel_owner_change_callback (FMPropertiesWindow *window)
 static gboolean
 schedule_owner_change_timeout (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 	char *owner;
 
 	g_assert (FM_IS_PROPERTIES_WINDOW (window));
@@ -1968,7 +1968,7 @@ schedule_owner_change_timeout (FMPropertiesWindow *window)
 
 	baul_file_set_owner
 		(file,  owner,
-		 (CajaFileOperationCallback) owner_change_callback, window);
+		 (BaulFileOperationCallback) owner_change_callback, window);
 
 	window->details->owner_change_timeout = 0;
 	return FALSE;
@@ -1976,7 +1976,7 @@ schedule_owner_change_timeout (FMPropertiesWindow *window)
 
 static void
 schedule_owner_change (FMPropertiesWindow *window,
-		       CajaFile       *file,
+		       BaulFile       *file,
 		       const char         *owner)
 {
 	g_assert (FM_IS_PROPERTIES_WINDOW (window));
@@ -1996,7 +1996,7 @@ schedule_owner_change (FMPropertiesWindow *window,
 static void
 unschedule_or_cancel_owner_change (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 	char *owner;
 
 	g_assert (FM_IS_PROPERTIES_WINDOW (window));
@@ -2012,7 +2012,7 @@ unschedule_or_cancel_owner_change (FMPropertiesWindow *window)
 
 		if (window->details->owner_change_timeout == 0) {
 			baul_file_cancel (file,
-					      (CajaFileOperationCallback) owner_change_callback, window);
+					      (BaulFileOperationCallback) owner_change_callback, window);
 			eel_timed_wait_stop ((EelCancelCallback) cancel_owner_change_callback, window);
 		}
 
@@ -2032,7 +2032,7 @@ unschedule_or_cancel_owner_change (FMPropertiesWindow *window)
 }
 
 static void
-changed_owner_callback (GtkComboBox *combo_box, CajaFile* file)
+changed_owner_callback (GtkComboBox *combo_box, BaulFile* file)
 {
 	char *owner_text;
 	char **name_array;
@@ -2064,7 +2064,7 @@ changed_owner_callback (GtkComboBox *combo_box, CajaFile* file)
 }
 
 static void
-synch_user_menu (GtkComboBox *combo_box, CajaFile *file)
+synch_user_menu (GtkComboBox *combo_box, BaulFile *file)
 {
 	GList *users;
 	GList *node;
@@ -2165,7 +2165,7 @@ synch_user_menu (GtkComboBox *combo_box, CajaFile *file)
 static GtkComboBox*
 attach_owner_combo_box (GtkGrid *grid,
                         GtkWidget *sibling,
-                        CajaFile *file)
+                        BaulFile *file)
 {
 	GtkComboBox *combo_box;
 
@@ -2186,7 +2186,7 @@ attach_owner_combo_box (GtkGrid *grid,
 }
 
 static gboolean
-file_has_prefix (CajaFile *file,
+file_has_prefix (BaulFile *file,
 		 GList *prefix_candidates)
 {
 	GList *p;
@@ -2216,7 +2216,7 @@ file_has_prefix (CajaFile *file,
 static void
 directory_contents_value_field_update (FMPropertiesWindow *window)
 {
-	CajaRequestStatus file_status, status;
+	BaulRequestStatus file_status, status;
 	char *text, *temp;
 	guint directory_count;
 	guint file_count;
@@ -2229,7 +2229,7 @@ directory_contents_value_field_update (FMPropertiesWindow *window)
 	guint file_unreadable;
 	goffset file_size;
 	goffset file_size_on_disk;
-	CajaFile *file = NULL;
+	BaulFile *file = NULL;
 
 	g_assert (FM_IS_PROPERTIES_WINDOW (window));
 
@@ -2386,7 +2386,7 @@ attach_directory_contents_value_field (FMPropertiesWindow *window,
 {
 	GtkLabel *value_field;
 	GList *l;
-	CajaFile *file = NULL;
+	BaulFile *file = NULL;
 
 	value_field = attach_value_label (grid, sibling, "");
 
@@ -2555,7 +2555,7 @@ create_grid_with_standard_properties (void)
 }
 
 static gboolean
-is_merged_trash_directory (CajaFile *file)
+is_merged_trash_directory (BaulFile *file)
 {
 	char *file_uri;
 	gboolean result;
@@ -2568,7 +2568,7 @@ is_merged_trash_directory (CajaFile *file)
 }
 
 static gboolean
-is_computer_directory (CajaFile *file)
+is_computer_directory (BaulFile *file)
 {
 	char *file_uri;
 	gboolean result;
@@ -2581,7 +2581,7 @@ is_computer_directory (CajaFile *file)
 }
 
 static gboolean
-is_network_directory (CajaFile *file)
+is_network_directory (BaulFile *file)
 {
 	char *file_uri;
 	gboolean result;
@@ -2594,7 +2594,7 @@ is_network_directory (CajaFile *file)
 }
 
 static gboolean
-is_burn_directory (CajaFile *file)
+is_burn_directory (BaulFile *file)
 {
 	char *file_uri;
 	gboolean result;
@@ -2692,7 +2692,7 @@ should_show_free_space (FMPropertiesWindow *window)
 static gboolean
 should_show_volume_usage (FMPropertiesWindow *window)
 {
-	CajaFile 		*file;
+	BaulFile 		*file;
 	gboolean 		success = FALSE;
 
 	if (is_multi_file_window (window)) {
@@ -3044,7 +3044,7 @@ _pie_style_shade (GdkRGBA *a,
 static GtkWidget*
 create_pie_widget (FMPropertiesWindow *window)
 {
-	CajaFile		*file;
+	BaulFile		*file;
 	GtkGrid                 *grid;
 	GtkStyleContext		*style;
 
@@ -3191,7 +3191,7 @@ create_volume_usage_widget (FMPropertiesWindow *window)
 {
 	GtkWidget *piewidget;
 	gchar *uri;
-	CajaFile *file;
+	BaulFile *file;
 	GFile *location;
 	GFileInfo *info;
 
@@ -3369,7 +3369,7 @@ get_initial_emblems (GList *files)
 				     (GDestroyNotify) eel_g_list_free_deep);
 
 	for (l = files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 		GList *keywords;
 
 		file = BAUL_FILE (l->data);
@@ -3387,7 +3387,7 @@ files_has_directory (FMPropertiesWindow *window)
 	GList *l;
 
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 		file = BAUL_FILE (l->data);
 		if (baul_file_is_directory (file)) {
 			return TRUE;
@@ -3404,7 +3404,7 @@ files_has_changable_permissions_directory (FMPropertiesWindow *window)
 	GList *l;
 
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 		file = BAUL_FILE (l->data);
 		if (baul_file_is_directory (file) &&
 		    baul_file_can_get_permissions (file) &&
@@ -3424,7 +3424,7 @@ files_has_file (FMPropertiesWindow *window)
 	GList *l;
 
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 		file = BAUL_FILE (l->data);
 		if (!baul_file_is_directory (file)) {
 			return TRUE;
@@ -3443,7 +3443,7 @@ create_emblems_page (FMPropertiesWindow *window)
 	GdkPixbuf *pixbuf;
 	char *label;
 	GList *icons, *l;
-	CajaIconInfo *info;
+	BaulIconInfo *info;
 	gint scale;
 
 	/* The emblems wrapped table */
@@ -3543,7 +3543,7 @@ end_long_operation (FMPropertiesWindow *window)
 }
 
 static void
-permission_change_callback (CajaFile *file,
+permission_change_callback (BaulFile *file,
 			    GFile *res_loc,
 			    GError *error,
 			    gpointer callback_data)
@@ -3571,7 +3571,7 @@ update_permissions (FMPropertiesWindow *window,
 	GList *l;
 
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 		guint32 permissions;
 
 		file = BAUL_FILE (l->data);
@@ -3619,7 +3619,7 @@ initial_permission_state_consistent (FMPropertiesWindow *window,
 	first = TRUE;
 	first_permissions = 0;
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 		guint32 permissions;
 
 		file = l->data;
@@ -3741,7 +3741,7 @@ permission_button_update (FMPropertiesWindow *window,
 	all_cannot_set = TRUE;
 	no_match = TRUE;
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 		guint32 file_permissions;
 
 		file = BAUL_FILE (l->data);
@@ -4065,7 +4065,7 @@ permission_combo_update (FMPropertiesWindow *window,
 	all_file_cannot_set = TRUE;
 
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 		guint32 file_permissions;
 
 		file = BAUL_FILE (l->data);
@@ -4326,7 +4326,7 @@ all_can_get_permissions (GList *file_list)
 {
 	GList *l;
 	for (l = file_list; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -4343,7 +4343,7 @@ all_can_set_permissions (GList *file_list)
 {
 	GList *l;
 	for (l = file_list; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -4366,7 +4366,7 @@ get_initial_permissions (GList *file_list)
 
 	for (l = file_list; l != NULL; l = l->next) {
 		guint32 permissions;
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -4752,7 +4752,7 @@ apply_recursive_clicked (GtkWidget *recursive_button,
 	}
 
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
+		BaulFile *file;
 
 		file = BAUL_FILE (l->data);
 
@@ -4876,14 +4876,14 @@ append_extension_pages (FMPropertiesWindow *window)
 	module_providers = baul_module_get_extensions_for_type (BAUL_TYPE_PROPERTY_PAGE_PROVIDER);
 	for (p = module_providers; p != NULL; p = p->next) {
 		const gchar *type_name = G_OBJECT_TYPE_NAME (G_OBJECT (p->data));
-		if (g_strcmp0 (type_name, "CajaNotesViewerProvider") == 0 ||
-		    g_strcmp0 (type_name, "CajaImagePropertiesPageProvider") == 0) {
+		if (g_strcmp0 (type_name, "BaulNotesViewerProvider") == 0 ||
+		    g_strcmp0 (type_name, "BaulImagePropertiesPageProvider") == 0) {
 			providers = g_list_prepend (providers, p->data);
 		}
 	}
 
 	for (p = providers; p != NULL; p = p->next) {
-		CajaPropertyPageProvider *provider;
+		BaulPropertyPageProvider *provider;
 		GList *pages;
 		GList *l;
 
@@ -4893,7 +4893,7 @@ append_extension_pages (FMPropertiesWindow *window)
 			(provider, window->details->original_files);
 
 		for (l = pages; l != NULL; l = l->next) {
-			CajaPropertyPage *page;
+			BaulPropertyPage *page;
 			GtkWidget *page_widget;
 			GtkWidget *label;
 
@@ -4941,7 +4941,7 @@ should_show_emblems (FMPropertiesWindow *window)
 static gboolean
 should_show_permissions (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 
 	file = get_target_file (window);
 
@@ -5020,7 +5020,7 @@ startup_data_free (StartupData *data)
 }
 
 static void
-file_changed_callback (CajaFile *file, gpointer user_data)
+file_changed_callback (BaulFile *file, gpointer user_data)
 {
 	FMPropertiesWindow *window = FM_PROPERTIES_WINDOW (user_data);
 
@@ -5033,7 +5033,7 @@ file_changed_callback (CajaFile *file, gpointer user_data)
 }
 
 static gboolean
-is_a_special_file (CajaFile *file)
+is_a_special_file (BaulFile *file)
 {
 	if (file == NULL ||
 	    BAUL_IS_DESKTOP_ICON_FILE (file) ||
@@ -5047,7 +5047,7 @@ is_a_special_file (CajaFile *file)
 static gboolean
 should_show_open_with (FMPropertiesWindow *window)
 {
-	CajaFile *file;
+	BaulFile *file;
 
 	/* Don't show open with tab for desktop special icons (trash, etc)
 	 * We don't get the open-with menu for these anyway.
@@ -5147,8 +5147,8 @@ create_properties_window (StartupData *startup_data)
 	 */
 
 	for (l = window->details->original_files; l != NULL; l = l->next) {
-		CajaFile *file;
-		CajaFileAttributes attributes;
+		BaulFile *file;
+		BaulFileAttributes attributes;
 
 		file = BAUL_FILE (l->data);
 
@@ -5163,8 +5163,8 @@ create_properties_window (StartupData *startup_data)
 	}
 
 	for (l = window->details->target_files; l != NULL; l = l->next) {
-		CajaFile *file;
-		CajaFileAttributes attributes;
+		BaulFile *file;
+		BaulFileAttributes attributes;
 
 		file = BAUL_FILE (l->data);
 
@@ -5256,7 +5256,7 @@ get_target_file_list (GList *original_files)
 	ret = NULL;
 
 	for (l = original_files; l != NULL; l = l->next) {
-		CajaFile *target;
+		BaulFile *target;
 
 		target = get_target_file_for_original_file (BAUL_FILE (l->data));
 
@@ -5354,7 +5354,7 @@ remove_pending (StartupData *startup_data,
 }
 
 static void
-is_directory_ready_callback (CajaFile *file,
+is_directory_ready_callback (BaulFile *file,
 			     gpointer data)
 {
 	StartupData *startup_data;
@@ -5611,7 +5611,7 @@ set_icon (const char* icon_uri, FMPropertiesWindow *properties_window)
 	/* we don't allow remote URIs */
 	if (icon_path != NULL) {
 		GList *l;
-		CajaFile *file = NULL;
+		BaulFile *file = NULL;
 
 		for (l = properties_window->details->original_files; l != NULL; l = l->next) {
 			char *file_uri;
@@ -5726,7 +5726,7 @@ select_image_button_callback (GtkWidget *widget,
 {
 	GtkWidget *dialog;
 	GList *l;
-	CajaFile *file;
+	BaulFile *file;
 	char *image_path;
 	gboolean revert_is_sensitive;
 

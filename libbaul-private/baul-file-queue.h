@@ -25,28 +25,28 @@
 
 #include "baul-file.h"
 
-typedef struct CajaFileQueue CajaFileQueue;
+typedef struct BaulFileQueue BaulFileQueue;
 
-CajaFileQueue *baul_file_queue_new      (void);
-void               baul_file_queue_destroy  (CajaFileQueue *queue);
+BaulFileQueue *baul_file_queue_new      (void);
+void               baul_file_queue_destroy  (BaulFileQueue *queue);
 
 /* Add a file to the tail of the queue, unless it's already in the queue */
-void               baul_file_queue_enqueue  (CajaFileQueue *queue,
-        CajaFile      *file);
+void               baul_file_queue_enqueue  (BaulFileQueue *queue,
+        BaulFile      *file);
 
 /* Return the file at the head of the queue after removing it from the
  * queue. This is dangerous unless you have another ref to the file,
  * since it will unref it.
  */
-CajaFile *     baul_file_queue_dequeue  (CajaFileQueue *queue);
+BaulFile *     baul_file_queue_dequeue  (BaulFileQueue *queue);
 
 /* Remove a file from an arbitrary point in the queue in constant time. */
-void               baul_file_queue_remove   (CajaFileQueue *queue,
-        CajaFile      *file);
+void               baul_file_queue_remove   (BaulFileQueue *queue,
+        BaulFile      *file);
 
 /* Get the file at the head of the queue without removing or unrefing it. */
-CajaFile *     baul_file_queue_head     (CajaFileQueue *queue);
+BaulFile *     baul_file_queue_head     (BaulFileQueue *queue);
 
-gboolean           baul_file_queue_is_empty (CajaFileQueue *queue);
+gboolean           baul_file_queue_is_empty (BaulFileQueue *queue);
 
 #endif /* BAUL_FILE_CHANGES_QUEUE_H */

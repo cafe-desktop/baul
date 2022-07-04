@@ -59,7 +59,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 struct _ProgressWidgetData;
 
-struct _CajaProgressInfo
+struct _BaulProgressInfo
 {
     GObject parent_instance;
 
@@ -88,7 +88,7 @@ struct _CajaProgressInfo
     gboolean progress_at_idle;
 };
 
-struct _CajaProgressInfoClass
+struct _BaulProgressInfoClass
 {
     GObjectClass parent_class;
 };
@@ -101,7 +101,7 @@ static void update_status_icon_and_window (void);
 
 G_LOCK_DEFINE_STATIC(progress_info);
 
-G_DEFINE_TYPE (CajaProgressInfo, baul_progress_info, G_TYPE_OBJECT)
+G_DEFINE_TYPE (BaulProgressInfo, baul_progress_info, G_TYPE_OBJECT)
 
 GList *
 baul_get_all_progress_info (void)
@@ -120,7 +120,7 @@ baul_get_all_progress_info (void)
 static void
 baul_progress_info_finalize (GObject *object)
 {
-    CajaProgressInfo *info;
+    BaulProgressInfo *info;
 
     info = BAUL_PROGRESS_INFO (object);
 
@@ -137,7 +137,7 @@ baul_progress_info_finalize (GObject *object)
 static void
 baul_progress_info_dispose (GObject *object)
 {
-    CajaProgressInfo *info;
+    BaulProgressInfo *info;
 
     info = BAUL_PROGRESS_INFO (object);
 
@@ -160,7 +160,7 @@ baul_progress_info_dispose (GObject *object)
 }
 
 static void
-baul_progress_info_class_init (CajaProgressInfoClass *klass)
+baul_progress_info_class_init (BaulProgressInfoClass *klass)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
@@ -289,7 +289,7 @@ is_op_paused (ProgressWidgetState state) {
 typedef struct _ProgressWidgetData
 {
     GtkWidget *widget;
-    CajaProgressInfo *info;
+    BaulProgressInfo *info;
     GtkLabel *status;
     GtkLabel *details;
     GtkProgressBar *progress_bar;
@@ -451,7 +451,7 @@ queue_button_update_view (ProgressWidgetData *data)
 }
 
 static void
-progress_info_set_waiting(CajaProgressInfo *info, gboolean waiting)
+progress_info_set_waiting(BaulProgressInfo *info, gboolean waiting)
 {
      G_LOCK (progress_info);
      info->waiting = waiting;
@@ -661,7 +661,7 @@ op_finished (ProgressWidgetData *data)
 }
 
 static int
-do_disable_pause (CajaProgressInfo *info)
+do_disable_pause (BaulProgressInfo *info)
 {
     info->can_pause = FALSE;
 
@@ -671,7 +671,7 @@ do_disable_pause (CajaProgressInfo *info)
 }
 
 void
-baul_progress_info_disable_pause (CajaProgressInfo *info)
+baul_progress_info_disable_pause (BaulProgressInfo *info)
 {
     GSource *source = g_idle_source_new ();
     g_source_set_callback (source, (GSourceFunc)do_disable_pause, info, NULL);
@@ -707,7 +707,7 @@ widget_state_notify_paused_callback (ProgressWidgetData *data)
 }
 
 void
-baul_progress_info_get_ready (CajaProgressInfo *info)
+baul_progress_info_get_ready (BaulProgressInfo *info)
 {
     if (info->waiting) {
         G_LOCK (progress_info);
@@ -810,7 +810,7 @@ queue_button_init (ProgressWidgetData *data)
 }
 
 static GtkWidget *
-progress_widget_new (CajaProgressInfo *info)
+progress_widget_new (BaulProgressInfo *info)
 {
     ProgressWidgetData *data;
     GtkWidget *label, *progress_bar, *hbox, *vbox, *box, *btcancel, *imgcancel;
@@ -913,7 +913,7 @@ progress_widget_new (CajaProgressInfo *info)
 }
 
 static void
-handle_new_progress_info (CajaProgressInfo *info)
+handle_new_progress_info (BaulProgressInfo *info)
 {
     GtkWidget *window, *progress;
 
@@ -933,7 +933,7 @@ handle_new_progress_info (CajaProgressInfo *info)
 }
 
 static gboolean
-delayed_window_showup (CajaProgressInfo *info)
+delayed_window_showup (BaulProgressInfo *info)
 {
     if (baul_progress_info_get_is_paused (info))
     {
@@ -948,7 +948,7 @@ delayed_window_showup (CajaProgressInfo *info)
 }
 
 static void
-new_op_started (CajaProgressInfo *info)
+new_op_started (BaulProgressInfo *info)
 {
     g_signal_handlers_disconnect_by_func (info, (GCallback)new_op_started, NULL);
 
@@ -969,7 +969,7 @@ new_op_started (CajaProgressInfo *info)
 }
 
 static void
-baul_progress_info_init (CajaProgressInfo *info)
+baul_progress_info_init (BaulProgressInfo *info)
 {
     info->cancellable = g_cancellable_new ();
 
@@ -980,10 +980,10 @@ baul_progress_info_init (CajaProgressInfo *info)
     g_signal_connect (info, "started", (GCallback)new_op_started, NULL);
 }
 
-CajaProgressInfo *
+BaulProgressInfo *
 baul_progress_info_new (gboolean should_start, gboolean can_pause)
 {
-    CajaProgressInfo *info;
+    BaulProgressInfo *info;
 
     info = g_object_new (BAUL_TYPE_PROGRESS_INFO, NULL);
     info->waiting = !should_start;
@@ -992,7 +992,7 @@ baul_progress_info_new (gboolean should_start, gboolean can_pause)
 }
 
 char *
-baul_progress_info_get_status (CajaProgressInfo *info)
+baul_progress_info_get_status (BaulProgressInfo *info)
 {
     char *res;
 
@@ -1013,7 +1013,7 @@ baul_progress_info_get_status (CajaProgressInfo *info)
 }
 
 char *
-baul_progress_info_get_details (CajaProgressInfo *info)
+baul_progress_info_get_details (BaulProgressInfo *info)
 {
     char *res;
 
@@ -1034,7 +1034,7 @@ baul_progress_info_get_details (CajaProgressInfo *info)
 }
 
 double
-baul_progress_info_get_progress (CajaProgressInfo *info)
+baul_progress_info_get_progress (BaulProgressInfo *info)
 {
     double res;
 
@@ -1055,7 +1055,7 @@ baul_progress_info_get_progress (CajaProgressInfo *info)
 }
 
 void
-baul_progress_info_cancel (CajaProgressInfo *info)
+baul_progress_info_cancel (BaulProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1067,7 +1067,7 @@ baul_progress_info_cancel (CajaProgressInfo *info)
 }
 
 GCancellable *
-baul_progress_info_get_cancellable (CajaProgressInfo *info)
+baul_progress_info_get_cancellable (BaulProgressInfo *info)
 {
     GCancellable *c;
 
@@ -1081,7 +1081,7 @@ baul_progress_info_get_cancellable (CajaProgressInfo *info)
 }
 
 gboolean
-baul_progress_info_get_is_started (CajaProgressInfo *info)
+baul_progress_info_get_is_started (BaulProgressInfo *info)
 {
     gboolean res;
 
@@ -1095,7 +1095,7 @@ baul_progress_info_get_is_started (CajaProgressInfo *info)
 }
 
 gboolean
-baul_progress_info_get_is_finished (CajaProgressInfo *info)
+baul_progress_info_get_is_finished (BaulProgressInfo *info)
 {
     gboolean res;
 
@@ -1109,7 +1109,7 @@ baul_progress_info_get_is_finished (CajaProgressInfo *info)
 }
 
 gboolean
-baul_progress_info_get_is_paused (CajaProgressInfo *info)
+baul_progress_info_get_is_paused (BaulProgressInfo *info)
 {
     gboolean res;
 
@@ -1125,7 +1125,7 @@ baul_progress_info_get_is_paused (CajaProgressInfo *info)
 static gboolean
 idle_callback (gpointer data)
 {
-    CajaProgressInfo *info = data;
+    BaulProgressInfo *info = data;
     gboolean start_at_idle;
     gboolean finish_at_idle;
     gboolean changed_at_idle;
@@ -1205,7 +1205,7 @@ idle_callback (gpointer data)
 
 /* Called with lock held */
 static void
-queue_idle (CajaProgressInfo *info, gboolean now)
+queue_idle (BaulProgressInfo *info, gboolean now)
 {
     if (info->idle_source == NULL ||
             (now && !info->source_is_now))
@@ -1232,7 +1232,7 @@ queue_idle (CajaProgressInfo *info, gboolean now)
 }
 
 void
-baul_progress_info_pause (CajaProgressInfo *info)
+baul_progress_info_pause (BaulProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1245,7 +1245,7 @@ baul_progress_info_pause (CajaProgressInfo *info)
 }
 
 void
-baul_progress_info_resume (CajaProgressInfo *info)
+baul_progress_info_resume (BaulProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1258,7 +1258,7 @@ baul_progress_info_resume (CajaProgressInfo *info)
 }
 
 void
-baul_progress_info_start (CajaProgressInfo *info)
+baul_progress_info_start (BaulProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1274,7 +1274,7 @@ baul_progress_info_start (CajaProgressInfo *info)
 }
 
 void
-baul_progress_info_finish (CajaProgressInfo *info)
+baul_progress_info_finish (BaulProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1290,7 +1290,7 @@ baul_progress_info_finish (CajaProgressInfo *info)
 }
 
 void
-baul_progress_info_take_status (CajaProgressInfo *info,
+baul_progress_info_take_status (BaulProgressInfo *info,
                                 char *status)
 {
     G_LOCK (progress_info);
@@ -1312,7 +1312,7 @@ baul_progress_info_take_status (CajaProgressInfo *info,
 }
 
 void
-baul_progress_info_set_status (CajaProgressInfo *info,
+baul_progress_info_set_status (BaulProgressInfo *info,
                                const char *status)
 {
     G_LOCK (progress_info);
@@ -1331,7 +1331,7 @@ baul_progress_info_set_status (CajaProgressInfo *info,
 
 
 void
-baul_progress_info_take_details (CajaProgressInfo *info,
+baul_progress_info_take_details (BaulProgressInfo *info,
                                  char           *details)
 {
     G_LOCK (progress_info);
@@ -1353,7 +1353,7 @@ baul_progress_info_take_details (CajaProgressInfo *info,
 }
 
 void
-baul_progress_info_set_details (CajaProgressInfo *info,
+baul_progress_info_set_details (BaulProgressInfo *info,
                                 const char           *details)
 {
     G_LOCK (progress_info);
@@ -1371,7 +1371,7 @@ baul_progress_info_set_details (CajaProgressInfo *info,
 }
 
 void
-baul_progress_info_pulse_progress (CajaProgressInfo *info)
+baul_progress_info_pulse_progress (BaulProgressInfo *info)
 {
     G_LOCK (progress_info);
 
@@ -1384,7 +1384,7 @@ baul_progress_info_pulse_progress (CajaProgressInfo *info)
 }
 
 void
-baul_progress_info_set_progress (CajaProgressInfo *info,
+baul_progress_info_set_progress (BaulProgressInfo *info,
                                  double                current,
                                  double                total)
 {

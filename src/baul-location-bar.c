@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -27,7 +27,7 @@
  *
  */
 
-/* baul-location-bar.c - Location bar for Caja
+/* baul-location-bar.c - Location bar for Baul
  */
 
 #include <config.h>
@@ -62,10 +62,10 @@ static const char untranslated_go_to_label[] = N_("Go To:");
 #define LOCATION_LABEL _(untranslated_location_label)
 #define GO_TO_LABEL _(untranslated_go_to_label)
 
-struct _CajaLocationBarPrivate
+struct _BaulLocationBarPrivate
 {
     GtkLabel *label;
-    CajaEntry *entry;
+    BaulEntry *entry;
 
     char *last_location;
 
@@ -100,9 +100,9 @@ static const GtkTargetEntry drop_types [] =
     { BAUL_DND_TEXT_PLAIN_TYPE, 0, BAUL_DND_TEXT_PLAIN },
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaLocationBar, baul_location_bar, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulLocationBar, baul_location_bar, GTK_TYPE_BOX);
 
-static CajaNavigationWindow *
+static BaulNavigationWindow *
 baul_location_bar_get_window (GtkWidget *bar)
 {
     return BAUL_NAVIGATION_WINDOW (gtk_widget_get_ancestor (bar, BAUL_TYPE_WINDOW));
@@ -113,7 +113,7 @@ baul_location_bar_get_window (GtkWidget *bar)
  *
  * Get the "URI" represented by the text in the location bar.
  *
- * @bar: A CajaLocationBar.
+ * @bar: A BaulLocationBar.
  *
  * returns a newly allocated "string" containing the mangled
  * (by g_file_parse_name) text that the user typed in...maybe a URI
@@ -121,7 +121,7 @@ baul_location_bar_get_window (GtkWidget *bar)
  *
  **/
 static char *
-baul_location_bar_get_location (CajaLocationBar *bar)
+baul_location_bar_get_location (BaulLocationBar *bar)
 {
     char *user_location, *uri;
     GFile *location;
@@ -135,7 +135,7 @@ baul_location_bar_get_location (CajaLocationBar *bar)
 }
 
 static void
-emit_location_changed (CajaLocationBar *bar)
+emit_location_changed (BaulLocationBar *bar)
 {
     char *location;
 
@@ -158,9 +158,9 @@ drag_data_received_callback (GtkWidget *widget,
 {
     char **names;
     int name_count;
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
     gboolean new_windows_for_extras;
-    CajaLocationBar *self = BAUL_LOCATION_BAR (widget);
+    BaulLocationBar *self = BAUL_LOCATION_BAR (widget);
 
     g_assert (data != NULL);
     g_assert (callback_data == NULL);
@@ -222,10 +222,10 @@ drag_data_received_callback (GtkWidget *widget,
 
     if (new_windows_for_extras)
     {
-        CajaApplication *application;
+        BaulApplication *application;
         GdkScreen *screen;
         int i;
-        CajaWindow *new_window = NULL;
+        BaulWindow *new_window = NULL;
         GFile *location = NULL;
 
         application = BAUL_WINDOW (window)->application;
@@ -254,7 +254,7 @@ drag_data_get_callback (GtkWidget *widget,
                         guint32 time,
                         gpointer callback_data)
 {
-    CajaLocationBar *self;
+    BaulLocationBar *self;
     char *entry_text;
 
     g_assert (selection_data != NULL);
@@ -317,9 +317,9 @@ static gboolean
 label_button_pressed_callback (GtkWidget             *widget,
                                GdkEventButton        *event)
 {
-    CajaNavigationWindow *window;
-    CajaWindowSlot       *slot;
-    CajaView             *view;
+    BaulNavigationWindow *window;
+    BaulWindowSlot       *slot;
+    BaulView             *view;
     GtkWidget                *label;
 
     if (event->button != 3)
@@ -347,7 +347,7 @@ static void
 editable_activate_callback (GtkEntry *entry,
                             gpointer user_data)
 {
-    CajaLocationBar *self = user_data;
+    BaulLocationBar *self = user_data;
     const char *entry_text;
 
     entry_text = gtk_entry_get_text (entry);
@@ -364,7 +364,7 @@ editable_activate_callback (GtkEntry *entry,
  *
  **/
 static void
-baul_location_bar_update_label (CajaLocationBar *bar)
+baul_location_bar_update_label (BaulLocationBar *bar)
 {
     const char *current_text;
     GFile *location;
@@ -403,7 +403,7 @@ editable_changed_callback (GtkEntry *entry,
 }
 
 void
-baul_location_bar_activate (CajaLocationBar *bar)
+baul_location_bar_activate (BaulLocationBar *bar)
 {
     /* Put the keyboard focus in the text field when switching to this mode,
      * and select all text for easy overtyping
@@ -413,7 +413,7 @@ baul_location_bar_activate (CajaLocationBar *bar)
 }
 
 static void
-baul_location_bar_cancel (CajaLocationBar *bar)
+baul_location_bar_cancel (BaulLocationBar *bar)
 {
     char *last_location;
 
@@ -424,7 +424,7 @@ baul_location_bar_cancel (CajaLocationBar *bar)
 static void
 finalize (GObject *object)
 {
-    CajaLocationBar *bar;
+    BaulLocationBar *bar;
 
     bar = BAUL_LOCATION_BAR (object);
 
@@ -442,7 +442,7 @@ finalize (GObject *object)
 }
 
 static void
-baul_location_bar_class_init (CajaLocationBarClass *klass)
+baul_location_bar_class_init (BaulLocationBarClass *klass)
  {
     GObjectClass *gobject_class;
     GtkBindingSet *binding_set;
@@ -456,7 +456,7 @@ baul_location_bar_class_init (CajaLocationBarClass *klass)
             ("cancel",
             G_TYPE_FROM_CLASS (klass),
             G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-            G_STRUCT_OFFSET (CajaLocationBarClass,
+            G_STRUCT_OFFSET (BaulLocationBarClass,
                              cancel),
             NULL, NULL,
             g_cclosure_marshal_VOID__VOID,
@@ -475,7 +475,7 @@ baul_location_bar_class_init (CajaLocationBarClass *klass)
 }
 
 static void
-baul_location_bar_init (CajaLocationBar *bar)
+baul_location_bar_init (BaulLocationBar *bar)
 {
     GtkWidget *label;
     GtkWidget *entry;
@@ -538,10 +538,10 @@ baul_location_bar_init (CajaLocationBar *bar)
 }
 
 GtkWidget *
-baul_location_bar_new (CajaNavigationWindowPane *pane)
+baul_location_bar_new (BaulNavigationWindowPane *pane)
 {
     GtkWidget *bar;
-    CajaLocationBar *location_bar;
+    BaulLocationBar *location_bar;
 
     bar = gtk_widget_new (BAUL_TYPE_LOCATION_BAR, NULL);
     location_bar = BAUL_LOCATION_BAR (bar);
@@ -556,7 +556,7 @@ baul_location_bar_new (CajaNavigationWindowPane *pane)
 }
 
 void
-baul_location_bar_set_location (CajaLocationBar *bar,
+baul_location_bar_set_location (BaulLocationBar *bar,
                                 const char *location)
 {
     g_assert (location != NULL);
@@ -615,7 +615,7 @@ override_background_color (GtkWidget *widget,
 
 /* change background color based on activity state */
 void
-baul_location_bar_set_active (CajaLocationBar *location_bar, gboolean is_active)
+baul_location_bar_set_active (BaulLocationBar *location_bar, gboolean is_active)
 {
     GtkStyleContext *style;
     GdkRGBA color;
@@ -653,8 +653,8 @@ baul_location_bar_set_active (CajaLocationBar *location_bar, gboolean is_active)
     }
 }
 
-CajaEntry *
-baul_location_bar_get_entry (CajaLocationBar *location_bar)
+BaulEntry *
+baul_location_bar_get_entry (BaulLocationBar *location_bar)
 {
     return location_bar->details->entry;
 }

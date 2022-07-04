@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-directory.c: Caja directory model.
+   baul-directory.c: Baul directory model.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -55,17 +55,17 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static GHashTable *directories;
 
 static void               baul_directory_finalize         (GObject                *object);
-static CajaDirectory *baul_directory_new              (GFile                  *location);
-static char *             real_get_name_for_self_as_new_file  (CajaDirectory      *directory);
-static GList *            real_get_file_list                  (CajaDirectory      *directory);
-static gboolean		  real_is_editable                    (CajaDirectory      *directory);
-static void               set_directory_location              (CajaDirectory      *directory,
+static BaulDirectory *baul_directory_new              (GFile                  *location);
+static char *             real_get_name_for_self_as_new_file  (BaulDirectory      *directory);
+static GList *            real_get_file_list                  (BaulDirectory      *directory);
+static gboolean		  real_is_editable                    (BaulDirectory      *directory);
+static void               set_directory_location              (BaulDirectory      *directory,
         GFile                  *location);
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaDirectory, baul_directory, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulDirectory, baul_directory, G_TYPE_OBJECT)
 
 static void
-baul_directory_class_init (CajaDirectoryClass *klass)
+baul_directory_class_init (BaulDirectoryClass *klass)
 {
     GObjectClass *object_class;
 
@@ -77,7 +77,7 @@ baul_directory_class_init (CajaDirectoryClass *klass)
         g_signal_new ("files_added",
                       G_TYPE_FROM_CLASS (object_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaDirectoryClass, files_added),
+                      G_STRUCT_OFFSET (BaulDirectoryClass, files_added),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__POINTER,
                       G_TYPE_NONE, 1, G_TYPE_POINTER);
@@ -85,7 +85,7 @@ baul_directory_class_init (CajaDirectoryClass *klass)
         g_signal_new ("files_changed",
                       G_TYPE_FROM_CLASS (object_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaDirectoryClass, files_changed),
+                      G_STRUCT_OFFSET (BaulDirectoryClass, files_changed),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__POINTER,
                       G_TYPE_NONE, 1, G_TYPE_POINTER);
@@ -93,7 +93,7 @@ baul_directory_class_init (CajaDirectoryClass *klass)
         g_signal_new ("done_loading",
                       G_TYPE_FROM_CLASS (object_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaDirectoryClass, done_loading),
+                      G_STRUCT_OFFSET (BaulDirectoryClass, done_loading),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -101,7 +101,7 @@ baul_directory_class_init (CajaDirectoryClass *klass)
         g_signal_new ("load_error",
                       G_TYPE_FROM_CLASS (object_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaDirectoryClass, load_error),
+                      G_STRUCT_OFFSET (BaulDirectoryClass, load_error),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__POINTER,
                       G_TYPE_NONE, 1, G_TYPE_POINTER);
@@ -112,7 +112,7 @@ baul_directory_class_init (CajaDirectoryClass *klass)
 }
 
 static void
-baul_directory_init (CajaDirectory *directory)
+baul_directory_init (BaulDirectory *directory)
 {
     directory->details = baul_directory_get_instance_private (directory);
     directory->details->file_hash = g_hash_table_new (g_str_hash, g_str_equal);
@@ -122,8 +122,8 @@ baul_directory_init (CajaDirectory *directory)
     directory->details->free_space = (guint64)-1;
 }
 
-CajaDirectory *
-baul_directory_ref (CajaDirectory *directory)
+BaulDirectory *
+baul_directory_ref (BaulDirectory *directory)
 {
     if (directory == NULL)
     {
@@ -137,7 +137,7 @@ baul_directory_ref (CajaDirectory *directory)
 }
 
 void
-baul_directory_unref (CajaDirectory *directory)
+baul_directory_unref (BaulDirectory *directory)
 {
     if (directory == NULL)
     {
@@ -152,7 +152,7 @@ baul_directory_unref (CajaDirectory *directory)
 static void
 baul_directory_finalize (GObject *object)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     directory = BAUL_DIRECTORY (object);
 
@@ -164,7 +164,7 @@ baul_directory_finalize (GObject *object)
 
     if (directory->details->monitor_list != NULL)
     {
-        g_warning ("destroying a CajaDirectory while it's being monitored");
+        g_warning ("destroying a BaulDirectory while it's being monitored");
         g_list_free_full (directory->details->monitor_list, g_free);
     }
 
@@ -203,7 +203,7 @@ baul_directory_finalize (GObject *object)
 }
 
 void
-emit_change_signals_for_all_files (CajaDirectory *directory)
+emit_change_signals_for_all_files (BaulDirectory *directory)
 {
     GList *files;
 
@@ -222,7 +222,7 @@ emit_change_signals_for_all_files (CajaDirectory *directory)
 static void
 collect_all_directories (gpointer key, gpointer value, gpointer callback_data)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GList **dirs;
 
     directory = BAUL_DIRECTORY (value);
@@ -235,7 +235,7 @@ void
 emit_change_signals_for_all_files_in_all_directories (void)
 {
     GList *dirs, *l;
-    CajaDirectory *directory = NULL;
+    BaulDirectory *directory = NULL;
 
     dirs = NULL;
     g_hash_table_foreach (directories,
@@ -261,10 +261,10 @@ emit_change_signals_for_all_files_in_all_directories (void)
  * Returns a referenced object, not a floating one. Unref when finished.
  * If two windows are viewing the same uri, the directory object is shared.
  */
-CajaDirectory *
+BaulDirectory *
 baul_directory_get_internal (GFile *location, gboolean create)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     /* Create the hash table first time through. */
     if (directories == NULL) {
@@ -298,7 +298,7 @@ baul_directory_get_internal (GFile *location, gboolean create)
     return directory;
 }
 
-CajaDirectory *
+BaulDirectory *
 baul_directory_get (GFile *location)
 {
     if (location == NULL)
@@ -309,7 +309,7 @@ baul_directory_get (GFile *location)
     return baul_directory_get_internal (location, TRUE);
 }
 
-CajaDirectory *
+BaulDirectory *
 baul_directory_get_existing (GFile *location)
 {
     if (location == NULL)
@@ -321,10 +321,10 @@ baul_directory_get_existing (GFile *location)
 }
 
 
-CajaDirectory *
+BaulDirectory *
 baul_directory_get_by_uri (const char *uri)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GFile *location;
 
     if (uri == NULL)
@@ -339,11 +339,11 @@ baul_directory_get_by_uri (const char *uri)
     return directory;
 }
 
-CajaDirectory *
-baul_directory_get_for_file (CajaFile *file)
+BaulDirectory *
+baul_directory_get_for_file (BaulFile *file)
 {
     char *uri;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     g_return_val_if_fail (BAUL_IS_FILE (file), NULL);
 
@@ -353,12 +353,12 @@ baul_directory_get_for_file (CajaFile *file)
     return directory;
 }
 
-/* Returns a reffed CajaFile object for this directory.
+/* Returns a reffed BaulFile object for this directory.
  */
-CajaFile *
-baul_directory_get_corresponding_file (CajaDirectory *directory)
+BaulFile *
+baul_directory_get_corresponding_file (BaulDirectory *directory)
 {
-    CajaFile *file;
+    BaulFile *file;
 
     file = baul_directory_get_existing_corresponding_file (directory);
     if (file == NULL)
@@ -373,13 +373,13 @@ baul_directory_get_corresponding_file (CajaDirectory *directory)
     return file;
 }
 
-/* Returns a reffed CajaFile object for this directory, but only if the
- * CajaFile object has already been created.
+/* Returns a reffed BaulFile object for this directory, but only if the
+ * BaulFile object has already been created.
  */
-CajaFile *
-baul_directory_get_existing_corresponding_file (CajaDirectory *directory)
+BaulFile *
+baul_directory_get_existing_corresponding_file (BaulDirectory *directory)
 {
-    CajaFile *file;
+    BaulFile *file;
     char *uri;
 
     file = directory->details->as_file;
@@ -399,10 +399,10 @@ baul_directory_get_existing_corresponding_file (CajaDirectory *directory)
  *
  * Get a name to display for the file representing this
  * directory. This is called only when there's no VFS
- * directory for this CajaDirectory.
+ * directory for this BaulDirectory.
  */
 char *
-baul_directory_get_name_for_self_as_new_file (CajaDirectory *directory)
+baul_directory_get_name_for_self_as_new_file (BaulDirectory *directory)
 {
     g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), NULL);
 
@@ -413,7 +413,7 @@ baul_directory_get_name_for_self_as_new_file (CajaDirectory *directory)
 }
 
 static char *
-real_get_name_for_self_as_new_file (CajaDirectory *directory)
+real_get_name_for_self_as_new_file (BaulDirectory *directory)
 {
     char *directory_uri;
     char *name, *colon;
@@ -435,7 +435,7 @@ real_get_name_for_self_as_new_file (CajaDirectory *directory)
 }
 
 char *
-baul_directory_get_uri (CajaDirectory *directory)
+baul_directory_get_uri (BaulDirectory *directory)
 {
     g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), NULL);
 
@@ -443,17 +443,17 @@ baul_directory_get_uri (CajaDirectory *directory)
 }
 
 GFile *
-baul_directory_get_location (CajaDirectory  *directory)
+baul_directory_get_location (BaulDirectory  *directory)
 {
     g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), NULL);
 
     return g_object_ref (directory->details->location);
 }
 
-static CajaDirectory *
+static BaulDirectory *
 baul_directory_new (GFile *location)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     char *uri;
 
     uri = g_file_get_uri (location);
@@ -483,7 +483,7 @@ baul_directory_new (GFile *location)
 }
 
 gboolean
-baul_directory_is_local (CajaDirectory *directory)
+baul_directory_is_local (BaulDirectory *directory)
 {
     g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
 
@@ -497,7 +497,7 @@ baul_directory_is_local (CajaDirectory *directory)
 }
 
 gboolean
-baul_directory_is_in_trash (CajaDirectory *directory)
+baul_directory_is_in_trash (BaulDirectory *directory)
 {
     g_assert (BAUL_IS_DIRECTORY (directory));
 
@@ -510,7 +510,7 @@ baul_directory_is_in_trash (CajaDirectory *directory)
 }
 
 gboolean
-baul_directory_are_all_files_seen (CajaDirectory *directory)
+baul_directory_are_all_files_seen (BaulDirectory *directory)
 {
     g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
 
@@ -523,7 +523,7 @@ baul_directory_are_all_files_seen (CajaDirectory *directory)
 }
 
 static void
-add_to_hash_table (CajaDirectory *directory, CajaFile *file, GList *node)
+add_to_hash_table (BaulDirectory *directory, BaulFile *file, GList *node)
 {
     const char *name;
 
@@ -536,7 +536,7 @@ add_to_hash_table (CajaDirectory *directory, CajaFile *file, GList *node)
 }
 
 static GList *
-extract_from_hash_table (CajaDirectory *directory, CajaFile *file)
+extract_from_hash_table (BaulDirectory *directory, BaulFile *file)
 {
     const char *name;
     GList *node;
@@ -555,7 +555,7 @@ extract_from_hash_table (CajaDirectory *directory, CajaFile *file)
 }
 
 void
-baul_directory_add_file (CajaDirectory *directory, CajaFile *file)
+baul_directory_add_file (BaulDirectory *directory, BaulFile *file)
 {
     GList *node;
     gboolean add_to_work_queue;
@@ -595,7 +595,7 @@ baul_directory_add_file (CajaDirectory *directory, CajaFile *file)
 }
 
 void
-baul_directory_remove_file (CajaDirectory *directory, CajaFile *file)
+baul_directory_remove_file (BaulDirectory *directory, BaulFile *file)
 {
     GList *node;
 
@@ -628,16 +628,16 @@ baul_directory_remove_file (CajaDirectory *directory, CajaFile *file)
 }
 
 GList *
-baul_directory_begin_file_name_change (CajaDirectory *directory,
-                                       CajaFile *file)
+baul_directory_begin_file_name_change (BaulDirectory *directory,
+                                       BaulFile *file)
 {
     /* Find the list node in the hash table. */
     return extract_from_hash_table (directory, file);
 }
 
 void
-baul_directory_end_file_name_change (CajaDirectory *directory,
-                                     CajaFile *file,
+baul_directory_end_file_name_change (BaulDirectory *directory,
+                                     BaulFile *file,
                                      GList *node)
 {
     /* Add the list node to the hash table. */
@@ -647,8 +647,8 @@ baul_directory_end_file_name_change (CajaDirectory *directory,
     }
 }
 
-CajaFile *
-baul_directory_find_file_by_name (CajaDirectory *directory,
+BaulFile *
+baul_directory_find_file_by_name (BaulDirectory *directory,
                                   const char *name)
 {
     GList *node;
@@ -662,7 +662,7 @@ baul_directory_find_file_by_name (CajaDirectory *directory,
 }
 
 void
-baul_directory_emit_files_added (CajaDirectory *directory,
+baul_directory_emit_files_added (BaulDirectory *directory,
                                  GList *added_files)
 {
     if (added_files != NULL)
@@ -674,7 +674,7 @@ baul_directory_emit_files_added (CajaDirectory *directory,
 }
 
 void
-baul_directory_emit_files_changed (CajaDirectory *directory,
+baul_directory_emit_files_changed (BaulDirectory *directory,
                                    GList *changed_files)
 {
     if (changed_files != NULL)
@@ -686,7 +686,7 @@ baul_directory_emit_files_changed (CajaDirectory *directory,
 }
 
 void
-baul_directory_emit_change_signals (CajaDirectory *directory,
+baul_directory_emit_change_signals (BaulDirectory *directory,
                                     GList *changed_files)
 {
     GList *p;
@@ -699,14 +699,14 @@ baul_directory_emit_change_signals (CajaDirectory *directory,
 }
 
 void
-baul_directory_emit_done_loading (CajaDirectory *directory)
+baul_directory_emit_done_loading (BaulDirectory *directory)
 {
     g_signal_emit (directory,
                    signals[DONE_LOADING], 0);
 }
 
 void
-baul_directory_emit_load_error (CajaDirectory *directory,
+baul_directory_emit_load_error (BaulDirectory *directory,
                                 GError *error)
 {
     g_signal_emit (directory,
@@ -715,7 +715,7 @@ baul_directory_emit_load_error (CajaDirectory *directory,
 }
 
 /* Return a directory object for this one's parent. */
-static CajaDirectory *
+static BaulDirectory *
 get_parent_directory (GFile *location)
 {
     GFile *parent;
@@ -723,7 +723,7 @@ get_parent_directory (GFile *location)
     parent = g_file_get_parent (location);
     if (parent)
     {
-        CajaDirectory *directory;
+        BaulDirectory *directory;
 
         directory = baul_directory_get_internal (parent, TRUE);
         g_object_unref (parent);
@@ -735,7 +735,7 @@ get_parent_directory (GFile *location)
 /* If a directory object exists for this one's parent, then
  * return it, otherwise return NULL.
  */
-static CajaDirectory *
+static BaulDirectory *
 get_parent_directory_if_exists (GFile *location)
 {
     GFile *parent;
@@ -743,7 +743,7 @@ get_parent_directory_if_exists (GFile *location)
     parent = g_file_get_parent (location);
     if (parent)
     {
-        CajaDirectory *directory;
+        BaulDirectory *directory;
 
         directory = baul_directory_get_internal (parent, FALSE);
         g_object_unref (parent);
@@ -776,10 +776,10 @@ call_files_added_free_list (gpointer key, gpointer value, gpointer user_data)
 }
 
 static void
-call_files_changed_common (CajaDirectory *directory, GList *file_list)
+call_files_changed_common (BaulDirectory *directory, GList *file_list)
 {
     GList *node;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     for (node = file_list; node != NULL; node = node->next)
     {
@@ -817,7 +817,7 @@ call_files_changed_unref_free_list (gpointer key, gpointer value, gpointer user_
 static void
 call_get_file_info_free_list (gpointer key, gpointer value, gpointer user_data)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GList *files;
 
     g_assert (BAUL_IS_DIRECTORY (key));
@@ -843,7 +843,7 @@ invalidate_count_and_unref (gpointer key, gpointer value, gpointer user_data)
 }
 
 static void
-collect_parent_directories (GHashTable *hash_table, CajaDirectory *directory)
+collect_parent_directories (GHashTable *hash_table, BaulDirectory *directory)
 {
     g_assert (hash_table != NULL);
     g_assert (BAUL_IS_DIRECTORY (directory));
@@ -861,9 +861,9 @@ baul_directory_notify_files_added (GList *files)
     GHashTable *added_lists;
     GList *p;
     GHashTable *parent_directories;
-    CajaFile *file;
+    BaulFile *file;
     GFile *parent;
-    CajaDirectory *directory = NULL;
+    BaulDirectory *directory = NULL;
     GFile *location = NULL;
 
     /* Make a list of added files in each directory. */
@@ -934,7 +934,7 @@ baul_directory_notify_files_added (GList *files)
         baul_directory_unref (directory);
     }
 
-    /* Now get file info for the new files. This creates CajaFile
+    /* Now get file info for the new files. This creates BaulFile
      * objects for the new files, and sends out a files_added signal.
      */
     g_hash_table_foreach (added_lists, call_get_file_info_free_list, NULL);
@@ -951,7 +951,7 @@ baul_directory_notify_files_changed (GList *files)
     GHashTable *changed_lists;
     GList *node;
     GFile *location = NULL;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     /* Make a list of changed files in each directory. */
     changed_lists = g_hash_table_new (NULL, NULL);
@@ -989,8 +989,8 @@ baul_directory_notify_files_removed (GList *files)
     GHashTable *changed_lists;
     GList *p;
     GHashTable *parent_directories;
-    CajaDirectory *directory = NULL;
-    CajaFile *file = NULL;
+    BaulDirectory *directory = NULL;
+    BaulFile *file = NULL;
     GFile *location = NULL;
 
     /* Make a list of changed files in each directory. */
@@ -1034,7 +1034,7 @@ baul_directory_notify_files_removed (GList *files)
 }
 
 static void
-set_directory_location (CajaDirectory *directory,
+set_directory_location (BaulDirectory *directory,
                         GFile *location)
 {
     if (directory->details->location)
@@ -1046,7 +1046,7 @@ set_directory_location (CajaDirectory *directory,
 }
 
 static void
-change_directory_location (CajaDirectory *directory,
+change_directory_location (BaulDirectory *directory,
                            GFile *new_location)
 {
     /* I believe it's impossible for a self-owned file/directory
@@ -1074,7 +1074,7 @@ typedef struct
 static void
 collect_directories_by_container (gpointer key, gpointer value, gpointer callback_data)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     CollectData *collect_data;
     GFile *location;
 
@@ -1099,7 +1099,7 @@ baul_directory_moved_internal (GFile *old_location,
     CollectData collection;
     GList *node, *affected_files;
     char *relative_path;
-    CajaDirectory *directory = NULL;
+    BaulDirectory *directory = NULL;
     GFile *new_directory_location = NULL;
 
     collection.container = old_location;
@@ -1165,7 +1165,7 @@ baul_directory_moved (const char *old_uri,
     GHashTable *hash;
     GFile *old_location;
     GFile *new_location;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     hash = g_hash_table_new (NULL, NULL);
 
@@ -1194,13 +1194,13 @@ baul_directory_notify_files_moved (GList *file_pairs)
 {
     GList *p, *affected_files, *node;
     GFilePair *pair;
-    CajaFile *file;
-    CajaDirectory *old_directory, *new_directory;
+    BaulFile *file;
+    BaulDirectory *old_directory, *new_directory;
     GHashTable *parent_directories;
     GList *new_files_list, *unref_list;
     GHashTable *added_lists, *changed_lists;
     char *name;
-    CajaFileAttributes cancel_attributes;
+    BaulFileAttributes cancel_attributes;
     GFile *to_location = NULL;
     GFile *from_location = NULL;
 
@@ -1323,14 +1323,14 @@ baul_directory_schedule_position_set (GList *position_setting_list)
     GList *p;
     char str[64];
     time_t now;
-    const CajaFileChangesQueuePosition *item = NULL;
-    CajaFile *file = NULL;
+    const BaulFileChangesQueuePosition *item = NULL;
+    BaulFile *file = NULL;
 
     time (&now);
 
     for (p = position_setting_list; p != NULL; p = p->next)
     {
-        item = (CajaFileChangesQueuePosition *) p->data;
+        item = (BaulFileChangesQueuePosition *) p->data;
 
         file = baul_file_get (item->location);
 
@@ -1382,8 +1382,8 @@ baul_directory_schedule_position_set (GList *position_setting_list)
 }
 
 gboolean
-baul_directory_contains_file (CajaDirectory *directory,
-                              CajaFile *file)
+baul_directory_contains_file (BaulDirectory *directory,
+                              BaulFile *file)
 {
     g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
     g_return_val_if_fail (BAUL_IS_FILE (file), FALSE);
@@ -1400,10 +1400,10 @@ baul_directory_contains_file (CajaDirectory *directory,
 }
 
 void
-baul_directory_call_when_ready (CajaDirectory *directory,
-                                CajaFileAttributes file_attributes,
+baul_directory_call_when_ready (BaulDirectory *directory,
+                                BaulFileAttributes file_attributes,
                                 gboolean wait_for_all_files,
-                                CajaDirectoryCallback callback,
+                                BaulDirectoryCallback callback,
                                 gpointer callback_data)
 {
     g_return_if_fail (BAUL_IS_DIRECTORY (directory));
@@ -1420,8 +1420,8 @@ baul_directory_call_when_ready (CajaDirectory *directory,
 }
 
 void
-baul_directory_cancel_callback (CajaDirectory *directory,
-                                CajaDirectoryCallback callback,
+baul_directory_cancel_callback (BaulDirectory *directory,
+                                BaulDirectoryCallback callback,
                                 gpointer callback_data)
 {
     g_return_if_fail (BAUL_IS_DIRECTORY (directory));
@@ -1434,11 +1434,11 @@ baul_directory_cancel_callback (CajaDirectory *directory,
 }
 
 void
-baul_directory_file_monitor_add (CajaDirectory *directory,
+baul_directory_file_monitor_add (BaulDirectory *directory,
                                  gconstpointer client,
                                  gboolean monitor_hidden_files,
-                                 CajaFileAttributes file_attributes,
-                                 CajaDirectoryCallback callback,
+                                 BaulFileAttributes file_attributes,
+                                 BaulDirectoryCallback callback,
                                  gpointer callback_data)
 {
     g_return_if_fail (BAUL_IS_DIRECTORY (directory));
@@ -1455,7 +1455,7 @@ baul_directory_file_monitor_add (CajaDirectory *directory,
 }
 
 void
-baul_directory_file_monitor_remove (CajaDirectory *directory,
+baul_directory_file_monitor_remove (BaulDirectory *directory,
                                     gconstpointer client)
 {
     g_return_if_fail (BAUL_IS_DIRECTORY (directory));
@@ -1468,7 +1468,7 @@ baul_directory_file_monitor_remove (CajaDirectory *directory,
 }
 
 void
-baul_directory_force_reload (CajaDirectory *directory)
+baul_directory_force_reload (BaulDirectory *directory)
 {
     g_return_if_fail (BAUL_IS_DIRECTORY (directory));
 
@@ -1479,7 +1479,7 @@ baul_directory_force_reload (CajaDirectory *directory)
 }
 
 gboolean
-baul_directory_is_not_empty (CajaDirectory *directory)
+baul_directory_is_not_empty (BaulDirectory *directory)
 {
     g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
 
@@ -1494,7 +1494,7 @@ baul_directory_is_not_empty (CajaDirectory *directory)
 static gboolean
 is_tentative (gpointer data, gpointer callback_data)
 {
-    CajaFile *file;
+    BaulFile *file;
 
     g_assert (callback_data == NULL);
 
@@ -1507,7 +1507,7 @@ is_tentative (gpointer data, gpointer callback_data)
 }
 
 GList *
-baul_directory_get_file_list (CajaDirectory *directory)
+baul_directory_get_file_list (BaulDirectory *directory)
 {
     if (BAUL_DIRECTORY_GET_CLASS(directory)->get_file_list == NULL)
     {
@@ -1518,7 +1518,7 @@ baul_directory_get_file_list (CajaDirectory *directory)
 }
 
 static GList *
-real_get_file_list (CajaDirectory *directory)
+real_get_file_list (BaulDirectory *directory)
 {
     GList *tentative_files, *non_tentative_files;
 
@@ -1532,13 +1532,13 @@ real_get_file_list (CajaDirectory *directory)
 }
 
 static gboolean
-real_is_editable (CajaDirectory *directory)
+real_is_editable (BaulDirectory *directory)
 {
     return TRUE;
 }
 
 gboolean
-baul_directory_is_editable (CajaDirectory *directory)
+baul_directory_is_editable (BaulDirectory *directory)
 {
     if (BAUL_DIRECTORY_GET_CLASS(directory)->is_editable == NULL)
     {
@@ -1549,7 +1549,7 @@ baul_directory_is_editable (CajaDirectory *directory)
 }
 
 GList *
-baul_directory_match_pattern (CajaDirectory *directory, const char *pattern)
+baul_directory_match_pattern (BaulDirectory *directory, const char *pattern)
 {
     GList *files, *l, *ret;
     GPatternSpec *spec;
@@ -1561,7 +1561,7 @@ baul_directory_match_pattern (CajaDirectory *directory, const char *pattern)
     files = baul_directory_get_file_list (directory);
     for (l = files; l; l = l->next)
     {
-        CajaFile *file;
+        BaulFile *file;
         char *name;
 
         file = BAUL_FILE (l->data);
@@ -1632,7 +1632,7 @@ baul_directory_list_copy (GList *list)
 }
 
 static int
-compare_by_uri (CajaDirectory *a, CajaDirectory *b)
+compare_by_uri (BaulDirectory *a, BaulDirectory *b)
 {
     char *uri_a, *uri_b;
     int res;
@@ -1667,7 +1667,7 @@ baul_directory_list_sort_by_uri (GList *list)
 }
 
 gboolean
-baul_directory_is_desktop_directory (CajaDirectory   *directory)
+baul_directory_is_desktop_directory (BaulDirectory   *directory)
 {
     if (directory->details->location == NULL)
     {
@@ -1686,7 +1686,7 @@ static int data_dummy;
 static gboolean got_files_flag;
 
 static void
-got_files_callback (CajaDirectory *directory, GList *files, gpointer callback_data)
+got_files_callback (BaulDirectory *directory, GList *files, gpointer callback_data)
 {
     g_assert (BAUL_IS_DIRECTORY (directory));
     g_assert (g_list_length (files) > 10);
@@ -1695,7 +1695,7 @@ got_files_callback (CajaDirectory *directory, GList *files, gpointer callback_da
     got_files_flag = TRUE;
 }
 
-/* Return the number of extant CajaDirectories */
+/* Return the number of extant BaulDirectories */
 int
 baul_directory_number_outstanding (void)
 {
@@ -1705,8 +1705,8 @@ baul_directory_number_outstanding (void)
 void
 baul_self_check_directory (void)
 {
-    CajaDirectory *directory;
-    CajaFile *file;
+    BaulDirectory *directory;
+    BaulFile *file;
 
     directory = baul_directory_get_by_uri ("file:///etc");
     file = baul_file_get_by_uri ("file:///etc/passwd");

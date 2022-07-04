@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-sidebar-provider.c: register and create CajaSidebars
+   baul-sidebar-provider.c: register and create BaulSidebars
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -39,7 +39,7 @@ baul_sidebar_provider_get_type (void)
     {
         const GTypeInfo info =
         {
-            sizeof (CajaSidebarProviderIface),
+            sizeof (BaulSidebarProviderIface),
             baul_sidebar_provider_base_init,
             NULL,
             NULL,
@@ -51,7 +51,7 @@ baul_sidebar_provider_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaSidebarProvider",
+                                       "BaulSidebarProvider",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -59,9 +59,9 @@ baul_sidebar_provider_get_type (void)
     return type;
 }
 
-CajaSidebar *
-baul_sidebar_provider_create (CajaSidebarProvider *provider,
-                              CajaWindowInfo  *window)
+BaulSidebar *
+baul_sidebar_provider_create (BaulSidebarProvider *provider,
+                              BaulWindowInfo  *window)
 {
     return (* BAUL_SIDEBAR_PROVIDER_GET_IFACE (provider)->create) (provider, window);
 }

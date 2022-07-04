@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-navigation-window-pane.h: Caja navigation window pane
+   baul-navigation-window-pane.h: Baul navigation window pane
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -29,23 +29,23 @@
 #include "baul-navigation-window-slot.h"
 
 #define BAUL_TYPE_NAVIGATION_WINDOW_PANE     (baul_navigation_window_pane_get_type())
-#define BAUL_NAVIGATION_WINDOW_PANE_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPaneClass))
-#define BAUL_NAVIGATION_WINDOW_PANE(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPane))
+#define BAUL_NAVIGATION_WINDOW_PANE_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_NAVIGATION_WINDOW_PANE, BaulNavigationWindowPaneClass))
+#define BAUL_NAVIGATION_WINDOW_PANE(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NAVIGATION_WINDOW_PANE, BaulNavigationWindowPane))
 #define BAUL_IS_NAVIGATION_WINDOW_PANE(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_NAVIGATION_WINDOW_PANE))
 #define BAUL_IS_NAVIGATION_WINDOW_PANE_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_NAVIGATION_WINDOW_PANE))
-#define BAUL_NAVIGATION_WINDOW_PANE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPaneClass))
+#define BAUL_NAVIGATION_WINDOW_PANE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NAVIGATION_WINDOW_PANE, BaulNavigationWindowPaneClass))
 
-typedef struct _CajaNavigationWindowPaneClass CajaNavigationWindowPaneClass;
-typedef struct _CajaNavigationWindowPane      CajaNavigationWindowPane;
+typedef struct _BaulNavigationWindowPaneClass BaulNavigationWindowPaneClass;
+typedef struct _BaulNavigationWindowPane      BaulNavigationWindowPane;
 
-struct _CajaNavigationWindowPaneClass
+struct _BaulNavigationWindowPaneClass
 {
-    CajaWindowPaneClass parent_class;
+    BaulWindowPaneClass parent_class;
 };
 
-struct _CajaNavigationWindowPane
+struct _BaulNavigationWindowPane
 {
-    CajaWindowPane parent;
+    BaulWindowPane parent;
 
     GtkWidget *widget;
 
@@ -69,25 +69,25 @@ struct _CajaNavigationWindowPane
 
 GType    baul_navigation_window_pane_get_type (void);
 
-CajaNavigationWindowPane* baul_navigation_window_pane_new (CajaWindow *window);
+BaulNavigationWindowPane* baul_navigation_window_pane_new (BaulWindow *window);
 
 /* location bar */
-void     baul_navigation_window_pane_setup             (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_setup             (BaulNavigationWindowPane *pane);
 
-void     baul_navigation_window_pane_hide_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference);
-void     baul_navigation_window_pane_show_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference);
-gboolean baul_navigation_window_pane_location_bar_showing (CajaNavigationWindowPane *pane);
-void     baul_navigation_window_pane_hide_path_bar (CajaNavigationWindowPane *pane);
-void     baul_navigation_window_pane_show_path_bar (CajaNavigationWindowPane *pane);
-gboolean baul_navigation_window_pane_path_bar_showing (CajaNavigationWindowPane *pane);
-gboolean baul_navigation_window_pane_search_bar_showing (CajaNavigationWindowPane *pane);
-void     baul_navigation_window_pane_set_bar_mode  (CajaNavigationWindowPane *pane, CajaBarMode mode);
-void     baul_navigation_window_pane_show_location_bar_temporarily (CajaNavigationWindowPane *pane);
-void     baul_navigation_window_pane_show_navigation_bar_temporarily (CajaNavigationWindowPane *pane);
-void     baul_navigation_window_pane_always_use_location_entry (CajaNavigationWindowPane *pane, gboolean use_entry);
-gboolean baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_hide_location_bar (BaulNavigationWindowPane *pane, gboolean save_preference);
+void     baul_navigation_window_pane_show_location_bar (BaulNavigationWindowPane *pane, gboolean save_preference);
+gboolean baul_navigation_window_pane_location_bar_showing (BaulNavigationWindowPane *pane);
+void     baul_navigation_window_pane_hide_path_bar (BaulNavigationWindowPane *pane);
+void     baul_navigation_window_pane_show_path_bar (BaulNavigationWindowPane *pane);
+gboolean baul_navigation_window_pane_path_bar_showing (BaulNavigationWindowPane *pane);
+gboolean baul_navigation_window_pane_search_bar_showing (BaulNavigationWindowPane *pane);
+void     baul_navigation_window_pane_set_bar_mode  (BaulNavigationWindowPane *pane, BaulBarMode mode);
+void     baul_navigation_window_pane_show_location_bar_temporarily (BaulNavigationWindowPane *pane);
+void     baul_navigation_window_pane_show_navigation_bar_temporarily (BaulNavigationWindowPane *pane);
+void     baul_navigation_window_pane_always_use_location_entry (BaulNavigationWindowPane *pane, gboolean use_entry);
+gboolean baul_navigation_window_pane_hide_temporary_bars (BaulNavigationWindowPane *pane);
 /* notebook */
-void     baul_navigation_window_pane_add_slot_in_tab (CajaNavigationWindowPane *pane, CajaWindowSlot *slot, CajaWindowOpenSlotFlags flags);
-void     baul_navigation_window_pane_remove_page (CajaNavigationWindowPane *pane, int page_num);
+void     baul_navigation_window_pane_add_slot_in_tab (BaulNavigationWindowPane *pane, BaulWindowSlot *slot, BaulWindowOpenSlotFlags flags);
+void     baul_navigation_window_pane_remove_page (BaulNavigationWindowPane *pane, int page_num);
 
 #endif /* BAUL_NAVIGATION_WINDOW_PANE_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-navigation-window-pane.c: Caja navigation window pane
+   baul-navigation-window-pane.c: Baul navigation window pane
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -39,15 +39,15 @@
 
 static void baul_navigation_window_pane_dispose    (GObject *object);
 
-G_DEFINE_TYPE (CajaNavigationWindowPane,
+G_DEFINE_TYPE (BaulNavigationWindowPane,
                baul_navigation_window_pane,
                BAUL_TYPE_WINDOW_PANE)
 #define parent_class baul_navigation_window_pane_parent_class
 
 static void
-real_set_active (CajaWindowPane *pane, gboolean is_active)
+real_set_active (BaulWindowPane *pane, gboolean is_active)
 {
-    CajaNavigationWindowPane *nav_pane;
+    BaulNavigationWindowPane *nav_pane;
     GList *l;
 
     nav_pane = BAUL_NAVIGATION_WINDOW_PANE (pane);
@@ -68,7 +68,7 @@ real_set_active (CajaWindowPane *pane, gboolean is_active)
 static gboolean
 navigation_bar_focus_in_callback (GtkWidget *widget, GdkEventFocus *event, gpointer user_data)
 {
-    CajaWindowPane *pane;
+    BaulWindowPane *pane;
     pane = BAUL_WINDOW_PANE (user_data);
     baul_window_set_active_pane (pane->window, pane);
     return FALSE;
@@ -79,7 +79,7 @@ bookmark_list_get_uri_index (GList *list, GFile *location)
 {
     GList *l;
     int i;
-    CajaBookmark *bookmark = NULL;
+    BaulBookmark *bookmark = NULL;
     GFile *tmp = NULL;
 
     g_return_val_if_fail (location != NULL, -1);
@@ -101,21 +101,21 @@ bookmark_list_get_uri_index (GList *list, GFile *location)
 }
 
 static void
-search_bar_focus_in_callback (CajaSearchBar *bar,
-                              CajaWindowPane *pane)
+search_bar_focus_in_callback (BaulSearchBar *bar,
+                              BaulWindowPane *pane)
 {
     baul_window_set_active_pane (pane->window, pane);
 }
 
 
 static void
-search_bar_activate_callback (CajaSearchBar *bar,
-                              CajaNavigationWindowPane *pane)
+search_bar_activate_callback (BaulSearchBar *bar,
+                              BaulNavigationWindowPane *pane)
 {
     char *uri;
-    CajaDirectory *directory;
-    CajaSearchDirectory *search_directory;
-    CajaQuery *query;
+    BaulDirectory *directory;
+    BaulSearchDirectory *search_directory;
+    BaulQuery *query;
     GFile *location;
 
     uri = baul_search_directory_generate_new_uri ();
@@ -131,7 +131,7 @@ search_bar_activate_callback (CajaSearchBar *bar,
     query = baul_search_bar_get_query (BAUL_SEARCH_BAR (pane->search_bar));
     if (query != NULL)
     {
-        CajaWindowSlot *slot = BAUL_WINDOW_PANE (pane)->active_slot;
+        BaulWindowSlot *slot = BAUL_WINDOW_PANE (pane)->active_slot;
         if (!baul_search_directory_is_indexed (search_directory))
         {
             char *current_uri;
@@ -152,7 +152,7 @@ search_bar_activate_callback (CajaSearchBar *bar,
 
 static void
 search_bar_cancel_callback (GtkWidget *widget,
-                            CajaNavigationWindowPane *pane)
+                            BaulNavigationWindowPane *pane)
 {
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
     {
@@ -162,7 +162,7 @@ search_bar_cancel_callback (GtkWidget *widget,
 
 static void
 navigation_bar_cancel_callback (GtkWidget *widget,
-                                CajaNavigationWindowPane *pane)
+                                BaulNavigationWindowPane *pane)
 {
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
     {
@@ -173,7 +173,7 @@ navigation_bar_cancel_callback (GtkWidget *widget,
 static void
 navigation_bar_location_changed_callback (GtkWidget *widget,
         const char *uri,
-        CajaNavigationWindowPane *pane)
+        BaulNavigationWindowPane *pane)
 {
     GFile *location;
 
@@ -190,10 +190,10 @@ navigation_bar_location_changed_callback (GtkWidget *widget,
 static void
 path_bar_location_changed_callback (GtkWidget *widget,
                                     GFile *location,
-                                    CajaNavigationWindowPane *pane)
+                                    BaulNavigationWindowPane *pane)
 {
-    CajaNavigationWindowSlot *slot;
-    CajaWindowPane *win_pane;
+    BaulNavigationWindowSlot *slot;
+    BaulWindowPane *win_pane;
     int i;
 
     g_assert (BAUL_IS_NAVIGATION_WINDOW_PANE (pane));
@@ -218,14 +218,14 @@ path_bar_location_changed_callback (GtkWidget *widget,
 }
 
 static gboolean
-location_button_should_be_active (CajaNavigationWindowPane *pane)
+location_button_should_be_active (BaulNavigationWindowPane *pane)
 {
     return g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
 }
 
 static void
 location_button_toggled_cb (GtkToggleButton *toggle,
-                            CajaNavigationWindowPane *pane)
+                            BaulNavigationWindowPane *pane)
 {
     gboolean is_active;
 
@@ -240,7 +240,7 @@ location_button_toggled_cb (GtkToggleButton *toggle,
 }
 
 static GtkWidget *
-location_button_create (CajaNavigationWindowPane *pane)
+location_button_create (BaulNavigationWindowPane *pane)
 {
     GtkWidget *image;
     GtkWidget *button;
@@ -263,14 +263,14 @@ location_button_create (CajaNavigationWindowPane *pane)
 }
 
 static gboolean
-path_bar_path_event_callback (CajaPathBar *path_bar,
+path_bar_path_event_callback (BaulPathBar *path_bar,
                    GFile *location,
                    GdkEventButton *event,
-                   CajaWindowPane *pane)
+                   BaulWindowPane *pane)
 
 {
-    CajaWindowSlot *slot;
-    CajaWindowOpenFlags flags;
+    BaulWindowSlot *slot;
+    BaulWindowOpenFlags flags;
 
     if (event->type == GDK_BUTTON_RELEASE) {
         int mask;
@@ -299,7 +299,7 @@ path_bar_path_event_callback (CajaPathBar *path_bar,
     }
 
     if (event->button == 3) {
-        CajaView *view;
+        BaulView *view;
 
         slot = baul_window_get_active_slot (pane->window);
         view = slot->content_view;
@@ -320,7 +320,7 @@ static void
 notebook_popup_menu_new_tab_cb (GtkMenuItem *menuitem,
     			gpointer user_data)
 {
-    CajaWindowPane *pane;
+    BaulWindowPane *pane;
 
     pane = BAUL_WINDOW_PANE (user_data);
     baul_window_new_tab (pane->window);
@@ -330,7 +330,7 @@ static void
 notebook_popup_menu_move_left_cb (GtkMenuItem *menuitem,
                                   gpointer user_data)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
     baul_notebook_reorder_current_child_relative (BAUL_NOTEBOOK (pane->notebook), -1);
@@ -340,7 +340,7 @@ static void
 notebook_popup_menu_move_right_cb (GtkMenuItem *menuitem,
                                    gpointer user_data)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
     baul_notebook_reorder_current_child_relative (BAUL_NOTEBOOK (pane->notebook), 1);
@@ -350,8 +350,8 @@ static void
 notebook_popup_menu_close_cb (GtkMenuItem *menuitem,
                               gpointer user_data)
 {
-    CajaWindowPane *pane;
-    CajaWindowSlot *slot;
+    BaulWindowPane *pane;
+    BaulWindowSlot *slot;
 
     pane = BAUL_WINDOW_PANE (user_data);
     slot = pane->active_slot;
@@ -359,13 +359,13 @@ notebook_popup_menu_close_cb (GtkMenuItem *menuitem,
 }
 
 static void
-notebook_popup_menu_show (CajaNavigationWindowPane *pane,
+notebook_popup_menu_show (BaulNavigationWindowPane *pane,
                           GdkEventButton *event)
 {
     GtkWidget *popup;
     GtkWidget *item;
     gboolean can_move_left, can_move_right;
-    CajaNotebook *notebook;
+    BaulNotebook *notebook;
 
     notebook = BAUL_NOTEBOOK (pane->notebook);
 
@@ -425,9 +425,9 @@ notebook_popup_menu_show (CajaNavigationWindowPane *pane,
 
 /* emitted when the user clicks the "close" button of tabs */
 static void
-notebook_tab_close_requested (CajaNotebook *notebook,
-                              CajaWindowSlot *slot,
-                              CajaWindowPane *pane)
+notebook_tab_close_requested (BaulNotebook *notebook,
+                              BaulWindowSlot *slot,
+                              BaulWindowPane *pane)
 {
     baul_window_pane_slot_close (pane, slot);
 }
@@ -437,7 +437,7 @@ notebook_button_press_cb (GtkWidget *widget,
                           GdkEventButton *event,
                           gpointer user_data)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
     if (GDK_BUTTON_PRESS == event->type && 3 == event->button)
@@ -447,8 +447,8 @@ notebook_button_press_cb (GtkWidget *widget,
     }
     else if (GDK_BUTTON_PRESS == event->type && 2 == event->button)
     {
-        CajaWindowPane *wpane;
-        CajaWindowSlot *slot;
+        BaulWindowPane *wpane;
+        BaulWindowSlot *slot;
 
         wpane = BAUL_WINDOW_PANE (pane);
         slot = wpane->active_slot;
@@ -464,7 +464,7 @@ static gboolean
 notebook_popup_menu_cb (GtkWidget *widget,
                         gpointer user_data)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
     notebook_popup_menu_show (pane, NULL);
@@ -475,9 +475,9 @@ static gboolean
 notebook_switch_page_cb (GtkNotebook *notebook,
                          GtkWidget *page,
                          unsigned int page_num,
-                         CajaNavigationWindowPane *pane)
+                         BaulNavigationWindowPane *pane)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GtkWidget *widget;
 
     widget = gtk_notebook_get_nth_page (GTK_NOTEBOOK (pane->notebook), page_num);
@@ -495,7 +495,7 @@ notebook_switch_page_cb (GtkNotebook *notebook,
 }
 
 void
-baul_navigation_window_pane_remove_page (CajaNavigationWindowPane *pane, int page_num)
+baul_navigation_window_pane_remove_page (BaulNavigationWindowPane *pane, int page_num)
 {
     GtkNotebook *notebook;
     notebook = GTK_NOTEBOOK (pane->notebook);
@@ -510,9 +510,9 @@ baul_navigation_window_pane_remove_page (CajaNavigationWindowPane *pane, int pag
 }
 
 void
-baul_navigation_window_pane_add_slot_in_tab (CajaNavigationWindowPane *pane, CajaWindowSlot *slot, CajaWindowOpenSlotFlags flags)
+baul_navigation_window_pane_add_slot_in_tab (BaulNavigationWindowPane *pane, BaulWindowSlot *slot, BaulWindowOpenSlotFlags flags)
 {
-    CajaNotebook *notebook;
+    BaulNotebook *notebook;
 
     notebook = BAUL_NOTEBOOK (pane->notebook);
     g_signal_handlers_block_by_func (notebook,
@@ -530,10 +530,10 @@ baul_navigation_window_pane_add_slot_in_tab (CajaNavigationWindowPane *pane, Caj
 }
 
 static void
-real_sync_location_widgets (CajaWindowPane *pane)
+real_sync_location_widgets (BaulWindowPane *pane)
 {
-    CajaNavigationWindowPane *navigation_pane;
-    CajaWindowSlot *slot;
+    BaulNavigationWindowPane *navigation_pane;
+    BaulWindowSlot *slot;
 
     slot = pane->active_slot;
     navigation_pane = BAUL_NAVIGATION_WINDOW_PANE (pane);
@@ -553,7 +553,7 @@ real_sync_location_widgets (CajaWindowPane *pane)
     /* Update window global UI if this is the active pane */
     if (pane == pane->window->details->active_pane)
     {
-        CajaNavigationWindowSlot *navigation_slot;
+        BaulNavigationWindowSlot *navigation_slot;
 
         baul_window_update_up_button (pane->window);
 
@@ -567,9 +567,9 @@ real_sync_location_widgets (CajaWindowPane *pane)
 }
 
 gboolean
-baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane)
+baul_navigation_window_pane_hide_temporary_bars (BaulNavigationWindowPane *pane)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     gboolean success;
 
     g_assert (BAUL_IS_NAVIGATION_WINDOW_PANE (pane));
@@ -588,7 +588,7 @@ baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane)
     }
     if (pane->temporary_navigation_bar)
     {
-        CajaDirectory *directory;
+        BaulDirectory *directory;
 
         directory = baul_directory_get (slot->location);
 
@@ -610,7 +610,7 @@ baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane)
     }
     if (pane->temporary_search_bar)
     {
-        CajaNavigationWindow *window;
+        BaulNavigationWindow *window;
 
         if (!g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY))
         {
@@ -630,7 +630,7 @@ baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane)
 }
 
 void
-baul_navigation_window_pane_always_use_location_entry (CajaNavigationWindowPane *pane, gboolean use_entry)
+baul_navigation_window_pane_always_use_location_entry (BaulNavigationWindowPane *pane, gboolean use_entry)
 {
     if (use_entry)
     {
@@ -651,10 +651,10 @@ baul_navigation_window_pane_always_use_location_entry (CajaNavigationWindowPane 
 }
 
 void
-baul_navigation_window_pane_setup (CajaNavigationWindowPane *pane)
+baul_navigation_window_pane_setup (BaulNavigationWindowPane *pane)
 {
     GtkWidget *hbox;
-    CajaEntry *entry;
+    BaulEntry *entry;
     GtkSizeGroup *header_size_group;
 
     pane->widget = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -744,7 +744,7 @@ baul_navigation_window_pane_setup (CajaNavigationWindowPane *pane)
 
 
 void
-baul_navigation_window_pane_show_location_bar_temporarily (CajaNavigationWindowPane *pane)
+baul_navigation_window_pane_show_location_bar_temporarily (BaulNavigationWindowPane *pane)
 {
     if (!baul_navigation_window_pane_location_bar_showing (pane))
     {
@@ -754,7 +754,7 @@ baul_navigation_window_pane_show_location_bar_temporarily (CajaNavigationWindowP
 }
 
 void
-baul_navigation_window_pane_show_navigation_bar_temporarily (CajaNavigationWindowPane *pane)
+baul_navigation_window_pane_show_navigation_bar_temporarily (BaulNavigationWindowPane *pane)
 {
     if (baul_navigation_window_pane_path_bar_showing (pane)
             || baul_navigation_window_pane_search_bar_showing (pane))
@@ -767,7 +767,7 @@ baul_navigation_window_pane_show_navigation_bar_temporarily (CajaNavigationWindo
 }
 
 gboolean
-baul_navigation_window_pane_path_bar_showing (CajaNavigationWindowPane *pane)
+baul_navigation_window_pane_path_bar_showing (BaulNavigationWindowPane *pane)
 {
     if (pane->path_bar != NULL)
     {
@@ -778,12 +778,12 @@ baul_navigation_window_pane_path_bar_showing (CajaNavigationWindowPane *pane)
 }
 
 void
-baul_navigation_window_pane_set_bar_mode (CajaNavigationWindowPane *pane,
-        CajaBarMode mode)
+baul_navigation_window_pane_set_bar_mode (BaulNavigationWindowPane *pane,
+        BaulBarMode mode)
 {
     gboolean use_entry;
     GtkWidget *focus_widget;
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
 
     switch (mode)
     {
@@ -837,7 +837,7 @@ baul_navigation_window_pane_set_bar_mode (CajaNavigationWindowPane *pane,
 }
 
 gboolean
-baul_navigation_window_pane_search_bar_showing (CajaNavigationWindowPane *pane)
+baul_navigation_window_pane_search_bar_showing (BaulNavigationWindowPane *pane)
 {
     if (pane->search_bar != NULL)
     {
@@ -848,7 +848,7 @@ baul_navigation_window_pane_search_bar_showing (CajaNavigationWindowPane *pane)
 }
 
 void
-baul_navigation_window_pane_hide_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference)
+baul_navigation_window_pane_hide_location_bar (BaulNavigationWindowPane *pane, gboolean save_preference)
 {
     pane->temporary_location_bar = FALSE;
     gtk_widget_hide(pane->location_bar);
@@ -861,7 +861,7 @@ baul_navigation_window_pane_hide_location_bar (CajaNavigationWindowPane *pane, g
 }
 
 void
-baul_navigation_window_pane_show_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference)
+baul_navigation_window_pane_show_location_bar (BaulNavigationWindowPane *pane, gboolean save_preference)
 {
     gtk_widget_show(pane->location_bar);
     baul_navigation_window_update_show_hide_menu_items(BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window));
@@ -872,7 +872,7 @@ baul_navigation_window_pane_show_location_bar (CajaNavigationWindowPane *pane, g
 }
 
 gboolean
-baul_navigation_window_pane_location_bar_showing (CajaNavigationWindowPane *pane)
+baul_navigation_window_pane_location_bar_showing (BaulNavigationWindowPane *pane)
 {
     if (!BAUL_IS_NAVIGATION_WINDOW_PANE (pane))
     {
@@ -887,26 +887,26 @@ baul_navigation_window_pane_location_bar_showing (CajaNavigationWindowPane *pane
 }
 
 static void
-baul_navigation_window_pane_init (CajaNavigationWindowPane *pane)
+baul_navigation_window_pane_init (BaulNavigationWindowPane *pane)
 {
 }
 
 static void
-baul_navigation_window_pane_show (CajaWindowPane *pane)
+baul_navigation_window_pane_show (BaulWindowPane *pane)
 {
-    CajaNavigationWindowPane *npane = BAUL_NAVIGATION_WINDOW_PANE (pane);
+    BaulNavigationWindowPane *npane = BAUL_NAVIGATION_WINDOW_PANE (pane);
 
     gtk_widget_show (npane->widget);
 }
 
 /* either called due to slot change, or due to location change in the current slot. */
 static void
-real_sync_search_widgets (CajaWindowPane *window_pane)
+real_sync_search_widgets (BaulWindowPane *window_pane)
 {
-    CajaWindowSlot *slot;
-    CajaDirectory *directory;
-    CajaSearchDirectory *search_directory;
-    CajaNavigationWindowPane *pane;
+    BaulWindowSlot *slot;
+    BaulDirectory *directory;
+    BaulSearchDirectory *search_directory;
+    BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (window_pane);
     slot = window_pane->active_slot;
@@ -934,7 +934,7 @@ real_sync_search_widgets (CajaWindowPane *window_pane)
 }
 
 static void
-baul_navigation_window_pane_class_init (CajaNavigationWindowPaneClass *class)
+baul_navigation_window_pane_class_init (BaulNavigationWindowPaneClass *class)
 {
     G_OBJECT_CLASS (class)->dispose = baul_navigation_window_pane_dispose;
     BAUL_WINDOW_PANE_CLASS (class)->show = baul_navigation_window_pane_show;
@@ -946,17 +946,17 @@ baul_navigation_window_pane_class_init (CajaNavigationWindowPaneClass *class)
 static void
 baul_navigation_window_pane_dispose (GObject *object)
 {
-    CajaNavigationWindowPane *pane = BAUL_NAVIGATION_WINDOW_PANE (object);
+    BaulNavigationWindowPane *pane = BAUL_NAVIGATION_WINDOW_PANE (object);
 
     gtk_widget_destroy (pane->widget);
 
     G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
-CajaNavigationWindowPane *
-baul_navigation_window_pane_new (CajaWindow *window)
+BaulNavigationWindowPane *
+baul_navigation_window_pane_new (BaulWindow *window)
 {
-    CajaNavigationWindowPane *pane;
+    BaulNavigationWindowPane *pane;
 
     pane = g_object_new (BAUL_TYPE_NAVIGATION_WINDOW_PANE, NULL);
     BAUL_WINDOW_PANE(pane)->window = window;

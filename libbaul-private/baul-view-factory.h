@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-view-factory.h: register and create CajaViews
+   baul-view-factory.h: register and create BaulViews
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -36,9 +36,9 @@
 extern "C" {
 #endif
 
-    typedef struct _CajaViewInfo CajaViewInfo;
+    typedef struct _BaulViewInfo BaulViewInfo;
 
-    struct _CajaViewInfo
+    struct _BaulViewInfo
     {
         char *id;
         char *view_combo_label;               /* Foo View (used in preferences dialog and navigation combo) */
@@ -47,7 +47,7 @@ extern "C" {
         char *startup_error_label;         /* The foo view encountered an error while starting up. */
         char *display_location_label;      /* Display this location with the foo view. */
         gboolean single_view;
-        CajaView * (*create) (CajaWindowSlotInfo *slot);
+        BaulView * (*create) (BaulWindowSlotInfo *slot);
         /* MATECOMPONENTTODO: More args here */
         gboolean (*supports_uri) (const char *uri,
                                   GFileType file_type,
@@ -55,10 +55,10 @@ extern "C" {
     };
 
 
-    void                    baul_view_factory_register          (CajaViewInfo   *view_info);
-    const CajaViewInfo *baul_view_factory_lookup            (const char         *id);
-    CajaView *          baul_view_factory_create            (const char         *id,
-            CajaWindowSlotInfo *slot);
+    void                    baul_view_factory_register          (BaulViewInfo   *view_info);
+    const BaulViewInfo *baul_view_factory_lookup            (const char         *id);
+    BaulView *          baul_view_factory_create            (const char         *id,
+            BaulWindowSlotInfo *slot);
     gboolean                baul_view_factory_view_supports_uri (const char         *id,
             GFile              *location,
             GFileType          file_type,

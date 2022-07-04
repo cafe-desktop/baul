@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-window-slot.c: Caja window slot
+   baul-window-slot.c: Baul window slot
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -37,9 +37,9 @@
 
 static void baul_window_slot_dispose    (GObject *object);
 
-static void baul_window_slot_info_iface_init (CajaWindowSlotInfoIface *iface);
+static void baul_window_slot_info_iface_init (BaulWindowSlotInfoIface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CajaWindowSlot,
+G_DEFINE_TYPE_WITH_CODE (BaulWindowSlot,
                          baul_window_slot,
                          G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_WINDOW_SLOT_INFO,
@@ -48,12 +48,12 @@ G_DEFINE_TYPE_WITH_CODE (CajaWindowSlot,
 #define parent_class baul_window_slot_parent_class
 
 static void
-query_editor_changed_callback (CajaSearchBar *bar,
-                               CajaQuery *query,
+query_editor_changed_callback (BaulSearchBar *bar,
+                               BaulQuery *query,
                                gboolean reload,
-                               CajaWindowSlot *slot)
+                               BaulWindowSlot *slot)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     directory = baul_directory_get_for_file (slot->viewed_file);
     g_assert (BAUL_IS_SEARCH_DIRECTORY (directory));
@@ -69,17 +69,17 @@ query_editor_changed_callback (CajaSearchBar *bar,
 }
 
 static void
-real_update_query_editor (CajaWindowSlot *slot)
+real_update_query_editor (BaulWindowSlot *slot)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     directory = baul_directory_get (slot->location);
 
     if (BAUL_IS_SEARCH_DIRECTORY (directory))
     {
         GtkWidget *query_editor;
-        CajaQuery *query;
-        CajaSearchDirectory *search_directory;
+        BaulQuery *query;
+        BaulSearchDirectory *search_directory;
 
         search_directory = BAUL_SEARCH_DIRECTORY (directory);
 
@@ -111,9 +111,9 @@ real_update_query_editor (CajaWindowSlot *slot)
 
 
 static void
-real_active (CajaWindowSlot *slot)
+real_active (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = slot->pane->window;
 
@@ -133,10 +133,10 @@ real_active (CajaWindowSlot *slot)
 }
 
 static void
-baul_window_slot_active (CajaWindowSlot *slot)
+baul_window_slot_active (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
-    CajaWindowPane *pane;
+    BaulWindow *window;
+    BaulWindowPane *pane;
 
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
@@ -150,19 +150,19 @@ baul_window_slot_active (CajaWindowSlot *slot)
 }
 
 static void
-real_inactive (CajaWindowSlot *slot)
+real_inactive (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (slot->pane->window);
     g_assert (slot == window->details->active_pane->active_slot);
 }
 
 static void
-baul_window_slot_inactive (CajaWindowSlot *slot)
+baul_window_slot_inactive (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
-    CajaWindowPane *pane;
+    BaulWindow *window;
+    BaulWindowPane *pane;
 
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
@@ -178,7 +178,7 @@ baul_window_slot_inactive (CajaWindowSlot *slot)
 
 
 static void
-baul_window_slot_init (CajaWindowSlot *slot)
+baul_window_slot_init (BaulWindowSlot *slot)
 {
     GtkWidget *content_box, *eventbox, *extras_vbox, *frame;
 
@@ -210,7 +210,7 @@ baul_window_slot_init (CajaWindowSlot *slot)
 }
 
 static void
-baul_window_slot_class_init (CajaWindowSlotClass *class)
+baul_window_slot_class_init (BaulWindowSlotClass *class)
 {
     class->active = real_active;
     class->inactive = real_inactive;
@@ -220,7 +220,7 @@ baul_window_slot_class_init (CajaWindowSlotClass *class)
 }
 
 static int
-baul_window_slot_get_selection_count (CajaWindowSlot *slot)
+baul_window_slot_get_selection_count (BaulWindowSlot *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
@@ -232,7 +232,7 @@ baul_window_slot_get_selection_count (CajaWindowSlot *slot)
 }
 
 GFile *
-baul_window_slot_get_location (CajaWindowSlot *slot)
+baul_window_slot_get_location (BaulWindowSlot *slot)
 {
     g_assert (slot != NULL);
     g_assert (BAUL_IS_WINDOW (slot->pane->window));
@@ -245,7 +245,7 @@ baul_window_slot_get_location (CajaWindowSlot *slot)
 }
 
 char *
-baul_window_slot_get_location_uri (CajaWindowSlotInfo *slot)
+baul_window_slot_get_location_uri (BaulWindowSlotInfo *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
@@ -257,7 +257,7 @@ baul_window_slot_get_location_uri (CajaWindowSlotInfo *slot)
 }
 
 static void
-baul_window_slot_make_hosting_pane_active (CajaWindowSlot *slot)
+baul_window_slot_make_hosting_pane_active (BaulWindowSlot *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
     g_assert (BAUL_IS_WINDOW_PANE (slot->pane));
@@ -266,7 +266,7 @@ baul_window_slot_make_hosting_pane_active (CajaWindowSlot *slot)
 }
 
 char *
-baul_window_slot_get_title (CajaWindowSlot *slot)
+baul_window_slot_get_title (BaulWindowSlot *slot)
 {
     char *title;
 
@@ -290,8 +290,8 @@ baul_window_slot_get_title (CajaWindowSlot *slot)
     return title;
 }
 
-static CajaWindow *
-baul_window_slot_get_window (CajaWindowSlot *slot)
+static BaulWindow *
+baul_window_slot_get_window (BaulWindowSlot *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
     return slot->pane->window;
@@ -304,10 +304,10 @@ baul_window_slot_get_window (CajaWindowSlot *slot)
  * might look a bit different (e.g. with "file browser:" added)
  */
 static void
-baul_window_slot_set_title (CajaWindowSlot *slot,
+baul_window_slot_set_title (BaulWindowSlot *slot,
                             const char *title)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     gboolean changed;
 
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
@@ -345,11 +345,11 @@ baul_window_slot_set_title (CajaWindowSlot *slot,
  *
  * Re-calculate the slot title.
  * Called when the location or view has changed.
- * @slot: The CajaWindowSlot in question.
+ * @slot: The BaulWindowSlot in question.
  *
  */
 void
-baul_window_slot_update_title (CajaWindowSlot *slot)
+baul_window_slot_update_title (BaulWindowSlot *slot)
 {
     char *title;
 
@@ -362,13 +362,13 @@ baul_window_slot_update_title (CajaWindowSlot *slot)
  *
  * Re-calculate the slot icon
  * Called when the location or view or icon set has changed.
- * @slot: The CajaWindowSlot in question.
+ * @slot: The BaulWindowSlot in question.
  */
 void
-baul_window_slot_update_icon (CajaWindowSlot *slot)
+baul_window_slot_update_icon (BaulWindowSlot *slot)
 {
-    CajaWindow *window;
-    CajaIconInfo *info;
+    BaulWindow *window;
+    BaulIconInfo *info;
     const char *icon_name;
 
     window = slot->pane->window;
@@ -417,7 +417,7 @@ baul_window_slot_update_icon (CajaWindowSlot *slot)
 }
 
 void
-baul_window_slot_is_in_active_pane (CajaWindowSlot *slot,
+baul_window_slot_is_in_active_pane (BaulWindowSlot *slot,
                                     gboolean is_active)
 {
     /* NULL is valid, and happens during init */
@@ -439,10 +439,10 @@ baul_window_slot_is_in_active_pane (CajaWindowSlot *slot,
 }
 
 void
-baul_window_slot_connect_content_view (CajaWindowSlot *slot,
-                                       CajaView *view)
+baul_window_slot_connect_content_view (BaulWindowSlot *slot,
+                                       BaulView *view)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = slot->pane->window;
     if (window != NULL && slot == baul_window_get_active_slot (window))
@@ -452,10 +452,10 @@ baul_window_slot_connect_content_view (CajaWindowSlot *slot,
 }
 
 void
-baul_window_slot_disconnect_content_view (CajaWindowSlot *slot,
-        CajaView *view)
+baul_window_slot_disconnect_content_view (BaulWindowSlot *slot,
+        BaulView *view)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = slot->pane->window;
     if (window != NULL && window->details->active_pane && window->details->active_pane->active_slot == slot)
@@ -465,10 +465,10 @@ baul_window_slot_disconnect_content_view (CajaWindowSlot *slot,
 }
 
 void
-baul_window_slot_set_content_view_widget (CajaWindowSlot *slot,
-        CajaView *new_view)
+baul_window_slot_set_content_view_widget (BaulWindowSlot *slot,
+        BaulView *new_view)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GtkWidget *widget;
 
     window = slot->pane->window;
@@ -502,10 +502,10 @@ baul_window_slot_set_content_view_widget (CajaWindowSlot *slot,
 }
 
 void
-baul_window_slot_set_allow_stop (CajaWindowSlot *slot,
+baul_window_slot_set_allow_stop (BaulWindowSlot *slot,
                                  gboolean allow)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
@@ -516,10 +516,10 @@ baul_window_slot_set_allow_stop (CajaWindowSlot *slot,
 }
 
 void
-baul_window_slot_set_status (CajaWindowSlot *slot,
+baul_window_slot_set_status (BaulWindowSlot *slot,
                              const char *status)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
@@ -538,10 +538,10 @@ baul_window_slot_set_status (CajaWindowSlot *slot,
  * Update the query editor.
  * Called when the location has changed.
  *
- * @slot: The CajaWindowSlot in question.
+ * @slot: The BaulWindowSlot in question.
  */
 void
-baul_window_slot_update_query_editor (CajaWindowSlot *slot)
+baul_window_slot_update_query_editor (BaulWindowSlot *slot)
 {
     if (slot->query_editor != NULL)
     {
@@ -566,7 +566,7 @@ remove_all (GtkWidget *widget,
 }
 
 void
-baul_window_slot_remove_extra_location_widgets (CajaWindowSlot *slot)
+baul_window_slot_remove_extra_location_widgets (BaulWindowSlot *slot)
 {
     gtk_container_foreach (GTK_CONTAINER (slot->extra_location_widgets),
                            remove_all,
@@ -575,7 +575,7 @@ baul_window_slot_remove_extra_location_widgets (CajaWindowSlot *slot)
 }
 
 void
-baul_window_slot_add_extra_location_widget (CajaWindowSlot *slot,
+baul_window_slot_add_extra_location_widget (BaulWindowSlot *slot,
         GtkWidget *widget)
 {
     gtk_box_pack_start (GTK_BOX (slot->extra_location_widgets),
@@ -584,7 +584,7 @@ baul_window_slot_add_extra_location_widget (CajaWindowSlot *slot,
 }
 
 void
-baul_window_slot_add_current_location_to_history_list (CajaWindowSlot *slot)
+baul_window_slot_add_current_location_to_history_list (BaulWindowSlot *slot)
 {
 
     if ((slot->pane->window == NULL || !BAUL_IS_DESKTOP_WINDOW (slot->pane->window)) &&
@@ -596,9 +596,9 @@ baul_window_slot_add_current_location_to_history_list (CajaWindowSlot *slot)
 
 /* returns either the pending or the actual current location - used by side panes. */
 static char *
-real_slot_info_get_current_location (CajaWindowSlotInfo *info)
+real_slot_info_get_current_location (BaulWindowSlotInfo *info)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     slot = BAUL_WINDOW_SLOT (info);
 
@@ -616,10 +616,10 @@ real_slot_info_get_current_location (CajaWindowSlotInfo *info)
     return NULL;
 }
 
-static CajaView *
-real_slot_info_get_current_view (CajaWindowSlotInfo *info)
+static BaulView *
+real_slot_info_get_current_view (BaulWindowSlotInfo *info)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     slot = BAUL_WINDOW_SLOT (info);
 
@@ -638,7 +638,7 @@ real_slot_info_get_current_view (CajaWindowSlotInfo *info)
 static void
 baul_window_slot_dispose (GObject *object)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GtkWidget *widget;
 
     slot = BAUL_WINDOW_SLOT (object);
@@ -695,7 +695,7 @@ baul_window_slot_dispose (GObject *object)
 }
 
 static void
-baul_window_slot_info_iface_init (CajaWindowSlotInfoIface *iface)
+baul_window_slot_info_iface_init (BaulWindowSlotInfoIface *iface)
 {
     iface->active = baul_window_slot_active;
     iface->inactive = baul_window_slot_inactive;
