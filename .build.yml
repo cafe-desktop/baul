@@ -5,10 +5,12 @@ requires:
   debian:
     # Useful URL: https://github.com/mate-desktop/debian-packages
     # Useful URL: https://salsa.debian.org/debian-mate-team/caja
+    - aptitude
     - autopoint
     - clang
     - clang-tools
     - cppcheck
+    - expect
     - git
     - gla11y
     - gobject-introspection
@@ -32,6 +34,7 @@ requires:
     - python3-lxml
     - quilt
     - shared-mime-info
+    - wget
     - xvfb
 
 before_scripts:
