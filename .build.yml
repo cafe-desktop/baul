@@ -43,5 +43,4 @@ before_scripts:
 build_scripts:
   - ./before-build
   - ./make-scanbuild '--enable-empty-view --enable-compile-warnings=maximum'
-  - if xvfb-run make check; then :; else cat eel/test-suite.log; cat src/test-suite.log; false; fi
   - ./after-build
