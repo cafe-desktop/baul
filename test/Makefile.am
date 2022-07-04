@@ -5,7 +5,7 @@ AM_CPPFLAGS =\
 	$(CORE_CFLAGS) \
 	$(WARNING_CFLAGS) \
 	-DVERSION="\"$(VERSION)\"" \
-	-DCAJA_DATADIR=\""$(datadir)/baul"\" \
+	-DBAUL_DATADIR=\""$(datadir)/baul"\" \
 	-DMATELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\" \
 	$(NULL)
 

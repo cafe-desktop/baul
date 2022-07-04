@@ -59,7 +59,7 @@ activate_nth_short_list_item (CajaWindow *window, guint index)
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = baul_window_get_active_slot (window);
     g_assert (index < g_list_length (window->details->short_list_viewers));
@@ -73,7 +73,7 @@ activate_extra_viewer (CajaWindow *window)
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = baul_window_get_active_slot (window);
     g_assert (window->details->extra_viewer != NULL);
@@ -87,7 +87,7 @@ view_as_menu_switch_views_callback (GtkComboBox *combo_box, CajaNavigationWindow
     int active;
 
     g_assert (GTK_IS_COMBO_BOX (combo_box));
-    g_assert (CAJA_IS_NAVIGATION_WINDOW (window));
+    g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
     active = gtk_combo_box_get_active (combo_box);
 
@@ -97,11 +97,11 @@ view_as_menu_switch_views_callback (GtkComboBox *combo_box, CajaNavigationWindow
     }
     else if (active < GPOINTER_TO_INT (g_object_get_data (G_OBJECT (combo_box), "num viewers")))
     {
-        activate_nth_short_list_item (CAJA_WINDOW (window), active);
+        activate_nth_short_list_item (BAUL_WINDOW (window), active);
     }
     else
     {
-        activate_extra_viewer (CAJA_WINDOW (window));
+        activate_extra_viewer (BAUL_WINDOW (window));
     }
 }
 
@@ -175,7 +175,7 @@ connect_proxy (GtkAction *action,
     if (GTK_IS_TOOL_ITEM (proxy))
     {
         GtkToolItem *item = GTK_TOOL_ITEM (proxy);
-        CajaViewAsAction *vaction = CAJA_VIEW_AS_ACTION (action);
+        CajaViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
         CajaNavigationWindow *window = vaction->priv->window;
         GtkWidget *view_as_menu_vbox;
         GtkWidget *view_as_combo_box;
@@ -212,7 +212,7 @@ disconnect_proxy (GtkAction *action,
 {
     if (GTK_IS_TOOL_ITEM (proxy))
     {
-        CajaViewAsAction *vaction = CAJA_VIEW_AS_ACTION (action);
+        CajaViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
         CajaNavigationWindow *window = vaction->priv->window;
 
         g_signal_handlers_disconnect_matched (window,
@@ -239,12 +239,12 @@ baul_view_as_action_set_property (GObject *object,
 {
     CajaViewAsAction *zoom;
 
-    zoom = CAJA_VIEW_AS_ACTION (object);
+    zoom = BAUL_VIEW_AS_ACTION (object);
 
     switch (prop_id)
     {
     case PROP_WINDOW:
-        zoom->priv->window = CAJA_NAVIGATION_WINDOW (g_value_get_object (value));
+        zoom->priv->window = BAUL_NAVIGATION_WINDOW (g_value_get_object (value));
         break;
     }
 }
@@ -257,7 +257,7 @@ baul_view_as_action_get_property (GObject *object,
 {
     CajaViewAsAction *zoom;
 
-    zoom = CAJA_VIEW_AS_ACTION (object);
+    zoom = BAUL_VIEW_AS_ACTION (object);
 
     switch (prop_id)
     {

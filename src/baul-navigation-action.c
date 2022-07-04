@@ -82,7 +82,7 @@ activate_back_or_forward_menu_item (GtkMenuItem *menu_item,
     int index;
 
     g_assert (GTK_IS_MENU_ITEM (menu_item));
-    g_assert (CAJA_IS_NAVIGATION_WINDOW (window));
+    g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
     index = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu_item), "user_data"));
 
@@ -112,9 +112,9 @@ fill_menu (CajaNavigationWindow *window,
     gboolean list_void;
     GtkWidget *menu_item = NULL;
 
-    g_assert (CAJA_IS_NAVIGATION_WINDOW (window));
+    g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
-    slot = CAJA_NAVIGATION_WINDOW_SLOT (CAJA_WINDOW (window)->details->active_pane->active_slot);
+    slot = BAUL_NAVIGATION_WINDOW_SLOT (BAUL_WINDOW (window)->details->active_pane->active_slot);
 
     list = back ? slot->back_list : slot->forward_list;
     index = 0;
@@ -122,7 +122,7 @@ fill_menu (CajaNavigationWindow *window,
 
     while (list != NULL)
     {
-        menu_item = baul_bookmark_menu_item_new (CAJA_BOOKMARK (list->data));
+        menu_item = baul_bookmark_menu_item_new (BAUL_BOOKMARK (list->data));
 
         if (menu_item) {
             list_void = FALSE;
@@ -182,10 +182,10 @@ show_menu_callback (GtkMenuToolButton *button,
 
     switch (p->direction)
     {
-    case CAJA_NAVIGATION_DIRECTION_FORWARD:
+    case BAUL_NAVIGATION_DIRECTION_FORWARD:
         fill_menu (window, menu, FALSE);
         break;
-    case CAJA_NAVIGATION_DIRECTION_BACK:
+    case BAUL_NAVIGATION_DIRECTION_BACK:
         fill_menu (window, menu, TRUE);
         break;
     default:
@@ -225,7 +225,7 @@ connect_proxy (GtkAction *action, GtkWidget *proxy)
 {
     if (GTK_IS_MENU_TOOL_BUTTON (proxy))
     {
-        CajaNavigationAction *naction = CAJA_NAVIGATION_ACTION (action);
+        CajaNavigationAction *naction = BAUL_NAVIGATION_ACTION (action);
         GtkMenuToolButton *button = GTK_MENU_TOOL_BUTTON (proxy);
         GtkWidget *menu;
         GtkWidget *child;
@@ -277,7 +277,7 @@ disconnect_proxy (GtkAction *action, GtkWidget *proxy)
 static void
 baul_navigation_action_finalize (GObject *object)
 {
-    CajaNavigationAction *action = CAJA_NAVIGATION_ACTION (object);
+    CajaNavigationAction *action = BAUL_NAVIGATION_ACTION (object);
 
     g_free (action->priv->arrow_tooltip);
 
@@ -292,7 +292,7 @@ baul_navigation_action_set_property (GObject *object,
 {
     CajaNavigationAction *nav;
 
-    nav = CAJA_NAVIGATION_ACTION (object);
+    nav = BAUL_NAVIGATION_ACTION (object);
 
     switch (prop_id)
     {
@@ -304,7 +304,7 @@ baul_navigation_action_set_property (GObject *object,
         nav->priv->direction = g_value_get_int (value);
         break;
     case PROP_WINDOW:
-        nav->priv->window = CAJA_NAVIGATION_WINDOW (g_value_get_object (value));
+        nav->priv->window = BAUL_NAVIGATION_WINDOW (g_value_get_object (value));
         break;
     }
 }
@@ -317,7 +317,7 @@ baul_navigation_action_get_property (GObject *object,
 {
     CajaNavigationAction *nav;
 
-    nav = CAJA_NAVIGATION_ACTION (object);
+    nav = BAUL_NAVIGATION_ACTION (object);
 
     switch (prop_id)
     {

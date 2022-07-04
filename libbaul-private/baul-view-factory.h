@@ -22,8 +22,8 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_VIEW_FACTORY_H
-#define CAJA_VIEW_FACTORY_H
+#ifndef BAUL_VIEW_FACTORY_H
+#define BAUL_VIEW_FACTORY_H
 
 #include <string.h>
 
@@ -74,4 +74,4 @@ extern "C" {
 }
 #endif
 
-#endif /* CAJA_VIEW_FACTORY_H */
+#endif /* BAUL_VIEW_FACTORY_H */

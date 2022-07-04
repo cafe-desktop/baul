@@ -24,26 +24,26 @@
  */
 /* baul-window.h: Interface of the main window object */
 
-#ifndef CAJA_SPATIAL_WINDOW_H
-#define CAJA_SPATIAL_WINDOW_H
+#ifndef BAUL_SPATIAL_WINDOW_H
+#define BAUL_SPATIAL_WINDOW_H
 
 #include "baul-window.h"
 #include "baul-window-private.h"
 
-#define CAJA_TYPE_SPATIAL_WINDOW baul_spatial_window_get_type()
-#define CAJA_SPATIAL_WINDOW(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SPATIAL_WINDOW, CajaSpatialWindow))
-#define CAJA_SPATIAL_WINDOW_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SPATIAL_WINDOW, CajaSpatialWindowClass))
-#define CAJA_IS_SPATIAL_WINDOW(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SPATIAL_WINDOW))
-#define CAJA_IS_SPATIAL_WINDOW_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SPATIAL_WINDOW))
-#define CAJA_SPATIAL_WINDOW_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SPATIAL_WINDOW, CajaSpatialWindowClass))
+#define BAUL_TYPE_SPATIAL_WINDOW baul_spatial_window_get_type()
+#define BAUL_SPATIAL_WINDOW(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SPATIAL_WINDOW, CajaSpatialWindow))
+#define BAUL_SPATIAL_WINDOW_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SPATIAL_WINDOW, CajaSpatialWindowClass))
+#define BAUL_IS_SPATIAL_WINDOW(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SPATIAL_WINDOW))
+#define BAUL_IS_SPATIAL_WINDOW_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SPATIAL_WINDOW))
+#define BAUL_SPATIAL_WINDOW_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SPATIAL_WINDOW, CajaSpatialWindowClass))
 
-#ifndef CAJA_SPATIAL_WINDOW_DEFINED
-#define CAJA_SPATIAL_WINDOW_DEFINED
+#ifndef BAUL_SPATIAL_WINDOW_DEFINED
+#define BAUL_SPATIAL_WINDOW_DEFINED
 typedef struct _CajaSpatialWindow        CajaSpatialWindow;
 #endif
 typedef struct _CajaSpatialWindowClass   CajaSpatialWindowClass;

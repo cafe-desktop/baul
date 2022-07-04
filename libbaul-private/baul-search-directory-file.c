@@ -44,7 +44,7 @@ struct CajaSearchDirectoryFileDetails
     CajaSearchDirectory *search_directory;
 };
 
-G_DEFINE_TYPE(CajaSearchDirectoryFile, baul_search_directory_file, CAJA_TYPE_FILE);
+G_DEFINE_TYPE(CajaSearchDirectoryFile, baul_search_directory_file, BAUL_TYPE_FILE);
 
 
 static void
@@ -56,7 +56,7 @@ search_directory_file_monitor_add (CajaFile *file,
        are added/removed, and no other metadata changes */
 
     /* Update display name, in case this didn't happen yet */
-    baul_search_directory_file_update_display_name (CAJA_SEARCH_DIRECTORY_FILE (file));
+    baul_search_directory_file_update_display_name (BAUL_SEARCH_DIRECTORY_FILE (file));
 }
 
 static void
@@ -74,7 +74,7 @@ search_directory_file_call_when_ready (CajaFile *file,
 
 {
     /* Update display name, in case this didn't happen yet */
-    baul_search_directory_file_update_display_name (CAJA_SEARCH_DIRECTORY_FILE (file));
+    baul_search_directory_file_update_display_name (BAUL_SEARCH_DIRECTORY_FILE (file));
 
     /* All data for directory-as-file is always uptodate */
     (* callback) (file, callback_data);
@@ -132,7 +132,7 @@ search_directory_file_get_deep_counts (CajaFile *file,
     dirs = files = 0;
     for (l = file_list; l != NULL; l = l->next)
     {
-        dir_file = CAJA_FILE (l->data);
+        dir_file = BAUL_FILE (l->data);
         type = baul_file_get_file_type (dir_file);
         if (type == G_FILE_TYPE_DIRECTORY)
         {
@@ -169,7 +169,7 @@ search_directory_file_get_deep_counts (CajaFile *file,
 
     baul_file_list_free (file_list);
 
-    return CAJA_REQUEST_DONE;
+    return BAUL_REQUEST_DONE;
 }
 
 static char *
@@ -187,13 +187,13 @@ baul_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_
 
 
     display_name = NULL;
-    file = CAJA_FILE (search_file);
+    file = BAUL_FILE (search_file);
     if (file->details->directory)
     {
         CajaSearchDirectory *search_dir;
         CajaQuery *query;
 
-        search_dir = CAJA_SEARCH_DIRECTORY (file->details->directory);
+        search_dir = BAUL_SEARCH_DIRECTORY (file->details->directory);
         query = baul_search_directory_get_query (search_dir);
 
         if (query != NULL)
@@ -220,7 +220,7 @@ baul_search_directory_file_init (CajaSearchDirectoryFile *search_file)
 {
     CajaFile *file;
 
-    file = CAJA_FILE (search_file);
+    file = BAUL_FILE (search_file);
 
     file->details->got_file_info = TRUE;
     file->details->mime_type = g_ref_string_new_intern ("x-directory/normal");
@@ -246,7 +246,7 @@ baul_search_directory_file_class_init (CajaSearchDirectoryFileClass *klass)
 {
     CajaFileClass *file_class;
 
-    file_class = CAJA_FILE_CLASS (klass);
+    file_class = BAUL_FILE_CLASS (klass);
 
     file_class->default_file_type = G_FILE_TYPE_DIRECTORY;
 

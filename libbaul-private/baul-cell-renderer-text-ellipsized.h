@@ -24,22 +24,22 @@
    Author: Martin Wehner <martin.wehner@gmail.com>
 */
 
-#ifndef CAJA_CELL_RENDERER_TEXT_ELLIPSIZED_H
-#define CAJA_CELL_RENDERER_TEXT_ELLIPSIZED_H
+#ifndef BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_H
+#define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_H
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED baul_cell_renderer_text_ellipsized_get_type()
-#define CAJA_CELL_RENDERER_TEXT_ELLIPSIZED(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsized))
-#define CAJA_CELL_RENDERER_TEXT_ELLIPSIZED_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsizedClass))
-#define CAJA_IS_CELL_RENDERER_TEXT_ELLIPSIZED(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED))
-#define CAJA_IS_CELL_RENDERER_TEXT_ELLIPSIZED_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED))
-#define CAJA_CELL_RENDERER_TEXT_ELLIPSIZED_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsizedClass))
+#define BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED baul_cell_renderer_text_ellipsized_get_type()
+#define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsized))
+#define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsizedClass))
+#define BAUL_IS_CELL_RENDERER_TEXT_ELLIPSIZED(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED))
+#define BAUL_IS_CELL_RENDERER_TEXT_ELLIPSIZED_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED))
+#define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsizedClass))
 
 
 typedef struct _CajaCellRendererTextEllipsized CajaCellRendererTextEllipsized;
@@ -58,4 +58,4 @@ struct _CajaCellRendererTextEllipsizedClass
 GType		 baul_cell_renderer_text_ellipsized_get_type (void);
 GtkCellRenderer *baul_cell_renderer_text_ellipsized_new      (void);
 
-#endif /* CAJA_CELL_RENDERER_TEXT_ELLIPSIZED_H */
+#endif /* BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_H */

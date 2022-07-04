@@ -52,14 +52,14 @@ enum
 
 typedef enum
 {
-    CAJA_QUERY_EDITOR_ROW_LOCATION,
-    CAJA_QUERY_EDITOR_ROW_TYPE,
-    CAJA_QUERY_EDITOR_ROW_TAGS,
-    CAJA_QUERY_EDITOR_ROW_TIME_MODIFIED,
-    CAJA_QUERY_EDITOR_ROW_SIZE,
-    CAJA_QUERY_EDITOR_ROW_CONTAINED_TEXT,
+    BAUL_QUERY_EDITOR_ROW_LOCATION,
+    BAUL_QUERY_EDITOR_ROW_TYPE,
+    BAUL_QUERY_EDITOR_ROW_TAGS,
+    BAUL_QUERY_EDITOR_ROW_TIME_MODIFIED,
+    BAUL_QUERY_EDITOR_ROW_SIZE,
+    BAUL_QUERY_EDITOR_ROW_CONTAINED_TEXT,
 
-    CAJA_QUERY_EDITOR_ROW_LAST
+    BAUL_QUERY_EDITOR_ROW_LAST
 } CajaQueryEditorRowType;
 
 typedef struct
@@ -220,7 +220,7 @@ baul_query_editor_finalize (GObject *object)
 {
     CajaQueryEditor *editor;
 
-    editor = CAJA_QUERY_EDITOR (object);
+    editor = BAUL_QUERY_EDITOR (object);
 
     g_free (editor->details);
 
@@ -232,7 +232,7 @@ baul_query_editor_dispose (GObject *object)
 {
     CajaQueryEditor *editor;
 
-    editor = CAJA_QUERY_EDITOR (object);
+    editor = BAUL_QUERY_EDITOR (object);
 
     if (editor->details->typing_timeout_id)
     {
@@ -273,7 +273,7 @@ baul_query_editor_class_init (CajaQueryEditorClass *class)
                       G_STRUCT_OFFSET (CajaQueryEditorClass, changed),
                       NULL, NULL,
                       baul_src_marshal_VOID__OBJECT_BOOLEAN,
-                      G_TYPE_NONE, 2, CAJA_TYPE_QUERY, G_TYPE_BOOLEAN);
+                      G_TYPE_NONE, 2, BAUL_TYPE_QUERY, G_TYPE_BOOLEAN);
 
     signals[CANCEL] =
         g_signal_new ("cancel",
@@ -305,7 +305,7 @@ typing_timeout_cb (gpointer user_data)
 {
     CajaQueryEditor *editor;
 
-    editor = CAJA_QUERY_EDITOR (user_data);
+    editor = BAUL_QUERY_EDITOR (user_data);
 
     baul_query_editor_changed (editor);
 
@@ -412,7 +412,7 @@ location_add_rows_from_query (CajaQueryEditor    *editor,
     }
 
     row = baul_query_editor_add_row (editor,
-                                     CAJA_QUERY_EDITOR_ROW_LOCATION);
+                                     BAUL_QUERY_EDITOR_ROW_LOCATION);
     gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (row->type_widget),
                                          folder);
 
@@ -517,7 +517,7 @@ tags_add_rows_from_query (CajaQueryEditor *editor,
     }
 
     CajaQueryEditorRow *row;
-    row = baul_query_editor_add_row (editor, CAJA_QUERY_EDITOR_ROW_TAGS);
+    row = baul_query_editor_add_row (editor, BAUL_QUERY_EDITOR_ROW_TAGS);
 
     gchar *tags_str = xattr_tags_list_to_str (tags);
     g_list_free_full (tags, g_free);
@@ -1020,7 +1020,7 @@ type_add_rows_from_query (CajaQueryEditor    *editor,
                          mime_types);
 
             row = baul_query_editor_add_row (editor,
-                                             CAJA_QUERY_EDITOR_ROW_TYPE);
+                                             BAUL_QUERY_EDITOR_ROW_TYPE);
 
             model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
 
@@ -1043,7 +1043,7 @@ type_add_rows_from_query (CajaQueryEditor    *editor,
         }
 
         row = baul_query_editor_add_row (editor,
-                                         CAJA_QUERY_EDITOR_ROW_TYPE);
+                                         BAUL_QUERY_EDITOR_ROW_TYPE);
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
 
         type_add_custom_type (row, mime_type, desc, &iter);
@@ -1232,7 +1232,7 @@ static GtkWidget *size_row_create_widgets(CajaQueryEditorRow *row)
     gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(size_combo), cell, "text",
                                    1, NULL);
 
-    if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_USE_IEC_UNITS))
+    if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_USE_IEC_UNITS))
     {
         gtk_list_store_append(size_store, &iter);
         gtk_list_store_set(size_store, &iter, 0, 10240, 1, _("10 KiB"), -1);
@@ -1383,7 +1383,7 @@ get_next_free_type (CajaQueryEditor *editor)
     GList *l;
 
 
-    for (type = 0; type < CAJA_QUERY_EDITOR_ROW_LAST; type++)
+    for (type = 0; type < BAUL_QUERY_EDITOR_ROW_LAST; type++)
     {
         found = FALSE;
         for (l = editor->details->rows; l != NULL; l = l->next)
@@ -1400,7 +1400,7 @@ get_next_free_type (CajaQueryEditor *editor)
             return type;
         }
     }
-    return CAJA_QUERY_EDITOR_ROW_TYPE;
+    return BAUL_QUERY_EDITOR_ROW_TYPE;
 }
 
 static void
@@ -1473,7 +1473,7 @@ baul_query_editor_add_row (CajaQueryEditor *editor,
 
     combo = gtk_combo_box_text_new ();
     row->combo = combo;
-    for (i = 0; i < CAJA_QUERY_EDITOR_ROW_LAST; i++)
+    for (i = 0; i < BAUL_QUERY_EDITOR_ROW_LAST; i++)
     {
         gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), gettext (row_type[i].name));
     }
@@ -1569,7 +1569,7 @@ baul_query_editor_set_default_query (CajaQueryEditor *editor)
 {
     if (!editor->details->is_indexed)
     {
-        baul_query_editor_add_row (editor, CAJA_QUERY_EDITOR_ROW_LOCATION);
+        baul_query_editor_add_row (editor, BAUL_QUERY_EDITOR_ROW_LOCATION);
         baul_query_editor_changed (editor);
     }
 }
@@ -1785,14 +1785,14 @@ baul_query_editor_new (gboolean start_hidden,
 {
     GtkWidget *editor;
 
-    editor = g_object_new (CAJA_TYPE_QUERY_EDITOR, NULL);
+    editor = g_object_new (BAUL_TYPE_QUERY_EDITOR, NULL);
 
-    CAJA_QUERY_EDITOR (editor)->details->is_indexed = is_indexed;
+    BAUL_QUERY_EDITOR (editor)->details->is_indexed = is_indexed;
 
-    baul_query_editor_set_visible (CAJA_QUERY_EDITOR (editor),
+    baul_query_editor_set_visible (BAUL_QUERY_EDITOR (editor),
                                    !start_hidden);
 
-    setup_internal_entry (CAJA_QUERY_EDITOR (editor));
+    setup_internal_entry (BAUL_QUERY_EDITOR (editor));
 
     return editor;
 }
@@ -1842,7 +1842,7 @@ baul_query_editor_new_with_bar (gboolean start_hidden,
     GtkWidget *entry;
     CajaQueryEditor *editor;
 
-    editor = CAJA_QUERY_EDITOR (g_object_new (CAJA_TYPE_QUERY_EDITOR, NULL));
+    editor = BAUL_QUERY_EDITOR (g_object_new (BAUL_TYPE_QUERY_EDITOR, NULL));
     editor->details->is_indexed = is_indexed;
 
     baul_query_editor_set_visible (editor, !start_hidden);
@@ -1891,7 +1891,7 @@ baul_query_editor_set_query (CajaQueryEditor *editor, CajaQuery *query)
     editor->details->change_frozen = TRUE;
     gtk_entry_set_text (GTK_ENTRY (editor->details->entry), text);
 
-    for (type = 0; type < CAJA_QUERY_EDITOR_ROW_LAST; type++)
+    for (type = 0; type < BAUL_QUERY_EDITOR_ROW_LAST; type++)
     {
         row_type[type].add_rows_from_query (editor, query);
     }

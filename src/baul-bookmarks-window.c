@@ -279,7 +279,7 @@ create_bookmarks_window (CajaBookmarkList *list, CajaWindow *window_source)
 
     application = window_source->application;
 
-    if (CAJA_IS_NAVIGATION_WINDOW (window_source))
+    if (BAUL_IS_NAVIGATION_WINDOW (window_source))
     {
         parent_is_browser_window = TRUE;
     }
@@ -306,7 +306,7 @@ create_bookmarks_window (CajaBookmarkList *list, CajaWindow *window_source)
     gtk_tree_view_append_column (bookmark_list_widget,
                                  GTK_TREE_VIEW_COLUMN (col));
     gtk_tree_view_column_set_fixed_width (GTK_TREE_VIEW_COLUMN (col),
-                                          CAJA_ICON_SIZE_SMALLER);
+                                          BAUL_ICON_SIZE_SMALLER);
 
     rend = gtk_cell_renderer_text_new ();
     g_object_set (rend,
@@ -438,7 +438,7 @@ edit_bookmarks_dialog_set_signals (CajaWindow *window)
 static CajaBookmark *
 get_selected_bookmark (void)
 {
-    g_return_val_if_fail(CAJA_IS_BOOKMARK_LIST(bookmarks), NULL);
+    g_return_val_if_fail(BAUL_IS_BOOKMARK_LIST(bookmarks), NULL);
 
     if (!get_selection_exists())
         return NULL;
@@ -483,7 +483,7 @@ baul_bookmarks_window_restore_geometry (GtkWidget *window)
     const char *window_geometry;
 
     g_return_if_fail (GTK_IS_WINDOW (window));
-    g_return_if_fail (CAJA_IS_BOOKMARK_LIST (bookmarks));
+    g_return_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks));
 
     window_geometry = baul_bookmark_list_get_window_geometry (bookmarks);
 
@@ -515,7 +515,7 @@ void
 baul_bookmarks_window_save_geometry (GtkWindow *window)
 {
     g_return_if_fail (GTK_IS_WINDOW (window));
-    g_return_if_fail (CAJA_IS_BOOKMARK_LIST (bookmarks));
+    g_return_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks));
 
     /* Don't bother if window is already closed */
     if (gtk_widget_get_visible (GTK_WIDGET (window)))
@@ -532,7 +532,7 @@ baul_bookmarks_window_save_geometry (GtkWindow *window)
 static void
 on_bookmark_list_changed (CajaBookmarkList *bookmarks, gpointer data)
 {
-    g_return_if_fail (CAJA_IS_BOOKMARK_LIST (bookmarks));
+    g_return_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks));
 
     /* maybe add logic here or in repopulate to save/restore selection */
     repopulate ();
@@ -584,11 +584,11 @@ open_selected_bookmark (gpointer user_data, GdkScreen *screen)
         return;
     }
 
-    if (CAJA_IS_NAVIGATION_WINDOW (user_data))
+    if (BAUL_IS_NAVIGATION_WINDOW (user_data))
     {
         window = user_data;
     }
-    else if (CAJA_IS_SPATIAL_WINDOW (user_data))
+    else if (BAUL_IS_SPATIAL_WINDOW (user_data))
     {
         window = baul_application_get_spatial_window (application,
                                                       NULL,
@@ -597,7 +597,7 @@ open_selected_bookmark (gpointer user_data, GdkScreen *screen)
                                                       screen,
                                                       NULL);
     } else { /* window that opened bookmarks window has been closed */
-        if (parent_is_browser_window || g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+        if (parent_is_browser_window || g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER)) {
             window = baul_application_create_navigation_window (application,
                      screen);
         }
@@ -823,12 +823,12 @@ on_selection_changed (GtkTreeSelection *treeselection,
     gtk_widget_set_sensitive (uri_field, selected != NULL);
 
     g_signal_handler_block (name_field, name_field_changed_signal_id);
-    baul_entry_set_text (CAJA_ENTRY (name_field),
+    baul_entry_set_text (BAUL_ENTRY (name_field),
                          name ? name : "");
     g_signal_handler_unblock (name_field, name_field_changed_signal_id);
 
     g_signal_handler_block (uri_field, uri_field_changed_signal_id);
-    baul_entry_set_text (CAJA_ENTRY (uri_field),
+    baul_entry_set_text (BAUL_ENTRY (uri_field),
                          entry_text ? entry_text : "");
     g_signal_handler_unblock (uri_field, uri_field_changed_signal_id);
 
@@ -913,7 +913,7 @@ on_text_field_focus_out_event (GtkWidget *widget,
                                GdkEventFocus *event,
                                gpointer user_data)
 {
-    g_assert (CAJA_IS_ENTRY (widget));
+    g_assert (BAUL_IS_ENTRY (widget));
 
     update_bookmark_from_text ();
     return FALSE;
@@ -922,7 +922,7 @@ on_text_field_focus_out_event (GtkWidget *widget,
 static void
 name_or_uri_field_activate (CajaEntry *entry)
 {
-    g_assert (CAJA_IS_ENTRY (entry));
+    g_assert (BAUL_IS_ENTRY (entry));
 
     update_bookmark_from_text ();
     baul_entry_select_all_at_idle (entry);
@@ -987,7 +987,7 @@ repopulate (void)
     GtkTreePath *path = NULL;
 
     g_assert (GTK_IS_TREE_VIEW (bookmark_list_widget));
-    g_assert (CAJA_IS_BOOKMARK_LIST (bookmarks));
+    g_assert (BAUL_IS_BOOKMARK_LIST (bookmarks));
 
     store = GTK_LIST_STORE (bookmark_list_store);
 

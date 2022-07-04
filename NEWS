@@ -331,7 +331,7 @@
   * baul-file-management-properties.ui: avoid stock properties:
   * Toolbar: find icon: use icon name instead the stock id
   * baul-bookmarks-window.ui: avoid deprecated GtkButton:use-stock
-  * CAJA_TYPE_NAVIGATION_ACTION: avoid deprecated property "stock_id"
+  * BAUL_TYPE_NAVIGATION_ACTION: avoid deprecated property "stock_id"
   * fix backgrounds and emblems dialog content rendering
   * avoid deprecated GtkStock
 

@@ -23,22 +23,22 @@
    Author: Alexander Larsson
 */
 
-#ifndef CAJA_SAVED_SEARCH_FILE_H
-#define CAJA_SAVED_SEARCH_FILE_H
+#ifndef BAUL_SAVED_SEARCH_FILE_H
+#define BAUL_SAVED_SEARCH_FILE_H
 
 #include "baul-vfs-file.h"
 
-#define CAJA_TYPE_SAVED_SEARCH_FILE baul_saved_search_file_get_type()
-#define CAJA_SAVED_SEARCH_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFile))
-#define CAJA_SAVED_SEARCH_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFileClass))
-#define CAJA_IS_SAVED_SEARCH_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SAVED_SEARCH_FILE))
-#define CAJA_IS_SAVED_SEARCH_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SAVED_SEARCH_FILE))
-#define CAJA_SAVED_SEARCH_FILE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFileClass))
+#define BAUL_TYPE_SAVED_SEARCH_FILE baul_saved_search_file_get_type()
+#define BAUL_SAVED_SEARCH_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFile))
+#define BAUL_SAVED_SEARCH_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFileClass))
+#define BAUL_IS_SAVED_SEARCH_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SAVED_SEARCH_FILE))
+#define BAUL_IS_SAVED_SEARCH_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SAVED_SEARCH_FILE))
+#define BAUL_SAVED_SEARCH_FILE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SAVED_SEARCH_FILE, CajaSavedSearchFileClass))
 
 
 typedef struct CajaSavedSearchFileDetails CajaSavedSearchFileDetails;
@@ -55,4 +55,4 @@ typedef struct
 
 GType   baul_saved_search_file_get_type (void);
 
-#endif /* CAJA_SAVED_SEARCH_FILE_H */
+#endif /* BAUL_SAVED_SEARCH_FILE_H */

@@ -21,24 +21,24 @@
  *  Author: Dave Camp <dave@ximian.com>
  */
 
-#ifndef CAJA_SIDE_PANE_H
-#define CAJA_SIDE_PANE_H
+#ifndef BAUL_SIDE_PANE_H
+#define BAUL_SIDE_PANE_H
 
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_SIDE_PANE baul_side_pane_get_type()
-#define CAJA_SIDE_PANE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SIDE_PANE, CajaSidePane))
-#define CAJA_SIDE_PANE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SIDE_PANE, CajaSidePaneClass))
-#define CAJA_IS_SIDE_PANE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SIDE_PANE))
-#define CAJA_IS_SIDE_PANE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SIDE_PANE))
-#define CAJA_SIDE_PANE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SIDE_PANE, CajaSidePaneClass))
+#define BAUL_TYPE_SIDE_PANE baul_side_pane_get_type()
+#define BAUL_SIDE_PANE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDE_PANE, CajaSidePane))
+#define BAUL_SIDE_PANE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SIDE_PANE, CajaSidePaneClass))
+#define BAUL_IS_SIDE_PANE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SIDE_PANE))
+#define BAUL_IS_SIDE_PANE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SIDE_PANE))
+#define BAUL_SIDE_PANE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SIDE_PANE, CajaSidePaneClass))
 
     typedef struct _CajaSidePanePrivate CajaSidePanePrivate;
 
@@ -75,4 +75,4 @@ G_BEGIN_DECLS
 
 G_END_DECLS
 
-#endif /* CAJA_SIDE_PANE_H */
+#endif /* BAUL_SIDE_PANE_H */

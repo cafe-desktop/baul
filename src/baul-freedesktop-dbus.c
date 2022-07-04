@@ -65,7 +65,7 @@ skeleton_handle_show_items_cb (CajaFreedesktopFileManager1 *object,
     CajaApplication *application;
     int i;
 
-    application = CAJA_APPLICATION (fdb->application);
+    application = BAUL_APPLICATION (fdb->application);
 
     for (i = 0; uris[i] != NULL; i++) {
         GFile *file;
@@ -98,7 +98,7 @@ skeleton_handle_show_folders_cb (CajaFreedesktopFileManager1 *object,
     CajaApplication *application;
     int i;
 
-    application = CAJA_APPLICATION (fdb->application);
+    application = BAUL_APPLICATION (fdb->application);
 
     for (i = 0; uris[i] != NULL; i++) {
         GFile *file;
@@ -125,7 +125,7 @@ skeleton_handle_show_item_properties_cb (CajaFreedesktopFileManager1 *object,
     GList *files;
     int i;
 
-    application = CAJA_APPLICATION (fdb->application);
+    application = BAUL_APPLICATION (fdb->application);
     files = NULL;
 
     for (i = 0; uris[i] != NULL; i++) {
@@ -162,9 +162,9 @@ bus_acquired_cb (GDBusConnection *conn,
 {
     CajaFreedesktopDBus *fdb = user_data;
 
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Bus acquired at %s", name);
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER, "Bus acquired at %s", name);
 
-    fdb->object_manager = g_dbus_object_manager_server_new (CAJA_FDO_DBUS_PATH);
+    fdb->object_manager = g_dbus_object_manager_server_new (BAUL_FDO_DBUS_PATH);
 
     fdb->skeleton = baul_freedesktop_file_manager1_skeleton_new ();
 
@@ -175,7 +175,7 @@ bus_acquired_cb (GDBusConnection *conn,
     g_signal_connect (fdb->skeleton, "handle-show-item-properties",
                       G_CALLBACK (skeleton_handle_show_item_properties_cb), fdb);
 
-    g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (fdb->skeleton), conn, CAJA_FDO_DBUS_PATH, NULL);
+    g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (fdb->skeleton), conn, BAUL_FDO_DBUS_PATH, NULL);
 
     g_dbus_object_manager_server_set_connection (fdb->object_manager, conn);
 }
@@ -185,7 +185,7 @@ name_acquired_cb (GDBusConnection *connection,
                   const gchar     *name,
                   gpointer         user_data)
 {
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Acquired the name %s on the session message bus\n", name);
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER, "Acquired the name %s on the session message bus\n", name);
 }
 
 static void
@@ -193,7 +193,7 @@ name_lost_cb (GDBusConnection *connection,
               const gchar     *name,
               gpointer         user_data)
 {
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Lost (or failed to acquire) the name %s on the session message bus\n", name);
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER, "Lost (or failed to acquire) the name %s on the session message bus\n", name);
 }
 
 static void
@@ -229,7 +229,7 @@ static void
 baul_freedesktop_dbus_init (CajaFreedesktopDBus *fdb)
 {
     fdb->owner_id = g_bus_own_name (G_BUS_TYPE_SESSION,
-                                    CAJA_FDO_DBUS_NAME,
+                                    BAUL_FDO_DBUS_NAME,
                                     G_BUS_NAME_OWNER_FLAGS_NONE,
                                     bus_acquired_cb,
                                     name_acquired_cb,

@@ -78,7 +78,7 @@ discovered. The calls used for this are baul_file_monitor_add and
 baul_file_call_when_ready respectively. Both of these calls take a
 list of information needed about a file. If all you need is the file
 type, for example, you would pass a list containing just
-CAJA_FILE_ATTRIBUTE_FILE_TYPE (the attributes are defined in
+BAUL_FILE_ATTRIBUTE_FILE_TYPE (the attributes are defined in
 baul-file-attributes.h). Not every call has a corresponding file
 attribute type. We add new ones as needed.
 

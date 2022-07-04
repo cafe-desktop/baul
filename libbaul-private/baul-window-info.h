@@ -22,8 +22,8 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_WINDOW_INFO_H
-#define CAJA_WINDOW_INFO_H
+#ifndef BAUL_WINDOW_INFO_H
+#define BAUL_WINDOW_INFO_H
 
 #include <glib-object.h>
 
@@ -37,57 +37,57 @@ extern "C" {
 
     typedef enum
     {
-        CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT,
-        CAJA_WINDOW_SHOW_HIDDEN_FILES_ENABLE,
-        CAJA_WINDOW_SHOW_HIDDEN_FILES_DISABLE
+        BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT,
+        BAUL_WINDOW_SHOW_HIDDEN_FILES_ENABLE,
+        BAUL_WINDOW_SHOW_HIDDEN_FILES_DISABLE
     }
     CajaWindowShowHiddenFilesMode;
 
     typedef enum
     {
-        CAJA_WINDOW_SHOW_BACKUP_FILES_DEFAULT,
-        CAJA_WINDOW_SHOW_BACKUP_FILES_ENABLE,
-        CAJA_WINDOW_SHOW_BACKUP_FILES_DISABLE
+        BAUL_WINDOW_SHOW_BACKUP_FILES_DEFAULT,
+        BAUL_WINDOW_SHOW_BACKUP_FILES_ENABLE,
+        BAUL_WINDOW_SHOW_BACKUP_FILES_DISABLE
     }
     CajaWindowShowBackupFilesMode;
 
     typedef enum
     {
-        CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
-        CAJA_WINDOW_OPEN_IN_SPATIAL,
-        CAJA_WINDOW_OPEN_IN_NAVIGATION
+        BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
+        BAUL_WINDOW_OPEN_IN_SPATIAL,
+        BAUL_WINDOW_OPEN_IN_NAVIGATION
     } CajaWindowOpenMode;
 
     typedef enum
     {
         /* used in spatial mode */
-        CAJA_WINDOW_OPEN_FLAG_CLOSE_BEHIND = 1<<0,
+        BAUL_WINDOW_OPEN_FLAG_CLOSE_BEHIND = 1<<0,
         /* used in navigation mode */
-        CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW = 1<<1,
-        CAJA_WINDOW_OPEN_FLAG_NEW_TAB = 1<<2
+        BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW = 1<<1,
+        BAUL_WINDOW_OPEN_FLAG_NEW_TAB = 1<<2
     } CajaWindowOpenFlags;
 
     typedef	enum
     {
-        CAJA_WINDOW_SPATIAL,
-        CAJA_WINDOW_NAVIGATION,
-        CAJA_WINDOW_DESKTOP
+        BAUL_WINDOW_SPATIAL,
+        BAUL_WINDOW_NAVIGATION,
+        BAUL_WINDOW_DESKTOP
     } CajaWindowType;
 
-#define CAJA_TYPE_WINDOW_INFO           (baul_window_info_get_type ())
-#define CAJA_WINDOW_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW_INFO, CajaWindowInfo))
-#define CAJA_IS_WINDOW_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW_INFO))
-#define CAJA_WINDOW_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_WINDOW_INFO, CajaWindowInfoIface))
+#define BAUL_TYPE_WINDOW_INFO           (baul_window_info_get_type ())
+#define BAUL_WINDOW_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_WINDOW_INFO, CajaWindowInfo))
+#define BAUL_IS_WINDOW_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_WINDOW_INFO))
+#define BAUL_WINDOW_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_WINDOW_INFO, CajaWindowInfoIface))
 
-#ifndef CAJA_WINDOW_DEFINED
-#define CAJA_WINDOW_DEFINED
+#ifndef BAUL_WINDOW_DEFINED
+#define BAUL_WINDOW_DEFINED
     /* Using CajaWindow for the vtable to make implementing this in
      * CajaWindow easier */
     typedef struct CajaWindow          CajaWindow;
 #endif
 
-#ifndef CAJA_WINDOW_SLOT_DEFINED
-#define CAJA_WINDOW_SLOT_DEFINED
+#ifndef BAUL_WINDOW_SLOT_DEFINED
+#define BAUL_WINDOW_SLOT_DEFINED
     typedef struct CajaWindowSlot      CajaWindowSlot;
 #endif
 
@@ -207,4 +207,4 @@ extern "C" {
 }
 #endif
 
-#endif /* CAJA_WINDOW_INFO_H */
+#endif /* BAUL_WINDOW_INFO_H */

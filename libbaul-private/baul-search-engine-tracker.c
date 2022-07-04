@@ -189,7 +189,7 @@ struct CajaSearchEngineTrackerDetails
 
 G_DEFINE_TYPE (CajaSearchEngineTracker,
                baul_search_engine_tracker,
-               CAJA_TYPE_SEARCH_ENGINE);
+               BAUL_TYPE_SEARCH_ENGINE);
 
 static CajaSearchEngineClass *parent_class = NULL;
 
@@ -198,7 +198,7 @@ finalize (GObject *object)
 {
     CajaSearchEngineTracker *tracker;
 
-    tracker = CAJA_SEARCH_ENGINE_TRACKER (object);
+    tracker = BAUL_SEARCH_ENGINE_TRACKER (object);
 
     if (tracker->details->query)
     {
@@ -246,14 +246,14 @@ search_callback (gpointer results, GError *error, gpointer user_data)
     gint i;
     char *uri;
 
-    tracker = CAJA_SEARCH_ENGINE_TRACKER (user_data);
+    tracker = BAUL_SEARCH_ENGINE_TRACKER (user_data);
     hit_uris = NULL;
 
     tracker->details->query_pending = FALSE;
 
     if (error)
     {
-        baul_search_engine_error (CAJA_SEARCH_ENGINE (tracker), error->message);
+        baul_search_engine_error (BAUL_SEARCH_ENGINE (tracker), error->message);
         g_error_free (error);
         return;
     }
@@ -303,8 +303,8 @@ search_callback (gpointer results, GError *error, gpointer user_data)
         g_strfreev ((gchar **)results);
     }
 
-    baul_search_engine_hits_added (CAJA_SEARCH_ENGINE (tracker), hit_uris);
-    baul_search_engine_finished (CAJA_SEARCH_ENGINE (tracker));
+    baul_search_engine_hits_added (BAUL_SEARCH_ENGINE (tracker), hit_uris);
+    baul_search_engine_finished (BAUL_SEARCH_ENGINE (tracker));
     g_list_free_full (hit_uris, g_free);
 }
 
@@ -319,7 +319,7 @@ baul_search_engine_tracker_start (CajaSearchEngine *engine)
     int 	i, mime_count;
     GString *sparql;
 
-    tracker = CAJA_SEARCH_ENGINE_TRACKER (engine);
+    tracker = BAUL_SEARCH_ENGINE_TRACKER (engine);
 
 
     if (tracker->details->query_pending)
@@ -467,7 +467,7 @@ baul_search_engine_tracker_stop (CajaSearchEngine *engine)
 {
     CajaSearchEngineTracker *tracker;
 
-    tracker = CAJA_SEARCH_ENGINE_TRACKER (engine);
+    tracker = BAUL_SEARCH_ENGINE_TRACKER (engine);
 
     if (tracker->details->query && tracker->details->query_pending)
     {
@@ -487,7 +487,7 @@ baul_search_engine_tracker_set_query (CajaSearchEngine *engine, CajaQuery *query
 {
     CajaSearchEngineTracker *tracker;
 
-    tracker = CAJA_SEARCH_ENGINE_TRACKER (engine);
+    tracker = BAUL_SEARCH_ENGINE_TRACKER (engine);
 
     if (query)
     {
@@ -513,7 +513,7 @@ baul_search_engine_tracker_class_init (CajaSearchEngineTrackerClass *class)
     gobject_class = G_OBJECT_CLASS (class);
     gobject_class->finalize = finalize;
 
-    engine_class = CAJA_SEARCH_ENGINE_CLASS (class);
+    engine_class = BAUL_SEARCH_ENGINE_CLASS (class);
     engine_class->set_query = baul_search_engine_tracker_set_query;
     engine_class->start = baul_search_engine_tracker_start;
     engine_class->stop = baul_search_engine_tracker_stop;
@@ -567,11 +567,11 @@ baul_search_engine_tracker_new (void)
         }
     }
 
-    engine = g_object_new (CAJA_TYPE_SEARCH_ENGINE_TRACKER, NULL);
+    engine = g_object_new (BAUL_TYPE_SEARCH_ENGINE_TRACKER, NULL);
 
     engine->details->client = tracker_client;
     engine->details->query_pending = FALSE;
     engine->details->version = version;
 
-    return CAJA_SEARCH_ENGINE (engine);
+    return BAUL_SEARCH_ENGINE (engine);
 }

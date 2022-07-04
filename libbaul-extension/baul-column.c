@@ -84,7 +84,7 @@ baul_column_new (const char *name,
     g_return_val_if_fail (label != NULL, NULL);
     g_return_val_if_fail (description != NULL, NULL);
 
-    column = g_object_new (CAJA_TYPE_COLUMN,
+    column = g_object_new (BAUL_TYPE_COLUMN,
                            "name", name,
                            "attribute", attribute,
                            "label", label,
@@ -102,7 +102,7 @@ baul_column_get_property (GObject *object,
 {
     CajaColumn *column;
 
-    column = CAJA_COLUMN (object);
+    column = BAUL_COLUMN (object);
 
     switch (param_id) {
     case PROP_NAME :
@@ -137,7 +137,7 @@ baul_column_set_property (GObject *object,
 {
     CajaColumn *column;
 
-    column = CAJA_COLUMN (object);
+    column = BAUL_COLUMN (object);
 
     switch (param_id) {
     case PROP_NAME :
@@ -175,7 +175,7 @@ baul_column_finalize (GObject *object)
 {
     CajaColumn *column;
 
-    column = CAJA_COLUMN (object);
+    column = BAUL_COLUMN (object);
 
     g_free (column->details->name);
     g_free (column->details->label);

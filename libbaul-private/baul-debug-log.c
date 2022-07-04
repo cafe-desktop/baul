@@ -75,7 +75,7 @@ static gboolean
 is_domain_enabled (const char *domain)
 {
     /* User actions are always logged */
-    if (strcmp (domain, CAJA_DEBUG_LOG_DOMAIN_USER) == 0)
+    if (strcmp (domain, BAUL_DEBUG_LOG_DOMAIN_USER) == 0)
         return TRUE;
 
     if (!domains_hash)
@@ -278,7 +278,7 @@ baul_debug_log_with_file_list (gboolean is_milestone, const char *domain, GList 
         CajaFile *file;
         char *uri;
 
-        file = CAJA_FILE (l->data);
+        file = BAUL_FILE (l->data);
         uri = baul_file_get_uri (file);
 
         if (baul_file_is_gone (file))
@@ -378,7 +378,7 @@ baul_debug_log_enable_domains (const char **domains, int n_domains)
     {
         g_assert (domains[i] != NULL);
 
-        if (strcmp (domains[i], CAJA_DEBUG_LOG_DOMAIN_USER) == 0)
+        if (strcmp (domains[i], BAUL_DEBUG_LOG_DOMAIN_USER) == 0)
             continue; /* user actions are always enabled */
 
         if (g_hash_table_lookup (domains_hash, domains[i]) == NULL)
@@ -411,7 +411,7 @@ baul_debug_log_disable_domains (const char **domains, int n_domains)
 
             g_assert (domains[i] != NULL);
 
-            if (strcmp (domains[i], CAJA_DEBUG_LOG_DOMAIN_USER) == 0)
+            if (strcmp (domains[i], BAUL_DEBUG_LOG_DOMAIN_USER) == 0)
                 continue; /* user actions are always enabled */
 
             domain = g_hash_table_lookup (domains_hash, domains[i]);

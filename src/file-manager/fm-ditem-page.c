@@ -534,7 +534,7 @@ fm_ditem_page_make_box (GtkSizeGroup *label_size_group,
     g_object_set_data_full (G_OBJECT (box), "label-size-group",
                             label_size_group, (GDestroyNotify) g_object_unref);
 
-    info = CAJA_FILE_INFO (files->data);
+    info = BAUL_FILE_INFO (files->data);
 
     uri = baul_file_info_get_uri (info);
     fm_ditem_page_create_begin (uri, box);
@@ -553,7 +553,7 @@ fm_ditem_page_should_show (GList *files)
         return FALSE;
     }
 
-    info = CAJA_FILE_INFO (files->data);
+    info = BAUL_FILE_INFO (files->data);
 
     if (!baul_file_info_is_mime_type (info, "application/x-desktop"))
     {

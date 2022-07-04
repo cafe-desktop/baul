@@ -21,16 +21,16 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef CAJA_LOCATION_DIALOG_H
-#define CAJA_LOCATION_DIALOG_H
+#ifndef BAUL_LOCATION_DIALOG_H
+#define BAUL_LOCATION_DIALOG_H
 
 #include <gtk/gtk.h>
 #include "baul-window.h"
 
-#define CAJA_TYPE_LOCATION_DIALOG         (baul_location_dialog_get_type ())
-#define CAJA_LOCATION_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_LOCATION_DIALOG, CajaLocationDialog))
-#define CAJA_LOCATION_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_LOCATION_DIALOG, CajaLocationDialogClass))
-#define CAJA_IS_LOCATION_DIALOG(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_LOCATION_DIALOG)
+#define BAUL_TYPE_LOCATION_DIALOG         (baul_location_dialog_get_type ())
+#define BAUL_LOCATION_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_LOCATION_DIALOG, CajaLocationDialog))
+#define BAUL_LOCATION_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_LOCATION_DIALOG, CajaLocationDialogClass))
+#define BAUL_IS_LOCATION_DIALOG(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_LOCATION_DIALOG)
 
 typedef struct _CajaLocationDialog        CajaLocationDialog;
 typedef struct _CajaLocationDialogClass   CajaLocationDialogClass;
@@ -52,4 +52,4 @@ GtkWidget* baul_location_dialog_new          (CajaWindow         *window);
 void       baul_location_dialog_set_location (CajaLocationDialog *dialog,
         const char             *location);
 
-#endif /* CAJA_LOCATION_DIALOG_H */
+#endif /* BAUL_LOCATION_DIALOG_H */

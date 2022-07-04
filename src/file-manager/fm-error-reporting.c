@@ -279,7 +279,7 @@ rename_callback (CajaFile *file, GFile *result_location,
 {
     FMRenameData *data;
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (callback_data == NULL);
 
     data = g_object_get_data (G_OBJECT (file), NEW_NAME_TAG);
@@ -301,7 +301,7 @@ cancel_rename_callback (gpointer callback_data)
     GError *error;
 
     error = g_error_new (G_IO_ERROR, G_IO_ERROR_CANCELLED, "Cancelled");
-    finish_rename (CAJA_FILE (callback_data), FALSE, error);
+    finish_rename (BAUL_FILE (callback_data), FALSE, error);
     g_error_free (error);
 }
 
@@ -343,7 +343,7 @@ fm_rename_file (CajaFile *file,
     char *uri;
     GError *error;
 
-    g_return_if_fail (CAJA_IS_FILE (file));
+    g_return_if_fail (BAUL_IS_FILE (file));
     g_return_if_fail (new_name != NULL);
 
     /* Stop any earlier rename that's already in progress. */
@@ -372,7 +372,7 @@ fm_rename_file (CajaFile *file,
     g_free (wait_message);
 
     uri = baul_file_get_uri (file);
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                     "rename file old=\"%s\", new=\"%s\"",
                     uri, new_name);
     g_free (uri);

@@ -71,7 +71,7 @@ baul_entry_init (CajaEntry *entry)
 GtkWidget *
 baul_entry_new (void)
 {
-    return gtk_widget_new (CAJA_TYPE_ENTRY, NULL);
+    return gtk_widget_new (BAUL_TYPE_ENTRY, NULL);
 }
 
 static void
@@ -79,7 +79,7 @@ baul_entry_finalize (GObject *object)
 {
     CajaEntry *entry;
 
-    entry = CAJA_ENTRY (object);
+    entry = BAUL_ENTRY (object);
 
     if (entry->details->select_idle_id != 0)
     {
@@ -99,7 +99,7 @@ baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
     gboolean old_has, new_has;
     gboolean result;
 
-    entry = CAJA_ENTRY (widget);
+    entry = BAUL_ENTRY (widget);
     editable = GTK_EDITABLE (widget);
 
     if (!gtk_editable_get_editable (editable))
@@ -187,7 +187,7 @@ baul_entry_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 void
 baul_entry_select_all (CajaEntry *entry)
 {
-    g_return_if_fail (CAJA_IS_ENTRY (entry));
+    g_return_if_fail (BAUL_IS_ENTRY (entry));
 
     gtk_editable_set_position (GTK_EDITABLE (entry), -1);
     gtk_editable_select_region (GTK_EDITABLE (entry), 0, -1);
@@ -198,7 +198,7 @@ select_all_at_idle (gpointer callback_data)
 {
     CajaEntry *entry;
 
-    entry = CAJA_ENTRY (callback_data);
+    entry = BAUL_ENTRY (callback_data);
 
     baul_entry_select_all (entry);
 
@@ -220,7 +220,7 @@ select_all_at_idle (gpointer callback_data)
 void
 baul_entry_select_all_at_idle (CajaEntry *entry)
 {
-    g_return_if_fail (CAJA_IS_ENTRY (entry));
+    g_return_if_fail (BAUL_IS_ENTRY (entry));
 
     /* If the text cursor position changes in this routine
      * then gtk_entry_key_press will unselect (and we want
@@ -248,7 +248,7 @@ baul_entry_select_all_at_idle (CajaEntry *entry)
 void
 baul_entry_set_text (CajaEntry *entry, const gchar *text)
 {
-    g_return_if_fail (CAJA_IS_ENTRY (entry));
+    g_return_if_fail (BAUL_IS_ENTRY (entry));
 
     entry->details->user_edit = FALSE;
     gtk_entry_set_text (GTK_ENTRY (entry), text);
@@ -305,7 +305,7 @@ baul_entry_insert_text (GtkEditable *editable, const gchar *text,
 {
     CajaEntry *entry;
 
-    entry = CAJA_ENTRY(editable);
+    entry = BAUL_ENTRY(editable);
 
     /* Fire off user changed signals */
     if (entry->details->user_edit)
@@ -323,7 +323,7 @@ baul_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
 {
     CajaEntry *entry;
 
-    entry = CAJA_ENTRY (editable);
+    entry = BAUL_ENTRY (editable);
 
     /* Fire off user changed signals */
     if (entry->details->user_edit)
@@ -348,7 +348,7 @@ static gboolean
 baul_entry_selection_clear (GtkWidget *widget,
                             GdkEventSelection *event)
 {
-    g_assert (CAJA_IS_ENTRY (widget));
+    g_assert (BAUL_IS_ENTRY (widget));
 
     if (gdk_selection_owner_get (event->selection) == gtk_widget_get_window (widget))
     {
@@ -413,7 +413,7 @@ void
 baul_entry_set_special_tab_handling (CajaEntry *entry,
                                      gboolean special_tab_handling)
 {
-    g_return_if_fail (CAJA_IS_ENTRY (entry));
+    g_return_if_fail (BAUL_IS_ENTRY (entry));
 
     entry->details->special_tab_handling = special_tab_handling;
 }

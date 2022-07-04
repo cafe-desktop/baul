@@ -29,8 +29,8 @@
  * Extensions are called when Caja displays a location.
  */
 
-#ifndef CAJA_LOCATION_WIDGET_PROVIDER_H
-#define CAJA_LOCATION_WIDGET_PROVIDER_H
+#ifndef BAUL_LOCATION_WIDGET_PROVIDER_H
+#define BAUL_LOCATION_WIDGET_PROVIDER_H
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -38,10 +38,10 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_LOCATION_WIDGET_PROVIDER           (baul_location_widget_provider_get_type ())
-#define CAJA_LOCATION_WIDGET_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_LOCATION_WIDGET_PROVIDER, CajaLocationWidgetProvider))
-#define CAJA_IS_LOCATION_WIDGET_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_LOCATION_WIDGET_PROVIDER))
-#define CAJA_LOCATION_WIDGET_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_LOCATION_WIDGET_PROVIDER, CajaLocationWidgetProviderIface))
+#define BAUL_TYPE_LOCATION_WIDGET_PROVIDER           (baul_location_widget_provider_get_type ())
+#define BAUL_LOCATION_WIDGET_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_LOCATION_WIDGET_PROVIDER, CajaLocationWidgetProvider))
+#define BAUL_IS_LOCATION_WIDGET_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_LOCATION_WIDGET_PROVIDER))
+#define BAUL_LOCATION_WIDGET_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_LOCATION_WIDGET_PROVIDER, CajaLocationWidgetProviderIface))
 
 typedef struct _CajaLocationWidgetProvider       CajaLocationWidgetProvider;
 typedef struct _CajaLocationWidgetProviderIface  CajaLocationWidgetProviderIface;

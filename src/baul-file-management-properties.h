@@ -22,8 +22,8 @@
    Authors: Jan Arne Petersen <jpetersen@uni-bonn.de>
 */
 
-#ifndef CAJA_FILE_MANAGEMENT_PROPERTIES_H
-#define CAJA_FILE_MANAGEMENT_PROPERTIES_H
+#ifndef BAUL_FILE_MANAGEMENT_PROPERTIES_H
+#define BAUL_FILE_MANAGEMENT_PROPERTIES_H
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -38,4 +38,4 @@ extern "C" {
 }
 #endif
 
-#endif /* CAJA_FILE_MANAGEMENT_PROPERTIES_H */
+#endif /* BAUL_FILE_MANAGEMENT_PROPERTIES_H */

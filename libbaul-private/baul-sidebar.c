@@ -44,7 +44,7 @@ baul_sidebar_base_init (gpointer g_class)
     {
         baul_sidebar_signals[TAB_ICON_CHANGED] =
             g_signal_new ("tab_icon_changed",
-                          CAJA_TYPE_SIDEBAR,
+                          BAUL_TYPE_SIDEBAR,
                           G_SIGNAL_RUN_LAST,
                           G_STRUCT_OFFSET (CajaSidebarIface, tab_icon_changed),
                           NULL, NULL,
@@ -88,41 +88,41 @@ baul_sidebar_get_type (void)
 const char *
 baul_sidebar_get_sidebar_id (CajaSidebar *sidebar)
 {
-    g_return_val_if_fail (CAJA_IS_SIDEBAR (sidebar), NULL);
+    g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);
 
-    return (* CAJA_SIDEBAR_GET_IFACE (sidebar)->get_sidebar_id) (sidebar);
+    return (* BAUL_SIDEBAR_GET_IFACE (sidebar)->get_sidebar_id) (sidebar);
 }
 
 char *
 baul_sidebar_get_tab_label (CajaSidebar *sidebar)
 {
-    g_return_val_if_fail (CAJA_IS_SIDEBAR (sidebar), NULL);
+    g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);
 
-    return (* CAJA_SIDEBAR_GET_IFACE (sidebar)->get_tab_label) (sidebar);
+    return (* BAUL_SIDEBAR_GET_IFACE (sidebar)->get_tab_label) (sidebar);
 }
 
 char *
 baul_sidebar_get_tab_tooltip (CajaSidebar *sidebar)
 {
-    g_return_val_if_fail (CAJA_IS_SIDEBAR (sidebar), NULL);
+    g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);
 
-    return (* CAJA_SIDEBAR_GET_IFACE (sidebar)->get_tab_tooltip) (sidebar);
+    return (* BAUL_SIDEBAR_GET_IFACE (sidebar)->get_tab_tooltip) (sidebar);
 }
 
 GdkPixbuf *
 baul_sidebar_get_tab_icon (CajaSidebar *sidebar)
 {
-    g_return_val_if_fail (CAJA_IS_SIDEBAR (sidebar), NULL);
+    g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);
 
-    return (* CAJA_SIDEBAR_GET_IFACE (sidebar)->get_tab_icon) (sidebar);
+    return (* BAUL_SIDEBAR_GET_IFACE (sidebar)->get_tab_icon) (sidebar);
 }
 
 void
 baul_sidebar_is_visible_changed (CajaSidebar *sidebar,
                                  gboolean         is_visible)
 {
-    g_return_if_fail (CAJA_IS_SIDEBAR (sidebar));
+    g_return_if_fail (BAUL_IS_SIDEBAR (sidebar));
 
-    (* CAJA_SIDEBAR_GET_IFACE (sidebar)->is_visible_changed) (sidebar,
+    (* BAUL_SIDEBAR_GET_IFACE (sidebar)->is_visible_changed) (sidebar,
             is_visible);
 }

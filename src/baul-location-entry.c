@@ -73,7 +73,7 @@ static void  baul_location_entry_init             (CajaLocationEntry      *entry
 
 EEL_CLASS_BOILERPLATE (CajaLocationEntry,
                        baul_location_entry,
-                       CAJA_TYPE_ENTRY)
+                       BAUL_TYPE_ENTRY)
 
 /* routine that performs the tab expansion.  Extract the directory name and
    incomplete basename, then iterate through the directory trying to complete it.  If we
@@ -87,7 +87,7 @@ try_to_expand_path (gpointer callback_data)
     char *suffix, *user_location, *uri_scheme;
     int user_location_length, pos;
 
-    entry = CAJA_LOCATION_ENTRY (callback_data);
+    entry = BAUL_LOCATION_ENTRY (callback_data);
     editable = GTK_EDITABLE (entry);
     user_location = gtk_editable_get_chars (editable, 0, -1);
     user_location_length = g_utf8_strlen (user_location, -1);
@@ -280,7 +280,7 @@ finalize (GObject *object)
 {
     CajaLocationEntry *entry;
 
-    entry = CAJA_LOCATION_ENTRY (object);
+    entry = BAUL_LOCATION_ENTRY (object);
 
     g_object_unref (entry->details->completer);
     g_free (entry->details->special_text);
@@ -294,7 +294,7 @@ destroy (GtkWidget *object)
 {
     CajaLocationEntry *entry;
 
-    entry = CAJA_LOCATION_ENTRY (object);
+    entry = BAUL_LOCATION_ENTRY (object);
 
     /* cancel the pending idle call, if any */
     if (entry->details->idle_id != 0)
@@ -327,12 +327,12 @@ baul_location_entry_icon_release (GtkEntry *gentry,
                                   GdkEvent *event,
                                   gpointer unused)
 {
-    switch (CAJA_LOCATION_ENTRY (gentry)->details->secondary_action)
+    switch (BAUL_LOCATION_ENTRY (gentry)->details->secondary_action)
     {
-    case CAJA_LOCATION_ENTRY_ACTION_GOTO:
+    case BAUL_LOCATION_ENTRY_ACTION_GOTO:
         g_signal_emit_by_name (gentry, "activate", gentry);
         break;
-    case CAJA_LOCATION_ENTRY_ACTION_CLEAR:
+    case BAUL_LOCATION_ENTRY_ACTION_CLEAR:
         gtk_entry_set_text (gentry, "");
         break;
     default:
@@ -344,7 +344,7 @@ static gboolean
 baul_location_entry_focus_in (GtkWidget     *widget,
                               GdkEventFocus *event)
 {
-    CajaLocationEntry *entry = CAJA_LOCATION_ENTRY (widget);
+    CajaLocationEntry *entry = BAUL_LOCATION_ENTRY (widget);
 
     if (entry->details->has_special_text)
     {
@@ -363,7 +363,7 @@ baul_location_entry_activate (GtkEntry *entry)
     const gchar *entry_text;
     gchar *uri_scheme = NULL;
 
-    loc_entry = CAJA_LOCATION_ENTRY (entry);
+    loc_entry = BAUL_LOCATION_ENTRY (entry);
     entry_text = gtk_entry_get_text (entry);
 
     if (entry_text != NULL && *entry_text != '\0')
@@ -405,7 +405,7 @@ baul_location_entry_update_current_location (CajaLocationEntry *entry,
     g_free (entry->details->current_directory);
     entry->details->current_directory = g_strdup (location);
 
-    baul_entry_set_text (CAJA_ENTRY (entry), location);
+    baul_entry_set_text (BAUL_ENTRY (entry), location);
     set_position_and_selection_to_end (GTK_EDITABLE (entry));
 }
 
@@ -419,12 +419,12 @@ baul_location_entry_set_secondary_action (CajaLocationEntry *entry,
     }
     switch (secondary_action)
     {
-    case CAJA_LOCATION_ENTRY_ACTION_CLEAR:
+    case BAUL_LOCATION_ENTRY_ACTION_CLEAR:
         gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
                                            GTK_ENTRY_ICON_SECONDARY,
                                            "edit-clear");
         break;
-    case CAJA_LOCATION_ENTRY_ACTION_GOTO:
+    case BAUL_LOCATION_ENTRY_ACTION_GOTO:
         gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
                                            GTK_ENTRY_ICON_SECONDARY,
                                            "forward");
@@ -449,9 +449,9 @@ baul_location_entry_init (CajaLocationEntry *entry)
     g_filename_completer_set_dirs_only (entry->details->completer, TRUE);
 
     baul_location_entry_set_secondary_action (entry,
-            CAJA_LOCATION_ENTRY_ACTION_CLEAR);
+            BAUL_LOCATION_ENTRY_ACTION_CLEAR);
 
-    baul_entry_set_special_tab_handling (CAJA_ENTRY (entry), TRUE);
+    baul_entry_set_special_tab_handling (BAUL_ENTRY (entry), TRUE);
 
     g_signal_connect (entry, "event_after",
                       G_CALLBACK (editable_event_after_callback), entry);
@@ -471,7 +471,7 @@ baul_location_entry_new (void)
 {
     GtkWidget *entry;
 
-    entry = gtk_widget_new (CAJA_TYPE_LOCATION_ENTRY, NULL);
+    entry = gtk_widget_new (BAUL_TYPE_LOCATION_ENTRY, NULL);
 
     return entry;
 }

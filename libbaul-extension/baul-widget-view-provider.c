@@ -77,10 +77,10 @@ baul_widget_view_provider_get_type (void)
 GtkWidget *
 baul_widget_view_provider_get_widget (CajaWidgetViewProvider *provider)
 {
-    g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider), NULL);
-    g_return_val_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_widget != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider), NULL);
+    g_return_val_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_widget != NULL, NULL);
 
-    return CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_widget (provider);
+    return BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_widget (provider);
 }
 
 /**
@@ -93,10 +93,10 @@ baul_widget_view_provider_get_widget (CajaWidgetViewProvider *provider)
  **/
 void baul_widget_view_provider_add_file (CajaWidgetViewProvider *provider, CajaFile *file, CajaFile *directory)
 {
-    g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider));
-    g_return_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->add_file != NULL);
+    g_return_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider));
+    g_return_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->add_file != NULL);
 
-    CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->add_file (provider, file, directory);
+    BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->add_file (provider, file, directory);
 }
 
 /**
@@ -108,10 +108,10 @@ void baul_widget_view_provider_add_file (CajaWidgetViewProvider *provider, CajaF
  **/
 void baul_widget_view_provider_set_location (CajaWidgetViewProvider *provider, const char *location)
 {
-    g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider));
-    g_return_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_location != NULL);
+    g_return_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider));
+    g_return_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_location != NULL);
 
-    CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_location (provider, location);
+    BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_location (provider, location);
 }
 
 /**
@@ -123,10 +123,10 @@ void baul_widget_view_provider_set_location (CajaWidgetViewProvider *provider, c
  **/
 void baul_widget_view_provider_set_window (CajaWidgetViewProvider *provider, GtkWindow *window)
 {
-    g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider));
-    g_return_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_window != NULL);
+    g_return_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider));
+    g_return_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_window != NULL);
 
-    CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_window (provider, window);
+    BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_window (provider, window);
 }
 
 /**
@@ -137,10 +137,10 @@ void baul_widget_view_provider_set_window (CajaWidgetViewProvider *provider, Gtk
  **/
 guint baul_widget_view_provider_get_item_count (CajaWidgetViewProvider *provider)
 {
-    g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider), 0);
-    g_return_val_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_item_count != NULL, 0);
+    g_return_val_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider), 0);
+    g_return_val_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_item_count != NULL, 0);
 
-    return CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_item_count (provider);
+    return BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_item_count (provider);
 }
 
 /**
@@ -154,10 +154,10 @@ guint baul_widget_view_provider_get_item_count (CajaWidgetViewProvider *provider
  **/
 gchar* baul_widget_view_provider_get_first_visible_file (CajaWidgetViewProvider *provider)
 {
-    g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider), NULL);
-    g_return_val_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_first_visible_file != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider), NULL);
+    g_return_val_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_first_visible_file != NULL, NULL);
 
-    return CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_first_visible_file (provider);
+    return BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->get_first_visible_file (provider);
 }
 
 /**
@@ -168,10 +168,10 @@ gchar* baul_widget_view_provider_get_first_visible_file (CajaWidgetViewProvider 
  **/
 void baul_widget_view_provider_clear (CajaWidgetViewProvider *provider)
 {
-    g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider));
-    g_return_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->clear != NULL);
+    g_return_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider));
+    g_return_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->clear != NULL);
 
-    CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->clear (provider);
+    BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->clear (provider);
 }
 
 /**
@@ -190,8 +190,8 @@ gboolean baul_widget_view_provider_supports_uri (CajaWidgetViewProvider *provide
                                                  GFileType file_type,
                                                  const char *mime_type)
 {
-    g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (provider), FALSE);
-    g_return_val_if_fail (CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->supports_uri!= NULL, FALSE);
+    g_return_val_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider), FALSE);
+    g_return_val_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->supports_uri!= NULL, FALSE);
 
-    return CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->supports_uri (provider, uri, file_type, mime_type);
+    return BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->supports_uri (provider, uri, file_type, mime_type);
 }

@@ -74,19 +74,19 @@ file_icons_changed (CajaFile *file,
     cairo_surface_t *surface;
 
     surface = baul_file_get_icon_surface (fcd->details->destination,
-                                          CAJA_ICON_SIZE_LARGE,
+                                          BAUL_ICON_SIZE_LARGE,
                                           FALSE,
                                           gtk_widget_get_scale_factor (fcd->details->dest_image),
-                                          CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS);
+                                          BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS);
 
     gtk_image_set_from_surface (GTK_IMAGE (fcd->details->dest_image), surface);
     cairo_surface_destroy (surface);
 
     surface = baul_file_get_icon_surface (fcd->details->source,
-                                          CAJA_ICON_SIZE_LARGE,
+                                          BAUL_ICON_SIZE_LARGE,
                                           FALSE,
                                           gtk_widget_get_scale_factor (fcd->details->src_image),
-                                          CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS);
+                                          BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS);
 
     gtk_image_set_from_surface (GTK_IMAGE (fcd->details->src_image), surface);
     cairo_surface_destroy (surface);
@@ -235,10 +235,10 @@ file_list_ready_cb (GList *files,
 
     /* Set up file icons */
     surface = baul_file_get_icon_surface (dest,
-                                          CAJA_ICON_SIZE_LARGE,
+                                          BAUL_ICON_SIZE_LARGE,
                                           TRUE,
                                           gtk_widget_get_scale_factor (fcd->details->titles_vbox),
-                                          CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS);
+                                          BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS);
     details->dest_image = gtk_image_new_from_surface (surface);
     gtk_box_pack_start (GTK_BOX (details->first_hbox),
                         details->dest_image, FALSE, FALSE, 0);
@@ -246,10 +246,10 @@ file_list_ready_cb (GList *files,
     cairo_surface_destroy (surface);
 
     surface = baul_file_get_icon_surface (src,
-                                          CAJA_ICON_SIZE_LARGE,
+                                          BAUL_ICON_SIZE_LARGE,
                                           TRUE,
                                           gtk_widget_get_scale_factor (fcd->details->titles_vbox),
-                                          CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS);
+                                          BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS);
     details->src_image = gtk_image_new_from_surface (surface);
     gtk_box_pack_start (GTK_BOX (details->second_hbox),
                         details->src_image, FALSE, FALSE, 0);
@@ -367,8 +367,8 @@ file_list_ready_cb (GList *files,
         }
     }
 
-    baul_file_monitor_add (src, fcd, CAJA_FILE_ATTRIBUTES_FOR_ICON);
-    baul_file_monitor_add (dest, fcd, CAJA_FILE_ATTRIBUTES_FOR_ICON);
+    baul_file_monitor_add (src, fcd, BAUL_FILE_ATTRIBUTES_FOR_ICON);
+    baul_file_monitor_add (dest, fcd, BAUL_FILE_ATTRIBUTES_FOR_ICON);
 
     details->src_handler_id = g_signal_connect (src, "changed",
                               G_CALLBACK (file_icons_changed), fcd);
@@ -387,7 +387,7 @@ build_dialog_appearance (CajaFileConflictDialog *fcd)
     files = g_list_prepend (files, details->dest_dir);
 
     baul_file_list_call_when_ready (files,
-                                    CAJA_FILE_ATTRIBUTES_FOR_ICON,
+                                    BAUL_FILE_ATTRIBUTES_FOR_ICON,
                                     &details->handle, file_list_ready_cb, fcd);
     g_list_free (files);
 }
@@ -401,7 +401,7 @@ set_source_and_destination (GtkWidget *w,
     CajaFileConflictDialog *dialog;
     CajaFileConflictDialogPrivate *details;
 
-    dialog = CAJA_FILE_CONFLICT_DIALOG (w);
+    dialog = BAUL_FILE_CONFLICT_DIALOG (w);
     details = dialog->details;
 
     details->source = baul_file_get (source);
@@ -682,7 +682,7 @@ static void
 do_finalize (GObject *self)
 {
     CajaFileConflictDialogPrivate *details =
-        CAJA_FILE_CONFLICT_DIALOG (self)->details;
+        BAUL_FILE_CONFLICT_DIALOG (self)->details;
 
     g_free (details->conflict_name);
 
@@ -747,12 +747,12 @@ baul_file_conflict_dialog_new (GtkWindow *parent,
     dest_is_dir = baul_file_is_directory (dest);
 
     if (source_is_dir) {
-        dialog = GTK_WIDGET (g_object_new (CAJA_TYPE_FILE_CONFLICT_DIALOG,
+        dialog = GTK_WIDGET (g_object_new (BAUL_TYPE_FILE_CONFLICT_DIALOG,
                                            "title", dest_is_dir ? _("Merge Folder") : _("File and Folder conflict"),
                                            NULL));
     }
     else {
-        dialog = GTK_WIDGET (g_object_new (CAJA_TYPE_FILE_CONFLICT_DIALOG,
+        dialog = GTK_WIDGET (g_object_new (BAUL_TYPE_FILE_CONFLICT_DIALOG,
                                            "title", dest_is_dir ? _("File and Folder conflict") : _("File conflict"),
                                            NULL));
     }

@@ -208,8 +208,8 @@ typedef struct
     GtkTreeModelFilterClass parent_class;
 } CajaShortcutsModelFilterClass;
 
-#define CAJA_SHORTCUTS_MODEL_FILTER_TYPE (_baul_shortcuts_model_filter_get_type ())
-#define CAJA_SHORTCUTS_MODEL_FILTER(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_SHORTCUTS_MODEL_FILTER_TYPE, CajaShortcutsModelFilter))
+#define BAUL_SHORTCUTS_MODEL_FILTER_TYPE (_baul_shortcuts_model_filter_get_type ())
+#define BAUL_SHORTCUTS_MODEL_FILTER(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_SHORTCUTS_MODEL_FILTER_TYPE, CajaShortcutsModelFilter))
 
 GType _baul_shortcuts_model_filter_get_type (void);
 static void baul_shortcuts_model_filter_drag_source_iface_init (GtkTreeDragSourceIface *iface);
@@ -225,11 +225,11 @@ static GtkTreeModel *baul_shortcuts_model_filter_new (CajaPlacesSidebar *sidebar
         GtkTreePath           *root);
 
 G_DEFINE_TYPE_WITH_CODE (CajaPlacesSidebar, baul_places_sidebar, GTK_TYPE_SCROLLED_WINDOW,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_SIDEBAR,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_places_sidebar_iface_init));
 
 G_DEFINE_TYPE_WITH_CODE (CajaPlacesSidebarProvider, baul_places_sidebar_provider, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_SIDEBAR_PROVIDER,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR_PROVIDER,
                                  sidebar_provider_iface_init));
 
 static cairo_surface_t *
@@ -519,7 +519,7 @@ update_places (CajaPlacesSidebar *sidebar)
 
     mount_uri = baul_get_home_directory_uri ();
     display_name = g_filename_display_basename (g_get_home_dir ());
-    icon = g_themed_icon_new (CAJA_ICON_HOME);
+    icon = g_themed_icon_new (BAUL_ICON_HOME);
     last_iter = add_place (sidebar, PLACES_BUILT_IN,
                            SECTION_COMPUTER,
                            display_name, icon,
@@ -536,7 +536,7 @@ update_places (CajaPlacesSidebar *sidebar)
     desktop_path = baul_get_desktop_directory ();
     if (strcmp (g_get_home_dir(), desktop_path) != 0) {
 	    mount_uri = g_filename_to_uri (desktop_path, NULL, NULL);
-	    icon = g_themed_icon_new (CAJA_ICON_DESKTOP);
+	    icon = g_themed_icon_new (BAUL_ICON_DESKTOP);
 	    last_iter = add_place (sidebar, PLACES_BUILT_IN,
 	                           SECTION_COMPUTER,
 	                           _("Desktop"), icon,
@@ -552,7 +552,7 @@ update_places (CajaPlacesSidebar *sidebar)
 
     /* file system root */
     mount_uri = "file:///"; /* No need to strdup */
-    icon = g_themed_icon_new (CAJA_ICON_FILESYSTEM);
+    icon = g_themed_icon_new (BAUL_ICON_FILESYSTEM);
     last_iter = add_place (sidebar, PLACES_BUILT_IN,
                            SECTION_COMPUTER,
                            _("File System"), icon,
@@ -881,7 +881,7 @@ update_places (CajaPlacesSidebar *sidebar)
 
     /* network:// */
     mount_uri = "network:///"; /* No need to strdup */
-    icon = g_themed_icon_new (CAJA_ICON_NETWORK);
+    icon = g_themed_icon_new (BAUL_ICON_NETWORK);
     last_iter = add_place (sidebar, PLACES_BUILT_IN,
                            SECTION_NETWORK,
                            _("Browse Network"), icon,
@@ -1059,7 +1059,7 @@ desktop_location_changed_callback (gpointer user_data)
 {
     CajaPlacesSidebar *sidebar;
 
-    sidebar = CAJA_PLACES_SIDEBAR (user_data);
+    sidebar = BAUL_PLACES_SIDEBAR (user_data);
 
     update_places (sidebar);
 }
@@ -1383,7 +1383,7 @@ bookmarks_drop_uris (CajaPlacesSidebar *sidebar,
         baul_file_unref (file);
 
         name = baul_compute_title_for_location (location);
-        icon = g_themed_icon_new (CAJA_ICON_FOLDER);
+        icon = g_themed_icon_new (BAUL_ICON_FOLDER);
         bookmark = baul_bookmark_new (location, name, TRUE, icon);
 
         if (!baul_bookmark_list_contains (sidebar->bookmarks, bookmark))
@@ -1662,8 +1662,8 @@ bookmarks_popup_menu_detach_cb (GtkWidget *attach_widget,
 {
     CajaPlacesSidebar *sidebar;
 
-    sidebar = CAJA_PLACES_SIDEBAR (attach_widget);
-    g_assert (CAJA_IS_PLACES_SIDEBAR (sidebar));
+    sidebar = BAUL_PLACES_SIDEBAR (attach_widget);
+    g_assert (BAUL_IS_PLACES_SIDEBAR (sidebar));
 
     sidebar->popup_menu = NULL;
     sidebar->popup_menu_remove_item = NULL;
@@ -1861,7 +1861,7 @@ volume_mounted_cb (GVolume *volume,
     GMount *mount;
     CajaPlacesSidebar *sidebar;
 
-    sidebar = CAJA_PLACES_SIDEBAR (user_data);
+    sidebar = BAUL_PLACES_SIDEBAR (user_data);
 
     sidebar->mounting = FALSE;
 
@@ -1874,17 +1874,17 @@ volume_mounted_cb (GVolume *volume,
 
         if (sidebar->go_to_after_mount_slot != NULL)
         {
-            if ((sidebar->go_to_after_mount_flags & CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW) == 0)
+            if ((sidebar->go_to_after_mount_flags & BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW) == 0)
             {
                 baul_window_slot_info_open_location (sidebar->go_to_after_mount_slot, location,
-                                                     CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+                                                     BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
                                                      sidebar->go_to_after_mount_flags, NULL);
             }
             else
             {
                 CajaWindow *cur, *new;
 
-                cur = CAJA_WINDOW (sidebar->window);
+                cur = BAUL_WINDOW (sidebar->window);
                 new = baul_application_create_navigation_window (cur->application,
                         gtk_window_get_screen (GTK_WINDOW (cur)));
                 baul_window_go_to (new, location);
@@ -1952,23 +1952,23 @@ open_selected_bookmark (CajaPlacesSidebar   *sidebar,
     {
         GFile *location;
 
-        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                         "activate from places sidebar window=%p: %s",
                         sidebar->window, uri);
         location = g_file_new_for_uri (uri);
         /* Navigate to the clicked location */
-        if ((flags & CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW) == 0)
+        if ((flags & BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW) == 0)
         {
             slot = baul_window_info_get_active_slot (sidebar->window);
             baul_window_slot_info_open_location (slot, location,
-                                                 CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+                                                 BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
                                                  flags, NULL);
         }
         else
         {
             CajaWindow *cur, *new;
 
-            cur = CAJA_WINDOW (sidebar->window);
+            cur = BAUL_WINDOW (sidebar->window);
             new = baul_application_create_navigation_window (cur->application,
                     gtk_window_get_screen (GTK_WINDOW (cur)));
             baul_window_go_to (new, location);
@@ -2046,14 +2046,14 @@ static void
 open_shortcut_in_new_window_cb (GtkMenuItem       *item,
                                 CajaPlacesSidebar *sidebar)
 {
-    open_shortcut_from_menu (sidebar, CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW);
+    open_shortcut_from_menu (sidebar, BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW);
 }
 
 static void
 open_shortcut_in_new_tab_cb (GtkMenuItem       *item,
                              CajaPlacesSidebar *sidebar)
 {
-    open_shortcut_from_menu (sidebar, CAJA_WINDOW_OPEN_FLAG_NEW_TAB);
+    open_shortcut_from_menu (sidebar, BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
 }
 
 /* Rename the selected bookmark */
@@ -2638,9 +2638,9 @@ bookmarks_key_press_event_cb (GtkWidget             *widget,
         GtkTreeModel *model;
 
         if ((event->state & modifiers) == GDK_SHIFT_MASK)
-            flags = CAJA_WINDOW_OPEN_FLAG_NEW_TAB;
+            flags = BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
         else if ((event->state & modifiers) == GDK_CONTROL_MASK)
-            flags = CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW;
+            flags = BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW;
 
         model = gtk_tree_view_get_model(sidebar->tree_view);
         gtk_tree_view_get_cursor(sidebar->tree_view, &path, NULL);
@@ -2788,7 +2788,7 @@ bookmarks_build_popup_menu (CajaPlacesSidebar *sidebar)
 
     /* Empty Trash menu item */
 
-    item = eel_image_menu_item_new_from_icon (CAJA_ICON_TRASH, _("Empty _Trash"));
+    item = eel_image_menu_item_new_from_icon (BAUL_ICON_TRASH, _("Empty _Trash"));
     sidebar->popup_menu_empty_trash_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (empty_trash_cb), sidebar);
@@ -2998,8 +2998,8 @@ bookmarks_button_press_event_cb (GtkWidget             *widget,
 
         open_selected_bookmark (sidebar, model, path,
                                 event->state & GDK_CONTROL_MASK ?
-                                CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW :
-                                CAJA_WINDOW_OPEN_FLAG_NEW_TAB);
+                                BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW :
+                                BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
 
         if (path != NULL)
         {
@@ -3053,7 +3053,7 @@ trash_state_changed_cb (CajaTrashMonitor    *trash_monitor,
 {
     CajaPlacesSidebar *sidebar;
 
-    sidebar = CAJA_PLACES_SIDEBAR (data);
+    sidebar = BAUL_PLACES_SIDEBAR (data);
 
     /* The trash icon changed, update the sidebar */
     update_places (sidebar);
@@ -3272,7 +3272,7 @@ baul_places_sidebar_init (CajaPlacesSidebar *sidebar)
                       G_CALLBACK (bookmarks_editing_canceled), sidebar);
 
     /* this is required to align the eject buttons to the right */
-    gtk_tree_view_column_set_max_width (GTK_TREE_VIEW_COLUMN (col), CAJA_ICON_SIZE_SMALLER);
+    gtk_tree_view_column_set_max_width (GTK_TREE_VIEW_COLUMN (col), BAUL_ICON_SIZE_SMALLER);
     gtk_tree_view_append_column (tree_view, col);
 
     sidebar->store = gtk_list_store_new (PLACES_SIDEBAR_COLUMN_COUNT,
@@ -3350,7 +3350,7 @@ baul_places_sidebar_init (CajaPlacesSidebar *sidebar)
     eel_gtk_tree_view_set_activate_on_single_click (sidebar->tree_view,
             TRUE);
 
-    g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+    g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_DESKTOP_IS_HOME_DIR,
                               G_CALLBACK(desktop_location_changed_callback),
                               sidebar);
 
@@ -3365,7 +3365,7 @@ baul_places_sidebar_dispose (GObject *object)
 {
     CajaPlacesSidebar *sidebar;
 
-    sidebar = CAJA_PLACES_SIDEBAR (object);
+    sidebar = BAUL_PLACES_SIDEBAR (object);
 
     sidebar->window = NULL;
     sidebar->tree_view = NULL;
@@ -3405,7 +3405,7 @@ baul_places_sidebar_class_init (CajaPlacesSidebarClass *class)
 static const char *
 baul_places_sidebar_get_sidebar_id (CajaSidebar *sidebar)
 {
-    return CAJA_PLACES_SIDEBAR_ID;
+    return BAUL_PLACES_SIDEBAR_ID;
 }
 
 static char *
@@ -3491,7 +3491,7 @@ baul_places_sidebar_style_updated (GtkWidget *widget)
 {
     CajaPlacesSidebar *sidebar;
 
-    sidebar = CAJA_PLACES_SIDEBAR (widget);
+    sidebar = BAUL_PLACES_SIDEBAR (widget);
 
     update_places (sidebar);
 }
@@ -3506,7 +3506,7 @@ baul_places_sidebar_create (CajaSidebarProvider *provider,
     baul_places_sidebar_set_parent_window (sidebar, window);
     g_object_ref_sink (sidebar);
 
-    return CAJA_SIDEBAR (sidebar);
+    return BAUL_SIDEBAR (sidebar);
 }
 
 static void
@@ -3582,7 +3582,7 @@ baul_shortcuts_model_filter_new (CajaPlacesSidebar *sidebar,
 {
     CajaShortcutsModelFilter *model;
 
-    model = g_object_new (CAJA_SHORTCUTS_MODEL_FILTER_TYPE,
+    model = g_object_new (BAUL_SHORTCUTS_MODEL_FILTER_TYPE,
                           "child-model", child_model,
                           "virtual-root", root,
                           NULL);

@@ -27,8 +27,8 @@
  *                                 contain a hierarchy of files
  */
 
-#ifndef CAJA_TREE_VIEW_DRAG_DEST_H
-#define CAJA_TREE_VIEW_DRAG_DEST_H
+#ifndef BAUL_TREE_VIEW_DRAG_DEST_H
+#define BAUL_TREE_VIEW_DRAG_DEST_H
 
 #include <gtk/gtk.h>
 
@@ -38,11 +38,11 @@
 extern "C" {
 #endif
 
-#define CAJA_TYPE_TREE_VIEW_DRAG_DEST	(baul_tree_view_drag_dest_get_type ())
-#define CAJA_TREE_VIEW_DRAG_DEST(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_TREE_VIEW_DRAG_DEST, CajaTreeViewDragDest))
-#define CAJA_TREE_VIEW_DRAG_DEST_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_TREE_VIEW_DRAG_DEST, CajaTreeViewDragDestClass))
-#define CAJA_IS_TREE_VIEW_DRAG_DEST(obj)		(G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_TREE_VIEW_DRAG_DEST))
-#define CAJA_IS_TREE_VIEW_DRAG_DEST_CLASS(klass)	(G_TYPE_CLASS_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_TREE_VIEW_DRAG_DEST))
+#define BAUL_TYPE_TREE_VIEW_DRAG_DEST	(baul_tree_view_drag_dest_get_type ())
+#define BAUL_TREE_VIEW_DRAG_DEST(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_TREE_VIEW_DRAG_DEST, CajaTreeViewDragDest))
+#define BAUL_TREE_VIEW_DRAG_DEST_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_TREE_VIEW_DRAG_DEST, CajaTreeViewDragDestClass))
+#define BAUL_IS_TREE_VIEW_DRAG_DEST(obj)		(G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_TREE_VIEW_DRAG_DEST))
+#define BAUL_IS_TREE_VIEW_DRAG_DEST_CLASS(klass)	(G_TYPE_CLASS_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_TREE_VIEW_DRAG_DEST))
 
     typedef struct _CajaTreeViewDragDest        CajaTreeViewDragDest;
     typedef struct _CajaTreeViewDragDestClass   CajaTreeViewDragDestClass;

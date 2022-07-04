@@ -46,7 +46,7 @@ baul_menu_provider_base_init (gpointer g_class)
     if (!initialized) {
         /* This signal should be emited each time the extension modify the list of menu items */
         g_signal_new ("items_updated",
-                      CAJA_TYPE_MENU_PROVIDER,
+                      BAUL_TYPE_MENU_PROVIDER,
                       G_SIGNAL_RUN_LAST,
                       0,
                       NULL, NULL,
@@ -96,10 +96,10 @@ baul_menu_provider_get_file_items (CajaMenuProvider *provider,
                                    GtkWidget        *window,
                                    GList            *files)
 {
-    g_return_val_if_fail (CAJA_IS_MENU_PROVIDER (provider), NULL);
+    g_return_val_if_fail (BAUL_IS_MENU_PROVIDER (provider), NULL);
 
-    if (CAJA_MENU_PROVIDER_GET_IFACE (provider)->get_file_items) {
-        return CAJA_MENU_PROVIDER_GET_IFACE (provider)->get_file_items
+    if (BAUL_MENU_PROVIDER_GET_IFACE (provider)->get_file_items) {
+        return BAUL_MENU_PROVIDER_GET_IFACE (provider)->get_file_items
                (provider, window, files);
     } else {
         return NULL;
@@ -119,11 +119,11 @@ baul_menu_provider_get_background_items (CajaMenuProvider *provider,
                                          GtkWidget        *window,
                                          CajaFileInfo     *current_folder)
 {
-    g_return_val_if_fail (CAJA_IS_MENU_PROVIDER (provider), NULL);
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (current_folder), NULL);
+    g_return_val_if_fail (BAUL_IS_MENU_PROVIDER (provider), NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (current_folder), NULL);
 
-    if (CAJA_MENU_PROVIDER_GET_IFACE (provider)->get_background_items) {
-        return CAJA_MENU_PROVIDER_GET_IFACE (provider)->get_background_items
+    if (BAUL_MENU_PROVIDER_GET_IFACE (provider)->get_background_items) {
+        return BAUL_MENU_PROVIDER_GET_IFACE (provider)->get_background_items
                (provider, window, current_folder);
     } else {
         return NULL;
@@ -143,11 +143,11 @@ baul_menu_provider_get_toolbar_items (CajaMenuProvider *provider,
                                       GtkWidget        *window,
                                       CajaFileInfo     *current_folder)
 {
-    g_return_val_if_fail (CAJA_IS_MENU_PROVIDER (provider), NULL);
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (current_folder), NULL);
+    g_return_val_if_fail (BAUL_IS_MENU_PROVIDER (provider), NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (current_folder), NULL);
 
-    if (CAJA_MENU_PROVIDER_GET_IFACE (provider)->get_toolbar_items) {
-        return CAJA_MENU_PROVIDER_GET_IFACE (provider)->get_toolbar_items
+    if (BAUL_MENU_PROVIDER_GET_IFACE (provider)->get_toolbar_items) {
+        return BAUL_MENU_PROVIDER_GET_IFACE (provider)->get_toolbar_items
                (provider, window, current_folder);
     } else {
         return NULL;
@@ -158,7 +158,7 @@ baul_menu_provider_get_toolbar_items (CajaMenuProvider *provider,
 void
 baul_menu_provider_emit_items_updated_signal (CajaMenuProvider* provider)
 {
-    g_return_if_fail (CAJA_IS_MENU_PROVIDER (provider));
+    g_return_if_fail (BAUL_IS_MENU_PROVIDER (provider));
 
     g_signal_emit_by_name (provider, "items_updated");
 }

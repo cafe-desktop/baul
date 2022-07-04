@@ -40,8 +40,8 @@ void baul_run_self_checks (void);
    can be used to do operations on the whole list of functions.
 */
 
-#define CAJA_FOR_EACH_SELF_CHECK_FUNCTION(macro) \
+#define BAUL_FOR_EACH_SELF_CHECK_FUNCTION(macro) \
 /* Add new self-check functions to the list above this line. */
 
 /* Generate prototypes for all the functions. */
-CAJA_FOR_EACH_SELF_CHECK_FUNCTION (CAJA_SELF_CHECK_FUNCTION_PROTOTYPE)
+BAUL_FOR_EACH_SELF_CHECK_FUNCTION (BAUL_SELF_CHECK_FUNCTION_PROTOTYPE)

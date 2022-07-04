@@ -162,7 +162,7 @@ static void   fm_list_view_rename_callback                 (CajaFile      *file,
 
 
 G_DEFINE_TYPE_WITH_CODE (FMListView, fm_list_view, FM_TYPE_DIRECTORY_VIEW,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_VIEW,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_VIEW,
                                  fm_list_view_iface_init));
 
 static const char * default_trash_visible_columns[] =
@@ -274,7 +274,7 @@ activate_selected_items (FMListView *view)
 
     fm_directory_view_activate_files (FM_DIRECTORY_VIEW (view),
                                       file_list,
-                                      CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+                                      BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
                                       0,
                                       TRUE);
     baul_file_list_free (file_list);
@@ -289,15 +289,15 @@ activate_selected_items_alternate (FMListView *view,
     GList *file_list;
     CajaWindowOpenFlags flags;
 
-    flags = CAJA_WINDOW_OPEN_FLAG_CLOSE_BEHIND;
+    flags = BAUL_WINDOW_OPEN_FLAG_CLOSE_BEHIND;
 
     if (open_in_tab)
     {
-        flags |= CAJA_WINDOW_OPEN_FLAG_NEW_TAB;
+        flags |= BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
     }
     else
     {
-        flags |= CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW;
+        flags |= BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW;
     }
 
     if (file != NULL)
@@ -311,7 +311,7 @@ activate_selected_items_alternate (FMListView *view,
     }
     fm_directory_view_activate_files (FM_DIRECTORY_VIEW (view),
                                       file_list,
-                                      CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+                                      BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
                                       flags,
                                       TRUE);
     baul_file_list_free (file_list);
@@ -354,7 +354,7 @@ fm_list_view_did_not_drag (FMListView *view,
             }
         }
 
-        if ((click_policy_auto_value == CAJA_CLICK_POLICY_SINGLE)
+        if ((click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE)
                 && !button_event_modifies_selection(event))
         {
             if (event->button == 1)
@@ -540,7 +540,7 @@ motion_notify_callback (GtkWidget *widget,
         return FALSE;
     }
 
-    if (click_policy_auto_value == CAJA_CLICK_POLICY_SINGLE)
+    if (click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE)
     {
         GtkTreePath *old_hover_path;
 
@@ -604,7 +604,7 @@ leave_notify_callback (GtkWidget *widget,
 
     view = FM_LIST_VIEW (callback_data);
 
-    if (click_policy_auto_value == CAJA_CLICK_POLICY_SINGLE &&
+    if (click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE &&
             view->details->hover_path != NULL)
     {
         gtk_tree_path_free (view->details->hover_path);
@@ -623,7 +623,7 @@ enter_notify_callback (GtkWidget *widget,
 
     view = FM_LIST_VIEW (callback_data);
 
-    if (click_policy_auto_value == CAJA_CLICK_POLICY_SINGLE)
+    if (click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE)
     {
         if (view->details->hover_path != NULL)
         {
@@ -713,7 +713,7 @@ button_press_callback (GtkWidget *widget, GdkEventButton *event, gpointer callba
     last_click_time = current_time;
 
     /* Ignore double click if we are in single click mode */
-    if (click_policy_auto_value == CAJA_CLICK_POLICY_SINGLE && click_count >= 2)
+    if (click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE && click_count >= 2)
     {
         return TRUE;
     }
@@ -960,7 +960,7 @@ row_expanded_callback (GtkTreeView *treeview, GtkTreeIter *iter, GtkTreePath *pa
         char *uri;
 
         uri = baul_directory_get_uri (directory);
-        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                         "list view row expanded window=%p: %s",
                         fm_directory_view_get_containing_window (FM_DIRECTORY_VIEW (view)),
                         uri);
@@ -1060,7 +1060,7 @@ row_collapsed_callback (GtkTreeView *treeview, GtkTreeIter *iter, GtkTreePath *p
 
 
     uri = baul_file_get_uri (file);
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                     "list view row collapsed window=%p: %s",
                     fm_directory_view_get_containing_window (FM_DIRECTORY_VIEW (view)),
                     uri);
@@ -1093,7 +1093,7 @@ subdirectory_unloaded_callback (FMListModel *model,
     FMListView *view;
 
     g_return_if_fail (FM_IS_LIST_MODEL (model));
-    g_return_if_fail (CAJA_IS_DIRECTORY (directory));
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
 
     view = FM_LIST_VIEW(callback_data);
 
@@ -1292,7 +1292,7 @@ sort_column_changed_callback (GtkTreeSortable *sortable,
     default_sort_column_id = fm_list_model_get_sort_column_id_from_attribute (view->details->model,
                              g_quark_from_string (get_default_sort_order (file, &default_sort_reversed)));
     default_sort_attr = fm_list_model_get_attribute_from_sort_column_id (view->details->model, default_sort_column_id);
-    baul_file_set_metadata (file, CAJA_METADATA_KEY_LIST_VIEW_SORT_COLUMN,
+    baul_file_set_metadata (file, BAUL_METADATA_KEY_LIST_VIEW_SORT_COLUMN,
                             g_quark_to_string (default_sort_attr), g_quark_to_string (sort_attr));
 
     default_reversed_attr = (default_sort_reversed ? "true" : "false");
@@ -1306,7 +1306,7 @@ sort_column_changed_callback (GtkTreeSortable *sortable,
         if (sort_attr == default_sort_attr)
         {
             /* use value from preferences */
-            reversed = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER);
+            reversed = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER);
         }
         else
         {
@@ -1325,7 +1325,7 @@ sort_column_changed_callback (GtkTreeSortable *sortable,
 
 
     reversed_attr = (reversed ? "true" : "false");
-    baul_file_set_metadata (file, CAJA_METADATA_KEY_LIST_VIEW_SORT_REVERSED,
+    baul_file_set_metadata (file, BAUL_METADATA_KEY_LIST_VIEW_SORT_REVERSED,
                             default_reversed_attr, reversed_attr);
 
     /* Make sure selected item(s) is visible after sort */
@@ -1606,7 +1606,7 @@ filename_cell_data_func (GtkTreeViewColumn *column,
                         view->details->file_name_column_num, &text,
                         -1);
 
-    if (click_policy_auto_value == CAJA_CLICK_POLICY_SINGLE)
+    if (click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE)
     {
         GtkTreePath *path;
 
@@ -1760,7 +1760,7 @@ create_and_set_up_tree_view (FMListView *view)
         char *label;
         float xalign;
 
-        baul_column = CAJA_COLUMN (l->data);
+        baul_column = BAUL_COLUMN (l->data);
 
         g_object_get (baul_column,
                       "name", &name,
@@ -1883,7 +1883,7 @@ get_visible_columns (FMListView *list_view)
 
     visible_columns = baul_file_get_metadata_list
                       (file,
-                       CAJA_METADATA_KEY_LIST_VIEW_VISIBLE_COLUMNS);
+                       BAUL_METADATA_KEY_LIST_VIEW_VISIBLE_COLUMNS);
 
     if (visible_columns)
     {
@@ -1924,7 +1924,7 @@ get_column_order (FMListView *list_view)
 
     column_order = baul_file_get_metadata_list
                    (file,
-                    CAJA_METADATA_KEY_LIST_VIEW_COLUMN_ORDER);
+                    BAUL_METADATA_KEY_LIST_VIEW_COLUMN_ORDER);
 
     if (column_order)
     {
@@ -1978,7 +1978,7 @@ set_sort_order_from_metadata_and_preferences (FMListView *list_view)
 
     file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (list_view));
     sort_attribute = baul_file_get_metadata (file,
-                     CAJA_METADATA_KEY_LIST_VIEW_SORT_COLUMN,
+                     BAUL_METADATA_KEY_LIST_VIEW_SORT_COLUMN,
                      NULL);
     sort_column_id = fm_list_model_get_sort_column_id_from_attribute (list_view->details->model,
                      g_quark_from_string (sort_attribute));
@@ -1994,7 +1994,7 @@ set_sort_order_from_metadata_and_preferences (FMListView *list_view)
     }
 
     sort_reversed = baul_file_get_boolean_metadata (file,
-                    CAJA_METADATA_KEY_LIST_VIEW_SORT_REVERSED,
+                    BAUL_METADATA_KEY_LIST_VIEW_SORT_REVERSED,
                     default_sort_reversed);
 
     gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_view->details->model),
@@ -2019,10 +2019,10 @@ get_default_zoom_level (void)
 
     default_zoom_level = default_zoom_level_auto_value;
 
-    if (default_zoom_level <  CAJA_ZOOM_LEVEL_SMALLEST
-            || CAJA_ZOOM_LEVEL_LARGEST < default_zoom_level)
+    if (default_zoom_level <  BAUL_ZOOM_LEVEL_SMALLEST
+            || BAUL_ZOOM_LEVEL_LARGEST < default_zoom_level)
     {
-        default_zoom_level = CAJA_ZOOM_LEVEL_SMALL;
+        default_zoom_level = BAUL_ZOOM_LEVEL_SMALL;
     }
 
     return default_zoom_level;
@@ -2038,7 +2038,7 @@ set_zoom_level_from_metadata_and_preferences (FMListView *list_view)
 
         file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (list_view));
         level = baul_file_get_integer_metadata (file,
-                                                CAJA_METADATA_KEY_LIST_VIEW_ZOOM_LEVEL,
+                                                BAUL_METADATA_KEY_LIST_VIEW_ZOOM_LEVEL,
                                                 get_default_zoom_level ());
         fm_list_view_set_zoom_level (list_view, level, TRUE);
 
@@ -2453,7 +2453,7 @@ column_chooser_changed_callback (CajaColumnChooser *chooser,
     }
     list = g_list_reverse (list);
     baul_file_set_metadata_list (file,
-                                 CAJA_METADATA_KEY_LIST_VIEW_VISIBLE_COLUMNS,
+                                 BAUL_METADATA_KEY_LIST_VIEW_VISIBLE_COLUMNS,
                                  list);
     g_list_free (list);
 
@@ -2464,7 +2464,7 @@ column_chooser_changed_callback (CajaColumnChooser *chooser,
     }
     list = g_list_reverse (list);
     baul_file_set_metadata_list (file,
-                                 CAJA_METADATA_KEY_LIST_VIEW_COLUMN_ORDER,
+                                 BAUL_METADATA_KEY_LIST_VIEW_COLUMN_ORDER,
                                  list);
     g_list_free (list);
 
@@ -2519,8 +2519,8 @@ column_chooser_use_default_callback (CajaColumnChooser *chooser,
     file = fm_directory_view_get_directory_as_file
            (FM_DIRECTORY_VIEW (view));
 
-    baul_file_set_metadata_list (file, CAJA_METADATA_KEY_LIST_VIEW_COLUMN_ORDER, NULL);
-    baul_file_set_metadata_list (file, CAJA_METADATA_KEY_LIST_VIEW_VISIBLE_COLUMNS, NULL);
+    baul_file_set_metadata_list (file, BAUL_METADATA_KEY_LIST_VIEW_COLUMN_ORDER, NULL);
+    baul_file_set_metadata_list (file, BAUL_METADATA_KEY_LIST_VIEW_VISIBLE_COLUMNS, NULL);
 
     /* set view values ourselves, as new metadata could not have been
      * updated yet.
@@ -2604,7 +2604,7 @@ create_column_editor (FMListView *view)
                       view);
 
     column_chooser_set_from_settings
-    (CAJA_COLUMN_CHOOSER (column_chooser), view);
+    (BAUL_COLUMN_CHOOSER (column_chooser), view);
 
     return window;
 }
@@ -2716,11 +2716,11 @@ fm_list_view_reset_to_defaults (FMDirectoryView *view)
 
     file = fm_directory_view_get_directory_as_file (view);
 
-    baul_file_set_metadata (file, CAJA_METADATA_KEY_LIST_VIEW_SORT_COLUMN, NULL, NULL);
-    baul_file_set_metadata (file, CAJA_METADATA_KEY_LIST_VIEW_SORT_REVERSED, NULL, NULL);
-    baul_file_set_metadata (file, CAJA_METADATA_KEY_LIST_VIEW_ZOOM_LEVEL, NULL, NULL);
-    baul_file_set_metadata_list (file, CAJA_METADATA_KEY_LIST_VIEW_COLUMN_ORDER, NULL);
-    baul_file_set_metadata_list (file, CAJA_METADATA_KEY_LIST_VIEW_VISIBLE_COLUMNS, NULL);
+    baul_file_set_metadata (file, BAUL_METADATA_KEY_LIST_VIEW_SORT_COLUMN, NULL, NULL);
+    baul_file_set_metadata (file, BAUL_METADATA_KEY_LIST_VIEW_SORT_REVERSED, NULL, NULL);
+    baul_file_set_metadata (file, BAUL_METADATA_KEY_LIST_VIEW_ZOOM_LEVEL, NULL, NULL);
+    baul_file_set_metadata_list (file, BAUL_METADATA_KEY_LIST_VIEW_COLUMN_ORDER, NULL);
+    baul_file_set_metadata_list (file, BAUL_METADATA_KEY_LIST_VIEW_VISIBLE_COLUMNS, NULL);
 
     default_sort_order = get_default_sort_order (file, &default_sort_reversed);
 
@@ -2742,8 +2742,8 @@ fm_list_view_scale_font_size (FMListView *view,
     static gboolean first_time = TRUE;
     static double pango_scale[7];
 
-    g_return_if_fail (new_level >= CAJA_ZOOM_LEVEL_SMALLEST &&
-                      new_level <= CAJA_ZOOM_LEVEL_LARGEST);
+    g_return_if_fail (new_level >= BAUL_ZOOM_LEVEL_SMALLEST &&
+                      new_level <= BAUL_ZOOM_LEVEL_LARGEST);
 
     if (first_time)
     {
@@ -2751,14 +2751,14 @@ fm_list_view_scale_font_size (FMListView *view,
         int i;
 
         first_time = FALSE;
-        medium = CAJA_ZOOM_LEVEL_SMALLER;
+        medium = BAUL_ZOOM_LEVEL_SMALLER;
         pango_scale[medium] = PANGO_SCALE_MEDIUM;
 
-        for (i = medium; i > CAJA_ZOOM_LEVEL_SMALLEST; i--)
+        for (i = medium; i > BAUL_ZOOM_LEVEL_SMALLEST; i--)
         {
             pango_scale[i - 1] = (1 / 1.2) * pango_scale[i];
         }
-        for (i = medium; i < CAJA_ZOOM_LEVEL_LARGEST; i++)
+        for (i = medium; i < BAUL_ZOOM_LEVEL_LARGEST; i++)
         {
             pango_scale[i + 1] = 1.2 * pango_scale[i];
         }
@@ -2784,8 +2784,8 @@ fm_list_view_set_zoom_level (FMListView *view,
     int column;
 
     g_return_if_fail (FM_IS_LIST_VIEW (view));
-    g_return_if_fail (new_level >= CAJA_ZOOM_LEVEL_SMALLEST &&
-                      new_level <= CAJA_ZOOM_LEVEL_LARGEST);
+    g_return_if_fail (new_level >= BAUL_ZOOM_LEVEL_SMALLEST &&
+                      new_level <= BAUL_ZOOM_LEVEL_LARGEST);
 
     if (view->details->zoom_level == new_level)
     {
@@ -2801,7 +2801,7 @@ fm_list_view_set_zoom_level (FMListView *view,
 
     baul_file_set_integer_metadata
     (fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (view)),
-     CAJA_METADATA_KEY_LIST_VIEW_ZOOM_LEVEL,
+     BAUL_METADATA_KEY_LIST_VIEW_ZOOM_LEVEL,
      get_default_zoom_level (),
      new_level);
 
@@ -2839,8 +2839,8 @@ fm_list_view_bump_zoom_level (FMDirectoryView *view, int zoom_increment)
     list_view = FM_LIST_VIEW (view);
     new_level = list_view->details->zoom_level + zoom_increment;
 
-    if (new_level >= CAJA_ZOOM_LEVEL_SMALLEST &&
-            new_level <= CAJA_ZOOM_LEVEL_LARGEST)
+    if (new_level >= BAUL_ZOOM_LEVEL_SMALLEST &&
+            new_level <= BAUL_ZOOM_LEVEL_LARGEST)
     {
         fm_list_view_set_zoom_level (list_view, new_level, FALSE);
     }
@@ -2851,7 +2851,7 @@ fm_list_view_get_zoom_level (FMDirectoryView *view)
 {
     FMListView *list_view;
 
-    g_return_val_if_fail (FM_IS_LIST_VIEW (view), CAJA_ZOOM_LEVEL_STANDARD);
+    g_return_val_if_fail (FM_IS_LIST_VIEW (view), BAUL_ZOOM_LEVEL_STANDARD);
 
     list_view = FM_LIST_VIEW (view);
 
@@ -2888,7 +2888,7 @@ fm_list_view_can_zoom_in (FMDirectoryView *view)
 {
     g_return_val_if_fail (FM_IS_LIST_VIEW (view), FALSE);
 
-    return FM_LIST_VIEW (view)->details->zoom_level	< CAJA_ZOOM_LEVEL_LARGEST;
+    return FM_LIST_VIEW (view)->details->zoom_level	< BAUL_ZOOM_LEVEL_LARGEST;
 }
 
 static gboolean
@@ -2896,7 +2896,7 @@ fm_list_view_can_zoom_out (FMDirectoryView *view)
 {
     g_return_val_if_fail (FM_IS_LIST_VIEW (view), FALSE);
 
-    return FM_LIST_VIEW (view)->details->zoom_level > CAJA_ZOOM_LEVEL_SMALLEST;
+    return FM_LIST_VIEW (view)->details->zoom_level > BAUL_ZOOM_LEVEL_SMALLEST;
 }
 
 static void
@@ -2969,7 +2969,7 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
     display = gtk_widget_get_display (GTK_WIDGET (view));
 
     /* ensure that we unset the hand cursor and refresh underlined rows */
-    if (click_policy_auto_value == CAJA_CLICK_POLICY_DOUBLE)
+    if (click_policy_auto_value == BAUL_CLICK_POLICY_DOUBLE)
     {
         GtkTreeView *tree;
 
@@ -3004,7 +3004,7 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
         g_clear_object (&hand_cursor);
 
     }
-    else if (click_policy_auto_value == CAJA_CLICK_POLICY_SINGLE)
+    else if (click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE)
     {
         if (hand_cursor == NULL)
         {
@@ -3374,22 +3374,22 @@ fm_list_view_class_init (FMListViewClass *class)
     fm_directory_view_class->set_is_active = real_set_is_active;
 
     eel_g_settings_add_auto_enum (baul_preferences,
-                                  CAJA_PREFERENCES_CLICK_POLICY,
+                                  BAUL_PREFERENCES_CLICK_POLICY,
                                   &click_policy_auto_value);
     eel_g_settings_add_auto_enum (baul_preferences,
-                                  CAJA_PREFERENCES_DEFAULT_SORT_ORDER,
+                                  BAUL_PREFERENCES_DEFAULT_SORT_ORDER,
                                   (int *) &default_sort_order_auto_value);
     eel_g_settings_add_auto_boolean (baul_preferences,
-                                     CAJA_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER,
+                                     BAUL_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER,
                                      &default_sort_reversed_auto_value);
     eel_g_settings_add_auto_enum (baul_list_view_preferences,
-                                  CAJA_PREFERENCES_LIST_VIEW_DEFAULT_ZOOM_LEVEL,
+                                  BAUL_PREFERENCES_LIST_VIEW_DEFAULT_ZOOM_LEVEL,
                                   (int *) &default_zoom_level_auto_value);
     eel_g_settings_add_auto_strv (baul_list_view_preferences,
-                                  CAJA_PREFERENCES_LIST_VIEW_DEFAULT_VISIBLE_COLUMNS,
+                                  BAUL_PREFERENCES_LIST_VIEW_DEFAULT_VISIBLE_COLUMNS,
                                   &default_visible_columns_auto_value);
     eel_g_settings_add_auto_strv (baul_list_view_preferences,
-                                  CAJA_PREFERENCES_LIST_VIEW_DEFAULT_COLUMN_ORDER,
+                                  BAUL_PREFERENCES_LIST_VIEW_DEFAULT_COLUMN_ORDER,
                                   &default_column_order_auto_value);
 }
 
@@ -3420,23 +3420,23 @@ fm_list_view_init (FMListView *list_view)
     create_and_set_up_tree_view (list_view);
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_DEFAULT_SORT_ORDER,
+                              "changed::" BAUL_PREFERENCES_DEFAULT_SORT_ORDER,
                               G_CALLBACK (default_sort_order_changed_callback),
                               list_view);
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER,
+                              "changed::" BAUL_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER,
                               G_CALLBACK (default_sort_order_changed_callback),
                               list_view);
     g_signal_connect_swapped (baul_list_view_preferences,
-                              "changed::" CAJA_PREFERENCES_LIST_VIEW_DEFAULT_ZOOM_LEVEL,
+                              "changed::" BAUL_PREFERENCES_LIST_VIEW_DEFAULT_ZOOM_LEVEL,
                               G_CALLBACK (default_zoom_level_changed_callback),
                               list_view);
     g_signal_connect_swapped (baul_list_view_preferences,
-                              "changed::" CAJA_PREFERENCES_LIST_VIEW_DEFAULT_VISIBLE_COLUMNS,
+                              "changed::" BAUL_PREFERENCES_LIST_VIEW_DEFAULT_VISIBLE_COLUMNS,
                               G_CALLBACK (default_visible_columns_changed_callback),
                               list_view);
     g_signal_connect_swapped (baul_list_view_preferences,
-                              "changed::" CAJA_PREFERENCES_LIST_VIEW_DEFAULT_COLUMN_ORDER,
+                              "changed::" BAUL_PREFERENCES_LIST_VIEW_DEFAULT_COLUMN_ORDER,
                               G_CALLBACK (default_column_order_changed_callback),
                               list_view);
 
@@ -3445,7 +3445,7 @@ fm_list_view_init (FMListView *list_view)
     fm_list_view_sort_directories_first_changed (FM_DIRECTORY_VIEW (list_view));
 
     /* ensure that the zoom level is always set in begin_loading */
-    list_view->details->zoom_level = CAJA_ZOOM_LEVEL_SMALLEST - 1;
+    list_view->details->zoom_level = BAUL_ZOOM_LEVEL_SMALLEST - 1;
 
     list_view->details->hover_path = NULL;
     list_view->details->clipboard_handler_id =
@@ -3462,7 +3462,7 @@ fm_list_view_create (CajaWindowSlotInfo *slot)
     view = g_object_new (FM_TYPE_LIST_VIEW,
                          "window-slot", slot,
                          NULL);
-    return CAJA_VIEW (view);
+    return BAUL_VIEW (view);
 }
 
 static gboolean
@@ -3474,7 +3474,7 @@ fm_list_view_supports_uri (const char *uri,
     {
         return TRUE;
     }
-    if (strcmp (mime_type, CAJA_SAVED_SEARCH_MIMETYPE) == 0)
+    if (strcmp (mime_type, BAUL_SAVED_SEARCH_MIMETYPE) == 0)
     {
         return TRUE;
     }

@@ -23,17 +23,17 @@
  *
  */
 
-#ifndef CAJA_ZOOM_ACTION_H
-#define CAJA_ZOOM_ACTION_H
+#ifndef BAUL_ZOOM_ACTION_H
+#define BAUL_ZOOM_ACTION_H
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_ZOOM_ACTION            (baul_zoom_action_get_type ())
-#define CAJA_ZOOM_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ZOOM_ACTION, CajaZoomAction))
-#define CAJA_ZOOM_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_ZOOM_ACTION, CajaZoomActionClass))
-#define CAJA_IS_ZOOM_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_ZOOM_ACTION))
-#define CAJA_IS_ZOOM_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), CAJA_TYPE_ZOOM_ACTION))
-#define CAJA_ZOOM_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), CAJA_TYPE_ZOOM_ACTION, CajaZoomActionClass))
+#define BAUL_TYPE_ZOOM_ACTION            (baul_zoom_action_get_type ())
+#define BAUL_ZOOM_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ZOOM_ACTION, CajaZoomAction))
+#define BAUL_ZOOM_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ZOOM_ACTION, CajaZoomActionClass))
+#define BAUL_IS_ZOOM_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_ZOOM_ACTION))
+#define BAUL_IS_ZOOM_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), BAUL_TYPE_ZOOM_ACTION))
+#define BAUL_ZOOM_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_ZOOM_ACTION, CajaZoomActionClass))
 
 typedef struct _CajaZoomAction       CajaZoomAction;
 typedef struct _CajaZoomActionClass  CajaZoomActionClass;

@@ -514,7 +514,7 @@ async_job_wake_up (void)
         }
         g_hash_table_remove (waiting_directories, value);
         baul_directory_async_state_changed
-        (CAJA_DIRECTORY (value));
+        (BAUL_DIRECTORY (value));
     }
     already_waking_up = FALSE;
 }
@@ -533,11 +533,11 @@ deep_count_cancel (CajaDirectory *directory)
 {
     if (directory->details->deep_count_in_progress != NULL)
     {
-        g_assert (CAJA_IS_FILE (directory->details->deep_count_file));
+        g_assert (BAUL_IS_FILE (directory->details->deep_count_file));
 
         g_cancellable_cancel (directory->details->deep_count_in_progress->cancellable);
 
-        directory->details->deep_count_file->details->deep_counts_status = CAJA_REQUEST_NOT_STARTED;
+        directory->details->deep_count_file->details->deep_counts_status = BAUL_REQUEST_NOT_STARTED;
 
         directory->details->deep_count_in_progress->directory = NULL;
         directory->details->deep_count_in_progress = NULL;
@@ -718,61 +718,61 @@ baul_directory_set_up_request (CajaFileAttributes file_attributes)
 
     request = 0;
 
-    if ((file_attributes & CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT) != 0)
+    if ((file_attributes & BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT) != 0)
     {
         REQUEST_SET_TYPE (request, REQUEST_DIRECTORY_COUNT);
     }
 
-    if ((file_attributes & CAJA_FILE_ATTRIBUTE_DEEP_COUNTS) != 0)
+    if ((file_attributes & BAUL_FILE_ATTRIBUTE_DEEP_COUNTS) != 0)
     {
         REQUEST_SET_TYPE (request, REQUEST_DEEP_COUNT);
     }
 
-    if ((file_attributes & CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES) != 0)
+    if ((file_attributes & BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES) != 0)
     {
         REQUEST_SET_TYPE (request, REQUEST_MIME_LIST);
     }
-    if ((file_attributes & CAJA_FILE_ATTRIBUTE_INFO) != 0)
+    if ((file_attributes & BAUL_FILE_ATTRIBUTE_INFO) != 0)
     {
         REQUEST_SET_TYPE (request, REQUEST_FILE_INFO);
     }
 
-    if (file_attributes & CAJA_FILE_ATTRIBUTE_LINK_INFO)
+    if (file_attributes & BAUL_FILE_ATTRIBUTE_LINK_INFO)
     {
         REQUEST_SET_TYPE (request, REQUEST_FILE_INFO);
         REQUEST_SET_TYPE (request, REQUEST_LINK_INFO);
     }
 
-    if (file_attributes & CAJA_FILE_ATTRIBUTE_TOP_LEFT_TEXT)
+    if (file_attributes & BAUL_FILE_ATTRIBUTE_TOP_LEFT_TEXT)
     {
         REQUEST_SET_TYPE (request, REQUEST_TOP_LEFT_TEXT);
         REQUEST_SET_TYPE (request, REQUEST_FILE_INFO);
     }
 
-    if (file_attributes & CAJA_FILE_ATTRIBUTE_LARGE_TOP_LEFT_TEXT)
+    if (file_attributes & BAUL_FILE_ATTRIBUTE_LARGE_TOP_LEFT_TEXT)
     {
         REQUEST_SET_TYPE (request, REQUEST_LARGE_TOP_LEFT_TEXT);
         REQUEST_SET_TYPE (request, REQUEST_FILE_INFO);
     }
 
-    if ((file_attributes & CAJA_FILE_ATTRIBUTE_EXTENSION_INFO) != 0)
+    if ((file_attributes & BAUL_FILE_ATTRIBUTE_EXTENSION_INFO) != 0)
     {
         REQUEST_SET_TYPE (request, REQUEST_EXTENSION_INFO);
     }
 
-    if (file_attributes & CAJA_FILE_ATTRIBUTE_THUMBNAIL)
+    if (file_attributes & BAUL_FILE_ATTRIBUTE_THUMBNAIL)
     {
         REQUEST_SET_TYPE (request, REQUEST_THUMBNAIL);
         REQUEST_SET_TYPE (request, REQUEST_FILE_INFO);
     }
 
-    if (file_attributes & CAJA_FILE_ATTRIBUTE_MOUNT)
+    if (file_attributes & BAUL_FILE_ATTRIBUTE_MOUNT)
     {
         REQUEST_SET_TYPE (request, REQUEST_MOUNT);
         REQUEST_SET_TYPE (request, REQUEST_FILE_INFO);
     }
 
-    if (file_attributes & CAJA_FILE_ATTRIBUTE_FILESYSTEM_INFO)
+    if (file_attributes & BAUL_FILE_ATTRIBUTE_FILESYSTEM_INFO)
     {
         REQUEST_SET_TYPE (request, REQUEST_FILESYSTEM_INFO);
     }
@@ -788,9 +788,9 @@ mime_db_changed_callback (GObject *ignore, CajaDirectory *dir)
     g_assert (dir != NULL);
     g_assert (dir->details != NULL);
 
-    attrs = CAJA_FILE_ATTRIBUTE_INFO |
-            CAJA_FILE_ATTRIBUTE_LINK_INFO |
-            CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES;
+    attrs = BAUL_FILE_ATTRIBUTE_INFO |
+            BAUL_FILE_ATTRIBUTE_LINK_INFO |
+            BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES;
 
     baul_directory_force_reload_internal (dir, attrs);
 }
@@ -806,7 +806,7 @@ baul_directory_monitor_add_internal (CajaDirectory *directory,
 {
     Monitor *monitor;
 
-    g_assert (CAJA_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_DIRECTORY (directory));
 
     /* Replace any current monitor for this client/file pair. */
     remove_monitor (directory, file, client);
@@ -875,7 +875,7 @@ set_file_unconfirmed (CajaFile *file, gboolean unconfirmed)
 {
     CajaDirectory *directory;
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (unconfirmed == FALSE || unconfirmed == TRUE);
 
     if (file->details->unconfirmed == unconfirmed)
@@ -900,7 +900,7 @@ static gboolean show_hidden_files = TRUE;
 static void
 show_hidden_files_changed_callback (gpointer callback_data)
 {
-    show_hidden_files = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_HIDDEN_FILES);
+    show_hidden_files = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_HIDDEN_FILES);
 }
 
 static gboolean
@@ -912,7 +912,7 @@ should_skip_file (CajaDirectory *directory, GFileInfo *info)
     if (!show_hidden_files_changed_callback_installed)
     {
         g_signal_connect_swapped (baul_preferences,
-                                  "changed::" CAJA_PREFERENCES_SHOW_HIDDEN_FILES,
+                                  "changed::" BAUL_PREFERENCES_SHOW_HIDDEN_FILES,
                                   G_CALLBACK(show_hidden_files_changed_callback),
                                   NULL);
         show_hidden_files_changed_callback_installed = TRUE;
@@ -941,7 +941,7 @@ dequeue_pending_idle_callback (gpointer callback_data)
     const char *mimetype, *name;
     DirectoryLoadState *dir_load_state;
 
-    directory = CAJA_DIRECTORY (callback_data);
+    directory = BAUL_DIRECTORY (callback_data);
 
     baul_directory_ref (directory);
 
@@ -1033,7 +1033,7 @@ dequeue_pending_idle_callback (gpointer callback_data)
         for (node = directory->details->file_list;
                 node != NULL; node = next)
         {
-            file = CAJA_FILE (node->data);
+            file = BAUL_FILE (node->data);
             next = node->next;
 
             if (file->details->unconfirmed)
@@ -1189,7 +1189,7 @@ directory_load_done (CajaDirectory *directory,
         for (node = directory->details->file_list;
                 node != NULL; node = node->next)
         {
-            set_file_unconfirmed (CAJA_FILE (node->data), FALSE);
+            set_file_unconfirmed (BAUL_FILE (node->data), FALSE);
         }
 
         baul_directory_emit_load_error (directory, error);
@@ -1210,8 +1210,8 @@ baul_directory_monitor_remove_internal (CajaDirectory *directory,
                                         CajaFile *file,
                                         gconstpointer client)
 {
-    g_assert (CAJA_IS_DIRECTORY (directory));
-    g_assert (file == NULL || CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_DIRECTORY (directory));
+    g_assert (file == NULL || BAUL_IS_FILE (file));
     g_assert (client != NULL);
 
     remove_monitor (directory, file, client);
@@ -1235,8 +1235,8 @@ baul_directory_remove_file_monitors (CajaDirectory *directory,
     GList *result, **list, *node, *next;
     Monitor *monitor = NULL;
 
-    g_assert (CAJA_IS_DIRECTORY (directory));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (file->details->directory == directory);
 
     result = NULL;
@@ -1272,8 +1272,8 @@ baul_directory_add_file_monitors (CajaDirectory *directory,
     GList *l;
     Monitor *monitor = NULL;
 
-    g_assert (CAJA_IS_DIRECTORY (directory));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (file->details->directory == directory);
 
     if (monitors == NULL)
@@ -1414,8 +1414,8 @@ baul_directory_call_when_ready_internal (CajaDirectory *directory,
 {
     ReadyCallback callback;
 
-    g_assert (directory == NULL || CAJA_IS_DIRECTORY (directory));
-    g_assert (file == NULL || CAJA_IS_FILE (file));
+    g_assert (directory == NULL || BAUL_IS_DIRECTORY (directory));
+    g_assert (file == NULL || BAUL_IS_FILE (file));
     g_assert (file != NULL || directory_callback != NULL);
 
     /* Construct a callback object. */
@@ -1483,7 +1483,7 @@ baul_directory_check_if_ready_internal (CajaDirectory *directory,
 {
     Request request;
 
-    g_assert (CAJA_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_DIRECTORY (directory));
 
     request = baul_directory_set_up_request (file_attributes);
     return request_is_satisfied (directory, file, request);
@@ -1531,8 +1531,8 @@ baul_directory_cancel_callback_internal (CajaDirectory *directory,
         return;
     }
 
-    g_assert (CAJA_IS_DIRECTORY (directory));
-    g_assert (file == NULL || CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_DIRECTORY (directory));
+    g_assert (file == NULL || BAUL_IS_FILE (file));
     g_assert (file != NULL || directory_callback != NULL);
     g_assert (file == NULL || file_callback != NULL);
 
@@ -1641,7 +1641,7 @@ baul_directory_get_info_for_new_files (CajaDirectory *directory,
         state->count++;
 
         g_file_query_info_async (location,
-                                 CAJA_FILE_DEFAULT_ATTRIBUTES,
+                                 BAUL_FILE_DEFAULT_ATTRIBUTES,
                                  0,
                                  G_PRIORITY_DEFAULT,
                                  state->cancellable,
@@ -1815,7 +1815,7 @@ lacks_filesystem_info (CajaFile *file)
 static gboolean
 lacks_deep_count (CajaFile *file)
 {
-    return file->details->deep_counts_status != CAJA_REQUEST_DONE;
+    return file->details->deep_counts_status != BAUL_REQUEST_DONE;
 }
 
 static gboolean
@@ -2009,7 +2009,7 @@ call_ready_callbacks_at_idle (gpointer callback_data)
     GList *node, *next;
     ReadyCallback *callback;
 
-    directory = CAJA_DIRECTORY (callback_data);
+    directory = BAUL_DIRECTORY (callback_data);
     directory->details->call_ready_idle_id = 0;
 
     baul_directory_ref (directory);
@@ -2333,7 +2333,7 @@ start_monitoring_file_list (CajaDirectory *directory)
     directory->details->directory_load_in_progress = state;
 
     g_file_enumerate_children_async (directory->details->location,
-                                     CAJA_FILE_DEFAULT_ATTRIBUTES,
+                                     BAUL_FILE_DEFAULT_ATTRIBUTES,
                                      0, /* flags */
                                      G_PRIORITY_DEFAULT, /* prio */
                                      state->cancellable,
@@ -2375,8 +2375,8 @@ baul_file_invalidate_count_and_mime_list (CajaFile *file)
 {
     CajaFileAttributes attributes;
 
-    attributes = CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT |
-                 CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES;
+    attributes = BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT |
+                 BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES;
 
     baul_file_invalidate_attributes (file, attributes);
 }
@@ -2412,7 +2412,7 @@ baul_directory_invalidate_file_attributes (CajaDirectory      *directory,
 
     for (node = directory->details->file_list; node != NULL; node = node->next)
     {
-        baul_file_invalidate_attributes_internal (CAJA_FILE (node->data),
+        baul_file_invalidate_attributes_internal (BAUL_FILE (node->data),
                 file_attributes);
     }
 
@@ -2531,7 +2531,7 @@ directory_count_stop (CajaDirectory *directory)
         file = directory->details->count_in_progress->count_file;
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file,
                           should_get_directory_count_now,
@@ -2571,7 +2571,7 @@ count_children_done (CajaDirectory *directory,
                      gboolean succeeded,
                      int count)
 {
-    g_assert (CAJA_IS_FILE (count_file));
+    g_assert (BAUL_IS_FILE (count_file));
 
     count_file->details->directory_count_is_up_to_date = TRUE;
 
@@ -2941,7 +2941,7 @@ deep_count_next_dir (DeepCountState *state)
     }
     else
     {
-        file->details->deep_counts_status = CAJA_REQUEST_DONE;
+        file->details->deep_counts_status = BAUL_REQUEST_DONE;
         directory->details->deep_count_file = NULL;
         directory->details->deep_count_in_progress = NULL;
         deep_count_state_free (state);
@@ -3090,7 +3090,7 @@ deep_count_stop (CajaDirectory *directory)
         file = directory->details->deep_count_file;
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file,
                           lacks_deep_count,
@@ -3150,7 +3150,7 @@ deep_count_start (CajaDirectory *directory,
 
     if (!baul_file_is_directory (file))
     {
-        file->details->deep_counts_status = CAJA_REQUEST_DONE;
+        file->details->deep_counts_status = BAUL_REQUEST_DONE;
 
         baul_directory_async_state_changed (directory);
         return;
@@ -3162,7 +3162,7 @@ deep_count_start (CajaDirectory *directory,
     }
 
     /* Start counting. */
-    file->details->deep_counts_status = CAJA_REQUEST_IN_PROGRESS;
+    file->details->deep_counts_status = BAUL_REQUEST_IN_PROGRESS;
     file->details->deep_directory_count = 0;
     file->details->deep_file_count = 0;
     file->details->deep_unreadable_count = 0;
@@ -3199,7 +3199,7 @@ mime_list_stop (CajaDirectory *directory)
         file = directory->details->mime_list_in_progress->mime_list_file;
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file,
                           should_get_mime_list,
@@ -3482,7 +3482,7 @@ top_left_stop (CajaDirectory *directory)
         file = directory->details->top_left_read_state->file;
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file,
                           lacks_top_left,
@@ -3588,13 +3588,13 @@ top_left_read_more_callback (const char *file_contents,
     /* Stop reading when we have enough. */
     if (state->large)
     {
-        return bytes_read < CAJA_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_BYTES &&
-               count_lines (file_contents, bytes_read) <= CAJA_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_LINES;
+        return bytes_read < BAUL_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_BYTES &&
+               count_lines (file_contents, bytes_read) <= BAUL_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_LINES;
     }
     else
     {
-        return bytes_read < CAJA_FILE_TOP_LEFT_TEXT_MAXIMUM_BYTES &&
-               count_lines (file_contents, bytes_read) <= CAJA_FILE_TOP_LEFT_TEXT_MAXIMUM_LINES;
+        return bytes_read < BAUL_FILE_TOP_LEFT_TEXT_MAXIMUM_BYTES &&
+               count_lines (file_contents, bytes_read) <= BAUL_FILE_TOP_LEFT_TEXT_MAXIMUM_LINES;
     }
 }
 
@@ -3697,7 +3697,7 @@ query_info_callback (GObject *source_object,
     directory = baul_directory_ref (state->directory);
 
     get_info_file = directory->details->get_info_file;
-    g_assert (CAJA_IS_FILE (get_info_file));
+    g_assert (BAUL_IS_FILE (get_info_file));
 
     directory->details->get_info_file = NULL;
     directory->details->get_info_in_progress = NULL;
@@ -3750,7 +3750,7 @@ file_info_stop (CajaDirectory *directory)
         file = directory->details->get_info_file;
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file, lacks_info, REQUEST_FILE_INFO))
             {
@@ -3806,7 +3806,7 @@ file_info_start (CajaDirectory *directory,
 
     location = baul_file_get_location (file);
     g_file_query_info_async (location,
-                             CAJA_FILE_DEFAULT_ATTRIBUTES,
+                             BAUL_FILE_DEFAULT_ATTRIBUTES,
                              0,
                              G_PRIORITY_DEFAULT,
                              state->cancellable, query_info_callback, state);
@@ -3951,7 +3951,7 @@ link_info_stop (CajaDirectory *directory)
 
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file,
                           lacks_link_info,
@@ -4184,7 +4184,7 @@ thumbnail_stop (CajaDirectory *directory)
 
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file,
                           lacks_thumbnail,
@@ -4242,7 +4242,7 @@ thumbnail_loader_size_prepared (GdkPixbufLoader *loader,
     aspect_ratio = ((double) width) / height;
 
     /* cf. baul_file_get_icon() */
-    max_thumbnail_size = CAJA_ICON_SIZE_LARGEST * cached_thumbnail_size / CAJA_ICON_SIZE_STANDARD;
+    max_thumbnail_size = BAUL_ICON_SIZE_LARGEST * cached_thumbnail_size / BAUL_ICON_SIZE_STANDARD;
     if (MAX (width, height) > max_thumbnail_size)
     {
         if (width > height)
@@ -4428,7 +4428,7 @@ mount_stop (CajaDirectory *directory)
 
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file,
                           lacks_mount,
@@ -4646,7 +4646,7 @@ filesystem_info_stop (CajaDirectory *directory)
 
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file,
                           lacks_filesystem_info,
@@ -4809,7 +4809,7 @@ extension_info_stop (CajaDirectory *directory)
         file = directory->details->extension_info_file;
         if (file != NULL)
         {
-            g_assert (CAJA_IS_FILE (file));
+            g_assert (BAUL_IS_FILE (file));
             g_assert (file->details->directory == directory);
             if (is_needy (file, lacks_extension_info, REQUEST_EXTENSION_INFO))
             {
@@ -4885,7 +4885,7 @@ info_provider_callback (CajaInfoProvider *provider,
     response->provider = provider;
     response->handle = handle;
     response->result = result;
-    response->directory = CAJA_DIRECTORY (user_data);
+    response->directory = BAUL_DIRECTORY (user_data);
 
     response->directory->details->extension_info_idle =
         g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
@@ -4930,14 +4930,14 @@ extension_info_start (CajaDirectory *directory,
 
     result = baul_info_provider_update_file_info
              (provider,
-              CAJA_FILE_INFO (file),
+              BAUL_FILE_INFO (file),
               update_complete,
               &handle);
 
     g_closure_unref (update_complete);
 
-    if (result == CAJA_OPERATION_COMPLETE ||
-            result == CAJA_OPERATION_FAILED)
+    if (result == BAUL_OPERATION_COMPLETE ||
+            result == BAUL_OPERATION_FAILED)
     {
         finish_info_provider (directory, file, provider);
         async_job_end (directory, "extension info");
@@ -5316,7 +5316,7 @@ add_all_files_to_work_queue (CajaDirectory *directory)
     {
         CajaFile *file;
 
-        file = CAJA_FILE (node->data);
+        file = BAUL_FILE (node->data);
 
         baul_directory_add_file_to_work_queue (directory, file);
     }

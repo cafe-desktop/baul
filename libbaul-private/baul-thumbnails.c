@@ -282,8 +282,8 @@ thumbnail_thread_notify_file_changed (gpointer image_uri)
     {
         baul_file_set_is_thumbnailing (file, FALSE);
         baul_file_invalidate_attributes (file,
-                                         CAJA_FILE_ATTRIBUTE_THUMBNAIL |
-                                         CAJA_FILE_ATTRIBUTE_INFO);
+                                         BAUL_FILE_ATTRIBUTE_THUMBNAIL |
+                                         BAUL_FILE_ATTRIBUTE_INFO);
         baul_file_unref (file);
     }
     g_free (image_uri);

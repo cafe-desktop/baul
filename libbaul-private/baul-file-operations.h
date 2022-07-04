@@ -24,8 +24,8 @@
             Pavel Cisler <pavel@eazel.com>
 */
 
-#ifndef CAJA_FILE_OPERATIONS_H
-#define CAJA_FILE_OPERATIONS_H
+#ifndef BAUL_FILE_OPERATIONS_H
+#define BAUL_FILE_OPERATIONS_H
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
@@ -140,4 +140,4 @@ void baul_file_mark_desktop_file_trusted (GFile           *file,
 
 void baul_application_notify_unmount_show (const gchar *message);
 
-#endif /* CAJA_FILE_OPERATIONS_H */
+#endif /* BAUL_FILE_OPERATIONS_H */

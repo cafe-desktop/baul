@@ -22,8 +22,8 @@
    Author: Christian Neumair <cneumair@gnome.org>
 */
 
-#ifndef CAJA_NAVIGATION_WINDOW_SLOT_H
-#define CAJA_NAVIGATION_WINDOW_SLOT_H
+#ifndef BAUL_NAVIGATION_WINDOW_SLOT_H
+#define BAUL_NAVIGATION_WINDOW_SLOT_H
 
 #include "baul-window-slot.h"
 
@@ -31,18 +31,18 @@ typedef struct CajaNavigationWindowSlot CajaNavigationWindowSlot;
 typedef struct CajaNavigationWindowSlotClass CajaNavigationWindowSlotClass;
 
 
-#define CAJA_TYPE_NAVIGATION_WINDOW_SLOT         (baul_navigation_window_slot_get_type())
-#define CAJA_NAVIGATION_WINDOW_SLOT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_NAVIGATION_WINDOW_SLOT_CLASS, CajaNavigationWindowSlotClass))
-#define CAJA_NAVIGATION_WINDOW_SLOT(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NAVIGATION_WINDOW_SLOT, CajaNavigationWindowSlot))
-#define CAJA_IS_NAVIGATION_WINDOW_SLOT(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_NAVIGATION_WINDOW_SLOT))
-#define CAJA_IS_NAVIGATION_WINDOW_SLOT_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_NAVIGATION_WINDOW_SLOT))
-#define CAJA_NAVIGATION_WINDOW_SLOT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_NAVIGATION_WINDOW_SLOT, CajaNavigationWindowSlotClass))
+#define BAUL_TYPE_NAVIGATION_WINDOW_SLOT         (baul_navigation_window_slot_get_type())
+#define BAUL_NAVIGATION_WINDOW_SLOT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_NAVIGATION_WINDOW_SLOT_CLASS, CajaNavigationWindowSlotClass))
+#define BAUL_NAVIGATION_WINDOW_SLOT(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NAVIGATION_WINDOW_SLOT, CajaNavigationWindowSlot))
+#define BAUL_IS_NAVIGATION_WINDOW_SLOT(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_NAVIGATION_WINDOW_SLOT))
+#define BAUL_IS_NAVIGATION_WINDOW_SLOT_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_NAVIGATION_WINDOW_SLOT))
+#define BAUL_NAVIGATION_WINDOW_SLOT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NAVIGATION_WINDOW_SLOT, CajaNavigationWindowSlotClass))
 
 typedef enum
 {
-    CAJA_BAR_PATH,
-    CAJA_BAR_NAVIGATION,
-    CAJA_BAR_SEARCH
+    BAUL_BAR_PATH,
+    BAUL_BAR_NAVIGATION,
+    BAUL_BAR_SEARCH
 } CajaBarMode;
 
 struct CajaNavigationWindowSlot
@@ -75,4 +75,4 @@ gboolean baul_navigation_window_slot_should_close_with_mount (CajaNavigationWind
 void baul_navigation_window_slot_clear_forward_list (CajaNavigationWindowSlot *slot);
 void baul_navigation_window_slot_clear_back_list    (CajaNavigationWindowSlot *slot);
 
-#endif /* CAJA_NAVIGATION_WINDOW_SLOT_H */
+#endif /* BAUL_NAVIGATION_WINDOW_SLOT_H */

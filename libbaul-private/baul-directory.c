@@ -130,7 +130,7 @@ baul_directory_ref (CajaDirectory *directory)
         return directory;
     }
 
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), NULL);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), NULL);
 
     g_object_ref (directory);
     return directory;
@@ -144,7 +144,7 @@ baul_directory_unref (CajaDirectory *directory)
         return;
     }
 
-    g_return_if_fail (CAJA_IS_DIRECTORY (directory));
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
 
     g_object_unref (directory);
 }
@@ -154,7 +154,7 @@ baul_directory_finalize (GObject *object)
 {
     CajaDirectory *directory;
 
-    directory = CAJA_DIRECTORY (object);
+    directory = BAUL_DIRECTORY (object);
 
     g_hash_table_remove (directories, directory->details->location);
 
@@ -225,7 +225,7 @@ collect_all_directories (gpointer key, gpointer value, gpointer callback_data)
     CajaDirectory *directory;
     GList **dirs;
 
-    directory = CAJA_DIRECTORY (value);
+    directory = BAUL_DIRECTORY (value);
     dirs = callback_data;
 
     *dirs = g_list_prepend (*dirs, baul_directory_ref (directory));
@@ -244,7 +244,7 @@ emit_change_signals_for_all_files_in_all_directories (void)
 
     for (l = dirs; l != NULL; l = l->next)
     {
-        directory = CAJA_DIRECTORY (l->data);
+        directory = BAUL_DIRECTORY (l->data);
         emit_change_signals_for_all_files (directory);
         baul_directory_unref (directory);
     }
@@ -345,7 +345,7 @@ baul_directory_get_for_file (CajaFile *file)
     char *uri;
     CajaDirectory *directory;
 
-    g_return_val_if_fail (CAJA_IS_FILE (file), NULL);
+    g_return_val_if_fail (BAUL_IS_FILE (file), NULL);
 
     uri = baul_file_get_uri (file);
     directory = baul_directory_get_by_uri (uri);
@@ -404,12 +404,12 @@ baul_directory_get_existing_corresponding_file (CajaDirectory *directory)
 char *
 baul_directory_get_name_for_self_as_new_file (CajaDirectory *directory)
 {
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), NULL);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), NULL);
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->get_name_for_self_as_new_file == NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->get_name_for_self_as_new_file == NULL)
             return NULL;
     else
-            return CAJA_DIRECTORY_GET_CLASS(directory)->get_name_for_self_as_new_file (directory);
+            return BAUL_DIRECTORY_GET_CLASS(directory)->get_name_for_self_as_new_file (directory);
 }
 
 static char *
@@ -437,7 +437,7 @@ real_get_name_for_self_as_new_file (CajaDirectory *directory)
 char *
 baul_directory_get_uri (CajaDirectory *directory)
 {
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), NULL);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), NULL);
 
     return g_file_get_uri (directory->details->location);
 }
@@ -445,7 +445,7 @@ baul_directory_get_uri (CajaDirectory *directory)
 GFile *
 baul_directory_get_location (CajaDirectory  *directory)
 {
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), NULL);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), NULL);
 
     return g_object_ref (directory->details->location);
 }
@@ -460,19 +460,19 @@ baul_directory_new (GFile *location)
 
     if (eel_uri_is_desktop (uri))
     {
-        directory = CAJA_DIRECTORY (g_object_new (CAJA_TYPE_DESKTOP_DIRECTORY, NULL));
+        directory = BAUL_DIRECTORY (g_object_new (BAUL_TYPE_DESKTOP_DIRECTORY, NULL));
     }
     else if (eel_uri_is_search (uri))
     {
-        directory = CAJA_DIRECTORY (g_object_new (CAJA_TYPE_SEARCH_DIRECTORY, NULL));
+        directory = BAUL_DIRECTORY (g_object_new (BAUL_TYPE_SEARCH_DIRECTORY, NULL));
     }
-    else if (g_str_has_suffix (uri, CAJA_SAVED_SEARCH_EXTENSION))
+    else if (g_str_has_suffix (uri, BAUL_SAVED_SEARCH_EXTENSION))
     {
-        directory = CAJA_DIRECTORY (baul_search_directory_new_from_saved_search (uri));
+        directory = BAUL_DIRECTORY (baul_search_directory_new_from_saved_search (uri));
     }
     else
     {
-        directory = CAJA_DIRECTORY (g_object_new (CAJA_TYPE_VFS_DIRECTORY, NULL));
+        directory = BAUL_DIRECTORY (g_object_new (BAUL_TYPE_VFS_DIRECTORY, NULL));
     }
 
     set_directory_location (directory, location);
@@ -485,7 +485,7 @@ baul_directory_new (GFile *location)
 gboolean
 baul_directory_is_local (CajaDirectory *directory)
 {
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), FALSE);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
 
     if (directory->details->location == NULL)
     {
@@ -499,7 +499,7 @@ baul_directory_is_local (CajaDirectory *directory)
 gboolean
 baul_directory_is_in_trash (CajaDirectory *directory)
 {
-    g_assert (CAJA_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_DIRECTORY (directory));
 
     if (directory->details->location == NULL)
     {
@@ -512,13 +512,13 @@ baul_directory_is_in_trash (CajaDirectory *directory)
 gboolean
 baul_directory_are_all_files_seen (CajaDirectory *directory)
 {
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), FALSE);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->are_all_files_seen == NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->are_all_files_seen == NULL)
     {
         return FALSE;
     } else {
-        return CAJA_DIRECTORY_GET_CLASS(directory)->are_all_files_seen (directory);
+        return BAUL_DIRECTORY_GET_CLASS(directory)->are_all_files_seen (directory);
     }
 }
 
@@ -560,8 +560,8 @@ baul_directory_add_file (CajaDirectory *directory, CajaFile *file)
     GList *node;
     gboolean add_to_work_queue;
 
-    g_assert (CAJA_IS_DIRECTORY (directory));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (file->details->name != NULL);
 
     /* Add to list. */
@@ -599,8 +599,8 @@ baul_directory_remove_file (CajaDirectory *directory, CajaFile *file)
 {
     GList *node;
 
-    g_assert (CAJA_IS_DIRECTORY (directory));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (file->details->name != NULL);
 
     /* Find the list node in the hash table. */
@@ -653,12 +653,12 @@ baul_directory_find_file_by_name (CajaDirectory *directory,
 {
     GList *node;
 
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), NULL);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), NULL);
     g_return_val_if_fail (name != NULL, NULL);
 
     node = g_hash_table_lookup (directory->details->file_hash,
                                 name);
-    return node == NULL ? NULL : CAJA_FILE (node->data);
+    return node == NULL ? NULL : BAUL_FILE (node->data);
 }
 
 void
@@ -765,7 +765,7 @@ hash_table_list_prepend (GHashTable *table, gconstpointer key, gpointer data)
 static void
 call_files_added_free_list (gpointer key, gpointer value, gpointer user_data)
 {
-    g_assert (CAJA_IS_DIRECTORY (key));
+    g_assert (BAUL_IS_DIRECTORY (key));
     g_assert (value != NULL);
     g_assert (user_data == NULL);
 
@@ -800,7 +800,7 @@ call_files_changed_free_list (gpointer key, gpointer value, gpointer user_data)
     g_assert (value != NULL);
     g_assert (user_data == NULL);
 
-    call_files_changed_common (CAJA_DIRECTORY (key), value);
+    call_files_changed_common (BAUL_DIRECTORY (key), value);
     g_list_free (value);
 }
 
@@ -810,7 +810,7 @@ call_files_changed_unref_free_list (gpointer key, gpointer value, gpointer user_
     g_assert (value != NULL);
     g_assert (user_data == NULL);
 
-    call_files_changed_common (CAJA_DIRECTORY (key), value);
+    call_files_changed_common (BAUL_DIRECTORY (key), value);
     baul_file_list_free (value);
 }
 
@@ -820,7 +820,7 @@ call_get_file_info_free_list (gpointer key, gpointer value, gpointer user_data)
     CajaDirectory *directory;
     GList *files;
 
-    g_assert (CAJA_IS_DIRECTORY (key));
+    g_assert (BAUL_IS_DIRECTORY (key));
     g_assert (value != NULL);
     g_assert (user_data == NULL);
 
@@ -834,7 +834,7 @@ call_get_file_info_free_list (gpointer key, gpointer value, gpointer user_data)
 static void
 invalidate_count_and_unref (gpointer key, gpointer value, gpointer user_data)
 {
-    g_assert (CAJA_IS_DIRECTORY (key));
+    g_assert (BAUL_IS_DIRECTORY (key));
     g_assert (value == key);
     g_assert (user_data == NULL);
 
@@ -846,7 +846,7 @@ static void
 collect_parent_directories (GHashTable *hash_table, CajaDirectory *directory)
 {
     g_assert (hash_table != NULL);
-    g_assert (CAJA_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_DIRECTORY (directory));
 
     if (g_hash_table_lookup (hash_table, directory) == NULL)
     {
@@ -1079,7 +1079,7 @@ collect_directories_by_container (gpointer key, gpointer value, gpointer callbac
     GFile *location;
 
     location = (GFile *) key;
-    directory = CAJA_DIRECTORY (value);
+    directory = BAUL_DIRECTORY (value);
     collect_data = (CollectData *) callback_data;
 
     if (g_file_has_prefix (location, collect_data->container) ||
@@ -1113,7 +1113,7 @@ baul_directory_moved_internal (GFile *old_location,
 
     for (node = collection.directories; node != NULL; node = node->next)
     {
-        directory = CAJA_DIRECTORY (node->data);
+        directory = BAUL_DIRECTORY (node->data);
         new_directory_location = NULL;
 
         if (g_file_equal (directory->details->location, old_location))
@@ -1175,7 +1175,7 @@ baul_directory_moved (const char *old_uri,
     list = baul_directory_moved_internal (old_location, new_location);
     for (node = list; node != NULL; node = node->next)
     {
-        file = CAJA_FILE (node->data);
+        file = BAUL_FILE (node->data);
         hash_table_list_prepend (hash,
                                  file->details->directory,
                                  baul_file_ref (file));
@@ -1240,7 +1240,7 @@ baul_directory_notify_files_moved (GList *file_pairs)
                          to_location);
         for (node = affected_files; node != NULL; node = node->next)
         {
-            file = CAJA_FILE (node->data);
+            file = BAUL_FILE (node->data);
             hash_table_list_prepend (changed_lists,
                                      file->details->directory,
                                      file);
@@ -1282,7 +1282,7 @@ baul_directory_notify_files_moved (GList *file_pairs)
             g_free (name);
 
             /* Update file attributes */
-            baul_file_invalidate_attributes (file, CAJA_FILE_ATTRIBUTE_INFO);
+            baul_file_invalidate_attributes (file, BAUL_FILE_ATTRIBUTE_INFO);
 
             hash_table_list_prepend (changed_lists,
                                      old_directory,
@@ -1344,7 +1344,7 @@ baul_directory_schedule_position_set (GList *position_setting_list)
         }
         baul_file_set_metadata
         (file,
-         CAJA_METADATA_KEY_ICON_POSITION,
+         BAUL_METADATA_KEY_ICON_POSITION,
          NULL,
          str);
 
@@ -1352,14 +1352,14 @@ baul_directory_schedule_position_set (GList *position_setting_list)
         {
             baul_file_set_time_metadata
             (file,
-             CAJA_METADATA_KEY_ICON_POSITION_TIMESTAMP,
+             BAUL_METADATA_KEY_ICON_POSITION_TIMESTAMP,
              now);
         }
         else
         {
             baul_file_set_time_metadata
             (file,
-             CAJA_METADATA_KEY_ICON_POSITION_TIMESTAMP,
+             BAUL_METADATA_KEY_ICON_POSITION_TIMESTAMP,
              UNDEFINED_TIME);
         }
 
@@ -1373,7 +1373,7 @@ baul_directory_schedule_position_set (GList *position_setting_list)
         }
         baul_file_set_metadata
         (file,
-         CAJA_METADATA_KEY_SCREEN,
+         BAUL_METADATA_KEY_SCREEN,
          NULL,
          str);
 
@@ -1385,18 +1385,18 @@ gboolean
 baul_directory_contains_file (CajaDirectory *directory,
                               CajaFile *file)
 {
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), FALSE);
-    g_return_val_if_fail (CAJA_IS_FILE (file), FALSE);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
+    g_return_val_if_fail (BAUL_IS_FILE (file), FALSE);
 
     if (baul_file_is_gone (file))
     {
         return FALSE;
     }
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->contains_file == NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->contains_file == NULL)
         return FALSE;
     else
-        return CAJA_DIRECTORY_GET_CLASS(directory)->contains_file (directory, file);
+        return BAUL_DIRECTORY_GET_CLASS(directory)->contains_file (directory, file);
 }
 
 void
@@ -1406,12 +1406,12 @@ baul_directory_call_when_ready (CajaDirectory *directory,
                                 CajaDirectoryCallback callback,
                                 gpointer callback_data)
 {
-    g_return_if_fail (CAJA_IS_DIRECTORY (directory));
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
     g_return_if_fail (callback != NULL);
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->call_when_ready != NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->call_when_ready != NULL)
     {
-        CAJA_DIRECTORY_GET_CLASS(directory)->call_when_ready (directory,
+        BAUL_DIRECTORY_GET_CLASS(directory)->call_when_ready (directory,
                                                               file_attributes,
                                                               wait_for_all_files,
                                                               callback,
@@ -1424,12 +1424,12 @@ baul_directory_cancel_callback (CajaDirectory *directory,
                                 CajaDirectoryCallback callback,
                                 gpointer callback_data)
 {
-    g_return_if_fail (CAJA_IS_DIRECTORY (directory));
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
     g_return_if_fail (callback != NULL);
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->cancel_callback != NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->cancel_callback != NULL)
     {
-        CAJA_DIRECTORY_GET_CLASS(directory)->cancel_callback (directory, callback, callback_data);
+        BAUL_DIRECTORY_GET_CLASS(directory)->cancel_callback (directory, callback, callback_data);
     }
 }
 
@@ -1441,12 +1441,12 @@ baul_directory_file_monitor_add (CajaDirectory *directory,
                                  CajaDirectoryCallback callback,
                                  gpointer callback_data)
 {
-    g_return_if_fail (CAJA_IS_DIRECTORY (directory));
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
     g_return_if_fail (client != NULL);
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->file_monitor_add != NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->file_monitor_add != NULL)
     {
-        CAJA_DIRECTORY_GET_CLASS(directory)->file_monitor_add (directory,
+        BAUL_DIRECTORY_GET_CLASS(directory)->file_monitor_add (directory,
                                                                client,
                                                                monitor_hidden_files,
                                                                file_attributes,
@@ -1458,36 +1458,36 @@ void
 baul_directory_file_monitor_remove (CajaDirectory *directory,
                                     gconstpointer client)
 {
-    g_return_if_fail (CAJA_IS_DIRECTORY (directory));
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
     g_return_if_fail (client != NULL);
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->file_monitor_remove != NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->file_monitor_remove != NULL)
     {
-        CAJA_DIRECTORY_GET_CLASS(directory)->file_monitor_remove (directory, client);
+        BAUL_DIRECTORY_GET_CLASS(directory)->file_monitor_remove (directory, client);
     }
 }
 
 void
 baul_directory_force_reload (CajaDirectory *directory)
 {
-    g_return_if_fail (CAJA_IS_DIRECTORY (directory));
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->force_reload != NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->force_reload != NULL)
     {
-        CAJA_DIRECTORY_GET_CLASS(directory)->force_reload (directory);
+        BAUL_DIRECTORY_GET_CLASS(directory)->force_reload (directory);
     }
 }
 
 gboolean
 baul_directory_is_not_empty (CajaDirectory *directory)
 {
-    g_return_val_if_fail (CAJA_IS_DIRECTORY (directory), FALSE);
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
 
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->is_not_empty == NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->is_not_empty == NULL)
     {
         return FALSE;
     } else {
-        return CAJA_DIRECTORY_GET_CLASS(directory)->is_not_empty (directory);
+        return BAUL_DIRECTORY_GET_CLASS(directory)->is_not_empty (directory);
     }
 }
 
@@ -1498,7 +1498,7 @@ is_tentative (gpointer data, gpointer callback_data)
 
     g_assert (callback_data == NULL);
 
-    file = CAJA_FILE (data);
+    file = BAUL_FILE (data);
     /* Avoid returning files with !is_added, because these
      * will later be sent with the files_added signal, and a
      * user doing get_file_list + files_added monitoring will
@@ -1509,11 +1509,11 @@ is_tentative (gpointer data, gpointer callback_data)
 GList *
 baul_directory_get_file_list (CajaDirectory *directory)
 {
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->get_file_list == NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->get_file_list == NULL)
     {
         return NULL;
     } else {
-        return CAJA_DIRECTORY_GET_CLASS(directory)->get_file_list (directory);
+        return BAUL_DIRECTORY_GET_CLASS(directory)->get_file_list (directory);
     }
 }
 
@@ -1540,11 +1540,11 @@ real_is_editable (CajaDirectory *directory)
 gboolean
 baul_directory_is_editable (CajaDirectory *directory)
 {
-    if (CAJA_DIRECTORY_GET_CLASS(directory)->is_editable == NULL)
+    if (BAUL_DIRECTORY_GET_CLASS(directory)->is_editable == NULL)
     {
         return FALSE;
     } else {
-        return CAJA_DIRECTORY_GET_CLASS(directory)->is_editable (directory);
+        return BAUL_DIRECTORY_GET_CLASS(directory)->is_editable (directory);
     }
 }
 
@@ -1564,7 +1564,7 @@ baul_directory_match_pattern (CajaDirectory *directory, const char *pattern)
         CajaFile *file;
         char *name;
 
-        file = CAJA_FILE (l->data);
+        file = BAUL_FILE (l->data);
         name = baul_file_get_display_name (file);
 
         if (g_pattern_match_string (spec, name))
@@ -1651,7 +1651,7 @@ compare_by_uri (CajaDirectory *a, CajaDirectory *b)
 static int
 compare_by_uri_cover (gconstpointer a, gconstpointer b)
 {
-    return compare_by_uri (CAJA_DIRECTORY (a), CAJA_DIRECTORY (b));
+    return compare_by_uri (BAUL_DIRECTORY (a), BAUL_DIRECTORY (b));
 }
 
 /**
@@ -1677,7 +1677,7 @@ baul_directory_is_desktop_directory (CajaDirectory   *directory)
     return baul_is_desktop_directory (directory->details->location);
 }
 
-#if !defined (CAJA_OMIT_SELF_CHECK)
+#if !defined (BAUL_OMIT_SELF_CHECK)
 
 #include <eel/eel-debug.h>
 #include "baul-file-attributes.h"
@@ -1688,7 +1688,7 @@ static gboolean got_files_flag;
 static void
 got_files_callback (CajaDirectory *directory, GList *files, gpointer callback_data)
 {
-    g_assert (CAJA_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_DIRECTORY (directory));
     g_assert (g_list_length (files) > 10);
     g_assert (callback_data == &data_dummy);
 
@@ -1765,8 +1765,8 @@ baul_self_check_directory (void)
     got_files_flag = FALSE;
 
     baul_directory_call_when_ready (directory,
-                                    CAJA_FILE_ATTRIBUTE_INFO |
-                                    CAJA_FILE_ATTRIBUTE_DEEP_COUNTS,
+                                    BAUL_FILE_ATTRIBUTE_INFO |
+                                    BAUL_FILE_ATTRIBUTE_DEEP_COUNTS,
                                     TRUE,
                                     got_files_callback, &data_dummy);
 
@@ -1790,4 +1790,4 @@ baul_self_check_directory (void)
     EEL_CHECK_INTEGER_RESULT (g_hash_table_size (directories), 0);
 }
 
-#endif /* !CAJA_OMIT_SELF_CHECK */
+#endif /* !BAUL_OMIT_SELF_CHECK */

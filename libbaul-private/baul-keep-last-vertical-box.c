@@ -69,7 +69,7 @@ baul_keep_last_vertical_box_new (gint spacing)
 {
     CajaKeepLastVerticalBox *box;
 
-    box = CAJA_KEEP_LAST_VERTICAL_BOX (gtk_widget_new (baul_keep_last_vertical_box_get_type (), NULL));
+    box = BAUL_KEEP_LAST_VERTICAL_BOX (gtk_widget_new (baul_keep_last_vertical_box_get_type (), NULL));
 
     gtk_box_set_spacing (GTK_BOX (box), spacing);
 
@@ -90,7 +90,7 @@ baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
     GList *children, *l;
     GtkAllocation last_child_allocation, child_allocation, tiny_allocation;
 
-    g_return_if_fail (CAJA_IS_KEEP_LAST_VERTICAL_BOX (widget));
+    g_return_if_fail (BAUL_IS_KEEP_LAST_VERTICAL_BOX (widget));
     g_return_if_fail (allocation != NULL);
 
     GTK_WIDGET_CLASS (baul_keep_last_vertical_box_parent_class)->size_allocate (widget, allocation);

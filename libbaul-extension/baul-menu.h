@@ -23,8 +23,8 @@
  *
  */
 
-#ifndef CAJA_MENU_H
-#define CAJA_MENU_H
+#ifndef BAUL_MENU_H
+#define BAUL_MENU_H
 
 #include <glib-object.h>
 #include "baul-extension-types.h"
@@ -32,19 +32,19 @@
 G_BEGIN_DECLS
 
 /* CajaMenu defines */
-#define CAJA_TYPE_MENU         (baul_menu_get_type ())
-#define CAJA_MENU(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_MENU, CajaMenu))
-#define CAJA_MENU_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_MENU, CajaMenuClass))
-#define CAJA_IS_MENU(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_MENU))
-#define CAJA_IS_MENU_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_MENU))
-#define CAJA_MENU_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_MENU, CajaMenuClass))
+#define BAUL_TYPE_MENU         (baul_menu_get_type ())
+#define BAUL_MENU(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_MENU, CajaMenu))
+#define BAUL_MENU_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_MENU, CajaMenuClass))
+#define BAUL_IS_MENU(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_MENU))
+#define BAUL_IS_MENU_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_MENU))
+#define BAUL_MENU_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_MENU, CajaMenuClass))
 /* CajaMenuItem defines */
-#define CAJA_TYPE_MENU_ITEM            (baul_menu_item_get_type())
-#define CAJA_MENU_ITEM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_MENU_ITEM, CajaMenuItem))
-#define CAJA_MENU_ITEM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_MENU_ITEM, CajaMenuItemClass))
-#define CAJA_MENU_IS_ITEM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_MENU_ITEM))
-#define CAJA_MENU_IS_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), CAJA_TYPE_MENU_ITEM))
-#define CAJA_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), CAJA_TYPE_MENU_ITEM, CajaMenuItemClass))
+#define BAUL_TYPE_MENU_ITEM            (baul_menu_item_get_type())
+#define BAUL_MENU_ITEM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MENU_ITEM, CajaMenuItem))
+#define BAUL_MENU_ITEM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MENU_ITEM, CajaMenuItemClass))
+#define BAUL_MENU_IS_ITEM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_MENU_ITEM))
+#define BAUL_MENU_IS_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), BAUL_TYPE_MENU_ITEM))
+#define BAUL_MENU_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_MENU_ITEM, CajaMenuItemClass))
 
 /* CajaMenu types */
 typedef struct _CajaMenu		CajaMenu;
@@ -111,4 +111,4 @@ void          baul_menu_item_set_submenu (CajaMenuItem *item,
 
 G_END_DECLS
 
-#endif /* CAJA_MENU_H */
+#endif /* BAUL_MENU_H */

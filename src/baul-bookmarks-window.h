@@ -25,8 +25,8 @@
 /* baul-bookmarks-window.h - interface for bookmark-editing window.
  */
 
-#ifndef CAJA_BOOKMARKS_WINDOW_H
-#define CAJA_BOOKMARKS_WINDOW_H
+#ifndef BAUL_BOOKMARKS_WINDOW_H
+#define BAUL_BOOKMARKS_WINDOW_H
 
 #include <gtk/gtk.h>
 #include "baul-bookmark-list.h"
@@ -37,4 +37,4 @@ GtkWindow *create_bookmarks_window                 (CajaBookmarkList *bookmarks,
 void       baul_bookmarks_window_save_geometry     (GtkWindow        *window);
 void	   edit_bookmarks_dialog_set_signals	   (CajaWindow       *window);
 
-#endif /* CAJA_BOOKMARKS_WINDOW_H */
+#endif /* BAUL_BOOKMARKS_WINDOW_H */

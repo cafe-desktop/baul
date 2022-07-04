@@ -21,24 +21,24 @@
  * Author: Alexander Larsson <alexl@redhat.com>
  */
 
-#ifndef CAJA_IMAGE_PROPERTIES_PAGE_H
-#define CAJA_IMAGE_PROPERTIES_PAGE_H
+#ifndef BAUL_IMAGE_PROPERTIES_PAGE_H
+#define BAUL_IMAGE_PROPERTIES_PAGE_H
 
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_IMAGE_PROPERTIES_PAGE baul_image_properties_page_get_type()
-#define CAJA_IMAGE_PROPERTIES_PAGE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPage))
-#define CAJA_IMAGE_PROPERTIES_PAGE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPageClass))
-#define CAJA_IS_IMAGE_PROPERTIES_PAGE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_IMAGE_PROPERTIES_PAGE))
-#define CAJA_IS_IMAGE_PROPERTIES_PAGE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_IMAGE_PROPERTIES_PAGE))
-#define CAJA_IMAGE_PROPERTIES_PAGE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPageClass))
+#define BAUL_TYPE_IMAGE_PROPERTIES_PAGE baul_image_properties_page_get_type()
+#define BAUL_IMAGE_PROPERTIES_PAGE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPage))
+#define BAUL_IMAGE_PROPERTIES_PAGE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPageClass))
+#define BAUL_IS_IMAGE_PROPERTIES_PAGE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_IMAGE_PROPERTIES_PAGE))
+#define BAUL_IS_IMAGE_PROPERTIES_PAGE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_IMAGE_PROPERTIES_PAGE))
+#define BAUL_IMAGE_PROPERTIES_PAGE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPageClass))
 
 typedef struct _CajaImagePropertiesPagePrivate CajaImagePropertiesPagePrivate;
 
@@ -58,4 +58,4 @@ void  baul_image_properties_page_register (void);
 
 G_END_DECLS
 
-#endif /* CAJA_IMAGE_PROPERTIES_PAGE_H */
+#endif /* BAUL_IMAGE_PROPERTIES_PAGE_H */

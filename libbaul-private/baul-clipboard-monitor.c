@@ -82,7 +82,7 @@ baul_clipboard_monitor_get (void)
     {
         GtkClipboard *clipboard;
 
-        clipboard_monitor = CAJA_CLIPBOARD_MONITOR (g_object_new (CAJA_TYPE_CLIPBOARD_MONITOR, NULL));
+        clipboard_monitor = BAUL_CLIPBOARD_MONITOR (g_object_new (BAUL_TYPE_CLIPBOARD_MONITOR, NULL));
         eel_debug_call_at_shutdown (destroy_clipboard_monitor);
 
         clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
@@ -150,7 +150,7 @@ clipboard_monitor_finalize (GObject *object)
 {
     CajaClipboardMonitor *monitor;
 
-    monitor = CAJA_CLIPBOARD_MONITOR (object);
+    monitor = BAUL_CLIPBOARD_MONITOR (object);
 
     if (monitor->details->info != NULL)
     {

@@ -30,11 +30,11 @@
 #include "baul-module.h"
 #include "baul-extensions.h"
 
-#define CAJA_TYPE_MODULE    	(baul_module_get_type ())
-#define CAJA_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_MODULE, CajaModule))
-#define CAJA_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_MODULE, CajaModule))
-#define CAJA_IS_MODULE(obj)		(G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_MODULE))
-#define CAJA_IS_MODULE_CLASS(klass)	(G_TYPE_CLASS_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_MODULE))
+#define BAUL_TYPE_MODULE    	(baul_module_get_type ())
+#define BAUL_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MODULE, CajaModule))
+#define BAUL_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MODULE, CajaModule))
+#define BAUL_IS_MODULE(obj)		(G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_MODULE))
+#define BAUL_IS_MODULE_CLASS(klass)	(G_TYPE_CLASS_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_MODULE))
 
 typedef struct _CajaModule        CajaModule;
 typedef struct _CajaModuleClass   CajaModuleClass;
@@ -73,7 +73,7 @@ baul_module_load (GTypeModule *gmodule)
 {
     CajaModule *module;
 
-    module = CAJA_MODULE (gmodule);
+    module = BAUL_MODULE (gmodule);
 
     module->library = g_module_open (module->path, G_MODULE_BIND_LAZY | G_MODULE_BIND_LOCAL);
 
@@ -114,7 +114,7 @@ baul_module_unload (GTypeModule *gmodule)
 {
     CajaModule *module;
 
-    module = CAJA_MODULE (gmodule);
+    module = BAUL_MODULE (gmodule);
 
     module->shutdown ();
 
@@ -130,7 +130,7 @@ baul_module_finalize (GObject *object)
 {
     CajaModule *module;
 
-    module = CAJA_MODULE (object);
+    module = BAUL_MODULE (object);
 
     g_free (module->path);
 
@@ -197,7 +197,7 @@ baul_module_load_file (const char *filename)
 {
     CajaModule *module;
 
-    module = g_object_new (CAJA_TYPE_MODULE, NULL);
+    module = g_object_new (BAUL_TYPE_MODULE, NULL);
     module->path = g_strdup (filename);
 
     if (g_type_module_use (G_TYPE_MODULE (module)))
@@ -263,7 +263,7 @@ baul_module_setup (void)
     {
         initialized = TRUE;
 
-        load_module_dir (CAJA_EXTENSIONDIR);
+        load_module_dir (BAUL_EXTENSIONDIR);
 
         eel_debug_call_at_shutdown (free_module_objects);
     }

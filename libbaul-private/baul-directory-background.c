@@ -50,13 +50,13 @@ baul_background_get_default_settings (char **color,
 {
     gboolean background_set;
 
-    background_set = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_BACKGROUND_SET);
+    background_set = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_BACKGROUND_SET);
 
     if (background_set && color)
-        *color = g_settings_get_string (baul_preferences, CAJA_PREFERENCES_BACKGROUND_COLOR);
+        *color = g_settings_get_string (baul_preferences, BAUL_PREFERENCES_BACKGROUND_COLOR);
 
     if (background_set && image)
-        *image =  g_settings_get_string (baul_preferences, CAJA_PREFERENCES_BACKGROUND_URI);
+        *image =  g_settings_get_string (baul_preferences, BAUL_PREFERENCES_BACKGROUND_URI);
 }
 
 static void
@@ -66,11 +66,11 @@ baul_background_load_from_file_metadata (CajaFile      *file,
     char *color, *image;
 
     g_assert (EEL_IS_BACKGROUND (background));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (g_object_get_data (G_OBJECT (background), "eel_background_file") == file);
 
-    color = baul_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL);
-    image = baul_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL);
+    color = baul_file_get_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL);
+    image = baul_file_get_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL);
 
     /* if there's none, read the default from the theme */
     if (color == NULL && image == NULL)
@@ -123,7 +123,7 @@ baul_background_changed_cb (EelBackground *background,
                             CajaFile   *file)
 {
     g_assert (EEL_IS_BACKGROUND (background));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (g_object_get_data (G_OBJECT (background), "eel_background_file") == file);
 
     char *color = eel_background_get_color (background);
@@ -135,35 +135,35 @@ baul_background_changed_cb (EelBackground *background,
     g_signal_handlers_block_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                      background);
 
-    if (action != (GdkDragAction) CAJA_DND_ACTION_SET_AS_FOLDER_BACKGROUND &&
-            action != (GdkDragAction) CAJA_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
+    if (action != (GdkDragAction) BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND &&
+            action != (GdkDragAction) BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
     {
         action = (GdkDragAction) GPOINTER_TO_INT (g_object_get_data (G_OBJECT (background),
                                                   "default_drag_action"));
     }
 
-    if (action == (GdkDragAction) CAJA_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
+    if (action == (GdkDragAction) BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
     {
-        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
-        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
+        baul_file_set_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
+        baul_file_set_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
 
         g_signal_handlers_block_by_func (baul_preferences,
                                          G_CALLBACK (baul_background_theme_notify_cb),
                                          background);
 
         g_settings_set_string (baul_preferences,
-                               CAJA_PREFERENCES_BACKGROUND_COLOR, color ? color : "");
+                               BAUL_PREFERENCES_BACKGROUND_COLOR, color ? color : "");
         g_settings_set_string (baul_preferences,
-                               CAJA_PREFERENCES_BACKGROUND_URI, image ? image : "");
+                               BAUL_PREFERENCES_BACKGROUND_URI, image ? image : "");
 
-        g_settings_set_boolean (baul_preferences, CAJA_PREFERENCES_BACKGROUND_SET, TRUE);
+        g_settings_set_boolean (baul_preferences, BAUL_PREFERENCES_BACKGROUND_SET, TRUE);
 
         g_signal_handlers_unblock_by_func (baul_preferences,
                                            G_CALLBACK (baul_background_theme_notify_cb),
                                            background);
     } else {
-        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, color);
-        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, image);
+        baul_file_set_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, color);
+        baul_file_set_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, image);
     }
 
     /* Unblock the handler. */
@@ -187,14 +187,14 @@ baul_background_reset_cb (EelBackground *background,
     g_signal_handlers_block_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                      background);
 
-    color = baul_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL);
-    image = baul_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL);
+    color = baul_file_get_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL);
+    image = baul_file_get_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL);
     if (!color && !image)
     {
         g_signal_handlers_block_by_func (baul_preferences,
                                          G_CALLBACK (baul_background_theme_notify_cb),
                                          background);
-        g_settings_set_boolean (baul_preferences, CAJA_PREFERENCES_BACKGROUND_SET, FALSE);
+        g_settings_set_boolean (baul_preferences, BAUL_PREFERENCES_BACKGROUND_SET, FALSE);
         g_signal_handlers_unblock_by_func (baul_preferences,
                                            G_CALLBACK (baul_background_theme_notify_cb),
                                            background);
@@ -202,8 +202,8 @@ baul_background_reset_cb (EelBackground *background,
     else
     {
         /* reset the metadata */
-        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
-        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
+        baul_file_set_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
+        baul_file_set_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
     }
     g_free (color);
     g_free (image);
@@ -220,7 +220,7 @@ static void
 baul_background_weak_notify (gpointer data,
                              GObject *background)
 {
-    CajaFile *file = CAJA_FILE (data);
+    CajaFile *file = BAUL_FILE (data);
 
     g_signal_handlers_disconnect_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                           background);
@@ -249,7 +249,7 @@ baul_connect_background_to_file_metadata (GtkWidget     *widget,
     /* Disconnect old signal handlers. */
     if (old_file != NULL)
     {
-        g_assert (CAJA_IS_FILE (old_file));
+        g_assert (BAUL_IS_FILE (old_file));
 
         g_signal_handlers_disconnect_by_func (background,
                                               G_CALLBACK (baul_background_changed_cb), old_file);
@@ -291,14 +291,14 @@ baul_connect_background_to_file_metadata (GtkWidget     *widget,
         g_object_weak_ref (G_OBJECT (background), baul_background_weak_notify, file);
 
         /* arrange to receive file metadata */
-        baul_file_monitor_add (file, background, CAJA_FILE_ATTRIBUTE_INFO);
+        baul_file_monitor_add (file, background, BAUL_FILE_ATTRIBUTE_INFO);
 
         /* arrange for notification when the theme changes */
-        g_signal_connect (baul_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_SET,
+        g_signal_connect (baul_preferences, "changed::" BAUL_PREFERENCES_BACKGROUND_SET,
                           G_CALLBACK(baul_background_theme_notify_cb), background);
-        g_signal_connect (baul_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_COLOR,
+        g_signal_connect (baul_preferences, "changed::" BAUL_PREFERENCES_BACKGROUND_COLOR,
                           G_CALLBACK(baul_background_theme_notify_cb), background);
-        g_signal_connect (baul_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_URI,
+        g_signal_connect (baul_preferences, "changed::" BAUL_PREFERENCES_BACKGROUND_URI,
                           G_CALLBACK(baul_background_theme_notify_cb), background);
     }
 

@@ -89,14 +89,14 @@ main (int argc, char **argv)
 	query = baul_query_new ();
 	baul_query_set_text (query, "richard hult");
 	directory = baul_directory_get_by_uri ("x-baul-search://0/");
-	baul_search_directory_set_query (CAJA_SEARCH_DIRECTORY (directory), query);
+	baul_search_directory_set_query (BAUL_SEARCH_DIRECTORY (directory), query);
 	g_object_unref (query);
 
 	g_signal_connect (directory, "files-added", G_CALLBACK (files_added), NULL);
 	g_signal_connect (directory, "files-changed", G_CALLBACK (files_changed), NULL);
 	g_signal_connect (directory, "done-loading", G_CALLBACK (done_loading), NULL);
 	baul_directory_file_monitor_add (directory, client1, TRUE,
-					     CAJA_FILE_ATTRIBUTE_INFO,
+					     BAUL_FILE_ATTRIBUTE_INFO,
 					     NULL, NULL);
 
 

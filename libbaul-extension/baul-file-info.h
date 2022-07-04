@@ -23,21 +23,21 @@
  * provides access to the asynchronous data in the CajaFile.
  * Extensions are passed objects of this type for operations. */
 
-#ifndef CAJA_FILE_INFO_H
-#define CAJA_FILE_INFO_H
+#ifndef BAUL_FILE_INFO_H
+#define BAUL_FILE_INFO_H
 
 #include <glib-object.h>
 #include <gio/gio.h>
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_FILE_INFO           (baul_file_info_get_type ())
-#define CAJA_FILE_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_FILE_INFO, CajaFileInfo))
-#define CAJA_IS_FILE_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_FILE_INFO))
-#define CAJA_FILE_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_FILE_INFO, CajaFileInfoIface))
+#define BAUL_TYPE_FILE_INFO           (baul_file_info_get_type ())
+#define BAUL_FILE_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_FILE_INFO, CajaFileInfo))
+#define BAUL_IS_FILE_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_FILE_INFO))
+#define BAUL_FILE_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_FILE_INFO, CajaFileInfoIface))
 
-#ifndef CAJA_FILE_DEFINED
-#define CAJA_FILE_DEFINED
+#ifndef BAUL_FILE_DEFINED
+#define BAUL_FILE_DEFINED
 /* Using CajaFile for the vtable to make implementing this in
  * CajaFile easier */
 typedef struct CajaFile            CajaFile;

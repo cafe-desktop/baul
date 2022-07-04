@@ -76,7 +76,7 @@ baul_drag_init (CajaDragInfo     *drag_info,
     if (add_text_targets)
     {
         gtk_target_list_add_text_targets (drag_info->target_list,
-                                          CAJA_ICON_DND_TEXT);
+                                          BAUL_ICON_DND_TEXT);
     }
 
     drag_info->drop_occured = FALSE;
@@ -700,13 +700,13 @@ baul_drag_drag_data_get (GtkWidget *widget,
 
     switch (info)
     {
-    case CAJA_ICON_DND_MATE_ICON_LIST:
+    case BAUL_ICON_DND_MATE_ICON_LIST:
         result = g_string_new (NULL);
         (* each_selected_item_iterator) (add_one_mate_icon, container_context, result);
         break;
 
-    case CAJA_ICON_DND_URI_LIST:
-    case CAJA_ICON_DND_TEXT:
+    case BAUL_ICON_DND_URI_LIST:
+    case BAUL_ICON_DND_TEXT:
         result = g_string_new (NULL);
         (* each_selected_item_iterator) (add_one_uri, container_context, result);
         break;
@@ -811,8 +811,8 @@ baul_drag_drop_action_ask (GtkWidget *widget,
                                   &damd);
 
     append_drop_action_menu_item (menu, _("Set as _Background"),
-                                  CAJA_DND_ACTION_SET_AS_BACKGROUND,
-                                  (actions & CAJA_DND_ACTION_SET_AS_BACKGROUND) != 0,
+                                  BAUL_DND_ACTION_SET_AS_BACKGROUND,
+                                  (actions & BAUL_DND_ACTION_SET_AS_BACKGROUND) != 0,
                                   &damd);
 
     eel_gtk_menu_append_separator (GTK_MENU (menu));
@@ -859,13 +859,13 @@ baul_drag_drop_background_ask (GtkWidget *widget,
     gtk_menu_set_screen (GTK_MENU (menu), gtk_widget_get_screen (widget));
 
     append_drop_action_menu_item (menu, _("Set as background for _all folders"),
-                                  CAJA_DND_ACTION_SET_AS_GLOBAL_BACKGROUND,
-                                  (actions & CAJA_DND_ACTION_SET_AS_GLOBAL_BACKGROUND) != 0,
+                                  BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND,
+                                  (actions & BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND) != 0,
                                   &damd);
 
     append_drop_action_menu_item (menu, _("Set as background for _this folder"),
-                                  CAJA_DND_ACTION_SET_AS_FOLDER_BACKGROUND,
-                                  (actions & CAJA_DND_ACTION_SET_AS_FOLDER_BACKGROUND) != 0,
+                                  BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND,
+                                  (actions & BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND) != 0,
                                   &damd);
 
     eel_gtk_menu_append_separator (GTK_MENU (menu));
@@ -1082,7 +1082,7 @@ slot_proxy_drag_motion (GtkWidget          *widget,
     }
 
     window = gtk_widget_get_toplevel (widget);
-    g_assert (CAJA_IS_WINDOW_INFO (window));
+    g_assert (BAUL_IS_WINDOW_INFO (window));
 
     if (!drag_info->have_data)
     {
@@ -1109,7 +1109,7 @@ slot_proxy_drag_motion (GtkWidget          *widget,
         }
         else
         {
-            target_slot = baul_window_info_get_active_slot (CAJA_WINDOW_INFO (window));
+            target_slot = baul_window_info_get_active_slot (BAUL_WINDOW_INFO (window));
         }
 
         if (target_slot != NULL)
@@ -1121,17 +1121,17 @@ slot_proxy_drag_motion (GtkWidget          *widget,
     if (drag_info->have_data &&
             drag_info->have_valid_data)
     {
-        if (drag_info->info == CAJA_ICON_DND_MATE_ICON_LIST)
+        if (drag_info->info == BAUL_ICON_DND_MATE_ICON_LIST)
         {
             baul_drag_default_drop_action_for_icons (context, target_uri,
                     drag_info->data.selection_list,
                     &action);
         }
-        else if (drag_info->info == CAJA_ICON_DND_URI_LIST)
+        else if (drag_info->info == BAUL_ICON_DND_URI_LIST)
         {
             action = baul_drag_default_drop_action_for_uri_list (context, target_uri);
         }
-        else if (drag_info->info == CAJA_ICON_DND_NETSCAPE_URL)
+        else if (drag_info->info == BAUL_ICON_DND_NETSCAPE_URL)
         {
             action = baul_drag_default_drop_action_for_netscape_url (context);
         }
@@ -1162,15 +1162,15 @@ drag_info_clear (CajaDragSlotProxyInfo *drag_info)
         goto out;
     }
 
-    if (drag_info->info == CAJA_ICON_DND_MATE_ICON_LIST)
+    if (drag_info->info == BAUL_ICON_DND_MATE_ICON_LIST)
     {
         baul_drag_destroy_selection_list (drag_info->data.selection_list);
     }
-    else if (drag_info->info == CAJA_ICON_DND_URI_LIST)
+    else if (drag_info->info == BAUL_ICON_DND_URI_LIST)
     {
         g_list_free (drag_info->data.uri_list);
     }
-    else if (drag_info->info == CAJA_ICON_DND_NETSCAPE_URL)
+    else if (drag_info->info == BAUL_ICON_DND_NETSCAPE_URL)
     {
         g_free (drag_info->data.netscape_url);
     }
@@ -1239,7 +1239,7 @@ slot_proxy_handle_drop (GtkWidget                *widget,
     }
 
     window = gtk_widget_get_toplevel (widget);
-    g_assert (CAJA_IS_WINDOW_INFO (window));
+    g_assert (BAUL_IS_WINDOW_INFO (window));
 
     if (drag_info->target_slot != NULL)
     {
@@ -1247,7 +1247,7 @@ slot_proxy_handle_drop (GtkWidget                *widget,
     }
     else
     {
-        target_slot = baul_window_info_get_active_slot (CAJA_WINDOW_INFO (window));
+        target_slot = baul_window_info_get_active_slot (BAUL_WINDOW_INFO (window));
     }
 
     target_uri = NULL;
@@ -1268,7 +1268,7 @@ slot_proxy_handle_drop (GtkWidget                *widget,
 
     if (target_slot != NULL && target_view != NULL)
     {
-        if (drag_info->info == CAJA_ICON_DND_MATE_ICON_LIST)
+        if (drag_info->info == BAUL_ICON_DND_MATE_ICON_LIST)
         {
             GList *uri_list;
 
@@ -1281,14 +1281,14 @@ slot_proxy_handle_drop (GtkWidget                *widget,
                                                 gdk_drag_context_get_selected_action (context));
             g_list_free_full (uri_list, g_free);
         }
-        else if (drag_info->info == CAJA_ICON_DND_URI_LIST)
+        else if (drag_info->info == BAUL_ICON_DND_URI_LIST)
         {
             baul_view_drop_proxy_received_uris (target_view,
                                                 drag_info->data.uri_list,
                                                 target_uri,
                                                 gdk_drag_context_get_selected_action (context));
         }
-        if (drag_info->info == CAJA_ICON_DND_NETSCAPE_URL)
+        if (drag_info->info == BAUL_ICON_DND_NETSCAPE_URL)
         {
             baul_view_drop_proxy_received_netscape_url (target_view,
                     drag_info->data.netscape_url,
@@ -1340,13 +1340,13 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
         return;
     }
 
-    if (info == CAJA_ICON_DND_MATE_ICON_LIST)
+    if (info == BAUL_ICON_DND_MATE_ICON_LIST)
     {
         drag_info->data.selection_list = baul_drag_build_selection_list (data);
 
         drag_info->have_valid_data = drag_info->data.selection_list != NULL;
     }
-    else if (info == CAJA_ICON_DND_URI_LIST)
+    else if (info == BAUL_ICON_DND_URI_LIST)
     {
         uris = gtk_selection_data_get_uris (data);
         drag_info->data.uri_list = baul_drag_uri_list_from_array ((const char **) uris);
@@ -1354,7 +1354,7 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
 
         drag_info->have_valid_data = drag_info->data.uri_list != NULL;
     }
-    else if (info == CAJA_ICON_DND_NETSCAPE_URL)
+    else if (info == BAUL_ICON_DND_NETSCAPE_URL)
     {
         drag_info->data.netscape_url = g_strdup ((char *) gtk_selection_data_get_data (data));
 
@@ -1373,8 +1373,8 @@ baul_drag_slot_proxy_init (GtkWidget *widget,
 {
     const GtkTargetEntry targets[] =
     {
-        { CAJA_ICON_DND_MATE_ICON_LIST_TYPE, 0, CAJA_ICON_DND_MATE_ICON_LIST },
-        { CAJA_ICON_DND_NETSCAPE_URL_TYPE, 0, CAJA_ICON_DND_NETSCAPE_URL }
+        { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
+        { BAUL_ICON_DND_NETSCAPE_URL_TYPE, 0, BAUL_ICON_DND_NETSCAPE_URL }
     };
     GtkTargetList *target_list;
 
@@ -1389,7 +1389,7 @@ baul_drag_slot_proxy_init (GtkWidget *widget,
                        GDK_ACTION_ASK);
 
     target_list = gtk_target_list_new (targets, G_N_ELEMENTS (targets));
-    gtk_target_list_add_uri_targets (target_list, CAJA_ICON_DND_URI_LIST);
+    gtk_target_list_add_uri_targets (target_list, BAUL_ICON_DND_URI_LIST);
     gtk_drag_dest_set_target_list (widget, target_list);
     gtk_target_list_unref (target_list);
 

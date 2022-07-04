@@ -24,8 +24,8 @@
  */
 /* baul-window.h: Interface of the main window object */
 
-#ifndef CAJA_WINDOW_H
-#define CAJA_WINDOW_H
+#ifndef BAUL_WINDOW_H
+#define BAUL_WINDOW_H
 
 #include <gtk/gtk.h>
 
@@ -40,25 +40,25 @@
 #include "baul-information-panel.h"
 #include "baul-side-pane.h"
 
-#define CAJA_TYPE_WINDOW baul_window_get_type()
-#define CAJA_WINDOW(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW, CajaWindow))
-#define CAJA_WINDOW_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_WINDOW, CajaWindowClass))
-#define CAJA_IS_WINDOW(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW))
-#define CAJA_IS_WINDOW_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_WINDOW))
-#define CAJA_WINDOW_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_WINDOW, CajaWindowClass))
+#define BAUL_TYPE_WINDOW baul_window_get_type()
+#define BAUL_WINDOW(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_WINDOW, CajaWindow))
+#define BAUL_WINDOW_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_WINDOW, CajaWindowClass))
+#define BAUL_IS_WINDOW(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_WINDOW))
+#define BAUL_IS_WINDOW_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_WINDOW))
+#define BAUL_WINDOW_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_WINDOW, CajaWindowClass))
 
-#ifndef CAJA_WINDOW_DEFINED
-#define CAJA_WINDOW_DEFINED
+#ifndef BAUL_WINDOW_DEFINED
+#define BAUL_WINDOW_DEFINED
 typedef struct CajaWindow CajaWindow;
 #endif
 
-#ifndef CAJA_WINDOW_SLOT_DEFINED
-#define CAJA_WINDOW_SLOT_DEFINED
+#ifndef BAUL_WINDOW_SLOT_DEFINED
+#define BAUL_WINDOW_SLOT_DEFINED
 typedef struct CajaWindowSlot CajaWindowSlot;
 #endif
 
@@ -69,15 +69,15 @@ typedef enum CajaWindowOpenSlotFlags CajaWindowOpenSlotFlags;
 
 typedef enum
 {
-    CAJA_WINDOW_NOT_SHOWN,
-    CAJA_WINDOW_POSITION_SET,
-    CAJA_WINDOW_SHOULD_SHOW
+    BAUL_WINDOW_NOT_SHOWN,
+    BAUL_WINDOW_POSITION_SET,
+    BAUL_WINDOW_SHOULD_SHOW
 } CajaWindowShowState;
 
 enum CajaWindowOpenSlotFlags
 {
-    CAJA_WINDOW_OPEN_SLOT_NONE = 0,
-    CAJA_WINDOW_OPEN_SLOT_APPEND = 1
+    BAUL_WINDOW_OPEN_SLOT_NONE = 0,
+    BAUL_WINDOW_OPEN_SLOT_APPEND = 1
 };
 
 typedef struct _CajaWindowPrivate CajaWindowPrivate;

@@ -111,28 +111,28 @@ baul_file_info_get_type (void)
 gboolean
 baul_file_info_is_gone (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), FALSE);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->is_gone != NULL, FALSE);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), FALSE);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->is_gone != NULL, FALSE);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->is_gone (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->is_gone (file);
 }
 
 GFileType
 baul_file_info_get_file_type (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), G_FILE_TYPE_UNKNOWN);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_file_type != NULL, G_FILE_TYPE_UNKNOWN);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), G_FILE_TYPE_UNKNOWN);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_file_type != NULL, G_FILE_TYPE_UNKNOWN);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_file_type (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_file_type (file);
 }
 
 char *
 baul_file_info_get_name (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_name != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_name != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_name (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_name (file);
 }
 
 /**
@@ -144,28 +144,28 @@ baul_file_info_get_name (CajaFileInfo *file)
 GFile *
 baul_file_info_get_location (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_location != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_location != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_location (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_location (file);
 }
 
 char *
 baul_file_info_get_uri (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_uri != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_uri != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_uri (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_uri (file);
 }
 
 char *
 baul_file_info_get_activation_uri (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_activation_uri != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_activation_uri != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_activation_uri (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_activation_uri (file);
 }
 
 /**
@@ -178,19 +178,19 @@ baul_file_info_get_activation_uri (CajaFileInfo *file)
 GFile *
 baul_file_info_get_parent_location (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_parent_location != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_parent_location != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_parent_location (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_parent_location (file);
 }
 
 char *
 baul_file_info_get_parent_uri (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_parent_uri != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_parent_uri != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_parent_uri (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_parent_uri (file);
 }
 
 /**
@@ -203,10 +203,10 @@ baul_file_info_get_parent_uri (CajaFileInfo *file)
 CajaFileInfo *
 baul_file_info_get_parent_info (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_parent_info != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_parent_info != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_parent_info (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_parent_info (file);
 }
 
 /**
@@ -219,79 +219,79 @@ baul_file_info_get_parent_info (CajaFileInfo *file)
 GMount *
 baul_file_info_get_mount (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_mount != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_mount != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_mount (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_mount (file);
 }
 
 char *
 baul_file_info_get_uri_scheme (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_uri_scheme != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_uri_scheme != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_uri_scheme (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_uri_scheme (file);
 }
 
 char *
 baul_file_info_get_mime_type (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_mime_type != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_mime_type != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_mime_type (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_mime_type (file);
 }
 
 gboolean
 baul_file_info_is_mime_type (CajaFileInfo *file,
                              const char *mime_type)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), FALSE);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), FALSE);
     g_return_val_if_fail (mime_type != NULL, FALSE);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->is_mime_type != NULL, FALSE);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->is_mime_type != NULL, FALSE);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->is_mime_type (file,
+    return BAUL_FILE_INFO_GET_IFACE (file)->is_mime_type (file,
            mime_type);
 }
 
 gboolean
 baul_file_info_is_directory (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), FALSE);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->is_directory != NULL, FALSE);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), FALSE);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->is_directory != NULL, FALSE);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->is_directory (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->is_directory (file);
 }
 
 gboolean
 baul_file_info_can_write (CajaFileInfo *file)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), FALSE);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->can_write != NULL, FALSE);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), FALSE);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->can_write != NULL, FALSE);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->can_write (file);
+    return BAUL_FILE_INFO_GET_IFACE (file)->can_write (file);
 }
 
 void
 baul_file_info_add_emblem (CajaFileInfo *file,
                            const char *emblem_name)
 {
-    g_return_if_fail (CAJA_IS_FILE_INFO (file));
-    g_return_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->add_emblem != NULL);
+    g_return_if_fail (BAUL_IS_FILE_INFO (file));
+    g_return_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->add_emblem != NULL);
 
-    CAJA_FILE_INFO_GET_IFACE (file)->add_emblem (file, emblem_name);
+    BAUL_FILE_INFO_GET_IFACE (file)->add_emblem (file, emblem_name);
 }
 
 char *
 baul_file_info_get_string_attribute (CajaFileInfo *file,
                                      const char *attribute_name)
 {
-    g_return_val_if_fail (CAJA_IS_FILE_INFO (file), NULL);
-    g_return_val_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->get_string_attribute != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_FILE_INFO (file), NULL);
+    g_return_val_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->get_string_attribute != NULL, NULL);
     g_return_val_if_fail (attribute_name != NULL, NULL);
 
-    return CAJA_FILE_INFO_GET_IFACE (file)->get_string_attribute
+    return BAUL_FILE_INFO_GET_IFACE (file)->get_string_attribute
            (file, attribute_name);
 }
 
@@ -300,22 +300,22 @@ baul_file_info_add_string_attribute (CajaFileInfo *file,
                                      const char *attribute_name,
                                      const char *value)
 {
-    g_return_if_fail (CAJA_IS_FILE_INFO (file));
-    g_return_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->add_string_attribute != NULL);
+    g_return_if_fail (BAUL_IS_FILE_INFO (file));
+    g_return_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->add_string_attribute != NULL);
     g_return_if_fail (attribute_name != NULL);
     g_return_if_fail (value != NULL);
 
-    CAJA_FILE_INFO_GET_IFACE (file)->add_string_attribute
+    BAUL_FILE_INFO_GET_IFACE (file)->add_string_attribute
         (file, attribute_name, value);
 }
 
 void
 baul_file_info_invalidate_extension_info (CajaFileInfo *file)
 {
-    g_return_if_fail (CAJA_IS_FILE_INFO (file));
-    g_return_if_fail (CAJA_FILE_INFO_GET_IFACE (file)->invalidate_extension_info != NULL);
+    g_return_if_fail (BAUL_IS_FILE_INFO (file));
+    g_return_if_fail (BAUL_FILE_INFO_GET_IFACE (file)->invalidate_extension_info != NULL);
 
-    CAJA_FILE_INFO_GET_IFACE (file)->invalidate_extension_info (file);
+    BAUL_FILE_INFO_GET_IFACE (file)->invalidate_extension_info (file);
 }
 
 /**

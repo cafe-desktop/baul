@@ -20,8 +20,8 @@
    Author: Pavel Cisler <pavel@eazel.com>
 */
 
-#ifndef CAJA_FILE_CHANGES_QUEUE_H
-#define CAJA_FILE_CHANGES_QUEUE_H
+#ifndef BAUL_FILE_CHANGES_QUEUE_H
+#define BAUL_FILE_CHANGES_QUEUE_H
 
 #include <gdk/gdk.h>
 #include <gio/gio.h>
@@ -39,4 +39,4 @@ void baul_file_changes_queue_schedule_position_remove        (GFile      *locati
 void baul_file_changes_consume_changes                       (gboolean    consume_all);
 
 
-#endif /* CAJA_FILE_CHANGES_QUEUE_H */
+#endif /* BAUL_FILE_CHANGES_QUEUE_H */

@@ -22,8 +22,8 @@
  *
  */
 
-#ifndef CAJA_PROPERTY_PAGE_H
-#define CAJA_PROPERTY_PAGE_H
+#ifndef BAUL_PROPERTY_PAGE_H
+#define BAUL_PROPERTY_PAGE_H
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -31,12 +31,12 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_PROPERTY_PAGE            (baul_property_page_get_type())
-#define CAJA_PROPERTY_PAGE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PROPERTY_PAGE, CajaPropertyPage))
-#define CAJA_PROPERTY_PAGE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_PROPERTY_PAGE, CajaPropertyPageClass))
-#define CAJA_IS_PROPERTY_PAGE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_PROPERTY_PAGE))
-#define CAJA_IS_PROPERTY_PAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), CAJA_TYPE_PROPERTY_PAGE))
-#define CAJA_PROPERTY_PAGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), CAJA_TYPE_PROPERTY_PAGE, CajaPropertyPageClass))
+#define BAUL_TYPE_PROPERTY_PAGE            (baul_property_page_get_type())
+#define BAUL_PROPERTY_PAGE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PROPERTY_PAGE, CajaPropertyPage))
+#define BAUL_PROPERTY_PAGE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_PROPERTY_PAGE, CajaPropertyPageClass))
+#define BAUL_IS_PROPERTY_PAGE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_PROPERTY_PAGE))
+#define BAUL_IS_PROPERTY_PAGE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), BAUL_TYPE_PROPERTY_PAGE))
+#define BAUL_PROPERTY_PAGE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_PROPERTY_PAGE, CajaPropertyPageClass))
 
 typedef struct _CajaPropertyPage        CajaPropertyPage;
 typedef struct _CajaPropertyPageDetails CajaPropertyPageDetails;

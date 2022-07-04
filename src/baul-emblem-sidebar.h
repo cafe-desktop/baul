@@ -24,24 +24,24 @@
  *  in a vertical panel and hosts the meta-sidebars.
  */
 
-#ifndef CAJA_EMBLEM_SIDEBAR_H
-#define CAJA_EMBLEM_SIDEBAR_H
+#ifndef BAUL_EMBLEM_SIDEBAR_H
+#define BAUL_EMBLEM_SIDEBAR_H
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_EMBLEM_SIDEBAR baul_emblem_sidebar_get_type()
-#define CAJA_EMBLEM_SIDEBAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_EMBLEM_SIDEBAR, CajaEmblemSidebar))
-#define CAJA_EMBLEM_SIDEBAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_EMBLEM_SIDEBAR, CajaEmblemSidebarClass))
-#define CAJA_IS_EMBLEM_SIDEBAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_EMBLEM_SIDEBAR))
-#define CAJA_IS_EMBLEM_SIDEBAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_EMBLEM_SIDEBAR))
-#define CAJA_EMBLEM_SIDEBAR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_EMBLEM_SIDEBAR, CajaEmblemSidebarClass))
+#define BAUL_TYPE_EMBLEM_SIDEBAR baul_emblem_sidebar_get_type()
+#define BAUL_EMBLEM_SIDEBAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_EMBLEM_SIDEBAR, CajaEmblemSidebar))
+#define BAUL_EMBLEM_SIDEBAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_EMBLEM_SIDEBAR, CajaEmblemSidebarClass))
+#define BAUL_IS_EMBLEM_SIDEBAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_EMBLEM_SIDEBAR))
+#define BAUL_IS_EMBLEM_SIDEBAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_EMBLEM_SIDEBAR))
+#define BAUL_EMBLEM_SIDEBAR_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_EMBLEM_SIDEBAR, CajaEmblemSidebarClass))
 
-#define CAJA_EMBLEM_SIDEBAR_ID "emblems"
+#define BAUL_EMBLEM_SIDEBAR_ID "emblems"
 
 typedef struct CajaEmblemSidebarDetails CajaEmblemSidebarDetails;
 
@@ -59,4 +59,4 @@ typedef struct
 GType	baul_emblem_sidebar_get_type     (void);
 void    baul_emblem_sidebar_register     (void);
 
-#endif /* CAJA_EMBLEM_SIDEBAR_H */
+#endif /* BAUL_EMBLEM_SIDEBAR_H */

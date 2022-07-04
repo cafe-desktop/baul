@@ -26,7 +26,7 @@
 #include "baul-saved-search-file.h"
 #include "baul-file-private.h"
 
-G_DEFINE_TYPE(CajaSavedSearchFile, baul_saved_search_file, CAJA_TYPE_VFS_FILE)
+G_DEFINE_TYPE(CajaSavedSearchFile, baul_saved_search_file, BAUL_TYPE_VFS_FILE)
 
 
 static void
@@ -39,7 +39,7 @@ baul_saved_search_file_class_init (CajaSavedSearchFileClass * klass)
 {
     CajaFileClass *file_class;
 
-    file_class = CAJA_FILE_CLASS (klass);
+    file_class = BAUL_FILE_CLASS (klass);
 
     file_class->default_file_type = G_FILE_TYPE_DIRECTORY;
 }

@@ -59,7 +59,7 @@ baul_trash_monitor_finalize (GObject *object)
 {
     CajaTrashMonitor *trash_monitor;
 
-    trash_monitor = CAJA_TRASH_MONITOR (object);
+    trash_monitor = BAUL_TRASH_MONITOR (object);
 
     if (trash_monitor->details->icon)
     {
@@ -102,7 +102,7 @@ update_info_cb (GObject *source_object,
     GFileInfo *info;
     gboolean empty;
 
-    trash_monitor = CAJA_TRASH_MONITOR (user_data);
+    trash_monitor = BAUL_TRASH_MONITOR (user_data);
 
     info = g_file_query_info_finish (G_FILE (source_object),
                                      res, NULL);
@@ -126,7 +126,7 @@ update_info_cb (GObject *source_object,
                 names = g_themed_icon_get_names (G_THEMED_ICON (icon));
                 for (i = 0; names[i] != NULL; i++)
                 {
-                    if (strcmp (names[i], CAJA_ICON_TRASH_FULL) == 0)
+                    if (strcmp (names[i], BAUL_ICON_TRASH_FULL) == 0)
                     {
                         empty = FALSE;
                         break;
@@ -173,7 +173,7 @@ file_changed (GFileMonitor* monitor,
 {
     CajaTrashMonitor *trash_monitor;
 
-    trash_monitor = CAJA_TRASH_MONITOR (user_data);
+    trash_monitor = BAUL_TRASH_MONITOR (user_data);
 
     schedule_update_info (trash_monitor);
 }
@@ -186,7 +186,7 @@ baul_trash_monitor_init (CajaTrashMonitor *trash_monitor)
     trash_monitor->details = baul_trash_monitor_get_instance_private (trash_monitor);
 
     trash_monitor->details->empty = TRUE;
-    trash_monitor->details->icon = g_themed_icon_new (CAJA_ICON_TRASH);
+    trash_monitor->details->icon = g_themed_icon_new (BAUL_ICON_TRASH);
 
     location = g_file_new_for_uri ("trash:///");
 
@@ -213,8 +213,8 @@ baul_trash_monitor_get (void)
     {
         /* not running yet, start it up */
 
-        baul_trash_monitor = CAJA_TRASH_MONITOR
-                             (g_object_new (CAJA_TYPE_TRASH_MONITOR, NULL));
+        baul_trash_monitor = BAUL_TRASH_MONITOR
+                             (g_object_new (BAUL_TYPE_TRASH_MONITOR, NULL));
         eel_debug_call_at_shutdown (unref_trash_monitor);
     }
 

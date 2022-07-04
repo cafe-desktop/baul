@@ -301,11 +301,11 @@ get_menu_icon_for_file (TreeNode *node,
     gicon = baul_file_get_gicon (file, flags);
 
     i = 0;
-    emblems_to_ignore[i++] = CAJA_FILE_EMBLEM_NAME_TRASH;
+    emblems_to_ignore[i++] = BAUL_FILE_EMBLEM_NAME_TRASH;
 
     if (node->parent && node->parent->file) {
         if (!baul_file_can_write (node->parent->file)) {
-            emblems_to_ignore[i++] = CAJA_FILE_EMBLEM_NAME_CANT_WRITE;
+            emblems_to_ignore[i++] = BAUL_FILE_EMBLEM_NAME_CANT_WRITE;
         }
     }
 
@@ -399,7 +399,7 @@ tree_node_update_closed_surface (TreeNode *node)
 static gboolean
 tree_node_update_open_surface (TreeNode *node)
 {
-    return tree_node_update_surface (node, &node->open_surface, CAJA_FILE_ICON_FLAGS_FOR_OPEN_FOLDER);
+    return tree_node_update_surface (node, &node->open_surface, BAUL_FILE_ICON_FLAGS_FOR_OPEN_FOLDER);
 }
 
 static gboolean
@@ -442,7 +442,7 @@ tree_node_get_open_surface (TreeNode *node)
 {
     if (node->open_surface == NULL)
     {
-        node->open_surface = tree_node_get_surface (node, CAJA_FILE_ICON_FLAGS_FOR_OPEN_FOLDER);
+        node->open_surface = tree_node_get_surface (node, BAUL_FILE_ICON_FLAGS_FOR_OPEN_FOLDER);
     }
     return node->open_surface;
 }
@@ -1085,7 +1085,7 @@ files_changed_callback (CajaDirectory *directory,
 
     for (node = changed_files; node != NULL; node = node->next)
     {
-        process_file_change (root, CAJA_FILE (node->data));
+        process_file_change (root, BAUL_FILE (node->data));
     }
 }
 
@@ -1165,9 +1165,9 @@ get_tree_monitor_attributes (void)
     CajaFileAttributes attributes;
 
     attributes =
-        CAJA_FILE_ATTRIBUTES_FOR_ICON |
-        CAJA_FILE_ATTRIBUTE_INFO |
-        CAJA_FILE_ATTRIBUTE_LINK_INFO;
+        BAUL_FILE_ATTRIBUTES_FOR_ICON |
+        BAUL_FILE_ATTRIBUTE_INFO |
+        BAUL_FILE_ATTRIBUTE_LINK_INFO;
 
     return attributes;
 }
@@ -1248,7 +1248,7 @@ iter_is_valid (FMTreeModel *model, const GtkTreeIter *iter)
     {
         if (parent != NULL)
         {
-            if (!CAJA_IS_FILE (parent->file))
+            if (!BAUL_IS_FILE (parent->file))
             {
                 return FALSE;
             }
@@ -1260,7 +1260,7 @@ iter_is_valid (FMTreeModel *model, const GtkTreeIter *iter)
     }
     else
     {
-        if (!CAJA_IS_FILE (node->file))
+        if (!BAUL_IS_FILE (node->file))
         {
             return FALSE;
         }

@@ -26,46 +26,46 @@
  * needs information about a file.  They are passed a CajaFileInfo
  * object which should be filled with relevant information */
 
-#ifndef CAJA_EXTENSION_TYPES_H
-#define CAJA_EXTENSION_TYPES_H
+#ifndef BAUL_EXTENSION_TYPES_H
+#define BAUL_EXTENSION_TYPES_H
 
 #include <glib-object.h>
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_OPERATION_RESULT (baul_operation_result_get_type ())
+#define BAUL_TYPE_OPERATION_RESULT (baul_operation_result_get_type ())
 
 /**
  * CajaOperationHandle:
  *
  * Handle for asynchronous interfaces. These are opaque handles that must
  * be unique within an extension object. These are returned by operations
- * that return CAJA_OPERATION_IN_PROGRESS.
+ * that return BAUL_OPERATION_IN_PROGRESS.
  */
 typedef struct _CajaOperationHandle CajaOperationHandle;
 
 /**
  * CajaOperationResult:
- * @CAJA_OPERATION_COMPLETE: the operation succeeded, and the extension
+ * @BAUL_OPERATION_COMPLETE: the operation succeeded, and the extension
  *  is done with the request.
- * @CAJA_OPERATION_FAILED: the operation failed.
- * @CAJA_OPERATION_IN_PROGRESS: the extension has begin an async operation.
+ * @BAUL_OPERATION_FAILED: the operation failed.
+ * @BAUL_OPERATION_IN_PROGRESS: the extension has begin an async operation.
  *  When this value is returned, the extension must set the handle parameter
  *  and call the callback closure when the operation is complete.
  */
 typedef enum {
     /* Returned if the call succeeded, and the extension is done
      * with the request */
-    CAJA_OPERATION_COMPLETE,
+    BAUL_OPERATION_COMPLETE,
 
     /* Returned if the call failed */
-    CAJA_OPERATION_FAILED,
+    BAUL_OPERATION_FAILED,
 
     /* Returned if the extension has begun an async operation.
      * If this is returned, the extension must set the handle
      * parameter and call the callback closure when the
      * operation is complete. */
-    CAJA_OPERATION_IN_PROGRESS
+    BAUL_OPERATION_IN_PROGRESS
 } CajaOperationResult;
 
 GType baul_operation_result_get_type (void);

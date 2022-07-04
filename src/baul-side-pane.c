@@ -102,7 +102,7 @@ switch_page_callback (GtkWidget *notebook,
     CajaSidePane *side_pane;
     SidePanel *panel;
 
-    side_pane = CAJA_SIDE_PANE (user_data);
+    side_pane = BAUL_SIDE_PANE (user_data);
 
     panel = panel_for_widget (side_pane,
                               gtk_notebook_get_nth_page (GTK_NOTEBOOK (side_pane->details->notebook),
@@ -167,7 +167,7 @@ panel_item_activate_callback (GtkMenuItem *item,
     CajaSidePane *side_pane;
     SidePanel *panel;
 
-    side_pane = CAJA_SIDE_PANE (user_data);
+    side_pane = BAUL_SIDE_PANE (user_data);
 
     panel = g_object_get_data (G_OBJECT (item), "panel-item");
 
@@ -181,7 +181,7 @@ select_button_press_callback (GtkWidget *widget,
 {
     CajaSidePane *side_pane;
 
-    side_pane = CAJA_SIDE_PANE (user_data);
+    side_pane = BAUL_SIDE_PANE (user_data);
 
     if ((event->type == GDK_BUTTON_PRESS) && event->button == 1)
     {
@@ -217,7 +217,7 @@ select_button_key_press_callback (GtkWidget *widget,
 {
     CajaSidePane *side_pane;
 
-    side_pane = CAJA_SIDE_PANE (user_data);
+    side_pane = BAUL_SIDE_PANE (user_data);
 
     if (event->keyval == GDK_KEY_space ||
         event->keyval == GDK_KEY_KP_Space ||
@@ -242,7 +242,7 @@ close_clicked_callback (GtkWidget *widget,
 {
     CajaSidePane *side_pane;
 
-    side_pane = CAJA_SIDE_PANE (user_data);
+    side_pane = BAUL_SIDE_PANE (user_data);
 
     g_signal_emit (side_pane, signals[CLOSE_REQUESTED], 0);
 }
@@ -264,7 +264,7 @@ menu_detach_callback (GtkWidget *widget,
 {
     CajaSidePane *side_pane;
 
-    side_pane = CAJA_SIDE_PANE (widget);
+    side_pane = BAUL_SIDE_PANE (widget);
 
     side_pane->details->menu = NULL;
 }
@@ -386,7 +386,7 @@ baul_side_pane_dispose (GObject *object)
 {
     CajaSidePane *side_pane;
 
-    side_pane = CAJA_SIDE_PANE (object);
+    side_pane = BAUL_SIDE_PANE (object);
 
     if (side_pane->details->menu)
     {
@@ -403,7 +403,7 @@ baul_side_pane_finalize (GObject *object)
     CajaSidePane *side_pane;
     GList *l;
 
-    side_pane = CAJA_SIDE_PANE (object);
+    side_pane = BAUL_SIDE_PANE (object);
 
     for (l = side_pane->details->panels; l != NULL; l = l->next)
     {
@@ -418,7 +418,7 @@ baul_side_pane_finalize (GObject *object)
 CajaSidePane *
 baul_side_pane_new (void)
 {
-    return CAJA_SIDE_PANE (gtk_widget_new (baul_side_pane_get_type (), NULL));
+    return BAUL_SIDE_PANE (gtk_widget_new (baul_side_pane_get_type (), NULL));
 }
 
 void
@@ -430,7 +430,7 @@ baul_side_pane_add_panel (CajaSidePane *side_pane,
     SidePanel *panel;
 
     g_return_if_fail (side_pane != NULL);
-    g_return_if_fail (CAJA_IS_SIDE_PANE (side_pane));
+    g_return_if_fail (BAUL_IS_SIDE_PANE (side_pane));
     g_return_if_fail (widget != NULL);
     g_return_if_fail (GTK_IS_WIDGET (widget));
     g_return_if_fail (title != NULL);
@@ -470,7 +470,7 @@ baul_side_pane_remove_panel (CajaSidePane *side_pane,
     SidePanel *panel;
 
     g_return_if_fail (side_pane != NULL);
-    g_return_if_fail (CAJA_IS_SIDE_PANE (side_pane));
+    g_return_if_fail (BAUL_IS_SIDE_PANE (side_pane));
     g_return_if_fail (widget != NULL);
     g_return_if_fail (GTK_IS_WIDGET (widget));
 
@@ -505,7 +505,7 @@ baul_side_pane_show_panel (CajaSidePane *side_pane,
     int page_num;
 
     g_return_if_fail (side_pane != NULL);
-    g_return_if_fail (CAJA_IS_SIDE_PANE (side_pane));
+    g_return_if_fail (BAUL_IS_SIDE_PANE (side_pane));
     g_return_if_fail (widget != NULL);
     g_return_if_fail (GTK_IS_WIDGET (widget));
 
@@ -527,7 +527,7 @@ shortcut_clicked_callback (GtkWidget *button,
     CajaSidePane *side_pane;
     GtkWidget *page;
 
-    side_pane = CAJA_SIDE_PANE (user_data);
+    side_pane = BAUL_SIDE_PANE (user_data);
 
     page = GTK_WIDGET (g_object_get_data (G_OBJECT (button), "side-page"));
 
@@ -567,7 +567,7 @@ baul_side_pane_set_panel_image (CajaSidePane *side_pane,
     GtkWidget *image;
 
     g_return_if_fail (side_pane != NULL);
-    g_return_if_fail (CAJA_IS_SIDE_PANE (side_pane));
+    g_return_if_fail (BAUL_IS_SIDE_PANE (side_pane));
     g_return_if_fail (widget != NULL);
     g_return_if_fail (GTK_IS_WIDGET (widget));
     g_return_if_fail (pixbuf == NULL || GDK_IS_PIXBUF (pixbuf));

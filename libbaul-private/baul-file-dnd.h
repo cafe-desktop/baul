@@ -22,13 +22,13 @@
    Authors: Pavel Cisler <pavel@eazel.com>,
 */
 
-#ifndef CAJA_FILE_DND_H
-#define CAJA_FILE_DND_H
+#ifndef BAUL_FILE_DND_H
+#define BAUL_FILE_DND_H
 
 #include "baul-dnd.h"
 #include "baul-file.h"
 
-#define CAJA_FILE_DND_ERASE_KEYWORD "erase"
+#define BAUL_FILE_DND_ERASE_KEYWORD "erase"
 
 gboolean baul_drag_can_accept_item              (CajaFile *drop_target_item,
         const char   *item_uri);
@@ -40,5 +40,5 @@ gboolean baul_drag_can_accept_info              (CajaFile *drop_target_item,
 void     baul_drag_file_receive_dropped_keyword (CajaFile *file,
         const char   *keyword);
 
-#endif /* CAJA_FILE_DND_H */
+#endif /* BAUL_FILE_DND_H */
 

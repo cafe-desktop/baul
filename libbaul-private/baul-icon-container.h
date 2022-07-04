@@ -23,27 +23,27 @@
    Authors: Ettore Perazzoli <ettore@gnu.org>, Darin Adler <darin@bentspoon.com>
 */
 
-#ifndef CAJA_ICON_CONTAINER_H
-#define CAJA_ICON_CONTAINER_H
+#ifndef BAUL_ICON_CONTAINER_H
+#define BAUL_ICON_CONTAINER_H
 
 #include <eel/eel-canvas.h>
 
 #include "baul-icon-info.h"
 
-#define CAJA_TYPE_ICON_CONTAINER baul_icon_container_get_type()
-#define CAJA_ICON_CONTAINER(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ICON_CONTAINER, CajaIconContainer))
-#define CAJA_ICON_CONTAINER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_ICON_CONTAINER, CajaIconContainerClass))
-#define CAJA_IS_ICON_CONTAINER(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_ICON_CONTAINER))
-#define CAJA_IS_ICON_CONTAINER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_ICON_CONTAINER))
-#define CAJA_ICON_CONTAINER_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_ICON_CONTAINER, CajaIconContainerClass))
+#define BAUL_TYPE_ICON_CONTAINER baul_icon_container_get_type()
+#define BAUL_ICON_CONTAINER(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ICON_CONTAINER, CajaIconContainer))
+#define BAUL_ICON_CONTAINER_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ICON_CONTAINER, CajaIconContainerClass))
+#define BAUL_IS_ICON_CONTAINER(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_ICON_CONTAINER))
+#define BAUL_IS_ICON_CONTAINER_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_ICON_CONTAINER))
+#define BAUL_ICON_CONTAINER_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ICON_CONTAINER, CajaIconContainerClass))
 
 
-#define CAJA_ICON_CONTAINER_ICON_DATA(pointer) \
+#define BAUL_ICON_CONTAINER_ICON_DATA(pointer) \
 	((CajaIconData *) (pointer))
 
 typedef struct CajaIconData CajaIconData;
@@ -60,19 +60,19 @@ typedef struct
 
 typedef enum
 {
-    CAJA_ICON_LAYOUT_L_R_T_B,
-    CAJA_ICON_LAYOUT_R_L_T_B,
-    CAJA_ICON_LAYOUT_T_B_L_R,
-    CAJA_ICON_LAYOUT_T_B_R_L
+    BAUL_ICON_LAYOUT_L_R_T_B,
+    BAUL_ICON_LAYOUT_R_L_T_B,
+    BAUL_ICON_LAYOUT_T_B_L_R,
+    BAUL_ICON_LAYOUT_T_B_R_L
 } CajaIconLayoutMode;
 
 typedef enum
 {
-    CAJA_ICON_LABEL_POSITION_UNDER,
-    CAJA_ICON_LABEL_POSITION_BESIDE
+    BAUL_ICON_LABEL_POSITION_UNDER,
+    BAUL_ICON_LABEL_POSITION_BESIDE
 } CajaIconLabelPosition;
 
-#define	CAJA_ICON_CONTAINER_TYPESELECT_FLUSH_DELAY 1000000
+#define	BAUL_ICON_CONTAINER_TYPESELECT_FLUSH_DELAY 1000000
 
 typedef struct CajaIconContainerDetails CajaIconContainerDetails;
 
@@ -330,7 +330,7 @@ void              baul_icon_container_reset_scroll_region           (CajaIconCon
 void              baul_icon_container_set_font                      (CajaIconContainer  *container,
         const char             *font);
 void              baul_icon_container_set_font_size_table           (CajaIconContainer  *container,
-        const int               font_size_table[CAJA_ZOOM_LEVEL_LARGEST + 1]);
+        const int               font_size_table[BAUL_ZOOM_LEVEL_LARGEST + 1]);
 void              baul_icon_container_set_margins                   (CajaIconContainer  *container,
         int                     left_margin,
         int                     right_margin,
@@ -369,4 +369,4 @@ void              baul_icon_container_widget_to_file_operation_position (CajaIco
 			 - container->details->bottom_margin) \
 			 / EEL_CANVAS (container)->pixels_per_unit)
 
-#endif /* CAJA_ICON_CONTAINER_H */
+#endif /* BAUL_ICON_CONTAINER_H */

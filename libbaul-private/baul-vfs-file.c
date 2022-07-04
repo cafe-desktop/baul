@@ -41,7 +41,7 @@ static void baul_vfs_file_class_init (gpointer   klass);
 
 EEL_CLASS_BOILERPLATE (CajaVFSFile,
                        baul_vfs_file,
-                       CAJA_TYPE_FILE)
+                       BAUL_TYPE_FILE)
 
 static void
 vfs_file_monitor_add (CajaFile *file,
@@ -140,7 +140,7 @@ set_metadata_callback (GObject *source_object,
     if (res)
     {
         g_file_query_info_async (G_FILE (source_object),
-                                 CAJA_FILE_DEFAULT_ATTRIBUTES,
+                                 BAUL_FILE_DEFAULT_ATTRIBUTES,
                                  0,
                                  G_PRIORITY_DEFAULT,
                                  NULL,
@@ -274,10 +274,10 @@ vfs_file_get_deep_counts (CajaFile *file,
 
     if (!baul_file_is_directory (file))
     {
-        return CAJA_REQUEST_DONE;
+        return BAUL_REQUEST_DONE;
     }
 
-    if (file->details->deep_counts_status != CAJA_REQUEST_NOT_STARTED)
+    if (file->details->deep_counts_status != BAUL_REQUEST_NOT_STARTED)
     {
         if (directory_count != NULL)
         {
@@ -307,11 +307,11 @@ vfs_file_get_deep_counts (CajaFile *file,
     if (type == G_FILE_TYPE_UNKNOWN
             || type == G_FILE_TYPE_DIRECTORY)
     {
-        return CAJA_REQUEST_NOT_STARTED;
+        return BAUL_REQUEST_NOT_STARTED;
     }
 
     /* For other types, we are done, and the zeros are permanent. */
-    return CAJA_REQUEST_DONE;
+    return BAUL_REQUEST_DONE;
 }
 
 static gboolean
@@ -321,7 +321,7 @@ vfs_file_get_date (CajaFile *file,
 {
     switch (date_type)
     {
-    case CAJA_DATE_TYPE_CHANGED:
+    case BAUL_DATE_TYPE_CHANGED:
         /* Before we have info on a file, the date is unknown. */
         if (file->details->ctime == 0)
         {
@@ -332,7 +332,7 @@ vfs_file_get_date (CajaFile *file,
             *date = file->details->ctime;
         }
         return TRUE;
-    case CAJA_DATE_TYPE_ACCESSED:
+    case BAUL_DATE_TYPE_ACCESSED:
         /* Before we have info on a file, the date is unknown. */
         if (file->details->atime == 0)
         {
@@ -343,7 +343,7 @@ vfs_file_get_date (CajaFile *file,
             *date = file->details->atime;
         }
         return TRUE;
-    case CAJA_DATE_TYPE_MODIFIED:
+    case BAUL_DATE_TYPE_MODIFIED:
         /* Before we have info on a file, the date is unknown. */
         if (file->details->mtime == 0)
         {
@@ -354,7 +354,7 @@ vfs_file_get_date (CajaFile *file,
             *date = file->details->mtime;
         }
         return TRUE;
-    case CAJA_DATE_TYPE_TRASHED:
+    case BAUL_DATE_TYPE_TRASHED:
         /* Before we have info on a file, the date is unknown. */
         if (file->details->trash_time == 0)
         {
@@ -365,7 +365,7 @@ vfs_file_get_date (CajaFile *file,
             *date = file->details->trash_time;
         }
         return TRUE;
-    case CAJA_DATE_TYPE_PERMISSIONS_CHANGED:
+    case BAUL_DATE_TYPE_PERMISSIONS_CHANGED:
         /* Before we have info on a file, the date is unknown. */
         if (file->details->mtime == 0 || file->details->ctime == 0)
         {
@@ -766,7 +766,7 @@ baul_vfs_file_class_init (gpointer klass)
 {
     CajaFileClass *file_class;
 
-    file_class = CAJA_FILE_CLASS (klass);
+    file_class = BAUL_FILE_CLASS (klass);
 
     file_class->monitor_add = vfs_file_monitor_add;
     file_class->monitor_remove = vfs_file_monitor_remove;

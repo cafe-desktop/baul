@@ -193,7 +193,7 @@ baul_x_content_bar_set_property (GObject      *object,
 {
     CajaXContentBar *bar;
 
-    bar = CAJA_X_CONTENT_BAR (object);
+    bar = BAUL_X_CONTENT_BAR (object);
 
     switch (prop_id)
     {
@@ -217,7 +217,7 @@ baul_x_content_bar_get_property (GObject    *object,
 {
     CajaXContentBar *bar;
 
-    bar = CAJA_X_CONTENT_BAR (object);
+    bar = BAUL_X_CONTENT_BAR (object);
 
     switch (prop_id)
     {
@@ -236,7 +236,7 @@ baul_x_content_bar_get_property (GObject    *object,
 static void
 baul_x_content_bar_finalize (GObject *object)
 {
-    CajaXContentBar *bar = CAJA_X_CONTENT_BAR (object);
+    CajaXContentBar *bar = BAUL_X_CONTENT_BAR (object);
 
     g_free (bar->priv->x_content_type);
     if (bar->priv->mount != NULL)
@@ -323,7 +323,7 @@ baul_x_content_bar_new (GMount *mount,
 {
     GObject *bar;
 
-    bar = g_object_new (CAJA_TYPE_X_CONTENT_BAR,
+    bar = g_object_new (BAUL_TYPE_X_CONTENT_BAR,
                         "mount", mount,
                         "x-content-type", x_content_type,
                         NULL);

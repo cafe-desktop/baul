@@ -26,8 +26,8 @@
  * This is the header file for the sidebar title, which is part of the sidebar.
  */
 
-#ifndef CAJA_SIDEBAR_TITLE_H
-#define CAJA_SIDEBAR_TITLE_H
+#ifndef BAUL_SIDEBAR_TITLE_H
+#define BAUL_SIDEBAR_TITLE_H
 
 #include <gtk/gtk.h>
 
@@ -35,17 +35,17 @@
 
 #include <libbaul-private/baul-file.h>
 
-#define CAJA_TYPE_SIDEBAR_TITLE baul_sidebar_title_get_type()
-#define CAJA_SIDEBAR_TITLE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SIDEBAR_TITLE, CajaSidebarTitle))
-#define CAJA_SIDEBAR_TITLE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SIDEBAR_TITLE, CajaSidebarTitleClass))
-#define CAJA_IS_SIDEBAR_TITLE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SIDEBAR_TITLE))
-#define CAJA_IS_SIDEBAR_TITLE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SIDEBAR_TITLE))
-#define CAJA_SIDEBAR_TITLE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SIDEBAR_TITLE, CajaSidebarTitleClass))
+#define BAUL_TYPE_SIDEBAR_TITLE baul_sidebar_title_get_type()
+#define BAUL_SIDEBAR_TITLE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR_TITLE, CajaSidebarTitle))
+#define BAUL_SIDEBAR_TITLE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SIDEBAR_TITLE, CajaSidebarTitleClass))
+#define BAUL_IS_SIDEBAR_TITLE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SIDEBAR_TITLE))
+#define BAUL_IS_SIDEBAR_TITLE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SIDEBAR_TITLE))
+#define BAUL_SIDEBAR_TITLE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SIDEBAR_TITLE, CajaSidebarTitleClass))
 
 typedef struct _CajaSidebarTitlePrivate CajaSidebarTitlePrivate;
 
@@ -74,4 +74,4 @@ gboolean   baul_sidebar_title_hit_test_icon     (CajaSidebarTitle *sidebar_title
 void       baul_sidebar_title_select_text_color (CajaSidebarTitle *sidebar_title,
         					 EelBackground        *background);
 
-#endif /* CAJA_SIDEBAR_TITLE_H */
+#endif /* BAUL_SIDEBAR_TITLE_H */

@@ -25,26 +25,26 @@
  *  in a vertical panel and hosts the meta-views.
  */
 
-#ifndef CAJA_INFORMATION_PANEL_H
-#define CAJA_INFORMATION_PANEL_H
+#ifndef BAUL_INFORMATION_PANEL_H
+#define BAUL_INFORMATION_PANEL_H
 
 #include <eel/eel-background-box.h>
 
-#define CAJA_TYPE_INFORMATION_PANEL baul_information_panel_get_type()
-#define CAJA_INFORMATION_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_INFORMATION_PANEL, CajaInformationPanel))
-#define CAJA_INFORMATION_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_INFORMATION_PANEL, CajaInformationPanelClass))
-#define CAJA_IS_INFORMATION_PANEL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_INFORMATION_PANEL))
-#define CAJA_IS_INFORMATION_PANEL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_INFORMATION_PANEL))
-#define CAJA_INFORMATION_PANEL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_INFORMATION_PANEL, CajaInformationPanelClass))
+#define BAUL_TYPE_INFORMATION_PANEL baul_information_panel_get_type()
+#define BAUL_INFORMATION_PANEL(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_INFORMATION_PANEL, CajaInformationPanel))
+#define BAUL_INFORMATION_PANEL_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_INFORMATION_PANEL, CajaInformationPanelClass))
+#define BAUL_IS_INFORMATION_PANEL(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_INFORMATION_PANEL))
+#define BAUL_IS_INFORMATION_PANEL_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_INFORMATION_PANEL))
+#define BAUL_INFORMATION_PANEL_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_INFORMATION_PANEL, CajaInformationPanelClass))
 
 typedef struct _CajaInformationPanelPrivate CajaInformationPanelPrivate;
 
-#define CAJA_INFORMATION_PANEL_ID "information"
+#define BAUL_INFORMATION_PANEL_ID "information"
 
 typedef struct
 {
@@ -63,4 +63,4 @@ typedef struct
 GType            baul_information_panel_get_type     (void);
 void             baul_information_panel_register     (void);
 
-#endif /* CAJA_INFORMATION_PANEL_H */
+#endif /* BAUL_INFORMATION_PANEL_H */

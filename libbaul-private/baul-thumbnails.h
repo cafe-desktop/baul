@@ -22,8 +22,8 @@
    Author: Andy Hertzfeld <andy@eazel.com>
 */
 
-#ifndef CAJA_THUMBNAILS_H
-#define CAJA_THUMBNAILS_H
+#ifndef BAUL_THUMBNAILS_H
+#define BAUL_THUMBNAILS_H
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
@@ -41,4 +41,4 @@ void       baul_thumbnail_remove_from_queue     (const char   *file_uri);
 void       baul_thumbnail_prioritize            (const char   *file_uri);
 
 
-#endif /* CAJA_THUMBNAILS_H */
+#endif /* BAUL_THUMBNAILS_H */

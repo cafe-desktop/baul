@@ -105,9 +105,9 @@ static CajaIconContainer *
 get_icon_container (FMDesktopIconView *icon_view)
 {
     g_return_val_if_fail (FM_IS_DESKTOP_ICON_VIEW (icon_view), NULL);
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view))), NULL);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view))), NULL);
 
-    return CAJA_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view)));
+    return BAUL_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view)));
 }
 
 static void
@@ -427,17 +427,17 @@ static CajaZoomLevel
 get_default_zoom_level (void)
 {
     static gboolean auto_storage_added = FALSE;
-    static CajaZoomLevel default_zoom_level = CAJA_ZOOM_LEVEL_STANDARD;
+    static CajaZoomLevel default_zoom_level = BAUL_ZOOM_LEVEL_STANDARD;
 
     if (!auto_storage_added)
     {
         auto_storage_added = TRUE;
         eel_g_settings_add_auto_enum (baul_icon_view_preferences,
-                                      CAJA_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
+                                      BAUL_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
                                       (int *) &default_zoom_level);
     }
 
-    return CLAMP (default_zoom_level, CAJA_ZOOM_LEVEL_SMALLEST, CAJA_ZOOM_LEVEL_LARGEST);
+    return CLAMP (default_zoom_level, BAUL_ZOOM_LEVEL_SMALLEST, BAUL_ZOOM_LEVEL_LARGEST);
 }
 
 static void
@@ -537,7 +537,7 @@ fm_desktop_icon_view_update_icon_container_fonts (FMDesktopIconView *icon_view)
     icon_container = get_icon_container (icon_view);
     g_assert (icon_container != NULL);
 
-    font = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_FONT);
+    font = g_settings_get_string (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_FONT);
 
     baul_icon_container_set_font (icon_container, font);
 
@@ -555,7 +555,7 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 
     if (desktop_directory == NULL)
     {
-        g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+        g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_DESKTOP_IS_HOME_DIR,
                                   G_CALLBACK(desktop_directory_changed_callback),
                                   NULL);
         desktop_directory_changed_callback (NULL);
@@ -607,8 +607,8 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
     /* Set our default layout mode */
     baul_icon_container_set_layout_mode (icon_container,
                                          gtk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
-                                         CAJA_ICON_LAYOUT_T_B_R_L :
-                                         CAJA_ICON_LAYOUT_T_B_L_R);
+                                         BAUL_ICON_LAYOUT_T_B_R_L :
+                                         BAUL_ICON_LAYOUT_T_B_L_R);
 
     g_signal_connect_object (icon_container, "middle_click",
                              G_CALLBACK (fm_desktop_icon_view_handle_middle_click), desktop_icon_view, 0);
@@ -620,19 +620,19 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
     default_zoom_level_changed (desktop_icon_view);
 
     g_signal_connect_swapped (baul_icon_view_preferences,
-                              "changed::" CAJA_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
+                              "changed::" BAUL_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
                               G_CALLBACK (default_zoom_level_changed),
                               desktop_icon_view);
 
     g_signal_connect_swapped (baul_desktop_preferences,
-                              "changed::" CAJA_PREFERENCES_DESKTOP_FONT,
+                              "changed::" BAUL_PREFERENCES_DESKTOP_FONT,
                               G_CALLBACK (font_changed_callback),
                               desktop_icon_view);
 
     fm_desktop_icon_view_update_icon_container_fonts (desktop_icon_view);
 
     g_signal_connect_swapped (mate_lockdown_preferences,
-                              "changed::" CAJA_PREFERENCES_LOCKDOWN_COMMAND_LINE,
+                              "changed::" BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE,
                               G_CALLBACK (fm_directory_view_update_menus),
                               desktop_icon_view);
 
@@ -689,14 +689,14 @@ trash_link_is_selection (FMDirectoryView *view)
     selection = fm_directory_view_get_selection (view);
 
     if (eel_g_list_exactly_one_item (selection) &&
-            CAJA_IS_DESKTOP_ICON_FILE (selection->data))
+            BAUL_IS_DESKTOP_ICON_FILE (selection->data))
     {
         CajaDesktopLink *link;
 
-        link = baul_desktop_icon_file_get_link (CAJA_DESKTOP_ICON_FILE (selection->data));
+        link = baul_desktop_icon_file_get_link (BAUL_DESKTOP_ICON_FILE (selection->data));
         /* link may be NULL if the link was recently removed (unmounted) */
         if (link != NULL &&
-                baul_desktop_link_get_link_type (link) == CAJA_DESKTOP_LINK_TRASH)
+                baul_desktop_link_get_link_type (link) == BAUL_DESKTOP_LINK_TRASH)
         {
             result = TRUE;
         }
@@ -726,7 +726,7 @@ real_update_menus (FMDirectoryView *view)
     desktop_view = FM_DESKTOP_ICON_VIEW (view);
 
     /* New Launcher */
-    disable_command_line = g_settings_get_boolean (mate_lockdown_preferences, CAJA_PREFERENCES_LOCKDOWN_COMMAND_LINE);
+    disable_command_line = g_settings_get_boolean (mate_lockdown_preferences, BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (desktop_view->priv->desktop_action_group,
                                           FM_ACTION_NEW_LAUNCHER_DESKTOP);
@@ -864,7 +864,7 @@ fm_desktop_icon_view_create (CajaWindowSlotInfo *slot)
     view = g_object_new (FM_TYPE_DESKTOP_ICON_VIEW,
                          "window-slot", slot,
                          NULL);
-    return CAJA_VIEW (view);
+    return BAUL_VIEW (view);
 }
 
 static gboolean

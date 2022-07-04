@@ -46,7 +46,7 @@ baul_window_info_base_init (gpointer g_class)
     {
         baul_window_info_signals[LOADING_URI] =
             g_signal_new ("loading_uri",
-                          CAJA_TYPE_WINDOW_INFO,
+                          BAUL_TYPE_WINDOW_INFO,
                           G_SIGNAL_RUN_LAST,
                           G_STRUCT_OFFSET (CajaWindowInfoIface, loading_uri),
                           NULL, NULL,
@@ -56,7 +56,7 @@ baul_window_info_base_init (gpointer g_class)
 
         baul_window_info_signals[SELECTION_CHANGED] =
             g_signal_new ("selection_changed",
-                          CAJA_TYPE_WINDOW_INFO,
+                          BAUL_TYPE_WINDOW_INFO,
                           G_SIGNAL_RUN_LAST,
                           G_STRUCT_OFFSET (CajaWindowInfoIface, selection_changed),
                           NULL, NULL,
@@ -65,7 +65,7 @@ baul_window_info_base_init (gpointer g_class)
 
         baul_window_info_signals[TITLE_CHANGED] =
             g_signal_new ("title_changed",
-                          CAJA_TYPE_WINDOW_INFO,
+                          BAUL_TYPE_WINDOW_INFO,
                           G_SIGNAL_RUN_LAST,
                           G_STRUCT_OFFSET (CajaWindowInfoIface, title_changed),
                           NULL, NULL,
@@ -75,7 +75,7 @@ baul_window_info_base_init (gpointer g_class)
 
         baul_window_info_signals[HIDDEN_FILES_MODE_CHANGED] =
             g_signal_new ("hidden_files_mode_changed",
-                          CAJA_TYPE_WINDOW_INFO,
+                          BAUL_TYPE_WINDOW_INFO,
                           G_SIGNAL_RUN_LAST,
                           G_STRUCT_OFFSET (CajaWindowInfoIface, hidden_files_mode_changed),
                           NULL, NULL,
@@ -84,7 +84,7 @@ baul_window_info_base_init (gpointer g_class)
 
         baul_window_info_signals[BACKUP_FILES_MODE_CHANGED] =
             g_signal_new ("backup_files_mode_changed",
-                          CAJA_TYPE_WINDOW_INFO,
+                          BAUL_TYPE_WINDOW_INFO,
                           G_SIGNAL_RUN_LAST,
                           G_STRUCT_OFFSET (CajaWindowInfoIface, backup_files_mode_changed),
                           NULL, NULL,
@@ -128,10 +128,10 @@ void
 baul_window_info_report_load_underway (CajaWindowInfo      *window,
                                        CajaView            *view)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
-    g_return_if_fail (CAJA_IS_VIEW (view));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_VIEW (view));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->report_load_underway) (window,
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->report_load_underway) (window,
             view);
 }
 
@@ -139,10 +139,10 @@ void
 baul_window_info_report_load_complete (CajaWindowInfo      *window,
                                        CajaView            *view)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
-    g_return_if_fail (CAJA_IS_VIEW (view));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_VIEW (view));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->report_load_complete) (window,
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->report_load_complete) (window,
             view);
 }
 
@@ -150,170 +150,170 @@ void
 baul_window_info_report_view_failed (CajaWindowInfo      *window,
                                      CajaView            *view)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
-    g_return_if_fail (CAJA_IS_VIEW (view));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_VIEW (view));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->report_view_failed) (window,
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->report_view_failed) (window,
             view);
 }
 
 void
 baul_window_info_report_selection_changed (CajaWindowInfo      *window)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->report_selection_changed) (window);
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->report_selection_changed) (window);
 }
 
 void
 baul_window_info_view_visible (CajaWindowInfo      *window,
                                CajaView            *view)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->view_visible) (window, view);
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->view_visible) (window, view);
 }
 
 void
 baul_window_info_close (CajaWindowInfo      *window)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->close_window) (window);
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->close_window) (window);
 }
 
 void
 baul_window_info_push_status (CajaWindowInfo      *window,
                               const char              *status)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->push_status) (window,
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->push_status) (window,
             status);
 }
 
 CajaWindowType
 baul_window_info_get_window_type (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), CAJA_WINDOW_SPATIAL);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), BAUL_WINDOW_SPATIAL);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_window_type) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_window_type) (window);
 }
 
 char *
 baul_window_info_get_title (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), NULL);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), NULL);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_title) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_title) (window);
 }
 
 GList *
 baul_window_info_get_history (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), NULL);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), NULL);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_history) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_history) (window);
 }
 
 char *
 baul_window_info_get_current_location (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), NULL);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), NULL);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_current_location) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_current_location) (window);
 }
 
 int
 baul_window_info_get_selection_count (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), 0);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), 0);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_selection_count) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_selection_count) (window);
 }
 
 GList *
 baul_window_info_get_selection (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), NULL);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), NULL);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_selection) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_selection) (window);
 }
 
 CajaWindowShowHiddenFilesMode
 baul_window_info_get_hidden_files_mode (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_hidden_files_mode) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_hidden_files_mode) (window);
 }
 
 void
 baul_window_info_set_hidden_files_mode (CajaWindowInfo *window,
                                         CajaWindowShowHiddenFilesMode  mode)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->set_hidden_files_mode) (window,
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->set_hidden_files_mode) (window,
             mode);
 }
 
 CajaWindowShowBackupFilesMode
 baul_window_info_get_backup_files_mode (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), CAJA_WINDOW_SHOW_BACKUP_FILES_DEFAULT);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), BAUL_WINDOW_SHOW_BACKUP_FILES_DEFAULT);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_backup_files_mode) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_backup_files_mode) (window);
 }
 
 void
 baul_window_info_set_backup_files_mode (CajaWindowInfo *window,
                                         CajaWindowShowBackupFilesMode  mode)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->set_backup_files_mode) (window,
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->set_backup_files_mode) (window,
             mode);
 }
 
 GtkUIManager *
 baul_window_info_get_ui_manager (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), NULL);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), NULL);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_ui_manager) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_ui_manager) (window);
 }
 
 CajaWindowSlotInfo *
 baul_window_info_get_active_slot (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), NULL);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), NULL);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_active_slot) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_active_slot) (window);
 }
 
 CajaWindowSlotInfo *
 baul_window_info_get_extra_slot (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), NULL);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), NULL);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_extra_slot) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_extra_slot) (window);
 }
 
 gboolean
 baul_window_info_get_initiated_unmount (CajaWindowInfo *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW_INFO (window), FALSE);
+    g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), FALSE);
 
-    return (* CAJA_WINDOW_INFO_GET_IFACE (window)->get_initiated_unmount) (window);
+    return (* BAUL_WINDOW_INFO_GET_IFACE (window)->get_initiated_unmount) (window);
 }
 
 void
 baul_window_info_set_initiated_unmount (CajaWindowInfo *window, gboolean initiated_unmount)
 {
-    g_return_if_fail (CAJA_IS_WINDOW_INFO (window));
+    g_return_if_fail (BAUL_IS_WINDOW_INFO (window));
 
-    (* CAJA_WINDOW_INFO_GET_IFACE (window)->set_initiated_unmount) (window,
+    (* BAUL_WINDOW_INFO_GET_IFACE (window)->set_initiated_unmount) (window,
             initiated_unmount);
 
 }

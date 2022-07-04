@@ -22,14 +22,14 @@
    Authors: John Sullivan <sullivan@eazel.com>
 */
 
-#ifndef CAJA_FILE_UTILITIES_H
-#define CAJA_FILE_UTILITIES_H
+#ifndef BAUL_FILE_UTILITIES_H
+#define BAUL_FILE_UTILITIES_H
 
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#define CAJA_SAVED_SEARCH_EXTENSION ".savedSearch"
-#define CAJA_SAVED_SEARCH_MIMETYPE "application/x-mate-saved-search"
+#define BAUL_SAVED_SEARCH_EXTENSION ".savedSearch"
+#define BAUL_SAVED_SEARCH_MIMETYPE "application/x-mate-saved-search"
 
 /* These functions all return something something that needs to be
  * freed with g_free, is not NULL, and is guaranteed to exist.
@@ -94,4 +94,4 @@ GHashTable * baul_trashed_files_get_original_directories (GList *files,
 void baul_restore_files_from_trash (GList *files,
                                     GtkWindow *parent_window);
 
-#endif /* CAJA_FILE_UTILITIES_H */
+#endif /* BAUL_FILE_UTILITIES_H */

@@ -24,22 +24,22 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_DESKTOP_DIRECTORY_H
-#define CAJA_DESKTOP_DIRECTORY_H
+#ifndef BAUL_DESKTOP_DIRECTORY_H
+#define BAUL_DESKTOP_DIRECTORY_H
 
 #include "baul-directory.h"
 
-#define CAJA_TYPE_DESKTOP_DIRECTORY baul_desktop_directory_get_type()
-#define CAJA_DESKTOP_DIRECTORY(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_DIRECTORY, CajaDesktopDirectory))
-#define CAJA_DESKTOP_DIRECTORY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_DESKTOP_DIRECTORY, CajaDesktopDirectoryClass))
-#define CAJA_IS_DESKTOP_DIRECTORY(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_DESKTOP_DIRECTORY))
-#define CAJA_IS_DESKTOP_DIRECTORY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_DESKTOP_DIRECTORY))
-#define CAJA_DESKTOP_DIRECTORY_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_DESKTOP_DIRECTORY, CajaDesktopDirectoryClass))
+#define BAUL_TYPE_DESKTOP_DIRECTORY baul_desktop_directory_get_type()
+#define BAUL_DESKTOP_DIRECTORY(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_DIRECTORY, CajaDesktopDirectory))
+#define BAUL_DESKTOP_DIRECTORY_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_DIRECTORY, CajaDesktopDirectoryClass))
+#define BAUL_IS_DESKTOP_DIRECTORY(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_DESKTOP_DIRECTORY))
+#define BAUL_IS_DESKTOP_DIRECTORY_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_DESKTOP_DIRECTORY))
+#define BAUL_DESKTOP_DIRECTORY_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_DIRECTORY, CajaDesktopDirectoryClass))
 
 typedef struct CajaDesktopDirectoryDetails CajaDesktopDirectoryDetails;
 
@@ -58,4 +58,4 @@ typedef struct
 GType   baul_desktop_directory_get_type             (void);
 CajaDirectory * baul_desktop_directory_get_real_directory   (CajaDesktopDirectory *desktop_directory);
 
-#endif /* CAJA_DESKTOP_DIRECTORY_H */
+#endif /* BAUL_DESKTOP_DIRECTORY_H */

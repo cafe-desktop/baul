@@ -57,7 +57,7 @@ baul_location_dialog_finalize (GObject *object)
 {
     CajaLocationDialog *dialog;
 
-    dialog = CAJA_LOCATION_DIALOG (object);
+    dialog = BAUL_LOCATION_DIALOG (object);
 
     g_free (dialog->details);
 
@@ -118,7 +118,7 @@ entry_activate_callback (GtkEntry *entry,
 {
     CajaLocationDialog *dialog;
 
-    dialog = CAJA_LOCATION_DIALOG (user_data);
+    dialog = BAUL_LOCATION_DIALOG (user_data);
 
     if (gtk_entry_get_text_length (GTK_ENTRY (dialog->details->entry)) != 0)
     {
@@ -137,7 +137,7 @@ entry_text_changed (GObject *object, GParamSpec *spec, gpointer user_data)
 {
     CajaLocationDialog *dialog;
 
-    dialog = CAJA_LOCATION_DIALOG (user_data);
+    dialog = BAUL_LOCATION_DIALOG (user_data);
 
     if (gtk_entry_get_text_length (GTK_ENTRY (dialog->details->entry)) != 0)
     {
@@ -221,8 +221,8 @@ baul_location_dialog_new (CajaWindow *window)
     GtkWidget *dialog;
     GFile *location;
 
-    dialog = gtk_widget_new (CAJA_TYPE_LOCATION_DIALOG, NULL);
-    loc_dialog = CAJA_LOCATION_DIALOG (dialog);
+    dialog = gtk_widget_new (BAUL_TYPE_LOCATION_DIALOG, NULL);
+    loc_dialog = BAUL_LOCATION_DIALOG (dialog);
 
     if (window)
     {
@@ -239,7 +239,7 @@ baul_location_dialog_new (CajaWindow *window)
     {
         char *formatted_location;
 
-        if (CAJA_IS_DESKTOP_WINDOW (window))
+        if (BAUL_IS_DESKTOP_WINDOW (window))
         {
             formatted_location = g_strdup_printf ("%s/", g_get_home_dir ());
         }
@@ -247,7 +247,7 @@ baul_location_dialog_new (CajaWindow *window)
         {
             formatted_location = g_file_get_parse_name (location);
         }
-        baul_location_entry_update_current_location (CAJA_LOCATION_ENTRY (loc_dialog->details->entry),
+        baul_location_entry_update_current_location (BAUL_LOCATION_ENTRY (loc_dialog->details->entry),
                 formatted_location);
         g_free (formatted_location);
     }
@@ -261,6 +261,6 @@ void
 baul_location_dialog_set_location (CajaLocationDialog *dialog,
                                    const char *location)
 {
-    baul_location_entry_update_current_location (CAJA_LOCATION_ENTRY (dialog->details->entry),
+    baul_location_entry_update_current_location (BAUL_LOCATION_ENTRY (dialog->details->entry),
             location);
 }

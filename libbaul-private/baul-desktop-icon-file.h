@@ -23,23 +23,23 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_DESKTOP_ICON_FILE_H
-#define CAJA_DESKTOP_ICON_FILE_H
+#ifndef BAUL_DESKTOP_ICON_FILE_H
+#define BAUL_DESKTOP_ICON_FILE_H
 
 #include "baul-file.h"
 #include "baul-desktop-link.h"
 
-#define CAJA_TYPE_DESKTOP_ICON_FILE baul_desktop_icon_file_get_type()
-#define CAJA_DESKTOP_ICON_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_ICON_FILE, CajaDesktopIconFile))
-#define CAJA_DESKTOP_ICON_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_DESKTOP_ICON_FILE, CajaDesktopIconFileClass))
-#define CAJA_IS_DESKTOP_ICON_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_DESKTOP_ICON_FILE))
-#define CAJA_IS_DESKTOP_ICON_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_DESKTOP_ICON_FILE))
-#define CAJA_DESKTOP_ICON_FILE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_DESKTOP_ICON_FILE, CajaDesktopIconFileClass))
+#define BAUL_TYPE_DESKTOP_ICON_FILE baul_desktop_icon_file_get_type()
+#define BAUL_DESKTOP_ICON_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_ICON_FILE, CajaDesktopIconFile))
+#define BAUL_DESKTOP_ICON_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_ICON_FILE, CajaDesktopIconFileClass))
+#define BAUL_IS_DESKTOP_ICON_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_DESKTOP_ICON_FILE))
+#define BAUL_IS_DESKTOP_ICON_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_DESKTOP_ICON_FILE))
+#define BAUL_DESKTOP_ICON_FILE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_ICON_FILE, CajaDesktopIconFileClass))
 
 typedef struct _CajaDesktopIconFilePrivate CajaDesktopIconFilePrivate;
 
@@ -61,4 +61,4 @@ void                     baul_desktop_icon_file_update   (CajaDesktopIconFile *i
 void                     baul_desktop_icon_file_remove   (CajaDesktopIconFile *icon_file);
 CajaDesktopLink     *baul_desktop_icon_file_get_link (CajaDesktopIconFile *icon_file);
 
-#endif /* CAJA_DESKTOP_ICON_FILE_H */
+#endif /* BAUL_DESKTOP_ICON_FILE_H */

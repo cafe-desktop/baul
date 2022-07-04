@@ -6,7 +6,7 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	$(CORE_CFLAGS) \
 	$(WARNING_CFLAGS) \
-	-DCAJA_DATADIR=\""$(datadir)/baul"\" \
+	-DBAUL_DATADIR=\""$(datadir)/baul"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	$(DISABLE_DEPRECATED_CFLAGS) \
 	$(NULL)

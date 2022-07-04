@@ -106,9 +106,9 @@ style_updated (GtkWidget *widget)
 {
     CajaSidebarTitle *sidebar_title;
 
-    g_return_if_fail (CAJA_IS_SIDEBAR_TITLE (widget));
+    g_return_if_fail (BAUL_IS_SIDEBAR_TITLE (widget));
 
-    sidebar_title = CAJA_SIDEBAR_TITLE (widget);
+    sidebar_title = BAUL_SIDEBAR_TITLE (widget);
 
     /* Update the dynamically-sized title font */
     update_title_font (sidebar_title);
@@ -149,7 +149,7 @@ baul_sidebar_title_init (CajaSidebarTitle *sidebar_title)
     style_updated (GTK_WIDGET (sidebar_title));
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_SHOW_DIRECTORY_ITEM_COUNTS,
+                              "changed::" BAUL_PREFERENCES_SHOW_DIRECTORY_ITEM_COUNTS,
                               G_CALLBACK(update_more_info),
                               sidebar_title);
 }
@@ -181,7 +181,7 @@ baul_sidebar_title_finalize (GObject *object)
 {
     CajaSidebarTitle *sidebar_title;
 
-    sidebar_title = CAJA_SIDEBAR_TITLE (object);
+    sidebar_title = BAUL_SIDEBAR_TITLE (object);
 
     if (sidebar_title->details)
     {
@@ -244,7 +244,7 @@ baul_sidebar_title_select_text_color (CajaSidebarTitle *sidebar_title,
     GdkRGBA color;
     GdkRGBA *c;
 
-    g_assert (CAJA_IS_SIDEBAR_TITLE (sidebar_title));
+    g_assert (BAUL_IS_SIDEBAR_TITLE (sidebar_title));
     g_return_if_fail (gtk_widget_get_realized (GTK_WIDGET (sidebar_title)));
 
     /* read the info colors from the current theme; use a reasonable default if undefined */
@@ -381,20 +381,20 @@ update_icon (CajaSidebarTitle *sidebar_title)
     {
         CajaIconInfo *info;
 
-        info = baul_icon_info_lookup_from_name (icon_name, CAJA_ICON_SIZE_LARGE, icon_scale);
-        surface = baul_icon_info_get_surface_at_size (info, CAJA_ICON_SIZE_LARGE);
+        info = baul_icon_info_lookup_from_name (icon_name, BAUL_ICON_SIZE_LARGE, icon_scale);
+        surface = baul_icon_info_get_surface_at_size (info, BAUL_ICON_SIZE_LARGE);
         g_object_unref (info);
     }
     else if (sidebar_title->details->file != NULL &&
              baul_file_check_if_ready (sidebar_title->details->file,
-                                       CAJA_FILE_ATTRIBUTES_FOR_ICON))
+                                       BAUL_FILE_ATTRIBUTES_FOR_ICON))
     {
         surface = baul_file_get_icon_surface (sidebar_title->details->file,
                                               sidebar_title->details->best_icon_size * icon_scale,
                                               TRUE,
                                               icon_scale,
-                                              CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS |
-                                              CAJA_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM);
+                                              BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS |
+                                              BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM);
     }
     else if (sidebar_title->details->determined_icon)
     {
@@ -652,7 +652,7 @@ update_emblems (CajaSidebarTitle *sidebar_title)
 
     /* fetch the emblem icons from metadata */
     pixbufs = baul_file_get_emblem_pixbufs (sidebar_title->details->file,
-                                            baul_icon_get_emblem_size_for_icon_size (CAJA_ICON_SIZE_STANDARD),
+                                            baul_icon_get_emblem_size_for_icon_size (BAUL_ICON_SIZE_STANDARD),
                                             FALSE,
                                             NULL);
 
@@ -718,10 +718,10 @@ monitor_add (CajaSidebarTitle *sidebar_title)
 
     sidebar_title->details->monitoring_count = item_count_ready (sidebar_title);
 
-    attributes = CAJA_FILE_ATTRIBUTES_FOR_ICON | CAJA_FILE_ATTRIBUTE_INFO;
+    attributes = BAUL_FILE_ATTRIBUTES_FOR_ICON | BAUL_FILE_ATTRIBUTE_INFO;
     if (sidebar_title->details->monitoring_count)
     {
-        attributes |= CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT;
+        attributes |= BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT;
     }
 
     baul_file_monitor_add (sidebar_title->details->file, sidebar_title, attributes);
@@ -784,7 +784,7 @@ baul_sidebar_title_size_allocate (GtkWidget *widget,
     gint scale;
     GtkAllocation old_allocation, new_allocation;
 
-    sidebar_title = CAJA_SIDEBAR_TITLE (widget);
+    sidebar_title = BAUL_SIDEBAR_TITLE (widget);
     scale = gtk_widget_get_scale_factor (widget);
 
     gtk_widget_get_allocation (widget, &old_allocation);
@@ -815,7 +815,7 @@ baul_sidebar_title_hit_test_icon (CajaSidebarTitle *sidebar_title, int x, int y)
     GtkAllocation *allocation;
     gboolean icon_hit;
 
-    g_return_val_if_fail (CAJA_IS_SIDEBAR_TITLE (sidebar_title), FALSE);
+    g_return_val_if_fail (BAUL_IS_SIDEBAR_TITLE (sidebar_title), FALSE);
 
     allocation = g_new0 (GtkAllocation, 1);
     gtk_widget_get_allocation (GTK_WIDGET (sidebar_title->details->icon), allocation);

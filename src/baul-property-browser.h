@@ -28,8 +28,8 @@
  * customize them
  */
 
-#ifndef CAJA_PROPERTY_BROWSER_H
-#define CAJA_PROPERTY_BROWSER_H
+#ifndef BAUL_PROPERTY_BROWSER_H
+#define BAUL_PROPERTY_BROWSER_H
 
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
@@ -37,17 +37,17 @@
 typedef struct CajaPropertyBrowser CajaPropertyBrowser;
 typedef struct CajaPropertyBrowserClass  CajaPropertyBrowserClass;
 
-#define CAJA_TYPE_PROPERTY_BROWSER baul_property_browser_get_type()
-#define CAJA_PROPERTY_BROWSER(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PROPERTY_BROWSER, CajaPropertyBrowser))
-#define CAJA_PROPERTY_BROWSER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_PROPERTY_BROWSER, CajaPropertyBrowserClass))
-#define CAJA_IS_PROPERTY_BROWSER(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_PROPERTY_BROWSER))
-#define CAJA_IS_PROPERTY_BROWSER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_PROPERTY_BROWSER))
-#define CAJA_PROPERTY_BROWSER_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_PROPERTY_BROWSER, CajaPropertyBrowserClass))
+#define BAUL_TYPE_PROPERTY_BROWSER baul_property_browser_get_type()
+#define BAUL_PROPERTY_BROWSER(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PROPERTY_BROWSER, CajaPropertyBrowser))
+#define BAUL_PROPERTY_BROWSER_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_PROPERTY_BROWSER, CajaPropertyBrowserClass))
+#define BAUL_IS_PROPERTY_BROWSER(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_PROPERTY_BROWSER))
+#define BAUL_IS_PROPERTY_BROWSER_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_PROPERTY_BROWSER))
+#define BAUL_PROPERTY_BROWSER_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_PROPERTY_BROWSER, CajaPropertyBrowserClass))
 
 typedef struct _CajaPropertyBrowserPrivate CajaPropertyBrowserPrivate;
 
@@ -68,4 +68,4 @@ void                     baul_property_browser_show     (GdkScreen              
 void                     baul_property_browser_set_path (CajaPropertyBrowser *panel,
         const char              *new_path);
 
-#endif /* CAJA_PROPERTY_BROWSER_H */
+#endif /* BAUL_PROPERTY_BROWSER_H */

@@ -43,12 +43,12 @@
 
 #include "baul-history-sidebar.h"
 
-#define CAJA_HISTORY_SIDEBAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_HISTORY_SIDEBAR, CajaHistorySidebarClass))
-#define CAJA_IS_HISTORY_SIDEBAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_HISTORY_SIDEBAR))
-#define CAJA_IS_HISTORY_SIDEBAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_HISTORY_SIDEBAR))
+#define BAUL_HISTORY_SIDEBAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_HISTORY_SIDEBAR, CajaHistorySidebarClass))
+#define BAUL_IS_HISTORY_SIDEBAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_HISTORY_SIDEBAR))
+#define BAUL_IS_HISTORY_SIDEBAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_HISTORY_SIDEBAR))
 
 typedef struct
 {
@@ -80,11 +80,11 @@ static GType baul_history_sidebar_provider_get_type (void);
 static void  baul_history_sidebar_style_updated	        (GtkWidget *widget);
 
 G_DEFINE_TYPE_WITH_CODE (CajaHistorySidebar, baul_history_sidebar, GTK_TYPE_SCROLLED_WINDOW,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_SIDEBAR,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_history_sidebar_iface_init));
 
 G_DEFINE_TYPE_WITH_CODE (CajaHistorySidebarProvider, baul_history_sidebar_provider, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_SIDEBAR_PROVIDER,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR_PROVIDER,
                                  sidebar_provider_iface_init));
 
 static void
@@ -163,11 +163,11 @@ open_selected_item (CajaHistorySidebar *sidebar,
     (model, &iter, HISTORY_SIDEBAR_COLUMN_BOOKMARK, &bookmark, -1);
 
     /* Navigate to the clicked location. */
-    location = baul_bookmark_get_location (CAJA_BOOKMARK (bookmark));
+    location = baul_bookmark_get_location (BAUL_BOOKMARK (bookmark));
     slot = baul_window_info_get_active_slot (sidebar->window);
     baul_window_slot_info_open_location
     (slot,
-     location, CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+     location, BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
      flags, NULL);
     g_object_unref (location);
 }
@@ -180,7 +180,7 @@ row_activated_callback (GtkTreeView *tree_view,
 {
     CajaHistorySidebar *sidebar;
 
-    sidebar = CAJA_HISTORY_SIDEBAR (user_data);
+    sidebar = BAUL_HISTORY_SIDEBAR (user_data);
     g_assert (sidebar->tree_view == tree_view);
 
     open_selected_item (sidebar, path, 0);
@@ -197,7 +197,7 @@ button_press_event_callback (GtkWidget *widget,
         CajaHistorySidebar *sidebar;
         GtkTreePath *path;
 
-        sidebar = CAJA_HISTORY_SIDEBAR (user_data);
+        sidebar = BAUL_HISTORY_SIDEBAR (user_data);
         g_assert (sidebar->tree_view == GTK_TREE_VIEW (widget));
 
         if (gtk_tree_view_get_path_at_pos (sidebar->tree_view,
@@ -206,7 +206,7 @@ button_press_event_callback (GtkWidget *widget,
         {
             open_selected_item (sidebar,
                                 path,
-                                CAJA_WINDOW_OPEN_FLAG_NEW_TAB);
+                                BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
             gtk_tree_path_free (path);
         }
     }
@@ -219,10 +219,10 @@ update_click_policy (CajaHistorySidebar *sidebar)
 {
     int policy;
 
-    policy = g_settings_get_enum (baul_preferences, CAJA_PREFERENCES_CLICK_POLICY);
+    policy = g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_CLICK_POLICY);
 
     eel_gtk_tree_view_set_activate_on_single_click
-    (sidebar->tree_view, policy == CAJA_CLICK_POLICY_SINGLE);
+    (sidebar->tree_view, policy == BAUL_CLICK_POLICY_SINGLE);
 }
 
 static void
@@ -230,7 +230,7 @@ click_policy_changed_callback (gpointer user_data)
 {
     CajaHistorySidebar *sidebar;
 
-    sidebar = CAJA_HISTORY_SIDEBAR (user_data);
+    sidebar = BAUL_HISTORY_SIDEBAR (user_data);
 
     update_click_policy (sidebar);
 }
@@ -262,13 +262,13 @@ baul_history_sidebar_init (CajaHistorySidebar *sidebar)
                                          "text", HISTORY_SIDEBAR_COLUMN_NAME,
                                          NULL);
 
-    gtk_tree_view_column_set_fixed_width (col, CAJA_ICON_SIZE_SMALLER);
+    gtk_tree_view_column_set_fixed_width (col, BAUL_ICON_SIZE_SMALLER);
     gtk_tree_view_append_column (tree_view, col);
 
     store = gtk_list_store_new (HISTORY_SIDEBAR_COLUMN_COUNT,
                                 CAIRO_GOBJECT_TYPE_SURFACE,
                                 G_TYPE_STRING,
-                                CAJA_TYPE_BOOKMARK);
+                                BAUL_TYPE_BOOKMARK);
 
     gtk_tree_view_set_model (tree_view, GTK_TREE_MODEL (store));
     g_object_unref (store);
@@ -301,7 +301,7 @@ baul_history_sidebar_init (CajaHistorySidebar *sidebar)
                       G_CALLBACK (button_press_event_callback), sidebar);
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_CLICK_POLICY,
+                              "changed::" BAUL_PREFERENCES_CLICK_POLICY,
                               G_CALLBACK(click_policy_changed_callback),
                               sidebar);
     update_click_policy (sidebar);
@@ -312,7 +312,7 @@ baul_history_sidebar_finalize (GObject *object)
 {
     CajaHistorySidebar *sidebar;
 
-    sidebar = CAJA_HISTORY_SIDEBAR (object);
+    sidebar = BAUL_HISTORY_SIDEBAR (object);
 
     g_signal_handlers_disconnect_by_func (baul_preferences,
                                           click_policy_changed_callback,
@@ -332,7 +332,7 @@ baul_history_sidebar_class_init (CajaHistorySidebarClass *class)
 static const char *
 baul_history_sidebar_get_sidebar_id (CajaSidebar *sidebar)
 {
-    return CAJA_HISTORY_SIDEBAR_ID;
+    return BAUL_HISTORY_SIDEBAR_ID;
 }
 
 static char *
@@ -383,7 +383,7 @@ baul_history_sidebar_style_updated (GtkWidget *widget)
 {
     CajaHistorySidebar *sidebar;
 
-    sidebar = CAJA_HISTORY_SIDEBAR (widget);
+    sidebar = BAUL_HISTORY_SIDEBAR (widget);
 
     update_history (sidebar);
 }
@@ -398,7 +398,7 @@ baul_history_sidebar_create (CajaSidebarProvider *provider,
     baul_history_sidebar_set_parent_window (sidebar, window);
     g_object_ref_sink (sidebar);
 
-    return CAJA_SIDEBAR (sidebar);
+    return BAUL_SIDEBAR (sidebar);
 }
 
 static void

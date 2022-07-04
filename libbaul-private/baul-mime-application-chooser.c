@@ -83,7 +83,7 @@ baul_mime_application_chooser_finalize (GObject *object)
 {
     CajaMimeApplicationChooser *chooser;
 
-    chooser = CAJA_MIME_APPLICATION_CHOOSER (object);
+    chooser = BAUL_MIME_APPLICATION_CHOOSER (object);
 
     if (chooser->details->refresh_timeout)
     {
@@ -125,7 +125,7 @@ default_toggled_cb (GtkCellRendererToggle *renderer,
     GtkTreePath *path;
     GError *error;
 
-    chooser = CAJA_MIME_APPLICATION_CHOOSER (user_data);
+    chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
     path = gtk_tree_path_new_from_string (path_str);
     if (gtk_tree_model_get_iter (GTK_TREE_MODEL (chooser->details->model),
@@ -207,7 +207,7 @@ selection_changed_cb (GtkTreeSelection *selection,
     CajaMimeApplicationChooser *chooser;
     GAppInfo *info;
 
-    chooser = CAJA_MIME_APPLICATION_CHOOSER (user_data);
+    chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
     info = get_selected_application (chooser);
     if (info)
@@ -295,7 +295,7 @@ add_clicked_cb (GtkButton *button,
     CajaMimeApplicationChooser *chooser;
     GtkWidget *dialog;
 
-    chooser = CAJA_MIME_APPLICATION_CHOOSER (user_data);
+    chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
     if (chooser->details->for_multiple_files)
     {
@@ -320,7 +320,7 @@ remove_clicked_cb (GtkButton *button,
     GError *error;
     GAppInfo *info;
 
-    chooser = CAJA_MIME_APPLICATION_CHOOSER (user_data);
+    chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
     info = get_selected_application (chooser);
 
@@ -349,7 +349,7 @@ reset_clicked_cb (GtkButton *button,
 {
     CajaMimeApplicationChooser *chooser;
 
-    chooser = CAJA_MIME_APPLICATION_CHOOSER (user_data);
+    chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
     g_app_info_reset_type_associations (chooser->details->content_type);
 
@@ -363,7 +363,7 @@ mime_type_data_changed_cb (GObject *signaller,
 {
     CajaMimeApplicationChooser *chooser;
 
-    chooser = CAJA_MIME_APPLICATION_CHOOSER (user_data);
+    chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
     refresh_model_soon (chooser);
 }
@@ -625,7 +625,7 @@ set_uri_and_type (CajaMimeApplicationChooser *chooser,
     chooser->details->orig_mime_type = g_strdup (mime_type);
 
     extension = get_extension (name);
-    set_extension_and_description (CAJA_MIME_APPLICATION_CHOOSER (chooser),
+    set_extension_and_description (BAUL_MIME_APPLICATION_CHOOSER (chooser),
                                    extension, mime_type);
     g_free (extension);
 
@@ -673,14 +673,14 @@ set_uri_and_type_for_multiple_files (CajaMimeApplicationChooser *chooser,
     chooser->details->uri = NULL;
     chooser->details->orig_mime_type = g_strdup (mime_type);
     same_extension = TRUE;
-    first_extension = get_extension_from_file (CAJA_FILE (uris->data));
+    first_extension = get_extension_from_file (BAUL_FILE (uris->data));
     iter = uris->next;
 
     while (iter != NULL)
     {
         char *extension_current;
 
-        extension_current = get_extension_from_file (CAJA_FILE (iter->data));
+        extension_current = get_extension_from_file (BAUL_FILE (iter->data));
         if (g_strcmp0 (first_extension, extension_current)) {
             same_extension = FALSE;
             g_free (extension_current);
@@ -692,12 +692,12 @@ set_uri_and_type_for_multiple_files (CajaMimeApplicationChooser *chooser,
     }
     if (!same_extension)
     {
-        set_extension_and_description (CAJA_MIME_APPLICATION_CHOOSER (chooser),
+        set_extension_and_description (BAUL_MIME_APPLICATION_CHOOSER (chooser),
                                        NULL, mime_type);
     }
     else
     {
-        set_extension_and_description (CAJA_MIME_APPLICATION_CHOOSER (chooser),
+        set_extension_and_description (BAUL_MIME_APPLICATION_CHOOSER (chooser),
                                        first_extension, mime_type);
     }
 
@@ -720,9 +720,9 @@ baul_mime_application_chooser_new (const char *uri,
 {
     GtkWidget *chooser;
 
-    chooser = gtk_widget_new (CAJA_TYPE_MIME_APPLICATION_CHOOSER, NULL);
+    chooser = gtk_widget_new (BAUL_TYPE_MIME_APPLICATION_CHOOSER, NULL);
 
-    set_uri_and_type (CAJA_MIME_APPLICATION_CHOOSER (chooser), uri, mime_type);
+    set_uri_and_type (BAUL_MIME_APPLICATION_CHOOSER (chooser), uri, mime_type);
 
     return chooser;
 }
@@ -733,9 +733,9 @@ baul_mime_application_chooser_new_for_multiple_files (GList *uris,
 {
     GtkWidget *chooser;
 
-    chooser = gtk_widget_new (CAJA_TYPE_MIME_APPLICATION_CHOOSER, NULL);
+    chooser = gtk_widget_new (BAUL_TYPE_MIME_APPLICATION_CHOOSER, NULL);
 
-    set_uri_and_type_for_multiple_files (CAJA_MIME_APPLICATION_CHOOSER (chooser),
+    set_uri_and_type_for_multiple_files (BAUL_MIME_APPLICATION_CHOOSER (chooser),
                                          uris, mime_type);
 
     return chooser;

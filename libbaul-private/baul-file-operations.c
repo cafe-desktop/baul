@@ -200,7 +200,7 @@ baul_application_notify_unmount_show (const gchar *message)
     gchar **strings;
     strings = g_strsplit (message, "\n", 0);
 
-    if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_NOTIFICATIONS)) return;
+    if (!g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_NOTIFICATIONS)) return;
 
     if (unmount_notify == NULL) {
         unmount_notify =
@@ -877,7 +877,7 @@ custom_size_to_string (char *format, va_list va)
 
 	size = va_arg (va, goffset);
 
-	if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_USE_IEC_UNITS))
+	if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_USE_IEC_UNITS))
 		return g_format_size_full (size, G_FORMAT_SIZE_IEC_UNITS);
 	else
 		return g_format_size(size);
@@ -1327,7 +1327,7 @@ should_confirm_trash (void)
 	gboolean confirm_trash;
 
 	prefs = g_settings_new ("org.mate.baul.preferences");
-	confirm_trash = g_settings_get_boolean (prefs, CAJA_PREFERENCES_CONFIRM_TRASH);
+	confirm_trash = g_settings_get_boolean (prefs, BAUL_PREFERENCES_CONFIRM_TRASH);
 	g_object_unref (prefs);
 	return confirm_trash;
 }
@@ -1339,7 +1339,7 @@ should_confirm_move_to_trash (void)
 	gboolean confirm_trash;
 
 	prefs = g_settings_new ("org.mate.baul.preferences");
-	confirm_trash = g_settings_get_boolean (prefs, CAJA_PREFERENCES_CONFIRM_MOVE_TO_TRASH);
+	confirm_trash = g_settings_get_boolean (prefs, BAUL_PREFERENCES_CONFIRM_MOVE_TO_TRASH);
 	g_object_unref (prefs);
 	return confirm_trash;
 }
@@ -2095,7 +2095,7 @@ trash_or_delete_internal (GList                  *files,
 	// FIXME: Disabled, because of missing mechanism to restore a file from trash in a clean way
 	// see https://www.mail-archive.com/nautilus-list@gnome.org/msg04664.html
 	if (try_trash && !baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
-		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_MOVETOTRASH, g_list_length(files));
+		job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_MOVETOTRASH, g_list_length(files));
 		GFile* src_dir = g_file_get_parent (files->data);
 		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 	}
@@ -4045,12 +4045,12 @@ do_run_conflict_dialog (gpointer _data)
 
 	if (response == CONFLICT_RESPONSE_RENAME) {
 		data->resp_data->new_name =
-			baul_file_conflict_dialog_get_new_name (CAJA_FILE_CONFLICT_DIALOG (dialog));
+			baul_file_conflict_dialog_get_new_name (BAUL_FILE_CONFLICT_DIALOG (dialog));
 	} else if (response != GTK_RESPONSE_CANCEL ||
 		   response != GTK_RESPONSE_NONE) {
 		   data->resp_data->apply_to_all =
 			   baul_file_conflict_dialog_get_apply_to_all
-				(CAJA_FILE_CONFLICT_DIALOG (dialog));
+				(BAUL_FILE_CONFLICT_DIALOG (dialog));
 	}
 
 	data->resp_data->id = response;
@@ -4759,7 +4759,7 @@ baul_file_operations_copy (GList *files,
 
 	// Start UNDO-REDO
 	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
-		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_COPY, g_list_length(files));
+		job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_COPY, g_list_length(files));
 		GFile* src_dir = g_file_get_parent (files->data);
 		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 		g_object_ref (target_dir);
@@ -5303,9 +5303,9 @@ baul_file_operations_move (GList *files,
 	// Start UNDO-REDO
 	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
 		if (g_file_has_uri_scheme (g_list_first(files)->data, "trash")) {
-			job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_RESTOREFROMTRASH, g_list_length(files));
+			job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_RESTOREFROMTRASH, g_list_length(files));
 		} else {
-			job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_MOVE, g_list_length(files));
+			job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_MOVE, g_list_length(files));
 		}
 		GFile* src_dir = g_file_get_parent (files->data);
 		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
@@ -5619,7 +5619,7 @@ baul_file_operations_link (GList *files,
 
 	// Start UNDO-REDO
 	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
-		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_CREATELINK, g_list_length(files));
+		job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_CREATELINK, g_list_length(files));
 		GFile* src_dir = g_file_get_parent (files->data);
 		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 		g_object_ref (target_dir);
@@ -5660,7 +5660,7 @@ baul_file_operations_duplicate (GList *files,
 
 	// Start UNDO-REDO
 	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
-		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_DUPLICATE, g_list_length(files));
+		job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_DUPLICATE, g_list_length(files));
 		GFile* src_dir = g_file_get_parent (files->data);
 		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 		g_object_ref (src_dir);
@@ -5828,7 +5828,7 @@ baul_file_set_permissions_recursive (const char *directory,
 
 	// Start UNDO-REDO
 	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
-		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS, 1);
+		job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS, 1);
 		g_object_ref (job->file);
 		baul_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, job->file);
 		baul_undostack_manager_data_set_recursive_permissions(job->common.undo_redo_data, file_permissions, file_mask, dir_permissions, dir_mask);
@@ -6299,7 +6299,7 @@ baul_file_operations_new_folder (GtkWidget *parent_view,
 
 	// Start UNDO-REDO
 	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
-		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEFOLDER, 1);
+		job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_CREATEFOLDER, 1);
 	}
 	// End UNDO-REDO
 
@@ -6343,7 +6343,7 @@ baul_file_operations_new_file_from_template (GtkWidget *parent_view,
 
 	// Start UNDO-REDO
 	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
-		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE, 1);
+		job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_CREATEFILEFROMTEMPLATE, 1);
 	}
 	// End UNDO-REDO
 
@@ -6386,7 +6386,7 @@ baul_file_operations_new_file (GtkWidget *parent_view,
 
 	// Start UNDO-REDO
 	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
-		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEEMPTYFILE, 1);
+		job->common.undo_redo_data = baul_undostack_manager_data_new (BAUL_UNDOSTACK_CREATEEMPTYFILE, 1);
 	}
 	// End UNDO-REDO
 
@@ -6748,7 +6748,7 @@ baul_file_mark_desktop_file_trusted (GFile *file,
 				 NULL);
 }
 
-#if !defined (CAJA_OMIT_SELF_CHECK)
+#if !defined (BAUL_OMIT_SELF_CHECK)
 
 void
 baul_self_check_file_operations (void)

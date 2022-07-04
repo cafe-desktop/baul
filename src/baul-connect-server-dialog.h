@@ -21,24 +21,24 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef CAJA_CONNECT_SERVER_DIALOG_H
-#define CAJA_CONNECT_SERVER_DIALOG_H
+#ifndef BAUL_CONNECT_SERVER_DIALOG_H
+#define BAUL_CONNECT_SERVER_DIALOG_H
 
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
 #include "baul-window.h"
 
-#define CAJA_TYPE_CONNECT_SERVER_DIALOG\
+#define BAUL_TYPE_CONNECT_SERVER_DIALOG\
 	(baul_connect_server_dialog_get_type ())
-#define CAJA_CONNECT_SERVER_DIALOG(obj)\
-        (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_CONNECT_SERVER_DIALOG,\
+#define BAUL_CONNECT_SERVER_DIALOG(obj)\
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CONNECT_SERVER_DIALOG,\
 				     CajaConnectServerDialog))
-#define CAJA_CONNECT_SERVER_DIALOG_CLASS(klass)\
-	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_CONNECT_SERVER_DIALOG,\
+#define BAUL_CONNECT_SERVER_DIALOG_CLASS(klass)\
+	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CONNECT_SERVER_DIALOG,\
 				  CajaConnectServerDialogClass))
-#define CAJA_IS_CONNECT_SERVER_DIALOG(obj)\
-	(G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_CONNECT_SERVER_DIALOG)
+#define BAUL_IS_CONNECT_SERVER_DIALOG(obj)\
+	(G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_CONNECT_SERVER_DIALOG)
 
 typedef struct _CajaConnectServerDialog CajaConnectServerDialog;
 typedef struct _CajaConnectServerDialogClass CajaConnectServerDialogClass;
@@ -78,4 +78,4 @@ void baul_connect_server_dialog_fill_details_async (CajaConnectServerDialog *sel
 gboolean baul_connect_server_dialog_fill_details_finish (CajaConnectServerDialog *self,
 							     GAsyncResult *result);
 
-#endif /* CAJA_CONNECT_SERVER_DIALOG_H */
+#endif /* BAUL_CONNECT_SERVER_DIALOG_H */

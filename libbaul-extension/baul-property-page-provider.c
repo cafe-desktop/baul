@@ -87,10 +87,10 @@ GList *
 baul_property_page_provider_get_pages (CajaPropertyPageProvider *provider,
                                        GList *files)
 {
-    g_return_val_if_fail (CAJA_IS_PROPERTY_PAGE_PROVIDER (provider), NULL);
-    g_return_val_if_fail (CAJA_PROPERTY_PAGE_PROVIDER_GET_IFACE (provider)->get_pages != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_PROPERTY_PAGE_PROVIDER (provider), NULL);
+    g_return_val_if_fail (BAUL_PROPERTY_PAGE_PROVIDER_GET_IFACE (provider)->get_pages != NULL, NULL);
 
-    return CAJA_PROPERTY_PAGE_PROVIDER_GET_IFACE (provider)->get_pages
+    return BAUL_PROPERTY_PAGE_PROVIDER_GET_IFACE (provider)->get_pages
            (provider, files);
 }
 

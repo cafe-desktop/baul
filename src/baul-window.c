@@ -70,8 +70,8 @@
 
 /* dock items */
 
-#define CAJA_MENU_PATH_EXTRA_VIEWER_PLACEHOLDER	"/MenuBar/View/View Choices/Extra Viewer"
-#define CAJA_MENU_PATH_SHORT_LIST_PLACEHOLDER  	"/MenuBar/View/View Choices/Short List"
+#define BAUL_MENU_PATH_EXTRA_VIEWER_PLACEHOLDER	"/MenuBar/View/View Choices/Extra Viewer"
+#define BAUL_MENU_PATH_SHORT_LIST_PLACEHOLDER  	"/MenuBar/View/View Choices/Short List"
 
 enum {
 	ARG_0,
@@ -104,7 +104,7 @@ static GList *history_list;
 
 G_DEFINE_TYPE_WITH_CODE (CajaWindow, baul_window, GTK_TYPE_WINDOW,
                          G_ADD_PRIVATE (CajaWindow)
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_WINDOW_INFO,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_WINDOW_INFO,
                                  baul_window_info_iface_init));
 
 static const struct
@@ -114,19 +114,19 @@ static const struct
 } extra_window_keybindings [] =
 {
 #ifdef HAVE_X11_XF86KEYSYM_H
-    { XF86XK_AddFavorite,	CAJA_ACTION_ADD_BOOKMARK },
-    { XF86XK_Favorites,	CAJA_ACTION_EDIT_BOOKMARKS },
-    { XF86XK_Go,		CAJA_ACTION_GO_TO_LOCATION },
-    /* TODO?{ XF86XK_History,	CAJA_ACTION_HISTORY }, */
-    { XF86XK_HomePage,      CAJA_ACTION_GO_HOME },
-    { XF86XK_OpenURL,	CAJA_ACTION_GO_TO_LOCATION },
-    { XF86XK_Refresh,	CAJA_ACTION_RELOAD },
-    { XF86XK_Reload,	CAJA_ACTION_RELOAD },
-    { XF86XK_Search,	CAJA_ACTION_SEARCH },
-    { XF86XK_Start,		CAJA_ACTION_GO_HOME },
-    { XF86XK_Stop,		CAJA_ACTION_STOP },
-    { XF86XK_ZoomIn,	CAJA_ACTION_ZOOM_IN },
-    { XF86XK_ZoomOut,	CAJA_ACTION_ZOOM_OUT }
+    { XF86XK_AddFavorite,	BAUL_ACTION_ADD_BOOKMARK },
+    { XF86XK_Favorites,	BAUL_ACTION_EDIT_BOOKMARKS },
+    { XF86XK_Go,		BAUL_ACTION_GO_TO_LOCATION },
+    /* TODO?{ XF86XK_History,	BAUL_ACTION_HISTORY }, */
+    { XF86XK_HomePage,      BAUL_ACTION_GO_HOME },
+    { XF86XK_OpenURL,	BAUL_ACTION_GO_TO_LOCATION },
+    { XF86XK_Refresh,	BAUL_ACTION_RELOAD },
+    { XF86XK_Reload,	BAUL_ACTION_RELOAD },
+    { XF86XK_Search,	BAUL_ACTION_SEARCH },
+    { XF86XK_Start,		BAUL_ACTION_GO_HOME },
+    { XF86XK_Stop,		BAUL_ACTION_STOP },
+    { XF86XK_ZoomIn,	BAUL_ACTION_ZOOM_IN },
+    { XF86XK_ZoomOut,	BAUL_ACTION_ZOOM_OUT }
 #endif
 };
 
@@ -161,7 +161,7 @@ baul_window_init (CajaWindow *window)
     window->details->panes = NULL;
     window->details->active_pane = NULL;
 
-    window->details->show_hidden_files_mode = CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT;
+    window->details->show_hidden_files_mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT;
 
     /* Set initial window title */
     gtk_window_set_title (GTK_WINDOW (window), _("Caja"));
@@ -201,7 +201,7 @@ baul_window_init (CajaWindow *window)
 static void
 baul_window_ui_update (CajaWindow *window)
 {
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     gtk_ui_manager_ensure_update (window->details->ui_manager);
 }
@@ -210,7 +210,7 @@ static void
 baul_window_push_status (CajaWindow *window,
                          const char *text)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     /* clear any previous message, underflow is allowed */
     gtk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar), 0);
@@ -233,7 +233,7 @@ baul_window_sync_status (CajaWindow *window)
 void
 baul_window_go_to (CajaWindow *window, GFile *location)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     baul_window_slot_go_to (window->details->active_pane->active_slot, location, FALSE);
 }
@@ -241,7 +241,7 @@ baul_window_go_to (CajaWindow *window, GFile *location)
 void
 baul_window_go_to_tab (CajaWindow *window, GFile *location)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     baul_window_slot_go_to (window->details->active_pane->active_slot, location, TRUE);
 }
@@ -252,7 +252,7 @@ baul_window_go_to_full (CajaWindow *window,
                         CajaWindowGoToCallback callback,
                         gpointer               user_data)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     baul_window_slot_go_to_full (window->details->active_pane->active_slot, location, FALSE, callback, user_data);
 }
@@ -260,7 +260,7 @@ baul_window_go_to_full (CajaWindow *window,
 void
 baul_window_go_to_with_selection (CajaWindow *window, GFile *location, GList *new_selection)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     baul_window_slot_go_to_with_selection (window->details->active_pane->active_slot, location, new_selection);
 }
@@ -289,9 +289,9 @@ baul_window_new_tab (CajaWindow *window)
 
     	flags = 0;
 
-    	new_slot_position = g_settings_get_enum (baul_preferences, CAJA_PREFERENCES_NEW_TAB_POSITION);
-    	if (new_slot_position == CAJA_NEW_TAB_POSITION_END) {
-    		flags = CAJA_WINDOW_OPEN_SLOT_APPEND;
+    	new_slot_position = g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_NEW_TAB_POSITION);
+    	if (new_slot_position == BAUL_NEW_TAB_POSITION_END) {
+    		flags = BAUL_WINDOW_OPEN_SLOT_APPEND;
     	}
 
     	scheme = g_file_get_uri_scheme (location);
@@ -314,7 +314,7 @@ baul_window_new_window (CajaWindow *window)
 {
     CajaWindowSlot *current_slot;
     GFile *location = NULL;
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     /*Get and set the directory location of current window (slot).*/
     current_slot = window->details->active_pane->active_slot;
@@ -334,11 +334,11 @@ baul_window_new_window (CajaWindow *window)
 
         /*Create a slot in the new window.*/
         new_slot = new_window->details->active_pane->active_slot;
-        g_return_if_fail (CAJA_IS_WINDOW_SLOT (new_slot));
+        g_return_if_fail (BAUL_IS_WINDOW_SLOT (new_slot));
 
         /*Open a directory at the set location in the new window (slot).*/
         baul_window_slot_open_location_full (new_slot, location,
-                                             CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+                                             BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
                                              flags, NULL, NULL, NULL);
         g_object_unref (location);
     }
@@ -352,7 +352,7 @@ baul_window_go_up (CajaWindow *window, gboolean close_behind, gboolean new_tab)
     GList *selection;
     CajaWindowOpenFlags flags;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = window->details->active_pane->active_slot;
 
@@ -373,15 +373,15 @@ baul_window_go_up (CajaWindow *window, gboolean close_behind, gboolean new_tab)
     flags = 0;
     if (close_behind)
     {
-        flags |= CAJA_WINDOW_OPEN_FLAG_CLOSE_BEHIND;
+        flags |= BAUL_WINDOW_OPEN_FLAG_CLOSE_BEHIND;
     }
     if (new_tab)
     {
-        flags |= CAJA_WINDOW_OPEN_FLAG_NEW_TAB;
+        flags |= BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
     }
 
     baul_window_slot_open_location_full (slot, parent,
-                                         CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+                                         BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
                                          flags,
                                          selection,
                                          NULL, NULL);
@@ -397,14 +397,14 @@ real_set_allow_up (CajaWindow *window,
 {
     GtkAction *action;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (window->details->main_action_group,
-                                          CAJA_ACTION_UP);
+                                          BAUL_ACTION_UP);
     gtk_action_set_sensitive (action, allow);
     action = gtk_action_group_get_action (window->details->main_action_group,
-                                          CAJA_ACTION_UP_ACCEL);
+                                          BAUL_ACTION_UP_ACCEL);
     gtk_action_set_sensitive (action, allow);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -412,9 +412,9 @@ real_set_allow_up (CajaWindow *window,
 void
 baul_window_allow_up (CajaWindow *window, gboolean allow)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
-    EEL_CALL_METHOD (CAJA_WINDOW_CLASS, window,
+    EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      set_allow_up, (window, allow));
 }
 
@@ -448,11 +448,11 @@ baul_window_sync_allow_stop (CajaWindow *window,
     GtkAction *action;
     gboolean allow_stop;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (window->details->main_action_group,
-                                          CAJA_ACTION_STOP);
+                                          BAUL_ACTION_STOP);
     allow_stop = gtk_action_get_sensitive (action);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
@@ -471,7 +471,7 @@ baul_window_sync_allow_stop (CajaWindow *window,
             update_cursor (window);
         }
 
-        EEL_CALL_METHOD (CAJA_WINDOW_CLASS, window,
+        EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                          sync_allow_stop, (window, slot));
     }
 }
@@ -481,11 +481,11 @@ baul_window_allow_reload (CajaWindow *window, gboolean allow)
 {
     GtkAction *action;
 
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (window->details->main_action_group,
-                                          CAJA_ACTION_RELOAD);
+                                          BAUL_ACTION_RELOAD);
     gtk_action_set_sensitive (action, allow);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -493,7 +493,7 @@ baul_window_allow_reload (CajaWindow *window, gboolean allow)
 void
 baul_window_go_home (CajaWindow *window)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     baul_window_slot_go_home (window->details->active_pane->active_slot, FALSE);
 }
@@ -502,9 +502,9 @@ void
 baul_window_prompt_for_location (CajaWindow *window,
                                  const char     *initial)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
-    EEL_CALL_METHOD (CAJA_WINDOW_CLASS, window,
+    EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      prompt_for_location, (window, initial));
 }
 
@@ -513,7 +513,7 @@ baul_window_get_location_uri (CajaWindow *window)
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = window->details->active_pane->active_slot;
 
@@ -595,7 +595,7 @@ baul_window_set_initial_window_geometry (CajaWindow *window)
     max_width_for_screen = get_max_forced_width (screen);
     max_height_for_screen = get_max_forced_height (screen);
 
-    EEL_CALL_METHOD (CAJA_WINDOW_CLASS, window,
+    EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      get_default_size, (window, &default_width, &default_height));
 
     gtk_window_set_default_size (GTK_WINDOW (window),
@@ -610,7 +610,7 @@ baul_window_constructed (GObject *self)
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (self);
+    window = BAUL_WINDOW (self);
 
     baul_window_initialize_bookmarks_menu (window);
     baul_window_set_initial_window_geometry (window);
@@ -624,12 +624,12 @@ baul_window_set_property (GObject *object,
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (object);
+    window = BAUL_WINDOW (object);
 
     switch (arg_id)
     {
     case ARG_APP:
-        window->application = CAJA_APPLICATION (g_value_get_object (value));
+        window->application = BAUL_APPLICATION (g_value_get_object (value));
         break;
     }
 }
@@ -643,7 +643,7 @@ baul_window_get_property (GObject *object,
     switch (arg_id)
     {
     case ARG_APP:
-        g_value_set_object (value, CAJA_WINDOW (object)->application);
+        g_value_set_object (value, BAUL_WINDOW (object)->application);
         break;
     }
 }
@@ -663,7 +663,7 @@ baul_window_destroy (GtkWidget *object)
     CajaWindow *window;
     GList *panes_copy;
 
-    window = CAJA_WINDOW (object);
+    window = BAUL_WINDOW (object);
 
     /* close all panes safely */
     panes_copy = g_list_copy (window->details->panes);
@@ -681,7 +681,7 @@ baul_window_finalize (GObject *object)
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (object);
+    window = BAUL_WINDOW (object);
 
     baul_window_finalize_menus (window);
     free_stored_viewers (window);
@@ -712,7 +712,7 @@ baul_window_constructor (GType type,
              n_construct_properties,
              construct_params);
 
-    window = CAJA_WINDOW (object);
+    window = BAUL_WINDOW (object);
 
     slot = baul_window_open_slot (window->details->active_pane, 0);
     baul_window_set_active_slot (window, slot);
@@ -745,7 +745,7 @@ baul_window_show_window (CajaWindow    *window)
 
     if (slot->viewed_file)
     {
-        if (CAJA_IS_SPATIAL_WINDOW (window))
+        if (BAUL_IS_SPATIAL_WINDOW (window))
         {
             baul_file_set_has_open_window (slot->viewed_file, TRUE);
         }
@@ -760,7 +760,7 @@ baul_window_view_visible (CajaWindow *window,
     CajaWindowPane *pane;
     GList *l, *walk;
 
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     slot = baul_window_get_slot_for_view (window, view);
 
@@ -815,9 +815,9 @@ baul_window_view_visible (CajaWindow *window,
 void
 baul_window_close (CajaWindow *window)
 {
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
-    EEL_CALL_METHOD (CAJA_WINDOW_CLASS, window,
+    EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      close, (window));
 
     gtk_widget_destroy (GTK_WIDGET (window));
@@ -829,13 +829,13 @@ baul_window_open_slot (CajaWindowPane *pane,
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW_PANE (pane));
-    g_assert (CAJA_IS_WINDOW (pane->window));
+    g_assert (BAUL_IS_WINDOW_PANE (pane));
+    g_assert (BAUL_IS_WINDOW (pane->window));
 
-    slot = EEL_CALL_METHOD_WITH_RETURN_VALUE (CAJA_WINDOW_CLASS, pane->window,
+    slot = EEL_CALL_METHOD_WITH_RETURN_VALUE (BAUL_WINDOW_CLASS, pane->window,
             open_slot, (pane, flags));
 
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
     g_assert (pane->window == slot->pane->window);
 
     pane->slots = g_list_append (pane->slots, slot);
@@ -848,8 +848,8 @@ baul_window_close_pane (CajaWindowPane *pane)
 {
     CajaWindow *window;
 
-    g_assert (CAJA_IS_WINDOW_PANE (pane));
-    g_assert (CAJA_IS_WINDOW (pane->window));
+    g_assert (BAUL_IS_WINDOW_PANE (pane));
+    g_assert (BAUL_IS_WINDOW (pane->window));
     g_assert (g_list_find (pane->window->details->panes, pane) != NULL);
 
     while (pane->slots != NULL)
@@ -887,14 +887,14 @@ baul_window_close_slot (CajaWindowSlot *slot)
 {
     CajaWindowPane *pane;
 
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
-    g_assert (CAJA_IS_WINDOW_PANE(slot->pane));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_PANE(slot->pane));
     g_assert (g_list_find (slot->pane->slots, slot) != NULL);
 
     /* save pane because slot is not valid anymore after this call */
     pane = slot->pane;
 
-    EEL_CALL_METHOD (CAJA_WINDOW_CLASS, slot->pane->window,
+    EEL_CALL_METHOD (BAUL_WINDOW_CLASS, slot->pane->window,
                      close_slot, (slot->pane, slot));
 
     g_object_run_dispose (G_OBJECT (slot));
@@ -908,7 +908,7 @@ baul_window_close_slot (CajaWindowSlot *slot)
 CajaWindowPane*
 baul_window_get_active_pane (CajaWindow *window)
 {
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
     return window->details->active_pane;
 }
 
@@ -934,7 +934,7 @@ void
 baul_window_set_active_pane (CajaWindow *window,
                              CajaWindowPane *new_pane)
 {
-    g_assert (CAJA_IS_WINDOW_PANE (new_pane));
+    g_assert (BAUL_IS_WINDOW_PANE (new_pane));
     if (new_pane->active_slot)
     {
         baul_window_set_active_slot (window, new_pane->active_slot);
@@ -953,12 +953,12 @@ baul_window_set_active_slot (CajaWindow *window, CajaWindowSlot *new_slot)
 {
     CajaWindowSlot *old_slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     if (new_slot)
     {
-        g_assert (CAJA_IS_WINDOW_SLOT (new_slot));
-        g_assert (CAJA_IS_WINDOW_PANE (new_slot->pane));
+        g_assert (BAUL_IS_WINDOW_SLOT (new_slot));
+        g_assert (BAUL_IS_WINDOW_PANE (new_slot->pane));
         g_assert (window == new_slot->pane->window);
         g_assert (g_list_find (new_slot->pane->slots, new_slot) != NULL);
     }
@@ -1032,7 +1032,7 @@ static void
 baul_window_realize (GtkWidget *widget)
 {
     GTK_WIDGET_CLASS (baul_window_parent_class)->realize (widget);
-    update_cursor (CAJA_WINDOW (widget));
+    update_cursor (BAUL_WINDOW (widget));
 }
 
 static gboolean
@@ -1047,7 +1047,7 @@ baul_window_key_press_event (GtkWidget *widget,
     CajaWindow *window;
     int i;
 
-    window = CAJA_WINDOW (widget);
+    window = BAUL_WINDOW (widget);
 
     for (i = 0; i < G_N_ELEMENTS (extra_window_keybindings); i++)
     {
@@ -1247,7 +1247,7 @@ update_extra_viewer_in_view_as_menus (CajaWindow *window,
         window->details->extra_viewer_merge_id = gtk_ui_manager_new_merge_id (window->details->ui_manager);
         window->details->extra_viewer_radio_action =
             add_view_as_menu_item (window,
-                                   CAJA_MENU_PATH_EXTRA_VIEWER_PLACEHOLDER,
+                                   BAUL_MENU_PATH_EXTRA_VIEWER_PLACEHOLDER,
                                    window->details->extra_viewer,
                                    0,
                                    window->details->extra_viewer_merge_id);
@@ -1290,7 +1290,7 @@ baul_window_synch_view_as_menus (CajaWindow *window)
     GList *node;
     GtkAction *action;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = window->details->active_pane->active_slot;
 
@@ -1409,7 +1409,7 @@ load_view_as_menu (CajaWindow *window)
         {
             /* Menu item in View menu. */
             add_view_as_menu_item (window,
-                    CAJA_MENU_PATH_SHORT_LIST_PLACEHOLDER,
+                    BAUL_MENU_PATH_SHORT_LIST_PLACEHOLDER,
                     node->data,
                     index,
                     merge_id);
@@ -1434,7 +1434,7 @@ load_view_as_menus_callback (CajaFile *file,
     CajaWindowSlot *slot;
 
     slot = callback_data;
-    window = CAJA_WINDOW (slot->pane->window);
+    window = BAUL_WINDOW (slot->pane->window);
 
     if (slot == window->details->active_pane->active_slot)
     {
@@ -1456,7 +1456,7 @@ baul_window_load_view_as_menus (CajaWindow *window)
     CajaWindowSlot *slot;
     CajaFileAttributes attributes;
 
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     attributes = baul_mime_actions_get_required_file_attributes ();
 
@@ -1474,7 +1474,7 @@ baul_window_display_error (CajaWindow *window, const char *error_msg)
 {
     GtkWidget *dialog;
 
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
     dialog = gtk_message_dialog_new (GTK_WINDOW (window), 0, GTK_MESSAGE_ERROR,
                                      GTK_BUTTONS_OK, error_msg, NULL);
@@ -1484,7 +1484,7 @@ baul_window_display_error (CajaWindow *window, const char *error_msg)
 static char *
 real_get_title (CajaWindow *window)
 {
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     return baul_window_slot_get_title (window->details->active_pane->active_slot);
 }
@@ -1508,7 +1508,7 @@ void
 baul_window_sync_title (CajaWindow *window,
                         CajaWindowSlot *slot)
 {
-    EEL_CALL_METHOD (CAJA_WINDOW_CLASS, window,
+    EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      sync_title, (window, slot));
 }
 
@@ -1530,14 +1530,14 @@ baul_window_sync_zoom_widgets (CajaWindow *window)
         supports_zooming = baul_view_supports_zooming (view);
         zoom_level = baul_view_get_zoom_level (view);
         can_zoom = supports_zooming &&
-                   zoom_level >= CAJA_ZOOM_LEVEL_SMALLEST &&
-                   zoom_level <= CAJA_ZOOM_LEVEL_LARGEST;
+                   zoom_level >= BAUL_ZOOM_LEVEL_SMALLEST &&
+                   zoom_level <= BAUL_ZOOM_LEVEL_LARGEST;
         can_zoom_in = can_zoom && baul_view_can_zoom_in (view);
         can_zoom_out = can_zoom && baul_view_can_zoom_out (view);
     }
     else
     {
-        zoom_level = CAJA_ZOOM_LEVEL_STANDARD;
+        zoom_level = BAUL_ZOOM_LEVEL_STANDARD;
         supports_zooming = FALSE;
         can_zoom = FALSE;
         can_zoom_in = FALSE;
@@ -1546,17 +1546,17 @@ baul_window_sync_zoom_widgets (CajaWindow *window)
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (window->details->main_action_group,
-                                          CAJA_ACTION_ZOOM_IN);
+                                          BAUL_ACTION_ZOOM_IN);
     gtk_action_set_visible (action, supports_zooming);
     gtk_action_set_sensitive (action, can_zoom_in);
 
     action = gtk_action_group_get_action (window->details->main_action_group,
-                                          CAJA_ACTION_ZOOM_OUT);
+                                          BAUL_ACTION_ZOOM_OUT);
     gtk_action_set_visible (action, supports_zooming);
     gtk_action_set_sensitive (action, can_zoom_out);
 
     action = gtk_action_group_get_action (window->details->main_action_group,
-                                          CAJA_ACTION_ZOOM_NORMAL);
+                                          BAUL_ACTION_ZOOM_NORMAL);
     gtk_action_set_visible (action, supports_zooming);
     gtk_action_set_sensitive (action, can_zoom);
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -1570,7 +1570,7 @@ static void
 zoom_level_changed_callback (CajaView *view,
                              CajaWindow *window)
 {
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     /* This is called each time the component in
      * the active slot successfully completed
@@ -1591,8 +1591,8 @@ baul_window_connect_content_view (CajaWindow *window,
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
-    g_assert (CAJA_IS_VIEW (view));
+    g_assert (BAUL_IS_WINDOW (window));
+    g_assert (BAUL_IS_VIEW (view));
 
     slot = baul_window_get_slot_for_view (window, view);
     g_assert (slot == baul_window_get_active_slot (window));
@@ -1620,8 +1620,8 @@ baul_window_disconnect_content_view (CajaWindow *window,
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
-    g_assert (CAJA_IS_VIEW (view));
+    g_assert (BAUL_IS_WINDOW (window));
+    g_assert (BAUL_IS_VIEW (view));
 
     slot = baul_window_get_slot_for_view (window, view);
     g_assert (slot == baul_window_get_active_slot (window));
@@ -1641,7 +1641,7 @@ baul_window_show (GtkWidget *widget)
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (widget);
+    window = BAUL_WINDOW (widget);
 
     GTK_WIDGET_CLASS (baul_window_parent_class)->show (widget);
 
@@ -1651,7 +1651,7 @@ baul_window_show (GtkWidget *widget)
 GtkUIManager *
 baul_window_get_ui_manager (CajaWindow *window)
 {
-    g_return_val_if_fail (CAJA_IS_WINDOW (window), NULL);
+    g_return_val_if_fail (BAUL_IS_WINDOW (window), NULL);
 
     return window->details->ui_manager;
 }
@@ -1705,7 +1705,7 @@ baul_window_slot_set_viewed_file (CajaWindowSlot *slot,
 
         window = slot->pane->window;
 
-        if (CAJA_IS_SPATIAL_WINDOW (window))
+        if (BAUL_IS_SPATIAL_WINDOW (window))
         {
             baul_file_set_has_open_window (slot->viewed_file,
                                            FALSE);
@@ -1717,8 +1717,8 @@ baul_window_slot_set_viewed_file (CajaWindowSlot *slot,
     if (file != NULL)
     {
         attributes =
-            CAJA_FILE_ATTRIBUTE_INFO |
-            CAJA_FILE_ATTRIBUTE_LINK_INFO;
+            BAUL_FILE_ATTRIBUTE_INFO |
+            BAUL_FILE_ATTRIBUTE_LINK_INFO;
         baul_file_monitor_add (file, slot, attributes);
     }
 
@@ -1776,7 +1776,7 @@ baul_add_bookmark_to_history_list (CajaBookmark *bookmark)
     GList *l, *next;
     static gboolean free_history_list_is_set_up;
 
-    g_assert (CAJA_IS_BOOKMARK (bookmark));
+    g_assert (BAUL_IS_BOOKMARK (bookmark));
 
     if (!free_history_list_is_set_up)
     {
@@ -1873,7 +1873,7 @@ baul_forget_history (void)
     GList *window_node, *l, *walk;
     CajaApplication *app;
 
-    app = CAJA_APPLICATION (g_application_get_default ());
+    app = BAUL_APPLICATION (g_application_get_default ());
     /* Clear out each window's back & forward lists. Also, remove
      * each window's current location bookmark from history list
      * so it doesn't get clobbered.
@@ -1883,13 +1883,13 @@ baul_forget_history (void)
             window_node = window_node->next)
     {
 
-        if (CAJA_IS_NAVIGATION_WINDOW (window_node->data))
+        if (BAUL_IS_NAVIGATION_WINDOW (window_node->data))
         {
             CajaNavigationWindow *window;
 
-            window = CAJA_NAVIGATION_WINDOW (window_node->data);
+            window = BAUL_NAVIGATION_WINDOW (window_node->data);
 
-            for (walk = CAJA_WINDOW (window_node->data)->details->panes; walk; walk = walk->next)
+            for (walk = BAUL_WINDOW (window_node->data)->details->panes; walk; walk = walk->next)
             {
                 CajaWindowPane *pane = walk->data;
                 for (l = pane->slots; l != NULL; l = l->next)
@@ -1905,7 +1905,7 @@ baul_forget_history (void)
             baul_navigation_window_allow_forward (window, FALSE);
         }
 
-        for (walk = CAJA_WINDOW (window_node->data)->details->panes; walk; walk = walk->next)
+        for (walk = BAUL_WINDOW (window_node->data)->details->panes; walk; walk = walk->next)
         {
             CajaWindowPane *pane = walk->data;
             for (l = pane->slots; l != NULL; l = l->next)
@@ -1929,13 +1929,13 @@ baul_forget_history (void)
         CajaWindowSlot *slot;
         GList *l;
 
-        window = CAJA_WINDOW (window_node->data);
+        window = BAUL_WINDOW (window_node->data);
         for (walk = window->details->panes; walk; walk = walk->next)
         {
             CajaWindowPane *pane = walk->data;
             for (l = pane->slots; l != NULL; l = l->next)
             {
-                slot = CAJA_WINDOW_SLOT (l->data);
+                slot = BAUL_WINDOW_SLOT (l->data);
                 baul_window_slot_add_current_location_to_history_list (slot);
             }
         }
@@ -1958,9 +1958,9 @@ baul_window_get_history (CajaWindow *window)
 static CajaWindowType
 baul_window_get_window_type (CajaWindow *window)
 {
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
-    return CAJA_WINDOW_GET_CLASS (window)->window_type;
+    return BAUL_WINDOW_GET_CLASS (window)->window_type;
 }
 
 static int
@@ -1968,7 +1968,7 @@ baul_window_get_selection_count (CajaWindow *window)
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = window->details->active_pane->active_slot;
 
@@ -1985,7 +1985,7 @@ baul_window_get_selection (CajaWindow *window)
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = window->details->active_pane->active_slot;
 
@@ -2044,7 +2044,7 @@ baul_window_get_cached_title (CajaWindow *window)
 {
     CajaWindowSlot *slot;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = window->details->active_pane->active_slot;
 
@@ -2054,7 +2054,7 @@ baul_window_get_cached_title (CajaWindow *window)
 CajaWindowSlot *
 baul_window_get_active_slot (CajaWindow *window)
 {
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     return window->details->active_pane->active_slot;
 }
@@ -2065,7 +2065,7 @@ baul_window_get_extra_slot (CajaWindow *window)
     CajaWindowPane *extra_pane;
     GList *node;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
 
     /* return NULL if there is only one pane */
@@ -2097,7 +2097,7 @@ baul_window_get_slots (CajaWindow *window)
 {
     GList *walk,*list;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     list = NULL;
     for (walk = window->details->panes; walk; walk = walk->next)
@@ -2164,7 +2164,7 @@ baul_window_class_init (CajaWindowClass *class)
                                      g_param_spec_object ("app",
                                              "Application",
                                              "The CajaApplication associated with this window.",
-                                             CAJA_TYPE_APPLICATION,
+                                             BAUL_TYPE_APPLICATION,
                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 
     signals[GO_UP] =

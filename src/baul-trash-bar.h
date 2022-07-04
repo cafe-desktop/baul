@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef __CAJA_TRASH_BAR_H
-#define __CAJA_TRASH_BAR_H
+#ifndef __BAUL_TRASH_BAR_H
+#define __BAUL_TRASH_BAR_H
 
 #include "baul-window.h"
 
@@ -29,12 +29,12 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_TRASH_BAR         (baul_trash_bar_get_type ())
-#define CAJA_TRASH_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_TRASH_BAR, CajaTrashBar))
-#define CAJA_TRASH_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_TRASH_BAR, CajaTrashBarClass))
-#define CAJA_IS_TRASH_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_TRASH_BAR))
-#define CAJA_IS_TRASH_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_TRASH_BAR))
-#define CAJA_TRASH_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_TRASH_BAR, CajaTrashBarClass))
+#define BAUL_TYPE_TRASH_BAR         (baul_trash_bar_get_type ())
+#define BAUL_TRASH_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_TRASH_BAR, CajaTrashBar))
+#define BAUL_TRASH_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_TRASH_BAR, CajaTrashBarClass))
+#define BAUL_IS_TRASH_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_TRASH_BAR))
+#define BAUL_IS_TRASH_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_TRASH_BAR))
+#define BAUL_TRASH_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_TRASH_BAR, CajaTrashBarClass))
 
 typedef struct _CajaTrashBarPrivate CajaTrashBarPrivate;
 

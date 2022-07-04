@@ -57,7 +57,7 @@ finalize (GObject *object)
 {
     CajaSearchEngine *engine;
 
-    engine = CAJA_SEARCH_ENGINE (object);
+    engine = BAUL_SEARCH_ENGINE (object);
 
     g_free (engine->details);
 
@@ -145,44 +145,44 @@ baul_search_engine_new (void)
 void
 baul_search_engine_set_query (CajaSearchEngine *engine, CajaQuery *query)
 {
-    g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
-    g_return_if_fail (CAJA_SEARCH_ENGINE_GET_CLASS (engine)->set_query != NULL);
+    g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
+    g_return_if_fail (BAUL_SEARCH_ENGINE_GET_CLASS (engine)->set_query != NULL);
 
-    CAJA_SEARCH_ENGINE_GET_CLASS (engine)->set_query (engine, query);
+    BAUL_SEARCH_ENGINE_GET_CLASS (engine)->set_query (engine, query);
 }
 
 void
 baul_search_engine_start (CajaSearchEngine *engine)
 {
-    g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
-    g_return_if_fail (CAJA_SEARCH_ENGINE_GET_CLASS (engine)->start != NULL);
+    g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
+    g_return_if_fail (BAUL_SEARCH_ENGINE_GET_CLASS (engine)->start != NULL);
 
-    CAJA_SEARCH_ENGINE_GET_CLASS (engine)->start (engine);
+    BAUL_SEARCH_ENGINE_GET_CLASS (engine)->start (engine);
 }
 
 
 void
 baul_search_engine_stop (CajaSearchEngine *engine)
 {
-    g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
-    g_return_if_fail (CAJA_SEARCH_ENGINE_GET_CLASS (engine)->stop != NULL);
+    g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
+    g_return_if_fail (BAUL_SEARCH_ENGINE_GET_CLASS (engine)->stop != NULL);
 
-    CAJA_SEARCH_ENGINE_GET_CLASS (engine)->stop (engine);
+    BAUL_SEARCH_ENGINE_GET_CLASS (engine)->stop (engine);
 }
 
 gboolean
 baul_search_engine_is_indexed (CajaSearchEngine *engine)
 {
-    g_return_val_if_fail (CAJA_IS_SEARCH_ENGINE (engine), FALSE);
-    g_return_val_if_fail (CAJA_SEARCH_ENGINE_GET_CLASS (engine)->is_indexed != NULL, FALSE);
+    g_return_val_if_fail (BAUL_IS_SEARCH_ENGINE (engine), FALSE);
+    g_return_val_if_fail (BAUL_SEARCH_ENGINE_GET_CLASS (engine)->is_indexed != NULL, FALSE);
 
-    return CAJA_SEARCH_ENGINE_GET_CLASS (engine)->is_indexed (engine);
+    return BAUL_SEARCH_ENGINE_GET_CLASS (engine)->is_indexed (engine);
 }
 
 void
 baul_search_engine_hits_added (CajaSearchEngine *engine, GList *hits)
 {
-    g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
+    g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
 
     g_signal_emit (engine, signals[HITS_ADDED], 0, hits);
 }
@@ -191,7 +191,7 @@ baul_search_engine_hits_added (CajaSearchEngine *engine, GList *hits)
 void
 baul_search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits)
 {
-    g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
+    g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
 
     g_signal_emit (engine, signals[HITS_SUBTRACTED], 0, hits);
 }
@@ -200,7 +200,7 @@ baul_search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits)
 void
 baul_search_engine_finished (CajaSearchEngine *engine)
 {
-    g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
+    g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
 
     g_signal_emit (engine, signals[FINISHED], 0);
 }
@@ -208,7 +208,7 @@ baul_search_engine_finished (CajaSearchEngine *engine)
 void
 baul_search_engine_error (CajaSearchEngine *engine, const char *error_message)
 {
-    g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
+    g_return_if_fail (BAUL_IS_SEARCH_ENGINE (engine));
 
     g_signal_emit (engine, signals[ERROR], 0, error_message);
 }

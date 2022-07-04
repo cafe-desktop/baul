@@ -22,16 +22,16 @@
  */
 
 
-#ifndef __CAJA_FREEDESKTOP_DBUS_H__
-#define __CAJA_FREEDESKTOP_DBUS_H__
+#ifndef __BAUL_FREEDESKTOP_DBUS_H__
+#define __BAUL_FREEDESKTOP_DBUS_H__
 
 #include <glib-object.h>
 
 #include "baul-application.h"
 
-#define CAJA_FDO_DBUS_IFACE "org.freedesktop.FileManager1"
-#define CAJA_FDO_DBUS_NAME  "org.freedesktop.FileManager1"
-#define CAJA_FDO_DBUS_PATH  "/org/freedesktop/FileManager1"
+#define BAUL_FDO_DBUS_IFACE "org.freedesktop.FileManager1"
+#define BAUL_FDO_DBUS_NAME  "org.freedesktop.FileManager1"
+#define BAUL_FDO_DBUS_PATH  "/org/freedesktop/FileManager1"
 
 typedef struct _CajaFreedesktopDBus CajaFreedesktopDBus;
 typedef struct _CajaFreedesktopDBusClass CajaFreedesktopDBusClass;
@@ -39,4 +39,4 @@ typedef struct _CajaFreedesktopDBusClass CajaFreedesktopDBusClass;
 GType baul_freedesktop_dbus_get_type (void);
 CajaFreedesktopDBus * baul_freedesktop_dbus_new (CajaApplication *application);
 
-#endif /* __CAJA_FREEDESKTOP_DBUS_H__ */
+#endif /* __BAUL_FREEDESKTOP_DBUS_H__ */

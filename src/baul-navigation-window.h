@@ -27,8 +27,8 @@
  */
 /* baul-navigation-window.h: Interface of the navigation window object */
 
-#ifndef CAJA_NAVIGATION_WINDOW_H
-#define CAJA_NAVIGATION_WINDOW_H
+#ifndef BAUL_NAVIGATION_WINDOW_H
+#define BAUL_NAVIGATION_WINDOW_H
 
 #include <gtk/gtk.h>
 
@@ -42,17 +42,17 @@
 #include "baul-side-pane.h"
 #include "baul-window.h"
 
-#define CAJA_TYPE_NAVIGATION_WINDOW baul_navigation_window_get_type()
-#define CAJA_NAVIGATION_WINDOW(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NAVIGATION_WINDOW, CajaNavigationWindow))
-#define CAJA_NAVIGATION_WINDOW_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_NAVIGATION_WINDOW, CajaNavigationWindowClass))
-#define CAJA_IS_NAVIGATION_WINDOW(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_NAVIGATION_WINDOW))
-#define CAJA_IS_NAVIGATION_WINDOW_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_NAVIGATION_WINDOW))
-#define CAJA_NAVIGATION_WINDOW_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_NAVIGATION_WINDOW, CajaNavigationWindowClass))
+#define BAUL_TYPE_NAVIGATION_WINDOW baul_navigation_window_get_type()
+#define BAUL_NAVIGATION_WINDOW(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NAVIGATION_WINDOW, CajaNavigationWindow))
+#define BAUL_NAVIGATION_WINDOW_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_NAVIGATION_WINDOW, CajaNavigationWindowClass))
+#define BAUL_IS_NAVIGATION_WINDOW(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_NAVIGATION_WINDOW))
+#define BAUL_IS_NAVIGATION_WINDOW_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_NAVIGATION_WINDOW))
+#define BAUL_NAVIGATION_WINDOW_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_NAVIGATION_WINDOW, CajaNavigationWindowClass))
 
 typedef struct _CajaNavigationWindow        CajaNavigationWindow;
 typedef struct _CajaNavigationWindowClass   CajaNavigationWindowClass;

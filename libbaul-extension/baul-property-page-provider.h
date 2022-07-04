@@ -28,8 +28,8 @@
  * list of CajaFileInfo objects for which information should
  * be displayed  */
 
-#ifndef CAJA_PROPERTY_PAGE_PROVIDER_H
-#define CAJA_PROPERTY_PAGE_PROVIDER_H
+#ifndef BAUL_PROPERTY_PAGE_PROVIDER_H
+#define BAUL_PROPERTY_PAGE_PROVIDER_H
 
 #include <glib-object.h>
 #include "baul-extension-types.h"
@@ -38,10 +38,10 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_PROPERTY_PAGE_PROVIDER           (baul_property_page_provider_get_type ())
-#define CAJA_PROPERTY_PAGE_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PROPERTY_PAGE_PROVIDER, CajaPropertyPageProvider))
-#define CAJA_IS_PROPERTY_PAGE_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_PROPERTY_PAGE_PROVIDER))
-#define CAJA_PROPERTY_PAGE_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_PROPERTY_PAGE_PROVIDER, CajaPropertyPageProviderIface))
+#define BAUL_TYPE_PROPERTY_PAGE_PROVIDER           (baul_property_page_provider_get_type ())
+#define BAUL_PROPERTY_PAGE_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PROPERTY_PAGE_PROVIDER, CajaPropertyPageProvider))
+#define BAUL_IS_PROPERTY_PAGE_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_PROPERTY_PAGE_PROVIDER))
+#define BAUL_PROPERTY_PAGE_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_PROPERTY_PAGE_PROVIDER, CajaPropertyPageProviderIface))
 
 typedef struct _CajaPropertyPageProvider       CajaPropertyPageProvider;
 typedef struct _CajaPropertyPageProviderIface  CajaPropertyPageProviderIface;

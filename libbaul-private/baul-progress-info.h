@@ -22,18 +22,18 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_PROGRESS_INFO_H
-#define CAJA_PROGRESS_INFO_H
+#ifndef BAUL_PROGRESS_INFO_H
+#define BAUL_PROGRESS_INFO_H
 
 #include <glib-object.h>
 #include <gio/gio.h>
 
-#define CAJA_TYPE_PROGRESS_INFO         (baul_progress_info_get_type ())
-#define CAJA_PROGRESS_INFO(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_PROGRESS_INFO, CajaProgressInfo))
-#define CAJA_PROGRESS_INFO_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_PROGRESS_INFO, CajaProgressInfoClass))
-#define CAJA_IS_PROGRESS_INFO(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_PROGRESS_INFO))
-#define CAJA_IS_PROGRESS_INFO_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_PROGRESS_INFO))
-#define CAJA_PROGRESS_INFO_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_PROGRESS_INFO, CajaProgressInfoClass))
+#define BAUL_TYPE_PROGRESS_INFO         (baul_progress_info_get_type ())
+#define BAUL_PROGRESS_INFO(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_PROGRESS_INFO, CajaProgressInfo))
+#define BAUL_PROGRESS_INFO_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_PROGRESS_INFO, CajaProgressInfoClass))
+#define BAUL_IS_PROGRESS_INFO(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_PROGRESS_INFO))
+#define BAUL_IS_PROGRESS_INFO_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_PROGRESS_INFO))
+#define BAUL_PROGRESS_INFO_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_PROGRESS_INFO, CajaProgressInfoClass))
 
 typedef struct _CajaProgressInfo      CajaProgressInfo;
 typedef struct _CajaProgressInfoClass CajaProgressInfoClass;
@@ -83,4 +83,4 @@ void          baul_progress_info_set_progress    (CajaProgressInfo *info,
 void          baul_progress_info_pulse_progress  (CajaProgressInfo *info);
 
 
-#endif /* CAJA_PROGRESS_INFO_H */
+#endif /* BAUL_PROGRESS_INFO_H */

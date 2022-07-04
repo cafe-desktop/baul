@@ -21,17 +21,17 @@
  *
  */
 
-#ifndef CAJA_SEARCH_ENGINE_TRACKER_H
-#define CAJA_SEARCH_ENGINE_TRACKER_H
+#ifndef BAUL_SEARCH_ENGINE_TRACKER_H
+#define BAUL_SEARCH_ENGINE_TRACKER_H
 
 #include "baul-search-engine.h"
 
-#define CAJA_TYPE_SEARCH_ENGINE_TRACKER		(baul_search_engine_tracker_get_type ())
-#define CAJA_SEARCH_ENGINE_TRACKER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_ENGINE_TRACKER, CajaSearchEngineTracker))
-#define CAJA_SEARCH_ENGINE_TRACKER_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SEARCH_ENGINE_TRACKER, CajaSearchEngineTrackerClass))
-#define CAJA_IS_SEARCH_ENGINE_TRACKER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SEARCH_ENGINE_TRACKER))
-#define CAJA_IS_SEARCH_ENGINE_TRACKER_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SEARCH_ENGINE_TRACKER))
-#define CAJA_SEARCH_ENGINE_TRACKER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SEARCH_ENGINE_TRACKER, CajaSearchEngineTrackerClass))
+#define BAUL_TYPE_SEARCH_ENGINE_TRACKER		(baul_search_engine_tracker_get_type ())
+#define BAUL_SEARCH_ENGINE_TRACKER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_ENGINE_TRACKER, CajaSearchEngineTracker))
+#define BAUL_SEARCH_ENGINE_TRACKER_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_ENGINE_TRACKER, CajaSearchEngineTrackerClass))
+#define BAUL_IS_SEARCH_ENGINE_TRACKER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_ENGINE_TRACKER))
+#define BAUL_IS_SEARCH_ENGINE_TRACKER_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_ENGINE_TRACKER))
+#define BAUL_SEARCH_ENGINE_TRACKER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_ENGINE_TRACKER, CajaSearchEngineTrackerClass))
 
 typedef struct CajaSearchEngineTrackerDetails CajaSearchEngineTrackerDetails;
 
@@ -50,4 +50,4 @@ GType baul_search_engine_tracker_get_type (void);
 
 CajaSearchEngine* baul_search_engine_tracker_new (void);
 
-#endif /* CAJA_SEARCH_ENGINE_TRACKER_H */
+#endif /* BAUL_SEARCH_ENGINE_TRACKER_H */

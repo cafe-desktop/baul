@@ -97,7 +97,7 @@ baul_open_with_dialog_finalize (GObject *object)
 {
     CajaOpenWithDialog *dialog;
 
-    dialog = CAJA_OPEN_WITH_DIALOG (object);
+    dialog = BAUL_OPEN_WITH_DIALOG (object);
 
     if (dialog->details->add_icons_idle_id)
     {
@@ -419,7 +419,7 @@ chooser_response_cb (GtkFileChooser *chooser,
 {
     CajaOpenWithDialog *dialog;
 
-    dialog = CAJA_OPEN_WITH_DIALOG (user_data);
+    dialog = BAUL_OPEN_WITH_DIALOG (user_data);
 
     if (response == GTK_RESPONSE_OK)
     {
@@ -451,7 +451,7 @@ browse_clicked_cb (GtkWidget *button,
     CajaOpenWithDialog *dialog;
     GtkWidget *chooser;
 
-    dialog = CAJA_OPEN_WITH_DIALOG (user_data);
+    dialog = BAUL_OPEN_WITH_DIALOG (user_data);
 
     chooser = eel_file_chooser_dialog_new (_("Select an Application"),
                                            GTK_WINDOW (dialog),
@@ -496,7 +496,7 @@ entry_changed_cb (GtkWidget *entry,
     }
 }
 
-#define CAJA_OPEN_WITH_DIALOG_ICON_SIZE 24
+#define BAUL_OPEN_WITH_DIALOG_ICON_SIZE 24
 static cairo_surface_t *
 get_surface_for_icon (GIcon *icon)
 {
@@ -515,8 +515,8 @@ get_surface_for_icon (GIcon *icon)
         {
             GdkPixbuf *pixbuf;
             pixbuf = gdk_pixbuf_new_from_file_at_size (filename,
-                                                       CAJA_OPEN_WITH_DIALOG_ICON_SIZE * icon_scale,
-                                                       CAJA_OPEN_WITH_DIALOG_ICON_SIZE * icon_scale,
+                                                       BAUL_OPEN_WITH_DIALOG_ICON_SIZE * icon_scale,
+                                                       BAUL_OPEN_WITH_DIALOG_ICON_SIZE * icon_scale,
                                                        NULL);
             surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, icon_scale, NULL);
             g_object_unref (pixbuf);
@@ -545,7 +545,7 @@ get_surface_for_icon (GIcon *icon)
             }
             surface = gtk_icon_theme_load_surface (gtk_icon_theme_get_default (),
                                                    icon_no_extension,
-                                                   CAJA_OPEN_WITH_DIALOG_ICON_SIZE,
+                                                   BAUL_OPEN_WITH_DIALOG_ICON_SIZE,
                                                    icon_scale,
                                                    NULL,
                                                    GTK_ICON_LOOKUP_FORCE_SIZE,
@@ -1161,9 +1161,9 @@ real_baul_open_with_dialog_new (const char *uri,
 {
     GtkWidget *dialog;
 
-    dialog = gtk_widget_new (CAJA_TYPE_OPEN_WITH_DIALOG, NULL);
+    dialog = gtk_widget_new (BAUL_TYPE_OPEN_WITH_DIALOG, NULL);
 
-    set_uri_and_type (CAJA_OPEN_WITH_DIALOG (dialog), uri, mime_type, extension, add_mode);
+    set_uri_and_type (BAUL_OPEN_WITH_DIALOG (dialog), uri, mime_type, extension, add_mode);
 
     return dialog;
 }
@@ -1182,7 +1182,7 @@ baul_add_application_dialog_new (const char *uri,
 {
     CajaOpenWithDialog *dialog;
 
-    dialog = CAJA_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (uri, mime_type, NULL, TRUE));
+    dialog = BAUL_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (uri, mime_type, NULL, TRUE));
 
     return GTK_WIDGET (dialog);
 }
@@ -1193,7 +1193,7 @@ baul_add_application_dialog_new_for_multiple_files (const char *extension,
 {
     CajaOpenWithDialog *dialog;
 
-    dialog = CAJA_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (NULL, mime_type, extension, TRUE));
+    dialog = BAUL_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (NULL, mime_type, extension, TRUE));
 
     return GTK_WIDGET (dialog);
 }

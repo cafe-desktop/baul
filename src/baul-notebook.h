@@ -24,8 +24,8 @@
  *  $Id: baul-notebook.h 8210 2008-04-11 20:05:25Z chpe $
  */
 
-#ifndef CAJA_NOTEBOOK_H
-#define CAJA_NOTEBOOK_H
+#ifndef BAUL_NOTEBOOK_H
+#define BAUL_NOTEBOOK_H
 
 #include <glib.h>
 
@@ -36,12 +36,12 @@
 extern "C" {
 #endif
 
-#define CAJA_TYPE_NOTEBOOK		(baul_notebook_get_type ())
-#define CAJA_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_NOTEBOOK, CajaNotebook))
-#define CAJA_NOTEBOOK_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_NOTEBOOK, CajaNotebookClass))
-#define CAJA_IS_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_NOTEBOOK))
-#define CAJA_IS_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_NOTEBOOK))
-#define CAJA_NOTEBOOK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_NOTEBOOK, CajaNotebookClass))
+#define BAUL_TYPE_NOTEBOOK		(baul_notebook_get_type ())
+#define BAUL_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_NOTEBOOK, CajaNotebook))
+#define BAUL_NOTEBOOK_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_NOTEBOOK, CajaNotebookClass))
+#define BAUL_IS_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_NOTEBOOK))
+#define BAUL_IS_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_NOTEBOOK))
+#define BAUL_NOTEBOOK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NOTEBOOK, CajaNotebookClass))
 
     typedef struct _CajaNotebookClass	CajaNotebookClass;
     typedef struct _CajaNotebook		CajaNotebook;
@@ -95,5 +95,5 @@ extern "C" {
 }
 #endif
 
-#endif /* CAJA_NOTEBOOK_H */
+#endif /* BAUL_NOTEBOOK_H */
 

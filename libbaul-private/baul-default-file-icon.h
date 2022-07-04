@@ -22,11 +22,11 @@
    Author: Darin Adler <darin@bentspoon.com>
 */
 
-#ifndef CAJA_DEFAULT_FILE_ICON_H
-#define CAJA_DEFAULT_FILE_ICON_H
+#ifndef BAUL_DEFAULT_FILE_ICON_H
+#define BAUL_DEFAULT_FILE_ICON_H
 
 extern const int baul_default_file_icon_width;
 extern const int baul_default_file_icon_height;
 extern const unsigned char baul_default_file_icon[];
 
-#endif /* CAJA_DEFAULT_FILE_ICON_H */
+#endif /* BAUL_DEFAULT_FILE_ICON_H */

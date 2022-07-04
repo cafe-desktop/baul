@@ -24,24 +24,24 @@
 	    Ettore Perazzoli <ettore@gnu.org>
 */
 
-#ifndef CAJA_DND_H
-#define CAJA_DND_H
+#ifndef BAUL_DND_H
+#define BAUL_DND_H
 
 #include <gtk/gtk.h>
 
 #include "baul-window-slot-info.h"
 
 /* Drag & Drop target names. */
-#define CAJA_ICON_DND_MATE_ICON_LIST_TYPE	"x-special/mate-icon-list"
-#define CAJA_ICON_DND_URI_LIST_TYPE		"text/uri-list"
-#define CAJA_ICON_DND_NETSCAPE_URL_TYPE	"_NETSCAPE_URL"
-#define CAJA_ICON_DND_COLOR_TYPE		"application/x-color"
-#define CAJA_ICON_DND_BGIMAGE_TYPE		"property/bgimage"
-#define CAJA_ICON_DND_KEYWORD_TYPE		"property/keyword"
-#define CAJA_ICON_DND_RESET_BACKGROUND_TYPE "x-special/mate-reset-background"
-#define CAJA_ICON_DND_ROOTWINDOW_DROP_TYPE	"application/x-rootwindow-drop"
-#define CAJA_ICON_DND_XDNDDIRECTSAVE_TYPE	"XdndDirectSave0" /* XDS Protocol Type */
-#define CAJA_ICON_DND_RAW_TYPE	"application/octet-stream"
+#define BAUL_ICON_DND_MATE_ICON_LIST_TYPE	"x-special/mate-icon-list"
+#define BAUL_ICON_DND_URI_LIST_TYPE		"text/uri-list"
+#define BAUL_ICON_DND_NETSCAPE_URL_TYPE	"_NETSCAPE_URL"
+#define BAUL_ICON_DND_COLOR_TYPE		"application/x-color"
+#define BAUL_ICON_DND_BGIMAGE_TYPE		"property/bgimage"
+#define BAUL_ICON_DND_KEYWORD_TYPE		"property/keyword"
+#define BAUL_ICON_DND_RESET_BACKGROUND_TYPE "x-special/mate-reset-background"
+#define BAUL_ICON_DND_ROOTWINDOW_DROP_TYPE	"application/x-rootwindow-drop"
+#define BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE	"XdndDirectSave0" /* XDS Protocol Type */
+#define BAUL_ICON_DND_RAW_TYPE	"application/octet-stream"
 
 /* Item of the drag selection list */
 typedef struct
@@ -55,25 +55,25 @@ typedef struct
 /* Standard Drag & Drop types. */
 typedef enum
 {
-    CAJA_ICON_DND_MATE_ICON_LIST,
-    CAJA_ICON_DND_URI_LIST,
-    CAJA_ICON_DND_NETSCAPE_URL,
-    CAJA_ICON_DND_COLOR,
-    CAJA_ICON_DND_BGIMAGE,
-    CAJA_ICON_DND_KEYWORD,
-    CAJA_ICON_DND_TEXT,
-    CAJA_ICON_DND_RESET_BACKGROUND,
-    CAJA_ICON_DND_XDNDDIRECTSAVE,
-    CAJA_ICON_DND_RAW,
-    CAJA_ICON_DND_ROOTWINDOW_DROP
+    BAUL_ICON_DND_MATE_ICON_LIST,
+    BAUL_ICON_DND_URI_LIST,
+    BAUL_ICON_DND_NETSCAPE_URL,
+    BAUL_ICON_DND_COLOR,
+    BAUL_ICON_DND_BGIMAGE,
+    BAUL_ICON_DND_KEYWORD,
+    BAUL_ICON_DND_TEXT,
+    BAUL_ICON_DND_RESET_BACKGROUND,
+    BAUL_ICON_DND_XDNDDIRECTSAVE,
+    BAUL_ICON_DND_RAW,
+    BAUL_ICON_DND_ROOTWINDOW_DROP
 } CajaIconDndTargetType;
 
 typedef enum
 {
-    CAJA_DND_ACTION_FIRST = GDK_ACTION_ASK << 1,
-    CAJA_DND_ACTION_SET_AS_BACKGROUND = CAJA_DND_ACTION_FIRST << 0,
-    CAJA_DND_ACTION_SET_AS_FOLDER_BACKGROUND = CAJA_DND_ACTION_FIRST << 1,
-    CAJA_DND_ACTION_SET_AS_GLOBAL_BACKGROUND = CAJA_DND_ACTION_FIRST << 2
+    BAUL_DND_ACTION_FIRST = GDK_ACTION_ASK << 1,
+    BAUL_DND_ACTION_SET_AS_BACKGROUND = BAUL_DND_ACTION_FIRST << 0,
+    BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND = BAUL_DND_ACTION_FIRST << 1,
+    BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND = BAUL_DND_ACTION_FIRST << 2
 } CajaDndAction;
 
 /* drag&drop-related information. */

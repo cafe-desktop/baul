@@ -63,10 +63,10 @@
 
 typedef enum
 {
-    CAJA_PROPERTY_NONE,
-    CAJA_PROPERTY_PATTERN,
-    CAJA_PROPERTY_COLOR,
-    CAJA_PROPERTY_EMBLEM
+    BAUL_PROPERTY_NONE,
+    BAUL_PROPERTY_PATTERN,
+    BAUL_PROPERTY_COLOR,
+    BAUL_PROPERTY_EMBLEM
 } CajaPropertyType;
 
 struct _CajaPropertyBrowserPrivate
@@ -227,7 +227,7 @@ baul_property_browser_dispose (GObject *object)
 {
     CajaPropertyBrowser *property_browser;
 
-    property_browser = CAJA_PROPERTY_BROWSER (object);
+    property_browser = BAUL_PROPERTY_BROWSER (object);
 
     baul_property_browser_destroy_dialogs (property_browser);
 
@@ -274,7 +274,7 @@ baul_property_browser_init (CajaPropertyBrowser *property_browser)
     property_browser->details = baul_property_browser_get_instance_private (property_browser);
 
     property_browser->details->category = g_strdup ("patterns");
-    property_browser->details->category_type = CAJA_PROPERTY_PATTERN;
+    property_browser->details->category_type = BAUL_PROPERTY_PATTERN;
 
     /* load the chit frame */
     temp_str = baul_pixmap_file ("chit_frame.png");
@@ -458,7 +458,7 @@ baul_property_browser_new (GdkScreen *screen)
 {
     CajaPropertyBrowser *browser;
 
-    browser = CAJA_PROPERTY_BROWSER
+    browser = BAUL_PROPERTY_BROWSER
               (gtk_widget_new (baul_property_browser_get_type (), NULL));
 
     gtk_window_set_screen (GTK_WINDOW (browser), screen);
@@ -503,7 +503,7 @@ baul_property_browser_hide_callback (GtkWidget *widget,
 {
     CajaPropertyBrowser *property_browser;
 
-    property_browser = CAJA_PROPERTY_BROWSER (widget);
+    property_browser = BAUL_PROPERTY_BROWSER (widget);
 
     cancel_remove_mode (property_browser);
 
@@ -538,7 +538,7 @@ baul_property_browser_drag_begin (GtkWidget *widget,
     GdkPixbuf *pixbuf;
     char *element_name;
 
-    property_browser = CAJA_PROPERTY_BROWSER (widget);
+    property_browser = BAUL_PROPERTY_BROWSER (widget);
 
     child = g_object_steal_data (G_OBJECT (property_browser), "dragged-image");
     g_return_if_fail (child != NULL);
@@ -593,7 +593,7 @@ baul_property_browser_drag_data_get (GtkWidget *widget,
 {
     char  *image_file_name, *image_file_uri;
     gboolean is_reset;
-    CajaPropertyBrowser *property_browser = CAJA_PROPERTY_BROWSER(widget);
+    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
     GdkAtom target;
 
     g_return_if_fail (widget != NULL);
@@ -645,7 +645,7 @@ baul_property_browser_drag_data_get (GtkWidget *widget,
         }
 
         image_file_name = g_strdup_printf ("%s/%s/%s",
-                                           CAJA_DATADIR,
+                                           BAUL_DATADIR,
                                            is_reset ? "patterns" : property_browser->details->category,
                                            property_browser->details->dragged_file);
 
@@ -679,7 +679,7 @@ baul_property_browser_drag_data_get (GtkWidget *widget,
 static void
 baul_property_browser_drag_end (GtkWidget *widget, GdkDragContext *context)
 {
-    CajaPropertyBrowser *property_browser = CAJA_PROPERTY_BROWSER(widget);
+    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
     if (!property_browser->details->keep_around)
     {
         gtk_widget_hide (GTK_WIDGET (widget));
@@ -724,7 +724,7 @@ make_drag_image (CajaPropertyBrowser *property_browser, const char* file_name)
     char *image_file_name;
     gboolean is_reset;
 
-    if (property_browser->details->category_type == CAJA_PROPERTY_EMBLEM)
+    if (property_browser->details->category_type == BAUL_PROPERTY_EMBLEM)
     {
         if (strcmp (file_name, "erase") == 0)
         {
@@ -743,8 +743,8 @@ make_drag_image (CajaPropertyBrowser *property_browser, const char* file_name)
             CajaIconInfo *info;
 
             icon_name = baul_emblem_get_icon_name_from_keyword (file_name);
-            info = baul_icon_info_lookup_from_name (icon_name, CAJA_ICON_SIZE_STANDARD, 1);
-            pixbuf = baul_icon_info_get_pixbuf_at_size (info, CAJA_ICON_SIZE_STANDARD);
+            info = baul_icon_info_lookup_from_name (icon_name, BAUL_ICON_SIZE_STANDARD, 1);
+            pixbuf = baul_icon_info_get_pixbuf_at_size (info, BAUL_ICON_SIZE_STANDARD);
             g_object_unref (info);
             g_free (icon_name);
         }
@@ -752,7 +752,7 @@ make_drag_image (CajaPropertyBrowser *property_browser, const char* file_name)
     }
 
     image_file_name = g_strdup_printf ("%s/%s/%s",
-                                       CAJA_DATADIR,
+                                       BAUL_DATADIR,
                                        property_browser->details->category,
                                        file_name);
 
@@ -862,7 +862,7 @@ category_toggled_callback (GtkWidget *widget, char *category_name)
 {
     CajaPropertyBrowser *property_browser;
 
-    property_browser = CAJA_PROPERTY_BROWSER (g_object_get_data (G_OBJECT (widget), "user_data"));
+    property_browser = BAUL_PROPERTY_BROWSER (g_object_get_data (G_OBJECT (widget), "user_data"));
 
     /* exit remove mode when the user switches categories, since there might be nothing to remove
        in the new category */
@@ -1017,15 +1017,15 @@ baul_property_browser_remove_element (CajaPropertyBrowser *property_browser, Eel
     /* lookup category and get mode, then case out and handle the modes */
     switch (property_browser->details->category_type)
     {
-    case CAJA_PROPERTY_PATTERN:
+    case BAUL_PROPERTY_PATTERN:
         remove_pattern (property_browser, element_name);
         break;
-    case CAJA_PROPERTY_COLOR:
+    case BAUL_PROPERTY_COLOR:
         color_name = eel_labeled_image_get_text (child);
         remove_color (property_browser, color_name);
         g_free (color_name);
         break;
-    case CAJA_PROPERTY_EMBLEM:
+    case BAUL_PROPERTY_EMBLEM:
         remove_emblem (property_browser, element_name);
         break;
     default:
@@ -1154,7 +1154,7 @@ baul_emblem_dialog_new (CajaPropertyBrowser *property_browser)
 
     /* default image is the generic emblem */
     g_free (property_browser->details->image_path);
-    property_browser->details->image_path = g_build_filename (CAJA_PIXMAPDIR, "emblems.png", NULL);
+    property_browser->details->image_path = g_build_filename (BAUL_PIXMAPDIR, "emblems.png", NULL);
 
     /* set up a file chooser to pick the image file */
     label = gtk_label_new_with_mnemonic (_("_Image:"));
@@ -1249,7 +1249,7 @@ add_pattern_to_browser (GtkDialog *dialog, gint response_id, gpointer data)
     char *user_directory;
     GFile *dest, *selected;
 
-    CajaPropertyBrowser *property_browser = CAJA_PROPERTY_BROWSER (data);
+    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
     if (response_id != GTK_RESPONSE_ACCEPT)
     {
@@ -1419,7 +1419,7 @@ add_color_to_file (CajaPropertyBrowser *property_browser, const char *color_spec
 static void
 add_color_to_browser (GtkWidget *widget, gint which_button, gpointer data)
 {
-    CajaPropertyBrowser *property_browser = CAJA_PROPERTY_BROWSER (data);
+    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
     if (which_button == GTK_RESPONSE_OK)
     {
@@ -1458,7 +1458,7 @@ static void
 show_color_selection_window (GtkWidget *widget, gpointer data)
 {
     GdkColor color;
-    CajaPropertyBrowser *property_browser = CAJA_PROPERTY_BROWSER (data);
+    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
     gtk_color_selection_get_current_color (GTK_COLOR_SELECTION
                                            (gtk_color_selection_dialog_get_color_selection (GTK_COLOR_SELECTION_DIALOG (property_browser->details->colors_dialog))),
@@ -1645,13 +1645,13 @@ add_new_button_callback(GtkWidget *widget, CajaPropertyBrowser *property_browser
 
     switch (property_browser->details->category_type)
     {
-    case CAJA_PROPERTY_PATTERN:
+    case BAUL_PROPERTY_PATTERN:
         add_new_pattern (property_browser);
         break;
-    case CAJA_PROPERTY_COLOR:
+    case BAUL_PROPERTY_COLOR:
         add_new_color (property_browser);
         break;
-    case CAJA_PROPERTY_EMBLEM:
+    case BAUL_PROPERTY_EMBLEM:
         add_new_emblem (property_browser);
         break;
     default:
@@ -1663,7 +1663,7 @@ add_new_button_callback(GtkWidget *widget, CajaPropertyBrowser *property_browser
 static void
 done_button_callback (GtkWidget *widget, GtkWidget *property_browser)
 {
-    cancel_remove_mode (CAJA_PROPERTY_BROWSER (property_browser));
+    cancel_remove_mode (BAUL_PROPERTY_BROWSER (property_browser));
     gtk_widget_hide (property_browser);
 }
 
@@ -1726,11 +1726,11 @@ element_clicked_callback (GtkWidget *image_table,
     g_return_if_fail (EEL_IS_IMAGE_TABLE (image_table));
     g_return_if_fail (EEL_IS_LABELED_IMAGE (child));
     g_return_if_fail (event != NULL);
-    g_return_if_fail (CAJA_IS_PROPERTY_BROWSER (callback_data));
+    g_return_if_fail (BAUL_IS_PROPERTY_BROWSER (callback_data));
     g_return_if_fail (g_object_get_data (G_OBJECT (child), "property-name") != NULL);
 
     element_name = g_object_get_data (G_OBJECT (child), "property-name");
-    property_browser = CAJA_PROPERTY_BROWSER (callback_data);
+    property_browser = BAUL_PROPERTY_BROWSER (callback_data);
 
     /* handle remove mode by removing the element */
     if (property_browser->details->remove_mode)
@@ -1817,12 +1817,12 @@ make_properties_from_directories (CajaPropertyBrowser *property_browser)
     GtkWidget *property_image;
     guint num_images;
 
-    g_return_if_fail (CAJA_IS_PROPERTY_BROWSER (property_browser));
+    g_return_if_fail (BAUL_IS_PROPERTY_BROWSER (property_browser));
     g_return_if_fail (EEL_IS_IMAGE_TABLE (property_browser->details->content_table));
 
     image_table = EEL_IMAGE_TABLE (property_browser->details->content_table);
 
-    if (property_browser->details->category_type == CAJA_PROPERTY_EMBLEM)
+    if (property_browser->details->category_type == BAUL_PROPERTY_EMBLEM)
     {
         CajaIconInfo *info = NULL;
 
@@ -1856,8 +1856,8 @@ make_properties_from_directories (CajaPropertyBrowser *property_browser)
                 g_free (object_name);
                 continue;
             }
-            info = baul_icon_info_lookup_from_name (icon_name, CAJA_ICON_SIZE_STANDARD, 1);
-            object_pixbuf = baul_icon_info_get_pixbuf_at_size (info, CAJA_ICON_SIZE_STANDARD);
+            info = baul_icon_info_lookup_from_name (icon_name, BAUL_ICON_SIZE_STANDARD, 1);
+            object_pixbuf = baul_icon_info_get_pixbuf_at_size (info, BAUL_ICON_SIZE_STANDARD);
             object_label = g_strdup (baul_icon_info_get_display_name (info));
             g_object_unref (info);
 
@@ -1911,7 +1911,7 @@ make_properties_from_directories (CajaPropertyBrowser *property_browser)
             gtk_widget_show (property_image);
 
             /* Keep track of ERASE objects to place them prominently later */
-            if (property_browser->details->category_type == CAJA_PROPERTY_PATTERN
+            if (property_browser->details->category_type == BAUL_PROPERTY_PATTERN
                     && !g_strcmp0 (object_name, RESET_IMAGE_NAME))
             {
                 g_assert (reset_object == NULL);
@@ -1935,7 +1935,7 @@ make_properties_from_directories (CajaPropertyBrowser *property_browser)
     /*
      * We place ERASE objects (for emblems) at the end with a blank in between.
      */
-    if (property_browser->details->category_type == CAJA_PROPERTY_EMBLEM)
+    if (property_browser->details->category_type == BAUL_PROPERTY_EMBLEM)
     {
         GtkWidget *blank;
         char *path;
@@ -1998,7 +1998,7 @@ add_reset_property (CajaPropertyBrowser *property_browser)
 
     reset_chit = NULL;
 
-    reset_image_file_name = g_strdup_printf ("%s/%s/%s", CAJA_DATADIR, "patterns", RESET_IMAGE_NAME);
+    reset_image_file_name = g_strdup_printf ("%s/%s/%s", BAUL_DATADIR, "patterns", RESET_IMAGE_NAME);
     reset_pixbuf = gdk_pixbuf_new_from_file (reset_image_file_name, NULL);
     if (reset_pixbuf != NULL && property_browser->details->property_chit != NULL)
     {
@@ -2152,7 +2152,7 @@ make_category_link (CajaPropertyBrowser *property_browser,
     g_return_if_fail (name != NULL);
     g_return_if_fail (image != NULL);
     g_return_if_fail (display_name != NULL);
-    g_return_if_fail (CAJA_IS_PROPERTY_BROWSER (property_browser));
+    g_return_if_fail (BAUL_IS_PROPERTY_BROWSER (property_browser));
 
     button = property_browser_category_button_new (display_name, image);
     gtk_widget_show (button);
@@ -2330,13 +2330,13 @@ baul_property_browser_update_contents (CajaPropertyBrowser *property_browser)
             /* FIXME: Using spaces to add padding is not good design. */
             switch (property_browser->details->category_type)
             {
-            case CAJA_PROPERTY_PATTERN:
+            case BAUL_PROPERTY_PATTERN:
                 text = _("_Add a New Pattern...");
                 break;
-            case CAJA_PROPERTY_COLOR:
+            case BAUL_PROPERTY_COLOR:
                 text = _("_Add a New Color...");
                 break;
-            case CAJA_PROPERTY_EMBLEM:
+            case BAUL_PROPERTY_EMBLEM:
                 text = _("_Add a New Emblem...");
                 break;
             default:
@@ -2362,13 +2362,13 @@ baul_property_browser_update_contents (CajaPropertyBrowser *property_browser)
 
             switch (property_browser->details->category_type)
             {
-            case CAJA_PROPERTY_PATTERN:
+            case BAUL_PROPERTY_PATTERN:
                 label_text = g_strdup (_("Click on a pattern to remove it"));
                 break;
-            case CAJA_PROPERTY_COLOR:
+            case BAUL_PROPERTY_COLOR:
                 label_text = g_strdup (_("Click on a color to remove it"));
                 break;
-            case CAJA_PROPERTY_EMBLEM:
+            case BAUL_PROPERTY_EMBLEM:
                 label_text = g_strdup (_("Click on an emblem to remove it"));
                 break;
             default:
@@ -2380,13 +2380,13 @@ baul_property_browser_update_contents (CajaPropertyBrowser *property_browser)
         {
             switch (property_browser->details->category_type)
             {
-            case CAJA_PROPERTY_PATTERN:
+            case BAUL_PROPERTY_PATTERN:
                 label_text = g_strdup (_("Patterns:"));
                 break;
-            case CAJA_PROPERTY_COLOR:
+            case BAUL_PROPERTY_COLOR:
                 label_text = g_strdup (_("Colors:"));
                 break;
-            case CAJA_PROPERTY_EMBLEM:
+            case BAUL_PROPERTY_EMBLEM:
                 label_text = g_strdup (_("Emblems:"));
                 break;
             default:
@@ -2408,13 +2408,13 @@ baul_property_browser_update_contents (CajaPropertyBrowser *property_browser)
         /* FIXME: Using spaces to add padding is not good design. */
         switch (property_browser->details->category_type)
         {
-        case CAJA_PROPERTY_PATTERN:
+        case BAUL_PROPERTY_PATTERN:
             text = _("_Remove a Pattern...");
             break;
-        case CAJA_PROPERTY_COLOR:
+        case BAUL_PROPERTY_COLOR:
             text = _("_Remove a Color...");
             break;
-        case CAJA_PROPERTY_EMBLEM:
+        case BAUL_PROPERTY_EMBLEM:
             text = _("_Remove an Emblem...");
             break;
         default:
@@ -2452,19 +2452,19 @@ baul_property_browser_set_category (CajaPropertyBrowser *property_browser,
     /* set up the property type enum */
     if (g_strcmp0 (new_category, "patterns") == 0)
     {
-        property_browser->details->category_type = CAJA_PROPERTY_PATTERN;
+        property_browser->details->category_type = BAUL_PROPERTY_PATTERN;
     }
     else if (g_strcmp0 (new_category, "colors") == 0)
     {
-        property_browser->details->category_type = CAJA_PROPERTY_COLOR;
+        property_browser->details->category_type = BAUL_PROPERTY_COLOR;
     }
     else if (g_strcmp0 (new_category, "emblems") == 0)
     {
-        property_browser->details->category_type = CAJA_PROPERTY_EMBLEM;
+        property_browser->details->category_type = BAUL_PROPERTY_EMBLEM;
     }
     else
     {
-        property_browser->details->category_type = CAJA_PROPERTY_NONE;
+        property_browser->details->category_type = BAUL_PROPERTY_NONE;
     }
 
     /* populate the per-uri box with the info */

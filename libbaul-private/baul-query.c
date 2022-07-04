@@ -53,7 +53,7 @@ finalize (GObject *object)
 {
     CajaQuery *query;
 
-    query = CAJA_QUERY (object);
+    query = BAUL_QUERY (object);
 
     g_free (query->details->text);
     g_free (query->details);
@@ -83,7 +83,7 @@ baul_query_init (CajaQuery *query)
 CajaQuery *
 baul_query_new (void)
 {
-    return g_object_new (CAJA_TYPE_QUERY,  NULL);
+    return g_object_new (BAUL_TYPE_QUERY,  NULL);
 }
 
 

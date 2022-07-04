@@ -27,8 +27,8 @@
  * needs information about a file.  They are passed a CajaFileInfo
  * object which should be filled with relevant information */
 
-#ifndef CAJA_INFO_PROVIDER_H
-#define CAJA_INFO_PROVIDER_H
+#ifndef BAUL_INFO_PROVIDER_H
+#define BAUL_INFO_PROVIDER_H
 
 #include <glib-object.h>
 #include "baul-extension-types.h"
@@ -36,10 +36,10 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_INFO_PROVIDER           (baul_info_provider_get_type ())
-#define CAJA_INFO_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_INFO_PROVIDER, CajaInfoProvider))
-#define CAJA_IS_INFO_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_INFO_PROVIDER))
-#define CAJA_INFO_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_INFO_PROVIDER, CajaInfoProviderIface))
+#define BAUL_TYPE_INFO_PROVIDER           (baul_info_provider_get_type ())
+#define BAUL_INFO_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_INFO_PROVIDER, CajaInfoProvider))
+#define BAUL_IS_INFO_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_INFO_PROVIDER))
+#define BAUL_INFO_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_INFO_PROVIDER, CajaInfoProviderIface))
 
 typedef struct _CajaInfoProvider       CajaInfoProvider;
 typedef struct _CajaInfoProviderIface  CajaInfoProviderIface;

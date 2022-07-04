@@ -92,7 +92,7 @@
 #define APPLICATION_WINDOW_MIN_WIDTH	300
 #define APPLICATION_WINDOW_MIN_HEIGHT	100
 
-#define CAJA_ACCEL_MAP_SAVE_DELAY 30
+#define BAUL_ACCEL_MAP_SAVE_DELAY 30
 
 /* Keeps track of all the desktop windows. */
 static GList *baul_application_desktop_windows;
@@ -138,7 +138,7 @@ automount_all_volumes (CajaApplication *application)
 {
     GList *volumes, *l;
 
-    if (g_settings_get_boolean (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTOMOUNT))
+    if (g_settings_get_boolean (baul_media_preferences, BAUL_PREFERENCES_MEDIA_AUTOMOUNT))
     {
         /* automount all mountable volumes at start-up */
 
@@ -229,7 +229,7 @@ open_window (CajaApplication *application,
              const char *geometry,
              gboolean browser_window)
 {
-    CajaApplication *self = CAJA_APPLICATION (application);
+    CajaApplication *self = BAUL_APPLICATION (application);
     CajaWindow *window;
     gchar *uri;
 
@@ -238,11 +238,11 @@ open_window (CajaApplication *application,
 
     /*monitor the preference to use browser or spatial windows */
     /*connect before trying to read or this preference won't be read by root or after change*/
-     g_signal_connect_swapped(baul_preferences, "changed::"CAJA_PREFERENCES_ALWAYS_USE_BROWSER,
+     g_signal_connect_swapped(baul_preferences, "changed::"BAUL_PREFERENCES_ALWAYS_USE_BROWSER,
                       G_CALLBACK (baul_empty_callback_to_ensure_read),
                       self);
 
-    if (browser_window ||g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+    if (browser_window ||g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER)) {
         window = baul_application_create_navigation_window (application,
                  screen);
     } else {
@@ -278,18 +278,18 @@ open_tabs (CajaApplication *application,
            const char *geometry,
            gboolean browser_window)
 {
-    CajaApplication *self = CAJA_APPLICATION (application);
+    CajaApplication *self = BAUL_APPLICATION (application);
     CajaWindow *window;
     gchar *uri = NULL;
 
     /* monitor the preference to use browser or spatial windows */
     /* connect before trying to read or this preference won't be read by root or after change */
     g_signal_connect_swapped (baul_preferences,
-                              "changed::"CAJA_PREFERENCES_ALWAYS_USE_BROWSER,
+                              "changed::"BAUL_PREFERENCES_ALWAYS_USE_BROWSER,
                               G_CALLBACK (baul_empty_callback_to_ensure_read),
                               self);
 
-    if (browser_window ||g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+    if (browser_window ||g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER)) {
         window = baul_application_create_navigation_window (application, screen);
     } else {
         window = baul_application_get_spatial_window (application,
@@ -362,7 +362,7 @@ baul_application_open (GApplication *app,
                        gint n_files,
                        const gchar *options)
 {
-    CajaApplication *self = CAJA_APPLICATION (app);
+    CajaApplication *self = BAUL_APPLICATION (app);
     gboolean browser_window = FALSE;
     gboolean open_in_tabs = FALSE;
     const gchar *geometry = NULL;
@@ -417,7 +417,7 @@ baul_application_open_location (CajaApplication *application,
     }
 
     baul_window_slot_open_location_full (baul_window_get_active_slot (window), location,
-                                         open_in_tabs, CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW,
+                                         open_in_tabs, BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW,
                                          sel_list, NULL, NULL);
 
     if (sel_list != NULL) {
@@ -457,7 +457,7 @@ baul_application_finalize (GObject *object)
 {
     CajaApplication *application;
 
-    application = CAJA_APPLICATION (object);
+    application = BAUL_APPLICATION (object);
 
     baul_bookmarks_exiting ();
 
@@ -511,7 +511,7 @@ check_required_directories (CajaApplication *application)
     GSList *directories;
     gboolean ret;
 
-    g_assert (CAJA_IS_APPLICATION (application));
+    g_assert (BAUL_IS_APPLICATION (application));
 
     ret = TRUE;
 
@@ -595,11 +595,11 @@ menu_provider_init_callback (void)
     GList *providers;
     GList *l;
 
-    providers = baul_extensions_get_for_type (CAJA_TYPE_MENU_PROVIDER);
+    providers = baul_extensions_get_for_type (BAUL_TYPE_MENU_PROVIDER);
 
     for (l = providers; l != NULL; l = l->next)
     {
-        CajaMenuProvider *provider = CAJA_MENU_PROVIDER (l->data);
+        CajaMenuProvider *provider = BAUL_MENU_PROVIDER (l->data);
 
         g_signal_connect_after (G_OBJECT (provider), "items_updated",
                                 (GCallback)menu_provider_items_updated_handler,
@@ -612,7 +612,7 @@ menu_provider_init_callback (void)
 static gboolean
 automount_all_volumes_idle_cb (gpointer data)
 {
-    CajaApplication *application = CAJA_APPLICATION (data);
+    CajaApplication *application = BAUL_APPLICATION (data);
 
     automount_all_volumes (application);
 
@@ -695,7 +695,7 @@ baul_application_create_desktop_windows (CajaApplication *application)
     GtkWidget *selection_widget;
 
     g_return_if_fail (baul_application_desktop_windows == NULL);
-    g_return_if_fail (CAJA_IS_APPLICATION (application));
+    g_return_if_fail (BAUL_IS_APPLICATION (application));
     display = gdk_display_get_default ();
 
     selection_widget = get_desktop_manager_selection (display);
@@ -712,7 +712,7 @@ baul_application_create_desktop_windows (CajaApplication *application)
         g_signal_connect (window, "unrealize",
                           G_CALLBACK (desktop_unrealize_cb), selection_widget);
 
-        /* We realize it immediately so that the CAJA_DESKTOP_WINDOW_ID
+        /* We realize it immediately so that the BAUL_DESKTOP_WINDOW_ID
            property is set so mate-settings-daemon doesn't try to set the
            background. And we do a gdk_display_flush() to be sure X gets it. */
         gtk_widget_realize (GTK_WIDGET (window));
@@ -754,9 +754,9 @@ baul_application_close_all_navigation_windows (CajaApplication *self)
     {
         CajaWindow *window;
 
-        window = CAJA_WINDOW (l->data);
+        window = BAUL_WINDOW (l->data);
 
-        if (CAJA_IS_NAVIGATION_WINDOW (window))
+        if (BAUL_IS_NAVIGATION_WINDOW (window))
         {
             gtk_widget_hide (GTK_WIDGET (window));
         }
@@ -766,9 +766,9 @@ baul_application_close_all_navigation_windows (CajaApplication *self)
     {
         CajaWindow *window;
 
-        window = CAJA_WINDOW (l->data);
+        window = BAUL_WINDOW (l->data);
 
-        if (CAJA_IS_NAVIGATION_WINDOW (window))
+        if (BAUL_IS_NAVIGATION_WINDOW (window))
         {
             baul_window_close (window);
         }
@@ -785,7 +785,7 @@ baul_application_get_existing_spatial_window (GFile *location)
 
     for (l = baul_application_get_spatial_window_list ();
             l != NULL; l = l->next) {
-        slot = CAJA_WINDOW (l->data)->details->active_pane->active_slot;
+        slot = BAUL_WINDOW (l->data)->details->active_pane->active_slot;
 
         window_location = slot->pending_location;
 
@@ -795,7 +795,7 @@ baul_application_get_existing_spatial_window (GFile *location)
 
         if (window_location != NULL) {
         	if (g_file_equal (location, window_location)) {
-            	return CAJA_SPATIAL_WINDOW (l->data);
+            	return BAUL_SPATIAL_WINDOW (l->data);
             }
         }
     }
@@ -811,7 +811,7 @@ find_parent_spatial_window (CajaSpatialWindow *window)
     CajaWindowSlot *slot;
     GFile *location;
 
-    slot = CAJA_WINDOW (window)->details->active_pane->active_slot;
+    slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
 
     location = slot->location;
     if (location == NULL)
@@ -863,7 +863,7 @@ baul_application_close_parent_windows (CajaSpatialWindow *window)
     CajaSpatialWindow *parent_window;
     CajaSpatialWindow *new_parent_window;
 
-    g_return_if_fail (CAJA_IS_SPATIAL_WINDOW (window));
+    g_return_if_fail (BAUL_IS_SPATIAL_WINDOW (window));
 
     parent_window = find_parent_spatial_window (window);
 
@@ -871,7 +871,7 @@ baul_application_close_parent_windows (CajaSpatialWindow *window)
     {
 
         new_parent_window = find_parent_spatial_window (parent_window);
-        baul_window_close (CAJA_WINDOW (parent_window));
+        baul_window_close (BAUL_WINDOW (parent_window));
         parent_window = new_parent_window;
     }
 }
@@ -888,9 +888,9 @@ baul_application_close_all_spatial_windows (void)
     {
         CajaWindow *window;
 
-        window = CAJA_WINDOW (l->data);
+        window = BAUL_WINDOW (l->data);
 
-        if (CAJA_IS_SPATIAL_WINDOW (window))
+        if (BAUL_IS_SPATIAL_WINDOW (window))
         {
             gtk_widget_hide (GTK_WIDGET (window));
         }
@@ -900,9 +900,9 @@ baul_application_close_all_spatial_windows (void)
     {
         CajaWindow *window;
 
-        window = CAJA_WINDOW (l->data);
+        window = BAUL_WINDOW (l->data);
 
-        if (CAJA_IS_SPATIAL_WINDOW (window))
+        if (BAUL_IS_SPATIAL_WINDOW (window))
         {
             baul_window_close (window);
         }
@@ -917,7 +917,7 @@ baul_window_delete_event_callback (GtkWidget *widget,
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (widget);
+    window = BAUL_WINDOW (widget);
     baul_window_close (window);
 
     return TRUE;
@@ -931,9 +931,9 @@ create_window (CajaApplication *application,
 {
     CajaWindow *window;
 
-    g_return_val_if_fail (CAJA_IS_APPLICATION (application), NULL);
+    g_return_val_if_fail (BAUL_IS_APPLICATION (application), NULL);
 
-    window = CAJA_WINDOW (gtk_widget_new (window_type,
+    window = BAUL_WINDOW (gtk_widget_new (window_type,
                                           "app", application,
                                           "screen", screen,
                                           NULL));
@@ -970,8 +970,8 @@ baul_application_get_spatial_window (CajaApplication *application,
     CajaWindow *window;
     gchar *uri;
 
-    g_return_val_if_fail (CAJA_IS_APPLICATION (application), NULL);
-    window = CAJA_WINDOW
+    g_return_val_if_fail (BAUL_IS_APPLICATION (application), NULL);
+    window = BAUL_WINDOW
     		(baul_application_get_existing_spatial_window (location));
 
 	if (window != NULL) {
@@ -985,7 +985,7 @@ baul_application_get_spatial_window (CajaApplication *application,
 	if (existing != NULL) {
 		*existing = FALSE;
 	}
-    window = create_window (application, CAJA_TYPE_SPATIAL_WINDOW, screen);
+    window = create_window (application, BAUL_TYPE_SPATIAL_WINDOW, screen);
 
     if (requesting_window)
     {
@@ -1017,7 +1017,7 @@ baul_application_get_spatial_window (CajaApplication *application,
                        spatial_window_destroyed_callback, NULL);
 
     uri = g_file_get_uri (location);
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                     "present NEW spatial window=%p: %s",
                     window, uri);
     g_free (uri);
@@ -1033,11 +1033,11 @@ baul_application_create_navigation_window (CajaApplication *application,
     char *geometry_string;
     gboolean maximized;
 
-    g_return_val_if_fail (CAJA_IS_APPLICATION (application), NULL);
-    window = create_window (application, CAJA_TYPE_NAVIGATION_WINDOW, screen);
+    g_return_val_if_fail (BAUL_IS_APPLICATION (application), NULL);
+    window = create_window (application, BAUL_TYPE_NAVIGATION_WINDOW, screen);
 
     maximized = g_settings_get_boolean (baul_window_state,
-                    CAJA_WINDOW_STATE_MAXIMIZED);
+                    BAUL_WINDOW_STATE_MAXIMIZED);
     if (maximized)
     {
         gtk_window_maximize (GTK_WINDOW (window));
@@ -1048,20 +1048,20 @@ baul_application_create_navigation_window (CajaApplication *application,
     }
 
     geometry_string = g_settings_get_string (baul_window_state,
-                        CAJA_WINDOW_STATE_GEOMETRY);
+                        BAUL_WINDOW_STATE_GEOMETRY);
     if (geometry_string != NULL &&
             geometry_string[0] != 0)
     {
         eel_gtk_window_set_initial_geometry_from_string
         (GTK_WINDOW (window),
          geometry_string,
-         CAJA_NAVIGATION_WINDOW_MIN_WIDTH,
-         CAJA_NAVIGATION_WINDOW_MIN_HEIGHT,
+         BAUL_NAVIGATION_WINDOW_MIN_WIDTH,
+         BAUL_NAVIGATION_WINDOW_MIN_HEIGHT,
          TRUE);
     }
     g_free (geometry_string);
 
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                     "create new navigation window=%p",
                     window);
 
@@ -1074,7 +1074,7 @@ desktop_changed_callback (gpointer user_data)
 {
     CajaApplication *application;
 
-    application = CAJA_APPLICATION (user_data);
+    application = BAUL_APPLICATION (user_data);
     if (g_settings_get_boolean (mate_background_preferences, MATE_BG_KEY_SHOW_DESKTOP))
     {
         baul_application_open_desktop (application);
@@ -1088,7 +1088,7 @@ desktop_changed_callback (gpointer user_data)
 static gboolean
 window_can_be_closed (CajaWindow *window)
 {
-    if (!CAJA_IS_DESKTOP_WINDOW (window))
+    if (!BAUL_IS_DESKTOP_WINDOW (window))
     {
         return TRUE;
     }
@@ -1129,7 +1129,7 @@ volume_added_callback (GVolumeMonitor *monitor,
                        GVolume *volume,
                        CajaApplication *application)
 {
-    if (g_settings_get_boolean (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTOMOUNT) &&
+    if (g_settings_get_boolean (baul_media_preferences, BAUL_PREFERENCES_MEDIA_AUTOMOUNT) &&
             g_volume_should_automount (volume) &&
             g_volume_can_mount (volume))
     {
@@ -1210,7 +1210,7 @@ autorun_show_window (GMount *mount, gpointer user_data)
     location = g_mount_get_root (mount);
 
     /* There should probably be an easier way to do this */
-    if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+    if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER)) {
         window = baul_application_create_navigation_window (application,
                                                             gdk_screen_get_default ());
     }
@@ -1260,7 +1260,7 @@ get_first_navigation_slot (GList *slot_list)
 
     for (l = slot_list; l != NULL; l = l->next)
     {
-        if (CAJA_IS_NAVIGATION_WINDOW_SLOT (l->data))
+        if (BAUL_IS_NAVIGATION_WINDOW_SLOT (l->data))
         {
             return l->data;
         }
@@ -1275,11 +1275,11 @@ should_close_slot_with_mount (CajaWindow *window,
                               CajaWindowSlot *slot,
                               GMount *mount)
 {
-    if (CAJA_IS_SPATIAL_WINDOW (window))
+    if (BAUL_IS_SPATIAL_WINDOW (window))
     {
         return TRUE;
     }
-    return baul_navigation_window_slot_should_close_with_mount (CAJA_NAVIGATION_WINDOW_SLOT (slot),
+    return baul_navigation_window_slot_should_close_with_mount (BAUL_NAVIGATION_WINDOW_SLOT (slot),
             mount);
 }
 
@@ -1312,7 +1312,7 @@ mount_removed_callback (GVolumeMonitor *monitor,
     /* Construct a list of windows to be closed. Do not add the non-closable windows to the list. */
     for (node = window_list; node != NULL; node = node->next)
     {
-        window = CAJA_WINDOW (node->data);
+        window = BAUL_WINDOW (node->data);
         if (window != NULL && window_can_be_closed (window))
         {
             GList *l;
@@ -1460,9 +1460,9 @@ baul_application_get_session_data (CajaApplication *self)
         xmlNewProp (win_node, "location", tmp);
         g_free (tmp);
 
-        xmlNewProp (win_node, "type", CAJA_IS_NAVIGATION_WINDOW (window) ? "navigation" : "spatial");
+        xmlNewProp (win_node, "type", BAUL_IS_NAVIGATION_WINDOW (window) ? "navigation" : "spatial");
 
-        if (CAJA_IS_NAVIGATION_WINDOW (window)) { /* spatial windows store their state as file metadata */
+        if (BAUL_IS_NAVIGATION_WINDOW (window)) { /* spatial windows store their state as file metadata */
             GdkWindow *gdk_window;
 
             tmp = eel_gtk_window_get_geometry_string (GTK_WINDOW (window));
@@ -1488,7 +1488,7 @@ baul_application_get_session_data (CajaApplication *self)
         }
 
         for (m = slots; m != NULL; m = m->next) {
-            slot = CAJA_WINDOW_SLOT (m->data);
+            slot = BAUL_WINDOW_SLOT (m->data);
 
             slot_node = xmlNewChild (win_node, NULL, "slot", NULL);
 
@@ -1661,8 +1661,8 @@ baul_application_load_session (CajaApplication *application)
                         eel_gtk_window_set_initial_geometry_from_string
                         (GTK_WINDOW (window),
                          geometry,
-                         CAJA_NAVIGATION_WINDOW_MIN_WIDTH,
-                         CAJA_NAVIGATION_WINDOW_MIN_HEIGHT,
+                         BAUL_NAVIGATION_WINDOW_MIN_WIDTH,
+                         BAUL_NAVIGATION_WINDOW_MIN_HEIGHT,
                          FALSE);
                     }
                     xmlFree (geometry);
@@ -1711,7 +1711,7 @@ baul_application_load_session (CajaApplication *application)
                                 }
                                 else
                                 {
-                                    slot = baul_window_open_slot (window->details->active_pane, CAJA_WINDOW_OPEN_SLOT_APPEND);
+                                    slot = baul_window_open_slot (window->details->active_pane, BAUL_WINDOW_OPEN_SLOT_APPEND);
                                 }
 
                                 location = g_file_new_for_uri (slot_uri);
@@ -1815,7 +1815,7 @@ do_cmdline_sanity_checks (CajaApplication *self,
 static void
 do_perform_self_checks (gint *exit_status)
 {
-#ifndef CAJA_OMIT_SELF_CHECK
+#ifndef BAUL_OMIT_SELF_CHECK
     /* Run the checks (each twice) for baul and libbaul-private. */
 
     baul_run_self_checks ();
@@ -1857,14 +1857,14 @@ baul_application_local_command_line (GApplication *application,
     const gchar *autostart_id;
     gboolean no_default_window = FALSE;
     gchar **remaining = NULL;
-    CajaApplication *self = CAJA_APPLICATION (application);
+    CajaApplication *self = BAUL_APPLICATION (application);
 
     /*First set these FALSE */
     self->priv->force_desktop = FALSE;
     self->priv->no_desktop = FALSE;
 
     const GOptionEntry options[] = {
-#ifndef CAJA_OMIT_SELF_CHECK
+#ifndef BAUL_OMIT_SELF_CHECK
         { "check", 'c', 0, G_OPTION_ARG_NONE, &perform_self_check,
           N_("Perform a quick set of self-check tests."), NULL },
 #endif
@@ -2031,7 +2031,7 @@ load_custom_css (GtkCssProvider *provider,
                  guint priority)
 {
     GError *error = NULL;
-    gchar *path = g_build_filename (CAJA_DATADIR, filename, NULL);
+    gchar *path = g_build_filename (BAUL_DATADIR, filename, NULL);
 
     if (provider)
         g_object_ref (provider);
@@ -2065,7 +2065,7 @@ reload_theme_css (GtkSettings    *settings,
 
     g_object_get (settings, "gtk-theme-name", &theme_name, NULL);
     css_theme_name = g_strconcat ("baul-desktop-", theme_name, ".css", NULL);
-    path = g_build_filename (CAJA_DATADIR, css_theme_name, NULL);
+    path = g_build_filename (BAUL_DATADIR, css_theme_name, NULL);
 
     if (g_file_test (path, G_FILE_TEST_EXISTS))
         load_custom_css (provider, css_theme_name, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -2095,7 +2095,7 @@ init_icons_and_styles (void)
 
     /* initialize search path for custom icons */
     gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-                       CAJA_DATADIR G_DIR_SEPARATOR_S "icons");
+                       BAUL_DATADIR G_DIR_SEPARATOR_S "icons");
 }
 
 static void
@@ -2149,7 +2149,7 @@ queue_accel_map_save_callback (GtkAccelMap *object, gchar *accel_path,
 {
     if (!save_of_accel_map_requested) {
         save_of_accel_map_requested = TRUE;
-        g_timeout_add_seconds (CAJA_ACCEL_MAP_SAVE_DELAY,
+        g_timeout_add_seconds (BAUL_ACCEL_MAP_SAVE_DELAY,
                 baul_application_save_accel_map, NULL);
     }
 }
@@ -2174,7 +2174,7 @@ init_gtk_accels (void)
 static void
 baul_application_startup (GApplication *app)
 {
-    CajaApplication *self = CAJA_APPLICATION (app);
+    CajaApplication *self = BAUL_APPLICATION (app);
     gboolean exit_with_last_window;
     exit_with_last_window = TRUE;
 
@@ -2267,7 +2267,7 @@ baul_application_startup (GApplication *app)
         GApplication *instance;
 
         exit_with_last_window = g_settings_get_boolean (baul_preferences,
-                                CAJA_PREFERENCES_EXIT_WITH_LAST_WINDOW);
+                                BAUL_PREFERENCES_EXIT_WITH_LAST_WINDOW);
         /*Keep this inside the running as mate/not as root block */
         /*So other desktop don't get unkillable baul instances holding open */
         instance = g_application_get_default ();
@@ -2307,7 +2307,7 @@ baul_application_class_init (CajaApplicationClass *class)
 CajaApplication *
 baul_application_new (void)
 {
-        return g_object_new (CAJA_TYPE_APPLICATION,
+        return g_object_new (BAUL_TYPE_APPLICATION,
                     "application-id", "org.mate.Caja",
                     "register-session", TRUE,
                     "flags", G_APPLICATION_HANDLES_OPEN,

@@ -22,8 +22,8 @@
    Authors: Dave Camp <dave@ximian.com>
 */
 
-#ifndef CAJA_COLUMN_UTILITIES_H
-#define CAJA_COLUMN_UTILITIES_H
+#ifndef BAUL_COLUMN_UTILITIES_H
+#define BAUL_COLUMN_UTILITIES_H
 
 #include <libbaul-extension/baul-column.h>
 
@@ -39,4 +39,4 @@ GList *baul_sort_columns          (GList       *columns,
                                    char       **column_order);
 
 
-#endif /* CAJA_COLUMN_UTILITIES_H */
+#endif /* BAUL_COLUMN_UTILITIES_H */

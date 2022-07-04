@@ -22,8 +22,8 @@
    Author: Darin Adler <darin@bentspoon.com>
 */
 
-#ifndef CAJA_DIRECTORY_H
-#define CAJA_DIRECTORY_H
+#ifndef BAUL_DIRECTORY_H
+#define BAUL_DIRECTORY_H
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
@@ -44,21 +44,21 @@ G_BEGIN_DECLS
           operations on files.
 */
 
-#define CAJA_TYPE_DIRECTORY baul_directory_get_type()
-#define CAJA_DIRECTORY(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DIRECTORY, CajaDirectory))
-#define CAJA_DIRECTORY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_DIRECTORY, CajaDirectoryClass))
-#define CAJA_IS_DIRECTORY(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_DIRECTORY))
-#define CAJA_IS_DIRECTORY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_DIRECTORY))
-#define CAJA_DIRECTORY_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_DIRECTORY, CajaDirectoryClass))
+#define BAUL_TYPE_DIRECTORY baul_directory_get_type()
+#define BAUL_DIRECTORY(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DIRECTORY, CajaDirectory))
+#define BAUL_DIRECTORY_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DIRECTORY, CajaDirectoryClass))
+#define BAUL_IS_DIRECTORY(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_DIRECTORY))
+#define BAUL_IS_DIRECTORY_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_DIRECTORY))
+#define BAUL_DIRECTORY_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DIRECTORY, CajaDirectoryClass))
 
 /* CajaFile is defined both here and in baul-file.h. */
-#ifndef CAJA_FILE_DEFINED
-#define CAJA_FILE_DEFINED
+#ifndef BAUL_FILE_DEFINED
+#define BAUL_FILE_DEFINED
 typedef struct CajaFile CajaFile;
 #endif
 
@@ -238,4 +238,4 @@ gboolean           baul_directory_is_editable              (CajaDirectory       
 
 G_END_DECLS
 
-#endif /* CAJA_DIRECTORY_H */
+#endif /* BAUL_DIRECTORY_H */

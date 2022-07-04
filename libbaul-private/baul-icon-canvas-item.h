@@ -22,25 +22,25 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef CAJA_ICON_CANVAS_ITEM_H
-#define CAJA_ICON_CANVAS_ITEM_H
+#ifndef BAUL_ICON_CANVAS_ITEM_H
+#define BAUL_ICON_CANVAS_ITEM_H
 
 #include <eel/eel-canvas.h>
 #include <eel/eel-art-extensions.h>
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_ICON_CANVAS_ITEM baul_icon_canvas_item_get_type()
-#define CAJA_ICON_CANVAS_ITEM(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ICON_CANVAS_ITEM, CajaIconCanvasItem))
-#define CAJA_ICON_CANVAS_ITEM_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_ICON_CANVAS_ITEM, CajaIconCanvasItemClass))
-#define CAJA_IS_ICON_CANVAS_ITEM(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_ICON_CANVAS_ITEM))
-#define CAJA_IS_ICON_CANVAS_ITEM_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_ICON_CANVAS_ITEM))
-#define CAJA_ICON_CANVAS_ITEM_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_ICON_CANVAS_ITEM, CajaIconCanvasItemClass))
+#define BAUL_TYPE_ICON_CANVAS_ITEM baul_icon_canvas_item_get_type()
+#define BAUL_ICON_CANVAS_ITEM(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ICON_CANVAS_ITEM, CajaIconCanvasItem))
+#define BAUL_ICON_CANVAS_ITEM_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ICON_CANVAS_ITEM, CajaIconCanvasItemClass))
+#define BAUL_IS_ICON_CANVAS_ITEM(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_ICON_CANVAS_ITEM))
+#define BAUL_IS_ICON_CANVAS_ITEM_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_ICON_CANVAS_ITEM))
+#define BAUL_ICON_CANVAS_ITEM_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ICON_CANVAS_ITEM, CajaIconCanvasItemClass))
 
     typedef struct CajaIconCanvasItem CajaIconCanvasItem;
     typedef struct CajaIconCanvasItemClass CajaIconCanvasItemClass;
@@ -116,4 +116,4 @@ G_BEGIN_DECLS
 
 G_END_DECLS
 
-#endif /* CAJA_ICON_CANVAS_ITEM_H */
+#endif /* BAUL_ICON_CANVAS_ITEM_H */

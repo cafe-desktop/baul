@@ -22,8 +22,8 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_SIDEBAR_PROVIDER_H
-#define CAJA_SIDEBAR_PROVIDER_H
+#ifndef BAUL_SIDEBAR_PROVIDER_H
+#define BAUL_SIDEBAR_PROVIDER_H
 
 #include "baul-sidebar.h"
 #include "baul-window-info.h"
@@ -32,10 +32,10 @@
 extern "C" {
 #endif
 
-#define CAJA_TYPE_SIDEBAR_PROVIDER           (baul_sidebar_provider_get_type ())
-#define CAJA_SIDEBAR_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SIDEBAR_PROVIDER, CajaSidebarProvider))
-#define CAJA_IS_SIDEBAR_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SIDEBAR_PROVIDER))
-#define CAJA_SIDEBAR_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_SIDEBAR_PROVIDER, CajaSidebarProviderIface))
+#define BAUL_TYPE_SIDEBAR_PROVIDER           (baul_sidebar_provider_get_type ())
+#define BAUL_SIDEBAR_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR_PROVIDER, CajaSidebarProvider))
+#define BAUL_IS_SIDEBAR_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SIDEBAR_PROVIDER))
+#define BAUL_SIDEBAR_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_SIDEBAR_PROVIDER, CajaSidebarProviderIface))
 
     typedef struct _CajaSidebarProvider       CajaSidebarProvider;
     typedef struct _CajaSidebarProviderIface  CajaSidebarProviderIface;
@@ -58,4 +58,4 @@ extern "C" {
 }
 #endif
 
-#endif /* CAJA_SIDEBAR_PROVIDER_H */
+#endif /* BAUL_SIDEBAR_PROVIDER_H */

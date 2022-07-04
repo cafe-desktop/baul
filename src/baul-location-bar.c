@@ -54,8 +54,8 @@
 #include "baul-window.h"
 #include "baul-navigation-window-pane.h"
 
-#define CAJA_DND_URI_LIST_TYPE 	  "text/uri-list"
-#define CAJA_DND_TEXT_PLAIN_TYPE 	  "text/plain"
+#define BAUL_DND_URI_LIST_TYPE 	  "text/uri-list"
+#define BAUL_DND_TEXT_PLAIN_TYPE 	  "text/plain"
 
 static const char untranslated_location_label[] = N_("Location:");
 static const char untranslated_go_to_label[] = N_("Go To:");
@@ -74,10 +74,10 @@ struct _CajaLocationBarPrivate
 
 enum
 {
-    CAJA_DND_MC_DESKTOP_ICON,
-    CAJA_DND_URI_LIST,
-    CAJA_DND_TEXT_PLAIN,
-    CAJA_DND_NTARGETS
+    BAUL_DND_MC_DESKTOP_ICON,
+    BAUL_DND_URI_LIST,
+    BAUL_DND_TEXT_PLAIN,
+    BAUL_DND_NTARGETS
 };
 
 enum {
@@ -90,14 +90,14 @@ static guint signals[LAST_SIGNAL];
 
 static const GtkTargetEntry drag_types [] =
 {
-    { CAJA_DND_URI_LIST_TYPE,   0, CAJA_DND_URI_LIST },
-    { CAJA_DND_TEXT_PLAIN_TYPE, 0, CAJA_DND_TEXT_PLAIN },
+    { BAUL_DND_URI_LIST_TYPE,   0, BAUL_DND_URI_LIST },
+    { BAUL_DND_TEXT_PLAIN_TYPE, 0, BAUL_DND_TEXT_PLAIN },
 };
 
 static const GtkTargetEntry drop_types [] =
 {
-    { CAJA_DND_URI_LIST_TYPE,   0, CAJA_DND_URI_LIST },
-    { CAJA_DND_TEXT_PLAIN_TYPE, 0, CAJA_DND_TEXT_PLAIN },
+    { BAUL_DND_URI_LIST_TYPE,   0, BAUL_DND_URI_LIST },
+    { BAUL_DND_TEXT_PLAIN_TYPE, 0, BAUL_DND_TEXT_PLAIN },
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (CajaLocationBar, baul_location_bar, GTK_TYPE_BOX);
@@ -105,7 +105,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (CajaLocationBar, baul_location_bar, GTK_TYPE_BOX);
 static CajaNavigationWindow *
 baul_location_bar_get_window (GtkWidget *bar)
 {
-    return CAJA_NAVIGATION_WINDOW (gtk_widget_get_ancestor (bar, CAJA_TYPE_WINDOW));
+    return BAUL_NAVIGATION_WINDOW (gtk_widget_get_ancestor (bar, BAUL_TYPE_WINDOW));
 }
 
 /**
@@ -160,7 +160,7 @@ drag_data_received_callback (GtkWidget *widget,
     int name_count;
     CajaNavigationWindow *window;
     gboolean new_windows_for_extras;
-    CajaLocationBar *self = CAJA_LOCATION_BAR (widget);
+    CajaLocationBar *self = BAUL_LOCATION_BAR (widget);
 
     g_assert (data != NULL);
     g_assert (callback_data == NULL);
@@ -228,7 +228,7 @@ drag_data_received_callback (GtkWidget *widget,
         CajaWindow *new_window = NULL;
         GFile *location = NULL;
 
-        application = CAJA_WINDOW (window)->application;
+        application = BAUL_WINDOW (window)->application;
         screen = gtk_window_get_screen (GTK_WINDOW (window));
 
         for (i = 1; names[i] != NULL; ++i)
@@ -264,8 +264,8 @@ drag_data_get_callback (GtkWidget *widget,
 
     switch (info)
     {
-    case CAJA_DND_URI_LIST:
-    case CAJA_DND_TEXT_PLAIN:
+    case BAUL_DND_URI_LIST:
+    case BAUL_DND_TEXT_PLAIN:
         gtk_selection_data_set (selection_data,
                                 gtk_selection_data_get_target (selection_data),
                                 8, (guchar *) entry_text,
@@ -328,7 +328,7 @@ label_button_pressed_callback (GtkWidget             *widget,
     }
 
     window = baul_location_bar_get_window (gtk_widget_get_parent (widget));
-    slot = CAJA_WINDOW (window)->details->active_pane->active_slot;
+    slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
     view = slot->content_view;
     label = gtk_bin_get_child (GTK_BIN (widget));
     /* only pop-up if the URI in the entry matches the displayed location */
@@ -372,8 +372,8 @@ baul_location_bar_update_label (CajaLocationBar *bar)
 
     if (bar->details->last_location == NULL){
         gtk_label_set_text (GTK_LABEL (bar->details->label), GO_TO_LABEL);
-        baul_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
-                                                  CAJA_LOCATION_ENTRY_ACTION_GOTO);
+        baul_location_entry_set_secondary_action (BAUL_LOCATION_ENTRY (bar->details->entry),
+                                                  BAUL_LOCATION_ENTRY_ACTION_GOTO);
         return;
     }
 
@@ -383,12 +383,12 @@ baul_location_bar_update_label (CajaLocationBar *bar)
 
     if (g_file_equal (last_location, location)) {
         gtk_label_set_text (GTK_LABEL (bar->details->label), LOCATION_LABEL);
-        baul_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
-                                                  CAJA_LOCATION_ENTRY_ACTION_CLEAR);
+        baul_location_entry_set_secondary_action (BAUL_LOCATION_ENTRY (bar->details->entry),
+                                                  BAUL_LOCATION_ENTRY_ACTION_CLEAR);
     } else {
         gtk_label_set_text (GTK_LABEL (bar->details->label), GO_TO_LABEL);
-        baul_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
-                                                  CAJA_LOCATION_ENTRY_ACTION_GOTO);
+        baul_location_entry_set_secondary_action (BAUL_LOCATION_ENTRY (bar->details->entry),
+                                                  BAUL_LOCATION_ENTRY_ACTION_GOTO);
     }
 
     g_object_unref (location);
@@ -399,7 +399,7 @@ static void
 editable_changed_callback (GtkEntry *entry,
                            gpointer user_data)
 {
-    baul_location_bar_update_label (CAJA_LOCATION_BAR (user_data));
+    baul_location_bar_update_label (BAUL_LOCATION_BAR (user_data));
 }
 
 void
@@ -426,7 +426,7 @@ finalize (GObject *object)
 {
     CajaLocationBar *bar;
 
-    bar = CAJA_LOCATION_BAR (object);
+    bar = BAUL_LOCATION_BAR (object);
 
     /* cancel the pending idle call, if any */
     if (bar->details->idle_id != 0)
@@ -532,7 +532,7 @@ baul_location_bar_init (CajaLocationBar *bar)
                       G_CALLBACK (drag_data_received_callback), NULL);
 
     bar->details->label = GTK_LABEL (label);
-    bar->details->entry = CAJA_ENTRY (entry);
+    bar->details->entry = BAUL_ENTRY (entry);
 
     gtk_widget_show_all (GTK_WIDGET (bar));
 }
@@ -543,13 +543,13 @@ baul_location_bar_new (CajaNavigationWindowPane *pane)
     GtkWidget *bar;
     CajaLocationBar *location_bar;
 
-    bar = gtk_widget_new (CAJA_TYPE_LOCATION_BAR, NULL);
-    location_bar = CAJA_LOCATION_BAR (bar);
+    bar = gtk_widget_new (BAUL_TYPE_LOCATION_BAR, NULL);
+    location_bar = BAUL_LOCATION_BAR (bar);
 
     /* Clipboard */
     baul_clipboard_set_up_editable
     (GTK_EDITABLE (location_bar->details->entry),
-     baul_window_get_ui_manager (CAJA_WINDOW (CAJA_WINDOW_PANE(pane)->window)),
+     baul_window_get_ui_manager (BAUL_WINDOW (BAUL_WINDOW_PANE(pane)->window)),
      TRUE);
 
     return bar;
@@ -566,7 +566,7 @@ baul_location_bar_set_location (CajaLocationBar *bar,
 
     if (eel_uri_is_search (location))
     {
-        baul_location_entry_set_special_text (CAJA_LOCATION_ENTRY (bar->details->entry),
+        baul_location_entry_set_special_text (BAUL_LOCATION_ENTRY (bar->details->entry),
                                               "");
     }
     else
@@ -577,7 +577,7 @@ baul_location_bar_set_location (CajaLocationBar *bar,
         file = g_file_new_for_uri (location);
         formatted_location = g_file_get_parse_name (file);
         g_object_unref (file);
-        baul_location_entry_update_current_location (CAJA_LOCATION_ENTRY (bar->details->entry),
+        baul_location_entry_update_current_location (BAUL_LOCATION_ENTRY (bar->details->entry),
                 formatted_location);
         g_free (formatted_location);
     }

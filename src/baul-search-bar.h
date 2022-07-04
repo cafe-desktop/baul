@@ -21,8 +21,8 @@
  *
  */
 
-#ifndef CAJA_SEARCH_BAR_H
-#define CAJA_SEARCH_BAR_H
+#ifndef BAUL_SEARCH_BAR_H
+#define BAUL_SEARCH_BAR_H
 
 #include <gtk/gtk.h>
 
@@ -30,17 +30,17 @@
 
 #include "baul-window.h"
 
-#define CAJA_TYPE_SEARCH_BAR baul_search_bar_get_type()
-#define CAJA_SEARCH_BAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_BAR, CajaSearchBar))
-#define CAJA_SEARCH_BAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SEARCH_BAR, CajaSearchBarClass))
-#define CAJA_IS_SEARCH_BAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SEARCH_BAR))
-#define CAJA_IS_SEARCH_BAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SEARCH_BAR))
-#define CAJA_SEARCH_BAR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SEARCH_BAR, CajaSearchBarClass))
+#define BAUL_TYPE_SEARCH_BAR baul_search_bar_get_type()
+#define BAUL_SEARCH_BAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_BAR, CajaSearchBar))
+#define BAUL_SEARCH_BAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_BAR, CajaSearchBarClass))
+#define BAUL_IS_SEARCH_BAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_BAR))
+#define BAUL_IS_SEARCH_BAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_BAR))
+#define BAUL_SEARCH_BAR_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_BAR, CajaSearchBarClass))
 
 typedef struct CajaSearchBarDetails CajaSearchBarDetails;
 
@@ -68,4 +68,4 @@ void           baul_search_bar_grab_focus    (CajaSearchBar *bar);
 CajaQuery *baul_search_bar_get_query     (CajaSearchBar *bar);
 void           baul_search_bar_clear         (CajaSearchBar *bar);
 
-#endif /* CAJA_SEARCH_BAR_H */
+#endif /* BAUL_SEARCH_BAR_H */

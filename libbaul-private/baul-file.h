@@ -22,8 +22,8 @@
    Author: Darin Adler <darin@bentspoon.com>
 */
 
-#ifndef CAJA_FILE_H
-#define CAJA_FILE_H
+#ifndef BAUL_FILE_H
+#define BAUL_FILE_H
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
@@ -39,69 +39,69 @@ G_BEGIN_DECLS
  */
 
 /* CajaFile is defined both here and in baul-directory.h. */
-#ifndef CAJA_FILE_DEFINED
-#define CAJA_FILE_DEFINED
+#ifndef BAUL_FILE_DEFINED
+#define BAUL_FILE_DEFINED
 typedef struct CajaFile CajaFile;
 #endif
 
-#define CAJA_TYPE_FILE baul_file_get_type()
-#define CAJA_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_FILE, CajaFile))
-#define CAJA_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_FILE, CajaFileClass))
-#define CAJA_IS_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_FILE))
-#define CAJA_IS_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_FILE))
-#define CAJA_FILE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_FILE, CajaFileClass))
+#define BAUL_TYPE_FILE baul_file_get_type()
+#define BAUL_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_FILE, CajaFile))
+#define BAUL_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_FILE, CajaFileClass))
+#define BAUL_IS_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_FILE))
+#define BAUL_IS_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_FILE))
+#define BAUL_FILE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_FILE, CajaFileClass))
 
 typedef enum
 {
-    CAJA_FILE_SORT_NONE,
-    CAJA_FILE_SORT_BY_DISPLAY_NAME,
-    CAJA_FILE_SORT_BY_DIRECTORY,
-    CAJA_FILE_SORT_BY_SIZE,
-    CAJA_FILE_SORT_BY_TYPE,
-    CAJA_FILE_SORT_BY_MTIME,
-    CAJA_FILE_SORT_BY_ATIME,
-    CAJA_FILE_SORT_BY_EMBLEMS,
-    CAJA_FILE_SORT_BY_TRASHED_TIME,
-    CAJA_FILE_SORT_BY_SIZE_ON_DISK,
-    CAJA_FILE_SORT_BY_EXTENSION
+    BAUL_FILE_SORT_NONE,
+    BAUL_FILE_SORT_BY_DISPLAY_NAME,
+    BAUL_FILE_SORT_BY_DIRECTORY,
+    BAUL_FILE_SORT_BY_SIZE,
+    BAUL_FILE_SORT_BY_TYPE,
+    BAUL_FILE_SORT_BY_MTIME,
+    BAUL_FILE_SORT_BY_ATIME,
+    BAUL_FILE_SORT_BY_EMBLEMS,
+    BAUL_FILE_SORT_BY_TRASHED_TIME,
+    BAUL_FILE_SORT_BY_SIZE_ON_DISK,
+    BAUL_FILE_SORT_BY_EXTENSION
 } CajaFileSortType;
 
 typedef enum
 {
-    CAJA_REQUEST_NOT_STARTED,
-    CAJA_REQUEST_IN_PROGRESS,
-    CAJA_REQUEST_DONE
+    BAUL_REQUEST_NOT_STARTED,
+    BAUL_REQUEST_IN_PROGRESS,
+    BAUL_REQUEST_DONE
 } CajaRequestStatus;
 
 typedef enum
 {
-    CAJA_FILE_ICON_FLAGS_NONE = 0,
-    CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS = (1<<0),
-    CAJA_FILE_ICON_FLAGS_IGNORE_VISITING = (1<<1),
-    CAJA_FILE_ICON_FLAGS_EMBEDDING_TEXT = (1<<2),
-    CAJA_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT = (1<<3),
-    CAJA_FILE_ICON_FLAGS_FOR_OPEN_FOLDER = (1<<4),
+    BAUL_FILE_ICON_FLAGS_NONE = 0,
+    BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS = (1<<0),
+    BAUL_FILE_ICON_FLAGS_IGNORE_VISITING = (1<<1),
+    BAUL_FILE_ICON_FLAGS_EMBEDDING_TEXT = (1<<2),
+    BAUL_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT = (1<<3),
+    BAUL_FILE_ICON_FLAGS_FOR_OPEN_FOLDER = (1<<4),
     /* whether the thumbnail size must match the display icon size */
-    CAJA_FILE_ICON_FLAGS_FORCE_THUMBNAIL_SIZE = (1<<5),
+    BAUL_FILE_ICON_FLAGS_FORCE_THUMBNAIL_SIZE = (1<<5),
     /* uses the icon of the mount if present */
-    CAJA_FILE_ICON_FLAGS_USE_MOUNT_ICON = (1<<6),
+    BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON = (1<<6),
     /* render the mount icon as an emblem over the regular one */
-    CAJA_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM = (1<<7)
+    BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM = (1<<7)
 } CajaFileIconFlags;
 
 /* Emblems sometimes displayed for CajaFiles. Do not localize. */
-#define CAJA_FILE_EMBLEM_NAME_SYMBOLIC_LINK "symbolic-link"
-#define CAJA_FILE_EMBLEM_NAME_CANT_READ "noread"
-#define CAJA_FILE_EMBLEM_NAME_CANT_WRITE "nowrite"
-#define CAJA_FILE_EMBLEM_NAME_TRASH "trash"
-#define CAJA_FILE_EMBLEM_NAME_NOTE "note"
-#define CAJA_FILE_EMBLEM_NAME_DESKTOP "desktop"
-#define CAJA_FILE_EMBLEM_NAME_SHARED "shared"
+#define BAUL_FILE_EMBLEM_NAME_SYMBOLIC_LINK "symbolic-link"
+#define BAUL_FILE_EMBLEM_NAME_CANT_READ "noread"
+#define BAUL_FILE_EMBLEM_NAME_CANT_WRITE "nowrite"
+#define BAUL_FILE_EMBLEM_NAME_TRASH "trash"
+#define BAUL_FILE_EMBLEM_NAME_NOTE "note"
+#define BAUL_FILE_EMBLEM_NAME_DESKTOP "desktop"
+#define BAUL_FILE_EMBLEM_NAME_SHARED "shared"
 
 typedef void (*CajaFileCallback)          (CajaFile  *file,
         gpointer       callback_data);
@@ -118,7 +118,7 @@ typedef char * (*CajaTruncateCallback)    (const char    *string,
         void	     *context);
 
 
-#define CAJA_FILE_ATTRIBUTES_FOR_ICON (CAJA_FILE_ATTRIBUTE_INFO | CAJA_FILE_ATTRIBUTE_LINK_INFO | CAJA_FILE_ATTRIBUTE_THUMBNAIL)
+#define BAUL_FILE_ATTRIBUTES_FOR_ICON (BAUL_FILE_ATTRIBUTE_INFO | BAUL_FILE_ATTRIBUTE_LINK_INFO | BAUL_FILE_ATTRIBUTE_THUMBNAIL)
 
 typedef void CajaFileListHandle;
 
@@ -510,11 +510,11 @@ struct CajaFile
  */
 typedef enum
 {
-    CAJA_DATE_TYPE_MODIFIED,
-    CAJA_DATE_TYPE_CHANGED,
-    CAJA_DATE_TYPE_ACCESSED,
-    CAJA_DATE_TYPE_PERMISSIONS_CHANGED,
-    CAJA_DATE_TYPE_TRASHED
+    BAUL_DATE_TYPE_MODIFIED,
+    BAUL_DATE_TYPE_CHANGED,
+    BAUL_DATE_TYPE_ACCESSED,
+    BAUL_DATE_TYPE_PERMISSIONS_CHANGED,
+    BAUL_DATE_TYPE_TRASHED
 } CajaDateType;
 
 typedef struct
@@ -601,4 +601,4 @@ typedef struct
 
 G_END_DECLS
 
-#endif /* CAJA_FILE_H */
+#endif /* BAUL_FILE_H */

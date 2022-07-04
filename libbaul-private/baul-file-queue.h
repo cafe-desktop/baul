@@ -20,8 +20,8 @@
    Author: Maciej Stachowiak <mjs@noisehavoc.org>
 */
 
-#ifndef CAJA_FILE_QUEUE_H
-#define CAJA_FILE_QUEUE_H
+#ifndef BAUL_FILE_QUEUE_H
+#define BAUL_FILE_QUEUE_H
 
 #include "baul-file.h"
 
@@ -49,4 +49,4 @@ CajaFile *     baul_file_queue_head     (CajaFileQueue *queue);
 
 gboolean           baul_file_queue_is_empty (CajaFileQueue *queue);
 
-#endif /* CAJA_FILE_CHANGES_QUEUE_H */
+#endif /* BAUL_FILE_CHANGES_QUEUE_H */

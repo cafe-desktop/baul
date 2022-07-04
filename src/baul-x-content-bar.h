@@ -22,20 +22,20 @@
  *
  */
 
-#ifndef __CAJA_X_CONTENT_BAR_H
-#define __CAJA_X_CONTENT_BAR_H
+#ifndef __BAUL_X_CONTENT_BAR_H
+#define __BAUL_X_CONTENT_BAR_H
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_X_CONTENT_BAR         (baul_x_content_bar_get_type ())
-#define CAJA_X_CONTENT_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_X_CONTENT_BAR, CajaXContentBar))
-#define CAJA_X_CONTENT_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_X_CONTENT_BAR, CajaXContentBarClass))
-#define CAJA_IS_X_CONTENT_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_X_CONTENT_BAR))
-#define CAJA_IS_X_CONTENT_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_X_CONTENT_BAR))
-#define CAJA_X_CONTENT_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_X_CONTENT_BAR, CajaXContentBarClass))
+#define BAUL_TYPE_X_CONTENT_BAR         (baul_x_content_bar_get_type ())
+#define BAUL_X_CONTENT_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_X_CONTENT_BAR, CajaXContentBar))
+#define BAUL_X_CONTENT_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_X_CONTENT_BAR, CajaXContentBarClass))
+#define BAUL_IS_X_CONTENT_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_X_CONTENT_BAR))
+#define BAUL_IS_X_CONTENT_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_X_CONTENT_BAR))
+#define BAUL_X_CONTENT_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_X_CONTENT_BAR, CajaXContentBarClass))
 
     typedef struct _CajaXContentBarPrivate CajaXContentBarPrivate;
 
@@ -64,4 +64,4 @@ G_BEGIN_DECLS
 
 G_END_DECLS
 
-#endif /* __CAJA_X_CONTENT_BAR_H */
+#endif /* __BAUL_X_CONTENT_BAR_H */

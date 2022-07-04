@@ -99,7 +99,7 @@ baul_desktop_link_ensure_display_name (CajaDesktopLink *link)
 
         switch (link->details->type)
         {
-        case CAJA_DESKTOP_LINK_HOME:
+        case BAUL_DESKTOP_LINK_HOME:
             /* Translators: If it's hard to compose a good home
              * icon name from the user name, you can use a string without
              * an "%s" here, in which case the home icon name will not
@@ -110,17 +110,17 @@ baul_desktop_link_ensure_display_name (CajaDesktopLink *link)
              */
             link->details->display_name = g_strdup_printf (_("%s's Home"), g_get_user_name ());
             break;
-        case CAJA_DESKTOP_LINK_COMPUTER:
+        case BAUL_DESKTOP_LINK_COMPUTER:
             link->details->display_name = g_strdup (_("Computer"));
             break;
-        case CAJA_DESKTOP_LINK_NETWORK:
+        case BAUL_DESKTOP_LINK_NETWORK:
             link->details->display_name = g_strdup (_("Network Servers"));
             break;
-        case CAJA_DESKTOP_LINK_TRASH:
+        case BAUL_DESKTOP_LINK_TRASH:
             link->details->display_name = g_strdup (_("Trash"));
             break;
         default:
-        case CAJA_DESKTOP_LINK_MOUNT:
+        case BAUL_DESKTOP_LINK_MOUNT:
             g_assert_not_reached();
         }
     }
@@ -133,8 +133,8 @@ trash_state_changed_callback (CajaTrashMonitor *trash_monitor,
 {
     CajaDesktopLink *link;
 
-    link = CAJA_DESKTOP_LINK (callback_data);
-    g_assert (link->details->type == CAJA_DESKTOP_LINK_TRASH);
+    link = BAUL_DESKTOP_LINK (callback_data);
+    g_assert (link->details->type == BAUL_DESKTOP_LINK_TRASH);
 
     if (link->details->icon)
     {
@@ -150,13 +150,13 @@ home_name_changed (gpointer callback_data)
 {
     CajaDesktopLink *link;
 
-    link = CAJA_DESKTOP_LINK (callback_data);
-    g_assert (link->details->type == CAJA_DESKTOP_LINK_HOME);
+    link = BAUL_DESKTOP_LINK (callback_data);
+    g_assert (link->details->type == BAUL_DESKTOP_LINK_HOME);
 
     g_free (link->details->display_name);
 
     link->details->display_name = g_settings_get_string (baul_desktop_preferences,
-                                                         CAJA_PREFERENCES_DESKTOP_HOME_NAME);
+                                                         BAUL_PREFERENCES_DESKTOP_HOME_NAME);
 
     baul_desktop_link_ensure_display_name (link);
     baul_desktop_link_changed (link);
@@ -167,11 +167,11 @@ computer_name_changed (gpointer callback_data)
 {
     CajaDesktopLink *link;
 
-    link = CAJA_DESKTOP_LINK (callback_data);
-    g_assert (link->details->type == CAJA_DESKTOP_LINK_COMPUTER);
+    link = BAUL_DESKTOP_LINK (callback_data);
+    g_assert (link->details->type == BAUL_DESKTOP_LINK_COMPUTER);
 
     g_free (link->details->display_name);
-    link->details->display_name = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_COMPUTER_NAME);
+    link->details->display_name = g_settings_get_string (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_COMPUTER_NAME);
 
     baul_desktop_link_ensure_display_name (link);
     baul_desktop_link_changed (link);
@@ -182,11 +182,11 @@ trash_name_changed (gpointer callback_data)
 {
     CajaDesktopLink *link;
 
-    link = CAJA_DESKTOP_LINK (callback_data);
-    g_assert (link->details->type == CAJA_DESKTOP_LINK_TRASH);
+    link = BAUL_DESKTOP_LINK (callback_data);
+    g_assert (link->details->type == BAUL_DESKTOP_LINK_TRASH);
 
     g_free (link->details->display_name);
-    link->details->display_name = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_TRASH_NAME);
+    link->details->display_name = g_settings_get_string (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_TRASH_NAME);
 
     baul_desktop_link_ensure_display_name (link);
     baul_desktop_link_changed (link);
@@ -197,11 +197,11 @@ network_name_changed (gpointer callback_data)
 {
     CajaDesktopLink *link;
 
-    link = CAJA_DESKTOP_LINK (callback_data);
-    g_assert (link->details->type == CAJA_DESKTOP_LINK_NETWORK);
+    link = BAUL_DESKTOP_LINK (callback_data);
+    g_assert (link->details->type == BAUL_DESKTOP_LINK_NETWORK);
 
     g_free (link->details->display_name);
-    link->details->display_name = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_NETWORK_NAME);
+    link->details->display_name = g_settings_get_string (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_NETWORK_NAME);
 
     baul_desktop_link_ensure_display_name (link);
     baul_desktop_link_changed (link);
@@ -212,46 +212,46 @@ baul_desktop_link_new (CajaDesktopLinkType type)
 {
     CajaDesktopLink *link;
 
-    link = CAJA_DESKTOP_LINK (g_object_new (CAJA_TYPE_DESKTOP_LINK, NULL));
+    link = BAUL_DESKTOP_LINK (g_object_new (BAUL_TYPE_DESKTOP_LINK, NULL));
 
     link->details->type = type;
     switch (type)
     {
-    case CAJA_DESKTOP_LINK_HOME:
+    case BAUL_DESKTOP_LINK_HOME:
         link->details->filename = g_strdup ("home");
-        link->details->display_name = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_HOME_NAME);
+        link->details->display_name = g_settings_get_string (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_HOME_NAME);
         link->details->activation_location = g_file_new_for_path (g_get_home_dir ());
-        link->details->icon = g_themed_icon_new (CAJA_ICON_HOME);
+        link->details->icon = g_themed_icon_new (BAUL_ICON_HOME);
 
         g_signal_connect_swapped (baul_desktop_preferences,
-                                  "changed::" CAJA_PREFERENCES_DESKTOP_HOME_NAME,
+                                  "changed::" BAUL_PREFERENCES_DESKTOP_HOME_NAME,
                                   G_CALLBACK (home_name_changed),
                                   link);
 
         break;
 
-    case CAJA_DESKTOP_LINK_COMPUTER:
+    case BAUL_DESKTOP_LINK_COMPUTER:
         link->details->filename = g_strdup ("computer");
-        link->details->display_name = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_COMPUTER_NAME);
+        link->details->display_name = g_settings_get_string (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_COMPUTER_NAME);
         link->details->activation_location = g_file_new_for_uri ("computer:///");
         /* TODO: This might need a different icon: */
-        link->details->icon = g_themed_icon_new (CAJA_ICON_COMPUTER);
+        link->details->icon = g_themed_icon_new (BAUL_ICON_COMPUTER);
 
         g_signal_connect_swapped (baul_desktop_preferences,
-                                  "changed::" CAJA_PREFERENCES_DESKTOP_COMPUTER_NAME,
+                                  "changed::" BAUL_PREFERENCES_DESKTOP_COMPUTER_NAME,
                                   G_CALLBACK (computer_name_changed),
                                   link);
 
         break;
 
-    case CAJA_DESKTOP_LINK_TRASH:
+    case BAUL_DESKTOP_LINK_TRASH:
         link->details->filename = g_strdup ("trash");
-        link->details->display_name = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_TRASH_NAME);
+        link->details->display_name = g_settings_get_string (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_TRASH_NAME);
         link->details->activation_location = g_file_new_for_uri (EEL_TRASH_URI);
         link->details->icon = baul_trash_monitor_get_icon ();
 
         g_signal_connect_swapped (baul_desktop_preferences,
-                                  "changed::" CAJA_PREFERENCES_DESKTOP_TRASH_NAME,
+                                  "changed::" BAUL_PREFERENCES_DESKTOP_TRASH_NAME,
                                   G_CALLBACK (trash_name_changed),
                                   link);
         link->details->signal_handler_obj = G_OBJECT (baul_trash_monitor_get ());
@@ -260,20 +260,20 @@ baul_desktop_link_new (CajaDesktopLinkType type)
                                      G_CALLBACK (trash_state_changed_callback), link, 0);
         break;
 
-    case CAJA_DESKTOP_LINK_NETWORK:
+    case BAUL_DESKTOP_LINK_NETWORK:
         link->details->filename = g_strdup ("network");
-        link->details->display_name = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_NETWORK_NAME);
+        link->details->display_name = g_settings_get_string (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_NETWORK_NAME);
         link->details->activation_location = g_file_new_for_uri ("network:///");
-        link->details->icon = g_themed_icon_new (CAJA_ICON_NETWORK);
+        link->details->icon = g_themed_icon_new (BAUL_ICON_NETWORK);
 
         g_signal_connect_swapped (baul_desktop_preferences,
-                                  "changed::" CAJA_PREFERENCES_DESKTOP_NETWORK_NAME,
+                                  "changed::" BAUL_PREFERENCES_DESKTOP_NETWORK_NAME,
                                   G_CALLBACK (network_name_changed),
                                   link);
         break;
 
     default:
-    case CAJA_DESKTOP_LINK_MOUNT:
+    case BAUL_DESKTOP_LINK_MOUNT:
         g_assert_not_reached();
     }
 
@@ -290,9 +290,9 @@ baul_desktop_link_new_from_mount (GMount *mount)
     GVolume *volume;
     char *name, *filename;
 
-    link = CAJA_DESKTOP_LINK (g_object_new (CAJA_TYPE_DESKTOP_LINK, NULL));
+    link = BAUL_DESKTOP_LINK (g_object_new (BAUL_TYPE_DESKTOP_LINK, NULL));
 
-    link->details->type = CAJA_DESKTOP_LINK_MOUNT;
+    link->details->type = BAUL_DESKTOP_LINK_MOUNT;
 
     link->details->mount = g_object_ref (mount);
 
@@ -402,10 +402,10 @@ baul_desktop_link_get_date (CajaDesktopLink *link,
 gboolean
 baul_desktop_link_can_rename (CajaDesktopLink     *link)
 {
-    return (link->details->type == CAJA_DESKTOP_LINK_HOME ||
-            link->details->type == CAJA_DESKTOP_LINK_TRASH ||
-            link->details->type == CAJA_DESKTOP_LINK_NETWORK ||
-            link->details->type == CAJA_DESKTOP_LINK_COMPUTER);
+    return (link->details->type == BAUL_DESKTOP_LINK_HOME ||
+            link->details->type == BAUL_DESKTOP_LINK_TRASH ||
+            link->details->type == BAUL_DESKTOP_LINK_NETWORK ||
+            link->details->type == BAUL_DESKTOP_LINK_COMPUTER);
 }
 
 gboolean
@@ -414,24 +414,24 @@ baul_desktop_link_rename (CajaDesktopLink     *link,
 {
     switch (link->details->type)
     {
-    case CAJA_DESKTOP_LINK_HOME:
+    case BAUL_DESKTOP_LINK_HOME:
         g_settings_set_string (baul_desktop_preferences,
-                               CAJA_PREFERENCES_DESKTOP_HOME_NAME,
+                               BAUL_PREFERENCES_DESKTOP_HOME_NAME,
                                name);
         break;
-    case CAJA_DESKTOP_LINK_COMPUTER:
+    case BAUL_DESKTOP_LINK_COMPUTER:
         g_settings_set_string (baul_desktop_preferences,
-                               CAJA_PREFERENCES_DESKTOP_COMPUTER_NAME,
+                               BAUL_PREFERENCES_DESKTOP_COMPUTER_NAME,
                                name);
         break;
-    case CAJA_DESKTOP_LINK_TRASH:
+    case BAUL_DESKTOP_LINK_TRASH:
         g_settings_set_string (baul_desktop_preferences,
-                               CAJA_PREFERENCES_DESKTOP_TRASH_NAME,
+                               BAUL_PREFERENCES_DESKTOP_TRASH_NAME,
                                name);
         break;
-    case CAJA_DESKTOP_LINK_NETWORK:
+    case BAUL_DESKTOP_LINK_NETWORK:
         g_settings_set_string (baul_desktop_preferences,
-                               CAJA_PREFERENCES_DESKTOP_NETWORK_NAME,
+                               BAUL_PREFERENCES_DESKTOP_NETWORK_NAME,
                                name);
         break;
     default:
@@ -455,7 +455,7 @@ desktop_link_finalize (GObject *object)
 {
     CajaDesktopLink *link;
 
-    link = CAJA_DESKTOP_LINK (object);
+    link = BAUL_DESKTOP_LINK (object);
 
     if (link->details->signal_handler != 0)
     {
@@ -469,39 +469,39 @@ desktop_link_finalize (GObject *object)
     if (link->details->icon_file != NULL)
     {
         baul_desktop_icon_file_remove (link->details->icon_file);
-        baul_file_unref (CAJA_FILE (link->details->icon_file));
+        baul_file_unref (BAUL_FILE (link->details->icon_file));
         link->details->icon_file = NULL;
     }
 
-    if (link->details->type == CAJA_DESKTOP_LINK_HOME)
+    if (link->details->type == BAUL_DESKTOP_LINK_HOME)
     {
         g_signal_handlers_disconnect_by_func (baul_desktop_preferences,
                                          home_name_changed,
                                          link);
     }
 
-    if (link->details->type == CAJA_DESKTOP_LINK_COMPUTER)
+    if (link->details->type == BAUL_DESKTOP_LINK_COMPUTER)
     {
         g_signal_handlers_disconnect_by_func (baul_desktop_preferences,
                                          computer_name_changed,
                                          link);
     }
 
-    if (link->details->type == CAJA_DESKTOP_LINK_TRASH)
+    if (link->details->type == BAUL_DESKTOP_LINK_TRASH)
     {
         g_signal_handlers_disconnect_by_func (baul_desktop_preferences,
                                          trash_name_changed,
                                          link);
     }
 
-    if (link->details->type == CAJA_DESKTOP_LINK_NETWORK)
+    if (link->details->type == BAUL_DESKTOP_LINK_NETWORK)
     {
         g_signal_handlers_disconnect_by_func (baul_desktop_preferences,
                                          network_name_changed,
                                          link);
     }
 
-    if (link->details->type == CAJA_DESKTOP_LINK_MOUNT)
+    if (link->details->type == BAUL_DESKTOP_LINK_MOUNT)
     {
         g_object_unref (link->details->mount);
     }

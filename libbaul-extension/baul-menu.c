@@ -92,7 +92,7 @@ baul_menu_item_list_free (GList *item_list)
 static void
 baul_menu_finalize (GObject *object)
 {
-    CajaMenu *menu = CAJA_MENU (object);
+    CajaMenu *menu = BAUL_MENU (object);
 
     if (menu->priv->item_list) {
         g_list_free (menu->priv->item_list);
@@ -124,7 +124,7 @@ baul_menu_new (void)
 {
     CajaMenu *obj;
 
-    obj = CAJA_MENU (g_object_new (CAJA_TYPE_MENU, NULL));
+    obj = BAUL_MENU (g_object_new (BAUL_TYPE_MENU, NULL));
 
     return obj;
 }

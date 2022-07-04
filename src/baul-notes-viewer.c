@@ -75,15 +75,15 @@ typedef struct
 
 
 G_DEFINE_TYPE_WITH_CODE (CajaNotesViewer, baul_notes_viewer, GTK_TYPE_SCROLLED_WINDOW,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_SIDEBAR,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_notes_viewer_sidebar_iface_init));
 
 static GType baul_notes_viewer_provider_get_type (void);
 
 G_DEFINE_TYPE_WITH_CODE (CajaNotesViewerProvider, baul_notes_viewer_provider, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_PROPERTY_PAGE_PROVIDER,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_PROPERTY_PAGE_PROVIDER,
                                  property_page_provider_iface_init);
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_SIDEBAR_PROVIDER,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR_PROVIDER,
                                  sidebar_provider_iface_init));
 
 
@@ -144,7 +144,7 @@ set_saved_text (CajaNotesViewer *notes, char *new_notes)
 
     if (g_strcmp0 (old_text, new_notes) != 0)
     {
-        g_signal_emit_by_name (CAJA_SIDEBAR (notes),
+        g_signal_emit_by_name (BAUL_SIDEBAR (notes),
                                "tab_icon_changed");
     }
 
@@ -182,7 +182,7 @@ notes_save_metainfo (CajaNotesViewer *notes)
                                            FALSE);
 
     baul_file_set_metadata (notes->details->file,
-                            CAJA_METADATA_KEY_ANNOTATION,
+                            BAUL_METADATA_KEY_ANNOTATION,
                             NULL, notes_text);
 
     g_signal_handlers_unblock_matched (notes->details->file,
@@ -200,10 +200,10 @@ load_note_text_from_metadata (CajaFile *file,
 {
     char *saved_text;
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (notes->details->file == file);
 
-    saved_text = baul_file_get_metadata (file, CAJA_METADATA_KEY_ANNOTATION, "");
+    saved_text = baul_file_get_metadata (file, BAUL_METADATA_KEY_ANNOTATION, "");
 
     /* This fn is called for any change signal on the file, so make sure that the
      * metadata has actually changed.
@@ -277,7 +277,7 @@ notes_load_metainfo (CajaNotesViewer *notes)
         return;
     }
 
-    attributes = CAJA_FILE_ATTRIBUTE_INFO;
+    attributes = BAUL_FILE_ATTRIBUTE_INFO;
     baul_file_monitor_add (notes->details->file, notes, attributes);
 
     if (baul_file_check_if_ready (notes->details->file, attributes))
@@ -369,7 +369,7 @@ baul_notes_viewer_finalize (GObject *object)
 {
     CajaNotesViewer *sidebar;
 
-    sidebar = CAJA_NOTES_VIEWER (object);
+    sidebar = BAUL_NOTES_VIEWER (object);
 
     done_with_file (sidebar);
     if (sidebar->details->icon != NULL)
@@ -393,7 +393,7 @@ baul_notes_viewer_class_init (CajaNotesViewerClass *class)
 static const char *
 baul_notes_viewer_get_sidebar_id (CajaSidebar *sidebar)
 {
-    return CAJA_NOTES_SIDEBAR_ID;
+    return BAUL_NOTES_SIDEBAR_ID;
 }
 
 static char *
@@ -413,7 +413,7 @@ baul_notes_viewer_get_tab_icon (CajaSidebar *sidebar)
 {
     CajaNotesViewer *notes;
 
-    notes = CAJA_NOTES_VIEWER (sidebar);
+    notes = BAUL_NOTES_VIEWER (sidebar);
 
     if (notes->details->previous_saved_text != NULL &&
             notes->details->previous_saved_text[0] != '\0')
@@ -471,7 +471,7 @@ baul_notes_viewer_create_sidebar (CajaSidebarProvider *provider,
     baul_notes_viewer_set_parent_window (sidebar, window);
     g_object_ref_sink (sidebar);
 
-    return CAJA_SIDEBAR (sidebar);
+    return BAUL_SIDEBAR (sidebar);
 }
 
 static GList *
@@ -493,7 +493,7 @@ get_property_pages (CajaPropertyPageProvider *provider,
 
     pages = NULL;
 
-    file = CAJA_FILE_INFO (files->data);
+    file = BAUL_FILE_INFO (files->data);
     uri = baul_file_info_get_uri (file);
 
     viewer = g_object_new (baul_notes_viewer_get_type (), NULL);

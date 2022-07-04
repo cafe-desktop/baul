@@ -1,7 +1,7 @@
 
 
-#ifndef __CAJA_RECENT_H__
-#define __CAJA_RECENT_H__
+#ifndef __BAUL_RECENT_H__
+#define __BAUL_RECENT_H__
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>

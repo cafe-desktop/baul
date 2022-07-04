@@ -46,7 +46,7 @@ struct _CajaDesktopIconFilePrivate
     CajaDesktopLink *link;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaDesktopIconFile, baul_desktop_icon_file, CAJA_TYPE_FILE)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaDesktopIconFile, baul_desktop_icon_file, BAUL_TYPE_FILE)
 
 
 static void
@@ -142,7 +142,7 @@ desktop_icon_file_get_deep_counts (CajaFile *file,
         *total_size_on_disk = 0;
     }
 
-    return CAJA_REQUEST_DONE;
+    return BAUL_REQUEST_DONE;
 }
 
 static gboolean
@@ -152,7 +152,7 @@ desktop_icon_file_get_date (CajaFile *file,
 {
     CajaDesktopIconFile *desktop_file;
 
-    desktop_file = CAJA_DESKTOP_ICON_FILE (file);
+    desktop_file = BAUL_DESKTOP_ICON_FILE (file);
 
     return baul_desktop_link_get_date (desktop_file->details->link,
                                        date_type, date);
@@ -178,7 +178,7 @@ update_info_from_link (CajaDesktopIconFile *icon_file)
     char *display_name;
     GMount *mount;
 
-    file = CAJA_FILE (icon_file);
+    file = BAUL_FILE (icon_file);
 
     link = icon_file->details->link;
 
@@ -238,7 +238,7 @@ baul_desktop_icon_file_update (CajaDesktopIconFile *icon_file)
     CajaFile *file;
 
     update_info_from_link (icon_file);
-    file = CAJA_FILE (icon_file);
+    file = BAUL_FILE (icon_file);
     baul_file_changed (file);
 }
 
@@ -250,7 +250,7 @@ baul_desktop_icon_file_remove (CajaDesktopIconFile *icon_file)
 
     icon_file->details->link = NULL;
 
-    file = CAJA_FILE (icon_file);
+    file = BAUL_FILE (icon_file);
 
     /* ref here because we might be removing the last ref when we
      * mark the file gone below, but we need to keep a ref at
@@ -281,16 +281,16 @@ baul_desktop_icon_file_new (CajaDesktopLink *link)
 
     directory = baul_directory_get_by_uri (EEL_DESKTOP_URI);
 
-    file = CAJA_FILE (g_object_new (CAJA_TYPE_DESKTOP_ICON_FILE, NULL));
+    file = BAUL_FILE (g_object_new (BAUL_TYPE_DESKTOP_ICON_FILE, NULL));
 
-#ifdef CAJA_FILE_DEBUG_REF
+#ifdef BAUL_FILE_DEBUG_REF
     printf("%10p ref'd\n", file);
     eazel_dump_stack_trace ("\t", 10);
 #endif
 
     file->details->directory = directory;
 
-    icon_file = CAJA_DESKTOP_ICON_FILE (file);
+    icon_file = BAUL_DESKTOP_ICON_FILE (file);
     icon_file->details->link = link;
 
     name = baul_desktop_link_get_file_name (link);
@@ -330,7 +330,7 @@ baul_desktop_icon_file_unmount (CajaFile                   *file,
 {
     CajaDesktopIconFile *desktop_file;
 
-    desktop_file = CAJA_DESKTOP_ICON_FILE (file);
+    desktop_file = BAUL_DESKTOP_ICON_FILE (file);
     if (desktop_file)
     {
         GMount *mount;
@@ -353,7 +353,7 @@ baul_desktop_icon_file_eject (CajaFile                   *file,
 {
     CajaDesktopIconFile *desktop_file;
 
-    desktop_file = CAJA_DESKTOP_ICON_FILE (file);
+    desktop_file = BAUL_DESKTOP_ICON_FILE (file);
     if (desktop_file)
     {
         GMount *mount;
@@ -387,7 +387,7 @@ baul_desktop_icon_file_class_init (CajaDesktopIconFileClass *klass)
 {
     CajaFileClass *file_class;
 
-    file_class = CAJA_FILE_CLASS (klass);
+    file_class = BAUL_FILE_CLASS (klass);
 
     file_class->default_file_type = G_FILE_TYPE_DIRECTORY;
 

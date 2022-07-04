@@ -125,7 +125,7 @@ static void
 extension_action_callback (GtkAction *action,
                            gpointer callback_data)
 {
-    baul_menu_item_activate (CAJA_MENU_ITEM (callback_data));
+    baul_menu_item_activate (BAUL_MENU_ITEM (callback_data));
 }
 
 static void
@@ -303,10 +303,10 @@ baul_get_thumbnail_frame (void)
     return thumbnail_frame;
 }
 
-#define CAJA_THUMBNAIL_FRAME_LEFT 3
-#define CAJA_THUMBNAIL_FRAME_TOP 3
-#define CAJA_THUMBNAIL_FRAME_RIGHT 3
-#define CAJA_THUMBNAIL_FRAME_BOTTOM 3
+#define BAUL_THUMBNAIL_FRAME_LEFT 3
+#define BAUL_THUMBNAIL_FRAME_TOP 3
+#define BAUL_THUMBNAIL_FRAME_RIGHT 3
+#define BAUL_THUMBNAIL_FRAME_BOTTOM 3
 
 void
 baul_ui_frame_image (GdkPixbuf **pixbuf)
@@ -319,10 +319,10 @@ baul_ui_frame_image (GdkPixbuf **pixbuf)
         return;
     }
 
-    left_offset = CAJA_THUMBNAIL_FRAME_LEFT;
-    top_offset = CAJA_THUMBNAIL_FRAME_TOP;
-    right_offset = CAJA_THUMBNAIL_FRAME_RIGHT;
-    bottom_offset = CAJA_THUMBNAIL_FRAME_BOTTOM;
+    left_offset = BAUL_THUMBNAIL_FRAME_LEFT;
+    top_offset = BAUL_THUMBNAIL_FRAME_TOP;
+    right_offset = BAUL_THUMBNAIL_FRAME_RIGHT;
+    bottom_offset = BAUL_THUMBNAIL_FRAME_BOTTOM;
 
     pixbuf_with_frame = eel_embed_image_in_frame
         (*pixbuf, frame,

@@ -45,7 +45,7 @@ AC_SUBST(GAIL_REQUIRED, [gail_minver])
 
 dnl We need to decrement current by one in the calculation of the age because
 dnl the library was started with version "1:0:0" instead of "0:0:0"
-AC_SUBST(CAJA_EXTENSION_VERSION_INFO, [baul_extension_current]:[baul_extension_revision]:`expr [baul_extension_current] - 1`)
+AC_SUBST(BAUL_EXTENSION_VERSION_INFO, [baul_extension_current]:[baul_extension_revision]:`expr [baul_extension_current] - 1`)
 
 AC_C_BIGENDIAN
 AC_C_CONST
@@ -190,14 +190,14 @@ AC_ARG_ENABLE(empty_view,
 AC_SUBST(ENABLE_EMPTY_VIEW)
 AM_CONDITIONAL(ENABLE_EMPTY_VIEW, test "x$ENABLE_EMPTY_VIEW" = "x1")
 
-dnl ==========  EEL/CAJA OMIT SELF CHECK  ====================================
+dnl ==========  EEL/BAUL OMIT SELF CHECK  ====================================
 AC_ARG_ENABLE(self-check,
     AC_HELP_STRING([--disable-self-check], [build without self check]))
 msg_self_check=yes
 if test "x$enable_self_check" = "xno"; then
     msg_self_check=no
     AC_DEFINE(EEL_OMIT_SELF_CHECK, 1, [define to disable eel self check])
-    AC_DEFINE(CAJA_OMIT_SELF_CHECK, 1, [define to disable baul self check])
+    AC_DEFINE(BAUL_OMIT_SELF_CHECK, 1, [define to disable baul self check])
 fi
 AM_CONDITIONAL(ENABLE_SELF_CHECK, test "x$msg_self_check" = "xyes")
 
@@ -269,11 +269,11 @@ LIBEGG_LIBS="`$PKG_CONFIG --libs $LIBEGG_MODULES`"
 AC_SUBST(LIBEGG_LIBS)
 
 dnl libbaul-extension
-LIBCAJA_EXTENSION_MODULES="glib-2.0 gtk+-3.0"
-LIBCAJA_EXTENSION_CFLAGS="`$PKG_CONFIG --cflags $LIBCAJA_EXTENSION_MODULES`"
-AC_SUBST(LIBCAJA_EXTENSION_CFLAGS)
-LIBCAJA_EXTENSION_LIBS="`$PKG_CONFIG --libs $LIBCAJA_EXTENSION_MODULES`"
-AC_SUBST(LIBCAJA_EXTENSION_LIBS)
+LIBBAUL_EXTENSION_MODULES="glib-2.0 gtk+-3.0"
+LIBBAUL_EXTENSION_CFLAGS="`$PKG_CONFIG --cflags $LIBBAUL_EXTENSION_MODULES`"
+AC_SUBST(LIBBAUL_EXTENSION_CFLAGS)
+LIBBAUL_EXTENSION_LIBS="`$PKG_CONFIG --libs $LIBBAUL_EXTENSION_MODULES`"
+AC_SUBST(LIBBAUL_EXTENSION_LIBS)
 
 dnl core baul
 PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])

@@ -47,7 +47,7 @@ baul_drag_can_accept_files (CajaFile *drop_target_item)
         return res;
     }
 
-    if (CAJA_IS_DESKTOP_ICON_FILE (drop_target_item))
+    if (BAUL_IS_DESKTOP_ICON_FILE (drop_target_item))
     {
         return TRUE;
     }
@@ -94,7 +94,7 @@ baul_drag_can_accept_items (CajaFile *drop_target_item,
     if (drop_target_item == NULL)
         return FALSE;
 
-    g_assert (CAJA_IS_FILE (drop_target_item));
+    g_assert (BAUL_IS_FILE (drop_target_item));
 
     /* Iterate through selection checking if item will get accepted by the
      * drop target. If more than 100 items selected, return an over-optimisic
@@ -119,28 +119,28 @@ baul_drag_can_accept_info (CajaFile *drop_target_item,
 {
     switch (drag_type)
     {
-    case CAJA_ICON_DND_MATE_ICON_LIST:
+    case BAUL_ICON_DND_MATE_ICON_LIST:
         return baul_drag_can_accept_items (drop_target_item, items);
 
-    case CAJA_ICON_DND_URI_LIST:
-    case CAJA_ICON_DND_NETSCAPE_URL:
-    case CAJA_ICON_DND_TEXT:
+    case BAUL_ICON_DND_URI_LIST:
+    case BAUL_ICON_DND_NETSCAPE_URL:
+    case BAUL_ICON_DND_TEXT:
         return baul_drag_can_accept_files (drop_target_item);
 
-    case CAJA_ICON_DND_XDNDDIRECTSAVE:
-    case CAJA_ICON_DND_RAW:
+    case BAUL_ICON_DND_XDNDDIRECTSAVE:
+    case BAUL_ICON_DND_RAW:
         return baul_drag_can_accept_files (drop_target_item); /* Check if we can accept files at this location */
 
-    case CAJA_ICON_DND_KEYWORD:
+    case BAUL_ICON_DND_KEYWORD:
         return TRUE;
 
-    case CAJA_ICON_DND_ROOTWINDOW_DROP:
+    case BAUL_ICON_DND_ROOTWINDOW_DROP:
         return FALSE;
 
         /* TODO return TRUE for folders as soon as drop handling is implemented */
-    case CAJA_ICON_DND_COLOR:
-    case CAJA_ICON_DND_BGIMAGE:
-    case CAJA_ICON_DND_RESET_BACKGROUND:
+    case BAUL_ICON_DND_COLOR:
+    case BAUL_ICON_DND_BGIMAGE:
+    case BAUL_ICON_DND_RESET_BACKGROUND:
         return FALSE;
 
     default:
@@ -155,11 +155,11 @@ baul_drag_file_receive_dropped_keyword (CajaFile *file,
 {
     GList *keywords;
 
-    g_return_if_fail (CAJA_IS_FILE (file));
+    g_return_if_fail (BAUL_IS_FILE (file));
     g_return_if_fail (keyword != NULL);
 
     /* special case the erase emblem */
-    if (strcmp (keyword, CAJA_FILE_DND_ERASE_KEYWORD) == 0)
+    if (strcmp (keyword, BAUL_FILE_DND_ERASE_KEYWORD) == 0)
     {
         keywords = NULL;
     }

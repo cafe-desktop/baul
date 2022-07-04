@@ -33,8 +33,8 @@
 #include "baul-trash-bar.h"
 #include "baul-window.h"
 
-#define CAJA_TRASH_BAR_GET_PRIVATE(o)\
-	(G_TYPE_INSTANCE_GET_PRIVATE ((o), CAJA_TYPE_TRASH_BAR, CajaTrashBarPrivate))
+#define BAUL_TRASH_BAR_GET_PRIVATE(o)\
+	(G_TYPE_INSTANCE_GET_PRIVATE ((o), BAUL_TYPE_TRASH_BAR, CajaTrashBarPrivate))
 
 enum
 {
@@ -59,7 +59,7 @@ restore_button_clicked_cb (GtkWidget *button,
 {
     GList *locations, *files, *l;
 
-    locations = baul_window_info_get_selection (CAJA_WINDOW_INFO  (bar->priv->window));
+    locations = baul_window_info_get_selection (BAUL_WINDOW_INFO  (bar->priv->window));
     files = NULL;
 
     for (l = locations; l != NULL; l = l->next)
@@ -79,7 +79,7 @@ selection_changed_cb (CajaWindow *window,
 {
     int count;
 
-    count = baul_window_info_get_selection_count (CAJA_WINDOW_INFO (window));
+    count = baul_window_info_get_selection_count (BAUL_WINDOW_INFO (window));
 
     gtk_widget_set_sensitive (bar->priv->restore_button, (count > 0));
 }
@@ -102,7 +102,7 @@ baul_trash_bar_set_property (GObject      *object,
 {
     CajaTrashBar *bar;
 
-    bar = CAJA_TRASH_BAR (object);
+    bar = BAUL_TRASH_BAR (object);
 
     switch (prop_id)
     {
@@ -121,7 +121,7 @@ baul_trash_bar_finalize (GObject *obj)
 {
     CajaTrashBar *bar;
 
-    bar = CAJA_TRASH_BAR (obj);
+    bar = BAUL_TRASH_BAR (obj);
 
     if (bar->priv->selection_handler_id)
     {
@@ -138,7 +138,7 @@ baul_trash_bar_trash_state_changed (CajaTrashMonitor *trash_monitor,
 {
     CajaTrashBar *bar;
 
-    bar = CAJA_TRASH_BAR (data);
+    bar = BAUL_TRASH_BAR (data);
 
     gtk_widget_set_sensitive (bar->priv->empty_button,
                               !baul_trash_monitor_is_empty ());
@@ -159,7 +159,7 @@ baul_trash_bar_class_init (CajaTrashBarClass *klass)
                                      g_param_spec_object ("window",
                                              "window",
                                              "the CajaWindow",
-                                             CAJA_TYPE_WINDOW,
+                                             BAUL_TYPE_WINDOW,
                                              G_PARAM_WRITABLE |
                                              G_PARAM_CONSTRUCT_ONLY |
                                              G_PARAM_STATIC_STRINGS));
@@ -231,7 +231,7 @@ baul_trash_bar_new (CajaWindow *window)
 {
     GObject *bar;
 
-    bar = g_object_new (CAJA_TYPE_TRASH_BAR, "window", window, NULL);
+    bar = g_object_new (BAUL_TYPE_TRASH_BAR, "window", window, NULL);
 
     return GTK_WIDGET (bar);
 }
