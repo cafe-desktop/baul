@@ -31,6 +31,7 @@ requires:
     - libx11-dev
     - libxml2-dev
     - mate-common
+    - mate-desktop
     - python3-lxml
     - quilt
     - shared-mime-info
