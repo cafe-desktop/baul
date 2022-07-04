@@ -8,7 +8,7 @@
 
 #include "baul-file.h"
 
-void baul_recent_add_file (CajaFile *file,
+void baul_recent_add_file (BaulFile *file,
                            GAppInfo *application);
 
 #endif

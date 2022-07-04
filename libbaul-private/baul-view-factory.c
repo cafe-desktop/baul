@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: nil; c-basic-offset: 4; tab-width: 4 -*-
 
-   baul-view-factory.c: register and create CajaViews
+   baul-view-factory.c: register and create BaulViews
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -27,7 +27,7 @@
 static GList *registered_views;
 
 void
-baul_view_factory_register (CajaViewInfo *view_info)
+baul_view_factory_register (BaulViewInfo *view_info)
 {
     g_return_if_fail (view_info != NULL);
     g_return_if_fail (view_info->id != NULL);
@@ -36,11 +36,11 @@ baul_view_factory_register (CajaViewInfo *view_info)
     registered_views = g_list_append (registered_views, view_info);
 }
 
-const CajaViewInfo *
+const BaulViewInfo *
 baul_view_factory_lookup (const char *id)
 {
     GList *l;
-    CajaViewInfo *view_info = NULL;
+    BaulViewInfo *view_info = NULL;
 
     g_return_val_if_fail (id != NULL, NULL);
 
@@ -57,12 +57,12 @@ baul_view_factory_lookup (const char *id)
     return NULL;
 }
 
-CajaView *
+BaulView *
 baul_view_factory_create (const char *id,
-                          CajaWindowSlotInfo *slot)
+                          BaulWindowSlotInfo *slot)
 {
-    const CajaViewInfo *view_info;
-    CajaView *view;
+    const BaulViewInfo *view_info;
+    BaulView *view;
 
     view_info = baul_view_factory_lookup (id);
     if (view_info == NULL)
@@ -84,7 +84,7 @@ baul_view_factory_view_supports_uri (const char *id,
                                      GFileType file_type,
                                      const char *mime_type)
 {
-    const CajaViewInfo *view_info;
+    const BaulViewInfo *view_info;
     char *uri;
     gboolean res;
 
@@ -106,7 +106,7 @@ baul_view_factory_get_views_for_uri (const char *uri,
                                      const char *mime_type)
 {
     GList *l, *res;
-    const CajaViewInfo *view_info = NULL;
+    const BaulViewInfo *view_info = NULL;
 
     res = NULL;
 

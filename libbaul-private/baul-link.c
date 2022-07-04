@@ -203,7 +203,7 @@ baul_link_local_create (const char     *directory_uri,
     char *contents;
     GFile *file;
     GList dummy_list;
-    CajaFileChangesQueuePosition item;
+    BaulFileChangesQueuePosition item;
 
     g_return_val_if_fail (directory_uri != NULL, FALSE);
     g_return_val_if_fail (base_name != NULL, FALSE);
@@ -485,7 +485,7 @@ baul_link_get_link_icon_from_desktop (GKeyFile *key_file)
 {
     char *icon_uri, *icon, *type;
 
-    icon_uri = g_key_file_get_string (key_file, MAIN_GROUP, "X-Caja-Icon", NULL);
+    icon_uri = g_key_file_get_string (key_file, MAIN_GROUP, "X-Baul-Icon", NULL);
     if (icon_uri != NULL)
     {
         return icon_uri;

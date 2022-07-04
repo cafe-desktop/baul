@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-search-directory-file.c: Subclass of CajaFile to help implement the
+   baul-search-directory-file.c: Subclass of BaulFile to help implement the
    searches
 
    Copyright (C) 2005 Novell, Inc.
@@ -39,18 +39,18 @@
 #include "baul-file-utilities.h"
 #include "baul-search-directory.h"
 
-struct CajaSearchDirectoryFileDetails
+struct BaulSearchDirectoryFileDetails
 {
-    CajaSearchDirectory *search_directory;
+    BaulSearchDirectory *search_directory;
 };
 
-G_DEFINE_TYPE(CajaSearchDirectoryFile, baul_search_directory_file, BAUL_TYPE_FILE);
+G_DEFINE_TYPE(BaulSearchDirectoryFile, baul_search_directory_file, BAUL_TYPE_FILE);
 
 
 static void
-search_directory_file_monitor_add (CajaFile *file,
+search_directory_file_monitor_add (BaulFile *file,
                                    gconstpointer client,
-                                   CajaFileAttributes attributes)
+                                   BaulFileAttributes attributes)
 {
     /* No need for monitoring, we always emit changed when files
        are added/removed, and no other metadata changes */
@@ -60,16 +60,16 @@ search_directory_file_monitor_add (CajaFile *file,
 }
 
 static void
-search_directory_file_monitor_remove (CajaFile *file,
+search_directory_file_monitor_remove (BaulFile *file,
                                       gconstpointer client)
 {
     /* Do nothing here, we don't have any monitors */
 }
 
 static void
-search_directory_file_call_when_ready (CajaFile *file,
-                                       CajaFileAttributes file_attributes,
-                                       CajaFileCallback callback,
+search_directory_file_call_when_ready (BaulFile *file,
+                                       BaulFileAttributes file_attributes,
+                                       BaulFileCallback callback,
                                        gpointer callback_data)
 
 {
@@ -81,22 +81,22 @@ search_directory_file_call_when_ready (CajaFile *file,
 }
 
 static void
-search_directory_file_cancel_call_when_ready (CajaFile *file,
-        CajaFileCallback callback,
+search_directory_file_cancel_call_when_ready (BaulFile *file,
+        BaulFileCallback callback,
         gpointer callback_data)
 {
     /* Do nothing here, we don't have any pending calls */
 }
 
 static gboolean
-search_directory_file_check_if_ready (CajaFile *file,
-                                      CajaFileAttributes attributes)
+search_directory_file_check_if_ready (BaulFile *file,
+                                      BaulFileAttributes attributes)
 {
     return TRUE;
 }
 
 static gboolean
-search_directory_file_get_item_count (CajaFile *file,
+search_directory_file_get_item_count (BaulFile *file,
                                       guint *count,
                                       gboolean *count_unreadable)
 {
@@ -114,8 +114,8 @@ search_directory_file_get_item_count (CajaFile *file,
     return TRUE;
 }
 
-static CajaRequestStatus
-search_directory_file_get_deep_counts (CajaFile *file,
+static BaulRequestStatus
+search_directory_file_get_deep_counts (BaulFile *file,
                                        guint *directory_count,
                                        guint *file_count,
                                        guint *unreadable_directory_count,
@@ -125,7 +125,7 @@ search_directory_file_get_deep_counts (CajaFile *file,
     GList *file_list, *l;
     guint dirs, files;
     GFileType type;
-    CajaFile *dir_file = NULL;
+    BaulFile *dir_file = NULL;
 
     file_list = baul_directory_get_file_list (file->details->directory);
 
@@ -173,15 +173,15 @@ search_directory_file_get_deep_counts (CajaFile *file,
 }
 
 static char *
-search_directory_file_get_where_string (CajaFile *file)
+search_directory_file_get_where_string (BaulFile *file)
 {
     return g_strdup (_("Search"));
 }
 
 void
-baul_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_file)
+baul_search_directory_file_update_display_name (BaulSearchDirectoryFile *search_file)
 {
-    CajaFile *file;
+    BaulFile *file;
     char *display_name;
     gboolean changed;
 
@@ -190,8 +190,8 @@ baul_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_
     file = BAUL_FILE (search_file);
     if (file->details->directory)
     {
-        CajaSearchDirectory *search_dir;
-        CajaQuery *query;
+        BaulSearchDirectory *search_dir;
+        BaulQuery *query;
 
         search_dir = BAUL_SEARCH_DIRECTORY (file->details->directory);
         query = baul_search_directory_get_query (search_dir);
@@ -216,9 +216,9 @@ baul_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_
 }
 
 static void
-baul_search_directory_file_init (CajaSearchDirectoryFile *search_file)
+baul_search_directory_file_init (BaulSearchDirectoryFile *search_file)
 {
-    CajaFile *file;
+    BaulFile *file;
 
     file = BAUL_FILE (search_file);
 
@@ -242,9 +242,9 @@ baul_search_directory_file_init (CajaSearchDirectoryFile *search_file)
 }
 
 static void
-baul_search_directory_file_class_init (CajaSearchDirectoryFileClass *klass)
+baul_search_directory_file_class_init (BaulSearchDirectoryFileClass *klass)
 {
-    CajaFileClass *file_class;
+    BaulFileClass *file_class;
 
     file_class = BAUL_FILE_CLASS (klass);
 

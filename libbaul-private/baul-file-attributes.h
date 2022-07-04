@@ -25,7 +25,7 @@
 #ifndef BAUL_FILE_ATTRIBUTES_H
 #define BAUL_FILE_ATTRIBUTES_H
 
-/* Names for CajaFile attributes. These are used when registering
+/* Names for BaulFile attributes. These are used when registering
  * interest in changes to the attributes or when waiting for them.
  */
 
@@ -42,6 +42,6 @@ typedef enum
     BAUL_FILE_ATTRIBUTE_THUMBNAIL = 1 << 8,
     BAUL_FILE_ATTRIBUTE_MOUNT = 1 << 9,
     BAUL_FILE_ATTRIBUTE_FILESYSTEM_INFO = 1 << 10,
-} CajaFileAttributes;
+} BaulFileAttributes;
 
 #endif /* BAUL_FILE_ATTRIBUTES_H */

@@ -37,15 +37,15 @@
 #include "baul-file.h"
 #include "baul-icon-info.h"
 
-struct _CajaFileConflictDialogPrivate
+struct _BaulFileConflictDialogPrivate
 {
     /* conflicting objects */
-    CajaFile *source;
-    CajaFile *destination;
-    CajaFile *dest_dir;
+    BaulFile *source;
+    BaulFile *destination;
+    BaulFile *dest_dir;
 
     gchar *conflict_name;
-    CajaFileListHandle *handle;
+    BaulFileListHandle *handle;
     gulong src_handler_id;
     gulong dest_handler_id;
 
@@ -63,13 +63,13 @@ struct _CajaFileConflictDialogPrivate
     GtkWidget *src_image;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaFileConflictDialog,
+G_DEFINE_TYPE_WITH_PRIVATE (BaulFileConflictDialog,
                             baul_file_conflict_dialog,
                             GTK_TYPE_DIALOG);
 
 static void
-file_icons_changed (CajaFile *file,
-                    CajaFileConflictDialog *fcd)
+file_icons_changed (BaulFile *file,
+                    BaulFileConflictDialog *fcd)
 {
     cairo_surface_t *surface;
 
@@ -96,11 +96,11 @@ static void
 file_list_ready_cb (GList *files,
                     gpointer user_data)
 {
-    CajaFileConflictDialog *fcd = user_data;
-    CajaFile *src, *dest, *dest_dir;
+    BaulFileConflictDialog *fcd = user_data;
+    BaulFile *src, *dest, *dest_dir;
     time_t src_mtime, dest_mtime;
     gboolean source_is_dir,	dest_is_dir, should_show_type;
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialogPrivate *details;
     char *primary_text, *message, *secondary_text;
     const gchar *message_extra;
     char *dest_name, *dest_dir_name, *edit_name;
@@ -377,10 +377,10 @@ file_list_ready_cb (GList *files,
 }
 
 static void
-build_dialog_appearance (CajaFileConflictDialog *fcd)
+build_dialog_appearance (BaulFileConflictDialog *fcd)
 {
     GList *files = NULL;
-    CajaFileConflictDialogPrivate *details = fcd->details;
+    BaulFileConflictDialogPrivate *details = fcd->details;
 
     files = g_list_prepend (files, details->source);
     files = g_list_prepend (files, details->destination);
@@ -398,8 +398,8 @@ set_source_and_destination (GtkWidget *w,
                             GFile *destination,
                             GFile *dest_dir)
 {
-    CajaFileConflictDialog *dialog;
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialog *dialog;
+    BaulFileConflictDialogPrivate *details;
 
     dialog = BAUL_FILE_CONFLICT_DIALOG (w);
     details = dialog->details;
@@ -413,9 +413,9 @@ set_source_and_destination (GtkWidget *w,
 
 static void
 entry_text_changed_cb (GtkEditable *entry,
-                       CajaFileConflictDialog *dialog)
+                       BaulFileConflictDialog *dialog)
 {
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialogPrivate *details;
 
     details = dialog->details;
 
@@ -447,9 +447,9 @@ entry_text_changed_cb (GtkEditable *entry,
 
 static void
 expander_activated_cb (GtkExpander *w,
-                       CajaFileConflictDialog *dialog)
+                       BaulFileConflictDialog *dialog)
 {
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialogPrivate *details;
     int start_pos, end_pos;
 
     details = dialog->details;
@@ -471,9 +471,9 @@ expander_activated_cb (GtkExpander *w,
 
 static void
 checkbox_toggled_cb (GtkToggleButton *t,
-                     CajaFileConflictDialog *dialog)
+                     BaulFileConflictDialog *dialog)
 {
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialogPrivate *details;
 
     details = dialog->details;
 
@@ -500,9 +500,9 @@ checkbox_toggled_cb (GtkToggleButton *t,
 
 static void
 reset_button_clicked_cb (GtkButton *w,
-                         CajaFileConflictDialog *dialog)
+                         BaulFileConflictDialog *dialog)
 {
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialogPrivate *details;
     int start_pos, end_pos;
 
     details = dialog->details;
@@ -519,9 +519,9 @@ reset_button_clicked_cb (GtkButton *w,
 
 static void
 diff_button_clicked_cb (GtkButton *w,
-                        CajaFileConflictDialog *dialog)
+                        BaulFileConflictDialog *dialog)
 {
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialogPrivate *details;
     details = dialog->details;
 
     GError *error;
@@ -557,11 +557,11 @@ diff_button_clicked_cb (GtkButton *w,
 }
 
 static void
-baul_file_conflict_dialog_init (CajaFileConflictDialog *fcd)
+baul_file_conflict_dialog_init (BaulFileConflictDialog *fcd)
 {
     GtkWidget *hbox, *vbox, *vbox2;
     GtkWidget *widget, *dialog_area;
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialogPrivate *details;
     GtkDialog *dialog;
 
     details = fcd->details = baul_file_conflict_dialog_get_instance_private (fcd);
@@ -681,7 +681,7 @@ baul_file_conflict_dialog_init (CajaFileConflictDialog *fcd)
 static void
 do_finalize (GObject *self)
 {
-    CajaFileConflictDialogPrivate *details =
+    BaulFileConflictDialogPrivate *details =
         BAUL_FILE_CONFLICT_DIALOG (self)->details;
 
     g_free (details->conflict_name);
@@ -711,20 +711,20 @@ do_finalize (GObject *self)
 }
 
 static void
-baul_file_conflict_dialog_class_init (CajaFileConflictDialogClass *klass)
+baul_file_conflict_dialog_class_init (BaulFileConflictDialogClass *klass)
 {
     G_OBJECT_CLASS (klass)->finalize = do_finalize;
 }
 
 char *
-baul_file_conflict_dialog_get_new_name (CajaFileConflictDialog *dialog)
+baul_file_conflict_dialog_get_new_name (BaulFileConflictDialog *dialog)
 {
     return g_strdup (gtk_entry_get_text
                      (GTK_ENTRY (dialog->details->entry)));
 }
 
 gboolean
-baul_file_conflict_dialog_get_apply_to_all (CajaFileConflictDialog *dialog)
+baul_file_conflict_dialog_get_apply_to_all (BaulFileConflictDialog *dialog)
 {
     return gtk_toggle_button_get_active
            (GTK_TOGGLE_BUTTON (dialog->details->checkbox));
@@ -737,7 +737,7 @@ baul_file_conflict_dialog_new (GtkWindow *parent,
                                GFile *dest_dir)
 {
     GtkWidget *dialog;
-    CajaFile *src, *dest;
+    BaulFile *src, *dest;
     gboolean source_is_dir, dest_is_dir;
 
     src = baul_file_get (source);

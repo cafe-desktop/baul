@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-vfs-file.c: Subclass of CajaFile to help implement the
+   baul-vfs-file.c: Subclass of BaulFile to help implement the
    virtual trash directory.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
@@ -39,14 +39,14 @@ static void baul_vfs_file_init       (gpointer   object,
                                       gpointer   klass);
 static void baul_vfs_file_class_init (gpointer   klass);
 
-EEL_CLASS_BOILERPLATE (CajaVFSFile,
+EEL_CLASS_BOILERPLATE (BaulVFSFile,
                        baul_vfs_file,
                        BAUL_TYPE_FILE)
 
 static void
-vfs_file_monitor_add (CajaFile *file,
+vfs_file_monitor_add (BaulFile *file,
                       gconstpointer client,
-                      CajaFileAttributes attributes)
+                      BaulFileAttributes attributes)
 {
     baul_directory_monitor_add_internal
     (file->details->directory, file,
@@ -54,7 +54,7 @@ vfs_file_monitor_add (CajaFile *file,
 }
 
 static void
-vfs_file_monitor_remove (CajaFile *file,
+vfs_file_monitor_remove (BaulFile *file,
                          gconstpointer client)
 {
     baul_directory_monitor_remove_internal
@@ -62,9 +62,9 @@ vfs_file_monitor_remove (CajaFile *file,
 }
 
 static void
-vfs_file_call_when_ready (CajaFile *file,
-                          CajaFileAttributes file_attributes,
-                          CajaFileCallback callback,
+vfs_file_call_when_ready (BaulFile *file,
+                          BaulFileAttributes file_attributes,
+                          BaulFileCallback callback,
                           gpointer callback_data)
 
 {
@@ -74,8 +74,8 @@ vfs_file_call_when_ready (CajaFile *file,
 }
 
 static void
-vfs_file_cancel_call_when_ready (CajaFile *file,
-                                 CajaFileCallback callback,
+vfs_file_cancel_call_when_ready (BaulFile *file,
+                                 BaulFileCallback callback,
                                  gpointer callback_data)
 {
     baul_directory_cancel_callback_internal
@@ -84,8 +84,8 @@ vfs_file_cancel_call_when_ready (CajaFile *file,
 }
 
 static gboolean
-vfs_file_check_if_ready (CajaFile *file,
-                         CajaFileAttributes file_attributes)
+vfs_file_check_if_ready (BaulFile *file,
+                         BaulFileAttributes file_attributes)
 {
     return baul_directory_check_if_ready_internal
            (file->details->directory, file,
@@ -97,7 +97,7 @@ set_metadata_get_info_callback (GObject *source_object,
                                 GAsyncResult *res,
                                 gpointer callback_data)
 {
-    CajaFile *file;
+    BaulFile *file;
     GFileInfo *new_info;
     GError *error;
 
@@ -125,7 +125,7 @@ set_metadata_callback (GObject *source_object,
                        GAsyncResult *result,
                        gpointer callback_data)
 {
-    CajaFile *file;
+    BaulFile *file;
     GError *error;
     gboolean res;
 
@@ -154,7 +154,7 @@ set_metadata_callback (GObject *source_object,
 }
 
 static void
-vfs_file_set_metadata (CajaFile           *file,
+vfs_file_set_metadata (BaulFile           *file,
                        const char             *key,
                        const char             *value)
 {
@@ -191,7 +191,7 @@ vfs_file_set_metadata (CajaFile           *file,
 }
 
 static void
-vfs_file_set_metadata_as_list (CajaFile           *file,
+vfs_file_set_metadata_as_list (BaulFile           *file,
                                const char             *key,
                                char                  **value)
 {
@@ -218,7 +218,7 @@ vfs_file_set_metadata_as_list (CajaFile           *file,
 }
 
 static gboolean
-vfs_file_get_item_count (CajaFile *file,
+vfs_file_get_item_count (BaulFile *file,
                          guint *count,
                          gboolean *count_unreadable)
 {
@@ -241,8 +241,8 @@ vfs_file_get_item_count (CajaFile *file,
     return TRUE;
 }
 
-static CajaRequestStatus
-vfs_file_get_deep_counts (CajaFile *file,
+static BaulRequestStatus
+vfs_file_get_deep_counts (BaulFile *file,
                           guint *directory_count,
                           guint *file_count,
                           guint *unreadable_directory_count,
@@ -315,8 +315,8 @@ vfs_file_get_deep_counts (CajaFile *file,
 }
 
 static gboolean
-vfs_file_get_date (CajaFile *file,
-                   CajaDateType date_type,
+vfs_file_get_date (BaulFile *file,
+                   BaulDateType date_type,
                    time_t *date)
 {
     switch (date_type)
@@ -390,7 +390,7 @@ vfs_file_get_date (CajaFile *file,
 }
 
 static char *
-vfs_file_get_where_string (CajaFile *file)
+vfs_file_get_where_string (BaulFile *file)
 {
     return baul_file_get_parent_uri_for_display (file);
 }
@@ -400,7 +400,7 @@ vfs_file_mount_callback (GObject *source_object,
                          GAsyncResult *res,
                          gpointer callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     GFile *mounted_on;
     GError *error;
 
@@ -422,13 +422,13 @@ vfs_file_mount_callback (GObject *source_object,
 
 
 static void
-vfs_file_mount (CajaFile                   *file,
+vfs_file_mount (BaulFile                   *file,
                 GMountOperation                *mount_op,
                 GCancellable                   *cancellable,
-                CajaFileOperationCallback   callback,
+                BaulFileOperationCallback   callback,
                 gpointer                        callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     GError *error;
     GFile *location;
 
@@ -467,7 +467,7 @@ vfs_file_unmount_callback (GObject *source_object,
                            GAsyncResult *res,
                            gpointer callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     gboolean unmounted;
     GError *error;
 
@@ -494,13 +494,13 @@ vfs_file_unmount_callback (GObject *source_object,
 }
 
 static void
-vfs_file_unmount (CajaFile                   *file,
+vfs_file_unmount (BaulFile                   *file,
                   GMountOperation                *mount_op,
                   GCancellable                   *cancellable,
-                  CajaFileOperationCallback   callback,
+                  BaulFileOperationCallback   callback,
                   gpointer                        callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     GFile *location;
 
     op = baul_file_operation_new (file, callback, callback_data);
@@ -525,7 +525,7 @@ vfs_file_eject_callback (GObject *source_object,
                          GAsyncResult *res,
                          gpointer callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     gboolean ejected;
     GError *error;
 
@@ -552,13 +552,13 @@ vfs_file_eject_callback (GObject *source_object,
 }
 
 static void
-vfs_file_eject (CajaFile                   *file,
+vfs_file_eject (BaulFile                   *file,
                 GMountOperation                *mount_op,
                 GCancellable                   *cancellable,
-                CajaFileOperationCallback   callback,
+                BaulFileOperationCallback   callback,
                 gpointer                        callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     GFile *location;
 
     op = baul_file_operation_new (file, callback, callback_data);
@@ -583,7 +583,7 @@ vfs_file_start_callback (GObject *source_object,
                          GAsyncResult *res,
                          gpointer callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     gboolean started;
     GError *error;
 
@@ -611,13 +611,13 @@ vfs_file_start_callback (GObject *source_object,
 
 
 static void
-vfs_file_start (CajaFile                   *file,
+vfs_file_start (BaulFile                   *file,
                 GMountOperation                *mount_op,
                 GCancellable                   *cancellable,
-                CajaFileOperationCallback   callback,
+                BaulFileOperationCallback   callback,
                 gpointer                        callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     GError *error;
     GFile *location;
 
@@ -656,7 +656,7 @@ vfs_file_stop_callback (GObject *source_object,
                         GAsyncResult *res,
                         gpointer callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     gboolean stopped;
     GError *error;
 
@@ -683,13 +683,13 @@ vfs_file_stop_callback (GObject *source_object,
 }
 
 static void
-vfs_file_stop (CajaFile                   *file,
+vfs_file_stop (BaulFile                   *file,
                GMountOperation                *mount_op,
                GCancellable                   *cancellable,
-               CajaFileOperationCallback   callback,
+               BaulFileOperationCallback   callback,
                gpointer                        callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     GFile *location;
 
     op = baul_file_operation_new (file, callback, callback_data);
@@ -714,7 +714,7 @@ vfs_file_poll_callback (GObject *source_object,
                         GAsyncResult *res,
                         gpointer callback_data)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     gboolean stopped;
     GError *error;
 
@@ -741,9 +741,9 @@ vfs_file_poll_callback (GObject *source_object,
 }
 
 static void
-vfs_file_poll_for_media (CajaFile *file)
+vfs_file_poll_for_media (BaulFile *file)
 {
-    CajaFileOperation *op;
+    BaulFileOperation *op;
     GFile *location;
 
     op = baul_file_operation_new (file, NULL, NULL);
@@ -764,7 +764,7 @@ baul_vfs_file_init (gpointer object, gpointer klass)
 static void
 baul_vfs_file_class_init (gpointer klass)
 {
-    CajaFileClass *file_class;
+    BaulFileClass *file_class;
 
     file_class = BAUL_FILE_CLASS (klass);
 

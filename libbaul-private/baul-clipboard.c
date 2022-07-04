@@ -2,7 +2,7 @@
 
 /* baul-clipboard.c
  *
- * Caja Clipboard support.  For now, routines to support component cut
+ * Baul Clipboard support.  For now, routines to support component cut
  * and paste.
  *
  * Copyright (C) 1999, 2000  Free Software Foundaton
@@ -131,7 +131,7 @@ action_select_all_callback (GtkAction *action,
 
     g_assert (callback_data != NULL);
 
-    target_data = g_object_get_data (callback_data, "Caja:clipboard_target_data");
+    target_data = g_object_get_data (callback_data, "Baul:clipboard_target_data");
     g_assert (target_data != NULL);
 
     target_data->select_all_callback (callback_data);
@@ -218,7 +218,7 @@ static gboolean
 clipboard_items_are_merged_in (GtkWidget *widget)
 {
     return GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget),
-                            "Caja:clipboard_menu_items_merged"));
+                            "Baul:clipboard_menu_items_merged"));
 }
 
 static void
@@ -226,7 +226,7 @@ set_clipboard_items_are_merged_in (GObject *widget_as_object,
                                    gboolean merged_in)
 {
     g_object_set_data (widget_as_object,
-                       "Caja:clipboard_menu_items_merged",
+                       "Baul:clipboard_menu_items_merged",
                        GINT_TO_POINTER (merged_in));
 }
 
@@ -526,7 +526,7 @@ baul_clipboard_real_set_up (gpointer target,
 {
     TargetCallbackData *target_data;
 
-    if (g_object_get_data (G_OBJECT (target), "Caja:clipboard_target_data") != NULL)
+    if (g_object_get_data (G_OBJECT (target), "Baul:clipboard_target_data") != NULL)
     {
         return;
     }
@@ -546,7 +546,7 @@ baul_clipboard_real_set_up (gpointer target,
     g_signal_connect (target, "destroy",
                       G_CALLBACK (target_destroy_callback), target_data);
 
-    g_object_set_data_full (G_OBJECT (target), "Caja:clipboard_target_data",
+    g_object_set_data_full (G_OBJECT (target), "Baul:clipboard_target_data",
                             target_data, (GDestroyNotify) target_data_free);
 
     /* Call the focus changed callback once to merge if the window is

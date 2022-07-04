@@ -32,7 +32,7 @@
 #include "baul-icon-container.h"
 
 void     baul_connect_background_to_file_metadata    (GtkWidget         *widget,
-                                                      CajaFile          *file,
+                                                      BaulFile          *file,
                                                       GdkDragAction      default_drag_action);
 
-void     baul_connect_desktop_background_to_settings (CajaIconContainer *icon_container);
+void     baul_connect_desktop_background_to_settings (BaulIconContainer *icon_container);

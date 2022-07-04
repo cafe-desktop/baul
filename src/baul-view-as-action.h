@@ -1,16 +1,16 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 2009 Red Hat, Inc.
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of the
  *  License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -29,25 +29,25 @@
 #include <gtk/gtk.h>
 
 #define BAUL_TYPE_VIEW_AS_ACTION            (baul_view_as_action_get_type ())
-#define BAUL_VIEW_AS_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VIEW_AS_ACTION, CajaViewAsAction))
-#define BAUL_VIEW_AS_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_VIEW_AS_ACTION, CajaViewAsActionClass))
+#define BAUL_VIEW_AS_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VIEW_AS_ACTION, BaulViewAsAction))
+#define BAUL_VIEW_AS_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_VIEW_AS_ACTION, BaulViewAsActionClass))
 #define BAUL_IS_VIEW_AS_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_VIEW_AS_ACTION))
 #define BAUL_IS_VIEW_AS_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), BAUL_TYPE_VIEW_AS_ACTION))
-#define BAUL_VIEW_AS_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_VIEW_AS_ACTION, CajaViewAsActionClass))
+#define BAUL_VIEW_AS_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_VIEW_AS_ACTION, BaulViewAsActionClass))
 
-typedef struct _CajaViewAsAction       CajaViewAsAction;
-typedef struct _CajaViewAsActionClass  CajaViewAsActionClass;
-typedef struct _CajaViewAsActionPrivate CajaViewAsActionPrivate;
+typedef struct _BaulViewAsAction       BaulViewAsAction;
+typedef struct _BaulViewAsActionClass  BaulViewAsActionClass;
+typedef struct _BaulViewAsActionPrivate BaulViewAsActionPrivate;
 
-struct _CajaViewAsAction
+struct _BaulViewAsAction
 {
     GtkAction parent;
 
     /*< private >*/
-    CajaViewAsActionPrivate *priv;
+    BaulViewAsActionPrivate *priv;
 };
 
-struct _CajaViewAsActionClass
+struct _BaulViewAsActionClass
 {
     GtkActionClass parent_class;
 };

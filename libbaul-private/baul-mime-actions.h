@@ -31,31 +31,31 @@
 #include "baul-window-info.h"
 #include "baul-window-slot-info.h"
 
-CajaFileAttributes baul_mime_actions_get_required_file_attributes (void);
+BaulFileAttributes baul_mime_actions_get_required_file_attributes (void);
 
-GAppInfo *             baul_mime_get_default_application_for_file     (CajaFile            *file);
-GList *                baul_mime_get_applications_for_file            (CajaFile            *file);
+GAppInfo *             baul_mime_get_default_application_for_file     (BaulFile            *file);
+GList *                baul_mime_get_applications_for_file            (BaulFile            *file);
 
 GAppInfo *             baul_mime_get_default_application_for_files    (GList                   *files);
 GList *                baul_mime_get_applications_for_files           (GList                   *file);
 
-gboolean               baul_mime_has_any_applications_for_file        (CajaFile            *file);
+gboolean               baul_mime_has_any_applications_for_file        (BaulFile            *file);
 
-gboolean               baul_mime_file_opens_in_view                   (CajaFile            *file);
-gboolean               baul_mime_file_opens_in_external_app           (CajaFile            *file);
+gboolean               baul_mime_file_opens_in_view                   (BaulFile            *file);
+gboolean               baul_mime_file_opens_in_external_app           (BaulFile            *file);
 void                   baul_mime_activate_files                       (GtkWindow               *parent_window,
-        CajaWindowSlotInfo  *slot_info,
+        BaulWindowSlotInfo  *slot_info,
         GList                   *files,
         const char              *launch_directory,
-        CajaWindowOpenMode   mode,
-        CajaWindowOpenFlags  flags,
+        BaulWindowOpenMode   mode,
+        BaulWindowOpenFlags  flags,
         gboolean                 user_confirmation);
 void                   baul_mime_activate_file                        (GtkWindow               *parent_window,
-        CajaWindowSlotInfo  *slot_info,
-        CajaFile            *file,
+        BaulWindowSlotInfo  *slot_info,
+        BaulFile            *file,
         const char              *launch_directory,
-        CajaWindowOpenMode   mode,
-        CajaWindowOpenFlags  flags);
+        BaulWindowOpenMode   mode,
+        BaulWindowOpenFlags  flags);
 
 
 #endif /* BAUL_MIME_ACTIONS_H */

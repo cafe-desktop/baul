@@ -44,15 +44,15 @@ G_DEFINE_TYPE (FMIconContainer, fm_icon_container, BAUL_TYPE_ICON_CONTAINER);
 static GQuark attribute_none_q;
 
 static FMIconView *
-get_icon_view (CajaIconContainer *container)
+get_icon_view (BaulIconContainer *container)
 {
     /* Type unsafe comparison for performance */
     return ((FMIconContainer *)container)->view;
 }
 
-static CajaIconInfo *
-fm_icon_container_get_icon_images (CajaIconContainer *container,
-                                   CajaIconData      *data,
+static BaulIconInfo *
+fm_icon_container_get_icon_images (BaulIconContainer *container,
+                                   BaulIconData      *data,
                                    int                    size,
                                    GList                **emblem_pixbufs,
                                    char                 **embedded_text,
@@ -62,13 +62,13 @@ fm_icon_container_get_icon_images (CajaIconContainer *container,
                                    gboolean              *has_window_open)
 {
     FMIconView *icon_view;
-    CajaFile *file;
+    BaulFile *file;
     gboolean use_embedding;
-    CajaFileIconFlags flags;
+    BaulFileIconFlags flags;
     guint emblem_size;
     gint scale;
 
-    file = (CajaFile *) data;
+    file = (BaulFile *) data;
 
     g_assert (BAUL_IS_FILE (file));
     icon_view = get_icon_view (container);
@@ -129,10 +129,10 @@ fm_icon_container_get_icon_images (CajaIconContainer *container,
 }
 
 static char *
-fm_icon_container_get_icon_description (CajaIconContainer *container,
-                                        CajaIconData      *data)
+fm_icon_container_get_icon_description (BaulIconContainer *container,
+                                        BaulIconData      *data)
 {
-    CajaFile *file;
+    BaulFile *file;
     char *mime_type;
     const char *description;
 
@@ -151,15 +151,15 @@ fm_icon_container_get_icon_description (CajaIconContainer *container,
 }
 
 static void
-fm_icon_container_start_monitor_top_left (CajaIconContainer *container,
-        CajaIconData      *data,
+fm_icon_container_start_monitor_top_left (BaulIconContainer *container,
+        BaulIconData      *data,
         gconstpointer          client,
         gboolean               large_text)
 {
-    CajaFile *file;
-    CajaFileAttributes attributes;
+    BaulFile *file;
+    BaulFileAttributes attributes;
 
-    file = (CajaFile *) data;
+    file = (BaulFile *) data;
 
     g_assert (BAUL_IS_FILE (file));
 
@@ -172,13 +172,13 @@ fm_icon_container_start_monitor_top_left (CajaIconContainer *container,
 }
 
 static void
-fm_icon_container_stop_monitor_top_left (CajaIconContainer *container,
-        CajaIconData      *data,
+fm_icon_container_stop_monitor_top_left (BaulIconContainer *container,
+        BaulIconData      *data,
         gconstpointer          client)
 {
-    CajaFile *file;
+    BaulFile *file;
 
-    file = (CajaFile *) data;
+    file = (BaulFile *) data;
 
     g_assert (BAUL_IS_FILE (file));
 
@@ -186,12 +186,12 @@ fm_icon_container_stop_monitor_top_left (CajaIconContainer *container,
 }
 
 static void
-fm_icon_container_prioritize_thumbnailing (CajaIconContainer *container,
-        CajaIconData      *data)
+fm_icon_container_prioritize_thumbnailing (BaulIconContainer *container,
+        BaulIconData      *data)
 {
-    CajaFile *file;
+    BaulFile *file;
 
-    file = (CajaFile *) data;
+    file = (BaulFile *) data;
 
     g_assert (BAUL_IS_FILE (file));
 
@@ -234,7 +234,7 @@ fm_icon_container_get_icon_text_attributes_from_preferences (void)
      *    config files.  Its also possible to use a third party MateConf key
      *    editor and store garbage for the keys in question.
      *
-     * Thankfully, the Caja preferences machinery deals with both of
+     * Thankfully, the Baul preferences machinery deals with both of
      * these cases.
      *
      * In the first case, the preferences dialog widgetry prevents
@@ -272,7 +272,7 @@ quarkv_length (GQuark *attributes)
  *
  **/
 static GQuark *
-fm_icon_container_get_icon_text_attribute_names (CajaIconContainer *container,
+fm_icon_container_get_icon_text_attribute_names (BaulIconContainer *container,
         int *len)
 {
     GQuark *attributes;
@@ -302,8 +302,8 @@ fm_icon_container_get_icon_text_attribute_names (CajaIconContainer *container,
  * part below that is not editable.
  */
 static void
-fm_icon_container_get_icon_text (CajaIconContainer *container,
-                                 CajaIconData      *data,
+fm_icon_container_get_icon_text (BaulIconContainer *container,
+                                 BaulIconData      *data,
                                  char                 **editable_text,
                                  char                 **additional_text,
                                  gboolean               include_invisible)
@@ -312,7 +312,7 @@ fm_icon_container_get_icon_text (CajaIconContainer *container,
     char *text_array[4];
     int i, j, num_attributes;
     FMIconView *icon_view;
-    CajaFile *file;
+    BaulFile *file;
     gboolean use_additional;
 
     file = BAUL_FILE (data);
@@ -437,7 +437,7 @@ typedef enum
 } SortCategory;
 
 static SortCategory
-get_sort_category (CajaFile *file)
+get_sort_category (BaulFile *file)
 {
     SortCategory category;
 
@@ -445,7 +445,7 @@ get_sort_category (CajaFile *file)
 
     if (BAUL_IS_DESKTOP_ICON_FILE (file))
     {
-        CajaDesktopLink *link;
+        BaulDesktopLink *link;
 
         link = baul_desktop_icon_file_get_link (BAUL_DESKTOP_ICON_FILE (file));
 
@@ -480,17 +480,17 @@ get_sort_category (CajaFile *file)
 }
 
 static int
-fm_desktop_icon_container_icons_compare (CajaIconContainer *container,
-        CajaIconData      *data_a,
-        CajaIconData      *data_b)
+fm_desktop_icon_container_icons_compare (BaulIconContainer *container,
+        BaulIconData      *data_a,
+        BaulIconData      *data_b)
 {
-    CajaFile *file_a;
-    CajaFile *file_b;
+    BaulFile *file_a;
+    BaulFile *file_b;
     FMDirectoryView *directory_view;
     SortCategory category_a, category_b;
 
-    file_a = (CajaFile *) data_a;
-    file_b = (CajaFile *) data_b;
+    file_a = (BaulFile *) data_a;
+    file_b = (BaulFile *) data_b;
 
     directory_view = FM_DIRECTORY_VIEW (FM_ICON_CONTAINER (container)->view);
     g_return_val_if_fail (directory_view != NULL, 0);
@@ -517,9 +517,9 @@ fm_desktop_icon_container_icons_compare (CajaIconContainer *container,
 }
 
 static int
-fm_icon_container_compare_icons (CajaIconContainer *container,
-                                 CajaIconData      *icon_a,
-                                 CajaIconData      *icon_b)
+fm_icon_container_compare_icons (BaulIconContainer *container,
+                                 BaulIconData      *icon_a,
+                                 BaulIconData      *icon_b)
 {
     FMIconView *icon_view;
 
@@ -534,14 +534,14 @@ fm_icon_container_compare_icons (CajaIconContainer *container,
 
     /* Type unsafe comparisons for performance */
     return fm_icon_view_compare_files (icon_view,
-                                       (CajaFile *)icon_a,
-                                       (CajaFile *)icon_b);
+                                       (BaulFile *)icon_a,
+                                       (BaulFile *)icon_b);
 }
 
 static int
-fm_icon_container_compare_icons_by_name (CajaIconContainer *container,
-        CajaIconData      *icon_a,
-        CajaIconData      *icon_b)
+fm_icon_container_compare_icons_by_name (BaulIconContainer *container,
+        BaulIconData      *icon_a,
+        BaulIconData      *icon_b)
 {
     return baul_file_compare_for_sort
            (BAUL_FILE (icon_a),
@@ -551,7 +551,7 @@ fm_icon_container_compare_icons_by_name (CajaIconContainer *container,
 }
 
 static void
-fm_icon_container_freeze_updates (CajaIconContainer *container)
+fm_icon_container_freeze_updates (BaulIconContainer *container)
 {
     FMIconView *icon_view;
     icon_view = get_icon_view (container);
@@ -560,7 +560,7 @@ fm_icon_container_freeze_updates (CajaIconContainer *container)
 }
 
 static void
-fm_icon_container_unfreeze_updates (CajaIconContainer *container)
+fm_icon_container_unfreeze_updates (BaulIconContainer *container)
 {
     FMIconView *icon_view;
     icon_view = get_icon_view (container);
@@ -583,7 +583,7 @@ fm_icon_container_dispose (GObject *object)
 static void
 fm_icon_container_class_init (FMIconContainerClass *klass)
 {
-    CajaIconContainerClass *ic_class;
+    BaulIconContainerClass *ic_class;
 
     ic_class = &klass->parent_class;
 
@@ -611,7 +611,7 @@ fm_icon_container_init (FMIconContainer *icon_container)
                                  GTK_STYLE_CLASS_VIEW);
 }
 
-CajaIconContainer *
+BaulIconContainer *
 fm_icon_container_construct (FMIconContainer *icon_container, FMIconView *view)
 {
     AtkObject *atk_obj;
@@ -625,7 +625,7 @@ fm_icon_container_construct (FMIconContainer *icon_container, FMIconView *view)
     return BAUL_ICON_CONTAINER (icon_container);
 }
 
-CajaIconContainer *
+BaulIconContainer *
 fm_icon_container_new (FMIconView *view)
 {
     return fm_icon_container_construct

@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 2000, 2001 Eazel, Inc.
  *
@@ -49,50 +49,50 @@
 
 #define SAVE_TIMEOUT 3
 
-static void load_note_text_from_metadata             (CajaFile                      *file,
-        CajaNotesViewer               *notes);
-static void notes_save_metainfo                      (CajaNotesViewer               *notes);
-static void baul_notes_viewer_sidebar_iface_init (CajaSidebarIface              *iface);
+static void load_note_text_from_metadata             (BaulFile                      *file,
+        BaulNotesViewer               *notes);
+static void notes_save_metainfo                      (BaulNotesViewer               *notes);
+static void baul_notes_viewer_sidebar_iface_init (BaulSidebarIface              *iface);
 static void on_changed                               (GtkEditable                       *editable,
-        CajaNotesViewer               *notes);
-static void property_page_provider_iface_init        (CajaPropertyPageProviderIface *iface);
-static void sidebar_provider_iface_init              (CajaSidebarProviderIface       *iface);
+        BaulNotesViewer               *notes);
+static void property_page_provider_iface_init        (BaulPropertyPageProviderIface *iface);
+static void sidebar_provider_iface_init              (BaulSidebarProviderIface       *iface);
 
 typedef struct
 {
     GtkScrolledWindowClass parent;
-} CajaNotesViewerClass;
+} BaulNotesViewerClass;
 
 typedef struct
 {
     GObject parent;
-} CajaNotesViewerProvider;
+} BaulNotesViewerProvider;
 
 typedef struct
 {
     GObjectClass parent;
-} CajaNotesViewerProviderClass;
+} BaulNotesViewerProviderClass;
 
 
-G_DEFINE_TYPE_WITH_CODE (CajaNotesViewer, baul_notes_viewer, GTK_TYPE_SCROLLED_WINDOW,
+G_DEFINE_TYPE_WITH_CODE (BaulNotesViewer, baul_notes_viewer, GTK_TYPE_SCROLLED_WINDOW,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_notes_viewer_sidebar_iface_init));
 
 static GType baul_notes_viewer_provider_get_type (void);
 
-G_DEFINE_TYPE_WITH_CODE (CajaNotesViewerProvider, baul_notes_viewer_provider, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (BaulNotesViewerProvider, baul_notes_viewer_provider, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_PROPERTY_PAGE_PROVIDER,
                                  property_page_provider_iface_init);
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR_PROVIDER,
                                  sidebar_provider_iface_init));
 
 
-struct _CajaNotesViewerDetails
+struct _BaulNotesViewerDetails
 {
     GtkWidget *note_text_field;
     GtkTextBuffer *text_buffer;
     char *uri;
-    CajaFile *file;
+    BaulFile *file;
     guint save_timeout_id;
     char *previous_saved_text;
     GdkPixbuf *icon;
@@ -101,7 +101,7 @@ struct _CajaNotesViewerDetails
 static gboolean
 schedule_save_callback (gpointer data)
 {
-    CajaNotesViewer *notes;
+    BaulNotesViewer *notes;
 
     notes = data;
 
@@ -116,7 +116,7 @@ schedule_save_callback (gpointer data)
 }
 
 static void
-cancel_pending_save (CajaNotesViewer *notes)
+cancel_pending_save (BaulNotesViewer *notes)
 {
     if (notes->details->save_timeout_id != 0)
     {
@@ -126,7 +126,7 @@ cancel_pending_save (CajaNotesViewer *notes)
 }
 
 static void
-schedule_save (CajaNotesViewer *notes)
+schedule_save (BaulNotesViewer *notes)
 {
     cancel_pending_save (notes);
 
@@ -135,7 +135,7 @@ schedule_save (CajaNotesViewer *notes)
 
 /* notifies event listeners if the notes data actually changed */
 static void
-set_saved_text (CajaNotesViewer *notes, char *new_notes)
+set_saved_text (BaulNotesViewer *notes, char *new_notes)
 {
     char *old_text;
 
@@ -153,7 +153,7 @@ set_saved_text (CajaNotesViewer *notes, char *new_notes)
 
 /* save the metainfo corresponding to the current uri, if any, into the text field */
 static void
-notes_save_metainfo (CajaNotesViewer *notes)
+notes_save_metainfo (BaulNotesViewer *notes)
 {
     char *notes_text;
     GtkTextIter start_iter;
@@ -195,8 +195,8 @@ notes_save_metainfo (CajaNotesViewer *notes)
 }
 
 static void
-load_note_text_from_metadata (CajaFile *file,
-                              CajaNotesViewer *notes)
+load_note_text_from_metadata (BaulFile *file,
+                              BaulNotesViewer *notes)
 {
     char *saved_text;
 
@@ -234,7 +234,7 @@ load_note_text_from_metadata (CajaFile *file,
 }
 
 static void
-done_with_file (CajaNotesViewer *notes)
+done_with_file (BaulNotesViewer *notes)
 {
     cancel_pending_save (notes);
 
@@ -251,9 +251,9 @@ done_with_file (CajaNotesViewer *notes)
 }
 
 static void
-notes_load_metainfo (CajaNotesViewer *notes)
+notes_load_metainfo (BaulNotesViewer *notes)
 {
-    CajaFileAttributes attributes;
+    BaulFileAttributes attributes;
 
     done_with_file (notes);
     notes->details->file = baul_file_get_by_uri (notes->details->uri);
@@ -290,9 +290,9 @@ notes_load_metainfo (CajaNotesViewer *notes)
 }
 
 static void
-loading_uri_callback (CajaWindowInfo *window,
+loading_uri_callback (BaulWindowInfo *window,
                       const char *location,
-                      CajaNotesViewer *notes)
+                      BaulNotesViewer *notes)
 {
     if (strcmp (notes->details->uri, location) != 0)
     {
@@ -308,7 +308,7 @@ on_text_field_focus_out_event (GtkWidget *widget,
                                GdkEventFocus *event,
                                gpointer callback_data)
 {
-    CajaNotesViewer *notes;
+    BaulNotesViewer *notes;
 
     notes = callback_data;
     notes_save_metainfo (notes);
@@ -316,19 +316,19 @@ on_text_field_focus_out_event (GtkWidget *widget,
 }
 
 static void
-on_changed (GtkEditable *editable, CajaNotesViewer *notes)
+on_changed (GtkEditable *editable, BaulNotesViewer *notes)
 {
     schedule_save (notes);
 }
 
 static void
-baul_notes_viewer_init (CajaNotesViewer *sidebar)
+baul_notes_viewer_init (BaulNotesViewer *sidebar)
 {
-    CajaNotesViewerDetails *details;
-    CajaIconInfo *info;
+    BaulNotesViewerDetails *details;
+    BaulIconInfo *info;
     gint scale;
 
-    details = g_new0 (CajaNotesViewerDetails, 1);
+    details = g_new0 (BaulNotesViewerDetails, 1);
     sidebar->details = details;
 
     details->uri = g_strdup ("");
@@ -367,7 +367,7 @@ baul_notes_viewer_init (CajaNotesViewer *sidebar)
 static void
 baul_notes_viewer_finalize (GObject *object)
 {
-    CajaNotesViewer *sidebar;
+    BaulNotesViewer *sidebar;
 
     sidebar = BAUL_NOTES_VIEWER (object);
 
@@ -385,33 +385,33 @@ baul_notes_viewer_finalize (GObject *object)
 
 
 static void
-baul_notes_viewer_class_init (CajaNotesViewerClass *class)
+baul_notes_viewer_class_init (BaulNotesViewerClass *class)
 {
     G_OBJECT_CLASS (class)->finalize = baul_notes_viewer_finalize;
 }
 
 static const char *
-baul_notes_viewer_get_sidebar_id (CajaSidebar *sidebar)
+baul_notes_viewer_get_sidebar_id (BaulSidebar *sidebar)
 {
     return BAUL_NOTES_SIDEBAR_ID;
 }
 
 static char *
-baul_notes_viewer_get_tab_label (CajaSidebar *sidebar)
+baul_notes_viewer_get_tab_label (BaulSidebar *sidebar)
 {
     return g_strdup (_("Notes"));
 }
 
 static char *
-baul_notes_viewer_get_tab_tooltip (CajaSidebar *sidebar)
+baul_notes_viewer_get_tab_tooltip (BaulSidebar *sidebar)
 {
     return g_strdup (_("Show Notes"));
 }
 
 static GdkPixbuf *
-baul_notes_viewer_get_tab_icon (CajaSidebar *sidebar)
+baul_notes_viewer_get_tab_icon (BaulSidebar *sidebar)
 {
-    CajaNotesViewer *notes;
+    BaulNotesViewer *notes;
 
     notes = BAUL_NOTES_VIEWER (sidebar);
 
@@ -425,14 +425,14 @@ baul_notes_viewer_get_tab_icon (CajaSidebar *sidebar)
 }
 
 static void
-baul_notes_viewer_is_visible_changed (CajaSidebar *sidebar,
+baul_notes_viewer_is_visible_changed (BaulSidebar *sidebar,
                                       gboolean         is_visible)
 {
     /* Do nothing */
 }
 
 static void
-baul_notes_viewer_sidebar_iface_init (CajaSidebarIface *iface)
+baul_notes_viewer_sidebar_iface_init (BaulSidebarIface *iface)
 {
     iface->get_sidebar_id = baul_notes_viewer_get_sidebar_id;
     iface->get_tab_label = baul_notes_viewer_get_tab_label;
@@ -442,10 +442,10 @@ baul_notes_viewer_sidebar_iface_init (CajaSidebarIface *iface)
 }
 
 static void
-baul_notes_viewer_set_parent_window (CajaNotesViewer *sidebar,
-                                     CajaWindowInfo *window)
+baul_notes_viewer_set_parent_window (BaulNotesViewer *sidebar,
+                                     BaulWindowInfo *window)
 {
-    CajaWindowSlotInfo *slot;
+    BaulWindowSlotInfo *slot;
 
     slot = baul_window_info_get_active_slot (window);
 
@@ -461,11 +461,11 @@ baul_notes_viewer_set_parent_window (CajaNotesViewer *sidebar,
      baul_window_info_get_ui_manager (window));
 }
 
-static CajaSidebar *
-baul_notes_viewer_create_sidebar (CajaSidebarProvider *provider,
-                                  CajaWindowInfo *window)
+static BaulSidebar *
+baul_notes_viewer_create_sidebar (BaulSidebarProvider *provider,
+                                  BaulWindowInfo *window)
 {
-    CajaNotesViewer *sidebar;
+    BaulNotesViewer *sidebar;
 
     sidebar = g_object_new (baul_notes_viewer_get_type (), NULL);
     baul_notes_viewer_set_parent_window (sidebar, window);
@@ -475,14 +475,14 @@ baul_notes_viewer_create_sidebar (CajaSidebarProvider *provider,
 }
 
 static GList *
-get_property_pages (CajaPropertyPageProvider *provider,
+get_property_pages (BaulPropertyPageProvider *provider,
                     GList *files)
 {
     GList *pages;
-    CajaPropertyPage *page;
-    CajaFileInfo *file;
+    BaulPropertyPage *page;
+    BaulFileInfo *file;
     char *uri;
-    CajaNotesViewer *viewer;
+    BaulNotesViewer *viewer;
 
 
     /* Only show the property page if 1 file is selected */
@@ -502,7 +502,7 @@ get_property_pages (CajaPropertyPageProvider *provider,
     notes_load_metainfo (viewer);
 
     page = baul_property_page_new
-           ("CajaNotesViewer::property_page",
+           ("BaulNotesViewer::property_page",
             gtk_label_new (_("Notes")),
             GTK_WIDGET (viewer));
     pages = g_list_append (pages, page);
@@ -511,24 +511,24 @@ get_property_pages (CajaPropertyPageProvider *provider,
 }
 
 static void
-property_page_provider_iface_init (CajaPropertyPageProviderIface *iface)
+property_page_provider_iface_init (BaulPropertyPageProviderIface *iface)
 {
     iface->get_pages = get_property_pages;
 }
 
 static void
-sidebar_provider_iface_init (CajaSidebarProviderIface *iface)
+sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 {
     iface->create = baul_notes_viewer_create_sidebar;
 }
 
 static void
-baul_notes_viewer_provider_init (CajaNotesViewerProvider *sidebar)
+baul_notes_viewer_provider_init (BaulNotesViewerProvider *sidebar)
 {
 }
 
 static void
-baul_notes_viewer_provider_class_init (CajaNotesViewerProviderClass *class)
+baul_notes_viewer_provider_class_init (BaulNotesViewerProviderClass *class)
 {
 }
 

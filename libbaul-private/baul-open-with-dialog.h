@@ -30,25 +30,25 @@
 #include <gio/gio.h>
 
 #define BAUL_TYPE_OPEN_WITH_DIALOG         (baul_open_with_dialog_get_type ())
-#define BAUL_OPEN_WITH_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_OPEN_WITH_DIALOG, CajaOpenWithDialog))
-#define BAUL_OPEN_WITH_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_OPEN_WITH_DIALOG, CajaOpenWithDialogClass))
+#define BAUL_OPEN_WITH_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_OPEN_WITH_DIALOG, BaulOpenWithDialog))
+#define BAUL_OPEN_WITH_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_OPEN_WITH_DIALOG, BaulOpenWithDialogClass))
 #define BAUL_IS_OPEN_WITH_DIALOG(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_OPEN_WITH_DIALOG)
 
-typedef struct _CajaOpenWithDialog        CajaOpenWithDialog;
-typedef struct _CajaOpenWithDialogClass   CajaOpenWithDialogClass;
-typedef struct _CajaOpenWithDialogDetails CajaOpenWithDialogDetails;
+typedef struct _BaulOpenWithDialog        BaulOpenWithDialog;
+typedef struct _BaulOpenWithDialogClass   BaulOpenWithDialogClass;
+typedef struct _BaulOpenWithDialogDetails BaulOpenWithDialogDetails;
 
-struct _CajaOpenWithDialog
+struct _BaulOpenWithDialog
 {
     GtkDialog parent;
-    CajaOpenWithDialogDetails *details;
+    BaulOpenWithDialogDetails *details;
 };
 
-struct _CajaOpenWithDialogClass
+struct _BaulOpenWithDialogClass
 {
     GtkDialogClass parent_class;
 
-    void (*application_selected) (CajaOpenWithDialog *dialog,
+    void (*application_selected) (BaulOpenWithDialog *dialog,
                                   GAppInfo *application);
 };
 

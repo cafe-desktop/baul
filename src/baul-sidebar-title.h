@@ -1,11 +1,11 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
@@ -37,41 +37,41 @@
 
 #define BAUL_TYPE_SIDEBAR_TITLE baul_sidebar_title_get_type()
 #define BAUL_SIDEBAR_TITLE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR_TITLE, CajaSidebarTitle))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR_TITLE, BaulSidebarTitle))
 #define BAUL_SIDEBAR_TITLE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SIDEBAR_TITLE, CajaSidebarTitleClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SIDEBAR_TITLE, BaulSidebarTitleClass))
 #define BAUL_IS_SIDEBAR_TITLE(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SIDEBAR_TITLE))
 #define BAUL_IS_SIDEBAR_TITLE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SIDEBAR_TITLE))
 #define BAUL_SIDEBAR_TITLE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SIDEBAR_TITLE, CajaSidebarTitleClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SIDEBAR_TITLE, BaulSidebarTitleClass))
 
-typedef struct _CajaSidebarTitlePrivate CajaSidebarTitlePrivate;
+typedef struct _BaulSidebarTitlePrivate BaulSidebarTitlePrivate;
 
 typedef struct
 {
     GtkBox box;
-    CajaSidebarTitlePrivate *details;
-} CajaSidebarTitle;
+    BaulSidebarTitlePrivate *details;
+} BaulSidebarTitle;
 
 typedef struct
 {
     GtkBoxClass parent_class;
-} CajaSidebarTitleClass;
+} BaulSidebarTitleClass;
 
 GType      baul_sidebar_title_get_type          (void);
 GtkWidget *baul_sidebar_title_new               (void);
-void       baul_sidebar_title_set_file          (CajaSidebarTitle *sidebar_title,
-        CajaFile         *file,
+void       baul_sidebar_title_set_file          (BaulSidebarTitle *sidebar_title,
+        BaulFile         *file,
         const char           *initial_text);
-void       baul_sidebar_title_set_text          (CajaSidebarTitle *sidebar_title,
+void       baul_sidebar_title_set_text          (BaulSidebarTitle *sidebar_title,
         const char           *new_title);
-char *     baul_sidebar_title_get_text          (CajaSidebarTitle *sidebar_title);
-gboolean   baul_sidebar_title_hit_test_icon     (CajaSidebarTitle *sidebar_title,
+char *     baul_sidebar_title_get_text          (BaulSidebarTitle *sidebar_title);
+gboolean   baul_sidebar_title_hit_test_icon     (BaulSidebarTitle *sidebar_title,
         int                   x,
         int                   y);
-void       baul_sidebar_title_select_text_color (CajaSidebarTitle *sidebar_title,
+void       baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
         					 EelBackground        *background);
 
 #endif /* BAUL_SIDEBAR_TITLE_H */

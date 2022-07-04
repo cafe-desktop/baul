@@ -1,17 +1,17 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 1999, 2000, 2001 Eazel, Inc.
  * Copyright (C) 2001 Red Hat, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -51,9 +51,9 @@
 
 #include "baul-emblem-sidebar.h"
 
-struct CajaEmblemSidebarDetails
+struct BaulEmblemSidebarDetails
 {
-    CajaWindowInfo *window;
+    BaulWindowInfo *window;
     GtkWidget *emblems_table;
     GtkWidget *popup;
     GtkWidget *popup_remove;
@@ -68,10 +68,10 @@ struct CajaEmblemSidebarDetails
 #define STANDARD_EMBLEM_HEIGHT			52
 #define EMBLEM_LABEL_SPACING			2
 
-static void baul_emblem_sidebar_populate          (CajaEmblemSidebar        *emblem_sidebar);
-static void baul_emblem_sidebar_refresh           (CajaEmblemSidebar        *emblem_sidebar);
-static void baul_emblem_sidebar_iface_init        (CajaSidebarIface         *iface);
-static void sidebar_provider_iface_init           (CajaSidebarProviderIface *iface);
+static void baul_emblem_sidebar_populate          (BaulEmblemSidebar        *emblem_sidebar);
+static void baul_emblem_sidebar_refresh           (BaulEmblemSidebar        *emblem_sidebar);
+static void baul_emblem_sidebar_iface_init        (BaulSidebarIface         *iface);
+static void sidebar_provider_iface_init           (BaulSidebarProviderIface *iface);
 static GType baul_emblem_sidebar_provider_get_type (void);
 
 static const GtkTargetEntry drag_types[] =
@@ -104,18 +104,18 @@ typedef struct _Emblem
 typedef struct
 {
     GObject parent;
-} CajaEmblemSidebarProvider;
+} BaulEmblemSidebarProvider;
 
 typedef struct
 {
     GObjectClass parent;
-} CajaEmblemSidebarProviderClass;
+} BaulEmblemSidebarProviderClass;
 
-G_DEFINE_TYPE_WITH_CODE (CajaEmblemSidebar, baul_emblem_sidebar, GTK_TYPE_BOX,
+G_DEFINE_TYPE_WITH_CODE (BaulEmblemSidebar, baul_emblem_sidebar, GTK_TYPE_BOX,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_emblem_sidebar_iface_init));
 
-G_DEFINE_TYPE_WITH_CODE (CajaEmblemSidebarProvider, baul_emblem_sidebar_provider, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (BaulEmblemSidebarProvider, baul_emblem_sidebar_provider, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR_PROVIDER,
                                  sidebar_provider_iface_init));
 
@@ -125,7 +125,7 @@ baul_emblem_sidebar_drag_data_get_cb (GtkWidget *widget,
                                       GtkSelectionData *data,
                                       guint info,
                                       guint time,
-                                      CajaEmblemSidebar *emblem_sidebar)
+                                      BaulEmblemSidebar *emblem_sidebar)
 {
     char *keyword;
 
@@ -140,7 +140,7 @@ baul_emblem_sidebar_drag_data_get_cb (GtkWidget *widget,
 
 static void
 baul_emblem_sidebar_enter_notify_cb (GtkWidget *widget,
-                                     CajaEmblemSidebar *emblem_sidebar)
+                                     BaulEmblemSidebar *emblem_sidebar)
 {
     GdkPixbuf *pixbuf;
     EelLabeledImage *image;
@@ -153,7 +153,7 @@ baul_emblem_sidebar_enter_notify_cb (GtkWidget *widget,
 
 static void
 baul_emblem_sidebar_leave_notify_cb (GtkWidget *widget,
-                                     CajaEmblemSidebar *emblem_sidebar)
+                                     BaulEmblemSidebar *emblem_sidebar)
 {
     GdkPixbuf *pixbuf;
     EelLabeledImage *image;
@@ -167,7 +167,7 @@ baul_emblem_sidebar_leave_notify_cb (GtkWidget *widget,
 static gboolean
 baul_emblem_sidebar_button_press_cb (GtkWidget *widget,
                                      GdkEventButton *event,
-                                     CajaEmblemSidebar *emblem_sidebar)
+                                     BaulEmblemSidebar *emblem_sidebar)
 {
     char *keyword, *name;
     GdkPixbuf *pixbuf;
@@ -206,14 +206,14 @@ send_emblems_changed (void)
 
 static void
 emblems_changed_callback (GObject *signaller,
-                          CajaEmblemSidebar *emblem_sidebar)
+                          BaulEmblemSidebar *emblem_sidebar)
 {
     baul_emblem_sidebar_refresh (emblem_sidebar);
 }
 
 static void
 baul_emblem_sidebar_delete_cb (GtkWidget *menu_item,
-                               CajaEmblemSidebar *emblem_sidebar)
+                               BaulEmblemSidebar *emblem_sidebar)
 {
     if (baul_emblem_remove_emblem (emblem_sidebar->details->popup_emblem_keyword))
     {
@@ -232,7 +232,7 @@ baul_emblem_sidebar_delete_cb (GtkWidget *menu_item,
 
 static void
 rename_dialog_response_cb (GtkWidget *dialog, int response,
-                           CajaEmblemSidebar *emblem_sidebar)
+                           BaulEmblemSidebar *emblem_sidebar)
 {
     GtkWidget *entry;
     char *keyword, *name;
@@ -276,7 +276,7 @@ rename_dialog_response_cb (GtkWidget *dialog, int response,
 }
 
 static GtkWidget *
-create_rename_emblem_dialog (CajaEmblemSidebar *emblem_sidebar,
+create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar,
                              const char *keyword, const char *orig_name,
                              GdkPixbuf *pixbuf)
 {
@@ -341,7 +341,7 @@ create_rename_emblem_dialog (CajaEmblemSidebar *emblem_sidebar,
 
 static void
 baul_emblem_sidebar_rename_cb (GtkWidget *menu_item,
-                               CajaEmblemSidebar *emblem_sidebar)
+                               BaulEmblemSidebar *emblem_sidebar)
 {
     GtkWidget *dialog;
 
@@ -356,7 +356,7 @@ baul_emblem_sidebar_rename_cb (GtkWidget *menu_item,
 }
 
 static void
-create_popup_menu (CajaEmblemSidebar *emblem_sidebar)
+create_popup_menu (BaulEmblemSidebar *emblem_sidebar)
 {
     GtkWidget *popup, *menu_item;
 
@@ -388,7 +388,7 @@ create_popup_menu (CajaEmblemSidebar *emblem_sidebar)
 }
 
 static GtkWidget *
-create_emblem_widget_with_pixbuf (CajaEmblemSidebar *emblem_sidebar,
+create_emblem_widget_with_pixbuf (BaulEmblemSidebar *emblem_sidebar,
                                   const char *keyword,
                                   const char *display_name,
                                   GdkPixbuf *pixbuf)
@@ -449,14 +449,14 @@ create_emblem_widget_with_pixbuf (CajaEmblemSidebar *emblem_sidebar,
 }
 
 static GtkWidget *
-create_emblem_widget (CajaEmblemSidebar *emblem_sidebar,
+create_emblem_widget (BaulEmblemSidebar *emblem_sidebar,
                       const char *name)
 {
     GtkWidget *ret;
     const char *display_name;
     char *keyword;
     GdkPixbuf *pixbuf;
-    CajaIconInfo *info;
+    BaulIconInfo *info;
 
     info = baul_icon_info_lookup_from_name (name, BAUL_ICON_SIZE_STANDARD, 1);
 
@@ -531,7 +531,7 @@ destroy_emblem_list (GSList *list)
 }
 
 static GtkWidget *
-create_add_emblems_dialog (CajaEmblemSidebar *emblem_sidebar,
+create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
                            GSList *emblems)
 {
     GtkWidget *dialog, *label, *table;
@@ -644,7 +644,7 @@ remove_widget (GtkWidget *widget, GtkContainer *container)
 }
 
 static void
-baul_emblem_sidebar_refresh (CajaEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_refresh (BaulEmblemSidebar *emblem_sidebar)
 {
     baul_emblem_refresh_list ();
 
@@ -657,7 +657,7 @@ baul_emblem_sidebar_refresh (CajaEmblemSidebar *emblem_sidebar)
 
 static void
 add_emblems_dialog_response_cb (GtkWidget *dialog, int response,
-                                CajaEmblemSidebar *emblem_sidebar)
+                                BaulEmblemSidebar *emblem_sidebar)
 {
     Emblem *emblem;
     GSList *emblems;
@@ -720,7 +720,7 @@ add_emblems_dialog_response_cb (GtkWidget *dialog, int response,
 }
 
 static void
-show_add_emblems_dialog (CajaEmblemSidebar *emblem_sidebar,
+show_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
                          GSList *emblems)
 {
     GtkWidget *dialog;
@@ -749,7 +749,7 @@ baul_emblem_sidebar_drag_received_cb (GtkWidget *widget,
                                       GtkSelectionData *data,
                                       guint info,
                                       guint time,
-                                      CajaEmblemSidebar *emblem_sidebar)
+                                      BaulEmblemSidebar *emblem_sidebar)
 {
     GSList *emblems;
     Emblem *emblem;
@@ -938,7 +938,7 @@ baul_emblem_sidebar_drag_received_cb (GtkWidget *widget,
 }
 
 static GtkWidget *
-baul_emblem_sidebar_create_container (CajaEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_create_container (BaulEmblemSidebar *emblem_sidebar)
 {
     GtkWidget *emblems_table, *scroller;
 
@@ -977,7 +977,7 @@ emblem_widget_sort_func (gconstpointer a, gconstpointer b)
 }
 
 static void
-baul_emblem_sidebar_populate (CajaEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_populate (BaulEmblemSidebar *emblem_sidebar)
 {
     GList *icons, *l, *widgets;
     GtkWidget *emblem_widget;
@@ -1044,11 +1044,11 @@ baul_emblem_sidebar_populate (CajaEmblemSidebar *emblem_sidebar)
 }
 
 static void
-baul_emblem_sidebar_init (CajaEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_init (BaulEmblemSidebar *emblem_sidebar)
 {
     GtkWidget *widget;
 
-    emblem_sidebar->details = g_new0 (CajaEmblemSidebarDetails, 1);
+    emblem_sidebar->details = g_new0 (BaulEmblemSidebarDetails, 1);
 
     create_popup_menu (emblem_sidebar);
 
@@ -1067,7 +1067,7 @@ baul_emblem_sidebar_init (CajaEmblemSidebar *emblem_sidebar)
 static void
 baul_emblem_sidebar_finalize (GObject *object)
 {
-    CajaEmblemSidebar *emblem_sidebar;
+    BaulEmblemSidebar *emblem_sidebar;
 
     g_assert (BAUL_IS_EMBLEM_SIDEBAR (object));
     emblem_sidebar = BAUL_EMBLEM_SIDEBAR (object);
@@ -1081,7 +1081,7 @@ baul_emblem_sidebar_finalize (GObject *object)
 }
 
 static void
-baul_emblem_sidebar_class_init (CajaEmblemSidebarClass *object_klass)
+baul_emblem_sidebar_class_init (BaulEmblemSidebarClass *object_klass)
 {
     GObjectClass *gobject_class;
 
@@ -1091,38 +1091,38 @@ baul_emblem_sidebar_class_init (CajaEmblemSidebarClass *object_klass)
 }
 
 static const char *
-baul_emblem_sidebar_get_sidebar_id (CajaSidebar *sidebar)
+baul_emblem_sidebar_get_sidebar_id (BaulSidebar *sidebar)
 {
     return BAUL_EMBLEM_SIDEBAR_ID;
 }
 
 static char *
-baul_emblem_sidebar_get_tab_label (CajaSidebar *sidebar)
+baul_emblem_sidebar_get_tab_label (BaulSidebar *sidebar)
 {
     return g_strdup (_("Emblems"));
 }
 
 static char *
-baul_emblem_sidebar_get_tab_tooltip (CajaSidebar *sidebar)
+baul_emblem_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
 {
     return g_strdup (_("Show Emblems"));
 }
 
 static GdkPixbuf *
-baul_emblem_sidebar_get_tab_icon (CajaSidebar *sidebar)
+baul_emblem_sidebar_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;
 }
 
 static void
-baul_emblem_sidebar_is_visible_changed (CajaSidebar *sidebar,
+baul_emblem_sidebar_is_visible_changed (BaulSidebar *sidebar,
                                         gboolean         is_visible)
 {
     /* Do nothing */
 }
 
 static void
-baul_emblem_sidebar_iface_init (CajaSidebarIface *iface)
+baul_emblem_sidebar_iface_init (BaulSidebarIface *iface)
 {
     iface->get_sidebar_id = baul_emblem_sidebar_get_sidebar_id;
     iface->get_tab_label = baul_emblem_sidebar_get_tab_label;
@@ -1132,17 +1132,17 @@ baul_emblem_sidebar_iface_init (CajaSidebarIface *iface)
 }
 
 static void
-baul_emblem_sidebar_set_parent_window (CajaEmblemSidebar *sidebar,
-                                       CajaWindowInfo *window)
+baul_emblem_sidebar_set_parent_window (BaulEmblemSidebar *sidebar,
+                                       BaulWindowInfo *window)
 {
     sidebar->details->window = window;
 }
 
-static CajaSidebar *
-baul_emblem_sidebar_create (CajaSidebarProvider *provider,
-                            CajaWindowInfo *window)
+static BaulSidebar *
+baul_emblem_sidebar_create (BaulSidebarProvider *provider,
+                            BaulWindowInfo *window)
 {
-    CajaEmblemSidebar *sidebar;
+    BaulEmblemSidebar *sidebar;
 
     sidebar = g_object_new (baul_emblem_sidebar_get_type (), NULL);
     baul_emblem_sidebar_set_parent_window (sidebar, window);
@@ -1152,18 +1152,18 @@ baul_emblem_sidebar_create (CajaSidebarProvider *provider,
 }
 
 static void
-sidebar_provider_iface_init (CajaSidebarProviderIface *iface)
+sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 {
     iface->create = baul_emblem_sidebar_create;
 }
 
 static void
-baul_emblem_sidebar_provider_init (CajaEmblemSidebarProvider *sidebar)
+baul_emblem_sidebar_provider_init (BaulEmblemSidebarProvider *sidebar)
 {
 }
 
 static void
-baul_emblem_sidebar_provider_class_init (CajaEmblemSidebarProviderClass *class)
+baul_emblem_sidebar_provider_class_init (BaulEmblemSidebarProviderClass *class)
 {
 }
 

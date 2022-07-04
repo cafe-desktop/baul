@@ -305,8 +305,8 @@ msgstr "削除"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -314,7 +314,7 @@ msgstr "MATE デスクトップ環境向けのファイルマネージャー"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -322,8 +322,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -2871,29 +2871,29 @@ msgid ""
 msgstr "trueの場合、[ctrl + tab]および[ctrl + shift + tab]を使用してタブを切り替えることができます。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "最後のウィンドウが削除された時に、Caja を終了します。"
+msgid "Baul will exit when last window destroyed."
+msgstr "最後のウィンドウが削除された時に、Baul を終了します。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
-"TRUE にすると、全てのウィンドウを閉じた時に Caja を終了します。これはデフォルトの設定です。FALSE "
-"にすると、ウィンドウなしで起動することができます。これにより、Caja はメディアの自動マウントなどのタスクを提供するデーモンとして振る舞います。"
+"TRUE にすると、全てのウィンドウを閉じた時に Baul を終了します。これはデフォルトの設定です。FALSE "
+"にすると、ウィンドウなしで起動することができます。これにより、Baul はメディアの自動マウントなどのタスクを提供するデーモンとして振る舞います。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
-msgstr "すべてのウィンドウがブラウザに統一されている旧バージョンの Caja の動作を有効にする"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
+msgstr "すべてのウィンドウがブラウザに統一されている旧バージョンの Baul の動作を有効にする"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
-"TRUE にすると、すべての Caja ウィンドウがブラウザ型式のウィンドウになります。これはバージョン 2.6 以前の Nautilus "
+"TRUE にすると、すべての Baul ウィンドウがブラウザ型式のウィンドウになります。これはバージョン 2.6 以前の Nautilus "
 "の動作を再現するものです (このスタイルを好むユーザーがいるために残してある機能です)。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:96
@@ -2902,9 +2902,9 @@ msgstr "常に場所エントリを使用する (パスバーは使わない)"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
-msgstr "TRUE にすると、Caja ブラウザの場所バーはパスバーのスタイルではなく、キーボードから入力するスタイルを使用します。"
+msgstr "TRUE にすると、Baul ブラウザの場所バーはパスバーのスタイルではなく、キーボードから入力するスタイルを使用します。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
@@ -2912,7 +2912,7 @@ msgstr "ファイルを削除したりゴミ箱へ移動する度に確認する
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr "TRUE にすると、ファイルを削除したりゴミ箱に移動するたびに確認ダイアログを表示します。"
 
@@ -2922,7 +2922,7 @@ msgstr "ファイルをゴミ箱に起動する際に確認ダイアログを表
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr "TRUE にすると、ファイルをゴミ箱に移動する前に確認ダイアログを表示します。"
 
@@ -2932,11 +2932,11 @@ msgstr "ファイルの即削除を有効にするかどうか"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"TRUE にすると、Caja はファイルをゴミ箱に移動するかわりに直ちに削除する権限を得ます。この機能は危険なので、注意深く設定してください。"
+"TRUE にすると、Baul はファイルをゴミ箱に移動するかわりに直ちに削除する権限を得ます。この機能は危険なので、注意深く設定してください。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:117
 msgid "When to show preview text in icons"
@@ -3006,15 +3006,15 @@ msgstr ""
 "未知の MIME 型のファイルが開かれた際、ファイルを取り扱えるアプリケーションを探す代わりにパッケージインストーラーを表示するかどうかです。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
-msgstr "Caja のブラウザウィンドウでマウスの特別なボタンを使う"
+msgid "Use extra mouse button events in Baul' browser window"
+msgstr "Baul のブラウザウィンドウでマウスの特別なボタンを使う"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
-"「進む」「戻る」ボタンのあるマウスを使う場合、Caja 中においてそれらのボタンを押した時に何らかのアクションを実行するかどうか、このキーによって "
+"「進む」「戻る」ボタンのあるマウスを使う場合、Baul 中においてそれらのボタンを押した時に何らかのアクションを実行するかどうか、このキーによって "
 "決定します"
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
@@ -3092,7 +3092,7 @@ msgstr "ファイルのプロパティダイアログに拡張版のアクセス
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
 "TRUE にすると、UNIX 形式でファイルのアクセス権限を編集したり表示します。さらにいろいろな秘密のオプションにもアクセスできるようになります。"
@@ -3103,7 +3103,7 @@ msgstr "ウィンドウの中でフォルダーを最初に表示する"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr "TRUE にすると、アイコン表示と一覧表示でファイルの前にフォルダーを表示します。"
 
@@ -3132,12 +3132,12 @@ msgstr ""
 "でファイルを並び替えるかわりに、\"z\" 〜 \"a\" の順番で並べます。サイズ順にすると、大きい順のかわりに小さい順で並べます。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja がユーザーのホームフォルダーをデスクトップとして使用する"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul がユーザーのホームフォルダーをデスクトップとして使用する"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
 "TRUE にすると、ユーザーのホームフォルダーをデスクトップとして利用します。FALSE の場合は、~/Desktop をデスクトップとして利用します。"
@@ -3268,7 +3268,7 @@ msgid "Whether to show desktop notifications"
 msgstr "デスクトップ通知を表示するかどうか"
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3403,9 +3403,9 @@ msgstr "ツリー式サイドペインではフォルダーのみ表示する"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
-msgstr "TRUE にすると、Caja はツリー式サイドペインの中にフォルダーのみ表示します。それ以外はフォルダーとファイルの両方を表示します。"
+msgstr "TRUE にすると、Baul はツリー式サイドペインの中にフォルダーのみ表示します。それ以外はフォルダーとファイルの両方を表示します。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
 msgid "Desktop font"
@@ -3597,7 +3597,7 @@ msgstr "メディアを自動的にマウントするかどうか"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
 "TRUE にすると、MATE "
@@ -3609,7 +3609,7 @@ msgstr "マウントしたメディアを自動的にフォルダーとして開
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
@@ -3623,7 +3623,7 @@ msgstr "メディアの挿入時にオートラン・プログラムを起動し
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr "TRUE にすると、メディアを挿入してもオートラン/オートスタート・プログラムを起動したり確認ダイアログを表示しなくなります。"
 
@@ -3728,26 +3728,26 @@ msgstr "セッション管理のオプションを表示する"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
+msgid "Baul could not create the required folder \"%s\"."
 msgstr "指定したフォルダー \"%s\" を生成できませんでした。"
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
-msgstr "Caja を起動する前にこのフォルダーを生成するか、Caja がフォルダーを生成できるように適切なパーミッションを設定してください。"
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
+msgstr "Baul を起動する前にこのフォルダーを生成するか、Baul がフォルダーを生成できるように適切なパーミッションを設定してください。"
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja は必要なフォルダーを生成できませんでした: %s"
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul は必要なフォルダーを生成できませんでした: %s"
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Caja を起動する前にこれらのフォルダーを作成するか、Caja がそれらのフォルダーを作成できるように適切なパーミッションを設定してください。"
+"Baul を起動する前にこれらのフォルダーを作成するか、Baul がそれらのフォルダーを作成できるように適切なパーミッションを設定してください。"
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -3808,8 +3808,8 @@ msgid "Open a browser window."
 msgstr "ブラウザーウィンドウを開きます。"
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Caja を強制終了する"
+msgid "Quit Baul."
+msgstr "Baul を強制終了する"
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -4805,8 +4805,8 @@ msgid "New _Window"
 msgstr "新しいウィンドウ(_W)"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "この場所を別の Caja ウィンドウで開きます"
+msgid "Open another Baul window for the displayed location"
+msgstr "この場所を別の Baul ウィンドウで開きます"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -5623,8 +5623,8 @@ msgid "View of the current folder"
 msgstr "このフォルダーを表示します"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja でフォルダーを表示できるビューアがインストールされていません。"
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul でフォルダーを表示できるビューアがインストールされていません。"
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5641,12 +5641,12 @@ msgstr "つづりを確認して再試行してください。"
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "Caja では \"%s:\" という場所を扱うことはできません。"
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "Baul では \"%s:\" という場所を扱うことはできません。"
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Caja ではこの種類の場所を扱えません。"
+msgid "Baul cannot handle this kind of location."
+msgstr "Baul ではこの種類の場所を扱えません。"
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -5681,28 +5681,28 @@ msgstr "このブックマークに指定されている場所に移動します
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja はフリーソフトウェアです; フリーソフトウェア財団が発行する GNU "
+"Baul はフリーソフトウェアです; フリーソフトウェア財団が発行する GNU "
 "一般公有使用許諾契約書の第2版またはそれ以降の版の下で改変・修正・再配布が認められています。"
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Caja は便利に使ってもらえるように配布されていますが、完全に無保証です。商用利用または特定の目的における適合性の保証もありません。詳細は GNU "
+"Baul は便利に使ってもらえるように配布されていますが、完全に無保証です。商用利用または特定の目的における適合性の保証もありません。詳細は GNU "
 "一般公有使用許諾契約書をご覧ください。"
 
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "本プログラムと一緒に GNU 一般公有使用許諾契約書の写しを受け取っているはずです。そうでない場合は、Free Software Foundation,"
@@ -5710,18 +5710,18 @@ msgstr ""
 "まで手紙を書いてください。"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
-msgstr "Caja はお使いのコンピュータとリモートのコンピュータにあるいろいろなファイルやフォルダーを整理してくれます。"
+"Baul lets you organize files and folders, both on your computer and online."
+msgstr "Baul はお使いのコンピュータとリモートのコンピュータにあるいろいろなファイルやフォルダーを整理してくれます。"
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -5774,8 +5774,8 @@ msgid "Prefere_nces"
 msgstr "設定(_N)"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Caja の設定を編集します"
+msgid "Edit Baul preferences"
+msgstr "Baul の設定を編集します"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -5802,16 +5802,16 @@ msgid "_Contents"
 msgstr "目次(_C)"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Caja のヘルプを表示します"
+msgid "Display Baul help"
+msgstr "Baul のヘルプを表示します"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "情報(_A)"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Caja を開発した人たちのクレジットを表示します"
+msgid "Display credits for the creators of Baul"
+msgstr "Baul を開発した人たちのクレジットを表示します"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6183,7 +6183,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6203,7 +6203,7 @@ msgstr ""
 "\n"
 "ローカルフォルダーで実行すると、選択したファイル名がスクリプトの引数になります。リモートフォルダー (例: Web や FTP の内容を表示するフォルダー) で実行すると、スクリプトには何も渡されません。\n"
 "\n"
-"すべてに共通することとして、スクリプトは Caja がセットした次の環境変数を使用します:\n"
+"すべてに共通することとして、スクリプトは Baul がセットした次の環境変数を使用します:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: 選択したパス名を改行で区切ったもの (ローカルのみ)\n"
 "\n"

@@ -1,5 +1,5 @@
 /*
- *  baul-info-provider.h - Interface for Caja extensions that
+ *  baul-info-provider.h - Interface for Baul extensions that
  *                             provide info about files.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -22,9 +22,9 @@
  *
  */
 
-/* This interface is implemented by Caja extensions that want to
- * provide information about files.  Extensions are called when Caja
- * needs information about a file.  They are passed a CajaFileInfo
+/* This interface is implemented by Baul extensions that want to
+ * provide information about files.  Extensions are called when Baul
+ * needs information about a file.  They are passed a BaulFileInfo
  * object which should be filled with relevant information */
 
 #ifndef BAUL_INFO_PROVIDER_H
@@ -37,22 +37,22 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_INFO_PROVIDER           (baul_info_provider_get_type ())
-#define BAUL_INFO_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_INFO_PROVIDER, CajaInfoProvider))
+#define BAUL_INFO_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_INFO_PROVIDER, BaulInfoProvider))
 #define BAUL_IS_INFO_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_INFO_PROVIDER))
-#define BAUL_INFO_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_INFO_PROVIDER, CajaInfoProviderIface))
+#define BAUL_INFO_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_INFO_PROVIDER, BaulInfoProviderIface))
 
-typedef struct _CajaInfoProvider       CajaInfoProvider;
-typedef struct _CajaInfoProviderIface  CajaInfoProviderIface;
+typedef struct _BaulInfoProvider       BaulInfoProvider;
+typedef struct _BaulInfoProviderIface  BaulInfoProviderIface;
 
-typedef void (*CajaInfoProviderUpdateComplete) (CajaInfoProvider    *provider,
-                                                CajaOperationHandle *handle,
-                                                CajaOperationResult  result,
+typedef void (*BaulInfoProviderUpdateComplete) (BaulInfoProvider    *provider,
+                                                BaulOperationHandle *handle,
+                                                BaulOperationResult  result,
                                                 gpointer             user_data);
 
 /**
- * CajaInfoProviderIface:
+ * BaulInfoProviderIface:
  * @g_iface: The parent interface.
- * @update_file_info: Returns a #CajaOperationResult.
+ * @update_file_info: Returns a #BaulOperationResult.
  *   See baul_info_provider_update_file_info() for details.
  * @cancel_update: Cancels a previous call to baul_info_provider_update_file_info().
  *   See baul_info_provider_cancel_update() for details.
@@ -60,33 +60,33 @@ typedef void (*CajaInfoProviderUpdateComplete) (CajaInfoProvider    *provider,
  * Interface for extensions to provide additional information about files.
  */
 
-struct _CajaInfoProviderIface {
+struct _BaulInfoProviderIface {
     GTypeInterface g_iface;
 
-    CajaOperationResult (*update_file_info) (CajaInfoProvider     *provider,
-                                             CajaFileInfo         *file,
+    BaulOperationResult (*update_file_info) (BaulInfoProvider     *provider,
+                                             BaulFileInfo         *file,
                                              GClosure             *update_complete,
-                                             CajaOperationHandle **handle);
-    void                (*cancel_update)    (CajaInfoProvider     *provider,
-                                             CajaOperationHandle  *handle);
+                                             BaulOperationHandle **handle);
+    void                (*cancel_update)    (BaulInfoProvider     *provider,
+                                             BaulOperationHandle  *handle);
 };
 
 /* Interface Functions */
 GType               baul_info_provider_get_type               (void);
-CajaOperationResult baul_info_provider_update_file_info       (CajaInfoProvider     *provider,
-                                                               CajaFileInfo         *file,
+BaulOperationResult baul_info_provider_update_file_info       (BaulInfoProvider     *provider,
+                                                               BaulFileInfo         *file,
                                                                GClosure             *update_complete,
-                                                               CajaOperationHandle **handle);
-void                baul_info_provider_cancel_update          (CajaInfoProvider     *provider,
-                                                               CajaOperationHandle  *handle);
+                                                               BaulOperationHandle **handle);
+void                baul_info_provider_cancel_update          (BaulInfoProvider     *provider,
+                                                               BaulOperationHandle  *handle);
 
 
 
 /* Helper functions for implementations */
 void                baul_info_provider_update_complete_invoke (GClosure             *update_complete,
-                                                               CajaInfoProvider     *provider,
-                                                               CajaOperationHandle  *handle,
-                                                               CajaOperationResult   result);
+                                                               BaulInfoProvider     *provider,
+                                                               BaulOperationHandle  *handle,
+                                                               BaulOperationResult   result);
 
 G_END_DECLS
 

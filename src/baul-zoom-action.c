@@ -1,16 +1,16 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 2009 Red Hat, Inc.
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of the
  *  License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -37,9 +37,9 @@
 
 static GObjectClass *parent_class = NULL;
 
-struct _CajaZoomActionPrivate
+struct _BaulZoomActionPrivate
 {
-    CajaNavigationWindow *window;
+    BaulNavigationWindow *window;
 };
 
 enum
@@ -49,12 +49,12 @@ enum
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (CajaZoomAction, baul_zoom_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulZoomAction, baul_zoom_action, GTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 static void
-zoom_changed_callback (CajaWindow *window,
-                       CajaZoomLevel zoom_level,
+zoom_changed_callback (BaulWindow *window,
+                       BaulZoomLevel zoom_level,
                        gboolean supports_zooming,
                        gboolean can_zoom,
                        gboolean can_zoom_in,
@@ -84,8 +84,8 @@ connect_proxy (GtkAction *action,
     if (GTK_IS_TOOL_ITEM (proxy))
     {
         GtkToolItem *item = GTK_TOOL_ITEM (proxy);
-        CajaZoomAction *zaction = BAUL_ZOOM_ACTION (action);
-        CajaNavigationWindow *window = zaction->priv->window;
+        BaulZoomAction *zaction = BAUL_ZOOM_ACTION (action);
+        BaulNavigationWindow *window = zaction->priv->window;
         GtkWidget *zoom_control;
 
         zoom_control = baul_zoom_control_new ();
@@ -122,8 +122,8 @@ disconnect_proxy (GtkAction *action,
     if (GTK_IS_TOOL_ITEM (proxy))
     {
         GtkToolItem *item = GTK_TOOL_ITEM (proxy);
-        CajaZoomAction *zaction = BAUL_ZOOM_ACTION (action);
-        CajaNavigationWindow *window = zaction->priv->window;
+        BaulZoomAction *zaction = BAUL_ZOOM_ACTION (action);
+        BaulNavigationWindow *window = zaction->priv->window;
         GtkWidget *child;
 
         child = gtk_bin_get_child (GTK_BIN (item));
@@ -149,7 +149,7 @@ baul_zoom_action_set_property (GObject *object,
                                const GValue *value,
                                GParamSpec *pspec)
 {
-    CajaZoomAction *zoom;
+    BaulZoomAction *zoom;
 
     zoom = BAUL_ZOOM_ACTION (object);
 
@@ -167,7 +167,7 @@ baul_zoom_action_get_property (GObject *object,
                                GValue *value,
                                GParamSpec *pspec)
 {
-    CajaZoomAction *zoom;
+    BaulZoomAction *zoom;
 
     zoom = BAUL_ZOOM_ACTION (object);
 
@@ -180,7 +180,7 @@ baul_zoom_action_get_property (GObject *object,
 }
 
 static void
-baul_zoom_action_class_init (CajaZoomActionClass *class)
+baul_zoom_action_class_init (BaulZoomActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -207,7 +207,7 @@ baul_zoom_action_class_init (CajaZoomActionClass *class)
 }
 
 static void
-baul_zoom_action_init (CajaZoomAction *action)
+baul_zoom_action_init (BaulZoomAction *action)
 {
     action->priv = baul_zoom_action_get_instance_private (action);
 }

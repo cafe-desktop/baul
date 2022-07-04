@@ -38,7 +38,7 @@ baul_recent_get_manager (void)
 }
 
 void
-baul_recent_add_file (CajaFile *file,
+baul_recent_add_file (BaulFile *file,
                       GAppInfo *application)
 {
     GtkRecentData recent_data;

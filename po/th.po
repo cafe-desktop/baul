@@ -297,8 +297,8 @@ msgstr "ลบ"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -306,7 +306,7 @@ msgstr "เครื่องมือจัดการแฟ้มสำหร
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -314,8 +314,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -2878,28 +2878,28 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Caja จะจบการทำงานเมื่อหน้าต่างสุดท้ายถูกปิด"
+msgid "Baul will exit when last window destroyed."
+msgstr "Baul จะจบการทำงานเมื่อหน้าต่างสุดท้ายถูกปิด"
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
-msgstr "ใช้พฤติกรรมดั้งเดิมของ Caja ซึ่งหน้าต่างทั้งหมดเป็นเบราว์เซอร์"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
+msgstr "ใช้พฤติกรรมดั้งเดิมของ Baul ซึ่งหน้าต่างทั้งหมดเป็นเบราว์เซอร์"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
-"ถ้าเป็นจริง หน้าต่างของ Caja ทุกบานจะเป็นเบราว์เซอร์  นี่เป็นพฤติกรรมของ "
-"Caja รุ่นก่อนหน้า 2.6 และบางคนชอบพฤติกรรมนี้มากกว่า"
+"ถ้าเป็นจริง หน้าต่างของ Baul ทุกบานจะเป็นเบราว์เซอร์  นี่เป็นพฤติกรรมของ "
+"Baul รุ่นก่อนหน้า 2.6 และบางคนชอบพฤติกรรมนี้มากกว่า"
 
 #: libbaul-private/org.mate.baul.gschema.xml:96
 msgid "Always use the location entry, instead of the pathbar"
@@ -2907,10 +2907,10 @@ msgstr "ใช้ช่องกรอกตำแหน่งเสมอ แ�
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
-"ถ้าเป็นจริง หน้าต่าง Caja "
+"ถ้าเป็นจริง หน้าต่าง Baul "
 "แบบเบราว์เซอร์จะใช้ช่องกรอกข้อความสำหรับรับตำแหน่งในแถบเครื่องมือเสมอ "
 "แทนที่จะเป็นแถบแสดงพาธ"
 
@@ -2920,9 +2920,9 @@ msgstr "จะขอคำยืนยันก่อนจะลบแฟ้ม
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
-msgstr "ถ้าเป็นจริง Caja ขอคำยืนยันก่อนจะลบแฟ้มหรือเทถังขยะ"
+msgstr "ถ้าเป็นจริง Baul ขอคำยืนยันก่อนจะลบแฟ้มหรือเทถังขยะ"
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
 msgid "Whether to ask for confirmation when moving files to the Trash"
@@ -2930,7 +2930,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
@@ -2940,11 +2940,11 @@ msgstr "จะยอมให้ลบโดยไม่ผ่านถังข
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"ถ้าเป็นจริง Caja จะอนุญาตให้คุณสามารถลบแฟ้มทิ้งอย่างถาวรได้ทันที "
+"ถ้าเป็นจริง Baul จะอนุญาตให้คุณสามารถลบแฟ้มทิ้งอย่างถาวรได้ทันที "
 "โดยไม่ผ่านถังขยะ การเลือกลักษณะนี้ค่อนข้างเสี่ยง ควรระมัดระวัง"
 
 #: libbaul-private/org.mate.baul.gschema.xml:117
@@ -3020,16 +3020,16 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
-msgstr "ใช้เมาส์ปุ่มพิเศษในหน้าต่างเบราว์เซอร์ของ Caja"
+msgid "Use extra mouse button events in Baul' browser window"
+msgstr "ใช้เมาส์ปุ่มพิเศษในหน้าต่างเบราว์เซอร์ของ Baul"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "สำหรับผู้ใช้ที่ใช้เมาส์ที่มีปุ่ม \"ถัดไป\" และ \"ถอยกลับ\" "
-"คีย์นี้จะกำหนดว่าจะกระทำสิ่งใดหรือไม่ใน Caja เมื่อมีการกดปุ่มดังกล่าว"
+"คีย์นี้จะกำหนดว่าจะกระทำสิ่งใดหรือไม่ใน Baul เมื่อมีการกดปุ่มดังกล่าว"
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
@@ -3114,10 +3114,10 @@ msgstr "แสดงการกำหนดสิทธิ์ขั้นสู
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"ถ้าเป็นจริง Caja จะยอมให้คุณแก้ไขการกำหนดสิทธิ์ของแฟ้มในแบบยูนิกซ์ "
+"ถ้าเป็นจริง Baul จะยอมให้คุณแก้ไขการกำหนดสิทธิ์ของแฟ้มในแบบยูนิกซ์ "
 "และสามารถใช้ตัวเลือกที่ปกติไม่ค่อยได้ใช้"
 
 #: libbaul-private/org.mate.baul.gschema.xml:180
@@ -3126,10 +3126,10 @@ msgstr "แสดงโฟลเดอร์ขึ้นก่อนในหน
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"ถ้าเป็นจริง Caja แสดงโฟลเดอร์ก่อนแฟ้ม ในมุมมองไอคอนและมุมมองแบบรายชื่อ"
+"ถ้าเป็นจริง Baul แสดงโฟลเดอร์ก่อนแฟ้ม ในมุมมองไอคอนและมุมมองแบบรายชื่อ"
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
 msgid "Default sort order"
@@ -3158,15 +3158,15 @@ msgstr ""
 "จะมาก่อน A  ถ้าเรียงตามขนาด จะแสดงใหญ่ไปเล็ก แทนที่จะเล็กไปใหญ่"
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja ใช้โฟลเดอร์บ้านเป็นพื้นโต๊ะ"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul ใช้โฟลเดอร์บ้านเป็นพื้นโต๊ะ"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"ถ้าเป็นจริง Caja จะใช้โฟลเดอร์บ้านของผู้ใช้เป็นพื้นโต๊ะ ไม่งั้นจะใช้โฟลเดอร์"
+"ถ้าเป็นจริง Baul จะใช้โฟลเดอร์บ้านของผู้ใช้เป็นพื้นโต๊ะ ไม่งั้นจะใช้โฟลเดอร์"
 " ~/Desktop"
 
 #: libbaul-private/org.mate.baul.gschema.xml:203
@@ -3297,7 +3297,7 @@ msgid "Whether to show desktop notifications"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3440,10 +3440,10 @@ msgstr "แสดงเฉพาะโฟลเดอร์ในช่องด
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"ถ้าเป็นจริง Caja จะแสดงเฉพาะโฟลเดอร์ในช่องด้านข้างแบบต้นไม้ "
+"ถ้าเป็นจริง Baul จะแสดงเฉพาะโฟลเดอร์ในช่องด้านข้างแบบต้นไม้ "
 "มิฉะนั้นจะแสดงทั้งโฟลเดอร์และแฟ้ม"
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
@@ -3640,10 +3640,10 @@ msgstr "จะเมานท์สื่อโดยอัตโนมัติ
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
-"ถ้าเป็นจริง Caja จะเมานท์สื่อต่างๆ เช่น "
+"ถ้าเป็นจริง Baul จะเมานท์สื่อต่างๆ เช่น "
 "ฮาร์ดดิสก์ที่ผู้ใช้ใช้งานได้และสื่อถอดเสียบ "
 "โดยอัตโนมัติเมื่อเริ่มทำงานหรือเมื่อใส่สื่อ"
 
@@ -3653,12 +3653,12 @@ msgstr "จะเปิดโฟลเดอร์สำหรับสื่อ
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
-"ถ้าเป็นจริง Caja จะเปิดโฟลเดอร์โดยอัตโนมัติเมื่อสื่อถูกเมานท์ "
+"ถ้าเป็นจริง Baul จะเปิดโฟลเดอร์โดยอัตโนมัติเมื่อสื่อถูกเมานท์ "
 "ตัวเลือกนี้จะใช้กับสื่อที่ไม่สามารถตรวจสอบชนิด x-content/* ได้เท่านั้น "
 "สำหรับสื่อที่พบชนิด x-content ที่รู้จัก จะกระทำการตามที่ผู้ใช้กำหนดไว้แทน"
 
@@ -3668,9 +3668,9 @@ msgstr "ไม่ต้องถามหรือเรียกโปรแก
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
-msgstr "ถ้าเป็นจริง Caja ไม่ถามหรือเรียกโปรแกรมอัตโนมัติเมื่อใส่สื่อ"
+msgstr "ถ้าเป็นจริง Baul ไม่ถามหรือเรียกโปรแกรมอัตโนมัติเมื่อใส่สื่อ"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
 msgid ""
@@ -3775,29 +3775,29 @@ msgstr "แสดงตัวเลือกเกี่ยวกับการ
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Caja สร้างโฟลเดอร์ (%s) ที่ต้องการไม่สำเร็จ"
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Baul สร้างโฟลเดอร์ (%s) ที่ต้องการไม่สำเร็จ"
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"ก่อนใช้ Caja กรุณาสร้างโฟลเดอร์นี้ หรือตั้งสิทธิ์ให้ Caja "
+"ก่อนใช้ Baul กรุณาสร้างโฟลเดอร์นี้ หรือตั้งสิทธิ์ให้ Baul "
 "สร้างโฟลเดอร์นี้ได้"
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja สร้างโฟลเดอร์ที่ต้องการเหล่านี้ไม่สำเร็จ: %s"
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul สร้างโฟลเดอร์ที่ต้องการเหล่านี้ไม่สำเร็จ: %s"
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"ก่อนจะใช้ Caja กรุณาสร้างโฟลเดอร์เหล่านี้ หรือตั้งสิทธิ์ที่อนุญาตเช่นว่าให้ "
-"Caja สร้างโฟลเดอร์เหล่านี้ได้"
+"ก่อนจะใช้ Baul กรุณาสร้างโฟลเดอร์เหล่านี้ หรือตั้งสิทธิ์ที่อนุญาตเช่นว่าให้ "
+"Baul สร้างโฟลเดอร์เหล่านี้ได้"
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -3858,8 +3858,8 @@ msgid "Open a browser window."
 msgstr ""
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "ออกจาก Caja"
+msgid "Quit Baul."
+msgstr "ออกจาก Baul"
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -4860,7 +4860,7 @@ msgid "New _Window"
 msgstr "เปิด_หน้าต่างใหม่"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
+msgid "Open another Baul window for the displayed location"
 msgstr "เปิดหน้าต่างใหม่สำหรับตำแหน่งที่แสดง"
 
 #: src/baul-navigation-window-menus.c:834
@@ -5681,8 +5681,8 @@ msgid "View of the current folder"
 msgstr "มุมมองของโฟลเดอร์ปัจจุบัน"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja ไม่ได้ติดตั้งโปรแกรมที่สามารถแสดงโฟลเดอร์นี้ไว้"
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul ไม่ได้ติดตั้งโปรแกรมที่สามารถแสดงโฟลเดอร์นี้ไว้"
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5699,12 +5699,12 @@ msgstr "กรุณาตรวจตัวสะกดแล้วลองใ
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
+msgid "Baul cannot handle \"%s\" locations."
 msgstr "ยังไม่รองรับการแสดงตำแหน่งชนิด \"%s\":"
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Caja ยังไม่รองรับตำแหน่งชนิดนี้"
+msgid "Baul cannot handle this kind of location."
+msgstr "Baul ยังไม่รองรับตำแหน่งชนิดนี้"
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -5739,24 +5739,24 @@ msgstr "ไปที่ตำแหน่งที่ที่คั่นหน
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja เป็นซอฟต์แวร์เสรี คุณสามารถแจกจ่ายต่อ และ/หรือ แก้ไขโปรแกรมได้ "
+"Baul เป็นซอฟต์แวร์เสรี คุณสามารถแจกจ่ายต่อ และ/หรือ แก้ไขโปรแกรมได้ "
 "ภายใต้เงื่อนไขของ GNU General Public License "
 "ที่เผยแพร่โดยมูลนิธิซอฟต์แวร์เสรี ไม่ว่าจะเป็นสัญญาอนุญาตรุ่นที่ 2 "
 "หรือรุ่นถัดมา (ตามแต่คุณจะเลือก)"
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Caja เผยแพร่ด้วยความหวังว่าโปรแกรมจะมีประโยชน์ แต่ _ไม่มีการรับประกันใดๆ_ "
+"Baul เผยแพร่ด้วยความหวังว่าโปรแกรมจะมีประโยชน์ แต่ _ไม่มีการรับประกันใดๆ_ "
 "ไม่มีแม้การรับประกัน _อรรถประโยชน์เชิงพาณิชย์_ หรือ "
 "_ความเหมาะสมสำหรับวัตถุประสงค์เฉพาะกิจใดๆ_ กรุณาอ่าน GNU General Public "
 "License เพื่อดูรายละเอียดเพิ่มเติม"
@@ -5764,28 +5764,28 @@ msgstr ""
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
-"คุณควรจะได้รับสำเนาของ GNU General Public License มาพร้อมกับ Caja "
+"คุณควรจะได้รับสำเนาของ GNU General Public License มาพร้อมกับ Baul "
 "ถ้าคุณไม่ได้รับ กรุณาติดต่อไปที่ Free Software Foundation, Inc., 51 Franklin"
 " Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
-"Caja ช่วยคุณจัดระเบียบแฟ้มและโฟลเดอร์ต่างๆ "
+"Baul ช่วยคุณจัดระเบียบแฟ้มและโฟลเดอร์ต่างๆ "
 "ทั้งในเครื่องของคุณเองและในเครือข่าย"
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -5820,15 +5820,15 @@ msgstr "_พื้นหลังและตรา..."
 msgid ""
 "Display patterns, colors, and emblems that can be used to customize "
 "appearance"
-msgstr "แสดงลวดลาย สี และตรา ที่ใช้ตกแต่ง Caja ได้"
+msgstr "แสดงลวดลาย สี และตรา ที่ใช้ตกแต่ง Baul ได้"
 
 #: src/baul-window-menus.c:866
 msgid "Prefere_nces"
 msgstr "ปรับแ_ต่ง"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "ปรับแต่ง Caja"
+msgid "Edit Baul preferences"
+msgstr "ปรับแต่ง Baul"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -5855,16 +5855,16 @@ msgid "_Contents"
 msgstr "เ_นื้อหา"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "แสดงวิธีใช้ Caja"
+msgid "Display Baul help"
+msgstr "แสดงวิธีใช้ Baul"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "แสดงรายชื่อผู้เขียน Caja"
+msgid "Display credits for the creators of Baul"
+msgstr "แสดงรายชื่อผู้เขียน Baul"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6239,7 +6239,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6259,7 +6259,7 @@ msgstr ""
 "\n"
 "ถ้าเป็นการเรียกจากโฟลเดอร์ในเครื่อง สคริปต์จะได้รับชื่อแฟ้มที่เลือกเป็นอาร์กิวเมนต์ ถ้าเป็นการเรียกจากโฟลเดอร์ในเครือข่าย (เช่น โฟลเดอร์ที่เป็นเว็บหรือ FTP) ก็จะไม่ส่งอาร์กิวเมนต์อะไรให้เลย\n"
 "\n"
-"ไม่ว่ากรณีใดก็ตาม Caja จะกำหนดตัวแปรสภาพแวดล้อมต่อไปนี้ เพื่อให้สคริปต์ใช้ได้:\n"
+"ไม่ว่ากรณีใดก็ตาม Baul จะกำหนดตัวแปรสภาพแวดล้อมต่อไปนี้ เพื่อให้สคริปต์ใช้ได้:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: รายชื่อพาธของแฟ้มที่เลือก คั่นด้วย newline (เฉพาะจากในเครื่องเท่านั้น)\n"
 "\n"

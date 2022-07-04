@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Novell, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -27,27 +27,27 @@
 #include "baul-search-engine.h"
 
 #define BAUL_TYPE_SEARCH_ENGINE_BEAGLE		(baul_search_engine_beagle_get_type ())
-#define BAUL_SEARCH_ENGINE_BEAGLE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_ENGINE_BEAGLE, CajaSearchEngineBeagle))
-#define BAUL_SEARCH_ENGINE_BEAGLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_ENGINE_BEAGLE, CajaSearchEngineBeagleClass))
+#define BAUL_SEARCH_ENGINE_BEAGLE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_ENGINE_BEAGLE, BaulSearchEngineBeagle))
+#define BAUL_SEARCH_ENGINE_BEAGLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_ENGINE_BEAGLE, BaulSearchEngineBeagleClass))
 #define BAUL_IS_SEARCH_ENGINE_BEAGLE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_ENGINE_BEAGLE))
 #define BAUL_IS_SEARCH_ENGINE_BEAGLE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_ENGINE_BEAGLE))
-#define BAUL_SEARCH_ENGINE_BEAGLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_ENGINE_BEAGLE, CajaSearchEngineBeagleClass))
+#define BAUL_SEARCH_ENGINE_BEAGLE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_ENGINE_BEAGLE, BaulSearchEngineBeagleClass))
 
-typedef struct CajaSearchEngineBeagleDetails CajaSearchEngineBeagleDetails;
+typedef struct BaulSearchEngineBeagleDetails BaulSearchEngineBeagleDetails;
 
-typedef struct CajaSearchEngineBeagle
+typedef struct BaulSearchEngineBeagle
 {
-    CajaSearchEngine parent;
-    CajaSearchEngineBeagleDetails *details;
-} CajaSearchEngineBeagle;
+    BaulSearchEngine parent;
+    BaulSearchEngineBeagleDetails *details;
+} BaulSearchEngineBeagle;
 
 typedef struct
 {
-    CajaSearchEngineClass parent_class;
-} CajaSearchEngineBeagleClass;
+    BaulSearchEngineClass parent_class;
+} BaulSearchEngineBeagleClass;
 
 GType          baul_search_engine_beagle_get_type  (void);
 
-CajaSearchEngine* baul_search_engine_beagle_new       (void);
+BaulSearchEngine* baul_search_engine_beagle_new       (void);
 
 #endif /* BAUL_SEARCH_ENGINE_BEAGLE_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-vfs-directory.c: Subclass of CajaDirectory to help implement the
+   baul-vfs-directory.c: Subclass of BaulDirectory to help implement the
    virtual trash directory.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
@@ -35,7 +35,7 @@ static void baul_vfs_directory_init       (gpointer   object,
         gpointer   klass);
 static void baul_vfs_directory_class_init (gpointer   klass);
 
-EEL_CLASS_BOILERPLATE (CajaVFSDirectory,
+EEL_CLASS_BOILERPLATE (BaulVFSDirectory,
                        baul_vfs_directory,
                        BAUL_TYPE_DIRECTORY)
 
@@ -45,8 +45,8 @@ baul_vfs_directory_init (gpointer object, gpointer klass)
 }
 
 static gboolean
-vfs_contains_file (CajaDirectory *directory,
-                   CajaFile *file)
+vfs_contains_file (BaulDirectory *directory,
+                   BaulFile *file)
 {
     g_assert (BAUL_IS_VFS_DIRECTORY (directory));
     g_assert (BAUL_IS_FILE (file));
@@ -55,10 +55,10 @@ vfs_contains_file (CajaDirectory *directory,
 }
 
 static void
-vfs_call_when_ready (CajaDirectory *directory,
-                     CajaFileAttributes file_attributes,
+vfs_call_when_ready (BaulDirectory *directory,
+                     BaulFileAttributes file_attributes,
                      gboolean wait_for_file_list,
-                     CajaDirectoryCallback callback,
+                     BaulDirectoryCallback callback,
                      gpointer callback_data)
 {
     g_assert (BAUL_IS_VFS_DIRECTORY (directory));
@@ -74,8 +74,8 @@ vfs_call_when_ready (CajaDirectory *directory,
 }
 
 static void
-vfs_cancel_callback (CajaDirectory *directory,
-                     CajaDirectoryCallback callback,
+vfs_cancel_callback (BaulDirectory *directory,
+                     BaulDirectoryCallback callback,
                      gpointer callback_data)
 {
     g_assert (BAUL_IS_VFS_DIRECTORY (directory));
@@ -89,11 +89,11 @@ vfs_cancel_callback (CajaDirectory *directory,
 }
 
 static void
-vfs_file_monitor_add (CajaDirectory *directory,
+vfs_file_monitor_add (BaulDirectory *directory,
                       gconstpointer client,
                       gboolean monitor_hidden_files,
-                      CajaFileAttributes file_attributes,
-                      CajaDirectoryCallback callback,
+                      BaulFileAttributes file_attributes,
+                      BaulDirectoryCallback callback,
                       gpointer callback_data)
 {
     g_assert (BAUL_IS_VFS_DIRECTORY (directory));
@@ -108,7 +108,7 @@ vfs_file_monitor_add (CajaDirectory *directory,
 }
 
 static void
-vfs_file_monitor_remove (CajaDirectory *directory,
+vfs_file_monitor_remove (BaulDirectory *directory,
                          gconstpointer client)
 {
     g_assert (BAUL_IS_VFS_DIRECTORY (directory));
@@ -118,9 +118,9 @@ vfs_file_monitor_remove (CajaDirectory *directory,
 }
 
 static void
-vfs_force_reload (CajaDirectory *directory)
+vfs_force_reload (BaulDirectory *directory)
 {
-    CajaFileAttributes all_attributes;
+    BaulFileAttributes all_attributes;
 
     g_assert (BAUL_IS_DIRECTORY (directory));
 
@@ -130,7 +130,7 @@ vfs_force_reload (CajaDirectory *directory)
 }
 
 static gboolean
-vfs_are_all_files_seen (CajaDirectory *directory)
+vfs_are_all_files_seen (BaulDirectory *directory)
 {
     g_assert (BAUL_IS_VFS_DIRECTORY (directory));
 
@@ -138,7 +138,7 @@ vfs_are_all_files_seen (CajaDirectory *directory)
 }
 
 static gboolean
-vfs_is_not_empty (CajaDirectory *directory)
+vfs_is_not_empty (BaulDirectory *directory)
 {
     g_assert (BAUL_IS_VFS_DIRECTORY (directory));
     g_assert (baul_directory_is_anyone_monitoring_file_list (directory));
@@ -149,7 +149,7 @@ vfs_is_not_empty (CajaDirectory *directory)
 static void
 baul_vfs_directory_class_init (gpointer klass)
 {
-    CajaDirectoryClass *directory_class;
+    BaulDirectoryClass *directory_class;
 
     directory_class = BAUL_DIRECTORY_CLASS (klass);
 

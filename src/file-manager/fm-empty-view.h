@@ -39,7 +39,7 @@
 #define FM_EMPTY_VIEW_GET_CLASS(obj) \
   (G_TYPE_INSTANCE_GET_CLASS ((obj), FM_TYPE_EMPTY_VIEW, FMEmptyViewClass))
 
-#define FM_EMPTY_VIEW_ID "OAFIID:Caja_File_Manager_Empty_View"
+#define FM_EMPTY_VIEW_ID "OAFIID:Baul_File_Manager_Empty_View"
 
 typedef struct FMEmptyViewDetails FMEmptyViewDetails;
 

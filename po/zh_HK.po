@@ -296,8 +296,8 @@ msgstr "移除圖章"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -305,7 +305,7 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -313,8 +313,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -2856,23 +2856,23 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Caja 會在最後的視窗關閉時結束。"
+msgid "Baul will exit when last window destroyed."
+msgstr "Baul 會在最後的視窗關閉時結束。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
-msgstr "啟用典型的 Caja 運作方式，那麼所有視窗都是瀏覽器"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
+msgstr "啟用典型的 Baul 運作方式，那麼所有視窗都是瀏覽器"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
@@ -2883,9 +2883,9 @@ msgstr "總是使用需要輸入的位置列，而非路徑列"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
-msgstr "如設定為‘true’，Caja 瀏覽器視窗會使用輸入文字項目的位置工具列，而非路徑列。"
+msgstr "如設定為‘true’，Baul 瀏覽器視窗會使用輸入文字項目的位置工具列，而非路徑列。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
@@ -2893,9 +2893,9 @@ msgstr "刪除檔案或清空回收筒時是否需要確認"
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
-msgstr "如設定為‘true’，Caja 會在你嘗試刪除檔案或清空回收筒時先進行確認。"
+msgstr "如設定為‘true’，Baul 會在你嘗試刪除檔案或清空回收筒時先進行確認。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
 msgid "Whether to ask for confirmation when moving files to the Trash"
@@ -2903,7 +2903,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
@@ -2913,10 +2913,10 @@ msgstr "是否啟用立即刪除功能"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
-msgstr "如設定為‘true’，Caja 會提供另一種功能，讓你即時刪除檔案，而不是將檔案丟進回收筒。本功能是比較危險，所以請小心使用。"
+msgstr "如設定為‘true’，Baul 會提供另一種功能，讓你即時刪除檔案，而不是將檔案丟進回收筒。本功能是比較危險，所以請小心使用。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:117
 msgid "When to show preview text in icons"
@@ -2983,14 +2983,14 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
-msgstr "是否在 Caja 瀏覽器視窗中使用額外的滑鼠按鈕事件"
+msgid "Use extra mouse button events in Baul' browser window"
+msgstr "是否在 Baul 瀏覽器視窗中使用額外的滑鼠按鈕事件"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
-msgstr "用於使用者的滑鼠有「往前」和「往後」按鈕時，這個設定鍵會決定當 Caja 被按下時所進行的行動。"
+"will determine if any action is taken inside of Baul when either is pressed."
+msgstr "用於使用者的滑鼠有「往前」和「往後」按鈕時，這個設定鍵會決定當 Baul 被按下時所進行的行動。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
@@ -3058,9 +3058,9 @@ msgstr "在檔案屬性對話盒中顯示進階權限"
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
-msgstr "如設定為‘true’，Caja 會讓你以較 unix 相似的形式修改及顯示檔案權限，存取一些較難懂的選項。"
+msgstr "如設定為‘true’，Baul 會讓你以較 unix 相似的形式修改及顯示檔案權限，存取一些較難懂的選項。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:180
 msgid "Show folders first in windows"
@@ -3068,9 +3068,9 @@ msgstr "在視窗中先顯示資料夾"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
-msgstr "如設定為‘true’，Caja 會在圖示顯示模式及清單顯示模式中先顯示目錄，然後才顯示檔案。"
+msgstr "如設定為‘true’，Baul 會在圖示顯示模式及清單顯示模式中先顯示目錄，然後才顯示檔案。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
 msgid "Default sort order"
@@ -3096,14 +3096,14 @@ msgstr ""
 "如設定為‘true’，在新的視窗中檔案會以相反次序排列。譬如說，如果是以檔案名稱來排列，本來從“a”至“z”排列的檔案會改為從“z”至“a”排列；如果是以檔案大小來排列，本來是遞增排列的，現在會變成遞減。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja 會使用使用者的「個人資料夾」作為桌面"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul 會使用使用者的「個人資料夾」作為桌面"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
-msgstr "如設定為‘true’，Caja 會以使用者的個人資料夾作為桌面，如設定為‘false’，則會使用 ~/Desktop 作為桌面。"
+msgstr "如設定為‘true’，Baul 會以使用者的個人資料夾作為桌面，如設定為‘false’，則會使用 ~/Desktop 作為桌面。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:203
 msgid "Custom Background"
@@ -3224,7 +3224,7 @@ msgid "Whether to show desktop notifications"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3352,9 +3352,9 @@ msgstr "只在目錄樹側面窗格中顯示資料夾"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
-msgstr "如設定為‘true’，Caja 只會在目錄樹側面窗格中顯示目錄，不然會同時顯示目錄和檔案。"
+msgstr "如設定為‘true’，Baul 只會在目錄樹側面窗格中顯示目錄，不然會同時顯示目錄和檔案。"
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
 msgid "Desktop font"
@@ -3545,9 +3545,9 @@ msgstr "是否自動掛載媒體"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
-msgstr "如果設為「true」，Caja 會在啟動或插入媒體時自動掛載媒體（例如使用者看得到的硬碟和可攜式媒體）。"
+msgstr "如果設為「true」，Baul 會在啟動或插入媒體時自動掛載媒體（例如使用者看得到的硬碟和可攜式媒體）。"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:10
 msgid "Whether to automatically open a folder for automounted media"
@@ -3555,12 +3555,12 @@ msgstr "是否自動開啟已自動掛載媒體的資料夾"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
-"如果設為 true，Caja 會在自動掛載媒體後自動開啟資料夾。這個選項只有在媒體中尚未偵測到已知的 x-content/* "
+"如果設為 true，Baul 會在自動掛載媒體後自動開啟資料夾。這個選項只有在媒體中尚未偵測到已知的 x-content/* "
 "類型時才會生效；若在媒體中偵測到已知的 x-content 類型，則會用使用者設定的動作來代替。"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:15
@@ -3569,9 +3569,9 @@ msgstr "當插入媒體時永不提示或自動執行/啟動程式"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
-msgstr "如設定為「true」，當插入媒體時 Caja 將不會提示或自動執行/啟動程式。"
+msgstr "如設定為「true」，當插入媒體時 Baul 將不會提示或自動執行/啟動程式。"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
 msgid ""
@@ -3672,25 +3672,25 @@ msgstr "顯示作業階段管理選項"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Caja 無法建立所需的資料夾“%s”。"
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Baul 無法建立所需的資料夾“%s”。"
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
-msgstr "執行 Caja 之前，請自行建立以下資料夾，或是設定正確的權限使 Caja 可以建立這些資料夾。"
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
+msgstr "執行 Baul 之前，請自行建立以下資料夾，或是設定正確的權限使 Baul 可以建立這些資料夾。"
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja 無法新增以下的資料夾：%s。"
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul 無法新增以下的資料夾：%s。"
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
-msgstr "執行 Caja 之前，請自行建立這些資料夾，或是設定正確的權限使 Caja 可以建立這些資料夾。"
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
+msgstr "執行 Baul 之前，請自行建立這些資料夾，或是設定正確的權限使 Baul 可以建立這些資料夾。"
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -3751,8 +3751,8 @@ msgid "Open a browser window."
 msgstr ""
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "離開 Caja。"
+msgid "Quit Baul."
+msgstr "離開 Baul。"
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -4748,8 +4748,8 @@ msgid "New _Window"
 msgstr "開新視窗(_W)"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "在已顯示的位置中開啟另一個 Caja 視窗"
+msgid "Open another Baul window for the displayed location"
+msgstr "在已顯示的位置中開啟另一個 Baul 視窗"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -5566,8 +5566,8 @@ msgid "View of the current folder"
 msgstr "顯示目前的資料夾"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja 沒有一個已安裝的檢示程式能顯示這資料夾"
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul 沒有一個已安裝的檢示程式能顯示這資料夾"
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5584,12 +5584,12 @@ msgstr "請檢查拼字是否正確並再試一次。"
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "Caja 無法處理「%s」的位置。"
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "Baul 無法處理「%s」的位置。"
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Caja 無法處理此類型的位置。"
+msgid "Baul cannot handle this kind of location."
+msgstr "Baul 無法處理此類型的位置。"
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -5624,47 +5624,47 @@ msgstr "前往該書籤指定的位置"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja 為自由軟件；你可根據據自由軟件基金會所發表的 GNU 通用公共授權\n"
+"Baul 為自由軟件；你可根據據自由軟件基金會所發表的 GNU 通用公共授權\n"
 "條款規定，就本程式再為散佈與／或修改；無論你根據據的是本授權的第二版或\n"
 "（你自行選擇的）任一日後發行的版本。"
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Caja 係基於使用目的而加以散佈，然而不負任何擔保責任；亦無對適售性\n"
+"Baul 係基於使用目的而加以散佈，然而不負任何擔保責任；亦無對適售性\n"
 "或特定目的適用性所為的默示性擔保。詳情請參照 GNU 通用公共授權。"
 
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "你應該已經和程式一起收到一份 GNU 通用公共許可證的副本。如果還沒有，寫信給：  the Free Software Foundation, "
 "Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
-msgstr "Caja 讓你組織檔案和資料夾，不管是在你的電腦或是在網絡上。"
+"Baul lets you organize files and folders, both on your computer and online."
+msgstr "Baul 讓你組織檔案和資料夾，不管是在你的電腦或是在網絡上。"
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -5709,8 +5709,8 @@ msgid "Prefere_nces"
 msgstr "偏好設定(_N)"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "修改 Caja 偏好設定"
+msgid "Edit Baul preferences"
+msgstr "修改 Baul 偏好設定"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -5737,16 +5737,16 @@ msgid "_Contents"
 msgstr "內容(_C)"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "顯示 Caja 說明文件"
+msgid "Display Baul help"
+msgstr "顯示 Baul 說明文件"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "關於(_A)"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "顯示鳴謝 Caja 開發者的清單"
+msgid "Display credits for the creators of Baul"
+msgstr "顯示鳴謝 Baul 開發者的清單"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6118,7 +6118,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6138,7 +6138,7 @@ msgstr ""
 "\n"
 "當在本機的資料夾中執行時，命令稿會以選取的檔案名稱作為參數。當在遠端的資料夾中執行時（例如顯示網頁或 ftp 內容的資料夾），執行指令稿時不會使用任何參數。\n"
 "\n"
-"在任何情況下，命令稿都可以使用以下由 Caja 設定的環境變數：\n"
+"在任何情況下，命令稿都可以使用以下由 Baul 設定的環境變數：\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS：已選取的檔案，以 newline 字符分隔（只適用於本機檔案）\n"
 "\n"

@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Novell, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -38,10 +38,10 @@ typedef struct _BeagleQueryPartProperty BeagleQueryPartProperty;
 typedef struct _BeagleQueryPart BeagleQueryPart;
 typedef struct _BeagleHitsSubtractedResponse BeagleHitsSubtractedResponse;
 
-struct CajaSearchEngineBeagleDetails
+struct BaulSearchEngineBeagleDetails
 {
     BeagleClient *client;
-    CajaQuery *query;
+    BaulQuery *query;
 
     BeagleQuery *current_query;
     char *current_query_uri_prefix;
@@ -166,16 +166,16 @@ beagle_client_new (const char *client_name)
     return NULL;
 }
 
-G_DEFINE_TYPE (CajaSearchEngineBeagle,
+G_DEFINE_TYPE (BaulSearchEngineBeagle,
                baul_search_engine_beagle,
                BAUL_TYPE_SEARCH_ENGINE);
 
-static CajaSearchEngineClass *parent_class = NULL;
+static BaulSearchEngineClass *parent_class = NULL;
 
 static void
 finalize (GObject *object)
 {
-    CajaSearchEngineBeagle *beagle;
+    BaulSearchEngineBeagle *beagle;
 
     beagle = BAUL_SEARCH_ENGINE_BEAGLE (object);
 
@@ -207,7 +207,7 @@ finalize (GObject *object)
 static void
 beagle_hits_added (BeagleQuery *query,
                    BeagleHitsAddedResponse *response,
-                   CajaSearchEngineBeagle *engine)
+                   BaulSearchEngineBeagle *engine)
 {
     GSList *hits, *list;
     GList *hit_uris;
@@ -240,7 +240,7 @@ beagle_hits_added (BeagleQuery *query,
 static void
 beagle_hits_subtracted (BeagleQuery *query,
                         BeagleHitsSubtractedResponse *response,
-                        CajaSearchEngineBeagle *engine)
+                        BaulSearchEngineBeagle *engine)
 {
     GSList *uris, *list;
     GList *hit_uris;
@@ -261,7 +261,7 @@ beagle_hits_subtracted (BeagleQuery *query,
 static void
 beagle_finished (BeagleQuery *query,
                  BeagleFinishedResponse *response,
-                 CajaSearchEngineBeagle *engine)
+                 BaulSearchEngineBeagle *engine)
 {
     /* For some reason we keep getting finished events,
      * only emit finished once */
@@ -277,15 +277,15 @@ beagle_finished (BeagleQuery *query,
 static void
 beagle_error (BeagleQuery *query,
               GError *error,
-              CajaSearchEngineBeagle *engine)
+              BaulSearchEngineBeagle *engine)
 {
     baul_search_engine_error (BAUL_SEARCH_ENGINE (engine), error->message);
 }
 
 static void
-baul_search_engine_beagle_start (CajaSearchEngine *engine)
+baul_search_engine_beagle_start (BaulSearchEngine *engine)
 {
-    CajaSearchEngineBeagle *beagle;
+    BaulSearchEngineBeagle *beagle;
     GError *error;
     GList *mimetypes, *l;
     char *text;
@@ -346,9 +346,9 @@ baul_search_engine_beagle_start (CajaSearchEngine *engine)
 }
 
 static void
-baul_search_engine_beagle_stop (CajaSearchEngine *engine)
+baul_search_engine_beagle_stop (BaulSearchEngine *engine)
 {
-    CajaSearchEngineBeagle *beagle;
+    BaulSearchEngineBeagle *beagle;
 
     beagle = BAUL_SEARCH_ENGINE_BEAGLE (engine);
 
@@ -362,15 +362,15 @@ baul_search_engine_beagle_stop (CajaSearchEngine *engine)
 }
 
 static gboolean
-baul_search_engine_beagle_is_indexed (CajaSearchEngine *engine)
+baul_search_engine_beagle_is_indexed (BaulSearchEngine *engine)
 {
     return TRUE;
 }
 
 static void
-baul_search_engine_beagle_set_query (CajaSearchEngine *engine, CajaQuery *query)
+baul_search_engine_beagle_set_query (BaulSearchEngine *engine, BaulQuery *query)
 {
-    CajaSearchEngineBeagle *beagle;
+    BaulSearchEngineBeagle *beagle;
 
     beagle = BAUL_SEARCH_ENGINE_BEAGLE (engine);
 
@@ -388,10 +388,10 @@ baul_search_engine_beagle_set_query (CajaSearchEngine *engine, CajaQuery *query)
 }
 
 static void
-baul_search_engine_beagle_class_init (CajaSearchEngineBeagleClass *class)
+baul_search_engine_beagle_class_init (BaulSearchEngineBeagleClass *class)
 {
     GObjectClass *gobject_class;
-    CajaSearchEngineClass *engine_class;
+    BaulSearchEngineClass *engine_class;
 
     parent_class = g_type_class_peek_parent (class);
 
@@ -406,16 +406,16 @@ baul_search_engine_beagle_class_init (CajaSearchEngineBeagleClass *class)
 }
 
 static void
-baul_search_engine_beagle_init (CajaSearchEngineBeagle *engine)
+baul_search_engine_beagle_init (BaulSearchEngineBeagle *engine)
 {
-    engine->details = g_new0 (CajaSearchEngineBeagleDetails, 1);
+    engine->details = g_new0 (BaulSearchEngineBeagleDetails, 1);
 }
 
 
-CajaSearchEngine *
+BaulSearchEngine *
 baul_search_engine_beagle_new (void)
 {
-    CajaSearchEngineBeagle *engine;
+    BaulSearchEngineBeagle *engine;
     BeagleClient *client;
 
     open_libbeagle ();

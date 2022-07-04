@@ -24,18 +24,18 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
-typedef struct _CajaPathBar      CajaPathBar;
-typedef struct _CajaPathBarClass CajaPathBarClass;
+typedef struct _BaulPathBar      BaulPathBar;
+typedef struct _BaulPathBarClass BaulPathBarClass;
 
 
 #define BAUL_TYPE_PATH_BAR                 (baul_path_bar_get_type ())
-#define BAUL_PATH_BAR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PATH_BAR, CajaPathBar))
-#define BAUL_PATH_BAR_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_PATH_BAR, CajaPathBarClass))
+#define BAUL_PATH_BAR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PATH_BAR, BaulPathBar))
+#define BAUL_PATH_BAR_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_PATH_BAR, BaulPathBarClass))
 #define BAUL_IS_PATH_BAR(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_PATH_BAR))
 #define BAUL_IS_PATH_BAR_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_PATH_BAR))
-#define BAUL_PATH_BAR_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_PATH_BAR, CajaPathBarClass))
+#define BAUL_PATH_BAR_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_PATH_BAR, BaulPathBarClass))
 
-struct _CajaPathBar
+struct _BaulPathBar
 {
     GtkContainer parent;
 
@@ -65,26 +65,26 @@ struct _CajaPathBar
     gboolean drag_slider_timeout_for_up_button;
 };
 
-struct _CajaPathBarClass
+struct _BaulPathBarClass
 {
     GtkContainerClass parent_class;
 
-    void (* path_clicked)   (CajaPathBar  *path_bar,
+    void (* path_clicked)   (BaulPathBar  *path_bar,
                              GFile             *location);
 
-    void (* path_event)     (CajaPathBar  *path_bar,
+    void (* path_event)     (BaulPathBar  *path_bar,
                              GdkEventButton   *event,
                              GFile            *location);
 };
 
 GType    baul_path_bar_get_type (void) G_GNUC_CONST;
 
-gboolean baul_path_bar_set_path    (CajaPathBar *path_bar, GFile *file);
+gboolean baul_path_bar_set_path    (BaulPathBar *path_bar, GFile *file);
 
-GFile *  baul_path_bar_get_path_for_button (CajaPathBar *path_bar,
+GFile *  baul_path_bar_get_path_for_button (BaulPathBar *path_bar,
         GtkWidget       *button);
 
-void     baul_path_bar_clear_buttons (CajaPathBar *path_bar);
+void     baul_path_bar_clear_buttons (BaulPathBar *path_bar);
 
 GtkWidget * baul_path_bar_get_button_from_button_list_entry (gpointer entry);
 

@@ -24,7 +24,7 @@
    	    Ettore Perazzoli <ettore@gnu.org>
 */
 
-/* FIXME: This should really be back in Caja, not here in Eel. */
+/* FIXME: This should really be back in Baul, not here in Eel. */
 
 #include <config.h>
 #include <gtk/gtk.h>
@@ -65,7 +65,7 @@
 #define MAX_AUTOSCROLL_DELTA 50
 
 void
-baul_drag_init (CajaDragInfo     *drag_info,
+baul_drag_init (BaulDragInfo     *drag_info,
                 const GtkTargetEntry *drag_types,
                 int                   drag_type_count,
                 gboolean              add_text_targets)
@@ -84,7 +84,7 @@ baul_drag_init (CajaDragInfo     *drag_info,
 }
 
 void
-baul_drag_finalize (CajaDragInfo *drag_info)
+baul_drag_finalize (BaulDragInfo *drag_info)
 {
     gtk_target_list_unref (drag_info->target_list);
     baul_drag_destroy_selection_list (drag_info->selection_list);
@@ -93,16 +93,16 @@ baul_drag_finalize (CajaDragInfo *drag_info)
 }
 
 
-/* Functions to deal with CajaDragSelectionItems.  */
+/* Functions to deal with BaulDragSelectionItems.  */
 
-CajaDragSelectionItem *
+BaulDragSelectionItem *
 baul_drag_selection_item_new (void)
 {
-    return g_new0 (CajaDragSelectionItem, 1);
+    return g_new0 (BaulDragSelectionItem, 1);
 }
 
 static void
-drag_selection_item_destroy (CajaDragSelectionItem *item)
+drag_selection_item_destroy (BaulDragSelectionItem *item)
 {
     g_free (item->uri);
     g_free (item);
@@ -127,12 +127,12 @@ baul_drag_uri_list_from_selection_list (const GList *selection_list)
 {
     GList *uri_list;
     const GList *l;
-    CajaDragSelectionItem *selection_item = NULL;
+    BaulDragSelectionItem *selection_item = NULL;
 
     uri_list = NULL;
     for (l = selection_list; l != NULL; l = l->next)
     {
-        selection_item = (CajaDragSelectionItem *) l->data;
+        selection_item = (BaulDragSelectionItem *) l->data;
         if (selection_item->uri != NULL)
         {
             uri_list = g_list_prepend (uri_list, g_strdup (selection_item->uri));
@@ -176,7 +176,7 @@ baul_drag_build_selection_list (GtkSelectionData *data)
 
     while (size > 0)
     {
-        CajaDragSelectionItem *item;
+        BaulDragSelectionItem *item;
         guint len;
 
         /* The list is in the form:
@@ -306,7 +306,7 @@ baul_drag_items_local (const char *target_uri_string,
     g_assert (selection_list);
 
     return baul_drag_file_local_internal (target_uri_string,
-                                          ((CajaDragSelectionItem *)selection_list->data)->uri);
+                                          ((BaulDragSelectionItem *)selection_list->data)->uri);
 }
 
 gboolean
@@ -321,7 +321,7 @@ baul_drag_items_on_desktop (const GList *selection_list)
      * we should really test each item but that would be slow for large selections
      * and currently dropped items can only be from the same container
      */
-    uri = ((CajaDragSelectionItem *)selection_list->data)->uri;
+    uri = ((BaulDragSelectionItem *)selection_list->data)->uri;
     if (eel_uri_is_desktop (uri))
     {
         return TRUE;
@@ -366,8 +366,8 @@ baul_drag_default_drop_action_for_netscape_url (GdkDragContext *context)
 }
 
 static gboolean
-check_same_fs (CajaFile *file1,
-               CajaFile *file2)
+check_same_fs (BaulFile *file1,
+               BaulFile *file2)
 {
     gboolean result;
 
@@ -395,10 +395,10 @@ check_same_fs (CajaFile *file1,
 static gboolean
 source_is_deletable (GFile *file)
 {
-    CajaFile *naut_file;
+    BaulFile *naut_file;
     gboolean ret;
 
-    /* if there's no a cached CajaFile, it returns NULL */
+    /* if there's no a cached BaulFile, it returns NULL */
     naut_file = baul_file_get_existing (file);
     if (naut_file == NULL)
     {
@@ -422,7 +422,7 @@ baul_drag_default_drop_action_for_icons (GdkDragContext *context,
     const char *dropped_uri;
     GFile *target, *dropped, *dropped_directory;
     GdkDragAction actions;
-    CajaFile *dropped_file, *target_file;
+    BaulFile *dropped_file, *target_file;
 
     if (target_uri_string == NULL)
     {
@@ -445,7 +445,7 @@ baul_drag_default_drop_action_for_icons (GdkDragContext *context,
         return;
     }
 
-    dropped_uri = ((CajaDragSelectionItem *)items->data)->uri;
+    dropped_uri = ((BaulDragSelectionItem *)items->data)->uri;
     dropped_file = baul_file_get_existing_by_uri (dropped_uri);
     target_file = baul_file_get_existing_by_uri (target_uri_string);
 
@@ -694,7 +694,7 @@ baul_drag_drag_data_get (GtkWidget *widget,
                          guint info,
                          guint32 time,
                          gpointer container_context,
-                         CajaDragEachSelectedItemIterator each_selected_item_iterator)
+                         BaulDragEachSelectedItemIterator each_selected_item_iterator)
 {
     GString *result;
 
@@ -998,7 +998,7 @@ baul_drag_autoscroll_calculate_delta (GtkWidget *widget, float *x_scroll_delta, 
 
 
 void
-baul_drag_autoscroll_start (CajaDragInfo *drag_info,
+baul_drag_autoscroll_start (BaulDragInfo *drag_info,
                             GtkWidget        *widget,
                             GSourceFunc       callback,
                             gpointer          user_data)
@@ -1028,7 +1028,7 @@ baul_drag_autoscroll_start (CajaDragInfo *drag_info,
 }
 
 void
-baul_drag_autoscroll_stop (CajaDragInfo *drag_info)
+baul_drag_autoscroll_stop (BaulDragInfo *drag_info)
 {
     if (drag_info->auto_scroll_timeout_id != 0)
     {
@@ -1046,7 +1046,7 @@ baul_drag_selection_includes_special_link (GList *selection_list)
     {
         char *uri;
 
-        uri = ((CajaDragSelectionItem *) node->data)->uri;
+        uri = ((BaulDragSelectionItem *) node->data)->uri;
 
         if (eel_uri_is_desktop (uri))
         {
@@ -1065,8 +1065,8 @@ slot_proxy_drag_motion (GtkWidget          *widget,
                         unsigned int        time,
                         gpointer            user_data)
 {
-    CajaDragSlotProxyInfo *drag_info;
-    CajaWindowSlotInfo *target_slot;
+    BaulDragSlotProxyInfo *drag_info;
+    BaulWindowSlotInfo *target_slot;
     GtkWidget *window;
     GdkAtom target;
     int action;
@@ -1155,7 +1155,7 @@ out:
 }
 
 static void
-drag_info_clear (CajaDragSlotProxyInfo *drag_info)
+drag_info_clear (BaulDragSlotProxyInfo *drag_info)
 {
     if (!drag_info->have_data)
     {
@@ -1188,7 +1188,7 @@ slot_proxy_drag_leave (GtkWidget          *widget,
                        unsigned int        time,
                        gpointer            user_data)
 {
-    CajaDragSlotProxyInfo *drag_info;
+    BaulDragSlotProxyInfo *drag_info;
 
     drag_info = user_data;
 
@@ -1205,7 +1205,7 @@ slot_proxy_drag_drop (GtkWidget          *widget,
                       gpointer            user_data)
 {
     GdkAtom target;
-    CajaDragSlotProxyInfo *drag_info;
+    BaulDragSlotProxyInfo *drag_info;
 
     drag_info = user_data;
     g_assert (!drag_info->have_data);
@@ -1223,11 +1223,11 @@ static void
 slot_proxy_handle_drop (GtkWidget                *widget,
                         GdkDragContext           *context,
                         unsigned int              time,
-                        CajaDragSlotProxyInfo *drag_info)
+                        BaulDragSlotProxyInfo *drag_info)
 {
     GtkWidget *window;
-    CajaWindowSlotInfo *target_slot;
-    CajaView *target_view;
+    BaulWindowSlotInfo *target_slot;
+    BaulView *target_view;
     char *target_uri;
 
     if (!drag_info->have_data ||
@@ -1324,7 +1324,7 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
                                unsigned int        time,
                                gpointer            user_data)
 {
-    CajaDragSlotProxyInfo *drag_info;
+    BaulDragSlotProxyInfo *drag_info;
     char **uris;
 
     drag_info = user_data;
@@ -1369,7 +1369,7 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
 
 void
 baul_drag_slot_proxy_init (GtkWidget *widget,
-                           CajaDragSlotProxyInfo *drag_info)
+                           BaulDragSlotProxyInfo *drag_info)
 {
     const GtkTargetEntry targets[] =
     {

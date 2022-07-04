@@ -31,7 +31,7 @@
 
 #include "baul-column-utilities.h"
 
-struct _CajaColumnChooserPrivate
+struct _BaulColumnChooserPrivate
 {
     GtkTreeView *view;
     GtkListStore *store;
@@ -40,7 +40,7 @@ struct _CajaColumnChooserPrivate
     GtkWidget *move_down_button;
     GtkWidget *use_default_button;
 
-    CajaFile *file;
+    BaulFile *file;
 };
 
 enum
@@ -65,7 +65,7 @@ enum
 };
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaColumnChooser, baul_column_chooser, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulColumnChooser, baul_column_chooser, GTK_TYPE_BOX);
 
 static void baul_column_chooser_constructed (GObject *object);
 
@@ -75,7 +75,7 @@ baul_column_chooser_set_property (GObject *object,
                                   const GValue *value,
                                   GParamSpec *pspec)
 {
-    CajaColumnChooser *chooser;
+    BaulColumnChooser *chooser;
 
     chooser = BAUL_COLUMN_CHOOSER (object);
 
@@ -91,7 +91,7 @@ baul_column_chooser_set_property (GObject *object,
 }
 
 static void
-baul_column_chooser_class_init (CajaColumnChooserClass *chooser_class)
+baul_column_chooser_class_init (BaulColumnChooserClass *chooser_class)
 {
     GObjectClass *oclass;
 
@@ -104,7 +104,7 @@ baul_column_chooser_class_init (CajaColumnChooserClass *chooser_class)
                        ("changed",
                         G_TYPE_FROM_CLASS (chooser_class),
                         G_SIGNAL_RUN_LAST,
-                        G_STRUCT_OFFSET (CajaColumnChooserClass,
+                        G_STRUCT_OFFSET (BaulColumnChooserClass,
                                          changed),
                         NULL, NULL,
                         g_cclosure_marshal_VOID__VOID,
@@ -114,7 +114,7 @@ baul_column_chooser_class_init (CajaColumnChooserClass *chooser_class)
                            ("use_default",
                             G_TYPE_FROM_CLASS (chooser_class),
                             G_SIGNAL_RUN_LAST,
-                            G_STRUCT_OFFSET (CajaColumnChooserClass,
+                            G_STRUCT_OFFSET (BaulColumnChooserClass,
                                     use_default),
                             NULL, NULL,
                             g_cclosure_marshal_VOID__VOID,
@@ -131,7 +131,7 @@ baul_column_chooser_class_init (CajaColumnChooserClass *chooser_class)
 }
 
 static void
-update_buttons (CajaColumnChooser *chooser)
+update_buttons (BaulColumnChooser *chooser)
 {
     GtkTreeSelection *selection;
     GtkTreeIter iter;
@@ -178,7 +178,7 @@ update_buttons (CajaColumnChooser *chooser)
 }
 
 static void
-list_changed (CajaColumnChooser *chooser)
+list_changed (BaulColumnChooser *chooser)
 {
     update_buttons (chooser);
     g_signal_emit (chooser, signals[CHANGED], 0);
@@ -189,7 +189,7 @@ visible_toggled_callback (GtkCellRendererToggle *cell,
                           char *path_string,
                           gpointer user_data)
 {
-    CajaColumnChooser *chooser;
+    BaulColumnChooser *chooser;
     GtkTreePath *path;
     GtkTreeIter iter;
     gboolean visible;
@@ -222,7 +222,7 @@ row_deleted_callback (GtkTreeModel *model,
 }
 
 static void
-add_tree_view (CajaColumnChooser *chooser)
+add_tree_view (BaulColumnChooser *chooser)
 {
     GtkWidget *scrolled;
     GtkWidget *view;
@@ -289,7 +289,7 @@ add_tree_view (CajaColumnChooser *chooser)
 static void
 move_up_clicked_callback (GtkWidget *button, gpointer user_data)
 {
-    CajaColumnChooser *chooser;
+    BaulColumnChooser *chooser;
     GtkTreeIter iter;
     GtkTreeSelection *selection;
 
@@ -319,7 +319,7 @@ move_up_clicked_callback (GtkWidget *button, gpointer user_data)
 static void
 move_down_clicked_callback (GtkWidget *button, gpointer user_data)
 {
-    CajaColumnChooser *chooser;
+    BaulColumnChooser *chooser;
     GtkTreeIter iter;
     GtkTreeSelection *selection;
 
@@ -366,7 +366,7 @@ button_new_with_mnemonic (const gchar *icon_name, const gchar *str)
 }
 
 static void
-add_buttons (CajaColumnChooser *chooser)
+add_buttons (BaulColumnChooser *chooser)
 {
     GtkWidget *box;
     GtkWidget *separator;
@@ -411,7 +411,7 @@ add_buttons (CajaColumnChooser *chooser)
 }
 
 static void
-populate_tree (CajaColumnChooser *chooser)
+populate_tree (BaulColumnChooser *chooser)
 {
     GList *columns;
     GList *l;
@@ -421,7 +421,7 @@ populate_tree (CajaColumnChooser *chooser)
     for (l = columns; l != NULL; l = l->next)
     {
         GtkTreeIter iter;
-        CajaColumn *column;
+        BaulColumn *column;
         char *name;
         char *label;
 
@@ -448,7 +448,7 @@ populate_tree (CajaColumnChooser *chooser)
 static void
 baul_column_chooser_constructed (GObject *object)
 {
-    CajaColumnChooser *chooser;
+    BaulColumnChooser *chooser;
 
     chooser = BAUL_COLUMN_CHOOSER (object);
 
@@ -459,7 +459,7 @@ baul_column_chooser_constructed (GObject *object)
 }
 
 static void
-baul_column_chooser_init (CajaColumnChooser *chooser)
+baul_column_chooser_init (BaulColumnChooser *chooser)
 {
     chooser->details = baul_column_chooser_get_instance_private (chooser);
 
@@ -474,7 +474,7 @@ baul_column_chooser_init (CajaColumnChooser *chooser)
 }
 
 static void
-set_visible_columns (CajaColumnChooser *chooser,
+set_visible_columns (BaulColumnChooser *chooser,
                      char **visible_columns)
 {
     GHashTable *visible_columns_hash;
@@ -518,7 +518,7 @@ set_visible_columns (CajaColumnChooser *chooser,
 }
 
 static char **
-get_column_names (CajaColumnChooser *chooser, gboolean only_visible)
+get_column_names (BaulColumnChooser *chooser, gboolean only_visible)
 {
     GPtrArray *ret;
     GtkTreeIter iter;
@@ -551,8 +551,8 @@ get_column_names (CajaColumnChooser *chooser, gboolean only_visible)
 }
 
 static gboolean
-get_column_iter (CajaColumnChooser *chooser,
-                 CajaColumn *column,
+get_column_iter (BaulColumnChooser *chooser,
+                 BaulColumn *column,
                  GtkTreeIter *iter)
 {
     char *column_name;
@@ -587,7 +587,7 @@ get_column_iter (CajaColumnChooser *chooser,
 }
 
 static void
-set_column_order (CajaColumnChooser *chooser,
+set_column_order (BaulColumnChooser *chooser,
                   char **column_order)
 
 {
@@ -635,7 +635,7 @@ set_column_order (CajaColumnChooser *chooser,
 }
 
 void
-baul_column_chooser_set_settings (CajaColumnChooser *chooser,
+baul_column_chooser_set_settings (BaulColumnChooser *chooser,
                                   char **visible_columns,
                                   char **column_order)
 {
@@ -650,7 +650,7 @@ baul_column_chooser_set_settings (CajaColumnChooser *chooser,
 }
 
 void
-baul_column_chooser_get_settings (CajaColumnChooser *chooser,
+baul_column_chooser_get_settings (BaulColumnChooser *chooser,
                                   char ***visible_columns,
                                   char ***column_order)
 {
@@ -663,7 +663,7 @@ baul_column_chooser_get_settings (CajaColumnChooser *chooser,
 }
 
 GtkWidget *
-baul_column_chooser_new (CajaFile *file)
+baul_column_chooser_new (BaulFile *file)
 {
     return g_object_new (BAUL_TYPE_COLUMN_CHOOSER, "file", file, NULL);
 }

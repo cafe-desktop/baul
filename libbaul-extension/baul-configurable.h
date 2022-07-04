@@ -22,7 +22,7 @@
  *
  */
 
-/* This interface is implemented by Caja extensions that want to
+/* This interface is implemented by Baul extensions that want to
  * have configuration screens (this is particularly important for open-terminal)
  */
 
@@ -38,30 +38,30 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_CONFIGURABLE           (baul_configurable_get_type ())
-#define BAUL_CONFIGURABLE(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CONFIGURABLE, CajaConfigurable))
+#define BAUL_CONFIGURABLE(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CONFIGURABLE, BaulConfigurable))
 #define BAUL_IS_CONFIGURABLE(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_CONFIGURABLE))
-#define BAUL_CONFIGURABLE_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_CONFIGURABLE, CajaConfigurableIface))
+#define BAUL_CONFIGURABLE_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_CONFIGURABLE, BaulConfigurableIface))
 
-typedef struct _CajaConfigurable       CajaConfigurable;
-typedef struct _CajaConfigurableIface  CajaConfigurableIface;
+typedef struct _BaulConfigurable       BaulConfigurable;
+typedef struct _BaulConfigurableIface  BaulConfigurableIface;
 
 /**
- * CajaConfigurableIface:
+ * BaulConfigurableIface:
  * @g_iface: The parent interface.
  * @run: Starts the configuration panel (should use g_dialog_run)
  *
  * Interface for extensions to provide additional menu items.
  */
 
-struct _CajaConfigurableIface {
+struct _BaulConfigurableIface {
     GTypeInterface g_iface;
 
-    void (*run_config) (CajaConfigurable *provider);
+    void (*run_config) (BaulConfigurable *provider);
 };
 
 /* Interface Functions */
 GType baul_configurable_get_type   (void);
-void  baul_configurable_run_config (CajaConfigurable *provider);
+void  baul_configurable_run_config (BaulConfigurable *provider);
 
 G_END_DECLS
 

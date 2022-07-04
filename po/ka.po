@@ -296,7 +296,7 @@ msgstr "წაშლა"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
+msgid "Baul"
 msgstr "ნაუტილუსი"
 
 #: data/baul.appdata.xml.in:8
@@ -305,7 +305,7 @@ msgstr "ფაილ მენეჯერი MATE სამუშაო გა�
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -313,8 +313,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -2951,23 +2951,23 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Caja გაითიშება როდესაც უკანასკნელი ფანჯარა დაიხურება."
+msgid "Baul will exit when last window destroyed."
+msgstr "Baul გაითიშება როდესაც უკანასკნელი ფანჯარა დაიხურება."
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr "ააქტიურებს ნაუტილუსის კლასიკურ რეჟიმს, როცა ყველა ფანჯარა ბრაუზერია"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
@@ -2978,7 +2978,7 @@ msgstr "გეზის ზოლის ნაცვლად, ყოველ�
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
 "თუ მონიშნულია, ნაუტილუსი გეზის ზოლის მაგივრად, ტექსტის შეყვანის "
@@ -2990,7 +2990,7 @@ msgstr "ფაილების წაშლის ან სანაგვე
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
 "თუ მონიშნულია, ნაუტილუსი მოითხოვს დასტურს სანაგვე ყუთის დაცარიელების ან "
@@ -3002,7 +3002,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
@@ -3012,7 +3012,7 @@ msgstr "ფაილების მყისი წაშლა არ წა�
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
@@ -3080,13 +3080,13 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
+msgid "Use extra mouse button events in Baul' browser window"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
@@ -3153,7 +3153,7 @@ msgstr "ფაილის თვისებების დიალოგშ�
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
 "თუ მონიშნულია, შესაძლებელი გახდება ნაუტილუსის მიერ ზოგიერთი \"ეზოთერიულ\" "
@@ -3166,7 +3166,7 @@ msgstr "პირველ რიგში დასტების ჩვენ
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
 "თუ მონიშნულია,\"პიქტოგრამული ხედი\" რეჟიმის შემთხვევაში, ნაუტილუსი ასახავს "
@@ -3195,12 +3195,12 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
+msgid "Baul uses the users home folder as the desktop"
 msgstr "ნაუტილუსი მომხმარებლის \"სახლის დასტა\"-ს, სამუშაო მაგიდის სახით მოიხმარს"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
 "თუ მონიშნულია, ნაუტილუსი მოიხმარს \"სახლი\"-ის დასტას '/home/სახელი' როგორც "
@@ -3331,7 +3331,7 @@ msgid "Whether to show desktop notifications"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3451,7 +3451,7 @@ msgstr "გვერდითა პანელში მხოლოდ და
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
 "მონიშნულის შემთხვევაში, ნაუტილუსი გვერდითა პანელზე მხოლოდ დასტებს აჩვენებს, "
@@ -3653,7 +3653,7 @@ msgstr "გარე მედიის ავტო მიერთების
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
 "თუ მონიშნულია, ნაუტილუსი ავტომატურად მიაერთებს მოწყობილობებს, როგორიცაა გარე"
@@ -3665,7 +3665,7 @@ msgstr "გაიხსნას თუ არა ახლად მიერ�
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
@@ -3683,7 +3683,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
 "თუ მონიშნულია, ნაუტილუსი აღარ მოგთხოვთ კომპაქტ დისკიდან ავტო-გაშვებად "
@@ -3784,26 +3784,26 @@ msgstr "აჩვენე სეანსის მართვის პარ
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
+msgid "Baul could not create the required folder \"%s\"."
 msgstr ""
 "ნაუტილუსმა ვერ დააკმაყოფილა თქვენი მოთხოვნა, შეუძლებელი გახდა \"%s\" დასტის "
 "შექმნა."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
+msgid "Baul could not create the following required folders: %s."
 msgstr ""
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
@@ -3866,7 +3866,7 @@ msgid "Open a browser window."
 msgstr "ბრაუზერის ფანჯრის გახსნა."
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
+msgid "Quit Baul."
 msgstr "გათიშე ნაუტილუსი"
 
 #: src/baul-application.c:1887
@@ -4882,7 +4882,7 @@ msgid "New _Window"
 msgstr "ახალი _ფანჯარა"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
+msgid "Open another Baul window for the displayed location"
 msgstr "მოცემული მისამართისთვის დამატებითი ნაუტილუსის ფანჯრის გახსნა"
 
 #: src/baul-navigation-window-menus.c:834
@@ -5704,7 +5704,7 @@ msgid "View of the current folder"
 msgstr "მიმდინარე დასტის დათვალიერებახედი ის საქაღალდე"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
+msgid "Baul has no installed viewer capable of displaying the folder."
 msgstr ""
 
 #: src/baul-window-manage-views.c:2145
@@ -5722,11 +5722,11 @@ msgstr "გთხოვთ გადაამოწმოთ ორთოგრ�
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
+msgid "Baul cannot handle \"%s\" locations."
 msgstr "ნაუტილუსმა ვერ დაამუშავა მდებარეობები: %s"
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
+msgid "Baul cannot handle this kind of location."
 msgstr ""
 
 #: src/baul-window-manage-views.c:2178
@@ -5762,7 +5762,7 @@ msgstr "სანიშნის მიერ მითითებულ მდ
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
@@ -5774,7 +5774,7 @@ msgstr ""
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
@@ -5788,7 +5788,7 @@ msgstr ""
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "ამ პროგრამასთან ერთად თქვენ უნდა მიგეღოთ GNU ზოგადი საჯარო ლიცენზიის(GNU "
@@ -5797,18 +5797,18 @@ msgstr ""
 " MA 02110-1301, USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -5850,7 +5850,7 @@ msgid "Prefere_nces"
 msgstr "_პარამეტრები"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
+msgid "Edit Baul preferences"
 msgstr "ნაუტილუსის პარამეტრების შეცვლა"
 
 #: src/baul-window-menus.c:870
@@ -5878,7 +5878,7 @@ msgid "_Contents"
 msgstr "_შინაარსი"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
+msgid "Display Baul help"
 msgstr "ნაუტილუსის დახმარების ჩვენება"
 
 #: src/baul-window-menus.c:894
@@ -5886,7 +5886,7 @@ msgid "_About"
 msgstr "_შესახებ"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
+msgid "Display credits for the creators of Baul"
 msgstr "ნაუტილუსის შემქმნელთა სიის ჩვენება"
 
 #: src/baul-window-menus.c:899
@@ -6267,7 +6267,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"

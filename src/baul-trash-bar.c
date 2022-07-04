@@ -34,7 +34,7 @@
 #include "baul-window.h"
 
 #define BAUL_TRASH_BAR_GET_PRIVATE(o)\
-	(G_TYPE_INSTANCE_GET_PRIVATE ((o), BAUL_TYPE_TRASH_BAR, CajaTrashBarPrivate))
+	(G_TYPE_INSTANCE_GET_PRIVATE ((o), BAUL_TYPE_TRASH_BAR, BaulTrashBarPrivate))
 
 enum
 {
@@ -42,20 +42,20 @@ enum
     NUM_PROPERTIES
 };
 
-struct _CajaTrashBarPrivate
+struct _BaulTrashBarPrivate
 {
     GtkWidget *empty_button;
     GtkWidget *restore_button;
 
-    CajaWindow *window;
+    BaulWindow *window;
     gulong selection_handler_id;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaTrashBar, baul_trash_bar, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulTrashBar, baul_trash_bar, GTK_TYPE_BOX);
 
 static void
 restore_button_clicked_cb (GtkWidget *button,
-                           CajaTrashBar *bar)
+                           BaulTrashBar *bar)
 {
     GList *locations, *files, *l;
 
@@ -74,8 +74,8 @@ restore_button_clicked_cb (GtkWidget *button,
 }
 
 static void
-selection_changed_cb (CajaWindow *window,
-                      CajaTrashBar *bar)
+selection_changed_cb (BaulWindow *window,
+                      BaulTrashBar *bar)
 {
     int count;
 
@@ -85,7 +85,7 @@ selection_changed_cb (CajaWindow *window,
 }
 
 static void
-connect_window_and_update_button (CajaTrashBar *bar)
+connect_window_and_update_button (BaulTrashBar *bar)
 {
     bar->priv->selection_handler_id =
         g_signal_connect (bar->priv->window, "selection_changed",
@@ -100,7 +100,7 @@ baul_trash_bar_set_property (GObject      *object,
                              const GValue *value,
                              GParamSpec   *pspec)
 {
-    CajaTrashBar *bar;
+    BaulTrashBar *bar;
 
     bar = BAUL_TRASH_BAR (object);
 
@@ -119,7 +119,7 @@ baul_trash_bar_set_property (GObject      *object,
 static void
 baul_trash_bar_finalize (GObject *obj)
 {
-    CajaTrashBar *bar;
+    BaulTrashBar *bar;
 
     bar = BAUL_TRASH_BAR (obj);
 
@@ -132,11 +132,11 @@ baul_trash_bar_finalize (GObject *obj)
 }
 
 static void
-baul_trash_bar_trash_state_changed (CajaTrashMonitor *trash_monitor,
+baul_trash_bar_trash_state_changed (BaulTrashMonitor *trash_monitor,
                                     gboolean              state,
                                     gpointer              data)
 {
-    CajaTrashBar *bar;
+    BaulTrashBar *bar;
 
     bar = BAUL_TRASH_BAR (data);
 
@@ -145,7 +145,7 @@ baul_trash_bar_trash_state_changed (CajaTrashMonitor *trash_monitor,
 }
 
 static void
-baul_trash_bar_class_init (CajaTrashBarClass *klass)
+baul_trash_bar_class_init (BaulTrashBarClass *klass)
 {
     GObjectClass *object_class;
 
@@ -158,7 +158,7 @@ baul_trash_bar_class_init (CajaTrashBarClass *klass)
                                      PROP_WINDOW,
                                      g_param_spec_object ("window",
                                              "window",
-                                             "the CajaWindow",
+                                             "the BaulWindow",
                                              BAUL_TYPE_WINDOW,
                                              G_PARAM_WRITABLE |
                                              G_PARAM_CONSTRUCT_ONLY |
@@ -176,7 +176,7 @@ empty_trash_callback (GtkWidget *button, gpointer data)
 }
 
 static void
-baul_trash_bar_init (CajaTrashBar *bar)
+baul_trash_bar_init (BaulTrashBar *bar)
 {
     GtkWidget *label;
     GtkWidget *hbox;
@@ -227,7 +227,7 @@ baul_trash_bar_init (CajaTrashBar *bar)
 }
 
 GtkWidget *
-baul_trash_bar_new (CajaWindow *window)
+baul_trash_bar_new (BaulWindow *window)
 {
     GObject *bar;
 

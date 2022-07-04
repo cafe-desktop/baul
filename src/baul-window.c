@@ -1,15 +1,15 @@
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 1999, 2000, 2004 Red Hat, Inc.
  *  Copyright (C) 1999, 2000, 2001 Eazel, Inc.
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public
  *  License as published by the Free Software Foundation; either
  *  version 2 of the License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -91,19 +91,19 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 typedef struct
 {
-    CajaWindow *window;
+    BaulWindow *window;
     char *id;
 } ActivateViewData;
 
-static void cancel_view_as_callback         (CajaWindowSlot      *slot);
-static void baul_window_info_iface_init (CajaWindowInfoIface *iface);
+static void cancel_view_as_callback         (BaulWindowSlot      *slot);
+static void baul_window_info_iface_init (BaulWindowInfoIface *iface);
 static void action_view_as_callback         (GtkAction               *action,
         ActivateViewData        *data);
 
 static GList *history_list;
 
-G_DEFINE_TYPE_WITH_CODE (CajaWindow, baul_window, GTK_TYPE_WINDOW,
-                         G_ADD_PRIVATE (CajaWindow)
+G_DEFINE_TYPE_WITH_CODE (BaulWindow, baul_window, GTK_TYPE_WINDOW,
+                         G_ADD_PRIVATE (BaulWindow)
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_WINDOW_INFO,
                                  baul_window_info_iface_init));
 
@@ -131,7 +131,7 @@ static const struct
 };
 
 static void
-baul_window_init (CajaWindow *window)
+baul_window_init (BaulWindow *window)
 {
     GtkWidget *grid;
     GtkWidget *menu;
@@ -147,7 +147,7 @@ baul_window_init (CajaWindow *window)
     gtk_css_provider_load_from_data (provider, css_custom, -1, &error);
 
     if (error != NULL) {
-            g_warning ("Can't parse CajaWindow's CSS custom description: %s\n", error->message);
+            g_warning ("Can't parse BaulWindow's CSS custom description: %s\n", error->message);
             g_error_free (error);
     } else {
             gtk_style_context_add_provider (gtk_widget_get_style_context (GTK_WIDGET (window)),
@@ -164,7 +164,7 @@ baul_window_init (CajaWindow *window)
     window->details->show_hidden_files_mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT;
 
     /* Set initial window title */
-    gtk_window_set_title (GTK_WINDOW (window), _("Caja"));
+    gtk_window_set_title (GTK_WINDOW (window), _("Baul"));
 
     grid = gtk_grid_new ();
     gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
@@ -199,7 +199,7 @@ baul_window_init (CajaWindow *window)
 
 /* Unconditionally synchronize the GtkUIManager of WINDOW. */
 static void
-baul_window_ui_update (CajaWindow *window)
+baul_window_ui_update (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -207,7 +207,7 @@ baul_window_ui_update (CajaWindow *window)
 }
 
 static void
-baul_window_push_status (CajaWindow *window,
+baul_window_push_status (BaulWindow *window,
                          const char *text)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
@@ -222,16 +222,16 @@ baul_window_push_status (CajaWindow *window,
 }
 
 void
-baul_window_sync_status (CajaWindow *window)
+baul_window_sync_status (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     slot = window->details->active_pane->active_slot;
     baul_window_push_status (window, slot->status_text);
 }
 
 void
-baul_window_go_to (CajaWindow *window, GFile *location)
+baul_window_go_to (BaulWindow *window, GFile *location)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -239,7 +239,7 @@ baul_window_go_to (CajaWindow *window, GFile *location)
 }
 
 void
-baul_window_go_to_tab (CajaWindow *window, GFile *location)
+baul_window_go_to_tab (BaulWindow *window, GFile *location)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -247,9 +247,9 @@ baul_window_go_to_tab (CajaWindow *window, GFile *location)
 }
 
 void
-baul_window_go_to_full (CajaWindow *window,
+baul_window_go_to_full (BaulWindow *window,
                         GFile                 *location,
-                        CajaWindowGoToCallback callback,
+                        BaulWindowGoToCallback callback,
                         gpointer               user_data)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
@@ -258,7 +258,7 @@ baul_window_go_to_full (CajaWindow *window,
 }
 
 void
-baul_window_go_to_with_selection (CajaWindow *window, GFile *location, GList *new_selection)
+baul_window_go_to_with_selection (BaulWindow *window, GFile *location, GList *new_selection)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -266,24 +266,24 @@ baul_window_go_to_with_selection (CajaWindow *window, GFile *location, GList *ne
 }
 
 static gboolean
-baul_window_go_up_signal (CajaWindow *window, gboolean close_behind)
+baul_window_go_up_signal (BaulWindow *window, gboolean close_behind)
 {
     baul_window_go_up (window, close_behind, FALSE);
     return TRUE;
 }
 
 void
-baul_window_new_tab (CajaWindow *window)
+baul_window_new_tab (BaulWindow *window)
 {
-    CajaWindowSlot *current_slot;
-    CajaWindowOpenFlags flags;
+    BaulWindowSlot *current_slot;
+    BaulWindowOpenFlags flags;
     GFile *location = NULL;
 
     current_slot = window->details->active_pane->active_slot;
     location = baul_window_slot_get_location (current_slot);
 
     if (location != NULL) {
-        CajaWindowSlot *new_slot;
+        BaulWindowSlot *new_slot;
         int new_slot_position;
         char *scheme;
 
@@ -310,9 +310,9 @@ baul_window_new_tab (CajaWindow *window)
 
 /*Opens a new window when called from an existing window and goes to the same location that's in the existing window.*/
 void
-baul_window_new_window (CajaWindow *window)
+baul_window_new_window (BaulWindow *window)
 {
-    CajaWindowSlot *current_slot;
+    BaulWindowSlot *current_slot;
     GFile *location = NULL;
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -322,9 +322,9 @@ baul_window_new_window (CajaWindow *window)
 
     if (location != NULL) 
     {
-        CajaWindow *new_window;
-        CajaWindowSlot *new_slot;
-        CajaWindowOpenFlags flags;
+        BaulWindow *new_window;
+        BaulWindowSlot *new_slot;
+        BaulWindowOpenFlags flags;
         flags = FALSE;
 
         /*Create a new window*/
@@ -345,12 +345,12 @@ baul_window_new_window (CajaWindow *window)
 }
 
 void
-baul_window_go_up (CajaWindow *window, gboolean close_behind, gboolean new_tab)
+baul_window_go_up (BaulWindow *window, gboolean close_behind, gboolean new_tab)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GFile *parent;
     GList *selection;
-    CajaWindowOpenFlags flags;
+    BaulWindowOpenFlags flags;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -392,7 +392,7 @@ baul_window_go_up (CajaWindow *window, gboolean close_behind, gboolean new_tab)
 }
 
 static void
-real_set_allow_up (CajaWindow *window,
+real_set_allow_up (BaulWindow *window,
                    gboolean        allow)
 {
     GtkAction *action;
@@ -410,7 +410,7 @@ real_set_allow_up (CajaWindow *window,
 }
 
 void
-baul_window_allow_up (CajaWindow *window, gboolean allow)
+baul_window_allow_up (BaulWindow *window, gboolean allow)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -419,9 +419,9 @@ baul_window_allow_up (CajaWindow *window, gboolean allow)
 }
 
 static void
-update_cursor (CajaWindow *window)
+update_cursor (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     slot = window->details->active_pane->active_slot;
 
@@ -442,8 +442,8 @@ update_cursor (CajaWindow *window)
 }
 
 void
-baul_window_sync_allow_stop (CajaWindow *window,
-                             CajaWindowSlot *slot)
+baul_window_sync_allow_stop (BaulWindow *window,
+                             BaulWindowSlot *slot)
 {
     GtkAction *action;
     gboolean allow_stop;
@@ -477,7 +477,7 @@ baul_window_sync_allow_stop (CajaWindow *window,
 }
 
 void
-baul_window_allow_reload (CajaWindow *window, gboolean allow)
+baul_window_allow_reload (BaulWindow *window, gboolean allow)
 {
     GtkAction *action;
 
@@ -491,7 +491,7 @@ baul_window_allow_reload (CajaWindow *window, gboolean allow)
 }
 
 void
-baul_window_go_home (CajaWindow *window)
+baul_window_go_home (BaulWindow *window)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -499,7 +499,7 @@ baul_window_go_home (CajaWindow *window)
 }
 
 void
-baul_window_prompt_for_location (CajaWindow *window,
+baul_window_prompt_for_location (BaulWindow *window,
                                  const char     *initial)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
@@ -509,9 +509,9 @@ baul_window_prompt_for_location (CajaWindow *window,
 }
 
 static char *
-baul_window_get_location_uri (CajaWindow *window)
+baul_window_get_location_uri (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -525,7 +525,7 @@ baul_window_get_location_uri (CajaWindow *window)
 }
 
 void
-baul_window_zoom_in (CajaWindow *window)
+baul_window_zoom_in (BaulWindow *window)
 {
     g_assert (window != NULL);
 
@@ -533,8 +533,8 @@ baul_window_zoom_in (CajaWindow *window)
 }
 
 void
-baul_window_zoom_to_level (CajaWindow *window,
-                           CajaZoomLevel level)
+baul_window_zoom_to_level (BaulWindow *window,
+                           BaulZoomLevel level)
 {
     g_assert (window != NULL);
 
@@ -542,7 +542,7 @@ baul_window_zoom_to_level (CajaWindow *window,
 }
 
 void
-baul_window_zoom_out (CajaWindow *window)
+baul_window_zoom_out (BaulWindow *window)
 {
     g_assert (window != NULL);
 
@@ -550,7 +550,7 @@ baul_window_zoom_out (CajaWindow *window)
 }
 
 void
-baul_window_zoom_to_default (CajaWindow *window)
+baul_window_zoom_to_default (BaulWindow *window)
 {
     g_assert (window != NULL);
 
@@ -577,12 +577,12 @@ get_max_forced_width (GdkScreen *screen)
     return (WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale * 90) / 100;
 }
 
-/* This must be called when construction of CajaWindow is finished,
+/* This must be called when construction of BaulWindow is finished,
  * since it depends on the type of the argument, which isn't decided at
  * construction time.
  */
 static void
-baul_window_set_initial_window_geometry (CajaWindow *window)
+baul_window_set_initial_window_geometry (BaulWindow *window)
 {
     GdkScreen *screen;
     guint max_width_for_screen, max_height_for_screen;
@@ -608,7 +608,7 @@ baul_window_set_initial_window_geometry (CajaWindow *window)
 static void
 baul_window_constructed (GObject *self)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (self);
 
@@ -622,7 +622,7 @@ baul_window_set_property (GObject *object,
                           const GValue *value,
                           GParamSpec *pspec)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (object);
 
@@ -649,7 +649,7 @@ baul_window_get_property (GObject *object,
 }
 
 static void
-free_stored_viewers (CajaWindow *window)
+free_stored_viewers (BaulWindow *window)
 {
     g_list_free_full (window->details->short_list_viewers, g_free);
     window->details->short_list_viewers = NULL;
@@ -660,7 +660,7 @@ free_stored_viewers (CajaWindow *window)
 static void
 baul_window_destroy (GtkWidget *object)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GList *panes_copy;
 
     window = BAUL_WINDOW (object);
@@ -679,7 +679,7 @@ baul_window_destroy (GtkWidget *object)
 static void
 baul_window_finalize (GObject *object)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (object);
 
@@ -705,8 +705,8 @@ baul_window_constructor (GType type,
                          GObjectConstructParam *construct_params)
 {
     GObject *object;
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
 
     object = (* G_OBJECT_CLASS (baul_window_parent_class)->constructor) (type,
              n_construct_properties,
@@ -721,10 +721,10 @@ baul_window_constructor (GType type,
 }
 
 void
-baul_window_show_window (CajaWindow    *window)
+baul_window_show_window (BaulWindow    *window)
 {
-    CajaWindowSlot *slot;
-    CajaWindowPane *pane;
+    BaulWindowSlot *slot;
+    BaulWindowPane *pane;
     GList *l, *walk;
 
     for (walk = window->details->panes; walk; walk = walk->next)
@@ -753,11 +753,11 @@ baul_window_show_window (CajaWindow    *window)
 }
 
 static void
-baul_window_view_visible (CajaWindow *window,
-                          CajaView *view)
+baul_window_view_visible (BaulWindow *window,
+                          BaulView *view)
 {
-    CajaWindowSlot *slot;
-    CajaWindowPane *pane;
+    BaulWindowSlot *slot;
+    BaulWindowPane *pane;
     GList *l, *walk;
 
     g_return_if_fail (BAUL_IS_WINDOW (window));
@@ -813,7 +813,7 @@ baul_window_view_visible (CajaWindow *window,
 }
 
 void
-baul_window_close (CajaWindow *window)
+baul_window_close (BaulWindow *window)
 {
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -823,11 +823,11 @@ baul_window_close (CajaWindow *window)
     gtk_widget_destroy (GTK_WIDGET (window));
 }
 
-CajaWindowSlot *
-baul_window_open_slot (CajaWindowPane *pane,
-                       CajaWindowOpenSlotFlags flags)
+BaulWindowSlot *
+baul_window_open_slot (BaulWindowPane *pane,
+                       BaulWindowOpenSlotFlags flags)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW_PANE (pane));
     g_assert (BAUL_IS_WINDOW (pane->window));
@@ -844,9 +844,9 @@ baul_window_open_slot (CajaWindowPane *pane,
 }
 
 void
-baul_window_close_pane (CajaWindowPane *pane)
+baul_window_close_pane (BaulWindowPane *pane)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     g_assert (BAUL_IS_WINDOW_PANE (pane));
     g_assert (BAUL_IS_WINDOW (pane->window));
@@ -854,7 +854,7 @@ baul_window_close_pane (CajaWindowPane *pane)
 
     while (pane->slots != NULL)
     {
-        CajaWindowSlot *slot = pane->slots->data;
+        BaulWindowSlot *slot = pane->slots->data;
 
         baul_window_close_slot (slot);
     }
@@ -875,17 +875,17 @@ baul_window_close_pane (CajaWindowPane *pane)
 }
 
 static void
-real_close_slot (CajaWindowPane *pane,
-                 CajaWindowSlot *slot)
+real_close_slot (BaulWindowPane *pane,
+                 BaulWindowSlot *slot)
 {
     baul_window_manage_views_close_slot (pane, slot);
     cancel_view_as_callback (slot);
 }
 
 void
-baul_window_close_slot (CajaWindowSlot *slot)
+baul_window_close_slot (BaulWindowSlot *slot)
 {
-    CajaWindowPane *pane;
+    BaulWindowPane *pane;
 
     g_assert (BAUL_IS_WINDOW_SLOT (slot));
     g_assert (BAUL_IS_WINDOW_PANE(slot->pane));
@@ -905,15 +905,15 @@ baul_window_close_slot (CajaWindowSlot *slot)
 
 }
 
-CajaWindowPane*
-baul_window_get_active_pane (CajaWindow *window)
+BaulWindowPane*
+baul_window_get_active_pane (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
     return window->details->active_pane;
 }
 
 static void
-real_set_active_pane (CajaWindow *window, CajaWindowPane *new_pane)
+real_set_active_pane (BaulWindow *window, BaulWindowPane *new_pane)
 {
     /* make old pane inactive, and new one active.
      * Currently active pane may be NULL (after init). */
@@ -931,8 +931,8 @@ real_set_active_pane (CajaWindow *window, CajaWindowPane *new_pane)
  * always implies making the containing active slot the active slot of
  * the window. */
 void
-baul_window_set_active_pane (CajaWindow *window,
-                             CajaWindowPane *new_pane)
+baul_window_set_active_pane (BaulWindow *window,
+                             BaulWindowPane *new_pane)
 {
     g_assert (BAUL_IS_WINDOW_PANE (new_pane));
     if (new_pane->active_slot)
@@ -949,9 +949,9 @@ baul_window_set_active_pane (CajaWindow *window,
  * pane the active pane of the associated window.
  * new_slot may be NULL. */
 void
-baul_window_set_active_slot (CajaWindow *window, CajaWindowSlot *new_slot)
+baul_window_set_active_slot (BaulWindow *window, BaulWindowSlot *new_slot)
 {
-    CajaWindowSlot *old_slot;
+    BaulWindowSlot *old_slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1023,7 +1023,7 @@ baul_window_set_active_slot (CajaWindow *window, CajaWindowSlot *new_slot)
 }
 
 void
-baul_window_slot_close (CajaWindowSlot *slot)
+baul_window_slot_close (BaulWindowSlot *slot)
 {
     baul_window_pane_slot_close (slot->pane, slot);
 }
@@ -1044,7 +1044,7 @@ baul_window_key_press_event (GtkWidget *widget,
         ((event->keyval == '.') || (event->keyval == ';')))
         return TRUE;
 
-    CajaWindow *window;
+    BaulWindow *window;
     int i;
 
     window = BAUL_WINDOW (widget);
@@ -1101,14 +1101,14 @@ static void
 action_view_as_callback (GtkAction *action,
                          ActivateViewData *data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = data->window;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
-        CajaWindowSlot *slot;
+        BaulWindowSlot *slot;
 
         slot = window->details->active_pane->active_slot;
         baul_window_slot_set_content_view (slot,
@@ -1118,13 +1118,13 @@ action_view_as_callback (GtkAction *action,
 }
 
 static GtkRadioAction *
-add_view_as_menu_item (CajaWindow *window,
+add_view_as_menu_item (BaulWindow *window,
                        const char *placeholder_path,
                        const char *identifier,
                        int index, /* extra_viewer is always index 0 */
                        guint merge_id)
 {
-    const CajaViewInfo *info;
+    const BaulViewInfo *info;
     GtkRadioAction *action;
     char action_name[32];
     ActivateViewData *data;
@@ -1147,7 +1147,7 @@ add_view_as_menu_item (CajaWindow *window,
         unsigned int accel_keyval;
 
         g_snprintf (accel, sizeof (accel), "%d", index);
-        g_snprintf (accel_path, sizeof (accel_path), "<Caja-Window>/%s", action_name);
+        g_snprintf (accel_path, sizeof (accel_path), "<Baul-Window>/%s", action_name);
 
         accel_keyval = gdk_keyval_from_name (accel);
 		g_assert (accel_keyval != GDK_KEY_VoidSymbol);
@@ -1201,7 +1201,7 @@ add_view_as_menu_item (CajaWindow *window,
  * content view isn't already in the "View as" option menu.
  */
 static void
-update_extra_viewer_in_view_as_menus (CajaWindow *window,
+update_extra_viewer_in_view_as_menus (BaulWindow *window,
                                       const char *id)
 {
     gboolean had_extra_viewer;
@@ -1255,15 +1255,15 @@ update_extra_viewer_in_view_as_menus (CajaWindow *window,
 }
 
 static void
-remove_extra_viewer_in_view_as_menus (CajaWindow *window)
+remove_extra_viewer_in_view_as_menus (BaulWindow *window)
 {
     update_extra_viewer_in_view_as_menus (window, NULL);
 }
 
 static void
-replace_extra_viewer_in_view_as_menus (CajaWindow *window)
+replace_extra_viewer_in_view_as_menus (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     const char *id;
 
     slot = window->details->active_pane->active_slot;
@@ -1279,12 +1279,12 @@ replace_extra_viewer_in_view_as_menus (CajaWindow *window)
  * the marked "View as" item in the View menu to
  * match the current content view.
  *
- * @window: The CajaWindow whose "View as" option menu should be synched.
+ * @window: The BaulWindow whose "View as" option menu should be synched.
  */
 static void
-baul_window_synch_view_as_menus (CajaWindow *window)
+baul_window_synch_view_as_menus (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     int index;
     char action_name[32];
     GList *node;
@@ -1342,9 +1342,9 @@ baul_window_synch_view_as_menus (CajaWindow *window)
 }
 
 static void
-refresh_stored_viewers (CajaWindow *window)
+refresh_stored_viewers (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GList *viewers;
     char *uri, *mimetype;
 
@@ -1363,7 +1363,7 @@ refresh_stored_viewers (CajaWindow *window)
 }
 
 static void
-load_view_as_menu (CajaWindow *window)
+load_view_as_menu (BaulWindow *window)
 {
     GList *node;
     guint merge_id;
@@ -1427,11 +1427,11 @@ load_view_as_menu (CajaWindow *window)
 }
 
 static void
-load_view_as_menus_callback (CajaFile *file,
+load_view_as_menus_callback (BaulFile *file,
                              gpointer callback_data)
 {
-    CajaWindow *window;
-    CajaWindowSlot *slot;
+    BaulWindow *window;
+    BaulWindowSlot *slot;
 
     slot = callback_data;
     window = BAUL_WINDOW (slot->pane->window);
@@ -1443,7 +1443,7 @@ load_view_as_menus_callback (CajaFile *file,
 }
 
 static void
-cancel_view_as_callback (CajaWindowSlot *slot)
+cancel_view_as_callback (BaulWindowSlot *slot)
 {
     baul_file_cancel_call_when_ready (slot->viewed_file,
                                       load_view_as_menus_callback,
@@ -1451,10 +1451,10 @@ cancel_view_as_callback (CajaWindowSlot *slot)
 }
 
 void
-baul_window_load_view_as_menus (CajaWindow *window)
+baul_window_load_view_as_menus (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
-    CajaFileAttributes attributes;
+    BaulWindowSlot *slot;
+    BaulFileAttributes attributes;
 
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -1470,7 +1470,7 @@ baul_window_load_view_as_menus (CajaWindow *window)
 }
 
 void
-baul_window_display_error (CajaWindow *window, const char *error_msg)
+baul_window_display_error (BaulWindow *window, const char *error_msg)
 {
     GtkWidget *dialog;
 
@@ -1482,7 +1482,7 @@ baul_window_display_error (CajaWindow *window, const char *error_msg)
 }
 
 static char *
-real_get_title (CajaWindow *window)
+real_get_title (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1490,8 +1490,8 @@ real_get_title (CajaWindow *window)
 }
 
 static void
-real_sync_title (CajaWindow *window,
-                 CajaWindowSlot *slot)
+real_sync_title (BaulWindow *window,
+                 BaulWindowSlot *slot)
 {
     if (slot == window->details->active_pane->active_slot)
     {
@@ -1505,22 +1505,22 @@ real_sync_title (CajaWindow *window,
 }
 
 void
-baul_window_sync_title (CajaWindow *window,
-                        CajaWindowSlot *slot)
+baul_window_sync_title (BaulWindow *window,
+                        BaulWindowSlot *slot)
 {
     EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      sync_title, (window, slot));
 }
 
 void
-baul_window_sync_zoom_widgets (CajaWindow *window)
+baul_window_sync_zoom_widgets (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
-    CajaView *view;
+    BaulWindowSlot *slot;
+    BaulView *view;
     GtkAction *action;
     gboolean supports_zooming;
     gboolean can_zoom, can_zoom_in, can_zoom_out;
-    CajaZoomLevel zoom_level;
+    BaulZoomLevel zoom_level;
 
     slot = window->details->active_pane->active_slot;
     view = slot->content_view;
@@ -1567,8 +1567,8 @@ baul_window_sync_zoom_widgets (CajaWindow *window)
 }
 
 static void
-zoom_level_changed_callback (CajaView *view,
-                             CajaWindow *window)
+zoom_level_changed_callback (BaulView *view,
+                             BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1586,10 +1586,10 @@ zoom_level_changed_callback (CajaView *view,
  *   C) when closing the active slot (disconnect)
 */
 void
-baul_window_connect_content_view (CajaWindow *window,
-                                  CajaView *view)
+baul_window_connect_content_view (BaulWindow *window,
+                                  BaulView *view)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
     g_assert (BAUL_IS_VIEW (view));
@@ -1615,10 +1615,10 @@ baul_window_connect_content_view (CajaWindow *window,
 }
 
 void
-baul_window_disconnect_content_view (CajaWindow *window,
-                                     CajaView *view)
+baul_window_disconnect_content_view (BaulWindow *window,
+                                     BaulView *view)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
     g_assert (BAUL_IS_VIEW (view));
@@ -1639,7 +1639,7 @@ baul_window_disconnect_content_view (CajaWindow *window,
 static void
 baul_window_show (GtkWidget *widget)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     window = BAUL_WINDOW (widget);
 
@@ -1649,17 +1649,17 @@ baul_window_show (GtkWidget *widget)
 }
 
 GtkUIManager *
-baul_window_get_ui_manager (CajaWindow *window)
+baul_window_get_ui_manager (BaulWindow *window)
 {
     g_return_val_if_fail (BAUL_IS_WINDOW (window), NULL);
 
     return window->details->ui_manager;
 }
 
-CajaWindowPane *
-baul_window_get_next_pane (CajaWindow *window)
+BaulWindowPane *
+baul_window_get_next_pane (BaulWindow *window)
 {
-    CajaWindowPane *next_pane;
+    BaulWindowPane *next_pane;
     GList *node;
 
     /* return NULL if there is only one pane */
@@ -1685,10 +1685,10 @@ baul_window_get_next_pane (CajaWindow *window)
 
 
 void
-baul_window_slot_set_viewed_file (CajaWindowSlot *slot,
-                                  CajaFile *file)
+baul_window_slot_set_viewed_file (BaulWindowSlot *slot,
+                                  BaulFile *file)
 {
-    CajaFileAttributes attributes;
+    BaulFileAttributes attributes;
 
     if (slot->viewed_file == file)
     {
@@ -1701,7 +1701,7 @@ baul_window_slot_set_viewed_file (CajaWindowSlot *slot,
 
     if (slot->viewed_file != NULL)
     {
-        CajaWindow *window;
+        BaulWindow *window;
 
         window = slot->pane->window;
 
@@ -1745,7 +1745,7 @@ free_history_list (void)
  * We pass in a bookmark for convenience.
  */
 static void
-remove_from_history_list (CajaBookmark *bookmark)
+remove_from_history_list (BaulBookmark *bookmark)
 {
     GList *node;
 
@@ -1767,10 +1767,10 @@ remove_from_history_list (CajaBookmark *bookmark)
 }
 
 gboolean
-baul_add_bookmark_to_history_list (CajaBookmark *bookmark)
+baul_add_bookmark_to_history_list (BaulBookmark *bookmark)
 {
     /* Note that the history is shared amongst all windows so
-     * this is not a CajaNavigationWindow function. Perhaps it belongs
+     * this is not a BaulNavigationWindow function. Perhaps it belongs
      * in its own file.
      */
     GList *l, *next;
@@ -1817,7 +1817,7 @@ baul_add_bookmark_to_history_list (CajaBookmark *bookmark)
 void
 baul_remove_from_history_list_no_notify (GFile *location)
 {
-    CajaBookmark *bookmark;
+    BaulBookmark *bookmark;
 
     bookmark = baul_bookmark_new (location, "", FALSE, NULL);
     remove_from_history_list (bookmark);
@@ -1830,7 +1830,7 @@ baul_add_to_history_list_no_notify (GFile *location,
                                     gboolean has_custom_name,
                                     GIcon *icon)
 {
-    CajaBookmark *bookmark;
+    BaulBookmark *bookmark;
     gboolean ret;
 
     bookmark = baul_bookmark_new (location, name, has_custom_name, icon);
@@ -1840,16 +1840,16 @@ baul_add_to_history_list_no_notify (GFile *location,
     return ret;
 }
 
-CajaWindowSlot *
-baul_window_get_slot_for_view (CajaWindow *window,
-                               CajaView *view)
+BaulWindowSlot *
+baul_window_get_slot_for_view (BaulWindow *window,
+                               BaulView *view)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GList *l, *walk;
 
     for (walk = window->details->panes; walk; walk = walk->next)
     {
-        CajaWindowPane *pane = walk->data;
+        BaulWindowPane *pane = walk->data;
 
         for (l = pane->slots; l != NULL; l = l->next)
         {
@@ -1868,10 +1868,10 @@ baul_window_get_slot_for_view (CajaWindow *window,
 void
 baul_forget_history (void)
 {
-    CajaWindowSlot *slot;
-    CajaNavigationWindowSlot *navigation_slot;
+    BaulWindowSlot *slot;
+    BaulNavigationWindowSlot *navigation_slot;
     GList *window_node, *l, *walk;
-    CajaApplication *app;
+    BaulApplication *app;
 
     app = BAUL_APPLICATION (g_application_get_default ());
     /* Clear out each window's back & forward lists. Also, remove
@@ -1885,13 +1885,13 @@ baul_forget_history (void)
 
         if (BAUL_IS_NAVIGATION_WINDOW (window_node->data))
         {
-            CajaNavigationWindow *window;
+            BaulNavigationWindow *window;
 
             window = BAUL_NAVIGATION_WINDOW (window_node->data);
 
             for (walk = BAUL_WINDOW (window_node->data)->details->panes; walk; walk = walk->next)
             {
-                CajaWindowPane *pane = walk->data;
+                BaulWindowPane *pane = walk->data;
                 for (l = pane->slots; l != NULL; l = l->next)
                 {
                     navigation_slot = l->data;
@@ -1907,7 +1907,7 @@ baul_forget_history (void)
 
         for (walk = BAUL_WINDOW (window_node->data)->details->panes; walk; walk = walk->next)
         {
-            CajaWindowPane *pane = walk->data;
+            BaulWindowPane *pane = walk->data;
             for (l = pane->slots; l != NULL; l = l->next)
             {
                 slot = l->data;
@@ -1925,14 +1925,14 @@ baul_forget_history (void)
             window_node != NULL;
             window_node = window_node->next)
     {
-        CajaWindow *window;
-        CajaWindowSlot *slot;
+        BaulWindow *window;
+        BaulWindowSlot *slot;
         GList *l;
 
         window = BAUL_WINDOW (window_node->data);
         for (walk = window->details->panes; walk; walk = walk->next)
         {
-            CajaWindowPane *pane = walk->data;
+            BaulWindowPane *pane = walk->data;
             for (l = pane->slots; l != NULL; l = l->next)
             {
                 slot = BAUL_WINDOW_SLOT (l->data);
@@ -1949,14 +1949,14 @@ baul_get_history_list (void)
 }
 
 static GList *
-baul_window_get_history (CajaWindow *window)
+baul_window_get_history (BaulWindow *window)
 {
     return g_list_copy_deep (history_list, (GCopyFunc) g_object_ref, NULL);
 }
 
 
-static CajaWindowType
-baul_window_get_window_type (CajaWindow *window)
+static BaulWindowType
+baul_window_get_window_type (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1964,9 +1964,9 @@ baul_window_get_window_type (CajaWindow *window)
 }
 
 static int
-baul_window_get_selection_count (CajaWindow *window)
+baul_window_get_selection_count (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1981,9 +1981,9 @@ baul_window_get_selection_count (CajaWindow *window)
 }
 
 static GList *
-baul_window_get_selection (CajaWindow *window)
+baul_window_get_selection (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1996,30 +1996,30 @@ baul_window_get_selection (CajaWindow *window)
     return NULL;
 }
 
-static CajaWindowShowHiddenFilesMode
-baul_window_get_hidden_files_mode (CajaWindowInfo *window)
+static BaulWindowShowHiddenFilesMode
+baul_window_get_hidden_files_mode (BaulWindowInfo *window)
 {
     return window->details->show_hidden_files_mode;
 }
 
 static void
-baul_window_set_hidden_files_mode (CajaWindowInfo *window,
-                                   CajaWindowShowHiddenFilesMode  mode)
+baul_window_set_hidden_files_mode (BaulWindowInfo *window,
+                                   BaulWindowShowHiddenFilesMode  mode)
 {
     window->details->show_hidden_files_mode = mode;
 
     g_signal_emit_by_name (window, "hidden_files_mode_changed");
 }
 
-static CajaWindowShowBackupFilesMode
-baul_window_get_backup_files_mode (CajaWindowInfo *window)
+static BaulWindowShowBackupFilesMode
+baul_window_get_backup_files_mode (BaulWindowInfo *window)
 {
     return window->details->show_backup_files_mode;
 }
 
 static void
-baul_window_set_backup_files_mode (CajaWindowInfo *window,
-                                   CajaWindowShowBackupFilesMode  mode)
+baul_window_set_backup_files_mode (BaulWindowInfo *window,
+                                   BaulWindowShowBackupFilesMode  mode)
 {
     window->details->show_backup_files_mode = mode;
 
@@ -2027,22 +2027,22 @@ baul_window_set_backup_files_mode (CajaWindowInfo *window,
 }
 
 static gboolean
-baul_window_get_initiated_unmount (CajaWindowInfo *window)
+baul_window_get_initiated_unmount (BaulWindowInfo *window)
 {
     return window->details->initiated_unmount;
 }
 
 static void
-baul_window_set_initiated_unmount (CajaWindowInfo *window,
+baul_window_set_initiated_unmount (BaulWindowInfo *window,
                                    gboolean initiated_unmount)
 {
     window->details->initiated_unmount = initiated_unmount;
 }
 
 static char *
-baul_window_get_cached_title (CajaWindow *window)
+baul_window_get_cached_title (BaulWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -2051,18 +2051,18 @@ baul_window_get_cached_title (CajaWindow *window)
     return g_strdup (slot->title);
 }
 
-CajaWindowSlot *
-baul_window_get_active_slot (CajaWindow *window)
+BaulWindowSlot *
+baul_window_get_active_slot (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 
     return window->details->active_pane->active_slot;
 }
 
-CajaWindowSlot *
-baul_window_get_extra_slot (CajaWindow *window)
+BaulWindowSlot *
+baul_window_get_extra_slot (BaulWindow *window)
 {
-    CajaWindowPane *extra_pane;
+    BaulWindowPane *extra_pane;
     GList *node;
 
     g_assert (BAUL_IS_WINDOW (window));
@@ -2093,7 +2093,7 @@ baul_window_get_extra_slot (CajaWindow *window)
 }
 
 GList *
-baul_window_get_slots (CajaWindow *window)
+baul_window_get_slots (BaulWindow *window)
 {
     GList *walk,*list;
 
@@ -2102,14 +2102,14 @@ baul_window_get_slots (CajaWindow *window)
     list = NULL;
     for (walk = window->details->panes; walk; walk = walk->next)
     {
-        CajaWindowPane *pane = walk->data;
+        BaulWindowPane *pane = walk->data;
         list  = g_list_concat (list, g_list_copy(pane->slots));
     }
     return list;
 }
 
 static void
-baul_window_info_iface_init (CajaWindowInfoIface *iface)
+baul_window_info_iface_init (BaulWindowInfoIface *iface)
 {
     iface->report_load_underway = baul_window_report_load_underway;
     iface->report_load_complete = baul_window_report_load_complete;
@@ -2138,7 +2138,7 @@ baul_window_info_iface_init (CajaWindowInfoIface *iface)
 }
 
 static void
-baul_window_class_init (CajaWindowClass *class)
+baul_window_class_init (BaulWindowClass *class)
 {
     GtkBindingSet *binding_set;
 
@@ -2163,7 +2163,7 @@ baul_window_class_init (CajaWindowClass *class)
                                      ARG_APP,
                                      g_param_spec_object ("app",
                                              "Application",
-                                             "The CajaApplication associated with this window.",
+                                             "The BaulApplication associated with this window.",
                                              BAUL_TYPE_APPLICATION,
                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 
@@ -2171,7 +2171,7 @@ baul_window_class_init (CajaWindowClass *class)
         g_signal_new ("go_up",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-                      G_STRUCT_OFFSET (CajaWindowClass, go_up),
+                      G_STRUCT_OFFSET (BaulWindowClass, go_up),
                       g_signal_accumulator_true_handled, NULL,
                       baul_src_marshal_BOOLEAN__BOOLEAN,
                       G_TYPE_BOOLEAN, 1, G_TYPE_BOOLEAN);
@@ -2179,7 +2179,7 @@ baul_window_class_init (CajaWindowClass *class)
         g_signal_new ("reload",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-                      G_STRUCT_OFFSET (CajaWindowClass, reload),
+                      G_STRUCT_OFFSET (BaulWindowClass, reload),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -2187,7 +2187,7 @@ baul_window_class_init (CajaWindowClass *class)
         g_signal_new ("prompt-for-location",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-                      G_STRUCT_OFFSET (CajaWindowClass, prompt_for_location),
+                      G_STRUCT_OFFSET (BaulWindowClass, prompt_for_location),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__STRING,
                       G_TYPE_NONE, 1, G_TYPE_STRING);

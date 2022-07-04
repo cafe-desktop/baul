@@ -36,10 +36,10 @@
 typedef struct
 {
     /* Object represented by this icon. */
-    CajaIconData *data;
+    BaulIconData *data;
 
     /* Canvas item for the icon. */
-    CajaIconCanvasItem *item;
+    BaulIconCanvasItem *item;
 
     /* X/Y coordinates. */
     double x, y;
@@ -68,10 +68,10 @@ typedef struct
     eel_boolean_bit is_monitored : 1;
 
     eel_boolean_bit has_lazy_position : 1;
-} CajaIcon;
+} BaulIcon;
 
 
-/* Private CajaIconContainer members. */
+/* Private BaulIconContainer members. */
 
 typedef struct
 {
@@ -87,7 +87,7 @@ typedef struct
     EelDRect prev_rect;
     int last_adj_x;
     int last_adj_y;
-} CajaIconRubberbandInfo;
+} BaulIconRubberbandInfo;
 
 typedef enum
 {
@@ -125,7 +125,7 @@ enum
     LAST_LABEL_COLOR
 };
 
-struct CajaIconContainerDetails
+struct BaulIconContainerDetails
 {
     /* List of icons. */
     GList *icons;
@@ -133,26 +133,26 @@ struct CajaIconContainerDetails
     GHashTable *icon_set;
 
     /* Current icon for keyboard navigation. */
-    CajaIcon *keyboard_focus;
-    CajaIcon *keyboard_rubberband_start;
+    BaulIcon *keyboard_focus;
+    BaulIcon *keyboard_rubberband_start;
 
     /* Current icon with stretch handles, so we have only one. */
-    CajaIcon *stretch_icon;
+    BaulIcon *stretch_icon;
     double stretch_initial_x, stretch_initial_y;
     guint stretch_initial_size;
 
     /* Last highlighted drop target. */
-    CajaIcon *drop_target;
+    BaulIcon *drop_target;
 
     /* Rubberbanding status. */
-    CajaIconRubberbandInfo rubberband_info;
+    BaulIconRubberbandInfo rubberband_info;
 
     /* Timeout used to make a selected icon fully visible after a short
      * period of time. (The timeout is needed to make sure
      * double-clicking still works.)
      */
     guint keyboard_icon_reveal_timer_id;
-    CajaIcon *keyboard_icon_to_reveal;
+    BaulIcon *keyboard_icon_to_reveal;
 
     /* Used to coalesce selection changed signals in some cases */
     guint selection_changed_id;
@@ -160,19 +160,19 @@ struct CajaIconContainerDetails
     /* If a request is made to reveal an unpositioned icon we remember
      * it and reveal it once it gets positioned (in relayout).
      */
-    CajaIcon *pending_icon_to_reveal;
+    BaulIcon *pending_icon_to_reveal;
 
     /* If a request is made to rename an unpositioned icon we remember
      * it and start renaming it once it gets positioned (in relayout).
      */
-    CajaIcon *pending_icon_to_rename;
+    BaulIcon *pending_icon_to_rename;
 
     /* Remembered information about the start of the current event. */
     guint32 button_down_time;
 
     /* Drag state. Valid only if drag_button is non-zero. */
     guint drag_button;
-    CajaIcon *drag_icon;
+    BaulIcon *drag_icon;
     int drag_x, drag_y;
     DragState drag_state;
     gboolean drag_started;
@@ -180,10 +180,10 @@ struct CajaIconContainerDetails
     gboolean drag_allow_moves;
 
     gboolean icon_selected_on_button_down;
-    CajaIcon *double_click_icon[2]; /* Both clicks in a double click need to be on the same icon */
+    BaulIcon *double_click_icon[2]; /* Both clicks in a double click need to be on the same icon */
     guint double_click_button[2];
 
-    CajaIcon *range_selection_base_icon;
+    BaulIcon *range_selection_base_icon;
 
     /* Renaming Details */
     gboolean renaming;
@@ -200,7 +200,7 @@ struct CajaIconContainerDetails
     guint align_idle_id;
 
     /* DnD info. */
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
 
     /* zoom level */
     int zoom_level;
@@ -227,10 +227,10 @@ struct CajaIconContainerDetails
     gboolean all_columns_same_width;
 
     /* Layout mode */
-    CajaIconLayoutMode layout_mode;
+    BaulIconLayoutMode layout_mode;
 
     /* Label position */
-    CajaIconLabelPosition label_position;
+    BaulIconLabelPosition label_position;
 
     /* Forced icon size, iff greater than 0 */
     int forced_icon_size;
@@ -289,32 +289,32 @@ struct CajaIconContainerDetails
 };
 
 /* Private functions shared by mutiple files. */
-CajaIcon *baul_icon_container_get_icon_by_uri             (CajaIconContainer *container,
+BaulIcon *baul_icon_container_get_icon_by_uri             (BaulIconContainer *container,
         const char            *uri);
-void          baul_icon_container_move_icon                   (CajaIconContainer *container,
-        CajaIcon          *icon,
+void          baul_icon_container_move_icon                   (BaulIconContainer *container,
+        BaulIcon          *icon,
         int                    x,
         int                    y,
         double                 scale,
         gboolean               raise,
         gboolean               snap,
         gboolean		  update_position);
-void          baul_icon_container_select_list_unselect_others (CajaIconContainer *container,
+void          baul_icon_container_select_list_unselect_others (BaulIconContainer *container,
         GList                 *icons);
-char *        baul_icon_container_get_icon_uri                (CajaIconContainer *container,
-        CajaIcon          *icon);
-char *        baul_icon_container_get_icon_drop_target_uri    (CajaIconContainer *container,
-        CajaIcon          *icon);
-void          baul_icon_container_update_icon                 (CajaIconContainer *container,
-        CajaIcon          *icon);
-gboolean      baul_icon_container_has_stored_icon_positions   (CajaIconContainer *container);
-gboolean      baul_icon_container_emit_preview_signal         (CajaIconContainer *view,
-        CajaIcon          *icon,
+char *        baul_icon_container_get_icon_uri                (BaulIconContainer *container,
+        BaulIcon          *icon);
+char *        baul_icon_container_get_icon_drop_target_uri    (BaulIconContainer *container,
+        BaulIcon          *icon);
+void          baul_icon_container_update_icon                 (BaulIconContainer *container,
+        BaulIcon          *icon);
+gboolean      baul_icon_container_has_stored_icon_positions   (BaulIconContainer *container);
+gboolean      baul_icon_container_emit_preview_signal         (BaulIconContainer *view,
+        BaulIcon          *icon,
         gboolean               start_flag);
-gboolean      baul_icon_container_scroll                      (CajaIconContainer *container,
+gboolean      baul_icon_container_scroll                      (BaulIconContainer *container,
         int                    delta_x,
         int                    delta_y);
-void          baul_icon_container_update_scroll_region        (CajaIconContainer *container);
+void          baul_icon_container_update_scroll_region        (BaulIconContainer *container);
 
 
 

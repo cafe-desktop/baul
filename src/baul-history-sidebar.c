@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000, 2001 Eazel, Inc.
@@ -44,7 +44,7 @@
 #include "baul-history-sidebar.h"
 
 #define BAUL_HISTORY_SIDEBAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_HISTORY_SIDEBAR, CajaHistorySidebarClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_HISTORY_SIDEBAR, BaulHistorySidebarClass))
 #define BAUL_IS_HISTORY_SIDEBAR(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_HISTORY_SIDEBAR))
 #define BAUL_IS_HISTORY_SIDEBAR_CLASS(klass) \
@@ -53,17 +53,17 @@
 typedef struct
 {
     GtkScrolledWindowClass parent;
-} CajaHistorySidebarClass;
+} BaulHistorySidebarClass;
 
 typedef struct
 {
     GObject parent;
-} CajaHistorySidebarProvider;
+} BaulHistorySidebarProvider;
 
 typedef struct
 {
     GObjectClass parent;
-} CajaHistorySidebarProviderClass;
+} BaulHistorySidebarProviderClass;
 
 
 enum
@@ -74,27 +74,27 @@ enum
     HISTORY_SIDEBAR_COLUMN_COUNT
 };
 
-static void  baul_history_sidebar_iface_init        (CajaSidebarIface         *iface);
-static void  sidebar_provider_iface_init                (CajaSidebarProviderIface *iface);
+static void  baul_history_sidebar_iface_init        (BaulSidebarIface         *iface);
+static void  sidebar_provider_iface_init                (BaulSidebarProviderIface *iface);
 static GType baul_history_sidebar_provider_get_type (void);
 static void  baul_history_sidebar_style_updated	        (GtkWidget *widget);
 
-G_DEFINE_TYPE_WITH_CODE (CajaHistorySidebar, baul_history_sidebar, GTK_TYPE_SCROLLED_WINDOW,
+G_DEFINE_TYPE_WITH_CODE (BaulHistorySidebar, baul_history_sidebar, GTK_TYPE_SCROLLED_WINDOW,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_history_sidebar_iface_init));
 
-G_DEFINE_TYPE_WITH_CODE (CajaHistorySidebarProvider, baul_history_sidebar_provider, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (BaulHistorySidebarProvider, baul_history_sidebar_provider, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR_PROVIDER,
                                  sidebar_provider_iface_init));
 
 static void
-update_history (CajaHistorySidebar *sidebar)
+update_history (BaulHistorySidebar *sidebar)
 {
     GtkListStore         *store;
     GtkTreeSelection     *selection;
     GtkTreeIter           iter;
     GList *l, *history;
-    CajaBookmark         *bookmark = NULL;
+    BaulBookmark         *bookmark = NULL;
     cairo_surface_t      *surface = NULL;
 
     store = GTK_LIST_STORE (gtk_tree_view_get_model (sidebar->tree_view));
@@ -136,20 +136,20 @@ update_history (CajaHistorySidebar *sidebar)
 
 static void
 history_changed_callback (GObject *signaller,
-                          CajaHistorySidebar *sidebar)
+                          BaulHistorySidebar *sidebar)
 {
     update_history (sidebar);
 }
 
 static void
-open_selected_item (CajaHistorySidebar *sidebar,
+open_selected_item (BaulHistorySidebar *sidebar,
                     GtkTreePath *path,
-                    CajaWindowOpenFlags flags)
+                    BaulWindowOpenFlags flags)
 {
-    CajaWindowSlotInfo *slot;
+    BaulWindowSlotInfo *slot;
     GtkTreeModel *model;
     GtkTreeIter iter;
-    CajaBookmark *bookmark;
+    BaulBookmark *bookmark;
     GFile *location;
 
     model = gtk_tree_view_get_model (sidebar->tree_view);
@@ -178,7 +178,7 @@ row_activated_callback (GtkTreeView *tree_view,
                         GtkTreeViewColumn *column,
                         gpointer user_data)
 {
-    CajaHistorySidebar *sidebar;
+    BaulHistorySidebar *sidebar;
 
     sidebar = BAUL_HISTORY_SIDEBAR (user_data);
     g_assert (sidebar->tree_view == tree_view);
@@ -194,7 +194,7 @@ button_press_event_callback (GtkWidget *widget,
     if (event->button == 2 && event->type == GDK_BUTTON_PRESS)
     {
         /* Open new tab on middle click. */
-        CajaHistorySidebar *sidebar;
+        BaulHistorySidebar *sidebar;
         GtkTreePath *path;
 
         sidebar = BAUL_HISTORY_SIDEBAR (user_data);
@@ -215,7 +215,7 @@ button_press_event_callback (GtkWidget *widget,
 }
 
 static void
-update_click_policy (CajaHistorySidebar *sidebar)
+update_click_policy (BaulHistorySidebar *sidebar)
 {
     int policy;
 
@@ -228,7 +228,7 @@ update_click_policy (CajaHistorySidebar *sidebar)
 static void
 click_policy_changed_callback (gpointer user_data)
 {
-    CajaHistorySidebar *sidebar;
+    BaulHistorySidebar *sidebar;
 
     sidebar = BAUL_HISTORY_SIDEBAR (user_data);
 
@@ -236,7 +236,7 @@ click_policy_changed_callback (gpointer user_data)
 }
 
 static void
-baul_history_sidebar_init (CajaHistorySidebar *sidebar)
+baul_history_sidebar_init (BaulHistorySidebar *sidebar)
 {
     GtkTreeView       *tree_view;
     GtkTreeViewColumn *col;
@@ -310,7 +310,7 @@ baul_history_sidebar_init (CajaHistorySidebar *sidebar)
 static void
 baul_history_sidebar_finalize (GObject *object)
 {
-    CajaHistorySidebar *sidebar;
+    BaulHistorySidebar *sidebar;
 
     sidebar = BAUL_HISTORY_SIDEBAR (object);
 
@@ -322,7 +322,7 @@ baul_history_sidebar_finalize (GObject *object)
 }
 
 static void
-baul_history_sidebar_class_init (CajaHistorySidebarClass *class)
+baul_history_sidebar_class_init (BaulHistorySidebarClass *class)
 {
     G_OBJECT_CLASS (class)->finalize = baul_history_sidebar_finalize;
 
@@ -330,38 +330,38 @@ baul_history_sidebar_class_init (CajaHistorySidebarClass *class)
 }
 
 static const char *
-baul_history_sidebar_get_sidebar_id (CajaSidebar *sidebar)
+baul_history_sidebar_get_sidebar_id (BaulSidebar *sidebar)
 {
     return BAUL_HISTORY_SIDEBAR_ID;
 }
 
 static char *
-baul_history_sidebar_get_tab_label (CajaSidebar *sidebar)
+baul_history_sidebar_get_tab_label (BaulSidebar *sidebar)
 {
     return g_strdup (_("History"));
 }
 
 static char *
-baul_history_sidebar_get_tab_tooltip (CajaSidebar *sidebar)
+baul_history_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
 {
     return g_strdup (_("Show History"));
 }
 
 static GdkPixbuf *
-baul_history_sidebar_get_tab_icon (CajaSidebar *sidebar)
+baul_history_sidebar_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;
 }
 
 static void
-baul_history_sidebar_is_visible_changed (CajaSidebar *sidebar,
+baul_history_sidebar_is_visible_changed (BaulSidebar *sidebar,
         gboolean         is_visible)
 {
     /* Do nothing */
 }
 
 static void
-baul_history_sidebar_iface_init (CajaSidebarIface *iface)
+baul_history_sidebar_iface_init (BaulSidebarIface *iface)
 {
     iface->get_sidebar_id = baul_history_sidebar_get_sidebar_id;
     iface->get_tab_label = baul_history_sidebar_get_tab_label;
@@ -371,8 +371,8 @@ baul_history_sidebar_iface_init (CajaSidebarIface *iface)
 }
 
 static void
-baul_history_sidebar_set_parent_window (CajaHistorySidebar *sidebar,
-                                        CajaWindowInfo *window)
+baul_history_sidebar_set_parent_window (BaulHistorySidebar *sidebar,
+                                        BaulWindowInfo *window)
 {
     sidebar->window = window;
     update_history (sidebar);
@@ -381,18 +381,18 @@ baul_history_sidebar_set_parent_window (CajaHistorySidebar *sidebar,
 static void
 baul_history_sidebar_style_updated (GtkWidget *widget)
 {
-    CajaHistorySidebar *sidebar;
+    BaulHistorySidebar *sidebar;
 
     sidebar = BAUL_HISTORY_SIDEBAR (widget);
 
     update_history (sidebar);
 }
 
-static CajaSidebar *
-baul_history_sidebar_create (CajaSidebarProvider *provider,
-                             CajaWindowInfo *window)
+static BaulSidebar *
+baul_history_sidebar_create (BaulSidebarProvider *provider,
+                             BaulWindowInfo *window)
 {
-    CajaHistorySidebar *sidebar;
+    BaulHistorySidebar *sidebar;
 
     sidebar = g_object_new (baul_history_sidebar_get_type (), NULL);
     baul_history_sidebar_set_parent_window (sidebar, window);
@@ -402,18 +402,18 @@ baul_history_sidebar_create (CajaSidebarProvider *provider,
 }
 
 static void
-sidebar_provider_iface_init (CajaSidebarProviderIface *iface)
+sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 {
     iface->create = baul_history_sidebar_create;
 }
 
 static void
-baul_history_sidebar_provider_init (CajaHistorySidebarProvider *sidebar)
+baul_history_sidebar_provider_init (BaulHistorySidebarProvider *sidebar)
 {
 }
 
 static void
-baul_history_sidebar_provider_class_init (CajaHistorySidebarProviderClass *class)
+baul_history_sidebar_provider_class_init (BaulHistorySidebarProviderClass *class)
 {
 }
 

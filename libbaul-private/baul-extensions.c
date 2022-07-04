@@ -29,7 +29,7 @@
 
 #include <string.h>
 
-#define BAUL_EXTENSION_GROUP "Caja Extension"
+#define BAUL_EXTENSION_GROUP "Baul Extension"
 
 static GList *baul_extensions = NULL;
 

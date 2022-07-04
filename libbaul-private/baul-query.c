@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Novell, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -31,7 +31,7 @@
 #include "baul-query.h"
 #include "baul-file-utilities.h"
 
-struct CajaQueryDetails
+struct BaulQueryDetails
 {
     char *text;
     char *location_uri;
@@ -42,7 +42,7 @@ struct CajaQueryDetails
     char *contained_text;
 };
 
-G_DEFINE_TYPE (CajaQuery,
+G_DEFINE_TYPE (BaulQuery,
                baul_query,
                G_TYPE_OBJECT);
 
@@ -51,7 +51,7 @@ static GObjectClass *parent_class = NULL;
 static void
 finalize (GObject *object)
 {
-    CajaQuery *query;
+    BaulQuery *query;
 
     query = BAUL_QUERY (object);
 
@@ -62,7 +62,7 @@ finalize (GObject *object)
 }
 
 static void
-baul_query_class_init (CajaQueryClass *class)
+baul_query_class_init (BaulQueryClass *class)
 {
     GObjectClass *gobject_class;
 
@@ -73,14 +73,14 @@ baul_query_class_init (CajaQueryClass *class)
 }
 
 static void
-baul_query_init (CajaQuery *query)
+baul_query_init (BaulQuery *query)
 {
-    query->details = g_new0 (CajaQueryDetails, 1);
+    query->details = g_new0 (BaulQueryDetails, 1);
     query->details->timestamp = 0;
     query->details->size = 0;
 }
 
-CajaQuery *
+BaulQuery *
 baul_query_new (void)
 {
     return g_object_new (BAUL_TYPE_QUERY,  NULL);
@@ -88,66 +88,66 @@ baul_query_new (void)
 
 
 char *
-baul_query_get_text (CajaQuery *query)
+baul_query_get_text (BaulQuery *query)
 {
     return g_strdup (query->details->text);
 }
 
 void
-baul_query_set_text (CajaQuery *query, const char *text)
+baul_query_set_text (BaulQuery *query, const char *text)
 {
     g_free (query->details->text);
     query->details->text = g_strdup (text);
 }
 
 char *
-baul_query_get_location (CajaQuery *query)
+baul_query_get_location (BaulQuery *query)
 {
     return g_strdup (query->details->location_uri);
 }
 
 void
-baul_query_set_location (CajaQuery *query, const char *uri)
+baul_query_set_location (BaulQuery *query, const char *uri)
 {
     g_free (query->details->location_uri);
     query->details->location_uri = g_strdup (uri);
 }
 
 GList *
-baul_query_get_mime_types (CajaQuery *query)
+baul_query_get_mime_types (BaulQuery *query)
 {
     return g_list_copy_deep (query->details->mime_types, (GCopyFunc) g_strdup, NULL);
 }
 
 void
-baul_query_set_mime_types (CajaQuery *query, GList *mime_types)
+baul_query_set_mime_types (BaulQuery *query, GList *mime_types)
 {
     g_list_free_full (query->details->mime_types, g_free);
     query->details->mime_types = g_list_copy_deep (mime_types, (GCopyFunc) g_strdup, NULL);
 }
 
 void
-baul_query_add_mime_type (CajaQuery *query, const char *mime_type)
+baul_query_add_mime_type (BaulQuery *query, const char *mime_type)
 {
     query->details->mime_types = g_list_append (query->details->mime_types,
                                  g_strdup (mime_type));
 }
 
 GList *
-baul_query_get_tags (CajaQuery *query)
+baul_query_get_tags (BaulQuery *query)
 {
     return g_list_copy_deep (query->details->tags, (GCopyFunc) g_strdup, NULL);
 }
 
 void
-baul_query_set_tags (CajaQuery *query, GList *tags)
+baul_query_set_tags (BaulQuery *query, GList *tags)
 {
     g_list_free_full (query->details->tags, g_free);
     query->details->tags = g_list_copy_deep (tags, (GCopyFunc) g_strdup, NULL);
 }
 
 void
-baul_query_add_tag (CajaQuery *query, const char *tag)
+baul_query_add_tag (BaulQuery *query, const char *tag)
 {
     gchar *normalized = g_utf8_normalize (tag, -1, G_NORMALIZE_NFD);
     gchar *lower_case = g_utf8_strdown (normalized, -1);
@@ -157,7 +157,7 @@ baul_query_add_tag (CajaQuery *query, const char *tag)
 }
 
 char *
-baul_query_to_readable_string (CajaQuery *query)
+baul_query_to_readable_string (BaulQuery *query)
 {
     if (!query || !query->details->text)
     {
@@ -219,7 +219,7 @@ decode_home_uri (const char *uri)
 
 typedef struct
 {
-    CajaQuery *query;
+    BaulQuery *query;
     gboolean in_text;
     gboolean in_location;
     gboolean in_mimetypes;
@@ -332,7 +332,7 @@ static GMarkupParser parser =
 };
 
 
-static CajaQuery *
+static BaulQuery *
 baul_query_parse_xml (char *xml, gsize xml_len)
 {
     ParserInfo info = { NULL };
@@ -354,10 +354,10 @@ baul_query_parse_xml (char *xml, gsize xml_len)
 }
 
 
-CajaQuery *
+BaulQuery *
 baul_query_load (char *file)
 {
-    CajaQuery *query;
+    BaulQuery *query;
     char *xml;
     gsize xml_len;
 
@@ -375,7 +375,7 @@ baul_query_load (char *file)
 }
 
 static char *
-baul_query_to_xml (CajaQuery *query)
+baul_query_to_xml (BaulQuery *query)
 {
     GString *xml;
     char *text;
@@ -444,7 +444,7 @@ baul_query_to_xml (CajaQuery *query)
 }
 
 gboolean
-baul_query_save (CajaQuery *query, char *file)
+baul_query_save (BaulQuery *query, char *file)
 {
     char *xml;
     GError *err = NULL;
@@ -464,33 +464,33 @@ baul_query_save (CajaQuery *query, char *file)
     return res;
 }
 
-void baul_query_set_timestamp(CajaQuery *query, gint64 sec)
+void baul_query_set_timestamp(BaulQuery *query, gint64 sec)
 {
     query->details->timestamp = sec;
 }
 
-gint64 baul_query_get_timestamp(CajaQuery *query)
+gint64 baul_query_get_timestamp(BaulQuery *query)
 {
     return query->details->timestamp;
 }
 
-void baul_query_set_size(CajaQuery *query, gint64 size)
+void baul_query_set_size(BaulQuery *query, gint64 size)
 {
     query->details->size = size;
 }
 
-gint64 baul_query_get_size(CajaQuery *query)
+gint64 baul_query_get_size(BaulQuery *query)
 {
     return query->details->size;
 }
 
-void baul_query_set_contained_text (CajaQuery *query, const char *text)
+void baul_query_set_contained_text (BaulQuery *query, const char *text)
 {
     g_free (query->details->contained_text);
     query->details->contained_text = g_strdup (text);
 }
 
-char *baul_query_get_contained_text (CajaQuery *query)
+char *baul_query_get_contained_text (BaulQuery *query)
 {
     return g_strdup (query->details->contained_text);
 }

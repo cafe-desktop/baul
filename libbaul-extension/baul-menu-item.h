@@ -1,5 +1,5 @@
 /*
- *  baul-menu-item.h - Menu items exported by CajaMenuProvider
+ *  baul-menu-item.h - Menu items exported by BaulMenuProvider
  *                         objects.
  *
  *  Copyright (C) 2003 Novell, Inc.

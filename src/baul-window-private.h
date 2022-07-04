@@ -1,17 +1,17 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 1999, 2000, 2001 Eazel, Inc.
  *
- *  Caja is free software; you can redistribute it and/or
+ *  Baul is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of the
  *  License, or (at your option) any later version.
  *
- *  Caja is distributed in the hope that it will be useful,
+ *  Baul is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  *  General Public License for more details.
@@ -37,10 +37,10 @@
 #include "baul-navigation-window.h"
 #include "baul-bookmark-list.h"
 
-struct _CajaNavigationWindowPane;
+struct _BaulNavigationWindowPane;
 
 /* FIXME bugzilla.gnome.org 42575: Migrate more fields into here. */
-struct _CajaWindowPrivate
+struct _BaulWindowPrivate
 {
     GtkWidget *grid;
 
@@ -57,10 +57,10 @@ struct _CajaWindowPrivate
 
     GtkActionGroup *bookmarks_action_group;
     guint bookmarks_merge_id;
-    CajaBookmarkList *bookmark_list;
+    BaulBookmarkList *bookmark_list;
 
-    CajaWindowShowHiddenFilesMode show_hidden_files_mode;
-    CajaWindowShowBackupFilesMode show_backup_files_mode;
+    BaulWindowShowHiddenFilesMode show_hidden_files_mode;
+    BaulWindowShowBackupFilesMode show_backup_files_mode;
 
     /* View As menu */
     GList *short_list_viewers;
@@ -83,7 +83,7 @@ struct _CajaWindowPrivate
      * Both of them may never be NULL.
      */
     GList *panes;
-    CajaWindowPane *active_pane;
+    BaulWindowPane *active_pane;
 
     /* So we can tell which window initiated
      * an unmount operation.
@@ -91,7 +91,7 @@ struct _CajaWindowPrivate
     gboolean initiated_unmount;
 };
 
-struct _CajaNavigationWindowPrivate
+struct _BaulNavigationWindowPrivate
 {
     GtkWidget *content_paned;
     GtkWidget *content_box;
@@ -101,7 +101,7 @@ struct _CajaNavigationWindowPrivate
 
     /* Side Pane */
     int side_pane_width;
-    CajaSidebar *current_side_panel;
+    BaulSidebar *current_side_panel;
 
     /* Menus */
     GtkActionGroup *go_menu_action_group;
@@ -146,7 +146,7 @@ struct _CajaNavigationWindowPrivate
 #define BAUL_COMMAND_ZOOM_NORMAL			"/commands/Zoom Normal"
 
 /* window geometry */
-/* Min values are very small, and a Caja window at this tiny size is *almost*
+/* Min values are very small, and a Baul window at this tiny size is *almost*
  * completely unusable. However, if all the extra bits (sidebar, location bar, etc)
  * are turned off, you can see an icon or two at this size. See bug 5946.
  */
@@ -161,52 +161,52 @@ struct _CajaNavigationWindowPrivate
 #define BAUL_NAVIGATION_WINDOW_DEFAULT_WIDTH		800
 #define BAUL_NAVIGATION_WINDOW_DEFAULT_HEIGHT		550
 
-typedef void (*CajaBookmarkFailedCallback) (CajaWindow *window,
-        CajaBookmark *bookmark);
+typedef void (*BaulBookmarkFailedCallback) (BaulWindow *window,
+        BaulBookmark *bookmark);
 
-void               baul_window_set_status                            (CajaWindow    *window,
-        CajaWindowSlot *slot,
+void               baul_window_set_status                            (BaulWindow    *window,
+        BaulWindowSlot *slot,
         const char        *status);
-void               baul_window_load_view_as_menus                    (CajaWindow    *window);
-void               baul_window_load_extension_menus                  (CajaWindow    *window);
-void               baul_window_initialize_menus                      (CajaWindow    *window);
-void               baul_window_finalize_menus                        (CajaWindow    *window);
-CajaWindowPane *baul_window_get_next_pane                        (CajaWindow *window);
-void               baul_menus_append_bookmark_to_menu                (CajaWindow    *window,
-        CajaBookmark  *bookmark,
+void               baul_window_load_view_as_menus                    (BaulWindow    *window);
+void               baul_window_load_extension_menus                  (BaulWindow    *window);
+void               baul_window_initialize_menus                      (BaulWindow    *window);
+void               baul_window_finalize_menus                        (BaulWindow    *window);
+BaulWindowPane *baul_window_get_next_pane                        (BaulWindow *window);
+void               baul_menus_append_bookmark_to_menu                (BaulWindow    *window,
+        BaulBookmark  *bookmark,
         const char        *parent_path,
         const char        *parent_id,
         guint              index_in_parent,
         GtkActionGroup    *action_group,
         guint              merge_id,
         GCallback          refresh_callback,
-        CajaBookmarkFailedCallback failed_callback);
-void               baul_window_update_find_menu_item                 (CajaWindow    *window);
-void               baul_window_zoom_in                               (CajaWindow    *window);
-void               baul_window_zoom_out                              (CajaWindow    *window);
-void               baul_window_zoom_to_level                         (CajaWindow    *window,
-        CajaZoomLevel  level);
-void               baul_window_zoom_to_default                       (CajaWindow    *window);
+        BaulBookmarkFailedCallback failed_callback);
+void               baul_window_update_find_menu_item                 (BaulWindow    *window);
+void               baul_window_zoom_in                               (BaulWindow    *window);
+void               baul_window_zoom_out                              (BaulWindow    *window);
+void               baul_window_zoom_to_level                         (BaulWindow    *window,
+        BaulZoomLevel  level);
+void               baul_window_zoom_to_default                       (BaulWindow    *window);
 
-CajaWindowSlot *baul_window_open_slot                            (CajaWindowPane *pane,
-        CajaWindowOpenSlotFlags flags);
-void                baul_window_close_slot                           (CajaWindowSlot *slot);
+BaulWindowSlot *baul_window_open_slot                            (BaulWindowPane *pane,
+        BaulWindowOpenSlotFlags flags);
+void                baul_window_close_slot                           (BaulWindowSlot *slot);
 
-CajaWindowSlot *baul_window_get_slot_for_view                    (CajaWindow *window,
-        CajaView   *view);
+BaulWindowSlot *baul_window_get_slot_for_view                    (BaulWindow *window,
+        BaulView   *view);
 
-GList *              baul_window_get_slots                           (CajaWindow    *window);
-CajaWindowSlot * baul_window_get_active_slot                     (CajaWindow    *window);
-CajaWindowSlot * baul_window_get_extra_slot                      (CajaWindow    *window);
-void                 baul_window_set_active_slot                     (CajaWindow    *window,
-        CajaWindowSlot *slot);
-void                 baul_window_set_active_pane                     (CajaWindow *window,
-        CajaWindowPane *new_pane);
-CajaWindowPane * baul_window_get_active_pane                     (CajaWindow *window);
+GList *              baul_window_get_slots                           (BaulWindow    *window);
+BaulWindowSlot * baul_window_get_active_slot                     (BaulWindow    *window);
+BaulWindowSlot * baul_window_get_extra_slot                      (BaulWindow    *window);
+void                 baul_window_set_active_slot                     (BaulWindow    *window,
+        BaulWindowSlot *slot);
+void                 baul_window_set_active_pane                     (BaulWindow *window,
+        BaulWindowPane *new_pane);
+BaulWindowPane * baul_window_get_active_pane                     (BaulWindow *window);
 
 void               baul_send_history_list_changed                    (void);
 void               baul_remove_from_history_list_no_notify           (GFile             *location);
-gboolean           baul_add_bookmark_to_history_list                 (CajaBookmark  *bookmark);
+gboolean           baul_add_bookmark_to_history_list                 (BaulBookmark  *bookmark);
 gboolean           baul_add_to_history_list_no_notify                (GFile             *location,
         const char        *name,
         gboolean           has_custom_name,
@@ -218,33 +218,33 @@ void               baul_window_bookmarks_preference_changed_callback (gpointer  
 /* sync window GUI with current slot. Used when changing slots,
  * and when updating the slot state.
  */
-void baul_window_sync_status           (CajaWindow *window);
-void baul_window_sync_allow_stop       (CajaWindow *window,
-                                        CajaWindowSlot *slot);
-void baul_window_sync_title            (CajaWindow *window,
-                                        CajaWindowSlot *slot);
-void baul_window_sync_zoom_widgets     (CajaWindow *window);
+void baul_window_sync_status           (BaulWindow *window);
+void baul_window_sync_allow_stop       (BaulWindow *window,
+                                        BaulWindowSlot *slot);
+void baul_window_sync_title            (BaulWindow *window,
+                                        BaulWindowSlot *slot);
+void baul_window_sync_zoom_widgets     (BaulWindow *window);
 
 /* Navigation window menus */
-void               baul_navigation_window_initialize_actions                    (CajaNavigationWindow    *window);
-void               baul_navigation_window_initialize_menus                      (CajaNavigationWindow    *window);
-void               baul_navigation_window_remove_bookmarks_menu_callback        (CajaNavigationWindow    *window);
+void               baul_navigation_window_initialize_actions                    (BaulNavigationWindow    *window);
+void               baul_navigation_window_initialize_menus                      (BaulNavigationWindow    *window);
+void               baul_navigation_window_remove_bookmarks_menu_callback        (BaulNavigationWindow    *window);
 
-void               baul_navigation_window_remove_bookmarks_menu_items           (CajaNavigationWindow    *window);
-void               baul_navigation_window_update_show_hide_menu_items           (CajaNavigationWindow     *window);
-void               baul_navigation_window_update_spatial_menu_item              (CajaNavigationWindow     *window);
-void               baul_navigation_window_remove_go_menu_callback    (CajaNavigationWindow    *window);
-void               baul_navigation_window_remove_go_menu_items       (CajaNavigationWindow    *window);
+void               baul_navigation_window_remove_bookmarks_menu_items           (BaulNavigationWindow    *window);
+void               baul_navigation_window_update_show_hide_menu_items           (BaulNavigationWindow     *window);
+void               baul_navigation_window_update_spatial_menu_item              (BaulNavigationWindow     *window);
+void               baul_navigation_window_remove_go_menu_callback    (BaulNavigationWindow    *window);
+void               baul_navigation_window_remove_go_menu_items       (BaulNavigationWindow    *window);
 
 /* Navigation window toolbar */
-void               baul_navigation_window_activate_spinner                     (CajaNavigationWindow    *window);
-void               baul_navigation_window_initialize_toolbars                   (CajaNavigationWindow    *window);
-void               baul_navigation_window_load_extension_toolbar_items          (CajaNavigationWindow    *window);
-void               baul_navigation_window_set_spinner_active                   (CajaNavigationWindow    *window,
+void               baul_navigation_window_activate_spinner                     (BaulNavigationWindow    *window);
+void               baul_navigation_window_initialize_toolbars                   (BaulNavigationWindow    *window);
+void               baul_navigation_window_load_extension_toolbar_items          (BaulNavigationWindow    *window);
+void               baul_navigation_window_set_spinner_active                   (BaulNavigationWindow    *window,
         gboolean                     active);
-void               baul_navigation_window_go_back                               (CajaNavigationWindow    *window);
-void               baul_navigation_window_go_forward                            (CajaNavigationWindow    *window);
-void               baul_window_close_pane                                       (CajaWindowPane *pane);
-void               baul_navigation_window_update_split_view_actions_sensitivity (CajaNavigationWindow    *window);
+void               baul_navigation_window_go_back                               (BaulNavigationWindow    *window);
+void               baul_navigation_window_go_forward                            (BaulNavigationWindow    *window);
+void               baul_window_close_pane                                       (BaulWindowPane *pane);
+void               baul_navigation_window_update_split_view_actions_sensitivity (BaulNavigationWindow    *window);
 
 #endif /* BAUL_WINDOW_PRIVATE_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-directory-async.c: Caja directory model state machine.
+   baul-directory-async.c: Baul directory model state machine.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -62,56 +62,56 @@
 
 struct TopLeftTextReadState
 {
-    CajaDirectory *directory;
-    CajaFile *file;
+    BaulDirectory *directory;
+    BaulFile *file;
     gboolean large;
     GCancellable *cancellable;
 };
 
 struct LinkInfoReadState
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GCancellable *cancellable;
-    CajaFile *file;
+    BaulFile *file;
 };
 
 struct ThumbnailState
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GCancellable *cancellable;
-    CajaFile *file;
+    BaulFile *file;
     gboolean trying_original;
     gboolean tried_original;
 };
 
 struct MountState
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GCancellable *cancellable;
-    CajaFile *file;
+    BaulFile *file;
 };
 
 struct FilesystemInfoState
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GCancellable *cancellable;
-    CajaFile *file;
+    BaulFile *file;
 };
 
 struct DirectoryLoadState
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GCancellable *cancellable;
     GFileEnumerator *enumerator;
     GHashTable *load_mime_list_hash;
-    CajaFile *load_directory_file;
+    BaulFile *load_directory_file;
     int load_file_count;
 };
 
 struct MimeListState
 {
-    CajaDirectory *directory;
-    CajaFile *mime_list_file;
+    BaulDirectory *directory;
+    BaulFile *mime_list_file;
     GCancellable *cancellable;
     GFileEnumerator *enumerator;
     GHashTable *mime_list_hash;
@@ -119,21 +119,21 @@ struct MimeListState
 
 struct GetInfoState
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GCancellable *cancellable;
 };
 
 struct NewFilesState
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GCancellable *cancellable;
     int count;
 };
 
 struct DirectoryCountState
 {
-    CajaDirectory *directory;
-    CajaFile *count_file;
+    BaulDirectory *directory;
+    BaulFile *count_file;
     GCancellable *cancellable;
     GFileEnumerator *enumerator;
     int file_count;
@@ -141,7 +141,7 @@ struct DirectoryCountState
 
 struct DeepCountState
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GCancellable *cancellable;
     GFileEnumerator *enumerator;
     GFile *deep_count_location;
@@ -154,11 +154,11 @@ struct DeepCountState
 
 typedef struct
 {
-    CajaFile *file; /* Which file, NULL means all. */
+    BaulFile *file; /* Which file, NULL means all. */
     union
     {
-        CajaDirectoryCallback directory;
-        CajaFileCallback file;
+        BaulDirectoryCallback directory;
+        BaulFileCallback file;
     } callback;
     gpointer callback_data;
     Request request;
@@ -171,7 +171,7 @@ typedef struct
 
 typedef struct
 {
-    CajaFile *file; /* Which file, NULL means all. */
+    BaulFile *file; /* Which file, NULL means all. */
     gboolean monitor_hidden_files; /* defines whether "all" includes hidden files */
     gconstpointer client;
     Request request;
@@ -179,14 +179,14 @@ typedef struct
 
 typedef struct
 {
-    CajaDirectory *directory;
-    CajaInfoProvider *provider;
-    CajaOperationHandle *handle;
-    CajaOperationResult result;
+    BaulDirectory *directory;
+    BaulInfoProvider *provider;
+    BaulOperationHandle *handle;
+    BaulOperationResult result;
 } InfoProviderResponse;
 
 typedef gboolean (* RequestCheck) (Request);
-typedef gboolean (* FileCheck) (CajaFile *);
+typedef gboolean (* FileCheck) (BaulFile *);
 
 /* Current number of async. jobs. */
 static int async_job_count;
@@ -198,25 +198,25 @@ static GHashTable *async_jobs;
 /* Forward declarations for functions that need them. */
 static void     deep_count_load                               (DeepCountState         *state,
         GFile                  *location);
-static gboolean request_is_satisfied                          (CajaDirectory      *directory,
-        CajaFile           *file,
+static gboolean request_is_satisfied                          (BaulDirectory      *directory,
+        BaulFile           *file,
         Request                 request);
-static void     cancel_loading_attributes                     (CajaDirectory      *directory,
-        CajaFileAttributes  file_attributes);
-static void     add_all_files_to_work_queue                   (CajaDirectory      *directory);
-static void     link_info_done                                (CajaDirectory      *directory,
-        CajaFile           *file,
+static void     cancel_loading_attributes                     (BaulDirectory      *directory,
+        BaulFileAttributes  file_attributes);
+static void     add_all_files_to_work_queue                   (BaulDirectory      *directory);
+static void     link_info_done                                (BaulDirectory      *directory,
+        BaulFile           *file,
         const char             *uri,
         const char             *name,
         const char             *icon,
         gboolean                is_launcher,
         gboolean                is_foreign);
-static void     move_file_to_low_priority_queue               (CajaDirectory      *directory,
-        CajaFile           *file);
-static void     move_file_to_extension_queue                  (CajaDirectory      *directory,
-        CajaFile           *file);
-static void     baul_directory_invalidate_file_attributes (CajaDirectory      *directory,
-        CajaFileAttributes  file_attributes);
+static void     move_file_to_low_priority_queue               (BaulDirectory      *directory,
+        BaulFile           *file);
+static void     move_file_to_extension_queue                  (BaulDirectory      *directory,
+        BaulFile           *file);
+static void     baul_directory_invalidate_file_attributes (BaulDirectory      *directory,
+        BaulFileAttributes  file_attributes);
 
 /* Some helpers for case-insensitive strings.
  * Move to baul-glib-extensions?
@@ -315,7 +315,7 @@ request_counter_remove_request (RequestCounter counter,
 
 #if 0
 static void
-baul_directory_verify_request_counts (CajaDirectory *directory)
+baul_directory_verify_request_counts (BaulDirectory *directory)
 {
     GList *l;
     RequestCounter counters;
@@ -368,7 +368,7 @@ baul_directory_verify_request_counts (CajaDirectory *directory)
  * number of requests is unbounded.
  */
 static gboolean
-async_job_start (CajaDirectory *directory,
+async_job_start (BaulDirectory *directory,
                  const char *job)
 {
 #ifdef DEBUG_ASYNC_JOBS
@@ -425,7 +425,7 @@ async_job_start (CajaDirectory *directory,
 
 /* End a job. */
 static void
-async_job_end (CajaDirectory *directory,
+async_job_end (BaulDirectory *directory,
                const char *job)
 {
 #ifdef DEBUG_ASYNC_JOBS
@@ -520,7 +520,7 @@ async_job_wake_up (void)
 }
 
 static void
-directory_count_cancel (CajaDirectory *directory)
+directory_count_cancel (BaulDirectory *directory)
 {
     if (directory->details->count_in_progress != NULL)
     {
@@ -529,7 +529,7 @@ directory_count_cancel (CajaDirectory *directory)
 }
 
 static void
-deep_count_cancel (CajaDirectory *directory)
+deep_count_cancel (BaulDirectory *directory)
 {
     if (directory->details->deep_count_in_progress != NULL)
     {
@@ -548,7 +548,7 @@ deep_count_cancel (CajaDirectory *directory)
 }
 
 static void
-mime_list_cancel (CajaDirectory *directory)
+mime_list_cancel (BaulDirectory *directory)
 {
     if (directory->details->mime_list_in_progress != NULL)
     {
@@ -557,7 +557,7 @@ mime_list_cancel (CajaDirectory *directory)
 }
 
 static void
-top_left_cancel (CajaDirectory *directory)
+top_left_cancel (BaulDirectory *directory)
 {
     if (directory->details->top_left_read_state != NULL)
     {
@@ -570,7 +570,7 @@ top_left_cancel (CajaDirectory *directory)
 }
 
 static void
-link_info_cancel (CajaDirectory *directory)
+link_info_cancel (BaulDirectory *directory)
 {
     if (directory->details->link_info_read_state != NULL)
     {
@@ -582,7 +582,7 @@ link_info_cancel (CajaDirectory *directory)
 }
 
 static void
-thumbnail_cancel (CajaDirectory *directory)
+thumbnail_cancel (BaulDirectory *directory)
 {
     if (directory->details->thumbnail_state != NULL)
     {
@@ -594,7 +594,7 @@ thumbnail_cancel (CajaDirectory *directory)
 }
 
 static void
-mount_cancel (CajaDirectory *directory)
+mount_cancel (BaulDirectory *directory)
 {
     if (directory->details->mount_state != NULL)
     {
@@ -606,7 +606,7 @@ mount_cancel (CajaDirectory *directory)
 }
 
 static void
-file_info_cancel (CajaDirectory *directory)
+file_info_cancel (BaulDirectory *directory)
 {
     if (directory->details->get_info_in_progress != NULL)
     {
@@ -620,7 +620,7 @@ file_info_cancel (CajaDirectory *directory)
 }
 
 static void
-new_files_cancel (CajaDirectory *directory)
+new_files_cancel (BaulDirectory *directory)
 {
     GList *l;
 
@@ -671,8 +671,8 @@ monitor_key_compare (gconstpointer a,
 }
 
 static GList *
-find_monitor (CajaDirectory *directory,
-              CajaFile *file,
+find_monitor (BaulDirectory *directory,
+              BaulFile *file,
               gconstpointer client)
 {
     Monitor monitor;
@@ -686,7 +686,7 @@ find_monitor (CajaDirectory *directory,
 }
 
 static void
-remove_monitor_link (CajaDirectory *directory,
+remove_monitor_link (BaulDirectory *directory,
                      GList *link)
 {
     if (link != NULL)
@@ -704,15 +704,15 @@ remove_monitor_link (CajaDirectory *directory,
 }
 
 static void
-remove_monitor (CajaDirectory *directory,
-                CajaFile *file,
+remove_monitor (BaulDirectory *directory,
+                BaulFile *file,
                 gconstpointer client)
 {
     remove_monitor_link (directory, find_monitor (directory, file, client));
 }
 
 Request
-baul_directory_set_up_request (CajaFileAttributes file_attributes)
+baul_directory_set_up_request (BaulFileAttributes file_attributes)
 {
     Request request;
 
@@ -781,9 +781,9 @@ baul_directory_set_up_request (CajaFileAttributes file_attributes)
 }
 
 static void
-mime_db_changed_callback (GObject *ignore, CajaDirectory *dir)
+mime_db_changed_callback (GObject *ignore, BaulDirectory *dir)
 {
-    CajaFileAttributes attrs;
+    BaulFileAttributes attrs;
 
     g_assert (dir != NULL);
     g_assert (dir->details != NULL);
@@ -796,12 +796,12 @@ mime_db_changed_callback (GObject *ignore, CajaDirectory *dir)
 }
 
 void
-baul_directory_monitor_add_internal (CajaDirectory *directory,
-                                     CajaFile *file,
+baul_directory_monitor_add_internal (BaulDirectory *directory,
+                                     BaulFile *file,
                                      gconstpointer client,
                                      gboolean monitor_hidden_files,
-                                     CajaFileAttributes file_attributes,
-                                     CajaDirectoryCallback callback,
+                                     BaulFileAttributes file_attributes,
+                                     BaulDirectoryCallback callback,
                                      gpointer callback_data)
 {
     Monitor *monitor;
@@ -871,9 +871,9 @@ baul_directory_monitor_add_internal (CajaDirectory *directory,
 }
 
 static void
-set_file_unconfirmed (CajaFile *file, gboolean unconfirmed)
+set_file_unconfirmed (BaulFile *file, gboolean unconfirmed)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     g_assert (BAUL_IS_FILE (file));
     g_assert (unconfirmed == FALSE || unconfirmed == TRUE);
@@ -904,7 +904,7 @@ show_hidden_files_changed_callback (gpointer callback_data)
 }
 
 static gboolean
-should_skip_file (CajaDirectory *directory, GFileInfo *info)
+should_skip_file (BaulDirectory *directory, GFileInfo *info)
 {
     static gboolean show_hidden_files_changed_callback_installed = FALSE;
 
@@ -932,10 +932,10 @@ should_skip_file (CajaDirectory *directory, GFileInfo *info)
 static gboolean
 dequeue_pending_idle_callback (gpointer callback_data)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GList *pending_file_info;
     GList *node, *next;
-    CajaFile *file;
+    BaulFile *file;
     GList *changed_files, *added_files;
     GFileInfo *file_info;
     const char *mimetype, *name;
@@ -963,7 +963,7 @@ dequeue_pending_idle_callback (gpointer callback_data)
 
     dir_load_state = directory->details->directory_load_in_progress;
 
-    /* Build a list of CajaFile objects. */
+    /* Build a list of BaulFile objects. */
     for (node = pending_file_info; node != NULL; node = node->next)
     {
         file_info = node->data;
@@ -1091,7 +1091,7 @@ drain:
 }
 
 void
-baul_directory_schedule_dequeue_pending (CajaDirectory *directory)
+baul_directory_schedule_dequeue_pending (BaulDirectory *directory)
 {
     if (directory->details->dequeue_pending_idle_id == 0)
     {
@@ -1101,7 +1101,7 @@ baul_directory_schedule_dequeue_pending (CajaDirectory *directory)
 }
 
 static void
-directory_load_one (CajaDirectory *directory,
+directory_load_one (BaulDirectory *directory,
                     GFileInfo *info)
 {
     if (info == NULL)
@@ -1128,14 +1128,14 @@ directory_load_one (CajaDirectory *directory,
 }
 
 static void
-directory_load_cancel (CajaDirectory *directory)
+directory_load_cancel (BaulDirectory *directory)
 {
     DirectoryLoadState *state;
 
     state = directory->details->directory_load_in_progress;
     if (state != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = state->load_directory_file;
         file->details->loading_directory = FALSE;
@@ -1152,7 +1152,7 @@ directory_load_cancel (CajaDirectory *directory)
 }
 
 static void
-file_list_cancel (CajaDirectory *directory)
+file_list_cancel (BaulDirectory *directory)
 {
     directory_load_cancel (directory);
 
@@ -1170,7 +1170,7 @@ file_list_cancel (CajaDirectory *directory)
 }
 
 static void
-directory_load_done (CajaDirectory *directory,
+directory_load_done (BaulDirectory *directory,
                      GError *error)
 {
     GList *node;
@@ -1206,8 +1206,8 @@ directory_load_done (CajaDirectory *directory,
 }
 
 void
-baul_directory_monitor_remove_internal (CajaDirectory *directory,
-                                        CajaFile *file,
+baul_directory_monitor_remove_internal (BaulDirectory *directory,
+                                        BaulFile *file,
                                         gconstpointer client)
 {
     g_assert (BAUL_IS_DIRECTORY (directory));
@@ -1229,8 +1229,8 @@ baul_directory_monitor_remove_internal (CajaDirectory *directory,
 }
 
 FileMonitors *
-baul_directory_remove_file_monitors (CajaDirectory *directory,
-                                     CajaFile *file)
+baul_directory_remove_file_monitors (BaulDirectory *directory,
+                                     BaulFile *file)
 {
     GList *result, **list, *node, *next;
     Monitor *monitor = NULL;
@@ -1264,8 +1264,8 @@ baul_directory_remove_file_monitors (CajaDirectory *directory,
 }
 
 void
-baul_directory_add_file_monitors (CajaDirectory *directory,
-                                  CajaFile *file,
+baul_directory_add_file_monitors (BaulDirectory *directory,
+                                  BaulFile *file,
                                   FileMonitors *monitors)
 {
     GList **list;
@@ -1368,7 +1368,7 @@ ready_callback_key_compare_only_active (gconstpointer a, gconstpointer b)
 }
 
 static void
-ready_callback_call (CajaDirectory *directory,
+ready_callback_call (BaulDirectory *directory,
                      const ReadyCallback *callback)
 {
     GList *file_list;
@@ -1404,12 +1404,12 @@ ready_callback_call (CajaDirectory *directory,
 }
 
 void
-baul_directory_call_when_ready_internal (CajaDirectory *directory,
-        CajaFile *file,
-        CajaFileAttributes file_attributes,
+baul_directory_call_when_ready_internal (BaulDirectory *directory,
+        BaulFile *file,
+        BaulFileAttributes file_attributes,
         gboolean wait_for_file_list,
-        CajaDirectoryCallback directory_callback,
-        CajaFileCallback file_callback,
+        BaulDirectoryCallback directory_callback,
+        BaulFileCallback file_callback,
         gpointer callback_data)
 {
     ReadyCallback callback;
@@ -1477,9 +1477,9 @@ baul_directory_call_when_ready_internal (CajaDirectory *directory,
 }
 
 gboolean
-baul_directory_check_if_ready_internal (CajaDirectory *directory,
-                                        CajaFile *file,
-                                        CajaFileAttributes file_attributes)
+baul_directory_check_if_ready_internal (BaulDirectory *directory,
+                                        BaulFile *file,
+                                        BaulFileAttributes file_attributes)
 {
     Request request;
 
@@ -1490,7 +1490,7 @@ baul_directory_check_if_ready_internal (CajaDirectory *directory,
 }
 
 static void
-remove_callback_link_keep_data (CajaDirectory *directory,
+remove_callback_link_keep_data (BaulDirectory *directory,
                                 GList *link)
 {
     ReadyCallback *callback;
@@ -1506,7 +1506,7 @@ remove_callback_link_keep_data (CajaDirectory *directory,
 }
 
 static void
-remove_callback_link (CajaDirectory *directory,
+remove_callback_link (BaulDirectory *directory,
                       GList *link)
 {
     ReadyCallback *callback;
@@ -1517,10 +1517,10 @@ remove_callback_link (CajaDirectory *directory,
 }
 
 void
-baul_directory_cancel_callback_internal (CajaDirectory *directory,
-        CajaFile *file,
-        CajaDirectoryCallback directory_callback,
-        CajaFileCallback file_callback,
+baul_directory_cancel_callback_internal (BaulDirectory *directory,
+        BaulFile *file,
+        BaulDirectoryCallback directory_callback,
+        BaulFileCallback file_callback,
         gpointer callback_data)
 {
     ReadyCallback callback;
@@ -1588,7 +1588,7 @@ new_files_callback (GObject *source_object,
                     GAsyncResult *res,
                     gpointer user_data)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GFileInfo *info;
     NewFilesState *state;
 
@@ -1617,7 +1617,7 @@ new_files_callback (GObject *source_object,
 }
 
 void
-baul_directory_get_info_for_new_files (CajaDirectory *directory,
+baul_directory_get_info_for_new_files (BaulDirectory *directory,
                                        GList *location_list)
 {
     NewFilesState *state;
@@ -1654,9 +1654,9 @@ baul_directory_get_info_for_new_files (CajaDirectory *directory,
 }
 
 void
-baul_async_destroying_file (CajaFile *file)
+baul_async_destroying_file (BaulFile *file)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     gboolean changed;
     GList *node, *next;
     ReadyCallback *callback = NULL;
@@ -1770,21 +1770,21 @@ baul_async_destroying_file (CajaFile *file)
 }
 
 static gboolean
-lacks_directory_count (CajaFile *file)
+lacks_directory_count (BaulFile *file)
 {
     return !file->details->directory_count_is_up_to_date
            && baul_file_should_show_directory_item_count (file);
 }
 
 static gboolean
-should_get_directory_count_now (CajaFile *file)
+should_get_directory_count_now (BaulFile *file)
 {
     return lacks_directory_count (file)
            && !file->details->loading_directory;
 }
 
 static gboolean
-lacks_top_left (CajaFile *file)
+lacks_top_left (BaulFile *file)
 {
     return file->details->file_info_is_up_to_date &&
            !file->details->top_left_text_is_up_to_date
@@ -1792,7 +1792,7 @@ lacks_top_left (CajaFile *file)
 }
 
 static gboolean
-lacks_large_top_left (CajaFile *file)
+lacks_large_top_left (BaulFile *file)
 {
     return file->details->file_info_is_up_to_date &&
            (!file->details->top_left_text_is_up_to_date ||
@@ -1800,39 +1800,39 @@ lacks_large_top_left (CajaFile *file)
            && baul_file_should_get_top_left_text (file);
 }
 static gboolean
-lacks_info (CajaFile *file)
+lacks_info (BaulFile *file)
 {
     return !file->details->file_info_is_up_to_date
            && !file->details->is_gone;
 }
 
 static gboolean
-lacks_filesystem_info (CajaFile *file)
+lacks_filesystem_info (BaulFile *file)
 {
     return !file->details->filesystem_info_is_up_to_date;
 }
 
 static gboolean
-lacks_deep_count (CajaFile *file)
+lacks_deep_count (BaulFile *file)
 {
     return file->details->deep_counts_status != BAUL_REQUEST_DONE;
 }
 
 static gboolean
-lacks_mime_list (CajaFile *file)
+lacks_mime_list (BaulFile *file)
 {
     return !file->details->mime_list_is_up_to_date;
 }
 
 static gboolean
-should_get_mime_list (CajaFile *file)
+should_get_mime_list (BaulFile *file)
 {
     return lacks_mime_list (file)
            && !file->details->loading_directory;
 }
 
 static gboolean
-lacks_link_info (CajaFile *file)
+lacks_link_info (BaulFile *file)
 {
     if (file->details->file_info_is_up_to_date &&
             !file->details->link_info_is_up_to_date)
@@ -1854,13 +1854,13 @@ lacks_link_info (CajaFile *file)
 }
 
 static gboolean
-lacks_extension_info (CajaFile *file)
+lacks_extension_info (BaulFile *file)
 {
     return file->details->pending_info_providers != NULL;
 }
 
 static gboolean
-lacks_thumbnail (CajaFile *file)
+lacks_thumbnail (BaulFile *file)
 {
     return baul_file_should_show_thumbnail (file) &&
            file->details->thumbnail_path != NULL &&
@@ -1868,7 +1868,7 @@ lacks_thumbnail (CajaFile *file)
 }
 
 static gboolean
-lacks_mount (CajaFile *file)
+lacks_mount (BaulFile *file)
 {
     return (!file->details->mount_is_up_to_date &&
             (
@@ -1887,7 +1887,7 @@ lacks_mount (CajaFile *file)
 }
 
 static gboolean
-has_problem (CajaDirectory *directory, CajaFile *file, FileCheck problem)
+has_problem (BaulDirectory *directory, BaulFile *file, FileCheck problem)
 {
     GList *node;
 
@@ -1908,8 +1908,8 @@ has_problem (CajaDirectory *directory, CajaFile *file, FileCheck problem)
 }
 
 static gboolean
-request_is_satisfied (CajaDirectory *directory,
-                      CajaFile *file,
+request_is_satisfied (BaulDirectory *directory,
+                      BaulFile *file,
                       Request request)
 {
     if (REQUEST_WANTS_TYPE (request, REQUEST_FILE_LIST) &&
@@ -2005,7 +2005,7 @@ request_is_satisfied (CajaDirectory *directory,
 static gboolean
 call_ready_callbacks_at_idle (gpointer callback_data)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GList *node, *next;
     ReadyCallback *callback;
 
@@ -2050,7 +2050,7 @@ call_ready_callbacks_at_idle (gpointer callback_data)
 }
 
 static void
-schedule_call_ready_callbacks (CajaDirectory *directory)
+schedule_call_ready_callbacks (BaulDirectory *directory)
 {
     if (directory->details->call_ready_idle_id == 0)
     {
@@ -2063,7 +2063,7 @@ schedule_call_ready_callbacks (CajaDirectory *directory)
  * calls them at idle time, unless they are removed
  * before then */
 static gboolean
-call_ready_callbacks (CajaDirectory *directory)
+call_ready_callbacks (BaulDirectory *directory)
 {
     gboolean found_any;
     GList *node, *next;
@@ -2094,8 +2094,8 @@ call_ready_callbacks (CajaDirectory *directory)
 }
 
 gboolean
-baul_directory_has_active_request_for_file (CajaDirectory *directory,
-        CajaFile *file)
+baul_directory_has_active_request_for_file (BaulDirectory *directory,
+        BaulFile *file)
 {
     GList *node;
     ReadyCallback *callback = NULL;
@@ -2129,7 +2129,7 @@ baul_directory_has_active_request_for_file (CajaDirectory *directory,
 
 /* This checks if there's a request for monitoring the file list. */
 gboolean
-baul_directory_is_anyone_monitoring_file_list (CajaDirectory *directory)
+baul_directory_is_anyone_monitoring_file_list (BaulDirectory *directory)
 {
     if (directory->details->call_when_ready_counters[REQUEST_FILE_LIST] > 0)
     {
@@ -2146,16 +2146,16 @@ baul_directory_is_anyone_monitoring_file_list (CajaDirectory *directory)
 
 /* This checks if the file list being monitored. */
 gboolean
-baul_directory_is_file_list_monitored (CajaDirectory *directory)
+baul_directory_is_file_list_monitored (BaulDirectory *directory)
 {
     return directory->details->file_list_monitored;
 }
 
 static void
-mark_all_files_unconfirmed (CajaDirectory *directory)
+mark_all_files_unconfirmed (BaulDirectory *directory)
 {
     GList *node;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     for (node = directory->details->file_list; node != NULL; node = node->next)
     {
@@ -2192,7 +2192,7 @@ more_files_callback (GObject *source_object,
                      gpointer user_data)
 {
     DirectoryLoadState *state;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GError *error;
     GList *files, *l;
     GFileInfo *info = NULL;
@@ -2291,7 +2291,7 @@ enumerate_children_callback (GObject *source_object,
 
 /* Start monitoring the file list if it isn't already. */
 static void
-start_monitoring_file_list (CajaDirectory *directory)
+start_monitoring_file_list (BaulDirectory *directory)
 {
     DirectoryLoadState *state;
 
@@ -2343,7 +2343,7 @@ start_monitoring_file_list (CajaDirectory *directory)
 
 /* Stop monitoring the file list if it is being monitored. */
 void
-baul_directory_stop_monitoring_file_list (CajaDirectory *directory)
+baul_directory_stop_monitoring_file_list (BaulDirectory *directory)
 {
     if (!directory->details->file_list_monitored)
     {
@@ -2358,7 +2358,7 @@ baul_directory_stop_monitoring_file_list (CajaDirectory *directory)
 }
 
 static void
-file_list_start_or_stop (CajaDirectory *directory)
+file_list_start_or_stop (BaulDirectory *directory)
 {
     if (baul_directory_is_anyone_monitoring_file_list (directory))
     {
@@ -2371,9 +2371,9 @@ file_list_start_or_stop (CajaDirectory *directory)
 }
 
 void
-baul_file_invalidate_count_and_mime_list (CajaFile *file)
+baul_file_invalidate_count_and_mime_list (BaulFile *file)
 {
-    CajaFileAttributes attributes;
+    BaulFileAttributes attributes;
 
     attributes = BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT |
                  BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES;
@@ -2389,9 +2389,9 @@ baul_file_invalidate_count_and_mime_list (CajaFile *file)
  * deliberately does not take filtering into account.
  */
 void
-baul_directory_invalidate_count_and_mime_list (CajaDirectory *directory)
+baul_directory_invalidate_count_and_mime_list (BaulDirectory *directory)
 {
-    CajaFile *file;
+    BaulFile *file;
 
     file = baul_directory_get_existing_corresponding_file (directory);
     if (file != NULL)
@@ -2403,8 +2403,8 @@ baul_directory_invalidate_count_and_mime_list (CajaDirectory *directory)
 }
 
 static void
-baul_directory_invalidate_file_attributes (CajaDirectory      *directory,
-        CajaFileAttributes  file_attributes)
+baul_directory_invalidate_file_attributes (BaulDirectory      *directory,
+        BaulFileAttributes  file_attributes)
 {
     GList *node;
 
@@ -2424,8 +2424,8 @@ baul_directory_invalidate_file_attributes (CajaDirectory      *directory,
 }
 
 void
-baul_directory_force_reload_internal (CajaDirectory     *directory,
-                                      CajaFileAttributes file_attributes)
+baul_directory_force_reload_internal (BaulDirectory     *directory,
+                                      BaulFileAttributes file_attributes)
 {
     /* invalidate attributes that are getting reloaded for all files */
     baul_directory_invalidate_file_attributes (directory, file_attributes);
@@ -2443,7 +2443,7 @@ baul_directory_force_reload_internal (CajaDirectory     *directory,
 
 static gboolean
 monitor_includes_file (const Monitor *monitor,
-                       CajaFile *file)
+                       BaulFile *file)
 {
     if (monitor->file == file)
     {
@@ -2464,11 +2464,11 @@ monitor_includes_file (const Monitor *monitor,
 }
 
 static gboolean
-is_needy (CajaFile *file,
+is_needy (BaulFile *file,
           FileCheck check_missing,
           RequestType request_type_wanted)
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GList *node;
 
     if (!(* check_missing) (file))
@@ -2522,11 +2522,11 @@ is_needy (CajaFile *file,
 }
 
 static void
-directory_count_stop (CajaDirectory *directory)
+directory_count_stop (BaulDirectory *directory)
 {
     if (directory->details->count_in_progress != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->count_in_progress->count_file;
         if (file != NULL)
@@ -2566,8 +2566,8 @@ count_non_skipped_files (GList *list)
 }
 
 static void
-count_children_done (CajaDirectory *directory,
-                     CajaFile *count_file,
+count_children_done (BaulDirectory *directory,
+                     BaulFile *count_file,
                      gboolean succeeded,
                      int count)
 {
@@ -2623,7 +2623,7 @@ count_more_files_callback (GObject *source_object,
                            gpointer user_data)
 {
     DirectoryCountState *state;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GError *error;
     GList *files;
 
@@ -2689,7 +2689,7 @@ count_children_callback (GObject *source_object,
 
     if (g_cancellable_is_cancelled (state->cancellable))
     {
-        CajaDirectory *directory;
+        BaulDirectory *directory;
 
         /* Operation was cancelled. Bail out */
         directory = state->directory;
@@ -2729,8 +2729,8 @@ count_children_callback (GObject *source_object,
 }
 
 static void
-directory_count_start (CajaDirectory *directory,
-                       CajaFile *file,
+directory_count_start (BaulDirectory *directory,
+                       BaulFile *file,
                        gboolean *doing_io)
 {
     DirectoryCountState *state;
@@ -2836,7 +2836,7 @@ static void
 deep_count_one (DeepCountState *state,
                 GFileInfo *info)
 {
-    CajaFile *file;
+    BaulFile *file;
     gboolean is_seen_inode;
 
     if (should_skip_file (NULL, info))
@@ -2916,8 +2916,8 @@ deep_count_state_free (DeepCountState *state)
 static void
 deep_count_next_dir (DeepCountState *state)
 {
-    CajaFile *file;
-    CajaDirectory *directory;
+    BaulFile *file;
+    BaulDirectory *directory;
     gboolean done;
 
     directory = state->directory;
@@ -2964,7 +2964,7 @@ deep_count_more_files_callback (GObject *source_object,
                                 gpointer user_data)
 {
     DeepCountState *state;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GList *files, *l;
     GFileInfo *info = NULL;
 
@@ -3022,7 +3022,7 @@ deep_count_callback (GObject *source_object,
 {
     DeepCountState *state;
     GFileEnumerator *enumerator;
-    CajaFile *file;
+    BaulFile *file;
 
     state = user_data;
 
@@ -3081,11 +3081,11 @@ deep_count_load (DeepCountState *state, GFile *location)
 }
 
 static void
-deep_count_stop (CajaDirectory *directory)
+deep_count_stop (BaulDirectory *directory)
 {
     if (directory->details->deep_count_in_progress != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->deep_count_file;
         if (file != NULL)
@@ -3127,8 +3127,8 @@ deep_count_got_info (GObject *source_object,
 }
 
 static void
-deep_count_start (CajaDirectory *directory,
-                  CajaFile *file,
+deep_count_start (BaulDirectory *directory,
+                  BaulFile *file,
                   gboolean *doing_io)
 {
     GFile *location;
@@ -3190,11 +3190,11 @@ deep_count_start (CajaDirectory *directory,
 }
 
 static void
-mime_list_stop (CajaDirectory *directory)
+mime_list_stop (BaulDirectory *directory)
 {
     if (directory->details->mime_list_in_progress != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->mime_list_in_progress->mime_list_file;
         if (file != NULL)
@@ -3236,8 +3236,8 @@ mime_list_state_free (MimeListState *state)
 static void
 mime_list_done (MimeListState *state, gboolean success)
 {
-    CajaFile *file;
-    CajaDirectory *directory;
+    BaulFile *file;
+    BaulDirectory *directory;
 
     directory = state->directory;
     g_assert (directory != NULL);
@@ -3294,7 +3294,7 @@ mime_list_callback (GObject *source_object,
                     gpointer user_data)
 {
     MimeListState *state;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GError *error;
     GList *files, *l;
     GFileInfo *info = NULL;
@@ -3365,7 +3365,7 @@ list_mime_enum_callback (GObject *source_object,
 
     if (g_cancellable_is_cancelled (state->cancellable))
     {
-        CajaDirectory *directory;
+        BaulDirectory *directory;
 
         /* Operation was cancelled. Bail out */
         directory = state->directory;
@@ -3403,8 +3403,8 @@ list_mime_enum_callback (GObject *source_object,
 }
 
 static void
-mime_list_start (CajaDirectory *directory,
-                 CajaFile *file,
+mime_list_start (BaulDirectory *directory,
+                 BaulFile *file,
                  gboolean *doing_io)
 {
     MimeListState *state;
@@ -3473,11 +3473,11 @@ mime_list_start (CajaDirectory *directory,
 }
 
 static void
-top_left_stop (CajaDirectory *directory)
+top_left_stop (BaulDirectory *directory)
 {
     if (directory->details->top_left_read_state != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->top_left_read_state->file;
         if (file != NULL)
@@ -3513,8 +3513,8 @@ top_left_read_callback (GObject *source_object,
                         gpointer callback_data)
 {
     TopLeftTextReadState *state;
-    CajaDirectory *directory;
-    CajaFilePrivate *file_details;
+    BaulDirectory *directory;
+    BaulFilePrivate *file_details;
     gsize file_size;
     char *file_contents;
 
@@ -3599,8 +3599,8 @@ top_left_read_more_callback (const char *file_contents,
 }
 
 static void
-top_left_start (CajaDirectory *directory,
-                CajaFile *file,
+top_left_start (BaulDirectory *directory,
+                BaulFile *file,
                 gboolean *doing_io)
 {
     GFile *location;
@@ -3679,8 +3679,8 @@ query_info_callback (GObject *source_object,
                      GAsyncResult *res,
                      gpointer user_data)
 {
-    CajaDirectory *directory;
-    CajaFile *get_info_file;
+    BaulDirectory *directory;
+    BaulFile *get_info_file;
     GFileInfo *info;
     GetInfoState *state;
     GError *error;
@@ -3741,11 +3741,11 @@ query_info_callback (GObject *source_object,
 }
 
 static void
-file_info_stop (CajaDirectory *directory)
+file_info_stop (BaulDirectory *directory)
 {
     if (directory->details->get_info_in_progress != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->get_info_file;
         if (file != NULL)
@@ -3764,8 +3764,8 @@ file_info_stop (CajaDirectory *directory)
 }
 
 static void
-file_info_start (CajaDirectory *directory,
-                 CajaFile *file,
+file_info_start (BaulDirectory *directory,
+                 BaulFile *file,
                  gboolean *doing_io)
 {
     GFile *location;
@@ -3851,7 +3851,7 @@ done:
 }
 
 static gboolean
-is_link_trusted (CajaFile *file,
+is_link_trusted (BaulFile *file,
                  gboolean is_launcher)
 {
     gboolean res;
@@ -3886,8 +3886,8 @@ is_link_trusted (CajaFile *file,
 }
 
 static void
-link_info_done (CajaDirectory *directory,
-                CajaFile *file,
+link_info_done (BaulDirectory *directory,
+                BaulFile *file,
                 const char *uri,
                 const char *name,
                 const char *icon,
@@ -3931,7 +3931,7 @@ link_info_done (CajaDirectory *directory,
 }
 
 static gboolean
-should_read_link_info_sync (CajaFile *file)
+should_read_link_info_sync (BaulFile *file)
 {
 #ifdef READ_LOCAL_LINKS_SYNC
     return (baul_file_is_local (file) && !baul_file_is_directory (file));
@@ -3941,11 +3941,11 @@ should_read_link_info_sync (CajaFile *file)
 }
 
 static void
-link_info_stop (CajaDirectory *directory)
+link_info_stop (BaulDirectory *directory)
 {
     if (directory->details->link_info_read_state != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->link_info_read_state->file;
 
@@ -3967,8 +3967,8 @@ link_info_stop (CajaDirectory *directory)
 }
 
 static void
-link_info_got_data (CajaDirectory *directory,
-                    CajaFile *file,
+link_info_got_data (BaulDirectory *directory,
+                    BaulFile *file,
                     gboolean result,
                     goffset bytes_read,
                     char *file_contents)
@@ -3985,7 +3985,7 @@ link_info_got_data (CajaDirectory *directory,
     is_launcher = FALSE;
     is_foreign = FALSE;
 
-    /* Handle the case where we read the Caja link. */
+    /* Handle the case where we read the Baul link. */
     if (result)
     {
         char *link_uri;
@@ -4028,7 +4028,7 @@ link_info_baul_link_read_callback (GObject *source_object,
     gsize file_size;
     char *file_contents;
     gboolean result;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     state = user_data;
 
@@ -4062,8 +4062,8 @@ link_info_baul_link_read_callback (GObject *source_object,
 }
 
 static void
-link_info_start (CajaDirectory *directory,
-                 CajaFile *file,
+link_info_start (BaulDirectory *directory,
+                 BaulFile *file,
                  gboolean *doing_io)
 {
     GFile *location;
@@ -4126,8 +4126,8 @@ link_info_start (CajaDirectory *directory,
 }
 
 static void
-thumbnail_done (CajaDirectory *directory,
-                CajaFile *file,
+thumbnail_done (BaulDirectory *directory,
+                BaulFile *file,
                 GdkPixbuf *pixbuf,
                 gboolean tried_original)
 {
@@ -4174,11 +4174,11 @@ thumbnail_done (CajaDirectory *directory,
 }
 
 static void
-thumbnail_stop (CajaDirectory *directory)
+thumbnail_stop (BaulDirectory *directory)
 {
     if (directory->details->thumbnail_state != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->thumbnail_state->file;
 
@@ -4200,8 +4200,8 @@ thumbnail_stop (CajaDirectory *directory)
 }
 
 static void
-thumbnail_got_pixbuf (CajaDirectory *directory,
-                      CajaFile *file,
+thumbnail_got_pixbuf (BaulDirectory *directory,
+                      BaulFile *file,
                       GdkPixbuf *pixbuf,
                       gboolean tried_original)
 {
@@ -4313,7 +4313,7 @@ thumbnail_read_callback (GObject *source_object,
     gsize file_size;
     char *file_contents;
     gboolean result;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
     GdkPixbuf *pixbuf;
 
     state = user_data;
@@ -4366,8 +4366,8 @@ thumbnail_read_callback (GObject *source_object,
 }
 
 static void
-thumbnail_start (CajaDirectory *directory,
-                 CajaFile *file,
+thumbnail_start (BaulDirectory *directory,
+                 BaulFile *file,
                  gboolean *doing_io)
 {
     GFile *location;
@@ -4418,11 +4418,11 @@ thumbnail_start (CajaDirectory *directory,
 }
 
 static void
-mount_stop (CajaDirectory *directory)
+mount_stop (BaulDirectory *directory)
 {
     if (directory->details->mount_state != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->mount_state->file;
 
@@ -4453,8 +4453,8 @@ mount_state_free (MountState *state)
 static void
 got_mount (MountState *state, GMount *mount)
 {
-    CajaDirectory *directory;
-    CajaFile *file;
+    BaulDirectory *directory;
+    BaulFile *file;
 
     directory = baul_directory_ref (state->directory);
 
@@ -4557,8 +4557,8 @@ get_mount_at (GFile *target)
 }
 
 static void
-mount_start (CajaDirectory *directory,
-             CajaFile *file,
+mount_start (BaulDirectory *directory,
+             BaulFile *file,
              gboolean *doing_io)
 {
     GFile *location;
@@ -4624,7 +4624,7 @@ mount_start (CajaDirectory *directory,
 }
 
 static void
-filesystem_info_cancel (CajaDirectory *directory)
+filesystem_info_cancel (BaulDirectory *directory)
 {
     if (directory->details->filesystem_info_state != NULL)
     {
@@ -4636,11 +4636,11 @@ filesystem_info_cancel (CajaDirectory *directory)
 }
 
 static void
-filesystem_info_stop (CajaDirectory *directory)
+filesystem_info_stop (BaulDirectory *directory)
 {
     if (directory->details->filesystem_info_state != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->filesystem_info_state->file;
 
@@ -4671,8 +4671,8 @@ filesystem_info_state_free (FilesystemInfoState *state)
 static void
 got_filesystem_info (FilesystemInfoState *state, GFileInfo *info)
 {
-    CajaDirectory *directory;
-    CajaFile *file;
+    BaulDirectory *directory;
+    BaulFile *file;
 
     /* careful here, info may be NULL */
 
@@ -4729,8 +4729,8 @@ query_filesystem_info_callback (GObject *source_object,
 }
 
 static void
-filesystem_info_start (CajaDirectory *directory,
-                       CajaFile *file,
+filesystem_info_start (BaulDirectory *directory,
+                       BaulFile *file,
                        gboolean *doing_io)
 {
     GFile *location;
@@ -4775,7 +4775,7 @@ filesystem_info_start (CajaDirectory *directory,
 }
 
 static void
-extension_info_cancel (CajaDirectory *directory)
+extension_info_cancel (BaulDirectory *directory)
 {
     if (directory->details->extension_info_in_progress != NULL)
     {
@@ -4800,11 +4800,11 @@ extension_info_cancel (CajaDirectory *directory)
 }
 
 static void
-extension_info_stop (CajaDirectory *directory)
+extension_info_stop (BaulDirectory *directory)
 {
     if (directory->details->extension_info_in_progress != NULL)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = directory->details->extension_info_file;
         if (file != NULL)
@@ -4823,9 +4823,9 @@ extension_info_stop (CajaDirectory *directory)
 }
 
 static void
-finish_info_provider (CajaDirectory *directory,
-                      CajaFile *file,
-                      CajaInfoProvider *provider)
+finish_info_provider (BaulDirectory *directory,
+                      BaulFile *file,
+                      BaulInfoProvider *provider)
 {
     file->details->pending_info_providers =
         g_list_remove  (file->details->pending_info_providers,
@@ -4845,7 +4845,7 @@ static gboolean
 info_provider_idle_callback (gpointer user_data)
 {
     InfoProviderResponse *response;
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     response = user_data;
     directory = response->directory;
@@ -4853,11 +4853,11 @@ info_provider_idle_callback (gpointer user_data)
     if (response->handle != directory->details->extension_info_in_progress
             || response->provider != directory->details->extension_info_provider)
     {
-        g_warning ("Unexpected plugin response.  This probably indicates a bug in a Caja extension: handle=%p", response->handle);
+        g_warning ("Unexpected plugin response.  This probably indicates a bug in a Baul extension: handle=%p", response->handle);
     }
     else
     {
-        CajaFile *file;
+        BaulFile *file;
         async_job_end (directory, "extension info");
 
         file = directory->details->extension_info_file;
@@ -4874,9 +4874,9 @@ info_provider_idle_callback (gpointer user_data)
 }
 
 static void
-info_provider_callback (CajaInfoProvider *provider,
-                        CajaOperationHandle *handle,
-                        CajaOperationResult result,
+info_provider_callback (BaulInfoProvider *provider,
+                        BaulOperationHandle *handle,
+                        BaulOperationResult result,
                         gpointer user_data)
 {
     InfoProviderResponse *response;
@@ -4894,13 +4894,13 @@ info_provider_callback (CajaInfoProvider *provider,
 }
 
 static void
-extension_info_start (CajaDirectory *directory,
-                      CajaFile *file,
+extension_info_start (BaulDirectory *directory,
+                      BaulFile *file,
                       gboolean *doing_io)
 {
-    CajaInfoProvider *provider;
-    CajaOperationResult result;
-    CajaOperationHandle *handle;
+    BaulInfoProvider *provider;
+    BaulOperationResult result;
+    BaulOperationHandle *handle;
     GClosure *update_complete;
 
     if (directory->details->extension_info_in_progress != NULL)
@@ -4951,9 +4951,9 @@ extension_info_start (CajaDirectory *directory,
 }
 
 static void
-start_or_stop_io (CajaDirectory *directory)
+start_or_stop_io (BaulDirectory *directory)
 {
-    CajaFile *file;
+    BaulFile *file;
     gboolean doing_io;
 
     /* Start or stop reading files. */
@@ -5031,7 +5031,7 @@ start_or_stop_io (CajaDirectory *directory)
  * or when some I/O is completed.
  */
 void
-baul_directory_async_state_changed (CajaDirectory *directory)
+baul_directory_async_state_changed (BaulDirectory *directory)
 {
     /* Check if any callbacks are satisfied and call them if they
      * are. Do this last so that any changes done in start or stop
@@ -5066,7 +5066,7 @@ baul_directory_async_state_changed (CajaDirectory *directory)
 }
 
 void
-baul_directory_cancel (CajaDirectory *directory)
+baul_directory_cancel (BaulDirectory *directory)
 {
     /* Arbitrary order (kept alphabetical). */
     deep_count_cancel (directory);
@@ -5093,8 +5093,8 @@ baul_directory_cancel (CajaDirectory *directory)
 }
 
 static void
-cancel_directory_count_for_file (CajaDirectory *directory,
-                                 CajaFile      *file)
+cancel_directory_count_for_file (BaulDirectory *directory,
+                                 BaulFile      *file)
 {
     if (directory->details->count_in_progress != NULL &&
             directory->details->count_in_progress->count_file == file)
@@ -5104,8 +5104,8 @@ cancel_directory_count_for_file (CajaDirectory *directory,
 }
 
 static void
-cancel_deep_counts_for_file (CajaDirectory *directory,
-                             CajaFile      *file)
+cancel_deep_counts_for_file (BaulDirectory *directory,
+                             BaulFile      *file)
 {
     if (directory->details->deep_count_file == file)
     {
@@ -5114,8 +5114,8 @@ cancel_deep_counts_for_file (CajaDirectory *directory,
 }
 
 static void
-cancel_mime_list_for_file (CajaDirectory *directory,
-                           CajaFile      *file)
+cancel_mime_list_for_file (BaulDirectory *directory,
+                           BaulFile      *file)
 {
     if (directory->details->mime_list_in_progress != NULL &&
             directory->details->mime_list_in_progress->mime_list_file == file)
@@ -5125,8 +5125,8 @@ cancel_mime_list_for_file (CajaDirectory *directory,
 }
 
 static void
-cancel_top_left_text_for_file (CajaDirectory *directory,
-                               CajaFile      *file)
+cancel_top_left_text_for_file (BaulDirectory *directory,
+                               BaulFile      *file)
 {
     if (directory->details->top_left_read_state != NULL &&
             directory->details->top_left_read_state->file == file)
@@ -5136,8 +5136,8 @@ cancel_top_left_text_for_file (CajaDirectory *directory,
 }
 
 static void
-cancel_file_info_for_file (CajaDirectory *directory,
-                           CajaFile      *file)
+cancel_file_info_for_file (BaulDirectory *directory,
+                           BaulFile      *file)
 {
     if (directory->details->get_info_file == file)
     {
@@ -5146,8 +5146,8 @@ cancel_file_info_for_file (CajaDirectory *directory,
 }
 
 static void
-cancel_thumbnail_for_file (CajaDirectory *directory,
-                           CajaFile      *file)
+cancel_thumbnail_for_file (BaulDirectory *directory,
+                           BaulFile      *file)
 {
     if (directory->details->thumbnail_state != NULL &&
             directory->details->thumbnail_state->file == file)
@@ -5157,8 +5157,8 @@ cancel_thumbnail_for_file (CajaDirectory *directory,
 }
 
 static void
-cancel_mount_for_file (CajaDirectory *directory,
-                       CajaFile      *file)
+cancel_mount_for_file (BaulDirectory *directory,
+                       BaulFile      *file)
 {
     if (directory->details->mount_state != NULL &&
             directory->details->mount_state->file == file)
@@ -5168,8 +5168,8 @@ cancel_mount_for_file (CajaDirectory *directory,
 }
 
 static void
-cancel_filesystem_info_for_file (CajaDirectory *directory,
-                                 CajaFile      *file)
+cancel_filesystem_info_for_file (BaulDirectory *directory,
+                                 BaulFile      *file)
 {
     if (directory->details->filesystem_info_state != NULL &&
             directory->details->filesystem_info_state->file == file)
@@ -5179,8 +5179,8 @@ cancel_filesystem_info_for_file (CajaDirectory *directory,
 }
 
 static void
-cancel_link_info_for_file (CajaDirectory *directory,
-                           CajaFile      *file)
+cancel_link_info_for_file (BaulDirectory *directory,
+                           BaulFile      *file)
 {
     if (directory->details->link_info_read_state != NULL &&
             directory->details->link_info_read_state->file == file)
@@ -5191,8 +5191,8 @@ cancel_link_info_for_file (CajaDirectory *directory,
 
 
 static void
-cancel_loading_attributes (CajaDirectory *directory,
-                           CajaFileAttributes file_attributes)
+cancel_loading_attributes (BaulDirectory *directory,
+                           BaulFileAttributes file_attributes)
 {
     Request request;
 
@@ -5246,9 +5246,9 @@ cancel_loading_attributes (CajaDirectory *directory,
 }
 
 void
-baul_directory_cancel_loading_file_attributes (CajaDirectory      *directory,
-        CajaFile           *file,
-        CajaFileAttributes  file_attributes)
+baul_directory_cancel_loading_file_attributes (BaulDirectory      *directory,
+        BaulFile           *file,
+        BaulFileAttributes  file_attributes)
 {
     Request request;
 
@@ -5297,8 +5297,8 @@ baul_directory_cancel_loading_file_attributes (CajaDirectory      *directory,
 }
 
 void
-baul_directory_add_file_to_work_queue (CajaDirectory *directory,
-                                       CajaFile *file)
+baul_directory_add_file_to_work_queue (BaulDirectory *directory,
+                                       BaulFile *file)
 {
     g_return_if_fail (file->details->directory == directory);
 
@@ -5308,13 +5308,13 @@ baul_directory_add_file_to_work_queue (CajaDirectory *directory,
 
 
 static void
-add_all_files_to_work_queue (CajaDirectory *directory)
+add_all_files_to_work_queue (BaulDirectory *directory)
 {
     GList *node;
 
     for (node = directory->details->file_list; node != NULL; node = node->next)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = BAUL_FILE (node->data);
 
@@ -5323,8 +5323,8 @@ add_all_files_to_work_queue (CajaDirectory *directory)
 }
 
 void
-baul_directory_remove_file_from_work_queue (CajaDirectory *directory,
-        CajaFile *file)
+baul_directory_remove_file_from_work_queue (BaulDirectory *directory,
+        BaulFile *file)
 {
     baul_file_queue_remove (directory->details->high_priority_queue,
                             file);
@@ -5336,8 +5336,8 @@ baul_directory_remove_file_from_work_queue (CajaDirectory *directory,
 
 
 static void
-move_file_to_low_priority_queue (CajaDirectory *directory,
-                                 CajaFile *file)
+move_file_to_low_priority_queue (BaulDirectory *directory,
+                                 BaulFile *file)
 {
     /* Must add before removing to avoid ref underflow */
     baul_file_queue_enqueue (directory->details->low_priority_queue,
@@ -5347,8 +5347,8 @@ move_file_to_low_priority_queue (CajaDirectory *directory,
 }
 
 static void
-move_file_to_extension_queue (CajaDirectory *directory,
-                              CajaFile *file)
+move_file_to_extension_queue (BaulDirectory *directory,
+                              BaulFile *file)
 {
     /* Must add before removing to avoid ref underflow */
     baul_file_queue_enqueue (directory->details->extension_queue,

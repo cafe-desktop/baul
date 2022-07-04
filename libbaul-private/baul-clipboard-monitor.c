@@ -54,17 +54,17 @@ enum
     LAST_SIGNAL
 };
 
-struct _CajaClipboardMonitorPrivate
+struct _BaulClipboardMonitorPrivate
 {
-    CajaClipboardInfo *info;
+    BaulClipboardInfo *info;
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
 static GdkAtom copied_files_atom;
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaClipboardMonitor, baul_clipboard_monitor, G_TYPE_OBJECT);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulClipboardMonitor, baul_clipboard_monitor, G_TYPE_OBJECT);
 
-static CajaClipboardMonitor *clipboard_monitor = NULL;
+static BaulClipboardMonitor *clipboard_monitor = NULL;
 
 static void
 destroy_clipboard_monitor (void)
@@ -75,7 +75,7 @@ destroy_clipboard_monitor (void)
     }
 }
 
-CajaClipboardMonitor *
+BaulClipboardMonitor *
 baul_clipboard_monitor_get (void)
 {
     if (clipboard_monitor == NULL)
@@ -95,30 +95,30 @@ baul_clipboard_monitor_get (void)
 void
 baul_clipboard_monitor_emit_changed (void)
 {
-    CajaClipboardMonitor *monitor;
+    BaulClipboardMonitor *monitor;
 
     monitor = baul_clipboard_monitor_get ();
 
     g_signal_emit (monitor, signals[CLIPBOARD_CHANGED], 0);
 }
 
-static CajaClipboardInfo *
+static BaulClipboardInfo *
 baul_clipboard_info_new (GList *files,
                          gboolean cut)
 {
-    CajaClipboardInfo *info;
+    BaulClipboardInfo *info;
 
-    info = g_slice_new0 (CajaClipboardInfo);
+    info = g_slice_new0 (BaulClipboardInfo);
     info->files = baul_file_list_copy (files);
     info->cut = cut;
 
     return info;
 }
 
-static CajaClipboardInfo *
-baul_clipboard_info_copy (CajaClipboardInfo *info)
+static BaulClipboardInfo *
+baul_clipboard_info_copy (BaulClipboardInfo *info)
 {
-    CajaClipboardInfo *new_info;
+    BaulClipboardInfo *new_info;
 
     new_info = NULL;
 
@@ -132,15 +132,15 @@ baul_clipboard_info_copy (CajaClipboardInfo *info)
 }
 
 static void
-baul_clipboard_info_free (CajaClipboardInfo *info)
+baul_clipboard_info_free (BaulClipboardInfo *info)
 {
     baul_file_list_free (info->files);
 
-    g_slice_free (CajaClipboardInfo, info);
+    g_slice_free (BaulClipboardInfo, info);
 }
 
 static void
-baul_clipboard_monitor_init (CajaClipboardMonitor *monitor)
+baul_clipboard_monitor_init (BaulClipboardMonitor *monitor)
 {
     monitor->details = baul_clipboard_monitor_get_instance_private (monitor);
 }
@@ -148,7 +148,7 @@ baul_clipboard_monitor_init (CajaClipboardMonitor *monitor)
 static void
 clipboard_monitor_finalize (GObject *object)
 {
-    CajaClipboardMonitor *monitor;
+    BaulClipboardMonitor *monitor;
 
     monitor = BAUL_CLIPBOARD_MONITOR (object);
 
@@ -162,7 +162,7 @@ clipboard_monitor_finalize (GObject *object)
 }
 
 static void
-baul_clipboard_monitor_class_init (CajaClipboardMonitorClass *klass)
+baul_clipboard_monitor_class_init (BaulClipboardMonitorClass *klass)
 {
     GObjectClass *object_class;
 
@@ -175,7 +175,7 @@ baul_clipboard_monitor_class_init (CajaClipboardMonitorClass *klass)
         g_signal_new ("clipboard_changed",
                       G_TYPE_FROM_CLASS (klass),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaClipboardMonitorClass, clipboard_changed),
+                      G_STRUCT_OFFSET (BaulClipboardMonitorClass, clipboard_changed),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -183,7 +183,7 @@ baul_clipboard_monitor_class_init (CajaClipboardMonitorClass *klass)
         g_signal_new ("clipboard_info",
                       G_TYPE_FROM_CLASS (klass),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaClipboardMonitorClass, clipboard_info),
+                      G_STRUCT_OFFSET (BaulClipboardMonitorClass, clipboard_info),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__POINTER,
                       G_TYPE_NONE,
@@ -191,8 +191,8 @@ baul_clipboard_monitor_class_init (CajaClipboardMonitorClass *klass)
 }
 
 void
-baul_clipboard_monitor_set_clipboard_info (CajaClipboardMonitor *monitor,
-        CajaClipboardInfo *info)
+baul_clipboard_monitor_set_clipboard_info (BaulClipboardMonitor *monitor,
+        BaulClipboardInfo *info)
 {
     if (monitor->details->info != NULL)
     {
@@ -207,8 +207,8 @@ baul_clipboard_monitor_set_clipboard_info (CajaClipboardMonitor *monitor,
     baul_clipboard_monitor_emit_changed ();
 }
 
-CajaClipboardInfo *
-baul_clipboard_monitor_get_clipboard_info (CajaClipboardMonitor *monitor)
+BaulClipboardInfo *
+baul_clipboard_monitor_get_clipboard_info (BaulClipboardMonitor *monitor)
 {
     return monitor->details->info;
 }
@@ -222,7 +222,7 @@ baul_clear_clipboard_callback (GtkClipboard *clipboard,
 }
 
 static char *
-convert_file_list_to_string (CajaClipboardInfo *info,
+convert_file_list_to_string (BaulClipboardInfo *info,
                              gboolean format_for_text,
                              gsize *len)
 {
@@ -289,7 +289,7 @@ baul_get_clipboard_callback (GtkClipboard     *clipboard,
                              gpointer          user_data)
 {
     GList *l;
-    CajaClipboardInfo *clipboard_info;
+    BaulClipboardInfo *clipboard_info;
     GdkAtom target;
 
     clipboard_info =

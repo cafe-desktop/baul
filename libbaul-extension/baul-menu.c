@@ -1,5 +1,5 @@
 /*
- *  baul-menu.h - Menus exported by CajaMenuProvider objects.
+ *  baul-menu.h - Menus exported by BaulMenuProvider objects.
  *
  *  Copyright (C) 2005 Raffaele Sandrini
  *
@@ -29,24 +29,24 @@
 
 /**
  * SECTION:baul-menu
- * @title: CajaMenu
+ * @title: BaulMenu
  * @short_description: Menu descriptor object
  * @include: libbaul-extension/baul-menu.h
  *
- * #CajaMenu is an object that describes a submenu in a file manager
- * menu. Extensions can provide #CajaMenu objects by attaching them to
- * #CajaMenuItem objects, using baul_menu_item_set_submenu().
+ * #BaulMenu is an object that describes a submenu in a file manager
+ * menu. Extensions can provide #BaulMenu objects by attaching them to
+ * #BaulMenuItem objects, using baul_menu_item_set_submenu().
  */
 
 
-struct _CajaMenuPrivate {
+struct _BaulMenuPrivate {
     GList *item_list;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaMenu, baul_menu, G_TYPE_OBJECT);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulMenu, baul_menu, G_TYPE_OBJECT);
 
 void
-baul_menu_append_item (CajaMenu *menu, CajaMenuItem *item)
+baul_menu_append_item (BaulMenu *menu, BaulMenuItem *item)
 {
     g_return_if_fail (menu != NULL);
     g_return_if_fail (item != NULL);
@@ -56,12 +56,12 @@ baul_menu_append_item (CajaMenu *menu, CajaMenuItem *item)
 
 /**
  * baul_menu_get_items:
- * @menu: a #CajaMenu
+ * @menu: a #BaulMenu
  *
- * Returns: (element-type CajaMenuItem) (transfer full): the provided #CajaMenuItem list
+ * Returns: (element-type BaulMenuItem) (transfer full): the provided #BaulMenuItem list
  */
 GList *
-baul_menu_get_items (CajaMenu *menu)
+baul_menu_get_items (BaulMenu *menu)
 {
     GList *item_list;
 
@@ -75,7 +75,7 @@ baul_menu_get_items (CajaMenu *menu)
 
 /**
  * baul_menu_item_list_free:
- * @item_list: (element-type CajaMenuItem): a list of #CajaMenuItem
+ * @item_list: (element-type BaulMenuItem): a list of #BaulMenuItem
  *
  */
 void
@@ -92,7 +92,7 @@ baul_menu_item_list_free (GList *item_list)
 static void
 baul_menu_finalize (GObject *object)
 {
-    CajaMenu *menu = BAUL_MENU (object);
+    BaulMenu *menu = BAUL_MENU (object);
 
     if (menu->priv->item_list) {
         g_list_free (menu->priv->item_list);
@@ -102,7 +102,7 @@ baul_menu_finalize (GObject *object)
 }
 
 static void
-baul_menu_init (CajaMenu *menu)
+baul_menu_init (BaulMenu *menu)
 {
     menu->priv = baul_menu_get_instance_private (menu);
 
@@ -110,7 +110,7 @@ baul_menu_init (CajaMenu *menu)
 }
 
 static void
-baul_menu_class_init (CajaMenuClass *klass)
+baul_menu_class_init (BaulMenuClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
@@ -119,10 +119,10 @@ baul_menu_class_init (CajaMenuClass *klass)
 
 /* public constructors */
 
-CajaMenu *
+BaulMenu *
 baul_menu_new (void)
 {
-    CajaMenu *obj;
+    BaulMenu *obj;
 
     obj = BAUL_MENU (g_object_new (BAUL_TYPE_MENU, NULL));
 

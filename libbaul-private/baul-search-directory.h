@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-search-directory.h: Subclass of CajaDirectory to implement
+   baul-search-directory.h: Subclass of BaulDirectory to implement
    a virtual directory consisting of the search directory and the search
    icons
 
@@ -30,44 +30,44 @@
 
 #define BAUL_TYPE_SEARCH_DIRECTORY baul_search_directory_get_type()
 #define BAUL_SEARCH_DIRECTORY(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_DIRECTORY, CajaSearchDirectory))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_DIRECTORY, BaulSearchDirectory))
 #define BAUL_SEARCH_DIRECTORY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_DIRECTORY, CajaSearchDirectoryClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_DIRECTORY, BaulSearchDirectoryClass))
 #define BAUL_IS_SEARCH_DIRECTORY(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_DIRECTORY))
 #define BAUL_IS_SEARCH_DIRECTORY_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_DIRECTORY))
 #define BAUL_SEARCH_DIRECTORY_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_DIRECTORY, CajaSearchDirectoryClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_DIRECTORY, BaulSearchDirectoryClass))
 
-typedef struct CajaSearchDirectoryDetails CajaSearchDirectoryDetails;
-
-typedef struct
-{
-    CajaDirectory parent_slot;
-    CajaSearchDirectoryDetails *details;
-} CajaSearchDirectory;
+typedef struct BaulSearchDirectoryDetails BaulSearchDirectoryDetails;
 
 typedef struct
 {
-    CajaDirectoryClass parent_slot;
-} CajaSearchDirectoryClass;
+    BaulDirectory parent_slot;
+    BaulSearchDirectoryDetails *details;
+} BaulSearchDirectory;
+
+typedef struct
+{
+    BaulDirectoryClass parent_slot;
+} BaulSearchDirectoryClass;
 
 GType   baul_search_directory_get_type             (void);
 
 char   *baul_search_directory_generate_new_uri     (void);
 
-CajaSearchDirectory *baul_search_directory_new_from_saved_search (const char *uri);
+BaulSearchDirectory *baul_search_directory_new_from_saved_search (const char *uri);
 
-gboolean       baul_search_directory_is_saved_search (CajaSearchDirectory *search);
-gboolean       baul_search_directory_is_modified     (CajaSearchDirectory *search);
-gboolean       baul_search_directory_is_indexed      (CajaSearchDirectory *search);
-void           baul_search_directory_save_search     (CajaSearchDirectory *search);
-void           baul_search_directory_save_to_file    (CajaSearchDirectory *search,
+gboolean       baul_search_directory_is_saved_search (BaulSearchDirectory *search);
+gboolean       baul_search_directory_is_modified     (BaulSearchDirectory *search);
+gboolean       baul_search_directory_is_indexed      (BaulSearchDirectory *search);
+void           baul_search_directory_save_search     (BaulSearchDirectory *search);
+void           baul_search_directory_save_to_file    (BaulSearchDirectory *search,
         const char              *save_file_uri);
 
-CajaQuery *baul_search_directory_get_query       (CajaSearchDirectory *search);
-void           baul_search_directory_set_query       (CajaSearchDirectory *search,
-        CajaQuery           *query);
+BaulQuery *baul_search_directory_get_query       (BaulSearchDirectory *search);
+void           baul_search_directory_set_query       (BaulSearchDirectory *search,
+        BaulQuery           *query);
 
 #endif /* BAUL_SEARCH_DIRECTORY_H */

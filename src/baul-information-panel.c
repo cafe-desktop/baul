@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 1999, 2000, 2001 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -51,15 +51,15 @@
 #include "baul-information-panel.h"
 #include "baul-sidebar-title.h"
 
-struct _CajaInformationPanelPrivate
+struct _BaulInformationPanelPrivate
 {
     GtkWidget *container;
-    CajaWindowInfo *window;
-    CajaSidebarTitle *title;
+    BaulWindowInfo *window;
+    BaulSidebarTitle *title;
     GtkWidget *button_box_centerer;
     GtkWidget *button_box;
     gboolean has_buttons;
-    CajaFile *file;
+    BaulFile *file;
     guint file_changed_connection;
     gboolean background_connected;
 
@@ -82,16 +82,16 @@ static void     baul_information_panel_drag_data_received    (GtkWidget         
         GtkSelectionData             *selection_data,
         guint                         info,
         guint                         time);
-static void     baul_information_panel_read_defaults         (CajaInformationPanel     *information_panel);
+static void     baul_information_panel_read_defaults         (BaulInformationPanel     *information_panel);
 static void     baul_information_panel_style_updated         (GtkWidget                    *widget);
 static void     baul_information_panel_theme_changed         (GSettings   *settings,
                                                               const gchar *key,
                                                               gpointer     user_data);
-static void     baul_information_panel_update_appearance     (CajaInformationPanel     *information_panel);
-static void     baul_information_panel_update_buttons        (CajaInformationPanel     *information_panel);
-static void     background_metadata_changed_callback             (CajaInformationPanel     *information_panel);
-static void     baul_information_panel_iface_init            (CajaSidebarIface         *iface);
-static void     sidebar_provider_iface_init                      (CajaSidebarProviderIface *iface);
+static void     baul_information_panel_update_appearance     (BaulInformationPanel     *information_panel);
+static void     baul_information_panel_update_buttons        (BaulInformationPanel     *information_panel);
+static void     background_metadata_changed_callback             (BaulInformationPanel     *information_panel);
+static void     baul_information_panel_iface_init            (BaulSidebarIface         *iface);
+static void     sidebar_provider_iface_init                      (BaulSidebarProviderIface *iface);
 static GType    baul_information_panel_provider_get_type     (void);
 
 enum
@@ -134,57 +134,57 @@ typedef enum
 typedef struct
 {
     GObject parent;
-} CajaInformationPanelProvider;
+} BaulInformationPanelProvider;
 
 typedef struct
 {
     GObjectClass parent;
-} CajaInformationPanelProviderClass;
+} BaulInformationPanelProviderClass;
 
 
-G_DEFINE_TYPE_WITH_CODE (CajaInformationPanel, baul_information_panel, EEL_TYPE_BACKGROUND_BOX,
-                         G_ADD_PRIVATE (CajaInformationPanel)
+G_DEFINE_TYPE_WITH_CODE (BaulInformationPanel, baul_information_panel, EEL_TYPE_BACKGROUND_BOX,
+                         G_ADD_PRIVATE (BaulInformationPanel)
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_information_panel_iface_init));
 
-G_DEFINE_TYPE_WITH_CODE (CajaInformationPanelProvider, baul_information_panel_provider, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (BaulInformationPanelProvider, baul_information_panel_provider, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR_PROVIDER,
                                  sidebar_provider_iface_init));
 
 
 static const char *
-baul_information_panel_get_sidebar_id (CajaSidebar *sidebar)
+baul_information_panel_get_sidebar_id (BaulSidebar *sidebar)
 {
     return BAUL_INFORMATION_PANEL_ID;
 }
 
 static char *
-baul_information_panel_get_tab_label (CajaSidebar *sidebar)
+baul_information_panel_get_tab_label (BaulSidebar *sidebar)
 {
     return g_strdup (_("Information"));
 }
 
 static char *
-baul_information_panel_get_tab_tooltip (CajaSidebar *sidebar)
+baul_information_panel_get_tab_tooltip (BaulSidebar *sidebar)
 {
     return g_strdup (_("Show Information"));
 }
 
 static GdkPixbuf *
-baul_information_panel_get_tab_icon (CajaSidebar *sidebar)
+baul_information_panel_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;
 }
 
 static void
-baul_information_panel_is_visible_changed (CajaSidebar *sidebar,
+baul_information_panel_is_visible_changed (BaulSidebar *sidebar,
         gboolean         is_visible)
 {
     /* Do nothing */
 }
 
 static void
-baul_information_panel_iface_init (CajaSidebarIface *iface)
+baul_information_panel_iface_init (BaulSidebarIface *iface)
 {
     iface->get_sidebar_id = baul_information_panel_get_sidebar_id;
     iface->get_tab_label = baul_information_panel_get_tab_label;
@@ -195,7 +195,7 @@ baul_information_panel_iface_init (CajaSidebarIface *iface)
 
 /* initializing the class object by installing the operations we override */
 static void
-baul_information_panel_class_init (CajaInformationPanelClass *klass)
+baul_information_panel_class_init (BaulInformationPanelClass *klass)
 {
     GtkWidgetClass *widget_class;
     GObjectClass *gobject_class;
@@ -214,7 +214,7 @@ baul_information_panel_class_init (CajaInformationPanelClass *klass)
                                 ("location_changed",
                                  G_TYPE_FROM_CLASS (klass),
                                  G_SIGNAL_RUN_LAST,
-                                 G_STRUCT_OFFSET (CajaInformationPanelClass,
+                                 G_STRUCT_OFFSET (BaulInformationPanelClass,
                                          location_changed),
                                  NULL, NULL,
                                  g_cclosure_marshal_VOID__STRING,
@@ -223,7 +223,7 @@ baul_information_panel_class_init (CajaInformationPanelClass *klass)
 
 /* utility routine to allocate the box the holds the command buttons */
 static void
-make_button_box (CajaInformationPanel *information_panel)
+make_button_box (BaulInformationPanel *information_panel)
 {
     information_panel->details->button_box_centerer = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
@@ -242,7 +242,7 @@ make_button_box (CajaInformationPanel *information_panel)
 /* initialize the instance's fields, create the necessary subviews, etc. */
 
 static void
-baul_information_panel_init (CajaInformationPanel *information_panel)
+baul_information_panel_init (BaulInformationPanel *information_panel)
 {
     information_panel->details = baul_information_panel_get_instance_private (information_panel);
 
@@ -293,7 +293,7 @@ baul_information_panel_init (CajaInformationPanel *information_panel)
 static void
 baul_information_panel_finalize (GObject *object)
 {
-    CajaInformationPanel *information_panel;
+    BaulInformationPanel *information_panel;
 
     information_panel = BAUL_INFORMATION_PANEL (object);
 
@@ -329,7 +329,7 @@ reset_background_callback (GtkWidget *menu_item, GtkWidget *information_panel)
 }
 
 static gboolean
-information_panel_has_background (CajaInformationPanel *information_panel)
+information_panel_has_background (BaulInformationPanel *information_panel)
 {
     EelBackground *background;
     gboolean has_background;
@@ -348,7 +348,7 @@ information_panel_has_background (CajaInformationPanel *information_panel)
 
 /* create the context menu */
 static GtkWidget *
-baul_information_panel_create_context_menu (CajaInformationPanel *information_panel)
+baul_information_panel_create_context_menu (BaulInformationPanel *information_panel)
 {
     GtkWidget *menu, *menu_item;
 
@@ -369,7 +369,7 @@ baul_information_panel_create_context_menu (CajaInformationPanel *information_pa
 
 /* set up the default backgrounds and images */
 static void
-baul_information_panel_read_defaults (CajaInformationPanel *information_panel)
+baul_information_panel_read_defaults (BaulInformationPanel *information_panel)
 {
     gboolean background_set;
     char *background_color, *background_image;
@@ -412,7 +412,7 @@ baul_information_panel_theme_changed (GSettings   *settings,
                                       const gchar *key,
                                       gpointer user_data)
 {
-    CajaInformationPanel *information_panel;
+    BaulInformationPanel *information_panel;
 
     information_panel = BAUL_INFORMATION_PANEL (user_data);
     baul_information_panel_read_defaults (information_panel);
@@ -423,7 +423,7 @@ baul_information_panel_theme_changed (GSettings   *settings,
 /* hit testing */
 
 static InformationPanelPart
-hit_test (CajaInformationPanel *information_panel,
+hit_test (BaulInformationPanel *information_panel,
           int x, int y)
 {
     GtkAllocation *allocation;
@@ -476,7 +476,7 @@ uri_is_local_image (const char *uri)
 }
 
 static void
-receive_dropped_uri_list (CajaInformationPanel *information_panel,
+receive_dropped_uri_list (BaulInformationPanel *information_panel,
                           GdkDragAction action,
                           int x, int y,
                           GtkSelectionData *selection_data)
@@ -572,7 +572,7 @@ receive_dropped_uri_list (CajaInformationPanel *information_panel,
 }
 
 static void
-receive_dropped_color (CajaInformationPanel *information_panel,
+receive_dropped_color (BaulInformationPanel *information_panel,
                        GdkDragAction action,
                        int x, int y,
                        GtkSelectionData *selection_data)
@@ -620,7 +620,7 @@ receive_dropped_color (CajaInformationPanel *information_panel,
 /* handle receiving a dropped keyword */
 
 static void
-receive_dropped_keyword (CajaInformationPanel *information_panel,
+receive_dropped_keyword (BaulInformationPanel *information_panel,
                          int x, int y,
                          GtkSelectionData *selection_data)
 {
@@ -637,7 +637,7 @@ baul_information_panel_drag_data_received (GtkWidget *widget, GdkDragContext *co
         GtkSelectionData *selection_data,
         guint info, guint time)
 {
-    CajaInformationPanel *information_panel;
+    BaulInformationPanel *information_panel;
     EelBackground *background;
 
     g_return_if_fail (BAUL_IS_INFORMATION_PANEL (widget));
@@ -679,7 +679,7 @@ baul_information_panel_drag_data_received (GtkWidget *widget, GdkDragContext *co
 static gboolean
 baul_information_panel_press_event (GtkWidget *widget, GdkEventButton *event)
 {
-    CajaInformationPanel *information_panel;
+    BaulInformationPanel *information_panel;
 
     if (gtk_widget_get_window (widget) != event->window)
     {
@@ -701,7 +701,7 @@ baul_information_panel_press_event (GtkWidget *widget, GdkEventButton *event)
 }
 
 static GtkWindow *
-baul_information_panel_get_window (CajaInformationPanel *information_panel)
+baul_information_panel_get_window (BaulInformationPanel *information_panel)
 {
     GtkWidget *result;
 
@@ -713,7 +713,7 @@ baul_information_panel_get_window (CajaInformationPanel *information_panel)
 static void
 command_button_callback (GtkWidget *button, GAppInfo *application)
 {
-    CajaInformationPanel *information_panel;
+    BaulInformationPanel *information_panel;
     GList files;
 
     information_panel = BAUL_INFORMATION_PANEL (g_object_get_data (G_OBJECT (button), "user_data"));
@@ -731,13 +731,13 @@ command_button_callback (GtkWidget *button, GAppInfo *application)
 static void
 metadata_button_callback (GtkWidget *button, const char *command_str)
 {
-    //CajaInformationPanel *self = BAUL_INFORMATION_PANEL (g_object_get_data (G_OBJECT (button), "user_data"));
+    //BaulInformationPanel *self = BAUL_INFORMATION_PANEL (g_object_get_data (G_OBJECT (button), "user_data"));
 }
 
 /* utility routine that allocates the command buttons from the command list */
 
 static void
-add_command_button (CajaInformationPanel *information_panel, GAppInfo *application)
+add_command_button (BaulInformationPanel *information_panel, GAppInfo *application)
 {
     char *temp_str;
     GtkWidget *temp_button, *label;
@@ -770,7 +770,7 @@ add_command_button (CajaInformationPanel *information_panel, GAppInfo *applicati
 /* utility to construct command buttons for the information_panel from the passed in metadata string */
 
 static void
-add_buttons_from_metadata (CajaInformationPanel *information_panel, const char *button_data)
+add_buttons_from_metadata (BaulInformationPanel *information_panel, const char *button_data)
 {
     char **terms;
     char *button_name, *command_string;
@@ -836,7 +836,7 @@ add_buttons_from_metadata (CajaInformationPanel *information_panel, const char *
  * Update the list of program-launching buttons based on the current uri.
  */
 static void
-baul_information_panel_update_buttons (CajaInformationPanel *information_panel)
+baul_information_panel_update_buttons (BaulInformationPanel *information_panel)
 {
     char *button_data;
 
@@ -874,16 +874,16 @@ baul_information_panel_update_buttons (CajaInformationPanel *information_panel)
 }
 
 static void
-baul_information_panel_update_appearance (CajaInformationPanel *information_panel)
+baul_information_panel_update_appearance (BaulInformationPanel *information_panel)
 {
     gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (information_panel)),
                                  GTK_STYLE_CLASS_VIEW);
 }
 
 static void
-background_metadata_changed_callback (CajaInformationPanel *information_panel)
+background_metadata_changed_callback (BaulInformationPanel *information_panel)
 {
-    CajaFileAttributes attributes;
+    BaulFileAttributes attributes;
     gboolean ready;
 
     attributes = baul_mime_actions_get_required_file_attributes ();
@@ -901,12 +901,12 @@ background_metadata_changed_callback (CajaInformationPanel *information_panel)
 /* here is the key routine that populates the information_panel with the appropriate information when the uri changes */
 
 static void
-baul_information_panel_set_uri (CajaInformationPanel *information_panel,
+baul_information_panel_set_uri (BaulInformationPanel *information_panel,
                                 const char* new_uri,
                                 const char* initial_title)
 {
-    CajaFile *file;
-    CajaFileAttributes attributes;
+    BaulFile *file;
+    BaulFileAttributes attributes;
 
     g_return_if_fail (BAUL_IS_INFORMATION_PANEL (information_panel));
     g_return_if_fail (new_uri != NULL);
@@ -948,9 +948,9 @@ baul_information_panel_set_uri (CajaInformationPanel *information_panel,
 }
 
 static void
-title_changed_callback (CajaWindowInfo *window,
+title_changed_callback (BaulWindowInfo *window,
                         char               *new_title,
-                        CajaInformationPanel *panel)
+                        BaulInformationPanel *panel)
 {
     baul_sidebar_title_set_text (panel->details->title,
                                  new_title);
@@ -960,7 +960,7 @@ title_changed_callback (CajaWindowInfo *window,
 static void
 baul_information_panel_style_updated (GtkWidget *widget)
 {
-    CajaInformationPanel *information_panel;
+    BaulInformationPanel *information_panel;
 
     information_panel = BAUL_INFORMATION_PANEL (widget);
 
@@ -968,11 +968,11 @@ baul_information_panel_style_updated (GtkWidget *widget)
 }
 
 static void
-loading_uri_callback (CajaWindowInfo *window,
+loading_uri_callback (BaulWindowInfo *window,
                       char               *uri,
-                      CajaInformationPanel *panel)
+                      BaulInformationPanel *panel)
 {
-    CajaWindowSlotInfo *slot;
+    BaulWindowSlotInfo *slot;
     char *title;
 
     slot = baul_window_info_get_active_slot (window);
@@ -985,8 +985,8 @@ loading_uri_callback (CajaWindowInfo *window,
 }
 
 static void
-selection_changed_callback (CajaWindowInfo *window,
-                            CajaInformationPanel *panel)
+selection_changed_callback (BaulWindowInfo *window,
+                            BaulInformationPanel *panel)
 {
     int selection_count;
     GList *selection;
@@ -998,7 +998,7 @@ selection_changed_callback (CajaWindowInfo *window,
     if (selection_count == 1)
     {
         GFile *selected;
-        CajaFile *file;
+        BaulFile *file;
 
         selection = baul_window_info_get_selection (window);
         selected = selection->data;
@@ -1024,8 +1024,8 @@ selection_changed_callback (CajaWindowInfo *window,
 }
 
 static void
-baul_information_panel_set_parent_window (CajaInformationPanel *panel,
-        CajaWindowInfo *window)
+baul_information_panel_set_parent_window (BaulInformationPanel *panel,
+        BaulWindowInfo *window)
 {
     gpointer slot;
     char *title, *location;
@@ -1050,11 +1050,11 @@ baul_information_panel_set_parent_window (CajaInformationPanel *panel,
     g_free (title);
 }
 
-static CajaSidebar *
-baul_information_panel_create (CajaSidebarProvider *provider,
-                               CajaWindowInfo *window)
+static BaulSidebar *
+baul_information_panel_create (BaulSidebarProvider *provider,
+                               BaulWindowInfo *window)
 {
-    CajaInformationPanel *panel;
+    BaulInformationPanel *panel;
 
     panel = g_object_new (baul_information_panel_get_type (), NULL);
     baul_information_panel_set_parent_window (panel, window);
@@ -1064,18 +1064,18 @@ baul_information_panel_create (CajaSidebarProvider *provider,
 }
 
 static void
-sidebar_provider_iface_init (CajaSidebarProviderIface *iface)
+sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 {
     iface->create = baul_information_panel_create;
 }
 
 static void
-baul_information_panel_provider_init (CajaInformationPanelProvider *sidebar)
+baul_information_panel_provider_init (BaulInformationPanelProvider *sidebar)
 {
 }
 
 static void
-baul_information_panel_provider_class_init (CajaInformationPanelProviderClass *class)
+baul_information_panel_provider_class_init (BaulInformationPanelProviderClass *class)
 {
 }
 

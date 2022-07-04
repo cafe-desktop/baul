@@ -1,6 +1,6 @@
 /*
  *  baul-column.h - Info columns exported by
- *                      CajaColumnProvider objects.
+ *                      BaulColumnProvider objects.
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -31,33 +31,33 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_COLUMN            (baul_column_get_type())
-#define BAUL_COLUMN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN, CajaColumn))
-#define BAUL_COLUMN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_COLUMN, CajaColumnClass))
+#define BAUL_COLUMN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN, BaulColumn))
+#define BAUL_COLUMN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_COLUMN, BaulColumnClass))
 #define BAUL_INFO_IS_COLUMN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_COLUMN))
 #define BAUL_INFO_IS_COLUMN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), BAUL_TYPE_COLUMN))
-#define BAUL_COLUMN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_COLUMN, CajaColumnClass))
+#define BAUL_COLUMN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_COLUMN, BaulColumnClass))
 
-typedef struct _CajaColumn        CajaColumn;
-typedef struct _CajaColumnDetails CajaColumnDetails;
-typedef struct _CajaColumnClass   CajaColumnClass;
+typedef struct _BaulColumn        BaulColumn;
+typedef struct _BaulColumnDetails BaulColumnDetails;
+typedef struct _BaulColumnClass   BaulColumnClass;
 
-struct _CajaColumn {
+struct _BaulColumn {
     GObject parent;
 
-    CajaColumnDetails *details;
+    BaulColumnDetails *details;
 };
 
-struct _CajaColumnClass {
+struct _BaulColumnClass {
     GObjectClass parent;
 };
 
 GType       baul_column_get_type  (void);
-CajaColumn *baul_column_new       (const char *name,
+BaulColumn *baul_column_new       (const char *name,
                                    const char *attribute,
                                    const char *label,
                                    const char *description);
 
-/* CajaColumn has the following properties:
+/* BaulColumn has the following properties:
  *   name (string)        - the identifier for the column
  *   attribute (string)   - the file attribute to be displayed in the
  *                          column

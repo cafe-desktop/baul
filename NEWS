@@ -25,9 +25,9 @@
   * baul-extensions: allows the translation of copyright
   * baul-window-slot: "folder-saved-search" icon instead "text-x-generic"
   * Let some strings be translatable
-  * add document for CajaWidgetViewProvider api
+  * add document for BaulWidgetViewProvider api
   * add new interface
-  * add CajaWidgetViewProvider docs
+  * add BaulWidgetViewProvider docs
   * add new extension for widget view
   * hide menu and toolbutton when view is only one
   * Set FmWidgetView is single view.
@@ -44,7 +44,7 @@
   * update translations
   * baul-progress-info: use NotifyNotification instead of GNotification
   * Copy file and keep timestamps of original file including remotes
-  * Fix Caja crashes on file move in Korean
+  * Fix Baul crashes on file move in Korean
   * Support querying files by contained text
   * use show icons option in views tab
   * Add preference option to hide icons in list view.
@@ -176,7 +176,7 @@
   * Support querying files by modification time and size
   * Avoid deprecated g_type_class_add_private
   * Update copyright to 2019
-  * CajaApplication: avoid deprecated 'g_type_class_add_private'
+  * BaulApplication: avoid deprecated 'g_type_class_add_private'
   * baul-menu: avoid deprecated 'g_type_class_add_private'
   * [eel][libegg] Use G_DEFINE_TYPE_WITH_PRIVATE macro
   * configure.ac: Add check for PKG_CONFIG being set.
@@ -211,14 +211,14 @@
   * update translations
   * Fix case-insensitive comparison in running_in_mate
   * monitor: fix crash on unmounting remote filesystems
-  * CajaFile: fix crash in modify_link_hash_table
+  * BaulFile: fix crash in modify_link_hash_table
   * connect-server-dialog: Respect password save setting
   * properties-window: fix checking inconsistent state
   * monitor: watch for removal of non-native mounts on GVolumeMonitor
   * Add 'Configurable' interface and add support to baul-file-management-properties
   * baul-application.c: Remove redundant empty lines
   * Update baul manpage with info about "--force-desktop" option
-  * Caja-icon-info: Optimize icon lookups by GIcon.
+  * Baul-icon-info: Optimize icon lookups by GIcon.
   * fm-directory-view.c:  Decrease minimum update interval.
   * Remove dead code, fix a memory leak
   * add option to open multiple uri in tabs at startup
@@ -439,13 +439,13 @@
   * Add support for back/forward mouse buttons for directory navigation
   * Add notification when ejected drives are safe to unplug (and require
     libnotify at build time)
-  * Add --force-desktop command line option to make Caja always manage
+  * Add --force-desktop command line option to make Baul always manage
     the desktop
   * Add ability to get feedback from Orca when additional icons are
     selected/deselected
   * Drop metadata converting tool
   * Fix crossfade issues with recent GTK+ versions
-  * Fix more graphics issues to allow Caja to use background for directory
+  * Fix more graphics issues to allow Baul to use background for directory
     windows
   * Fix some more GTK+ deprecations and runtime warnings
   * Schema: some fixes and cleanups
@@ -462,7 +462,7 @@
   * Show "Open with" menu item and "Open with" tab in properties window
     for .desktop and .theme files
   * Fix cursor refresh issues on folder change in single click mode
-  * Fix runtime warnings on window closing and Caja exit
+  * Fix runtime warnings on window closing and Baul exit
   * GTK+3: fix mousewheel scrolling in compact view
   * GTK+3: fix visual issues when renaming files
   * GTK+3: force X11 backend

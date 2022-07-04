@@ -25,7 +25,7 @@
 #ifndef BAUL_METADATA_H
 #define BAUL_METADATA_H
 
-/* Keys for getting/setting Caja metadata. All metadata used in Caja
+/* Keys for getting/setting Baul metadata. All metadata used in Baul
  * should define its key here, so we can keep track of the whole set easily.
  * Any updates here needs to be added in baul-metadata.c too.
  */

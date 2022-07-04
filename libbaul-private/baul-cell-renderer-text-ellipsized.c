@@ -26,11 +26,11 @@
 
 #include "baul-cell-renderer-text-ellipsized.h"
 
-G_DEFINE_TYPE (CajaCellRendererTextEllipsized, baul_cell_renderer_text_ellipsized,
+G_DEFINE_TYPE (BaulCellRendererTextEllipsized, baul_cell_renderer_text_ellipsized,
                GTK_TYPE_CELL_RENDERER_TEXT);
 
 static void
-baul_cell_renderer_text_ellipsized_init (CajaCellRendererTextEllipsized *cell)
+baul_cell_renderer_text_ellipsized_init (BaulCellRendererTextEllipsized *cell)
 {
     g_object_set (cell,
                   "ellipsize", PANGO_ELLIPSIZE_END,
@@ -60,7 +60,7 @@ baul_cell_renderer_text_ellipsized_get_preferred_width (GtkCellRenderer *cell,
 }
 
 static void
-baul_cell_renderer_text_ellipsized_class_init (CajaCellRendererTextEllipsizedClass *klass)
+baul_cell_renderer_text_ellipsized_class_init (BaulCellRendererTextEllipsizedClass *klass)
 {
     GtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (klass);
     cell_class->get_preferred_width = baul_cell_renderer_text_ellipsized_get_preferred_width;

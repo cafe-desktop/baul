@@ -1,5 +1,5 @@
 /*
- *  baul-extension-types.c - Type definitions for Caja extensions
+ *  baul-extension-types.c - Type definitions for Baul extensions
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -48,7 +48,7 @@ baul_operation_result_get_type (void)
             { 0, NULL, NULL }
         };
 
-        type = g_enum_register_static ("CajaOperationResult",
+        type = g_enum_register_static ("BaulOperationResult",
                                        values);
     }
 

@@ -30,29 +30,29 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_TRASH_BAR         (baul_trash_bar_get_type ())
-#define BAUL_TRASH_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_TRASH_BAR, CajaTrashBar))
-#define BAUL_TRASH_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_TRASH_BAR, CajaTrashBarClass))
+#define BAUL_TRASH_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_TRASH_BAR, BaulTrashBar))
+#define BAUL_TRASH_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_TRASH_BAR, BaulTrashBarClass))
 #define BAUL_IS_TRASH_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_TRASH_BAR))
 #define BAUL_IS_TRASH_BAR_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_TRASH_BAR))
-#define BAUL_TRASH_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_TRASH_BAR, CajaTrashBarClass))
+#define BAUL_TRASH_BAR_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_TRASH_BAR, BaulTrashBarClass))
 
-typedef struct _CajaTrashBarPrivate CajaTrashBarPrivate;
+typedef struct _BaulTrashBarPrivate BaulTrashBarPrivate;
 
 typedef struct
 {
         GtkBox	box;
-        CajaTrashBarPrivate *priv;
-} CajaTrashBar;
+        BaulTrashBarPrivate *priv;
+} BaulTrashBar;
 
 typedef struct
 {
 GtkBoxClass	    parent_class;
 
-} CajaTrashBarClass;
+} BaulTrashBarClass;
 
 GType		 baul_trash_bar_get_type	(void) G_GNUC_CONST;
 
-GtkWidget       *baul_trash_bar_new         (CajaWindow *window);
+GtkWidget       *baul_trash_bar_new         (BaulWindow *window);
 
 G_END_DECLS
 

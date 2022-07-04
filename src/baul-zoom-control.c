@@ -1,17 +1,17 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000 Eazel, Inc.
  * Copyright (C) 2004 Red Hat, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -58,16 +58,16 @@ enum
     LAST_SIGNAL
 };
 
-struct _CajaZoomControlPrivate
+struct _BaulZoomControlPrivate
 {
     GtkWidget *zoom_in;
     GtkWidget *zoom_out;
     GtkWidget *zoom_label;
     GtkWidget *zoom_button;
 
-    CajaZoomLevel zoom_level;
-    CajaZoomLevel min_zoom_level;
-    CajaZoomLevel max_zoom_level;
+    BaulZoomLevel zoom_level;
+    BaulZoomLevel min_zoom_level;
+    BaulZoomLevel max_zoom_level;
     gboolean has_min_zoom_level;
     gboolean has_max_zoom_level;
     GList *preferred_zoom_levels;
@@ -101,7 +101,7 @@ static const char * const baul_zoom_control_accessible_action_descriptions[] =
     N_("Use the normal view size")
 };
 
-static GtkMenu *create_zoom_menu (CajaZoomControl *zoom_control);
+static GtkMenu *create_zoom_menu (BaulZoomControl *zoom_control);
 
 static GType baul_zoom_control_accessible_get_type (void);
 
@@ -110,7 +110,7 @@ static GType baul_zoom_control_accessible_get_type (void);
 
 #define NUM_ACTIONS ((int)G_N_ELEMENTS (baul_zoom_control_accessible_action_names))
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaZoomControl, baul_zoom_control, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulZoomControl, baul_zoom_control, GTK_TYPE_BOX);
 
 static void
 baul_zoom_control_finalize (GObject *object)
@@ -121,13 +121,13 @@ baul_zoom_control_finalize (GObject *object)
 }
 
 static void
-zoom_button_clicked (GtkButton *button, CajaZoomControl *zoom_control)
+zoom_button_clicked (GtkButton *button, BaulZoomControl *zoom_control)
 {
     g_signal_emit (zoom_control, signals[ZOOM_TO_DEFAULT], 0);
 }
 
 static void
-zoom_popup_menu_show (GtkWidget *widget, GdkEventButton *event, CajaZoomControl *zoom_control)
+zoom_popup_menu_show (GtkWidget *widget, GdkEventButton *event, BaulZoomControl *zoom_control)
 {
     GtkMenu *menu;
 
@@ -140,7 +140,7 @@ zoom_popup_menu_show (GtkWidget *widget, GdkEventButton *event, CajaZoomControl 
 }
 
 static void
-zoom_popup_menu (GtkWidget *widget, CajaZoomControl *zoom_control)
+zoom_popup_menu (GtkWidget *widget, BaulZoomControl *zoom_control)
 {
     GtkMenu *menu;
 
@@ -158,7 +158,7 @@ zoom_popup_menu (GtkWidget *widget, CajaZoomControl *zoom_control)
 static gboolean
 baul_zoom_control_button_press_event (GtkWidget *widget,
                                       GdkEventButton *event,
-                                      CajaZoomControl *zoom_control)
+                                      BaulZoomControl *zoom_control)
 {
     if (event->type != GDK_BUTTON_PRESS)
     {
@@ -184,7 +184,7 @@ baul_zoom_control_button_press_event (GtkWidget *widget,
 
 static void
 zoom_out_clicked (GtkButton *button,
-                  CajaZoomControl *zoom_control)
+                  BaulZoomControl *zoom_control)
 {
     if (baul_zoom_control_can_zoom_out (zoom_control))
     {
@@ -194,7 +194,7 @@ zoom_out_clicked (GtkButton *button,
 
 static void
 zoom_in_clicked (GtkButton *button,
-                 CajaZoomControl *zoom_control)
+                 BaulZoomControl *zoom_control)
 {
     if (baul_zoom_control_can_zoom_in (zoom_control))
     {
@@ -203,7 +203,7 @@ zoom_in_clicked (GtkButton *button,
 }
 
 static void
-set_label_size (CajaZoomControl *zoom_control)
+set_label_size (BaulZoomControl *zoom_control)
 {
     const char *text;
     PangoLayout *layout;
@@ -228,7 +228,7 @@ label_style_set_callback (GtkWidget *label,
 }
 
 static void
-baul_zoom_control_init (CajaZoomControl *zoom_control)
+baul_zoom_control_init (BaulZoomControl *zoom_control)
 {
     GtkWidget *image;
     int i;
@@ -331,7 +331,7 @@ baul_zoom_control_new (void)
 }
 
 static void
-baul_zoom_control_redraw (CajaZoomControl *zoom_control)
+baul_zoom_control_redraw (BaulZoomControl *zoom_control)
 {
     int percent;
     char *num_str;
@@ -352,8 +352,8 @@ baul_zoom_control_redraw (CajaZoomControl *zoom_control)
 static void
 zoom_menu_callback (GtkMenuItem *item, gpointer callback_data)
 {
-    CajaZoomLevel zoom_level;
-    CajaZoomControl *zoom_control;
+    BaulZoomLevel zoom_level;
+    BaulZoomControl *zoom_control;
     gboolean can_zoom;
 
     zoom_control = BAUL_ZOOM_CONTROL (callback_data);
@@ -370,7 +370,7 @@ zoom_menu_callback (GtkMenuItem *item, gpointer callback_data)
         return;
     }
 
-    zoom_level = (CajaZoomLevel) GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "zoom_level"));
+    zoom_level = (BaulZoomLevel) GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "zoom_level"));
 
     /* Assume we can zoom and then check whether we're right. */
     can_zoom = TRUE;
@@ -389,8 +389,8 @@ zoom_menu_callback (GtkMenuItem *item, gpointer callback_data)
 }
 
 static GtkRadioMenuItem *
-create_zoom_menu_item (CajaZoomControl *zoom_control, GtkMenu *menu,
-                       CajaZoomLevel zoom_level,
+create_zoom_menu_item (BaulZoomControl *zoom_control, GtkMenu *menu,
+                       BaulZoomLevel zoom_level,
                        GtkRadioMenuItem *previous_radio_item)
 {
     GtkWidget *menu_item;
@@ -428,7 +428,7 @@ create_zoom_menu_item (CajaZoomControl *zoom_control, GtkMenu *menu,
 }
 
 static GtkMenu *
-create_zoom_menu (CajaZoomControl *zoom_control)
+create_zoom_menu (BaulZoomControl *zoom_control)
 {
     GtkMenu *menu;
     GtkRadioMenuItem *previous_item;
@@ -447,7 +447,7 @@ create_zoom_menu (CajaZoomControl *zoom_control)
 }
 
 static void
-baul_zoom_control_change_value (CajaZoomControl *zoom_control,
+baul_zoom_control_change_value (BaulZoomControl *zoom_control,
                                 GtkScrollType scroll)
 {
     switch (scroll)
@@ -465,22 +465,22 @@ baul_zoom_control_change_value (CajaZoomControl *zoom_control,
         }
         break;
     default :
-        g_warning ("Invalid scroll type %d for CajaZoomControl:change_value", scroll);
+        g_warning ("Invalid scroll type %d for BaulZoomControl:change_value", scroll);
     }
 }
 
 void
-baul_zoom_control_set_zoom_level (CajaZoomControl *zoom_control,
-                                  CajaZoomLevel zoom_level)
+baul_zoom_control_set_zoom_level (BaulZoomControl *zoom_control,
+                                  BaulZoomLevel zoom_level)
 {
     zoom_control->details->zoom_level = zoom_level;
     baul_zoom_control_redraw (zoom_control);
 }
 
 void
-baul_zoom_control_set_parameters (CajaZoomControl *zoom_control,
-                                  CajaZoomLevel min_zoom_level,
-                                  CajaZoomLevel max_zoom_level,
+baul_zoom_control_set_parameters (BaulZoomControl *zoom_control,
+                                  BaulZoomLevel min_zoom_level,
+                                  BaulZoomLevel max_zoom_level,
                                   gboolean has_min_zoom_level,
                                   gboolean has_max_zoom_level,
                                   GList *zoom_levels)
@@ -498,38 +498,38 @@ baul_zoom_control_set_parameters (CajaZoomControl *zoom_control,
     baul_zoom_control_redraw (zoom_control);
 }
 
-CajaZoomLevel
-baul_zoom_control_get_zoom_level (CajaZoomControl *zoom_control)
+BaulZoomLevel
+baul_zoom_control_get_zoom_level (BaulZoomControl *zoom_control)
 {
     return zoom_control->details->zoom_level;
 }
 
-CajaZoomLevel
-baul_zoom_control_get_min_zoom_level (CajaZoomControl *zoom_control)
+BaulZoomLevel
+baul_zoom_control_get_min_zoom_level (BaulZoomControl *zoom_control)
 {
     return zoom_control->details->min_zoom_level;
 }
 
-CajaZoomLevel
-baul_zoom_control_get_max_zoom_level (CajaZoomControl *zoom_control)
+BaulZoomLevel
+baul_zoom_control_get_max_zoom_level (BaulZoomControl *zoom_control)
 {
     return zoom_control->details->max_zoom_level;
 }
 
 gboolean
-baul_zoom_control_has_min_zoom_level (CajaZoomControl *zoom_control)
+baul_zoom_control_has_min_zoom_level (BaulZoomControl *zoom_control)
 {
     return zoom_control->details->has_min_zoom_level;
 }
 
 gboolean
-baul_zoom_control_has_max_zoom_level (CajaZoomControl *zoom_control)
+baul_zoom_control_has_max_zoom_level (BaulZoomControl *zoom_control)
 {
     return zoom_control->details->has_max_zoom_level;
 }
 
 gboolean
-baul_zoom_control_can_zoom_in (CajaZoomControl *zoom_control)
+baul_zoom_control_can_zoom_in (BaulZoomControl *zoom_control)
 {
     return !zoom_control->details->has_max_zoom_level ||
            (zoom_control->details->zoom_level
@@ -537,7 +537,7 @@ baul_zoom_control_can_zoom_in (CajaZoomControl *zoom_control)
 }
 
 gboolean
-baul_zoom_control_can_zoom_out (CajaZoomControl *zoom_control)
+baul_zoom_control_can_zoom_out (BaulZoomControl *zoom_control)
 {
     return !zoom_control->details->has_min_zoom_level ||
            (zoom_control->details->zoom_level
@@ -547,7 +547,7 @@ baul_zoom_control_can_zoom_out (CajaZoomControl *zoom_control)
 static gboolean
 baul_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
 {
-    CajaZoomControl *zoom_control;
+    BaulZoomControl *zoom_control;
 
     zoom_control = BAUL_ZOOM_CONTROL (widget);
 
@@ -579,7 +579,7 @@ baul_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
 
 
 static void
-baul_zoom_control_class_init (CajaZoomControlClass *class)
+baul_zoom_control_class_init (BaulZoomControlClass *class)
 {
     GtkWidgetClass *widget_class;
     GtkBindingSet *binding_set;
@@ -600,7 +600,7 @@ baul_zoom_control_class_init (CajaZoomControlClass *class)
         g_signal_new ("zoom_in",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaZoomControlClass,
+                      G_STRUCT_OFFSET (BaulZoomControlClass,
                                        zoom_in),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
@@ -610,7 +610,7 @@ baul_zoom_control_class_init (CajaZoomControlClass *class)
         g_signal_new ("zoom_out",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaZoomControlClass,
+                      G_STRUCT_OFFSET (BaulZoomControlClass,
                                        zoom_out),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
@@ -620,7 +620,7 @@ baul_zoom_control_class_init (CajaZoomControlClass *class)
         g_signal_new ("zoom_to_level",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaZoomControlClass,
+                      G_STRUCT_OFFSET (BaulZoomControlClass,
                                        zoom_to_level),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__INT,
@@ -632,7 +632,7 @@ baul_zoom_control_class_init (CajaZoomControlClass *class)
         g_signal_new ("zoom_to_default",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-                      G_STRUCT_OFFSET (CajaZoomControlClass,
+                      G_STRUCT_OFFSET (BaulZoomControlClass,
                                        zoom_to_default),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
@@ -642,7 +642,7 @@ baul_zoom_control_class_init (CajaZoomControlClass *class)
         g_signal_new ("change_value",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-                      G_STRUCT_OFFSET (CajaZoomControlClass,
+                      G_STRUCT_OFFSET (BaulZoomControlClass,
                                        change_value),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__ENUM,
@@ -735,7 +735,7 @@ static void
 baul_zoom_control_accessible_get_current_value (AtkValue *accessible,
         GValue *value)
 {
-    CajaZoomControl *control;
+    BaulZoomControl *control;
 
     g_value_init (value, G_TYPE_INT);
 
@@ -753,7 +753,7 @@ static void
 baul_zoom_control_accessible_get_maximum_value (AtkValue *accessible,
         GValue *value)
 {
-    CajaZoomControl *control;
+    BaulZoomControl *control;
 
     g_value_init (value, G_TYPE_INT);
 
@@ -771,7 +771,7 @@ static void
 baul_zoom_control_accessible_get_minimum_value (AtkValue *accessible,
         GValue *value)
 {
-    CajaZoomControl *control;
+    BaulZoomControl *control;
 
     g_value_init (value, G_TYPE_INT);
 
@@ -785,11 +785,11 @@ baul_zoom_control_accessible_get_minimum_value (AtkValue *accessible,
     g_value_set_int (value, control->details->min_zoom_level);
 }
 
-static CajaZoomLevel
-nearest_preferred (CajaZoomControl *zoom_control, CajaZoomLevel value)
+static BaulZoomLevel
+nearest_preferred (BaulZoomControl *zoom_control, BaulZoomLevel value)
 {
-    CajaZoomLevel last_value;
-    CajaZoomLevel current_value;
+    BaulZoomLevel last_value;
+    BaulZoomLevel current_value;
     GList *l;
 
     if (!zoom_control->details->preferred_zoom_levels)
@@ -822,8 +822,8 @@ static gboolean
 baul_zoom_control_accessible_set_current_value (AtkValue *accessible,
         const GValue *value)
 {
-    CajaZoomControl *control;
-    CajaZoomLevel zoom;
+    BaulZoomControl *control;
+    BaulZoomLevel zoom;
 
     control = BAUL_ZOOM_CONTROL (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
     if (!control)
@@ -868,20 +868,20 @@ baul_zoom_control_accessible_initialize (AtkObject *accessible,
     atk_object_set_role (accessible, ATK_ROLE_DIAL);
 }
 
-typedef struct _CajaZoomControlAccessible CajaZoomControlAccessible;
-typedef struct _CajaZoomControlAccessibleClass CajaZoomControlAccessibleClass;
+typedef struct _BaulZoomControlAccessible BaulZoomControlAccessible;
+typedef struct _BaulZoomControlAccessibleClass BaulZoomControlAccessibleClass;
 
-struct _CajaZoomControlAccessible
+struct _BaulZoomControlAccessible
 {
     GtkContainerAccessible parent;
 };
 
-struct _CajaZoomControlAccessibleClass
+struct _BaulZoomControlAccessibleClass
 {
     GtkContainerAccessibleClass parent_class;
 };
 
-G_DEFINE_TYPE_WITH_CODE (CajaZoomControlAccessible,
+G_DEFINE_TYPE_WITH_CODE (BaulZoomControlAccessible,
                          baul_zoom_control_accessible,
                          GTK_TYPE_CONTAINER_ACCESSIBLE,
                          G_IMPLEMENT_INTERFACE (ATK_TYPE_ACTION,
@@ -889,7 +889,7 @@ G_DEFINE_TYPE_WITH_CODE (CajaZoomControlAccessible,
                          G_IMPLEMENT_INTERFACE (ATK_TYPE_VALUE,
                                                 baul_zoom_control_accessible_value_interface_init));
 static void
-baul_zoom_control_accessible_class_init (CajaZoomControlAccessibleClass *klass)
+baul_zoom_control_accessible_class_init (BaulZoomControlAccessibleClass *klass)
 {
     AtkObjectClass *atk_class = ATK_OBJECT_CLASS (klass);
     accessible_parent_class = g_type_class_peek_parent (klass);
@@ -900,12 +900,12 @@ baul_zoom_control_accessible_class_init (CajaZoomControlAccessibleClass *klass)
 }
 
 static void
-baul_zoom_control_accessible_init (CajaZoomControlAccessible *accessible)
+baul_zoom_control_accessible_init (BaulZoomControlAccessible *accessible)
 {
 }
 
 void
-baul_zoom_control_set_active_appearance (CajaZoomControl *zoom_control, gboolean is_active)
+baul_zoom_control_set_active_appearance (BaulZoomControl *zoom_control, gboolean is_active)
 {
     gtk_widget_set_sensitive (gtk_bin_get_child (GTK_BIN (zoom_control->details->zoom_in)), is_active);
     gtk_widget_set_sensitive (gtk_bin_get_child (GTK_BIN (zoom_control->details->zoom_out)), is_active);

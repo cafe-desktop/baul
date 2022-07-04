@@ -296,8 +296,8 @@ msgstr "Diverkañ"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -305,7 +305,7 @@ msgstr "Ardoer restroù evit an endro burev MATE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -313,8 +313,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -3148,29 +3148,29 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Kuitaat a ray Caja pa vo distrujet ar prenestr diwezhañ."
+msgid "Baul will exit when last window destroyed."
+msgstr "Kuitaat a ray Baul pa vo distrujet ar prenestr diwezhañ."
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
-"Gweredekaat a ra emzalc'h klasel Caja : an holl brenestroù a dalv da verdeiñ"
+"Gweredekaat a ra emzalc'h klasel Baul : an holl brenestroù a dalv da verdeiñ"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
-"Mar lakaet da wir e vo holl brenestroù Caja prenestroù merdeiñ. An doare ma "
-"oa emzalc'h Caja kent an handelv 2.6 eo ha tud zo a blij dezho gwell an "
+"Mar lakaet da wir e vo holl brenestroù Baul prenestroù merdeiñ. An doare ma "
+"oa emzalc'h Baul kent an handelv 2.6 eo ha tud zo a blij dezho gwell an "
 "emzalc'h-mañ."
 
 #: libbaul-private/org.mate.baul.gschema.xml:96
@@ -3179,11 +3179,11 @@ msgstr "Arver bepred enankad al lec'hiadur e-lec'h varren an treugoù"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
 "Mar lakaet da wir e vo arveret un enankad testennel gant prenestr merdeiñ "
-"Caja evit ar varrenn lec'hiañ e lec'h barrenn an treugoù."
+"Baul evit ar varrenn lec'hiañ e lec'h barrenn an treugoù."
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
@@ -3193,10 +3193,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
-"Mar lakaet da wir e c'houlennoù Caja diganeoc'h ar c'hadarnaat mar klaskot "
+"Mar lakaet da wir e c'houlennoù Baul diganeoc'h ar c'hadarnaat mar klaskot "
 "dilemel restroù pe c'houllonderiñ al lastez."
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
@@ -3205,7 +3205,7 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
@@ -3215,11 +3215,11 @@ msgstr "Menegiñ a ra hag-eñ eo ret gweredekaat an dilamadur diouzhtu"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"Mar arventennet da wir ez eus ur mollad gant Caja hag a ro an aotre ddeoc'h "
+"Mar arventennet da wir ez eus ur mollad gant Baul hag a ro an aotre ddeoc'h "
 "da diverkañ ur restr diouzhtu war al lec'h, e-lec'h he c'has d'al lastez. "
 "Arvarus e c'hall bezañ ar mollad-mañ, bezit evezhiek."
 
@@ -3297,19 +3297,19 @@ msgid ""
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
+msgid "Use extra mouse button events in Baul' browser window"
 msgstr ""
 "Arverañ degouezhioù un afell ouzhpenn eus al logodenn en ur prenestr merdeiñ"
-" eus Caja"
+" eus Baul"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "Evit an arveriaded o deus ul logodenn gant afelloù \"War-raok\" ha \"War-"
 "Gil\" ez erspizo an alc'hwez-mañ mar bez sevenet ur gwezhiadur bennak "
-"e-barzh Caja pa vez pouezet war unan pe eben."
+"e-barzh Baul pa vez pouezet war unan pe eben."
 
 #: libbaul-private/org.mate.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
@@ -3403,10 +3403,10 @@ msgstr "Diskouez an aotreoù kempleshoc'h e boestad emziviz perzhioù ar restr"
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"Mar lakaet da wir e ro Caja tro deoc'h da gemmañ ha skrammañ aotreoù evit ar"
+"Mar lakaet da wir e ro Baul tro deoc'h da gemmañ ha skrammañ aotreoù evit ar"
 " restroù gant un mod unix, o tizhout dibarzhioù kempleshoc'h."
 
 #: libbaul-private/org.mate.baul.gschema.xml:180
@@ -3415,10 +3415,10 @@ msgstr "Diskouez an teuliadoù da gentañ e-barzh ar prenistri"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Mar lakaet da wir e tiskouez Caja an teuliadoù a-raok skrammañ ar restroù "
+"Mar lakaet da wir e tiskouez Baul an teuliadoù a-raok skrammañ ar restroù "
 "gant ar gwelioù dre arlunioù ha dre roll."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3451,15 +3451,15 @@ msgstr ""
 "war zigreskaat e-lec'h war greskaat."
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja a arver teuliad personel an arveriaded evel burev"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul a arver teuliad personel an arveriaded evel burev"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Mar lakaet da wir ez arvero Caja teuliad personel an arveriad evel ma oa ar "
+"Mar lakaet da wir ez arvero Baul teuliad personel an arveriad evel ma oa ar "
 "burev. Mar diwir ez arvero ~/Burev evel burev."
 
 #: libbaul-private/org.mate.baul.gschema.xml:203
@@ -3603,7 +3603,7 @@ msgid "Whether to show desktop notifications"
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3751,10 +3751,10 @@ msgstr "Diskouez an teuliadoù e gwezennad ar banell gostez nemetken"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Mar lakaet da wir e tiskouezo Caja an teuliadoù hepken war banell gostez ar "
+"Mar lakaet da wir e tiskouezo Baul an teuliadoù hepken war banell gostez ar "
 "gwezennad. A-henn-all e tiskouezo an teuliadoù hag ar restroù war un dro."
 
 #: libbaul-private/org.mate.baul.gschema.xml:375
@@ -3979,10 +3979,10 @@ msgstr "Menegiñ a ra hag-eñ eo ret sevel ar media ent emgefreek"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
-"Mar arventennet da wir e vo savet gant Caja ar media ent emgefreek (evel "
+"Mar arventennet da wir e vo savet gant Baul ar media ent emgefreek (evel "
 "kantennoù kalet heweladus gant an arveriaded pe vedia dilamadus) gant al "
 "loc'hadur hag ensoc'hadur ar media."
 
@@ -3994,12 +3994,12 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
-"Mar arventennet da wir e vo digoret ent emgefreek un teuliad gant Caja pa "
+"Mar arventennet da wir e vo digoret ent emgefreek un teuliad gant Baul pa "
 "vez emsavet ar media. Arloet e vez an dra-mañ d'ar media ma n'eo ket bet "
 "dinoet un endalc'had e rizh x-content/* ; evit ar media gant un endalc'had e"
 " rizh x-content/* bet dinoet e vo kemeret gwezhiadur kefluniadus an arveriad"
@@ -4012,10 +4012,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
-"Mar lakaet da wir ne zelusko biken Caja na emloc'ho goulevioù pa vo "
+"Mar lakaet da wir ne zelusko biken Baul na emloc'ho goulevioù pa vo "
 "ensoc'het ur mediom."
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
@@ -4127,29 +4127,29 @@ msgstr "Diskouez dibarzhioù ardeiñ an estez"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Ne oa ket tu da Caja da grouiñ an teuliad ret \"%s\"."
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Ne oa ket tu da Baul da grouiñ an teuliad ret \"%s\"."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"A-raok erounit Caja, krouit an teuliad da heul, pe roit an aotreoù a-zere "
-"evit ma vefe Caja barrek d'e grouiñ."
+"A-raok erounit Baul, krouit an teuliad da heul, pe roit an aotreoù a-zere "
+"evit ma vefe Baul barrek d'e grouiñ."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Ne oa ket tu da Caja da grouiñ an teuliadoù ret-mañ : %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Ne oa ket tu da Baul da grouiñ an teuliadoù ret-mañ : %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"A-raok erounit Caja, krouit an teuliadoù-mañ, pe roit an aotreoù a-zere evit"
-" ma vefe Caja barrek d'o c'hrouiñ."
+"A-raok erounit Baul, krouit an teuliadoù-mañ, pe roit an aotreoù a-zere evit"
+" ma vefe Baul barrek d'o c'hrouiñ."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -4212,8 +4212,8 @@ msgid "Open a browser window."
 msgstr "Digeriñ ur prenestr merdeiñ."
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Kuitaat Caja."
+msgid "Quit Baul."
+msgstr "Kuitaat Baul."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -5237,8 +5237,8 @@ msgid "New _Window"
 msgstr "_Prenestr nevez"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "Digeriñ ur prenestr all eus Caja evit ar chomlec'h diskouezet"
+msgid "Open another Baul window for the displayed location"
+msgstr "Digeriñ ur prenestr all eus Baul evit ar chomlec'h diskouezet"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -6062,8 +6062,8 @@ msgid "View of the current folder"
 msgstr "Ur gwel eus an teuliad bremanel"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja n'en deus gweler staliet ebet gouest da skrammañ an teuliad."
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul n'en deus gweler staliet ebet gouest da skrammañ an teuliad."
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -6080,12 +6080,12 @@ msgstr "Gwiriit ar reizhkrivañ mar plij, ha klaskit en-dro."
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "Caja n'hall ket dornata al lec'hiadurioù \"%s\"."
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "Baul n'hall ket dornata al lec'hiadurioù \"%s\"."
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Caja n'hall ket dornata al lec'hiadurioù ar seurt-se."
+msgid "Baul cannot handle this kind of location."
+msgstr "Baul n'hall ket dornata al lec'hiadurioù ar seurt-se."
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -6121,31 +6121,31 @@ msgstr "Mont gant ar sined-mañ d'al lec'hiadur roet"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Ur meziant digor eo Caja ; dasparzhet pe/ha daskemmet e vez dindan termenoù "
+"Ur meziant digor eo Baul ; dasparzhet pe/ha daskemmet e vez dindan termenoù "
 "al Lañvaz Foran Hollek GNU evel ma'z eo bet embannet gant Diazezadenn ar "
 "Meziantoù Digor ; da lâret eo handelv 2 eus al lañvaz pe (evel ma plij "
 "deoc'h) ne vern pe handelv nevesoc'h."
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Dasparzhet eo Caja gant ar spi e vo talvoudus met GANT GWARANT EBET ; hep ar"
+"Dasparzhet eo Baul gant ar spi e vo talvoudus met GANT GWARANT EBET ; hep ar"
 " gwarant enpleg a-fet TALVOUDEGEZH KENWERZHEL pe VARREGEZH EVIT UR PAL "
 "PERSONEL. Taolit ur sell war Lañvaz Foran Hollek GNU evit gouzout hiroc'h."
 
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "Moarvat hoc'h eus bet un eilad eus al Lañvaz Foran Hollek GNU gant Brasero ;"
@@ -6153,20 +6153,20 @@ msgstr ""
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA"
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
-"Gant Caja e vez kempennet restroù ha teuliadoù, war un urzhiataer pe "
+"Gant Baul e vez kempennet restroù ha teuliadoù, war un urzhiataer pe "
 "enlinenn."
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -6210,8 +6210,8 @@ msgid "Prefere_nces"
 msgstr "_Gwellvezioù"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Kemmañ gwellvezioù Caja"
+msgid "Edit Baul preferences"
+msgstr "Kemmañ gwellvezioù Baul"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -6238,16 +6238,16 @@ msgid "_Contents"
 msgstr "Endal_c'hadoù"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Skrammañ skoazell Caja"
+msgid "Display Baul help"
+msgstr "Skrammañ skoazell Baul"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "_Diwar-benn"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Diskouez an titouroù diwar-benn krouerien Caja"
+msgid "Display credits for the creators of Baul"
+msgstr "Diskouez an titouroù diwar-benn krouerien Baul"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6658,7 +6658,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6676,7 +6676,7 @@ msgid ""
 msgstr ""
 "An holl restroù erounezadus en teuliad-mañ a vo gwelet war lañser Skriptoù. Dibab ur skript diwar al lañser a erounezo ar skript-mañ.\\nPa vez erounezet ar skriptoù diouzh un teuliad lec'hel e tremeno an anvioù restr evel arventennoù. Pa vez erounezet ar skriptoù diouzh un teuliad a-bell (dle. un teuliad war ar rouedad pe dre un arval ftp) ne dremeno arventenn ebet.\n"
 "\n"
-"Gant pep tro e vo arventennet ar argemennoù endro gant Caja, argemennoù a vez arveret gant ar skriptoù :\n"
+"Gant pep tro e vo arventennet ar argemennoù endro gant Baul, argemennoù a vez arveret gant ar skriptoù :\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: treugoù bevennet gant dilinennadurioù evit ar restroù diuzet (mar lec'hel hepken)\n"
 "\n"

@@ -3,17 +3,17 @@
     <key name="automount" type="b">
       <default>true</default>
       <summary>Whether to automatically mount media</summary>
-      <description>If set to true, then Caja will automatically mount media such as user-visible hard disks and removable media on start-up and media insertion.</description>
+      <description>If set to true, then Baul will automatically mount media such as user-visible hard disks and removable media on start-up and media insertion.</description>
     </key>
     <key name="automount-open" type="b">
       <default>true</default>
       <summary>Whether to automatically open a folder for automounted media</summary>
-      <description>If set to true, then Caja will automatically open a folder when media is automounted. This only applies to media where no known x-content/* type was detected; for media where a known x-content type is detected, the user configurable action will be taken instead.</description>
+      <description>If set to true, then Baul will automatically open a folder when media is automounted. This only applies to media where no known x-content/* type was detected; for media where a known x-content type is detected, the user configurable action will be taken instead.</description>
     </key>
     <key name="autorun-never" type="b">
       <default>false</default>
       <summary>Never prompt or autorun/autostart programs when media are inserted</summary>
-      <description>If set to true, then Caja will never prompt nor autorun/autostart programs when a medium is inserted.</description>
+      <description>If set to true, then Baul will never prompt nor autorun/autostart programs when a medium is inserted.</description>
     </key>
     <key name="autorun-x-content-start-app" type="as">
       <default>[ 'x-content/software' ]</default>

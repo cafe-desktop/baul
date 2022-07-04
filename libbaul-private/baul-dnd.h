@@ -50,7 +50,7 @@ typedef struct
     gboolean got_icon_position;
     int icon_x, icon_y;
     int icon_width, icon_height;
-} CajaDragSelectionItem;
+} BaulDragSelectionItem;
 
 /* Standard Drag & Drop types. */
 typedef enum
@@ -66,7 +66,7 @@ typedef enum
     BAUL_ICON_DND_XDNDDIRECTSAVE,
     BAUL_ICON_DND_RAW,
     BAUL_ICON_DND_ROOTWINDOW_DROP
-} CajaIconDndTargetType;
+} BaulIconDndTargetType;
 
 typedef enum
 {
@@ -74,7 +74,7 @@ typedef enum
     BAUL_DND_ACTION_SET_AS_BACKGROUND = BAUL_DND_ACTION_FIRST << 0,
     BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND = BAUL_DND_ACTION_FIRST << 1,
     BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND = BAUL_DND_ACTION_FIRST << 2
-} CajaDndAction;
+} BaulDndAction;
 
 /* drag&drop-related information. */
 typedef struct
@@ -83,14 +83,14 @@ typedef struct
 
     /* Stuff saved at "receive data" time needed later in the drag. */
     gboolean got_drop_data_type;
-    CajaIconDndTargetType data_type;
+    BaulIconDndTargetType data_type;
     GtkSelectionData *selection_data;
     char *direct_save_uri;
 
     /* Start of the drag, in window coordinates. */
     int start_x, start_y;
 
-    /* List of CajaDragSelectionItems, representing items being dragged, or NULL
+    /* List of BaulDragSelectionItems, representing items being dragged, or NULL
      * if data about them has not been received from the source yet.
      */
     GList *selection_list;
@@ -106,7 +106,7 @@ typedef struct
     gboolean waiting_to_autoscroll;
     gint64 start_auto_scroll_in;
 
-} CajaDragInfo;
+} BaulDragInfo;
 
 typedef struct
 {
@@ -130,22 +130,22 @@ typedef struct
     /* a fixed location, or NULL to use slot's location */
     GFile *target_location;
     /* a fixed slot, or NULL to use the window's active slot */
-    CajaWindowSlotInfo *target_slot;
-} CajaDragSlotProxyInfo;
+    BaulWindowSlotInfo *target_slot;
+} BaulDragSlotProxyInfo;
 
-typedef void		(* CajaDragEachSelectedItemDataGet)	(const char *url,
+typedef void		(* BaulDragEachSelectedItemDataGet)	(const char *url,
         int x, int y, int w, int h,
         gpointer data);
-typedef void		(* CajaDragEachSelectedItemIterator)	(CajaDragEachSelectedItemDataGet iteratee,
+typedef void		(* BaulDragEachSelectedItemIterator)	(BaulDragEachSelectedItemDataGet iteratee,
         gpointer iterator_context,
         gpointer data);
 
-void			    baul_drag_init				(CajaDragInfo		      *drag_info,
+void			    baul_drag_init				(BaulDragInfo		      *drag_info,
         const GtkTargetEntry		      *drag_types,
         int				       drag_type_count,
         gboolean			       add_text_targets);
-void			    baul_drag_finalize			(CajaDragInfo		      *drag_info);
-CajaDragSelectionItem  *baul_drag_selection_item_new		(void);
+void			    baul_drag_finalize			(BaulDragInfo		      *drag_info);
+BaulDragSelectionItem  *baul_drag_selection_item_new		(void);
 void			    baul_drag_destroy_selection_list	(GList				      *selection_list);
 GList			   *baul_drag_build_selection_list		(GtkSelectionData		      *data);
 
@@ -171,7 +171,7 @@ gboolean		    baul_drag_drag_data_get			(GtkWidget			      *widget,
         guint				       info,
         guint32			       time,
         gpointer			       container_context,
-        CajaDragEachSelectedItemIterator  each_selected_item_iterator);
+        BaulDragEachSelectedItemIterator  each_selected_item_iterator);
 int			    baul_drag_modifier_based_action		(int				       default_action,
         int				       non_default_action);
 
@@ -184,15 +184,15 @@ gboolean		    baul_drag_autoscroll_in_scroll_region	(GtkWidget			      *widget);
 void			    baul_drag_autoscroll_calculate_delta	(GtkWidget			      *widget,
         float				      *x_scroll_delta,
         float				      *y_scroll_delta);
-void			    baul_drag_autoscroll_start		(CajaDragInfo		      *drag_info,
+void			    baul_drag_autoscroll_start		(BaulDragInfo		      *drag_info,
         GtkWidget			      *widget,
         GSourceFunc			       callback,
         gpointer			       user_data);
-void			    baul_drag_autoscroll_stop		(CajaDragInfo		      *drag_info);
+void			    baul_drag_autoscroll_stop		(BaulDragInfo		      *drag_info);
 
 gboolean		    baul_drag_selection_includes_special_link (GList			      *selection_list);
 
 void                        baul_drag_slot_proxy_init               (GtkWidget *widget,
-        CajaDragSlotProxyInfo *drag_info);
+        BaulDragSlotProxyInfo *drag_info);
 
 #endif

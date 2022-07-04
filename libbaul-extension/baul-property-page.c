@@ -1,6 +1,6 @@
 /*
  *  baul-property-page.h - Property pages exported by
- *                             CajaPropertyProvider objects.
+ *                             BaulPropertyProvider objects.
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -35,7 +35,7 @@ enum {
     LAST_PROP
 };
 
-struct _CajaPropertyPageDetails {
+struct _BaulPropertyPageDetails {
     char *name;
     GtkWidget *label;
     GtkWidget *page;
@@ -45,13 +45,13 @@ static GObjectClass *parent_class = NULL;
 
 /**
  * SECTION:baul-property-page
- * @title: CajaPropertyPage
+ * @title: BaulPropertyPage
  * @short_description: Property page descriptor object
  * @include: libbaul-extension/baul-property-page.h
  *
- * #CajaPropertyPage is an object that describes a page in the file
- * properties dialog. Extensions can provide #CajaPropertyPage objects
- * by registering a #CajaPropertyPageProvider and returning them from
+ * #BaulPropertyPage is an object that describes a page in the file
+ * properties dialog. Extensions can provide #BaulPropertyPage objects
+ * by registering a #BaulPropertyPageProvider and returning them from
  * baul_property_page_provider_get_pages(), which will be called by the
  * main application when creating file properties dialogs.
  */
@@ -62,16 +62,16 @@ static GObjectClass *parent_class = NULL;
  * @label: the user-visible label of the property page
  * @page: the property page to display
  *
- * Creates a new #CajaPropertyPage from page_widget.
+ * Creates a new #BaulPropertyPage from page_widget.
  *
- * Returns: a newly created #CajaPropertyPage
+ * Returns: a newly created #BaulPropertyPage
  */
-CajaPropertyPage *
+BaulPropertyPage *
 baul_property_page_new (const char *name,
                         GtkWidget *label,
                         GtkWidget *page_widget)
 {
-    CajaPropertyPage *page;
+    BaulPropertyPage *page;
 
     g_return_val_if_fail (name != NULL, NULL);
     g_return_val_if_fail (label != NULL && GTK_IS_WIDGET (label), NULL);
@@ -93,7 +93,7 @@ baul_property_page_get_property (GObject *object,
                                  GValue *value,
                                  GParamSpec *pspec)
 {
-    CajaPropertyPage *page;
+    BaulPropertyPage *page;
 
     page = BAUL_PROPERTY_PAGE (object);
 
@@ -119,7 +119,7 @@ baul_property_page_set_property (GObject *object,
                                  const GValue *value,
                                  GParamSpec *pspec)
 {
-    CajaPropertyPage *page;
+    BaulPropertyPage *page;
 
     page = BAUL_PROPERTY_PAGE (object);
 
@@ -154,7 +154,7 @@ baul_property_page_set_property (GObject *object,
 static void
 baul_property_page_dispose (GObject *object)
 {
-    CajaPropertyPage *page;
+    BaulPropertyPage *page;
 
     page = BAUL_PROPERTY_PAGE (object);
 
@@ -171,7 +171,7 @@ baul_property_page_dispose (GObject *object)
 static void
 baul_property_page_finalize (GObject *object)
 {
-    CajaPropertyPage *page;
+    BaulPropertyPage *page;
 
     page = BAUL_PROPERTY_PAGE (object);
 
@@ -183,13 +183,13 @@ baul_property_page_finalize (GObject *object)
 }
 
 static void
-baul_property_page_instance_init (CajaPropertyPage *page)
+baul_property_page_instance_init (BaulPropertyPage *page)
 {
-    page->details = g_new0 (CajaPropertyPageDetails, 1);
+    page->details = g_new0 (BaulPropertyPageDetails, 1);
 }
 
 static void
-baul_property_page_class_init (CajaPropertyPageClass *class)
+baul_property_page_class_init (BaulPropertyPageClass *class)
 {
     parent_class = g_type_class_peek_parent (class);
 
@@ -228,20 +228,20 @@ baul_property_page_get_type (void)
 
     if (!type) {
         const GTypeInfo info = {
-            sizeof (CajaPropertyPageClass),
+            sizeof (BaulPropertyPageClass),
             NULL,
             NULL,
             (GClassInitFunc)baul_property_page_class_init,
             NULL,
             NULL,
-            sizeof (CajaPropertyPage),
+            sizeof (BaulPropertyPage),
             0,
             (GInstanceInitFunc)baul_property_page_instance_init
         };
 
         type = g_type_register_static
                (G_TYPE_OBJECT,
-                "CajaPropertyPage",
+                "BaulPropertyPage",
                 &info, 0);
     }
 

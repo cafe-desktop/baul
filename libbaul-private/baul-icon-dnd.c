@@ -89,13 +89,13 @@ static void     dnd_highlight_queue_redraw (GtkWidget      *widget);
 static GtkTargetList *drop_types_list = NULL;
 static GtkTargetList *drop_types_list_root = NULL;
 
-static char * baul_icon_container_find_drop_target (CajaIconContainer *container,
+static char * baul_icon_container_find_drop_target (BaulIconContainer *container,
         GdkDragContext *context,
         int x, int y, gboolean *icon_hit,
         gboolean rewrite_desktop);
 
 static EelCanvasItem *
-create_selection_shadow (CajaIconContainer *container,
+create_selection_shadow (BaulIconContainer *container,
                          GList *list)
 {
     EelCanvasGroup *group;
@@ -138,7 +138,7 @@ create_selection_shadow (CajaIconContainer *container,
 
     for (p = list; p != NULL; p = p->next)
     {
-        CajaDragSelectionItem *item;
+        BaulDragSelectionItem *item;
         int x1, y1, x2, y2;
         GdkRGBA black = { 0, 0, 0, 1 };
 
@@ -190,7 +190,7 @@ set_shadow_position (EelCanvasItem *shadow,
 typedef struct
 {
     gpointer iterator_context;
-    CajaDragEachSelectedItemDataGet iteratee;
+    BaulDragEachSelectedItemDataGet iteratee;
     gpointer iteratee_data;
 } IconGetDataBinderContext;
 
@@ -229,13 +229,13 @@ canvas_widget_to_world (EelCanvas *canvas,
 }
 
 static gboolean
-icon_get_data_binder (CajaIcon *icon, gpointer data)
+icon_get_data_binder (BaulIcon *icon, gpointer data)
 {
     IconGetDataBinderContext *context;
     EelDRect world_rect;
     EelIRect widget_rect;
     char *uri;
-    CajaIconContainer *container;
+    BaulIconContainer *container;
 
     context = (IconGetDataBinderContext *)data;
 
@@ -274,15 +274,15 @@ icon_get_data_binder (CajaIcon *icon, gpointer data)
     return TRUE;
 }
 
-/* Iterate over each selected icon in a CajaIconContainer,
+/* Iterate over each selected icon in a BaulIconContainer,
  * calling each_function on each.
  */
 static void
-baul_icon_container_each_selected_icon (CajaIconContainer *container,
-                                        gboolean (*each_function) (CajaIcon *, gpointer), gpointer data)
+baul_icon_container_each_selected_icon (BaulIconContainer *container,
+                                        gboolean (*each_function) (BaulIcon *, gpointer), gpointer data)
 {
     GList *p;
-    CajaIcon *icon = NULL;
+    BaulIcon *icon = NULL;
 
     for (p = container->details->icons; p != NULL; p = p->next)
     {
@@ -303,11 +303,11 @@ baul_icon_container_each_selected_icon (CajaIconContainer *container,
  * values to the iteratee
  */
 static void
-each_icon_get_data_binder (CajaDragEachSelectedItemDataGet iteratee,
+each_icon_get_data_binder (BaulDragEachSelectedItemDataGet iteratee,
                            gpointer iterator_context, gpointer data)
 {
     IconGetDataBinderContext context;
-    CajaIconContainer *container;
+    BaulIconContainer *container;
 
     g_assert (BAUL_IS_ICON_CONTAINER (iterator_context));
     container = BAUL_ICON_CONTAINER (iterator_context);
@@ -343,7 +343,7 @@ drag_data_get_callback (GtkWidget *widget,
 /* Target-side handling of the drag.  */
 
 static void
-baul_icon_container_position_shadow (CajaIconContainer *container,
+baul_icon_container_position_shadow (BaulIconContainer *container,
                                      int x, int y)
 {
     EelCanvasItem *shadow;
@@ -367,8 +367,8 @@ baul_icon_container_dropped_icon_feedback (GtkWidget *widget,
         GtkSelectionData *data,
         int x, int y)
 {
-    CajaIconContainer *container;
-    CajaIconDndInfo *dnd_info;
+    BaulIconContainer *container;
+    BaulIconDndInfo *dnd_info;
 
     container = BAUL_ICON_CONTAINER (widget);
     dnd_info = container->details->dnd_info;
@@ -422,7 +422,7 @@ get_direct_save_filename (GdkDragContext *context)
 }
 
 static void
-set_direct_save_uri (GtkWidget *widget, GdkDragContext *context, CajaDragInfo *drag_info, int x, int y)
+set_direct_save_uri (GtkWidget *widget, GdkDragContext *context, BaulDragInfo *drag_info, int x, int y)
 {
     char *filename, *drop_target;
     gchar *uri;
@@ -500,7 +500,7 @@ get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context,
     if (target != GDK_NONE)
     {
         guint info;
-        CajaDragInfo *drag_info;
+        BaulDragInfo *drag_info;
         gboolean found;
 
         drag_info = &(BAUL_ICON_CONTAINER (widget)->details->dnd_info->drag_info);
@@ -531,11 +531,11 @@ get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context,
 }
 
 static void
-baul_icon_container_ensure_drag_data (CajaIconContainer *container,
+baul_icon_container_ensure_drag_data (BaulIconContainer *container,
                                       GdkDragContext *context,
                                       guint32 time)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
 
     dnd_info = container->details->dnd_info;
 
@@ -550,8 +550,8 @@ drag_end_callback (GtkWidget *widget,
                    GdkDragContext *context,
                    gpointer data)
 {
-    CajaIconContainer *container;
-    CajaIconDndInfo *dnd_info;
+    BaulIconContainer *container;
+    BaulIconDndInfo *dnd_info;
 
     container = BAUL_ICON_CONTAINER (widget);
     dnd_info = container->details->dnd_info;
@@ -560,8 +560,8 @@ drag_end_callback (GtkWidget *widget,
     dnd_info->drag_info.selection_list = NULL;
 }
 
-static CajaIcon *
-baul_icon_container_item_at (CajaIconContainer *container,
+static BaulIcon *
+baul_icon_container_item_at (BaulIconContainer *container,
                              int x, int y)
 {
     GList *p;
@@ -581,7 +581,7 @@ baul_icon_container_item_at (CajaIconContainer *container,
 
     for (p = container->details->icons; p != NULL; p = p->next)
     {
-        CajaIcon *icon;
+        BaulIcon *icon;
         icon = p->data;
 
         eel_canvas_w2c (EEL_CANVAS (container),
@@ -604,7 +604,7 @@ baul_icon_container_item_at (CajaIconContainer *container,
 }
 
 static char *
-get_container_uri (CajaIconContainer *container)
+get_container_uri (BaulIconContainer *container)
 {
     char *uri;
 
@@ -615,7 +615,7 @@ get_container_uri (CajaIconContainer *container)
 }
 
 static gboolean
-baul_icon_container_selection_items_local (CajaIconContainer *container,
+baul_icon_container_selection_items_local (BaulIconContainer *container,
         GList *items)
 {
     char *container_uri_string;
@@ -643,7 +643,7 @@ baul_icon_container_selection_items_local (CajaIconContainer *container,
 }
 
 static GdkDragAction
-get_background_drag_action (CajaIconContainer *container,
+get_background_drag_action (BaulIconContainer *container,
                             GdkDragAction action)
 {
     /* FIXME: This function is very FMDirectoryView specific, and
@@ -666,7 +666,7 @@ get_background_drag_action (CajaIconContainer *container,
 }
 
 static void
-receive_dropped_color (CajaIconContainer *container,
+receive_dropped_color (BaulIconContainer *container,
                        int x, int y,
                        GdkDragAction action,
                        GtkSelectionData *data)
@@ -690,7 +690,7 @@ receive_dropped_color (CajaIconContainer *container,
 
 /* handle dropped tile images */
 static void
-receive_dropped_tile_image (CajaIconContainer *container, GdkDragAction action, GtkSelectionData *data)
+receive_dropped_tile_image (BaulIconContainer *container, GdkDragAction action, GtkSelectionData *data)
 {
     g_assert (data != NULL);
 
@@ -712,13 +712,13 @@ receive_dropped_tile_image (CajaIconContainer *container, GdkDragAction action, 
 
 /* handle dropped keywords */
 static void
-receive_dropped_keyword (CajaIconContainer *container, const char *keyword, int x, int y)
+receive_dropped_keyword (BaulIconContainer *container, const char *keyword, int x, int y)
 {
     char *uri;
     double world_x, world_y;
 
-    CajaIcon *drop_target_icon;
-    CajaFile *file;
+    BaulIcon *drop_target_icon;
+    BaulFile *file;
 
     g_assert (keyword != NULL);
 
@@ -754,7 +754,7 @@ receive_dropped_keyword (CajaIconContainer *container, const char *keyword, int 
 
 /* handle dropped url */
 static void
-receive_dropped_netscape_url (CajaIconContainer *container, const char *encoded_url, GdkDragContext *context, int x, int y)
+receive_dropped_netscape_url (BaulIconContainer *container, const char *encoded_url, GdkDragContext *context, int x, int y)
 {
     char *drop_target;
 
@@ -776,7 +776,7 @@ receive_dropped_netscape_url (CajaIconContainer *container, const char *encoded_
 
 /* handle dropped uri list */
 static void
-receive_dropped_uri_list (CajaIconContainer *container, const char *uri_list, GdkDragContext *context, int x, int y)
+receive_dropped_uri_list (BaulIconContainer *container, const char *uri_list, GdkDragContext *context, int x, int y)
 {
     char *drop_target;
 
@@ -798,7 +798,7 @@ receive_dropped_uri_list (CajaIconContainer *container, const char *uri_list, Gd
 
 /* handle dropped text */
 static void
-receive_dropped_text (CajaIconContainer *container, const char *text, GdkDragContext *context, int x, int y)
+receive_dropped_text (BaulIconContainer *container, const char *text, GdkDragContext *context, int x, int y)
 {
     char *drop_target;
 
@@ -820,7 +820,7 @@ receive_dropped_text (CajaIconContainer *container, const char *text, GdkDragCon
 
 /* handle dropped raw data */
 static void
-receive_dropped_raw (CajaIconContainer *container, const char *raw_data, int length, const char *direct_save_uri, GdkDragContext *context, int x, int y)
+receive_dropped_raw (BaulIconContainer *container, const char *raw_data, int length, const char *direct_save_uri, GdkDragContext *context, int x, int y)
 {
     char *drop_target;
 
@@ -845,7 +845,7 @@ receive_dropped_raw (CajaIconContainer *container, const char *raw_data, int len
 static int
 auto_scroll_timeout_callback (gpointer data)
 {
-    CajaIconContainer *container;
+    BaulIconContainer *container;
     GtkWidget *widget;
     float x_scroll_delta, y_scroll_delta;
     GdkRectangle exposed_area;
@@ -931,7 +931,7 @@ auto_scroll_timeout_callback (gpointer data)
 }
 
 static void
-set_up_auto_scroll_if_needed (CajaIconContainer *container)
+set_up_auto_scroll_if_needed (BaulIconContainer *container)
 {
     baul_drag_autoscroll_start (&container->details->dnd_info->drag_info,
                                 GTK_WIDGET (container),
@@ -940,22 +940,22 @@ set_up_auto_scroll_if_needed (CajaIconContainer *container)
 }
 
 static void
-stop_auto_scroll (CajaIconContainer *container)
+stop_auto_scroll (BaulIconContainer *container)
 {
     baul_drag_autoscroll_stop (&container->details->dnd_info->drag_info);
 }
 
 static void
-handle_local_move (CajaIconContainer *container,
+handle_local_move (BaulIconContainer *container,
                    double world_x, double world_y)
 {
     GList *moved_icons, *p;
-    CajaFile *file;
+    BaulFile *file;
     char screen_string[32];
     GdkScreen *screen;
     time_t now;
-    CajaDragSelectionItem *item = NULL;
-    CajaIcon *icon = NULL;
+    BaulDragSelectionItem *item = NULL;
+    BaulIcon *icon = NULL;
 
     if (container->details->auto_layout)
     {
@@ -1014,7 +1014,7 @@ handle_local_move (CajaIconContainer *container,
 }
 
 static void
-handle_nonlocal_move (CajaIconContainer *container,
+handle_nonlocal_move (BaulIconContainer *container,
                       GdkDragAction action,
                       int x, int y,
                       const char *target_uri,
@@ -1034,7 +1034,7 @@ handle_nonlocal_move (CajaIconContainer *container,
     for (p = container->details->dnd_info->drag_info.selection_list; p != NULL; p = p->next)
     {
         /* do a shallow copy of all the uri strings of the copied files */
-        source_uris = g_list_prepend (source_uris, ((CajaDragSelectionItem *)p->data)->uri);
+        source_uris = g_list_prepend (source_uris, ((BaulDragSelectionItem *)p->data)->uri);
     }
     source_uris = g_list_reverse (source_uris);
 
@@ -1056,12 +1056,12 @@ handle_nonlocal_move (CajaIconContainer *container,
         {
             int item_x;
 
-            item_x = ((CajaDragSelectionItem *)p->data)->icon_x;
+            item_x = ((BaulDragSelectionItem *)p->data)->icon_x;
             if (is_rtl)
-                item_x = -item_x - ((CajaDragSelectionItem *)p->data)->icon_width;
+                item_x = -item_x - ((BaulDragSelectionItem *)p->data)->icon_width;
             g_array_index (source_item_locations, GdkPoint, index).x = item_x;
             g_array_index (source_item_locations, GdkPoint, index).y =
-                ((CajaDragSelectionItem *)p->data)->icon_y;
+                ((BaulDragSelectionItem *)p->data)->icon_y;
         }
     }
 
@@ -1097,13 +1097,13 @@ handle_nonlocal_move (CajaIconContainer *container,
 }
 
 static char *
-baul_icon_container_find_drop_target (CajaIconContainer *container,
+baul_icon_container_find_drop_target (BaulIconContainer *container,
                                       GdkDragContext *context,
                                       int x, int y,
                                       gboolean *icon_hit,
                                       gboolean rewrite_desktop)
 {
-    CajaIcon *drop_target_icon;
+    BaulIcon *drop_target_icon;
     double world_x, world_y;
 
     if (icon_hit)
@@ -1133,7 +1133,7 @@ baul_icon_container_find_drop_target (CajaIconContainer *container,
         icon_uri = baul_icon_container_get_icon_uri (container, drop_target_icon);
         if (icon_uri != NULL)
         {
-            CajaFile *file;
+            BaulFile *file;
 
             file = baul_file_get_by_uri (icon_uri);
 
@@ -1185,7 +1185,7 @@ static gboolean
 selection_is_image_file (GList *selection_list)
 {
     const char *mime_type;
-    CajaDragSelectionItem *selected_item;
+    BaulDragSelectionItem *selected_item;
     gboolean result;
     GFile *location;
     GFileInfo *info;
@@ -1223,7 +1223,7 @@ selection_is_image_file (GList *selection_list)
 
 
 static void
-baul_icon_container_receive_dropped_icons (CajaIconContainer *container,
+baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
         GdkDragContext *context,
         int x, int y)
 {
@@ -1265,7 +1265,7 @@ baul_icon_container_receive_dropped_icons (CajaIconContainer *container,
 
     if (real_action == (GdkDragAction) BAUL_DND_ACTION_SET_AS_BACKGROUND)
     {
-        CajaDragSelectionItem *selected_item;
+        BaulDragSelectionItem *selected_item;
 
         selected_item = container->details->dnd_info->drag_info.selection_list->data;
         eel_background_set_dropped_image (eel_get_widget_background (GTK_WIDGET (container)),
@@ -1309,14 +1309,14 @@ baul_icon_container_receive_dropped_icons (CajaIconContainer *container,
 }
 
 static void
-baul_icon_container_get_drop_action (CajaIconContainer *container,
+baul_icon_container_get_drop_action (BaulIconContainer *container,
                                      GdkDragContext *context,
                                      int x, int y,
                                      int *action)
 {
     char *drop_target;
     gboolean icon_hit;
-    CajaIcon *icon;
+    BaulIcon *icon;
     double world_x, world_y;
 
     icon_hit = FALSE;
@@ -1388,10 +1388,10 @@ baul_icon_container_get_drop_action (CajaIconContainer *container,
 }
 
 static void
-set_drop_target (CajaIconContainer *container,
-                 CajaIcon *icon)
+set_drop_target (BaulIconContainer *container,
+                 BaulIcon *icon)
 {
-    CajaIcon *old_icon;
+    BaulIcon *old_icon;
 
     /* Check if current drop target changed, update icon drop
      * higlight if needed.
@@ -1409,11 +1409,11 @@ set_drop_target (CajaIconContainer *container,
 }
 
 static void
-baul_icon_dnd_update_drop_target (CajaIconContainer *container,
+baul_icon_dnd_update_drop_target (BaulIconContainer *container,
                                   GdkDragContext *context,
                                   int x, int y)
 {
-    CajaIcon *icon;
+    BaulIcon *icon;
     double world_x, world_y;
 
     g_assert (BAUL_IS_ICON_CONTAINER (container));
@@ -1432,7 +1432,7 @@ baul_icon_dnd_update_drop_target (CajaIconContainer *container,
     /* Find if target icon accepts our drop. */
     if (icon != NULL && (container->details->dnd_info->drag_info.data_type != BAUL_ICON_DND_KEYWORD))
     {
-        CajaFile *file;
+        BaulFile *file;
         char *uri;
 
         uri = baul_icon_container_get_icon_uri (container, icon);
@@ -1453,9 +1453,9 @@ baul_icon_dnd_update_drop_target (CajaIconContainer *container,
 }
 
 static void
-baul_icon_container_free_drag_data (CajaIconContainer *container)
+baul_icon_container_free_drag_data (BaulIconContainer *container)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
 
     dnd_info = container->details->dnd_info;
 
@@ -1486,7 +1486,7 @@ drag_leave_callback (GtkWidget *widget,
                      guint32 time,
                      gpointer data)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
 
     dnd_info = BAUL_ICON_CONTAINER (widget)->details->dnd_info;
 
@@ -1505,7 +1505,7 @@ drag_begin_callback (GtkWidget      *widget,
                      GdkDragContext *context,
                      gpointer        data)
 {
-    CajaIconContainer *container;
+    BaulIconContainer *container;
     cairo_surface_t *surface;
     double x1, y1, x2, y2, winx, winy;
     int x_offset, y_offset;
@@ -1535,14 +1535,14 @@ drag_begin_callback (GtkWidget      *widget,
 }
 
 void
-baul_icon_dnd_begin_drag (CajaIconContainer *container,
+baul_icon_dnd_begin_drag (BaulIconContainer *container,
                           GdkDragAction actions,
                           int button,
                           GdkEventMotion *event,
                           int                    start_x,
                           int                    start_y)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
 
     g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
     g_return_if_fail (event != NULL);
@@ -1600,7 +1600,7 @@ drag_highlight_draw (GtkWidget *widget,
 static void
 dnd_highlight_queue_redraw (GtkWidget *widget)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
     int width, height;
     GtkAllocation allocation;
 
@@ -1635,7 +1635,7 @@ dnd_highlight_queue_redraw (GtkWidget *widget)
 static void
 start_dnd_highlight (GtkWidget *widget)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
     GtkWidget *toplevel;
 
     dnd_info = BAUL_ICON_CONTAINER (widget)->details->dnd_info;
@@ -1660,7 +1660,7 @@ start_dnd_highlight (GtkWidget *widget)
 static void
 stop_dnd_highlight (GtkWidget *widget)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
 
     dnd_info = BAUL_ICON_CONTAINER (widget)->details->dnd_info;
 
@@ -1710,7 +1710,7 @@ drag_drop_callback (GtkWidget *widget,
                     guint32 time,
                     gpointer data)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
 
     dnd_info = BAUL_ICON_CONTAINER (widget)->details->dnd_info;
 
@@ -1727,9 +1727,9 @@ drag_drop_callback (GtkWidget *widget,
 }
 
 void
-baul_icon_dnd_end_drag (CajaIconContainer *container)
+baul_icon_dnd_end_drag (BaulIconContainer *container)
 {
-    CajaIconDndInfo *dnd_info;
+    BaulIconDndInfo *dnd_info;
 
     g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
@@ -1759,7 +1759,7 @@ drag_data_received_callback (GtkWidget *widget,
                              guint32 time,
                              gpointer user_data)
 {
-    CajaDragInfo *drag_info;
+    BaulDragInfo *drag_info;
     gboolean success;
 
     drag_info = &(BAUL_ICON_CONTAINER (widget)->details->dnd_info->drag_info);
@@ -1935,7 +1935,7 @@ drag_data_received_callback (GtkWidget *widget,
 }
 
 void
-baul_icon_dnd_init (CajaIconContainer *container)
+baul_icon_dnd_init (BaulIconContainer *container)
 {
     GtkTargetList *targets;
     int n_elements;
@@ -1944,7 +1944,7 @@ baul_icon_dnd_init (CajaIconContainer *container)
     g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
 
-    container->details->dnd_info = g_new0 (CajaIconDndInfo, 1);
+    container->details->dnd_info = g_new0 (BaulIconDndInfo, 1);
     baul_drag_init (&container->details->dnd_info->drag_info,
                     drag_types, G_N_ELEMENTS (drag_types), TRUE);
 
@@ -1987,7 +1987,7 @@ baul_icon_dnd_init (CajaIconContainer *container)
 }
 
 void
-baul_icon_dnd_fini (CajaIconContainer *container)
+baul_icon_dnd_fini (BaulIconContainer *container)
 {
     g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 

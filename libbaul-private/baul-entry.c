@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* CajaEntry: one-line text editing widget. This consists of bug fixes
+/* BaulEntry: one-line text editing widget. This consists of bug fixes
  * and other improvements to GtkEntry, and all the changes could be rolled
  * into GtkEntry some day.
  *
@@ -36,7 +36,7 @@
 #include "baul-entry.h"
 #include "baul-global-preferences.h"
 
-struct CajaEntryDetails
+struct BaulEntryDetails
 {
     gboolean user_edit;
     gboolean special_tab_handling;
@@ -54,16 +54,16 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 static void baul_entry_editable_init (GtkEditableInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CajaEntry, baul_entry, GTK_TYPE_ENTRY,
+G_DEFINE_TYPE_WITH_CODE (BaulEntry, baul_entry, GTK_TYPE_ENTRY,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
                                  baul_entry_editable_init));
 
 static GtkEditableInterface *parent_editable_interface = NULL;
 
 static void
-baul_entry_init (CajaEntry *entry)
+baul_entry_init (BaulEntry *entry)
 {
-    entry->details = g_new0 (CajaEntryDetails, 1);
+    entry->details = g_new0 (BaulEntryDetails, 1);
 
     entry->details->user_edit = TRUE;
 }
@@ -77,7 +77,7 @@ baul_entry_new (void)
 static void
 baul_entry_finalize (GObject *object)
 {
-    CajaEntry *entry;
+    BaulEntry *entry;
 
     entry = BAUL_ENTRY (object);
 
@@ -94,7 +94,7 @@ baul_entry_finalize (GObject *object)
 static gboolean
 baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
 {
-    CajaEntry *entry;
+    BaulEntry *entry;
     GtkEditable *editable;
     gboolean old_has, new_has;
     gboolean result;
@@ -182,10 +182,10 @@ baul_entry_motion_notify (GtkWidget *widget, GdkEventMotion *event)
  *
  * Select all text, leaving the text cursor position at the end.
  *
- * @entry: A CajaEntry
+ * @entry: A BaulEntry
  **/
 void
-baul_entry_select_all (CajaEntry *entry)
+baul_entry_select_all (BaulEntry *entry)
 {
     g_return_if_fail (BAUL_IS_ENTRY (entry));
 
@@ -196,7 +196,7 @@ baul_entry_select_all (CajaEntry *entry)
 static gboolean
 select_all_at_idle (gpointer callback_data)
 {
-    CajaEntry *entry;
+    BaulEntry *entry;
 
     entry = BAUL_ENTRY (callback_data);
 
@@ -215,10 +215,10 @@ select_all_at_idle (gpointer callback_data)
  * changing the selection and the text cursor position doesn't
  * work in a key_press signal handler.
  *
- * @entry: A CajaEntry
+ * @entry: A BaulEntry
  **/
 void
-baul_entry_select_all_at_idle (CajaEntry *entry)
+baul_entry_select_all_at_idle (BaulEntry *entry)
 {
     g_return_if_fail (BAUL_IS_ENTRY (entry));
 
@@ -241,12 +241,12 @@ baul_entry_select_all_at_idle (CajaEntry *entry)
  * done so the programmatic changes to the entry do not register
  * with the undo manager.
  *
- * @entry: A CajaEntry
+ * @entry: A BaulEntry
  * @test: The text to set
  **/
 
 void
-baul_entry_set_text (CajaEntry *entry, const gchar *text)
+baul_entry_set_text (BaulEntry *entry, const gchar *text)
 {
     g_return_if_fail (BAUL_IS_ENTRY (entry));
 
@@ -303,7 +303,7 @@ static void
 baul_entry_insert_text (GtkEditable *editable, const gchar *text,
                         int length, int *position)
 {
-    CajaEntry *entry;
+    BaulEntry *entry;
 
     entry = BAUL_ENTRY(editable);
 
@@ -321,7 +321,7 @@ baul_entry_insert_text (GtkEditable *editable, const gchar *text,
 static void
 baul_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
 {
-    CajaEntry *entry;
+    BaulEntry *entry;
 
     entry = BAUL_ENTRY (editable);
 
@@ -340,7 +340,7 @@ baul_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
  * when the selection changes. Changing the selection to NULL and then
  * back to the original selection owner still sends the event, so the
  * selection owner then gets the selection ripped away from it. We ran into
- * this with type-completion behavior in CajaLocationBar (see bug 5313).
+ * this with type-completion behavior in BaulLocationBar (see bug 5313).
  * There's a FIXME comment that seems to be about this same issue in
  * gtk+/gtkselection.c, gtk_selection_clear.
  */
@@ -374,7 +374,7 @@ baul_entry_editable_init (GtkEditableInterface *iface)
 }
 
 static void
-baul_entry_class_init (CajaEntryClass *class)
+baul_entry_class_init (BaulEntryClass *class)
 {
     GtkWidgetClass *widget_class;
     GObjectClass *gobject_class;
@@ -395,7 +395,7 @@ baul_entry_class_init (CajaEntryClass *class)
                             ("user_changed",
                              G_TYPE_FROM_CLASS (class),
                              G_SIGNAL_RUN_LAST,
-                             G_STRUCT_OFFSET (CajaEntryClass, user_changed),
+                             G_STRUCT_OFFSET (BaulEntryClass, user_changed),
                              NULL, NULL,
                              g_cclosure_marshal_VOID__VOID,
                              G_TYPE_NONE, 0);
@@ -403,14 +403,14 @@ baul_entry_class_init (CajaEntryClass *class)
                                  ("selection_changed",
                                   G_TYPE_FROM_CLASS (class),
                                   G_SIGNAL_RUN_LAST,
-                                  G_STRUCT_OFFSET (CajaEntryClass, selection_changed),
+                                  G_STRUCT_OFFSET (BaulEntryClass, selection_changed),
                                   NULL, NULL,
                                   g_cclosure_marshal_VOID__VOID,
                                   G_TYPE_NONE, 0);
 }
 
 void
-baul_entry_set_special_tab_handling (CajaEntry *entry,
+baul_entry_set_special_tab_handling (BaulEntry *entry,
                                      gboolean special_tab_handling)
 {
     g_return_if_fail (BAUL_IS_ENTRY (entry));

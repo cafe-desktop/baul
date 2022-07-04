@@ -129,7 +129,7 @@ extension_action_callback (GtkAction *action,
 }
 
 static void
-extension_action_sensitive_callback (CajaMenuItem *item,
+extension_action_sensitive_callback (BaulMenuItem *item,
                                      GParamSpec *arg1,
                                      gpointer user_data)
 {
@@ -149,7 +149,7 @@ get_action_icon (const char *icon_name,
                  int         size,
                  GtkWidget  *parent_widget)
 {
-    CajaIconInfo *info;
+    BaulIconInfo *info;
     cairo_surface_t *surface;
     int scale;
 
@@ -170,7 +170,7 @@ get_action_icon (const char *icon_name,
 }
 
 GtkAction *
-baul_action_from_menu_item (CajaMenuItem *item,
+baul_action_from_menu_item (BaulMenuItem *item,
                             GtkWidget    *parent_widget)
 {
     char *name, *label, *tip, *icon_name;
@@ -225,7 +225,7 @@ baul_action_from_menu_item (CajaMenuItem *item,
 }
 
 GtkAction *
-baul_toolbar_action_from_menu_item (CajaMenuItem *item, GtkWidget *parent_widget)
+baul_toolbar_action_from_menu_item (BaulMenuItem *item, GtkWidget *parent_widget)
 {
     char *name, *label, *tip, *icon_name;
     gboolean sensitive, priority;

@@ -1,17 +1,17 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000, 2001 Eazel, Inc.
  * Copyright (C) 2005 Red Hat, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -44,12 +44,12 @@
 
 static GtkWindow *bookmarks_window = NULL;
 
-static void refresh_bookmarks_menu (CajaWindow *window);
+static void refresh_bookmarks_menu (BaulWindow *window);
 
 static void
 remove_bookmarks_for_uri_if_yes (GtkDialog *dialog, int response, gpointer callback_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
 
     g_assert (GTK_IS_DIALOG (dialog));
     g_assert (callback_data != NULL);
@@ -68,8 +68,8 @@ remove_bookmarks_for_uri_if_yes (GtkDialog *dialog, int response, gpointer callb
 }
 
 static void
-show_bogus_bookmark_window (CajaWindow *window,
-                            CajaBookmark *bookmark)
+show_bogus_bookmark_window (BaulWindow *window,
+                            BaulBookmark *bookmark)
 {
     GtkDialog *dialog;
     GFile *location;
@@ -101,7 +101,7 @@ show_bogus_bookmark_window (CajaWindow *window,
 }
 
 static GtkWindow *
-get_or_create_bookmarks_window (CajaWindow *window)
+get_or_create_bookmarks_window (BaulWindow *window)
 {
     if (bookmarks_window == NULL)
     {
@@ -139,11 +139,11 @@ baul_bookmarks_exiting (void)
  * Does nothing if there's already a bookmark for the displayed location.
  */
 void
-baul_window_add_bookmark_for_current_location (CajaWindow *window)
+baul_window_add_bookmark_for_current_location (BaulWindow *window)
 {
-    CajaBookmark *bookmark;
-    CajaWindowSlot *slot;
-    CajaBookmarkList *list;
+    BaulBookmark *bookmark;
+    BaulWindowSlot *slot;
+    BaulBookmarkList *list;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -158,7 +158,7 @@ baul_window_add_bookmark_for_current_location (CajaWindow *window)
 }
 
 void
-baul_window_edit_bookmarks (CajaWindow *window)
+baul_window_edit_bookmarks (BaulWindow *window)
 {
     GtkWindow *dialog;
 
@@ -170,7 +170,7 @@ baul_window_edit_bookmarks (CajaWindow *window)
 }
 
 static void
-remove_bookmarks_menu_items (CajaWindow *window)
+remove_bookmarks_menu_items (BaulWindow *window)
 {
     GtkUIManager *ui_manager;
 
@@ -208,13 +208,13 @@ connect_proxy_cb (GtkActionGroup *action_group,
 }
 
 static void
-update_bookmarks (CajaWindow *window)
+update_bookmarks (BaulWindow *window)
 {
     guint bookmark_count;
     guint index;
     GtkUIManager *ui_manager;
-    CajaBookmarkList *bookmarks;
-    CajaBookmark *bookmark = NULL;
+    BaulBookmarkList *bookmarks;
+    BaulBookmark *bookmark = NULL;
 
     g_assert (BAUL_IS_WINDOW (window));
     g_assert (window->details->bookmarks_merge_id == 0);
@@ -266,7 +266,7 @@ update_bookmarks (CajaWindow *window)
 }
 
 static void
-refresh_bookmarks_menu (CajaWindow *window)
+refresh_bookmarks_menu (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -281,7 +281,7 @@ refresh_bookmarks_menu (CajaWindow *window)
  * so we'll be notified when bookmark list changes.
  */
 void
-baul_window_initialize_bookmarks_menu (CajaWindow *window)
+baul_window_initialize_bookmarks_menu (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 

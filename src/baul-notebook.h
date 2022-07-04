@@ -37,58 +37,58 @@ extern "C" {
 #endif
 
 #define BAUL_TYPE_NOTEBOOK		(baul_notebook_get_type ())
-#define BAUL_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_NOTEBOOK, CajaNotebook))
-#define BAUL_NOTEBOOK_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_NOTEBOOK, CajaNotebookClass))
+#define BAUL_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_NOTEBOOK, BaulNotebook))
+#define BAUL_NOTEBOOK_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_NOTEBOOK, BaulNotebookClass))
 #define BAUL_IS_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_NOTEBOOK))
 #define BAUL_IS_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_NOTEBOOK))
-#define BAUL_NOTEBOOK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NOTEBOOK, CajaNotebookClass))
+#define BAUL_NOTEBOOK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NOTEBOOK, BaulNotebookClass))
 
-    typedef struct _CajaNotebookClass	CajaNotebookClass;
-    typedef struct _CajaNotebook		CajaNotebook;
-    typedef struct _CajaNotebookPrivate	CajaNotebookPrivate;
+    typedef struct _BaulNotebookClass	BaulNotebookClass;
+    typedef struct _BaulNotebook		BaulNotebook;
+    typedef struct _BaulNotebookPrivate	BaulNotebookPrivate;
 
-    struct _CajaNotebook
+    struct _BaulNotebook
     {
         GtkNotebook parent;
 
         /*< private >*/
-        CajaNotebookPrivate *priv;
+        BaulNotebookPrivate *priv;
     };
 
-    struct _CajaNotebookClass
+    struct _BaulNotebookClass
     {
         GtkNotebookClass parent_class;
 
         /* Signals */
-        void	 (* tab_close_request)  (CajaNotebook *notebook,
-                                         CajaWindowSlot *slot);
+        void	 (* tab_close_request)  (BaulNotebook *notebook,
+                                         BaulWindowSlot *slot);
     };
 
     GType		baul_notebook_get_type		(void);
 
-    int		baul_notebook_add_tab	(CajaNotebook *nb,
-                                     CajaWindowSlot *slot,
+    int		baul_notebook_add_tab	(BaulNotebook *nb,
+                                     BaulWindowSlot *slot,
                                      int position,
                                      gboolean jump_to);
 
-    void		baul_notebook_set_show_tabs	(CajaNotebook *nb,
+    void		baul_notebook_set_show_tabs	(BaulNotebook *nb,
             gboolean show_tabs);
 
-    void		baul_notebook_set_dnd_enabled (CajaNotebook *nb,
+    void		baul_notebook_set_dnd_enabled (BaulNotebook *nb,
             gboolean enabled);
-    void		baul_notebook_sync_tab_label (CajaNotebook *nb,
-            CajaWindowSlot *slot);
-    void		baul_notebook_sync_loading   (CajaNotebook *nb,
-            CajaWindowSlot *slot);
+    void		baul_notebook_sync_tab_label (BaulNotebook *nb,
+            BaulWindowSlot *slot);
+    void		baul_notebook_sync_loading   (BaulNotebook *nb,
+            BaulWindowSlot *slot);
 
-    void		baul_notebook_reorder_current_child_relative (CajaNotebook *notebook,
+    void		baul_notebook_reorder_current_child_relative (BaulNotebook *notebook,
             int offset);
-    void		baul_notebook_set_current_page_relative (CajaNotebook *notebook,
+    void		baul_notebook_set_current_page_relative (BaulNotebook *notebook,
             int offset);
 
-    gboolean        baul_notebook_can_reorder_current_child_relative (CajaNotebook *notebook,
+    gboolean        baul_notebook_can_reorder_current_child_relative (BaulNotebook *notebook,
             int offset);
-    gboolean        baul_notebook_can_set_current_page_relative (CajaNotebook *notebook,
+    gboolean        baul_notebook_can_set_current_page_relative (BaulNotebook *notebook,
             int offset);
 
 #ifdef __cplusplus

@@ -41,7 +41,7 @@
 #define sure_string(s)                    ((const char *)((s)!=NULL?(s):""))
 #define DESKTOP_ENTRY_GROUP		  "Desktop Entry"
 
-struct _CajaOpenWithDialogDetails
+struct _BaulOpenWithDialogDetails
 {
     GAppInfo *selected_app_info;
 
@@ -90,12 +90,12 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-G_DEFINE_TYPE (CajaOpenWithDialog, baul_open_with_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (BaulOpenWithDialog, baul_open_with_dialog, GTK_TYPE_DIALOG);
 
 static void
 baul_open_with_dialog_finalize (GObject *object)
 {
-    CajaOpenWithDialog *dialog;
+    BaulOpenWithDialog *dialog;
 
     dialog = BAUL_OPEN_WITH_DIALOG (object);
 
@@ -127,7 +127,7 @@ baul_open_with_dialog_finalize (GObject *object)
  * 2) The user has permissions to run the file
  */
 static gboolean
-check_application (CajaOpenWithDialog *dialog)
+check_application (BaulOpenWithDialog *dialog)
 {
     char *command;
     char *path = NULL;
@@ -218,7 +218,7 @@ get_app_name (const char *commandline, GError **error)
  * It also sets the app info as the default for this type.
  */
 static GAppInfo *
-add_or_find_application (CajaOpenWithDialog *dialog)
+add_or_find_application (BaulOpenWithDialog *dialog)
 {
     GAppInfo *app;
     GError *error;
@@ -316,7 +316,7 @@ add_or_find_application (CajaOpenWithDialog *dialog)
 }
 
 static void
-emit_application_selected (CajaOpenWithDialog *dialog,
+emit_application_selected (BaulOpenWithDialog *dialog,
                            GAppInfo *application)
 {
     g_signal_emit (G_OBJECT (dialog), signals[APPLICATION_SELECTED], 0,
@@ -324,7 +324,7 @@ emit_application_selected (CajaOpenWithDialog *dialog,
 }
 
 static void
-response_cb (CajaOpenWithDialog *dialog,
+response_cb (BaulOpenWithDialog *dialog,
              int response_id,
              gpointer data)
 {
@@ -393,7 +393,7 @@ response_cb (CajaOpenWithDialog *dialog,
 
 
 static void
-baul_open_with_dialog_class_init (CajaOpenWithDialogClass *class)
+baul_open_with_dialog_class_init (BaulOpenWithDialogClass *class)
 {
     GObjectClass *gobject_class;
 
@@ -404,7 +404,7 @@ baul_open_with_dialog_class_init (CajaOpenWithDialogClass *class)
         g_signal_new ("application_selected",
                       G_TYPE_FROM_CLASS (class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaOpenWithDialogClass,
+                      G_STRUCT_OFFSET (BaulOpenWithDialogClass,
                                        application_selected),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__POINTER,
@@ -417,7 +417,7 @@ chooser_response_cb (GtkFileChooser *chooser,
                      int response,
                      gpointer user_data)
 {
-    CajaOpenWithDialog *dialog;
+    BaulOpenWithDialog *dialog;
 
     dialog = BAUL_OPEN_WITH_DIALOG (user_data);
 
@@ -448,7 +448,7 @@ static void
 browse_clicked_cb (GtkWidget *button,
                    gpointer user_data)
 {
-    CajaOpenWithDialog *dialog;
+    BaulOpenWithDialog *dialog;
     GtkWidget *chooser;
 
     dialog = BAUL_OPEN_WITH_DIALOG (user_data);
@@ -477,7 +477,7 @@ browse_clicked_cb (GtkWidget *button,
 
 static void
 entry_changed_cb (GtkWidget *entry,
-                  CajaOpenWithDialog *dialog)
+                  BaulOpenWithDialog *dialog)
 {
     /* We are writing in the entry, so we are not using a known appinfo anymore */
     if (dialog->details->selected_app_info != NULL)
@@ -557,7 +557,7 @@ get_surface_for_icon (GIcon *icon)
 }
 
 static gboolean
-baul_open_with_dialog_add_icon_idle (CajaOpenWithDialog *dialog)
+baul_open_with_dialog_add_icon_idle (BaulOpenWithDialog *dialog)
 {
     cairo_surface_t *surface;
     GIcon           *icon;
@@ -692,7 +692,7 @@ baul_open_with_search_equal_func (GtkTreeModel *model,
 
 
 static gboolean
-baul_open_with_dialog_add_items_idle (CajaOpenWithDialog *dialog)
+baul_open_with_dialog_add_items_idle (BaulOpenWithDialog *dialog)
 {
     GtkCellRenderer   *renderer;
     GtkTreeViewColumn *column;
@@ -777,7 +777,7 @@ baul_open_with_dialog_add_items_idle (CajaOpenWithDialog *dialog)
 
 static void
 program_list_selection_changed (GtkTreeSelection  *selection,
-                                CajaOpenWithDialog *dialog)
+                                BaulOpenWithDialog *dialog)
 {
     GtkTreeModel     *model;
     GtkTreeIter       iter;
@@ -823,7 +823,7 @@ static void
 program_list_selection_activated (GtkTreeView       *view,
                                   GtkTreePath       *path,
                                   GtkTreeViewColumn *column,
-                                  CajaOpenWithDialog *dialog)
+                                  BaulOpenWithDialog *dialog)
 {
     GtkTreeSelection *selection;
 
@@ -835,7 +835,7 @@ program_list_selection_activated (GtkTreeView       *view,
 }
 
 static void
-expander_toggled (GtkWidget *expander, CajaOpenWithDialog *dialog)
+expander_toggled (GtkWidget *expander, BaulOpenWithDialog *dialog)
 {
     if (gtk_expander_get_expanded (GTK_EXPANDER (expander)) == TRUE)
     {
@@ -853,7 +853,7 @@ expander_toggled (GtkWidget *expander, CajaOpenWithDialog *dialog)
 }
 
 static void
-baul_open_with_dialog_init (CajaOpenWithDialog *dialog)
+baul_open_with_dialog_init (BaulOpenWithDialog *dialog)
 {
     GtkWidget *hbox;
     GtkWidget *vbox;
@@ -863,7 +863,7 @@ baul_open_with_dialog_init (CajaOpenWithDialog *dialog)
     GtkWidget *expander;
     GtkTreeSelection *selection;
 
-    dialog->details = g_new0 (CajaOpenWithDialogDetails, 1);
+    dialog->details = g_new0 (BaulOpenWithDialogDetails, 1);
 
     gtk_window_set_title (GTK_WINDOW (dialog), _("Open With"));
     gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
@@ -1027,7 +1027,7 @@ get_extension (const char *basename)
 }
 
 static void
-set_uri_and_type (CajaOpenWithDialog *dialog,
+set_uri_and_type (BaulOpenWithDialog *dialog,
                   const char *uri,
                   const char *mime_type,
                   const char *passed_extension,
@@ -1180,7 +1180,7 @@ GtkWidget *
 baul_add_application_dialog_new (const char *uri,
                                  const char *mime_type)
 {
-    CajaOpenWithDialog *dialog;
+    BaulOpenWithDialog *dialog;
 
     dialog = BAUL_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (uri, mime_type, NULL, TRUE));
 
@@ -1191,7 +1191,7 @@ GtkWidget *
 baul_add_application_dialog_new_for_multiple_files (const char *extension,
         const char *mime_type)
 {
-    CajaOpenWithDialog *dialog;
+    BaulOpenWithDialog *dialog;
 
     dialog = BAUL_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (NULL, mime_type, extension, TRUE));
 

@@ -1,5 +1,5 @@
 /*
- *  baul-info-provider.h - Interface for Caja extensions that
+ *  baul-info-provider.h - Interface for Baul extensions that
  *                             provide info about files.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -24,9 +24,9 @@
  *
  */
 
-/* This interface is implemented by Caja extensions that want to
+/* This interface is implemented by Baul extensions that want to
  * provide extra location widgets for a particular location.
- * Extensions are called when Caja displays a location.
+ * Extensions are called when Baul displays a location.
  */
 
 #ifndef BAUL_LOCATION_WIDGET_PROVIDER_H
@@ -39,32 +39,32 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_LOCATION_WIDGET_PROVIDER           (baul_location_widget_provider_get_type ())
-#define BAUL_LOCATION_WIDGET_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_LOCATION_WIDGET_PROVIDER, CajaLocationWidgetProvider))
+#define BAUL_LOCATION_WIDGET_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_LOCATION_WIDGET_PROVIDER, BaulLocationWidgetProvider))
 #define BAUL_IS_LOCATION_WIDGET_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_LOCATION_WIDGET_PROVIDER))
-#define BAUL_LOCATION_WIDGET_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_LOCATION_WIDGET_PROVIDER, CajaLocationWidgetProviderIface))
+#define BAUL_LOCATION_WIDGET_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_LOCATION_WIDGET_PROVIDER, BaulLocationWidgetProviderIface))
 
-typedef struct _CajaLocationWidgetProvider       CajaLocationWidgetProvider;
-typedef struct _CajaLocationWidgetProviderIface  CajaLocationWidgetProviderIface;
+typedef struct _BaulLocationWidgetProvider       BaulLocationWidgetProvider;
+typedef struct _BaulLocationWidgetProviderIface  BaulLocationWidgetProviderIface;
 
 /**
- * CajaLocationWidgetProviderIface:
+ * BaulLocationWidgetProviderIface:
  * @g_iface: The parent interface.
  * @get_widget: Returns a #GtkWidget.
  *   See baul_location_widget_provider_get_widget() for details.
  *
  * Interface for extensions to provide additional location widgets.
  */
-struct _CajaLocationWidgetProviderIface {
+struct _BaulLocationWidgetProviderIface {
     GTypeInterface g_iface;
 
-    GtkWidget *(*get_widget) (CajaLocationWidgetProvider *provider,
+    GtkWidget *(*get_widget) (BaulLocationWidgetProvider *provider,
                               const char                 *uri,
                               GtkWidget                  *window);
 };
 
 /* Interface Functions */
 GType      baul_location_widget_provider_get_type   (void);
-GtkWidget *baul_location_widget_provider_get_widget (CajaLocationWidgetProvider *provider,
+GtkWidget *baul_location_widget_provider_get_widget (BaulLocationWidgetProvider *provider,
                                                      const char                 *uri,
                                                      GtkWidget                  *window);
 G_END_DECLS

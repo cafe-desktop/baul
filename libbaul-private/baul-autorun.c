@@ -1,11 +1,11 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2008 Red Hat, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
@@ -219,14 +219,14 @@ typedef struct
     gboolean include_open_with_other_app;
 
     gboolean update_settings;
-    CajaAutorunComboBoxChanged changed_cb;
+    BaulAutorunComboBoxChanged changed_cb;
     gpointer user_data;
 
     gboolean other_application_selected;
-} CajaAutorunComboBoxData;
+} BaulAutorunComboBoxData;
 
 static void
-baul_autorun_combobox_data_destroy (CajaAutorunComboBoxData *data)
+baul_autorun_combobox_data_destroy (BaulAutorunComboBoxData *data)
 {
     /* signal handler may be automatically disconnected by destroying the widget */
     if (g_signal_handler_is_connected (G_OBJECT (data->combo_box), data->changed_signal_id))
@@ -238,9 +238,9 @@ baul_autorun_combobox_data_destroy (CajaAutorunComboBoxData *data)
 }
 
 static void
-other_application_selected (CajaOpenWithDialog *dialog,
+other_application_selected (BaulOpenWithDialog *dialog,
                             GAppInfo *app_info,
-                            CajaAutorunComboBoxData *data)
+                            BaulAutorunComboBoxData *data)
 {
     if (data->changed_cb != NULL)
     {
@@ -260,7 +260,7 @@ other_application_selected (CajaOpenWithDialog *dialog,
 }
 
 static void
-handle_dialog_closure (CajaAutorunComboBoxData *data)
+handle_dialog_closure (BaulAutorunComboBoxData *data)
 {
     if (!data->other_application_selected)
     {
@@ -272,21 +272,21 @@ handle_dialog_closure (CajaAutorunComboBoxData *data)
 static void
 dialog_response_cb (GtkDialog *dialog,
                     gint response,
-                    CajaAutorunComboBoxData *data)
+                    BaulAutorunComboBoxData *data)
 {
     handle_dialog_closure (data);
 }
 
 static void
 dialog_destroy_cb (GtkWidget *object,
-                   CajaAutorunComboBoxData *data)
+                   BaulAutorunComboBoxData *data)
 {
     handle_dialog_closure (data);
 }
 
 static void
 combo_box_changed (GtkComboBox *combo_box,
-                   CajaAutorunComboBoxData *data)
+                   BaulAutorunComboBoxData *data)
 {
     GtkTreeIter iter;
     GtkTreeModel *model;
@@ -397,7 +397,7 @@ out:
 static void
 baul_autorun_rebuild_combo_box (GtkWidget *combo_box)
 {
-    CajaAutorunComboBoxData *data;
+    BaulAutorunComboBoxData *data;
     char *x_content_type;
 
     data = g_object_get_data (G_OBJECT (combo_box), "baul_autorun_combobox_data");
@@ -464,7 +464,7 @@ baul_autorun_prepare_combo_box (GtkWidget *combo_box,
                                 gboolean include_ask,
                                 gboolean include_open_with_other_app,
                                 gboolean update_settings,
-                                CajaAutorunComboBoxChanged changed_cb,
+                                BaulAutorunComboBoxChanged changed_cb,
                                 gpointer user_data)
 {
     GList *l;
@@ -480,7 +480,7 @@ baul_autorun_prepare_combo_box (GtkWidget *combo_box,
     gboolean pref_start_app;
     gboolean pref_ignore;
     gboolean pref_open_folder;
-    CajaAutorunComboBoxData *data;
+    BaulAutorunComboBoxData *data;
     GtkCellRenderer *renderer;
     gboolean new_data;
 
@@ -598,7 +598,7 @@ baul_autorun_prepare_combo_box (GtkWidget *combo_box,
         for (l = app_info_list, n = include_ask ? 4 : 3; l != NULL; l = l->next, n++)
         {
             GIcon *icon;
-            CajaIconInfo *icon_info;
+            BaulIconInfo *icon_info;
             char *open_string;
             GAppInfo *app_info = l->data;
 
@@ -725,7 +725,7 @@ baul_autorun_prepare_combo_box (GtkWidget *combo_box,
         }
         else
         {
-            data = g_new0 (CajaAutorunComboBoxData, 1);
+            data = g_new0 (BaulAutorunComboBoxData, 1);
         }
 
         data->x_content_type = g_strdup (x_content_type);
@@ -797,7 +797,7 @@ typedef struct
 
     char *x_content_type;
 
-    CajaAutorunOpenWindow open_window_func;
+    BaulAutorunOpenWindow open_window_func;
     gpointer user_data;
 } AutorunDialogData;
 
@@ -806,7 +806,7 @@ void
 baul_autorun_launch_for_mount (GMount *mount, GAppInfo *app_info)
 {
     GFile *root;
-    CajaFile *file;
+    BaulFile *file;
     GList *files;
 
     root = g_mount_get_root (mount);
@@ -936,7 +936,7 @@ combo_box_enter_ok (GtkWidget *togglebutton, GdkEventKey *event, GtkDialog *dial
 
 /* returns TRUE if a folder window should be opened */
 static gboolean
-do_autorun_for_content_type (GMount *mount, const char *x_content_type, CajaAutorunOpenWindow open_window_func, gpointer user_data)
+do_autorun_for_content_type (GMount *mount, const char *x_content_type, BaulAutorunOpenWindow open_window_func, gpointer user_data)
 {
     AutorunDialogData *data;
     GtkWidget *dialog;
@@ -954,7 +954,7 @@ do_autorun_for_content_type (GMount *mount, const char *x_content_type, CajaAuto
     GIcon *icon;
     GdkPixbuf *pixbuf;
     cairo_surface_t *surface;
-    CajaIconInfo *icon_info;
+    BaulIconInfo *icon_info;
     int icon_size, icon_scale;
     gboolean user_forced_dialog;
     gboolean pref_ask;
@@ -1207,7 +1207,7 @@ out:
 typedef struct
 {
     GMount *mount;
-    CajaAutorunOpenWindow open_window_func;
+    BaulAutorunOpenWindow open_window_func;
     gpointer user_data;
 } AutorunData;
 
@@ -1267,7 +1267,7 @@ autorun_guessed_content_type_callback (GObject *source_object,
 }
 
 void
-baul_autorun (GMount *mount, CajaAutorunOpenWindow open_window_func, gpointer user_data)
+baul_autorun (GMount *mount, BaulAutorunOpenWindow open_window_func, gpointer user_data)
 {
     AutorunData *data;
 
@@ -1291,7 +1291,7 @@ baul_autorun (GMount *mount, CajaAutorunOpenWindow open_window_func, gpointer us
 
 typedef struct
 {
-    CajaAutorunGetContent callback;
+    BaulAutorunGetContent callback;
     gpointer user_data;
 } GetContentTypesData;
 
@@ -1321,7 +1321,7 @@ get_types_cb (GObject *source_object,
 
 void
 baul_autorun_get_x_content_types_for_mount_async (GMount *mount,
-        CajaAutorunGetContent callback,
+        BaulAutorunGetContent callback,
         GCancellable *cancellable,
         gpointer user_data)
 {

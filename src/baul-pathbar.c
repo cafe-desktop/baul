@@ -71,7 +71,7 @@ struct _ButtonData
     ButtonType type;
     char *dir_name;
     GFile *path;
-    CajaFile *file;
+    BaulFile *file;
     unsigned int file_changed_signal_id;
 
     /* custom icon */
@@ -86,10 +86,10 @@ struct _ButtonData
     guint file_is_hidden : 1;
     guint fake_root : 1;
 
-    CajaDragSlotProxyInfo drag_info;
+    BaulDragSlotProxyInfo drag_info;
 };
 
-G_DEFINE_TYPE (CajaPathBar,
+G_DEFINE_TYPE (BaulPathBar,
                baul_path_bar,
                GTK_TYPE_CONTAINER);
 
@@ -114,17 +114,17 @@ static void     baul_path_bar_forall                   (GtkContainer    *contain
         gboolean         include_internals,
         GtkCallback      callback,
         gpointer         callback_data);
-static void     baul_path_bar_scroll_up                (CajaPathBar *path_bar);
-static void     baul_path_bar_scroll_down              (CajaPathBar *path_bar);
+static void     baul_path_bar_scroll_up                (BaulPathBar *path_bar);
+static void     baul_path_bar_scroll_down              (BaulPathBar *path_bar);
 static gboolean baul_path_bar_scroll                   (GtkWidget       *path_bar,
         GdkEventScroll  *scroll);
-static void     baul_path_bar_stop_scrolling           (CajaPathBar *path_bar);
+static void     baul_path_bar_stop_scrolling           (BaulPathBar *path_bar);
 static gboolean baul_path_bar_slider_button_press      (GtkWidget       *widget,
         GdkEventButton  *event,
-        CajaPathBar *path_bar);
+        BaulPathBar *path_bar);
 static gboolean baul_path_bar_slider_button_release    (GtkWidget       *widget,
         GdkEventButton  *event,
-        CajaPathBar *path_bar);
+        BaulPathBar *path_bar);
 static void     baul_path_bar_grab_notify              (GtkWidget       *widget,
         gboolean         was_grabbed);
 static void     baul_path_bar_state_changed            (GtkWidget       *widget,
@@ -134,17 +134,17 @@ static void     baul_path_bar_style_updated            (GtkWidget       *widget)
 
 static void     baul_path_bar_screen_changed           (GtkWidget       *widget,
         GdkScreen       *previous_screen);
-static void     baul_path_bar_check_icon_theme         (CajaPathBar *path_bar);
+static void     baul_path_bar_check_icon_theme         (BaulPathBar *path_bar);
 static void     baul_path_bar_update_button_appearance (ButtonData      *button_data);
 static void     baul_path_bar_update_button_state      (ButtonData      *button_data,
         gboolean         current_dir);
-static gboolean baul_path_bar_update_path              (CajaPathBar *path_bar,
+static gboolean baul_path_bar_update_path              (BaulPathBar *path_bar,
         GFile           *file_path,
         gboolean         emit_signal);
 
 
 static GtkWidget *
-get_slider_button (CajaPathBar  *path_bar,
+get_slider_button (BaulPathBar  *path_bar,
                    const gchar  *arrow_type)
 {
     GtkWidget *button;
@@ -161,7 +161,7 @@ get_slider_button (CajaPathBar  *path_bar,
 }
 
 static void
-update_button_types (CajaPathBar *path_bar)
+update_button_types (BaulPathBar *path_bar)
 {
     GList *list;
     GFile *path = NULL;
@@ -190,7 +190,7 @@ update_button_types (CajaPathBar *path_bar)
 static void
 desktop_location_changed_callback (gpointer user_data)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
 
     path_bar = BAUL_PATH_BAR (user_data);
 
@@ -204,9 +204,9 @@ desktop_location_changed_callback (gpointer user_data)
 }
 
 static void
-trash_state_changed_cb (CajaTrashMonitor *monitor,
+trash_state_changed_cb (BaulTrashMonitor *monitor,
                         gboolean state,
-                        CajaPathBar *path_bar)
+                        BaulPathBar *path_bar)
 {
     GFile *file;
     GList *list;
@@ -221,7 +221,7 @@ trash_state_changed_cb (CajaTrashMonitor *monitor,
         if (g_file_equal (file, button_data->path))
         {
             GIcon *icon;
-            CajaIconInfo *icon_info;
+            BaulIconInfo *icon_info;
             cairo_surface_t *surface;
 
             icon = baul_trash_monitor_get_icon ();
@@ -236,7 +236,7 @@ trash_state_changed_cb (CajaTrashMonitor *monitor,
 static gboolean
 slider_timeout (gpointer user_data)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
 
     path_bar = BAUL_PATH_BAR (user_data);
 
@@ -265,7 +265,7 @@ baul_path_bar_slider_drag_motion (GtkWidget      *widget,
                                   unsigned int    time,
                                   gpointer        user_data)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
     unsigned int timeout;
 
     path_bar = BAUL_PATH_BAR (user_data);
@@ -293,7 +293,7 @@ baul_path_bar_slider_drag_leave (GtkWidget      *widget,
                                  unsigned int    time,
                                  gpointer        user_data)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
 
     path_bar = BAUL_PATH_BAR (user_data);
 
@@ -305,7 +305,7 @@ baul_path_bar_slider_drag_leave (GtkWidget      *widget,
 }
 
 static void
-baul_path_bar_init (CajaPathBar *path_bar)
+baul_path_bar_init (BaulPathBar *path_bar)
 {
     char *p;
     GtkStyleContext *context;
@@ -379,7 +379,7 @@ baul_path_bar_init (CajaPathBar *path_bar)
 }
 
 static void
-baul_path_bar_class_init (CajaPathBarClass *path_bar_class)
+baul_path_bar_class_init (BaulPathBarClass *path_bar_class)
 {
     GObjectClass *gobject_class;
     GtkWidgetClass *widget_class;
@@ -412,7 +412,7 @@ baul_path_bar_class_init (CajaPathBarClass *path_bar_class)
         g_signal_new ("path-clicked",
                       G_OBJECT_CLASS_TYPE (path_bar_class),
                       G_SIGNAL_RUN_FIRST,
-                      G_STRUCT_OFFSET (CajaPathBarClass, path_clicked),
+                      G_STRUCT_OFFSET (BaulPathBarClass, path_clicked),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__OBJECT,
                       G_TYPE_NONE, 1,
@@ -422,7 +422,7 @@ baul_path_bar_class_init (CajaPathBarClass *path_bar_class)
        g_signal_new ("path-event",
                       G_OBJECT_CLASS_TYPE (path_bar_class),
                       G_SIGNAL_RUN_FIRST | G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (CajaPathBarClass, path_event),
+                      G_STRUCT_OFFSET (BaulPathBarClass, path_event),
                       NULL, NULL, NULL,
                       G_TYPE_BOOLEAN, 2,
                       G_TYPE_FILE,
@@ -435,7 +435,7 @@ baul_path_bar_class_init (CajaPathBarClass *path_bar_class)
 static void
 baul_path_bar_finalize (GObject *object)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
 
     path_bar = BAUL_PATH_BAR (object);
 
@@ -475,7 +475,7 @@ baul_path_bar_finalize (GObject *object)
 
 /* Removes the settings signal handler.  It's safe to call multiple times */
 static void
-remove_settings_signal (CajaPathBar *path_bar,
+remove_settings_signal (BaulPathBar *path_bar,
                         GdkScreen  *screen)
 {
     if (path_bar->settings_signal_id)
@@ -508,7 +508,7 @@ baul_path_bar_get_preferred_width (GtkWidget *widget,
     			       gint      *minimum,
     			       gint      *natural)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
     GList *list;
     gint child_height;
     gint height;
@@ -562,7 +562,7 @@ baul_path_bar_get_preferred_height (GtkWidget *widget,
     				gint      *minimum,
     				gint      *natural)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
     GList *list;
     gint child_min, child_nat;
     ButtonData *button_data = NULL;
@@ -581,7 +581,7 @@ baul_path_bar_get_preferred_height (GtkWidget *widget,
 }
 
 static void
-baul_path_bar_update_slider_buttons (CajaPathBar *path_bar)
+baul_path_bar_update_slider_buttons (BaulPathBar *path_bar)
 {
     if (path_bar->button_list)
     {
@@ -623,7 +623,7 @@ baul_path_bar_size_allocate (GtkWidget     *widget,
                              GtkAllocation *allocation)
 {
     GtkWidget *child;
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
     GtkTextDirection direction;
     GtkAllocation child_allocation;
     GList *list, *first_button;
@@ -907,7 +907,7 @@ static gboolean
 baul_path_bar_scroll (GtkWidget      *widget,
                       GdkEventScroll *event)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
 
     path_bar = BAUL_PATH_BAR (widget);
 
@@ -954,7 +954,7 @@ static void
 baul_path_bar_remove (GtkContainer *container,
                       GtkWidget    *widget)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
     GList *children;
 
     path_bar = BAUL_PATH_BAR (container);
@@ -993,7 +993,7 @@ baul_path_bar_forall (GtkContainer *container,
                       GtkCallback   callback,
                       gpointer      callback_data)
 {
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
     GList *children;
 
     g_return_if_fail (callback != NULL);
@@ -1020,7 +1020,7 @@ baul_path_bar_forall (GtkContainer *container,
 }
 
 static void
-baul_path_bar_scroll_down (CajaPathBar *path_bar)
+baul_path_bar_scroll_down (BaulPathBar *path_bar)
 {
     GList *list;
     GList *down_button;
@@ -1098,7 +1098,7 @@ baul_path_bar_scroll_down (CajaPathBar *path_bar)
 }
 
 static void
-baul_path_bar_scroll_up (CajaPathBar *path_bar)
+baul_path_bar_scroll_up (BaulPathBar *path_bar)
 {
     GList *list;
 
@@ -1125,7 +1125,7 @@ baul_path_bar_scroll_up (CajaPathBar *path_bar)
 }
 
 static gboolean
-baul_path_bar_scroll_timeout (CajaPathBar *path_bar)
+baul_path_bar_scroll_timeout (BaulPathBar *path_bar)
 {
     gboolean retval = FALSE;
 
@@ -1161,7 +1161,7 @@ baul_path_bar_scroll_timeout (CajaPathBar *path_bar)
 }
 
 static void
-baul_path_bar_stop_scrolling (CajaPathBar *path_bar)
+baul_path_bar_stop_scrolling (BaulPathBar *path_bar)
 {
     if (path_bar->timer)
     {
@@ -1174,7 +1174,7 @@ baul_path_bar_stop_scrolling (CajaPathBar *path_bar)
 static gboolean
 baul_path_bar_slider_button_press (GtkWidget       *widget,
                                    GdkEventButton  *event,
-                                   CajaPathBar *path_bar)
+                                   BaulPathBar *path_bar)
 {
     if (!gtk_widget_has_focus (widget))
     {
@@ -1214,7 +1214,7 @@ baul_path_bar_slider_button_press (GtkWidget       *widget,
 static gboolean
 baul_path_bar_slider_button_release (GtkWidget      *widget,
                                      GdkEventButton *event,
-                                     CajaPathBar     *path_bar)
+                                     BaulPathBar     *path_bar)
 {
     if (event->type != GDK_BUTTON_RELEASE)
     {
@@ -1251,7 +1251,7 @@ baul_path_bar_state_changed (GtkWidget    *widget,
 
 /* Changes the icons wherever it is needed */
 static void
-reload_icons (CajaPathBar *path_bar)
+reload_icons (BaulPathBar *path_bar)
 {
     GList *list;
 
@@ -1269,7 +1269,7 @@ reload_icons (CajaPathBar *path_bar)
 }
 
 static void
-change_icon_theme (CajaPathBar *path_bar)
+change_icon_theme (BaulPathBar *path_bar)
 {
     path_bar->icon_size = BAUL_PATH_BAR_ICON_SIZE;
     reload_icons (path_bar);
@@ -1279,7 +1279,7 @@ change_icon_theme (CajaPathBar *path_bar)
 static void
 settings_notify_cb (GObject    *object,
                     GParamSpec *pspec,
-                    CajaPathBar *path_bar)
+                    BaulPathBar *path_bar)
 {
     const char *name;
 
@@ -1292,7 +1292,7 @@ settings_notify_cb (GObject    *object,
 }
 
 static void
-baul_path_bar_check_icon_theme (CajaPathBar *path_bar)
+baul_path_bar_check_icon_theme (BaulPathBar *path_bar)
 {
     GtkSettings *settings;
 
@@ -1309,7 +1309,7 @@ baul_path_bar_check_icon_theme (CajaPathBar *path_bar)
 
 /* Public functions and their helpers */
 void
-baul_path_bar_clear_buttons (CajaPathBar *path_bar)
+baul_path_bar_clear_buttons (BaulPathBar *path_bar)
 {
     while (path_bar->button_list != NULL)
     {
@@ -1324,7 +1324,7 @@ button_clicked_cb (GtkWidget *button,
                    gpointer   data)
 {
     ButtonData *button_data;
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
     GList *button_list;
 
     button_data = BUTTON_DATA (data);
@@ -1349,7 +1349,7 @@ button_event_cb (GtkWidget *button,
 		 gpointer   data)
 {
         ButtonData *button_data;
-        CajaPathBar *path_bar;
+        BaulPathBar *path_bar;
         GList *button_list;
         gboolean retval;
 
@@ -1385,7 +1385,7 @@ button_drag_begin_cb (GtkWidget *widget,
 }
 
 
-static CajaIconInfo *
+static BaulIconInfo *
 get_type_icon_info (ButtonData *button_data)
 {
     gint icon_scale = gtk_widget_get_scale_factor (GTK_WIDGET (button_data->button));
@@ -1524,7 +1524,7 @@ baul_path_bar_update_button_appearance (ButtonData *button_data)
         }
         else
         {
-            CajaIconInfo *icon_info;
+            BaulIconInfo *icon_info;
             cairo_surface_t *surface;
 
             icon_info = get_type_icon_info (button_data);
@@ -1581,7 +1581,7 @@ setup_file_path_mounted_mount (GFile *location, ButtonData *button_data)
     GList *mounts, *l;
     gboolean result;
     GIcon *icon;
-    CajaIconInfo *info;
+    BaulIconInfo *info;
     GFile *root, *default_location;
     gint scale;
     GMount *mount = NULL;
@@ -1661,7 +1661,7 @@ setup_file_path_mounted_mount (GFile *location, ButtonData *button_data)
 
 static void
 setup_button_type (ButtonData       *button_data,
-                   CajaPathBar  *path_bar,
+                   BaulPathBar  *path_bar,
                    GFile *location)
 {
     if (path_bar->root_path != NULL && g_file_equal (location, path_bar->root_path))
@@ -1756,15 +1756,15 @@ setup_button_drag_source (ButtonData *button_data)
 }
 
 static void
-button_data_file_changed (CajaFile *file,
+button_data_file_changed (BaulFile *file,
                           ButtonData *button_data)
 {
     GFile *location, *current_location;
     ButtonData *current_button_data;
-    CajaPathBar *path_bar;
+    BaulPathBar *path_bar;
     gboolean renamed, child;
 
-    path_bar = (CajaPathBar *) gtk_widget_get_ancestor (button_data->button,
+    path_bar = (BaulPathBar *) gtk_widget_get_ancestor (button_data->button,
                BAUL_TYPE_PATH_BAR);
     if (path_bar == NULL)
     {
@@ -1880,8 +1880,8 @@ button_data_file_changed (CajaFile *file,
 }
 
 static ButtonData *
-make_directory_button (CajaPathBar  *path_bar,
-                       CajaFile     *file,
+make_directory_button (BaulPathBar  *path_bar,
+                       BaulFile     *file,
                        gboolean          current_dir,
                        gboolean          base_dir,
                        gboolean          file_is_hidden)
@@ -1979,7 +1979,7 @@ make_directory_button (CajaPathBar  *path_bar,
 }
 
 static gboolean
-baul_path_bar_check_parent_path (CajaPathBar *path_bar,
+baul_path_bar_check_parent_path (BaulPathBar *path_bar,
                                  GFile *location,
                                  ButtonData **current_button_data)
 {
@@ -2054,11 +2054,11 @@ baul_path_bar_check_parent_path (CajaPathBar *path_bar,
 }
 
 static gboolean
-baul_path_bar_update_path (CajaPathBar *path_bar,
+baul_path_bar_update_path (BaulPathBar *path_bar,
                            GFile *file_path,
                            gboolean emit_signal)
 {
-    CajaFile *file, *parent_file;
+    BaulFile *file, *parent_file;
     gboolean first_directory, last_directory;
     gboolean result;
     GList *new_buttons, *l, *fake_root;
@@ -2123,7 +2123,7 @@ baul_path_bar_update_path (CajaPathBar *path_bar,
 }
 
 gboolean
-baul_path_bar_set_path (CajaPathBar *path_bar, GFile *file_path)
+baul_path_bar_set_path (BaulPathBar *path_bar, GFile *file_path)
 {
     ButtonData *button_data;
 
@@ -2149,7 +2149,7 @@ baul_path_bar_set_path (CajaPathBar *path_bar, GFile *file_path)
 }
 
 GFile *
-baul_path_bar_get_path_for_button (CajaPathBar *path_bar,
+baul_path_bar_get_path_for_button (BaulPathBar *path_bar,
                                    GtkWidget       *button)
 {
     GList *list;

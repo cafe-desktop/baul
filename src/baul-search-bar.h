@@ -2,12 +2,12 @@
 /*
  * Copyright (C) 2005 Novell, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -32,40 +32,40 @@
 
 #define BAUL_TYPE_SEARCH_BAR baul_search_bar_get_type()
 #define BAUL_SEARCH_BAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_BAR, CajaSearchBar))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_BAR, BaulSearchBar))
 #define BAUL_SEARCH_BAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_BAR, CajaSearchBarClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_BAR, BaulSearchBarClass))
 #define BAUL_IS_SEARCH_BAR(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_BAR))
 #define BAUL_IS_SEARCH_BAR_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_BAR))
 #define BAUL_SEARCH_BAR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_BAR, CajaSearchBarClass))
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_BAR, BaulSearchBarClass))
 
-typedef struct CajaSearchBarDetails CajaSearchBarDetails;
+typedef struct BaulSearchBarDetails BaulSearchBarDetails;
 
-typedef struct CajaSearchBar
+typedef struct BaulSearchBar
 {
     GtkEventBox parent;
-    CajaSearchBarDetails *details;
-} CajaSearchBar;
+    BaulSearchBarDetails *details;
+} BaulSearchBar;
 
 typedef struct
 {
     GtkEventBoxClass parent_class;
 
-    void (* activate) (CajaSearchBar *bar);
-    void (* cancel)   (CajaSearchBar *bar);
-    void (* focus_in) (CajaSearchBar *bar);
-} CajaSearchBarClass;
+    void (* activate) (BaulSearchBar *bar);
+    void (* cancel)   (BaulSearchBar *bar);
+    void (* focus_in) (BaulSearchBar *bar);
+} BaulSearchBarClass;
 
 GType      baul_search_bar_get_type     	(void);
-GtkWidget* baul_search_bar_new          	(CajaWindow *window);
+GtkWidget* baul_search_bar_new          	(BaulWindow *window);
 
-GtkWidget *    baul_search_bar_borrow_entry  (CajaSearchBar *bar);
-void           baul_search_bar_return_entry  (CajaSearchBar *bar);
-void           baul_search_bar_grab_focus    (CajaSearchBar *bar);
-CajaQuery *baul_search_bar_get_query     (CajaSearchBar *bar);
-void           baul_search_bar_clear         (CajaSearchBar *bar);
+GtkWidget *    baul_search_bar_borrow_entry  (BaulSearchBar *bar);
+void           baul_search_bar_return_entry  (BaulSearchBar *bar);
+void           baul_search_bar_grab_focus    (BaulSearchBar *bar);
+BaulQuery *baul_search_bar_get_query     (BaulSearchBar *bar);
+void           baul_search_bar_clear         (BaulSearchBar *bar);
 
 #endif /* BAUL_SEARCH_BAR_H */

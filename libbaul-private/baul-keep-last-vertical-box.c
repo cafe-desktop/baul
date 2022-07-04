@@ -29,13 +29,13 @@
 static void	baul_keep_last_vertical_box_size_allocate 	  (GtkWidget 			    *widget,
         GtkAllocation 		    *allocation);
 
-G_DEFINE_TYPE (CajaKeepLastVerticalBox, baul_keep_last_vertical_box, GTK_TYPE_BOX)
+G_DEFINE_TYPE (BaulKeepLastVerticalBox, baul_keep_last_vertical_box, GTK_TYPE_BOX)
 
 #define parent_class baul_keep_last_vertical_box_parent_class
 
 /* Standard class initialization function */
 static void
-baul_keep_last_vertical_box_class_init (CajaKeepLastVerticalBoxClass *klass)
+baul_keep_last_vertical_box_class_init (BaulKeepLastVerticalBoxClass *klass)
 {
     GtkWidgetClass *widget_class;
 
@@ -46,7 +46,7 @@ baul_keep_last_vertical_box_class_init (CajaKeepLastVerticalBoxClass *klass)
 
 /* Standard object initialization function */
 static void
-baul_keep_last_vertical_box_init (CajaKeepLastVerticalBox *box)
+baul_keep_last_vertical_box_init (BaulKeepLastVerticalBox *box)
 {
     gtk_orientable_set_orientation (GTK_ORIENTABLE (box), GTK_ORIENTATION_VERTICAL);
 }
@@ -62,12 +62,12 @@ baul_keep_last_vertical_box_init (CajaKeepLastVerticalBox *box)
  *
  * @spacing: Vertical space between items.
  *
- * Return value: A new CajaKeepLastVerticalBox
+ * Return value: A new BaulKeepLastVerticalBox
  */
 GtkWidget *
 baul_keep_last_vertical_box_new (gint spacing)
 {
-    CajaKeepLastVerticalBox *box;
+    BaulKeepLastVerticalBox *box;
 
     box = BAUL_KEEP_LAST_VERTICAL_BOX (gtk_widget_new (baul_keep_last_vertical_box_get_type (), NULL));
 

@@ -34,29 +34,29 @@
 	(baul_file_conflict_dialog_get_type ())
 #define BAUL_FILE_CONFLICT_DIALOG(o) \
 	(G_TYPE_CHECK_INSTANCE_CAST ((o), BAUL_TYPE_FILE_CONFLICT_DIALOG,\
-				     CajaFileConflictDialog))
+				     BaulFileConflictDialog))
 #define BAUL_FILE_CONFLICT_DIALOG_CLASS(k) \
 	(G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_FILE_CONFLICT_DIALOG,\
-				 CajaFileConflictDialogClass))
+				 BaulFileConflictDialogClass))
 #define BAUL_IS_FILE_CONFLICT_DIALOG(o) \
 	(G_TYPE_CHECK_INSTANCE_TYPE ((o), BAUL_TYPE_FILE_CONFLICT_DIALOG))
 #define BAUL_IS_FILE_CONFLICT_DIALOG_CLASS(k) \
 	(G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_FILE_CONFLICT_DIALOG))
 #define BAUL_FILE_CONFLICT_DIALOG_GET_CLASS(o) \
 	(G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_FILE_CONFLICT_DIALOG,\
-				    CajaFileConflictDialogClass))
+				    BaulFileConflictDialogClass))
 
-typedef struct _CajaFileConflictDialog        CajaFileConflictDialog;
-typedef struct _CajaFileConflictDialogClass   CajaFileConflictDialogClass;
-typedef struct _CajaFileConflictDialogPrivate CajaFileConflictDialogPrivate;
+typedef struct _BaulFileConflictDialog        BaulFileConflictDialog;
+typedef struct _BaulFileConflictDialogClass   BaulFileConflictDialogClass;
+typedef struct _BaulFileConflictDialogPrivate BaulFileConflictDialogPrivate;
 
-struct _CajaFileConflictDialog
+struct _BaulFileConflictDialog
 {
     GtkDialog parent;
-    CajaFileConflictDialogPrivate *details;
+    BaulFileConflictDialogPrivate *details;
 };
 
-struct _CajaFileConflictDialogClass
+struct _BaulFileConflictDialogClass
 {
     GtkDialogClass parent_class;
 };
@@ -74,7 +74,7 @@ GtkWidget* baul_file_conflict_dialog_new              (GtkWindow *parent,
         GFile *source,
         GFile *destination,
         GFile *dest_dir);
-char*      baul_file_conflict_dialog_get_new_name     (CajaFileConflictDialog *dialog);
-gboolean   baul_file_conflict_dialog_get_apply_to_all (CajaFileConflictDialog *dialog);
+char*      baul_file_conflict_dialog_get_new_name     (BaulFileConflictDialog *dialog);
+gboolean   baul_file_conflict_dialog_get_apply_to_all (BaulFileConflictDialog *dialog);
 
 #endif /* BAUL_FILE_CONFLICT_DIALOG_H */

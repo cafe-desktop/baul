@@ -57,11 +57,11 @@ typedef enum
 typedef struct
 {
     char emblem_keywords[1];
-} CajaFileSortByEmblemCache;
+} BaulFileSortByEmblemCache;
 
-struct _CajaFilePrivate
+struct _BaulFilePrivate
 {
-    CajaDirectory *directory;
+    BaulDirectory *directory;
 
     GRefString *name;
 
@@ -135,9 +135,9 @@ struct _CajaFilePrivate
 
     /* We use this to cache automatic emblems and emblem keywords
        to speed up compare_by_emblems. */
-    CajaFileSortByEmblemCache *compare_by_emblem_cache;
+    BaulFileSortByEmblemCache *compare_by_emblem_cache;
 
-    /* CajaInfoProviders that need to be run for this file */
+    /* BaulInfoProviders that need to be run for this file */
     GList *pending_info_providers;
 
     /* Emblems provided by extensions */
@@ -154,14 +154,14 @@ struct _CajaFilePrivate
     GMount *mount;
 
     /* boolean fields: bitfield to save space, since there can be
-           many CajaFile objects. */
+           many BaulFile objects. */
 
     eel_boolean_bit unconfirmed                   : 1;
     eel_boolean_bit is_gone                       : 1;
     /* Set when emitting files_added on the directory to make sure we
        add a file, and only once */
     eel_boolean_bit is_added                      : 1;
-    /* Set by the CajaDirectory while it's loading the file
+    /* Set by the BaulDirectory while it's loading the file
      * list so the file knows not to do redundant I/O.
      */
     eel_boolean_bit loading_directory             : 1;
@@ -173,7 +173,7 @@ struct _CajaFilePrivate
     eel_boolean_bit directory_count_failed        : 1;
     eel_boolean_bit directory_count_is_up_to_date : 1;
 
-    eel_boolean_bit deep_counts_status      : 2; /* CajaRequestStatus */
+    eel_boolean_bit deep_counts_status      : 2; /* BaulRequestStatus */
     /* no deep_counts_are_up_to_date field; since we expose
            intermediate values for this attribute, we do actually
            forget it rather than invalidating. */
@@ -237,84 +237,84 @@ struct _CajaFilePrivate
 
 typedef struct
 {
-    CajaFile *file;
+    BaulFile *file;
     GCancellable *cancellable;
-    CajaFileOperationCallback callback;
+    BaulFileOperationCallback callback;
     gpointer callback_data;
     gboolean is_rename;
 
     gpointer data;
     GDestroyNotify free_data;
-    CajaUndoStackActionData* undo_redo_data;
-} CajaFileOperation;
+    BaulUndoStackActionData* undo_redo_data;
+} BaulFileOperation;
 
 
-CajaFile *baul_file_new_from_info                  (CajaDirectory      *directory,
+BaulFile *baul_file_new_from_info                  (BaulDirectory      *directory,
         GFileInfo              *info);
-void          baul_file_emit_changed                   (CajaFile           *file);
-void          baul_file_mark_gone                      (CajaFile           *file);
+void          baul_file_emit_changed                   (BaulFile           *file);
+void          baul_file_mark_gone                      (BaulFile           *file);
 char *        baul_extract_top_left_text               (const char             *text,
         gboolean                large,
         int                     length);
-void          baul_file_set_directory                  (CajaFile           *file,
-        CajaDirectory      *directory);
-gboolean      baul_file_get_date                       (CajaFile           *file,
-        CajaDateType        date_type,
+void          baul_file_set_directory                  (BaulFile           *file,
+        BaulDirectory      *directory);
+gboolean      baul_file_get_date                       (BaulFile           *file,
+        BaulDateType        date_type,
         time_t                 *date);
-void          baul_file_updated_deep_count_in_progress (CajaFile           *file);
+void          baul_file_updated_deep_count_in_progress (BaulFile           *file);
 
 
-void          baul_file_clear_info                     (CajaFile           *file);
+void          baul_file_clear_info                     (BaulFile           *file);
 /* Compare file's state with a fresh file info struct, return FALSE if
  * no change, update file and return TRUE if the file info contains
  * new state.  */
-gboolean      baul_file_update_info                    (CajaFile           *file,
+gboolean      baul_file_update_info                    (BaulFile           *file,
         GFileInfo              *info);
-gboolean      baul_file_update_name                    (CajaFile           *file,
+gboolean      baul_file_update_name                    (BaulFile           *file,
         const char             *name);
-gboolean      baul_file_update_metadata_from_info      (CajaFile           *file,
+gboolean      baul_file_update_metadata_from_info      (BaulFile           *file,
         GFileInfo              *info);
 
-gboolean      baul_file_update_name_and_directory      (CajaFile           *file,
+gboolean      baul_file_update_name_and_directory      (BaulFile           *file,
         const char             *name,
-        CajaDirectory      *directory);
+        BaulDirectory      *directory);
 
-gboolean      baul_file_set_display_name               (CajaFile           *file,
+gboolean      baul_file_set_display_name               (BaulFile           *file,
         const char             *display_name,
         const char             *edit_name,
         gboolean                custom);
-void          baul_file_set_mount                      (CajaFile           *file,
+void          baul_file_set_mount                      (BaulFile           *file,
         GMount                 *mount);
 
 /* Return true if the top lefts of files in this directory should be
  * fetched, according to the preference settings.
  */
-gboolean      baul_file_should_get_top_left_text       (CajaFile           *file);
+gboolean      baul_file_should_get_top_left_text       (BaulFile           *file);
 
 /* Mark specified attributes for this file out of date without canceling current
  * I/O or kicking off new I/O.
  */
-void                   baul_file_invalidate_attributes_internal     (CajaFile           *file,
-        CajaFileAttributes  file_attributes);
-CajaFileAttributes baul_file_get_all_attributes                 (void);
-gboolean               baul_file_is_self_owned                      (CajaFile           *file);
-void                   baul_file_invalidate_count_and_mime_list     (CajaFile           *file);
-gboolean               baul_file_rename_in_progress                 (CajaFile           *file);
-void                   baul_file_invalidate_extension_info_internal (CajaFile           *file);
-void                   baul_file_info_providers_done                (CajaFile           *file);
+void                   baul_file_invalidate_attributes_internal     (BaulFile           *file,
+        BaulFileAttributes  file_attributes);
+BaulFileAttributes baul_file_get_all_attributes                 (void);
+gboolean               baul_file_is_self_owned                      (BaulFile           *file);
+void                   baul_file_invalidate_count_and_mime_list     (BaulFile           *file);
+gboolean               baul_file_rename_in_progress                 (BaulFile           *file);
+void                   baul_file_invalidate_extension_info_internal (BaulFile           *file);
+void                   baul_file_info_providers_done                (BaulFile           *file);
 
 
 /* Thumbnailing: */
-void          baul_file_set_is_thumbnailing            (CajaFile           *file,
+void          baul_file_set_is_thumbnailing            (BaulFile           *file,
         gboolean                is_thumbnailing);
 
-CajaFileOperation *baul_file_operation_new      (CajaFile                  *file,
-        CajaFileOperationCallback  callback,
+BaulFileOperation *baul_file_operation_new      (BaulFile                  *file,
+        BaulFileOperationCallback  callback,
         gpointer                       callback_data);
-void                   baul_file_operation_free     (CajaFileOperation         *op);
-void                   baul_file_operation_complete (CajaFileOperation         *op,
+void                   baul_file_operation_free     (BaulFileOperation         *op);
+void                   baul_file_operation_complete (BaulFileOperation         *op,
         GFile                         *result_location,
         GError                        *error);
-void                   baul_file_operation_cancel   (CajaFileOperation         *op);
+void                   baul_file_operation_cancel   (BaulFileOperation         *op);
 
 #endif

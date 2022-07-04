@@ -66,8 +66,8 @@
 	</menu>
 	<placeholder name="Other Menus"/>
 	<menu action="Help">
-		<menuitem name="Caja Manual" action="Caja Manual"/>
-		<menuitem name="About Caja" action="About Caja"/>
+		<menuitem name="Baul Manual" action="Baul Manual"/>
+		<menuitem name="About Baul" action="About Baul"/>
 	</menu>
 </menubar>
 <popup name="background">

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* CajaUndoStackManager - Manages undo of file operations (implementation)
+/* BaulUndoStackManager - Manages undo of file operations (implementation)
  *
  * Copyright (C) 2007-2010 Amos Brocco
  * Copyright (C) 2011 Stefano Karapetsas
@@ -38,15 +38,15 @@
  Private fields
  ***************************************************************** */
 
-struct _CajaUndoStackActionData
+struct _BaulUndoStackActionData
 {
   /* Common stuff */
-  CajaUndoStackActionType type;
+  BaulUndoStackActionType type;
   gboolean isValid;
   gboolean locked;              /* True if the action is being undone/redone */
   gboolean freed;               /* True if the action must be freed after undo/redo */
   guint count;                  /* Size of affected uris (count of items) */
-  CajaUndoStackManager *manager;    /* Pointer to the manager */
+  BaulUndoStackManager *manager;    /* Pointer to the manager */
 
   /* Copy / Move stuff */
   GFile *src_dir;
@@ -92,7 +92,7 @@ struct _CajaUndoStackActionData
 
 };
 
-struct _CajaUndoStackManagerPrivate
+struct _BaulUndoStackManagerPrivate
 {
   /* Private fields */
   GQueue *stack;
@@ -128,7 +128,7 @@ static void baul_undostack_manager_dispose (GObject * object);
 /* *****************************************************************
  Type definition
  ***************************************************************** */
-G_DEFINE_TYPE_WITH_PRIVATE (CajaUndoStackManager, baul_undostack_manager,
+G_DEFINE_TYPE_WITH_PRIVATE (BaulUndoStackManager, baul_undostack_manager,
     G_TYPE_OBJECT);
 
 /* *****************************************************************
@@ -137,36 +137,36 @@ G_DEFINE_TYPE_WITH_PRIVATE (CajaUndoStackManager, baul_undostack_manager,
 
 static void stack_clear_n_oldest (GQueue * stack, guint n);
 
-static void stack_fix_size (CajaUndoStackManagerPrivate * priv);
+static void stack_fix_size (BaulUndoStackManagerPrivate * priv);
 
-static gboolean can_undo (CajaUndoStackManagerPrivate * priv);
+static gboolean can_undo (BaulUndoStackManagerPrivate * priv);
 
-static gboolean can_redo (CajaUndoStackManagerPrivate * priv);
+static gboolean can_redo (BaulUndoStackManagerPrivate * priv);
 
-static void stack_push_action (CajaUndoStackManagerPrivate * priv,
-    CajaUndoStackActionData * action);
+static void stack_push_action (BaulUndoStackManagerPrivate * priv,
+    BaulUndoStackActionData * action);
 
-static CajaUndoStackActionData
-    * stack_scroll_left (CajaUndoStackManagerPrivate * priv);
+static BaulUndoStackActionData
+    * stack_scroll_left (BaulUndoStackManagerPrivate * priv);
 
-static CajaUndoStackActionData
-    * stack_scroll_right (CajaUndoStackManagerPrivate * priv);
+static BaulUndoStackActionData
+    * stack_scroll_right (BaulUndoStackManagerPrivate * priv);
 
-static CajaUndoStackActionData
-    * get_next_redo_action (CajaUndoStackManagerPrivate * priv);
+static BaulUndoStackActionData
+    * get_next_redo_action (BaulUndoStackManagerPrivate * priv);
 
-static CajaUndoStackActionData
-    * get_next_undo_action (CajaUndoStackManagerPrivate * priv);
+static BaulUndoStackActionData
+    * get_next_undo_action (BaulUndoStackManagerPrivate * priv);
 
-static gchar *get_undo_label (CajaUndoStackActionData * action);
+static gchar *get_undo_label (BaulUndoStackActionData * action);
 
-static gchar *get_undo_description (CajaUndoStackActionData * action);
+static gchar *get_undo_description (BaulUndoStackActionData * action);
 
-static gchar *get_redo_label (CajaUndoStackActionData * action);
+static gchar *get_redo_label (BaulUndoStackActionData * action);
 
-static gchar *get_redo_description (CajaUndoStackActionData * action);
+static gchar *get_redo_description (BaulUndoStackActionData * action);
 
-static void do_menu_update (CajaUndoStackManager * manager);
+static void do_menu_update (BaulUndoStackManager * manager);
 
 static void free_undostack_action (gpointer data, gpointer user_data);
 
@@ -177,7 +177,7 @@ static void undo_redo_done_transfer_callback (GHashTable * debuting_uris,
 
 static void undo_redo_op_callback (gpointer callback_data);
 
-static void undo_redo_done_rename_callback (CajaFile * file,
+static void undo_redo_done_rename_callback (BaulFile * file,
     GFile * result_location, GError * error, gpointer callback_data);
 
 static void undo_redo_done_delete_callback (GHashTable * debuting_uris,
@@ -186,9 +186,9 @@ static void undo_redo_done_delete_callback (GHashTable * debuting_uris,
 static void undo_redo_done_create_callback (GFile * new_file,
     gpointer callback_data);
 
-static void clear_redo_actions (CajaUndoStackManagerPrivate * priv);
+static void clear_redo_actions (BaulUndoStackManagerPrivate * priv);
 
-static gchar *get_first_target_short_name (CajaUndoStackActionData *
+static gchar *get_first_target_short_name (BaulUndoStackActionData *
     action);
 
 static GList *construct_gfile_list (const GList * urilist, GFile * parent);
@@ -209,7 +209,7 @@ static GHashTable *retrieve_files_to_restore (GHashTable * trashed);
  Base functions
  ***************************************************************** */
 static void
-baul_undostack_manager_class_init (CajaUndoStackManagerClass * klass)
+baul_undostack_manager_class_init (BaulUndoStackManagerClass * klass)
 {
   GParamSpec *undo_levels;
   GParamSpec *confirm_delete;
@@ -251,9 +251,9 @@ baul_undostack_manager_class_init (CajaUndoStackManagerClass * klass)
 }
 
 static void
-baul_undostack_manager_init (CajaUndoStackManager * self)
+baul_undostack_manager_init (BaulUndoStackManager * self)
 {
-  CajaUndoStackManagerPrivate *priv;
+  BaulUndoStackManagerPrivate *priv;
 
   priv = baul_undostack_manager_get_instance_private (self);
 
@@ -271,8 +271,8 @@ baul_undostack_manager_init (CajaUndoStackManager * self)
 static void
 baul_undostack_manager_dispose (GObject * object)
 {
-  CajaUndoStackManager *self = BAUL_UNDOSTACK_MANAGER (object);
-  CajaUndoStackManagerPrivate *priv = self->priv;
+  BaulUndoStackManager *self = BAUL_UNDOSTACK_MANAGER (object);
+  BaulUndoStackManagerPrivate *priv = self->priv;
 
   if (priv->dispose_has_run)
     return;
@@ -305,8 +305,8 @@ baul_undostack_manager_set_property (GObject * object, guint prop_id,
 {
   g_return_if_fail (IS_BAUL_UNDOSTACK_MANAGER (object));
 
-  CajaUndoStackManager *manager = BAUL_UNDOSTACK_MANAGER (object);
-  CajaUndoStackManagerPrivate *priv = manager->priv;
+  BaulUndoStackManager *manager = BAUL_UNDOSTACK_MANAGER (object);
+  BaulUndoStackManagerPrivate *priv = manager->priv;
   guint new_undo_levels;
 
   switch (prop_id) {
@@ -335,8 +335,8 @@ baul_undostack_manager_get_property (GObject * object, guint prop_id,
 {
   g_return_if_fail (IS_BAUL_UNDOSTACK_MANAGER (object));
 
-  CajaUndoStackManager *manager = BAUL_UNDOSTACK_MANAGER (object);
-  CajaUndoStackManagerPrivate *priv = manager->priv;
+  BaulUndoStackManager *manager = BAUL_UNDOSTACK_MANAGER (object);
+  BaulUndoStackManagerPrivate *priv = manager->priv;
 
   switch (prop_id) {
     case PROP_UNDO_LEVELS:
@@ -356,10 +356,10 @@ baul_undostack_manager_get_property (GObject * object, guint prop_id,
 /** ****************************************************************
  * Returns the undo stack manager instance (singleton pattern)
  ** ****************************************************************/
-CajaUndoStackManager *
+BaulUndoStackManager *
 baul_undostack_manager_instance (void)
 {
-  static CajaUndoStackManager *manager = NULL;
+  static BaulUndoStackManager *manager = NULL;
 
   if (manager == NULL) {
     manager =
@@ -373,9 +373,9 @@ baul_undostack_manager_instance (void)
  * True if undoing / redoing
  ** ****************************************************************/
 gboolean
-baul_undostack_manager_is_undo_redo (CajaUndoStackManager * manager)
+baul_undostack_manager_is_undo_redo (BaulUndoStackManager * manager)
 {
-  CajaUndoStackManagerPrivate *priv = manager->priv;
+  BaulUndoStackManagerPrivate *priv = manager->priv;
   if (priv->undo_redo_flag) {
     return TRUE;
   }
@@ -384,7 +384,7 @@ baul_undostack_manager_is_undo_redo (CajaUndoStackManager * manager)
 }
 
 void
-baul_undostack_manager_request_menu_update (CajaUndoStackManager *
+baul_undostack_manager_request_menu_update (BaulUndoStackManager *
     manager)
 {
   do_menu_update (manager);
@@ -394,14 +394,14 @@ baul_undostack_manager_request_menu_update (CajaUndoStackManager *
  * Redoes the last file operation
  ** ****************************************************************/
 void
-baul_undostack_manager_redo (CajaUndoStackManager * manager,
-    GtkWidget * parent_view, CajaUndostackFinishCallback cb)
+baul_undostack_manager_redo (BaulUndoStackManager * manager,
+    GtkWidget * parent_view, BaulUndostackFinishCallback cb)
 {
-  CajaUndoStackManagerPrivate *priv = manager->priv;
+  BaulUndoStackManagerPrivate *priv = manager->priv;
 
   g_mutex_lock (&priv->mutex);
 
-  CajaUndoStackActionData *action = stack_scroll_left (priv);
+  BaulUndoStackActionData *action = stack_scroll_left (priv);
 
   /* Action will be NULL if redo is not possible */
   if (action != NULL) {
@@ -464,7 +464,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
       }
       case BAUL_UNDOSTACK_RENAME:
       {
-        CajaFile *file;
+        BaulFile *file;
         char *new_name;
 
         new_name = get_uri_basename (action->new_uri);
@@ -525,7 +525,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
       }
       case BAUL_UNDOSTACK_SETPERMISSIONS:
       {
-        CajaFile *file;
+        BaulFile *file;
 
         file = baul_file_get_by_uri (action->target_uri);
         baul_file_set_permissions (file,
@@ -548,7 +548,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
       }
       case BAUL_UNDOSTACK_CHANGEGROUP:
       {
-        CajaFile *file;
+        BaulFile *file;
 
         file = baul_file_get_by_uri (action->target_uri);
         baul_file_set_group (file,
@@ -559,7 +559,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
       }
       case BAUL_UNDOSTACK_CHANGEOWNER:
       {
-        CajaFile *file;
+        BaulFile *file;
 
         file = baul_file_get_by_uri (action->target_uri);
         baul_file_set_owner (file,
@@ -582,15 +582,15 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
  * Undoes the last file operation
  ** ****************************************************************/
 void
-baul_undostack_manager_undo (CajaUndoStackManager * manager,
-    GtkWidget * parent_view, CajaUndostackFinishCallback cb)
+baul_undostack_manager_undo (BaulUndoStackManager * manager,
+    GtkWidget * parent_view, BaulUndostackFinishCallback cb)
 {
-  CajaUndoStackManagerPrivate *priv = manager->priv;
+  BaulUndoStackManagerPrivate *priv = manager->priv;
   GList *uris = NULL;
 
   g_mutex_lock (&priv->mutex);
 
-  CajaUndoStackActionData *action = stack_scroll_right (priv);
+  BaulUndoStackActionData *action = stack_scroll_right (priv);
 
   if (action != NULL) {
     action->locked = TRUE;
@@ -677,7 +677,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
         break;
       case BAUL_UNDOSTACK_RENAME:
       {
-        CajaFile *file;
+        BaulFile *file;
         char *new_name;
 
         new_name = get_uri_basename (action->old_uri);
@@ -690,7 +690,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
       }
       case BAUL_UNDOSTACK_SETPERMISSIONS:
       {
-        CajaFile *file;
+        BaulFile *file;
 
         file = baul_file_get_by_uri (action->target_uri);
         baul_file_set_permissions (file,
@@ -727,7 +727,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
         break;
       case BAUL_UNDOSTACK_CHANGEGROUP:
       {
-        CajaFile *file;
+        BaulFile *file;
 
         file = baul_file_get_by_uri (action->target_uri);
         baul_file_set_group (file,
@@ -738,7 +738,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
       }
       case BAUL_UNDOSTACK_CHANGEOWNER:
       {
-        CajaFile *file;
+        BaulFile *file;
 
         file = baul_file_get_by_uri (action->target_uri);
         baul_file_set_owner (file,
@@ -761,10 +761,10 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
  * Adds an operation to the stack
  ** ****************************************************************/
 void
-baul_undostack_manager_add_action (CajaUndoStackManager * manager,
-    CajaUndoStackActionData * action)
+baul_undostack_manager_add_action (BaulUndoStackManager * manager,
+    BaulUndoStackActionData * action)
 {
-  CajaUndoStackManagerPrivate *priv = manager->priv;
+  BaulUndoStackManagerPrivate *priv = manager->priv;
 
   if (!action)
     return;
@@ -788,12 +788,12 @@ baul_undostack_manager_add_action (CajaUndoStackManager * manager,
 static GList *
 get_all_trashed_items (GQueue *stack)
 {
-  CajaUndoStackActionData *action = NULL;
+  BaulUndoStackActionData *action = NULL;
   GList *trash = NULL;
   GList *l;
   GQueue *tmp_stack = g_queue_copy(stack);
 
-  while ((action = (CajaUndoStackActionData *) g_queue_pop_tail (tmp_stack)) != NULL)
+  while ((action = (BaulUndoStackActionData *) g_queue_pop_tail (tmp_stack)) != NULL)
     if (action->trashed)
         for (l = g_hash_table_get_keys (action->trashed); l != NULL; l=l->next) {
                 trash = g_list_append(trash, l->data);
@@ -828,22 +828,22 @@ is_destination_uri_action_partof_trashed(GList *trash, GList *g)
  * Callback after emptying the trash
  ** ****************************************************************/
 void
-baul_undostack_manager_trash_has_emptied (CajaUndoStackManager *
+baul_undostack_manager_trash_has_emptied (BaulUndoStackManager *
     manager)
 {
-  CajaUndoStackManagerPrivate *priv = manager->priv;
+  BaulUndoStackManagerPrivate *priv = manager->priv;
 
   /* Clear actions from the oldest to the newest move to trash */
 
   g_mutex_lock (&priv->mutex);
 
   clear_redo_actions (priv);
-  CajaUndoStackActionData *action = NULL;
+  BaulUndoStackActionData *action = NULL;
 
   GList *g;
   GQueue *tmp_stack = g_queue_copy(priv->stack);
   GList *trash = get_all_trashed_items (tmp_stack);
-  while ((action = (CajaUndoStackActionData *) g_queue_pop_tail (tmp_stack)) != NULL)
+  while ((action = (BaulUndoStackActionData *) g_queue_pop_tail (tmp_stack)) != NULL)
   {
     if (action->destinations && action->dest_dir) {
         /* what a pain rebuild again and again an uri
@@ -891,12 +891,12 @@ baul_undostack_manager_get_file_modification_time (GFile * file)
 /** ****************************************************************
  * Returns a new undo data container
  ** ****************************************************************/
-CajaUndoStackActionData *
-baul_undostack_manager_data_new (CajaUndoStackActionType type,
+BaulUndoStackActionData *
+baul_undostack_manager_data_new (BaulUndoStackActionType type,
     gint items_count)
 {
-  CajaUndoStackActionData *data =
-      g_slice_new0 (CajaUndoStackActionData);
+  BaulUndoStackActionData *data =
+      g_slice_new0 (BaulUndoStackActionData);
   data->type = type;
   data->count = items_count;
 
@@ -915,7 +915,7 @@ baul_undostack_manager_data_new (CajaUndoStackActionType type,
  * Sets the source directory
  ** ****************************************************************/
 void
-baul_undostack_manager_data_set_src_dir (CajaUndoStackActionData *
+baul_undostack_manager_data_set_src_dir (BaulUndoStackActionData *
     data, GFile * src)
 {
   if (!data)
@@ -928,7 +928,7 @@ baul_undostack_manager_data_set_src_dir (CajaUndoStackActionData *
  * Sets the destination directory
  ** ****************************************************************/
 void
-baul_undostack_manager_data_set_dest_dir (CajaUndoStackActionData *
+baul_undostack_manager_data_set_dest_dir (BaulUndoStackActionData *
     data, GFile * dest)
 {
   if (!data)
@@ -941,7 +941,7 @@ baul_undostack_manager_data_set_dest_dir (CajaUndoStackActionData *
  * Pushes an origin, target pair in an existing undo data container
  ** ****************************************************************/
 void baul_undostack_manager_data_add_origin_target_pair
-    (CajaUndoStackActionData * data, GFile * origin, GFile * target)
+    (BaulUndoStackActionData * data, GFile * origin, GFile * target)
 {
 
   if (!data)
@@ -959,7 +959,7 @@ void baul_undostack_manager_data_add_origin_target_pair
  * Pushes an trashed file with modification time in an existing undo data container
  ** ****************************************************************/
 void
-baul_undostack_manager_data_add_trashed_file (CajaUndoStackActionData
+baul_undostack_manager_data_add_trashed_file (BaulUndoStackActionData
     * data, GFile * file, guint64 mtime)
 {
 
@@ -981,7 +981,7 @@ baul_undostack_manager_data_add_trashed_file (CajaUndoStackActionData
  * Pushes a recursive permission change data in an existing undo data container
  ** ****************************************************************/
 void baul_undostack_manager_data_add_file_permissions
-    (CajaUndoStackActionData * data, GFile * file, guint32 permission)
+    (BaulUndoStackActionData * data, GFile * file, guint32 permission)
 {
 
   if (!data)
@@ -1003,7 +1003,7 @@ void baul_undostack_manager_data_add_file_permissions
  * Sets the original file permission in an existing undo data container
  ** ****************************************************************/
 void baul_undostack_manager_data_set_file_permissions
-    (CajaUndoStackActionData * data, char *uri,
+    (BaulUndoStackActionData * data, char *uri,
     guint32 current_permissions, guint32 new_permissions)
 {
 
@@ -1022,7 +1022,7 @@ void baul_undostack_manager_data_set_file_permissions
  * Sets the change owner information in an existing undo data container
  ** ****************************************************************/
 void baul_undostack_manager_data_set_owner_change_information
-    (CajaUndoStackActionData * data, char *uri,
+    (BaulUndoStackActionData * data, char *uri,
     const char *current_user, const char *new_user)
 {
 
@@ -1041,7 +1041,7 @@ void baul_undostack_manager_data_set_owner_change_information
  * Sets the change group information in an existing undo data container
  ** ****************************************************************/
 void baul_undostack_manager_data_set_group_change_information
-    (CajaUndoStackActionData * data, char *uri,
+    (BaulUndoStackActionData * data, char *uri,
     const char *current_group, const char *new_group)
 {
 
@@ -1060,7 +1060,7 @@ void baul_undostack_manager_data_set_group_change_information
  * Sets the permission change mask
  ** ****************************************************************/
 void baul_undostack_manager_data_set_recursive_permissions
-    (CajaUndoStackActionData * data, guint32 file_permissions,
+    (BaulUndoStackActionData * data, guint32 file_permissions,
     guint32 file_mask, guint32 dir_permissions, guint32 dir_mask)
 {
 
@@ -1079,7 +1079,7 @@ void baul_undostack_manager_data_set_recursive_permissions
  * Sets create file information
  ** ****************************************************************/
 void
-baul_undostack_manager_data_set_create_data (CajaUndoStackActionData *
+baul_undostack_manager_data_set_create_data (BaulUndoStackActionData *
     data, char *target_uri, char *template)
 {
 
@@ -1096,7 +1096,7 @@ baul_undostack_manager_data_set_create_data (CajaUndoStackActionData *
  * Sets rename information
  ** ****************************************************************/
 void baul_undostack_manager_data_set_rename_information
-    (CajaUndoStackActionData * data, GFile * old_file, GFile * new_file)
+    (BaulUndoStackActionData * data, GFile * old_file, GFile * new_file)
 {
 
   if (!data)
@@ -1112,8 +1112,8 @@ void baul_undostack_manager_data_set_rename_information
  Private methods (nothing to see here, move along)
  ***************************************************************** */
 
-static CajaUndoStackActionData *
-stack_scroll_right (CajaUndoStackManagerPrivate * priv)
+static BaulUndoStackActionData *
+stack_scroll_right (BaulUndoStackManagerPrivate * priv)
 {
   gpointer data = NULL;
 
@@ -1129,8 +1129,8 @@ stack_scroll_right (CajaUndoStackManagerPrivate * priv)
 }
 
 /** ---------------------------------------------------------------- */
-static CajaUndoStackActionData *
-stack_scroll_left (CajaUndoStackManagerPrivate * priv)
+static BaulUndoStackActionData *
+stack_scroll_left (BaulUndoStackManagerPrivate * priv)
 {
   gpointer data = NULL;
 
@@ -1148,10 +1148,10 @@ static void
 stack_clear_n_oldest (GQueue * stack, guint n)
 {
   guint i;
-  CajaUndoStackActionData *action = NULL;
+  BaulUndoStackActionData *action = NULL;
 
   for (i = 0; i < n; i++) {
-    if ((action = (CajaUndoStackActionData *) g_queue_pop_tail (stack)) == NULL)
+    if ((action = (BaulUndoStackActionData *) g_queue_pop_tail (stack)) == NULL)
         break;
     if (action->locked) {
       action->freed = TRUE;
@@ -1163,7 +1163,7 @@ stack_clear_n_oldest (GQueue * stack, guint n)
 
 /** ---------------------------------------------------------------- */
 static void
-stack_fix_size (CajaUndoStackManagerPrivate * priv)
+stack_fix_size (BaulUndoStackManagerPrivate * priv)
 {
   guint length = g_queue_get_length (priv->stack);
 
@@ -1179,10 +1179,10 @@ stack_fix_size (CajaUndoStackManagerPrivate * priv)
 
 /** ---------------------------------------------------------------- */
 static void
-clear_redo_actions (CajaUndoStackManagerPrivate * priv)
+clear_redo_actions (BaulUndoStackManagerPrivate * priv)
 {
   while (priv->index > 0) {
-    CajaUndoStackActionData *head = (CajaUndoStackActionData *)
+    BaulUndoStackActionData *head = (BaulUndoStackActionData *)
         g_queue_pop_head (priv->stack);
     free_undostack_action (head, NULL);
     priv->index--;
@@ -1191,8 +1191,8 @@ clear_redo_actions (CajaUndoStackManagerPrivate * priv)
 
 /** ---------------------------------------------------------------- */
 static void
-stack_push_action (CajaUndoStackManagerPrivate * priv,
-    CajaUndoStackActionData * action)
+stack_push_action (BaulUndoStackManagerPrivate * priv,
+    BaulUndoStackActionData * action)
 {
   guint length;
 
@@ -1208,7 +1208,7 @@ stack_push_action (CajaUndoStackManagerPrivate * priv,
 
 /** ---------------------------------------------------------------- */
 static gchar *
-get_first_target_short_name (CajaUndoStackActionData * action)
+get_first_target_short_name (BaulUndoStackActionData * action)
 {
   GList *targets_first;
   gchar *file_name;
@@ -1221,7 +1221,7 @@ get_first_target_short_name (CajaUndoStackActionData * action)
 
 /** ---------------------------------------------------------------- */
 static gchar *
-get_undo_description (CajaUndoStackActionData * action)
+get_undo_description (BaulUndoStackActionData * action)
 {
   gchar *description = NULL;
   gchar *source = NULL;
@@ -1382,7 +1382,7 @@ get_undo_description (CajaUndoStackActionData * action)
 
 /** ---------------------------------------------------------------- */
 static gchar *
-get_redo_description (CajaUndoStackActionData * action)
+get_redo_description (BaulUndoStackActionData * action)
 {
   gchar *description = NULL;
   gchar *destination = NULL;
@@ -1556,7 +1556,7 @@ get_redo_description (CajaUndoStackActionData * action)
 
 /** ---------------------------------------------------------------- */
 static gchar *
-get_undo_label (CajaUndoStackActionData * action)
+get_undo_label (BaulUndoStackActionData * action)
 {
   gchar *label = NULL;
   guint count;
@@ -1651,7 +1651,7 @@ get_undo_label (CajaUndoStackActionData * action)
 
 /** ---------------------------------------------------------------- */
 static gchar *
-get_redo_label (CajaUndoStackActionData * action)
+get_redo_label (BaulUndoStackActionData * action)
 {
   gchar *label = NULL;
   guint count;
@@ -1748,9 +1748,9 @@ get_redo_label (CajaUndoStackActionData * action)
 static void
 undo_redo_done_transfer_callback (GHashTable * debuting_uris, gpointer data)
 {
-  CajaUndoStackActionData *action;
+  BaulUndoStackActionData *action;
 
-  action = (CajaUndoStackActionData *) data;
+  action = (BaulUndoStackActionData *) data;
 
   /* If the action needed to be freed but was locked, free now */
   if (action->freed) {
@@ -1759,7 +1759,7 @@ undo_redo_done_transfer_callback (GHashTable * debuting_uris, gpointer data)
     action->locked = FALSE;
   }
 
-  CajaUndoStackManager *manager = action->manager;
+  BaulUndoStackManager *manager = action->manager;
   manager->priv->undo_redo_flag = FALSE;
 
   /* Update menus */
@@ -1790,7 +1790,7 @@ undo_redo_op_callback (gpointer callback_data)
 
 /** ---------------------------------------------------------------- */
 static void
-undo_redo_done_rename_callback (CajaFile * file,
+undo_redo_done_rename_callback (BaulFile * file,
     GFile * result_location, GError * error, gpointer callback_data)
 {
   undo_redo_done_transfer_callback (NULL, callback_data);
@@ -1800,7 +1800,7 @@ undo_redo_done_rename_callback (CajaFile * file,
 static void
 free_undostack_action (gpointer data, gpointer user_data)
 {
-  CajaUndoStackActionData *action = (CajaUndoStackActionData *) data;
+  BaulUndoStackActionData *action = (BaulUndoStackActionData *) data;
 
   if (!action)
     return;
@@ -1841,7 +1841,7 @@ free_undostack_action (gpointer data, gpointer user_data)
     g_object_unref (action->dest_dir);
 
   if (action)
-    g_slice_free (CajaUndoStackActionData, action);
+    g_slice_free (BaulUndoStackActionData, action);
 }
 
 /** ---------------------------------------------------------------- */
@@ -1853,21 +1853,21 @@ undostack_dispose_all (GQueue * queue)
 
 /** ---------------------------------------------------------------- */
 static gboolean
-can_undo (CajaUndoStackManagerPrivate * priv)
+can_undo (BaulUndoStackManagerPrivate * priv)
 {
   return (get_next_undo_action (priv) != NULL);
 }
 
 /** ---------------------------------------------------------------- */
 static gboolean
-can_redo (CajaUndoStackManagerPrivate * priv)
+can_redo (BaulUndoStackManagerPrivate * priv)
 {
   return (get_next_redo_action (priv) != NULL);
 }
 
 /** ---------------------------------------------------------------- */
-static CajaUndoStackActionData *
-get_next_redo_action (CajaUndoStackManagerPrivate * priv)
+static BaulUndoStackActionData *
+get_next_redo_action (BaulUndoStackManagerPrivate * priv)
 {
   if (g_queue_is_empty (priv->stack)) {
     return NULL;
@@ -1878,7 +1878,7 @@ get_next_redo_action (CajaUndoStackManagerPrivate * priv)
     return NULL;
   }
 
-  CajaUndoStackActionData *action = g_queue_peek_nth (priv->stack,
+  BaulUndoStackActionData *action = g_queue_peek_nth (priv->stack,
       priv->index - 1);
 
   if (action->locked) {
@@ -1889,8 +1889,8 @@ get_next_redo_action (CajaUndoStackManagerPrivate * priv)
 }
 
 /** ---------------------------------------------------------------- */
-static CajaUndoStackActionData *
-get_next_undo_action (CajaUndoStackManagerPrivate * priv)
+static BaulUndoStackActionData *
+get_next_undo_action (BaulUndoStackManagerPrivate * priv)
 {
   if (g_queue_is_empty (priv->stack)) {
     return NULL;
@@ -1902,7 +1902,7 @@ get_next_undo_action (CajaUndoStackManagerPrivate * priv)
     return NULL;
   }
 
-  CajaUndoStackActionData *action = g_queue_peek_nth (priv->stack,
+  BaulUndoStackActionData *action = g_queue_peek_nth (priv->stack,
       priv->index);
 
   if (action->locked) {
@@ -1914,15 +1914,15 @@ get_next_undo_action (CajaUndoStackManagerPrivate * priv)
 
 /** ---------------------------------------------------------------- */
 static void
-do_menu_update (CajaUndoStackManager * manager)
+do_menu_update (BaulUndoStackManager * manager)
 {
 
   if (!manager)
     return;
 
-  CajaUndoStackActionData *action;
-  CajaUndoStackManagerPrivate *priv = manager->priv;
-  CajaUndoStackMenuData *data = g_slice_new0 (CajaUndoStackMenuData);
+  BaulUndoStackActionData *action;
+  BaulUndoStackManagerPrivate *priv = manager->priv;
+  BaulUndoStackMenuData *data = g_slice_new0 (BaulUndoStackMenuData);
 
   g_mutex_lock (&priv->mutex);
 
@@ -1942,7 +1942,7 @@ do_menu_update (CajaUndoStackManager * manager)
 
   /* Free the signal data */
   // Note: we do not own labels and descriptions, they are part of the action.
-  g_slice_free (CajaUndoStackMenuData, data);
+  g_slice_free (BaulUndoStackMenuData, data);
 }
 
 /** ---------------------------------------------------------------- */

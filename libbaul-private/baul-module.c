@@ -31,15 +31,15 @@
 #include "baul-extensions.h"
 
 #define BAUL_TYPE_MODULE    	(baul_module_get_type ())
-#define BAUL_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MODULE, CajaModule))
-#define BAUL_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MODULE, CajaModule))
+#define BAUL_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MODULE, BaulModule))
+#define BAUL_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MODULE, BaulModule))
 #define BAUL_IS_MODULE(obj)		(G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_MODULE))
 #define BAUL_IS_MODULE_CLASS(klass)	(G_TYPE_CLASS_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_MODULE))
 
-typedef struct _CajaModule        CajaModule;
-typedef struct _CajaModuleClass   CajaModuleClass;
+typedef struct _BaulModule        BaulModule;
+typedef struct _BaulModuleClass   BaulModuleClass;
 
-struct _CajaModule
+struct _BaulModule
 {
     GTypeModule parent;
 
@@ -56,7 +56,7 @@ struct _CajaModule
 
 };
 
-struct _CajaModuleClass
+struct _BaulModuleClass
 {
     GTypeModuleClass parent;
 };
@@ -65,13 +65,13 @@ static GList *module_objects = NULL;
 
 static GType baul_module_get_type (void);
 
-G_DEFINE_TYPE (CajaModule, baul_module, G_TYPE_TYPE_MODULE);
+G_DEFINE_TYPE (BaulModule, baul_module, G_TYPE_TYPE_MODULE);
 #define parent_class baul_module_parent_class
 
 static gboolean
 baul_module_load (GTypeModule *gmodule)
 {
-    CajaModule *module;
+    BaulModule *module;
 
     module = BAUL_MODULE (gmodule);
 
@@ -112,7 +112,7 @@ baul_module_load (GTypeModule *gmodule)
 static void
 baul_module_unload (GTypeModule *gmodule)
 {
-    CajaModule *module;
+    BaulModule *module;
 
     module = BAUL_MODULE (gmodule);
 
@@ -128,7 +128,7 @@ baul_module_unload (GTypeModule *gmodule)
 static void
 baul_module_finalize (GObject *object)
 {
-    CajaModule *module;
+    BaulModule *module;
 
     module = BAUL_MODULE (object);
 
@@ -138,12 +138,12 @@ baul_module_finalize (GObject *object)
 }
 
 static void
-baul_module_init (CajaModule *module)
+baul_module_init (BaulModule *module)
 {
 }
 
 static void
-baul_module_class_init (CajaModuleClass *class)
+baul_module_class_init (BaulModuleClass *class)
 {
     G_OBJECT_CLASS (class)->finalize = baul_module_finalize;
     G_TYPE_MODULE_CLASS (class)->load = baul_module_load;
@@ -157,7 +157,7 @@ module_object_weak_notify (gpointer user_data, GObject *object)
 }
 
 static void
-add_module_objects (CajaModule *module)
+add_module_objects (BaulModule *module)
 {
     GObject *object = NULL;
     GList *pyfiles = NULL;
@@ -192,10 +192,10 @@ add_module_objects (CajaModule *module)
     }
 }
 
-static CajaModule *
+static BaulModule *
 baul_module_load_file (const char *filename)
 {
-    CajaModule *module;
+    BaulModule *module;
 
     module = g_object_new (BAUL_TYPE_MODULE, NULL);
     module->path = g_strdup (filename);

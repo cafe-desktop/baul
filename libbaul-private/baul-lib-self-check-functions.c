@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
    baul-lib-self-check-functions.c: Wrapper for all self check functions
-   in Caja proper.
+   in Baul proper.
 
    Copyright (C) 2000 Eazel, Inc.
 

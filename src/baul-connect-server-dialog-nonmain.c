@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2005 Red Hat, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -37,7 +37,7 @@
 static GSimpleAsyncResult *display_location_res = NULL;
 
 static void
-window_go_to_cb (CajaWindow *window,
+window_go_to_cb (BaulWindow *window,
 		 GError *error,
 		 gpointer user_data)
 {
@@ -52,7 +52,7 @@ window_go_to_cb (CajaWindow *window,
 }
 
 gboolean
-baul_connect_server_dialog_display_location_finish (CajaConnectServerDialog *self,
+baul_connect_server_dialog_display_location_finish (BaulConnectServerDialog *self,
 						    GAsyncResult *res,
 						    GError **error)
 {
@@ -64,13 +64,13 @@ baul_connect_server_dialog_display_location_finish (CajaConnectServerDialog *sel
 }
 
 void
-baul_connect_server_dialog_display_location_async (CajaConnectServerDialog *self,
-    						   CajaApplication *application,
+baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self,
+    						   BaulApplication *application,
     						   GFile *location,
     						   GAsyncReadyCallback callback,
     						   gpointer user_data)
 {
-    CajaWindow *window;
+    BaulWindow *window;
     GtkWidget *widget;
 
     widget = GTK_WIDGET (self);

@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or modify
+ * Baul is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -67,9 +67,9 @@ typedef enum
     BAUL_PROPERTY_PATTERN,
     BAUL_PROPERTY_COLOR,
     BAUL_PROPERTY_EMBLEM
-} CajaPropertyType;
+} BaulPropertyType;
 
-struct _CajaPropertyBrowserPrivate
+struct _BaulPropertyBrowserPrivate
 {
     GtkWidget *container;
 
@@ -111,7 +111,7 @@ struct _CajaPropertyBrowserPrivate
     char *image_path;
     char *filename;
 
-    CajaPropertyType category_type;
+    BaulPropertyType category_type;
 
     int category_position;
 
@@ -122,22 +122,22 @@ struct _CajaPropertyBrowserPrivate
     gboolean has_local;
 };
 
-static void     baul_property_browser_update_contents       (CajaPropertyBrowser       *property_browser);
-static void     baul_property_browser_set_category          (CajaPropertyBrowser       *property_browser,
+static void     baul_property_browser_update_contents       (BaulPropertyBrowser       *property_browser);
+static void     baul_property_browser_set_category          (BaulPropertyBrowser       *property_browser,
         const char                    *new_category);
-static void     baul_property_browser_set_dragged_file      (CajaPropertyBrowser       *property_browser,
+static void     baul_property_browser_set_dragged_file      (BaulPropertyBrowser       *property_browser,
         const char                    *dragged_file_name);
-static void     baul_property_browser_set_drag_type         (CajaPropertyBrowser       *property_browser,
+static void     baul_property_browser_set_drag_type         (BaulPropertyBrowser       *property_browser,
         const char                    *new_drag_type);
 static void     add_new_button_callback                         (GtkWidget                     *widget,
-        CajaPropertyBrowser       *property_browser);
-static void     cancel_remove_mode                              (CajaPropertyBrowser       *property_browser);
+        BaulPropertyBrowser       *property_browser);
+static void     cancel_remove_mode                              (BaulPropertyBrowser       *property_browser);
 static void     done_button_callback                            (GtkWidget                     *widget,
         GtkWidget                     *property_browser);
 static void     help_button_callback                            (GtkWidget                     *widget,
         GtkWidget                     *property_browser);
 static void     remove_button_callback                          (GtkWidget                     *widget,
-        CajaPropertyBrowser       *property_browser);
+        BaulPropertyBrowser       *property_browser);
 static gboolean baul_property_browser_delete_event_callback (GtkWidget                     *widget,
         GdkEvent                      *event,
         gpointer                       user_data);
@@ -154,7 +154,7 @@ static void     baul_property_browser_drag_data_get         (GtkWidget          
         guint32                        time);
 static void     emit_emblems_changed_signal                     (void);
 static void     emblems_changed_callback                        (GObject                       *signaller,
-        CajaPropertyBrowser       *property_browser);
+        BaulPropertyBrowser       *property_browser);
 
 /* misc utilities */
 static void     element_clicked_callback                        (GtkWidget                     *image_table,
@@ -162,9 +162,9 @@ static void     element_clicked_callback                        (GtkWidget      
         const EelImageTableEvent *event,
         gpointer                       callback_data);
 
-static GdkPixbuf * make_drag_image                              (CajaPropertyBrowser       *property_browser,
+static GdkPixbuf * make_drag_image                              (BaulPropertyBrowser       *property_browser,
         const char                    *file_name);
-static GdkPixbuf * make_color_drag_image                        (CajaPropertyBrowser       *property_browser,
+static GdkPixbuf * make_color_drag_image                        (BaulPropertyBrowser       *property_browser,
         const char                    *color_spec,
         gboolean                       trim_edges);
 
@@ -197,13 +197,13 @@ static GtkTargetEntry drag_types[] =
 };
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaPropertyBrowser, baul_property_browser, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulPropertyBrowser, baul_property_browser, GTK_TYPE_WINDOW)
 
 
 /* Destroy the three dialogs for adding patterns/colors/emblems if any of them
    exist. */
 static void
-baul_property_browser_destroy_dialogs (CajaPropertyBrowser *property_browser)
+baul_property_browser_destroy_dialogs (BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->patterns_dialog)
     {
@@ -225,7 +225,7 @@ baul_property_browser_destroy_dialogs (CajaPropertyBrowser *property_browser)
 static void
 baul_property_browser_dispose (GObject *object)
 {
-    CajaPropertyBrowser *property_browser;
+    BaulPropertyBrowser *property_browser;
 
     property_browser = BAUL_PROPERTY_BROWSER (object);
 
@@ -248,7 +248,7 @@ baul_property_browser_dispose (GObject *object)
 
 /* initializing the class object by installing the operations we override */
 static void
-baul_property_browser_class_init (CajaPropertyBrowserClass *klass)
+baul_property_browser_class_init (BaulPropertyBrowserClass *klass)
 {
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
@@ -261,7 +261,7 @@ baul_property_browser_class_init (CajaPropertyBrowserClass *klass)
 /* initialize the instance's fields, create the necessary subviews, etc. */
 
 static void
-baul_property_browser_init (CajaPropertyBrowser *property_browser)
+baul_property_browser_init (BaulPropertyBrowser *property_browser)
 {
     GtkWidget *widget, *temp_box, *temp_hbox, *temp_frame, *vbox;
     GtkWidget *temp_button;
@@ -453,10 +453,10 @@ baul_property_browser_init (CajaPropertyBrowser *property_browser)
 }
 
 /* create a new instance */
-CajaPropertyBrowser *
+BaulPropertyBrowser *
 baul_property_browser_new (GdkScreen *screen)
 {
-    CajaPropertyBrowser *browser;
+    BaulPropertyBrowser *browser;
 
     browser = BAUL_PROPERTY_BROWSER
               (gtk_widget_new (baul_property_browser_get_type (), NULL));
@@ -501,7 +501,7 @@ static void
 baul_property_browser_hide_callback (GtkWidget *widget,
                                      gpointer   user_data)
 {
-    CajaPropertyBrowser *property_browser;
+    BaulPropertyBrowser *property_browser;
 
     property_browser = BAUL_PROPERTY_BROWSER (widget);
 
@@ -513,7 +513,7 @@ baul_property_browser_hide_callback (GtkWidget *widget,
 
 /* remember the name of the dragged file */
 static void
-baul_property_browser_set_dragged_file (CajaPropertyBrowser *property_browser,
+baul_property_browser_set_dragged_file (BaulPropertyBrowser *property_browser,
                                         const char *dragged_file_name)
 {
     g_free (property_browser->details->dragged_file);
@@ -522,7 +522,7 @@ baul_property_browser_set_dragged_file (CajaPropertyBrowser *property_browser,
 
 /* remember the drag type */
 static void
-baul_property_browser_set_drag_type (CajaPropertyBrowser *property_browser,
+baul_property_browser_set_drag_type (BaulPropertyBrowser *property_browser,
                                      const char *new_drag_type)
 {
     g_free (property_browser->details->drag_type);
@@ -533,7 +533,7 @@ static void
 baul_property_browser_drag_begin (GtkWidget *widget,
                                   GdkDragContext *context)
 {
-    CajaPropertyBrowser *property_browser;
+    BaulPropertyBrowser *property_browser;
     GtkWidget *child;
     GdkPixbuf *pixbuf;
     char *element_name;
@@ -593,7 +593,7 @@ baul_property_browser_drag_data_get (GtkWidget *widget,
 {
     char  *image_file_name, *image_file_uri;
     gboolean is_reset;
-    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
+    BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
     GdkAtom target;
 
     g_return_if_fail (widget != NULL);
@@ -679,7 +679,7 @@ baul_property_browser_drag_data_get (GtkWidget *widget,
 static void
 baul_property_browser_drag_end (GtkWidget *widget, GdkDragContext *context)
 {
-    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
+    BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
     if (!property_browser->details->keep_around)
     {
         gtk_widget_hide (GTK_WIDGET (widget));
@@ -718,7 +718,7 @@ ensure_file_is_image (GFile *file)
 /* create the appropriate pixbuf for the passed in file */
 
 static GdkPixbuf *
-make_drag_image (CajaPropertyBrowser *property_browser, const char* file_name)
+make_drag_image (BaulPropertyBrowser *property_browser, const char* file_name)
 {
     GdkPixbuf *pixbuf, *orig_pixbuf;
     char *image_file_name;
@@ -740,7 +740,7 @@ make_drag_image (CajaPropertyBrowser *property_browser, const char* file_name)
         else
         {
             char *icon_name;
-            CajaIconInfo *info;
+            BaulIconInfo *info;
 
             icon_name = baul_emblem_get_icon_name_from_keyword (file_name);
             info = baul_icon_info_lookup_from_name (icon_name, BAUL_ICON_SIZE_STANDARD, 1);
@@ -804,7 +804,7 @@ make_drag_image (CajaPropertyBrowser *property_browser, const char* file_name)
 /* create a pixbuf and fill it with a color */
 
 static GdkPixbuf*
-make_color_drag_image (CajaPropertyBrowser *property_browser, const char *color_spec, gboolean trim_edges)
+make_color_drag_image (BaulPropertyBrowser *property_browser, const char *color_spec, gboolean trim_edges)
 {
     GdkPixbuf *color_square;
     GdkPixbuf *ret;
@@ -860,7 +860,7 @@ make_color_drag_image (CajaPropertyBrowser *property_browser, const char *color_
 static void
 category_toggled_callback (GtkWidget *widget, char *category_name)
 {
-    CajaPropertyBrowser *property_browser;
+    BaulPropertyBrowser *property_browser;
 
     property_browser = BAUL_PROPERTY_BROWSER (g_object_get_data (G_OBJECT (widget), "user_data"));
 
@@ -872,7 +872,7 @@ category_toggled_callback (GtkWidget *widget, char *category_name)
 }
 
 static xmlDocPtr
-read_browser_xml (CajaPropertyBrowser *property_browser)
+read_browser_xml (BaulPropertyBrowser *property_browser)
 {
     char *path;
     xmlDocPtr document;
@@ -888,7 +888,7 @@ read_browser_xml (CajaPropertyBrowser *property_browser)
 }
 
 static void
-write_browser_xml (CajaPropertyBrowser *property_browser,
+write_browser_xml (BaulPropertyBrowser *property_browser,
                    xmlDocPtr document)
 {
     char *user_directory, *path;
@@ -909,7 +909,7 @@ get_color_category (xmlDocPtr document)
 /* routines to remove specific category types.  First, handle colors */
 
 static void
-remove_color (CajaPropertyBrowser *property_browser, const char* color_name)
+remove_color (BaulPropertyBrowser *property_browser, const char* color_name)
 {
     /* load the local xml file to remove the color */
     xmlDocPtr document;
@@ -959,7 +959,7 @@ remove_color (CajaPropertyBrowser *property_browser, const char* color_name)
 /* remove the pattern matching the passed in name */
 
 static void
-remove_pattern(CajaPropertyBrowser *property_browser, const char* pattern_name)
+remove_pattern(BaulPropertyBrowser *property_browser, const char* pattern_name)
 {
     char *pattern_path;
     char *user_directory;
@@ -988,7 +988,7 @@ remove_pattern(CajaPropertyBrowser *property_browser, const char* pattern_name)
 /* remove the emblem matching the passed in name */
 
 static void
-remove_emblem (CajaPropertyBrowser *property_browser, const char* emblem_name)
+remove_emblem (BaulPropertyBrowser *property_browser, const char* emblem_name)
 {
     /* delete the emblem from the emblem directory */
     if (baul_emblem_remove_emblem (emblem_name) == FALSE)
@@ -1007,7 +1007,7 @@ remove_emblem (CajaPropertyBrowser *property_browser, const char* emblem_name)
 /* handle removing the passed in element */
 
 static void
-baul_property_browser_remove_element (CajaPropertyBrowser *property_browser, EelLabeledImage *child)
+baul_property_browser_remove_element (BaulPropertyBrowser *property_browser, EelLabeledImage *child)
 {
     const char *element_name;
     char *color_name;
@@ -1061,7 +1061,7 @@ update_preview_cb (GtkFileChooser *fc,
 
 static void
 icon_button_clicked_cb (GtkButton *b,
-                        CajaPropertyBrowser *browser)
+                        BaulPropertyBrowser *browser)
 {
     GtkWidget *dialog;
     GtkFileFilter *filter;
@@ -1101,7 +1101,7 @@ icon_button_clicked_cb (GtkButton *b,
 
 /* here's where we create the emblem dialog */
 static GtkWidget*
-baul_emblem_dialog_new (CajaPropertyBrowser *property_browser)
+baul_emblem_dialog_new (BaulPropertyBrowser *property_browser)
 {
     GtkWidget *widget;
     GtkWidget *button;
@@ -1182,7 +1182,7 @@ baul_emblem_dialog_new (CajaPropertyBrowser *property_browser)
 /* create the color selection dialog */
 
 static GtkWidget*
-baul_color_selection_dialog_new (CajaPropertyBrowser *property_browser)
+baul_color_selection_dialog_new (BaulPropertyBrowser *property_browser)
 {
     GtkWidget *widget;
     GtkWidget *dialog;
@@ -1249,7 +1249,7 @@ add_pattern_to_browser (GtkDialog *dialog, gint response_id, gpointer data)
     char *user_directory;
     GFile *dest, *selected;
 
-    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
+    BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
     if (response_id != GTK_RESPONSE_ACCEPT)
     {
@@ -1312,7 +1312,7 @@ add_pattern_to_browser (GtkDialog *dialog, gint response_id, gpointer data)
 /* here's where we initiate adding a new pattern by putting up a file selector */
 
 static void
-add_new_pattern (CajaPropertyBrowser *property_browser)
+add_new_pattern (BaulPropertyBrowser *property_browser)
 {
     GtkWidget *dialog;
 
@@ -1360,7 +1360,7 @@ add_new_pattern (CajaPropertyBrowser *property_browser)
 /* here's where we add the passed in color to the file that defines the colors */
 
 static void
-add_color_to_file (CajaPropertyBrowser *property_browser, const char *color_spec, const char *color_name)
+add_color_to_file (BaulPropertyBrowser *property_browser, const char *color_spec, const char *color_name)
 {
     xmlNodePtr cur_node, new_color_node, children_node;
     xmlDocPtr document;
@@ -1419,7 +1419,7 @@ add_color_to_file (CajaPropertyBrowser *property_browser, const char *color_spec
 static void
 add_color_to_browser (GtkWidget *widget, gint which_button, gpointer data)
 {
-    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
+    BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
     if (which_button == GTK_RESPONSE_OK)
     {
@@ -1458,7 +1458,7 @@ static void
 show_color_selection_window (GtkWidget *widget, gpointer data)
 {
     GdkColor color;
-    CajaPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
+    BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
     gtk_color_selection_get_current_color (GTK_COLOR_SELECTION
                                            (gtk_color_selection_dialog_get_color_selection (GTK_COLOR_SELECTION_DIALOG (property_browser->details->colors_dialog))),
@@ -1485,7 +1485,7 @@ show_color_selection_window (GtkWidget *widget, gpointer data)
 /* here's the routine to add a new color, by putting up a color selector */
 
 static void
-add_new_color (CajaPropertyBrowser *property_browser)
+add_new_color (BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->colors_dialog)
     {
@@ -1518,7 +1518,7 @@ add_new_color (CajaPropertyBrowser *property_browser)
 
 /* here's where we handle clicks in the emblem dialog buttons */
 static void
-emblem_dialog_clicked (GtkWidget *dialog, int which_button, CajaPropertyBrowser *property_browser)
+emblem_dialog_clicked (GtkWidget *dialog, int which_button, BaulPropertyBrowser *property_browser)
 {
     char *emblem_path;
 
@@ -1600,7 +1600,7 @@ emblem_dialog_clicked (GtkWidget *dialog, int which_button, CajaPropertyBrowser 
 /* here's the routine to add a new emblem, by putting up an emblem dialog */
 
 static void
-add_new_emblem (CajaPropertyBrowser *property_browser)
+add_new_emblem (BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->emblems_dialog)
     {
@@ -1621,7 +1621,7 @@ add_new_emblem (CajaPropertyBrowser *property_browser)
 
 /* cancelremove mode */
 static void
-cancel_remove_mode (CajaPropertyBrowser *property_browser)
+cancel_remove_mode (BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->remove_mode)
     {
@@ -1634,7 +1634,7 @@ cancel_remove_mode (CajaPropertyBrowser *property_browser)
 /* handle the add_new button */
 
 static void
-add_new_button_callback(GtkWidget *widget, CajaPropertyBrowser *property_browser)
+add_new_button_callback(GtkWidget *widget, BaulPropertyBrowser *property_browser)
 {
     /* handle remove mode, where we act as a cancel button */
     if (property_browser->details->remove_mode)
@@ -1699,7 +1699,7 @@ help_button_callback (GtkWidget *widget, GtkWidget *property_browser)
 
 /* handle the "remove" button */
 static void
-remove_button_callback(GtkWidget *widget, CajaPropertyBrowser *property_browser)
+remove_button_callback(GtkWidget *widget, BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->remove_mode)
     {
@@ -1719,7 +1719,7 @@ element_clicked_callback (GtkWidget *image_table,
                           const EelImageTableEvent *event,
                           gpointer callback_data)
 {
-    CajaPropertyBrowser *property_browser;
+    BaulPropertyBrowser *property_browser;
     GtkTargetList *target_list;
     const char *element_name;
 
@@ -1806,7 +1806,7 @@ labeled_image_new (const char *text,
 }
 
 static void
-make_properties_from_directories (CajaPropertyBrowser *property_browser)
+make_properties_from_directories (BaulPropertyBrowser *property_browser)
 {
     char *object_name;
     char *object_label;
@@ -1824,7 +1824,7 @@ make_properties_from_directories (CajaPropertyBrowser *property_browser)
 
     if (property_browser->details->category_type == BAUL_PROPERTY_EMBLEM)
     {
-        CajaIconInfo *info = NULL;
+        BaulIconInfo *info = NULL;
 
         g_list_free_full (property_browser->details->keywords, g_free);
         property_browser->details->keywords = NULL;
@@ -1887,7 +1887,7 @@ make_properties_from_directories (CajaPropertyBrowser *property_browser)
     }
     else
     {
-        CajaCustomizationData *customization_data;
+        BaulCustomizationData *customization_data;
 
         customization_data = baul_customization_data_new (property_browser->details->category,
                              !property_browser->details->remove_mode,
@@ -1990,7 +1990,7 @@ make_properties_from_directories (CajaPropertyBrowser *property_browser)
 
 /* utility routine to add a reset property in the first position */
 static void
-add_reset_property (CajaPropertyBrowser *property_browser)
+add_reset_property (BaulPropertyBrowser *property_browser)
 {
     char *reset_image_file_name;
     GtkWidget *reset_image;
@@ -2029,7 +2029,7 @@ add_reset_property (CajaPropertyBrowser *property_browser)
 /* for now, we just handle color nodes */
 
 static void
-make_properties_from_xml_node (CajaPropertyBrowser *property_browser,
+make_properties_from_xml_node (BaulPropertyBrowser *property_browser,
                                xmlNodePtr node)
 {
     xmlNodePtr child_node;
@@ -2094,7 +2094,7 @@ make_properties_from_xml_node (CajaPropertyBrowser *property_browser,
 
 /* make_category generates widgets corresponding all of the objects in the passed in directory */
 static void
-make_category(CajaPropertyBrowser *property_browser, const char* path, const char* mode, xmlNodePtr node, const char *description)
+make_category(BaulPropertyBrowser *property_browser, const char* path, const char* mode, xmlNodePtr node, const char *description)
 {
 
     /* set up the description in the help label */
@@ -2141,7 +2141,7 @@ property_browser_category_button_new (const char *display_name,
 
 /* this is a utility routine to generate a category link widget and install it in the browser */
 static void
-make_category_link (CajaPropertyBrowser *property_browser,
+make_category_link (BaulPropertyBrowser *property_browser,
                     const char *name,
                     const char *display_name,
                     const char *image,
@@ -2188,7 +2188,7 @@ make_category_link (CajaPropertyBrowser *property_browser,
 
 /* update_contents populates the property browser with information specified by the path and other state variables */
 void
-baul_property_browser_update_contents (CajaPropertyBrowser *property_browser)
+baul_property_browser_update_contents (BaulPropertyBrowser *property_browser)
 {
     xmlNodePtr cur_node;
     xmlDocPtr document;
@@ -2437,7 +2437,7 @@ baul_property_browser_update_contents (CajaPropertyBrowser *property_browser)
 /* set the category and regenerate contents as necessary */
 
 static void
-baul_property_browser_set_category (CajaPropertyBrowser *property_browser,
+baul_property_browser_set_category (BaulPropertyBrowser *property_browser,
                                     const char *new_category)
 {
     /* there's nothing to do if the category is the same as the current one */
@@ -2476,7 +2476,7 @@ baul_property_browser_set_category (CajaPropertyBrowser *property_browser,
    when the path changes */
 
 void
-baul_property_browser_set_path (CajaPropertyBrowser *property_browser,
+baul_property_browser_set_path (BaulPropertyBrowser *property_browser,
                                 const char *new_path)
 {
     /* there's nothing to do if the uri is the same as the current one */
@@ -2494,7 +2494,7 @@ baul_property_browser_set_path (CajaPropertyBrowser *property_browser,
 
 static void
 emblems_changed_callback (GObject *signaller,
-                          CajaPropertyBrowser *property_browser)
+                          BaulPropertyBrowser *property_browser)
 {
     baul_property_browser_update_contents (property_browser);
 }

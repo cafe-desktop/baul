@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2011 Red Hat, Inc.
  *               2012 Stefano Karapetsas
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -140,7 +140,7 @@ get_keyfile (void)
 }
 
 void
-baul_desktop_set_metadata_string (CajaFile *file,
+baul_desktop_set_metadata_string (BaulFile *file,
                                       const gchar *name,
                                       const gchar *key,
                                       const gchar *string)
@@ -182,7 +182,7 @@ baul_desktop_set_metadata_string (CajaFile *file,
 #define STRV_TERMINATOR "@x-baul-desktop-metadata-term@"
 
 void
-baul_desktop_set_metadata_stringv (CajaFile *file,
+baul_desktop_set_metadata_stringv (BaulFile *file,
                                        const char *name,
                                        const char *key,
                                        const char * const *stringv)
@@ -230,7 +230,7 @@ baul_desktop_set_metadata_stringv (CajaFile *file,
 }
 
 gboolean
-baul_desktop_update_metadata_from_keyfile (CajaFile *file,
+baul_desktop_update_metadata_from_keyfile (BaulFile *file,
                            const gchar *name)
 {
     gchar **keys, **values;

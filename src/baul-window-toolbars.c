@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000, 2001 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -59,7 +59,7 @@
 #define TOOLBAR_PATH_EXTENSION_ACTIONS "/Toolbar/Extra Buttons Placeholder/Extension Actions"
 
 void
-baul_navigation_window_set_spinner_active (CajaNavigationWindow *window,
+baul_navigation_window_set_spinner_active (BaulNavigationWindow *window,
         gboolean allow)
 {
     if (( window->details->spinner_active &&  allow) ||
@@ -77,7 +77,7 @@ baul_navigation_window_set_spinner_active (CajaNavigationWindow *window,
 }
 
 void
-baul_navigation_window_activate_spinner (CajaNavigationWindow *window)
+baul_navigation_window_activate_spinner (BaulNavigationWindow *window)
 {
     GtkToolItem *item;
     GtkWidget *spinner;
@@ -107,16 +107,16 @@ baul_navigation_window_activate_spinner (CajaNavigationWindow *window)
 }
 
 void
-baul_navigation_window_initialize_toolbars (CajaNavigationWindow *window)
+baul_navigation_window_initialize_toolbars (BaulNavigationWindow *window)
 {
     baul_navigation_window_activate_spinner (window);
 }
 
 
 static GList *
-get_extension_toolbar_items (CajaNavigationWindow *window)
+get_extension_toolbar_items (BaulNavigationWindow *window)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
     GList *items;
     GList *providers;
     GList *l;
@@ -128,7 +128,7 @@ get_extension_toolbar_items (CajaNavigationWindow *window)
 
     for (l = providers; l != NULL; l = l->next)
     {
-        CajaMenuProvider *provider;
+        BaulMenuProvider *provider;
         GList *file_items;
 
         provider = BAUL_MENU_PROVIDER (l->data);
@@ -145,7 +145,7 @@ get_extension_toolbar_items (CajaNavigationWindow *window)
 }
 
 void
-baul_navigation_window_load_extension_toolbar_items (CajaNavigationWindow *window)
+baul_navigation_window_load_extension_toolbar_items (BaulNavigationWindow *window)
 {
     GtkUIManager *ui_manager;
     GList *items;
@@ -153,7 +153,7 @@ baul_navigation_window_load_extension_toolbar_items (CajaNavigationWindow *windo
     guint merge_id;
     GtkActionGroup *action_group;
     GtkAction *action = NULL;
-    CajaMenuItem *item = NULL;
+    BaulMenuItem *item = NULL;
     const gchar *action_name = NULL;
 
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));

@@ -43,7 +43,7 @@ baul_window_slot_info_base_init (gpointer g_class)
             g_signal_new ("active",
                           BAUL_TYPE_WINDOW_SLOT_INFO,
                           G_SIGNAL_RUN_LAST,
-                          G_STRUCT_OFFSET (CajaWindowSlotInfoIface, active),
+                          G_STRUCT_OFFSET (BaulWindowSlotInfoIface, active),
                           NULL, NULL,
                           g_cclosure_marshal_VOID__VOID,
                           G_TYPE_NONE, 0);
@@ -52,7 +52,7 @@ baul_window_slot_info_base_init (gpointer g_class)
             g_signal_new ("inactive",
                           BAUL_TYPE_WINDOW_SLOT_INFO,
                           G_SIGNAL_RUN_LAST,
-                          G_STRUCT_OFFSET (CajaWindowSlotInfoIface, inactive),
+                          G_STRUCT_OFFSET (BaulWindowSlotInfoIface, inactive),
                           NULL, NULL,
                           g_cclosure_marshal_VOID__VOID,
                           G_TYPE_NONE, 0);
@@ -70,7 +70,7 @@ baul_window_slot_info_get_type (void)
     {
         const GTypeInfo info =
         {
-            sizeof (CajaWindowSlotInfoIface),
+            sizeof (BaulWindowSlotInfoIface),
             baul_window_slot_info_base_init,
             NULL,
             NULL,
@@ -82,7 +82,7 @@ baul_window_slot_info_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaWindowSlotInfo",
+                                       "BaulWindowSlotInfo",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -91,7 +91,7 @@ baul_window_slot_info_get_type (void)
 }
 
 void
-baul_window_slot_info_set_status (CajaWindowSlotInfo *slot,
+baul_window_slot_info_set_status (BaulWindowSlotInfo *slot,
                                   const char             *status)
 {
     g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
@@ -101,19 +101,19 @@ baul_window_slot_info_set_status (CajaWindowSlotInfo *slot,
 }
 
 void
-baul_window_slot_info_make_hosting_pane_active (CajaWindowSlotInfo *slot)
+baul_window_slot_info_make_hosting_pane_active (BaulWindowSlotInfo *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
     (* BAUL_WINDOW_SLOT_INFO_GET_IFACE (slot)->make_hosting_pane_active) (slot);
 }
 
 void
-baul_window_slot_info_open_location_full (CajaWindowSlotInfo  *slot,
+baul_window_slot_info_open_location_full (BaulWindowSlotInfo  *slot,
                                      GFile                   *location,
-                                     CajaWindowOpenMode       mode,
-                                     CajaWindowOpenFlags      flags,
+                                     BaulWindowOpenMode       mode,
+                                     BaulWindowOpenFlags      flags,
                                      GList                   *selection,
-                                     CajaWindowGoToCallback   callback,
+                                     BaulWindowGoToCallback   callback,
                                      gpointer user_data)
 {
     g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
@@ -128,7 +128,7 @@ baul_window_slot_info_open_location_full (CajaWindowSlotInfo  *slot,
 }
 
 char *
-baul_window_slot_info_get_title (CajaWindowSlotInfo *slot)
+baul_window_slot_info_get_title (BaulWindowSlotInfo *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
 
@@ -136,23 +136,23 @@ baul_window_slot_info_get_title (CajaWindowSlotInfo *slot)
 }
 
 char *
-baul_window_slot_info_get_current_location (CajaWindowSlotInfo *slot)
+baul_window_slot_info_get_current_location (BaulWindowSlotInfo *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
 
     return (* BAUL_WINDOW_SLOT_INFO_GET_IFACE (slot)->get_current_location) (slot);
 }
 
-CajaView *
-baul_window_slot_info_get_current_view (CajaWindowSlotInfo *slot)
+BaulView *
+baul_window_slot_info_get_current_view (BaulWindowSlotInfo *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
 
     return (* BAUL_WINDOW_SLOT_INFO_GET_IFACE (slot)->get_current_view) (slot);
 }
 
-CajaWindowInfo *
-baul_window_slot_info_get_window (CajaWindowSlotInfo *slot)
+BaulWindowInfo *
+baul_window_slot_info_get_window (BaulWindowSlotInfo *slot)
 {
     g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
 

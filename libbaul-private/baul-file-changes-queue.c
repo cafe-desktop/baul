@@ -34,40 +34,40 @@ typedef enum
     CHANGE_FILE_MOVED,
     CHANGE_POSITION_SET,
     CHANGE_POSITION_REMOVE
-} CajaFileChangeKind;
+} BaulFileChangeKind;
 
 typedef struct
 {
-    CajaFileChangeKind kind;
+    BaulFileChangeKind kind;
     GFile *from;
     GFile *to;
     GdkPoint point;
     int screen;
-} CajaFileChange;
+} BaulFileChange;
 
 typedef struct
 {
     GList *head;
     GList *tail;
     GMutex mutex;
-} CajaFileChangesQueue;
+} BaulFileChangesQueue;
 
-static CajaFileChangesQueue *
+static BaulFileChangesQueue *
 baul_file_changes_queue_new (void)
 {
-    CajaFileChangesQueue *result;
+    BaulFileChangesQueue *result;
 
-    result = g_new0 (CajaFileChangesQueue, 1);
+    result = g_new0 (BaulFileChangesQueue, 1);
 
     g_mutex_init (&result->mutex);
 
     return result;
 }
 
-static CajaFileChangesQueue *
+static BaulFileChangesQueue *
 baul_file_changes_queue_get (void)
 {
-    static CajaFileChangesQueue *file_changes_queue;
+    static BaulFileChangesQueue *file_changes_queue;
 
     if (file_changes_queue == NULL)
     {
@@ -78,8 +78,8 @@ baul_file_changes_queue_get (void)
 }
 
 static void
-baul_file_changes_queue_add_common (CajaFileChangesQueue *queue,
-                                    CajaFileChange *new_item)
+baul_file_changes_queue_add_common (BaulFileChangesQueue *queue,
+                                    BaulFileChange *new_item)
 {
     /* enqueue the new queue item while locking down the list */
     g_mutex_lock (&queue->mutex);
@@ -94,12 +94,12 @@ baul_file_changes_queue_add_common (CajaFileChangesQueue *queue,
 void
 baul_file_changes_queue_file_added (GFile *location)
 {
-    CajaFileChange *new_item;
-    CajaFileChangesQueue *queue;
+    BaulFileChange *new_item;
+    BaulFileChangesQueue *queue;
 
     queue = baul_file_changes_queue_get();
 
-    new_item = g_new0 (CajaFileChange, 1);
+    new_item = g_new0 (BaulFileChange, 1);
     new_item->kind = CHANGE_FILE_ADDED;
     new_item->from = g_object_ref (location);
     baul_file_changes_queue_add_common (queue, new_item);
@@ -108,12 +108,12 @@ baul_file_changes_queue_file_added (GFile *location)
 void
 baul_file_changes_queue_file_changed (GFile *location)
 {
-    CajaFileChange *new_item;
-    CajaFileChangesQueue *queue;
+    BaulFileChange *new_item;
+    BaulFileChangesQueue *queue;
 
     queue = baul_file_changes_queue_get();
 
-    new_item = g_new0 (CajaFileChange, 1);
+    new_item = g_new0 (BaulFileChange, 1);
     new_item->kind = CHANGE_FILE_CHANGED;
     new_item->from = g_object_ref (location);
     baul_file_changes_queue_add_common (queue, new_item);
@@ -122,12 +122,12 @@ baul_file_changes_queue_file_changed (GFile *location)
 void
 baul_file_changes_queue_file_removed (GFile *location)
 {
-    CajaFileChange *new_item;
-    CajaFileChangesQueue *queue;
+    BaulFileChange *new_item;
+    BaulFileChangesQueue *queue;
 
     queue = baul_file_changes_queue_get();
 
-    new_item = g_new0 (CajaFileChange, 1);
+    new_item = g_new0 (BaulFileChange, 1);
     new_item->kind = CHANGE_FILE_REMOVED;
     new_item->from = g_object_ref (location);
     baul_file_changes_queue_add_common (queue, new_item);
@@ -137,12 +137,12 @@ void
 baul_file_changes_queue_file_moved (GFile *from,
                                     GFile *to)
 {
-    CajaFileChange *new_item;
-    CajaFileChangesQueue *queue;
+    BaulFileChange *new_item;
+    BaulFileChangesQueue *queue;
 
     queue = baul_file_changes_queue_get ();
 
-    new_item = g_new (CajaFileChange, 1);
+    new_item = g_new (BaulFileChange, 1);
     new_item->kind = CHANGE_FILE_MOVED;
     new_item->from = g_object_ref (from);
     new_item->to = g_object_ref (to);
@@ -154,12 +154,12 @@ baul_file_changes_queue_schedule_position_set (GFile *location,
         GdkPoint point,
         int screen)
 {
-    CajaFileChange *new_item;
-    CajaFileChangesQueue *queue;
+    BaulFileChange *new_item;
+    BaulFileChangesQueue *queue;
 
     queue = baul_file_changes_queue_get ();
 
-    new_item = g_new (CajaFileChange, 1);
+    new_item = g_new (BaulFileChange, 1);
     new_item->kind = CHANGE_POSITION_SET;
     new_item->from = g_object_ref (location);
     new_item->point = point;
@@ -170,22 +170,22 @@ baul_file_changes_queue_schedule_position_set (GFile *location,
 void
 baul_file_changes_queue_schedule_position_remove (GFile *location)
 {
-    CajaFileChange *new_item;
-    CajaFileChangesQueue *queue;
+    BaulFileChange *new_item;
+    BaulFileChangesQueue *queue;
 
     queue = baul_file_changes_queue_get ();
 
-    new_item = g_new (CajaFileChange, 1);
+    new_item = g_new (BaulFileChange, 1);
     new_item->kind = CHANGE_POSITION_REMOVE;
     new_item->from = g_object_ref (location);
     baul_file_changes_queue_add_common (queue, new_item);
 }
 
-static CajaFileChange *
-baul_file_changes_queue_get_change (CajaFileChangesQueue *queue)
+static BaulFileChange *
+baul_file_changes_queue_get_change (BaulFileChangesQueue *queue)
 {
     GList *new_tail;
-    CajaFileChange *result;
+    BaulFileChange *result;
 
     g_assert (queue != NULL);
 
@@ -240,7 +240,7 @@ static void
 position_set_list_free (GList *list)
 {
     GList *p;
-    CajaFileChangesQueuePosition *item = NULL;
+    BaulFileChangesQueuePosition *item = NULL;
 
     for (p = list; p != NULL; p = p->next)
     {
@@ -257,13 +257,13 @@ position_set_list_free (GList *list)
 void
 baul_file_changes_consume_changes (gboolean consume_all)
 {
-    CajaFileChange *change;
+    BaulFileChange *change;
     GList *additions, *changes, *deletions, *moves;
     GList *position_set_requests;
     GFilePair *pair;
-    CajaFileChangesQueuePosition *position_set;
+    BaulFileChangesQueuePosition *position_set;
     guint chunk_count;
-    CajaFileChangesQueue *queue;
+    BaulFileChangesQueue *queue;
     gboolean flush_needed;
 
 
@@ -392,7 +392,7 @@ baul_file_changes_consume_changes (gboolean consume_all)
             break;
 
         case CHANGE_POSITION_SET:
-            position_set = g_new (CajaFileChangesQueuePosition, 1);
+            position_set = g_new (BaulFileChangesQueuePosition, 1);
             position_set->location = change->from;
             position_set->set = TRUE;
             position_set->point = change->point;
@@ -402,7 +402,7 @@ baul_file_changes_consume_changes (gboolean consume_all)
             break;
 
         case CHANGE_POSITION_REMOVE:
-            position_set = g_new (CajaFileChangesQueuePosition, 1);
+            position_set = g_new (BaulFileChangesQueuePosition, 1);
             position_set->location = change->from;
             position_set->set = FALSE;
             position_set_requests = g_list_prepend (position_set_requests,

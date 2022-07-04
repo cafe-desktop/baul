@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* baul-global-preferences.c - Caja specific preference keys and
+/* baul-global-preferences.c - Baul specific preference keys and
                                    functions.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.

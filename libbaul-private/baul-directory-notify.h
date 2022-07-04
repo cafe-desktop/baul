@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-directory-notify.h: Caja directory notify calls.
+   baul-directory-notify.h: Baul directory notify calls.
 
    Copyright (C) 2000, 2001 Eazel, Inc.
 
@@ -44,7 +44,7 @@ typedef struct
     gboolean set;
     GdkPoint point;
     int screen;
-} CajaFileChangesQueuePosition;
+} BaulFileChangesQueuePosition;
 
 /* Almost-public change notification calls */
 void baul_directory_notify_files_added   (GList *files);
@@ -66,4 +66,4 @@ void baul_directory_schedule_position_set    (GList        *position_setting_lis
  * a notification. Eventually this should become private, but for now
  * it needs to be used for code like the thumbnail generation.
  */
-void baul_file_changed                       (CajaFile *file);
+void baul_file_changed                       (BaulFile *file);

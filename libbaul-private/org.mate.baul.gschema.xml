@@ -83,33 +83,33 @@
     </key>
     <key name="exit-with-last-window" type="b">
       <default>false</default>
-      <summary>Caja will exit when last window destroyed.</summary>
-      <description>If set to true, then Caja will exit when all windows are destroyed. This is the default setting. If set to false, it can be started without any window, so Caja can serve as a daemon to monitor media automount, or similar tasks.</description>
+      <summary>Baul will exit when last window destroyed.</summary>
+      <description>If set to true, then Baul will exit when all windows are destroyed. This is the default setting. If set to false, it can be started without any window, so Baul can serve as a daemon to monitor media automount, or similar tasks.</description>
     </key>
     <key name="always-use-browser" type="b">
       <default>true</default>
-      <summary>Enables the classic Caja behavior, where all windows are browsers</summary>
-      <description>If set to true, then all Caja windows will be browser windows. This is how Nautilus used to behave before version 2.6, and some people prefer this behavior.</description>
+      <summary>Enables the classic Baul behavior, where all windows are browsers</summary>
+      <description>If set to true, then all Baul windows will be browser windows. This is how Nautilus used to behave before version 2.6, and some people prefer this behavior.</description>
     </key>
     <key name="always-use-location-entry" type="b">
       <default>false</default>
       <summary>Always use the location entry, instead of the pathbar</summary>
-      <description>If set to true, then Caja browser windows will always use a textual input entry for the location toolbar, instead of the pathbar.</description>
+      <description>If set to true, then Baul browser windows will always use a textual input entry for the location toolbar, instead of the pathbar.</description>
     </key>
     <key name="confirm-trash" type="b">
       <default>true</default>
       <summary>Whether to ask for confirmation when deleting files, or emptying Trash</summary>
-      <description>If set to true, then Caja will ask for confirmation when  you attempt to delete files, or empty the Trash.</description>
+      <description>If set to true, then Baul will ask for confirmation when  you attempt to delete files, or empty the Trash.</description>
     </key>
     <key name="confirm-move-to-trash" type="b">
       <default>false</default>
       <summary>Whether to ask for confirmation when moving files to the Trash</summary>
-      <description>If set to true, then Caja will ask for confirmation when you attempt to move files to the Trash.</description>
+      <description>If set to true, then Baul will ask for confirmation when you attempt to move files to the Trash.</description>
     </key>
     <key name="enable-delete" type="b">
       <default>false</default>
       <summary>Whether to enable immediate deletion</summary>
-      <description>If set to true, then Caja will have a feature allowing you to delete a file immediately and in-place, instead of moving it  to the trash. This feature can be dangerous, so use caution.</description>
+      <description>If set to true, then Baul will have a feature allowing you to delete a file immediately and in-place, instead of moving it  to the trash. This feature can be dangerous, so use caution.</description>
     </key>
     <key name="show-icon-text" enum="org.mate.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
@@ -140,8 +140,8 @@
     </key>
     <key name="mouse-use-extra-buttons" type="b">
       <default>true</default>
-      <summary>Use extra mouse button events in Caja' browser window</summary>
-      <description>For users with mice that have "Forward" and "Back" buttons, this key will determine if any action is taken inside of Caja when either is pressed.</description>
+      <summary>Use extra mouse button events in Baul' browser window</summary>
+      <description>For users with mice that have "Forward" and "Back" buttons, this key will determine if any action is taken inside of Baul when either is pressed.</description>
     </key>
     <key name="mouse-forward-button" type="i">
       <default>9</default>
@@ -173,12 +173,12 @@
     <key name="show-advanced-permissions" type="b">
       <default>false</default>
       <summary>Show advanced permissions in the file property dialog</summary>
-      <description>If set to true, then Caja lets you edit and display file permissions in a more unix-like way, accessing some more esoteric options.</description>
+      <description>If set to true, then Baul lets you edit and display file permissions in a more unix-like way, accessing some more esoteric options.</description>
     </key>
     <key name="sort-directories-first" type="b">
       <default>true</default>
       <summary>Show folders first in windows</summary>
-      <description>If set to true, then Caja shows folders prior to showing files in the icon and list views.</description>
+      <description>If set to true, then Baul shows folders prior to showing files in the icon and list views.</description>
     </key>
     <key name="default-sort-order" enum="org.mate.baul.SortOrder">
       <aliases>
@@ -195,8 +195,8 @@
     </key>
     <key name="desktop-is-home-dir" type="b">
       <default>false</default>
-      <summary>Caja uses the users home folder as the desktop</summary>
-      <description>If set to true, then Caja will use the user's home folder as the desktop.  If it is false, then it will use ~/Desktop as the desktop.</description>
+      <summary>Baul uses the users home folder as the desktop</summary>
+      <description>If set to true, then Baul will use the user's home folder as the desktop.  If it is false, then it will use ~/Desktop as the desktop.</description>
     </key>
     <key name="background-set" type="b">
       <default>false</default>
@@ -267,7 +267,7 @@
     <key name="show-notifications" type="b">
       <default>true</default>
       <summary>Whether to show desktop notifications</summary>
-      <description>If set to true, Caja will show desktop notifications.</description>
+      <description>If set to true, Baul will show desktop notifications.</description>
     </key>
   </schema>
 
@@ -365,7 +365,7 @@
     <key name="show-only-directories" type="b">
       <default>true</default>
       <summary>Only show folders in the tree side pane</summary>
-      <description>If set to true, Caja will only show folders in the tree side pane. Otherwise it will show both folders and files.</description>
+      <description>If set to true, Baul will only show folders in the tree side pane. Otherwise it will show both folders and files.</description>
     </key>
   </schema>
 
@@ -473,12 +473,12 @@
     <choice value='tree'/>
       </choices>
       <aliases>
-    <alias value='CajaEmblemSidebar' target='emblems'/>
-    <alias value='CajaHistorySidebar' target='history'/>
-    <alias value='CajaInformationPanel' target='information'/>
-    <alias value='CajaNotesSidebar' target='notes'/>
-    <alias value='CajaPlacesSidebar' target='places'/>
-    <alias value='CajaTreeSidebar' target='tree'/>
+    <alias value='BaulEmblemSidebar' target='emblems'/>
+    <alias value='BaulHistorySidebar' target='history'/>
+    <alias value='BaulInformationPanel' target='information'/>
+    <alias value='BaulNotesSidebar' target='notes'/>
+    <alias value='BaulPlacesSidebar' target='places'/>
+    <alias value='BaulTreeSidebar' target='tree'/>
       </aliases>
       <default>'places'</default>
       <summary>Side pane view</summary>

@@ -31,7 +31,7 @@
 
 GList *baul_get_all_columns       (void);
 GList *baul_get_common_columns    (void);
-GList *baul_get_columns_for_file (CajaFile *file);
+GList *baul_get_columns_for_file (BaulFile *file);
 GList *baul_column_list_copy      (GList       *columns);
 void   baul_column_list_free      (GList       *columns);
 

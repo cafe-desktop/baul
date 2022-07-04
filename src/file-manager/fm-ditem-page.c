@@ -206,7 +206,7 @@ fm_ditem_page_exec_drag_data_received (GtkWidget *widget, GdkDragContext *contex
 {
     char **uris;
     gboolean exactly_one;
-    CajaFile *file;
+    BaulFile *file;
     char *uri, *exec;
 
     uris = g_strsplit (gtk_selection_data_get_data (selection_data), "\r\n", 0);
@@ -524,7 +524,7 @@ GtkWidget *
 fm_ditem_page_make_box (GtkSizeGroup *label_size_group,
                         GList *files)
 {
-    CajaFileInfo *info;
+    BaulFileInfo *info;
     char *uri;
     GtkWidget *box;
 
@@ -546,7 +546,7 @@ fm_ditem_page_make_box (GtkSizeGroup *label_size_group,
 gboolean
 fm_ditem_page_should_show (GList *files)
 {
-    CajaFileInfo *info;
+    BaulFileInfo *info;
 
     if (!files || files->next)
     {

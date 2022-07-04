@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 1999, 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -32,9 +32,9 @@
 #include "baul-bookmark-list.h"
 #include "baul-window.h"
 
-GtkWindow *create_bookmarks_window                 (CajaBookmarkList *bookmarks,
-                                                    CajaWindow       *window_source);
+GtkWindow *create_bookmarks_window                 (BaulBookmarkList *bookmarks,
+                                                    BaulWindow       *window_source);
 void       baul_bookmarks_window_save_geometry     (GtkWindow        *window);
-void	   edit_bookmarks_dialog_set_signals	   (CajaWindow       *window);
+void	   edit_bookmarks_dialog_set_signals	   (BaulWindow       *window);
 
 #endif /* BAUL_BOOKMARKS_WINDOW_H */

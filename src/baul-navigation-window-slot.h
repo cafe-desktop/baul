@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-navigation-window-slot.h: Caja navigation window slot
+   baul-navigation-window-slot.h: Baul navigation window slot
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -27,34 +27,34 @@
 
 #include "baul-window-slot.h"
 
-typedef struct CajaNavigationWindowSlot CajaNavigationWindowSlot;
-typedef struct CajaNavigationWindowSlotClass CajaNavigationWindowSlotClass;
+typedef struct BaulNavigationWindowSlot BaulNavigationWindowSlot;
+typedef struct BaulNavigationWindowSlotClass BaulNavigationWindowSlotClass;
 
 
 #define BAUL_TYPE_NAVIGATION_WINDOW_SLOT         (baul_navigation_window_slot_get_type())
-#define BAUL_NAVIGATION_WINDOW_SLOT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_NAVIGATION_WINDOW_SLOT_CLASS, CajaNavigationWindowSlotClass))
-#define BAUL_NAVIGATION_WINDOW_SLOT(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NAVIGATION_WINDOW_SLOT, CajaNavigationWindowSlot))
+#define BAUL_NAVIGATION_WINDOW_SLOT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_NAVIGATION_WINDOW_SLOT_CLASS, BaulNavigationWindowSlotClass))
+#define BAUL_NAVIGATION_WINDOW_SLOT(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NAVIGATION_WINDOW_SLOT, BaulNavigationWindowSlot))
 #define BAUL_IS_NAVIGATION_WINDOW_SLOT(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_NAVIGATION_WINDOW_SLOT))
 #define BAUL_IS_NAVIGATION_WINDOW_SLOT_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_NAVIGATION_WINDOW_SLOT))
-#define BAUL_NAVIGATION_WINDOW_SLOT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NAVIGATION_WINDOW_SLOT, CajaNavigationWindowSlotClass))
+#define BAUL_NAVIGATION_WINDOW_SLOT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NAVIGATION_WINDOW_SLOT, BaulNavigationWindowSlotClass))
 
 typedef enum
 {
     BAUL_BAR_PATH,
     BAUL_BAR_NAVIGATION,
     BAUL_BAR_SEARCH
-} CajaBarMode;
+} BaulBarMode;
 
-struct CajaNavigationWindowSlot
+struct BaulNavigationWindowSlot
 {
-    CajaWindowSlot parent;
+    BaulWindowSlot parent;
 
-    CajaBarMode bar_mode;
+    BaulBarMode bar_mode;
     GtkTreeModel *viewer_model;
     int num_viewers;
 
     /* Back/Forward chain, and history list.
-     * The data in these lists are CajaBookmark pointers.
+     * The data in these lists are BaulBookmark pointers.
      */
     GList *back_list, *forward_list;
 
@@ -62,17 +62,17 @@ struct CajaNavigationWindowSlot
     GList *sidebar_panels;
 };
 
-struct CajaNavigationWindowSlotClass
+struct BaulNavigationWindowSlotClass
 {
-    CajaWindowSlotClass parent;
+    BaulWindowSlotClass parent;
 };
 
 GType baul_navigation_window_slot_get_type (void);
 
-gboolean baul_navigation_window_slot_should_close_with_mount (CajaNavigationWindowSlot *slot,
+gboolean baul_navigation_window_slot_should_close_with_mount (BaulNavigationWindowSlot *slot,
         GMount *mount);
 
-void baul_navigation_window_slot_clear_forward_list (CajaNavigationWindowSlot *slot);
-void baul_navigation_window_slot_clear_back_list    (CajaNavigationWindowSlot *slot);
+void baul_navigation_window_slot_clear_forward_list (BaulNavigationWindowSlot *slot);
+void baul_navigation_window_slot_clear_back_list    (BaulNavigationWindowSlot *slot);
 
 #endif /* BAUL_NAVIGATION_WINDOW_SLOT_H */

@@ -59,7 +59,7 @@
  *  */
 static void
 application_cannot_open_location (GAppInfo *application,
-                                  CajaFile *file,
+                                  BaulFile *file,
                                   const char *uri_scheme,
                                   GtkWindow *parent_window)
 {
@@ -194,12 +194,12 @@ baul_launch_application_by_uri (GAppInfo *application,
                                 GList *uris,
                                 GtkWindow *parent_window)
 {
-    CajaFile *file;
+    BaulFile *file;
     gboolean result;
     GError *error;
     GdkDisplay *display;
     GdkAppLaunchContext *launch_context;
-    CajaIconInfo *icon;
+    BaulIconInfo *icon;
     int count;
     GList *locations, *l;
     GFile *location = NULL;

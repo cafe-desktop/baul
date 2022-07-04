@@ -29,12 +29,12 @@
 
 /**
  * SECTION:baul-configurable
- * @title: CajaConfigurable
+ * @title: BaulConfigurable
  * @short_description: Interface to allow an extension to be configured
  * @include: libbaul-extension/baul-configurable.h
  *
- * #CajaConfigurable allows an extension to show a configuration page.
- * The presence of CajaConfigurable enables the 'Configure' button.
+ * #BaulConfigurable allows an extension to show a configuration page.
+ * The presence of BaulConfigurable enables the 'Configure' button.
  */
 
 static void
@@ -49,7 +49,7 @@ baul_configurable_get_type (void)
 
     if (!type) {
         const GTypeInfo info = {
-            sizeof (CajaConfigurableIface),
+            sizeof (BaulConfigurableIface),
             baul_configurable_base_init,
             NULL,
             NULL,
@@ -61,7 +61,7 @@ baul_configurable_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaConfigurable",
+                                       "BaulConfigurable",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -71,10 +71,10 @@ baul_configurable_get_type (void)
 
 /**
  * baul_configurable_run:
- * @provider: a #CajaConfigurable
+ * @provider: a #BaulConfigurable
  */
 void
-baul_configurable_run_config (CajaConfigurable *provider)
+baul_configurable_run_config (BaulConfigurable *provider)
 {
     if (!BAUL_IS_CONFIGURABLE(provider)) {
         return;

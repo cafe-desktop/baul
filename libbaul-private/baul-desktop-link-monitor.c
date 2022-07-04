@@ -42,15 +42,15 @@
 #include "baul-global-preferences.h"
 #include "baul-trash-monitor.h"
 
-struct CajaDesktopLinkMonitorDetails
+struct BaulDesktopLinkMonitorDetails
 {
     GVolumeMonitor *volume_monitor;
-    CajaDirectory *desktop_dir;
+    BaulDirectory *desktop_dir;
 
-    CajaDesktopLink *home_link;
-    CajaDesktopLink *computer_link;
-    CajaDesktopLink *trash_link;
-    CajaDesktopLink *network_link;
+    BaulDesktopLink *home_link;
+    BaulDesktopLink *computer_link;
+    BaulDesktopLink *trash_link;
+    BaulDesktopLink *network_link;
 
     gulong mount_id;
     gulong unmount_id;
@@ -64,11 +64,11 @@ static void baul_desktop_link_monitor_init       (gpointer              object,
         gpointer              klass);
 static void baul_desktop_link_monitor_class_init (gpointer              klass);
 
-EEL_CLASS_BOILERPLATE (CajaDesktopLinkMonitor,
+EEL_CLASS_BOILERPLATE (BaulDesktopLinkMonitor,
                        baul_desktop_link_monitor,
                        G_TYPE_OBJECT)
 
-static CajaDesktopLinkMonitor *the_link_monitor = NULL;
+static BaulDesktopLinkMonitor *the_link_monitor = NULL;
 
 static void
 destroy_desktop_link_monitor (void)
@@ -79,7 +79,7 @@ destroy_desktop_link_monitor (void)
     }
 }
 
-CajaDesktopLinkMonitor *
+BaulDesktopLinkMonitor *
 baul_desktop_link_monitor_get (void)
 {
     if (the_link_monitor == NULL)
@@ -91,7 +91,7 @@ baul_desktop_link_monitor_get (void)
 }
 
 static gboolean
-volume_file_name_used (CajaDesktopLinkMonitor *monitor,
+volume_file_name_used (BaulDesktopLinkMonitor *monitor,
                        const char *name)
 {
     GList *l;
@@ -115,7 +115,7 @@ volume_file_name_used (CajaDesktopLinkMonitor *monitor,
 }
 
 char *
-baul_desktop_link_monitor_make_filename_unique (CajaDesktopLinkMonitor *monitor,
+baul_desktop_link_monitor_make_filename_unique (BaulDesktopLinkMonitor *monitor,
         const char *filename)
 {
     char *unique_name;
@@ -132,7 +132,7 @@ baul_desktop_link_monitor_make_filename_unique (CajaDesktopLinkMonitor *monitor,
 }
 
 static gboolean
-has_mount (CajaDesktopLinkMonitor *monitor,
+has_mount (BaulDesktopLinkMonitor *monitor,
            GMount                     *mount)
 {
     gboolean ret;
@@ -157,7 +157,7 @@ has_mount (CajaDesktopLinkMonitor *monitor,
 }
 
 static void
-create_mount_link (CajaDesktopLinkMonitor *monitor,
+create_mount_link (BaulDesktopLinkMonitor *monitor,
                    GMount *mount)
 {
     if (has_mount (monitor, mount))
@@ -166,7 +166,7 @@ create_mount_link (CajaDesktopLinkMonitor *monitor,
     if ((!g_mount_is_shadowed (mount)) &&
             g_settings_get_boolean (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
     {
-        CajaDesktopLink *link;
+        BaulDesktopLink *link;
 
         link = baul_desktop_link_new_from_mount (mount);
         monitor->details->mount_links = g_list_prepend (monitor->details->mount_links, link);
@@ -174,11 +174,11 @@ create_mount_link (CajaDesktopLinkMonitor *monitor,
 }
 
 static void
-remove_mount_link (CajaDesktopLinkMonitor *monitor,
+remove_mount_link (BaulDesktopLinkMonitor *monitor,
                    GMount *mount)
 {
     GList *l;
-    CajaDesktopLink *link;
+    BaulDesktopLink *link;
     GMount *other_mount = NULL;
 
     link = NULL;
@@ -206,7 +206,7 @@ remove_mount_link (CajaDesktopLinkMonitor *monitor,
 static void
 mount_added_callback (GVolumeMonitor *volume_monitor,
                       GMount *mount,
-                      CajaDesktopLinkMonitor *monitor)
+                      BaulDesktopLinkMonitor *monitor)
 {
     create_mount_link (monitor, mount);
 }
@@ -215,7 +215,7 @@ mount_added_callback (GVolumeMonitor *volume_monitor,
 static void
 mount_removed_callback (GVolumeMonitor *volume_monitor,
                         GMount *mount,
-                        CajaDesktopLinkMonitor *monitor)
+                        BaulDesktopLinkMonitor *monitor)
 {
     remove_mount_link (monitor, mount);
 }
@@ -223,7 +223,7 @@ mount_removed_callback (GVolumeMonitor *volume_monitor,
 static void
 mount_changed_callback (GVolumeMonitor *volume_monitor,
                         GMount *mount,
-                        CajaDesktopLinkMonitor *monitor)
+                        BaulDesktopLinkMonitor *monitor)
 {
     /* TODO: update the mount with other details */
 
@@ -235,9 +235,9 @@ mount_changed_callback (GVolumeMonitor *volume_monitor,
 }
 
 static void
-update_link_visibility (CajaDesktopLinkMonitor *monitor,
-                        CajaDesktopLink       **link_ref,
-                        CajaDesktopLinkType     link_type,
+update_link_visibility (BaulDesktopLinkMonitor *monitor,
+                        BaulDesktopLink       **link_ref,
+                        BaulDesktopLinkType     link_type,
                         const char                 *preference_key)
 {
     if (g_settings_get_boolean (baul_desktop_preferences, preference_key))
@@ -260,7 +260,7 @@ update_link_visibility (CajaDesktopLinkMonitor *monitor,
 static void
 desktop_home_visible_changed (gpointer callback_data)
 {
-    CajaDesktopLinkMonitor *monitor;
+    BaulDesktopLinkMonitor *monitor;
 
     monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
@@ -273,7 +273,7 @@ desktop_home_visible_changed (gpointer callback_data)
 static void
 desktop_computer_visible_changed (gpointer callback_data)
 {
-    CajaDesktopLinkMonitor *monitor;
+    BaulDesktopLinkMonitor *monitor;
 
     monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
@@ -286,7 +286,7 @@ desktop_computer_visible_changed (gpointer callback_data)
 static void
 desktop_trash_visible_changed (gpointer callback_data)
 {
-    CajaDesktopLinkMonitor *monitor;
+    BaulDesktopLinkMonitor *monitor;
 
     monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
@@ -299,7 +299,7 @@ desktop_trash_visible_changed (gpointer callback_data)
 static void
 desktop_network_visible_changed (gpointer callback_data)
 {
-    CajaDesktopLinkMonitor *monitor;
+    BaulDesktopLinkMonitor *monitor;
 
     monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
@@ -312,7 +312,7 @@ desktop_network_visible_changed (gpointer callback_data)
 static void
 desktop_volumes_visible_changed (gpointer callback_data)
 {
-    CajaDesktopLinkMonitor *monitor;
+    BaulDesktopLinkMonitor *monitor;
     GList *l, *mounts;
 
     monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
@@ -339,8 +339,8 @@ desktop_volumes_visible_changed (gpointer callback_data)
 }
 
 static void
-create_link_and_add_preference (CajaDesktopLink   **link_ref,
-                                CajaDesktopLinkType link_type,
+create_link_and_add_preference (BaulDesktopLink   **link_ref,
+                                BaulDesktopLinkType link_type,
                                 const char         *preference_key,
                                 GCallback           callback,
                                 gpointer            callback_data)
@@ -362,7 +362,7 @@ create_link_and_add_preference (CajaDesktopLink   **link_ref,
 static void
 baul_desktop_link_monitor_init (gpointer object, gpointer klass)
 {
-    CajaDesktopLinkMonitor *monitor;
+    BaulDesktopLinkMonitor *monitor;
     GList *l, *mounts;
     GMount *mount = NULL;
 
@@ -370,7 +370,7 @@ baul_desktop_link_monitor_init (gpointer object, gpointer klass)
 
     the_link_monitor = monitor;
 
-    monitor->details = g_new0 (CajaDesktopLinkMonitorDetails, 1);
+    monitor->details = g_new0 (BaulDesktopLinkMonitorDetails, 1);
 
     monitor->details->volume_monitor = g_volume_monitor_get ();
 
@@ -432,7 +432,7 @@ baul_desktop_link_monitor_init (gpointer object, gpointer klass)
 }
 
 static void
-remove_link_and_preference (CajaDesktopLink       **link_ref,
+remove_link_and_preference (BaulDesktopLink       **link_ref,
                             const char             *preference_key,
                             GCallback               callback,
                             gpointer                callback_data)
@@ -450,7 +450,7 @@ remove_link_and_preference (CajaDesktopLink       **link_ref,
 static void
 desktop_link_monitor_finalize (GObject *object)
 {
-    CajaDesktopLinkMonitor *monitor;
+    BaulDesktopLinkMonitor *monitor;
 
     monitor = BAUL_DESKTOP_LINK_MONITOR (object);
 

@@ -97,9 +97,9 @@ typedef struct FileEntry FileEntry;
 
 struct FileEntry
 {
-    CajaFile *file;
+    BaulFile *file;
     GHashTable *reverse_map;	/* map from files to GSequenceIter's */
-    CajaDirectory *subdirectory;
+    BaulDirectory *subdirectory;
     FileEntry *parent;
     GSequence *files;
     GSequenceIter *ptr;
@@ -288,12 +288,12 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
 {
     FMListModel *model;
     FileEntry *file_entry;
-    CajaFile *file;
+    BaulFile *file;
     GdkPixbuf *rendered_icon;
     GIcon *emblemed_icon;
     GList *emblem_icons, *l;
-    CajaZoomLevel zoom_level;
-    CajaFileIconFlags flags;
+    BaulZoomLevel zoom_level;
+    BaulFileIconFlags flags;
 
     model = (FMListModel *)tree_model;
 
@@ -341,10 +341,10 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
         {
             GdkPixbuf *icon;
             GIcon *gicon;
-            CajaIconInfo *icon_info;
+            BaulIconInfo *icon_info;
             GEmblem *emblem;
             int icon_size, icon_scale;
-            CajaFile *parent_file;
+            BaulFile *parent_file;
             char *emblems_to_ignore[3];
             int i;
             cairo_surface_t *surface;
@@ -460,7 +460,7 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
     default:
         if (column >= FM_LIST_MODEL_NUM_COLUMNS || column < FM_LIST_MODEL_NUM_COLUMNS + model->details->columns->len)
         {
-            CajaColumn *baul_column;
+            BaulColumn *baul_column;
             GQuark attribute;
             baul_column = model->details->columns->pdata[column - FM_LIST_MODEL_NUM_COLUMNS];
 
@@ -631,8 +631,8 @@ fm_list_model_iter_parent (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeI
 }
 
 static GSequenceIter *
-lookup_file (FMListModel *model, CajaFile *file,
-             CajaDirectory *directory)
+lookup_file (FMListModel *model, BaulFile *file,
+             BaulDirectory *directory)
 {
     GSequenceIter *ptr, *parent_ptr;
 
@@ -667,7 +667,7 @@ lookup_file (FMListModel *model, CajaFile *file,
 struct GetIters
 {
     FMListModel *model;
-    CajaFile *file;
+    BaulFile *file;
     GList *iters;
 };
 
@@ -701,7 +701,7 @@ file_to_iter_cb (gpointer  key,
 }
 
 GList *
-fm_list_model_get_all_iters_for_file (FMListModel *model, CajaFile *file)
+fm_list_model_get_all_iters_for_file (FMListModel *model, BaulFile *file)
 {
     struct GetIters data;
 
@@ -718,7 +718,7 @@ fm_list_model_get_all_iters_for_file (FMListModel *model, CajaFile *file)
 
 gboolean
 fm_list_model_get_first_iter_for_file (FMListModel          *model,
-                                       CajaFile         *file,
+                                       BaulFile         *file,
                                        GtkTreeIter          *iter)
 {
     GList *list;
@@ -739,8 +739,8 @@ fm_list_model_get_first_iter_for_file (FMListModel          *model,
 
 
 gboolean
-fm_list_model_get_tree_iter_from_file (FMListModel *model, CajaFile *file,
-                                       CajaDirectory *directory,
+fm_list_model_get_tree_iter_from_file (FMListModel *model, BaulFile *file,
+                                       BaulDirectory *directory,
                                        GtkTreeIter *iter)
 {
     GSequenceIter *ptr;
@@ -792,8 +792,8 @@ fm_list_model_file_entry_compare_func (gconstpointer a,
 
 int
 fm_list_model_compare_func (FMListModel *model,
-                            CajaFile *file1,
-                            CajaFile *file2)
+                            BaulFile *file1,
+                            BaulFile *file2)
 {
     int result;
 
@@ -943,7 +943,7 @@ fm_list_model_multi_row_draggable (EggTreeMultiDragSource *drag_source, GList *p
 }
 
 static void
-each_path_get_data_binder (CajaDragEachSelectedItemDataGet data_get,
+each_path_get_data_binder (BaulDragEachSelectedItemDataGet data_get,
                            gpointer context,
                            gpointer data)
 {
@@ -952,7 +952,7 @@ each_path_get_data_binder (CajaDragEachSelectedItemDataGet data_get,
     char *uri;
     GdkRectangle cell_area;
     GtkTreeViewColumn *column;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
     GtkTreeRowReference *row = NULL;
     GtkTreePath *path = NULL;
 
@@ -1058,8 +1058,8 @@ add_dummy_row (FMListModel *model, FileEntry *parent_entry)
 }
 
 gboolean
-fm_list_model_add_file (FMListModel *model, CajaFile *file,
-                        CajaDirectory *directory)
+fm_list_model_add_file (FMListModel *model, BaulFile *file,
+                        BaulDirectory *directory)
 {
     GtkTreeIter iter;
     GtkTreePath *path;
@@ -1158,8 +1158,8 @@ fm_list_model_add_file (FMListModel *model, CajaFile *file,
 }
 
 void
-fm_list_model_file_changed (FMListModel *model, CajaFile *file,
-                            CajaDirectory *directory)
+fm_list_model_file_changed (FMListModel *model, BaulFile *file,
+                            BaulDirectory *directory)
 {
     FileEntry *parent_file_entry;
     GtkTreeIter iter;
@@ -1343,8 +1343,8 @@ fm_list_model_remove (FMListModel *model, GtkTreeIter *iter)
 }
 
 void
-fm_list_model_remove_file (FMListModel *model, CajaFile *file,
-                           CajaDirectory *directory)
+fm_list_model_remove_file (FMListModel *model, BaulFile *file,
+                           BaulDirectory *directory)
 {
     GtkTreeIter iter;
 
@@ -1384,10 +1384,10 @@ fm_list_model_clear (FMListModel *model)
     fm_list_model_clear_directory (model, model->details->files);
 }
 
-CajaFile *
+BaulFile *
 fm_list_model_file_for_path (FMListModel *model, GtkTreePath *path)
 {
-    CajaFile *file;
+    BaulFile *file;
     GtkTreeIter iter;
 
     file = NULL;
@@ -1403,11 +1403,11 @@ fm_list_model_file_for_path (FMListModel *model, GtkTreePath *path)
 }
 
 gboolean
-fm_list_model_load_subdirectory (FMListModel *model, GtkTreePath *path, CajaDirectory **directory)
+fm_list_model_load_subdirectory (FMListModel *model, GtkTreePath *path, BaulDirectory **directory)
 {
     GtkTreeIter iter;
     FileEntry *file_entry;
-    CajaDirectory *subdirectory;
+    BaulDirectory *subdirectory;
 
     if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path))
     {
@@ -1531,7 +1531,7 @@ fm_list_model_get_sort_column_id_from_attribute (FMListModel *model,
 
     for (i = 0; i < model->details->columns->len; i++)
     {
-        CajaColumn *column;
+        BaulColumn *column;
         GQuark column_attribute;
 
         column =
@@ -1552,7 +1552,7 @@ GQuark
 fm_list_model_get_attribute_from_sort_column_id (FMListModel *model,
         int sort_column_id)
 {
-    CajaColumn *column;
+    BaulColumn *column;
     int index;
     GQuark attribute;
 
@@ -1570,7 +1570,7 @@ fm_list_model_get_attribute_from_sort_column_id (FMListModel *model,
     return attribute;
 }
 
-CajaZoomLevel
+BaulZoomLevel
 fm_list_model_get_zoom_level_from_column_id (int column)
 {
     switch (column)
@@ -1595,7 +1595,7 @@ fm_list_model_get_zoom_level_from_column_id (int column)
 }
 
 int
-fm_list_model_get_column_id_from_zoom_level (CajaZoomLevel zoom_level)
+fm_list_model_get_column_id_from_zoom_level (BaulZoomLevel zoom_level)
 {
     switch (zoom_level)
     {
@@ -1646,7 +1646,7 @@ fm_list_model_get_drag_target_list ()
 
 int
 fm_list_model_add_column (FMListModel *model,
-                          CajaColumn *column)
+                          BaulColumn *column)
 {
     g_ptr_array_add (model->details->columns, column);
     g_object_ref (column);
@@ -1789,7 +1789,7 @@ fm_list_model_multi_drag_source_init (EggTreeMultiDragSourceIface *iface)
 }
 
 void
-fm_list_model_subdirectory_done_loading (FMListModel *model, CajaDirectory *directory)
+fm_list_model_subdirectory_done_loading (FMListModel *model, BaulDirectory *directory)
 {
     GtkTreeIter iter;
     FileEntry *file_entry;
@@ -1841,7 +1841,7 @@ static void
 refresh_row (gpointer data,
              gpointer user_data)
 {
-    CajaFile *file;
+    BaulFile *file;
     FMListModel *model;
     GList *iters, *l;
     GtkTreePath *path = NULL;

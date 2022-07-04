@@ -1,12 +1,12 @@
 /*
  * baul-freedesktop-dbus: Implementation for the org.freedesktop DBus file-management interfaces
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -33,7 +33,7 @@
 #include "baul-freedesktop-dbus.h"
 #include "baul-freedesktop-generated.h"
 
-struct _CajaFreedesktopDBus {
+struct _BaulFreedesktopDBus {
     GObject parent;
 
     /* Id from g_dbus_own_name() */
@@ -43,26 +43,26 @@ struct _CajaFreedesktopDBus {
     GDBusObjectManagerServer *object_manager;
 
     /* Our DBus implementation skeleton */
-    CajaFreedesktopFileManager1 *skeleton;
+    BaulFreedesktopFileManager1 *skeleton;
 
-    /* Caja application */
-    CajaApplication *application;
+    /* Baul application */
+    BaulApplication *application;
 };
 
-struct _CajaFreedesktopDBusClass {
+struct _BaulFreedesktopDBusClass {
     GObjectClass parent_class;
 };
 
-G_DEFINE_TYPE (CajaFreedesktopDBus, baul_freedesktop_dbus, G_TYPE_OBJECT);
+G_DEFINE_TYPE (BaulFreedesktopDBus, baul_freedesktop_dbus, G_TYPE_OBJECT);
 
 static gboolean
-skeleton_handle_show_items_cb (CajaFreedesktopFileManager1 *object,
+skeleton_handle_show_items_cb (BaulFreedesktopFileManager1 *object,
                                GDBusMethodInvocation *invocation,
                                const gchar *const *uris,
                                const gchar *startup_id,
-                               CajaFreedesktopDBus *fdb)
+                               BaulFreedesktopDBus *fdb)
 {
-    CajaApplication *application;
+    BaulApplication *application;
     int i;
 
     application = BAUL_APPLICATION (fdb->application);
@@ -89,13 +89,13 @@ skeleton_handle_show_items_cb (CajaFreedesktopFileManager1 *object,
 }
 
 static gboolean
-skeleton_handle_show_folders_cb (CajaFreedesktopFileManager1 *object,
+skeleton_handle_show_folders_cb (BaulFreedesktopFileManager1 *object,
                                  GDBusMethodInvocation *invocation,
                                  const gchar *const *uris,
                                  const gchar *startup_id,
-                                 CajaFreedesktopDBus *fdb)
+                                 BaulFreedesktopDBus *fdb)
 {
-    CajaApplication *application;
+    BaulApplication *application;
     int i;
 
     application = BAUL_APPLICATION (fdb->application);
@@ -115,13 +115,13 @@ skeleton_handle_show_folders_cb (CajaFreedesktopFileManager1 *object,
 }
 
 static gboolean
-skeleton_handle_show_item_properties_cb (CajaFreedesktopFileManager1 *object,
+skeleton_handle_show_item_properties_cb (BaulFreedesktopFileManager1 *object,
                      GDBusMethodInvocation *invocation,
                      const gchar *const *uris,
                      const gchar *startup_id,
-                     CajaFreedesktopDBus *fdb)
+                     BaulFreedesktopDBus *fdb)
 {
-    CajaApplication *application;
+    BaulApplication *application;
     GList *files;
     int i;
 
@@ -136,7 +136,7 @@ skeleton_handle_show_item_properties_cb (CajaFreedesktopFileManager1 *object,
 
     if (uris[0] != NULL) {
         GFile *file;
-        CajaWindow *window;
+        BaulWindow *window;
 
         file = g_file_new_for_uri (uris[i]);
         window = baul_application_get_spatial_window (application,
@@ -160,7 +160,7 @@ bus_acquired_cb (GDBusConnection *conn,
                  const gchar     *name,
                  gpointer         user_data)
 {
-    CajaFreedesktopDBus *fdb = user_data;
+    BaulFreedesktopDBus *fdb = user_data;
 
     baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER, "Bus acquired at %s", name);
 
@@ -199,7 +199,7 @@ name_lost_cb (GDBusConnection *connection,
 static void
 baul_freedesktop_dbus_dispose (GObject *object)
 {
-    CajaFreedesktopDBus *fdb = (CajaFreedesktopDBus *) object;
+    BaulFreedesktopDBus *fdb = (BaulFreedesktopDBus *) object;
 
     if (fdb->owner_id != 0) {
         g_bus_unown_name (fdb->owner_id);
@@ -218,7 +218,7 @@ baul_freedesktop_dbus_dispose (GObject *object)
 }
 
 static void
-baul_freedesktop_dbus_class_init (CajaFreedesktopDBusClass *klass)
+baul_freedesktop_dbus_class_init (BaulFreedesktopDBusClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
@@ -226,7 +226,7 @@ baul_freedesktop_dbus_class_init (CajaFreedesktopDBusClass *klass)
 }
 
 static void
-baul_freedesktop_dbus_init (CajaFreedesktopDBus *fdb)
+baul_freedesktop_dbus_init (BaulFreedesktopDBus *fdb)
 {
     fdb->owner_id = g_bus_own_name (G_BUS_TYPE_SESSION,
                                     BAUL_FDO_DBUS_NAME,
@@ -239,10 +239,10 @@ baul_freedesktop_dbus_init (CajaFreedesktopDBus *fdb)
 }
 
 /* Tries to own the org.freedesktop.FileManager1 service name */
-CajaFreedesktopDBus *
-baul_freedesktop_dbus_new (CajaApplication *application)
+BaulFreedesktopDBus *
+baul_freedesktop_dbus_new (BaulApplication *application)
 {
-    CajaFreedesktopDBus *fdb = g_object_new (baul_freedesktop_dbus_get_type (), NULL);
+    BaulFreedesktopDBus *fdb = g_object_new (baul_freedesktop_dbus_get_type (), NULL);
     fdb->application = application;
     return fdb;
 }

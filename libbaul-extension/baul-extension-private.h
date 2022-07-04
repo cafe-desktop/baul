@@ -1,5 +1,5 @@
 /*
- *  baul-extension-private.h - Type definitions for Caja extensions
+ *  baul-extension-private.h - Type definitions for Baul extensions
  *
  *  Copyright (C) 2009 Red Hat, Inc.
  *
@@ -30,7 +30,7 @@
 extern "C" {
 #endif
 
-    extern CajaFileInfo *(*baul_file_info_getter) (GFile *location, gboolean create);
+    extern BaulFileInfo *(*baul_file_info_getter) (GFile *location, gboolean create);
 
 #ifdef __cplusplus
 }

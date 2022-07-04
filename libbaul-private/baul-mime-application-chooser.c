@@ -40,7 +40,7 @@
 #include "baul-signaller.h"
 #include "baul-file.h"
 
-struct _CajaMimeApplicationChooserDetails
+struct _BaulMimeApplicationChooserDetails
 {
     char *uri;
 
@@ -71,17 +71,17 @@ enum
     NUM_COLUMNS
 };
 
-G_DEFINE_TYPE (CajaMimeApplicationChooser, baul_mime_application_chooser, GTK_TYPE_BOX);
+G_DEFINE_TYPE (BaulMimeApplicationChooser, baul_mime_application_chooser, GTK_TYPE_BOX);
 
-static void refresh_model             (CajaMimeApplicationChooser *chooser);
-static void refresh_model_soon        (CajaMimeApplicationChooser *chooser);
+static void refresh_model             (BaulMimeApplicationChooser *chooser);
+static void refresh_model_soon        (BaulMimeApplicationChooser *chooser);
 static void mime_type_data_changed_cb (GObject                        *signaller,
                                        gpointer                        user_data);
 
 static void
 baul_mime_application_chooser_finalize (GObject *object)
 {
-    CajaMimeApplicationChooser *chooser;
+    BaulMimeApplicationChooser *chooser;
 
     chooser = BAUL_MIME_APPLICATION_CHOOSER (object);
 
@@ -107,7 +107,7 @@ baul_mime_application_chooser_finalize (GObject *object)
 }
 
 static void
-baul_mime_application_chooser_class_init (CajaMimeApplicationChooserClass *class)
+baul_mime_application_chooser_class_init (BaulMimeApplicationChooserClass *class)
 {
     GObjectClass *gobject_class;
 
@@ -120,7 +120,7 @@ default_toggled_cb (GtkCellRendererToggle *renderer,
                     const char *path_str,
                     gpointer user_data)
 {
-    CajaMimeApplicationChooser *chooser;
+    BaulMimeApplicationChooser *chooser;
     GtkTreeIter iter;
     GtkTreePath *path;
     GError *error;
@@ -178,7 +178,7 @@ default_toggled_cb (GtkCellRendererToggle *renderer,
 }
 
 static GAppInfo *
-get_selected_application (CajaMimeApplicationChooser *chooser)
+get_selected_application (BaulMimeApplicationChooser *chooser)
 {
     GtkTreeIter iter;
     GtkTreeSelection *selection;
@@ -204,7 +204,7 @@ static void
 selection_changed_cb (GtkTreeSelection *selection,
                       gpointer user_data)
 {
-    CajaMimeApplicationChooser *chooser;
+    BaulMimeApplicationChooser *chooser;
     GAppInfo *info;
 
     chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
@@ -225,7 +225,7 @@ selection_changed_cb (GtkTreeSelection *selection,
 }
 
 static GtkWidget *
-create_tree_view (CajaMimeApplicationChooser *chooser)
+create_tree_view (BaulMimeApplicationChooser *chooser)
 {
     GtkWidget *treeview;
     GtkListStore *store;
@@ -292,7 +292,7 @@ static void
 add_clicked_cb (GtkButton *button,
                 gpointer user_data)
 {
-    CajaMimeApplicationChooser *chooser;
+    BaulMimeApplicationChooser *chooser;
     GtkWidget *dialog;
 
     chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
@@ -316,7 +316,7 @@ static void
 remove_clicked_cb (GtkButton *button,
                    gpointer user_data)
 {
-    CajaMimeApplicationChooser *chooser;
+    BaulMimeApplicationChooser *chooser;
     GError *error;
     GAppInfo *info;
 
@@ -347,7 +347,7 @@ static void
 reset_clicked_cb (GtkButton *button,
                   gpointer   user_data)
 {
-    CajaMimeApplicationChooser *chooser;
+    BaulMimeApplicationChooser *chooser;
 
     chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
@@ -361,7 +361,7 @@ static void
 mime_type_data_changed_cb (GObject *signaller,
                            gpointer user_data)
 {
-    CajaMimeApplicationChooser *chooser;
+    BaulMimeApplicationChooser *chooser;
 
     chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
@@ -369,13 +369,13 @@ mime_type_data_changed_cb (GObject *signaller,
 }
 
 static void
-baul_mime_application_chooser_init (CajaMimeApplicationChooser *chooser)
+baul_mime_application_chooser_init (BaulMimeApplicationChooser *chooser)
 {
     GtkWidget *box;
     GtkWidget *scrolled;
     GtkWidget *button;
 
-    chooser->details = g_new0 (CajaMimeApplicationChooserDetails, 1);
+    chooser->details = g_new0 (BaulMimeApplicationChooserDetails, 1);
 
     chooser->details->for_multiple_files = FALSE;
 
@@ -475,7 +475,7 @@ get_extension (const char *basename)
 static gboolean
 refresh_model_timeout (gpointer data)
 {
-    CajaMimeApplicationChooser *chooser = data;
+    BaulMimeApplicationChooser *chooser = data;
 
     chooser->details->refresh_timeout = 0;
 
@@ -487,7 +487,7 @@ refresh_model_timeout (gpointer data)
 /* This adds a slight delay so that we're sure the mime data is
    done writing */
 static void
-refresh_model_soon (CajaMimeApplicationChooser *chooser)
+refresh_model_soon (BaulMimeApplicationChooser *chooser)
 {
     if (chooser->details->refresh_timeout != 0)
         return;
@@ -499,7 +499,7 @@ refresh_model_soon (CajaMimeApplicationChooser *chooser)
 }
 
 static void
-refresh_model (CajaMimeApplicationChooser *chooser)
+refresh_model (BaulMimeApplicationChooser *chooser)
 {
     GList *applications;
     GAppInfo *default_app;
@@ -577,7 +577,7 @@ refresh_model (CajaMimeApplicationChooser *chooser)
 }
 
 static void
-set_extension_and_description (CajaMimeApplicationChooser *chooser,
+set_extension_and_description (BaulMimeApplicationChooser *chooser,
                                const char *extension,
                                const char *mime_type)
 {
@@ -606,7 +606,7 @@ set_extension_and_description (CajaMimeApplicationChooser *chooser,
 }
 
 static gboolean
-set_uri_and_type (CajaMimeApplicationChooser *chooser,
+set_uri_and_type (BaulMimeApplicationChooser *chooser,
                   const char *uri,
                   const char *mime_type)
 {
@@ -646,7 +646,7 @@ set_uri_and_type (CajaMimeApplicationChooser *chooser,
 }
 
 static char *
-get_extension_from_file (CajaFile *nfile)
+get_extension_from_file (BaulFile *nfile)
 {
     char *name;
     char *extension;
@@ -660,7 +660,7 @@ get_extension_from_file (CajaFile *nfile)
 }
 
 static gboolean
-set_uri_and_type_for_multiple_files (CajaMimeApplicationChooser *chooser,
+set_uri_and_type_for_multiple_files (BaulMimeApplicationChooser *chooser,
                                      GList *uris,
                                      const char *mime_type)
 {

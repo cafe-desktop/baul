@@ -1,7 +1,7 @@
 <SECTION>
 <FILE>baul-location-widget-provider</FILE>
-CajaLocationWidgetProvider
-CajaLocationWidgetProviderIface
+BaulLocationWidgetProvider
+BaulLocationWidgetProviderIface
 baul_location_widget_provider_get_widget
 <SUBSECTION Standard>
 BAUL_LOCATION_WIDGET_PROVIDER
@@ -13,8 +13,8 @@ BAUL_LOCATION_WIDGET_PROVIDER_GET_IFACE
 
 <SECTION>
 <FILE>baul-menu-provider</FILE>
-CajaMenuProvider
-CajaMenuProviderIface
+BaulMenuProvider
+BaulMenuProviderIface
 baul_menu_provider_get_file_items
 baul_menu_provider_get_background_items
 baul_menu_provider_get_toolbar_items
@@ -29,8 +29,8 @@ BAUL_MENU_PROVIDER_GET_IFACE
 
 <SECTION>
 <FILE>baul-menu</FILE>
-CajaMenuPrivate
-CajaMenu
+BaulMenuPrivate
+BaulMenu
 baul_menu_new
 baul_menu_append_item
 baul_menu_get_items
@@ -47,7 +47,7 @@ BAUL_MENU_GET_CLASS
 
 <SECTION>
 <FILE>baul-menu-item</FILE>
-CajaMenuItem
+BaulMenuItem
 baul_menu_item_get_type
 baul_menu_item_new
 baul_menu_item_activate
@@ -59,13 +59,13 @@ BAUL_MENU_ITEM_CLASS
 BAUL_MENU_IS_ITEM
 BAUL_MENU_IS_ITEM_CLASS
 BAUL_MENU_ITEM_GET_CLASS
-CajaMenuItemDetails
+BaulMenuItemDetails
 </SECTION>
 
 <SECTION>
 <FILE>baul-column-provider</FILE>
-CajaColumnProvider
-CajaColumnProviderIface
+BaulColumnProvider
+BaulColumnProviderIface
 baul_column_provider_get_columns
 <SUBSECTION Standard>
 BAUL_COLUMN_PROVIDER
@@ -77,8 +77,8 @@ BAUL_COLUMN_PROVIDER_GET_IFACE
 
 <SECTION>
 <FILE>baul-property-page-provider</FILE>
-CajaPropertyPageProvider
-CajaPropertyPageProviderIface
+BaulPropertyPageProvider
+BaulPropertyPageProviderIface
 baul_property_page_provider_get_pages
 <SUBSECTION Standard>
 BAUL_PROPERTY_PAGE_PROVIDER
@@ -91,9 +91,9 @@ BAUL_PROPERTY_PAGE_PROVIDER_GET_IFACE
 <SECTION>
 <FILE>baul-file-info</FILE>
 BAUL_FILE_DEFINED
-CajaFile
-CajaFileInfo
-CajaFileInfoIface
+BaulFile
+BaulFileInfo
+BaulFileInfoIface
 baul_file_info_create
 baul_file_info_create_for_uri
 baul_file_info_getter
@@ -130,7 +130,7 @@ BAUL_FILE_INFO_GET_IFACE
 
 <SECTION>
 <FILE>baul-column</FILE>
-CajaColumn
+BaulColumn
 baul_column_new
 <SUBSECTION Standard>
 BAUL_COLUMN
@@ -140,14 +140,14 @@ baul_column_get_type
 BAUL_COLUMN_CLASS
 BAUL_INFO_IS_COLUMN_CLASS
 BAUL_COLUMN_GET_CLASS
-CajaColumnDetails
+BaulColumnDetails
 </SECTION>
 
 <SECTION>
 <FILE>baul-info-provider</FILE>
-CajaInfoProvider
-CajaInfoProviderIface
-CajaInfoProviderUpdateComplete
+BaulInfoProvider
+BaulInfoProviderIface
+BaulInfoProviderUpdateComplete
 baul_info_provider_update_file_info
 baul_info_provider_cancel_update
 baul_info_provider_update_complete_invoke
@@ -161,7 +161,7 @@ BAUL_INFO_PROVIDER_GET_IFACE
 
 <SECTION>
 <FILE>baul-property-page</FILE>
-CajaPropertyPage
+BaulPropertyPage
 baul_property_page_new
 <SUBSECTION Standard>
 BAUL_PROPERTY_PAGE
@@ -171,14 +171,14 @@ baul_property_page_get_type
 BAUL_PROPERTY_PAGE_CLASS
 BAUL_IS_PROPERTY_PAGE_CLASS
 BAUL_PROPERTY_PAGE_GET_CLASS
-CajaPropertyPageDetails
+BaulPropertyPageDetails
 </SECTION>
 
 <SECTION>
 <FILE>baul-extension-types</FILE>
 BAUL_TYPE_OPERATION_RESULT
-CajaOperationHandle
-CajaOperationResult
+BaulOperationHandle
+BaulOperationResult
 baul_operation_result_get_type
 baul_module_initialize
 baul_module_shutdown
@@ -188,8 +188,8 @@ baul_module_list_pyfiles
 
 <SECTION>
 <FILE>baul-widget-view-provider</FILE>
-CajaWidgetViewProvider
-CajaWidgetViewProviderIface
+BaulWidgetViewProvider
+BaulWidgetViewProviderIface
 baul_widget_view_provider_supports_uri
 baul_widget_view_provider_get_widget
 baul_widget_view_provider_set_location

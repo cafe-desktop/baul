@@ -31,7 +31,7 @@
 
 #include <gio/gio.h>
 
-struct CajaMonitor
+struct BaulMonitor
 {
     GFileMonitor *monitor;
     GVolumeMonitor *volume_monitor;
@@ -90,7 +90,7 @@ mount_removed (GVolumeMonitor *volume_monitor,
                GMount *mount,
                gpointer user_data)
 {
-    CajaMonitor *monitor = user_data;
+    BaulMonitor *monitor = user_data;
     if (mount == monitor->mount) {
         baul_file_changes_queue_file_removed (monitor->location);
         schedule_call_consume_changes ();
@@ -143,13 +143,13 @@ dir_changed (GFileMonitor* monitor,
     schedule_call_consume_changes ();
 }
 
-CajaMonitor *
+BaulMonitor *
 baul_monitor_directory (GFile *location)
 {
     GFileMonitor *dir_monitor;
-    CajaMonitor *ret;
+    BaulMonitor *ret;
 
-    ret = g_new0 (CajaMonitor, 1);
+    ret = g_new0 (BaulMonitor, 1);
     dir_monitor = g_file_monitor_directory (location, G_FILE_MONITOR_WATCH_MOUNTS, NULL, NULL);
 
     if (dir_monitor != NULL) {
@@ -181,7 +181,7 @@ baul_monitor_directory (GFile *location)
 }
 
 void
-baul_monitor_cancel (CajaMonitor *monitor)
+baul_monitor_cancel (BaulMonitor *monitor)
 {
     if (monitor->monitor != NULL)
     {

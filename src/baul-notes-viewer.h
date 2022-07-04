@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- *  Caja
+ *  Baul
  *
  *  Copyright (C) 1999, 2000, 2004 Red Hat, Inc.
  *  Copyright (C) 2000, 2001 Eazel, Inc.
@@ -35,15 +35,15 @@
 
 #define BAUL_TYPE_NOTES_VIEWER baul_notes_viewer_get_type()
 #define BAUL_NOTES_VIEWER(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NOTES_VIEWER, CajaNotesViewer))
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NOTES_VIEWER, BaulNotesViewer))
 
-typedef struct _CajaNotesViewerDetails CajaNotesViewerDetails;
+typedef struct _BaulNotesViewerDetails BaulNotesViewerDetails;
 
 typedef struct
 {
     GtkScrolledWindow parent;
-    CajaNotesViewerDetails *details;
-} CajaNotesViewer;
+    BaulNotesViewerDetails *details;
+} BaulNotesViewer;
 
 GType baul_notes_viewer_get_type (void);
 void baul_notes_viewer_register (void);

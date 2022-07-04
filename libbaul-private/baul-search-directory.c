@@ -37,13 +37,13 @@
 #include "baul-file-utilities.h"
 #include "baul-search-engine.h"
 
-struct CajaSearchDirectoryDetails
+struct BaulSearchDirectoryDetails
 {
-    CajaQuery *query;
+    BaulQuery *query;
     char *saved_search_uri;
     gboolean modified;
 
-    CajaSearchEngine *engine;
+    BaulSearchEngine *engine;
 
     gboolean search_running;
     gboolean search_finished;
@@ -59,36 +59,36 @@ struct CajaSearchDirectoryDetails
 typedef struct
 {
     gboolean monitor_hidden_files;
-    CajaFileAttributes monitor_attributes;
+    BaulFileAttributes monitor_attributes;
 
     gconstpointer client;
 } SearchMonitor;
 
 typedef struct
 {
-    CajaSearchDirectory *search_directory;
+    BaulSearchDirectory *search_directory;
 
-    CajaDirectoryCallback callback;
+    BaulDirectoryCallback callback;
     gpointer callback_data;
 
-    CajaFileAttributes wait_for_attributes;
+    BaulFileAttributes wait_for_attributes;
     gboolean wait_for_file_list;
     GList *file_list;
     GHashTable *non_ready_hash;
 } SearchCallback;
 
-G_DEFINE_TYPE (CajaSearchDirectory, baul_search_directory,
+G_DEFINE_TYPE (BaulSearchDirectory, baul_search_directory,
                BAUL_TYPE_DIRECTORY);
 
-static void search_engine_hits_added (CajaSearchEngine *engine, GList *hits, CajaSearchDirectory *search);
-static void search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits, CajaSearchDirectory *search);
-static void search_engine_finished (CajaSearchEngine *engine, CajaSearchDirectory *search);
-static void search_engine_error (CajaSearchEngine *engine, const char *error, CajaSearchDirectory *search);
-static void search_callback_file_ready_callback (CajaFile *file, gpointer data);
-static void file_changed (CajaFile *file, CajaSearchDirectory *search);
+static void search_engine_hits_added (BaulSearchEngine *engine, GList *hits, BaulSearchDirectory *search);
+static void search_engine_hits_subtracted (BaulSearchEngine *engine, GList *hits, BaulSearchDirectory *search);
+static void search_engine_finished (BaulSearchEngine *engine, BaulSearchDirectory *search);
+static void search_engine_error (BaulSearchEngine *engine, const char *error, BaulSearchDirectory *search);
+static void search_callback_file_ready_callback (BaulFile *file, gpointer data);
+static void file_changed (BaulFile *file, BaulSearchDirectory *search);
 
 static void
-ensure_search_engine (CajaSearchDirectory *search)
+ensure_search_engine (BaulSearchDirectory *search)
 {
     if (!search->details->engine)
     {
@@ -109,11 +109,11 @@ ensure_search_engine (CajaSearchDirectory *search)
 }
 
 static void
-reset_file_list (CajaSearchDirectory *search)
+reset_file_list (BaulSearchDirectory *search)
 {
     GList *list, *monitor_list;
     SearchMonitor *monitor;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     /* Remove file connections */
     for (list = search->details->files; list != NULL; list = list->next)
@@ -137,7 +137,7 @@ reset_file_list (CajaSearchDirectory *search)
 }
 
 static void
-start_or_stop_search_engine (CajaSearchDirectory *search, gboolean adding)
+start_or_stop_search_engine (BaulSearchDirectory *search, gboolean adding)
 {
     if (adding && (search->details->monitor_list ||
                    search->details->pending_callback_list) &&
@@ -168,7 +168,7 @@ start_or_stop_search_engine (CajaSearchDirectory *search, gboolean adding)
 }
 
 static void
-file_changed (CajaFile *file, CajaSearchDirectory *search)
+file_changed (BaulFile *file, BaulSearchDirectory *search)
 {
     GList list;
 
@@ -179,17 +179,17 @@ file_changed (CajaFile *file, CajaSearchDirectory *search)
 }
 
 static void
-search_monitor_add (CajaDirectory *directory,
+search_monitor_add (BaulDirectory *directory,
                     gconstpointer client,
                     gboolean monitor_hidden_files,
-                    CajaFileAttributes file_attributes,
-                    CajaDirectoryCallback callback,
+                    BaulFileAttributes file_attributes,
+                    BaulDirectoryCallback callback,
                     gpointer callback_data)
 {
     GList *list;
     SearchMonitor *monitor;
-    CajaSearchDirectory *search;
-    CajaFile *file = NULL;
+    BaulSearchDirectory *search;
+    BaulFile *file = NULL;
 
     search = BAUL_SEARCH_DIRECTORY (directory);
 
@@ -217,10 +217,10 @@ search_monitor_add (CajaDirectory *directory,
 }
 
 static void
-search_monitor_remove_file_monitors (SearchMonitor *monitor, CajaSearchDirectory *search)
+search_monitor_remove_file_monitors (SearchMonitor *monitor, BaulSearchDirectory *search)
 {
     GList *list;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     for (list = search->details->files; list != NULL; list = list->next)
     {
@@ -231,7 +231,7 @@ search_monitor_remove_file_monitors (SearchMonitor *monitor, CajaSearchDirectory
 }
 
 static void
-search_monitor_destroy (SearchMonitor *monitor, CajaSearchDirectory *search)
+search_monitor_destroy (SearchMonitor *monitor, BaulSearchDirectory *search)
 {
     search_monitor_remove_file_monitors (monitor, search);
 
@@ -239,10 +239,10 @@ search_monitor_destroy (SearchMonitor *monitor, CajaSearchDirectory *search)
 }
 
 static void
-search_monitor_remove (CajaDirectory *directory,
+search_monitor_remove (BaulDirectory *directory,
                        gconstpointer client)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
     GList *list;
     SearchMonitor *monitor = NULL;
 
@@ -269,7 +269,7 @@ static void
 cancel_call_when_ready (gpointer key, gpointer value, gpointer user_data)
 {
     SearchCallback *search_callback;
-    CajaFile *file;
+    BaulFile *file;
 
     file = key;
     search_callback = user_data;
@@ -306,7 +306,7 @@ search_callback_invoke_and_destroy (SearchCallback *search_callback)
 }
 
 static void
-search_callback_file_ready_callback (CajaFile *file, gpointer data)
+search_callback_file_ready_callback (BaulFile *file, gpointer data)
 {
     SearchCallback *search_callback = data;
 
@@ -322,7 +322,7 @@ static void
 search_callback_add_file_callbacks (SearchCallback *callback)
 {
     GList *file_list_copy, *list;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     file_list_copy = g_list_copy (callback->file_list);
 
@@ -339,7 +339,7 @@ search_callback_add_file_callbacks (SearchCallback *callback)
 }
 
 static SearchCallback *
-search_callback_find (CajaSearchDirectory *search, CajaDirectoryCallback callback, gpointer callback_data)
+search_callback_find (BaulSearchDirectory *search, BaulDirectoryCallback callback, gpointer callback_data)
 {
     GList *list;
     SearchCallback *search_callback = NULL;
@@ -359,7 +359,7 @@ search_callback_find (CajaSearchDirectory *search, CajaDirectoryCallback callbac
 }
 
 static SearchCallback *
-search_callback_find_pending (CajaSearchDirectory *search, CajaDirectoryCallback callback, gpointer callback_data)
+search_callback_find_pending (BaulSearchDirectory *search, BaulDirectoryCallback callback, gpointer callback_data)
 {
     GList *list;
     SearchCallback *search_callback = NULL;
@@ -398,13 +398,13 @@ file_list_to_hash_table (GList *file_list)
 }
 
 static void
-search_call_when_ready (CajaDirectory *directory,
-                        CajaFileAttributes file_attributes,
+search_call_when_ready (BaulDirectory *directory,
+                        BaulFileAttributes file_attributes,
                         gboolean wait_for_file_list,
-                        CajaDirectoryCallback callback,
+                        BaulDirectoryCallback callback,
                         gpointer callback_data)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
     SearchCallback *search_callback;
 
     search = BAUL_SEARCH_DIRECTORY (directory);
@@ -460,11 +460,11 @@ search_call_when_ready (CajaDirectory *directory,
 }
 
 static void
-search_cancel_callback (CajaDirectory *directory,
-                        CajaDirectoryCallback callback,
+search_cancel_callback (BaulDirectory *directory,
+                        BaulDirectoryCallback callback,
                         gpointer callback_data)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
     SearchCallback *search_callback;
 
     search = BAUL_SEARCH_DIRECTORY (directory);
@@ -495,12 +495,12 @@ search_cancel_callback (CajaDirectory *directory,
 
 
 static void
-search_engine_hits_added (CajaSearchEngine *engine, GList *hits,
-                          CajaSearchDirectory *search)
+search_engine_hits_added (BaulSearchEngine *engine, GList *hits,
+                          BaulSearchDirectory *search)
 {
     GList *hit_list;
     GList *file_list;
-    CajaFile *file;
+    BaulFile *file;
     SearchMonitor *monitor;
     GList *monitor_list;
 
@@ -543,14 +543,14 @@ search_engine_hits_added (CajaSearchEngine *engine, GList *hits,
 }
 
 static void
-search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits,
-                               CajaSearchDirectory *search)
+search_engine_hits_subtracted (BaulSearchEngine *engine, GList *hits,
+                               BaulSearchDirectory *search)
 {
     GList *hit_list;
     GList *monitor_list;
     SearchMonitor *monitor;
     GList *file_list;
-    CajaFile *file;
+    BaulFile *file;
 
     file_list = NULL;
 
@@ -595,7 +595,7 @@ search_callback_add_pending_file_callbacks (SearchCallback *callback)
 }
 
 static void
-search_engine_error (CajaSearchEngine *engine, const char *error_message, CajaSearchDirectory *search)
+search_engine_error (BaulSearchEngine *engine, const char *error_message, BaulSearchDirectory *search)
 {
     GError *error;
 
@@ -607,7 +607,7 @@ search_engine_error (CajaSearchEngine *engine, const char *error_message, CajaSe
 }
 
 static void
-search_engine_finished (CajaSearchEngine *engine, CajaSearchDirectory *search)
+search_engine_finished (BaulSearchEngine *engine, BaulSearchDirectory *search)
 {
     search->details->search_finished = TRUE;
 
@@ -624,9 +624,9 @@ search_engine_finished (CajaSearchEngine *engine, CajaSearchDirectory *search)
 }
 
 static void
-search_force_reload (CajaDirectory *directory)
+search_force_reload (BaulDirectory *directory)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
 
     search = BAUL_SEARCH_DIRECTORY (directory);
 
@@ -654,9 +654,9 @@ search_force_reload (CajaDirectory *directory)
 }
 
 static gboolean
-search_are_all_files_seen (CajaDirectory *directory)
+search_are_all_files_seen (BaulDirectory *directory)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
 
     search = BAUL_SEARCH_DIRECTORY (directory);
 
@@ -665,10 +665,10 @@ search_are_all_files_seen (CajaDirectory *directory)
 }
 
 static gboolean
-search_contains_file (CajaDirectory *directory,
-                      CajaFile *file)
+search_contains_file (BaulDirectory *directory,
+                      BaulFile *file)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
 
     search = BAUL_SEARCH_DIRECTORY (directory);
 
@@ -677,9 +677,9 @@ search_contains_file (CajaDirectory *directory,
 }
 
 static GList *
-search_get_file_list (CajaDirectory *directory)
+search_get_file_list (BaulDirectory *directory)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
 
     search = BAUL_SEARCH_DIRECTORY (directory);
 
@@ -688,7 +688,7 @@ search_get_file_list (CajaDirectory *directory)
 
 
 static gboolean
-search_is_editable (CajaDirectory *directory)
+search_is_editable (BaulDirectory *directory)
 {
     return FALSE;
 }
@@ -696,7 +696,7 @@ search_is_editable (CajaDirectory *directory)
 static void
 search_dispose (GObject *object)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
     GList *list;
 
     search = BAUL_SEARCH_DIRECTORY (object);
@@ -755,7 +755,7 @@ search_dispose (GObject *object)
 static void
 search_finalize (GObject *object)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
 
     search = BAUL_SEARCH_DIRECTORY (object);
 
@@ -767,15 +767,15 @@ search_finalize (GObject *object)
 }
 
 static void
-baul_search_directory_init (CajaSearchDirectory *search)
+baul_search_directory_init (BaulSearchDirectory *search)
 {
-    search->details = g_new0 (CajaSearchDirectoryDetails, 1);
+    search->details = g_new0 (BaulSearchDirectoryDetails, 1);
 }
 
 static void
-baul_search_directory_class_init (CajaSearchDirectoryClass *class)
+baul_search_directory_class_init (BaulSearchDirectoryClass *class)
 {
-    CajaDirectoryClass *directory_class;
+    BaulDirectoryClass *directory_class;
 
     G_OBJECT_CLASS (class)->dispose = search_dispose;
     G_OBJECT_CLASS (class)->finalize = search_finalize;
@@ -808,11 +808,11 @@ baul_search_directory_generate_new_uri (void)
 
 
 void
-baul_search_directory_set_query (CajaSearchDirectory *search,
-                                 CajaQuery *query)
+baul_search_directory_set_query (BaulSearchDirectory *search,
+                                 BaulQuery *query)
 {
-    CajaDirectory *dir;
-    CajaFile *as_file;
+    BaulDirectory *dir;
+    BaulFile *as_file;
 
     if (search->details->query != query)
     {
@@ -839,8 +839,8 @@ baul_search_directory_set_query (CajaSearchDirectory *search,
     }
 }
 
-CajaQuery *
-baul_search_directory_get_query (CajaSearchDirectory *search)
+BaulQuery *
+baul_search_directory_get_query (BaulSearchDirectory *search)
 {
     if (search->details->query != NULL)
     {
@@ -850,10 +850,10 @@ baul_search_directory_get_query (CajaSearchDirectory *search)
     return NULL;
 }
 
-CajaSearchDirectory *
+BaulSearchDirectory *
 baul_search_directory_new_from_saved_search (const char *uri)
 {
-    CajaSearchDirectory *search;
+    BaulSearchDirectory *search;
     char *file;
 
     search = BAUL_SEARCH_DIRECTORY (g_object_new (BAUL_TYPE_SEARCH_DIRECTORY, NULL));
@@ -863,7 +863,7 @@ baul_search_directory_new_from_saved_search (const char *uri)
     file = g_filename_from_uri (uri, NULL, NULL);
     if (file != NULL)
     {
-        CajaQuery *query;
+        BaulQuery *query;
 
         query = baul_query_load (file);
         if (query != NULL)
@@ -883,19 +883,19 @@ baul_search_directory_new_from_saved_search (const char *uri)
 }
 
 gboolean
-baul_search_directory_is_saved_search (CajaSearchDirectory *search)
+baul_search_directory_is_saved_search (BaulSearchDirectory *search)
 {
     return search->details->saved_search_uri != NULL;
 }
 
 gboolean
-baul_search_directory_is_modified (CajaSearchDirectory *search)
+baul_search_directory_is_modified (BaulSearchDirectory *search)
 {
     return search->details->modified;
 }
 
 gboolean
-baul_search_directory_is_indexed (CajaSearchDirectory *search)
+baul_search_directory_is_indexed (BaulSearchDirectory *search)
 {
     ensure_search_engine (search);
     return baul_search_engine_is_indexed (search->details->engine);
@@ -903,7 +903,7 @@ baul_search_directory_is_indexed (CajaSearchDirectory *search)
 
 
 void
-baul_search_directory_save_to_file (CajaSearchDirectory *search,
+baul_search_directory_save_to_file (BaulSearchDirectory *search,
                                     const char              *save_file_uri)
 {
     char *file;
@@ -923,7 +923,7 @@ baul_search_directory_save_to_file (CajaSearchDirectory *search,
 }
 
 void
-baul_search_directory_save_search (CajaSearchDirectory *search)
+baul_search_directory_save_search (BaulSearchDirectory *search)
 {
     if (search->details->saved_search_uri == NULL)
     {

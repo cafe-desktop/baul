@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2000 Eazel, Inc.
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -27,7 +27,7 @@
  *
  */
 
-/* baul-location-bar.c - Location bar for Caja
+/* baul-location-bar.c - Location bar for Baul
  */
 
 #include <config.h>
@@ -53,7 +53,7 @@
 #include "baul-window-private.h"
 #include "baul-window.h"
 
-struct CajaLocationEntryDetails
+struct BaulLocationEntryDetails
 {
     GtkLabel *label;
 
@@ -65,13 +65,13 @@ struct CajaLocationEntryDetails
     gboolean has_special_text;
     gboolean setting_special_text;
     gchar *special_text;
-    CajaLocationEntryAction secondary_action;
+    BaulLocationEntryAction secondary_action;
 };
 
-static void  baul_location_entry_class_init       (CajaLocationEntryClass *class);
-static void  baul_location_entry_init             (CajaLocationEntry      *entry);
+static void  baul_location_entry_class_init       (BaulLocationEntryClass *class);
+static void  baul_location_entry_init             (BaulLocationEntry      *entry);
 
-EEL_CLASS_BOILERPLATE (CajaLocationEntry,
+EEL_CLASS_BOILERPLATE (BaulLocationEntry,
                        baul_location_entry,
                        BAUL_TYPE_ENTRY)
 
@@ -82,7 +82,7 @@ EEL_CLASS_BOILERPLATE (CajaLocationEntry,
 static gboolean
 try_to_expand_path (gpointer callback_data)
 {
-    CajaLocationEntry *entry;
+    BaulLocationEntry *entry;
     GtkEditable *editable;
     char *suffix, *user_location, *uri_scheme;
     int user_location_length, pos;
@@ -209,7 +209,7 @@ position_and_selection_are_at_end (GtkEditable *editable)
 
 static void
 got_completion_data_callback (GFilenameCompleter *completer,
-                              CajaLocationEntry *entry)
+                              BaulLocationEntry *entry)
 {
     if (entry->details->idle_id)
     {
@@ -222,7 +222,7 @@ got_completion_data_callback (GFilenameCompleter *completer,
 static void
 editable_event_after_callback (GtkEntry *entry,
                                GdkEvent *event,
-                               CajaLocationEntry *location_entry)
+                               BaulLocationEntry *location_entry)
 {
     GtkEditable *editable;
     GdkEventKey *keyevent;
@@ -278,7 +278,7 @@ editable_event_after_callback (GtkEntry *entry,
 static void
 finalize (GObject *object)
 {
-    CajaLocationEntry *entry;
+    BaulLocationEntry *entry;
 
     entry = BAUL_LOCATION_ENTRY (object);
 
@@ -292,7 +292,7 @@ finalize (GObject *object)
 static void
 destroy (GtkWidget *object)
 {
-    CajaLocationEntry *entry;
+    BaulLocationEntry *entry;
 
     entry = BAUL_LOCATION_ENTRY (object);
 
@@ -310,7 +310,7 @@ destroy (GtkWidget *object)
 }
 
 static void
-baul_location_entry_text_changed (CajaLocationEntry *entry,
+baul_location_entry_text_changed (BaulLocationEntry *entry,
                                   GParamSpec            *pspec)
 {
     if (entry->details->setting_special_text)
@@ -344,7 +344,7 @@ static gboolean
 baul_location_entry_focus_in (GtkWidget     *widget,
                               GdkEventFocus *event)
 {
-    CajaLocationEntry *entry = BAUL_LOCATION_ENTRY (widget);
+    BaulLocationEntry *entry = BAUL_LOCATION_ENTRY (widget);
 
     if (entry->details->has_special_text)
     {
@@ -359,7 +359,7 @@ baul_location_entry_focus_in (GtkWidget     *widget,
 static void
 baul_location_entry_activate (GtkEntry *entry)
 {
-    CajaLocationEntry *loc_entry;
+    BaulLocationEntry *loc_entry;
     const gchar *entry_text;
     gchar *uri_scheme = NULL;
 
@@ -387,7 +387,7 @@ baul_location_entry_activate (GtkEntry *entry)
 }
 
 static void
-baul_location_entry_class_init (CajaLocationEntryClass *class)
+baul_location_entry_class_init (BaulLocationEntryClass *class)
 {
     GTK_WIDGET_CLASS (class)->focus_in_event = baul_location_entry_focus_in;
 
@@ -399,7 +399,7 @@ baul_location_entry_class_init (CajaLocationEntryClass *class)
 }
 
 void
-baul_location_entry_update_current_location (CajaLocationEntry *entry,
+baul_location_entry_update_current_location (BaulLocationEntry *entry,
         const char *location)
 {
     g_free (entry->details->current_directory);
@@ -410,8 +410,8 @@ baul_location_entry_update_current_location (CajaLocationEntry *entry,
 }
 
 void
-baul_location_entry_set_secondary_action (CajaLocationEntry *entry,
-        CajaLocationEntryAction secondary_action)
+baul_location_entry_set_secondary_action (BaulLocationEntry *entry,
+        BaulLocationEntryAction secondary_action)
 {
     if (entry->details->secondary_action == secondary_action)
     {
@@ -436,14 +436,14 @@ baul_location_entry_set_secondary_action (CajaLocationEntry *entry,
 }
 
 static void
-baul_location_entry_init (CajaLocationEntry *entry)
+baul_location_entry_init (BaulLocationEntry *entry)
 {
     GtkStyleContext *context;
 
     context = gtk_widget_get_style_context (GTK_WIDGET (entry));
     gtk_style_context_add_class (context, "baul-location-entry");
 
-    entry->details = g_new0 (CajaLocationEntryDetails, 1);
+    entry->details = g_new0 (BaulLocationEntryDetails, 1);
 
     entry->details->completer = g_filename_completer_new ();
     g_filename_completer_set_dirs_only (entry->details->completer, TRUE);
@@ -477,7 +477,7 @@ baul_location_entry_new (void)
 }
 
 void
-baul_location_entry_set_special_text (CajaLocationEntry *entry,
+baul_location_entry_set_special_text (BaulLocationEntry *entry,
                                       const char            *special_text)
 {
     entry->details->has_special_text = TRUE;

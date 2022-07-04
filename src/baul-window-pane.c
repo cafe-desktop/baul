@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   baul-window-pane.c: Caja window pane
+   baul-window-pane.c: Baul window pane
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -31,17 +31,17 @@
 
 static void baul_window_pane_dispose    (GObject *object);
 
-G_DEFINE_TYPE (CajaWindowPane,
+G_DEFINE_TYPE (BaulWindowPane,
                baul_window_pane,
                G_TYPE_OBJECT)
 #define parent_class baul_window_pane_parent_class
 
 
-static inline CajaWindowSlot *
-get_first_inactive_slot (CajaWindowPane *pane)
+static inline BaulWindowSlot *
+get_first_inactive_slot (BaulWindowPane *pane)
 {
     GList *l;
-    CajaWindowSlot *slot = NULL;
+    BaulWindowSlot *slot = NULL;
 
     for (l = pane->slots; l != NULL; l = l->next)
     {
@@ -56,7 +56,7 @@ get_first_inactive_slot (CajaWindowPane *pane)
 }
 
 void
-baul_window_pane_show (CajaWindowPane *pane)
+baul_window_pane_show (BaulWindowPane *pane)
 {
     pane->visible = TRUE;
     EEL_CALL_METHOD (BAUL_WINDOW_PANE_CLASS, pane,
@@ -64,9 +64,9 @@ baul_window_pane_show (CajaWindowPane *pane)
 }
 
 void
-baul_window_pane_zoom_in (CajaWindowPane *pane)
+baul_window_pane_zoom_in (BaulWindowPane *pane)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (pane != NULL);
 
@@ -80,10 +80,10 @@ baul_window_pane_zoom_in (CajaWindowPane *pane)
 }
 
 void
-baul_window_pane_zoom_to_level (CajaWindowPane *pane,
-                                CajaZoomLevel level)
+baul_window_pane_zoom_to_level (BaulWindowPane *pane,
+                                BaulZoomLevel level)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (pane != NULL);
 
@@ -97,9 +97,9 @@ baul_window_pane_zoom_to_level (CajaWindowPane *pane,
 }
 
 void
-baul_window_pane_zoom_out (CajaWindowPane *pane)
+baul_window_pane_zoom_out (BaulWindowPane *pane)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (pane != NULL);
 
@@ -113,9 +113,9 @@ baul_window_pane_zoom_out (CajaWindowPane *pane)
 }
 
 void
-baul_window_pane_zoom_to_default (CajaWindowPane *pane)
+baul_window_pane_zoom_to_default (BaulWindowPane *pane)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     g_assert (pane != NULL);
 
@@ -129,18 +129,18 @@ baul_window_pane_zoom_to_default (CajaWindowPane *pane)
 }
 
 void
-baul_window_pane_slot_close (CajaWindowPane *pane, CajaWindowSlot *slot)
+baul_window_pane_slot_close (BaulWindowPane *pane, BaulWindowSlot *slot)
 {
     if (pane->window)
     {
-        CajaWindow *window;
+        BaulWindow *window;
         window = pane->window;
         if (pane->active_slot == slot)
         {
             g_assert (pane->active_slots != NULL);
             g_assert (pane->active_slots->data == slot);
 
-            CajaWindowSlot *next_slot;
+            BaulWindowSlot *next_slot;
 
             next_slot = NULL;
             if (pane->active_slots->next != NULL)
@@ -160,7 +160,7 @@ baul_window_pane_slot_close (CajaWindowPane *pane, CajaWindowSlot *slot)
         /* If that was the last slot in the active pane, close the pane or even the whole window. */
         if (window->details->active_pane->slots == NULL)
         {
-            CajaWindowPane *next_pane;
+            BaulWindowPane *next_pane;
             next_pane = baul_window_get_next_pane (window);
 
             /* If next_pane is non-NULL, we have more than one pane available. In this
@@ -184,9 +184,9 @@ baul_window_pane_slot_close (CajaWindowPane *pane, CajaWindowSlot *slot)
 }
 
 static void
-real_sync_location_widgets (CajaWindowPane *pane)
+real_sync_location_widgets (BaulWindowPane *pane)
 {
-    CajaWindowSlot *slot;
+    BaulWindowSlot *slot;
 
     /* TODO: Would be nice with a real subclass for spatial panes */
     g_assert (BAUL_IS_SPATIAL_WINDOW (pane->window));
@@ -200,14 +200,14 @@ real_sync_location_widgets (CajaWindowPane *pane)
 
 
 void
-baul_window_pane_sync_location_widgets (CajaWindowPane *pane)
+baul_window_pane_sync_location_widgets (BaulWindowPane *pane)
 {
     EEL_CALL_METHOD (BAUL_WINDOW_PANE_CLASS, pane,
                      sync_location_widgets, (pane));
 }
 
 void
-baul_window_pane_sync_search_widgets (CajaWindowPane *pane)
+baul_window_pane_sync_search_widgets (BaulWindowPane *pane)
 {
     g_assert (BAUL_IS_WINDOW_PANE (pane));
 
@@ -216,7 +216,7 @@ baul_window_pane_sync_search_widgets (CajaWindowPane *pane)
 }
 
 void
-baul_window_pane_grab_focus (CajaWindowPane *pane)
+baul_window_pane_grab_focus (BaulWindowPane *pane)
 {
     if (BAUL_IS_WINDOW_PANE (pane) && pane->active_slot)
     {
@@ -225,13 +225,13 @@ baul_window_pane_grab_focus (CajaWindowPane *pane)
 }
 
 void
-baul_window_pane_switch_to (CajaWindowPane *pane)
+baul_window_pane_switch_to (BaulWindowPane *pane)
 {
     baul_window_pane_grab_focus (pane);
 }
 
 static void
-baul_window_pane_init (CajaWindowPane *pane)
+baul_window_pane_init (BaulWindowPane *pane)
 {
     pane->slots = NULL;
     pane->active_slots = NULL;
@@ -240,7 +240,7 @@ baul_window_pane_init (CajaWindowPane *pane)
 }
 
 void
-baul_window_pane_set_active (CajaWindowPane *pane, gboolean is_active)
+baul_window_pane_set_active (BaulWindowPane *pane, gboolean is_active)
 {
     if (is_active == pane->is_active)
     {
@@ -257,7 +257,7 @@ baul_window_pane_set_active (CajaWindowPane *pane, gboolean is_active)
 }
 
 static void
-baul_window_pane_class_init (CajaWindowPaneClass *class)
+baul_window_pane_class_init (BaulWindowPaneClass *class)
 {
     G_OBJECT_CLASS (class)->dispose = baul_window_pane_dispose;
     BAUL_WINDOW_PANE_CLASS (class)->sync_location_widgets = real_sync_location_widgets;
@@ -266,7 +266,7 @@ baul_window_pane_class_init (CajaWindowPaneClass *class)
 static void
 baul_window_pane_dispose (GObject *object)
 {
-    CajaWindowPane *pane = BAUL_WINDOW_PANE (object);
+    BaulWindowPane *pane = BAUL_WINDOW_PANE (object);
 
     g_assert (pane->slots == NULL);
 
@@ -274,22 +274,22 @@ baul_window_pane_dispose (GObject *object)
     G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
-CajaWindowPane *
-baul_window_pane_new (CajaWindow *window)
+BaulWindowPane *
+baul_window_pane_new (BaulWindow *window)
 {
-    CajaWindowPane *pane;
+    BaulWindowPane *pane;
 
     pane = g_object_new (BAUL_TYPE_WINDOW_PANE, NULL);
     pane->window = window;
     return pane;
 }
 
-CajaWindowSlot *
-baul_window_pane_get_slot_for_content_box (CajaWindowPane *pane,
+BaulWindowSlot *
+baul_window_pane_get_slot_for_content_box (BaulWindowPane *pane,
         GtkWidget *content_box)
 {
     GList *l;
-    CajaWindowSlot *slot = NULL;
+    BaulWindowSlot *slot = NULL;
 
     for (l = pane->slots; l != NULL; l = l->next)
     {

@@ -18,14 +18,14 @@ quit_cb (gpointer data)
 #endif
 
 static void
-files_added (CajaDirectory *directory,
+files_added (BaulDirectory *directory,
 	     GList *added_files)
 {
 #if 0
 	GList *list;
 
 	for (list = added_files; list != NULL; list = list->next) {
-		CajaFile *file = list->data;
+		BaulFile *file = list->data;
 
 		g_print (" - %s\n", baul_file_get_uri (file));
 	}
@@ -36,14 +36,14 @@ files_added (CajaDirectory *directory,
 }
 
 static void
-files_changed (CajaDirectory *directory,
+files_changed (BaulDirectory *directory,
 	       GList *changed_files)
 {
 #if 0
 	GList *list;
 
 	for (list = changed_files; list != NULL; list = list->next) {
-		CajaFile *file = list->data;
+		BaulFile *file = list->data;
 
 		g_print (" - %s\n", baul_file_get_uri (file));
 	}
@@ -53,7 +53,7 @@ files_changed (CajaDirectory *directory,
 }
 
 static gboolean
-force_reload (CajaDirectory *directory)
+force_reload (BaulDirectory *directory)
 {
 	g_print ("forcing reload!\n");
 
@@ -63,7 +63,7 @@ force_reload (CajaDirectory *directory)
 }
 
 static void
-done_loading (CajaDirectory *directory)
+done_loading (BaulDirectory *directory)
 {
 	static int i = 0;
 
@@ -79,8 +79,8 @@ done_loading (CajaDirectory *directory)
 int
 main (int argc, char **argv)
 {
-	CajaDirectory *directory;
-	CajaQuery *query;
+	BaulDirectory *directory;
+	BaulQuery *query;
 	client1 = g_new0 (int, 1);
 	client2 = g_new0 (int, 1);
 

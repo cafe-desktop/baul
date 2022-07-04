@@ -1,5 +1,5 @@
 /*
- *  baul-menu-provider.h - Interface for Caja extensions that
+ *  baul-menu-provider.h - Interface for Baul extensions that
  *                             provide context menu items.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -22,10 +22,10 @@
  *
  */
 
-/* This interface is implemented by Caja extensions that want to
+/* This interface is implemented by Baul extensions that want to
  * add context menu entries to files.  Extensions are called when
- * Caja constructs the context menu for a file.  They are passed a
- * list of CajaFileInfo objects which holds the current selection */
+ * Baul constructs the context menu for a file.  They are passed a
+ * list of BaulFileInfo objects which holds the current selection */
 
 #ifndef BAUL_MENU_PROVIDER_H
 #define BAUL_MENU_PROVIDER_H
@@ -39,54 +39,54 @@
 G_BEGIN_DECLS
 
 #define BAUL_TYPE_MENU_PROVIDER           (baul_menu_provider_get_type ())
-#define BAUL_MENU_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MENU_PROVIDER, CajaMenuProvider))
+#define BAUL_MENU_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MENU_PROVIDER, BaulMenuProvider))
 #define BAUL_IS_MENU_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_MENU_PROVIDER))
-#define BAUL_MENU_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_MENU_PROVIDER, CajaMenuProviderIface))
+#define BAUL_MENU_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_MENU_PROVIDER, BaulMenuProviderIface))
 
-typedef struct _CajaMenuProvider       CajaMenuProvider;
-typedef struct _CajaMenuProviderIface  CajaMenuProviderIface;
+typedef struct _BaulMenuProvider       BaulMenuProvider;
+typedef struct _BaulMenuProviderIface  BaulMenuProviderIface;
 
 /**
- * CajaMenuProviderIface:
+ * BaulMenuProviderIface:
  * @g_iface: The parent interface.
- * @get_file_items: Returns a #GList of #CajaMenuItem.
+ * @get_file_items: Returns a #GList of #BaulMenuItem.
  *   See baul_menu_provider_get_file_items() for details.
- * @get_background_items: Returns a #GList of #CajaMenuItem.
+ * @get_background_items: Returns a #GList of #BaulMenuItem.
  *   See baul_menu_provider_get_background_items() for details.
- * @get_toolbar_items: Returns a #GList of #CajaMenuItem.
+ * @get_toolbar_items: Returns a #GList of #BaulMenuItem.
  *   See baul_menu_provider_get_toolbar_items() for details.
  *
  * Interface for extensions to provide additional menu items.
  */
 
-struct _CajaMenuProviderIface {
+struct _BaulMenuProviderIface {
     GTypeInterface g_iface;
 
-    GList *(*get_file_items)       (CajaMenuProvider *provider,
+    GList *(*get_file_items)       (BaulMenuProvider *provider,
                                     GtkWidget        *window,
                                     GList            *files);
-    GList *(*get_background_items) (CajaMenuProvider *provider,
+    GList *(*get_background_items) (BaulMenuProvider *provider,
                                     GtkWidget        *window,
-                                    CajaFileInfo     *current_folder);
-    GList *(*get_toolbar_items)    (CajaMenuProvider *provider,
+                                    BaulFileInfo     *current_folder);
+    GList *(*get_toolbar_items)    (BaulMenuProvider *provider,
                                     GtkWidget        *window,
-                                    CajaFileInfo     *current_folder);
+                                    BaulFileInfo     *current_folder);
 };
 
 /* Interface Functions */
 GType  baul_menu_provider_get_type             (void);
-GList *baul_menu_provider_get_file_items       (CajaMenuProvider *provider,
+GList *baul_menu_provider_get_file_items       (BaulMenuProvider *provider,
                                                 GtkWidget        *window,
                                                 GList            *files);
-GList *baul_menu_provider_get_background_items (CajaMenuProvider *provider,
+GList *baul_menu_provider_get_background_items (BaulMenuProvider *provider,
                                                 GtkWidget        *window,
-                                                CajaFileInfo     *current_folder);
-GList *baul_menu_provider_get_toolbar_items    (CajaMenuProvider *provider,
+                                                BaulFileInfo     *current_folder);
+GList *baul_menu_provider_get_toolbar_items    (BaulMenuProvider *provider,
                                                 GtkWidget        *window,
-                                                CajaFileInfo     *current_folder);
+                                                BaulFileInfo     *current_folder);
 
 /* This function emit a signal to inform baul that its item list has changed. */
-void   baul_menu_provider_emit_items_updated_signal (CajaMenuProvider *provider);
+void   baul_menu_provider_emit_items_updated_signal (BaulMenuProvider *provider);
 
 G_END_DECLS
 

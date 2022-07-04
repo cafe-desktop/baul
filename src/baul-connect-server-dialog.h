@@ -1,16 +1,16 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
- * Caja
+ * Baul
  *
  * Copyright (C) 2003 Red Hat, Inc.
  * Copyright (C) 2010 Cosimo Cecchi <cosimoc@gnome.org>
  *
- * Caja is free software; you can redistribute it and/or
+ * Baul is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * Caja is distributed in the hope that it will be useful,
+ * Baul is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -33,49 +33,49 @@
 	(baul_connect_server_dialog_get_type ())
 #define BAUL_CONNECT_SERVER_DIALOG(obj)\
         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CONNECT_SERVER_DIALOG,\
-				     CajaConnectServerDialog))
+				     BaulConnectServerDialog))
 #define BAUL_CONNECT_SERVER_DIALOG_CLASS(klass)\
 	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CONNECT_SERVER_DIALOG,\
-				  CajaConnectServerDialogClass))
+				  BaulConnectServerDialogClass))
 #define BAUL_IS_CONNECT_SERVER_DIALOG(obj)\
 	(G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_CONNECT_SERVER_DIALOG)
 
-typedef struct _CajaConnectServerDialog CajaConnectServerDialog;
-typedef struct _CajaConnectServerDialogClass CajaConnectServerDialogClass;
-typedef struct _CajaConnectServerDialogPrivate CajaConnectServerDialogPrivate;
+typedef struct _BaulConnectServerDialog BaulConnectServerDialog;
+typedef struct _BaulConnectServerDialogClass BaulConnectServerDialogClass;
+typedef struct _BaulConnectServerDialogPrivate BaulConnectServerDialogPrivate;
 
-struct _CajaConnectServerDialog
+struct _BaulConnectServerDialog
 {
     GtkDialog parent;
-    CajaConnectServerDialogPrivate *details;
+    BaulConnectServerDialogPrivate *details;
 };
 
-struct _CajaConnectServerDialogClass
+struct _BaulConnectServerDialogClass
 {
     GtkDialogClass parent_class;
 };
 
 GType baul_connect_server_dialog_get_type (void);
 
-GtkWidget* baul_connect_server_dialog_new (CajaWindow *window);
+GtkWidget* baul_connect_server_dialog_new (BaulWindow *window);
 
-void baul_connect_server_dialog_display_location_async (CajaConnectServerDialog *self,
-							    CajaApplication *application,
+void baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self,
+							    BaulApplication *application,
 							    GFile *location,
 							    GAsyncReadyCallback callback,
 							    gpointer user_data);
-gboolean baul_connect_server_dialog_display_location_finish (CajaConnectServerDialog *self,
+gboolean baul_connect_server_dialog_display_location_finish (BaulConnectServerDialog *self,
 								 GAsyncResult *result,
 								 GError **error);
 
-void baul_connect_server_dialog_fill_details_async (CajaConnectServerDialog *self,
+void baul_connect_server_dialog_fill_details_async (BaulConnectServerDialog *self,
 							GMountOperation *operation,
 							const gchar *default_user,
 							const gchar *default_domain,
 							GAskPasswordFlags flags,
 							GAsyncReadyCallback callback,
 							gpointer user_data);
-gboolean baul_connect_server_dialog_fill_details_finish (CajaConnectServerDialog *self,
+gboolean baul_connect_server_dialog_fill_details_finish (BaulConnectServerDialog *self,
 							     GAsyncResult *result);
 
 #endif /* BAUL_CONNECT_SERVER_DIALOG_H */

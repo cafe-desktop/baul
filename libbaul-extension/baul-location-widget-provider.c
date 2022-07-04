@@ -1,5 +1,5 @@
 /*
- *  baul-location-widget-provider.c - Interface for Caja
+ *  baul-location-widget-provider.c - Interface for Baul
                  extensions that provide extra widgets for a location
  *
  *  Copyright (C) 2005 Red Hat, Inc.
@@ -29,11 +29,11 @@
 
 /**
  * SECTION:baul-location-widget-provider
- * @title: CajaLocationWidgetProvider
+ * @title: BaulLocationWidgetProvider
  * @short_description: Interface to provide additional location widgets
  * @include: libbaul-extension/baul-location-widget-provider.h
  *
- * #CajaLocationWidgetProvider allows extension to provide additional location
+ * #BaulLocationWidgetProvider allows extension to provide additional location
  * widgets in the file manager views.
  */
 
@@ -49,7 +49,7 @@ baul_location_widget_provider_get_type (void)
 
     if (!type) {
         const GTypeInfo info = {
-            sizeof (CajaLocationWidgetProviderIface),
+            sizeof (BaulLocationWidgetProviderIface),
             baul_location_widget_provider_base_init,
             NULL,
             NULL,
@@ -61,7 +61,7 @@ baul_location_widget_provider_get_type (void)
         };
 
         type = g_type_register_static (G_TYPE_INTERFACE,
-                                       "CajaLocationWidgetProvider",
+                                       "BaulLocationWidgetProvider",
                                        &info, 0);
         g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
@@ -71,14 +71,14 @@ baul_location_widget_provider_get_type (void)
 
 /**
  * baul_location_widget_provider_get_widget:
- * @provider: a #CajaLocationWidgetProvider
+ * @provider: a #BaulLocationWidgetProvider
  * @uri: the URI of the location
  * @window: parent #GtkWindow
  *
  * Returns: (transfer none): the location widget for @provider at @uri
  */
 GtkWidget *
-baul_location_widget_provider_get_widget (CajaLocationWidgetProvider *provider,
+baul_location_widget_provider_get_widget (BaulLocationWidgetProvider *provider,
                                           const char                 *uri,
                                           GtkWidget                  *window)
 {

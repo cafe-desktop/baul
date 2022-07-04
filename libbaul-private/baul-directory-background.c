@@ -42,7 +42,7 @@
 
 static void baul_background_changed_cb (EelBackground *background,
                                         GdkDragAction  action,
-                                        CajaFile      *file);
+                                        BaulFile      *file);
 
 static void
 baul_background_get_default_settings (char **color,
@@ -60,7 +60,7 @@ baul_background_get_default_settings (char **color,
 }
 
 static void
-baul_background_load_from_file_metadata (CajaFile      *file,
+baul_background_load_from_file_metadata (BaulFile      *file,
                                          EelBackground *background)
 {
     char *color, *image;
@@ -95,7 +95,7 @@ baul_background_load_from_file_metadata (CajaFile      *file,
 
 /* handle the file changed signal */
 static void
-baul_background_settings_notify_cb (CajaFile *file,
+baul_background_settings_notify_cb (BaulFile *file,
                                     EelBackground *background)
 {
     baul_background_load_from_file_metadata (file, background);
@@ -107,7 +107,7 @@ baul_background_theme_notify_cb (GSettings   *settings,
                                  const gchar *key,
                                  gpointer     user_data)
 {
-    CajaFile *file;
+    BaulFile *file;
     EelBackground *background = EEL_BACKGROUND (user_data);
 
     file = g_object_get_data (G_OBJECT (background), "eel_background_file");
@@ -120,7 +120,7 @@ baul_background_theme_notify_cb (GSettings   *settings,
 static void
 baul_background_changed_cb (EelBackground *background,
                             GdkDragAction  action,
-                            CajaFile   *file)
+                            BaulFile   *file)
 {
     g_assert (EEL_IS_BACKGROUND (background));
     g_assert (BAUL_IS_FILE (file));
@@ -177,7 +177,7 @@ baul_background_changed_cb (EelBackground *background,
 /* handle the background reset signal by setting values from the current theme */
 static void
 baul_background_reset_cb (EelBackground *background,
-                          CajaFile  *file)
+                          BaulFile  *file)
 {
     char *color, *image;
 
@@ -220,7 +220,7 @@ static void
 baul_background_weak_notify (gpointer data,
                              GObject *background)
 {
-    CajaFile *file = BAUL_FILE (data);
+    BaulFile *file = BAUL_FILE (data);
 
     g_signal_handlers_disconnect_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                           background);
@@ -232,7 +232,7 @@ baul_background_weak_notify (gpointer data,
 /* key routine that hooks up a background and location */
 void
 baul_connect_background_to_file_metadata (GtkWidget     *widget,
-                                          CajaFile      *file,
+                                          BaulFile      *file,
                                           GdkDragAction  default_drag_action)
 {
     EelBackground *background;
@@ -380,7 +380,7 @@ desktop_background_weak_notify (gpointer data,
 }
 
 void
-baul_connect_desktop_background_to_settings (CajaIconContainer *icon_container)
+baul_connect_desktop_background_to_settings (BaulIconContainer *icon_container)
 {
     EelBackground *background;
 

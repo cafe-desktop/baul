@@ -63,7 +63,7 @@ baul_compute_title_for_location (GFile *location)
     title = NULL;
     if (location)
     {
-        CajaFile *file;
+        BaulFile *file;
 
         file = baul_file_get (location);
         title = baul_file_get_description (file);
@@ -96,7 +96,7 @@ char* baul_get_user_directory(void)
 	 * How should we handle the case where this mkdir fails?
 	 * Note that baul_application_startup will refuse to launch if this
 	 * directory doesn't get created, so that case is OK. But the directory
-	 * could be deleted after Caja was launched, and perhaps
+	 * could be deleted after Baul was launched, and perhaps
 	 * there is some bad side-effect of not handling that case.
 	 * <<<
 	 * Si alguien tiene tiempo, puede enviar este codigo a Nautilus.
@@ -184,7 +184,7 @@ char* baul_get_accel_map_file(void)
 typedef struct {
 	char*type;
 	char*path;
-	CajaFile* file;
+	BaulFile* file;
 } XdgDirEntry;
 
 
@@ -293,7 +293,7 @@ static XdgDirEntry *cached_xdg_dirs = NULL;
 static GFileMonitor *cached_xdg_dirs_monitor = NULL;
 
 static void
-xdg_dir_changed (CajaFile *file,
+xdg_dir_changed (BaulFile *file,
                  XdgDirEntry *dir)
 {
     GFile *location, *dir_location;
@@ -537,7 +537,7 @@ baul_get_desktop_directory (void)
              * How should we handle the case where this mkdir fails?
              * Note that baul_application_startup will refuse to launch if this
              * directory doesn't get created, so that case is OK. But the directory
-             * could be deleted after Caja was launched, and perhaps
+             * could be deleted after Baul was launched, and perhaps
              * there is some bad side-effect of not handling that case.
              */
         }
@@ -810,7 +810,7 @@ baul_get_mounted_mount_for_root (GFile *location)
 /**
  * baul_get_pixmap_directory
  *
- * Get the path for the directory containing Caja pixmaps.
+ * Get the path for the directory containing Baul pixmaps.
  *
  * Return value: the directory path.
  **/
@@ -838,7 +838,7 @@ baul_pixmap_file (const char *partial_path)
     {
         char *tmp;
         tmp = baul_get_pixmap_directory ();
-        g_debug ("Failed to locate \"%s\" in Caja pixmap path \"%s\". Incomplete installation?", partial_path, tmp);
+        g_debug ("Failed to locate \"%s\" in Baul pixmap path \"%s\". Incomplete installation?", partial_path, tmp);
         g_free (tmp);
     }
     g_free (path);
@@ -1001,7 +1001,7 @@ get_dbus_connection (void)
  *       is being suspended.
  *
  * Inhibits the power manager from logging out or suspending the machine
- * (e.g. whenever Caja is doing file operations).
+ * (e.g. whenever Baul is doing file operations).
  *
  * Returns: an integer cookie, which must be passed to
  *    baul_uninhibit_power_manager() to resume
@@ -1030,7 +1030,7 @@ baul_inhibit_power_manager (const char *message)
                                           GSM_INTERFACE,
                                           "Inhibit",
                                           g_variant_new ("(susu)",
-                                                  "Caja",
+                                                  "Baul",
                                                   (guint) 0,
                                                   message,
                                                   (guint) (INHIBIT_LOGOUT | INHIBIT_SUSPEND)),
@@ -1140,9 +1140,9 @@ baul_trashed_files_get_original_directories (GList *files,
 {
     GHashTable *directories;
     GList *l, *m;
-    CajaFile *file = NULL;
-    CajaFile *original_file = NULL;
-    CajaFile *original_dir = NULL;
+    BaulFile *file = NULL;
+    BaulFile *original_file = NULL;
+    BaulFile *original_dir = NULL;
 
     directories = NULL;
 
@@ -1203,7 +1203,7 @@ static GList *
 locations_from_file_list (GList *file_list)
 {
     GList *l, *ret;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     ret = NULL;
 
@@ -1223,7 +1223,7 @@ baul_restore_files_from_trash (GList *files,
     GHashTable *original_dirs_hash;
     GList *original_dirs, *unhandled_files;
     GList *l;
-    CajaFile *file = NULL;
+    BaulFile *file = NULL;
 
     original_dirs_hash = baul_trashed_files_get_original_directories (files, &unhandled_files);
 
@@ -1244,7 +1244,7 @@ baul_restore_files_from_trash (GList *files,
 
     if (original_dirs_hash != NULL)
     {
-        CajaFile *original_dir = NULL;
+        BaulFile *original_dir = NULL;
         GFile *original_dir_location = NULL;
         GList *locations = NULL;
 

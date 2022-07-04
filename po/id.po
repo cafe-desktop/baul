@@ -307,8 +307,8 @@ msgstr "Hapus"
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:399 src/baul-window.c:167
 #: src/baul-window-menus.c:574
-msgid "Caja"
-msgstr "Caja"
+msgid "Baul"
+msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the MATE desktop environment"
@@ -316,7 +316,7 @@ msgstr "Manajer berkas untuk lingkungan desktop MATE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Caja is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the MATE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
 "MATE desktop. It works on local and remote file systems."
@@ -324,8 +324,8 @@ msgstr ""
 
 #: data/baul.appdata.xml.in:16
 msgid ""
-"Caja is extensible through a plugin system, similar to that of GNOME "
-"Nautilus, of which Caja is a fork."
+"Baul is extensible through a plugin system, similar to that of GNOME "
+"Nautilus, of which Baul is a fork."
 msgstr ""
 
 #: data/baul-autorun-software.desktop.in.in:3
@@ -2923,33 +2923,33 @@ msgstr ""
 "dan [ctrl + shift + tab]."
 
 #: libbaul-private/org.mate.baul.gschema.xml:86
-msgid "Caja will exit when last window destroyed."
-msgstr "Caja akan keluar ketika jendela terakhir ditutup."
+msgid "Baul will exit when last window destroyed."
+msgstr "Baul akan keluar ketika jendela terakhir ditutup."
 
 #: libbaul-private/org.mate.baul.gschema.xml:87
 msgid ""
-"If set to true, then Caja will exit when all windows are destroyed. This is "
+"If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
-"so Caja can serve as a daemon to monitor media automount, or similar tasks."
+"so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
-"Jika diaktifkan, maka Caja akan keluar ketika semua jendela ditiadakan. Hal "
+"Jika diaktifkan, maka Baul akan keluar ketika semua jendela ditiadakan. Hal "
 "ini merupakan pengaturan bawaan. Jika tidak diaktifkan, hal ini dapat "
-"dimulai tanpa jendela apapun, sehingga Caja dapat berfungsi sebagai daemon "
+"dimulai tanpa jendela apapun, sehingga Baul dapat berfungsi sebagai daemon "
 "untuk memantau media automount atau tugas yang sejenis."
 
 #: libbaul-private/org.mate.baul.gschema.xml:91
-msgid "Enables the classic Caja behavior, where all windows are browsers"
+msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
-"Mengaktifkan perilaku klasik Caja di mana semua jendela adalah peramban"
+"Mengaktifkan perilaku klasik Baul di mana semua jendela adalah peramban"
 
 #: libbaul-private/org.mate.baul.gschema.xml:92
 msgid ""
-"If set to true, then all Caja windows will be browser windows. This is how "
+"If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
-"Bila diaktifkan, semua jendela Caja akan menjadi jendela penjelajah. Ini "
-"adalah perilaku standar Caja sebelum versi 2.6, dan beberapa orang memilih "
+"Bila diaktifkan, semua jendela Baul akan menjadi jendela penjelajah. Ini "
+"adalah perilaku standar Baul sebelum versi 2.6, dan beberapa orang memilih "
 "perilaku ini."
 
 #: libbaul-private/org.mate.baul.gschema.xml:96
@@ -2958,10 +2958,10 @@ msgstr "Selalu menggunakan entri lokasi, bukan berupa tombol"
 
 #: libbaul-private/org.mate.baul.gschema.xml:97
 msgid ""
-"If set to true, then Caja browser windows will always use a textual input "
+"If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
-"Jika diaktifkan, maka Caja akan menggunakan masukan teks pada kotak alat "
+"Jika diaktifkan, maka Baul akan menggunakan masukan teks pada kotak alat "
 "lokasi, dan bukan dari bilah lokasi."
 
 #: libbaul-private/org.mate.baul.gschema.xml:101
@@ -2972,10 +2972,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:102
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to "
+"If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr ""
-"Apabila bernilai benar (true), Caja akan meminta konfirmasi ketika menghapus"
+"Apabila bernilai benar (true), Baul akan meminta konfirmasi ketika menghapus"
 " berkas atau mengosongkan Tempat Sampah."
 
 #: libbaul-private/org.mate.baul.gschema.xml:106
@@ -2985,10 +2985,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:107
 msgid ""
-"If set to true, then Caja will ask for confirmation when you attempt to move"
+"If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
-"Jika bernilai benar, maka Caja akan meminta konfirmasi ketika Anda mencoba "
+"Jika bernilai benar, maka Baul akan meminta konfirmasi ketika Anda mencoba "
 "memindahkan berkas ke Tempat Sampah."
 
 #: libbaul-private/org.mate.baul.gschema.xml:111
@@ -2997,11 +2997,11 @@ msgstr "Menentukan untuk menghapus langsung tanpa melewati tempat sampah"
 
 #: libbaul-private/org.mate.baul.gschema.xml:112
 msgid ""
-"If set to true, then Caja will have a feature allowing you to delete a file "
+"If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr ""
-"Jika diaktifkan, maka Caja akan memiliki fitur yang mengijinkan Anda "
+"Jika diaktifkan, maka Baul akan memiliki fitur yang mengijinkan Anda "
 "menghapus berkas langsung, tanpa memindahkannya ke Tempat Sampah. Fitur ini "
 "bisa berbahaya, gunakan dengan hati-hati."
 
@@ -3083,15 +3083,15 @@ msgstr ""
 "yang menanganinya."
 
 #: libbaul-private/org.mate.baul.gschema.xml:143
-msgid "Use extra mouse button events in Caja' browser window"
+msgid "Use extra mouse button events in Baul' browser window"
 msgstr ""
 "Memakai kejadian atau event ekstra tombol tetikus dalam jendela peramban "
-"Caja"
+"Baul"
 
 #: libbaul-private/org.mate.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
-"will determine if any action is taken inside of Caja when either is pressed."
+"will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "Bagi pengguna dengan tetikus yang memiliki tombol \"Maju\" serta \"Mundur\","
 " kunci ini akan menentukan apakah aksi yang sesuai akan dilaksanakan oleh "
@@ -3182,10 +3182,10 @@ msgstr "Menampilkan hak akses lanjuan pada dialog properti berkas"
 
 #: libbaul-private/org.mate.baul.gschema.xml:176
 msgid ""
-"If set to true, then Caja lets you edit and display file permissions in a "
+"If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr ""
-"Jika diaktifkan, maka Caja akan mengizinkan Anda merubah dan menampilkan "
+"Jika diaktifkan, maka Baul akan mengizinkan Anda merubah dan menampilkan "
 "permisi berkas dalam cara lebih seperti unix, mengakses beberapa pilihan "
 "yang lebih esoteric."
 
@@ -3195,10 +3195,10 @@ msgstr "Menampilkan folder lebih dahulu"
 
 #: libbaul-private/org.mate.baul.gschema.xml:181
 msgid ""
-"If set to true, then Caja shows folders prior to showing files in the icon "
+"If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr ""
-"Apabila bernilai benar (true), maka Caja akan menampilkan folder ketimbang "
+"Apabila bernilai benar (true), maka Baul akan menampilkan folder ketimbang "
 "berkas dalam mode tampilan ikon dan tabel."
 
 #: libbaul-private/org.mate.baul.gschema.xml:188
@@ -3231,15 +3231,15 @@ msgstr ""
 "yang paling besar ke yang paling kecil."
 
 #: libbaul-private/org.mate.baul.gschema.xml:198
-msgid "Caja uses the users home folder as the desktop"
-msgstr "Caja menggunakan folder rumah pengguna sebagai desktop"
+msgid "Baul uses the users home folder as the desktop"
+msgstr "Baul menggunakan folder rumah pengguna sebagai desktop"
 
 #: libbaul-private/org.mate.baul.gschema.xml:199
 msgid ""
-"If set to true, then Caja will use the user's home folder as the desktop. If"
+"If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Apabila bernilai benar (true), maka Caja akan memakai folder rumah pengguna "
+"Apabila bernilai benar (true), maka Baul akan memakai folder rumah pengguna "
 "sebagai desktop. Jika bernilai salah (false), maka yang dipakai adalah "
 "~/Desktop sebagai desktopnya."
 
@@ -3375,7 +3375,7 @@ msgid "Whether to show desktop notifications"
 msgstr "Apakah akan menampilkan notifikasi destop"
 
 #: libbaul-private/org.mate.baul.gschema.xml:270
-msgid "If set to true, Caja will show desktop notifications."
+msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
 #: libbaul-private/org.mate.baul.gschema.xml:277
@@ -3523,10 +3523,10 @@ msgstr "Hanya menampilkan folder untuk tampilan pohon pada panel samping"
 
 #: libbaul-private/org.mate.baul.gschema.xml:368
 msgid ""
-"If set to true, Caja will only show folders in the tree side pane. Otherwise"
+"If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr ""
-"Apabila bernilai benar (true), Caja hanya akan menampilkan folder pada "
+"Apabila bernilai benar (true), Baul hanya akan menampilkan folder pada "
 "tampilan pohon panel samping. Jika sebaliknya, maka berkas dan folder akan "
 "ditampilkan."
 
@@ -3752,10 +3752,10 @@ msgstr "Menentukan untuk mengkait otomatis media"
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:6
 msgid ""
-"If set to true, then Caja will automatically mount media such as user-"
+"If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
-"Jika diaktifkan, maka Caja akan mengkait otomatis media seperti cakram keras"
+"Jika diaktifkan, maka Baul akan mengkait otomatis media seperti cakram keras"
 " yang terlihat oleh pengguna dan media copot pasang saat mulai dan "
 "penyisipan media."
 
@@ -3766,12 +3766,12 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:11
 msgid ""
-"If set to true, then Caja will automatically open a folder when media is "
+"If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
 "detected; for media where a known x-content type is detected, the user "
 "configurable action will be taken instead."
 msgstr ""
-"Jika diaktifkan, maka Caja akan membuka otomatis suatu folder ketika media "
+"Jika diaktifkan, maka Baul akan membuka otomatis suatu folder ketika media "
 "dikait otomatis. Ini hanya berlaku ke media dimana tidak ada tipe "
 "x-content/* yang dikenal terdeteksi; bagi media dimana suatu tipe x-content "
 "terdeteksi, aksi yang dapat diubah penggunalah yang akan diambil."
@@ -3783,10 +3783,10 @@ msgstr ""
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:16
 msgid ""
-"If set to true, then Caja will never prompt nor autorun/autostart programs "
+"If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr ""
-"Jika diisi \"true\", Caja tidak akan pernah menjalankan secara otomatis "
+"Jika diisi \"true\", Baul tidak akan pernah menjalankan secara otomatis "
 "sebuah program apabila medium yang menyimpan program tersebut dimasukkan."
 
 #: libbaul-private/org.mate.media-handling.gschema.xml:20
@@ -3897,29 +3897,29 @@ msgstr "Menampilkan opsi manajemen sesi"
 
 #: src/baul-application.c:554
 #, c-format
-msgid "Caja could not create the required folder \"%s\"."
-msgstr "Caja tidak dapat membuat folder \"%s\" yang diperlukan."
+msgid "Baul could not create the required folder \"%s\"."
+msgstr "Baul tidak dapat membuat folder \"%s\" yang diperlukan."
 
 #: src/baul-application.c:556
 msgid ""
-"Before running Caja, please create the following folder, or set permissions "
-"such that Caja can create it."
+"Before running Baul, please create the following folder, or set permissions "
+"such that Baul can create it."
 msgstr ""
-"Sebelum menjalankan Caja, buatlah dulu folder berikut, atau setel hak "
-"aksesnya supaya Caja bisa membuatnya sendiri."
+"Sebelum menjalankan Baul, buatlah dulu folder berikut, atau setel hak "
+"aksesnya supaya Baul bisa membuatnya sendiri."
 
 #: src/baul-application.c:561
 #, c-format
-msgid "Caja could not create the following required folders: %s."
-msgstr "Caja tidak dapat membuat folder yang diperlukan berikut: %s."
+msgid "Baul could not create the following required folders: %s."
+msgstr "Baul tidak dapat membuat folder yang diperlukan berikut: %s."
 
 #: src/baul-application.c:563
 msgid ""
-"Before running Caja, please create these folders, or set permissions such "
-"that Caja can create them."
+"Before running Baul, please create these folders, or set permissions such "
+"that Baul can create them."
 msgstr ""
-"Sebelum menjalankan Caja, buatlah dulu folder berikut, atau setel hak "
-"aksesnya supaya Caja bisa membuatnya sendiri."
+"Sebelum menjalankan Baul, buatlah dulu folder berikut, atau setel hak "
+"aksesnya supaya Baul bisa membuatnya sendiri."
 
 #: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
@@ -3982,8 +3982,8 @@ msgid "Open a browser window."
 msgstr "Buka jendela oeramban."
 
 #: src/baul-application.c:1886
-msgid "Quit Caja."
-msgstr "Keluar dari Caja."
+msgid "Quit Baul."
+msgstr "Keluar dari Baul."
 
 #: src/baul-application.c:1887
 msgid "[URI...]"
@@ -4990,8 +4990,8 @@ msgid "New _Window"
 msgstr "_Jendela Baru"
 
 #: src/baul-navigation-window-menus.c:831
-msgid "Open another Caja window for the displayed location"
-msgstr "Membuka jendela Caja yang lain"
+msgid "Open another Baul window for the displayed location"
+msgstr "Membuka jendela Baul yang lain"
 
 #: src/baul-navigation-window-menus.c:834
 msgid "New _Tab"
@@ -5815,8 +5815,8 @@ msgid "View of the current folder"
 msgstr "Membuka folder saat ini"
 
 #: src/baul-window-manage-views.c:2137
-msgid "Caja has no installed viewer capable of displaying the folder."
-msgstr "Caja tidak memiliki penampil yang mampu untukmenampilkan folder ini."
+msgid "Baul has no installed viewer capable of displaying the folder."
+msgstr "Baul tidak memiliki penampil yang mampu untukmenampilkan folder ini."
 
 #: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
@@ -5833,12 +5833,12 @@ msgstr "Periksalah ejaannya dan coba lagi."
 
 #: src/baul-window-manage-views.c:2166
 #, c-format
-msgid "Caja cannot handle \"%s\" locations."
-msgstr "Caja tidak dapat menangani lokasi \"%s\"."
+msgid "Baul cannot handle \"%s\" locations."
+msgstr "Baul tidak dapat menangani lokasi \"%s\"."
 
 #: src/baul-window-manage-views.c:2171
-msgid "Caja cannot handle this kind of location."
-msgstr "Caja tidak dapat menangani jenis lokasi ini."
+msgid "Baul cannot handle this kind of location."
+msgstr "Baul tidak dapat menangani jenis lokasi ini."
 
 #: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
@@ -5873,52 +5873,52 @@ msgstr "Pergi ke lokasi penanda ini"
 
 #: src/baul-window-menus.c:535
 msgid ""
-"Caja is free software; you can redistribute it and/or modify it under the "
+"Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
 "Foundation; either version 2 of the License, or (at your option) any later "
 "version."
 msgstr ""
-"Caja adalah perangkat lunak bebas; Anda dapat menyebarluaskannya dan/atau "
+"Baul adalah perangkat lunak bebas; Anda dapat menyebarluaskannya dan/atau "
 "mengubahnya di bawah syarat GNU General Public License sebagaimana "
 "dipublikasikan oleh Free Software Foundation; baik versi 2 dari Lisensi, "
 "atau (terserah pilihan Anda) versi setelahnya."
 
 #: src/baul-window-menus.c:539
 msgid ""
-"Caja is distributed in the hope that it will be useful, but WITHOUT ANY "
+"Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Caja didistribusikan dengan harapan dapat berguna, tetapi TANPA ADANYA "
+"Baul didistribusikan dengan harapan dapat berguna, tetapi TANPA ADANYA "
 "JAMINAN; termasuk tanpa jaminan DAYA JUAL atau KELAIKAN UNTUK TUJUAN "
 "TERTENTU. Lihat GNU General Public License untuk rincian lebih lanjut."
 
 #: src/baul-window-menus.c:543
 msgid ""
 "You should have received a copy of the GNU General Public License along with"
-" Caja; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "Anda seharusnya menerima salinan dari GNU General Public License bersama "
-"Caja; jika tidak, kirimkan surat Anda ke Free Software Foundation, Inc., 51 "
+"Baul; jika tidak, kirimkan surat Anda ke Free Software Foundation, Inc., 51 "
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
 
 #: src/baul-window-menus.c:575
-msgid "About Caja"
+msgid "About Baul"
 msgstr ""
 
 #: src/baul-window-menus.c:577
 msgid ""
-"Caja lets you organize files and folders, both on your computer and online."
+"Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
-"Dengan Caja, Anda dapat mengelola berkas dan folder, baik dalam komputer "
+"Dengan Baul, Anda dapat mengelola berkas dan folder, baik dalam komputer "
 "Anda sendiri maupun yang terdapat pada jaringan."
 
 #: src/baul-window-menus.c:580
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Caja authors"
+"Copyright © 2011-2020 The Baul authors"
 msgstr ""
 
 #: src/baul-window-menus.c:586
@@ -5967,8 +5967,8 @@ msgid "Prefere_nces"
 msgstr "Prefere_nsi"
 
 #: src/baul-window-menus.c:867
-msgid "Edit Caja preferences"
-msgstr "Menyunting preferensi Caja"
+msgid "Edit Baul preferences"
+msgstr "Menyunting preferensi Baul"
 
 #: src/baul-window-menus.c:870
 msgid "Open _Parent"
@@ -5995,16 +5995,16 @@ msgid "_Contents"
 msgstr "_Isi"
 
 #: src/baul-window-menus.c:890
-msgid "Display Caja help"
-msgstr "Menampilkan bantuan Caja"
+msgid "Display Baul help"
+msgstr "Menampilkan bantuan Baul"
 
 #: src/baul-window-menus.c:894
 msgid "_About"
 msgstr "_Tentang"
 
 #: src/baul-window-menus.c:895
-msgid "Display credits for the creators of Caja"
-msgstr "Menampilkan kredit untuk para pembuat Caja"
+msgid "Display credits for the creators of Baul"
+msgstr "Menampilkan kredit untuk para pembuat Baul"
 
 #: src/baul-window-menus.c:899
 msgid "Zoom _In"
@@ -6380,7 +6380,7 @@ msgid ""
 "\n"
 "When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Caja, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
 "\n"
@@ -6400,7 +6400,7 @@ msgstr ""
 "\n"
 "Bila dijalankan dari folder lokal, skrip akan dijalankan dengan parameter nama berkas yang terpilih. Bila dieksekusi dari folder jarak jauh/remote (misalnya folder web atau ftp), maka skrip akan dijalankan tanpa parameter.\n"
 "\n"
-"Dalam semua kasus, variabel lingkungan berikut akan diset oleh Caja, yang dapat dipakai oleh skrip:\n"
+"Dalam semua kasus, variabel lingkungan berikut akan diset oleh Baul, yang dapat dipakai oleh skrip:\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_FILE_PATHS: berkas-berkas yang terpilih, dipisahkan oleh baris baru (hanya jika skrip dijalankan di folder lokal)\n"
 "\n"
