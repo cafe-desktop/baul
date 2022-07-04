@@ -45,3 +45,6 @@ build_scripts:
   - ./before-build
   - ./make-scanbuild '--enable-empty-view --enable-compile-warnings=maximum'
   - ./after-build
+
+after_scripts:
+  - ./gen-index -l 20 -i https://github.com/${OWNER_NAME}/cafe-icon-theme/raw/master/cafe/16x16/apps/system-file-manager.png
