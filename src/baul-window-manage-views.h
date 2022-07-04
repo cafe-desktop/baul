@@ -27,23 +27,23 @@
 #ifndef CAJA_WINDOW_MANAGE_VIEWS_H
 #define CAJA_WINDOW_MANAGE_VIEWS_H
 
-#include "caja-window.h"
-#include "caja-window-pane.h"
-#include "caja-navigation-window.h"
+#include "baul-window.h"
+#include "baul-window-pane.h"
+#include "baul-navigation-window.h"
 
-void caja_window_manage_views_close_slot (CajaWindowPane *pane,
+void baul_window_manage_views_close_slot (CajaWindowPane *pane,
         CajaWindowSlot *slot);
 
 
 /* CajaWindowInfo implementation: */
-void caja_window_report_load_underway     (CajaWindow     *window,
+void baul_window_report_load_underway     (CajaWindow     *window,
         CajaView       *view);
-void caja_window_report_selection_changed (CajaWindowInfo *window);
-void caja_window_report_view_failed       (CajaWindow     *window,
+void baul_window_report_selection_changed (CajaWindowInfo *window);
+void baul_window_report_view_failed       (CajaWindow     *window,
         CajaView       *view);
-void caja_window_report_load_complete     (CajaWindow     *window,
+void baul_window_report_load_complete     (CajaWindow     *window,
         CajaView       *view);
-void caja_window_report_location_change   (CajaWindow     *window);
-void caja_window_update_up_button         (CajaWindow     *window);
+void baul_window_report_location_change   (CajaWindow     *window);
+void baul_window_update_up_button         (CajaWindow     *window);
 
 #endif /* CAJA_WINDOW_MANAGE_VIEWS_H */

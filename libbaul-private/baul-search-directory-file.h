@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-search-directory-file.h: Subclass of CajaFile to implement the
+   baul-search-directory-file.h: Subclass of CajaFile to implement the
    the case of the search directory
 
    Copyright (C) 2003 Red Hat, Inc.
@@ -26,9 +26,9 @@
 #ifndef CAJA_SEARCH_DIRECTORY_FILE_H
 #define CAJA_SEARCH_DIRECTORY_FILE_H
 
-#include "caja-file.h"
+#include "baul-file.h"
 
-#define CAJA_TYPE_SEARCH_DIRECTORY_FILE caja_search_directory_file_get_type()
+#define CAJA_TYPE_SEARCH_DIRECTORY_FILE baul_search_directory_file_get_type()
 #define CAJA_SEARCH_DIRECTORY_FILE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_DIRECTORY_FILE, CajaSearchDirectoryFile))
 #define CAJA_SEARCH_DIRECTORY_FILE_CLASS(klass) \
@@ -53,7 +53,7 @@ typedef struct
     CajaFileClass parent_slot;
 } CajaSearchDirectoryFileClass;
 
-GType   caja_search_directory_file_get_type (void);
-void    caja_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_file);
+GType   baul_search_directory_file_get_type (void);
+void    baul_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_file);
 
 #endif /* CAJA_SEARCH_DIRECTORY_FILE_H */

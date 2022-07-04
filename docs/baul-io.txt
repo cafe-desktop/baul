@@ -45,14 +45,14 @@ asynchronous I/O and dealing with the uncertainty of when the
 information will be available. (It also does a few other things, but
 that's the main service it provides.) When you want information about
 a particular file or directory, you get the CajaFile object for
-that item using caja_file_get. This operation, like most
+that item using baul_file_get. This operation, like most
 CajaFile operations, is not allowed to do any disk I/O. Once you
 have a CajaFile object, you can ask it questions like "What is
 your file type?" by calling functions like
-caja_file_get_file_type. However, for a newly created CajaFile
+baul_file_get_file_type. However, for a newly created CajaFile
 object the answer is almost certainly "I don't know." Each function
 defines a default, which is the answer given for "I don't know." For
-example, caja_file_get_type will return
+example, baul_file_get_type will return
 MATE_VFS_FILE_TYPE_UNKNOWN if it doesn't yet know the type.
 
 It's worth taking a side trip to discuss the nature of the
@@ -60,7 +60,7 @@ CajaFile API. Since these classes are a private part of the
 Caja implementation, we make no effort to have the API be
 "complete" in an abstract sense. Instead we add operations as
 necessary and give them the semantics that are most handy for our
-purposes. For example, we could have a caja_file_get_size that
+purposes. For example, we could have a baul_file_get_size that
 returns a special distinguishable value to mean "I don't know" or a
 separate boolean instead of returning 0 for files where the size is
 unknown. This is entirely motivated by pragmatic concerns. The intent
@@ -74,21 +74,21 @@ are planning to display the type on an ongoing basis then you want to
 tell the CajaFile that you'll be monitoring the file's type and want to
 know about changes to it. If you just need one-time information about
 the type then you'll want to be informed when the type is
-discovered. The calls used for this are caja_file_monitor_add and
-caja_file_call_when_ready respectively. Both of these calls take a
+discovered. The calls used for this are baul_file_monitor_add and
+baul_file_call_when_ready respectively. Both of these calls take a
 list of information needed about a file. If all you need is the file
 type, for example, you would pass a list containing just
 CAJA_FILE_ATTRIBUTE_FILE_TYPE (the attributes are defined in
-caja-file-attributes.h). Not every call has a corresponding file
+baul-file-attributes.h). Not every call has a corresponding file
 attribute type. We add new ones as needed.
 
-If you do a caja_file_monitor_add, you also typically connect to
+If you do a baul_file_monitor_add, you also typically connect to
 the CajaFile object's changed signal. Each time any monitored
 attribute changes, a changed signal is emitted. The caller typically
 caches the value of the attribute that was last seen (for example,
 what's displayed on screen) and does a quick check to see if the
 attribute it cares about has changed. If you do a
-caja_file_call_when_ready, you don't typically need to connect to
+baul_file_call_when_ready, you don't typically need to connect to
 the changed signal, because your callback function will be called when
 and if the requested information is ready.
 
@@ -106,7 +106,7 @@ know when to ask FAM to monitor a file or directory for us.
 
 Lets review a few of the concepts:
 
-1) Nearly all CajaFile operations, like caja_file_get_type,
+1) Nearly all CajaFile operations, like baul_file_get_type,
    are not allowed to do any disk I/O.
 2) To cause the actual I/O to be done, callers need to use set up
    either a monitor or a callback.
@@ -127,7 +127,7 @@ Caching, the good and the bad
 Another feature of the CajaFile class is the caching. If you keep
 around a CajaFile object, it keeps around information about the
 last known state of that file. Thus, if you call
-caja_file_get_type, you might well get file type of the file found
+baul_file_get_type, you might well get file type of the file found
 at this location the last time you looked, rather than the information
 about what the file type is now, or "unknown". There are some problems
 with this, though.
@@ -137,9 +137,9 @@ some way to "goose" the CajaFile object and get it to grab new
 information. This is trickier than it might sound, because we don't
 want to constantly distrust information we received just moments
 before. To handle this, we have the
-caja_file_invalidate_attributes and
-caja_file_invalidate_all_attributes calls, as well as the
-caja_directory_force_reload call. If some code in Caja makes a
+baul_file_invalidate_attributes and
+baul_file_invalidate_all_attributes calls, as well as the
+baul_directory_force_reload call. If some code in Caja makes a
 change to a file that's known to affect the cached information, it can
 call one of these to inform the CajaFile framework. Changes that
 are made through the framework itself are automatically understood, so
@@ -150,8 +150,8 @@ and won't be cached. The current rule that's implemented is that no
 information is cached if no one retains a reference to the
 CajaFile object. This means that someone else holding a
 CajaFile object can subtly affect the semantics of whether you
-have new data or not. Calling caja_file_call_when_ready or
-caja_file_monitor_add will not invalidate the cache, but rather
+have new data or not. Calling baul_file_call_when_ready or
+baul_file_monitor_add will not invalidate the cache, but rather
 will return you the already cached information.
 
 These problems are less pronounced when FAM is in use. With FAM, any
@@ -229,14 +229,14 @@ information and have some way to deal with the time when it's not yet
 known.
 
 Adding new kinds of I/O usually involves working on the Caja I/O
-state machine in caja-directory-async.c. If we changed Caja to
+state machine in baul-directory-async.c. If we changed Caja to
 use threading instead of using mate-vfs asychronous operations, I'm
 pretty sure that most of the changes would be here in this
 file. That's because the external API used for CajaFile wouldn't
 really have a reason to change. In either case, you'd want to schedule
 work to be done, and get called back when the work is complete.
 
-[We probably need more about caja-directory-async.c here.]
+[We probably need more about baul-directory-async.c here.]
 
 Future direction
 

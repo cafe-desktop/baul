@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_X_CONTENT_BAR         (caja_x_content_bar_get_type ())
+#define CAJA_TYPE_X_CONTENT_BAR         (baul_x_content_bar_get_type ())
 #define CAJA_X_CONTENT_BAR(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_X_CONTENT_BAR, CajaXContentBar))
 #define CAJA_X_CONTENT_BAR_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_X_CONTENT_BAR, CajaXContentBarClass))
 #define CAJA_IS_X_CONTENT_BAR(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_X_CONTENT_BAR))
@@ -51,16 +51,16 @@ G_BEGIN_DECLS
         GtkBoxClass	    parent_class;
     } CajaXContentBarClass;
 
-    GType		 caja_x_content_bar_get_type	(void) G_GNUC_CONST;
+    GType		 baul_x_content_bar_get_type	(void) G_GNUC_CONST;
 
-    GtkWidget	*caja_x_content_bar_new		   (GMount              *mount,
+    GtkWidget	*baul_x_content_bar_new		   (GMount              *mount,
             const char          *x_content_type);
-    const char      *caja_x_content_bar_get_x_content_type (CajaXContentBar *bar);
-    void             caja_x_content_bar_set_x_content_type (CajaXContentBar *bar,
+    const char      *baul_x_content_bar_get_x_content_type (CajaXContentBar *bar);
+    void             baul_x_content_bar_set_x_content_type (CajaXContentBar *bar,
             const char          *x_content_type);
-    void             caja_x_content_bar_set_mount          (CajaXContentBar *bar,
+    void             baul_x_content_bar_set_mount          (CajaXContentBar *bar,
             GMount              *mount);
-    GMount          *caja_x_content_bar_get_mount          (CajaXContentBar *bar);
+    GMount          *baul_x_content_bar_get_mount          (CajaXContentBar *bar);
 
 G_END_DECLS
 

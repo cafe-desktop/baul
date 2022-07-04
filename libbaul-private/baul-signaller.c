@@ -22,7 +22,7 @@
  * Author: John Sullivan <sullivan@eazel.com>
  */
 
-/* caja-signaller.h: Class to manage caja-wide signals that don't
+/* baul-signaller.h: Class to manage baul-wide signals that don't
  * correspond to any particular object.
  */
 
@@ -30,7 +30,7 @@
 
 #include <eel/eel-debug.h>
 
-#include "caja-signaller.h"
+#include "baul-signaller.h"
 
 typedef GObject CajaSignaller;
 typedef GObjectClass CajaSignallerClass;
@@ -47,18 +47,18 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static GType caja_signaller_get_type (void);
+static GType baul_signaller_get_type (void);
 
-G_DEFINE_TYPE (CajaSignaller, caja_signaller, G_TYPE_OBJECT);
+G_DEFINE_TYPE (CajaSignaller, baul_signaller, G_TYPE_OBJECT);
 
 GObject *
-caja_signaller_get_current (void)
+baul_signaller_get_current (void)
 {
     static GObject *global_signaller = NULL;
 
     if (global_signaller == NULL)
     {
-        global_signaller = g_object_new (caja_signaller_get_type (), NULL);
+        global_signaller = g_object_new (baul_signaller_get_type (), NULL);
         eel_debug_call_at_shutdown_with_data (g_object_unref, global_signaller);
     }
 
@@ -66,12 +66,12 @@ caja_signaller_get_current (void)
 }
 
 static void
-caja_signaller_init (CajaSignaller *signaller)
+baul_signaller_init (CajaSignaller *signaller)
 {
 }
 
 static void
-caja_signaller_class_init (CajaSignallerClass *class)
+baul_signaller_class_init (CajaSignallerClass *class)
 {
     signals[HISTORY_LIST_CHANGED] =
         g_signal_new ("history_list_changed",

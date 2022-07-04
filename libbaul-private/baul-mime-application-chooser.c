@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
-   caja-mime-application-chooser.c: an mime-application chooser
+   baul-mime-application-chooser.c: an mime-application chooser
 
    Copyright (C) 2004 Novell, Inc.
    Copyright (C) 2007 Red Hat, Inc.
@@ -35,10 +35,10 @@
 
 #include <eel/eel-stock-dialogs.h>
 
-#include "caja-mime-application-chooser.h"
-#include "caja-open-with-dialog.h"
-#include "caja-signaller.h"
-#include "caja-file.h"
+#include "baul-mime-application-chooser.h"
+#include "baul-open-with-dialog.h"
+#include "baul-signaller.h"
+#include "baul-file.h"
 
 struct _CajaMimeApplicationChooserDetails
 {
@@ -71,7 +71,7 @@ enum
     NUM_COLUMNS
 };
 
-G_DEFINE_TYPE (CajaMimeApplicationChooser, caja_mime_application_chooser, GTK_TYPE_BOX);
+G_DEFINE_TYPE (CajaMimeApplicationChooser, baul_mime_application_chooser, GTK_TYPE_BOX);
 
 static void refresh_model             (CajaMimeApplicationChooser *chooser);
 static void refresh_model_soon        (CajaMimeApplicationChooser *chooser);
@@ -79,7 +79,7 @@ static void mime_type_data_changed_cb (GObject                        *signaller
                                        gpointer                        user_data);
 
 static void
-caja_mime_application_chooser_finalize (GObject *object)
+baul_mime_application_chooser_finalize (GObject *object)
 {
     CajaMimeApplicationChooser *chooser;
 
@@ -90,7 +90,7 @@ caja_mime_application_chooser_finalize (GObject *object)
         g_source_remove (chooser->details->refresh_timeout);
     }
 
-    g_signal_handlers_disconnect_by_func (caja_signaller_get_current (),
+    g_signal_handlers_disconnect_by_func (baul_signaller_get_current (),
                                           G_CALLBACK (mime_type_data_changed_cb),
                                           chooser);
 
@@ -103,16 +103,16 @@ caja_mime_application_chooser_finalize (GObject *object)
 
     g_free (chooser->details);
 
-    G_OBJECT_CLASS (caja_mime_application_chooser_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_mime_application_chooser_parent_class)->finalize (object);
 }
 
 static void
-caja_mime_application_chooser_class_init (CajaMimeApplicationChooserClass *class)
+baul_mime_application_chooser_class_init (CajaMimeApplicationChooserClass *class)
 {
     GObjectClass *gobject_class;
 
     gobject_class = G_OBJECT_CLASS (class);
-    gobject_class->finalize = caja_mime_application_chooser_finalize;
+    gobject_class->finalize = baul_mime_application_chooser_finalize;
 }
 
 static void
@@ -169,7 +169,7 @@ default_toggled_cb (GtkCellRendererToggle *renderer,
                 g_error_free (error);
             }
 
-            g_signal_emit_by_name (caja_signaller_get_current (),
+            g_signal_emit_by_name (baul_signaller_get_current (),
                                    "mime_data_changed");
         }
         g_object_unref (info);
@@ -299,12 +299,12 @@ add_clicked_cb (GtkButton *button,
 
     if (chooser->details->for_multiple_files)
     {
-        dialog = caja_add_application_dialog_new_for_multiple_files (chooser->details->extension,
+        dialog = baul_add_application_dialog_new_for_multiple_files (chooser->details->extension,
                  chooser->details->orig_mime_type);
     }
     else
     {
-        dialog = caja_add_application_dialog_new (chooser->details->uri,
+        dialog = baul_add_application_dialog_new (chooser->details->uri,
                  chooser->details->orig_mime_type);
     }
     gtk_window_set_screen (GTK_WINDOW (dialog),
@@ -337,7 +337,7 @@ remove_clicked_cb (GtkButton *button,
             g_error_free (error);
 
         }
-        g_signal_emit_by_name (caja_signaller_get_current (),
+        g_signal_emit_by_name (baul_signaller_get_current (),
                                "mime_data_changed");
         g_object_unref (info);
     }
@@ -353,7 +353,7 @@ reset_clicked_cb (GtkButton *button,
 
     g_app_info_reset_type_associations (chooser->details->content_type);
 
-    g_signal_emit_by_name (caja_signaller_get_current (),
+    g_signal_emit_by_name (baul_signaller_get_current (),
                            "mime_data_changed");
 }
 
@@ -369,7 +369,7 @@ mime_type_data_changed_cb (GObject *signaller,
 }
 
 static void
-caja_mime_application_chooser_init (CajaMimeApplicationChooser *chooser)
+baul_mime_application_chooser_init (CajaMimeApplicationChooser *chooser)
 {
     GtkWidget *box;
     GtkWidget *scrolled;
@@ -449,7 +449,7 @@ caja_mime_application_chooser_init (CajaMimeApplicationChooser *chooser)
     gtk_widget_show (button);
     gtk_container_add (GTK_CONTAINER (box), button);
 
-    g_signal_connect (caja_signaller_get_current (),
+    g_signal_connect (baul_signaller_get_current (),
                       "mime_data_changed",
                       G_CALLBACK (mime_type_data_changed_cb),
                       chooser);
@@ -651,7 +651,7 @@ get_extension_from_file (CajaFile *nfile)
     char *name;
     char *extension;
 
-    name = caja_file_get_name (nfile);
+    name = baul_file_get_name (nfile);
     extension = get_extension (name);
 
     g_free (name);
@@ -715,7 +715,7 @@ set_uri_and_type_for_multiple_files (CajaMimeApplicationChooser *chooser,
 }
 
 GtkWidget *
-caja_mime_application_chooser_new (const char *uri,
+baul_mime_application_chooser_new (const char *uri,
                                    const char *mime_type)
 {
     GtkWidget *chooser;
@@ -728,7 +728,7 @@ caja_mime_application_chooser_new (const char *uri,
 }
 
 GtkWidget *
-caja_mime_application_chooser_new_for_multiple_files (GList *uris,
+baul_mime_application_chooser_new_for_multiple_files (GList *uris,
         const char *mime_type)
 {
     GtkWidget *chooser;

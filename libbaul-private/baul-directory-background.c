@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
-   caja-directory-background.c: Helper for the background of a widget
+   baul-directory-background.c: Helper for the background of a widget
                                 that is viewing a particular location.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -34,33 +34,33 @@
 #include <eel/eel-gtk-extensions.h>
 #include <eel/eel-background.h>
 
-#include "caja-directory-background.h"
-#include "caja-dnd.h"
-#include "caja-global-preferences.h"
-#include "caja-metadata.h"
-#include "caja-file-attributes.h"
+#include "baul-directory-background.h"
+#include "baul-dnd.h"
+#include "baul-global-preferences.h"
+#include "baul-metadata.h"
+#include "baul-file-attributes.h"
 
-static void caja_background_changed_cb (EelBackground *background,
+static void baul_background_changed_cb (EelBackground *background,
                                         GdkDragAction  action,
                                         CajaFile      *file);
 
 static void
-caja_background_get_default_settings (char **color,
+baul_background_get_default_settings (char **color,
                                       char **image)
 {
     gboolean background_set;
 
-    background_set = g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_BACKGROUND_SET);
+    background_set = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_BACKGROUND_SET);
 
     if (background_set && color)
-        *color = g_settings_get_string (caja_preferences, CAJA_PREFERENCES_BACKGROUND_COLOR);
+        *color = g_settings_get_string (baul_preferences, CAJA_PREFERENCES_BACKGROUND_COLOR);
 
     if (background_set && image)
-        *image =  g_settings_get_string (caja_preferences, CAJA_PREFERENCES_BACKGROUND_URI);
+        *image =  g_settings_get_string (baul_preferences, CAJA_PREFERENCES_BACKGROUND_URI);
 }
 
 static void
-caja_background_load_from_file_metadata (CajaFile      *file,
+baul_background_load_from_file_metadata (CajaFile      *file,
                                          EelBackground *background)
 {
     char *color, *image;
@@ -69,17 +69,17 @@ caja_background_load_from_file_metadata (CajaFile      *file,
     g_assert (CAJA_IS_FILE (file));
     g_assert (g_object_get_data (G_OBJECT (background), "eel_background_file") == file);
 
-    color = caja_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL);
-    image = caja_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL);
+    color = baul_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL);
+    image = baul_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL);
 
     /* if there's none, read the default from the theme */
     if (color == NULL && image == NULL)
-        caja_background_get_default_settings (&color, &image);
+        baul_background_get_default_settings (&color, &image);
 
     /* Block the other handler while we are responding to changes
      * in the metadata so it doesn't try to change the metadata.
      */
-    g_signal_handlers_block_by_func (background, G_CALLBACK (caja_background_changed_cb), file);
+    g_signal_handlers_block_by_func (background, G_CALLBACK (baul_background_changed_cb), file);
 
     eel_background_set_color (background, color);
     /* non-tiled only available for desktop, at least for now */
@@ -87,7 +87,7 @@ caja_background_load_from_file_metadata (CajaFile      *file,
     eel_background_set_image_uri (background, image);
 
     /* Unblock the handler. */
-    g_signal_handlers_unblock_by_func (background, G_CALLBACK (caja_background_changed_cb), file);
+    g_signal_handlers_unblock_by_func (background, G_CALLBACK (baul_background_changed_cb), file);
 
     g_free (color);
     g_free (image);
@@ -95,15 +95,15 @@ caja_background_load_from_file_metadata (CajaFile      *file,
 
 /* handle the file changed signal */
 static void
-caja_background_settings_notify_cb (CajaFile *file,
+baul_background_settings_notify_cb (CajaFile *file,
                                     EelBackground *background)
 {
-    caja_background_load_from_file_metadata (file, background);
+    baul_background_load_from_file_metadata (file, background);
 }
 
 /* handle the theme changing */
 static void
-caja_background_theme_notify_cb (GSettings   *settings,
+baul_background_theme_notify_cb (GSettings   *settings,
                                  const gchar *key,
                                  gpointer     user_data)
 {
@@ -113,12 +113,12 @@ caja_background_theme_notify_cb (GSettings   *settings,
     file = g_object_get_data (G_OBJECT (background), "eel_background_file");
 
     if (file)
-        caja_background_settings_notify_cb (file, background);
+        baul_background_settings_notify_cb (file, background);
 }
 
 /* handle the background changed signal */
 static void
-caja_background_changed_cb (EelBackground *background,
+baul_background_changed_cb (EelBackground *background,
                             GdkDragAction  action,
                             CajaFile   *file)
 {
@@ -132,7 +132,7 @@ caja_background_changed_cb (EelBackground *background,
     /* Block the other handler while we are writing metadata so it doesn't
      * try to change the background.
      */
-    g_signal_handlers_block_by_func (file, G_CALLBACK (caja_background_settings_notify_cb),
+    g_signal_handlers_block_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                      background);
 
     if (action != (GdkDragAction) CAJA_DND_ACTION_SET_AS_FOLDER_BACKGROUND &&
@@ -144,30 +144,30 @@ caja_background_changed_cb (EelBackground *background,
 
     if (action == (GdkDragAction) CAJA_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
     {
-        caja_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
-        caja_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
+        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
+        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
 
-        g_signal_handlers_block_by_func (caja_preferences,
-                                         G_CALLBACK (caja_background_theme_notify_cb),
+        g_signal_handlers_block_by_func (baul_preferences,
+                                         G_CALLBACK (baul_background_theme_notify_cb),
                                          background);
 
-        g_settings_set_string (caja_preferences,
+        g_settings_set_string (baul_preferences,
                                CAJA_PREFERENCES_BACKGROUND_COLOR, color ? color : "");
-        g_settings_set_string (caja_preferences,
+        g_settings_set_string (baul_preferences,
                                CAJA_PREFERENCES_BACKGROUND_URI, image ? image : "");
 
-        g_settings_set_boolean (caja_preferences, CAJA_PREFERENCES_BACKGROUND_SET, TRUE);
+        g_settings_set_boolean (baul_preferences, CAJA_PREFERENCES_BACKGROUND_SET, TRUE);
 
-        g_signal_handlers_unblock_by_func (caja_preferences,
-                                           G_CALLBACK (caja_background_theme_notify_cb),
+        g_signal_handlers_unblock_by_func (baul_preferences,
+                                           G_CALLBACK (baul_background_theme_notify_cb),
                                            background);
     } else {
-        caja_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, color);
-        caja_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, image);
+        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, color);
+        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, image);
     }
 
     /* Unblock the handler. */
-    g_signal_handlers_unblock_by_func (file, G_CALLBACK (caja_background_settings_notify_cb),
+    g_signal_handlers_unblock_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                        background);
 
     g_free (color);
@@ -176,7 +176,7 @@ caja_background_changed_cb (EelBackground *background,
 
 /* handle the background reset signal by setting values from the current theme */
 static void
-caja_background_reset_cb (EelBackground *background,
+baul_background_reset_cb (EelBackground *background,
                           CajaFile  *file)
 {
     char *color, *image;
@@ -184,54 +184,54 @@ caja_background_reset_cb (EelBackground *background,
     /* Block the other handler while we are writing metadata so it doesn't
      * try to change the background.
      */
-    g_signal_handlers_block_by_func (file, G_CALLBACK (caja_background_settings_notify_cb),
+    g_signal_handlers_block_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                      background);
 
-    color = caja_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL);
-    image = caja_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL);
+    color = baul_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL);
+    image = baul_file_get_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL);
     if (!color && !image)
     {
-        g_signal_handlers_block_by_func (caja_preferences,
-                                         G_CALLBACK (caja_background_theme_notify_cb),
+        g_signal_handlers_block_by_func (baul_preferences,
+                                         G_CALLBACK (baul_background_theme_notify_cb),
                                          background);
-        g_settings_set_boolean (caja_preferences, CAJA_PREFERENCES_BACKGROUND_SET, FALSE);
-        g_signal_handlers_unblock_by_func (caja_preferences,
-                                           G_CALLBACK (caja_background_theme_notify_cb),
+        g_settings_set_boolean (baul_preferences, CAJA_PREFERENCES_BACKGROUND_SET, FALSE);
+        g_signal_handlers_unblock_by_func (baul_preferences,
+                                           G_CALLBACK (baul_background_theme_notify_cb),
                                            background);
     }
     else
     {
         /* reset the metadata */
-        caja_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
-        caja_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
+        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
+        baul_file_set_metadata (file, CAJA_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
     }
     g_free (color);
     g_free (image);
 
     /* Unblock the handler. */
-    g_signal_handlers_unblock_by_func (file, G_CALLBACK (caja_background_settings_notify_cb),
+    g_signal_handlers_unblock_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                        background);
 
-    caja_background_settings_notify_cb (file, background);
+    baul_background_settings_notify_cb (file, background);
 }
 
 /* handle the background destroyed signal */
 static void
-caja_background_weak_notify (gpointer data,
+baul_background_weak_notify (gpointer data,
                              GObject *background)
 {
     CajaFile *file = CAJA_FILE (data);
 
-    g_signal_handlers_disconnect_by_func (file, G_CALLBACK (caja_background_settings_notify_cb),
+    g_signal_handlers_disconnect_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                           background);
-    caja_file_monitor_remove (file, background);
-    g_signal_handlers_disconnect_by_func (caja_preferences, caja_background_theme_notify_cb,
+    baul_file_monitor_remove (file, background);
+    g_signal_handlers_disconnect_by_func (baul_preferences, baul_background_theme_notify_cb,
                                           background);
 }
 
 /* key routine that hooks up a background and location */
 void
-caja_connect_background_to_file_metadata (GtkWidget     *widget,
+baul_connect_background_to_file_metadata (GtkWidget     *widget,
                                           CajaFile      *file,
                                           GdkDragAction  default_drag_action)
 {
@@ -252,26 +252,26 @@ caja_connect_background_to_file_metadata (GtkWidget     *widget,
         g_assert (CAJA_IS_FILE (old_file));
 
         g_signal_handlers_disconnect_by_func (background,
-                                              G_CALLBACK (caja_background_changed_cb), old_file);
+                                              G_CALLBACK (baul_background_changed_cb), old_file);
         g_signal_handlers_disconnect_by_func (background,
-                                              G_CALLBACK (caja_background_reset_cb), old_file);
+                                              G_CALLBACK (baul_background_reset_cb), old_file);
 
-        g_object_weak_unref (G_OBJECT (background), caja_background_weak_notify, old_file);
+        g_object_weak_unref (G_OBJECT (background), baul_background_weak_notify, old_file);
 
         g_signal_handlers_disconnect_by_func (old_file,
-                                              G_CALLBACK (caja_background_settings_notify_cb),
+                                              G_CALLBACK (baul_background_settings_notify_cb),
                                               background);
 
-        caja_file_monitor_remove (old_file, background);
+        baul_file_monitor_remove (old_file, background);
 
-        g_signal_handlers_disconnect_by_func (caja_preferences, caja_background_theme_notify_cb,
+        g_signal_handlers_disconnect_by_func (baul_preferences, baul_background_theme_notify_cb,
                                               background);
     }
 
     /* Attach the new directory. */
-    caja_file_ref (file);
+    baul_file_ref (file);
     g_object_set_data_full (G_OBJECT (background), "eel_background_file",
-                            file, (GDestroyNotify) caja_file_unref);
+                            file, (GDestroyNotify) baul_file_unref);
 
     g_object_set_data (G_OBJECT (background), "default_drag_action",
                        GINT_TO_POINTER (default_drag_action));
@@ -280,30 +280,30 @@ caja_connect_background_to_file_metadata (GtkWidget     *widget,
     if (file != NULL)
     {
         g_signal_connect_object (background, "settings_changed",
-                                 G_CALLBACK (caja_background_changed_cb), file, 0);
+                                 G_CALLBACK (baul_background_changed_cb), file, 0);
 
         g_signal_connect_object (background, "reset",
-                                 G_CALLBACK (caja_background_reset_cb), file, 0);
+                                 G_CALLBACK (baul_background_reset_cb), file, 0);
 
         g_signal_connect_object (file, "changed",
-                                 G_CALLBACK (caja_background_settings_notify_cb), background, 0);
+                                 G_CALLBACK (baul_background_settings_notify_cb), background, 0);
 
-        g_object_weak_ref (G_OBJECT (background), caja_background_weak_notify, file);
+        g_object_weak_ref (G_OBJECT (background), baul_background_weak_notify, file);
 
         /* arrange to receive file metadata */
-        caja_file_monitor_add (file, background, CAJA_FILE_ATTRIBUTE_INFO);
+        baul_file_monitor_add (file, background, CAJA_FILE_ATTRIBUTE_INFO);
 
         /* arrange for notification when the theme changes */
-        g_signal_connect (caja_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_SET,
-                          G_CALLBACK(caja_background_theme_notify_cb), background);
-        g_signal_connect (caja_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_COLOR,
-                          G_CALLBACK(caja_background_theme_notify_cb), background);
-        g_signal_connect (caja_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_URI,
-                          G_CALLBACK(caja_background_theme_notify_cb), background);
+        g_signal_connect (baul_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_SET,
+                          G_CALLBACK(baul_background_theme_notify_cb), background);
+        g_signal_connect (baul_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_COLOR,
+                          G_CALLBACK(baul_background_theme_notify_cb), background);
+        g_signal_connect (baul_preferences, "changed::" CAJA_PREFERENCES_BACKGROUND_URI,
+                          G_CALLBACK(baul_background_theme_notify_cb), background);
     }
 
     /* Update the background based on the file metadata. */
-    caja_background_load_from_file_metadata (file, background);
+    baul_background_load_from_file_metadata (file, background);
 }
 
 /**
@@ -380,7 +380,7 @@ desktop_background_weak_notify (gpointer data,
 }
 
 void
-caja_connect_desktop_background_to_settings (CajaIconContainer *icon_container)
+baul_connect_desktop_background_to_settings (CajaIconContainer *icon_container)
 {
     EelBackground *background;
 

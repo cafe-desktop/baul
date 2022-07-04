@@ -31,14 +31,14 @@
 
 #include <eel/eel-stock-dialogs.h>
 
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-icon-names.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-icon-names.h>
 
-#include "caja-connect-server-dialog.h"
-#include "caja-application.h"
-#include "caja-bookmark-list.h"
-#include "caja-connect-server-operation.h"
-#include "caja-window.h"
+#include "baul-connect-server-dialog.h"
+#include "baul-application.h"
+#include "baul-bookmark-list.h"
+#include "baul-connect-server-operation.h"
+#include "baul-window.h"
 
 /* TODO:
  * - name entry + pre-fill
@@ -79,7 +79,7 @@ struct _CajaConnectServerDialogPrivate
     gboolean should_destroy;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaConnectServerDialog, caja_connect_server_dialog,
+G_DEFINE_TYPE_WITH_PRIVATE (CajaConnectServerDialog, baul_connect_server_dialog,
 	       GTK_TYPE_DIALOG)
 
 static void sensitive_entry_changed_callback (GtkEditable *editable,
@@ -459,7 +459,7 @@ display_location_async_cb (GObject *source,
 	dialog = CAJA_CONNECT_SERVER_DIALOG (source);
 	error = NULL;
 
-	caja_connect_server_dialog_display_location_finish (dialog,
+	baul_connect_server_dialog_display_location_finish (dialog,
 								res, &error);
 
 	if (error != NULL) {
@@ -487,7 +487,7 @@ mount_enclosing_ready_cb (GObject *source,
 
 	if (!error || g_error_matches (error, G_IO_ERROR, G_IO_ERROR_ALREADY_MOUNTED)) {
 		/* volume is mounted, show it */
-		caja_connect_server_dialog_display_location_async (dialog,
+		baul_connect_server_dialog_display_location_async (dialog,
 								       dialog->details->application, location,
 								       display_location_async_cb, NULL);
 	} else {
@@ -510,7 +510,7 @@ connect_dialog_present_uri_async (CajaConnectServerDialog *self,
 {
 	GMountOperation *op;
 
-	op = caja_connect_server_operation_new (self);
+	op = baul_connect_server_operation_new (self);
 	g_file_mount_enclosing_volume (location,
 				       0, op, NULL,
 				       mount_enclosing_ready_cb, self);
@@ -631,10 +631,10 @@ connect_dialog_connect_to_server (CajaConnectServerDialog *dialog)
 
         name = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->name_entry), 0, -1);
         icon = g_themed_icon_new (CAJA_ICON_FOLDER_REMOTE);
-        bookmark = caja_bookmark_new (location, strlen (name) ? name : NULL, TRUE, icon);
-        list = caja_bookmark_list_new ();
-        if (!caja_bookmark_list_contains (list, bookmark))
-            caja_bookmark_list_append (list, bookmark);
+        bookmark = baul_bookmark_new (location, strlen (name) ? name : NULL, TRUE, icon);
+        list = baul_bookmark_list_new ();
+        if (!baul_bookmark_list_contains (list, bookmark))
+            baul_bookmark_list_append (list, bookmark);
         g_object_unref (bookmark);
         g_object_unref (list);
         g_object_unref (icon);
@@ -710,7 +710,7 @@ connect_dialog_response_cb (CajaConnectServerDialog *dialog,
     case GTK_RESPONSE_HELP :
         error = NULL;
         gtk_show_uri_on_window (GTK_WINDOW (dialog),
-                                "help:mate-user-guide/caja-server-connect",
+                                "help:mate-user-guide/baul-server-connect",
                                 gtk_get_current_event_time (), &error);
         if (error)
         {
@@ -838,7 +838,7 @@ bind_visibility (CajaConnectServerDialog *dialog,
 }
 
 static void
-caja_connect_server_dialog_init (CajaConnectServerDialog *dialog)
+baul_connect_server_dialog_init (CajaConnectServerDialog *dialog)
 {
     GtkWidget *label;
     GtkWidget *content_area;
@@ -849,7 +849,7 @@ caja_connect_server_dialog_init (CajaConnectServerDialog *dialog)
     gchar *str;
     int i;
 
-    dialog->details = caja_connect_server_dialog_get_instance_private (dialog);
+    dialog->details = baul_connect_server_dialog_get_instance_private (dialog);
 
     content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
@@ -1141,7 +1141,7 @@ caja_connect_server_dialog_init (CajaConnectServerDialog *dialog)
 }
 
 static void
-caja_connect_server_dialog_finalize (GObject *object)
+baul_connect_server_dialog_finalize (GObject *object)
 {
 	CajaConnectServerDialog *dialog;
 
@@ -1154,20 +1154,20 @@ caja_connect_server_dialog_finalize (GObject *object)
 		dialog->details->iconized_entries = NULL;
 	}
 
-	G_OBJECT_CLASS (caja_connect_server_dialog_parent_class)->finalize (object);
+	G_OBJECT_CLASS (baul_connect_server_dialog_parent_class)->finalize (object);
 }
 
 static void
-caja_connect_server_dialog_class_init (CajaConnectServerDialogClass *class)
+baul_connect_server_dialog_class_init (CajaConnectServerDialogClass *class)
 {
 	GObjectClass *oclass;
 
 	oclass = G_OBJECT_CLASS (class);
-	oclass->finalize = caja_connect_server_dialog_finalize;
+	oclass->finalize = baul_connect_server_dialog_finalize;
 }
 
 GtkWidget *
-caja_connect_server_dialog_new (CajaWindow *window)
+baul_connect_server_dialog_new (CajaWindow *window)
 {
     CajaConnectServerDialog *conndlg;
     GtkWidget *dialog;
@@ -1186,14 +1186,14 @@ caja_connect_server_dialog_new (CajaWindow *window)
 }
 
 gboolean
-caja_connect_server_dialog_fill_details_finish (CajaConnectServerDialog *self,
+baul_connect_server_dialog_fill_details_finish (CajaConnectServerDialog *self,
 						    GAsyncResult *result)
 {
 	return g_simple_async_result_get_op_res_gboolean (G_SIMPLE_ASYNC_RESULT (result));
 }
 
 void
-caja_connect_server_dialog_fill_details_async (CajaConnectServerDialog *self,
+baul_connect_server_dialog_fill_details_async (CajaConnectServerDialog *self,
 						   GMountOperation *operation,
 						   const gchar *default_user,
 						   const gchar *default_domain,
@@ -1206,7 +1206,7 @@ caja_connect_server_dialog_fill_details_async (CajaConnectServerDialog *self,
 	GAskPasswordFlags set_flags;
 
 	fill_details_res = g_simple_async_result_new (G_OBJECT (self), callback, user_data,
-						      caja_connect_server_dialog_fill_details_async);
+						      baul_connect_server_dialog_fill_details_async);
 
 	self->details->fill_details_res = fill_details_res;
 	set_flags = (flags & G_ASK_PASSWORD_NEED_PASSWORD) |

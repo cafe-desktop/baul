@@ -1,5 +1,5 @@
 /*
- *  caja-property-page-provider.c - Interface for Caja extensions
+ *  baul-property-page-provider.c - Interface for Caja extensions
  *                                      that provide context menu items
  *                                      for files.
  *
@@ -24,22 +24,22 @@
  */
 
 #include <config.h>
-#include "caja-menu-provider.h"
+#include "baul-menu-provider.h"
 
 #include <glib-object.h>
 
 /**
- * SECTION:caja-menu-provider
+ * SECTION:baul-menu-provider
  * @title: CajaMenuProvider
  * @short_description: Interface to provide additional menu items
- * @include: libcaja-extension/caja-menu-provider.h
+ * @include: libbaul-extension/baul-menu-provider.h
  *
  * #CajaMenuProvider allows extension to provide additional menu items
  * in the file manager menus.
  */
 
 static void
-caja_menu_provider_base_init (gpointer g_class)
+baul_menu_provider_base_init (gpointer g_class)
 {
     static gboolean initialized = FALSE;
 
@@ -57,14 +57,14 @@ caja_menu_provider_base_init (gpointer g_class)
 }
 
 GType
-caja_menu_provider_get_type (void)
+baul_menu_provider_get_type (void)
 {
     static GType type = 0;
 
     if (!type) {
         const GTypeInfo info = {
             sizeof (CajaMenuProviderIface),
-            caja_menu_provider_base_init,
+            baul_menu_provider_base_init,
             NULL,
             NULL,
             NULL,
@@ -84,7 +84,7 @@ caja_menu_provider_get_type (void)
 }
 
 /**
- * caja_menu_provider_get_file_items:
+ * baul_menu_provider_get_file_items:
  * @provider: a #CajaMenuProvider
  * @window: the parent #GtkWidget window
  * @files: (element-type CajaFileInfo): a list of #CajaFileInfo
@@ -92,7 +92,7 @@ caja_menu_provider_get_type (void)
  * Returns: (element-type CajaMenuItem) (transfer full): the provided list of #CajaMenuItem
  */
 GList *
-caja_menu_provider_get_file_items (CajaMenuProvider *provider,
+baul_menu_provider_get_file_items (CajaMenuProvider *provider,
                                    GtkWidget        *window,
                                    GList            *files)
 {
@@ -107,7 +107,7 @@ caja_menu_provider_get_file_items (CajaMenuProvider *provider,
 }
 
 /**
- * caja_menu_provider_get_background_items:
+ * baul_menu_provider_get_background_items:
  * @provider: a #CajaMenuProvider
  * @window: the parent #GtkWidget window
  * @current_folder: the folder for which background items are requested
@@ -115,7 +115,7 @@ caja_menu_provider_get_file_items (CajaMenuProvider *provider,
  * Returns: (element-type CajaMenuItem) (transfer full): the provided list of #CajaMenuItem
  */
 GList *
-caja_menu_provider_get_background_items (CajaMenuProvider *provider,
+baul_menu_provider_get_background_items (CajaMenuProvider *provider,
                                          GtkWidget        *window,
                                          CajaFileInfo     *current_folder)
 {
@@ -131,7 +131,7 @@ caja_menu_provider_get_background_items (CajaMenuProvider *provider,
 }
 
 /**
- * caja_menu_provider_get_toolbar_items:
+ * baul_menu_provider_get_toolbar_items:
  * @provider: a #CajaMenuProvider
  * @window: the parent #GtkWidget window
  * @current_folder: the folder for which toolbar items are requested
@@ -139,7 +139,7 @@ caja_menu_provider_get_background_items (CajaMenuProvider *provider,
  * Returns: (element-type CajaMenuItem) (transfer full): the provided list of #CajaMenuItem
  */
 GList *
-caja_menu_provider_get_toolbar_items (CajaMenuProvider *provider,
+baul_menu_provider_get_toolbar_items (CajaMenuProvider *provider,
                                       GtkWidget        *window,
                                       CajaFileInfo     *current_folder)
 {
@@ -154,9 +154,9 @@ caja_menu_provider_get_toolbar_items (CajaMenuProvider *provider,
     }
 }
 
-/* This function emit a signal to inform caja that its item list has changed */
+/* This function emit a signal to inform baul that its item list has changed */
 void
-caja_menu_provider_emit_items_updated_signal (CajaMenuProvider* provider)
+baul_menu_provider_emit_items_updated_signal (CajaMenuProvider* provider)
 {
     g_return_if_fail (CAJA_IS_MENU_PROVIDER (provider));
 

@@ -1,5 +1,5 @@
 /*
- *  caja-info-provider.h - Interface for Caja extensions that
+ *  baul-info-provider.h - Interface for Caja extensions that
  *                             provide info about files.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -34,11 +34,11 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include "caja-extension-types.h"
+#include "baul-extension-types.h"
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_LOCATION_WIDGET_PROVIDER           (caja_location_widget_provider_get_type ())
+#define CAJA_TYPE_LOCATION_WIDGET_PROVIDER           (baul_location_widget_provider_get_type ())
 #define CAJA_LOCATION_WIDGET_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_LOCATION_WIDGET_PROVIDER, CajaLocationWidgetProvider))
 #define CAJA_IS_LOCATION_WIDGET_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_LOCATION_WIDGET_PROVIDER))
 #define CAJA_LOCATION_WIDGET_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_LOCATION_WIDGET_PROVIDER, CajaLocationWidgetProviderIface))
@@ -50,7 +50,7 @@ typedef struct _CajaLocationWidgetProviderIface  CajaLocationWidgetProviderIface
  * CajaLocationWidgetProviderIface:
  * @g_iface: The parent interface.
  * @get_widget: Returns a #GtkWidget.
- *   See caja_location_widget_provider_get_widget() for details.
+ *   See baul_location_widget_provider_get_widget() for details.
  *
  * Interface for extensions to provide additional location widgets.
  */
@@ -63,8 +63,8 @@ struct _CajaLocationWidgetProviderIface {
 };
 
 /* Interface Functions */
-GType      caja_location_widget_provider_get_type   (void);
-GtkWidget *caja_location_widget_provider_get_widget (CajaLocationWidgetProvider *provider,
+GType      baul_location_widget_provider_get_type   (void);
+GtkWidget *baul_location_widget_provider_get_widget (CajaLocationWidgetProvider *provider,
                                                      const char                 *uri,
                                                      GtkWidget                  *window);
 G_END_DECLS

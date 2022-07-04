@@ -35,9 +35,9 @@
 
 #include <eel/eel-graphic-effects.h>
 
-#include <libcaja-private/caja-directory.h>
-#include <libcaja-private/caja-file-attributes.h>
-#include <libcaja-private/caja-file.h>
+#include <libbaul-private/baul-directory.h>
+#include <libbaul-private/baul-file-attributes.h>
+#include <libbaul-private/baul-file.h>
 
 #include "fm-tree-model.h"
 
@@ -170,7 +170,7 @@ tree_node_new (CajaFile *file, FMTreeModelRoot *root)
     TreeNode *node;
 
     node = g_new0 (TreeNode, 1);
-    node->file = caja_file_ref (file);
+    node->file = baul_file_ref (file);
     node->root = root;
     return node;
 }
@@ -231,7 +231,7 @@ tree_node_destroy (FMTreeModel *model, TreeNode *node)
     g_assert (node->done_loading_id == 0);
     g_assert (node->files_added_id == 0);
     g_assert (node->files_changed_id == 0);
-    caja_directory_unref (node->directory);
+    baul_directory_unref (node->directory);
 
     g_free (node);
 }
@@ -268,11 +268,11 @@ get_menu_icon (GIcon *icon)
     cairo_surface_t *surface;
     int size, scale;
 
-    size = caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+    size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
     scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
 
-    info = caja_icon_info_lookup (icon, size, scale);
-    surface = caja_icon_info_get_surface_nodefault_at_size (info, size);
+    info = baul_icon_info_lookup (icon, size, scale);
+    surface = baul_icon_info_get_surface_nodefault_at_size (info, size);
     g_object_unref (info);
 
     return surface;
@@ -295,16 +295,16 @@ get_menu_icon_for_file (TreeNode *node,
     GIcon *gicon, *emblemed_icon;
     GIcon *emblem_icon = NULL;
 
-    size = caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+    size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
     scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
 
-    gicon = caja_file_get_gicon (file, flags);
+    gicon = baul_file_get_gicon (file, flags);
 
     i = 0;
     emblems_to_ignore[i++] = CAJA_FILE_EMBLEM_NAME_TRASH;
 
     if (node->parent && node->parent->file) {
-        if (!caja_file_can_write (node->parent->file)) {
+        if (!baul_file_can_write (node->parent->file)) {
             emblems_to_ignore[i++] = CAJA_FILE_EMBLEM_NAME_CANT_WRITE;
         }
     }
@@ -312,13 +312,13 @@ get_menu_icon_for_file (TreeNode *node,
     emblems_to_ignore[i++] = NULL;
 
     emblem = NULL;
-    emblem_icons = caja_file_get_emblem_icons (node->file,
+    emblem_icons = baul_file_get_emblem_icons (node->file,
                 		       emblems_to_ignore);
 
     /* pick only the first emblem we can render for the tree view */
     for (l = emblem_icons; l != NULL; l = l->next) {
         emblem_icon = l->data;
-        if (caja_icon_theme_can_render (G_THEMED_ICON (emblem_icon))) {
+        if (baul_icon_theme_can_render (G_THEMED_ICON (emblem_icon))) {
             emblem = g_emblem_new (emblem_icon);
             emblemed_icon = g_emblemed_icon_new (gicon, emblem);
 
@@ -332,14 +332,14 @@ get_menu_icon_for_file (TreeNode *node,
 
     g_list_free_full (emblem_icons, g_object_unref);
 
-    info = caja_icon_info_lookup (gicon, size, scale);
-    retval = caja_icon_info_get_surface_nodefault_at_size (info, size);
+    info = baul_icon_info_lookup (gicon, size, scale);
+    retval = baul_icon_info_get_surface_nodefault_at_size (info, size);
     model = node->root->model;
 
     g_object_unref (gicon);
 
     highlight = (g_list_find_custom (model->details->highlighted_files,
-                                     file, (GCompareFunc) caja_file_compare_location) != NULL);
+                                     file, (GCompareFunc) baul_file_compare_location) != NULL);
 
     if (highlight)
     {
@@ -416,7 +416,7 @@ tree_node_update_display_name (TreeNode *node)
     {
         return FALSE;
     }
-    display_name = caja_file_get_display_name (node->file);
+    display_name = baul_file_get_display_name (node->file);
     if (strcmp (display_name, node->display_name) == 0)
     {
         g_free (display_name);
@@ -452,7 +452,7 @@ tree_node_get_display_name (TreeNode *node)
 {
     if (node->display_name == NULL)
     {
-        node->display_name = caja_file_get_display_name (node->file);
+        node->display_name = baul_file_get_display_name (node->file);
     }
     return node->display_name;
 }
@@ -541,9 +541,9 @@ get_parent_node_from_file (FMTreeModelRoot *root, CajaFile *file)
     CajaFile *parent_file;
     TreeNode *parent_node;
 
-    parent_file = caja_file_get_parent (file);
+    parent_file = baul_file_get_parent (file);
     parent_node = get_node_from_file (root, parent_file);
-    caja_file_unref (parent_file);
+    baul_file_unref (parent_file);
     return parent_node;
 }
 
@@ -569,11 +569,11 @@ get_node_uri (GtkTreeIter *iter)
     node = iter->user_data;
     if (node != NULL)
     {
-        return caja_file_get_uri (node->file);
+        return baul_file_get_uri (node->file);
     }
 
     parent = iter->user_data2;
-    parent_uri = caja_file_get_uri (parent->file);
+    parent_uri = baul_file_get_uri (parent->file);
     node_uri = g_strconcat (parent_uri, " -- DUMMY", NULL);
     g_free (parent_uri);
     return node_uri;
@@ -602,7 +602,7 @@ abandon_node_ref_count (FMTreeModel *model, TreeNode *node)
         {
             char *uri;
 
-            uri = caja_file_get_uri (node->file);
+            uri = baul_file_get_uri (node->file);
             g_message ("abandoning %d ref of %s, count is now %d",
                        node->ref_count, uri, node->parent->all_children_ref_count);
             g_free (uri);
@@ -621,7 +621,7 @@ abandon_dummy_row_ref_count (FMTreeModel *model, TreeNode *node)
 #ifdef LOG_REF_COUNTS
         char *uri;
 
-        uri = caja_file_get_uri (node->file);
+        uri = baul_file_get_uri (node->file);
         g_message ("abandoning %d ref of %s -- DUMMY, count is now %d",
                    node->dummy_child_ref_count, uri, node->all_children_ref_count);
         g_free (uri);
@@ -778,7 +778,7 @@ stop_monitoring_directory (FMTreeModel *model, TreeNode *node)
     node->files_added_id = 0;
     node->files_changed_id = 0;
 
-    caja_directory_file_monitor_remove (node->directory, model);
+    baul_directory_file_monitor_remove (node->directory, model);
 }
 
 static void
@@ -882,16 +882,16 @@ update_node_without_reporting (FMTreeModel *model, TreeNode *node)
     changed = FALSE;
 
     if (node->directory == NULL &&
-            (caja_file_is_directory (node->file) || node->parent == NULL))
+            (baul_file_is_directory (node->file) || node->parent == NULL))
     {
-        node->directory = caja_directory_get_for_file (node->file);
+        node->directory = baul_directory_get_for_file (node->file);
     }
     else if (node->directory != NULL &&
-             !(caja_file_is_directory (node->file) || node->parent == NULL))
+             !(baul_file_is_directory (node->file) || node->parent == NULL))
     {
         stop_monitoring_directory (model, node);
         destroy_children (model, node);
-        caja_directory_unref (node->directory);
+        baul_directory_unref (node->directory);
         node->directory = NULL;
     }
 
@@ -964,19 +964,19 @@ should_show_file (FMTreeModel *model, CajaFile *file)
     gboolean should;
     TreeNode *node;
 
-    should = caja_file_should_show (file,
+    should = baul_file_should_show (file,
                                     model->details->show_hidden_files,
                                     TRUE,
 				    model->details->show_backup_files);
 
     if (should
             && model->details->show_only_directories
-            &&! caja_file_is_directory (file))
+            &&! baul_file_is_directory (file))
     {
         should = FALSE;
     }
 
-    if (should && caja_file_is_gone (file))
+    if (should && baul_file_is_gone (file))
     {
         should = FALSE;
     }
@@ -1006,7 +1006,7 @@ update_node (FMTreeModel *model, TreeNode *node)
     }
 
     if (node->parent != NULL && node->parent->directory != NULL
-            && !caja_directory_contains_file (node->parent->directory, node->file))
+            && !baul_directory_contains_file (node->parent->directory, node->file))
     {
         reparent_node (model, node);
         return;
@@ -1139,19 +1139,19 @@ done_loading_callback (CajaDirectory *directory,
     TreeNode *node;
     GtkTreeIter iter;
 
-    file = caja_directory_get_corresponding_file (directory);
+    file = baul_directory_get_corresponding_file (directory);
     node = get_node_from_file (root, file);
     if (node == NULL)
     {
         /* This can happen for non-existing files as tree roots,
          * since the directory <-> file object relation gets
-         * broken due to caja_directory_remove_file()
+         * broken due to baul_directory_remove_file()
          * getting called when i/o fails.
          */
         return;
     }
     set_done_loading (root->model, node, TRUE);
-    caja_file_unref (file);
+    baul_file_unref (file);
 
     make_iter_for_node (node, &iter, root->model->details->stamp);
     g_signal_emit (root->model,
@@ -1198,10 +1198,10 @@ start_monitoring_directory (FMTreeModel *model, TreeNode *node)
                              (directory, "files_changed",
                               G_CALLBACK (files_changed_callback), node->root);
 
-    set_done_loading (model, node, caja_directory_are_all_files_seen (directory));
+    set_done_loading (model, node, baul_directory_are_all_files_seen (directory));
 
     attributes = get_tree_monitor_attributes ();
-    caja_directory_file_monitor_add (directory, model,
+    baul_directory_file_monitor_add (directory, model,
                                      model->details->show_hidden_files,
                                      attributes, files_changed_callback, node->root);
 }
@@ -1486,7 +1486,7 @@ fm_tree_model_iter_has_child (GtkTreeModel *model, GtkTreeIter *iter)
 
 #if 0
     g_warning ("Node '%s' %s",
-               node && node->file ? caja_file_get_uri (node->file) : "no name",
+               node && node->file ? baul_file_get_uri (node->file) : "no name",
                has_child ? "has child" : "no child");
 #endif
 
@@ -1725,7 +1725,7 @@ fm_tree_model_add_root_uri (FMTreeModel *model, const char *root_uri, const char
     TreeNode *node, *cnode;
     FMTreeModelRoot *newroot;
 
-    file = caja_file_get_by_uri (root_uri);
+    file = baul_file_get_by_uri (root_uri);
 
     newroot = tree_model_root_new (model);
     node = create_node_for_file (newroot, file);
@@ -1749,7 +1749,7 @@ fm_tree_model_add_root_uri (FMTreeModel *model, const char *root_uri, const char
         node->prev = cnode;
     }
 
-    caja_file_unref (file);
+    baul_file_unref (file);
 
     update_node_without_reporting (model, node);
     report_node_inserted (model, node);
@@ -1782,7 +1782,7 @@ fm_tree_model_remove_root_uri (FMTreeModel *model, const char *uri)
     TreeNode *node;
     CajaFile *file;
 
-    file = caja_file_get_by_uri (uri);
+    file = baul_file_get_by_uri (uri);
     for (node = model->details->root_node; node != NULL; node = node->next)
     {
         if (file == node->file)
@@ -1790,7 +1790,7 @@ fm_tree_model_remove_root_uri (FMTreeModel *model, const char *uri)
             break;
         }
     }
-    caja_file_unref (file);
+    baul_file_unref (file);
 
     if (node)
     {
@@ -1805,7 +1805,7 @@ fm_tree_model_remove_root_uri (FMTreeModel *model, const char *uri)
             node->mount = NULL;
         }
 
-        caja_file_monitor_remove (node->file, model);
+        baul_file_monitor_remove (node->file, model);
         path = get_node_path (model, node);
 
         /* Report row_deleted before actually deleting */
@@ -1859,7 +1859,7 @@ fm_tree_model_set_show_hidden_files (FMTreeModel *model,
     stop_monitoring (model);
     if (!show_hidden_files)
     {
-        destroy_by_function (model, caja_file_is_hidden_file);
+        destroy_by_function (model, baul_file_is_hidden_file);
     }
     schedule_monitoring_update (model);
 }
@@ -1867,7 +1867,7 @@ fm_tree_model_set_show_hidden_files (FMTreeModel *model,
 static gboolean
 file_is_not_directory (CajaFile *file)
 {
-    return !caja_file_is_directory (file);
+    return !baul_file_is_directory (file);
 }
 
 void
@@ -1900,7 +1900,7 @@ fm_tree_model_iter_get_file (FMTreeModel *model, GtkTreeIter *iter)
     g_return_val_if_fail (iter_is_valid (FM_TREE_MODEL (model), iter), NULL);
 
     node = iter->user_data;
-    return node == NULL ? NULL : caja_file_ref (node->file);
+    return node == NULL ? NULL : baul_file_ref (node->file);
 }
 
 /* This is used to work around some sort order stability problems
@@ -2022,13 +2022,13 @@ fm_tree_model_set_highlight_for_files (FMTreeModel *model,
         g_list_foreach (old_files,
                         (GFunc) do_update_node, model);
 
-        caja_file_list_free (old_files);
+        baul_file_list_free (old_files);
     }
 
     if (files != NULL)
     {
         model->details->highlighted_files =
-            caja_file_list_copy (files);
+            baul_file_list_copy (files);
         g_list_foreach (model->details->highlighted_files,
                         (GFunc) do_update_node, model);
     }
@@ -2071,7 +2071,7 @@ fm_tree_model_finalize (GObject *object)
 
     if (model->details->highlighted_files != NULL)
     {
-        caja_file_list_free (model->details->highlighted_files);
+        baul_file_list_free (model->details->highlighted_files);
     }
 
     g_free (model->details);

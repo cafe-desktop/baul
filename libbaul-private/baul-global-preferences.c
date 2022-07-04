@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-global-preferences.c - Caja specific preference keys and
+/* baul-global-preferences.c - Caja specific preference keys and
                                    functions.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
@@ -31,19 +31,19 @@
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-string.h>
 
-#include "caja-global-preferences.h"
-#include "caja-file-utilities.h"
-#include "caja-file.h"
+#include "baul-global-preferences.h"
+#include "baul-file-utilities.h"
+#include "baul-file.h"
 
-GSettings *caja_preferences;
-GSettings *caja_media_preferences;
-GSettings *caja_window_state;
-GSettings *caja_icon_view_preferences;
-GSettings *caja_desktop_preferences;
-GSettings *caja_tree_sidebar_preferences;
-GSettings *caja_compact_view_preferences;
-GSettings *caja_list_view_preferences;
-GSettings *caja_extension_preferences;
+GSettings *baul_preferences;
+GSettings *baul_media_preferences;
+GSettings *baul_window_state;
+GSettings *baul_icon_view_preferences;
+GSettings *baul_desktop_preferences;
+GSettings *baul_tree_sidebar_preferences;
+GSettings *baul_compact_view_preferences;
+GSettings *baul_list_view_preferences;
+GSettings *baul_extension_preferences;
 
 GSettings *mate_background_preferences;
 GSettings *mate_lockdown_preferences;
@@ -52,13 +52,13 @@ GSettings *mate_lockdown_preferences;
  * Public functions
  */
 char *
-caja_global_preferences_get_default_folder_viewer_preference_as_iid (void)
+baul_global_preferences_get_default_folder_viewer_preference_as_iid (void)
 {
     int preference_value;
     const char *viewer_iid;
 
     preference_value =
-        g_settings_get_enum (caja_preferences, CAJA_PREFERENCES_DEFAULT_FOLDER_VIEWER);
+        g_settings_get_enum (baul_preferences, CAJA_PREFERENCES_DEFAULT_FOLDER_VIEWER);
 
     if (preference_value == CAJA_DEFAULT_FOLDER_VIEWER_LIST_VIEW)
     {
@@ -77,7 +77,7 @@ caja_global_preferences_get_default_folder_viewer_preference_as_iid (void)
 }
 
 void
-caja_global_preferences_init (void)
+baul_global_preferences_init (void)
 {
     static gboolean initialized = FALSE;
 
@@ -88,15 +88,15 @@ caja_global_preferences_init (void)
 
     initialized = TRUE;
 
-    caja_preferences = g_settings_new("org.mate.caja.preferences");
-    caja_media_preferences = g_settings_new("org.mate.media-handling");
-    caja_window_state = g_settings_new("org.mate.caja.window-state");
-    caja_icon_view_preferences = g_settings_new("org.mate.caja.icon-view");
-    caja_compact_view_preferences = g_settings_new("org.mate.caja.compact-view");
-    caja_desktop_preferences = g_settings_new("org.mate.caja.desktop");
-    caja_tree_sidebar_preferences = g_settings_new("org.mate.caja.sidebar-panels.tree");
-    caja_list_view_preferences = g_settings_new("org.mate.caja.list-view");
-    caja_extension_preferences = g_settings_new("org.mate.caja.extensions");
+    baul_preferences = g_settings_new("org.mate.baul.preferences");
+    baul_media_preferences = g_settings_new("org.mate.media-handling");
+    baul_window_state = g_settings_new("org.mate.baul.window-state");
+    baul_icon_view_preferences = g_settings_new("org.mate.baul.icon-view");
+    baul_compact_view_preferences = g_settings_new("org.mate.baul.compact-view");
+    baul_desktop_preferences = g_settings_new("org.mate.baul.desktop");
+    baul_tree_sidebar_preferences = g_settings_new("org.mate.baul.sidebar-panels.tree");
+    baul_list_view_preferences = g_settings_new("org.mate.baul.list-view");
+    baul_extension_preferences = g_settings_new("org.mate.baul.extensions");
 
     mate_background_preferences = g_settings_new("org.mate.background");
     mate_lockdown_preferences = g_settings_new("org.mate.lockdown");

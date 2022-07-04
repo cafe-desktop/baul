@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-sidebar-provider.h: register and create CajaSidebars
+   baul-sidebar-provider.h: register and create CajaSidebars
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -25,14 +25,14 @@
 #ifndef CAJA_SIDEBAR_PROVIDER_H
 #define CAJA_SIDEBAR_PROVIDER_H
 
-#include "caja-sidebar.h"
-#include "caja-window-info.h"
+#include "baul-sidebar.h"
+#include "baul-window-info.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define CAJA_TYPE_SIDEBAR_PROVIDER           (caja_sidebar_provider_get_type ())
+#define CAJA_TYPE_SIDEBAR_PROVIDER           (baul_sidebar_provider_get_type ())
 #define CAJA_SIDEBAR_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SIDEBAR_PROVIDER, CajaSidebarProvider))
 #define CAJA_IS_SIDEBAR_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SIDEBAR_PROVIDER))
 #define CAJA_SIDEBAR_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_SIDEBAR_PROVIDER, CajaSidebarProviderIface))
@@ -49,10 +49,10 @@ extern "C" {
     };
 
     /* Interface Functions */
-    GType                   caja_sidebar_provider_get_type  (void);
-    CajaSidebar *       caja_sidebar_provider_create (CajaSidebarProvider *provider,
+    GType                   baul_sidebar_provider_get_type  (void);
+    CajaSidebar *       baul_sidebar_provider_create (CajaSidebarProvider *provider,
             CajaWindowInfo  *window);
-    GList *                 caja_list_sidebar_providers (void);
+    GList *                 baul_list_sidebar_providers (void);
 
 #ifdef __cplusplus
 }

@@ -22,19 +22,19 @@
  * Authors: John Sullivan <sullivan@eazel.com>
  */
 
-/* caja-bookmarks-window.h - interface for bookmark-editing window.
+/* baul-bookmarks-window.h - interface for bookmark-editing window.
  */
 
 #ifndef CAJA_BOOKMARKS_WINDOW_H
 #define CAJA_BOOKMARKS_WINDOW_H
 
 #include <gtk/gtk.h>
-#include "caja-bookmark-list.h"
-#include "caja-window.h"
+#include "baul-bookmark-list.h"
+#include "baul-window.h"
 
 GtkWindow *create_bookmarks_window                 (CajaBookmarkList *bookmarks,
                                                     CajaWindow       *window_source);
-void       caja_bookmarks_window_save_geometry     (GtkWindow        *window);
+void       baul_bookmarks_window_save_geometry     (GtkWindow        *window);
 void	   edit_bookmarks_dialog_set_signals	   (CajaWindow       *window);
 
 #endif /* CAJA_BOOKMARKS_WINDOW_H */

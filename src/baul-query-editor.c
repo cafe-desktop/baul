@@ -33,11 +33,11 @@
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 
-#include <libcaja-private/caja-global-preferences.h>
+#include <libbaul-private/baul-global-preferences.h>
 
-#include "caja-query-editor.h"
-#include "caja-src-marshal.h"
-#include "caja-window-slot.h"
+#include "baul-query-editor.h"
+#include "baul-src-marshal.h"
+#include "baul-window-slot.h"
 
 enum
 {
@@ -112,17 +112,17 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static void  caja_query_editor_class_init       (CajaQueryEditorClass *class);
-static void  caja_query_editor_init             (CajaQueryEditor      *editor);
+static void  baul_query_editor_class_init       (CajaQueryEditorClass *class);
+static void  baul_query_editor_init             (CajaQueryEditor      *editor);
 
 static void go_search_cb (GtkButton *clicked_button, CajaQueryEditor *editor);
 
 static void entry_activate_cb (GtkWidget *entry, CajaQueryEditor *editor);
 static void entry_changed_cb  (GtkWidget *entry, CajaQueryEditor *editor);
-static void caja_query_editor_changed_force (CajaQueryEditor *editor,
+static void baul_query_editor_changed_force (CajaQueryEditor *editor,
         gboolean             force);
-static void caja_query_editor_changed (CajaQueryEditor *editor);
-static CajaQueryEditorRow * caja_query_editor_add_row (CajaQueryEditor *editor,
+static void baul_query_editor_changed (CajaQueryEditor *editor);
+static CajaQueryEditorRow * baul_query_editor_add_row (CajaQueryEditor *editor,
         CajaQueryEditorRowType type);
 
 static GtkWidget *location_row_create_widgets  (CajaQueryEditorRow *row);
@@ -212,11 +212,11 @@ static CajaQueryEditorRowOps row_type[] =
 };
 
 EEL_CLASS_BOILERPLATE (CajaQueryEditor,
-                       caja_query_editor,
+                       baul_query_editor,
                        GTK_TYPE_BOX)
 
 static void
-caja_query_editor_finalize (GObject *object)
+baul_query_editor_finalize (GObject *object)
 {
     CajaQueryEditor *editor;
 
@@ -228,7 +228,7 @@ caja_query_editor_finalize (GObject *object)
 }
 
 static void
-caja_query_editor_dispose (GObject *object)
+baul_query_editor_dispose (GObject *object)
 {
     CajaQueryEditor *editor;
 
@@ -249,7 +249,7 @@ caja_query_editor_dispose (GObject *object)
                                               entry_changed_cb,
                                               editor);
 
-        caja_search_bar_return_entry (editor->details->bar);
+        baul_search_bar_return_entry (editor->details->bar);
         eel_remove_weak_pointer (&editor->details->bar);
     }
 
@@ -257,14 +257,14 @@ caja_query_editor_dispose (GObject *object)
 }
 
 static void
-caja_query_editor_class_init (CajaQueryEditorClass *class)
+baul_query_editor_class_init (CajaQueryEditorClass *class)
 {
     GObjectClass *gobject_class;
     GtkBindingSet *binding_set;
 
     gobject_class = G_OBJECT_CLASS (class);
-    gobject_class->finalize = caja_query_editor_finalize;
-    gobject_class->dispose = caja_query_editor_dispose;
+    gobject_class->finalize = baul_query_editor_finalize;
+    gobject_class->dispose = baul_query_editor_dispose;
 
     signals[CHANGED] =
         g_signal_new ("changed",
@@ -272,7 +272,7 @@ caja_query_editor_class_init (CajaQueryEditorClass *class)
                       G_SIGNAL_RUN_LAST,
                       G_STRUCT_OFFSET (CajaQueryEditorClass, changed),
                       NULL, NULL,
-                      caja_src_marshal_VOID__OBJECT_BOOLEAN,
+                      baul_src_marshal_VOID__OBJECT_BOOLEAN,
                       G_TYPE_NONE, 2, CAJA_TYPE_QUERY, G_TYPE_BOOLEAN);
 
     signals[CANCEL] =
@@ -297,7 +297,7 @@ entry_activate_cb (GtkWidget *entry, CajaQueryEditor *editor)
         editor->details->typing_timeout_id = 0;
     }
 
-    caja_query_editor_changed_force (editor, TRUE);
+    baul_query_editor_changed_force (editor, TRUE);
 }
 
 static gboolean
@@ -307,7 +307,7 @@ typing_timeout_cb (gpointer user_data)
 
     editor = CAJA_QUERY_EDITOR (user_data);
 
-    caja_query_editor_changed (editor);
+    baul_query_editor_changed (editor);
 
     editor->details->typing_timeout_id = 0;
 
@@ -338,8 +338,8 @@ entry_changed_cb (GtkWidget *entry, CajaQueryEditor *editor)
 static void
 edit_clicked (GtkButton *button, CajaQueryEditor *editor)
 {
-    caja_query_editor_set_visible (editor, TRUE);
-    caja_query_editor_grab_focus (editor);
+    baul_query_editor_set_visible (editor, TRUE);
+    baul_query_editor_grab_focus (editor);
 }
 
 /* Location */
@@ -357,7 +357,7 @@ location_row_create_widgets (CajaQueryEditorRow *row)
     gtk_widget_show (chooser);
 
     g_signal_connect_swapped (chooser, "current-folder-changed",
-                              G_CALLBACK (caja_query_editor_changed),
+                              G_CALLBACK (baul_query_editor_changed),
                               row->editor);
 
     gtk_box_pack_start (GTK_BOX (row->hbox), chooser, FALSE, FALSE, 0);
@@ -382,7 +382,7 @@ location_row_add_to_query (CajaQueryEditorRow *row,
     uri = g_filename_to_uri (folder, NULL, NULL);
     g_free (folder);
 
-    caja_query_set_location (query, uri);
+    baul_query_set_location (query, uri);
     g_free (uri);
 }
 
@@ -398,7 +398,7 @@ location_add_rows_from_query (CajaQueryEditor    *editor,
     CajaQueryEditorRow *row;
     char *uri, *folder;
 
-    uri = caja_query_get_location (query);
+    uri = baul_query_get_location (query);
 
     if (uri == NULL)
     {
@@ -411,7 +411,7 @@ location_add_rows_from_query (CajaQueryEditor    *editor,
         return;
     }
 
-    row = caja_query_editor_add_row (editor,
+    row = baul_query_editor_add_row (editor,
                                      CAJA_QUERY_EDITOR_ROW_LOCATION);
     gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (row->type_widget),
                                          folder);
@@ -474,7 +474,7 @@ tags_row_add_to_query (CajaQueryEditorRow *row,
     for (i = 0; i < len; ++i) {
         strv[i] = g_strstrip (strv[i]);
         if (strlen (strv[i]) > 0) {
-            caja_query_add_tag (query, strv[i]);
+            baul_query_add_tag (query, strv[i]);
         }
     }
     g_strfreev (strv);
@@ -511,13 +511,13 @@ static void
 tags_add_rows_from_query (CajaQueryEditor *editor,
                               CajaQuery   *query)
 {
-    GList *tags = caja_query_get_tags (query);
+    GList *tags = baul_query_get_tags (query);
     if (tags == NULL) {
         return;
     }
 
     CajaQueryEditorRow *row;
-    row = caja_query_editor_add_row (editor, CAJA_QUERY_EDITOR_ROW_TAGS);
+    row = baul_query_editor_add_row (editor, CAJA_QUERY_EDITOR_ROW_TAGS);
 
     gchar *tags_str = xattr_tags_list_to_str (tags);
     g_list_free_full (tags, g_free);
@@ -835,7 +835,7 @@ type_combo_changed (GtkComboBox *combo_box, CajaQueryEditorRow *row)
         gtk_widget_destroy (dialog);
     }
 
-    caja_query_editor_changed (row->editor);
+    baul_query_editor_changed (row->editor);
 }
 
 static GtkWidget *
@@ -914,13 +914,13 @@ type_row_add_to_query (CajaQueryEditorRow *row,
     {
         while (*mimetypes != NULL)
         {
-            caja_query_add_mime_type (query, *mimetypes);
+            baul_query_add_mime_type (query, *mimetypes);
             mimetypes++;
         }
     }
     if (mimetype)
     {
-        caja_query_add_mime_type (query, mimetype);
+        baul_query_add_mime_type (query, mimetype);
         g_free (mimetype);
     }
 }
@@ -1004,7 +1004,7 @@ type_add_rows_from_query (CajaQueryEditor    *editor,
     GtkTreeModel *model;
     GList *l;
 
-    mime_types = caja_query_get_mime_types (query);
+    mime_types = baul_query_get_mime_types (query);
 
     if (mime_types == NULL)
     {
@@ -1019,7 +1019,7 @@ type_add_rows_from_query (CajaQueryEditor    *editor,
             mime_types = remove_group_types_from_list (mime_type_groups[i].mimetypes,
                          mime_types);
 
-            row = caja_query_editor_add_row (editor,
+            row = baul_query_editor_add_row (editor,
                                              CAJA_QUERY_EDITOR_ROW_TYPE);
 
             model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
@@ -1042,7 +1042,7 @@ type_add_rows_from_query (CajaQueryEditor    *editor,
             desc = mime_type;
         }
 
-        row = caja_query_editor_add_row (editor,
+        row = baul_query_editor_add_row (editor,
                                          CAJA_QUERY_EDITOR_ROW_TYPE);
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
 
@@ -1184,7 +1184,7 @@ static void modtime_row_add_to_query(CajaQueryEditorRow *row, CajaQuery *query)
     timestamp = g_date_time_to_unix (datetime);
     g_date_time_unref (datetime);
 
-    caja_query_set_timestamp(query, is_greater ? timestamp: -timestamp);
+    baul_query_set_timestamp(query, is_greater ? timestamp: -timestamp);
 }
 
 static void modtime_row_free_data(CajaQueryEditorRow *row)
@@ -1232,7 +1232,7 @@ static GtkWidget *size_row_create_widgets(CajaQueryEditorRow *row)
     gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(size_combo), cell, "text",
                                    1, NULL);
 
-    if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_USE_IEC_UNITS))
+    if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_USE_IEC_UNITS))
     {
         gtk_list_store_append(size_store, &iter);
         gtk_list_store_set(size_store, &iter, 0, 10240, 1, _("10 KiB"), -1);
@@ -1327,7 +1327,7 @@ static void size_row_add_to_query(CajaQueryEditorRow *row, CajaQuery *query)
     size_model = gtk_combo_box_get_model(GTK_COMBO_BOX(size_combo));
     gtk_tree_model_get(size_model, &size_iter, 0, &size, -1);
 
-    caja_query_set_size(query, is_greater ? size : -size);
+    baul_query_set_size(query, is_greater ? size : -size);
 }
 
 static void size_row_free_data(CajaQueryEditorRow *row)
@@ -1361,7 +1361,7 @@ contained_text_row_add_to_query (CajaQueryEditorRow *row, CajaQuery *query)
     GtkEntry *entry = GTK_ENTRY (row->type_widget);
     const gchar *text = gtk_entry_get_text (entry);
 
-    caja_query_set_contained_text (query, text);
+    baul_query_set_contained_text (query, text);
 }
 
 static void
@@ -1417,7 +1417,7 @@ remove_row_cb (GtkButton *clicked_button, CajaQueryEditorRow *row)
     row_type[row->type].free_data (row);
     g_free (row);
 
-    caja_query_editor_changed (editor);
+    baul_query_editor_changed (editor);
 }
 
 static void
@@ -1451,11 +1451,11 @@ row_type_combo_changed_cb (GtkComboBox *combo_box, CajaQueryEditorRow *row)
 
     create_type_widgets (row);
 
-    caja_query_editor_changed (row->editor);
+    baul_query_editor_changed (row->editor);
 }
 
 static CajaQueryEditorRow *
-caja_query_editor_add_row (CajaQueryEditor *editor,
+baul_query_editor_add_row (CajaQueryEditor *editor,
                            CajaQueryEditorRowType type)
 {
     GtkWidget *hbox, *button, *image, *combo;
@@ -1510,18 +1510,18 @@ caja_query_editor_add_row (CajaQueryEditor *editor,
 static void
 go_search_cb (GtkButton *clicked_button, CajaQueryEditor *editor)
 {
-    caja_query_editor_changed_force (editor, TRUE);
+    baul_query_editor_changed_force (editor, TRUE);
 }
 
 static void
 add_new_row_cb (GtkButton *clicked_button, CajaQueryEditor *editor)
 {
-    caja_query_editor_add_row (editor, get_next_free_type (editor));
-    caja_query_editor_changed (editor);
+    baul_query_editor_add_row (editor, get_next_free_type (editor));
+    baul_query_editor_changed (editor);
 }
 
 static void
-caja_query_editor_init (CajaQueryEditor *editor)
+baul_query_editor_init (CajaQueryEditor *editor)
 {
     GtkWidget *hbox, *label, *button;
     char *label_markup;
@@ -1565,12 +1565,12 @@ caja_query_editor_init (CajaQueryEditor *editor)
 }
 
 void
-caja_query_editor_set_default_query (CajaQueryEditor *editor)
+baul_query_editor_set_default_query (CajaQueryEditor *editor)
 {
     if (!editor->details->is_indexed)
     {
-        caja_query_editor_add_row (editor, CAJA_QUERY_EDITOR_ROW_LOCATION);
-        caja_query_editor_changed (editor);
+        baul_query_editor_add_row (editor, CAJA_QUERY_EDITOR_ROW_LOCATION);
+        baul_query_editor_changed (editor);
     }
 }
 
@@ -1673,7 +1673,7 @@ setup_external_entry (CajaQueryEditor *editor, GtkWidget *entry)
 }
 
 void
-caja_query_editor_set_visible (CajaQueryEditor *editor,
+baul_query_editor_set_visible (CajaQueryEditor *editor,
                                gboolean visible)
 {
     editor->details->is_visible = visible;
@@ -1700,7 +1700,7 @@ query_is_valid (CajaQueryEditor *editor)
 }
 
 static void
-caja_query_editor_changed_force (CajaQueryEditor *editor, gboolean force_reload)
+baul_query_editor_changed_force (CajaQueryEditor *editor, gboolean force_reload)
 {
     if (editor->details->change_frozen)
     {
@@ -1711,7 +1711,7 @@ caja_query_editor_changed_force (CajaQueryEditor *editor, gboolean force_reload)
     {
         CajaQuery *query;
 
-        query = caja_query_editor_get_query (editor);
+        query = baul_query_editor_get_query (editor);
         g_signal_emit (editor, signals[CHANGED], 0,
                        query, editor->details->is_indexed || force_reload);
         g_object_unref (query);
@@ -1719,13 +1719,13 @@ caja_query_editor_changed_force (CajaQueryEditor *editor, gboolean force_reload)
 }
 
 static void
-caja_query_editor_changed (CajaQueryEditor *editor)
+baul_query_editor_changed (CajaQueryEditor *editor)
 {
-    caja_query_editor_changed_force (editor, FALSE);
+    baul_query_editor_changed_force (editor, FALSE);
 }
 
 void
-caja_query_editor_grab_focus (CajaQueryEditor *editor)
+baul_query_editor_grab_focus (CajaQueryEditor *editor)
 {
     if (editor->details->is_visible)
     {
@@ -1734,7 +1734,7 @@ caja_query_editor_grab_focus (CajaQueryEditor *editor)
 }
 
 CajaQuery *
-caja_query_editor_get_query (CajaQueryEditor *editor)
+baul_query_editor_get_query (CajaQueryEditor *editor)
 {
     const char *query_text;
     CajaQuery *query;
@@ -1754,8 +1754,8 @@ caja_query_editor_get_query (CajaQueryEditor *editor)
         return NULL;
     }
 
-    query = caja_query_new ();
-    caja_query_set_text (query, query_text);
+    query = baul_query_new ();
+    baul_query_set_text (query, query_text);
 
     for (l = editor->details->rows; l != NULL; l = l->next)
     {
@@ -1768,7 +1768,7 @@ caja_query_editor_get_query (CajaQueryEditor *editor)
 }
 
 void
-caja_query_editor_clear_query (CajaQueryEditor *editor)
+baul_query_editor_clear_query (CajaQueryEditor *editor)
 {
     editor->details->change_frozen = TRUE;
     gtk_entry_set_text (GTK_ENTRY (editor->details->entry), "");
@@ -1780,7 +1780,7 @@ caja_query_editor_clear_query (CajaQueryEditor *editor)
 }
 
 GtkWidget *
-caja_query_editor_new (gboolean start_hidden,
+baul_query_editor_new (gboolean start_hidden,
                        gboolean is_indexed)
 {
     GtkWidget *editor;
@@ -1789,7 +1789,7 @@ caja_query_editor_new (gboolean start_hidden,
 
     CAJA_QUERY_EDITOR (editor)->details->is_indexed = is_indexed;
 
-    caja_query_editor_set_visible (CAJA_QUERY_EDITOR (editor),
+    baul_query_editor_set_visible (CAJA_QUERY_EDITOR (editor),
                                    !start_hidden);
 
     setup_internal_entry (CAJA_QUERY_EDITOR (editor));
@@ -1802,7 +1802,7 @@ detach_from_external_entry (CajaQueryEditor *editor)
 {
     if (editor->details->bar != NULL)
     {
-        caja_search_bar_return_entry (editor->details->bar);
+        baul_search_bar_return_entry (editor->details->bar);
         g_signal_handlers_block_by_func (editor->details->entry,
                                          entry_activate_cb,
                                          editor);
@@ -1817,7 +1817,7 @@ attach_to_external_entry (CajaQueryEditor *editor)
 {
     if (editor->details->bar != NULL)
     {
-        caja_search_bar_borrow_entry (editor->details->bar);
+        baul_search_bar_borrow_entry (editor->details->bar);
         g_signal_handlers_unblock_by_func (editor->details->entry,
                                            entry_activate_cb,
                                            editor);
@@ -1833,7 +1833,7 @@ attach_to_external_entry (CajaQueryEditor *editor)
 }
 
 GtkWidget*
-caja_query_editor_new_with_bar (gboolean start_hidden,
+baul_query_editor_new_with_bar (gboolean start_hidden,
                                 gboolean is_indexed,
                                 gboolean start_attached,
                                 CajaSearchBar *bar,
@@ -1845,14 +1845,14 @@ caja_query_editor_new_with_bar (gboolean start_hidden,
     editor = CAJA_QUERY_EDITOR (g_object_new (CAJA_TYPE_QUERY_EDITOR, NULL));
     editor->details->is_indexed = is_indexed;
 
-    caja_query_editor_set_visible (editor, !start_hidden);
+    baul_query_editor_set_visible (editor, !start_hidden);
 
     editor->details->bar = bar;
     eel_add_weak_pointer (&editor->details->bar);
 
     editor->details->slot = slot;
 
-    entry = caja_search_bar_borrow_entry (bar);
+    entry = baul_search_bar_borrow_entry (bar);
     setup_external_entry (editor, entry);
     if (!start_attached)
     {
@@ -1870,18 +1870,18 @@ caja_query_editor_new_with_bar (gboolean start_hidden,
 }
 
 void
-caja_query_editor_set_query (CajaQueryEditor *editor, CajaQuery *query)
+baul_query_editor_set_query (CajaQueryEditor *editor, CajaQuery *query)
 {
     CajaQueryEditorRowType type;
     char *text;
 
     if (!query)
     {
-        caja_query_editor_clear_query (editor);
+        baul_query_editor_clear_query (editor);
         return;
     }
 
-    text = caja_query_get_text (query);
+    text = baul_query_get_text (query);
 
     if (!text)
     {

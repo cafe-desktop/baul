@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-dnd.h - Common Drag & drop handling code shared by the icon container
+/* baul-dnd.h - Common Drag & drop handling code shared by the icon container
    and the list view.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -29,7 +29,7 @@
 
 #include <gtk/gtk.h>
 
-#include "caja-window-slot-info.h"
+#include "baul-window-slot-info.h"
 
 /* Drag & Drop target names. */
 #define CAJA_ICON_DND_MATE_ICON_LIST_TYPE	"x-special/mate-icon-list"
@@ -125,7 +125,7 @@ typedef struct
     } data;
 
     /* NB: the following elements are managed by the caller of
-     *   caja_drag_slot_proxy_init() */
+     *   baul_drag_slot_proxy_init() */
 
     /* a fixed location, or NULL to use slot's location */
     GFile *target_location;
@@ -140,59 +140,59 @@ typedef void		(* CajaDragEachSelectedItemIterator)	(CajaDragEachSelectedItemData
         gpointer iterator_context,
         gpointer data);
 
-void			    caja_drag_init				(CajaDragInfo		      *drag_info,
+void			    baul_drag_init				(CajaDragInfo		      *drag_info,
         const GtkTargetEntry		      *drag_types,
         int				       drag_type_count,
         gboolean			       add_text_targets);
-void			    caja_drag_finalize			(CajaDragInfo		      *drag_info);
-CajaDragSelectionItem  *caja_drag_selection_item_new		(void);
-void			    caja_drag_destroy_selection_list	(GList				      *selection_list);
-GList			   *caja_drag_build_selection_list		(GtkSelectionData		      *data);
+void			    baul_drag_finalize			(CajaDragInfo		      *drag_info);
+CajaDragSelectionItem  *baul_drag_selection_item_new		(void);
+void			    baul_drag_destroy_selection_list	(GList				      *selection_list);
+GList			   *baul_drag_build_selection_list		(GtkSelectionData		      *data);
 
-GList *			    caja_drag_uri_list_from_selection_list	(const GList			      *selection_list);
+GList *			    baul_drag_uri_list_from_selection_list	(const GList			      *selection_list);
 
-GList *			    caja_drag_uri_list_from_array		(const char			     **uris);
+GList *			    baul_drag_uri_list_from_array		(const char			     **uris);
 
-gboolean		    caja_drag_items_local			(const char			      *target_uri,
+gboolean		    baul_drag_items_local			(const char			      *target_uri,
         const GList			      *selection_list);
-gboolean		    caja_drag_uris_local			(const char			      *target_uri,
+gboolean		    baul_drag_uris_local			(const char			      *target_uri,
         const GList			      *source_uri_list);
-gboolean		    caja_drag_items_on_desktop		(const GList			      *selection_list);
-void			    caja_drag_default_drop_action_for_icons (GdkDragContext			      *context,
+gboolean		    baul_drag_items_on_desktop		(const GList			      *selection_list);
+void			    baul_drag_default_drop_action_for_icons (GdkDragContext			      *context,
         const char			      *target_uri,
         const GList			      *items,
         int				      *action);
-GdkDragAction		    caja_drag_default_drop_action_for_netscape_url (GdkDragContext			     *context);
-GdkDragAction		    caja_drag_default_drop_action_for_uri_list     (GdkDragContext			     *context,
+GdkDragAction		    baul_drag_default_drop_action_for_netscape_url (GdkDragContext			     *context);
+GdkDragAction		    baul_drag_default_drop_action_for_uri_list     (GdkDragContext			     *context,
         const char			     *target_uri_string);
-gboolean		    caja_drag_drag_data_get			(GtkWidget			      *widget,
+gboolean		    baul_drag_drag_data_get			(GtkWidget			      *widget,
         GdkDragContext			      *context,
         GtkSelectionData		      *selection_data,
         guint				       info,
         guint32			       time,
         gpointer			       container_context,
         CajaDragEachSelectedItemIterator  each_selected_item_iterator);
-int			    caja_drag_modifier_based_action		(int				       default_action,
+int			    baul_drag_modifier_based_action		(int				       default_action,
         int				       non_default_action);
 
-GdkDragAction		    caja_drag_drop_action_ask		(GtkWidget			      *widget,
+GdkDragAction		    baul_drag_drop_action_ask		(GtkWidget			      *widget,
         GdkDragAction			       possible_actions);
-GdkDragAction		    caja_drag_drop_background_ask		(GtkWidget			      *widget,
+GdkDragAction		    baul_drag_drop_background_ask		(GtkWidget			      *widget,
         GdkDragAction			       possible_actions);
 
-gboolean		    caja_drag_autoscroll_in_scroll_region	(GtkWidget			      *widget);
-void			    caja_drag_autoscroll_calculate_delta	(GtkWidget			      *widget,
+gboolean		    baul_drag_autoscroll_in_scroll_region	(GtkWidget			      *widget);
+void			    baul_drag_autoscroll_calculate_delta	(GtkWidget			      *widget,
         float				      *x_scroll_delta,
         float				      *y_scroll_delta);
-void			    caja_drag_autoscroll_start		(CajaDragInfo		      *drag_info,
+void			    baul_drag_autoscroll_start		(CajaDragInfo		      *drag_info,
         GtkWidget			      *widget,
         GSourceFunc			       callback,
         gpointer			       user_data);
-void			    caja_drag_autoscroll_stop		(CajaDragInfo		      *drag_info);
+void			    baul_drag_autoscroll_stop		(CajaDragInfo		      *drag_info);
 
-gboolean		    caja_drag_selection_includes_special_link (GList			      *selection_list);
+gboolean		    baul_drag_selection_includes_special_link (GList			      *selection_list);
 
-void                        caja_drag_slot_proxy_init               (GtkWidget *widget,
+void                        baul_drag_slot_proxy_init               (GtkWidget *widget,
         CajaDragSlotProxyInfo *drag_info);
 
 #endif

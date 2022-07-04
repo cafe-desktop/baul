@@ -1,6 +1,6 @@
 include $(top_srcdir)/Makefile.shared
 
-noinst_LTLIBRARIES=libcaja-private.la
+noinst_LTLIBRARIES=libbaul-private.la
 
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
@@ -12,190 +12,190 @@ AM_CPPFLAGS = \
 	$(BEAGLE_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
-	-DCAJA_DATADIR=\""$(datadir)/caja"\" \
-	-DCAJA_EXTENSIONDIR=\""$(libdir)/caja/extensions-2.0"\" \
+	-DCAJA_DATADIR=\""$(datadir)/baul"\" \
+	-DCAJA_EXTENSIONDIR=\""$(libdir)/baul/extensions-2.0"\" \
 	$(NULL)
 
 BUILT_SOURCES = \
-	caja-marshal.c \
-	caja-marshal.h \
+	baul-marshal.c \
+	baul-marshal.h \
 	$(NULL)
 
 dependency_static_libs = \
 	$(top_builddir)/libegg/libegg.la \
 	$(NULL)
 
-libcaja_private_la_LDFLAGS = \
+libbaul_private_la_LDFLAGS = \
 	-no-undefined \
 	$(NULL)
 
-libcaja_private_la_LIBADD = \
+libbaul_private_la_LIBADD = \
 	$(dependency_static_libs) \
 	$(SELINUX_LIBS) \
 	$(BEAGLE_LIBS) \
 	$(TRACKER_LIBS) \
 	$(top_builddir)/eel/libeel-2.la \
-	$(top_builddir)/libcaja-extension/libcaja-extension.la \
+	$(top_builddir)/libbaul-extension/libbaul-extension.la \
 	$(CORE_LIBS) \
     -lnotify
 	$(NULL)
 
-libcaja_private_la_SOURCES = \
-	caja-autorun.c \
-	caja-autorun.h \
-	caja-bookmark.c \
-	caja-bookmark.h \
-	caja-cell-renderer-text-ellipsized.c \
-	caja-cell-renderer-text-ellipsized.h \
-	caja-clipboard-monitor.c \
-	caja-clipboard-monitor.h \
-	caja-clipboard.c \
-	caja-clipboard.h \
-	caja-column-chooser.c \
-	caja-column-chooser.h \
-	caja-column-utilities.c \
-	caja-column-utilities.h \
-	caja-customization-data.c \
-	caja-customization-data.h \
-	caja-debug-log.c \
-	caja-debug-log.h \
-	caja-default-file-icon.c \
-	caja-default-file-icon.h \
-	caja-desktop-directory-file.c \
-	caja-desktop-directory-file.h \
-	caja-desktop-directory.c \
-	caja-desktop-directory.h \
-	caja-desktop-icon-file.c \
-	caja-desktop-icon-file.h \
-	caja-desktop-link-monitor.c \
-	caja-desktop-link-monitor.h \
-	caja-desktop-link.c \
-	caja-desktop-link.h \
-	caja-desktop-metadata.c \
-	caja-desktop-metadata.h \
-	caja-directory-async.c \
-	caja-directory-background.c \
-	caja-directory-background.h \
-	caja-directory-notify.h \
-	caja-directory-private.h \
-	caja-directory.c \
-	caja-directory.h \
-	caja-dnd.c \
-	caja-dnd.h \
-	caja-emblem-utils.c \
-	caja-emblem-utils.h \
-	caja-extensions.c \
-	caja-extensions.h \
-	caja-entry.c \
-	caja-entry.h \
-	caja-file-attributes.h \
-	caja-file-changes-queue.c \
-	caja-file-changes-queue.h \
-	caja-file-conflict-dialog.c \
-	caja-file-conflict-dialog.h \
-	caja-file-dnd.c \
-	caja-file-dnd.h \
-	caja-file-operations.c \
-	caja-file-operations.h \
-	caja-file-private.h \
-	caja-file-queue.c \
-	caja-file-queue.h \
-	caja-file-utilities.c \
-	caja-file-utilities.h \
-	caja-file.c \
-	caja-file.h \
-	caja-global-preferences.c \
-	caja-global-preferences.h \
-	caja-icon-canvas-item.c \
-	caja-icon-canvas-item.h \
-	caja-icon-container.c \
-	caja-icon-container.h \
-	caja-icon-dnd.c \
-	caja-icon-dnd.h \
-	caja-icon-private.h \
-	caja-icon-info.c \
-	caja-icon-info.h \
-	caja-icon-names.h \
-	caja-keep-last-vertical-box.c \
-	caja-keep-last-vertical-box.h \
-	caja-lib-self-check-functions.c \
-	caja-lib-self-check-functions.h \
-	caja-link.c \
-	caja-link.h \
-	caja-metadata.h \
-	caja-metadata.c \
-	caja-mime-actions.c \
-	caja-mime-actions.h \
-	caja-mime-application-chooser.c \
-	caja-mime-application-chooser.h \
-	caja-module.c \
-	caja-module.h \
-	caja-monitor.c \
-	caja-monitor.h \
-	caja-open-with-dialog.c \
-	caja-open-with-dialog.h \
-	caja-progress-info.c \
-	caja-progress-info.h \
-	caja-program-choosing.c \
-	caja-program-choosing.h \
-	caja-recent.c \
-	caja-recent.h \
-	caja-saved-search-file.c \
-	caja-saved-search-file.h \
-	caja-search-directory.c \
-	caja-search-directory.h \
-	caja-search-directory-file.c \
-	caja-search-directory-file.h \
-	caja-search-engine.c \
-	caja-search-engine.h \
-	caja-search-engine-simple.c \
-	caja-search-engine-simple.h \
-	caja-search-engine-beagle.c \
-	caja-search-engine-beagle.h \
-	caja-search-engine-tracker.c \
-	caja-search-engine-tracker.h \
-	caja-sidebar-provider.c \
-	caja-sidebar-provider.h \
-	caja-sidebar.c \
-	caja-sidebar.h \
-	caja-signaller.h \
-	caja-signaller.c \
-	caja-query.c \
-	caja-query.h \
-	caja-thumbnails.c \
-	caja-thumbnails.h \
-	caja-trash-monitor.c \
-	caja-trash-monitor.h \
-	caja-tree-view-drag-dest.c \
-	caja-tree-view-drag-dest.h \
-	caja-ui-utilities.c \
-	caja-ui-utilities.h \
-	caja-vfs-directory.c \
-	caja-vfs-directory.h \
-	caja-vfs-file.c \
-	caja-vfs-file.h \
-	caja-view-factory.c \
-	caja-view-factory.h \
-	caja-view.c \
-	caja-view.h \
-	caja-window-info.c \
-	caja-window-info.h \
-	caja-window-slot-info.c \
-	caja-window-slot-info.h \
-	caja-undostack-manager.c \
-	caja-undostack-manager.h \
+libbaul_private_la_SOURCES = \
+	baul-autorun.c \
+	baul-autorun.h \
+	baul-bookmark.c \
+	baul-bookmark.h \
+	baul-cell-renderer-text-ellipsized.c \
+	baul-cell-renderer-text-ellipsized.h \
+	baul-clipboard-monitor.c \
+	baul-clipboard-monitor.h \
+	baul-clipboard.c \
+	baul-clipboard.h \
+	baul-column-chooser.c \
+	baul-column-chooser.h \
+	baul-column-utilities.c \
+	baul-column-utilities.h \
+	baul-customization-data.c \
+	baul-customization-data.h \
+	baul-debug-log.c \
+	baul-debug-log.h \
+	baul-default-file-icon.c \
+	baul-default-file-icon.h \
+	baul-desktop-directory-file.c \
+	baul-desktop-directory-file.h \
+	baul-desktop-directory.c \
+	baul-desktop-directory.h \
+	baul-desktop-icon-file.c \
+	baul-desktop-icon-file.h \
+	baul-desktop-link-monitor.c \
+	baul-desktop-link-monitor.h \
+	baul-desktop-link.c \
+	baul-desktop-link.h \
+	baul-desktop-metadata.c \
+	baul-desktop-metadata.h \
+	baul-directory-async.c \
+	baul-directory-background.c \
+	baul-directory-background.h \
+	baul-directory-notify.h \
+	baul-directory-private.h \
+	baul-directory.c \
+	baul-directory.h \
+	baul-dnd.c \
+	baul-dnd.h \
+	baul-emblem-utils.c \
+	baul-emblem-utils.h \
+	baul-extensions.c \
+	baul-extensions.h \
+	baul-entry.c \
+	baul-entry.h \
+	baul-file-attributes.h \
+	baul-file-changes-queue.c \
+	baul-file-changes-queue.h \
+	baul-file-conflict-dialog.c \
+	baul-file-conflict-dialog.h \
+	baul-file-dnd.c \
+	baul-file-dnd.h \
+	baul-file-operations.c \
+	baul-file-operations.h \
+	baul-file-private.h \
+	baul-file-queue.c \
+	baul-file-queue.h \
+	baul-file-utilities.c \
+	baul-file-utilities.h \
+	baul-file.c \
+	baul-file.h \
+	baul-global-preferences.c \
+	baul-global-preferences.h \
+	baul-icon-canvas-item.c \
+	baul-icon-canvas-item.h \
+	baul-icon-container.c \
+	baul-icon-container.h \
+	baul-icon-dnd.c \
+	baul-icon-dnd.h \
+	baul-icon-private.h \
+	baul-icon-info.c \
+	baul-icon-info.h \
+	baul-icon-names.h \
+	baul-keep-last-vertical-box.c \
+	baul-keep-last-vertical-box.h \
+	baul-lib-self-check-functions.c \
+	baul-lib-self-check-functions.h \
+	baul-link.c \
+	baul-link.h \
+	baul-metadata.h \
+	baul-metadata.c \
+	baul-mime-actions.c \
+	baul-mime-actions.h \
+	baul-mime-application-chooser.c \
+	baul-mime-application-chooser.h \
+	baul-module.c \
+	baul-module.h \
+	baul-monitor.c \
+	baul-monitor.h \
+	baul-open-with-dialog.c \
+	baul-open-with-dialog.h \
+	baul-progress-info.c \
+	baul-progress-info.h \
+	baul-program-choosing.c \
+	baul-program-choosing.h \
+	baul-recent.c \
+	baul-recent.h \
+	baul-saved-search-file.c \
+	baul-saved-search-file.h \
+	baul-search-directory.c \
+	baul-search-directory.h \
+	baul-search-directory-file.c \
+	baul-search-directory-file.h \
+	baul-search-engine.c \
+	baul-search-engine.h \
+	baul-search-engine-simple.c \
+	baul-search-engine-simple.h \
+	baul-search-engine-beagle.c \
+	baul-search-engine-beagle.h \
+	baul-search-engine-tracker.c \
+	baul-search-engine-tracker.h \
+	baul-sidebar-provider.c \
+	baul-sidebar-provider.h \
+	baul-sidebar.c \
+	baul-sidebar.h \
+	baul-signaller.h \
+	baul-signaller.c \
+	baul-query.c \
+	baul-query.h \
+	baul-thumbnails.c \
+	baul-thumbnails.h \
+	baul-trash-monitor.c \
+	baul-trash-monitor.h \
+	baul-tree-view-drag-dest.c \
+	baul-tree-view-drag-dest.h \
+	baul-ui-utilities.c \
+	baul-ui-utilities.h \
+	baul-vfs-directory.c \
+	baul-vfs-directory.h \
+	baul-vfs-file.c \
+	baul-vfs-file.h \
+	baul-view-factory.c \
+	baul-view-factory.h \
+	baul-view.c \
+	baul-view.h \
+	baul-window-info.c \
+	baul-window-info.h \
+	baul-window-slot-info.c \
+	baul-window-slot-info.h \
+	baul-undostack-manager.c \
+	baul-undostack-manager.h \
 	$(NULL)
 
-nodist_libcaja_private_la_SOURCES =\
+nodist_libbaul_private_la_SOURCES =\
 	$(BUILT_SOURCES) \
 	$(NULL)
 
 $(lib_LTLIBRARIES): $(dependency_static_libs)
 
-caja-marshal.list: $(libcaja_private_la_SOURCES) Makefile.am
+baul-marshal.list: $(libbaul_private_la_SOURCES) Makefile.am
 	$(AM_V_GEN)( cd $(srcdir) && \
-	sed -n -e 's/.*caja_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
-	$(libcaja_private_la_SOURCES) ) \
+	sed -n -e 's/.*baul_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
+	$(libbaul_private_la_SOURCES) ) \
 	| sed -e 's/__/:/' -e 'y/_/,/' | sort -u > $@.tmp
 	@if cmp -s $@.tmp $@; then \
 		rm $@.tmp; \
@@ -207,15 +207,15 @@ caja-marshal.list: $(libcaja_private_la_SOURCES) Makefile.am
 	$(AM_V_GEN)$(GLIB_GENMARSHAL) --header --prefix=$(subst -,_,$*)_marshal $< > $*-marshal.h
 
 %-marshal.c: %-marshal.list Makefile
-	$(AM_V_GEN)echo "#include \"caja-marshal.h\"" > $@ && \
+	$(AM_V_GEN)echo "#include \"baul-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) --body --prefix=$(subst -,_,$*)_marshal $< >> $*-marshal.c
 
-gsettings_SCHEMAS = org.mate.caja.gschema.xml org.mate.media-handling.gschema.xml
+gsettings_SCHEMAS = org.mate.baul.gschema.xml org.mate.media-handling.gschema.xml
 
 @GSETTINGS_RULES@
 
 EXTRA_DIST = \
-	caja-marshal.list \
+	baul-marshal.list \
 	$(gsettings_SCHEMAS) \
 	$(BEAGLE_SOURCES) \
 	$(TRACKER_SOURCES) \
@@ -223,7 +223,7 @@ EXTRA_DIST = \
 
 CLEANFILES = \
 	$(BUILT_SOURCES) \
-	caja-marshal.list \
+	baul-marshal.list \
 	$(NULL)
 
 dist-hook:

@@ -26,12 +26,12 @@
 
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-view.h>
-#include <libcaja-private/caja-window-info.h>
+#include <libbaul-private/baul-view.h>
+#include <libbaul-private/baul-window-info.h>
 
 #define CAJA_PLACES_SIDEBAR_ID    "places"
 
-#define CAJA_TYPE_PLACES_SIDEBAR caja_places_sidebar_get_type()
+#define CAJA_TYPE_PLACES_SIDEBAR baul_places_sidebar_get_type()
 #define CAJA_PLACES_SIDEBAR(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PLACES_SIDEBAR, CajaPlacesSidebar))
 #define CAJA_PLACES_SIDEBAR_CLASS(klass) \
@@ -44,7 +44,7 @@
   (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_PLACES_SIDEBAR, CajaPlacesSidebarClass))
 
 
-GType caja_places_sidebar_get_type (void);
-void caja_places_sidebar_register (void);
+GType baul_places_sidebar_get_type (void);
+void baul_places_sidebar_register (void);
 
 #endif

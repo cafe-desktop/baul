@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-desktop-icon-file.c: Subclass of CajaFile to help implement the
+   baul-desktop-icon-file.c: Subclass of CajaFile to help implement the
    virtual desktop icons.
 
    Copyright (C) 2003 Red Hat, Inc.
@@ -30,23 +30,23 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include "caja-desktop-icon-file.h"
-#include "caja-desktop-metadata.h"
-#include "caja-desktop-directory-file.h"
-#include "caja-directory-notify.h"
-#include "caja-directory-private.h"
-#include "caja-file-attributes.h"
-#include "caja-file-private.h"
-#include "caja-file-utilities.h"
-#include "caja-file-operations.h"
-#include "caja-desktop-directory.h"
+#include "baul-desktop-icon-file.h"
+#include "baul-desktop-metadata.h"
+#include "baul-desktop-directory-file.h"
+#include "baul-directory-notify.h"
+#include "baul-directory-private.h"
+#include "baul-file-attributes.h"
+#include "baul-file-private.h"
+#include "baul-file-utilities.h"
+#include "baul-file-operations.h"
+#include "baul-desktop-directory.h"
 
 struct _CajaDesktopIconFilePrivate
 {
     CajaDesktopLink *link;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaDesktopIconFile, caja_desktop_icon_file, CAJA_TYPE_FILE)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaDesktopIconFile, baul_desktop_icon_file, CAJA_TYPE_FILE)
 
 
 static void
@@ -54,7 +54,7 @@ desktop_icon_file_monitor_add (CajaFile *file,
                                gconstpointer client,
                                CajaFileAttributes attributes)
 {
-    caja_directory_monitor_add_internal
+    baul_directory_monitor_add_internal
     (file->details->directory, file,
      client, TRUE, attributes, NULL, NULL);
 }
@@ -63,7 +63,7 @@ static void
 desktop_icon_file_monitor_remove (CajaFile *file,
                                   gconstpointer client)
 {
-    caja_directory_monitor_remove_internal
+    baul_directory_monitor_remove_internal
     (file->details->directory, file, client);
 }
 
@@ -73,7 +73,7 @@ desktop_icon_file_call_when_ready (CajaFile *file,
                                    CajaFileCallback callback,
                                    gpointer callback_data)
 {
-    caja_directory_call_when_ready_internal
+    baul_directory_call_when_ready_internal
     (file->details->directory, file,
      attributes, FALSE, NULL, callback, callback_data);
 }
@@ -83,7 +83,7 @@ desktop_icon_file_cancel_call_when_ready (CajaFile *file,
         CajaFileCallback callback,
         gpointer callback_data)
 {
-    caja_directory_cancel_callback_internal
+    baul_directory_cancel_callback_internal
     (file->details->directory, file,
      NULL, callback, callback_data);
 }
@@ -92,7 +92,7 @@ static gboolean
 desktop_icon_file_check_if_ready (CajaFile *file,
                                   CajaFileAttributes attributes)
 {
-    return caja_directory_check_if_ready_internal
+    return baul_directory_check_if_ready_internal
            (file->details->directory, file,
             attributes);
 }
@@ -154,7 +154,7 @@ desktop_icon_file_get_date (CajaFile *file,
 
     desktop_file = CAJA_DESKTOP_ICON_FILE (file);
 
-    return caja_desktop_link_get_date (desktop_file->details->link,
+    return baul_desktop_link_get_date (desktop_file->details->link,
                                        date_type, date);
 }
 
@@ -165,9 +165,9 @@ desktop_icon_file_get_where_string (CajaFile *file)
 }
 
 static void
-caja_desktop_icon_file_init (CajaDesktopIconFile *desktop_file)
+baul_desktop_icon_file_init (CajaDesktopIconFile *desktop_file)
 {
-    desktop_file->details =	caja_desktop_icon_file_get_instance_private (desktop_file);
+    desktop_file->details =	baul_desktop_icon_file_get_instance_private (desktop_file);
 }
 
 static void
@@ -188,7 +188,7 @@ update_info_from_link (CajaDesktopIconFile *icon_file)
     }
 
     g_clear_pointer (&file->details->mime_type, g_ref_string_release);
-    file->details->mime_type = g_ref_string_new_intern ("application/x-caja-link");
+    file->details->mime_type = g_ref_string_new_intern ("application/x-baul-link");
     file->details->type = G_FILE_TYPE_SHORTCUT;
     file->details->size = 0;
     file->details->has_permissions = FALSE;
@@ -202,7 +202,7 @@ update_info_from_link (CajaDesktopIconFile *icon_file)
     {
         g_object_unref (file->details->mount);
     }
-    mount = caja_desktop_link_get_mount (link);
+    mount = baul_desktop_link_get_mount (link);
     file->details->mount = mount;
     if (mount)
     {
@@ -212,8 +212,8 @@ update_info_from_link (CajaDesktopIconFile *icon_file)
 
     file->details->file_info_is_up_to_date = TRUE;
 
-    display_name = caja_desktop_link_get_display_name (link);
-    caja_file_set_display_name (file,
+    display_name = baul_desktop_link_get_display_name (link);
+    baul_file_set_display_name (file,
                                 display_name, NULL, TRUE);
     g_free (display_name);
 
@@ -221,9 +221,9 @@ update_info_from_link (CajaDesktopIconFile *icon_file)
     {
         g_object_unref (file->details->icon);
     }
-    file->details->icon = caja_desktop_link_get_icon (link);
+    file->details->icon = baul_desktop_link_get_icon (link);
     g_free (file->details->activation_uri);
-    file->details->activation_uri = caja_desktop_link_get_activation_uri (link);
+    file->details->activation_uri = baul_desktop_link_get_activation_uri (link);
     file->details->got_link_info = TRUE;
     file->details->link_info_is_up_to_date = TRUE;
 
@@ -233,17 +233,17 @@ update_info_from_link (CajaDesktopIconFile *icon_file)
 }
 
 void
-caja_desktop_icon_file_update (CajaDesktopIconFile *icon_file)
+baul_desktop_icon_file_update (CajaDesktopIconFile *icon_file)
 {
     CajaFile *file;
 
     update_info_from_link (icon_file);
     file = CAJA_FILE (icon_file);
-    caja_file_changed (file);
+    baul_file_changed (file);
 }
 
 void
-caja_desktop_icon_file_remove (CajaDesktopIconFile *icon_file)
+baul_desktop_icon_file_remove (CajaDesktopIconFile *icon_file)
 {
     CajaFile *file;
     GList list;
@@ -256,7 +256,7 @@ caja_desktop_icon_file_remove (CajaDesktopIconFile *icon_file)
      * mark the file gone below, but we need to keep a ref at
      * least long enough to send the change notification.
      */
-    caja_file_ref (file);
+    baul_file_ref (file);
 
     file->details->is_gone = TRUE;
 
@@ -264,14 +264,14 @@ caja_desktop_icon_file_remove (CajaDesktopIconFile *icon_file)
     list.next = NULL;
     list.prev = NULL;
 
-    caja_directory_remove_file (file->details->directory, file);
-    caja_directory_emit_change_signals (file->details->directory, &list);
+    baul_directory_remove_file (file->details->directory, file);
+    baul_directory_emit_change_signals (file->details->directory, &list);
 
-    caja_file_unref (file);
+    baul_file_unref (file);
 }
 
 CajaDesktopIconFile *
-caja_desktop_icon_file_new (CajaDesktopLink *link)
+baul_desktop_icon_file_new (CajaDesktopLink *link)
 {
     CajaFile *file;
     CajaDirectory *directory;
@@ -279,7 +279,7 @@ caja_desktop_icon_file_new (CajaDesktopLink *link)
     GList list;
     char *name;
 
-    directory = caja_directory_get_by_uri (EEL_DESKTOP_URI);
+    directory = baul_directory_get_by_uri (EEL_DESKTOP_URI);
 
     file = CAJA_FILE (g_object_new (CAJA_TYPE_DESKTOP_ICON_FILE, NULL));
 
@@ -293,27 +293,27 @@ caja_desktop_icon_file_new (CajaDesktopLink *link)
     icon_file = CAJA_DESKTOP_ICON_FILE (file);
     icon_file->details->link = link;
 
-    name = caja_desktop_link_get_file_name (link);
+    name = baul_desktop_link_get_file_name (link);
     file->details->name = g_ref_string_new (name);
     g_free (name);
 
     update_info_from_link (icon_file);
 
-    caja_desktop_update_metadata_from_keyfile (file, file->details->name);
+    baul_desktop_update_metadata_from_keyfile (file, file->details->name);
 
-    caja_directory_add_file (directory, file);
+    baul_directory_add_file (directory, file);
 
     list.data = file;
     list.next = NULL;
     list.prev = NULL;
-    caja_directory_emit_files_added (directory, &list);
+    baul_directory_emit_files_added (directory, &list);
 
     return icon_file;
 }
 
 /* Note: This can return NULL if the link was recently removed (i.e. unmounted) */
 CajaDesktopLink *
-caja_desktop_icon_file_get_link (CajaDesktopIconFile *icon_file)
+baul_desktop_icon_file_get_link (CajaDesktopIconFile *icon_file)
 {
     if (icon_file->details->link)
         return g_object_ref (icon_file->details->link);
@@ -322,7 +322,7 @@ caja_desktop_icon_file_get_link (CajaDesktopIconFile *icon_file)
 }
 
 static void
-caja_desktop_icon_file_unmount (CajaFile                   *file,
+baul_desktop_icon_file_unmount (CajaFile                   *file,
                                 GMountOperation                *mount_op,
                                 GCancellable                   *cancellable,
                                 CajaFileOperationCallback   callback,
@@ -335,17 +335,17 @@ caja_desktop_icon_file_unmount (CajaFile                   *file,
     {
         GMount *mount;
 
-        mount = caja_desktop_link_get_mount (desktop_file->details->link);
+        mount = baul_desktop_link_get_mount (desktop_file->details->link);
         if (mount != NULL)
         {
-            caja_file_operations_unmount_mount (NULL, mount, FALSE, TRUE);
+            baul_file_operations_unmount_mount (NULL, mount, FALSE, TRUE);
         }
     }
 
 }
 
 static void
-caja_desktop_icon_file_eject (CajaFile                   *file,
+baul_desktop_icon_file_eject (CajaFile                   *file,
                               GMountOperation                *mount_op,
                               GCancellable                   *cancellable,
                               CajaFileOperationCallback   callback,
@@ -358,32 +358,32 @@ caja_desktop_icon_file_eject (CajaFile                   *file,
     {
         GMount *mount;
 
-        mount = caja_desktop_link_get_mount (desktop_file->details->link);
+        mount = baul_desktop_link_get_mount (desktop_file->details->link);
         if (mount != NULL)
         {
-            caja_file_operations_unmount_mount (NULL, mount, TRUE, TRUE);
+            baul_file_operations_unmount_mount (NULL, mount, TRUE, TRUE);
         }
     }
 }
 
 static void
-caja_desktop_icon_file_set_metadata (CajaFile           *file,
+baul_desktop_icon_file_set_metadata (CajaFile           *file,
                                      const char             *key,
                                      const char             *value)
 {
-    caja_desktop_set_metadata_string (file, file->details->name, key, value);
+    baul_desktop_set_metadata_string (file, file->details->name, key, value);
 }
 
 static void
-caja_desktop_icon_file_set_metadata_as_list (CajaFile           *file,
+baul_desktop_icon_file_set_metadata_as_list (CajaFile           *file,
         const char             *key,
         char                  **value)
 {
-    caja_desktop_set_metadata_stringv (file, file->details->name, key, (const gchar **) value);
+    baul_desktop_set_metadata_stringv (file, file->details->name, key, (const gchar **) value);
 }
 
 static void
-caja_desktop_icon_file_class_init (CajaDesktopIconFileClass *klass)
+baul_desktop_icon_file_class_init (CajaDesktopIconFileClass *klass)
 {
     CajaFileClass *file_class;
 
@@ -400,8 +400,8 @@ caja_desktop_icon_file_class_init (CajaDesktopIconFileClass *klass)
     file_class->get_deep_counts = desktop_icon_file_get_deep_counts;
     file_class->get_date = desktop_icon_file_get_date;
     file_class->get_where_string = desktop_icon_file_get_where_string;
-    file_class->set_metadata = caja_desktop_icon_file_set_metadata;
-    file_class->set_metadata_as_list = caja_desktop_icon_file_set_metadata_as_list;
-    file_class->unmount = caja_desktop_icon_file_unmount;
-    file_class->eject = caja_desktop_icon_file_eject;
+    file_class->set_metadata = baul_desktop_icon_file_set_metadata;
+    file_class->set_metadata_as_list = baul_desktop_icon_file_set_metadata_as_list;
+    file_class->unmount = baul_desktop_icon_file_unmount;
+    file_class->eject = baul_desktop_icon_file_eject;
 }

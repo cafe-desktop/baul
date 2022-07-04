@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-monitor.h: file and directory change monitoring for caja
+   baul-monitor.h: file and directory change monitoring for baul
 
    Copyright (C) 2000, 2001 Eazel, Inc.
 
@@ -31,8 +31,8 @@
 
 typedef struct CajaMonitor CajaMonitor;
 
-gboolean         caja_monitor_active    (void);
-CajaMonitor *caja_monitor_directory (GFile *location);
-void             caja_monitor_cancel    (CajaMonitor *monitor);
+gboolean         baul_monitor_active    (void);
+CajaMonitor *baul_monitor_directory (GFile *location);
+void             baul_monitor_cancel    (CajaMonitor *monitor);
 
 #endif /* CAJA_MONITOR_H */

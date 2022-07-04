@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: nil; c-basic-offset: 4; tab-width: 4 -*-
 
-   caja-view-factory.c: register and create CajaViews
+   baul-view-factory.c: register and create CajaViews
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -22,22 +22,22 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#include "caja-view-factory.h"
+#include "baul-view-factory.h"
 
 static GList *registered_views;
 
 void
-caja_view_factory_register (CajaViewInfo *view_info)
+baul_view_factory_register (CajaViewInfo *view_info)
 {
     g_return_if_fail (view_info != NULL);
     g_return_if_fail (view_info->id != NULL);
-    g_return_if_fail (caja_view_factory_lookup (view_info->id) == NULL);
+    g_return_if_fail (baul_view_factory_lookup (view_info->id) == NULL);
 
     registered_views = g_list_append (registered_views, view_info);
 }
 
 const CajaViewInfo *
-caja_view_factory_lookup (const char *id)
+baul_view_factory_lookup (const char *id)
 {
     GList *l;
     CajaViewInfo *view_info = NULL;
@@ -58,13 +58,13 @@ caja_view_factory_lookup (const char *id)
 }
 
 CajaView *
-caja_view_factory_create (const char *id,
+baul_view_factory_create (const char *id,
                           CajaWindowSlotInfo *slot)
 {
     const CajaViewInfo *view_info;
     CajaView *view;
 
-    view_info = caja_view_factory_lookup (id);
+    view_info = baul_view_factory_lookup (id);
     if (view_info == NULL)
     {
         return NULL;
@@ -79,7 +79,7 @@ caja_view_factory_create (const char *id,
 }
 
 gboolean
-caja_view_factory_view_supports_uri (const char *id,
+baul_view_factory_view_supports_uri (const char *id,
                                      GFile *location,
                                      GFileType file_type,
                                      const char *mime_type)
@@ -88,7 +88,7 @@ caja_view_factory_view_supports_uri (const char *id,
     char *uri;
     gboolean res;
 
-    view_info = caja_view_factory_lookup (id);
+    view_info = baul_view_factory_lookup (id);
     if (view_info == NULL)
     {
         return FALSE;
@@ -101,7 +101,7 @@ caja_view_factory_view_supports_uri (const char *id,
 }
 
 GList *
-caja_view_factory_get_views_for_uri (const char *uri,
+baul_view_factory_get_views_for_uri (const char *uri,
                                      GFileType file_type,
                                      const char *mime_type)
 {

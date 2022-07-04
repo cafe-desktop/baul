@@ -1,3 +1,3 @@
-SUBDIRS = libcaja-extension
+SUBDIRS = libbaul-extension
 
 -include $(top_srcdir)/git.mk

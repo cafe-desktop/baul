@@ -25,9 +25,9 @@
 #define CAJA_LOCATION_DIALOG_H
 
 #include <gtk/gtk.h>
-#include "caja-window.h"
+#include "baul-window.h"
 
-#define CAJA_TYPE_LOCATION_DIALOG         (caja_location_dialog_get_type ())
+#define CAJA_TYPE_LOCATION_DIALOG         (baul_location_dialog_get_type ())
 #define CAJA_LOCATION_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_LOCATION_DIALOG, CajaLocationDialog))
 #define CAJA_LOCATION_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_LOCATION_DIALOG, CajaLocationDialogClass))
 #define CAJA_IS_LOCATION_DIALOG(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_LOCATION_DIALOG)
@@ -47,9 +47,9 @@ struct _CajaLocationDialogClass
     GtkDialogClass parent_class;
 };
 
-GType      caja_location_dialog_get_type     (void);
-GtkWidget* caja_location_dialog_new          (CajaWindow         *window);
-void       caja_location_dialog_set_location (CajaLocationDialog *dialog,
+GType      baul_location_dialog_get_type     (void);
+GtkWidget* baul_location_dialog_new          (CajaWindow         *window);
+void       baul_location_dialog_set_location (CajaLocationDialog *dialog,
         const char             *location);
 
 #endif /* CAJA_LOCATION_DIALOG_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-sidebar-provider.c: register and create CajaSidebars
+   baul-sidebar-provider.c: register and create CajaSidebars
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -23,15 +23,15 @@
 */
 
 #include <string.h>
-#include "caja-sidebar-provider.h"
+#include "baul-sidebar-provider.h"
 
 static void
-caja_sidebar_provider_base_init (gpointer g_class)
+baul_sidebar_provider_base_init (gpointer g_class)
 {
 }
 
 GType
-caja_sidebar_provider_get_type (void)
+baul_sidebar_provider_get_type (void)
 {
     static GType type = 0;
 
@@ -40,7 +40,7 @@ caja_sidebar_provider_get_type (void)
         const GTypeInfo info =
         {
             sizeof (CajaSidebarProviderIface),
-            caja_sidebar_provider_base_init,
+            baul_sidebar_provider_base_init,
             NULL,
             NULL,
             NULL,
@@ -60,7 +60,7 @@ caja_sidebar_provider_get_type (void)
 }
 
 CajaSidebar *
-caja_sidebar_provider_create (CajaSidebarProvider *provider,
+baul_sidebar_provider_create (CajaSidebarProvider *provider,
                               CajaWindowInfo  *window)
 {
     return (* CAJA_SIDEBAR_PROVIDER_GET_IFACE (provider)->create) (provider, window);
@@ -68,7 +68,7 @@ caja_sidebar_provider_create (CajaSidebarProvider *provider,
 
 
 GList *
-caja_list_sidebar_providers (void)
+baul_list_sidebar_providers (void)
 {
     return NULL;
 }

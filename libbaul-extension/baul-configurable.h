@@ -1,5 +1,5 @@
 /*
- *  caja-configurable.c - Interface for configuration
+ *  baul-configurable.c - Interface for configuration
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -18,7 +18,7 @@
  *  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  *  Author: 20kdc <gamemanj@hotmail.co.uk>
- *  Based on caja-menu-provider.h by Dave Camp <dave@ximian.com>
+ *  Based on baul-menu-provider.h by Dave Camp <dave@ximian.com>
  *
  */
 
@@ -31,13 +31,13 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include "caja-extension-types.h"
-#include "caja-file-info.h"
-#include "caja-menu.h"
+#include "baul-extension-types.h"
+#include "baul-file-info.h"
+#include "baul-menu.h"
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_CONFIGURABLE           (caja_configurable_get_type ())
+#define CAJA_TYPE_CONFIGURABLE           (baul_configurable_get_type ())
 #define CAJA_CONFIGURABLE(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_CONFIGURABLE, CajaConfigurable))
 #define CAJA_IS_CONFIGURABLE(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_CONFIGURABLE))
 #define CAJA_CONFIGURABLE_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_CONFIGURABLE, CajaConfigurableIface))
@@ -60,8 +60,8 @@ struct _CajaConfigurableIface {
 };
 
 /* Interface Functions */
-GType caja_configurable_get_type   (void);
-void  caja_configurable_run_config (CajaConfigurable *provider);
+GType baul_configurable_get_type   (void);
+void  baul_configurable_run_config (CajaConfigurable *provider);
 
 G_END_DECLS
 

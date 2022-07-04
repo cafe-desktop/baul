@@ -1,5 +1,5 @@
 /*
- *  caja-property-page.h - Property pages exported by
+ *  baul-property-page.h - Property pages exported by
  *                             CajaPropertyProvider objects.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -27,11 +27,11 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include "caja-extension-types.h"
+#include "baul-extension-types.h"
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_PROPERTY_PAGE            (caja_property_page_get_type())
+#define CAJA_TYPE_PROPERTY_PAGE            (baul_property_page_get_type())
 #define CAJA_PROPERTY_PAGE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PROPERTY_PAGE, CajaPropertyPage))
 #define CAJA_PROPERTY_PAGE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_PROPERTY_PAGE, CajaPropertyPageClass))
 #define CAJA_IS_PROPERTY_PAGE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_PROPERTY_PAGE))
@@ -52,8 +52,8 @@ struct _CajaPropertyPageClass {
     GObjectClass parent;
 };
 
-GType             caja_property_page_get_type  (void);
-CajaPropertyPage *caja_property_page_new       (const char *name,
+GType             baul_property_page_get_type  (void);
+CajaPropertyPage *baul_property_page_new       (const char *name,
                                                 GtkWidget  *label,
                                                 GtkWidget  *page);
 

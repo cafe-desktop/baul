@@ -5,7 +5,7 @@
 
 +-----------------------------------------------------------------------+
 |                                                                       |
-|                            caja application                           |
+|                            baul application                           |
 |                                                                       |
 |     +----------------------------------------------------------+      |
 |     |                                                          |      |
@@ -36,7 +36,7 @@
 | |                          | | | |                       | | | |                       | |
 | +--------------------------+ | | +-----------------------+ | | +-----------------------+ |
 |                              | |                           | |                           |
-|     caja view component      | |    caja view component    | |    caja view component    |
+|     baul view component      | |    baul view component    | |    baul view component    |
 |                              | |                           | |                           |
 +------------------------------+ +---------------------------+ +---------------------------+
 
@@ -45,12 +45,12 @@
 * Caja Architecture Summary
 
 Caja is a general-purpose shell application for browsing arbitrary
-content. It is implemented as `caja', a container application
+content. It is implemented as `baul', a container application
 which excercises overall control and provides chrome, and a number of
-caja view components. These view components may use the
-`libcaja' library to ease implementation.
+baul view components. These view components may use the
+`libbaul' library to ease implementation.
 
-There are two types of views, content views and meta-views. A caja
+There are two types of views, content views and meta-views. A baul
 window typically has one content view, which is displayed in the main
 area of the window, and several meta-views, which are displayed on the
 left, typically one at a time. The meta-views should be panels that
@@ -60,7 +60,7 @@ navigation aids.
 However, ultimately multiple content views will be available and may
 be switched by using an option menu.
 
-The caja application has a CajaWindow object for each window
+The baul application has a CajaWindow object for each window
 it displays. The CajaWindow object provides various chrome and
 uses a number of CajaView objects to communicate with view
 components. The relationship between CajaWindow and the
@@ -100,7 +100,7 @@ Back or Forward buttons, or the user selecting a bookmark.
 ** A view requests a location change
 
 For a view to initiate a location change, view-specific code in the
-component calls caja_view_frame_request_location_change with the
+component calls baul_view_frame_request_location_change with the
 appropriate arguments. This results in the "request_location_change"
 signal being emitted by the corresponding CajaView object in the
 app, as described above. The CajaWindow has connected to this
@@ -113,18 +113,18 @@ the same window. Either way, control proceeds largely as below.
 
 When a CajaWindow has determined that it should carry out a
 location change or load an initial location, it calls
-`caja_window_change_location'. This routine begins by stopping any
+`baul_window_change_location'. This routine begins by stopping any
 previous in-progress loads. Then it determines the applicable content
 views and meta-views. It then enters a state machine which results in
 updating each view.
 
 When an individual view is being updated, one of two things may
 happen. First, if the same view component is still applicable but the
-location is different, `caja_view_notify_location_change' is
+location is different, `baul_view_notify_location_change' is
 called which causes the "notify_location_change" signal to be emitted
 in the view. If the same view component is no longer applicable, then
 a new CajaView object is created, and the component for the proper
-iid is loaded. Then `caja_view_notify_location_change' is called
+iid is loaded. Then `baul_view_notify_location_change' is called
 to set it's initial location.
 
 
@@ -132,7 +132,7 @@ to set it's initial location.
 
 Caja also has built-in support for viewing locations via MateComponent
 subdocuments and MateComponent controls. This is implemented in the view and
-transparent to the caja application. However, the underlying
+transparent to the baul application. However, the underlying
 architecture is different.
 
 

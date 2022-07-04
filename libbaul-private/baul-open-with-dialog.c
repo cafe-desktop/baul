@@ -35,8 +35,8 @@
 
 #include <eel/eel-stock-dialogs.h>
 
-#include "caja-open-with-dialog.h"
-#include "caja-signaller.h"
+#include "baul-open-with-dialog.h"
+#include "baul-signaller.h"
 
 #define sure_string(s)                    ((const char *)((s)!=NULL?(s):""))
 #define DESKTOP_ENTRY_GROUP		  "Desktop Entry"
@@ -90,10 +90,10 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-G_DEFINE_TYPE (CajaOpenWithDialog, caja_open_with_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (CajaOpenWithDialog, baul_open_with_dialog, GTK_TYPE_DIALOG);
 
 static void
-caja_open_with_dialog_finalize (GObject *object)
+baul_open_with_dialog_finalize (GObject *object)
 {
     CajaOpenWithDialog *dialog;
 
@@ -118,7 +118,7 @@ caja_open_with_dialog_finalize (GObject *object)
 
     g_free (dialog->details);
 
-    G_OBJECT_CLASS (caja_open_with_dialog_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_open_with_dialog_parent_class)->finalize (object);
 }
 
 /* An application is valid if:
@@ -310,7 +310,7 @@ add_or_find_application (CajaOpenWithDialog *dialog)
         g_error_free (error);
     }
 
-    g_signal_emit_by_name (caja_signaller_get_current (),
+    g_signal_emit_by_name (baul_signaller_get_current (),
                            "mime_data_changed");
     return app;
 }
@@ -393,12 +393,12 @@ response_cb (CajaOpenWithDialog *dialog,
 
 
 static void
-caja_open_with_dialog_class_init (CajaOpenWithDialogClass *class)
+baul_open_with_dialog_class_init (CajaOpenWithDialogClass *class)
 {
     GObjectClass *gobject_class;
 
     gobject_class = G_OBJECT_CLASS (class);
-    gobject_class->finalize = caja_open_with_dialog_finalize;
+    gobject_class->finalize = baul_open_with_dialog_finalize;
 
     signals[APPLICATION_SELECTED] =
         g_signal_new ("application_selected",
@@ -557,7 +557,7 @@ get_surface_for_icon (GIcon *icon)
 }
 
 static gboolean
-caja_open_with_dialog_add_icon_idle (CajaOpenWithDialog *dialog)
+baul_open_with_dialog_add_icon_idle (CajaOpenWithDialog *dialog)
 {
     cairo_surface_t *surface;
     GIcon           *icon;
@@ -613,7 +613,7 @@ caja_open_with_dialog_add_icon_idle (CajaOpenWithDialog *dialog)
 
 
 static gboolean
-caja_open_with_search_equal_func (GtkTreeModel *model,
+baul_open_with_search_equal_func (GtkTreeModel *model,
                                   int column,
                                   const char *key,
                                   GtkTreeIter *iter,
@@ -692,7 +692,7 @@ caja_open_with_search_equal_func (GtkTreeModel *model,
 
 
 static gboolean
-caja_open_with_dialog_add_items_idle (CajaOpenWithDialog *dialog)
+baul_open_with_dialog_add_items_idle (CajaOpenWithDialog *dialog)
 {
     GtkCellRenderer   *renderer;
     GtkTreeViewColumn *column;
@@ -744,7 +744,7 @@ caja_open_with_dialog_add_items_idle (CajaOpenWithDialog *dialog)
     gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort),
                                           COLUMN_NAME, GTK_SORT_ASCENDING);
     gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (dialog->details->program_list),
-                                         caja_open_with_search_equal_func,
+                                         baul_open_with_search_equal_func,
                                          NULL, NULL);
 
     renderer = gtk_cell_renderer_pixbuf_new ();
@@ -767,7 +767,7 @@ caja_open_with_dialog_add_items_idle (CajaOpenWithDialog *dialog)
     if (!dialog->details->add_icons_idle_id)
     {
         dialog->details->add_icons_idle_id =
-            g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) caja_open_with_dialog_add_icon_idle,
+            g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) baul_open_with_dialog_add_icon_idle,
                              dialog, NULL);
     }
 
@@ -853,7 +853,7 @@ expander_toggled (GtkWidget *expander, CajaOpenWithDialog *dialog)
 }
 
 static void
-caja_open_with_dialog_init (CajaOpenWithDialog *dialog)
+baul_open_with_dialog_init (CajaOpenWithDialog *dialog)
 {
     GtkWidget *hbox;
     GtkWidget *vbox;
@@ -921,7 +921,7 @@ caja_open_with_dialog_init (CajaOpenWithDialog *dialog)
                       dialog);
 
     dialog->details->add_items_idle_id = g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
-                                         (GSourceFunc) caja_open_with_dialog_add_items_idle,
+                                         (GSourceFunc) baul_open_with_dialog_add_items_idle,
                                          dialog, NULL);
 
 
@@ -1154,7 +1154,7 @@ set_uri_and_type (CajaOpenWithDialog *dialog,
 
 
 static GtkWidget *
-real_caja_open_with_dialog_new (const char *uri,
+real_baul_open_with_dialog_new (const char *uri,
                                 const char *mime_type,
                                 const char *extension,
                                 gboolean add_mode)
@@ -1169,31 +1169,31 @@ real_caja_open_with_dialog_new (const char *uri,
 }
 
 GtkWidget *
-caja_open_with_dialog_new (const char *uri,
+baul_open_with_dialog_new (const char *uri,
                            const char *mime_type,
                            const char *extension)
 {
-    return real_caja_open_with_dialog_new (uri, mime_type, extension, FALSE);
+    return real_baul_open_with_dialog_new (uri, mime_type, extension, FALSE);
 }
 
 GtkWidget *
-caja_add_application_dialog_new (const char *uri,
+baul_add_application_dialog_new (const char *uri,
                                  const char *mime_type)
 {
     CajaOpenWithDialog *dialog;
 
-    dialog = CAJA_OPEN_WITH_DIALOG (real_caja_open_with_dialog_new (uri, mime_type, NULL, TRUE));
+    dialog = CAJA_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (uri, mime_type, NULL, TRUE));
 
     return GTK_WIDGET (dialog);
 }
 
 GtkWidget *
-caja_add_application_dialog_new_for_multiple_files (const char *extension,
+baul_add_application_dialog_new_for_multiple_files (const char *extension,
         const char *mime_type)
 {
     CajaOpenWithDialog *dialog;
 
-    dialog = CAJA_OPEN_WITH_DIALOG (real_caja_open_with_dialog_new (NULL, mime_type, extension, TRUE));
+    dialog = CAJA_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (NULL, mime_type, extension, TRUE));
 
     return GTK_WIDGET (dialog);
 }

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/*  caja-side-pane.c
+/*  baul-side-pane.c
  *
  *  Copyright (C) 2002 Ximian, Inc.
  *
@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_SIDE_PANE caja_side_pane_get_type()
+#define CAJA_TYPE_SIDE_PANE baul_side_pane_get_type()
 #define CAJA_SIDE_PANE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SIDE_PANE, CajaSidePane))
 #define CAJA_SIDE_PANE_CLASS(klass) \
@@ -57,21 +57,21 @@ G_BEGIN_DECLS
                              GtkWidget *child);
     } CajaSidePaneClass;
 
-    GType                  caja_side_pane_get_type        (void);
-    CajaSidePane      *caja_side_pane_new             (void);
-    void                   caja_side_pane_add_panel       (CajaSidePane *side_pane,
+    GType                  baul_side_pane_get_type        (void);
+    CajaSidePane      *baul_side_pane_new             (void);
+    void                   baul_side_pane_add_panel       (CajaSidePane *side_pane,
             GtkWidget        *widget,
             const char       *title,
             const char       *tooltip);
-    void                   caja_side_pane_remove_panel    (CajaSidePane *side_pane,
+    void                   baul_side_pane_remove_panel    (CajaSidePane *side_pane,
             GtkWidget        *widget);
-    void                   caja_side_pane_show_panel      (CajaSidePane *side_pane,
+    void                   baul_side_pane_show_panel      (CajaSidePane *side_pane,
             GtkWidget        *widget);
-    void                   caja_side_pane_set_panel_image (CajaSidePane *side_pane,
+    void                   baul_side_pane_set_panel_image (CajaSidePane *side_pane,
             GtkWidget        *widget,
             GdkPixbuf        *pixbuf);
-    GtkWidget             *caja_side_pane_get_current_panel (CajaSidePane *side_pane);
-    GtkWidget             *caja_side_pane_get_title        (CajaSidePane *side_pane);
+    GtkWidget             *baul_side_pane_get_current_panel (CajaSidePane *side_pane);
+    GtkWidget             *baul_side_pane_get_title        (CajaSidePane *side_pane);
 
 G_END_DECLS
 

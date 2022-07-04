@@ -23,7 +23,7 @@
  * Author: Dave Camp <dave@ximian.com>
  */
 
-/* caja-tree-view-drag-dest.h: Handles drag and drop for treeviews which
+/* baul-tree-view-drag-dest.h: Handles drag and drop for treeviews which
  *                                 contain a hierarchy of files
  */
 
@@ -32,13 +32,13 @@
 
 #include <gtk/gtk.h>
 
-#include "caja-file.h"
+#include "baul-file.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define CAJA_TYPE_TREE_VIEW_DRAG_DEST	(caja_tree_view_drag_dest_get_type ())
+#define CAJA_TYPE_TREE_VIEW_DRAG_DEST	(baul_tree_view_drag_dest_get_type ())
 #define CAJA_TREE_VIEW_DRAG_DEST(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_TREE_VIEW_DRAG_DEST, CajaTreeViewDragDest))
 #define CAJA_TREE_VIEW_DRAG_DEST_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_TREE_VIEW_DRAG_DEST, CajaTreeViewDragDestClass))
 #define CAJA_IS_TREE_VIEW_DRAG_DEST(obj)		(G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_TREE_VIEW_DRAG_DEST))
@@ -96,8 +96,8 @@ extern "C" {
                                 int y);
     };
 
-    GType                     caja_tree_view_drag_dest_get_type (void);
-    CajaTreeViewDragDest *caja_tree_view_drag_dest_new      (GtkTreeView *tree_view);
+    GType                     baul_tree_view_drag_dest_get_type (void);
+    CajaTreeViewDragDest *baul_tree_view_drag_dest_new      (GtkTreeView *tree_view);
 
 #ifdef __cplusplus
 }

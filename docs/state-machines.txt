@@ -50,7 +50,7 @@ A "*" means that this is illegal but non-fatal, so we want to use g_warning.
 	  ----------------------------------------|-----|-----|-----|-----|-----|-----|-----|
 	  stop activation                         |  E  |  E  |  X  |  X  |  X  |  X  | ?2  |
 	  ----------------------------------------|-----|-----|-----|-----|-----|-----|-----|
-          caja_view_frame_load_location call  |  X  |  F  |  W  |  W  |  W  |  W  | ?2  |
+          baul_view_frame_load_location call  |  X  |  F  |  W  |  W  |  W  |  W  | ?2  |
           ----------------------------------------|-----|-----|-----|-----|-----|-----|-----|
           open_location call from component       |  X  |  X  |  N* |  U  |  U  |  L  |  X  |
           ----------------------------------------|-----|-----|-----|-----|-----|-----|-----|

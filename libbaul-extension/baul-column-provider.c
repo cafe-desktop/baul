@@ -1,5 +1,5 @@
 /*
- *  caja-column-provider.c - Interface for Caja extensions
+ *  baul-column-provider.c - Interface for Caja extensions
  *                               that provide column specifications.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -23,34 +23,34 @@
  */
 
 #include <config.h>
-#include "caja-column-provider.h"
+#include "baul-column-provider.h"
 
 #include <glib-object.h>
 
 /**
- * SECTION:caja-column-provider
+ * SECTION:baul-column-provider
  * @title: CajaColumnProvider
  * @short_description: Interface to provide additional list view columns
- * @include: libcaja-extension/caja-column-provider.h
+ * @include: libbaul-extension/baul-column-provider.h
  *
  * #CajaColumnProvider allows extension to provide additional columns
  * in the file manager list view.
  */
 
 static void
-caja_column_provider_base_init (gpointer g_class)
+baul_column_provider_base_init (gpointer g_class)
 {
 }
 
 GType
-caja_column_provider_get_type (void)
+baul_column_provider_get_type (void)
 {
     static GType type = 0;
 
     if (!type) {
         const GTypeInfo info = {
             sizeof (CajaColumnProviderIface),
-            caja_column_provider_base_init,
+            baul_column_provider_base_init,
             NULL,
             NULL,
             NULL,
@@ -70,13 +70,13 @@ caja_column_provider_get_type (void)
 }
 
 /**
- * caja_column_provider_get_columns:
+ * baul_column_provider_get_columns:
  * @provider: a #CajaColumnProvider
  *
  * Returns: (element-type CajaColumn) (transfer full): the provided #CajaColumn objects
  */
 GList *
-caja_column_provider_get_columns (CajaColumnProvider *provider)
+baul_column_provider_get_columns (CajaColumnProvider *provider)
 {
     g_return_val_if_fail (CAJA_IS_COLUMN_PROVIDER (provider), NULL);
     g_return_val_if_fail (CAJA_COLUMN_PROVIDER_GET_IFACE (provider)->get_columns != NULL, NULL);

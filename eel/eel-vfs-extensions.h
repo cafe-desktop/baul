@@ -36,8 +36,8 @@ extern "C" {
 #endif
 
 #define	EEL_TRASH_URI "trash:"
-#define EEL_DESKTOP_URI "x-caja-desktop:"
-#define EEL_SEARCH_URI "x-caja-search:"
+#define EEL_DESKTOP_URI "x-baul-desktop:"
+#define EEL_SEARCH_URI "x-baul-search:"
 
     gboolean eel_uri_is_trash(const char* uri);
     gboolean eel_uri_is_trash_folder(const char* uri);

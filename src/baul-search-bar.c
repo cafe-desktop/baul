@@ -29,9 +29,9 @@
 
 #include <eel/eel-gtk-macros.h>
 
-#include <libcaja-private/caja-clipboard.h>
+#include <libbaul-private/baul-clipboard.h>
 
-#include "caja-search-bar.h"
+#include "baul-search-bar.h"
 
 struct CajaSearchBarDetails
 {
@@ -49,11 +49,11 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static void  caja_search_bar_class_init       (CajaSearchBarClass *class);
-static void  caja_search_bar_init             (CajaSearchBar      *bar);
+static void  baul_search_bar_class_init       (CajaSearchBarClass *class);
+static void  baul_search_bar_init             (CajaSearchBar      *bar);
 
 EEL_CLASS_BOILERPLATE (CajaSearchBar,
-                       caja_search_bar,
+                       baul_search_bar,
                        GTK_TYPE_EVENT_BOX)
 
 
@@ -70,7 +70,7 @@ finalize (GObject *object)
 }
 
 static void
-caja_search_bar_class_init (CajaSearchBarClass *class)
+baul_search_bar_class_init (CajaSearchBarClass *class)
 {
     GObjectClass *gobject_class;
     GtkBindingSet *binding_set;
@@ -152,14 +152,14 @@ focus_in_event_callback (GtkWidget *widget,
 }
 
 static void
-caja_search_bar_init (CajaSearchBar *bar)
+baul_search_bar_init (CajaSearchBar *bar)
 {
     GtkWidget *hbox;
     GtkWidget *label;
     GtkStyleContext *context;
 
     context = gtk_widget_get_style_context (GTK_WIDGET (bar));
-    gtk_style_context_add_class (context, "caja-search-bar");
+    gtk_style_context_add_class (context, "baul-search-bar");
 
     bar->details = g_new0 (CajaSearchBarDetails, 1);
 
@@ -193,7 +193,7 @@ caja_search_bar_init (CajaSearchBar *bar)
 }
 
 GtkWidget *
-caja_search_bar_borrow_entry (CajaSearchBar *bar)
+baul_search_bar_borrow_entry (CajaSearchBar *bar)
 {
     GtkBindingSet *binding_set;
 
@@ -205,7 +205,7 @@ caja_search_bar_borrow_entry (CajaSearchBar *bar)
 }
 
 void
-caja_search_bar_return_entry (CajaSearchBar *bar)
+baul_search_bar_return_entry (CajaSearchBar *bar)
 {
     GtkBindingSet *binding_set;
 
@@ -216,7 +216,7 @@ caja_search_bar_return_entry (CajaSearchBar *bar)
 }
 
 GtkWidget *
-caja_search_bar_new (CajaWindow *window)
+baul_search_bar_new (CajaWindow *window)
 {
     GtkWidget *bar;
     CajaSearchBar *search_bar;
@@ -225,16 +225,16 @@ caja_search_bar_new (CajaWindow *window)
     search_bar = CAJA_SEARCH_BAR(bar);
 
     /* Clipboard */
-    caja_clipboard_set_up_editable
+    baul_clipboard_set_up_editable
     (GTK_EDITABLE (search_bar->details->entry),
-     caja_window_get_ui_manager (window),
+     baul_window_get_ui_manager (window),
      FALSE);
 
     return bar;
 }
 
 CajaQuery *
-caja_search_bar_get_query (CajaSearchBar *bar)
+baul_search_bar_get_query (CajaSearchBar *bar)
 {
     const char *query_text;
     CajaQuery *query;
@@ -247,20 +247,20 @@ caja_search_bar_get_query (CajaSearchBar *bar)
         return NULL;
     }
 
-    query = caja_query_new ();
-    caja_query_set_text (query, query_text);
+    query = baul_query_new ();
+    baul_query_set_text (query, query_text);
 
     return query;
 }
 
 void
-caja_search_bar_grab_focus (CajaSearchBar *bar)
+baul_search_bar_grab_focus (CajaSearchBar *bar)
 {
     gtk_widget_grab_focus (bar->details->entry);
 }
 
 void
-caja_search_bar_clear (CajaSearchBar *bar)
+baul_search_bar_clear (CajaSearchBar *bar)
 {
     gtk_entry_set_text (GTK_ENTRY (bar->details->entry), "");
 }

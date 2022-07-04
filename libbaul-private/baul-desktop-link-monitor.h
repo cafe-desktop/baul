@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-desktop-link-monitor.h: singleton that manages the desktop links
+   baul-desktop-link-monitor.h: singleton that manages the desktop links
 
    Copyright (C) 2003 Red Hat, Inc.
 
@@ -27,9 +27,9 @@
 
 #include <gtk/gtk.h>
 
-#include "caja-desktop-link.h"
+#include "baul-desktop-link.h"
 
-#define CAJA_TYPE_DESKTOP_LINK_MONITOR caja_desktop_link_monitor_get_type()
+#define CAJA_TYPE_DESKTOP_LINK_MONITOR baul_desktop_link_monitor_get_type()
 #define CAJA_DESKTOP_LINK_MONITOR(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitor))
 #define CAJA_DESKTOP_LINK_MONITOR_CLASS(klass) \
@@ -54,12 +54,12 @@ typedef struct
     GObjectClass parent_slot;
 } CajaDesktopLinkMonitorClass;
 
-GType   caja_desktop_link_monitor_get_type (void);
+GType   baul_desktop_link_monitor_get_type (void);
 
-CajaDesktopLinkMonitor *   caja_desktop_link_monitor_get (void);
+CajaDesktopLinkMonitor *   baul_desktop_link_monitor_get (void);
 
-/* Used by caja-desktop-link.c */
-char * caja_desktop_link_monitor_make_filename_unique (CajaDesktopLinkMonitor *monitor,
+/* Used by baul-desktop-link.c */
+char * baul_desktop_link_monitor_make_filename_unique (CajaDesktopLinkMonitor *monitor,
         const char *filename);
 
 #endif /* CAJA_DESKTOP_LINK_MONITOR_H */

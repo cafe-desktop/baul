@@ -28,9 +28,9 @@
 
 #include <eel/eel-canvas.h>
 
-#include "caja-icon-info.h"
+#include "baul-icon-info.h"
 
-#define CAJA_TYPE_ICON_CONTAINER caja_icon_container_get_type()
+#define CAJA_TYPE_ICON_CONTAINER baul_icon_container_get_type()
 #define CAJA_ICON_CONTAINER(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ICON_CONTAINER, CajaIconContainer))
 #define CAJA_ICON_CONTAINER_CLASS(klass) \
@@ -242,120 +242,120 @@ typedef struct
 } CajaIconContainerClass;
 
 /* GtkObject */
-GType             caja_icon_container_get_type                      (void);
-GtkWidget *       caja_icon_container_new                           (void);
+GType             baul_icon_container_get_type                      (void);
+GtkWidget *       baul_icon_container_new                           (void);
 
 
 /* adding, removing, and managing icons */
-void              caja_icon_container_clear                         (CajaIconContainer  *view);
-gboolean          caja_icon_container_add                           (CajaIconContainer  *view,
+void              baul_icon_container_clear                         (CajaIconContainer  *view);
+gboolean          baul_icon_container_add                           (CajaIconContainer  *view,
         CajaIconData       *data);
-void              caja_icon_container_layout_now                    (CajaIconContainer *container);
-gboolean          caja_icon_container_remove                        (CajaIconContainer  *view,
+void              baul_icon_container_layout_now                    (CajaIconContainer *container);
+gboolean          baul_icon_container_remove                        (CajaIconContainer  *view,
         CajaIconData       *data);
-void              caja_icon_container_for_each                      (CajaIconContainer  *view,
+void              baul_icon_container_for_each                      (CajaIconContainer  *view,
         CajaIconCallback    callback,
         gpointer                callback_data);
-void              caja_icon_container_request_update                (CajaIconContainer  *view,
+void              baul_icon_container_request_update                (CajaIconContainer  *view,
         CajaIconData       *data);
-void              caja_icon_container_request_update_all            (CajaIconContainer  *container);
-void              caja_icon_container_reveal                        (CajaIconContainer  *container,
+void              baul_icon_container_request_update_all            (CajaIconContainer  *container);
+void              baul_icon_container_reveal                        (CajaIconContainer  *container,
         CajaIconData       *data);
-gboolean          caja_icon_container_is_empty                      (CajaIconContainer  *container);
-CajaIconData *caja_icon_container_get_first_visible_icon        (CajaIconContainer  *container);
-void              caja_icon_container_scroll_to_icon                (CajaIconContainer  *container,
+gboolean          baul_icon_container_is_empty                      (CajaIconContainer  *container);
+CajaIconData *baul_icon_container_get_first_visible_icon        (CajaIconContainer  *container);
+void              baul_icon_container_scroll_to_icon                (CajaIconContainer  *container,
         CajaIconData       *data);
 
-void              caja_icon_container_begin_loading                 (CajaIconContainer  *container);
-void              caja_icon_container_end_loading                   (CajaIconContainer  *container,
+void              baul_icon_container_begin_loading                 (CajaIconContainer  *container);
+void              baul_icon_container_end_loading                   (CajaIconContainer  *container,
         gboolean                all_icons_added);
 
 /* control the layout */
-gboolean          caja_icon_container_is_auto_layout                (CajaIconContainer  *container);
-void              caja_icon_container_set_auto_layout               (CajaIconContainer  *container,
+gboolean          baul_icon_container_is_auto_layout                (CajaIconContainer  *container);
+void              baul_icon_container_set_auto_layout               (CajaIconContainer  *container,
         gboolean                auto_layout);
-gboolean          caja_icon_container_is_tighter_layout             (CajaIconContainer  *container);
-void              caja_icon_container_set_tighter_layout            (CajaIconContainer  *container,
+gboolean          baul_icon_container_is_tighter_layout             (CajaIconContainer  *container);
+void              baul_icon_container_set_tighter_layout            (CajaIconContainer  *container,
         gboolean                tighter_layout);
 
-gboolean          caja_icon_container_is_keep_aligned               (CajaIconContainer  *container);
-void              caja_icon_container_set_keep_aligned              (CajaIconContainer  *container,
+gboolean          baul_icon_container_is_keep_aligned               (CajaIconContainer  *container);
+void              baul_icon_container_set_keep_aligned              (CajaIconContainer  *container,
         gboolean                keep_aligned);
-void              caja_icon_container_set_layout_mode               (CajaIconContainer  *container,
+void              baul_icon_container_set_layout_mode               (CajaIconContainer  *container,
         CajaIconLayoutMode  mode);
-void              caja_icon_container_set_label_position            (CajaIconContainer  *container,
+void              baul_icon_container_set_label_position            (CajaIconContainer  *container,
         CajaIconLabelPosition pos);
-void              caja_icon_container_sort                          (CajaIconContainer  *container);
-void              caja_icon_container_freeze_icon_positions         (CajaIconContainer  *container);
+void              baul_icon_container_sort                          (CajaIconContainer  *container);
+void              baul_icon_container_freeze_icon_positions         (CajaIconContainer  *container);
 
-int               caja_icon_container_get_max_layout_lines           (CajaIconContainer  *container);
-int               caja_icon_container_get_max_layout_lines_for_pango (CajaIconContainer  *container);
+int               baul_icon_container_get_max_layout_lines           (CajaIconContainer  *container);
+int               baul_icon_container_get_max_layout_lines_for_pango (CajaIconContainer  *container);
 
-void              caja_icon_container_set_highlighted_for_clipboard (CajaIconContainer  *container,
+void              baul_icon_container_set_highlighted_for_clipboard (CajaIconContainer  *container,
         GList                  *clipboard_icon_data);
 
 /* operations on all icons */
-void              caja_icon_container_unselect_all                  (CajaIconContainer  *view);
-void              caja_icon_container_select_all                    (CajaIconContainer  *view);
+void              baul_icon_container_unselect_all                  (CajaIconContainer  *view);
+void              baul_icon_container_select_all                    (CajaIconContainer  *view);
 
 
 /* operations on the selection */
-GList     *       caja_icon_container_get_selection                 (CajaIconContainer  *view);
-void			  caja_icon_container_invert_selection				(CajaIconContainer  *view);
-void              caja_icon_container_set_selection                 (CajaIconContainer  *view,
+GList     *       baul_icon_container_get_selection                 (CajaIconContainer  *view);
+void			  baul_icon_container_invert_selection				(CajaIconContainer  *view);
+void              baul_icon_container_set_selection                 (CajaIconContainer  *view,
         GList                  *selection);
-GArray    *       caja_icon_container_get_selected_icon_locations   (CajaIconContainer  *view);
-gboolean          caja_icon_container_has_stretch_handles           (CajaIconContainer  *container);
-gboolean          caja_icon_container_is_stretched                  (CajaIconContainer  *container);
-void              caja_icon_container_show_stretch_handles          (CajaIconContainer  *container);
-void              caja_icon_container_unstretch                     (CajaIconContainer  *container);
-void              caja_icon_container_start_renaming_selected_item  (CajaIconContainer  *container,
+GArray    *       baul_icon_container_get_selected_icon_locations   (CajaIconContainer  *view);
+gboolean          baul_icon_container_has_stretch_handles           (CajaIconContainer  *container);
+gboolean          baul_icon_container_is_stretched                  (CajaIconContainer  *container);
+void              baul_icon_container_show_stretch_handles          (CajaIconContainer  *container);
+void              baul_icon_container_unstretch                     (CajaIconContainer  *container);
+void              baul_icon_container_start_renaming_selected_item  (CajaIconContainer  *container,
         gboolean                select_all);
 
 /* options */
-CajaZoomLevel caja_icon_container_get_zoom_level                (CajaIconContainer  *view);
-void              caja_icon_container_set_zoom_level                (CajaIconContainer  *view,
+CajaZoomLevel baul_icon_container_get_zoom_level                (CajaIconContainer  *view);
+void              baul_icon_container_set_zoom_level                (CajaIconContainer  *view,
         int                     new_zoom_level);
-void              caja_icon_container_set_single_click_mode         (CajaIconContainer  *container,
+void              baul_icon_container_set_single_click_mode         (CajaIconContainer  *container,
         gboolean                single_click_mode);
-void              caja_icon_container_enable_linger_selection       (CajaIconContainer  *view,
+void              baul_icon_container_enable_linger_selection       (CajaIconContainer  *view,
         gboolean                enable);
-gboolean          caja_icon_container_get_is_fixed_size             (CajaIconContainer  *container);
-void              caja_icon_container_set_is_fixed_size             (CajaIconContainer  *container,
+gboolean          baul_icon_container_get_is_fixed_size             (CajaIconContainer  *container);
+void              baul_icon_container_set_is_fixed_size             (CajaIconContainer  *container,
         gboolean                is_fixed_size);
-gboolean          caja_icon_container_get_is_desktop                (CajaIconContainer  *container);
-void              caja_icon_container_set_is_desktop                (CajaIconContainer  *container,
+gboolean          baul_icon_container_get_is_desktop                (CajaIconContainer  *container);
+void              baul_icon_container_set_is_desktop                (CajaIconContainer  *container,
         gboolean                is_desktop);
-void              caja_icon_container_reset_scroll_region           (CajaIconContainer  *container);
-void              caja_icon_container_set_font                      (CajaIconContainer  *container,
+void              baul_icon_container_reset_scroll_region           (CajaIconContainer  *container);
+void              baul_icon_container_set_font                      (CajaIconContainer  *container,
         const char             *font);
-void              caja_icon_container_set_font_size_table           (CajaIconContainer  *container,
+void              baul_icon_container_set_font_size_table           (CajaIconContainer  *container,
         const int               font_size_table[CAJA_ZOOM_LEVEL_LARGEST + 1]);
-void              caja_icon_container_set_margins                   (CajaIconContainer  *container,
+void              baul_icon_container_set_margins                   (CajaIconContainer  *container,
         int                     left_margin,
         int                     right_margin,
         int                     top_margin,
         int                     bottom_margin);
-void              caja_icon_container_set_use_drop_shadows          (CajaIconContainer  *container,
+void              baul_icon_container_set_use_drop_shadows          (CajaIconContainer  *container,
         gboolean                use_drop_shadows);
-char*             caja_icon_container_get_icon_description          (CajaIconContainer  *container,
+char*             baul_icon_container_get_icon_description          (CajaIconContainer  *container,
         CajaIconData       *data);
-gboolean          caja_icon_container_get_allow_moves               (CajaIconContainer  *container);
-void              caja_icon_container_set_allow_moves               (CajaIconContainer  *container,
+gboolean          baul_icon_container_get_allow_moves               (CajaIconContainer  *container);
+void              baul_icon_container_set_allow_moves               (CajaIconContainer  *container,
         gboolean                allow_moves);
-void		  caja_icon_container_set_forced_icon_size		(CajaIconContainer  *container,
+void		  baul_icon_container_set_forced_icon_size		(CajaIconContainer  *container,
         int                     forced_icon_size);
-void		  caja_icon_container_set_all_columns_same_width	(CajaIconContainer  *container,
+void		  baul_icon_container_set_all_columns_same_width	(CajaIconContainer  *container,
         gboolean                all_columns_same_width);
 
-gboolean	  caja_icon_container_is_layout_rtl			(CajaIconContainer  *container);
-gboolean	  caja_icon_container_is_layout_vertical		(CajaIconContainer  *container);
+gboolean	  baul_icon_container_is_layout_rtl			(CajaIconContainer  *container);
+gboolean	  baul_icon_container_is_layout_vertical		(CajaIconContainer  *container);
 
-gboolean          caja_icon_container_get_store_layout_timestamps   (CajaIconContainer  *container);
-void              caja_icon_container_set_store_layout_timestamps   (CajaIconContainer  *container,
+gboolean          baul_icon_container_get_store_layout_timestamps   (CajaIconContainer  *container);
+void              baul_icon_container_set_store_layout_timestamps   (CajaIconContainer  *container,
         gboolean                store_layout);
 
-void              caja_icon_container_widget_to_file_operation_position (CajaIconContainer *container,
+void              baul_icon_container_widget_to_file_operation_position (CajaIconContainer *container,
         GdkPoint              *position);
 
 

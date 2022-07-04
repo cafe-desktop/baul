@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-thumbnails.h: Thumbnail code for icon factory.
+   baul-thumbnails.h: Thumbnail code for icon factory.
 
    Copyright (C) 2000, 2001 Eazel, Inc.
    Copyright (C) 2002, 2003 Red Hat, Inc.
@@ -43,11 +43,11 @@
 #include <eel/eel-debug.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include "caja-thumbnails.h"
-#include "caja-directory-notify.h"
-#include "caja-global-preferences.h"
-#include "caja-file-utilities.h"
-#include "caja-file-private.h"
+#include "baul-thumbnails.h"
+#include "baul-directory-notify.h"
+#include "baul-global-preferences.h"
+#include "baul-file-utilities.h"
+#include "baul-file-private.h"
 
 /* turn this on to see messages about thumbnail creation */
 #if 0
@@ -188,7 +188,7 @@ thumbnail_thread_starter_cb (gpointer data)
 }
 
 void
-caja_thumbnail_remove_from_queue (const char *file_uri)
+baul_thumbnail_remove_from_queue (const char *file_uri)
 {
 #ifdef DEBUG_THUMBNAILS
     g_message ("(Remove from queue) Locking mutex\n");
@@ -224,7 +224,7 @@ caja_thumbnail_remove_from_queue (const char *file_uri)
 }
 
 void
-caja_thumbnail_prioritize (const char *file_uri)
+baul_thumbnail_prioritize (const char *file_uri)
 {
 #ifdef DEBUG_THUMBNAILS
     g_message ("(Prioritize) Locking mutex\n");
@@ -266,25 +266,25 @@ caja_thumbnail_prioritize (const char *file_uri)
 
 /* This is a one-shot idle callback called from the main loop to call
    notify_file_changed() for a thumbnail. It frees the uri afterwards.
-   We do this in an idle callback as I don't think caja_file_changed() is
+   We do this in an idle callback as I don't think baul_file_changed() is
    thread-safe. */
 static gboolean
 thumbnail_thread_notify_file_changed (gpointer image_uri)
 {
     CajaFile *file;
 
-    file = caja_file_get_by_uri ((char *) image_uri);
+    file = baul_file_get_by_uri ((char *) image_uri);
 #ifdef DEBUG_THUMBNAILS
     g_message ("(Thumbnail Thread) Notifying file changed file:%p uri: %s\n", file, (char*) image_uri);
 #endif
 
     if (file != NULL)
     {
-        caja_file_set_is_thumbnailing (file, FALSE);
-        caja_file_invalidate_attributes (file,
+        baul_file_set_is_thumbnailing (file, FALSE);
+        baul_file_invalidate_attributes (file,
                                          CAJA_FILE_ATTRIBUTE_THUMBNAIL |
                                          CAJA_FILE_ATTRIBUTE_INFO);
-        caja_file_unref (file);
+        baul_file_unref (file);
     }
     g_free (image_uri);
 
@@ -342,25 +342,25 @@ pixbuf_can_load_type (const char *mime_type)
 }
 
 gboolean
-caja_can_thumbnail_internally (CajaFile *file)
+baul_can_thumbnail_internally (CajaFile *file)
 {
     char *mime_type;
     gboolean res;
 
-    mime_type = caja_file_get_mime_type (file);
+    mime_type = baul_file_get_mime_type (file);
     res = pixbuf_can_load_type (mime_type);
     g_free (mime_type);
     return res;
 }
 
 gboolean
-caja_thumbnail_is_mimetype_limited_by_size (const char *mime_type)
+baul_thumbnail_is_mimetype_limited_by_size (const char *mime_type)
 {
     return pixbuf_can_load_type (mime_type);
 }
 
 gboolean
-caja_can_thumbnail (CajaFile *file)
+baul_can_thumbnail (CajaFile *file)
 {
     MateDesktopThumbnailFactory *factory;
     gboolean res;
@@ -368,9 +368,9 @@ caja_can_thumbnail (CajaFile *file)
     time_t mtime;
     char *mime_type;
 
-    uri = caja_file_get_uri (file);
-    mime_type = caja_file_get_mime_type (file);
-    mtime = caja_file_get_mtime (file);
+    uri = baul_file_get_uri (file);
+    mime_type = baul_file_get_mime_type (file);
+    mtime = baul_file_get_mtime (file);
 
     factory = get_thumbnail_factory ();
     res = mate_desktop_thumbnail_factory_can_thumbnail (factory,
@@ -384,17 +384,17 @@ caja_can_thumbnail (CajaFile *file)
 }
 
 void
-caja_create_thumbnail (CajaFile *file)
+baul_create_thumbnail (CajaFile *file)
 {
     time_t file_mtime = 0;
     CajaThumbnailInfo *info;
     GList *existing;
 
-    caja_file_set_is_thumbnailing (file, TRUE);
+    baul_file_set_is_thumbnailing (file, TRUE);
 
     info = g_new0 (CajaThumbnailInfo, 1);
-    info->image_uri = caja_file_get_uri (file);
-    info->mime_type = caja_file_get_mime_type (file);
+    info->image_uri = baul_file_get_uri (file);
+    info->mime_type = baul_file_get_mime_type (file);
 
     /* Hopefully the CajaFile will already have the image file mtime,
        so we can just use that. Otherwise we have to get it ourselves. */
@@ -599,7 +599,7 @@ thumbnail_thread_func (GTask        *task,
                     info->image_uri,
                     current_orig_mtime);
         }
-        /* We need to call caja_file_changed(), but I don't think that is
+        /* We need to call baul_file_changed(), but I don't think that is
            thread safe. So add an idle handler and do it from the main loop. */
         g_idle_add_full (G_PRIORITY_HIGH_IDLE,
                          thumbnail_thread_notify_file_changed,

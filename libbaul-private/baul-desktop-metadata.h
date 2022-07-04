@@ -29,19 +29,19 @@
 
 #include <glib.h>
 
-#include "caja-file.h"
+#include "baul-file.h"
 
-void caja_desktop_set_metadata_string (CajaFile *file,
+void baul_desktop_set_metadata_string (CajaFile *file,
                                        const gchar *name,
                                        const gchar *key,
                                        const gchar *string);
 
-void caja_desktop_set_metadata_stringv (CajaFile *file,
+void baul_desktop_set_metadata_stringv (CajaFile *file,
                                         const char *name,
                                         const char *key,
                                         const char * const *stringv);
 
-gboolean caja_desktop_update_metadata_from_keyfile (CajaFile *file,
+gboolean baul_desktop_update_metadata_from_keyfile (CajaFile *file,
                                                     const gchar *name);
 
 #endif /* __CAJA_DESKTOP_METADATA_H__ */

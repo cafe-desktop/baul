@@ -1,5 +1,5 @@
 /*
- *  caja-configurable.c - Interface for configuration
+ *  baul-configurable.c - Interface for configuration
  *
  *  Copyright (C) 2003 Novell, Inc.
  *
@@ -18,39 +18,39 @@
  *  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  *  Author: 20kdc <gamemanj@hotmail.co.uk>
- *  Based on caja-menu-provider.c by Dave Camp <dave@ximian.com>
+ *  Based on baul-menu-provider.c by Dave Camp <dave@ximian.com>
  *
  */
 
 #include <config.h>
-#include "caja-configurable.h"
+#include "baul-configurable.h"
 
 #include <glib-object.h>
 
 /**
- * SECTION:caja-configurable
+ * SECTION:baul-configurable
  * @title: CajaConfigurable
  * @short_description: Interface to allow an extension to be configured
- * @include: libcaja-extension/caja-configurable.h
+ * @include: libbaul-extension/baul-configurable.h
  *
  * #CajaConfigurable allows an extension to show a configuration page.
  * The presence of CajaConfigurable enables the 'Configure' button.
  */
 
 static void
-caja_configurable_base_init (gpointer g_class)
+baul_configurable_base_init (gpointer g_class)
 {
 }
 
 GType
-caja_configurable_get_type (void)
+baul_configurable_get_type (void)
 {
     static GType type = 0;
 
     if (!type) {
         const GTypeInfo info = {
             sizeof (CajaConfigurableIface),
-            caja_configurable_base_init,
+            baul_configurable_base_init,
             NULL,
             NULL,
             NULL,
@@ -70,11 +70,11 @@ caja_configurable_get_type (void)
 }
 
 /**
- * caja_configurable_run:
+ * baul_configurable_run:
  * @provider: a #CajaConfigurable
  */
 void
-caja_configurable_run_config (CajaConfigurable *provider)
+baul_configurable_run_config (CajaConfigurable *provider)
 {
     if (!CAJA_IS_CONFIGURABLE(provider)) {
         return;

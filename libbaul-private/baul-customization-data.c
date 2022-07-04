@@ -22,7 +22,7 @@
  * Author: Rebecca Schulman <rebecka@eazel.com>
  */
 
-/* caja-customization-data.c - functions to collect and load customization
+/* baul-customization-data.c - functions to collect and load customization
    names and images */
 
 #include <config.h>
@@ -42,8 +42,8 @@
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-xml-extensions.h>
 
-#include "caja-customization-data.h"
-#include "caja-file-utilities.h"
+#include "baul-customization-data.h"
+#include "baul-file-utilities.h"
 
 typedef enum
 {
@@ -118,7 +118,7 @@ read_all_children (char *filename,
 
 
 CajaCustomizationData*
-caja_customization_data_new (const char *customization_name,
+baul_customization_data_new (const char *customization_name,
                              gboolean show_public_customizations,
                              int maximum_icon_height,
                              int maximum_icon_width)
@@ -174,7 +174,7 @@ caja_customization_data_new (const char *customization_name,
     {
         char *temp_str;
 
-        temp_str = caja_pixmap_file ("chit_frame.png");
+        temp_str = baul_pixmap_file ("chit_frame.png");
         if (temp_str != NULL)
         {
             data->pattern_frame = gdk_pixbuf_new_from_file (temp_str, NULL);
@@ -194,7 +194,7 @@ caja_customization_data_new (const char *customization_name,
 }
 
 gboolean
-caja_customization_data_get_next_element_for_display (CajaCustomizationData *data,
+baul_customization_data_get_next_element_for_display (CajaCustomizationData *data,
         char **emblem_name,
         GdkPixbuf **pixbuf_out,
         char **label_out)
@@ -220,7 +220,7 @@ caja_customization_data_get_next_element_for_display (CajaCustomizationData *dat
             }
             data->reading_mode = READ_PRIVATE_CUSTOMIZATIONS;
             data->current_file_list = data->private_file_list;
-            return caja_customization_data_get_next_element_for_display (data,
+            return baul_customization_data_get_next_element_for_display (data,
                     emblem_name,
                     pixbuf_out,
                     label_out);
@@ -240,7 +240,7 @@ caja_customization_data_get_next_element_for_display (CajaCustomizationData *dat
     if (!eel_istr_has_prefix (g_file_info_get_content_type (current_file_info), "image/")
             || eel_istr_has_prefix (g_file_info_get_name (current_file_info), "."))
     {
-        return caja_customization_data_get_next_element_for_display (data,
+        return baul_customization_data_get_next_element_for_display (data,
                 emblem_name,
                 pixbuf_out,
                 label_out);
@@ -257,7 +257,7 @@ caja_customization_data_get_next_element_for_display (CajaCustomizationData *dat
 
     if (orig_pixbuf == NULL)
     {
-        return caja_customization_data_get_next_element_for_display (data,
+        return baul_customization_data_get_next_element_for_display (data,
                 emblem_name,
                 pixbuf_out,
                 label_out);
@@ -270,7 +270,7 @@ caja_customization_data_get_next_element_for_display (CajaCustomizationData *dat
     if (strcmp (data->customization_name, "patterns") == 0 &&
             data->pattern_frame != NULL)
     {
-        pixbuf = caja_customization_make_pattern_chit (orig_pixbuf, data->pattern_frame, FALSE, is_reset_image);
+        pixbuf = baul_customization_make_pattern_chit (orig_pixbuf, data->pattern_frame, FALSE, is_reset_image);
     }
     else
     {
@@ -293,13 +293,13 @@ caja_customization_data_get_next_element_for_display (CajaCustomizationData *dat
 }
 
 gboolean
-caja_customization_data_private_data_was_displayed (CajaCustomizationData *data)
+baul_customization_data_private_data_was_displayed (CajaCustomizationData *data)
 {
     return data->private_data_was_displayed;
 }
 
 void
-caja_customization_data_destroy (CajaCustomizationData *data)
+baul_customization_data_destroy (CajaCustomizationData *data)
 {
     g_assert (data->public_file_list != NULL ||
               data->private_file_list != NULL);
@@ -351,7 +351,7 @@ get_private_customization_path (const char *customization_name)
     char *user_directory;
     char *directory_path;
 
-    user_directory = caja_get_user_directory ();
+    user_directory = baul_get_user_directory ();
     directory_path = g_build_filename (user_directory,
                                        customization_name,
                                        NULL);
@@ -384,7 +384,7 @@ get_file_path_for_mode (const CajaCustomizationData *data,
 
 /* utility to make an attractive pattern image by compositing with a frame */
 GdkPixbuf*
-caja_customization_make_pattern_chit (GdkPixbuf *pattern_tile, GdkPixbuf *frame, gboolean dragging, gboolean is_reset)
+baul_customization_make_pattern_chit (GdkPixbuf *pattern_tile, GdkPixbuf *frame, gboolean dragging, gboolean is_reset)
 {
     GdkPixbuf *pixbuf, *temp_pixbuf;
     int frame_width, frame_height;

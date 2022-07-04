@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
-   caja-trash-monitor.c: Caja trash state watcher.
+   baul-trash-monitor.c: Caja trash state watcher.
 
    Copyright (C) 2000, 2001 Eazel, Inc.
 
@@ -30,11 +30,11 @@
 
 #include <eel/eel-debug.h>
 
-#include "caja-trash-monitor.h"
-#include "caja-directory-notify.h"
-#include "caja-directory.h"
-#include "caja-file-attributes.h"
-#include "caja-icon-names.h"
+#include "baul-trash-monitor.h"
+#include "baul-directory-notify.h"
+#include "baul-directory.h"
+#include "baul-file-attributes.h"
+#include "baul-icon-names.h"
 
 struct _CajaTrashMonitorPrivate
 {
@@ -50,12 +50,12 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-static CajaTrashMonitor *caja_trash_monitor = NULL;
+static CajaTrashMonitor *baul_trash_monitor = NULL;
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaTrashMonitor, caja_trash_monitor, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaTrashMonitor, baul_trash_monitor, G_TYPE_OBJECT)
 
 static void
-caja_trash_monitor_finalize (GObject *object)
+baul_trash_monitor_finalize (GObject *object)
 {
     CajaTrashMonitor *trash_monitor;
 
@@ -70,17 +70,17 @@ caja_trash_monitor_finalize (GObject *object)
         g_object_unref (trash_monitor->details->file_monitor);
     }
 
-    G_OBJECT_CLASS (caja_trash_monitor_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_trash_monitor_parent_class)->finalize (object);
 }
 
 static void
-caja_trash_monitor_class_init (CajaTrashMonitorClass *klass)
+baul_trash_monitor_class_init (CajaTrashMonitorClass *klass)
 {
     GObjectClass *object_class;
 
     object_class = G_OBJECT_CLASS (klass);
 
-    object_class->finalize = caja_trash_monitor_finalize;
+    object_class->finalize = baul_trash_monitor_finalize;
 
     signals[TRASH_STATE_CHANGED] = g_signal_new
                                    ("trash_state_changed",
@@ -179,11 +179,11 @@ file_changed (GFileMonitor* monitor,
 }
 
 static void
-caja_trash_monitor_init (CajaTrashMonitor *trash_monitor)
+baul_trash_monitor_init (CajaTrashMonitor *trash_monitor)
 {
     GFile *location;
 
-    trash_monitor->details = caja_trash_monitor_get_instance_private (trash_monitor);
+    trash_monitor->details = baul_trash_monitor_get_instance_private (trash_monitor);
 
     trash_monitor->details->empty = TRUE;
     trash_monitor->details->icon = g_themed_icon_new (CAJA_ICON_TRASH);
@@ -203,39 +203,39 @@ caja_trash_monitor_init (CajaTrashMonitor *trash_monitor)
 static void
 unref_trash_monitor (void)
 {
-    g_object_unref (caja_trash_monitor);
+    g_object_unref (baul_trash_monitor);
 }
 
 CajaTrashMonitor *
-caja_trash_monitor_get (void)
+baul_trash_monitor_get (void)
 {
-    if (caja_trash_monitor == NULL)
+    if (baul_trash_monitor == NULL)
     {
         /* not running yet, start it up */
 
-        caja_trash_monitor = CAJA_TRASH_MONITOR
+        baul_trash_monitor = CAJA_TRASH_MONITOR
                              (g_object_new (CAJA_TYPE_TRASH_MONITOR, NULL));
         eel_debug_call_at_shutdown (unref_trash_monitor);
     }
 
-    return caja_trash_monitor;
+    return baul_trash_monitor;
 }
 
 gboolean
-caja_trash_monitor_is_empty (void)
+baul_trash_monitor_is_empty (void)
 {
     CajaTrashMonitor *monitor;
 
-    monitor = caja_trash_monitor_get ();
+    monitor = baul_trash_monitor_get ();
     return monitor->details->empty;
 }
 
 GIcon *
-caja_trash_monitor_get_icon (void)
+baul_trash_monitor_get_icon (void)
 {
     CajaTrashMonitor *monitor;
 
-    monitor = caja_trash_monitor_get ();
+    monitor = baul_trash_monitor_get ();
     if (monitor->details->icon)
     {
         return g_object_ref (monitor->details->icon);

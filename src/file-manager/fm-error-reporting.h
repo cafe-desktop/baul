@@ -28,7 +28,7 @@
 
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-file.h>
+#include <libbaul-private/baul-file.h>
 
 void fm_report_error_loading_directory	 (CajaFile   *file,
         GError         *error,

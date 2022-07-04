@@ -29,7 +29,7 @@
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_EMBLEM_SIDEBAR caja_emblem_sidebar_get_type()
+#define CAJA_TYPE_EMBLEM_SIDEBAR baul_emblem_sidebar_get_type()
 #define CAJA_EMBLEM_SIDEBAR(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_EMBLEM_SIDEBAR, CajaEmblemSidebar))
 #define CAJA_EMBLEM_SIDEBAR_CLASS(klass) \
@@ -56,7 +56,7 @@ typedef struct
     GtkBoxClass parent_slot;
 } CajaEmblemSidebarClass;
 
-GType	caja_emblem_sidebar_get_type     (void);
-void    caja_emblem_sidebar_register     (void);
+GType	baul_emblem_sidebar_get_type     (void);
+void    baul_emblem_sidebar_register     (void);
 
 #endif /* CAJA_EMBLEM_SIDEBAR_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-desktop-directory.h: Subclass of CajaDirectory to implement
+   baul-desktop-directory.h: Subclass of CajaDirectory to implement
    a virtual directory consisting of the desktop directory and the desktop
    icons
 
@@ -27,9 +27,9 @@
 #ifndef CAJA_DESKTOP_DIRECTORY_H
 #define CAJA_DESKTOP_DIRECTORY_H
 
-#include "caja-directory.h"
+#include "baul-directory.h"
 
-#define CAJA_TYPE_DESKTOP_DIRECTORY caja_desktop_directory_get_type()
+#define CAJA_TYPE_DESKTOP_DIRECTORY baul_desktop_directory_get_type()
 #define CAJA_DESKTOP_DIRECTORY(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_DIRECTORY, CajaDesktopDirectory))
 #define CAJA_DESKTOP_DIRECTORY_CLASS(klass) \
@@ -55,7 +55,7 @@ typedef struct
 
 } CajaDesktopDirectoryClass;
 
-GType   caja_desktop_directory_get_type             (void);
-CajaDirectory * caja_desktop_directory_get_real_directory   (CajaDesktopDirectory *desktop_directory);
+GType   baul_desktop_directory_get_type             (void);
+CajaDirectory * baul_desktop_directory_get_real_directory   (CajaDesktopDirectory *desktop_directory);
 
 #endif /* CAJA_DESKTOP_DIRECTORY_H */

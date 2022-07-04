@@ -85,7 +85,7 @@ typedef struct _CajaUndoStackManagerClass
 
 } CajaUndoStackManagerClass;
 
-#define TYPE_CAJA_UNDOSTACK_MANAGER (caja_undostack_manager_get_type())
+#define TYPE_CAJA_UNDOSTACK_MANAGER (baul_undostack_manager_get_type())
 
 #define CAJA_UNDOSTACK_MANAGER(object) \
  (G_TYPE_CHECK_INSTANCE_CAST((object), TYPE_CAJA_UNDOSTACK_MANAGER, CajaUndoStackManager))
@@ -103,82 +103,82 @@ typedef struct _CajaUndoStackManagerClass
  (G_TYPE_INSTANCE_GET_CLASS((object), TYPE_CAJA_UNDOSTACK_MANAGER, CajaUndoStackManagerClass))
 
 GType
-caja_undostack_manager_get_type (void);
+baul_undostack_manager_get_type (void);
 
 void
-caja_undostack_manager_add_action(CajaUndoStackManager* manager,
+baul_undostack_manager_add_action(CajaUndoStackManager* manager,
     CajaUndoStackActionData* action);
 
 void
-caja_undostack_manager_undo(CajaUndoStackManager* manager,
+baul_undostack_manager_undo(CajaUndoStackManager* manager,
     GtkWidget *parent_view, CajaUndostackFinishCallback cb);
 
 void
-caja_undostack_manager_redo(CajaUndoStackManager* manager,
+baul_undostack_manager_redo(CajaUndoStackManager* manager,
     GtkWidget *parent_view, CajaUndostackFinishCallback cb);
 
 CajaUndoStackActionData*
-caja_undostack_manager_data_new(CajaUndoStackActionType type,
+baul_undostack_manager_data_new(CajaUndoStackActionType type,
     gint items_count);
 
 gboolean
-caja_undostack_manager_is_undo_redo(CajaUndoStackManager* manager);
+baul_undostack_manager_is_undo_redo(CajaUndoStackManager* manager);
 
 void
-caja_undostack_manager_trash_has_emptied(CajaUndoStackManager* manager);
+baul_undostack_manager_trash_has_emptied(CajaUndoStackManager* manager);
 
 CajaUndoStackManager*
-caja_undostack_manager_instance(void);
+baul_undostack_manager_instance(void);
 
 void
-caja_undostack_manager_data_set_src_dir(CajaUndoStackActionData* data,
+baul_undostack_manager_data_set_src_dir(CajaUndoStackActionData* data,
     GFile* src);
 
 void
-caja_undostack_manager_data_set_dest_dir(CajaUndoStackActionData* data,
+baul_undostack_manager_data_set_dest_dir(CajaUndoStackActionData* data,
     GFile* dest);
 
 void
-caja_undostack_manager_data_add_origin_target_pair(
+baul_undostack_manager_data_add_origin_target_pair(
     CajaUndoStackActionData* data, GFile* origin, GFile* target);
 
 void
-caja_undostack_manager_data_set_create_data(
+baul_undostack_manager_data_set_create_data(
     CajaUndoStackActionData* data, char* target_uri, char* template_uri);
 
 void
-caja_undostack_manager_data_set_rename_information(
+baul_undostack_manager_data_set_rename_information(
     CajaUndoStackActionData* data, GFile* old_file, GFile* new_file);
 
 guint64
-caja_undostack_manager_get_file_modification_time(GFile* file);
+baul_undostack_manager_get_file_modification_time(GFile* file);
 
 void
-caja_undostack_manager_data_add_trashed_file(
+baul_undostack_manager_data_add_trashed_file(
     CajaUndoStackActionData* data, GFile* file, guint64 mtime);
 
 void
-caja_undostack_manager_request_menu_update(CajaUndoStackManager* manager);
+baul_undostack_manager_request_menu_update(CajaUndoStackManager* manager);
 
 void
-caja_undostack_manager_data_add_file_permissions(
+baul_undostack_manager_data_add_file_permissions(
     CajaUndoStackActionData* data, GFile* file, guint32 permission);
 
 void
-caja_undostack_manager_data_set_recursive_permissions(
+baul_undostack_manager_data_set_recursive_permissions(
     CajaUndoStackActionData* data, guint32 file_permissions, guint32 file_mask,
 	guint32 dir_permissions, guint32 dir_mask);
 
 void
-caja_undostack_manager_data_set_file_permissions(
+baul_undostack_manager_data_set_file_permissions(
     CajaUndoStackActionData* data, char* uri, guint32 current_permissions, guint32 new_permissions);
 
 void
-caja_undostack_manager_data_set_owner_change_information(
+baul_undostack_manager_data_set_owner_change_information(
     CajaUndoStackActionData* data, char* uri, const char* current_user, const char* new_user);
 
 void
-caja_undostack_manager_data_set_group_change_information(
+baul_undostack_manager_data_set_group_change_information(
     CajaUndoStackActionData* data, char* uri, const char* current_group, const char* new_group);
 
 #endif /* CAJA_UNDOSTACK_MANAGER_H */

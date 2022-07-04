@@ -29,12 +29,12 @@
 
 #include <eel/eel-gtk-extensions.h>
 
-#include <libcaja-private/caja-view-factory.h>
+#include <libbaul-private/baul-view-factory.h>
 
-#include "caja-view-as-action.h"
-#include "caja-navigation-window.h"
-#include "caja-window-private.h"
-#include "caja-navigation-window-slot.h"
+#include "baul-view-as-action.h"
+#include "baul-navigation-window.h"
+#include "baul-window-private.h"
+#include "baul-navigation-window-slot.h"
 
 static GObjectClass *parent_class = NULL;
 
@@ -44,7 +44,7 @@ struct _CajaViewAsActionPrivate
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (CajaViewAsAction, caja_view_as_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaViewAsAction, baul_view_as_action, GTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 enum
@@ -61,10 +61,10 @@ activate_nth_short_list_item (CajaWindow *window, guint index)
 
     g_assert (CAJA_IS_WINDOW (window));
 
-    slot = caja_window_get_active_slot (window);
+    slot = baul_window_get_active_slot (window);
     g_assert (index < g_list_length (window->details->short_list_viewers));
 
-    caja_window_slot_set_content_view (slot,
+    baul_window_slot_set_content_view (slot,
                                        g_list_nth_data (window->details->short_list_viewers, index));
 }
 
@@ -75,10 +75,10 @@ activate_extra_viewer (CajaWindow *window)
 
     g_assert (CAJA_IS_WINDOW (window));
 
-    slot = caja_window_get_active_slot (window);
+    slot = baul_window_get_active_slot (window);
     g_assert (window->details->extra_viewer != NULL);
 
-    caja_window_slot_set_content_view (slot, window->details->extra_viewer);
+    baul_window_slot_set_content_view (slot, window->details->extra_viewer);
 }
 
 static void
@@ -126,17 +126,17 @@ view_as_changed_callback (CajaWindow *window,
     store = GTK_LIST_STORE (model);
     gtk_list_store_clear (store);
 
-    slot = caja_window_get_active_slot (window);
+    slot = baul_window_get_active_slot (window);
 
     /* Add a menu item for each view in the preferred list for this location. */
     for (node = window->details->short_list_viewers, index = 0;
             node != NULL;
             node = node->next, ++index)
     {
-        info = caja_view_factory_lookup (node->data);
+        info = baul_view_factory_lookup (node->data);
         gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box), _(info->view_combo_label));
 
-        if (caja_window_slot_content_view_matches_iid (slot, (char *)node->data))
+        if (baul_window_slot_content_view_matches_iid (slot, (char *)node->data))
         {
             selected_index = index;
         }
@@ -153,8 +153,8 @@ view_as_changed_callback (CajaWindow *window,
         const char *id;
         /* We're using an extra viewer, add a menu item for it */
 
-        id = caja_window_slot_get_content_view_id (slot);
-        info = caja_view_factory_lookup (id);
+        id = baul_window_slot_get_content_view_id (slot);
+        info = baul_view_factory_lookup (id);
         gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box),
                                         _(info->view_combo_label));
         selected_index = index;
@@ -226,13 +226,13 @@ disconnect_proxy (GtkAction *action,
 }
 
 static void
-caja_view_as_action_finalize (GObject *object)
+baul_view_as_action_finalize (GObject *object)
 {
     (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 static void
-caja_view_as_action_set_property (GObject *object,
+baul_view_as_action_set_property (GObject *object,
                                   guint prop_id,
                                   const GValue *value,
                                   GParamSpec *pspec)
@@ -250,7 +250,7 @@ caja_view_as_action_set_property (GObject *object,
 }
 
 static void
-caja_view_as_action_get_property (GObject *object,
+baul_view_as_action_get_property (GObject *object,
                                   guint prop_id,
                                   GValue *value,
                                   GParamSpec *pspec)
@@ -268,16 +268,16 @@ caja_view_as_action_get_property (GObject *object,
 }
 
 static void
-caja_view_as_action_class_init (CajaViewAsActionClass *class)
+baul_view_as_action_class_init (CajaViewAsActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     GtkActionClass *action_class = GTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    object_class->finalize = caja_view_as_action_finalize;
-    object_class->set_property = caja_view_as_action_set_property;
-    object_class->get_property = caja_view_as_action_get_property;
+    object_class->finalize = baul_view_as_action_finalize;
+    object_class->set_property = baul_view_as_action_set_property;
+    object_class->get_property = baul_view_as_action_get_property;
 
     parent_class = g_type_class_peek_parent (class);
 
@@ -295,7 +295,7 @@ caja_view_as_action_class_init (CajaViewAsActionClass *class)
 }
 
 static void
-caja_view_as_action_init (CajaViewAsAction *action)
+baul_view_as_action_init (CajaViewAsAction *action)
 {
-    action->priv = caja_view_as_action_get_instance_private (action);
+    action->priv = baul_view_as_action_get_instance_private (action);
 }

@@ -3,25 +3,25 @@ include $(top_srcdir)/Makefile.shared
 SUBDIRS=file-manager
 
 bin_PROGRAMS = \
-	caja \
-	caja-file-management-properties \
-	caja-autorun-software \
-	caja-connect-server \
+	baul \
+	baul-file-management-properties \
+	baul-autorun-software \
+	baul-connect-server \
 	$(NULL)
 
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-I$(top_builddir)/libcaja-private \
+	-I$(top_builddir)/libbaul-private \
 	$(CORE_CFLAGS) \
 	$(WARNING_CFLAGS) \
 	$(EXIF_CFLAGS) \
 	$(EXEMPI_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	-DLIBDIR=\""$(libdir)"\" \
-	-DCAJA_DATADIR=\""$(datadir)/caja"\" \
+	-DCAJA_DATADIR=\""$(datadir)/baul"\" \
 	-DMATELOCALEDIR=\""$(datadir)/locale"\" \
-	-DUIDIR=\""$(datadir)/caja/ui"\" \
-	-DCAJA_PIXMAPDIR=\""$(datadir)/pixmaps/caja"\" \
+	-DUIDIR=\""$(datadir)/baul/ui"\" \
+	-DCAJA_PIXMAPDIR=\""$(datadir)/pixmaps/baul"\" \
 	-DPREFIX=\""$(prefix)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
 	-DVERSION="\"$(VERSION)\"" \
@@ -29,8 +29,8 @@ AM_CPPFLAGS = \
 	$(NULL)
 
 LDADD = \
-	$(top_builddir)/src/file-manager/libcaja-file-manager.la \
-	$(top_builddir)/libcaja-private/libcaja-private.la \
+	$(top_builddir)/src/file-manager/libbaul-file-manager.la \
+	$(top_builddir)/libbaul-private/libbaul-private.la \
 	$(CORE_LIBS) \
 	$(EXIF_LIBS) \
 	$(EXEMPI_LIBS) \
@@ -39,121 +39,121 @@ LDADD = \
 	$(NULL)
 
 dbus_freedesktop_built_sources =			\
-	caja-freedesktop-generated.c		\
-	caja-freedesktop-generated.h
+	baul-freedesktop-generated.c		\
+	baul-freedesktop-generated.h
 
 $(dbus_freedesktop_built_sources) : Makefile.am $(top_srcdir)/data/freedesktop-dbus-interfaces.xml
 	gdbus-codegen									\
 		--interface-prefix org.freedesktop.					\
 		--c-namespace CajaFreedesktop					\
 		--c-generate-object-manager						\
-		--generate-c-code caja-freedesktop-generated			\
+		--generate-c-code baul-freedesktop-generated			\
 		$(top_srcdir)/data/freedesktop-dbus-interfaces.xml			\
 		$(NULL)
 
 BUILT_SOURCES = \
-	caja-src-marshal.c \
-	caja-src-marshal.h \
+	baul-src-marshal.c \
+	baul-src-marshal.h \
 	$(dbus_freedesktop_built_sources) \
 	$(NULL)
-caja_SOURCES = \
-	caja-actions.h \
-	caja-application.c \
-	caja-application.h \
-	caja-bookmark-list.c \
-	caja-bookmark-list.h \
-	caja-bookmarks-window.c \
-	caja-bookmarks-window.h \
-	caja-connect-server-dialog.c \
-	caja-connect-server-dialog.h \
-	caja-connect-server-dialog-nonmain.c \
-	caja-connect-server-operation.c	\
-	caja-connect-server-operation.h	\
-	caja-desktop-window.c \
-	caja-desktop-window.h \
-	caja-emblem-sidebar.c \
-	caja-emblem-sidebar.h \
-	caja-file-management-properties.c \
-	caja-file-management-properties.h \
-	caja-freedesktop-dbus.c \
-	caja-freedesktop-dbus.h \
-	caja-history-sidebar.c \
-	caja-history-sidebar.h \
-	caja-image-properties-page.c \
-	caja-image-properties-page.h \
-	caja-information-panel.c \
-	caja-information-panel.h \
-	caja-location-bar.c \
-	caja-location-bar.h \
-	caja-location-dialog.c \
-	caja-location-dialog.h \
-	caja-location-entry.c \
-	caja-location-entry.h \
-	caja-main.c \
-	caja-navigation-action.c \
-	caja-navigation-action.h \
-	caja-navigation-window-menus.c \
-	caja-navigation-window.c \
-	caja-navigation-window.h \
-	caja-navigation-window-pane.c \
-	caja-navigation-window-pane.h \
-	caja-navigation-window-slot.c \
-	caja-navigation-window-slot.h \
-	caja-notebook.c \
-	caja-notebook.h \
-	caja-notes-viewer.c \
-	caja-notes-viewer.h \
-	caja-pathbar.c \
-	caja-pathbar.h \
-	caja-places-sidebar.c \
-	caja-places-sidebar.h \
-	caja-property-browser.c \
-	caja-property-browser.h \
-	caja-query-editor.c \
-	caja-query-editor.h \
-	caja-search-bar.c \
-	caja-search-bar.h \
-	caja-self-check-functions.c \
-	caja-self-check-functions.h \
-	caja-side-pane.c \
-	caja-side-pane.h \
-	caja-sidebar-title.c \
-	caja-sidebar-title.h \
-	caja-spatial-window.c \
-	caja-spatial-window.h \
-	caja-trash-bar.c \
-	caja-trash-bar.h \
-	caja-view-as-action.c \
-	caja-view-as-action.h \
-	caja-window-bookmarks.c \
-	caja-window-bookmarks.h \
-	caja-window-manage-views.c \
-	caja-window-manage-views.h \
-	caja-window-menus.c \
-	caja-window-pane.c \
-	caja-window-pane.h \
-	caja-window-private.h \
-	caja-window-slot.c \
-	caja-window-slot.h \
-	caja-window-toolbars.c \
-	caja-window.c \
-	caja-window.h \
-	caja-x-content-bar.c \
-	caja-x-content-bar.h \
-	caja-zoom-action.c \
-	caja-zoom-action.h \
-	caja-zoom-control.c \
-	caja-zoom-control.h \
+baul_SOURCES = \
+	baul-actions.h \
+	baul-application.c \
+	baul-application.h \
+	baul-bookmark-list.c \
+	baul-bookmark-list.h \
+	baul-bookmarks-window.c \
+	baul-bookmarks-window.h \
+	baul-connect-server-dialog.c \
+	baul-connect-server-dialog.h \
+	baul-connect-server-dialog-nonmain.c \
+	baul-connect-server-operation.c	\
+	baul-connect-server-operation.h	\
+	baul-desktop-window.c \
+	baul-desktop-window.h \
+	baul-emblem-sidebar.c \
+	baul-emblem-sidebar.h \
+	baul-file-management-properties.c \
+	baul-file-management-properties.h \
+	baul-freedesktop-dbus.c \
+	baul-freedesktop-dbus.h \
+	baul-history-sidebar.c \
+	baul-history-sidebar.h \
+	baul-image-properties-page.c \
+	baul-image-properties-page.h \
+	baul-information-panel.c \
+	baul-information-panel.h \
+	baul-location-bar.c \
+	baul-location-bar.h \
+	baul-location-dialog.c \
+	baul-location-dialog.h \
+	baul-location-entry.c \
+	baul-location-entry.h \
+	baul-main.c \
+	baul-navigation-action.c \
+	baul-navigation-action.h \
+	baul-navigation-window-menus.c \
+	baul-navigation-window.c \
+	baul-navigation-window.h \
+	baul-navigation-window-pane.c \
+	baul-navigation-window-pane.h \
+	baul-navigation-window-slot.c \
+	baul-navigation-window-slot.h \
+	baul-notebook.c \
+	baul-notebook.h \
+	baul-notes-viewer.c \
+	baul-notes-viewer.h \
+	baul-pathbar.c \
+	baul-pathbar.h \
+	baul-places-sidebar.c \
+	baul-places-sidebar.h \
+	baul-property-browser.c \
+	baul-property-browser.h \
+	baul-query-editor.c \
+	baul-query-editor.h \
+	baul-search-bar.c \
+	baul-search-bar.h \
+	baul-self-check-functions.c \
+	baul-self-check-functions.h \
+	baul-side-pane.c \
+	baul-side-pane.h \
+	baul-sidebar-title.c \
+	baul-sidebar-title.h \
+	baul-spatial-window.c \
+	baul-spatial-window.h \
+	baul-trash-bar.c \
+	baul-trash-bar.h \
+	baul-view-as-action.c \
+	baul-view-as-action.h \
+	baul-window-bookmarks.c \
+	baul-window-bookmarks.h \
+	baul-window-manage-views.c \
+	baul-window-manage-views.h \
+	baul-window-menus.c \
+	baul-window-pane.c \
+	baul-window-pane.h \
+	baul-window-private.h \
+	baul-window-slot.c \
+	baul-window-slot.h \
+	baul-window-toolbars.c \
+	baul-window.c \
+	baul-window.h \
+	baul-x-content-bar.c \
+	baul-x-content-bar.h \
+	baul-zoom-action.c \
+	baul-zoom-action.h \
+	baul-zoom-control.c \
+	baul-zoom-control.h \
 	$(NULL)
 
-nodist_caja_SOURCES = \
+nodist_baul_SOURCES = \
 	$(BUILT_SOURCES) \
 	$(NULL)
 
-caja-src-marshal.list: $(caja_SOURCES) Makefile.am
+baul-src-marshal.list: $(baul_SOURCES) Makefile.am
 	$(AM_V_GEN)( cd $(srcdir) && \
-	sed -n -e 's/.*caja_src_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
-	$(caja_SOURCES) ) \
+	sed -n -e 's/.*baul_src_marshal_\([[:upper:][:digit:]]*__[[:upper:][:digit:]_]*\).*/\1/p' \
+	$(baul_SOURCES) ) \
 	| sed -e 's/__/:/' -e 'y/_/,/' | sort -u > $@.tmp
 	@if cmp -s $@.tmp $@; then \
 		rm $@.tmp; \
@@ -162,69 +162,69 @@ caja-src-marshal.list: $(caja_SOURCES) Makefile.am
 	fi
 
 %-marshal.c: %-marshal.list Makefile
-	$(AM_V_GEN)echo "#include \"caja-src-marshal.h\"" > $@ && \
+	$(AM_V_GEN)echo "#include \"baul-src-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) --body --prefix=$(subst -,_,$*)_marshal $< >> $*-marshal.c
 
 %-marshal.h: %-marshal.list Makefile
 	$(AM_V_GEN)$(GLIB_GENMARSHAL) --header --prefix=$(subst -,_,$*)_marshal $< > $*-marshal.h
 
-caja_file_management_properties_SOURCES = \
-	caja-file-management-properties.c \
-	caja-file-management-properties.h \
-	caja-file-management-properties-main.c \
+baul_file_management_properties_SOURCES = \
+	baul-file-management-properties.c \
+	baul-file-management-properties.h \
+	baul-file-management-properties-main.c \
 	$(NULL)
 
-caja_autorun_software_SOURCES = \
-	caja-autorun-software.c \
+baul_autorun_software_SOURCES = \
+	baul-autorun-software.c \
 	$(NULL)
 
-caja_connect_server_SOURCES = \
-	caja-bookmark-list.c \
-	caja-bookmark-list.h \
-	caja-connect-server-dialog.c \
-	caja-connect-server-dialog.h \
-	caja-connect-server-dialog-main.c \
-	caja-connect-server-operation.c     \
-	caja-connect-server-operation.h     \
+baul_connect_server_SOURCES = \
+	baul-bookmark-list.c \
+	baul-bookmark-list.h \
+	baul-connect-server-dialog.c \
+	baul-connect-server-dialog.h \
+	baul-connect-server-dialog-main.c \
+	baul-connect-server-operation.c     \
+	baul-connect-server-operation.h     \
 	$(NULL)
 
 
-aboutdir = $(datadir)/caja
+aboutdir = $(datadir)/baul
 about_DATA = \
-	caja.about \
+	baul.about \
         $(NULL)
 
 if ENABLE_SELF_CHECK
-TESTS=check-caja
+TESTS=check-baul
 endif
 
-uidir = $(datadir)/caja/ui
+uidir = $(datadir)/baul/ui
 
 ui_files = \
-	caja-file-management-properties.ui \
-	caja-bookmarks-window.ui \
+	baul-file-management-properties.ui \
+	baul-bookmarks-window.ui \
 	$(NULL)
 
 include $(top_srcdir)/gla11y.mk
 
 ui_DATA = \
-	caja-shell-ui.xml \
-	caja-navigation-window-ui.xml \
-	caja-spatial-window-ui.xml \
+	baul-shell-ui.xml \
+	baul-navigation-window-ui.xml \
+	baul-spatial-window-ui.xml \
 	$(ui_files) \
 	$(NULL)
 
 CLEANFILES = \
-	caja-src-marshal.list \
+	baul-src-marshal.list \
 	$(BUILT_SOURCES) \
 	$(server_DATA) \
 	$(NULL)
 
 EXTRA_DIST = \
-	caja-src-marshal.list \
+	baul-src-marshal.list \
 	$(server_in_files) \
 	$(ui_DATA) \
-	check-caja \
+	check-baul \
 	$(about_DATA) \
 	ui-a11y.suppr \
 	$(NULL)

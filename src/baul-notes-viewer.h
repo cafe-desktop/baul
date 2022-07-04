@@ -28,12 +28,12 @@
 
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-view.h>
-#include <libcaja-private/caja-window-info.h>
+#include <libbaul-private/baul-view.h>
+#include <libbaul-private/baul-window-info.h>
 
 #define CAJA_NOTES_SIDEBAR_ID    "notes"
 
-#define CAJA_TYPE_NOTES_VIEWER caja_notes_viewer_get_type()
+#define CAJA_TYPE_NOTES_VIEWER baul_notes_viewer_get_type()
 #define CAJA_NOTES_VIEWER(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NOTES_VIEWER, CajaNotesViewer))
 
@@ -45,7 +45,7 @@ typedef struct
     CajaNotesViewerDetails *details;
 } CajaNotesViewer;
 
-GType caja_notes_viewer_get_type (void);
-void caja_notes_viewer_register (void);
+GType baul_notes_viewer_get_type (void);
+void baul_notes_viewer_register (void);
 
 #endif

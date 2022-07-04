@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-file-management-properties.h - Function to show the caja preference dialog.
+/* baul-file-management-properties.h - Function to show the baul preference dialog.
 
    Copyright (C) 2002 Jan Arne Petersen
 
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-    void caja_file_management_properties_dialog_show (GCallback close_callback, GtkWindow *window);
+    void baul_file_management_properties_dialog_show (GCallback close_callback, GtkWindow *window);
 
 #ifdef __cplusplus
 }

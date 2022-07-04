@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-emblem-utils.c: Utilities for handling emblems
+   baul-emblem-utils.c: Utilities for handling emblems
 
    Copyright (C) 2002 Red Hat, Inc.
 
@@ -40,8 +40,8 @@
 #include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 
-#include "caja-file.h"
-#include "caja-emblem-utils.h"
+#include "baul-file.h"
+#include "baul-emblem-utils.h"
 
 #define EMBLEM_NAME_TRASH   "emblem-trash"
 #define EMBLEM_NAME_SYMLINK "emblem-symbolic-link"
@@ -51,7 +51,7 @@
 #define EMBLEM_NAME_SHARED  "emblem-shared"
 
 GList *
-caja_emblem_list_available (void)
+baul_emblem_list_available (void)
 {
     GtkIconTheme *icon_theme;
     GList *list;
@@ -62,7 +62,7 @@ caja_emblem_list_available (void)
 }
 
 void
-caja_emblem_refresh_list (void)
+baul_emblem_refresh_list (void)
 {
     GtkIconTheme *icon_theme;
 
@@ -71,7 +71,7 @@ caja_emblem_refresh_list (void)
 }
 
 char *
-caja_emblem_get_icon_name_from_keyword (const char *keyword)
+baul_emblem_get_icon_name_from_keyword (const char *keyword)
 {
     return g_strconcat ("emblem-", keyword, NULL);
 }
@@ -113,8 +113,8 @@ is_reserved_keyword (const char *keyword)
         return TRUE;
     }
 
-    available = caja_emblem_list_available ();
-    icon_name = caja_emblem_get_icon_name_from_keyword (keyword);
+    available = baul_emblem_list_available ();
+    icon_name = baul_emblem_get_icon_name_from_keyword (keyword);
     /* see if the keyword already exists */
     result = g_list_find_custom (available,
                                  (char *) icon_name,
@@ -125,7 +125,7 @@ is_reserved_keyword (const char *keyword)
 }
 
 gboolean
-caja_emblem_should_show_in_list (const char *emblem)
+baul_emblem_should_show_in_list (const char *emblem)
 {
     if (strcmp (emblem, EMBLEM_NAME_TRASH) == 0)
     {
@@ -156,7 +156,7 @@ caja_emblem_should_show_in_list (const char *emblem)
 }
 
 char *
-caja_emblem_get_keyword_from_icon_name (const char *emblem)
+baul_emblem_get_keyword_from_icon_name (const char *emblem)
 {
     g_return_val_if_fail (emblem != NULL, NULL);
 
@@ -171,7 +171,7 @@ caja_emblem_get_keyword_from_icon_name (const char *emblem)
 }
 
 GdkPixbuf *
-caja_emblem_load_pixbuf_for_emblem (GFile *emblem)
+baul_emblem_load_pixbuf_for_emblem (GFile *emblem)
 {
     GInputStream *stream;
     GdkPixbuf *pixbuf;
@@ -218,7 +218,7 @@ emblem_keyword_valid (const char *keyword)
 }
 
 gboolean
-caja_emblem_verify_keyword (GtkWindow *parent_window,
+baul_emblem_verify_keyword (GtkWindow *parent_window,
                             const char *keyword,
                             const char *display_name)
 {
@@ -255,7 +255,7 @@ caja_emblem_verify_keyword (GtkWindow *parent_window,
 }
 
 void
-caja_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
+baul_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
                                    const char *keyword,
                                    const char *display_name,
                                    GtkWindow *parent_window)
@@ -266,7 +266,7 @@ caja_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
 
     g_return_if_fail (pixbuf != NULL);
 
-    if (!caja_emblem_verify_keyword (parent_window, keyword, display_name))
+    if (!baul_emblem_verify_keyword (parent_window, keyword, display_name))
     {
         return;
     }
@@ -348,7 +348,7 @@ caja_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
 }
 
 gboolean
-caja_emblem_can_remove_emblem (const char *keyword)
+baul_emblem_can_remove_emblem (const char *keyword)
 {
     char *path;
     gboolean ret = TRUE;
@@ -367,7 +367,7 @@ caja_emblem_can_remove_emblem (const char *keyword)
 }
 
 gboolean
-caja_emblem_can_rename_emblem (const char *keyword)
+baul_emblem_can_rename_emblem (const char *keyword)
 {
     char *path;
     gboolean ret = TRUE;
@@ -387,7 +387,7 @@ caja_emblem_can_rename_emblem (const char *keyword)
 
 /* of course, this only works for custom installed emblems */
 gboolean
-caja_emblem_remove_emblem (const char *keyword)
+baul_emblem_remove_emblem (const char *keyword)
 {
     char *path, *dir, *stat_dir;
     struct stat stat_buf;
@@ -440,7 +440,7 @@ caja_emblem_remove_emblem (const char *keyword)
 
 /* this only works for custom emblems as well */
 gboolean
-caja_emblem_rename_emblem (const char *keyword, const char *name)
+baul_emblem_rename_emblem (const char *keyword, const char *name)
 {
     char *path, *dir, *stat_dir, *icon_name;
     struct stat stat_buf;
@@ -470,8 +470,8 @@ caja_emblem_rename_emblem (const char *keyword, const char *name)
     fflush (file);
     fclose (file);
 
-    icon_name = caja_emblem_get_icon_name_from_keyword (keyword);
-    caja_icon_info_clear_caches (); /* A bit overkill, but this happens rarely */
+    icon_name = baul_emblem_get_icon_name_from_keyword (keyword);
+    baul_icon_info_clear_caches (); /* A bit overkill, but this happens rarely */
 
     g_free (icon_name);
 
@@ -490,7 +490,7 @@ caja_emblem_rename_emblem (const char *keyword, const char *name)
 }
 
 char *
-caja_emblem_create_unique_keyword (const char *base)
+baul_emblem_create_unique_keyword (const char *base)
 {
     char *keyword;
     time_t t;

@@ -1,5 +1,5 @@
 /*
- *  caja-property-page.h - Property pages exported by
+ *  baul-property-page.h - Property pages exported by
  *                             CajaPropertyProvider objects.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -23,9 +23,9 @@
  */
 
 #include <config.h>
-#include "caja-property-page.h"
+#include "baul-property-page.h"
 
-#include "caja-extension-i18n.h"
+#include "baul-extension-i18n.h"
 
 enum {
     PROP_0,
@@ -44,20 +44,20 @@ struct _CajaPropertyPageDetails {
 static GObjectClass *parent_class = NULL;
 
 /**
- * SECTION:caja-property-page
+ * SECTION:baul-property-page
  * @title: CajaPropertyPage
  * @short_description: Property page descriptor object
- * @include: libcaja-extension/caja-property-page.h
+ * @include: libbaul-extension/baul-property-page.h
  *
  * #CajaPropertyPage is an object that describes a page in the file
  * properties dialog. Extensions can provide #CajaPropertyPage objects
  * by registering a #CajaPropertyPageProvider and returning them from
- * caja_property_page_provider_get_pages(), which will be called by the
+ * baul_property_page_provider_get_pages(), which will be called by the
  * main application when creating file properties dialogs.
  */
 
 /**
- * caja_property_page_new:
+ * baul_property_page_new:
  * @name: the identifier for the property page
  * @label: the user-visible label of the property page
  * @page: the property page to display
@@ -67,7 +67,7 @@ static GObjectClass *parent_class = NULL;
  * Returns: a newly created #CajaPropertyPage
  */
 CajaPropertyPage *
-caja_property_page_new (const char *name,
+baul_property_page_new (const char *name,
                         GtkWidget *label,
                         GtkWidget *page_widget)
 {
@@ -88,7 +88,7 @@ caja_property_page_new (const char *name,
 }
 
 static void
-caja_property_page_get_property (GObject *object,
+baul_property_page_get_property (GObject *object,
                                  guint param_id,
                                  GValue *value,
                                  GParamSpec *pspec)
@@ -114,7 +114,7 @@ caja_property_page_get_property (GObject *object,
 }
 
 static void
-caja_property_page_set_property (GObject *object,
+baul_property_page_set_property (GObject *object,
                                  guint param_id,
                                  const GValue *value,
                                  GParamSpec *pspec)
@@ -152,7 +152,7 @@ caja_property_page_set_property (GObject *object,
 }
 
 static void
-caja_property_page_dispose (GObject *object)
+baul_property_page_dispose (GObject *object)
 {
     CajaPropertyPage *page;
 
@@ -169,7 +169,7 @@ caja_property_page_dispose (GObject *object)
 }
 
 static void
-caja_property_page_finalize (GObject *object)
+baul_property_page_finalize (GObject *object)
 {
     CajaPropertyPage *page;
 
@@ -183,20 +183,20 @@ caja_property_page_finalize (GObject *object)
 }
 
 static void
-caja_property_page_instance_init (CajaPropertyPage *page)
+baul_property_page_instance_init (CajaPropertyPage *page)
 {
     page->details = g_new0 (CajaPropertyPageDetails, 1);
 }
 
 static void
-caja_property_page_class_init (CajaPropertyPageClass *class)
+baul_property_page_class_init (CajaPropertyPageClass *class)
 {
     parent_class = g_type_class_peek_parent (class);
 
-    G_OBJECT_CLASS (class)->finalize = caja_property_page_finalize;
-    G_OBJECT_CLASS (class)->dispose = caja_property_page_dispose;
-    G_OBJECT_CLASS (class)->get_property = caja_property_page_get_property;
-    G_OBJECT_CLASS (class)->set_property = caja_property_page_set_property;
+    G_OBJECT_CLASS (class)->finalize = baul_property_page_finalize;
+    G_OBJECT_CLASS (class)->dispose = baul_property_page_dispose;
+    G_OBJECT_CLASS (class)->get_property = baul_property_page_get_property;
+    G_OBJECT_CLASS (class)->set_property = baul_property_page_set_property;
 
     g_object_class_install_property (G_OBJECT_CLASS (class),
                                      PROP_NAME,
@@ -222,7 +222,7 @@ caja_property_page_class_init (CajaPropertyPageClass *class)
 }
 
 GType
-caja_property_page_get_type (void)
+baul_property_page_get_type (void)
 {
     static GType type = 0;
 
@@ -231,12 +231,12 @@ caja_property_page_get_type (void)
             sizeof (CajaPropertyPageClass),
             NULL,
             NULL,
-            (GClassInitFunc)caja_property_page_class_init,
+            (GClassInitFunc)baul_property_page_class_init,
             NULL,
             NULL,
             sizeof (CajaPropertyPage),
             0,
-            (GInstanceInitFunc)caja_property_page_instance_init
+            (GInstanceInitFunc)baul_property_page_instance_init
         };
 
         type = g_type_register_static

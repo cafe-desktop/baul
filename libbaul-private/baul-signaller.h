@@ -22,7 +22,7 @@
  * Author: John Sullivan <sullivan@eazel.com>
  */
 
-/* caja-signaller.h: Class to manage caja-wide signals that don't
+/* baul-signaller.h: Class to manage baul-wide signals that don't
  * correspond to any particular object.
  */
 
@@ -41,6 +41,6 @@
 */
 
 /* Get the one and only CajaSignaller to connect with or emit signals for */
-GObject *caja_signaller_get_current (void);
+GObject *baul_signaller_get_current (void);
 
 #endif /* CAJA_SIGNALLER_H */

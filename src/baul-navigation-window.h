@@ -25,7 +25,7 @@
  *           Darin Adler <darin@bentspoon.com>
  *
  */
-/* caja-navigation-window.h: Interface of the navigation window object */
+/* baul-navigation-window.h: Interface of the navigation window object */
 
 #ifndef CAJA_NAVIGATION_WINDOW_H
 #define CAJA_NAVIGATION_WINDOW_H
@@ -34,15 +34,15 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include <libcaja-private/caja-bookmark.h>
-#include <libcaja-private/caja-sidebar.h>
+#include <libbaul-private/baul-bookmark.h>
+#include <libbaul-private/baul-sidebar.h>
 
-#include "caja-application.h"
-#include "caja-information-panel.h"
-#include "caja-side-pane.h"
-#include "caja-window.h"
+#include "baul-application.h"
+#include "baul-information-panel.h"
+#include "baul-side-pane.h"
+#include "baul-window.h"
 
-#define CAJA_TYPE_NAVIGATION_WINDOW caja_navigation_window_get_type()
+#define CAJA_TYPE_NAVIGATION_WINDOW baul_navigation_window_get_type()
 #define CAJA_NAVIGATION_WINDOW(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NAVIGATION_WINDOW, CajaNavigationWindow))
 #define CAJA_NAVIGATION_WINDOW_CLASS(klass) \
@@ -78,45 +78,45 @@ struct _CajaNavigationWindowClass
     CajaWindowClass parent_spot;
 };
 
-GType    caja_navigation_window_get_type             (void);
-void     caja_navigation_window_allow_back           (CajaNavigationWindow *window,
+GType    baul_navigation_window_get_type             (void);
+void     baul_navigation_window_allow_back           (CajaNavigationWindow *window,
         gboolean                  allow);
-void     caja_navigation_window_allow_forward        (CajaNavigationWindow *window,
+void     baul_navigation_window_allow_forward        (CajaNavigationWindow *window,
         gboolean                  allow);
-void     caja_navigation_window_clear_back_list      (CajaNavigationWindow *window);
-void     caja_navigation_window_clear_forward_list   (CajaNavigationWindow *window);
-void     caja_forget_history                         (void);
-gint     caja_navigation_window_get_base_page_index  (CajaNavigationWindow *window);
-void     caja_navigation_window_hide_toolbar         (CajaNavigationWindow *window);
-void     caja_navigation_window_show_toolbar         (CajaNavigationWindow *window);
-gboolean caja_navigation_window_toolbar_showing      (CajaNavigationWindow *window);
-void     caja_navigation_window_hide_sidebar         (CajaNavigationWindow *window);
-void     caja_navigation_window_show_sidebar         (CajaNavigationWindow *window);
-gboolean caja_navigation_window_sidebar_showing      (CajaNavigationWindow *window);
-void     caja_navigation_window_add_sidebar_panel    (CajaNavigationWindow *window,
+void     baul_navigation_window_clear_back_list      (CajaNavigationWindow *window);
+void     baul_navigation_window_clear_forward_list   (CajaNavigationWindow *window);
+void     baul_forget_history                         (void);
+gint     baul_navigation_window_get_base_page_index  (CajaNavigationWindow *window);
+void     baul_navigation_window_hide_toolbar         (CajaNavigationWindow *window);
+void     baul_navigation_window_show_toolbar         (CajaNavigationWindow *window);
+gboolean baul_navigation_window_toolbar_showing      (CajaNavigationWindow *window);
+void     baul_navigation_window_hide_sidebar         (CajaNavigationWindow *window);
+void     baul_navigation_window_show_sidebar         (CajaNavigationWindow *window);
+gboolean baul_navigation_window_sidebar_showing      (CajaNavigationWindow *window);
+void     baul_navigation_window_add_sidebar_panel    (CajaNavigationWindow *window,
         CajaSidebar          *sidebar_panel);
-void     caja_navigation_window_remove_sidebar_panel (CajaNavigationWindow *window,
+void     baul_navigation_window_remove_sidebar_panel (CajaNavigationWindow *window,
         CajaSidebar          *sidebar_panel);
-void     caja_navigation_window_hide_status_bar      (CajaNavigationWindow *window);
-void     caja_navigation_window_show_status_bar      (CajaNavigationWindow *window);
-gboolean caja_navigation_window_status_bar_showing   (CajaNavigationWindow *window);
-void     caja_navigation_window_back_or_forward      (CajaNavigationWindow *window,
+void     baul_navigation_window_hide_status_bar      (CajaNavigationWindow *window);
+void     baul_navigation_window_show_status_bar      (CajaNavigationWindow *window);
+gboolean baul_navigation_window_status_bar_showing   (CajaNavigationWindow *window);
+void     baul_navigation_window_back_or_forward      (CajaNavigationWindow *window,
         gboolean                  back,
         guint                     distance,
         gboolean                  new_tab);
-void     caja_navigation_window_show_search          (CajaNavigationWindow *window);
-void     caja_navigation_window_unset_focus_widget   (CajaNavigationWindow *window);
-void     caja_navigation_window_hide_search          (CajaNavigationWindow *window);
-void     caja_navigation_window_set_search_button	 (CajaNavigationWindow *window,
+void     baul_navigation_window_show_search          (CajaNavigationWindow *window);
+void     baul_navigation_window_unset_focus_widget   (CajaNavigationWindow *window);
+void     baul_navigation_window_hide_search          (CajaNavigationWindow *window);
+void     baul_navigation_window_set_search_button	 (CajaNavigationWindow *window,
         gboolean		    state);
-void     caja_navigation_window_restore_focus_widget (CajaNavigationWindow *window);
-void     caja_navigation_window_split_view_on        (CajaNavigationWindow *window);
-void     caja_navigation_window_split_view_off       (CajaNavigationWindow *window);
-gboolean caja_navigation_window_split_view_showing   (CajaNavigationWindow *window);
+void     baul_navigation_window_restore_focus_widget (CajaNavigationWindow *window);
+void     baul_navigation_window_split_view_on        (CajaNavigationWindow *window);
+void     baul_navigation_window_split_view_off       (CajaNavigationWindow *window);
+gboolean baul_navigation_window_split_view_showing   (CajaNavigationWindow *window);
 
-gboolean caja_navigation_window_is_in_temporary_navigation_bar (GtkWidget *widget,
+gboolean baul_navigation_window_is_in_temporary_navigation_bar (GtkWidget *widget,
         CajaNavigationWindow *window);
-gboolean caja_navigation_window_is_in_temporary_search_bar (GtkWidget *widget,
+gboolean baul_navigation_window_is_in_temporary_search_bar (GtkWidget *widget,
         CajaNavigationWindow *window);
 
 #endif

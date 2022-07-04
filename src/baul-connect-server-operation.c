@@ -24,9 +24,9 @@
 
 #include <config.h>
 
-#include "caja-connect-server-operation.h"
+#include "baul-connect-server-operation.h"
 
-#include "caja-connect-server-dialog.h"
+#include "baul-connect-server-dialog.h"
 
 enum {
 	PROP_DIALOG = 1,
@@ -38,7 +38,7 @@ struct _CajaConnectServerOperationPrivate {
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (CajaConnectServerOperation,
-	       caja_connect_server_operation, GTK_TYPE_MOUNT_OPERATION);
+	       baul_connect_server_operation, GTK_TYPE_MOUNT_OPERATION);
 
 static void
 fill_details_async_cb (GObject *source,
@@ -52,7 +52,7 @@ fill_details_async_cb (GObject *source,
 	self = user_data;
 	dialog = CAJA_CONNECT_SERVER_DIALOG (source);
 
-	res = caja_connect_server_dialog_fill_details_finish (dialog, result);
+	res = baul_connect_server_dialog_fill_details_finish (dialog, result);
 
 	if (!res) {
 		g_mount_operation_reply (G_MOUNT_OPERATION (self), G_MOUNT_OPERATION_ABORTED);
@@ -62,7 +62,7 @@ fill_details_async_cb (GObject *source,
 }
 
 static void
-caja_connect_server_operation_ask_password (GMountOperation *op,
+baul_connect_server_operation_ask_password (GMountOperation *op,
 						const gchar *message,
 						const gchar *default_user,
 						const gchar *default_domain,
@@ -72,7 +72,7 @@ caja_connect_server_operation_ask_password (GMountOperation *op,
 
 	self = CAJA_CONNECT_SERVER_OPERATION (op);
 
-	caja_connect_server_dialog_fill_details_async (self->details->dialog,
+	baul_connect_server_dialog_fill_details_async (self->details->dialog,
 							   G_MOUNT_OPERATION (self),
 							   default_user,
 							   default_domain,
@@ -82,7 +82,7 @@ caja_connect_server_operation_ask_password (GMountOperation *op,
 }
 
 static void
-caja_connect_server_operation_set_property (GObject *object,
+baul_connect_server_operation_set_property (GObject *object,
 						guint property_id,
 						const GValue *value,
 						GParamSpec *pspec)
@@ -102,17 +102,17 @@ caja_connect_server_operation_set_property (GObject *object,
 }
 
 static void
-caja_connect_server_operation_class_init (CajaConnectServerOperationClass *klass)
+baul_connect_server_operation_class_init (CajaConnectServerOperationClass *klass)
 {
 	GMountOperationClass *mount_op_class;
 	GObjectClass *object_class;
 	GParamSpec *pspec;
 
 	object_class = G_OBJECT_CLASS (klass);
-	object_class->set_property = caja_connect_server_operation_set_property;
+	object_class->set_property = baul_connect_server_operation_set_property;
 
 	mount_op_class = G_MOUNT_OPERATION_CLASS (klass);
-	mount_op_class->ask_password = caja_connect_server_operation_ask_password;
+	mount_op_class->ask_password = baul_connect_server_operation_ask_password;
 
 	pspec = g_param_spec_object ("dialog", "The connect dialog",
 				     "The connect to server dialog",
@@ -122,13 +122,13 @@ caja_connect_server_operation_class_init (CajaConnectServerOperationClass *klass
 }
 
 static void
-caja_connect_server_operation_init (CajaConnectServerOperation *self)
+baul_connect_server_operation_init (CajaConnectServerOperation *self)
 {
-	self->details = caja_connect_server_operation_get_instance_private (self);
+	self->details = baul_connect_server_operation_get_instance_private (self);
 }
 
 GMountOperation *
-caja_connect_server_operation_new (CajaConnectServerDialog *dialog)
+baul_connect_server_operation_new (CajaConnectServerDialog *dialog)
 {
 	return g_object_new (CAJA_TYPE_CONNECT_SERVER_OPERATION,
 			     "dialog", dialog,

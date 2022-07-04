@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-ui-utilities.c - helper functions for GtkUIManager stuff
+/* baul-ui-utilities.c - helper functions for GtkUIManager stuff
 
    Copyright (C) 2004 Red Hat, Inc.
 
@@ -31,12 +31,12 @@
 #include <eel/eel-debug.h>
 #include <eel/eel-graphic-effects.h>
 
-#include "caja-ui-utilities.h"
-#include "caja-file-utilities.h"
-#include "caja-icon-info.h"
+#include "baul-ui-utilities.h"
+#include "baul-file-utilities.h"
+#include "baul-icon-info.h"
 
 void
-caja_ui_unmerge_ui (GtkUIManager *ui_manager,
+baul_ui_unmerge_ui (GtkUIManager *ui_manager,
                     guint *merge_id,
                     GtkActionGroup **action_group)
 {
@@ -55,7 +55,7 @@ caja_ui_unmerge_ui (GtkUIManager *ui_manager,
 }
 
 void
-caja_ui_prepare_merge_ui (GtkUIManager *ui_manager,
+baul_ui_prepare_merge_ui (GtkUIManager *ui_manager,
                           const char *name,
                           guint *merge_id,
                           GtkActionGroup **action_group)
@@ -71,17 +71,17 @@ caja_ui_prepare_merge_ui (GtkUIManager *ui_manager,
 
 
 char *
-caja_get_ui_directory (void)
+baul_get_ui_directory (void)
 {
-    return g_strdup (DATADIR "/caja/ui");
+    return g_strdup (DATADIR "/baul/ui");
 }
 
 char *
-caja_ui_file (const char *partial_path)
+baul_ui_file (const char *partial_path)
 {
     char *path;
 
-    path = g_build_filename (DATADIR "/caja/ui", partial_path, NULL);
+    path = g_build_filename (DATADIR "/baul/ui", partial_path, NULL);
     if (g_file_test (path, G_FILE_TEST_EXISTS))
     {
         return path;
@@ -91,7 +91,7 @@ caja_ui_file (const char *partial_path)
 }
 
 const char *
-caja_ui_string_get (const char *filename)
+baul_ui_string_get (const char *filename)
 {
     static GHashTable *ui_cache = NULL;
     char *ui;
@@ -107,7 +107,7 @@ caja_ui_string_get (const char *filename)
     {
         char *path;
 
-        path = caja_ui_file (filename);
+        path = baul_ui_file (filename);
         if (path == NULL || !g_file_get_contents (path, &ui, NULL, NULL))
         {
             g_warning ("Unable to load ui file %s\n", filename);
@@ -125,7 +125,7 @@ static void
 extension_action_callback (GtkAction *action,
                            gpointer callback_data)
 {
-    caja_menu_item_activate (CAJA_MENU_ITEM (callback_data));
+    baul_menu_item_activate (CAJA_MENU_ITEM (callback_data));
 }
 
 static void
@@ -157,20 +157,20 @@ get_action_icon (const char *icon_name,
 
     if (g_path_is_absolute (icon_name))
     {
-        info = caja_icon_info_lookup_from_path (icon_name, size, scale);
+        info = baul_icon_info_lookup_from_path (icon_name, size, scale);
     }
     else
     {
-        info = caja_icon_info_lookup_from_name (icon_name, size, scale);
+        info = baul_icon_info_lookup_from_name (icon_name, size, scale);
     }
-    surface = caja_icon_info_get_surface_nodefault_at_size (info, size);
+    surface = baul_icon_info_get_surface_nodefault_at_size (info, size);
     g_object_unref (info);
 
     return surface;
 }
 
 GtkAction *
-caja_action_from_menu_item (CajaMenuItem *item,
+baul_action_from_menu_item (CajaMenuItem *item,
                             GtkWidget    *parent_widget)
 {
     char *name, *label, *tip, *icon_name;
@@ -196,7 +196,7 @@ caja_action_from_menu_item (CajaMenuItem *item,
         cairo_surface_t *surface;
 
         surface = get_action_icon (icon_name,
-                                   caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
+                                   baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
                                    parent_widget);
         if (surface != NULL)
         {
@@ -225,7 +225,7 @@ caja_action_from_menu_item (CajaMenuItem *item,
 }
 
 GtkAction *
-caja_toolbar_action_from_menu_item (CajaMenuItem *item, GtkWidget *parent_widget)
+baul_toolbar_action_from_menu_item (CajaMenuItem *item, GtkWidget *parent_widget)
 {
     char *name, *label, *tip, *icon_name;
     gboolean sensitive, priority;
@@ -250,7 +250,7 @@ caja_toolbar_action_from_menu_item (CajaMenuItem *item, GtkWidget *parent_widget
         cairo_surface_t *surface;
 
         surface = get_action_icon (icon_name,
-                                   caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_LARGE_TOOLBAR),
+                                   baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_LARGE_TOOLBAR),
                                    parent_widget);
         if (surface != NULL)
         {
@@ -284,7 +284,7 @@ caja_toolbar_action_from_menu_item (CajaMenuItem *item, GtkWidget *parent_widget
 }
 
 static GdkPixbuf *
-caja_get_thumbnail_frame (void)
+baul_get_thumbnail_frame (void)
 {
     static GdkPixbuf *thumbnail_frame = NULL;
 
@@ -292,7 +292,7 @@ caja_get_thumbnail_frame (void)
     {
         char *image_path;
 
-        image_path = caja_pixmap_file ("thumbnail_frame.png");
+        image_path = baul_pixmap_file ("thumbnail_frame.png");
         if (image_path != NULL)
         {
             thumbnail_frame = gdk_pixbuf_new_from_file (image_path, NULL);
@@ -309,12 +309,12 @@ caja_get_thumbnail_frame (void)
 #define CAJA_THUMBNAIL_FRAME_BOTTOM 3
 
 void
-caja_ui_frame_image (GdkPixbuf **pixbuf)
+baul_ui_frame_image (GdkPixbuf **pixbuf)
 {
     GdkPixbuf *pixbuf_with_frame, *frame;
     int left_offset, top_offset, right_offset, bottom_offset;
 
-    frame = caja_get_thumbnail_frame ();
+    frame = baul_get_thumbnail_frame ();
     if (frame == NULL) {
         return;
     }

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-clipboard.c
+/* baul-clipboard.c
  *
  * Caja Clipboard support.  For now, routines to support component cut
  * and paste.
@@ -28,8 +28,8 @@
  */
 
 #include <config.h>
-#include "caja-clipboard.h"
-#include "caja-file-utilities.h"
+#include "baul-clipboard.h"
+#include "baul-file-utilities.h"
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
@@ -517,7 +517,7 @@ initialize_clipboard_component_with_callback_data (GtkEditable *target,
 }
 
 static void
-caja_clipboard_real_set_up (gpointer target,
+baul_clipboard_real_set_up (gpointer target,
                             GtkUIManager *ui_manager,
                             gboolean shares_selection_changes,
                             SelectAllCallback select_all_callback,
@@ -556,14 +556,14 @@ caja_clipboard_real_set_up (gpointer target,
 }
 
 void
-caja_clipboard_set_up_editable (GtkEditable *target,
+baul_clipboard_set_up_editable (GtkEditable *target,
                                 GtkUIManager *ui_manager,
                                 gboolean shares_selection_changes)
 {
     g_return_if_fail (GTK_IS_EDITABLE (target));
     g_return_if_fail (GTK_IS_UI_MANAGER (ui_manager));
 
-    caja_clipboard_real_set_up (target, ui_manager,
+    baul_clipboard_real_set_up (target, ui_manager,
                                 shares_selection_changes,
                                 editable_select_all_callback,
                                 editable_connect_callbacks,
@@ -571,13 +571,13 @@ caja_clipboard_set_up_editable (GtkEditable *target,
 }
 
 void
-caja_clipboard_set_up_text_view (GtkTextView *target,
+baul_clipboard_set_up_text_view (GtkTextView *target,
                                  GtkUIManager *ui_manager)
 {
     g_return_if_fail (GTK_IS_TEXT_VIEW (target));
     g_return_if_fail (GTK_IS_UI_MANAGER (ui_manager));
 
-    caja_clipboard_real_set_up (target, ui_manager, TRUE,
+    baul_clipboard_real_set_up (target, ui_manager, TRUE,
                                 text_view_select_all_callback,
                                 text_view_connect_callbacks,
                                 text_view_disconnect_callbacks);
@@ -620,7 +620,7 @@ convert_lines_to_str_list (char **lines, gboolean *cut)
 }
 
 GList*
-caja_clipboard_get_uri_list_from_selection_data (GtkSelectionData *selection_data,
+baul_clipboard_get_uri_list_from_selection_data (GtkSelectionData *selection_data,
         gboolean *cut,
         GdkAtom copied_files_atom)
 {
@@ -651,14 +651,14 @@ caja_clipboard_get_uri_list_from_selection_data (GtkSelectionData *selection_dat
 }
 
 GtkClipboard *
-caja_clipboard_get (GtkWidget *widget)
+baul_clipboard_get (GtkWidget *widget)
 {
     return gtk_clipboard_get_for_display (gtk_widget_get_display (GTK_WIDGET (widget)),
                                           GDK_SELECTION_CLIPBOARD);
 }
 
 void
-caja_clipboard_clear_if_colliding_uris (GtkWidget *widget,
+baul_clipboard_clear_if_colliding_uris (GtkWidget *widget,
                                         const GList *item_uris,
                                         GdkAtom copied_files_atom)
 {
@@ -667,13 +667,13 @@ caja_clipboard_clear_if_colliding_uris (GtkWidget *widget,
     gboolean collision;
 
     collision = FALSE;
-    data = gtk_clipboard_wait_for_contents (caja_clipboard_get (widget),
+    data = gtk_clipboard_wait_for_contents (baul_clipboard_get (widget),
                                             copied_files_atom);
     if (data == NULL) {
         return;
     }
 
-    clipboard_item_uris = caja_clipboard_get_uri_list_from_selection_data (data, NULL,
+    clipboard_item_uris = baul_clipboard_get_uri_list_from_selection_data (data, NULL,
                           copied_files_atom);
 
     for (l = (GList *) item_uris; l; l = l->next) {
@@ -685,7 +685,7 @@ caja_clipboard_clear_if_colliding_uris (GtkWidget *widget,
     }
 
     if (collision) {
-        gtk_clipboard_clear (caja_clipboard_get (widget));
+        gtk_clipboard_clear (baul_clipboard_get (widget));
     }
 
     if (clipboard_item_uris) {

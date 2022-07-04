@@ -25,10 +25,10 @@
 
 #include <eel/eel-gtk-macros.h>
 
-#include "caja-search-engine.h"
-#include "caja-search-engine-beagle.h"
-#include "caja-search-engine-simple.h"
-#include "caja-search-engine-tracker.h"
+#include "baul-search-engine.h"
+#include "baul-search-engine-beagle.h"
+#include "baul-search-engine-simple.h"
+#include "baul-search-engine-tracker.h"
 
 struct CajaSearchEngineDetails
 {
@@ -47,7 +47,7 @@ enum
 static guint signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_ABSTRACT_TYPE (CajaSearchEngine,
-                        caja_search_engine,
+                        baul_search_engine,
                         G_TYPE_OBJECT);
 
 static GObjectClass *parent_class = NULL;
@@ -65,7 +65,7 @@ finalize (GObject *object)
 }
 
 static void
-caja_search_engine_class_init (CajaSearchEngineClass *class)
+baul_search_engine_class_init (CajaSearchEngineClass *class)
 {
     GObjectClass *gobject_class;
 
@@ -116,34 +116,34 @@ caja_search_engine_class_init (CajaSearchEngineClass *class)
 }
 
 static void
-caja_search_engine_init (CajaSearchEngine *engine)
+baul_search_engine_init (CajaSearchEngine *engine)
 {
     engine->details = g_new0 (CajaSearchEngineDetails, 1);
 }
 
 CajaSearchEngine *
-caja_search_engine_new (void)
+baul_search_engine_new (void)
 {
     CajaSearchEngine *engine;
 
-    engine = caja_search_engine_tracker_new ();
+    engine = baul_search_engine_tracker_new ();
     if (engine)
     {
         return engine;
     }
 
-    engine = caja_search_engine_beagle_new ();
+    engine = baul_search_engine_beagle_new ();
     if (engine)
     {
         return engine;
     }
 
-    engine = caja_search_engine_simple_new ();
+    engine = baul_search_engine_simple_new ();
     return engine;
 }
 
 void
-caja_search_engine_set_query (CajaSearchEngine *engine, CajaQuery *query)
+baul_search_engine_set_query (CajaSearchEngine *engine, CajaQuery *query)
 {
     g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
     g_return_if_fail (CAJA_SEARCH_ENGINE_GET_CLASS (engine)->set_query != NULL);
@@ -152,7 +152,7 @@ caja_search_engine_set_query (CajaSearchEngine *engine, CajaQuery *query)
 }
 
 void
-caja_search_engine_start (CajaSearchEngine *engine)
+baul_search_engine_start (CajaSearchEngine *engine)
 {
     g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
     g_return_if_fail (CAJA_SEARCH_ENGINE_GET_CLASS (engine)->start != NULL);
@@ -162,7 +162,7 @@ caja_search_engine_start (CajaSearchEngine *engine)
 
 
 void
-caja_search_engine_stop (CajaSearchEngine *engine)
+baul_search_engine_stop (CajaSearchEngine *engine)
 {
     g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
     g_return_if_fail (CAJA_SEARCH_ENGINE_GET_CLASS (engine)->stop != NULL);
@@ -171,7 +171,7 @@ caja_search_engine_stop (CajaSearchEngine *engine)
 }
 
 gboolean
-caja_search_engine_is_indexed (CajaSearchEngine *engine)
+baul_search_engine_is_indexed (CajaSearchEngine *engine)
 {
     g_return_val_if_fail (CAJA_IS_SEARCH_ENGINE (engine), FALSE);
     g_return_val_if_fail (CAJA_SEARCH_ENGINE_GET_CLASS (engine)->is_indexed != NULL, FALSE);
@@ -180,7 +180,7 @@ caja_search_engine_is_indexed (CajaSearchEngine *engine)
 }
 
 void
-caja_search_engine_hits_added (CajaSearchEngine *engine, GList *hits)
+baul_search_engine_hits_added (CajaSearchEngine *engine, GList *hits)
 {
     g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
 
@@ -189,7 +189,7 @@ caja_search_engine_hits_added (CajaSearchEngine *engine, GList *hits)
 
 
 void
-caja_search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits)
+baul_search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits)
 {
     g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
 
@@ -198,7 +198,7 @@ caja_search_engine_hits_subtracted (CajaSearchEngine *engine, GList *hits)
 
 
 void
-caja_search_engine_finished (CajaSearchEngine *engine)
+baul_search_engine_finished (CajaSearchEngine *engine)
 {
     g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
 
@@ -206,7 +206,7 @@ caja_search_engine_finished (CajaSearchEngine *engine)
 }
 
 void
-caja_search_engine_error (CajaSearchEngine *engine, const char *error_message)
+baul_search_engine_error (CajaSearchEngine *engine, const char *error_message)
 {
     g_return_if_fail (CAJA_IS_SEARCH_ENGINE (engine));
 

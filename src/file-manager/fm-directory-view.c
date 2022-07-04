@@ -49,36 +49,36 @@
 #include <eel/eel-string.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include <libcaja-private/caja-recent.h>
-#include <libcaja-extension/caja-menu-provider.h>
-#include <libcaja-private/caja-clipboard.h>
-#include <libcaja-private/caja-clipboard-monitor.h>
-#include <libcaja-private/caja-debug-log.h>
-#include <libcaja-private/caja-desktop-icon-file.h>
-#include <libcaja-private/caja-desktop-directory.h>
-#include <libcaja-private/caja-extensions.h>
-#include <libcaja-private/caja-search-directory.h>
-#include <libcaja-private/caja-directory-background.h>
-#include <libcaja-private/caja-directory.h>
-#include <libcaja-private/caja-dnd.h>
-#include <libcaja-private/caja-file-attributes.h>
-#include <libcaja-private/caja-file-changes-queue.h>
-#include <libcaja-private/caja-file-dnd.h>
-#include <libcaja-private/caja-file-operations.h>
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-file-private.h> /* for caja_file_get_existing_by_uri */
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-link.h>
-#include <libcaja-private/caja-metadata.h>
-#include <libcaja-private/caja-mime-actions.h>
-#include <libcaja-private/caja-module.h>
-#include <libcaja-private/caja-program-choosing.h>
-#include <libcaja-private/caja-trash-monitor.h>
-#include <libcaja-private/caja-ui-utilities.h>
-#include <libcaja-private/caja-signaller.h>
-#include <libcaja-private/caja-autorun.h>
-#include <libcaja-private/caja-icon-names.h>
-#include <libcaja-private/caja-undostack-manager.h>
+#include <libbaul-private/baul-recent.h>
+#include <libbaul-extension/baul-menu-provider.h>
+#include <libbaul-private/baul-clipboard.h>
+#include <libbaul-private/baul-clipboard-monitor.h>
+#include <libbaul-private/baul-debug-log.h>
+#include <libbaul-private/baul-desktop-icon-file.h>
+#include <libbaul-private/baul-desktop-directory.h>
+#include <libbaul-private/baul-extensions.h>
+#include <libbaul-private/baul-search-directory.h>
+#include <libbaul-private/baul-directory-background.h>
+#include <libbaul-private/baul-directory.h>
+#include <libbaul-private/baul-dnd.h>
+#include <libbaul-private/baul-file-attributes.h>
+#include <libbaul-private/baul-file-changes-queue.h>
+#include <libbaul-private/baul-file-dnd.h>
+#include <libbaul-private/baul-file-operations.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-file-private.h> /* for baul_file_get_existing_by_uri */
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-link.h>
+#include <libbaul-private/baul-metadata.h>
+#include <libbaul-private/baul-mime-actions.h>
+#include <libbaul-private/baul-module.h>
+#include <libbaul-private/baul-program-choosing.h>
+#include <libbaul-private/baul-trash-monitor.h>
+#include <libbaul-private/baul-ui-utilities.h>
+#include <libbaul-private/baul-signaller.h>
+#include <libbaul-private/baul-autorun.h>
+#include <libbaul-private/baul-icon-names.h>
+#include <libbaul-private/baul-undostack-manager.h>
 
 #include "fm-directory-view.h"
 #include "fm-list-view.h"
@@ -87,7 +87,7 @@
 #include "fm-error-reporting.h"
 #include "fm-marshal.h"
 #include "fm-properties-window.h"
-#include "libcaja-private/caja-open-with-dialog.h"
+#include "libbaul-private/baul-open-with-dialog.h"
 
 /* Minimum starting update inverval */
 #define UPDATE_INTERVAL_MIN 100
@@ -296,9 +296,9 @@ static void     fm_directory_view_merge_menus                  (FMDirectoryView 
 static void     fm_directory_view_unmerge_menus                (FMDirectoryView      *view);
 static void     fm_directory_view_init_show_hidden_files       (FMDirectoryView      *view);
 static void     fm_directory_view_init_show_backup_files       (FMDirectoryView      *view);
-static void     fm_directory_view_load_location                (CajaView         *caja_view,
+static void     fm_directory_view_load_location                (CajaView         *baul_view,
 								const char           *location);
-static void     fm_directory_view_stop_loading                 (CajaView         *caja_view);
+static void     fm_directory_view_stop_loading                 (CajaView         *baul_view);
 static void     fm_directory_view_drop_proxy_received_uris     (FMDirectoryView *view,
 								const GList *source_uri_list,
 								const char *target_uri,
@@ -461,7 +461,7 @@ application_launch_parameters_new (GAppInfo *application,
 
 	result = g_new0 (ApplicationLaunchParameters, 1);
 	result->application = g_object_ref (application);
-	result->files = caja_file_list_copy (files);
+	result->files = baul_file_list_copy (files);
 
 	if (directory_view != NULL) {
 		g_object_ref (directory_view);
@@ -475,7 +475,7 @@ static void
 application_launch_parameters_free (ApplicationLaunchParameters *parameters)
 {
 	g_object_unref (parameters->application);
-	caja_file_list_free (parameters->files);
+	baul_file_list_free (parameters->files);
 
 	if (parameters->directory_view != NULL) {
 		g_object_unref (parameters->directory_view);
@@ -493,7 +493,7 @@ file_and_directory_list_to_files (GList *fad_list)
 	res = NULL;
 	for (l = fad_list; l != NULL; l = l->next) {
 		fad = l->data;
-		res = g_list_prepend (res, caja_file_ref (fad->file));
+		res = g_list_prepend (res, baul_file_ref (fad->file));
 	}
 	return g_list_reverse (res);
 }
@@ -508,8 +508,8 @@ file_and_directory_list_from_files (CajaDirectory *directory, GList *files)
 	res = NULL;
 	for (l = files; l != NULL; l = l->next) {
 		fad = g_new0 (FileAndDirectory, 1);
-		fad->directory = caja_directory_ref (directory);
-		fad->file = caja_file_ref (l->data);
+		fad->directory = baul_directory_ref (directory);
+		fad->file = baul_file_ref (l->data);
 		res = g_list_prepend (res, fad);
 	}
 	return g_list_reverse (res);
@@ -518,8 +518,8 @@ file_and_directory_list_from_files (CajaDirectory *directory, GList *files)
 static void
 file_and_directory_free (FileAndDirectory *fad)
 {
-	caja_directory_unref (fad->directory);
-	caja_file_unref (fad->file);
+	baul_directory_unref (fad->directory);
+	baul_file_unref (fad->file);
 	g_free (fad);
 }
 
@@ -569,7 +569,7 @@ script_launch_parameters_new (CajaFile *file,
 	result = g_new0 (ScriptLaunchParameters, 1);
 	g_object_ref (directory_view);
 	result->directory_view = directory_view;
-	caja_file_ref (file);
+	baul_file_ref (file);
 	result->file = file;
 
 	return result;
@@ -579,7 +579,7 @@ static void
 script_launch_parameters_free (ScriptLaunchParameters *parameters)
 {
 	g_object_unref (parameters->directory_view);
-	caja_file_unref (parameters->file);
+	baul_file_unref (parameters->file);
 	g_free (parameters);
 }
 
@@ -592,7 +592,7 @@ create_template_parameters_new (CajaFile *file,
 	result = g_new0 (CreateTemplateParameters, 1);
 	g_object_ref (directory_view);
 	result->directory_view = directory_view;
-	caja_file_ref (file);
+	baul_file_ref (file);
 	result->file = file;
 
 	return result;
@@ -602,12 +602,12 @@ static void
 create_templates_parameters_free (CreateTemplateParameters *parameters)
 {
 	g_object_unref (parameters->directory_view);
-	caja_file_unref (parameters->file);
+	baul_file_unref (parameters->file);
 	g_free (parameters);
 }
 
 CajaWindowInfo *
-fm_directory_view_get_caja_window (FMDirectoryView  *view)
+fm_directory_view_get_baul_window (FMDirectoryView  *view)
 {
 	g_assert (view->details->window != NULL);
 
@@ -615,7 +615,7 @@ fm_directory_view_get_caja_window (FMDirectoryView  *view)
 }
 
 CajaWindowSlotInfo *
-fm_directory_view_get_caja_window_slot (FMDirectoryView  *view)
+fm_directory_view_get_baul_window_slot (FMDirectoryView  *view)
 {
 	g_assert (view->details->slot != NULL);
 
@@ -717,10 +717,10 @@ get_view_directory (FMDirectoryView *view)
 	char *uri, *path;
 	GFile *f;
 
-	uri = caja_directory_get_uri (view->details->model);
+	uri = baul_directory_get_uri (view->details->model);
 	if (eel_uri_is_desktop (uri)) {
 		g_free (uri);
-		uri = caja_get_desktop_directory_uri ();
+		uri = baul_get_desktop_directory_uri ();
 
 	}
 	f = g_file_new_for_uri (uri);
@@ -741,7 +741,7 @@ fm_directory_view_activate_files (FMDirectoryView *view,
 	char *path;
 
 	path = get_view_directory (view);
-	caja_mime_activate_files (fm_directory_view_get_containing_window (view),
+	baul_mime_activate_files (fm_directory_view_get_containing_window (view),
 				      view->details->slot,
 				      files,
 				      path,
@@ -761,7 +761,7 @@ fm_directory_view_activate_file (FMDirectoryView *view,
 	char *path;
 
 	path = get_view_directory (view);
-	caja_mime_activate_file (fm_directory_view_get_containing_window (view),
+	baul_mime_activate_file (fm_directory_view_get_containing_window (view),
 				     view->details->slot,
 				     file,
 				     path,
@@ -786,7 +786,7 @@ action_open_callback (GtkAction *action,
 					  CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
 					  0,
 					  TRUE);
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -804,7 +804,7 @@ action_open_close_parent_callback (GtkAction *action,
 					  CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
 					  CAJA_WINDOW_OPEN_FLAG_CLOSE_BEHIND,
 					  TRUE);
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 
@@ -825,7 +825,7 @@ action_open_alternate_callback (GtkAction *action,
 		g_list_foreach (selection, open_one_in_new_window, view);
 	}
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -849,7 +849,7 @@ action_open_new_tab_callback (GtkAction *action,
 						  FALSE);
 	}
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -869,7 +869,7 @@ action_open_folder_window_callback (GtkAction *action,
 		g_list_foreach (selection, open_one_in_folder_window, view);
 	}
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -885,10 +885,10 @@ open_location (FMDirectoryView *directory_view,
 	g_assert (new_uri != NULL);
 
 	window = fm_directory_view_get_containing_window (directory_view);
-	caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+	baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
 			    "directory view open_location window=%p: %s", window, new_uri);
 	location = g_file_new_for_uri (new_uri);
-	caja_window_slot_info_open_location (directory_view->details->slot,
+	baul_window_slot_info_open_location (directory_view->details->slot,
 						 location, mode, flags, NULL);
 	g_object_unref (location);
 }
@@ -909,7 +909,7 @@ application_selected_cb (CajaOpenWithDialog *dialog,
 	files.next = NULL;
 	files.prev = NULL;
 	files.data = file;
-	caja_launch_application (app, &files, parent_window);
+	baul_launch_application (app, &files, parent_window);
 }
 
 static void
@@ -923,11 +923,11 @@ choose_program (FMDirectoryView *view,
 	g_assert (FM_IS_DIRECTORY_VIEW (view));
 	g_assert (CAJA_IS_FILE (file));
 
-	caja_file_ref (file);
-	uri = caja_file_get_uri (file);
-	mime_type = caja_file_get_mime_type (file);
+	baul_file_ref (file);
+	uri = baul_file_get_uri (file);
+	mime_type = baul_file_get_mime_type (file);
 
-	dialog = caja_open_with_dialog_new (uri, mime_type, NULL);
+	dialog = baul_open_with_dialog_new (uri, mime_type, NULL);
 	g_object_set_data_full (G_OBJECT (dialog),
 				"directory-view:file",
 				g_object_ref (file),
@@ -945,7 +945,7 @@ choose_program (FMDirectoryView *view,
 
  	g_free (uri);
 	g_free (mime_type);
-	caja_file_unref (file);
+	baul_file_unref (file);
 }
 
 static void
@@ -961,7 +961,7 @@ open_with_other_program (FMDirectoryView *view)
 		choose_program (view, CAJA_FILE (selection->data));
 	}
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -987,7 +987,7 @@ trash_or_delete_selected_files (FMDirectoryView *view)
 		trash_or_delete_files (fm_directory_view_get_containing_window (view),
 				       selection, TRUE,
 				       view);
-		caja_file_list_free (selection);
+		baul_file_list_free (selection);
 		view->details->selection_was_removed = TRUE;
 	}
 }
@@ -1031,14 +1031,14 @@ delete_selected_files (FMDirectoryView *view)
 	locations = NULL;
 	for (node = selection; node != NULL; node = node->next) {
 		locations = g_list_prepend (locations,
-					    caja_file_get_location ((CajaFile *) node->data));
+					    baul_file_get_location ((CajaFile *) node->data));
 	}
 	locations = g_list_reverse (locations);
 
-	caja_file_operations_delete (locations, fm_directory_view_get_containing_window (view), NULL, NULL);
+	baul_file_operations_delete (locations, fm_directory_view_get_containing_window (view), NULL, NULL);
 
 	g_list_free_full (locations, g_object_unref);
-        caja_file_list_free (selection);
+        baul_file_list_free (selection);
 }
 
 static void
@@ -1058,10 +1058,10 @@ action_restore_from_trash_callback (GtkAction *action,
 	view = FM_DIRECTORY_VIEW (callback_data);
 
 	selection = fm_directory_view_get_selection_for_file_transfer (view);
-	caja_restore_files_from_trash (selection,
+	baul_restore_files_from_trash (selection,
 					   fm_directory_view_get_containing_window (view));
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 
 }
 
@@ -1105,7 +1105,7 @@ action_duplicate_callback (GtkAction *action,
 	        g_array_free (selected_item_locations, TRUE);
 	}
 
-        caja_file_list_free (selection);
+        baul_file_list_free (selection);
 }
 
 static void
@@ -1127,7 +1127,7 @@ action_create_link_callback (GtkAction *action,
 	        g_array_free (selected_item_locations, TRUE);
 	}
 
-        caja_file_list_free (selection);
+        baul_file_list_free (selection);
 }
 
 static void
@@ -1164,12 +1164,12 @@ pattern_select_response_cb (GtkWidget *dialog, int response, gpointer user_data)
 	case GTK_RESPONSE_OK :
 		entry = g_object_get_data (G_OBJECT (dialog), "entry");
 		directory = fm_directory_view_get_model (view);
-		selection = caja_directory_match_pattern (directory,
+		selection = baul_directory_match_pattern (directory,
 					gtk_entry_get_text (GTK_ENTRY (entry)));
 
 		if (selection) {
 			fm_directory_view_set_selection (view, selection);
-			caja_file_list_free (selection);
+			baul_file_list_free (selection);
 
 			fm_directory_view_reveal_selection(view);
 		}
@@ -1182,7 +1182,7 @@ pattern_select_response_cb (GtkWidget *dialog, int response, gpointer user_data)
 	case GTK_RESPONSE_HELP :
 		error = NULL;
 		gtk_show_uri_on_window (GTK_WINDOW (dialog),
-			                "help:mate-user-guide/caja-select-pattern",
+			                "help:mate-user-guide/baul-select-pattern",
 			                gtk_get_current_event_time (), &error);
 		if (error) {
 			eel_show_error_dialog (_("There was an error displaying help."), error->message,
@@ -1326,7 +1326,7 @@ action_save_search_callback (GtkAction *action,
 		CajaSearchDirectory *search;
 
 		search = CAJA_SEARCH_DIRECTORY (directory_view->details->model);
-		caja_search_directory_save_search (search);
+		baul_search_directory_save_search (search);
 
 		/* Save search is disabled */
 		schedule_update_menus (directory_view);
@@ -1448,11 +1448,11 @@ action_save_search_as_callback (GtkAction *action,
 			uri = g_filename_to_uri (path, NULL, NULL);
 			g_free (path);
 
-			caja_search_directory_save_to_file (search, uri);
+			baul_search_directory_save_to_file (search, uri);
 			location = g_file_new_for_uri (uri);
-			caja_file_changes_queue_file_added (location);
+			baul_file_changes_queue_file_added (location);
 			g_object_unref (location);
-			caja_file_changes_consume_changes (TRUE);
+			baul_file_changes_consume_changes (TRUE);
 			g_free (uri);
 		}
 
@@ -1467,7 +1467,7 @@ action_empty_trash_callback (GtkAction *action,
 {
         g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
 
-	caja_file_operations_empty_trash (GTK_WIDGET (callback_data));
+	baul_file_operations_empty_trash (GTK_WIDGET (callback_data));
 }
 
 static void
@@ -1503,9 +1503,9 @@ action_new_launcher_callback (GtkAction *action,
 	parent_uri = fm_directory_view_get_backing_uri (view);
 
 	window = fm_directory_view_get_containing_window (view);
-	caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+	baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
 			    "directory view create new launcher in window=%p: %s", window, parent_uri);
-	caja_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (view)),
+	baul_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (view)),
 						  "mate-desktop-item-edit",
 						  "mate-desktop-item-edit",
 						  FALSE,
@@ -1529,16 +1529,16 @@ action_properties_callback (GtkAction *action,
 		if (view->details->directory_as_file != NULL) {
 			GList *files;
 
-			files = g_list_append (NULL, caja_file_ref (view->details->directory_as_file));
+			files = g_list_append (NULL, baul_file_ref (view->details->directory_as_file));
 
 			fm_properties_window_present (files, GTK_WIDGET (view));
 
-			caja_file_list_free (files);
+			baul_file_list_free (files);
 		}
 	} else {
 		fm_properties_window_present (selection, GTK_WIDGET (view));
 	}
-        caja_file_list_free (selection);
+        baul_file_list_free (selection);
 }
 
 static void
@@ -1553,11 +1553,11 @@ action_location_properties_callback (GtkAction *action,
 	view = FM_DIRECTORY_VIEW (callback_data);
 	g_assert (CAJA_IS_FILE (view->details->location_popup_directory_as_file));
 
-	files = g_list_append (NULL, caja_file_ref (view->details->location_popup_directory_as_file));
+	files = g_list_append (NULL, baul_file_ref (view->details->location_popup_directory_as_file));
 
 	fm_properties_window_present (files, GTK_WIDGET (view));
 
-	caja_file_list_free (files);
+	baul_file_list_free (files);
 }
 
 static gboolean
@@ -1569,7 +1569,7 @@ all_files_in_trash (GList *files)
 	g_return_val_if_fail (files != NULL, FALSE);
 
 	for (node = files; node != NULL; node = node->next) {
-		if (!caja_file_is_in_trash (CAJA_FILE (node->data))) {
+		if (!baul_file_is_in_trash (CAJA_FILE (node->data))) {
 			return FALSE;
 		}
 	}
@@ -1589,7 +1589,7 @@ all_selected_items_in_trash (FMDirectoryView *view)
 	 */
 	selection = fm_directory_view_get_selection (view);
 	result = (selection == NULL) ? FALSE : all_files_in_trash (selection);
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 
 	return result;
 }
@@ -1606,9 +1606,9 @@ we_are_in_vfolder_desktop_dir (FMDirectoryView *view)
 		return FALSE;
 	}
 
-	file = caja_directory_get_corresponding_file (view->details->model);
-	mime_type = caja_file_get_mime_type (file);
-	caja_file_unref (file);
+	file = baul_directory_get_corresponding_file (view->details->model);
+	mime_type = baul_file_get_mime_type (file);
+	baul_file_unref (file);
 
 	if (mime_type != NULL
 	    && strcmp (mime_type, "x-directory/vfolder-desktop") == 0) {
@@ -1672,7 +1672,7 @@ sort_directories_first_changed_callback (gpointer callback_data)
 	view = FM_DIRECTORY_VIEW (callback_data);
 
 	preference_value =
-		g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_SORT_DIRECTORIES_FIRST);
+		g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SORT_DIRECTORIES_FIRST);
 
 	if (preference_value != view->details->sort_directories_first) {
 		view->details->sort_directories_first = preference_value;
@@ -1690,7 +1690,7 @@ static void set_up_scripts_directory_global(void)
 	}
 
 	char* scripts_directory_path;
-	scripts_directory_path = g_build_filename (g_get_user_config_dir (), "caja", "scripts", NULL);
+	scripts_directory_path = g_build_filename (g_get_user_config_dir (), "baul", "scripts", NULL);
 
 	if (g_mkdir_with_parents(scripts_directory_path, 0755) == 0)
 	{
@@ -1703,7 +1703,7 @@ static void set_up_scripts_directory_global(void)
 
 		if (g_file_test(nautilus_scripts_path, G_FILE_TEST_IS_DIR) == TRUE)
 		{
-			char* nautilus_syslink = g_build_filename(g_get_user_config_dir(), "caja", "scripts", "nautilus", NULL);
+			char* nautilus_syslink = g_build_filename(g_get_user_config_dir(), "baul", "scripts", "nautilus", NULL);
 			/* If link already exists, or also any other kind of file/dir with same name, ignore it */
 			if (g_file_test(nautilus_syslink, G_FILE_TEST_IS_SYMLINK) == FALSE &&
 				g_file_test(nautilus_syslink, G_FILE_TEST_EXISTS) == FALSE &&
@@ -1782,14 +1782,14 @@ add_directory_to_directory_list (FMDirectoryView *view,
 	CajaFileAttributes attributes;
 
 	if (g_list_find (*directory_list, directory) == NULL) {
-		caja_directory_ref (directory);
+		baul_directory_ref (directory);
 
 		attributes =
 			CAJA_FILE_ATTRIBUTES_FOR_ICON |
 			CAJA_FILE_ATTRIBUTE_INFO |
 			CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT;
 
-		caja_directory_file_monitor_add (directory, directory_list,
+		baul_directory_file_monitor_add (directory, directory_list,
 						     FALSE, attributes,
 						     (CajaDirectoryCallback)changed_callback, view);
 
@@ -1814,9 +1814,9 @@ remove_directory_from_directory_list (FMDirectoryView *view,
 					      G_CALLBACK (changed_callback),
 					      view);
 
-	caja_directory_file_monitor_remove (directory, directory_list);
+	baul_directory_file_monitor_remove (directory, directory_list);
 
-	caja_directory_unref (directory);
+	baul_directory_unref (directory);
 }
 
 
@@ -1911,7 +1911,7 @@ fm_directory_view_get_selection_count (CajaView *view)
 
 	files = fm_directory_view_get_selection (FM_DIRECTORY_VIEW (view));
 	len = g_list_length (files);
-	caja_file_list_free (files);
+	baul_file_list_free (files);
 
 	return len;
 }
@@ -1927,10 +1927,10 @@ fm_directory_view_get_selection_locations (CajaView *view)
 	files = fm_directory_view_get_selection (FM_DIRECTORY_VIEW (view));
 	locations = NULL;
 	for (l = files; l != NULL; l = l->next) {
-		location = caja_file_get_location (CAJA_FILE (l->data));
+		location = baul_file_get_location (CAJA_FILE (l->data));
 		locations = g_list_prepend (locations, location);
 	}
-	caja_file_list_free (files);
+	baul_file_list_free (files);
 
 	return g_list_reverse (locations);
 }
@@ -1945,18 +1945,18 @@ file_list_from_location_list (const GList *uri_list)
 	for (node = uri_list; node != NULL; node = node->next) {
 		file_list = g_list_prepend
 			(file_list,
-			 caja_file_get (node->data));
+			 baul_file_get (node->data));
 	}
 	return g_list_reverse (file_list);
 }
 
 static void
-fm_directory_view_set_selection_locations (CajaView *caja_view,
+fm_directory_view_set_selection_locations (CajaView *baul_view,
 					   GList *selection_locations)
 {
 	FMDirectoryView *view;
 
-	view = FM_DIRECTORY_VIEW (caja_view);
+	view = FM_DIRECTORY_VIEW (baul_view);
 
 	if (!view->details->loading) {
 		GList *selection;
@@ -1969,7 +1969,7 @@ fm_directory_view_set_selection_locations (CajaView *caja_view,
 		fm_directory_view_set_selection (view, selection);
 		view->details->selection_change_is_due_to_shell = FALSE;
 		fm_directory_view_reveal_selection (view);
-		caja_file_list_free (selection);
+		baul_file_list_free (selection);
 	} else {
 		/* If we are still loading, set the list of pending URIs instead.
 		 * done_loading() will eventually select the pending URIs and reveal them.
@@ -2034,58 +2034,58 @@ fm_directory_view_init (FMDirectoryView *view)
 	gtk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (view), FALSE);
 
 	set_up_scripts_directory_global ();
-	scripts_directory = caja_directory_get_by_uri (scripts_directory_uri);
+	scripts_directory = baul_directory_get_by_uri (scripts_directory_uri);
 	add_directory_to_scripts_directory_list (view, scripts_directory);
-	caja_directory_unref (scripts_directory);
+	baul_directory_unref (scripts_directory);
 
-	if (caja_should_use_templates_directory ()) {
+	if (baul_should_use_templates_directory ()) {
 		CajaDirectory *templates_directory;
 		char *templates_uri;
 
-		templates_uri = caja_get_templates_directory_uri ();
-		templates_directory = caja_directory_get_by_uri (templates_uri);
+		templates_uri = baul_get_templates_directory_uri ();
+		templates_directory = baul_directory_get_by_uri (templates_uri);
 		g_free (templates_uri);
 		add_directory_to_templates_directory_list (view, templates_directory);
-		caja_directory_unref (templates_directory);
+		baul_directory_unref (templates_directory);
 	}
 	update_templates_directory (view);
-	g_signal_connect_object (caja_signaller_get_current (),
+	g_signal_connect_object (baul_signaller_get_current (),
 				 "user_dirs_changed",
 				 G_CALLBACK (user_dirs_changed),
 				 view, G_CONNECT_SWAPPED);
 
 	view->details->sort_directories_first =
-		g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_SORT_DIRECTORIES_FIRST);
+		g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SORT_DIRECTORIES_FIRST);
 
-	g_signal_connect_object (caja_trash_monitor_get (), "trash_state_changed",
+	g_signal_connect_object (baul_trash_monitor_get (), "trash_state_changed",
 				 G_CALLBACK (fm_directory_view_trash_state_changed_callback), view, 0);
 
 	/* React to clipboard changes */
-	g_signal_connect_object (caja_clipboard_monitor_get (), "clipboard_changed",
+	g_signal_connect_object (baul_clipboard_monitor_get (), "clipboard_changed",
 				 G_CALLBACK (clipboard_changed_callback), view, 0);
 
         /* Register to menu provider extension signal managing menu updates */
-        g_signal_connect_object (caja_signaller_get_current (), "popup_menu_changed",
+        g_signal_connect_object (baul_signaller_get_current (), "popup_menu_changed",
                          G_CALLBACK (fm_directory_view_update_menus), view, G_CONNECT_SWAPPED);
 
 	gtk_widget_show (GTK_WIDGET (view));
 
-	g_signal_connect_swapped (caja_preferences,
+	g_signal_connect_swapped (baul_preferences,
 							  "changed::" CAJA_PREFERENCES_ENABLE_DELETE,
 							  G_CALLBACK (schedule_update_menus_callback), view);
-	g_signal_connect_swapped (caja_icon_view_preferences,
+	g_signal_connect_swapped (baul_icon_view_preferences,
 							  "changed::" CAJA_PREFERENCES_ICON_VIEW_CAPTIONS,
 							  G_CALLBACK(text_attribute_names_changed_callback),
 							  view);
-	g_signal_connect_swapped (caja_preferences,
+	g_signal_connect_swapped (baul_preferences,
 							  "changed::" CAJA_PREFERENCES_SHOW_IMAGE_FILE_THUMBNAILS,
 							  G_CALLBACK (image_display_policy_changed_callback),
 							  view);
-	g_signal_connect_swapped (caja_preferences,
+	g_signal_connect_swapped (baul_preferences,
 							  "changed::" CAJA_PREFERENCES_CLICK_POLICY,
 							  G_CALLBACK(click_policy_changed_callback),
 							  view);
-	g_signal_connect_swapped (caja_preferences,
+	g_signal_connect_swapped (baul_preferences,
 							  "changed::" CAJA_PREFERENCES_SORT_DIRECTORIES_FIRST,
 							  G_CALLBACK(sort_directories_first_changed_callback),
 							  view);
@@ -2101,12 +2101,12 @@ fm_directory_view_init (FMDirectoryView *view)
 	view->details->redo_action_description = NULL;
 	view->details->redo_action_label = NULL;
 
-	CajaUndoStackManager* manager = caja_undostack_manager_instance ();
+	CajaUndoStackManager* manager = baul_undostack_manager_instance ();
 
 	g_signal_connect_object (G_OBJECT(manager), "request-menu-update",
 		   G_CALLBACK(undo_redo_menu_update_callback), view, 0);
 
-	caja_undostack_manager_request_menu_update (caja_undostack_manager_instance());
+	baul_undostack_manager_request_menu_update (baul_undostack_manager_instance());
 }
 
 static void
@@ -2118,21 +2118,21 @@ real_unmerge_menus (FMDirectoryView *view)
 		return;
 	}
 
-	ui_manager = caja_window_info_get_ui_manager (view->details->window);
+	ui_manager = baul_window_info_get_ui_manager (view->details->window);
 
-	caja_ui_unmerge_ui (ui_manager,
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->dir_merge_id,
 				&view->details->dir_action_group);
-	caja_ui_unmerge_ui (ui_manager,
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->extensions_menu_merge_id,
 				&view->details->extensions_menu_action_group);
-	caja_ui_unmerge_ui (ui_manager,
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->open_with_merge_id,
 				&view->details->open_with_action_group);
-	caja_ui_unmerge_ui (ui_manager,
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->scripts_merge_id,
 				&view->details->scripts_action_group);
-	caja_ui_unmerge_ui (ui_manager,
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->templates_merge_id,
 				&view->details->templates_action_group);
 }
@@ -2190,12 +2190,12 @@ fm_directory_view_destroy (GtkWidget *object)
 	}
 
 	if (view->details->model) {
-		caja_directory_unref (view->details->model);
+		baul_directory_unref (view->details->model);
 		view->details->model = NULL;
 	}
 
 	if (view->details->directory_as_file) {
-		caja_file_unref (view->details->directory_as_file);
+		baul_file_unref (view->details->directory_as_file);
 		view->details->directory_as_file = NULL;
 	}
 
@@ -2209,15 +2209,15 @@ fm_directory_view_finalize (GObject *object)
 
 	view = FM_DIRECTORY_VIEW (object);
 
-	g_signal_handlers_disconnect_by_func (caja_preferences,
+	g_signal_handlers_disconnect_by_func (baul_preferences,
         				      schedule_update_menus_callback, view);
-	g_signal_handlers_disconnect_by_func (caja_icon_view_preferences,
+	g_signal_handlers_disconnect_by_func (baul_icon_view_preferences,
         				      text_attribute_names_changed_callback, view);
-	g_signal_handlers_disconnect_by_func (caja_preferences,
+	g_signal_handlers_disconnect_by_func (baul_preferences,
         				      image_display_policy_changed_callback, view);
-	g_signal_handlers_disconnect_by_func (caja_preferences,
+	g_signal_handlers_disconnect_by_func (baul_preferences,
         				      click_policy_changed_callback, view);
-	g_signal_handlers_disconnect_by_func (caja_preferences,
+	g_signal_handlers_disconnect_by_func (baul_preferences,
         				      sort_directories_first_changed_callback, view);
 	g_signal_handlers_disconnect_by_func (mate_lockdown_preferences,
         				      schedule_update_menus, view);
@@ -2279,27 +2279,27 @@ fm_directory_view_display_selection_info (FMDirectoryView *view)
 
 	for (p = selection; p != NULL; p = p->next) {
 		file = p->data;
-		if (caja_file_is_directory (file)) {
+		if (baul_file_is_directory (file)) {
 			folder_count++;
-			if (caja_file_get_directory_item_count (file, &file_item_count, NULL)) {
+			if (baul_file_get_directory_item_count (file, &file_item_count, NULL)) {
 				folder_item_count += file_item_count;
 			} else {
 				folder_item_count_known = FALSE;
 			}
 		} else {
 			non_folder_count++;
-			if (!caja_file_can_get_size (file)) {
+			if (!baul_file_can_get_size (file)) {
 				non_folder_size_known = TRUE;
-				non_folder_size += caja_file_get_size (file);
+				non_folder_size += baul_file_get_size (file);
 			}
 		}
 
 		if (first_item_name == NULL) {
-			first_item_name = caja_file_get_display_name (file);
+			first_item_name = baul_file_get_display_name (file);
 		}
 	}
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 
 	/* Break out cases for localization's sake. But note that there are still pieces
 	 * being assembled in a particular order, which may be a problem for some localizers.
@@ -2363,7 +2363,7 @@ fm_directory_view_display_selection_info (FMDirectoryView *view)
 		if (non_folder_size_known) {
 			char *size_string;
 
-			if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_USE_IEC_UNITS))
+			if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_USE_IEC_UNITS))
 				size_string = g_format_size_full (non_folder_size, G_FORMAT_SIZE_IEC_UNITS);
 			else
 				size_string = g_format_size(non_folder_size);
@@ -2384,7 +2384,7 @@ fm_directory_view_display_selection_info (FMDirectoryView *view)
 		}
 	}
 
-	free_space_str = caja_file_get_volume_free_space (view->details->directory_as_file);
+	free_space_str = baul_file_get_volume_free_space (view->details->directory_as_file);
 	if (free_space_str != NULL) {
 		obj_selected_free_space_str = g_strdup_printf (_("Free space: %s"), free_space_str);
 	}
@@ -2473,7 +2473,7 @@ fm_directory_view_display_selection_info (FMDirectoryView *view)
 	g_free (folder_item_count_str);
 	g_free (non_folder_str);
 
-	caja_window_slot_info_set_status (view->details->slot,
+	baul_window_slot_info_set_status (view->details->slot,
 					      status_string);
 	g_free (status_string);
 }
@@ -2481,7 +2481,7 @@ fm_directory_view_display_selection_info (FMDirectoryView *view)
 void
 fm_directory_view_send_selection_change (FMDirectoryView *view)
 {
-	caja_window_info_report_selection_changed (view->details->window);
+	baul_window_info_report_selection_changed (view->details->window);
 
 	view->details->send_selection_change_to_shell = FALSE;
 }
@@ -2493,13 +2493,13 @@ fm_directory_view_get_allow_moves (FMDirectoryView *view)
 }
 
 static void
-fm_directory_view_load_location (CajaView *caja_view,
+fm_directory_view_load_location (CajaView *baul_view,
 				 const char *location)
 {
 	CajaDirectory *directory;
 	FMDirectoryView *directory_view;
 
-	directory_view = FM_DIRECTORY_VIEW (caja_view);
+	directory_view = FM_DIRECTORY_VIEW (baul_view);
 
 	if (eel_uri_is_search (location)) {
 		directory_view->details->allow_moves = FALSE;
@@ -2507,15 +2507,15 @@ fm_directory_view_load_location (CajaView *caja_view,
 		directory_view->details->allow_moves = TRUE;
 	}
 
-	directory = caja_directory_get_by_uri (location);
+	directory = baul_directory_get_by_uri (location);
 	load_directory (directory_view, directory);
-	caja_directory_unref (directory);
+	baul_directory_unref (directory);
 }
 
 static void
-fm_directory_view_stop_loading (CajaView *caja_view)
+fm_directory_view_stop_loading (CajaView *baul_view)
 {
-	fm_directory_view_stop (FM_DIRECTORY_VIEW (caja_view));
+	fm_directory_view_stop (FM_DIRECTORY_VIEW (baul_view));
 }
 
 static gboolean
@@ -2546,7 +2546,7 @@ done_loading (FMDirectoryView *view,
 		GList *locations_selected;
 
 		if (all_files_seen) {
-			caja_window_info_report_load_complete (view->details->window, CAJA_VIEW (view));
+			baul_window_info_report_load_complete (view->details->window, CAJA_VIEW (view));
 		}
 
 		schedule_update_menus (view);
@@ -2565,7 +2565,7 @@ done_loading (FMDirectoryView *view,
 			view->details->selection_change_is_due_to_shell = TRUE;
 			fm_directory_view_set_selection (view, selection);
 			view->details->selection_change_is_due_to_shell = FALSE;
-			caja_file_list_free (selection);
+			baul_file_list_free (selection);
 
 			if (FM_IS_LIST_VIEW (view)) {
 				/* HACK: We should be able to directly call reveal_selection here,
@@ -2603,7 +2603,7 @@ static void
 debuting_files_data_free (DebutingFilesData *data)
 {
 	g_hash_table_unref (data->debuting_files);
-	caja_file_list_free (data->added_files);
+	baul_file_list_free (data->added_files);
 	g_free (data);
 }
 
@@ -2619,10 +2619,10 @@ debuting_files_add_file_callback (FMDirectoryView *view,
 {
 	GFile *location;
 
-	location = caja_file_get_location (new_file);
+	location = baul_file_get_location (new_file);
 
 	if (g_hash_table_remove (data->debuting_files, location)) {
-		caja_file_ref (new_file);
+		baul_file_ref (new_file);
 		data->added_files = g_list_prepend (data->added_files, new_file);
 
 		if (g_hash_table_size (data->debuting_files) == 0) {
@@ -2648,7 +2648,7 @@ copy_move_done_data_free (CopyMoveDoneData *data)
 	g_assert (data != NULL);
 
 	eel_remove_weak_pointer (&data->directory_view);
-	caja_file_list_free (data->added_files);
+	baul_file_list_free (data->added_files);
 	g_free (data);
 }
 
@@ -2658,11 +2658,11 @@ pre_copy_move_add_file_callback (FMDirectoryView *view,
 				 CajaDirectory *directory,
 				 CopyMoveDoneData *data)
 {
-	caja_file_ref (new_file);
+	baul_file_ref (new_file);
 	data->added_files = g_list_prepend (data->added_files, new_file);
 }
 
-/* This needs to be called prior to caja_file_operations_copy_move.
+/* This needs to be called prior to baul_file_operations_copy_move.
  * It hooks up a signal handler to catch any icons that get added before
  * the copy_done_callback is invoked. The return value should  be passed
  * as the data for uri_copy_move_done_callback.
@@ -2696,7 +2696,7 @@ copy_move_done_partition_func (gpointer data, gpointer callback_data)
  	GFile *location;
  	gboolean result;
 
-	location = caja_file_get_location (CAJA_FILE (data));
+	location = baul_file_get_location (CAJA_FILE (data));
 	result = g_hash_table_remove ((GHashTable *) callback_data, location);
 	g_object_unref (location);
 
@@ -2719,7 +2719,7 @@ remove_not_really_moved_files (gpointer key,
 
 	added_files = callback_data;
 	*added_files = g_list_prepend (*added_files,
-				       caja_file_get (loc));
+				       baul_file_get (loc));
 	return TRUE;
 }
 
@@ -2806,7 +2806,7 @@ real_file_still_belongs (FMDirectoryView *view, CajaFile *file, CajaDirectory *d
 		return FALSE;
 	}
 
-	return caja_directory_contains_file (directory, file);
+	return baul_directory_contains_file (directory, file);
 }
 
 static gboolean
@@ -2819,7 +2819,7 @@ still_should_show_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *di
 static gboolean
 ready_to_load (CajaFile *file)
 {
-	return caja_file_check_if_ready (file,
+	return baul_file_check_if_ready (file,
 					     CAJA_FILE_ATTRIBUTES_FOR_ICON);
 }
 
@@ -2973,8 +2973,8 @@ process_old_files (FMDirectoryView *view)
 			files = file_and_directory_list_to_files (files_changed);
 			send_selection_change = eel_g_lists_sort_and_check_for_intersection
 				(&files, &selection);
-			caja_file_list_free (files);
-			caja_file_list_free (selection);
+			baul_file_list_free (files);
+			baul_file_list_free (selection);
 		}
 
 		file_and_directory_list_free (view->details->old_added_files);
@@ -3005,7 +3005,7 @@ display_pending_files (FMDirectoryView *view)
 	process_old_files (view);
 
 	if (view->details->model != NULL
-	    && caja_directory_are_all_files_seen (view->details->model)
+	    && baul_directory_are_all_files_seen (view->details->model)
 	    && g_hash_table_size (view->details->non_ready_files) == 0) {
 		done_loading (view, TRUE);
 	}
@@ -3176,7 +3176,7 @@ queue_pending_files (FMDirectoryView *view,
 	*pending_list = g_list_concat (file_and_directory_list_from_files (directory, files),
 				       *pending_list);
 
-	if (! view->details->loading || caja_directory_are_all_files_seen (directory)) {
+	if (! view->details->loading || baul_directory_are_all_files_seen (directory)) {
 		schedule_timeout_display_of_pending_files (view, view->details->update_interval);
 	}
 }
@@ -3277,7 +3277,7 @@ files_added_callback (CajaDirectory *directory,
 
 	window = fm_directory_view_get_containing_window (view);
 	uri = fm_directory_view_get_uri (view);
-	caja_debug_log_with_file_list (FALSE, CAJA_DEBUG_LOG_DOMAIN_ASYNC, files,
+	baul_debug_log_with_file_list (FALSE, CAJA_DEBUG_LOG_DOMAIN_ASYNC, files,
 					   "files added in window %p: %s",
 					   window,
 					   uri ? uri : "(no directory)");
@@ -3304,7 +3304,7 @@ files_changed_callback (CajaDirectory *directory,
 
 	window = fm_directory_view_get_containing_window (view);
 	uri = fm_directory_view_get_uri (view);
-	caja_debug_log_with_file_list (FALSE, CAJA_DEBUG_LOG_DOMAIN_ASYNC, files,
+	baul_debug_log_with_file_list (FALSE, CAJA_DEBUG_LOG_DOMAIN_ASYNC, files,
 					   "files changed in window %p: %s",
 					   window,
 					   uri ? uri : "(no directory)");
@@ -3389,7 +3389,7 @@ fm_directory_view_add_subdirectory (FMDirectoryView  *view,
 
 	g_assert (!g_list_find (view->details->subdirectory_list, directory));
 
-	caja_directory_ref (directory);
+	baul_directory_ref (directory);
 
 	attributes =
 		CAJA_FILE_ATTRIBUTES_FOR_ICON |
@@ -3399,7 +3399,7 @@ fm_directory_view_add_subdirectory (FMDirectoryView  *view,
 		CAJA_FILE_ATTRIBUTE_MOUNT |
 		CAJA_FILE_ATTRIBUTE_EXTENSION_INFO;
 
-	caja_directory_file_monitor_add (directory,
+	baul_directory_file_monitor_add (directory,
 					     &view->details->model,
 					     view->details->show_hidden_files,
 					     attributes,
@@ -3432,9 +3432,9 @@ fm_directory_view_remove_subdirectory (FMDirectoryView  *view,
 					      G_CALLBACK (files_changed_callback),
 					      view);
 
-	caja_directory_file_monitor_remove (directory, &view->details->model);
+	baul_directory_file_monitor_remove (directory, &view->details->model);
 
-	caja_directory_unref (directory);
+	baul_directory_unref (directory);
 }
 
 /**
@@ -3737,7 +3737,7 @@ fm_directory_view_get_ui_manager (FMDirectoryView  *view)
 	if (view->details->window == NULL) {
 		return NULL;
 	}
-	return caja_window_info_get_ui_manager (view->details->window);
+	return baul_window_info_get_ui_manager (view->details->window);
 }
 
 /**
@@ -3776,7 +3776,7 @@ prepend_uri_one (gpointer data, gpointer callback_data)
 
 	result = (GList **) callback_data;
 	file = (CajaFile *) data;
-	*result = g_list_prepend (*result, caja_file_get_uri (file));
+	*result = g_list_prepend (*result, baul_file_get_uri (file));
 }
 
 static void
@@ -3824,7 +3824,7 @@ fm_directory_view_create_links_for_files (FMDirectoryView *view, GList *files,
 
         copy_move_done_data = pre_copy_move (view);
 	dir_uri = fm_directory_view_get_backing_uri (view);
-	caja_file_operations_copy_move (uris, relative_item_points, dir_uri, GDK_ACTION_LINK,
+	baul_file_operations_copy_move (uris, relative_item_points, dir_uri, GDK_ACTION_LINK,
 					    GTK_WIDGET (view), copy_move_done_callback, copy_move_done_data);
 	g_free (dir_uri);
 	g_list_free_full (uris, g_free);
@@ -3857,7 +3857,7 @@ fm_directory_view_duplicate_selection (FMDirectoryView *view, GList *files,
 			    DUPLICATE_VERTICAL_ICON_OFFSET);
 
         copy_move_done_data = pre_copy_move (view);
-	caja_file_operations_copy_move (uris, relative_item_points, NULL, GDK_ACTION_COPY,
+	baul_file_operations_copy_move (uris, relative_item_points, NULL, GDK_ACTION_COPY,
 		GTK_WIDGET (view), copy_move_done_callback, copy_move_done_data);
 	g_list_free_full (uris, g_free);
 }
@@ -3892,7 +3892,7 @@ special_link_in_selection (FMDirectoryView *view)
 		}
 	}
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 
 	return saw_link;
 }
@@ -3919,15 +3919,15 @@ desktop_or_home_dir_in_selection (FMDirectoryView *view)
 		file = CAJA_FILE (node->data);
 
 		saw_desktop_or_home_dir =
-			caja_file_is_home (file)
-			|| caja_file_is_desktop_directory (file);
+			baul_file_is_home (file)
+			|| baul_file_is_desktop_directory (file);
 
 		if (saw_desktop_or_home_dir) {
 			break;
 		}
 	}
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 
 	return saw_desktop_or_home_dir;
 }
@@ -3954,12 +3954,12 @@ trash_or_delete_files (GtkWindow *parent_window,
 	locations = NULL;
 	for (node = files; node != NULL; node = node->next) {
 		locations = g_list_prepend (locations,
-					    caja_file_get_location ((CajaFile *) node->data));
+					    baul_file_get_location ((CajaFile *) node->data));
 	}
 
 	locations = g_list_reverse (locations);
 
-	caja_file_operations_trash_or_delete (locations,
+	baul_file_operations_trash_or_delete (locations,
 						  parent_window,
 						  (CajaDeleteCallback) trash_or_delete_done_cb,
 						  view);
@@ -3969,7 +3969,7 @@ trash_or_delete_files (GtkWindow *parent_window,
 static gboolean
 can_rename_file (FMDirectoryView *view, CajaFile *file)
 {
-	return caja_file_can_rename (file);
+	return baul_file_can_rename (file);
 }
 
 static void
@@ -4009,7 +4009,7 @@ static void
 delayed_rename_file_hack_removed (RenameData *data)
 {
 	g_object_unref (data->view);
-	caja_file_unref (data->new_file);
+	baul_file_unref (data->new_file);
 	g_free (data);
 }
 
@@ -4034,7 +4034,7 @@ rename_file (FMDirectoryView *view, CajaFile *new_file)
 
 		data = g_new (RenameData, 1);
 		data->view = g_object_ref (view);
-		data->new_file = caja_file_ref (new_file);
+		data->new_file = baul_file_ref (new_file);
 		if (view->details->delayed_rename_file_id != 0) {
 			g_source_remove (view->details->delayed_rename_file_id);
 		}
@@ -4059,7 +4059,7 @@ reveal_newly_added_folder (FMDirectoryView *view, CajaFile *new_file,
 {
 	GFile *location;
 
-	location = caja_file_get_location (new_file);
+	location = baul_file_get_location (new_file);
 	if (g_file_equal (location, target_location)) {
 		g_signal_handlers_disconnect_by_func (view,
 						      G_CALLBACK (reveal_newly_added_folder),
@@ -4083,7 +4083,7 @@ track_newly_added_locations (FMDirectoryView *view, CajaFile *new_file,
 
 	data = user_data;
 
-	g_hash_table_insert (data->added_locations, caja_file_get_location (new_file), NULL);
+	g_hash_table_insert (data->added_locations, baul_file_get_location (new_file), NULL);
 }
 
 static void
@@ -4115,8 +4115,8 @@ new_folder_done (GFile *new_folder, gpointer user_data)
 	g_snprintf (screen_string, sizeof (screen_string), "%d", gdk_x11_screen_get_screen_number (screen));
 
 
-	file = caja_file_get (new_folder);
-	caja_file_set_metadata
+	file = baul_file_get (new_folder);
+	baul_file_set_metadata
 		(file, CAJA_METADATA_KEY_SCREEN,
 		 NULL,
 		 screen_string);
@@ -4136,7 +4136,7 @@ new_folder_done (GFile *new_folder, gpointer user_data)
 				       (GClosureNotify)g_object_unref,
 				       G_CONNECT_AFTER);
 	}
-	caja_file_unref (file);
+	baul_file_unref (file);
 
  fail:
 	g_hash_table_destroy (data->added_locations);
@@ -4210,7 +4210,7 @@ fm_directory_view_new_folder (FMDirectoryView *directory_view)
 	pos = context_menu_to_file_operation_position (directory_view);
 
 	parent_uri = fm_directory_view_get_backing_uri (directory_view);
-	caja_file_operations_new_folder (GTK_WIDGET (directory_view),
+	baul_file_operations_new_folder (GTK_WIDGET (directory_view),
 					     pos, parent_uri,
 					     new_folder_done, data);
 
@@ -4252,7 +4252,7 @@ fm_directory_view_new_file_with_initial_contents (FMDirectoryView *directory_vie
 		pos = context_menu_to_file_operation_position (directory_view);
 	}
 
-	caja_file_operations_new_file (GTK_WIDGET (directory_view),
+	baul_file_operations_new_file (GTK_WIDGET (directory_view),
 					   pos, parent_uri, filename,
 					   initial_contents, length,
 					   new_folder_done, data);
@@ -4285,15 +4285,15 @@ fm_directory_view_new_file (FMDirectoryView *directory_view,
 		return;
 	}
 
-	g_return_if_fail (caja_file_is_local (source));
+	g_return_if_fail (baul_file_is_local (source));
 
 	pos = context_menu_to_file_operation_position (directory_view);
 
 	data = setup_new_folder_data (directory_view);
 
-	source_uri = caja_file_get_uri (source);
+	source_uri = baul_file_get_uri (source);
 
-	caja_file_operations_new_file_from_template (GTK_WIDGET (directory_view),
+	baul_file_operations_new_file_from_template (GTK_WIDGET (directory_view),
 							 pos,
 							 parent_uri != NULL ? parent_uri : container_uri,
 							 NULL,
@@ -4345,7 +4345,7 @@ open_with_launch_application_callback (GtkAction *action,
 	ApplicationLaunchParameters *launch_parameters;
 
 	launch_parameters = (ApplicationLaunchParameters *) callback_data;
-	caja_launch_application
+	baul_launch_application
 		(launch_parameters->application,
 		 launch_parameters->files,
 		 fm_directory_view_get_containing_window (launch_parameters->directory_view));
@@ -4552,7 +4552,7 @@ add_application_to_open_with_menu (FMDirectoryView *view,
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 	g_object_unref (action);
 
-	gtk_ui_manager_add_ui (caja_window_info_get_ui_manager (view->details->window),
+	gtk_ui_manager_add_ui (baul_window_info_get_ui_manager (view->details->window),
 			       view->details->open_with_merge_id,
 			       menu_placeholder,
 			       action_name,
@@ -4562,12 +4562,12 @@ add_application_to_open_with_menu (FMDirectoryView *view,
 
 	path = g_strdup_printf ("%s/%s", menu_placeholder, action_name);
 	menuitem = gtk_ui_manager_get_widget (
-			caja_window_info_get_ui_manager (view->details->window),
+			baul_window_info_get_ui_manager (view->details->window),
 			path);
 	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 	g_free (path);
 
-	gtk_ui_manager_add_ui (caja_window_info_get_ui_manager (view->details->window),
+	gtk_ui_manager_add_ui (baul_window_info_get_ui_manager (view->details->window),
 			       view->details->open_with_merge_id,
 			       popup_placeholder,
 			       action_name,
@@ -4577,7 +4577,7 @@ add_application_to_open_with_menu (FMDirectoryView *view,
 
 	path = g_strdup_printf ("%s/%s", popup_placeholder, action_name);
 	menuitem = gtk_ui_manager_get_widget (
-			caja_window_info_get_ui_manager (view->details->window),
+			baul_window_info_get_ui_manager (view->details->window),
 			path);
 	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 
@@ -4604,10 +4604,10 @@ add_parent_folder_to_open_menu (FMDirectoryView *view,
 
 	file = g_list_first(files)->data;
 
-	if (caja_file_is_directory (file))
+	if (baul_file_is_directory (file))
 		return;
 
-	uri = caja_file_get_parent_uri (file);
+	uri = baul_file_get_parent_uri (file);
 
 	label = g_strdup (_("Open parent location"));
 	tip = g_strdup (_("Open parent location for the selected item"));
@@ -4632,7 +4632,7 @@ add_parent_folder_to_open_menu (FMDirectoryView *view,
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 	g_object_unref (action);
 
-	gtk_ui_manager_add_ui (caja_window_info_get_ui_manager (view->details->window),
+	gtk_ui_manager_add_ui (baul_window_info_get_ui_manager (view->details->window),
 			       view->details->open_with_merge_id,
 			       menu_placeholder,
 			       action_name,
@@ -4642,12 +4642,12 @@ add_parent_folder_to_open_menu (FMDirectoryView *view,
 
 	path = g_strdup_printf ("%s/%s", menu_placeholder, action_name);
 	menuitem = gtk_ui_manager_get_widget (
-			caja_window_info_get_ui_manager (view->details->window),
+			baul_window_info_get_ui_manager (view->details->window),
 			path);
 	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 	g_free (path);
 
-	gtk_ui_manager_add_ui (caja_window_info_get_ui_manager (view->details->window),
+	gtk_ui_manager_add_ui (baul_window_info_get_ui_manager (view->details->window),
 			       view->details->open_with_merge_id,
 			       popup_placeholder,
 			       action_name,
@@ -4657,7 +4657,7 @@ add_parent_folder_to_open_menu (FMDirectoryView *view,
 
 	path = g_strdup_printf ("%s/%s", popup_placeholder, action_name);
 	menuitem = gtk_ui_manager_get_widget (
-			caja_window_info_get_ui_manager (view->details->window),
+			baul_window_info_get_ui_manager (view->details->window),
 			path);
 	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 
@@ -4689,13 +4689,13 @@ add_x_content_apps (FMDirectoryView *view, CajaFile *file, GList **applications)
 
 	g_return_if_fail (applications != NULL);
 
-	mount = caja_file_get_mount (file);
+	mount = baul_file_get_mount (file);
 
 	if (mount == NULL) {
 		return;
 	}
 
-	x_content_types = caja_autorun_get_cached_x_content_types_for_mount (mount);
+	x_content_types = baul_autorun_get_cached_x_content_types_for_mount (mount);
 	if (x_content_types != NULL) {
 		unsigned int n;
 
@@ -4708,7 +4708,7 @@ add_x_content_apps (FMDirectoryView *view, CajaFile *file, GList **applications)
 		}
 		g_strfreev (x_content_types);
 	} else {
-		caja_autorun_get_x_content_types_for_mount_async (mount,
+		baul_autorun_get_x_content_types_for_mount_async (mount,
 								      get_x_content_async_callback,
 								      NULL,
 								      g_object_ref (view));
@@ -4733,12 +4733,12 @@ reset_open_with_menu (FMDirectoryView *view, GList *selection)
 
 	/* Clear any previous inserted items in the applications and viewers placeholders */
 
-	ui_manager = caja_window_info_get_ui_manager (view->details->window);
-	caja_ui_unmerge_ui (ui_manager,
+	ui_manager = baul_window_info_get_ui_manager (view->details->window);
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->open_with_merge_id,
 				&view->details->open_with_action_group);
 
-	caja_ui_prepare_merge_ui (ui_manager,
+	baul_ui_prepare_merge_ui (ui_manager,
 				      "OpenWithGroup",
 				      &view->details->open_with_merge_id,
 				      &view->details->open_with_action_group);
@@ -4750,12 +4750,12 @@ reset_open_with_menu (FMDirectoryView *view, GList *selection)
 
 	default_app = NULL;
 	if (filter_default) {
-		default_app = caja_mime_get_default_application_for_files (selection);
+		default_app = baul_mime_get_default_application_for_files (selection);
 	}
 
 	applications = NULL;
 	if (other_applications_visible) {
-		applications = caja_mime_get_applications_for_files (selection);
+		applications = baul_mime_get_applications_for_files (selection);
 	}
 
 	if (g_list_length (selection) == 1) {
@@ -4790,7 +4790,7 @@ reset_open_with_menu (FMDirectoryView *view, GList *selection)
 			popup_path = FM_DIRECTORY_VIEW_POPUP_PATH_APPLICATIONS_PLACEHOLDER;
 		}
 
-		gtk_ui_manager_add_ui (caja_window_info_get_ui_manager (view->details->window),
+		gtk_ui_manager_add_ui (baul_window_info_get_ui_manager (view->details->window),
 				       view->details->open_with_merge_id,
 				       menu_path,
 				       "separator",
@@ -4847,7 +4847,7 @@ get_all_extension_menu_items (GtkWidget *window,
 	GList *providers;
 	GList *l;
 
-	providers = caja_extensions_get_for_type (CAJA_TYPE_MENU_PROVIDER);
+	providers = baul_extensions_get_for_type (CAJA_TYPE_MENU_PROVIDER);
 	items = NULL;
 
 	for (l = providers; l != NULL; l = l->next) {
@@ -4855,13 +4855,13 @@ get_all_extension_menu_items (GtkWidget *window,
 		GList *file_items;
 
 		provider = CAJA_MENU_PROVIDER (l->data);
-		file_items = caja_menu_provider_get_file_items (provider,
+		file_items = baul_menu_provider_get_file_items (provider,
 								    window,
 								    selection);
 		items = g_list_concat (items, file_items);
 	}
 
-	caja_module_extension_list_free (providers);
+	baul_module_extension_list_free (providers);
 
 	return items;
 }
@@ -4879,7 +4879,7 @@ static void
 extension_action_callback_data_free (ExtensionActionCallbackData *data)
 {
 	g_object_unref (data->item);
-	caja_file_list_free (data->selection);
+	baul_file_list_free (data->selection);
 
 	g_free (data);
 }
@@ -4906,9 +4906,9 @@ search_in_menu_items (GList* items, const char *item_name)
 			gboolean ret;
 			GList* submenus;
 
-			submenus = caja_menu_get_items (menu);
+			submenus = baul_menu_get_items (menu);
 			ret = search_in_menu_items (submenus, item_name);
-			caja_menu_item_list_free (submenus);
+			baul_menu_item_list_free (submenus);
 			g_object_unref (menu);
 			if (ret) {
 			    return TRUE;
@@ -4946,7 +4946,7 @@ extension_action_callback (GtkAction *action,
 	g_free (item_name);
 
 	if (is_valid) {
-		caja_menu_item_activate (data->item);
+		baul_menu_item_activate (data->item);
 	}
 }
 
@@ -4958,15 +4958,15 @@ get_menu_icon (const char *icon_name,
 	cairo_surface_t *surface;
 	int size, scale;
 
-	size = caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+	size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
 	scale = gtk_widget_get_scale_factor (widget);
 
 	if (g_path_is_absolute (icon_name)) {
-		info = caja_icon_info_lookup_from_path (icon_name, size, scale);
+		info = baul_icon_info_lookup_from_path (icon_name, size, scale);
 	} else {
-		info = caja_icon_info_lookup_from_name (icon_name, size, scale);
+		info = baul_icon_info_lookup_from_name (icon_name, size, scale);
 	}
-	surface = caja_icon_info_get_surface_nodefault_at_size (info, size);
+	surface = baul_icon_info_get_surface_nodefault_at_size (info, size);
 	g_object_unref (info);
 
 	return surface;
@@ -4980,11 +4980,11 @@ get_menu_icon_for_file (CajaFile  *file,
 	cairo_surface_t *surface;
 	int size, scale;
 
-	size = caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+	size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
 	scale = gtk_widget_get_scale_factor (widget);
 
-	info = caja_file_get_icon (file, size, scale, 0);
-	surface = caja_icon_info_get_surface_nodefault_at_size (info, size);
+	info = baul_file_get_icon (file, size, scale, 0);
+	surface = baul_icon_info_get_surface_nodefault_at_size (info, size);
 	g_object_unref (info);
 
 	return surface;
@@ -5034,7 +5034,7 @@ add_extension_action_for_files (FMDirectoryView *view,
 	data = g_new0 (ExtensionActionCallbackData, 1);
 	data->item = g_object_ref (item);
 	data->view = view;
-	data->selection = caja_file_list_copy (files);
+	data->selection = baul_file_list_copy (files);
 	data->action = action;
 
 	g_signal_connect_data (action, "activate",
@@ -5065,7 +5065,7 @@ add_extension_menu_items (FMDirectoryView *view,
 	GtkUIManager *ui_manager;
 	GList *l;
 
-	ui_manager = caja_window_info_get_ui_manager (view->details->window);
+	ui_manager = baul_window_info_get_ui_manager (view->details->window);
 
 	for (l = menu_items; l; l = l->next) {
 		CajaMenuItem *item;
@@ -5109,7 +5109,7 @@ add_extension_menu_items (FMDirectoryView *view,
 			char *subdir;
 			GList *children;
 
-			children = caja_menu_get_items (menu);
+			children = baul_menu_get_items (menu);
 
 			G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 			subdir = g_build_path ("/", subdirectory, gtk_action_get_name (action), NULL);
@@ -5119,7 +5119,7 @@ add_extension_menu_items (FMDirectoryView *view,
 						  children,
 						  subdir);
 
-			caja_menu_item_list_free (children);
+			baul_menu_item_list_free (children);
 			g_free (subdir);
 		}
 	}
@@ -5132,13 +5132,13 @@ reset_extension_actions_menu (FMDirectoryView *view, GList *selection)
 	GtkUIManager *ui_manager;
 
 	/* Clear any previous inserted items in the extension actions placeholder */
-	ui_manager = caja_window_info_get_ui_manager (view->details->window);
+	ui_manager = baul_window_info_get_ui_manager (view->details->window);
 
-	caja_ui_unmerge_ui (ui_manager,
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->extensions_menu_merge_id,
 				&view->details->extensions_menu_action_group);
 
-	caja_ui_prepare_merge_ui (ui_manager,
+	baul_ui_prepare_merge_ui (ui_manager,
 				      "DirExtensionsMenuGroup",
 				      &view->details->extensions_menu_merge_id,
 				      &view->details->extensions_menu_action_group);
@@ -5189,18 +5189,18 @@ get_file_names_as_parameter_array (GList *selection,
 
 	parameters = g_new (char *, g_list_length (selection) + 1);
 
-	model_location = caja_directory_get_location (model);
+	model_location = baul_directory_get_location (model);
 
 	for (node = selection, i = 0; node != NULL; node = node->next, i++) {
 		file = CAJA_FILE (node->data);
 
-		if (!caja_file_is_local (file)) {
+		if (!baul_file_is_local (file)) {
 			parameters[i] = NULL;
 			g_strfreev (parameters);
 			return NULL;
 		}
 
-		file_location = caja_file_get_location (CAJA_FILE (node->data));
+		file_location = baul_file_get_location (CAJA_FILE (node->data));
 		parameters[i] = g_file_get_relative_path (model_location, file_location);
 		if (parameters[i] == NULL) {
 			parameters[i] = g_file_get_path (file_location);
@@ -5231,15 +5231,15 @@ get_file_paths_or_uris_as_newline_delimited_string (GList *selection, gboolean g
 		uri = NULL;
 
 		if (CAJA_IS_DESKTOP_ICON_FILE (node->data)) {
-			link = caja_desktop_icon_file_get_link (CAJA_DESKTOP_ICON_FILE (node->data));
+			link = baul_desktop_icon_file_get_link (CAJA_DESKTOP_ICON_FILE (node->data));
 			if (link != NULL) {
-				location = caja_desktop_link_get_activation_location (link);
+				location = baul_desktop_link_get_activation_location (link);
 				uri = g_file_get_uri (location);
 				g_object_unref (location);
 				g_object_unref (G_OBJECT (link));
 			}
 		} else {
-			uri = caja_file_get_uri (CAJA_FILE (node->data));
+			uri = baul_file_get_uri (CAJA_FILE (node->data));
 		}
 		if (uri == NULL) {
 			continue;
@@ -5285,9 +5285,9 @@ get_strings_for_environment_variables (FMDirectoryView *view, GList *selected_fi
 	char *directory_uri;
 
 	/* We need to check that the directory uri starts with "file:" since
-	 * caja_directory_is_local returns FALSE for nfs.
+	 * baul_directory_is_local returns FALSE for nfs.
 	 */
-	directory_uri = caja_directory_get_uri (view->details->model);
+	directory_uri = baul_directory_get_uri (view->details->model);
 	if (eel_str_has_prefix (directory_uri, "file:") ||
 	    eel_uri_is_desktop (directory_uri) ||
 	    eel_uri_is_trash (directory_uri)) {
@@ -5299,10 +5299,10 @@ get_strings_for_environment_variables (FMDirectoryView *view, GList *selected_fi
 
 	*uris = get_file_uris_as_newline_delimited_string (selected_files);
 
-	*uri = caja_directory_get_uri (view->details->model);
+	*uri = baul_directory_get_uri (view->details->model);
 	if (eel_uri_is_desktop (*uri)) {
 		g_free (*uri);
-		*uri = caja_get_desktop_directory_uri ();
+		*uri = baul_get_desktop_directory_uri ();
 	}
 }
 
@@ -5311,11 +5311,11 @@ get_directory_view_of_extra_pane (FMDirectoryView *view)
 {
 	CajaWindowSlotInfo *slot;
 
-	slot = caja_window_info_get_extra_slot (fm_directory_view_get_caja_window (view));
+	slot = baul_window_info_get_extra_slot (fm_directory_view_get_baul_window (view));
 	if (slot != NULL) {
 		CajaView *next_view;
 
-		next_view = caja_window_slot_info_get_current_view (slot);
+		next_view = baul_window_slot_info_get_current_view (slot);
 
 		if (FM_IS_DIRECTORY_VIEW (next_view)) {
 			return FM_DIRECTORY_VIEW (next_view);
@@ -5370,7 +5370,7 @@ static void set_script_environment_variables(FMDirectoryView* view, GList* selec
 
 		get_strings_for_environment_variables(next_view, next_pane_selected_files, &file_paths, &uris, &uri);
 
-		caja_file_list_free(next_pane_selected_files);
+		baul_file_list_free(next_pane_selected_files);
 	}
 	else
 	{
@@ -5432,7 +5432,7 @@ run_script_callback (GtkAction *action, gpointer callback_data)
 
 	launch_parameters = (ScriptLaunchParameters *) callback_data;
 
-	file_uri = caja_file_get_uri (launch_parameters->file);
+	file_uri = baul_file_get_uri (launch_parameters->file);
 	local_file_path = g_filename_from_uri (file_uri, NULL, NULL);
 	g_assert (local_file_path != NULL);
 	g_free (file_uri);
@@ -5449,19 +5449,19 @@ run_script_callback (GtkAction *action, gpointer callback_data)
 
 	screen = gtk_widget_get_screen (GTK_WIDGET (launch_parameters->directory_view));
 
-	name = caja_file_get_name (launch_parameters->file);
+	name = baul_file_get_name (launch_parameters->file);
 	/* FIXME: handle errors with dialog? Or leave up to each script? */
 	window = fm_directory_view_get_containing_window (launch_parameters->directory_view);
-	caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+	baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
 			    "directory view run_script_callback, window=%p, name=\"%s\", script_path=\"%s\" (omitting script parameters)",
 			    window, name, local_file_path);
-	caja_launch_application_from_command_array (screen, name, quoted_path, FALSE,
+	baul_launch_application_from_command_array (screen, name, quoted_path, FALSE,
 							(const char * const *) parameters);
 	g_free (local_file_path);
 	g_free (name);
 	g_strfreev (parameters);
 
-	caja_file_list_free (selected_files);
+	baul_file_list_free (selected_files);
 	unset_script_environment_variables ();
 	g_chdir (old_working_dir);
 	g_free (old_working_dir);
@@ -5485,8 +5485,8 @@ add_script_to_scripts_menus (FMDirectoryView *directory_view,
 	GtkUIManager *ui_manager;
 	GtkAction *action;
 
-	name = caja_file_get_display_name (file);
-	uri = caja_file_get_uri (file);
+	name = baul_file_get_display_name (file);
+	uri = baul_file_get_uri (file);
 	tip = g_strdup_printf (_("Run \"%s\" on any selected items"), name);
 
 	launch_parameters = script_launch_parameters_new (file, directory_view);
@@ -5519,7 +5519,7 @@ add_script_to_scripts_menus (FMDirectoryView *directory_view,
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 	g_object_unref (action);
 
-	ui_manager = caja_window_info_get_ui_manager (directory_view->details->window);
+	ui_manager = baul_window_info_get_ui_manager (directory_view->details->window);
 
 	gtk_ui_manager_add_ui (ui_manager,
 			       directory_view->details->scripts_merge_id,
@@ -5564,9 +5564,9 @@ add_submenu_to_directory_menus (FMDirectoryView *directory_view,
 	char *uri;
 	GtkUIManager *ui_manager;
 
-	ui_manager = caja_window_info_get_ui_manager (directory_view->details->window);
-	uri = caja_file_get_uri (file);
-	name = caja_file_get_display_name (file);
+	ui_manager = baul_window_info_get_ui_manager (directory_view->details->window);
+	uri = baul_file_get_uri (file);
+	name = baul_file_get_display_name (file);
 	surface = get_menu_icon_for_file (file, GTK_WIDGET (directory_view));
 	add_submenu (ui_manager, action_group, merge_id, menu_path, uri, name, surface, TRUE);
 	add_submenu (ui_manager, action_group, merge_id, popup_path, uri, name, surface, FALSE);
@@ -5613,7 +5613,7 @@ update_directory_in_scripts_menu (FMDirectoryView *view, CajaDirectory *director
 	char *escaped_path;
 	CajaFile *file = NULL;
 
-	uri = caja_directory_get_uri (directory);
+	uri = baul_directory_get_uri (directory);
 	escaped_path = escape_action_path (uri + scripts_directory_uri_length);
 	g_free (uri);
 	menu_path = g_strconcat (FM_DIRECTORY_VIEW_MENU_PATH_SCRIPTS_PLACEHOLDER,
@@ -5627,25 +5627,25 @@ update_directory_in_scripts_menu (FMDirectoryView *view, CajaDirectory *director
 				  NULL);
 	g_free (escaped_path);
 
-	file_list = caja_directory_get_file_list (directory);
-	filtered = caja_file_list_filter_hidden (file_list, FALSE);
-	caja_file_list_free (file_list);
+	file_list = baul_directory_get_file_list (directory);
+	filtered = baul_file_list_filter_hidden (file_list, FALSE);
+	baul_file_list_free (file_list);
 
-	file_list = caja_file_list_sort_by_display_name (filtered);
+	file_list = baul_file_list_sort_by_display_name (filtered);
 
 	any_scripts = FALSE;
 	for (node = file_list; node != NULL; node = node->next) {
 		file = node->data;
 
-		if (caja_file_is_launchable (file)) {
+		if (baul_file_is_launchable (file)) {
 			add_script_to_scripts_menus (view, file, menu_path, popup_path, popup_bg_path);
 			any_scripts = TRUE;
-		} else if (caja_file_is_directory (file)) {
-			uri = caja_file_get_uri (file);
+		} else if (baul_file_is_directory (file)) {
+			uri = baul_file_get_uri (file);
 			if (directory_belongs_in_scripts_menu (uri)) {
-				dir = caja_directory_get_by_uri (uri);
+				dir = baul_directory_get_by_uri (uri);
 				add_directory_to_scripts_directory_list (view, dir);
-				caja_directory_unref (dir);
+				baul_directory_unref (dir);
 
 				add_submenu_to_directory_menus (view,
 								view->details->scripts_action_group,
@@ -5658,7 +5658,7 @@ update_directory_in_scripts_menu (FMDirectoryView *view, CajaDirectory *director
 		}
 	}
 
-	caja_file_list_free (file_list);
+	baul_file_list_free (file_list);
 
 	g_free (popup_path);
 	g_free (popup_bg_path);
@@ -5681,26 +5681,26 @@ update_scripts_menu (FMDirectoryView *view)
 	   occur before we finish. */
 	view->details->scripts_invalid = FALSE;
 
-	ui_manager = caja_window_info_get_ui_manager (view->details->window);
-	caja_ui_unmerge_ui (ui_manager,
+	ui_manager = baul_window_info_get_ui_manager (view->details->window);
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->scripts_merge_id,
 				&view->details->scripts_action_group);
 
-	caja_ui_prepare_merge_ui (ui_manager,
+	baul_ui_prepare_merge_ui (ui_manager,
 				      "ScriptsGroup",
 				      &view->details->scripts_merge_id,
 				      &view->details->scripts_action_group);
 
 	/* As we walk through the directories, remove any that no longer belong. */
 	any_scripts = FALSE;
-	sorted_copy = caja_directory_list_sort_by_uri
-		(caja_directory_list_copy (view->details->scripts_directory_list));
+	sorted_copy = baul_directory_list_sort_by_uri
+		(baul_directory_list_copy (view->details->scripts_directory_list));
 	for (node = sorted_copy; node != NULL; node = node->next) {
 		char *uri;
 
 		directory = node->data;
 
-		uri = caja_directory_get_uri (directory);
+		uri = baul_directory_get_uri (directory);
 		if (!directory_belongs_in_scripts_menu (uri)) {
 			remove_directory_from_scripts_directory_list (view, directory);
 		} else if (update_directory_in_scripts_menu (view, directory)) {
@@ -5708,7 +5708,7 @@ update_scripts_menu (FMDirectoryView *view)
 		}
 		g_free (uri);
 	}
-	caja_directory_list_free (sorted_copy);
+	baul_directory_list_free (sorted_copy);
 
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 	action = gtk_action_group_get_action (view->details->dir_action_group, FM_ACTION_SCRIPTS);
@@ -5740,11 +5740,11 @@ add_template_to_templates_menus (FMDirectoryView *directory_view,
 	GtkUIManager *ui_manager;
 	GtkAction *action;
 
-	tmp = caja_file_get_display_name (file);
+	tmp = baul_file_get_display_name (file);
 	name = eel_filename_strip_extension (tmp);
 	g_free (tmp);
 
-	uri = caja_file_get_uri (file);
+	uri = baul_file_get_uri (file);
 	tip = g_strdup_printf (_("Create Document from template \"%s\""), name);
 
 	action_name = escape_action_name (uri, "template_");
@@ -5777,7 +5777,7 @@ add_template_to_templates_menus (FMDirectoryView *directory_view,
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 	g_object_unref (action);
 
-	ui_manager = caja_window_info_get_ui_manager (directory_view->details->window);
+	ui_manager = baul_window_info_get_ui_manager (directory_view->details->window);
 
 	gtk_ui_manager_add_ui (ui_manager,
 			       directory_view->details->templates_merge_id,
@@ -5812,15 +5812,15 @@ update_templates_directory (FMDirectoryView *view)
 		remove_directory_from_templates_directory_list (view, node->data);
 	}
 
-	if (caja_should_use_templates_directory ()) {
+	if (baul_should_use_templates_directory ()) {
 		CajaDirectory *templates_directory;
 		char *templates_uri;
 
-		templates_uri = caja_get_templates_directory_uri ();
-		templates_directory = caja_directory_get_by_uri (templates_uri);
+		templates_uri = baul_get_templates_directory_uri ();
+		templates_directory = baul_directory_get_by_uri (templates_uri);
 		g_free (templates_uri);
 		add_directory_to_templates_directory_list (view, templates_directory);
-		caja_directory_unref (templates_directory);
+		baul_directory_unref (templates_directory);
 	}
 }
 
@@ -5878,7 +5878,7 @@ update_directory_in_templates_menu (FMDirectoryView *view,
 	/* We know this directory belongs to the template dir, so it must exist */
 	g_assert (templates_directory_uri);
 
-	uri = caja_directory_get_uri (directory);
+	uri = baul_directory_get_uri (directory);
 	escaped_path = escape_action_path (uri + strlen (templates_directory_uri));
 	g_free (uri);
 	menu_path = g_strconcat (FM_DIRECTORY_VIEW_MENU_PATH_NEW_DOCUMENTS_PLACEHOLDER,
@@ -5889,23 +5889,23 @@ update_directory_in_templates_menu (FMDirectoryView *view,
 				     NULL);
 	g_free (escaped_path);
 
-	file_list = caja_directory_get_file_list (directory);
-	filtered = caja_file_list_filter_hidden (file_list, FALSE);
-	caja_file_list_free (file_list);
+	file_list = baul_directory_get_file_list (directory);
+	filtered = baul_file_list_filter_hidden (file_list, FALSE);
+	baul_file_list_free (file_list);
 
-	file_list = caja_file_list_sort_by_display_name (filtered);
+	file_list = baul_file_list_sort_by_display_name (filtered);
 
 	num = 0;
 	any_templates = FALSE;
 	for (node = file_list; num < TEMPLATE_LIMIT && node != NULL; node = node->next, num++) {
 		file = node->data;
 
-		if (caja_file_is_directory (file)) {
-			uri = caja_file_get_uri (file);
+		if (baul_file_is_directory (file)) {
+			uri = baul_file_get_uri (file);
 			if (directory_belongs_in_templates_menu (templates_directory_uri, uri)) {
-				dir = caja_directory_get_by_uri (uri);
+				dir = baul_directory_get_by_uri (uri);
 				add_directory_to_templates_directory_list (view, dir);
-				caja_directory_unref (dir);
+				baul_directory_unref (dir);
 
 				add_submenu_to_directory_menus (view,
 								view->details->templates_action_group,
@@ -5915,13 +5915,13 @@ update_directory_in_templates_menu (FMDirectoryView *view,
 				any_templates = TRUE;
 			}
 			g_free (uri);
-		} else if (caja_file_can_read (file)) {
+		} else if (baul_file_can_read (file)) {
 			add_template_to_templates_menus (view, file, menu_path, popup_bg_path);
 			any_templates = TRUE;
 		}
 	}
 
-	caja_file_list_free (file_list);
+	baul_file_list_free (file_list);
 
 	g_free (popup_bg_path);
 	g_free (menu_path);
@@ -5941,8 +5941,8 @@ update_templates_menu (FMDirectoryView *view)
 	char *templates_directory_uri;
 	CajaDirectory *directory = NULL;
 
-	if (caja_should_use_templates_directory ()) {
-		templates_directory_uri = caja_get_templates_directory_uri ();
+	if (baul_should_use_templates_directory ()) {
+		templates_directory_uri = baul_get_templates_directory_uri ();
 	} else {
 		templates_directory_uri = NULL;
 	}
@@ -5952,26 +5952,26 @@ update_templates_menu (FMDirectoryView *view)
 	   occur before we finish. */
 	view->details->templates_invalid = FALSE;
 
-	ui_manager = caja_window_info_get_ui_manager (view->details->window);
-	caja_ui_unmerge_ui (ui_manager,
+	ui_manager = baul_window_info_get_ui_manager (view->details->window);
+	baul_ui_unmerge_ui (ui_manager,
 				&view->details->templates_merge_id,
 				&view->details->templates_action_group);
 
-	caja_ui_prepare_merge_ui (ui_manager,
+	baul_ui_prepare_merge_ui (ui_manager,
 				      "TemplatesGroup",
 				      &view->details->templates_merge_id,
 				      &view->details->templates_action_group);
 
 	/* As we walk through the directories, remove any that no longer belong. */
 	any_templates = FALSE;
-	sorted_copy = caja_directory_list_sort_by_uri
-		(caja_directory_list_copy (view->details->templates_directory_list));
+	sorted_copy = baul_directory_list_sort_by_uri
+		(baul_directory_list_copy (view->details->templates_directory_list));
 	for (node = sorted_copy; node != NULL; node = node->next) {
 		char *uri;
 
 		directory = node->data;
 
-		uri = caja_directory_get_uri (directory);
+		uri = baul_directory_get_uri (directory);
 		if (!directory_belongs_in_templates_menu (templates_directory_uri, uri)) {
 			remove_directory_from_templates_directory_list (view, directory);
 		} else if (update_directory_in_templates_menu (view,
@@ -5981,7 +5981,7 @@ update_templates_menu (FMDirectoryView *view)
 		}
 		g_free (uri);
 	}
-	caja_directory_list_free (sorted_copy);
+	baul_directory_list_free (sorted_copy);
 
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 	action = gtk_action_group_get_action (view->details->dir_action_group, FM_ACTION_NO_TEMPLATES);
@@ -6031,7 +6031,7 @@ create_popup_menu (FMDirectoryView *view, const char *popup_path)
 {
 	GtkWidget *menu;
 
-	menu = gtk_ui_manager_get_widget (caja_window_info_get_ui_manager (view->details->window),
+	menu = gtk_ui_manager_get_widget (baul_window_info_get_ui_manager (view->details->window),
 					  popup_path);
 	gtk_menu_set_screen (GTK_MENU (menu),
 			     gtk_widget_get_screen (GTK_WIDGET (view)));
@@ -6063,19 +6063,19 @@ copy_or_cut_files (FMDirectoryView *view,
         targets = gtk_target_table_new_from_list (target_list, &n_targets);
         gtk_target_list_unref (target_list);
 
-	gtk_clipboard_set_with_data (caja_clipboard_get (GTK_WIDGET (view)),
+	gtk_clipboard_set_with_data (baul_clipboard_get (GTK_WIDGET (view)),
 				     targets, n_targets,
-				     caja_get_clipboard_callback, caja_clear_clipboard_callback,
+				     baul_get_clipboard_callback, baul_clear_clipboard_callback,
 				     NULL);
         gtk_target_table_free (targets, n_targets);
 
-	caja_clipboard_monitor_set_clipboard_info (caja_clipboard_monitor_get (), &info);
+	baul_clipboard_monitor_set_clipboard_info (baul_clipboard_monitor_get (), &info);
 
 	count = g_list_length (clipboard_contents);
 	if (count == 1) {
 		char *name;
 
-		name = caja_file_get_display_name (clipboard_contents->data);
+		name = baul_file_get_display_name (clipboard_contents->data);
 		if (cut) {
 			status_string = g_strdup_printf (_("\"%s\" will be moved "
 							   "if you select the Paste command"),
@@ -6104,7 +6104,7 @@ copy_or_cut_files (FMDirectoryView *view,
 		}
 	}
 
-	caja_window_slot_info_set_status (view->details->slot,
+	baul_window_slot_info_set_status (view->details->slot,
 					      status_string);
 	g_free (status_string);
 }
@@ -6120,7 +6120,7 @@ action_copy_files_callback (GtkAction *action,
 
 	selection = fm_directory_view_get_selection_for_file_transfer (view);
 	copy_or_cut_files (view, selection, FALSE);
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6138,7 +6138,7 @@ move_copy_selection_to_location (FMDirectoryView *view,
 	uris = NULL;
 	for (l = selection; l != NULL; l = l->next) {
 		uris = g_list_prepend (uris,
-				       caja_file_get_uri ((CajaFile *) l->data));
+				       baul_file_get_uri ((CajaFile *) l->data));
 	}
 	uris = g_list_reverse (uris);
 
@@ -6148,7 +6148,7 @@ move_copy_selection_to_location (FMDirectoryView *view,
 					   view);
 
 	g_list_free_full (uris, g_free);
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6158,10 +6158,10 @@ move_copy_selection_to_next_pane (FMDirectoryView *view,
 	CajaWindowSlotInfo *slot;
 	char *dest_location;
 
-	slot = caja_window_info_get_extra_slot (fm_directory_view_get_caja_window (view));
+	slot = baul_window_info_get_extra_slot (fm_directory_view_get_baul_window (view));
 	g_return_if_fail (slot != NULL);
 
-	dest_location = caja_window_slot_info_get_current_location (slot);
+	dest_location = baul_window_slot_info_get_current_location (slot);
 	g_return_if_fail (dest_location != NULL);
 
 	move_copy_selection_to_location (view, copy_action, dest_location);
@@ -6186,10 +6186,10 @@ action_move_to_next_pane_callback (GtkAction *action, gpointer callback_data)
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 
-	slot = caja_window_info_get_extra_slot (fm_directory_view_get_caja_window (view));
+	slot = baul_window_info_get_extra_slot (fm_directory_view_get_baul_window (view));
 	g_return_if_fail (slot != NULL);
 
-	dest_location = caja_window_slot_info_get_current_location (slot);
+	dest_location = baul_window_slot_info_get_current_location (slot);
 	g_return_if_fail (dest_location != NULL);
 
 	move_copy_selection_to_location (view, GDK_ACTION_MOVE, dest_location);
@@ -6203,7 +6203,7 @@ action_copy_to_home_callback (GtkAction *action, gpointer callback_data)
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 
-	dest_location = caja_get_home_directory_uri ();
+	dest_location = baul_get_home_directory_uri ();
 	move_copy_selection_to_location (view, GDK_ACTION_COPY, dest_location);
 	g_free (dest_location);
 }
@@ -6216,7 +6216,7 @@ action_move_to_home_callback (GtkAction *action, gpointer callback_data)
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 
-	dest_location = caja_get_home_directory_uri ();
+	dest_location = baul_get_home_directory_uri ();
 	move_copy_selection_to_location (view, GDK_ACTION_MOVE, dest_location);
 	g_free (dest_location);
 }
@@ -6229,7 +6229,7 @@ action_copy_to_desktop_callback (GtkAction *action, gpointer callback_data)
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 
-	dest_location = caja_get_desktop_directory_uri ();
+	dest_location = baul_get_desktop_directory_uri ();
 	move_copy_selection_to_location (view, GDK_ACTION_COPY, dest_location);
 	g_free (dest_location);
 }
@@ -6242,7 +6242,7 @@ action_move_to_desktop_callback (GtkAction *action, gpointer callback_data)
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 
-	dest_location = caja_get_desktop_directory_uri ();
+	dest_location = baul_get_desktop_directory_uri ();
 	move_copy_selection_to_location (view, GDK_ACTION_MOVE, dest_location);
 	g_free (dest_location);
 }
@@ -6258,7 +6258,7 @@ action_cut_files_callback (GtkAction *action,
 
 	selection = fm_directory_view_get_selection_for_file_transfer (view);
 	copy_or_cut_files (view, selection, TRUE);
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6270,11 +6270,11 @@ paste_clipboard_data (FMDirectoryView *view,
 	GList *item_uris;
 
 	cut = FALSE;
-	item_uris = caja_clipboard_get_uri_list_from_selection_data (selection_data, &cut,
+	item_uris = baul_clipboard_get_uri_list_from_selection_data (selection_data, &cut,
 									 copied_files_atom);
 
 	if (item_uris == NULL|| destination_uri == NULL) {
-		caja_window_slot_info_set_status (view->details->slot,
+		baul_window_slot_info_set_status (view->details->slot,
 						      _("There is nothing on the clipboard to paste."));
 	} else {
 		fm_directory_view_move_copy_items (item_uris, NULL, destination_uri,
@@ -6284,7 +6284,7 @@ paste_clipboard_data (FMDirectoryView *view,
 
 		/* If items are cut then remove from clipboard */
 		if (cut) {
-			gtk_clipboard_clear (caja_clipboard_get (GTK_WIDGET (view)));
+			gtk_clipboard_clear (baul_clipboard_get (GTK_WIDGET (view)));
 		}
 
     		g_list_free_full (item_uris, g_free);
@@ -6332,7 +6332,7 @@ paste_into_clipboard_received_callback (GtkClipboard     *clipboard,
 	if (view->details->window != NULL) {
 		char *directory_uri;
 
-		directory_uri = caja_file_get_activation_uri (data->target);
+		directory_uri = baul_file_get_activation_uri (data->target);
 
 		paste_clipboard_data (view, selection_data, directory_uri);
 
@@ -6340,7 +6340,7 @@ paste_into_clipboard_received_callback (GtkClipboard     *clipboard,
 	}
 
 	g_object_unref (view);
-	caja_file_unref (data->target);
+	baul_file_unref (data->target);
 	g_free (data);
 }
 
@@ -6353,7 +6353,7 @@ action_paste_files_callback (GtkAction *action,
 	view = FM_DIRECTORY_VIEW (callback_data);
 
 	g_object_ref (view);
-	gtk_clipboard_request_contents (caja_clipboard_get (GTK_WIDGET (view)),
+	gtk_clipboard_request_contents (baul_clipboard_get (GTK_WIDGET (view)),
 					copied_files_atom,
 					paste_clipboard_received_callback,
 					view);
@@ -6371,9 +6371,9 @@ paste_into (FMDirectoryView *view,
 	data = g_new (PasteIntoData, 1);
 
 	data->view = g_object_ref (view);
-	data->target = caja_file_ref (target);
+	data->target = baul_file_ref (target);
 
-	gtk_clipboard_request_contents (caja_clipboard_get (GTK_WIDGET (view)),
+	gtk_clipboard_request_contents (baul_clipboard_get (GTK_WIDGET (view)),
 					copied_files_atom,
 					paste_into_clipboard_received_callback,
 					data);
@@ -6390,7 +6390,7 @@ action_paste_files_into_callback (GtkAction *action,
 	selection = fm_directory_view_get_selection (view);
 	if (selection != NULL) {
 		paste_into (view, CAJA_FILE (selection->data));
-		caja_file_list_free (selection);
+		baul_file_list_free (selection);
 	}
 
 }
@@ -6398,27 +6398,27 @@ action_paste_files_into_callback (GtkAction *action,
 static void
 real_action_undo (FMDirectoryView *view)
 {
-	CajaUndoStackManager *manager = caja_undostack_manager_instance ();
+	CajaUndoStackManager *manager = baul_undostack_manager_instance ();
 
 	/* Disable menus because they are in an untrustworthy status */
 	view->details->undo_active = FALSE;
 	view->details->redo_active = FALSE;
 	fm_directory_view_update_menus (view);
 
-	caja_undostack_manager_undo (manager, GTK_WIDGET (view), finish_undoredo_callback);
+	baul_undostack_manager_undo (manager, GTK_WIDGET (view), finish_undoredo_callback);
 }
 
 static void
 real_action_redo (FMDirectoryView *view)
 {
-	CajaUndoStackManager *manager = caja_undostack_manager_instance ();
+	CajaUndoStackManager *manager = baul_undostack_manager_instance ();
 
 	/* Disable menus because they are in an untrustworthy status */
 	view->details->undo_active = FALSE;
 	view->details->redo_active = FALSE;
 	fm_directory_view_update_menus (view);
 
-	caja_undostack_manager_redo (manager, GTK_WIDGET (view), finish_undoredo_callback);
+	baul_undostack_manager_redo (manager, GTK_WIDGET (view), finish_undoredo_callback);
 }
 
 static void
@@ -6439,12 +6439,12 @@ real_action_rename (FMDirectoryView *view,
 		if (!select_all) {
 			/* directories don't have a file extension, so
 			 * they are always pre-selected as a whole */
-			select_all = caja_file_is_directory (file);
+			select_all = baul_file_is_directory (file);
 		}
 		EEL_CALL_METHOD (FM_DIRECTORY_VIEW_CLASS, view, start_renaming_file, (view, file, select_all));
 	}
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6549,15 +6549,15 @@ action_mount_volume_callback (GtkAction *action,
 	for (l = selection; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
 
-		if (caja_file_can_mount (file)) {
+		if (baul_file_can_mount (file)) {
 			mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 			g_mount_operation_set_password_save (mount_op, G_PASSWORD_SAVE_FOR_SESSION);
-			caja_file_mount (file, mount_op, NULL,
+			baul_file_mount (file, mount_op, NULL,
 					     file_mount_callback, NULL);
 			g_object_unref (mount_op);
 		}
 	}
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6574,16 +6574,16 @@ action_unmount_volume_callback (GtkAction *action,
 
 	for (l = selection; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
-		if (caja_file_can_unmount (file)) {
+		if (baul_file_can_unmount (file)) {
 			GMountOperation *mount_op;
 			mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 			fm_directory_view_set_initiated_unmount (view, TRUE);
-			caja_file_unmount (file, mount_op, NULL,
+			baul_file_unmount (file, mount_op, NULL,
 					       file_unmount_callback, g_object_ref (view));
 			g_object_unref (mount_op);
 		}
 	}
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6605,7 +6605,7 @@ action_format_volume_callback (GtkAction *action,
 			g_spawn_command_line_async ("gfloppy", NULL);
 		}
 	}
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 #endif
 }
 
@@ -6623,16 +6623,16 @@ action_eject_volume_callback (GtkAction *action,
 	for (l = selection; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
 
-		if (caja_file_can_eject (file)) {
+		if (baul_file_can_eject (file)) {
 			GMountOperation *mount_op;
 			mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 			fm_directory_view_set_initiated_unmount (view, TRUE);
-			caja_file_eject (file, mount_op, NULL,
+			baul_file_eject (file, mount_op, NULL,
 					     file_eject_callback, g_object_ref (view));
 			g_object_unref (mount_op);
 		}
 	}
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6666,14 +6666,14 @@ action_start_volume_callback (GtkAction *action,
 	for (l = selection; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
 
-		if (caja_file_can_start (file) || caja_file_can_start_degraded (file)) {
+		if (baul_file_can_start (file) || baul_file_can_start_degraded (file)) {
 			mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
-			caja_file_start (file, mount_op, NULL,
+			baul_file_start (file, mount_op, NULL,
 					     file_start_callback, NULL);
 			g_object_unref (mount_op);
 		}
 	}
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6690,15 +6690,15 @@ action_stop_volume_callback (GtkAction *action,
 	for (l = selection; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
 
-		if (caja_file_can_stop (file)) {
+		if (baul_file_can_stop (file)) {
 			GMountOperation *mount_op;
 			mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
-			caja_file_stop (file, mount_op, NULL,
+			baul_file_stop (file, mount_op, NULL,
 					    file_stop_callback, NULL);
 			g_object_unref (mount_op);
 		}
 	}
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6715,11 +6715,11 @@ action_detect_media_callback (GtkAction *action,
 	for (l = selection; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
 
-		if (caja_file_can_poll_for_media (file) && !caja_file_is_media_check_automatic (file)) {
-			caja_file_poll_for_media (file);
+		if (baul_file_can_poll_for_media (file) && !baul_file_is_media_check_automatic (file)) {
+			baul_file_poll_for_media (file);
 		}
 	}
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 }
 
 static void
@@ -6739,7 +6739,7 @@ action_self_mount_volume_callback (GtkAction *action,
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 	g_mount_operation_set_password_save (mount_op, G_PASSWORD_SAVE_FOR_SESSION);
-	caja_file_mount (file, mount_op, NULL, file_mount_callback, NULL);
+	baul_file_mount (file, mount_op, NULL, file_mount_callback, NULL);
 	g_object_unref (mount_op);
 }
 
@@ -6760,7 +6760,7 @@ action_self_unmount_volume_callback (GtkAction *action,
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 	fm_directory_view_set_initiated_unmount (view, TRUE);
-	caja_file_unmount (file, mount_op, NULL, file_unmount_callback, g_object_ref (view));
+	baul_file_unmount (file, mount_op, NULL, file_unmount_callback, g_object_ref (view));
 	g_object_unref (mount_op);
 }
 
@@ -6781,7 +6781,7 @@ action_self_eject_volume_callback (GtkAction *action,
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 	fm_directory_view_set_initiated_unmount (view, TRUE);
-	caja_file_eject (file, mount_op, NULL, file_eject_callback, g_object_ref (view));
+	baul_file_eject (file, mount_op, NULL, file_eject_callback, g_object_ref (view));
 	g_object_unref (mount_op);
 }
 
@@ -6822,7 +6822,7 @@ action_self_start_volume_callback (GtkAction *action,
 	}
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
-	caja_file_start (file, mount_op, NULL, file_start_callback, NULL);
+	baul_file_start (file, mount_op, NULL, file_start_callback, NULL);
 	g_object_unref (mount_op);
 }
 
@@ -6842,7 +6842,7 @@ action_self_stop_volume_callback (GtkAction *action,
 	}
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
-	caja_file_stop (file, mount_op, NULL,
+	baul_file_stop (file, mount_op, NULL,
 			    file_stop_callback, NULL);
 	g_object_unref (mount_op);
 }
@@ -6861,7 +6861,7 @@ action_self_detect_media_callback (GtkAction *action,
 		return;
 	}
 
-	caja_file_poll_for_media (file);
+	baul_file_poll_for_media (file);
 }
 
 static void
@@ -6881,7 +6881,7 @@ action_location_mount_volume_callback (GtkAction *action,
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 	g_mount_operation_set_password_save (mount_op, G_PASSWORD_SAVE_FOR_SESSION);
-	caja_file_mount (file, mount_op, NULL, file_mount_callback, NULL);
+	baul_file_mount (file, mount_op, NULL, file_mount_callback, NULL);
 	g_object_unref (mount_op);
 }
 
@@ -6902,7 +6902,7 @@ action_location_unmount_volume_callback (GtkAction *action,
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 	fm_directory_view_set_initiated_unmount (view, TRUE);
-	caja_file_unmount (file, mount_op, NULL,
+	baul_file_unmount (file, mount_op, NULL,
 			       file_unmount_callback, g_object_ref (view));
 	g_object_unref (mount_op);
 }
@@ -6924,7 +6924,7 @@ action_location_eject_volume_callback (GtkAction *action,
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
 	fm_directory_view_set_initiated_unmount (view, TRUE);
-	caja_file_eject (file, mount_op, NULL,
+	baul_file_eject (file, mount_op, NULL,
 			     file_eject_callback, g_object_ref (view));
 	g_object_unref (mount_op);
 }
@@ -6966,7 +6966,7 @@ action_location_start_volume_callback (GtkAction *action,
 	}
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
-	caja_file_start (file, mount_op, NULL, file_start_callback, NULL);
+	baul_file_start (file, mount_op, NULL, file_start_callback, NULL);
 	g_object_unref (mount_op);
 }
 
@@ -6986,7 +6986,7 @@ action_location_stop_volume_callback (GtkAction *action,
 	}
 
 	mount_op = gtk_mount_operation_new (fm_directory_view_get_containing_window (view));
-	caja_file_stop (file, mount_op, NULL,
+	baul_file_stop (file, mount_op, NULL,
 			    file_stop_callback, NULL);
 	g_object_unref (mount_op);
 }
@@ -7005,7 +7005,7 @@ action_location_detect_media_callback (GtkAction *action,
 		return;
 	}
 
-	caja_file_poll_for_media (file);
+	baul_file_poll_for_media (file);
 }
 
 static void
@@ -7070,17 +7070,17 @@ action_connect_to_server_link_callback (GtkAction *action,
 	selection = fm_directory_view_get_selection (view);
 
 	if (!eel_g_list_exactly_one_item (selection)) {
-		caja_file_list_free (selection);
+		baul_file_list_free (selection);
 		return;
 	}
 
 	file = CAJA_FILE (selection->data);
 	scale = gtk_widget_get_scale_factor (GTK_WIDGET (view));
 
-	uri = caja_file_get_activation_uri (file);
-	icon = caja_file_get_icon (file, CAJA_ICON_SIZE_STANDARD, scale, 0);
-	icon_name = caja_icon_info_get_used_name (icon);
-	name = caja_file_get_display_name (file);
+	uri = baul_file_get_activation_uri (file);
+	icon = baul_file_get_icon (file, CAJA_ICON_SIZE_STANDARD, scale, 0);
+	icon_name = baul_icon_info_get_used_name (icon);
+	name = baul_file_get_display_name (file);
 
 	if (uri != NULL) {
 		GtkWidget *dialog;
@@ -7290,10 +7290,10 @@ action_location_delete_callback (GtkAction *action,
 	file = view->details->location_popup_directory_as_file;
 	g_return_if_fail (file != NULL);
 
-	location = caja_file_get_location (file);
+	location = baul_file_get_location (file);
 
 	files = g_list_append (NULL, location);
-	caja_file_operations_delete (files, fm_directory_view_get_containing_window (view),
+	baul_file_operations_delete (files, fm_directory_view_get_containing_window (view),
 					 NULL, NULL);
 
 	g_list_free_full (files, g_object_unref);
@@ -7313,7 +7313,7 @@ action_location_restore_from_trash_callback (GtkAction *action,
 	l.prev = NULL;
 	l.next = NULL;
 	l.data = file;
-	caja_restore_files_from_trash (&l,
+	baul_restore_files_from_trash (&l,
 					   fm_directory_view_get_containing_window (view));
 }
 
@@ -7329,10 +7329,10 @@ fm_directory_view_init_show_hidden_files (FMDirectoryView *view)
 	}
 
 	show_hidden_changed = FALSE;
-	mode = caja_window_info_get_hidden_files_mode (view->details->window);
+	mode = baul_window_info_get_hidden_files_mode (view->details->window);
 
 	if (mode == CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT) {
-		show_hidden_default_setting = g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_SHOW_HIDDEN_FILES);
+		show_hidden_default_setting = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_HIDDEN_FILES);
 		if (show_hidden_default_setting != view->details->show_hidden_files) {
 			view->details->show_hidden_files = show_hidden_default_setting;
 			show_hidden_changed = TRUE;
@@ -7361,10 +7361,10 @@ fm_directory_view_init_show_backup_files (FMDirectoryView *view)
 	gboolean show_backup_default_setting;
 
 	show_backup_changed = FALSE;
-	mode = caja_window_info_get_backup_files_mode (view->details->window);
+	mode = baul_window_info_get_backup_files_mode (view->details->window);
 
 	if (mode == CAJA_WINDOW_SHOW_BACKUP_FILES_DEFAULT) {
-		show_backup_default_setting = g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_SHOW_BACKUP_FILES);
+		show_backup_default_setting = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_BACKUP_FILES);
 		if (show_backup_default_setting != view->details->show_backup_files) {
 			view->details->show_backup_files = show_backup_default_setting;
 			show_backup_changed = TRUE;
@@ -7771,7 +7771,7 @@ real_merge_menus (FMDirectoryView *view)
 	const char *ui;
 	char *tooltip;
 
-	ui_manager = caja_window_info_get_ui_manager (view->details->window);
+	ui_manager = baul_window_info_get_ui_manager (view->details->window);
 
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 	action_group = gtk_action_group_new ("DirViewActions");
@@ -7783,7 +7783,7 @@ real_merge_menus (FMDirectoryView *view)
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 
 	/* Translators: %s is a directory */
-	tooltip = g_strdup_printf(_("Run or manage scripts from %s"), "~/.config/caja/scripts");
+	tooltip = g_strdup_printf(_("Run or manage scripts from %s"), "~/.config/baul/scripts");
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 	/* Create a script action here specially because its tooltip is dynamic */
 	action = gtk_action_new ("Scripts", _("_Scripts"), tooltip, NULL);
@@ -7806,7 +7806,7 @@ real_merge_menus (FMDirectoryView *view)
 	gtk_ui_manager_insert_action_group (ui_manager, action_group, -1);
 	g_object_unref (action_group); /* owned by ui manager */
 
-	ui = caja_ui_string_get ("caja-directory-view-ui.xml");
+	ui = baul_ui_string_get ("baul-directory-view-ui.xml");
 	view->details->dir_merge_id = gtk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
 	g_signal_connect_object (fm_directory_view_get_background (view), "settings_changed",
 				 G_CALLBACK (schedule_update_menus), G_OBJECT (view),
@@ -7819,27 +7819,27 @@ real_merge_menus (FMDirectoryView *view)
 static gboolean
 can_paste_into_file (CajaFile *file)
 {
-	if (caja_file_is_directory (file) &&
-	    caja_file_can_write (file)) {
+	if (baul_file_is_directory (file) &&
+	    baul_file_can_write (file)) {
 		return TRUE;
 	}
-	if (caja_file_has_activation_uri (file)) {
+	if (baul_file_has_activation_uri (file)) {
 		GFile *location;
 		CajaFile *activation_file;
 		gboolean res;
 
-		location = caja_file_get_activation_location (file);
-		activation_file = caja_file_get (location);
+		location = baul_file_get_activation_location (file);
+		activation_file = baul_file_get (location);
 		g_object_unref (location);
 
 		/* The target location might not have data for it read yet,
 		   and we can't want to do sync I/O, so treat the unknown
 		   case as can-write */
-		res = (caja_file_get_file_type (activation_file) == G_FILE_TYPE_UNKNOWN) ||
-			(caja_file_get_file_type (activation_file) == G_FILE_TYPE_DIRECTORY &&
-			 caja_file_can_write (activation_file));
+		res = (baul_file_get_file_type (activation_file) == G_FILE_TYPE_UNKNOWN) ||
+			(baul_file_get_file_type (activation_file) == G_FILE_TYPE_DIRECTORY &&
+			 baul_file_can_write (activation_file));
 
-		caja_file_unref (activation_file);
+		baul_file_unref (activation_file);
 
 		return res;
 	}
@@ -7909,7 +7909,7 @@ clipboard_targets_received (GtkClipboard     *clipboard,
 						   "can-paste-according-to-destination")));
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 
 	g_object_unref (view);
 }
@@ -7921,7 +7921,7 @@ showing_trash_directory (FMDirectoryView *view)
 
 	file = fm_directory_view_get_directory_as_file (view);
 	if (file != NULL) {
-		return caja_file_is_in_trash (file);
+		return baul_file_is_in_trash (file);
 	}
 	return FALSE;
 }
@@ -7929,7 +7929,7 @@ showing_trash_directory (FMDirectoryView *view)
 static gboolean
 should_show_empty_trash (FMDirectoryView *view)
 {
-	return (showing_trash_directory (view) || caja_window_info_get_window_type (view->details->window) == CAJA_WINDOW_NAVIGATION);
+	return (showing_trash_directory (view) || baul_window_info_get_window_type (view->details->window) == CAJA_WINDOW_NAVIGATION);
 }
 
 static gboolean
@@ -7943,20 +7943,20 @@ file_list_all_are_folders (GList *file_list)
 
 	for (l = file_list; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
-		if (caja_file_is_caja_link (file) &&
+		if (baul_file_is_baul_link (file) &&
 		    !CAJA_IS_DESKTOP_ICON_FILE (file)) {
-			if (caja_file_is_launcher (file)) {
+			if (baul_file_is_launcher (file)) {
 				return FALSE;
 			}
 
-			activation_uri = caja_file_get_activation_uri (file);
+			activation_uri = baul_file_get_activation_uri (file);
 
 			if (activation_uri == NULL) {
 				g_free (activation_uri);
 				return FALSE;
 			}
 
-			linked_file = caja_file_get_existing_by_uri (activation_uri);
+			linked_file = baul_file_get_existing_by_uri (activation_uri);
 
 			/* We might not actually know the type of the linked file yet,
 			 * however we don't want to schedule a read, since that might do things
@@ -7966,17 +7966,17 @@ file_list_all_are_folders (GList *file_list)
 			 */
 			is_dir =
 				(linked_file != NULL &&
-				 caja_file_is_directory (linked_file)) ||
+				 baul_file_is_directory (linked_file)) ||
 				(activation_uri != NULL &&
 				 activation_uri[strlen (activation_uri) - 1] == '/');
 
-			caja_file_unref (linked_file);
+			baul_file_unref (linked_file);
 			g_free (activation_uri);
 
 			if (!is_dir) {
 				return FALSE;
 			}
-		} else if (!(caja_file_is_directory (file) ||
+		} else if (!(baul_file_is_directory (file) ||
 			     CAJA_IS_DESKTOP_ICON_FILE (file))) {
 			return FALSE;
 		}
@@ -8005,11 +8005,11 @@ file_should_show_foreach (CajaFile        *file,
 	*show_stop = FALSE;
 	*show_poll = FALSE;
 
-	if (caja_file_can_eject (file)) {
+	if (baul_file_can_eject (file)) {
 		*show_eject = TRUE;
 	}
 
-	if (caja_file_can_mount (file)) {
+	if (baul_file_can_mount (file)) {
 		*show_mount = TRUE;
 
 #ifdef TODO_GIO
@@ -8020,30 +8020,30 @@ file_should_show_foreach (CajaFile        *file,
 #endif
 	}
 
-	if (caja_file_can_start (file) || caja_file_can_start_degraded (file)) {
+	if (baul_file_can_start (file) || baul_file_can_start_degraded (file)) {
 		*show_start = TRUE;
 	}
 
-	if (caja_file_can_stop (file)) {
+	if (baul_file_can_stop (file)) {
 		*show_stop = TRUE;
 	}
 
 	/* Dot not show both Unmount and Eject/Safe Removal; too confusing to
 	 * have too many menu entries */
-	if (caja_file_can_unmount (file) && !*show_eject && !*show_stop) {
+	if (baul_file_can_unmount (file) && !*show_eject && !*show_stop) {
 		*show_unmount = TRUE;
 	}
 
-	if (caja_file_can_poll_for_media (file) && !caja_file_is_media_check_automatic (file)) {
+	if (baul_file_can_poll_for_media (file) && !baul_file_is_media_check_automatic (file)) {
 		*show_poll = TRUE;
 	}
 
-	*start_stop_type = caja_file_get_start_stop_type (file);
+	*start_stop_type = baul_file_get_start_stop_type (file);
 
-	if (caja_file_is_caja_link (file)) {
+	if (baul_file_is_baul_link (file)) {
 		char *uri;
 
-		uri = caja_file_get_activation_uri (file);
+		uri = baul_file_get_activation_uri (file);
 		if (uri != NULL &&
 		    (eel_istr_has_prefix (uri, "ftp:") ||
 		     eel_istr_has_prefix (uri, "ssh:") ||
@@ -8079,11 +8079,11 @@ file_should_show_self (CajaFile        *file,
 		return;
 	}
 
-	if (caja_file_can_eject (file)) {
+	if (baul_file_can_eject (file)) {
 		*show_eject = TRUE;
 	}
 
-	if (caja_file_can_mount (file)) {
+	if (baul_file_can_mount (file)) {
 		*show_mount = TRUE;
 	}
 
@@ -8093,25 +8093,25 @@ file_should_show_self (CajaFile        *file,
 	}
 #endif
 
-	if (caja_file_can_start (file) || caja_file_can_start_degraded (file)) {
+	if (baul_file_can_start (file) || baul_file_can_start_degraded (file)) {
 		*show_start = TRUE;
 	}
 
-	if (caja_file_can_stop (file)) {
+	if (baul_file_can_stop (file)) {
 		*show_stop = TRUE;
 	}
 
 	/* Dot not show both Unmount and Eject/Safe Removal; too confusing to
 	 * have too many menu entries */
-	if (caja_file_can_unmount (file) && !*show_eject && !*show_stop) {
+	if (baul_file_can_unmount (file) && !*show_eject && !*show_stop) {
 		*show_unmount = TRUE;
 	}
 
-	if (caja_file_can_poll_for_media (file) && !caja_file_is_media_check_automatic (file)) {
+	if (baul_file_can_poll_for_media (file) && !baul_file_is_media_check_automatic (file)) {
 		*show_poll = TRUE;
 	}
 
-	*start_stop_type = caja_file_get_start_stop_type (file);
+	*start_stop_type = baul_file_get_start_stop_type (file);
 
 }
 
@@ -8126,7 +8126,7 @@ files_are_all_directories (GList *files)
 
 	for (l = files; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
-		all_directories &= caja_file_is_directory (file);
+		all_directories &= baul_file_is_directory (file);
 	}
 
 	return all_directories;
@@ -8143,7 +8143,7 @@ files_is_none_directory (GList *files)
 
 	for (l = files; l != NULL; l = l->next) {
 		file = CAJA_FILE (l->data);
-		no_directory &= !caja_file_is_directory (file);
+		no_directory &= !baul_file_is_directory (file);
 	}
 
 	return no_directory;
@@ -8170,13 +8170,13 @@ update_restore_from_trash_action (GtkAction *action,
 
 	if (files != NULL) {
 		if (g_list_length (files) == 1) {
-			original_file = caja_file_get_trash_original_file (files->data);
+			original_file = baul_file_get_trash_original_file (files->data);
 		} else {
-			original_dirs_hash = caja_trashed_files_get_original_directories (files, NULL);
+			original_dirs_hash = baul_trashed_files_get_original_directories (files, NULL);
 			if (original_dirs_hash != NULL) {
 				original_dirs = g_hash_table_get_keys (original_dirs_hash);
 				if (g_list_length (original_dirs) == 1) {
-					original_dir = caja_file_ref (CAJA_FILE (original_dirs->data));
+					original_dir = baul_file_ref (CAJA_FILE (original_dirs->data));
 				}
 			}
 		}
@@ -8190,9 +8190,9 @@ update_restore_from_trash_action (GtkAction *action,
 		G_GNUC_END_IGNORE_DEPRECATIONS;
 
 		if (original_file != NULL) {
-			original_location = caja_file_get_location (original_file);
+			original_location = baul_file_get_location (original_file);
 		} else if (original_dir != NULL) {
-			original_location = caja_file_get_location (original_dir);
+			original_location = baul_file_get_location (original_dir);
 		}
 
 		if (original_location != NULL) {
@@ -8247,8 +8247,8 @@ update_restore_from_trash_action (GtkAction *action,
 		G_GNUC_END_IGNORE_DEPRECATIONS;
 	}
 
-	caja_file_unref (original_file);
-	caja_file_unref (original_dir);
+	baul_file_unref (original_file);
+	baul_file_unref (original_dir);
 	g_list_free (original_dirs);
 
 	if (original_dirs_hash != NULL) {
@@ -8635,8 +8635,8 @@ real_update_paste_menu (FMDirectoryView *view,
 	GtkAction *action;
 
 	selection_is_read_only = selection_count == 1 &&
-		(!caja_file_can_write (CAJA_FILE (selection->data)) &&
-		 !caja_file_has_activation_uri (CAJA_FILE (selection->data)));
+		(!baul_file_can_write (CAJA_FILE (selection->data)) &&
+		 !baul_file_has_activation_uri (CAJA_FILE (selection->data)));
 
 	is_read_only = fm_directory_view_is_read_only (view);
 
@@ -8656,7 +8656,7 @@ real_update_paste_menu (FMDirectoryView *view,
 
 	/* Ask the clipboard */
 	g_object_ref (view); /* Need to keep the object alive until we get the reply */
-	gtk_clipboard_request_targets (caja_clipboard_get (GTK_WIDGET (view)),
+	gtk_clipboard_request_targets (baul_clipboard_get (GTK_WIDGET (view)),
 				       clipboard_targets_received,
 				       view);
 }
@@ -8679,8 +8679,8 @@ real_update_location_menu (FMDirectoryView *view)
 	show_open_folder_window = FALSE;
 	show_open_in_new_tab = FALSE;
 
-	if (caja_window_info_get_window_type (view->details->window) == CAJA_WINDOW_NAVIGATION) {
-		if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+	if (baul_window_info_get_window_type (view->details->window) == CAJA_WINDOW_NAVIGATION) {
+		if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
 			label = _("Open in New _Window");
 		} else {
 			label = _("Browse in New _Window");
@@ -8705,7 +8705,7 @@ real_update_location_menu (FMDirectoryView *view)
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 
 	if (show_open_in_new_tab) {
-		if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+		if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
 			label = _("Open in New _Tab");
 		} else {
 			label = _("Browse in New _Tab");
@@ -8723,16 +8723,16 @@ real_update_location_menu (FMDirectoryView *view)
 
 	file = view->details->location_popup_directory_as_file;
 	g_assert (CAJA_IS_FILE (file));
-	g_assert (caja_file_check_if_ready (file, CAJA_FILE_ATTRIBUTE_INFO |
+	g_assert (baul_file_check_if_ready (file, CAJA_FILE_ATTRIBUTE_INFO |
 						      CAJA_FILE_ATTRIBUTE_MOUNT |
 						      CAJA_FILE_ATTRIBUTE_FILESYSTEM_INFO));
 
 	is_special_link = CAJA_IS_DESKTOP_ICON_FILE (file);
-	is_desktop_or_home_dir = caja_file_is_home (file)
-		|| caja_file_is_desktop_directory (file);
+	is_desktop_or_home_dir = baul_file_is_home (file)
+		|| baul_file_is_desktop_directory (file);
 
 	can_delete_file =
-		caja_file_can_delete (file) &&
+		baul_file_can_delete (file) &&
 		!is_special_link &&
 		!is_desktop_or_home_dir;
 
@@ -8758,8 +8758,8 @@ real_update_location_menu (FMDirectoryView *view)
 	show_delete = TRUE;
 
 	if (file != NULL &&
-	    caja_file_is_in_trash (file)) {
-		if (caja_file_is_self_owned (file)) {
+	    baul_file_is_in_trash (file)) {
+		if (baul_file_is_self_owned (file)) {
 			show_delete = FALSE;
 		}
 
@@ -8769,7 +8769,7 @@ real_update_location_menu (FMDirectoryView *view)
 	} else {
 		label = _("Mo_ve to Trash");
 		tip = _("Move the open folder to the Trash");
-		show_separate_delete_command = g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ENABLE_DELETE);
+		show_separate_delete_command = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ENABLE_DELETE);
 	}
 
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -8779,7 +8779,7 @@ real_update_location_menu (FMDirectoryView *view)
 		      "label", label,
 		      "tooltip", tip,
 		      "icon-name", (file != NULL &&
-				   caja_file_is_in_trash (file)) ?
+				   baul_file_is_in_trash (file)) ?
 					CAJA_ICON_DELETE : CAJA_ICON_TRASH_FULL,
 		      NULL);
 	gtk_action_set_sensitive (action, can_delete_file);
@@ -8825,7 +8825,7 @@ clipboard_changed_callback (CajaClipboardMonitor *monitor, FMDirectoryView *view
 
 	real_update_paste_menu (view, selection, selection_count);
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 
 }
 
@@ -8837,7 +8837,7 @@ can_delete_all (GList *files)
 
 	for (l = files; l != NULL; l = l->next) {
 		file = l->data;
-		if (!caja_file_can_delete (file)) {
+		if (!baul_file_can_delete (file)) {
 			return FALSE;
 		}
 	}
@@ -8935,9 +8935,9 @@ real_update_menus (FMDirectoryView *view)
 		   if, for instance, a file was originally created with 0 bytes
 		   and then content was added to it later-- it will change from
 		   plaintext to something else. */
-		caja_file_refresh_info (file);
+		baul_file_refresh_info (file);
 
-		if (!caja_mime_file_opens_in_external_app (file)) {
+		if (!baul_mime_file_opens_in_external_app (file)) {
 			show_app = FALSE;
 		}
 
@@ -8952,7 +8952,7 @@ real_update_menus (FMDirectoryView *view)
 	app_icon = NULL;
 
 	if (can_open && show_app) {
-		app = caja_mime_get_default_application_for_files (selection);
+		app = baul_mime_get_default_application_for_files (selection);
 	}
 
 	if (app != NULL) {
@@ -8976,7 +8976,7 @@ real_update_menus (FMDirectoryView *view)
 		      NULL);
 
 	menuitem = gtk_ui_manager_get_widget (
-			caja_window_info_get_ui_manager (view->details->window),
+			baul_window_info_get_ui_manager (view->details->window),
 			FM_DIRECTORY_VIEW_MENU_PATH_OPEN);
 
 	/* Only force displaying the icon if it is an application icon */
@@ -8984,7 +8984,7 @@ real_update_menus (FMDirectoryView *view)
 		GTK_IMAGE_MENU_ITEM (menuitem), app_icon != NULL);
 
 	menuitem = gtk_ui_manager_get_widget (
-			caja_window_info_get_ui_manager (view->details->window),
+			baul_window_info_get_ui_manager (view->details->window),
 			FM_DIRECTORY_VIEW_POPUP_PATH_OPEN);
 
 	/* Only force displaying the icon if it is an application icon */
@@ -9006,11 +9006,11 @@ real_update_menus (FMDirectoryView *view)
 
 	show_open_alternate = file_list_all_are_folders (selection) &&
 				selection_count > 0 &&
-				!(caja_window_info_get_window_type (view->details->window) == CAJA_WINDOW_DESKTOP &&
-					g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER));
+				!(baul_window_info_get_window_type (view->details->window) == CAJA_WINDOW_DESKTOP &&
+					g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER));
 	show_open_folder_window = FALSE;
-	if (caja_window_info_get_window_type (view->details->window) == CAJA_WINDOW_NAVIGATION) {
-		if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+	if (baul_window_info_get_window_type (view->details->window) == CAJA_WINDOW_NAVIGATION) {
+		if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
 			if (selection_count == 0 || selection_count == 1) {
 				label_with_underscore = g_strdup (_("Open in New _Window"));
 			} else {
@@ -9049,9 +9049,9 @@ real_update_menus (FMDirectoryView *view)
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 
 	/* Open in New Tab action */
-	if (caja_window_info_get_window_type (view->details->window) == CAJA_WINDOW_NAVIGATION) {
+	if (baul_window_info_get_window_type (view->details->window) == CAJA_WINDOW_NAVIGATION) {
 
-		if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+		if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
 			if (selection_count == 0 || selection_count == 1) {
 				label_with_underscore = g_strdup (_("Open in New _Tab"));
 			} else {
@@ -9087,7 +9087,7 @@ real_update_menus (FMDirectoryView *view)
 	}
 
 	/* next pane actions, only in navigation mode */
-	if (caja_window_info_get_window_type (view->details->window) != CAJA_WINDOW_NAVIGATION) {
+	if (baul_window_info_get_window_type (view->details->window) != CAJA_WINDOW_NAVIGATION) {
 		G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 		action = gtk_action_group_get_action (view->details->dir_action_group,
 						      FM_ACTION_COPY_TO_NEXT_PANE);
@@ -9113,7 +9113,7 @@ real_update_menus (FMDirectoryView *view)
 	} else {
 		label = _("Mo_ve to Trash");
 		tip = _("Move each selected item to the Trash");
-		show_separate_delete_command = g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ENABLE_DELETE);
+		show_separate_delete_command = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ENABLE_DELETE);
 	}
 
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -9185,7 +9185,7 @@ real_update_menus (FMDirectoryView *view)
 	g_object_set (action,
 		      "label", _("E_mpty Trash"),
 		      NULL);
-	gtk_action_set_sensitive (action, !caja_trash_monitor_is_empty ());
+	gtk_action_set_sensitive (action, !baul_trash_monitor_is_empty ());
 	gtk_action_set_visible (action, should_show_empty_trash (view));
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 
@@ -9197,9 +9197,9 @@ real_update_menus (FMDirectoryView *view)
 		CajaSearchDirectory *search;
 
 		search = CAJA_SEARCH_DIRECTORY (view->details->model);
-		if (caja_search_directory_is_saved_search (search)) {
+		if (baul_search_directory_is_saved_search (search)) {
 			show_save_search = TRUE;
-			save_search_sensitive = caja_search_directory_is_modified (search);
+			save_search_sensitive = baul_search_directory_is_modified (search);
 		} else {
 			show_save_search_as = TRUE;
 		}
@@ -9249,7 +9249,7 @@ real_update_menus (FMDirectoryView *view)
 
 	undo_update_menu (view);
 
-	caja_file_list_free (selection);
+	baul_file_list_free (selection);
 
 	if (view->details->scripts_invalid) {
 		update_scripts_menu (view);
@@ -9393,10 +9393,10 @@ unschedule_pop_up_location_context_menu (FMDirectoryView *view)
 {
 	if (view->details->location_popup_directory_as_file != NULL) {
 		g_assert (CAJA_IS_FILE (view->details->location_popup_directory_as_file));
-		caja_file_cancel_call_when_ready (view->details->location_popup_directory_as_file,
+		baul_file_cancel_call_when_ready (view->details->location_popup_directory_as_file,
 						      location_popup_file_attributes_ready,
 						      view);
-		caja_file_unref (view->details->location_popup_directory_as_file);
+		baul_file_unref (view->details->location_popup_directory_as_file);
 		view->details->location_popup_directory_as_file = NULL;
 	}
 }
@@ -9414,7 +9414,7 @@ schedule_pop_up_location_context_menu (FMDirectoryView *view,
 	view->details->location_popup_event = (GdkEventButton *) gdk_event_copy ((GdkEvent *)event);
 
 	if (file == view->details->location_popup_directory_as_file) {
-		if (caja_file_check_if_ready (file, CAJA_FILE_ATTRIBUTE_INFO |
+		if (baul_file_check_if_ready (file, CAJA_FILE_ATTRIBUTE_INFO |
 							CAJA_FILE_ATTRIBUTE_MOUNT |
 							CAJA_FILE_ATTRIBUTE_FILESYSTEM_INFO)) {
 			real_pop_up_location_context_menu (view);
@@ -9422,8 +9422,8 @@ schedule_pop_up_location_context_menu (FMDirectoryView *view,
 	} else {
 		unschedule_pop_up_location_context_menu (view);
 
-		view->details->location_popup_directory_as_file = caja_file_ref (file);
-		caja_file_call_when_ready (view->details->location_popup_directory_as_file,
+		view->details->location_popup_directory_as_file = baul_file_ref (file);
+		baul_file_call_when_ready (view->details->location_popup_directory_as_file,
 					       CAJA_FILE_ATTRIBUTE_INFO |
 					       CAJA_FILE_ATTRIBUTE_MOUNT |
 					       CAJA_FILE_ATTRIBUTE_FILESYSTEM_INFO,
@@ -9452,14 +9452,14 @@ fm_directory_view_pop_up_location_context_menu (FMDirectoryView *view,
 	g_assert (FM_IS_DIRECTORY_VIEW (view));
 
 	if (location != NULL) {
-		file = caja_file_get_by_uri (location);
+		file = baul_file_get_by_uri (location);
 	} else {
-		file = caja_file_ref (view->details->directory_as_file);
+		file = baul_file_ref (view->details->directory_as_file);
 	}
 
 	if (file != NULL) {
 		schedule_pop_up_location_context_menu (view, event, file);
-		caja_file_unref (file);
+		baul_file_unref (file);
 	}
 }
 
@@ -9478,7 +9478,7 @@ fm_directory_view_drop_proxy_received_uris (FMDirectoryView *view,
 	}
 
 	if (action == GDK_ACTION_ASK) {
-		action = caja_drag_drop_action_ask
+		action = baul_drag_drop_action_ask
 			(GTK_WIDGET (view),
 			 GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 		if (action == 0) {
@@ -9486,7 +9486,7 @@ fm_directory_view_drop_proxy_received_uris (FMDirectoryView *view,
 		}
 	}
 
-	caja_clipboard_clear_if_colliding_uris (GTK_WIDGET (view),
+	baul_clipboard_clear_if_colliding_uris (GTK_WIDGET (view),
 						    source_uri_list,
 						    fm_directory_view_get_copied_files_atom (view));
 
@@ -9586,17 +9586,17 @@ fm_directory_view_notify_selection_changed (FMDirectoryView *view)
 {
 	g_return_if_fail (FM_IS_DIRECTORY_VIEW (view));
 
-	if (caja_debug_log_is_domain_enabled (CAJA_DEBUG_LOG_DOMAIN_USER)) {
+	if (baul_debug_log_is_domain_enabled (CAJA_DEBUG_LOG_DOMAIN_USER)) {
 		GList *selection;
 		GtkWindow *window;
 
 		selection = fm_directory_view_get_selection (view);
 
 		window = fm_directory_view_get_containing_window (view);
-		caja_debug_log_with_file_list (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, selection,
+		baul_debug_log_with_file_list (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, selection,
 						   "selection changed in window %p",
 						   window);
-		caja_file_list_free (selection);
+		baul_file_list_free (selection);
 	}
 
 	view->details->selection_was_removed = FALSE;
@@ -9641,7 +9641,7 @@ file_changed_callback (CajaFile *file, gpointer callback_data)
 	 * Don't do this for trash, as it never changes writability
 	 * but does change a lot for the file count attribute.
 	 */
-	if (!caja_file_is_in_trash (file)) {
+	if (!baul_file_is_in_trash (file)) {
 		EEL_CALL_METHOD
 			(FM_DIRECTORY_VIEW_CLASS, view, emblems_changed, (view));
 	}
@@ -9686,14 +9686,14 @@ load_directory (FMDirectoryView *view,
 	disconnect_model_handlers (view);
 
 	old_directory = view->details->model;
-	caja_directory_ref (directory);
+	baul_directory_ref (directory);
 	view->details->model = directory;
-	caja_directory_unref (old_directory);
+	baul_directory_unref (old_directory);
 
 	old_file = view->details->directory_as_file;
 	view->details->directory_as_file =
-		caja_directory_get_corresponding_file (directory);
-	caja_file_unref (old_file);
+		baul_directory_get_corresponding_file (directory);
+	baul_file_unref (old_file);
 
 	view->details->reported_load_error = FALSE;
 
@@ -9707,11 +9707,11 @@ load_directory (FMDirectoryView *view,
 		CAJA_FILE_ATTRIBUTE_FILESYSTEM_INFO;
 	view->details->metadata_for_directory_as_file_pending = TRUE;
 	view->details->metadata_for_files_in_directory_pending = TRUE;
-	caja_file_call_when_ready
+	baul_file_call_when_ready
 		(view->details->directory_as_file,
 		 attributes,
 		 metadata_for_directory_as_file_ready_callback, view);
-	caja_directory_call_when_ready
+	baul_directory_call_when_ready
 		(view->details->model,
 		 attributes,
 		 FALSE,
@@ -9723,7 +9723,7 @@ load_directory (FMDirectoryView *view,
 	attributes =
 		CAJA_FILE_ATTRIBUTE_INFO |
 		CAJA_FILE_ATTRIBUTE_FILESYSTEM_INFO;
-	caja_file_monitor_add (view->details->directory_as_file,
+	baul_file_monitor_add (view->details->directory_as_file,
 				   &view->details->directory_as_file,
 				   attributes);
 
@@ -9737,7 +9737,7 @@ finish_loading (FMDirectoryView *view)
 {
 	CajaFileAttributes attributes;
 
-	caja_window_info_report_load_underway (view->details->window,
+	baul_window_info_report_load_underway (view->details->window,
 						   CAJA_VIEW (view));
 
 	/* Tell interested parties that we've begun loading this directory now.
@@ -9746,9 +9746,9 @@ finish_loading (FMDirectoryView *view)
 	fm_directory_view_begin_loading (view);
 
 	/* Assume we have now all information to show window */
-	caja_window_info_view_visible  (view->details->window, CAJA_VIEW (view));
+	baul_window_info_view_visible  (view->details->window, CAJA_VIEW (view));
 
-	if (caja_directory_are_all_files_seen (view->details->model)) {
+	if (baul_directory_are_all_files_seen (view->details->model)) {
 		/* Unschedule a pending update and schedule a new one with the minimal
 		 * update interval. This gives the view a short chance at gathering the
 		 * (cached) deep counts.
@@ -9780,7 +9780,7 @@ finish_loading (FMDirectoryView *view)
 		CAJA_FILE_ATTRIBUTE_MOUNT |
 		CAJA_FILE_ATTRIBUTE_EXTENSION_INFO;
 
-	caja_directory_file_monitor_add (view->details->model,
+	baul_directory_file_monitor_add (view->details->model,
 					     &view->details->model,
 					     view->details->show_hidden_files,
 					     attributes,
@@ -9866,7 +9866,7 @@ real_get_emblem_names_to_exclude (FMDirectoryView *view)
 	i = 0;
 	excludes[i++] = g_strdup (CAJA_FILE_EMBLEM_NAME_TRASH);
 
-	if (!caja_file_can_write (view->details->directory_as_file)) {
+	if (!baul_file_can_write (view->details->directory_as_file)) {
 		excludes[i++] = g_strdup (CAJA_FILE_EMBLEM_NAME_CANT_WRITE);
 	}
 
@@ -9933,15 +9933,15 @@ disconnect_model_handlers (FMDirectoryView *view)
 	disconnect_directory_handler (view, &view->details->done_loading_handler_id);
 	disconnect_directory_handler (view, &view->details->load_error_handler_id);
 	disconnect_directory_as_file_handler (view, &view->details->file_changed_handler_id);
-	caja_file_cancel_call_when_ready (view->details->directory_as_file,
+	baul_file_cancel_call_when_ready (view->details->directory_as_file,
 					      metadata_for_directory_as_file_ready_callback,
 					      view);
-	caja_directory_cancel_callback (view->details->model,
+	baul_directory_cancel_callback (view->details->model,
 					    metadata_for_files_in_directory_ready_callback,
 					    view);
-	caja_directory_file_monitor_remove (view->details->model,
+	baul_directory_file_monitor_remove (view->details->model,
 						&view->details->model);
-	caja_file_monitor_remove (view->details->directory_as_file,
+	baul_file_monitor_remove (view->details->directory_as_file,
 				      &view->details->directory_as_file);
 }
 
@@ -9961,9 +9961,9 @@ fm_directory_view_reset_to_defaults (FMDirectoryView *view)
 	EEL_CALL_METHOD
 		(FM_DIRECTORY_VIEW_CLASS, view,
 		 reset_to_defaults, (view));
-	mode = caja_window_info_get_hidden_files_mode (view->details->window);
+	mode = baul_window_info_get_hidden_files_mode (view->details->window);
 	if (mode != CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT) {
-		caja_window_info_set_hidden_files_mode (view->details->window,
+		baul_window_info_set_hidden_files_mode (view->details->window,
 							    CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT);
 	}
 }
@@ -10073,7 +10073,7 @@ fm_directory_view_stop (FMDirectoryView *view)
 	view->details->pending_locations_selected = NULL;
 
 	if (view->details->model != NULL) {
-		caja_directory_file_monitor_remove (view->details->model, view);
+		baul_directory_file_monitor_remove (view->details->model, view);
 	}
 	done_loading (view, FALSE);
 }
@@ -10106,7 +10106,7 @@ fm_directory_view_is_editable (FMDirectoryView *view)
 	directory = fm_directory_view_get_model (view);
 
 	if (directory != NULL) {
-		return caja_directory_is_editable (directory);
+		return baul_directory_is_editable (directory);
 	}
 
 	return TRUE;
@@ -10117,7 +10117,7 @@ fm_directory_view_set_initiated_unmount (FMDirectoryView *view,
 					 gboolean initiated_unmount)
 {
 	if (view->details->window != NULL) {
-		caja_window_info_set_initiated_unmount(view->details->window,
+		baul_window_info_set_initiated_unmount(view->details->window,
 							   initiated_unmount);
 	}
 }
@@ -10133,7 +10133,7 @@ real_is_read_only (FMDirectoryView *view)
 
 	file = fm_directory_view_get_directory_as_file (view);
 	if (file != NULL) {
-		return !caja_file_can_write (file);
+		return !baul_file_can_write (file);
 	}
 	return FALSE;
 }
@@ -10167,7 +10167,7 @@ fm_directory_view_accepts_dragged_files (FMDirectoryView *view)
 gboolean
 fm_directory_view_should_show_file (FMDirectoryView *view, CajaFile *file)
 {
-	return caja_file_should_show (file,
+	return baul_file_should_show (file,
 				      view->details->show_hidden_files,
 				      view->details->show_foreign_files,
 				      view->details->show_backup_files);
@@ -10299,7 +10299,7 @@ fm_directory_view_get_uri (FMDirectoryView *view)
 	if (view->details->model == NULL) {
 		return NULL;
 	}
-	return caja_directory_get_uri (view->details->model);
+	return baul_directory_get_uri (view->details->model);
 }
 
 /* Get the real directory where files will be stored and created */
@@ -10318,14 +10318,14 @@ fm_directory_view_get_backing_uri (FMDirectoryView *view)
 	directory = view->details->model;
 
 	if (CAJA_IS_DESKTOP_DIRECTORY (directory)) {
-		directory = caja_desktop_directory_get_real_directory (CAJA_DESKTOP_DIRECTORY (directory));
+		directory = baul_desktop_directory_get_real_directory (CAJA_DESKTOP_DIRECTORY (directory));
 	} else {
-		caja_directory_ref (directory);
+		baul_directory_ref (directory);
 	}
 
-	uri = caja_directory_get_uri (directory);
+	uri = baul_directory_get_uri (directory);
 
-	caja_directory_unref (directory);
+	baul_directory_unref (directory);
 
 	return uri;
 }
@@ -10347,26 +10347,26 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 	/* add the drop location to the icon offsets */
 	offset_drop_points (relative_item_points, x, y);
 
-	target_file = caja_file_get_existing_by_uri (target_uri);
+	target_file = baul_file_get_existing_by_uri (target_uri);
 	/* special-case "command:" here instead of starting a move/copy */
-	if (target_file != NULL && caja_file_is_launcher (target_file)) {
-		caja_file_unref (target_file);
-		caja_launch_desktop_file (
+	if (target_file != NULL && baul_file_is_launcher (target_file)) {
+		baul_file_unref (target_file);
+		baul_launch_desktop_file (
 				gtk_widget_get_screen (GTK_WIDGET (view)),
 				target_uri, item_uris,
 				fm_directory_view_get_containing_window (view));
 		return;
 	} else if (copy_action == GDK_ACTION_COPY &&
-		   caja_is_engrampa_installed () &&
+		   baul_is_engrampa_installed () &&
 		   target_file != NULL &&
-		   caja_file_is_archive (target_file)) {
+		   baul_file_is_archive (target_file)) {
 		char *command, *quoted_uri, *tmp;
 		const GList *l;
 		GdkScreen  *screen;
 
 		/* Handle dropping onto a engrampa archiver file, instead of starting a move/copy */
 
-		caja_file_unref (target_file);
+		baul_file_unref (target_file);
 
 		quoted_uri = g_shell_quote (target_uri);
 		command = g_strconcat ("engrampa -a ", quoted_uri, NULL);
@@ -10392,9 +10392,9 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 
 		return;
 	}
-	caja_file_unref (target_file);
+	baul_file_unref (target_file);
 
-	caja_file_operations_copy_move
+	baul_file_operations_copy_move
 		(item_uris, relative_item_points,
 		 target_uri, copy_action, GTK_WIDGET (view),
 		 copy_move_done_callback, pre_copy_move (view));
@@ -10409,7 +10409,7 @@ fm_directory_view_can_accept_item (CajaFile *target_item,
 	g_return_val_if_fail (item_uri != NULL, FALSE);
 	g_return_val_if_fail (FM_IS_DIRECTORY_VIEW (view), FALSE);
 
-	return caja_drag_can_accept_item (target_item, item_uri);
+	return baul_drag_can_accept_item (target_item, item_uri);
 }
 
 static void
@@ -10745,7 +10745,7 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 			screen = gtk_widget_get_screen (GTK_WIDGET (view));
 			screen_num = gdk_x11_screen_get_screen_number (screen);
 
-			caja_link_local_create (target_uri != NULL ? target_uri : container_uri,
+			baul_link_local_create (target_uri != NULL ? target_uri : container_uri,
 						    link_name,
 						    link_display_name,
 						    "mate-fs-bookmark",
@@ -10805,7 +10805,7 @@ fm_directory_view_handle_uri_list_drop (FMDirectoryView  *view,
 	}
 
 	if (action == GDK_ACTION_ASK) {
-		action = caja_drag_drop_action_ask
+		action = baul_drag_drop_action_ask
 			(GTK_WIDGET (view),
 			 GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 		if (action == 0) {
@@ -10985,7 +10985,7 @@ fm_directory_view_set_property (GObject         *object,
 	  g_assert (directory_view->details->slot == NULL);
 
 	  slot = CAJA_WINDOW_SLOT_INFO (g_value_get_object (value));
-          window = caja_window_slot_info_get_window (slot);
+          window = baul_window_slot_info_get_window (slot);
 
 	  directory_view->details->slot = slot;
 	  directory_view->details->window = window;
@@ -11104,7 +11104,7 @@ fm_directory_view_parent_set (GtkWidget *widget,
 		g_assert (old_parent == NULL);
 
 		if (view->details->slot ==
-		    caja_window_info_get_active_slot (view->details->window)) {
+		    baul_window_info_get_active_slot (view->details->window)) {
 			view->details->active = TRUE;
 
 			fm_directory_view_merge_menus (view);

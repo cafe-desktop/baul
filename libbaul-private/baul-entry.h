@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-#define CAJA_TYPE_ENTRY caja_entry_get_type()
+#define CAJA_TYPE_ENTRY baul_entry_get_type()
 #define CAJA_ENTRY(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ENTRY, CajaEntry))
 #define CAJA_ENTRY_CLASS(klass) \
@@ -61,13 +61,13 @@ extern "C" {
         void (*selection_changed) (CajaEntry *entry);
     } CajaEntryClass;
 
-    GType       caja_entry_get_type                 (void);
-    GtkWidget  *caja_entry_new                      (void);
-    void        caja_entry_set_text                 (CajaEntry *entry,
+    GType       baul_entry_get_type                 (void);
+    GtkWidget  *baul_entry_new                      (void);
+    void        baul_entry_set_text                 (CajaEntry *entry,
             const char    *text);
-    void        caja_entry_select_all               (CajaEntry *entry);
-    void        caja_entry_select_all_at_idle       (CajaEntry *entry);
-    void        caja_entry_set_special_tab_handling (CajaEntry *entry,
+    void        baul_entry_select_all               (CajaEntry *entry);
+    void        baul_entry_select_all_at_idle       (CajaEntry *entry);
+    void        baul_entry_set_special_tab_handling (CajaEntry *entry,
             gboolean       special_tab_handling);
 
 #ifdef __cplusplus

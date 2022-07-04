@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-progress-info.h: file operation progress info.
+   baul-progress-info.h: file operation progress info.
 
    Copyright (C) 2007 Red Hat, Inc.
 
@@ -28,7 +28,7 @@
 #include <glib-object.h>
 #include <gio/gio.h>
 
-#define CAJA_TYPE_PROGRESS_INFO         (caja_progress_info_get_type ())
+#define CAJA_TYPE_PROGRESS_INFO         (baul_progress_info_get_type ())
 #define CAJA_PROGRESS_INFO(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), CAJA_TYPE_PROGRESS_INFO, CajaProgressInfo))
 #define CAJA_PROGRESS_INFO_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_PROGRESS_INFO, CajaProgressInfoClass))
 #define CAJA_IS_PROGRESS_INFO(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), CAJA_TYPE_PROGRESS_INFO))
@@ -38,7 +38,7 @@
 typedef struct _CajaProgressInfo      CajaProgressInfo;
 typedef struct _CajaProgressInfoClass CajaProgressInfoClass;
 
-GType caja_progress_info_get_type (void) G_GNUC_CONST;
+GType baul_progress_info_get_type (void) G_GNUC_CONST;
 
 /* Signals:
    "changed" - status or details changed
@@ -50,37 +50,37 @@ GType caja_progress_info_get_type (void) G_GNUC_CONST;
    All methods are threadsafe.
  */
 
-CajaProgressInfo *caja_progress_info_new (gboolean should_start, gboolean can_pause);
-void caja_progress_info_get_ready (CajaProgressInfo *info);
-void caja_progress_info_disable_pause (CajaProgressInfo *info);
+CajaProgressInfo *baul_progress_info_new (gboolean should_start, gboolean can_pause);
+void baul_progress_info_get_ready (CajaProgressInfo *info);
+void baul_progress_info_disable_pause (CajaProgressInfo *info);
 
-GList *       caja_get_all_progress_info (void);
+GList *       baul_get_all_progress_info (void);
 
-char *        caja_progress_info_get_status      (CajaProgressInfo *info);
-char *        caja_progress_info_get_details     (CajaProgressInfo *info);
-double        caja_progress_info_get_progress    (CajaProgressInfo *info);
-GCancellable *caja_progress_info_get_cancellable (CajaProgressInfo *info);
-void          caja_progress_info_cancel          (CajaProgressInfo *info);
-gboolean      caja_progress_info_get_is_started  (CajaProgressInfo *info);
-gboolean      caja_progress_info_get_is_finished (CajaProgressInfo *info);
-gboolean      caja_progress_info_get_is_paused   (CajaProgressInfo *info);
+char *        baul_progress_info_get_status      (CajaProgressInfo *info);
+char *        baul_progress_info_get_details     (CajaProgressInfo *info);
+double        baul_progress_info_get_progress    (CajaProgressInfo *info);
+GCancellable *baul_progress_info_get_cancellable (CajaProgressInfo *info);
+void          baul_progress_info_cancel          (CajaProgressInfo *info);
+gboolean      baul_progress_info_get_is_started  (CajaProgressInfo *info);
+gboolean      baul_progress_info_get_is_finished (CajaProgressInfo *info);
+gboolean      baul_progress_info_get_is_paused   (CajaProgressInfo *info);
 
-void          caja_progress_info_start           (CajaProgressInfo *info);
-void          caja_progress_info_finish          (CajaProgressInfo *info);
-void          caja_progress_info_pause           (CajaProgressInfo *info);
-void          caja_progress_info_resume          (CajaProgressInfo *info);
-void          caja_progress_info_set_status      (CajaProgressInfo *info,
+void          baul_progress_info_start           (CajaProgressInfo *info);
+void          baul_progress_info_finish          (CajaProgressInfo *info);
+void          baul_progress_info_pause           (CajaProgressInfo *info);
+void          baul_progress_info_resume          (CajaProgressInfo *info);
+void          baul_progress_info_set_status      (CajaProgressInfo *info,
         const char           *status);
-void          caja_progress_info_take_status     (CajaProgressInfo *info,
+void          baul_progress_info_take_status     (CajaProgressInfo *info,
         char                 *status);
-void          caja_progress_info_set_details     (CajaProgressInfo *info,
+void          baul_progress_info_set_details     (CajaProgressInfo *info,
         const char           *details);
-void          caja_progress_info_take_details    (CajaProgressInfo *info,
+void          baul_progress_info_take_details    (CajaProgressInfo *info,
         char                 *details);
-void          caja_progress_info_set_progress    (CajaProgressInfo *info,
+void          baul_progress_info_set_progress    (CajaProgressInfo *info,
         double                current,
         double                total);
-void          caja_progress_info_pulse_progress  (CajaProgressInfo *info);
+void          baul_progress_info_pulse_progress  (CajaProgressInfo *info);
 
 
 #endif /* CAJA_PROGRESS_INFO_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-directory-notify.h: Caja directory notify calls.
+   baul-directory-notify.h: Caja directory notify calls.
 
    Copyright (C) 2000, 2001 Eazel, Inc.
 
@@ -24,7 +24,7 @@
 
 #include <gdk/gdk.h>
 
-#include "caja-file.h"
+#include "baul-file.h"
 
 typedef struct
 {
@@ -47,23 +47,23 @@ typedef struct
 } CajaFileChangesQueuePosition;
 
 /* Almost-public change notification calls */
-void caja_directory_notify_files_added   (GList *files);
-void caja_directory_notify_files_moved   (GList *file_pairs);
-void caja_directory_notify_files_changed (GList *files);
-void caja_directory_notify_files_removed (GList *files);
+void baul_directory_notify_files_added   (GList *files);
+void baul_directory_notify_files_moved   (GList *file_pairs);
+void baul_directory_notify_files_changed (GList *files);
+void baul_directory_notify_files_removed (GList *files);
 
-void caja_directory_schedule_metadata_copy   (GList        *file_pairs);
-void caja_directory_schedule_metadata_move   (GList        *file_pairs);
-void caja_directory_schedule_metadata_remove (GList        *files);
+void baul_directory_schedule_metadata_copy   (GList        *file_pairs);
+void baul_directory_schedule_metadata_move   (GList        *file_pairs);
+void baul_directory_schedule_metadata_remove (GList        *files);
 
-void caja_directory_schedule_metadata_copy_by_uri   (GList        *uri_pairs);
-void caja_directory_schedule_metadata_move_by_uri   (GList        *uri_pairs);
-void caja_directory_schedule_metadata_remove_by_uri (GList        *uris);
-void caja_directory_schedule_position_set    (GList        *position_setting_list);
+void baul_directory_schedule_metadata_copy_by_uri   (GList        *uri_pairs);
+void baul_directory_schedule_metadata_move_by_uri   (GList        *uri_pairs);
+void baul_directory_schedule_metadata_remove_by_uri (GList        *uris);
+void baul_directory_schedule_position_set    (GList        *position_setting_list);
 
 /* Change notification hack.
  * This is called when code modifies the file and it needs to trigger
  * a notification. Eventually this should become private, but for now
  * it needs to be used for code like the thumbnail generation.
  */
-void caja_file_changed                       (CajaFile *file);
+void baul_file_changed                       (CajaFile *file);

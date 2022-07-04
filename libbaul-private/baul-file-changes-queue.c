@@ -21,9 +21,9 @@
 */
 
 #include <config.h>
-#include "caja-file-changes-queue.h"
+#include "baul-file-changes-queue.h"
 
-#include "caja-directory-notify.h"
+#include "baul-directory-notify.h"
 
 typedef enum
 {
@@ -53,7 +53,7 @@ typedef struct
 } CajaFileChangesQueue;
 
 static CajaFileChangesQueue *
-caja_file_changes_queue_new (void)
+baul_file_changes_queue_new (void)
 {
     CajaFileChangesQueue *result;
 
@@ -65,20 +65,20 @@ caja_file_changes_queue_new (void)
 }
 
 static CajaFileChangesQueue *
-caja_file_changes_queue_get (void)
+baul_file_changes_queue_get (void)
 {
     static CajaFileChangesQueue *file_changes_queue;
 
     if (file_changes_queue == NULL)
     {
-        file_changes_queue = caja_file_changes_queue_new ();
+        file_changes_queue = baul_file_changes_queue_new ();
     }
 
     return file_changes_queue;
 }
 
 static void
-caja_file_changes_queue_add_common (CajaFileChangesQueue *queue,
+baul_file_changes_queue_add_common (CajaFileChangesQueue *queue,
                                     CajaFileChange *new_item)
 {
     /* enqueue the new queue item while locking down the list */
@@ -92,97 +92,97 @@ caja_file_changes_queue_add_common (CajaFileChangesQueue *queue,
 }
 
 void
-caja_file_changes_queue_file_added (GFile *location)
+baul_file_changes_queue_file_added (GFile *location)
 {
     CajaFileChange *new_item;
     CajaFileChangesQueue *queue;
 
-    queue = caja_file_changes_queue_get();
+    queue = baul_file_changes_queue_get();
 
     new_item = g_new0 (CajaFileChange, 1);
     new_item->kind = CHANGE_FILE_ADDED;
     new_item->from = g_object_ref (location);
-    caja_file_changes_queue_add_common (queue, new_item);
+    baul_file_changes_queue_add_common (queue, new_item);
 }
 
 void
-caja_file_changes_queue_file_changed (GFile *location)
+baul_file_changes_queue_file_changed (GFile *location)
 {
     CajaFileChange *new_item;
     CajaFileChangesQueue *queue;
 
-    queue = caja_file_changes_queue_get();
+    queue = baul_file_changes_queue_get();
 
     new_item = g_new0 (CajaFileChange, 1);
     new_item->kind = CHANGE_FILE_CHANGED;
     new_item->from = g_object_ref (location);
-    caja_file_changes_queue_add_common (queue, new_item);
+    baul_file_changes_queue_add_common (queue, new_item);
 }
 
 void
-caja_file_changes_queue_file_removed (GFile *location)
+baul_file_changes_queue_file_removed (GFile *location)
 {
     CajaFileChange *new_item;
     CajaFileChangesQueue *queue;
 
-    queue = caja_file_changes_queue_get();
+    queue = baul_file_changes_queue_get();
 
     new_item = g_new0 (CajaFileChange, 1);
     new_item->kind = CHANGE_FILE_REMOVED;
     new_item->from = g_object_ref (location);
-    caja_file_changes_queue_add_common (queue, new_item);
+    baul_file_changes_queue_add_common (queue, new_item);
 }
 
 void
-caja_file_changes_queue_file_moved (GFile *from,
+baul_file_changes_queue_file_moved (GFile *from,
                                     GFile *to)
 {
     CajaFileChange *new_item;
     CajaFileChangesQueue *queue;
 
-    queue = caja_file_changes_queue_get ();
+    queue = baul_file_changes_queue_get ();
 
     new_item = g_new (CajaFileChange, 1);
     new_item->kind = CHANGE_FILE_MOVED;
     new_item->from = g_object_ref (from);
     new_item->to = g_object_ref (to);
-    caja_file_changes_queue_add_common (queue, new_item);
+    baul_file_changes_queue_add_common (queue, new_item);
 }
 
 void
-caja_file_changes_queue_schedule_position_set (GFile *location,
+baul_file_changes_queue_schedule_position_set (GFile *location,
         GdkPoint point,
         int screen)
 {
     CajaFileChange *new_item;
     CajaFileChangesQueue *queue;
 
-    queue = caja_file_changes_queue_get ();
+    queue = baul_file_changes_queue_get ();
 
     new_item = g_new (CajaFileChange, 1);
     new_item->kind = CHANGE_POSITION_SET;
     new_item->from = g_object_ref (location);
     new_item->point = point;
     new_item->screen = screen;
-    caja_file_changes_queue_add_common (queue, new_item);
+    baul_file_changes_queue_add_common (queue, new_item);
 }
 
 void
-caja_file_changes_queue_schedule_position_remove (GFile *location)
+baul_file_changes_queue_schedule_position_remove (GFile *location)
 {
     CajaFileChange *new_item;
     CajaFileChangesQueue *queue;
 
-    queue = caja_file_changes_queue_get ();
+    queue = baul_file_changes_queue_get ();
 
     new_item = g_new (CajaFileChange, 1);
     new_item->kind = CHANGE_POSITION_REMOVE;
     new_item->from = g_object_ref (location);
-    caja_file_changes_queue_add_common (queue, new_item);
+    baul_file_changes_queue_add_common (queue, new_item);
 }
 
 static CajaFileChange *
-caja_file_changes_queue_get_change (CajaFileChangesQueue *queue)
+baul_file_changes_queue_get_change (CajaFileChangesQueue *queue)
 {
     GList *new_tail;
     CajaFileChange *result;
@@ -252,10 +252,10 @@ position_set_list_free (GList *list)
 }
 
 /* go through changes in the change queue, send ones with the same kind
- * in a list to the different caja_directory_notify calls
+ * in a list to the different baul_directory_notify calls
  */
 void
-caja_file_changes_consume_changes (gboolean consume_all)
+baul_file_changes_consume_changes (gboolean consume_all)
 {
     CajaFileChange *change;
     GList *additions, *changes, *deletions, *moves;
@@ -273,7 +273,7 @@ caja_file_changes_consume_changes (gboolean consume_all)
     moves = NULL;
     position_set_requests = NULL;
 
-    queue = caja_file_changes_queue_get();
+    queue = baul_file_changes_queue_get();
 
     /* Consume changes from the queue, stuffing them into one of three lists,
      * keep doing it while the changes are of the same kind, then send them off.
@@ -282,7 +282,7 @@ caja_file_changes_consume_changes (gboolean consume_all)
      */
     for (chunk_count = 0; ; chunk_count++)
     {
-        change = caja_file_changes_queue_get_change (queue);
+        change = baul_file_changes_queue_get_change (queue);
 
         /* figure out if we need to flush the pending changes that we collected sofar */
 
@@ -329,35 +329,35 @@ caja_file_changes_consume_changes (gboolean consume_all)
             if (deletions != NULL)
             {
                 deletions = g_list_reverse (deletions);
-                caja_directory_notify_files_removed (deletions);
+                baul_directory_notify_files_removed (deletions);
     		g_list_free_full (deletions, g_object_unref);
                 deletions = NULL;
             }
             if (moves != NULL)
             {
                 moves = g_list_reverse (moves);
-                caja_directory_notify_files_moved (moves);
+                baul_directory_notify_files_moved (moves);
                 pairs_list_free (moves);
                 moves = NULL;
             }
             if (additions != NULL)
             {
                 additions = g_list_reverse (additions);
-                caja_directory_notify_files_added (additions);
+                baul_directory_notify_files_added (additions);
     		g_list_free_full (additions, g_object_unref);
                 additions = NULL;
             }
             if (changes != NULL)
             {
                 changes = g_list_reverse (changes);
-                caja_directory_notify_files_changed (changes);
+                baul_directory_notify_files_changed (changes);
     		g_list_free_full (changes, g_object_unref);
                 changes = NULL;
             }
             if (position_set_requests != NULL)
             {
                 position_set_requests = g_list_reverse (position_set_requests);
-                caja_directory_schedule_position_set (position_set_requests);
+                baul_directory_schedule_position_set (position_set_requests);
                 position_set_list_free (position_set_requests);
                 position_set_requests = NULL;
             }

@@ -1,5 +1,5 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
-/* caja-pathbar.c
+/* baul-pathbar.c
  * Copyright (C) 2004  Red Hat, Inc.,  Jonathan Blandford <jrb@gnome.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -25,15 +25,15 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
-#include <libcaja-private/caja-file.h>
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-icon-names.h>
-#include <libcaja-private/caja-trash-monitor.h>
-#include <libcaja-private/caja-dnd.h>
-#include <libcaja-private/caja-icon-dnd.h>
+#include <libbaul-private/baul-file.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-icon-names.h>
+#include <libbaul-private/baul-trash-monitor.h>
+#include <libbaul-private/baul-dnd.h>
+#include <libbaul-private/baul-icon-dnd.h>
 
-#include "caja-pathbar.h"
+#include "baul-pathbar.h"
 
 enum
 {
@@ -90,55 +90,55 @@ struct _ButtonData
 };
 
 G_DEFINE_TYPE (CajaPathBar,
-               caja_path_bar,
+               baul_path_bar,
                GTK_TYPE_CONTAINER);
 
-static void     caja_path_bar_finalize                 (GObject         *object);
-static void     caja_path_bar_dispose                  (GObject         *object);
+static void     baul_path_bar_finalize                 (GObject         *object);
+static void     baul_path_bar_dispose                  (GObject         *object);
 
-static void     caja_path_bar_get_preferred_width      (GtkWidget        *widget,
+static void     baul_path_bar_get_preferred_width      (GtkWidget        *widget,
         						gint             *minimum,
         						gint             *natural);
-static void     caja_path_bar_get_preferred_height     (GtkWidget        *widget,
+static void     baul_path_bar_get_preferred_height     (GtkWidget        *widget,
         						gint             *minimum,
         						gint             *natural);
 
-static void     caja_path_bar_unmap                    (GtkWidget       *widget);
-static void     caja_path_bar_size_allocate            (GtkWidget       *widget,
+static void     baul_path_bar_unmap                    (GtkWidget       *widget);
+static void     baul_path_bar_size_allocate            (GtkWidget       *widget,
         GtkAllocation   *allocation);
-static void     caja_path_bar_add                      (GtkContainer    *container,
+static void     baul_path_bar_add                      (GtkContainer    *container,
         GtkWidget       *widget);
-static void     caja_path_bar_remove                   (GtkContainer    *container,
+static void     baul_path_bar_remove                   (GtkContainer    *container,
         GtkWidget       *widget);
-static void     caja_path_bar_forall                   (GtkContainer    *container,
+static void     baul_path_bar_forall                   (GtkContainer    *container,
         gboolean         include_internals,
         GtkCallback      callback,
         gpointer         callback_data);
-static void     caja_path_bar_scroll_up                (CajaPathBar *path_bar);
-static void     caja_path_bar_scroll_down              (CajaPathBar *path_bar);
-static gboolean caja_path_bar_scroll                   (GtkWidget       *path_bar,
+static void     baul_path_bar_scroll_up                (CajaPathBar *path_bar);
+static void     baul_path_bar_scroll_down              (CajaPathBar *path_bar);
+static gboolean baul_path_bar_scroll                   (GtkWidget       *path_bar,
         GdkEventScroll  *scroll);
-static void     caja_path_bar_stop_scrolling           (CajaPathBar *path_bar);
-static gboolean caja_path_bar_slider_button_press      (GtkWidget       *widget,
+static void     baul_path_bar_stop_scrolling           (CajaPathBar *path_bar);
+static gboolean baul_path_bar_slider_button_press      (GtkWidget       *widget,
         GdkEventButton  *event,
         CajaPathBar *path_bar);
-static gboolean caja_path_bar_slider_button_release    (GtkWidget       *widget,
+static gboolean baul_path_bar_slider_button_release    (GtkWidget       *widget,
         GdkEventButton  *event,
         CajaPathBar *path_bar);
-static void     caja_path_bar_grab_notify              (GtkWidget       *widget,
+static void     baul_path_bar_grab_notify              (GtkWidget       *widget,
         gboolean         was_grabbed);
-static void     caja_path_bar_state_changed            (GtkWidget       *widget,
+static void     baul_path_bar_state_changed            (GtkWidget       *widget,
         GtkStateType     previous_state);
 
-static void     caja_path_bar_style_updated            (GtkWidget       *widget);
+static void     baul_path_bar_style_updated            (GtkWidget       *widget);
 
-static void     caja_path_bar_screen_changed           (GtkWidget       *widget,
+static void     baul_path_bar_screen_changed           (GtkWidget       *widget,
         GdkScreen       *previous_screen);
-static void     caja_path_bar_check_icon_theme         (CajaPathBar *path_bar);
-static void     caja_path_bar_update_button_appearance (ButtonData      *button_data);
-static void     caja_path_bar_update_button_state      (ButtonData      *button_data,
+static void     baul_path_bar_check_icon_theme         (CajaPathBar *path_bar);
+static void     baul_path_bar_update_button_appearance (ButtonData      *button_data);
+static void     baul_path_bar_update_button_state      (ButtonData      *button_data,
         gboolean         current_dir);
-static gboolean caja_path_bar_update_path              (CajaPathBar *path_bar,
+static gboolean baul_path_bar_update_path              (CajaPathBar *path_bar,
         GFile           *file_path,
         gboolean         emit_signal);
 
@@ -173,7 +173,7 @@ update_button_types (CajaPathBar *path_bar)
         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button_data->button)))
         {
             /*Increase the reference count on path so it does not get cleared
-             *by caja_path_bar_clear_buttons during caja_path_bar_update_path
+             *by baul_path_bar_clear_buttons during baul_path_bar_update_path
              */
             path = g_object_ref (button_data->path);
             break;
@@ -181,7 +181,7 @@ update_button_types (CajaPathBar *path_bar)
     }
     if (path != NULL)
     {
-        caja_path_bar_update_path (path_bar, path, TRUE);
+        baul_path_bar_update_path (path_bar, path, TRUE);
         g_object_unref (path);
     }
 }
@@ -196,7 +196,7 @@ desktop_location_changed_callback (gpointer user_data)
 
     g_object_unref (path_bar->desktop_path);
     g_object_unref (path_bar->home_path);
-    path_bar->desktop_path = caja_get_desktop_location ();
+    path_bar->desktop_path = baul_get_desktop_location ();
     path_bar->home_path = g_file_new_for_path (g_get_home_dir ());
     desktop_is_home = g_file_equal (path_bar->home_path, path_bar->desktop_path);
 
@@ -224,9 +224,9 @@ trash_state_changed_cb (CajaTrashMonitor *monitor,
             CajaIconInfo *icon_info;
             cairo_surface_t *surface;
 
-            icon = caja_trash_monitor_get_icon ();
-            icon_info = caja_icon_info_lookup (icon, CAJA_PATH_BAR_ICON_SIZE, scale);
-            surface = caja_icon_info_get_surface_at_size (icon_info, CAJA_PATH_BAR_ICON_SIZE);
+            icon = baul_trash_monitor_get_icon ();
+            icon_info = baul_icon_info_lookup (icon, CAJA_PATH_BAR_ICON_SIZE, scale);
+            surface = baul_icon_info_get_surface_at_size (icon_info, CAJA_PATH_BAR_ICON_SIZE);
             gtk_image_set_from_surface (GTK_IMAGE (button_data->image), surface);
         }
     }
@@ -246,11 +246,11 @@ slider_timeout (gpointer user_data)
     {
         if (path_bar->drag_slider_timeout_for_up_button)
         {
-            caja_path_bar_scroll_up (path_bar);
+            baul_path_bar_scroll_up (path_bar);
         }
         else
         {
-            caja_path_bar_scroll_down (path_bar);
+            baul_path_bar_scroll_down (path_bar);
         }
     }
 
@@ -258,7 +258,7 @@ slider_timeout (gpointer user_data)
 }
 
 static void
-caja_path_bar_slider_drag_motion (GtkWidget      *widget,
+baul_path_bar_slider_drag_motion (GtkWidget      *widget,
                                   GdkDragContext *context,
                                   int             x,
                                   int             y,
@@ -288,7 +288,7 @@ caja_path_bar_slider_drag_motion (GtkWidget      *widget,
 }
 
 static void
-caja_path_bar_slider_drag_leave (GtkWidget      *widget,
+baul_path_bar_slider_drag_leave (GtkWidget      *widget,
                                  GdkDragContext *context,
                                  unsigned int    time,
                                  gpointer        user_data)
@@ -305,13 +305,13 @@ caja_path_bar_slider_drag_leave (GtkWidget      *widget,
 }
 
 static void
-caja_path_bar_init (CajaPathBar *path_bar)
+baul_path_bar_init (CajaPathBar *path_bar)
 {
     char *p;
     GtkStyleContext *context;
 
     context = gtk_widget_get_style_context (GTK_WIDGET (path_bar));
-    gtk_style_context_add_class (context, "caja-pathbar");
+    gtk_style_context_add_class (context, "baul-pathbar");
 
     gtk_widget_set_has_window (GTK_WIDGET (path_bar), FALSE);
     gtk_widget_set_redraw_on_allocate (GTK_WIDGET (path_bar), FALSE);
@@ -326,7 +326,7 @@ caja_path_bar_init (CajaPathBar *path_bar)
 
     path_bar->icon_size = CAJA_PATH_BAR_ICON_SIZE;
 
-    p = caja_get_desktop_directory ();
+    p = baul_get_desktop_directory ();
     path_bar->desktop_path = g_file_new_for_path (p);
     g_free (p);
     path_bar->home_path = g_file_new_for_path (g_get_home_dir ());
@@ -336,28 +336,28 @@ caja_path_bar_init (CajaPathBar *path_bar)
 
     desktop_is_home = g_file_equal (path_bar->home_path, path_bar->desktop_path);
 
-    g_signal_connect_swapped (caja_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+    g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
                               G_CALLBACK(desktop_location_changed_callback),
                               path_bar);
 
-    g_signal_connect_swapped (path_bar->up_slider_button, "clicked", G_CALLBACK (caja_path_bar_scroll_up), path_bar);
-    g_signal_connect_swapped (path_bar->down_slider_button, "clicked", G_CALLBACK (caja_path_bar_scroll_down), path_bar);
+    g_signal_connect_swapped (path_bar->up_slider_button, "clicked", G_CALLBACK (baul_path_bar_scroll_up), path_bar);
+    g_signal_connect_swapped (path_bar->down_slider_button, "clicked", G_CALLBACK (baul_path_bar_scroll_down), path_bar);
 
-    g_signal_connect (path_bar->up_slider_button, "button_press_event", G_CALLBACK (caja_path_bar_slider_button_press), path_bar);
-    g_signal_connect (path_bar->up_slider_button, "button_release_event", G_CALLBACK (caja_path_bar_slider_button_release), path_bar);
-    g_signal_connect (path_bar->down_slider_button, "button_press_event", G_CALLBACK (caja_path_bar_slider_button_press), path_bar);
-    g_signal_connect (path_bar->down_slider_button, "button_release_event", G_CALLBACK (caja_path_bar_slider_button_release), path_bar);
+    g_signal_connect (path_bar->up_slider_button, "button_press_event", G_CALLBACK (baul_path_bar_slider_button_press), path_bar);
+    g_signal_connect (path_bar->up_slider_button, "button_release_event", G_CALLBACK (baul_path_bar_slider_button_release), path_bar);
+    g_signal_connect (path_bar->down_slider_button, "button_press_event", G_CALLBACK (baul_path_bar_slider_button_press), path_bar);
+    g_signal_connect (path_bar->down_slider_button, "button_release_event", G_CALLBACK (baul_path_bar_slider_button_release), path_bar);
 
     gtk_drag_dest_set (GTK_WIDGET (path_bar->up_slider_button),
                        0, NULL, 0, 0);
     gtk_drag_dest_set_track_motion (GTK_WIDGET (path_bar->up_slider_button), TRUE);
     g_signal_connect (path_bar->up_slider_button,
                       "drag-motion",
-                      G_CALLBACK (caja_path_bar_slider_drag_motion),
+                      G_CALLBACK (baul_path_bar_slider_drag_motion),
                       path_bar);
     g_signal_connect (path_bar->up_slider_button,
                       "drag-leave",
-                      G_CALLBACK (caja_path_bar_slider_drag_leave),
+                      G_CALLBACK (baul_path_bar_slider_drag_leave),
                       path_bar);
 
     gtk_drag_dest_set (GTK_WIDGET (path_bar->down_slider_button),
@@ -365,21 +365,21 @@ caja_path_bar_init (CajaPathBar *path_bar)
     gtk_drag_dest_set_track_motion (GTK_WIDGET (path_bar->up_slider_button), TRUE);
     g_signal_connect (path_bar->down_slider_button,
                       "drag-motion",
-                      G_CALLBACK (caja_path_bar_slider_drag_motion),
+                      G_CALLBACK (baul_path_bar_slider_drag_motion),
                       path_bar);
     g_signal_connect (path_bar->down_slider_button,
                       "drag-leave",
-                      G_CALLBACK (caja_path_bar_slider_drag_leave),
+                      G_CALLBACK (baul_path_bar_slider_drag_leave),
                       path_bar);
 
-    g_signal_connect (caja_trash_monitor_get (),
+    g_signal_connect (baul_trash_monitor_get (),
                       "trash_state_changed",
                       G_CALLBACK (trash_state_changed_cb),
                       path_bar);
 }
 
 static void
-caja_path_bar_class_init (CajaPathBarClass *path_bar_class)
+baul_path_bar_class_init (CajaPathBarClass *path_bar_class)
 {
     GObjectClass *gobject_class;
     GtkWidgetClass *widget_class;
@@ -389,24 +389,24 @@ caja_path_bar_class_init (CajaPathBarClass *path_bar_class)
     widget_class = (GtkWidgetClass *) path_bar_class;
     container_class = (GtkContainerClass *) path_bar_class;
 
-    gobject_class->finalize = caja_path_bar_finalize;
-    gobject_class->dispose = caja_path_bar_dispose;
+    gobject_class->finalize = baul_path_bar_finalize;
+    gobject_class->dispose = baul_path_bar_dispose;
 
-    widget_class->get_preferred_height = caja_path_bar_get_preferred_height;
-    widget_class->get_preferred_width = caja_path_bar_get_preferred_width;
+    widget_class->get_preferred_height = baul_path_bar_get_preferred_height;
+    widget_class->get_preferred_width = baul_path_bar_get_preferred_width;
 
-    widget_class->unmap = caja_path_bar_unmap;
-    widget_class->size_allocate = caja_path_bar_size_allocate;
-    widget_class->style_updated = caja_path_bar_style_updated;
+    widget_class->unmap = baul_path_bar_unmap;
+    widget_class->size_allocate = baul_path_bar_size_allocate;
+    widget_class->style_updated = baul_path_bar_style_updated;
 
-    widget_class->screen_changed = caja_path_bar_screen_changed;
-    widget_class->grab_notify = caja_path_bar_grab_notify;
-    widget_class->state_changed = caja_path_bar_state_changed;
-    widget_class->scroll_event = caja_path_bar_scroll;
+    widget_class->screen_changed = baul_path_bar_screen_changed;
+    widget_class->grab_notify = baul_path_bar_grab_notify;
+    widget_class->state_changed = baul_path_bar_state_changed;
+    widget_class->scroll_event = baul_path_bar_scroll;
 
-    container_class->add = caja_path_bar_add;
-    container_class->forall = caja_path_bar_forall;
-    container_class->remove = caja_path_bar_remove;
+    container_class->add = baul_path_bar_add;
+    container_class->forall = baul_path_bar_forall;
+    container_class->remove = baul_path_bar_remove;
 
     path_bar_signals [PATH_CLICKED] =
         g_signal_new ("path-clicked",
@@ -433,13 +433,13 @@ caja_path_bar_class_init (CajaPathBarClass *path_bar_class)
 
 
 static void
-caja_path_bar_finalize (GObject *object)
+baul_path_bar_finalize (GObject *object)
 {
     CajaPathBar *path_bar;
 
     path_bar = CAJA_PATH_BAR (object);
 
-    caja_path_bar_stop_scrolling (path_bar);
+    baul_path_bar_stop_scrolling (path_bar);
 
     if (path_bar->drag_slider_timeout != 0)
     {
@@ -464,13 +464,13 @@ caja_path_bar_finalize (GObject *object)
         path_bar->desktop_path = NULL;
     }
 
-    g_signal_handlers_disconnect_by_func (caja_trash_monitor_get (),
+    g_signal_handlers_disconnect_by_func (baul_trash_monitor_get (),
                                           trash_state_changed_cb, path_bar);
-    g_signal_handlers_disconnect_by_func (caja_preferences,
+    g_signal_handlers_disconnect_by_func (baul_preferences,
                                           desktop_location_changed_callback,
                                           path_bar);
 
-    G_OBJECT_CLASS (caja_path_bar_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_path_bar_parent_class)->finalize (object);
 }
 
 /* Removes the settings signal handler.  It's safe to call multiple times */
@@ -490,11 +490,11 @@ remove_settings_signal (CajaPathBar *path_bar,
 }
 
 static void
-caja_path_bar_dispose (GObject *object)
+baul_path_bar_dispose (GObject *object)
 {
     remove_settings_signal (CAJA_PATH_BAR (object), gtk_widget_get_screen (GTK_WIDGET (object)));
 
-    G_OBJECT_CLASS (caja_path_bar_parent_class)->dispose (object);
+    G_OBJECT_CLASS (baul_path_bar_parent_class)->dispose (object);
 }
 
 /* Size requisition:
@@ -504,7 +504,7 @@ caja_path_bar_dispose (GObject *object)
  */
 
 static void
-caja_path_bar_get_preferred_width (GtkWidget *widget,
+baul_path_bar_get_preferred_width (GtkWidget *widget,
     			       gint      *minimum,
     			       gint      *natural)
 {
@@ -558,7 +558,7 @@ caja_path_bar_get_preferred_width (GtkWidget *widget,
 }
 
 static void
-caja_path_bar_get_preferred_height (GtkWidget *widget,
+baul_path_bar_get_preferred_height (GtkWidget *widget,
     				gint      *minimum,
     				gint      *natural)
 {
@@ -581,7 +581,7 @@ caja_path_bar_get_preferred_height (GtkWidget *widget,
 }
 
 static void
-caja_path_bar_update_slider_buttons (CajaPathBar *path_bar)
+baul_path_bar_update_slider_buttons (CajaPathBar *path_bar)
 {
     if (path_bar->button_list)
     {
@@ -610,16 +610,16 @@ caja_path_bar_update_slider_buttons (CajaPathBar *path_bar)
 }
 
 static void
-caja_path_bar_unmap (GtkWidget *widget)
+baul_path_bar_unmap (GtkWidget *widget)
 {
-    caja_path_bar_stop_scrolling (CAJA_PATH_BAR (widget));
+    baul_path_bar_stop_scrolling (CAJA_PATH_BAR (widget));
 
-    GTK_WIDGET_CLASS (caja_path_bar_parent_class)->unmap (widget);
+    GTK_WIDGET_CLASS (baul_path_bar_parent_class)->unmap (widget);
 }
 
 /* This is a tad complicated */
 static void
-caja_path_bar_size_allocate (GtkWidget     *widget,
+baul_path_bar_size_allocate (GtkWidget     *widget,
                              GtkAllocation *allocation)
 {
     GtkWidget *child;
@@ -868,7 +868,7 @@ caja_path_bar_size_allocate (GtkWidget     *widget,
 
         gtk_widget_set_child_visible (path_bar->down_slider_button, TRUE);
         gtk_widget_show_all (path_bar->down_slider_button);
-        caja_path_bar_update_slider_buttons (path_bar);
+        baul_path_bar_update_slider_buttons (path_bar);
     }
     else
     {
@@ -877,34 +877,34 @@ caja_path_bar_size_allocate (GtkWidget     *widget,
 }
 
 static void
-caja_path_bar_style_updated (GtkWidget *widget)
+baul_path_bar_style_updated (GtkWidget *widget)
 {
-    if (GTK_WIDGET_CLASS (caja_path_bar_parent_class)->style_updated)
+    if (GTK_WIDGET_CLASS (baul_path_bar_parent_class)->style_updated)
     {
-        GTK_WIDGET_CLASS (caja_path_bar_parent_class)->style_updated (widget);
+        GTK_WIDGET_CLASS (baul_path_bar_parent_class)->style_updated (widget);
     }
 
-    caja_path_bar_check_icon_theme (CAJA_PATH_BAR (widget));
+    baul_path_bar_check_icon_theme (CAJA_PATH_BAR (widget));
 }
 
 static void
-caja_path_bar_screen_changed (GtkWidget *widget,
+baul_path_bar_screen_changed (GtkWidget *widget,
                               GdkScreen *previous_screen)
 {
-    if (GTK_WIDGET_CLASS (caja_path_bar_parent_class)->screen_changed)
+    if (GTK_WIDGET_CLASS (baul_path_bar_parent_class)->screen_changed)
     {
-        GTK_WIDGET_CLASS (caja_path_bar_parent_class)->screen_changed (widget, previous_screen);
+        GTK_WIDGET_CLASS (baul_path_bar_parent_class)->screen_changed (widget, previous_screen);
     }
     /* We might nave a new settings, so we remove the old one */
     if (previous_screen)
     {
         remove_settings_signal (CAJA_PATH_BAR (widget), previous_screen);
     }
-    caja_path_bar_check_icon_theme (CAJA_PATH_BAR (widget));
+    baul_path_bar_check_icon_theme (CAJA_PATH_BAR (widget));
 }
 
 static gboolean
-caja_path_bar_scroll (GtkWidget      *widget,
+baul_path_bar_scroll (GtkWidget      *widget,
                       GdkEventScroll *event)
 {
     CajaPathBar *path_bar;
@@ -915,12 +915,12 @@ caja_path_bar_scroll (GtkWidget      *widget,
     {
     case GDK_SCROLL_RIGHT:
     case GDK_SCROLL_DOWN:
-        caja_path_bar_scroll_down (path_bar);
+        baul_path_bar_scroll_down (path_bar);
         return TRUE;
 
     case GDK_SCROLL_LEFT:
     case GDK_SCROLL_UP:
-        caja_path_bar_scroll_up (path_bar);
+        baul_path_bar_scroll_up (path_bar);
         return TRUE;
 
     case GDK_SCROLL_SMOOTH:
@@ -932,14 +932,14 @@ caja_path_bar_scroll (GtkWidget      *widget,
 
 
 static void
-caja_path_bar_add (GtkContainer *container,
+baul_path_bar_add (GtkContainer *container,
                    GtkWidget    *widget)
 {
     gtk_widget_set_parent (widget, GTK_WIDGET (container));
 }
 
 static void
-caja_path_bar_remove_1 (GtkContainer *container,
+baul_path_bar_remove_1 (GtkContainer *container,
                         GtkWidget    *widget)
 {
     gboolean was_visible = gtk_widget_get_visible (widget);
@@ -951,7 +951,7 @@ caja_path_bar_remove_1 (GtkContainer *container,
 }
 
 static void
-caja_path_bar_remove (GtkContainer *container,
+baul_path_bar_remove (GtkContainer *container,
                       GtkWidget    *widget)
 {
     CajaPathBar *path_bar;
@@ -961,14 +961,14 @@ caja_path_bar_remove (GtkContainer *container,
 
     if (widget == path_bar->up_slider_button)
     {
-        caja_path_bar_remove_1 (container, widget);
+        baul_path_bar_remove_1 (container, widget);
         path_bar->up_slider_button = NULL;
         return;
     }
 
     if (widget == path_bar->down_slider_button)
     {
-        caja_path_bar_remove_1 (container, widget);
+        baul_path_bar_remove_1 (container, widget);
         path_bar->down_slider_button = NULL;
         return;
     }
@@ -978,7 +978,7 @@ caja_path_bar_remove (GtkContainer *container,
     {
         if (widget == BUTTON_DATA (children->data)->button)
         {
-            caja_path_bar_remove_1 (container, widget);
+            baul_path_bar_remove_1 (container, widget);
             path_bar->button_list = g_list_remove_link (path_bar->button_list, children);
             g_list_free_1 (children);
             return;
@@ -988,7 +988,7 @@ caja_path_bar_remove (GtkContainer *container,
 }
 
 static void
-caja_path_bar_forall (GtkContainer *container,
+baul_path_bar_forall (GtkContainer *container,
                       gboolean      include_internals,
                       GtkCallback   callback,
                       gpointer      callback_data)
@@ -1020,7 +1020,7 @@ caja_path_bar_forall (GtkContainer *container,
 }
 
 static void
-caja_path_bar_scroll_down (CajaPathBar *path_bar)
+baul_path_bar_scroll_down (CajaPathBar *path_bar)
 {
     GList *list;
     GList *down_button;
@@ -1098,7 +1098,7 @@ caja_path_bar_scroll_down (CajaPathBar *path_bar)
 }
 
 static void
-caja_path_bar_scroll_up (CajaPathBar *path_bar)
+baul_path_bar_scroll_up (CajaPathBar *path_bar)
 {
     GList *list;
 
@@ -1125,7 +1125,7 @@ caja_path_bar_scroll_up (CajaPathBar *path_bar)
 }
 
 static gboolean
-caja_path_bar_scroll_timeout (CajaPathBar *path_bar)
+baul_path_bar_scroll_timeout (CajaPathBar *path_bar)
 {
     gboolean retval = FALSE;
 
@@ -1133,13 +1133,13 @@ caja_path_bar_scroll_timeout (CajaPathBar *path_bar)
     {
         if (gtk_widget_has_focus (path_bar->up_slider_button))
         {
-            caja_path_bar_scroll_up (path_bar);
+            baul_path_bar_scroll_up (path_bar);
         }
         else
         {
             if (gtk_widget_has_focus (path_bar->down_slider_button))
             {
-                caja_path_bar_scroll_down (path_bar);
+                baul_path_bar_scroll_down (path_bar);
             }
         }
         if (path_bar->need_timer)
@@ -1147,7 +1147,7 @@ caja_path_bar_scroll_timeout (CajaPathBar *path_bar)
             path_bar->need_timer = FALSE;
 
             path_bar->timer = g_timeout_add (SCROLL_TIMEOUT,
-                                             (GSourceFunc)caja_path_bar_scroll_timeout,
+                                             (GSourceFunc)baul_path_bar_scroll_timeout,
                                              path_bar);
 
         }
@@ -1161,7 +1161,7 @@ caja_path_bar_scroll_timeout (CajaPathBar *path_bar)
 }
 
 static void
-caja_path_bar_stop_scrolling (CajaPathBar *path_bar)
+baul_path_bar_stop_scrolling (CajaPathBar *path_bar)
 {
     if (path_bar->timer)
     {
@@ -1172,7 +1172,7 @@ caja_path_bar_stop_scrolling (CajaPathBar *path_bar)
 }
 
 static gboolean
-caja_path_bar_slider_button_press (GtkWidget       *widget,
+baul_path_bar_slider_button_press (GtkWidget       *widget,
                                    GdkEventButton  *event,
                                    CajaPathBar *path_bar)
 {
@@ -1190,13 +1190,13 @@ caja_path_bar_slider_button_press (GtkWidget       *widget,
 
     if (widget == path_bar->up_slider_button)
     {
-        caja_path_bar_scroll_up (path_bar);
+        baul_path_bar_scroll_up (path_bar);
     }
     else
     {
         if (widget == path_bar->down_slider_button)
         {
-            caja_path_bar_scroll_down (path_bar);
+            baul_path_bar_scroll_down (path_bar);
         }
     }
 
@@ -1204,7 +1204,7 @@ caja_path_bar_slider_button_press (GtkWidget       *widget,
     {
         path_bar->need_timer = TRUE;
         path_bar->timer = g_timeout_add (INITIAL_SCROLL_TIMEOUT,
-                                         (GSourceFunc)caja_path_bar_scroll_timeout,
+                                         (GSourceFunc)baul_path_bar_scroll_timeout,
                                          path_bar);
     }
 
@@ -1212,7 +1212,7 @@ caja_path_bar_slider_button_press (GtkWidget       *widget,
 }
 
 static gboolean
-caja_path_bar_slider_button_release (GtkWidget      *widget,
+baul_path_bar_slider_button_release (GtkWidget      *widget,
                                      GdkEventButton *event,
                                      CajaPathBar     *path_bar)
 {
@@ -1222,28 +1222,28 @@ caja_path_bar_slider_button_release (GtkWidget      *widget,
     }
 
     path_bar->ignore_click = TRUE;
-    caja_path_bar_stop_scrolling (path_bar);
+    baul_path_bar_stop_scrolling (path_bar);
 
     return FALSE;
 }
 
 static void
-caja_path_bar_grab_notify (GtkWidget *widget,
+baul_path_bar_grab_notify (GtkWidget *widget,
                            gboolean   was_grabbed)
 {
     if (!was_grabbed)
     {
-        caja_path_bar_stop_scrolling (CAJA_PATH_BAR (widget));
+        baul_path_bar_stop_scrolling (CAJA_PATH_BAR (widget));
     }
 }
 
 static void
-caja_path_bar_state_changed (GtkWidget    *widget,
+baul_path_bar_state_changed (GtkWidget    *widget,
                              GtkStateType  previous_state)
 {
     if (!gtk_widget_get_sensitive (widget))
     {
-        caja_path_bar_stop_scrolling (CAJA_PATH_BAR (widget));
+        baul_path_bar_stop_scrolling (CAJA_PATH_BAR (widget));
     }
 }
 
@@ -1262,7 +1262,7 @@ reload_icons (CajaPathBar *path_bar)
         button_data = BUTTON_DATA (list->data);
         if (button_data->type != NORMAL_BUTTON || button_data->is_base_dir)
         {
-            caja_path_bar_update_button_appearance (button_data);
+            baul_path_bar_update_button_appearance (button_data);
         }
 
     }
@@ -1292,7 +1292,7 @@ settings_notify_cb (GObject    *object,
 }
 
 static void
-caja_path_bar_check_icon_theme (CajaPathBar *path_bar)
+baul_path_bar_check_icon_theme (CajaPathBar *path_bar)
 {
     GtkSettings *settings;
 
@@ -1309,7 +1309,7 @@ caja_path_bar_check_icon_theme (CajaPathBar *path_bar)
 
 /* Public functions and their helpers */
 void
-caja_path_bar_clear_buttons (CajaPathBar *path_bar)
+baul_path_bar_clear_buttons (CajaPathBar *path_bar)
 {
     while (path_bar->button_list != NULL)
     {
@@ -1393,24 +1393,24 @@ get_type_icon_info (ButtonData *button_data)
     switch (button_data->type)
     {
     case ROOT_BUTTON:
-        return caja_icon_info_lookup_from_name (CAJA_ICON_FILESYSTEM,
+        return baul_icon_info_lookup_from_name (CAJA_ICON_FILESYSTEM,
                                                 CAJA_PATH_BAR_ICON_SIZE,
                                                 icon_scale);
 
     case HOME_BUTTON:
-        return caja_icon_info_lookup_from_name (CAJA_ICON_HOME,
+        return baul_icon_info_lookup_from_name (CAJA_ICON_HOME,
                                                 CAJA_PATH_BAR_ICON_SIZE,
                                                 icon_scale);
 
     case DESKTOP_BUTTON:
-        return caja_icon_info_lookup_from_name (CAJA_ICON_DESKTOP,
+        return baul_icon_info_lookup_from_name (CAJA_ICON_DESKTOP,
                                                 CAJA_PATH_BAR_ICON_SIZE,
                                                 icon_scale);
 
     case NORMAL_BUTTON:
         if (button_data->is_base_dir)
         {
-            return caja_file_get_icon (button_data->file,
+            return baul_file_get_icon (button_data->file,
                                        CAJA_PATH_BAR_ICON_SIZE, icon_scale,
                                        CAJA_FILE_ICON_FLAGS_NONE);
         }
@@ -1435,8 +1435,8 @@ button_data_free (ButtonData *button_data)
     {
         g_signal_handler_disconnect (button_data->file,
                                      button_data->file_changed_signal_id);
-        caja_file_monitor_remove (button_data->file, button_data);
-        caja_file_unref (button_data->file);
+        baul_file_monitor_remove (button_data->file, button_data);
+        baul_file_unref (button_data->file);
     }
 
     g_object_unref (button_data->drag_info.target_location);
@@ -1491,7 +1491,7 @@ set_label_padding_size (ButtonData *button_data)
 }
 
 static void
-caja_path_bar_update_button_appearance (ButtonData *button_data)
+baul_path_bar_update_button_appearance (ButtonData *button_data)
 {
     const gchar *dir_name = get_dir_name (button_data);
 
@@ -1532,7 +1532,7 @@ caja_path_bar_update_button_appearance (ButtonData *button_data)
 
             if (icon_info != NULL)
             {
-                surface = caja_icon_info_get_surface_at_size (icon_info, CAJA_PATH_BAR_ICON_SIZE);
+                surface = baul_icon_info_get_surface_at_size (icon_info, CAJA_PATH_BAR_ICON_SIZE);
                 g_object_unref (icon_info);
             }
 
@@ -1556,7 +1556,7 @@ caja_path_bar_update_button_appearance (ButtonData *button_data)
 }
 
 static void
-caja_path_bar_update_button_state (ButtonData *button_data,
+baul_path_bar_update_button_state (ButtonData *button_data,
                                    gboolean    current_dir)
 {
     if (button_data->label != NULL)
@@ -1564,7 +1564,7 @@ caja_path_bar_update_button_state (ButtonData *button_data,
         g_object_set (button_data->label, "use-markup", current_dir, NULL);
     }
 
-    caja_path_bar_update_button_appearance (button_data);
+    baul_path_bar_update_button_appearance (button_data);
 
     if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button_data->button)) != current_dir)
     {
@@ -1617,9 +1617,9 @@ setup_file_path_mounted_mount (GFile *location, ButtonData *button_data)
                 {
                     icon = g_themed_icon_new (CAJA_ICON_FOLDER);
                 }
-                info = caja_icon_info_lookup (icon, CAJA_PATH_BAR_ICON_SIZE, scale);
+                info = baul_icon_info_lookup (icon, CAJA_PATH_BAR_ICON_SIZE, scale);
                 g_object_unref (icon);
-                button_data->custom_icon = caja_icon_info_get_surface_at_size (info, CAJA_PATH_BAR_ICON_SIZE);
+                button_data->custom_icon = baul_icon_info_get_surface_at_size (info, CAJA_PATH_BAR_ICON_SIZE);
                 g_object_unref (info);
                 button_data->dir_name = g_mount_get_name (mount);
                 button_data->type = MOUNT_BUTTON;
@@ -1641,9 +1641,9 @@ setup_file_path_mounted_mount (GFile *location, ButtonData *button_data)
                 {
                     icon = g_themed_icon_new (CAJA_ICON_FOLDER);
                 }
-                info = caja_icon_info_lookup (icon, CAJA_PATH_BAR_ICON_SIZE, scale);
+                info = baul_icon_info_lookup (icon, CAJA_PATH_BAR_ICON_SIZE, scale);
                 g_object_unref (icon);
-                button_data->custom_icon = caja_icon_info_get_surface_at_size (info, CAJA_PATH_BAR_ICON_SIZE);
+                button_data->custom_icon = baul_icon_info_get_surface_at_size (info, CAJA_PATH_BAR_ICON_SIZE);
                 g_object_unref (info);
                 button_data->type = DEFAULT_LOCATION_BUTTON;
                 button_data->fake_root = TRUE;
@@ -1776,7 +1776,7 @@ button_data_file_changed (CajaFile *file,
 
     current_button_data = path_bar->current_button_data;
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     if (!g_file_equal (button_data->path, location))
     {
         GFile *parent, *button_parent;
@@ -1821,24 +1821,24 @@ button_data_file_changed (CajaFile *file,
                 /* moved current path, or file outside current path hierarchy.
                  * Update path bar to new locations.
                  */
-                current_location = caja_file_get_location (current_button_data->file);
+                current_location = baul_file_get_location (current_button_data->file);
             }
 
-            caja_path_bar_update_path (path_bar, location, FALSE);
-            caja_path_bar_set_path (path_bar, current_location);
+            baul_path_bar_update_path (path_bar, location, FALSE);
+            baul_path_bar_set_path (path_bar, current_location);
             g_object_unref (location);
             g_object_unref (current_location);
             return;
         }
     }
-    else if (caja_file_is_gone (file))
+    else if (baul_file_is_gone (file))
     {
         gint idx, position;
 
         /* if the current or a parent location are gone, don't do anything, as the view
          * will get the event too and call us back.
          */
-        current_location = caja_file_get_location (current_button_data->file);
+        current_location = baul_file_get_location (current_button_data->file);
 
         if (g_file_has_prefix (location, current_location))
         {
@@ -1867,7 +1867,7 @@ button_data_file_changed (CajaFile *file,
     {
         char *display_name;
 
-        display_name = caja_file_get_display_name (file);
+        display_name = baul_file_get_display_name (file);
         if (g_strcmp0 (display_name, button_data->dir_name) != 0)
         {
             g_free (button_data->dir_name);
@@ -1876,7 +1876,7 @@ button_data_file_changed (CajaFile *file,
 
         g_free (display_name);
     }
-    caja_path_bar_update_button_appearance (button_data);
+    baul_path_bar_update_button_appearance (button_data);
 }
 
 static ButtonData *
@@ -1890,7 +1890,7 @@ make_directory_button (CajaPathBar  *path_bar,
     GtkWidget *child;
     ButtonData *button_data;
 
-    path = caja_file_get_location (file);
+    path = baul_file_get_location (file);
 
     child = NULL;
 
@@ -1942,12 +1942,12 @@ make_directory_button (CajaPathBar  *path_bar,
     }
     if (button_data->dir_name == NULL)
     {
-        button_data->dir_name = caja_file_get_display_name (file);
+        button_data->dir_name = baul_file_get_display_name (file);
     }
     if (button_data->file == NULL)
     {
-        button_data->file = caja_file_ref (file);
-        caja_file_monitor_add (button_data->file, button_data,
+        button_data->file = baul_file_ref (file);
+        baul_file_monitor_add (button_data->file, button_data,
                                CAJA_FILE_ATTRIBUTES_FOR_ICON);
         button_data->file_changed_signal_id =
             g_signal_connect (button_data->file, "changed",
@@ -1960,7 +1960,7 @@ make_directory_button (CajaPathBar  *path_bar,
     gtk_container_add (GTK_CONTAINER (button_data->button), child);
     gtk_widget_show_all (button_data->button);
 
-    caja_path_bar_update_button_state (button_data, current_dir);
+    baul_path_bar_update_button_state (button_data, current_dir);
 
     g_signal_connect (button_data->button, "clicked", G_CALLBACK (button_clicked_cb), button_data);
     g_signal_connect (button_data->button, "button-press-event", G_CALLBACK (button_event_cb), button_data);
@@ -1970,7 +1970,7 @@ make_directory_button (CajaPathBar  *path_bar,
 
     setup_button_drag_source (button_data);
 
-    caja_drag_slot_proxy_init (button_data->button,
+    baul_drag_slot_proxy_init (button_data->button,
                                &(button_data->drag_info));
 
     g_object_unref (path);
@@ -1979,7 +1979,7 @@ make_directory_button (CajaPathBar  *path_bar,
 }
 
 static gboolean
-caja_path_bar_check_parent_path (CajaPathBar *path_bar,
+baul_path_bar_check_parent_path (CajaPathBar *path_bar,
                                  GFile *location,
                                  ButtonData **current_button_data)
 {
@@ -2039,7 +2039,7 @@ caja_path_bar_check_parent_path (CajaPathBar *path_bar,
         for (list = path_bar->button_list; list; list = list->next)
         {
 
-            caja_path_bar_update_button_state (BUTTON_DATA (list->data),
+            baul_path_bar_update_button_state (BUTTON_DATA (list->data),
                                                (list == current_path) ? TRUE : FALSE);
         }
 
@@ -2054,7 +2054,7 @@ caja_path_bar_check_parent_path (CajaPathBar *path_bar,
 }
 
 static gboolean
-caja_path_bar_update_path (CajaPathBar *path_bar,
+baul_path_bar_update_path (CajaPathBar *path_bar,
                            GFile *file_path,
                            gboolean emit_signal)
 {
@@ -2073,14 +2073,14 @@ caja_path_bar_update_path (CajaPathBar *path_bar,
     new_buttons = NULL;
     current_button_data = NULL;
 
-    file = caja_file_get (file_path);
+    file = baul_file_get (file_path);
 
     while (file != NULL)
     {
-        parent_file = caja_file_get_parent (file);
+        parent_file = baul_file_get_parent (file);
         last_directory = !parent_file;
         button_data = make_directory_button (path_bar, file, first_directory, last_directory, FALSE);
-        caja_file_unref (file);
+        baul_file_unref (file);
 
         if (first_directory)
         {
@@ -2099,7 +2099,7 @@ caja_path_bar_update_path (CajaPathBar *path_bar,
         first_directory = FALSE;
     }
 
-    caja_path_bar_clear_buttons (path_bar);
+    baul_path_bar_clear_buttons (path_bar);
     path_bar->button_list = g_list_reverse (new_buttons);
     path_bar->fake_root = fake_root;
 
@@ -2123,7 +2123,7 @@ caja_path_bar_update_path (CajaPathBar *path_bar,
 }
 
 gboolean
-caja_path_bar_set_path (CajaPathBar *path_bar, GFile *file_path)
+baul_path_bar_set_path (CajaPathBar *path_bar, GFile *file_path)
 {
     ButtonData *button_data;
 
@@ -2132,7 +2132,7 @@ caja_path_bar_set_path (CajaPathBar *path_bar, GFile *file_path)
 
     /* Check whether the new path is already present in the pathbar as buttons.
      * This could be a parent directory or a previous selected subdirectory. */
-    if (caja_path_bar_check_parent_path (path_bar, file_path, &button_data))
+    if (baul_path_bar_check_parent_path (path_bar, file_path, &button_data))
     {
         if (path_bar->current_path != NULL)
         {
@@ -2145,11 +2145,11 @@ caja_path_bar_set_path (CajaPathBar *path_bar, GFile *file_path)
         return TRUE;
     }
 
-    return caja_path_bar_update_path (path_bar, file_path, TRUE);
+    return baul_path_bar_update_path (path_bar, file_path, TRUE);
 }
 
 GFile *
-caja_path_bar_get_path_for_button (CajaPathBar *path_bar,
+baul_path_bar_get_path_for_button (CajaPathBar *path_bar,
                                    GtkWidget       *button)
 {
     GList *list;
@@ -2171,7 +2171,7 @@ caja_path_bar_get_path_for_button (CajaPathBar *path_bar,
 }
 
 GtkWidget *
-caja_path_bar_get_button_from_button_list_entry (gpointer entry)
+baul_path_bar_get_button_from_button_list_entry (gpointer entry)
 {
     return BUTTON_DATA(entry)->button;
 }

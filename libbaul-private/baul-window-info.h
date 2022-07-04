@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-window-info.h: Interface for caja windows
+   baul-window-info.h: Interface for baul windows
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -29,7 +29,7 @@
 
 #include <gtk/gtk.h>
 
-#include "caja-view.h"
+#include "baul-view.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,7 +74,7 @@ extern "C" {
         CAJA_WINDOW_DESKTOP
     } CajaWindowType;
 
-#define CAJA_TYPE_WINDOW_INFO           (caja_window_info_get_type ())
+#define CAJA_TYPE_WINDOW_INFO           (baul_window_info_get_type ())
 #define CAJA_WINDOW_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW_INFO, CajaWindowInfo))
 #define CAJA_IS_WINDOW_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW_INFO))
 #define CAJA_WINDOW_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_WINDOW_INFO, CajaWindowInfoIface))
@@ -170,38 +170,38 @@ extern "C" {
         GtkUIManager *     (* get_ui_manager)   (CajaWindowInfo *window);
     };
 
-    GType                             caja_window_info_get_type                 (void);
-    void                              caja_window_info_report_load_underway     (CajaWindowInfo                *window,
+    GType                             baul_window_info_get_type                 (void);
+    void                              baul_window_info_report_load_underway     (CajaWindowInfo                *window,
             CajaView                      *view);
-    void                              caja_window_info_report_load_complete     (CajaWindowInfo                *window,
+    void                              baul_window_info_report_load_complete     (CajaWindowInfo                *window,
             CajaView                      *view);
-    void                              caja_window_info_report_view_failed       (CajaWindowInfo                *window,
+    void                              baul_window_info_report_view_failed       (CajaWindowInfo                *window,
             CajaView                      *view);
-    void                              caja_window_info_report_selection_changed (CajaWindowInfo                *window);
-    CajaWindowSlotInfo *          caja_window_info_get_active_slot          (CajaWindowInfo                *window);
-    CajaWindowSlotInfo *          caja_window_info_get_extra_slot           (CajaWindowInfo                *window);
-    void                              caja_window_info_view_visible             (CajaWindowInfo                *window,
+    void                              baul_window_info_report_selection_changed (CajaWindowInfo                *window);
+    CajaWindowSlotInfo *          baul_window_info_get_active_slot          (CajaWindowInfo                *window);
+    CajaWindowSlotInfo *          baul_window_info_get_extra_slot           (CajaWindowInfo                *window);
+    void                              baul_window_info_view_visible             (CajaWindowInfo                *window,
             CajaView                      *view);
-    void                              caja_window_info_close                    (CajaWindowInfo                *window);
-    void                              caja_window_info_push_status              (CajaWindowInfo                *window,
+    void                              baul_window_info_close                    (CajaWindowInfo                *window);
+    void                              baul_window_info_push_status              (CajaWindowInfo                *window,
             const char                        *status);
-    CajaWindowType                caja_window_info_get_window_type          (CajaWindowInfo                *window);
-    char *                            caja_window_info_get_title                (CajaWindowInfo                *window);
-    GList *                           caja_window_info_get_history              (CajaWindowInfo                *window);
-    char *                            caja_window_info_get_current_location     (CajaWindowInfo                *window);
-    int                               caja_window_info_get_selection_count      (CajaWindowInfo                *window);
-    GList *                           caja_window_info_get_selection            (CajaWindowInfo                *window);
-    CajaWindowShowHiddenFilesMode caja_window_info_get_hidden_files_mode    (CajaWindowInfo                *window);
-    void                              caja_window_info_set_hidden_files_mode    (CajaWindowInfo                *window,
+    CajaWindowType                baul_window_info_get_window_type          (CajaWindowInfo                *window);
+    char *                            baul_window_info_get_title                (CajaWindowInfo                *window);
+    GList *                           baul_window_info_get_history              (CajaWindowInfo                *window);
+    char *                            baul_window_info_get_current_location     (CajaWindowInfo                *window);
+    int                               baul_window_info_get_selection_count      (CajaWindowInfo                *window);
+    GList *                           baul_window_info_get_selection            (CajaWindowInfo                *window);
+    CajaWindowShowHiddenFilesMode baul_window_info_get_hidden_files_mode    (CajaWindowInfo                *window);
+    void                              baul_window_info_set_hidden_files_mode    (CajaWindowInfo                *window,
             CajaWindowShowHiddenFilesMode  mode);
-    CajaWindowShowBackupFilesMode     caja_window_info_get_backup_files_mode    (CajaWindowInfo                *window);
-    void                              caja_window_info_set_backup_files_mode    (CajaWindowInfo                *window,
+    CajaWindowShowBackupFilesMode     baul_window_info_get_backup_files_mode    (CajaWindowInfo                *window);
+    void                              baul_window_info_set_backup_files_mode    (CajaWindowInfo                *window,
             CajaWindowShowBackupFilesMode  mode);
 
-    gboolean                          caja_window_info_get_initiated_unmount    (CajaWindowInfo                *window);
-    void                              caja_window_info_set_initiated_unmount    (CajaWindowInfo                *window,
+    gboolean                          baul_window_info_get_initiated_unmount    (CajaWindowInfo                *window);
+    void                              baul_window_info_set_initiated_unmount    (CajaWindowInfo                *window,
             gboolean initiated_unmount);
-    GtkUIManager *                    caja_window_info_get_ui_manager           (CajaWindowInfo                *window);
+    GtkUIManager *                    baul_window_info_get_ui_manager           (CajaWindowInfo                *window);
 
 #ifdef __cplusplus
 }

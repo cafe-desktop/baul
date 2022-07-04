@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-vfs-file.c: Subclass of CajaFile to help implement the
+   baul-vfs-file.c: Subclass of CajaFile to help implement the
    virtual trash directory.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
@@ -29,18 +29,18 @@
 
 #include <eel/eel-gtk-macros.h>
 
-#include "caja-vfs-file.h"
-#include "caja-directory-notify.h"
-#include "caja-directory-private.h"
-#include "caja-file-private.h"
-#include "caja-autorun.h"
+#include "baul-vfs-file.h"
+#include "baul-directory-notify.h"
+#include "baul-directory-private.h"
+#include "baul-file-private.h"
+#include "baul-autorun.h"
 
-static void caja_vfs_file_init       (gpointer   object,
+static void baul_vfs_file_init       (gpointer   object,
                                       gpointer   klass);
-static void caja_vfs_file_class_init (gpointer   klass);
+static void baul_vfs_file_class_init (gpointer   klass);
 
 EEL_CLASS_BOILERPLATE (CajaVFSFile,
-                       caja_vfs_file,
+                       baul_vfs_file,
                        CAJA_TYPE_FILE)
 
 static void
@@ -48,7 +48,7 @@ vfs_file_monitor_add (CajaFile *file,
                       gconstpointer client,
                       CajaFileAttributes attributes)
 {
-    caja_directory_monitor_add_internal
+    baul_directory_monitor_add_internal
     (file->details->directory, file,
      client, TRUE, attributes, NULL, NULL);
 }
@@ -57,7 +57,7 @@ static void
 vfs_file_monitor_remove (CajaFile *file,
                          gconstpointer client)
 {
-    caja_directory_monitor_remove_internal
+    baul_directory_monitor_remove_internal
     (file->details->directory, file, client);
 }
 
@@ -68,7 +68,7 @@ vfs_file_call_when_ready (CajaFile *file,
                           gpointer callback_data)
 
 {
-    caja_directory_call_when_ready_internal
+    baul_directory_call_when_ready_internal
     (file->details->directory, file,
      file_attributes, FALSE, NULL, callback, callback_data);
 }
@@ -78,7 +78,7 @@ vfs_file_cancel_call_when_ready (CajaFile *file,
                                  CajaFileCallback callback,
                                  gpointer callback_data)
 {
-    caja_directory_cancel_callback_internal
+    baul_directory_cancel_callback_internal
     (file->details->directory, file,
      NULL, callback, callback_data);
 }
@@ -87,7 +87,7 @@ static gboolean
 vfs_file_check_if_ready (CajaFile *file,
                          CajaFileAttributes file_attributes)
 {
-    return caja_directory_check_if_ready_internal
+    return baul_directory_check_if_ready_internal
            (file->details->directory, file,
             file_attributes);
 }
@@ -107,13 +107,13 @@ set_metadata_get_info_callback (GObject *source_object,
     new_info = g_file_query_info_finish (G_FILE (source_object), res, &error);
     if (new_info != NULL)
     {
-        if (caja_file_update_info (file, new_info))
+        if (baul_file_update_info (file, new_info))
         {
-            caja_file_changed (file);
+            baul_file_changed (file);
         }
         g_object_unref (new_info);
     }
-    caja_file_unref (file);
+    baul_file_unref (file);
     if (error)
     {
         g_error_free (error);
@@ -148,7 +148,7 @@ set_metadata_callback (GObject *source_object,
     }
     else
     {
-        caja_file_unref (file);
+        baul_file_unref (file);
         g_error_free (error);
     }
 }
@@ -178,14 +178,14 @@ vfs_file_set_metadata (CajaFile           *file,
     }
     g_free (gio_key);
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     g_file_set_attributes_async (location,
                                  info,
                                  0,
                                  G_PRIORITY_DEFAULT,
                                  NULL,
                                  set_metadata_callback,
-                                 caja_file_ref (file));
+                                 baul_file_ref (file));
     g_object_unref (location);
     g_object_unref (info);
 }
@@ -205,14 +205,14 @@ vfs_file_set_metadata_as_list (CajaFile           *file,
     g_file_info_set_attribute_stringv (info, gio_key, value);
     g_free (gio_key);
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     g_file_set_attributes_async (location,
                                  info,
                                  0,
                                  G_PRIORITY_DEFAULT,
                                  NULL,
                                  set_metadata_callback,
-                                 caja_file_ref (file));
+                                 baul_file_ref (file));
     g_object_unref (info);
     g_object_unref (location);
 }
@@ -272,7 +272,7 @@ vfs_file_get_deep_counts (CajaFile *file,
         *total_size_on_disk = 0;
     }
 
-    if (!caja_file_is_directory (file))
+    if (!baul_file_is_directory (file))
     {
         return CAJA_REQUEST_DONE;
     }
@@ -303,7 +303,7 @@ vfs_file_get_deep_counts (CajaFile *file,
     }
 
     /* For directories, or before we know the type, we haven't started. */
-    type = caja_file_get_file_type (file);
+    type = baul_file_get_file_type (file);
     if (type == G_FILE_TYPE_UNKNOWN
             || type == G_FILE_TYPE_DIRECTORY)
     {
@@ -392,7 +392,7 @@ vfs_file_get_date (CajaFile *file,
 static char *
 vfs_file_get_where_string (CajaFile *file)
 {
-    return caja_file_get_parent_uri_for_display (file);
+    return baul_file_get_parent_uri_for_display (file);
 }
 
 static void
@@ -409,7 +409,7 @@ vfs_file_mount_callback (GObject *source_object,
     error = NULL;
     mounted_on = g_file_mount_mountable_finish (G_FILE (source_object),
                  res, &error);
-    caja_file_operation_complete (op, mounted_on, error);
+    baul_file_operation_complete (op, mounted_on, error);
     if (mounted_on)
     {
         g_object_unref (mounted_on);
@@ -445,14 +445,14 @@ vfs_file_mount (CajaFile                   *file,
         return;
     }
 
-    op = caja_file_operation_new (file, callback, callback_data);
+    op = baul_file_operation_new (file, callback, callback_data);
     if (cancellable)
     {
         g_object_unref (op->cancellable);
         op->cancellable = g_object_ref (cancellable);
     }
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     g_file_mount_mountable (location,
                             0,
                             mount_op,
@@ -486,7 +486,7 @@ vfs_file_unmount_callback (GObject *source_object,
         error = NULL;
     }
 
-    caja_file_operation_complete (op, G_FILE (source_object), error);
+    baul_file_operation_complete (op, G_FILE (source_object), error);
     if (error)
     {
         g_error_free (error);
@@ -503,14 +503,14 @@ vfs_file_unmount (CajaFile                   *file,
     CajaFileOperation *op;
     GFile *location;
 
-    op = caja_file_operation_new (file, callback, callback_data);
+    op = baul_file_operation_new (file, callback, callback_data);
     if (cancellable)
     {
         g_object_unref (op->cancellable);
         op->cancellable = g_object_ref (cancellable);
     }
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     g_file_unmount_mountable_with_operation (location,
             G_MOUNT_UNMOUNT_NONE,
             mount_op,
@@ -544,7 +544,7 @@ vfs_file_eject_callback (GObject *source_object,
         error = NULL;
     }
 
-    caja_file_operation_complete (op, G_FILE (source_object), error);
+    baul_file_operation_complete (op, G_FILE (source_object), error);
     if (error)
     {
         g_error_free (error);
@@ -561,14 +561,14 @@ vfs_file_eject (CajaFile                   *file,
     CajaFileOperation *op;
     GFile *location;
 
-    op = caja_file_operation_new (file, callback, callback_data);
+    op = baul_file_operation_new (file, callback, callback_data);
     if (cancellable)
     {
         g_object_unref (op->cancellable);
         op->cancellable = g_object_ref (cancellable);
     }
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     g_file_eject_mountable_with_operation (location,
                                            G_MOUNT_UNMOUNT_NONE,
                                            mount_op,
@@ -602,7 +602,7 @@ vfs_file_start_callback (GObject *source_object,
         error = NULL;
     }
 
-    caja_file_operation_complete (op, G_FILE (source_object), error);
+    baul_file_operation_complete (op, G_FILE (source_object), error);
     if (error)
     {
         g_error_free (error);
@@ -634,14 +634,14 @@ vfs_file_start (CajaFile                   *file,
         return;
     }
 
-    op = caja_file_operation_new (file, callback, callback_data);
+    op = baul_file_operation_new (file, callback, callback_data);
     if (cancellable)
     {
         g_object_unref (op->cancellable);
         op->cancellable = g_object_ref (cancellable);
     }
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     g_file_start_mountable (location,
                             0,
                             mount_op,
@@ -675,7 +675,7 @@ vfs_file_stop_callback (GObject *source_object,
         error = NULL;
     }
 
-    caja_file_operation_complete (op, G_FILE (source_object), error);
+    baul_file_operation_complete (op, G_FILE (source_object), error);
     if (error)
     {
         g_error_free (error);
@@ -692,14 +692,14 @@ vfs_file_stop (CajaFile                   *file,
     CajaFileOperation *op;
     GFile *location;
 
-    op = caja_file_operation_new (file, callback, callback_data);
+    op = baul_file_operation_new (file, callback, callback_data);
     if (cancellable)
     {
         g_object_unref (op->cancellable);
         op->cancellable = g_object_ref (cancellable);
     }
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     g_file_stop_mountable (location,
                            G_MOUNT_UNMOUNT_NONE,
                            mount_op,
@@ -733,7 +733,7 @@ vfs_file_poll_callback (GObject *source_object,
         error = NULL;
     }
 
-    caja_file_operation_complete (op, G_FILE (source_object), error);
+    baul_file_operation_complete (op, G_FILE (source_object), error);
     if (error)
     {
         g_error_free (error);
@@ -746,9 +746,9 @@ vfs_file_poll_for_media (CajaFile *file)
     CajaFileOperation *op;
     GFile *location;
 
-    op = caja_file_operation_new (file, NULL, NULL);
+    op = baul_file_operation_new (file, NULL, NULL);
 
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
     g_file_poll_mountable (location,
                            op->cancellable,
                            vfs_file_poll_callback,
@@ -757,12 +757,12 @@ vfs_file_poll_for_media (CajaFile *file)
 }
 
 static void
-caja_vfs_file_init (gpointer object, gpointer klass)
+baul_vfs_file_init (gpointer object, gpointer klass)
 {
 }
 
 static void
-caja_vfs_file_class_init (gpointer klass)
+baul_vfs_file_class_init (gpointer klass)
 {
     CajaFileClass *file_class;
 

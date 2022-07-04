@@ -30,7 +30,7 @@
 
 #include <eel/eel-background-box.h>
 
-#define CAJA_TYPE_INFORMATION_PANEL caja_information_panel_get_type()
+#define CAJA_TYPE_INFORMATION_PANEL baul_information_panel_get_type()
 #define CAJA_INFORMATION_PANEL(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_INFORMATION_PANEL, CajaInformationPanel))
 #define CAJA_INFORMATION_PANEL_CLASS(klass) \
@@ -60,7 +60,7 @@ typedef struct
                               const char *location);
 } CajaInformationPanelClass;
 
-GType            caja_information_panel_get_type     (void);
-void             caja_information_panel_register     (void);
+GType            baul_information_panel_get_type     (void);
+void             baul_information_panel_register     (void);
 
 #endif /* CAJA_INFORMATION_PANEL_H */

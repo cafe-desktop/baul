@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-bookmark.c - implementation of individual bookmarks.
+/* baul-bookmark.c - implementation of individual bookmarks.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
 
@@ -31,9 +31,9 @@
 #include <eel/eel-gtk-macros.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include "caja-bookmark.h"
-#include "caja-file.h"
-#include "caja-icon-names.h"
+#include "baul-bookmark.h"
+#include "baul-file.h"
+#include "baul-icon-names.h"
 
 enum
 {
@@ -57,15 +57,15 @@ struct CajaBookmarkDetails
     char *scroll_file;
 };
 
-static void	  caja_bookmark_connect_file	  (CajaBookmark	 *file);
-static void	  caja_bookmark_disconnect_file	  (CajaBookmark	 *file);
+static void	  baul_bookmark_connect_file	  (CajaBookmark	 *file);
+static void	  baul_bookmark_disconnect_file	  (CajaBookmark	 *file);
 
-G_DEFINE_TYPE (CajaBookmark, caja_bookmark, G_TYPE_OBJECT);
+G_DEFINE_TYPE (CajaBookmark, baul_bookmark, G_TYPE_OBJECT);
 
 /* GObject methods.  */
 
 static void
-caja_bookmark_finalize (GObject *object)
+baul_bookmark_finalize (GObject *object)
 {
     CajaBookmark *bookmark;
 
@@ -73,7 +73,7 @@ caja_bookmark_finalize (GObject *object)
 
     bookmark = CAJA_BOOKMARK (object);
 
-    caja_bookmark_disconnect_file (bookmark);
+    baul_bookmark_disconnect_file (bookmark);
 
     g_free (bookmark->details->name);
     g_object_unref (bookmark->details->location);
@@ -84,15 +84,15 @@ caja_bookmark_finalize (GObject *object)
     g_free (bookmark->details->scroll_file);
     g_free (bookmark->details);
 
-    G_OBJECT_CLASS (caja_bookmark_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_bookmark_parent_class)->finalize (object);
 }
 
 /* Initialization.  */
 
 static void
-caja_bookmark_class_init (CajaBookmarkClass *class)
+baul_bookmark_class_init (CajaBookmarkClass *class)
 {
-    G_OBJECT_CLASS (class)->finalize = caja_bookmark_finalize;
+    G_OBJECT_CLASS (class)->finalize = baul_bookmark_finalize;
 
     signals[APPEARANCE_CHANGED] =
         g_signal_new ("appearance_changed",
@@ -115,13 +115,13 @@ caja_bookmark_class_init (CajaBookmarkClass *class)
 }
 
 static void
-caja_bookmark_init (CajaBookmark *bookmark)
+baul_bookmark_init (CajaBookmark *bookmark)
 {
     bookmark->details = g_new0 (CajaBookmarkDetails, 1);
 }
 
 /**
- * caja_bookmark_compare_with:
+ * baul_bookmark_compare_with:
  *
  * Check whether two bookmarks are considered identical.
  * @a: first CajaBookmark*.
@@ -131,7 +131,7 @@ caja_bookmark_init (CajaBookmark *bookmark)
  * (GCompareFunc style)
  **/
 int
-caja_bookmark_compare_with (gconstpointer a, gconstpointer b)
+baul_bookmark_compare_with (gconstpointer a, gconstpointer b)
 {
     CajaBookmark *bookmark_a;
     CajaBookmark *bookmark_b;
@@ -158,7 +158,7 @@ caja_bookmark_compare_with (gconstpointer a, gconstpointer b)
 }
 
 /**
- * caja_bookmark_compare_uris:
+ * baul_bookmark_compare_uris:
  *
  * Check whether the uris of two bookmarks are for the same location.
  * @a: first CajaBookmark*.
@@ -168,7 +168,7 @@ caja_bookmark_compare_with (gconstpointer a, gconstpointer b)
  * (GCompareFunc style)
  **/
 int
-caja_bookmark_compare_uris (gconstpointer a, gconstpointer b)
+baul_bookmark_compare_uris (gconstpointer a, gconstpointer b)
 {
     CajaBookmark *bookmark_a;
     CajaBookmark *bookmark_b;
@@ -184,11 +184,11 @@ caja_bookmark_compare_uris (gconstpointer a, gconstpointer b)
 }
 
 CajaBookmark *
-caja_bookmark_copy (CajaBookmark *bookmark)
+baul_bookmark_copy (CajaBookmark *bookmark)
 {
     g_return_val_if_fail (CAJA_IS_BOOKMARK (bookmark), NULL);
 
-    return caja_bookmark_new (
+    return baul_bookmark_new (
                bookmark->details->location,
                bookmark->details->name,
                bookmark->details->has_custom_name,
@@ -196,7 +196,7 @@ caja_bookmark_copy (CajaBookmark *bookmark)
 }
 
 char *
-caja_bookmark_get_name (CajaBookmark *bookmark)
+baul_bookmark_get_name (CajaBookmark *bookmark)
 {
     g_return_val_if_fail(CAJA_IS_BOOKMARK (bookmark), NULL);
 
@@ -205,7 +205,7 @@ caja_bookmark_get_name (CajaBookmark *bookmark)
 
 
 gboolean
-caja_bookmark_get_has_custom_name (CajaBookmark *bookmark)
+baul_bookmark_get_has_custom_name (CajaBookmark *bookmark)
 {
     g_return_val_if_fail(CAJA_IS_BOOKMARK (bookmark), FALSE);
 
@@ -213,7 +213,7 @@ caja_bookmark_get_has_custom_name (CajaBookmark *bookmark)
 }
 
 cairo_surface_t *
-caja_bookmark_get_surface (CajaBookmark *bookmark,
+baul_bookmark_get_surface (CajaBookmark *bookmark,
                            GtkIconSize stock_size)
 {
     cairo_surface_t *result;
@@ -223,16 +223,16 @@ caja_bookmark_get_surface (CajaBookmark *bookmark,
 
     g_return_val_if_fail (CAJA_IS_BOOKMARK (bookmark), NULL);
 
-    icon = caja_bookmark_get_icon (bookmark);
+    icon = baul_bookmark_get_icon (bookmark);
     if (icon == NULL)
     {
         return NULL;
     }
 
-    pixel_size = caja_get_icon_size_for_stock_size (stock_size);
+    pixel_size = baul_get_icon_size_for_stock_size (stock_size);
     pixel_scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
-    info = caja_icon_info_lookup (icon, pixel_size, pixel_scale);
-    result = caja_icon_info_get_surface_at_size (info, pixel_size);
+    info = baul_icon_info_lookup (icon, pixel_size, pixel_scale);
+    result = baul_icon_info_get_surface_at_size (info, pixel_size);
     g_object_unref (info);
 
     g_object_unref (icon);
@@ -241,12 +241,12 @@ caja_bookmark_get_surface (CajaBookmark *bookmark,
 }
 
 GIcon *
-caja_bookmark_get_icon (CajaBookmark *bookmark)
+baul_bookmark_get_icon (CajaBookmark *bookmark)
 {
     g_return_val_if_fail (CAJA_IS_BOOKMARK (bookmark), NULL);
 
     /* Try to connect a file in case file exists now but didn't earlier. */
-    caja_bookmark_connect_file (bookmark);
+    baul_bookmark_connect_file (bookmark);
 
     if (bookmark->details->icon)
     {
@@ -256,7 +256,7 @@ caja_bookmark_get_icon (CajaBookmark *bookmark)
 }
 
 GFile *
-caja_bookmark_get_location (CajaBookmark *bookmark)
+baul_bookmark_get_location (CajaBookmark *bookmark)
 {
     g_return_val_if_fail(CAJA_IS_BOOKMARK (bookmark), NULL);
 
@@ -266,18 +266,18 @@ caja_bookmark_get_location (CajaBookmark *bookmark)
      * file. Calling connect_file here means that attempts to activate the
      * bookmark will update its image if possible.
      */
-    caja_bookmark_connect_file (bookmark);
+    baul_bookmark_connect_file (bookmark);
 
     return g_object_ref (bookmark->details->location);
 }
 
 char *
-caja_bookmark_get_uri (CajaBookmark *bookmark)
+baul_bookmark_get_uri (CajaBookmark *bookmark)
 {
     GFile *file;
     char *uri;
 
-    file = caja_bookmark_get_location (bookmark);
+    file = baul_bookmark_get_location (bookmark);
     uri = g_file_get_uri (file);
     g_object_unref (file);
     return uri;
@@ -285,7 +285,7 @@ caja_bookmark_get_uri (CajaBookmark *bookmark)
 
 
 /**
- * caja_bookmark_set_name:
+ * baul_bookmark_set_name:
  *
  * Change the user-displayed name of a bookmark.
  * @new_name: The new user-displayed name for this bookmark, mustn't be NULL.
@@ -293,7 +293,7 @@ caja_bookmark_get_uri (CajaBookmark *bookmark)
  * Returns: TRUE if the name changed else FALSE.
  **/
 gboolean
-caja_bookmark_set_name (CajaBookmark *bookmark, const char *new_name)
+baul_bookmark_set_name (CajaBookmark *bookmark, const char *new_name)
 {
     g_return_val_if_fail (new_name != NULL, FALSE);
     g_return_val_if_fail (CAJA_IS_BOOKMARK (bookmark), FALSE);
@@ -321,7 +321,7 @@ caja_bookmark_set_name (CajaBookmark *bookmark, const char *new_name)
 }
 
 static gboolean
-caja_bookmark_icon_is_different (CajaBookmark *bookmark,
+baul_bookmark_icon_is_different (CajaBookmark *bookmark,
                                  GIcon *new_icon)
 {
     g_assert (CAJA_IS_BOOKMARK (bookmark));
@@ -340,7 +340,7 @@ caja_bookmark_icon_is_different (CajaBookmark *bookmark,
  * Return TRUE if the icon changed.
  */
 static gboolean
-caja_bookmark_update_icon (CajaBookmark *bookmark)
+baul_bookmark_update_icon (CajaBookmark *bookmark)
 {
     GIcon *new_icon;
 
@@ -351,18 +351,18 @@ caja_bookmark_update_icon (CajaBookmark *bookmark)
         return FALSE;
     }
 
-    if (!caja_file_is_local (bookmark->details->file))
+    if (!baul_file_is_local (bookmark->details->file))
     {
         /* never update icons for remote bookmarks */
         return FALSE;
     }
 
-    if (!caja_file_is_not_yet_confirmed (bookmark->details->file) &&
-            caja_file_check_if_ready (bookmark->details->file,
+    if (!baul_file_is_not_yet_confirmed (bookmark->details->file) &&
+            baul_file_check_if_ready (bookmark->details->file,
                                       CAJA_FILE_ATTRIBUTES_FOR_ICON))
     {
-        new_icon = caja_file_get_gicon (bookmark->details->file, 0);
-        if (caja_bookmark_icon_is_different (bookmark, new_icon))
+        new_icon = baul_file_get_gicon (bookmark->details->file, 0);
+        if (baul_bookmark_icon_is_different (bookmark, new_icon))
         {
             if (bookmark->details->icon)
             {
@@ -391,10 +391,10 @@ bookmark_file_changed_callback (CajaFile *file, CajaBookmark *bookmark)
 
     should_emit_appearance_changed_signal = FALSE;
     should_emit_contents_changed_signal = FALSE;
-    location = caja_file_get_location (file);
+    location = baul_file_get_location (file);
 
     if (!g_file_equal (bookmark->details->location, location) &&
-            !caja_file_is_in_trash (file))
+            !baul_file_is_in_trash (file))
     {
         g_object_unref (bookmark->details->location);
         bookmark->details->location = location;
@@ -405,8 +405,8 @@ bookmark_file_changed_callback (CajaFile *file, CajaBookmark *bookmark)
         g_object_unref (location);
     }
 
-    if (caja_file_is_gone (file) ||
-            caja_file_is_in_trash (file))
+    if (baul_file_is_gone (file) ||
+            baul_file_is_in_trash (file))
     {
         /* The file we were monitoring has been trashed, deleted,
          * or moved in a way that we didn't notice. We should make
@@ -421,9 +421,9 @@ bookmark_file_changed_callback (CajaFile *file, CajaBookmark *bookmark)
          * we don't want to change the icon or anything about the
          * bookmark just because its not there anymore.
          */
-        caja_bookmark_disconnect_file (bookmark);
+        baul_bookmark_disconnect_file (bookmark);
     }
-    else if (caja_bookmark_update_icon (bookmark))
+    else if (baul_bookmark_update_icon (bookmark))
     {
         /* File hasn't gone away, but it has changed
          * in a way that affected its icon.
@@ -433,7 +433,7 @@ bookmark_file_changed_callback (CajaFile *file, CajaBookmark *bookmark)
 
     if (!bookmark->details->has_custom_name)
     {
-        display_name = caja_file_get_display_name (file);
+        display_name = baul_file_get_display_name (file);
 
         if (g_strcmp0 (bookmark->details->name, display_name) != 0)
         {
@@ -459,13 +459,13 @@ bookmark_file_changed_callback (CajaFile *file, CajaBookmark *bookmark)
 }
 
 /**
- * caja_bookmark_set_icon_to_default:
+ * baul_bookmark_set_icon_to_default:
  *
  * Reset the icon to either the missing bookmark icon or the generic
  * bookmark icon, depending on whether the file still exists.
  */
 static void
-caja_bookmark_set_icon_to_default (CajaBookmark *bookmark)
+baul_bookmark_set_icon_to_default (CajaBookmark *bookmark)
 {
     GIcon *emblemed_icon, *folder;
 
@@ -476,7 +476,7 @@ caja_bookmark_set_icon_to_default (CajaBookmark *bookmark)
 
     folder = g_themed_icon_new (CAJA_ICON_FOLDER);
 
-    if (caja_bookmark_uri_known_not_to_exist (bookmark))
+    if (baul_bookmark_uri_known_not_to_exist (bookmark))
     {
         GIcon *icon;
         GEmblem *emblem;
@@ -497,7 +497,7 @@ caja_bookmark_set_icon_to_default (CajaBookmark *bookmark)
 }
 
 static void
-caja_bookmark_disconnect_file (CajaBookmark *bookmark)
+baul_bookmark_disconnect_file (CajaBookmark *bookmark)
 {
     g_assert (CAJA_IS_BOOKMARK (bookmark));
 
@@ -506,7 +506,7 @@ caja_bookmark_disconnect_file (CajaBookmark *bookmark)
         g_signal_handlers_disconnect_by_func (bookmark->details->file,
                                               G_CALLBACK (bookmark_file_changed_callback),
                                               bookmark);
-        caja_file_unref (bookmark->details->file);
+        baul_file_unref (bookmark->details->file);
         bookmark->details->file = NULL;
     }
 
@@ -518,7 +518,7 @@ caja_bookmark_disconnect_file (CajaBookmark *bookmark)
 }
 
 static void
-caja_bookmark_connect_file (CajaBookmark *bookmark)
+baul_bookmark_connect_file (CajaBookmark *bookmark)
 {
     char *display_name;
 
@@ -529,10 +529,10 @@ caja_bookmark_connect_file (CajaBookmark *bookmark)
         return;
     }
 
-    if (!caja_bookmark_uri_known_not_to_exist (bookmark))
+    if (!baul_bookmark_uri_known_not_to_exist (bookmark))
     {
-        bookmark->details->file = caja_file_get (bookmark->details->location);
-        g_assert (!caja_file_is_gone (bookmark->details->file));
+        bookmark->details->file = baul_file_get (bookmark->details->location);
+        g_assert (!baul_file_is_gone (bookmark->details->file));
 
         g_signal_connect_object (bookmark->details->file, "changed",
                                  G_CALLBACK (bookmark_file_changed_callback), bookmark, 0);
@@ -541,19 +541,19 @@ caja_bookmark_connect_file (CajaBookmark *bookmark)
     /* Set icon based on available information; don't force network i/o
      * to get any currently unknown information.
      */
-    if (!caja_bookmark_update_icon (bookmark))
+    if (!baul_bookmark_update_icon (bookmark))
     {
         if (bookmark->details->icon == NULL || bookmark->details->file == NULL)
         {
-            caja_bookmark_set_icon_to_default (bookmark);
+            baul_bookmark_set_icon_to_default (bookmark);
         }
     }
 
     if (!bookmark->details->has_custom_name &&
             bookmark->details->file &&
-            caja_file_check_if_ready (bookmark->details->file, CAJA_FILE_ATTRIBUTE_INFO))
+            baul_file_check_if_ready (bookmark->details->file, CAJA_FILE_ATTRIBUTE_INFO))
     {
-        display_name = caja_file_get_display_name (bookmark->details->file);
+        display_name = baul_file_get_display_name (bookmark->details->file);
         if (g_strcmp0 (bookmark->details->name, display_name) != 0)
         {
             g_free (bookmark->details->name);
@@ -567,7 +567,7 @@ caja_bookmark_connect_file (CajaBookmark *bookmark)
 }
 
 CajaBookmark *
-caja_bookmark_new (GFile *location, const char *name, gboolean has_custom_name,
+baul_bookmark_new (GFile *location, const char *name, gboolean has_custom_name,
                    GIcon *icon)
 {
     CajaBookmark *new_bookmark;
@@ -582,7 +582,7 @@ caja_bookmark_new (GFile *location, const char *name, gboolean has_custom_name,
         new_bookmark->details->icon = g_object_ref (icon);
     }
 
-    caja_bookmark_connect_file (new_bookmark);
+    baul_bookmark_connect_file (new_bookmark);
 
     return new_bookmark;
 }
@@ -592,7 +592,7 @@ create_image_cairo_for_bookmark (CajaBookmark *bookmark)
 {
     cairo_surface_t *surface;
 
-    surface = caja_bookmark_get_surface (bookmark, GTK_ICON_SIZE_MENU);
+    surface = baul_bookmark_get_surface (bookmark, GTK_ICON_SIZE_MENU);
     if (surface == NULL)
     {
         return NULL;
@@ -637,14 +637,14 @@ bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
 }
 
 /**
- * caja_bookmark_menu_item_new:
+ * baul_bookmark_menu_item_new:
  *
  * Return a menu item representing a bookmark.
  * @bookmark: The bookmark the menu item represents.
  * Return value: A newly-created bookmark, not yet shown.
  **/
 GtkWidget *
-caja_bookmark_menu_item_new (CajaBookmark *bookmark)
+baul_bookmark_menu_item_new (CajaBookmark *bookmark)
 {
     cairo_surface_t *image_cairo;
 
@@ -663,7 +663,7 @@ caja_bookmark_menu_item_new (CajaBookmark *bookmark)
 }
 
 gboolean
-caja_bookmark_uri_known_not_to_exist (CajaBookmark *bookmark)
+baul_bookmark_uri_known_not_to_exist (CajaBookmark *bookmark)
 {
     char *path_name;
     gboolean exists;
@@ -683,7 +683,7 @@ caja_bookmark_uri_known_not_to_exist (CajaBookmark *bookmark)
 }
 
 void
-caja_bookmark_set_scroll_pos (CajaBookmark      *bookmark,
+baul_bookmark_set_scroll_pos (CajaBookmark      *bookmark,
                               const char            *uri)
 {
     g_free (bookmark->details->scroll_file);
@@ -691,7 +691,7 @@ caja_bookmark_set_scroll_pos (CajaBookmark      *bookmark,
 }
 
 char *
-caja_bookmark_get_scroll_pos (CajaBookmark      *bookmark)
+baul_bookmark_get_scroll_pos (CajaBookmark      *bookmark)
 {
     return g_strdup (bookmark->details->scroll_file);
 }

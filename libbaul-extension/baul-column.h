@@ -1,5 +1,5 @@
 /*
- *  caja-column.h - Info columns exported by
+ *  baul-column.h - Info columns exported by
  *                      CajaColumnProvider objects.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -26,11 +26,11 @@
 #define CAJA_COLUMN_H
 
 #include <glib-object.h>
-#include "caja-extension-types.h"
+#include "baul-extension-types.h"
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_COLUMN            (caja_column_get_type())
+#define CAJA_TYPE_COLUMN            (baul_column_get_type())
 #define CAJA_COLUMN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_COLUMN, CajaColumn))
 #define CAJA_COLUMN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_COLUMN, CajaColumnClass))
 #define CAJA_INFO_IS_COLUMN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_COLUMN))
@@ -51,8 +51,8 @@ struct _CajaColumnClass {
     GObjectClass parent;
 };
 
-GType       caja_column_get_type  (void);
-CajaColumn *caja_column_new       (const char *name,
+GType       baul_column_get_type  (void);
+CajaColumn *baul_column_new       (const char *name,
                                    const char *attribute,
                                    const char *label,
                                    const char *description);

@@ -33,10 +33,10 @@
 
 #include <eel/eel-gtk-extensions.h>
 
-#include "caja-navigation-action.h"
-#include "caja-navigation-window.h"
-#include "caja-window-private.h"
-#include "caja-navigation-window-slot.h"
+#include "baul-navigation-action.h"
+#include "baul-navigation-window.h"
+#include "baul-window-private.h"
+#include "baul-navigation-window-slot.h"
 
 struct _CajaNavigationActionPrivate
 {
@@ -54,7 +54,7 @@ enum
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (CajaNavigationAction, caja_navigation_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaNavigationAction, baul_navigation_action, GTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 static gboolean
@@ -86,7 +86,7 @@ activate_back_or_forward_menu_item (GtkMenuItem *menu_item,
 
     index = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu_item), "user_data"));
 
-    caja_navigation_window_back_or_forward (window, back, index, should_open_in_new_tab ());
+    baul_navigation_window_back_or_forward (window, back, index, should_open_in_new_tab ());
 }
 
 static void
@@ -122,7 +122,7 @@ fill_menu (CajaNavigationWindow *window,
 
     while (list != NULL)
     {
-        menu_item = caja_bookmark_menu_item_new (CAJA_BOOKMARK (list->data));
+        menu_item = baul_bookmark_menu_item_new (CAJA_BOOKMARK (list->data));
 
         if (menu_item) {
             list_void = FALSE;
@@ -147,13 +147,13 @@ fill_menu (CajaNavigationWindow *window,
                                eel_image_menu_item_new_from_icon ("dialog-error", _("folder removed")));
         if (back)
         {
-            caja_navigation_window_slot_clear_back_list (slot);
-            caja_navigation_window_allow_back (window, FALSE);
+            baul_navigation_window_slot_clear_back_list (slot);
+            baul_navigation_window_allow_back (window, FALSE);
         }
         else
         {
-            caja_navigation_window_slot_clear_forward_list (slot);
-            caja_navigation_window_allow_forward (window, FALSE);
+            baul_navigation_window_slot_clear_forward_list (slot);
+            baul_navigation_window_allow_forward (window, FALSE);
         }
     }
 }
@@ -244,14 +244,14 @@ connect_proxy (GtkAction *action, GtkWidget *proxy)
                           G_CALLBACK (show_menu_callback), action);
 
         /* Make sure that middle click works. Note that there is some code duplication
-         * between here and caja-window-menus.c */
+         * between here and baul-window-menus.c */
         child = eel_gtk_menu_tool_button_get_button (button);
         g_signal_connect (child, "button-press-event", G_CALLBACK (proxy_button_press_event_cb), NULL);
         g_signal_connect (child, "button-release-event", G_CALLBACK (proxy_button_release_event_cb), NULL);
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    (* GTK_ACTION_CLASS (caja_navigation_action_parent_class)->connect_proxy) (action, proxy);
+    (* GTK_ACTION_CLASS (baul_navigation_action_parent_class)->connect_proxy) (action, proxy);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -270,22 +270,22 @@ disconnect_proxy (GtkAction *action, GtkWidget *proxy)
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    (* GTK_ACTION_CLASS (caja_navigation_action_parent_class)->disconnect_proxy) (action, proxy);
+    (* GTK_ACTION_CLASS (baul_navigation_action_parent_class)->disconnect_proxy) (action, proxy);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
-caja_navigation_action_finalize (GObject *object)
+baul_navigation_action_finalize (GObject *object)
 {
     CajaNavigationAction *action = CAJA_NAVIGATION_ACTION (object);
 
     g_free (action->priv->arrow_tooltip);
 
-    (* G_OBJECT_CLASS (caja_navigation_action_parent_class)->finalize) (object);
+    (* G_OBJECT_CLASS (baul_navigation_action_parent_class)->finalize) (object);
 }
 
 static void
-caja_navigation_action_set_property (GObject *object,
+baul_navigation_action_set_property (GObject *object,
                                      guint prop_id,
                                      const GValue *value,
                                      GParamSpec *pspec)
@@ -310,7 +310,7 @@ caja_navigation_action_set_property (GObject *object,
 }
 
 static void
-caja_navigation_action_get_property (GObject *object,
+baul_navigation_action_get_property (GObject *object,
                                      guint prop_id,
                                      GValue *value,
                                      GParamSpec *pspec)
@@ -334,16 +334,16 @@ caja_navigation_action_get_property (GObject *object,
 }
 
 static void
-caja_navigation_action_class_init (CajaNavigationActionClass *class)
+baul_navigation_action_class_init (CajaNavigationActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     GtkActionClass *action_class = GTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    object_class->finalize = caja_navigation_action_finalize;
-    object_class->set_property = caja_navigation_action_set_property;
-    object_class->get_property = caja_navigation_action_get_property;
+    object_class->finalize = baul_navigation_action_finalize;
+    object_class->set_property = baul_navigation_action_set_property;
+    object_class->get_property = baul_navigation_action_get_property;
 
     action_class->toolbar_item_type = GTK_TYPE_MENU_TOOL_BUTTON;
     action_class->connect_proxy = connect_proxy;
@@ -375,7 +375,7 @@ caja_navigation_action_class_init (CajaNavigationActionClass *class)
 }
 
 static void
-caja_navigation_action_init (CajaNavigationAction *action)
+baul_navigation_action_init (CajaNavigationAction *action)
 {
-    action->priv = caja_navigation_action_get_instance_private (action);
+    action->priv = baul_navigation_action_get_instance_private (action);
 }

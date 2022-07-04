@@ -28,8 +28,8 @@
 #include <eel/eel-gtk-macros.h>
 #include <eel/eel-glib-extensions.h>
 
-#include "caja-query.h"
-#include "caja-file-utilities.h"
+#include "baul-query.h"
+#include "baul-file-utilities.h"
 
 struct CajaQueryDetails
 {
@@ -43,7 +43,7 @@ struct CajaQueryDetails
 };
 
 G_DEFINE_TYPE (CajaQuery,
-               caja_query,
+               baul_query,
                G_TYPE_OBJECT);
 
 static GObjectClass *parent_class = NULL;
@@ -62,7 +62,7 @@ finalize (GObject *object)
 }
 
 static void
-caja_query_class_init (CajaQueryClass *class)
+baul_query_class_init (CajaQueryClass *class)
 {
     GObjectClass *gobject_class;
 
@@ -73,7 +73,7 @@ caja_query_class_init (CajaQueryClass *class)
 }
 
 static void
-caja_query_init (CajaQuery *query)
+baul_query_init (CajaQuery *query)
 {
     query->details = g_new0 (CajaQueryDetails, 1);
     query->details->timestamp = 0;
@@ -81,73 +81,73 @@ caja_query_init (CajaQuery *query)
 }
 
 CajaQuery *
-caja_query_new (void)
+baul_query_new (void)
 {
     return g_object_new (CAJA_TYPE_QUERY,  NULL);
 }
 
 
 char *
-caja_query_get_text (CajaQuery *query)
+baul_query_get_text (CajaQuery *query)
 {
     return g_strdup (query->details->text);
 }
 
 void
-caja_query_set_text (CajaQuery *query, const char *text)
+baul_query_set_text (CajaQuery *query, const char *text)
 {
     g_free (query->details->text);
     query->details->text = g_strdup (text);
 }
 
 char *
-caja_query_get_location (CajaQuery *query)
+baul_query_get_location (CajaQuery *query)
 {
     return g_strdup (query->details->location_uri);
 }
 
 void
-caja_query_set_location (CajaQuery *query, const char *uri)
+baul_query_set_location (CajaQuery *query, const char *uri)
 {
     g_free (query->details->location_uri);
     query->details->location_uri = g_strdup (uri);
 }
 
 GList *
-caja_query_get_mime_types (CajaQuery *query)
+baul_query_get_mime_types (CajaQuery *query)
 {
     return g_list_copy_deep (query->details->mime_types, (GCopyFunc) g_strdup, NULL);
 }
 
 void
-caja_query_set_mime_types (CajaQuery *query, GList *mime_types)
+baul_query_set_mime_types (CajaQuery *query, GList *mime_types)
 {
     g_list_free_full (query->details->mime_types, g_free);
     query->details->mime_types = g_list_copy_deep (mime_types, (GCopyFunc) g_strdup, NULL);
 }
 
 void
-caja_query_add_mime_type (CajaQuery *query, const char *mime_type)
+baul_query_add_mime_type (CajaQuery *query, const char *mime_type)
 {
     query->details->mime_types = g_list_append (query->details->mime_types,
                                  g_strdup (mime_type));
 }
 
 GList *
-caja_query_get_tags (CajaQuery *query)
+baul_query_get_tags (CajaQuery *query)
 {
     return g_list_copy_deep (query->details->tags, (GCopyFunc) g_strdup, NULL);
 }
 
 void
-caja_query_set_tags (CajaQuery *query, GList *tags)
+baul_query_set_tags (CajaQuery *query, GList *tags)
 {
     g_list_free_full (query->details->tags, g_free);
     query->details->tags = g_list_copy_deep (tags, (GCopyFunc) g_strdup, NULL);
 }
 
 void
-caja_query_add_tag (CajaQuery *query, const char *tag)
+baul_query_add_tag (CajaQuery *query, const char *tag)
 {
     gchar *normalized = g_utf8_normalize (tag, -1, G_NORMALIZE_NFD);
     gchar *lower_case = g_utf8_strdown (normalized, -1);
@@ -157,7 +157,7 @@ caja_query_add_tag (CajaQuery *query, const char *tag)
 }
 
 char *
-caja_query_to_readable_string (CajaQuery *query)
+baul_query_to_readable_string (CajaQuery *query)
 {
     if (!query || !query->details->text)
     {
@@ -173,7 +173,7 @@ encode_home_uri (const char *uri)
     char *home_uri;
     const char *encoded_uri;
 
-    home_uri = caja_get_home_directory_uri ();
+    home_uri = baul_get_home_directory_uri ();
 
     if (g_str_has_prefix (uri, home_uri))
     {
@@ -206,7 +206,7 @@ decode_home_uri (const char *uri)
     {
         char *home_uri;
 
-        home_uri = caja_get_home_directory_uri ();
+        home_uri = baul_get_home_directory_uri ();
 
         decoded_uri = g_strconcat (home_uri, "/", uri, NULL);
 
@@ -294,21 +294,21 @@ text_cb (GMarkupParseContext *ctx,
 
     if (info->in_text)
     {
-        caja_query_set_text (info->query, t);
+        baul_query_set_text (info->query, t);
     }
     else if (info->in_location)
     {
         uri = decode_home_uri (t);
-        caja_query_set_location (info->query, uri);
+        baul_query_set_location (info->query, uri);
         g_free (uri);
     }
     else if (info->in_mimetypes && info->in_mimetype)
     {
-        caja_query_add_mime_type (info->query, t);
+        baul_query_add_mime_type (info->query, t);
     }
     else if (info->in_tags && info->in_tag)
     {
-        caja_query_add_tag (info->query, t);
+        baul_query_add_tag (info->query, t);
     }
 
     g_free (t);
@@ -333,7 +333,7 @@ static GMarkupParser parser =
 
 
 static CajaQuery *
-caja_query_parse_xml (char *xml, gsize xml_len)
+baul_query_parse_xml (char *xml, gsize xml_len)
 {
     ParserInfo info = { NULL };
     GMarkupParseContext *ctx;
@@ -343,7 +343,7 @@ caja_query_parse_xml (char *xml, gsize xml_len)
         xml_len = strlen (xml);
     }
 
-    info.query = caja_query_new ();
+    info.query = baul_query_new ();
     info.in_text = FALSE;
 
     ctx = g_markup_parse_context_new (&parser, 0, &info, NULL);
@@ -355,7 +355,7 @@ caja_query_parse_xml (char *xml, gsize xml_len)
 
 
 CajaQuery *
-caja_query_load (char *file)
+baul_query_load (char *file)
 {
     CajaQuery *query;
     char *xml;
@@ -368,14 +368,14 @@ caja_query_load (char *file)
 
 
     g_file_get_contents (file, &xml, &xml_len, NULL);
-    query = caja_query_parse_xml (xml, xml_len);
+    query = baul_query_parse_xml (xml, xml_len);
     g_free (xml);
 
     return query;
 }
 
 static char *
-caja_query_to_xml (CajaQuery *query)
+baul_query_to_xml (CajaQuery *query)
 {
     GString *xml;
     char *text;
@@ -444,7 +444,7 @@ caja_query_to_xml (CajaQuery *query)
 }
 
 gboolean
-caja_query_save (CajaQuery *query, char *file)
+baul_query_save (CajaQuery *query, char *file)
 {
     char *xml;
     GError *err = NULL;
@@ -452,7 +452,7 @@ caja_query_save (CajaQuery *query, char *file)
 
 
     res = TRUE;
-    xml = caja_query_to_xml (query);
+    xml = baul_query_to_xml (query);
     g_file_set_contents (file, xml, strlen (xml), &err);
     g_free (xml);
 
@@ -464,33 +464,33 @@ caja_query_save (CajaQuery *query, char *file)
     return res;
 }
 
-void caja_query_set_timestamp(CajaQuery *query, gint64 sec)
+void baul_query_set_timestamp(CajaQuery *query, gint64 sec)
 {
     query->details->timestamp = sec;
 }
 
-gint64 caja_query_get_timestamp(CajaQuery *query)
+gint64 baul_query_get_timestamp(CajaQuery *query)
 {
     return query->details->timestamp;
 }
 
-void caja_query_set_size(CajaQuery *query, gint64 size)
+void baul_query_set_size(CajaQuery *query, gint64 size)
 {
     query->details->size = size;
 }
 
-gint64 caja_query_get_size(CajaQuery *query)
+gint64 baul_query_get_size(CajaQuery *query)
 {
     return query->details->size;
 }
 
-void caja_query_set_contained_text (CajaQuery *query, const char *text)
+void baul_query_set_contained_text (CajaQuery *query, const char *text)
 {
     g_free (query->details->contained_text);
     query->details->contained_text = g_strdup (text);
 }
 
-char *caja_query_get_contained_text (CajaQuery *query)
+char *baul_query_get_contained_text (CajaQuery *query)
 {
     return g_strdup (query->details->contained_text);
 }

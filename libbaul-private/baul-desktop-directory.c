@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-desktop-directory.c: Subclass of CajaDirectory to implement
+   baul-desktop-directory.c: Subclass of CajaDirectory to implement
    a virtual directory consisting of the desktop directory and the desktop
    icons
 
@@ -30,12 +30,12 @@
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-gtk-macros.h>
 
-#include "caja-desktop-directory.h"
-#include "caja-directory-private.h"
-#include "caja-file.h"
-#include "caja-file-private.h"
-#include "caja-file-utilities.h"
-#include "caja-global-preferences.h"
+#include "baul-desktop-directory.h"
+#include "baul-directory-private.h"
+#include "baul-file.h"
+#include "baul-file-private.h"
+#include "baul-file-utilities.h"
+#include "baul-global-preferences.h"
 
 struct CajaDesktopDirectoryDetails
 {
@@ -68,9 +68,9 @@ typedef struct
 
 static void desktop_directory_changed_callback (gpointer data);
 
-G_DEFINE_TYPE (CajaDesktopDirectory, caja_desktop_directory,
+G_DEFINE_TYPE (CajaDesktopDirectory, baul_desktop_directory,
                CAJA_TYPE_DIRECTORY);
-#define parent_class caja_desktop_directory_parent_class
+#define parent_class baul_desktop_directory_parent_class
 
 static gboolean
 desktop_contains_file (CajaDirectory *directory,
@@ -80,7 +80,7 @@ desktop_contains_file (CajaDirectory *directory,
 
     desktop = CAJA_DESKTOP_DIRECTORY (directory);
 
-    if (caja_directory_contains_file (desktop->details->real_directory, file))
+    if (baul_directory_contains_file (desktop->details->real_directory, file))
     {
         return TRUE;
     }
@@ -118,7 +118,7 @@ merged_callback_destroy (MergedCallback *merged_callback)
     g_assert (CAJA_IS_DESKTOP_DIRECTORY (merged_callback->desktop_dir));
 
     g_list_free (merged_callback->non_ready_directories);
-    caja_file_list_free (merged_callback->merged_file_list);
+    baul_file_list_free (merged_callback->merged_file_list);
     g_free (merged_callback);
 }
 
@@ -172,7 +172,7 @@ directory_ready_callback (CajaDirectory *directory,
     /* Update based on this call. */
     merged_callback->merged_file_list = g_list_concat
                                         (merged_callback->merged_file_list,
-                                         caja_file_list_copy (files));
+                                         baul_file_list_copy (files));
 
     /* Check if we are ready. */
     merged_callback_remove_directory (merged_callback, directory);
@@ -213,19 +213,19 @@ desktop_call_when_ready (CajaDirectory *directory,
 
 
     merged_callback->merged_file_list = g_list_concat (NULL,
-                                        caja_file_list_copy (directory->details->file_list));
+                                        baul_file_list_copy (directory->details->file_list));
 
     /* Put it in the hash table. */
     g_hash_table_insert (desktop->details->callbacks,
                          merged_callback, merged_callback);
 
     /* Now tell all the directories about it. */
-    caja_directory_call_when_ready
+    baul_directory_call_when_ready
     (desktop->details->real_directory,
      merged_callback->wait_for_attributes,
      merged_callback->wait_for_file_list,
      directory_ready_callback, merged_callback);
-    caja_directory_call_when_ready_internal
+    baul_directory_call_when_ready_internal
     (directory,
      NULL,
      merged_callback->wait_for_attributes,
@@ -262,7 +262,7 @@ desktop_cancel_callback (CajaDirectory *directory,
     /* Tell all the directories to cancel the call. */
     for (node = merged_callback->non_ready_directories; node != NULL; node = node->next)
     {
-        caja_directory_cancel_callback
+        baul_directory_cancel_callback
         (node->data,
          directory_ready_callback, merged_callback);
     }
@@ -277,9 +277,9 @@ merged_monitor_destroy (MergedMonitor *monitor)
     desktop = monitor->desktop_dir;
 
     /* Call through to the real directory remove calls. */
-    caja_directory_file_monitor_remove (desktop->details->real_directory, monitor);
+    baul_directory_file_monitor_remove (desktop->details->real_directory, monitor);
 
-    caja_directory_monitor_remove_internal (CAJA_DIRECTORY (desktop), NULL, monitor);
+    baul_directory_monitor_remove_internal (CAJA_DIRECTORY (desktop), NULL, monitor);
 
     g_free (monitor);
 }
@@ -293,7 +293,7 @@ build_merged_callback_list (CajaDirectory *directory,
 
     merged_list = callback_data;
     *merged_list = g_list_concat (*merged_list,
-                                  caja_file_list_copy (file_list));
+                                  baul_file_list_copy (file_list));
 }
 
 static void
@@ -332,7 +332,7 @@ desktop_monitor_add (CajaDirectory *directory,
     merged_callback_list = NULL;
 
     /* Call up to real dir */
-    caja_directory_file_monitor_add
+    baul_directory_file_monitor_add
     (desktop->details->real_directory, monitor,
      monitor_hidden_files,
      file_attributes,
@@ -340,14 +340,14 @@ desktop_monitor_add (CajaDirectory *directory,
 
     /* Handle the desktop part */
     merged_callback_list = g_list_concat (merged_callback_list,
-                                          caja_file_list_copy (directory->details->file_list));
+                                          baul_file_list_copy (directory->details->file_list));
 
 
     if (callback != NULL)
     {
         (* callback) (directory, merged_callback_list, callback_data);
     }
-    caja_file_list_free (merged_callback_list);
+    baul_file_list_free (merged_callback_list);
 }
 
 static void
@@ -375,7 +375,7 @@ desktop_force_reload (CajaDirectory *directory)
 
     desktop = CAJA_DESKTOP_DIRECTORY (directory);
 
-    caja_directory_force_reload (desktop->details->real_directory);
+    baul_directory_force_reload (desktop->details->real_directory);
 
     /* We don't invalidate the files in desktop, since they are always
        up to date. (And we don't ever want to mark them invalid.) */
@@ -388,7 +388,7 @@ desktop_are_all_files_seen (CajaDirectory *directory)
 
     desktop = CAJA_DESKTOP_DIRECTORY (directory);
 
-    if (!caja_directory_are_all_files_seen (desktop->details->real_directory))
+    if (!baul_directory_are_all_files_seen (desktop->details->real_directory))
     {
         return FALSE;
     }
@@ -403,7 +403,7 @@ desktop_is_not_empty (CajaDirectory *directory)
 
     desktop = CAJA_DESKTOP_DIRECTORY (directory);
 
-    if (caja_directory_is_not_empty (desktop->details->real_directory))
+    if (baul_directory_is_not_empty (desktop->details->real_directory))
     {
         return TRUE;
     }
@@ -416,7 +416,7 @@ desktop_get_file_list (CajaDirectory *directory)
 {
     GList *real_dir_file_list, *desktop_dir_file_list = NULL;
 
-    real_dir_file_list = caja_directory_get_file_list
+    real_dir_file_list = baul_directory_get_file_list
                          (CAJA_DESKTOP_DIRECTORY (directory)->details->real_directory);
     desktop_dir_file_list = EEL_CALL_PARENT_WITH_RETURN_VALUE (CAJA_DIRECTORY_CLASS, get_file_list, (directory));
 
@@ -424,9 +424,9 @@ desktop_get_file_list (CajaDirectory *directory)
 }
 
 CajaDirectory *
-caja_desktop_directory_get_real_directory (CajaDesktopDirectory *desktop)
+baul_desktop_directory_get_real_directory (CajaDesktopDirectory *desktop)
 {
-    caja_directory_ref (desktop->details->real_directory);
+    baul_directory_ref (desktop->details->real_directory);
     return desktop->details->real_directory;
 }
 
@@ -438,24 +438,24 @@ desktop_finalize (GObject *object)
 
     desktop = CAJA_DESKTOP_DIRECTORY (object);
 
-    caja_directory_unref (desktop->details->real_directory);
+    baul_directory_unref (desktop->details->real_directory);
 
     g_hash_table_destroy (desktop->details->callbacks);
     g_hash_table_destroy (desktop->details->monitors);
     g_free (desktop->details);
 
-    g_signal_handlers_disconnect_by_func (caja_preferences,
+    g_signal_handlers_disconnect_by_func (baul_preferences,
                                           desktop_directory_changed_callback,
                                           desktop);
 
-    G_OBJECT_CLASS (caja_desktop_directory_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_desktop_directory_parent_class)->finalize (object);
 }
 
 static void
 done_loading_callback (CajaDirectory *real_directory,
                        CajaDesktopDirectory *desktop)
 {
-    caja_directory_emit_done_loading (CAJA_DIRECTORY (desktop));
+    baul_directory_emit_done_loading (CAJA_DIRECTORY (desktop));
 }
 
 
@@ -464,7 +464,7 @@ forward_files_added_cover (CajaDirectory *real_directory,
                            GList *files,
                            gpointer callback_data)
 {
-    caja_directory_emit_files_added (CAJA_DIRECTORY (callback_data), files);
+    baul_directory_emit_files_added (CAJA_DIRECTORY (callback_data), files);
 }
 
 static void
@@ -472,7 +472,7 @@ forward_files_changed_cover (CajaDirectory *real_directory,
                              GList *files,
                              gpointer callback_data)
 {
-    caja_directory_emit_files_changed (CAJA_DIRECTORY (callback_data), files);
+    baul_directory_emit_files_changed (CAJA_DIRECTORY (callback_data), files);
 }
 
 static void
@@ -492,12 +492,12 @@ update_desktop_directory (CajaDesktopDirectory *desktop)
         g_signal_handlers_disconnect_by_func (real_directory, forward_files_added_cover, desktop);
         g_signal_handlers_disconnect_by_func (real_directory, forward_files_changed_cover, desktop);
 
-        caja_directory_unref (real_directory);
+        baul_directory_unref (real_directory);
     }
 
-    desktop_path = caja_get_desktop_directory ();
+    desktop_path = baul_get_desktop_directory ();
     desktop_uri = g_filename_to_uri (desktop_path, NULL, NULL);
-    real_directory = caja_directory_get_by_uri (desktop_uri);
+    real_directory = baul_directory_get_by_uri (desktop_uri);
     g_free (desktop_uri);
     g_free (desktop_path);
 
@@ -515,11 +515,11 @@ static void
 desktop_directory_changed_callback (gpointer data)
 {
     update_desktop_directory (CAJA_DESKTOP_DIRECTORY (data));
-    caja_directory_force_reload (CAJA_DIRECTORY (data));
+    baul_directory_force_reload (CAJA_DIRECTORY (data));
 }
 
 static void
-caja_desktop_directory_init (CajaDesktopDirectory *desktop)
+baul_desktop_directory_init (CajaDesktopDirectory *desktop)
 {
     desktop->details = g_new0 (CajaDesktopDirectoryDetails, 1);
 
@@ -531,13 +531,13 @@ caja_desktop_directory_init (CajaDesktopDirectory *desktop)
 
     update_desktop_directory (CAJA_DESKTOP_DIRECTORY (desktop));
 
-    g_signal_connect_swapped (caja_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+    g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
                               G_CALLBACK(desktop_directory_changed_callback),
                               desktop);
 }
 
 static void
-caja_desktop_directory_class_init (CajaDesktopDirectoryClass *class)
+baul_desktop_directory_class_init (CajaDesktopDirectoryClass *class)
 {
     CajaDirectoryClass *directory_class;
 

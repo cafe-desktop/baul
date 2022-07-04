@@ -27,7 +27,7 @@
  *
  */
 
-/* caja-location-bar.c - Location bar for Caja
+/* baul-location-bar.c - Location bar for Caja
  */
 
 #include <config.h>
@@ -44,14 +44,14 @@
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-string.h>
 
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-entry.h>
-#include <libcaja-private/caja-icon-dnd.h>
-#include <libcaja-private/caja-clipboard.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-entry.h>
+#include <libbaul-private/baul-icon-dnd.h>
+#include <libbaul-private/baul-clipboard.h>
 
-#include "caja-location-entry.h"
-#include "caja-window-private.h"
-#include "caja-window.h"
+#include "baul-location-entry.h"
+#include "baul-window-private.h"
+#include "baul-window.h"
 
 struct CajaLocationEntryDetails
 {
@@ -68,11 +68,11 @@ struct CajaLocationEntryDetails
     CajaLocationEntryAction secondary_action;
 };
 
-static void  caja_location_entry_class_init       (CajaLocationEntryClass *class);
-static void  caja_location_entry_init             (CajaLocationEntry      *entry);
+static void  baul_location_entry_class_init       (CajaLocationEntryClass *class);
+static void  baul_location_entry_init             (CajaLocationEntry      *entry);
 
 EEL_CLASS_BOILERPLATE (CajaLocationEntry,
-                       caja_location_entry,
+                       baul_location_entry,
                        CAJA_TYPE_ENTRY)
 
 /* routine that performs the tab expansion.  Extract the directory name and
@@ -310,7 +310,7 @@ destroy (GtkWidget *object)
 }
 
 static void
-caja_location_entry_text_changed (CajaLocationEntry *entry,
+baul_location_entry_text_changed (CajaLocationEntry *entry,
                                   GParamSpec            *pspec)
 {
     if (entry->details->setting_special_text)
@@ -322,7 +322,7 @@ caja_location_entry_text_changed (CajaLocationEntry *entry,
 }
 
 static void
-caja_location_entry_icon_release (GtkEntry *gentry,
+baul_location_entry_icon_release (GtkEntry *gentry,
                                   GtkEntryIconPosition position,
                                   GdkEvent *event,
                                   gpointer unused)
@@ -341,7 +341,7 @@ caja_location_entry_icon_release (GtkEntry *gentry,
 }
 
 static gboolean
-caja_location_entry_focus_in (GtkWidget     *widget,
+baul_location_entry_focus_in (GtkWidget     *widget,
                               GdkEventFocus *event)
 {
     CajaLocationEntry *entry = CAJA_LOCATION_ENTRY (widget);
@@ -357,7 +357,7 @@ caja_location_entry_focus_in (GtkWidget     *widget,
 }
 
 static void
-caja_location_entry_activate (GtkEntry *entry)
+baul_location_entry_activate (GtkEntry *entry)
 {
     CajaLocationEntry *loc_entry;
     const gchar *entry_text;
@@ -387,30 +387,30 @@ caja_location_entry_activate (GtkEntry *entry)
 }
 
 static void
-caja_location_entry_class_init (CajaLocationEntryClass *class)
+baul_location_entry_class_init (CajaLocationEntryClass *class)
 {
-    GTK_WIDGET_CLASS (class)->focus_in_event = caja_location_entry_focus_in;
+    GTK_WIDGET_CLASS (class)->focus_in_event = baul_location_entry_focus_in;
 
     GTK_WIDGET_CLASS (class)->destroy = destroy;
 
     G_OBJECT_CLASS (class)->finalize = finalize;
 
-    GTK_ENTRY_CLASS (class)->activate = caja_location_entry_activate;
+    GTK_ENTRY_CLASS (class)->activate = baul_location_entry_activate;
 }
 
 void
-caja_location_entry_update_current_location (CajaLocationEntry *entry,
+baul_location_entry_update_current_location (CajaLocationEntry *entry,
         const char *location)
 {
     g_free (entry->details->current_directory);
     entry->details->current_directory = g_strdup (location);
 
-    caja_entry_set_text (CAJA_ENTRY (entry), location);
+    baul_entry_set_text (CAJA_ENTRY (entry), location);
     set_position_and_selection_to_end (GTK_EDITABLE (entry));
 }
 
 void
-caja_location_entry_set_secondary_action (CajaLocationEntry *entry,
+baul_location_entry_set_secondary_action (CajaLocationEntry *entry,
         CajaLocationEntryAction secondary_action)
 {
     if (entry->details->secondary_action == secondary_action)
@@ -436,38 +436,38 @@ caja_location_entry_set_secondary_action (CajaLocationEntry *entry,
 }
 
 static void
-caja_location_entry_init (CajaLocationEntry *entry)
+baul_location_entry_init (CajaLocationEntry *entry)
 {
     GtkStyleContext *context;
 
     context = gtk_widget_get_style_context (GTK_WIDGET (entry));
-    gtk_style_context_add_class (context, "caja-location-entry");
+    gtk_style_context_add_class (context, "baul-location-entry");
 
     entry->details = g_new0 (CajaLocationEntryDetails, 1);
 
     entry->details->completer = g_filename_completer_new ();
     g_filename_completer_set_dirs_only (entry->details->completer, TRUE);
 
-    caja_location_entry_set_secondary_action (entry,
+    baul_location_entry_set_secondary_action (entry,
             CAJA_LOCATION_ENTRY_ACTION_CLEAR);
 
-    caja_entry_set_special_tab_handling (CAJA_ENTRY (entry), TRUE);
+    baul_entry_set_special_tab_handling (CAJA_ENTRY (entry), TRUE);
 
     g_signal_connect (entry, "event_after",
                       G_CALLBACK (editable_event_after_callback), entry);
 
     g_signal_connect (entry, "notify::text",
-                      G_CALLBACK (caja_location_entry_text_changed), NULL);
+                      G_CALLBACK (baul_location_entry_text_changed), NULL);
 
     g_signal_connect (entry, "icon-release",
-                      G_CALLBACK (caja_location_entry_icon_release), NULL);
+                      G_CALLBACK (baul_location_entry_icon_release), NULL);
 
     g_signal_connect (entry->details->completer, "got_completion_data",
                       G_CALLBACK (got_completion_data_callback), entry);
 }
 
 GtkWidget *
-caja_location_entry_new (void)
+baul_location_entry_new (void)
 {
     GtkWidget *entry;
 
@@ -477,7 +477,7 @@ caja_location_entry_new (void)
 }
 
 void
-caja_location_entry_set_special_text (CajaLocationEntry *entry,
+baul_location_entry_set_special_text (CajaLocationEntry *entry,
                                       const char            *special_text)
 {
     entry->details->has_special_text = TRUE;

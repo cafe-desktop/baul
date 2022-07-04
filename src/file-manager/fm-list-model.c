@@ -36,8 +36,8 @@
 
 #include <eel/eel-graphic-effects.h>
 
-#include <libcaja-private/caja-dnd.h>
-#include <libcaja-private/caja-global-preferences.h>
+#include <libbaul-private/baul-dnd.h>
+#include <libbaul-private/baul-global-preferences.h>
 
 #include "fm-list-model.h"
 
@@ -125,7 +125,7 @@ static GtkTargetList *drag_target_list = NULL;
 static void
 file_entry_free (FileEntry *file_entry)
 {
-    caja_file_unref (file_entry->file);
+    baul_file_unref (file_entry->file);
     if (file_entry->reverse_map)
     {
         g_hash_table_destroy (file_entry->reverse_map);
@@ -133,7 +133,7 @@ file_entry_free (FileEntry *file_entry)
     }
     if (file_entry->subdirectory != NULL)
     {
-        caja_directory_unref (file_entry->subdirectory);
+        baul_directory_unref (file_entry->subdirectory);
     }
     if (file_entry->files != NULL)
     {
@@ -322,14 +322,14 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
     case FM_LIST_MODEL_LARGE_ICON_COLUMN:
     case FM_LIST_MODEL_LARGER_ICON_COLUMN:
     case FM_LIST_MODEL_LARGEST_ICON_COLUMN:
-        if (!g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_SHOW_ICONS_IN_LIST_VIEW)) {
+        if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_ICONS_IN_LIST_VIEW)) {
             cairo_surface_t *surface;
             int icon_size;
 
             g_value_init (value, CAIRO_GOBJECT_TYPE_SURFACE);
 
             zoom_level = fm_list_model_get_zoom_level_from_column_id (column);
-            icon_size = caja_get_icon_size_for_zoom_level (zoom_level);
+            icon_size = baul_get_icon_size_for_zoom_level (zoom_level);
 
             surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, icon_size, icon_size);
             g_value_take_boxed (value, surface);
@@ -351,7 +351,7 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
             const char *icon_name;
 
             zoom_level = fm_list_model_get_zoom_level_from_column_id (column);
-            icon_size = caja_get_icon_size_for_zoom_level (zoom_level);
+            icon_size = baul_get_icon_size_for_zoom_level (zoom_level);
             icon_scale = fm_list_model_get_icon_scale (model);
 
             flags = CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS |
@@ -380,22 +380,22 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
                 }
             }
 
-            gicon = caja_file_get_gicon (file, flags);
+            gicon = baul_file_get_gicon (file, flags);
 
             /* render emblems with GEmblemedIcon */
-            parent_file = caja_file_get_parent (file);
+            parent_file = baul_file_get_parent (file);
             i = 0;
             emblems_to_ignore[i++] = CAJA_FILE_EMBLEM_NAME_TRASH;
             if (parent_file) {
-            	if (!caja_file_can_write (parent_file)) {
+            	if (!baul_file_can_write (parent_file)) {
                     emblems_to_ignore[i++] = CAJA_FILE_EMBLEM_NAME_CANT_WRITE;
             	}
-            	caja_file_unref (parent_file);
+            	baul_file_unref (parent_file);
             }
             emblems_to_ignore[i++] = NULL;
 
             emblem = NULL;
-            emblem_icons = caja_file_get_emblem_icons (file,
+            emblem_icons = baul_file_get_emblem_icons (file,
             					       emblems_to_ignore);
 
             if (emblem_icons != NULL) {
@@ -422,21 +422,21 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
             	gicon = emblemed_icon;
             }
 
-            icon_info = caja_file_get_icon (file, icon_size, icon_scale, flags);
-            icon_name = caja_icon_info_get_used_name (icon_info);
+            icon_info = baul_file_get_icon (file, icon_size, icon_scale, flags);
+            icon_name = baul_icon_info_get_used_name (icon_info);
 
             if (icon_name != NULL) {
                 g_object_unref (icon_info);
-                icon_info = caja_icon_info_lookup (gicon, icon_size, icon_scale);
+                icon_info = baul_icon_info_lookup (gicon, icon_size, icon_scale);
             }
-            icon = caja_icon_info_get_pixbuf_at_size (icon_info, icon_size);
+            icon = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
 
             g_object_unref (icon_info);
             g_object_unref (gicon);
 
             if (model->details->highlight_files != NULL &&
                     g_list_find_custom (model->details->highlight_files,
-                                        file, (GCompareFunc) caja_file_compare_location))
+                                        file, (GCompareFunc) baul_file_compare_location))
             {
                 rendered_icon = eel_create_spotlight_pixbuf (icon);
 
@@ -455,24 +455,24 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
     case FM_LIST_MODEL_FILE_NAME_IS_EDITABLE_COLUMN:
         g_value_init (value, G_TYPE_BOOLEAN);
 
-        g_value_set_boolean (value, file != NULL && caja_file_can_rename (file));
+        g_value_set_boolean (value, file != NULL && baul_file_can_rename (file));
         break;
     default:
         if (column >= FM_LIST_MODEL_NUM_COLUMNS || column < FM_LIST_MODEL_NUM_COLUMNS + model->details->columns->len)
         {
-            CajaColumn *caja_column;
+            CajaColumn *baul_column;
             GQuark attribute;
-            caja_column = model->details->columns->pdata[column - FM_LIST_MODEL_NUM_COLUMNS];
+            baul_column = model->details->columns->pdata[column - FM_LIST_MODEL_NUM_COLUMNS];
 
             g_value_init (value, G_TYPE_STRING);
-            g_object_get (caja_column,
+            g_object_get (baul_column,
                           "attribute_q", &attribute,
                           NULL);
             if (file != NULL)
             {
                 char *str;
 
-                str = caja_file_get_string_attribute_with_default_q (file,
+                str = baul_file_get_string_attribute_with_default_q (file,
                         attribute);
                 g_value_take_string (value, str);
             }
@@ -773,7 +773,7 @@ fm_list_model_file_entry_compare_func (gconstpointer a,
 
     if (file_entry1->file != NULL && file_entry2->file != NULL)
     {
-        result = caja_file_compare_for_sort_by_attribute_q (file_entry1->file, file_entry2->file,
+        result = baul_file_compare_for_sort_by_attribute_q (file_entry1->file, file_entry2->file,
                  model->details->sort_attribute,
                  model->details->sort_directories_first,
                  (model->details->order == GTK_SORT_DESCENDING));
@@ -797,7 +797,7 @@ fm_list_model_compare_func (FMListModel *model,
 {
     int result;
 
-    result = caja_file_compare_for_sort_by_attribute_q (file1, file2,
+    result = baul_file_compare_for_sort_by_attribute_q (file1, file2,
              model->details->sort_attribute,
              model->details->sort_directories_first,
              (model->details->order == GTK_SORT_DESCENDING));
@@ -977,7 +977,7 @@ each_path_get_data_binder (CajaDragEachSelectedItemDataGet data_get,
              column,
              &cell_area);
 
-            uri = caja_file_get_uri (file);
+            uri = baul_file_get_uri (file);
 
             (*data_get) (uri,
                          0,
@@ -987,7 +987,7 @@ each_path_get_data_binder (CajaDragEachSelectedItemDataGet data_get,
 
             g_free (uri);
 
-            caja_file_unref (file);
+            baul_file_unref (file);
         }
 
         gtk_tree_path_free (path);
@@ -1017,7 +1017,7 @@ fm_list_model_multi_drag_data_get (EggTreeMultiDragSource *drag_source,
                               gtk_selection_data_get_target (selection_data),
                               &target_info))
     {
-        caja_drag_drag_data_get (NULL,
+        baul_drag_drag_data_get (NULL,
                                  NULL,
                                  selection_data,
                                  target_info,
@@ -1089,7 +1089,7 @@ fm_list_model_add_file (FMListModel *model, CajaFile *file,
     }
 
     file_entry = g_new0 (FileEntry, 1);
-    file_entry->file = caja_file_ref (file);
+    file_entry->file = baul_file_ref (file);
     file_entry->parent = NULL;
     file_entry->subdirectory = NULL;
     file_entry->files = NULL;
@@ -1143,7 +1143,7 @@ fm_list_model_add_file (FMListModel *model, CajaFile *file,
         gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
     }
 
-    if (caja_file_is_directory (file))
+    if (baul_file_is_directory (file))
     {
         file_entry->files = g_sequence_new ((GDestroyNotify)file_entry_free);
 
@@ -1421,12 +1421,12 @@ fm_list_model_load_subdirectory (FMListModel *model, GtkTreePath *path, CajaDire
         return FALSE;
     }
 
-    subdirectory = caja_directory_get_for_file (file_entry->file);
+    subdirectory = baul_directory_get_for_file (file_entry->file);
 
     if (g_hash_table_lookup (model->details->directory_reverse_map,
                              subdirectory) != NULL)
     {
-        caja_directory_unref (subdirectory);
+        baul_directory_unref (subdirectory);
         g_warning ("Already in directory_reverse_map, failing\n");
         return FALSE;
     }
@@ -1437,7 +1437,7 @@ fm_list_model_load_subdirectory (FMListModel *model, GtkTreePath *path, CajaDire
     file_entry->reverse_map = g_hash_table_new (g_direct_hash, g_direct_equal);
 
     /* Return a ref too */
-    caja_directory_ref (subdirectory);
+    baul_directory_ref (subdirectory);
     *directory = subdirectory;
 
     return TRUE;
@@ -1488,7 +1488,7 @@ fm_list_model_unload_subdirectory (FMListModel *model, GtkTreeIter *iter)
     /* actually unload */
     g_hash_table_remove (model->details->directory_reverse_map,
                          file_entry->subdirectory);
-    caja_directory_unref (file_entry->subdirectory);
+    baul_directory_unref (file_entry->subdirectory);
     file_entry->subdirectory = NULL;
 
     g_assert (g_hash_table_size (file_entry->reverse_map) == 0);
@@ -1702,7 +1702,7 @@ fm_list_model_finalize (GObject *object)
 
     if (model->details->highlight_files != NULL)
     {
-        caja_file_list_free (model->details->highlight_files);
+        baul_file_list_free (model->details->highlight_files);
         model->details->highlight_files = NULL;
     }
 
@@ -1813,7 +1813,7 @@ fm_list_model_subdirectory_done_loading (FMListModel *model, CajaDirectory *dire
     /* Only swap loading -> empty if we saw no files yet at "done",
      * otherwise, toggle loading at first added file to the model.
      */
-    if (!caja_directory_is_not_empty (directory) &&
+    if (!baul_directory_is_not_empty (directory) &&
             g_sequence_get_length (files) == 1)
     {
         FileEntry *dummy_entry;
@@ -1869,13 +1869,13 @@ fm_list_model_set_highlight_for_files (FMListModel *model,
     {
         g_list_foreach (model->details->highlight_files,
                         refresh_row, model);
-        caja_file_list_free (model->details->highlight_files);
+        baul_file_list_free (model->details->highlight_files);
         model->details->highlight_files = NULL;
     }
 
     if (files != NULL)
     {
-        model->details->highlight_files = caja_file_list_copy (files);
+        model->details->highlight_files = baul_file_list_copy (files);
         g_list_foreach (model->details->highlight_files,
                         refresh_row, model);
 

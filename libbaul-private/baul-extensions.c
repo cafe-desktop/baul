@@ -1,5 +1,5 @@
 /*
- *  caja-extension.c - extension management functions
+ *  baul-extension.c - extension management functions
  *
  *  Copyright (C) 2014 MATE Desktop.
  *
@@ -21,17 +21,17 @@
  *  Author: Alexander van der Meij <alexandervdm@gliese.me>
  */
 
-#include "caja-extensions.h"
+#include "baul-extensions.h"
 
-#include "caja-global-preferences.h"
-#include "caja-module.h"
-#include "caja-debug-log.h"
+#include "baul-global-preferences.h"
+#include "baul-module.h"
+#include "baul-debug-log.h"
 
 #include <string.h>
 
 #define CAJA_EXTENSION_GROUP "Caja Extension"
 
-static GList *caja_extensions = NULL;
+static GList *baul_extensions = NULL;
 
 
 static Extension *
@@ -54,7 +54,7 @@ extension_new (gchar *filename, gboolean state, gboolean python, GObject *module
     ext->module = module;
 
     extension_file = g_key_file_new ();
-    extension_filename = g_strdup_printf(CAJA_DATADIR "/extensions/%s.caja-extension", filename);
+    extension_filename = g_strdup_printf(CAJA_DATADIR "/extensions/%s.baul-extension", filename);
     if (g_key_file_load_from_file (extension_file, extension_filename, G_KEY_FILE_NONE, &error))
     {
         ext->name = g_key_file_get_locale_string (extension_file, CAJA_EXTENSION_GROUP, "Name", NULL, NULL);
@@ -68,7 +68,7 @@ extension_new (gchar *filename, gboolean state, gboolean python, GObject *module
     }
     else
     {
-        caja_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Error loading keys from file: %s\n", error->message);
+        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Error loading keys from file: %s\n", error->message);
         g_error_free (error);
     }
     g_free (extension_filename);
@@ -76,7 +76,7 @@ extension_new (gchar *filename, gboolean state, gboolean python, GObject *module
     if (python)
     {
         ext->name = g_strconcat("Python: ", filename, NULL);
-        ext->description = "Python-caja extension";
+        ext->description = "Python-baul extension";
     }
 
     return ext;
@@ -90,7 +90,7 @@ gsettings_key_has_value (const gchar *value)
     gchar **list;
     gint i;
 
-    list = g_settings_get_strv (caja_extension_preferences,
+    list = g_settings_get_strv (baul_extension_preferences,
                                 CAJA_PREFERENCES_DISABLED_EXTENSIONS);
 
     if (list != NULL)
@@ -116,7 +116,7 @@ gsettings_append_to_list (const char *value)
     gint size;
     gboolean retval;
 
-    current = g_settings_get_strv (caja_extension_preferences,
+    current = g_settings_get_strv (baul_extension_preferences,
                                    CAJA_PREFERENCES_DISABLED_EXTENSIONS);
 
     for (size = 0; current[size] != NULL; size++);
@@ -129,7 +129,7 @@ gsettings_append_to_list (const char *value)
     new[size - 2] = g_strdup (value);
     new[size - 1] = NULL;
 
-    retval = g_settings_set_strv (caja_extension_preferences,
+    retval = g_settings_set_strv (baul_extension_preferences,
                                   CAJA_PREFERENCES_DISABLED_EXTENSIONS,
                                  (const gchar **) new);
 
@@ -145,7 +145,7 @@ gsettings_remove_from_list (const char *value)
     gint i;
     gboolean retval;
 
-    current = g_settings_get_strv (caja_extension_preferences,
+    current = g_settings_get_strv (baul_extension_preferences,
                                    CAJA_PREFERENCES_DISABLED_EXTENSIONS);
 
     array = g_array_new (TRUE, TRUE, sizeof (gchar *));
@@ -156,7 +156,7 @@ gsettings_remove_from_list (const char *value)
             array = g_array_append_val (array, current[i]);
     }
 
-    retval = g_settings_set_strv (caja_extension_preferences,
+    retval = g_settings_set_strv (baul_extension_preferences,
                                   CAJA_PREFERENCES_DISABLED_EXTENSIONS,
                                  (const gchar **) array->data);
 
@@ -168,21 +168,21 @@ gsettings_remove_from_list (const char *value)
 /* functions related to the extension management */
 
 static gboolean
-caja_extension_get_state (const gchar *extname)
+baul_extension_get_state (const gchar *extname)
 {
     return !gsettings_key_has_value (extname);
 }
 
 GList *
-caja_extensions_get_for_type (GType type)
+baul_extensions_get_for_type (GType type)
 {
     GList *l;
     GList *ret = NULL;
 
-    for (l = caja_extensions; l != NULL; l = l->next)
+    for (l = baul_extensions; l != NULL; l = l->next)
     {
         Extension *ext = l->data;
-        ext->state = caja_extension_get_state (ext->filename);
+        ext->state = baul_extension_get_state (ext->filename);
         if (ext->state) // only load enabled extensions
         {
             if (G_TYPE_CHECK_INSTANCE_TYPE (G_OBJECT (ext->module), type))
@@ -197,31 +197,31 @@ caja_extensions_get_for_type (GType type)
 }
 
 GList *
-caja_extensions_get_list (void)
+baul_extensions_get_list (void)
 {
-    return caja_extensions;
+    return baul_extensions;
 }
 
 void
-caja_extension_register (gchar *filename, GObject *module)
+baul_extension_register (gchar *filename, GObject *module)
 {
     gboolean ext_state = TRUE; // new extensions are enabled by default.
     gboolean ext_python = FALSE;
     gchar *ext_filename;
 
     ext_filename = g_strndup (filename, strlen(filename) - 3);
-    ext_state = caja_extension_get_state (ext_filename);
+    ext_state = baul_extension_get_state (ext_filename);
 
     if (g_str_has_suffix (filename, ".py")) {
         ext_python = TRUE;
     }
 
     Extension *ext = extension_new (ext_filename, ext_state, ext_python, module);
-    caja_extensions = g_list_append (caja_extensions, ext);
+    baul_extensions = g_list_append (baul_extensions, ext);
 }
 
 gboolean
-caja_extension_set_state (Extension *ext, gboolean new_state)
+baul_extension_set_state (Extension *ext, gboolean new_state)
 {
     if (ext)
     {

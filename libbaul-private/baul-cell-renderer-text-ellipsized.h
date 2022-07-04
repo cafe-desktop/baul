@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-cell-renderer-text-ellipsized.c: Cell renderer for text which
+   baul-cell-renderer-text-ellipsized.c: Cell renderer for text which
    will use pango ellipsization but deactivate it temporarily for the size
    calculation to get the size based on the actual text length.
 
@@ -29,7 +29,7 @@
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED caja_cell_renderer_text_ellipsized_get_type()
+#define CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED baul_cell_renderer_text_ellipsized_get_type()
 #define CAJA_CELL_RENDERER_TEXT_ELLIPSIZED(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, CajaCellRendererTextEllipsized))
 #define CAJA_CELL_RENDERER_TEXT_ELLIPSIZED_CLASS(klass) \
@@ -55,7 +55,7 @@ struct _CajaCellRendererTextEllipsizedClass
     GtkCellRendererTextClass parent_class;
 };
 
-GType		 caja_cell_renderer_text_ellipsized_get_type (void);
-GtkCellRenderer *caja_cell_renderer_text_ellipsized_new      (void);
+GType		 baul_cell_renderer_text_ellipsized_get_type (void);
+GtkCellRenderer *baul_cell_renderer_text_ellipsized_new      (void);
 
 #endif /* CAJA_CELL_RENDERER_TEXT_ELLIPSIZED_H */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-search-directory.h: Subclass of CajaDirectory to implement
+   baul-search-directory.h: Subclass of CajaDirectory to implement
    a virtual directory consisting of the search directory and the search
    icons
 
@@ -25,10 +25,10 @@
 #ifndef CAJA_SEARCH_DIRECTORY_H
 #define CAJA_SEARCH_DIRECTORY_H
 
-#include "caja-directory.h"
-#include "caja-query.h"
+#include "baul-directory.h"
+#include "baul-query.h"
 
-#define CAJA_TYPE_SEARCH_DIRECTORY caja_search_directory_get_type()
+#define CAJA_TYPE_SEARCH_DIRECTORY baul_search_directory_get_type()
 #define CAJA_SEARCH_DIRECTORY(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_DIRECTORY, CajaSearchDirectory))
 #define CAJA_SEARCH_DIRECTORY_CLASS(klass) \
@@ -53,21 +53,21 @@ typedef struct
     CajaDirectoryClass parent_slot;
 } CajaSearchDirectoryClass;
 
-GType   caja_search_directory_get_type             (void);
+GType   baul_search_directory_get_type             (void);
 
-char   *caja_search_directory_generate_new_uri     (void);
+char   *baul_search_directory_generate_new_uri     (void);
 
-CajaSearchDirectory *caja_search_directory_new_from_saved_search (const char *uri);
+CajaSearchDirectory *baul_search_directory_new_from_saved_search (const char *uri);
 
-gboolean       caja_search_directory_is_saved_search (CajaSearchDirectory *search);
-gboolean       caja_search_directory_is_modified     (CajaSearchDirectory *search);
-gboolean       caja_search_directory_is_indexed      (CajaSearchDirectory *search);
-void           caja_search_directory_save_search     (CajaSearchDirectory *search);
-void           caja_search_directory_save_to_file    (CajaSearchDirectory *search,
+gboolean       baul_search_directory_is_saved_search (CajaSearchDirectory *search);
+gboolean       baul_search_directory_is_modified     (CajaSearchDirectory *search);
+gboolean       baul_search_directory_is_indexed      (CajaSearchDirectory *search);
+void           baul_search_directory_save_search     (CajaSearchDirectory *search);
+void           baul_search_directory_save_to_file    (CajaSearchDirectory *search,
         const char              *save_file_uri);
 
-CajaQuery *caja_search_directory_get_query       (CajaSearchDirectory *search);
-void           caja_search_directory_set_query       (CajaSearchDirectory *search,
+CajaQuery *baul_search_directory_get_query       (CajaSearchDirectory *search);
+void           baul_search_directory_set_query       (CajaSearchDirectory *search,
         CajaQuery           *query);
 
 #endif /* CAJA_SEARCH_DIRECTORY_H */

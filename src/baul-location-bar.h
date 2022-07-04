@@ -24,7 +24,7 @@
  *         Ettore Perazzoli <ettore@gnu.org>
  */
 
-/* caja-location-bar.h - Location bar for Caja
+/* baul-location-bar.h - Location bar for Caja
  */
 
 #ifndef CAJA_LOCATION_BAR_H
@@ -32,12 +32,12 @@
 
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-entry.h>
+#include <libbaul-private/baul-entry.h>
 
-#include "caja-navigation-window.h"
-#include "caja-navigation-window-pane.h"
+#include "baul-navigation-window.h"
+#include "baul-navigation-window-pane.h"
 
-#define CAJA_TYPE_LOCATION_BAR caja_location_bar_get_type()
+#define CAJA_TYPE_LOCATION_BAR baul_location_bar_get_type()
 #define CAJA_LOCATION_BAR(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_LOCATION_BAR, CajaLocationBar))
 #define CAJA_LOCATION_BAR_CLASS(klass) \
@@ -65,14 +65,14 @@ typedef struct
     void         (* cancel)           (CajaLocationBar *bar);
 } CajaLocationBarClass;
 
-GType      caja_location_bar_get_type     	(void);
-GtkWidget* caja_location_bar_new          	(CajaNavigationWindowPane *pane);
-void       caja_location_bar_set_active     (CajaLocationBar *location_bar,
+GType      baul_location_bar_get_type     	(void);
+GtkWidget* baul_location_bar_new          	(CajaNavigationWindowPane *pane);
+void       baul_location_bar_set_active     (CajaLocationBar *location_bar,
         gboolean is_active);
-CajaEntry * caja_location_bar_get_entry (CajaLocationBar *location_bar);
+CajaEntry * baul_location_bar_get_entry (CajaLocationBar *location_bar);
 
-void    caja_location_bar_activate         (CajaLocationBar *bar);
-void    caja_location_bar_set_location     (CajaLocationBar *bar,
+void    baul_location_bar_activate         (CajaLocationBar *bar);
+void    baul_location_bar_set_location     (CajaLocationBar *bar,
                                             const char      *location);
 
 #endif /* CAJA_LOCATION_BAR_H */

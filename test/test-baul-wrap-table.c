@@ -1,8 +1,8 @@
 #include <eel/eel-wrap-table.h>
 #include <eel/eel-labeled-image.h>
 #include <eel/eel-vfs-extensions.h>
-#include <libcaja-private/caja-customization-data.h>
-#include <libcaja-private/caja-icon-info.h>
+#include <libbaul-private/baul-customization-data.h>
+#include <libbaul-private/baul-icon-info.h>
 
 #include "test.h"
 
@@ -53,12 +53,12 @@ main (int argc, char* argv[])
 #endif
 
 
-	/* Use caja_customization to make the emblem widgets */
-	customization_data = caja_customization_data_new ("emblems", TRUE,
+	/* Use baul_customization to make the emblem widgets */
+	customization_data = baul_customization_data_new ("emblems", TRUE,
 							      CAJA_ICON_SIZE_SMALL,
 							      CAJA_ICON_SIZE_SMALL);
 
-	while (caja_customization_data_get_next_element_for_display (customization_data,
+	while (baul_customization_data_get_next_element_for_display (customization_data,
 									 &emblem_name,
 									 &pixbuf,
 									 &label)) {
@@ -79,7 +79,7 @@ main (int argc, char* argv[])
 
 		/* Attach parameters and signal handler. */
 		g_object_set_data_full (G_OBJECT (button),
-					"caja_property_name",
+					"baul_property_name",
 					stripped_name,
 					(GDestroyNotify) g_free);
 

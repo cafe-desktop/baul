@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-file-operations.c - Caja file operations.
+/* baul-file-operations.c - Caja file operations.
 
    Copyright (C) 1999, 2000 Free Software Foundation
    Copyright (C) 2000, 2001 Eazel, Inc.
@@ -49,22 +49,22 @@
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include "caja-file-operations.h"
-#include "caja-debug-log.h"
-#include "caja-file-changes-queue.h"
-#include "caja-lib-self-check-functions.h"
-#include "caja-progress-info.h"
-#include "caja-file-changes-queue.h"
-#include "caja-file-private.h"
-#include "caja-desktop-icon-file.h"
-#include "caja-desktop-link-monitor.h"
-#include "caja-global-preferences.h"
-#include "caja-link.h"
-#include "caja-autorun.h"
-#include "caja-trash-monitor.h"
-#include "caja-file-utilities.h"
-#include "caja-file-conflict-dialog.h"
-#include "caja-undostack-manager.h"
+#include "baul-file-operations.h"
+#include "baul-debug-log.h"
+#include "baul-file-changes-queue.h"
+#include "baul-lib-self-check-functions.h"
+#include "baul-progress-info.h"
+#include "baul-file-changes-queue.h"
+#include "baul-file-private.h"
+#include "baul-desktop-icon-file.h"
+#include "baul-desktop-link-monitor.h"
+#include "baul-global-preferences.h"
+#include "baul-link.h"
+#include "baul-autorun.h"
+#include "baul-trash-monitor.h"
+#include "baul-file-utilities.h"
+#include "baul-file-conflict-dialog.h"
+#include "baul-undostack-manager.h"
 
 /* TODO: TESTING!!! */
 
@@ -195,12 +195,12 @@ typedef struct {
 NotifyNotification *unmount_notify;
 
 void
-caja_application_notify_unmount_show (const gchar *message)
+baul_application_notify_unmount_show (const gchar *message)
 {
     gchar **strings;
     strings = g_strsplit (message, "\n", 0);
 
-    if (!g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_SHOW_NOTIFICATIONS)) return;
+    if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_NOTIFICATIONS)) return;
 
     if (unmount_notify == NULL) {
         unmount_notify =
@@ -877,7 +877,7 @@ custom_size_to_string (char *format, va_list va)
 
 	size = va_arg (va, goffset);
 
-	if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_USE_IEC_UNITS))
+	if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_USE_IEC_UNITS))
 		return g_format_size_full (size, G_FORMAT_SIZE_IEC_UNITS);
 	else
 		return g_format_size(size);
@@ -965,8 +965,8 @@ init_common (gsize job_size,
 		common->parent_window = parent_window;
 		eel_add_weak_pointer (&common->parent_window);
 	}
-	common->progress = caja_progress_info_new (should_start, can_pause);
-	common->cancellable = caja_progress_info_get_cancellable (common->progress);
+	common->progress = baul_progress_info_new (should_start, can_pause);
+	common->cancellable = baul_progress_info_get_cancellable (common->progress);
 	common->time = g_timer_new ();
 	common->inhibit_cookie = -1;
 	common->screen_num = 0;
@@ -983,10 +983,10 @@ init_common (gsize job_size,
 static void
 finalize_common (CommonJob *common)
 {
-	caja_progress_info_finish (common->progress);
+	baul_progress_info_finish (common->progress);
 
 	if (common->inhibit_cookie != -1) {
-		caja_uninhibit_power_manager (common->inhibit_cookie);
+		baul_uninhibit_power_manager (common->inhibit_cookie);
 	}
 
 	common->inhibit_cookie = -1;
@@ -999,7 +999,7 @@ finalize_common (CommonJob *common)
 		g_hash_table_destroy (common->skip_readdir_error);
 	}
 	// Start UNDO-REDO
-	caja_undostack_manager_add_action (caja_undostack_manager_instance(),
+	baul_undostack_manager_add_action (baul_undostack_manager_instance(),
 		common->undo_redo_data);
 	// End UNDO-REDO
 	g_object_unref (common->progress);
@@ -1056,7 +1056,7 @@ static gboolean
 can_delete_without_confirm (GFile *file)
 {
 	if (g_file_has_uri_scheme (file, "burn") ||
-	    g_file_has_uri_scheme (file, "x-caja-desktop")) {
+	    g_file_has_uri_scheme (file, "x-baul-desktop")) {
 		return TRUE;
 	}
 
@@ -1189,12 +1189,12 @@ run_simple_dialog_va (CommonJob *job,
 	g_ptr_array_add (ptr_array, NULL);
 	data->button_titles = (const char **)g_ptr_array_free (ptr_array, FALSE);
 
-	caja_progress_info_pause (job->progress);
+	baul_progress_info_pause (job->progress);
 	g_io_scheduler_job_send_to_mainloop (job->io_job,
 					     do_run_simple_dialog,
 					     data,
 					     NULL);
-	caja_progress_info_resume (job->progress);
+	baul_progress_info_resume (job->progress);
 	res = data->result;
 
 	g_free (data->button_titles);
@@ -1309,7 +1309,7 @@ run_question (CommonJob *job,
 static void
 inhibit_power_manager (CommonJob *job, const char *message)
 {
-	job->inhibit_cookie = caja_inhibit_power_manager (message);
+	job->inhibit_cookie = baul_inhibit_power_manager (message);
 }
 
 static void
@@ -1326,7 +1326,7 @@ should_confirm_trash (void)
 	GSettings *prefs;
 	gboolean confirm_trash;
 
-	prefs = g_settings_new ("org.mate.caja.preferences");
+	prefs = g_settings_new ("org.mate.baul.preferences");
 	confirm_trash = g_settings_get_boolean (prefs, CAJA_PREFERENCES_CONFIRM_TRASH);
 	g_object_unref (prefs);
 	return confirm_trash;
@@ -1338,7 +1338,7 @@ should_confirm_move_to_trash (void)
 	GSettings *prefs;
 	gboolean confirm_trash;
 
-	prefs = g_settings_new ("org.mate.caja.preferences");
+	prefs = g_settings_new ("org.mate.baul.preferences");
 	confirm_trash = g_settings_get_boolean (prefs, CAJA_PREFERENCES_CONFIRM_MOVE_TO_TRASH);
 	g_object_unref (prefs);
 	return confirm_trash;
@@ -1526,13 +1526,13 @@ report_delete_progress (CommonJob *job,
 				    files_left),
 			  files_left);
 
-	caja_progress_info_take_status (job->progress,
+	baul_progress_info_take_status (job->progress,
 					    f (_("Deleting files")));
 
 	elapsed = g_timer_elapsed (job->time, NULL);
 	if (elapsed < SECONDS_NEEDED_FOR_RELIABLE_TRANSFER_RATE) {
 
-		caja_progress_info_set_details (job->progress, files_left_s);
+		baul_progress_info_set_details (job->progress, files_left_s);
 	} else {
 		char *details, *time_left_s;
 		int remaining_time;
@@ -1550,7 +1550,7 @@ report_delete_progress (CommonJob *job,
 				 remaining_time);
 
 		details = g_strconcat (files_left_s, "\xE2\x80\x94", time_left_s, NULL);
-		caja_progress_info_take_details (job->progress, details);
+		baul_progress_info_take_details (job->progress, details);
 
 		g_free (time_left_s);
 	}
@@ -1558,7 +1558,7 @@ report_delete_progress (CommonJob *job,
 	g_free (files_left_s);
 
 	if (source_info->num_files != 0) {
-		caja_progress_info_set_progress (job->progress, transfer_info->num_files, source_info->num_files);
+		baul_progress_info_set_progress (job->progress, transfer_info->num_files, source_info->num_files);
 	}
 }
 
@@ -1710,7 +1710,7 @@ delete_dir (CommonJob *job, GFile *dir,
 		skip:
 			g_error_free (error);
 		} else {
-			caja_file_changes_queue_file_removed (dir);
+			baul_file_changes_queue_file_removed (dir);
 			transfer_info->num_files ++;
 			report_delete_progress (job, source_info, transfer_info);
 			return;
@@ -1740,7 +1740,7 @@ delete_file (CommonJob *job, GFile *file,
 
 	error = NULL;
 	if (g_file_delete (file, job->cancellable, &error)) {
-		caja_file_changes_queue_file_removed (file);
+		baul_file_changes_queue_file_removed (file);
 		transfer_info->num_files ++;
 		report_delete_progress (job, source_info, transfer_info);
 		return;
@@ -1841,17 +1841,17 @@ report_trash_progress (CommonJob *job,
 
 	files_left = total_files - files_trashed;
 
-	caja_progress_info_take_status (job->progress,
+	baul_progress_info_take_status (job->progress,
 					    f (_("Moving files to trash")));
 
 	s = f (ngettext ("%'d file left to trash",
 			 "%'d files left to trash",
 			 files_left),
 	       files_left);
-	caja_progress_info_take_details (job->progress, s);
+	baul_progress_info_take_details (job->progress, s);
 
 	if (total_files != 0) {
-		caja_progress_info_set_progress (job->progress, files_trashed, total_files);
+		baul_progress_info_set_progress (job->progress, files_trashed, total_files);
 	}
 }
 
@@ -1882,13 +1882,13 @@ trash_files (CommonJob *job, GList *files, int *files_skipped)
 	for (l = files;
 	     l != NULL && !job_aborted (job);
 	     l = l->next) {
-        caja_progress_info_get_ready (job->progress);
+        baul_progress_info_get_ready (job->progress);
 
 		file = l->data;
 
 		error = NULL;
 
-		mtime = caja_undostack_manager_get_file_modification_time (file);
+		mtime = baul_undostack_manager_get_file_modification_time (file);
 
 		if (!g_file_trash (file, job->cancellable, &error)) {
 			if (job->skip_all_error) {
@@ -1935,10 +1935,10 @@ trash_files (CommonJob *job, GList *files, int *files_skipped)
 			g_error_free (error);
 			total_files--;
 		} else {
-			caja_file_changes_queue_file_removed (file);
+			baul_file_changes_queue_file_removed (file);
 
 			// Start UNDO-REDO
-			caja_undostack_manager_data_add_trashed_file (job->undo_redo_data, file, mtime);
+			baul_undostack_manager_data_add_trashed_file (job->undo_redo_data, file, mtime);
 			// End UNDO-REDO
 
 			files_trashed++;
@@ -1972,7 +1972,7 @@ delete_job_done (gpointer user_data)
 
 	finalize_common ((CommonJob *)job);
 
-	caja_file_changes_consume_changes (TRUE);
+	baul_file_changes_consume_changes (TRUE);
 
 	return FALSE;
 }
@@ -1997,7 +1997,7 @@ delete_job (GIOSchedulerJob *io_job,
 	common = (CommonJob *)job;
 	common->io_job = io_job;
 
-	caja_progress_info_start (job->common.progress);
+	baul_progress_info_start (job->common.progress);
 
 	to_trash_files = NULL;
 	to_delete_files = NULL;
@@ -2094,10 +2094,10 @@ trash_or_delete_internal (GList                  *files,
 	// Start UNDO-REDO
 	// FIXME: Disabled, because of missing mechanism to restore a file from trash in a clean way
 	// see https://www.mail-archive.com/nautilus-list@gnome.org/msg04664.html
-	if (try_trash && !caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
-		job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_MOVETOTRASH, g_list_length(files));
+	if (try_trash && !baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
+		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_MOVETOTRASH, g_list_length(files));
 		GFile* src_dir = g_file_get_parent (files->data);
-		caja_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
+		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 	}
 	// End UNDO-REDO
 
@@ -2109,7 +2109,7 @@ trash_or_delete_internal (GList                  *files,
 }
 
 void
-caja_file_operations_trash_or_delete (GList                  *files,
+baul_file_operations_trash_or_delete (GList                  *files,
 					  GtkWindow              *parent_window,
 					  CajaDeleteCallback  done_callback,
 					  gpointer                done_callback_data)
@@ -2120,7 +2120,7 @@ caja_file_operations_trash_or_delete (GList                  *files,
 }
 
 void
-caja_file_operations_delete (GList                  *files,
+baul_file_operations_delete (GList                  *files,
 				 GtkWindow              *parent_window,
 				 CajaDeleteCallback  done_callback,
 				 gpointer                done_callback_data)
@@ -2154,7 +2154,7 @@ unmount_mount_callback (GObject *source_object,
 		unmounted = g_mount_eject_with_operation_finish (G_MOUNT (source_object),
 								 res, &error);
 		if ((!error) || (unmounted == TRUE)){
-			caja_application_notify_unmount_show (_("It is now safe to remove the drive"));
+			baul_application_notify_unmount_show (_("It is now safe to remove the drive"));
 		}
 
 	} else {
@@ -2205,7 +2205,7 @@ do_unmount (UnmountData *data)
 					      unmount_mount_callback,
 					      data);
 
-		caja_application_notify_unmount_show (_("Writing data to the drive -- do not unplug"));
+		baul_application_notify_unmount_show (_("Writing data to the drive -- do not unplug"));
 
 	} else {
 		g_mount_unmount_with_operation (data->mount,
@@ -2367,7 +2367,7 @@ prompt_empty_trash (GtkWindow *parent_window)
 }
 
 void
-caja_file_operations_unmount_mount_full (GtkWindow                      *parent_window,
+baul_file_operations_unmount_mount_full (GtkWindow                      *parent_window,
 					     GMount                         *mount,
 					     gboolean                        eject,
 					     gboolean                        check_trash,
@@ -2421,12 +2421,12 @@ caja_file_operations_unmount_mount_full (GtkWindow                      *parent_
 }
 
 void
-caja_file_operations_unmount_mount (GtkWindow                      *parent_window,
+baul_file_operations_unmount_mount (GtkWindow                      *parent_window,
 					GMount                         *mount,
 					gboolean                        eject,
 					gboolean                        check_trash)
 {
-	caja_file_operations_unmount_mount_full (parent_window, mount, eject,
+	baul_file_operations_unmount_mount_full (parent_window, mount, eject,
 						     check_trash, NULL, NULL);
 }
 
@@ -2452,7 +2452,7 @@ volume_mount_cb (GObject *source_object,
 	GError *error;
 
 	error = NULL;
-	caja_allow_autorun_for_volume_finish (G_VOLUME (source_object));
+	baul_allow_autorun_for_volume_finish (G_VOLUME (source_object));
 	if (!g_volume_mount_finish (G_VOLUME (source_object), res, &error)) {
 		if (error->code != G_IO_ERROR_FAILED_HANDLED) {
 			char *name;
@@ -2490,16 +2490,16 @@ volume_mount_cb (GObject *source_object,
 
 
 void
-caja_file_operations_mount_volume (GtkWindow *parent_window,
+baul_file_operations_mount_volume (GtkWindow *parent_window,
 				       GVolume *volume,
 				       gboolean allow_autorun)
 {
-	caja_file_operations_mount_volume_full (parent_window, volume,
+	baul_file_operations_mount_volume_full (parent_window, volume,
 						    allow_autorun, NULL, NULL);
 }
 
 void
-caja_file_operations_mount_volume_full (GtkWindow *parent_window,
+baul_file_operations_mount_volume_full (GtkWindow *parent_window,
 					    GVolume *volume,
 					    gboolean allow_autorun,
 					    CajaMountCallback mount_callback,
@@ -2524,7 +2524,7 @@ caja_file_operations_mount_volume_full (GtkWindow *parent_window,
 			   mount_callback_data_object);
 
 	if (allow_autorun)
-		caja_allow_autorun_for_volume (volume);
+		baul_allow_autorun_for_volume (volume);
 	g_volume_mount (volume, 0, mount_op, NULL, volume_mount_cb, mount_op);
 }
 
@@ -2562,8 +2562,8 @@ report_count_progress (CommonJob *job,
 		break;
 	}
 
-	caja_progress_info_take_details (job->progress, s);
-	caja_progress_info_pulse_progress (job->progress);
+	baul_progress_info_take_details (job->progress, s);
+	baul_progress_info_pulse_progress (job->progress);
 }
 
 static void
@@ -3029,21 +3029,21 @@ report_copy_progress (CopyMoveJob *copy_job,
 
 		if (source_info->num_files == 1) {
 			if (copy_job->destination != NULL) {
-				caja_progress_info_take_status (job->progress,
+				baul_progress_info_take_status (job->progress,
 								    f (is_move ?
 								       _("Moving \"%B\" to \"%B\""):
 								       _("Copying \"%B\" to \"%B\""),
 								       (GFile *)copy_job->files->data,
 								       copy_job->destination));
 			} else {
-				caja_progress_info_take_status (job->progress,
+				baul_progress_info_take_status (job->progress,
 								    f (_("Duplicating \"%B\""),
 								       (GFile *)copy_job->files->data));
 			}
 		} else if (copy_job->files != NULL &&
 			   copy_job->files->next == NULL) {
 			if (copy_job->destination != NULL) {
-				caja_progress_info_take_status (job->progress,
+				baul_progress_info_take_status (job->progress,
 								    f (is_move?
 								       ngettext ("Moving %'d file (in \"%B\") to \"%B\"",
 										 "Moving %'d files (in \"%B\") to \"%B\"",
@@ -3056,7 +3056,7 @@ report_copy_progress (CopyMoveJob *copy_job,
 								       (GFile *)copy_job->files->data,
 								       copy_job->destination));
 			} else {
-				caja_progress_info_take_status (job->progress,
+				baul_progress_info_take_status (job->progress,
 								    f (ngettext ("Duplicating %'d file (in \"%B\")",
 										 "Duplicating %'d files (in \"%B\")",
 										 files_left),
@@ -3065,7 +3065,7 @@ report_copy_progress (CopyMoveJob *copy_job,
 			}
 		} else {
 			if (copy_job->destination != NULL) {
-				caja_progress_info_take_status (job->progress,
+				baul_progress_info_take_status (job->progress,
 								    f (is_move?
 								       ngettext ("Moving %'d file to \"%B\"",
 										 "Moving %'d files to \"%B\"",
@@ -3076,7 +3076,7 @@ report_copy_progress (CopyMoveJob *copy_job,
 										 files_left),
 								       files_left, copy_job->destination));
 			} else {
-				caja_progress_info_take_status (job->progress,
+				baul_progress_info_take_status (job->progress,
 								    f (ngettext ("Duplicating %'d file",
 										 "Duplicating %'d files",
 										 files_left),
@@ -3098,7 +3098,7 @@ report_copy_progress (CopyMoveJob *copy_job,
 		char *s;
 		/* Translators: %S will expand to a size like "2 bytes" or "3 MB", so something like "4 kb of 4 MB" */
 		s = f (_("%S of %S"), transfer_info->num_bytes, total_size);
-		caja_progress_info_take_details (job->progress, s);
+		baul_progress_info_take_details (job->progress, s);
 	} else {
 		int remaining_time;
 		char *s;
@@ -3116,10 +3116,10 @@ report_copy_progress (CopyMoveJob *copy_job,
 		       transfer_info->num_bytes, total_size,
 		       remaining_time,
 		       (goffset)transfer_rate);
-		caja_progress_info_take_details (job->progress, s);
+		baul_progress_info_take_details (job->progress, s);
 	}
 
-	caja_progress_info_set_progress (job->progress, transfer_info->num_bytes, total_size);
+	baul_progress_info_set_progress (job->progress, transfer_info->num_bytes, total_size);
 }
 
 static int
@@ -3530,9 +3530,9 @@ create_dest_dir (CommonJob *job,
 		return CREATE_DEST_DIR_FAILED;
 	}
 	// Start UNDO-REDO
-	caja_undostack_manager_data_add_origin_target_pair (job->undo_redo_data, src, *dest);
+	baul_undostack_manager_data_add_origin_target_pair (job->undo_redo_data, src, *dest);
 	// End UNDO-REDO
-	caja_file_changes_queue_file_added (*dest);
+	baul_file_changes_queue_file_added (*dest);
 	return CREATE_DEST_DIR_SUCCESS;
 }
 
@@ -3612,7 +3612,7 @@ copy_move_directory (CopyMoveJob *copy_job,
 		nextinfo = g_file_enumerator_next_file (enumerator, job->cancellable, skip_error?NULL:&error);
 		while (!job_aborted (job) &&
 		       (info = nextinfo) != NULL) {
-			caja_progress_info_get_ready (job->progress);
+			baul_progress_info_get_ready (job->progress);
 
 			nextinfo = g_file_enumerator_next_file (enumerator, job->cancellable, skip_error?NULL:&error);
 			src_file = g_file_get_child (src,
@@ -3889,7 +3889,7 @@ remove_target_recursively (CommonJob *job,
 
 		return FALSE;
 	}
-	caja_file_changes_queue_file_removed (file);
+	baul_file_changes_queue_file_removed (file);
 
 	return TRUE;
 
@@ -4008,7 +4008,7 @@ is_trusted_desktop_file (GFile *file,
 	if (g_file_info_get_file_type (info) == G_FILE_TYPE_REGULAR &&
 	    !g_file_info_get_attribute_boolean (info,
 						G_FILE_ATTRIBUTE_ACCESS_CAN_EXECUTE) &&
-	    caja_is_in_system_dir (file)) {
+	    baul_is_in_system_dir (file)) {
 		res = TRUE;
 	}
 	g_object_unref (info);
@@ -4037,7 +4037,7 @@ do_run_conflict_dialog (gpointer _data)
 	GtkWidget *dialog;
 	int response;
 
-	dialog = caja_file_conflict_dialog_new (data->parent,
+	dialog = baul_file_conflict_dialog_new (data->parent,
 						    data->src,
 						    data->dest,
 						    data->dest_dir);
@@ -4045,11 +4045,11 @@ do_run_conflict_dialog (gpointer _data)
 
 	if (response == CONFLICT_RESPONSE_RENAME) {
 		data->resp_data->new_name =
-			caja_file_conflict_dialog_get_new_name (CAJA_FILE_CONFLICT_DIALOG (dialog));
+			baul_file_conflict_dialog_get_new_name (CAJA_FILE_CONFLICT_DIALOG (dialog));
 	} else if (response != GTK_RESPONSE_CANCEL ||
 		   response != GTK_RESPONSE_NONE) {
 		   data->resp_data->apply_to_all =
-			   caja_file_conflict_dialog_get_apply_to_all
+			   baul_file_conflict_dialog_get_apply_to_all
 				(CAJA_FILE_CONFLICT_DIALOG (dialog));
 	}
 
@@ -4081,12 +4081,12 @@ run_conflict_dialog (CommonJob *job,
 	resp_data->new_name = NULL;
 	data->resp_data = resp_data;
 
-	caja_progress_info_pause (job->progress);
+	baul_progress_info_pause (job->progress);
 	g_io_scheduler_job_send_to_mainloop (job->io_job,
 					     do_run_conflict_dialog,
 					     data,
 					     NULL);
-	caja_progress_info_resume (job->progress);
+	baul_progress_info_resume (job->progress);
 
 	g_slice_free (ConflictDialogData, data);
 
@@ -4255,7 +4255,7 @@ copy_move_file (CopyMoveJob *copy_job,
 
 	if (!is_dir(src) && last_item)
 		/* this is the last file for this operation, cannot pause anymore */
-		caja_progress_info_disable_pause (job->progress);
+		baul_progress_info_disable_pause (job->progress);
 
 	if (copy_job->is_move) {
 		res = g_file_move (src, dest,
@@ -4286,17 +4286,17 @@ copy_move_file (CopyMoveJob *copy_job,
 
 		if (debuting_files) {
 			if (position) {
-				caja_file_changes_queue_schedule_position_set (dest, *position, job->screen_num);
+				baul_file_changes_queue_schedule_position_set (dest, *position, job->screen_num);
 			} else {
-				caja_file_changes_queue_schedule_position_remove (dest);
+				baul_file_changes_queue_schedule_position_remove (dest);
 			}
 
 			g_hash_table_replace (debuting_files, g_object_ref (dest), GINT_TO_POINTER (TRUE));
 		}
 		if (copy_job->is_move) {
-			caja_file_changes_queue_file_moved (src, dest);
+			baul_file_changes_queue_file_moved (src, dest);
 		} else {
-			caja_file_changes_queue_file_added (dest);
+			baul_file_changes_queue_file_added (dest);
 		}
 
 		/* If copying a trusted desktop file to the desktop,
@@ -4311,7 +4311,7 @@ copy_move_file (CopyMoveJob *copy_job,
 		}
 
 		// Start UNDO-REDO
-		caja_undostack_manager_data_add_origin_target_pair (job->undo_redo_data, src, dest);
+		baul_undostack_manager_data_add_origin_target_pair (job->undo_redo_data, src, dest);
 		// End UNDO-REDO
 
 		g_object_unref (dest);
@@ -4469,7 +4469,7 @@ copy_move_file (CopyMoveJob *copy_job,
 				g_error_free (error);
 				error = NULL;
 			}
-			caja_file_changes_queue_file_removed (dest);
+			baul_file_changes_queue_file_removed (dest);
 		}
 
 		if (is_merge) {
@@ -4580,7 +4580,7 @@ copy_files (CopyMoveJob *job,
 	for (l = job->files;
 	     l != NULL && !job_aborted (common);
 	     l = l->next) {
-		caja_progress_info_get_ready (common->progress);
+		baul_progress_info_get_ready (common->progress);
 
 		src = l->data;
 
@@ -4643,7 +4643,7 @@ copy_job_done (gpointer user_data)
 
 	finalize_common ((CommonJob *)job);
 
-	caja_file_changes_consume_changes (TRUE);
+	baul_file_changes_consume_changes (TRUE);
 	return FALSE;
 }
 
@@ -4665,7 +4665,7 @@ copy_job (GIOSchedulerJob *io_job,
 
 	dest_fs_id = NULL;
 
-	caja_progress_info_start (job->common.progress);
+	baul_progress_info_start (job->common.progress);
 
 	scan_sources (job->files,
 		      &source_info,
@@ -4731,7 +4731,7 @@ contains_multiple_items (GList *files)
 }
 
 void
-caja_file_operations_copy (GList *files,
+baul_file_operations_copy (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
 			       GtkWindow *parent_window,
@@ -4741,7 +4741,7 @@ caja_file_operations_copy (GList *files,
 	CopyMoveJob *job;
 
 	job = op_job_new (CopyMoveJob, parent_window, FALSE,  contains_multiple_items (files));
-	job->desktop_location = caja_get_desktop_location ();
+	job->desktop_location = baul_get_desktop_location ();
 	job->done_callback = done_callback;
 	job->done_callback_data = done_callback_data;
 	job->files = g_list_copy_deep (files, (GCopyFunc) g_object_ref, NULL);
@@ -4758,12 +4758,12 @@ caja_file_operations_copy (GList *files,
 	inhibit_power_manager ((CommonJob *)job, _("Copying Files"));
 
 	// Start UNDO-REDO
-	if (!caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
-		job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_COPY, g_list_length(files));
+	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
+		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_COPY, g_list_length(files));
 		GFile* src_dir = g_file_get_parent (files->data);
-		caja_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
+		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 		g_object_ref (target_dir);
-		caja_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, target_dir);
+		baul_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, target_dir);
 	}
 	// End UNDO-REDO
 
@@ -4781,16 +4781,16 @@ report_move_progress (CopyMoveJob *move_job, int total, int left)
 
 	job = (CommonJob *)move_job;
 
-	caja_progress_info_take_status (job->progress,
+	baul_progress_info_take_status (job->progress,
 					    f (_("Preparing to Move to \"%B\""),
 					       move_job->destination));
 
-	caja_progress_info_take_details (job->progress,
+	baul_progress_info_take_details (job->progress,
 					     f (ngettext ("Preparing to move %'d file",
 							  "Preparing to move %'d files",
 							  left), left));
 
-	caja_progress_info_pulse_progress (job->progress);
+	baul_progress_info_pulse_progress (job->progress);
 }
 
 typedef struct {
@@ -4898,7 +4898,7 @@ move_file_prepare (CopyMoveJob *move_job,
 	}
 
  retry:
-    caja_progress_info_get_ready (job->progress);
+    baul_progress_info_get_ready (job->progress);
 
 	flags = G_FILE_COPY_NOFOLLOW_SYMLINKS | G_FILE_COPY_NO_FALLBACK_FOR_MOVE;
 	if (overwrite) {
@@ -4917,16 +4917,16 @@ move_file_prepare (CopyMoveJob *move_job,
 			g_hash_table_replace (debuting_files, g_object_ref (dest), GINT_TO_POINTER (TRUE));
 		}
 
-		caja_file_changes_queue_file_moved (src, dest);
+		baul_file_changes_queue_file_moved (src, dest);
 
 		if (position) {
-			caja_file_changes_queue_schedule_position_set (dest, *position, job->screen_num);
+			baul_file_changes_queue_schedule_position_set (dest, *position, job->screen_num);
 		} else {
-			caja_file_changes_queue_schedule_position_remove (dest);
+			baul_file_changes_queue_schedule_position_remove (dest);
 		}
 
 		// Start UNDO-REDO
-		caja_undostack_manager_data_add_origin_target_pair (job->undo_redo_data, src, dest);
+		baul_undostack_manager_data_add_origin_target_pair (job->undo_redo_data, src, dest);
 		// End UNDO-REDO
 
 		return;
@@ -5074,7 +5074,7 @@ move_files_prepare (CopyMoveJob *job,
 
 	total = left = g_list_length (job->files);
 
-	caja_progress_info_get_ready (common->progress);
+	baul_progress_info_get_ready (common->progress);
 	report_move_progress (job, total, left);
 
 	i = 0;
@@ -5086,7 +5086,7 @@ move_files_prepare (CopyMoveJob *job,
 		last_item = (!l->next) && (!is_dir(src)) && (!(*fallbacks));
 		if (last_item)
 			/* this is the last file and there are no fallbacks to process, cannot pause anymore */
-			caja_progress_info_disable_pause (common->progress);
+			baul_progress_info_disable_pause (common->progress);
 
 		if (i < job->n_icon_positions) {
 			point = &job->icon_positions[i];
@@ -5140,7 +5140,7 @@ move_files (CopyMoveJob *job,
 	for (l = fallbacks;
 	     l != NULL && !job_aborted (common);
 	     l = l->next) {
-		caja_progress_info_get_ready (common->progress);
+		baul_progress_info_get_ready (common->progress);
 
 		fallback = l->data;
 		src = fallback->file;
@@ -5187,7 +5187,7 @@ move_job_done (gpointer user_data)
 
 	finalize_common ((CommonJob *)job);
 
-	caja_file_changes_consume_changes (TRUE);
+	baul_file_changes_consume_changes (TRUE);
 	return FALSE;
 }
 
@@ -5214,7 +5214,7 @@ move_job (GIOSchedulerJob *io_job,
 
 	fallbacks = NULL;
 
-	caja_progress_info_start (job->common.progress);
+	baul_progress_info_start (job->common.progress);
 
 	verify_destination (&job->common,
 			    job->destination,
@@ -5274,7 +5274,7 @@ move_job (GIOSchedulerJob *io_job,
 }
 
 void
-caja_file_operations_move (GList *files,
+baul_file_operations_move (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
 			       GtkWindow *parent_window,
@@ -5301,16 +5301,16 @@ caja_file_operations_move (GList *files,
 	inhibit_power_manager ((CommonJob *)job, _("Moving Files"));
 
 	// Start UNDO-REDO
-	if (!caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
+	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
 		if (g_file_has_uri_scheme (g_list_first(files)->data, "trash")) {
-			job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_RESTOREFROMTRASH, g_list_length(files));
+			job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_RESTOREFROMTRASH, g_list_length(files));
 		} else {
-			job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_MOVE, g_list_length(files));
+			job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_MOVE, g_list_length(files));
 		}
 		GFile* src_dir = g_file_get_parent (files->data);
-		caja_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
+		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 		g_object_ref (target_dir);
-		caja_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, target_dir);
+		baul_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, target_dir);
 	}
 	// End UNDO-REDO
 
@@ -5328,16 +5328,16 @@ report_link_progress (CopyMoveJob *link_job, int total, int left)
 
 	job = (CommonJob *)link_job;
 
-	caja_progress_info_take_status (job->progress,
+	baul_progress_info_take_status (job->progress,
 					    f (_("Creating links in \"%B\""),
 					       link_job->destination));
 
-	caja_progress_info_take_details (job->progress,
+	baul_progress_info_take_details (job->progress,
 					     f (ngettext ("Making link to %'d file",
 							  "Making links to %'d files",
 							  left), left));
 
-	caja_progress_info_set_progress (job->progress, left, total);
+	baul_progress_info_set_progress (job->progress, left, total);
 }
 
 static char *
@@ -5408,18 +5408,18 @@ link_file (CopyMoveJob *job,
 					      common->cancellable,
 					      &error)) {
 		// Start UNDO-REDO
-		caja_undostack_manager_data_add_origin_target_pair (common->undo_redo_data, src, dest);
+		baul_undostack_manager_data_add_origin_target_pair (common->undo_redo_data, src, dest);
 		// End UNDO-REDO
 		g_free (path);
 		if (debuting_files) {
 			g_hash_table_replace (debuting_files, g_object_ref (dest), GINT_TO_POINTER (TRUE));
 		}
 
-		caja_file_changes_queue_file_added (dest);
+		baul_file_changes_queue_file_added (dest);
 		if (position) {
-			caja_file_changes_queue_schedule_position_set (dest, *position, common->screen_num);
+			baul_file_changes_queue_schedule_position_set (dest, *position, common->screen_num);
 		} else {
-			caja_file_changes_queue_schedule_position_remove (dest);
+			baul_file_changes_queue_schedule_position_remove (dest);
 		}
 
 		g_object_unref (dest);
@@ -5521,7 +5521,7 @@ link_job_done (gpointer user_data)
 
 	finalize_common ((CommonJob *)job);
 
-	caja_file_changes_consume_changes (TRUE);
+	baul_file_changes_consume_changes (TRUE);
 	return FALSE;
 }
 
@@ -5545,7 +5545,7 @@ link_job (GIOSchedulerJob *io_job,
 
 	dest_fs_type = NULL;
 
-	caja_progress_info_start (job->common.progress);
+	baul_progress_info_start (job->common.progress);
 
 	verify_destination (&job->common,
 			    job->destination,
@@ -5563,7 +5563,7 @@ link_job (GIOSchedulerJob *io_job,
 	for (l = job->files;
 	     l != NULL && !job_aborted (common);
 	     l = l->next) {
-        caja_progress_info_get_ready (common->progress);
+        baul_progress_info_get_ready (common->progress);
 
 		src = l->data;
 
@@ -5594,7 +5594,7 @@ link_job (GIOSchedulerJob *io_job,
 }
 
 void
-caja_file_operations_link (GList *files,
+baul_file_operations_link (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
 			       GtkWindow *parent_window,
@@ -5618,12 +5618,12 @@ caja_file_operations_link (GList *files,
 	job->debuting_files = g_hash_table_new_full (g_file_hash, (GEqualFunc)g_file_equal, g_object_unref, NULL);
 
 	// Start UNDO-REDO
-	if (!caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
-		job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_CREATELINK, g_list_length(files));
+	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
+		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_CREATELINK, g_list_length(files));
 		GFile* src_dir = g_file_get_parent (files->data);
-		caja_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
+		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 		g_object_ref (target_dir);
-		caja_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, target_dir);
+		baul_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, target_dir);
 	}
 	// End UNDO-REDO
 
@@ -5636,7 +5636,7 @@ caja_file_operations_link (GList *files,
 
 
 void
-caja_file_operations_duplicate (GList *files,
+baul_file_operations_duplicate (GList *files,
 				    GArray *relative_item_points,
 				    GtkWindow *parent_window,
 				    CajaCopyCallback  done_callback,
@@ -5659,12 +5659,12 @@ caja_file_operations_duplicate (GList *files,
 	job->debuting_files = g_hash_table_new_full (g_file_hash, (GEqualFunc)g_file_equal, g_object_unref, NULL);
 
 	// Start UNDO-REDO
-	if (!caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
-		job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_DUPLICATE, g_list_length(files));
+	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
+		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_DUPLICATE, g_list_length(files));
 		GFile* src_dir = g_file_get_parent (files->data);
-		caja_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
+		baul_undostack_manager_data_set_src_dir (job->common.undo_redo_data, src_dir);
 		g_object_ref (src_dir);
-		caja_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, src_dir);
+		baul_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, src_dir);
 	}
 	// End UNDO-REDO
 
@@ -5705,9 +5705,9 @@ set_permissions_file (SetPermissionsJob *job,
 
 	common = (CommonJob *)job;
 
-	caja_progress_info_pulse_progress (common->progress);
+	baul_progress_info_pulse_progress (common->progress);
 
-	caja_progress_info_get_ready (common->progress);
+	baul_progress_info_get_ready (common->progress);
 
 	free_info = FALSE;
 	if (info == NULL) {
@@ -5737,7 +5737,7 @@ set_permissions_file (SetPermissionsJob *job,
 	    g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_UNIX_MODE)) {
 		current = g_file_info_get_attribute_uint32 (info, G_FILE_ATTRIBUTE_UNIX_MODE);
 		// Start UNDO-REDO
-		caja_undostack_manager_data_add_file_permissions(common->undo_redo_data, file, current);
+		baul_undostack_manager_data_add_file_permissions(common->undo_redo_data, file, current);
 		// End UNDO-REDO
 		current = (current & ~mask) | value;
 
@@ -5789,10 +5789,10 @@ set_permissions_job (GIOSchedulerJob *io_job,
 	common = (CommonJob *)job;
 	common->io_job = io_job;
 
-	caja_progress_info_set_status (common->progress,
+	baul_progress_info_set_status (common->progress,
 					   _("Setting permissions"));
 
-	caja_progress_info_start (job->common.progress);
+	baul_progress_info_start (job->common.progress);
 
 	set_permissions_file (job, job->file, NULL);
 
@@ -5807,7 +5807,7 @@ set_permissions_job (GIOSchedulerJob *io_job,
 
 
 void
-caja_file_set_permissions_recursive (const char *directory,
+baul_file_set_permissions_recursive (const char *directory,
 					 guint32         file_permissions,
 					 guint32         file_mask,
 					 guint32         dir_permissions,
@@ -5827,11 +5827,11 @@ caja_file_set_permissions_recursive (const char *directory,
 	job->done_callback_data = callback_data;
 
 	// Start UNDO-REDO
-	if (!caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
-		job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS, 1);
+	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
+		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS, 1);
 		g_object_ref (job->file);
-		caja_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, job->file);
-		caja_undostack_manager_data_set_recursive_permissions(job->common.undo_redo_data, file_permissions, file_mask, dir_permissions, dir_mask);
+		baul_undostack_manager_data_set_dest_dir (job->common.undo_redo_data, job->file);
+		baul_undostack_manager_data_set_recursive_permissions(job->common.undo_redo_data, file_permissions, file_mask, dir_permissions, dir_mask);
 	}
 	// End UNDO-REDO
 
@@ -5874,7 +5874,7 @@ callback_for_move_to_trash (GHashTable *debuting_uris,
 }
 
 void
-caja_file_operations_copy_move (const GList *item_uris,
+baul_file_operations_copy_move (const GList *item_uris,
 				    GArray *relative_item_points,
 				    const char *target_dir,
 				    GdkDragAction copy_action,
@@ -5927,12 +5927,12 @@ caja_file_operations_copy_move (const GList *item_uris,
 		if (target_dir == NULL ||
 		    (src_dir != NULL &&
 		     g_file_equal (src_dir, dest))) {
-			caja_file_operations_duplicate (locations,
+			baul_file_operations_duplicate (locations,
 							    relative_item_points,
 							    parent_window,
 							    done_callback, done_callback_data);
 		} else {
-			caja_file_operations_copy (locations,
+			baul_file_operations_copy (locations,
 						       relative_item_points,
 						       dest,
 						       parent_window,
@@ -5949,19 +5949,19 @@ caja_file_operations_copy_move (const GList *item_uris,
 			cb_data = g_slice_new0 (MoveTrashCBData);
 			cb_data->real_callback = done_callback;
 			cb_data->real_data = done_callback_data;
-			caja_file_operations_trash_or_delete (locations,
+			baul_file_operations_trash_or_delete (locations,
 								  parent_window,
 								  (CajaDeleteCallback) callback_for_move_to_trash,
 								  cb_data);
 		} else {
-			caja_file_operations_move (locations,
+			baul_file_operations_move (locations,
 						       relative_item_points,
 						       dest,
 						       parent_window,
 						       done_callback, done_callback_data);
 		}
 	} else {
-		caja_file_operations_link (locations,
+		baul_file_operations_link (locations,
 					       relative_item_points,
 					       dest,
 					       parent_window,
@@ -5996,7 +5996,7 @@ create_job_done (gpointer user_data)
 
 	finalize_common ((CommonJob *)job);
 
-	caja_file_changes_consume_changes (TRUE);
+	baul_file_changes_consume_changes (TRUE);
 	return FALSE;
 }
 
@@ -6026,7 +6026,7 @@ create_job (GIOSchedulerJob *io_job,
 	common = &job->common;
 	common->io_job = io_job;
 
-	caja_progress_info_start (job->common.progress);
+	baul_progress_info_start (job->common.progress);
 
 	handled_invalid_filename = FALSE;
 
@@ -6075,7 +6075,7 @@ create_job (GIOSchedulerJob *io_job,
 	count = 1;
 
  retry:
-    caja_progress_info_get_ready (common->progress);
+    baul_progress_info_get_ready (common->progress);
 
 	error = NULL;
 	if (job->make_dir) {
@@ -6084,7 +6084,7 @@ create_job (GIOSchedulerJob *io_job,
 					     &error);
 		// Start UNDO-REDO
 		if (res) {
-			caja_undostack_manager_data_set_create_data(common->undo_redo_data,
+			baul_undostack_manager_data_set_create_data(common->undo_redo_data,
 					g_file_get_uri(dest),
 					NULL);
 		}
@@ -6099,7 +6099,7 @@ create_job (GIOSchedulerJob *io_job,
 					   &error);
 			// Start UNDO-REDO
 			if (res) {
-				caja_undostack_manager_data_set_create_data(common->undo_redo_data,
+				baul_undostack_manager_data_set_create_data(common->undo_redo_data,
 						g_file_get_uri(dest),
 						g_file_get_uri(job->src));
 			}
@@ -6128,7 +6128,7 @@ create_job (GIOSchedulerJob *io_job,
 								     &error);
 					// Start UNDO-REDO
 					if (res) {
-						caja_undostack_manager_data_set_create_data(common->undo_redo_data,
+						baul_undostack_manager_data_set_create_data(common->undo_redo_data,
 								g_file_get_uri(dest),
 								g_strdup(data));
 					}
@@ -6145,11 +6145,11 @@ create_job (GIOSchedulerJob *io_job,
 
 	if (res) {
 		job->created_file = g_object_ref (dest);
-		caja_file_changes_queue_file_added (dest);
+		baul_file_changes_queue_file_added (dest);
 		if (job->has_position) {
-			caja_file_changes_queue_schedule_position_set (dest, job->position, common->screen_num);
+			baul_file_changes_queue_schedule_position_set (dest, job->position, common->screen_num);
 		} else {
-			caja_file_changes_queue_schedule_position_remove (dest);
+			baul_file_changes_queue_schedule_position_remove (dest);
 		}
 	} else {
 		g_assert (error != NULL);
@@ -6273,7 +6273,7 @@ create_job (GIOSchedulerJob *io_job,
 }
 
 void
-caja_file_operations_new_folder (GtkWidget *parent_view,
+baul_file_operations_new_folder (GtkWidget *parent_view,
 				     GdkPoint *target_point,
 				     const char *parent_dir,
 				     CajaCreateCallback done_callback,
@@ -6298,8 +6298,8 @@ caja_file_operations_new_folder (GtkWidget *parent_view,
 	}
 
 	// Start UNDO-REDO
-	if (!caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
-		job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEFOLDER, 1);
+	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
+		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEFOLDER, 1);
 	}
 	// End UNDO-REDO
 
@@ -6311,7 +6311,7 @@ caja_file_operations_new_folder (GtkWidget *parent_view,
 }
 
 void
-caja_file_operations_new_file_from_template (GtkWidget *parent_view,
+baul_file_operations_new_file_from_template (GtkWidget *parent_view,
 						 GdkPoint *target_point,
 						 const char *parent_dir,
 						 const char *target_filename,
@@ -6342,8 +6342,8 @@ caja_file_operations_new_file_from_template (GtkWidget *parent_view,
 	}
 
 	// Start UNDO-REDO
-	if (!caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
-		job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE, 1);
+	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
+		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE, 1);
 	}
 	// End UNDO-REDO
 
@@ -6355,7 +6355,7 @@ caja_file_operations_new_file_from_template (GtkWidget *parent_view,
 }
 
 void
-caja_file_operations_new_file (GtkWidget *parent_view,
+baul_file_operations_new_file (GtkWidget *parent_view,
 				   GdkPoint *target_point,
 				   const char *parent_dir,
 				   const char *target_filename,
@@ -6385,8 +6385,8 @@ caja_file_operations_new_file (GtkWidget *parent_view,
 	job->filename = g_strdup (target_filename);
 
 	// Start UNDO-REDO
-	if (!caja_undostack_manager_is_undo_redo(caja_undostack_manager_instance())) {
-		job->common.undo_redo_data = caja_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEEMPTYFILE, 1);
+	if (!baul_undostack_manager_is_undo_redo(baul_undostack_manager_instance())) {
+		job->common.undo_redo_data = baul_undostack_manager_data_new (CAJA_UNDOSTACK_CREATEEMPTYFILE, 1);
 	}
 	// End UNDO-REDO
 
@@ -6405,7 +6405,7 @@ delete_trash_file (CommonJob *job,
 		   gboolean del_file,
 		   gboolean del_children)
 {
-	caja_progress_info_get_ready (job->progress);
+	baul_progress_info_get_ready (job->progress);
 
 	if (job_aborted (job)) {
 		return;
@@ -6456,7 +6456,7 @@ empty_trash_job_done (gpointer user_data)
 		job->done_callback (job->done_callback_data);
 	}
 
-	caja_undostack_manager_trash_has_emptied(caja_undostack_manager_instance());
+	baul_undostack_manager_trash_has_emptied(baul_undostack_manager_instance());
 
 	finalize_common ((CommonJob *)job);
 	return FALSE;
@@ -6475,7 +6475,7 @@ empty_trash_job (GIOSchedulerJob *io_job,
 	common = (CommonJob *)job;
 	common->io_job = io_job;
 
-	caja_progress_info_start (job->common.progress);
+	baul_progress_info_start (job->common.progress);
 
 	if (job->should_confirm) {
 		confirmed = confirm_empty_trash (common);
@@ -6499,7 +6499,7 @@ empty_trash_job (GIOSchedulerJob *io_job,
 }
 
 void
-caja_file_operations_empty_trash (GtkWidget *parent_view)
+baul_file_operations_empty_trash (GtkWidget *parent_view)
 {
 	EmptyTrashJob *job;
 	GtkWindow *parent_window;
@@ -6554,7 +6554,7 @@ mark_desktop_file_trusted (CommonJob *common,
 	GFileInfo *info;
 
  retry:
-    caja_progress_info_get_ready (common->progress);
+    baul_progress_info_get_ready (common->progress);
 
 	error = NULL;
 	if (!g_file_load_contents (file,
@@ -6711,7 +6711,7 @@ mark_trusted_job (GIOSchedulerJob *io_job,
 	common = (CommonJob *)job;
 	common->io_job = io_job;
 
-	caja_progress_info_start (job->common.progress);
+	baul_progress_info_start (job->common.progress);
 
 	mark_desktop_file_trusted (common,
 				   cancellable,
@@ -6727,7 +6727,7 @@ mark_trusted_job (GIOSchedulerJob *io_job,
 }
 
 void
-caja_file_mark_desktop_file_trusted (GFile *file,
+baul_file_mark_desktop_file_trusted (GFile *file,
 					 GtkWindow *parent_window,
 					 gboolean interactive,
 					 CajaOpCallback done_callback,
@@ -6751,7 +6751,7 @@ caja_file_mark_desktop_file_trusted (GFile *file,
 #if !defined (CAJA_OMIT_SELF_CHECK)
 
 void
-caja_self_check_file_operations (void)
+baul_self_check_file_operations (void)
 {
 	setlocale (LC_MESSAGES, "C");
 

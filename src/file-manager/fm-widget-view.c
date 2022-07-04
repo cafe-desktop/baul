@@ -1,6 +1,6 @@
 /* vi: set sw=4 ts=4 wrap ai: */
 /*
- * fm-widget-view.c: This file is part of caja.
+ * fm-widget-view.c: This file is part of baul.
  *
  * Copyright (C) 2019 Wu Xiaotian <yetist@gmail.com>
  *
@@ -29,13 +29,13 @@
 #include <eel/eel-gtk-macros.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-view.h>
-#include <libcaja-private/caja-view-factory.h>
-#include <libcaja-private/caja-extensions.h>
-#include <libcaja-private/caja-module.h>
-#include <libcaja-private/caja-metadata.h>
-#include <libcaja-extension/caja-widget-view-provider.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-view.h>
+#include <libbaul-private/baul-view-factory.h>
+#include <libbaul-private/baul-extensions.h>
+#include <libbaul-private/baul-module.h>
+#include <libbaul-private/baul-metadata.h>
+#include <libbaul-extension/baul-widget-view-provider.h>
 
 #include "fm-widget-view.h"
 
@@ -63,9 +63,9 @@ fm_widget_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *d
     g_return_if_fail (FM_IS_WIDGET_VIEW(view));
     g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider));
 
-    file_dir = caja_directory_get_corresponding_file (directory);
-    caja_widget_view_provider_add_file (widget_view->provider, file, file_dir);
-    caja_file_unref (file_dir);
+    file_dir = baul_directory_get_corresponding_file (directory);
+    baul_widget_view_provider_add_file (widget_view->provider, file, file_dir);
+    baul_file_unref (file_dir);
 }
 
 static void
@@ -82,39 +82,39 @@ fm_widget_view_begin_loading (FMDirectoryView *view)
     widget_view = FM_WIDGET_VIEW (view);
 
     uri = fm_directory_view_get_uri (view);
-    file = caja_file_get_by_uri (uri);
-    mimetype = caja_file_get_mime_type (file);
+    file = baul_file_get_by_uri (uri);
+    mimetype = baul_file_get_mime_type (file);
 
-    providers = caja_extensions_get_for_type (CAJA_TYPE_WIDGET_VIEW_PROVIDER);
+    providers = baul_extensions_get_for_type (CAJA_TYPE_WIDGET_VIEW_PROVIDER);
     for (l = providers; l != NULL; l = l->next)
     {
         CajaWidgetViewProvider *provider;
 
         provider = CAJA_WIDGET_VIEW_PROVIDER (l->data);
-        if (caja_widget_view_provider_supports_uri (provider, uri,
-                                                    caja_file_get_file_type (file),
+        if (baul_widget_view_provider_supports_uri (provider, uri,
+                                                    baul_file_get_file_type (file),
                                                     mimetype)) {
             widget_view->provider = provider;
             break;
         }
     }
-    caja_file_unref (file);
+    baul_file_unref (file);
     g_free (mimetype);
-    caja_module_extension_list_free (providers);
+    baul_module_extension_list_free (providers);
 
     if (widget_view->provider == NULL) {
         g_free (uri);
         return;
     }
 
-    caja_widget_view_provider_set_location (widget_view->provider, uri);
+    baul_widget_view_provider_set_location (widget_view->provider, uri);
     g_free (uri);
 
-    widget = caja_widget_view_provider_get_widget (widget_view->provider);
+    widget = baul_widget_view_provider_get_widget (widget_view->provider);
     gtk_container_add (GTK_CONTAINER(widget_view), widget);
 
     window = fm_directory_view_get_containing_window (view);
-    caja_widget_view_provider_set_window (widget_view->provider, window);
+    baul_widget_view_provider_set_window (widget_view->provider, window);
 }
 
 static void
@@ -126,7 +126,7 @@ fm_widget_view_clear (FMDirectoryView *view)
     g_return_if_fail (FM_IS_WIDGET_VIEW(view));
     g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider));
 
-    caja_widget_view_provider_clear (widget_view->provider);
+    baul_widget_view_provider_clear (widget_view->provider);
 }
 
 static void
@@ -161,7 +161,7 @@ fm_widget_view_get_item_count (FMDirectoryView *view)
     g_return_val_if_fail (FM_IS_WIDGET_VIEW(view), 0);
     g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), 0);
 
-    return caja_widget_view_provider_get_item_count (widget_view->provider);
+    return baul_widget_view_provider_get_item_count (widget_view->provider);
 }
 
 static gboolean
@@ -173,7 +173,7 @@ fm_widget_view_is_empty (FMDirectoryView *view)
     g_return_val_if_fail (FM_IS_WIDGET_VIEW(view), TRUE);
     g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), TRUE);
 
-    return caja_widget_view_provider_get_item_count (widget_view->provider) == 0;
+    return baul_widget_view_provider_get_item_count (widget_view->provider) == 0;
 }
 
 static void
@@ -314,7 +314,7 @@ fm_widget_view_get_first_visible_file (CajaView *view)
     g_return_val_if_fail (FM_IS_WIDGET_VIEW(view), NULL);
     g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), NULL);
 
-    return caja_widget_view_provider_get_first_visible_file (widget_view->provider);
+    return baul_widget_view_provider_get_first_visible_file (widget_view->provider);
 }
 
 static void
@@ -421,18 +421,18 @@ fm_widget_view_supports_uri (const char *uri,
     GList *providers, *l;
     gboolean result = FALSE;
 
-    providers = caja_extensions_get_for_type (CAJA_TYPE_WIDGET_VIEW_PROVIDER);
+    providers = baul_extensions_get_for_type (CAJA_TYPE_WIDGET_VIEW_PROVIDER);
 
     for (l = providers; l != NULL; l = l->next)
     {
         CajaWidgetViewProvider *provider;
 
         provider = CAJA_WIDGET_VIEW_PROVIDER (l->data);
-        if (caja_widget_view_provider_supports_uri (provider, uri, file_type, mime_type)) {
+        if (baul_widget_view_provider_supports_uri (provider, uri, file_type, mime_type)) {
             result = TRUE;
         }
     }
-    caja_module_extension_list_free (providers);
+    baul_module_extension_list_free (providers);
 
     return result;
 }
@@ -458,5 +458,5 @@ fm_widget_view_register (void)
     fm_widget_view.startup_error_label = _(fm_widget_view.startup_error_label);
     fm_widget_view.display_location_label = _(fm_widget_view.display_location_label);
     fm_widget_view.single_view = TRUE;
-    caja_view_factory_register (&fm_widget_view);
+    baul_view_factory_register (&fm_widget_view);
 }

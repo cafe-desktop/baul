@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-search-engine.h>
+#include <libbaul-private/baul-search-engine.h>
 
 static void
 hits_added_cb (CajaSearchEngine *engine, GSList *hits)
@@ -37,7 +37,7 @@ main (int argc, char* argv[])
 
 	gtk_init (&argc, &argv);
 
-	engine = caja_search_engine_new ();
+	engine = baul_search_engine_new ();
 	g_signal_connect (engine, "hits-added",
 			  G_CALLBACK (hits_added_cb), NULL);
 	g_signal_connect (engine, "hits-subtracted",
@@ -45,12 +45,12 @@ main (int argc, char* argv[])
 	g_signal_connect (engine, "finished",
 			  G_CALLBACK (finished_cb), NULL);
 
-	query = caja_query_new ();
-	caja_query_set_text (query, "richard hult");
-	caja_search_engine_set_query (engine, query);
+	query = baul_query_new ();
+	baul_query_set_text (query, "richard hult");
+	baul_search_engine_set_query (engine, query);
 	g_object_unref (query);
 
-	caja_search_engine_start (engine);
+	baul_search_engine_start (engine);
 
 	gtk_main ();
 	return 0;

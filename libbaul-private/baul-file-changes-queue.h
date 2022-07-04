@@ -26,17 +26,17 @@
 #include <gdk/gdk.h>
 #include <gio/gio.h>
 
-void caja_file_changes_queue_file_added                      (GFile      *location);
-void caja_file_changes_queue_file_changed                    (GFile      *location);
-void caja_file_changes_queue_file_removed                    (GFile      *location);
-void caja_file_changes_queue_file_moved                      (GFile      *from,
+void baul_file_changes_queue_file_added                      (GFile      *location);
+void baul_file_changes_queue_file_changed                    (GFile      *location);
+void baul_file_changes_queue_file_removed                    (GFile      *location);
+void baul_file_changes_queue_file_moved                      (GFile      *from,
         GFile      *to);
-void caja_file_changes_queue_schedule_position_set           (GFile      *location,
+void baul_file_changes_queue_schedule_position_set           (GFile      *location,
         GdkPoint    point,
         int         screen);
-void caja_file_changes_queue_schedule_position_remove        (GFile      *location);
+void baul_file_changes_queue_schedule_position_remove        (GFile      *location);
 
-void caja_file_changes_consume_changes                       (gboolean    consume_all);
+void baul_file_changes_consume_changes                       (gboolean    consume_all);
 
 
 #endif /* CAJA_FILE_CHANGES_QUEUE_H */

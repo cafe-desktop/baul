@@ -20,12 +20,12 @@
 
 #include <eel/eel-vfs-extensions.h>
 
-#include "caja-recent.h"
+#include "baul-recent.h"
 
 #define DEFAULT_APP_EXEC "gio open %u"
 
 static GtkRecentManager *
-caja_recent_get_manager (void)
+baul_recent_get_manager (void)
 {
     static GtkRecentManager *manager = NULL;
 
@@ -38,13 +38,13 @@ caja_recent_get_manager (void)
 }
 
 void
-caja_recent_add_file (CajaFile *file,
+baul_recent_add_file (CajaFile *file,
                       GAppInfo *application)
 {
     GtkRecentData recent_data;
     char *uri;
 
-    uri = caja_file_get_uri (file);
+    uri = baul_file_get_uri (file);
 
     /* do not add trash:// etc */
     if (eel_uri_is_trash (uri)  ||
@@ -58,7 +58,7 @@ caja_recent_add_file (CajaFile *file,
     recent_data.display_name = NULL;
     recent_data.description = NULL;
 
-    recent_data.mime_type = caja_file_get_mime_type (file);
+    recent_data.mime_type = baul_file_get_mime_type (file);
     recent_data.app_name = g_strdup (g_get_application_name ());
 
     if (application != NULL)
@@ -69,7 +69,7 @@ caja_recent_add_file (CajaFile *file,
     recent_data.groups = NULL;
     recent_data.is_private = FALSE;
 
-    gtk_recent_manager_add_full (caja_recent_get_manager (),
+    gtk_recent_manager_add_full (baul_recent_get_manager (),
                                  uri, &recent_data);
 
     g_free (recent_data.mime_type);

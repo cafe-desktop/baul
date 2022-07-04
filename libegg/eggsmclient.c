@@ -358,7 +358,7 @@ egg_sm_client_get (void)
         /*FIXME
           Disabling when root/not in MATE in GtkApplication builds
           as egg_sm_client_set_mode must be called prior to start of main loop
-          to stop caja restart but this is diffcult in GtkApplication */
+          to stop baul restart but this is diffcult in GtkApplication */
 
 		if (geteuid () == 0 || !running_in_mate ()){
         global_client = g_object_new (EGG_TYPE_SM_CLIENT, NULL);

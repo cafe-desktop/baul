@@ -23,30 +23,30 @@
 #ifndef CAJA_FILE_QUEUE_H
 #define CAJA_FILE_QUEUE_H
 
-#include "caja-file.h"
+#include "baul-file.h"
 
 typedef struct CajaFileQueue CajaFileQueue;
 
-CajaFileQueue *caja_file_queue_new      (void);
-void               caja_file_queue_destroy  (CajaFileQueue *queue);
+CajaFileQueue *baul_file_queue_new      (void);
+void               baul_file_queue_destroy  (CajaFileQueue *queue);
 
 /* Add a file to the tail of the queue, unless it's already in the queue */
-void               caja_file_queue_enqueue  (CajaFileQueue *queue,
+void               baul_file_queue_enqueue  (CajaFileQueue *queue,
         CajaFile      *file);
 
 /* Return the file at the head of the queue after removing it from the
  * queue. This is dangerous unless you have another ref to the file,
  * since it will unref it.
  */
-CajaFile *     caja_file_queue_dequeue  (CajaFileQueue *queue);
+CajaFile *     baul_file_queue_dequeue  (CajaFileQueue *queue);
 
 /* Remove a file from an arbitrary point in the queue in constant time. */
-void               caja_file_queue_remove   (CajaFileQueue *queue,
+void               baul_file_queue_remove   (CajaFileQueue *queue,
         CajaFile      *file);
 
 /* Get the file at the head of the queue without removing or unrefing it. */
-CajaFile *     caja_file_queue_head     (CajaFileQueue *queue);
+CajaFile *     baul_file_queue_head     (CajaFileQueue *queue);
 
-gboolean           caja_file_queue_is_empty (CajaFileQueue *queue);
+gboolean           baul_file_queue_is_empty (CajaFileQueue *queue);
 
 #endif /* CAJA_FILE_CHANGES_QUEUE_H */

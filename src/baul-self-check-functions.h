@@ -22,12 +22,12 @@
  * Author: Darin Adler <darin@bentspoon.com>
  */
 
-/* caja-self-check-functions.h: Wrapper and prototypes for all self
+/* baul-self-check-functions.h: Wrapper and prototypes for all self
  * check functions in Caja proper.
  */
 
 
-void caja_run_self_checks (void);
+void baul_run_self_checks (void);
 
 /* Putting the prototypes for these self-check functions in each
    header file for the files they are defined in would make compiling

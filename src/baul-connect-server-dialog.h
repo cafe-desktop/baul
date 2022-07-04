@@ -27,10 +27,10 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#include "caja-window.h"
+#include "baul-window.h"
 
 #define CAJA_TYPE_CONNECT_SERVER_DIALOG\
-	(caja_connect_server_dialog_get_type ())
+	(baul_connect_server_dialog_get_type ())
 #define CAJA_CONNECT_SERVER_DIALOG(obj)\
         (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_CONNECT_SERVER_DIALOG,\
 				     CajaConnectServerDialog))
@@ -55,27 +55,27 @@ struct _CajaConnectServerDialogClass
     GtkDialogClass parent_class;
 };
 
-GType caja_connect_server_dialog_get_type (void);
+GType baul_connect_server_dialog_get_type (void);
 
-GtkWidget* caja_connect_server_dialog_new (CajaWindow *window);
+GtkWidget* baul_connect_server_dialog_new (CajaWindow *window);
 
-void caja_connect_server_dialog_display_location_async (CajaConnectServerDialog *self,
+void baul_connect_server_dialog_display_location_async (CajaConnectServerDialog *self,
 							    CajaApplication *application,
 							    GFile *location,
 							    GAsyncReadyCallback callback,
 							    gpointer user_data);
-gboolean caja_connect_server_dialog_display_location_finish (CajaConnectServerDialog *self,
+gboolean baul_connect_server_dialog_display_location_finish (CajaConnectServerDialog *self,
 								 GAsyncResult *result,
 								 GError **error);
 
-void caja_connect_server_dialog_fill_details_async (CajaConnectServerDialog *self,
+void baul_connect_server_dialog_fill_details_async (CajaConnectServerDialog *self,
 							GMountOperation *operation,
 							const gchar *default_user,
 							const gchar *default_domain,
 							GAskPasswordFlags flags,
 							GAsyncReadyCallback callback,
 							gpointer user_data);
-gboolean caja_connect_server_dialog_fill_details_finish (CajaConnectServerDialog *self,
+gboolean baul_connect_server_dialog_fill_details_finish (CajaConnectServerDialog *self,
 							     GAsyncResult *result);
 
 #endif /* CAJA_CONNECT_SERVER_DIALOG_H */

@@ -25,13 +25,13 @@
 
 #include <gio/gio.h>
 
-#include <libcaja-private/caja-global-preferences.h>
+#include <libbaul-private/baul-global-preferences.h>
 
-#include "caja-connect-server-dialog.h"
+#include "baul-connect-server-dialog.h"
 
 /* This file contains the glue for the calls from the connect to server dialog
- * to the main caja binary. A different version of this glue is in
- * caja-connect-server-dialog-main.c for the standalone version.
+ * to the main baul binary. A different version of this glue is in
+ * baul-connect-server-dialog-main.c for the standalone version.
  */
 
 static GSimpleAsyncResult *display_location_res = NULL;
@@ -52,7 +52,7 @@ window_go_to_cb (CajaWindow *window,
 }
 
 gboolean
-caja_connect_server_dialog_display_location_finish (CajaConnectServerDialog *self,
+baul_connect_server_dialog_display_location_finish (CajaConnectServerDialog *self,
 						    GAsyncResult *res,
 						    GError **error)
 {
@@ -64,7 +64,7 @@ caja_connect_server_dialog_display_location_finish (CajaConnectServerDialog *sel
 }
 
 void
-caja_connect_server_dialog_display_location_async (CajaConnectServerDialog *self,
+baul_connect_server_dialog_display_location_async (CajaConnectServerDialog *self,
     						   CajaApplication *application,
     						   GFile *location,
     						   GAsyncReadyCallback callback,
@@ -78,13 +78,13 @@ caja_connect_server_dialog_display_location_async (CajaConnectServerDialog *self
     display_location_res =
         g_simple_async_result_new (G_OBJECT (self),
         			   callback, user_data,
-        			   caja_connect_server_dialog_display_location_async);
+        			   baul_connect_server_dialog_display_location_async);
 
-    if (g_settings_get_boolean (caja_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
-        window = caja_application_create_navigation_window (application,
+    if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER)) {
+        window = baul_application_create_navigation_window (application,
         						    gtk_widget_get_screen (widget));
     } else {
-    	window = caja_application_get_spatial_window (application,
+    	window = baul_application_get_spatial_window (application,
     							  NULL,
     							  NULL,
     							  location,
@@ -92,6 +92,6 @@ caja_connect_server_dialog_display_location_async (CajaConnectServerDialog *self
     							  NULL);
     }
 
-    caja_window_go_to_full (window, location,
+    baul_window_go_to_full (window, location,
     			    window_go_to_cb, self);
 }

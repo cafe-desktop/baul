@@ -43,20 +43,20 @@
 #include <eel/eel-gtk-extensions.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include <libcaja-private/caja-desktop-icon-file.h>
-#include <libcaja-private/caja-directory-background.h>
-#include <libcaja-private/caja-directory-notify.h>
-#include <libcaja-private/caja-file-changes-queue.h>
-#include <libcaja-private/caja-file-operations.h>
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-ui-utilities.h>
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-view-factory.h>
-#include <libcaja-private/caja-link.h>
-#include <libcaja-private/caja-metadata.h>
-#include <libcaja-private/caja-monitor.h>
-#include <libcaja-private/caja-program-choosing.h>
-#include <libcaja-private/caja-trash-monitor.h>
+#include <libbaul-private/baul-desktop-icon-file.h>
+#include <libbaul-private/baul-directory-background.h>
+#include <libbaul-private/baul-directory-notify.h>
+#include <libbaul-private/baul-file-changes-queue.h>
+#include <libbaul-private/baul-file-operations.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-ui-utilities.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-view-factory.h>
+#include <libbaul-private/baul-link.h>
+#include <libbaul-private/baul-metadata.h>
+#include <libbaul-private/baul-monitor.h>
+#include <libbaul-private/baul-program-choosing.h>
+#include <libbaul-private/baul-trash-monitor.h>
 
 #include "fm-icon-container.h"
 #include "fm-desktop-icon-view.h"
@@ -98,7 +98,7 @@ static void
 desktop_directory_changed_callback (gpointer callback_data)
 {
     g_free (desktop_directory);
-    desktop_directory = caja_get_desktop_directory ();
+    desktop_directory = baul_get_desktop_directory ();
 }
 
 static CajaIconContainer *
@@ -144,7 +144,7 @@ icon_container_set_workarea (CajaIconContainer *icon_container,
         bottom = MAX (bottom, screen_height - height - y);
     }
 
-    caja_icon_container_set_margins (icon_container,
+    baul_icon_container_set_margins (icon_container,
                                      left, right, top, bottom);
 }
 
@@ -219,7 +219,7 @@ net_workarea_changed (FMDesktopIconView *icon_view,
             || format_returned != 32)
     {
         g_warning("Can not determine workarea, guessing at layout");
-        caja_icon_container_set_margins (icon_container,
+        baul_icon_container_set_margins (icon_container,
                                          0, 0, 0, 0);
     }
     else
@@ -280,22 +280,22 @@ fm_desktop_icon_view_dispose (GObject *object)
     ui_manager = fm_directory_view_get_ui_manager (FM_DIRECTORY_VIEW (icon_view));
     if (ui_manager != NULL)
     {
-        caja_ui_unmerge_ui (ui_manager,
+        baul_ui_unmerge_ui (ui_manager,
                             &icon_view->priv->desktop_merge_id,
                             &icon_view->priv->desktop_action_group);
     }
 
-    g_signal_handlers_disconnect_by_func (caja_icon_view_preferences,
+    g_signal_handlers_disconnect_by_func (baul_icon_view_preferences,
                                           default_zoom_level_changed,
                                           icon_view);
-    g_signal_handlers_disconnect_by_func (caja_desktop_preferences,
+    g_signal_handlers_disconnect_by_func (baul_desktop_preferences,
                                           font_changed_callback,
                                           icon_view);
 
     g_signal_handlers_disconnect_by_func (mate_lockdown_preferences,
                                           fm_directory_view_update_menus,
                                           icon_view);
-    g_signal_handlers_disconnect_by_func (caja_preferences,
+    g_signal_handlers_disconnect_by_func (baul_preferences,
                                           desktop_directory_changed_callback,
                                           NULL);
 
@@ -432,7 +432,7 @@ get_default_zoom_level (void)
     if (!auto_storage_added)
     {
         auto_storage_added = TRUE;
-        eel_g_settings_add_auto_enum (caja_icon_view_preferences,
+        eel_g_settings_add_auto_enum (baul_icon_view_preferences,
                                       CAJA_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
                                       (int *) &default_zoom_level);
     }
@@ -449,7 +449,7 @@ default_zoom_level_changed (gpointer user_data)
     desktop_icon_view = FM_DESKTOP_ICON_VIEW (user_data);
     new_level = get_default_zoom_level ();
 
-    caja_icon_container_set_zoom_level (get_icon_container (desktop_icon_view),
+    baul_icon_container_set_zoom_level (get_icon_container (desktop_icon_view),
                                         new_level);
 }
 
@@ -477,7 +477,7 @@ do_desktop_rescan (gpointer data)
 
     desktop_icon_view->priv->pending_rescan = TRUE;
 
-    caja_directory_force_reload (
+    baul_directory_force_reload (
         fm_directory_view_get_model (
             FM_DIRECTORY_VIEW (desktop_icon_view)));
     return TRUE;
@@ -537,9 +537,9 @@ fm_desktop_icon_view_update_icon_container_fonts (FMDesktopIconView *icon_view)
     icon_container = get_icon_container (icon_view);
     g_assert (icon_container != NULL);
 
-    font = g_settings_get_string (caja_desktop_preferences, CAJA_PREFERENCES_DESKTOP_FONT);
+    font = g_settings_get_string (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_FONT);
 
-    caja_icon_container_set_font (icon_container, font);
+    baul_icon_container_set_font (icon_container, font);
 
     g_free (font);
 }
@@ -555,7 +555,7 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 
     if (desktop_directory == NULL)
     {
-        g_signal_connect_swapped (caja_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+        g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
                                   G_CALLBACK(desktop_directory_changed_callback),
                                   NULL);
         desktop_directory_changed_callback (NULL);
@@ -563,22 +563,22 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 
     fm_icon_view_filter_by_screen (FM_ICON_VIEW (desktop_icon_view), TRUE);
     icon_container = get_icon_container (desktop_icon_view);
-    caja_icon_container_set_use_drop_shadows (icon_container, TRUE);
+    baul_icon_container_set_use_drop_shadows (icon_container, TRUE);
     fm_icon_container_set_sort_desktop (FM_ICON_CONTAINER (icon_container), TRUE);
 
     /* Do a reload on the desktop if we don't have FAM, a smarter
      * way to keep track of the items on the desktop.
      */
-    if (!caja_monitor_active ())
+    if (!baul_monitor_active ())
     {
         desktop_icon_view->priv->delayed_init_signal = g_signal_connect_object
                 (desktop_icon_view, "begin_loading",
                  G_CALLBACK (delayed_init), desktop_icon_view, 0);
     }
 
-    caja_icon_container_set_is_fixed_size (icon_container, TRUE);
-    caja_icon_container_set_is_desktop (icon_container, TRUE);
-    caja_icon_container_set_store_layout_timestamps (icon_container, TRUE);
+    baul_icon_container_set_is_fixed_size (icon_container, TRUE);
+    baul_icon_container_set_is_desktop (icon_container, TRUE);
+    baul_icon_container_set_store_layout_timestamps (icon_container, TRUE);
 
     /* Set allocation to be at 0, 0 */
     gtk_widget_get_allocation (GTK_WIDGET (icon_container), &allocation);
@@ -605,7 +605,7 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
                                         FALSE);
 
     /* Set our default layout mode */
-    caja_icon_container_set_layout_mode (icon_container,
+    baul_icon_container_set_layout_mode (icon_container,
                                          gtk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
                                          CAJA_ICON_LAYOUT_T_B_R_L :
                                          CAJA_ICON_LAYOUT_T_B_L_R);
@@ -619,12 +619,12 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 
     default_zoom_level_changed (desktop_icon_view);
 
-    g_signal_connect_swapped (caja_icon_view_preferences,
+    g_signal_connect_swapped (baul_icon_view_preferences,
                               "changed::" CAJA_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
                               G_CALLBACK (default_zoom_level_changed),
                               desktop_icon_view);
 
-    g_signal_connect_swapped (caja_desktop_preferences,
+    g_signal_connect_swapped (baul_desktop_preferences,
                               "changed::" CAJA_PREFERENCES_DESKTOP_FONT,
                               G_CALLBACK (font_changed_callback),
                               desktop_icon_view);
@@ -645,9 +645,9 @@ action_new_launcher_callback (GtkAction *action, gpointer data)
 
     g_assert (FM_DIRECTORY_VIEW (data));
 
-    desktop_directory = caja_get_desktop_directory ();
+    desktop_directory = baul_get_desktop_directory ();
 
-    caja_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (data)),
+    baul_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (data)),
                                           "mate-desktop-item-edit",
                                           "mate-desktop-item-edit",
                                           FALSE,
@@ -662,7 +662,7 @@ action_change_background_callback (GtkAction *action,
 {
     g_assert (FM_DIRECTORY_VIEW (data));
 
-    caja_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (data)),
+    baul_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (data)),
                                           _("Background"),
                                           "mate-appearance-properties",
                                           FALSE,
@@ -675,7 +675,7 @@ action_empty_trash_conditional_callback (GtkAction *action,
 {
     g_assert (FM_IS_DIRECTORY_VIEW (data));
 
-    caja_file_operations_empty_trash (GTK_WIDGET (data));
+    baul_file_operations_empty_trash (GTK_WIDGET (data));
 }
 
 static gboolean
@@ -693,10 +693,10 @@ trash_link_is_selection (FMDirectoryView *view)
     {
         CajaDesktopLink *link;
 
-        link = caja_desktop_icon_file_get_link (CAJA_DESKTOP_ICON_FILE (selection->data));
+        link = baul_desktop_icon_file_get_link (CAJA_DESKTOP_ICON_FILE (selection->data));
         /* link may be NULL if the link was recently removed (unmounted) */
         if (link != NULL &&
-                caja_desktop_link_get_link_type (link) == CAJA_DESKTOP_LINK_TRASH)
+                baul_desktop_link_get_link_type (link) == CAJA_DESKTOP_LINK_TRASH)
         {
             result = TRUE;
         }
@@ -706,7 +706,7 @@ trash_link_is_selection (FMDirectoryView *view)
         }
     }
 
-    caja_file_list_free (selection);
+    baul_file_list_free (selection);
 
     return result;
 }
@@ -750,7 +750,7 @@ real_update_menus (FMDirectoryView *view)
         g_object_set (action , "label", label, NULL);
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         gtk_action_set_sensitive (action,
-                                  !caja_trash_monitor_is_empty ());
+                                  !baul_trash_monitor_is_empty ());
         G_GNUC_END_IGNORE_DEPRECATIONS;
         g_free (label);
     }
@@ -814,7 +814,7 @@ real_merge_menus (FMDirectoryView *view)
     gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui manager */
 
-    ui = caja_ui_string_get ("caja-desktop-icon-view-ui.xml");
+    ui = baul_ui_string_get ("baul-desktop-icon-view-ui.xml");
     desktop_view->priv->desktop_merge_id =
         gtk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
 }
@@ -898,5 +898,5 @@ fm_desktop_icon_view_register (void)
     fm_desktop_icon_view.error_label = _(fm_desktop_icon_view.error_label);
     fm_desktop_icon_view.startup_error_label = _(fm_desktop_icon_view.startup_error_label);
 
-    caja_view_factory_register (&fm_desktop_icon_view);
+    baul_view_factory_register (&fm_desktop_icon_view);
 }

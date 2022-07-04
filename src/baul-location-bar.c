@@ -27,7 +27,7 @@
  *
  */
 
-/* caja-location-bar.c - Location bar for Caja
+/* baul-location-bar.c - Location bar for Caja
  */
 
 #include <config.h>
@@ -45,14 +45,14 @@
 #include <eel/eel-string.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include <libcaja-private/caja-icon-dnd.h>
-#include <libcaja-private/caja-clipboard.h>
+#include <libbaul-private/baul-icon-dnd.h>
+#include <libbaul-private/baul-clipboard.h>
 
-#include "caja-location-bar.h"
-#include "caja-location-entry.h"
-#include "caja-window-private.h"
-#include "caja-window.h"
-#include "caja-navigation-window-pane.h"
+#include "baul-location-bar.h"
+#include "baul-location-entry.h"
+#include "baul-window-private.h"
+#include "baul-window.h"
+#include "baul-navigation-window-pane.h"
 
 #define CAJA_DND_URI_LIST_TYPE 	  "text/uri-list"
 #define CAJA_DND_TEXT_PLAIN_TYPE 	  "text/plain"
@@ -100,16 +100,16 @@ static const GtkTargetEntry drop_types [] =
     { CAJA_DND_TEXT_PLAIN_TYPE, 0, CAJA_DND_TEXT_PLAIN },
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaLocationBar, caja_location_bar, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (CajaLocationBar, baul_location_bar, GTK_TYPE_BOX);
 
 static CajaNavigationWindow *
-caja_location_bar_get_window (GtkWidget *bar)
+baul_location_bar_get_window (GtkWidget *bar)
 {
     return CAJA_NAVIGATION_WINDOW (gtk_widget_get_ancestor (bar, CAJA_TYPE_WINDOW));
 }
 
 /**
- * caja_location_bar_get_location
+ * baul_location_bar_get_location
  *
  * Get the "URI" represented by the text in the location bar.
  *
@@ -121,7 +121,7 @@ caja_location_bar_get_window (GtkWidget *bar)
  *
  **/
 static char *
-caja_location_bar_get_location (CajaLocationBar *bar)
+baul_location_bar_get_location (CajaLocationBar *bar)
 {
     char *user_location, *uri;
     GFile *location;
@@ -139,7 +139,7 @@ emit_location_changed (CajaLocationBar *bar)
 {
     char *location;
 
-    location = caja_location_bar_get_location (bar);
+    location = baul_location_bar_get_location (bar);
     g_signal_emit (bar,
                    signals[LOCATION_CHANGED], 0,
                    location);
@@ -175,7 +175,7 @@ drag_data_received_callback (GtkWidget *widget,
         return;
     }
 
-    window = caja_location_bar_get_window (widget);
+    window = baul_location_bar_get_window (widget);
     new_windows_for_extras = FALSE;
     /* Ask user if they really want to open multiple windows
      * for multiple dropped URIs. This is likely to have been
@@ -217,7 +217,7 @@ drag_data_received_callback (GtkWidget *widget,
         }
     }
 
-    caja_location_bar_set_location (self, names[0]);
+    baul_location_bar_set_location (self, names[0]);
     emit_location_changed (self);
 
     if (new_windows_for_extras)
@@ -233,10 +233,10 @@ drag_data_received_callback (GtkWidget *widget,
 
         for (i = 1; names[i] != NULL; ++i)
         {
-            new_window = caja_application_create_navigation_window (application, screen);
+            new_window = baul_application_create_navigation_window (application, screen);
 
             location = g_file_new_for_uri (names[i]);
-            caja_window_go_to (new_window, location);
+            baul_window_go_to (new_window, location);
             g_object_unref (location);
         }
     }
@@ -260,7 +260,7 @@ drag_data_get_callback (GtkWidget *widget,
     g_assert (selection_data != NULL);
     self = callback_data;
 
-    entry_text = caja_location_bar_get_location (self);
+    entry_text = baul_location_bar_get_location (self);
 
     switch (info)
     {
@@ -327,7 +327,7 @@ label_button_pressed_callback (GtkWidget             *widget,
         return FALSE;
     }
 
-    window = caja_location_bar_get_window (gtk_widget_get_parent (widget));
+    window = baul_location_bar_get_window (gtk_widget_get_parent (widget));
     slot = CAJA_WINDOW (window)->details->active_pane->active_slot;
     view = slot->content_view;
     label = gtk_bin_get_child (GTK_BIN (widget));
@@ -338,7 +338,7 @@ label_button_pressed_callback (GtkWidget             *widget,
         return FALSE;
     }
 
-    caja_view_pop_up_location_context_menu (view, event, NULL);
+    baul_view_pop_up_location_context_menu (view, event, NULL);
 
     return FALSE;
 }
@@ -358,13 +358,13 @@ editable_activate_callback (GtkEntry *entry,
 }
 
 /**
- * caja_location_bar_update_label
+ * baul_location_bar_update_label
  *
  * if the text in the entry matches the uri, set the label to "location", otherwise use "goto"
  *
  **/
 static void
-caja_location_bar_update_label (CajaLocationBar *bar)
+baul_location_bar_update_label (CajaLocationBar *bar)
 {
     const char *current_text;
     GFile *location;
@@ -372,7 +372,7 @@ caja_location_bar_update_label (CajaLocationBar *bar)
 
     if (bar->details->last_location == NULL){
         gtk_label_set_text (GTK_LABEL (bar->details->label), GO_TO_LABEL);
-        caja_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
+        baul_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
                                                   CAJA_LOCATION_ENTRY_ACTION_GOTO);
         return;
     }
@@ -383,11 +383,11 @@ caja_location_bar_update_label (CajaLocationBar *bar)
 
     if (g_file_equal (last_location, location)) {
         gtk_label_set_text (GTK_LABEL (bar->details->label), LOCATION_LABEL);
-        caja_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
+        baul_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
                                                   CAJA_LOCATION_ENTRY_ACTION_CLEAR);
     } else {
         gtk_label_set_text (GTK_LABEL (bar->details->label), GO_TO_LABEL);
-        caja_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
+        baul_location_entry_set_secondary_action (CAJA_LOCATION_ENTRY (bar->details->entry),
                                                   CAJA_LOCATION_ENTRY_ACTION_GOTO);
     }
 
@@ -399,26 +399,26 @@ static void
 editable_changed_callback (GtkEntry *entry,
                            gpointer user_data)
 {
-    caja_location_bar_update_label (CAJA_LOCATION_BAR (user_data));
+    baul_location_bar_update_label (CAJA_LOCATION_BAR (user_data));
 }
 
 void
-caja_location_bar_activate (CajaLocationBar *bar)
+baul_location_bar_activate (CajaLocationBar *bar)
 {
     /* Put the keyboard focus in the text field when switching to this mode,
      * and select all text for easy overtyping
      */
     gtk_widget_grab_focus (GTK_WIDGET (bar->details->entry));
-    caja_entry_select_all (bar->details->entry);
+    baul_entry_select_all (bar->details->entry);
 }
 
 static void
-caja_location_bar_cancel (CajaLocationBar *bar)
+baul_location_bar_cancel (CajaLocationBar *bar)
 {
     char *last_location;
 
     last_location = bar->details->last_location;
-    caja_location_bar_set_location (bar, last_location);
+    baul_location_bar_set_location (bar, last_location);
 }
 
 static void
@@ -438,11 +438,11 @@ finalize (GObject *object)
     g_free (bar->details->last_location);
     bar->details->last_location = NULL;
 
-    G_OBJECT_CLASS (caja_location_bar_parent_class)->finalize (object);
+    G_OBJECT_CLASS (baul_location_bar_parent_class)->finalize (object);
 }
 
 static void
-caja_location_bar_class_init (CajaLocationBarClass *klass)
+baul_location_bar_class_init (CajaLocationBarClass *klass)
  {
     GObjectClass *gobject_class;
     GtkBindingSet *binding_set;
@@ -450,7 +450,7 @@ caja_location_bar_class_init (CajaLocationBarClass *klass)
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = finalize;
 
-    klass->cancel = caja_location_bar_cancel;
+    klass->cancel = baul_location_bar_cancel;
 
     signals[CANCEL] = g_signal_new
             ("cancel",
@@ -475,13 +475,13 @@ caja_location_bar_class_init (CajaLocationBarClass *klass)
 }
 
 static void
-caja_location_bar_init (CajaLocationBar *bar)
+baul_location_bar_init (CajaLocationBar *bar)
 {
     GtkWidget *label;
     GtkWidget *entry;
     GtkWidget *event_box;
 
-    bar->details = caja_location_bar_get_instance_private (bar);
+    bar->details = baul_location_bar_get_instance_private (bar);
 
     gtk_orientable_set_orientation (GTK_ORIENTABLE (bar),
                                     GTK_ORIENTATION_HORIZONTAL);
@@ -500,7 +500,7 @@ caja_location_bar_init (CajaLocationBar *bar)
 
     gtk_box_pack_start (GTK_BOX (bar), event_box, FALSE, TRUE, 4);
 
-    entry = caja_location_entry_new ();
+    entry = baul_location_entry_new ();
 
     g_signal_connect_object (entry, "activate",
                              G_CALLBACK (editable_activate_callback), bar, G_CONNECT_AFTER);
@@ -538,7 +538,7 @@ caja_location_bar_init (CajaLocationBar *bar)
 }
 
 GtkWidget *
-caja_location_bar_new (CajaNavigationWindowPane *pane)
+baul_location_bar_new (CajaNavigationWindowPane *pane)
 {
     GtkWidget *bar;
     CajaLocationBar *location_bar;
@@ -547,16 +547,16 @@ caja_location_bar_new (CajaNavigationWindowPane *pane)
     location_bar = CAJA_LOCATION_BAR (bar);
 
     /* Clipboard */
-    caja_clipboard_set_up_editable
+    baul_clipboard_set_up_editable
     (GTK_EDITABLE (location_bar->details->entry),
-     caja_window_get_ui_manager (CAJA_WINDOW (CAJA_WINDOW_PANE(pane)->window)),
+     baul_window_get_ui_manager (CAJA_WINDOW (CAJA_WINDOW_PANE(pane)->window)),
      TRUE);
 
     return bar;
 }
 
 void
-caja_location_bar_set_location (CajaLocationBar *bar,
+baul_location_bar_set_location (CajaLocationBar *bar,
                                 const char *location)
 {
     g_assert (location != NULL);
@@ -566,7 +566,7 @@ caja_location_bar_set_location (CajaLocationBar *bar,
 
     if (eel_uri_is_search (location))
     {
-        caja_location_entry_set_special_text (CAJA_LOCATION_ENTRY (bar->details->entry),
+        baul_location_entry_set_special_text (CAJA_LOCATION_ENTRY (bar->details->entry),
                                               "");
     }
     else
@@ -577,7 +577,7 @@ caja_location_bar_set_location (CajaLocationBar *bar,
         file = g_file_new_for_uri (location);
         formatted_location = g_file_get_parse_name (file);
         g_object_unref (file);
-        caja_location_entry_update_current_location (CAJA_LOCATION_ENTRY (bar->details->entry),
+        baul_location_entry_update_current_location (CAJA_LOCATION_ENTRY (bar->details->entry),
                 formatted_location);
         g_free (formatted_location);
     }
@@ -590,7 +590,7 @@ caja_location_bar_set_location (CajaLocationBar *bar,
         bar->details->last_location = g_strdup (location);
     }
 
-    caja_location_bar_update_label (bar);
+    baul_location_bar_update_label (bar);
 }
 
 static void
@@ -615,7 +615,7 @@ override_background_color (GtkWidget *widget,
 
 /* change background color based on activity state */
 void
-caja_location_bar_set_active (CajaLocationBar *location_bar, gboolean is_active)
+baul_location_bar_set_active (CajaLocationBar *location_bar, gboolean is_active)
 {
     GtkStyleContext *style;
     GdkRGBA color;
@@ -654,7 +654,7 @@ caja_location_bar_set_active (CajaLocationBar *location_bar, gboolean is_active)
 }
 
 CajaEntry *
-caja_location_bar_get_entry (CajaLocationBar *location_bar)
+baul_location_bar_get_entry (CajaLocationBar *location_bar)
 {
     return location_bar->details->entry;
 }

@@ -1,18 +1,18 @@
 /*Sane defaults for themes that do not specify them, themes can override these */
 /*This is loaded with GTK_STYLE_PROVIDER_PRIORITY_THEME so themes can override */
 
-.caja-canvas-item {
+.baul-canvas-item {
     border-radius: 3px;
 }
 
 /* EelEditableLabel (icon labels) */
-.caja-desktop.view .entry,
-.caja-desktop.view .entry:focus,
-.caja-desktop.view .entry:backdrop,
-.caja-navigation-window .view .entry,
-.caja-navigation-window .view .entry:active,
-.caja-navigation-window .view .entry:focus,
-.caja-navigation-window .view .entry:backdrop {
+.baul-desktop.view .entry,
+.baul-desktop.view .entry:focus,
+.baul-desktop.view .entry:backdrop,
+.baul-navigation-window .view .entry,
+.baul-navigation-window .view .entry:active,
+.baul-navigation-window .view .entry:focus,
+.baul-navigation-window .view .entry:backdrop {
     border-image: none;
     border-style: solid;
     border-width: 1px;
@@ -28,13 +28,13 @@
                                     to         (shade(rgba(255,255,255,1), 1.00)));
 }
 
-.caja-desktop.view .entry:selected,
-.caja-desktop.view .entry:focus:selected,
-.caja-desktop.view .entry:backdrop:selected,
-.caja-navigation-window .view .entry:active,
-.caja-navigation-window .view .entry:selected,
-.caja-navigation-window .view .entry:focus:selected,
-.caja-navigation-window .view .entry:backdrop:selected {
+.baul-desktop.view .entry:selected,
+.baul-desktop.view .entry:focus:selected,
+.baul-desktop.view .entry:backdrop:selected,
+.baul-navigation-window .view .entry:active,
+.baul-navigation-window .view .entry:selected,
+.baul-navigation-window .view .entry:focus:selected,
+.baul-navigation-window .view .entry:backdrop:selected {
     background-color: @theme_selected_bg_color;
     color: @theme_selected_fg_color;
     text-shadow: none;

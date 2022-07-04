@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-file-management-properties.c - Functions to create and show the caja preference dialog.
+/* baul-file-management-properties.c - Functions to create and show the baul preference dialog.
 
    Copyright (C) 2002 Jan Arne Petersen
 
@@ -34,16 +34,16 @@
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-gtk-extensions.h>
 
-#include <libcaja-private/caja-column-chooser.h>
-#include <libcaja-private/caja-column-utilities.h>
-#include <libcaja-private/caja-extensions.h>
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-module.h>
-#include <libcaja-private/caja-autorun.h>
+#include <libbaul-private/baul-column-chooser.h>
+#include <libbaul-private/baul-column-utilities.h>
+#include <libbaul-private/baul-extensions.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-module.h>
+#include <libbaul-private/baul-autorun.h>
 
-#include <libcaja-extension/caja-configurable.h>
+#include <libbaul-extension/baul-configurable.h>
 
-#include "caja-file-management-properties.h"
+#include "baul-file-management-properties.h"
 
 /* string enum preferences */
 #define CAJA_FILE_MANAGEMENT_PROPERTIES_DEFAULT_VIEW_WIDGET "default_view_combobox"
@@ -100,7 +100,7 @@ static const char * const zoom_values[] =
 
 /*
  * This array corresponds to the object with id "model2" in
- * caja-file-management-properties.ui. It has to positionally match with it.
+ * baul-file-management-properties.ui. It has to positionally match with it.
  * The purpose is to map values from a combo box to values of the gsettings
  * enum.
  */
@@ -195,10 +195,10 @@ enum
 	EXT_STRUCT_COLUMN
 };
 
-static void caja_file_management_properties_dialog_update_media_sensitivity (GtkBuilder *builder);
+static void baul_file_management_properties_dialog_update_media_sensitivity (GtkBuilder *builder);
 
 static void
-caja_file_management_properties_size_group_create (GtkBuilder *builder,
+baul_file_management_properties_size_group_create (GtkBuilder *builder,
         char *prefix,
         int items)
 {
@@ -260,7 +260,7 @@ preferences_show_help (GtkWindow *parent,
 
 
 static void
-caja_file_management_properties_dialog_response_cb (GtkDialog *parent,
+baul_file_management_properties_dialog_response_cb (GtkDialog *parent,
         int response_id,
         GtkBuilder *builder)
 {
@@ -272,30 +272,30 @@ caja_file_management_properties_dialog_response_cb (GtkDialog *parent,
         {
         default:
         case 0:
-            section = "goscaja-438";
+            section = "gosbaul-438";
             break;
         case 1:
-            section = "goscaja-56";
+            section = "gosbaul-56";
             break;
         case 2:
-            section = "goscaja-439";
+            section = "gosbaul-439";
             break;
         case 3:
-            section = "goscaja-490";
+            section = "gosbaul-490";
             break;
         case 4:
-            section = "goscaja-60";
+            section = "gosbaul-60";
             break;
         case 5:
-            section = "goscaja-61";
+            section = "gosbaul-61";
             break;
         }
         preferences_show_help (GTK_WINDOW (parent), "mate-user-guide", section);
     }
     else if (response_id == GTK_RESPONSE_CLOSE)
     {
-        g_signal_handlers_disconnect_by_func (caja_media_preferences,
-                                              caja_file_management_properties_dialog_update_media_sensitivity,
+        g_signal_handlers_disconnect_by_func (baul_media_preferences,
+                                              baul_file_management_properties_dialog_update_media_sensitivity,
                                               builder);
     }
 }
@@ -307,14 +307,14 @@ columns_changed_callback (CajaColumnChooser *chooser,
     char **visible_columns;
     char **column_order;
 
-    caja_column_chooser_get_settings (CAJA_COLUMN_CHOOSER (chooser),
+    baul_column_chooser_get_settings (CAJA_COLUMN_CHOOSER (chooser),
                                       &visible_columns,
                                       &column_order);
 
-    g_settings_set_strv (caja_list_view_preferences,
+    g_settings_set_strv (baul_list_view_preferences,
                          CAJA_PREFERENCES_LIST_VIEW_DEFAULT_VISIBLE_COLUMNS,
                          (const char * const *)visible_columns);
-    g_settings_set_strv (caja_list_view_preferences,
+    g_settings_set_strv (baul_list_view_preferences,
                          CAJA_PREFERENCES_LIST_VIEW_DEFAULT_COLUMN_ORDER,
                          (const char * const *)column_order);
 
@@ -403,7 +403,7 @@ icon_captions_changed_callback (GtkComboBox *combo_box,
     }
     g_ptr_array_add (captions, NULL);
 
-    g_settings_set_strv (caja_icon_view_preferences,
+    g_settings_set_strv (baul_icon_view_preferences,
                          CAJA_PREFERENCES_ICON_VIEW_CAPTIONS,
                          (const char **)captions->pdata);
     g_ptr_array_free (captions, TRUE);
@@ -449,7 +449,7 @@ update_icon_captions_from_settings (GtkBuilder *builder)
     char **captions;
     int i, j;
 
-    captions = g_settings_get_strv (caja_icon_view_preferences, CAJA_PREFERENCES_ICON_VIEW_CAPTIONS);
+    captions = g_settings_get_strv (baul_icon_view_preferences, CAJA_PREFERENCES_ICON_VIEW_CAPTIONS);
     if (captions == NULL)
         return;
 
@@ -478,15 +478,15 @@ update_icon_captions_from_settings (GtkBuilder *builder)
 }
 
 static void
-caja_file_management_properties_dialog_setup_icon_caption_page (GtkBuilder *builder)
+baul_file_management_properties_dialog_setup_icon_caption_page (GtkBuilder *builder)
 {
     GList *columns;
     int i;
     gboolean writable;
 
-    writable = g_settings_is_writable (caja_icon_view_preferences, CAJA_PREFERENCES_ICON_VIEW_CAPTIONS);
+    writable = g_settings_is_writable (baul_icon_view_preferences, CAJA_PREFERENCES_ICON_VIEW_CAPTIONS);
 
-    columns = caja_get_common_columns ();
+    columns = baul_get_common_columns ();
 
     for (i = 0; icon_captions_components[i] != NULL; i++)
     {
@@ -503,7 +503,7 @@ caja_file_management_properties_dialog_setup_icon_caption_page (GtkBuilder *buil
                           builder);
     }
 
-    caja_column_list_free (columns);
+    baul_column_list_free (columns);
 
     update_icon_captions_from_settings (builder);
 }
@@ -542,12 +542,12 @@ set_columns_from_settings (CajaColumnChooser *chooser)
     char **visible_columns;
     char **column_order;
 
-    visible_columns = g_settings_get_strv (caja_list_view_preferences,
+    visible_columns = g_settings_get_strv (baul_list_view_preferences,
                                            CAJA_PREFERENCES_LIST_VIEW_DEFAULT_VISIBLE_COLUMNS);
-    column_order = g_settings_get_strv (caja_list_view_preferences,
+    column_order = g_settings_get_strv (baul_list_view_preferences,
                                         CAJA_PREFERENCES_LIST_VIEW_DEFAULT_COLUMN_ORDER);
 
-    caja_column_chooser_set_settings (CAJA_COLUMN_CHOOSER (chooser),
+    baul_column_chooser_set_settings (CAJA_COLUMN_CHOOSER (chooser),
                                       visible_columns,
                                       column_order);
 
@@ -559,20 +559,20 @@ static void
 use_default_callback (CajaColumnChooser *chooser,
                       gpointer user_data)
 {
-    g_settings_reset (caja_list_view_preferences,
+    g_settings_reset (baul_list_view_preferences,
                       CAJA_PREFERENCES_LIST_VIEW_DEFAULT_VISIBLE_COLUMNS);
-    g_settings_reset (caja_list_view_preferences,
+    g_settings_reset (baul_list_view_preferences,
                       CAJA_PREFERENCES_LIST_VIEW_DEFAULT_COLUMN_ORDER);
     set_columns_from_settings (chooser);
 }
 
 static void
-caja_file_management_properties_dialog_setup_list_column_page (GtkBuilder *builder)
+baul_file_management_properties_dialog_setup_list_column_page (GtkBuilder *builder)
 {
     GtkWidget *chooser;
     GtkWidget *box;
 
-    chooser = caja_column_chooser_new (NULL);
+    chooser = baul_column_chooser_new (NULL);
     g_signal_connect (chooser, "changed",
                       G_CALLBACK (columns_changed_callback), chooser);
     g_signal_connect (chooser, "use_default",
@@ -587,10 +587,10 @@ caja_file_management_properties_dialog_setup_list_column_page (GtkBuilder *build
 }
 
 static void
-caja_file_management_properties_dialog_update_media_sensitivity (GtkBuilder *builder)
+baul_file_management_properties_dialog_update_media_sensitivity (GtkBuilder *builder)
 {
     gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (builder, "media_handling_vbox")),
-                              ! g_settings_get_boolean (caja_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_NEVER));
+                              ! g_settings_get_boolean (baul_media_preferences, CAJA_PREFERENCES_MEDIA_AUTORUN_NEVER));
 }
 
 static void
@@ -617,7 +617,7 @@ other_type_combo_box_changed (GtkComboBox *combo_box, GtkComboBox *action_combo_
                         2, &x_content_type,
                         -1);
 
-    caja_autorun_prepare_combo_box (GTK_WIDGET (action_combo_box),
+    baul_autorun_prepare_combo_box (GTK_WIDGET (action_combo_box),
                                     x_content_type,
                                     TRUE,
                                     TRUE,
@@ -666,7 +666,7 @@ static void
 extension_configure_clicked (GtkButton *button, Extension *ext)
 {
     if (extension_configure_check(ext)) {
-        caja_configurable_run_config(CAJA_CONFIGURABLE(ext->module));
+        baul_configurable_run_config(CAJA_CONFIGURABLE(ext->module));
     }
 }
 
@@ -744,7 +744,7 @@ extension_state_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer 
     {
         gtk_tree_model_get (model, &iter, EXT_STRUCT_COLUMN, &ext, -1);
 
-        if (caja_extension_set_state (ext, new_state))
+        if (baul_extension_set_state (ext, new_state))
         {
             gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                                 EXT_STATE_COLUMN, new_state, -1);
@@ -755,7 +755,7 @@ extension_state_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer 
 
 
 static void
-caja_file_management_properties_dialog_setup_media_page (GtkBuilder *builder)
+baul_file_management_properties_dialog_setup_media_page (GtkBuilder *builder)
 {
     unsigned int n;
     GList *l;
@@ -774,7 +774,7 @@ caja_file_management_properties_dialog_setup_media_page (GtkBuilder *builder)
 
     for (n = 0; s[n*2] != NULL; n++)
     {
-        caja_autorun_prepare_combo_box (GTK_WIDGET (gtk_builder_get_object (builder, s[n*2])), s[n*2 + 1],
+        baul_autorun_prepare_combo_box (GTK_WIDGET (gtk_builder_get_object (builder, s[n*2])), s[n*2 + 1],
                                         TRUE, TRUE, TRUE, NULL, NULL);
     }
 
@@ -810,7 +810,7 @@ caja_file_management_properties_dialog_setup_media_page (GtkBuilder *builder)
             }
         }
 
-        icon_size = caja_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+        icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
         icon_scale = gtk_widget_get_scale_factor (other_type_combo_box);
 
         description = g_content_type_get_description (content_type);
@@ -818,9 +818,9 @@ caja_file_management_properties_dialog_setup_media_page (GtkBuilder *builder)
         icon = g_content_type_get_icon (content_type);
         if (icon != NULL)
         {
-            icon_info = caja_icon_info_lookup (icon, icon_size, icon_scale);
+            icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
             g_object_unref (icon);
-            surface = caja_icon_info_get_surface_nodefault_at_size (icon_info, icon_size);
+            surface = baul_icon_info_get_surface_nodefault_at_size (icon_info, icon_size);
             g_object_unref (icon_info);
         }
         else
@@ -862,11 +862,11 @@ skip:
 
     gtk_combo_box_set_active (GTK_COMBO_BOX (other_type_combo_box), 0);
 
-    caja_file_management_properties_dialog_update_media_sensitivity (builder);
+    baul_file_management_properties_dialog_update_media_sensitivity (builder);
 }
 
 static void
-caja_file_management_properties_dialog_setup_extension_page (GtkBuilder *builder)
+baul_file_management_properties_dialog_setup_extension_page (GtkBuilder *builder)
 {
     GtkCellRendererToggle *toggle;
     GtkListStore *store;
@@ -881,7 +881,7 @@ caja_file_management_properties_dialog_setup_extension_page (GtkBuilder *builder
     GList *extensions;
     int i;
 
-    extensions = caja_extensions_get_list ();
+    extensions = baul_extensions_get_list ();
 
     view = GTK_TREE_VIEW (
                     gtk_builder_get_object (builder, "extension_view"));
@@ -1129,145 +1129,145 @@ bind_builder_radio (GtkBuilder *builder,
 }
 
 static  void
-caja_file_management_properties_dialog_setup (GtkBuilder *builder, GtkWindow *window)
+baul_file_management_properties_dialog_setup (GtkBuilder *builder, GtkWindow *window)
 {
     GtkWidget *dialog;
 
     /* setup UI */
-    caja_file_management_properties_size_group_create (builder,
+    baul_file_management_properties_size_group_create (builder,
             "views_label",
             5);
-    caja_file_management_properties_size_group_create (builder,
+    baul_file_management_properties_size_group_create (builder,
             "captions_label",
             3);
-    caja_file_management_properties_size_group_create (builder,
+    baul_file_management_properties_size_group_create (builder,
             "preview_label",
             5);
     create_date_format_menu (builder);
 
     /* setup preferences */
-    bind_builder_bool (builder, caja_icon_view_preferences,
+    bind_builder_bool (builder, baul_icon_view_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_COMPACT_LAYOUT_WIDGET,
                        CAJA_PREFERENCES_ICON_VIEW_DEFAULT_USE_TIGHTER_LAYOUT);
-    bind_builder_bool (builder, caja_icon_view_preferences,
+    bind_builder_bool (builder, baul_icon_view_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_LABELS_BESIDE_ICONS_WIDGET,
                        CAJA_PREFERENCES_ICON_VIEW_LABELS_BESIDE_ICONS);
-    bind_builder_bool (builder, caja_compact_view_preferences,
+    bind_builder_bool (builder, baul_compact_view_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_ALL_COLUMNS_SAME_WIDTH,
                        CAJA_PREFERENCES_COMPACT_VIEW_ALL_COLUMNS_SAME_WIDTH);
-    bind_builder_bool (builder, caja_preferences,
+    bind_builder_bool (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_FOLDERS_FIRST_WIDGET,
                        CAJA_PREFERENCES_SORT_DIRECTORIES_FIRST);
-    bind_builder_bool_inverted (builder, caja_preferences,
+    bind_builder_bool_inverted (builder, baul_preferences,
                                 CAJA_FILE_MANAGEMENT_PROPERTIES_ALWAYS_USE_BROWSER_WIDGET,
                                 CAJA_PREFERENCES_ALWAYS_USE_BROWSER);
 
-    bind_builder_bool (builder, caja_media_preferences,
+    bind_builder_bool (builder, baul_media_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_MEDIA_AUTOMOUNT_OPEN,
                        CAJA_PREFERENCES_MEDIA_AUTOMOUNT_OPEN);
-    bind_builder_bool (builder, caja_media_preferences,
+    bind_builder_bool (builder, baul_media_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_MEDIA_AUTORUN_NEVER,
                        CAJA_PREFERENCES_MEDIA_AUTORUN_NEVER);
 
-    bind_builder_bool (builder, caja_preferences,
+    bind_builder_bool (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_TRASH_CONFIRM_WIDGET,
                        CAJA_PREFERENCES_CONFIRM_TRASH);
-    bind_builder_bool (builder, caja_preferences,
+    bind_builder_bool (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_TRASH_CONFIRM_TRASH_WIDGET,
                        CAJA_PREFERENCES_CONFIRM_MOVE_TO_TRASH);
 
-    bind_builder_bool (builder, caja_preferences,
+    bind_builder_bool (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_TRASH_DELETE_WIDGET,
                        CAJA_PREFERENCES_ENABLE_DELETE);
-    bind_builder_bool (builder, caja_preferences,
+    bind_builder_bool (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_SHOW_HIDDEN_WIDGET,
                        CAJA_PREFERENCES_SHOW_HIDDEN_FILES);
-    bind_builder_bool (builder, caja_preferences,
+    bind_builder_bool (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_SHOW_BACKUP_WIDGET,
                        CAJA_PREFERENCES_SHOW_BACKUP_FILES);
-    bind_builder_bool (builder, caja_tree_sidebar_preferences,
+    bind_builder_bool (builder, baul_tree_sidebar_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_TREE_VIEW_FOLDERS_WIDGET,
                        CAJA_PREFERENCES_TREE_SHOW_ONLY_DIRECTORIES);
 
-    bind_builder_bool (builder, caja_preferences,
+    bind_builder_bool (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_USE_IEC_UNITS_WIDGET,
                        CAJA_PREFERENCES_USE_IEC_UNITS);
 
-    bind_builder_bool (builder, caja_preferences,
+    bind_builder_bool (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_SHOW_ICONS_IN_LIST_VIEW,
                        CAJA_PREFERENCES_SHOW_ICONS_IN_LIST_VIEW);
 
-    bind_builder_enum (builder, caja_preferences,
+    bind_builder_enum (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_DEFAULT_VIEW_WIDGET,
                        CAJA_PREFERENCES_DEFAULT_FOLDER_VIEWER,
                        (const char **) default_view_values);
-    bind_builder_enum (builder, caja_icon_view_preferences,
+    bind_builder_enum (builder, baul_icon_view_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_ICON_VIEW_ZOOM_WIDGET,
                        CAJA_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
                        (const char **) zoom_values);
-    bind_builder_enum (builder, caja_compact_view_preferences,
+    bind_builder_enum (builder, baul_compact_view_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_COMPACT_VIEW_ZOOM_WIDGET,
                        CAJA_PREFERENCES_COMPACT_VIEW_DEFAULT_ZOOM_LEVEL,
                        (const char **) zoom_values);
-    bind_builder_enum (builder, caja_list_view_preferences,
+    bind_builder_enum (builder, baul_list_view_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_LIST_VIEW_ZOOM_WIDGET,
                        CAJA_PREFERENCES_LIST_VIEW_DEFAULT_ZOOM_LEVEL,
                        (const char **) zoom_values);
-    bind_builder_enum (builder, caja_preferences,
+    bind_builder_enum (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_SORT_ORDER_WIDGET,
                        CAJA_PREFERENCES_DEFAULT_SORT_ORDER,
                        (const char **) sort_order_values);
-    bind_builder_enum (builder, caja_preferences,
+    bind_builder_enum (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_PREVIEW_TEXT_WIDGET,
                        CAJA_PREFERENCES_SHOW_TEXT_IN_ICONS,
                        (const char **) preview_values);
-    bind_builder_enum (builder, caja_preferences,
+    bind_builder_enum (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_PREVIEW_IMAGE_WIDGET,
                        CAJA_PREFERENCES_SHOW_IMAGE_FILE_THUMBNAILS,
                        (const char **) preview_values);
-    bind_builder_enum (builder, caja_preferences,
+    bind_builder_enum (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_PREVIEW_SOUND_WIDGET,
                        CAJA_PREFERENCES_PREVIEW_SOUND,
                        (const char **) preview_values);
-    bind_builder_enum (builder, caja_preferences,
+    bind_builder_enum (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_PREVIEW_FOLDER_WIDGET,
                        CAJA_PREFERENCES_SHOW_DIRECTORY_ITEM_COUNTS,
                        (const char **) preview_values);
-    bind_builder_enum (builder, caja_preferences,
+    bind_builder_enum (builder, baul_preferences,
                        CAJA_FILE_MANAGEMENT_PROPERTIES_DATE_FORMAT_WIDGET,
                        CAJA_PREFERENCES_DATE_FORMAT,
                        (const char **) date_format_values);
 
-    bind_builder_radio (builder, caja_preferences,
+    bind_builder_radio (builder, baul_preferences,
                         (const char **) click_behavior_components,
                         CAJA_PREFERENCES_CLICK_POLICY,
                         (const char **) click_behavior_values);
-    bind_builder_radio (builder, caja_preferences,
+    bind_builder_radio (builder, baul_preferences,
                         (const char **) executable_text_components,
                         CAJA_PREFERENCES_EXECUTABLE_TEXT_ACTIVATION,
                         (const char **) executable_text_values);
 
-    bind_builder_uint_enum (builder, caja_preferences,
+    bind_builder_uint_enum (builder, baul_preferences,
                             CAJA_FILE_MANAGEMENT_PROPERTIES_THUMBNAIL_LIMIT_WIDGET,
                             CAJA_PREFERENCES_IMAGE_FILE_THUMBNAIL_LIMIT,
                             thumbnail_limit_values,
                             G_N_ELEMENTS (thumbnail_limit_values));
 
-    caja_file_management_properties_dialog_setup_icon_caption_page (builder);
-    caja_file_management_properties_dialog_setup_list_column_page (builder);
-    caja_file_management_properties_dialog_setup_media_page (builder);
-    caja_file_management_properties_dialog_setup_extension_page (builder);
+    baul_file_management_properties_dialog_setup_icon_caption_page (builder);
+    baul_file_management_properties_dialog_setup_list_column_page (builder);
+    baul_file_management_properties_dialog_setup_media_page (builder);
+    baul_file_management_properties_dialog_setup_extension_page (builder);
 
-    g_signal_connect_swapped (caja_media_preferences,
+    g_signal_connect_swapped (baul_media_preferences,
                               "changed::" CAJA_PREFERENCES_MEDIA_AUTORUN_NEVER,
-                              G_CALLBACK(caja_file_management_properties_dialog_update_media_sensitivity),
+                              G_CALLBACK(baul_file_management_properties_dialog_update_media_sensitivity),
                               builder);
 
 
     /* UI callbacks */
     dialog = GTK_WIDGET (gtk_builder_get_object (builder, "file_management_dialog"));
     g_signal_connect_data (G_OBJECT (dialog), "response",
-                           G_CALLBACK (caja_file_management_properties_dialog_response_cb),
+                           G_CALLBACK (baul_file_management_properties_dialog_response_cb),
                            g_object_ref (builder),
                            (GClosureNotify)g_object_unref,
                            0);
@@ -1304,14 +1304,14 @@ delete_event_callback (GtkWidget       *widget,
 }
 
 void
-caja_file_management_properties_dialog_show (GCallback close_callback, GtkWindow *window)
+baul_file_management_properties_dialog_show (GCallback close_callback, GtkWindow *window)
 {
     GtkBuilder *builder;
 
     builder = gtk_builder_new ();
 
     gtk_builder_add_from_file (builder,
-                               UIDIR "/caja-file-management-properties.ui",
+                               UIDIR "/baul-file-management-properties.ui",
                                NULL);
 
     g_signal_connect (G_OBJECT (gtk_builder_get_object (builder, "file_management_dialog")),
@@ -1319,7 +1319,7 @@ caja_file_management_properties_dialog_show (GCallback close_callback, GtkWindow
     g_signal_connect (G_OBJECT (gtk_builder_get_object (builder, "file_management_dialog")),
                       "delete_event", G_CALLBACK (delete_event_callback), close_callback);
 
-    caja_file_management_properties_dialog_setup (builder, window);
+    baul_file_management_properties_dialog_setup (builder, window);
 
     g_object_unref (builder);
 }

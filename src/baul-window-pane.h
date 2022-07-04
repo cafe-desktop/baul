@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-window-pane.h: Caja window pane
+   baul-window-pane.h: Caja window pane
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -25,9 +25,9 @@
 #ifndef CAJA_WINDOW_PANE_H
 #define CAJA_WINDOW_PANE_H
 
-#include "caja-window.h"
+#include "baul-window.h"
 
-#define CAJA_TYPE_WINDOW_PANE	 (caja_window_pane_get_type())
+#define CAJA_TYPE_WINDOW_PANE	 (baul_window_pane_get_type())
 #define CAJA_WINDOW_PANE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_WINDOW_PANE, CajaWindowPaneClass))
 #define CAJA_WINDOW_PANE(obj)	 (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW_PANE, CajaWindowPane))
 #define CAJA_IS_WINDOW_PANE(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW_PANE))
@@ -75,23 +75,23 @@ struct _CajaWindowPane
     gboolean is_active;
 };
 
-GType caja_window_pane_get_type (void);
-CajaWindowPane *caja_window_pane_new (CajaWindow *window);
+GType baul_window_pane_get_type (void);
+CajaWindowPane *baul_window_pane_new (CajaWindow *window);
 
 
-void caja_window_pane_show (CajaWindowPane *pane);
-void caja_window_pane_zoom_in (CajaWindowPane *pane);
-void caja_window_pane_zoom_to_level (CajaWindowPane *pane, CajaZoomLevel level);
-void caja_window_pane_zoom_out (CajaWindowPane *pane);
-void caja_window_pane_zoom_to_default (CajaWindowPane *pane);
-void caja_window_pane_sync_location_widgets (CajaWindowPane *pane);
-void caja_window_pane_sync_search_widgets  (CajaWindowPane *pane);
-void caja_window_pane_set_active (CajaWindowPane *pane, gboolean is_active);
-void caja_window_pane_slot_close (CajaWindowPane *pane, CajaWindowSlot *slot);
+void baul_window_pane_show (CajaWindowPane *pane);
+void baul_window_pane_zoom_in (CajaWindowPane *pane);
+void baul_window_pane_zoom_to_level (CajaWindowPane *pane, CajaZoomLevel level);
+void baul_window_pane_zoom_out (CajaWindowPane *pane);
+void baul_window_pane_zoom_to_default (CajaWindowPane *pane);
+void baul_window_pane_sync_location_widgets (CajaWindowPane *pane);
+void baul_window_pane_sync_search_widgets  (CajaWindowPane *pane);
+void baul_window_pane_set_active (CajaWindowPane *pane, gboolean is_active);
+void baul_window_pane_slot_close (CajaWindowPane *pane, CajaWindowSlot *slot);
 
-CajaWindowSlot* caja_window_pane_get_slot_for_content_box (CajaWindowPane *pane, GtkWidget *content_box);
-void caja_window_pane_switch_to (CajaWindowPane *pane);
-void caja_window_pane_grab_focus (CajaWindowPane *pane);
+CajaWindowSlot* baul_window_pane_get_slot_for_content_box (CajaWindowPane *pane, GtkWidget *content_box);
+void baul_window_pane_switch_to (CajaWindowPane *pane);
+void baul_window_pane_grab_focus (CajaWindowPane *pane);
 
 
 #endif /* CAJA_WINDOW_PANE_H */

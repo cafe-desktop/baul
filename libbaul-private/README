@@ -1,7 +1,7 @@
-README for caja/libcaja-private
+README for baul/libbaul-private
 
-This library, libcaja-private, is totally private to caja.
+This library, libbaul-private, is totally private to baul.
 
-If you are writing a caja component, you should not use this
-library or link with it.  The code in here is internal to caja
+If you are writing a baul component, you should not use this
+library or link with it.  The code in here is internal to baul
 and not available for public consumption.

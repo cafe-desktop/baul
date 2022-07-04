@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-view.c: Interface for caja views
+   baul-view.c: Interface for baul views
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -23,7 +23,7 @@
 */
 
 #include <config.h>
-#include "caja-view.h"
+#include "baul-view.h"
 
 enum
 {
@@ -32,16 +32,16 @@ enum
     LAST_SIGNAL
 };
 
-static guint caja_view_signals[LAST_SIGNAL] = { 0 };
+static guint baul_view_signals[LAST_SIGNAL] = { 0 };
 
 static void
-caja_view_base_init (gpointer g_class)
+baul_view_base_init (gpointer g_class)
 {
     static gboolean initialized = FALSE;
 
     if (! initialized)
     {
-        caja_view_signals[TITLE_CHANGED] =
+        baul_view_signals[TITLE_CHANGED] =
             g_signal_new ("title_changed",
                           CAJA_TYPE_VIEW,
                           G_SIGNAL_RUN_LAST,
@@ -50,7 +50,7 @@ caja_view_base_init (gpointer g_class)
                           g_cclosure_marshal_VOID__VOID,
                           G_TYPE_NONE, 0);
 
-        caja_view_signals[ZOOM_LEVEL_CHANGED] =
+        baul_view_signals[ZOOM_LEVEL_CHANGED] =
             g_signal_new ("zoom_level_changed",
                           CAJA_TYPE_VIEW,
                           G_SIGNAL_RUN_LAST,
@@ -64,7 +64,7 @@ caja_view_base_init (gpointer g_class)
 }
 
 GType
-caja_view_get_type (void)
+baul_view_get_type (void)
 {
     static GType type = 0;
 
@@ -73,7 +73,7 @@ caja_view_get_type (void)
         const GTypeInfo info =
         {
             sizeof (CajaViewIface),
-            caja_view_base_init,
+            baul_view_base_init,
             NULL,
             NULL,
             NULL,
@@ -93,7 +93,7 @@ caja_view_get_type (void)
 }
 
 const char *
-caja_view_get_view_id (CajaView *view)
+baul_view_get_view_id (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), NULL);
 
@@ -101,7 +101,7 @@ caja_view_get_view_id (CajaView *view)
 }
 
 GtkWidget *
-caja_view_get_widget (CajaView *view)
+baul_view_get_widget (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), NULL);
 
@@ -109,7 +109,7 @@ caja_view_get_widget (CajaView *view)
 }
 
 void
-caja_view_load_location (CajaView *view,
+baul_view_load_location (CajaView *view,
                          const char   *location_uri)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
@@ -120,7 +120,7 @@ caja_view_load_location (CajaView *view,
 }
 
 void
-caja_view_stop_loading (CajaView *view)
+baul_view_stop_loading (CajaView *view)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
 
@@ -128,7 +128,7 @@ caja_view_stop_loading (CajaView *view)
 }
 
 int
-caja_view_get_selection_count (CajaView *view)
+baul_view_get_selection_count (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), 0);
 
@@ -136,7 +136,7 @@ caja_view_get_selection_count (CajaView *view)
 }
 
 GList *
-caja_view_get_selection (CajaView *view)
+baul_view_get_selection (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), NULL);
 
@@ -144,7 +144,7 @@ caja_view_get_selection (CajaView *view)
 }
 
 void
-caja_view_set_selection (CajaView *view,
+baul_view_set_selection (CajaView *view,
                          GList        *list)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
@@ -154,7 +154,7 @@ caja_view_set_selection (CajaView *view,
 }
 
 void
-caja_view_set_is_active (CajaView *view,
+baul_view_set_is_active (CajaView *view,
                          gboolean is_active)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
@@ -164,7 +164,7 @@ caja_view_set_is_active (CajaView *view,
 }
 
 void
-caja_view_invert_selection (CajaView *view)
+baul_view_invert_selection (CajaView *view)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
 
@@ -172,7 +172,7 @@ caja_view_invert_selection (CajaView *view)
 }
 
 char *
-caja_view_get_first_visible_file (CajaView *view)
+baul_view_get_first_visible_file (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), NULL);
 
@@ -180,7 +180,7 @@ caja_view_get_first_visible_file (CajaView *view)
 }
 
 void
-caja_view_scroll_to_file (CajaView *view,
+baul_view_scroll_to_file (CajaView *view,
                           const char   *uri)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
@@ -189,7 +189,7 @@ caja_view_scroll_to_file (CajaView *view,
 }
 
 char *
-caja_view_get_title (CajaView *view)
+baul_view_get_title (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), NULL);
 
@@ -205,7 +205,7 @@ caja_view_get_title (CajaView *view)
 
 
 gboolean
-caja_view_supports_zooming (CajaView *view)
+baul_view_supports_zooming (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), FALSE);
 
@@ -213,7 +213,7 @@ caja_view_supports_zooming (CajaView *view)
 }
 
 void
-caja_view_bump_zoom_level (CajaView *view,
+baul_view_bump_zoom_level (CajaView *view,
                            int zoom_increment)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
@@ -223,7 +223,7 @@ caja_view_bump_zoom_level (CajaView *view,
 }
 
 void
-caja_view_zoom_to_level (CajaView      *view,
+baul_view_zoom_to_level (CajaView      *view,
                          CajaZoomLevel  level)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
@@ -233,7 +233,7 @@ caja_view_zoom_to_level (CajaView      *view,
 }
 
 void
-caja_view_restore_default_zoom_level (CajaView *view)
+baul_view_restore_default_zoom_level (CajaView *view)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
 
@@ -241,7 +241,7 @@ caja_view_restore_default_zoom_level (CajaView *view)
 }
 
 gboolean
-caja_view_can_zoom_in (CajaView *view)
+baul_view_can_zoom_in (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), FALSE);
 
@@ -249,7 +249,7 @@ caja_view_can_zoom_in (CajaView *view)
 }
 
 gboolean
-caja_view_can_zoom_out (CajaView *view)
+baul_view_can_zoom_out (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), FALSE);
 
@@ -257,7 +257,7 @@ caja_view_can_zoom_out (CajaView *view)
 }
 
 CajaZoomLevel
-caja_view_get_zoom_level (CajaView *view)
+baul_view_get_zoom_level (CajaView *view)
 {
     g_return_val_if_fail (CAJA_IS_VIEW (view), CAJA_ZOOM_LEVEL_STANDARD);
 
@@ -265,7 +265,7 @@ caja_view_get_zoom_level (CajaView *view)
 }
 
 void
-caja_view_grab_focus (CajaView   *view)
+baul_view_grab_focus (CajaView   *view)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
 
@@ -276,7 +276,7 @@ caja_view_grab_focus (CajaView   *view)
 }
 
 void
-caja_view_update_menus (CajaView *view)
+baul_view_update_menus (CajaView *view)
 {
     g_return_if_fail (CAJA_IS_VIEW (view));
 
@@ -287,7 +287,7 @@ caja_view_update_menus (CajaView *view)
 }
 
 void
-caja_view_pop_up_location_context_menu (CajaView   *view,
+baul_view_pop_up_location_context_menu (CajaView   *view,
                                         GdkEventButton *event,
                                         const char     *location)
 {
@@ -300,7 +300,7 @@ caja_view_pop_up_location_context_menu (CajaView   *view,
 }
 
 void
-caja_view_drop_proxy_received_uris   (CajaView         *view,
+baul_view_drop_proxy_received_uris   (CajaView         *view,
                                       GList                *uris,
                                       const char           *target_location,
                                       GdkDragAction         action)
@@ -314,7 +314,7 @@ caja_view_drop_proxy_received_uris   (CajaView         *view,
 }
 
 void
-caja_view_drop_proxy_received_netscape_url (CajaView         *view,
+baul_view_drop_proxy_received_netscape_url (CajaView         *view,
         const char           *source_url,
         const char           *target_location,
         GdkDragAction         action)

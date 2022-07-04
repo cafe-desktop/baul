@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-view.h: Interface for caja views
+   baul-view.h: Interface for baul views
 
    Copyright (C) 2004 Red Hat Inc.
 
@@ -29,13 +29,13 @@
 #include <gtk/gtk.h>
 
 /* For CajaZoomLevel */
-#include "caja-icon-info.h"
+#include "baul-icon-info.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define CAJA_TYPE_VIEW           (caja_view_get_type ())
+#define CAJA_TYPE_VIEW           (baul_view_get_type ())
 #define CAJA_VIEW(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_VIEW, CajaView))
 #define CAJA_IS_VIEW(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_VIEW))
 #define CAJA_VIEW_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_VIEW, CajaViewIface))
@@ -145,45 +145,45 @@ extern "C" {
         void (*_reserved7) (void);
     };
 
-    GType             caja_view_get_type             (void);
+    GType             baul_view_get_type             (void);
 
-    const char *      caja_view_get_view_id                (CajaView      *view);
-    GtkWidget *       caja_view_get_widget                 (CajaView      *view);
-    void              caja_view_load_location              (CajaView      *view,
+    const char *      baul_view_get_view_id                (CajaView      *view);
+    GtkWidget *       baul_view_get_widget                 (CajaView      *view);
+    void              baul_view_load_location              (CajaView      *view,
             const char        *location_uri);
-    void              caja_view_stop_loading               (CajaView      *view);
-    int               caja_view_get_selection_count        (CajaView      *view);
-    GList *           caja_view_get_selection              (CajaView      *view);
-    void              caja_view_set_selection              (CajaView      *view,
+    void              baul_view_stop_loading               (CajaView      *view);
+    int               baul_view_get_selection_count        (CajaView      *view);
+    GList *           baul_view_get_selection              (CajaView      *view);
+    void              baul_view_set_selection              (CajaView      *view,
             GList             *list);
-    void              caja_view_invert_selection           (CajaView      *view);
-    char *            caja_view_get_first_visible_file     (CajaView      *view);
-    void              caja_view_scroll_to_file             (CajaView      *view,
+    void              baul_view_invert_selection           (CajaView      *view);
+    char *            baul_view_get_first_visible_file     (CajaView      *view);
+    void              baul_view_scroll_to_file             (CajaView      *view,
             const char        *uri);
-    char *            caja_view_get_title                  (CajaView      *view);
-    gboolean          caja_view_supports_zooming           (CajaView      *view);
-    void              caja_view_bump_zoom_level            (CajaView      *view,
+    char *            baul_view_get_title                  (CajaView      *view);
+    gboolean          baul_view_supports_zooming           (CajaView      *view);
+    void              baul_view_bump_zoom_level            (CajaView      *view,
             int                zoom_increment);
-    void              caja_view_zoom_to_level              (CajaView      *view,
+    void              baul_view_zoom_to_level              (CajaView      *view,
             CajaZoomLevel  level);
-    void              caja_view_restore_default_zoom_level (CajaView      *view);
-    gboolean          caja_view_can_zoom_in                (CajaView      *view);
-    gboolean          caja_view_can_zoom_out               (CajaView      *view);
-    CajaZoomLevel caja_view_get_zoom_level             (CajaView      *view);
-    void              caja_view_pop_up_location_context_menu (CajaView    *view,
+    void              baul_view_restore_default_zoom_level (CajaView      *view);
+    gboolean          baul_view_can_zoom_in                (CajaView      *view);
+    gboolean          baul_view_can_zoom_out               (CajaView      *view);
+    CajaZoomLevel baul_view_get_zoom_level             (CajaView      *view);
+    void              baul_view_pop_up_location_context_menu (CajaView    *view,
             GdkEventButton  *event,
             const char      *location);
-    void              caja_view_grab_focus                 (CajaView      *view);
-    void              caja_view_update_menus               (CajaView      *view);
-    void              caja_view_drop_proxy_received_uris   (CajaView         *view,
+    void              baul_view_grab_focus                 (CajaView      *view);
+    void              baul_view_update_menus               (CajaView      *view);
+    void              baul_view_drop_proxy_received_uris   (CajaView         *view,
             GList                *uris,
             const char           *target_location,
             GdkDragAction         action);
-    void              caja_view_drop_proxy_received_netscape_url (CajaView         *view,
+    void              baul_view_drop_proxy_received_netscape_url (CajaView         *view,
             const char           *source_url,
             const char           *target_location,
             GdkDragAction         action);
-    void              caja_view_set_is_active              (CajaView      *view,
+    void              baul_view_set_is_active              (CajaView      *view,
             gboolean           is_active);
 
 #ifdef __cplusplus

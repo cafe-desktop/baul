@@ -28,7 +28,7 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_IMAGE_PROPERTIES_PAGE caja_image_properties_page_get_type()
+#define CAJA_TYPE_IMAGE_PROPERTIES_PAGE baul_image_properties_page_get_type()
 #define CAJA_IMAGE_PROPERTIES_PAGE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_IMAGE_PROPERTIES_PAGE, CajaImagePropertiesPage))
 #define CAJA_IMAGE_PROPERTIES_PAGE_CLASS(klass) \
@@ -53,8 +53,8 @@ typedef struct
     GtkBoxClass parent;
 } CajaImagePropertiesPageClass;
 
-GType caja_image_properties_page_get_type (void);
-void  caja_image_properties_page_register (void);
+GType baul_image_properties_page_get_type (void);
+void  baul_image_properties_page_register (void);
 
 G_END_DECLS
 

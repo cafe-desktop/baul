@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-navigation-window-pane.h: Caja navigation window pane
+   baul-navigation-window-pane.h: Caja navigation window pane
 
    Copyright (C) 2008 Free Software Foundation, Inc.
 
@@ -25,10 +25,10 @@
 #ifndef CAJA_NAVIGATION_WINDOW_PANE_H
 #define CAJA_NAVIGATION_WINDOW_PANE_H
 
-#include "caja-window-pane.h"
-#include "caja-navigation-window-slot.h"
+#include "baul-window-pane.h"
+#include "baul-navigation-window-slot.h"
 
-#define CAJA_TYPE_NAVIGATION_WINDOW_PANE     (caja_navigation_window_pane_get_type())
+#define CAJA_TYPE_NAVIGATION_WINDOW_PANE     (baul_navigation_window_pane_get_type())
 #define CAJA_NAVIGATION_WINDOW_PANE_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPaneClass))
 #define CAJA_NAVIGATION_WINDOW_PANE(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPane))
 #define CAJA_IS_NAVIGATION_WINDOW_PANE(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_NAVIGATION_WINDOW_PANE))
@@ -67,27 +67,27 @@ struct _CajaNavigationWindowPane
     GtkWidget *split_view_hpane;
 };
 
-GType    caja_navigation_window_pane_get_type (void);
+GType    baul_navigation_window_pane_get_type (void);
 
-CajaNavigationWindowPane* caja_navigation_window_pane_new (CajaWindow *window);
+CajaNavigationWindowPane* baul_navigation_window_pane_new (CajaWindow *window);
 
 /* location bar */
-void     caja_navigation_window_pane_setup             (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_setup             (CajaNavigationWindowPane *pane);
 
-void     caja_navigation_window_pane_hide_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference);
-void     caja_navigation_window_pane_show_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference);
-gboolean caja_navigation_window_pane_location_bar_showing (CajaNavigationWindowPane *pane);
-void     caja_navigation_window_pane_hide_path_bar (CajaNavigationWindowPane *pane);
-void     caja_navigation_window_pane_show_path_bar (CajaNavigationWindowPane *pane);
-gboolean caja_navigation_window_pane_path_bar_showing (CajaNavigationWindowPane *pane);
-gboolean caja_navigation_window_pane_search_bar_showing (CajaNavigationWindowPane *pane);
-void     caja_navigation_window_pane_set_bar_mode  (CajaNavigationWindowPane *pane, CajaBarMode mode);
-void     caja_navigation_window_pane_show_location_bar_temporarily (CajaNavigationWindowPane *pane);
-void     caja_navigation_window_pane_show_navigation_bar_temporarily (CajaNavigationWindowPane *pane);
-void     caja_navigation_window_pane_always_use_location_entry (CajaNavigationWindowPane *pane, gboolean use_entry);
-gboolean caja_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_hide_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference);
+void     baul_navigation_window_pane_show_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference);
+gboolean baul_navigation_window_pane_location_bar_showing (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_hide_path_bar (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_show_path_bar (CajaNavigationWindowPane *pane);
+gboolean baul_navigation_window_pane_path_bar_showing (CajaNavigationWindowPane *pane);
+gboolean baul_navigation_window_pane_search_bar_showing (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_set_bar_mode  (CajaNavigationWindowPane *pane, CajaBarMode mode);
+void     baul_navigation_window_pane_show_location_bar_temporarily (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_show_navigation_bar_temporarily (CajaNavigationWindowPane *pane);
+void     baul_navigation_window_pane_always_use_location_entry (CajaNavigationWindowPane *pane, gboolean use_entry);
+gboolean baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane);
 /* notebook */
-void     caja_navigation_window_pane_add_slot_in_tab (CajaNavigationWindowPane *pane, CajaWindowSlot *slot, CajaWindowOpenSlotFlags flags);
-void     caja_navigation_window_pane_remove_page (CajaNavigationWindowPane *pane, int page_num);
+void     baul_navigation_window_pane_add_slot_in_tab (CajaNavigationWindowPane *pane, CajaWindowSlot *slot, CajaWindowOpenSlotFlags flags);
+void     baul_navigation_window_pane_remove_page (CajaNavigationWindowPane *pane, int page_num);
 
 #endif /* CAJA_NAVIGATION_WINDOW_PANE_H */

@@ -30,9 +30,9 @@
 #include <eel/eel-gtk-macros.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include <libcaja-private/caja-file-utilities.h>
-#include <libcaja-private/caja-view.h>
-#include <libcaja-private/caja-view-factory.h>
+#include <libbaul-private/baul-file-utilities.h>
+#include <libbaul-private/baul-view.h>
+#include <libbaul-private/baul-view-factory.h>
 
 #include "fm-empty-view.h"
 
@@ -65,7 +65,7 @@ fm_empty_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *di
     if (!timer) timer = g_timer_new ();
 
     g_timer_start (timer);
-    icon = caja_file_get_icon_surface (file, caja_get_icon_size_for_zoom_level (CAJA_ZOOM_LEVEL_STANDARD),
+    icon = baul_file_get_icon_surface (file, baul_get_icon_size_for_zoom_level (CAJA_ZOOM_LEVEL_STANDARD),
                                        TRUE, gtk_widget_get_scale_factor (GTK_WIDGET(view)), 0);
 
     elaps = g_timer_elapsed (timer, NULL);
@@ -412,5 +412,5 @@ fm_empty_view_register (void)
     fm_empty_view.error_label = fm_empty_view.error_label;
     fm_empty_view.display_location_label = fm_empty_view.display_location_label;
 
-    caja_view_factory_register (&fm_empty_view);
+    baul_view_factory_register (&fm_empty_view);
 }

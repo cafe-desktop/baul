@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-lib-self-check-functions.c: Wrapper for all self check functions
+   baul-lib-self-check-functions.c: Wrapper for all self check functions
    in Caja proper.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -27,10 +27,10 @@
 
 #if ! defined (CAJA_OMIT_SELF_CHECK)
 
-#include "caja-lib-self-check-functions.h"
+#include "baul-lib-self-check-functions.h"
 
 void
-caja_run_lib_self_checks (void)
+baul_run_lib_self_checks (void)
 {
     CAJA_LIB_FOR_EACH_SELF_CHECK_FUNCTION (EEL_CALL_SELF_CHECK_FUNCTION)
 }

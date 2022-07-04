@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-debug-log.c: Ring buffer for logging debug messages
+   baul-debug-log.c: Ring buffer for logging debug messages
 
    Copyright (C) 2006 Novell, Inc.
 
@@ -27,8 +27,8 @@
 #include <string.h>
 #include <time.h>
 #include <sys/time.h>
-#include "caja-debug-log.h"
-#include "caja-file.h"
+#include "baul-debug-log.h"
+#include "baul-file.h"
 
 #define DEFAULT_RING_BUFFER_NUM_LINES 1000
 
@@ -62,12 +62,12 @@ unlock (void)
 }
 
 void
-caja_debug_log (gboolean is_milestone, const char *domain, const char *format, ...)
+baul_debug_log (gboolean is_milestone, const char *domain, const char *format, ...)
 {
     va_list args;
 
     va_start (args, format);
-    caja_debug_logv (is_milestone, domain, NULL, format, args);
+    baul_debug_logv (is_milestone, domain, NULL, format, args);
     va_end (args);
 }
 
@@ -147,7 +147,7 @@ add_to_milestones (const char *str)
 }
 
 void
-caja_debug_logv (gboolean is_milestone, const char *domain, const GList *uris, const char *format, va_list args)
+baul_debug_logv (gboolean is_milestone, const char *domain, const GList *uris, const char *format, va_list args)
 {
     char *str;
     char *debug_str;
@@ -244,18 +244,18 @@ out:
 }
 
 void
-caja_debug_log_with_uri_list (gboolean is_milestone, const char *domain, const GList *uris,
+baul_debug_log_with_uri_list (gboolean is_milestone, const char *domain, const GList *uris,
                               const char *format, ...)
 {
     va_list args;
 
     va_start (args, format);
-    caja_debug_logv (is_milestone, domain, uris, format, args);
+    baul_debug_logv (is_milestone, domain, uris, format, args);
     va_end (args);
 }
 
 void
-caja_debug_log_with_file_list (gboolean is_milestone, const char *domain, GList *files,
+baul_debug_log_with_file_list (gboolean is_milestone, const char *domain, GList *files,
                                const char *format, ...)
 {
     va_list args;
@@ -265,7 +265,7 @@ caja_debug_log_with_file_list (gboolean is_milestone, const char *domain, GList 
 
     /* Avoid conversion if debugging disabled */
     if (!(is_milestone ||
-            caja_debug_log_is_domain_enabled (domain)))
+            baul_debug_log_is_domain_enabled (domain)))
     {
         return;
     }
@@ -279,9 +279,9 @@ caja_debug_log_with_file_list (gboolean is_milestone, const char *domain, GList 
         char *uri;
 
         file = CAJA_FILE (l->data);
-        uri = caja_file_get_uri (file);
+        uri = baul_file_get_uri (file);
 
-        if (caja_file_is_gone (file))
+        if (baul_file_is_gone (file))
         {
             char *new_uri;
 
@@ -305,14 +305,14 @@ caja_debug_log_with_file_list (gboolean is_milestone, const char *domain, GList 
     uris = g_list_reverse (uris);
 
     va_start (args, format);
-    caja_debug_logv (is_milestone, domain, uris, format, args);
+    baul_debug_logv (is_milestone, domain, uris, format, args);
     va_end (args);
 
     g_list_free_full (uris, g_free);
 }
 
 gboolean
-caja_debug_log_load_configuration (const char *filename, GError **error)
+baul_debug_log_load_configuration (const char *filename, GError **error)
 {
     GKeyFile *key_file;
     char **strings;
@@ -344,7 +344,7 @@ caja_debug_log_load_configuration (const char *filename, GError **error)
         for (i = 0; i < num_strings; i++)
             strings[i] = g_strstrip (strings[i]);
 
-        caja_debug_log_enable_domains ((const char **) strings, num_strings);
+        baul_debug_log_enable_domains ((const char **) strings, num_strings);
         g_strfreev (strings);
     }
 
@@ -355,14 +355,14 @@ caja_debug_log_load_configuration (const char *filename, GError **error)
     if (my_error)
         g_error_free (my_error);
     else
-        caja_debug_log_set_max_lines (num);
+        baul_debug_log_set_max_lines (num);
 
     g_key_file_free (key_file);
     return TRUE;
 }
 
 void
-caja_debug_log_enable_domains (const char **domains, int n_domains)
+baul_debug_log_enable_domains (const char **domains, int n_domains)
 {
     int i;
 
@@ -394,7 +394,7 @@ caja_debug_log_enable_domains (const char **domains, int n_domains)
 }
 
 void
-caja_debug_log_disable_domains (const char **domains, int n_domains)
+baul_debug_log_disable_domains (const char **domains, int n_domains)
 {
     g_assert (domains != NULL);
     g_assert (n_domains >= 0);
@@ -427,7 +427,7 @@ caja_debug_log_disable_domains (const char **domains, int n_domains)
 }
 
 gboolean
-caja_debug_log_is_domain_enabled (const char *domain)
+baul_debug_log_is_domain_enabled (const char *domain)
 {
     gboolean retval;
 
@@ -525,7 +525,7 @@ dump_configuration (const char *filename, FILE *file, GError **error)
     if (!write_string (filename, file,
                        "\n\n"
                        "This configuration for the debug log can be re-created\n"
-                       "by putting the following in ~/caja-debug-log.conf\n"
+                       "by putting the following in ~/baul-debug-log.conf\n"
                        "(use ';' to separate domain names):\n\n",
                        error))
     {
@@ -609,7 +609,7 @@ dump_ring_buffer (const char *filename, FILE *file, GError **error)
 }
 
 gboolean
-caja_debug_log_dump (const char *filename, GError **error)
+baul_debug_log_dump (const char *filename, GError **error)
 {
     FILE *file;
     gboolean success;
@@ -670,7 +670,7 @@ out:
 }
 
 void
-caja_debug_log_set_max_lines (int num_lines)
+baul_debug_log_set_max_lines (int num_lines)
 {
     char **new_buffer;
     int lines_to_copy;
@@ -725,7 +725,7 @@ out:
 }
 
 int
-caja_debug_log_get_max_lines (void)
+baul_debug_log_get_max_lines (void)
 {
     int retval;
 
@@ -737,7 +737,7 @@ caja_debug_log_get_max_lines (void)
 }
 
 void
-caja_debug_log_clear (void)
+baul_debug_log_clear (void)
 {
     int i;
 

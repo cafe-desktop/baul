@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
-   caja-trash-monitor.h: Caja trash state watcher.
+   baul-trash-monitor.h: Caja trash state watcher.
 
    Copyright (C) 2000 Eazel, Inc.
 
@@ -33,7 +33,7 @@ typedef struct CajaTrashMonitor CajaTrashMonitor;
 typedef struct CajaTrashMonitorClass CajaTrashMonitorClass;
 typedef struct _CajaTrashMonitorPrivate CajaTrashMonitorPrivate;
 
-#define CAJA_TYPE_TRASH_MONITOR caja_trash_monitor_get_type()
+#define CAJA_TYPE_TRASH_MONITOR baul_trash_monitor_get_type()
 #define CAJA_TRASH_MONITOR(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_TRASH_MONITOR, CajaTrashMonitor))
 #define CAJA_TRASH_MONITOR_CLASS(klass) \
@@ -59,10 +59,10 @@ struct CajaTrashMonitorClass
                                          gboolean 		 new_state);
 };
 
-GType			caja_trash_monitor_get_type				(void);
+GType			baul_trash_monitor_get_type				(void);
 
-CajaTrashMonitor   *caja_trash_monitor_get 				(void);
-gboolean		caja_trash_monitor_is_empty 			(void);
-GIcon                  *caja_trash_monitor_get_icon                         (void);
+CajaTrashMonitor   *baul_trash_monitor_get 				(void);
+gboolean		baul_trash_monitor_is_empty 			(void);
+GIcon                  *baul_trash_monitor_get_icon                         (void);
 
 #endif

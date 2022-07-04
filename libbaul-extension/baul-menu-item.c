@@ -1,5 +1,5 @@
 /*
- *  caja-menu-item.c - Menu items exported by CajaMenuProvider
+ *  baul-menu-item.c - Menu items exported by CajaMenuProvider
  *                         objects.
  *
  *  Copyright (C) 2003 Novell, Inc.
@@ -23,8 +23,8 @@
  */
 
 #include <config.h>
-#include "caja-menu.h"
-#include "caja-extension-i18n.h"
+#include "baul-menu.h"
+#include "baul-extension-i18n.h"
 
 enum {
     ACTIVATE,
@@ -58,21 +58,21 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static GObjectClass *parent_class = NULL;
 
 /**
- * SECTION:caja-menu-item
+ * SECTION:baul-menu-item
  * @title: CajaMenuItem
  * @short_description: Menu item descriptor object
- * @include: libcaja-extension/caja-menu-item.h
+ * @include: libbaul-extension/baul-menu-item.h
  *
  * #CajaMenuItem is an object that describes an item in a file manager
  * menu. Extensions can provide #CajaMenuItem objects by registering a
  * #CajaMenuProvider and returning them from
- * caja_menu_provider_get_file_items(), or
- * caja_menu_provider_get_background_items(), which will be called by the
+ * baul_menu_provider_get_file_items(), or
+ * baul_menu_provider_get_background_items(), which will be called by the
  * main application when creating menus.
  */
 
 /**
- * caja_menu_item_new:
+ * baul_menu_item_new:
  * @name: the identifier for the menu item
  * @label: the user-visible label of the menu item
  * @tip: the tooltip of the menu item
@@ -83,7 +83,7 @@ static GObjectClass *parent_class = NULL;
  * Returns: a newly create #CajaMenuItem
  */
 CajaMenuItem *
-caja_menu_item_new (const char *name,
+baul_menu_item_new (const char *name,
                     const char *label,
                     const char *tip,
                     const char *icon)
@@ -105,32 +105,32 @@ caja_menu_item_new (const char *name,
 }
 
 /**
- * caja_menu_item_activate:
+ * baul_menu_item_activate:
  * @item: pointer to a #CajaMenuItem
  *
  * emits the activate signal.
  */
 void
-caja_menu_item_activate (CajaMenuItem *item)
+baul_menu_item_activate (CajaMenuItem *item)
 {
     g_signal_emit (item, signals[ACTIVATE], 0);
 }
 
 /**
- * caja_menu_item_set_submenu:
+ * baul_menu_item_set_submenu:
  * @item: pointer to a #CajaMenuItem
  * @menu: pointer to a #CajaMenu to attach to the button
  *
  * Attachs a menu to the given #CajaMenuItem.
  */
 void
-caja_menu_item_set_submenu (CajaMenuItem *item, CajaMenu *menu)
+baul_menu_item_set_submenu (CajaMenuItem *item, CajaMenu *menu)
 {
     g_object_set (item, "menu", menu, NULL);
 }
 
 static void
-caja_menu_item_get_property (GObject *object,
+baul_menu_item_get_property (GObject *object,
                              guint param_id,
                              GValue *value,
                              GParamSpec *pspec)
@@ -168,7 +168,7 @@ caja_menu_item_get_property (GObject *object,
 }
 
 static void
-caja_menu_item_set_property (GObject *object,
+baul_menu_item_set_property (GObject *object,
                              guint param_id,
                              const GValue *value,
                              GParamSpec *pspec)
@@ -220,7 +220,7 @@ caja_menu_item_set_property (GObject *object,
 }
 
 static void
-caja_menu_item_finalize (GObject *object)
+baul_menu_item_finalize (GObject *object)
 {
     CajaMenuItem *item;
 
@@ -240,7 +240,7 @@ caja_menu_item_finalize (GObject *object)
 }
 
 static void
-caja_menu_item_instance_init (CajaMenuItem *item)
+baul_menu_item_instance_init (CajaMenuItem *item)
 {
     item->details = g_new0 (CajaMenuItemDetails, 1);
     item->details->sensitive = TRUE;
@@ -248,13 +248,13 @@ caja_menu_item_instance_init (CajaMenuItem *item)
 }
 
 static void
-caja_menu_item_class_init (CajaMenuItemClass *class)
+baul_menu_item_class_init (CajaMenuItemClass *class)
 {
     parent_class = g_type_class_peek_parent (class);
 
-    G_OBJECT_CLASS (class)->finalize = caja_menu_item_finalize;
-    G_OBJECT_CLASS (class)->get_property = caja_menu_item_get_property;
-    G_OBJECT_CLASS (class)->set_property = caja_menu_item_set_property;
+    G_OBJECT_CLASS (class)->finalize = baul_menu_item_finalize;
+    G_OBJECT_CLASS (class)->get_property = baul_menu_item_get_property;
+    G_OBJECT_CLASS (class)->set_property = baul_menu_item_set_property;
 
     signals[ACTIVATE] =
         g_signal_new ("activate",
@@ -319,7 +319,7 @@ caja_menu_item_class_init (CajaMenuItemClass *class)
 }
 
 GType
-caja_menu_item_get_type (void)
+baul_menu_item_get_type (void)
 {
     static GType type = 0;
 
@@ -328,12 +328,12 @@ caja_menu_item_get_type (void)
             sizeof (CajaMenuItemClass),
             NULL,
             NULL,
-            (GClassInitFunc)caja_menu_item_class_init,
+            (GClassInitFunc)baul_menu_item_class_init,
             NULL,
             NULL,
             sizeof (CajaMenuItem),
             0,
-            (GInstanceInitFunc)caja_menu_item_instance_init
+            (GInstanceInitFunc)baul_menu_item_instance_init
         };
 
         type = g_type_register_static

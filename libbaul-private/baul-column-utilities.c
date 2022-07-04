@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-column-utilities.h - Utilities related to column specifications
+/* baul-column-utilities.h - Utilities related to column specifications
 
    Copyright (C) 2004 Novell, Inc.
 
@@ -28,11 +28,11 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include <libcaja-extension/caja-column-provider.h>
+#include <libbaul-extension/baul-column-provider.h>
 
-#include "caja-column-utilities.h"
-#include "caja-extensions.h"
-#include "caja-module.h"
+#include "baul-column-utilities.h"
+#include "baul-extensions.h"
+#include "baul-module.h"
 
 static GList *
 get_builtin_columns (void)
@@ -158,7 +158,7 @@ get_extension_columns (void)
     GList *providers;
     GList *l;
 
-    providers = caja_extensions_get_for_type (CAJA_TYPE_COLUMN_PROVIDER);
+    providers = baul_extensions_get_for_type (CAJA_TYPE_COLUMN_PROVIDER);
 
     columns = NULL;
 
@@ -168,11 +168,11 @@ get_extension_columns (void)
         GList *provider_columns;
 
         provider = CAJA_COLUMN_PROVIDER (l->data);
-        provider_columns = caja_column_provider_get_columns (provider);
+        provider_columns = baul_column_provider_get_columns (provider);
         columns = g_list_concat (columns, provider_columns);
     }
 
-    caja_module_extension_list_free (providers);
+    baul_module_extension_list_free (providers);
 
     return columns;
 }
@@ -200,11 +200,11 @@ get_trash_columns (void)
                                                NULL));
     }
 
-    return caja_column_list_copy (columns);
+    return baul_column_list_copy (columns);
 }
 
 GList *
-caja_get_common_columns (void)
+baul_get_common_columns (void)
 {
     static GList *columns = NULL;
 
@@ -214,28 +214,28 @@ caja_get_common_columns (void)
                                  get_extension_columns ());
     }
 
-    return caja_column_list_copy (columns);
+    return baul_column_list_copy (columns);
 }
 
 GList *
-caja_get_all_columns (void)
+baul_get_all_columns (void)
 {
     GList *columns = NULL;
 
-    columns = g_list_concat (caja_get_common_columns (),
+    columns = g_list_concat (baul_get_common_columns (),
                              get_trash_columns ());
 
     return columns;
 }
 
 GList *
-caja_get_columns_for_file (CajaFile *file)
+baul_get_columns_for_file (CajaFile *file)
 {
     GList *columns;
 
-    columns = caja_get_common_columns ();
+    columns = baul_get_common_columns ();
 
-    if (file != NULL && caja_file_is_in_trash (file))
+    if (file != NULL && baul_file_is_in_trash (file))
     {
         columns = g_list_concat (columns,
                                  get_trash_columns ());
@@ -245,7 +245,7 @@ caja_get_columns_for_file (CajaFile *file)
 }
 
 GList *
-caja_column_list_copy (GList *columns)
+baul_column_list_copy (GList *columns)
 {
     GList *ret;
     GList *l;
@@ -261,7 +261,7 @@ caja_column_list_copy (GList *columns)
 }
 
 void
-caja_column_list_free (GList *columns)
+baul_column_list_free (GList *columns)
 {
     GList *l;
 
@@ -331,7 +331,7 @@ column_compare (CajaColumn *a, CajaColumn *b, char **column_order)
 }
 
 GList *
-caja_sort_columns (GList  *columns,
+baul_sort_columns (GList  *columns,
                    char  **column_order)
 {
     if (!column_order)

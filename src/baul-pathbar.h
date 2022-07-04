@@ -1,4 +1,4 @@
-/* caja-pathbar.h
+/* baul-pathbar.h
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -28,7 +28,7 @@ typedef struct _CajaPathBar      CajaPathBar;
 typedef struct _CajaPathBarClass CajaPathBarClass;
 
 
-#define CAJA_TYPE_PATH_BAR                 (caja_path_bar_get_type ())
+#define CAJA_TYPE_PATH_BAR                 (baul_path_bar_get_type ())
 #define CAJA_PATH_BAR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PATH_BAR, CajaPathBar))
 #define CAJA_PATH_BAR_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_PATH_BAR, CajaPathBarClass))
 #define CAJA_IS_PATH_BAR(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_PATH_BAR))
@@ -77,15 +77,15 @@ struct _CajaPathBarClass
                              GFile            *location);
 };
 
-GType    caja_path_bar_get_type (void) G_GNUC_CONST;
+GType    baul_path_bar_get_type (void) G_GNUC_CONST;
 
-gboolean caja_path_bar_set_path    (CajaPathBar *path_bar, GFile *file);
+gboolean baul_path_bar_set_path    (CajaPathBar *path_bar, GFile *file);
 
-GFile *  caja_path_bar_get_path_for_button (CajaPathBar *path_bar,
+GFile *  baul_path_bar_get_path_for_button (CajaPathBar *path_bar,
         GtkWidget       *button);
 
-void     caja_path_bar_clear_buttons (CajaPathBar *path_bar);
+void     baul_path_bar_clear_buttons (CajaPathBar *path_bar);
 
-GtkWidget * caja_path_bar_get_button_from_button_list_entry (gpointer entry);
+GtkWidget * baul_path_bar_get_button_from_button_list_entry (gpointer entry);
 
 #endif /* CAJA_PATHBAR_H */

@@ -26,11 +26,11 @@
 
 #include <gtk/gtk.h>
 
-#include <libcaja-private/caja-query.h>
+#include <libbaul-private/baul-query.h>
 
-#include "caja-window.h"
+#include "baul-window.h"
 
-#define CAJA_TYPE_SEARCH_BAR caja_search_bar_get_type()
+#define CAJA_TYPE_SEARCH_BAR baul_search_bar_get_type()
 #define CAJA_SEARCH_BAR(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_BAR, CajaSearchBar))
 #define CAJA_SEARCH_BAR_CLASS(klass) \
@@ -59,13 +59,13 @@ typedef struct
     void (* focus_in) (CajaSearchBar *bar);
 } CajaSearchBarClass;
 
-GType      caja_search_bar_get_type     	(void);
-GtkWidget* caja_search_bar_new          	(CajaWindow *window);
+GType      baul_search_bar_get_type     	(void);
+GtkWidget* baul_search_bar_new          	(CajaWindow *window);
 
-GtkWidget *    caja_search_bar_borrow_entry  (CajaSearchBar *bar);
-void           caja_search_bar_return_entry  (CajaSearchBar *bar);
-void           caja_search_bar_grab_focus    (CajaSearchBar *bar);
-CajaQuery *caja_search_bar_get_query     (CajaSearchBar *bar);
-void           caja_search_bar_clear         (CajaSearchBar *bar);
+GtkWidget *    baul_search_bar_borrow_entry  (CajaSearchBar *bar);
+void           baul_search_bar_return_entry  (CajaSearchBar *bar);
+void           baul_search_bar_grab_focus    (CajaSearchBar *bar);
+CajaQuery *baul_search_bar_get_query     (CajaSearchBar *bar);
+void           baul_search_bar_clear         (CajaSearchBar *bar);
 
 #endif /* CAJA_SEARCH_BAR_H */

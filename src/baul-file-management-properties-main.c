@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-file-management-properties-main.c - Start the caja-file-management preference dialog.
+/* baul-file-management-properties-main.c - Start the baul-file-management preference dialog.
 
    Copyright (C) 2002 Jan Arne Petersen
 
@@ -27,13 +27,13 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-module.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-module.h>
 
-#include "caja-file-management-properties.h"
+#include "baul-file-management-properties.h"
 
 static void
-caja_file_management_properties_main_close_callback (GtkDialog *dialog,
+baul_file_management_properties_main_close_callback (GtkDialog *dialog,
         int response_id)
 {
     if (response_id == GTK_RESPONSE_CLOSE)
@@ -51,11 +51,11 @@ main (int argc, char *argv[])
 
     gtk_init (&argc, &argv);
 
-    caja_global_preferences_init ();
+    baul_global_preferences_init ();
 
-    caja_module_setup ();
+    baul_module_setup ();
 
-    caja_file_management_properties_dialog_show (G_CALLBACK (caja_file_management_properties_main_close_callback), NULL);
+    baul_file_management_properties_dialog_show (G_CALLBACK (baul_file_management_properties_main_close_callback), NULL);
 
     gtk_main ();
 

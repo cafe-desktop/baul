@@ -22,7 +22,7 @@
  * Authors: John Sullivan <sullivan@eazel.com>
  */
 
-/* caja-bookmark-list.h - interface for centralized list of bookmarks.
+/* baul-bookmark-list.h - interface for centralized list of bookmarks.
  */
 
 #ifndef CAJA_BOOKMARK_LIST_H
@@ -30,12 +30,12 @@
 
 #include <gio/gio.h>
 
-#include <libcaja-private/caja-bookmark.h>
+#include <libbaul-private/baul-bookmark.h>
 
 typedef struct CajaBookmarkList CajaBookmarkList;
 typedef struct CajaBookmarkListClass CajaBookmarkListClass;
 
-#define CAJA_TYPE_BOOKMARK_LIST caja_bookmark_list_get_type()
+#define CAJA_TYPE_BOOKMARK_LIST baul_bookmark_list_get_type()
 #define CAJA_BOOKMARK_LIST(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_BOOKMARK_LIST, CajaBookmarkList))
 #define CAJA_BOOKMARK_LIST_CLASS(klass) \
@@ -62,27 +62,27 @@ struct CajaBookmarkListClass
     void (* contents_changed) (CajaBookmarkList *bookmarks);
 };
 
-GType                   caja_bookmark_list_get_type            (void);
-CajaBookmarkList *  caja_bookmark_list_new                 (void);
-void                    caja_bookmark_list_append              (CajaBookmarkList   *bookmarks,
+GType                   baul_bookmark_list_get_type            (void);
+CajaBookmarkList *  baul_bookmark_list_new                 (void);
+void                    baul_bookmark_list_append              (CajaBookmarkList   *bookmarks,
         CajaBookmark *bookmark);
-gboolean                caja_bookmark_list_contains            (CajaBookmarkList   *bookmarks,
+gboolean                baul_bookmark_list_contains            (CajaBookmarkList   *bookmarks,
         CajaBookmark *bookmark);
-void                    caja_bookmark_list_delete_item_at      (CajaBookmarkList   *bookmarks,
+void                    baul_bookmark_list_delete_item_at      (CajaBookmarkList   *bookmarks,
         guint                   index);
-void                    caja_bookmark_list_delete_items_with_uri (CajaBookmarkList *bookmarks,
+void                    baul_bookmark_list_delete_items_with_uri (CajaBookmarkList *bookmarks,
         const char		   *uri);
-void                    caja_bookmark_list_insert_item         (CajaBookmarkList   *bookmarks,
+void                    baul_bookmark_list_insert_item         (CajaBookmarkList   *bookmarks,
         CajaBookmark *bookmark,
         guint                   index);
-guint                   caja_bookmark_list_length              (CajaBookmarkList   *bookmarks);
-CajaBookmark *      caja_bookmark_list_item_at             (CajaBookmarkList   *bookmarks,
+guint                   baul_bookmark_list_length              (CajaBookmarkList   *bookmarks);
+CajaBookmark *      baul_bookmark_list_item_at             (CajaBookmarkList   *bookmarks,
         guint                   index);
-void                    caja_bookmark_list_move_item           (CajaBookmarkList *bookmarks,
+void                    baul_bookmark_list_move_item           (CajaBookmarkList *bookmarks,
         guint                 index,
         guint                 destination);
-void                    caja_bookmark_list_set_window_geometry (CajaBookmarkList   *bookmarks,
+void                    baul_bookmark_list_set_window_geometry (CajaBookmarkList   *bookmarks,
         const char             *geometry);
-const char *            caja_bookmark_list_get_window_geometry (CajaBookmarkList   *bookmarks);
+const char *            baul_bookmark_list_get_window_geometry (CajaBookmarkList   *bookmarks);
 
 #endif /* CAJA_BOOKMARK_LIST_H */

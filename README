@@ -5,10 +5,10 @@ Caja is a fork of Nautilus.
 Hacking on Caja
 ===================
 
-Please see the HACKING file for information about hacking on caja.
+Please see the HACKING file for information about hacking on baul.
 
 How to report bugs
 ==================
 
 Bugs should be reported in GitHub
-https://github.com/mate-desktop/caja/issues
+https://github.com/mate-desktop/baul/issues

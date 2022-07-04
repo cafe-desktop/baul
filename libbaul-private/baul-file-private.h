@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-file-private.h:
+   baul-file-private.h:
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -28,10 +28,10 @@
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-string.h>
 
-#include "caja-directory.h"
-#include "caja-file.h"
-#include "caja-monitor.h"
-#include "caja-undostack-manager.h"
+#include "baul-directory.h"
+#include "baul-file.h"
+#include "baul-monitor.h"
+#include "baul-undostack-manager.h"
 
 #define CAJA_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_CHARACTERS_PER_LINE 80
 #define CAJA_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_LINES               24
@@ -115,7 +115,7 @@ struct _CajaFilePrivate
     GList *mime_list; /* If this is a directory, the list of MIME types in it. */
     char *top_left_text;
 
-    /* Info you might get from a link (.desktop, .directory or caja link) */
+    /* Info you might get from a link (.desktop, .directory or baul link) */
     char *custom_icon;
     char *activation_uri;
 
@@ -249,72 +249,72 @@ typedef struct
 } CajaFileOperation;
 
 
-CajaFile *caja_file_new_from_info                  (CajaDirectory      *directory,
+CajaFile *baul_file_new_from_info                  (CajaDirectory      *directory,
         GFileInfo              *info);
-void          caja_file_emit_changed                   (CajaFile           *file);
-void          caja_file_mark_gone                      (CajaFile           *file);
-char *        caja_extract_top_left_text               (const char             *text,
+void          baul_file_emit_changed                   (CajaFile           *file);
+void          baul_file_mark_gone                      (CajaFile           *file);
+char *        baul_extract_top_left_text               (const char             *text,
         gboolean                large,
         int                     length);
-void          caja_file_set_directory                  (CajaFile           *file,
+void          baul_file_set_directory                  (CajaFile           *file,
         CajaDirectory      *directory);
-gboolean      caja_file_get_date                       (CajaFile           *file,
+gboolean      baul_file_get_date                       (CajaFile           *file,
         CajaDateType        date_type,
         time_t                 *date);
-void          caja_file_updated_deep_count_in_progress (CajaFile           *file);
+void          baul_file_updated_deep_count_in_progress (CajaFile           *file);
 
 
-void          caja_file_clear_info                     (CajaFile           *file);
+void          baul_file_clear_info                     (CajaFile           *file);
 /* Compare file's state with a fresh file info struct, return FALSE if
  * no change, update file and return TRUE if the file info contains
  * new state.  */
-gboolean      caja_file_update_info                    (CajaFile           *file,
+gboolean      baul_file_update_info                    (CajaFile           *file,
         GFileInfo              *info);
-gboolean      caja_file_update_name                    (CajaFile           *file,
+gboolean      baul_file_update_name                    (CajaFile           *file,
         const char             *name);
-gboolean      caja_file_update_metadata_from_info      (CajaFile           *file,
+gboolean      baul_file_update_metadata_from_info      (CajaFile           *file,
         GFileInfo              *info);
 
-gboolean      caja_file_update_name_and_directory      (CajaFile           *file,
+gboolean      baul_file_update_name_and_directory      (CajaFile           *file,
         const char             *name,
         CajaDirectory      *directory);
 
-gboolean      caja_file_set_display_name               (CajaFile           *file,
+gboolean      baul_file_set_display_name               (CajaFile           *file,
         const char             *display_name,
         const char             *edit_name,
         gboolean                custom);
-void          caja_file_set_mount                      (CajaFile           *file,
+void          baul_file_set_mount                      (CajaFile           *file,
         GMount                 *mount);
 
 /* Return true if the top lefts of files in this directory should be
  * fetched, according to the preference settings.
  */
-gboolean      caja_file_should_get_top_left_text       (CajaFile           *file);
+gboolean      baul_file_should_get_top_left_text       (CajaFile           *file);
 
 /* Mark specified attributes for this file out of date without canceling current
  * I/O or kicking off new I/O.
  */
-void                   caja_file_invalidate_attributes_internal     (CajaFile           *file,
+void                   baul_file_invalidate_attributes_internal     (CajaFile           *file,
         CajaFileAttributes  file_attributes);
-CajaFileAttributes caja_file_get_all_attributes                 (void);
-gboolean               caja_file_is_self_owned                      (CajaFile           *file);
-void                   caja_file_invalidate_count_and_mime_list     (CajaFile           *file);
-gboolean               caja_file_rename_in_progress                 (CajaFile           *file);
-void                   caja_file_invalidate_extension_info_internal (CajaFile           *file);
-void                   caja_file_info_providers_done                (CajaFile           *file);
+CajaFileAttributes baul_file_get_all_attributes                 (void);
+gboolean               baul_file_is_self_owned                      (CajaFile           *file);
+void                   baul_file_invalidate_count_and_mime_list     (CajaFile           *file);
+gboolean               baul_file_rename_in_progress                 (CajaFile           *file);
+void                   baul_file_invalidate_extension_info_internal (CajaFile           *file);
+void                   baul_file_info_providers_done                (CajaFile           *file);
 
 
 /* Thumbnailing: */
-void          caja_file_set_is_thumbnailing            (CajaFile           *file,
+void          baul_file_set_is_thumbnailing            (CajaFile           *file,
         gboolean                is_thumbnailing);
 
-CajaFileOperation *caja_file_operation_new      (CajaFile                  *file,
+CajaFileOperation *baul_file_operation_new      (CajaFile                  *file,
         CajaFileOperationCallback  callback,
         gpointer                       callback_data);
-void                   caja_file_operation_free     (CajaFileOperation         *op);
-void                   caja_file_operation_complete (CajaFileOperation         *op,
+void                   baul_file_operation_free     (CajaFileOperation         *op);
+void                   baul_file_operation_complete (CajaFileOperation         *op,
         GFile                         *result_location,
         GError                        *error);
-void                   caja_file_operation_cancel   (CajaFileOperation         *op);
+void                   baul_file_operation_cancel   (CajaFileOperation         *op);
 
 #endif

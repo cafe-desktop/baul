@@ -33,7 +33,7 @@
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_NAVIGATION_ACTION            (caja_navigation_action_get_type ())
+#define CAJA_TYPE_NAVIGATION_ACTION            (baul_navigation_action_get_type ())
 #define CAJA_NAVIGATION_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NAVIGATION_ACTION, CajaNavigationAction))
 #define CAJA_NAVIGATION_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_NAVIGATION_ACTION, CajaNavigationActionClass))
 #define CAJA_IS_NAVIGATION_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_NAVIGATION_ACTION))
@@ -63,6 +63,6 @@ struct _CajaNavigationActionClass
     GtkActionClass parent_class;
 };
 
-GType    caja_navigation_action_get_type   (void);
+GType    baul_navigation_action_get_type   (void);
 
 #endif

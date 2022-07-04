@@ -25,7 +25,7 @@
  *
  */
 
-/* caja-main.c: Implementation of the routines that drive program lifecycle and main window creation/destruction. */
+/* baul-main.c: Implementation of the routines that drive program lifecycle and main window creation/destruction. */
 
 #include <config.h>
 #include <dlfcn.h>
@@ -53,20 +53,20 @@
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-self-checks.h>
 
-#include <libcaja-private/caja-debug-log.h>
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-icon-names.h>
+#include <libbaul-private/baul-debug-log.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-icon-names.h>
 
 #include <libegg/eggdesktopfile.h>
 
-#include "caja-window.h"
+#include "baul-window.h"
 
 static void dump_debug_log (void)
 {
     char *filename;
 
-    filename = g_build_filename (g_get_home_dir (), "caja-debug-log.txt", NULL);
-    caja_debug_log_dump (filename, NULL); /* NULL GError */
+    filename = g_build_filename (g_get_home_dir (), "baul-debug-log.txt", NULL);
+    baul_debug_log_dump (filename, NULL); /* NULL GError */
     g_free (filename);
 }
 
@@ -79,7 +79,7 @@ static gboolean debug_log_io_cb (GIOChannel *io, GIOCondition condition, gpointe
     while (read (debug_log_pipes[0], &a, 1) != 1)
         ;
 
-    caja_debug_log (TRUE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (TRUE, CAJA_DEBUG_LOG_DOMAIN_USER,
                     "user requested dump of debug log");
 
     dump_debug_log ();
@@ -111,7 +111,7 @@ sigfatal_handler (int sig)
     /* FIXME: is this totally busted?  We do malloc() inside these functions,
      * and yet we are inside a signal handler...
      */
-    caja_debug_log (TRUE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (TRUE, CAJA_DEBUG_LOG_DOMAIN_USER,
                     "debug log dumped due to signal %d", sig);
     dump_debug_log ();
 
@@ -194,7 +194,7 @@ log_override_cb (const gchar   *log_domain,
     is_debug = ((log_level & G_LOG_LEVEL_DEBUG) != 0);
     is_milestone = !is_debug;
 
-    caja_debug_log (is_milestone, CAJA_DEBUG_LOG_DOMAIN_GLOG, "%s", message);
+    baul_debug_log (is_milestone, CAJA_DEBUG_LOG_DOMAIN_GLOG, "%s", message);
 
     if (!is_debug)
         (* default_log_handler) (log_domain, log_level, message, user_data);
@@ -211,8 +211,8 @@ setup_debug_log (void)
 {
     char *config_filename;
 
-    config_filename = g_build_filename (g_get_home_dir (), "caja-debug-log.conf", NULL);
-    caja_debug_log_load_configuration (config_filename, NULL); /* NULL GError */
+    config_filename = g_build_filename (g_get_home_dir (), "baul-debug-log.conf", NULL);
+    baul_debug_log_load_configuration (config_filename, NULL); /* NULL GError */
     g_free (config_filename);
 
     setup_debug_log_signals ();
@@ -229,7 +229,7 @@ main (int argc, char *argv[])
 	/* Caja uses lots and lots of small and medium size allocations,
 	 * and then a few large ones for the desktop background. By default
 	 * glibc uses a dynamic treshold for how large allocations should
-	 * be mmaped. Unfortunately this triggers quickly for caja when
+	 * be mmaped. Unfortunately this triggers quickly for baul when
 	 * it does the desktop background allocations, raising the limit
 	 * such that a lot of temporary large allocations end up on the
 	 * heap and are thus not returned to the OS. To fix this we set
@@ -248,12 +248,12 @@ main (int argc, char *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	g_set_prgname ("caja");
+	g_set_prgname ("baul");
 
 	gdk_set_allowed_backends ("x11");
 
-	if (g_file_test (DATADIR "/applications/caja.desktop", G_FILE_TEST_EXISTS)) {
-		egg_set_desktop_file (DATADIR "/applications/caja.desktop");
+	if (g_file_test (DATADIR "/applications/baul.desktop", G_FILE_TEST_EXISTS)) {
+		egg_set_desktop_file (DATADIR "/applications/baul.desktop");
 	}
 
 #ifdef HAVE_EXEMPI
@@ -265,8 +265,8 @@ main (int argc, char *argv[])
 	/* Initialize the services that we use. */
 	LIBXML_TEST_VERSION
 
-    /* Run the caja application. */
-    application = caja_application_new();
+    /* Run the baul application. */
+    application = baul_application_new();
 
     retval = g_application_run (G_APPLICATION (application),
                                 argc, argv);

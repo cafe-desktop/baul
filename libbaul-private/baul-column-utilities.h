@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* caja-column-utilities.h - Utilities related to column specifications
+/* baul-column-utilities.h - Utilities related to column specifications
 
    Copyright (C) 2004 Novell, Inc.
 
@@ -25,17 +25,17 @@
 #ifndef CAJA_COLUMN_UTILITIES_H
 #define CAJA_COLUMN_UTILITIES_H
 
-#include <libcaja-extension/caja-column.h>
+#include <libbaul-extension/baul-column.h>
 
-#include "caja-file.h"
+#include "baul-file.h"
 
-GList *caja_get_all_columns       (void);
-GList *caja_get_common_columns    (void);
-GList *caja_get_columns_for_file (CajaFile *file);
-GList *caja_column_list_copy      (GList       *columns);
-void   caja_column_list_free      (GList       *columns);
+GList *baul_get_all_columns       (void);
+GList *baul_get_common_columns    (void);
+GList *baul_get_columns_for_file (CajaFile *file);
+GList *baul_column_list_copy      (GList       *columns);
+void   baul_column_list_free      (GList       *columns);
 
-GList *caja_sort_columns          (GList       *columns,
+GList *baul_sort_columns          (GList       *columns,
                                    char       **column_order);
 
 

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   caja-desktop-file.h: Subclass of CajaFile to implement the
+   baul-desktop-file.h: Subclass of CajaFile to implement the
    the case of a desktop icon file
 
    Copyright (C) 2003 Red Hat, Inc.
@@ -26,10 +26,10 @@
 #ifndef CAJA_DESKTOP_ICON_FILE_H
 #define CAJA_DESKTOP_ICON_FILE_H
 
-#include "caja-file.h"
-#include "caja-desktop-link.h"
+#include "baul-file.h"
+#include "baul-desktop-link.h"
 
-#define CAJA_TYPE_DESKTOP_ICON_FILE caja_desktop_icon_file_get_type()
+#define CAJA_TYPE_DESKTOP_ICON_FILE baul_desktop_icon_file_get_type()
 #define CAJA_DESKTOP_ICON_FILE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_ICON_FILE, CajaDesktopIconFile))
 #define CAJA_DESKTOP_ICON_FILE_CLASS(klass) \
@@ -54,11 +54,11 @@ typedef struct
     CajaFileClass parent_slot;
 } CajaDesktopIconFileClass;
 
-GType   caja_desktop_icon_file_get_type (void);
+GType   baul_desktop_icon_file_get_type (void);
 
-CajaDesktopIconFile *caja_desktop_icon_file_new      (CajaDesktopLink     *link);
-void                     caja_desktop_icon_file_update   (CajaDesktopIconFile *icon_file);
-void                     caja_desktop_icon_file_remove   (CajaDesktopIconFile *icon_file);
-CajaDesktopLink     *caja_desktop_icon_file_get_link (CajaDesktopIconFile *icon_file);
+CajaDesktopIconFile *baul_desktop_icon_file_new      (CajaDesktopLink     *link);
+void                     baul_desktop_icon_file_update   (CajaDesktopIconFile *icon_file);
+void                     baul_desktop_icon_file_remove   (CajaDesktopIconFile *icon_file);
+CajaDesktopLink     *baul_desktop_icon_file_get_link (CajaDesktopIconFile *icon_file);
 
 #endif /* CAJA_DESKTOP_ICON_FILE_H */

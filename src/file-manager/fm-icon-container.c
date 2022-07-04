@@ -29,10 +29,10 @@
 
 #include <eel/eel-glib-extensions.h>
 
-#include <libcaja-private/caja-global-preferences.h>
-#include <libcaja-private/caja-file-attributes.h>
-#include <libcaja-private/caja-thumbnails.h>
-#include <libcaja-private/caja-desktop-icon-file.h>
+#include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-file-attributes.h>
+#include <libbaul-private/baul-thumbnails.h>
+#include <libbaul-private/baul-desktop-icon-file.h>
 
 #include "fm-icon-container.h"
 
@@ -77,13 +77,13 @@ fm_icon_container_get_icon_images (CajaIconContainer *container,
     use_embedding = FALSE;
     if (embedded_text)
     {
-        *embedded_text = caja_file_peek_top_left_text (file, need_large_embeddded_text, embedded_text_needs_loading);
+        *embedded_text = baul_file_peek_top_left_text (file, need_large_embeddded_text, embedded_text_needs_loading);
         use_embedding = *embedded_text != NULL;
     }
 
     if (emblem_pixbufs != NULL)
     {
-        emblem_size = caja_icon_get_emblem_size_for_icon_size (size);
+        emblem_size = baul_icon_get_emblem_size_for_icon_size (size);
         /* don't return images larger than the actual icon size */
         emblem_size = MIN (emblem_size, size);
 
@@ -93,7 +93,7 @@ fm_icon_container_get_icon_images (CajaIconContainer *container,
 
             emblems_to_ignore = fm_directory_view_get_emblem_names_to_exclude
                                 (FM_DIRECTORY_VIEW (icon_view));
-            *emblem_pixbufs = caja_file_get_emblem_pixbufs (file,
+            *emblem_pixbufs = baul_file_get_emblem_pixbufs (file,
                               emblem_size,
                               FALSE,
                               emblems_to_ignore);
@@ -101,11 +101,11 @@ fm_icon_container_get_icon_images (CajaIconContainer *container,
         }
     }
 
-    *has_window_open = caja_file_has_open_window (file);
+    *has_window_open = baul_file_has_open_window (file);
 
     flags = CAJA_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM;
     if (!fm_icon_view_is_compact (icon_view) ||
-            caja_icon_container_get_zoom_level (container) > CAJA_ZOOM_LEVEL_STANDARD)
+            baul_icon_container_get_zoom_level (container) > CAJA_ZOOM_LEVEL_STANDARD)
     {
         flags |= CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS;
         if (fm_icon_view_is_compact (icon_view))
@@ -125,7 +125,7 @@ fm_icon_container_get_icon_images (CajaIconContainer *container,
 
     scale = gtk_widget_get_scale_factor (GTK_WIDGET (icon_view));
 
-    return caja_file_get_icon (file, size, scale, flags);
+    return baul_file_get_icon (file, size, scale, flags);
 }
 
 static char *
@@ -144,7 +144,7 @@ fm_icon_container_get_icon_description (CajaIconContainer *container,
         return NULL;
     }
 
-    mime_type = caja_file_get_mime_type (file);
+    mime_type = baul_file_get_mime_type (file);
     description = g_content_type_get_description (mime_type);
     g_free (mime_type);
     return g_strdup (description);
@@ -168,7 +168,7 @@ fm_icon_container_start_monitor_top_left (CajaIconContainer *container,
     {
         attributes |= CAJA_FILE_ATTRIBUTE_LARGE_TOP_LEFT_TEXT;
     }
-    caja_file_monitor_add (file, client, attributes);
+    baul_file_monitor_add (file, client, attributes);
 }
 
 static void
@@ -182,7 +182,7 @@ fm_icon_container_stop_monitor_top_left (CajaIconContainer *container,
 
     g_assert (CAJA_IS_FILE (file));
 
-    caja_file_monitor_remove (file, client);
+    baul_file_monitor_remove (file, client);
 }
 
 static void
@@ -195,12 +195,12 @@ fm_icon_container_prioritize_thumbnailing (CajaIconContainer *container,
 
     g_assert (CAJA_IS_FILE (file));
 
-    if (caja_file_is_thumbnailing (file))
+    if (baul_file_is_thumbnailing (file))
     {
         char *uri;
 
-        uri = caja_file_get_uri (file);
-        caja_thumbnail_prioritize (uri);
+        uri = baul_file_get_uri (file);
+        baul_thumbnail_prioritize (uri);
         g_free (uri);
     }
 }
@@ -216,7 +216,7 @@ fm_icon_container_get_icon_text_attributes_from_preferences (void)
 
     if (attributes == NULL)
     {
-        eel_g_settings_add_auto_strv_as_quarks (caja_icon_view_preferences,
+        eel_g_settings_add_auto_strv_as_quarks (baul_icon_view_preferences,
                                                 CAJA_PREFERENCES_ICON_VIEW_CAPTIONS,
                                                 &attributes);
     }
@@ -289,7 +289,7 @@ fm_icon_container_get_icon_text_attribute_names (CajaIconContainer *container,
         3	/* CAJA_ZOOM_LEVEL_LARGEST */
     };
 
-    piece_count = pieces_by_level[caja_icon_container_get_zoom_level (container)];
+    piece_count = pieces_by_level[baul_icon_container_get_zoom_level (container)];
 
     attributes = fm_icon_container_get_icon_text_attributes_from_preferences ();
 
@@ -325,15 +325,15 @@ fm_icon_container_get_icon_text (CajaIconContainer *container,
     use_additional = (additional_text != NULL);
 
     /* In the smallest zoom mode, no text is drawn. */
-    if (caja_icon_container_get_zoom_level (container) == CAJA_ZOOM_LEVEL_SMALLEST &&
+    if (baul_icon_container_get_zoom_level (container) == CAJA_ZOOM_LEVEL_SMALLEST &&
             !include_invisible)
     {
         *editable_text = NULL;
     }
     else
     {
-        /* Strip the suffix for caja object xml files. */
-        *editable_text = caja_file_get_display_name (file);
+        /* Strip the suffix for baul object xml files. */
+        *editable_text = baul_file_get_display_name (file);
     }
 
     if (!use_additional)
@@ -356,17 +356,17 @@ fm_icon_container_get_icon_text (CajaIconContainer *container,
     }
 
     /* Handle link files specially. */
-    if (caja_file_is_caja_link (file))
+    if (baul_file_is_baul_link (file))
     {
         /* FIXME bugzilla.gnome.org 42531: Does sync. I/O and works only locally. */
         *additional_text = NULL;
-        if (caja_file_is_local (file))
+        if (baul_file_is_local (file))
         {
             char *actual_uri;
             gchar *description;
 
-            actual_uri = caja_file_get_uri (file);
-            description = caja_link_local_get_additional_text (actual_uri);
+            actual_uri = baul_file_get_uri (file);
+            description = baul_link_local_get_additional_text (actual_uri);
 
             if (description)
                 *additional_text = g_strdup_printf (" \n%s\n ", description);
@@ -393,7 +393,7 @@ fm_icon_container_get_icon_text (CajaIconContainer *container,
         }
 
         text_array[j++] =
-            caja_file_get_string_attribute_with_default_q (file, attributes[i]);
+            baul_file_get_string_attribute_with_default_q (file, attributes[i]);
     }
     text_array[j] = NULL;
 
@@ -447,11 +447,11 @@ get_sort_category (CajaFile *file)
     {
         CajaDesktopLink *link;
 
-        link = caja_desktop_icon_file_get_link (CAJA_DESKTOP_ICON_FILE (file));
+        link = baul_desktop_icon_file_get_link (CAJA_DESKTOP_ICON_FILE (file));
 
         if (link != NULL)
         {
-            switch (caja_desktop_link_get_link_type (link))
+            switch (baul_desktop_link_get_link_type (link))
             {
             case CAJA_DESKTOP_LINK_COMPUTER:
                 category = SORT_COMPUTER_LINK;
@@ -500,7 +500,7 @@ fm_desktop_icon_container_icons_compare (CajaIconContainer *container,
 
     if (category_a == category_b)
     {
-        return caja_file_compare_for_sort
+        return baul_file_compare_for_sort
                (file_a, file_b, CAJA_FILE_SORT_BY_DISPLAY_NAME,
                 fm_directory_view_should_sort_directories_first (directory_view),
                 FALSE);
@@ -543,7 +543,7 @@ fm_icon_container_compare_icons_by_name (CajaIconContainer *container,
         CajaIconData      *icon_a,
         CajaIconData      *icon_b)
 {
-    return caja_file_compare_for_sort
+    return baul_file_compare_for_sort
            (CAJA_FILE (icon_a),
             CAJA_FILE (icon_b),
             CAJA_FILE_SORT_BY_DISPLAY_NAME,
