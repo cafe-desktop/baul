@@ -29,7 +29,7 @@
 
 #include <string.h>
 
-#define CAJA_EXTENSION_GROUP "Caja Extension"
+#define BAUL_EXTENSION_GROUP "Caja Extension"
 
 static GList *baul_extensions = NULL;
 
@@ -54,21 +54,21 @@ extension_new (gchar *filename, gboolean state, gboolean python, GObject *module
     ext->module = module;
 
     extension_file = g_key_file_new ();
-    extension_filename = g_strdup_printf(CAJA_DATADIR "/extensions/%s.baul-extension", filename);
+    extension_filename = g_strdup_printf(BAUL_DATADIR "/extensions/%s.baul-extension", filename);
     if (g_key_file_load_from_file (extension_file, extension_filename, G_KEY_FILE_NONE, &error))
     {
-        ext->name = g_key_file_get_locale_string (extension_file, CAJA_EXTENSION_GROUP, "Name", NULL, NULL);
-        ext->description = g_key_file_get_locale_string (extension_file, CAJA_EXTENSION_GROUP, "Description", NULL, NULL);
-        ext->icon = g_key_file_get_string (extension_file, CAJA_EXTENSION_GROUP, "Icon", NULL);
-        ext->author = g_key_file_get_string_list (extension_file, CAJA_EXTENSION_GROUP, "Author", NULL, NULL);
-        ext->copyright = g_key_file_get_locale_string (extension_file, CAJA_EXTENSION_GROUP, "Copyright", NULL, NULL);
-        ext->version = g_key_file_get_string (extension_file, CAJA_EXTENSION_GROUP, "Version", NULL);
-        ext->website = g_key_file_get_string (extension_file, CAJA_EXTENSION_GROUP, "Website", NULL);
+        ext->name = g_key_file_get_locale_string (extension_file, BAUL_EXTENSION_GROUP, "Name", NULL, NULL);
+        ext->description = g_key_file_get_locale_string (extension_file, BAUL_EXTENSION_GROUP, "Description", NULL, NULL);
+        ext->icon = g_key_file_get_string (extension_file, BAUL_EXTENSION_GROUP, "Icon", NULL);
+        ext->author = g_key_file_get_string_list (extension_file, BAUL_EXTENSION_GROUP, "Author", NULL, NULL);
+        ext->copyright = g_key_file_get_locale_string (extension_file, BAUL_EXTENSION_GROUP, "Copyright", NULL, NULL);
+        ext->version = g_key_file_get_string (extension_file, BAUL_EXTENSION_GROUP, "Version", NULL);
+        ext->website = g_key_file_get_string (extension_file, BAUL_EXTENSION_GROUP, "Website", NULL);
         g_key_file_free (extension_file);
     }
     else
     {
-        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, "Error loading keys from file: %s\n", error->message);
+        baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER, "Error loading keys from file: %s\n", error->message);
         g_error_free (error);
     }
     g_free (extension_filename);
@@ -91,7 +91,7 @@ gsettings_key_has_value (const gchar *value)
     gint i;
 
     list = g_settings_get_strv (baul_extension_preferences,
-                                CAJA_PREFERENCES_DISABLED_EXTENSIONS);
+                                BAUL_PREFERENCES_DISABLED_EXTENSIONS);
 
     if (list != NULL)
     {
@@ -117,7 +117,7 @@ gsettings_append_to_list (const char *value)
     gboolean retval;
 
     current = g_settings_get_strv (baul_extension_preferences,
-                                   CAJA_PREFERENCES_DISABLED_EXTENSIONS);
+                                   BAUL_PREFERENCES_DISABLED_EXTENSIONS);
 
     for (size = 0; current[size] != NULL; size++);
 
@@ -130,7 +130,7 @@ gsettings_append_to_list (const char *value)
     new[size - 1] = NULL;
 
     retval = g_settings_set_strv (baul_extension_preferences,
-                                  CAJA_PREFERENCES_DISABLED_EXTENSIONS,
+                                  BAUL_PREFERENCES_DISABLED_EXTENSIONS,
                                  (const gchar **) new);
 
     g_strfreev (new);
@@ -146,7 +146,7 @@ gsettings_remove_from_list (const char *value)
     gboolean retval;
 
     current = g_settings_get_strv (baul_extension_preferences,
-                                   CAJA_PREFERENCES_DISABLED_EXTENSIONS);
+                                   BAUL_PREFERENCES_DISABLED_EXTENSIONS);
 
     array = g_array_new (TRUE, TRUE, sizeof (gchar *));
 
@@ -157,7 +157,7 @@ gsettings_remove_from_list (const char *value)
     }
 
     retval = g_settings_set_strv (baul_extension_preferences,
-                                  CAJA_PREFERENCES_DISABLED_EXTENSIONS,
+                                  BAUL_PREFERENCES_DISABLED_EXTENSIONS,
                                  (const gchar **) array->data);
 
     g_strfreev (current);

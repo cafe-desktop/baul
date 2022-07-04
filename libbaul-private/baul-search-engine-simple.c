@@ -66,7 +66,7 @@ struct CajaSearchEngineSimpleDetails
 
 G_DEFINE_TYPE (CajaSearchEngineSimple,
                baul_search_engine_simple,
-               CAJA_TYPE_SEARCH_ENGINE);
+               BAUL_TYPE_SEARCH_ENGINE);
 
 static CajaSearchEngineClass *parent_class = NULL;
 
@@ -75,7 +75,7 @@ finalize (GObject *object)
 {
     CajaSearchEngineSimple *simple;
 
-    simple = CAJA_SEARCH_ENGINE_SIMPLE (object);
+    simple = BAUL_SEARCH_ENGINE_SIMPLE (object);
 
     if (simple->details->query)
     {
@@ -158,7 +158,7 @@ search_thread_done_idle (gpointer user_data)
 
     if (!g_cancellable_is_cancelled (data->cancellable))
     {
-        baul_search_engine_finished (CAJA_SEARCH_ENGINE (data->engine));
+        baul_search_engine_finished (BAUL_SEARCH_ENGINE (data->engine));
         data->engine->details->active_search = NULL;
     }
 
@@ -183,7 +183,7 @@ search_thread_add_hits_idle (gpointer user_data)
 
     if (!g_cancellable_is_cancelled (hits->thread_data->cancellable))
     {
-        baul_search_engine_hits_added (CAJA_SEARCH_ENGINE (hits->thread_data->engine),
+        baul_search_engine_hits_added (BAUL_SEARCH_ENGINE (hits->thread_data->engine),
                                        hits->uris);
     }
 
@@ -665,7 +665,7 @@ baul_search_engine_simple_start (CajaSearchEngine *engine)
     SearchThreadData *data;
     GThread *thread;
 
-    simple = CAJA_SEARCH_ENGINE_SIMPLE (engine);
+    simple = BAUL_SEARCH_ENGINE_SIMPLE (engine);
 
     if (simple->details->active_search != NULL)
     {
@@ -690,7 +690,7 @@ baul_search_engine_simple_stop (CajaSearchEngine *engine)
 {
     CajaSearchEngineSimple *simple;
 
-    simple = CAJA_SEARCH_ENGINE_SIMPLE (engine);
+    simple = BAUL_SEARCH_ENGINE_SIMPLE (engine);
 
     if (simple->details->active_search != NULL)
     {
@@ -710,7 +710,7 @@ baul_search_engine_simple_set_query (CajaSearchEngine *engine, CajaQuery *query)
 {
     CajaSearchEngineSimple *simple;
 
-    simple = CAJA_SEARCH_ENGINE_SIMPLE (engine);
+    simple = BAUL_SEARCH_ENGINE_SIMPLE (engine);
 
     if (query)
     {
@@ -736,7 +736,7 @@ baul_search_engine_simple_class_init (CajaSearchEngineSimpleClass *class)
     gobject_class = G_OBJECT_CLASS (class);
     gobject_class->finalize = finalize;
 
-    engine_class = CAJA_SEARCH_ENGINE_CLASS (class);
+    engine_class = BAUL_SEARCH_ENGINE_CLASS (class);
     engine_class->set_query = baul_search_engine_simple_set_query;
     engine_class->start = baul_search_engine_simple_start;
     engine_class->stop = baul_search_engine_simple_stop;
@@ -755,7 +755,7 @@ baul_search_engine_simple_new (void)
 {
     CajaSearchEngine *engine;
 
-    engine = g_object_new (CAJA_TYPE_SEARCH_ENGINE_SIMPLE, NULL);
+    engine = g_object_new (BAUL_TYPE_SEARCH_ENGINE_SIMPLE, NULL);
 
     return engine;
 }

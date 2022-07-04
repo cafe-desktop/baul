@@ -19,8 +19,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  * */
 
-#ifndef __CAJA_WIDGET_VIEW_PROVIDER_H__
-#define __CAJA_WIDGET_VIEW_PROVIDER_H__  1
+#ifndef __BAUL_WIDGET_VIEW_PROVIDER_H__
+#define __BAUL_WIDGET_VIEW_PROVIDER_H__  1
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -29,10 +29,10 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_WIDGET_VIEW_PROVIDER           (baul_widget_view_provider_get_type ())
-#define CAJA_WIDGET_VIEW_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WIDGET_VIEW_PROVIDER, CajaWidgetViewProvider))
-#define CAJA_IS_WIDGET_VIEW_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WIDGET_VIEW_PROVIDER))
-#define CAJA_WIDGET_VIEW_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_WIDGET_VIEW_PROVIDER, CajaWidgetViewProviderIface))
+#define BAUL_TYPE_WIDGET_VIEW_PROVIDER           (baul_widget_view_provider_get_type ())
+#define BAUL_WIDGET_VIEW_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_WIDGET_VIEW_PROVIDER, CajaWidgetViewProvider))
+#define BAUL_IS_WIDGET_VIEW_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_WIDGET_VIEW_PROVIDER))
+#define BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_WIDGET_VIEW_PROVIDER, CajaWidgetViewProviderIface))
 
 typedef struct _CajaWidgetViewProvider       CajaWidgetViewProvider;
 typedef struct _CajaWidgetViewProviderIface  CajaWidgetViewProviderIface;
@@ -87,4 +87,4 @@ gboolean   baul_widget_view_provider_supports_uri   (CajaWidgetViewProvider *pro
                                                      const char *mime_type);
 G_END_DECLS
 
-#endif /* __CAJA_WIDGET_VIEW_PROVIDER_H__ */
+#endif /* __BAUL_WIDGET_VIEW_PROVIDER_H__ */

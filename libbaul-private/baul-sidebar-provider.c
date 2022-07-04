@@ -63,7 +63,7 @@ CajaSidebar *
 baul_sidebar_provider_create (CajaSidebarProvider *provider,
                               CajaWindowInfo  *window)
 {
-    return (* CAJA_SIDEBAR_PROVIDER_GET_IFACE (provider)->create) (provider, window);
+    return (* BAUL_SIDEBAR_PROVIDER_GET_IFACE (provider)->create) (provider, window);
 }
 
 

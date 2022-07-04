@@ -58,19 +58,19 @@ baul_global_preferences_get_default_folder_viewer_preference_as_iid (void)
     const char *viewer_iid;
 
     preference_value =
-        g_settings_get_enum (baul_preferences, CAJA_PREFERENCES_DEFAULT_FOLDER_VIEWER);
+        g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_DEFAULT_FOLDER_VIEWER);
 
-    if (preference_value == CAJA_DEFAULT_FOLDER_VIEWER_LIST_VIEW)
+    if (preference_value == BAUL_DEFAULT_FOLDER_VIEWER_LIST_VIEW)
     {
-        viewer_iid = CAJA_LIST_VIEW_IID;
+        viewer_iid = BAUL_LIST_VIEW_IID;
     }
-    else if (preference_value == CAJA_DEFAULT_FOLDER_VIEWER_COMPACT_VIEW)
+    else if (preference_value == BAUL_DEFAULT_FOLDER_VIEWER_COMPACT_VIEW)
     {
-        viewer_iid = CAJA_COMPACT_VIEW_IID;
+        viewer_iid = BAUL_COMPACT_VIEW_IID;
     }
     else
     {
-        viewer_iid = CAJA_ICON_VIEW_IID;
+        viewer_iid = BAUL_ICON_VIEW_IID;
     }
 
     return g_strdup (viewer_iid);

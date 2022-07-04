@@ -23,22 +23,22 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_SEARCH_DIRECTORY_FILE_H
-#define CAJA_SEARCH_DIRECTORY_FILE_H
+#ifndef BAUL_SEARCH_DIRECTORY_FILE_H
+#define BAUL_SEARCH_DIRECTORY_FILE_H
 
 #include "baul-file.h"
 
-#define CAJA_TYPE_SEARCH_DIRECTORY_FILE baul_search_directory_file_get_type()
-#define CAJA_SEARCH_DIRECTORY_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_DIRECTORY_FILE, CajaSearchDirectoryFile))
-#define CAJA_SEARCH_DIRECTORY_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SEARCH_DIRECTORY_FILE, CajaSearchDirectoryFileClass))
-#define CAJA_IS_SEARCH_DIRECTORY_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SEARCH_DIRECTORY_FILE))
-#define CAJA_IS_SEARCH_DIRECTORY_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SEARCH_DIRECTORY_FILE))
-#define CAJA_SEARCH_DIRECTORY_FILE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SEARCH_DIRECTORY_FILE, CajaSearchDirectoryFileClass))
+#define BAUL_TYPE_SEARCH_DIRECTORY_FILE baul_search_directory_file_get_type()
+#define BAUL_SEARCH_DIRECTORY_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_DIRECTORY_FILE, CajaSearchDirectoryFile))
+#define BAUL_SEARCH_DIRECTORY_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_DIRECTORY_FILE, CajaSearchDirectoryFileClass))
+#define BAUL_IS_SEARCH_DIRECTORY_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_DIRECTORY_FILE))
+#define BAUL_IS_SEARCH_DIRECTORY_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_DIRECTORY_FILE))
+#define BAUL_SEARCH_DIRECTORY_FILE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_DIRECTORY_FILE, CajaSearchDirectoryFileClass))
 
 typedef struct CajaSearchDirectoryFileDetails CajaSearchDirectoryFileDetails;
 
@@ -56,4 +56,4 @@ typedef struct
 GType   baul_search_directory_file_get_type (void);
 void    baul_search_directory_file_update_display_name (CajaSearchDirectoryFile *search_file);
 
-#endif /* CAJA_SEARCH_DIRECTORY_FILE_H */
+#endif /* BAUL_SEARCH_DIRECTORY_FILE_H */

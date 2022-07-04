@@ -98,7 +98,7 @@ static void  property_page_provider_iface_init                (CajaPropertyPageP
 G_DEFINE_TYPE_WITH_PRIVATE (CajaImagePropertiesPage, baul_image_properties_page, GTK_TYPE_BOX);
 
 G_DEFINE_TYPE_WITH_CODE (CajaImagePropertiesPageProvider, baul_image_properties_page_provider, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_PROPERTY_PAGE_PROVIDER,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_PROPERTY_PAGE_PROVIDER,
                                  property_page_provider_iface_init));
 
 static void
@@ -106,7 +106,7 @@ baul_image_properties_page_finalize (GObject *object)
 {
     CajaImagePropertiesPage *page;
 
-    page = CAJA_IMAGE_PROPERTIES_PAGE (object);
+    page = BAUL_IMAGE_PROPERTIES_PAGE (object);
 
     if (page->details->cancellable)
     {
@@ -126,7 +126,7 @@ file_close_callback (GObject      *object,
     CajaImagePropertiesPage *page;
     GInputStream *stream;
 
-    page = CAJA_IMAGE_PROPERTIES_PAGE (data);
+    page = BAUL_IMAGE_PROPERTIES_PAGE (data);
     stream = G_INPUT_STREAM (object);
 
     g_input_stream_close_finish (stream, res, NULL);
@@ -462,7 +462,7 @@ file_read_callback (GObject      *object,
     GError *error;
     gboolean done_reading;
 
-    page = CAJA_IMAGE_PROPERTIES_PAGE (data);
+    page = BAUL_IMAGE_PROPERTIES_PAGE (data);
     stream = G_INPUT_STREAM (object);
 
     error = NULL;
@@ -535,7 +535,7 @@ size_prepared_callback (GdkPixbufLoader *loader,
 {
     CajaImagePropertiesPage *page;
 
-    page = CAJA_IMAGE_PROPERTIES_PAGE (callback_data);
+    page = BAUL_IMAGE_PROPERTIES_PAGE (callback_data);
 
     page->details->height = height;
     page->details->width = width;
@@ -553,7 +553,7 @@ file_open_callback (GObject      *object,
     GFileInputStream *stream;
     GError *error;
 
-    page = CAJA_IMAGE_PROPERTIES_PAGE (data);
+    page = BAUL_IMAGE_PROPERTIES_PAGE (data);
     file = G_FILE (object);
 
     error = NULL;
@@ -591,7 +591,7 @@ load_location (CajaImagePropertiesPage *page,
 {
     GFile *file;
 
-    g_assert (CAJA_IS_IMAGE_PROPERTIES_PAGE (page));
+    g_assert (BAUL_IS_IMAGE_PROPERTIES_PAGE (page));
     g_assert (location != NULL);
 
     page->details->cancellable = g_cancellable_new ();
@@ -675,7 +675,7 @@ get_property_pages (CajaPropertyPageProvider *provider,
         return NULL;
     }
 
-    file = CAJA_FILE_INFO (files->data);
+    file = BAUL_FILE_INFO (files->data);
 
     if (!
             (baul_file_info_is_mime_type (file, "image/x-bmp") ||

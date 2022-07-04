@@ -136,7 +136,7 @@
 #define SNAP_CEIL_VERTICAL(y) SNAP_VERTICAL (ceil, y)
 
 /* Copied from CajaIconContainer */
-#define CAJA_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT 5
+#define BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT 5
 
 /* Copied from CajaFile */
 #define UNDEFINED_TIME ((time_t) (-1))
@@ -327,7 +327,7 @@ icon_set_position (CajaIcon *icon,
         return;
     }
 
-    container = CAJA_ICON_CONTAINER (EEL_CANVAS_ITEM (icon->item)->canvas);
+    container = BAUL_ICON_CONTAINER (EEL_CANVAS_ITEM (icon->item)->canvas);
 
     if (icon == get_icon_being_renamed (container))
     {
@@ -418,7 +418,7 @@ icon_get_size (CajaIconContainer *container,
     if (size != NULL)
     {
         *size = MAX (baul_get_icon_size_for_zoom_level (container->details->zoom_level)
-                     * icon->scale, CAJA_ICON_SIZE_SMALLEST);
+                     * icon->scale, BAUL_ICON_SIZE_SMALLEST);
     }
 }
 
@@ -458,7 +458,7 @@ icon_raise (CajaIcon *icon)
     EelCanvasItem *item, *band;
 
     item = EEL_CANVAS_ITEM (icon->item);
-    band = CAJA_ICON_CONTAINER (item->canvas)->details->rubberband_info.selection_rectangle;
+    band = BAUL_ICON_CONTAINER (item->canvas)->details->rubberband_info.selection_rectangle;
 
     eel_canvas_item_send_behind (item, band);
 }
@@ -616,7 +616,7 @@ static void
 pending_icon_to_reveal_destroy_callback (CajaIconCanvasItem *item,
         CajaIconContainer *container)
 {
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
     g_assert (container->details->pending_icon_to_reveal != NULL);
     g_assert (container->details->pending_icon_to_reveal->item == item);
 
@@ -794,7 +794,7 @@ keyboard_icon_reveal_timeout_callback (gpointer data)
     CajaIconContainer *container;
     CajaIcon *icon;
 
-    container = CAJA_ICON_CONTAINER (data);
+    container = BAUL_ICON_CONTAINER (data);
     icon = container->details->keyboard_icon_to_reveal;
 
     g_assert (icon != NULL);
@@ -929,19 +929,19 @@ get_icon_bounds_for_canvas_bounds (EelCanvasGroup *group,
         if (child->flags & EEL_CANVAS_ITEM_VISIBLE)
         {
             set = TRUE;
-            if (!CAJA_IS_ICON_CANVAS_ITEM (child) ||
+            if (!BAUL_IS_ICON_CANVAS_ITEM (child) ||
                     usage == BOUNDS_USAGE_FOR_DISPLAY)
             {
                 eel_canvas_item_get_bounds (child, &minx, &miny, &maxx, &maxy);
             }
             else if (usage == BOUNDS_USAGE_FOR_LAYOUT)
             {
-                baul_icon_canvas_item_get_bounds_for_layout (CAJA_ICON_CANVAS_ITEM (child),
+                baul_icon_canvas_item_get_bounds_for_layout (BAUL_ICON_CANVAS_ITEM (child),
                         &minx, &miny, &maxx, &maxy);
             }
             else if (usage == BOUNDS_USAGE_FOR_ENTIRE_ITEM)
             {
-                baul_icon_canvas_item_get_bounds_for_entire_item (CAJA_ICON_CANVAS_ITEM (child),
+                baul_icon_canvas_item_get_bounds_for_entire_item (BAUL_ICON_CANVAS_ITEM (child),
                         &minx, &miny, &maxx, &maxy);
             }
             else
@@ -971,19 +971,19 @@ get_icon_bounds_for_canvas_bounds (EelCanvasGroup *group,
         if (!(child->flags & EEL_CANVAS_ITEM_VISIBLE))
             continue;
 
-        if (!CAJA_IS_ICON_CANVAS_ITEM (child) ||
+        if (!BAUL_IS_ICON_CANVAS_ITEM (child) ||
                 usage == BOUNDS_USAGE_FOR_DISPLAY)
         {
             eel_canvas_item_get_bounds (child, &tx1, &ty1, &tx2, &ty2);
         }
         else if (usage == BOUNDS_USAGE_FOR_LAYOUT)
         {
-            baul_icon_canvas_item_get_bounds_for_layout (CAJA_ICON_CANVAS_ITEM (child),
+            baul_icon_canvas_item_get_bounds_for_layout (BAUL_ICON_CANVAS_ITEM (child),
                     &tx1, &ty1, &tx2, &ty2);
         }
         else if (usage == BOUNDS_USAGE_FOR_ENTIRE_ITEM)
         {
-            baul_icon_canvas_item_get_bounds_for_entire_item (CAJA_ICON_CANVAS_ITEM (child),
+            baul_icon_canvas_item_get_bounds_for_entire_item (BAUL_ICON_CANVAS_ITEM (child),
                     &tx1, &ty1, &tx2, &ty2);
         }
         else
@@ -1222,7 +1222,7 @@ compare_icons (gconstpointer a, gconstpointer b, gpointer icon_container)
 
     icon_a = a;
     icon_b = b;
-    klass  = CAJA_ICON_CONTAINER_GET_CLASS (icon_container);
+    klass  = BAUL_ICON_CONTAINER_GET_CLASS (icon_container);
 
     return klass->compare_icons (icon_container, icon_a->data, icon_b->data);
 }
@@ -1233,7 +1233,7 @@ sort_icons (CajaIconContainer *container,
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
     g_assert (klass->compare_icons != NULL);
 
     *icons = g_list_sort_with_data (*icons, compare_icons, container);
@@ -1280,7 +1280,7 @@ lay_down_one_line (CajaIconContainer *container,
 
         position = &g_array_index (positions, IconPositions, i++);
 
-        if (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+        if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
         {
             y_offset = (max_height - position->height) / 2;
         }
@@ -1361,7 +1361,7 @@ lay_down_icons_horizontal (CajaIconContainer *container,
     GArray *positions;
     IconPositions *position = NULL;
 
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
 
     if (icons == NULL)
     {
@@ -1375,7 +1375,7 @@ lay_down_icons_horizontal (CajaIconContainer *container,
     canvas_width = CANVAS_WIDTH(container, allocation);
     max_icon_width = max_text_width = 0.0;
 
-    if (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+    if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
     {
         /* Would it be worth caching these bounds for the next loop? */
         for (p = icons; p != NULL; p = p->next)
@@ -1404,7 +1404,7 @@ lay_down_icons_horizontal (CajaIconContainer *container,
 
     gridded_layout = !baul_icon_container_is_tighter_layout (container);
 
-    line_width = container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE ? ICON_PAD_LEFT : 0;
+    line_width = container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE ? ICON_PAD_LEFT : 0;
     line_start = icons;
     y = start_y + CONTAINER_PAD_TOP;
     i = 0;
@@ -1443,7 +1443,7 @@ lay_down_icons_horizontal (CajaIconContainer *container,
         /* If this icon doesn't fit, it's time to lay out the line that's queued up. */
         if (line_start != p && line_width + icon_width >= canvas_width )
         {
-            if (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+            if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
             {
                 y += ICON_PAD_TOP;
             }
@@ -1455,7 +1455,7 @@ lay_down_icons_horizontal (CajaIconContainer *container,
 
             lay_down_one_line (container, line_start, p, y, max_height_above, positions, FALSE);
 
-            if (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+            if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
             {
                 y += max_height_above + max_height_below + ICON_PAD_BOTTOM;
             }
@@ -1465,7 +1465,7 @@ lay_down_icons_horizontal (CajaIconContainer *container,
                 y += max_height_below + ICON_PAD_BOTTOM;
             }
 
-            line_width = container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE ? ICON_PAD_LEFT : 0;
+            line_width = container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE ? ICON_PAD_LEFT : 0;
             line_start = p;
             i = 0;
 
@@ -1489,7 +1489,7 @@ lay_down_icons_horizontal (CajaIconContainer *container,
         position->width = icon_width;
         position->height = icon_bounds.y1 - icon_bounds.y0;
 
-        if (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+        if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
         {
             if (gridded_layout)
             {
@@ -1514,7 +1514,7 @@ lay_down_icons_horizontal (CajaIconContainer *container,
     /* Lay down that last line of icons. */
     if (line_start != NULL)
     {
-        if (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+        if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
         {
             y += ICON_PAD_TOP;
         }
@@ -1602,8 +1602,8 @@ lay_down_icons_vertical (CajaIconContainer *container,
 
     CajaIcon *icon = NULL;
 
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
-    g_assert (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE);
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
+    g_assert (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE);
 
     if (icons == NULL)
     {
@@ -2318,13 +2318,13 @@ lay_down_icons (CajaIconContainer *container, GList *icons, double start_y)
 {
     switch (container->details->layout_mode)
     {
-    case CAJA_ICON_LAYOUT_L_R_T_B:
-    case CAJA_ICON_LAYOUT_R_L_T_B:
+    case BAUL_ICON_LAYOUT_L_R_T_B:
+    case BAUL_ICON_LAYOUT_R_L_T_B:
         lay_down_icons_horizontal (container, icons, start_y);
         break;
 
-    case CAJA_ICON_LAYOUT_T_B_L_R:
-    case CAJA_ICON_LAYOUT_T_B_R_L:
+    case BAUL_ICON_LAYOUT_T_B_L_R:
+    case BAUL_ICON_LAYOUT_T_B_R_L:
         if (baul_icon_container_get_is_desktop (container))
         {
             lay_down_icons_vertical_desktop (container, icons);
@@ -2374,7 +2374,7 @@ redo_layout_callback (gpointer callback_data)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (callback_data);
+    container = BAUL_ICON_CONTAINER (callback_data);
     redo_layout_internal (container);
     container->details->idle_id = 0;
 
@@ -2739,7 +2739,7 @@ rubberband_timeout_callback (gpointer data)
     EelDRect selection_rect;
 
     widget = GTK_WIDGET (data);
-    container = CAJA_ICON_CONTAINER (data);
+    container = BAUL_ICON_CONTAINER (data);
     band_info = &container->details->rubberband_info;
 
     g_assert (band_info->timer_id != 0);
@@ -3050,7 +3050,7 @@ compare_icons_by_uri (CajaIconContainer *container,
     char *uri_a, *uri_b;
     int result;
 
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
     g_assert (icon_a != NULL);
     g_assert (icon_b != NULL);
     g_assert (icon_a != icon_b);
@@ -3069,7 +3069,7 @@ static int
 get_cmp_point_x (CajaIconContainer *container,
                  EelDRect icon_rect)
 {
-    if (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+    if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
     {
         if (gtk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
         {
@@ -3090,7 +3090,7 @@ static int
 get_cmp_point_y (CajaIconContainer *container,
                  EelDRect icon_rect)
 {
-    if (container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+    if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
     {
         return (icon_rect.y0 + icon_rect.y1)/2;
     }
@@ -4358,7 +4358,7 @@ destroy (GtkWidget *object)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (object);
+    container = BAUL_ICON_CONTAINER (object);
 
     baul_icon_container_clear (container);
 
@@ -4419,7 +4419,7 @@ finalize (GObject *object)
 {
     CajaIconContainerDetails *details;
 
-    details = CAJA_ICON_CONTAINER (object)->details;
+    details = BAUL_ICON_CONTAINER (object)->details;
 
     g_signal_handlers_disconnect_by_func (baul_icon_view_preferences,
                                           text_ellipsis_limit_changed_container_callback,
@@ -4458,7 +4458,7 @@ clear_size_allocation_count (gpointer data)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (data);
+    container = BAUL_ICON_CONTAINER (data);
 
     container->details->size_allocation_count_id = 0;
     container->details->size_allocation_count = 0;
@@ -4474,7 +4474,7 @@ size_allocate (GtkWidget *widget,
     gboolean need_layout_redone;
     GtkAllocation wid_allocation;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     need_layout_redone = !container->details->has_been_allocated;
     gtk_widget_get_allocation (widget, &wid_allocation);
@@ -4587,7 +4587,7 @@ get_prefered_height (GtkWidget *widget,
 static gboolean
 draw (GtkWidget *widget, cairo_t *cr)
 {
-    if (!CAJA_ICON_CONTAINER (widget)->details->is_desktop)
+    if (!BAUL_ICON_CONTAINER (widget)->details->is_desktop)
     {
         eel_background_draw (widget, cr);
     }
@@ -4604,7 +4604,7 @@ realize (GtkWidget *widget)
 
     GTK_WIDGET_CLASS (baul_icon_container_parent_class)->realize (widget);
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     /* Set up DnD.  */
     baul_icon_dnd_init (container);
@@ -4624,7 +4624,7 @@ unrealize (GtkWidget *widget)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     baul_icon_dnd_fini (container);
 
@@ -4642,7 +4642,7 @@ style_updated (GtkWidget *widget)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
     container->details->use_drop_shadows = container->details->drop_shadows_requested;
 
     /* Don't chain up to parent, if this is a desktop container,
@@ -4668,7 +4668,7 @@ button_press_event (GtkWidget *widget,
     gboolean return_value;
     gboolean clicked_on_icon;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
     container->details->button_down_time = event->time;
 
     /* Forget about the old keyboard selection now that we've started mousing. */
@@ -5006,7 +5006,7 @@ continue_stretching (CajaIconContainer *container,
                      double world_x, double world_y)
 {
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     container->details->world_x = world_x;
     container->details->world_y = world_y;
@@ -5137,7 +5137,7 @@ button_release_event (GtkWidget *widget,
     CajaIconContainerDetails *details;
     double world_x, world_y;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
     details = container->details;
 
     if (event->button == RUBBERBAND_BUTTON && details->rubberband_info.active)
@@ -5160,7 +5160,7 @@ button_release_event (GtkWidget *widget,
             else
             {
                 baul_icon_dnd_end_drag (container);
-                baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+                baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                                 "end drag from icon container");
             }
             break;
@@ -5190,7 +5190,7 @@ motion_notify_event (GtkWidget *widget,
     int canvas_x, canvas_y;
     GdkDragAction actions;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
     details = container->details;
 
     if (details->drag_button != 0)
@@ -5238,7 +5238,7 @@ motion_notify_event (GtkWidget *widget,
                                           event,
                                           canvas_x,
                                           canvas_y);
-                baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+                baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                                 "begin drag from icon container");
             }
             break;
@@ -5424,7 +5424,7 @@ baul_icon_container_search_preedit_changed (GtkEntry *entry,
     {
         g_source_remove (container->details->typeselect_flush_timeout);
         container->details->typeselect_flush_timeout =
-            g_timeout_add_seconds (CAJA_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
+            g_timeout_add_seconds (BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
                                    (GSourceFunc) baul_icon_container_search_entry_flush_timeout,
                                    container);
     }
@@ -5478,7 +5478,7 @@ baul_icon_container_get_icon_text (CajaIconContainer *container,
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
     g_assert (klass->get_icon_text != NULL);
 
     klass->get_icon_text (container, data, editable_text, additional_text, include_invisible);
@@ -5639,7 +5639,7 @@ baul_icon_container_search_scroll_event (GtkWidget *widget,
     {
         g_source_remove (container->details->typeselect_flush_timeout);
         container->details->typeselect_flush_timeout =
-            g_timeout_add_seconds (CAJA_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
+            g_timeout_add_seconds (BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
                                    (GSourceFunc) baul_icon_container_search_entry_flush_timeout,
                                    container);
     }
@@ -5655,7 +5655,7 @@ baul_icon_container_search_key_press_event (GtkWidget *widget,
     gboolean retval = FALSE;
 
     g_assert (GTK_IS_WIDGET (widget));
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
 
     /* close window and cancel the search */
     if (event->keyval == GDK_KEY_Escape || event->keyval == GDK_KEY_Tab)
@@ -5707,7 +5707,7 @@ baul_icon_container_search_key_press_event (GtkWidget *widget,
     {
         g_source_remove (container->details->typeselect_flush_timeout);
         container->details->typeselect_flush_timeout =
-            g_timeout_add_seconds (CAJA_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
+            g_timeout_add_seconds (BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
                                    (GSourceFunc) baul_icon_container_search_entry_flush_timeout,
                                    container);
     }
@@ -5724,7 +5724,7 @@ baul_icon_container_search_init (GtkWidget   *entry,
     const gchar *text;
 
     g_assert (GTK_IS_ENTRY (entry));
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
 
     text = gtk_entry_get_text (GTK_ENTRY (entry));
     len = strlen (text);
@@ -5735,7 +5735,7 @@ baul_icon_container_search_init (GtkWidget   *entry,
     {
         g_source_remove (container->details->typeselect_flush_timeout);
         container->details->typeselect_flush_timeout =
-            g_timeout_add_seconds (CAJA_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
+            g_timeout_add_seconds (BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
                                    (GSourceFunc) baul_icon_container_search_entry_flush_timeout,
                                    container);
     }
@@ -5852,7 +5852,7 @@ baul_icon_container_real_start_interactive_search (CajaIconContainer *container,
     }
 
     container->details->typeselect_flush_timeout =
-        g_timeout_add_seconds (CAJA_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
+        g_timeout_add_seconds (BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
                                (GSourceFunc) baul_icon_container_search_entry_flush_timeout,
                                container);
 
@@ -5896,7 +5896,7 @@ key_press_event (GtkWidget *widget,
     CajaIconContainer *container;
     gboolean handled;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
     handled = FALSE;
 
     if (is_renaming (container) || is_renaming_pending (container))
@@ -6113,7 +6113,7 @@ popup_menu (GtkWidget *widget)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     if (has_selection (container))
     {
@@ -6142,7 +6142,7 @@ grab_notify_cb  (GtkWidget        *widget,
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     if (container->details->rubberband_info.active &&
             !was_grabbed)
@@ -6161,7 +6161,7 @@ text_ellipsis_limit_changed_container_callback (gpointer callback_data)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (callback_data);
+    container = BAUL_ICON_CONTAINER (callback_data);
     invalidate_label_sizes (container);
     schedule_redo_layout (container);
 }
@@ -6179,18 +6179,18 @@ baul_icon_container_constructor (GType                  type,
               n_construct_params,
               construct_params);
 
-    container = CAJA_ICON_CONTAINER (object);
+    container = BAUL_ICON_CONTAINER (object);
     if (baul_icon_container_get_is_desktop (container))
     {
         g_signal_connect_swapped (baul_desktop_preferences,
-                                  "changed::" CAJA_PREFERENCES_DESKTOP_TEXT_ELLIPSIS_LIMIT,
+                                  "changed::" BAUL_PREFERENCES_DESKTOP_TEXT_ELLIPSIS_LIMIT,
                                   G_CALLBACK (text_ellipsis_limit_changed_container_callback),
                                   container);
     }
     else
     {
         g_signal_connect_swapped (baul_icon_view_preferences,
-                                  "changed::" CAJA_PREFERENCES_ICON_VIEW_TEXT_ELLIPSIS_LIMIT,
+                                  "changed::" BAUL_PREFERENCES_ICON_VIEW_TEXT_ELLIPSIS_LIMIT,
                                   G_CALLBACK (text_ellipsis_limit_changed_container_callback),
                                   container);
     }
@@ -6633,7 +6633,7 @@ update_selected (CajaIconContainer *container)
 static gboolean
 handle_focus_in_event (GtkWidget *widget, GdkEventFocus *event, gpointer user_data)
 {
-    update_selected (CAJA_ICON_CONTAINER (widget));
+    update_selected (BAUL_ICON_CONTAINER (widget));
 
     return FALSE;
 }
@@ -6642,8 +6642,8 @@ static gboolean
 handle_focus_out_event (GtkWidget *widget, GdkEventFocus *event, gpointer user_data)
 {
     /* End renaming and commit change. */
-    end_renaming_mode (CAJA_ICON_CONTAINER (widget), TRUE);
-    update_selected (CAJA_ICON_CONTAINER (widget));
+    end_renaming_mode (BAUL_ICON_CONTAINER (widget), TRUE);
+    update_selected (BAUL_ICON_CONTAINER (widget));
 
     return FALSE;
 }
@@ -6653,12 +6653,12 @@ handle_scale_factor_changed (GObject    *object,
                              GParamSpec *pspec,
                              gpointer    user_data)
 {
-    invalidate_labels (CAJA_ICON_CONTAINER (object));
-    baul_icon_container_request_update_all (CAJA_ICON_CONTAINER (object));
+    invalidate_labels (BAUL_ICON_CONTAINER (object));
+    baul_icon_container_request_update_all (BAUL_ICON_CONTAINER (object));
 }
 
 
-static int text_ellipsis_limits[CAJA_ZOOM_LEVEL_N_ENTRIES];
+static int text_ellipsis_limits[BAUL_ZOOM_LEVEL_N_ENTRIES];
 static int desktop_text_ellipsis_limit;
 
 static gboolean
@@ -6718,11 +6718,11 @@ text_ellipsis_limit_changed_callback (gpointer callback_data)
     unsigned int i;
     int one_limit;
 
-    pref = g_settings_get_strv (baul_icon_view_preferences, CAJA_PREFERENCES_ICON_VIEW_TEXT_ELLIPSIS_LIMIT);
+    pref = g_settings_get_strv (baul_icon_view_preferences, BAUL_PREFERENCES_ICON_VIEW_TEXT_ELLIPSIS_LIMIT);
 
     /* set default */
     get_text_ellipsis_limit_for_zoom (pref, NULL, &one_limit);
-    for (i = 0; i < CAJA_ZOOM_LEVEL_N_ENTRIES; i++)
+    for (i = 0; i < BAUL_ZOOM_LEVEL_N_ENTRIES; i++)
     {
         text_ellipsis_limits[i] = one_limit;
     }
@@ -6744,7 +6744,7 @@ desktop_text_ellipsis_limit_changed_callback (gpointer callback_data)
 {
     int pref;
 
-    pref = g_settings_get_int (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_TEXT_ELLIPSIS_LIMIT);
+    pref = g_settings_get_int (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_TEXT_ELLIPSIS_LIMIT);
     desktop_text_ellipsis_limit = pref;
 }
 
@@ -6760,15 +6760,15 @@ baul_icon_container_init (CajaIconContainer *container)
     details->icon_set = g_hash_table_new (g_direct_hash, g_direct_equal);
     details->layout_timestamp = UNDEFINED_TIME;
 
-    details->zoom_level = CAJA_ZOOM_LEVEL_STANDARD;
+    details->zoom_level = BAUL_ZOOM_LEVEL_STANDARD;
 
-    details->font_size_table[CAJA_ZOOM_LEVEL_SMALLEST] = -2 * PANGO_SCALE;
-    details->font_size_table[CAJA_ZOOM_LEVEL_SMALLER] = -2 * PANGO_SCALE;
-    details->font_size_table[CAJA_ZOOM_LEVEL_SMALL] = -0 * PANGO_SCALE;
-    details->font_size_table[CAJA_ZOOM_LEVEL_STANDARD] = 0 * PANGO_SCALE;
-    details->font_size_table[CAJA_ZOOM_LEVEL_LARGE] = 0 * PANGO_SCALE;
-    details->font_size_table[CAJA_ZOOM_LEVEL_LARGER] = 0 * PANGO_SCALE;
-    details->font_size_table[CAJA_ZOOM_LEVEL_LARGEST] = 0 * PANGO_SCALE;
+    details->font_size_table[BAUL_ZOOM_LEVEL_SMALLEST] = -2 * PANGO_SCALE;
+    details->font_size_table[BAUL_ZOOM_LEVEL_SMALLER] = -2 * PANGO_SCALE;
+    details->font_size_table[BAUL_ZOOM_LEVEL_SMALL] = -0 * PANGO_SCALE;
+    details->font_size_table[BAUL_ZOOM_LEVEL_STANDARD] = 0 * PANGO_SCALE;
+    details->font_size_table[BAUL_ZOOM_LEVEL_LARGE] = 0 * PANGO_SCALE;
+    details->font_size_table[BAUL_ZOOM_LEVEL_LARGER] = 0 * PANGO_SCALE;
+    details->font_size_table[BAUL_ZOOM_LEVEL_LARGEST] = 0 * PANGO_SCALE;
 
     container->details = details;
 
@@ -6788,13 +6788,13 @@ baul_icon_container_init (CajaIconContainer *container)
     if (!setup_prefs)
     {
         g_signal_connect_swapped (baul_icon_view_preferences,
-                                  "changed::" CAJA_PREFERENCES_ICON_VIEW_TEXT_ELLIPSIS_LIMIT,
+                                  "changed::" BAUL_PREFERENCES_ICON_VIEW_TEXT_ELLIPSIS_LIMIT,
                                   G_CALLBACK (text_ellipsis_limit_changed_callback),
                                   NULL);
         text_ellipsis_limit_changed_callback (NULL);
 
         g_signal_connect_swapped (baul_icon_view_preferences,
-                                  "changed::" CAJA_PREFERENCES_DESKTOP_TEXT_ELLIPSIS_LIMIT,
+                                  "changed::" BAUL_PREFERENCES_DESKTOP_TEXT_ELLIPSIS_LIMIT,
                                   G_CALLBACK (desktop_text_ellipsis_limit_changed_callback),
                                   NULL);
         desktop_text_ellipsis_limit_changed_callback (NULL);
@@ -6976,9 +6976,9 @@ item_event_callback (EelCanvasItem *item,
     CajaIconContainer *container;
     CajaIcon *icon;
 
-    container = CAJA_ICON_CONTAINER (data);
+    container = BAUL_ICON_CONTAINER (data);
 
-    icon = CAJA_ICON_CANVAS_ITEM (item)->user_data;
+    icon = BAUL_ICON_CANVAS_ITEM (item)->user_data;
     g_assert (icon != NULL);
 
     switch (event->type)
@@ -7000,7 +7000,7 @@ item_event_callback (EelCanvasItem *item,
 GtkWidget *
 baul_icon_container_new (void)
 {
-    return gtk_widget_new (CAJA_TYPE_ICON_CONTAINER, NULL);
+    return gtk_widget_new (BAUL_TYPE_ICON_CONTAINER, NULL);
 }
 
 /* Clear all of the icons in the container. */
@@ -7011,7 +7011,7 @@ baul_icon_container_clear (CajaIconContainer *container)
     GList *p;
     CajaIcon *icon = NULL;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     details = container->details;
     details->layout_timestamp = UNDEFINED_TIME;
@@ -7223,7 +7223,7 @@ baul_icon_container_for_each (CajaIconContainer *container,
 {
     CallbackAndData callback_and_data;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     callback_and_data.callback = callback;
     callback_and_data.callback_data = callback_data;
@@ -7237,7 +7237,7 @@ selection_changed_at_idle_callback (gpointer data)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (data);
+    container = BAUL_ICON_CONTAINER (data);
 
     g_signal_emit (container,
                    signals[SELECTION_CHANGED], 0);
@@ -7333,7 +7333,7 @@ activate_selected_items (CajaIconContainer *container)
 {
     GList *selection;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     selection = baul_icon_container_get_selection (container);
     if (selection != NULL)
@@ -7351,7 +7351,7 @@ activate_selected_items_alternate (CajaIconContainer *container,
 {
     GList *selection;
 
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
 
     if (icon != NULL)
     {
@@ -7401,7 +7401,7 @@ baul_icon_container_get_icon_images (CajaIconContainer *container,
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
     g_assert (klass->get_icon_images != NULL);
 
     return klass->get_icon_images (container, data, size, emblem_pixbufs, embedded_text, for_drag_accept, need_large_embeddded_text, embedded_text_needs_loading, has_open_window);
@@ -7412,7 +7412,7 @@ baul_icon_container_freeze_updates (CajaIconContainer *container)
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
     g_assert (klass->freeze_updates != NULL);
 
     klass->freeze_updates (container);
@@ -7423,7 +7423,7 @@ baul_icon_container_unfreeze_updates (CajaIconContainer *container)
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
     g_assert (klass->unfreeze_updates != NULL);
 
     klass->unfreeze_updates (container);
@@ -7437,7 +7437,7 @@ baul_icon_container_start_monitor_top_left (CajaIconContainer *container,
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
     g_assert (klass->start_monitor_top_left != NULL);
 
     klass->start_monitor_top_left (container, data, client, large_text);
@@ -7450,7 +7450,7 @@ baul_icon_container_stop_monitor_top_left (CajaIconContainer *container,
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
     g_return_if_fail (klass->stop_monitor_top_left != NULL);
 
     klass->stop_monitor_top_left (container, data, client);
@@ -7463,7 +7463,7 @@ baul_icon_container_prioritize_thumbnailing (CajaIconContainer *container,
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
     g_assert (klass->prioritize_thumbnailing != NULL);
 
     klass->prioritize_thumbnailing (container, icon->data);
@@ -7590,7 +7590,7 @@ baul_icon_container_update_icon (CajaIconContainer *container,
 
     /* compute the maximum size based on the scale factor */
     min_image_size = MINIMUM_IMAGE_SIZE * EEL_CANVAS (container)->pixels_per_unit;
-    max_image_size = MAX (MAXIMUM_IMAGE_SIZE * EEL_CANVAS (container)->pixels_per_unit, CAJA_ICON_MAXIMUM_SIZE);
+    max_image_size = MAX (MAXIMUM_IMAGE_SIZE * EEL_CANVAS (container)->pixels_per_unit, BAUL_ICON_MAXIMUM_SIZE);
 
     /* Get the appropriate images for the file. */
     if (container->details->forced_icon_size > 0)
@@ -7868,7 +7868,7 @@ baul_icon_container_add (CajaIconContainer *container,
     CajaIcon *icon;
     EelCanvasItem *band, *item;
 
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), FALSE);
     g_return_val_if_fail (data != NULL, FALSE);
 
     details = container->details;
@@ -7890,7 +7890,7 @@ baul_icon_container_add (CajaIconContainer *container,
      */
     icon->has_lazy_position = is_old_or_unknown_icon_data (container, data);
     icon->scale = 1.0;
-    icon->item = CAJA_ICON_CANVAS_ITEM
+    icon->item = BAUL_ICON_CANVAS_ITEM
                  (eel_canvas_item_new (EEL_CANVAS_GROUP (EEL_CANVAS (container)->root),
                                        baul_icon_canvas_item_get_type (),
                                        "visible", FALSE,
@@ -7899,7 +7899,7 @@ baul_icon_container_add (CajaIconContainer *container,
 
     /* Make sure the icon is under the selection_rectangle */
     item = EEL_CANVAS_ITEM (icon->item);
-    band = CAJA_ICON_CONTAINER (item->canvas)->details->rubberband_info.selection_rectangle;
+    band = BAUL_ICON_CONTAINER (item->canvas)->details->rubberband_info.selection_rectangle;
     if (band)
     {
         eel_canvas_item_send_behind (item, band);
@@ -7945,7 +7945,7 @@ baul_icon_container_remove (CajaIconContainer *container,
 {
     CajaIcon *icon;
 
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), FALSE);
     g_return_val_if_fail (data != NULL, FALSE);
 
     end_renaming_mode (container, FALSE);
@@ -7978,7 +7978,7 @@ baul_icon_container_request_update (CajaIconContainer *container,
 {
     CajaIcon *icon;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
     g_return_if_fail (data != NULL);
 
     icon = g_hash_table_lookup (container->details->icon_set, data);
@@ -8010,13 +8010,13 @@ baul_icon_container_set_zoom_level (CajaIconContainer *container, int new_level)
     end_renaming_mode (container, TRUE);
 
     pinned_level = new_level;
-    if (pinned_level < CAJA_ZOOM_LEVEL_SMALLEST)
+    if (pinned_level < BAUL_ZOOM_LEVEL_SMALLEST)
     {
-        pinned_level = CAJA_ZOOM_LEVEL_SMALLEST;
+        pinned_level = BAUL_ZOOM_LEVEL_SMALLEST;
     }
-    else if (pinned_level > CAJA_ZOOM_LEVEL_LARGEST)
+    else if (pinned_level > BAUL_ZOOM_LEVEL_LARGEST)
     {
-        pinned_level = CAJA_ZOOM_LEVEL_LARGEST;
+        pinned_level = BAUL_ZOOM_LEVEL_LARGEST;
     }
 
     if (pinned_level == details->zoom_level)
@@ -8027,7 +8027,7 @@ baul_icon_container_set_zoom_level (CajaIconContainer *container, int new_level)
     details->zoom_level = pinned_level;
 
     pixels_per_unit = (double) baul_get_icon_size_for_zoom_level (pinned_level)
-                      / CAJA_ICON_SIZE_STANDARD;
+                      / BAUL_ICON_SIZE_STANDARD;
     eel_canvas_set_pixels_per_unit (EEL_CANVAS (container), pixels_per_unit);
 
     invalidate_labels (container);
@@ -8047,7 +8047,7 @@ baul_icon_container_request_update_all (CajaIconContainer *container)
     GList *node;
     CajaIcon *icon = NULL;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     container->details->is_loading = TRUE;
     for (node = container->details->icons; node != NULL; node = node->next)
@@ -8069,7 +8069,7 @@ baul_icon_container_reveal (CajaIconContainer *container, CajaIconData *data)
 {
     CajaIcon *icon;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
     g_return_if_fail (data != NULL);
 
     icon = g_hash_table_lookup (container->details->icon_set, data);
@@ -8095,7 +8095,7 @@ baul_icon_container_get_selection (CajaIconContainer *container)
 {
     GList *list, *p;
 
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), NULL);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), NULL);
 
     list = NULL;
     for (p = container->details->icons; p != NULL; p = p->next)
@@ -8117,7 +8117,7 @@ baul_icon_container_get_selected_icons (CajaIconContainer *container)
 {
     GList *list, *p;
 
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), NULL);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), NULL);
 
     list = NULL;
     for (p = container->details->icons; p != NULL; p = p->next)
@@ -8146,7 +8146,7 @@ baul_icon_container_invert_selection (CajaIconContainer *container)
 {
     GList *p;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     for (p = container->details->icons; p != NULL; p = p->next)
     {
@@ -8195,7 +8195,7 @@ baul_icon_container_get_selected_icon_locations (CajaIconContainer *container)
     GArray *result;
     GList *icons;
 
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), NULL);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), NULL);
 
     icons = baul_icon_container_get_selected_icons (container);
     result = baul_icon_container_get_icon_locations (container, icons);
@@ -8217,7 +8217,7 @@ baul_icon_container_select_all (CajaIconContainer *container)
     GList *p;
     CajaIcon *icon = NULL;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     selection_changed = FALSE;
 
@@ -8252,7 +8252,7 @@ baul_icon_container_set_selection (CajaIconContainer *container,
     GList *p;
     CajaIcon *icon = NULL;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     selection_changed = FALSE;
 
@@ -8294,7 +8294,7 @@ baul_icon_container_select_list_unselect_others (CajaIconContainer *container,
     GList *p;
     CajaIcon *icon = NULL;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     selection_changed = FALSE;
 
@@ -8582,7 +8582,7 @@ compute_stretch (StretchState *start,
         y_stretch = - y_stretch;
     }
     current->icon_size = MAX ((int) start->icon_size + MIN (x_stretch, y_stretch),
-                              (int) CAJA_ICON_SIZE_SMALLEST);
+                              (int) BAUL_ICON_SIZE_SMALLEST);
 
     /* Figure out where the corner of the icon should be. */
     current->icon_x = start->icon_x;
@@ -8645,7 +8645,7 @@ void
 baul_icon_container_set_auto_layout (CajaIconContainer *container,
                                      gboolean auto_layout)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
     g_return_if_fail (auto_layout == FALSE || auto_layout == TRUE);
 
     if (container->details->auto_layout == auto_layout)
@@ -8673,7 +8673,7 @@ void
 baul_icon_container_set_tighter_layout (CajaIconContainer *container,
                                         gboolean tighter_layout)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
     g_return_if_fail (tighter_layout == FALSE || tighter_layout == TRUE);
 
     if (container->details->tighter_layout == tighter_layout)
@@ -8711,7 +8711,7 @@ align_icons_callback (gpointer callback_data)
 {
     CajaIconContainer *container;
 
-    container = CAJA_ICON_CONTAINER (callback_data);
+    container = BAUL_ICON_CONTAINER (callback_data);
     align_icons (container);
     container->details->align_idle_id = 0;
 
@@ -8762,7 +8762,7 @@ void
 baul_icon_container_set_layout_mode (CajaIconContainer *container,
                                      CajaIconLayoutMode mode)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     container->details->layout_mode = mode;
     invalidate_labels (container);
@@ -8776,7 +8776,7 @@ void
 baul_icon_container_set_label_position (CajaIconContainer *container,
                                         CajaIconLabelPosition position)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     if (container->details->label_position != position)
     {
@@ -8842,7 +8842,7 @@ baul_icon_container_sort (CajaIconContainer *container)
 gboolean
 baul_icon_container_is_auto_layout (CajaIconContainer *container)
 {
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), FALSE);
 
     return container->details->auto_layout;
 }
@@ -8850,7 +8850,7 @@ baul_icon_container_is_auto_layout (CajaIconContainer *container)
 gboolean
 baul_icon_container_is_tighter_layout (CajaIconContainer *container)
 {
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), FALSE);
 
     return container->details->tighter_layout;
 }
@@ -9004,7 +9004,7 @@ baul_icon_container_start_renaming_selected_item (CajaIconContainer *container,
         eel_editable_label_set_line_wrap_mode (EEL_EDITABLE_LABEL (details->rename_widget), PANGO_WRAP_WORD_CHAR);
         eel_editable_label_set_draw_outline (EEL_EDITABLE_LABEL (details->rename_widget), TRUE);
 
-        if (details->label_position != CAJA_ICON_LABEL_POSITION_BESIDE)
+        if (details->label_position != BAUL_ICON_LABEL_POSITION_BESIDE)
         {
             eel_editable_label_set_justify (EEL_EDITABLE_LABEL (details->rename_widget), GTK_JUSTIFY_CENTER);
         }
@@ -9040,7 +9040,7 @@ baul_icon_container_start_renaming_selected_item (CajaIconContainer *container,
     text_rect = baul_icon_canvas_item_get_text_rectangle (icon->item, TRUE);
 
     if (baul_icon_container_is_layout_vertical (container) &&
-            container->details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+            container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
     {
         /* for one-line editables, the width changes dynamically */
         width = -1;
@@ -9050,7 +9050,7 @@ baul_icon_container_start_renaming_selected_item (CajaIconContainer *container,
         width = baul_icon_canvas_item_get_max_text_width (icon->item);
     }
 
-    if (details->label_position == CAJA_ICON_LABEL_POSITION_BESIDE)
+    if (details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
     {
         eel_canvas_w2c (EEL_CANVAS_ITEM (icon->item)->canvas,
                         text_rect.x0,
@@ -9160,7 +9160,7 @@ baul_icon_container_emit_preview_signal (CajaIconContainer *icon_container,
 {
     gboolean result;
 
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (icon_container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (icon_container), FALSE);
     g_return_val_if_fail (icon != NULL, FALSE);
     g_return_val_if_fail (start_flag == FALSE || start_flag == TRUE, FALSE);
 
@@ -9204,7 +9204,7 @@ void
 baul_icon_container_set_single_click_mode (CajaIconContainer *container,
         gboolean single_click_mode)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     container->details->single_click_mode = single_click_mode;
 }
@@ -9213,7 +9213,7 @@ baul_icon_container_set_single_click_mode (CajaIconContainer *container,
 gboolean
 baul_icon_container_get_is_fixed_size (CajaIconContainer *container)
 {
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), FALSE);
 
     return container->details->is_fixed_size;
 }
@@ -9223,7 +9223,7 @@ void
 baul_icon_container_set_is_fixed_size (CajaIconContainer *container,
                                        gboolean is_fixed_size)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     container->details->is_fixed_size = is_fixed_size;
 }
@@ -9231,7 +9231,7 @@ baul_icon_container_set_is_fixed_size (CajaIconContainer *container,
 gboolean
 baul_icon_container_get_is_desktop (CajaIconContainer *container)
 {
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), FALSE);
 
     return container->details->is_desktop;
 }
@@ -9240,7 +9240,7 @@ void
 baul_icon_container_set_is_desktop (CajaIconContainer *container,
                                     gboolean is_desktop)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     container->details->is_desktop = is_desktop;
 
@@ -9259,7 +9259,7 @@ baul_icon_container_set_margins (CajaIconContainer *container,
                                  int top_margin,
                                  int bottom_margin)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     container->details->left_margin = left_margin;
     container->details->right_margin = right_margin;
@@ -9291,7 +9291,7 @@ void
 baul_icon_container_set_font (CajaIconContainer *container,
                               const char *font)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     if (g_strcmp0 (container->details->font, font) == 0)
     {
@@ -9308,17 +9308,17 @@ baul_icon_container_set_font (CajaIconContainer *container,
 
 void
 baul_icon_container_set_font_size_table (CajaIconContainer *container,
-        const int font_size_table[CAJA_ZOOM_LEVEL_LARGEST + 1])
+        const int font_size_table[BAUL_ZOOM_LEVEL_LARGEST + 1])
 {
     int old_font_size;
     int i;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
     g_return_if_fail (font_size_table != NULL);
 
     old_font_size = container->details->font_size_table[container->details->zoom_level];
 
-    for (i = 0; i <= CAJA_ZOOM_LEVEL_LARGEST; i++)
+    for (i = 0; i <= BAUL_ZOOM_LEVEL_LARGEST; i++)
     {
         if (container->details->font_size_table[i] != font_size_table[i])
         {
@@ -9346,7 +9346,7 @@ baul_icon_container_get_icon_description (CajaIconContainer *container,
 {
     CajaIconContainerClass *klass;
 
-    klass = CAJA_ICON_CONTAINER_GET_CLASS (container);
+    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
 
     if (klass->get_icon_description)
     {
@@ -9361,7 +9361,7 @@ baul_icon_container_get_icon_description (CajaIconContainer *container,
 gboolean
 baul_icon_container_get_allow_moves (CajaIconContainer *container)
 {
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), FALSE);
 
     return container->details->drag_allow_moves;
 }
@@ -9370,7 +9370,7 @@ void
 baul_icon_container_set_allow_moves	(CajaIconContainer *container,
                                      gboolean               allow_moves)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     container->details->drag_allow_moves = allow_moves;
 }
@@ -9379,7 +9379,7 @@ void
 baul_icon_container_set_forced_icon_size (CajaIconContainer *container,
         int                    forced_icon_size)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     if (forced_icon_size != container->details->forced_icon_size)
     {
@@ -9394,7 +9394,7 @@ void
 baul_icon_container_set_all_columns_same_width (CajaIconContainer *container,
         gboolean               all_columns_same_width)
 {
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     if (all_columns_same_width != container->details->all_columns_same_width)
     {
@@ -9419,7 +9419,7 @@ baul_icon_container_set_highlighted_for_clipboard (CajaIconContainer *container,
     gboolean highlighted_for_clipboard;
     CajaIcon *icon = NULL;
 
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
     for (l = container->details->icons; l != NULL; l = l->next)
     {
@@ -9463,7 +9463,7 @@ baul_icon_container_accessible_do_action (AtkAction *accessible, int i)
         return FALSE;
     }
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
     switch (i)
     {
     case ACTION_ACTIVATE :
@@ -9569,7 +9569,7 @@ baul_icon_container_accessible_update_selection (AtkObject *accessible)
     GList *l;
     CajaIcon *icon = NULL;
 
-    container = CAJA_ICON_CONTAINER (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
+    container = BAUL_ICON_CONTAINER (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
 
     priv = accessible_get_priv (accessible);
 
@@ -9673,7 +9673,7 @@ baul_icon_container_accessible_add_selection (AtkSelection *accessible,
         return FALSE;
     }
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     icon = g_list_nth_data (container->details->icons, i);
     if (icon)
@@ -9704,7 +9704,7 @@ baul_icon_container_accessible_clear_selection (AtkSelection *accessible)
         return FALSE;
     }
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     baul_icon_container_unselect_all (container);
 
@@ -9768,7 +9768,7 @@ baul_icon_container_accessible_is_child_selected (AtkSelection *accessible,
         return FALSE;
     }
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     icon = g_list_nth_data (container->details->icons, i);
     return icon ? icon->is_selected : FALSE;
@@ -9792,7 +9792,7 @@ baul_icon_container_accessible_remove_selection (AtkSelection *accessible,
     baul_icon_container_accessible_update_selection (ATK_OBJECT (accessible));
     priv = accessible_get_priv (ATK_OBJECT (accessible));
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     icon = g_list_nth_data (priv->selection, i);
     if (icon)
@@ -9822,7 +9822,7 @@ baul_icon_container_accessible_select_all_selection (AtkSelection *accessible)
         return FALSE;
     }
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     baul_icon_container_select_all (container);
 
@@ -9876,7 +9876,7 @@ baul_icon_container_accessible_get_n_children (AtkObject *accessible)
         return FALSE;
     }
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     i = g_hash_table_size (container->details->icon_set);
     if (container->details->rename_widget)
@@ -9900,7 +9900,7 @@ baul_icon_container_accessible_ref_child (AtkObject *accessible, int i)
         return NULL;
     }
 
-    container = CAJA_ICON_CONTAINER (widget);
+    container = BAUL_ICON_CONTAINER (widget);
 
     icon = g_list_nth_data (container->details->icons, i);
     if (icon)
@@ -9949,7 +9949,7 @@ baul_icon_container_accessible_initialize (AtkObject *accessible,
         baul_icon_container_accessible_update_selection
         (ATK_OBJECT (accessible));
 
-        container = CAJA_ICON_CONTAINER (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
+        container = BAUL_ICON_CONTAINER (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
         g_signal_connect (G_OBJECT (container), "selection_changed",
                           G_CALLBACK (baul_icon_container_accessible_selection_changed_cb),
                           accessible);
@@ -10020,7 +10020,7 @@ baul_icon_container_accessible_class_init (CajaIconContainerAccessibleClass *kla
     accessible_private_data_quark = g_quark_from_static_string ("icon-container-accessible-private-data");
 }
 
-#if ! defined (CAJA_OMIT_SELF_CHECK)
+#if ! defined (BAUL_OMIT_SELF_CHECK)
 
 static char *
 check_compute_stretch (int icon_x, int icon_y, int icon_size,
@@ -10053,24 +10053,24 @@ baul_self_check_icon_container (void)
     EEL_CHECK_STRING_RESULT (check_compute_stretch (0, 0, 16, 16, 16, 17, 16), "0,0:16");
     EEL_CHECK_STRING_RESULT (check_compute_stretch (100, 100, 64, 105, 105, 40, 40), "35,35:129");
 }
-#endif /* ! CAJA_OMIT_SELF_CHECK */
+#endif /* ! BAUL_OMIT_SELF_CHECK */
 
 gboolean
 baul_icon_container_is_layout_rtl (CajaIconContainer *container)
 {
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), 0);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), 0);
 
-    return container->details->layout_mode == CAJA_ICON_LAYOUT_T_B_R_L ||
-           container->details->layout_mode == CAJA_ICON_LAYOUT_R_L_T_B;
+    return container->details->layout_mode == BAUL_ICON_LAYOUT_T_B_R_L ||
+           container->details->layout_mode == BAUL_ICON_LAYOUT_R_L_T_B;
 }
 
 gboolean
 baul_icon_container_is_layout_vertical (CajaIconContainer *container)
 {
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), FALSE);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), FALSE);
 
-    return (container->details->layout_mode == CAJA_ICON_LAYOUT_T_B_L_R ||
-            container->details->layout_mode == CAJA_ICON_LAYOUT_T_B_R_L);
+    return (container->details->layout_mode == BAUL_ICON_LAYOUT_T_B_L_R ||
+            container->details->layout_mode == BAUL_ICON_LAYOUT_T_B_R_L);
 }
 
 int

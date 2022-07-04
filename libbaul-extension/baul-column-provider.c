@@ -78,10 +78,10 @@ baul_column_provider_get_type (void)
 GList *
 baul_column_provider_get_columns (CajaColumnProvider *provider)
 {
-    g_return_val_if_fail (CAJA_IS_COLUMN_PROVIDER (provider), NULL);
-    g_return_val_if_fail (CAJA_COLUMN_PROVIDER_GET_IFACE (provider)->get_columns != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_COLUMN_PROVIDER (provider), NULL);
+    g_return_val_if_fail (BAUL_COLUMN_PROVIDER_GET_IFACE (provider)->get_columns != NULL, NULL);
 
-    return CAJA_COLUMN_PROVIDER_GET_IFACE (provider)->get_columns
+    return BAUL_COLUMN_PROVIDER_GET_IFACE (provider)->get_columns
            (provider);
 }
 

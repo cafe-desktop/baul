@@ -12,8 +12,8 @@ AM_CPPFLAGS = \
 	$(BEAGLE_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
-	-DCAJA_DATADIR=\""$(datadir)/baul"\" \
-	-DCAJA_EXTENSIONDIR=\""$(libdir)/baul/extensions-2.0"\" \
+	-DBAUL_DATADIR=\""$(datadir)/baul"\" \
+	-DBAUL_EXTENSIONDIR=\""$(libdir)/baul/extensions-2.0"\" \
 	$(NULL)
 
 BUILT_SOURCES = \

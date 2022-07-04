@@ -31,18 +31,18 @@ baul_operation_result_get_type (void)
     if (type == 0) {
         static const GEnumValue values[] = {
             {
-                CAJA_OPERATION_COMPLETE,
-                "CAJA_OPERATION_COMPLETE",
+                BAUL_OPERATION_COMPLETE,
+                "BAUL_OPERATION_COMPLETE",
                 "complete",
             },
             {
-                CAJA_OPERATION_FAILED,
-                "CAJA_OPERATION_FAILED",
+                BAUL_OPERATION_FAILED,
+                "BAUL_OPERATION_FAILED",
                 "failed",
             },
             {
-                CAJA_OPERATION_IN_PROGRESS,
-                "CAJA_OPERATION_IN_PROGRESS",
+                BAUL_OPERATION_IN_PROGRESS,
+                "BAUL_OPERATION_IN_PROGRESS",
                 "in_progress",
             },
             { 0, NULL, NULL }

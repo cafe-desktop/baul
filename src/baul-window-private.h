@@ -25,8 +25,8 @@
  *
  */
 
-#ifndef CAJA_WINDOW_PRIVATE_H
-#define CAJA_WINDOW_PRIVATE_H
+#ifndef BAUL_WINDOW_PRIVATE_H
+#define BAUL_WINDOW_PRIVATE_H
 
 #include <libbaul-private/baul-directory.h>
 
@@ -125,25 +125,25 @@ struct _CajaNavigationWindowPrivate
     GtkWidget *split_view_hpane;
 };
 
-#define CAJA_MENU_PATH_BACK_ITEM			"/menu/Go/Back"
-#define CAJA_MENU_PATH_FORWARD_ITEM			"/menu/Go/Forward"
-#define CAJA_MENU_PATH_UP_ITEM			"/menu/Go/Up"
+#define BAUL_MENU_PATH_BACK_ITEM			"/menu/Go/Back"
+#define BAUL_MENU_PATH_FORWARD_ITEM			"/menu/Go/Forward"
+#define BAUL_MENU_PATH_UP_ITEM			"/menu/Go/Up"
 
-#define CAJA_MENU_PATH_RELOAD_ITEM			"/menu/View/Reload"
-#define CAJA_MENU_PATH_ZOOM_IN_ITEM			"/menu/View/Zoom Items Placeholder/Zoom In"
-#define CAJA_MENU_PATH_ZOOM_OUT_ITEM		"/menu/View/Zoom Items Placeholder/Zoom Out"
-#define CAJA_MENU_PATH_ZOOM_NORMAL_ITEM		"/menu/View/Zoom Items Placeholder/Zoom Normal"
+#define BAUL_MENU_PATH_RELOAD_ITEM			"/menu/View/Reload"
+#define BAUL_MENU_PATH_ZOOM_IN_ITEM			"/menu/View/Zoom Items Placeholder/Zoom In"
+#define BAUL_MENU_PATH_ZOOM_OUT_ITEM		"/menu/View/Zoom Items Placeholder/Zoom Out"
+#define BAUL_MENU_PATH_ZOOM_NORMAL_ITEM		"/menu/View/Zoom Items Placeholder/Zoom Normal"
 
-#define CAJA_COMMAND_BACK				"/commands/Back"
-#define CAJA_COMMAND_FORWARD			"/commands/Forward"
-#define CAJA_COMMAND_UP				"/commands/Up"
+#define BAUL_COMMAND_BACK				"/commands/Back"
+#define BAUL_COMMAND_FORWARD			"/commands/Forward"
+#define BAUL_COMMAND_UP				"/commands/Up"
 
-#define CAJA_COMMAND_RELOAD				"/commands/Reload"
-#define CAJA_COMMAND_BURN_CD			"/commands/Burn CD"
-#define CAJA_COMMAND_STOP				"/commands/Stop"
-#define CAJA_COMMAND_ZOOM_IN			"/commands/Zoom In"
-#define CAJA_COMMAND_ZOOM_OUT			"/commands/Zoom Out"
-#define CAJA_COMMAND_ZOOM_NORMAL			"/commands/Zoom Normal"
+#define BAUL_COMMAND_RELOAD				"/commands/Reload"
+#define BAUL_COMMAND_BURN_CD			"/commands/Burn CD"
+#define BAUL_COMMAND_STOP				"/commands/Stop"
+#define BAUL_COMMAND_ZOOM_IN			"/commands/Zoom In"
+#define BAUL_COMMAND_ZOOM_OUT			"/commands/Zoom Out"
+#define BAUL_COMMAND_ZOOM_NORMAL			"/commands/Zoom Normal"
 
 /* window geometry */
 /* Min values are very small, and a Caja window at this tiny size is *almost*
@@ -151,15 +151,15 @@ struct _CajaNavigationWindowPrivate
  * are turned off, you can see an icon or two at this size. See bug 5946.
  */
 
-#define CAJA_SPATIAL_WINDOW_MIN_WIDTH			100
-#define CAJA_SPATIAL_WINDOW_MIN_HEIGHT			100
-#define CAJA_SPATIAL_WINDOW_DEFAULT_WIDTH			500
-#define CAJA_SPATIAL_WINDOW_DEFAULT_HEIGHT			300
+#define BAUL_SPATIAL_WINDOW_MIN_WIDTH			100
+#define BAUL_SPATIAL_WINDOW_MIN_HEIGHT			100
+#define BAUL_SPATIAL_WINDOW_DEFAULT_WIDTH			500
+#define BAUL_SPATIAL_WINDOW_DEFAULT_HEIGHT			300
 
-#define CAJA_NAVIGATION_WINDOW_MIN_WIDTH			200
-#define CAJA_NAVIGATION_WINDOW_MIN_HEIGHT			200
-#define CAJA_NAVIGATION_WINDOW_DEFAULT_WIDTH		800
-#define CAJA_NAVIGATION_WINDOW_DEFAULT_HEIGHT		550
+#define BAUL_NAVIGATION_WINDOW_MIN_WIDTH			200
+#define BAUL_NAVIGATION_WINDOW_MIN_HEIGHT			200
+#define BAUL_NAVIGATION_WINDOW_DEFAULT_WIDTH		800
+#define BAUL_NAVIGATION_WINDOW_DEFAULT_HEIGHT		550
 
 typedef void (*CajaBookmarkFailedCallback) (CajaWindow *window,
         CajaBookmark *bookmark);
@@ -247,4 +247,4 @@ void               baul_navigation_window_go_forward                            
 void               baul_window_close_pane                                       (CajaWindowPane *pane);
 void               baul_navigation_window_update_split_view_actions_sensitivity (CajaNavigationWindow    *window);
 
-#endif /* CAJA_WINDOW_PRIVATE_H */
+#endif /* BAUL_WINDOW_PRIVATE_H */

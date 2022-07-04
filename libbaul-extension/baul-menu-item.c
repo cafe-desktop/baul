@@ -94,7 +94,7 @@ baul_menu_item_new (const char *name,
     g_return_val_if_fail (label != NULL, NULL);
     g_return_val_if_fail (tip != NULL, NULL);
 
-    item = g_object_new (CAJA_TYPE_MENU_ITEM,
+    item = g_object_new (BAUL_TYPE_MENU_ITEM,
                          "name", name,
                          "label", label,
                          "tip", tip,
@@ -137,7 +137,7 @@ baul_menu_item_get_property (GObject *object,
 {
     CajaMenuItem *item;
 
-    item = CAJA_MENU_ITEM (object);
+    item = BAUL_MENU_ITEM (object);
 
     switch (param_id) {
     case PROP_NAME :
@@ -175,7 +175,7 @@ baul_menu_item_set_property (GObject *object,
 {
     CajaMenuItem *item;
 
-    item = CAJA_MENU_ITEM (object);
+    item = BAUL_MENU_ITEM (object);
 
     switch (param_id) {
     case PROP_NAME :
@@ -224,7 +224,7 @@ baul_menu_item_finalize (GObject *object)
 {
     CajaMenuItem *item;
 
-    item = CAJA_MENU_ITEM (object);
+    item = BAUL_MENU_ITEM (object);
 
     g_free (item->details->name);
     g_free (item->details->label);
@@ -314,7 +314,7 @@ baul_menu_item_class_init (CajaMenuItemClass *class)
                                      g_param_spec_object ("menu",
                                              "Menu",
                                              "The menu belonging to this item. May be null.",
-                                             CAJA_TYPE_MENU,
+                                             BAUL_TYPE_MENU,
                                              G_PARAM_READWRITE));
 }
 

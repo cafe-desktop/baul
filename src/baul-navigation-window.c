@@ -92,7 +92,7 @@ static void use_extra_mouse_buttons_changed          (gpointer                  
 static CajaWindowSlot *create_extra_pane         (CajaNavigationWindow *window);
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaNavigationWindow, baul_navigation_window, CAJA_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaNavigationWindow, baul_navigation_window, BAUL_TYPE_WINDOW)
 #define parent_class baul_navigation_window_parent_class
 
 static const struct
@@ -102,8 +102,8 @@ static const struct
 } extra_navigation_window_keybindings [] =
 {
 #ifdef HAVE_X11_XF86KEYSYM_H
-    { XF86XK_Back,		CAJA_ACTION_BACK },
-    { XF86XK_Forward,	CAJA_ACTION_FORWARD }
+    { XF86XK_Back,		BAUL_ACTION_BACK },
+    { XF86XK_Forward,	BAUL_ACTION_FORWARD }
 #endif
 };
 
@@ -117,7 +117,7 @@ baul_navigation_window_init (CajaNavigationWindow *window)
     GtkWidget *hpaned;
     GtkWidget *vbox;
 
-    win = CAJA_WINDOW (window);
+    win = BAUL_WINDOW (window);
 
     window->details = baul_navigation_window_get_instance_private (window);
 
@@ -135,7 +135,7 @@ baul_navigation_window_init (CajaNavigationWindow *window)
     window->details->content_paned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
     gtk_widget_set_hexpand (window->details->content_paned, TRUE);
     gtk_widget_set_vexpand (window->details->content_paned, TRUE);
-    gtk_grid_attach (GTK_GRID (CAJA_WINDOW (window)->details->grid),
+    gtk_grid_attach (GTK_GRID (BAUL_WINDOW (window)->details->grid),
                      window->details->content_paned,
                      0, 3, 1, 1);
     gtk_widget_show (window->details->content_paned);
@@ -160,18 +160,18 @@ baul_navigation_window_init (CajaNavigationWindow *window)
 
     /* this has to be done after the location bar has been set up,
      * but before menu stuff is being called */
-    baul_window_set_active_pane (win, CAJA_WINDOW_PANE (pane));
+    baul_window_set_active_pane (win, BAUL_WINDOW_PANE (pane));
 
     baul_navigation_window_initialize_actions (window);
 
     baul_navigation_window_initialize_menus (window);
 
-    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
     toolbar = gtk_ui_manager_get_widget (ui_manager, "/Toolbar");
     gtk_style_context_add_class (gtk_widget_get_style_context (toolbar), GTK_STYLE_CLASS_PRIMARY_TOOLBAR);
     window->details->toolbar = toolbar;
     gtk_widget_set_hexpand (toolbar, TRUE);
-    gtk_grid_attach (GTK_GRID (CAJA_WINDOW (window)->details->grid),
+    gtk_grid_attach (GTK_GRID (BAUL_WINDOW (window)->details->grid),
                      toolbar,
                      0, 1, 1, 1);
     gtk_widget_show (toolbar);
@@ -185,12 +185,12 @@ baul_navigation_window_init (CajaNavigationWindow *window)
     baul_navigation_window_allow_forward (window, FALSE);
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY,
+                              "changed::" BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY,
                               G_CALLBACK(always_use_location_entry_changed),
                               window);
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_ALWAYS_USE_BROWSER,
+                              "changed::" BAUL_PREFERENCES_ALWAYS_USE_BROWSER,
                               G_CALLBACK(always_use_browser_changed),
                               window);
 }
@@ -202,11 +202,11 @@ always_use_location_entry_changed (gpointer callback_data)
     GList *walk;
     gboolean use_entry;
 
-    window = CAJA_NAVIGATION_WINDOW (callback_data);
+    window = BAUL_NAVIGATION_WINDOW (callback_data);
 
-    use_entry = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
+    use_entry = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
 
-    for (walk = CAJA_WINDOW(window)->details->panes; walk; walk = walk->next)
+    for (walk = BAUL_WINDOW(window)->details->panes; walk; walk = walk->next)
     {
         baul_navigation_window_pane_always_use_location_entry (walk->data, use_entry);
     }
@@ -217,7 +217,7 @@ always_use_browser_changed (gpointer callback_data)
 {
     CajaNavigationWindow *window;
 
-    window = CAJA_NAVIGATION_WINDOW (callback_data);
+    window = BAUL_NAVIGATION_WINDOW (callback_data);
 
     baul_navigation_window_update_spatial_menu_item (window);
 }
@@ -236,7 +236,7 @@ mouse_back_button_changed (gpointer callback_data)
 {
     int new_back_button;
 
-    new_back_button = g_settings_get_int (baul_preferences, CAJA_PREFERENCES_MOUSE_BACK_BUTTON);
+    new_back_button = g_settings_get_int (baul_preferences, BAUL_PREFERENCES_MOUSE_BACK_BUTTON);
 
     /* Bounds checking */
     if (new_back_button < 6 || new_back_button > UPPER_MOUSE_LIMIT)
@@ -250,7 +250,7 @@ mouse_forward_button_changed (gpointer callback_data)
 {
     int new_forward_button;
 
-    new_forward_button = g_settings_get_int (baul_preferences, CAJA_PREFERENCES_MOUSE_FORWARD_BUTTON);
+    new_forward_button = g_settings_get_int (baul_preferences, BAUL_PREFERENCES_MOUSE_FORWARD_BUTTON);
 
     /* Bounds checking */
     if (new_forward_button < 6 || new_forward_button > UPPER_MOUSE_LIMIT)
@@ -262,7 +262,7 @@ mouse_forward_button_changed (gpointer callback_data)
 static void
 use_extra_mouse_buttons_changed (gpointer callback_data)
 {
-    mouse_extra_buttons = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_MOUSE_USE_EXTRA_BUTTONS);
+    mouse_extra_buttons = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_MOUSE_USE_EXTRA_BUTTONS);
 }
 
 void
@@ -283,10 +283,10 @@ baul_navigation_window_is_in_temporary_navigation_bar (GtkWidget *widget,
     GList *walk;
     gboolean is_in_any = FALSE;
 
-    for (walk = CAJA_WINDOW(window)->details->panes; walk; walk = walk->next)
+    for (walk = BAUL_WINDOW(window)->details->panes; walk; walk = walk->next)
     {
         CajaNavigationWindowPane *pane = walk->data;
-        if(gtk_widget_get_ancestor (widget, CAJA_TYPE_LOCATION_BAR) != NULL &&
+        if(gtk_widget_get_ancestor (widget, BAUL_TYPE_LOCATION_BAR) != NULL &&
                 pane->temporary_navigation_bar)
             is_in_any = TRUE;
     }
@@ -300,10 +300,10 @@ baul_navigation_window_is_in_temporary_search_bar (GtkWidget *widget,
     GList *walk;
     gboolean is_in_any = FALSE;
 
-    for (walk = CAJA_WINDOW(window)->details->panes; walk; walk = walk->next)
+    for (walk = BAUL_WINDOW(window)->details->panes; walk; walk = walk->next)
     {
         CajaNavigationWindowPane *pane = walk->data;
-        if(gtk_widget_get_ancestor (widget, CAJA_TYPE_SEARCH_BAR) != NULL &&
+        if(gtk_widget_get_ancestor (widget, BAUL_TYPE_SEARCH_BAR) != NULL &&
                 pane->temporary_search_bar)
             is_in_any = TRUE;
     }
@@ -316,7 +316,7 @@ remember_focus_widget (CajaNavigationWindow *window)
     CajaNavigationWindow *navigation_window;
     GtkWidget *focus_widget;
 
-    navigation_window = CAJA_NAVIGATION_WINDOW (window);
+    navigation_window = BAUL_NAVIGATION_WINDOW (window);
 
     focus_widget = gtk_window_get_focus (GTK_WINDOW (window));
     if (focus_widget != NULL &&
@@ -327,7 +327,7 @@ remember_focus_widget (CajaNavigationWindow *window)
 
         navigation_window->details->last_focus_widget = focus_widget;
         g_object_add_weak_pointer (G_OBJECT (focus_widget),
-                                   (gpointer *) &(CAJA_NAVIGATION_WINDOW (window)->details->last_focus_widget));
+                                   (gpointer *) &(BAUL_NAVIGATION_WINDOW (window)->details->last_focus_widget));
     }
 }
 
@@ -336,9 +336,9 @@ baul_navigation_window_restore_focus_widget (CajaNavigationWindow *window)
 {
     if (window->details->last_focus_widget != NULL)
     {
-        if (CAJA_IS_VIEW (window->details->last_focus_widget))
+        if (BAUL_IS_VIEW (window->details->last_focus_widget))
         {
-            baul_view_grab_focus (CAJA_VIEW (window->details->last_focus_widget));
+            baul_view_grab_focus (BAUL_VIEW (window->details->last_focus_widget));
         }
         else
         {
@@ -355,7 +355,7 @@ side_pane_close_requested_callback (GtkWidget *widget,
 {
     CajaNavigationWindow *window;
 
-    window = CAJA_NAVIGATION_WINDOW (user_data);
+    window = BAUL_NAVIGATION_WINDOW (user_data);
 
     baul_navigation_window_hide_sidebar (window);
 }
@@ -368,7 +368,7 @@ side_pane_size_allocate_callback (GtkWidget *widget,
     CajaNavigationWindow *window;
     gint scale;
 
-    window = CAJA_NAVIGATION_WINDOW (user_data);
+    window = BAUL_NAVIGATION_WINDOW (user_data);
     scale = gtk_widget_get_scale_factor (widget);
 
     allocation->width = allocation->width / scale;
@@ -376,7 +376,7 @@ side_pane_size_allocate_callback (GtkWidget *widget,
     {
         window->details->side_pane_width = allocation->width;
         g_settings_set_int (baul_window_state,
-                            CAJA_WINDOW_STATE_SIDEBAR_WIDTH,
+                            BAUL_WINDOW_STATE_SIDEBAR_WIDTH,
                             allocation->width <= 1 ? 0 : allocation->width);
     }
 }
@@ -391,7 +391,7 @@ setup_side_pane_width (CajaNavigationWindow *window)
     scale = gtk_widget_get_scale_factor (GTK_WIDGET (window->sidebar));
     window->details->side_pane_width =
         g_settings_get_int (baul_window_state,
-                            CAJA_WINDOW_STATE_SIDEBAR_WIDTH) * scale;
+                            BAUL_WINDOW_STATE_SIDEBAR_WIDTH) * scale;
 
     gtk_paned_set_position (GTK_PANED (window->details->content_paned),
                             window->details->side_pane_width);
@@ -424,7 +424,7 @@ side_pane_switch_page_callback (CajaSidePane *side_pane,
     const char *id;
     CajaSidebar *sidebar;
 
-    sidebar = CAJA_SIDEBAR (widget);
+    sidebar = BAUL_SIDEBAR (widget);
 
     if (sidebar == NULL)
     {
@@ -434,7 +434,7 @@ side_pane_switch_page_callback (CajaSidePane *side_pane,
     set_current_side_panel (window, sidebar);
 
     id = baul_sidebar_get_sidebar_id (sidebar);
-    g_settings_set_string (baul_window_state, CAJA_WINDOW_STATE_SIDE_PANE_VIEW, id);
+    g_settings_set_string (baul_window_state, BAUL_WINDOW_STATE_SIDE_PANE_VIEW, id);
 }
 
 static void
@@ -487,7 +487,7 @@ baul_navigation_window_tear_down_sidebar (CajaNavigationWindow *window)
     {
         next = node->next;
 
-        sidebar_panel = CAJA_SIDEBAR (node->data);
+        sidebar_panel = BAUL_SIDEBAR (node->data);
 
         baul_navigation_window_remove_sidebar_panel (window,
                 sidebar_panel);
@@ -503,7 +503,7 @@ baul_navigation_window_state_event (GtkWidget *widget,
 {
     if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED)
     {
-        g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_MAXIMIZED,
+        g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_MAXIMIZED,
                                 event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED);
     }
 
@@ -522,7 +522,7 @@ baul_navigation_window_key_press_event (GtkWidget *widget,
     CajaNavigationWindow *window;
     int i;
 
-    window = CAJA_NAVIGATION_WINDOW (widget);
+    window = BAUL_NAVIGATION_WINDOW (widget);
 
     if (event->state & GDK_CONTROL_MASK)
     {
@@ -539,10 +539,10 @@ baul_navigation_window_key_press_event (GtkWidget *widget,
             int pages;
             int page_num;
 
-            baulwin = CAJA_WINDOW (window);
+            baulwin = BAUL_WINDOW (window);
             slot = baul_window_get_active_slot (baulwin);
-            pane = CAJA_NAVIGATION_WINDOW_PANE (slot->pane);
-            baulnotebook = CAJA_NOTEBOOK (pane->notebook);
+            pane = BAUL_NAVIGATION_WINDOW_PANE (slot->pane);
+            baulnotebook = BAUL_NOTEBOOK (pane->notebook);
             notebook = GTK_NOTEBOOK (baulnotebook);
             pages = gtk_notebook_get_n_pages (notebook);
             page_num = gtk_notebook_get_current_page (notebook);
@@ -603,7 +603,7 @@ baul_navigation_window_button_press_event (GtkWidget *widget,
     gboolean handled;
 
     handled = FALSE;
-    window = CAJA_NAVIGATION_WINDOW (widget);
+    window = BAUL_NAVIGATION_WINDOW (widget);
 
     if (mouse_extra_buttons && (event->button == mouse_back_button))
     {
@@ -631,7 +631,7 @@ baul_navigation_window_destroy (GtkWidget *object)
 {
     CajaNavigationWindow *window;
 
-    window = CAJA_NAVIGATION_WINDOW (object);
+    window = BAUL_NAVIGATION_WINDOW (object);
 
     baul_navigation_window_unset_focus_widget (window);
 
@@ -651,7 +651,7 @@ baul_navigation_window_finalize (GObject *object)
 {
     CajaNavigationWindow *window;
 
-    window = CAJA_NAVIGATION_WINDOW (object);
+    window = BAUL_NAVIGATION_WINDOW (object);
 
     baul_navigation_window_remove_go_menu_callback (window);
 
@@ -679,9 +679,9 @@ baul_navigation_window_add_sidebar_panel (CajaNavigationWindow *window,
     char *default_id;
     GdkPixbuf *icon;
 
-    g_return_if_fail (CAJA_IS_NAVIGATION_WINDOW (window));
-    g_return_if_fail (CAJA_IS_SIDEBAR (sidebar_panel));
-    g_return_if_fail (CAJA_IS_SIDE_PANE (window->sidebar));
+    g_return_if_fail (BAUL_IS_NAVIGATION_WINDOW (window));
+    g_return_if_fail (BAUL_IS_SIDEBAR (sidebar_panel));
+    g_return_if_fail (BAUL_IS_SIDE_PANE (window->sidebar));
     g_return_if_fail (g_list_find (window->sidebar_panels, sidebar_panel) == NULL);
 
     label = baul_sidebar_get_tab_label (sidebar_panel);
@@ -694,7 +694,7 @@ baul_navigation_window_add_sidebar_panel (CajaNavigationWindow *window,
     g_free (label);
 
     icon = baul_sidebar_get_tab_icon (sidebar_panel);
-    baul_side_pane_set_panel_image (CAJA_NAVIGATION_WINDOW (window)->sidebar,
+    baul_side_pane_set_panel_image (BAUL_NAVIGATION_WINDOW (window)->sidebar,
                                     GTK_WIDGET (sidebar_panel),
                                     icon);
     if (icon)
@@ -710,7 +710,7 @@ baul_navigation_window_add_sidebar_panel (CajaNavigationWindow *window,
 
     /* Show if default */
     sidebar_id = baul_sidebar_get_sidebar_id (sidebar_panel);
-    default_id = g_settings_get_string (baul_window_state, CAJA_WINDOW_STATE_SIDE_PANE_VIEW);
+    default_id = g_settings_get_string (baul_window_state, BAUL_WINDOW_STATE_SIDE_PANE_VIEW);
     if (sidebar_id && default_id && !strcmp (sidebar_id, default_id))
     {
         baul_side_pane_show_panel (window->sidebar,
@@ -723,8 +723,8 @@ void
 baul_navigation_window_remove_sidebar_panel (CajaNavigationWindow *window,
         CajaSidebar *sidebar_panel)
 {
-    g_return_if_fail (CAJA_IS_NAVIGATION_WINDOW (window));
-    g_return_if_fail (CAJA_IS_SIDEBAR (sidebar_panel));
+    g_return_if_fail (BAUL_IS_NAVIGATION_WINDOW (window));
+    g_return_if_fail (BAUL_IS_SIDEBAR (sidebar_panel));
 
     if (g_list_find (window->sidebar_panels, sidebar_panel) == NULL)
     {
@@ -758,7 +758,7 @@ baul_navigation_window_allow_back (CajaNavigationWindow *window, gboolean allow)
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (window->details->navigation_action_group,
-                                          CAJA_ACTION_BACK);
+                                          BAUL_ACTION_BACK);
 
     gtk_action_set_sensitive (action, allow);
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -771,7 +771,7 @@ baul_navigation_window_allow_forward (CajaNavigationWindow *window, gboolean all
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (window->details->navigation_action_group,
-                                          CAJA_ACTION_FORWARD);
+                                          BAUL_ACTION_FORWARD);
 
     gtk_action_set_sensitive (action, allow);
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -784,7 +784,7 @@ real_sync_title (CajaWindow *window,
     CajaNavigationWindowPane *pane;
     CajaNotebook *notebook;
 
-    EEL_CALL_PARENT (CAJA_WINDOW_CLASS,
+    EEL_CALL_PARENT (BAUL_WINDOW_CLASS,
                      sync_title, (window, slot));
 
     if (slot == window->details->active_pane->active_slot)
@@ -794,7 +794,7 @@ real_sync_title (CajaWindow *window,
         /* if spatial mode is default, we keep "File Browser" in the window title
          * to recognize browser windows. Otherwise, we default to the directory name.
          */
-        if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_BROWSER))
+        if (!g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER))
         {
             char *full_title;
 
@@ -811,8 +811,8 @@ real_sync_title (CajaWindow *window,
         g_free (window_title);
     }
 
-    pane = CAJA_NAVIGATION_WINDOW_PANE (slot->pane);
-    notebook = CAJA_NOTEBOOK (pane->notebook);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (slot->pane);
+    notebook = BAUL_NOTEBOOK (pane->notebook);
     baul_notebook_sync_tab_label (notebook, slot);
 }
 
@@ -822,8 +822,8 @@ real_get_icon (CajaWindow *window,
 {
     return baul_file_get_icon (slot->viewed_file,
                                48, gtk_widget_get_scale_factor (GTK_WIDGET (window)),
-                               CAJA_FILE_ICON_FLAGS_IGNORE_VISITING |
-                               CAJA_FILE_ICON_FLAGS_USE_MOUNT_ICON);
+                               BAUL_FILE_ICON_FLAGS_IGNORE_VISITING |
+                               BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON);
 }
 
 static void
@@ -833,10 +833,10 @@ real_sync_allow_stop (CajaWindow *window,
     CajaNavigationWindow *navigation_window;
     CajaNotebook *notebook;
 
-    navigation_window = CAJA_NAVIGATION_WINDOW (window);
+    navigation_window = BAUL_NAVIGATION_WINDOW (window);
     baul_navigation_window_set_spinner_active (navigation_window, slot->allow_stop);
 
-    notebook = CAJA_NOTEBOOK (CAJA_NAVIGATION_WINDOW_PANE (slot->pane)->notebook);
+    notebook = BAUL_NOTEBOOK (BAUL_NAVIGATION_WINDOW_PANE (slot->pane)->notebook);
     baul_notebook_sync_loading (notebook, slot);
 }
 
@@ -845,16 +845,16 @@ real_prompt_for_location (CajaWindow *window, const char *initial)
 {
     CajaNavigationWindowPane *pane;
 
-    remember_focus_widget (CAJA_NAVIGATION_WINDOW (window));
+    remember_focus_widget (BAUL_NAVIGATION_WINDOW (window));
 
-    pane = CAJA_NAVIGATION_WINDOW_PANE (window->details->active_pane);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (window->details->active_pane);
 
     baul_navigation_window_pane_show_location_bar_temporarily (pane);
     baul_navigation_window_pane_show_navigation_bar_temporarily (pane);
 
     if (initial)
     {
-        baul_location_bar_set_location (CAJA_LOCATION_BAR (pane->navigation_bar),
+        baul_location_bar_set_location (BAUL_LOCATION_BAR (pane->navigation_bar),
                                         initial);
     }
 }
@@ -864,24 +864,24 @@ baul_navigation_window_show_search (CajaNavigationWindow *window)
 {
     CajaNavigationWindowPane *pane;
 
-    pane = CAJA_NAVIGATION_WINDOW_PANE (CAJA_WINDOW (window)->details->active_pane);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (BAUL_WINDOW (window)->details->active_pane);
     if (!baul_navigation_window_pane_search_bar_showing (pane))
     {
         remember_focus_widget (window);
 
         baul_navigation_window_pane_show_location_bar_temporarily (pane);
-        baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_SEARCH);
+        baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_SEARCH);
         pane->temporary_search_bar = TRUE;
-        baul_search_bar_clear (CAJA_SEARCH_BAR (pane->search_bar));
+        baul_search_bar_clear (BAUL_SEARCH_BAR (pane->search_bar));
     }
 
-    baul_search_bar_grab_focus (CAJA_SEARCH_BAR (pane->search_bar));
+    baul_search_bar_grab_focus (BAUL_SEARCH_BAR (pane->search_bar));
 }
 
 void
 baul_navigation_window_hide_search (CajaNavigationWindow *window)
 {
-    CajaNavigationWindowPane *pane = CAJA_NAVIGATION_WINDOW_PANE (CAJA_WINDOW (window)->details->active_pane);
+    CajaNavigationWindowPane *pane = BAUL_NAVIGATION_WINDOW_PANE (BAUL_WINDOW (window)->details->active_pane);
     if (baul_navigation_window_pane_search_bar_showing (pane))
     {
         if (baul_navigation_window_pane_hide_temporary_bars (pane))
@@ -918,10 +918,10 @@ side_panel_image_changed_callback (CajaSidebar *side_panel,
     CajaWindow *window;
     GdkPixbuf *icon;
 
-    window = CAJA_WINDOW (callback_data);
+    window = BAUL_WINDOW (callback_data);
 
     icon = baul_sidebar_get_tab_icon (side_panel);
-    baul_side_pane_set_panel_image (CAJA_NAVIGATION_WINDOW (window)->sidebar,
+    baul_side_pane_set_panel_image (BAUL_NAVIGATION_WINDOW (window)->sidebar,
                                     GTK_WIDGET (side_panel),
                                     icon);
     if (icon != NULL)
@@ -945,23 +945,23 @@ add_sidebar_panels (CajaNavigationWindow *window)
     GList *p;
     CajaSidebar *sidebar_panel = NULL;
 
-    g_assert (CAJA_IS_NAVIGATION_WINDOW (window));
+    g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
     if (window->sidebar == NULL)
     {
         return;
     }
 
-    providers = baul_module_get_extensions_for_type (CAJA_TYPE_SIDEBAR_PROVIDER);
+    providers = baul_module_get_extensions_for_type (BAUL_TYPE_SIDEBAR_PROVIDER);
 
     for (p = providers; p != NULL; p = p->next)
     {
         CajaSidebarProvider *provider;
 
-        provider = CAJA_SIDEBAR_PROVIDER (p->data);
+        provider = BAUL_SIDEBAR_PROVIDER (p->data);
 
         sidebar_panel = baul_sidebar_provider_create (provider,
-                        CAJA_WINDOW_INFO (window));
+                        BAUL_WINDOW_INFO (window));
         baul_navigation_window_add_sidebar_panel (window,
                 sidebar_panel);
 
@@ -973,7 +973,7 @@ add_sidebar_panels (CajaNavigationWindow *window)
     current = baul_side_pane_get_current_panel (window->sidebar);
     set_current_side_panel
     (window,
-     CAJA_SIDEBAR (current));
+     BAUL_SIDEBAR (current));
 }
 
 gboolean
@@ -990,29 +990,29 @@ baul_navigation_window_toolbar_showing (CajaNavigationWindow *window)
 void
 baul_navigation_window_hide_status_bar (CajaNavigationWindow *window)
 {
-    gtk_widget_hide (CAJA_WINDOW (window)->details->statusbar);
+    gtk_widget_hide (BAUL_WINDOW (window)->details->statusbar);
 
     baul_navigation_window_update_show_hide_menu_items (window);
 
-    g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_STATUS_BAR, FALSE);
+    g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_STATUS_BAR, FALSE);
 }
 
 void
 baul_navigation_window_show_status_bar (CajaNavigationWindow *window)
 {
-    gtk_widget_show (CAJA_WINDOW (window)->details->statusbar);
+    gtk_widget_show (BAUL_WINDOW (window)->details->statusbar);
 
     baul_navigation_window_update_show_hide_menu_items (window);
 
-    g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_STATUS_BAR, TRUE);
+    g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_STATUS_BAR, TRUE);
 }
 
 gboolean
 baul_navigation_window_status_bar_showing (CajaNavigationWindow *window)
 {
-    if (CAJA_WINDOW (window)->details->statusbar != NULL)
+    if (BAUL_WINDOW (window)->details->statusbar != NULL)
     {
-        return gtk_widget_get_visible (CAJA_WINDOW (window)->details->statusbar);
+        return gtk_widget_get_visible (BAUL_WINDOW (window)->details->statusbar);
     }
     /* If we're not visible yet we haven't changed visibility, so its TRUE */
     return TRUE;
@@ -1024,7 +1024,7 @@ baul_navigation_window_hide_toolbar (CajaNavigationWindow *window)
 {
     gtk_widget_hide (window->details->toolbar);
     baul_navigation_window_update_show_hide_menu_items (window);
-    g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_TOOLBAR, FALSE);
+    g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_TOOLBAR, FALSE);
 }
 
 void
@@ -1032,7 +1032,7 @@ baul_navigation_window_show_toolbar (CajaNavigationWindow *window)
 {
     gtk_widget_show (window->details->toolbar);
     baul_navigation_window_update_show_hide_menu_items (window);
-    g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_TOOLBAR, TRUE);
+    g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_TOOLBAR, TRUE);
 }
 
 void
@@ -1046,7 +1046,7 @@ baul_navigation_window_hide_sidebar (CajaNavigationWindow *window)
     baul_navigation_window_tear_down_sidebar (window);
     baul_navigation_window_update_show_hide_menu_items (window);
 
-    g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_SIDEBAR, FALSE);
+    g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_SIDEBAR, FALSE);
 }
 
 void
@@ -1059,13 +1059,13 @@ baul_navigation_window_show_sidebar (CajaNavigationWindow *window)
 
     baul_navigation_window_set_up_sidebar (window);
     baul_navigation_window_update_show_hide_menu_items (window);
-    g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_SIDEBAR, TRUE);
+    g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_SIDEBAR, TRUE);
 }
 
 gboolean
 baul_navigation_window_sidebar_showing (CajaNavigationWindow *window)
 {
-    g_return_val_if_fail (CAJA_IS_NAVIGATION_WINDOW (window), FALSE);
+    g_return_val_if_fail (BAUL_IS_NAVIGATION_WINDOW (window), FALSE);
 
     return (window->sidebar != NULL)
            && gtk_widget_get_visible (gtk_paned_get_child1 (GTK_PANED (window->details->content_paned)));
@@ -1086,7 +1086,7 @@ baul_navigation_window_get_base_page_index (CajaNavigationWindow *window)
     CajaNavigationWindowSlot *slot;
     gint forward_count;
 
-    slot = CAJA_NAVIGATION_WINDOW_SLOT (CAJA_WINDOW (window)->details->active_pane->active_slot);
+    slot = BAUL_NAVIGATION_WINDOW_SLOT (BAUL_WINDOW (window)->details->active_pane->active_slot);
 
     forward_count = g_list_length (slot->forward_list);
 
@@ -1117,13 +1117,13 @@ baul_navigation_window_show (GtkWidget *widget)
     gboolean always_use_location_entry;
     GList *walk;
 
-    window = CAJA_NAVIGATION_WINDOW (widget);
+    window = BAUL_NAVIGATION_WINDOW (widget);
 
     /* Initially show or hide views based on preferences; once the window is displayed
      * these can be controlled on a per-window basis from View menu items.
      */
 
-    if (g_settings_get_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_TOOLBAR))
+    if (g_settings_get_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_TOOLBAR))
     {
         baul_navigation_window_show_toolbar (window);
     }
@@ -1132,9 +1132,9 @@ baul_navigation_window_show (GtkWidget *widget)
         baul_navigation_window_hide_toolbar (window);
     }
 
-    show_location_bar = g_settings_get_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_LOCATION_BAR);
-    always_use_location_entry = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
-    for (walk = CAJA_WINDOW(window)->details->panes; walk; walk = walk->next)
+    show_location_bar = g_settings_get_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_LOCATION_BAR);
+    always_use_location_entry = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
+    for (walk = BAUL_WINDOW(window)->details->panes; walk; walk = walk->next)
     {
         CajaNavigationWindowPane *pane = walk->data;
         if (show_location_bar)
@@ -1148,15 +1148,15 @@ baul_navigation_window_show (GtkWidget *widget)
 
         if (always_use_location_entry)
         {
-            baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_NAVIGATION);
+            baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_NAVIGATION);
         }
         else
         {
-            baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_PATH);
+            baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_PATH);
         }
     }
 
-    if (g_settings_get_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_SIDEBAR))
+    if (g_settings_get_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_SIDEBAR))
     {
         baul_navigation_window_show_sidebar (window);
     }
@@ -1165,7 +1165,7 @@ baul_navigation_window_show (GtkWidget *widget)
         baul_navigation_window_hide_sidebar (window);
     }
 
-    if (g_settings_get_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_STATUS_BAR))
+    if (g_settings_get_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_STATUS_BAR))
     {
         baul_navigation_window_show_status_bar (window);
     }
@@ -1182,7 +1182,7 @@ baul_navigation_window_save_geometry (CajaNavigationWindow *window)
 {
     gboolean is_maximized;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     if (gtk_widget_get_window (GTK_WIDGET (window)))
     {
@@ -1195,13 +1195,13 @@ baul_navigation_window_save_geometry (CajaNavigationWindow *window)
         if (!is_maximized)
         {
             g_settings_set_string (baul_window_state,
-                                   CAJA_WINDOW_STATE_GEOMETRY,
+                                   BAUL_WINDOW_STATE_GEOMETRY,
                                    geometry_string);
         }
         g_free (geometry_string);
 
         g_settings_set_boolean (baul_window_state,
-                                CAJA_WINDOW_STATE_MAXIMIZED,
+                                BAUL_WINDOW_STATE_MAXIMIZED,
                                 is_maximized);
     }
 }
@@ -1209,7 +1209,7 @@ baul_navigation_window_save_geometry (CajaNavigationWindow *window)
 static void
 real_window_close (CajaWindow *window)
 {
-    baul_navigation_window_save_geometry (CAJA_NAVIGATION_WINDOW (window));
+    baul_navigation_window_save_geometry (BAUL_NAVIGATION_WINDOW (window));
 }
 
 static void
@@ -1218,11 +1218,11 @@ real_get_min_size (CajaWindow *window,
 {
     if (min_width)
     {
-        *min_width = CAJA_NAVIGATION_WINDOW_MIN_WIDTH;
+        *min_width = BAUL_NAVIGATION_WINDOW_MIN_WIDTH;
     }
     if (min_height)
     {
-        *min_height = CAJA_NAVIGATION_WINDOW_MIN_HEIGHT;
+        *min_height = BAUL_NAVIGATION_WINDOW_MIN_HEIGHT;
     }
 }
 
@@ -1232,12 +1232,12 @@ real_get_default_size (CajaWindow *window,
 {
     if (default_width)
     {
-        *default_width = CAJA_NAVIGATION_WINDOW_DEFAULT_WIDTH;
+        *default_width = BAUL_NAVIGATION_WINDOW_DEFAULT_WIDTH;
     }
 
     if (default_height)
     {
-        *default_height = CAJA_NAVIGATION_WINDOW_DEFAULT_HEIGHT;
+        *default_height = BAUL_NAVIGATION_WINDOW_DEFAULT_HEIGHT;
     }
 }
 
@@ -1247,10 +1247,10 @@ real_open_slot (CajaWindowPane *pane,
 {
     CajaWindowSlot *slot;
 
-    slot = (CajaWindowSlot *) g_object_new (CAJA_TYPE_NAVIGATION_WINDOW_SLOT, NULL);
+    slot = (CajaWindowSlot *) g_object_new (BAUL_TYPE_NAVIGATION_WINDOW_SLOT, NULL);
     slot->pane = pane;
 
-    baul_navigation_window_pane_add_slot_in_tab (CAJA_NAVIGATION_WINDOW_PANE (pane), slot, flags);
+    baul_navigation_window_pane_add_slot_in_tab (BAUL_NAVIGATION_WINDOW_PANE (pane), slot, flags);
     gtk_widget_show (slot->content_box);
 
     return slot;
@@ -1263,25 +1263,25 @@ real_close_slot (CajaWindowPane *pane,
     int page_num;
     GtkNotebook *notebook;
 
-    notebook = GTK_NOTEBOOK (CAJA_NAVIGATION_WINDOW_PANE (pane)->notebook);
+    notebook = GTK_NOTEBOOK (BAUL_NAVIGATION_WINDOW_PANE (pane)->notebook);
 
     page_num = gtk_notebook_page_num (notebook, slot->content_box);
     g_assert (page_num >= 0);
 
-    baul_navigation_window_pane_remove_page (CAJA_NAVIGATION_WINDOW_PANE (pane), page_num);
+    baul_navigation_window_pane_remove_page (BAUL_NAVIGATION_WINDOW_PANE (pane), page_num);
 
     gtk_notebook_set_show_tabs (notebook,
                                 gtk_notebook_get_n_pages (notebook) > 1);
 
-    EEL_CALL_PARENT (CAJA_WINDOW_CLASS,
+    EEL_CALL_PARENT (BAUL_WINDOW_CLASS,
                      close_slot, (pane, slot));
 }
 
 static void
 baul_navigation_window_class_init (CajaNavigationWindowClass *class)
 {
-    CAJA_WINDOW_CLASS (class)->window_type = CAJA_WINDOW_NAVIGATION;
-    CAJA_WINDOW_CLASS (class)->bookmarks_placeholder = MENU_PATH_BOOKMARKS_PLACEHOLDER;
+    BAUL_WINDOW_CLASS (class)->window_type = BAUL_WINDOW_NAVIGATION;
+    BAUL_WINDOW_CLASS (class)->bookmarks_placeholder = MENU_PATH_BOOKMARKS_PLACEHOLDER;
 
     G_OBJECT_CLASS (class)->finalize = baul_navigation_window_finalize;
 
@@ -1290,29 +1290,29 @@ baul_navigation_window_class_init (CajaNavigationWindowClass *class)
     GTK_WIDGET_CLASS (class)->window_state_event = baul_navigation_window_state_event;
     GTK_WIDGET_CLASS (class)->key_press_event = baul_navigation_window_key_press_event;
     GTK_WIDGET_CLASS (class)->button_press_event = baul_navigation_window_button_press_event;
-    CAJA_WINDOW_CLASS (class)->sync_allow_stop = real_sync_allow_stop;
-    CAJA_WINDOW_CLASS (class)->prompt_for_location = real_prompt_for_location;
-    CAJA_WINDOW_CLASS (class)->sync_title = real_sync_title;
-    CAJA_WINDOW_CLASS (class)->get_icon = real_get_icon;
-    CAJA_WINDOW_CLASS (class)->get_min_size = real_get_min_size;
-    CAJA_WINDOW_CLASS (class)->get_default_size = real_get_default_size;
-    CAJA_WINDOW_CLASS (class)->close = real_window_close;
+    BAUL_WINDOW_CLASS (class)->sync_allow_stop = real_sync_allow_stop;
+    BAUL_WINDOW_CLASS (class)->prompt_for_location = real_prompt_for_location;
+    BAUL_WINDOW_CLASS (class)->sync_title = real_sync_title;
+    BAUL_WINDOW_CLASS (class)->get_icon = real_get_icon;
+    BAUL_WINDOW_CLASS (class)->get_min_size = real_get_min_size;
+    BAUL_WINDOW_CLASS (class)->get_default_size = real_get_default_size;
+    BAUL_WINDOW_CLASS (class)->close = real_window_close;
 
-    CAJA_WINDOW_CLASS (class)->open_slot = real_open_slot;
-    CAJA_WINDOW_CLASS (class)->close_slot = real_close_slot;
+    BAUL_WINDOW_CLASS (class)->open_slot = real_open_slot;
+    BAUL_WINDOW_CLASS (class)->close_slot = real_close_slot;
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_MOUSE_BACK_BUTTON,
+                              "changed::" BAUL_PREFERENCES_MOUSE_BACK_BUTTON,
                               G_CALLBACK(mouse_back_button_changed),
                               NULL);
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_MOUSE_FORWARD_BUTTON,
+                              "changed::" BAUL_PREFERENCES_MOUSE_FORWARD_BUTTON,
                               G_CALLBACK(mouse_forward_button_changed),
                               NULL);
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_MOUSE_USE_EXTRA_BUTTONS,
+                              "changed::" BAUL_PREFERENCES_MOUSE_USE_EXTRA_BUTTONS,
                               G_CALLBACK(use_extra_mouse_buttons_changed),
                               NULL);
 }
@@ -1325,7 +1325,7 @@ create_extra_pane (CajaNavigationWindow *window)
     CajaWindowSlot *slot;
     GtkPaned *paned;
 
-    win = CAJA_WINDOW (window);
+    win = BAUL_WINDOW (window);
 
     /* New pane */
     pane = baul_navigation_window_pane_new (win);
@@ -1344,9 +1344,9 @@ create_extra_pane (CajaNavigationWindow *window)
     }
 
     /* slot */
-    slot = baul_window_open_slot (CAJA_WINDOW_PANE (pane),
-                                  CAJA_WINDOW_OPEN_SLOT_APPEND);
-    CAJA_WINDOW_PANE (pane)->active_slot = slot;
+    slot = baul_window_open_slot (BAUL_WINDOW_PANE (pane),
+                                  BAUL_WINDOW_OPEN_SLOT_APPEND);
+    BAUL_WINDOW_PANE (pane)->active_slot = slot;
 
     return slot;
 }
@@ -1360,11 +1360,11 @@ baul_navigation_window_split_view_on (CajaNavigationWindow *window)
     GFile *location;
     GtkAction *action;
 
-    win = CAJA_WINDOW (window);
+    win = BAUL_WINDOW (window);
 
     old_active_slot = baul_window_get_active_slot (win);
     slot = create_extra_pane (window);
-    pane = CAJA_NAVIGATION_WINDOW_PANE (slot->pane);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (slot->pane);
 
     location = NULL;
     if (old_active_slot != NULL)
@@ -1388,8 +1388,8 @@ baul_navigation_window_split_view_on (CajaNavigationWindow *window)
     g_object_unref (location);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window)->details->navigation_action_group,
-                                          CAJA_ACTION_SHOW_HIDE_LOCATION_BAR);
+    action = gtk_action_group_get_action (BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window)->details->navigation_action_group,
+                                          BAUL_ACTION_SHOW_HIDE_LOCATION_BAR);
     if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_pane_show_location_bar (pane, TRUE);
@@ -1409,7 +1409,7 @@ baul_navigation_window_split_view_off (CajaNavigationWindow *window)
     CajaWindowPane *active_pane;
     CajaWindowPane *pane = NULL;
 
-    win = CAJA_WINDOW (window);
+    win = BAUL_WINDOW (window);
 
     g_return_if_fail (win);
 
@@ -1433,5 +1433,5 @@ baul_navigation_window_split_view_off (CajaNavigationWindow *window)
 gboolean
 baul_navigation_window_split_view_showing (CajaNavigationWindow *window)
 {
-    return g_list_length (CAJA_WINDOW (window)->details->panes) > 1;
+    return g_list_length (BAUL_WINDOW (window)->details->panes) > 1;
 }

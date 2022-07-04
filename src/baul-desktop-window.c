@@ -83,7 +83,7 @@ struct _CajaDesktopWindowPrivate
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (CajaDesktopWindow, baul_desktop_window,
-               CAJA_TYPE_SPATIAL_WINDOW);
+               BAUL_TYPE_SPATIAL_WINDOW);
 
 static void
 baul_desktop_window_init (CajaDesktopWindow *window)
@@ -109,13 +109,13 @@ baul_desktop_window_init (CajaDesktopWindow *window)
     g_object_set_data (G_OBJECT (window), "is_desktop_window",
                        GINT_TO_POINTER (1));
 
-    gtk_widget_hide (CAJA_WINDOW (window)->details->statusbar);
-    gtk_widget_hide (CAJA_WINDOW (window)->details->menubar);
+    gtk_widget_hide (BAUL_WINDOW (window)->details->statusbar);
+    gtk_widget_hide (BAUL_WINDOW (window)->details->menubar);
 
     /* Don't allow close action on desktop */
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (CAJA_WINDOW (window)->details->main_action_group,
-                                          CAJA_ACTION_CLOSE);
+    action = gtk_action_group_get_action (BAUL_WINDOW (window)->details->main_action_group,
+                                          BAUL_ACTION_CLOSE);
     gtk_action_set_sensitive (action, FALSE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
@@ -139,10 +139,10 @@ baul_desktop_window_update_directory (CajaDesktopWindow *window)
 {
     GFile *location;
 
-    g_assert (CAJA_IS_DESKTOP_WINDOW (window));
+    g_assert (BAUL_IS_DESKTOP_WINDOW (window));
 
     location = g_file_new_for_uri (EEL_DESKTOP_URI);
-    baul_window_go_to (CAJA_WINDOW (window), location);
+    baul_window_go_to (BAUL_WINDOW (window), location);
     window->details->loaded = TRUE;
 
     g_object_unref (location);
@@ -179,7 +179,7 @@ baul_desktop_window_new (CajaApplication *application,
     width_request = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
     height_request = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
 
-    window = CAJA_DESKTOP_WINDOW
+    window = BAUL_DESKTOP_WINDOW
              (gtk_widget_new (baul_desktop_window_get_type(),
                               "app", application,
                               "width_request", width_request,
@@ -231,14 +231,14 @@ unrealize (GtkWidget *widget)
     CajaDesktopWindowPrivate *details;
     GdkWindow *root_window;
 
-    window = CAJA_DESKTOP_WINDOW (widget);
+    window = BAUL_DESKTOP_WINDOW (widget);
     details = window->details;
 
     root_window = gdk_screen_get_root_window (
                       gtk_window_get_screen (GTK_WINDOW (window)));
 
     gdk_property_delete (root_window,
-                         gdk_atom_intern ("CAJA_DESKTOP_WINDOW_ID", TRUE));
+                         gdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", TRUE));
 
     if (details->size_changed_id != 0) {
         g_signal_handler_disconnect (gtk_window_get_screen (GTK_WINDOW (window)),
@@ -277,7 +277,7 @@ set_desktop_window_id (CajaDesktopWindow *window,
     window_xid = GDK_WINDOW_XID (gdkwindow);
 
     gdk_property_change (root_window,
-                         gdk_atom_intern ("CAJA_DESKTOP_WINDOW_ID", FALSE),
+                         gdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", FALSE),
                          gdk_x11_xatom_to_atom (XA_WINDOW), 32,
                          GDK_PROP_MODE_REPLACE, (guchar *) &window_xid, 1);
 }
@@ -287,7 +287,7 @@ realize (GtkWidget *widget)
 {
     CajaDesktopWindow *window;
     CajaDesktopWindowPrivate *details;
-    window = CAJA_DESKTOP_WINDOW (widget);
+    window = BAUL_DESKTOP_WINDOW (widget);
     details = window->details;
 
     /* Make sure we get keyboard events */
@@ -320,23 +320,23 @@ real_get_icon (CajaWindow *window,
                CajaWindowSlot *slot)
 {
     gint scale = gtk_widget_get_scale_factor (GTK_WIDGET (window));
-    return baul_icon_info_lookup_from_name (CAJA_ICON_DESKTOP, 48, scale);
+    return baul_icon_info_lookup_from_name (BAUL_ICON_DESKTOP, 48, scale);
 }
 
 static void
 baul_desktop_window_class_init (CajaDesktopWindowClass *klass)
 {
     GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
-    CajaWindowClass *nclass = CAJA_WINDOW_CLASS (klass);
+    CajaWindowClass *nclass = BAUL_WINDOW_CLASS (klass);
 
     wclass->realize = realize;
     wclass->unrealize = unrealize;
     wclass->map = map;
     wclass->draw = draw;
 
-    gtk_widget_class_set_accessible_type (wclass, CAJA_TYPE_DESKTOP_WINDOW_ACCESSIBLE);
+    gtk_widget_class_set_accessible_type (wclass, BAUL_TYPE_DESKTOP_WINDOW_ACCESSIBLE);
 
-    nclass->window_type = CAJA_WINDOW_DESKTOP;
+    nclass->window_type = BAUL_WINDOW_DESKTOP;
     nclass->get_icon = real_get_icon;
 }
 

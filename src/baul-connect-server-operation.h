@@ -22,25 +22,25 @@
  * Author: Cosimo Cecchi <cosimoc@gnome.org>
  */
 
-#ifndef __CAJA_CONNECT_SERVER_OPERATION_H__
-#define __CAJA_CONNECT_SERVER_OPERATION_H__
+#ifndef __BAUL_CONNECT_SERVER_OPERATION_H__
+#define __BAUL_CONNECT_SERVER_OPERATION_H__
 
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
 #include "baul-connect-server-dialog.h"
 
-#define CAJA_TYPE_CONNECT_SERVER_OPERATION\
+#define BAUL_TYPE_CONNECT_SERVER_OPERATION\
 	(baul_connect_server_operation_get_type ())
-#define CAJA_CONNECT_SERVER_OPERATION(obj)\
+#define BAUL_CONNECT_SERVER_OPERATION(obj)\
   (G_TYPE_CHECK_INSTANCE_CAST ((obj),\
-			       CAJA_TYPE_CONNECT_SERVER_OPERATION,\
+			       BAUL_TYPE_CONNECT_SERVER_OPERATION,\
 			       CajaConnectServerOperation))
-#define CAJA_CONNECT_SERVER_OPERATION_CLASS(klass)\
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_CONNECT_SERVER_OPERATION,\
+#define BAUL_CONNECT_SERVER_OPERATION_CLASS(klass)\
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CONNECT_SERVER_OPERATION,\
 			    CajaConnectServerOperationClass))
-#define CAJA_IS_CONNECT_SERVER_OPERATION(obj)\
-  (G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_CONNECT_SERVER_OPERATION)
+#define BAUL_IS_CONNECT_SERVER_OPERATION(obj)\
+  (G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_CONNECT_SERVER_OPERATION)
 
 typedef struct _CajaConnectServerOperationPrivate
   CajaConnectServerOperationPrivate;
@@ -60,4 +60,4 @@ GMountOperation *
 baul_connect_server_operation_new (CajaConnectServerDialog *dialog);
 
 
-#endif /* __CAJA_CONNECT_SERVER_OPERATION_H__ */
+#endif /* __BAUL_CONNECT_SERVER_OPERATION_H__ */

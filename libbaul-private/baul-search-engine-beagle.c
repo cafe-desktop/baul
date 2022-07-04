@@ -168,7 +168,7 @@ beagle_client_new (const char *client_name)
 
 G_DEFINE_TYPE (CajaSearchEngineBeagle,
                baul_search_engine_beagle,
-               CAJA_TYPE_SEARCH_ENGINE);
+               BAUL_TYPE_SEARCH_ENGINE);
 
 static CajaSearchEngineClass *parent_class = NULL;
 
@@ -177,7 +177,7 @@ finalize (GObject *object)
 {
     CajaSearchEngineBeagle *beagle;
 
-    beagle = CAJA_SEARCH_ENGINE_BEAGLE (object);
+    beagle = BAUL_SEARCH_ENGINE_BEAGLE (object);
 
     if (beagle->details->current_query)
     {
@@ -233,7 +233,7 @@ beagle_hits_added (BeagleQuery *query,
         hit_uris = g_list_prepend (hit_uris, (char *)uri);
     }
 
-    baul_search_engine_hits_added (CAJA_SEARCH_ENGINE (engine), hit_uris);
+    baul_search_engine_hits_added (BAUL_SEARCH_ENGINE (engine), hit_uris);
     g_list_free (hit_uris);
 }
 
@@ -254,7 +254,7 @@ beagle_hits_subtracted (BeagleQuery *query,
         hit_uris = g_list_prepend (hit_uris, (char *)list->data);
     }
 
-    baul_search_engine_hits_subtracted (CAJA_SEARCH_ENGINE (engine), hit_uris);
+    baul_search_engine_hits_subtracted (BAUL_SEARCH_ENGINE (engine), hit_uris);
     g_list_free (hit_uris);
 }
 
@@ -271,7 +271,7 @@ beagle_finished (BeagleQuery *query,
     }
 
     engine->details->query_finished = TRUE;
-    baul_search_engine_finished (CAJA_SEARCH_ENGINE (engine));
+    baul_search_engine_finished (BAUL_SEARCH_ENGINE (engine));
 }
 
 static void
@@ -279,7 +279,7 @@ beagle_error (BeagleQuery *query,
               GError *error,
               CajaSearchEngineBeagle *engine)
 {
-    baul_search_engine_error (CAJA_SEARCH_ENGINE (engine), error->message);
+    baul_search_engine_error (BAUL_SEARCH_ENGINE (engine), error->message);
 }
 
 static void
@@ -291,7 +291,7 @@ baul_search_engine_beagle_start (CajaSearchEngine *engine)
     char *text;
 
     error = NULL;
-    beagle = CAJA_SEARCH_ENGINE_BEAGLE (engine);
+    beagle = BAUL_SEARCH_ENGINE_BEAGLE (engine);
 
     if (beagle->details->current_query)
     {
@@ -350,7 +350,7 @@ baul_search_engine_beagle_stop (CajaSearchEngine *engine)
 {
     CajaSearchEngineBeagle *beagle;
 
-    beagle = CAJA_SEARCH_ENGINE_BEAGLE (engine);
+    beagle = BAUL_SEARCH_ENGINE_BEAGLE (engine);
 
     if (beagle->details->current_query)
     {
@@ -372,7 +372,7 @@ baul_search_engine_beagle_set_query (CajaSearchEngine *engine, CajaQuery *query)
 {
     CajaSearchEngineBeagle *beagle;
 
-    beagle = CAJA_SEARCH_ENGINE_BEAGLE (engine);
+    beagle = BAUL_SEARCH_ENGINE_BEAGLE (engine);
 
     if (query)
     {
@@ -398,7 +398,7 @@ baul_search_engine_beagle_class_init (CajaSearchEngineBeagleClass *class)
     gobject_class = G_OBJECT_CLASS (class);
     gobject_class->finalize = finalize;
 
-    engine_class = CAJA_SEARCH_ENGINE_CLASS (class);
+    engine_class = BAUL_SEARCH_ENGINE_CLASS (class);
     engine_class->set_query = baul_search_engine_beagle_set_query;
     engine_class->start = baul_search_engine_beagle_start;
     engine_class->stop = baul_search_engine_beagle_stop;
@@ -435,9 +435,9 @@ baul_search_engine_beagle_new (void)
         return NULL;
     }
 
-    engine = g_object_new (CAJA_TYPE_SEARCH_ENGINE_BEAGLE, NULL);
+    engine = g_object_new (BAUL_TYPE_SEARCH_ENGINE_BEAGLE, NULL);
 
     engine->details->client = client;
 
-    return CAJA_SEARCH_ENGINE (engine);
+    return BAUL_SEARCH_ENGINE (engine);
 }

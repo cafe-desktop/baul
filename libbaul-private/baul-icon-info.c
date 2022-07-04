@@ -91,7 +91,7 @@ baul_icon_info_finalize (GObject *object)
 {
     CajaIconInfo *icon;
 
-    icon = CAJA_ICON_INFO (object);
+    icon = BAUL_ICON_INFO (object);
 
     if (!icon->sole_owner && icon->pixbuf)
     {
@@ -128,7 +128,7 @@ baul_icon_info_new_for_pixbuf (GdkPixbuf *pixbuf,
 {
     CajaIconInfo *icon;
 
-    icon = g_object_new (CAJA_TYPE_ICON_INFO, NULL);
+    icon = g_object_new (BAUL_TYPE_ICON_INFO, NULL);
 
     if (pixbuf)
     {
@@ -150,7 +150,7 @@ baul_icon_info_new_for_icon_info (GtkIconInfo *icon_info,
     const char *filename;
     char *basename;
 
-    icon = g_object_new (CAJA_TYPE_ICON_INFO, NULL);
+    icon = g_object_new (BAUL_TYPE_ICON_INFO, NULL);
 
     icon->pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
 
@@ -655,96 +655,96 @@ const char* baul_icon_info_get_used_name(CajaIconInfo* icon)
 /* Return nominal icon size for given zoom level.
  * @zoom_level: zoom level for which to find matching icon size.
  *
- * Return value: icon size between CAJA_ICON_SIZE_SMALLEST and
- * CAJA_ICON_SIZE_LARGEST, inclusive.
+ * Return value: icon size between BAUL_ICON_SIZE_SMALLEST and
+ * BAUL_ICON_SIZE_LARGEST, inclusive.
  */
 guint
 baul_get_icon_size_for_zoom_level (CajaZoomLevel zoom_level)
 {
     switch (zoom_level)
     {
-    case CAJA_ZOOM_LEVEL_SMALLEST:
-        return CAJA_ICON_SIZE_SMALLEST;
-    case CAJA_ZOOM_LEVEL_SMALLER:
-        return CAJA_ICON_SIZE_SMALLER;
-    case CAJA_ZOOM_LEVEL_SMALL:
-        return CAJA_ICON_SIZE_SMALL;
-    case CAJA_ZOOM_LEVEL_STANDARD:
-        return CAJA_ICON_SIZE_STANDARD;
-    case CAJA_ZOOM_LEVEL_LARGE:
-        return CAJA_ICON_SIZE_LARGE;
-    case CAJA_ZOOM_LEVEL_LARGER:
-        return CAJA_ICON_SIZE_LARGER;
-    case CAJA_ZOOM_LEVEL_LARGEST:
-        return CAJA_ICON_SIZE_LARGEST;
+    case BAUL_ZOOM_LEVEL_SMALLEST:
+        return BAUL_ICON_SIZE_SMALLEST;
+    case BAUL_ZOOM_LEVEL_SMALLER:
+        return BAUL_ICON_SIZE_SMALLER;
+    case BAUL_ZOOM_LEVEL_SMALL:
+        return BAUL_ICON_SIZE_SMALL;
+    case BAUL_ZOOM_LEVEL_STANDARD:
+        return BAUL_ICON_SIZE_STANDARD;
+    case BAUL_ZOOM_LEVEL_LARGE:
+        return BAUL_ICON_SIZE_LARGE;
+    case BAUL_ZOOM_LEVEL_LARGER:
+        return BAUL_ICON_SIZE_LARGER;
+    case BAUL_ZOOM_LEVEL_LARGEST:
+        return BAUL_ICON_SIZE_LARGEST;
     }
-    g_return_val_if_reached (CAJA_ICON_SIZE_STANDARD);
+    g_return_val_if_reached (BAUL_ICON_SIZE_STANDARD);
 }
 
 float
 baul_get_relative_icon_size_for_zoom_level (CajaZoomLevel zoom_level)
 {
-    return (float)baul_get_icon_size_for_zoom_level (zoom_level) / CAJA_ICON_SIZE_STANDARD;
+    return (float)baul_get_icon_size_for_zoom_level (zoom_level) / BAUL_ICON_SIZE_STANDARD;
 }
 
 guint
 baul_icon_get_larger_icon_size (guint size)
 {
-    if (size < CAJA_ICON_SIZE_SMALLEST)
+    if (size < BAUL_ICON_SIZE_SMALLEST)
     {
-        return CAJA_ICON_SIZE_SMALLEST;
+        return BAUL_ICON_SIZE_SMALLEST;
     }
-    if (size < CAJA_ICON_SIZE_SMALLER)
+    if (size < BAUL_ICON_SIZE_SMALLER)
     {
-        return CAJA_ICON_SIZE_SMALLER;
+        return BAUL_ICON_SIZE_SMALLER;
     }
-    if (size < CAJA_ICON_SIZE_SMALL)
+    if (size < BAUL_ICON_SIZE_SMALL)
     {
-        return CAJA_ICON_SIZE_SMALL;
+        return BAUL_ICON_SIZE_SMALL;
     }
-    if (size < CAJA_ICON_SIZE_STANDARD)
+    if (size < BAUL_ICON_SIZE_STANDARD)
     {
-        return CAJA_ICON_SIZE_STANDARD;
+        return BAUL_ICON_SIZE_STANDARD;
     }
-    if (size < CAJA_ICON_SIZE_LARGE)
+    if (size < BAUL_ICON_SIZE_LARGE)
     {
-        return CAJA_ICON_SIZE_LARGE;
+        return BAUL_ICON_SIZE_LARGE;
     }
-    if (size < CAJA_ICON_SIZE_LARGER)
+    if (size < BAUL_ICON_SIZE_LARGER)
     {
-        return CAJA_ICON_SIZE_LARGER;
+        return BAUL_ICON_SIZE_LARGER;
     }
-    return CAJA_ICON_SIZE_LARGEST;
+    return BAUL_ICON_SIZE_LARGEST;
 }
 
 guint
 baul_icon_get_smaller_icon_size (guint size)
 {
-    if (size > CAJA_ICON_SIZE_LARGEST)
+    if (size > BAUL_ICON_SIZE_LARGEST)
     {
-        return CAJA_ICON_SIZE_LARGEST;
+        return BAUL_ICON_SIZE_LARGEST;
     }
-    if (size > CAJA_ICON_SIZE_LARGER)
+    if (size > BAUL_ICON_SIZE_LARGER)
     {
-        return CAJA_ICON_SIZE_LARGER;
+        return BAUL_ICON_SIZE_LARGER;
     }
-    if (size > CAJA_ICON_SIZE_LARGE)
+    if (size > BAUL_ICON_SIZE_LARGE)
     {
-        return CAJA_ICON_SIZE_LARGE;
+        return BAUL_ICON_SIZE_LARGE;
     }
-    if (size > CAJA_ICON_SIZE_STANDARD)
+    if (size > BAUL_ICON_SIZE_STANDARD)
     {
-        return CAJA_ICON_SIZE_STANDARD;
+        return BAUL_ICON_SIZE_STANDARD;
     }
-    if (size > CAJA_ICON_SIZE_SMALL)
+    if (size > BAUL_ICON_SIZE_SMALL)
     {
-        return CAJA_ICON_SIZE_SMALL;
+        return BAUL_ICON_SIZE_SMALL;
     }
-    if (size > CAJA_ICON_SIZE_SMALLER)
+    if (size > BAUL_ICON_SIZE_SMALLER)
     {
-        return CAJA_ICON_SIZE_SMALLER;
+        return BAUL_ICON_SIZE_SMALLER;
     }
-    return CAJA_ICON_SIZE_SMALLEST;
+    return BAUL_ICON_SIZE_SMALLEST;
 }
 
 gint
@@ -756,7 +756,7 @@ baul_get_icon_size_for_stock_size (GtkIconSize size)
     {
         return MAX (w, h);
     }
-    return CAJA_ZOOM_LEVEL_STANDARD;
+    return BAUL_ZOOM_LEVEL_STANDARD;
 }
 
 
@@ -803,7 +803,7 @@ baul_user_special_directory_get_gicon (GUserDirectory directory)
 
 	#define ICON_CASE(x) \
 		case G_USER_DIRECTORY_ ## x:\
-			return g_themed_icon_new (CAJA_ICON_FOLDER_ ## x);
+			return g_themed_icon_new (BAUL_ICON_FOLDER_ ## x);
 
 	switch (directory) {
 

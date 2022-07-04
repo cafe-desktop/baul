@@ -116,8 +116,8 @@ G_DEFINE_TYPE_WITH_CODE (FMListModel, fm_list_model, G_TYPE_OBJECT,
 
 static const GtkTargetEntry drag_types [] =
 {
-    { CAJA_ICON_DND_MATE_ICON_LIST_TYPE, 0, CAJA_ICON_DND_MATE_ICON_LIST },
-    { CAJA_ICON_DND_URI_LIST_TYPE, 0, CAJA_ICON_DND_URI_LIST },
+    { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
+    { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
 };
 
 static GtkTargetList *drag_target_list = NULL;
@@ -160,9 +160,9 @@ fm_list_model_get_column_type (GtkTreeModel *tree_model, int index)
     switch (index)
     {
     case FM_LIST_MODEL_FILE_COLUMN:
-        return CAJA_TYPE_FILE;
+        return BAUL_TYPE_FILE;
     case FM_LIST_MODEL_SUBDIRECTORY_COLUMN:
-        return CAJA_TYPE_DIRECTORY;
+        return BAUL_TYPE_DIRECTORY;
     case FM_LIST_MODEL_SMALLEST_ICON_COLUMN:
     case FM_LIST_MODEL_SMALLER_ICON_COLUMN:
     case FM_LIST_MODEL_SMALL_ICON_COLUMN:
@@ -306,12 +306,12 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
     switch (column)
     {
     case FM_LIST_MODEL_FILE_COLUMN:
-        g_value_init (value, CAJA_TYPE_FILE);
+        g_value_init (value, BAUL_TYPE_FILE);
 
         g_value_set_object (value, file);
         break;
     case FM_LIST_MODEL_SUBDIRECTORY_COLUMN:
-        g_value_init (value, CAJA_TYPE_DIRECTORY);
+        g_value_init (value, BAUL_TYPE_DIRECTORY);
 
         g_value_set_object (value, file_entry->subdirectory);
         break;
@@ -322,7 +322,7 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
     case FM_LIST_MODEL_LARGE_ICON_COLUMN:
     case FM_LIST_MODEL_LARGER_ICON_COLUMN:
     case FM_LIST_MODEL_LARGEST_ICON_COLUMN:
-        if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_ICONS_IN_LIST_VIEW)) {
+        if (!g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_ICONS_IN_LIST_VIEW)) {
             cairo_surface_t *surface;
             int icon_size;
 
@@ -354,9 +354,9 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
             icon_size = baul_get_icon_size_for_zoom_level (zoom_level);
             icon_scale = fm_list_model_get_icon_scale (model);
 
-            flags = CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS |
-                    CAJA_FILE_ICON_FLAGS_FORCE_THUMBNAIL_SIZE |
-                    CAJA_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM;
+            flags = BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS |
+                    BAUL_FILE_ICON_FLAGS_FORCE_THUMBNAIL_SIZE |
+                    BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM;
             if (model->details->drag_view != NULL)
             {
                 GtkTreePath *path_a;
@@ -372,7 +372,7 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
 
                     if (gtk_tree_path_compare (path_a, path_b) == 0)
                     {
-                        flags |= CAJA_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT;
+                        flags |= BAUL_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT;
                     }
 
                     gtk_tree_path_free (path_a);
@@ -385,10 +385,10 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
             /* render emblems with GEmblemedIcon */
             parent_file = baul_file_get_parent (file);
             i = 0;
-            emblems_to_ignore[i++] = CAJA_FILE_EMBLEM_NAME_TRASH;
+            emblems_to_ignore[i++] = BAUL_FILE_EMBLEM_NAME_TRASH;
             if (parent_file) {
             	if (!baul_file_can_write (parent_file)) {
-                    emblems_to_ignore[i++] = CAJA_FILE_EMBLEM_NAME_CANT_WRITE;
+                    emblems_to_ignore[i++] = BAUL_FILE_EMBLEM_NAME_CANT_WRITE;
             	}
             	baul_file_unref (parent_file);
             }
@@ -1535,7 +1535,7 @@ fm_list_model_get_sort_column_id_from_attribute (FMListModel *model,
         GQuark column_attribute;
 
         column =
-            CAJA_COLUMN (model->details->columns->pdata[i]);
+            BAUL_COLUMN (model->details->columns->pdata[i]);
         g_object_get (G_OBJECT (column),
                       "attribute_q", &column_attribute,
                       NULL);
@@ -1564,7 +1564,7 @@ fm_list_model_get_attribute_from_sort_column_id (FMListModel *model,
         return 0;
     }
 
-    column = CAJA_COLUMN (model->details->columns->pdata[index]);
+    column = BAUL_COLUMN (model->details->columns->pdata[index]);
     g_object_get (G_OBJECT (column), "attribute_q", &attribute, NULL);
 
     return attribute;
@@ -1576,22 +1576,22 @@ fm_list_model_get_zoom_level_from_column_id (int column)
     switch (column)
     {
     case FM_LIST_MODEL_SMALLEST_ICON_COLUMN:
-        return CAJA_ZOOM_LEVEL_SMALLEST;
+        return BAUL_ZOOM_LEVEL_SMALLEST;
     case FM_LIST_MODEL_SMALLER_ICON_COLUMN:
-        return CAJA_ZOOM_LEVEL_SMALLER;
+        return BAUL_ZOOM_LEVEL_SMALLER;
     case FM_LIST_MODEL_SMALL_ICON_COLUMN:
-        return CAJA_ZOOM_LEVEL_SMALL;
+        return BAUL_ZOOM_LEVEL_SMALL;
     case FM_LIST_MODEL_STANDARD_ICON_COLUMN:
-        return CAJA_ZOOM_LEVEL_STANDARD;
+        return BAUL_ZOOM_LEVEL_STANDARD;
     case FM_LIST_MODEL_LARGE_ICON_COLUMN:
-        return CAJA_ZOOM_LEVEL_LARGE;
+        return BAUL_ZOOM_LEVEL_LARGE;
     case FM_LIST_MODEL_LARGER_ICON_COLUMN:
-        return CAJA_ZOOM_LEVEL_LARGER;
+        return BAUL_ZOOM_LEVEL_LARGER;
     case FM_LIST_MODEL_LARGEST_ICON_COLUMN:
-        return CAJA_ZOOM_LEVEL_LARGEST;
+        return BAUL_ZOOM_LEVEL_LARGEST;
     }
 
-    g_return_val_if_reached (CAJA_ZOOM_LEVEL_STANDARD);
+    g_return_val_if_reached (BAUL_ZOOM_LEVEL_STANDARD);
 }
 
 int
@@ -1599,19 +1599,19 @@ fm_list_model_get_column_id_from_zoom_level (CajaZoomLevel zoom_level)
 {
     switch (zoom_level)
     {
-    case CAJA_ZOOM_LEVEL_SMALLEST:
+    case BAUL_ZOOM_LEVEL_SMALLEST:
         return FM_LIST_MODEL_SMALLEST_ICON_COLUMN;
-    case CAJA_ZOOM_LEVEL_SMALLER:
+    case BAUL_ZOOM_LEVEL_SMALLER:
         return FM_LIST_MODEL_SMALLER_ICON_COLUMN;
-    case CAJA_ZOOM_LEVEL_SMALL:
+    case BAUL_ZOOM_LEVEL_SMALL:
         return FM_LIST_MODEL_SMALL_ICON_COLUMN;
-    case CAJA_ZOOM_LEVEL_STANDARD:
+    case BAUL_ZOOM_LEVEL_STANDARD:
         return FM_LIST_MODEL_STANDARD_ICON_COLUMN;
-    case CAJA_ZOOM_LEVEL_LARGE:
+    case BAUL_ZOOM_LEVEL_LARGE:
         return FM_LIST_MODEL_LARGE_ICON_COLUMN;
-    case CAJA_ZOOM_LEVEL_LARGER:
+    case BAUL_ZOOM_LEVEL_LARGER:
         return FM_LIST_MODEL_LARGER_ICON_COLUMN;
-    case CAJA_ZOOM_LEVEL_LARGEST:
+    case BAUL_ZOOM_LEVEL_LARGEST:
         return FM_LIST_MODEL_LARGEST_ICON_COLUMN;
     }
 
@@ -1639,7 +1639,7 @@ fm_list_model_get_drag_target_list ()
     GtkTargetList *target_list;
 
     target_list = gtk_target_list_new (drag_types, G_N_ELEMENTS (drag_types));
-    gtk_target_list_add_text_targets (target_list, CAJA_ICON_DND_TEXT);
+    gtk_target_list_add_text_targets (target_list, BAUL_ICON_DND_TEXT);
 
     return target_list;
 }
@@ -1744,7 +1744,7 @@ fm_list_model_class_init (FMListModelClass *klass)
                       NULL, NULL,
                       g_cclosure_marshal_VOID__OBJECT,
                       G_TYPE_NONE, 1,
-                      CAJA_TYPE_DIRECTORY);
+                      BAUL_TYPE_DIRECTORY);
 
     list_model_signals[GET_ICON_SCALE] =
         g_signal_new ("get-icon-scale",

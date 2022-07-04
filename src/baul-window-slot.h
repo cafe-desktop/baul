@@ -22,28 +22,28 @@
    Author: Christian Neumair <cneumair@gnome.org>
 */
 
-#ifndef CAJA_WINDOW_SLOT_H
-#define CAJA_WINDOW_SLOT_H
+#ifndef BAUL_WINDOW_SLOT_H
+#define BAUL_WINDOW_SLOT_H
 
 #include "baul-window-pane.h"
 #include "baul-query-editor.h"
 #include <glib/gi18n.h>
 
-#define CAJA_TYPE_WINDOW_SLOT	 (baul_window_slot_get_type())
-#define CAJA_WINDOW_SLOT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_WINDOW_SLOT, CajaWindowSlotClass))
-#define CAJA_WINDOW_SLOT(obj)	 (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW_SLOT, CajaWindowSlot))
-#define CAJA_IS_WINDOW_SLOT(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW_SLOT))
-#define CAJA_IS_WINDOW_SLOT_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_WINDOW_SLOT))
-#define CAJA_WINDOW_SLOT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_WINDOW_SLOT, CajaWindowSlotClass))
+#define BAUL_TYPE_WINDOW_SLOT	 (baul_window_slot_get_type())
+#define BAUL_WINDOW_SLOT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_WINDOW_SLOT, CajaWindowSlotClass))
+#define BAUL_WINDOW_SLOT(obj)	 (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_WINDOW_SLOT, CajaWindowSlot))
+#define BAUL_IS_WINDOW_SLOT(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_WINDOW_SLOT))
+#define BAUL_IS_WINDOW_SLOT_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_WINDOW_SLOT))
+#define BAUL_WINDOW_SLOT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_WINDOW_SLOT, CajaWindowSlotClass))
 
 typedef enum
 {
-    CAJA_LOCATION_CHANGE_STANDARD,
-    CAJA_LOCATION_CHANGE_BACK,
-    CAJA_LOCATION_CHANGE_FORWARD,
-    CAJA_LOCATION_CHANGE_RELOAD,
-    CAJA_LOCATION_CHANGE_REDIRECT,
-    CAJA_LOCATION_CHANGE_FALLBACK
+    BAUL_LOCATION_CHANGE_STANDARD,
+    BAUL_LOCATION_CHANGE_BACK,
+    BAUL_LOCATION_CHANGE_FORWARD,
+    BAUL_LOCATION_CHANGE_RELOAD,
+    BAUL_LOCATION_CHANGE_REDIRECT,
+    BAUL_LOCATION_CHANGE_FALLBACK
 } CajaLocationChangeType;
 
 struct CajaWindowSlotClass
@@ -158,13 +158,13 @@ void                    baul_window_slot_disconnect_content_view  (CajaWindowSlo
         CajaView             *view);
 
 #define baul_window_slot_go_to(slot,location, new_tab) \
-	baul_window_slot_open_location_full(slot, location, CAJA_WINDOW_OPEN_ACCORDING_TO_MODE, \
-						(new_tab ? CAJA_WINDOW_OPEN_FLAG_NEW_TAB : 0), \
+	baul_window_slot_open_location_full(slot, location, BAUL_WINDOW_OPEN_ACCORDING_TO_MODE, \
+						(new_tab ? BAUL_WINDOW_OPEN_FLAG_NEW_TAB : 0), \
 						NULL, NULL, NULL)
 
 #define baul_window_slot_go_to_full(slot, location, new_tab, callback, user_data) \
-	baul_window_slot_open_location_full(slot, location, CAJA_WINDOW_OPEN_ACCORDING_TO_MODE, \
-						(new_tab ? CAJA_WINDOW_OPEN_FLAG_NEW_TAB : 0), \
+	baul_window_slot_open_location_full(slot, location, BAUL_WINDOW_OPEN_ACCORDING_TO_MODE, \
+						(new_tab ? BAUL_WINDOW_OPEN_FLAG_NEW_TAB : 0), \
 						NULL, callback, user_data)
 
 #define baul_window_slot_go_to_with_selection(slot,location,new_selection) \
@@ -192,4 +192,4 @@ void    baul_window_slot_add_current_location_to_history_list (CajaWindowSlot *s
 
 void    baul_window_slot_is_in_active_pane (CajaWindowSlot *slot, gboolean is_active);
 
-#endif /* CAJA_WINDOW_SLOT_H */
+#endif /* BAUL_WINDOW_SLOT_H */

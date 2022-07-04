@@ -123,7 +123,7 @@ baul_file_queue_head (CajaFileQueue *queue)
         return NULL;
     }
 
-    return CAJA_FILE (queue->head->data);
+    return BAUL_FILE (queue->head->data);
 }
 
 gboolean

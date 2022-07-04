@@ -22,8 +22,8 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_SIDEBAR_H
-#define CAJA_SIDEBAR_H
+#ifndef BAUL_SIDEBAR_H
+#define BAUL_SIDEBAR_H
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -32,10 +32,10 @@
 extern "C" {
 #endif
 
-#define CAJA_TYPE_SIDEBAR           (baul_sidebar_get_type ())
-#define CAJA_SIDEBAR(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SIDEBAR, CajaSidebar))
-#define CAJA_IS_SIDEBAR(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SIDEBAR))
-#define CAJA_SIDEBAR_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_SIDEBAR, CajaSidebarIface))
+#define BAUL_TYPE_SIDEBAR           (baul_sidebar_get_type ())
+#define BAUL_SIDEBAR(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SIDEBAR, CajaSidebar))
+#define BAUL_IS_SIDEBAR(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SIDEBAR))
+#define BAUL_SIDEBAR_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_SIDEBAR, CajaSidebarIface))
 
     typedef struct _CajaSidebar CajaSidebar; /* dummy typedef */
     typedef struct _CajaSidebarIface CajaSidebarIface;
@@ -81,4 +81,4 @@ extern "C" {
 }
 #endif
 
-#endif /* CAJA_VIEW_H */
+#endif /* BAUL_VIEW_H */

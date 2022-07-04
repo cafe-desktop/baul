@@ -38,7 +38,7 @@ void baul_run_lib_self_checks (void);
    can be used to do operations on the whole list of functions.
 */
 
-#define CAJA_LIB_FOR_EACH_SELF_CHECK_FUNCTION(macro) \
+#define BAUL_LIB_FOR_EACH_SELF_CHECK_FUNCTION(macro) \
 	macro (baul_self_check_file_utilities) \
 	macro (baul_self_check_file_operations) \
 	macro (baul_self_check_directory) \
@@ -47,4 +47,4 @@ void baul_run_lib_self_checks (void);
 /* Add new self-check functions to the list above this line. */
 
 /* Generate prototypes for all the functions. */
-CAJA_LIB_FOR_EACH_SELF_CHECK_FUNCTION (EEL_SELF_CHECK_FUNCTION_PROTOTYPE)
+BAUL_LIB_FOR_EACH_SELF_CHECK_FUNCTION (EEL_SELF_CHECK_FUNCTION_PROTOTYPE)

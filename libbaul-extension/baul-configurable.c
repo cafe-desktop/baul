@@ -76,12 +76,12 @@ baul_configurable_get_type (void)
 void
 baul_configurable_run_config (CajaConfigurable *provider)
 {
-    if (!CAJA_IS_CONFIGURABLE(provider)) {
+    if (!BAUL_IS_CONFIGURABLE(provider)) {
         return;
     }
 
-    if (CAJA_CONFIGURABLE_GET_IFACE (provider)->run_config) {
-        CAJA_CONFIGURABLE_GET_IFACE (provider)->run_config(provider);
+    if (BAUL_CONFIGURABLE_GET_IFACE (provider)->run_config) {
+        BAUL_CONFIGURABLE_GET_IFACE (provider)->run_config(provider);
     }
 }
 

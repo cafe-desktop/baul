@@ -271,7 +271,7 @@ baul_undostack_manager_init (CajaUndoStackManager * self)
 static void
 baul_undostack_manager_dispose (GObject * object)
 {
-  CajaUndoStackManager *self = CAJA_UNDOSTACK_MANAGER (object);
+  CajaUndoStackManager *self = BAUL_UNDOSTACK_MANAGER (object);
   CajaUndoStackManagerPrivate *priv = self->priv;
 
   if (priv->dispose_has_run)
@@ -303,9 +303,9 @@ static void
 baul_undostack_manager_set_property (GObject * object, guint prop_id,
     const GValue * value, GParamSpec * pspec)
 {
-  g_return_if_fail (IS_CAJA_UNDOSTACK_MANAGER (object));
+  g_return_if_fail (IS_BAUL_UNDOSTACK_MANAGER (object));
 
-  CajaUndoStackManager *manager = CAJA_UNDOSTACK_MANAGER (object);
+  CajaUndoStackManager *manager = BAUL_UNDOSTACK_MANAGER (object);
   CajaUndoStackManagerPrivate *priv = manager->priv;
   guint new_undo_levels;
 
@@ -333,9 +333,9 @@ static void
 baul_undostack_manager_get_property (GObject * object, guint prop_id,
     GValue * value, GParamSpec * pspec)
 {
-  g_return_if_fail (IS_CAJA_UNDOSTACK_MANAGER (object));
+  g_return_if_fail (IS_BAUL_UNDOSTACK_MANAGER (object));
 
-  CajaUndoStackManager *manager = CAJA_UNDOSTACK_MANAGER (object);
+  CajaUndoStackManager *manager = BAUL_UNDOSTACK_MANAGER (object);
   CajaUndoStackManagerPrivate *priv = manager->priv;
 
   switch (prop_id) {
@@ -363,7 +363,7 @@ baul_undostack_manager_instance (void)
 
   if (manager == NULL) {
     manager =
-        g_object_new (TYPE_CAJA_UNDOSTACK_MANAGER, "undo-levels", 32, NULL);
+        g_object_new (TYPE_BAUL_UNDOSTACK_MANAGER, "undo-levels", 32, NULL);
   }
 
   return manager;
@@ -416,7 +416,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
     action->locked = TRUE;      /* Remember to unlock when redo is finished */
     priv->undo_redo_flag = TRUE;
     switch (action->type) {
-      case CAJA_UNDOSTACK_COPY:
+      case BAUL_UNDOSTACK_COPY:
       {
         GList *uris;
 
@@ -426,7 +426,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
     	g_list_free_full (uris, g_object_unref);
         break;
       }
-      case CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE:
+      case BAUL_UNDOSTACK_CREATEFILEFROMTEMPLATE:
       {
         char *new_name;
         char *puri;
@@ -441,7 +441,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
         g_free (new_name);
         break;
       }
-      case CAJA_UNDOSTACK_DUPLICATE:
+      case BAUL_UNDOSTACK_DUPLICATE:
       {
         GList *uris;
 
@@ -451,8 +451,8 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
     	g_list_free_full (uris, g_object_unref);
         break;
       }
-      case CAJA_UNDOSTACK_RESTOREFROMTRASH:
-      case CAJA_UNDOSTACK_MOVE:
+      case BAUL_UNDOSTACK_RESTOREFROMTRASH:
+      case BAUL_UNDOSTACK_MOVE:
       {
         GList *uris;
 
@@ -462,7 +462,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
     	g_list_free_full (uris, g_object_unref);
         break;
       }
-      case CAJA_UNDOSTACK_RENAME:
+      case BAUL_UNDOSTACK_RENAME:
       {
         CajaFile *file;
         char *new_name;
@@ -475,7 +475,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
         g_free (new_name);
         break;
       }
-      case CAJA_UNDOSTACK_CREATEEMPTYFILE:
+      case BAUL_UNDOSTACK_CREATEEMPTYFILE:
       {
         char *new_name;
         char *puri;
@@ -490,7 +490,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
         g_free (new_name);
         break;
       }
-      case CAJA_UNDOSTACK_CREATEFOLDER:
+      case BAUL_UNDOSTACK_CREATEFOLDER:
       {
         char *puri;
 
@@ -500,7 +500,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
         g_free (puri);
         break;
       }
-      case CAJA_UNDOSTACK_MOVETOTRASH:
+      case BAUL_UNDOSTACK_MOVETOTRASH:
         if (g_hash_table_size (action->trashed) > 0) {
           GList *uris;
 
@@ -513,7 +513,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
     	  g_list_free_full (uris, g_object_unref);
         }
         break;
-      case CAJA_UNDOSTACK_CREATELINK:
+      case BAUL_UNDOSTACK_CREATELINK:
       {
         GList *uris;
 
@@ -523,7 +523,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
     	g_list_free_full (uris, g_object_unref);
         break;
       }
-      case CAJA_UNDOSTACK_SETPERMISSIONS:
+      case BAUL_UNDOSTACK_SETPERMISSIONS:
       {
         CajaFile *file;
 
@@ -533,7 +533,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
         g_object_unref (file);
         break;
       }
-      case CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS:
+      case BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS:
       {
         char *puri;
 
@@ -546,7 +546,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
         g_free (puri);
         break;
       }
-      case CAJA_UNDOSTACK_CHANGEGROUP:
+      case BAUL_UNDOSTACK_CHANGEGROUP:
       {
         CajaFile *file;
 
@@ -557,7 +557,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
         g_object_unref (file);
         break;
       }
-      case CAJA_UNDOSTACK_CHANGEOWNER:
+      case BAUL_UNDOSTACK_CHANGEOWNER:
       {
         CajaFile *file;
 
@@ -568,7 +568,7 @@ baul_undostack_manager_redo (CajaUndoStackManager * manager,
         g_object_unref (file);
         break;
       }
-      case CAJA_UNDOSTACK_DELETE:
+      case BAUL_UNDOSTACK_DELETE:
       default:
         priv->undo_redo_flag = FALSE;
         break;                  /* We shouldn't be here */
@@ -603,13 +603,13 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
   if (action != NULL) {
     priv->undo_redo_flag = TRUE;
     switch (action->type) {
-      case CAJA_UNDOSTACK_CREATEEMPTYFILE:
-      case CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE:
-      case CAJA_UNDOSTACK_CREATEFOLDER:
+      case BAUL_UNDOSTACK_CREATEEMPTYFILE:
+      case BAUL_UNDOSTACK_CREATEFILEFROMTEMPLATE:
+      case BAUL_UNDOSTACK_CREATEFOLDER:
         uris = construct_gfile_list_from_uri (action->target_uri);
-      case CAJA_UNDOSTACK_COPY:
-      case CAJA_UNDOSTACK_DUPLICATE:
-      case CAJA_UNDOSTACK_CREATELINK:
+      case BAUL_UNDOSTACK_COPY:
+      case BAUL_UNDOSTACK_DUPLICATE:
+      case BAUL_UNDOSTACK_CREATELINK:
         if (!uris) {
           uris = construct_gfile_list (action->destinations, action->dest_dir);
           uris = g_list_reverse (uris); // Deleting must be done in reverse
@@ -634,13 +634,13 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
           undo_redo_done_transfer_callback (NULL, action);
         }
         break;
-      case CAJA_UNDOSTACK_RESTOREFROMTRASH:
+      case BAUL_UNDOSTACK_RESTOREFROMTRASH:
         uris = construct_gfile_list (action->destinations, action->dest_dir);
         baul_file_operations_trash_or_delete (uris, NULL,
             undo_redo_done_delete_callback, action);
     	g_list_free_full (uris, g_object_unref);
         break;
-      case CAJA_UNDOSTACK_MOVETOTRASH:
+      case BAUL_UNDOSTACK_MOVETOTRASH:
       {
         GHashTable *files_to_restore;
 
@@ -669,13 +669,13 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
         undo_redo_done_transfer_callback (NULL, action);
         break;
       }
-      case CAJA_UNDOSTACK_MOVE:
+      case BAUL_UNDOSTACK_MOVE:
         uris = construct_gfile_list (action->destinations, action->dest_dir);
         baul_file_operations_move (uris, NULL,
             action->src_dir, NULL, undo_redo_done_transfer_callback, action);
     	g_list_free_full (uris, g_object_unref);
         break;
-      case CAJA_UNDOSTACK_RENAME:
+      case BAUL_UNDOSTACK_RENAME:
       {
         CajaFile *file;
         char *new_name;
@@ -688,7 +688,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
         g_free (new_name);
         break;
       }
-      case CAJA_UNDOSTACK_SETPERMISSIONS:
+      case BAUL_UNDOSTACK_SETPERMISSIONS:
       {
         CajaFile *file;
 
@@ -699,7 +699,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
         g_object_unref (file);
         break;
       }
-      case CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS:
+      case BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS:
         if (g_hash_table_size (action->original_permissions) > 0) {
           GList *gfiles_list =
               g_hash_table_get_keys (action->original_permissions);
@@ -725,7 +725,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
           undo_redo_done_transfer_callback (NULL, action);
         }
         break;
-      case CAJA_UNDOSTACK_CHANGEGROUP:
+      case BAUL_UNDOSTACK_CHANGEGROUP:
       {
         CajaFile *file;
 
@@ -736,7 +736,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
         g_object_unref (file);
         break;
       }
-      case CAJA_UNDOSTACK_CHANGEOWNER:
+      case BAUL_UNDOSTACK_CHANGEOWNER:
       {
         CajaFile *file;
 
@@ -747,7 +747,7 @@ baul_undostack_manager_undo (CajaUndoStackManager * manager,
         g_object_unref (file);
         break;
       }
-      case CAJA_UNDOSTACK_DELETE:
+      case BAUL_UNDOSTACK_DELETE:
       default:
         priv->undo_redo_flag = FALSE;
         break;                  /* We shouldn't be here */
@@ -855,7 +855,7 @@ baul_undostack_manager_trash_has_emptied (CajaUndoStackManager *
                 continue;
         }
     }
-    if (action->type == CAJA_UNDOSTACK_MOVETOTRASH) {
+    if (action->type == BAUL_UNDOSTACK_MOVETOTRASH) {
         g_queue_remove (priv->stack, action);
     }
   }
@@ -900,10 +900,10 @@ baul_undostack_manager_data_new (CajaUndoStackActionType type,
   data->type = type;
   data->count = items_count;
 
-  if (type == CAJA_UNDOSTACK_MOVETOTRASH) {
+  if (type == BAUL_UNDOSTACK_MOVETOTRASH) {
     data->trashed =
         g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-  } else if (type == CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS) {
+  } else if (type == BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS) {
     data->original_permissions =
         g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
   }
@@ -1234,7 +1234,7 @@ get_undo_description (CajaUndoStackActionData * action)
       }
       count = action->count;
       switch (action->type) {
-        case CAJA_UNDOSTACK_COPY:
+        case BAUL_UNDOSTACK_COPY:
           if (count != 1) {
             description = g_strdup_printf (_("Delete %d copied items"), count);
           } else {
@@ -1243,7 +1243,7 @@ get_undo_description (CajaUndoStackActionData * action)
             g_free (name);
           }
           break;
-        case CAJA_UNDOSTACK_DUPLICATE:
+        case BAUL_UNDOSTACK_DUPLICATE:
           if (count != 1) {
             description =
                 g_strdup_printf (_("Delete %d duplicated items"), count);
@@ -1253,7 +1253,7 @@ get_undo_description (CajaUndoStackActionData * action)
             g_free (name);
           }
           break;
-        case CAJA_UNDOSTACK_MOVE:
+        case BAUL_UNDOSTACK_MOVE:
           if (count != 1) {
             description =
                 g_strdup_printf (_
@@ -1265,7 +1265,7 @@ get_undo_description (CajaUndoStackActionData * action)
             g_free (name);
           }
           break;
-        case CAJA_UNDOSTACK_RENAME:
+        case BAUL_UNDOSTACK_RENAME:
         {
           char *from_name = get_uri_basename (action->new_uri);
           char *to_name = get_uri_basename (action->old_uri);
@@ -1275,16 +1275,16 @@ get_undo_description (CajaUndoStackActionData * action)
           g_free (to_name);
         }
           break;
-        case CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE:
-        case CAJA_UNDOSTACK_CREATEEMPTYFILE:
-        case CAJA_UNDOSTACK_CREATEFOLDER:
+        case BAUL_UNDOSTACK_CREATEFILEFROMTEMPLATE:
+        case BAUL_UNDOSTACK_CREATEEMPTYFILE:
+        case BAUL_UNDOSTACK_CREATEFOLDER:
         {
           char *name = get_uri_basename (action->target_uri);
           description = g_strdup_printf (_("Delete '%s'"), name);
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_MOVETOTRASH:
+        case BAUL_UNDOSTACK_MOVETOTRASH:
         {
           count = g_hash_table_size (action->trashed);
           if (count != 1) {
@@ -1304,7 +1304,7 @@ get_undo_description (CajaUndoStackActionData * action)
           }
         }
           break;
-        case CAJA_UNDOSTACK_RESTOREFROMTRASH:
+        case BAUL_UNDOSTACK_RESTOREFROMTRASH:
         {
           if (count != 1) {
             description =
@@ -1316,7 +1316,7 @@ get_undo_description (CajaUndoStackActionData * action)
           }
         }
           break;
-        case CAJA_UNDOSTACK_CREATELINK:
+        case BAUL_UNDOSTACK_CREATELINK:
         {
           if (count != 1) {
             description =
@@ -1328,7 +1328,7 @@ get_undo_description (CajaUndoStackActionData * action)
           }
         }
           break;
-        case CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS:
+        case BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS:
         {
           char *name = g_file_get_path (action->dest_dir);
           description =
@@ -1337,7 +1337,7 @@ get_undo_description (CajaUndoStackActionData * action)
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_SETPERMISSIONS:
+        case BAUL_UNDOSTACK_SETPERMISSIONS:
         {
           char *name = get_uri_basename (action->target_uri);
           description =
@@ -1345,7 +1345,7 @@ get_undo_description (CajaUndoStackActionData * action)
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_CHANGEGROUP:
+        case BAUL_UNDOSTACK_CHANGEGROUP:
         {
           char *name = get_uri_basename (action->target_uri);
           description =
@@ -1355,7 +1355,7 @@ get_undo_description (CajaUndoStackActionData * action)
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_CHANGEOWNER:
+        case BAUL_UNDOSTACK_CHANGEOWNER:
         {
           char *name = get_uri_basename (action->target_uri);
           description =
@@ -1395,7 +1395,7 @@ get_redo_description (CajaUndoStackActionData * action)
       }
       count = action->count;
       switch (action->type) {
-        case CAJA_UNDOSTACK_COPY:
+        case BAUL_UNDOSTACK_COPY:
           if (count != 1) {
             description =
                 g_strdup_printf (_
@@ -1407,7 +1407,7 @@ get_redo_description (CajaUndoStackActionData * action)
             g_free (name);
           }
           break;
-        case CAJA_UNDOSTACK_DUPLICATE:
+        case BAUL_UNDOSTACK_DUPLICATE:
           if (count != 1) {
             description =
                 g_strdup_printf (_
@@ -1420,7 +1420,7 @@ get_redo_description (CajaUndoStackActionData * action)
             g_free (name);
           }
           break;
-        case CAJA_UNDOSTACK_MOVE:
+        case BAUL_UNDOSTACK_MOVE:
           if (count != 1) {
             description =
                 g_strdup_printf (_
@@ -1432,7 +1432,7 @@ get_redo_description (CajaUndoStackActionData * action)
             g_free (name);
           }
           break;
-        case CAJA_UNDOSTACK_RENAME:
+        case BAUL_UNDOSTACK_RENAME:
         {
           char *from_name = get_uri_basename (action->old_uri);
           char *to_name = get_uri_basename (action->new_uri);
@@ -1442,7 +1442,7 @@ get_redo_description (CajaUndoStackActionData * action)
           g_free (to_name);
         }
           break;
-        case CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE:
+        case BAUL_UNDOSTACK_CREATEFILEFROMTEMPLATE:
         {
           char *name = get_uri_basename (action->target_uri);
           description =
@@ -1450,21 +1450,21 @@ get_redo_description (CajaUndoStackActionData * action)
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_CREATEEMPTYFILE:
+        case BAUL_UNDOSTACK_CREATEEMPTYFILE:
         {
           char *name = get_uri_basename (action->target_uri);
           description = g_strdup_printf (_("Create an empty file '%s'"), name);
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_CREATEFOLDER:
+        case BAUL_UNDOSTACK_CREATEFOLDER:
         {
           char *name = get_uri_basename (action->target_uri);
           description = g_strdup_printf (_("Create a new folder '%s'"), name);
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_MOVETOTRASH:
+        case BAUL_UNDOSTACK_MOVETOTRASH:
         {
           count = g_hash_table_size (action->trashed);
           if (count != 1) {
@@ -1480,7 +1480,7 @@ get_redo_description (CajaUndoStackActionData * action)
           }
         }
           break;
-        case CAJA_UNDOSTACK_RESTOREFROMTRASH:
+        case BAUL_UNDOSTACK_RESTOREFROMTRASH:
         {
           if (count != 1) {
             description =
@@ -1492,7 +1492,7 @@ get_redo_description (CajaUndoStackActionData * action)
           }
         }
           break;
-        case CAJA_UNDOSTACK_CREATELINK:
+        case BAUL_UNDOSTACK_CREATELINK:
         {
           if (count != 1) {
             description =
@@ -1504,7 +1504,7 @@ get_redo_description (CajaUndoStackActionData * action)
           }
         }
           break;
-        case CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS:
+        case BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS:
         {
           char *name = g_file_get_path (action->dest_dir);
           description =
@@ -1513,14 +1513,14 @@ get_redo_description (CajaUndoStackActionData * action)
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_SETPERMISSIONS:
+        case BAUL_UNDOSTACK_SETPERMISSIONS:
         {
           char *name = get_uri_basename (action->target_uri);
           description = g_strdup_printf (_("Set permissions of '%s'"), name);
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_CHANGEGROUP:
+        case BAUL_UNDOSTACK_CHANGEGROUP:
         {
           char *name = get_uri_basename (action->target_uri);
           description =
@@ -1530,7 +1530,7 @@ get_redo_description (CajaUndoStackActionData * action)
           g_free (name);
         }
           break;
-        case CAJA_UNDOSTACK_CHANGEOWNER:
+        case BAUL_UNDOSTACK_CHANGEOWNER:
         {
           char *name = get_uri_basename (action->target_uri);
           description =
@@ -1565,74 +1565,74 @@ get_undo_label (CajaUndoStackActionData * action)
     if (action->undo_label == NULL) {
       count = action->count;
       switch (action->type) {
-        case CAJA_UNDOSTACK_COPY:
+        case BAUL_UNDOSTACK_COPY:
           label = g_strdup_printf (ngettext
               ("_Undo copy of %d item",
                   "_Undo copy of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_DUPLICATE:
+        case BAUL_UNDOSTACK_DUPLICATE:
           label = g_strdup_printf (ngettext
               ("_Undo duplicate of %d item",
                   "_Undo duplicate of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_MOVE:
+        case BAUL_UNDOSTACK_MOVE:
           label = g_strdup_printf (ngettext
               ("_Undo move of %d item",
                   "_Undo move of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_RENAME:
+        case BAUL_UNDOSTACK_RENAME:
           label = g_strdup_printf (ngettext
               ("_Undo rename of %d item",
                   "_Undo rename of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_CREATEEMPTYFILE:
+        case BAUL_UNDOSTACK_CREATEEMPTYFILE:
           label = g_strdup_printf (_("_Undo creation of an empty file"));
           break;
-        case CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE:
+        case BAUL_UNDOSTACK_CREATEFILEFROMTEMPLATE:
           label = g_strdup_printf (_("_Undo creation of a file from template"));
           break;
-        case CAJA_UNDOSTACK_CREATEFOLDER:
+        case BAUL_UNDOSTACK_CREATEFOLDER:
           label = g_strdup_printf (ngettext
               ("_Undo creation of %d folder",
                   "_Undo creation of %d folders", count), count);
           break;
-        case CAJA_UNDOSTACK_MOVETOTRASH:
+        case BAUL_UNDOSTACK_MOVETOTRASH:
           label = g_strdup_printf (ngettext
               ("_Undo move to trash of %d item",
                   "_Undo move to trash of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_RESTOREFROMTRASH:
+        case BAUL_UNDOSTACK_RESTOREFROMTRASH:
           label = g_strdup_printf (ngettext
               ("_Undo restore from trash of %d item",
                   "_Undo restore from trash of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_CREATELINK:
+        case BAUL_UNDOSTACK_CREATELINK:
           label = g_strdup_printf (ngettext
               ("_Undo create link to %d item",
                   "_Undo create link to %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_DELETE:
+        case BAUL_UNDOSTACK_DELETE:
           label = g_strdup_printf (ngettext
               ("_Undo delete of %d item",
                   "_Undo delete of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS:
+        case BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS:
           label = g_strdup_printf (ngettext
               ("Undo recursive change permissions of %d item",
                   "Undo recursive change permissions of %d items",
                   count), count);
           break;
-        case CAJA_UNDOSTACK_SETPERMISSIONS:
+        case BAUL_UNDOSTACK_SETPERMISSIONS:
           label = g_strdup_printf (ngettext
               ("Undo change permissions of %d item",
                   "Undo change permissions of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_CHANGEGROUP:
+        case BAUL_UNDOSTACK_CHANGEGROUP:
           label = g_strdup_printf (ngettext
               ("Undo change group of %d item",
                   "Undo change group of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_CHANGEOWNER:
+        case BAUL_UNDOSTACK_CHANGEOWNER:
           label = g_strdup_printf (ngettext
               ("Undo change owner of %d item",
                   "Undo change owner of %d items", count), count);
@@ -1660,74 +1660,74 @@ get_redo_label (CajaUndoStackActionData * action)
     if (action->redo_label == NULL) {
       count = action->count;
       switch (action->type) {
-        case CAJA_UNDOSTACK_COPY:
+        case BAUL_UNDOSTACK_COPY:
           label = g_strdup_printf (ngettext
               ("_Redo copy of %d item",
                   "_Redo copy of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_DUPLICATE:
+        case BAUL_UNDOSTACK_DUPLICATE:
           label = g_strdup_printf (ngettext
               ("_Redo duplicate of %d item",
                   "_Redo duplicate of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_MOVE:
+        case BAUL_UNDOSTACK_MOVE:
           label = g_strdup_printf (ngettext
               ("_Redo move of %d item",
                   "_Redo move of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_RENAME:
+        case BAUL_UNDOSTACK_RENAME:
           label = g_strdup_printf (ngettext
               ("_Redo rename of %d item",
                   "_Redo rename of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_CREATEEMPTYFILE:
+        case BAUL_UNDOSTACK_CREATEEMPTYFILE:
           label = g_strdup_printf (_("_Redo creation of an empty file"));
           break;
-        case CAJA_UNDOSTACK_CREATEFILEFROMTEMPLATE:
+        case BAUL_UNDOSTACK_CREATEFILEFROMTEMPLATE:
           label = g_strdup_printf (_("_Redo creation of a file from template"));
           break;
-        case CAJA_UNDOSTACK_CREATEFOLDER:
+        case BAUL_UNDOSTACK_CREATEFOLDER:
           label = g_strdup_printf (ngettext
               ("_Redo creation of %d folder",
                   "_Redo creation of %d folders", count), count);
           break;
-        case CAJA_UNDOSTACK_MOVETOTRASH:
+        case BAUL_UNDOSTACK_MOVETOTRASH:
           label = g_strdup_printf (ngettext
               ("_Redo move to trash of %d item",
                   "_Redo move to trash of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_RESTOREFROMTRASH:
+        case BAUL_UNDOSTACK_RESTOREFROMTRASH:
           label = g_strdup_printf (ngettext
               ("_Redo restore from trash of %d item",
                   "_Redo restore from trash of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_CREATELINK:
+        case BAUL_UNDOSTACK_CREATELINK:
           label = g_strdup_printf (ngettext
               ("_Redo create link to %d item",
                   "_Redo create link to %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_DELETE:
+        case BAUL_UNDOSTACK_DELETE:
           label = g_strdup_printf (ngettext
               ("_Redo delete of %d item",
                   "_Redo delete of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_RECURSIVESETPERMISSIONS:
+        case BAUL_UNDOSTACK_RECURSIVESETPERMISSIONS:
           label = g_strdup_printf (ngettext
               ("Redo recursive change permissions of %d item",
                   "Redo recursive change permissions of %d items",
                   count), count);
           break;
-        case CAJA_UNDOSTACK_SETPERMISSIONS:
+        case BAUL_UNDOSTACK_SETPERMISSIONS:
           label = g_strdup_printf (ngettext
               ("Redo change permissions of %d item",
                   "Redo change permissions of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_CHANGEGROUP:
+        case BAUL_UNDOSTACK_CHANGEGROUP:
           label = g_strdup_printf (ngettext
               ("Redo change group of %d item",
                   "Redo change group of %d items", count), count);
           break;
-        case CAJA_UNDOSTACK_CHANGEOWNER:
+        case BAUL_UNDOSTACK_CHANGEOWNER:
           label = g_strdup_printf (ngettext
               ("Redo change owner of %d item",
                   "Redo change owner of %d items", count), count);

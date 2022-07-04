@@ -27,8 +27,8 @@
 
 
 
-#ifndef CAJA_CUSTOMIZATION_DATA_H
-#define CAJA_CUSTOMIZATION_DATA_H
+#ifndef BAUL_CUSTOMIZATION_DATA_H
+#define BAUL_CUSTOMIZATION_DATA_H
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
@@ -65,4 +65,4 @@ GdkPixbuf*                 baul_customization_make_pattern_chit                 
         gboolean dragging,
         gboolean is_reset);
 
-#endif /* CAJA_CUSTOMIZATION_DATA_H */
+#endif /* BAUL_CUSTOMIZATION_DATA_H */

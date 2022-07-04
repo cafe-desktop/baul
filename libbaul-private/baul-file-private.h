@@ -22,8 +22,8 @@
    Author: Darin Adler <darin@bentspoon.com>
 */
 
-#ifndef CAJA_FILE_PRIVATE_H
-#define CAJA_FILE_PRIVATE_H
+#ifndef BAUL_FILE_PRIVATE_H
+#define BAUL_FILE_PRIVATE_H
 
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-string.h>
@@ -33,15 +33,15 @@
 #include "baul-monitor.h"
 #include "baul-undostack-manager.h"
 
-#define CAJA_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_CHARACTERS_PER_LINE 80
-#define CAJA_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_LINES               24
-#define CAJA_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_BYTES               10000
+#define BAUL_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_CHARACTERS_PER_LINE 80
+#define BAUL_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_LINES               24
+#define BAUL_FILE_LARGE_TOP_LEFT_TEXT_MAXIMUM_BYTES               10000
 
-#define CAJA_FILE_TOP_LEFT_TEXT_MAXIMUM_CHARACTERS_PER_LINE 10
-#define CAJA_FILE_TOP_LEFT_TEXT_MAXIMUM_LINES               5
-#define CAJA_FILE_TOP_LEFT_TEXT_MAXIMUM_BYTES               1024
+#define BAUL_FILE_TOP_LEFT_TEXT_MAXIMUM_CHARACTERS_PER_LINE 10
+#define BAUL_FILE_TOP_LEFT_TEXT_MAXIMUM_LINES               5
+#define BAUL_FILE_TOP_LEFT_TEXT_MAXIMUM_BYTES               1024
 
-#define CAJA_FILE_DEFAULT_ATTRIBUTES				\
+#define BAUL_FILE_DEFAULT_ATTRIBUTES				\
 	"standard::*,access::*,mountable::*,time::*,unix::*,owner::*,selinux::*,thumbnail::*,id::filesystem,trash::orig-path,trash::deletion-date,metadata::*"
 
 /* These are in the typical sort order. Known things come first, then

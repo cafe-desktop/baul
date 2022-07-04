@@ -22,8 +22,8 @@
    Author: Darin Adler <darin@bentspoon.com>
 */
 
-#ifndef CAJA_FILE_ATTRIBUTES_H
-#define CAJA_FILE_ATTRIBUTES_H
+#ifndef BAUL_FILE_ATTRIBUTES_H
+#define BAUL_FILE_ATTRIBUTES_H
 
 /* Names for CajaFile attributes. These are used when registering
  * interest in changes to the attributes or when waiting for them.
@@ -31,17 +31,17 @@
 
 typedef enum
 {
-    CAJA_FILE_ATTRIBUTE_INFO = 1 << 0, /* All standard info */
-    CAJA_FILE_ATTRIBUTE_LINK_INFO = 1 << 1, /* info from desktop links */
-    CAJA_FILE_ATTRIBUTE_DEEP_COUNTS = 1 << 2,
-    CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT = 1 << 3,
-    CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES = 1 << 4,
-    CAJA_FILE_ATTRIBUTE_TOP_LEFT_TEXT = 1 << 5,
-    CAJA_FILE_ATTRIBUTE_LARGE_TOP_LEFT_TEXT = 1 << 6,
-    CAJA_FILE_ATTRIBUTE_EXTENSION_INFO = 1 << 7,
-    CAJA_FILE_ATTRIBUTE_THUMBNAIL = 1 << 8,
-    CAJA_FILE_ATTRIBUTE_MOUNT = 1 << 9,
-    CAJA_FILE_ATTRIBUTE_FILESYSTEM_INFO = 1 << 10,
+    BAUL_FILE_ATTRIBUTE_INFO = 1 << 0, /* All standard info */
+    BAUL_FILE_ATTRIBUTE_LINK_INFO = 1 << 1, /* info from desktop links */
+    BAUL_FILE_ATTRIBUTE_DEEP_COUNTS = 1 << 2,
+    BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT = 1 << 3,
+    BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES = 1 << 4,
+    BAUL_FILE_ATTRIBUTE_TOP_LEFT_TEXT = 1 << 5,
+    BAUL_FILE_ATTRIBUTE_LARGE_TOP_LEFT_TEXT = 1 << 6,
+    BAUL_FILE_ATTRIBUTE_EXTENSION_INFO = 1 << 7,
+    BAUL_FILE_ATTRIBUTE_THUMBNAIL = 1 << 8,
+    BAUL_FILE_ATTRIBUTE_MOUNT = 1 << 9,
+    BAUL_FILE_ATTRIBUTE_FILESYSTEM_INFO = 1 << 10,
 } CajaFileAttributes;
 
-#endif /* CAJA_FILE_ATTRIBUTES_H */
+#endif /* BAUL_FILE_ATTRIBUTES_H */

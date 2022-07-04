@@ -145,7 +145,7 @@ baul_window_add_bookmark_for_current_location (CajaWindow *window)
     CajaWindowSlot *slot;
     CajaBookmarkList *list;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     slot = window->details->active_pane->active_slot;
     bookmark = slot->current_location_bookmark;
@@ -216,7 +216,7 @@ update_bookmarks (CajaWindow *window)
     CajaBookmarkList *bookmarks;
     CajaBookmark *bookmark = NULL;
 
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
     g_assert (window->details->bookmarks_merge_id == 0);
     g_assert (window->details->bookmarks_action_group == NULL);
 
@@ -227,7 +227,7 @@ update_bookmarks (CajaWindow *window)
 
     bookmarks = window->details->bookmark_list;
 
-    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
 
     window->details->bookmarks_merge_id = gtk_ui_manager_new_merge_id (ui_manager);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -253,9 +253,9 @@ update_bookmarks (CajaWindow *window)
         }
 
         baul_menus_append_bookmark_to_menu
-        (CAJA_WINDOW (window),
+        (BAUL_WINDOW (window),
          bookmark,
-         CAJA_WINDOW_GET_CLASS (window)->bookmarks_placeholder,
+         BAUL_WINDOW_GET_CLASS (window)->bookmarks_placeholder,
          "dynamic",
          index,
          window->details->bookmarks_action_group,
@@ -268,7 +268,7 @@ update_bookmarks (CajaWindow *window)
 static void
 refresh_bookmarks_menu (CajaWindow *window)
 {
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     remove_bookmarks_menu_items (window);
     update_bookmarks (window);
@@ -283,7 +283,7 @@ refresh_bookmarks_menu (CajaWindow *window)
 void
 baul_window_initialize_bookmarks_menu (CajaWindow *window)
 {
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     refresh_bookmarks_menu (window);
 

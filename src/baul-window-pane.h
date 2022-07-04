@@ -22,17 +22,17 @@
    Author: Holger Berndt <berndth@gmx.de>
 */
 
-#ifndef CAJA_WINDOW_PANE_H
-#define CAJA_WINDOW_PANE_H
+#ifndef BAUL_WINDOW_PANE_H
+#define BAUL_WINDOW_PANE_H
 
 #include "baul-window.h"
 
-#define CAJA_TYPE_WINDOW_PANE	 (baul_window_pane_get_type())
-#define CAJA_WINDOW_PANE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_WINDOW_PANE, CajaWindowPaneClass))
-#define CAJA_WINDOW_PANE(obj)	 (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW_PANE, CajaWindowPane))
-#define CAJA_IS_WINDOW_PANE(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW_PANE))
-#define CAJA_IS_WINDOW_PANE_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_WINDOW_PANE))
-#define CAJA_WINDOW_PANE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_WINDOW_PANE, CajaWindowPaneClass))
+#define BAUL_TYPE_WINDOW_PANE	 (baul_window_pane_get_type())
+#define BAUL_WINDOW_PANE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_WINDOW_PANE, CajaWindowPaneClass))
+#define BAUL_WINDOW_PANE(obj)	 (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_WINDOW_PANE, CajaWindowPane))
+#define BAUL_IS_WINDOW_PANE(obj)      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_WINDOW_PANE))
+#define BAUL_IS_WINDOW_PANE_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_WINDOW_PANE))
+#define BAUL_WINDOW_PANE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_WINDOW_PANE, CajaWindowPaneClass))
 
 typedef struct _CajaWindowPaneClass CajaWindowPaneClass;
 
@@ -94,4 +94,4 @@ void baul_window_pane_switch_to (CajaWindowPane *pane);
 void baul_window_pane_grab_focus (CajaWindowPane *pane);
 
 
-#endif /* CAJA_WINDOW_PANE_H */
+#endif /* BAUL_WINDOW_PANE_H */

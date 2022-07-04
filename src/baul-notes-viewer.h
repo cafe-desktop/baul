@@ -23,19 +23,19 @@
  *  Authors: Andy Hertzfeld <andy@eazel.com>
  *           Alexander Larsson <alexl@redhat.com>
  */
-#ifndef _CAJA_NOTES_VIEWER_H
-#define _CAJA_NOTES_VIEWER_H
+#ifndef _BAUL_NOTES_VIEWER_H
+#define _BAUL_NOTES_VIEWER_H
 
 #include <gtk/gtk.h>
 
 #include <libbaul-private/baul-view.h>
 #include <libbaul-private/baul-window-info.h>
 
-#define CAJA_NOTES_SIDEBAR_ID    "notes"
+#define BAUL_NOTES_SIDEBAR_ID    "notes"
 
-#define CAJA_TYPE_NOTES_VIEWER baul_notes_viewer_get_type()
-#define CAJA_NOTES_VIEWER(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NOTES_VIEWER, CajaNotesViewer))
+#define BAUL_TYPE_NOTES_VIEWER baul_notes_viewer_get_type()
+#define BAUL_NOTES_VIEWER(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NOTES_VIEWER, CajaNotesViewer))
 
 typedef struct _CajaNotesViewerDetails CajaNotesViewerDetails;
 

@@ -1,5 +1,5 @@
-#ifndef CAJA_ICON_INFO_H
-#define CAJA_ICON_INFO_H
+#ifndef BAUL_ICON_INFO_H
+#define BAUL_ICON_INFO_H
 
 #include <glib-object.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -13,17 +13,17 @@ extern "C" {
 
     /* Names for Caja's different zoom levels, from tiniest items to largest items */
     typedef enum {
-        CAJA_ZOOM_LEVEL_SMALLEST,
-        CAJA_ZOOM_LEVEL_SMALLER,
-        CAJA_ZOOM_LEVEL_SMALL,
-        CAJA_ZOOM_LEVEL_STANDARD,
-        CAJA_ZOOM_LEVEL_LARGE,
-        CAJA_ZOOM_LEVEL_LARGER,
-        CAJA_ZOOM_LEVEL_LARGEST
+        BAUL_ZOOM_LEVEL_SMALLEST,
+        BAUL_ZOOM_LEVEL_SMALLER,
+        BAUL_ZOOM_LEVEL_SMALL,
+        BAUL_ZOOM_LEVEL_STANDARD,
+        BAUL_ZOOM_LEVEL_LARGE,
+        BAUL_ZOOM_LEVEL_LARGER,
+        BAUL_ZOOM_LEVEL_LARGEST
     }
     CajaZoomLevel;
 
-#define CAJA_ZOOM_LEVEL_N_ENTRIES (CAJA_ZOOM_LEVEL_LARGEST + 1)
+#define BAUL_ZOOM_LEVEL_N_ENTRIES (BAUL_ZOOM_LEVEL_LARGEST + 1)
 
     /* Nominal icon sizes for each Caja zoom level.
      * This scheme assumes that icons are designed to
@@ -31,27 +31,27 @@ extern "C" {
      * be square. Since individual icons can be stretched,
      * each icon is not constrained to this nominal size.
      */
-#define CAJA_ICON_SIZE_SMALLEST	16
-#define CAJA_ICON_SIZE_SMALLER	24
-#define CAJA_ICON_SIZE_SMALL	32
-#define CAJA_ICON_SIZE_STANDARD	48
-#define CAJA_ICON_SIZE_LARGE	72
-#define CAJA_ICON_SIZE_LARGER	96
-#define CAJA_ICON_SIZE_LARGEST     192
+#define BAUL_ICON_SIZE_SMALLEST	16
+#define BAUL_ICON_SIZE_SMALLER	24
+#define BAUL_ICON_SIZE_SMALL	32
+#define BAUL_ICON_SIZE_STANDARD	48
+#define BAUL_ICON_SIZE_LARGE	72
+#define BAUL_ICON_SIZE_LARGER	96
+#define BAUL_ICON_SIZE_LARGEST     192
 
     /* Maximum size of an icon that the icon factory will ever produce */
-#define CAJA_ICON_MAXIMUM_SIZE     320
+#define BAUL_ICON_MAXIMUM_SIZE     320
 
     typedef struct _CajaIconInfo      CajaIconInfo;
     typedef struct _CajaIconInfoClass CajaIconInfoClass;
 
 
-#define CAJA_TYPE_ICON_INFO                 (baul_icon_info_get_type ())
-#define CAJA_ICON_INFO(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ICON_INFO, CajaIconInfo))
-#define CAJA_ICON_INFO_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_ICON_INFO, CajaIconInfoClass))
-#define CAJA_IS_ICON_INFO(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_ICON_INFO))
-#define CAJA_IS_ICON_INFO_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_ICON_INFO))
-#define CAJA_ICON_INFO_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_ICON_INFO, CajaIconInfoClass))
+#define BAUL_TYPE_ICON_INFO                 (baul_icon_info_get_type ())
+#define BAUL_ICON_INFO(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ICON_INFO, CajaIconInfo))
+#define BAUL_ICON_INFO_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ICON_INFO, CajaIconInfoClass))
+#define BAUL_IS_ICON_INFO(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_ICON_INFO))
+#define BAUL_IS_ICON_INFO_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_ICON_INFO))
+#define BAUL_ICON_INFO_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ICON_INFO, CajaIconInfoClass))
 
 
     GType    baul_icon_info_get_type (void) G_GNUC_CONST;
@@ -109,5 +109,5 @@ GIcon * baul_user_special_directory_get_gicon (GUserDirectory directory);
 }
 #endif
 
-#endif /* CAJA_ICON_INFO_H */
+#endif /* BAUL_ICON_INFO_H */
 

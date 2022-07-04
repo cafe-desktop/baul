@@ -22,24 +22,24 @@
    Authors: John Sullivan <sullivan@eazel.com>
 */
 
-#ifndef CAJA_BOOKMARK_H
-#define CAJA_BOOKMARK_H
+#ifndef BAUL_BOOKMARK_H
+#define BAUL_BOOKMARK_H
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 typedef struct CajaBookmark CajaBookmark;
 
-#define CAJA_TYPE_BOOKMARK baul_bookmark_get_type()
-#define CAJA_BOOKMARK(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_BOOKMARK, CajaBookmark))
-#define CAJA_BOOKMARK_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_BOOKMARK, CajaBookmarkClass))
-#define CAJA_IS_BOOKMARK(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_BOOKMARK))
-#define CAJA_IS_BOOKMARK_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_BOOKMARK))
-#define CAJA_BOOKMARK_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_BOOKMARK, CajaBookmarkClass))
+#define BAUL_TYPE_BOOKMARK baul_bookmark_get_type()
+#define BAUL_BOOKMARK(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_BOOKMARK, CajaBookmark))
+#define BAUL_BOOKMARK_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_BOOKMARK, CajaBookmarkClass))
+#define BAUL_IS_BOOKMARK(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_BOOKMARK))
+#define BAUL_IS_BOOKMARK_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_BOOKMARK))
+#define BAUL_BOOKMARK_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_BOOKMARK, CajaBookmarkClass))
 
 typedef struct CajaBookmarkDetails CajaBookmarkDetails;
 
@@ -97,4 +97,4 @@ cairo_surface_t *     baul_bookmark_get_surface            (CajaBookmark      *b
         GtkIconSize            icon_size);
 GtkWidget *           baul_bookmark_menu_item_new          (CajaBookmark      *bookmark);
 
-#endif /* CAJA_BOOKMARK_H */
+#endif /* BAUL_BOOKMARK_H */

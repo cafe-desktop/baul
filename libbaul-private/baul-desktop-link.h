@@ -22,24 +22,24 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_DESKTOP_LINK_H
-#define CAJA_DESKTOP_LINK_H
+#ifndef BAUL_DESKTOP_LINK_H
+#define BAUL_DESKTOP_LINK_H
 
 #include <gio/gio.h>
 
 #include "baul-file.h"
 
-#define CAJA_TYPE_DESKTOP_LINK baul_desktop_link_get_type()
-#define CAJA_DESKTOP_LINK(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_LINK, CajaDesktopLink))
-#define CAJA_DESKTOP_LINK_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_DESKTOP_LINK, CajaDesktopLinkClass))
-#define CAJA_IS_DESKTOP_LINK(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_DESKTOP_LINK))
-#define CAJA_IS_DESKTOP_LINK_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_DESKTOP_LINK))
-#define CAJA_DESKTOP_LINK_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_DESKTOP_LINK, CajaDesktopLinkClass))
+#define BAUL_TYPE_DESKTOP_LINK baul_desktop_link_get_type()
+#define BAUL_DESKTOP_LINK(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_LINK, CajaDesktopLink))
+#define BAUL_DESKTOP_LINK_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_LINK, CajaDesktopLinkClass))
+#define BAUL_IS_DESKTOP_LINK(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_DESKTOP_LINK))
+#define BAUL_IS_DESKTOP_LINK_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_DESKTOP_LINK))
+#define BAUL_DESKTOP_LINK_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_LINK, CajaDesktopLinkClass))
 
 typedef struct _CajaDesktopLinkPrivate CajaDesktopLinkPrivate;
 
@@ -56,11 +56,11 @@ typedef struct
 
 typedef enum
 {
-    CAJA_DESKTOP_LINK_HOME,
-    CAJA_DESKTOP_LINK_COMPUTER,
-    CAJA_DESKTOP_LINK_TRASH,
-    CAJA_DESKTOP_LINK_MOUNT,
-    CAJA_DESKTOP_LINK_NETWORK
+    BAUL_DESKTOP_LINK_HOME,
+    BAUL_DESKTOP_LINK_COMPUTER,
+    BAUL_DESKTOP_LINK_TRASH,
+    BAUL_DESKTOP_LINK_MOUNT,
+    BAUL_DESKTOP_LINK_NETWORK
 } CajaDesktopLinkType;
 
 GType   baul_desktop_link_get_type (void);
@@ -82,4 +82,4 @@ gboolean                baul_desktop_link_rename                  (CajaDesktopLi
         const char              *name);
 
 
-#endif /* CAJA_DESKTOP_LINK_H */
+#endif /* BAUL_DESKTOP_LINK_H */

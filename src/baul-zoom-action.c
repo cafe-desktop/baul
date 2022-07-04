@@ -67,7 +67,7 @@ zoom_changed_callback (CajaWindow *window,
         gtk_widget_show (zoom_control);
         if (can_zoom)
         {
-            baul_zoom_control_set_zoom_level (CAJA_ZOOM_CONTROL (zoom_control),
+            baul_zoom_control_set_zoom_level (BAUL_ZOOM_CONTROL (zoom_control),
                                               zoom_level);
         }
     }
@@ -84,7 +84,7 @@ connect_proxy (GtkAction *action,
     if (GTK_IS_TOOL_ITEM (proxy))
     {
         GtkToolItem *item = GTK_TOOL_ITEM (proxy);
-        CajaZoomAction *zaction = CAJA_ZOOM_ACTION (action);
+        CajaZoomAction *zaction = BAUL_ZOOM_ACTION (action);
         CajaNavigationWindow *window = zaction->priv->window;
         GtkWidget *zoom_control;
 
@@ -122,7 +122,7 @@ disconnect_proxy (GtkAction *action,
     if (GTK_IS_TOOL_ITEM (proxy))
     {
         GtkToolItem *item = GTK_TOOL_ITEM (proxy);
-        CajaZoomAction *zaction = CAJA_ZOOM_ACTION (action);
+        CajaZoomAction *zaction = BAUL_ZOOM_ACTION (action);
         CajaNavigationWindow *window = zaction->priv->window;
         GtkWidget *child;
 
@@ -151,12 +151,12 @@ baul_zoom_action_set_property (GObject *object,
 {
     CajaZoomAction *zoom;
 
-    zoom = CAJA_ZOOM_ACTION (object);
+    zoom = BAUL_ZOOM_ACTION (object);
 
     switch (prop_id)
     {
     case PROP_WINDOW:
-        zoom->priv->window = CAJA_NAVIGATION_WINDOW (g_value_get_object (value));
+        zoom->priv->window = BAUL_NAVIGATION_WINDOW (g_value_get_object (value));
         break;
     }
 }
@@ -169,7 +169,7 @@ baul_zoom_action_get_property (GObject *object,
 {
     CajaZoomAction *zoom;
 
-    zoom = CAJA_ZOOM_ACTION (object);
+    zoom = BAUL_ZOOM_ACTION (object);
 
     switch (prop_id)
     {

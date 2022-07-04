@@ -22,22 +22,22 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_CLIPBOARD_MONITOR_H
-#define CAJA_CLIPBOARD_MONITOR_H
+#ifndef BAUL_CLIPBOARD_MONITOR_H
+#define BAUL_CLIPBOARD_MONITOR_H
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_CLIPBOARD_MONITOR baul_clipboard_monitor_get_type()
-#define CAJA_CLIPBOARD_MONITOR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitor))
-#define CAJA_CLIPBOARD_MONITOR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitorClass))
-#define CAJA_IS_CLIPBOARD_MONITOR(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_CLIPBOARD_MONITOR))
-#define CAJA_IS_CLIPBOARD_MONITOR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_CLIPBOARD_MONITOR))
-#define CAJA_CLIPBOARD_MONITOR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitorClass))
+#define BAUL_TYPE_CLIPBOARD_MONITOR baul_clipboard_monitor_get_type()
+#define BAUL_CLIPBOARD_MONITOR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitor))
+#define BAUL_CLIPBOARD_MONITOR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitorClass))
+#define BAUL_IS_CLIPBOARD_MONITOR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_CLIPBOARD_MONITOR))
+#define BAUL_IS_CLIPBOARD_MONITOR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_CLIPBOARD_MONITOR))
+#define BAUL_CLIPBOARD_MONITOR_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_CLIPBOARD_MONITOR, CajaClipboardMonitorClass))
 
 typedef struct _CajaClipboardMonitorPrivate CajaClipboardMonitorPrivate;
 typedef struct CajaClipboardInfo CajaClipboardInfo;
@@ -81,5 +81,5 @@ void baul_get_clipboard_callback   (GtkClipboard     *clipboard,
 
 
 
-#endif /* CAJA_CLIPBOARD_MONITOR_H */
+#endif /* BAUL_CLIPBOARD_MONITOR_H */
 

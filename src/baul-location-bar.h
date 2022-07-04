@@ -27,8 +27,8 @@
 /* baul-location-bar.h - Location bar for Caja
  */
 
-#ifndef CAJA_LOCATION_BAR_H
-#define CAJA_LOCATION_BAR_H
+#ifndef BAUL_LOCATION_BAR_H
+#define BAUL_LOCATION_BAR_H
 
 #include <gtk/gtk.h>
 
@@ -37,17 +37,17 @@
 #include "baul-navigation-window.h"
 #include "baul-navigation-window-pane.h"
 
-#define CAJA_TYPE_LOCATION_BAR baul_location_bar_get_type()
-#define CAJA_LOCATION_BAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_LOCATION_BAR, CajaLocationBar))
-#define CAJA_LOCATION_BAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_LOCATION_BAR, CajaLocationBarClass))
-#define CAJA_IS_LOCATION_BAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_LOCATION_BAR))
-#define CAJA_IS_LOCATION_BAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_LOCATION_BAR))
-#define CAJA_LOCATION_BAR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_LOCATION_BAR, CajaLocationBarClass))
+#define BAUL_TYPE_LOCATION_BAR baul_location_bar_get_type()
+#define BAUL_LOCATION_BAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_LOCATION_BAR, CajaLocationBar))
+#define BAUL_LOCATION_BAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_LOCATION_BAR, CajaLocationBarClass))
+#define BAUL_IS_LOCATION_BAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_LOCATION_BAR))
+#define BAUL_IS_LOCATION_BAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_LOCATION_BAR))
+#define BAUL_LOCATION_BAR_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_LOCATION_BAR, CajaLocationBarClass))
 
 typedef struct _CajaLocationBarPrivate CajaLocationBarPrivate;
 
@@ -75,4 +75,4 @@ void    baul_location_bar_activate         (CajaLocationBar *bar);
 void    baul_location_bar_set_location     (CajaLocationBar *bar,
                                             const char      *location);
 
-#endif /* CAJA_LOCATION_BAR_H */
+#endif /* BAUL_LOCATION_BAR_H */

@@ -18,10 +18,10 @@ AM_CPPFLAGS = \
 	$(EXEMPI_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	-DLIBDIR=\""$(libdir)"\" \
-	-DCAJA_DATADIR=\""$(datadir)/baul"\" \
+	-DBAUL_DATADIR=\""$(datadir)/baul"\" \
 	-DMATELOCALEDIR=\""$(datadir)/locale"\" \
 	-DUIDIR=\""$(datadir)/baul/ui"\" \
-	-DCAJA_PIXMAPDIR=\""$(datadir)/pixmaps/baul"\" \
+	-DBAUL_PIXMAPDIR=\""$(datadir)/pixmaps/baul"\" \
 	-DPREFIX=\""$(prefix)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
 	-DVERSION="\"$(VERSION)\"" \

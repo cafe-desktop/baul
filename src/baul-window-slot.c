@@ -42,7 +42,7 @@ static void baul_window_slot_info_iface_init (CajaWindowSlotInfoIface *iface);
 G_DEFINE_TYPE_WITH_CODE (CajaWindowSlot,
                          baul_window_slot,
                          G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_WINDOW_SLOT_INFO,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_WINDOW_SLOT_INFO,
                                  baul_window_slot_info_iface_init))
 
 #define parent_class baul_window_slot_parent_class
@@ -56,9 +56,9 @@ query_editor_changed_callback (CajaSearchBar *bar,
     CajaDirectory *directory;
 
     directory = baul_directory_get_for_file (slot->viewed_file);
-    g_assert (CAJA_IS_SEARCH_DIRECTORY (directory));
+    g_assert (BAUL_IS_SEARCH_DIRECTORY (directory));
 
-    baul_search_directory_set_query (CAJA_SEARCH_DIRECTORY (directory),
+    baul_search_directory_set_query (BAUL_SEARCH_DIRECTORY (directory),
                                      query);
     if (reload)
     {
@@ -75,18 +75,18 @@ real_update_query_editor (CajaWindowSlot *slot)
 
     directory = baul_directory_get (slot->location);
 
-    if (CAJA_IS_SEARCH_DIRECTORY (directory))
+    if (BAUL_IS_SEARCH_DIRECTORY (directory))
     {
         GtkWidget *query_editor;
         CajaQuery *query;
         CajaSearchDirectory *search_directory;
 
-        search_directory = CAJA_SEARCH_DIRECTORY (directory);
+        search_directory = BAUL_SEARCH_DIRECTORY (directory);
 
         query_editor = baul_query_editor_new (baul_search_directory_is_saved_search (search_directory),
                                               baul_search_directory_is_indexed (search_directory));
 
-        slot->query_editor = CAJA_QUERY_EDITOR (query_editor);
+        slot->query_editor = BAUL_QUERY_EDITOR (query_editor);
 
         baul_window_slot_add_extra_location_widget (slot, query_editor);
         gtk_widget_show (query_editor);
@@ -96,13 +96,13 @@ real_update_query_editor (CajaWindowSlot *slot)
         query = baul_search_directory_get_query (search_directory);
         if (query != NULL)
         {
-            baul_query_editor_set_query (CAJA_QUERY_EDITOR (query_editor),
+            baul_query_editor_set_query (BAUL_QUERY_EDITOR (query_editor),
                                          query);
             g_object_unref (query);
         }
         else
         {
-            baul_query_editor_set_default_query (CAJA_QUERY_EDITOR (query_editor));
+            baul_query_editor_set_default_query (BAUL_QUERY_EDITOR (query_editor));
         }
     }
 
@@ -138,14 +138,14 @@ baul_window_slot_active (CajaWindowSlot *slot)
     CajaWindow *window;
     CajaWindowPane *pane;
 
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
-    pane = CAJA_WINDOW_PANE (slot->pane);
-    window = CAJA_WINDOW (slot->pane->window);
+    pane = BAUL_WINDOW_PANE (slot->pane);
+    window = BAUL_WINDOW (slot->pane->window);
     g_assert (g_list_find (pane->slots, slot) != NULL);
     g_assert (slot == window->details->active_pane->active_slot);
 
-    EEL_CALL_METHOD (CAJA_WINDOW_SLOT_CLASS, slot,
+    EEL_CALL_METHOD (BAUL_WINDOW_SLOT_CLASS, slot,
                      active, (slot));
 }
 
@@ -154,7 +154,7 @@ real_inactive (CajaWindowSlot *slot)
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (slot->pane->window);
+    window = BAUL_WINDOW (slot->pane->window);
     g_assert (slot == window->details->active_pane->active_slot);
 }
 
@@ -164,15 +164,15 @@ baul_window_slot_inactive (CajaWindowSlot *slot)
     CajaWindow *window;
     CajaWindowPane *pane;
 
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
-    pane = CAJA_WINDOW_PANE (slot->pane);
-    window = CAJA_WINDOW (pane->window);
+    pane = BAUL_WINDOW_PANE (slot->pane);
+    window = BAUL_WINDOW (pane->window);
 
     g_assert (g_list_find (pane->slots, slot) != NULL);
     g_assert (slot == window->details->active_pane->active_slot);
 
-    EEL_CALL_METHOD (CAJA_WINDOW_SLOT_CLASS, slot,
+    EEL_CALL_METHOD (BAUL_WINDOW_SLOT_CLASS, slot,
                      inactive, (slot));
 }
 
@@ -222,7 +222,7 @@ baul_window_slot_class_init (CajaWindowSlotClass *class)
 static int
 baul_window_slot_get_selection_count (CajaWindowSlot *slot)
 {
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
     if (slot->content_view != NULL)
     {
@@ -235,7 +235,7 @@ GFile *
 baul_window_slot_get_location (CajaWindowSlot *slot)
 {
     g_assert (slot != NULL);
-    g_assert (CAJA_IS_WINDOW (slot->pane->window));
+    g_assert (BAUL_IS_WINDOW (slot->pane->window));
 
     if (slot->location != NULL)
     {
@@ -247,7 +247,7 @@ baul_window_slot_get_location (CajaWindowSlot *slot)
 char *
 baul_window_slot_get_location_uri (CajaWindowSlotInfo *slot)
 {
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
     if (slot->location)
     {
@@ -259,8 +259,8 @@ baul_window_slot_get_location_uri (CajaWindowSlotInfo *slot)
 static void
 baul_window_slot_make_hosting_pane_active (CajaWindowSlot *slot)
 {
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
-    g_assert (CAJA_IS_WINDOW_PANE (slot->pane));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_PANE (slot->pane));
 
     baul_window_set_active_slot (slot->pane->window, slot);
 }
@@ -270,7 +270,7 @@ baul_window_slot_get_title (CajaWindowSlot *slot)
 {
     char *title;
 
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
     title = NULL;
     if (slot->new_content_view != NULL)
@@ -293,7 +293,7 @@ baul_window_slot_get_title (CajaWindowSlot *slot)
 static CajaWindow *
 baul_window_slot_get_window (CajaWindowSlot *slot)
 {
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
     return slot->pane->window;
 }
 
@@ -310,9 +310,9 @@ baul_window_slot_set_title (CajaWindowSlot *slot,
     CajaWindow *window;
     gboolean changed;
 
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
-    window = CAJA_WINDOW (slot->pane->window);
+    window = BAUL_WINDOW (slot->pane->window);
 
     changed = FALSE;
 
@@ -373,9 +373,9 @@ baul_window_slot_update_icon (CajaWindowSlot *slot)
 
     window = slot->pane->window;
 
-    g_return_if_fail (CAJA_IS_WINDOW (window));
+    g_return_if_fail (BAUL_IS_WINDOW (window));
 
-    info = EEL_CALL_METHOD_WITH_RETURN_VALUE (CAJA_WINDOW_CLASS, window,
+    info = EEL_CALL_METHOD_WITH_RETURN_VALUE (BAUL_WINDOW_CLASS, window,
             get_icon, (window, slot));
 
     if (slot != slot->pane->active_slot)
@@ -472,7 +472,7 @@ baul_window_slot_set_content_view_widget (CajaWindowSlot *slot,
     GtkWidget *widget;
 
     window = slot->pane->window;
-    g_assert (CAJA_IS_WINDOW (window));
+    g_assert (BAUL_IS_WINDOW (window));
 
     if (slot->content_view != NULL)
     {
@@ -507,11 +507,11 @@ baul_window_slot_set_allow_stop (CajaWindowSlot *slot,
 {
     CajaWindow *window;
 
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
     slot->allow_stop = allow;
 
-    window = CAJA_WINDOW (slot->pane->window);
+    window = BAUL_WINDOW (slot->pane->window);
     baul_window_sync_allow_stop (window, slot);
 }
 
@@ -521,12 +521,12 @@ baul_window_slot_set_status (CajaWindowSlot *slot,
 {
     CajaWindow *window;
 
-    g_assert (CAJA_IS_WINDOW_SLOT (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT (slot));
 
     g_free (slot->status_text);
     slot->status_text = g_strdup (status);
 
-    window = CAJA_WINDOW (slot->pane->window);
+    window = BAUL_WINDOW (slot->pane->window);
     if (slot == window->details->active_pane->active_slot)
     {
         baul_window_sync_status (window);
@@ -549,7 +549,7 @@ baul_window_slot_update_query_editor (CajaWindowSlot *slot)
         g_assert (slot->query_editor == NULL);
     }
 
-    EEL_CALL_METHOD (CAJA_WINDOW_SLOT_CLASS, slot,
+    EEL_CALL_METHOD (BAUL_WINDOW_SLOT_CLASS, slot,
                      update_query_editor, (slot));
 
     eel_add_weak_pointer (&slot->query_editor);
@@ -587,7 +587,7 @@ void
 baul_window_slot_add_current_location_to_history_list (CajaWindowSlot *slot)
 {
 
-    if ((slot->pane->window == NULL || !CAJA_IS_DESKTOP_WINDOW (slot->pane->window)) &&
+    if ((slot->pane->window == NULL || !BAUL_IS_DESKTOP_WINDOW (slot->pane->window)) &&
             baul_add_bookmark_to_history_list (slot->current_location_bookmark))
     {
         baul_send_history_list_changed ();
@@ -600,7 +600,7 @@ real_slot_info_get_current_location (CajaWindowSlotInfo *info)
 {
     CajaWindowSlot *slot;
 
-    slot = CAJA_WINDOW_SLOT (info);
+    slot = BAUL_WINDOW_SLOT (info);
 
     if (slot->pending_location != NULL)
     {
@@ -621,7 +621,7 @@ real_slot_info_get_current_view (CajaWindowSlotInfo *info)
 {
     CajaWindowSlot *slot;
 
-    slot = CAJA_WINDOW_SLOT (info);
+    slot = BAUL_WINDOW_SLOT (info);
 
     if (slot->content_view != NULL)
     {
@@ -641,7 +641,7 @@ baul_window_slot_dispose (GObject *object)
     CajaWindowSlot *slot;
     GtkWidget *widget;
 
-    slot = CAJA_WINDOW_SLOT (object);
+    slot = BAUL_WINDOW_SLOT (object);
 
     if (slot->content_view)
     {

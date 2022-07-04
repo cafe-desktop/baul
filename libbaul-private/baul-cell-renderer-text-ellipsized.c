@@ -70,5 +70,5 @@ baul_cell_renderer_text_ellipsized_class_init (CajaCellRendererTextEllipsizedCla
 GtkCellRenderer *
 baul_cell_renderer_text_ellipsized_new (void)
 {
-    return g_object_new (CAJA_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, NULL);
+    return g_object_new (BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, NULL);
 }

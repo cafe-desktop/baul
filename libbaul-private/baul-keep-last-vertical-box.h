@@ -23,22 +23,22 @@
    Author: John Sullivan <sullivan@eazel.com>,
  */
 
-#ifndef CAJA_KEEP_LAST_VERTICAL_BOX_H
-#define CAJA_KEEP_LAST_VERTICAL_BOX_H
+#ifndef BAUL_KEEP_LAST_VERTICAL_BOX_H
+#define BAUL_KEEP_LAST_VERTICAL_BOX_H
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_KEEP_LAST_VERTICAL_BOX baul_keep_last_vertical_box_get_type()
-#define CAJA_KEEP_LAST_VERTICAL_BOX(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBox))
-#define CAJA_KEEP_LAST_VERTICAL_BOX_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBoxClass))
-#define CAJA_IS_KEEP_LAST_VERTICAL_BOX(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_KEEP_LAST_VERTICAL_BOX))
-#define CAJA_IS_KEEP_LAST_VERTICAL_BOX_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_KEEP_LAST_VERTICAL_BOX))
-#define CAJA_KEEP_LAST_VERTICAL_BOX_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBoxClass))
+#define BAUL_TYPE_KEEP_LAST_VERTICAL_BOX baul_keep_last_vertical_box_get_type()
+#define BAUL_KEEP_LAST_VERTICAL_BOX(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBox))
+#define BAUL_KEEP_LAST_VERTICAL_BOX_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBoxClass))
+#define BAUL_IS_KEEP_LAST_VERTICAL_BOX(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX))
+#define BAUL_IS_KEEP_LAST_VERTICAL_BOX_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX))
+#define BAUL_KEEP_LAST_VERTICAL_BOX_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_KEEP_LAST_VERTICAL_BOX, CajaKeepLastVerticalBoxClass))
 
 typedef struct CajaKeepLastVerticalBox CajaKeepLastVerticalBox;
 typedef struct CajaKeepLastVerticalBoxClass CajaKeepLastVerticalBoxClass;
@@ -56,4 +56,4 @@ struct CajaKeepLastVerticalBoxClass
 GType      baul_keep_last_vertical_box_get_type  (void);
 GtkWidget *baul_keep_last_vertical_box_new       (gint spacing);
 
-#endif /* CAJA_KEEP_LAST_VERTICAL_BOX_H */
+#endif /* BAUL_KEEP_LAST_VERTICAL_BOX_H */

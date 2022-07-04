@@ -23,8 +23,8 @@
    Author: John Sullivan <sullivan@eazel.com>
 */
 
-#ifndef CAJA_PROGRAM_CHOOSING_H
-#define CAJA_PROGRAM_CHOOSING_H
+#ifndef BAUL_PROGRAM_CHOOSING_H
+#define BAUL_PROGRAM_CHOOSING_H
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
@@ -55,4 +55,4 @@ void baul_launch_desktop_file		 (GdkScreen                         *screen,
                                       const GList                       *parameter_uris,
                                       GtkWindow                         *parent_window);
 
-#endif /* CAJA_PROGRAM_CHOOSING_H */
+#endif /* BAUL_PROGRAM_CHOOSING_H */

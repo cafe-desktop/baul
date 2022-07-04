@@ -24,19 +24,19 @@
  *           Darin Adler <darin@bentspoon.com>
  *
  */
-#ifndef _CAJA_HISTORY_SIDEBAR_H
-#define _CAJA_HISTORY_SIDEBAR_H
+#ifndef _BAUL_HISTORY_SIDEBAR_H
+#define _BAUL_HISTORY_SIDEBAR_H
 
 #include <gtk/gtk.h>
 
 #include <libbaul-private/baul-view.h>
 #include <libbaul-private/baul-window-info.h>
 
-#define CAJA_HISTORY_SIDEBAR_ID    "history"
+#define BAUL_HISTORY_SIDEBAR_ID    "history"
 
-#define CAJA_TYPE_HISTORY_SIDEBAR baul_history_sidebar_get_type()
-#define CAJA_HISTORY_SIDEBAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_HISTORY_SIDEBAR, CajaHistorySidebar))
+#define BAUL_TYPE_HISTORY_SIDEBAR baul_history_sidebar_get_type()
+#define BAUL_HISTORY_SIDEBAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_HISTORY_SIDEBAR, CajaHistorySidebar))
 
 typedef struct
 {

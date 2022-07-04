@@ -26,8 +26,8 @@
  * have configuration screens (this is particularly important for open-terminal)
  */
 
-#ifndef CAJA_CONFIGURABLE_H
-#define CAJA_CONFIGURABLE_H
+#ifndef BAUL_CONFIGURABLE_H
+#define BAUL_CONFIGURABLE_H
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -37,10 +37,10 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_CONFIGURABLE           (baul_configurable_get_type ())
-#define CAJA_CONFIGURABLE(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_CONFIGURABLE, CajaConfigurable))
-#define CAJA_IS_CONFIGURABLE(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_CONFIGURABLE))
-#define CAJA_CONFIGURABLE_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_CONFIGURABLE, CajaConfigurableIface))
+#define BAUL_TYPE_CONFIGURABLE           (baul_configurable_get_type ())
+#define BAUL_CONFIGURABLE(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_CONFIGURABLE, CajaConfigurable))
+#define BAUL_IS_CONFIGURABLE(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_CONFIGURABLE))
+#define BAUL_CONFIGURABLE_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_CONFIGURABLE, CajaConfigurableIface))
 
 typedef struct _CajaConfigurable       CajaConfigurable;
 typedef struct _CajaConfigurableIface  CajaConfigurableIface;

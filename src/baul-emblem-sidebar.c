@@ -112,11 +112,11 @@ typedef struct
 } CajaEmblemSidebarProviderClass;
 
 G_DEFINE_TYPE_WITH_CODE (CajaEmblemSidebar, baul_emblem_sidebar, GTK_TYPE_BOX,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_SIDEBAR,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_emblem_sidebar_iface_init));
 
 G_DEFINE_TYPE_WITH_CODE (CajaEmblemSidebarProvider, baul_emblem_sidebar_provider, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_SIDEBAR_PROVIDER,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR_PROVIDER,
                                  sidebar_provider_iface_init));
 
 static void
@@ -458,9 +458,9 @@ create_emblem_widget (CajaEmblemSidebar *emblem_sidebar,
     GdkPixbuf *pixbuf;
     CajaIconInfo *info;
 
-    info = baul_icon_info_lookup_from_name (name, CAJA_ICON_SIZE_STANDARD, 1);
+    info = baul_icon_info_lookup_from_name (name, BAUL_ICON_SIZE_STANDARD, 1);
 
-    pixbuf = baul_icon_info_get_pixbuf_at_size (info, CAJA_ICON_SIZE_STANDARD);
+    pixbuf = baul_icon_info_get_pixbuf_at_size (info, BAUL_ICON_SIZE_STANDARD);
 
     display_name = baul_icon_info_get_display_name (info);
 
@@ -1069,8 +1069,8 @@ baul_emblem_sidebar_finalize (GObject *object)
 {
     CajaEmblemSidebar *emblem_sidebar;
 
-    g_assert (CAJA_IS_EMBLEM_SIDEBAR (object));
-    emblem_sidebar = CAJA_EMBLEM_SIDEBAR (object);
+    g_assert (BAUL_IS_EMBLEM_SIDEBAR (object));
+    emblem_sidebar = BAUL_EMBLEM_SIDEBAR (object);
 
     if (emblem_sidebar->details != NULL)
     {
@@ -1093,7 +1093,7 @@ baul_emblem_sidebar_class_init (CajaEmblemSidebarClass *object_klass)
 static const char *
 baul_emblem_sidebar_get_sidebar_id (CajaSidebar *sidebar)
 {
-    return CAJA_EMBLEM_SIDEBAR_ID;
+    return BAUL_EMBLEM_SIDEBAR_ID;
 }
 
 static char *
@@ -1148,7 +1148,7 @@ baul_emblem_sidebar_create (CajaSidebarProvider *provider,
     baul_emblem_sidebar_set_parent_window (sidebar, window);
     g_object_ref_sink (sidebar);
 
-    return CAJA_SIDEBAR (sidebar);
+    return BAUL_SIDEBAR (sidebar);
 }
 
 static void

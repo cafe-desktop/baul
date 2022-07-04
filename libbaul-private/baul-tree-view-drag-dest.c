@@ -87,13 +87,13 @@ G_DEFINE_TYPE (CajaTreeViewDragDest, baul_tree_view_drag_dest,
 
 static const GtkTargetEntry drag_types [] =
 {
-    { CAJA_ICON_DND_MATE_ICON_LIST_TYPE, 0, CAJA_ICON_DND_MATE_ICON_LIST },
+    { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
     /* prefer "_NETSCAPE_URL" over "text/uri-list" to satisfy web browsers. */
-    { CAJA_ICON_DND_NETSCAPE_URL_TYPE, 0, CAJA_ICON_DND_NETSCAPE_URL },
-    { CAJA_ICON_DND_URI_LIST_TYPE, 0, CAJA_ICON_DND_URI_LIST },
-    { CAJA_ICON_DND_KEYWORD_TYPE, 0, CAJA_ICON_DND_KEYWORD },
-    { CAJA_ICON_DND_XDNDDIRECTSAVE_TYPE, 0, CAJA_ICON_DND_XDNDDIRECTSAVE }, /* XDS Protocol Type */
-    { CAJA_ICON_DND_RAW_TYPE, 0, CAJA_ICON_DND_RAW }
+    { BAUL_ICON_DND_NETSCAPE_URL_TYPE, 0, BAUL_ICON_DND_NETSCAPE_URL },
+    { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
+    { BAUL_ICON_DND_KEYWORD_TYPE, 0, BAUL_ICON_DND_KEYWORD },
+    { BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, 0, BAUL_ICON_DND_XDNDDIRECTSAVE }, /* XDS Protocol Type */
+    { BAUL_ICON_DND_RAW_TYPE, 0, BAUL_ICON_DND_RAW }
 };
 
 
@@ -284,10 +284,10 @@ get_drag_data (CajaTreeViewDragDest *dest,
         return FALSE;
     }
 
-    if (target == gdk_atom_intern (CAJA_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE) &&
+    if (target == gdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE) &&
             !dest->details->drop_occurred)
     {
-        dest->details->drag_type = CAJA_ICON_DND_XDNDDIRECTSAVE;
+        dest->details->drag_type = BAUL_ICON_DND_XDNDDIRECTSAVE;
         dest->details->have_drag_data = TRUE;
         return TRUE;
     }
@@ -424,7 +424,7 @@ get_drop_action (CajaTreeViewDragDest *dest,
     int action;
 
     if (!dest->details->have_drag_data ||
-            (dest->details->drag_type == CAJA_ICON_DND_MATE_ICON_LIST &&
+            (dest->details->drag_type == BAUL_ICON_DND_MATE_ICON_LIST &&
              dest->details->drag_list == NULL))
     {
         return 0;
@@ -432,7 +432,7 @@ get_drop_action (CajaTreeViewDragDest *dest,
 
     switch (dest->details->drag_type)
     {
-    case CAJA_ICON_DND_MATE_ICON_LIST :
+    case BAUL_ICON_DND_MATE_ICON_LIST :
         drop_target = get_drop_target_uri_for_path (dest, path);
 
         if (!drop_target)
@@ -450,7 +450,7 @@ get_drop_action (CajaTreeViewDragDest *dest,
 
         return action;
 
-    case CAJA_ICON_DND_NETSCAPE_URL:
+    case BAUL_ICON_DND_NETSCAPE_URL:
         drop_target = get_drop_target_uri_for_path (dest, path);
 
         if (drop_target == NULL)
@@ -464,7 +464,7 @@ get_drop_action (CajaTreeViewDragDest *dest,
 
         return action;
 
-    case CAJA_ICON_DND_URI_LIST :
+    case BAUL_ICON_DND_URI_LIST :
         drop_target = get_drop_target_uri_for_path (dest, path);
 
         if (drop_target == NULL)
@@ -476,12 +476,12 @@ get_drop_action (CajaTreeViewDragDest *dest,
 
         return gdk_drag_context_get_suggested_action (context);
 
-    case CAJA_ICON_DND_TEXT:
-    case CAJA_ICON_DND_RAW:
-    case CAJA_ICON_DND_XDNDDIRECTSAVE:
+    case BAUL_ICON_DND_TEXT:
+    case BAUL_ICON_DND_RAW:
+    case BAUL_ICON_DND_XDNDDIRECTSAVE:
         return GDK_ACTION_COPY;
 
-    case CAJA_ICON_DND_KEYWORD:
+    case BAUL_ICON_DND_KEYWORD:
 
         if (!path)
         {
@@ -511,7 +511,7 @@ drag_motion_callback (GtkWidget *widget,
     guint action;
     gboolean res = TRUE;
 
-    dest = CAJA_TREE_VIEW_DRAG_DEST (data);
+    dest = BAUL_TREE_VIEW_DRAG_DEST (data);
 
     gtk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (widget),
                                        x, y, &path, &pos);
@@ -609,7 +609,7 @@ drag_leave_callback (GtkWidget *widget,
 {
     CajaTreeViewDragDest *dest;
 
-    dest = CAJA_TREE_VIEW_DRAG_DEST (data);
+    dest = BAUL_TREE_VIEW_DRAG_DEST (data);
 
     clear_drag_dest_row (dest);
 
@@ -677,7 +677,7 @@ receive_uris (CajaTreeViewDragDest *dest,
     }
 
     /* We only want to copy external uris */
-    if (dest->details->drag_type == CAJA_ICON_DND_URI_LIST)
+    if (dest->details->drag_type == BAUL_ICON_DND_URI_LIST)
     {
         action = GDK_ACTION_COPY;
     }
@@ -875,7 +875,7 @@ receive_xds (CajaTreeViewDragDest *dest,
             && selection_data[0] == 'F')
     {
         gtk_drag_get_data (widget, context,
-                           gdk_atom_intern (CAJA_ICON_DND_RAW_TYPE,
+                           gdk_atom_intern (BAUL_ICON_DND_RAW_TYPE,
                                             FALSE),
                            time);
         return FALSE;
@@ -909,7 +909,7 @@ drag_data_received_callback (GtkWidget *widget,
     CajaTreeViewDragDest *dest;
     gboolean success, finished;
 
-    dest = CAJA_TREE_VIEW_DRAG_DEST (data);
+    dest = BAUL_TREE_VIEW_DRAG_DEST (data);
 
     if (!dest->details->have_drag_data)
     {
@@ -917,7 +917,7 @@ drag_data_received_callback (GtkWidget *widget,
         dest->details->drag_type = info;
         dest->details->drag_data =
             gtk_selection_data_copy (selection_data);
-        if (info == CAJA_ICON_DND_MATE_ICON_LIST)
+        if (info == BAUL_ICON_DND_MATE_ICON_LIST)
         {
             dest->details->drag_list =
                 baul_drag_build_selection_list (selection_data);
@@ -930,23 +930,23 @@ drag_data_received_callback (GtkWidget *widget,
         finished = TRUE;
         switch (info)
         {
-        case CAJA_ICON_DND_MATE_ICON_LIST :
+        case BAUL_ICON_DND_MATE_ICON_LIST :
             receive_dropped_icons (dest, context, x, y);
             success = TRUE;
             break;
-        case CAJA_ICON_DND_NETSCAPE_URL :
+        case BAUL_ICON_DND_NETSCAPE_URL :
             receive_dropped_netscape_url (dest, context, x, y);
             success = TRUE;
             break;
-        case CAJA_ICON_DND_URI_LIST :
+        case BAUL_ICON_DND_URI_LIST :
             receive_dropped_uri_list (dest, context, x, y);
             success = TRUE;
             break;
-        case CAJA_ICON_DND_TEXT:
+        case BAUL_ICON_DND_TEXT:
             receive_dropped_text (dest, context, x, y);
             success = TRUE;
             break;
-        case CAJA_ICON_DND_RAW:
+        case BAUL_ICON_DND_RAW:
         {
             const char *tmp;
             int length;
@@ -957,11 +957,11 @@ drag_data_received_callback (GtkWidget *widget,
             success = TRUE;
             break;
         }
-        case CAJA_ICON_DND_KEYWORD:
+        case BAUL_ICON_DND_KEYWORD:
             receive_dropped_keyword (dest, context, x, y);
             success = TRUE;
             break;
-        case CAJA_ICON_DND_XDNDDIRECTSAVE:
+        case BAUL_ICON_DND_XDNDDIRECTSAVE:
             finished = receive_xds (dest, widget, time, context, x, y);
             success = TRUE;
             break;
@@ -989,7 +989,7 @@ get_direct_save_filename (GdkDragContext *context)
     guchar *prop_text;
     gint prop_len;
 
-    if (!gdk_property_get (gdk_drag_context_get_source_window (context), gdk_atom_intern (CAJA_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
+    if (!gdk_property_get (gdk_drag_context_get_source_window (context), gdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
                            gdk_atom_intern ("text/plain", FALSE), 0, 1024, FALSE, NULL, NULL,
                            &prop_len, &prop_text))
     {
@@ -1004,7 +1004,7 @@ get_direct_save_filename (GdkDragContext *context)
     if (*prop_text == '\0' ||
             strchr ((const gchar *) prop_text, G_DIR_SEPARATOR) != NULL)
     {
-        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                         "Invalid filename provided by XDS drag site");
         g_free (prop_text);
         return NULL;
@@ -1046,7 +1046,7 @@ set_direct_save_uri (CajaTreeViewDragDest *dest,
 
             /* Change the property */
             gdk_property_change (gdk_drag_context_get_source_window (context),
-                                 gdk_atom_intern (CAJA_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
+                                 gdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
                                  gdk_atom_intern ("text/plain", FALSE), 8,
                                  GDK_PROP_MODE_REPLACE, (const guchar *) uri,
                                  strlen (uri));
@@ -1055,13 +1055,13 @@ set_direct_save_uri (CajaTreeViewDragDest *dest,
         }
         else
         {
-            baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+            baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                             "Invalid filename provided by XDS drag site");
         }
     }
     else
     {
-        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                         "Could not retrieve XDS drop destination");
     }
 
@@ -1080,7 +1080,7 @@ drag_drop_callback (GtkWidget *widget,
     guint info;
     GdkAtom target;
 
-    dest = CAJA_TREE_VIEW_DRAG_DEST (data);
+    dest = BAUL_TREE_VIEW_DRAG_DEST (data);
 
     target = gtk_drag_dest_find_target (GTK_WIDGET (dest->details->tree_view),
                                         context,
@@ -1092,7 +1092,7 @@ drag_drop_callback (GtkWidget *widget,
 
     info = dest->details->drag_type;
 
-    if (info == CAJA_ICON_DND_XDNDDIRECTSAVE)
+    if (info == BAUL_ICON_DND_XDNDDIRECTSAVE)
     {
         /* We need to set this or get_drop_path will fail, and it
            was unset by drag_leave_callback */
@@ -1120,7 +1120,7 @@ tree_view_weak_notify (gpointer user_data,
 {
     CajaTreeViewDragDest *dest;
 
-    dest = CAJA_TREE_VIEW_DRAG_DEST (user_data);
+    dest = BAUL_TREE_VIEW_DRAG_DEST (user_data);
 
     remove_scroll_timeout (dest);
     remove_expand_timeout (dest);
@@ -1133,7 +1133,7 @@ baul_tree_view_drag_dest_dispose (GObject *object)
 {
     CajaTreeViewDragDest *dest;
 
-    dest = CAJA_TREE_VIEW_DRAG_DEST (object);
+    dest = BAUL_TREE_VIEW_DRAG_DEST (object);
 
     if (dest->details->tree_view)
     {
@@ -1153,7 +1153,7 @@ baul_tree_view_drag_dest_finalize (GObject *object)
 {
     CajaTreeViewDragDest *dest;
 
-    dest = CAJA_TREE_VIEW_DRAG_DEST (object);
+    dest = BAUL_TREE_VIEW_DRAG_DEST (object);
 
     free_drag_data (dest);
 
@@ -1195,7 +1195,7 @@ baul_tree_view_drag_dest_class_init (CajaTreeViewDragDestClass *class)
                                        get_file_for_path),
                       NULL, NULL,
                       baul_marshal_OBJECT__BOXED,
-                      CAJA_TYPE_FILE, 1,
+                      BAUL_TYPE_FILE, 1,
                       GTK_TYPE_TREE_PATH);
     signals[MOVE_COPY_ITEMS] =
         g_signal_new ("move_copy_items",
@@ -1280,7 +1280,7 @@ baul_tree_view_drag_dest_new (GtkTreeView *tree_view)
     CajaTreeViewDragDest *dest;
     GtkTargetList *targets;
 
-    dest = g_object_new (CAJA_TYPE_TREE_VIEW_DRAG_DEST, NULL);
+    dest = g_object_new (BAUL_TYPE_TREE_VIEW_DRAG_DEST, NULL);
 
     dest->details->tree_view = tree_view;
     g_object_weak_ref (G_OBJECT (dest->details->tree_view),
@@ -1291,7 +1291,7 @@ baul_tree_view_drag_dest_new (GtkTreeView *tree_view)
                        GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
     targets = gtk_drag_dest_get_target_list (GTK_WIDGET (tree_view));
-    gtk_target_list_add_text_targets (targets, CAJA_ICON_DND_TEXT);
+    gtk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);
 
     g_signal_connect_object (tree_view,
                              "drag_motion",

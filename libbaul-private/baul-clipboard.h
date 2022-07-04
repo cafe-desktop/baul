@@ -23,8 +23,8 @@
  * Author: Rebecca Schulman <rebecka@eazel.com>
  */
 
-#ifndef CAJA_CLIPBOARD_H
-#define CAJA_CLIPBOARD_H
+#ifndef BAUL_CLIPBOARD_H
+#define BAUL_CLIPBOARD_H
 
 #include <gtk/gtk.h>
 
@@ -51,4 +51,4 @@ GList* baul_clipboard_get_uri_list_from_selection_data
  gboolean           *cut,
  GdkAtom             copied_files_atom);
 
-#endif /* CAJA_CLIPBOARD_H */
+#endif /* BAUL_CLIPBOARD_H */

@@ -24,8 +24,8 @@
  *
  */
 
-#ifndef CAJA_WINDOW_MANAGE_VIEWS_H
-#define CAJA_WINDOW_MANAGE_VIEWS_H
+#ifndef BAUL_WINDOW_MANAGE_VIEWS_H
+#define BAUL_WINDOW_MANAGE_VIEWS_H
 
 #include "baul-window.h"
 #include "baul-window-pane.h"
@@ -46,4 +46,4 @@ void baul_window_report_load_complete     (CajaWindow     *window,
 void baul_window_report_location_change   (CajaWindow     *window);
 void baul_window_update_up_button         (CajaWindow     *window);
 
-#endif /* CAJA_WINDOW_MANAGE_VIEWS_H */
+#endif /* BAUL_WINDOW_MANAGE_VIEWS_H */

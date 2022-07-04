@@ -23,22 +23,22 @@
    Author: Darin Adler <darin@bentspoon.com>
 */
 
-#ifndef CAJA_VFS_FILE_H
-#define CAJA_VFS_FILE_H
+#ifndef BAUL_VFS_FILE_H
+#define BAUL_VFS_FILE_H
 
 #include "baul-file.h"
 
-#define CAJA_TYPE_VFS_FILE baul_vfs_file_get_type()
-#define CAJA_VFS_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_VFS_FILE, CajaVFSFile))
-#define CAJA_VFS_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_VFS_FILE, CajaVFSFileClass))
-#define CAJA_IS_VFS_FILE(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_VFS_FILE))
-#define CAJA_IS_VFS_FILE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_VFS_FILE))
-#define CAJA_VFS_FILE_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_VFS_FILE, CajaVFSFileClass))
+#define BAUL_TYPE_VFS_FILE baul_vfs_file_get_type()
+#define BAUL_VFS_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VFS_FILE, CajaVFSFile))
+#define BAUL_VFS_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_VFS_FILE, CajaVFSFileClass))
+#define BAUL_IS_VFS_FILE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_VFS_FILE))
+#define BAUL_IS_VFS_FILE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_VFS_FILE))
+#define BAUL_VFS_FILE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_VFS_FILE, CajaVFSFileClass))
 
 typedef struct CajaVFSFileDetails CajaVFSFileDetails;
 
@@ -54,4 +54,4 @@ typedef struct
 
 GType   baul_vfs_file_get_type (void);
 
-#endif /* CAJA_VFS_FILE_H */
+#endif /* BAUL_VFS_FILE_H */

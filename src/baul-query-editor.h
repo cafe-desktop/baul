@@ -21,8 +21,8 @@
  *
  */
 
-#ifndef CAJA_QUERY_EDITOR_H
-#define CAJA_QUERY_EDITOR_H
+#ifndef BAUL_QUERY_EDITOR_H
+#define BAUL_QUERY_EDITOR_H
 
 #include <gtk/gtk.h>
 
@@ -31,17 +31,17 @@
 
 #include "baul-search-bar.h"
 
-#define CAJA_TYPE_QUERY_EDITOR baul_query_editor_get_type()
-#define CAJA_QUERY_EDITOR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_QUERY_EDITOR, CajaQueryEditor))
-#define CAJA_QUERY_EDITOR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_QUERY_EDITOR, CajaQueryEditorClass))
-#define CAJA_IS_QUERY_EDITOR(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_QUERY_EDITOR))
-#define CAJA_IS_QUERY_EDITOR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_QUERY_EDITOR))
-#define CAJA_QUERY_EDITOR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_QUERY_EDITOR, CajaQueryEditorClass))
+#define BAUL_TYPE_QUERY_EDITOR baul_query_editor_get_type()
+#define BAUL_QUERY_EDITOR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_QUERY_EDITOR, CajaQueryEditor))
+#define BAUL_QUERY_EDITOR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_QUERY_EDITOR, CajaQueryEditorClass))
+#define BAUL_IS_QUERY_EDITOR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_QUERY_EDITOR))
+#define BAUL_IS_QUERY_EDITOR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_QUERY_EDITOR))
+#define BAUL_QUERY_EDITOR_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_QUERY_EDITOR, CajaQueryEditorClass))
 
 typedef struct CajaQueryEditorDetails CajaQueryEditorDetails;
 
@@ -80,4 +80,4 @@ void           baul_query_editor_set_query   (CajaQueryEditor *editor,
 void           baul_query_editor_set_visible (CajaQueryEditor *editor,
         gboolean             visible);
 
-#endif /* CAJA_QUERY_EDITOR_H */
+#endif /* BAUL_QUERY_EDITOR_H */

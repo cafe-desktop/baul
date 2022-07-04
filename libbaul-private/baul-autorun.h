@@ -37,8 +37,8 @@
  *
  */
 
-#ifndef CAJA_AUTORUN_H
-#define CAJA_AUTORUN_H
+#ifndef BAUL_AUTORUN_H
+#define BAUL_AUTORUN_H
 
 #include <gtk/gtk.h>
 
@@ -80,4 +80,4 @@ void baul_autorun_launch_for_mount (GMount *mount, GAppInfo *app_info);
 void baul_allow_autorun_for_volume (GVolume *volume);
 void baul_allow_autorun_for_volume_finish (GVolume *volume);
 
-#endif /* CAJA_AUTORUN_H */
+#endif /* BAUL_AUTORUN_H */

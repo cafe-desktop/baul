@@ -22,23 +22,23 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef CAJA_SEARCH_DIRECTORY_H
-#define CAJA_SEARCH_DIRECTORY_H
+#ifndef BAUL_SEARCH_DIRECTORY_H
+#define BAUL_SEARCH_DIRECTORY_H
 
 #include "baul-directory.h"
 #include "baul-query.h"
 
-#define CAJA_TYPE_SEARCH_DIRECTORY baul_search_directory_get_type()
-#define CAJA_SEARCH_DIRECTORY(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_DIRECTORY, CajaSearchDirectory))
-#define CAJA_SEARCH_DIRECTORY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SEARCH_DIRECTORY, CajaSearchDirectoryClass))
-#define CAJA_IS_SEARCH_DIRECTORY(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SEARCH_DIRECTORY))
-#define CAJA_IS_SEARCH_DIRECTORY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SEARCH_DIRECTORY))
-#define CAJA_SEARCH_DIRECTORY_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SEARCH_DIRECTORY, CajaSearchDirectoryClass))
+#define BAUL_TYPE_SEARCH_DIRECTORY baul_search_directory_get_type()
+#define BAUL_SEARCH_DIRECTORY(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_DIRECTORY, CajaSearchDirectory))
+#define BAUL_SEARCH_DIRECTORY_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_DIRECTORY, CajaSearchDirectoryClass))
+#define BAUL_IS_SEARCH_DIRECTORY(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_DIRECTORY))
+#define BAUL_IS_SEARCH_DIRECTORY_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_DIRECTORY))
+#define BAUL_SEARCH_DIRECTORY_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_DIRECTORY, CajaSearchDirectoryClass))
 
 typedef struct CajaSearchDirectoryDetails CajaSearchDirectoryDetails;
 
@@ -70,4 +70,4 @@ CajaQuery *baul_search_directory_get_query       (CajaSearchDirectory *search);
 void           baul_search_directory_set_query       (CajaSearchDirectory *search,
         CajaQuery           *query);
 
-#endif /* CAJA_SEARCH_DIRECTORY_H */
+#endif /* BAUL_SEARCH_DIRECTORY_H */

@@ -77,15 +77,15 @@ baul_info_provider_update_file_info (CajaInfoProvider     *provider,
                                      GClosure             *update_complete,
                                      CajaOperationHandle **handle)
 {
-    g_return_val_if_fail (CAJA_IS_INFO_PROVIDER (provider),
-                          CAJA_OPERATION_FAILED);
-    g_return_val_if_fail (CAJA_INFO_PROVIDER_GET_IFACE (provider)->update_file_info != NULL,
-                          CAJA_OPERATION_FAILED);
+    g_return_val_if_fail (BAUL_IS_INFO_PROVIDER (provider),
+                          BAUL_OPERATION_FAILED);
+    g_return_val_if_fail (BAUL_INFO_PROVIDER_GET_IFACE (provider)->update_file_info != NULL,
+                          BAUL_OPERATION_FAILED);
     g_return_val_if_fail (update_complete != NULL,
-                          CAJA_OPERATION_FAILED);
-    g_return_val_if_fail (handle != NULL, CAJA_OPERATION_FAILED);
+                          BAUL_OPERATION_FAILED);
+    g_return_val_if_fail (handle != NULL, BAUL_OPERATION_FAILED);
 
-    return CAJA_INFO_PROVIDER_GET_IFACE (provider)->update_file_info
+    return BAUL_INFO_PROVIDER_GET_IFACE (provider)->update_file_info
            (provider, file, update_complete, handle);
 }
 
@@ -93,11 +93,11 @@ void
 baul_info_provider_cancel_update (CajaInfoProvider    *provider,
                                   CajaOperationHandle *handle)
 {
-    g_return_if_fail (CAJA_IS_INFO_PROVIDER (provider));
-    g_return_if_fail (CAJA_INFO_PROVIDER_GET_IFACE (provider)->cancel_update != NULL);
+    g_return_if_fail (BAUL_IS_INFO_PROVIDER (provider));
+    g_return_if_fail (BAUL_INFO_PROVIDER_GET_IFACE (provider)->cancel_update != NULL);
     g_return_if_fail (handle != NULL);
 
-    CAJA_INFO_PROVIDER_GET_IFACE (provider)->cancel_update (provider,
+    BAUL_INFO_PROVIDER_GET_IFACE (provider)->cancel_update (provider,
             handle);
 }
 
@@ -111,11 +111,11 @@ baul_info_provider_update_complete_invoke (GClosure            *update_complete,
     GValue return_val = { 0, };
 
     g_return_if_fail (update_complete != NULL);
-    g_return_if_fail (CAJA_IS_INFO_PROVIDER (provider));
+    g_return_if_fail (BAUL_IS_INFO_PROVIDER (provider));
 
-    g_value_init (&args[0], CAJA_TYPE_INFO_PROVIDER);
+    g_value_init (&args[0], BAUL_TYPE_INFO_PROVIDER);
     g_value_init (&args[1], G_TYPE_POINTER);
-    g_value_init (&args[2], CAJA_TYPE_OPERATION_RESULT);
+    g_value_init (&args[2], BAUL_TYPE_OPERATION_RESULT);
 
     g_value_set_object (&args[0], provider);
     g_value_set_pointer (&args[1], handle);

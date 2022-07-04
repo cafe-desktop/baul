@@ -24,8 +24,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef CAJA_ENTRY_H
-#define CAJA_ENTRY_H
+#ifndef BAUL_ENTRY_H
+#define BAUL_ENTRY_H
 
 #include <gtk/gtk.h>
 
@@ -33,17 +33,17 @@
 extern "C" {
 #endif
 
-#define CAJA_TYPE_ENTRY baul_entry_get_type()
-#define CAJA_ENTRY(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ENTRY, CajaEntry))
-#define CAJA_ENTRY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_ENTRY, CajaEntryClass))
-#define CAJA_IS_ENTRY(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_ENTRY))
-#define CAJA_IS_ENTRY_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_ENTRY))
-#define CAJA_ENTRY_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_ENTRY, CajaEntryClass))
+#define BAUL_TYPE_ENTRY baul_entry_get_type()
+#define BAUL_ENTRY(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ENTRY, CajaEntry))
+#define BAUL_ENTRY_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ENTRY, CajaEntryClass))
+#define BAUL_IS_ENTRY(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_ENTRY))
+#define BAUL_IS_ENTRY_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_ENTRY))
+#define BAUL_ENTRY_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ENTRY, CajaEntryClass))
 
     typedef struct CajaEntryDetails CajaEntryDetails;
 
@@ -74,4 +74,4 @@ extern "C" {
 }
 #endif
 
-#endif /* CAJA_ENTRY_H */
+#endif /* BAUL_ENTRY_H */

@@ -301,8 +301,8 @@ baul_mime_actions_check_if_required_attributes_ready (CajaFile *file)
 CajaFileAttributes
 baul_mime_actions_get_required_file_attributes (void)
 {
-    return CAJA_FILE_ATTRIBUTE_INFO |
-           CAJA_FILE_ATTRIBUTE_LINK_INFO;
+    return BAUL_FILE_ATTRIBUTE_INFO |
+           BAUL_FILE_ATTRIBUTE_LINK_INFO;
 }
 
 static gboolean
@@ -792,18 +792,18 @@ get_executable_text_file_action (GtkWindow *parent_window, CajaFile *file)
     g_assert (baul_file_contains_text (file));
 
     preferences_value = g_settings_get_enum (baul_preferences,
-                            CAJA_PREFERENCES_EXECUTABLE_TEXT_ACTIVATION);
+                            BAUL_PREFERENCES_EXECUTABLE_TEXT_ACTIVATION);
     switch (preferences_value)
     {
-    case CAJA_EXECUTABLE_TEXT_LAUNCH:
+    case BAUL_EXECUTABLE_TEXT_LAUNCH:
         return ACTIVATION_ACTION_LAUNCH;
-    case CAJA_EXECUTABLE_TEXT_DISPLAY:
+    case BAUL_EXECUTABLE_TEXT_DISPLAY:
         return ACTIVATION_ACTION_OPEN_IN_APPLICATION;
-    case CAJA_EXECUTABLE_TEXT_ASK:
+    case BAUL_EXECUTABLE_TEXT_ASK:
         break;
     default:
         /* Complain non-fatally, since preference data can't be trusted */
-        g_warning ("Unknown value %d for CAJA_PREFERENCES_EXECUTABLE_TEXT_ACTIVATION",
+        g_warning ("Unknown value %d for BAUL_PREFERENCES_EXECUTABLE_TEXT_ACTIVATION",
                    preferences_value);
 
     }
@@ -856,14 +856,14 @@ get_default_executable_text_file_action (void)
     int preferences_value;
 
     preferences_value = g_settings_get_enum (baul_preferences,
-                            CAJA_PREFERENCES_EXECUTABLE_TEXT_ACTIVATION);
+                            BAUL_PREFERENCES_EXECUTABLE_TEXT_ACTIVATION);
     switch (preferences_value)
     {
-    case CAJA_EXECUTABLE_TEXT_LAUNCH:
+    case BAUL_EXECUTABLE_TEXT_LAUNCH:
         return ACTIVATION_ACTION_LAUNCH;
-    case CAJA_EXECUTABLE_TEXT_DISPLAY:
+    case BAUL_EXECUTABLE_TEXT_DISPLAY:
         return ACTIVATION_ACTION_OPEN_IN_APPLICATION;
-    case CAJA_EXECUTABLE_TEXT_ASK:
+    case BAUL_EXECUTABLE_TEXT_ASK:
     default:
         return ACTIVATION_ACTION_ASK;
     }
@@ -1315,7 +1315,7 @@ choose_program (GtkDialog *message_dialog, int response, gpointer callback_data)
 
     file = g_object_get_data (G_OBJECT (message_dialog), "mime-action:file");
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
 
     baul_file_ref (file);
     uri = baul_file_get_uri (file);
@@ -1478,7 +1478,7 @@ search_for_application_mime_type (ActivateParametersInstall *parameters_install,
                        (GAsyncReadyCallback) search_for_application_dbus_call_notify_cb,
                        parameters_install);
 
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                     "InstallMimeType method invoked for %s", mime_type);
 }
 
@@ -1597,7 +1597,7 @@ application_unhandled_uri (ActivateParameters *parameters, char *uri)
 
 #ifdef ENABLE_PACKAGEKIT
     /* allow an admin to disable the PackageKit search functionality */
-    show_install_mime = g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_INSTALL_MIME_ACTIVATION);
+    show_install_mime = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_INSTALL_MIME_ACTIVATION);
 #else
     /* we have no install functionality */
     show_install_mime = FALSE;
@@ -1666,7 +1666,7 @@ untrusted_launcher_response_callback (GtkDialog *dialog,
     case RESPONSE_RUN:
         screen = gtk_widget_get_screen (GTK_WIDGET (parameters->parent_window));
         uri = baul_file_get_uri (parameters->file);
-        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                         "directory view activate_callback launch_desktop_file window=%p: %s",
                         parameters->parent_window, uri);
         baul_launch_desktop_file (screen, uri, NULL,
@@ -1757,7 +1757,7 @@ activate_desktop_file (ActivateParameters *parameters,
     }
 
     uri = baul_file_get_uri (file);
-    baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                     "directory view activate_callback launch_desktop_file window=%p: %s",
                     parameters->parent_window, uri);
     baul_launch_desktop_file (screen, uri, NULL,
@@ -1845,7 +1845,7 @@ activate_files (ActivateParameters *parameters)
     launch_desktop_files = g_list_reverse (launch_desktop_files);
     for (l = launch_desktop_files; l != NULL; l = l->next)
     {
-        file = CAJA_FILE (l->data);
+        file = BAUL_FILE (l->data);
 
         activate_desktop_file (parameters, file);
     }
@@ -1862,14 +1862,14 @@ activate_files (ActivateParameters *parameters)
     launch_files = g_list_reverse (launch_files);
     for (l = launch_files; l != NULL; l = l->next)
     {
-        file = CAJA_FILE (l->data);
+        file = BAUL_FILE (l->data);
 
         uri = baul_file_get_activation_uri (file);
         executable_path = g_filename_from_uri (uri, NULL, NULL);
         quoted_path = g_shell_quote (executable_path);
         name = baul_file_get_name (file);
 
-        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                         "directory view activate_callback launch_file window=%p: %s",
                         parameters->parent_window, quoted_path);
 
@@ -1884,14 +1884,14 @@ activate_files (ActivateParameters *parameters)
     launch_in_terminal_files = g_list_reverse (launch_in_terminal_files);
     for (l = launch_in_terminal_files; l != NULL; l = l->next)
     {
-        file = CAJA_FILE (l->data);
+        file = BAUL_FILE (l->data);
 
         uri = baul_file_get_activation_uri (file);
         executable_path = g_filename_from_uri (uri, NULL, NULL);
         quoted_path = g_shell_quote (executable_path);
         name = baul_file_get_name (file);
 
-        baul_debug_log (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER,
+        baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                         "directory view activate_callback launch_in_terminal window=%p: %s",
                         parameters->parent_window, quoted_path);
 
@@ -1914,25 +1914,25 @@ activate_files (ActivateParameters *parameters)
     flags = parameters->flags;
     if (count > 1)
     {
-        if ((parameters->flags & CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW) == 0)
+        if ((parameters->flags & BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW) == 0)
         {
-            flags |= CAJA_WINDOW_OPEN_FLAG_NEW_TAB;
+            flags |= BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
         }
         else
         {
-            flags |= CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW;
+            flags |= BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW;
         }
     }
 
     if (parameters->slot_info != NULL &&
             (!parameters->user_confirmation ||
              confirm_multiple_windows (parameters->parent_window, count,
-                                       (flags & CAJA_WINDOW_OPEN_FLAG_NEW_TAB) != 0)))
+                                       (flags & BAUL_WINDOW_OPEN_FLAG_NEW_TAB) != 0)))
     {
 
-        if ((flags & CAJA_WINDOW_OPEN_FLAG_NEW_TAB) != 0 &&
-                g_settings_get_enum (baul_preferences, CAJA_PREFERENCES_NEW_TAB_POSITION) ==
-                CAJA_NEW_TAB_POSITION_AFTER_CURRENT_TAB)
+        if ((flags & BAUL_WINDOW_OPEN_FLAG_NEW_TAB) != 0 &&
+                g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_NEW_TAB_POSITION) ==
+                BAUL_NEW_TAB_POSITION_AFTER_CURRENT_TAB)
         {
             /* When inserting N tabs after the current one,
              * we first open tab N, then tab N-1, ..., then tab 0.
@@ -1948,7 +1948,7 @@ activate_files (ActivateParameters *parameters)
             GFile *f;
             /* The ui should ask for navigation or object windows
              * depending on what the current one is */
-            file = CAJA_FILE (l->data);
+            file = BAUL_FILE (l->data);
 
             uri = baul_file_get_activation_uri (file);
             f = g_file_new_for_uri (uri);
@@ -1997,9 +1997,9 @@ activate_files (ActivateParameters *parameters)
     if (open_in_app_parameters != NULL ||
             unhandled_open_in_app_uris != NULL)
     {
-        if ((parameters->flags & CAJA_WINDOW_OPEN_FLAG_CLOSE_BEHIND) != 0 &&
+        if ((parameters->flags & BAUL_WINDOW_OPEN_FLAG_CLOSE_BEHIND) != 0 &&
                 window_info != NULL &&
-                baul_window_info_get_window_type (window_info) == CAJA_WINDOW_SPATIAL)
+                baul_window_info_get_window_type (window_info) == BAUL_WINDOW_SPATIAL)
         {
             baul_window_info_close (window_info);
         }
@@ -2110,7 +2110,7 @@ activation_mount_not_mounted (ActivateParameters *parameters)
     files = get_file_list_for_launch_locations (parameters->locations);
     baul_file_list_call_when_ready
     (files,
-     baul_mime_actions_get_required_file_attributes () | CAJA_FILE_ATTRIBUTE_LINK_INFO,
+     baul_mime_actions_get_required_file_attributes () | BAUL_FILE_ATTRIBUTE_LINK_INFO,
      &parameters->files_handle,
      activate_callback, parameters);
     baul_file_list_free (files);
@@ -2241,7 +2241,7 @@ activate_activation_uris_ready_callback (GList *files_ignore,
     files = get_file_list_for_launch_locations (parameters->locations);
     baul_file_list_call_when_ready
     (files,
-     baul_mime_actions_get_required_file_attributes () | CAJA_FILE_ATTRIBUTE_LINK_INFO,
+     baul_mime_actions_get_required_file_attributes () | BAUL_FILE_ATTRIBUTE_LINK_INFO,
      &parameters->files_handle,
      activate_callback, parameters);
     baul_file_list_free (files);
@@ -2271,8 +2271,8 @@ activation_get_activation_uris (ActivateParameters *parameters)
         {
             baul_file_invalidate_attributes
             (file,
-             CAJA_FILE_ATTRIBUTE_INFO |
-             CAJA_FILE_ATTRIBUTE_LINK_INFO);
+             BAUL_FILE_ATTRIBUTE_INFO |
+             BAUL_FILE_ATTRIBUTE_LINK_INFO);
         }
     }
 
@@ -2285,8 +2285,8 @@ activation_get_activation_uris (ActivateParameters *parameters)
     files = get_file_list_for_launch_locations (parameters->locations);
     baul_file_list_call_when_ready
     (files,
-     CAJA_FILE_ATTRIBUTE_INFO |
-     CAJA_FILE_ATTRIBUTE_LINK_INFO,
+     BAUL_FILE_ATTRIBUTE_INFO |
+     BAUL_FILE_ATTRIBUTE_LINK_INFO,
      &parameters->files_handle,
      activate_activation_uris_ready_callback, parameters);
     baul_file_list_free (files);
@@ -2502,7 +2502,7 @@ baul_mime_activate_files (GtkWindow *parent_window,
         return;
     }
 
-    baul_debug_log_with_file_list (FALSE, CAJA_DEBUG_LOG_DOMAIN_USER, files,
+    baul_debug_log_with_file_list (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER, files,
                                    "baul_mime_activate_files window=%p",
                                    parent_window);
 
@@ -2588,7 +2588,7 @@ baul_mime_activate_file (GtkWindow *parent_window,
 {
     GList *files;
 
-    g_return_if_fail (CAJA_IS_FILE (file));
+    g_return_if_fail (BAUL_IS_FILE (file));
 
     files = g_list_prepend (NULL, file);
     baul_mime_activate_files (parent_window, slot_info, files, launch_directory, mode, flags, FALSE);

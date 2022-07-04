@@ -62,7 +62,7 @@ finalize (GObject *object)
 {
     CajaSearchBar *bar;
 
-    bar = CAJA_SEARCH_BAR (object);
+    bar = BAUL_SEARCH_BAR (object);
 
     g_free (bar->details);
 
@@ -144,7 +144,7 @@ focus_in_event_callback (GtkWidget *widget,
 {
     CajaSearchBar *bar;
 
-    bar = CAJA_SEARCH_BAR (user_data);
+    bar = BAUL_SEARCH_BAR (user_data);
 
     g_signal_emit (bar, signals[FOCUS_IN], 0);
 
@@ -221,8 +221,8 @@ baul_search_bar_new (CajaWindow *window)
     GtkWidget *bar;
     CajaSearchBar *search_bar;
 
-    bar = g_object_new (CAJA_TYPE_SEARCH_BAR, NULL);
-    search_bar = CAJA_SEARCH_BAR(bar);
+    bar = g_object_new (BAUL_TYPE_SEARCH_BAR, NULL);
+    search_bar = BAUL_SEARCH_BAR(bar);
 
     /* Clipboard */
     baul_clipboard_set_up_editable

@@ -21,27 +21,27 @@
  *  Author : Mr Jamie McCracken (jamiemcc at blueyonder dot co dot uk)
  *
  */
-#ifndef _CAJA_PLACES_SIDEBAR_H
-#define _CAJA_PLACES_SIDEBAR_H
+#ifndef _BAUL_PLACES_SIDEBAR_H
+#define _BAUL_PLACES_SIDEBAR_H
 
 #include <gtk/gtk.h>
 
 #include <libbaul-private/baul-view.h>
 #include <libbaul-private/baul-window-info.h>
 
-#define CAJA_PLACES_SIDEBAR_ID    "places"
+#define BAUL_PLACES_SIDEBAR_ID    "places"
 
-#define CAJA_TYPE_PLACES_SIDEBAR baul_places_sidebar_get_type()
-#define CAJA_PLACES_SIDEBAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PLACES_SIDEBAR, CajaPlacesSidebar))
-#define CAJA_PLACES_SIDEBAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_PLACES_SIDEBAR, CajaPlacesSidebarClass))
-#define CAJA_IS_PLACES_SIDEBAR(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_PLACES_SIDEBAR))
-#define CAJA_IS_PLACES_SIDEBAR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_PLACES_SIDEBAR))
-#define CAJA_PLACES_SIDEBAR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_PLACES_SIDEBAR, CajaPlacesSidebarClass))
+#define BAUL_TYPE_PLACES_SIDEBAR baul_places_sidebar_get_type()
+#define BAUL_PLACES_SIDEBAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PLACES_SIDEBAR, CajaPlacesSidebar))
+#define BAUL_PLACES_SIDEBAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_PLACES_SIDEBAR, CajaPlacesSidebarClass))
+#define BAUL_IS_PLACES_SIDEBAR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_PLACES_SIDEBAR))
+#define BAUL_IS_PLACES_SIDEBAR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_PLACES_SIDEBAR))
+#define BAUL_PLACES_SIDEBAR_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_PLACES_SIDEBAR, CajaPlacesSidebarClass))
 
 
 GType baul_places_sidebar_get_type (void);

@@ -86,11 +86,11 @@ struct _CajaSpatialWindowPrivate
 
 static const GtkTargetEntry location_button_drag_types[] =
 {
-    { CAJA_ICON_DND_MATE_ICON_LIST_TYPE, 0, CAJA_ICON_DND_MATE_ICON_LIST },
-    { CAJA_ICON_DND_URI_LIST_TYPE, 0, CAJA_ICON_DND_URI_LIST },
+    { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
+    { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (CajaSpatialWindow, baul_spatial_window, CAJA_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (CajaSpatialWindow, baul_spatial_window, BAUL_TYPE_WINDOW)
 
 static void baul_spatial_window_save_geometry (CajaSpatialWindow *window,
 						   CajaFile *viewed_file);
@@ -101,8 +101,8 @@ save_window_geometry_timeout (gpointer callback_data)
     CajaSpatialWindow *window;
     CajaWindowSlot *slot;
 
-    window = CAJA_SPATIAL_WINDOW (callback_data);
-    slot = baul_window_get_active_slot (CAJA_WINDOW (window));
+    window = BAUL_SPATIAL_WINDOW (callback_data);
+    slot = baul_window_get_active_slot (BAUL_WINDOW (window));
 
     if (slot != NULL)
     {
@@ -120,7 +120,7 @@ baul_spatial_window_configure_event (GtkWidget *widget,
 {
     CajaSpatialWindow *window;
 
-    window = CAJA_SPATIAL_WINDOW (widget);
+    window = BAUL_SPATIAL_WINDOW (widget);
 
     GTK_WIDGET_CLASS (baul_spatial_window_parent_class)->configure_event (widget, event);
 
@@ -144,8 +144,8 @@ baul_spatial_window_unrealize (GtkWidget *widget)
     CajaSpatialWindow *window;
     CajaWindowSlot *slot;
 
-    window = CAJA_SPATIAL_WINDOW (widget);
-    slot = baul_window_get_active_slot (CAJA_WINDOW (window));
+    window = BAUL_SPATIAL_WINDOW (widget);
+    slot = baul_window_get_active_slot (BAUL_WINDOW (window));
 
     GTK_WIDGET_CLASS (baul_spatial_window_parent_class)->unrealize (widget);
 
@@ -169,18 +169,18 @@ baul_spatial_window_state_event (GtkWidget *widget,
     CajaWindowSlot *slot;
     CajaFile *viewed_file;
 
-    window = CAJA_WINDOW (widget);
+    window = BAUL_WINDOW (widget);
     slot = window->details->active_pane->active_slot;
     viewed_file = slot->viewed_file;
 
-    if (!CAJA_IS_DESKTOP_WINDOW (widget))
+    if (!BAUL_IS_DESKTOP_WINDOW (widget))
     {
 
         if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED &&
                 viewed_file != NULL)
         {
             baul_file_set_boolean_metadata (viewed_file,
-                                            CAJA_METADATA_KEY_WINDOW_MAXIMIZED,
+                                            BAUL_METADATA_KEY_WINDOW_MAXIMIZED,
                                             FALSE,
                                             event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED);
         }
@@ -189,7 +189,7 @@ baul_spatial_window_state_event (GtkWidget *widget,
                 viewed_file != NULL)
         {
             baul_file_set_boolean_metadata (viewed_file,
-                                            CAJA_METADATA_KEY_WINDOW_STICKY,
+                                            BAUL_METADATA_KEY_WINDOW_STICKY,
                                             FALSE,
                                             event->new_window_state & GDK_WINDOW_STATE_STICKY);
         }
@@ -198,7 +198,7 @@ baul_spatial_window_state_event (GtkWidget *widget,
                 viewed_file != NULL)
         {
             baul_file_set_boolean_metadata (viewed_file,
-                                            CAJA_METADATA_KEY_WINDOW_KEEP_ABOVE,
+                                            BAUL_METADATA_KEY_WINDOW_KEEP_ABOVE,
                                             FALSE,
                                             event->new_window_state & GDK_WINDOW_STATE_ABOVE);
         }
@@ -218,7 +218,7 @@ baul_spatial_window_finalize (GObject *object)
 {
     CajaSpatialWindow *window;
 
-    window = CAJA_SPATIAL_WINDOW (object);
+    window = BAUL_SPATIAL_WINDOW (object);
 
     g_free (window->details->last_geometry);
 
@@ -239,7 +239,7 @@ baul_spatial_window_save_geometry (CajaSpatialWindow *window,
 
     if (gtk_widget_get_window (GTK_WIDGET (window)) &&
     	    gtk_widget_get_visible (GTK_WIDGET (window)) &&
-	    !CAJA_IS_DESKTOP_WINDOW (window) &&
+	    !BAUL_IS_DESKTOP_WINDOW (window) &&
             !(gdk_window_get_state (gtk_widget_get_window (GTK_WIDGET(window))) & GDK_WINDOW_STATE_MAXIMIZED)) {
 
         geometry_string = eel_gtk_window_get_geometry_string (GTK_WINDOW (window));
@@ -254,7 +254,7 @@ baul_spatial_window_save_geometry (CajaSpatialWindow *window,
         window->details->last_geometry = geometry_string;
 
         baul_file_set_metadata (viewed_file,
-                                CAJA_METADATA_KEY_WINDOW_GEOMETRY,
+                                BAUL_METADATA_KEY_WINDOW_GEOMETRY,
                                 NULL,
                                 geometry_string);
     }
@@ -274,7 +274,7 @@ baul_spatial_window_save_scroll_position (CajaSpatialWindow *window,
 
     scroll_string = baul_view_get_first_visible_file (slot->content_view);
     baul_file_set_metadata (slot->viewed_file,
-                            CAJA_METADATA_KEY_WINDOW_SCROLL_POSITION,
+                            BAUL_METADATA_KEY_WINDOW_SCROLL_POSITION,
                             NULL,
                             scroll_string);
     g_free (scroll_string);
@@ -290,18 +290,18 @@ baul_spatial_window_save_show_hidden_files_mode (CajaSpatialWindow *window,
         return;
     }
 
-    mode = CAJA_WINDOW (window)->details->show_hidden_files_mode;
+    mode = BAUL_WINDOW (window)->details->show_hidden_files_mode;
 
-    if (mode != CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT) {
+    if (mode != BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT) {
         char *show_hidden_file_setting;
 
-        if (mode == CAJA_WINDOW_SHOW_HIDDEN_FILES_ENABLE) {
+        if (mode == BAUL_WINDOW_SHOW_HIDDEN_FILES_ENABLE) {
             show_hidden_file_setting = "1";
         } else {
             show_hidden_file_setting = "0";
         }
         baul_file_set_metadata (viewed_file,
-                                CAJA_METADATA_KEY_WINDOW_SHOW_HIDDEN_FILES,
+                                BAUL_METADATA_KEY_WINDOW_SHOW_HIDDEN_FILES,
                                 NULL,
                                 show_hidden_file_setting);
     }
@@ -314,14 +314,14 @@ baul_spatial_window_show (GtkWidget *widget)
     CajaWindowSlot *slot;
     GFile *location;
 
-    window = CAJA_WINDOW (widget);
+    window = BAUL_WINDOW (widget);
     slot = baul_window_get_active_slot (window);
 
     GTK_WIDGET_CLASS (baul_spatial_window_parent_class)->show (widget);
 
     if (slot != NULL && slot->query_editor != NULL)
     {
-        baul_query_editor_grab_focus (CAJA_QUERY_EDITOR (slot->query_editor));
+        baul_query_editor_grab_focus (BAUL_QUERY_EDITOR (slot->query_editor));
     }
 
     location = baul_window_slot_get_location (slot);
@@ -332,9 +332,9 @@ baul_spatial_window_show (GtkWidget *widget)
 
         file = baul_file_get (location);
 
-        if  (!baul_file_check_if_ready (file, CAJA_FILE_ATTRIBUTE_INFO)) {
+        if  (!baul_file_check_if_ready (file, BAUL_FILE_ATTRIBUTE_INFO)) {
             baul_file_call_when_ready (file,
-                                       CAJA_FILE_ATTRIBUTE_INFO,
+                                       BAUL_FILE_ATTRIBUTE_INFO,
                                        NULL,
                                        NULL);
         }
@@ -351,7 +351,7 @@ static void
 action_close_parent_folders_callback (GtkAction *action,
                                       gpointer user_data)
 {
-    baul_application_close_parent_windows (CAJA_SPATIAL_WINDOW (user_data));
+    baul_application_close_parent_windows (BAUL_SPATIAL_WINDOW (user_data));
 }
 
 static void
@@ -370,7 +370,7 @@ real_prompt_for_location (CajaWindow *window,
     dialog = baul_location_dialog_new (window);
     if (initial != NULL)
     {
-        baul_location_dialog_set_location (CAJA_LOCATION_DIALOG (dialog),
+        baul_location_dialog_set_location (BAUL_LOCATION_DIALOG (dialog),
                                            initial);
     }
 
@@ -383,8 +383,8 @@ real_get_icon (CajaWindow *window,
 {
     return baul_file_get_icon (slot->viewed_file,
                                48, gtk_widget_get_scale_factor (GTK_WIDGET (window)),
-                               CAJA_FILE_ICON_FLAGS_IGNORE_VISITING |
-                               CAJA_FILE_ICON_FLAGS_USE_MOUNT_ICON);
+                               BAUL_FILE_ICON_FLAGS_IGNORE_VISITING |
+                               BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON);
 }
 
 static void
@@ -395,7 +395,7 @@ sync_window_title (CajaWindow *window)
     slot = baul_window_get_active_slot (window);
 
     /* Don't change desktop's title, it would override the one already defined */
-    if (CAJA_IS_DESKTOP_WINDOW (window))
+    if (BAUL_IS_DESKTOP_WINDOW (window))
         return;
 
     if (slot->title == NULL || slot->title[0] == '\0')
@@ -427,11 +427,11 @@ real_get_min_size (CajaWindow *window,
 {
     if (min_width)
     {
-        *min_width = CAJA_SPATIAL_WINDOW_MIN_WIDTH;
+        *min_width = BAUL_SPATIAL_WINDOW_MIN_WIDTH;
     }
     if (min_height)
     {
-        *min_height = CAJA_SPATIAL_WINDOW_MIN_HEIGHT;
+        *min_height = BAUL_SPATIAL_WINDOW_MIN_HEIGHT;
     }
 }
 
@@ -441,11 +441,11 @@ real_get_default_size (CajaWindow *window,
 {
     if (default_width)
     {
-        *default_width = CAJA_SPATIAL_WINDOW_DEFAULT_WIDTH;
+        *default_width = BAUL_SPATIAL_WINDOW_DEFAULT_WIDTH;
     }
     if (default_height)
     {
-        *default_height = CAJA_SPATIAL_WINDOW_DEFAULT_HEIGHT;
+        *default_height = BAUL_SPATIAL_WINDOW_DEFAULT_HEIGHT;
     }
 }
 
@@ -461,7 +461,7 @@ real_set_allow_up (CajaWindow *window, gboolean allow)
     CajaSpatialWindow *spatial;
     GtkAction *action;
 
-    spatial = CAJA_SPATIAL_WINDOW (window);
+    spatial = BAUL_SPATIAL_WINDOW (window);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (spatial->details->spatial_action_group,
@@ -469,7 +469,7 @@ real_set_allow_up (CajaWindow *window, gboolean allow)
     gtk_action_set_sensitive (action, allow);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    CAJA_WINDOW_CLASS (baul_spatial_window_parent_class)->set_allow_up (window, allow);
+    BAUL_WINDOW_CLASS (baul_spatial_window_parent_class)->set_allow_up (window, allow);
 }
 
 static CajaWindowSlot *
@@ -485,9 +485,9 @@ real_open_slot (CajaWindowPane *pane,
     g_assert (slots == NULL);
     g_list_free (slots);
 
-    slot = g_object_new (CAJA_TYPE_WINDOW_SLOT, NULL);
+    slot = g_object_new (BAUL_TYPE_WINDOW_SLOT, NULL);
     slot->pane = pane;
-    gtk_container_add (GTK_CONTAINER (CAJA_SPATIAL_WINDOW (pane->window)->details->content_box),
+    gtk_container_add (GTK_CONTAINER (BAUL_SPATIAL_WINDOW (pane->window)->details->content_box),
                        slot->content_box);
     gtk_widget_show (slot->content_box);
     return slot;
@@ -508,14 +508,14 @@ real_close_slot (CajaWindowPane *pane,
 {
     CajaSpatialWindow *window;
 
-    window = CAJA_SPATIAL_WINDOW (pane->window);
+    window = BAUL_SPATIAL_WINDOW (pane->window);
 
     /* Save spatial data for close if we didn't already */
     if (!window->details->saved_data_on_close) {
         save_spatial_data (window, slot);
     }
 
-    CAJA_WINDOW_CLASS (baul_spatial_window_parent_class)->close_slot (pane, slot);
+    BAUL_WINDOW_CLASS (baul_spatial_window_parent_class)->close_slot (pane, slot);
 }
 
 static void
@@ -524,7 +524,7 @@ real_window_close (CajaWindow *window)
     CajaWindowSlot *slot;
     CajaSpatialWindow *self;
 
-    self = CAJA_SPATIAL_WINDOW (window);
+    self = BAUL_SPATIAL_WINDOW (window);
 
     /* We're closing the window, save the geometry. */
     /* Note that we do this in window close, not slot close, because slot
@@ -538,8 +538,8 @@ real_window_close (CajaWindow *window)
         self->details->saved_data_on_close = TRUE;
     }
 
-    if (CAJA_WINDOW_CLASS (baul_spatial_window_parent_class)->close != NULL) {
-        CAJA_WINDOW_CLASS (baul_spatial_window_parent_class)->close (window);
+    if (BAUL_WINDOW_CLASS (baul_spatial_window_parent_class)->close != NULL) {
+        BAUL_WINDOW_CLASS (baul_spatial_window_parent_class)->close (window);
     }
 }
 
@@ -635,7 +635,7 @@ location_button_clicked_callback (GtkWidget         *widget,
     GFile *child_location;
     GMainLoop *loop;
 
-    slot = baul_window_get_active_slot (CAJA_WINDOW (window));
+    slot = baul_window_get_active_slot (BAUL_WINDOW (window));
 
     popup = gtk_menu_new ();
 
@@ -661,7 +661,7 @@ location_button_clicked_callback (GtkWidget         *widget,
                                               baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
                                               TRUE,
                                               gtk_widget_get_scale_factor (widget),
-                                              CAJA_FILE_ICON_FLAGS_IGNORE_VISITING);
+                                              BAUL_FILE_ICON_FLAGS_IGNORE_VISITING);
 
         if (surface != NULL)
         {
@@ -740,12 +740,12 @@ get_dnd_icon_size (CajaSpatialWindow *window)
     CajaView *view;
     CajaZoomLevel zoom_level;
 
-	active_slot = baul_window_get_active_slot (CAJA_WINDOW (window));
+	active_slot = baul_window_get_active_slot (BAUL_WINDOW (window));
 	view = active_slot->content_view;
 
     if (view == NULL)
     {
-        return CAJA_ICON_SIZE_STANDARD;
+        return BAUL_ICON_SIZE_STANDARD;
     }
     else
     {
@@ -762,13 +762,13 @@ location_button_drag_begin_callback (GtkWidget             *widget,
     CajaWindowSlot *slot;
     cairo_surface_t *surface;
 
-    slot = CAJA_WINDOW (window)->details->active_pane->active_slot;
+    slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
 
     surface = baul_file_get_icon_surface (slot->viewed_file,
                                           get_dnd_icon_size (window),
                                           FALSE,
                                           gtk_widget_get_scale_factor (widget),
-                                          CAJA_FILE_ICON_FLAGS_IGNORE_VISITING | CAJA_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT);
+                                          BAUL_FILE_ICON_FLAGS_IGNORE_VISITING | BAUL_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT);
 
     gtk_drag_set_icon_surface (context, surface);
 
@@ -788,10 +788,10 @@ get_data_binder (CajaDragEachSelectedItemDataGet iteratee,
     char *location;
     int icon_size;
 
-    g_assert (CAJA_IS_SPATIAL_WINDOW (iterator_context));
-    window = CAJA_SPATIAL_WINDOW (iterator_context);
+    g_assert (BAUL_IS_SPATIAL_WINDOW (iterator_context));
+    window = BAUL_SPATIAL_WINDOW (iterator_context);
 
-    slot = CAJA_WINDOW (window)->details->active_pane->active_slot;
+    slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
 
     location = baul_window_slot_get_location_uri (slot);
     icon_size = get_dnd_icon_size (window);
@@ -846,7 +846,7 @@ baul_spatial_window_set_location_button  (CajaSpatialWindow *window,
                                                   baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
                                                   TRUE,
                                                   gtk_widget_get_scale_factor (window->details->location_button),
-                                                  CAJA_FILE_ICON_FLAGS_IGNORE_VISITING);
+                                                  BAUL_FILE_ICON_FLAGS_IGNORE_VISITING);
 
             if (surface != NULL)
             {
@@ -876,7 +876,7 @@ action_go_to_location_callback (GtkAction *action,
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
 
     baul_window_prompt_for_location (window, NULL);
 }
@@ -887,9 +887,9 @@ action_add_bookmark_callback (GtkAction *action,
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
 
-    if (!CAJA_IS_DESKTOP_WINDOW (window))   /* don't bookmark x-baul-desktop:/// */
+    if (!BAUL_IS_DESKTOP_WINDOW (window))   /* don't bookmark x-baul-desktop:/// */
     {
         baul_window_add_bookmark_for_current_location (window);
     }
@@ -899,7 +899,7 @@ static void
 action_edit_bookmarks_callback (GtkAction *action,
                                 gpointer user_data)
 {
-    baul_window_edit_bookmarks (CAJA_WINDOW (user_data));
+    baul_window_edit_bookmarks (BAUL_WINDOW (user_data));
 }
 
 static void
@@ -910,7 +910,7 @@ action_search_callback (GtkAction *action,
     char *uri;
     GFile *f;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
 
     uri = baul_search_directory_generate_new_uri ();
     f = g_file_new_for_uri (uri);
@@ -965,7 +965,7 @@ baul_spatial_window_init (CajaSpatialWindow *window)
 
     window->details = baul_spatial_window_get_instance_private (window);
 
-    win = CAJA_WINDOW (window);
+    win = BAUL_WINDOW (window);
 
     gtk_widget_set_hexpand (win->details->statusbar, TRUE);
     gtk_grid_attach (GTK_GRID (win->details->grid),
@@ -980,7 +980,7 @@ baul_spatial_window_init (CajaSpatialWindow *window)
     gtk_box_set_homogeneous (GTK_BOX (vbox), TRUE);
     gtk_widget_set_hexpand (vbox, TRUE);
     gtk_widget_set_vexpand (vbox, TRUE);
-    gtk_grid_attach (GTK_GRID (CAJA_WINDOW (window)->details->grid),
+    gtk_grid_attach (GTK_GRID (BAUL_WINDOW (window)->details->grid),
                      vbox,
                      0, 1, 1, 3);
 
@@ -1030,17 +1030,17 @@ baul_spatial_window_init (CajaSpatialWindow *window)
                       window);
 
     targets = gtk_drag_source_get_target_list (window->details->location_button);
-    gtk_target_list_add_text_targets (targets, CAJA_ICON_DND_TEXT);
+    gtk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);
 
     gtk_widget_set_sensitive (window->details->location_button, FALSE);
     g_signal_connect (window->details->location_button,
                       "clicked",
                       G_CALLBACK (location_button_clicked_callback), window);
-    gtk_box_pack_start (GTK_BOX (CAJA_WINDOW (window)->details->statusbar),
+    gtk_box_pack_start (GTK_BOX (BAUL_WINDOW (window)->details->statusbar),
                         window->details->location_button,
                         FALSE, TRUE, 0);
 
-    gtk_box_reorder_child (GTK_BOX (CAJA_WINDOW (window)->details->statusbar),
+    gtk_box_reorder_child (GTK_BOX (BAUL_WINDOW (window)->details->statusbar),
                            window->details->location_button, 0);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -1052,7 +1052,7 @@ baul_spatial_window_init (CajaSpatialWindow *window)
                                   window);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
     gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui manager */
 
@@ -1066,10 +1066,10 @@ static void
 baul_spatial_window_class_init (CajaSpatialWindowClass *klass)
 {
     GtkBindingSet *binding_set;
-	CajaWindowClass *nclass = CAJA_WINDOW_CLASS (klass);
+	CajaWindowClass *nclass = BAUL_WINDOW_CLASS (klass);
 	GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
 
-	nclass->window_type = CAJA_WINDOW_SPATIAL;
+	nclass->window_type = BAUL_WINDOW_SPATIAL;
 	nclass->bookmarks_placeholder = MENU_PATH_SPATIAL_BOOKMARKS_PLACEHOLDER;
 	nclass->prompt_for_location = real_prompt_for_location;
 	nclass->get_icon = real_get_icon;

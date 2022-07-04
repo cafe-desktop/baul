@@ -26,8 +26,8 @@
  * correspond to any particular object.
  */
 
-#ifndef CAJA_SIGNALLER_H
-#define CAJA_SIGNALLER_H
+#ifndef BAUL_SIGNALLER_H
+#define BAUL_SIGNALLER_H
 
 #include <glib-object.h>
 
@@ -43,4 +43,4 @@
 /* Get the one and only CajaSignaller to connect with or emit signals for */
 GObject *baul_signaller_get_current (void);
 
-#endif /* CAJA_SIGNALLER_H */
+#endif /* BAUL_SIGNALLER_H */

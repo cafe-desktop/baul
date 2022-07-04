@@ -332,7 +332,7 @@ baul_customization_data_destroy (CajaCustomizationData *data)
 static char *
 get_global_customization_path (const char *customization_name)
 {
-    return g_build_filename (CAJA_DATADIR,
+    return g_build_filename (BAUL_DATADIR,
                              customization_name,
                              NULL);
 }
@@ -468,7 +468,7 @@ load_name_map_hash_table (CajaCustomizationData *data)
     data->name_map_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
     /* build the path name to the browser.xml file and load it */
-    xml_path = g_build_filename (CAJA_DATADIR, "browser.xml", NULL);
+    xml_path = g_build_filename (BAUL_DATADIR, "browser.xml", NULL);
     if (xml_path)
     {
         browser_data = xmlParseFile (xml_path);

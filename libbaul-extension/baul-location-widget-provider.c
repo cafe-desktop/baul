@@ -82,10 +82,10 @@ baul_location_widget_provider_get_widget (CajaLocationWidgetProvider *provider,
                                           const char                 *uri,
                                           GtkWidget                  *window)
 {
-    g_return_val_if_fail (CAJA_IS_LOCATION_WIDGET_PROVIDER (provider), NULL);
-    g_return_val_if_fail (CAJA_LOCATION_WIDGET_PROVIDER_GET_IFACE (provider)->get_widget != NULL, NULL);
+    g_return_val_if_fail (BAUL_IS_LOCATION_WIDGET_PROVIDER (provider), NULL);
+    g_return_val_if_fail (BAUL_LOCATION_WIDGET_PROVIDER_GET_IFACE (provider)->get_widget != NULL, NULL);
 
-    return CAJA_LOCATION_WIDGET_PROVIDER_GET_IFACE (provider)->get_widget
+    return BAUL_LOCATION_WIDGET_PROVIDER_GET_IFACE (provider)->get_widget
            (provider, uri, window);
 
 }

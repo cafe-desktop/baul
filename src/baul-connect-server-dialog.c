@@ -456,7 +456,7 @@ display_location_async_cb (GObject *source,
 	CajaConnectServerDialog *dialog;
 	GError *error;
 
-	dialog = CAJA_CONNECT_SERVER_DIALOG (source);
+	dialog = BAUL_CONNECT_SERVER_DIALOG (source);
 	error = NULL;
 
 	baul_connect_server_dialog_display_location_finish (dialog,
@@ -630,7 +630,7 @@ connect_dialog_connect_to_server (CajaConnectServerDialog *dialog)
         GIcon *icon;
 
         name = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->name_entry), 0, -1);
-        icon = g_themed_icon_new (CAJA_ICON_FOLDER_REMOTE);
+        icon = g_themed_icon_new (BAUL_ICON_FOLDER_REMOTE);
         bookmark = baul_bookmark_new (location, strlen (name) ? name : NULL, TRUE, icon);
         list = baul_bookmark_list_new ();
         if (!baul_bookmark_list_contains (list, bookmark))
@@ -1145,7 +1145,7 @@ baul_connect_server_dialog_finalize (GObject *object)
 {
 	CajaConnectServerDialog *dialog;
 
-	dialog = CAJA_CONNECT_SERVER_DIALOG (object);
+	dialog = BAUL_CONNECT_SERVER_DIALOG (object);
 
 	connect_dialog_abort_mount_operation (dialog);
 
@@ -1172,8 +1172,8 @@ baul_connect_server_dialog_new (CajaWindow *window)
     CajaConnectServerDialog *conndlg;
     GtkWidget *dialog;
 
-    dialog = gtk_widget_new (CAJA_TYPE_CONNECT_SERVER_DIALOG, NULL);
-    conndlg = CAJA_CONNECT_SERVER_DIALOG (dialog);
+    dialog = gtk_widget_new (BAUL_TYPE_CONNECT_SERVER_DIALOG, NULL);
+    conndlg = BAUL_CONNECT_SERVER_DIALOG (dialog);
 
     if (window)
     {

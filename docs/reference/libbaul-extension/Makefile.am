@@ -65,12 +65,12 @@ GTKDOC_CFLAGS = \
 	-I$(top_srcdir)/libbaul-extension      \
 	-I$(top_builddir)                          \
 	-I$(top_builddir)/libbaul-extension    \
-	$(LIBCAJA_EXTENSION_CFLAGS)            \
+	$(LIBBAUL_EXTENSION_CFLAGS)            \
 	$(NULL)
 
 GTKDOC_LIBS = \
 	$(top_builddir)/libbaul-extension/libbaul-extension.la       \
-	$(LIBCAJA_EXTENSION_LIBS)                                        \
+	$(LIBBAUL_EXTENSION_LIBS)                                        \
 	$(NULL)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.

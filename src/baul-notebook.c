@@ -79,7 +79,7 @@ baul_notebook_class_init (CajaNotebookClass *klass)
                       g_cclosure_marshal_VOID__OBJECT,
                       G_TYPE_NONE,
                       1,
-                      CAJA_TYPE_WINDOW_SLOT);
+                      BAUL_TYPE_WINDOW_SLOT);
 }
 
 static gint
@@ -184,8 +184,8 @@ baul_notebook_sync_loading (CajaNotebook *notebook,
     GtkWidget *tab_label, *spinner, *icon;
     gboolean active;
 
-    g_return_if_fail (CAJA_IS_NOTEBOOK (notebook));
-    g_return_if_fail (CAJA_IS_WINDOW_SLOT (slot));
+    g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
+    g_return_if_fail (BAUL_IS_WINDOW_SLOT (slot));
 
     tab_label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (notebook), slot->content_box);
     g_return_if_fail (GTK_IS_WIDGET (tab_label));
@@ -221,8 +221,8 @@ baul_notebook_sync_tab_label (CajaNotebook *notebook,
 {
     GtkWidget *hbox, *label;
 
-    g_return_if_fail (CAJA_IS_NOTEBOOK (notebook));
-    g_return_if_fail (CAJA_IS_WINDOW_SLOT (slot));
+    g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
+    g_return_if_fail (BAUL_IS_WINDOW_SLOT (slot));
     g_return_if_fail (GTK_IS_WIDGET (slot->content_box));
 
     hbox = gtk_notebook_get_tab_label (GTK_NOTEBOOK (notebook), slot->content_box);
@@ -256,7 +256,7 @@ close_button_clicked_cb (GtkWidget *widget,
 {
     GtkWidget *notebook;
 
-    notebook = gtk_widget_get_ancestor (slot->content_box, CAJA_TYPE_NOTEBOOK);
+    notebook = gtk_widget_get_ancestor (slot->content_box, BAUL_TYPE_NOTEBOOK);
     if (notebook != NULL)
     {
         g_signal_emit (notebook, signals[TAB_CLOSE_REQUEST], 0, slot);
@@ -364,8 +364,8 @@ baul_notebook_add_tab (CajaNotebook *notebook,
     GtkNotebook *gnotebook = GTK_NOTEBOOK (notebook);
     GtkWidget *tab_label;
 
-    g_return_val_if_fail (CAJA_IS_NOTEBOOK (notebook), -1);
-    g_return_val_if_fail (CAJA_IS_WINDOW_SLOT (slot), -1);
+    g_return_val_if_fail (BAUL_IS_NOTEBOOK (notebook), -1);
+    g_return_val_if_fail (BAUL_IS_WINDOW_SLOT (slot), -1);
 
     tab_label = build_tab_label (notebook, slot);
 
@@ -417,7 +417,7 @@ baul_notebook_reorder_current_child_relative (CajaNotebook *notebook,
     GtkWidget *child;
     int page;
 
-    g_return_if_fail (CAJA_IS_NOTEBOOK (notebook));
+    g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
 
     if (!baul_notebook_can_reorder_current_child_relative (notebook, offset))
     {
@@ -438,7 +438,7 @@ baul_notebook_set_current_page_relative (CajaNotebook *notebook,
     GtkNotebook *gnotebook;
     int page;
 
-    g_return_if_fail (CAJA_IS_NOTEBOOK (notebook));
+    g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
 
     if (!baul_notebook_can_set_current_page_relative (notebook, offset))
     {
@@ -478,7 +478,7 @@ gboolean
 baul_notebook_can_reorder_current_child_relative (CajaNotebook *notebook,
         int offset)
 {
-    g_return_val_if_fail (CAJA_IS_NOTEBOOK (notebook), FALSE);
+    g_return_val_if_fail (BAUL_IS_NOTEBOOK (notebook), FALSE);
 
     return baul_notebook_is_valid_relative_position (notebook, offset);
 }
@@ -487,7 +487,7 @@ gboolean
 baul_notebook_can_set_current_page_relative (CajaNotebook *notebook,
         int offset)
 {
-    g_return_val_if_fail (CAJA_IS_NOTEBOOK (notebook), FALSE);
+    g_return_val_if_fail (BAUL_IS_NOTEBOOK (notebook), FALSE);
 
     return baul_notebook_is_valid_relative_position (notebook, offset);
 }

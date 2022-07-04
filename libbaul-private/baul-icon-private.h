@@ -22,8 +22,8 @@
    Author: Ettore Perazzoli <ettore@gnu.org>
 */
 
-#ifndef CAJA_ICON_CONTAINER_PRIVATE_H
-#define CAJA_ICON_CONTAINER_PRIVATE_H
+#ifndef BAUL_ICON_CONTAINER_PRIVATE_H
+#define BAUL_ICON_CONTAINER_PRIVATE_H
 
 #include <eel/eel-glib-extensions.h>
 
@@ -209,7 +209,7 @@ struct CajaIconContainerDetails
     char *font;
 
     /* font sizes used to draw labels */
-    int font_size_table[CAJA_ZOOM_LEVEL_LARGEST + 1];
+    int font_size_table[BAUL_ZOOM_LEVEL_LARGEST + 1];
 
     /* State used so arrow keys don't wander if icons aren't lined up.
      */
@@ -318,4 +318,4 @@ void          baul_icon_container_update_scroll_region        (CajaIconContainer
 
 
 
-#endif /* CAJA_ICON_CONTAINER_PRIVATE_H */
+#endif /* BAUL_ICON_CONTAINER_PRIVATE_H */

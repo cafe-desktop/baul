@@ -21,17 +21,17 @@
  *
  */
 
-#ifndef CAJA_QUERY_H
-#define CAJA_QUERY_H
+#ifndef BAUL_QUERY_H
+#define BAUL_QUERY_H
 
 #include <glib-object.h>
 
-#define CAJA_TYPE_QUERY		(baul_query_get_type ())
-#define CAJA_QUERY(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_QUERY, CajaQuery))
-#define CAJA_QUERY_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_QUERY, CajaQueryClass))
-#define CAJA_IS_QUERY(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_QUERY))
-#define CAJA_IS_QUERY_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_QUERY))
-#define CAJA_QUERY_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_QUERY, CajaQueryClass))
+#define BAUL_TYPE_QUERY		(baul_query_get_type ())
+#define BAUL_QUERY(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_QUERY, CajaQuery))
+#define BAUL_QUERY_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_QUERY, CajaQueryClass))
+#define BAUL_IS_QUERY(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_QUERY))
+#define BAUL_IS_QUERY_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_QUERY))
+#define BAUL_QUERY_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_QUERY, CajaQueryClass))
 
 typedef struct CajaQueryDetails CajaQueryDetails;
 
@@ -78,4 +78,4 @@ void           baul_query_set_size           (CajaQuery *query, gint64 size);
 char *         baul_query_get_contained_text (CajaQuery *query);
 void           baul_query_set_contained_text (CajaQuery *query, const char *text);
 
-#endif /* CAJA_QUERY_H */
+#endif /* BAUL_QUERY_H */

@@ -78,7 +78,7 @@ baul_property_page_new (const char *name,
     g_return_val_if_fail (page_widget != NULL && GTK_IS_WIDGET (page_widget),
                           NULL);
 
-    page = g_object_new (CAJA_TYPE_PROPERTY_PAGE,
+    page = g_object_new (BAUL_TYPE_PROPERTY_PAGE,
                          "name", name,
                          "label", label,
                          "page", page_widget,
@@ -95,7 +95,7 @@ baul_property_page_get_property (GObject *object,
 {
     CajaPropertyPage *page;
 
-    page = CAJA_PROPERTY_PAGE (object);
+    page = BAUL_PROPERTY_PAGE (object);
 
     switch (param_id) {
     case PROP_NAME :
@@ -121,7 +121,7 @@ baul_property_page_set_property (GObject *object,
 {
     CajaPropertyPage *page;
 
-    page = CAJA_PROPERTY_PAGE (object);
+    page = BAUL_PROPERTY_PAGE (object);
 
     switch (param_id) {
     case PROP_NAME :
@@ -156,7 +156,7 @@ baul_property_page_dispose (GObject *object)
 {
     CajaPropertyPage *page;
 
-    page = CAJA_PROPERTY_PAGE (object);
+    page = BAUL_PROPERTY_PAGE (object);
 
     if (page->details->label) {
         g_object_unref (page->details->label);
@@ -173,7 +173,7 @@ baul_property_page_finalize (GObject *object)
 {
     CajaPropertyPage *page;
 
-    page = CAJA_PROPERTY_PAGE (object);
+    page = BAUL_PROPERTY_PAGE (object);
 
     g_free (page->details->name);
 

@@ -77,7 +77,7 @@ main (int argc, char* argv[])
 		return 0;
 	}
 
-	progress_info = CAJA_PROGRESS_INFO (infos->data);
+	progress_info = BAUL_PROGRESS_INFO (infos->data);
 
 	g_signal_connect (progress_info, "changed", (GCallback)changed_cb, NULL);
 	g_signal_connect (progress_info, "progress-changed", (GCallback)progress_changed_cb, NULL);

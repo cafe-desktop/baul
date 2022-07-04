@@ -43,7 +43,7 @@
 #include "baul-search-directory.h"
 #include "baul-signaller.h"
 
-#define DEFAULT_CAJA_DIRECTORY_MODE (0755)
+#define DEFAULT_BAUL_DIRECTORY_MODE (0755)
 
 #define DESKTOP_DIRECTORY_NAME "Desktop"
 #define DEFAULT_DESKTOP_DIRECTORY_MODE (0755)
@@ -104,10 +104,10 @@ char* baul_get_user_directory(void)
 	 */
 	char* user_directory = g_build_filename(g_get_user_config_dir(), "baul", NULL);
 	/* Se necesita que esta dirección sea una carpeta, con los permisos
-	 * DEFAULT_CAJA_DIRECTORY_MODE. Pero si es un archivo, el programa intentará
+	 * DEFAULT_BAUL_DIRECTORY_MODE. Pero si es un archivo, el programa intentará
 	 * eliminar el archivo silenciosamente. */
 	if (g_file_test(user_directory, G_FILE_TEST_IS_DIR) == FALSE ||
-		g_access(user_directory, DEFAULT_CAJA_DIRECTORY_MODE) == -1)
+		g_access(user_directory, DEFAULT_BAUL_DIRECTORY_MODE) == -1)
 	{
 		/* Se puede obtener un enlace simbolico a una carpeta */
 		if (g_file_test(user_directory, G_FILE_TEST_IS_SYMLINK) == TRUE)
@@ -121,11 +121,11 @@ char* baul_get_user_directory(void)
 				/* Si el enlace no es un directorio, o si falla al hacer chmod,
 				 * se borra el enlace y se crea la carpeta */
 				if (g_file_test(link, G_FILE_TEST_IS_DIR) != TRUE ||
-					g_chmod(link, DEFAULT_CAJA_DIRECTORY_MODE) != 0)
+					g_chmod(link, DEFAULT_BAUL_DIRECTORY_MODE) != 0)
 				{
 					/* podemos borrar el enlace y crear la carpeta */
 					g_unlink(user_directory);
-					g_mkdir(user_directory, DEFAULT_CAJA_DIRECTORY_MODE);
+					g_mkdir(user_directory, DEFAULT_BAUL_DIRECTORY_MODE);
 				}
 
 				g_free(link);
@@ -133,22 +133,22 @@ char* baul_get_user_directory(void)
 		}
 		else if (g_file_test(user_directory, G_FILE_TEST_IS_DIR) == TRUE)
 		{
-			g_chmod(user_directory, DEFAULT_CAJA_DIRECTORY_MODE);
+			g_chmod(user_directory, DEFAULT_BAUL_DIRECTORY_MODE);
 		}
 		else if (g_file_test(user_directory, G_FILE_TEST_EXISTS) == TRUE)
 		{
 			/* podemos borrar el enlace y crear la carpeta */
 			g_unlink(user_directory);
-			g_mkdir(user_directory, DEFAULT_CAJA_DIRECTORY_MODE);
+			g_mkdir(user_directory, DEFAULT_BAUL_DIRECTORY_MODE);
 		}
 		else
 		{
 			/* Si no existe ningun archivo, se crea la carpeta */
-			g_mkdir_with_parents(user_directory, DEFAULT_CAJA_DIRECTORY_MODE);
+			g_mkdir_with_parents(user_directory, DEFAULT_BAUL_DIRECTORY_MODE);
 		}
 
 		/* Faltan permisos */
-		if (g_chmod(user_directory, DEFAULT_CAJA_DIRECTORY_MODE) != 0)
+		if (g_chmod(user_directory, DEFAULT_BAUL_DIRECTORY_MODE) != 0)
 		{
 			GtkWidget* dialog = gtk_message_dialog_new(
 				NULL,
@@ -335,7 +335,7 @@ xdg_dir_changed (CajaFile *file,
             schedule_user_dirs_changed ();
             desktop_dir_changed ();
             /* Icon might have changed */
-            baul_file_invalidate_attributes (file, CAJA_FILE_ATTRIBUTE_INFO);
+            baul_file_invalidate_attributes (file, BAUL_FILE_ATTRIBUTE_INFO);
         }
     }
     g_object_unref (location);
@@ -446,7 +446,7 @@ update_xdg_dir_cache (void)
             cached_xdg_dirs[i].file = baul_file_get_by_uri (uri);
             baul_file_monitor_add (cached_xdg_dirs[i].file,
                                    &cached_xdg_dirs[i],
-                                   CAJA_FILE_ATTRIBUTE_INFO);
+                                   BAUL_FILE_ATTRIBUTE_INFO);
             g_signal_connect (cached_xdg_dirs[i].file,
                               "changed", G_CALLBACK (xdg_dir_changed), &cached_xdg_dirs[i]);
             g_free (uri);
@@ -503,7 +503,7 @@ baul_get_xdg_dir (const char *type)
 static char *
 get_desktop_path (void)
 {
-    if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR))
+    if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_DESKTOP_IS_HOME_DIR))
     {
         return g_strdup (g_get_home_dir());
     }
@@ -528,7 +528,7 @@ baul_get_desktop_directory (void)
     desktop_directory = get_desktop_path ();
 
     /* Don't try to create a home directory */
-    if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR))
+    if (!g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_DESKTOP_IS_HOME_DIR))
     {
         if (!g_file_test (desktop_directory, G_FILE_TEST_EXISTS))
         {
@@ -613,7 +613,7 @@ baul_create_templates_directory (void)
     dir = baul_get_templates_directory ();
     if (!g_file_test (dir, G_FILE_TEST_EXISTS))
     {
-        g_mkdir (dir, DEFAULT_CAJA_DIRECTORY_MODE);
+        g_mkdir (dir, DEFAULT_BAUL_DIRECTORY_MODE);
     }
     g_free (dir);
 }
@@ -730,7 +730,7 @@ baul_is_desktop_directory_file (GFile *dir,
 
     if (!desktop_dir_changed_callback_installed)
     {
-        g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+        g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_DESKTOP_IS_HOME_DIR,
                                   G_CALLBACK(desktop_dir_changed_callback),
                                   NULL);
         desktop_dir_changed_callback_installed = TRUE;
@@ -751,7 +751,7 @@ baul_is_desktop_directory (GFile *dir)
 
     if (!desktop_dir_changed_callback_installed)
     {
-        g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_DESKTOP_IS_HOME_DIR,
+        g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_DESKTOP_IS_HOME_DIR,
                                   G_CALLBACK(desktop_dir_changed_callback),
                                   NULL);
         desktop_dir_changed_callback_installed = TRUE;
@@ -862,7 +862,7 @@ baul_get_data_file_path (const char *partial_path)
     g_free (path);
 
     /* next try the shared directory */
-    path = g_build_filename (CAJA_DATADIR, partial_path, NULL);
+    path = g_build_filename (BAUL_DATADIR, partial_path, NULL);
     if (g_file_test (path, G_FILE_TEST_EXISTS))
     {
         return path;
@@ -1153,7 +1153,7 @@ baul_trashed_files_get_original_directories (GList *files,
 
     for (l = files; l != NULL; l = l->next)
     {
-        file = CAJA_FILE (l->data);
+        file = BAUL_FILE (l->data);
         original_file = baul_file_get_trash_original_file (file);
 
         original_dir = NULL;
@@ -1209,7 +1209,7 @@ locations_from_file_list (GList *file_list)
 
     for (l = file_list; l != NULL; l = l->next)
     {
-        file = CAJA_FILE (l->data);
+        file = BAUL_FILE (l->data);
         ret = g_list_prepend (ret, baul_file_get_location (file));
     }
 
@@ -1231,7 +1231,7 @@ baul_restore_files_from_trash (GList *files,
     {
         char *message, *file_name;
 
-        file = CAJA_FILE (l->data);
+        file = BAUL_FILE (l->data);
         file_name = baul_file_get_display_name (file);
         message = g_strdup_printf (_("Could not determine original location of \"%s\" "), file_name);
         g_free (file_name);
@@ -1251,7 +1251,7 @@ baul_restore_files_from_trash (GList *files,
         original_dirs = g_hash_table_get_keys (original_dirs_hash);
         for (l = original_dirs; l != NULL; l = l->next)
         {
-            original_dir = CAJA_FILE (l->data);
+            original_dir = BAUL_FILE (l->data);
             original_dir_location = baul_file_get_location (original_dir);
 
             files = g_hash_table_lookup (original_dirs_hash, original_dir);
@@ -1274,11 +1274,11 @@ baul_restore_files_from_trash (GList *files,
     baul_file_list_unref (unhandled_files);
 }
 
-#if !defined (CAJA_OMIT_SELF_CHECK)
+#if !defined (BAUL_OMIT_SELF_CHECK)
 
 void
 baul_self_check_file_utilities (void)
 {
 }
 
-#endif /* !CAJA_OMIT_SELF_CHECK */
+#endif /* !BAUL_OMIT_SELF_CHECK */

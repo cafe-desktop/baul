@@ -21,8 +21,8 @@
  *
  */
 
-#ifndef CAJA_EXTENSION_PRIVATE_H
-#define CAJA_EXTENSION_PRIVATE_H
+#ifndef BAUL_EXTENSION_PRIVATE_H
+#define BAUL_EXTENSION_PRIVATE_H
 
 #include "baul-file-info.h"
 

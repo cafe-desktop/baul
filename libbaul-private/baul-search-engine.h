@@ -21,19 +21,19 @@
  *
  */
 
-#ifndef CAJA_SEARCH_ENGINE_H
-#define CAJA_SEARCH_ENGINE_H
+#ifndef BAUL_SEARCH_ENGINE_H
+#define BAUL_SEARCH_ENGINE_H
 
 #include <glib-object.h>
 
 #include "baul-query.h"
 
-#define CAJA_TYPE_SEARCH_ENGINE		(baul_search_engine_get_type ())
-#define CAJA_SEARCH_ENGINE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_SEARCH_ENGINE, CajaSearchEngine))
-#define CAJA_SEARCH_ENGINE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_SEARCH_ENGINE, CajaSearchEngineClass))
-#define CAJA_IS_SEARCH_ENGINE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_SEARCH_ENGINE))
-#define CAJA_IS_SEARCH_ENGINE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_SEARCH_ENGINE))
-#define CAJA_SEARCH_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_SEARCH_ENGINE, CajaSearchEngineClass))
+#define BAUL_TYPE_SEARCH_ENGINE		(baul_search_engine_get_type ())
+#define BAUL_SEARCH_ENGINE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_SEARCH_ENGINE, CajaSearchEngine))
+#define BAUL_SEARCH_ENGINE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_SEARCH_ENGINE, CajaSearchEngineClass))
+#define BAUL_IS_SEARCH_ENGINE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_SEARCH_ENGINE))
+#define BAUL_IS_SEARCH_ENGINE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_SEARCH_ENGINE))
+#define BAUL_SEARCH_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_SEARCH_ENGINE, CajaSearchEngineClass))
 
 typedef struct CajaSearchEngineDetails CajaSearchEngineDetails;
 
@@ -75,4 +75,4 @@ void	       baul_search_engine_hits_subtracted (CajaSearchEngine *engine, GList 
 void	       baul_search_engine_finished (CajaSearchEngine *engine);
 void	       baul_search_engine_error (CajaSearchEngine *engine, const char *error_message);
 
-#endif /* CAJA_SEARCH_ENGINE_H */
+#endif /* BAUL_SEARCH_ENGINE_H */

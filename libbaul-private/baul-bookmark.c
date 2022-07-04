@@ -69,9 +69,9 @@ baul_bookmark_finalize (GObject *object)
 {
     CajaBookmark *bookmark;
 
-    g_assert (CAJA_IS_BOOKMARK (object));
+    g_assert (BAUL_IS_BOOKMARK (object));
 
-    bookmark = CAJA_BOOKMARK (object);
+    bookmark = BAUL_BOOKMARK (object);
 
     baul_bookmark_disconnect_file (bookmark);
 
@@ -136,11 +136,11 @@ baul_bookmark_compare_with (gconstpointer a, gconstpointer b)
     CajaBookmark *bookmark_a;
     CajaBookmark *bookmark_b;
 
-    g_return_val_if_fail (CAJA_IS_BOOKMARK (a), 1);
-    g_return_val_if_fail (CAJA_IS_BOOKMARK (b), 1);
+    g_return_val_if_fail (BAUL_IS_BOOKMARK (a), 1);
+    g_return_val_if_fail (BAUL_IS_BOOKMARK (b), 1);
 
-    bookmark_a = CAJA_BOOKMARK (a);
-    bookmark_b = CAJA_BOOKMARK (b);
+    bookmark_a = BAUL_BOOKMARK (a);
+    bookmark_b = BAUL_BOOKMARK (b);
 
     if (g_strcmp0 (bookmark_a->details->name,
                     bookmark_b->details->name) != 0)
@@ -173,11 +173,11 @@ baul_bookmark_compare_uris (gconstpointer a, gconstpointer b)
     CajaBookmark *bookmark_a;
     CajaBookmark *bookmark_b;
 
-    g_return_val_if_fail (CAJA_IS_BOOKMARK (a), 1);
-    g_return_val_if_fail (CAJA_IS_BOOKMARK (b), 1);
+    g_return_val_if_fail (BAUL_IS_BOOKMARK (a), 1);
+    g_return_val_if_fail (BAUL_IS_BOOKMARK (b), 1);
 
-    bookmark_a = CAJA_BOOKMARK (a);
-    bookmark_b = CAJA_BOOKMARK (b);
+    bookmark_a = BAUL_BOOKMARK (a);
+    bookmark_b = BAUL_BOOKMARK (b);
 
     return !g_file_equal (bookmark_a->details->location,
                           bookmark_b->details->location);
@@ -186,7 +186,7 @@ baul_bookmark_compare_uris (gconstpointer a, gconstpointer b)
 CajaBookmark *
 baul_bookmark_copy (CajaBookmark *bookmark)
 {
-    g_return_val_if_fail (CAJA_IS_BOOKMARK (bookmark), NULL);
+    g_return_val_if_fail (BAUL_IS_BOOKMARK (bookmark), NULL);
 
     return baul_bookmark_new (
                bookmark->details->location,
@@ -198,7 +198,7 @@ baul_bookmark_copy (CajaBookmark *bookmark)
 char *
 baul_bookmark_get_name (CajaBookmark *bookmark)
 {
-    g_return_val_if_fail(CAJA_IS_BOOKMARK (bookmark), NULL);
+    g_return_val_if_fail(BAUL_IS_BOOKMARK (bookmark), NULL);
 
     return g_strdup (bookmark->details->name);
 }
@@ -207,7 +207,7 @@ baul_bookmark_get_name (CajaBookmark *bookmark)
 gboolean
 baul_bookmark_get_has_custom_name (CajaBookmark *bookmark)
 {
-    g_return_val_if_fail(CAJA_IS_BOOKMARK (bookmark), FALSE);
+    g_return_val_if_fail(BAUL_IS_BOOKMARK (bookmark), FALSE);
 
     return (bookmark->details->has_custom_name);
 }
@@ -221,7 +221,7 @@ baul_bookmark_get_surface (CajaBookmark *bookmark,
     CajaIconInfo *info;
     int pixel_size, pixel_scale;
 
-    g_return_val_if_fail (CAJA_IS_BOOKMARK (bookmark), NULL);
+    g_return_val_if_fail (BAUL_IS_BOOKMARK (bookmark), NULL);
 
     icon = baul_bookmark_get_icon (bookmark);
     if (icon == NULL)
@@ -243,7 +243,7 @@ baul_bookmark_get_surface (CajaBookmark *bookmark,
 GIcon *
 baul_bookmark_get_icon (CajaBookmark *bookmark)
 {
-    g_return_val_if_fail (CAJA_IS_BOOKMARK (bookmark), NULL);
+    g_return_val_if_fail (BAUL_IS_BOOKMARK (bookmark), NULL);
 
     /* Try to connect a file in case file exists now but didn't earlier. */
     baul_bookmark_connect_file (bookmark);
@@ -258,7 +258,7 @@ baul_bookmark_get_icon (CajaBookmark *bookmark)
 GFile *
 baul_bookmark_get_location (CajaBookmark *bookmark)
 {
-    g_return_val_if_fail(CAJA_IS_BOOKMARK (bookmark), NULL);
+    g_return_val_if_fail(BAUL_IS_BOOKMARK (bookmark), NULL);
 
     /* Try to connect a file in case file exists now but didn't earlier.
      * This allows a bookmark to update its image properly in the case
@@ -296,7 +296,7 @@ gboolean
 baul_bookmark_set_name (CajaBookmark *bookmark, const char *new_name)
 {
     g_return_val_if_fail (new_name != NULL, FALSE);
-    g_return_val_if_fail (CAJA_IS_BOOKMARK (bookmark), FALSE);
+    g_return_val_if_fail (BAUL_IS_BOOKMARK (bookmark), FALSE);
 
     if (g_strcmp0 (new_name, bookmark->details->name) == 0)
     {
@@ -324,7 +324,7 @@ static gboolean
 baul_bookmark_icon_is_different (CajaBookmark *bookmark,
                                  GIcon *new_icon)
 {
-    g_assert (CAJA_IS_BOOKMARK (bookmark));
+    g_assert (BAUL_IS_BOOKMARK (bookmark));
     g_assert (new_icon != NULL);
 
     if (bookmark->details->icon == NULL)
@@ -344,7 +344,7 @@ baul_bookmark_update_icon (CajaBookmark *bookmark)
 {
     GIcon *new_icon;
 
-    g_assert (CAJA_IS_BOOKMARK (bookmark));
+    g_assert (BAUL_IS_BOOKMARK (bookmark));
 
     if (bookmark->details->file == NULL)
     {
@@ -359,7 +359,7 @@ baul_bookmark_update_icon (CajaBookmark *bookmark)
 
     if (!baul_file_is_not_yet_confirmed (bookmark->details->file) &&
             baul_file_check_if_ready (bookmark->details->file,
-                                      CAJA_FILE_ATTRIBUTES_FOR_ICON))
+                                      BAUL_FILE_ATTRIBUTES_FOR_ICON))
     {
         new_icon = baul_file_get_gicon (bookmark->details->file, 0);
         if (baul_bookmark_icon_is_different (bookmark, new_icon))
@@ -385,8 +385,8 @@ bookmark_file_changed_callback (CajaFile *file, CajaBookmark *bookmark)
     gboolean should_emit_contents_changed_signal;
     char *display_name;
 
-    g_assert (CAJA_IS_FILE (file));
-    g_assert (CAJA_IS_BOOKMARK (bookmark));
+    g_assert (BAUL_IS_FILE (file));
+    g_assert (BAUL_IS_BOOKMARK (bookmark));
     g_assert (file == bookmark->details->file);
 
     should_emit_appearance_changed_signal = FALSE;
@@ -474,7 +474,7 @@ baul_bookmark_set_icon_to_default (CajaBookmark *bookmark)
         g_object_unref (bookmark->details->icon);
     }
 
-    folder = g_themed_icon_new (CAJA_ICON_FOLDER);
+    folder = g_themed_icon_new (BAUL_ICON_FOLDER);
 
     if (baul_bookmark_uri_known_not_to_exist (bookmark))
     {
@@ -499,7 +499,7 @@ baul_bookmark_set_icon_to_default (CajaBookmark *bookmark)
 static void
 baul_bookmark_disconnect_file (CajaBookmark *bookmark)
 {
-    g_assert (CAJA_IS_BOOKMARK (bookmark));
+    g_assert (BAUL_IS_BOOKMARK (bookmark));
 
     if (bookmark->details->file != NULL)
     {
@@ -522,7 +522,7 @@ baul_bookmark_connect_file (CajaBookmark *bookmark)
 {
     char *display_name;
 
-    g_assert (CAJA_IS_BOOKMARK (bookmark));
+    g_assert (BAUL_IS_BOOKMARK (bookmark));
 
     if (bookmark->details->file != NULL)
     {
@@ -551,7 +551,7 @@ baul_bookmark_connect_file (CajaBookmark *bookmark)
 
     if (!bookmark->details->has_custom_name &&
             bookmark->details->file &&
-            baul_file_check_if_ready (bookmark->details->file, CAJA_FILE_ATTRIBUTE_INFO))
+            baul_file_check_if_ready (bookmark->details->file, BAUL_FILE_ATTRIBUTE_INFO))
     {
         display_name = baul_file_get_display_name (bookmark->details->file);
         if (g_strcmp0 (bookmark->details->name, display_name) != 0)
@@ -572,7 +572,7 @@ baul_bookmark_new (GFile *location, const char *name, gboolean has_custom_name,
 {
     CajaBookmark *new_bookmark;
 
-    new_bookmark = CAJA_BOOKMARK (g_object_new (CAJA_TYPE_BOOKMARK, NULL));
+    new_bookmark = BAUL_BOOKMARK (g_object_new (BAUL_TYPE_BOOKMARK, NULL));
 
     new_bookmark->details->name = g_strdup (name);
     new_bookmark->details->location = g_object_ref (location);

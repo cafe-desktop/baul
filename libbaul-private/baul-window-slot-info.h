@@ -22,17 +22,17 @@
    Author: Christian Neumair <cneumair@gnome.org>
 */
 
-#ifndef CAJA_WINDOW_SLOT_INFO_H
-#define CAJA_WINDOW_SLOT_INFO_H
+#ifndef BAUL_WINDOW_SLOT_INFO_H
+#define BAUL_WINDOW_SLOT_INFO_H
 
 #include "baul-window-info.h"
 #include "baul-view.h"
 
 
-#define CAJA_TYPE_WINDOW_SLOT_INFO           (baul_window_slot_info_get_type ())
-#define CAJA_WINDOW_SLOT_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_WINDOW_SLOT_INFO, CajaWindowSlotInfo))
-#define CAJA_IS_WINDOW_SLOT_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_WINDOW_SLOT_INFO))
-#define CAJA_WINDOW_SLOT_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_WINDOW_SLOT_INFO, CajaWindowSlotInfoIface))
+#define BAUL_TYPE_WINDOW_SLOT_INFO           (baul_window_slot_info_get_type ())
+#define BAUL_WINDOW_SLOT_INFO(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_WINDOW_SLOT_INFO, CajaWindowSlotInfo))
+#define BAUL_IS_WINDOW_SLOT_INFO(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_WINDOW_SLOT_INFO))
+#define BAUL_WINDOW_SLOT_INFO_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_WINDOW_SLOT_INFO, CajaWindowSlotInfoIface))
 
 typedef struct _CajaWindowSlotInfoIface CajaWindowSlotInfoIface;
 
@@ -103,4 +103,4 @@ int                               baul_window_slot_info_get_selection_count  (Ca
 GList *                           baul_window_slot_info_get_selection        (CajaWindowSlotInfo           *slot);
 char *                            baul_window_slot_info_get_title            (CajaWindowSlotInfo           *slot);
 
-#endif /* CAJA_WINDOW_SLOT_INFO_H */
+#endif /* BAUL_WINDOW_SLOT_INFO_H */

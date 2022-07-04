@@ -24,8 +24,8 @@
 /* baul-application.h
  */
 
-#ifndef CAJA_APPLICATION_H
-#define CAJA_APPLICATION_H
+#ifndef BAUL_APPLICATION_H
+#define BAUL_APPLICATION_H
 
 #include <config.h>
 #include <gdk/gdk.h>
@@ -34,28 +34,28 @@
 
 #include <libegg/eggsmclient.h>
 
-#define CAJA_DESKTOP_ICON_VIEW_IID "OAFIID:Caja_File_Manager_Desktop_Icon_View"
+#define BAUL_DESKTOP_ICON_VIEW_IID "OAFIID:Caja_File_Manager_Desktop_Icon_View"
 
-#define CAJA_TYPE_APPLICATION \
+#define BAUL_TYPE_APPLICATION \
 	baul_application_get_type()
-#define CAJA_APPLICATION(obj) \
-	(G_TYPE_CHECK_INSTANCE_CAST((obj), CAJA_TYPE_APPLICATION, CajaApplication))
-#define CAJA_APPLICATION_CLASS(klass) \
-	(G_TYPE_CHECK_CLASS_CAST((klass), CAJA_TYPE_APPLICATION, CajaApplicationClass))
-#define CAJA_IS_APPLICATION(obj) \
-	(G_TYPE_CHECK_INSTANCE_TYPE((obj), CAJA_TYPE_APPLICATION))
-#define CAJA_IS_APPLICATION_CLASS(klass) \
-	(G_TYPE_CHECK_CLASS_TYPE((klass), CAJA_TYPE_APPLICATION))
-#define CAJA_APPLICATION_GET_CLASS(obj) \
-	(G_TYPE_INSTANCE_GET_CLASS((obj), CAJA_TYPE_APPLICATION, CajaApplicationClass))
+#define BAUL_APPLICATION(obj) \
+	(G_TYPE_CHECK_INSTANCE_CAST((obj), BAUL_TYPE_APPLICATION, CajaApplication))
+#define BAUL_APPLICATION_CLASS(klass) \
+	(G_TYPE_CHECK_CLASS_CAST((klass), BAUL_TYPE_APPLICATION, CajaApplicationClass))
+#define BAUL_IS_APPLICATION(obj) \
+	(G_TYPE_CHECK_INSTANCE_TYPE((obj), BAUL_TYPE_APPLICATION))
+#define BAUL_IS_APPLICATION_CLASS(klass) \
+	(G_TYPE_CHECK_CLASS_TYPE((klass), BAUL_TYPE_APPLICATION))
+#define BAUL_APPLICATION_GET_CLASS(obj) \
+	(G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_APPLICATION, CajaApplicationClass))
 
-#ifndef CAJA_WINDOW_DEFINED
-#define CAJA_WINDOW_DEFINED
+#ifndef BAUL_WINDOW_DEFINED
+#define BAUL_WINDOW_DEFINED
 typedef struct CajaWindow CajaWindow;
 #endif
 
-#ifndef CAJA_SPATIAL_WINDOW_DEFINED
-#define CAJA_SPATIAL_WINDOW_DEFINED
+#ifndef BAUL_SPATIAL_WINDOW_DEFINED
+#define BAUL_SPATIAL_WINDOW_DEFINED
 typedef struct _CajaSpatialWindow CajaSpatialWindow;
 #endif
 
@@ -103,4 +103,4 @@ void baul_application_open_location (CajaApplication *application,
         const char *startup_id,
         const gboolean open_in_tabs);
 
-#endif /* CAJA_APPLICATION_H */
+#endif /* BAUL_APPLICATION_H */

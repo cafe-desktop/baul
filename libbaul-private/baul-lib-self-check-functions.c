@@ -25,14 +25,14 @@
 
 #include <config.h>
 
-#if ! defined (CAJA_OMIT_SELF_CHECK)
+#if ! defined (BAUL_OMIT_SELF_CHECK)
 
 #include "baul-lib-self-check-functions.h"
 
 void
 baul_run_lib_self_checks (void)
 {
-    CAJA_LIB_FOR_EACH_SELF_CHECK_FUNCTION (EEL_CALL_SELF_CHECK_FUNCTION)
+    BAUL_LIB_FOR_EACH_SELF_CHECK_FUNCTION (EEL_CALL_SELF_CHECK_FUNCTION)
 }
 
-#endif /* ! CAJA_OMIT_SELF_CHECK */
+#endif /* ! BAUL_OMIT_SELF_CHECK */

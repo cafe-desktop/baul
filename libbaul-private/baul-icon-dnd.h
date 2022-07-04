@@ -25,8 +25,8 @@
 	    Andy Hertzfeld <andy@eazel.com>
 */
 
-#ifndef CAJA_ICON_DND_H
-#define CAJA_ICON_DND_H
+#ifndef BAUL_ICON_DND_H
+#define BAUL_ICON_DND_H
 
 #include "baul-icon-container.h"
 #include "baul-dnd.h"
@@ -54,4 +54,4 @@ void   baul_icon_dnd_begin_drag            (CajaIconContainer *container,
         int                    start_y);
 void   baul_icon_dnd_end_drag              (CajaIconContainer *container);
 
-#endif /* CAJA_ICON_DND_H */
+#endif /* BAUL_ICON_DND_H */

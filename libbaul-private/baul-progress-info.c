@@ -122,7 +122,7 @@ baul_progress_info_finalize (GObject *object)
 {
     CajaProgressInfo *info;
 
-    info = CAJA_PROGRESS_INFO (object);
+    info = BAUL_PROGRESS_INFO (object);
 
     g_free (info->status);
     g_free (info->details);
@@ -139,7 +139,7 @@ baul_progress_info_dispose (GObject *object)
 {
     CajaProgressInfo *info;
 
-    info = CAJA_PROGRESS_INFO (object);
+    info = BAUL_PROGRESS_INFO (object);
 
     G_LOCK (progress_info);
 
@@ -169,7 +169,7 @@ baul_progress_info_class_init (CajaProgressInfoClass *klass)
 
     signals[CHANGED] =
         g_signal_new ("changed",
-                      CAJA_TYPE_PROGRESS_INFO,
+                      BAUL_TYPE_PROGRESS_INFO,
                       G_SIGNAL_RUN_LAST,
                       0,
                       NULL, NULL,
@@ -178,7 +178,7 @@ baul_progress_info_class_init (CajaProgressInfoClass *klass)
 
     signals[PROGRESS_CHANGED] =
         g_signal_new ("progress-changed",
-                      CAJA_TYPE_PROGRESS_INFO,
+                      BAUL_TYPE_PROGRESS_INFO,
                       G_SIGNAL_RUN_LAST,
                       0,
                       NULL, NULL,
@@ -187,7 +187,7 @@ baul_progress_info_class_init (CajaProgressInfoClass *klass)
 
     signals[STARTED] =
         g_signal_new ("started",
-                      CAJA_TYPE_PROGRESS_INFO,
+                      BAUL_TYPE_PROGRESS_INFO,
                       G_SIGNAL_RUN_LAST,
                       0,
                       NULL, NULL,
@@ -196,7 +196,7 @@ baul_progress_info_class_init (CajaProgressInfoClass *klass)
 
     signals[FINISHED] =
         g_signal_new ("finished",
-                      CAJA_TYPE_PROGRESS_INFO,
+                      BAUL_TYPE_PROGRESS_INFO,
                       G_SIGNAL_RUN_LAST,
                       0,
                       NULL, NULL,
@@ -622,7 +622,7 @@ update_status_icon_and_window (void)
 
         if (window_shown)
         {
-            if (g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_NOTIFICATIONS) &&
+            if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_NOTIFICATIONS) &&
                 !gtk_window_is_active (GTK_WINDOW (get_progress_window ())))
             {
                 NotifyNotification *notification;
@@ -985,7 +985,7 @@ baul_progress_info_new (gboolean should_start, gboolean can_pause)
 {
     CajaProgressInfo *info;
 
-    info = g_object_new (CAJA_TYPE_PROGRESS_INFO, NULL);
+    info = g_object_new (BAUL_TYPE_PROGRESS_INFO, NULL);
     info->waiting = !should_start;
     info->can_pause = can_pause;
     return info;

@@ -50,7 +50,7 @@ fill_details_async_cb (GObject *source,
 	gboolean res;
 
 	self = user_data;
-	dialog = CAJA_CONNECT_SERVER_DIALOG (source);
+	dialog = BAUL_CONNECT_SERVER_DIALOG (source);
 
 	res = baul_connect_server_dialog_fill_details_finish (dialog, result);
 
@@ -70,7 +70,7 @@ baul_connect_server_operation_ask_password (GMountOperation *op,
 {
 	CajaConnectServerOperation *self;
 
-	self = CAJA_CONNECT_SERVER_OPERATION (op);
+	self = BAUL_CONNECT_SERVER_OPERATION (op);
 
 	baul_connect_server_dialog_fill_details_async (self->details->dialog,
 							   G_MOUNT_OPERATION (self),
@@ -89,7 +89,7 @@ baul_connect_server_operation_set_property (GObject *object,
 {
 	CajaConnectServerOperation *self;
 
-	self = CAJA_CONNECT_SERVER_OPERATION (object);
+	self = BAUL_CONNECT_SERVER_OPERATION (object);
 
 	switch (property_id) {
 	case PROP_DIALOG:
@@ -116,7 +116,7 @@ baul_connect_server_operation_class_init (CajaConnectServerOperationClass *klass
 
 	pspec = g_param_spec_object ("dialog", "The connect dialog",
 				     "The connect to server dialog",
-				     CAJA_TYPE_CONNECT_SERVER_DIALOG,
+				     BAUL_TYPE_CONNECT_SERVER_DIALOG,
 				     G_PARAM_CONSTRUCT_ONLY | G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
 	g_object_class_install_property (object_class, PROP_DIALOG, pspec);
 }
@@ -130,7 +130,7 @@ baul_connect_server_operation_init (CajaConnectServerOperation *self)
 GMountOperation *
 baul_connect_server_operation_new (CajaConnectServerDialog *dialog)
 {
-	return g_object_new (CAJA_TYPE_CONNECT_SERVER_OPERATION,
+	return g_object_new (BAUL_TYPE_CONNECT_SERVER_OPERATION,
 			     "dialog", dialog,
 			     NULL);
 }

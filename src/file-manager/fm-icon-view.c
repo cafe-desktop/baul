@@ -124,56 +124,56 @@ struct FMIconViewDetails
 static const SortCriterion sort_criteria[] =
 {
     {
-        CAJA_FILE_SORT_BY_DISPLAY_NAME,
+        BAUL_FILE_SORT_BY_DISPLAY_NAME,
         "name",
         "Sort by Name",
         N_("by _Name"),
         N_("Keep icons sorted by name in rows")
     },
     {
-        CAJA_FILE_SORT_BY_SIZE,
+        BAUL_FILE_SORT_BY_SIZE,
         "size",
         "Sort by Size",
         N_("by _Size"),
         N_("Keep icons sorted by size in rows")
     },
     {
-        CAJA_FILE_SORT_BY_SIZE_ON_DISK,
+        BAUL_FILE_SORT_BY_SIZE_ON_DISK,
         "size_on_disk",
         "Sort by Size on Disk",
         N_("by S_ize on Disk"),
         N_("Keep icons sorted by disk usage in rows")
     },
     {
-        CAJA_FILE_SORT_BY_TYPE,
+        BAUL_FILE_SORT_BY_TYPE,
         "type",
         "Sort by Type",
         N_("by _Type"),
         N_("Keep icons sorted by type in rows")
     },
     {
-        CAJA_FILE_SORT_BY_MTIME,
+        BAUL_FILE_SORT_BY_MTIME,
         "modification date",
         "Sort by Modification Date",
         N_("by Modification _Date"),
         N_("Keep icons sorted by modification date in rows")
     },
     {
-        CAJA_FILE_SORT_BY_EMBLEMS,
+        BAUL_FILE_SORT_BY_EMBLEMS,
         "emblems",
         "Sort by Emblems",
         N_("by _Emblems"),
         N_("Keep icons sorted by emblems in rows")
     },
     {
-        CAJA_FILE_SORT_BY_TRASHED_TIME,
+        BAUL_FILE_SORT_BY_TRASHED_TIME,
         "trashed",
         "Sort by Trash Time",
         N_("by T_rash Time"),
         N_("Keep icons sorted by trash time in rows")
     },
     {
-        CAJA_FILE_SORT_BY_EXTENSION,
+        BAUL_FILE_SORT_BY_EXTENSION,
         "extension",
         "Sort by Extension",
         N_("by E_xtension"),
@@ -220,7 +220,7 @@ static void all_columns_same_width_changed_callback        (gpointer callback_da
 static void fm_icon_view_iface_init (CajaViewIface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (FMIconView, fm_icon_view, FM_TYPE_DIRECTORY_VIEW,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_VIEW,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_VIEW,
                                  fm_icon_view_iface_init));
 
 static void
@@ -292,7 +292,7 @@ fm_icon_view_finalize (GObject *object)
 static CajaIconContainer *
 get_icon_container (FMIconView *icon_view)
 {
-    return CAJA_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view)));
+    return BAUL_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view)));
 }
 
 static gboolean
@@ -305,8 +305,8 @@ get_stored_icon_position_callback (CajaIconContainer *container,
     gboolean position_good;
     char c;
 
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (position != NULL);
     g_assert (FM_IS_ICON_VIEW (icon_view));
 
@@ -317,7 +317,7 @@ get_stored_icon_position_callback (CajaIconContainer *container,
 
     /* Get the current position of this icon from the metadata. */
     position_string = baul_file_get_metadata
-                      (file, CAJA_METADATA_KEY_ICON_POSITION, "");
+                      (file, BAUL_METADATA_KEY_ICON_POSITION, "");
     position_good = sscanf
                     (position_string, " %d , %d %c",
                      &position->x, &position->y, &c) == 2;
@@ -332,7 +332,7 @@ get_stored_icon_position_callback (CajaIconContainer *container,
 
         /* Get the scale of the icon from the metadata. */
         scale_string = baul_file_get_metadata
-                       (file, CAJA_METADATA_KEY_ICON_SCALE, "1");
+                       (file, BAUL_METADATA_KEY_ICON_SCALE, "1");
         position->scale = g_ascii_strtod (scale_string, NULL);
 
         if (errno != 0)
@@ -362,9 +362,9 @@ real_set_sort_criterion (FMIconView *icon_view,
     if (clear)
     {
         baul_file_set_metadata (file,
-                                CAJA_METADATA_KEY_ICON_VIEW_SORT_BY, NULL, NULL);
+                                BAUL_METADATA_KEY_ICON_VIEW_SORT_BY, NULL, NULL);
         baul_file_set_metadata (file,
-                                CAJA_METADATA_KEY_ICON_VIEW_SORT_REVERSED, NULL, NULL);
+                                BAUL_METADATA_KEY_ICON_VIEW_SORT_REVERSED, NULL, NULL);
         icon_view->details->sort =
             get_sort_criterion_by_sort_type	(get_default_sort_order
                                              (file, &icon_view->details->sort_reversed));
@@ -505,7 +505,7 @@ action_sort_radio_callback (GtkAction *action,
     /* Note that id might be a toggle item.
      * Ignore non-sort ids so that they don't cause sorting.
      */
-    if (sort_type == CAJA_FILE_SORT_NONE)
+    if (sort_type == BAUL_FILE_SORT_NONE)
     {
         switch_to_manual_layout (view);
     }
@@ -528,7 +528,7 @@ list_covers (CajaIconData *data, gpointer callback_data)
 static void
 unref_cover (CajaIconData *data, gpointer callback_data)
 {
-    baul_file_unref (CAJA_FILE (data));
+    baul_file_unref (BAUL_FILE (data));
 }
 
 static void
@@ -593,7 +593,7 @@ fm_icon_view_remove_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *
     icon_view = FM_ICON_VIEW (view);
 
     if (baul_icon_container_remove (get_icon_container (icon_view),
-                                    CAJA_ICON_CONTAINER_ICON_DATA (file)))
+                                    BAUL_ICON_CONTAINER_ICON_DATA (file)))
     {
         if (file == icon_view->details->audio_preview_file)
         {
@@ -628,7 +628,7 @@ fm_icon_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *dir
     }
 
     if (baul_icon_container_add (icon_container,
-                                 CAJA_ICON_CONTAINER_ICON_DATA (file)))
+                                 BAUL_ICON_CONTAINER_ICON_DATA (file)))
     {
         baul_file_ref (file);
     }
@@ -654,7 +654,7 @@ fm_icon_view_file_changed (FMDirectoryView *view, CajaFile *file, CajaDirectory 
     {
         baul_icon_container_request_update
         (get_icon_container (icon_view),
-         CAJA_ICON_CONTAINER_ICON_DATA (file));
+         BAUL_ICON_CONTAINER_ICON_DATA (file));
         return;
     }
 
@@ -667,7 +667,7 @@ fm_icon_view_file_changed (FMDirectoryView *view, CajaFile *file, CajaDirectory 
 
         baul_icon_container_request_update
         (get_icon_container (icon_view),
-         CAJA_ICON_CONTAINER_ICON_DATA (file));
+         BAUL_ICON_CONTAINER_ICON_DATA (file));
     }
 }
 
@@ -819,7 +819,7 @@ fm_icon_view_get_directory_sort_by (FMIconView *icon_view,
             get_directory_sort_by, (icon_view, file));
 }
 
-static CajaFileSortType default_sort_order = CAJA_FILE_SORT_BY_DISPLAY_NAME;
+static CajaFileSortType default_sort_order = BAUL_FILE_SORT_BY_DISPLAY_NAME;
 
 static CajaFileSortType
 get_default_sort_order (CajaFile *file, gboolean *reversed)
@@ -831,16 +831,16 @@ get_default_sort_order (CajaFile *file, gboolean *reversed)
     {
         auto_storaged_added = TRUE;
         eel_g_settings_add_auto_enum (baul_preferences,
-                                      CAJA_PREFERENCES_DEFAULT_SORT_ORDER,
+                                      BAUL_PREFERENCES_DEFAULT_SORT_ORDER,
                                       (int *) &default_sort_order);
         eel_g_settings_add_auto_boolean (baul_preferences,
-                                         CAJA_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER,
+                                         BAUL_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER,
                                          &default_sort_in_reverse_order);
     }
 
     retval = baul_file_get_default_sort_type (file, reversed);
 
-    if (retval == CAJA_FILE_SORT_NONE)
+    if (retval == BAUL_FILE_SORT_NONE)
     {
 
         if (reversed != NULL)
@@ -848,8 +848,8 @@ get_default_sort_order (CajaFile *file, gboolean *reversed)
             *reversed = default_sort_in_reverse_order;
         }
 
-        retval = CLAMP (default_sort_order, CAJA_FILE_SORT_BY_DISPLAY_NAME,
-                        CAJA_FILE_SORT_BY_EMBLEMS);
+        retval = CLAMP (default_sort_order, BAUL_FILE_SORT_BY_DISPLAY_NAME,
+                        BAUL_FILE_SORT_BY_EMBLEMS);
     }
 
     return retval;
@@ -864,7 +864,7 @@ fm_icon_view_real_get_directory_sort_by (FMIconView *icon_view,
     g_return_val_if_fail (default_sort_criterion != NULL, NULL);
 
     return baul_file_get_metadata
-           (file, CAJA_METADATA_KEY_ICON_VIEW_SORT_BY,
+           (file, BAUL_METADATA_KEY_ICON_VIEW_SORT_BY,
             default_sort_criterion->metadata_text);
 }
 
@@ -892,7 +892,7 @@ fm_icon_view_real_set_directory_sort_by (FMIconView *icon_view,
     g_return_if_fail (default_sort_criterion != NULL);
 
     baul_file_set_metadata
-    (file, CAJA_METADATA_KEY_ICON_VIEW_SORT_BY,
+    (file, BAUL_METADATA_KEY_ICON_VIEW_SORT_BY,
      default_sort_criterion->metadata_text,
      sort_by);
 }
@@ -920,7 +920,7 @@ fm_icon_view_real_get_directory_sort_reversed (FMIconView *icon_view,
     get_default_sort_order (file, &reversed);
     return baul_file_get_boolean_metadata
            (file,
-            CAJA_METADATA_KEY_ICON_VIEW_SORT_REVERSED,
+            BAUL_METADATA_KEY_ICON_VIEW_SORT_REVERSED,
             reversed);
 }
 
@@ -949,7 +949,7 @@ fm_icon_view_real_set_directory_sort_reversed (FMIconView *icon_view,
     get_default_sort_order (file, &reversed);
     baul_file_set_boolean_metadata
     (file,
-     CAJA_METADATA_KEY_ICON_VIEW_SORT_REVERSED,
+     BAUL_METADATA_KEY_ICON_VIEW_SORT_REVERSED,
      reversed, sort_reversed);
 }
 
@@ -970,7 +970,7 @@ fm_icon_view_get_directory_keep_aligned (FMIconView *icon_view,
 
     return  baul_file_get_boolean_metadata
             (file,
-             CAJA_METADATA_KEY_ICON_VIEW_KEEP_ALIGNED,
+             BAUL_METADATA_KEY_ICON_VIEW_KEEP_ALIGNED,
              get_default_directory_keep_aligned ());
 }
 
@@ -985,7 +985,7 @@ fm_icon_view_set_directory_keep_aligned (FMIconView *icon_view,
     }
 
     baul_file_set_boolean_metadata
-    (file, CAJA_METADATA_KEY_ICON_VIEW_KEEP_ALIGNED,
+    (file, BAUL_METADATA_KEY_ICON_VIEW_KEEP_ALIGNED,
      get_default_directory_keep_aligned (),
      keep_aligned);
 }
@@ -1016,7 +1016,7 @@ fm_icon_view_real_get_directory_auto_layout (FMIconView *icon_view,
 
 
     return baul_file_get_boolean_metadata
-           (file, CAJA_METADATA_KEY_ICON_VIEW_AUTO_LAYOUT, TRUE);
+           (file, BAUL_METADATA_KEY_ICON_VIEW_AUTO_LAYOUT, TRUE);
 }
 
 static void
@@ -1045,7 +1045,7 @@ fm_icon_view_real_set_directory_auto_layout (FMIconView *icon_view,
     }
 
     baul_file_set_boolean_metadata
-    (file, CAJA_METADATA_KEY_ICON_VIEW_AUTO_LAYOUT,
+    (file, BAUL_METADATA_KEY_ICON_VIEW_AUTO_LAYOUT,
      TRUE,
      auto_layout);
 }
@@ -1071,7 +1071,7 @@ get_default_directory_tighter_layout (void)
     {
         auto_storaged_added = TRUE;
         eel_g_settings_add_auto_boolean (baul_icon_view_preferences,
-                                         CAJA_PREFERENCES_ICON_VIEW_DEFAULT_USE_TIGHTER_LAYOUT,
+                                         BAUL_PREFERENCES_ICON_VIEW_DEFAULT_USE_TIGHTER_LAYOUT,
                                          &default_directory_tighter_layout);
     }
 
@@ -1089,7 +1089,7 @@ fm_icon_view_real_get_directory_tighter_layout (FMIconView *icon_view,
 
     return baul_file_get_boolean_metadata
            (file,
-            CAJA_METADATA_KEY_ICON_VIEW_TIGHTER_LAYOUT,
+            BAUL_METADATA_KEY_ICON_VIEW_TIGHTER_LAYOUT,
             get_default_directory_tighter_layout ());
 }
 
@@ -1113,7 +1113,7 @@ fm_icon_view_real_set_directory_tighter_layout (FMIconView *icon_view,
     }
 
     baul_file_set_boolean_metadata
-    (file, CAJA_METADATA_KEY_ICON_VIEW_TIGHTER_LAYOUT,
+    (file, BAUL_METADATA_KEY_ICON_VIEW_TIGHTER_LAYOUT,
      get_default_directory_tighter_layout (),
      tighter_layout);
 }
@@ -1209,8 +1209,8 @@ get_sort_criterion_by_sort_type (CajaFileSortType sort_type)
     return NULL;
 }
 
-static CajaZoomLevel default_zoom_level = CAJA_ZOOM_LEVEL_STANDARD;
-static CajaZoomLevel default_compact_zoom_level = CAJA_ZOOM_LEVEL_STANDARD;
+static CajaZoomLevel default_zoom_level = BAUL_ZOOM_LEVEL_STANDARD;
+static CajaZoomLevel default_compact_zoom_level = BAUL_ZOOM_LEVEL_STANDARD;
 #define DEFAULT_ZOOM_LEVEL(icon_view) icon_view->details->compact ? default_compact_zoom_level : default_zoom_level
 
 static CajaZoomLevel
@@ -1222,14 +1222,14 @@ get_default_zoom_level (FMIconView *icon_view)
     {
         auto_storage_added = TRUE;
         eel_g_settings_add_auto_enum (baul_icon_view_preferences,
-                                      CAJA_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
+                                      BAUL_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
                                       (int *) &default_zoom_level);
         eel_g_settings_add_auto_enum (baul_compact_view_preferences,
-                                      CAJA_PREFERENCES_COMPACT_VIEW_DEFAULT_ZOOM_LEVEL,
+                                      BAUL_PREFERENCES_COMPACT_VIEW_DEFAULT_ZOOM_LEVEL,
                                       (int *) &default_compact_zoom_level);
     }
 
-    return CLAMP (DEFAULT_ZOOM_LEVEL(icon_view), CAJA_ZOOM_LEVEL_SMALLEST, CAJA_ZOOM_LEVEL_LARGEST);
+    return CLAMP (DEFAULT_ZOOM_LEVEL(icon_view), BAUL_ZOOM_LEVEL_SMALLEST, BAUL_ZOOM_LEVEL_LARGEST);
 }
 
 static void
@@ -1240,19 +1240,19 @@ set_labels_beside_icons (FMIconView *icon_view)
     if (fm_icon_view_supports_labels_beside_icons (icon_view))
     {
         labels_beside = fm_icon_view_is_compact (icon_view) ||
-                        g_settings_get_boolean (baul_icon_view_preferences, CAJA_PREFERENCES_ICON_VIEW_LABELS_BESIDE_ICONS);
+                        g_settings_get_boolean (baul_icon_view_preferences, BAUL_PREFERENCES_ICON_VIEW_LABELS_BESIDE_ICONS);
 
         if (labels_beside)
         {
             baul_icon_container_set_label_position
             (get_icon_container (icon_view),
-             CAJA_ICON_LABEL_POSITION_BESIDE);
+             BAUL_ICON_LABEL_POSITION_BESIDE);
         }
         else
         {
             baul_icon_container_set_label_position
             (get_icon_container (icon_view),
-             CAJA_ICON_LABEL_POSITION_UNDER);
+             BAUL_ICON_LABEL_POSITION_UNDER);
         }
     }
 }
@@ -1264,7 +1264,7 @@ set_columns_same_width (FMIconView *icon_view)
 
     if (fm_icon_view_is_compact (icon_view))
     {
-        all_columns_same_width = g_settings_get_boolean (baul_compact_view_preferences, CAJA_PREFERENCES_COMPACT_VIEW_ALL_COLUMNS_SAME_WIDTH);
+        all_columns_same_width = g_settings_get_boolean (baul_compact_view_preferences, BAUL_PREFERENCES_COMPACT_VIEW_ALL_COLUMNS_SAME_WIDTH);
         baul_icon_container_set_all_columns_same_width (get_icon_container (icon_view), all_columns_same_width);
     }
 }
@@ -1283,9 +1283,9 @@ fm_icon_view_begin_loading (FMDirectoryView *view)
     file = fm_directory_view_get_directory_as_file (view);
     icon_container = GTK_WIDGET (get_icon_container (icon_view));
 
-    baul_icon_container_begin_loading (CAJA_ICON_CONTAINER (icon_container));
+    baul_icon_container_begin_loading (BAUL_ICON_CONTAINER (icon_container));
 
-    baul_icon_container_set_allow_moves (CAJA_ICON_CONTAINER (icon_container),
+    baul_icon_container_set_allow_moves (BAUL_ICON_CONTAINER (icon_container),
                                          fm_directory_view_get_allow_moves (view));
 
     /* kill any sound preview process that is ongoing */
@@ -1295,19 +1295,19 @@ fm_icon_view_begin_loading (FMDirectoryView *view)
      */
     if (FM_IS_DESKTOP_ICON_VIEW (view))
     {
-        baul_connect_desktop_background_to_settings (CAJA_ICON_CONTAINER (icon_container));
+        baul_connect_desktop_background_to_settings (BAUL_ICON_CONTAINER (icon_container));
     }
     else
     {
         GdkDragAction default_action;
 
-        if (baul_window_info_get_window_type (fm_directory_view_get_baul_window (view)) == CAJA_WINDOW_NAVIGATION)
+        if (baul_window_info_get_window_type (fm_directory_view_get_baul_window (view)) == BAUL_WINDOW_NAVIGATION)
         {
-            default_action = CAJA_DND_ACTION_SET_AS_GLOBAL_BACKGROUND;
+            default_action = BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND;
         }
         else
         {
-            default_action = CAJA_DND_ACTION_SET_AS_FOLDER_BACKGROUND;
+            default_action = BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND;
         }
 
         baul_connect_background_to_file_metadata (icon_container, file, default_action);
@@ -1322,14 +1322,14 @@ fm_icon_view_begin_loading (FMDirectoryView *view)
         {
             level = baul_file_get_integer_metadata
                     (file,
-                     CAJA_METADATA_KEY_COMPACT_VIEW_ZOOM_LEVEL,
+                     BAUL_METADATA_KEY_COMPACT_VIEW_ZOOM_LEVEL,
                      get_default_zoom_level (icon_view));
         }
         else
         {
             level = baul_file_get_integer_metadata
                     (file,
-                     CAJA_METADATA_KEY_ICON_VIEW_ZOOM_LEVEL,
+                     BAUL_METADATA_KEY_ICON_VIEW_ZOOM_LEVEL,
                      get_default_zoom_level (icon_view));
         }
 
@@ -1398,7 +1398,7 @@ fm_icon_view_end_loading (FMDirectoryView *view,
     icon_view = FM_ICON_VIEW (view);
 
     icon_container = GTK_WIDGET (get_icon_container (icon_view));
-    baul_icon_container_end_loading (CAJA_ICON_CONTAINER (icon_container), all_files_seen);
+    baul_icon_container_end_loading (BAUL_ICON_CONTAINER (icon_container), all_files_seen);
 
     monitor = baul_clipboard_monitor_get ();
     info = baul_clipboard_monitor_get_clipboard_info (monitor);
@@ -1409,7 +1409,7 @@ fm_icon_view_end_loading (FMDirectoryView *view,
 static CajaZoomLevel
 fm_icon_view_get_zoom_level (FMDirectoryView *view)
 {
-    g_return_val_if_fail (FM_IS_ICON_VIEW (view), CAJA_ZOOM_LEVEL_STANDARD);
+    g_return_val_if_fail (FM_IS_ICON_VIEW (view), BAUL_ZOOM_LEVEL_STANDARD);
 
     return baul_icon_container_get_zoom_level (get_icon_container (FM_ICON_VIEW (view)));
 }
@@ -1422,8 +1422,8 @@ fm_icon_view_set_zoom_level (FMIconView *view,
     CajaIconContainer *icon_container;
 
     g_return_if_fail (FM_IS_ICON_VIEW (view));
-    g_return_if_fail (new_level >= CAJA_ZOOM_LEVEL_SMALLEST &&
-                      new_level <= CAJA_ZOOM_LEVEL_LARGEST);
+    g_return_if_fail (new_level >= BAUL_ZOOM_LEVEL_SMALLEST &&
+                      new_level <= BAUL_ZOOM_LEVEL_LARGEST);
 
     icon_container = get_icon_container (view);
     if (baul_icon_container_get_zoom_level (icon_container) == new_level)
@@ -1439,7 +1439,7 @@ fm_icon_view_set_zoom_level (FMIconView *view,
     {
         baul_file_set_integer_metadata
         (fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (view)),
-         CAJA_METADATA_KEY_COMPACT_VIEW_ZOOM_LEVEL,
+         BAUL_METADATA_KEY_COMPACT_VIEW_ZOOM_LEVEL,
          get_default_zoom_level (view),
          new_level);
     }
@@ -1447,7 +1447,7 @@ fm_icon_view_set_zoom_level (FMIconView *view,
     {
         baul_file_set_integer_metadata
         (fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (view)),
-         CAJA_METADATA_KEY_ICON_VIEW_ZOOM_LEVEL,
+         BAUL_METADATA_KEY_ICON_VIEW_ZOOM_LEVEL,
          get_default_zoom_level (view),
          new_level);
     }
@@ -1471,8 +1471,8 @@ fm_icon_view_bump_zoom_level (FMDirectoryView *view, int zoom_increment)
 
     new_level = fm_icon_view_get_zoom_level (view) + zoom_increment;
 
-    if (new_level >= CAJA_ZOOM_LEVEL_SMALLEST &&
-            new_level <= CAJA_ZOOM_LEVEL_LARGEST)
+    if (new_level >= BAUL_ZOOM_LEVEL_SMALLEST &&
+            new_level <= BAUL_ZOOM_LEVEL_LARGEST)
     {
         fm_directory_view_zoom_to_level (view, new_level);
     }
@@ -1508,7 +1508,7 @@ fm_icon_view_can_zoom_in (FMDirectoryView *view)
     g_return_val_if_fail (FM_IS_ICON_VIEW (view), FALSE);
 
     return fm_icon_view_get_zoom_level (view)
-           < CAJA_ZOOM_LEVEL_LARGEST;
+           < BAUL_ZOOM_LEVEL_LARGEST;
 }
 
 static gboolean
@@ -1517,7 +1517,7 @@ fm_icon_view_can_zoom_out (FMDirectoryView *view)
     g_return_val_if_fail (FM_IS_ICON_VIEW (view), FALSE);
 
     return fm_icon_view_get_zoom_level (view)
-           > CAJA_ZOOM_LEVEL_SMALLEST;
+           > BAUL_ZOOM_LEVEL_SMALLEST;
 }
 
 static GtkWidget *
@@ -1683,7 +1683,7 @@ layout_changed_callback (CajaIconContainer *container,
 static gboolean
 fm_icon_view_can_rename_file (FMDirectoryView *view, CajaFile *file)
 {
-    if (!(fm_icon_view_get_zoom_level (view) > CAJA_ZOOM_LEVEL_SMALLEST))
+    if (!(fm_icon_view_get_zoom_level (view) > BAUL_ZOOM_LEVEL_SMALLEST))
     {
         return FALSE;
     }
@@ -1752,55 +1752,55 @@ static const GtkRadioActionEntry arrange_radio_entries[] =
         "Manual Layout", NULL,
         N_("_Manually"), NULL,
         N_("Leave icons wherever they are dropped"),
-        CAJA_FILE_SORT_NONE
+        BAUL_FILE_SORT_NONE
     },
     {
         "Sort by Name", NULL,
         N_("By _Name"), NULL,
         N_("Keep icons sorted by name in rows"),
-        CAJA_FILE_SORT_BY_DISPLAY_NAME
+        BAUL_FILE_SORT_BY_DISPLAY_NAME
     },
     {
         "Sort by Size", NULL,
         N_("By _Size"), NULL,
         N_("Keep icons sorted by size in rows"),
-        CAJA_FILE_SORT_BY_SIZE
+        BAUL_FILE_SORT_BY_SIZE
     },
     {
         "Sort by Size on Disk", NULL,
         N_("By S_ize on Disk"), NULL,
         N_("Keep icons sorted by disk usage in rows"),
-        CAJA_FILE_SORT_BY_SIZE_ON_DISK
+        BAUL_FILE_SORT_BY_SIZE_ON_DISK
     },
     {
         "Sort by Type", NULL,
         N_("By _Type"), NULL,
         N_("Keep icons sorted by type in rows"),
-        CAJA_FILE_SORT_BY_TYPE
+        BAUL_FILE_SORT_BY_TYPE
     },
     {
         "Sort by Modification Date", NULL,
         N_("By Modification _Date"), NULL,
         N_("Keep icons sorted by modification date in rows"),
-        CAJA_FILE_SORT_BY_MTIME
+        BAUL_FILE_SORT_BY_MTIME
     },
     {
         "Sort by Emblems", NULL,
         N_("By _Emblems"), NULL,
         N_("Keep icons sorted by emblems in rows"),
-        CAJA_FILE_SORT_BY_EMBLEMS
+        BAUL_FILE_SORT_BY_EMBLEMS
     },
     {
         "Sort by Trash Time", NULL,
         N_("By T_rash Time"), NULL,
         N_("Keep icons sorted by trash time in rows"),
-        CAJA_FILE_SORT_BY_TRASHED_TIME
+        BAUL_FILE_SORT_BY_TRASHED_TIME
     },
     {
         "Sort by Extension", NULL,
         N_("By E_xtension"), NULL,
         N_("Keep icons sorted by reverse extension segments in rows"),
-        CAJA_FILE_SORT_BY_EXTENSION
+        BAUL_FILE_SORT_BY_EXTENSION
     },
 };
 
@@ -2060,7 +2060,7 @@ icon_container_activate_callback (CajaIconContainer *container,
 
     fm_directory_view_activate_files (FM_DIRECTORY_VIEW (icon_view),
                                       file_list,
-                                      CAJA_WINDOW_OPEN_ACCORDING_TO_MODE, 0,
+                                      BAUL_WINDOW_OPEN_ACCORDING_TO_MODE, 0,
                                       TRUE);
 }
 
@@ -2080,7 +2080,7 @@ icon_container_activate_alternate_callback (CajaIconContainer *container,
 
     window_info = fm_directory_view_get_baul_window (FM_DIRECTORY_VIEW (icon_view));
 
-    if (baul_window_info_get_window_type (window_info) == CAJA_WINDOW_NAVIGATION)
+    if (baul_window_info_get_window_type (window_info) == BAUL_WINDOW_NAVIGATION)
     {
         GdkEvent *event;
 
@@ -2111,19 +2111,19 @@ icon_container_activate_alternate_callback (CajaIconContainer *container,
         }
     }
 
-    flags = CAJA_WINDOW_OPEN_FLAG_CLOSE_BEHIND;
+    flags = BAUL_WINDOW_OPEN_FLAG_CLOSE_BEHIND;
     if (open_in_tab)
     {
-        flags |= CAJA_WINDOW_OPEN_FLAG_NEW_TAB;
+        flags |= BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
     }
     else
     {
-        flags |= CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW;
+        flags |= BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW;
     }
 
     fm_directory_view_activate_files (FM_DIRECTORY_VIEW (icon_view),
                                       file_list,
-                                      CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+                                      BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
                                       flags,
                                       TRUE);
 }
@@ -2351,12 +2351,12 @@ should_preview_sound (CajaFile *file)
     g_object_unref (location);
 
     /* Check user performance preference */
-    if (preview_sound_auto_value == CAJA_SPEED_TRADEOFF_NEVER)
+    if (preview_sound_auto_value == BAUL_SPEED_TRADEOFF_NEVER)
     {
         return FALSE;
     }
 
-    if (preview_sound_auto_value == CAJA_SPEED_TRADEOFF_ALWAYS)
+    if (preview_sound_auto_value == BAUL_SPEED_TRADEOFF_ALWAYS)
     {
         if (use_preview == G_FILESYSTEM_PREVIEW_TYPE_NEVER)
         {
@@ -2409,7 +2409,7 @@ icon_container_preview_callback (CajaIconContainer *container,
     /* Display file name in status area at low zoom levels, since
      * the name is not displayed or hard to read in the icon view.
      */
-    if (fm_icon_view_get_zoom_level (FM_DIRECTORY_VIEW (icon_view)) <= CAJA_ZOOM_LEVEL_SMALLER)
+    if (fm_icon_view_get_zoom_level (FM_DIRECTORY_VIEW (icon_view)) <= BAUL_ZOOM_LEVEL_SMALLER)
     {
         if (start_flag)
         {
@@ -2509,7 +2509,7 @@ fm_icon_view_screen_changed (GtkWidget *widget,
             else
             {
                 if (baul_icon_container_add (icon_container,
-                                             CAJA_ICON_CONTAINER_ICON_DATA (file)))
+                                             BAUL_ICON_CONTAINER_ICON_DATA (file)))
                 {
                     baul_file_ref (file);
                 }
@@ -2569,7 +2569,7 @@ icon_container_context_click_selection_callback (CajaIconContainer *container,
         GdkEventButton *event,
         FMIconView *icon_view)
 {
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
     g_assert (FM_IS_ICON_VIEW (icon_view));
 
     fm_directory_view_pop_up_selection_context_menu
@@ -2581,7 +2581,7 @@ icon_container_context_click_background_callback (CajaIconContainer *container,
         GdkEventButton *event,
         FMIconView *icon_view)
 {
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
     g_assert (FM_IS_ICON_VIEW (icon_view));
 
     /* FIXME: passing event from here won't work
@@ -2621,7 +2621,7 @@ icon_position_changed_callback (CajaIconContainer *container,
 
     g_assert (FM_IS_ICON_VIEW (icon_view));
     g_assert (container == get_icon_container (icon_view));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
 
     /* Schedule updating menus for the next idle. Doing it directly here
      * noticeably slows down icon stretching.  The other work here to
@@ -2646,7 +2646,7 @@ icon_position_changed_callback (CajaIconContainer *container,
         position_string = g_strdup_printf
                           ("%d,%d", position->x, position->y);
         baul_file_set_metadata
-        (file, CAJA_METADATA_KEY_ICON_POSITION,
+        (file, BAUL_METADATA_KEY_ICON_POSITION,
          NULL, position_string);
         g_free (position_string);
     }
@@ -2654,7 +2654,7 @@ icon_position_changed_callback (CajaIconContainer *container,
 
     g_ascii_dtostr (scale_string, sizeof (scale_string), position->scale);
     baul_file_set_metadata
-    (file, CAJA_METADATA_KEY_ICON_SCALE,
+    (file, BAUL_METADATA_KEY_ICON_SCALE,
      "1.0", scale_string);
 }
 
@@ -2665,7 +2665,7 @@ fm_icon_view_icon_text_changed_callback (CajaIconContainer *container,
         char *new_name,
         FMIconView *icon_view)
 {
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
 
     /* Don't allow a rename with an empty string. Revert to original
      * without notifying the user.
@@ -2682,8 +2682,8 @@ get_icon_uri_callback (CajaIconContainer *container,
                        CajaFile *file,
                        FMIconView *icon_view)
 {
-    g_assert (CAJA_IS_ICON_CONTAINER (container));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_ICON_CONTAINER (container));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (FM_IS_ICON_VIEW (icon_view));
 
     return baul_file_get_uri (file);
@@ -2694,8 +2694,8 @@ get_icon_drop_target_uri_callback (CajaIconContainer *container,
                                    CajaFile *file,
                                    FMIconView *icon_view)
 {
-    g_return_val_if_fail (CAJA_IS_ICON_CONTAINER (container), NULL);
-    g_return_val_if_fail (CAJA_IS_FILE (file), NULL);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (container), NULL);
+    g_return_val_if_fail (BAUL_IS_FILE (file), NULL);
     g_return_val_if_fail (FM_IS_ICON_VIEW (icon_view), NULL);
 
     return baul_file_get_drop_target_uri (file);
@@ -2760,7 +2760,7 @@ default_sort_order_changed_callback (gpointer callback_data)
     g_free (sort_name);
 
     icon_container = get_icon_container (icon_view);
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (icon_container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (icon_container));
 
     baul_icon_container_request_update_all (icon_container);
 }
@@ -2779,7 +2779,7 @@ default_sort_in_reverse_order_changed_callback (gpointer callback_data)
     file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (icon_view));
     set_sort_reversed (icon_view, fm_icon_view_get_directory_sort_reversed (icon_view, file));
     icon_container = get_icon_container (icon_view);
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (icon_container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (icon_container));
 
     baul_icon_container_request_update_all (icon_container);
 }
@@ -2797,7 +2797,7 @@ default_use_tighter_layout_changed_callback (gpointer callback_data)
 
     file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (icon_view));
     icon_container = get_icon_container (icon_view);
-    g_return_if_fail (CAJA_IS_ICON_CONTAINER (icon_container));
+    g_return_if_fail (BAUL_IS_ICON_CONTAINER (icon_container));
 
     baul_icon_container_set_tighter_layout (
         icon_container,
@@ -2825,13 +2825,13 @@ default_zoom_level_changed_callback (gpointer callback_data)
         if (fm_icon_view_is_compact (icon_view))
         {
             level = baul_file_get_integer_metadata (file,
-                                                    CAJA_METADATA_KEY_COMPACT_VIEW_ZOOM_LEVEL,
+                                                    BAUL_METADATA_KEY_COMPACT_VIEW_ZOOM_LEVEL,
                                                     get_default_zoom_level (icon_view));
         }
         else
         {
             level = baul_file_get_integer_metadata (file,
-                                                    CAJA_METADATA_KEY_ICON_VIEW_ZOOM_LEVEL,
+                                                    BAUL_METADATA_KEY_ICON_VIEW_ZOOM_LEVEL,
                                                     get_default_zoom_level (icon_view));
         }
         fm_directory_view_zoom_to_level (FM_DIRECTORY_VIEW (icon_view), level);
@@ -2918,10 +2918,10 @@ fm_icon_view_update_click_mode (FMIconView *icon_view)
     icon_container = get_icon_container (icon_view);
     g_assert (icon_container != NULL);
 
-    click_mode = g_settings_get_enum (baul_preferences, CAJA_PREFERENCES_CLICK_POLICY);
+    click_mode = g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_CLICK_POLICY);
 
     baul_icon_container_set_single_click_mode (icon_container,
-            click_mode == CAJA_CLICK_POLICY_SINGLE);
+            click_mode == BAUL_CLICK_POLICY_SINGLE);
 }
 
 static gboolean
@@ -2944,13 +2944,13 @@ get_stored_layout_timestamp (CajaIconContainer *container,
 
         file = baul_directory_get_corresponding_file (directory);
         *timestamp = baul_file_get_time_metadata (file,
-                     CAJA_METADATA_KEY_ICON_VIEW_LAYOUT_TIMESTAMP);
+                     BAUL_METADATA_KEY_ICON_VIEW_LAYOUT_TIMESTAMP);
         baul_file_unref (file);
     }
     else
     {
-        *timestamp = baul_file_get_time_metadata (CAJA_FILE (icon_data),
-                     CAJA_METADATA_KEY_ICON_POSITION_TIMESTAMP);
+        *timestamp = baul_file_get_time_metadata (BAUL_FILE (icon_data),
+                     BAUL_METADATA_KEY_ICON_POSITION_TIMESTAMP);
     }
 
     return TRUE;
@@ -2976,14 +2976,14 @@ store_layout_timestamp (CajaIconContainer *container,
 
         file = baul_directory_get_corresponding_file (directory);
         baul_file_set_time_metadata (file,
-                                     CAJA_METADATA_KEY_ICON_VIEW_LAYOUT_TIMESTAMP,
+                                     BAUL_METADATA_KEY_ICON_VIEW_LAYOUT_TIMESTAMP,
                                      (time_t) *timestamp);
         baul_file_unref (file);
     }
     else
     {
-        baul_file_set_time_metadata (CAJA_FILE (icon_data),
-                                     CAJA_METADATA_KEY_ICON_POSITION_TIMESTAMP,
+        baul_file_set_time_metadata (BAUL_FILE (icon_data),
+                                     BAUL_METADATA_KEY_ICON_POSITION_TIMESTAMP,
                                      (time_t) *timestamp);
     }
 
@@ -3118,7 +3118,7 @@ icon_view_get_first_visible_file (CajaView *view)
 
     icon_view = FM_ICON_VIEW (view);
 
-    file = CAJA_FILE (baul_icon_container_get_first_visible_icon (get_icon_container (icon_view)));
+    file = BAUL_FILE (baul_icon_container_get_first_visible_icon (get_icon_container (icon_view)));
 
     if (file)
     {
@@ -3146,7 +3146,7 @@ icon_view_scroll_to_file (CajaView *view,
         if (file != NULL)
         {
             baul_icon_container_scroll_to_icon (get_icon_container (icon_view),
-                                                CAJA_ICON_CONTAINER_ICON_DATA (file));
+                                                BAUL_ICON_CONTAINER_ICON_DATA (file));
             baul_file_unref (file);
         }
     }
@@ -3170,10 +3170,10 @@ fm_icon_view_set_property (GObject         *object,
         {
             baul_icon_container_set_layout_mode (get_icon_container (icon_view),
                                                  gtk_widget_get_direction (GTK_WIDGET(icon_view)) == GTK_TEXT_DIR_RTL ?
-                                                 CAJA_ICON_LAYOUT_T_B_R_L :
-                                                 CAJA_ICON_LAYOUT_T_B_L_R);
+                                                 BAUL_ICON_LAYOUT_T_B_R_L :
+                                                 BAUL_ICON_LAYOUT_T_B_L_R);
             baul_icon_container_set_forced_icon_size (get_icon_container (icon_view),
-                    CAJA_ICON_SIZE_SMALLEST);
+                    BAUL_ICON_SIZE_SMALLEST);
         }
         break;
 
@@ -3308,45 +3308,45 @@ fm_icon_view_init (FMIconView *icon_view)
     /* Set our default layout mode */
     baul_icon_container_set_layout_mode (icon_container,
                                          gtk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
-                                         CAJA_ICON_LAYOUT_R_L_T_B :
-                                         CAJA_ICON_LAYOUT_L_R_T_B);
+                                         BAUL_ICON_LAYOUT_R_L_T_B :
+                                         BAUL_ICON_LAYOUT_L_R_T_B);
 
     if (!setup_sound_preview)
     {
         eel_g_settings_add_auto_enum (baul_preferences,
-                                      CAJA_PREFERENCES_PREVIEW_SOUND,
+                                      BAUL_PREFERENCES_PREVIEW_SOUND,
                                       &preview_sound_auto_value);
 
         setup_sound_preview = TRUE;
     }
 
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_DEFAULT_SORT_ORDER,
+                              "changed::" BAUL_PREFERENCES_DEFAULT_SORT_ORDER,
                               G_CALLBACK (default_sort_order_changed_callback),
                               icon_view);
     g_signal_connect_swapped (baul_preferences,
-                              "changed::" CAJA_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER,
+                              "changed::" BAUL_PREFERENCES_DEFAULT_SORT_IN_REVERSE_ORDER,
                               G_CALLBACK (default_sort_in_reverse_order_changed_callback),
                               icon_view);
     g_signal_connect_swapped (baul_icon_view_preferences,
-                              "changed::" CAJA_PREFERENCES_ICON_VIEW_DEFAULT_USE_TIGHTER_LAYOUT,
+                              "changed::" BAUL_PREFERENCES_ICON_VIEW_DEFAULT_USE_TIGHTER_LAYOUT,
                               G_CALLBACK (default_use_tighter_layout_changed_callback),
                               icon_view);
     g_signal_connect_swapped (baul_icon_view_preferences,
-                              "changed::" CAJA_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
+                              "changed::" BAUL_PREFERENCES_ICON_VIEW_DEFAULT_ZOOM_LEVEL,
                               G_CALLBACK (default_zoom_level_changed_callback),
                               icon_view);
     g_signal_connect_swapped (baul_icon_view_preferences,
-                              "changed::" CAJA_PREFERENCES_ICON_VIEW_LABELS_BESIDE_ICONS,
+                              "changed::" BAUL_PREFERENCES_ICON_VIEW_LABELS_BESIDE_ICONS,
                               G_CALLBACK (labels_beside_icons_changed_callback),
                               icon_view);
 
     g_signal_connect_swapped (baul_compact_view_preferences,
-                              "changed::" CAJA_PREFERENCES_COMPACT_VIEW_DEFAULT_ZOOM_LEVEL,
+                              "changed::" BAUL_PREFERENCES_COMPACT_VIEW_DEFAULT_ZOOM_LEVEL,
                               G_CALLBACK (default_zoom_level_changed_callback),
                               icon_view);
     g_signal_connect_swapped (baul_compact_view_preferences,
-                              "changed::" CAJA_PREFERENCES_COMPACT_VIEW_ALL_COLUMNS_SAME_WIDTH,
+                              "changed::" BAUL_PREFERENCES_COMPACT_VIEW_ALL_COLUMNS_SAME_WIDTH,
                               G_CALLBACK (all_columns_same_width_changed_callback),
                               icon_view);
 
@@ -3377,7 +3377,7 @@ fm_icon_view_create (CajaWindowSlotInfo *slot)
 
     gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (view)), GTK_STYLE_CLASS_VIEW);
 
-    return CAJA_VIEW (view);
+    return BAUL_VIEW (view);
 }
 
 static CajaView *
@@ -3392,7 +3392,7 @@ fm_compact_view_create (CajaWindowSlotInfo *slot)
 
     gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (view)), GTK_STYLE_CLASS_VIEW);
 
-    return CAJA_VIEW (view);
+    return BAUL_VIEW (view);
 }
 
 static gboolean
@@ -3404,7 +3404,7 @@ fm_icon_view_supports_uri (const char *uri,
     {
         return TRUE;
     }
-    if (strcmp (mime_type, CAJA_SAVED_SEARCH_MIMETYPE) == 0)
+    if (strcmp (mime_type, BAUL_SAVED_SEARCH_MIMETYPE) == 0)
     {
         return TRUE;
     }

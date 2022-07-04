@@ -55,8 +55,8 @@ main (int argc, char* argv[])
 
 	/* Use baul_customization to make the emblem widgets */
 	customization_data = baul_customization_data_new ("emblems", TRUE,
-							      CAJA_ICON_SIZE_SMALL,
-							      CAJA_ICON_SIZE_SMALL);
+							      BAUL_ICON_SIZE_SMALL,
+							      BAUL_ICON_SIZE_SMALL);
 
 	while (baul_customization_data_get_next_element_for_display (customization_data,
 									 &emblem_name,

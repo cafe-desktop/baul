@@ -23,15 +23,15 @@
    Authors: Dave Camp <dave@novell.com>
 */
 
-#ifndef CAJA_MIME_APPLICATION_CHOOSER_H
-#define CAJA_MIME_APPLICATION_CHOOSER_H
+#ifndef BAUL_MIME_APPLICATION_CHOOSER_H
+#define BAUL_MIME_APPLICATION_CHOOSER_H
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_MIME_APPLICATION_CHOOSER         (baul_mime_application_chooser_get_type ())
-#define CAJA_MIME_APPLICATION_CHOOSER(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_MIME_APPLICATION_CHOOSER, CajaMimeApplicationChooser))
-#define CAJA_MIME_APPLICATION_CHOOSER_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_MIME_APPLICATION_CHOOSER, CajaMimeApplicationChooserClass))
-#define CAJA_IS_MIME_APPLICATION_CHOOSER(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_MIME_APPLICATION_CHOOSER)
+#define BAUL_TYPE_MIME_APPLICATION_CHOOSER         (baul_mime_application_chooser_get_type ())
+#define BAUL_MIME_APPLICATION_CHOOSER(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MIME_APPLICATION_CHOOSER, CajaMimeApplicationChooser))
+#define BAUL_MIME_APPLICATION_CHOOSER_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_MIME_APPLICATION_CHOOSER, CajaMimeApplicationChooserClass))
+#define BAUL_IS_MIME_APPLICATION_CHOOSER(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_MIME_APPLICATION_CHOOSER)
 
 typedef struct _CajaMimeApplicationChooser        CajaMimeApplicationChooser;
 typedef struct _CajaMimeApplicationChooserClass   CajaMimeApplicationChooserClass;
@@ -54,4 +54,4 @@ GtkWidget* baul_mime_application_chooser_new      (const char *uri,
 GtkWidget* baul_mime_application_chooser_new_for_multiple_files (GList *uris,
         const char *mime_type);
 
-#endif /* CAJA_MIME_APPLICATION_CHOOSER_H */
+#endif /* BAUL_MIME_APPLICATION_CHOOSER_H */

@@ -28,8 +28,8 @@
  * returned column refers to a string attribute which can be filled in
  * by CajaInfoProvider */
 
-#ifndef CAJA_COLUMN_PROVIDER_H
-#define CAJA_COLUMN_PROVIDER_H
+#ifndef BAUL_COLUMN_PROVIDER_H
+#define BAUL_COLUMN_PROVIDER_H
 
 #include <glib-object.h>
 #include "baul-extension-types.h"
@@ -37,10 +37,10 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_COLUMN_PROVIDER           (baul_column_provider_get_type ())
-#define CAJA_COLUMN_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_COLUMN_PROVIDER, CajaColumnProvider))
-#define CAJA_IS_COLUMN_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_COLUMN_PROVIDER))
-#define CAJA_COLUMN_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_COLUMN_PROVIDER, CajaColumnProviderIface))
+#define BAUL_TYPE_COLUMN_PROVIDER           (baul_column_provider_get_type ())
+#define BAUL_COLUMN_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN_PROVIDER, CajaColumnProvider))
+#define BAUL_IS_COLUMN_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_COLUMN_PROVIDER))
+#define BAUL_COLUMN_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_COLUMN_PROVIDER, CajaColumnProviderIface))
 
 typedef struct _CajaColumnProvider       CajaColumnProvider;
 typedef struct _CajaColumnProviderIface  CajaColumnProviderIface;

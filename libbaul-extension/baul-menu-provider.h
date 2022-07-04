@@ -27,8 +27,8 @@
  * Caja constructs the context menu for a file.  They are passed a
  * list of CajaFileInfo objects which holds the current selection */
 
-#ifndef CAJA_MENU_PROVIDER_H
-#define CAJA_MENU_PROVIDER_H
+#ifndef BAUL_MENU_PROVIDER_H
+#define BAUL_MENU_PROVIDER_H
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -38,10 +38,10 @@
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_MENU_PROVIDER           (baul_menu_provider_get_type ())
-#define CAJA_MENU_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_MENU_PROVIDER, CajaMenuProvider))
-#define CAJA_IS_MENU_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_MENU_PROVIDER))
-#define CAJA_MENU_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_MENU_PROVIDER, CajaMenuProviderIface))
+#define BAUL_TYPE_MENU_PROVIDER           (baul_menu_provider_get_type ())
+#define BAUL_MENU_PROVIDER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MENU_PROVIDER, CajaMenuProvider))
+#define BAUL_IS_MENU_PROVIDER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_MENU_PROVIDER))
+#define BAUL_MENU_PROVIDER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_MENU_PROVIDER, CajaMenuProviderIface))
 
 typedef struct _CajaMenuProvider       CajaMenuProvider;
 typedef struct _CajaMenuProviderIface  CajaMenuProviderIface;

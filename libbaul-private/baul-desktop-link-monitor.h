@@ -22,24 +22,24 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_DESKTOP_LINK_MONITOR_H
-#define CAJA_DESKTOP_LINK_MONITOR_H
+#ifndef BAUL_DESKTOP_LINK_MONITOR_H
+#define BAUL_DESKTOP_LINK_MONITOR_H
 
 #include <gtk/gtk.h>
 
 #include "baul-desktop-link.h"
 
-#define CAJA_TYPE_DESKTOP_LINK_MONITOR baul_desktop_link_monitor_get_type()
-#define CAJA_DESKTOP_LINK_MONITOR(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitor))
-#define CAJA_DESKTOP_LINK_MONITOR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitorClass))
-#define CAJA_IS_DESKTOP_LINK_MONITOR(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_DESKTOP_LINK_MONITOR))
-#define CAJA_IS_DESKTOP_LINK_MONITOR_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_DESKTOP_LINK_MONITOR))
-#define CAJA_DESKTOP_LINK_MONITOR_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitorClass))
+#define BAUL_TYPE_DESKTOP_LINK_MONITOR baul_desktop_link_monitor_get_type()
+#define BAUL_DESKTOP_LINK_MONITOR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitor))
+#define BAUL_DESKTOP_LINK_MONITOR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitorClass))
+#define BAUL_IS_DESKTOP_LINK_MONITOR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_DESKTOP_LINK_MONITOR))
+#define BAUL_IS_DESKTOP_LINK_MONITOR_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_DESKTOP_LINK_MONITOR))
+#define BAUL_DESKTOP_LINK_MONITOR_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_DESKTOP_LINK_MONITOR, CajaDesktopLinkMonitorClass))
 
 typedef struct CajaDesktopLinkMonitorDetails CajaDesktopLinkMonitorDetails;
 
@@ -62,4 +62,4 @@ CajaDesktopLinkMonitor *   baul_desktop_link_monitor_get (void);
 char * baul_desktop_link_monitor_make_filename_unique (CajaDesktopLinkMonitor *monitor,
         const char *filename);
 
-#endif /* CAJA_DESKTOP_LINK_MONITOR_H */
+#endif /* BAUL_DESKTOP_LINK_MONITOR_H */

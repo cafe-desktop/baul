@@ -22,14 +22,14 @@
    Author: Federico Mena-Quintero <federico@novell.com>
 */
 
-#ifndef CAJA_DEBUG_LOG_H
-#define CAJA_DEBUG_LOG_H
+#ifndef BAUL_DEBUG_LOG_H
+#define BAUL_DEBUG_LOG_H
 
 #include <glib.h>
 
-#define CAJA_DEBUG_LOG_DOMAIN_USER "USER"   /* always enabled */
-#define CAJA_DEBUG_LOG_DOMAIN_ASYNC "async"	 /* when asynchronous notifications come in */
-#define CAJA_DEBUG_LOG_DOMAIN_GLOG "GLog"	 /* used for GLog messages; don't use it yourself */
+#define BAUL_DEBUG_LOG_DOMAIN_USER "USER"   /* always enabled */
+#define BAUL_DEBUG_LOG_DOMAIN_ASYNC "async"	 /* when asynchronous notifications come in */
+#define BAUL_DEBUG_LOG_DOMAIN_GLOG "GLog"	 /* used for GLog messages; don't use it yourself */
 
 void baul_debug_log (gboolean is_milestone, const char *domain, const char *format, ...);
 
@@ -55,4 +55,4 @@ int baul_debug_log_get_max_lines (void);
 /* For testing only */
 void baul_debug_log_clear (void);
 
-#endif /* CAJA_DEBUG_LOG_H */
+#endif /* BAUL_DEBUG_LOG_H */

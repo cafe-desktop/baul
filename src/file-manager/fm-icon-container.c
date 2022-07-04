@@ -39,7 +39,7 @@
 #define ICON_TEXT_ATTRIBUTES_NUM_ITEMS		3
 #define ICON_TEXT_ATTRIBUTES_DEFAULT_TOKENS	"size,date_modified,type"
 
-G_DEFINE_TYPE (FMIconContainer, fm_icon_container, CAJA_TYPE_ICON_CONTAINER);
+G_DEFINE_TYPE (FMIconContainer, fm_icon_container, BAUL_TYPE_ICON_CONTAINER);
 
 static GQuark attribute_none_q;
 
@@ -70,7 +70,7 @@ fm_icon_container_get_icon_images (CajaIconContainer *container,
 
     file = (CajaFile *) data;
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
     icon_view = get_icon_view (container);
     g_return_val_if_fail (icon_view != NULL, NULL);
 
@@ -103,24 +103,24 @@ fm_icon_container_get_icon_images (CajaIconContainer *container,
 
     *has_window_open = baul_file_has_open_window (file);
 
-    flags = CAJA_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM;
+    flags = BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM;
     if (!fm_icon_view_is_compact (icon_view) ||
-            baul_icon_container_get_zoom_level (container) > CAJA_ZOOM_LEVEL_STANDARD)
+            baul_icon_container_get_zoom_level (container) > BAUL_ZOOM_LEVEL_STANDARD)
     {
-        flags |= CAJA_FILE_ICON_FLAGS_USE_THUMBNAILS;
+        flags |= BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS;
         if (fm_icon_view_is_compact (icon_view))
         {
-            flags |= CAJA_FILE_ICON_FLAGS_FORCE_THUMBNAIL_SIZE;
+            flags |= BAUL_FILE_ICON_FLAGS_FORCE_THUMBNAIL_SIZE;
         }
     }
 
     if (use_embedding)
     {
-        flags |= CAJA_FILE_ICON_FLAGS_EMBEDDING_TEXT;
+        flags |= BAUL_FILE_ICON_FLAGS_EMBEDDING_TEXT;
     }
     if (for_drag_accept)
     {
-        flags |= CAJA_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT;
+        flags |= BAUL_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT;
     }
 
     scale = gtk_widget_get_scale_factor (GTK_WIDGET (icon_view));
@@ -136,10 +136,10 @@ fm_icon_container_get_icon_description (CajaIconContainer *container,
     char *mime_type;
     const char *description;
 
-    file = CAJA_FILE (data);
-    g_assert (CAJA_IS_FILE (file));
+    file = BAUL_FILE (data);
+    g_assert (BAUL_IS_FILE (file));
 
-    if (CAJA_IS_DESKTOP_ICON_FILE (file))
+    if (BAUL_IS_DESKTOP_ICON_FILE (file))
     {
         return NULL;
     }
@@ -161,12 +161,12 @@ fm_icon_container_start_monitor_top_left (CajaIconContainer *container,
 
     file = (CajaFile *) data;
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
 
-    attributes = CAJA_FILE_ATTRIBUTE_TOP_LEFT_TEXT;
+    attributes = BAUL_FILE_ATTRIBUTE_TOP_LEFT_TEXT;
     if (large_text)
     {
-        attributes |= CAJA_FILE_ATTRIBUTE_LARGE_TOP_LEFT_TEXT;
+        attributes |= BAUL_FILE_ATTRIBUTE_LARGE_TOP_LEFT_TEXT;
     }
     baul_file_monitor_add (file, client, attributes);
 }
@@ -180,7 +180,7 @@ fm_icon_container_stop_monitor_top_left (CajaIconContainer *container,
 
     file = (CajaFile *) data;
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
 
     baul_file_monitor_remove (file, client);
 }
@@ -193,7 +193,7 @@ fm_icon_container_prioritize_thumbnailing (CajaIconContainer *container,
 
     file = (CajaFile *) data;
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
 
     if (baul_file_is_thumbnailing (file))
     {
@@ -217,7 +217,7 @@ fm_icon_container_get_icon_text_attributes_from_preferences (void)
     if (attributes == NULL)
     {
         eel_g_settings_add_auto_strv_as_quarks (baul_icon_view_preferences,
-                                                CAJA_PREFERENCES_ICON_VIEW_CAPTIONS,
+                                                BAUL_PREFERENCES_ICON_VIEW_CAPTIONS,
                                                 &attributes);
     }
 
@@ -280,13 +280,13 @@ fm_icon_container_get_icon_text_attribute_names (CajaIconContainer *container,
 
     const int pieces_by_level[] =
     {
-        0,	/* CAJA_ZOOM_LEVEL_SMALLEST */
-        0,	/* CAJA_ZOOM_LEVEL_SMALLER */
-        0,	/* CAJA_ZOOM_LEVEL_SMALL */
-        1,	/* CAJA_ZOOM_LEVEL_STANDARD */
-        2,	/* CAJA_ZOOM_LEVEL_LARGE */
-        2,	/* CAJA_ZOOM_LEVEL_LARGER */
-        3	/* CAJA_ZOOM_LEVEL_LARGEST */
+        0,	/* BAUL_ZOOM_LEVEL_SMALLEST */
+        0,	/* BAUL_ZOOM_LEVEL_SMALLER */
+        0,	/* BAUL_ZOOM_LEVEL_SMALL */
+        1,	/* BAUL_ZOOM_LEVEL_STANDARD */
+        2,	/* BAUL_ZOOM_LEVEL_LARGE */
+        2,	/* BAUL_ZOOM_LEVEL_LARGER */
+        3	/* BAUL_ZOOM_LEVEL_LARGEST */
     };
 
     piece_count = pieces_by_level[baul_icon_container_get_zoom_level (container)];
@@ -315,9 +315,9 @@ fm_icon_container_get_icon_text (CajaIconContainer *container,
     CajaFile *file;
     gboolean use_additional;
 
-    file = CAJA_FILE (data);
+    file = BAUL_FILE (data);
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (editable_text != NULL);
     icon_view = get_icon_view (container);
     g_return_if_fail (icon_view != NULL);
@@ -325,7 +325,7 @@ fm_icon_container_get_icon_text (CajaIconContainer *container,
     use_additional = (additional_text != NULL);
 
     /* In the smallest zoom mode, no text is drawn. */
-    if (baul_icon_container_get_zoom_level (container) == CAJA_ZOOM_LEVEL_SMALLEST &&
+    if (baul_icon_container_get_zoom_level (container) == BAUL_ZOOM_LEVEL_SMALLEST &&
             !include_invisible)
     {
         *editable_text = NULL;
@@ -347,7 +347,7 @@ fm_icon_container_get_icon_text (CajaIconContainer *container,
         return;
     }
 
-    if (CAJA_IS_DESKTOP_ICON_FILE (file))
+    if (BAUL_IS_DESKTOP_ICON_FILE (file))
     {
         /* Don't show the normal extra information for desktop icons, it doesn't
          * make sense. */
@@ -443,29 +443,29 @@ get_sort_category (CajaFile *file)
 
     category = SORT_OTHER;
 
-    if (CAJA_IS_DESKTOP_ICON_FILE (file))
+    if (BAUL_IS_DESKTOP_ICON_FILE (file))
     {
         CajaDesktopLink *link;
 
-        link = baul_desktop_icon_file_get_link (CAJA_DESKTOP_ICON_FILE (file));
+        link = baul_desktop_icon_file_get_link (BAUL_DESKTOP_ICON_FILE (file));
 
         if (link != NULL)
         {
             switch (baul_desktop_link_get_link_type (link))
             {
-            case CAJA_DESKTOP_LINK_COMPUTER:
+            case BAUL_DESKTOP_LINK_COMPUTER:
                 category = SORT_COMPUTER_LINK;
                 break;
-            case CAJA_DESKTOP_LINK_HOME:
+            case BAUL_DESKTOP_LINK_HOME:
                 category = SORT_HOME_LINK;
                 break;
-            case CAJA_DESKTOP_LINK_MOUNT:
+            case BAUL_DESKTOP_LINK_MOUNT:
                 category = SORT_MOUNT_LINK;
                 break;
-            case CAJA_DESKTOP_LINK_TRASH:
+            case BAUL_DESKTOP_LINK_TRASH:
                 category = SORT_TRASH_LINK;
                 break;
-            case CAJA_DESKTOP_LINK_NETWORK:
+            case BAUL_DESKTOP_LINK_NETWORK:
                 category = SORT_NETWORK_LINK;
                 break;
             default:
@@ -501,7 +501,7 @@ fm_desktop_icon_container_icons_compare (CajaIconContainer *container,
     if (category_a == category_b)
     {
         return baul_file_compare_for_sort
-               (file_a, file_b, CAJA_FILE_SORT_BY_DISPLAY_NAME,
+               (file_a, file_b, BAUL_FILE_SORT_BY_DISPLAY_NAME,
                 fm_directory_view_should_sort_directories_first (directory_view),
                 FALSE);
     }
@@ -544,9 +544,9 @@ fm_icon_container_compare_icons_by_name (CajaIconContainer *container,
         CajaIconData      *icon_b)
 {
     return baul_file_compare_for_sort
-           (CAJA_FILE (icon_a),
-            CAJA_FILE (icon_b),
-            CAJA_FILE_SORT_BY_DISPLAY_NAME,
+           (BAUL_FILE (icon_a),
+            BAUL_FILE (icon_b),
+            BAUL_FILE_SORT_BY_DISPLAY_NAME,
             FALSE, FALSE);
 }
 
@@ -622,7 +622,7 @@ fm_icon_container_construct (FMIconContainer *icon_container, FMIconView *view)
     atk_obj = gtk_widget_get_accessible (GTK_WIDGET (icon_container));
     atk_object_set_name (atk_obj, _("Icon View"));
 
-    return CAJA_ICON_CONTAINER (icon_container);
+    return BAUL_ICON_CONTAINER (icon_container);
 }
 
 CajaIconContainer *

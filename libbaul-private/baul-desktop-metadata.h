@@ -24,8 +24,8 @@
  *          Stefano Karapetsas <stefano@karapetsas.com>
  */
 
-#ifndef __CAJA_DESKTOP_METADATA_H__
-#define __CAJA_DESKTOP_METADATA_H__
+#ifndef __BAUL_DESKTOP_METADATA_H__
+#define __BAUL_DESKTOP_METADATA_H__
 
 #include <glib.h>
 
@@ -44,4 +44,4 @@ void baul_desktop_set_metadata_stringv (CajaFile *file,
 gboolean baul_desktop_update_metadata_from_keyfile (CajaFile *file,
                                                     const gchar *name);
 
-#endif /* __CAJA_DESKTOP_METADATA_H__ */
+#endif /* __BAUL_DESKTOP_METADATA_H__ */

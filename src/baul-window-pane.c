@@ -45,7 +45,7 @@ get_first_inactive_slot (CajaWindowPane *pane)
 
     for (l = pane->slots; l != NULL; l = l->next)
     {
-        slot = CAJA_WINDOW_SLOT (l->data);
+        slot = BAUL_WINDOW_SLOT (l->data);
         if (slot != pane->active_slot)
         {
             return slot;
@@ -59,7 +59,7 @@ void
 baul_window_pane_show (CajaWindowPane *pane)
 {
     pane->visible = TRUE;
-    EEL_CALL_METHOD (CAJA_WINDOW_PANE_CLASS, pane,
+    EEL_CALL_METHOD (BAUL_WINDOW_PANE_CLASS, pane,
                      show, (pane));
 }
 
@@ -145,12 +145,12 @@ baul_window_pane_slot_close (CajaWindowPane *pane, CajaWindowSlot *slot)
             next_slot = NULL;
             if (pane->active_slots->next != NULL)
             {
-                next_slot = CAJA_WINDOW_SLOT (pane->active_slots->next->data);
+                next_slot = BAUL_WINDOW_SLOT (pane->active_slots->next->data);
             }
 
             if (next_slot == NULL)
             {
-                next_slot = get_first_inactive_slot (CAJA_WINDOW_PANE (pane));
+                next_slot = get_first_inactive_slot (BAUL_WINDOW_PANE (pane));
             }
 
             baul_window_set_active_slot (window, next_slot);
@@ -170,9 +170,9 @@ baul_window_pane_slot_close (CajaWindowPane *pane, CajaWindowSlot *slot)
             {
                 baul_window_close_pane (pane);
                 baul_window_pane_switch_to (next_pane);
-                if (CAJA_IS_NAVIGATION_WINDOW (window))
+                if (BAUL_IS_NAVIGATION_WINDOW (window))
                 {
-                    baul_navigation_window_update_show_hide_menu_items (CAJA_NAVIGATION_WINDOW (window));
+                    baul_navigation_window_update_show_hide_menu_items (BAUL_NAVIGATION_WINDOW (window));
                 }
             }
             else
@@ -189,12 +189,12 @@ real_sync_location_widgets (CajaWindowPane *pane)
     CajaWindowSlot *slot;
 
     /* TODO: Would be nice with a real subclass for spatial panes */
-    g_assert (CAJA_IS_SPATIAL_WINDOW (pane->window));
+    g_assert (BAUL_IS_SPATIAL_WINDOW (pane->window));
 
     slot = pane->active_slot;
 
     /* Change the location button to match the current location. */
-    baul_spatial_window_set_location_button (CAJA_SPATIAL_WINDOW (pane->window),
+    baul_spatial_window_set_location_button (BAUL_SPATIAL_WINDOW (pane->window),
             slot->location);
 }
 
@@ -202,23 +202,23 @@ real_sync_location_widgets (CajaWindowPane *pane)
 void
 baul_window_pane_sync_location_widgets (CajaWindowPane *pane)
 {
-    EEL_CALL_METHOD (CAJA_WINDOW_PANE_CLASS, pane,
+    EEL_CALL_METHOD (BAUL_WINDOW_PANE_CLASS, pane,
                      sync_location_widgets, (pane));
 }
 
 void
 baul_window_pane_sync_search_widgets (CajaWindowPane *pane)
 {
-    g_assert (CAJA_IS_WINDOW_PANE (pane));
+    g_assert (BAUL_IS_WINDOW_PANE (pane));
 
-    EEL_CALL_METHOD (CAJA_WINDOW_PANE_CLASS, pane,
+    EEL_CALL_METHOD (BAUL_WINDOW_PANE_CLASS, pane,
                      sync_search_widgets, (pane));
 }
 
 void
 baul_window_pane_grab_focus (CajaWindowPane *pane)
 {
-    if (CAJA_IS_WINDOW_PANE (pane) && pane->active_slot)
+    if (BAUL_IS_WINDOW_PANE (pane) && pane->active_slot)
     {
         baul_view_grab_focus (pane->active_slot->content_view);
     }
@@ -252,7 +252,7 @@ baul_window_pane_set_active (CajaWindowPane *pane, gboolean is_active)
     /* notify the current slot about its activity state (so that it can e.g. modify the bg color) */
     baul_window_slot_is_in_active_pane (pane->active_slot, is_active);
 
-    EEL_CALL_METHOD (CAJA_WINDOW_PANE_CLASS, pane,
+    EEL_CALL_METHOD (BAUL_WINDOW_PANE_CLASS, pane,
                      set_active, (pane, is_active));
 }
 
@@ -260,13 +260,13 @@ static void
 baul_window_pane_class_init (CajaWindowPaneClass *class)
 {
     G_OBJECT_CLASS (class)->dispose = baul_window_pane_dispose;
-    CAJA_WINDOW_PANE_CLASS (class)->sync_location_widgets = real_sync_location_widgets;
+    BAUL_WINDOW_PANE_CLASS (class)->sync_location_widgets = real_sync_location_widgets;
 }
 
 static void
 baul_window_pane_dispose (GObject *object)
 {
-    CajaWindowPane *pane = CAJA_WINDOW_PANE (object);
+    CajaWindowPane *pane = BAUL_WINDOW_PANE (object);
 
     g_assert (pane->slots == NULL);
 
@@ -279,7 +279,7 @@ baul_window_pane_new (CajaWindow *window)
 {
     CajaWindowPane *pane;
 
-    pane = g_object_new (CAJA_TYPE_WINDOW_PANE, NULL);
+    pane = g_object_new (BAUL_TYPE_WINDOW_PANE, NULL);
     pane->window = window;
     return pane;
 }
@@ -293,7 +293,7 @@ baul_window_pane_get_slot_for_content_box (CajaWindowPane *pane,
 
     for (l = pane->slots; l != NULL; l = l->next)
     {
-        slot = CAJA_WINDOW_SLOT (l->data);
+        slot = BAUL_WINDOW_SLOT (l->data);
 
         if (slot->content_box == content_box)
         {

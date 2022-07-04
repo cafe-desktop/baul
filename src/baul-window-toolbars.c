@@ -121,17 +121,17 @@ get_extension_toolbar_items (CajaNavigationWindow *window)
     GList *providers;
     GList *l;
 
-    providers = baul_extensions_get_for_type (CAJA_TYPE_MENU_PROVIDER);
+    providers = baul_extensions_get_for_type (BAUL_TYPE_MENU_PROVIDER);
     items = NULL;
 
-    slot = CAJA_WINDOW (window)->details->active_pane->active_slot;
+    slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
 
     for (l = providers; l != NULL; l = l->next)
     {
         CajaMenuProvider *provider;
         GList *file_items;
 
-        provider = CAJA_MENU_PROVIDER (l->data);
+        provider = BAUL_MENU_PROVIDER (l->data);
         file_items = baul_menu_provider_get_toolbar_items
                      (provider,
                       GTK_WIDGET (window),
@@ -156,7 +156,7 @@ baul_navigation_window_load_extension_toolbar_items (CajaNavigationWindow *windo
     CajaMenuItem *item = NULL;
     const gchar *action_name = NULL;
 
-    ui_manager = baul_window_get_ui_manager (CAJA_WINDOW (window));
+    ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
     if (window->details->extensions_toolbar_merge_id != 0)
     {
         gtk_ui_manager_remove_ui (ui_manager,
@@ -185,7 +185,7 @@ baul_navigation_window_load_extension_toolbar_items (CajaNavigationWindow *windo
 
     for (l = items; l != NULL; l = l->next)
     {
-        item = CAJA_MENU_ITEM (l->data);
+        item = BAUL_MENU_ITEM (l->data);
 
         action = baul_toolbar_action_from_menu_item (item, GTK_WIDGET (window));
 

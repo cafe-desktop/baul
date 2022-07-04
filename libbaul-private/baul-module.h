@@ -21,8 +21,8 @@
  *
  */
 
-#ifndef CAJA_MODULE_H
-#define CAJA_MODULE_H
+#ifndef BAUL_MODULE_H
+#define BAUL_MODULE_H
 
 #include <glib-object.h>
 

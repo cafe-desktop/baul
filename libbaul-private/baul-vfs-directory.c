@@ -37,7 +37,7 @@ static void baul_vfs_directory_class_init (gpointer   klass);
 
 EEL_CLASS_BOILERPLATE (CajaVFSDirectory,
                        baul_vfs_directory,
-                       CAJA_TYPE_DIRECTORY)
+                       BAUL_TYPE_DIRECTORY)
 
 static void
 baul_vfs_directory_init (gpointer object, gpointer klass)
@@ -48,8 +48,8 @@ static gboolean
 vfs_contains_file (CajaDirectory *directory,
                    CajaFile *file)
 {
-    g_assert (CAJA_IS_VFS_DIRECTORY (directory));
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_VFS_DIRECTORY (directory));
+    g_assert (BAUL_IS_FILE (file));
 
     return file->details->directory == directory;
 }
@@ -61,7 +61,7 @@ vfs_call_when_ready (CajaDirectory *directory,
                      CajaDirectoryCallback callback,
                      gpointer callback_data)
 {
-    g_assert (CAJA_IS_VFS_DIRECTORY (directory));
+    g_assert (BAUL_IS_VFS_DIRECTORY (directory));
 
     baul_directory_call_when_ready_internal
     (directory,
@@ -78,7 +78,7 @@ vfs_cancel_callback (CajaDirectory *directory,
                      CajaDirectoryCallback callback,
                      gpointer callback_data)
 {
-    g_assert (CAJA_IS_VFS_DIRECTORY (directory));
+    g_assert (BAUL_IS_VFS_DIRECTORY (directory));
 
     baul_directory_cancel_callback_internal
     (directory,
@@ -96,7 +96,7 @@ vfs_file_monitor_add (CajaDirectory *directory,
                       CajaDirectoryCallback callback,
                       gpointer callback_data)
 {
-    g_assert (CAJA_IS_VFS_DIRECTORY (directory));
+    g_assert (BAUL_IS_VFS_DIRECTORY (directory));
     g_assert (client != NULL);
 
     baul_directory_monitor_add_internal
@@ -111,7 +111,7 @@ static void
 vfs_file_monitor_remove (CajaDirectory *directory,
                          gconstpointer client)
 {
-    g_assert (CAJA_IS_VFS_DIRECTORY (directory));
+    g_assert (BAUL_IS_VFS_DIRECTORY (directory));
     g_assert (client != NULL);
 
     baul_directory_monitor_remove_internal (directory, NULL, client);
@@ -122,7 +122,7 @@ vfs_force_reload (CajaDirectory *directory)
 {
     CajaFileAttributes all_attributes;
 
-    g_assert (CAJA_IS_DIRECTORY (directory));
+    g_assert (BAUL_IS_DIRECTORY (directory));
 
     all_attributes = baul_file_get_all_attributes ();
     baul_directory_force_reload_internal (directory,
@@ -132,7 +132,7 @@ vfs_force_reload (CajaDirectory *directory)
 static gboolean
 vfs_are_all_files_seen (CajaDirectory *directory)
 {
-    g_assert (CAJA_IS_VFS_DIRECTORY (directory));
+    g_assert (BAUL_IS_VFS_DIRECTORY (directory));
 
     return directory->details->directory_loaded;
 }
@@ -140,7 +140,7 @@ vfs_are_all_files_seen (CajaDirectory *directory)
 static gboolean
 vfs_is_not_empty (CajaDirectory *directory)
 {
-    g_assert (CAJA_IS_VFS_DIRECTORY (directory));
+    g_assert (BAUL_IS_VFS_DIRECTORY (directory));
     g_assert (baul_directory_is_anyone_monitoring_file_list (directory));
 
     return directory->details->file_list != NULL;
@@ -151,7 +151,7 @@ baul_vfs_directory_class_init (gpointer klass)
 {
     CajaDirectoryClass *directory_class;
 
-    directory_class = CAJA_DIRECTORY_CLASS (klass);
+    directory_class = BAUL_DIRECTORY_CLASS (klass);
 
     directory_class->contains_file = vfs_contains_file;
     directory_class->call_when_ready = vfs_call_when_ready;

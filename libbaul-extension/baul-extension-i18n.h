@@ -1,5 +1,5 @@
-#ifndef CAJA_EXTENSION_I18N_H
-#define CAJA_EXTENSION_I18N_H
+#ifndef BAUL_EXTENSION_I18N_H
+#define BAUL_EXTENSION_I18N_H
 
 #include "config.h"
 

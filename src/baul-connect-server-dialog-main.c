@@ -132,7 +132,7 @@ main (int argc, char *argv[])
 
     baul_global_preferences_init ();
 
-    gtk_window_set_default_icon_name (CAJA_ICON_FOLDER);
+    gtk_window_set_default_icon_name (BAUL_ICON_FOLDER);
 
     dialog = baul_connect_server_dialog_new (NULL);
 

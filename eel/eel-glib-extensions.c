@@ -380,7 +380,7 @@ eel_g_hash_table_new_free_at_exit (GHashFunc hash_func,
     GHashTable *hash_table;
     HashTableToFree *hash_table_to_free;
 
-    /* FIXME: We can take out the CAJA_DEBUG check once we
+    /* FIXME: We can take out the BAUL_DEBUG check once we
      * have fixed more of the leaks. For now, it's a bit too noisy
      * for the general public.
      */

@@ -7,18 +7,18 @@ lib_LTLIBRARIES=libbaul-extension.la
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-I$(top_builddir) \
-	$(LIBCAJA_EXTENSION_CFLAGS) \
+	$(LIBBAUL_EXTENSION_CFLAGS) \
 	$(WARNING_CFLAGS) \
 	$(DISABLE_DEPRECATED_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	$(NULL)
 
 libbaul_extension_la_LDFLAGS=\
-	-version-info @CAJA_EXTENSION_VERSION_INFO@ \
+	-version-info @BAUL_EXTENSION_VERSION_INFO@ \
 	-no-undefined \
 	$(NULL)
 
-libbaul_extension_la_LIBADD = $(LIBCAJA_EXTENSION_LIBS)
+libbaul_extension_la_LIBADD = $(LIBBAUL_EXTENSION_LIBS)
 
 libbaul_extension_includedir=$(includedir)/baul/libbaul-extension
 
@@ -77,7 +77,7 @@ Caja_2_0_gir_INCLUDES = Gtk-3.0 Gio-2.0 GLib-2.0
 Caja_2_0_gir_CFLAGS = \
 	-I$(top_srcdir) \
 	-I$(top_builddir) \
-	$(LIBCAJA_EXTENSION_CFLAGS)
+	$(LIBBAUL_EXTENSION_CFLAGS)
 Caja_2_0_gir_LIBS = libbaul-extension.la
 Caja_2_0_gir_FILES = $(addprefix $(srcdir)/, $(introspection_files))
 INTROSPECTION_GIRS += Caja-2.0.gir

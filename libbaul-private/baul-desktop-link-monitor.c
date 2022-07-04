@@ -84,7 +84,7 @@ baul_desktop_link_monitor_get (void)
 {
     if (the_link_monitor == NULL)
     {
-        g_object_new (CAJA_TYPE_DESKTOP_LINK_MONITOR, NULL);
+        g_object_new (BAUL_TYPE_DESKTOP_LINK_MONITOR, NULL);
         eel_debug_call_at_shutdown (destroy_desktop_link_monitor);
     }
     return the_link_monitor;
@@ -164,7 +164,7 @@ create_mount_link (CajaDesktopLinkMonitor *monitor,
         return;
 
     if ((!g_mount_is_shadowed (mount)) &&
-            g_settings_get_boolean (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
+            g_settings_get_boolean (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
     {
         CajaDesktopLink *link;
 
@@ -262,12 +262,12 @@ desktop_home_visible_changed (gpointer callback_data)
 {
     CajaDesktopLinkMonitor *monitor;
 
-    monitor = CAJA_DESKTOP_LINK_MONITOR (callback_data);
+    monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
-    update_link_visibility (CAJA_DESKTOP_LINK_MONITOR (monitor),
+    update_link_visibility (BAUL_DESKTOP_LINK_MONITOR (monitor),
                             &monitor->details->home_link,
-                            CAJA_DESKTOP_LINK_HOME,
-                            CAJA_PREFERENCES_DESKTOP_HOME_VISIBLE);
+                            BAUL_DESKTOP_LINK_HOME,
+                            BAUL_PREFERENCES_DESKTOP_HOME_VISIBLE);
 }
 
 static void
@@ -275,12 +275,12 @@ desktop_computer_visible_changed (gpointer callback_data)
 {
     CajaDesktopLinkMonitor *monitor;
 
-    monitor = CAJA_DESKTOP_LINK_MONITOR (callback_data);
+    monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
-    update_link_visibility (CAJA_DESKTOP_LINK_MONITOR (callback_data),
+    update_link_visibility (BAUL_DESKTOP_LINK_MONITOR (callback_data),
                             &monitor->details->computer_link,
-                            CAJA_DESKTOP_LINK_COMPUTER,
-                            CAJA_PREFERENCES_DESKTOP_COMPUTER_VISIBLE);
+                            BAUL_DESKTOP_LINK_COMPUTER,
+                            BAUL_PREFERENCES_DESKTOP_COMPUTER_VISIBLE);
 }
 
 static void
@@ -288,12 +288,12 @@ desktop_trash_visible_changed (gpointer callback_data)
 {
     CajaDesktopLinkMonitor *monitor;
 
-    monitor = CAJA_DESKTOP_LINK_MONITOR (callback_data);
+    monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
-    update_link_visibility (CAJA_DESKTOP_LINK_MONITOR (callback_data),
+    update_link_visibility (BAUL_DESKTOP_LINK_MONITOR (callback_data),
                             &monitor->details->trash_link,
-                            CAJA_DESKTOP_LINK_TRASH,
-                            CAJA_PREFERENCES_DESKTOP_TRASH_VISIBLE);
+                            BAUL_DESKTOP_LINK_TRASH,
+                            BAUL_PREFERENCES_DESKTOP_TRASH_VISIBLE);
 }
 
 static void
@@ -301,12 +301,12 @@ desktop_network_visible_changed (gpointer callback_data)
 {
     CajaDesktopLinkMonitor *monitor;
 
-    monitor = CAJA_DESKTOP_LINK_MONITOR (callback_data);
+    monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
-    update_link_visibility (CAJA_DESKTOP_LINK_MONITOR (callback_data),
+    update_link_visibility (BAUL_DESKTOP_LINK_MONITOR (callback_data),
                             &monitor->details->network_link,
-                            CAJA_DESKTOP_LINK_NETWORK,
-                            CAJA_PREFERENCES_DESKTOP_NETWORK_VISIBLE);
+                            BAUL_DESKTOP_LINK_NETWORK,
+                            BAUL_PREFERENCES_DESKTOP_NETWORK_VISIBLE);
 }
 
 static void
@@ -315,9 +315,9 @@ desktop_volumes_visible_changed (gpointer callback_data)
     CajaDesktopLinkMonitor *monitor;
     GList *l, *mounts;
 
-    monitor = CAJA_DESKTOP_LINK_MONITOR (callback_data);
+    monitor = BAUL_DESKTOP_LINK_MONITOR (callback_data);
 
-    if (g_settings_get_boolean (baul_desktop_preferences, CAJA_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
+    if (g_settings_get_boolean (baul_desktop_preferences, BAUL_PREFERENCES_DESKTOP_VOLUMES_VISIBLE))
     {
         if (monitor->details->mount_links == NULL)
         {
@@ -366,7 +366,7 @@ baul_desktop_link_monitor_init (gpointer object, gpointer klass)
     GList *l, *mounts;
     GMount *mount = NULL;
 
-    monitor = CAJA_DESKTOP_LINK_MONITOR (object);
+    monitor = BAUL_DESKTOP_LINK_MONITOR (object);
 
     the_link_monitor = monitor;
 
@@ -380,26 +380,26 @@ baul_desktop_link_monitor_init (gpointer object, gpointer klass)
     /* Default links */
 
     create_link_and_add_preference (&monitor->details->home_link,
-                                    CAJA_DESKTOP_LINK_HOME,
-                                    CAJA_PREFERENCES_DESKTOP_HOME_VISIBLE,
+                                    BAUL_DESKTOP_LINK_HOME,
+                                    BAUL_PREFERENCES_DESKTOP_HOME_VISIBLE,
                                     G_CALLBACK (desktop_home_visible_changed),
                                     monitor);
 
     create_link_and_add_preference (&monitor->details->computer_link,
-                                    CAJA_DESKTOP_LINK_COMPUTER,
-                                    CAJA_PREFERENCES_DESKTOP_COMPUTER_VISIBLE,
+                                    BAUL_DESKTOP_LINK_COMPUTER,
+                                    BAUL_PREFERENCES_DESKTOP_COMPUTER_VISIBLE,
                                     G_CALLBACK (desktop_computer_visible_changed),
                                     monitor);
 
     create_link_and_add_preference (&monitor->details->trash_link,
-                                    CAJA_DESKTOP_LINK_TRASH,
-                                    CAJA_PREFERENCES_DESKTOP_TRASH_VISIBLE,
+                                    BAUL_DESKTOP_LINK_TRASH,
+                                    BAUL_PREFERENCES_DESKTOP_TRASH_VISIBLE,
                                     G_CALLBACK (desktop_trash_visible_changed),
                                     monitor);
 
     create_link_and_add_preference (&monitor->details->network_link,
-                                    CAJA_DESKTOP_LINK_NETWORK,
-                                    CAJA_PREFERENCES_DESKTOP_NETWORK_VISIBLE,
+                                    BAUL_DESKTOP_LINK_NETWORK,
+                                    BAUL_PREFERENCES_DESKTOP_NETWORK_VISIBLE,
                                     G_CALLBACK (desktop_network_visible_changed),
                                     monitor);
 
@@ -415,7 +415,7 @@ baul_desktop_link_monitor_init (gpointer object, gpointer klass)
     g_list_free (mounts);
 
     g_signal_connect_swapped (baul_desktop_preferences,
-                              "changed::" CAJA_PREFERENCES_DESKTOP_VOLUMES_VISIBLE,
+                              "changed::" BAUL_PREFERENCES_DESKTOP_VOLUMES_VISIBLE,
                               G_CALLBACK (desktop_volumes_visible_changed),
                               monitor);
 
@@ -452,29 +452,29 @@ desktop_link_monitor_finalize (GObject *object)
 {
     CajaDesktopLinkMonitor *monitor;
 
-    monitor = CAJA_DESKTOP_LINK_MONITOR (object);
+    monitor = BAUL_DESKTOP_LINK_MONITOR (object);
 
     g_object_unref (monitor->details->volume_monitor);
 
     /* Default links */
 
     remove_link_and_preference (&monitor->details->home_link,
-                                CAJA_PREFERENCES_DESKTOP_HOME_VISIBLE,
+                                BAUL_PREFERENCES_DESKTOP_HOME_VISIBLE,
                                 G_CALLBACK (desktop_home_visible_changed),
                                 monitor);
 
     remove_link_and_preference (&monitor->details->computer_link,
-                                CAJA_PREFERENCES_DESKTOP_COMPUTER_VISIBLE,
+                                BAUL_PREFERENCES_DESKTOP_COMPUTER_VISIBLE,
                                 G_CALLBACK (desktop_computer_visible_changed),
                                 monitor);
 
     remove_link_and_preference (&monitor->details->trash_link,
-                                CAJA_PREFERENCES_DESKTOP_TRASH_VISIBLE,
+                                BAUL_PREFERENCES_DESKTOP_TRASH_VISIBLE,
                                 G_CALLBACK (desktop_trash_visible_changed),
                                 monitor);
 
     remove_link_and_preference (&monitor->details->network_link,
-                                CAJA_PREFERENCES_DESKTOP_NETWORK_VISIBLE,
+                                BAUL_PREFERENCES_DESKTOP_NETWORK_VISIBLE,
                                 G_CALLBACK (desktop_network_visible_changed),
                                 monitor);
 

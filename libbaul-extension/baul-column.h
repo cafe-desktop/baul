@@ -22,20 +22,20 @@
  *
  */
 
-#ifndef CAJA_COLUMN_H
-#define CAJA_COLUMN_H
+#ifndef BAUL_COLUMN_H
+#define BAUL_COLUMN_H
 
 #include <glib-object.h>
 #include "baul-extension-types.h"
 
 G_BEGIN_DECLS
 
-#define CAJA_TYPE_COLUMN            (baul_column_get_type())
-#define CAJA_COLUMN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_COLUMN, CajaColumn))
-#define CAJA_COLUMN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_COLUMN, CajaColumnClass))
-#define CAJA_INFO_IS_COLUMN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_COLUMN))
-#define CAJA_INFO_IS_COLUMN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), CAJA_TYPE_COLUMN))
-#define CAJA_COLUMN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), CAJA_TYPE_COLUMN, CajaColumnClass))
+#define BAUL_TYPE_COLUMN            (baul_column_get_type())
+#define BAUL_COLUMN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN, CajaColumn))
+#define BAUL_COLUMN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_COLUMN, CajaColumnClass))
+#define BAUL_INFO_IS_COLUMN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_COLUMN))
+#define BAUL_INFO_IS_COLUMN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), BAUL_TYPE_COLUMN))
+#define BAUL_COLUMN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_COLUMN, CajaColumnClass))
 
 typedef struct _CajaColumn        CajaColumn;
 typedef struct _CajaColumnDetails CajaColumnDetails;

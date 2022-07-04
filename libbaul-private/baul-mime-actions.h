@@ -22,8 +22,8 @@
    Authors: Maciej Stachowiak <mjs@eazel.com>
 */
 
-#ifndef CAJA_MIME_ACTIONS_H
-#define CAJA_MIME_ACTIONS_H
+#ifndef BAUL_MIME_ACTIONS_H
+#define BAUL_MIME_ACTIONS_H
 
 #include <gio/gio.h>
 
@@ -58,4 +58,4 @@ void                   baul_mime_activate_file                        (GtkWindow
         CajaWindowOpenFlags  flags);
 
 
-#endif /* CAJA_MIME_ACTIONS_H */
+#endif /* BAUL_MIME_ACTIONS_H */

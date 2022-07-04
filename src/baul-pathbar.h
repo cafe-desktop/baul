@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef CAJA_PATHBAR_H
-#define CAJA_PATHBAR_H
+#ifndef BAUL_PATHBAR_H
+#define BAUL_PATHBAR_H
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
@@ -28,12 +28,12 @@ typedef struct _CajaPathBar      CajaPathBar;
 typedef struct _CajaPathBarClass CajaPathBarClass;
 
 
-#define CAJA_TYPE_PATH_BAR                 (baul_path_bar_get_type ())
-#define CAJA_PATH_BAR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_PATH_BAR, CajaPathBar))
-#define CAJA_PATH_BAR_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_PATH_BAR, CajaPathBarClass))
-#define CAJA_IS_PATH_BAR(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_PATH_BAR))
-#define CAJA_IS_PATH_BAR_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_PATH_BAR))
-#define CAJA_PATH_BAR_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_PATH_BAR, CajaPathBarClass))
+#define BAUL_TYPE_PATH_BAR                 (baul_path_bar_get_type ())
+#define BAUL_PATH_BAR(obj)                 (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_PATH_BAR, CajaPathBar))
+#define BAUL_PATH_BAR_CLASS(klass)         (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_PATH_BAR, CajaPathBarClass))
+#define BAUL_IS_PATH_BAR(obj)              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_PATH_BAR))
+#define BAUL_IS_PATH_BAR_CLASS(klass)      (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_PATH_BAR))
+#define BAUL_PATH_BAR_GET_CLASS(obj)       (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_PATH_BAR, CajaPathBarClass))
 
 struct _CajaPathBar
 {
@@ -88,4 +88,4 @@ void     baul_path_bar_clear_buttons (CajaPathBar *path_bar);
 
 GtkWidget * baul_path_bar_get_button_from_button_list_entry (gpointer entry);
 
-#endif /* CAJA_PATHBAR_H */
+#endif /* BAUL_PATHBAR_H */

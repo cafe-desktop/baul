@@ -22,8 +22,8 @@
    Author: Alexander Larsson <alexl@redhat.com>
 */
 
-#ifndef CAJA_VIEW_H
-#define CAJA_VIEW_H
+#ifndef BAUL_VIEW_H
+#define BAUL_VIEW_H
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -35,10 +35,10 @@
 extern "C" {
 #endif
 
-#define CAJA_TYPE_VIEW           (baul_view_get_type ())
-#define CAJA_VIEW(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_VIEW, CajaView))
-#define CAJA_IS_VIEW(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_VIEW))
-#define CAJA_VIEW_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CAJA_TYPE_VIEW, CajaViewIface))
+#define BAUL_TYPE_VIEW           (baul_view_get_type ())
+#define BAUL_VIEW(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VIEW, CajaView))
+#define BAUL_IS_VIEW(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_VIEW))
+#define BAUL_VIEW_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), BAUL_TYPE_VIEW, CajaViewIface))
 
 
     typedef struct _CajaView CajaView; /* dummy typedef */
@@ -190,4 +190,4 @@ extern "C" {
 }
 #endif
 
-#endif /* CAJA_VIEW_H */
+#endif /* BAUL_VIEW_H */

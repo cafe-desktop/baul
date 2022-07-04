@@ -48,7 +48,7 @@ static void   fm_empty_view_scroll_to_file                  (CajaView      *view
 static void   fm_empty_view_iface_init                      (CajaViewIface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (FMEmptyView, fm_empty_view, FM_TYPE_DIRECTORY_VIEW,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_VIEW,
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_VIEW,
                                  fm_empty_view_iface_init));
 
 /* for EEL_CALL_PARENT */
@@ -65,7 +65,7 @@ fm_empty_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *di
     if (!timer) timer = g_timer_new ();
 
     g_timer_start (timer);
-    icon = baul_file_get_icon_surface (file, baul_get_icon_size_for_zoom_level (CAJA_ZOOM_LEVEL_STANDARD),
+    icon = baul_file_get_icon_surface (file, baul_get_icon_size_for_zoom_level (BAUL_ZOOM_LEVEL_STANDARD),
                                        TRUE, gtk_widget_get_scale_factor (GTK_WIDGET(view)), 0);
 
     elaps = g_timer_elapsed (timer, NULL);
@@ -179,7 +179,7 @@ fm_empty_view_bump_zoom_level (FMDirectoryView *view, int zoom_increment)
 static CajaZoomLevel
 fm_empty_view_get_zoom_level (FMDirectoryView *view)
 {
-    return CAJA_ZOOM_LEVEL_STANDARD;
+    return BAUL_ZOOM_LEVEL_STANDARD;
 }
 
 static void
@@ -357,13 +357,13 @@ fm_empty_view_create (CajaWindowSlotInfo *slot)
 {
     FMEmptyView *view;
 
-    g_assert (CAJA_IS_WINDOW_SLOT_INFO (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
 
     view = g_object_new (FM_TYPE_EMPTY_VIEW,
                          "window-slot", slot,
                          NULL);
 
-    return CAJA_VIEW (view);
+    return BAUL_VIEW (view);
 }
 
 static gboolean
@@ -375,7 +375,7 @@ fm_empty_view_supports_uri (const char *uri,
     {
         return TRUE;
     }
-    if (strcmp (mime_type, CAJA_SAVED_SEARCH_MIMETYPE) == 0)
+    if (strcmp (mime_type, BAUL_SAVED_SEARCH_MIMETYPE) == 0)
     {
         return TRUE;
     }

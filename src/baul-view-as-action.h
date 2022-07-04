@@ -23,17 +23,17 @@
  *
  */
 
-#ifndef CAJA_VIEW_AS_ACTION_H
-#define CAJA_VIEW_AS_ACTION_H
+#ifndef BAUL_VIEW_AS_ACTION_H
+#define BAUL_VIEW_AS_ACTION_H
 
 #include <gtk/gtk.h>
 
-#define CAJA_TYPE_VIEW_AS_ACTION            (baul_view_as_action_get_type ())
-#define CAJA_VIEW_AS_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_VIEW_AS_ACTION, CajaViewAsAction))
-#define CAJA_VIEW_AS_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_VIEW_AS_ACTION, CajaViewAsActionClass))
-#define CAJA_IS_VIEW_AS_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_VIEW_AS_ACTION))
-#define CAJA_IS_VIEW_AS_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), CAJA_TYPE_VIEW_AS_ACTION))
-#define CAJA_VIEW_AS_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), CAJA_TYPE_VIEW_AS_ACTION, CajaViewAsActionClass))
+#define BAUL_TYPE_VIEW_AS_ACTION            (baul_view_as_action_get_type ())
+#define BAUL_VIEW_AS_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VIEW_AS_ACTION, CajaViewAsAction))
+#define BAUL_VIEW_AS_ACTION_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_VIEW_AS_ACTION, CajaViewAsActionClass))
+#define BAUL_IS_VIEW_AS_ACTION(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_VIEW_AS_ACTION))
+#define BAUL_IS_VIEW_AS_ACTION_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), BAUL_TYPE_VIEW_AS_ACTION))
+#define BAUL_VIEW_AS_ACTION_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), BAUL_TYPE_VIEW_AS_ACTION, CajaViewAsActionClass))
 
 typedef struct _CajaViewAsAction       CajaViewAsAction;
 typedef struct _CajaViewAsActionClass  CajaViewAsActionClass;

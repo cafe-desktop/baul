@@ -25,8 +25,8 @@
 /* baul-bookmark-list.h - interface for centralized list of bookmarks.
  */
 
-#ifndef CAJA_BOOKMARK_LIST_H
-#define CAJA_BOOKMARK_LIST_H
+#ifndef BAUL_BOOKMARK_LIST_H
+#define BAUL_BOOKMARK_LIST_H
 
 #include <gio/gio.h>
 
@@ -35,17 +35,17 @@
 typedef struct CajaBookmarkList CajaBookmarkList;
 typedef struct CajaBookmarkListClass CajaBookmarkListClass;
 
-#define CAJA_TYPE_BOOKMARK_LIST baul_bookmark_list_get_type()
-#define CAJA_BOOKMARK_LIST(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_BOOKMARK_LIST, CajaBookmarkList))
-#define CAJA_BOOKMARK_LIST_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_BOOKMARK_LIST, CajaBookmarkListClass))
-#define CAJA_IS_BOOKMARK_LIST(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_BOOKMARK_LIST))
-#define CAJA_IS_BOOKMARK_LIST_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_BOOKMARK_LIST))
-#define CAJA_BOOKMARK_LIST_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_BOOKMARK_LIST, CajaBookmarkListClass))
+#define BAUL_TYPE_BOOKMARK_LIST baul_bookmark_list_get_type()
+#define BAUL_BOOKMARK_LIST(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_BOOKMARK_LIST, CajaBookmarkList))
+#define BAUL_BOOKMARK_LIST_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_BOOKMARK_LIST, CajaBookmarkListClass))
+#define BAUL_IS_BOOKMARK_LIST(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_BOOKMARK_LIST))
+#define BAUL_IS_BOOKMARK_LIST_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_BOOKMARK_LIST))
+#define BAUL_BOOKMARK_LIST_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_BOOKMARK_LIST, CajaBookmarkListClass))
 
 struct CajaBookmarkList
 {
@@ -85,4 +85,4 @@ void                    baul_bookmark_list_set_window_geometry (CajaBookmarkList
         const char             *geometry);
 const char *            baul_bookmark_list_get_window_geometry (CajaBookmarkList   *bookmarks);
 
-#endif /* CAJA_BOOKMARK_LIST_H */
+#endif /* BAUL_BOOKMARK_LIST_H */

@@ -21,8 +21,8 @@
 
    Authors: Alexander Larsson <alexl@redhat.com>
 */
-#ifndef CAJA_UI_UTILITIES_H
-#define CAJA_UI_UTILITIES_H
+#ifndef BAUL_UI_UTILITIES_H
+#define BAUL_UI_UTILITIES_H
 
 #include <gtk/gtk.h>
 
@@ -42,4 +42,4 @@ GtkAction * baul_toolbar_action_from_menu_item (CajaMenuItem  *item, GtkWidget *
 const char *baul_ui_string_get                 (const char        *filename);
 void   baul_ui_frame_image                     (GdkPixbuf        **pixbuf);
 
-#endif /* CAJA_UI_UTILITIES_H */
+#endif /* BAUL_UI_UTILITIES_H */

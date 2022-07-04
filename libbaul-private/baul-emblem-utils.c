@@ -88,27 +88,27 @@ is_reserved_keyword (const char *keyword)
     g_assert (keyword != NULL);
 
     /* check intrinsic emblems */
-    if (g_ascii_strcasecmp (keyword, CAJA_FILE_EMBLEM_NAME_TRASH) == 0)
+    if (g_ascii_strcasecmp (keyword, BAUL_FILE_EMBLEM_NAME_TRASH) == 0)
     {
         return TRUE;
     }
-    if (g_ascii_strcasecmp (keyword, CAJA_FILE_EMBLEM_NAME_CANT_READ) == 0)
+    if (g_ascii_strcasecmp (keyword, BAUL_FILE_EMBLEM_NAME_CANT_READ) == 0)
     {
         return TRUE;
     }
-    if (g_ascii_strcasecmp (keyword, CAJA_FILE_EMBLEM_NAME_CANT_WRITE) == 0)
+    if (g_ascii_strcasecmp (keyword, BAUL_FILE_EMBLEM_NAME_CANT_WRITE) == 0)
     {
         return TRUE;
     }
-    if (g_ascii_strcasecmp (keyword, CAJA_FILE_EMBLEM_NAME_SYMBOLIC_LINK) == 0)
+    if (g_ascii_strcasecmp (keyword, BAUL_FILE_EMBLEM_NAME_SYMBOLIC_LINK) == 0)
     {
         return TRUE;
     }
-    if (g_ascii_strcasecmp (keyword, CAJA_FILE_EMBLEM_NAME_NOTE) == 0)
+    if (g_ascii_strcasecmp (keyword, BAUL_FILE_EMBLEM_NAME_NOTE) == 0)
     {
         return TRUE;
     }
-    if (g_ascii_strcasecmp (keyword, CAJA_FILE_EMBLEM_NAME_SHARED) == 0)
+    if (g_ascii_strcasecmp (keyword, BAUL_FILE_EMBLEM_NAME_SHARED) == 0)
     {
         return TRUE;
     }
@@ -187,8 +187,8 @@ baul_emblem_load_pixbuf_for_emblem (GFile *emblem)
     g_return_val_if_fail (pixbuf != NULL, NULL);
 
     scaled = eel_gdk_pixbuf_scale_down_to_fit (pixbuf,
-             CAJA_ICON_SIZE_STANDARD,
-             CAJA_ICON_SIZE_STANDARD);
+             BAUL_ICON_SIZE_STANDARD,
+             BAUL_ICON_SIZE_STANDARD);
 
     g_object_unref (pixbuf);
     g_object_unref (stream);

@@ -22,8 +22,8 @@
  * Author:  Alexander Larsson <alexl@redhat.com>
  */
 
-#ifndef CAJA_WINDOW_BOOKMARKS_H
-#define CAJA_WINDOW_BOOKMARKS_H
+#ifndef BAUL_WINDOW_BOOKMARKS_H
+#define BAUL_WINDOW_BOOKMARKS_H
 
 #include <libbaul-private/baul-bookmark.h>
 

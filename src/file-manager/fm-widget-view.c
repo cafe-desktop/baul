@@ -51,7 +51,7 @@ static void   fm_widget_view_scroll_to_file                  (CajaView *view, co
 static void   fm_widget_view_iface_init                      (CajaViewIface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (FMWidgetView, fm_widget_view, FM_TYPE_DIRECTORY_VIEW,
-                         G_IMPLEMENT_INTERFACE (CAJA_TYPE_VIEW, fm_widget_view_iface_init));
+                         G_IMPLEMENT_INTERFACE (BAUL_TYPE_VIEW, fm_widget_view_iface_init));
 
 static void
 fm_widget_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *directory)
@@ -61,7 +61,7 @@ fm_widget_view_add_file (FMDirectoryView *view, CajaFile *file, CajaDirectory *d
 
     widget_view = FM_WIDGET_VIEW (view);
     g_return_if_fail (FM_IS_WIDGET_VIEW(view));
-    g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider));
+    g_return_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (widget_view->provider));
 
     file_dir = baul_directory_get_corresponding_file (directory);
     baul_widget_view_provider_add_file (widget_view->provider, file, file_dir);
@@ -85,12 +85,12 @@ fm_widget_view_begin_loading (FMDirectoryView *view)
     file = baul_file_get_by_uri (uri);
     mimetype = baul_file_get_mime_type (file);
 
-    providers = baul_extensions_get_for_type (CAJA_TYPE_WIDGET_VIEW_PROVIDER);
+    providers = baul_extensions_get_for_type (BAUL_TYPE_WIDGET_VIEW_PROVIDER);
     for (l = providers; l != NULL; l = l->next)
     {
         CajaWidgetViewProvider *provider;
 
-        provider = CAJA_WIDGET_VIEW_PROVIDER (l->data);
+        provider = BAUL_WIDGET_VIEW_PROVIDER (l->data);
         if (baul_widget_view_provider_supports_uri (provider, uri,
                                                     baul_file_get_file_type (file),
                                                     mimetype)) {
@@ -124,7 +124,7 @@ fm_widget_view_clear (FMDirectoryView *view)
 
     widget_view = FM_WIDGET_VIEW (view);
     g_return_if_fail (FM_IS_WIDGET_VIEW(view));
-    g_return_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider));
+    g_return_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (widget_view->provider));
 
     baul_widget_view_provider_clear (widget_view->provider);
 }
@@ -159,7 +159,7 @@ fm_widget_view_get_item_count (FMDirectoryView *view)
 
     widget_view = FM_WIDGET_VIEW (view);
     g_return_val_if_fail (FM_IS_WIDGET_VIEW(view), 0);
-    g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), 0);
+    g_return_val_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), 0);
 
     return baul_widget_view_provider_get_item_count (widget_view->provider);
 }
@@ -171,7 +171,7 @@ fm_widget_view_is_empty (FMDirectoryView *view)
 
     widget_view = FM_WIDGET_VIEW (view);
     g_return_val_if_fail (FM_IS_WIDGET_VIEW(view), TRUE);
-    g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), TRUE);
+    g_return_val_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), TRUE);
 
     return baul_widget_view_provider_get_item_count (widget_view->provider) == 0;
 }
@@ -228,7 +228,7 @@ fm_widget_view_bump_zoom_level (FMDirectoryView *view, int zoom_increment)
 static CajaZoomLevel
 fm_widget_view_get_zoom_level (FMDirectoryView *view)
 {
-    return CAJA_ZOOM_LEVEL_STANDARD;
+    return BAUL_ZOOM_LEVEL_STANDARD;
 }
 
 static void
@@ -312,7 +312,7 @@ fm_widget_view_get_first_visible_file (CajaView *view)
 
     widget_view = FM_WIDGET_VIEW (view);
     g_return_val_if_fail (FM_IS_WIDGET_VIEW(view), NULL);
-    g_return_val_if_fail (CAJA_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), NULL);
+    g_return_val_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (widget_view->provider), NULL);
 
     return baul_widget_view_provider_get_first_visible_file (widget_view->provider);
 }
@@ -404,13 +404,13 @@ static CajaView *
 fm_widget_view_create (CajaWindowSlotInfo *slot)
 {
     FMWidgetView *view;
-    g_assert (CAJA_IS_WINDOW_SLOT_INFO (slot));
+    g_assert (BAUL_IS_WINDOW_SLOT_INFO (slot));
 
     view = g_object_new (FM_TYPE_WIDGET_VIEW,
                          "window-slot", slot,
                          NULL);
 
-    return CAJA_VIEW (view);
+    return BAUL_VIEW (view);
 }
 
 static gboolean
@@ -421,13 +421,13 @@ fm_widget_view_supports_uri (const char *uri,
     GList *providers, *l;
     gboolean result = FALSE;
 
-    providers = baul_extensions_get_for_type (CAJA_TYPE_WIDGET_VIEW_PROVIDER);
+    providers = baul_extensions_get_for_type (BAUL_TYPE_WIDGET_VIEW_PROVIDER);
 
     for (l = providers; l != NULL; l = l->next)
     {
         CajaWidgetViewProvider *provider;
 
-        provider = CAJA_WIDGET_VIEW_PROVIDER (l->data);
+        provider = BAUL_WIDGET_VIEW_PROVIDER (l->data);
         if (baul_widget_view_provider_supports_uri (provider, uri, file_type, mime_type)) {
             result = TRUE;
         }

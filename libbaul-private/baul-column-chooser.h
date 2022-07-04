@@ -22,24 +22,24 @@
    Authors: Dave Camp <dave@ximian.com>
 */
 
-#ifndef CAJA_COLUMN_CHOOSER_H
-#define CAJA_COLUMN_CHOOSER_H
+#ifndef BAUL_COLUMN_CHOOSER_H
+#define BAUL_COLUMN_CHOOSER_H
 
 #include <gtk/gtk.h>
 
 #include "baul-file.h"
 
-#define CAJA_TYPE_COLUMN_CHOOSER baul_column_chooser_get_type()
-#define CAJA_COLUMN_CHOOSER(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_COLUMN_CHOOSER, CajaColumnChooser))
-#define CAJA_COLUMN_CHOOSER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_COLUMN_CHOOSER, CajaColumnChooserClass))
-#define CAJA_IS_COLUMN_CHOOSER(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_COLUMN_CHOOSER))
-#define CAJA_IS_COLUMN_CHOOSER_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_COLUMN_CHOOSER))
-#define CAJA_COLUMN_CHOOSER_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_COLUMN_CHOOSER, CajaColumnChooserClass))
+#define BAUL_TYPE_COLUMN_CHOOSER baul_column_chooser_get_type()
+#define BAUL_COLUMN_CHOOSER(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_COLUMN_CHOOSER, CajaColumnChooser))
+#define BAUL_COLUMN_CHOOSER_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_COLUMN_CHOOSER, CajaColumnChooserClass))
+#define BAUL_IS_COLUMN_CHOOSER(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_COLUMN_CHOOSER))
+#define BAUL_IS_COLUMN_CHOOSER_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_COLUMN_CHOOSER))
+#define BAUL_COLUMN_CHOOSER_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_COLUMN_CHOOSER, CajaColumnChooserClass))
 
 typedef struct _CajaColumnChooserPrivate CajaColumnChooserPrivate;
 
@@ -67,4 +67,4 @@ void       baul_column_chooser_get_settings    (CajaColumnChooser *chooser,
         char                  ***visible_columns,
         char                  ***column_order);
 
-#endif /* CAJA_COLUMN_CHOOSER_H */
+#endif /* BAUL_COLUMN_CHOOSER_H */

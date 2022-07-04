@@ -23,8 +23,8 @@
             Darin Adler <darin@bentspoon.com>
 */
 
-#ifndef CAJA_MONITOR_H
-#define CAJA_MONITOR_H
+#ifndef BAUL_MONITOR_H
+#define BAUL_MONITOR_H
 
 #include <glib.h>
 #include <gio/gio.h>
@@ -35,4 +35,4 @@ gboolean         baul_monitor_active    (void);
 CajaMonitor *baul_monitor_directory (GFile *location);
 void             baul_monitor_cancel    (CajaMonitor *monitor);
 
-#endif /* CAJA_MONITOR_H */
+#endif /* BAUL_MONITOR_H */

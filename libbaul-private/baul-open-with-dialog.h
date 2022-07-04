@@ -23,16 +23,16 @@
    Authors: Dave Camp <dave@novell.com>
 */
 
-#ifndef CAJA_OPEN_WITH_DIALOG_H
-#define CAJA_OPEN_WITH_DIALOG_H
+#ifndef BAUL_OPEN_WITH_DIALOG_H
+#define BAUL_OPEN_WITH_DIALOG_H
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
-#define CAJA_TYPE_OPEN_WITH_DIALOG         (baul_open_with_dialog_get_type ())
-#define CAJA_OPEN_WITH_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_OPEN_WITH_DIALOG, CajaOpenWithDialog))
-#define CAJA_OPEN_WITH_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_OPEN_WITH_DIALOG, CajaOpenWithDialogClass))
-#define CAJA_IS_OPEN_WITH_DIALOG(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), CAJA_TYPE_OPEN_WITH_DIALOG)
+#define BAUL_TYPE_OPEN_WITH_DIALOG         (baul_open_with_dialog_get_type ())
+#define BAUL_OPEN_WITH_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_OPEN_WITH_DIALOG, CajaOpenWithDialog))
+#define BAUL_OPEN_WITH_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_OPEN_WITH_DIALOG, CajaOpenWithDialogClass))
+#define BAUL_IS_OPEN_WITH_DIALOG(obj)      (G_TYPE_INSTANCE_CHECK_TYPE ((obj), BAUL_TYPE_OPEN_WITH_DIALOG)
 
 typedef struct _CajaOpenWithDialog        CajaOpenWithDialog;
 typedef struct _CajaOpenWithDialogClass   CajaOpenWithDialogClass;
@@ -63,4 +63,4 @@ GtkWidget* baul_add_application_dialog_new_for_multiple_files (const char *exten
 
 
 
-#endif /* CAJA_OPEN_WITH_DIALOG_H */
+#endif /* BAUL_OPEN_WITH_DIALOG_H */

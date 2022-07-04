@@ -41,7 +41,7 @@ static void baul_navigation_window_pane_dispose    (GObject *object);
 
 G_DEFINE_TYPE (CajaNavigationWindowPane,
                baul_navigation_window_pane,
-               CAJA_TYPE_WINDOW_PANE)
+               BAUL_TYPE_WINDOW_PANE)
 #define parent_class baul_navigation_window_pane_parent_class
 
 static void
@@ -50,16 +50,16 @@ real_set_active (CajaWindowPane *pane, gboolean is_active)
     CajaNavigationWindowPane *nav_pane;
     GList *l;
 
-    nav_pane = CAJA_NAVIGATION_WINDOW_PANE (pane);
+    nav_pane = BAUL_NAVIGATION_WINDOW_PANE (pane);
 
     /* path bar */
-    for (l = CAJA_PATH_BAR (nav_pane->path_bar)->button_list; l; l = l->next)
+    for (l = BAUL_PATH_BAR (nav_pane->path_bar)->button_list; l; l = l->next)
     {
         gtk_widget_set_sensitive (gtk_bin_get_child (GTK_BIN (baul_path_bar_get_button_from_button_list_entry (l->data))), is_active);
     }
 
     /* navigation bar (manual entry) */
-    baul_location_bar_set_active (CAJA_LOCATION_BAR (nav_pane->navigation_bar), is_active);
+    baul_location_bar_set_active (BAUL_LOCATION_BAR (nav_pane->navigation_bar), is_active);
 
     /* location button */
     gtk_widget_set_sensitive (gtk_bin_get_child (GTK_BIN (nav_pane->location_button)), is_active);
@@ -69,7 +69,7 @@ static gboolean
 navigation_bar_focus_in_callback (GtkWidget *widget, GdkEventFocus *event, gpointer user_data)
 {
     CajaWindowPane *pane;
-    pane = CAJA_WINDOW_PANE (user_data);
+    pane = BAUL_WINDOW_PANE (user_data);
     baul_window_set_active_pane (pane->window, pane);
     return FALSE;
 }
@@ -86,7 +86,7 @@ bookmark_list_get_uri_index (GList *list, GFile *location)
 
     for (i = 0, l = list; l != NULL; i++, l = l->next)
     {
-        bookmark = CAJA_BOOKMARK (l->data);
+        bookmark = BAUL_BOOKMARK (l->data);
 
         tmp = baul_bookmark_get_location (bookmark);
         if (g_file_equal (location, tmp))
@@ -124,14 +124,14 @@ search_bar_activate_callback (CajaSearchBar *bar,
 
     directory = baul_directory_get (location);
 
-    g_assert (CAJA_IS_SEARCH_DIRECTORY (directory));
+    g_assert (BAUL_IS_SEARCH_DIRECTORY (directory));
 
-    search_directory = CAJA_SEARCH_DIRECTORY (directory);
+    search_directory = BAUL_SEARCH_DIRECTORY (directory);
 
-    query = baul_search_bar_get_query (CAJA_SEARCH_BAR (pane->search_bar));
+    query = baul_search_bar_get_query (BAUL_SEARCH_BAR (pane->search_bar));
     if (query != NULL)
     {
-        CajaWindowSlot *slot = CAJA_WINDOW_PANE (pane)->active_slot;
+        CajaWindowSlot *slot = BAUL_WINDOW_PANE (pane)->active_slot;
         if (!baul_search_directory_is_indexed (search_directory))
         {
             char *current_uri;
@@ -144,7 +144,7 @@ search_bar_activate_callback (CajaSearchBar *bar,
         g_object_unref (query);
     }
 
-    baul_window_slot_go_to (CAJA_WINDOW_PANE (pane)->active_slot, location, FALSE);
+    baul_window_slot_go_to (BAUL_WINDOW_PANE (pane)->active_slot, location, FALSE);
 
     baul_directory_unref (directory);
     g_object_unref (location);
@@ -156,7 +156,7 @@ search_bar_cancel_callback (GtkWidget *widget,
 {
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
     {
-        baul_navigation_window_restore_focus_widget (CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window));
+        baul_navigation_window_restore_focus_widget (BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window));
     }
 }
 
@@ -166,7 +166,7 @@ navigation_bar_cancel_callback (GtkWidget *widget,
 {
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
     {
-        baul_navigation_window_restore_focus_widget (CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window));
+        baul_navigation_window_restore_focus_widget (BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window));
     }
 }
 
@@ -179,11 +179,11 @@ navigation_bar_location_changed_callback (GtkWidget *widget,
 
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
     {
-        baul_navigation_window_restore_focus_widget (CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window));
+        baul_navigation_window_restore_focus_widget (BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window));
     }
 
     location = g_file_new_for_uri (uri);
-    baul_window_slot_go_to (CAJA_WINDOW_PANE (pane)->active_slot, location, FALSE);
+    baul_window_slot_go_to (BAUL_WINDOW_PANE (pane)->active_slot, location, FALSE);
     g_object_unref (location);
 }
 
@@ -196,20 +196,20 @@ path_bar_location_changed_callback (GtkWidget *widget,
     CajaWindowPane *win_pane;
     int i;
 
-    g_assert (CAJA_IS_NAVIGATION_WINDOW_PANE (pane));
+    g_assert (BAUL_IS_NAVIGATION_WINDOW_PANE (pane));
 
-    win_pane = CAJA_WINDOW_PANE(pane);
+    win_pane = BAUL_WINDOW_PANE(pane);
 
-    slot = CAJA_NAVIGATION_WINDOW_SLOT (win_pane->active_slot);
+    slot = BAUL_NAVIGATION_WINDOW_SLOT (win_pane->active_slot);
 
     /* Make sure we are changing the location on the correct pane */
-    baul_window_set_active_pane (CAJA_WINDOW_PANE (pane)->window, CAJA_WINDOW_PANE (pane));
+    baul_window_set_active_pane (BAUL_WINDOW_PANE (pane)->window, BAUL_WINDOW_PANE (pane));
 
     /* check whether we already visited the target location */
     i = bookmark_list_get_uri_index (slot->back_list, location);
     if (i >= 0)
     {
-        baul_navigation_window_back_or_forward (CAJA_NAVIGATION_WINDOW (win_pane->window), TRUE, i, FALSE);
+        baul_navigation_window_back_or_forward (BAUL_NAVIGATION_WINDOW (win_pane->window), TRUE, i, FALSE);
     }
     else
     {
@@ -220,7 +220,7 @@ path_bar_location_changed_callback (GtkWidget *widget,
 static gboolean
 location_button_should_be_active (CajaNavigationWindowPane *pane)
 {
-    return g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
+    return g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
 }
 
 static void
@@ -230,13 +230,13 @@ location_button_toggled_cb (GtkToggleButton *toggle,
     gboolean is_active;
 
     is_active = gtk_toggle_button_get_active (toggle);
-    g_settings_set_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY, is_active);
+    g_settings_set_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY, is_active);
 
     if (is_active) {
-        baul_location_bar_activate (CAJA_LOCATION_BAR (pane->navigation_bar));
+        baul_location_bar_activate (BAUL_LOCATION_BAR (pane->navigation_bar));
     }
 
-    baul_window_set_active_pane (CAJA_WINDOW_PANE (pane)->window, CAJA_WINDOW_PANE (pane));
+    baul_window_set_active_pane (BAUL_WINDOW_PANE (pane)->window, BAUL_WINDOW_PANE (pane));
 }
 
 static GtkWidget *
@@ -280,18 +280,18 @@ path_bar_path_event_callback (CajaPathBar *path_bar,
 
         if (event->button == 2 && mask == 0)
         {
-            flags = CAJA_WINDOW_OPEN_FLAG_NEW_TAB;
+            flags = BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
         }
         else if (event->button == 1 && mask == GDK_CONTROL_MASK)
         {
-            flags = CAJA_WINDOW_OPEN_FLAG_NEW_WINDOW;
+            flags = BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW;
         }
 
         if (flags != 0)
         {
-            slot = baul_window_get_active_slot (CAJA_WINDOW_PANE (pane)->window);
+            slot = baul_window_get_active_slot (BAUL_WINDOW_PANE (pane)->window);
             baul_window_slot_info_open_location (slot, location,
-                                                 CAJA_WINDOW_OPEN_ACCORDING_TO_MODE,
+                                                 BAUL_WINDOW_OPEN_ACCORDING_TO_MODE,
                                                  flags, NULL);
         }
 
@@ -322,7 +322,7 @@ notebook_popup_menu_new_tab_cb (GtkMenuItem *menuitem,
 {
     CajaWindowPane *pane;
 
-    pane = CAJA_WINDOW_PANE (user_data);
+    pane = BAUL_WINDOW_PANE (user_data);
     baul_window_new_tab (pane->window);
 }
 
@@ -332,8 +332,8 @@ notebook_popup_menu_move_left_cb (GtkMenuItem *menuitem,
 {
     CajaNavigationWindowPane *pane;
 
-    pane = CAJA_NAVIGATION_WINDOW_PANE (user_data);
-    baul_notebook_reorder_current_child_relative (CAJA_NOTEBOOK (pane->notebook), -1);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
+    baul_notebook_reorder_current_child_relative (BAUL_NOTEBOOK (pane->notebook), -1);
 }
 
 static void
@@ -342,8 +342,8 @@ notebook_popup_menu_move_right_cb (GtkMenuItem *menuitem,
 {
     CajaNavigationWindowPane *pane;
 
-    pane = CAJA_NAVIGATION_WINDOW_PANE (user_data);
-    baul_notebook_reorder_current_child_relative (CAJA_NOTEBOOK (pane->notebook), 1);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
+    baul_notebook_reorder_current_child_relative (BAUL_NOTEBOOK (pane->notebook), 1);
 }
 
 static void
@@ -353,7 +353,7 @@ notebook_popup_menu_close_cb (GtkMenuItem *menuitem,
     CajaWindowPane *pane;
     CajaWindowSlot *slot;
 
-    pane = CAJA_WINDOW_PANE (user_data);
+    pane = BAUL_WINDOW_PANE (user_data);
     slot = pane->active_slot;
     baul_window_slot_close (slot);
 }
@@ -367,7 +367,7 @@ notebook_popup_menu_show (CajaNavigationWindowPane *pane,
     gboolean can_move_left, can_move_right;
     CajaNotebook *notebook;
 
-    notebook = CAJA_NOTEBOOK (pane->notebook);
+    notebook = BAUL_NOTEBOOK (pane->notebook);
 
     can_move_left = baul_notebook_can_reorder_current_child_relative (notebook, -1);
     can_move_right = baul_notebook_can_reorder_current_child_relative (notebook, 1);
@@ -439,7 +439,7 @@ notebook_button_press_cb (GtkWidget *widget,
 {
     CajaNavigationWindowPane *pane;
 
-    pane = CAJA_NAVIGATION_WINDOW_PANE (user_data);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
     if (GDK_BUTTON_PRESS == event->type && 3 == event->button)
     {
         notebook_popup_menu_show (pane, event);
@@ -450,7 +450,7 @@ notebook_button_press_cb (GtkWidget *widget,
         CajaWindowPane *wpane;
         CajaWindowSlot *slot;
 
-        wpane = CAJA_WINDOW_PANE (pane);
+        wpane = BAUL_WINDOW_PANE (pane);
         slot = wpane->active_slot;
         baul_window_slot_close (slot);
 
@@ -466,7 +466,7 @@ notebook_popup_menu_cb (GtkWidget *widget,
 {
     CajaNavigationWindowPane *pane;
 
-    pane = CAJA_NAVIGATION_WINDOW_PANE (user_data);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
     notebook_popup_menu_show (pane, NULL);
     return TRUE;
 }
@@ -484,7 +484,7 @@ notebook_switch_page_cb (GtkNotebook *notebook,
     g_assert (widget != NULL);
 
     /* find slot corresponding to the target page */
-    slot = baul_window_pane_get_slot_for_content_box (CAJA_WINDOW_PANE (pane), widget);
+    slot = baul_window_pane_get_slot_for_content_box (BAUL_WINDOW_PANE (pane), widget);
     g_assert (slot != NULL);
 
     baul_window_set_active_slot (slot->pane->window, slot);
@@ -514,13 +514,13 @@ baul_navigation_window_pane_add_slot_in_tab (CajaNavigationWindowPane *pane, Caj
 {
     CajaNotebook *notebook;
 
-    notebook = CAJA_NOTEBOOK (pane->notebook);
+    notebook = BAUL_NOTEBOOK (pane->notebook);
     g_signal_handlers_block_by_func (notebook,
                                      G_CALLBACK (notebook_switch_page_cb),
                                      pane);
     baul_notebook_add_tab (notebook,
                            slot,
-                           (flags & CAJA_WINDOW_OPEN_SLOT_APPEND) != 0 ?
+                           (flags & BAUL_WINDOW_OPEN_SLOT_APPEND) != 0 ?
                            -1 :
                            gtk_notebook_get_current_page (GTK_NOTEBOOK (notebook)) + 1,
                            FALSE);
@@ -536,7 +536,7 @@ real_sync_location_widgets (CajaWindowPane *pane)
     CajaWindowSlot *slot;
 
     slot = pane->active_slot;
-    navigation_pane = CAJA_NAVIGATION_WINDOW_PANE (pane);
+    navigation_pane = BAUL_NAVIGATION_WINDOW_PANE (pane);
 
     /* Change the location bar and path bar to match the current location. */
     if (slot->location != NULL)
@@ -545,9 +545,9 @@ real_sync_location_widgets (CajaWindowPane *pane)
 
         /* this may be NULL if we just created the slot */
         uri = baul_window_slot_get_location_uri (slot);
-        baul_location_bar_set_location (CAJA_LOCATION_BAR (navigation_pane->navigation_bar), uri);
+        baul_location_bar_set_location (BAUL_LOCATION_BAR (navigation_pane->navigation_bar), uri);
         g_free (uri);
-        baul_path_bar_set_path (CAJA_PATH_BAR (navigation_pane->path_bar), slot->location);
+        baul_path_bar_set_path (BAUL_PATH_BAR (navigation_pane->path_bar), slot->location);
     }
 
     /* Update window global UI if this is the active pane */
@@ -558,10 +558,10 @@ real_sync_location_widgets (CajaWindowPane *pane)
         baul_window_update_up_button (pane->window);
 
         /* Check if the back and forward buttons need enabling or disabling. */
-        navigation_slot = CAJA_NAVIGATION_WINDOW_SLOT (pane->window->details->active_pane->active_slot);
-        baul_navigation_window_allow_back (CAJA_NAVIGATION_WINDOW (pane->window),
+        navigation_slot = BAUL_NAVIGATION_WINDOW_SLOT (pane->window->details->active_pane->active_slot);
+        baul_navigation_window_allow_back (BAUL_NAVIGATION_WINDOW (pane->window),
                                            navigation_slot->back_list != NULL);
-        baul_navigation_window_allow_forward (CAJA_NAVIGATION_WINDOW (pane->window),
+        baul_navigation_window_allow_forward (BAUL_NAVIGATION_WINDOW (pane->window),
                                               navigation_slot->forward_list != NULL);
     }
 }
@@ -572,9 +572,9 @@ baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane)
     CajaWindowSlot *slot;
     gboolean success;
 
-    g_assert (CAJA_IS_NAVIGATION_WINDOW_PANE (pane));
+    g_assert (BAUL_IS_NAVIGATION_WINDOW_PANE (pane));
 
-    slot = CAJA_WINDOW_PANE(pane)->active_slot;
+    slot = BAUL_WINDOW_PANE(pane)->active_slot;
     success = FALSE;
 
     if (pane->temporary_location_bar)
@@ -592,15 +592,15 @@ baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane)
 
         directory = baul_directory_get (slot->location);
 
-        if (CAJA_IS_SEARCH_DIRECTORY (directory))
+        if (BAUL_IS_SEARCH_DIRECTORY (directory))
         {
-            baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_SEARCH);
+            baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_SEARCH);
         }
         else
         {
-            if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY))
+            if (!g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY))
             {
-                baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_PATH);
+                baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_PATH);
             }
         }
         pane->temporary_navigation_bar = FALSE;
@@ -612,15 +612,15 @@ baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPane *pane)
     {
         CajaNavigationWindow *window;
 
-        if (!g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY))
+        if (!g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY))
         {
-            baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_PATH);
+            baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_PATH);
         }
         else
         {
-            baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_NAVIGATION);
+            baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_NAVIGATION);
         }
-        window = CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window);
+        window = BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window);
         baul_navigation_window_set_search_button (window, FALSE);
         pane->temporary_search_bar = FALSE;
         success = TRUE;
@@ -634,11 +634,11 @@ baul_navigation_window_pane_always_use_location_entry (CajaNavigationWindowPane 
 {
     if (use_entry)
     {
-        baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_NAVIGATION);
+        baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_NAVIGATION);
     }
     else
     {
-        baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_PATH);
+        baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_PATH);
     }
 
     g_signal_handlers_block_by_func (pane->location_button,
@@ -667,14 +667,14 @@ baul_navigation_window_pane_setup (CajaNavigationWindowPane *pane)
     gtk_widget_show (hbox);
 
     /* the header size group ensures that the location bar has the same height as the sidebar header */
-    header_size_group = CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window)->details->header_size_group;
+    header_size_group = BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window)->details->header_size_group;
     gtk_size_group_add_widget (header_size_group, pane->location_bar);
 
     pane->location_button = location_button_create (pane);
     gtk_box_pack_start (GTK_BOX (hbox), pane->location_button, FALSE, FALSE, 0);
     gtk_widget_show (pane->location_button);
 
-    pane->path_bar = g_object_new (CAJA_TYPE_PATH_BAR, NULL);
+    pane->path_bar = g_object_new (BAUL_TYPE_PATH_BAR, NULL);
     gtk_widget_show (pane->path_bar);
 
     g_signal_connect_object (pane->path_bar, "path_clicked",
@@ -692,7 +692,7 @@ baul_navigation_window_pane_setup (CajaNavigationWindowPane *pane)
                              G_CALLBACK (navigation_bar_location_changed_callback), pane, 0);
     g_signal_connect_object (pane->navigation_bar, "cancel",
                              G_CALLBACK (navigation_bar_cancel_callback), pane, 0);
-    entry = baul_location_bar_get_entry (CAJA_LOCATION_BAR (pane->navigation_bar));
+    entry = baul_location_bar_get_entry (BAUL_LOCATION_BAR (pane->navigation_bar));
     g_signal_connect (entry, "focus-in-event",
                       G_CALLBACK (navigation_bar_focus_in_callback), pane);
 
@@ -700,7 +700,7 @@ baul_navigation_window_pane_setup (CajaNavigationWindowPane *pane)
                         pane->navigation_bar,
                         TRUE, TRUE, 0);
 
-    pane->search_bar = baul_search_bar_new (CAJA_WINDOW_PANE (pane)->window);
+    pane->search_bar = baul_search_bar_new (BAUL_WINDOW_PANE (pane)->window);
     g_signal_connect_object (pane->search_bar, "activate",
                              G_CALLBACK (search_bar_activate_callback), pane, 0);
     g_signal_connect_object (pane->search_bar, "cancel",
@@ -711,7 +711,7 @@ baul_navigation_window_pane_setup (CajaNavigationWindowPane *pane)
                         pane->search_bar,
                         TRUE, TRUE, 0);
 
-    pane->notebook = g_object_new (CAJA_TYPE_NOTEBOOK, NULL);
+    pane->notebook = g_object_new (BAUL_TYPE_NOTEBOOK, NULL);
     gtk_box_pack_start (GTK_BOX (pane->widget), pane->notebook,
                         TRUE, TRUE, 0);
     g_signal_connect (pane->notebook,
@@ -759,11 +759,11 @@ baul_navigation_window_pane_show_navigation_bar_temporarily (CajaNavigationWindo
     if (baul_navigation_window_pane_path_bar_showing (pane)
             || baul_navigation_window_pane_search_bar_showing (pane))
     {
-        baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_NAVIGATION);
+        baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_NAVIGATION);
         pane->temporary_navigation_bar = TRUE;
     }
     baul_location_bar_activate
-    (CAJA_LOCATION_BAR (pane->navigation_bar));
+    (BAUL_LOCATION_BAR (pane->navigation_bar));
 }
 
 gboolean
@@ -788,27 +788,27 @@ baul_navigation_window_pane_set_bar_mode (CajaNavigationWindowPane *pane,
     switch (mode)
     {
 
-    case CAJA_BAR_PATH:
+    case BAUL_BAR_PATH:
         gtk_widget_show (pane->path_bar);
         gtk_widget_hide (pane->navigation_bar);
         gtk_widget_hide (pane->search_bar);
         break;
 
-    case CAJA_BAR_NAVIGATION:
+    case BAUL_BAR_NAVIGATION:
         gtk_widget_show (pane->navigation_bar);
         gtk_widget_hide (pane->path_bar);
         gtk_widget_hide (pane->search_bar);
         break;
 
-    case CAJA_BAR_SEARCH:
+    case BAUL_BAR_SEARCH:
         gtk_widget_show (pane->search_bar);
         gtk_widget_hide (pane->path_bar);
         gtk_widget_hide (pane->navigation_bar);
         break;
     }
 
-    if (mode == CAJA_BAR_NAVIGATION || mode == CAJA_BAR_PATH) {
-        use_entry = (mode == CAJA_BAR_NAVIGATION);
+    if (mode == BAUL_BAR_NAVIGATION || mode == BAUL_BAR_PATH) {
+        use_entry = (mode == BAUL_BAR_NAVIGATION);
 
         g_signal_handlers_block_by_func (pane->location_button,
                          G_CALLBACK (location_button_toggled_cb),
@@ -820,12 +820,12 @@ baul_navigation_window_pane_set_bar_mode (CajaNavigationWindowPane *pane,
                            pane);
     }
 
-    window = CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window);
+    window = BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window);
     focus_widget = gtk_window_get_focus (GTK_WINDOW (window));
     if (focus_widget != NULL && !baul_navigation_window_is_in_temporary_navigation_bar (focus_widget, window) &&
             !baul_navigation_window_is_in_temporary_search_bar (focus_widget, window))
     {
-        if (mode == CAJA_BAR_NAVIGATION || mode == CAJA_BAR_PATH)
+        if (mode == BAUL_BAR_NAVIGATION || mode == BAUL_BAR_PATH)
         {
             baul_navigation_window_set_search_button (window, FALSE);
         }
@@ -853,10 +853,10 @@ baul_navigation_window_pane_hide_location_bar (CajaNavigationWindowPane *pane, g
     pane->temporary_location_bar = FALSE;
     gtk_widget_hide(pane->location_bar);
     baul_navigation_window_update_show_hide_menu_items(
-        CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window));
+        BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window));
     if (save_preference)
     {
-        g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_LOCATION_BAR, FALSE);
+        g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_LOCATION_BAR, FALSE);
     }
 }
 
@@ -864,17 +864,17 @@ void
 baul_navigation_window_pane_show_location_bar (CajaNavigationWindowPane *pane, gboolean save_preference)
 {
     gtk_widget_show(pane->location_bar);
-    baul_navigation_window_update_show_hide_menu_items(CAJA_NAVIGATION_WINDOW (CAJA_WINDOW_PANE (pane)->window));
+    baul_navigation_window_update_show_hide_menu_items(BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window));
     if (save_preference)
     {
-        g_settings_set_boolean (baul_window_state, CAJA_WINDOW_STATE_START_WITH_LOCATION_BAR, TRUE);
+        g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_START_WITH_LOCATION_BAR, TRUE);
     }
 }
 
 gboolean
 baul_navigation_window_pane_location_bar_showing (CajaNavigationWindowPane *pane)
 {
-    if (!CAJA_IS_NAVIGATION_WINDOW_PANE (pane))
+    if (!BAUL_IS_NAVIGATION_WINDOW_PANE (pane))
     {
         return FALSE;
     }
@@ -894,7 +894,7 @@ baul_navigation_window_pane_init (CajaNavigationWindowPane *pane)
 static void
 baul_navigation_window_pane_show (CajaWindowPane *pane)
 {
-    CajaNavigationWindowPane *npane = CAJA_NAVIGATION_WINDOW_PANE (pane);
+    CajaNavigationWindowPane *npane = BAUL_NAVIGATION_WINDOW_PANE (pane);
 
     gtk_widget_show (npane->widget);
 }
@@ -908,21 +908,21 @@ real_sync_search_widgets (CajaWindowPane *window_pane)
     CajaSearchDirectory *search_directory;
     CajaNavigationWindowPane *pane;
 
-    pane = CAJA_NAVIGATION_WINDOW_PANE (window_pane);
+    pane = BAUL_NAVIGATION_WINDOW_PANE (window_pane);
     slot = window_pane->active_slot;
     search_directory = NULL;
 
     directory = baul_directory_get (slot->location);
-    if (CAJA_IS_SEARCH_DIRECTORY (directory))
+    if (BAUL_IS_SEARCH_DIRECTORY (directory))
     {
-        search_directory = CAJA_SEARCH_DIRECTORY (directory);
+        search_directory = BAUL_SEARCH_DIRECTORY (directory);
     }
 
     if (search_directory != NULL &&
             !baul_search_directory_is_saved_search (search_directory))
     {
         baul_navigation_window_pane_show_location_bar_temporarily (pane);
-        baul_navigation_window_pane_set_bar_mode (pane, CAJA_BAR_SEARCH);
+        baul_navigation_window_pane_set_bar_mode (pane, BAUL_BAR_SEARCH);
         pane->temporary_search_bar = FALSE;
     }
     else
@@ -937,16 +937,16 @@ static void
 baul_navigation_window_pane_class_init (CajaNavigationWindowPaneClass *class)
 {
     G_OBJECT_CLASS (class)->dispose = baul_navigation_window_pane_dispose;
-    CAJA_WINDOW_PANE_CLASS (class)->show = baul_navigation_window_pane_show;
-    CAJA_WINDOW_PANE_CLASS (class)->set_active = real_set_active;
-    CAJA_WINDOW_PANE_CLASS (class)->sync_search_widgets = real_sync_search_widgets;
-    CAJA_WINDOW_PANE_CLASS (class)->sync_location_widgets = real_sync_location_widgets;
+    BAUL_WINDOW_PANE_CLASS (class)->show = baul_navigation_window_pane_show;
+    BAUL_WINDOW_PANE_CLASS (class)->set_active = real_set_active;
+    BAUL_WINDOW_PANE_CLASS (class)->sync_search_widgets = real_sync_search_widgets;
+    BAUL_WINDOW_PANE_CLASS (class)->sync_location_widgets = real_sync_location_widgets;
 }
 
 static void
 baul_navigation_window_pane_dispose (GObject *object)
 {
-    CajaNavigationWindowPane *pane = CAJA_NAVIGATION_WINDOW_PANE (object);
+    CajaNavigationWindowPane *pane = BAUL_NAVIGATION_WINDOW_PANE (object);
 
     gtk_widget_destroy (pane->widget);
 
@@ -958,8 +958,8 @@ baul_navigation_window_pane_new (CajaWindow *window)
 {
     CajaNavigationWindowPane *pane;
 
-    pane = g_object_new (CAJA_TYPE_NAVIGATION_WINDOW_PANE, NULL);
-    CAJA_WINDOW_PANE(pane)->window = window;
+    pane = g_object_new (BAUL_TYPE_NAVIGATION_WINDOW_PANE, NULL);
+    BAUL_WINDOW_PANE(pane)->window = window;
 
     return pane;
 }

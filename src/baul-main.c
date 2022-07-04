@@ -79,7 +79,7 @@ static gboolean debug_log_io_cb (GIOChannel *io, GIOCondition condition, gpointe
     while (read (debug_log_pipes[0], &a, 1) != 1)
         ;
 
-    baul_debug_log (TRUE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (TRUE, BAUL_DEBUG_LOG_DOMAIN_USER,
                     "user requested dump of debug log");
 
     dump_debug_log ();
@@ -111,7 +111,7 @@ sigfatal_handler (int sig)
     /* FIXME: is this totally busted?  We do malloc() inside these functions,
      * and yet we are inside a signal handler...
      */
-    baul_debug_log (TRUE, CAJA_DEBUG_LOG_DOMAIN_USER,
+    baul_debug_log (TRUE, BAUL_DEBUG_LOG_DOMAIN_USER,
                     "debug log dumped due to signal %d", sig);
     dump_debug_log ();
 
@@ -194,7 +194,7 @@ log_override_cb (const gchar   *log_domain,
     is_debug = ((log_level & G_LOG_LEVEL_DEBUG) != 0);
     is_milestone = !is_debug;
 
-    baul_debug_log (is_milestone, CAJA_DEBUG_LOG_DOMAIN_GLOG, "%s", message);
+    baul_debug_log (is_milestone, BAUL_DEBUG_LOG_DOMAIN_GLOG, "%s", message);
 
     if (!is_debug)
         (* default_log_handler) (log_domain, log_level, message, user_data);
@@ -239,7 +239,7 @@ main (int argc, char *argv[])
 	mallopt (M_MMAP_THRESHOLD, 128 *1024);
 #endif
 
-	if (g_getenv ("CAJA_DEBUG") != NULL) {
+	if (g_getenv ("BAUL_DEBUG") != NULL) {
 		eel_make_warnings_and_criticals_stop_in_debugger ();
 	}
 

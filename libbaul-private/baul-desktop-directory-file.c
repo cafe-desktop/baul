@@ -80,7 +80,7 @@ static void baul_desktop_directory_file_class_init (gpointer   klass);
 
 EEL_CLASS_BOILERPLATE (CajaDesktopDirectoryFile,
                        baul_desktop_directory_file,
-                       CAJA_TYPE_FILE)
+                       BAUL_TYPE_FILE)
 
 static guint
 desktop_callback_hash (gconstpointer desktop_callback_as_pointer)
@@ -112,16 +112,16 @@ real_file_changed_callback (CajaFile *real_file,
 {
     CajaDesktopDirectoryFile *desktop_file;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (callback_data);
-    baul_file_changed (CAJA_FILE (desktop_file));
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (callback_data);
+    baul_file_changed (BAUL_FILE (desktop_file));
 }
 
 static CajaFileAttributes
 get_delegated_attributes_mask (void)
 {
-    return CAJA_FILE_ATTRIBUTE_DEEP_COUNTS |
-           CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT |
-           CAJA_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES;
+    return BAUL_FILE_ATTRIBUTE_DEEP_COUNTS |
+           BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_COUNT |
+           BAUL_FILE_ATTRIBUTE_DIRECTORY_ITEM_MIME_TYPES;
 }
 
 static void
@@ -145,7 +145,7 @@ desktop_directory_file_monitor_add (CajaFile *file,
     CajaDesktopDirectoryFile *desktop_file;
     DesktopMonitor *monitor;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (file);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
     /* Map the client to a unique value so this doesn't interfere
      * with direct monitoring of the file by the same client.
@@ -186,7 +186,7 @@ desktop_directory_file_monitor_remove (CajaFile *file,
     CajaDesktopDirectoryFile *desktop_file;
     DesktopMonitor *monitor;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (file);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
     /* Map the client to the value used by the earlier add call. */
     monitor = g_hash_table_lookup (desktop_file->details->monitors, client);
@@ -207,9 +207,9 @@ static void
 desktop_callback_destroy (DesktopCallback *desktop_callback)
 {
     g_assert (desktop_callback != NULL);
-    g_assert (CAJA_IS_DESKTOP_DIRECTORY_FILE (desktop_callback->desktop_file));
+    g_assert (BAUL_IS_DESKTOP_DIRECTORY_FILE (desktop_callback->desktop_file));
 
-    baul_file_unref (CAJA_FILE (desktop_callback->desktop_file));
+    baul_file_unref (BAUL_FILE (desktop_callback->desktop_file));
     g_list_free (desktop_callback->non_ready_files);
     g_free (desktop_callback);
 }
@@ -225,7 +225,7 @@ desktop_callback_check_done (DesktopCallback *desktop_callback)
     }
 
     /* Ensure our metadata is updated before calling back. */
-    baul_desktop_update_metadata_from_keyfile(CAJA_FILE (desktop_callback->desktop_file),
+    baul_desktop_update_metadata_from_keyfile(BAUL_FILE (desktop_callback->desktop_file),
                                                "directory");
 
     /* Remove from the hash table before sending it. */
@@ -233,7 +233,7 @@ desktop_callback_check_done (DesktopCallback *desktop_callback)
                          desktop_callback);
 
     /* We are ready, so do the real callback. */
-    (* desktop_callback->callback) (CAJA_FILE (desktop_callback->desktop_file),
+    (* desktop_callback->callback) (BAUL_FILE (desktop_callback->desktop_file),
                                     desktop_callback->callback_data);
 
     /* And we are done. */
@@ -255,7 +255,7 @@ ready_callback (CajaFile *file,
 {
     DesktopCallback *desktop_callback;
 
-    g_assert (CAJA_IS_FILE (file));
+    g_assert (BAUL_IS_FILE (file));
     g_assert (callback_data != NULL);
 
     desktop_callback = callback_data;
@@ -274,7 +274,7 @@ desktop_directory_file_call_when_ready (CajaFile *file,
     CajaDesktopDirectoryFile *desktop_file;
     DesktopCallback search_key, *desktop_callback;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (file);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
     /* Check to be sure we aren't overwriting. */
     search_key.callback = callback;
@@ -334,7 +334,7 @@ desktop_directory_file_cancel_call_when_ready (CajaFile *file,
     CajaDesktopDirectoryFile *desktop_file;
     DesktopCallback search_key, *desktop_callback;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (file);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
     /* Find the entry in the table. */
     search_key.callback = callback;
@@ -376,7 +376,7 @@ desktop_directory_file_check_if_ready (CajaFile *file,
     CajaFileAttributes delegated_attributes, non_delegated_attributes;
     CajaDesktopDirectoryFile *desktop_file;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (file);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
     partition_attributes (attributes,
                           &delegated_attributes,
@@ -395,7 +395,7 @@ desktop_directory_file_get_item_count (CajaFile *file,
     CajaDesktopDirectoryFile *desktop_file;
     gboolean got_count;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (file);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
     got_count = baul_file_get_directory_item_count (desktop_file->details->real_dir_file,
                 count,
@@ -420,7 +420,7 @@ desktop_directory_file_get_deep_counts (CajaFile *file,
     CajaDesktopDirectoryFile *desktop_file;
     CajaRequestStatus status;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (file);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
     status = baul_file_get_deep_counts (desktop_file->details->real_dir_file,
                                         directory_count,
@@ -445,7 +445,7 @@ desktop_directory_file_get_date (CajaFile *file,
 {
     CajaDesktopDirectoryFile *desktop_file;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (file);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (file);
 
     return baul_file_get_date (desktop_file->details->real_dir_file,
                                date_type,
@@ -465,7 +465,7 @@ monitor_destroy (gpointer data)
     DesktopMonitor *monitor = data;
 
     baul_file_monitor_remove
-    (CAJA_FILE (monitor->desktop_file->details->real_dir_file), monitor);
+    (BAUL_FILE (monitor->desktop_file->details->real_dir_file), monitor);
     g_free (monitor);
 }
 
@@ -493,9 +493,9 @@ baul_desktop_directory_file_init (gpointer object, gpointer klass)
     CajaDirectory *real_dir;
     CajaFile *real_dir_file;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (object);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (object);
 
-    desktop_directory = CAJA_DESKTOP_DIRECTORY (baul_directory_get_by_uri (EEL_DESKTOP_URI));
+    desktop_directory = BAUL_DESKTOP_DIRECTORY (baul_directory_get_by_uri (EEL_DESKTOP_URI));
 
     desktop_file->details = g_new0 (CajaDesktopDirectoryFileDetails, 1);
     desktop_file->details->desktop_directory = desktop_directory;
@@ -522,7 +522,7 @@ desktop_callback_remove_file_cover (gpointer key,
                                     gpointer callback_data)
 {
     desktop_callback_remove_file
-    (value, CAJA_FILE (callback_data));
+    (value, BAUL_FILE (callback_data));
 }
 
 
@@ -532,7 +532,7 @@ desktop_finalize (GObject *object)
     CajaDesktopDirectoryFile *desktop_file;
     CajaDesktopDirectory *desktop_directory;
 
-    desktop_file = CAJA_DESKTOP_DIRECTORY_FILE (object);
+    desktop_file = BAUL_DESKTOP_DIRECTORY_FILE (object);
     desktop_directory = desktop_file->details->desktop_directory;
 
     /* Todo: ghash now safe? */
@@ -553,7 +553,7 @@ desktop_finalize (GObject *object)
 
     g_free (desktop_file->details);
 
-    baul_directory_unref (CAJA_DIRECTORY (desktop_directory));
+    baul_directory_unref (BAUL_DIRECTORY (desktop_directory));
 
     EEL_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
 }
@@ -565,7 +565,7 @@ baul_desktop_directory_file_class_init (gpointer klass)
     CajaFileClass *file_class;
 
     object_class = G_OBJECT_CLASS (klass);
-    file_class = CAJA_FILE_CLASS (klass);
+    file_class = BAUL_FILE_CLASS (klass);
 
     object_class->finalize = desktop_finalize;
 

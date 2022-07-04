@@ -42,10 +42,10 @@
 
 #define MAIN_GROUP "Desktop Entry"
 
-#define CAJA_LINK_GENERIC_TAG	"Link"
-#define CAJA_LINK_TRASH_TAG 	"X-baul-trash"
-#define CAJA_LINK_MOUNT_TAG 	"FSDevice"
-#define CAJA_LINK_HOME_TAG 		"X-baul-home"
+#define BAUL_LINK_GENERIC_TAG	"Link"
+#define BAUL_LINK_TRASH_TAG 	"X-baul-trash"
+#define BAUL_LINK_MOUNT_TAG 	"FSDevice"
+#define BAUL_LINK_HOME_TAG 		"X-baul-home"
 
 static gboolean
 is_link_mime_type (const char *mime_type)
@@ -433,10 +433,10 @@ baul_link_get_link_uri_from_desktop (GKeyFile *key_file, const char *desktop_fil
         /* Some old broken desktop files use this nonstandard feature, we need handle it though */
         retval = g_key_file_get_string (key_file, MAIN_GROUP, "Exec", NULL);
     }
-    else if ((strcmp (type, CAJA_LINK_GENERIC_TAG) == 0) ||
-             (strcmp (type, CAJA_LINK_MOUNT_TAG) == 0) ||
-             (strcmp (type, CAJA_LINK_TRASH_TAG) == 0) ||
-             (strcmp (type, CAJA_LINK_HOME_TAG) == 0))
+    else if ((strcmp (type, BAUL_LINK_GENERIC_TAG) == 0) ||
+             (strcmp (type, BAUL_LINK_MOUNT_TAG) == 0) ||
+             (strcmp (type, BAUL_LINK_TRASH_TAG) == 0) ||
+             (strcmp (type, BAUL_LINK_HOME_TAG) == 0))
     {
         retval = g_key_file_get_string (key_file, MAIN_GROUP, "URL", NULL);
     }
@@ -530,7 +530,7 @@ baul_link_get_link_icon_from_desktop (GKeyFile *key_file)
     }
     else if (g_strcmp0 (type, "Directory") == 0)
     {
-        icon = g_strdup (CAJA_ICON_FOLDER);
+        icon = g_strdup (BAUL_ICON_FOLDER);
     }
     else if (g_strcmp0 (type, "Service") == 0 ||
              g_strcmp0 (type, "ServiceType") == 0)

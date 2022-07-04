@@ -182,8 +182,8 @@ baul_menus_append_bookmark_to_menu (CajaWindow *window,
     GtkAction *action;
     GtkWidget *menuitem;
 
-    g_assert (CAJA_IS_WINDOW (window));
-    g_assert (CAJA_IS_BOOKMARK (bookmark));
+    g_assert (BAUL_IS_WINDOW (window));
+    g_assert (BAUL_IS_BOOKMARK (bookmark));
 
     bookmark_holder = bookmark_holder_new (bookmark, window, refresh_callback, failed_callback);
     name = baul_bookmark_get_name (bookmark);
@@ -242,7 +242,7 @@ action_close_window_slot_callback (GtkAction *action,
     CajaWindow *window;
     CajaWindowSlot *slot;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
 
     baul_window_slot_close (slot);
@@ -252,7 +252,7 @@ static void
 action_connect_to_server_callback (GtkAction *action,
                                    gpointer user_data)
 {
-    CajaWindow *window = CAJA_WINDOW (user_data);
+    CajaWindow *window = BAUL_WINDOW (user_data);
     GtkWidget *dialog;
 
     dialog = baul_connect_server_dialog_new (window);
@@ -267,7 +267,7 @@ action_stop_callback (GtkAction *action,
     CajaWindow *window;
     CajaWindowSlot *slot;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
 
     baul_window_slot_stop_loading (slot);
@@ -280,7 +280,7 @@ action_home_callback (GtkAction *action,
     CajaWindow *window;
     CajaWindowSlot *slot;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
 
     baul_window_slot_go_home (slot,
@@ -295,7 +295,7 @@ action_go_to_computer_callback (GtkAction *action,
     CajaWindowSlot *slot;
     GFile *computer;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
 
     computer = g_file_new_for_uri (COMPUTER_URI);
@@ -313,7 +313,7 @@ action_go_to_network_callback (GtkAction *action,
     CajaWindowSlot *slot;
     GFile *network;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
 
     network = g_file_new_for_uri (NETWORK_URI);
@@ -332,7 +332,7 @@ action_go_to_templates_callback (GtkAction *action,
     char *path;
     GFile *location;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
 
     path = baul_get_templates_directory ();
@@ -352,7 +352,7 @@ action_go_to_trash_callback (GtkAction *action,
     CajaWindowSlot *slot;
     GFile *trash;
 
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
     slot = baul_window_get_active_slot (window);
 
     trash = g_file_new_for_uri ("trash:///");
@@ -366,28 +366,28 @@ static void
 action_reload_callback (GtkAction *action,
                         gpointer user_data)
 {
-    baul_window_reload (CAJA_WINDOW (user_data));
+    baul_window_reload (BAUL_WINDOW (user_data));
 }
 
 static void
 action_zoom_in_callback (GtkAction *action,
                          gpointer user_data)
 {
-    baul_window_zoom_in (CAJA_WINDOW (user_data));
+    baul_window_zoom_in (BAUL_WINDOW (user_data));
 }
 
 static void
 action_zoom_out_callback (GtkAction *action,
                           gpointer user_data)
 {
-    baul_window_zoom_out (CAJA_WINDOW (user_data));
+    baul_window_zoom_out (BAUL_WINDOW (user_data));
 }
 
 static void
 action_zoom_normal_callback (GtkAction *action,
                              gpointer user_data)
 {
-    baul_window_zoom_to_default (CAJA_WINDOW (user_data));
+    baul_window_zoom_to_default (BAUL_WINDOW (user_data));
 }
 
 static void
@@ -397,16 +397,16 @@ action_show_hidden_files_callback (GtkAction *action,
     CajaWindow *window;
     CajaWindowShowHiddenFilesMode mode;
 
-    window = CAJA_WINDOW (callback_data);
+    window = BAUL_WINDOW (callback_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
-        mode = CAJA_WINDOW_SHOW_HIDDEN_FILES_ENABLE;
+        mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_ENABLE;
     }
     else
     {
-        mode = CAJA_WINDOW_SHOW_HIDDEN_FILES_DISABLE;
+        mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_DISABLE;
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
@@ -420,16 +420,16 @@ action_show_backup_files_callback (GtkAction *action,
     CajaWindow *window;
     CajaWindowShowBackupFilesMode mode;
 
-    window = CAJA_WINDOW (callback_data);
+    window = BAUL_WINDOW (callback_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
-        mode = CAJA_WINDOW_SHOW_BACKUP_FILES_ENABLE;
+        mode = BAUL_WINDOW_SHOW_BACKUP_FILES_ENABLE;
     }
     else
     {
-        mode = CAJA_WINDOW_SHOW_BACKUP_FILES_DISABLE;
+        mode = BAUL_WINDOW_SHOW_BACKUP_FILES_DISABLE;
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
@@ -441,25 +441,25 @@ show_hidden_files_preference_callback (gpointer callback_data)
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (callback_data);
+    window = BAUL_WINDOW (callback_data);
 
-    if (window->details->show_hidden_files_mode == CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT)
+    if (window->details->show_hidden_files_mode == BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT)
     {
         GtkAction *action;
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        action = gtk_action_group_get_action (window->details->main_action_group, CAJA_ACTION_SHOW_HIDDEN_FILES);
+        action = gtk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
         g_assert (GTK_IS_ACTION (action));
 
         /* update button */
         g_signal_handlers_block_by_func (action, action_show_hidden_files_callback, window);
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                      g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_HIDDEN_FILES));
+                                      g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_HIDDEN_FILES));
         G_GNUC_END_IGNORE_DEPRECATIONS;
         g_signal_handlers_unblock_by_func (action, action_show_hidden_files_callback, window);
 
         /* inform views */
-        baul_window_info_set_hidden_files_mode (window, CAJA_WINDOW_SHOW_HIDDEN_FILES_DEFAULT);
+        baul_window_info_set_hidden_files_mode (window, BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT);
 
     }
 }
@@ -469,25 +469,25 @@ show_backup_files_preference_callback (gpointer callback_data)
 {
     CajaWindow *window;
 
-    window = CAJA_WINDOW (callback_data);
+    window = BAUL_WINDOW (callback_data);
 
-    if (window->details->show_backup_files_mode == CAJA_WINDOW_SHOW_BACKUP_FILES_DEFAULT)
+    if (window->details->show_backup_files_mode == BAUL_WINDOW_SHOW_BACKUP_FILES_DEFAULT)
     {
         GtkAction *action;
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        action = gtk_action_group_get_action (window->details->main_action_group, CAJA_ACTION_SHOW_BACKUP_FILES);
+        action = gtk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
         g_assert (GTK_IS_ACTION (action));
 
         /* update button */
         g_signal_handlers_block_by_func (action, action_show_backup_files_callback, window);
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                      g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_BACKUP_FILES));
+                                      g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_BACKUP_FILES));
         G_GNUC_END_IGNORE_DEPRECATIONS;
         g_signal_handlers_unblock_by_func (action, action_show_backup_files_callback, window);
 
         /* inform views */
-        baul_window_info_set_backup_files_mode (window, CAJA_WINDOW_SHOW_BACKUP_FILES_DEFAULT);
+        baul_window_info_set_backup_files_mode (window, BAUL_WINDOW_SHOW_BACKUP_FILES_DEFAULT);
     }
 }
 
@@ -551,7 +551,7 @@ action_about_baul_callback (GtkAction *action,
     gsize n_authors = 0, n_documenters = 0 , i;
 
     key_file = g_key_file_new ();
-    if (!g_key_file_load_from_file (key_file, CAJA_DATADIR G_DIR_SEPARATOR_S "baul.about", 0, &error))
+    if (!g_key_file_load_from_file (key_file, BAUL_DATADIR G_DIR_SEPARATOR_S "baul.about", 0, &error))
     {
         g_warning ("Couldn't load about data: %s\n", error->message);
         g_error_free (error);
@@ -599,7 +599,7 @@ static void
 action_up_callback (GtkAction *action,
                     gpointer user_data)
 {
-    baul_window_go_up (CAJA_WINDOW (user_data), FALSE, should_open_in_new_tab ());
+    baul_window_go_up (BAUL_WINDOW (user_data), FALSE, should_open_in_new_tab ());
 }
 
 static void
@@ -610,10 +610,10 @@ action_baul_manual_callback (GtkAction *action,
     GError *error;
 
     error = NULL;
-    window = CAJA_WINDOW (user_data);
+    window = BAUL_WINDOW (user_data);
 
     gtk_show_uri_on_window (GTK_WINDOW (window),
-                            CAJA_IS_DESKTOP_WINDOW (window)
+                            BAUL_IS_DESKTOP_WINDOW (window)
                                ? "help:mate-user-guide"
                                : "help:mate-user-guide/gosbaul-1",
                             gtk_get_current_event_time (), &error);
@@ -930,27 +930,27 @@ static const GtkActionEntry main_entries[] =
         /* tooltip */                  N_("Connect to a remote computer or shared disk"),
         G_CALLBACK (action_connect_to_server_callback)
     },
-    /* name, icon name */        { "Home", CAJA_ICON_HOME,
+    /* name, icon name */        { "Home", BAUL_ICON_HOME,
         /* label, accelerator */       N_("_Home Folder"), "<alt>Home",
         /* tooltip */                  N_("Open your personal folder"),
         G_CALLBACK (action_home_callback)
     },
-    /* name, icon name */        { "Go to Computer", CAJA_ICON_COMPUTER,
+    /* name, icon name */        { "Go to Computer", BAUL_ICON_COMPUTER,
         /* label, accelerator */       N_("_Computer"), NULL,
         /* tooltip */                  N_("Browse all local and remote disks and folders accessible from this computer"),
         G_CALLBACK (action_go_to_computer_callback)
     },
-    /* name, icon name */        { "Go to Network", CAJA_ICON_NETWORK,
+    /* name, icon name */        { "Go to Network", BAUL_ICON_NETWORK,
         /* label, accelerator */       N_("_Network"), NULL,
         /* tooltip */                  N_("Browse bookmarked and local network locations"),
         G_CALLBACK (action_go_to_network_callback)
     },
-    /* name, icon name */        { "Go to Templates", CAJA_ICON_TEMPLATE,
+    /* name, icon name */        { "Go to Templates", BAUL_ICON_TEMPLATE,
         /* label, accelerator */       N_("T_emplates"), NULL,
         /* tooltip */                  N_("Open your personal templates folder"),
         G_CALLBACK (action_go_to_templates_callback)
     },
-    /* name, icon name */        { "Go to Trash", CAJA_ICON_TRASH,
+    /* name, icon name */        { "Go to Trash", BAUL_ICON_TRASH,
         /* label, accelerator */       N_("_Trash"), NULL,
         /* tooltip */                  N_("Open your personal trash folder"),
         G_CALLBACK (action_go_to_trash_callback)
@@ -999,29 +999,29 @@ baul_window_initialize_menus (CajaWindow *window)
                                          main_toggle_entries, G_N_ELEMENTS (main_toggle_entries),
                                          window);
 
-    action = gtk_action_group_get_action (action_group, CAJA_ACTION_UP);
+    action = gtk_action_group_get_action (action_group, BAUL_ACTION_UP);
     g_object_set (action, "short_label", _("_Up"), NULL);
 
-    action = gtk_action_group_get_action (action_group, CAJA_ACTION_HOME);
+    action = gtk_action_group_get_action (action_group, BAUL_ACTION_HOME);
     g_object_set (action, "short_label", _("_Home"), NULL);
 
-    action = gtk_action_group_get_action (action_group, CAJA_ACTION_SHOW_HIDDEN_FILES);
+    action = gtk_action_group_get_action (action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
     g_signal_handlers_block_by_func (action, action_show_hidden_files_callback, window);
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                  g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_HIDDEN_FILES));
+                                  g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_HIDDEN_FILES));
     g_signal_handlers_unblock_by_func (action, action_show_hidden_files_callback, window);
-    g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_SHOW_HIDDEN_FILES,
+    g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_SHOW_HIDDEN_FILES,
                               G_CALLBACK(show_hidden_files_preference_callback),
                               window);
 
-    action = gtk_action_group_get_action (action_group, CAJA_ACTION_SHOW_BACKUP_FILES);
+    action = gtk_action_group_get_action (action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
     g_signal_handlers_block_by_func (action, action_show_backup_files_callback, window);
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                  g_settings_get_boolean (baul_preferences, CAJA_PREFERENCES_SHOW_BACKUP_FILES));
+                                  g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_BACKUP_FILES));
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_handlers_unblock_by_func (action, action_show_backup_files_callback, window);
 
-    g_signal_connect_swapped (baul_preferences, "changed::" CAJA_PREFERENCES_SHOW_BACKUP_FILES,
+    g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_SHOW_BACKUP_FILES,
                               G_CALLBACK(show_backup_files_preference_callback),
                               window);
 
@@ -1069,7 +1069,7 @@ get_extension_menus (CajaWindow *window)
     GList *items;
     GList *l;
 
-    providers = baul_extensions_get_for_type (CAJA_TYPE_MENU_PROVIDER);
+    providers = baul_extensions_get_for_type (BAUL_TYPE_MENU_PROVIDER);
     items = NULL;
 
     slot = baul_window_get_active_slot (window);
@@ -1079,7 +1079,7 @@ get_extension_menus (CajaWindow *window)
         CajaMenuProvider *provider;
         GList *file_items;
 
-        provider = CAJA_MENU_PROVIDER (l->data);
+        provider = BAUL_MENU_PROVIDER (l->data);
         file_items = baul_menu_provider_get_background_items (provider,
                      GTK_WIDGET (window),
                      slot->viewed_file);
@@ -1111,7 +1111,7 @@ add_extension_menu_items (CajaWindow *window,
         char *path;
         const gchar *action_name;
 
-        item = CAJA_MENU_ITEM (l->data);
+        item = BAUL_MENU_ITEM (l->data);
 
         g_object_get (item, "menu", &menu, NULL);
 

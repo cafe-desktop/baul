@@ -22,8 +22,8 @@
  *
  */
 
-#ifndef CAJA_MENU_ITEM_H
-#define CAJA_MENU_ITEM_H
+#ifndef BAUL_MENU_ITEM_H
+#define BAUL_MENU_ITEM_H
 
 #include "baul-menu.h"
 

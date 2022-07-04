@@ -40,14 +40,14 @@ get_builtin_columns (void)
     GList *columns;
 
     columns = g_list_append (NULL,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "name",
                                            "attribute", "name",
                                            "label", _("Name"),
                                            "description", _("The name and icon of the file."),
                                            NULL));
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "size",
                                            "attribute", "size",
                                            "label", _("Size"),
@@ -55,7 +55,7 @@ get_builtin_columns (void)
                                            "xalign", 1.0,
                                            NULL));
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "size_on_disk",
                                            "attribute", "size_on_disk",
                                            "label", _("Size on Disk"),
@@ -63,14 +63,14 @@ get_builtin_columns (void)
                                            "xalign", 1.0,
                                            NULL));
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "type",
                                            "attribute", "type",
                                            "label", _("Type"),
                                            "description", _("The type of the file."),
                                            NULL));
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "date_modified",
                                            "attribute", "date_modified",
                                            "label", _("Date Modified"),
@@ -78,7 +78,7 @@ get_builtin_columns (void)
                                            NULL));
 
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "date_accessed",
                                            "attribute", "date_accessed",
                                            "label", _("Date Accessed"),
@@ -86,7 +86,7 @@ get_builtin_columns (void)
                                            NULL));
 
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "owner",
                                            "attribute", "owner",
                                            "label", _("Owner"),
@@ -94,7 +94,7 @@ get_builtin_columns (void)
                                            NULL));
 
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "group",
                                            "attribute", "group",
                                            "label", _("Group"),
@@ -102,7 +102,7 @@ get_builtin_columns (void)
                                            NULL));
 
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "permissions",
                                            "attribute", "permissions",
                                            "label", _("Permissions"),
@@ -110,7 +110,7 @@ get_builtin_columns (void)
                                            NULL));
 
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "octal_permissions",
                                            "attribute", "octal_permissions",
                                            "label", _("Octal Permissions"),
@@ -118,7 +118,7 @@ get_builtin_columns (void)
                                            NULL));
 
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "mime_type",
                                            "attribute", "mime_type",
                                            "label", _("MIME Type"),
@@ -126,7 +126,7 @@ get_builtin_columns (void)
                                            NULL));
 #ifdef HAVE_SELINUX
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "selinux_context",
                                            "attribute", "selinux_context",
                                            "label", _("SELinux Context"),
@@ -134,7 +134,7 @@ get_builtin_columns (void)
                                            NULL));
 #endif
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "where",
                                            "attribute", "where",
                                            "label", _("Location"),
@@ -142,7 +142,7 @@ get_builtin_columns (void)
                                            NULL));
 
     columns = g_list_append (columns,
-                             g_object_new (CAJA_TYPE_COLUMN,
+                             g_object_new (BAUL_TYPE_COLUMN,
                                            "name", "extension",
                                            "attribute", "extension",
                                            "label", _("Extension"),
@@ -158,7 +158,7 @@ get_extension_columns (void)
     GList *providers;
     GList *l;
 
-    providers = baul_extensions_get_for_type (CAJA_TYPE_COLUMN_PROVIDER);
+    providers = baul_extensions_get_for_type (BAUL_TYPE_COLUMN_PROVIDER);
 
     columns = NULL;
 
@@ -167,7 +167,7 @@ get_extension_columns (void)
         CajaColumnProvider *provider;
         GList *provider_columns;
 
-        provider = CAJA_COLUMN_PROVIDER (l->data);
+        provider = BAUL_COLUMN_PROVIDER (l->data);
         provider_columns = baul_column_provider_get_columns (provider);
         columns = g_list_concat (columns, provider_columns);
     }
@@ -185,14 +185,14 @@ get_trash_columns (void)
     if (columns == NULL)
     {
         columns = g_list_append (columns,
-                                 g_object_new (CAJA_TYPE_COLUMN,
+                                 g_object_new (BAUL_TYPE_COLUMN,
                                                "name", "trashed_on",
                                                "attribute", "trashed_on",
                                                "label", _("Trashed On"),
                                                "description", _("Date when file was moved to the Trash"),
                                                NULL));
         columns = g_list_append (columns,
-                                 g_object_new (CAJA_TYPE_COLUMN,
+                                 g_object_new (BAUL_TYPE_COLUMN,
                                                "name", "trash_orig_path",
                                                "attribute", "trash_orig_path",
                                                "label", _("Original Location"),

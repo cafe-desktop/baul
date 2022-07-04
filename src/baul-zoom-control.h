@@ -25,24 +25,24 @@
  *
  */
 
-#ifndef CAJA_ZOOM_CONTROL_H
-#define CAJA_ZOOM_CONTROL_H
+#ifndef BAUL_ZOOM_CONTROL_H
+#define BAUL_ZOOM_CONTROL_H
 
 #include <gtk/gtk.h>
 
 #include <libbaul-private/baul-icon-info.h> /* For CajaZoomLevel */
 
-#define CAJA_TYPE_ZOOM_CONTROL baul_zoom_control_get_type()
-#define CAJA_ZOOM_CONTROL(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_ZOOM_CONTROL, CajaZoomControl))
-#define CAJA_ZOOM_CONTROL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), CAJA_TYPE_ZOOM_CONTROL, CajaZoomControlClass))
-#define CAJA_IS_ZOOM_CONTROL(obj) \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_ZOOM_CONTROL))
-#define CAJA_IS_ZOOM_CONTROL_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), CAJA_TYPE_ZOOM_CONTROL))
-#define CAJA_ZOOM_CONTROL_GET_CLASS(obj) \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj), CAJA_TYPE_ZOOM_CONTROL, CajaZoomControlClass))
+#define BAUL_TYPE_ZOOM_CONTROL baul_zoom_control_get_type()
+#define BAUL_ZOOM_CONTROL(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ZOOM_CONTROL, CajaZoomControl))
+#define BAUL_ZOOM_CONTROL_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BAUL_TYPE_ZOOM_CONTROL, CajaZoomControlClass))
+#define BAUL_IS_ZOOM_CONTROL(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_ZOOM_CONTROL))
+#define BAUL_IS_ZOOM_CONTROL_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BAUL_TYPE_ZOOM_CONTROL))
+#define BAUL_ZOOM_CONTROL_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS ((obj), BAUL_TYPE_ZOOM_CONTROL, CajaZoomControlClass))
 
 typedef struct CajaZoomControl CajaZoomControl;
 typedef struct CajaZoomControlClass CajaZoomControlClass;
@@ -89,4 +89,4 @@ gboolean          baul_zoom_control_can_zoom_out       (CajaZoomControl *zoom_co
 
 void              baul_zoom_control_set_active_appearance (CajaZoomControl *zoom_control, gboolean is_active);
 
-#endif /* CAJA_ZOOM_CONTROL_H */
+#endif /* BAUL_ZOOM_CONTROL_H */

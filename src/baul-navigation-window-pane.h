@@ -22,18 +22,18 @@
    Author: Holger Berndt <berndth@gmx.de>
 */
 
-#ifndef CAJA_NAVIGATION_WINDOW_PANE_H
-#define CAJA_NAVIGATION_WINDOW_PANE_H
+#ifndef BAUL_NAVIGATION_WINDOW_PANE_H
+#define BAUL_NAVIGATION_WINDOW_PANE_H
 
 #include "baul-window-pane.h"
 #include "baul-navigation-window-slot.h"
 
-#define CAJA_TYPE_NAVIGATION_WINDOW_PANE     (baul_navigation_window_pane_get_type())
-#define CAJA_NAVIGATION_WINDOW_PANE_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), CAJA_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPaneClass))
-#define CAJA_NAVIGATION_WINDOW_PANE(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), CAJA_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPane))
-#define CAJA_IS_NAVIGATION_WINDOW_PANE(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CAJA_TYPE_NAVIGATION_WINDOW_PANE))
-#define CAJA_IS_NAVIGATION_WINDOW_PANE_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CAJA_TYPE_NAVIGATION_WINDOW_PANE))
-#define CAJA_NAVIGATION_WINDOW_PANE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CAJA_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPaneClass))
+#define BAUL_TYPE_NAVIGATION_WINDOW_PANE     (baul_navigation_window_pane_get_type())
+#define BAUL_NAVIGATION_WINDOW_PANE_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), BAUL_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPaneClass))
+#define BAUL_NAVIGATION_WINDOW_PANE(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPane))
+#define BAUL_IS_NAVIGATION_WINDOW_PANE(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BAUL_TYPE_NAVIGATION_WINDOW_PANE))
+#define BAUL_IS_NAVIGATION_WINDOW_PANE_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BAUL_TYPE_NAVIGATION_WINDOW_PANE))
+#define BAUL_NAVIGATION_WINDOW_PANE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BAUL_TYPE_NAVIGATION_WINDOW_PANE, CajaNavigationWindowPaneClass))
 
 typedef struct _CajaNavigationWindowPaneClass CajaNavigationWindowPaneClass;
 typedef struct _CajaNavigationWindowPane      CajaNavigationWindowPane;
@@ -90,4 +90,4 @@ gboolean baul_navigation_window_pane_hide_temporary_bars (CajaNavigationWindowPa
 void     baul_navigation_window_pane_add_slot_in_tab (CajaNavigationWindowPane *pane, CajaWindowSlot *slot, CajaWindowOpenSlotFlags flags);
 void     baul_navigation_window_pane_remove_page (CajaNavigationWindowPane *pane, int page_num);
 
-#endif /* CAJA_NAVIGATION_WINDOW_PANE_H */
+#endif /* BAUL_NAVIGATION_WINDOW_PANE_H */
