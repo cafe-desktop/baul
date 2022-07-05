@@ -54,7 +54,7 @@ static EggSMClientMode global_client_mode = EGG_SM_CLIENT_MODE_NORMAL;
 static gboolean
 running_in_cafe (void)
 {
-    return (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "MATE") == 0)
+    return (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "CAFE") == 0)
         || (g_strcmp0 (g_getenv ("XDG_SESSION_DESKTOP"), "cafe") == 0)
         || (g_strcmp0 (g_getenv ("DESKTOP_SESSION"), "cafe") == 0);
 }
@@ -356,7 +356,7 @@ egg_sm_client_get (void)
         if (!global_client)
             global_client = g_object_new (EGG_TYPE_SM_CLIENT, NULL);
         /*FIXME
-          Disabling when root/not in MATE in GtkApplication builds
+          Disabling when root/not in CAFE in GtkApplication builds
           as egg_sm_client_set_mode must be called prior to start of main loop
           to stop baul restart but this is diffcult in GtkApplication */
 

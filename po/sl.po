@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -72,8 +72,8 @@ msgid "Countertop"
 msgstr "Vijuge"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "Temna MATE"
+msgid "Dark CAFE"
+msgstr "Temna CAFE"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -96,8 +96,8 @@ msgid "Fossil"
 msgstr "Fosili"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -304,19 +304,19 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "Upravljalnik datotek za namizno okolje MATE"
+msgid "File manager for the CAFE desktop environment"
+msgstr "Upravljalnik datotek za namizno okolje CAFE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul je uradni upravljalnik datotek za MATE namizje. Omogoča brskanje po "
+"Baul je uradni upravljalnik datotek za CAFE namizje. Omogoča brskanje po "
 "mapah, kot tudi predogled datotek in zagon aplikacij, ki so povezane z "
-"njimi. Odgovoren je tudi za upravljanje ikon v MATE namizju. Deluje na "
+"njimi. Odgovoren je tudi za upravljanje ikon v CAFE namizju. Deluje na "
 "lokalnik in oddaljeni datotečni sistemih."
 
 #: data/baul.appdata.xml.in:16
@@ -355,8 +355,8 @@ msgstr "sistemski -upravljalnik-datotek"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "datoteke;brskalnik;upravljalnik;MATE;"
+msgid "files;browser;manager;CAFE;"
+msgstr "datoteke;brskalnik;upravljalnik;CAFE;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -379,8 +379,8 @@ msgstr "računalnik"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
-msgstr "brskanje;diski;mape;lokalno;oddaljeno;računalnik;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
+msgstr "brskanje;diski;mape;lokalno;oddaljeno;računalnik;CAFE;"
 
 #: data/baul.desktop.in.in:4
 msgid "File Manager"
@@ -397,9 +397,9 @@ msgstr "Spremeni obnašanje in videz oken urejevalnika datotek."
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
-"datoteka;upravljanik;spremninjanje;lastnosti;obnašanje;prikaz;okna;MATE;"
+"datoteka;upravljanik;spremninjanje;lastnosti;obnašanje;prikaz;okna;CAFE;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -429,8 +429,8 @@ msgstr "domača-mapa"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "dom;domača;home;osebno;mapa;odpri;MATE;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "dom;domača;home;osebno;mapa;odpri;CAFE;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -453,7 +453,7 @@ msgstr "network-workgroup"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
@@ -6067,8 +6067,8 @@ msgid "translator-credits"
 msgstr "zasluge-prevajalcev"
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "MATE spletna stran"
+msgid "CAFE Web Site"
+msgstr "CAFE spletna stran"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

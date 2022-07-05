@@ -10,6 +10,6 @@ StartupNotify=true
 Type=Application
 Categories=GTK;System;Core;
 # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-Keywords=home;personal;folder;open;MATE;
-OnlyShowIn=MATE;
+Keywords=home;personal;folder;open;CAFE;
+OnlyShowIn=CAFE;
 NoDisplay=true

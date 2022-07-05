@@ -204,7 +204,7 @@ drag_data_received_callback (GtkWidget *widget,
                                   prompt,
                                   detail,
                                   "process-stop", "gtk-ok",
-                                  NULL) != 0 /* MATE_OK */;
+                                  NULL) != 0 /* CAFE_OK */;
 
         g_free (prompt);
         g_free (detail);

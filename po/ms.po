@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -67,8 +67,8 @@ msgid "Countertop"
 msgstr "Countertop"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "MATE Gelap"
+msgid "Dark CAFE"
+msgstr "CAFE Gelap"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -91,8 +91,8 @@ msgid "Fossil"
 msgstr "Fosil"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -299,19 +299,19 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "Pengurus fail untuk persekitran desktop MATE"
+msgid "File manager for the CAFE desktop environment"
+msgstr "Pengurus fail untuk persekitran desktop CAFE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul ialah pengurus fail rasmi bagi desktop MATE. Ia membolehkan pelayaran "
+"Baul ialah pengurus fail rasmi bagi desktop CAFE. Ia membolehkan pelayaran "
 "direktori, membuat pratonton fail dan melancarkan aplikasi yang dikaitkan "
-"dengannya. Ia juga bertanggungjawab mengendalikan ikon-ikon desktop MATE. Ia"
+"dengannya. Ia juga bertanggungjawab mengendalikan ikon-ikon desktop CAFE. Ia"
 " berfungsi pada sistem fail setempat dan jauh."
 
 #: data/baul.appdata.xml.in:16
@@ -350,8 +350,8 @@ msgstr "system-file-manager"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "fai;pelayar;pengurus;MATE;"
+msgid "files;browser;manager;CAFE;"
+msgstr "fai;pelayar;pengurus;CAFE;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -374,8 +374,8 @@ msgstr "komputer"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
-msgstr "layar;cakera;folder;setempat;jauh;komputer;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
+msgstr "layar;cakera;folder;setempat;jauh;komputer;CAFE;"
 
 #: data/baul.desktop.in.in:4
 msgid "File Manager"
@@ -392,8 +392,8 @@ msgstr "Ubah kelakuan dan penampilan tetingkap pengurus fail"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
-msgstr "fail;pengurus;ubah;sifat;kelakuan;penampilan;tetingkap;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
+msgstr "fail;pengurus;ubah;sifat;kelakuan;penampilan;tetingkap;CAFE;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -423,8 +423,8 @@ msgstr "user-home"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "rumah;peribadi;folder;buka;MATE;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "rumah;peribadi;folder;buka;CAFE;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -447,8 +447,8 @@ msgstr "network-workgroup"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
-msgstr "tandabuku;layar;setempat;rangkaian;lokasi;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
+msgstr "tandabuku;layar;setempat;rangkaian;lokasi;CAFE;"
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
 msgid "X"
@@ -5917,8 +5917,8 @@ msgid "translator-credits"
 msgstr "Abuyop"
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "Laman Sesawang MATE"
+msgid "CAFE Web Site"
+msgstr "Laman Sesawang CAFE"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

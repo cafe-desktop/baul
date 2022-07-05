@@ -41,7 +41,7 @@
 #include <libnotify/notify.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#define MATE_DESKTOP_USE_UNSTABLE_API
+#define CAFE_DESKTOP_USE_UNSTABLE_API
 #include <libcafe-desktop/cafe-bg.h>
 
 #include <eel/eel-gtk-extensions.h>
@@ -1075,7 +1075,7 @@ desktop_changed_callback (gpointer user_data)
     BaulApplication *application;
 
     application = BAUL_APPLICATION (user_data);
-    if (g_settings_get_boolean (cafe_background_preferences, MATE_BG_KEY_SHOW_DESKTOP))
+    if (g_settings_get_boolean (cafe_background_preferences, CAFE_BG_KEY_SHOW_DESKTOP))
     {
         baul_application_open_desktop (application);
     }
@@ -1833,7 +1833,7 @@ do_perform_self_checks (gint *exit_status)
 static gboolean
 running_in_cafe (void)
 {
-    return (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "MATE") == 0)
+    return (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "CAFE") == 0)
         || (g_strcmp0 (g_getenv ("XDG_SESSION_DESKTOP"), "cafe") == 0)
         || (g_strcmp0 (g_getenv ("DESKTOP_SESSION"), "cafe") == 0);
 }
@@ -1924,7 +1924,7 @@ baul_application_local_command_line (GApplication *application,
     }
 
     if (version) {
-        g_print ("MATE baul " PACKAGE_VERSION "\n");
+        g_print ("CAFE baul " PACKAGE_VERSION "\n");
         goto out;
     }
 
@@ -2106,7 +2106,7 @@ init_desktop (BaulApplication *self)
 
     if (!self->priv->no_desktop &&
         !g_settings_get_boolean (cafe_background_preferences,
-                     MATE_BG_KEY_SHOW_DESKTOP)) {
+                     CAFE_BG_KEY_SHOW_DESKTOP)) {
         self->priv->no_desktop = TRUE;
     }
 
@@ -2121,7 +2121,7 @@ init_desktop (BaulApplication *self)
     }
 
     /* Monitor the preference to show or hide the desktop */
-    g_signal_connect_swapped (cafe_background_preferences, "changed::" MATE_BG_KEY_SHOW_DESKTOP,
+    g_signal_connect_swapped (cafe_background_preferences, "changed::" CAFE_BG_KEY_SHOW_DESKTOP,
                   G_CALLBACK (desktop_changed_callback),
                   self);
 }

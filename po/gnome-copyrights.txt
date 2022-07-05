@@ -507,14 +507,14 @@
 ========== en_CA.po ==========
 # #-#-#-#-#  en_CA.po (baul)  #-#-#-#-#
 # English/Canada translation of baul.
-# Copyright (C) 2004-2006 Adam Weinberger and the MATE Foundation
+# Copyright (C) 2004-2006 Adam Weinberger and the CAFE Foundation
 # This file is distributed under the same licence as the baul package.
 # Adam Weinberger <adamw@gnome.org>, 2004, 2005, 2006.
 #
 #
 # #-#-#-#-#  en_CA.po (eel)  #-#-#-#-#
 # English/Canada translations for eel
-# Copyright (C) 2004-2005 Adam Weinberger and the MATE foundation
+# Copyright (C) 2004-2005 Adam Weinberger and the CAFE foundation
 # This file is distributed under the same licence as the eel package.
 # Adam Weinberger <adamw@gnome.org>, 2004, 2005.
 #
@@ -525,7 +525,7 @@
 
 ========== en_GB.po ==========
 # English (British) translation.
-# Copyright (C) 2003 The MATE Foundation
+# Copyright (C) 2003 The CAFE Foundation
 # This file is distributed under the same license as the baul package.
 # Abigail Brady <morwen@evilmagic.org>, Bastien Nocera <hadess@hadess.net>, 2003.
 # Gareth Owen <gowen72@yahoo.com>, David Lodge <dave@cirt.net>, 2004
@@ -582,7 +582,7 @@
 # Estonian translation of Baul.
 #
 # Copyright (C) 2002-2006 Free Software Foundation, Inc.
-# Copyright (C) 2007-2010 The MATE Project.
+# Copyright (C) 2007-2010 The CAFE Project.
 # This file is distributed under the same license as the baul package.
 #
 # Lauri Kasvandik <lauri.kasvandik mail ee>, 2002.
@@ -901,7 +901,7 @@
 
 ========== is.po ==========
 # Icelandic Translation of Baul.
-# This file is distributed under the same license as the MATE package.
+# This file is distributed under the same license as the CAFE package.
 # The translations are Copyright (C) of the contributing translators.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # Samúel Jón Gunnarsson <sammi@techattack.nu>, 2003.
@@ -1075,7 +1075,7 @@
 
 ========== mai.po ==========
 # translation of baul.HEAD.po to Maithili
-# Copyright (C) 2006 The MATE Foundation
+# Copyright (C) 2006 The CAFE Foundation
 # This file is distributed under the same license as the PACKAGE package.
 # BOSS GNU/Linux <bosslinux@cdac.in>, 2008.
 
@@ -1745,7 +1745,7 @@
 
 ========== vi.po ==========
 # Vietnamese Translation for Baul.
-# Copyright © 2009 MATE i18n Project for Vietnamese.
+# Copyright © 2009 CAFE i18n Project for Vietnamese.
 # Hoang Ngoc Tu <hntu@gmx.de>, 2001-2002.
 # Joern v. Kattchee <kattchee@gmx.net>, 2001-2002.
 # Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2002, 2004, 2007-2008.

@@ -10,4 +10,4 @@ Icon=folder-open
 StartupNotify=false
 Type=Application
 MimeType=inode/directory;application/x-cafe-saved-search;
-OnlyShowIn=MATE;
+OnlyShowIn=CAFE;

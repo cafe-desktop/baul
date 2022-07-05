@@ -26,7 +26,7 @@
 
 #include <config.h>
 
-#define MATE_DESKTOP_USE_UNSTABLE_API
+#define CAFE_DESKTOP_USE_UNSTABLE_API
 
 #include "eel-cafe-extensions.h"
 

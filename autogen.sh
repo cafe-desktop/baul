@@ -13,7 +13,7 @@ PKG_NAME="baul"
 }
 
 which cafe-autogen || {
-    echo "You need to install cafe-common from the MATE Git"
+    echo "You need to install cafe-common from the CAFE Git"
     exit 1
 }
 

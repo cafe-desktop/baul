@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -69,7 +69,7 @@ msgid "Countertop"
 msgstr "Nøglehuller"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
+msgid "Dark CAFE"
 msgstr "Mørk Mate"
 
 #: data/browser.xml.in:16
@@ -93,8 +93,8 @@ msgid "Fossil"
 msgstr "Fossil"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -301,20 +301,20 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "Filhåndtering for skrivebordsmiljøet MATE"
+msgid "File manager for the CAFE desktop environment"
+msgstr "Filhåndtering for skrivebordsmiljøet CAFE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul er den officielle filhåndtering for skrivebordet MATE. Programmet giver"
+"Baul er den officielle filhåndtering for skrivebordet CAFE. Programmet giver"
 " mulighed for at gennemse mapper samt forhåndsvise filer og starte "
 "programmer associeret med disse filer. Programmet er også ansvarlig for "
-"håndtering af ikoner på MATE-skrivebordet. Fungerer på lokale og eksterne "
+"håndtering af ikoner på CAFE-skrivebordet. Fungerer på lokale og eksterne "
 "filsystemer. "
 
 #: data/baul.appdata.xml.in:16
@@ -353,8 +353,8 @@ msgstr "system-file-manager"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "filer;browser;manager;håndtering;MATE;"
+msgid "files;browser;manager;CAFE;"
+msgstr "filer;browser;manager;håndtering;CAFE;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -377,8 +377,8 @@ msgstr "computer"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
-msgstr "gennemse;diske;mapper;lokal;ekstern;computer;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
+msgstr "gennemse;diske;mapper;lokal;ekstern;computer;CAFE;"
 
 #: data/baul.desktop.in.in:4
 msgid "File Manager"
@@ -395,8 +395,8 @@ msgstr "Ændr opførslen og udseendet af filhåndteringsvinduer"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
-msgstr "fil;håndtering;ændring;egenskaber;opførsel;udseende;vinduer;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
+msgstr "fil;håndtering;ændring;egenskaber;opførsel;udseende;vinduer;CAFE;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -426,8 +426,8 @@ msgstr "bruger-hjem"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "hjem;personlig;mappe;åbn;MATE;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "hjem;personlig;mappe;åbn;CAFE;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -450,8 +450,8 @@ msgstr "netværk-arbejdsgruppe"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
-msgstr "bogmærker;gennemse;lokal;netværk;steder;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
+msgstr "bogmærker;gennemse;lokal;netværk;steder;CAFE;"
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
 msgid "X"
@@ -5972,8 +5972,8 @@ msgstr ""
 "\"Mere info: http://www.dansk-gruppen.dk\""
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "MATE-hjemmeside"
+msgid "CAFE Web Site"
+msgstr "CAFE-hjemmeside"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

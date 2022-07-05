@@ -12,7 +12,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: MATE Desktop Environment\n"
+"Project-Id-Version: CAFE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-20 21:30+0200\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
@@ -69,7 +69,7 @@ msgid "Countertop"
 msgstr ""
 
 #: ../data/browser.xml.h:12
-msgid "Dark MATE"
+msgid "Dark CAFE"
 msgstr ""
 
 #: ../data/browser.xml.h:13
@@ -93,8 +93,8 @@ msgid "Fossil"
 msgstr ""
 
 #: ../data/browser.xml.h:18
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: ../data/browser.xml.h:19
 msgid "Green Weave"
@@ -295,15 +295,15 @@ msgid "Erase"
 msgstr ""
 
 #: ../data/baul.appdata.xml.in.h:1
-msgid "File manager for the MATE desktop environment"
+msgid "File manager for the CAFE desktop environment"
 msgstr ""
 
 #: ../data/baul.appdata.xml.in.h:2
 msgid ""
-"<p> Baul is the official file manager for the MATE desktop. It allows for "
+"<p> Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems. </p> <p> Baul is "
+"CAFE desktop. It works on local and remote file systems. </p> <p> Baul is "
 "extensible through a plugin system, similar to that of GNOME Nautilus, of "
 "which Baul is a fork. </p>"
 msgstr ""
@@ -7414,7 +7414,7 @@ msgid "translator-credits"
 msgstr "Vendelín Slezák <klaykap@yandex.com>"
 
 #: ../src/baul-window-menus.c:553
-msgid "MATE Web Site"
+msgid "CAFE Web Site"
 msgstr ""
 
 #. name, icon name, label

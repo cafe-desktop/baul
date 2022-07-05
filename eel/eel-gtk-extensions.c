@@ -190,7 +190,7 @@ eel_gtk_window_set_initial_geometry (GtkWindow *window,
          * to South/East types, which should be done if using negative
          * positions (so that the right or bottom edge of the window
          * appears at the specified position, not the left or top).
-         * However it does seem to be consistent with other MATE apps.
+         * However it does seem to be consistent with other CAFE apps.
          */
         if (geometry_flags & EEL_GDK_X_NEGATIVE)
         {

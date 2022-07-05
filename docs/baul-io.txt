@@ -53,7 +53,7 @@ baul_file_get_file_type. However, for a newly created BaulFile
 object the answer is almost certainly "I don't know." Each function
 defines a default, which is the answer given for "I don't know." For
 example, baul_file_get_type will return
-MATE_VFS_FILE_TYPE_UNKNOWN if it doesn't yet know the type.
+CAFE_VFS_FILE_TYPE_UNKNOWN if it doesn't yet know the type.
 
 It's worth taking a side trip to discuss the nature of the
 BaulFile API. Since these classes are a private part of the

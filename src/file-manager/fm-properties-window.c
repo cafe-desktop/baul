@@ -168,13 +168,13 @@ typedef struct {
 
 enum {
 	TARGET_URI_LIST,
-	TARGET_MATE_URI_LIST,
+	TARGET_CAFE_URI_LIST,
 	TARGET_RESET_BACKGROUND
 };
 
 static const GtkTargetEntry target_table[] = {
 	{ "text/uri-list",  0, TARGET_URI_LIST },
-	{ "x-special/cafe-icon-list",  0, TARGET_MATE_URI_LIST },
+	{ "x-special/cafe-icon-list",  0, TARGET_CAFE_URI_LIST },
 	{ "x-special/cafe-reset-background", 0, TARGET_RESET_BACKGROUND }
 };
 

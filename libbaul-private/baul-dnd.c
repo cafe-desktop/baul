@@ -700,7 +700,7 @@ baul_drag_drag_data_get (GtkWidget *widget,
 
     switch (info)
     {
-    case BAUL_ICON_DND_MATE_ICON_LIST:
+    case BAUL_ICON_DND_CAFE_ICON_LIST:
         result = g_string_new (NULL);
         (* each_selected_item_iterator) (add_one_cafe_icon, container_context, result);
         break;
@@ -1121,7 +1121,7 @@ slot_proxy_drag_motion (GtkWidget          *widget,
     if (drag_info->have_data &&
             drag_info->have_valid_data)
     {
-        if (drag_info->info == BAUL_ICON_DND_MATE_ICON_LIST)
+        if (drag_info->info == BAUL_ICON_DND_CAFE_ICON_LIST)
         {
             baul_drag_default_drop_action_for_icons (context, target_uri,
                     drag_info->data.selection_list,
@@ -1162,7 +1162,7 @@ drag_info_clear (BaulDragSlotProxyInfo *drag_info)
         goto out;
     }
 
-    if (drag_info->info == BAUL_ICON_DND_MATE_ICON_LIST)
+    if (drag_info->info == BAUL_ICON_DND_CAFE_ICON_LIST)
     {
         baul_drag_destroy_selection_list (drag_info->data.selection_list);
     }
@@ -1268,7 +1268,7 @@ slot_proxy_handle_drop (GtkWidget                *widget,
 
     if (target_slot != NULL && target_view != NULL)
     {
-        if (drag_info->info == BAUL_ICON_DND_MATE_ICON_LIST)
+        if (drag_info->info == BAUL_ICON_DND_CAFE_ICON_LIST)
         {
             GList *uri_list;
 
@@ -1340,7 +1340,7 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
         return;
     }
 
-    if (info == BAUL_ICON_DND_MATE_ICON_LIST)
+    if (info == BAUL_ICON_DND_CAFE_ICON_LIST)
     {
         drag_info->data.selection_list = baul_drag_build_selection_list (data);
 
@@ -1373,7 +1373,7 @@ baul_drag_slot_proxy_init (GtkWidget *widget,
 {
     const GtkTargetEntry targets[] =
     {
-        { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
+        { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
         { BAUL_ICON_DND_NETSCAPE_URL_TYPE, 0, BAUL_ICON_DND_NETSCAPE_URL }
     };
     GtkTargetList *target_list;
