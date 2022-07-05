@@ -47,7 +47,7 @@
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#define MATE_DESKTOP_USE_UNSTABLE_API
+#define CAFE_DESKTOP_USE_UNSTABLE_API
 #include <libcafe-desktop/cafe-bg.h>
 
 typedef struct EelBackground EelBackground;

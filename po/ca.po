@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -68,8 +68,8 @@ msgid "Countertop"
 msgstr "Marbre"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "MATE fosc"
+msgid "Dark CAFE"
+msgstr "CAFE fosc"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -92,8 +92,8 @@ msgid "Fossil"
 msgstr "Fòssil"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -300,20 +300,20 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "Gestor de fitxers per a l'entorn d'escriptori MATE"
+msgid "File manager for the CAFE desktop environment"
+msgstr "Gestor de fitxers per a l'entorn d'escriptori CAFE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul és el gestor de fitxers oficial de l'escriptori MATE. Permet navegar "
+"Baul és el gestor de fitxers oficial de l'escriptori CAFE. Permet navegar "
 "pels directoris, així com la presentació preliminar dels fitxers i el "
 "llançament de les aplicacions associades aquests fitxers. També és el "
-"responsable del maneig de les icones a l'escriptori MATE. Funciona amb "
+"responsable del maneig de les icones a l'escriptori CAFE. Funciona amb "
 "fitxers de sistemes locals i remots."
 
 #: data/baul.appdata.xml.in:16
@@ -352,8 +352,8 @@ msgstr "system-file-manager"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "fitxers;navegador;gestor;MATE;"
+msgid "files;browser;manager;CAFE;"
+msgstr "fitxers;navegador;gestor;CAFE;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -376,8 +376,8 @@ msgstr "computer"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
-msgstr "navega;discs;carpetes;local;remot;ordinador;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
+msgstr "navega;discs;carpetes;local;remot;ordinador;CAFE;"
 
 #: data/baul.desktop.in.in:4
 msgid "File Manager"
@@ -395,8 +395,8 @@ msgstr ""
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
-msgstr "fitxer;gestor;canvi;propietats;comportament;aparença;finestres;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
+msgstr "fitxer;gestor;canvi;propietats;comportament;aparença;finestres;CAFE;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -426,8 +426,8 @@ msgstr "user-home"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "capeta d'usuari;personal;carpeta;usuari;obre;inici;MATE;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "capeta d'usuari;personal;carpeta;usuari;obre;inici;CAFE;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -450,8 +450,8 @@ msgstr "network-workgroup"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
-msgstr "marcadors;navega;local;xarxa;ubicacions;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
+msgstr "marcadors;navega;local;xarxa;ubicacions;CAFE;"
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
 msgid "X"
@@ -6036,8 +6036,8 @@ msgstr ""
 "Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>"
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "Pàgina web de MATE"
+msgid "CAFE Web Site"
+msgstr "Pàgina web de CAFE"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

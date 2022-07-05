@@ -11,7 +11,7 @@ AM_CPPFLAGS = \
 	$(DISABLE_DEPRECATED_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	-DSOURCE_DATADIR=\""$(top_srcdir)/data"\" \
-	-DMATELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\" \
+	-DCAFELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\" \
 	$(NULL)
 
 BUILT_SOURCES = \

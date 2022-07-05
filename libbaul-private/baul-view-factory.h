@@ -48,7 +48,7 @@ extern "C" {
         char *display_location_label;      /* Display this location with the foo view. */
         gboolean single_view;
         BaulView * (*create) (BaulWindowSlotInfo *slot);
-        /* MATECOMPONENTTODO: More args here */
+        /* CAFECOMPONENTTODO: More args here */
         gboolean (*supports_uri) (const char *uri,
                                   GFileType file_type,
                                   const char *mime_type);

@@ -629,7 +629,7 @@ baul_link_get_link_info_given_file_contents (const char  *file_contents,
     *is_foreign = FALSE;
     only_show_in = g_key_file_get_string_list (key_file, MAIN_GROUP,
                    "OnlyShowIn", NULL, NULL);
-    if (only_show_in && !string_array_contains (only_show_in, "MATE"))
+    if (only_show_in && !string_array_contains (only_show_in, "CAFE"))
     {
         *is_foreign = TRUE;
     }
@@ -637,7 +637,7 @@ baul_link_get_link_info_given_file_contents (const char  *file_contents,
 
     not_show_in = g_key_file_get_string_list (key_file, MAIN_GROUP,
                   "NotShowIn", NULL, NULL);
-    if (not_show_in && string_array_contains (not_show_in, "MATE"))
+    if (not_show_in && string_array_contains (not_show_in, "CAFE"))
     {
         *is_foreign = TRUE;
     }

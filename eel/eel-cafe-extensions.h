@@ -24,8 +24,8 @@
    Authors: Darin Adler <darin@eazel.com>
 */
 
-#ifndef EEL_MATE_EXTENSIONS_H
-#define EEL_MATE_EXTENSIONS_H
+#ifndef EEL_CAFE_EXTENSIONS_H
+#define EEL_CAFE_EXTENSIONS_H
 
 #include <gtk/gtk.h>
 
@@ -36,4 +36,4 @@ char *        eel_cafe_make_terminal_command                         (const char
 void          eel_cafe_open_terminal_on_screen                       (const char               *command,
         GdkScreen                *screen);
 
-#endif /* EEL_MATE_EXTENSIONS_H */
+#endif /* EEL_CAFE_EXTENSIONS_H */

@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -78,8 +78,8 @@ msgid "Countertop"
 msgstr "Kuchyňský stůl"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "Tmavé MATE"
+msgid "Dark CAFE"
+msgstr "Tmavé CAFE"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -102,8 +102,8 @@ msgid "Fossil"
 msgstr "Fosílie"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -310,19 +310,19 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "Správce souborů pro prostředí plochy MATE"
+msgid "File manager for the CAFE desktop environment"
+msgstr "Správce souborů pro prostředí plochy CAFE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul je oficiálním správcem souborů pro MATE. Umožňuje procházení adresářů, "
+"Baul je oficiálním správcem souborů pro CAFE. Umožňuje procházení adresářů, "
 "prohlížení souborů a spouštění aplikací, které jsou s ním asociovány. Je "
-"také zodpovědný za zpracování ikon na ploše MATE. Funguje na lokálních a "
+"také zodpovědný za zpracování ikon na ploše CAFE. Funguje na lokálních a "
 "vzdálených souborových systémech."
 
 #: data/baul.appdata.xml.in:16
@@ -361,8 +361,8 @@ msgstr "system-file-manager"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "soubory;souborů;prohlížeč;správce;MATE;"
+msgid "files;browser;manager;CAFE;"
+msgstr "soubory;souborů;prohlížeč;správce;CAFE;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -385,8 +385,8 @@ msgstr "computer"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
-msgstr "procházení;disky;složky;místní;vzdálené;počítač;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
+msgstr "procházení;disky;složky;místní;vzdálené;počítač;CAFE;"
 
 #: data/baul.desktop.in.in:4
 msgid "File Manager"
@@ -403,8 +403,8 @@ msgstr "Změnit chování a vzhled oken správce souborů"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
-msgstr "soubor;správce;změna;vlastnosti;chování;vzhled;okna;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
+msgstr "soubor;správce;změna;vlastnosti;chování;vzhled;okna;CAFE;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -434,8 +434,8 @@ msgstr "user-home"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "domů;osobní;složka;otevřít;MATE;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "domů;osobní;složka;otevřít;CAFE;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -458,8 +458,8 @@ msgstr "network-workgroup"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
-msgstr "záložky;procházet;místní;síť;umístění;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
+msgstr "záložky;procházet;místní;síť;umístění;CAFE;"
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
 msgid "X"
@@ -6089,8 +6089,8 @@ msgstr ""
 "Roman Horník <roman.hornik@debian-linux.cz>"
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "Webová stránka MATE"
+msgid "CAFE Web Site"
+msgstr "Webová stránka CAFE"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

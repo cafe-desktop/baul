@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -69,8 +69,8 @@ msgid "Countertop"
 msgstr "料理檯面"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "深色 MATE 標誌"
+msgid "Dark CAFE"
+msgstr "深色 CAFE 標誌"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -93,8 +93,8 @@ msgid "Fossil"
 msgstr "化石紋"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -301,17 +301,17 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "適用於 MATE 桌面環境的檔案管理員"
+msgid "File manager for the CAFE desktop environment"
+msgstr "適用於 CAFE 桌面環境的檔案管理員"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul 是 MATE 桌面環境的官方檔案管理員。它可以讓您瀏覽目錄，也可以預覽檔案及啟動與其相關的應用程式。它同時也負責處理 MATE "
+"Baul 是 CAFE 桌面環境的官方檔案管理員。它可以讓您瀏覽目錄，也可以預覽檔案及啟動與其相關的應用程式。它同時也負責處理 CAFE "
 "桌面環境的小圖示。它可以在本機及遠端檔案系統中工作。"
 
 #: data/baul.appdata.xml.in:16
@@ -348,8 +348,8 @@ msgstr "system-file-manager"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "files;browser;manager;MATE;"
+msgid "files;browser;manager;CAFE;"
+msgstr "files;browser;manager;CAFE;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -370,8 +370,8 @@ msgstr "電腦"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
-msgstr "browse;disks;folders;local;remote;computer;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
+msgstr "browse;disks;folders;local;remote;computer;CAFE;"
 
 #: data/baul.desktop.in.in:4
 msgid "File Manager"
@@ -388,8 +388,8 @@ msgstr "改變檔案管理員視窗的行為與外觀"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
-msgstr "file;manager;change;properties;behaviour;appearance;windows;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
+msgstr "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -419,8 +419,8 @@ msgstr "user-home"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "home;personal;folder;open;MATE;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "home;personal;folder;open;CAFE;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -443,8 +443,8 @@ msgstr "network-workgroup"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
-msgstr "bookmarks;browse;local;network;locations;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
+msgstr "bookmarks;browse;local;network;locations;CAFE;"
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
 msgid "X"
@@ -5693,8 +5693,8 @@ msgstr ""
 "Walter Cheuk <wwycheuk@gmail.com>, 2016."
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "MATE 網站"
+msgid "CAFE Web Site"
+msgstr "CAFE 網站"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

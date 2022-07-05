@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2014 MATE team <cafe-dev@ml.cafe-desktop.org> -->
+<!-- Copyright 2014 CAFE team <cafe-dev@ml.cafe-desktop.org> -->
 <component type="desktop">
  <id>baul.desktop</id>
  <metadata_license>CC0-1.0</metadata_license>
  <project_license>GPL-2.0+</project_license>
  <name>Baul</name>
- <summary>File manager for the MATE desktop environment</summary>
+ <summary>File manager for the CAFE desktop environment</summary>
  <description>
   <p>
-   Baul is the official file manager for the MATE desktop. It allows for
+   Baul is the official file manager for the CAFE desktop. It allows for
    browsing directories, as well as previewing files and launching applications
    associated with them. It is also responsible for handling the icons on
-   the MATE desktop. It works on local and remote file systems.
+   the CAFE desktop. It works on local and remote file systems.
   </p>
   <p>
    Baul is extensible through a plugin system, similar to that of GNOME Nautilus,
@@ -37,5 +37,5 @@
  </screenshots>
  <url type="homepage">https://cafe-desktop.org</url>
  <updatecontact>cafe-dev@ml.cafe-desktop.org</updatecontact>
- <project_group>MATE</project_group>
+ <project_group>CAFE</project_group>
 </component>

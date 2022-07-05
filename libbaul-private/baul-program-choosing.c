@@ -279,7 +279,7 @@ baul_launch_application_by_uri (GAppInfo *application,
         {
 #ifdef NEW_MIME_COMPLETE
             baul_program_chooser_show_invalid_message
-            (MATE_VFS_MIME_ACTION_TYPE_APPLICATION, file, parent_window);
+            (CAFE_VFS_MIME_ACTION_TYPE_APPLICATION, file, parent_window);
 #else
             g_warning ("Cannot open app: %s\n", error->message);
 #endif

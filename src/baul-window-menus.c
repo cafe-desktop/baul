@@ -586,7 +586,7 @@ action_about_baul_callback (GtkAction *action,
                            "translator-credits", _("translator-credits"),
                            "logo-icon-name", "system-file-manager",
                            "website", "https://cafe-desktop.org",
-                           "website-label", _("MATE Web Site"),
+                           "website-label", _("CAFE Web Site"),
                            NULL);
 
     g_strfreev (authors);

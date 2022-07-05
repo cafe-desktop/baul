@@ -6,7 +6,7 @@ AM_CPPFLAGS =\
 	$(WARNING_CFLAGS) \
 	-DVERSION="\"$(VERSION)\"" \
 	-DBAUL_DATADIR=\""$(datadir)/baul"\" \
-	-DMATELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\" \
+	-DCAFELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\" \
 	$(NULL)
 
 LDADD =\

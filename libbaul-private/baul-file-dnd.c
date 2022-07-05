@@ -119,7 +119,7 @@ baul_drag_can_accept_info (BaulFile *drop_target_item,
 {
     switch (drag_type)
     {
-    case BAUL_ICON_DND_MATE_ICON_LIST:
+    case BAUL_ICON_DND_CAFE_ICON_LIST:
         return baul_drag_can_accept_items (drop_target_item, items);
 
     case BAUL_ICON_DND_URI_LIST:

@@ -32,7 +32,7 @@
 #include "baul-window-slot-info.h"
 
 /* Drag & Drop target names. */
-#define BAUL_ICON_DND_MATE_ICON_LIST_TYPE	"x-special/cafe-icon-list"
+#define BAUL_ICON_DND_CAFE_ICON_LIST_TYPE	"x-special/cafe-icon-list"
 #define BAUL_ICON_DND_URI_LIST_TYPE		"text/uri-list"
 #define BAUL_ICON_DND_NETSCAPE_URL_TYPE	"_NETSCAPE_URL"
 #define BAUL_ICON_DND_COLOR_TYPE		"application/x-color"
@@ -55,7 +55,7 @@ typedef struct
 /* Standard Drag & Drop types. */
 typedef enum
 {
-    BAUL_ICON_DND_MATE_ICON_LIST,
+    BAUL_ICON_DND_CAFE_ICON_LIST,
     BAUL_ICON_DND_URI_LIST,
     BAUL_ICON_DND_NETSCAPE_URL,
     BAUL_ICON_DND_COLOR,

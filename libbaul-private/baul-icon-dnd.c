@@ -64,13 +64,13 @@
 
 static const GtkTargetEntry drag_types [] =
 {
-    { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
+    { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
 };
 
 static const GtkTargetEntry drop_types [] =
 {
-    { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
+    { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     /* prefer "_NETSCAPE_URL" over "text/uri-list" to satisfy web browsers. */
     { BAUL_ICON_DND_NETSCAPE_URL_TYPE, 0, BAUL_ICON_DND_NETSCAPE_URL },
     { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
@@ -1336,7 +1336,7 @@ baul_icon_container_get_drop_action (BaulIconContainer *container,
     /* case out on the type of object being dragged */
     switch (container->details->dnd_info->drag_info.data_type)
     {
-    case BAUL_ICON_DND_MATE_ICON_LIST:
+    case BAUL_ICON_DND_CAFE_ICON_LIST:
         if (container->details->dnd_info->drag_info.selection_list == NULL)
         {
             return;
@@ -1769,7 +1769,7 @@ drag_data_received_callback (GtkWidget *widget,
 
     switch (info)
     {
-    case BAUL_ICON_DND_MATE_ICON_LIST:
+    case BAUL_ICON_DND_CAFE_ICON_LIST:
         baul_icon_container_dropped_icon_feedback (widget, data, x, y);
         break;
     case BAUL_ICON_DND_COLOR:
@@ -1814,7 +1814,7 @@ drag_data_received_callback (GtkWidget *widget,
         success = FALSE;
         switch (info)
         {
-        case BAUL_ICON_DND_MATE_ICON_LIST:
+        case BAUL_ICON_DND_CAFE_ICON_LIST:
             baul_icon_container_receive_dropped_icons
             (BAUL_ICON_CONTAINER (widget),
              context, x, y);

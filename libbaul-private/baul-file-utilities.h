@@ -64,7 +64,7 @@ char *	 baul_compute_title_for_location	     (GFile *file);
  */
 /* FIXME bugzilla.gnome.org 42425:
  * We might not need this once we get on cafe-libs 2.0 which handles
- * cafe_pixmap_file better, using MATE_PATH.
+ * cafe_pixmap_file better, using CAFE_PATH.
  */
 char *   baul_pixmap_file                        (const char *partial_path);
 
@@ -73,7 +73,7 @@ char *   baul_get_data_file_path                 (const char *partial_path);
 
 gboolean baul_is_engrampa_installed              (void);
 
-/* Inhibit/Uninhibit MATE Power Manager */
+/* Inhibit/Uninhibit CAFE Power Manager */
 int    baul_inhibit_power_manager                (const char *message) G_GNUC_WARN_UNUSED_RESULT;
 void     baul_uninhibit_power_manager            (int cookie);
 

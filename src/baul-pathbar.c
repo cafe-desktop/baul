@@ -1710,7 +1710,7 @@ button_drag_data_get_cb (GtkWidget          *widget,
     uri_list[0] = g_file_get_uri (button_data->path);
     uri_list[1] = NULL;
 
-    if (info == BAUL_ICON_DND_MATE_ICON_LIST)
+    if (info == BAUL_ICON_DND_CAFE_ICON_LIST)
     {
         char *tmp;
 
@@ -1733,7 +1733,7 @@ setup_button_drag_source (ButtonData *button_data)
     GtkTargetList *target_list;
     const GtkTargetEntry targets[] =
     {
-        { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST }
+        { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST }
     };
 
     gtk_drag_source_set (button_data->button,

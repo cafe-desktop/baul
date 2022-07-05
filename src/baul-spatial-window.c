@@ -86,7 +86,7 @@ struct _BaulSpatialWindowPrivate
 
 static const GtkTargetEntry location_button_drag_types[] =
 {
-    { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
+    { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
 };
 
@@ -775,7 +775,7 @@ location_button_drag_begin_callback (GtkWidget             *widget,
     cairo_surface_destroy (surface);
 }
 
-/* build MATE icon list, which only contains the window's URI.
+/* build CAFE icon list, which only contains the window's URI.
  * If we just used URIs, moving the folder to trash
  * wouldn't work */
 static void

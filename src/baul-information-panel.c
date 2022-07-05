@@ -111,7 +111,7 @@ enum
     TARGET_BGIMAGE,
     TARGET_KEYWORD,
     TARGET_BACKGROUND_RESET,
-    TARGET_MATE_URI_LIST
+    TARGET_CAFE_URI_LIST
 };
 
 static const GtkTargetEntry target_table[] =
@@ -121,7 +121,7 @@ static const GtkTargetEntry target_table[] =
     { "property/bgimage", 0, TARGET_BGIMAGE },
     { "property/keyword", 0, TARGET_KEYWORD },
     { "x-special/cafe-reset-background", 0, TARGET_BACKGROUND_RESET },
-    { "x-special/cafe-icon-list",  0, TARGET_MATE_URI_LIST }
+    { "x-special/cafe-icon-list",  0, TARGET_CAFE_URI_LIST }
 };
 
 typedef enum
@@ -646,7 +646,7 @@ baul_information_panel_drag_data_received (GtkWidget *widget, GdkDragContext *co
 
     switch (info)
     {
-    case TARGET_MATE_URI_LIST:
+    case TARGET_CAFE_URI_LIST:
     case TARGET_URI_LIST:
         receive_dropped_uri_list (information_panel,
                                   gdk_drag_context_get_selected_action (context), x, y, selection_data);

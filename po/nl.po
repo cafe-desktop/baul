@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -75,8 +75,8 @@ msgid "Countertop"
 msgstr "Balie"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "Donker MATE"
+msgid "Dark CAFE"
+msgstr "Donker CAFE"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -99,8 +99,8 @@ msgid "Fossil"
 msgstr "Fossiel"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -307,20 +307,20 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "Bestandsbeheerder voor de MATE-werkomgeving"
+msgid "File manager for the CAFE desktop environment"
+msgstr "Bestandsbeheerder voor de CAFE-werkomgeving"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul is de officiële bestandbeheerder van de MATE-werkomgeving. U kunt er "
+"Baul is de officiële bestandbeheerder van de CAFE-werkomgeving. U kunt er "
 "mappen mee verkennen, voorbeeldweergave van bestanden tonen en toepassingen "
 "starten die met die bestanden zijn geassocieerd. Hij is ook verantwoordelijk"
-" voor het afhandelen van de pictogrammen op het MATE-bureaublad. Hij werkt "
+" voor het afhandelen van de pictogrammen op het CAFE-bureaublad. Hij werkt "
 "zowel met plaatselijke bestandssystemen als met bestandssystemen-op-afstand."
 
 #: data/baul.appdata.xml.in:16
@@ -359,8 +359,8 @@ msgstr "system-file-manager"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "bestanden;verkenner;bestandbeheer;MATE;"
+msgid "files;browser;manager;CAFE;"
+msgstr "bestanden;verkenner;bestandbeheer;CAFE;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -383,8 +383,8 @@ msgstr "computer"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
-msgstr "verkennen;schijven;mappen;plaatselijk;afstand;computer;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
+msgstr "verkennen;schijven;mappen;plaatselijk;afstand;computer;CAFE;"
 
 #: data/baul.desktop.in.in:4
 msgid "File Manager"
@@ -401,9 +401,9 @@ msgstr "Wijzig het gedrag en uiterlijk van de bestandsbeheervensters"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
-"bestand;bestandbeheer;wijzigen;eigenschappen;gedrag;uiterlijk;vensters;MATE;"
+"bestand;bestandbeheer;wijzigen;eigenschappen;gedrag;uiterlijk;vensters;CAFE;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -433,8 +433,8 @@ msgstr "user-home"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "thuismap;persoonlijk;map;openen;MATE;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "thuismap;persoonlijk;map;openen;CAFE;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -457,8 +457,8 @@ msgstr "network-workgroup"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
-msgstr "bladwijzers;verkennen;plaatselijk;netwerk;locaties;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
+msgstr "bladwijzers;verkennen;plaatselijk;netwerk;locaties;CAFE;"
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
 msgid "X"
@@ -6051,8 +6051,8 @@ msgstr ""
 "Pjotr"
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "Website van MATE"
+msgid "CAFE Web Site"
+msgstr "Website van CAFE"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -74,8 +74,8 @@ msgid "Countertop"
 msgstr "Контури"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "Темний MATE"
+msgid "Dark CAFE"
+msgstr "Темний CAFE"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -98,8 +98,8 @@ msgid "Fossil"
 msgstr "Закам'янілість"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -306,19 +306,19 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
+msgid "File manager for the CAFE desktop environment"
 msgstr "Упорядник файлів для стільничного середовища МАТЕ"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul - офіційний файловий упорядник для MATE desktop. Він використовується "
+"Baul - офіційний файловий упорядник для CAFE desktop. Він використовується "
 "для перегляду директорій, файлів та запуск програм повʼязаних з ними. Також "
-"відповідальний за обробку піктограм у MATE desktop. Працює на локальних та "
+"відповідальний за обробку піктограм у CAFE desktop. Працює на локальних та "
 "дистанційних файлових системах."
 
 #: data/baul.appdata.xml.in:16
@@ -357,8 +357,8 @@ msgstr "system-file-manager"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "файли;бровзер;упорядник;MATE;"
+msgid "files;browser;manager;CAFE;"
+msgstr "файли;бровзер;упорядник;CAFE;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -381,7 +381,7 @@ msgstr "комп'ютер"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr ""
 
 #: data/baul.desktop.in.in:4
@@ -399,9 +399,9 @@ msgstr "Змінити зовнішній вигляд та поведінку �
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
-"файл;упорядник;зміна;властивості;поведінка;зовнішній вигляд;вікна;MATE;"
+"файл;упорядник;зміна;властивості;поведінка;зовнішній вигляд;вікна;CAFE;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -431,8 +431,8 @@ msgstr "user-home"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "домівка;особиста;тека;відкрити;MATE;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "домівка;особиста;тека;відкрити;CAFE;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -455,7 +455,7 @@ msgstr "network-workgroup"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
@@ -6076,8 +6076,8 @@ msgstr ""
 "Oleh Tsyupka <myr4yk@gmail.com>"
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "Сайт MATE"
+msgid "CAFE Web Site"
+msgstr "Сайт CAFE"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

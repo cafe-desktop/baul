@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -79,8 +79,8 @@ msgid "Countertop"
 msgstr "Контуры"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "Тёмный MATE"
+msgid "Dark CAFE"
+msgstr "Тёмный CAFE"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -103,8 +103,8 @@ msgid "Fossil"
 msgstr "Окаменелость"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -311,19 +311,19 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "Файловый менеджер для рабочей среды MATE"
+msgid "File manager for the CAFE desktop environment"
+msgstr "Файловый менеджер для рабочей среды CAFE"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
-"Baul — официальный файловый менеджер среды MATE. Он позволяет как обозревать"
+"Baul — официальный файловый менеджер среды CAFE. Он позволяет как обозревать"
 " каталоги, так и выполнять предпросмотр файлов с запуском связанных с ними "
-"приложений. Он также управляет значками на рабочем столе MATE. Baul работает"
+"приложений. Он также управляет значками на рабочем столе CAFE. Baul работает"
 " на локальных и удалённых файловых системах."
 
 #: data/baul.appdata.xml.in:16
@@ -363,8 +363,8 @@ msgstr "system-file-manager"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
-msgstr "files;browser;manager;MATE;файлы;обозреватель;менеджер;диспетчер;"
+msgid "files;browser;manager;CAFE;"
+msgstr "files;browser;manager;CAFE;файлы;обозреватель;менеджер;диспетчер;"
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
@@ -387,9 +387,9 @@ msgstr "computer"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr ""
-"browse;disks;folders;local;remote;computer;MATE;обзор;диски;папки;локальный;удалённый;компьютер;"
+"browse;disks;folders;local;remote;computer;CAFE;обзор;диски;папки;локальный;удалённый;компьютер;"
 
 #: data/baul.desktop.in.in:4
 msgid "File Manager"
@@ -406,9 +406,9 @@ msgstr "Изменить внешний вид и поведение окон ф
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
-"file;manager;change;properties;behaviour;appearance;windows;MATE;файловый;менеджер;диспетчер;изменить;свойства;поведение;вид;окна;"
+"file;manager;change;properties;behaviour;appearance;windows;CAFE;файловый;менеджер;диспетчер;изменить;свойства;поведение;вид;окна;"
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
@@ -438,8 +438,8 @@ msgstr "user-home"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
-msgstr "home;personal;folder;open;MATE;домашняя;папка;открыть;"
+msgid "home;personal;folder;open;CAFE;"
+msgstr "home;personal;folder;open;CAFE;домашняя;папка;открыть;"
 
 #: data/baul.xml.in:5
 msgid "Saved search"
@@ -462,9 +462,9 @@ msgstr "network-workgroup"
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
-"bookmarks;browse;local;network;locations;MATE;закладки;обзор;локальный;сеть;расположения;"
+"bookmarks;browse;local;network;locations;CAFE;закладки;обзор;локальный;сеть;расположения;"
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
 msgid "X"
@@ -6157,8 +6157,8 @@ msgstr ""
 "Мальцев Артур <arturiosboss@gmail.com>"
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "Сайт MATE"
+msgid "CAFE Web Site"
+msgstr "Сайт CAFE"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

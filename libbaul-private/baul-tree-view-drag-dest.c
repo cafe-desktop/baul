@@ -87,7 +87,7 @@ G_DEFINE_TYPE (BaulTreeViewDragDest, baul_tree_view_drag_dest,
 
 static const GtkTargetEntry drag_types [] =
 {
-    { BAUL_ICON_DND_MATE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_MATE_ICON_LIST },
+    { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     /* prefer "_NETSCAPE_URL" over "text/uri-list" to satisfy web browsers. */
     { BAUL_ICON_DND_NETSCAPE_URL_TYPE, 0, BAUL_ICON_DND_NETSCAPE_URL },
     { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
@@ -424,7 +424,7 @@ get_drop_action (BaulTreeViewDragDest *dest,
     int action;
 
     if (!dest->details->have_drag_data ||
-            (dest->details->drag_type == BAUL_ICON_DND_MATE_ICON_LIST &&
+            (dest->details->drag_type == BAUL_ICON_DND_CAFE_ICON_LIST &&
              dest->details->drag_list == NULL))
     {
         return 0;
@@ -432,7 +432,7 @@ get_drop_action (BaulTreeViewDragDest *dest,
 
     switch (dest->details->drag_type)
     {
-    case BAUL_ICON_DND_MATE_ICON_LIST :
+    case BAUL_ICON_DND_CAFE_ICON_LIST :
         drop_target = get_drop_target_uri_for_path (dest, path);
 
         if (!drop_target)
@@ -917,7 +917,7 @@ drag_data_received_callback (GtkWidget *widget,
         dest->details->drag_type = info;
         dest->details->drag_data =
             gtk_selection_data_copy (selection_data);
-        if (info == BAUL_ICON_DND_MATE_ICON_LIST)
+        if (info == BAUL_ICON_DND_CAFE_ICON_LIST)
         {
             dest->details->drag_list =
                 baul_drag_build_selection_list (selection_data);
@@ -930,7 +930,7 @@ drag_data_received_callback (GtkWidget *widget,
         finished = TRUE;
         switch (info)
         {
-        case BAUL_ICON_DND_MATE_ICON_LIST :
+        case BAUL_ICON_DND_CAFE_ICON_LIST :
             receive_dropped_icons (dest, context, x, y);
             success = TRUE;
             break;

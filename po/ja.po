@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR MATE Desktop Environment team
+# Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -77,8 +77,8 @@ msgid "Countertop"
 msgstr "カウンタートップ"
 
 #: data/browser.xml.in:15
-msgid "Dark MATE"
-msgstr "ダーク MATE"
+msgid "Dark CAFE"
+msgstr "ダーク CAFE"
 
 #: data/browser.xml.in:16
 msgid "Dots"
@@ -101,8 +101,8 @@ msgid "Fossil"
 msgstr "化石"
 
 #: data/browser.xml.in:21
-msgid "MATE"
-msgstr "MATE"
+msgid "CAFE"
+msgstr "CAFE"
 
 #: data/browser.xml.in:22
 msgid "Green Weave"
@@ -309,15 +309,15 @@ msgid "Baul"
 msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
-msgid "File manager for the MATE desktop environment"
-msgstr "MATE デスクトップ環境向けのファイルマネージャー"
+msgid "File manager for the CAFE desktop environment"
+msgstr "CAFE デスクトップ環境向けのファイルマネージャー"
 
 #: data/baul.appdata.xml.in:10
 msgid ""
-"Baul is the official file manager for the MATE desktop. It allows for "
+"Baul is the official file manager for the CAFE desktop. It allows for "
 "browsing directories, as well as previewing files and launching applications"
 " associated with them. It is also responsible for handling the icons on the "
-"MATE desktop. It works on local and remote file systems."
+"CAFE desktop. It works on local and remote file systems."
 msgstr ""
 
 #: data/baul.appdata.xml.in:16
@@ -354,7 +354,7 @@ msgstr ""
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
-msgid "files;browser;manager;MATE;"
+msgid "files;browser;manager;CAFE;"
 msgstr ""
 
 #: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
@@ -376,7 +376,7 @@ msgstr ""
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
-msgid "browse;disks;folders;local;remote;computer;MATE;"
+msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr ""
 
 #: data/baul.desktop.in.in:4
@@ -394,7 +394,7 @@ msgstr "ファイルマネージャの動きとウィンドウの外観を変更
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
-msgid "file;manager;change;properties;behaviour;appearance;windows;MATE;"
+msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
 
 #: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
@@ -425,7 +425,7 @@ msgstr ""
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
-msgid "home;personal;folder;open;MATE;"
+msgid "home;personal;folder;open;CAFE;"
 msgstr ""
 
 #: data/baul.xml.in:5
@@ -449,7 +449,7 @@ msgstr ""
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
-msgid "bookmarks;browse;local;network;locations;MATE;"
+msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
 
 #: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
@@ -3600,7 +3600,7 @@ msgid ""
 "If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr ""
-"TRUE にすると、MATE "
+"TRUE にすると、CAFE "
 "デスクトップを起動した時やメディアを挿入した時に、ユーザーに表示することが可能なハードディスクやリムーバブルメディアなどを自動的にマウントします。"
 
 #: libbaul-private/org.cafe.media-handling.gschema.xml:10
@@ -5740,8 +5740,8 @@ msgstr ""
 "日本GNOMEユーザー会 http://www.gnome.gr.jp/"
 
 #: src/baul-window-menus.c:589
-msgid "MATE Web Site"
-msgstr "MATE のウェブサイト"
+msgid "CAFE Web Site"
+msgstr "CAFE のウェブサイト"
 
 #: src/baul-window-menus.c:849
 msgid "_File"

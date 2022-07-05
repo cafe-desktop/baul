@@ -34,7 +34,7 @@
 #include <gtk/gtk.h>
 #include <sys/wait.h>
 
-#define MATE_DESKTOP_USE_UNSTABLE_API
+#define CAFE_DESKTOP_USE_UNSTABLE_API
 #include <libcafe-desktop/cafe-desktop-thumbnail.h>
 
 #include <eel/eel-gdk-pixbuf-extensions.h>
@@ -146,7 +146,7 @@ get_thumbnail_factory (void)
 
     if (thumbnail_factory == NULL)
     {
-        thumbnail_factory = cafe_desktop_thumbnail_factory_new (MATE_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+        thumbnail_factory = cafe_desktop_thumbnail_factory_new (CAFE_DESKTOP_THUMBNAIL_SIZE_NORMAL);
     }
 
     return thumbnail_factory;

@@ -197,15 +197,15 @@ eel_bg_get_desktop_color (EelBackground *self)
 
     cafe_bg_get_color (self->details->bg, &type, &primary, &secondary);
 
-    if (type == MATE_BG_COLOR_V_GRADIENT)
+    if (type == CAFE_BG_COLOR_V_GRADIENT)
     {
         is_horizontal = FALSE;
     }
-    else if (type == MATE_BG_COLOR_H_GRADIENT)
+    else if (type == CAFE_BG_COLOR_H_GRADIENT)
     {
         is_horizontal = TRUE;
     }
-    else	/* implicit (type == MATE_BG_COLOR_SOLID) */
+    else	/* implicit (type == CAFE_BG_COLOR_SOLID) */
     {
         use_gradient = FALSE;
     }
@@ -241,13 +241,13 @@ set_image_properties (EelBackground *self)
     {
         c = self->details->default_color;
         make_color_inactive (self, &c);
-        cafe_bg_set_color (self->details->bg, MATE_BG_COLOR_SOLID, &c, NULL);
+        cafe_bg_set_color (self->details->bg, CAFE_BG_COLOR_SOLID, &c, NULL);
     }
     else if (!eel_gradient_is_gradient (self->details->color))
     {
         eel_gdk_rgba_parse_with_white_default (&c, self->details->color);
         make_color_inactive (self, &c);
-        cafe_bg_set_color (self->details->bg, MATE_BG_COLOR_SOLID, &c, NULL);
+        cafe_bg_set_color (self->details->bg, CAFE_BG_COLOR_SOLID, &c, NULL);
     }
     else
     {
@@ -265,9 +265,9 @@ set_image_properties (EelBackground *self)
         g_free (spec);
 
         if (eel_gradient_is_horizontal (self->details->color)) {
-            cafe_bg_set_color (self->details->bg, MATE_BG_COLOR_H_GRADIENT, &c1, &c2);
+            cafe_bg_set_color (self->details->bg, CAFE_BG_COLOR_H_GRADIENT, &c1, &c2);
         } else {
-            cafe_bg_set_color (self->details->bg, MATE_BG_COLOR_V_GRADIENT, &c1, &c2);
+            cafe_bg_set_color (self->details->bg, CAFE_BG_COLOR_V_GRADIENT, &c1, &c2);
         }
     }
 }
@@ -439,7 +439,7 @@ init_fade (EelBackground *self)
 
     cafe_background_preferences = g_settings_new ("org.cafe.background");
     do_fade = g_settings_get_boolean (cafe_background_preferences,
-                                      MATE_BG_KEY_BACKGROUND_FADE);
+                                      CAFE_BG_KEY_BACKGROUND_FADE);
     g_object_unref (cafe_background_preferences);
 
     if (!do_fade) {
@@ -1000,12 +1000,12 @@ void
 eel_bg_load_from_gsettings (EelBackground *self,
 			    GSettings     *settings)
 {
-    char *keyfile = g_settings_get_string (settings, MATE_BG_KEY_PICTURE_FILENAME);
+    char *keyfile = g_settings_get_string (settings, CAFE_BG_KEY_PICTURE_FILENAME);
 
     if (!g_file_test (keyfile, G_FILE_TEST_EXISTS) && (*keyfile != '\0'))
     {
         *keyfile = '\0';
-        g_settings_set_string (settings, MATE_BG_KEY_PICTURE_FILENAME, keyfile);
+        g_settings_set_string (settings, CAFE_BG_KEY_PICTURE_FILENAME, keyfile);
     }
 
     if (self->details->bg)
@@ -1031,7 +1031,7 @@ eel_background_set_dropped_image (EelBackground *self,
                                   const gchar   *image_uri)
 {
     /* Currently, we only support tiled images. So we set the placement. */
-    cafe_bg_set_placement (self->details->bg, MATE_BG_PLACEMENT_TILED);
+    cafe_bg_set_placement (self->details->bg, CAFE_BG_PLACEMENT_TILED);
 
     eel_bg_set_image_uri_and_color (self, action, image_uri, NULL);
 }

@@ -135,7 +135,7 @@
   * [ci] use clang analyzer
   * configure.ac: fix portability issue with test
   * eel: remove g_str_list_copy
-  * Remove USE_MATE2_MACROS from autogen.sh (legacy)
+  * Remove USE_CAFE2_MACROS from autogen.sh (legacy)
   * eel: remove g_list_free_deep_custom
   * avoid variables set but not used
   * eel-canvas: Fix warning: Undefined or garbage value returned to caller
@@ -410,7 +410,7 @@
   * update copyright year to 2017
   * use atk_component_get_extents instead of atk_component_get_position
   * don't parse .hidden files manually - GIO does it since 2.36
-  * don't check nonexistent MATE22_USER_DIR env var
+  * don't check nonexistent CAFE22_USER_DIR env var
   * don't check nonexistent ~/.cafe2 directory
   * eel-accessibility: remove unused code and outdated comments
   * show correct right-click menu after making selection
