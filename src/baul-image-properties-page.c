@@ -599,7 +599,7 @@ load_location (BaulImagePropertiesPage *page,
 
 #ifdef HAVE_EXEMPI
     {
-        /* Current Exempi does not support setting custom IO to be able to use Mate-vfs */
+        /* Current Exempi does not support setting custom IO to be able to use Cafe-vfs */
         /* So it will only work with local files. Future version might remove this limitation */
         XmpFilePtr xf;
         char *localname;

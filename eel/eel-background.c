@@ -52,13 +52,13 @@ struct EelBackgroundPrivate
 {
     GtkWidget *widget;
     GtkWidget *front_widget;
-    MateBG *bg;
+    CafeBG *bg;
     char *color;
 
     /* Realized data: */
     cairo_surface_t *bg_surface;
     gboolean unset_root_surface;
-    MateBGCrossfade *fade;
+    CafeBGCrossfade *fade;
     int bg_entire_width;
     int bg_entire_height;
     GdkRGBA default_color;
@@ -189,7 +189,7 @@ make_color_inactive (EelBackground *self,
 gchar *
 eel_bg_get_desktop_color (EelBackground *self)
 {
-    MateBGColorType type;
+    CafeBGColorType type;
     GdkRGBA    primary, secondary;
     char      *start_color, *color_spec;
     gboolean   use_gradient = TRUE;
@@ -482,7 +482,7 @@ init_fade (EelBackground *self)
 }
 
 static void
-on_fade_finished (MateBGCrossfade *fade,
+on_fade_finished (CafeBGCrossfade *fade,
                   GdkWindow       *window,
 		  gpointer         user_data)
 {
@@ -597,7 +597,7 @@ widget_style_updated_cb (GtkWidget *widget,
 }
 
 static void
-eel_background_changed (MateBG *bg,
+eel_background_changed (CafeBG *bg,
                         gpointer user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
@@ -607,7 +607,7 @@ eel_background_changed (MateBG *bg,
 }
 
 static void
-eel_background_transitioned (MateBG *bg, gpointer user_data)
+eel_background_transitioned (CafeBG *bg, gpointer user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
 
@@ -980,7 +980,7 @@ eel_bg_set_image_uri_and_color (EelBackground *self,
 
 void
 eel_bg_set_placement (EelBackground   *self,
-		      MateBGPlacement  placement)
+		      CafeBGPlacement  placement)
 {
     if (self->details->bg)
         cafe_bg_set_placement (self->details->bg,

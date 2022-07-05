@@ -4,18 +4,18 @@
 
    Copyright (C) 2002 Sun Microsystems, Inc.
 
-   The Mate Library is free software; you can redistribute it and/or
+   The Cafe Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
    published by the Free Software Foundation; either version 2 of the
    License, or (at your option) any later version.
 
-   The Mate Library is distributed in the hope that it will be useful,
+   The Cafe Library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
    Library General Public License for more details.
 
    You should have received a copy of the GNU Library General Public
-   License along with the Mate Library; see the file COPYING.LIB.  If not,
+   License along with the Cafe Library; see the file COPYING.LIB.  If not,
    write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
    Boston, MA 02110-1301, USA.
 
@@ -229,9 +229,9 @@ fm_icon_container_get_icon_text_attributes_from_preferences (void)
      * 1) The user picks "bad" values.  "bad" values are those that result in
      *    there being duplicate attributes in the list.
      *
-     * 2) Value stored in MateConf are tampered with.  Its possible physically do
-     *    this by pulling the rug underneath MateConf and manually editing its
-     *    config files.  Its also possible to use a third party MateConf key
+     * 2) Value stored in CafeConf are tampered with.  Its possible physically do
+     *    this by pulling the rug underneath CafeConf and manually editing its
+     *    config files.  Its also possible to use a third party CafeConf key
      *    editor and store garbage for the keys in question.
      *
      * Thankfully, the Baul preferences machinery deals with both of

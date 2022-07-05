@@ -3455,7 +3455,7 @@ baul_file_compare_for_sort (BaulFile *file_1,
 			break;
 		case BAUL_FILE_SORT_BY_SIZE:
 			/* Compare directory sizes ourselves, then if necessary
-			 * use MateVFS to compare file sizes.
+			 * use CafeVFS to compare file sizes.
 			 */
 			result = compare_by_size (file_1, file_2, FALSE);
 			if (result == 0) {
@@ -3464,7 +3464,7 @@ baul_file_compare_for_sort (BaulFile *file_1,
 			break;
 		case BAUL_FILE_SORT_BY_SIZE_ON_DISK:
 			/* Compare directory sizes ourselves, then if necessary
-			 * use MateVFS to compare file sizes.
+			 * use CafeVFS to compare file sizes.
 			 */
 			result = compare_by_size (file_1, file_2, TRUE);
 			if (result == 0) {
@@ -3472,7 +3472,7 @@ baul_file_compare_for_sort (BaulFile *file_1,
 			}
 			break;
 		case BAUL_FILE_SORT_BY_TYPE:
-			/* MateVFS doesn't know about our special text for certain
+			/* CafeVFS doesn't know about our special text for certain
 			 * mime types, so we handle the mime-type sorting ourselves.
 			 */
 			result = compare_by_type (file_1, file_2);
@@ -3499,7 +3499,7 @@ baul_file_compare_for_sort (BaulFile *file_1,
 			}
 			break;
 		case BAUL_FILE_SORT_BY_EMBLEMS:
-			/* MateVFS doesn't know squat about our emblems, so
+			/* CafeVFS doesn't know squat about our emblems, so
 			 * we handle comparing them here, before falling back
 			 * to tie-breakers.
 			 */

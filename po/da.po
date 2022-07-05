@@ -70,7 +70,7 @@ msgstr "Nøglehuller"
 
 #: data/browser.xml.in:15
 msgid "Dark CAFE"
-msgstr "Mørk Mate"
+msgstr "Mørk Cafe"
 
 #: data/browser.xml.in:16
 msgid "Dots"

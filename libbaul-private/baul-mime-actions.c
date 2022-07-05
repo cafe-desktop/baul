@@ -4,18 +4,18 @@
 
    Copyright (C) 2000, 2001 Eazel, Inc.
 
-   The Mate Library is free software; you can redistribute it and/or
+   The Cafe Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
    published by the Free Software Foundation; either version 2 of the
    License, or (at your option) any later version.
 
-   The Mate Library is distributed in the hope that it will be useful,
+   The Cafe Library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
    Library General Public License for more details.
 
    You should have received a copy of the GNU Library General Public
-   License along with the Mate Library; see the file COPYING.LIB.  If not,
+   License along with the Cafe Library; see the file COPYING.LIB.  If not,
    write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
    Boston, MA 02110-1301, USA.
 
@@ -756,9 +756,9 @@ report_broken_symbolic_link (GtkWindow *parent_window, BaulFile *file)
     /* Make this modal to avoid problems with reffing the view & file
      * to keep them around in case the view changes, which would then
      * cause the old view not to be destroyed, which would cause its
-     * merged MateComponent items not to be un-merged. Maybe we need to unmerge
+     * merged CafeComponent items not to be un-merged. Maybe we need to unmerge
      * explicitly when disconnecting views instead of relying on the
-     * unmerge in Destroy. But since MateComponentUIHandler is probably going
+     * unmerge in Destroy. But since CafeComponentUIHandler is probably going
      * to change wildly, I don't want to mess with this now.
      */
 

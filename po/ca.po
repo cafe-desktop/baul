@@ -5145,7 +5145,7 @@ msgstr "Mou el focus a l'altre plafó en una vista de finestra dividida"
 
 #: src/baul-navigation-window-menus.c:858
 msgid "Sa_me Location as Other Pane"
-msgstr "_Mateixa ubicació que a l'altre plafó"
+msgstr "_Cafeixa ubicació que a l'altre plafó"
 
 #: src/baul-navigation-window-menus.c:859
 msgid "Go to the same location as in the extra pane"
