@@ -31,7 +31,7 @@
 #include "eel-gdk-extensions.h"
 #include "eel-gdk-pixbuf-extensions.h"
 #include "eel-glib-extensions.h"
-#include "eel-mate-extensions.h"
+#include "eel-cafe-extensions.h"
 #include "eel-graphic-effects.h"
 #include "eel-gtk-container.h"
 #include "eel-gtk-extensions.h"

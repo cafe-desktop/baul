@@ -9,5 +9,5 @@ Terminal=false
 Icon=folder-open
 StartupNotify=false
 Type=Application
-MimeType=inode/directory;application/x-mate-saved-search;
+MimeType=inode/directory;application/x-cafe-saved-search;
 OnlyShowIn=MATE;

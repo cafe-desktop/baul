@@ -28,11 +28,11 @@ kinds of abstract file systems, there can be arbitrarily slow parts of
 the file system that have file system paths.
 
 For historical reasons, threading in Baul is done through the
-mate-vfs asynchronous I/O abstraction rather than using threads
-directly. This means that all the threads are created by mate-vfs,
+cafe-vfs asynchronous I/O abstraction rather than using threads
+directly. This means that all the threads are created by cafe-vfs,
 and Baul code runs on the main thread only. Thus, the rule of
-thumb is that synchronous mate-vfs operations like the ones in
-<libmatevfs/mate-vfs-ops.h> are illegal in most Baul
+thumb is that synchronous cafe-vfs operations like the ones in
+<libcafevfs/cafe-vfs-ops.h> are illegal in most Baul
 code. Similarly, it's illegal to ask for a piece of information, say a
 file size, and then wait until it arrives. The program's main thread
 must be allowed to get back to the main loop and start asking for user
@@ -110,7 +110,7 @@ Lets review a few of the concepts:
    are not allowed to do any disk I/O.
 2) To cause the actual I/O to be done, callers need to use set up
    either a monitor or a callback.
-3) The actual I/O is done by asynchronous mate-vfs calls, so the work
+3) The actual I/O is done by asynchronous cafe-vfs calls, so the work
    is done on another thread.
 
 To work with an entire directory of files at once, you use
@@ -230,7 +230,7 @@ known.
 
 Adding new kinds of I/O usually involves working on the Baul I/O
 state machine in baul-directory-async.c. If we changed Baul to
-use threading instead of using mate-vfs asychronous operations, I'm
+use threading instead of using cafe-vfs asychronous operations, I'm
 pretty sure that most of the changes would be here in this
 file. That's because the external API used for BaulFile wouldn't
 really have a reason to change. In either case, you'd want to schedule
@@ -241,7 +241,7 @@ work to be done, and get called back when the work is complete.
 Future direction
 
 Some have suggested that by using threading directly in Baul
-rather than using it indirectly through the mate-vfs async. calls,
+rather than using it indirectly through the cafe-vfs async. calls,
 we could simplify the I/O code in Baul. It's possible this would
 make a big improvement, but it's also possible that this would primarily
 affect the internals and implementation details of BaulFile and

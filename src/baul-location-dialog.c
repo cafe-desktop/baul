@@ -98,7 +98,7 @@ response_callback (BaulLocationDialog *dialog,
     case GTK_RESPONSE_HELP :
         error = NULL;
         gtk_show_uri_on_window (GTK_WINDOW (dialog),
-                                "help:mate-user-guide/baul-open-location",
+                                "help:cafe-user-guide/baul-open-location",
                                 gtk_get_current_event_time (), &error);
         if (error)
         {

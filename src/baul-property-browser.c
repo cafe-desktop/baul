@@ -1674,7 +1674,7 @@ help_button_callback (GtkWidget *widget, GtkWidget *property_browser)
     GError *error = NULL;
 
     gtk_show_uri_on_window (GTK_WINDOW (property_browser),
-                            "help:mate-user-guide/gosbaul-50",
+                            "help:cafe-user-guide/gosbaul-50",
                             gtk_get_current_event_time (), &error);
 
     if (error)
@@ -1748,7 +1748,7 @@ element_clicked_callback (GtkWidget *image_table,
     /* treat the reset property in the colors section specially */
     if (g_strcmp0 (element_name, RESET_IMAGE_NAME) == 0)
     {
-        drag_types[0].target = "x-special/mate-reset-background";
+        drag_types[0].target = "x-special/cafe-reset-background";
     }
 
     target_list = gtk_target_list_new (drag_types, G_N_ELEMENTS (drag_types));

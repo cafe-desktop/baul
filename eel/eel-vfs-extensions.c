@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-vfs-extensions.c - mate-vfs extensions.  Its likely some of these will
-                          be part of mate-vfs in the future.
+/* eel-vfs-extensions.c - cafe-vfs extensions.  Its likely some of these will
+                          be part of cafe-vfs in the future.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
 

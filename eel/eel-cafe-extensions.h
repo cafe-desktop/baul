@@ -1,8 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-mate-extensions.h - interface for new functions that operate on
-                                 mate classes. Perhaps some of these should be
-  			         rolled into mate someday.
+/* eel-cafe-extensions.h - interface for new functions that operate on
+                                 cafe classes. Perhaps some of these should be
+  			         rolled into cafe someday.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -30,10 +30,10 @@
 #include <gtk/gtk.h>
 
 /* Return a command string containing the path to a terminal on this system. */
-char *        eel_mate_make_terminal_command                         (const char               *command);
+char *        eel_cafe_make_terminal_command                         (const char               *command);
 
 /* Open up a new terminal, optionally passing in a command to execute */
-void          eel_mate_open_terminal_on_screen                       (const char               *command,
+void          eel_cafe_open_terminal_on_screen                       (const char               *command,
         GdkScreen                *screen);
 
 #endif /* EEL_MATE_EXTENSIONS_H */

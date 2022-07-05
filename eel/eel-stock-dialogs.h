@@ -59,7 +59,7 @@ GtkWidget* eel_file_chooser_dialog_new (const gchar *title,
         const gchar          *first_button_text,
                               ...);
 
-/* Variations on mate stock dialogs; these do line wrapping, we don't
+/* Variations on cafe stock dialogs; these do line wrapping, we don't
  * bother with non-parented versions, we allow setting the title,
  * primary, and secondary messages, and we return GtkDialog pointers
  * instead of GtkWidget pointers.

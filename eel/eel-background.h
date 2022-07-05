@@ -48,7 +48,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #define MATE_DESKTOP_USE_UNSTABLE_API
-#include <libmate-desktop/mate-bg.h>
+#include <libcafe-desktop/cafe-bg.h>
 
 typedef struct EelBackground EelBackground;
 typedef struct EelBackgroundClass EelBackgroundClass;
@@ -113,7 +113,7 @@ void                        eel_background_set_dropped_image     (EelBackground 
 /* Gets or creates a background so that it's attached to a widget. */
 EelBackground *             eel_get_widget_background            (GtkWidget       *widget);
 
-/* Thin-wrappers around mate_bg gsettings functions */
+/* Thin-wrappers around cafe_bg gsettings functions */
 void			    eel_bg_save_to_gsettings             (EelBackground   *self,
 								  GSettings       *settings);
 void			    eel_bg_load_from_gsettings           (EelBackground   *self,

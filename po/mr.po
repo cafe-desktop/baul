@@ -11,11 +11,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: baul 1.23.2\n"
-"Report-Msgid-Bugs-To: https://mate-desktop.org\n"
+"Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
 "POT-Creation-Date: 2020-01-10 11:11+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
-"Language-Team: Marathi (https://www.transifex.com/mate/teams/13566/mr/)\n"
+"Language-Team: Marathi (https://www.transifex.com/cafe/teams/13566/mr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -424,23 +424,23 @@ msgstr ""
 msgid "Saved search"
 msgstr "संचयीत शोध"
 
-#: data/mate-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
+#: data/cafe-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
 msgid "Network"
 msgstr "नेटवर्क"
 
-#: data/mate-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
 msgid "Browse bookmarked and local network locations"
 msgstr "संचार्ह ओळचिन्हे व स्थानिक नेटवर्क स्थळे"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon
 #. file name)!
-#: data/mate-network-scheme.desktop.in.in:11
+#: data/cafe-network-scheme.desktop.in.in:11
 msgid "network-workgroup"
 msgstr ""
 
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
-#: data/mate-network-scheme.desktop.in.in:14
+#: data/cafe-network-scheme.desktop.in.in:14
 msgid "bookmarks;browse;local;network;locations;MATE;"
 msgstr ""
 
@@ -1414,8 +1414,8 @@ msgstr[1] ""
 
 #: libbaul-private/baul-file-operations.c:330
 #, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
+msgid "approxicafely %'d hour"
+msgid_plural "approxicafely %'d hours"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2924,11 +2924,11 @@ msgid_plural "Redo change owner of %d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:76
+#: libbaul-private/org.cafe.baul.gschema.xml:76
 msgid "Where to position newly open tabs in browser windows."
 msgstr "ब्राउजर चौकटीत नविन उघडलेले टॅब कुठे स्थीत करायचे."
 
-#: libbaul-private/org.mate.baul.gschema.xml:77
+#: libbaul-private/org.cafe.baul.gschema.xml:77
 msgid ""
 "If set to \"after-current-tab\", then new tabs are inserted after the "
 "current tab. If set to \"end\", then new tabs are appended to the end of the"
@@ -2938,33 +2938,33 @@ msgstr ""
 "अंतर्भूत होतात. \"end\" करीता निश्चित केल्यास, टॅब यादीच्या शेवटी नविन टॅब "
 "जोडले जातात."
 
-#: libbaul-private/org.mate.baul.gschema.xml:81
+#: libbaul-private/org.cafe.baul.gschema.xml:81
 msgid "Switch tabs with [ctrl] + [tab]"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:82
+#: libbaul-private/org.cafe.baul.gschema.xml:82
 msgid ""
 "If true, it enables the ability to switch tabs using [ctrl + tab] and [ctrl "
 "+ shift + tab]."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:86
+#: libbaul-private/org.cafe.baul.gschema.xml:86
 msgid "Baul will exit when last window destroyed."
 msgstr "शेवटची खिडकी नष्ट केल्यास Baul बाहेर पडेल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:87
+#: libbaul-private/org.cafe.baul.gschema.xml:87
 msgid ""
 "If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
 "so Baul can serve as a daemon to monitor media automount, or similar tasks."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:91
+#: libbaul-private/org.cafe.baul.gschema.xml:91
 msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
 "Baul विशेष वागणुक कार्यनान्वीत करतो, जेथे सर्व चौकटी ब्राउजरस्वरूपात आहे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:92
+#: libbaul-private/org.cafe.baul.gschema.xml:92
 msgid ""
 "If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
@@ -2973,11 +2973,11 @@ msgstr ""
 "खरे निश्चित केल्यास, सर्व Baul चौकटी ब्राऊजर चौकटी होतील. अशा रिती Nautilus "
 "आवृत्ती 2.6 च्या पूर्वी वागत असे, व काहीक लोक ही वागणूक पसंत करतात."
 
-#: libbaul-private/org.mate.baul.gschema.xml:96
+#: libbaul-private/org.cafe.baul.gschema.xml:96
 msgid "Always use the location entry, instead of the pathbar"
 msgstr "मार्गपट्टी ऐवजी,नेहमी स्थान प्रवेशाचा वापरा करा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:97
+#: libbaul-private/org.cafe.baul.gschema.xml:97
 msgid ""
 "If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
@@ -2985,11 +2985,11 @@ msgstr ""
 "मुल्य खरे निश्चित केल्यास, Baul ब्राउजर चौकटी मार्गपट्टी ऐवजी, नेहमी "
 "स्थानपट्टीकरीता पाठ्य आगत नोंदणी वापरेल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:101
+#: libbaul-private/org.cafe.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
 msgstr "कचरापेटी रिक्त करतेवेळी, किंवा फाइल काढुन टाकतेवेळी खात्री करायची"
 
-#: libbaul-private/org.mate.baul.gschema.xml:102
+#: libbaul-private/org.cafe.baul.gschema.xml:102
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
@@ -2997,21 +2997,21 @@ msgstr ""
 "मुल्य खरे निश्चित केल्यास, फाइल काढुन टाकतेवेळी, किंवा कचरापेटी रिक्त "
 "करतेवेळी Baul आपल्याकडुन खात्री करून घेईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:106
+#: libbaul-private/org.cafe.baul.gschema.xml:106
 msgid "Whether to ask for confirmation when moving files to the Trash"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:107
+#: libbaul-private/org.cafe.baul.gschema.xml:107
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:111
+#: libbaul-private/org.cafe.baul.gschema.xml:111
 msgid "Whether to enable immediate deletion"
 msgstr "त्वरीत घालवण्याची प्रक्रिया सुरू करायची"
 
-#: libbaul-private/org.mate.baul.gschema.xml:112
+#: libbaul-private/org.cafe.baul.gschema.xml:112
 msgid ""
 "If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
@@ -3021,11 +3021,11 @@ msgstr ""
 "काढुन टाकण्यासाठी Baul एक विशेष उपलब्ध करून देतो. हे विशेष घातकही असु शकते, "
 "त्यामुळे सावधानता बाळगा."
 
-#: libbaul-private/org.mate.baul.gschema.xml:117
+#: libbaul-private/org.cafe.baul.gschema.xml:117
 msgid "When to show preview text in icons"
 msgstr "चिन्हामधील वाक्यरचना आधिच केव्हा पाहायची"
 
-#: libbaul-private/org.mate.baul.gschema.xml:118
+#: libbaul-private/org.cafe.baul.gschema.xml:118
 msgid ""
 "Speed tradeoff for when to show a preview of text file contents in the "
 "file's icon. If set to \"always\" then always show previews, even if the "
@@ -3039,11 +3039,11 @@ msgstr ""
 "दृश्यीत केरा. \"never\" निश्चित केल्यास कधिही पूर्वदृश्यीत माहिती वाचण्याची "
 "चिंता करू नका."
 
-#: libbaul-private/org.mate.baul.gschema.xml:123
+#: libbaul-private/org.cafe.baul.gschema.xml:123
 msgid "When to show number of items in a folder"
 msgstr "संचयीकेतील एकूण घटके कधी दर्शवायचे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:124
+#: libbaul-private/org.cafe.baul.gschema.xml:124
 msgid ""
 "Speed tradeoff for when to show the number of items in a folder. If set to "
 "\"always\" then always show item counts, even if the folder is on a remote "
@@ -3055,11 +3055,11 @@ msgstr ""
 "\"local_only\" निश्चित केल्यास फक्त स्थानीय फाइल प्रणाली प्रमाण दर्शवा. "
 "\"never\" निश्चित केल्यास कधिही घटक प्रमाण मुल्यांकण करण्याची चिंता करू नका."
 
-#: libbaul-private/org.mate.baul.gschema.xml:128
+#: libbaul-private/org.cafe.baul.gschema.xml:128
 msgid "Type of click used to launch/open files"
 msgstr "फाइल दाखलकरण्यासाठी/उगडण्यासाठी वापरण्यात येणारी क्लिक प्रकार"
 
-#: libbaul-private/org.mate.baul.gschema.xml:129
+#: libbaul-private/org.cafe.baul.gschema.xml:129
 msgid ""
 "Possible values are \"single\" to launch files on a single click, or "
 "\"double\" to launch them on a double click."
@@ -3067,11 +3067,11 @@ msgstr ""
 "एका क्लिकवर फाइल दाखल करण्याकरीता अपेक्षित मुल्य \"single\" आहे, किंवा "
 "दोनवेळा क्लिक केल्यावर अपेक्षित मुल्य \"double\" आहे."
 
-#: libbaul-private/org.mate.baul.gschema.xml:133
+#: libbaul-private/org.cafe.baul.gschema.xml:133
 msgid "What to do with executable text files when activated"
 msgstr "जेव्हा सक्रिय होतात तेव्हा त्या कार्यान्वित मजकूर फाइल्सचे काय करायचे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:134
+#: libbaul-private/org.cafe.baul.gschema.xml:134
 msgid ""
 "What to do with executable text files when they are activated (single or "
 "double clicked). Possible values are \"launch\" to launch them as programs, "
@@ -3083,21 +3083,21 @@ msgstr ""
 "दाखल करण्याकरीता, \"ask\" संवादपटच्या मदतीने विचारण्याकरीता, व \"display\" "
 "पाठ्य फाइल स्वरूपी दर्शविण्याकरीता."
 
-#: libbaul-private/org.mate.baul.gschema.xml:138
+#: libbaul-private/org.cafe.baul.gschema.xml:138
 msgid "Show the package installer for unknown MIME types"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:139
+#: libbaul-private/org.cafe.baul.gschema.xml:139
 msgid ""
 "Whether to show the user a package installer dialog in case an unknown MIME "
 "type is opened, in order to search for an application to handle it."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:143
+#: libbaul-private/org.cafe.baul.gschema.xml:143
 msgid "Use extra mouse button events in Baul' browser window"
 msgstr "Baul च्या ब्राऊजर खिडकीत अगाऊ माऊस बटन घटनांचा वापर करा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:144
+#: libbaul-private/org.cafe.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
 "will determine if any action is taken inside of Baul when either is pressed."
@@ -3106,11 +3106,11 @@ msgstr ""
 "कुठलिही बटन दाबल्यास Baul मध्ये कुठल्या प्रकारची कृती कार्यान्वीत होते, ते "
 "ओळखते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:148
+#: libbaul-private/org.cafe.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
 msgstr "ब्राऊजर खिडकीत \"Forward\" आदेश सक्रीय करण्यासाठी माऊस बटन"
 
-#: libbaul-private/org.mate.baul.gschema.xml:149
+#: libbaul-private/org.cafe.baul.gschema.xml:149
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Forward\" command in a browser "
@@ -3120,11 +3120,11 @@ msgstr ""
 "ब्राऊजर खिडकीत \"Forward\" आदेश कुठल्या बटन द्वारे सक्रीय केले जाते, ते सेट "
 "करते. संभाव्य मूल्यांची व्यप्ती 6 व 14 च्या अंतर्गत आहे."
 
-#: libbaul-private/org.mate.baul.gschema.xml:153
+#: libbaul-private/org.cafe.baul.gschema.xml:153
 msgid "Mouse button to activate the \"Back\" command in browser window"
 msgstr "ब्राऊजर खिडकीत \"Back\" आदेश सक्रीय करण्यासाठी माऊस बटन"
 
-#: libbaul-private/org.mate.baul.gschema.xml:154
+#: libbaul-private/org.cafe.baul.gschema.xml:154
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Back\" command in a browser window. "
@@ -3134,11 +3134,11 @@ msgstr ""
 "ब्राऊजर खिडकीत \"Back\" आदेश कुठल्या बटन द्वारे सक्रीय केले जाते, ते सेट "
 "करते. संभाव्य मूल्यांची व्यप्ती 6 व 14 च्या अंतर्गत आहे."
 
-#: libbaul-private/org.mate.baul.gschema.xml:159
+#: libbaul-private/org.cafe.baul.gschema.xml:159
 msgid "When to show thumbnails of image files"
 msgstr "प्रतिमा फाइल्सचे थंबनेल्स कधी पहायचे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:160
+#: libbaul-private/org.cafe.baul.gschema.xml:160
 msgid ""
 "Speed tradeoff for when to show an image file as a thumbnail. If set to "
 "\"always\" then always thumbnail, even if the folder is on a remote server. "
@@ -3152,11 +3152,11 @@ msgstr ""
 "\"never\" निश्चित केल्यास कधिही प्रतिमांना थंबनेल करण्याची चिंता करू नका, "
 "फक्त मुलभूत चिन्ह वापरा."
 
-#: libbaul-private/org.mate.baul.gschema.xml:164
+#: libbaul-private/org.cafe.baul.gschema.xml:164
 msgid "Maximum image size for thumbnailing"
 msgstr "थंबनेलिंग करीता कमाल चित्राचे आकार"
 
-#: libbaul-private/org.mate.baul.gschema.xml:165
+#: libbaul-private/org.cafe.baul.gschema.xml:165
 msgid ""
 "Images over this size (in bytes) won't be thumbnailed. The purpose of this "
 "setting is to avoid thumbnailing large images that may take a long time to "
@@ -3166,11 +3166,11 @@ msgstr ""
 "हेतु मोठ्या आकाराची प्रतिमांना थंबनेल करण्यापासून थांबविण्याकरीता आहे कारण "
 "त्यास दाखल वायला अधिक वेळ किंवा जास्त स्मृतीची गरज भासते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:170
+#: libbaul-private/org.cafe.baul.gschema.xml:170
 msgid "Whether to preview sounds when mousing over an icon"
 msgstr "चिन्हावरून माउस हलवितेवेळी आवाज पूर्वदृश्यीत करायचे का"
 
-#: libbaul-private/org.mate.baul.gschema.xml:171
+#: libbaul-private/org.cafe.baul.gschema.xml:171
 msgid ""
 "Speed tradeoff for when to preview a sound file when mousing over a files "
 "icon. If set to \"always\" then always plays the sound, even if the file is "
@@ -3183,11 +3183,11 @@ msgstr ""
 "पूर्वदृश्य चालवा. \"never\" निश्चित केल्यास ध्वनी कधिही पूर्वदृश्यीत केल्या "
 "जात नाही."
 
-#: libbaul-private/org.mate.baul.gschema.xml:175
+#: libbaul-private/org.cafe.baul.gschema.xml:175
 msgid "Show advanced permissions in the file property dialog"
 msgstr "फाइल गुणधर्म संवादपट मध्ये प्रगत परवानगी दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:176
+#: libbaul-private/org.cafe.baul.gschema.xml:176
 msgid ""
 "If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
@@ -3196,11 +3196,11 @@ msgstr ""
 " संपादन व दर्शवयास परवानगी देतो, काहिक गुपीत पर्याय वापरण्यास देखिल प्रवेश "
 "देतो."
 
-#: libbaul-private/org.mate.baul.gschema.xml:180
+#: libbaul-private/org.cafe.baul.gschema.xml:180
 msgid "Show folders first in windows"
 msgstr "चौकटीत प्रथम संचयीका दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:181
+#: libbaul-private/org.cafe.baul.gschema.xml:181
 msgid ""
 "If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
@@ -3209,11 +3209,11 @@ msgstr ""
 " प्रकारे संपादन व दर्शवयास परवानगी देतो, काहिक गुपीत पर्याय वापरण्यास देखिल "
 "प्रवेश देतो."
 
-#: libbaul-private/org.mate.baul.gschema.xml:188
+#: libbaul-private/org.cafe.baul.gschema.xml:188
 msgid "Default sort order"
 msgstr "मुलभूत क्रमवारी"
 
-#: libbaul-private/org.mate.baul.gschema.xml:189
+#: libbaul-private/org.cafe.baul.gschema.xml:189
 msgid ""
 "The default sort-order for items in the icon view. Possible values are "
 "\"name\", \"size\", \"type\", \"mtime\", and \"emblems\"."
@@ -3221,11 +3221,11 @@ msgstr ""
 "चिन्ह दृश्यातील घटकांकरीता मुलभूत क्रम-रीत .स्वीकार्य मुल्य आहे \"name\", "
 "\"size\", \"type\", \"motime\", व \"emblems\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:193
+#: libbaul-private/org.cafe.baul.gschema.xml:193
 msgid "Reverse sort order in new windows"
 msgstr "नवीन चौकटीत छाणणीची पध्दती उलटी करा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:194
+#: libbaul-private/org.cafe.baul.gschema.xml:194
 msgid ""
 "If true, files in new windows will be sorted in reverse order. ie, if sorted"
 " by name, then instead of sorting the files from \"a\" to \"z\", they will "
@@ -3237,11 +3237,11 @@ msgstr ""
 "लावण्यापेक्षा, \"z\" ते \"a\" या क्रमानुसारे लावा; जर आकारनुसारे क्रमवारी "
 "लावल्यास, वाढीव रूपी क्रमवारी करण्याऐवजी ढासळत्या रूपी क्रमवारी केली जाईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:198
+#: libbaul-private/org.cafe.baul.gschema.xml:198
 msgid "Baul uses the users home folder as the desktop"
 msgstr "Baul वापरकर्त्याचे मुख्य संचयीका डेस्कटॉपच्या स्वरूपात वापरतो"
 
-#: libbaul-private/org.mate.baul.gschema.xml:199
+#: libbaul-private/org.cafe.baul.gschema.xml:199
 msgid ""
 "If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
@@ -3249,19 +3249,19 @@ msgstr ""
 "खरे निश्चित केल्यास, Baul वापरकर्त्याची मुख्य संचयीका यास डेस्कटॉप नुरूप "
 "वापर करू शकतो. खोटे असल्यास, ~/Desktop ला डेस्कटॉप नुरूप वापरले जाते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:203
+#: libbaul-private/org.cafe.baul.gschema.xml:203
 msgid "Custom Background"
 msgstr "इच्छिक पार्श्वभूमी"
 
-#: libbaul-private/org.mate.baul.gschema.xml:204
+#: libbaul-private/org.cafe.baul.gschema.xml:204
 msgid "Whether a custom default folder background has been set."
 msgstr "इच्छिक मुलभूत संचयीका पार्श्वभूमी निश्चित करायची."
 
-#: libbaul-private/org.mate.baul.gschema.xml:208
+#: libbaul-private/org.cafe.baul.gschema.xml:208
 msgid "Default Background Color"
 msgstr "मुलभूत पार्श्र्वभूमी रंग"
 
-#: libbaul-private/org.mate.baul.gschema.xml:209
+#: libbaul-private/org.cafe.baul.gschema.xml:209
 msgid ""
 "Color for the default folder background. Only used if background_set is "
 "true."
@@ -3269,30 +3269,30 @@ msgstr ""
 "मुलभूत संचयीका पार्श्वभूमीकरीता फाइल नाव. तेंव्हाच वापरले जाते जेंव्हा "
 "background_set चे मुल्य खरे असते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:213
+#: libbaul-private/org.cafe.baul.gschema.xml:213
 msgid "Default Background Filename"
 msgstr "मुलभूत पार्श्र्वभूमी फाइलचे नाव"
 
-#: libbaul-private/org.mate.baul.gschema.xml:214
+#: libbaul-private/org.cafe.baul.gschema.xml:214
 msgid ""
 "Uri of the default folder background. Only used if background_set is true."
 msgstr ""
 "मुलभूत संचयीका पार्श्वभूमीकरीता Uri. तेंव्हाच वापरले जाते जेंव्हा "
 "background_set चे मुल्य खरे असते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:218
+#: libbaul-private/org.cafe.baul.gschema.xml:218
 msgid "Custom Side Pane Background Set"
 msgstr "इच्छेनुसारे बाजुचे पटल पार्श्वभूमी संच"
 
-#: libbaul-private/org.mate.baul.gschema.xml:219
+#: libbaul-private/org.cafe.baul.gschema.xml:219
 msgid "Whether a custom default side pane background has been set."
 msgstr "इच्छिक मुलभूत बाजुचे पटल पार्श्वभूमी निश्चित करायची."
 
-#: libbaul-private/org.mate.baul.gschema.xml:223
+#: libbaul-private/org.cafe.baul.gschema.xml:223
 msgid "Default Side Pane Background Color"
 msgstr "मुलभूत बाजुचे पटल पार्श्र्वभूमी रंग"
 
-#: libbaul-private/org.mate.baul.gschema.xml:224
+#: libbaul-private/org.cafe.baul.gschema.xml:224
 msgid ""
 "Filename for the default side pane background. Only used if "
 "side_pane_background_set is true."
@@ -3300,11 +3300,11 @@ msgstr ""
 "मुलभूत बाजूचे पटल पार्श्वभूमीकरीता फाइल नाव. तेंव्हाच वापरले जाते जेंव्हा "
 "side_pane_background_set चे मुल्य खरे असते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:228
+#: libbaul-private/org.cafe.baul.gschema.xml:228
 msgid "Default Side Pane Background Filename"
 msgstr "मुलभूत बाजुचे पटल पार्श्र्वभूमी फाइल नाव"
 
-#: libbaul-private/org.mate.baul.gschema.xml:229
+#: libbaul-private/org.cafe.baul.gschema.xml:229
 msgid ""
 "Uri of the default side pane background. Only used if "
 "side_pane_background_set is true."
@@ -3312,11 +3312,11 @@ msgstr ""
 "मुलभूत बाजूचे पटल पार्श्वभूमीकरीता Uri. तेंव्हाच वापरले जाते जेंव्हा "
 "side_pane_background_set चे मुल्य खरे असते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:238
+#: libbaul-private/org.cafe.baul.gschema.xml:238
 msgid "Default folder viewer"
 msgstr "मुलभूत संचयीका दर्शिका"
 
-#: libbaul-private/org.mate.baul.gschema.xml:239
+#: libbaul-private/org.cafe.baul.gschema.xml:239
 msgid ""
 "When a folder is visited this viewer is used unless you have selected "
 "another view for that particular folder. Possible values are \"list-view\", "
@@ -3326,41 +3326,41 @@ msgstr ""
 "तोपर्यंत संचयीका पहाण्याकरीता या दर्शकाचे वापर केले जाईल. स्वीकार्य मुल्य "
 "\"list_view\", \"icon_view\" व \"compact_view\" आहे."
 
-#: libbaul-private/org.mate.baul.gschema.xml:243
+#: libbaul-private/org.cafe.baul.gschema.xml:243
 msgid "Date Format"
 msgstr "दिनांकाचा आराखडा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:244
+#: libbaul-private/org.cafe.baul.gschema.xml:244
 msgid ""
 "The format of file dates. Possible values are \"locale\", \"iso\", and "
 "\"informal\"."
 msgstr "फाइल दिनांकचे स्वरूप. स्वीकार्य मुल्य आहे \"locale\", \"iso\", व \"informal\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:248
+#: libbaul-private/org.cafe.baul.gschema.xml:248
 msgid "Whether to show hidden files"
 msgstr "लपवलेल्या फाइल्स दर्शवायचे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:249
+#: libbaul-private/org.cafe.baul.gschema.xml:249
 msgid ""
 "If set to true, then hidden files are shown by default in the file manager. "
 "Hidden files are either dotfiles or listed in the folder's .hidden file."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:253
+#: libbaul-private/org.cafe.baul.gschema.xml:253
 msgid "Whether to show backup files"
 msgstr "बॅकअप फाइल्स दर्शवायचे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:254
+#: libbaul-private/org.cafe.baul.gschema.xml:254
 msgid ""
 "If set to true, then backup files are shown by default in the file manager. "
 "Backup files are backup files ending with a tilde (~)."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:259
+#: libbaul-private/org.cafe.baul.gschema.xml:259
 msgid "Whether to show file sizes with IEC units"
 msgstr "फॉन्ट आकार IEC एकांकामध्ये दाखवायचे का"
 
-#: libbaul-private/org.mate.baul.gschema.xml:260
+#: libbaul-private/org.cafe.baul.gschema.xml:260
 msgid ""
 "If set to true, file sizes are shown using IEC (base 1024) units with "
 "\"KiB\" style suffixes, instead of default with SI units."
@@ -3368,27 +3368,27 @@ msgstr ""
 "खरे ठेवल्यास, फ़ाइल आकार मुलभूत SI एकांकाऐवजी IEC (base 1024) एकांकामध्ये "
 "मागे \"KiB\" लावून दाखविले जाईल "
 
-#: libbaul-private/org.mate.baul.gschema.xml:264
+#: libbaul-private/org.cafe.baul.gschema.xml:264
 msgid "Whether to show icons in list view"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:265
+#: libbaul-private/org.cafe.baul.gschema.xml:265
 msgid "If set to true, show file icons in list view."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:269
+#: libbaul-private/org.cafe.baul.gschema.xml:269
 msgid "Whether to show desktop notifications"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:270
+#: libbaul-private/org.cafe.baul.gschema.xml:270
 msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:277
+#: libbaul-private/org.cafe.baul.gschema.xml:277
 msgid "List of possible captions on icons"
 msgstr "चिन्हांवरील स्वीकार्य कॅपशनची यादी"
 
-#: libbaul-private/org.mate.baul.gschema.xml:278
+#: libbaul-private/org.cafe.baul.gschema.xml:278
 msgid ""
 "A list of captions below an icon in the icon view and the desktop. The "
 "actual number of captions shown depends on the zoom level. Some possible "
@@ -3402,47 +3402,47 @@ msgstr ""
 "\"owner\", \"group\", \"permissions\", \"octal_permissions\" व "
 "\"mime_type\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:286
+#: libbaul-private/org.cafe.baul.gschema.xml:286
 msgid "Use tighter layout in new windows"
 msgstr "घट्ट मांडणी नविन चौकटीत वापरा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:287
+#: libbaul-private/org.cafe.baul.gschema.xml:287
 msgid "If true, icons will be laid out tighter by default in new windows."
 msgstr "खरे असल्यास, नविन चौकटींमध्ये चिन्हांची मांडणी घट्टरीत्या केली जाईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:291
+#: libbaul-private/org.cafe.baul.gschema.xml:291
 msgid "Put labels beside icons"
 msgstr "चिन्हांच्या शेजारी लेबल्स ठेवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:292
+#: libbaul-private/org.cafe.baul.gschema.xml:292
 msgid ""
 "If true, labels will be placed beside icons rather than underneath them."
 msgstr ""
 "खरे असल्यास, लेबलची मांडणी चिन्हांच्या खालच्या बाजुस नसून त्यांच्या जवळ "
 "घट्टरीत्या केली जाईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:296
+#: libbaul-private/org.cafe.baul.gschema.xml:296
 msgid "Default icon zoom level"
 msgstr "मुलभूत चिन्ह लहान मोठे करण्याचे स्थर"
 
-#: libbaul-private/org.mate.baul.gschema.xml:297
+#: libbaul-private/org.cafe.baul.gschema.xml:297
 msgid "Default zoom level used by the icon view."
 msgstr "मुलभूत लहान मोठे करण्याचे स्थर चिन्ह दर्शवातर्फे वापरले जाते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:301
+#: libbaul-private/org.cafe.baul.gschema.xml:301
 msgid "Default Thumbnail Icon Size"
 msgstr "मुलभूत थंबनेल चिन्ह आकार"
 
-#: libbaul-private/org.mate.baul.gschema.xml:302
+#: libbaul-private/org.cafe.baul.gschema.xml:302
 msgid "The default size of an icon for a thumbnail in the icon view."
 msgstr "चिन्ह दर्शवातील थंबनेल करीता मुलभूत चिन्ह आकार."
 
-#: libbaul-private/org.mate.baul.gschema.xml:306
-#: libbaul-private/org.mate.baul.gschema.xml:425
+#: libbaul-private/org.cafe.baul.gschema.xml:306
+#: libbaul-private/org.cafe.baul.gschema.xml:425
 msgid "Text Ellipsis Limit"
 msgstr "पाठ्य एलीपसीस् मर्यादा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:307
+#: libbaul-private/org.cafe.baul.gschema.xml:307
 msgid ""
 "A string specifying how parts of overlong file names should be replaced by "
 "ellipses, depending on the zoom level. Each of the list entries is of the "
@@ -3473,19 +3473,19 @@ msgstr ""
 "झूम स्तर: सर्वात लहान (33%), इतरांपेक्षा लहान (50%), लहान (66%), मानक "
 "(100%), मोठे (150%), इतरांपेक्षा मोठे (200%), सर्वात मोठे (400%)"
 
-#: libbaul-private/org.mate.baul.gschema.xml:332
+#: libbaul-private/org.cafe.baul.gschema.xml:332
 msgid "Default compact view zoom level"
 msgstr "मुलभूत चिन्ह लहान मोठे करण्याचे स्थर"
 
-#: libbaul-private/org.mate.baul.gschema.xml:333
+#: libbaul-private/org.cafe.baul.gschema.xml:333
 msgid "Default zoom level used by the compact view."
 msgstr "संक्षिप्त दृश्य द्वारे वापरले गेलेले मुलभूत झूम स्थर."
 
-#: libbaul-private/org.mate.baul.gschema.xml:337
+#: libbaul-private/org.cafe.baul.gschema.xml:337
 msgid "All columns have same width"
 msgstr "सर्व स्तंभची रूंदी समान आहे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:338
+#: libbaul-private/org.cafe.baul.gschema.xml:338
 msgid ""
 "If this preference is set, all columns in the compact view have the same "
 "width. Otherwise, the width of each column is determined seperately."
@@ -3493,35 +3493,35 @@ msgstr ""
 "ही प्राधान्यक्रम निश्चित केल्यावर, संक्षिप्त दृश्यातील सर्व स्तंभची रूंदी "
 "समान राहील. नाहीतर, प्रत्येक स्तंभची रूंदी वेगळेरित्या तपासली जाईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:345
+#: libbaul-private/org.cafe.baul.gschema.xml:345
 msgid "Default list zoom level"
 msgstr "लहान मोठे स्थर करण्याची मुलभूत यादी"
 
-#: libbaul-private/org.mate.baul.gschema.xml:346
+#: libbaul-private/org.cafe.baul.gschema.xml:346
 msgid "Default zoom level used by the list view."
 msgstr "मुलभूत लहान मोठे करण्याचे स्थर यादी दर्शवा तर्फे वापरले जाते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:350
+#: libbaul-private/org.cafe.baul.gschema.xml:350
 msgid "Default list of columns visible in the list view"
 msgstr "यादी दृश्यातील दृश्यीत मुलभूत स्तंभ क्रमवारी"
 
-#: libbaul-private/org.mate.baul.gschema.xml:351
+#: libbaul-private/org.cafe.baul.gschema.xml:351
 msgid "Default list of columns visible in the list view."
 msgstr "यादी दृश्यातील दृश्यीत मुलभूत स्तंभ क्रमवारी."
 
-#: libbaul-private/org.mate.baul.gschema.xml:355
+#: libbaul-private/org.cafe.baul.gschema.xml:355
 msgid "Default column order in the list view"
 msgstr "यादी दृश्यातील मुलभूत स्तंभ क्रमवारी"
 
-#: libbaul-private/org.mate.baul.gschema.xml:356
+#: libbaul-private/org.cafe.baul.gschema.xml:356
 msgid "Default column order in the list view."
 msgstr "यादी दृश्यातील मुलभूत स्तंभ क्रमवारी."
 
-#: libbaul-private/org.mate.baul.gschema.xml:367
+#: libbaul-private/org.cafe.baul.gschema.xml:367
 msgid "Only show folders in the tree side pane"
 msgstr "फक्त रचनात्मक बाजूच्या पटलातील संचयीका दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:368
+#: libbaul-private/org.cafe.baul.gschema.xml:368
 msgid ""
 "If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
@@ -3529,19 +3529,19 @@ msgstr ""
 "मुल्य खरे निश्चित केल्यास, Baul फक्त बाजुच्या पटल संरचनेवरील संचयीका "
 "दर्शवितो. नाहीतर दोन्ही संचयीका व फाइल दर्शविल्या जातील."
 
-#: libbaul-private/org.mate.baul.gschema.xml:375
+#: libbaul-private/org.cafe.baul.gschema.xml:375
 msgid "Desktop font"
 msgstr "डेस्कटॉप फाँट"
 
-#: libbaul-private/org.mate.baul.gschema.xml:376
+#: libbaul-private/org.cafe.baul.gschema.xml:376
 msgid "The font description used for the icons on the desktop."
 msgstr "डेस्कटॉपवरील चिन्हांकरीता वापरल्यागेलेले फॉन्ट वर्णन."
 
-#: libbaul-private/org.mate.baul.gschema.xml:380
+#: libbaul-private/org.cafe.baul.gschema.xml:380
 msgid "Home icon visible on desktop"
 msgstr "डेस्कटॉपवर दिसणारे मुख्य चिन्ह"
 
-#: libbaul-private/org.mate.baul.gschema.xml:381
+#: libbaul-private/org.cafe.baul.gschema.xml:381
 msgid ""
 "If this is set to true, an icon linking to the home folder will be put on "
 "the desktop."
@@ -3549,11 +3549,11 @@ msgstr ""
 "मुल्य खरे निश्चित केल्यास, मुख्य फोल्डरशी जुळवणी करणारे चिन्ह डेस्कटॉपवर "
 "दिसेल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:385
+#: libbaul-private/org.cafe.baul.gschema.xml:385
 msgid "Computer icon visible on desktop"
 msgstr "डेस्कटॉपवर संगणकचिन्ह दिसत आहे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:386
+#: libbaul-private/org.cafe.baul.gschema.xml:386
 msgid ""
 "If this is set to true, an icon linking to the computer location will be put"
 " on the desktop."
@@ -3561,22 +3561,22 @@ msgstr ""
 "मुल्य खरे निश्चित केल्यास, संगणक स्थळाशी जुळवणी करणारे चिन्ह डेस्कटॉपवर "
 "दिसेल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:390
+#: libbaul-private/org.cafe.baul.gschema.xml:390
 msgid "Trash icon visible on desktop"
 msgstr "डेस्कटॉपवर दिसणारे कचरापेटी चिन्ह"
 
-#: libbaul-private/org.mate.baul.gschema.xml:391
+#: libbaul-private/org.cafe.baul.gschema.xml:391
 msgid ""
 "If this is set to true, an icon linking to the trash will be put on the "
 "desktop."
 msgstr ""
 "मुल्य खरे निश्चित केल्यास, कचरापेटीशी जुळवणी करणारे चिन्ह डेस्कटॉपवर दिसेल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:395
+#: libbaul-private/org.cafe.baul.gschema.xml:395
 msgid "Show mounted volumes on the desktop"
 msgstr "डेस्कटॉपवर आरोहीत खंड दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:396
+#: libbaul-private/org.cafe.baul.gschema.xml:396
 msgid ""
 "If this is set to true, icons linking to mounted volumes will be put on the "
 "desktop."
@@ -3584,11 +3584,11 @@ msgstr ""
 "हे खरे असल्यास, आरोहीत खंडकरीता जुळवणी स्थापीत करणारी चिन्ह डेस्कटॉपवर "
 "दर्शविल्या जातील."
 
-#: libbaul-private/org.mate.baul.gschema.xml:400
+#: libbaul-private/org.cafe.baul.gschema.xml:400
 msgid "Network Servers icon visible on the desktop"
 msgstr "नेटवर्क सर्व्हर चिन्ह डेस्कटॉपवर दिसत आहे"
 
-#: libbaul-private/org.mate.baul.gschema.xml:401
+#: libbaul-private/org.cafe.baul.gschema.xml:401
 msgid ""
 "If this is set to true, an icon linking to the Network Servers view will be "
 "put on the desktop."
@@ -3596,11 +3596,11 @@ msgstr ""
 "मुल्य खरे निश्चित केल्यास, नेटवर्क सर्व्हर दृश्यशी जुळवणी करणारे चिन्ह "
 "डेस्कटॉपवर दिसेल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:405
+#: libbaul-private/org.cafe.baul.gschema.xml:405
 msgid "Desktop computer icon name"
 msgstr "डेस्कटॉपवरील संगणक चिन्हाचे नाव"
 
-#: libbaul-private/org.mate.baul.gschema.xml:406
+#: libbaul-private/org.cafe.baul.gschema.xml:406
 msgid ""
 "This name can be set if you want a custom name for the computer icon on the "
 "desktop."
@@ -3608,11 +3608,11 @@ msgstr ""
 "जर तुम्हाला डेस्कटॉपवरील संगणक चिन्हाकरीता इच्छिक नाव द्याचे असेल तर हे नाव "
 "निश्चित केल्या जाऊ शकते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:410
+#: libbaul-private/org.cafe.baul.gschema.xml:410
 msgid "Desktop home icon name"
 msgstr "डेस्कटॉपवरील मुख्य चिन्हाचे नाव"
 
-#: libbaul-private/org.mate.baul.gschema.xml:411
+#: libbaul-private/org.cafe.baul.gschema.xml:411
 msgid ""
 "This name can be set if you want a custom name for the home icon on the "
 "desktop."
@@ -3620,11 +3620,11 @@ msgstr ""
 "जर तुम्हाला डेस्कटॉपवरील मुख्य चिन्हाकरीता इच्छिक नाव द्याचे असेल तर हे नाव "
 "निश्चित केल्या जाऊ शकते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:415
+#: libbaul-private/org.cafe.baul.gschema.xml:415
 msgid "Desktop trash icon name"
 msgstr "डेस्कटॉपवरील कचरापेटी चिन्हाचे नाव"
 
-#: libbaul-private/org.mate.baul.gschema.xml:416
+#: libbaul-private/org.cafe.baul.gschema.xml:416
 msgid ""
 "This name can be set if you want a custom name for the trash icon on the "
 "desktop."
@@ -3632,11 +3632,11 @@ msgstr ""
 "जर तुम्हाला डेस्कटॉपवरील कचरापेटी चिन्हाकरीता इच्छिक नाव द्याचे असेल तर हे "
 "नाव निश्चित केल्या जाऊ शकते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:420
+#: libbaul-private/org.cafe.baul.gschema.xml:420
 msgid "Network servers icon name"
 msgstr "नेटवर्क सर्व्हर चिन्ह"
 
-#: libbaul-private/org.mate.baul.gschema.xml:421
+#: libbaul-private/org.cafe.baul.gschema.xml:421
 msgid ""
 "This name can be set if you want a custom name for the network servers icon "
 "on the desktop."
@@ -3644,7 +3644,7 @@ msgstr ""
 "जर तुम्हाला डेस्कटॉपवरील नेटवर्क सर्व्हर चिन्हाकरीता इच्छिक नाव द्याचे असेल "
 "तर हे नाव निश्चित केल्या जाऊ शकते."
 
-#: libbaul-private/org.mate.baul.gschema.xml:426
+#: libbaul-private/org.cafe.baul.gschema.xml:426
 msgid ""
 "An integer specifying how parts of overlong file names should be replaced by"
 " ellipses on the desktop. If the number is larger than 0, the file name will"
@@ -3656,91 +3656,91 @@ msgstr ""
 "संख्यापेक्षा जास्त वाढणार नाही. संख्या 0 किंवा त्यापेक्षा कमी असल्यावर, "
 "दर्शविण्याजोगी ओळींकरीता मर्यादा लागू केली जात नाही."
 
-#: libbaul-private/org.mate.baul.gschema.xml:433
+#: libbaul-private/org.cafe.baul.gschema.xml:433
 msgid "The geometry string for a navigation window."
 msgstr "नेविगेशन पटलाची भूमिती स्ट्रिंग "
 
-#: libbaul-private/org.mate.baul.gschema.xml:434
+#: libbaul-private/org.cafe.baul.gschema.xml:434
 msgid ""
 "A string containing the saved geometry and coordinates string for navigation"
 " windows."
 msgstr "नेविगेशन पटलाची साठविलेली भूमिती असलेली स्ट्रिंग"
 
-#: libbaul-private/org.mate.baul.gschema.xml:438
+#: libbaul-private/org.cafe.baul.gschema.xml:438
 msgid "Whether the navigation window should be maximized."
 msgstr "अनुप्रयोग चौकट मोठे करायचे का."
 
-#: libbaul-private/org.mate.baul.gschema.xml:439
+#: libbaul-private/org.cafe.baul.gschema.xml:439
 msgid "Whether the navigation window should be maximized by default."
 msgstr "संचार चौकट मोठे असायला हवे का."
 
-#: libbaul-private/org.mate.baul.gschema.xml:443
+#: libbaul-private/org.cafe.baul.gschema.xml:443
 msgid "Width of the side pane"
 msgstr "बाजूच्या कप्पयाची रूंद"
 
-#: libbaul-private/org.mate.baul.gschema.xml:444
+#: libbaul-private/org.cafe.baul.gschema.xml:444
 msgid "The default width of the side pane in new windows."
 msgstr "नव्या चौकटीतील बाजुच्या पटलाची मुलभूत रूंदी."
 
-#: libbaul-private/org.mate.baul.gschema.xml:448
+#: libbaul-private/org.cafe.baul.gschema.xml:448
 msgid "Show toolbar in new windows"
 msgstr "नविन चौकटीत साधन पट्टी दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:449
+#: libbaul-private/org.cafe.baul.gschema.xml:449
 msgid "If set to true, newly opened windows will have toolbars visible."
 msgstr ""
 "मुल्य खरे निश्चित केल्यास, नुकतेच उघडलेल्या चौकटीत स्थानपट्टी दृश्यास येईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:453
+#: libbaul-private/org.cafe.baul.gschema.xml:453
 msgid "Show location bar in new windows"
 msgstr "नविन चौकटीत ठिकाणदर्शक पट्टी दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:454
+#: libbaul-private/org.cafe.baul.gschema.xml:454
 msgid ""
 "If set to true, newly opened windows will have the location bar visible."
 msgstr ""
 "मुल्य खरे निश्चित केल्यास, नुकतेच उघडलेल्या चौकटीत स्थान पट्टी दृश्यास येईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:458
+#: libbaul-private/org.cafe.baul.gschema.xml:458
 msgid "Show status bar in new windows"
 msgstr "नविन चौकटीत स्थिती पट्टी दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:459
+#: libbaul-private/org.cafe.baul.gschema.xml:459
 msgid "If set to true, newly opened windows will have the status bar visible."
 msgstr ""
 "मुल्य खरे निश्चित केल्यास, नुकतेच उघडलेल्या चौकटीत स्थिती पट्टी दृश्यास "
 "येईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:463
+#: libbaul-private/org.cafe.baul.gschema.xml:463
 msgid "Show side pane in new windows"
 msgstr "नवीन चौकटीत बाजूचे पटल दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:464
+#: libbaul-private/org.cafe.baul.gschema.xml:464
 msgid "If set to true, newly opened windows will have the side pane visible."
 msgstr ""
 "मुल्य खरे निश्चित केल्यास, नुकतेच उघडलेल्या चौकटीत बाजुचे पटल दृश्यास येईल."
 
-#: libbaul-private/org.mate.baul.gschema.xml:484
+#: libbaul-private/org.cafe.baul.gschema.xml:484
 msgid "Side pane view"
 msgstr "बाजुचे पटल दर्शवा"
 
-#: libbaul-private/org.mate.baul.gschema.xml:485
+#: libbaul-private/org.cafe.baul.gschema.xml:485
 msgid "The side pane view to show in newly opened windows."
 msgstr "बाजुचे पटल दृश्य नव्या उघडलेल्या चौकटीत दर्शवा."
 
-#: libbaul-private/org.mate.baul.gschema.xml:492
+#: libbaul-private/org.cafe.baul.gschema.xml:492
 msgid "List of extensions in disabled state."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:493
+#: libbaul-private/org.cafe.baul.gschema.xml:493
 msgid "This list contains the extensions that are currently de-activated."
 msgstr ""
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:5
+#: libbaul-private/org.cafe.media-handling.gschema.xml:5
 msgid "Whether to automatically mount media"
 msgstr "आपोआप मिडीया आरोहीत करायचे का"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:6
+#: libbaul-private/org.cafe.media-handling.gschema.xml:6
 msgid ""
 "If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
@@ -3748,11 +3748,11 @@ msgstr ""
 "खरे निश्चित केल्यास, Baul, प्रारंभ व मिडीया अंतर्भूत केल्यावर "
 "वापरकर्ता-दृश्यास्पद हार्ड डीस्क व काढण्याजोगी मिडीया आपोआप आरोहीत करतो."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:10
+#: libbaul-private/org.cafe.media-handling.gschema.xml:10
 msgid "Whether to automatically open a folder for automounted media"
 msgstr "स्वआरोहण मिडीया करीता संचयीका आपोआप उघडायची का"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:11
+#: libbaul-private/org.cafe.media-handling.gschema.xml:11
 msgid ""
 "If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
@@ -3764,13 +3764,13 @@ msgstr ""
 "त्या मिडीया करीता ज्याकरीता x-content/* प्रकार आढळले जाते, व वापरकर्ता "
 "संयोजीत क्रीय कार्यरत केली जाते."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:15
+#: libbaul-private/org.cafe.media-handling.gschema.xml:15
 msgid "Never prompt or autorun/autostart programs when media are inserted"
 msgstr ""
 "मिडीया अंतर्भूत केल्यावर कधिही कार्यक्रम करीता विचारू नका किंवा "
 "स्वकार्य/स्वआरंभ करीता विचारू नका"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:16
+#: libbaul-private/org.cafe.media-handling.gschema.xml:16
 msgid ""
 "If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
@@ -3778,12 +3778,12 @@ msgstr ""
 "मुल्य खरे निश्चित केल्यास, मिडीया अंतर्भूद केल्यास Baul कधिही "
 "स्वचालवा/स्वसुरू करा कार्यक्रम करीता विचारणार नाही."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:20
+#: libbaul-private/org.cafe.media-handling.gschema.xml:20
 msgid ""
 "List of x-content/* types where the preferred application will be launched"
 msgstr "अनुप्रयोग जेथे दाखल केली जाईल त्या x-अनुक्रम/* प्रकारांची यादी"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:21
+#: libbaul-private/org.cafe.media-handling.gschema.xml:21
 msgid ""
 "List of x-content/* types for which the user have chosen to start an "
 "application in the preference capplet. The preferred application for the "
@@ -3793,11 +3793,11 @@ msgstr ""
 "निवडलेले x-अनुक्रम/* प्रकारांची यादी. या प्रकारचे मिडीया अंतर्भूत करतेवेळी "
 "प्रविष्ट प्रकार करीता प्राधान्यकृत अनुप्रयोग."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:25
+#: libbaul-private/org.cafe.media-handling.gschema.xml:25
 msgid "List of x-content/* types set to \"Do Nothing\""
 msgstr "x-अनुक्रम/* प्रकार \"Do Nothing\" करीता निश्चित केले गेले"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:26
+#: libbaul-private/org.cafe.media-handling.gschema.xml:26
 msgid ""
 "List of x-content/* types for which the user have chosen \"Do Nothing\" in "
 "the preference capplet. No prompt will be shown nor will any matching "
@@ -3807,11 +3807,11 @@ msgstr ""
 "x-अनुक्रम/* प्रकारांची यादी. या प्रकारचे मिडीया अंतर्भूत करतेवेळी प्रॉम्पट "
 "दर्शविले जाणार नाही किंवा कुठलेही अनुप्रयोग प्रारंभ होणार नाही."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:30
+#: libbaul-private/org.cafe.media-handling.gschema.xml:30
 msgid "List of x-content/* types set to \"Open Folder\""
 msgstr "x-अनुक्रम/* प्रकार \"Open Folder\" करीता निश्चित केले गेले"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:31
+#: libbaul-private/org.cafe.media-handling.gschema.xml:31
 msgid ""
 "List of x-content/* types for which the user have chosen \"Open Folder\" in "
 "the preferences capplet. A folder window will be opened on insertion of "

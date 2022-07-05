@@ -1,34 +1,34 @@
 <schemalist>
-  <enum id="org.mate.baul.SpeedTradeoff">
+  <enum id="org.cafe.baul.SpeedTradeoff">
     <value nick="always" value="0"/>
     <value nick="local-only" value="1"/>
     <value nick="never" value="2"/>
   </enum>
 
-  <enum id="org.mate.baul.ClickPolicy">
+  <enum id="org.cafe.baul.ClickPolicy">
     <value nick="single" value="0"/>
     <value nick="double" value="1"/>
   </enum>
 
-  <enum id="org.mate.baul.ActivationChoice">
+  <enum id="org.cafe.baul.ActivationChoice">
     <value nick="launch" value="0"/>
     <value nick="display" value="1"/>
     <value nick="ask" value="2"/>
   </enum>
 
-  <enum id="org.mate.baul.FolderView">
+  <enum id="org.cafe.baul.FolderView">
     <value nick="icon-view" value="0"/>
     <value nick="compact-view" value="1"/>
     <value nick="list-view" value="2"/>
   </enum>
 
-  <enum id="org.mate.baul.DateFormat">
+  <enum id="org.cafe.baul.DateFormat">
     <value nick="locale" value="0"/>
     <value nick="iso" value="1"/>
     <value nick="informal" value="2"/>
   </enum>
 
-  <enum id="org.mate.baul.SortOrder">
+  <enum id="org.cafe.baul.SortOrder">
     <value nick="manually" value="0"/>
     <value nick="name" value="1"/>
     <value nick="directory" value="2"/>
@@ -42,7 +42,7 @@
     <value nick="extension" value="10"/>
   </enum>
 
-  <enum id="org.mate.baul.ZoomLevel">
+  <enum id="org.cafe.baul.ZoomLevel">
     <value nick="smallest" value="0"/>
     <value nick="smaller" value="1"/>
     <value nick="small" value="2"/>
@@ -52,23 +52,23 @@
     <value nick="largest" value="6"/>
   </enum>
 
-  <enum id="org.mate.baul.TabPosition">
+  <enum id="org.cafe.baul.TabPosition">
     <value nick="after-current-tab" value="0"/>
     <value nick="end" value="1"/>
   </enum>
 
-  <schema id="org.mate.baul" path="/org/mate/baul/" gettext-domain="baul">
-    <child name="preferences" schema="org.mate.baul.preferences"/>
-    <child name="icon-view" schema="org.mate.baul.icon-view"/>
-    <child name="compact-view" schema="org.mate.baul.compact-view"/>
-    <child name="list-view" schema="org.mate.baul.list-view"/>
-    <child name="sidebar-panels" schema="org.mate.baul.sidebar-panels"/>
-    <child name="desktop" schema="org.mate.baul.desktop"/>
-    <child name="window-state" schema="org.mate.baul.window-state"/>
+  <schema id="org.cafe.baul" path="/org/cafe/baul/" gettext-domain="baul">
+    <child name="preferences" schema="org.cafe.baul.preferences"/>
+    <child name="icon-view" schema="org.cafe.baul.icon-view"/>
+    <child name="compact-view" schema="org.cafe.baul.compact-view"/>
+    <child name="list-view" schema="org.cafe.baul.list-view"/>
+    <child name="sidebar-panels" schema="org.cafe.baul.sidebar-panels"/>
+    <child name="desktop" schema="org.cafe.baul.desktop"/>
+    <child name="window-state" schema="org.cafe.baul.window-state"/>
   </schema>
 
-  <schema id="org.mate.baul.preferences" path="/org/mate/baul/preferences/" gettext-domain="baul">
-    <key name="tabs-open-position" enum="org.mate.baul.TabPosition">
+  <schema id="org.cafe.baul.preferences" path="/org/cafe/baul/preferences/" gettext-domain="baul">
+    <key name="tabs-open-position" enum="org.cafe.baul.TabPosition">
       <aliases>
     <alias value='after_current_tab' target='after-current-tab'/>
       </aliases>
@@ -111,24 +111,24 @@
       <summary>Whether to enable immediate deletion</summary>
       <description>If set to true, then Baul will have a feature allowing you to delete a file immediately and in-place, instead of moving it  to the trash. This feature can be dangerous, so use caution.</description>
     </key>
-    <key name="show-icon-text" enum="org.mate.baul.SpeedTradeoff">
+    <key name="show-icon-text" enum="org.cafe.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
       <default>'local-only'</default>
       <summary>When to show preview text in icons</summary>
       <description>Speed tradeoff for when to show a preview of text file contents in the file's icon. If set to "always" then always show previews,  even if the folder is on a remote server. If set to "local-only" then only show previews for local file systems. If set to "never" then never bother to read preview data.</description>
     </key>
-    <key name="show-directory-item-counts"  enum="org.mate.baul.SpeedTradeoff">
+    <key name="show-directory-item-counts"  enum="org.cafe.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
       <default>'local-only'</default>
       <summary>When to show number of items in a folder</summary>
       <description>Speed tradeoff for when to show the number of items in a  folder. If set to "always" then always show item counts,  even if the folder is on a remote server.  If set to "local-only" then only show counts for local file systems. If set to "never" then never bother to compute item counts.</description>
     </key>
-    <key name="click-policy" enum="org.mate.baul.ClickPolicy">
+    <key name="click-policy" enum="org.cafe.baul.ClickPolicy">
       <default>'double'</default>
       <summary>Type of click used to launch/open files</summary>
       <description>Possible values are "single" to launch files on a single click,  or "double" to launch them on a double click.</description>
     </key>
-    <key name="executable-text-activation" enum="org.mate.baul.ActivationChoice">
+    <key name="executable-text-activation" enum="org.cafe.baul.ActivationChoice">
       <default>'ask'</default>
       <summary>What to do with executable text files when activated</summary>
       <description>What to do with executable text files when they are activated (single or double clicked). Possible values are "launch" to launch them as programs, "ask" to ask what to do via a dialog, and "display" to display them as text files.</description>
@@ -153,7 +153,7 @@
       <summary>Mouse button to activate the "Back" command in browser window</summary>
       <description>For users with mice that have buttons for "Forward" and "Back", this key will set which button activates the "Back" command in a browser window. Possible values range between 6 and 14.</description>
     </key>
-    <key name="show-image-thumbnails" enum="org.mate.baul.SpeedTradeoff">
+    <key name="show-image-thumbnails" enum="org.cafe.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
       <default>'local-only'</default>
       <summary>When to show thumbnails of image files</summary>
@@ -164,7 +164,7 @@
       <summary>Maximum image size for thumbnailing</summary>
       <description>Images over this size (in bytes) won't be  thumbnailed. The purpose of this setting is to  avoid thumbnailing large images that may take a long time to load or use lots of memory.</description>
     </key>
-    <key name="preview-sound" enum="org.mate.baul.SpeedTradeoff">
+    <key name="preview-sound" enum="org.cafe.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
       <default>'local-only'</default>
       <summary>Whether to preview sounds when mousing over an icon</summary>
@@ -180,7 +180,7 @@
       <summary>Show folders first in windows</summary>
       <description>If set to true, then Baul shows folders prior to showing files in the icon and list views.</description>
     </key>
-    <key name="default-sort-order" enum="org.mate.baul.SortOrder">
+    <key name="default-sort-order" enum="org.cafe.baul.SortOrder">
       <aliases>
         <alias value='modification_date' target='mtime'/>
       </aliases>
@@ -228,7 +228,7 @@
       <summary>Default Side Pane Background Filename</summary>
       <description>Uri of the default side pane background.  Only used if side_pane_background_set is true.</description>
     </key>
-    <key name="default-folder-viewer" enum="org.mate.baul.FolderView">
+    <key name="default-folder-viewer" enum="org.cafe.baul.FolderView">
       <aliases>
         <alias value='icon_view' target='icon-view'/>
         <alias value='compact_view' target='compact-view'/>
@@ -238,7 +238,7 @@
       <summary>Default folder viewer</summary>
       <description>When a folder is visited this viewer is used unless you have selected another view for that particular folder. Possible values are "list-view", "icon-view" and "compact-view".</description>
     </key>
-    <key name="date-format" enum="org.mate.baul.DateFormat">
+    <key name="date-format" enum="org.cafe.baul.DateFormat">
       <default>'locale'</default>
       <summary>Date Format</summary>
       <description>The format of file dates. Possible values are "locale", "iso", and "informal".</description>
@@ -271,7 +271,7 @@
     </key>
   </schema>
 
-  <schema id="org.mate.baul.icon-view" path="/org/mate/baul/icon-view/" gettext-domain="baul">
+  <schema id="org.cafe.baul.icon-view" path="/org/cafe/baul/icon-view/" gettext-domain="baul">
     <key name="captions" type="as">
       <default>[ 'none', 'size', 'date_modified' ]</default>
       <summary>List of possible captions on icons</summary>
@@ -291,7 +291,7 @@
       <summary>Put labels beside icons</summary>
       <description>If true, labels will be placed beside icons rather than underneath them.</description>
     </key>
-    <key name="default-zoom-level" enum="org.mate.baul.ZoomLevel">
+    <key name="default-zoom-level" enum="org.cafe.baul.ZoomLevel">
       <default>'standard'</default>
       <summary>Default icon zoom level</summary>
       <description>Default zoom level used by the icon view.</description>
@@ -326,8 +326,8 @@
     </key>
   </schema>
 
-  <schema id="org.mate.baul.compact-view" path="/org/mate/baul/compact-view/" gettext-domain="baul">
-    <key name="default-zoom-level" enum="org.mate.baul.ZoomLevel">
+  <schema id="org.cafe.baul.compact-view" path="/org/cafe/baul/compact-view/" gettext-domain="baul">
+    <key name="default-zoom-level" enum="org.cafe.baul.ZoomLevel">
       <default>'standard'</default>
       <summary>Default compact view zoom level</summary>
       <description>Default zoom level used by the compact view.</description>
@@ -339,8 +339,8 @@
     </key>
   </schema>
 
-  <schema id="org.mate.baul.list-view" path="/org/mate/baul/list-view/" gettext-domain="baul">
-    <key name="default-zoom-level" enum="org.mate.baul.ZoomLevel">
+  <schema id="org.cafe.baul.list-view" path="/org/cafe/baul/list-view/" gettext-domain="baul">
+    <key name="default-zoom-level" enum="org.cafe.baul.ZoomLevel">
       <default>'smaller'</default>
       <summary>Default list zoom level</summary>
       <description>Default zoom level used by the list view.</description>
@@ -357,11 +357,11 @@
     </key>
   </schema>
 
-  <schema id="org.mate.baul.sidebar-panels" path="/org/mate/baul/sidebar-panels/" gettext-domain="baul">
-    <child name="tree" schema="org.mate.baul.sidebar-panels.tree"/>
+  <schema id="org.cafe.baul.sidebar-panels" path="/org/cafe/baul/sidebar-panels/" gettext-domain="baul">
+    <child name="tree" schema="org.cafe.baul.sidebar-panels.tree"/>
   </schema>
 
-  <schema id="org.mate.baul.sidebar-panels.tree" path="/org/mate/baul/sidebar-panels/tree/" gettext-domain="baul">
+  <schema id="org.cafe.baul.sidebar-panels.tree" path="/org/cafe/baul/sidebar-panels/tree/" gettext-domain="baul">
     <key name="show-only-directories" type="b">
       <default>true</default>
       <summary>Only show folders in the tree side pane</summary>
@@ -369,7 +369,7 @@
     </key>
   </schema>
 
-  <schema id="org.mate.baul.desktop" path="/org/mate/baul/desktop/" gettext-domain="baul">
+  <schema id="org.cafe.baul.desktop" path="/org/cafe/baul/desktop/" gettext-domain="baul">
     <key name="font" type="s">
       <default>'Sans 10'</default>
       <summary>Desktop font</summary>
@@ -427,7 +427,7 @@
     </key>
   </schema>
 
-  <schema id="org.mate.baul.window-state" path="/org/mate/baul/window-state/" gettext-domain="baul">
+  <schema id="org.cafe.baul.window-state" path="/org/cafe/baul/window-state/" gettext-domain="baul">
     <key name="geometry" type="s">
       <default>''</default>
       <summary>The geometry string for a navigation window.</summary>
@@ -486,7 +486,7 @@
     </key>
   </schema>
 
-  <schema path="/org/mate/baul/extensions/" id="org.mate.baul.extensions" gettext-domain="baul">
+  <schema path="/org/cafe/baul/extensions/" id="org.cafe.baul.extensions" gettext-domain="baul">
     <key type="as" name="disabled-extensions">
       <default>[  ]</default>
       <summary>List of extensions in disabled state.</summary>

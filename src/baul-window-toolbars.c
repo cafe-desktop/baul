@@ -33,7 +33,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 
-#include <eel/eel-mate-extensions.h>
+#include <eel/eel-cafe-extensions.h>
 #include <eel/eel-gtk-extensions.h>
 #include <eel/eel-string.h>
 

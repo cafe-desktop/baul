@@ -44,7 +44,7 @@
 #include <eel/eel-background.h>
 #include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-mate-extensions.h>
+#include <eel/eel-cafe-extensions.h>
 #include <eel/eel-graphic-effects.h>
 #include <eel/eel-gtk-extensions.h>
 #include <eel/eel-gtk-macros.h>

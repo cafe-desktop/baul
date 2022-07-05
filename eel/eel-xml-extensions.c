@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-xml-extensions.c - functions that extend mate-xml
+/* eel-xml-extensions.c - functions that extend cafe-xml
 
    Copyright (C) 2000 Eazel, Inc.
 

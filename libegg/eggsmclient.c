@@ -52,11 +52,11 @@ static EggSMClient *global_client;
 static EggSMClientMode global_client_mode = EGG_SM_CLIENT_MODE_NORMAL;
 
 static gboolean
-running_in_mate (void)
+running_in_cafe (void)
 {
     return (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "MATE") == 0)
-        || (g_strcmp0 (g_getenv ("XDG_SESSION_DESKTOP"), "mate") == 0)
-        || (g_strcmp0 (g_getenv ("DESKTOP_SESSION"), "mate") == 0);
+        || (g_strcmp0 (g_getenv ("XDG_SESSION_DESKTOP"), "cafe") == 0)
+        || (g_strcmp0 (g_getenv ("DESKTOP_SESSION"), "cafe") == 0);
 }
 
 static void
@@ -360,7 +360,7 @@ egg_sm_client_get (void)
           as egg_sm_client_set_mode must be called prior to start of main loop
           to stop baul restart but this is diffcult in GtkApplication */
 
-		if (geteuid () == 0 || !running_in_mate ()){
+		if (geteuid () == 0 || !running_in_cafe ()){
         global_client = g_object_new (EGG_TYPE_SM_CLIENT, NULL);
         }
     }

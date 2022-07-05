@@ -292,7 +292,7 @@ fm_desktop_icon_view_dispose (GObject *object)
                                           font_changed_callback,
                                           icon_view);
 
-    g_signal_handlers_disconnect_by_func (mate_lockdown_preferences,
+    g_signal_handlers_disconnect_by_func (cafe_lockdown_preferences,
                                           fm_directory_view_update_menus,
                                           icon_view);
     g_signal_handlers_disconnect_by_func (baul_preferences,
@@ -631,7 +631,7 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 
     fm_desktop_icon_view_update_icon_container_fonts (desktop_icon_view);
 
-    g_signal_connect_swapped (mate_lockdown_preferences,
+    g_signal_connect_swapped (cafe_lockdown_preferences,
                               "changed::" BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE,
                               G_CALLBACK (fm_directory_view_update_menus),
                               desktop_icon_view);
@@ -648,8 +648,8 @@ action_new_launcher_callback (GtkAction *action, gpointer data)
     desktop_directory = baul_get_desktop_directory ();
 
     baul_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (data)),
-                                          "mate-desktop-item-edit",
-                                          "mate-desktop-item-edit",
+                                          "cafe-desktop-item-edit",
+                                          "cafe-desktop-item-edit",
                                           FALSE,
                                           "--create-new", desktop_directory, NULL);
     g_free (desktop_directory);
@@ -664,7 +664,7 @@ action_change_background_callback (GtkAction *action,
 
     baul_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (data)),
                                           _("Background"),
-                                          "mate-appearance-properties",
+                                          "cafe-appearance-properties",
                                           FALSE,
                                           "--show-page=background", NULL);
 }
@@ -726,7 +726,7 @@ real_update_menus (FMDirectoryView *view)
     desktop_view = FM_DESKTOP_ICON_VIEW (view);
 
     /* New Launcher */
-    disable_command_line = g_settings_get_boolean (mate_lockdown_preferences, BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE);
+    disable_command_line = g_settings_get_boolean (cafe_lockdown_preferences, BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = gtk_action_group_get_action (desktop_view->priv->desktop_action_group,
                                           FM_ACTION_NEW_LAUNCHER_DESKTOP);

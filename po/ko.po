@@ -15,11 +15,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: baul 1.23.2\n"
-"Report-Msgid-Bugs-To: https://mate-desktop.org\n"
+"Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
 "POT-Creation-Date: 2020-01-10 11:11+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
-"Language-Team: Korean (https://www.transifex.com/mate/teams/13566/ko/)\n"
+"Language-Team: Korean (https://www.transifex.com/cafe/teams/13566/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -426,23 +426,23 @@ msgstr ""
 msgid "Saved search"
 msgstr "저장된 검색 결과"
 
-#: data/mate-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
+#: data/cafe-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
 msgid "Network"
 msgstr "네트워크"
 
-#: data/mate-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
 msgid "Browse bookmarked and local network locations"
 msgstr "저장된 네트워크와 로컬 네트워크를 살펴봅니다"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon
 #. file name)!
-#: data/mate-network-scheme.desktop.in.in:11
+#: data/cafe-network-scheme.desktop.in.in:11
 msgid "network-workgroup"
 msgstr ""
 
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
-#: data/mate-network-scheme.desktop.in.in:14
+#: data/cafe-network-scheme.desktop.in.in:14
 msgid "bookmarks;browse;local;network;locations;MATE;"
 msgstr ""
 
@@ -1404,8 +1404,8 @@ msgstr[0] "%'d 시간"
 
 #: libbaul-private/baul-file-operations.c:330
 #, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
+msgid "approxicafely %'d hour"
+msgid_plural "approxicafely %'d hours"
 msgstr[0] "약 %'d 시간"
 
 #: libbaul-private/baul-file-operations.c:410
@@ -2839,11 +2839,11 @@ msgid "Redo change owner of %d item"
 msgid_plural "Redo change owner of %d items"
 msgstr[0] "항목 %d개 소유자 변경 재실행"
 
-#: libbaul-private/org.mate.baul.gschema.xml:76
+#: libbaul-private/org.cafe.baul.gschema.xml:76
 msgid "Where to position newly open tabs in browser windows."
 msgstr "브라우져 창에서 새 탭이 열릴 위치입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:77
+#: libbaul-private/org.cafe.baul.gschema.xml:77
 msgid ""
 "If set to \"after-current-tab\", then new tabs are inserted after the "
 "current tab. If set to \"end\", then new tabs are appended to the end of the"
@@ -2852,21 +2852,21 @@ msgstr ""
 "\"after-current-tab\"을 설정하면, 현재 탭 다음에 삽입 탭이 들어가고, \"end\"로 설정하면, 새 탭은 탭 목록의 "
 "마지막에 붙습니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:81
+#: libbaul-private/org.cafe.baul.gschema.xml:81
 msgid "Switch tabs with [ctrl] + [tab]"
 msgstr "[ctrl] + [tab]으로 탭 전환"
 
-#: libbaul-private/org.mate.baul.gschema.xml:82
+#: libbaul-private/org.cafe.baul.gschema.xml:82
 msgid ""
 "If true, it enables the ability to switch tabs using [ctrl + tab] and [ctrl "
 "+ shift + tab]."
 msgstr "참 값이면, [ctrl + tab] 과 [ctrl + shift + tab]을 이용해서 탭을 바꿀 수 있게 합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:86
+#: libbaul-private/org.cafe.baul.gschema.xml:86
 msgid "Baul will exit when last window destroyed."
 msgstr "마지막 창을 닫으면 카하가 끝납니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:87
+#: libbaul-private/org.cafe.baul.gschema.xml:87
 msgid ""
 "If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
@@ -2875,11 +2875,11 @@ msgstr ""
 "참으로 설정하면, 모든 창을 닫으면 카하가 끝납니다. 이 설정은 기본값입니다. 거짓으로 설정할 경우, 창이 없어도 카하는 미디어 자동 "
 "마운트 따위의 작업을 하는 데몬으로 동작합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:91
+#: libbaul-private/org.cafe.baul.gschema.xml:91
 msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr "전통적인 카하 방식을 사용합니다.  따라서 모든 창이 탐색기가 됩니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:92
+#: libbaul-private/org.cafe.baul.gschema.xml:92
 msgid ""
 "If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
@@ -2888,52 +2888,52 @@ msgstr ""
 "참으로 설정하면, 모든 카하 창아 브라우저로 바뀝니다. 노틸러스가 2.6 버전 이전에 어떻게 사용했는가에 대한 것이며, 어떤 사용자는 이"
 " 기능을 선호합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:96
+#: libbaul-private/org.cafe.baul.gschema.xml:96
 msgid "Always use the location entry, instead of the pathbar"
 msgstr "경로 표시줄 대신에 위치 표시줄을 항상 씁니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:97
+#: libbaul-private/org.cafe.baul.gschema.xml:97
 msgid ""
 "If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
 msgstr "참으로 설정하면 카하 찾아보기 창은 항상 위치 도구 모음에 경로 표시줄 대신 입력 항목을 사용하도록 합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:101
+#: libbaul-private/org.cafe.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
 msgstr "파일을 휴지통에 넣을 때 확인 질문을 할 것인지 여부"
 
-#: libbaul-private/org.mate.baul.gschema.xml:102
+#: libbaul-private/org.cafe.baul.gschema.xml:102
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
 msgstr "참으로 설정하면, 카하에서 파일을 휴지통에 버릴 때 확인 질문을 합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:106
+#: libbaul-private/org.cafe.baul.gschema.xml:106
 msgid "Whether to ask for confirmation when moving files to the Trash"
 msgstr "파일을 휴지통으로 보낼 때 확인 여부를 물을지 결정합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:107
+#: libbaul-private/org.cafe.baul.gschema.xml:107
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
 msgstr "참으로 설정하면 휴지통으로 파일을 보내려 하면 카하가 확인 여부를 물을 겁니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:111
+#: libbaul-private/org.cafe.baul.gschema.xml:111
 msgid "Whether to enable immediate deletion"
 msgstr "즉시 삭제를 사용할지 여부"
 
-#: libbaul-private/org.mate.baul.gschema.xml:112
+#: libbaul-private/org.cafe.baul.gschema.xml:112
 msgid ""
 "If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
 "can be dangerous, so use caution."
 msgstr "참으로 설정하면, 카하에서 파일을 즉시 지울 수 있습니다. 휴지통으로 옮기지 않습니다. 이 기능은 위험하므로, 주의하십시오."
 
-#: libbaul-private/org.mate.baul.gschema.xml:117
+#: libbaul-private/org.cafe.baul.gschema.xml:117
 msgid "When to show preview text in icons"
 msgstr "아이콘에 미리 보기 텍스트를 보여줄 때"
 
-#: libbaul-private/org.mate.baul.gschema.xml:118
+#: libbaul-private/org.cafe.baul.gschema.xml:118
 msgid ""
 "Speed tradeoff for when to show a preview of text file contents in the "
 "file's icon. If set to \"always\" then always show previews, even if the "
@@ -2945,11 +2945,11 @@ msgstr ""
 "있다 하더라도 항상 미리 보기를 보여줍니다.  \"local-only\"를 설정하면 로컬 파일 시스템의 파일만 미리 보기를 보여줍니다. "
 "\"never\"로 설정하면 미리 보기 데이터를 읽느라 귀찮게 하지 않습니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:123
+#: libbaul-private/org.cafe.baul.gschema.xml:123
 msgid "When to show number of items in a folder"
 msgstr "언제 디렉토리 안에 항목의 개수를 보여줄 지"
 
-#: libbaul-private/org.mate.baul.gschema.xml:124
+#: libbaul-private/org.cafe.baul.gschema.xml:124
 msgid ""
 "Speed tradeoff for when to show the number of items in a folder. If set to "
 "\"always\" then always show item counts, even if the folder is on a remote "
@@ -2960,21 +2960,21 @@ msgstr ""
 "셉니다. \"local-only\"로 설정하면 로컬 파일 시스템의 항목 갯수만 표시합니다. \"never\"로 설정하면 항목 갯수를 "
 "계산하느라 귀찮게 하지 않습니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:128
+#: libbaul-private/org.cafe.baul.gschema.xml:128
 msgid "Type of click used to launch/open files"
 msgstr "파일을 실행하거나 열 때 쓰는 누르기 방법"
 
-#: libbaul-private/org.mate.baul.gschema.xml:129
+#: libbaul-private/org.cafe.baul.gschema.xml:129
 msgid ""
 "Possible values are \"single\" to launch files on a single click, or "
 "\"double\" to launch them on a double click."
 msgstr "가능한 값으로, \"single\"은 한 번 누르면 파일을 실행하고, \"double\"은 두 번 눌러야 실행합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:133
+#: libbaul-private/org.cafe.baul.gschema.xml:133
 msgid "What to do with executable text files when activated"
 msgstr "실행 가능 텍스트 파일을 눌렀을 때 어떻게 할 지"
 
-#: libbaul-private/org.mate.baul.gschema.xml:134
+#: libbaul-private/org.cafe.baul.gschema.xml:134
 msgid ""
 "What to do with executable text files when they are activated (single or "
 "double clicked). Possible values are \"launch\" to launch them as programs, "
@@ -2984,31 +2984,31 @@ msgstr ""
 "실행 가능한 텍스트 파일을(한 번 혹은 두 번 눌러) 활성화했을 때 어떻게 할지 정합니다. 가능한 값으로, \"launch\"는 "
 "프로그램으로 실행하고, \"ask\"는 대화 상자에서 물어보고, \"display\"는 텍스트 파일로 표시합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:138
+#: libbaul-private/org.cafe.baul.gschema.xml:138
 msgid "Show the package installer for unknown MIME types"
 msgstr "알 수 없는 MIME 타입에 대해 패키지 설치 프로그램을 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:139
+#: libbaul-private/org.cafe.baul.gschema.xml:139
 msgid ""
 "Whether to show the user a package installer dialog in case an unknown MIME "
 "type is opened, in order to search for an application to handle it."
 msgstr "알 수 없는 MIME 종류를 열면 처리할 수 있는 프로그램을 찾아볼 수 있도록 패키지 설치 창을 표시할지 여부."
 
-#: libbaul-private/org.mate.baul.gschema.xml:143
+#: libbaul-private/org.cafe.baul.gschema.xml:143
 msgid "Use extra mouse button events in Baul' browser window"
 msgstr "카하 브라우져 창에서 추가 마우스 단추 이벤트를 사용"
 
-#: libbaul-private/org.mate.baul.gschema.xml:144
+#: libbaul-private/org.cafe.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
 "will determine if any action is taken inside of Baul when either is pressed."
 msgstr "\"앞으로\" 및 \"뒤로\" 단추가 있는 마우스 사용자의 경우, 이 키에 따라 이 단추를 눌렀을 때 카하에서 해당 동작을 합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:148
+#: libbaul-private/org.cafe.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
 msgstr "브라우저 창에서 \"앞으로\" 명령이 동작할 마우스 단추."
 
-#: libbaul-private/org.mate.baul.gschema.xml:149
+#: libbaul-private/org.cafe.baul.gschema.xml:149
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Forward\" command in a browser "
@@ -3017,11 +3017,11 @@ msgstr ""
 "\"앞으로\" 및 \"뒤로\" 단추가 있는 마우스 사용자의 경우, 이 키는 \"앞으로\" 명령이 동작하는 단추를 지정합니다. 가능한 값은"
 " 6에서 14 사이입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:153
+#: libbaul-private/org.cafe.baul.gschema.xml:153
 msgid "Mouse button to activate the \"Back\" command in browser window"
 msgstr "브라우저 창에서 \"뒤로\" 명령이 동작할 마우스 단추."
 
-#: libbaul-private/org.mate.baul.gschema.xml:154
+#: libbaul-private/org.cafe.baul.gschema.xml:154
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Back\" command in a browser window. "
@@ -3030,11 +3030,11 @@ msgstr ""
 "\"앞으로\" 및 \"뒤로\" 단추가 있는 마우스 사용자의 경우, 이 키는 \"뒤로\" 명령이 동작하는 단추를 지정합니다. 가능한 값은 "
 "6에서 14 사이입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:159
+#: libbaul-private/org.cafe.baul.gschema.xml:159
 msgid "When to show thumbnails of image files"
 msgstr "그림 파일의 썸네일을 보여줄 때"
 
-#: libbaul-private/org.mate.baul.gschema.xml:160
+#: libbaul-private/org.cafe.baul.gschema.xml:160
 msgid ""
 "Speed tradeoff for when to show an image file as a thumbnail. If set to "
 "\"always\" then always thumbnail, even if the folder is on a remote server. "
@@ -3046,11 +3046,11 @@ msgstr ""
 "미리 보기를 표시합니다. \"local-only\"로 설정하면 로컬 파일 시스템에 대해서만 미리 보기를 표시합니다. \"never\"로 "
 "설정하면 이미지를 미리 보게 하느라 귀찮게 하지 않고, 일반 아이콘을 사용합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:164
+#: libbaul-private/org.cafe.baul.gschema.xml:164
 msgid "Maximum image size for thumbnailing"
 msgstr "썸네일을 만들 그림의 최대 크기"
 
-#: libbaul-private/org.mate.baul.gschema.xml:165
+#: libbaul-private/org.cafe.baul.gschema.xml:165
 msgid ""
 "Images over this size (in bytes) won't be thumbnailed. The purpose of this "
 "setting is to avoid thumbnailing large images that may take a long time to "
@@ -3059,11 +3059,11 @@ msgstr ""
 "이 크기(바이트 단위)보다 큰 그림은 썸네일을 만들지 않습니다. 이 설정의 목적은 큰 그림을 썸네일로 만들면 시간이 많이 걸리고 메모리를"
 " 많이 쓰기 때문입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:170
+#: libbaul-private/org.cafe.baul.gschema.xml:170
 msgid "Whether to preview sounds when mousing over an icon"
 msgstr "마우스를 아이콘 위에 올려 놓을 때 사운드를 미리 들을 지 여부"
 
-#: libbaul-private/org.mate.baul.gschema.xml:171
+#: libbaul-private/org.cafe.baul.gschema.xml:171
 msgid ""
 "Speed tradeoff for when to preview a sound file when mousing over a files "
 "icon. If set to \"always\" then always plays the sound, even if the file is "
@@ -3074,31 +3074,31 @@ msgstr ""
 "파일이 원격 서버에 있어도 언제든 노래를 재생합니다. \"local-only\"로 설정하면 로컬 파일 시스템에 있는 파일만 미리 듣기 "
 "재생을 수행합니다. \"never\"로 설정하면 음악을 미리 듣지 않습니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:175
+#: libbaul-private/org.cafe.baul.gschema.xml:175
 msgid "Show advanced permissions in the file property dialog"
 msgstr "파일 속성 대화 상자에서 고급 권한을 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:176
+#: libbaul-private/org.cafe.baul.gschema.xml:176
 msgid ""
 "If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
 msgstr "참으로 설정하면, 카하에서 파일 권한을 더욱 유닉스 방식으로 괴상한 옵션까지 편집하고 표시할 수 있습니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:180
+#: libbaul-private/org.cafe.baul.gschema.xml:180
 msgid "Show folders first in windows"
 msgstr "창에서 폴더를 먼저 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:181
+#: libbaul-private/org.cafe.baul.gschema.xml:181
 msgid ""
 "If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
 msgstr "참으로 설정하면, 카하의 아이콘 뷰와 목록 뷰에서 폴더를 파일보다 먼저 보여 줍니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:188
+#: libbaul-private/org.cafe.baul.gschema.xml:188
 msgid "Default sort order"
 msgstr "기본 정렬 순서"
 
-#: libbaul-private/org.mate.baul.gschema.xml:189
+#: libbaul-private/org.cafe.baul.gschema.xml:189
 msgid ""
 "The default sort-order for items in the icon view. Possible values are "
 "\"name\", \"size\", \"type\", \"mtime\", and \"emblems\"."
@@ -3106,11 +3106,11 @@ msgstr ""
 "아이콘 보기 상태의 항목의 기본 정렬 순서입니다. 가능한 값은 \"name\", \"size\", \"type\", \"mtime\", "
 "\"emblems\" 입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:193
+#: libbaul-private/org.cafe.baul.gschema.xml:193
 msgid "Reverse sort order in new windows"
 msgstr "새 창에서 정렬 순서 거꾸로"
 
-#: libbaul-private/org.mate.baul.gschema.xml:194
+#: libbaul-private/org.cafe.baul.gschema.xml:194
 msgid ""
 "If true, files in new windows will be sorted in reverse order. ie, if sorted"
 " by name, then instead of sorting the files from \"a\" to \"z\", they will "
@@ -3120,77 +3120,77 @@ msgstr ""
 "참이면, 새 창에서 파일을 반대로 정렬합니다. 즉, 이름으로 정렬할 경우에 \"a\"부터 \"z\" 순서로 정렬하는 게 아니라 "
 "\"z\"에서 \"a\" 순서로 정렬합니다; 크기 순서대로 정렬하면 오름차 순이 아니라 내림차 순으로 정렬합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:198
+#: libbaul-private/org.cafe.baul.gschema.xml:198
 msgid "Baul uses the users home folder as the desktop"
 msgstr "카하에서 사용자의 홈 폴더를 바탕 화면으로 사용합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:199
+#: libbaul-private/org.cafe.baul.gschema.xml:199
 msgid ""
 "If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
 "참으로 설정하면, 카하에서 사용자의 홈 폴더를 배경 화면으로 사용합니다. 거짓이면 ~/Desktop을 배경 화면으로 사용합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:203
+#: libbaul-private/org.cafe.baul.gschema.xml:203
 msgid "Custom Background"
 msgstr "사용자 지정 배경"
 
-#: libbaul-private/org.mate.baul.gschema.xml:204
+#: libbaul-private/org.cafe.baul.gschema.xml:204
 msgid "Whether a custom default folder background has been set."
 msgstr "사용자 지정 폴더 배경 그림을 설정할지 여부."
 
-#: libbaul-private/org.mate.baul.gschema.xml:208
+#: libbaul-private/org.cafe.baul.gschema.xml:208
 msgid "Default Background Color"
 msgstr "기본 배경색"
 
-#: libbaul-private/org.mate.baul.gschema.xml:209
+#: libbaul-private/org.cafe.baul.gschema.xml:209
 msgid ""
 "Color for the default folder background. Only used if background_set is "
 "true."
 msgstr "기본 폴더의 배경 색. background_set이 참일 경우에만 사용합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:213
+#: libbaul-private/org.cafe.baul.gschema.xml:213
 msgid "Default Background Filename"
 msgstr "기본 배경 파일 이름"
 
-#: libbaul-private/org.mate.baul.gschema.xml:214
+#: libbaul-private/org.cafe.baul.gschema.xml:214
 msgid ""
 "Uri of the default folder background. Only used if background_set is true."
 msgstr "기본 폴더 배경의 URI입니다. background_set 값이 참일때만 사용합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:218
+#: libbaul-private/org.cafe.baul.gschema.xml:218
 msgid "Custom Side Pane Background Set"
 msgstr "사용자 지정 가장자리 창 배경 모음"
 
-#: libbaul-private/org.mate.baul.gschema.xml:219
+#: libbaul-private/org.cafe.baul.gschema.xml:219
 msgid "Whether a custom default side pane background has been set."
 msgstr "사용자 지정 기본 가장자리 창 배경 그림을 설정할지 여부."
 
-#: libbaul-private/org.mate.baul.gschema.xml:223
+#: libbaul-private/org.cafe.baul.gschema.xml:223
 msgid "Default Side Pane Background Color"
 msgstr "기본 가장자리 창 배경색"
 
-#: libbaul-private/org.mate.baul.gschema.xml:224
+#: libbaul-private/org.cafe.baul.gschema.xml:224
 msgid ""
 "Filename for the default side pane background. Only used if "
 "side_pane_background_set is true."
 msgstr "기본 가장자리 창의 배경 그림 파일 이름. side_pane_background_set이 참일 경우에만 사용합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:228
+#: libbaul-private/org.cafe.baul.gschema.xml:228
 msgid "Default Side Pane Background Filename"
 msgstr "기본 가장자리 창 배경 파일 이름"
 
-#: libbaul-private/org.mate.baul.gschema.xml:229
+#: libbaul-private/org.cafe.baul.gschema.xml:229
 msgid ""
 "Uri of the default side pane background. Only used if "
 "side_pane_background_set is true."
 msgstr "기본 가장자리 창 배경의 URI입니다. side_pane_background_set이 참일때만 사용합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:238
+#: libbaul-private/org.cafe.baul.gschema.xml:238
 msgid "Default folder viewer"
 msgstr "기본 폴더 뷰어"
 
-#: libbaul-private/org.mate.baul.gschema.xml:239
+#: libbaul-private/org.cafe.baul.gschema.xml:239
 msgid ""
 "When a folder is visited this viewer is used unless you have selected "
 "another view for that particular folder. Possible values are \"list-view\", "
@@ -3199,21 +3199,21 @@ msgstr ""
 "폴더를 방문하면 보기 프로그램은 각각의 폴더에 대한 다른 보기를 선택하기 전에는 해당 뷰 모양새를 사용합니다. 가능한 값은 \"list-"
 "view\", \"icon-view\", \"compact-view\" 입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:243
+#: libbaul-private/org.cafe.baul.gschema.xml:243
 msgid "Date Format"
 msgstr "데이터 형식"
 
-#: libbaul-private/org.mate.baul.gschema.xml:244
+#: libbaul-private/org.cafe.baul.gschema.xml:244
 msgid ""
 "The format of file dates. Possible values are \"locale\", \"iso\", and "
 "\"informal\"."
 msgstr "파일 날짜의 형식. 가능한 값은 \"locale\", \"iso\", \"informal\"입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:248
+#: libbaul-private/org.cafe.baul.gschema.xml:248
 msgid "Whether to show hidden files"
 msgstr "숨김 파일을 보여 줄 것인지 여부"
 
-#: libbaul-private/org.mate.baul.gschema.xml:249
+#: libbaul-private/org.cafe.baul.gschema.xml:249
 msgid ""
 "If set to true, then hidden files are shown by default in the file manager. "
 "Hidden files are either dotfiles or listed in the folder's .hidden file."
@@ -3221,47 +3221,47 @@ msgstr ""
 "참으로 설정하면, 파일 관리자에서 숨겨진 파일이 기본으로 보입니다. 숨겨진 파일은 dotfile이거나 폴더에 .hidden 파일로 "
 "나옵니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:253
+#: libbaul-private/org.cafe.baul.gschema.xml:253
 msgid "Whether to show backup files"
 msgstr "백업 파일을 보여 줄 것인지 여부"
 
-#: libbaul-private/org.mate.baul.gschema.xml:254
+#: libbaul-private/org.cafe.baul.gschema.xml:254
 msgid ""
 "If set to true, then backup files are shown by default in the file manager. "
 "Backup files are backup files ending with a tilde (~)."
 msgstr "참으로 설정하면, 파일 관리자에서 백업 파일이 기본으로 보입니다. 백업 파일은 백업 파일용 물결 표시(~)로 끝납니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:259
+#: libbaul-private/org.cafe.baul.gschema.xml:259
 msgid "Whether to show file sizes with IEC units"
 msgstr "IEC 단위로 파일 크기 볼지 여부"
 
-#: libbaul-private/org.mate.baul.gschema.xml:260
+#: libbaul-private/org.cafe.baul.gschema.xml:260
 msgid ""
 "If set to true, file sizes are shown using IEC (base 1024) units with "
 "\"KiB\" style suffixes, instead of default with SI units."
 msgstr "참으로 설정하면, 파일 크기는 기본 SI 단위 대신, \" KiB\"방식 접미사가 붙는(1024 기반) IEC 단위로 나타납니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:264
+#: libbaul-private/org.cafe.baul.gschema.xml:264
 msgid "Whether to show icons in list view"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:265
+#: libbaul-private/org.cafe.baul.gschema.xml:265
 msgid "If set to true, show file icons in list view."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:269
+#: libbaul-private/org.cafe.baul.gschema.xml:269
 msgid "Whether to show desktop notifications"
 msgstr "바탕화면 알림 표시 여부"
 
-#: libbaul-private/org.mate.baul.gschema.xml:270
+#: libbaul-private/org.cafe.baul.gschema.xml:270
 msgid "If set to true, Baul will show desktop notifications."
 msgstr "참으로 설정하면, 카하가 바탕화면에 알림을 표시할 겁니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:277
+#: libbaul-private/org.cafe.baul.gschema.xml:277
 msgid "List of possible captions on icons"
 msgstr "아이콘의 표시가능 캡션 목록"
 
-#: libbaul-private/org.mate.baul.gschema.xml:278
+#: libbaul-private/org.cafe.baul.gschema.xml:278
 msgid ""
 "A list of captions below an icon in the icon view and the desktop. The "
 "actual number of captions shown depends on the zoom level. Some possible "
@@ -3274,45 +3274,45 @@ msgstr ""
 "\"owner\", \"group\", \"permissions\", \"octal_permissions\", \"mime_type\"이"
 " 있습니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:286
+#: libbaul-private/org.cafe.baul.gschema.xml:286
 msgid "Use tighter layout in new windows"
 msgstr "새 창에서 빈틈없는 배치 사용"
 
-#: libbaul-private/org.mate.baul.gschema.xml:287
+#: libbaul-private/org.cafe.baul.gschema.xml:287
 msgid "If true, icons will be laid out tighter by default in new windows."
 msgstr "참이면, 새 창에서 기본적으로 아이콘을 빈틈없이 배치합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:291
+#: libbaul-private/org.cafe.baul.gschema.xml:291
 msgid "Put labels beside icons"
 msgstr "아이콘 옆에 레이블 쓰기"
 
-#: libbaul-private/org.mate.baul.gschema.xml:292
+#: libbaul-private/org.cafe.baul.gschema.xml:292
 msgid ""
 "If true, labels will be placed beside icons rather than underneath them."
 msgstr "참이면, 레이블을 아이콘 아래가 아니라 옆에 놓습니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:296
+#: libbaul-private/org.cafe.baul.gschema.xml:296
 msgid "Default icon zoom level"
 msgstr "기본 아이콘 확대 수준"
 
-#: libbaul-private/org.mate.baul.gschema.xml:297
+#: libbaul-private/org.cafe.baul.gschema.xml:297
 msgid "Default zoom level used by the icon view."
 msgstr "아이콘 보기의 기본 확대 수준입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:301
+#: libbaul-private/org.cafe.baul.gschema.xml:301
 msgid "Default Thumbnail Icon Size"
 msgstr "기본 썸네일 아이콘 크기"
 
-#: libbaul-private/org.mate.baul.gschema.xml:302
+#: libbaul-private/org.cafe.baul.gschema.xml:302
 msgid "The default size of an icon for a thumbnail in the icon view."
 msgstr "아이콘 보기에 있는 썸네일의 기본 아이콘 크기입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:306
-#: libbaul-private/org.mate.baul.gschema.xml:425
+#: libbaul-private/org.cafe.baul.gschema.xml:306
+#: libbaul-private/org.cafe.baul.gschema.xml:425
 msgid "Text Ellipsis Limit"
 msgstr "글줄임표 제한"
 
-#: libbaul-private/org.mate.baul.gschema.xml:307
+#: libbaul-private/org.cafe.baul.gschema.xml:307
 msgid ""
 "A string specifying how parts of overlong file names should be replaced by "
 "ellipses, depending on the zoom level. Each of the list entries is of the "
@@ -3338,157 +3338,157 @@ msgstr ""
 "(50%), small (66%), standard (100%), large (150%), larger (200%), largest "
 "(400%)"
 
-#: libbaul-private/org.mate.baul.gschema.xml:332
+#: libbaul-private/org.cafe.baul.gschema.xml:332
 msgid "Default compact view zoom level"
 msgstr "기본 간략히 확대 수준"
 
-#: libbaul-private/org.mate.baul.gschema.xml:333
+#: libbaul-private/org.cafe.baul.gschema.xml:333
 msgid "Default zoom level used by the compact view."
 msgstr "간략히 보기의 기본 확대 수준입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:337
+#: libbaul-private/org.cafe.baul.gschema.xml:337
 msgid "All columns have same width"
 msgstr "모든 열의 너비가 같습니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:338
+#: libbaul-private/org.cafe.baul.gschema.xml:338
 msgid ""
 "If this preference is set, all columns in the compact view have the same "
 "width. Otherwise, the width of each column is determined seperately."
 msgstr "이 설정이 참이면, 간략히 보기에서 모든 열의 너비가 같습니다. 참이 아니면, 각 열의 너비는 열마다 별도로 결정됩니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:345
+#: libbaul-private/org.cafe.baul.gschema.xml:345
 msgid "Default list zoom level"
 msgstr "기본 목록 확대 수준"
 
-#: libbaul-private/org.mate.baul.gschema.xml:346
+#: libbaul-private/org.cafe.baul.gschema.xml:346
 msgid "Default zoom level used by the list view."
 msgstr "목록 보기의 기본 확대 수준입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:350
+#: libbaul-private/org.cafe.baul.gschema.xml:350
 msgid "Default list of columns visible in the list view"
 msgstr "목록 보기에서 표시할 열 목록 기본값"
 
-#: libbaul-private/org.mate.baul.gschema.xml:351
+#: libbaul-private/org.cafe.baul.gschema.xml:351
 msgid "Default list of columns visible in the list view."
 msgstr "목록 보기에서 표시할 열 목록 기본값."
 
-#: libbaul-private/org.mate.baul.gschema.xml:355
+#: libbaul-private/org.cafe.baul.gschema.xml:355
 msgid "Default column order in the list view"
 msgstr "목록 보기에서 열 순서 기본값"
 
-#: libbaul-private/org.mate.baul.gschema.xml:356
+#: libbaul-private/org.cafe.baul.gschema.xml:356
 msgid "Default column order in the list view."
 msgstr "목록 보기에서 열 순서 기본값."
 
-#: libbaul-private/org.mate.baul.gschema.xml:367
+#: libbaul-private/org.cafe.baul.gschema.xml:367
 msgid "Only show folders in the tree side pane"
 msgstr "폴더보기 가장자리 창에 폴더만 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:368
+#: libbaul-private/org.cafe.baul.gschema.xml:368
 msgid ""
 "If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
 msgstr "참으로 설정하면, 폴더 가장자리 창에서 폴더만 표시합니다. 아니면, 폴더와 파일을 모두 표시합니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:375
+#: libbaul-private/org.cafe.baul.gschema.xml:375
 msgid "Desktop font"
 msgstr "바탕 화면 글꼴"
 
-#: libbaul-private/org.mate.baul.gschema.xml:376
+#: libbaul-private/org.cafe.baul.gschema.xml:376
 msgid "The font description used for the icons on the desktop."
 msgstr "데스크톱의 아이콘에 사용하는 글꼴 설명입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:380
+#: libbaul-private/org.cafe.baul.gschema.xml:380
 msgid "Home icon visible on desktop"
 msgstr "바탕 화면에 홈 아이콘을 보입니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:381
+#: libbaul-private/org.cafe.baul.gschema.xml:381
 msgid ""
 "If this is set to true, an icon linking to the home folder will be put on "
 "the desktop."
 msgstr "참으로 설정하면, 홈 폴더 아이콘을 바탕 화면에 만듭니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:385
+#: libbaul-private/org.cafe.baul.gschema.xml:385
 msgid "Computer icon visible on desktop"
 msgstr "바탕 화면에 컴퓨터 아이콘을 보입니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:386
+#: libbaul-private/org.cafe.baul.gschema.xml:386
 msgid ""
 "If this is set to true, an icon linking to the computer location will be put"
 " on the desktop."
 msgstr "참으로 설정하면, 컴퓨터 아이콘을 바탕 화면에 만듭니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:390
+#: libbaul-private/org.cafe.baul.gschema.xml:390
 msgid "Trash icon visible on desktop"
 msgstr "바탕 화면에 휴지통을 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:391
+#: libbaul-private/org.cafe.baul.gschema.xml:391
 msgid ""
 "If this is set to true, an icon linking to the trash will be put on the "
 "desktop."
 msgstr "참으로 설정하면, 휴지통 아이콘을 바탕 화면에 만듭니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:395
+#: libbaul-private/org.cafe.baul.gschema.xml:395
 msgid "Show mounted volumes on the desktop"
 msgstr "바탕 화면에 마운트한 볼륨을 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:396
+#: libbaul-private/org.cafe.baul.gschema.xml:396
 msgid ""
 "If this is set to true, icons linking to mounted volumes will be put on the "
 "desktop."
 msgstr "참으로 설정하면, 마운트한 볼륨에 연결된 아이콘을 바탕 화면에 만듭니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:400
+#: libbaul-private/org.cafe.baul.gschema.xml:400
 msgid "Network Servers icon visible on the desktop"
 msgstr "바탕 화면에 네트워크 서버 아이콘을 보입니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:401
+#: libbaul-private/org.cafe.baul.gschema.xml:401
 msgid ""
 "If this is set to true, an icon linking to the Network Servers view will be "
 "put on the desktop."
 msgstr "참으로 설정하면, 네트워크 아이콘을 바탕 화면에 만듭니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:405
+#: libbaul-private/org.cafe.baul.gschema.xml:405
 msgid "Desktop computer icon name"
 msgstr "바탕 화면 컴퓨터 아이콘 이름"
 
-#: libbaul-private/org.mate.baul.gschema.xml:406
+#: libbaul-private/org.cafe.baul.gschema.xml:406
 msgid ""
 "This name can be set if you want a custom name for the computer icon on the "
 "desktop."
 msgstr "바탕 화면의 컴퓨터 아이콘의 이름을 직접 지정하려면 여기서 설정하면 됩니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:410
+#: libbaul-private/org.cafe.baul.gschema.xml:410
 msgid "Desktop home icon name"
 msgstr "바탕 화면 홈 아이콘 이름"
 
-#: libbaul-private/org.mate.baul.gschema.xml:411
+#: libbaul-private/org.cafe.baul.gschema.xml:411
 msgid ""
 "This name can be set if you want a custom name for the home icon on the "
 "desktop."
 msgstr "바탕 화면의 홈 아이콘의 이름을 직접 지정하려면 여기서 설정하면 됩니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:415
+#: libbaul-private/org.cafe.baul.gschema.xml:415
 msgid "Desktop trash icon name"
 msgstr "바탕 화면 휴지통 아이콘 이름"
 
-#: libbaul-private/org.mate.baul.gschema.xml:416
+#: libbaul-private/org.cafe.baul.gschema.xml:416
 msgid ""
 "This name can be set if you want a custom name for the trash icon on the "
 "desktop."
 msgstr "바탕 화면의 휴지통 아이콘의 이름을 직접 지정하려면 여기서 설정하면 됩니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:420
+#: libbaul-private/org.cafe.baul.gschema.xml:420
 msgid "Network servers icon name"
 msgstr "네트워크 서버 아이콘 이름"
 
-#: libbaul-private/org.mate.baul.gschema.xml:421
+#: libbaul-private/org.cafe.baul.gschema.xml:421
 msgid ""
 "This name can be set if you want a custom name for the network servers icon "
 "on the desktop."
 msgstr "바탕 화면의 네트워크 서버 아이콘의 이름을 직접 지정하려면 여기서 설정하면 됩니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:426
+#: libbaul-private/org.cafe.baul.gschema.xml:426
 msgid ""
 "An integer specifying how parts of overlong file names should be replaced by"
 " ellipses on the desktop. If the number is larger than 0, the file name will"
@@ -3498,96 +3498,96 @@ msgstr ""
 "바탕 화면에서 매우 긴 파일 이름의 일부분을 말줄임표로 바꾸도록 지정하는 정수값. 0보다 크면 파일 이름은 지정한 값까지 줄을 "
 "사용합니다. 0보다 작으면 표시줄에 제한이 없어집니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:433
+#: libbaul-private/org.cafe.baul.gschema.xml:433
 msgid "The geometry string for a navigation window."
 msgstr "찾아보기 창의 크기 및 위치 문자열."
 
-#: libbaul-private/org.mate.baul.gschema.xml:434
+#: libbaul-private/org.cafe.baul.gschema.xml:434
 msgid ""
 "A string containing the saved geometry and coordinates string for navigation"
 " windows."
 msgstr "찾아보기 창의 저장한 크기와 위치를 나타내는 문자열."
 
-#: libbaul-private/org.mate.baul.gschema.xml:438
+#: libbaul-private/org.cafe.baul.gschema.xml:438
 msgid "Whether the navigation window should be maximized."
 msgstr "찾아보기 창을 최대화할지 여부."
 
-#: libbaul-private/org.mate.baul.gschema.xml:439
+#: libbaul-private/org.cafe.baul.gschema.xml:439
 msgid "Whether the navigation window should be maximized by default."
 msgstr "찾아보기 창을 기본으로 최대화할지 여부."
 
-#: libbaul-private/org.mate.baul.gschema.xml:443
+#: libbaul-private/org.cafe.baul.gschema.xml:443
 msgid "Width of the side pane"
 msgstr "가장자리 창의 너비"
 
-#: libbaul-private/org.mate.baul.gschema.xml:444
+#: libbaul-private/org.cafe.baul.gschema.xml:444
 msgid "The default width of the side pane in new windows."
 msgstr "새 창에서 가장자리 창의 기본 너비."
 
-#: libbaul-private/org.mate.baul.gschema.xml:448
+#: libbaul-private/org.cafe.baul.gschema.xml:448
 msgid "Show toolbar in new windows"
 msgstr "새 창에서 도구 모음을 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:449
+#: libbaul-private/org.cafe.baul.gschema.xml:449
 msgid "If set to true, newly opened windows will have toolbars visible."
 msgstr "참으로 설정하면, 새로 연 창에 도구 모음이 보입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:453
+#: libbaul-private/org.cafe.baul.gschema.xml:453
 msgid "Show location bar in new windows"
 msgstr "새 창에서 위치 표시줄을 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:454
+#: libbaul-private/org.cafe.baul.gschema.xml:454
 msgid ""
 "If set to true, newly opened windows will have the location bar visible."
 msgstr "참으로 설정하면, 새로 연 창에 위치 표시줄이 보입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:458
+#: libbaul-private/org.cafe.baul.gschema.xml:458
 msgid "Show status bar in new windows"
 msgstr "새 창에서 상태 표시줄을 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:459
+#: libbaul-private/org.cafe.baul.gschema.xml:459
 msgid "If set to true, newly opened windows will have the status bar visible."
 msgstr "참으로 설정하면, 새로 연 창에 상태 표시줄이 보입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:463
+#: libbaul-private/org.cafe.baul.gschema.xml:463
 msgid "Show side pane in new windows"
 msgstr "새 창에서 가장자리 창을 표시합니다"
 
-#: libbaul-private/org.mate.baul.gschema.xml:464
+#: libbaul-private/org.cafe.baul.gschema.xml:464
 msgid "If set to true, newly opened windows will have the side pane visible."
 msgstr "참으로 설정하면, 새로 연 창에 가장자리 창이 보입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:484
+#: libbaul-private/org.cafe.baul.gschema.xml:484
 msgid "Side pane view"
 msgstr "가장자리 창 뷰"
 
-#: libbaul-private/org.mate.baul.gschema.xml:485
+#: libbaul-private/org.cafe.baul.gschema.xml:485
 msgid "The side pane view to show in newly opened windows."
 msgstr "새로 연 창에서 가장자리 창 뷰를 보입니다."
 
-#: libbaul-private/org.mate.baul.gschema.xml:492
+#: libbaul-private/org.cafe.baul.gschema.xml:492
 msgid "List of extensions in disabled state."
 msgstr "사용 불능 상태인 확장 프로그램 목록."
 
-#: libbaul-private/org.mate.baul.gschema.xml:493
+#: libbaul-private/org.cafe.baul.gschema.xml:493
 msgid "This list contains the extensions that are currently de-activated."
 msgstr "이 목록에는 지금 사용 중이지 않은 확장 프로그램들을 포함합니다."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:5
+#: libbaul-private/org.cafe.media-handling.gschema.xml:5
 msgid "Whether to automatically mount media"
 msgstr "자동으로 미디어를 마운트할지 여부"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:6
+#: libbaul-private/org.cafe.media-handling.gschema.xml:6
 msgid ""
 "If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
 msgstr "참으로 설정하면, 카하에서 하드 디스크나 이동식 미디어를 시작할 때 발견하거나 연결하면 자동으로 그 미디어를 마운트합니다."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:10
+#: libbaul-private/org.cafe.media-handling.gschema.xml:10
 msgid "Whether to automatically open a folder for automounted media"
 msgstr "자동 마운트한 미디어의 폴더를 자동으로 열 지 여부"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:11
+#: libbaul-private/org.cafe.media-handling.gschema.xml:11
 msgid ""
 "If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
@@ -3597,22 +3597,22 @@ msgstr ""
 "참으로 설정하면, 카하가 미디어를 연결했을 때 자동으로 폴더를 엽니다. 이 설정은 알려진 x-content/* 타입이 없는 미디어에만 "
 "적용합니다. 알려진 x-content 타입의 경우 사용자가 설정한 동작을 실행합니다."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:15
+#: libbaul-private/org.cafe.media-handling.gschema.xml:15
 msgid "Never prompt or autorun/autostart programs when media are inserted"
 msgstr "미디어를 연결했을 때 확인하거나 프로그램을 자동 실행/시작하지 않기"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:16
+#: libbaul-private/org.cafe.media-handling.gschema.xml:16
 msgid ""
 "If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
 msgstr "참으로 설정하면, 카하에서 미디어를 연결했을 때 물어보거나 프로그램을 자동으로 실행/시작하지 않습니다."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:20
+#: libbaul-private/org.cafe.media-handling.gschema.xml:20
 msgid ""
 "List of x-content/* types where the preferred application will be launched"
 msgstr "설정된 프로그램이 실행될 x-content/* 타입의 목록"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:21
+#: libbaul-private/org.cafe.media-handling.gschema.xml:21
 msgid ""
 "List of x-content/* types for which the user have chosen to start an "
 "application in the preference capplet. The preferred application for the "
@@ -3621,11 +3621,11 @@ msgstr ""
 "기본 설정 capplet에서 프로그램 시작으로 선택된 x-content/* 형식의 목록. 이러한 형식의 미디어가 삽입되면 설정된 "
 "프로그램이 시작됩니다."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:25
+#: libbaul-private/org.cafe.media-handling.gschema.xml:25
 msgid "List of x-content/* types set to \"Do Nothing\""
 msgstr "\"아무것도 하지 않음\"으로 설정된 x-content/* 타입의 목록"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:26
+#: libbaul-private/org.cafe.media-handling.gschema.xml:26
 msgid ""
 "List of x-content/* types for which the user have chosen \"Do Nothing\" in "
 "the preference capplet. No prompt will be shown nor will any matching "
@@ -3634,11 +3634,11 @@ msgstr ""
 "기본 설정 capplet에서 \"아무것도 하지 않음\"으로 선택된 x-content/* 형식의 목록. 이러한 형식의 미디어가 삽입되면 "
 "확인창이나 일치하는 프로그램을 시작하지 않습니다."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:30
+#: libbaul-private/org.cafe.media-handling.gschema.xml:30
 msgid "List of x-content/* types set to \"Open Folder\""
 msgstr "\"폴더 열기\"로 설정된 x-content/* 타입의 목록"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:31
+#: libbaul-private/org.cafe.media-handling.gschema.xml:31
 msgid ""
 "List of x-content/* types for which the user have chosen \"Open Folder\" in "
 "the preferences capplet. A folder window will be opened on insertion of "
@@ -5711,7 +5711,7 @@ msgstr ""
 "Yoo Duk Nam https://launchpad.net/~yoo2001818\n"
 "onlyeriko https://launchpad.net/~onlyeriko\n"
 "Seong-ho Cho <darkcircle.0426@gmail.com>\n"
-"MATE Desktop Environment Team <https://www.transifex.com/mate/teams/13566/ko/>"
+"MATE Desktop Environment Team <https://www.transifex.com/cafe/teams/13566/ko/>"
 
 #: src/baul-window-menus.c:589
 msgid "MATE Web Site"

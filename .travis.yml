@@ -10,8 +10,8 @@ branches:
   - gh-pages
 
 before_install:
-  - curl -Ls -o docker-build https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/docker-build
-  - curl -Ls -o gen-index https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/gen-index.sh
+  - curl -Ls -o docker-build https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/docker-build
+  - curl -Ls -o gen-index https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/gen-index.sh
   - chmod +x docker-build gen-index
 
 install:
@@ -45,7 +45,7 @@ after_success:
   - 'if [[ "$TRAVIS_SECURE_ENV_VARS" == "true" && "$TRAVIS_PULL_REQUEST" != "false" && ${DISTRO} =~ ^fedora.*$ ]]; then
         REPO_SLUG_ARRAY=(${TRAVIS_REPO_SLUG//\// });
         REPO_NAME=${REPO_SLUG_ARRAY[1]};
-        URL="https://${REPO_NAME}.mate-desktop.dev";
+        URL="https://${REPO_NAME}.cafe-desktop.dev";
         COMMENT="Code analysis completed";
         curl -H "Authorization: token $GITHUB_TOKEN" -X POST
            -d "{\"state\": \"success\", \"description\": \"$COMMENT\", \"context\":\"scan-build\", \"target_url\": \"$URL\"}"
@@ -76,14 +76,14 @@ requires:
     - libexif
     - libnotify
     - libsm
-    - mate-common
-    - mate-desktop
+    - cafe-common
+    - cafe-desktop
     - xorgproto
     - which
 
   debian:
-    # Useful URL: https://github.com/mate-desktop/debian-packages
-    # Useful URL: https://salsa.debian.org/debian-mate-team/baul
+    # Useful URL: https://github.com/cafe-desktop/debian-packages
+    # Useful URL: https://salsa.debian.org/debian-cafe-team/baul
     - autopoint
     - clang
     - clang-tools
@@ -99,14 +99,14 @@ requires:
     - libgirepository1.0-dev
     - libglib2.0-dev
     - libgtk-3-dev
-    - libmate-desktop-dev
+    - libcafe-desktop-dev
     - libnotify-dev
     - libpango1.0-dev
     - libselinux1-dev
     - libstartup-notification0-dev
     - libx11-dev
     - libxml2-dev
-    - mate-common
+    - cafe-common
     - python3-lxml
     - quilt
     - shared-mime-info
@@ -129,8 +129,8 @@ requires:
     - libselinux-devel
     - libSM-devel
     - libxml2-devel
-    - mate-common
-    - mate-desktop-devel
+    - cafe-common
+    - cafe-desktop-devel
     - pangox-compat-devel
     - python3-lxml
     - startup-notification-devel
@@ -151,14 +151,14 @@ requires:
     - libgirepository1.0-dev
     - libglib2.0-dev
     - libgtk-3-dev
-    - libmate-desktop-dev
+    - libcafe-desktop-dev
     - libnotify-dev
     - libpango1.0-dev
     - libselinux1-dev
     - libstartup-notification0-dev
     - libx11-dev
     - libxml2-dev
-    - mate-common
+    - cafe-common
     - python3-lxml
     - quilt
     - shared-mime-info
@@ -193,7 +193,7 @@ before_scripts:
 build_scripts:
 # build failed with f30 und using clang patch, fixed in f30?
 #  - if [ ${DISTRO_NAME} == "fedora" ];then
-#  -     curl -Ls -o fedora.sh https://github.com/mate-desktop/mate-dev-scripts/raw/master/travis/fedora.sh
+#  -     curl -Ls -o fedora.sh https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/fedora.sh
 #  -     bash ./fedora.sh
 #  - fi
   - ./autogen.sh --enable-empty-view
@@ -211,7 +211,7 @@ after_scripts:
   - if [ ${DISTRO_NAME} == "fedora" ];then
   -   cppcheck --xml --output-file=cppcheck.xml --enable=warning,style,performance,portability,information,missingInclude .
   -   cppcheck-htmlreport --title=${REPO_NAME} --file=cppcheck.xml --report-dir=cppcheck-htmlreport
-  -   ./gen-index -l 20 -i https://github.com/${OWNER_NAME}/mate-icon-theme/raw/master/mate/16x16/apps/system-file-manager.png
+  -   ./gen-index -l 20 -i https://github.com/${OWNER_NAME}/cafe-icon-theme/raw/master/cafe/16x16/apps/system-file-manager.png
   - fi
   - make distcheck
 
@@ -226,4 +226,4 @@ releases:
     overwrite: true
     base_version: 1.20.0
     notify_servers:
-      - https://release.mate-desktop.org/release
+      - https://release.cafe-desktop.org/release

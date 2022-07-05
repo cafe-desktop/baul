@@ -38,11 +38,11 @@
 #include <gio/gio.h>
 
 #define MATE_DESKTOP_USE_UNSTABLE_API
-#include <libmate-desktop/mate-desktop-utils.h>
+#include <libcafe-desktop/cafe-desktop-utils.h>
 
 #include <eel/eel-background.h>
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-mate-extensions.h>
+#include <eel/eel-cafe-extensions.h>
 #include <eel/eel-gtk-extensions.h>
 #include <eel/eel-gtk-macros.h>
 #include <eel/eel-stock-dialogs.h>
@@ -1182,7 +1182,7 @@ pattern_select_response_cb (GtkWidget *dialog, int response, gpointer user_data)
 	case GTK_RESPONSE_HELP :
 		error = NULL;
 		gtk_show_uri_on_window (GTK_WINDOW (dialog),
-			                "help:mate-user-guide/baul-select-pattern",
+			                "help:cafe-user-guide/baul-select-pattern",
 			                gtk_get_current_event_time (), &error);
 		if (error) {
 			eel_show_error_dialog (_("There was an error displaying help."), error->message,
@@ -1506,8 +1506,8 @@ action_new_launcher_callback (GtkAction *action,
 	baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
 			    "directory view create new launcher in window=%p: %s", window, parent_uri);
 	baul_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (view)),
-						  "mate-desktop-item-edit",
-						  "mate-desktop-item-edit",
+						  "cafe-desktop-item-edit",
+						  "cafe-desktop-item-edit",
 						  FALSE,
 						  "--create-new", parent_uri, NULL);
 
@@ -2089,7 +2089,7 @@ fm_directory_view_init (FMDirectoryView *view)
 							  "changed::" BAUL_PREFERENCES_SORT_DIRECTORIES_FIRST,
 							  G_CALLBACK(sort_directories_first_changed_callback),
 							  view);
-	g_signal_connect_swapped (mate_lockdown_preferences,
+	g_signal_connect_swapped (cafe_lockdown_preferences,
 							  "changed::" BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE,
 							  G_CALLBACK (schedule_update_menus), view);
 
@@ -2219,7 +2219,7 @@ fm_directory_view_finalize (GObject *object)
         				      click_policy_changed_callback, view);
 	g_signal_handlers_disconnect_by_func (baul_preferences,
         				      sort_directories_first_changed_callback, view);
-	g_signal_handlers_disconnect_by_func (mate_lockdown_preferences,
+	g_signal_handlers_disconnect_by_func (cafe_lockdown_preferences,
         				      schedule_update_menus, view);
 
 	unschedule_pop_up_location_context_menu (view);
@@ -7026,7 +7026,7 @@ connect_to_server_response_callback (GtkDialog *dialog,
 		uri = g_object_get_data (G_OBJECT (dialog), "link-uri");
 		icon = g_object_get_data (G_OBJECT (dialog), "link-icon");
 		name = gtk_entry_get_text (entry);
-		mate_vfs_connect_to_server (uri, (char *)name, icon);
+		cafe_vfs_connect_to_server (uri, (char *)name, icon);
 		gtk_widget_destroy (GTK_WIDGET (dialog));
 		break;
 	case GTK_RESPONSE_NONE:
@@ -9237,7 +9237,7 @@ real_update_menus (FMDirectoryView *view)
 
 	real_update_paste_menu (view, selection, selection_count);
 
-	disable_command_line = g_settings_get_boolean (mate_lockdown_preferences, BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE);
+	disable_command_line = g_settings_get_boolean (cafe_lockdown_preferences, BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE);
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 	action = gtk_action_group_get_action (view->details->dir_action_group,
 					      FM_ACTION_NEW_LAUNCHER);
@@ -10387,7 +10387,7 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 			screen = gdk_screen_get_default ();
 		}
 
-		mate_gdk_spawn_command_line_on_screen(screen, command, NULL);
+		cafe_gdk_spawn_command_line_on_screen(screen, command, NULL);
 		g_free (command);
 
 		return;
@@ -10748,7 +10748,7 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 			baul_link_local_create (target_uri != NULL ? target_uri : container_uri,
 						    link_name,
 						    link_display_name,
-						    "mate-fs-bookmark",
+						    "cafe-fs-bookmark",
 						    url,
 						    &point,
 						    screen_num,
@@ -11256,7 +11256,7 @@ fm_directory_view_class_init (FMDirectoryViewClass *klass)
 	EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass, fm_directory_view, zoom_to_level);
 	EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass, fm_directory_view, get_zoom_level);
 
-	copied_files_atom = gdk_atom_intern ("x-special/mate-copied-files", FALSE);
+	copied_files_atom = gdk_atom_intern ("x-special/cafe-copied-files", FALSE);
 
 	g_object_class_install_property (G_OBJECT_CLASS (klass),
 					 PROP_WINDOW_SLOT,

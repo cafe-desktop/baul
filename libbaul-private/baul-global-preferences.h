@@ -222,8 +222,8 @@ extern GSettings *baul_compact_view_preferences;
 extern GSettings *baul_list_view_preferences;
 extern GSettings *baul_extension_preferences;
 
-extern GSettings *mate_background_preferences;
-extern GSettings *mate_lockdown_preferences;
+extern GSettings *cafe_background_preferences;
+extern GSettings *cafe_lockdown_preferences;
 
 G_END_DECLS
 

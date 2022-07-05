@@ -42,7 +42,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #define MATE_DESKTOP_USE_UNSTABLE_API
-#include <libmate-desktop/mate-bg.h>
+#include <libcafe-desktop/cafe-bg.h>
 
 #include <eel/eel-gtk-extensions.h>
 #include <eel/eel-gtk-macros.h>
@@ -713,7 +713,7 @@ baul_application_create_desktop_windows (BaulApplication *application)
                           G_CALLBACK (desktop_unrealize_cb), selection_widget);
 
         /* We realize it immediately so that the BAUL_DESKTOP_WINDOW_ID
-           property is set so mate-settings-daemon doesn't try to set the
+           property is set so cafe-settings-daemon doesn't try to set the
            background. And we do a gdk_display_flush() to be sure X gets it. */
         gtk_widget_realize (GTK_WIDGET (window));
         gdk_display_flush (display);
@@ -1075,7 +1075,7 @@ desktop_changed_callback (gpointer user_data)
     BaulApplication *application;
 
     application = BAUL_APPLICATION (user_data);
-    if (g_settings_get_boolean (mate_background_preferences, MATE_BG_KEY_SHOW_DESKTOP))
+    if (g_settings_get_boolean (cafe_background_preferences, MATE_BG_KEY_SHOW_DESKTOP))
     {
         baul_application_open_desktop (application);
     }
@@ -1831,11 +1831,11 @@ do_perform_self_checks (gint *exit_status)
 }
 
 static gboolean
-running_in_mate (void)
+running_in_cafe (void)
 {
     return (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "MATE") == 0)
-        || (g_strcmp0 (g_getenv ("XDG_SESSION_DESKTOP"), "mate") == 0)
-        || (g_strcmp0 (g_getenv ("DESKTOP_SESSION"), "mate") == 0);
+        || (g_strcmp0 (g_getenv ("XDG_SESSION_DESKTOP"), "cafe") == 0)
+        || (g_strcmp0 (g_getenv ("DESKTOP_SESSION"), "cafe") == 0);
 }
 
 static gboolean
@@ -2105,12 +2105,12 @@ init_desktop (BaulApplication *self)
     baul_desktop_link_monitor_get ();
 
     if (!self->priv->no_desktop &&
-        !g_settings_get_boolean (mate_background_preferences,
+        !g_settings_get_boolean (cafe_background_preferences,
                      MATE_BG_KEY_SHOW_DESKTOP)) {
         self->priv->no_desktop = TRUE;
     }
 
-    if (running_as_root () || !running_in_mate ())
+    if (running_as_root () || !running_in_cafe ())
 	{
         /* do not manage desktop when running as root or on other desktops unless forced */
         self->priv->no_desktop = TRUE;
@@ -2121,7 +2121,7 @@ init_desktop (BaulApplication *self)
     }
 
     /* Monitor the preference to show or hide the desktop */
-    g_signal_connect_swapped (mate_background_preferences, "changed::" MATE_BG_KEY_SHOW_DESKTOP,
+    g_signal_connect_swapped (cafe_background_preferences, "changed::" MATE_BG_KEY_SHOW_DESKTOP,
                   G_CALLBACK (desktop_changed_callback),
                   self);
 }
@@ -2262,13 +2262,13 @@ baul_application_startup (GApplication *app)
      * Otherwise, we read the value from the configuration.
      */
 
-    if (running_in_mate () && !running_as_root())
+    if (running_in_cafe () && !running_as_root())
     {
         GApplication *instance;
 
         exit_with_last_window = g_settings_get_boolean (baul_preferences,
                                 BAUL_PREFERENCES_EXIT_WITH_LAST_WINDOW);
-        /*Keep this inside the running as mate/not as root block */
+        /*Keep this inside the running as cafe/not as root block */
         /*So other desktop don't get unkillable baul instances holding open */
         instance = g_application_get_default ();
         if (exit_with_last_window == FALSE){
@@ -2308,7 +2308,7 @@ BaulApplication *
 baul_application_new (void)
 {
         return g_object_new (BAUL_TYPE_APPLICATION,
-                    "application-id", "org.mate.Baul",
+                    "application-id", "org.cafe.Baul",
                     "register-session", TRUE,
                     "flags", G_APPLICATION_HANDLES_OPEN,
                      NULL);

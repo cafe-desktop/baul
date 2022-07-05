@@ -1039,7 +1039,7 @@ static gboolean
 baul_window_key_press_event (GtkWidget *widget,
                              GdkEventKey *event)
 {
-    /* Fix for https://github.com/mate-desktop/baul/issues/1024 */
+    /* Fix for https://github.com/cafe-desktop/baul/issues/1024 */
     if ((event->state & GDK_CONTROL_MASK) &&
         ((event->keyval == '.') || (event->keyval == ';')))
         return TRUE;

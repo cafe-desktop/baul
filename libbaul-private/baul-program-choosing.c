@@ -33,7 +33,7 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 
-#include <eel/eel-mate-extensions.h>
+#include <eel/eel-cafe-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 
 #include "baul-program-choosing.h"
@@ -341,7 +341,7 @@ baul_launch_application_from_command (GdkScreen  *screen,
 
     if (use_terminal)
     {
-        eel_mate_open_terminal_on_screen (full_command, screen);
+        eel_cafe_open_terminal_on_screen (full_command, screen);
     }
     else
     {
@@ -407,7 +407,7 @@ baul_launch_application_from_command_array (GdkScreen  *screen,
 
     if (use_terminal)
     {
-        eel_mate_open_terminal_on_screen (full_command, screen);
+        eel_cafe_open_terminal_on_screen (full_command, screen);
     }
     else
     {

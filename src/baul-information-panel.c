@@ -120,8 +120,8 @@ static const GtkTargetEntry target_table[] =
     { "application/x-color", 0, TARGET_COLOR },
     { "property/bgimage", 0, TARGET_BGIMAGE },
     { "property/keyword", 0, TARGET_KEYWORD },
-    { "x-special/mate-reset-background", 0, TARGET_BACKGROUND_RESET },
-    { "x-special/mate-icon-list",  0, TARGET_MATE_URI_LIST }
+    { "x-special/cafe-reset-background", 0, TARGET_BACKGROUND_RESET },
+    { "x-special/cafe-icon-list",  0, TARGET_MATE_URI_LIST }
 };
 
 typedef enum

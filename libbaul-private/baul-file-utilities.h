@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 
 #define BAUL_SAVED_SEARCH_EXTENSION ".savedSearch"
-#define BAUL_SAVED_SEARCH_MIMETYPE "application/x-mate-saved-search"
+#define BAUL_SAVED_SEARCH_MIMETYPE "application/x-cafe-saved-search"
 
 /* These functions all return something something that needs to be
  * freed with g_free, is not NULL, and is guaranteed to exist.
@@ -58,13 +58,13 @@ void     baul_create_templates_directory         (void);
 
 char *	 baul_compute_title_for_location	     (GFile *file);
 
-/* A version of mate's mate_pixmap_file that works for the baul prefix.
- * Otherwise similar to mate_pixmap_file in that it checks to see if the file
+/* A version of cafe's cafe_pixmap_file that works for the baul prefix.
+ * Otherwise similar to cafe_pixmap_file in that it checks to see if the file
  * exists and returns NULL if it doesn't.
  */
 /* FIXME bugzilla.gnome.org 42425:
- * We might not need this once we get on mate-libs 2.0 which handles
- * mate_pixmap_file better, using MATE_PATH.
+ * We might not need this once we get on cafe-libs 2.0 which handles
+ * cafe_pixmap_file better, using MATE_PATH.
  */
 char *   baul_pixmap_file                        (const char *partial_path);
 

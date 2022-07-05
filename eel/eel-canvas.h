@@ -438,7 +438,7 @@ extern "C" {
         void (* draw_background) (EelCanvas *canvas,
                                   cairo_t *cr);
 
-        /* Private Virtual methods for groping the canvas inside matecomponent */
+        /* Private Virtual methods for groping the canvas inside cafecomponent */
         void (* request_update) (EelCanvas *canvas);
 
         /* Reserved for future expansion */

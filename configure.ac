@@ -5,7 +5,7 @@ dnl ===========================================================================
 m4_define(gdk-pixbuf_minver,           2.36.5)
 m4_define(glib_minver,                 2.58.1)
 m4_define(gio_minver,                  2.50.0)
-m4_define(mate_desktop_minver,         1.17.3)
+m4_define(cafe_desktop_minver,         1.17.3)
 m4_define(pango_minver,                1.1.2)
 m4_define(gtk_minver,                  3.22.0)
 m4_define(xml_minver,                  2.4.7)
@@ -21,7 +21,7 @@ dnl Interface break is not allowed.
 m4_define(baul_extension_current,  5)
 m4_define(baul_extension_revision, 0)
 
-AC_INIT([baul], [1.24.0], [https://mate-desktop.org])
+AC_INIT([baul], [1.24.0], [https://cafe-desktop.org])
 
 dnl ---------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ AC_SUBST([ACLOCAL_AMFLAGS], ["\${ACLOCAL_FLAGS}"])
 AC_SUBST(GDKPIXBUF_REQUIRED, [gdk-pixbuf_minver])
 AC_SUBST(GLIB_REQUIRED, [glib_minver])
 AC_SUBST(GIO_REQUIRED, [gio_minver])
-AC_SUBST(MATE_DESKTOP_REQUIRED, [mate_desktop_minver])
+AC_SUBST(MATE_DESKTOP_REQUIRED, [cafe_desktop_minver])
 AC_SUBST(PANGO_REQUIRED, [pango_minver])
 AC_SUBST(GTK_REQUIRED, [gtk_minver])
 AC_SUBST(XML_REQUIRED, [xml_minver])
@@ -68,7 +68,7 @@ AC_CHECK_LIB(m, floor)
 PKG_CHECK_MODULES(ALL, [
     gdk-pixbuf-2.0 >= gdk-pixbuf_minver
     glib-2.0 >= glib_minver
-    mate-desktop-2.0 >= mate_desktop_minver
+    cafe-desktop-2.0 >= cafe_desktop_minver
     gthread-2.0
     gio-unix-2.0
     gio-2.0 >= gio_minver
@@ -277,7 +277,7 @@ AC_SUBST(LIBBAUL_EXTENSION_LIBS)
 
 dnl core baul
 PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])
-CORE_MODULES="glib-2.0 $GMODULE_ADD mate-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 gail-3.0 libxml-2.0 $EXTRA_CORE_MODULES gtk+-3.0 x11"
+CORE_MODULES="glib-2.0 $GMODULE_ADD cafe-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 gail-3.0 libxml-2.0 $EXTRA_CORE_MODULES gtk+-3.0 x11"
 CORE_CFLAGS="`$PKG_CONFIG --cflags $CORE_MODULES`"
 AC_SUBST(CORE_CFLAGS)
 CORE_LIBS="`$PKG_CONFIG --libs $CORE_MODULES`"

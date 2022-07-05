@@ -25,7 +25,7 @@ sub ReplaceAuthors {
   $_ eq 'alexandervdm <alexandervdm%gliese.me>' and $_ = 'Alexander van der Meij <alexandervdm%gliese.me>' for @authors;
   $_ eq 'bkerlin <me%brentkerlin.com>' and $_ = 'Brent Kerlin <me%brentkerlin.com>' for @authors;
   $_ eq 'bl0ckeduser <bl0ckedusersoft%gmail.com>' and $_ = 'Gabriel Cormier-Affleck <bl0ckedusersoft%gmail.com>' for @authors;
-  $_ eq 'chat-to-me%raveit.de <Nice&Gently>' and $_ = 'Wolfgang Ulbrich <mate%raveit.de>' for @authors;
+  $_ eq 'chat-to-me%raveit.de <Nice&Gently>' and $_ = 'Wolfgang Ulbrich <cafe%raveit.de>' for @authors;
   $_ eq 'chen donghai <chen.donghai%zte.com.cn>' and $_ = 'Chen Donghai <chen.donghai%zte.com.cn>' for @authors;
   $_ eq 'Clément Masci <>' and $_ = 'Clément Masci' for @authors;
   $_ eq 'emanuele-f <black.silver%hotmail.it>' and $_ = 'Emanuele Faranda <black.silver%hotmail.it>' for @authors;
@@ -33,17 +33,17 @@ sub ReplaceAuthors {
   $_ eq 'hekel <hekel%archlinux.info>' and $_ = 'Adam Erdman <hekel%archlinux.info>' for @authors;
   $_ eq 'infirit <infirit%gmail.com>' and $_ = 'Sander Sweers <infirit%gmail.com>' for @authors;
   $_ eq 'leigh123linux <leigh123linux%googlemail.com>' and $_ = 'Leigh Scott <leigh123linux%googlemail.com>' for @authors;
-  $_ eq 'Martin Wimpress <code%flexion.org>' and $_ = 'Martin Wimpress <martin%mate-desktop.org>' for @authors;
+  $_ eq 'Martin Wimpress <code%flexion.org>' and $_ = 'Martin Wimpress <martin%cafe-desktop.org>' for @authors;
   $_ eq 'Monsta <monsta%inbox.ru>' and $_ = 'Vlad Orlov <monsta%inbox.ru>' for @authors;
   $_ eq 'monsta <monsta%inbox.ru>' and $_ = 'Vlad Orlov <monsta%inbox.ru>' for @authors;
   $_ eq 'OBATA Akio <obache%users.noreply.github.com>' and $_ = 'Obata Akio <obache%users.noreply.github.com>' for @authors;
-  $_ eq 'raveit65 <chat-to-me%raveit.de>' and $_ = 'Wolfgang Ulbrich <mate%raveit.de>' for @authors;
-  $_ eq 'raveit65 <mate%raveit.de>' and $_ = 'Wolfgang Ulbrich <mate%raveit.de>' for @authors;
+  $_ eq 'raveit65 <chat-to-me%raveit.de>' and $_ = 'Wolfgang Ulbrich <cafe%raveit.de>' for @authors;
+  $_ eq 'raveit65 <cafe%raveit.de>' and $_ = 'Wolfgang Ulbrich <cafe%raveit.de>' for @authors;
   $_ eq 'rbuj <robert.buj%gmail.com>' and $_ = 'Robert Buj <robert.buj%gmail.com>' for @authors;
   $_ eq 'romovs <romovs%gmail.com>' and $_ = 'Roman Ovseitsev <romovs%gmail.com>' for @authors;
   $_ eq 'tarakbumba <tarakbumba%gmail.com>' and $_ = 'Atilla ÖNTAŞ <tarakbumba%gmail.com>' for @authors;
   $_ eq 'Victor Kareh <vkareh%vkareh.net>' and $_ = 'Victor Kareh <vkareh%redhat.com>' for @authors;
-  $_ eq 'Wolfgang Ulbrich <chat-to-me%raveit.de>' and $_ = 'Wolfgang Ulbrich <mate%raveit.de>' for @authors;
+  $_ eq 'Wolfgang Ulbrich <chat-to-me%raveit.de>' and $_ = 'Wolfgang Ulbrich <cafe%raveit.de>' for @authors;
   $_ eq 'yetist <xiaotian.wu%i-soft.com.cn>' and $_ = 'Wu Xiaotian <yetist%gmail.com>' for @authors;
   return @authors;
 }
@@ -61,7 +61,7 @@ sub GetCurrentAuthors {
 }
 
 sub GetNewAuthors {
-  my @authors = `git log --pretty="%an <%ae>" --since "2012-01-01" -- . "_.h" "_.c" | sort | uniq | sed 's/@/%/g' | sed '/^mate-i18n.*/d'`;
+  my @authors = `git log --pretty="%an <%ae>" --since "2012-01-01" -- . "_.h" "_.c" | sort | uniq | sed 's/@/%/g' | sed '/^cafe-i18n.*/d'`;
   chomp @authors;
   return ReplaceAuthors(@authors);
 }

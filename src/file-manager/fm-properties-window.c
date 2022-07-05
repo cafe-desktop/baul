@@ -34,7 +34,7 @@
 #include <eel/eel-accessibility.h>
 #include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-mate-extensions.h>
+#include <eel/eel-cafe-extensions.h>
 #include <eel/eel-gtk-extensions.h>
 #include <eel/eel-labeled-image.h>
 #include <eel/eel-stock-dialogs.h>
@@ -174,8 +174,8 @@ enum {
 
 static const GtkTargetEntry target_table[] = {
 	{ "text/uri-list",  0, TARGET_URI_LIST },
-	{ "x-special/mate-icon-list",  0, TARGET_MATE_URI_LIST },
-	{ "x-special/mate-reset-background", 0, TARGET_RESET_BACKGROUND }
+	{ "x-special/cafe-icon-list",  0, TARGET_MATE_URI_LIST },
+	{ "x-special/cafe-reset-background", 0, TARGET_RESET_BACKGROUND }
 };
 
 #define DIRECTORY_CONTENTS_UPDATE_INTERVAL	200 /* milliseconds */
@@ -5465,7 +5465,7 @@ real_response (GtkDialog *dialog,
 	switch (response) {
 	case GTK_RESPONSE_HELP:
 		gtk_show_uri_on_window (GTK_WINDOW (dialog),
-			                "help:mate-user-guide/gosbaul-51",
+			                "help:cafe-user-guide/gosbaul-51",
 			                gtk_get_current_event_time (),
 			                &error);
 		if (error != NULL) {

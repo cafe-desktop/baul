@@ -32,7 +32,7 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <eel/eel-gtk-extensions.h>
-#include <eel/eel-mate-extensions.h>
+#include <eel/eel-cafe-extensions.h>
 
 #include <libbaul-private/baul-global-preferences.h>
 
@@ -150,7 +150,7 @@ baul_bookmarks_window_response_callback (GtkDialog *dialog,
         GError *error = NULL;
 
         gtk_show_uri_on_window (GTK_WINDOW (dialog),
-                                "help:mate-user-guide/gosbaul-36",
+                                "help:cafe-user-guide/gosbaul-36",
                                 gtk_get_current_event_time (), &error);
 
         if (error)

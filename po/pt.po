@@ -23,11 +23,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: baul 1.23.2\n"
-"Report-Msgid-Bugs-To: https://mate-desktop.org\n"
+"Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
 "POT-Creation-Date: 2020-01-10 11:11+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>, 2019\n"
-"Language-Team: Portuguese (https://www.transifex.com/mate/teams/13566/pt/)\n"
+"Language-Team: Portuguese (https://www.transifex.com/cafe/teams/13566/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -437,23 +437,23 @@ msgstr ""
 msgid "Saved search"
 msgstr "Procura gravada"
 
-#: data/mate-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
+#: data/cafe-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
 msgid "Network"
 msgstr "Rede"
 
-#: data/mate-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
 msgid "Browse bookmarked and local network locations"
 msgstr "Navegar nas localizações marcadas ou na rede local"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon
 #. file name)!
-#: data/mate-network-scheme.desktop.in.in:11
+#: data/cafe-network-scheme.desktop.in.in:11
 msgid "network-workgroup"
 msgstr ""
 
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
-#: data/mate-network-scheme.desktop.in.in:14
+#: data/cafe-network-scheme.desktop.in.in:14
 msgid "bookmarks;browse;local;network;locations;MATE;"
 msgstr ""
 
@@ -1430,8 +1430,8 @@ msgstr[1] "%'d horas"
 
 #: libbaul-private/baul-file-operations.c:330
 #, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
+msgid "approxicafely %'d hour"
+msgid_plural "approxicafely %'d hours"
 msgstr[0] "aproximadamente %'d hora"
 msgstr[1] "aproximadamente %'d horas"
 
@@ -2955,11 +2955,11 @@ msgid_plural "Redo change owner of %d items"
 msgstr[0] "Refazer alteração de proprietário de %d item"
 msgstr[1] "Refazer alteração de proprietário de %d itens"
 
-#: libbaul-private/org.mate.baul.gschema.xml:76
+#: libbaul-private/org.cafe.baul.gschema.xml:76
 msgid "Where to position newly open tabs in browser windows."
 msgstr "Onde colocar os separadores novos nas janelas de navegador."
 
-#: libbaul-private/org.mate.baul.gschema.xml:77
+#: libbaul-private/org.cafe.baul.gschema.xml:77
 msgid ""
 "If set to \"after-current-tab\", then new tabs are inserted after the "
 "current tab. If set to \"end\", then new tabs are appended to the end of the"
@@ -2969,11 +2969,11 @@ msgstr ""
 "inseridos após o separador atual. Se definido como \"fim\", os novos "
 "separadores são adicionados ao fim da lista de separadores."
 
-#: libbaul-private/org.mate.baul.gschema.xml:81
+#: libbaul-private/org.cafe.baul.gschema.xml:81
 msgid "Switch tabs with [ctrl] + [tab]"
 msgstr "Mudar de separador com [ctrl] + [tab]"
 
-#: libbaul-private/org.mate.baul.gschema.xml:82
+#: libbaul-private/org.cafe.baul.gschema.xml:82
 msgid ""
 "If true, it enables the ability to switch tabs using [ctrl + tab] and [ctrl "
 "+ shift + tab]."
@@ -2981,11 +2981,11 @@ msgstr ""
 "Se verdadeiro, ativa a possibilidade de separador usando [ctrl + tab] e "
 "[ctrl + shift + tab]."
 
-#: libbaul-private/org.mate.baul.gschema.xml:86
+#: libbaul-private/org.cafe.baul.gschema.xml:86
 msgid "Baul will exit when last window destroyed."
 msgstr "O Baul irá terminar quando a última janela for encerrada"
 
-#: libbaul-private/org.mate.baul.gschema.xml:87
+#: libbaul-private/org.cafe.baul.gschema.xml:87
 msgid ""
 "If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
@@ -2996,13 +2996,13 @@ msgstr ""
 "pode ser iniciado sem qualquer janela, pelo que o Baul pode atuar como "
 "servidor para monitorizar a montagem de media, ou tarefas semelhantes."
 
-#: libbaul-private/org.mate.baul.gschema.xml:91
+#: libbaul-private/org.cafe.baul.gschema.xml:91
 msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
 "Ativa o comportamento clássico do Baul, em que todas as janelas são de "
 "navegação"
 
-#: libbaul-private/org.mate.baul.gschema.xml:92
+#: libbaul-private/org.cafe.baul.gschema.xml:92
 msgid ""
 "If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
@@ -3012,11 +3012,11 @@ msgstr ""
 "navegação. Esta é a forma como o Baul se comportava antes da versão 2.6, e "
 "algumas pessoas preferem este comportamento."
 
-#: libbaul-private/org.mate.baul.gschema.xml:96
+#: libbaul-private/org.cafe.baul.gschema.xml:96
 msgid "Always use the location entry, instead of the pathbar"
 msgstr "Usar sempre a entrada de localização em vez da barra de caminho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:97
+#: libbaul-private/org.cafe.baul.gschema.xml:97
 msgid ""
 "If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
@@ -3025,11 +3025,11 @@ msgstr ""
 "utilizar uma entrada de texto para a barra de localização, em vez de uma "
 "barra de caminho."
 
-#: libbaul-private/org.mate.baul.gschema.xml:101
+#: libbaul-private/org.cafe.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
 msgstr "Se pedir confirmação ao apagar ficheiros, ou esvaziar o Lixo"
 
-#: libbaul-private/org.mate.baul.gschema.xml:102
+#: libbaul-private/org.cafe.baul.gschema.xml:102
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
@@ -3037,11 +3037,11 @@ msgstr ""
 "Se definido como verdadeiro, o Baul pedirá confirmação quando tentar apagar "
 "ficheiros ou esvaziar o Lixo."
 
-#: libbaul-private/org.mate.baul.gschema.xml:106
+#: libbaul-private/org.cafe.baul.gschema.xml:106
 msgid "Whether to ask for confirmation when moving files to the Trash"
 msgstr "Se pedir confirmação ao mover ficheiros, para o Lixo"
 
-#: libbaul-private/org.mate.baul.gschema.xml:107
+#: libbaul-private/org.cafe.baul.gschema.xml:107
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
@@ -3049,11 +3049,11 @@ msgstr ""
 "Se definido como verdadeiro, o Baul pedirá confirmação quando tentar mover "
 "ficheiros para o Lixo."
 
-#: libbaul-private/org.mate.baul.gschema.xml:111
+#: libbaul-private/org.cafe.baul.gschema.xml:111
 msgid "Whether to enable immediate deletion"
 msgstr "Se deve ativar remoção imediata"
 
-#: libbaul-private/org.mate.baul.gschema.xml:112
+#: libbaul-private/org.cafe.baul.gschema.xml:112
 msgid ""
 "If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
@@ -3063,11 +3063,11 @@ msgstr ""
 "eliminar um ficheiro imediatamente no local, em vez de o mover para o lixo. "
 "Esta funcionalidade pode ser perigosa, pelo que tenha cuidado."
 
-#: libbaul-private/org.mate.baul.gschema.xml:117
+#: libbaul-private/org.cafe.baul.gschema.xml:117
 msgid "When to show preview text in icons"
 msgstr "Quando apresentar texto de antevisão nos ícones"
 
-#: libbaul-private/org.mate.baul.gschema.xml:118
+#: libbaul-private/org.cafe.baul.gschema.xml:118
 msgid ""
 "Speed tradeoff for when to show a preview of text file contents in the "
 "file's icon. If set to \"always\" then always show previews, even if the "
@@ -3081,11 +3081,11 @@ msgstr ""
 "apresenta antevisões para sistemas de ficheiros locais. Se \"never\", não "
 "haverá uma antevisão dos dados."
 
-#: libbaul-private/org.mate.baul.gschema.xml:123
+#: libbaul-private/org.cafe.baul.gschema.xml:123
 msgid "When to show number of items in a folder"
 msgstr "Quando apresentar o número de itens numa pasta"
 
-#: libbaul-private/org.mate.baul.gschema.xml:124
+#: libbaul-private/org.cafe.baul.gschema.xml:124
 msgid ""
 "Speed tradeoff for when to show the number of items in a folder. If set to "
 "\"always\" then always show item counts, even if the folder is on a remote "
@@ -3098,11 +3098,11 @@ msgstr ""
 " sistemas de ficheiros locais. Se \"never\", não haverá uma contagem de "
 "itens."
 
-#: libbaul-private/org.mate.baul.gschema.xml:128
+#: libbaul-private/org.cafe.baul.gschema.xml:128
 msgid "Type of click used to launch/open files"
 msgstr "Tipo de clique utilizado para iniciar/abrir ficheiros"
 
-#: libbaul-private/org.mate.baul.gschema.xml:129
+#: libbaul-private/org.cafe.baul.gschema.xml:129
 msgid ""
 "Possible values are \"single\" to launch files on a single click, or "
 "\"double\" to launch them on a double click."
@@ -3110,11 +3110,11 @@ msgstr ""
 "Valores possíveis são \"single\" para iniciar ficheiros com um único clique "
 "ou \"double\" para os iniciar com um clique duplo."
 
-#: libbaul-private/org.mate.baul.gschema.xml:133
+#: libbaul-private/org.cafe.baul.gschema.xml:133
 msgid "What to do with executable text files when activated"
 msgstr "O que fazer com ficheiros de texto executáveis ao ativá-los"
 
-#: libbaul-private/org.mate.baul.gschema.xml:134
+#: libbaul-private/org.cafe.baul.gschema.xml:134
 msgid ""
 "What to do with executable text files when they are activated (single or "
 "double clicked). Possible values are \"launch\" to launch them as programs, "
@@ -3126,11 +3126,11 @@ msgstr ""
 "\"ask\" para perguntar o que fazer através de um diálogo, e \"display\" para"
 " os apresentar como ficheiros de texto."
 
-#: libbaul-private/org.mate.baul.gschema.xml:138
+#: libbaul-private/org.cafe.baul.gschema.xml:138
 msgid "Show the package installer for unknown MIME types"
 msgstr "Mostrar o instalador do pacote para tipos MIME desconhecidos"
 
-#: libbaul-private/org.mate.baul.gschema.xml:139
+#: libbaul-private/org.cafe.baul.gschema.xml:139
 msgid ""
 "Whether to show the user a package installer dialog in case an unknown MIME "
 "type is opened, in order to search for an application to handle it."
@@ -3139,13 +3139,13 @@ msgstr ""
 "seja aberto um tipo MIME desconhecido, para que se procure uma aplicação que"
 " o manipule."
 
-#: libbaul-private/org.mate.baul.gschema.xml:143
+#: libbaul-private/org.cafe.baul.gschema.xml:143
 msgid "Use extra mouse button events in Baul' browser window"
 msgstr ""
 "Utilizar os eventos dos botões de rato adicionais nas janelas de navegação "
 "do Baul"
 
-#: libbaul-private/org.mate.baul.gschema.xml:144
+#: libbaul-private/org.cafe.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
 "will determine if any action is taken inside of Baul when either is pressed."
@@ -3154,11 +3154,11 @@ msgstr ""
 "esta chave determina se é realizada alguma acão dentro do Baul quando um "
 "deles for premido."
 
-#: libbaul-private/org.mate.baul.gschema.xml:148
+#: libbaul-private/org.cafe.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
 msgstr "Botão do rato para ativar o comando \"Avançar\" na janela de navegação"
 
-#: libbaul-private/org.mate.baul.gschema.xml:149
+#: libbaul-private/org.cafe.baul.gschema.xml:149
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Forward\" command in a browser "
@@ -3168,11 +3168,11 @@ msgstr ""
 "esta chave determina que botão ativa o comando \"Avançar\" numa janela de "
 "navegador. Valores possíveis estão no intervalo entre 6 e 14."
 
-#: libbaul-private/org.mate.baul.gschema.xml:153
+#: libbaul-private/org.cafe.baul.gschema.xml:153
 msgid "Mouse button to activate the \"Back\" command in browser window"
 msgstr "Botão do rato para ativar o comando \"Retroceder\" na janela de navegação"
 
-#: libbaul-private/org.mate.baul.gschema.xml:154
+#: libbaul-private/org.cafe.baul.gschema.xml:154
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Back\" command in a browser window. "
@@ -3182,11 +3182,11 @@ msgstr ""
 "esta chave determina que botão ativa o comando \"Retroceder\" numa janela de"
 " navegador. Valores possíveis estão no intervalo entre 6 e 14."
 
-#: libbaul-private/org.mate.baul.gschema.xml:159
+#: libbaul-private/org.cafe.baul.gschema.xml:159
 msgid "When to show thumbnails of image files"
 msgstr "Quando apresentar miniaturas de ficheiros de imagem"
 
-#: libbaul-private/org.mate.baul.gschema.xml:160
+#: libbaul-private/org.cafe.baul.gschema.xml:160
 msgid ""
 "Speed tradeoff for when to show an image file as a thumbnail. If set to "
 "\"always\" then always thumbnail, even if the folder is on a remote server. "
@@ -3200,11 +3200,11 @@ msgstr ""
 "de ficheiros locais. Se \"never\", não haverá miniaturas, apenas um ícone "
 "genérico."
 
-#: libbaul-private/org.mate.baul.gschema.xml:164
+#: libbaul-private/org.cafe.baul.gschema.xml:164
 msgid "Maximum image size for thumbnailing"
 msgstr "Tamanho máximo de imagem em miniaturas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:165
+#: libbaul-private/org.cafe.baul.gschema.xml:165
 msgid ""
 "Images over this size (in bytes) won't be thumbnailed. The purpose of this "
 "setting is to avoid thumbnailing large images that may take a long time to "
@@ -3214,11 +3214,11 @@ msgstr ""
 "desta definição é evitar amostrar imagens grandes que demoram muito tempo a "
 "ler ou ocupam muita memória."
 
-#: libbaul-private/org.mate.baul.gschema.xml:170
+#: libbaul-private/org.cafe.baul.gschema.xml:170
 msgid "Whether to preview sounds when mousing over an icon"
 msgstr "Se antever sons ao mover o rato sobre um ícone"
 
-#: libbaul-private/org.mate.baul.gschema.xml:171
+#: libbaul-private/org.cafe.baul.gschema.xml:171
 msgid ""
 "Speed tradeoff for when to preview a sound file when mousing over a files "
 "icon. If set to \"always\" then always plays the sound, even if the file is "
@@ -3231,11 +3231,11 @@ msgstr ""
 "reproduz sons em sistemas de ficheiros locais. Se \"never\", não serão "
 "reproduzidos quaisquer sons."
 
-#: libbaul-private/org.mate.baul.gschema.xml:175
+#: libbaul-private/org.cafe.baul.gschema.xml:175
 msgid "Show advanced permissions in the file property dialog"
 msgstr "Mostrar permissões avançadas no diálogo de propriedades do ficheiro"
 
-#: libbaul-private/org.mate.baul.gschema.xml:176
+#: libbaul-private/org.cafe.baul.gschema.xml:176
 msgid ""
 "If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
@@ -3244,11 +3244,11 @@ msgstr ""
 "permissões de ficheiros de uma forma similar ao unix, permitindo-lhe aceder "
 "a algumas opções mais esotéricas."
 
-#: libbaul-private/org.mate.baul.gschema.xml:180
+#: libbaul-private/org.cafe.baul.gschema.xml:180
 msgid "Show folders first in windows"
 msgstr "Mostrar pastas primeiro em janelas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:181
+#: libbaul-private/org.cafe.baul.gschema.xml:181
 msgid ""
 "If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
@@ -3256,11 +3256,11 @@ msgstr ""
 "Se definido como verdadeiro, o Baul apresenta as pastas antes de apresentar "
 "os ficheiros, nas vistas de lista e de ícones."
 
-#: libbaul-private/org.mate.baul.gschema.xml:188
+#: libbaul-private/org.cafe.baul.gschema.xml:188
 msgid "Default sort order"
 msgstr "Ordenação pré-definida"
 
-#: libbaul-private/org.mate.baul.gschema.xml:189
+#: libbaul-private/org.cafe.baul.gschema.xml:189
 msgid ""
 "The default sort-order for items in the icon view. Possible values are "
 "\"name\", \"size\", \"type\", \"mtime\", and \"emblems\"."
@@ -3268,11 +3268,11 @@ msgstr ""
 "O modo de ordenação por defeito na vista de ícones. Os valores possíveis são"
 " \"nome\", \"tamanho\", \"tipo\", \"mtime\" e \"emblemas\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:193
+#: libbaul-private/org.cafe.baul.gschema.xml:193
 msgid "Reverse sort order in new windows"
 msgstr "Inverter ordenação em novas janelas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:194
+#: libbaul-private/org.cafe.baul.gschema.xml:194
 msgid ""
 "If true, files in new windows will be sorted in reverse order. ie, if sorted"
 " by name, then instead of sorting the files from \"a\" to \"z\", they will "
@@ -3284,11 +3284,11 @@ msgstr ""
 "ordenados de \"z\" a \"a\"; se ordenados por tamanho, em vez de "
 "incrementalmente serão ordenados decrementalmente."
 
-#: libbaul-private/org.mate.baul.gschema.xml:198
+#: libbaul-private/org.cafe.baul.gschema.xml:198
 msgid "Baul uses the users home folder as the desktop"
 msgstr "O Baul utiliza a pasta pessoal do utilizador como área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:199
+#: libbaul-private/org.cafe.baul.gschema.xml:199
 msgid ""
 "If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
@@ -3297,49 +3297,49 @@ msgstr ""
 "como a sua área de trabalho. Se falso, utilizará ~/Desktop como a área de "
 "trabalho."
 
-#: libbaul-private/org.mate.baul.gschema.xml:203
+#: libbaul-private/org.cafe.baul.gschema.xml:203
 msgid "Custom Background"
 msgstr "Fundo personalizado"
 
-#: libbaul-private/org.mate.baul.gschema.xml:204
+#: libbaul-private/org.cafe.baul.gschema.xml:204
 msgid "Whether a custom default folder background has been set."
 msgstr "Se foi definido um fundo de diretório por omissão personalizado."
 
-#: libbaul-private/org.mate.baul.gschema.xml:208
+#: libbaul-private/org.cafe.baul.gschema.xml:208
 msgid "Default Background Color"
 msgstr "Cor pré-definida do fundo"
 
-#: libbaul-private/org.mate.baul.gschema.xml:209
+#: libbaul-private/org.cafe.baul.gschema.xml:209
 msgid ""
 "Color for the default folder background. Only used if background_set is "
 "true."
 msgstr ""
 "Cor padrão do fundo das pastas. Só utilizada se background_set for true"
 
-#: libbaul-private/org.mate.baul.gschema.xml:213
+#: libbaul-private/org.cafe.baul.gschema.xml:213
 msgid "Default Background Filename"
 msgstr "Nome de ficheiro do fundo pré-definido"
 
-#: libbaul-private/org.mate.baul.gschema.xml:214
+#: libbaul-private/org.cafe.baul.gschema.xml:214
 msgid ""
 "Uri of the default folder background. Only used if background_set is true."
 msgstr ""
 "URI do fundo padrão das pastas. Apenas utilizado se background_set for "
 "verdadeiro."
 
-#: libbaul-private/org.mate.baul.gschema.xml:218
+#: libbaul-private/org.cafe.baul.gschema.xml:218
 msgid "Custom Side Pane Background Set"
 msgstr "Fundo personalizado definido no painel lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:219
+#: libbaul-private/org.cafe.baul.gschema.xml:219
 msgid "Whether a custom default side pane background has been set."
 msgstr "Se foi definido um fundo de painel lateral por defeito personalizado."
 
-#: libbaul-private/org.mate.baul.gschema.xml:223
+#: libbaul-private/org.cafe.baul.gschema.xml:223
 msgid "Default Side Pane Background Color"
 msgstr "Cor de fundo pré-definida do painel lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:224
+#: libbaul-private/org.cafe.baul.gschema.xml:224
 msgid ""
 "Filename for the default side pane background. Only used if "
 "side_pane_background_set is true."
@@ -3347,11 +3347,11 @@ msgstr ""
 "Nome pré-definido do ficheiro para o fundo do painel lateral. Só usado se "
 "side_pane_background_set for verdadeiro"
 
-#: libbaul-private/org.mate.baul.gschema.xml:228
+#: libbaul-private/org.cafe.baul.gschema.xml:228
 msgid "Default Side Pane Background Filename"
 msgstr "Nome de ficheiro do fundo pré-definido do painel lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:229
+#: libbaul-private/org.cafe.baul.gschema.xml:229
 msgid ""
 "Uri of the default side pane background. Only used if "
 "side_pane_background_set is true."
@@ -3359,11 +3359,11 @@ msgstr ""
 "URI do fundo padrão do painel lateral. Apenas usado se "
 "side_pane_background_set for verdadeiro."
 
-#: libbaul-private/org.mate.baul.gschema.xml:238
+#: libbaul-private/org.cafe.baul.gschema.xml:238
 msgid "Default folder viewer"
 msgstr "Vista pré-definida da pasta "
 
-#: libbaul-private/org.mate.baul.gschema.xml:239
+#: libbaul-private/org.cafe.baul.gschema.xml:239
 msgid ""
 "When a folder is visited this viewer is used unless you have selected "
 "another view for that particular folder. Possible values are \"list-view\", "
@@ -3373,11 +3373,11 @@ msgstr ""
 " selecionado outra vista para essa pasta específica. Os valores possíveis "
 "são \"vista de lista\", \"vista de ícones\" e \"vista compacta\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:243
+#: libbaul-private/org.cafe.baul.gschema.xml:243
 msgid "Date Format"
 msgstr "Formato de data"
 
-#: libbaul-private/org.mate.baul.gschema.xml:244
+#: libbaul-private/org.cafe.baul.gschema.xml:244
 msgid ""
 "The format of file dates. Possible values are \"locale\", \"iso\", and "
 "\"informal\"."
@@ -3385,11 +3385,11 @@ msgstr ""
 "O formato das datas dos ficheiros. Valores possíveis são \"locale\", "
 "\"iso\", e \"informal\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:248
+#: libbaul-private/org.cafe.baul.gschema.xml:248
 msgid "Whether to show hidden files"
 msgstr "Se apresenta ficheiros escondidos"
 
-#: libbaul-private/org.mate.baul.gschema.xml:249
+#: libbaul-private/org.cafe.baul.gschema.xml:249
 msgid ""
 "If set to true, then hidden files are shown by default in the file manager. "
 "Hidden files are either dotfiles or listed in the folder's .hidden file."
@@ -3398,11 +3398,11 @@ msgstr ""
 "ficheiros. Os ficheiros ocultos são ficheiros ponto (dotfiles) ou são "
 "listados no ficheiro .hidden da pasta."
 
-#: libbaul-private/org.mate.baul.gschema.xml:253
+#: libbaul-private/org.cafe.baul.gschema.xml:253
 msgid "Whether to show backup files"
 msgstr "Se apresentar cópias de segurança de ficheiros"
 
-#: libbaul-private/org.mate.baul.gschema.xml:254
+#: libbaul-private/org.cafe.baul.gschema.xml:254
 msgid ""
 "If set to true, then backup files are shown by default in the file manager. "
 "Backup files are backup files ending with a tilde (~)."
@@ -3411,11 +3411,11 @@ msgstr ""
 "padrão no gestor de ficheiros. Os ficheiros de cópias de segurança terminam "
 "com um til (~)."
 
-#: libbaul-private/org.mate.baul.gschema.xml:259
+#: libbaul-private/org.cafe.baul.gschema.xml:259
 msgid "Whether to show file sizes with IEC units"
 msgstr "Se se deve mostrar os tamanhos de ficheiros com unidades IEC"
 
-#: libbaul-private/org.mate.baul.gschema.xml:260
+#: libbaul-private/org.cafe.baul.gschema.xml:260
 msgid ""
 "If set to true, file sizes are shown using IEC (base 1024) units with "
 "\"KiB\" style suffixes, instead of default with SI units."
@@ -3424,27 +3424,27 @@ msgstr ""
 "unidades IEC (base 1024) com sufixos de estilo \"KiB\", em vez das unidades "
 "SI padrão."
 
-#: libbaul-private/org.mate.baul.gschema.xml:264
+#: libbaul-private/org.cafe.baul.gschema.xml:264
 msgid "Whether to show icons in list view"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:265
+#: libbaul-private/org.cafe.baul.gschema.xml:265
 msgid "If set to true, show file icons in list view."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:269
+#: libbaul-private/org.cafe.baul.gschema.xml:269
 msgid "Whether to show desktop notifications"
 msgstr "Se se deve mostrar ou não notificações na área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:270
+#: libbaul-private/org.cafe.baul.gschema.xml:270
 msgid "If set to true, Baul will show desktop notifications."
 msgstr "Se ativado, o Baul irá mostrar notificações no ambiente de trabalho."
 
-#: libbaul-private/org.mate.baul.gschema.xml:277
+#: libbaul-private/org.cafe.baul.gschema.xml:277
 msgid "List of possible captions on icons"
 msgstr "Lista de legendas possíveis nos ícones"
 
-#: libbaul-private/org.mate.baul.gschema.xml:278
+#: libbaul-private/org.cafe.baul.gschema.xml:278
 msgid ""
 "A list of captions below an icon in the icon view and the desktop. The "
 "actual number of captions shown depends on the zoom level. Some possible "
@@ -3458,49 +3458,49 @@ msgstr ""
 "\"data_alterado\", \"data_acedido\", \"proprietário\", \"grupo\", "
 "\"permissões\", \"permissões_octal\" e \"tipo_mime\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:286
+#: libbaul-private/org.cafe.baul.gschema.xml:286
 msgid "Use tighter layout in new windows"
 msgstr "Utilizar disposição mais apertada em novas janelas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:287
+#: libbaul-private/org.cafe.baul.gschema.xml:287
 msgid "If true, icons will be laid out tighter by default in new windows."
 msgstr ""
 "Se verdadeiro, os ícones serão dispostos por defeito mais juntos nas novas "
 "janelas."
 
-#: libbaul-private/org.mate.baul.gschema.xml:291
+#: libbaul-private/org.cafe.baul.gschema.xml:291
 msgid "Put labels beside icons"
 msgstr "Colocar etiquetas ao lado dos ícones"
 
-#: libbaul-private/org.mate.baul.gschema.xml:292
+#: libbaul-private/org.cafe.baul.gschema.xml:292
 msgid ""
 "If true, labels will be placed beside icons rather than underneath them."
 msgstr ""
 "Se verdadeiro, serão colocadas etiquetas ao lado dos ícones, em vez de por "
 "baixo."
 
-#: libbaul-private/org.mate.baul.gschema.xml:296
+#: libbaul-private/org.cafe.baul.gschema.xml:296
 msgid "Default icon zoom level"
 msgstr "Nível de ampliação padrão dos ícones"
 
-#: libbaul-private/org.mate.baul.gschema.xml:297
+#: libbaul-private/org.cafe.baul.gschema.xml:297
 msgid "Default zoom level used by the icon view."
 msgstr "Nível de ampliação padrão utilizado na vista de ícones."
 
-#: libbaul-private/org.mate.baul.gschema.xml:301
+#: libbaul-private/org.cafe.baul.gschema.xml:301
 msgid "Default Thumbnail Icon Size"
 msgstr "Tamanho pré-definido do ícones das miniaturas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:302
+#: libbaul-private/org.cafe.baul.gschema.xml:302
 msgid "The default size of an icon for a thumbnail in the icon view."
 msgstr "O tamanho padrão do ícone de uma miniatura na vista de ícones."
 
-#: libbaul-private/org.mate.baul.gschema.xml:306
-#: libbaul-private/org.mate.baul.gschema.xml:425
+#: libbaul-private/org.cafe.baul.gschema.xml:306
+#: libbaul-private/org.cafe.baul.gschema.xml:425
 msgid "Text Ellipsis Limit"
 msgstr "Limite das Reticências no Texto"
 
-#: libbaul-private/org.mate.baul.gschema.xml:307
+#: libbaul-private/org.cafe.baul.gschema.xml:307
 msgid ""
 "A string specifying how parts of overlong file names should be replaced by "
 "ellipses, depending on the zoom level. Each of the list entries is of the "
@@ -3534,19 +3534,19 @@ msgstr ""
 " disponíveis: \"smallest\" (33%), \"smaller\" (50%), \"small\" (66%), "
 "\"standard\" (100%), \"large\" (150%), \"larger\" (200%), \"largest\" (400%)"
 
-#: libbaul-private/org.mate.baul.gschema.xml:332
+#: libbaul-private/org.cafe.baul.gschema.xml:332
 msgid "Default compact view zoom level"
 msgstr "Nível de ampliação padrão da vista compacta"
 
-#: libbaul-private/org.mate.baul.gschema.xml:333
+#: libbaul-private/org.cafe.baul.gschema.xml:333
 msgid "Default zoom level used by the compact view."
 msgstr "Nível de ampliação padrão utilizado na vista compacta."
 
-#: libbaul-private/org.mate.baul.gschema.xml:337
+#: libbaul-private/org.cafe.baul.gschema.xml:337
 msgid "All columns have same width"
 msgstr "Todas as colunas têm a mesma largura"
 
-#: libbaul-private/org.mate.baul.gschema.xml:338
+#: libbaul-private/org.cafe.baul.gschema.xml:338
 msgid ""
 "If this preference is set, all columns in the compact view have the same "
 "width. Otherwise, the width of each column is determined seperately."
@@ -3555,35 +3555,35 @@ msgstr ""
 " a mesma largura. Caso contrário, a largura de cada coluna é determinada "
 "individualmente."
 
-#: libbaul-private/org.mate.baul.gschema.xml:345
+#: libbaul-private/org.cafe.baul.gschema.xml:345
 msgid "Default list zoom level"
 msgstr "Nível pré-definido da ampliação da lista"
 
-#: libbaul-private/org.mate.baul.gschema.xml:346
+#: libbaul-private/org.cafe.baul.gschema.xml:346
 msgid "Default zoom level used by the list view."
 msgstr "Nível pré-definido de ampliação utilizado na vista de lista"
 
-#: libbaul-private/org.mate.baul.gschema.xml:350
+#: libbaul-private/org.cafe.baul.gschema.xml:350
 msgid "Default list of columns visible in the list view"
 msgstr "Lista pré-definida das colunas visíveis na vista de lista"
 
-#: libbaul-private/org.mate.baul.gschema.xml:351
+#: libbaul-private/org.cafe.baul.gschema.xml:351
 msgid "Default list of columns visible in the list view."
 msgstr "Lista pré-definida das colunas visíveis na vista de lista"
 
-#: libbaul-private/org.mate.baul.gschema.xml:355
+#: libbaul-private/org.cafe.baul.gschema.xml:355
 msgid "Default column order in the list view"
 msgstr "Ordenação pré-definida na vista de lista"
 
-#: libbaul-private/org.mate.baul.gschema.xml:356
+#: libbaul-private/org.cafe.baul.gschema.xml:356
 msgid "Default column order in the list view."
 msgstr "Ordenação pré-definida na vista de lista"
 
-#: libbaul-private/org.mate.baul.gschema.xml:367
+#: libbaul-private/org.cafe.baul.gschema.xml:367
 msgid "Only show folders in the tree side pane"
 msgstr "Apenas mostrar pastas na árvore do painel lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:368
+#: libbaul-private/org.cafe.baul.gschema.xml:368
 msgid ""
 "If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
@@ -3591,19 +3591,19 @@ msgstr ""
 "Se definido como verdadeiro, o Baul apenas apresentará pastas no painel "
 "lateral de árvore. Caso contrário, apresentará pastas e ficheiros."
 
-#: libbaul-private/org.mate.baul.gschema.xml:375
+#: libbaul-private/org.cafe.baul.gschema.xml:375
 msgid "Desktop font"
 msgstr "Tipo de letra da área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:376
+#: libbaul-private/org.cafe.baul.gschema.xml:376
 msgid "The font description used for the icons on the desktop."
 msgstr "A descrição da fonte utilizada para os ícones na área de trabalho."
 
-#: libbaul-private/org.mate.baul.gschema.xml:380
+#: libbaul-private/org.cafe.baul.gschema.xml:380
 msgid "Home icon visible on desktop"
 msgstr "Ícone de Pasta Pessoal visível na área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:381
+#: libbaul-private/org.cafe.baul.gschema.xml:381
 msgid ""
 "If this is set to true, an icon linking to the home folder will be put on "
 "the desktop."
@@ -3611,11 +3611,11 @@ msgstr ""
 "Se definido como verdadeiro, será colocado na área de trabalho um ícone a "
 "apontar para a pasta pessoal do utilizador."
 
-#: libbaul-private/org.mate.baul.gschema.xml:385
+#: libbaul-private/org.cafe.baul.gschema.xml:385
 msgid "Computer icon visible on desktop"
 msgstr "Ícone de computador visível na área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:386
+#: libbaul-private/org.cafe.baul.gschema.xml:386
 msgid ""
 "If this is set to true, an icon linking to the computer location will be put"
 " on the desktop."
@@ -3623,11 +3623,11 @@ msgstr ""
 "Se definido como verdadeiro, será colocado na área de trabalho um ícone a "
 "apontar para o computador."
 
-#: libbaul-private/org.mate.baul.gschema.xml:390
+#: libbaul-private/org.cafe.baul.gschema.xml:390
 msgid "Trash icon visible on desktop"
 msgstr "Ícone de lixo visível na área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:391
+#: libbaul-private/org.cafe.baul.gschema.xml:391
 msgid ""
 "If this is set to true, an icon linking to the trash will be put on the "
 "desktop."
@@ -3635,11 +3635,11 @@ msgstr ""
 "Se definido como verdadeiro, será colocado na área de trabalho um ícone a "
 "apontar para o lixo."
 
-#: libbaul-private/org.mate.baul.gschema.xml:395
+#: libbaul-private/org.cafe.baul.gschema.xml:395
 msgid "Show mounted volumes on the desktop"
 msgstr "Mostrar unidades montadas na área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:396
+#: libbaul-private/org.cafe.baul.gschema.xml:396
 msgid ""
 "If this is set to true, icons linking to mounted volumes will be put on the "
 "desktop."
@@ -3647,11 +3647,11 @@ msgstr ""
 "Se definido como verdadeiro, serão colocados na área de trabalho ícones que "
 "apontam para as unidades montadas."
 
-#: libbaul-private/org.mate.baul.gschema.xml:400
+#: libbaul-private/org.cafe.baul.gschema.xml:400
 msgid "Network Servers icon visible on the desktop"
 msgstr "Ícone de Servidores na Rede visível na área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:401
+#: libbaul-private/org.cafe.baul.gschema.xml:401
 msgid ""
 "If this is set to true, an icon linking to the Network Servers view will be "
 "put on the desktop."
@@ -3659,11 +3659,11 @@ msgstr ""
 "Se definido como verdadeiro, será colocado na área de trabalho um ícone a "
 "apontar a vista de Servidores da Rede."
 
-#: libbaul-private/org.mate.baul.gschema.xml:405
+#: libbaul-private/org.cafe.baul.gschema.xml:405
 msgid "Desktop computer icon name"
 msgstr "Nome do ícone do computador da área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:406
+#: libbaul-private/org.cafe.baul.gschema.xml:406
 msgid ""
 "This name can be set if you want a custom name for the computer icon on the "
 "desktop."
@@ -3671,11 +3671,11 @@ msgstr ""
 "Este nome pode ser definido caso deseje um nome personalizado para o ícone "
 "de computador na área de trabalho."
 
-#: libbaul-private/org.mate.baul.gschema.xml:410
+#: libbaul-private/org.cafe.baul.gschema.xml:410
 msgid "Desktop home icon name"
 msgstr "Nome do ícone da pata pessoal na área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:411
+#: libbaul-private/org.cafe.baul.gschema.xml:411
 msgid ""
 "This name can be set if you want a custom name for the home icon on the "
 "desktop."
@@ -3683,11 +3683,11 @@ msgstr ""
 "Este nome pode ser definido caso deseje um nome personalizado para o ícone "
 "de pasta pessoal na área de trabalho."
 
-#: libbaul-private/org.mate.baul.gschema.xml:415
+#: libbaul-private/org.cafe.baul.gschema.xml:415
 msgid "Desktop trash icon name"
 msgstr "Nome do ícone do lixo na área de trabalho"
 
-#: libbaul-private/org.mate.baul.gschema.xml:416
+#: libbaul-private/org.cafe.baul.gschema.xml:416
 msgid ""
 "This name can be set if you want a custom name for the trash icon on the "
 "desktop."
@@ -3695,11 +3695,11 @@ msgstr ""
 "Este nome pode ser definido caso deseje um nome personalizado para o ícone "
 "de lixo na área de trabalho."
 
-#: libbaul-private/org.mate.baul.gschema.xml:420
+#: libbaul-private/org.cafe.baul.gschema.xml:420
 msgid "Network servers icon name"
 msgstr "Nome do ícone de servidores de rede"
 
-#: libbaul-private/org.mate.baul.gschema.xml:421
+#: libbaul-private/org.cafe.baul.gschema.xml:421
 msgid ""
 "This name can be set if you want a custom name for the network servers icon "
 "on the desktop."
@@ -3707,7 +3707,7 @@ msgstr ""
 "Este nome pode ser definido caso deseje um nome personalizado para o ícone "
 "servidores de rede na área de trabalho."
 
-#: libbaul-private/org.mate.baul.gschema.xml:426
+#: libbaul-private/org.cafe.baul.gschema.xml:426
 msgid ""
 "An integer specifying how parts of overlong file names should be replaced by"
 " ellipses on the desktop. If the number is larger than 0, the file name will"
@@ -3720,11 +3720,11 @@ msgstr ""
 "linhas indicado. Se o número for 0 ou inferior, nenhum limite será imposto "
 "sobre o número de linhas apresentadas."
 
-#: libbaul-private/org.mate.baul.gschema.xml:433
+#: libbaul-private/org.cafe.baul.gschema.xml:433
 msgid "The geometry string for a navigation window."
 msgstr "A expressão de geometria de uma janela de navegação."
 
-#: libbaul-private/org.mate.baul.gschema.xml:434
+#: libbaul-private/org.cafe.baul.gschema.xml:434
 msgid ""
 "A string containing the saved geometry and coordinates string for navigation"
 " windows."
@@ -3732,82 +3732,82 @@ msgstr ""
 "Uma expressão com a geometria gravada e as coordenadas das janelas de "
 "navegação"
 
-#: libbaul-private/org.mate.baul.gschema.xml:438
+#: libbaul-private/org.cafe.baul.gschema.xml:438
 msgid "Whether the navigation window should be maximized."
 msgstr "Se a janela de navegação deverá estar maximizada."
 
-#: libbaul-private/org.mate.baul.gschema.xml:439
+#: libbaul-private/org.cafe.baul.gschema.xml:439
 msgid "Whether the navigation window should be maximized by default."
 msgstr "Se a janela de navegação deverá estar maximizada por defeito."
 
-#: libbaul-private/org.mate.baul.gschema.xml:443
+#: libbaul-private/org.cafe.baul.gschema.xml:443
 msgid "Width of the side pane"
 msgstr "Largura do painel lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:444
+#: libbaul-private/org.cafe.baul.gschema.xml:444
 msgid "The default width of the side pane in new windows."
 msgstr "A largura padrão do painel lateral nas novas janelas."
 
-#: libbaul-private/org.mate.baul.gschema.xml:448
+#: libbaul-private/org.cafe.baul.gschema.xml:448
 msgid "Show toolbar in new windows"
 msgstr "Mostrar barra de ferramentas em novas janelas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:449
+#: libbaul-private/org.cafe.baul.gschema.xml:449
 msgid "If set to true, newly opened windows will have toolbars visible."
 msgstr ""
 "Se definido como verdadeiro, novas janelas terão a barra de ferramentas "
 "visível."
 
-#: libbaul-private/org.mate.baul.gschema.xml:453
+#: libbaul-private/org.cafe.baul.gschema.xml:453
 msgid "Show location bar in new windows"
 msgstr "Mostrar barra de localização em novas janelas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:454
+#: libbaul-private/org.cafe.baul.gschema.xml:454
 msgid ""
 "If set to true, newly opened windows will have the location bar visible."
 msgstr ""
 "Se definido como verdadeiro, novas janelas terão a barra de localização "
 "visível."
 
-#: libbaul-private/org.mate.baul.gschema.xml:458
+#: libbaul-private/org.cafe.baul.gschema.xml:458
 msgid "Show status bar in new windows"
 msgstr "Mostrar barra de estado nas novas janelas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:459
+#: libbaul-private/org.cafe.baul.gschema.xml:459
 msgid "If set to true, newly opened windows will have the status bar visible."
 msgstr ""
 "Se definido como verdadeiro, novas janelas terão a barra de estado visível."
 
-#: libbaul-private/org.mate.baul.gschema.xml:463
+#: libbaul-private/org.cafe.baul.gschema.xml:463
 msgid "Show side pane in new windows"
 msgstr "Mostrar painel lateral nas novas janelas"
 
-#: libbaul-private/org.mate.baul.gschema.xml:464
+#: libbaul-private/org.cafe.baul.gschema.xml:464
 msgid "If set to true, newly opened windows will have the side pane visible."
 msgstr ""
 "Se definido como verdadeiro, novas janelas terão o painel lateral visível."
 
-#: libbaul-private/org.mate.baul.gschema.xml:484
+#: libbaul-private/org.cafe.baul.gschema.xml:484
 msgid "Side pane view"
 msgstr "Vista de painel lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:485
+#: libbaul-private/org.cafe.baul.gschema.xml:485
 msgid "The side pane view to show in newly opened windows."
 msgstr "A vista de painel lateral a apresentar em novas janelas."
 
-#: libbaul-private/org.mate.baul.gschema.xml:492
+#: libbaul-private/org.cafe.baul.gschema.xml:492
 msgid "List of extensions in disabled state."
 msgstr "Lista de extensões no estado desativado"
 
-#: libbaul-private/org.mate.baul.gschema.xml:493
+#: libbaul-private/org.cafe.baul.gschema.xml:493
 msgid "This list contains the extensions that are currently de-activated."
 msgstr "Esta lista contém as extensões que estão atualmente desativadas."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:5
+#: libbaul-private/org.cafe.media-handling.gschema.xml:5
 msgid "Whether to automatically mount media"
 msgstr "Se montar ou não o media automaticamente"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:6
+#: libbaul-private/org.cafe.media-handling.gschema.xml:6
 msgid ""
 "If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
@@ -3816,13 +3816,13 @@ msgstr ""
 "visíveis pelo utilizador tal como discos rígidos e media removível, ao "
 "iniciar e ao serem inseridos."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:10
+#: libbaul-private/org.cafe.media-handling.gschema.xml:10
 msgid "Whether to automatically open a folder for automounted media"
 msgstr ""
 "Se abrir automaticamente ou não uma pasta para o media montado "
 "automaticamente"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:11
+#: libbaul-private/org.cafe.media-handling.gschema.xml:11
 msgid ""
 "If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
@@ -3835,13 +3835,13 @@ msgstr ""
 "detetado um x-content/* conhecido, será executada a ação configurável pelo "
 "utilizador."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:15
+#: libbaul-private/org.cafe.media-handling.gschema.xml:15
 msgid "Never prompt or autorun/autostart programs when media are inserted"
 msgstr ""
 "Nunca questionar nem executar/iniciar automaticamente aplicações quando é "
 "inserido um media"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:16
+#: libbaul-private/org.cafe.media-handling.gschema.xml:16
 msgid ""
 "If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
@@ -3849,13 +3849,13 @@ msgstr ""
 "Se definido como verdadeiro, o Baul nunca questionará sobre aplicações de "
 "execução ou abertura automática ao ser inserido um media."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:20
+#: libbaul-private/org.cafe.media-handling.gschema.xml:20
 msgid ""
 "List of x-content/* types where the preferred application will be launched"
 msgstr ""
 "Lista de tipos de x-content/* para os quais será iniciada uma aplicação"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:21
+#: libbaul-private/org.cafe.media-handling.gschema.xml:21
 msgid ""
 "List of x-content/* types for which the user have chosen to start an "
 "application in the preference capplet. The preferred application for the "
@@ -3865,11 +3865,11 @@ msgstr ""
 "aplicação na applet de preferências. A aplicação preferida de cada tipo será"
 " iniciada ao ser inserido um media de um desses tipos."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:25
+#: libbaul-private/org.cafe.media-handling.gschema.xml:25
 msgid "List of x-content/* types set to \"Do Nothing\""
 msgstr "Lista de tipos de x-content/* definidos para \"Não Fazer Nada\""
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:26
+#: libbaul-private/org.cafe.media-handling.gschema.xml:26
 msgid ""
 "List of x-content/* types for which the user have chosen \"Do Nothing\" in "
 "the preference capplet. No prompt will be shown nor will any matching "
@@ -3879,11 +3879,11 @@ msgstr ""
 "Nada\" na applet de preferências. Nada será questionado nem será iniciada "
 "nenhuma aplicação ao ser inserido um media de um desses tipos."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:30
+#: libbaul-private/org.cafe.media-handling.gschema.xml:30
 msgid "List of x-content/* types set to \"Open Folder\""
 msgstr "Lista de tipos de x-content/* definidos para \"Abrir Pasta\""
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:31
+#: libbaul-private/org.cafe.media-handling.gschema.xml:31
 msgid ""
 "List of x-content/* types for which the user have chosen \"Open Folder\" in "
 "the preferences capplet. A folder window will be opened on insertion of "

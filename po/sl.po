@@ -16,11 +16,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: baul 1.23.2\n"
-"Report-Msgid-Bugs-To: https://mate-desktop.org\n"
+"Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
 "POT-Creation-Date: 2020-01-10 11:11+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Helena S <ele@tutamail.com>, 2020\n"
-"Language-Team: Slovenian (https://www.transifex.com/mate/teams/13566/sl/)\n"
+"Language-Team: Slovenian (https://www.transifex.com/cafe/teams/13566/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -436,23 +436,23 @@ msgstr "dom;domača;home;osebno;mapa;odpri;MATE;"
 msgid "Saved search"
 msgstr "Shranjeno iskanje"
 
-#: data/mate-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
+#: data/cafe-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
 msgid "Network"
 msgstr "Omrežje"
 
-#: data/mate-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
 msgid "Browse bookmarked and local network locations"
 msgstr "Brskanje med zaznamki in mesti krajevnega omrežja"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon
 #. file name)!
-#: data/mate-network-scheme.desktop.in.in:11
+#: data/cafe-network-scheme.desktop.in.in:11
 msgid "network-workgroup"
 msgstr "network-workgroup"
 
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
-#: data/mate-network-scheme.desktop.in.in:14
+#: data/cafe-network-scheme.desktop.in.in:14
 msgid "bookmarks;browse;local;network;locations;MATE;"
 msgstr ""
 
@@ -1440,8 +1440,8 @@ msgstr[3] "%'d ur"
 
 #: libbaul-private/baul-file-operations.c:330
 #, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
+msgid "approxicafely %'d hour"
+msgid_plural "approxicafely %'d hours"
 msgstr[0] "približno %'d uro"
 msgstr[1] "približno %'d uri"
 msgstr[2] "približno %'d ure"
@@ -1684,7 +1684,7 @@ msgstr "Napaka med brisanjem."
 msgid ""
 "Files in the folder \"%B\" cannot be deleted because you do not have "
 "permissions to see them."
-msgstr "Datotek v mapi \"%B\" ni mogoče izbrisati, ker nimate dovoljenj za ogled."
+msgstr "Datotek v mapi \"%B\" ni mogoče izbrisati, ker nicafe dovoljenj za ogled."
 
 #: libbaul-private/baul-file-operations.c:1621
 #: libbaul-private/baul-file-operations.c:2653
@@ -1703,7 +1703,7 @@ msgstr "Pre_skoči datoteke"
 msgid ""
 "The folder \"%B\" cannot be deleted because you do not have permissions to "
 "read it."
-msgstr "Mape \"%B\" ni mogoče izbrisati, ker nimate dovoljenja za branje."
+msgstr "Mape \"%B\" ni mogoče izbrisati, ker nicafe dovoljenja za branje."
 
 #: libbaul-private/baul-file-operations.c:1654
 #: libbaul-private/baul-file-operations.c:2692
@@ -1844,20 +1844,20 @@ msgid ""
 "Files in the folder \"%B\" cannot be handled because you do not have "
 "permissions to see them."
 msgstr ""
-"Z datotekami v mapi \"%B\" ni mogoče upravljati, ker nimate dovoljenja za "
+"Z datotekami v mapi \"%B\" ni mogoče upravljati, ker nicafe dovoljenja za "
 "ogled."
 
 #: libbaul-private/baul-file-operations.c:2689
 msgid ""
 "The folder \"%B\" cannot be handled because you do not have permissions to "
 "read it."
-msgstr "Z mapo \"%B\" ni mogoče upravljati, ker nimate dovoljenja za branje."
+msgstr "Z mapo \"%B\" ni mogoče upravljati, ker nicafe dovoljenja za branje."
 
 #: libbaul-private/baul-file-operations.c:2767
 msgid ""
 "The file \"%B\" cannot be handled because you do not have permissions to "
 "read it."
-msgstr "Z datoteko \"%B\" ni mogoče upravljati, ker nimate dovoljenja za branje."
+msgstr "Z datoteko \"%B\" ni mogoče upravljati, ker nicafe dovoljenja za branje."
 
 #: libbaul-private/baul-file-operations.c:2770
 msgid "There was an error getting information about \"%B\"."
@@ -1872,7 +1872,7 @@ msgstr "Napaka med kopiranjem v \"%B\"."
 
 #: libbaul-private/baul-file-operations.c:2874
 msgid "You do not have permissions to access the destination folder."
-msgstr "Nimate dovoljenj za dostop do ciljne mape."
+msgstr "Nicafe dovoljenj za dostop do ciljne mape."
 
 #: libbaul-private/baul-file-operations.c:2876
 msgid "There was an error getting information about the destination."
@@ -1985,7 +1985,7 @@ msgid ""
 "The folder \"%B\" cannot be copied because you do not have permissions to "
 "create it in the destination."
 msgstr ""
-"Mape \"%B\" ni mogoče kopirati, ker nimate dovoljenj za pisanje na ciljnem "
+"Mape \"%B\" ni mogoče kopirati, ker nicafe dovoljenj za pisanje na ciljnem "
 "mestu."
 
 #: libbaul-private/baul-file-operations.c:3507
@@ -1996,13 +1996,13 @@ msgstr "Prišlo je do napake med ustvarjanjem mape \"%B\"."
 msgid ""
 "Files in the folder \"%B\" cannot be copied because you do not have "
 "permissions to see them."
-msgstr "Datotek v mapi \"%B\" ni mogoče kopirati, ker nimate dovoljenja za ogled."
+msgstr "Datotek v mapi \"%B\" ni mogoče kopirati, ker nicafe dovoljenja za ogled."
 
 #: libbaul-private/baul-file-operations.c:3690
 msgid ""
 "The folder \"%B\" cannot be copied because you do not have permissions to "
 "read it."
-msgstr "Mape \"%B\" ni mogoče kopirati, ker nimate dovoljenj za branje."
+msgstr "Mape \"%B\" ni mogoče kopirati, ker nicafe dovoljenj za branje."
 
 #: libbaul-private/baul-file-operations.c:3735
 #: libbaul-private/baul-file-operations.c:4436
@@ -3051,11 +3051,11 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:76
+#: libbaul-private/org.cafe.baul.gschema.xml:76
 msgid "Where to position newly open tabs in browser windows."
 msgstr "Kam naj se postavi novo odprti zavihek okna."
 
-#: libbaul-private/org.mate.baul.gschema.xml:77
+#: libbaul-private/org.cafe.baul.gschema.xml:77
 msgid ""
 "If set to \"after-current-tab\", then new tabs are inserted after the "
 "current tab. If set to \"end\", then new tabs are appended to the end of the"
@@ -3065,11 +3065,11 @@ msgstr ""
 "vedno postavljeni za trenutno izbrani zavihek. Možnost \"end\" pa pripne "
 "nove zavihke na konec seznama zavihkov."
 
-#: libbaul-private/org.mate.baul.gschema.xml:81
+#: libbaul-private/org.cafe.baul.gschema.xml:81
 msgid "Switch tabs with [ctrl] + [tab]"
 msgstr "Preklopi med zavihki z [ctrl] + [tab]"
 
-#: libbaul-private/org.mate.baul.gschema.xml:82
+#: libbaul-private/org.cafe.baul.gschema.xml:82
 msgid ""
 "If true, it enables the ability to switch tabs using [ctrl + tab] and [ctrl "
 "+ shift + tab]."
@@ -3077,11 +3077,11 @@ msgstr ""
 "Izbrana možnost omogoči preklope med zavihki z uporabo [ctrl+tab] in "
 "[ctrl+shift+tab]."
 
-#: libbaul-private/org.mate.baul.gschema.xml:86
+#: libbaul-private/org.cafe.baul.gschema.xml:86
 msgid "Baul will exit when last window destroyed."
 msgstr "Baul se konča, ko je zaprto zadnje okno."
 
-#: libbaul-private/org.mate.baul.gschema.xml:87
+#: libbaul-private/org.cafe.baul.gschema.xml:87
 msgid ""
 "If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
@@ -3092,13 +3092,13 @@ msgstr ""
 "zagnati brez odprtih oken in tako deluje kot ozadnji program za nadzor "
 "samodejnega zaganjanja programov oziroma drugih opravil."
 
-#: libbaul-private/org.mate.baul.gschema.xml:91
+#: libbaul-private/org.cafe.baul.gschema.xml:91
 msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
 "Omogoča običajno delovanje Baula, tako da so vsa okna namenjena tudi "
 "brskanju."
 
-#: libbaul-private/org.mate.baul.gschema.xml:92
+#: libbaul-private/org.cafe.baul.gschema.xml:92
 msgid ""
 "If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
@@ -3108,11 +3108,11 @@ msgstr ""
 "je Nautilus deloval pred različico 2.6, kar je najljubša izbira nekaterih "
 "uporabnikov."
 
-#: libbaul-private/org.mate.baul.gschema.xml:96
+#: libbaul-private/org.cafe.baul.gschema.xml:96
 msgid "Always use the location entry, instead of the pathbar"
 msgstr "Vedno uporabi vnosno polje mesta namesto gumbov s potjo"
 
-#: libbaul-private/org.mate.baul.gschema.xml:97
+#: libbaul-private/org.cafe.baul.gschema.xml:97
 msgid ""
 "If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
@@ -3120,13 +3120,13 @@ msgstr ""
 "Izbrana možnost omogoča, da Baulova okna za brskanje vedno uporabljajo polje"
 " za besedilni vnos mesta namesto gumbov s potjo."
 
-#: libbaul-private/org.mate.baul.gschema.xml:101
+#: libbaul-private/org.cafe.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
 msgstr ""
 "Ali naj program zahteva potrditev pred premikanjem datotek v smeti ali pred "
 "brisanjem."
 
-#: libbaul-private/org.mate.baul.gschema.xml:102
+#: libbaul-private/org.cafe.baul.gschema.xml:102
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
@@ -3134,11 +3134,11 @@ msgstr ""
 "Izbrana možnost omogoča, da program Baul pred brisanjem ali prestavljanjem "
 "predmetov v smeti vedno vpraša za potrditev."
 
-#: libbaul-private/org.mate.baul.gschema.xml:106
+#: libbaul-private/org.cafe.baul.gschema.xml:106
 msgid "Whether to ask for confirmation when moving files to the Trash"
 msgstr "Ali naj program zahteva potrditev pred premikanjem datotek v smeti"
 
-#: libbaul-private/org.mate.baul.gschema.xml:107
+#: libbaul-private/org.cafe.baul.gschema.xml:107
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
@@ -3146,11 +3146,11 @@ msgstr ""
 "Izbrana možnost omogoča, da program Baul pred premikom datotek vedno vpraša "
 "za potrditev."
 
-#: libbaul-private/org.mate.baul.gschema.xml:111
+#: libbaul-private/org.cafe.baul.gschema.xml:111
 msgid "Whether to enable immediate deletion"
 msgstr "Ali naj bo omogočen neposreden izbris datotek"
 
-#: libbaul-private/org.mate.baul.gschema.xml:112
+#: libbaul-private/org.cafe.baul.gschema.xml:112
 msgid ""
 "If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
@@ -3159,11 +3159,11 @@ msgstr ""
 "Izbrana možnost omogoči, neposredno brisanje datoteke v Baulu namesto "
 "premika v smeti. Ta možnost je lahko nevarna, zato jo uporabljajte previdno."
 
-#: libbaul-private/org.mate.baul.gschema.xml:117
+#: libbaul-private/org.cafe.baul.gschema.xml:117
 msgid "When to show preview text in icons"
 msgstr "Kdaj naj se pokaže predogled besedila v ikonah"
 
-#: libbaul-private/org.mate.baul.gschema.xml:118
+#: libbaul-private/org.cafe.baul.gschema.xml:118
 msgid ""
 "Speed tradeoff for when to show a preview of text file contents in the "
 "file's icon. If set to \"always\" then always show previews, even if the "
@@ -3178,11 +3178,11 @@ msgstr ""
 "nastavljeno na \"nikoli\", se datoteke z besedilom nikoli ne prikažejo v "
 "predogledu."
 
-#: libbaul-private/org.mate.baul.gschema.xml:123
+#: libbaul-private/org.cafe.baul.gschema.xml:123
 msgid "When to show number of items in a folder"
 msgstr "Kdaj naj se pokaže število predmetov v mapi"
 
-#: libbaul-private/org.mate.baul.gschema.xml:124
+#: libbaul-private/org.cafe.baul.gschema.xml:124
 msgid ""
 "Speed tradeoff for when to show the number of items in a folder. If set to "
 "\"always\" then always show item counts, even if the folder is on a remote "
@@ -3195,11 +3195,11 @@ msgstr ""
 "mape na krajevnih datotečnih sistemih. Če je nastavljeno na \"nikoli\", se "
 "število predmetov v mapah nikoli ne prešteje."
 
-#: libbaul-private/org.mate.baul.gschema.xml:128
+#: libbaul-private/org.cafe.baul.gschema.xml:128
 msgid "Type of click used to launch/open files"
 msgstr "Vrsta klika uporabljena za zagon/odpiranje datotek"
 
-#: libbaul-private/org.mate.baul.gschema.xml:129
+#: libbaul-private/org.cafe.baul.gschema.xml:129
 msgid ""
 "Possible values are \"single\" to launch files on a single click, or "
 "\"double\" to launch them on a double click."
@@ -3207,11 +3207,11 @@ msgstr ""
 "Mogoče vrednosti so \"single\" (enojni) za zagon datotek z enojnim klikom "
 "ali \"double\" (dvojni) za zagon datotek z dvojnim klikom."
 
-#: libbaul-private/org.mate.baul.gschema.xml:133
+#: libbaul-private/org.cafe.baul.gschema.xml:133
 msgid "What to do with executable text files when activated"
 msgstr "Kaj storiti z izvedljivimi besedilnimi datotekami, ko so dejavne"
 
-#: libbaul-private/org.mate.baul.gschema.xml:134
+#: libbaul-private/org.cafe.baul.gschema.xml:134
 msgid ""
 "What to do with executable text files when they are activated (single or "
 "double clicked). Possible values are \"launch\" to launch them as programs, "
@@ -3222,11 +3222,11 @@ msgstr ""
 "oz. dvojnim klikom) Mogoče vrednosti so \"launch\" za zagon kot programa, "
 "\"ask\" za vprašanje uporabniku in \"display\" za prikaz kot besedilo."
 
-#: libbaul-private/org.mate.baul.gschema.xml:138
+#: libbaul-private/org.cafe.baul.gschema.xml:138
 msgid "Show the package installer for unknown MIME types"
 msgstr "Pokaži namestilnik paketov za neznane vrste datotek"
 
-#: libbaul-private/org.mate.baul.gschema.xml:139
+#: libbaul-private/org.cafe.baul.gschema.xml:139
 msgid ""
 "Whether to show the user a package installer dialog in case an unknown MIME "
 "type is opened, in order to search for an application to handle it."
@@ -3235,11 +3235,11 @@ msgstr ""
 "pogovorno okno namestilnika paketov za iskanje ustreznega programa za "
 "upravljanje neznane vrste mime."
 
-#: libbaul-private/org.mate.baul.gschema.xml:143
+#: libbaul-private/org.cafe.baul.gschema.xml:143
 msgid "Use extra mouse button events in Baul' browser window"
 msgstr "Uporabi dodatna dejanja gumbov miške v oknu brskalnika Baul"
 
-#: libbaul-private/org.mate.baul.gschema.xml:144
+#: libbaul-private/org.cafe.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
 "will determine if any action is taken inside of Baul when either is pressed."
@@ -3247,11 +3247,11 @@ msgstr ""
 "Za uporabnike, ki imajo na miški gumba \"Naprej\" in \"Nazaj\", določilo "
 "določi katero dejanje je povezano z delovanjem programa Baul."
 
-#: libbaul-private/org.mate.baul.gschema.xml:148
+#: libbaul-private/org.cafe.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
 msgstr "Gumb miške za izvršitev ukaza \"Naprej\" v brskalniku."
 
-#: libbaul-private/org.mate.baul.gschema.xml:149
+#: libbaul-private/org.cafe.baul.gschema.xml:149
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Forward\" command in a browser "
@@ -3261,11 +3261,11 @@ msgstr ""
 "določi kateri gumb prevzame ukaz \"Naprej\" v oknu brskalnika. Mogoče "
 "vrednosti so med 6 in 14."
 
-#: libbaul-private/org.mate.baul.gschema.xml:153
+#: libbaul-private/org.cafe.baul.gschema.xml:153
 msgid "Mouse button to activate the \"Back\" command in browser window"
 msgstr "Gumb miške za izvršitev ukaza \"Nazaj\" v brskalniku."
 
-#: libbaul-private/org.mate.baul.gschema.xml:154
+#: libbaul-private/org.cafe.baul.gschema.xml:154
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Back\" command in a browser window. "
@@ -3275,11 +3275,11 @@ msgstr ""
 "določi kateri gumb prevzame ukaz \"Nazaj\" v oknu brskalnika. Mogoče "
 "vrednosti so med 6 in 14."
 
-#: libbaul-private/org.mate.baul.gschema.xml:159
+#: libbaul-private/org.cafe.baul.gschema.xml:159
 msgid "When to show thumbnails of image files"
 msgstr "Kdaj naj se pokažejo sličice slikovnih datotek"
 
-#: libbaul-private/org.mate.baul.gschema.xml:160
+#: libbaul-private/org.cafe.baul.gschema.xml:160
 msgid ""
 "Speed tradeoff for when to show an image file as a thumbnail. If set to "
 "\"always\" then always thumbnail, even if the folder is on a remote server. "
@@ -3294,11 +3294,11 @@ msgstr ""
 " na \"nikoli\", se sličice nikoli ne prikažejo, ampak se uporabi  splošna "
 "ikona."
 
-#: libbaul-private/org.mate.baul.gschema.xml:164
+#: libbaul-private/org.cafe.baul.gschema.xml:164
 msgid "Maximum image size for thumbnailing"
 msgstr "Največja velikost slike za izdelavo sličic"
 
-#: libbaul-private/org.mate.baul.gschema.xml:165
+#: libbaul-private/org.cafe.baul.gschema.xml:165
 msgid ""
 "Images over this size (in bytes) won't be thumbnailed. The purpose of this "
 "setting is to avoid thumbnailing large images that may take a long time to "
@@ -3308,12 +3308,12 @@ msgstr ""
 "nastavitev je izogibanje izdelavi sličic velikih datotek, ki bi lahko vzele "
 "veliko časa za nalaganje in porabile veliko pomnilnika."
 
-#: libbaul-private/org.mate.baul.gschema.xml:170
+#: libbaul-private/org.cafe.baul.gschema.xml:170
 msgid "Whether to preview sounds when mousing over an icon"
 msgstr ""
 "Ali naj se predvajajo zvočne datoteke, ko je nad njihovimi ikonami miška"
 
-#: libbaul-private/org.mate.baul.gschema.xml:171
+#: libbaul-private/org.cafe.baul.gschema.xml:171
 msgid ""
 "Speed tradeoff for when to preview a sound file when mousing over a files "
 "icon. If set to \"always\" then always plays the sound, even if the file is "
@@ -3326,11 +3326,11 @@ msgstr ""
 "datoteke le na krajevnih datotečnih sistemih. Če je nastavljeno na "
 "\"nikoli\", se zvočne datoteke ne predvajajo nikoli."
 
-#: libbaul-private/org.mate.baul.gschema.xml:175
+#: libbaul-private/org.cafe.baul.gschema.xml:175
 msgid "Show advanced permissions in the file property dialog"
 msgstr "V pogovornemu oknu lastnosti datotek pokaži napredna dovoljenja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:176
+#: libbaul-private/org.cafe.baul.gschema.xml:176
 msgid ""
 "If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
@@ -3338,11 +3338,11 @@ msgstr ""
 "Izbrana možnost omogoča, da Baul omogoči urejanje in prikaz dovoljenj "
 "datotek v \"unix\" načinu."
 
-#: libbaul-private/org.mate.baul.gschema.xml:180
+#: libbaul-private/org.cafe.baul.gschema.xml:180
 msgid "Show folders first in windows"
 msgstr "V oknih najprej pokaži mape"
 
-#: libbaul-private/org.mate.baul.gschema.xml:181
+#: libbaul-private/org.cafe.baul.gschema.xml:181
 msgid ""
 "If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
@@ -3350,11 +3350,11 @@ msgstr ""
 "Izbrana možnost omogoča, da Baul v seznamskem prikazu in prikazu ikon "
 "prikaže mape pred datotekami."
 
-#: libbaul-private/org.mate.baul.gschema.xml:188
+#: libbaul-private/org.cafe.baul.gschema.xml:188
 msgid "Default sort order"
 msgstr "Privzet vrstni red razvrščanja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:189
+#: libbaul-private/org.cafe.baul.gschema.xml:189
 msgid ""
 "The default sort-order for items in the icon view. Possible values are "
 "\"name\", \"size\", \"type\", \"mtime\", and \"emblems\"."
@@ -3362,11 +3362,11 @@ msgstr ""
 "Privzeto razvrščanje predmetov v pogledu ikon. Možne vrednosti so \"name\", "
 "\"size\", \"type\", \"mtime\" in \"emblems\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:193
+#: libbaul-private/org.cafe.baul.gschema.xml:193
 msgid "Reverse sort order in new windows"
 msgstr "V novih oknih obrni razvrstitev"
 
-#: libbaul-private/org.mate.baul.gschema.xml:194
+#: libbaul-private/org.cafe.baul.gschema.xml:194
 msgid ""
 "If true, files in new windows will be sorted in reverse order. ie, if sorted"
 " by name, then instead of sorting the files from \"a\" to \"z\", they will "
@@ -3379,11 +3379,11 @@ msgstr ""
 " velikosti, bodo namesto od večje proti manjši urejene od manjše proti "
 "večji."
 
-#: libbaul-private/org.mate.baul.gschema.xml:198
+#: libbaul-private/org.cafe.baul.gschema.xml:198
 msgid "Baul uses the users home folder as the desktop"
 msgstr "Baul naj uporabnikovo domačo mapo uporabi kot namizje"
 
-#: libbaul-private/org.mate.baul.gschema.xml:199
+#: libbaul-private/org.cafe.baul.gschema.xml:199
 msgid ""
 "If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
@@ -3391,19 +3391,19 @@ msgstr ""
 "Izbrana možnost določi, da Baul za namizje uporabi uporabnikovo domačo mapo."
 " Sicer bo za namizje uporabil mapo ~/Namizje."
 
-#: libbaul-private/org.mate.baul.gschema.xml:203
+#: libbaul-private/org.cafe.baul.gschema.xml:203
 msgid "Custom Background"
 msgstr "Ozadje po meri"
 
-#: libbaul-private/org.mate.baul.gschema.xml:204
+#: libbaul-private/org.cafe.baul.gschema.xml:204
 msgid "Whether a custom default folder background has been set."
 msgstr "Ali je bilo nastavljeno po meri privzeto ozadje mape."
 
-#: libbaul-private/org.mate.baul.gschema.xml:208
+#: libbaul-private/org.cafe.baul.gschema.xml:208
 msgid "Default Background Color"
 msgstr "Privzeta barva ozadja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:209
+#: libbaul-private/org.cafe.baul.gschema.xml:209
 msgid ""
 "Color for the default folder background. Only used if background_set is "
 "true."
@@ -3411,30 +3411,30 @@ msgstr ""
 "Barva za privzeto ozadje map. Uporabljeno le, če je uporabljena možnost "
 "nastavljanja ozadja."
 
-#: libbaul-private/org.mate.baul.gschema.xml:213
+#: libbaul-private/org.cafe.baul.gschema.xml:213
 msgid "Default Background Filename"
 msgstr "Privzeto ime datoteke ozadja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:214
+#: libbaul-private/org.cafe.baul.gschema.xml:214
 msgid ""
 "Uri of the default folder background. Only used if background_set is true."
 msgstr ""
 "Ime datoteke privzetega ozadja map. Uporabljeno le, če je uporabljena "
 "možnost nastavitve ozadja."
 
-#: libbaul-private/org.mate.baul.gschema.xml:218
+#: libbaul-private/org.cafe.baul.gschema.xml:218
 msgid "Custom Side Pane Background Set"
 msgstr "Nastavljanje ozadja stranskega pladnja po meri"
 
-#: libbaul-private/org.mate.baul.gschema.xml:219
+#: libbaul-private/org.cafe.baul.gschema.xml:219
 msgid "Whether a custom default side pane background has been set."
 msgstr "Ali je bilo nastavljeno po meri privzeto ozadje stranskega pladnja."
 
-#: libbaul-private/org.mate.baul.gschema.xml:223
+#: libbaul-private/org.cafe.baul.gschema.xml:223
 msgid "Default Side Pane Background Color"
 msgstr "Privzeta barva ozadja stranskega pladnja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:224
+#: libbaul-private/org.cafe.baul.gschema.xml:224
 msgid ""
 "Filename for the default side pane background. Only used if "
 "side_pane_background_set is true."
@@ -3442,11 +3442,11 @@ msgstr ""
 "Ime datoteke za privzeto ozadje stranskega pladnja. Uporabljeno le, če je "
 "omogočena možnost ozadja pladnja."
 
-#: libbaul-private/org.mate.baul.gschema.xml:228
+#: libbaul-private/org.cafe.baul.gschema.xml:228
 msgid "Default Side Pane Background Filename"
 msgstr "Privzeto ime datoteke ozadja stranskega pladnja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:229
+#: libbaul-private/org.cafe.baul.gschema.xml:229
 msgid ""
 "Uri of the default side pane background. Only used if "
 "side_pane_background_set is true."
@@ -3454,11 +3454,11 @@ msgstr ""
 "Ime datoteke za privzeto ozadje stranskega pladnja. Uporabljeno le, če je "
 "omogočena možnost ozadja pladnja."
 
-#: libbaul-private/org.mate.baul.gschema.xml:238
+#: libbaul-private/org.cafe.baul.gschema.xml:238
 msgid "Default folder viewer"
 msgstr "Privzet pregledovalnik mape"
 
-#: libbaul-private/org.mate.baul.gschema.xml:239
+#: libbaul-private/org.cafe.baul.gschema.xml:239
 msgid ""
 "When a folder is visited this viewer is used unless you have selected "
 "another view for that particular folder. Possible values are \"list-view\", "
@@ -3468,11 +3468,11 @@ msgstr ""
 "izbrali kateri drug prikaz. Mogoče vrednosti so \"list_view\", \"icon_view\""
 " in \"compact_view\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:243
+#: libbaul-private/org.cafe.baul.gschema.xml:243
 msgid "Date Format"
 msgstr "Oblika datuma"
 
-#: libbaul-private/org.mate.baul.gschema.xml:244
+#: libbaul-private/org.cafe.baul.gschema.xml:244
 msgid ""
 "The format of file dates. Possible values are \"locale\", \"iso\", and "
 "\"informal\"."
@@ -3480,11 +3480,11 @@ msgstr ""
 "Oblika prikaza datuma datotek. Mogoče vrednosti so \"locale\", \"iso\" in "
 "\"informal\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:248
+#: libbaul-private/org.cafe.baul.gschema.xml:248
 msgid "Whether to show hidden files"
 msgstr "Ali naj se skrite datoteke prikažejo"
 
-#: libbaul-private/org.mate.baul.gschema.xml:249
+#: libbaul-private/org.cafe.baul.gschema.xml:249
 msgid ""
 "If set to true, then hidden files are shown by default in the file manager. "
 "Hidden files are either dotfiles or listed in the folder's .hidden file."
@@ -3493,11 +3493,11 @@ msgstr ""
 "datotek. Skrite datoteke so bodisi tiste s prepono pike ali tiste, ki so "
 "navedene v .hidden datoteki mape."
 
-#: libbaul-private/org.mate.baul.gschema.xml:253
+#: libbaul-private/org.cafe.baul.gschema.xml:253
 msgid "Whether to show backup files"
 msgstr "Ali naj se varnostne kopije datotek prikažejo"
 
-#: libbaul-private/org.mate.baul.gschema.xml:254
+#: libbaul-private/org.cafe.baul.gschema.xml:254
 msgid ""
 "If set to true, then backup files are shown by default in the file manager. "
 "Backup files are backup files ending with a tilde (~)."
@@ -3506,11 +3506,11 @@ msgstr ""
 "upravljaniku datotek. Varnostne kopije datotek so tiste, ki se končajo s "
 "kljukico (~)."
 
-#: libbaul-private/org.mate.baul.gschema.xml:259
+#: libbaul-private/org.cafe.baul.gschema.xml:259
 msgid "Whether to show file sizes with IEC units"
 msgstr "Ali se naj prikažejo velikosti datotek z enotami IEC"
 
-#: libbaul-private/org.mate.baul.gschema.xml:260
+#: libbaul-private/org.cafe.baul.gschema.xml:260
 msgid ""
 "If set to true, file sizes are shown using IEC (base 1024) units with "
 "\"KiB\" style suffixes, instead of default with SI units."
@@ -3518,27 +3518,27 @@ msgstr ""
 "Če je omogočeno, bodo velikosti datotek prikazane z enotami IEC (osnova "
 "1024) in priponami s slogom \"KiB\", namesto privzetega z enotami SI."
 
-#: libbaul-private/org.mate.baul.gschema.xml:264
+#: libbaul-private/org.cafe.baul.gschema.xml:264
 msgid "Whether to show icons in list view"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:265
+#: libbaul-private/org.cafe.baul.gschema.xml:265
 msgid "If set to true, show file icons in list view."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:269
+#: libbaul-private/org.cafe.baul.gschema.xml:269
 msgid "Whether to show desktop notifications"
 msgstr "Ali naj se prikažejo namizna obvestila"
 
-#: libbaul-private/org.mate.baul.gschema.xml:270
+#: libbaul-private/org.cafe.baul.gschema.xml:270
 msgid "If set to true, Baul will show desktop notifications."
 msgstr "Če je omogočeno, bo program Baul prikazoval namizna obvestila."
 
-#: libbaul-private/org.mate.baul.gschema.xml:277
+#: libbaul-private/org.cafe.baul.gschema.xml:277
 msgid "List of possible captions on icons"
 msgstr "Seznam mogočih oznak ikon"
 
-#: libbaul-private/org.mate.baul.gschema.xml:278
+#: libbaul-private/org.cafe.baul.gschema.xml:278
 msgid ""
 "A list of captions below an icon in the icon view and the desktop. The "
 "actual number of captions shown depends on the zoom level. Some possible "
@@ -3552,48 +3552,48 @@ msgstr ""
 "\"owner\", \"group\", \"permissions\", \"octal_permissions\" in "
 "\"mime_type\"."
 
-#: libbaul-private/org.mate.baul.gschema.xml:286
+#: libbaul-private/org.cafe.baul.gschema.xml:286
 msgid "Use tighter layout in new windows"
 msgstr "V novih oknih uporabi tesnejši razpored"
 
-#: libbaul-private/org.mate.baul.gschema.xml:287
+#: libbaul-private/org.cafe.baul.gschema.xml:287
 msgid "If true, icons will be laid out tighter by default in new windows."
 msgstr ""
 "Izbrana možnost določi, da so ikone novih oknih privzeto postavljene tesneje"
 " skupaj."
 
-#: libbaul-private/org.mate.baul.gschema.xml:291
+#: libbaul-private/org.cafe.baul.gschema.xml:291
 msgid "Put labels beside icons"
 msgstr "Postavi oznake ob ikone"
 
-#: libbaul-private/org.mate.baul.gschema.xml:292
+#: libbaul-private/org.cafe.baul.gschema.xml:292
 msgid ""
 "If true, labels will be placed beside icons rather than underneath them."
 msgstr ""
 "Izbrana možnost določi, da so oznake postavljene ob ikone namesto pod njih."
 
-#: libbaul-private/org.mate.baul.gschema.xml:296
+#: libbaul-private/org.cafe.baul.gschema.xml:296
 msgid "Default icon zoom level"
 msgstr "Privzeto približanje ikon"
 
-#: libbaul-private/org.mate.baul.gschema.xml:297
+#: libbaul-private/org.cafe.baul.gschema.xml:297
 msgid "Default zoom level used by the icon view."
 msgstr "Privzeto približanje prikaza ikon."
 
-#: libbaul-private/org.mate.baul.gschema.xml:301
+#: libbaul-private/org.cafe.baul.gschema.xml:301
 msgid "Default Thumbnail Icon Size"
 msgstr "Privzeta velikost sličic ikon"
 
-#: libbaul-private/org.mate.baul.gschema.xml:302
+#: libbaul-private/org.cafe.baul.gschema.xml:302
 msgid "The default size of an icon for a thumbnail in the icon view."
 msgstr "Privzeta velikost sličic v prikazu ikon."
 
-#: libbaul-private/org.mate.baul.gschema.xml:306
-#: libbaul-private/org.mate.baul.gschema.xml:425
+#: libbaul-private/org.cafe.baul.gschema.xml:306
+#: libbaul-private/org.cafe.baul.gschema.xml:425
 msgid "Text Ellipsis Limit"
 msgstr "Omejitev dolžine tripičja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:307
+#: libbaul-private/org.cafe.baul.gschema.xml:307
 msgid ""
 "A string specifying how parts of overlong file names should be replaced by "
 "ellipses, depending on the zoom level. Each of the list entries is of the "
@@ -3625,19 +3625,19 @@ msgstr ""
 " manjše (50%), majhno (66%), običajno (100%), veliko (150%), večje (200%), "
 "največje (400%)."
 
-#: libbaul-private/org.mate.baul.gschema.xml:332
+#: libbaul-private/org.cafe.baul.gschema.xml:332
 msgid "Default compact view zoom level"
 msgstr "Privzeto približanje ikon v strnjenem prikazu"
 
-#: libbaul-private/org.mate.baul.gschema.xml:333
+#: libbaul-private/org.cafe.baul.gschema.xml:333
 msgid "Default zoom level used by the compact view."
 msgstr "Privzeto približanje strnjenega prikaza."
 
-#: libbaul-private/org.mate.baul.gschema.xml:337
+#: libbaul-private/org.cafe.baul.gschema.xml:337
 msgid "All columns have same width"
 msgstr "Vsi stolpci so enake širine"
 
-#: libbaul-private/org.mate.baul.gschema.xml:338
+#: libbaul-private/org.cafe.baul.gschema.xml:338
 msgid ""
 "If this preference is set, all columns in the compact view have the same "
 "width. Otherwise, the width of each column is determined seperately."
@@ -3646,35 +3646,35 @@ msgstr ""
 "širino. V primeru da možnost ni izbrana ima vsak stolpec svojo širino, ki je"
 " določena posebej."
 
-#: libbaul-private/org.mate.baul.gschema.xml:345
+#: libbaul-private/org.cafe.baul.gschema.xml:345
 msgid "Default list zoom level"
 msgstr "Privzeto približanje seznamov"
 
-#: libbaul-private/org.mate.baul.gschema.xml:346
+#: libbaul-private/org.cafe.baul.gschema.xml:346
 msgid "Default zoom level used by the list view."
 msgstr "Privzeto približanje seznamskega prikaza."
 
-#: libbaul-private/org.mate.baul.gschema.xml:350
+#: libbaul-private/org.cafe.baul.gschema.xml:350
 msgid "Default list of columns visible in the list view"
 msgstr "Privzet seznam stolpcev vidnih v seznamskem prikazu."
 
-#: libbaul-private/org.mate.baul.gschema.xml:351
+#: libbaul-private/org.cafe.baul.gschema.xml:351
 msgid "Default list of columns visible in the list view."
 msgstr "Privzet seznam stolpcev vidnih v seznamskem prikazu."
 
-#: libbaul-private/org.mate.baul.gschema.xml:355
+#: libbaul-private/org.cafe.baul.gschema.xml:355
 msgid "Default column order in the list view"
 msgstr "Privzet vrstni red stolpcev v seznamskem prikazu"
 
-#: libbaul-private/org.mate.baul.gschema.xml:356
+#: libbaul-private/org.cafe.baul.gschema.xml:356
 msgid "Default column order in the list view."
 msgstr "Privzet vrstni red stolpcev v seznamskem prikazu."
 
-#: libbaul-private/org.mate.baul.gschema.xml:367
+#: libbaul-private/org.cafe.baul.gschema.xml:367
 msgid "Only show folders in the tree side pane"
 msgstr "Mape pokaži le v drevesu stranskega pladnja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:368
+#: libbaul-private/org.cafe.baul.gschema.xml:368
 msgid ""
 "If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
@@ -3682,19 +3682,19 @@ msgstr ""
 "Izbrana možnost določi, da Baul v drevesu stranskega pladnja prikaže le "
 "mape. Sicer so prikazane tudi datoteke."
 
-#: libbaul-private/org.mate.baul.gschema.xml:375
+#: libbaul-private/org.cafe.baul.gschema.xml:375
 msgid "Desktop font"
 msgstr "Pisava namizja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:376
+#: libbaul-private/org.cafe.baul.gschema.xml:376
 msgid "The font description used for the icons on the desktop."
 msgstr "Opis pisave, ki naj se uporabi za ikone na namizju."
 
-#: libbaul-private/org.mate.baul.gschema.xml:380
+#: libbaul-private/org.cafe.baul.gschema.xml:380
 msgid "Home icon visible on desktop"
 msgstr "Ikona Domov vidna na namizju"
 
-#: libbaul-private/org.mate.baul.gschema.xml:381
+#: libbaul-private/org.cafe.baul.gschema.xml:381
 msgid ""
 "If this is set to true, an icon linking to the home folder will be put on "
 "the desktop."
@@ -3702,11 +3702,11 @@ msgstr ""
 "Izbrana možnost določi, da je ikona s povezavo na domačo mapo prikazana na "
 "namizju."
 
-#: libbaul-private/org.mate.baul.gschema.xml:385
+#: libbaul-private/org.cafe.baul.gschema.xml:385
 msgid "Computer icon visible on desktop"
 msgstr "Ikona Računalnik vidna na namizju"
 
-#: libbaul-private/org.mate.baul.gschema.xml:386
+#: libbaul-private/org.cafe.baul.gschema.xml:386
 msgid ""
 "If this is set to true, an icon linking to the computer location will be put"
 " on the desktop."
@@ -3714,11 +3714,11 @@ msgstr ""
 "Izbrana možnost določi, da je ikona s povezavo na mesto računalnika "
 "prikazana na namizju."
 
-#: libbaul-private/org.mate.baul.gschema.xml:390
+#: libbaul-private/org.cafe.baul.gschema.xml:390
 msgid "Trash icon visible on desktop"
 msgstr "Ikona smeti vidna na namizju"
 
-#: libbaul-private/org.mate.baul.gschema.xml:391
+#: libbaul-private/org.cafe.baul.gschema.xml:391
 msgid ""
 "If this is set to true, an icon linking to the trash will be put on the "
 "desktop."
@@ -3726,11 +3726,11 @@ msgstr ""
 "Izbrana možnost določi, da je ikona s povezavo do smeti prikazana na "
 "namizju."
 
-#: libbaul-private/org.mate.baul.gschema.xml:395
+#: libbaul-private/org.cafe.baul.gschema.xml:395
 msgid "Show mounted volumes on the desktop"
 msgstr "Pokaži priklopljene nosilce na namizju"
 
-#: libbaul-private/org.mate.baul.gschema.xml:396
+#: libbaul-private/org.cafe.baul.gschema.xml:396
 msgid ""
 "If this is set to true, icons linking to mounted volumes will be put on the "
 "desktop."
@@ -3738,11 +3738,11 @@ msgstr ""
 "Izbrana možnost določi, da so ikone s povezavo na priklopljene naprave "
 "prikazane na namizju."
 
-#: libbaul-private/org.mate.baul.gschema.xml:400
+#: libbaul-private/org.cafe.baul.gschema.xml:400
 msgid "Network Servers icon visible on the desktop"
 msgstr "Ikona omrežni strežniki vidna na namizju"
 
-#: libbaul-private/org.mate.baul.gschema.xml:401
+#: libbaul-private/org.cafe.baul.gschema.xml:401
 msgid ""
 "If this is set to true, an icon linking to the Network Servers view will be "
 "put on the desktop."
@@ -3750,11 +3750,11 @@ msgstr ""
 "Izbrana možnost določi, da je ikona s povezavo na omrežne strežnike "
 "prikazana na namizju."
 
-#: libbaul-private/org.mate.baul.gschema.xml:405
+#: libbaul-private/org.cafe.baul.gschema.xml:405
 msgid "Desktop computer icon name"
 msgstr "Ime ikone namizni računalnik"
 
-#: libbaul-private/org.mate.baul.gschema.xml:406
+#: libbaul-private/org.cafe.baul.gschema.xml:406
 msgid ""
 "This name can be set if you want a custom name for the computer icon on the "
 "desktop."
@@ -3762,11 +3762,11 @@ msgstr ""
 "Ime lahko nastavite, če želite za ikono računalnika na namizju nastaviti ime"
 " po meri."
 
-#: libbaul-private/org.mate.baul.gschema.xml:410
+#: libbaul-private/org.cafe.baul.gschema.xml:410
 msgid "Desktop home icon name"
 msgstr "Ime ikone Dom na namizju"
 
-#: libbaul-private/org.mate.baul.gschema.xml:411
+#: libbaul-private/org.cafe.baul.gschema.xml:411
 msgid ""
 "This name can be set if you want a custom name for the home icon on the "
 "desktop."
@@ -3774,11 +3774,11 @@ msgstr ""
 "Ime lahko nastavite, če želite za ikono doma na namizju nastaviti ime po "
 "meri."
 
-#: libbaul-private/org.mate.baul.gschema.xml:415
+#: libbaul-private/org.cafe.baul.gschema.xml:415
 msgid "Desktop trash icon name"
 msgstr "Ime ikone Smeti na namizju"
 
-#: libbaul-private/org.mate.baul.gschema.xml:416
+#: libbaul-private/org.cafe.baul.gschema.xml:416
 msgid ""
 "This name can be set if you want a custom name for the trash icon on the "
 "desktop."
@@ -3786,11 +3786,11 @@ msgstr ""
 "Ime lahko nastavite, če želite za ikono smeti na namizju nastaviti ime po "
 "meri."
 
-#: libbaul-private/org.mate.baul.gschema.xml:420
+#: libbaul-private/org.cafe.baul.gschema.xml:420
 msgid "Network servers icon name"
 msgstr "Ime ikone omrežni strežniki"
 
-#: libbaul-private/org.mate.baul.gschema.xml:421
+#: libbaul-private/org.cafe.baul.gschema.xml:421
 msgid ""
 "This name can be set if you want a custom name for the network servers icon "
 "on the desktop."
@@ -3798,7 +3798,7 @@ msgstr ""
 "Ime lahko nastavite, če želite za ikono omrežnih strežnikov na namizju "
 "nastaviti ime po meri."
 
-#: libbaul-private/org.mate.baul.gschema.xml:426
+#: libbaul-private/org.cafe.baul.gschema.xml:426
 msgid ""
 "An integer specifying how parts of overlong file names should be replaced by"
 " ellipses on the desktop. If the number is larger than 0, the file name will"
@@ -3810,90 +3810,90 @@ msgstr ""
 " preseglo določene vrednosti. V primeru, da je vrednost 0 ali manjša od 0, "
 "ni omejitve dolžine imena."
 
-#: libbaul-private/org.mate.baul.gschema.xml:433
+#: libbaul-private/org.cafe.baul.gschema.xml:433
 msgid "The geometry string for a navigation window."
 msgstr "Niz geometrije za okno krmarjenja."
 
-#: libbaul-private/org.mate.baul.gschema.xml:434
+#: libbaul-private/org.cafe.baul.gschema.xml:434
 msgid ""
 "A string containing the saved geometry and coordinates string for navigation"
 " windows."
 msgstr "Niz s podatki geometrije in koordinat za okna krmarjenja."
 
-#: libbaul-private/org.mate.baul.gschema.xml:438
+#: libbaul-private/org.cafe.baul.gschema.xml:438
 msgid "Whether the navigation window should be maximized."
 msgstr "Ali naj bo okno krmarjenja razpeto."
 
-#: libbaul-private/org.mate.baul.gschema.xml:439
+#: libbaul-private/org.cafe.baul.gschema.xml:439
 msgid "Whether the navigation window should be maximized by default."
 msgstr "Ali naj bo okno krmarjenja privzeto razpeto."
 
-#: libbaul-private/org.mate.baul.gschema.xml:443
+#: libbaul-private/org.cafe.baul.gschema.xml:443
 msgid "Width of the side pane"
 msgstr "Širina stranskega pladnja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:444
+#: libbaul-private/org.cafe.baul.gschema.xml:444
 msgid "The default width of the side pane in new windows."
 msgstr "Privzeta širina stranskega pladnja v novih oknih."
 
-#: libbaul-private/org.mate.baul.gschema.xml:448
+#: libbaul-private/org.cafe.baul.gschema.xml:448
 msgid "Show toolbar in new windows"
 msgstr "V novih oknih pokaži orodno vrstico"
 
-#: libbaul-private/org.mate.baul.gschema.xml:449
+#: libbaul-private/org.cafe.baul.gschema.xml:449
 msgid "If set to true, newly opened windows will have toolbars visible."
 msgstr ""
 "Izbrana možnost določi, da imajo novo odprta okna vidne orodne vrstice."
 
-#: libbaul-private/org.mate.baul.gschema.xml:453
+#: libbaul-private/org.cafe.baul.gschema.xml:453
 msgid "Show location bar in new windows"
 msgstr "V novih oknih pokaži vrstico mesta"
 
-#: libbaul-private/org.mate.baul.gschema.xml:454
+#: libbaul-private/org.cafe.baul.gschema.xml:454
 msgid ""
 "If set to true, newly opened windows will have the location bar visible."
 msgstr ""
 "Izbrana možnost določi, da imajo novo odprta okna vidno vrstico mesta."
 
-#: libbaul-private/org.mate.baul.gschema.xml:458
+#: libbaul-private/org.cafe.baul.gschema.xml:458
 msgid "Show status bar in new windows"
 msgstr "V novih oknih pokaži vrstico stanja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:459
+#: libbaul-private/org.cafe.baul.gschema.xml:459
 msgid "If set to true, newly opened windows will have the status bar visible."
 msgstr ""
 "Izbrana možnost določi, da imajo novo odprta okna vidno vrstico stanja."
 
-#: libbaul-private/org.mate.baul.gschema.xml:463
+#: libbaul-private/org.cafe.baul.gschema.xml:463
 msgid "Show side pane in new windows"
 msgstr "V novih oknih pokaži stranski pladenj"
 
-#: libbaul-private/org.mate.baul.gschema.xml:464
+#: libbaul-private/org.cafe.baul.gschema.xml:464
 msgid "If set to true, newly opened windows will have the side pane visible."
 msgstr ""
 "Izbrana možnost določi, da imajo novo odprta okna viden stranski pladenj."
 
-#: libbaul-private/org.mate.baul.gschema.xml:484
+#: libbaul-private/org.cafe.baul.gschema.xml:484
 msgid "Side pane view"
 msgstr "Pogled stranskega pladnja"
 
-#: libbaul-private/org.mate.baul.gschema.xml:485
+#: libbaul-private/org.cafe.baul.gschema.xml:485
 msgid "The side pane view to show in newly opened windows."
 msgstr "Pogled stranskega pladnja, ki naj se pokaže v novo odprtih oknih."
 
-#: libbaul-private/org.mate.baul.gschema.xml:492
+#: libbaul-private/org.cafe.baul.gschema.xml:492
 msgid "List of extensions in disabled state."
 msgstr "Seznam onemogočenih razširitev"
 
-#: libbaul-private/org.mate.baul.gschema.xml:493
+#: libbaul-private/org.cafe.baul.gschema.xml:493
 msgid "This list contains the extensions that are currently de-activated."
 msgstr "Ta lista vsebuje razširitve, ki so trenutno onemogočene. "
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:5
+#: libbaul-private/org.cafe.media-handling.gschema.xml:5
 msgid "Whether to automatically mount media"
 msgstr "Ali naj se medij samodejno priklopi"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:6
+#: libbaul-private/org.cafe.media-handling.gschema.xml:6
 msgid ""
 "If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
@@ -3901,11 +3901,11 @@ msgstr ""
 "Izbrana možnost omogoča samodejen priklop naprav kot so uporabniku vidni "
 "trdi diski in odstranljivi mediji ob zagonu ali ob vstavitvi medija."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:10
+#: libbaul-private/org.cafe.media-handling.gschema.xml:10
 msgid "Whether to automatically open a folder for automounted media"
 msgstr "Ali naj se za samodejno priklopljen medij samodejno odpre mapa"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:11
+#: libbaul-private/org.cafe.media-handling.gschema.xml:11
 msgid ""
 "If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
@@ -3916,11 +3916,11 @@ msgstr ""
 "Možnost je na voljo le za medije, kjer je poznana vrsta x-content/*; Za "
 "medije neznane vrste bo uporabniku zastavljeno vprašanje o nadaljevanju."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:15
+#: libbaul-private/org.cafe.media-handling.gschema.xml:15
 msgid "Never prompt or autorun/autostart programs when media are inserted"
 msgstr "Nikoli ne vprašaj ali samodejno zaženi programe ob vstavitvi medija"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:16
+#: libbaul-private/org.cafe.media-handling.gschema.xml:16
 msgid ""
 "If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
@@ -3928,12 +3928,12 @@ msgstr ""
 "Izbrana možnost določi, da program Baul ne sprašuje kaj storiti ob vstavitvi"
 " medija."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:20
+#: libbaul-private/org.cafe.media-handling.gschema.xml:20
 msgid ""
 "List of x-content/* types where the preferred application will be launched"
 msgstr "Seznam x-content/* vrste kjer bo zagnan prednostni program."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:21
+#: libbaul-private/org.cafe.media-handling.gschema.xml:21
 msgid ""
 "List of x-content/* types for which the user have chosen to start an "
 "application in the preference capplet. The preferred application for the "
@@ -3943,12 +3943,12 @@ msgstr ""
 "uporabnik. Program bo zagnan vsakokrat, ko bo vstavljen medij z ustreznimi "
 "vrstami datotek."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:25
+#: libbaul-private/org.cafe.media-handling.gschema.xml:25
 msgid "List of x-content/* types set to \"Do Nothing\""
 msgstr ""
 "Seznam x-content/* vrste pri katerih bo izveden ukaz \"Ne naredi ničesar\"."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:26
+#: libbaul-private/org.cafe.media-handling.gschema.xml:26
 msgid ""
 "List of x-content/* types for which the user have chosen \"Do Nothing\" in "
 "the preference capplet. No prompt will be shown nor will any matching "
@@ -3959,11 +3959,11 @@ msgstr ""
 "Možnost bo v veljavi vsakokrat, ko bo vstavljen medij z ustreznimi vrstami "
 "datotek."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:30
+#: libbaul-private/org.cafe.media-handling.gschema.xml:30
 msgid "List of x-content/* types set to \"Open Folder\""
 msgstr "Seznam x-content/* vrste pri katerih bo izveden ukaz \"Odpri mapo\"."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:31
+#: libbaul-private/org.cafe.media-handling.gschema.xml:31
 msgid ""
 "List of x-content/* types for which the user have chosen \"Open Folder\" in "
 "the preferences capplet. A folder window will be opened on insertion of "
@@ -5539,7 +5539,7 @@ msgstr "Vzorca %s ni mogoče izbrisati."
 
 #: src/baul-property-browser.c:980
 msgid "Check that you have permission to delete the pattern."
-msgstr "Preverite ali imate dovoljenje za brisanje tega vzorca."
+msgstr "Preverite ali icafe dovoljenje za brisanje tega vzorca."
 
 #: src/baul-property-browser.c:996
 #, c-format
@@ -5548,7 +5548,7 @@ msgstr "Značke %s ni mogoče izbrisati."
 
 #: src/baul-property-browser.c:997
 msgid "Check that you have permission to delete the emblem."
-msgstr "Preverite ali imate dovoljenje za brisanje značke."
+msgstr "Preverite ali icafe dovoljenje za brisanje značke."
 
 #: src/baul-property-browser.c:1071
 msgid "Select an Image File for the New Emblem"
@@ -7368,7 +7368,7 @@ msgstr ""
 #: src/file-manager/fm-error-reporting.c:72
 #, c-format
 msgid "You do not have the permissions necessary to view the contents of \"%s\"."
-msgstr "Nimate ustreznih dovoljenj za ogled vsebine \"%s\"."
+msgstr "Nicafe ustreznih dovoljenj za ogled vsebine \"%s\"."
 
 #: src/file-manager/fm-error-reporting.c:76
 #, c-format
@@ -7398,7 +7398,7 @@ msgstr "V tej mapi ni \"%s\". Morda je bila pravkar prestavljena ali izbrisana?"
 #: src/file-manager/fm-error-reporting.c:130
 #, c-format
 msgid "You do not have the permissions necessary to rename \"%s\"."
-msgstr "Nimate ustreznih dovoljenj za preimenovanje \"%s\"."
+msgstr "Nicafe ustreznih dovoljenj za preimenovanje \"%s\"."
 
 #: src/file-manager/fm-error-reporting.c:136
 #, c-format
@@ -7424,7 +7424,7 @@ msgstr "Predmeta ni mogoče preimenovati."
 #: src/file-manager/fm-error-reporting.c:191
 #, c-format
 msgid "You do not have the permissions necessary to change the group of \"%s\"."
-msgstr "Nimate ustreznih dovoljenj za spremembo skupine od \"%s\"."
+msgstr "Nicafe ustreznih dovoljenj za spremembo skupine od \"%s\"."
 
 #: src/file-manager/fm-error-reporting.c:205
 #, c-format

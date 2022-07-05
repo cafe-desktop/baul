@@ -195,7 +195,7 @@ eel_bg_get_desktop_color (EelBackground *self)
     gboolean   use_gradient = TRUE;
     gboolean   is_horizontal = FALSE;
 
-    mate_bg_get_color (self->details->bg, &type, &primary, &secondary);
+    cafe_bg_get_color (self->details->bg, &type, &primary, &secondary);
 
     if (type == MATE_BG_COLOR_V_GRADIENT)
     {
@@ -241,13 +241,13 @@ set_image_properties (EelBackground *self)
     {
         c = self->details->default_color;
         make_color_inactive (self, &c);
-        mate_bg_set_color (self->details->bg, MATE_BG_COLOR_SOLID, &c, NULL);
+        cafe_bg_set_color (self->details->bg, MATE_BG_COLOR_SOLID, &c, NULL);
     }
     else if (!eel_gradient_is_gradient (self->details->color))
     {
         eel_gdk_rgba_parse_with_white_default (&c, self->details->color);
         make_color_inactive (self, &c);
-        mate_bg_set_color (self->details->bg, MATE_BG_COLOR_SOLID, &c, NULL);
+        cafe_bg_set_color (self->details->bg, MATE_BG_COLOR_SOLID, &c, NULL);
     }
     else
     {
@@ -265,9 +265,9 @@ set_image_properties (EelBackground *self)
         g_free (spec);
 
         if (eel_gradient_is_horizontal (self->details->color)) {
-            mate_bg_set_color (self->details->bg, MATE_BG_COLOR_H_GRADIENT, &c1, &c2);
+            cafe_bg_set_color (self->details->bg, MATE_BG_COLOR_H_GRADIENT, &c1, &c2);
         } else {
-            mate_bg_set_color (self->details->bg, MATE_BG_COLOR_V_GRADIENT, &c1, &c2);
+            cafe_bg_set_color (self->details->bg, MATE_BG_COLOR_V_GRADIENT, &c1, &c2);
         }
     }
 }
@@ -359,7 +359,7 @@ eel_background_ensure_realized (EelBackground *self)
     set_image_properties (self);
 
     window = gtk_widget_get_window (self->details->widget);
-    self->details->bg_surface = mate_bg_create_surface (self->details->bg,
+    self->details->bg_surface = cafe_bg_create_surface (self->details->bg,
         						window, width, height,
         						self->details->is_desktop);
     self->details->unset_root_surface = self->details->is_desktop;
@@ -379,7 +379,7 @@ eel_background_draw (GtkWidget *widget,
     int width, height;
 
     if (self->details->fade != NULL &&
-        mate_bg_crossfade_is_started (self->details->fade))
+        cafe_bg_crossfade_is_started (self->details->fade))
     {
         return;
     }
@@ -418,18 +418,18 @@ set_root_surface (EelBackground *self,
     } else {
         int width, height;
         drawable_get_adjusted_size (self, &width, &height);
-        self->details->bg_surface = mate_bg_create_surface (self->details->bg, window,
+        self->details->bg_surface = cafe_bg_create_surface (self->details->bg, window,
         						    width, height, TRUE);
     }
 
     if (self->details->bg_surface != NULL)
-        mate_bg_set_surface_as_root (screen, self->details->bg_surface);
+        cafe_bg_set_surface_as_root (screen, self->details->bg_surface);
 }
 
 static void
 init_fade (EelBackground *self)
 {
-    GSettings *mate_background_preferences;
+    GSettings *cafe_background_preferences;
     GtkWidget *widget = self->details->widget;
     gboolean do_fade;
 
@@ -437,10 +437,10 @@ init_fade (EelBackground *self)
         return;
     }
 
-    mate_background_preferences = g_settings_new ("org.mate.background");
-    do_fade = g_settings_get_boolean (mate_background_preferences,
+    cafe_background_preferences = g_settings_new ("org.cafe.background");
+    do_fade = g_settings_get_boolean (cafe_background_preferences,
                                       MATE_BG_KEY_BACKGROUND_FADE);
-    g_object_unref (mate_background_preferences);
+    g_object_unref (cafe_background_preferences);
 
     if (!do_fade) {
     	return;
@@ -457,7 +457,7 @@ init_fade (EelBackground *self)
         if (width == self->details->bg_entire_width &&
             height == self->details->bg_entire_height)
         {
-            self->details->fade = mate_bg_crossfade_new (width, height);
+            self->details->fade = cafe_bg_crossfade_new (width, height);
             g_signal_connect_swapped (self->details->fade,
                                       "finished",
                                       G_CALLBACK (free_fade),
@@ -465,18 +465,18 @@ init_fade (EelBackground *self)
         }
     }
 
-    if (self->details->fade != NULL && !mate_bg_crossfade_is_started (self->details->fade))
+    if (self->details->fade != NULL && !cafe_bg_crossfade_is_started (self->details->fade))
     {
         if (self->details->bg_surface == NULL)
         {
             cairo_surface_t *start_surface;
-            start_surface = mate_bg_get_surface_from_root (gtk_widget_get_screen (widget));
-            mate_bg_crossfade_set_start_surface (self->details->fade, start_surface);
+            start_surface = cafe_bg_get_surface_from_root (gtk_widget_get_screen (widget));
+            cafe_bg_crossfade_set_start_surface (self->details->fade, start_surface);
             cairo_surface_destroy (start_surface);
         }
         else
         {
-            mate_bg_crossfade_set_start_surface (self->details->fade, self->details->bg_surface);
+            cafe_bg_crossfade_set_start_surface (self->details->fade, self->details->bg_surface);
         }
     }
 }
@@ -497,14 +497,14 @@ fade_to_surface (EelBackground   *self,
                  cairo_surface_t *surface)
 {
     if (self->details->fade == NULL ||
-        !mate_bg_crossfade_set_end_surface (self->details->fade, surface))
+        !cafe_bg_crossfade_set_end_surface (self->details->fade, surface))
     {
         return FALSE;
     }
 
-    if (!mate_bg_crossfade_is_started (self->details->fade))
+    if (!cafe_bg_crossfade_is_started (self->details->fade))
     {
-        mate_bg_crossfade_start_widget (self->details->fade, widget);
+        cafe_bg_crossfade_start_widget (self->details->fade, widget);
 
         if (self->details->is_desktop)
         {
@@ -514,7 +514,7 @@ fade_to_surface (EelBackground   *self,
         }
     }
 
-    return mate_bg_crossfade_is_started (self->details->fade);
+    return cafe_bg_crossfade_is_started (self->details->fade);
 }
 
 static void
@@ -807,7 +807,7 @@ eel_background_init (EelBackground *self)
 {
     self->details = eel_background_get_instance_private(self);
 
-    self->details->bg = mate_bg_new ();
+    self->details->bg = cafe_bg_new ();
     self->details->default_color.red = 1.0;
     self->details->default_color.green = 1.0;
     self->details->default_color.blue = 1.0;
@@ -832,7 +832,7 @@ eel_background_is_set (EelBackground *self)
     g_assert (EEL_IS_BACKGROUND (self));
 
     return self->details->color != NULL ||
-           mate_bg_get_filename (self->details->bg) != NULL;
+           cafe_bg_get_filename (self->details->bg) != NULL;
 }
 
 /**
@@ -906,7 +906,7 @@ eel_background_is_dark (EelBackground *self)
     GdkDisplay *display = gdk_screen_get_display (screen);
     gdk_monitor_get_geometry (gdk_display_get_monitor (display, 0), &rect);
 
-    return mate_bg_is_dark (self->details->bg, rect.width, rect.height);
+    return cafe_bg_is_dark (self->details->bg, rect.width, rect.height);
 }
 
 gchar *
@@ -914,7 +914,7 @@ eel_background_get_image_uri (EelBackground *self)
 {
     g_return_val_if_fail (EEL_IS_BACKGROUND (self), NULL);
 
-    const gchar *filename = mate_bg_get_filename (self->details->bg);
+    const gchar *filename = cafe_bg_get_filename (self->details->bg);
 
     if (filename) {
         return g_filename_to_uri (filename, NULL, NULL);
@@ -935,7 +935,7 @@ eel_bg_set_image_uri_helper (EelBackground *self,
         filename = g_strdup ("");    /* GSettings expects a string, not NULL */
     }
 
-    mate_bg_set_filename (self->details->bg, filename);
+    cafe_bg_set_filename (self->details->bg, filename);
     g_free (filename);
 
     if (emit_signal)
@@ -965,9 +965,9 @@ eel_bg_set_image_uri_and_color (EelBackground *self,
                                 const gchar   *color)
 {
     if (self->details->is_desktop &&
-        !mate_bg_get_draw_background (self->details->bg))
+        !cafe_bg_get_draw_background (self->details->bg))
     {
-        mate_bg_set_draw_background (self->details->bg, TRUE);
+        cafe_bg_set_draw_background (self->details->bg, TRUE);
     }
 
     eel_bg_set_image_uri_helper (self, image_uri, FALSE);
@@ -983,7 +983,7 @@ eel_bg_set_placement (EelBackground   *self,
 		      MateBGPlacement  placement)
 {
     if (self->details->bg)
-        mate_bg_set_placement (self->details->bg,
+        cafe_bg_set_placement (self->details->bg,
         		       placement);
 }
 
@@ -992,7 +992,7 @@ eel_bg_save_to_gsettings (EelBackground *self,
 			  GSettings     *settings)
 {
     if (self->details->bg)
-        mate_bg_save_to_gsettings (self->details->bg,
+        cafe_bg_save_to_gsettings (self->details->bg,
         			   settings);
 }
 
@@ -1009,7 +1009,7 @@ eel_bg_load_from_gsettings (EelBackground *self,
     }
 
     if (self->details->bg)
-        mate_bg_load_from_gsettings (self->details->bg,
+        cafe_bg_load_from_gsettings (self->details->bg,
         			     settings);
 }
 
@@ -1019,7 +1019,7 @@ eel_bg_load_from_system_gsettings (EelBackground *self,
 				   gboolean       apply)
 {
     if (self->details->bg)
-        mate_bg_load_from_system_gsettings (self->details->bg,
+        cafe_bg_load_from_system_gsettings (self->details->bg,
         				    settings,
         				    apply);
 }
@@ -1031,7 +1031,7 @@ eel_background_set_dropped_image (EelBackground *self,
                                   const gchar   *image_uri)
 {
     /* Currently, we only support tiled images. So we set the placement. */
-    mate_bg_set_placement (self->details->bg, MATE_BG_PLACEMENT_TILED);
+    cafe_bg_set_placement (self->details->bg, MATE_BG_PLACEMENT_TILED);
 
     eel_bg_set_image_uri_and_color (self, action, image_uri, NULL);
 }

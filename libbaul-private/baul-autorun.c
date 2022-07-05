@@ -517,7 +517,7 @@ baul_autorun_prepare_combo_box (GtkWidget *combo_box,
                                                0,
                                                NULL);
 
-        /* TODO: integrate with PackageKit-mate to find applications */
+        /* TODO: integrate with PackageKit-cafe to find applications */
 
         gtk_list_store_set (list_store, &iter,
                             COLUMN_AUTORUN_SURFACE, surface,

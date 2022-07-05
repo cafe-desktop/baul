@@ -33,7 +33,7 @@
 #include <glib/gi18n.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-mate-extensions.h>
+#include <eel/eel-cafe-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-string.h>
 
