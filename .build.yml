@@ -6,29 +6,34 @@ requires:
     # Useful URL: https://github.com/mate-desktop/debian-packages
     # Useful URL: https://salsa.debian.org/debian-mate-team/baul
     - aptitude
+    - autoconf-archive
     - autopoint
     - clang
     - clang-tools
     - cppcheck
-    - expect
+    - expect #required for unbuffer
     - git
     - gla11y
     - gobject-introspection
     - gtk-doc-tools
     - intltool
+    - iso-codes
     - libdconf-dev
     - libexempi-dev
     - libexif-dev
     - libgail-3-dev
     - libgirepository1.0-dev
     - libglib2.0-dev
+    - libglib2.0-doc
     - libgtk-3-dev
     - libnotify-dev
     - libpango1.0-dev
     - libselinux1-dev
     - libstartup-notification0-dev
+    - libtool
     - libx11-dev
     - libxml2-dev
+    - meson
     - python3-lxml
     - quilt
     - shared-mime-info
