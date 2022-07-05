@@ -327,8 +327,8 @@ format_time (int seconds)
 		return res;
 	}
 
-	return g_strdup_printf (ngettext ("approximately %'d hour",
-					  "approximately %'d hours",
+	return g_strdup_printf (ngettext ("approxicafely %'d hour",
+					  "approxicafely %'d hours",
 					  hours), hours);
 }
 
@@ -1326,7 +1326,7 @@ should_confirm_trash (void)
 	GSettings *prefs;
 	gboolean confirm_trash;
 
-	prefs = g_settings_new ("org.mate.baul.preferences");
+	prefs = g_settings_new ("org.cafe.baul.preferences");
 	confirm_trash = g_settings_get_boolean (prefs, BAUL_PREFERENCES_CONFIRM_TRASH);
 	g_object_unref (prefs);
 	return confirm_trash;
@@ -1338,7 +1338,7 @@ should_confirm_move_to_trash (void)
 	GSettings *prefs;
 	gboolean confirm_trash;
 
-	prefs = g_settings_new ("org.mate.baul.preferences");
+	prefs = g_settings_new ("org.cafe.baul.preferences");
 	confirm_trash = g_settings_get_boolean (prefs, BAUL_PREFERENCES_CONFIRM_MOVE_TO_TRASH);
 	g_object_unref (prefs);
 	return confirm_trash;

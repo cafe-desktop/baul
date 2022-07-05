@@ -51,7 +51,7 @@ static gboolean
 is_link_mime_type (const char *mime_type)
 {
     if (mime_type != NULL &&
-            (g_ascii_strcasecmp (mime_type, "application/x-mate-app-info") == 0 ||
+            (g_ascii_strcasecmp (mime_type, "application/x-cafe-app-info") == 0 ||
              g_ascii_strcasecmp (mime_type, "application/x-desktop") == 0))
     {
         return TRUE;
@@ -518,15 +518,15 @@ baul_link_get_link_icon_from_desktop (GKeyFile *key_file)
     type = g_key_file_get_string (key_file, MAIN_GROUP, "Type", NULL);
     if (g_strcmp0 (type, "Application") == 0)
     {
-        icon = g_strdup ("mate-fs-executable");
+        icon = g_strdup ("cafe-fs-executable");
     }
     else if (g_strcmp0 (type, "Link") == 0)
     {
-        icon = g_strdup ("mate-dev-symlink");
+        icon = g_strdup ("cafe-dev-symlink");
     }
     else if (g_strcmp0 (type, "FSDevice") == 0)
     {
-        icon = g_strdup ("mate-dev-harddisk");
+        icon = g_strdup ("cafe-dev-harddisk");
     }
     else if (g_strcmp0 (type, "Directory") == 0)
     {
@@ -535,11 +535,11 @@ baul_link_get_link_icon_from_desktop (GKeyFile *key_file)
     else if (g_strcmp0 (type, "Service") == 0 ||
              g_strcmp0 (type, "ServiceType") == 0)
     {
-        icon = g_strdup ("mate-fs-web");
+        icon = g_strdup ("cafe-fs-web");
     }
     else
     {
-        icon = g_strdup ("mate-fs-regular");
+        icon = g_strdup ("cafe-fs-regular");
     }
     g_free (type);
 

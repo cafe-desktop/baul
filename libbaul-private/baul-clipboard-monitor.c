@@ -169,7 +169,7 @@ baul_clipboard_monitor_class_init (BaulClipboardMonitorClass *klass)
     object_class = G_OBJECT_CLASS (klass);
     object_class->finalize = clipboard_monitor_finalize;
 
-    copied_files_atom = gdk_atom_intern ("x-special/mate-copied-files", FALSE);
+    copied_files_atom = gdk_atom_intern ("x-special/cafe-copied-files", FALSE);
 
     signals[CLIPBOARD_CHANGED] =
         g_signal_new ("clipboard_changed",

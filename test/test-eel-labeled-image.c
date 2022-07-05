@@ -2,7 +2,7 @@
 
 #include "test.h"
 
-static const char pixbuf_name[] = "/usr/share/pixmaps/mate-globe.png";
+static const char pixbuf_name[] = "/usr/share/pixmaps/cafe-globe.png";
 
 static void
 button_callback (GtkWidget *button,

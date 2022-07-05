@@ -12,13 +12,13 @@ PKG_NAME="baul"
     exit 1
 }
 
-which mate-autogen || {
-    echo "You need to install mate-common from the MATE Git"
+which cafe-autogen || {
+    echo "You need to install cafe-common from the MATE Git"
     exit 1
 }
 
 REQUIRED_AUTOMAKE_VERSION=1.9
 USE_COMMON_DOC_BUILD=yes
 
-. mate-autogen
+. cafe-autogen
 

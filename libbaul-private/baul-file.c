@@ -2731,7 +2731,7 @@ get_size (BaulFile *file,
 	}
 
 	/* If we got info with no size in it, it means there is no
-	 * such thing as a size as far as mate-vfs is concerned,
+	 * such thing as a size as far as cafe-vfs is concerned,
 	 * so "unknowable".
 	 */
 	if (size_on_disk && file->details->size_on_disk == -1) {
@@ -2793,7 +2793,7 @@ get_time (BaulFile *file,
 
 	/* If we got info with no modification time in it, it means
 	 * there is no such thing as a modification time as far as
-	 * mate-vfs is concerned, so "unknowable".
+	 * cafe-vfs is concerned, so "unknowable".
 	 */
 	if (time == 0) {
 		return UNKNOWABLE;

@@ -13,7 +13,7 @@
 ### baul 1.23.3
 
   * update translations
-  * fm-properties: Remove use of mate-desktop-thumbnail helper
+  * fm-properties: Remove use of cafe-desktop-thumbnail helper
   * Update copyright to 2020
   * Make device ejection notifications translatable
   * Keep path same when opening new window from an existing one
@@ -209,7 +209,7 @@
 
   * GSettings should init beforce use it
   * update translations
-  * Fix case-insensitive comparison in running_in_mate
+  * Fix case-insensitive comparison in running_in_cafe
   * monitor: fix crash on unmounting remote filesystems
   * BaulFile: fix crash in modify_link_hash_table
   * connect-server-dialog: Respect password save setting
@@ -304,7 +304,7 @@
   * fm-tree-view.c: drop unused variable
   * modify code error: end the statement with a semicolon
   * fm-tree-view.c: avoid deprecated GtkImageMenuItem
-  * rename 'mate_image_menu_item...' to 'eel_image_menu_item_new_from_icon'
+  * rename 'cafe_image_menu_item...' to 'eel_image_menu_item_new_from_icon'
   * eel-editable-label.c: avoid 'append_action_signal' with stock ids
 
 ### baul 1.21.0
@@ -316,7 +316,7 @@
   * avoid gtk_dialog_add_buttons with stock ids
   * baul-file-management-properties.ui: avoid deprecated GtkVBox and GtkHBox
   * baul-bookmarks-window.ui: avoid deprecated:
-  * rename mate_dialog_add_button to eel_dialog_add_button
+  * rename cafe_dialog_add_button to eel_dialog_add_button
   * use development version
   * avoid eel_create_question_dialog with stock ids
   * avoid eel_run_simple_dialog with stock ids
@@ -411,7 +411,7 @@
   * use atk_component_get_extents instead of atk_component_get_position
   * don't parse .hidden files manually - GIO does it since 2.36
   * don't check nonexistent MATE22_USER_DIR env var
-  * don't check nonexistent ~/.mate2 directory
+  * don't check nonexistent ~/.cafe2 directory
   * eel-accessibility: remove unused code and outdated comments
   * show correct right-click menu after making selection
   * eel: Queue resizes on the canvas as elements change visibility
@@ -430,7 +430,7 @@
 
   * NEWS: use consistent, project wide, markdown-like formatting to make
     generating release announcements easier
-  * Build: require libmate-desktop >= 1.17.3
+  * Build: require libcafe-desktop >= 1.17.3
   * Move to GTK+3 (require GTK+ >= 3.14), drop GTK+2 code and --with-gtk
     build option
   * Port from libunique to GtkApplication
@@ -581,7 +581,7 @@
 
   * Do not automount USB flash drives and CD/DVD drives while session is locked
   * Reverted dropping of files to Bookmarks sidebar
-    * See https://github.com/mate-desktop/baul/issues/423
+    * See https://github.com/cafe-desktop/baul/issues/423
   * UI bugfixes
 
 ### baul 1.10.0
@@ -598,7 +598,7 @@
 
 ### baul 1.6.0
 
-  * Replace mateconf with gsettings (much code taken from Nautilus 3.0 patches by Alexander Larsson)
+  * Replace cafeconf with gsettings (much code taken from Nautilus 3.0 patches by Alexander Larsson)
   * "Show backup files" option merged in "Show hidden files"
   * Add support for freedesktop.org File Manager DBus Interface (https://www.freedesktop.org/wiki/Specifications/file-manager-interface)
   * Allow to open files, if passed as arguments

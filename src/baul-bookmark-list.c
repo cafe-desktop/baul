@@ -455,7 +455,7 @@ baul_bookmark_list_delete_items_with_uri (BaulBookmarkList *bookmarks,
  * This is the value set earlier by baul_bookmark_list_set_window_geometry.
  * @bookmarks: the list of bookmarks associated with the window.
  * Return value: string representation of window's geometry, suitable for
- * passing to mate_parse_geometry(), or NULL if
+ * passing to cafe_parse_geometry(), or NULL if
  * no window geometry has yet been saved for this bookmark list.
  **/
 const char *

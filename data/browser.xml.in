@@ -12,13 +12,13 @@
   	<pattern display_name="Chalk" filename="chalk"/>
   	<pattern display_name="Cork" filename="cork"/>
   	<pattern display_name="Countertop" filename="countertop"/>
-  	<pattern display_name="Dark MATE" filename="dark-mate"/>
+  	<pattern display_name="Dark MATE" filename="dark-cafe"/>
   	<pattern display_name="Dots" filename="dots"/>
   	<pattern display_name="Fibers" filename="fibers"/>
   	<pattern display_name="Fleur De Lis" filename="fleur_de_lis"/>
   	<pattern display_name="Floral" filename="floral"/>
   	<pattern display_name="Fossil" filename="fossil"/>
-  	<pattern display_name="MATE" filename="mate"/>
+  	<pattern display_name="MATE" filename="cafe"/>
   	<pattern display_name="Green Weave" filename="green_weave"/>
    	<pattern display_name="Ice" filename="ice"/>
   	<pattern display_name="Manila Paper" filename="manila_paper"/>

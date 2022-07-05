@@ -1,5 +1,5 @@
 <schemalist>
-  <schema id="org.mate.media-handling" path="/org/mate/desktop/media-handling/" gettext-domain="baul">
+  <schema id="org.cafe.media-handling" path="/org/cafe/desktop/media-handling/" gettext-domain="baul">
     <key name="automount" type="b">
       <default>true</default>
       <summary>Whether to automatically mount media</summary>

@@ -317,7 +317,7 @@ desktop_background_changed_cb (EelBackground *background,
                                gpointer       user_data)
 {
     eel_bg_save_to_gsettings (background,
-                              mate_background_preferences);
+                              cafe_background_preferences);
 }
 
 /* delayed initializor of desktop background after GSettings changes */
@@ -327,7 +327,7 @@ desktop_background_prefs_change_event_idle_cb (EelBackground *background)
     gchar *desktop_color = NULL;
 
     eel_bg_load_from_gsettings (background,
-                                mate_background_preferences);
+                                cafe_background_preferences);
 
     desktop_color = eel_bg_get_desktop_color (background);
     eel_background_set_color (background, desktop_color);
@@ -345,7 +345,7 @@ desktop_background_reset_cb (EelBackground *background,
 {
     /* Reset to defaults, and save */
     eel_bg_load_from_system_gsettings (background,
-                                       mate_background_preferences,
+                                       cafe_background_preferences,
                                        TRUE);
     /* Reload from saved settings */
     g_idle_add ((GSourceFunc) desktop_background_prefs_change_event_idle_cb,
@@ -374,7 +374,7 @@ static void
 desktop_background_weak_notify (gpointer data,
                                 GObject *object)
 {
-    g_signal_handlers_disconnect_by_func (mate_background_preferences,
+    g_signal_handlers_disconnect_by_func (cafe_background_preferences,
                                           G_CALLBACK (desktop_background_prefs_change_event_cb),
                                           object);
 }
@@ -395,12 +395,12 @@ baul_connect_desktop_background_to_settings (BaulIconContainer *icon_container)
                              G_CALLBACK (desktop_background_reset_cb), NULL, 0);
 
     eel_bg_load_from_gsettings (background,
-                                mate_background_preferences);
+                                cafe_background_preferences);
 
     /* Connect to "change-event" signal to receive *groups of changes* before
      * they are split out into multiple emissions of the "changed" signal.
      */
-    g_signal_connect (mate_background_preferences, "change-event",
+    g_signal_connect (cafe_background_preferences, "change-event",
                       G_CALLBACK (desktop_background_prefs_change_event_cb),
                       background);
 

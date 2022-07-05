@@ -526,7 +526,7 @@ baul_navigation_window_key_press_event (GtkWidget *widget,
 
     if (event->state & GDK_CONTROL_MASK)
     {
-        GSettings *settings = g_settings_new ("org.mate.baul.preferences");
+        GSettings *settings = g_settings_new ("org.cafe.baul.preferences");
         gboolean handled = FALSE;
 
         if (g_settings_get_boolean (settings, "ctrl-tab-switch-tabs"))

@@ -45,8 +45,8 @@ GSettings *baul_compact_view_preferences;
 GSettings *baul_list_view_preferences;
 GSettings *baul_extension_preferences;
 
-GSettings *mate_background_preferences;
-GSettings *mate_lockdown_preferences;
+GSettings *cafe_background_preferences;
+GSettings *cafe_lockdown_preferences;
 
 /*
  * Public functions
@@ -88,16 +88,16 @@ baul_global_preferences_init (void)
 
     initialized = TRUE;
 
-    baul_preferences = g_settings_new("org.mate.baul.preferences");
-    baul_media_preferences = g_settings_new("org.mate.media-handling");
-    baul_window_state = g_settings_new("org.mate.baul.window-state");
-    baul_icon_view_preferences = g_settings_new("org.mate.baul.icon-view");
-    baul_compact_view_preferences = g_settings_new("org.mate.baul.compact-view");
-    baul_desktop_preferences = g_settings_new("org.mate.baul.desktop");
-    baul_tree_sidebar_preferences = g_settings_new("org.mate.baul.sidebar-panels.tree");
-    baul_list_view_preferences = g_settings_new("org.mate.baul.list-view");
-    baul_extension_preferences = g_settings_new("org.mate.baul.extensions");
+    baul_preferences = g_settings_new("org.cafe.baul.preferences");
+    baul_media_preferences = g_settings_new("org.cafe.media-handling");
+    baul_window_state = g_settings_new("org.cafe.baul.window-state");
+    baul_icon_view_preferences = g_settings_new("org.cafe.baul.icon-view");
+    baul_compact_view_preferences = g_settings_new("org.cafe.baul.compact-view");
+    baul_desktop_preferences = g_settings_new("org.cafe.baul.desktop");
+    baul_tree_sidebar_preferences = g_settings_new("org.cafe.baul.sidebar-panels.tree");
+    baul_list_view_preferences = g_settings_new("org.cafe.baul.list-view");
+    baul_extension_preferences = g_settings_new("org.cafe.baul.extensions");
 
-    mate_background_preferences = g_settings_new("org.mate.background");
-    mate_lockdown_preferences = g_settings_new("org.mate.lockdown");
+    cafe_background_preferences = g_settings_new("org.cafe.background");
+    cafe_lockdown_preferences = g_settings_new("org.cafe.lockdown");
 }

@@ -35,7 +35,7 @@
 #include <sys/wait.h>
 
 #define MATE_DESKTOP_USE_UNSTABLE_API
-#include <libmate-desktop/mate-desktop-thumbnail.h>
+#include <libcafe-desktop/cafe-desktop-thumbnail.h>
 
 #include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-graphic-effects.h>
@@ -146,7 +146,7 @@ get_thumbnail_factory (void)
 
     if (thumbnail_factory == NULL)
     {
-        thumbnail_factory = mate_desktop_thumbnail_factory_new (MATE_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+        thumbnail_factory = cafe_desktop_thumbnail_factory_new (MATE_DESKTOP_THUMBNAIL_SIZE_NORMAL);
     }
 
     return thumbnail_factory;
@@ -373,7 +373,7 @@ baul_can_thumbnail (BaulFile *file)
     mtime = baul_file_get_mtime (file);
 
     factory = get_thumbnail_factory ();
-    res = mate_desktop_thumbnail_factory_can_thumbnail (factory,
+    res = cafe_desktop_thumbnail_factory_can_thumbnail (factory,
             uri,
             mime_type,
             mtime);
@@ -573,7 +573,7 @@ thumbnail_thread_func (GTask        *task,
                    info->image_uri);
 #endif
 
-        pixbuf = mate_desktop_thumbnail_factory_generate_thumbnail (thumbnail_factory,
+        pixbuf = cafe_desktop_thumbnail_factory_generate_thumbnail (thumbnail_factory,
                  info->image_uri,
                  info->mime_type);
 
@@ -583,7 +583,7 @@ thumbnail_thread_func (GTask        *task,
 			g_message ("(Thumbnail Thread) Saving thumbnail: %s\n",
 				   info->image_uri);
 #endif
-            mate_desktop_thumbnail_factory_save_thumbnail (thumbnail_factory,
+            cafe_desktop_thumbnail_factory_save_thumbnail (thumbnail_factory,
                     pixbuf,
                     info->image_uri,
                     current_orig_mtime);
@@ -595,7 +595,7 @@ thumbnail_thread_func (GTask        *task,
 			g_message ("(Thumbnail Thread) Thumbnail failed: %s\n",
 				   info->image_uri);
 #endif
-            mate_desktop_thumbnail_factory_create_failed_thumbnail (thumbnail_factory,
+            cafe_desktop_thumbnail_factory_create_failed_thumbnail (thumbnail_factory,
                     info->image_uri,
                     current_orig_mtime);
         }

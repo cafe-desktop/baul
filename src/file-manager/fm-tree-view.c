@@ -1697,7 +1697,7 @@ fm_tree_view_class_init (FMTreeViewClass *class)
     G_OBJECT_CLASS (class)->dispose = fm_tree_view_dispose;
     G_OBJECT_CLASS (class)->finalize = fm_tree_view_finalize;
 
-    copied_files_atom = gdk_atom_intern ("x-special/mate-copied-files", FALSE);
+    copied_files_atom = gdk_atom_intern ("x-special/cafe-copied-files", FALSE);
 }
 
 static const char *

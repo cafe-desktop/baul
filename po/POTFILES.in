@@ -10,12 +10,12 @@ data/baul-file-management-properties.desktop.in.in
 data/baul-folder-handler.desktop.in.in
 data/baul-home.desktop.in.in
 data/baul.xml.in
-data/mate-network-scheme.desktop.in.in
+data/cafe-network-scheme.desktop.in.in
 eel/eel-canvas.c
 eel/eel-editable-label.c
 eel/eel-glib-extensions.c
 eel/eel-gtk-extensions.c
-eel/eel-mate-extensions.c
+eel/eel-cafe-extensions.c
 eel/eel-stock-dialogs.c
 eel/eel-vfs-extensions.c
 libbaul-extension/baul-column.c
@@ -50,8 +50,8 @@ libbaul-private/baul-search-directory-file.c
 libbaul-private/baul-tree-view-drag-dest.c
 libbaul-private/baul-undostack-manager.c
 libbaul-private/baul-vfs-file.c
-libbaul-private/org.mate.baul.gschema.xml
-libbaul-private/org.mate.media-handling.gschema.xml
+libbaul-private/org.cafe.baul.gschema.xml
+libbaul-private/org.cafe.media-handling.gschema.xml
 libegg/eggdesktopfile.c
 libegg/eggsmclient.c
 src/baul-application.c

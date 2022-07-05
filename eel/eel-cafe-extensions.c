@@ -1,8 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-mate-extensions.c - implementation of new functions that operate on
-                            mate classes. Perhaps some of these should be
-  			    rolled into mate someday.
+/* eel-cafe-extensions.c - implementation of new functions that operate on
+                            cafe classes. Perhaps some of these should be
+  			    rolled into cafe someday.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -28,10 +28,10 @@
 
 #define MATE_DESKTOP_USE_UNSTABLE_API
 
-#include "eel-mate-extensions.h"
+#include "eel-cafe-extensions.h"
 
 #include <gtk/gtk.h>
-#include <libmate-desktop/mate-desktop-utils.h>
+#include <libcafe-desktop/cafe-desktop-utils.h>
 
 
 /* Return a command string containing the path to a terminal on this system. */
@@ -107,7 +107,7 @@ get_terminal_command_prefix (gboolean for_command)
     guint i;
     static const char *const commands[][3] =
     {
-        { "mate-terminal", "-x",                                      "" },
+        { "cafe-terminal", "-x",                                      "" },
         { "dtterm",         "-e",                                      "-ls" },
         { "nxterm",         "-e",                                      "-ls" },
         { "color-xterm",    "-e",                                      "-ls" },
@@ -120,7 +120,7 @@ get_terminal_command_prefix (gboolean for_command)
      */
     argc = 0;
     argv = g_new0 (char *, 1);
-    mate_desktop_prepend_terminal_to_vector (&argc, &argv);
+    cafe_desktop_prepend_terminal_to_vector (&argc, &argv);
 
     command = NULL;
     if (argc != 0)
@@ -164,7 +164,7 @@ get_terminal_command_prefix (gboolean for_command)
 }
 
 char *
-eel_mate_make_terminal_command (const char *command)
+eel_cafe_make_terminal_command (const char *command)
 {
     char *prefix, *quoted, *terminal_command;
 
@@ -181,7 +181,7 @@ eel_mate_make_terminal_command (const char *command)
 }
 
 void
-eel_mate_open_terminal_on_screen (const char *command,
+eel_cafe_open_terminal_on_screen (const char *command,
                                   GdkScreen  *screen)
 {
     char *command_line;
@@ -191,13 +191,13 @@ eel_mate_open_terminal_on_screen (const char *command,
         screen = gdk_screen_get_default ();
     }
 
-    command_line = eel_mate_make_terminal_command (command);
+    command_line = eel_cafe_make_terminal_command (command);
     if (command_line == NULL)
     {
         g_message ("Could not start a terminal");
         return;
     }
 
-    mate_gdk_spawn_command_line_on_screen(screen, command_line, NULL);
+    cafe_gdk_spawn_command_line_on_screen(screen, command_line, NULL);
     g_free (command_line);
 }

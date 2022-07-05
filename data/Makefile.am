@@ -15,7 +15,7 @@ desktop_DATA = \
 	baul-file-management-properties.desktop  \
 	baul-browser.desktop \
 	baul-autorun-software.desktop \
-	mate-network-scheme.desktop
+	cafe-network-scheme.desktop
 desktop_in_files = $(desktop_DATA:.desktop=.desktop.in)
 desktop_in_in_files = $(desktop_DATA:.desktop=.desktop.in.in)
 %.desktop.in: %.desktop.in.in
@@ -31,9 +31,9 @@ mime_DATA = $(xml_files)
 servicedir = $(datadir)/dbus-1/services
 service_DATA = $(service_in_files:.service.in=.service)
 service_in_files = 				\
-	org.mate.freedesktop.FileManager1.service.in
+	org.cafe.freedesktop.FileManager1.service.in
 
-org.mate.freedesktop.FileManager1.service: org.mate.freedesktop.FileManager1.service.in Makefile
+org.cafe.freedesktop.FileManager1.service: org.cafe.freedesktop.FileManager1.service.in Makefile
 	$(AM_V_GEN) sed -e "s|\@bindir\@|$(bindir)|" $< > $@
 
 bauldatadir = $(datadir)/baul

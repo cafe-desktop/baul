@@ -32,13 +32,13 @@
 #include "baul-window-slot-info.h"
 
 /* Drag & Drop target names. */
-#define BAUL_ICON_DND_MATE_ICON_LIST_TYPE	"x-special/mate-icon-list"
+#define BAUL_ICON_DND_MATE_ICON_LIST_TYPE	"x-special/cafe-icon-list"
 #define BAUL_ICON_DND_URI_LIST_TYPE		"text/uri-list"
 #define BAUL_ICON_DND_NETSCAPE_URL_TYPE	"_NETSCAPE_URL"
 #define BAUL_ICON_DND_COLOR_TYPE		"application/x-color"
 #define BAUL_ICON_DND_BGIMAGE_TYPE		"property/bgimage"
 #define BAUL_ICON_DND_KEYWORD_TYPE		"property/keyword"
-#define BAUL_ICON_DND_RESET_BACKGROUND_TYPE "x-special/mate-reset-background"
+#define BAUL_ICON_DND_RESET_BACKGROUND_TYPE "x-special/cafe-reset-background"
 #define BAUL_ICON_DND_ROOTWINDOW_DROP_TYPE	"application/x-rootwindow-drop"
 #define BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE	"XdndDirectSave0" /* XDS Protocol Type */
 #define BAUL_ICON_DND_RAW_TYPE	"application/octet-stream"

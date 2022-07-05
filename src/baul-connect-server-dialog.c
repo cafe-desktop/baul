@@ -710,7 +710,7 @@ connect_dialog_response_cb (BaulConnectServerDialog *dialog,
     case GTK_RESPONSE_HELP :
         error = NULL;
         gtk_show_uri_on_window (GTK_WINDOW (dialog),
-                                "help:mate-user-guide/baul-server-connect",
+                                "help:cafe-user-guide/baul-server-connect",
                                 gtk_get_current_event_time (), &error);
         if (error)
         {

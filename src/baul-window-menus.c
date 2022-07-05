@@ -585,7 +585,7 @@ action_about_baul_callback (GtkAction *action,
                            "documenters", documenters,
                            "translator-credits", _("translator-credits"),
                            "logo-icon-name", "system-file-manager",
-                           "website", "https://mate-desktop.org",
+                           "website", "https://cafe-desktop.org",
                            "website-label", _("MATE Web Site"),
                            NULL);
 
@@ -614,8 +614,8 @@ action_baul_manual_callback (GtkAction *action,
 
     gtk_show_uri_on_window (GTK_WINDOW (window),
                             BAUL_IS_DESKTOP_WINDOW (window)
-                               ? "help:mate-user-guide"
-                               : "help:mate-user-guide/gosbaul-1",
+                               ? "help:cafe-user-guide"
+                               : "help:cafe-user-guide/gosbaul-1",
                             gtk_get_current_event_time (), &error);
 
     if (error)

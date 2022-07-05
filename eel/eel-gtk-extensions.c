@@ -31,7 +31,7 @@
 
 #include "eel-gdk-pixbuf-extensions.h"
 #include "eel-glib-extensions.h"
-#include "eel-mate-extensions.h"
+#include "eel-cafe-extensions.h"
 #include "eel-marshal.h"
 #include "eel-string.h"
 
@@ -50,7 +50,7 @@
 #define MAXIMUM_MENU_TITLE_LENGTH	48
 
 /* Used for window position & size sanity-checking. The sizes are big enough to prevent
- * at least normal-sized mate panels from obscuring the window at the screen edges.
+ * at least normal-sized cafe panels from obscuring the window at the screen edges.
  */
 #define MINIMUM_ON_SCREEN_WIDTH		100
 #define MINIMUM_ON_SCREEN_HEIGHT	100
@@ -454,7 +454,7 @@ eel_image_menu_item_new_from_icon (const gchar *icon_name,
     GSettings *icon_settings;
     GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
-    icon_settings = g_settings_new ("org.mate.interface");
+    icon_settings = g_settings_new ("org.cafe.interface");
     if ((icon_name) && (g_settings_get_boolean (icon_settings, "menus-have-icons")))
         /*Load the icon if user has icons in menus turned on*/
         icon = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);

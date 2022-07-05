@@ -210,7 +210,7 @@ baul-marshal.list: $(libbaul_private_la_SOURCES) Makefile.am
 	$(AM_V_GEN)echo "#include \"baul-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) --body --prefix=$(subst -,_,$*)_marshal $< >> $*-marshal.c
 
-gsettings_SCHEMAS = org.mate.baul.gschema.xml org.mate.media-handling.gschema.xml
+gsettings_SCHEMAS = org.cafe.baul.gschema.xml org.cafe.media-handling.gschema.xml
 
 @GSETTINGS_RULES@
 

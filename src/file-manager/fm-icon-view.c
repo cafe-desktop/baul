@@ -323,7 +323,7 @@ get_stored_icon_position_callback (BaulIconContainer *container,
                      &position->x, &position->y, &c) == 2;
     g_free (position_string);
 
-    /* If it is the desktop directory, maybe the mate-libs metadata has information about it */
+    /* If it is the desktop directory, maybe the cafe-libs metadata has information about it */
 
     /* Disable scaling if not on the desktop */
     if (fm_icon_view_supports_scaling (icon_view))

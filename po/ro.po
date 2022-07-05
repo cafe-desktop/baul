@@ -16,11 +16,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: baul 1.23.2\n"
-"Report-Msgid-Bugs-To: https://mate-desktop.org\n"
+"Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
 "POT-Creation-Date: 2020-01-10 11:11+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
-"Language-Team: Romanian (https://www.transifex.com/mate/teams/13566/ro/)\n"
+"Language-Team: Romanian (https://www.transifex.com/cafe/teams/13566/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -435,23 +435,23 @@ msgstr ""
 msgid "Saved search"
 msgstr "Căutare salvată"
 
-#: data/mate-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
+#: data/cafe-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
 msgid "Network"
 msgstr "Rețea"
 
-#: data/mate-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
 msgid "Browse bookmarked and local network locations"
 msgstr "Navighează prin locațiile favorite sau din rețeaua locală"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon
 #. file name)!
-#: data/mate-network-scheme.desktop.in.in:11
+#: data/cafe-network-scheme.desktop.in.in:11
 msgid "network-workgroup"
 msgstr ""
 
 #. Translators: Search terms to find this application. Do NOT translate or
 #. localize the semicolons! The list MUST also end with a semicolon!
-#: data/mate-network-scheme.desktop.in.in:14
+#: data/cafe-network-scheme.desktop.in.in:14
 msgid "bookmarks;browse;local;network;locations;MATE;"
 msgstr ""
 
@@ -1434,8 +1434,8 @@ msgstr[2] ""
 
 #: libbaul-private/baul-file-operations.c:330
 #, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
+msgid "approxicafely %'d hour"
+msgid_plural "approxicafely %'d hours"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -3012,11 +3012,11 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:76
+#: libbaul-private/org.cafe.baul.gschema.xml:76
 msgid "Where to position newly open tabs in browser windows."
 msgstr "Unde se poziționează taburile noi deschise în ferestrele de navigare."
 
-#: libbaul-private/org.mate.baul.gschema.xml:77
+#: libbaul-private/org.cafe.baul.gschema.xml:77
 msgid ""
 "If set to \"after-current-tab\", then new tabs are inserted after the "
 "current tab. If set to \"end\", then new tabs are appended to the end of the"
@@ -3026,11 +3026,11 @@ msgstr ""
 "inserate după pagina actuală. Dacă este definit ca „end”, atunci noile "
 "pagini vor fi adăugate la sfârșitul listei de pagini."
 
-#: libbaul-private/org.mate.baul.gschema.xml:81
+#: libbaul-private/org.cafe.baul.gschema.xml:81
 msgid "Switch tabs with [ctrl] + [tab]"
 msgstr "Comută taburile folosind combinația de taste [ctrl] + [tab]"
 
-#: libbaul-private/org.mate.baul.gschema.xml:82
+#: libbaul-private/org.cafe.baul.gschema.xml:82
 msgid ""
 "If true, it enables the ability to switch tabs using [ctrl + tab] and [ctrl "
 "+ shift + tab]."
@@ -3038,11 +3038,11 @@ msgstr ""
 "Dacă este activat, permite schimbarea taburilor folosind combinațiile de "
 "taste [ctrl + tab] și [ctrl + shift + tab]."
 
-#: libbaul-private/org.mate.baul.gschema.xml:86
+#: libbaul-private/org.cafe.baul.gschema.xml:86
 msgid "Baul will exit when last window destroyed."
 msgstr "Baul va ieși la închiderea ultimei ferestre."
 
-#: libbaul-private/org.mate.baul.gschema.xml:87
+#: libbaul-private/org.cafe.baul.gschema.xml:87
 msgid ""
 "If set to true, then Baul will exit when all windows are destroyed. This is "
 "the default setting. If set to false, it can be started without any window, "
@@ -3051,14 +3051,14 @@ msgstr ""
 "Dacă este activat, Baul va ieși atunci când toate ferestrele sunt închise. "
 "Aceasta este configurarea implicită. Dacă nu este activat, poate fi pornit "
 "fără nicio fereastră, în acest caz putând servi ca un serviciu de "
-"monitorizare a montării automate de medii de stocare sau sarcini similare."
+"monitorizare a montării autocafe de medii de stocare sau sarcini similare."
 
-#: libbaul-private/org.mate.baul.gschema.xml:91
+#: libbaul-private/org.cafe.baul.gschema.xml:91
 msgid "Enables the classic Baul behavior, where all windows are browsers"
 msgstr ""
 "Activează comportamenul tradițional Baul;  toate ferestrele sunt navigatoare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:92
+#: libbaul-private/org.cafe.baul.gschema.xml:92
 msgid ""
 "If set to true, then all Baul windows will be browser windows. This is how "
 "Nautilus used to behave before version 2.6, and some people prefer this "
@@ -3068,13 +3068,13 @@ msgstr ""
 "obișnuia Nautilus să se comporte înainte de versiunea 2.6, și unii oameni "
 "preferă acest comportament."
 
-#: libbaul-private/org.mate.baul.gschema.xml:96
+#: libbaul-private/org.cafe.baul.gschema.xml:96
 msgid "Always use the location entry, instead of the pathbar"
 msgstr ""
 "Pentru afișarea locului se utilizează întotdeauna un câmp text, nu o bară de"
 " butoane"
 
-#: libbaul-private/org.mate.baul.gschema.xml:97
+#: libbaul-private/org.cafe.baul.gschema.xml:97
 msgid ""
 "If set to true, then Baul browser windows will always use a textual input "
 "entry for the location toolbar, instead of the pathbar."
@@ -3082,13 +3082,13 @@ msgstr ""
 "Dacă opțiunea este activată, ferestrele de navigare Baul vor utiliza "
 "întotdeauna un câmp text în locul barei de butoane pentru bara de locuri."
 
-#: libbaul-private/org.mate.baul.gschema.xml:101
+#: libbaul-private/org.cafe.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
 msgstr ""
 "Dacă să ceară confirmarea la ștergerea fișierelor, sau la golirea Coșului de"
 " gunoi."
 
-#: libbaul-private/org.mate.baul.gschema.xml:102
+#: libbaul-private/org.cafe.baul.gschema.xml:102
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to "
 "delete files, or empty the Trash."
@@ -3096,11 +3096,11 @@ msgstr ""
 "Dacă opțiunea este activată, Baul va solicita confirmare la ștergerea de "
 "fișiere sau la golirea Coșului de gunoi."
 
-#: libbaul-private/org.mate.baul.gschema.xml:106
+#: libbaul-private/org.cafe.baul.gschema.xml:106
 msgid "Whether to ask for confirmation when moving files to the Trash"
 msgstr "Dacă să ceară confirmarea la mutarea fișierelor în coșul de gunoi"
 
-#: libbaul-private/org.mate.baul.gschema.xml:107
+#: libbaul-private/org.cafe.baul.gschema.xml:107
 msgid ""
 "If set to true, then Baul will ask for confirmation when you attempt to move"
 " files to the Trash."
@@ -3108,11 +3108,11 @@ msgstr ""
 "Dacă este stabilită ca true (adevărat), atunci Baul va cere confirmarea când"
 " încercați să mutați fișiere în Coșul de gunoi."
 
-#: libbaul-private/org.mate.baul.gschema.xml:111
+#: libbaul-private/org.cafe.baul.gschema.xml:111
 msgid "Whether to enable immediate deletion"
 msgstr "Dacă să activeze ștergerea fără avertizare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:112
+#: libbaul-private/org.cafe.baul.gschema.xml:112
 msgid ""
 "If set to true, then Baul will have a feature allowing you to delete a file "
 "immediately and in-place, instead of moving it to the trash. This feature "
@@ -3123,11 +3123,11 @@ msgstr ""
 " de gunoi.  Această facilitate poate fi periculoasă, așa că trebuie "
 "utilizată cu atenție."
 
-#: libbaul-private/org.mate.baul.gschema.xml:117
+#: libbaul-private/org.cafe.baul.gschema.xml:117
 msgid "When to show preview text in icons"
 msgstr "Când să afișeze text în pictograme"
 
-#: libbaul-private/org.mate.baul.gschema.xml:118
+#: libbaul-private/org.cafe.baul.gschema.xml:118
 msgid ""
 "Speed tradeoff for when to show a preview of text file contents in the "
 "file's icon. If set to \"always\" then always show previews, even if the "
@@ -3142,11 +3142,11 @@ msgstr ""
 "previzualizări doar pentru sistemele de fișiere locale. Dacă este stabilită "
 "ca „never”(niciodată), previzualizările nu vor fi arătate niciodată."
 
-#: libbaul-private/org.mate.baul.gschema.xml:123
+#: libbaul-private/org.cafe.baul.gschema.xml:123
 msgid "When to show number of items in a folder"
 msgstr "Când să afișeze numărul de elemente în dosare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:124
+#: libbaul-private/org.cafe.baul.gschema.xml:124
 msgid ""
 "Speed tradeoff for when to show the number of items in a folder. If set to "
 "\"always\" then always show item counts, even if the folder is on a remote "
@@ -3161,11 +3161,11 @@ msgstr ""
 "ca „never”(niciodată), atunci nu se va mai deranja să calculeze numărul de "
 "elemente."
 
-#: libbaul-private/org.mate.baul.gschema.xml:128
+#: libbaul-private/org.cafe.baul.gschema.xml:128
 msgid "Type of click used to launch/open files"
 msgstr "Tipul de clic folosit pentru a lansa/deschide fișiere"
 
-#: libbaul-private/org.mate.baul.gschema.xml:129
+#: libbaul-private/org.cafe.baul.gschema.xml:129
 msgid ""
 "Possible values are \"single\" to launch files on a single click, or "
 "\"double\" to launch them on a double click."
@@ -3173,11 +3173,11 @@ msgstr ""
 "Valorile posibile sunt „single” pentru lansarea fișierelor cu un singur "
 "clic, sau „double” pentru lansarea acestora cu un clic dublu."
 
-#: libbaul-private/org.mate.baul.gschema.xml:133
+#: libbaul-private/org.cafe.baul.gschema.xml:133
 msgid "What to do with executable text files when activated"
 msgstr "Comportarea fișierelor text executabile la activare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:134
+#: libbaul-private/org.cafe.baul.gschema.xml:134
 msgid ""
 "What to do with executable text files when they are activated (single or "
 "double clicked). Possible values are \"launch\" to launch them as programs, "
@@ -3189,11 +3189,11 @@ msgstr ""
 "întreba ce urmează să facă printr-un dialog, și „display” pentru a le afișa "
 "ca fișiere text."
 
-#: libbaul-private/org.mate.baul.gschema.xml:138
+#: libbaul-private/org.cafe.baul.gschema.xml:138
 msgid "Show the package installer for unknown MIME types"
 msgstr "Afișează instalatorul de pachete pentru tipuri MIME necunoscute"
 
-#: libbaul-private/org.mate.baul.gschema.xml:139
+#: libbaul-private/org.cafe.baul.gschema.xml:139
 msgid ""
 "Whether to show the user a package installer dialog in case an unknown MIME "
 "type is opened, in order to search for an application to handle it."
@@ -3201,13 +3201,13 @@ msgstr ""
 "Dacă să fie afișat dialogul instalatorul de pachete în că un tip MIME type "
 "este deschis, pentru a căuta o aplicație care să îl manevreze."
 
-#: libbaul-private/org.mate.baul.gschema.xml:143
+#: libbaul-private/org.cafe.baul.gschema.xml:143
 msgid "Use extra mouse button events in Baul' browser window"
 msgstr ""
 "Folosește evenimente adiționale ale butoanelor de  maus în ferestra de "
 "navigare Baul"
 
-#: libbaul-private/org.mate.baul.gschema.xml:144
+#: libbaul-private/org.cafe.baul.gschema.xml:144
 msgid ""
 "For users with mice that have \"Forward\" and \"Back\" buttons, this key "
 "will determine if any action is taken inside of Baul when either is pressed."
@@ -3215,12 +3215,12 @@ msgstr ""
 "Pentru utilizatorii a căror maus are butoanele „Înainte” și „Înapoi”, "
 "această cheie determină dacă Baul va răspunde la apăsarea unuia dintre ele."
 
-#: libbaul-private/org.mate.baul.gschema.xml:148
+#: libbaul-private/org.cafe.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
 msgstr ""
 "Buton maus pentru a activa comanda „Înainte” din fereastra de navigare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:149
+#: libbaul-private/org.cafe.baul.gschema.xml:149
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Forward\" command in a browser "
@@ -3230,11 +3230,11 @@ msgstr ""
 "această cheie determină care buton activează comanda „Înainte” în ferastra "
 "de navigare. Rază de valori posibile între 6 și 14."
 
-#: libbaul-private/org.mate.baul.gschema.xml:153
+#: libbaul-private/org.cafe.baul.gschema.xml:153
 msgid "Mouse button to activate the \"Back\" command in browser window"
 msgstr "Buton maus pentru a activa comanda „Înapoi” din fereastra de navigare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:154
+#: libbaul-private/org.cafe.baul.gschema.xml:154
 msgid ""
 "For users with mice that have buttons for \"Forward\" and \"Back\", this key"
 " will set which button activates the \"Back\" command in a browser window. "
@@ -3244,11 +3244,11 @@ msgstr ""
 "această cheie determină care buton activează comanda „Înapoi” în ferastra de"
 " navigare. Rază de valori posibile între 6 și 14."
 
-#: libbaul-private/org.mate.baul.gschema.xml:159
+#: libbaul-private/org.cafe.baul.gschema.xml:159
 msgid "When to show thumbnails of image files"
 msgstr "Când să afișeze miniaturi pentru fișiere imagine"
 
-#: libbaul-private/org.mate.baul.gschema.xml:160
+#: libbaul-private/org.cafe.baul.gschema.xml:160
 msgid ""
 "Speed tradeoff for when to show an image file as a thumbnail. If set to "
 "\"always\" then always thumbnail, even if the folder is on a remote server. "
@@ -3264,11 +3264,11 @@ msgstr ""
 "„never”(niciodată), atunci nici nu se va mai deranja să facă miniaturi "
 "pentru imagini, se vor folosi doar pictograme generale."
 
-#: libbaul-private/org.mate.baul.gschema.xml:164
+#: libbaul-private/org.cafe.baul.gschema.xml:164
 msgid "Maximum image size for thumbnailing"
 msgstr "Dimensiunea maximă a fișierelor pentru care se produc miniaturi"
 
-#: libbaul-private/org.mate.baul.gschema.xml:165
+#: libbaul-private/org.cafe.baul.gschema.xml:165
 msgid ""
 "Images over this size (in bytes) won't be thumbnailed. The purpose of this "
 "setting is to avoid thumbnailing large images that may take a long time to "
@@ -3279,12 +3279,12 @@ msgstr ""
 "foarte mari, proces ce ar putea dura foarte mult sau folosi foarte multă "
 "memorie."
 
-#: libbaul-private/org.mate.baul.gschema.xml:170
+#: libbaul-private/org.cafe.baul.gschema.xml:170
 msgid "Whether to preview sounds when mousing over an icon"
 msgstr ""
 "Dacă să previzualizeze sunetele la deplasarea mausului peste pictogramă"
 
-#: libbaul-private/org.mate.baul.gschema.xml:171
+#: libbaul-private/org.cafe.baul.gschema.xml:171
 msgid ""
 "Speed tradeoff for when to preview a sound file when mousing over a files "
 "icon. If set to \"always\" then always plays the sound, even if the file is "
@@ -3299,12 +3299,12 @@ msgstr ""
 "locale. Dacă este stabilită ca „never”(niciodată), atunci sunetele nu vor fi"
 " previzualizate niciodată."
 
-#: libbaul-private/org.mate.baul.gschema.xml:175
+#: libbaul-private/org.cafe.baul.gschema.xml:175
 msgid "Show advanced permissions in the file property dialog"
 msgstr ""
 "Afișează permisiuni avansate în dialogul pentru proprietățile fișierului"
 
-#: libbaul-private/org.mate.baul.gschema.xml:176
+#: libbaul-private/org.cafe.baul.gschema.xml:176
 msgid ""
 "If set to true, then Baul lets you edit and display file permissions in a "
 "more unix-like way, accessing some more esoteric options."
@@ -3313,11 +3313,11 @@ msgstr ""
 "permisiunilor fișierelor în mod tradițional unix și, de asemenea, oferă "
 "acces la unele opțiuni ascunse."
 
-#: libbaul-private/org.mate.baul.gschema.xml:180
+#: libbaul-private/org.cafe.baul.gschema.xml:180
 msgid "Show folders first in windows"
 msgstr "Afișează mai întâi dosarele"
 
-#: libbaul-private/org.mate.baul.gschema.xml:181
+#: libbaul-private/org.cafe.baul.gschema.xml:181
 msgid ""
 "If set to true, then Baul shows folders prior to showing files in the icon "
 "and list views."
@@ -3325,11 +3325,11 @@ msgstr ""
 "Dacă opțiunea este activată, directoarele vor fi afișate înaintea fișierelor"
 " în modurile de vizualizare „listă” sau „pictograme”."
 
-#: libbaul-private/org.mate.baul.gschema.xml:188
+#: libbaul-private/org.cafe.baul.gschema.xml:188
 msgid "Default sort order"
 msgstr "Ordinea implicită de sortare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:189
+#: libbaul-private/org.cafe.baul.gschema.xml:189
 msgid ""
 "The default sort-order for items in the icon view. Possible values are "
 "\"name\", \"size\", \"type\", \"mtime\", and \"emblems\"."
@@ -3337,11 +3337,11 @@ msgstr ""
 "Ordinea implicită de sortare a elementelor în vizualizarea pictograme. "
 "Valorile posibile sunt „name”, „size”, „type”, „mtime”, și „emblems”."
 
-#: libbaul-private/org.mate.baul.gschema.xml:193
+#: libbaul-private/org.cafe.baul.gschema.xml:193
 msgid "Reverse sort order in new windows"
 msgstr "Ordine inversă de sortare în noile ferestre"
 
-#: libbaul-private/org.mate.baul.gschema.xml:194
+#: libbaul-private/org.cafe.baul.gschema.xml:194
 msgid ""
 "If true, files in new windows will be sorted in reverse order. ie, if sorted"
 " by name, then instead of sorting the files from \"a\" to \"z\", they will "
@@ -3353,11 +3353,11 @@ msgstr ""
 "se facă de la „a” la „z”, se va face de la „z” la „a”; la sortarea după "
 "mărime, vor fi sortate de la mai mare către mai mic."
 
-#: libbaul-private/org.mate.baul.gschema.xml:198
+#: libbaul-private/org.cafe.baul.gschema.xml:198
 msgid "Baul uses the users home folder as the desktop"
 msgstr "Baul utilizează dosarul personal al utilizatorului ca desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:199
+#: libbaul-private/org.cafe.baul.gschema.xml:199
 msgid ""
 "If set to true, then Baul will use the user's home folder as the desktop. If"
 " it is false, then it will use ~/Desktop as the desktop."
@@ -3366,19 +3366,19 @@ msgstr ""
 "utilizatorului ca desktop.  Dacă este dezactivată, va utiliza dosarul "
 "~/Desktop."
 
-#: libbaul-private/org.mate.baul.gschema.xml:203
+#: libbaul-private/org.cafe.baul.gschema.xml:203
 msgid "Custom Background"
 msgstr "Fundal personalizat"
 
-#: libbaul-private/org.mate.baul.gschema.xml:204
+#: libbaul-private/org.cafe.baul.gschema.xml:204
 msgid "Whether a custom default folder background has been set."
 msgstr "Dacă a fost definit un fundal implicit pentru dosar."
 
-#: libbaul-private/org.mate.baul.gschema.xml:208
+#: libbaul-private/org.cafe.baul.gschema.xml:208
 msgid "Default Background Color"
 msgstr "Culoarea de fundal implicită"
 
-#: libbaul-private/org.mate.baul.gschema.xml:209
+#: libbaul-private/org.cafe.baul.gschema.xml:209
 msgid ""
 "Color for the default folder background. Only used if background_set is "
 "true."
@@ -3386,30 +3386,30 @@ msgstr ""
 "Culoarea implicită de fundal pentru directoare.  Este utilizată doar dacă "
 "opțiunea background_set este activată."
 
-#: libbaul-private/org.mate.baul.gschema.xml:213
+#: libbaul-private/org.cafe.baul.gschema.xml:213
 msgid "Default Background Filename"
 msgstr "Fișierul de fundal implicit"
 
-#: libbaul-private/org.mate.baul.gschema.xml:214
+#: libbaul-private/org.cafe.baul.gschema.xml:214
 msgid ""
 "Uri of the default folder background. Only used if background_set is true."
 msgstr ""
 "Uri-ul fundalului implicit pentru dosar. Folosit doar dacă background_set is"
 " adevărat."
 
-#: libbaul-private/org.mate.baul.gschema.xml:218
+#: libbaul-private/org.cafe.baul.gschema.xml:218
 msgid "Custom Side Pane Background Set"
 msgstr "Activare fundal personalizat pentru panoul lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:219
+#: libbaul-private/org.cafe.baul.gschema.xml:219
 msgid "Whether a custom default side pane background has been set."
 msgstr "Dacă a fost definit un fundal implicit pentru panoul lateral."
 
-#: libbaul-private/org.mate.baul.gschema.xml:223
+#: libbaul-private/org.cafe.baul.gschema.xml:223
 msgid "Default Side Pane Background Color"
 msgstr "Culoarea implicită pentru fundalul panoului lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:224
+#: libbaul-private/org.cafe.baul.gschema.xml:224
 msgid ""
 "Filename for the default side pane background. Only used if "
 "side_pane_background_set is true."
@@ -3417,11 +3417,11 @@ msgstr ""
 "Fișierul de fundal implicit pentru panoul lateral.  Este utilizat doar dacă "
 "opțiunea side_pane_background_set este activată."
 
-#: libbaul-private/org.mate.baul.gschema.xml:228
+#: libbaul-private/org.cafe.baul.gschema.xml:228
 msgid "Default Side Pane Background Filename"
 msgstr "Fișierul implicit pentru fundalul panoului lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:229
+#: libbaul-private/org.cafe.baul.gschema.xml:229
 msgid ""
 "Uri of the default side pane background. Only used if "
 "side_pane_background_set is true."
@@ -3429,11 +3429,11 @@ msgstr ""
 "Uri-ul fundalului implicit pentru panoul lateral. Folosit doar dacă "
 "side_pane_background_set este adevărat."
 
-#: libbaul-private/org.mate.baul.gschema.xml:238
+#: libbaul-private/org.cafe.baul.gschema.xml:238
 msgid "Default folder viewer"
 msgstr "Modul implicit de vizualizare pentru directoare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:239
+#: libbaul-private/org.cafe.baul.gschema.xml:239
 msgid ""
 "When a folder is visited this viewer is used unless you have selected "
 "another view for that particular folder. Possible values are \"list-view\", "
@@ -3443,11 +3443,11 @@ msgstr ""
 "selectat o altă vizualizare pentru acel dosar particular. Valorile posibile "
 "sunt „list-view”, „icon-view” și „compact-view”."
 
-#: libbaul-private/org.mate.baul.gschema.xml:243
+#: libbaul-private/org.cafe.baul.gschema.xml:243
 msgid "Date Format"
 msgstr "Format dată"
 
-#: libbaul-private/org.mate.baul.gschema.xml:244
+#: libbaul-private/org.cafe.baul.gschema.xml:244
 msgid ""
 "The format of file dates. Possible values are \"locale\", \"iso\", and "
 "\"informal\"."
@@ -3455,31 +3455,31 @@ msgstr ""
 "Formatul datei fișierelor. Valori posibile sunt „locale”, „iso” și "
 "„informal”."
 
-#: libbaul-private/org.mate.baul.gschema.xml:248
+#: libbaul-private/org.cafe.baul.gschema.xml:248
 msgid "Whether to show hidden files"
 msgstr "Dacă să afișeze fișierele ascunse"
 
-#: libbaul-private/org.mate.baul.gschema.xml:249
+#: libbaul-private/org.cafe.baul.gschema.xml:249
 msgid ""
 "If set to true, then hidden files are shown by default in the file manager. "
 "Hidden files are either dotfiles or listed in the folder's .hidden file."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:253
+#: libbaul-private/org.cafe.baul.gschema.xml:253
 msgid "Whether to show backup files"
 msgstr "Dacă să afișeze fișierele copii de siguranță"
 
-#: libbaul-private/org.mate.baul.gschema.xml:254
+#: libbaul-private/org.cafe.baul.gschema.xml:254
 msgid ""
 "If set to true, then backup files are shown by default in the file manager. "
 "Backup files are backup files ending with a tilde (~)."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:259
+#: libbaul-private/org.cafe.baul.gschema.xml:259
 msgid "Whether to show file sizes with IEC units"
 msgstr "Dacă să fie afișate dimensiunile fișierelor în unități IEC"
 
-#: libbaul-private/org.mate.baul.gschema.xml:260
+#: libbaul-private/org.cafe.baul.gschema.xml:260
 msgid ""
 "If set to true, file sizes are shown using IEC (base 1024) units with "
 "\"KiB\" style suffixes, instead of default with SI units."
@@ -3488,29 +3488,29 @@ msgstr ""
 "folosind unitățile IEC (în baza 1024) cu prefixe în stil „KiB”, în locul "
 "unităților implicite în SI."
 
-#: libbaul-private/org.mate.baul.gschema.xml:264
+#: libbaul-private/org.cafe.baul.gschema.xml:264
 msgid "Whether to show icons in list view"
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:265
+#: libbaul-private/org.cafe.baul.gschema.xml:265
 msgid "If set to true, show file icons in list view."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:269
+#: libbaul-private/org.cafe.baul.gschema.xml:269
 msgid "Whether to show desktop notifications"
 msgstr "Arată notificări pe desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:270
+#: libbaul-private/org.cafe.baul.gschema.xml:270
 msgid "If set to true, Baul will show desktop notifications."
 msgstr ""
 
-#: libbaul-private/org.mate.baul.gschema.xml:277
+#: libbaul-private/org.cafe.baul.gschema.xml:277
 msgid "List of possible captions on icons"
 msgstr ""
 "Lista câmpurilor care pot fi afișate în legenda explicativă pentru "
 "pictograme"
 
-#: libbaul-private/org.mate.baul.gschema.xml:278
+#: libbaul-private/org.cafe.baul.gschema.xml:278
 msgid ""
 "A list of captions below an icon in the icon view and the desktop. The "
 "actual number of captions shown depends on the zoom level. Some possible "
@@ -3526,50 +3526,50 @@ msgstr ""
 "accesări), „owner” (deținător), „group” (grup), „permissions” (permisiuni), "
 "„octal_permissions” (permisiuni octale) și „mime_type” (tipul mime)."
 
-#: libbaul-private/org.mate.baul.gschema.xml:286
+#: libbaul-private/org.cafe.baul.gschema.xml:286
 msgid "Use tighter layout in new windows"
 msgstr "Folosește aranjare strânsă pentru noile ferestre"
 
-#: libbaul-private/org.mate.baul.gschema.xml:287
+#: libbaul-private/org.cafe.baul.gschema.xml:287
 msgid "If true, icons will be laid out tighter by default in new windows."
 msgstr ""
 "Dacă opțiunea este activată, aranjarea implicită a pictogramelor va fi mai "
 "compactă în ferestrele noi."
 
-#: libbaul-private/org.mate.baul.gschema.xml:291
+#: libbaul-private/org.cafe.baul.gschema.xml:291
 msgid "Put labels beside icons"
 msgstr "Arată etichete lângă pictograme"
 
-#: libbaul-private/org.mate.baul.gschema.xml:292
+#: libbaul-private/org.cafe.baul.gschema.xml:292
 msgid ""
 "If true, labels will be placed beside icons rather than underneath them."
 msgstr ""
 "Dacă opțiunea este activată, etichetele vor fi plasate lângă pictograme, și "
 "nu sub acestea."
 
-#: libbaul-private/org.mate.baul.gschema.xml:296
+#: libbaul-private/org.cafe.baul.gschema.xml:296
 msgid "Default icon zoom level"
 msgstr "Nivelul implicit de mărire pentru pictograme"
 
-#: libbaul-private/org.mate.baul.gschema.xml:297
+#: libbaul-private/org.cafe.baul.gschema.xml:297
 msgid "Default zoom level used by the icon view."
 msgstr "Nivelul implicit de mărire pentru modul de vizualizare „pictograme”."
 
-#: libbaul-private/org.mate.baul.gschema.xml:301
+#: libbaul-private/org.cafe.baul.gschema.xml:301
 msgid "Default Thumbnail Icon Size"
 msgstr "Dimensiunea implicită pentru pictograme"
 
-#: libbaul-private/org.mate.baul.gschema.xml:302
+#: libbaul-private/org.cafe.baul.gschema.xml:302
 msgid "The default size of an icon for a thumbnail in the icon view."
 msgstr ""
 "Dimensiunea implicită a miniaturilor în modul de vizualizare „pictograme”."
 
-#: libbaul-private/org.mate.baul.gschema.xml:306
-#: libbaul-private/org.mate.baul.gschema.xml:425
+#: libbaul-private/org.cafe.baul.gschema.xml:306
+#: libbaul-private/org.cafe.baul.gschema.xml:425
 msgid "Text Ellipsis Limit"
 msgstr "Limită omisie text"
 
-#: libbaul-private/org.mate.baul.gschema.xml:307
+#: libbaul-private/org.cafe.baul.gschema.xml:307
 msgid ""
 "A string specifying how parts of overlong file names should be replaced by "
 "ellipses, depending on the zoom level. Each of the list entries is of the "
@@ -3601,19 +3601,19 @@ msgstr ""
 "disponibile: smallest (33%), smaller (50%), small (66%), standard (100%), "
 "large (150%), larger (200%), largest (400%)"
 
-#: libbaul-private/org.mate.baul.gschema.xml:332
+#: libbaul-private/org.cafe.baul.gschema.xml:332
 msgid "Default compact view zoom level"
 msgstr "Nivel scalare implicit în vizualizarea compactă"
 
-#: libbaul-private/org.mate.baul.gschema.xml:333
+#: libbaul-private/org.cafe.baul.gschema.xml:333
 msgid "Default zoom level used by the compact view."
 msgstr "Nivelul de scalare implicit folosit în vizualizarea compactă."
 
-#: libbaul-private/org.mate.baul.gschema.xml:337
+#: libbaul-private/org.cafe.baul.gschema.xml:337
 msgid "All columns have same width"
 msgstr "Toate coloanele au aceeași lățime"
 
-#: libbaul-private/org.mate.baul.gschema.xml:338
+#: libbaul-private/org.cafe.baul.gschema.xml:338
 msgid ""
 "If this preference is set, all columns in the compact view have the same "
 "width. Otherwise, the width of each column is determined seperately."
@@ -3622,35 +3622,35 @@ msgstr ""
 "compact vor avea aceeași lățime. Altfel, lățimea fiecărei coloane este "
 "determinată separat."
 
-#: libbaul-private/org.mate.baul.gschema.xml:345
+#: libbaul-private/org.cafe.baul.gschema.xml:345
 msgid "Default list zoom level"
 msgstr "Nivelul implicit de mărire pentru modul de vizualizare „listă”"
 
-#: libbaul-private/org.mate.baul.gschema.xml:346
+#: libbaul-private/org.cafe.baul.gschema.xml:346
 msgid "Default zoom level used by the list view."
 msgstr "Nivelul implicit de mărire utilizat în modul de vizualizare „listă”."
 
-#: libbaul-private/org.mate.baul.gschema.xml:350
+#: libbaul-private/org.cafe.baul.gschema.xml:350
 msgid "Default list of columns visible in the list view"
 msgstr "Lista implicită de coloane vizibile în modul de vizualizare „listă”"
 
-#: libbaul-private/org.mate.baul.gschema.xml:351
+#: libbaul-private/org.cafe.baul.gschema.xml:351
 msgid "Default list of columns visible in the list view."
 msgstr "Lista implicită de coloane vizibile în modul de vizualizare „listă”"
 
-#: libbaul-private/org.mate.baul.gschema.xml:355
+#: libbaul-private/org.cafe.baul.gschema.xml:355
 msgid "Default column order in the list view"
 msgstr "Ordinea implicită a coloanelor în modul de vizualizare „listă”"
 
-#: libbaul-private/org.mate.baul.gschema.xml:356
+#: libbaul-private/org.cafe.baul.gschema.xml:356
 msgid "Default column order in the list view."
 msgstr "Ordinea implicită a coloanelor în modul de vizualizare „listă”"
 
-#: libbaul-private/org.mate.baul.gschema.xml:367
+#: libbaul-private/org.cafe.baul.gschema.xml:367
 msgid "Only show folders in the tree side pane"
 msgstr "Afișează doar directoare în panoul lateral în modul arbore"
 
-#: libbaul-private/org.mate.baul.gschema.xml:368
+#: libbaul-private/org.cafe.baul.gschema.xml:368
 msgid ""
 "If set to true, Baul will only show folders in the tree side pane. Otherwise"
 " it will show both folders and files."
@@ -3658,19 +3658,19 @@ msgstr ""
 "Dacă opțiunea este activată, Baul va afișa doar directoare în panoul lateral"
 " în modul arbore. În caz contrar, va afișa atât directoare cât și fișiere."
 
-#: libbaul-private/org.mate.baul.gschema.xml:375
+#: libbaul-private/org.cafe.baul.gschema.xml:375
 msgid "Desktop font"
 msgstr "Font pentru desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:376
+#: libbaul-private/org.cafe.baul.gschema.xml:376
 msgid "The font description used for the icons on the desktop."
 msgstr "Descrierea fontului folosit pentru pictogramele de pe desktop."
 
-#: libbaul-private/org.mate.baul.gschema.xml:380
+#: libbaul-private/org.cafe.baul.gschema.xml:380
 msgid "Home icon visible on desktop"
 msgstr "Pictograma „Dosar Acasă” vizibilă pe desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:381
+#: libbaul-private/org.cafe.baul.gschema.xml:381
 msgid ""
 "If this is set to true, an icon linking to the home folder will be put on "
 "the desktop."
@@ -3678,11 +3678,11 @@ msgstr ""
 "Dacă opțiunea este activată, pe desktop va fi afișată o pictogramă care "
 "permite afișarea dosarului personal."
 
-#: libbaul-private/org.mate.baul.gschema.xml:385
+#: libbaul-private/org.cafe.baul.gschema.xml:385
 msgid "Computer icon visible on desktop"
 msgstr "Pictograma Calculator vizibilă pe desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:386
+#: libbaul-private/org.cafe.baul.gschema.xml:386
 msgid ""
 "If this is set to true, an icon linking to the computer location will be put"
 " on the desktop."
@@ -3690,11 +3690,11 @@ msgstr ""
 "Dacă opțiunea este activată, pe desktop va fi afișată o pictogramă care "
 "permite afișarea locației Calculator."
 
-#: libbaul-private/org.mate.baul.gschema.xml:390
+#: libbaul-private/org.cafe.baul.gschema.xml:390
 msgid "Trash icon visible on desktop"
 msgstr "Pictograma Coș de gunoi vizibilă pe desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:391
+#: libbaul-private/org.cafe.baul.gschema.xml:391
 msgid ""
 "If this is set to true, an icon linking to the trash will be put on the "
 "desktop."
@@ -3702,11 +3702,11 @@ msgstr ""
 "Dacă opțiunea este activată, pe desktop va fi afișată o pictogramă care "
 "permite accesarea coșului de gunoi."
 
-#: libbaul-private/org.mate.baul.gschema.xml:395
+#: libbaul-private/org.cafe.baul.gschema.xml:395
 msgid "Show mounted volumes on the desktop"
 msgstr "Afișează pe desktop volumele montate"
 
-#: libbaul-private/org.mate.baul.gschema.xml:396
+#: libbaul-private/org.cafe.baul.gschema.xml:396
 msgid ""
 "If this is set to true, icons linking to mounted volumes will be put on the "
 "desktop."
@@ -3714,11 +3714,11 @@ msgstr ""
 "Dacă opțiunea este activată, pe desktop vor fi afișate pictograme care "
 "permit accesarea volumelor montate."
 
-#: libbaul-private/org.mate.baul.gschema.xml:400
+#: libbaul-private/org.cafe.baul.gschema.xml:400
 msgid "Network Servers icon visible on the desktop"
 msgstr "Pictograma Servitoare de rețea vizibilă pe desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:401
+#: libbaul-private/org.cafe.baul.gschema.xml:401
 msgid ""
 "If this is set to true, an icon linking to the Network Servers view will be "
 "put on the desktop."
@@ -3726,11 +3726,11 @@ msgstr ""
 "Dacă opțiunea este activată, pe desktop va fi afișată o pictogramă care "
 "permite afișarea locației Servitoare."
 
-#: libbaul-private/org.mate.baul.gschema.xml:405
+#: libbaul-private/org.cafe.baul.gschema.xml:405
 msgid "Desktop computer icon name"
 msgstr "Nume alternativ pentru pictograma Calculator"
 
-#: libbaul-private/org.mate.baul.gschema.xml:406
+#: libbaul-private/org.cafe.baul.gschema.xml:406
 msgid ""
 "This name can be set if you want a custom name for the computer icon on the "
 "desktop."
@@ -3738,11 +3738,11 @@ msgstr ""
 "Acest nume poate fi setat dacă doriți un nume personalizat pentru pictograma"
 " Calculator de pe desktop."
 
-#: libbaul-private/org.mate.baul.gschema.xml:410
+#: libbaul-private/org.cafe.baul.gschema.xml:410
 msgid "Desktop home icon name"
 msgstr "Nume alternativ pentru pictograma Acasă de pe desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:411
+#: libbaul-private/org.cafe.baul.gschema.xml:411
 msgid ""
 "This name can be set if you want a custom name for the home icon on the "
 "desktop."
@@ -3750,11 +3750,11 @@ msgstr ""
 "Acest nume poate fi setat dacă doriți un nume personalizat pentru pictograma"
 " Acasă de pe de desktop."
 
-#: libbaul-private/org.mate.baul.gschema.xml:415
+#: libbaul-private/org.cafe.baul.gschema.xml:415
 msgid "Desktop trash icon name"
 msgstr "Nume alternativ pentru pictograma Coș de gunoi de pe desktop"
 
-#: libbaul-private/org.mate.baul.gschema.xml:416
+#: libbaul-private/org.cafe.baul.gschema.xml:416
 msgid ""
 "This name can be set if you want a custom name for the trash icon on the "
 "desktop."
@@ -3762,11 +3762,11 @@ msgstr ""
 "Acest nume poate fi definit dacă doriți un nume personalizat pentru "
 "pictograma „Coș de gunoi” de pe de desktop."
 
-#: libbaul-private/org.mate.baul.gschema.xml:420
+#: libbaul-private/org.cafe.baul.gschema.xml:420
 msgid "Network servers icon name"
 msgstr "Nume pictogramă Servitoare"
 
-#: libbaul-private/org.mate.baul.gschema.xml:421
+#: libbaul-private/org.cafe.baul.gschema.xml:421
 msgid ""
 "This name can be set if you want a custom name for the network servers icon "
 "on the desktop."
@@ -3774,7 +3774,7 @@ msgstr ""
 "Acest nume poate fi definit dacă doriți un nume personalizat pentru "
 "pictograma servitoarelor de rețea de pe desktop."
 
-#: libbaul-private/org.mate.baul.gschema.xml:426
+#: libbaul-private/org.cafe.baul.gschema.xml:426
 msgid ""
 "An integer specifying how parts of overlong file names should be replaced by"
 " ellipses on the desktop. If the number is larger than 0, the file name will"
@@ -3787,11 +3787,11 @@ msgstr ""
 "numărul este 0 sau mai mic, nicio limită nu este impusă asupra numărului de "
 "linii afișate."
 
-#: libbaul-private/org.mate.baul.gschema.xml:433
+#: libbaul-private/org.cafe.baul.gschema.xml:433
 msgid "The geometry string for a navigation window."
 msgstr "Șirul care descrie geometria unei ferestre de navigare."
 
-#: libbaul-private/org.mate.baul.gschema.xml:434
+#: libbaul-private/org.cafe.baul.gschema.xml:434
 msgid ""
 "A string containing the saved geometry and coordinates string for navigation"
 " windows."
@@ -3799,82 +3799,82 @@ msgstr ""
 "Un șir de caractere care conține datele geometrice și coordonatele salvate "
 "pentru ferestrele de navigare."
 
-#: libbaul-private/org.mate.baul.gschema.xml:438
+#: libbaul-private/org.cafe.baul.gschema.xml:438
 msgid "Whether the navigation window should be maximized."
 msgstr "Dacă fereastra de navigare să fie maximizată."
 
-#: libbaul-private/org.mate.baul.gschema.xml:439
+#: libbaul-private/org.cafe.baul.gschema.xml:439
 msgid "Whether the navigation window should be maximized by default."
 msgstr "Dacă fereastra de navigare să fie implicit maximizată."
 
-#: libbaul-private/org.mate.baul.gschema.xml:443
+#: libbaul-private/org.cafe.baul.gschema.xml:443
 msgid "Width of the side pane"
 msgstr "Lățimea panoului lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:444
+#: libbaul-private/org.cafe.baul.gschema.xml:444
 msgid "The default width of the side pane in new windows."
 msgstr "Lățimea implicită a panoului lateral în noile ferestre."
 
-#: libbaul-private/org.mate.baul.gschema.xml:448
+#: libbaul-private/org.cafe.baul.gschema.xml:448
 msgid "Show toolbar in new windows"
 msgstr "Afișează bara de instrumente în ferestre noi"
 
-#: libbaul-private/org.mate.baul.gschema.xml:449
+#: libbaul-private/org.cafe.baul.gschema.xml:449
 msgid "If set to true, newly opened windows will have toolbars visible."
 msgstr ""
 "Dacă opțiunea este activată, ferestrele noi vor avea barele de instrumente "
 "vizibile."
 
-#: libbaul-private/org.mate.baul.gschema.xml:453
+#: libbaul-private/org.cafe.baul.gschema.xml:453
 msgid "Show location bar in new windows"
 msgstr "Afișează bara de locație în ferestre noi"
 
-#: libbaul-private/org.mate.baul.gschema.xml:454
+#: libbaul-private/org.cafe.baul.gschema.xml:454
 msgid ""
 "If set to true, newly opened windows will have the location bar visible."
 msgstr ""
 "Dacă opțiunea este activată, ferestrele noi vor avea bara de locuri "
 "vizibilă."
 
-#: libbaul-private/org.mate.baul.gschema.xml:458
+#: libbaul-private/org.cafe.baul.gschema.xml:458
 msgid "Show status bar in new windows"
 msgstr "Afișează bara de stare în ferestre noi"
 
-#: libbaul-private/org.mate.baul.gschema.xml:459
+#: libbaul-private/org.cafe.baul.gschema.xml:459
 msgid "If set to true, newly opened windows will have the status bar visible."
 msgstr ""
 "Dacă opțiunea este activată, ferestrele noi vor avea bara de stare vizibilă."
 
-#: libbaul-private/org.mate.baul.gschema.xml:463
+#: libbaul-private/org.cafe.baul.gschema.xml:463
 msgid "Show side pane in new windows"
 msgstr "Afișează panoul lateral în ferestre noi"
 
-#: libbaul-private/org.mate.baul.gschema.xml:464
+#: libbaul-private/org.cafe.baul.gschema.xml:464
 msgid "If set to true, newly opened windows will have the side pane visible."
 msgstr ""
 "Dacă opțiunea este activată, ferestrele noi vor avea panoul lateral vizibil."
 
-#: libbaul-private/org.mate.baul.gschema.xml:484
+#: libbaul-private/org.cafe.baul.gschema.xml:484
 msgid "Side pane view"
 msgstr "Tip de informații prezentat în panoul lateral"
 
-#: libbaul-private/org.mate.baul.gschema.xml:485
+#: libbaul-private/org.cafe.baul.gschema.xml:485
 msgid "The side pane view to show in newly opened windows."
 msgstr "Panoul lateral folosit în noile ferestre deschise."
 
-#: libbaul-private/org.mate.baul.gschema.xml:492
+#: libbaul-private/org.cafe.baul.gschema.xml:492
 msgid "List of extensions in disabled state."
 msgstr "Listă de extensii dezactivate."
 
-#: libbaul-private/org.mate.baul.gschema.xml:493
+#: libbaul-private/org.cafe.baul.gschema.xml:493
 msgid "This list contains the extensions that are currently de-activated."
 msgstr "Această listă conține extensiile care sunt momentan dezactivate."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:5
+#: libbaul-private/org.cafe.media-handling.gschema.xml:5
 msgid "Whether to automatically mount media"
 msgstr "Dacă mediile de stocare să fie montate automat"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:6
+#: libbaul-private/org.cafe.media-handling.gschema.xml:6
 msgid ""
 "If set to true, then Baul will automatically mount media such as user-"
 "visible hard disks and removable media on start-up and media insertion."
@@ -3883,13 +3883,13 @@ msgstr ""
 "stocare ca discurile fixe vizibile utilizatorului și medii detașabile la "
 "pornire și la introducerea acestor medii."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:10
+#: libbaul-private/org.cafe.media-handling.gschema.xml:10
 msgid "Whether to automatically open a folder for automounted media"
 msgstr ""
 "Dacă să fie deschis automat dosarul pentru mediile de stocare montate "
 "automat"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:11
+#: libbaul-private/org.cafe.media-handling.gschema.xml:11
 msgid ""
 "If set to true, then Baul will automatically open a folder when media is "
 "automounted. This only applies to media where no known x-content/* type was "
@@ -3902,13 +3902,13 @@ msgstr ""
 "este necunoscut; în cazul suporturilor de date al căror tip x-content este "
 "recunoscut se execută acțiunea asociată, configurabilă de utilizator."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:15
+#: libbaul-private/org.cafe.media-handling.gschema.xml:15
 msgid "Never prompt or autorun/autostart programs when media are inserted"
 msgstr ""
 "Nu întreba și nu rula automat programe niciodată când sunt introduse medii "
 "de stocare"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:16
+#: libbaul-private/org.cafe.media-handling.gschema.xml:16
 msgid ""
 "If set to true, then Baul will never prompt nor autorun/autostart programs "
 "when a medium is inserted."
@@ -3916,12 +3916,12 @@ msgstr ""
 "Dacă este stabilit la adevărat, atunci Baul nu va întreba și nici nu va "
 "porni automat programe când un mediu este introdus."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:20
+#: libbaul-private/org.cafe.media-handling.gschema.xml:20
 msgid ""
 "List of x-content/* types where the preferred application will be launched"
 msgstr "Lista tipurilor x-content/* unde aplicația preferată va fi rulată"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:21
+#: libbaul-private/org.cafe.media-handling.gschema.xml:21
 msgid ""
 "List of x-content/* types for which the user have chosen to start an "
 "application in the preference capplet. The preferred application for the "
@@ -3932,11 +3932,11 @@ msgstr ""
 "fișierului respectiv va fi rulată la introducerea mediului de stocare care "
 "se potrivește acestor tipuri."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:25
+#: libbaul-private/org.cafe.media-handling.gschema.xml:25
 msgid "List of x-content/* types set to \"Do Nothing\""
 msgstr "Lista tipurilor x-content/* definite la „Nu fă nimic”"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:26
+#: libbaul-private/org.cafe.media-handling.gschema.xml:26
 msgid ""
 "List of x-content/* types for which the user have chosen \"Do Nothing\" in "
 "the preference capplet. No prompt will be shown nor will any matching "
@@ -3947,11 +3947,11 @@ msgstr ""
 "aplicație potrivită nu va fi rulată la introducerea unor medii de stocare de"
 " aceste tipuri."
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:30
+#: libbaul-private/org.cafe.media-handling.gschema.xml:30
 msgid "List of x-content/* types set to \"Open Folder\""
 msgstr "Lista tipurilor x-content/* definite la „Deschide dosar”"
 
-#: libbaul-private/org.mate.media-handling.gschema.xml:31
+#: libbaul-private/org.cafe.media-handling.gschema.xml:31
 msgid ""
 "List of x-content/* types for which the user have chosen \"Open Folder\" in "
 "the preferences capplet. A folder window will be opened on insertion of "
@@ -4862,7 +4862,7 @@ msgstr "<b>Alte medii de stocare</b>"
 #: src/baul-file-management-properties.ui:2346
 msgid "Less common media formats can be configured here"
 msgstr ""
-"Formatele de medii de stocare mai puțin populare pot fi configurate aici"
+"Forcafele de medii de stocare mai puțin populare pot fi configurate aici"
 
 #: src/baul-file-management-properties.ui:2380
 msgid "Acti_on:"
@@ -5503,7 +5503,7 @@ msgstr "_Detectează mediul de stocare"
 #: src/file-manager/fm-directory-view.c:7574
 #: src/file-manager/fm-directory-view.c:7655
 msgid "_Format"
-msgstr "_Formatează"
+msgstr "_Forcafează"
 
 #: src/baul-places-sidebar.c:3414
 msgid "Places"
@@ -6869,7 +6869,7 @@ msgstr "Scoate volumul selectat"
 
 #: src/file-manager/fm-directory-view.c:7547
 msgid "Format the selected volume"
-msgstr "Formatează volumul selectat"
+msgstr "Forcafează volumul selectat"
 
 #: src/file-manager/fm-directory-view.c:7551
 msgid "Start the selected volume"
@@ -6900,7 +6900,7 @@ msgstr "Scoate volumul asociat dosarului deschis"
 
 #: src/file-manager/fm-directory-view.c:7575
 msgid "Format the volume associated with the open folder"
-msgstr "Formatează volumul asociat dosarului deschis"
+msgstr "Forcafează volumul asociat dosarului deschis"
 
 #: src/file-manager/fm-directory-view.c:7579
 msgid "Start the volume associated with the open folder"
@@ -6980,7 +6980,7 @@ msgstr "Scoate volumul asociat cu acest dosar"
 
 #: src/file-manager/fm-directory-view.c:7656
 msgid "Format the volume associated with this folder"
-msgstr "Formatează volumul asociat cu acest dosar"
+msgstr "Forcafează volumul asociat cu acest dosar"
 
 #: src/file-manager/fm-directory-view.c:7660
 msgid "Start the volume associated with this folder"

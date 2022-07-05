@@ -207,7 +207,7 @@ baul_drag_build_selection_list (GtkSelectionData *data)
             result = g_list_prepend (result, item);
             if (p == 0)
             {
-                g_warning ("Invalid x-special/mate-icon-list data received: "
+                g_warning ("Invalid x-special/cafe-icon-list data received: "
                            "missing newline character.");
                 break;
             }
@@ -228,7 +228,7 @@ baul_drag_build_selection_list (GtkSelectionData *data)
                                           &item->icon_width, &item->icon_height) == 4;
         if (!item->got_icon_position)
         {
-            g_warning ("Invalid x-special/mate-icon-list data received: "
+            g_warning ("Invalid x-special/cafe-icon-list data received: "
                        "invalid icon position specification.");
         }
 
@@ -237,7 +237,7 @@ baul_drag_build_selection_list (GtkSelectionData *data)
         p = memchr (p, '\r', size);
         if (p == NULL || p[1] != '\n')
         {
-            g_warning ("Invalid x-special/mate-icon-list data received: "
+            g_warning ("Invalid x-special/cafe-icon-list data received: "
                        "missing newline character.");
             if (p == NULL)
             {
@@ -451,7 +451,7 @@ baul_drag_default_drop_action_for_icons (GdkDragContext *context,
 
     /*
      * Check for trash URI.  We do a find_directory for any Trash directory.
-     * Passing 0 permissions as mate-vfs would override the permissions
+     * Passing 0 permissions as cafe-vfs would override the permissions
      * passed with 700 while creating .Trash directory
      */
     if (eel_uri_is_trash (target_uri_string))
@@ -575,12 +575,12 @@ baul_drag_default_drop_action_for_uri_list (GdkDragContext *context,
     }
 }
 
-/* Encode a "x-special/mate-icon-list" selection.
+/* Encode a "x-special/cafe-icon-list" selection.
    Along with the URIs of the dragged files, this encodes
    the location and size of each icon relative to the cursor.
 */
 static void
-add_one_mate_icon (const char *uri, int x, int y, int w, int h,
+add_one_cafe_icon (const char *uri, int x, int y, int w, int h,
                    gpointer data)
 {
     GString *result;
@@ -596,7 +596,7 @@ add_one_mate_icon (const char *uri, int x, int y, int w, int h,
  */
 #ifdef THIS_WAS_REALLY_BROKEN
 static gboolean
-is_path_that_mate_uri_list_extract_filenames_can_parse (const char *path)
+is_path_that_cafe_uri_list_extract_filenames_can_parse (const char *path)
 {
     if (path == NULL || path [0] == '\0')
     {
@@ -631,7 +631,7 @@ is_path_that_mate_uri_list_extract_filenames_can_parse (const char *path)
 
 /* Encode a "text/plain" selection; this is a broken URL -- just
  * "file:" with a path after it (no escaping or anything). We are
- * trying to make the old mate_uri_list_extract_filenames function
+ * trying to make the old cafe_uri_list_extract_filenames function
  * happy, so this is coded to its idiosyncrasises.
  */
 static void
@@ -644,7 +644,7 @@ add_one_compatible_uri (const char *uri, int x, int y, int w, int h, gpointer da
     /* For URLs that do not have a file: scheme, there's no harm
      * in passing the real URL. But for URLs that do have a file:
      * scheme, we have to send a URL that will work with the old
-     * mate-libs function or nothing will be able to understand
+     * cafe-libs function or nothing will be able to understand
      * it.
      */
     if (!eel_istr_has_prefix (uri, "file:"))
@@ -659,10 +659,10 @@ add_one_compatible_uri (const char *uri, int x, int y, int w, int h, gpointer da
         local_path = g_filename_from_uri (uri, NULL, NULL);
 
         /* Check for characters that confuse the old
-         * mate_uri_list_extract_filenames implementation, and just leave
+         * cafe_uri_list_extract_filenames implementation, and just leave
          * out any paths with those in them.
          */
-        if (is_path_that_mate_uri_list_extract_filenames_can_parse (local_path))
+        if (is_path_that_cafe_uri_list_extract_filenames_can_parse (local_path))
         {
             g_string_append (result, "file:");
             g_string_append (result, local_path);
@@ -702,7 +702,7 @@ baul_drag_drag_data_get (GtkWidget *widget,
     {
     case BAUL_ICON_DND_MATE_ICON_LIST:
         result = g_string_new (NULL);
-        (* each_selected_item_iterator) (add_one_mate_icon, container_context, result);
+        (* each_selected_item_iterator) (add_one_cafe_icon, container_context, result);
         break;
 
     case BAUL_ICON_DND_URI_LIST:
