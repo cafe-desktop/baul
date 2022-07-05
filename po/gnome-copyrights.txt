@@ -446,8 +446,8 @@
 # simos: 1454 messages, 26 Oct2002, 71 remaining.
 # simos: 1508 messages, 07Nov2002, 17 remaining.
 # simos: 1525 messages, 11Nov2002, translation completed.
-# kostas: unfuzzy 60, 40 new, 07Jan 2003, updated translation for Mate 2.1x.
-# kostas: 19Jun2003, 1447 messages, updated translation for Mate 2.4.
+# kostas: unfuzzy 60, 40 new, 07Jan 2003, updated translation for Cafe 2.1x.
+# kostas: 19Jun2003, 1447 messages, updated translation for Cafe 2.4.
 # kostas:13Dec2003, one more update,1549 messages.
 # kostas:13Jan2004,1523 messages.
 # Nikos:21Jan2004, first review for 2.6 , 1508 messages.
@@ -497,7 +497,7 @@
 
 ========== en@shaw.po ==========
 # Shavian translation for baul.
-# Copyright (C) 2010 The Mate Foundation.
+# Copyright (C) 2010 The Cafe Foundation.
 # Thomas Thurman <tthurman@gnome.org>, 2010.
 # Transliterate Baul as ·𐑯𐑷𐑑𐑦𐑤𐑩𐑕
 
@@ -849,7 +849,7 @@
 # Gabor Sari <saga at cafe dot hu>, 2003.
 # Laszlo Dvornik <dvornik at cafe dot hu>, 2004.
 # Gabor Kelemen <kelemeng at cafe dot hu>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
-# Mate Ory <orycafe at gmail dot com>, 2006, 2008.
+# Cafe Ory <orycafe at gmail dot com>, 2006, 2008.
 # Emese Kovacs <emese at cafe dot hu>, 2000, 2001.
 # Andras Timar <timar at cafe dot hu>, 2002, 2004.
 
@@ -946,7 +946,7 @@
 
 ========== ka.po ==========
 # #-#-#-#-#  ka.po (ka)  #-#-#-#-#
-# Copyright © 2007 Mate i18n Project for Georgia, 2008.
+# Copyright © 2007 Cafe i18n Project for Georgia, 2008.
 # Georgian Translation for Baul, 2008, 2008.
 #
 # Vladimer Sichinava  ვლადიმერ სიჭინავა <vsichi@gnome.org>, 2008.
@@ -1548,7 +1548,7 @@
 #
 # Andraž Tori <andraz.tori1@guest.arnes.si>, 2000.
 # Matjaž Horvat <m@owca.info>, 2006.
-# Matej Urbančič <cafeju@svn.gnome.org> 2007- 2010.
+# Cafej Urbančič <cafeju@svn.gnome.org> 2007- 2010.
 #
 
 
@@ -1761,7 +1761,7 @@
 # #-#-#-#-#  wa.po (Baul 2.2.0.2)  #-#-#-#-#
 # Translation into the walloon language.
 #
-# Si vos voloz donner on côp di spale pol ratournaedje di Mate (ou des
+# Si vos voloz donner on côp di spale pol ratournaedje di Cafe (ou des
 # ôtes libes programes) sicrijhoz-mu a l' adresse emile
 # <pablo@walon.org>; nos avans co bråmint di l' ovraedje a fé.
 #

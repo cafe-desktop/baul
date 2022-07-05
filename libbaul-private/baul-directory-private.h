@@ -106,7 +106,7 @@ struct _BaulDirectoryPrivate
     gboolean directory_loaded_sent_notification;
     DirectoryLoadState *directory_load_in_progress;
 
-    GList *pending_file_info; /* list of MateVFSFileInfo's that are pending */
+    GList *pending_file_info; /* list of CafeVFSFileInfo's that are pending */
     int confirmed_file_count;
     guint dequeue_pending_idle_id;
 

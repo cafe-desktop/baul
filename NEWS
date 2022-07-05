@@ -479,7 +479,7 @@
 
 ### baul 1.16.0
 
-  * Use GtkAboutDialog instead of MateAboutDialog
+  * Use GtkAboutDialog instead of CafeAboutDialog
   * Pathbar: always show right arrow button
   * Fix changing taskbar icon when switching between tabs with different icons
   * Fix lots of warnings when building docs for libbaul-extension
@@ -503,7 +503,7 @@
 
 ### baul 1.14.0
 
-  * Drop MateConf migration script
+  * Drop CafeConf migration script
   * Allow closing tabs on middle-click
   * List Python extensions separately in extensions list
   * GTK+3: add several style classes to simplify theming

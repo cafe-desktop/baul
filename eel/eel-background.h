@@ -78,7 +78,7 @@ void                        eel_background_set_image_uri         (EelBackground 
         							  const gchar      *image_uri);
 void                        eel_background_reset                 (EelBackground   *self);
 void                        eel_bg_set_placement                 (EelBackground   *self,
-        							  MateBGPlacement  placement);
+        							  CafeBGPlacement  placement);
 
 /* Should be TRUE for desktop background */
 gboolean		    eel_background_is_desktop 		 (EelBackground   *self);

@@ -306,7 +306,7 @@ msgstr "Baul"
 
 #: data/baul.appdata.xml.in:8
 msgid "File manager for the CAFE desktop environment"
-msgstr "מנהל קבצים לסביבת שולחן העבודה Mate"
+msgstr "מנהל קבצים לסביבת שולחן העבודה Cafe"
 
 #: data/baul.appdata.xml.in:10
 msgid ""

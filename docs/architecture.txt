@@ -130,8 +130,8 @@ to set it's initial location.
 
 ** Other component types
 
-Baul also has built-in support for viewing locations via MateComponent
-subdocuments and MateComponent controls. This is implemented in the view and
+Baul also has built-in support for viewing locations via CafeComponent
+subdocuments and CafeComponent controls. This is implemented in the view and
 transparent to the baul application. However, the underlying
 architecture is different.
 

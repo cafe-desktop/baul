@@ -102,7 +102,7 @@ static GHashTable *thumbnails_to_make_hash = NULL;
  * to avoid adding it again. Lock thumbnails_mutex when accessing this. */
 static BaulThumbnailInfo *currently_thumbnailing = NULL;
 
-static MateDesktopThumbnailFactory *thumbnail_factory = NULL;
+static CafeDesktopThumbnailFactory *thumbnail_factory = NULL;
 
 static gboolean
 get_file_mtime (const char *file_uri, time_t* mtime)
@@ -139,10 +139,10 @@ free_thumbnail_info (BaulThumbnailInfo *info)
     g_free (info);
 }
 
-static MateDesktopThumbnailFactory *
+static CafeDesktopThumbnailFactory *
 get_thumbnail_factory (void)
 {
-    static MateDesktopThumbnailFactory *thumbnail_factory = NULL;
+    static CafeDesktopThumbnailFactory *thumbnail_factory = NULL;
 
     if (thumbnail_factory == NULL)
     {
@@ -362,7 +362,7 @@ baul_thumbnail_is_mimetype_limited_by_size (const char *mime_type)
 gboolean
 baul_can_thumbnail (BaulFile *file)
 {
-    MateDesktopThumbnailFactory *factory;
+    CafeDesktopThumbnailFactory *factory;
     gboolean res;
     char *uri;
     time_t mtime;
