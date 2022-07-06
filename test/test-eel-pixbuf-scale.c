@@ -49,7 +49,7 @@ main (int argc, char* argv[])
 
 	gettimeofday(&t1, NULL);
 	for (i = 0; i < N_SCALES; i++) {
-		scaled = gdk_pixbuf_scale_simple (pixbuf, DEST_WIDTH, DEST_HEIGHT, CDK_INTERP_NEAREST);
+		scaled = gdk_pixbuf_scale_simple (pixbuf, DEST_WIDTH, DEST_HEIGHT, GDK_INTERP_NEAREST);
 		g_object_unref (scaled);
 	}
 	gettimeofday(&t2, NULL);
@@ -70,7 +70,7 @@ main (int argc, char* argv[])
 	gdk_pixbuf_save (scaled, "eel_scaled.png", "png", NULL, NULL);
 	g_object_unref (scaled);
 
-	scaled = gdk_pixbuf_scale_simple (pixbuf, DEST_WIDTH, DEST_HEIGHT, CDK_INTERP_NEAREST);
+	scaled = gdk_pixbuf_scale_simple (pixbuf, DEST_WIDTH, DEST_HEIGHT, GDK_INTERP_NEAREST);
 	gdk_pixbuf_save (scaled, "nearest_scaled.png", "png", NULL, NULL);
 	g_object_unref (scaled);
 

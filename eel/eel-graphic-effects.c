@@ -296,7 +296,7 @@ eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset
 
     if (fill_flag)
     {
-        result_pixbuf = gdk_pixbuf_scale_simple (frame_image, dest_width, dest_height, CDK_INTERP_NEAREST);
+        result_pixbuf = gdk_pixbuf_scale_simple (frame_image, dest_width, dest_height, GDK_INTERP_NEAREST);
     }
     else
     {
