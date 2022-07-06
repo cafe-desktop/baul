@@ -1449,7 +1449,7 @@ eel_editable_label_get_block_cursor_location (EelEditableLabel  *label,
         font_desc = pango_context_get_font_description (context);
 
     metrics = pango_context_get_metrics (context, font_desc, NULL);
-    pos->width = pango_font_metrics_get_approxicafe_char_width (metrics);
+    pos->width = pango_font_metrics_get_approximate_char_width (metrics);
     pango_font_metrics_unref (metrics);
 
     if (rtl)

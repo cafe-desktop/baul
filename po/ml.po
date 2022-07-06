@@ -1432,8 +1432,8 @@ msgstr[1] ""
 
 #: libbaul-private/baul-file-operations.c:330
 #, c-format
-msgid "approxicafely %'d hour"
-msgid_plural "approxicafely %'d hours"
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
 msgstr[0] ""
 msgstr[1] ""
 
