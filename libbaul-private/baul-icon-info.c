@@ -559,7 +559,7 @@ baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
     scale = (double)forced_size / s;
     scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
                     w * scale, h * scale,
-                    CDK_INTERP_BILINEAR);
+                    GDK_INTERP_BILINEAR);
     g_object_unref (pixbuf);
     return scaled_pixbuf;
 }
@@ -605,7 +605,7 @@ baul_icon_info_get_pixbuf_at_size (BaulIconInfo  *icon,
     scale = (double)forced_size / s;
     scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
                     w * scale, h * scale,
-                    CDK_INTERP_BILINEAR);
+                    GDK_INTERP_BILINEAR);
     g_object_unref (pixbuf);
     return scaled_pixbuf;
 }

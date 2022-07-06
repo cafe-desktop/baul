@@ -107,7 +107,7 @@ test_pixbuf_new_named (const char *name, float scale)
 		float width = gdk_pixbuf_get_width (pixbuf) * scale;
 		float height = gdk_pixbuf_get_width (pixbuf) * scale;
 
-		scaled = gdk_pixbuf_scale_simple (pixbuf, width, height, CDK_INTERP_BILINEAR);
+		scaled = gdk_pixbuf_scale_simple (pixbuf, width, height, GDK_INTERP_BILINEAR);
 
 		g_object_unref (pixbuf);
 

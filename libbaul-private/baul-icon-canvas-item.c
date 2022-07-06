@@ -1768,7 +1768,7 @@ real_map_surface (BaulIconCanvasItem *icon_item)
                  gdk_pixbuf_get_height (audio_pixbuf),
                  0, 0,
                  1.0, 1.0,
-                 CDK_INTERP_BILINEAR, 0xFF);
+                 GDK_INTERP_BILINEAR, 0xFF);
 
                 g_object_unref (audio_pixbuf);
             }

@@ -407,7 +407,7 @@ baul_customization_make_pattern_chit (GdkPixbuf *pattern_tile, GdkPixbuf *frame,
                       0, 0,
                       (double)(frame_width - 8 + 1)/pattern_width,
                       (double)(frame_height - 8 + 1)/pattern_height,
-                      CDK_INTERP_BILINEAR);
+                      GDK_INTERP_BILINEAR);
 
     /* if we're dragging, get rid of the light-colored halo */
     if (dragging)
