@@ -34,8 +34,8 @@
 #include <glib/gi18n.h>
 
 #include <eel/eel-background.h>
-#include <eel/eel-gdk-extensions.h>
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 
@@ -257,13 +257,13 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
     if (!light_info_color)
     {
         light_info_color = g_malloc (sizeof (GdkRGBA));
-        gdk_rgba_parse (light_info_color, DEFAULT_LIGHT_INFO_COLOR);
+        cdk_rgba_parse (light_info_color, DEFAULT_LIGHT_INFO_COLOR);
     }
 
     if (!dark_info_color)
     {
         dark_info_color = g_malloc (sizeof (GdkRGBA));
-        gdk_rgba_parse (dark_info_color, DEFAULT_DARK_INFO_COLOR);
+        cdk_rgba_parse (dark_info_color, DEFAULT_DARK_INFO_COLOR);
     }
 
     ctk_style_context_get_color (style, CTK_STATE_FLAG_SELECTED, &color);
@@ -281,7 +281,7 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
     color = *c;
 
     setup_gc_with_fg (sidebar_title, LABEL_INFO_COLOR_HIGHLIGHT,
-                      eel_gdk_rgba_is_dark (&color) ? light_info_color : dark_info_color);
+                      eel_cdk_rgba_is_dark (&color) ? light_info_color : dark_info_color);
 
     ctk_style_context_get (style, CTK_STATE_FLAG_ACTIVE,
                            CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
@@ -289,7 +289,7 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
     color = *c;
 
     setup_gc_with_fg (sidebar_title, LABEL_INFO_COLOR_ACTIVE,
-                      eel_gdk_rgba_is_dark (&color) ? light_info_color : dark_info_color);
+                      eel_cdk_rgba_is_dark (&color) ? light_info_color : dark_info_color);
 
 
     /* If EelBackground is not set in the widget, we can safely
@@ -306,14 +306,14 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
         color = *c;
 
         setup_gc_with_fg (sidebar_title, LABEL_INFO_COLOR,
-                          eel_gdk_rgba_is_dark (&color) ?
+                          eel_cdk_rgba_is_dark (&color) ?
                           light_info_color : dark_info_color);
     }
     else if (eel_background_is_dark (background))
     {
         GdkRGBA tmp;
 
-        gdk_rgba_parse (&tmp, "EFEFEF");
+        cdk_rgba_parse (&tmp, "EFEFEF");
         setup_gc_with_fg (sidebar_title, LABEL_COLOR, &tmp);
         setup_gc_with_fg (sidebar_title, LABEL_INFO_COLOR, light_info_color);
     }
@@ -321,14 +321,14 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
     {
         GdkRGBA tmp;
 
-        gdk_rgba_parse (&tmp, "000000");
+        cdk_rgba_parse (&tmp, "000000");
         setup_gc_with_fg (sidebar_title, LABEL_COLOR, &tmp);
         setup_gc_with_fg (sidebar_title, LABEL_INFO_COLOR, dark_info_color);
     }
 
-    gdk_rgba_free (c);
-    gdk_rgba_free (dark_info_color);
-    gdk_rgba_free (light_info_color);
+    cdk_rgba_free (c);
+    cdk_rgba_free (dark_info_color);
+    cdk_rgba_free (light_info_color);
 }
 
 static char*

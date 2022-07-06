@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-eel-ctk-extensions.c - Access ctk/gdk attributes as libeel rectangles.
+/* eel-eel-ctk-extensions.c - Access ctk/cdk attributes as libeel rectangles.
 
    Copyright (C) 2000 Eazel, Inc.
 

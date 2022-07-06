@@ -36,7 +36,7 @@
 #include <glib/gi18n.h>
 #include <ctk/ctk.h>
 #include <ctk/ctk-a11y.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 
 #include <eel/eel-accessibility.h>
 #include <eel/eel-glib-extensions.h>

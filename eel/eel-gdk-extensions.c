@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-gdk-extensions.c: Graphics routines to augment what's in gdk.
+/* eel-cdk-extensions.c: Graphics routines to augment what's in cdk.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
 
@@ -25,15 +25,15 @@
 */
 
 #include <config.h>
-#include "eel-gdk-extensions.h"
+#include "eel-cdk-extensions.h"
 
 #include "eel-glib-extensions.h"
 #include "eel-lib-self-check-functions.h"
 #include "eel-string.h"
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk/gdkprivate.h>
-#include <gdk/gdk.h>
-#include <gdk/gdkx.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <cdk/cdkprivate.h>
+#include <cdk/cdk.h>
+#include <cdk/cdkx.h>
 #include <stdlib.h>
 #include <pango/pango.h>
 
@@ -313,15 +313,15 @@ eel_gradient_set_bottom_color_spec (const char *gradient_spec,
 }
 
 /**
- * eel_gdk_rgba_parse_with_white_default
+ * eel_cdk_rgba_parse_with_white_default
  * @color: Pointer to place to put resulting color.
  * @color_spec: A color spec, or NULL.
  *
- * The same as gdk_rgba_parse, except sets the color to white if
+ * The same as cdk_rgba_parse, except sets the color to white if
  * the spec. can't be parsed, instead of returning a boolean flag.
  */
 void
-eel_gdk_rgba_parse_with_white_default (GdkRGBA *color,
+eel_cdk_rgba_parse_with_white_default (GdkRGBA *color,
                                        const char *color_spec)
 {
     gboolean got_color;
@@ -331,7 +331,7 @@ eel_gdk_rgba_parse_with_white_default (GdkRGBA *color,
     got_color = FALSE;
     if (color_spec != NULL)
     {
-        if (gdk_rgba_parse (color, color_spec))
+        if (cdk_rgba_parse (color, color_spec))
         {
             got_color = TRUE;
         }
@@ -359,15 +359,15 @@ eel_rgb16_to_rgb (gushort r, gushort g, gushort b)
 }
 
 /**
- * eel_gdk_rgba_to_rgb
+ * eel_cdk_rgba_to_rgb
  * @color: A GdkRGBA style color.
  * Returns: An rgb value.
  *
- * Converts from a GdkRGBA style color to a gdk_rgb one.
+ * Converts from a GdkRGBA style color to a cdk_rgb one.
  * Alpha gets set to fully opaque
  */
 guint32
-eel_gdk_rgba_to_rgb (const GdkRGBA *color)
+eel_cdk_rgba_to_rgb (const GdkRGBA *color)
 {
     return eel_rgb16_to_rgb ((guint) (color->red * 65535),
                              (guint) (color->green * 65535),
@@ -375,16 +375,16 @@ eel_gdk_rgba_to_rgb (const GdkRGBA *color)
 }
 
 /**
- * eel_gdk_rgb_to_rgba
- * @color: a gdk_rgb style value.
+ * eel_cdk_rgb_to_rgba
+ * @color: a cdk_rgb style value.
  *
- * Converts from a gdk_rgb value style to a GdkRGBA one.
- * The gdk_rgb color alpha channel is ignored.
+ * Converts from a cdk_rgb value style to a GdkRGBA one.
+ * The cdk_rgb color alpha channel is ignored.
  *
  * Return value: A GdkRGBA structure version of the given RGB color.
  */
 GdkRGBA
-eel_gdk_rgb_to_rgba (guint32 color)
+eel_cdk_rgb_to_rgba (guint32 color)
 {
     GdkRGBA result;
 
@@ -398,28 +398,28 @@ eel_gdk_rgb_to_rgba (guint32 color)
 
 
 /**
- * eel_gdk_rgb_to_color_spec
- * @color: a gdk_rgb style value.
+ * eel_cdk_rgb_to_color_spec
+ * @color: a cdk_rgb style value.
  *
- * Converts from a gdk_rgb value style to a string color spec.
- * The gdk_rgb color alpha channel is ignored.
+ * Converts from a cdk_rgb value style to a string color spec.
+ * The cdk_rgb color alpha channel is ignored.
  *
  * Return value: a newly allocated color spec.
  */
 char *
-eel_gdk_rgb_to_color_spec (const guint32 color)
+eel_cdk_rgb_to_color_spec (const guint32 color)
 {
     return g_strdup_printf ("#%06X", (guint) (color & 0xFFFFFF));
 }
 
 
 /**
- * eel_gdk_rgba_is_dark:
+ * eel_cdk_rgba_is_dark:
  *
  * Return true if the given color is `dark'
  */
 gboolean
-eel_gdk_rgba_is_dark (const GdkRGBA *color)
+eel_cdk_rgba_is_dark (const GdkRGBA *color)
 {
     int intensity;
 
@@ -431,11 +431,11 @@ eel_gdk_rgba_is_dark (const GdkRGBA *color)
 }
 
 EelGdkGeometryFlags
-eel_gdk_parse_geometry (const char *string, int *x_return, int *y_return,
+eel_cdk_parse_geometry (const char *string, int *x_return, int *y_return,
                         guint *width_return, guint *height_return)
 {
     int x11_flags;
-    EelGdkGeometryFlags gdk_flags;
+    EelGdkGeometryFlags cdk_flags;
 
     g_return_val_if_fail (string != NULL, EEL_GDK_NO_VALUE);
     g_return_val_if_fail (x_return != NULL, EEL_GDK_NO_VALUE);
@@ -446,39 +446,39 @@ eel_gdk_parse_geometry (const char *string, int *x_return, int *y_return,
     x11_flags = XParseGeometry (string, x_return, y_return,
                                 width_return, height_return);
 
-    gdk_flags = EEL_GDK_NO_VALUE;
+    cdk_flags = EEL_GDK_NO_VALUE;
     if (x11_flags & XValue)
     {
-        gdk_flags |= EEL_GDK_X_VALUE;
+        cdk_flags |= EEL_GDK_X_VALUE;
     }
     if (x11_flags & YValue)
     {
-        gdk_flags |= EEL_GDK_Y_VALUE;
+        cdk_flags |= EEL_GDK_Y_VALUE;
     }
     if (x11_flags & WidthValue)
     {
-        gdk_flags |= EEL_GDK_WIDTH_VALUE;
+        cdk_flags |= EEL_GDK_WIDTH_VALUE;
     }
     if (x11_flags & HeightValue)
     {
-        gdk_flags |= EEL_GDK_HEIGHT_VALUE;
+        cdk_flags |= EEL_GDK_HEIGHT_VALUE;
     }
     if (x11_flags & XNegative)
     {
-        gdk_flags |= EEL_GDK_X_NEGATIVE;
+        cdk_flags |= EEL_GDK_X_NEGATIVE;
     }
     if (x11_flags & YNegative)
     {
-        gdk_flags |= EEL_GDK_Y_NEGATIVE;
+        cdk_flags |= EEL_GDK_Y_NEGATIVE;
     }
 
-    return gdk_flags;
+    return cdk_flags;
 }
 
 #if ! defined (EEL_OMIT_SELF_CHECK)
 
 static char *
-eel_gdk_rgba_as_hex_string (GdkRGBA color)
+eel_cdk_rgba_as_hex_string (GdkRGBA color)
 {
     return g_strdup_printf ("%04X%04X%04X",
                             (guint) (color.red * 65535),
@@ -491,22 +491,22 @@ eel_self_check_parse (const char *color_spec)
 {
     GdkRGBA color;
 
-    eel_gdk_rgba_parse_with_white_default (&color, color_spec);
-    return eel_gdk_rgba_as_hex_string (color);
+    eel_cdk_rgba_parse_with_white_default (&color, color_spec);
+    return eel_cdk_rgba_as_hex_string (color);
 }
 
 static char *
-eel_self_check_gdk_rgb_to_color (guint32 color)
+eel_self_check_cdk_rgb_to_color (guint32 color)
 {
     GdkRGBA result;
 
-    result = eel_gdk_rgb_to_rgba (color);
+    result = eel_cdk_rgb_to_rgba (color);
 
-    return eel_gdk_rgba_as_hex_string (result);
+    return eel_cdk_rgba_as_hex_string (result);
 }
 
 void
-eel_self_check_gdk_extensions (void)
+eel_self_check_cdk_extensions (void)
 {
     /* eel_gradient_new */
     EEL_CHECK_STRING_RESULT (eel_gradient_new ("", "", FALSE), "");
@@ -588,7 +588,7 @@ eel_self_check_gdk_extensions (void)
     EEL_CHECK_STRING_RESULT (eel_gradient_set_bottom_color_spec ("a-c:v", "c"), "a-c");
     EEL_CHECK_STRING_RESULT (eel_gradient_set_bottom_color_spec ("a:-b:h", "d"), "a:-d");
 
-    /* eel_gdk_rgba_parse_with_white_default */
+    /* eel_cdk_rgba_parse_with_white_default */
     EEL_CHECK_STRING_RESULT (eel_self_check_parse (""), "FFFFFFFFFFFF");
     EEL_CHECK_STRING_RESULT (eel_self_check_parse ("a"), "FFFFFFFFFFFF");
     EEL_CHECK_STRING_RESULT (eel_self_check_parse ("white"), "FFFFFFFFFFFF");
@@ -597,11 +597,11 @@ eel_self_check_gdk_extensions (void)
     EEL_CHECK_STRING_RESULT (eel_self_check_parse ("#012345"), "010123234545");
     /* EEL_CHECK_STRING_RESULT (eel_self_check_parse ("rgb:0123/4567/89AB"), "#014589"); */
 
-    /* eel_gdk_rgb_to_color */
-    EEL_CHECK_STRING_RESULT (eel_self_check_gdk_rgb_to_color (EEL_RGB_COLOR_RED), "FFFF00000000");
-    EEL_CHECK_STRING_RESULT (eel_self_check_gdk_rgb_to_color (EEL_RGB_COLOR_BLACK), "000000000000");
-    EEL_CHECK_STRING_RESULT (eel_self_check_gdk_rgb_to_color (EEL_RGB_COLOR_WHITE), "FFFFFFFFFFFF");
-    EEL_CHECK_STRING_RESULT (eel_self_check_gdk_rgb_to_color (EEL_RGB_COLOR_PACK (0x01, 0x23, 0x45)), "010123234545");
+    /* eel_cdk_rgb_to_color */
+    EEL_CHECK_STRING_RESULT (eel_self_check_cdk_rgb_to_color (EEL_RGB_COLOR_RED), "FFFF00000000");
+    EEL_CHECK_STRING_RESULT (eel_self_check_cdk_rgb_to_color (EEL_RGB_COLOR_BLACK), "000000000000");
+    EEL_CHECK_STRING_RESULT (eel_self_check_cdk_rgb_to_color (EEL_RGB_COLOR_WHITE), "FFFFFFFFFFFF");
+    EEL_CHECK_STRING_RESULT (eel_self_check_cdk_rgb_to_color (EEL_RGB_COLOR_PACK (0x01, 0x23, 0x45)), "010123234545");
 
     /* EEL_RGBA_COLOR_PACK */
     EEL_CHECK_INTEGER_RESULT (EEL_RGBA_COLOR_PACK (0xFF, 0x00, 0x00, 00), EEL_RGB_COLOR_RED);

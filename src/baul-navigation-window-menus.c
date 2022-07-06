@@ -94,7 +94,7 @@ should_open_in_new_tab (void)
         return event->button.button == 2;
     }
 
-    gdk_event_free (event);
+    cdk_event_free (event);
 
     return FALSE;
 }

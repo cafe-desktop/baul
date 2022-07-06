@@ -26,11 +26,11 @@
 
 #include <config.h>
 #include <string.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
-#include <eel/eel-gdk-extensions.h>
+#include <eel/eel-cdk-extensions.h>
 #include <eel/eel-ctk-macros.h>
 
 #include "baul-entry.h"
@@ -350,7 +350,7 @@ baul_entry_selection_clear (CtkWidget *widget,
 {
     g_assert (BAUL_IS_ENTRY (widget));
 
-    if (gdk_selection_owner_get (event->selection) == ctk_widget_get_window (widget))
+    if (cdk_selection_owner_get (event->selection) == ctk_widget_get_window (widget))
     {
         return FALSE;
     }

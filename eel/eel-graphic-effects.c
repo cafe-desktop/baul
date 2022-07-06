@@ -37,17 +37,17 @@
 static GdkPixbuf *
 create_new_pixbuf (GdkPixbuf *src)
 {
-    g_assert (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB);
-    g_assert ((!gdk_pixbuf_get_has_alpha (src)
-               && gdk_pixbuf_get_n_channels (src) == 3)
-              || (gdk_pixbuf_get_has_alpha (src)
-                  && gdk_pixbuf_get_n_channels (src) == 4));
+    g_assert (cdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB);
+    g_assert ((!cdk_pixbuf_get_has_alpha (src)
+               && cdk_pixbuf_get_n_channels (src) == 3)
+              || (cdk_pixbuf_get_has_alpha (src)
+                  && cdk_pixbuf_get_n_channels (src) == 4));
 
-    return gdk_pixbuf_new (gdk_pixbuf_get_colorspace (src),
-                           gdk_pixbuf_get_has_alpha (src),
-                           gdk_pixbuf_get_bits_per_sample (src),
-                           gdk_pixbuf_get_width (src),
-                           gdk_pixbuf_get_height (src));
+    return cdk_pixbuf_new (cdk_pixbuf_get_colorspace (src),
+                           cdk_pixbuf_get_has_alpha (src),
+                           cdk_pixbuf_get_bits_per_sample (src),
+                           cdk_pixbuf_get_width (src),
+                           cdk_pixbuf_get_height (src));
 }
 
 /* utility routine to bump the level of a color component with pinning */
@@ -72,22 +72,22 @@ eel_create_spotlight_pixbuf (GdkPixbuf* src)
     int width, height, has_alpha, src_row_stride, dst_row_stride;
     guchar *target_pixels, *original_pixels;
 
-    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
-    g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
-                           && gdk_pixbuf_get_n_channels (src) == 3)
-                          || (gdk_pixbuf_get_has_alpha (src)
-                              && gdk_pixbuf_get_n_channels (src) == 4), NULL);
-    g_return_val_if_fail (gdk_pixbuf_get_bits_per_sample (src) == 8, NULL);
+    g_return_val_if_fail (cdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
+    g_return_val_if_fail ((!cdk_pixbuf_get_has_alpha (src)
+                           && cdk_pixbuf_get_n_channels (src) == 3)
+                          || (cdk_pixbuf_get_has_alpha (src)
+                              && cdk_pixbuf_get_n_channels (src) == 4), NULL);
+    g_return_val_if_fail (cdk_pixbuf_get_bits_per_sample (src) == 8, NULL);
 
     dest = create_new_pixbuf (src);
 
-    has_alpha = gdk_pixbuf_get_has_alpha (src);
-    width = gdk_pixbuf_get_width (src);
-    height = gdk_pixbuf_get_height (src);
-    dst_row_stride = gdk_pixbuf_get_rowstride (dest);
-    src_row_stride = gdk_pixbuf_get_rowstride (src);
-    target_pixels = gdk_pixbuf_get_pixels (dest);
-    original_pixels = gdk_pixbuf_get_pixels (src);
+    has_alpha = cdk_pixbuf_get_has_alpha (src);
+    width = cdk_pixbuf_get_width (src);
+    height = cdk_pixbuf_get_height (src);
+    dst_row_stride = cdk_pixbuf_get_rowstride (dest);
+    src_row_stride = cdk_pixbuf_get_rowstride (src);
+    target_pixels = cdk_pixbuf_get_pixels (dest);
+    original_pixels = cdk_pixbuf_get_pixels (src);
 
     for (i = 0; i < height; i++)
     {
@@ -115,10 +115,10 @@ eel_create_spotlight_surface (cairo_surface_t* src, int scale)
     GdkPixbuf *pixbuf;
     cairo_surface_t *dest;
 
-    pixbuf = gdk_pixbuf_get_from_surface (src, 0, 0,
+    pixbuf = cdk_pixbuf_get_from_surface (src, 0, 0,
                                           cairo_image_surface_get_width (src),
                                           cairo_image_surface_get_height (src));
-    dest = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale, NULL);
+    dest = cdk_cairo_surface_create_from_pixbuf (pixbuf, scale, NULL);
     g_object_unref (pixbuf);
 
     return dest;
@@ -141,22 +141,22 @@ eel_create_darkened_pixbuf (GdkPixbuf *src, int saturation, int darken)
     guchar r, g, b;
     GdkPixbuf *dest;
 
-    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
-    g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
-                           && gdk_pixbuf_get_n_channels (src) == 3)
-                          || (gdk_pixbuf_get_has_alpha (src)
-                              && gdk_pixbuf_get_n_channels (src) == 4), NULL);
-    g_return_val_if_fail (gdk_pixbuf_get_bits_per_sample (src) == 8, NULL);
+    g_return_val_if_fail (cdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
+    g_return_val_if_fail ((!cdk_pixbuf_get_has_alpha (src)
+                           && cdk_pixbuf_get_n_channels (src) == 3)
+                          || (cdk_pixbuf_get_has_alpha (src)
+                              && cdk_pixbuf_get_n_channels (src) == 4), NULL);
+    g_return_val_if_fail (cdk_pixbuf_get_bits_per_sample (src) == 8, NULL);
 
     dest = create_new_pixbuf (src);
 
-    has_alpha = gdk_pixbuf_get_has_alpha (src);
-    width = gdk_pixbuf_get_width (src);
-    height = gdk_pixbuf_get_height (src);
-    dest_row_stride = gdk_pixbuf_get_rowstride (dest);
-    src_row_stride = gdk_pixbuf_get_rowstride (src);
-    target_pixels = gdk_pixbuf_get_pixels (dest);
-    original_pixels = gdk_pixbuf_get_pixels (src);
+    has_alpha = cdk_pixbuf_get_has_alpha (src);
+    width = cdk_pixbuf_get_width (src);
+    height = cdk_pixbuf_get_height (src);
+    dest_row_stride = cdk_pixbuf_get_rowstride (dest);
+    src_row_stride = cdk_pixbuf_get_rowstride (src);
+    target_pixels = cdk_pixbuf_get_pixels (dest);
+    original_pixels = cdk_pixbuf_get_pixels (src);
 
     for (i = 0; i < height; i++)
     {
@@ -198,12 +198,12 @@ eel_create_colorized_pixbuf (GdkPixbuf *src,
 
     gint red_value, green_value, blue_value;
 
-    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
-    g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
-                           && gdk_pixbuf_get_n_channels (src) == 3)
-                          || (gdk_pixbuf_get_has_alpha (src)
-                              && gdk_pixbuf_get_n_channels (src) == 4), NULL);
-    g_return_val_if_fail (gdk_pixbuf_get_bits_per_sample (src) == 8, NULL);
+    g_return_val_if_fail (cdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
+    g_return_val_if_fail ((!cdk_pixbuf_get_has_alpha (src)
+                           && cdk_pixbuf_get_n_channels (src) == 3)
+                          || (cdk_pixbuf_get_has_alpha (src)
+                              && cdk_pixbuf_get_n_channels (src) == 4), NULL);
+    g_return_val_if_fail (cdk_pixbuf_get_bits_per_sample (src) == 8, NULL);
 
     red_value = eel_round (color->red * 255);
     green_value = eel_round (color->green * 255);
@@ -211,13 +211,13 @@ eel_create_colorized_pixbuf (GdkPixbuf *src,
 
     dest = create_new_pixbuf (src);
 
-    has_alpha = gdk_pixbuf_get_has_alpha (src);
-    width = gdk_pixbuf_get_width (src);
-    height = gdk_pixbuf_get_height (src);
-    src_row_stride = gdk_pixbuf_get_rowstride (src);
-    dst_row_stride = gdk_pixbuf_get_rowstride (dest);
-    target_pixels = gdk_pixbuf_get_pixels (dest);
-    original_pixels = gdk_pixbuf_get_pixels (src);
+    has_alpha = cdk_pixbuf_get_has_alpha (src);
+    width = cdk_pixbuf_get_width (src);
+    height = cdk_pixbuf_get_height (src);
+    src_row_stride = cdk_pixbuf_get_rowstride (src);
+    dst_row_stride = cdk_pixbuf_get_rowstride (dest);
+    target_pixels = cdk_pixbuf_get_pixels (dest);
+    original_pixels = cdk_pixbuf_get_pixels (src);
 
     for (i = 0; i < height; i++)
     {
@@ -254,7 +254,7 @@ draw_frame_row (GdkPixbuf *frame_image, int target_width, int source_width, int 
         int slab_width;
 
         slab_width = remaining_width > source_width ? source_width : remaining_width;
-        gdk_pixbuf_copy_area (frame_image, left_offset, source_v_position, slab_width, height, result_pixbuf, left_offset + h_offset, dest_v_position);
+        cdk_pixbuf_copy_area (frame_image, left_offset, source_v_position, slab_width, height, result_pixbuf, left_offset + h_offset, dest_v_position);
         remaining_width -= slab_width;
         h_offset += slab_width;
     }
@@ -274,7 +274,7 @@ draw_frame_column (GdkPixbuf *frame_image, int target_height, int source_height,
         int slab_height;
 
         slab_height = remaining_height > source_height ? source_height : remaining_height;
-        gdk_pixbuf_copy_area (frame_image, source_h_position, top_offset, width, slab_height, result_pixbuf, dest_h_position, top_offset + v_offset);
+        cdk_pixbuf_copy_area (frame_image, source_h_position, top_offset, width, slab_height, result_pixbuf, dest_h_position, top_offset + v_offset);
         remaining_height -= slab_height;
         v_offset += slab_height;
     }
@@ -291,19 +291,19 @@ eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset
     int target_width, target_frame_width;
     int target_height, target_frame_height;
 
-    frame_width  = gdk_pixbuf_get_width  (frame_image);
-    frame_height = gdk_pixbuf_get_height (frame_image );
+    frame_width  = cdk_pixbuf_get_width  (frame_image);
+    frame_height = cdk_pixbuf_get_height (frame_image );
 
     if (fill_flag)
     {
-        result_pixbuf = gdk_pixbuf_scale_simple (frame_image, dest_width, dest_height, GDK_INTERP_NEAREST);
+        result_pixbuf = cdk_pixbuf_scale_simple (frame_image, dest_width, dest_height, GDK_INTERP_NEAREST);
     }
     else
     {
-        result_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, dest_width, dest_height);
+        result_pixbuf = cdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, dest_width, dest_height);
     }
-    row_stride = gdk_pixbuf_get_rowstride (result_pixbuf);
-    pixels_ptr = gdk_pixbuf_get_pixels (result_pixbuf);
+    row_stride = cdk_pixbuf_get_rowstride (result_pixbuf);
+    pixels_ptr = cdk_pixbuf_get_pixels (result_pixbuf);
 
     /* clear the new pixbuf */
     if (!fill_flag)
@@ -324,19 +324,19 @@ eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset
     target_frame_height = frame_height - top_offset - bottom_offset;
 
     /* draw the left top corner  and top row */
-    gdk_pixbuf_copy_area (frame_image, 0, 0, left_offset, top_offset, result_pixbuf, 0,  0);
+    cdk_pixbuf_copy_area (frame_image, 0, 0, left_offset, top_offset, result_pixbuf, 0,  0);
     draw_frame_row (frame_image, target_width, target_frame_width, 0, 0, result_pixbuf, left_offset, top_offset);
 
     /* draw the right top corner and left column */
-    gdk_pixbuf_copy_area (frame_image, frame_width - right_offset, 0, right_offset, top_offset, result_pixbuf, dest_width - right_offset,  0);
+    cdk_pixbuf_copy_area (frame_image, frame_width - right_offset, 0, right_offset, top_offset, result_pixbuf, dest_width - right_offset,  0);
     draw_frame_column (frame_image, target_height, target_frame_height, 0, 0, result_pixbuf, top_offset, left_offset);
 
     /* draw the bottom right corner and bottom row */
-    gdk_pixbuf_copy_area (frame_image, frame_width - right_offset, frame_height - bottom_offset, right_offset, bottom_offset, result_pixbuf, dest_width - right_offset,  dest_height - bottom_offset);
+    cdk_pixbuf_copy_area (frame_image, frame_width - right_offset, frame_height - bottom_offset, right_offset, bottom_offset, result_pixbuf, dest_width - right_offset,  dest_height - bottom_offset);
     draw_frame_row (frame_image, target_width, target_frame_width, frame_height - bottom_offset, dest_height - bottom_offset, result_pixbuf, left_offset, bottom_offset);
 
     /* draw the bottom left corner and the right column */
-    gdk_pixbuf_copy_area (frame_image, 0, frame_height - bottom_offset, left_offset, bottom_offset, result_pixbuf, 0,  dest_height - bottom_offset);
+    cdk_pixbuf_copy_area (frame_image, 0, frame_height - bottom_offset, left_offset, bottom_offset, result_pixbuf, 0,  dest_height - bottom_offset);
     draw_frame_column (frame_image, target_height, target_frame_height, frame_width - right_offset, dest_width - right_offset, result_pixbuf, top_offset, right_offset);
 
     return result_pixbuf;
@@ -351,8 +351,8 @@ eel_embed_image_in_frame (GdkPixbuf *source_image, GdkPixbuf *frame_image, int l
     int source_width, source_height;
     int dest_width, dest_height;
 
-    source_width  = gdk_pixbuf_get_width  (source_image);
-    source_height = gdk_pixbuf_get_height (source_image);
+    source_width  = cdk_pixbuf_get_width  (source_image);
+    source_height = cdk_pixbuf_get_height (source_image);
 
     dest_width  = source_width  + left_offset + right_offset;
     dest_height = source_height + top_offset  + bottom_offset;
@@ -361,7 +361,7 @@ eel_embed_image_in_frame (GdkPixbuf *source_image, GdkPixbuf *frame_image, int l
                     dest_width, dest_height, FALSE);
 
     /* Finally, copy the source image into the framed area */
-    gdk_pixbuf_copy_area (source_image, 0, 0, source_width, source_height, result_pixbuf, left_offset,  top_offset);
+    cdk_pixbuf_copy_area (source_image, 0, 0, source_width, source_height, result_pixbuf, left_offset,  top_offset);
 
     return result_pixbuf;
 }

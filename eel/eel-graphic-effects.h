@@ -25,9 +25,9 @@
 #ifndef EEL_GRAPHIC_EFFECTS_H
 #define EEL_GRAPHIC_EFFECTS_H
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 #include <ctk/ctk.h>
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 
 
 /* return a lightened pixbuf for pre-lighting */

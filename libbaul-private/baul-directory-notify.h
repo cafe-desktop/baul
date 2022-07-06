@@ -22,7 +22,7 @@
    Author: Darin Adler <darin@bentspoon.com>
 */
 
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 
 #include "baul-file.h"
 

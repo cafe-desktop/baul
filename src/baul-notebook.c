@@ -108,7 +108,7 @@ find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
             continue;
         }
 
-        gdk_window_get_origin (ctk_widget_get_window (tab),
+        cdk_window_get_origin (ctk_widget_get_window (tab),
                                &x_root, &y_root);
         ctk_widget_get_allocation (tab, &allocation);
 

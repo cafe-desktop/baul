@@ -30,7 +30,7 @@
 
 #include <glib/gi18n.h>
 #include <ctk/ctk.h>
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 
 #include <eel/eel-stock-dialogs.h>
 
@@ -81,9 +81,9 @@ baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self
     error = NULL;
     uri = g_file_get_uri (location);
 
-    launch_context = gdk_display_get_app_launch_context (ctk_widget_get_display (CTK_WIDGET (self)));
+    launch_context = cdk_display_get_app_launch_context (ctk_widget_get_display (CTK_WIDGET (self)));
 
-    gdk_app_launch_context_set_screen (launch_context,
+    cdk_app_launch_context_set_screen (launch_context,
                                        ctk_widget_get_screen (CTK_WIDGET (self)));
 
     g_app_info_launch_default_for_uri (uri,

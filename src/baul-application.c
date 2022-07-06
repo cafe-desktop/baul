@@ -36,7 +36,7 @@
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <libnotify/notify.h>
 #include <sys/types.h>
@@ -380,7 +380,7 @@ baul_application_open (GApplication *app,
         sscanf (splitedOptions[2], "%d", &open_in_tabs);
 
         open_windows (self, files,
-                      gdk_screen_get_default (),
+                      cdk_screen_get_default (),
                       geometry,
                       n_files,
                       browser_window,
@@ -393,7 +393,7 @@ baul_application_open (GApplication *app,
     }
     else
         open_windows (self, files,
-                      gdk_screen_get_default (),
+                      cdk_screen_get_default (),
                       geometry,
                       n_files,
                       browser_window,
@@ -410,7 +410,7 @@ baul_application_open_location (BaulApplication *application,
     BaulWindow *window;
     GList *sel_list = NULL;
 
-    window = baul_application_create_navigation_window (application, gdk_screen_get_default ());
+    window = baul_application_create_navigation_window (application, cdk_screen_get_default ());
 
     if (selection != NULL) {
         sel_list = g_list_prepend (NULL, g_object_ref (selection));
@@ -638,24 +638,24 @@ get_desktop_manager_selection (GdkDisplay *display)
     CtkWidget *selection_widget;
 
     g_snprintf (selection_name, sizeof (selection_name), "_NET_DESKTOP_MANAGER_S0");
-    selection_atom = gdk_atom_intern (selection_name, FALSE);
+    selection_atom = cdk_atom_intern (selection_name, FALSE);
 
     selection_owner = XGetSelectionOwner (GDK_DISPLAY_XDISPLAY (display),
-                                          gdk_x11_atom_to_xatom_for_display (display,
+                                          cdk_x11_atom_to_xatom_for_display (display,
                                                   selection_atom));
     if (selection_owner != None)
     {
         return NULL;
     }
 
-    selection_widget = ctk_invisible_new_for_screen (gdk_display_get_default_screen (display));
-    /* We need this for gdk_x11_get_server_time() */
+    selection_widget = ctk_invisible_new_for_screen (cdk_display_get_default_screen (display));
+    /* We need this for cdk_x11_get_server_time() */
     ctk_widget_add_events (selection_widget, GDK_PROPERTY_CHANGE_MASK);
 
     if (ctk_selection_owner_set_for_display (display,
             selection_widget,
             selection_atom,
-            gdk_x11_get_server_time (ctk_widget_get_window (selection_widget))))
+            cdk_x11_get_server_time (ctk_widget_get_window (selection_widget))))
     {
 
         g_signal_connect (selection_widget, "selection_get",
@@ -696,7 +696,7 @@ baul_application_create_desktop_windows (BaulApplication *application)
 
     g_return_if_fail (baul_application_desktop_windows == NULL);
     g_return_if_fail (BAUL_IS_APPLICATION (application));
-    display = gdk_display_get_default ();
+    display = cdk_display_get_default ();
 
     selection_widget = get_desktop_manager_selection (display);
 
@@ -704,7 +704,7 @@ baul_application_create_desktop_windows (BaulApplication *application)
     {
         BaulDesktopWindow *window;
 
-        window = baul_desktop_window_new (application, gdk_display_get_default_screen (display));
+        window = baul_desktop_window_new (application, cdk_display_get_default_screen (display));
 
         g_signal_connect (selection_widget, "selection_clear_event",
                           G_CALLBACK (selection_clear_event_cb), window);
@@ -714,9 +714,9 @@ baul_application_create_desktop_windows (BaulApplication *application)
 
         /* We realize it immediately so that the BAUL_DESKTOP_WINDOW_ID
            property is set so cafe-settings-daemon doesn't try to set the
-           background. And we do a gdk_display_flush() to be sure X gets it. */
+           background. And we do a cdk_display_flush() to be sure X gets it. */
         ctk_widget_realize (CTK_WIDGET (window));
-        gdk_display_flush (display);
+        cdk_display_flush (display);
 
         baul_application_desktop_windows =
             g_list_prepend (baul_application_desktop_windows, window);
@@ -1212,7 +1212,7 @@ autorun_show_window (GMount *mount, gpointer user_data)
     /* There should probably be an easier way to do this */
     if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER)) {
         window = baul_application_create_navigation_window (application,
-                                                            gdk_screen_get_default ());
+                                                            cdk_screen_get_default ());
     }
     else
     {
@@ -1220,7 +1220,7 @@ autorun_show_window (GMount *mount, gpointer user_data)
                                                       NULL,
                                                       NULL,
                                                       location,
-                                                      gdk_screen_get_default (),
+                                                      cdk_screen_get_default (),
                                                       NULL);
     }
 
@@ -1463,26 +1463,26 @@ baul_application_get_session_data (BaulApplication *self)
         xmlNewProp (win_node, "type", BAUL_IS_NAVIGATION_WINDOW (window) ? "navigation" : "spatial");
 
         if (BAUL_IS_NAVIGATION_WINDOW (window)) { /* spatial windows store their state as file metadata */
-            GdkWindow *gdk_window;
+            GdkWindow *cdk_window;
 
             tmp = eel_ctk_window_get_geometry_string (CTK_WINDOW (window));
             xmlNewProp (win_node, "geometry", tmp);
             g_free (tmp);
 
-            gdk_window = ctk_widget_get_window (CTK_WIDGET (window));
+            cdk_window = ctk_widget_get_window (CTK_WIDGET (window));
 
-            if (gdk_window &&
-                gdk_window_get_state (gdk_window) & GDK_WINDOW_STATE_MAXIMIZED) {
+            if (cdk_window &&
+                cdk_window_get_state (cdk_window) & GDK_WINDOW_STATE_MAXIMIZED) {
                 xmlNewProp (win_node, "maximized", "TRUE");
             }
 
-            if (gdk_window &&
-                gdk_window_get_state (gdk_window) & GDK_WINDOW_STATE_STICKY) {
+            if (cdk_window &&
+                cdk_window_get_state (cdk_window) & GDK_WINDOW_STATE_STICKY) {
                 xmlNewProp (win_node, "sticky", "TRUE");
             }
 
-            if (gdk_window &&
-                gdk_window_get_state (gdk_window) & GDK_WINDOW_STATE_ABOVE) {
+            if (cdk_window &&
+                cdk_window_get_state (cdk_window) & GDK_WINDOW_STATE_ABOVE) {
                 xmlNewProp (win_node, "keep-above", "TRUE");
             }
         }
@@ -1654,7 +1654,7 @@ baul_application_load_session (BaulApplication *application)
                     xmlChar *geometry;
                     int i;
 
-                    window = baul_application_create_navigation_window (application, gdk_screen_get_default ());
+                    window = baul_application_create_navigation_window (application, cdk_screen_get_default ());
                     geometry = xmlGetProp (node, "geometry");
                     if (geometry != NULL)
                     {
@@ -1740,7 +1740,7 @@ baul_application_load_session (BaulApplication *application)
                 {
                     location = g_file_new_for_uri (location_uri);
                     window = baul_application_get_spatial_window (application, NULL, NULL,
-                    											  location, gdk_screen_get_default (),
+                    											  location, cdk_screen_get_default (),
                     											  NULL);
 
 					baul_window_go_to (window, location);
@@ -2045,7 +2045,7 @@ load_custom_css (CtkCssProvider *provider,
                    filename, error->message);
         g_error_free (error);
     } else {
-        ctk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+        ctk_style_context_add_provider_for_screen (cdk_screen_get_default (),
                                                    CTK_STYLE_PROVIDER (provider),
                                                    priority);
     }

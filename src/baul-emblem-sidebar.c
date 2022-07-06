@@ -31,14 +31,14 @@
 #include <config.h>
 #include <stdio.h>
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-wrap-table.h>
 #include <eel/eel-labeled-image.h>
 #include <eel/eel-graphic-effects.h>
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-ctk-extensions.h>
 
@@ -989,7 +989,7 @@ baul_emblem_sidebar_populate (BaulEmblemSidebar *emblem_sidebar)
     path = baul_pixmap_file ("erase.png");
     if (path != NULL)
     {
-        erase_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+        erase_pixbuf = cdk_pixbuf_new_from_file (path, NULL);
     }
     g_free (path);
 

@@ -25,7 +25,7 @@
 #ifndef BAUL_LINK_H
 #define BAUL_LINK_H
 
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 
 gboolean         baul_link_local_create                      (const char        *directory_uri,
         const char        *base_name,

@@ -269,7 +269,7 @@ get_menu_icon (GIcon *icon)
     int size, scale;
 
     size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
-    scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
+    scale = cdk_window_get_scale_factor (cdk_get_default_root_window ());
 
     info = baul_icon_info_lookup (icon, size, scale);
     surface = baul_icon_info_get_surface_nodefault_at_size (info, size);
@@ -296,7 +296,7 @@ get_menu_icon_for_file (TreeNode *node,
     GIcon *emblem_icon = NULL;
 
     size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
-    scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
+    scale = cdk_window_get_scale_factor (cdk_get_default_root_window ());
 
     gicon = baul_file_get_gicon (file, flags);
 

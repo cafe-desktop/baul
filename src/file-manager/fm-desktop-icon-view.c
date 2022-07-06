@@ -34,7 +34,7 @@
 
 #include <X11/Xatom.h>
 #include <ctk/ctk.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 #include <glib/gi18n.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -123,10 +123,10 @@ icon_container_set_workarea (BaulIconContainer *icon_container,
 
     left = right = top = bottom = 0;
 
-    scale = gdk_window_get_scale_factor (gdk_screen_get_root_window (screen));
+    scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
 
-    screen_width  = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
-    screen_height = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
+    screen_width  = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
+    screen_height = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
 
     for (i = 0; i < n_items; i += 4)
     {
@@ -169,10 +169,10 @@ net_workarea_changed (FMDesktopIconView *icon_view,
      * elements in the workareas array describing
      * x,y,width,height) */
     display = ctk_widget_get_display (CTK_WIDGET (icon_view));
-    gdk_x11_display_error_trap_push (display);
-    if (!gdk_property_get (window,
-                           gdk_atom_intern ("_NET_NUMBER_OF_DESKTOPS", FALSE),
-                           gdk_x11_xatom_to_atom (XA_CARDINAL),
+    cdk_x11_display_error_trap_push (display);
+    if (!cdk_property_get (window,
+                           cdk_atom_intern ("_NET_NUMBER_OF_DESKTOPS", FALSE),
+                           cdk_x11_xatom_to_atom (XA_CARDINAL),
                            0, 4, FALSE,
                            &type_returned,
                            &format_returned,
@@ -181,15 +181,15 @@ net_workarea_changed (FMDesktopIconView *icon_view,
     {
         g_warning("Can not calculate _NET_NUMBER_OF_DESKTOPS");
     }
-    if (gdk_x11_display_error_trap_pop (display)
+    if (cdk_x11_display_error_trap_pop (display)
             || nworkareas == NULL
-            || type_returned != gdk_x11_xatom_to_atom (XA_CARDINAL)
+            || type_returned != cdk_x11_xatom_to_atom (XA_CARDINAL)
             || format_returned != 32)
         g_warning("Can not calculate _NET_NUMBER_OF_DESKTOPS");
 
-    /* Note : gdk_property_get() is broken (API documents admit
+    /* Note : cdk_property_get() is broken (API documents admit
      * this).  As a length argument, it expects the number of
-     * _bytes_ of data you require.  Internally, gdk_property_get
+     * _bytes_ of data you require.  Internally, cdk_property_get
      * converts that value to a count of 32 bit (4 byte) elements.
      * However, the length returned is in bytes, but is calculated
      * via the count of returned elements * sizeof(long).  This
@@ -197,11 +197,11 @@ net_workarea_changed (FMDesktopIconView *icon_view,
      * request does not correspond to the number of bytes you get
      * back, and is the reason for the workaround below.
      */
-    gdk_x11_display_error_trap_push (display);
+    cdk_x11_display_error_trap_push (display);
     if (nworkareas == NULL || (*nworkareas < 1)
-            || !gdk_property_get (window,
-                                  gdk_atom_intern ("_NET_WORKAREA", FALSE),
-                                  gdk_x11_xatom_to_atom (XA_CARDINAL),
+            || !cdk_property_get (window,
+                                  cdk_atom_intern ("_NET_WORKAREA", FALSE),
+                                  cdk_x11_xatom_to_atom (XA_CARDINAL),
                                   0, ((*nworkareas) * 4 * 4), FALSE,
                                   &type_returned,
                                   &format_returned,
@@ -212,9 +212,9 @@ net_workarea_changed (FMDesktopIconView *icon_view,
         workareas = NULL;
     }
 
-    if (gdk_x11_display_error_trap_pop (display)
+    if (cdk_x11_display_error_trap_pop (display)
             || workareas == NULL
-            || type_returned != gdk_x11_xatom_to_atom (XA_CARDINAL)
+            || type_returned != cdk_x11_xatom_to_atom (XA_CARDINAL)
             || ((*nworkareas) * 4 * sizeof(long)) != length_returned
             || format_returned != 32)
     {
@@ -226,7 +226,7 @@ net_workarea_changed (FMDesktopIconView *icon_view,
     {
         GdkScreen *screen;
 
-        screen = gdk_window_get_screen (window);
+        screen = cdk_window_get_screen (window);
 
         icon_container_set_workarea (
             icon_container, screen, workareas, length_returned / sizeof (long));
@@ -240,11 +240,11 @@ net_workarea_changed (FMDesktopIconView *icon_view,
 }
 
 static GdkFilterReturn
-desktop_icon_view_property_filter (GdkXEvent *gdk_xevent,
+desktop_icon_view_property_filter (GdkXEvent *cdk_xevent,
                                    GdkEvent *event,
                                    gpointer data)
 {
-    XEvent *xevent = gdk_xevent;
+    XEvent *xevent = cdk_xevent;
     FMDesktopIconView *icon_view;
 
     icon_view = FM_DESKTOP_ICON_VIEW (data);
@@ -252,7 +252,7 @@ desktop_icon_view_property_filter (GdkXEvent *gdk_xevent,
     switch (xevent->type)
     {
     case PropertyNotify:
-        if (xevent->xproperty.atom == gdk_x11_get_xatom_by_name ("_NET_WORKAREA"))
+        if (xevent->xproperty.atom == cdk_x11_get_xatom_by_name ("_NET_WORKAREA"))
             net_workarea_changed (icon_view, event->any.window);
         break;
     default:
@@ -327,9 +327,9 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
     GdkSeat *seat;
     GdkDisplay *display;
 
-    seat = gdk_display_get_default_seat (ctk_widget_get_display (CTK_WIDGET (icon_container)));
-    pointer = gdk_seat_get_pointer (seat);
-    keyboard = gdk_seat_get_keyboard (seat);
+    seat = cdk_display_get_default_seat (ctk_widget_get_display (CTK_WIDGET (icon_container)));
+    pointer = cdk_seat_get_pointer (seat);
+    keyboard = cdk_seat_get_keyboard (seat);
 
     /* During a mouse click we have the pointer and keyboard grab.
      * We will send a fake event to the root window which will cause it
@@ -337,22 +337,22 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
      */
 
     if (pointer != NULL) {
-            gdk_seat_ungrab (seat);
+            cdk_seat_ungrab (seat);
     }
 
     if (keyboard != NULL) {
-            gdk_seat_ungrab (seat);
+            cdk_seat_ungrab (seat);
     }
 
     /* Stop the event because we don't want anyone else dealing with it. */
     display = ctk_widget_get_display (CTK_WIDGET (icon_container));
-    gdk_display_flush (display);
+    cdk_display_flush (display);
     g_signal_stop_emission_by_name (icon_container, "middle_click");
 
     /* build an X event to represent the middle click. */
     x_event.type = ButtonPress;
     x_event.send_event = True;
-    x_event.display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+    x_event.display = GDK_DISPLAY_XDISPLAY (cdk_display_get_default ());
     x_event.window = GDK_ROOT_WINDOW ();
     x_event.root = GDK_ROOT_WINDOW ();
     x_event.subwindow = 0;
@@ -366,7 +366,7 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
     x_event.same_screen = True;
 
     /* Send it to the root window, the window manager will handle it. */
-    XSendEvent (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), GDK_ROOT_WINDOW (), True,
+    XSendEvent (GDK_DISPLAY_XDISPLAY (cdk_display_get_default ()), GDK_ROOT_WINDOW (), True,
                 ButtonPressMask, (XEvent *) &x_event);
 }
 
@@ -376,7 +376,7 @@ unrealized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
     g_return_if_fail (desktop_icon_view->priv->root_window != NULL);
 
     /* Remove the property filter */
-    gdk_window_remove_filter (desktop_icon_view->priv->root_window,
+    cdk_window_remove_filter (desktop_icon_view->priv->root_window,
                               desktop_icon_view_property_filter,
                               desktop_icon_view);
     desktop_icon_view->priv->root_window = NULL;
@@ -403,12 +403,12 @@ realized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
      */
     allocation.x = 0;
     allocation.y = 0;
-    allocation.width = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
-    allocation.height = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
+    allocation.width = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
+    allocation.height = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
     ctk_widget_size_allocate (CTK_WIDGET(get_icon_container(desktop_icon_view)),
                               &allocation);
 
-    root_window = gdk_screen_get_root_window (screen);
+    root_window = cdk_screen_get_root_window (screen);
 
     desktop_icon_view->priv->root_window = root_window;
 
@@ -416,8 +416,8 @@ realized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
     net_workarea_changed (desktop_icon_view, root_window);
 
     /* Setup the property filter */
-    gdk_window_set_events (root_window, GDK_PROPERTY_CHANGE_MASK);
-    gdk_window_add_filter (root_window,
+    cdk_window_set_events (root_window, GDK_PROPERTY_CHANGE_MASK);
+    cdk_window_add_filter (root_window,
                            desktop_icon_view_property_filter,
                            desktop_icon_view);
 

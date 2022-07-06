@@ -32,7 +32,7 @@
 #include "eel-accessibility.h"
 #include <ctk/ctk.h>
 #include <ctk/ctk-a11y.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <atk/atkimage.h>
 
 #define DEFAULT_SPACING 0

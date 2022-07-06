@@ -30,7 +30,7 @@
 #include <ctk/ctk.h>
 #include <string.h>
 
-#include <eel/eel-gdk-extensions.h>
+#include <eel/eel-cdk-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-background.h>
 

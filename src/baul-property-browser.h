@@ -31,7 +31,7 @@
 #ifndef BAUL_PROPERTY_BROWSER_H
 #define BAUL_PROPERTY_BROWSER_H
 
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 #include <ctk/ctk.h>
 
 typedef struct BaulPropertyBrowser BaulPropertyBrowser;

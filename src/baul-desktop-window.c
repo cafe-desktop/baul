@@ -25,7 +25,7 @@
 #include <config.h>
 
 #include <X11/Xatom.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <gio/gio.h>
 #include <glib/gi18n.h>
@@ -155,10 +155,10 @@ baul_desktop_window_screen_size_changed (GdkScreen             *screen,
     int width_request, height_request;
     int scale;
 
-    scale = gdk_window_get_scale_factor (gdk_screen_get_root_window (screen));
+    scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
 
-    width_request = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
-    height_request = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
+    width_request = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
+    height_request = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
 
     g_object_set (window,
                   "width_request", width_request,
@@ -174,10 +174,10 @@ baul_desktop_window_new (BaulApplication *application,
     int width_request, height_request;
     int scale;
 
-    scale = gdk_window_get_scale_factor (gdk_screen_get_root_window (screen));
+    scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
 
-    width_request = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
-    height_request = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
+    width_request = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
+    height_request = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
 
     window = BAUL_DESKTOP_WINDOW
              (ctk_widget_new (baul_desktop_window_get_type(),
@@ -192,19 +192,19 @@ baul_desktop_window_new (BaulApplication *application,
     ctk_window_set_default_size (CTK_WINDOW (window), -1, -1);
 
     /* Special sawmill setting*/
-    GdkWindow *gdkwin;
+    GdkWindow *cdkwin;
     ctk_widget_realize (CTK_WIDGET (window));
-    gdkwin = ctk_widget_get_window (CTK_WIDGET (window));
-    if (gdk_window_ensure_native (gdkwin)) {
-        Display *disp = GDK_DISPLAY_XDISPLAY (gdk_window_get_display (gdkwin));
+    cdkwin = ctk_widget_get_window (CTK_WIDGET (window));
+    if (cdk_window_ensure_native (cdkwin)) {
+        Display *disp = GDK_DISPLAY_XDISPLAY (cdk_window_get_display (cdkwin));
         XClassHint *xch = XAllocClassHint ();
         xch->res_name = "desktop_window";
         xch->res_class = "Baul";
-        XSetClassHint (disp, GDK_WINDOW_XID(gdkwin), xch);
+        XSetClassHint (disp, GDK_WINDOW_XID(cdkwin), xch);
         XFree(xch);
     }
 
-    gdk_window_set_title (gdkwin, _("Desktop"));
+    cdk_window_set_title (cdkwin, _("Desktop"));
 
     g_signal_connect (window, "delete_event", G_CALLBACK (baul_desktop_window_delete_event), NULL);
 
@@ -221,7 +221,7 @@ map (CtkWidget *widget)
 {
     /* Chain up to realize our children */
     CTK_WIDGET_CLASS (baul_desktop_window_parent_class)->map (widget);
-    gdk_window_lower (ctk_widget_get_window (widget));
+    cdk_window_lower (ctk_widget_get_window (widget));
 }
 
 static void
@@ -234,11 +234,11 @@ unrealize (CtkWidget *widget)
     window = BAUL_DESKTOP_WINDOW (widget);
     details = window->details;
 
-    root_window = gdk_screen_get_root_window (
+    root_window = cdk_screen_get_root_window (
                       ctk_window_get_screen (CTK_WINDOW (window)));
 
-    gdk_property_delete (root_window,
-                         gdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", TRUE));
+    cdk_property_delete (root_window,
+                         cdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", TRUE));
 
     if (details->size_changed_id != 0) {
         g_signal_handler_disconnect (ctk_window_get_screen (CTK_WINDOW (window)),
@@ -254,31 +254,31 @@ set_wmspec_desktop_hint (GdkWindow *window)
 {
     GdkAtom atom;
 
-    atom = gdk_atom_intern ("_NET_WM_WINDOW_TYPE_DESKTOP", FALSE);
+    atom = cdk_atom_intern ("_NET_WM_WINDOW_TYPE_DESKTOP", FALSE);
 
-    gdk_property_change (window,
-                         gdk_atom_intern ("_NET_WM_WINDOW_TYPE", FALSE),
-                         gdk_x11_xatom_to_atom (XA_ATOM), 32,
+    cdk_property_change (window,
+                         cdk_atom_intern ("_NET_WM_WINDOW_TYPE", FALSE),
+                         cdk_x11_xatom_to_atom (XA_ATOM), 32,
                          GDK_PROP_MODE_REPLACE, (guchar *) &atom, 1);
 }
 
 static void
 set_desktop_window_id (BaulDesktopWindow *window,
-                       GdkWindow             *gdkwindow)
+                       GdkWindow             *cdkwindow)
 {
     /* Tuck the desktop windows xid in the root to indicate we own the desktop.
      */
     Window window_xid;
     GdkWindow *root_window;
 
-    root_window = gdk_screen_get_root_window (
+    root_window = cdk_screen_get_root_window (
                       ctk_window_get_screen (CTK_WINDOW (window)));
 
-    window_xid = GDK_WINDOW_XID (gdkwindow);
+    window_xid = GDK_WINDOW_XID (cdkwindow);
 
-    gdk_property_change (root_window,
-                         gdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", FALSE),
-                         gdk_x11_xatom_to_atom (XA_WINDOW), 32,
+    cdk_property_change (root_window,
+                         cdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", FALSE),
+                         cdk_x11_xatom_to_atom (XA_WINDOW), 32,
                          GDK_PROP_MODE_REPLACE, (guchar *) &window_xid, 1);
 }
 

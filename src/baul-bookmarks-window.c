@@ -29,7 +29,7 @@
 #include <cairo-gobject.h>
 
 #include <ctk/ctk.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-cafe-extensions.h>

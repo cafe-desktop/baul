@@ -28,14 +28,14 @@
 #include <config.h>
 #include <string.h>
 
-#include <gdk/gdk.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdk.h>
+#include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <glib-object.h>
 
 #include <eel/eel-vfs-extensions.h>
-#include <eel/eel-gdk-extensions.h>
+#include <eel/eel-cdk-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-ctk-macros.h>
 #include <eel/eel-stock-dialogs.h>
@@ -554,11 +554,11 @@ motion_notify_callback (CtkWidget *widget,
         {
             if (view->details->hover_path != NULL)
             {
-                gdk_window_set_cursor (ctk_widget_get_window (widget), hand_cursor);
+                cdk_window_set_cursor (ctk_widget_get_window (widget), hand_cursor);
             }
             else
             {
-                gdk_window_set_cursor (ctk_widget_get_window (widget), NULL);
+                cdk_window_set_cursor (ctk_widget_get_window (widget), NULL);
             }
         }
 
@@ -637,7 +637,7 @@ enter_notify_callback (CtkWidget *widget,
 
         if (view->details->hover_path != NULL)
         {
-            gdk_window_set_cursor (ctk_widget_get_window (widget), hand_cursor);
+            cdk_window_set_cursor (ctk_widget_get_window (widget), hand_cursor);
         }
     }
 
@@ -2993,11 +2993,11 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
             GdkWindow *win;
 
             win = ctk_widget_get_window (CTK_WIDGET (tree));
-            gdk_window_set_cursor (win, NULL);
+            cdk_window_set_cursor (win, NULL);
 
             if (display != NULL)
             {
-                gdk_display_flush (display);
+                cdk_display_flush (display);
             }
         }
 
@@ -3008,7 +3008,7 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
     {
         if (hand_cursor == NULL)
         {
-            hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
+            hand_cursor = cdk_cursor_new_for_display (display, GDK_HAND2);
         }
     }
 }
@@ -3320,7 +3320,7 @@ real_set_is_active (FMDirectoryView *view,
                                CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                &c, NULL);
         color = *c;
-        gdk_rgba_free (c);
+        cdk_rgba_free (c);
 
         ctk_widget_override_background_color (tree_view, CTK_STATE_FLAG_NORMAL, &color);
     }

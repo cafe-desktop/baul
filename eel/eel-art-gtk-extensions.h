@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-art-ctk-extensions.h - Access ctk/gdk attributes as libart rectangles.
+/* eel-art-ctk-extensions.h - Access ctk/cdk attributes as libart rectangles.
 
    Copyright (C) 2000 Eazel, Inc.
 
@@ -22,7 +22,7 @@
    Authors: Ramiro Estrugo <ramiro@eazel.com>
 */
 
-/* The following functions accept ctk/gdk structures and
+/* The following functions accept ctk/cdk structures and
  * return their bounds and dimensions, where:
  *
  * bounds: The (x,y) and (width, height) of something.

@@ -39,7 +39,7 @@
 
 #include <ctk/ctk.h>
 #include <ctk/ctk-a11y.h>
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 #include <stdarg.h>
 
 #ifdef __cplusplus
@@ -249,7 +249,7 @@ extern "C" {
 
     /* Grab the seat for the specified item.  Only the events in event_mask will be
      * reported. If cursor is non-NULL, it will be used during the duration of the
-     * grab. event is the event, triggering the grab. Returns the same values as gdk_seat_grab().
+     * grab. event is the event, triggering the grab. Returns the same values as cdk_seat_grab().
      */
      GdkGrabStatus eel_canvas_item_grab (EelCanvasItem *item,
                                          GdkEventMask event_mask,
@@ -451,7 +451,7 @@ extern "C" {
 
     /* Creates a new canvas.  You should check that the canvas is created with the
      * proper visual and colormap.  Any visual will do unless you intend to insert
-     * gdk_imlib images into it, in which case you should use the gdk_imlib visual.
+     * cdk_imlib images into it, in which case you should use the cdk_imlib visual.
      *
      * You should call eel_canvas_set_scroll_region() soon after calling this
      * function to set the desired scrolling limits for the canvas.

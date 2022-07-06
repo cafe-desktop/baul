@@ -1139,7 +1139,7 @@ idle_callback (gpointer data)
     /* Protect agains races where the source has
        been destroyed on another thread while it
        was being dispatched.
-       Similar to what gdk_threads_add_idle does.
+       Similar to what cdk_threads_add_idle does.
     */
     if (g_source_is_destroyed (source))
     {

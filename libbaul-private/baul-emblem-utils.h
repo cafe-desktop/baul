@@ -25,7 +25,7 @@
 #include <glib.h>
 #include <gio/gio.h>
 #include <ctk/ctk.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 
 GList *    baul_emblem_list_available             (void);
 void       baul_emblem_refresh_list               (void);

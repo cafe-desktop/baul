@@ -34,7 +34,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
@@ -603,7 +603,7 @@ override_background_color (CtkWidget *widget,
     provider = ctk_css_provider_new ();
 
     css = g_strdup_printf ("entry { background-color: %s;}",
-                           gdk_rgba_to_string (rgba));
+                           cdk_rgba_to_string (rgba));
     ctk_css_provider_load_from_data (provider, css, -1, NULL);
     g_free (css);
 
@@ -635,18 +635,18 @@ baul_location_bar_set_active (BaulLocationBar *location_bar, gboolean is_active)
                                &c, NULL);
 
     color = *c;
-    gdk_rgba_free (c);
+    cdk_rgba_free (c);
 
     if (is_active)
     {
-        if (gdk_rgba_equal (&bg_active, &bg_inactive))
+        if (cdk_rgba_equal (&bg_active, &bg_inactive))
             bg_active = color;
 
         override_background_color (CTK_WIDGET (location_bar->details->entry), &bg_active);
     }
     else
     {
-        if (gdk_rgba_equal (&bg_active, &bg_inactive))
+        if (cdk_rgba_equal (&bg_active, &bg_inactive))
             bg_inactive = color;
 
         override_background_color(CTK_WIDGET (location_bar->details->entry), &bg_inactive);

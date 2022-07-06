@@ -29,7 +29,7 @@
 #define EEL_CTK_EXTENSIONS_H
 
 #include <ctk/ctk.h>
-#include "eel-gdk-extensions.h"
+#include "eel-cdk-extensions.h"
 
 /* CtkWindow */
 void                  eel_ctk_window_set_initial_geometry             (CtkWindow            *window,

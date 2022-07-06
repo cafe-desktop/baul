@@ -37,8 +37,8 @@
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
-#include <gdk/gdk.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdk.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <gio/gio.h>
 #include <glib.h>
@@ -974,7 +974,7 @@ init_common (gsize job_size,
 		GdkScreen *screen;
 
 		screen = ctk_widget_get_screen (CTK_WIDGET (parent_window));
-		common->screen_num = gdk_x11_screen_get_screen_number (screen);
+		common->screen_num = cdk_x11_screen_get_screen_number (screen);
 	}
 
 	return common;
@@ -2357,8 +2357,8 @@ prompt_empty_trash (CtkWindow *parent_window)
 	/* Make transient for the window group */
 	ctk_widget_realize (dialog);
 	if (screen != NULL) {
-		gdk_window_set_transient_for (ctk_widget_get_window (CTK_WIDGET (dialog)),
-				      		gdk_screen_get_root_window (screen));
+		cdk_window_set_transient_for (ctk_widget_get_window (CTK_WIDGET (dialog)),
+				      		cdk_screen_get_root_window (screen));
 	}
 
 	result = ctk_dialog_run (CTK_DIALOG (dialog));

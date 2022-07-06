@@ -28,12 +28,12 @@
 #include <config.h>
 
 #include <ctk/ctk.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-accessibility.h>
 #include <eel/eel-debug.h>
-#include <eel/eel-gdk-extensions.h>
+#include <eel/eel-cdk-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-ctk-macros.h>

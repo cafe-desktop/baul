@@ -30,8 +30,8 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
-#include <gdk/gdk.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdk.h>
+#include <cdk/cdkx.h>
 
 #include <eel/eel-cafe-extensions.h>
 #include <eel/eel-stock-dialogs.h>
@@ -227,13 +227,13 @@ baul_launch_application_by_uri (GAppInfo *application,
     if (parent_window != NULL) {
             display = ctk_widget_get_display (CTK_WIDGET (parent_window));
     } else {
-            display = gdk_display_get_default ();
+            display = cdk_display_get_default ();
     }
 
-    launch_context = gdk_display_get_app_launch_context (display);
+    launch_context = cdk_display_get_app_launch_context (display);
 
     if (parent_window != NULL) {
-        gdk_app_launch_context_set_screen (launch_context,
+        cdk_app_launch_context_set_screen (launch_context,
                                            ctk_window_get_screen (parent_window));
     }
 
@@ -244,7 +244,7 @@ baul_launch_application_by_uri (GAppInfo *application,
     baul_file_unref (file);
     if (icon)
     {
-        gdk_app_launch_context_set_icon_name (launch_context,
+        cdk_app_launch_context_set_icon_name (launch_context,
                                               baul_icon_info_get_used_name (icon));
         g_object_unref (icon);
     }
@@ -355,9 +355,9 @@ baul_launch_application_from_command (GdkScreen  *screen,
             GdkAppLaunchContext *launch_context;
             GdkDisplay *display;
 
-            display = gdk_screen_get_display (screen);
-            launch_context = gdk_display_get_app_launch_context (display);
-            gdk_app_launch_context_set_screen (launch_context, screen);
+            display = cdk_screen_get_display (screen);
+            launch_context = cdk_display_get_app_launch_context (display);
+            cdk_app_launch_context_set_screen (launch_context, screen);
             g_app_info_launch (app_info, NULL, G_APP_LAUNCH_CONTEXT (launch_context), NULL);
             g_object_unref (launch_context);
             g_object_unref (app_info);
@@ -421,9 +421,9 @@ baul_launch_application_from_command_array (GdkScreen  *screen,
             GdkAppLaunchContext *launch_context;
             GdkDisplay *display;
 
-            display = gdk_screen_get_display (screen);
-            launch_context = gdk_display_get_app_launch_context (display);
-            gdk_app_launch_context_set_screen (launch_context, screen);
+            display = cdk_screen_get_display (screen);
+            launch_context = cdk_display_get_app_launch_context (display);
+            cdk_app_launch_context_set_screen (launch_context, screen);
             g_app_info_launch (app_info, NULL, G_APP_LAUNCH_CONTEXT (launch_context), NULL);
             g_object_unref (launch_context);
             g_object_unref (app_info);
@@ -525,11 +525,11 @@ baul_launch_desktop_file (GdkScreen   *screen,
 
     error = NULL;
 
-    context = gdk_display_get_app_launch_context (ctk_widget_get_display (CTK_WIDGET (parent_window)));
+    context = cdk_display_get_app_launch_context (ctk_widget_get_display (CTK_WIDGET (parent_window)));
 
     /* TODO: Ideally we should accept a timestamp here instead of using GDK_CURRENT_TIME */
-    gdk_app_launch_context_set_timestamp (context, GDK_CURRENT_TIME);
-    gdk_app_launch_context_set_screen (context,
+    cdk_app_launch_context_set_timestamp (context, GDK_CURRENT_TIME);
+    cdk_app_launch_context_set_screen (context,
                                        ctk_window_get_screen (parent_window));
     g_desktop_app_info_launch_uris_as_manager (app_info,
                                                (GList *) parameter_uris,

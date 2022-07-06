@@ -188,7 +188,7 @@ eel_cafe_open_terminal_on_screen (const char *command,
 
     if (screen == NULL)
     {
-        screen = gdk_screen_get_default ();
+        screen = cdk_screen_get_default ();
     }
 
     command_line = eel_cafe_make_terminal_command (command);
@@ -198,6 +198,6 @@ eel_cafe_open_terminal_on_screen (const char *command,
         return;
     }
 
-    cafe_gdk_spawn_command_line_on_screen(screen, command_line, NULL);
+    cafe_cdk_spawn_command_line_on_screen(screen, command_line, NULL);
     g_free (command_line);
 }

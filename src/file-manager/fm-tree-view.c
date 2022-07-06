@@ -555,7 +555,7 @@ selection_changed_callback (CtkTreeSelection *selection,
     if (event)
     {
         is_keyboard = (event->type == GDK_KEY_PRESS || event->type == GDK_KEY_RELEASE);
-        gdk_event_free (event);
+        cdk_event_free (event);
 
         if (is_keyboard)
         {
@@ -1697,7 +1697,7 @@ fm_tree_view_class_init (FMTreeViewClass *class)
     G_OBJECT_CLASS (class)->dispose = fm_tree_view_dispose;
     G_OBJECT_CLASS (class)->finalize = fm_tree_view_finalize;
 
-    copied_files_atom = gdk_atom_intern ("x-special/cafe-copied-files", FALSE);
+    copied_files_atom = cdk_atom_intern ("x-special/cafe-copied-files", FALSE);
 }
 
 static const char *

@@ -23,7 +23,7 @@
 */
 
 #include <config.h>
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 #include <ctk/ctk.h>
 #include <libxml/parser.h>
 #include <stdlib.h>

@@ -27,9 +27,9 @@
 
 #include <config.h>
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk/gdkx.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <cdk/cdkx.h>
+#include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #ifdef HAVE_X11_XF86KEYSYM_H
@@ -431,13 +431,13 @@ update_cursor (BaulWindow *window)
         GdkCursor * cursor;
 
         display = ctk_widget_get_display (CTK_WIDGET (window));
-        cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
-        gdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), cursor);
+        cursor = cdk_cursor_new_for_display (display, GDK_WATCH);
+        cdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), cursor);
         g_object_unref (cursor);
     }
     else
     {
-        gdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), NULL);
+        cdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), NULL);
     }
 }
 
@@ -563,8 +563,8 @@ baul_window_zoom_to_default (BaulWindow *window)
 static guint
 get_max_forced_height (GdkScreen *screen)
 {
-    gint scale = gdk_window_get_scale_factor (gdk_screen_get_root_window (screen));
-    return (HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale * 90) / 100;
+    gint scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
+    return (HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale * 90) / 100;
 }
 
 /* Code should never force the window wider than this size.
@@ -573,8 +573,8 @@ get_max_forced_height (GdkScreen *screen)
 static guint
 get_max_forced_width (GdkScreen *screen)
 {
-    gint scale = gdk_window_get_scale_factor (gdk_screen_get_root_window (screen));
-    return (WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale * 90) / 100;
+    gint scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
+    return (WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale * 90) / 100;
 }
 
 /* This must be called when construction of BaulWindow is finished,
@@ -1149,7 +1149,7 @@ add_view_as_menu_item (BaulWindow *window,
         g_snprintf (accel, sizeof (accel), "%d", index);
         g_snprintf (accel_path, sizeof (accel_path), "<Baul-Window>/%s", action_name);
 
-        accel_keyval = gdk_keyval_from_name (accel);
+        accel_keyval = cdk_keyval_from_name (accel);
 		g_assert (accel_keyval != GDK_KEY_VoidSymbol);
 
         ctk_accel_map_add_entry (accel_path, accel_keyval, GDK_CONTROL_MASK);

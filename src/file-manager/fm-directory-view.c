@@ -30,8 +30,8 @@
 #include <config.h>
 #include <math.h>
 
-#include <gdk/gdkkeysyms.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkkeysyms.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
@@ -2224,7 +2224,7 @@ fm_directory_view_finalize (GObject *object)
 
 	unschedule_pop_up_location_context_menu (view);
 	if (view->details->location_popup_event != NULL) {
-		gdk_event_free ((GdkEvent *) view->details->location_popup_event);
+		cdk_event_free ((GdkEvent *) view->details->location_popup_event);
 	}
 
 	g_hash_table_destroy (view->details->non_ready_files);
@@ -4112,7 +4112,7 @@ new_folder_done (GFile *new_folder, gpointer user_data)
 	}
 
 	screen = ctk_widget_get_screen (CTK_WIDGET (directory_view));
-	g_snprintf (screen_string, sizeof (screen_string), "%d", gdk_x11_screen_get_screen_number (screen));
+	g_snprintf (screen_string, sizeof (screen_string), "%d", cdk_x11_screen_get_screen_number (screen));
 
 
 	file = baul_file_get (new_folder);
@@ -9409,9 +9409,9 @@ schedule_pop_up_location_context_menu (FMDirectoryView *view,
 	g_assert (BAUL_IS_FILE (file));
 
 	if (view->details->location_popup_event != NULL) {
-		gdk_event_free ((GdkEvent *) view->details->location_popup_event);
+		cdk_event_free ((GdkEvent *) view->details->location_popup_event);
 	}
-	view->details->location_popup_event = (GdkEventButton *) gdk_event_copy ((GdkEvent *)event);
+	view->details->location_popup_event = (GdkEventButton *) cdk_event_copy ((GdkEvent *)event);
 
 	if (file == view->details->location_popup_directory_as_file) {
 		if (baul_file_check_if_ready (file, BAUL_FILE_ATTRIBUTE_INFO |
@@ -10384,10 +10384,10 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 
 		screen = ctk_widget_get_screen (CTK_WIDGET (view));
 		if (screen == NULL) {
-			screen = gdk_screen_get_default ();
+			screen = cdk_screen_get_default ();
 		}
 
-		cafe_gdk_spawn_command_line_on_screen(screen, command, NULL);
+		cafe_cdk_spawn_command_line_on_screen(screen, command, NULL);
 		g_free (command);
 
 		return;
@@ -10743,7 +10743,7 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 			point.y = y;
 
 			screen = ctk_widget_get_screen (CTK_WIDGET (view));
-			screen_num = gdk_x11_screen_get_screen_number (screen);
+			screen_num = cdk_x11_screen_get_screen_number (screen);
 
 			baul_link_local_create (target_uri != NULL ? target_uri : container_uri,
 						    link_name,
@@ -11035,7 +11035,7 @@ fm_directory_view_handle_scroll_event (FMDirectoryView *directory_view,
 			return TRUE;
 
 		case GDK_SCROLL_SMOOTH:
-			gdk_event_get_scroll_deltas ((const GdkEvent *) event,
+			cdk_event_get_scroll_deltas ((const GdkEvent *) event,
 			                             &delta_x, &delta_y);
 
 			/* try to emulate a normal scrolling event by summing deltas */
@@ -11256,7 +11256,7 @@ fm_directory_view_class_init (FMDirectoryViewClass *klass)
 	EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass, fm_directory_view, zoom_to_level);
 	EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass, fm_directory_view, get_zoom_level);
 
-	copied_files_atom = gdk_atom_intern ("x-special/cafe-copied-files", FALSE);
+	copied_files_atom = cdk_atom_intern ("x-special/cafe-copied-files", FALSE);
 
 	g_object_class_install_property (G_OBJECT_CLASS (klass),
 					 PROP_WINDOW_SLOT,

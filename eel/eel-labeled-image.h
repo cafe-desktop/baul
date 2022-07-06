@@ -46,7 +46,7 @@
 #ifndef EEL_LABELED_IMAGE_H
 #define EEL_LABELED_IMAGE_H
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 #include <ctk/ctk.h>
 #include "eel-art-extensions.h"
 

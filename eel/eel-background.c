@@ -27,13 +27,13 @@
 #include <config.h>
 #include <ctk/ctk.h>
 #include <cairo-xlib.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 #include <gio/gio.h>
 #include <math.h>
 #include <stdio.h>
 
 #include "eel-background.h"
-#include "eel-gdk-extensions.h"
+#include "eel-cdk-extensions.h"
 #include "eel-glib-extensions.h"
 #include "eel-lib-self-check-functions.h"
 #include "eel-canvas.h"
@@ -210,13 +210,13 @@ eel_bg_get_desktop_color (EelBackground *self)
         use_gradient = FALSE;
     }
 
-    start_color = eel_gdk_rgb_to_color_spec (eel_gdk_rgba_to_rgb (&primary));
+    start_color = eel_cdk_rgb_to_color_spec (eel_cdk_rgba_to_rgb (&primary));
 
     if (use_gradient)
     {
         char *end_color;
 
-        end_color  = eel_gdk_rgb_to_color_spec (eel_gdk_rgba_to_rgb (&secondary));
+        end_color  = eel_cdk_rgb_to_color_spec (eel_cdk_rgba_to_rgb (&secondary));
         color_spec = eel_gradient_new (start_color, end_color, is_horizontal);
         g_free (end_color);
     }
@@ -245,7 +245,7 @@ set_image_properties (EelBackground *self)
     }
     else if (!eel_gradient_is_gradient (self->details->color))
     {
-        eel_gdk_rgba_parse_with_white_default (&c, self->details->color);
+        eel_cdk_rgba_parse_with_white_default (&c, self->details->color);
         make_color_inactive (self, &c);
         cafe_bg_set_color (self->details->bg, CAFE_BG_COLOR_SOLID, &c, NULL);
     }
@@ -255,12 +255,12 @@ set_image_properties (EelBackground *self)
         char *spec;
 
         spec = eel_gradient_get_start_color_spec (self->details->color);
-        eel_gdk_rgba_parse_with_white_default (&c1, spec);
+        eel_cdk_rgba_parse_with_white_default (&c1, spec);
         make_color_inactive (self, &c1);
         g_free (spec);
 
         spec = eel_gradient_get_end_color_spec (self->details->color);
-        eel_gdk_rgba_parse_with_white_default (&c2, spec);
+        eel_cdk_rgba_parse_with_white_default (&c2, spec);
         make_color_inactive (self, &c2);
         g_free (spec);
 
@@ -311,14 +311,14 @@ drawable_get_adjusted_size (EelBackground *self,
     {
         GdkScreen *screen = ctk_widget_get_screen (self->details->widget);
         gint scale = ctk_widget_get_scale_factor (self->details->widget);
-        *width = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
-        *height = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
+        *width = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
+        *height = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
     }
     else
     {
         GdkWindow *window = ctk_widget_get_window (self->details->widget);
-        *width = gdk_window_get_width (window);
-        *height = gdk_window_get_height (window);
+        *width = cdk_window_get_width (window);
+        *height = cdk_window_get_height (window);
     }
 }
 
@@ -342,7 +342,7 @@ eel_background_ensure_realized (EelBackground *self)
                            CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                            &c, NULL);
     self->details->default_color = *c;
-    gdk_rgba_free (c);
+    cdk_rgba_free (c);
 
     ctk_style_context_restore (style);
 
@@ -397,7 +397,7 @@ eel_background_draw (CtkWidget *widget,
         cairo_set_source_surface (cr, self->details->bg_surface, 0, 0);
         cairo_pattern_set_extend (cairo_get_source (cr), CAIRO_EXTEND_REPEAT);
     } else {
-        gdk_cairo_set_source_rgba (cr, &color);
+        cdk_cairo_set_source_rgba (cr, &color);
     }
 
     cairo_rectangle (cr, 0, 0, width, height);
@@ -488,7 +488,7 @@ on_fade_finished (CafeBGCrossfade *fade,
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
 
-    set_root_surface (self, window, gdk_window_get_screen (window));
+    set_root_surface (self, window, cdk_window_get_screen (window));
 }
 
 static gboolean
@@ -637,7 +637,7 @@ widget_realized_setup (CtkWidget     *widget,
     }
 
     GdkScreen *screen = ctk_widget_get_screen (widget);
-    GdkWindow *window = gdk_screen_get_root_window (screen);
+    GdkWindow *window = cdk_screen_get_root_window (screen);
 
     if (self->details->screen_size_handler > 0)
     {
@@ -654,7 +654,7 @@ widget_realized_setup (CtkWidget     *widget,
         g_signal_connect (screen, "monitors-changed", G_CALLBACK (screen_size_changed), self);
 
     self->details->use_common_surface =
-        (gdk_window_get_visual (window) == ctk_widget_get_visual (widget)) ? TRUE : FALSE;
+        (cdk_window_get_visual (window) == ctk_widget_get_visual (widget)) ? TRUE : FALSE;
 
     init_fade (self);
 }
@@ -902,9 +902,9 @@ eel_background_is_dark (EelBackground *self)
     GdkRectangle rect;
 
     /* only check for the background on the 0th monitor */
-    GdkScreen *screen = gdk_screen_get_default ();
-    GdkDisplay *display = gdk_screen_get_display (screen);
-    gdk_monitor_get_geometry (gdk_display_get_monitor (display, 0), &rect);
+    GdkScreen *screen = cdk_screen_get_default ();
+    GdkDisplay *display = cdk_screen_get_display (screen);
+    cdk_monitor_get_geometry (cdk_display_get_monitor (display, 0), &rect);
 
     return cafe_bg_is_dark (self->details->bg, rect.width, rect.height);
 }
@@ -1091,9 +1091,9 @@ eel_background_set_dropped_color (EelBackground *self,
                                CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                &c, NULL);
         bg = *c;
-        gdk_rgba_free (c);
+        cdk_rgba_free (c);
 
-        gradient_spec = gdk_rgba_to_string (&bg);
+        gradient_spec = cdk_rgba_to_string (&bg);
 
     }
     else

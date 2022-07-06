@@ -504,7 +504,7 @@ get_surface_for_icon (GIcon *icon)
     gint icon_scale;
 
     surface = NULL;
-    icon_scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
+    icon_scale = cdk_window_get_scale_factor (cdk_get_default_root_window ());
 
     if (G_IS_FILE_ICON (icon))
     {
@@ -514,11 +514,11 @@ get_surface_for_icon (GIcon *icon)
         if (filename)
         {
             GdkPixbuf *pixbuf;
-            pixbuf = gdk_pixbuf_new_from_file_at_size (filename,
+            pixbuf = cdk_pixbuf_new_from_file_at_size (filename,
                                                        BAUL_OPEN_WITH_DIALOG_ICON_SIZE * icon_scale,
                                                        BAUL_OPEN_WITH_DIALOG_ICON_SIZE * icon_scale,
                                                        NULL);
-            surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, icon_scale, NULL);
+            surface = cdk_cairo_surface_create_from_pixbuf (pixbuf, icon_scale, NULL);
             g_object_unref (pixbuf);
         }
         g_free (filename);

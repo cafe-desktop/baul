@@ -38,8 +38,8 @@
 #include <pango/pango.h>
 #include <ctk/ctk.h>
 #include <ctk/ctk-a11y.h>
-#include <gdk/gdkx.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkx.h>
+#include <cdk/cdkkeysyms.h>
 
 #ifndef PANGO_CHECK_VERSION
 #define PANGO_CHECK_VERSION(major, minor, micro)                          \
@@ -1072,7 +1072,7 @@ eel_editable_label_ensure_layout (EelEditableLabel *label,
                 scale = ctk_widget_get_scale_factor (widget);
                 width = MIN (width, wrap_width);
                 width = MIN (width,
-                             PANGO_SCALE * (WidthOfScreen (gdk_x11_screen_get_xscreen (gdk_screen_get_default ())) / scale + 1) / 2);
+                             PANGO_SCALE * (WidthOfScreen (cdk_x11_screen_get_xscreen (cdk_screen_get_default ())) / scale + 1) / 2);
 
                 pango_layout_set_width (label->layout, width);
                 pango_layout_get_extents (label->layout, NULL, &logical_rect);
@@ -1494,7 +1494,7 @@ eel_editable_label_draw_cursor (EelEditableLabel  *label, cairo_t *cr, gint xoff
             ctk_render_insertion_cursor (context, cr,
                                          xoffset, yoffset,
                                          label->layout, index,
-                                         gdk_keymap_get_direction (gdk_keymap_get_for_display (ctk_widget_get_display (widget))));
+                                         cdk_keymap_get_direction (cdk_keymap_get_for_display (ctk_widget_get_display (widget))));
         }
         else /* Block cursor */
         {
@@ -1503,7 +1503,7 @@ eel_editable_label_draw_cursor (EelEditableLabel  *label, cairo_t *cr, gint xoff
             ctk_style_context_get_color (context, CTK_STATE_FLAG_NORMAL, &fg_color);
 
             cairo_save (cr);
-            gdk_cairo_set_source_rgba (cr, &fg_color);
+            cdk_cairo_set_source_rgba (cr, &fg_color);
             cairo_rectangle (cr,
                              xoffset + PANGO_PIXELS (strong_pos.x),
                              yoffset + PANGO_PIXELS (strong_pos.y),
@@ -1517,20 +1517,20 @@ eel_editable_label_draw_cursor (EelEditableLabel  *label, cairo_t *cr, gint xoff
                 GdkRGBA *c;
                 cairo_region_t *clip;
 
-                clip = gdk_pango_layout_get_clip_region (label->layout,
+                clip = cdk_pango_layout_get_clip_region (label->layout,
 							 xoffset, yoffset,
 							 range, 1);
 
-                gdk_cairo_region (cr, clip);
+                cdk_cairo_region (cr, clip);
                 cairo_clip (cr);
 
                 ctk_style_context_get (context, CTK_STATE_FLAG_FOCUSED,
                                        CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                        &c, NULL);
                 color = *c;
-                gdk_rgba_free (c);
+                cdk_rgba_free (c);
 
-                gdk_cairo_set_source_rgba (cr,
+                cdk_cairo_set_source_rgba (cr,
                                            &color);
                 cairo_move_to (cr, xoffset, yoffset);
                 pango_cairo_show_layout (cr, label->layout);
@@ -1603,14 +1603,14 @@ eel_editable_label_draw (CtkWidget *widget,
                 range[1] = tmp;
             }
 
-            clip = gdk_pango_layout_get_clip_region (label->layout,
+            clip = cdk_pango_layout_get_clip_region (label->layout,
                                                      x, y,
                                                      range,
                                                      1);
 
             cairo_save (cr);
 
-            gdk_cairo_region (cr, clip);
+            cdk_cairo_region (cr, clip);
             cairo_clip (cr);
 
             state = ctk_widget_get_state_flags (widget);
@@ -1620,9 +1620,9 @@ eel_editable_label_draw (CtkWidget *widget,
                                    CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                    &c, NULL);
             background_color = *c;
-            gdk_rgba_free (c);
+            cdk_rgba_free (c);
 
-            gdk_cairo_set_source_rgba (cr, &background_color);
+            cdk_cairo_set_source_rgba (cr, &background_color);
             cairo_paint (cr);
 
             ctk_style_context_save (style);
@@ -1679,7 +1679,7 @@ eel_editable_label_realize (CtkWidget *widget)
     attributes.height = allocation.height;
     attributes.visual = ctk_widget_get_visual (widget);
     display = ctk_widget_get_display (CTK_WIDGET (label));
-    attributes.cursor = gdk_cursor_new_for_display (display, GDK_XTERM);
+    attributes.cursor = cdk_cursor_new_for_display (display, GDK_XTERM);
     attributes.event_mask = ctk_widget_get_events (widget) |
                             (GDK_EXPOSURE_MASK |
                              GDK_BUTTON_PRESS_MASK |
@@ -1693,10 +1693,10 @@ eel_editable_label_realize (CtkWidget *widget)
 
     attributes_mask = GDK_WA_X | GDK_WA_Y  | GDK_WA_VISUAL | GDK_WA_CURSOR;
 
-    window = gdk_window_new (ctk_widget_get_parent_window (widget),
+    window = cdk_window_new (ctk_widget_get_parent_window (widget),
                              &attributes, attributes_mask);
     ctk_widget_set_window (widget, window);
-    gdk_window_set_user_data (window, widget);
+    cdk_window_set_user_data (window, widget);
 
     g_object_unref (attributes.cursor);
 
@@ -1922,7 +1922,7 @@ eel_editable_label_motion (CtkWidget      *widget,
     if ((event->state & GDK_BUTTON1_MASK) == 0)
         return FALSE;
 
-    gdk_window_get_device_position (ctk_widget_get_window (widget),
+    cdk_window_get_device_position (ctk_widget_get_window (widget),
                                     event->device,
                                     &x, &y, NULL);
 
@@ -2243,7 +2243,7 @@ eel_editable_label_focus_in (CtkWidget     *widget,
     label->need_im_reset = TRUE;
     ctk_im_context_focus_in (label->im_context);
 
-    g_signal_connect (gdk_keymap_get_for_display (ctk_widget_get_display (widget)),
+    g_signal_connect (cdk_keymap_get_for_display (ctk_widget_get_display (widget)),
                       "direction_changed",
                       G_CALLBACK (eel_editable_label_keymap_direction_changed), label);
 
@@ -2265,7 +2265,7 @@ eel_editable_label_focus_out (CtkWidget     *widget,
 
     eel_editable_label_check_cursor_blink (label);
 
-    g_signal_handlers_disconnect_by_func (gdk_keymap_get_for_display (ctk_widget_get_display (widget)),
+    g_signal_handlers_disconnect_by_func (cdk_keymap_get_for_display (ctk_widget_get_display (widget)),
                                           (gpointer) eel_editable_label_keymap_direction_changed,
                                           label);
 
@@ -2469,7 +2469,7 @@ get_better_cursor (EelEditableLabel *label,
                    gint      *y)
 {
     CtkTextDirection keymap_direction =
-        (gdk_keymap_get_direction (gdk_keymap_get_for_display (ctk_widget_get_display (CTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
+        (cdk_keymap_get_direction (cdk_keymap_get_for_display (ctk_widget_get_display (CTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
         CTK_TEXT_DIR_LTR : CTK_TEXT_DIR_RTL;
     CtkTextDirection widget_direction = ctk_widget_get_direction (CTK_WIDGET (label));
     gboolean split_cursor;
@@ -2571,7 +2571,7 @@ eel_editable_label_move_visually (EelEditableLabel *label,
         else
         {
             CtkTextDirection keymap_direction =
-                (gdk_keymap_get_direction (gdk_keymap_get_for_display (ctk_widget_get_display (CTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
+                (cdk_keymap_get_direction (cdk_keymap_get_for_display (ctk_widget_get_display (CTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
                 CTK_TEXT_DIR_LTR : CTK_TEXT_DIR_RTL;
 
             strong = keymap_direction == ctk_widget_get_direction (CTK_WIDGET (label));
@@ -3144,7 +3144,7 @@ eel_editable_label_do_popup (EelEditableLabel *label,
     }
 
     ctk_clipboard_request_contents (ctk_widget_get_clipboard (CTK_WIDGET (label), GDK_SELECTION_CLIPBOARD),
-                                    gdk_atom_intern ("TARGETS", FALSE),
+                                    cdk_atom_intern ("TARGETS", FALSE),
                                     popup_targets_received,
                                     info);
 }

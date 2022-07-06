@@ -25,9 +25,9 @@
 #include <config.h>
 #include <math.h>
 #include <glib/gi18n.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 #include <ctk/ctk.h>
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 #include <glib/gi18n.h>
 #include <atk/atkimage.h>
 #include <atk/atkcomponent.h>
@@ -36,8 +36,8 @@
 #include <string.h>
 
 #include <eel/eel-art-extensions.h>
-#include <eel/eel-gdk-extensions.h>
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-graphic-effects.h>
 #include <eel/eel-ctk-macros.h>
@@ -268,7 +268,7 @@ baul_icon_canvas_item_finalize (GObject *object)
 
     if (details->cursor_window != NULL)
     {
-        gdk_window_set_cursor (details->cursor_window, NULL);
+        cdk_window_set_cursor (details->cursor_window, NULL);
         g_object_unref (details->cursor_window);
     }
 
@@ -313,18 +313,18 @@ baul_icon_canvas_item_finalize (GObject *object)
 }
 
 /* Currently we require pixbufs in this format (for hit testing).
- * Perhaps gdk-pixbuf will be changed so it can do the hit testing
+ * Perhaps cdk-pixbuf will be changed so it can do the hit testing
  * and we won't have this requirement any more.
  */
 static gboolean
 pixbuf_is_acceptable (GdkPixbuf *pixbuf)
 {
-    return gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB
-           && ((!gdk_pixbuf_get_has_alpha (pixbuf)
-                && gdk_pixbuf_get_n_channels (pixbuf) == 3)
-               || (gdk_pixbuf_get_has_alpha (pixbuf)
-                   && gdk_pixbuf_get_n_channels (pixbuf) == 4))
-           && gdk_pixbuf_get_bits_per_sample (pixbuf) == 8;
+    return cdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB
+           && ((!cdk_pixbuf_get_has_alpha (pixbuf)
+                && cdk_pixbuf_get_n_channels (pixbuf) == 3)
+               || (cdk_pixbuf_get_has_alpha (pixbuf)
+                   && cdk_pixbuf_get_n_channels (pixbuf) == 4))
+           && cdk_pixbuf_get_bits_per_sample (pixbuf) == 8;
 }
 
 static void
@@ -523,9 +523,9 @@ get_scaled_icon_size (BaulIconCanvasItem *item,
     }
 
     if (width)
-        *width = (pixbuf == NULL) ? 0 : (gdk_pixbuf_get_width (pixbuf) / scale);
+        *width = (pixbuf == NULL) ? 0 : (cdk_pixbuf_get_width (pixbuf) / scale);
     if (height)
-        *height = (pixbuf == NULL) ? 0 : (gdk_pixbuf_get_height (pixbuf) / scale);
+        *height = (pixbuf == NULL) ? 0 : (cdk_pixbuf_get_height (pixbuf) / scale);
 }
 
 cairo_surface_t *
@@ -570,13 +570,13 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     width = EEL_CANVAS_ITEM (item)->x2 - EEL_CANVAS_ITEM (item)->x1;
     height = EEL_CANVAS_ITEM (item)->y2 - EEL_CANVAS_ITEM (item)->y1;
 
-    surface = gdk_window_create_similar_surface (ctk_widget_get_window (CTK_WIDGET (canvas)),
+    surface = cdk_window_create_similar_surface (ctk_widget_get_window (CTK_WIDGET (canvas)),
     						 CAIRO_CONTENT_COLOR_ALPHA,
     						 width, height);
 
     cr = cairo_create (surface);
 
-    drag_surface = gdk_cairo_surface_create_from_pixbuf (item->details->pixbuf,
+    drag_surface = cdk_cairo_surface_create_from_pixbuf (item->details->pixbuf,
                                                          ctk_widget_get_scale_factor (CTK_WIDGET (canvas)),
                                                          ctk_widget_get_window (CTK_WIDGET (canvas)));
     ctk_render_icon_surface (context, cr, drag_surface,
@@ -596,10 +596,10 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
 
     while (emblem_layout_next (&emblem_layout, &emblem_pixbuf, &emblem_rect, is_rtl))
     {
-        gdk_cairo_set_source_pixbuf (cr, emblem_pixbuf, emblem_rect.x0, emblem_rect.y0);
+        cdk_cairo_set_source_pixbuf (cr, emblem_pixbuf, emblem_rect.x0, emblem_rect.y0);
         cairo_rectangle (cr, emblem_rect.x0, emblem_rect.y0,
-                         gdk_pixbuf_get_width (emblem_pixbuf),
-                         gdk_pixbuf_get_height (emblem_pixbuf));
+                         cdk_pixbuf_get_width (emblem_pixbuf),
+                         cdk_pixbuf_get_height (emblem_pixbuf));
         cairo_fill (cr);
     }
 
@@ -1480,7 +1480,7 @@ get_knob_pixbuf (void)
         char *knob_filename;
 
         knob_filename = baul_pixmap_file ("knob.png");
-        knob_pixbuf = gdk_pixbuf_new_from_file (knob_filename, NULL);
+        knob_pixbuf = cdk_pixbuf_new_from_file (knob_filename, NULL);
         g_free (knob_filename);
     }
 
@@ -1510,12 +1510,12 @@ draw_stretch_handles (BaulIconCanvasItem *item,
     cairo_save (cr);
 
     knob_pixbuf = get_knob_pixbuf ();
-    knob_width = gdk_pixbuf_get_width (knob_pixbuf);
-    knob_height = gdk_pixbuf_get_height (knob_pixbuf);
+    knob_width = cdk_pixbuf_get_width (knob_pixbuf);
+    knob_height = cdk_pixbuf_get_height (knob_pixbuf);
 
     /* first draw the box */
     ctk_style_context_get_color (style, CTK_STATE_FLAG_SELECTED, &color);
-    gdk_cairo_set_source_rgba (cr, &color);
+    cdk_cairo_set_source_rgba (cr, &color);
 
     cairo_set_dash (cr, &dash, 1, 0);
     cairo_set_line_width (cr, 1.0);
@@ -1566,8 +1566,8 @@ emblem_layout_next (EmblemLayout *layout,
 
     /* Get the pixbuf. */
     pixbuf = layout->emblem->data;
-    width = gdk_pixbuf_get_width (pixbuf);
-    height = gdk_pixbuf_get_height (pixbuf);
+    width = cdk_pixbuf_get_width (pixbuf);
+    height = cdk_pixbuf_get_height (pixbuf);
 
 
     /* Advance to the next emblem. */
@@ -1700,7 +1700,7 @@ draw_pixbuf (GdkPixbuf *pixbuf,
              int x, int y)
 {
     cairo_save (cr);
-    gdk_cairo_set_source_pixbuf (cr, pixbuf, x, y);
+    cdk_cairo_set_source_pixbuf (cr, pixbuf, x, y);
     cairo_paint (cr);
     cairo_restore (cr);
 }
@@ -1742,12 +1742,12 @@ real_map_surface (BaulIconCanvasItem *icon_item)
             GdkPixbuf *audio_pixbuf;
             int emblem_size;
 
-            emblem_size = baul_icon_get_emblem_size_for_icon_size (gdk_pixbuf_get_width (temp_pixbuf));
+            emblem_size = baul_icon_get_emblem_size_for_icon_size (cdk_pixbuf_get_width (temp_pixbuf));
             /* Load the audio symbol. */
             audio_filename = baul_pixmap_file ("audio.svg");
             if (audio_filename != NULL)
             {
-                audio_pixbuf = gdk_pixbuf_new_from_file_at_scale (audio_filename,
+                audio_pixbuf = cdk_pixbuf_new_from_file_at_scale (audio_filename,
                                emblem_size, emblem_size,
                                TRUE,
                                NULL);
@@ -1760,12 +1760,12 @@ real_map_surface (BaulIconCanvasItem *icon_item)
             /* Composite it onto the icon. */
             if (audio_pixbuf != NULL)
             {
-                gdk_pixbuf_composite
+                cdk_pixbuf_composite
                 (audio_pixbuf,
                  temp_pixbuf,
                  0, 0,
-                 gdk_pixbuf_get_width (audio_pixbuf),
-                 gdk_pixbuf_get_height (audio_pixbuf),
+                 cdk_pixbuf_get_width (audio_pixbuf),
+                 cdk_pixbuf_get_height (audio_pixbuf),
                  0, 0,
                  1.0, 1.0,
                  GDK_INTERP_BILINEAR, 0xFF);
@@ -1795,7 +1795,7 @@ real_map_surface (BaulIconCanvasItem *icon_item)
         }
 
         color = *c;
-        gdk_rgba_free (c);
+        cdk_rgba_free (c);
 
         old_pixbuf = temp_pixbuf;
         temp_pixbuf = eel_create_colorized_pixbuf (temp_pixbuf, &color);
@@ -1803,7 +1803,7 @@ real_map_surface (BaulIconCanvasItem *icon_item)
         g_object_unref (old_pixbuf);
     }
 
-    surface = gdk_cairo_surface_create_from_pixbuf (temp_pixbuf,
+    surface = cdk_cairo_surface_create_from_pixbuf (temp_pixbuf,
                                                     ctk_widget_get_scale_factor (CTK_WIDGET (canvas)),
                                                     ctk_widget_get_window (CTK_WIDGET (canvas)));
     g_object_unref (temp_pixbuf);
@@ -2118,9 +2118,9 @@ baul_icon_canvas_item_event (EelCanvasItem *item, GdkEvent *event)
             {
                 GdkCursor *cursor;
 
-                cursor = gdk_cursor_new_for_display (gdk_display_get_default(),
+                cursor = cdk_cursor_new_for_display (cdk_display_get_default(),
                                                      GDK_HAND2);
-                gdk_window_set_cursor (cursor_window, cursor);
+                cdk_window_set_cursor (cursor_window, cursor);
                 g_object_unref (cursor);
 
                 icon_item->details->cursor_window = g_object_ref (cursor_window);
@@ -2170,7 +2170,7 @@ baul_icon_canvas_item_event (EelCanvasItem *item, GdkEvent *event)
             eel_canvas_item_request_update (item);
 
             /* show default cursor */
-            gdk_window_set_cursor (cursor_window, NULL);
+            cdk_window_set_cursor (cursor_window, NULL);
             g_clear_object (&icon_item->details->cursor_window);
         }
         return TRUE;
@@ -2201,8 +2201,8 @@ hit_test_pixbuf (GdkPixbuf *pixbuf, EelIRect pixbuf_location, EelIRect probe_rec
     relative_rect.y1 = probe_rect.y1 - pixbuf_location.y0;
     pixbuf_rect.x0 = 0;
     pixbuf_rect.y0 = 0;
-    pixbuf_rect.x1 = gdk_pixbuf_get_width (pixbuf);
-    pixbuf_rect.y1 = gdk_pixbuf_get_height (pixbuf);
+    pixbuf_rect.x1 = cdk_pixbuf_get_width (pixbuf);
+    pixbuf_rect.y1 = cdk_pixbuf_get_height (pixbuf);
     eel_irect_intersect (&relative_rect, &relative_rect, &pixbuf_rect);
     if (eel_irect_is_empty (&relative_rect))
     {
@@ -2210,19 +2210,19 @@ hit_test_pixbuf (GdkPixbuf *pixbuf, EelIRect pixbuf_location, EelIRect probe_rec
     }
 
     /* If there's no alpha channel, it's opaque and we have a hit. */
-    if (!gdk_pixbuf_get_has_alpha (pixbuf))
+    if (!cdk_pixbuf_get_has_alpha (pixbuf))
     {
         return TRUE;
     }
-    g_assert (gdk_pixbuf_get_n_channels (pixbuf) == 4);
+    g_assert (cdk_pixbuf_get_n_channels (pixbuf) == 4);
 
     /* Check the alpha channel of the pixel to see if we have a hit. */
     for (x = relative_rect.x0; x < relative_rect.x1; x++)
     {
         for (y = relative_rect.y0; y < relative_rect.y1; y++)
         {
-            pixel = gdk_pixbuf_get_pixels (pixbuf)
-                    + y * gdk_pixbuf_get_rowstride (pixbuf)
+            pixel = cdk_pixbuf_get_pixels (pixbuf)
+                    + y * cdk_pixbuf_get_rowstride (pixbuf)
                     + x * 4;
             if (pixel[3] > 1)
             {
@@ -2622,8 +2622,8 @@ hit_test_stretch_handle (BaulIconCanvasItem *item,
     }
 
     knob_pixbuf = get_knob_pixbuf ();
-    knob_width = gdk_pixbuf_get_width (knob_pixbuf);
-    knob_height = gdk_pixbuf_get_height (knob_pixbuf);
+    knob_width = cdk_pixbuf_get_width (knob_pixbuf);
+    knob_height = cdk_pixbuf_get_height (knob_pixbuf);
     g_object_unref (knob_pixbuf);
 
     /* Check for hits in the stretch handles. */
