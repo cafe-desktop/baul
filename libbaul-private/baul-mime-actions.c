@@ -1460,7 +1460,7 @@ search_for_application_mime_type (ActivateParametersInstall *parameters_install,
     window = ctk_widget_get_window (CTK_WIDGET (parameters_install->parent_window));
     if (window != NULL)
     {
-        xid = GDK_WINDOW_XID (window);
+        xid = CDK_WINDOW_XID (window);
     }
 
     mime_types[0] = mime_type;

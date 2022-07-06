@@ -196,11 +196,11 @@ baul_desktop_window_new (BaulApplication *application,
     ctk_widget_realize (CTK_WIDGET (window));
     cdkwin = ctk_widget_get_window (CTK_WIDGET (window));
     if (cdk_window_ensure_native (cdkwin)) {
-        Display *disp = GDK_DISPLAY_XDISPLAY (cdk_window_get_display (cdkwin));
+        Display *disp = CDK_DISPLAY_XDISPLAY (cdk_window_get_display (cdkwin));
         XClassHint *xch = XAllocClassHint ();
         xch->res_name = "desktop_window";
         xch->res_class = "Baul";
-        XSetClassHint (disp, GDK_WINDOW_XID(cdkwin), xch);
+        XSetClassHint (disp, CDK_WINDOW_XID(cdkwin), xch);
         XFree(xch);
     }
 
@@ -259,7 +259,7 @@ set_wmspec_desktop_hint (CdkWindow *window)
     cdk_property_change (window,
                          cdk_atom_intern ("_NET_WM_WINDOW_TYPE", FALSE),
                          cdk_x11_xatom_to_atom (XA_ATOM), 32,
-                         GDK_PROP_MODE_REPLACE, (guchar *) &atom, 1);
+                         CDK_PROP_MODE_REPLACE, (guchar *) &atom, 1);
 }
 
 static void
@@ -274,12 +274,12 @@ set_desktop_window_id (BaulDesktopWindow *window,
     root_window = cdk_screen_get_root_window (
                       ctk_window_get_screen (CTK_WINDOW (window)));
 
-    window_xid = GDK_WINDOW_XID (cdkwindow);
+    window_xid = CDK_WINDOW_XID (cdkwindow);
 
     cdk_property_change (root_window,
                          cdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", FALSE),
                          cdk_x11_xatom_to_atom (XA_WINDOW), 32,
-                         GDK_PROP_MODE_REPLACE, (guchar *) &window_xid, 1);
+                         CDK_PROP_MODE_REPLACE, (guchar *) &window_xid, 1);
 }
 
 static void
@@ -292,7 +292,7 @@ realize (CtkWidget *widget)
 
     /* Make sure we get keyboard events */
     ctk_widget_set_events (widget, ctk_widget_get_events (widget)
-                           | GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
+                           | CDK_KEY_PRESS_MASK | CDK_KEY_RELEASE_MASK);
     /* Do the work of realizing. */
     CTK_WIDGET_CLASS (baul_desktop_window_parent_class)->realize (widget);
 

@@ -183,7 +183,7 @@ select_button_press_callback (CtkWidget *widget,
 
     side_pane = BAUL_SIDE_PANE (user_data);
 
-    if ((event->type == GDK_BUTTON_PRESS) && event->button == 1)
+    if ((event->type == CDK_BUTTON_PRESS) && event->button == 1)
     {
         CtkRequisition requisition;
         CtkAllocation allocation;
@@ -201,8 +201,8 @@ select_button_press_callback (CtkWidget *widget,
         ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (widget), TRUE);
         ctk_menu_popup_at_widget (CTK_MENU (side_pane->details->menu),
                                   widget,
-                                  GDK_GRAVITY_SOUTH_WEST,
-                                  GDK_GRAVITY_NORTH_WEST,
+                                  CDK_GRAVITY_SOUTH_WEST,
+                                  CDK_GRAVITY_NORTH_WEST,
                                   (const CdkEvent*) event);
 
         return TRUE;
@@ -219,16 +219,16 @@ select_button_key_press_callback (CtkWidget *widget,
 
     side_pane = BAUL_SIDE_PANE (user_data);
 
-    if (event->keyval == GDK_KEY_space ||
-        event->keyval == GDK_KEY_KP_Space ||
-        event->keyval == GDK_KEY_Return ||
-        event->keyval == GDK_KEY_KP_Enter)
+    if (event->keyval == CDK_KEY_space ||
+        event->keyval == CDK_KEY_KP_Space ||
+        event->keyval == CDK_KEY_Return ||
+        event->keyval == CDK_KEY_KP_Enter)
     {
         ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (widget), TRUE);
         ctk_menu_popup_at_widget (CTK_MENU (side_pane->details->menu),
                                   widget,
-                                  GDK_GRAVITY_SOUTH_WEST,
-                                  GDK_GRAVITY_NORTH_WEST,
+                                  CDK_GRAVITY_SOUTH_WEST,
+                                  CDK_GRAVITY_NORTH_WEST,
                                   (const CdkEvent*) event);
         return TRUE;
     }
@@ -570,7 +570,7 @@ baul_side_pane_set_panel_image (BaulSidePane *side_pane,
     g_return_if_fail (BAUL_IS_SIDE_PANE (side_pane));
     g_return_if_fail (widget != NULL);
     g_return_if_fail (CTK_IS_WIDGET (widget));
-    g_return_if_fail (pixbuf == NULL || GDK_IS_PIXBUF (pixbuf));
+    g_return_if_fail (pixbuf == NULL || CDK_IS_PIXBUF (pixbuf));
 
     panel = panel_for_widget (side_pane, widget);
 

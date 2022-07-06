@@ -471,7 +471,7 @@ baul_location_bar_class_init (BaulLocationBarClass *klass)
             G_TYPE_NONE, 1, G_TYPE_STRING);
 
     binding_set = ctk_binding_set_by_class (klass);
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_Escape, 0, "cancel", 0);
 }
 
 static void
@@ -517,9 +517,9 @@ baul_location_bar_init (BaulLocationBar *bar)
 
     /* Drag source */
     ctk_drag_source_set (CTK_WIDGET (event_box),
-                         GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
+                         CDK_BUTTON1_MASK | CDK_BUTTON3_MASK,
                          drag_types, G_N_ELEMENTS (drag_types),
-                         GDK_ACTION_COPY | GDK_ACTION_LINK);
+                         CDK_ACTION_COPY | CDK_ACTION_LINK);
     g_signal_connect_object (event_box, "drag_data_get",
                              G_CALLBACK (drag_data_get_callback), bar, 0);
 
@@ -527,7 +527,7 @@ baul_location_bar_init (BaulLocationBar *bar)
     ctk_drag_dest_set (CTK_WIDGET (bar),
                        CTK_DEST_DEFAULT_ALL,
                        drop_types, G_N_ELEMENTS (drop_types),
-                       GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+                       CDK_ACTION_COPY | CDK_ACTION_MOVE | CDK_ACTION_LINK);
     g_signal_connect (bar, "drag_data_received",
                       G_CALLBACK (drag_data_received_callback), NULL);
 

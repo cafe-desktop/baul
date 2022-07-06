@@ -106,7 +106,7 @@ baul_search_bar_class_init (BaulSearchBarClass *class)
                       G_TYPE_NONE, 0);
 
     binding_set = ctk_binding_set_by_class (class);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_Escape, 0, "cancel", 0);
 }
 
 static gboolean
@@ -200,7 +200,7 @@ baul_search_bar_borrow_entry (BaulSearchBar *bar)
     bar->details->entry_borrowed = TRUE;
 
     binding_set = ctk_binding_set_by_class (G_OBJECT_GET_CLASS (bar));
-	ctk_binding_entry_remove (binding_set, GDK_KEY_Escape, 0);
+	ctk_binding_entry_remove (binding_set, CDK_KEY_Escape, 0);
     return bar->details->entry;
 }
 
@@ -212,7 +212,7 @@ baul_search_bar_return_entry (BaulSearchBar *bar)
     bar->details->entry_borrowed = FALSE;
 
     binding_set = ctk_binding_set_by_class (G_OBJECT_GET_CLASS (bar));
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_Escape, 0, "cancel", 0);
 }
 
 CtkWidget *

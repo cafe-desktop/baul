@@ -558,7 +558,7 @@ create_image_widget (FMPropertiesWindow *window,
 		ctk_drag_dest_set (CTK_WIDGET (image),
 				   CTK_DEST_DEFAULT_MOTION | CTK_DEST_DEFAULT_HIGHLIGHT | CTK_DEST_DEFAULT_DROP,
 				   target_table, G_N_ELEMENTS (target_table),
-				   GDK_ACTION_COPY | GDK_ACTION_MOVE);
+				   CDK_ACTION_COPY | CDK_ACTION_MOVE);
 
 		g_signal_connect (image, "drag_data_received",
 				  G_CALLBACK (fm_properties_window_drag_data_received), NULL);
@@ -3524,7 +3524,7 @@ start_long_operation (FMPropertiesWindow *window)
 		CdkCursor * cursor;
 
 		display = ctk_widget_get_display (CTK_WIDGET (window));
-		cursor = cdk_cursor_new_for_display (display, GDK_WATCH);
+		cursor = cdk_cursor_new_for_display (display, CDK_WATCH);
 		cdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), cursor);
 		g_object_unref (cursor);
 	}
@@ -5136,7 +5136,7 @@ create_properties_window (StartupData *startup_data)
 	ctk_window_set_screen (CTK_WINDOW (window),
 			       ctk_widget_get_screen (startup_data->parent_widget));
 
-	ctk_window_set_type_hint (CTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DIALOG);
+	ctk_window_set_type_hint (CTK_WINDOW (window), CDK_WINDOW_TYPE_HINT_DIALOG);
 
 	/* Set initial window title */
 	update_properties_window_title (window);
@@ -5197,7 +5197,7 @@ create_properties_window (StartupData *startup_data)
 	window->details->notebook = CTK_NOTEBOOK (ctk_notebook_new ());
 
         ctk_notebook_set_scrollable (CTK_NOTEBOOK (window->details->notebook), TRUE);
-        ctk_widget_add_events (CTK_WIDGET (window->details->notebook), GDK_SCROLL_MASK);
+        ctk_widget_add_events (CTK_WIDGET (window->details->notebook), CDK_SCROLL_MASK);
         g_signal_connect (window->details->notebook,
                           "scroll-event",
                           G_CALLBACK (eel_dialog_page_scroll_event_callback),
@@ -5678,7 +5678,7 @@ update_preview_callback (CtkFileChooser *icon_chooser,
 				(pixbuf,
 				 PREVIEW_IMAGE_WIDTH,
 				 scale * PREVIEW_IMAGE_WIDTH,
-				 GDK_INTERP_HYPER);
+				 CDK_INTERP_HYPER);
 			g_object_unref (pixbuf);
 			pixbuf = scaled_pixbuf;
 		}
@@ -5816,7 +5816,7 @@ fm_properties_window_class_init (FMPropertiesWindowClass *class)
 	CTK_DIALOG_CLASS (class)->response = real_response;
 
 	binding_set = ctk_binding_set_by_class (class);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_Escape, 0,
 				      "close", 0);
 }
 

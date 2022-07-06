@@ -109,7 +109,7 @@ baul_entry_key_press (CtkWidget *widget, CdkEventKey *event)
 
     switch (event->keyval)
     {
-    case GDK_KEY_Tab:
+    case CDK_KEY_Tab:
         /* The location bar entry wants TAB to work kind of
          * like it does in the shell for command completion,
          * so if we get a tab and there's a selection, we

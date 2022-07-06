@@ -279,7 +279,7 @@ extern "C" {
     void eel_canvas_item_reparent (EelCanvasItem *item, EelCanvasGroup *new_group);
 
     /* Used to send all of the keystroke events to a specific item as well as
-     * GDK_FOCUS_CHANGE events.
+     * CDK_FOCUS_CHANGE events.
      */
     void eel_canvas_item_grab_focus (EelCanvasItem *item);
 

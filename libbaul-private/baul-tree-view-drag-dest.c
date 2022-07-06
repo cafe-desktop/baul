@@ -279,7 +279,7 @@ get_drag_data (BaulTreeViewDragDest *dest,
                                         context,
                                         NULL);
 
-    if (target == GDK_NONE)
+    if (target == CDK_NONE)
     {
         return FALSE;
     }
@@ -479,7 +479,7 @@ get_drop_action (BaulTreeViewDragDest *dest,
     case BAUL_ICON_DND_TEXT:
     case BAUL_ICON_DND_RAW:
     case BAUL_ICON_DND_XDNDDIRECTSAVE:
-        return GDK_ACTION_COPY;
+        return CDK_ACTION_COPY;
 
     case BAUL_ICON_DND_KEYWORD:
 
@@ -488,7 +488,7 @@ get_drop_action (BaulTreeViewDragDest *dest,
             return 0;
         }
 
-        return GDK_ACTION_COPY;
+        return CDK_ACTION_COPY;
     }
 
     return 0;
@@ -661,16 +661,16 @@ receive_uris (BaulTreeViewDragDest *dest,
 
     real_action = cdk_drag_context_get_selected_action (context);
 
-    if (real_action == GDK_ACTION_ASK)
+    if (real_action == CDK_ACTION_ASK)
     {
         if (baul_drag_selection_includes_special_link (dest->details->drag_list))
         {
             /* We only want to move the trash */
-            action = GDK_ACTION_MOVE;
+            action = CDK_ACTION_MOVE;
         }
         else
         {
-            action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK;
+            action = CDK_ACTION_MOVE | CDK_ACTION_COPY | CDK_ACTION_LINK;
         }
         real_action = baul_drag_drop_action_ask
                       (CTK_WIDGET (dest->details->tree_view), action);
@@ -679,13 +679,13 @@ receive_uris (BaulTreeViewDragDest *dest,
     /* We only want to copy external uris */
     if (dest->details->drag_type == BAUL_ICON_DND_URI_LIST)
     {
-        action = GDK_ACTION_COPY;
+        action = CDK_ACTION_COPY;
     }
 
     if (real_action > 0)
     {
         if (!baul_drag_uris_local (drop_target, source_uris)
-                || real_action != GDK_ACTION_MOVE)
+                || real_action != CDK_ACTION_MOVE)
         {
             g_signal_emit (dest, signals[MOVE_COPY_ITEMS], 0,
                            source_uris,
@@ -1048,7 +1048,7 @@ set_direct_save_uri (BaulTreeViewDragDest *dest,
             cdk_property_change (cdk_drag_context_get_source_window (context),
                                  cdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
                                  cdk_atom_intern ("text/plain", FALSE), 8,
-                                 GDK_PROP_MODE_REPLACE, (const guchar *) uri,
+                                 CDK_PROP_MODE_REPLACE, (const guchar *) uri,
                                  strlen (uri));
 
             dest->details->direct_save_uri = uri;
@@ -1085,7 +1085,7 @@ drag_drop_callback (CtkWidget *widget,
     target = ctk_drag_dest_find_target (CTK_WIDGET (dest->details->tree_view),
                                         context,
                                         NULL);
-    if (target == GDK_NONE)
+    if (target == CDK_NONE)
     {
         return FALSE;
     }
@@ -1209,7 +1209,7 @@ baul_tree_view_drag_dest_class_init (BaulTreeViewDragDestClass *class)
                       G_TYPE_NONE, 5,
                       G_TYPE_POINTER,
                       G_TYPE_STRING,
-                      GDK_TYPE_DRAG_ACTION,
+                      CDK_TYPE_DRAG_ACTION,
                       G_TYPE_INT,
                       G_TYPE_INT);
     signals[HANDLE_NETSCAPE_URL] =
@@ -1223,7 +1223,7 @@ baul_tree_view_drag_dest_class_init (BaulTreeViewDragDestClass *class)
                       G_TYPE_NONE, 5,
                       G_TYPE_STRING,
                       G_TYPE_STRING,
-                      GDK_TYPE_DRAG_ACTION,
+                      CDK_TYPE_DRAG_ACTION,
                       G_TYPE_INT,
                       G_TYPE_INT);
     signals[HANDLE_URI_LIST] =
@@ -1237,7 +1237,7 @@ baul_tree_view_drag_dest_class_init (BaulTreeViewDragDestClass *class)
                       G_TYPE_NONE, 5,
                       G_TYPE_STRING,
                       G_TYPE_STRING,
-                      GDK_TYPE_DRAG_ACTION,
+                      CDK_TYPE_DRAG_ACTION,
                       G_TYPE_INT,
                       G_TYPE_INT);
     signals[HANDLE_TEXT] =
@@ -1251,7 +1251,7 @@ baul_tree_view_drag_dest_class_init (BaulTreeViewDragDestClass *class)
                       G_TYPE_NONE, 5,
                       G_TYPE_STRING,
                       G_TYPE_STRING,
-                      GDK_TYPE_DRAG_ACTION,
+                      CDK_TYPE_DRAG_ACTION,
                       G_TYPE_INT,
                       G_TYPE_INT);
     signals[HANDLE_RAW] =
@@ -1267,7 +1267,7 @@ baul_tree_view_drag_dest_class_init (BaulTreeViewDragDestClass *class)
                       G_TYPE_INT,
                       G_TYPE_STRING,
                       G_TYPE_STRING,
-                      GDK_TYPE_DRAG_ACTION,
+                      CDK_TYPE_DRAG_ACTION,
                       G_TYPE_INT,
                       G_TYPE_INT);
 }
@@ -1288,7 +1288,7 @@ baul_tree_view_drag_dest_new (CtkTreeView *tree_view)
 
     ctk_drag_dest_set (CTK_WIDGET (tree_view),
                        0, drag_types, G_N_ELEMENTS (drag_types),
-                       GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK);
+                       CDK_ACTION_MOVE | CDK_ACTION_COPY | CDK_ACTION_LINK | CDK_ACTION_ASK);
 
     targets = ctk_drag_dest_get_target_list (CTK_WIDGET (tree_view));
     ctk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);

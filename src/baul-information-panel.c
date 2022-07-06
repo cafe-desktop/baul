@@ -250,7 +250,7 @@ baul_information_panel_init (BaulInformationPanel *information_panel)
     baul_information_panel_read_defaults (information_panel);
 
     /* enable mouse tracking */
-    ctk_widget_add_events (CTK_WIDGET (information_panel), GDK_POINTER_MOTION_MASK);
+    ctk_widget_add_events (CTK_WIDGET (information_panel), CDK_POINTER_MOTION_MASK);
 
     /* create the container box */
     information_panel->details->container = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
@@ -287,7 +287,7 @@ baul_information_panel_init (BaulInformationPanel *information_panel)
     ctk_drag_dest_set (CTK_WIDGET (information_panel),
                        CTK_DEST_DEFAULT_MOTION | CTK_DEST_DEFAULT_HIGHLIGHT | CTK_DEST_DEFAULT_DROP,
                        target_table, G_N_ELEMENTS (target_table),
-                       GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_ASK);
+                       CDK_ACTION_COPY | CDK_ACTION_MOVE | CDK_ACTION_ASK);
 }
 
 static void
@@ -498,7 +498,7 @@ receive_dropped_uri_list (BaulInformationPanel *information_panel,
          */
         if (exactly_one && uri_is_local_image (uris[0]))
         {
-            if (action == GDK_ACTION_ASK)
+            if (action == CDK_ACTION_ASK)
             {
                 action = baul_drag_drop_background_ask (CTK_WIDGET (information_panel),
                              BAUL_DND_ACTION_SET_AS_BACKGROUND | BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND);
@@ -598,7 +598,7 @@ receive_dropped_color (BaulInformationPanel *information_panel,
         break;
     case ICON_PART:
     case BACKGROUND_PART:
-        if (action == GDK_ACTION_ASK)
+        if (action == CDK_ACTION_ASK)
         {
             action = baul_drag_drop_background_ask (CTK_WIDGET (information_panel),
                          BAUL_DND_ACTION_SET_AS_BACKGROUND | BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND);

@@ -457,7 +457,7 @@ set_direct_save_uri (CtkWidget *widget, CdkDragContext *context, BaulDragInfo *d
         cdk_property_change (cdk_drag_context_get_source_window (context),
                              cdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
                              cdk_atom_intern ("text/plain", FALSE), 8,
-                             GDK_PROP_MODE_REPLACE, (const guchar *) uri,
+                             CDK_PROP_MODE_REPLACE, (const guchar *) uri,
                              strlen (uri));
 
         drag_info->direct_save_uri = uri;
@@ -497,7 +497,7 @@ get_data_on_first_target_we_support (CtkWidget *widget, CdkDragContext *context,
     }
 
     target = ctk_drag_dest_find_target (widget, context, list);
-    if (target != GDK_NONE)
+    if (target != CDK_NONE)
     {
         guint info;
         BaulDragInfo *drag_info;
@@ -650,7 +650,7 @@ get_background_drag_action (BaulIconContainer *container,
      * should be moved out of baul-icon-dnd.c */
     CdkDragAction valid_actions;
 
-    if (action == GDK_ACTION_ASK)
+    if (action == CDK_ACTION_ASK)
     {
         valid_actions = BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND;
         if (!eel_background_is_desktop (eel_get_widget_background (CTK_WIDGET (container))))
@@ -1242,18 +1242,18 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
 
     real_action = cdk_drag_context_get_selected_action (context);
 
-    if (real_action == GDK_ACTION_ASK)
+    if (real_action == CDK_ACTION_ASK)
     {
         /* FIXME bugzilla.gnome.org 42485: This belongs in FMDirectoryView, not here. */
         /* Check for special case items in selection list */
         if (baul_drag_selection_includes_special_link (container->details->dnd_info->drag_info.selection_list))
         {
             /* We only want to move the trash */
-            action = GDK_ACTION_MOVE;
+            action = CDK_ACTION_MOVE;
         }
         else
         {
-            action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK;
+            action = CDK_ACTION_MOVE | CDK_ACTION_COPY | CDK_ACTION_LINK;
 
             if (selection_is_image_file (container->details->dnd_info->drag_info.selection_list))
             {
@@ -1284,7 +1284,7 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
                       context, x, y, &icon_hit, FALSE);
 
         local_move_only = FALSE;
-        if (!icon_hit && real_action == GDK_ACTION_MOVE)
+        if (!icon_hit && real_action == CDK_ACTION_MOVE)
         {
             /* we can just move the icon positions if the move ended up in
              * the item's parent container
@@ -1382,7 +1382,7 @@ baul_icon_container_get_drop_action (BaulIconContainer *container,
     case BAUL_ICON_DND_TEXT:
     case BAUL_ICON_DND_XDNDDIRECTSAVE:
     case BAUL_ICON_DND_RAW:
-        *action = GDK_ACTION_COPY;
+        *action = CDK_ACTION_COPY;
         break;
     }
 }
@@ -1961,7 +1961,7 @@ baul_icon_dnd_init (BaulIconContainer *container)
     ctk_drag_dest_set (CTK_WIDGET (container),
                        0,
                        drop_types, n_elements,
-                       GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
+                       CDK_ACTION_COPY | CDK_ACTION_MOVE | CDK_ACTION_LINK | CDK_ACTION_ASK);
 
     targets = ctk_drag_dest_get_target_list (CTK_WIDGET (container));
     ctk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);

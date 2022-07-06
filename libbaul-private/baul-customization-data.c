@@ -407,12 +407,12 @@ baul_customization_make_pattern_chit (CdkPixbuf *pattern_tile, CdkPixbuf *frame,
                       0, 0,
                       (double)(frame_width - 8 + 1)/pattern_width,
                       (double)(frame_height - 8 + 1)/pattern_height,
-                      GDK_INTERP_BILINEAR);
+                      CDK_INTERP_BILINEAR);
 
     /* if we're dragging, get rid of the light-colored halo */
     if (dragging)
     {
-        temp_pixbuf = cdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, frame_width - 8, frame_height - 8);
+        temp_pixbuf = cdk_pixbuf_new (CDK_COLORSPACE_RGB, TRUE, 8, frame_width - 8, frame_height - 8);
         cdk_pixbuf_copy_area (pixbuf, 2, 2, frame_width - 8, frame_height - 8, temp_pixbuf, 0, 0);
         g_object_unref (pixbuf);
         pixbuf = temp_pixbuf;

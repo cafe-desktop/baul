@@ -73,7 +73,7 @@ eel_ctk_window_get_geometry_string (CtkWindow *window)
 
     g_return_val_if_fail (CTK_IS_WINDOW (window), NULL);
     g_return_val_if_fail (ctk_window_get_gravity (window) ==
-                          GDK_GRAVITY_NORTH_WEST, NULL);
+                          CDK_GRAVITY_NORTH_WEST, NULL);
 
     ctk_window_get_position (window, &x, &y);
     ctk_window_get_size (window, &w, &h);
@@ -172,7 +172,7 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
      */
     g_return_if_fail (!ctk_widget_get_visible (CTK_WIDGET (window)));
 
-    if ((geometry_flags & EEL_GDK_X_VALUE) && (geometry_flags & EEL_GDK_Y_VALUE))
+    if ((geometry_flags & EEL_CDK_X_VALUE) && (geometry_flags & EEL_CDK_Y_VALUE))
     {
         CdkScreen *screen;
         int screen_width, screen_height;
@@ -186,17 +186,17 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
         screen_width  = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
         screen_height = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
 
-        /* This is sub-optimal. GDK doesn't allow us to set win_gravity
+        /* This is sub-optimal. CDK doesn't allow us to set win_gravity
          * to South/East types, which should be done if using negative
          * positions (so that the right or bottom edge of the window
          * appears at the specified position, not the left or top).
          * However it does seem to be consistent with other CAFE apps.
          */
-        if (geometry_flags & EEL_GDK_X_NEGATIVE)
+        if (geometry_flags & EEL_CDK_X_NEGATIVE)
         {
             real_left = screen_width - real_left;
         }
-        if (geometry_flags & EEL_GDK_Y_NEGATIVE)
+        if (geometry_flags & EEL_CDK_Y_NEGATIVE)
         {
             real_top = screen_height - real_top;
         }
@@ -205,7 +205,7 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
         ctk_window_move (window, real_left, real_top);
     }
 
-    if ((geometry_flags & EEL_GDK_WIDTH_VALUE) && (geometry_flags & EEL_GDK_HEIGHT_VALUE))
+    if ((geometry_flags & EEL_CDK_WIDTH_VALUE) && (geometry_flags & EEL_CDK_HEIGHT_VALUE))
     {
         sanity_check_window_dimensions (&width, &height);
         ctk_window_set_default_size (CTK_WINDOW (window), (int)width, (int)height);
@@ -254,11 +254,11 @@ eel_ctk_window_set_initial_geometry_from_string (CtkWindow *window,
     /* Make sure the window isn't smaller than makes sense for this window.
      * Other sanity checks are performed in set_initial_geometry.
      */
-    if (geometry_flags & EEL_GDK_WIDTH_VALUE)
+    if (geometry_flags & EEL_CDK_WIDTH_VALUE)
     {
         width = MAX (width, minimum_width);
     }
-    if (geometry_flags & EEL_GDK_HEIGHT_VALUE)
+    if (geometry_flags & EEL_CDK_HEIGHT_VALUE)
     {
         height = MAX (height, minimum_height);
     }
@@ -266,7 +266,7 @@ eel_ctk_window_set_initial_geometry_from_string (CtkWindow *window,
     /* Ignore saved window position if requested. */
     if (ignore_position)
     {
-        geometry_flags &= ~(EEL_GDK_X_VALUE | EEL_GDK_Y_VALUE);
+        geometry_flags &= ~(EEL_CDK_X_VALUE | EEL_CDK_Y_VALUE);
     }
 
     eel_ctk_window_set_initial_geometry (window, geometry_flags, left, top, width, height);
@@ -375,7 +375,7 @@ tree_view_button_press_callback (CtkWidget *tree_view,
     CtkTreePath *path;
     CtkTreeViewColumn *column;
 
-    if (event->button == 1 && event->type == GDK_BUTTON_PRESS)
+    if (event->button == 1 && event->type == CDK_BUTTON_PRESS)
     {
         if (ctk_tree_view_get_path_at_pos (CTK_TREE_VIEW (tree_view),
                                            event->x, event->y,
@@ -536,15 +536,15 @@ eel_dialog_page_scroll_event_callback (CtkWidget *widget, CdkEventScroll *event,
         return FALSE;
 
     switch (event->direction) {
-    case GDK_SCROLL_RIGHT:
-    case GDK_SCROLL_DOWN:
+    case CDK_SCROLL_RIGHT:
+    case CDK_SCROLL_DOWN:
         ctk_notebook_next_page (notebook);
         break;
-    case GDK_SCROLL_LEFT:
-    case GDK_SCROLL_UP:
+    case CDK_SCROLL_LEFT:
+    case CDK_SCROLL_UP:
         ctk_notebook_prev_page (notebook);
         break;
-    case GDK_SCROLL_SMOOTH:
+    case CDK_SCROLL_SMOOTH:
         switch (ctk_notebook_get_tab_pos (notebook)) {
             case CTK_POS_LEFT:
             case CTK_POS_RIGHT:

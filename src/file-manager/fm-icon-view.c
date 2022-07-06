@@ -2086,24 +2086,24 @@ icon_container_activate_alternate_callback (BaulIconContainer *container,
 
         event = ctk_get_current_event ();
 
-        if (event->type == GDK_BUTTON_PRESS ||
-                event->type == GDK_BUTTON_RELEASE ||
-                event->type == GDK_2BUTTON_PRESS ||
-                event->type == GDK_3BUTTON_PRESS)
+        if (event->type == CDK_BUTTON_PRESS ||
+                event->type == CDK_BUTTON_RELEASE ||
+                event->type == CDK_2BUTTON_PRESS ||
+                event->type == CDK_3BUTTON_PRESS)
         {
             CdkEventButton *button_event;
 
             button_event = (CdkEventButton *) event;
-            open_in_tab = (button_event->state & GDK_SHIFT_MASK) == 0;
+            open_in_tab = (button_event->state & CDK_SHIFT_MASK) == 0;
         }
-        else if (event->type == GDK_KEY_PRESS ||
-                 event->type == GDK_KEY_RELEASE)
+        else if (event->type == CDK_KEY_PRESS ||
+                 event->type == CDK_KEY_RELEASE)
         {
             CdkEventKey *key_event;
 
             key_event = (CdkEventKey *) event;
-            open_in_tab = !((key_event->state & GDK_SHIFT_MASK) != 0 &&
-                            (key_event->state & GDK_CONTROL_MASK) != 0);
+            open_in_tab = !((key_event->state & CDK_SHIFT_MASK) != 0 &&
+                            (key_event->state & CDK_CONTROL_MASK) != 0);
         }
         else
         {
@@ -2535,11 +2535,11 @@ fm_icon_view_scroll_event (CtkWidget *widget,
         if((ret = fm_directory_view_handle_scroll_event(FM_DIRECTORY_VIEW(icon_view), scroll_event)))
             return ret;
 
-        if(scroll_event->direction == GDK_SCROLL_UP)
-            scroll_event->direction = GDK_SCROLL_LEFT;
-        else if(scroll_event->direction == GDK_SCROLL_DOWN)
-            scroll_event->direction = GDK_SCROLL_RIGHT;
-        else if(scroll_event->direction == GDK_SCROLL_SMOOTH)
+        if(scroll_event->direction == CDK_SCROLL_UP)
+            scroll_event->direction = CDK_SCROLL_LEFT;
+        else if(scroll_event->direction == CDK_SCROLL_DOWN)
+            scroll_event->direction = CDK_SCROLL_RIGHT;
+        else if(scroll_event->direction == CDK_SCROLL_SMOOTH)
         {
             /* no x value implies only vertical scrolling enabled */
             if(scroll_event->delta_x == 0.0)

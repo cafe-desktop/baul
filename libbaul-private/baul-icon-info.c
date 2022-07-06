@@ -509,7 +509,7 @@ baul_icon_info_get_pixbuf (BaulIconInfo *icon)
     if (res == NULL)
     {
         res = cdk_pixbuf_new_from_data (baul_default_file_icon,
-                                        GDK_COLORSPACE_RGB,
+                                        CDK_COLORSPACE_RGB,
                                         TRUE,
                                         8,
                                         baul_default_file_icon_width,
@@ -559,7 +559,7 @@ baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
     scale = (double)forced_size / s;
     scaled_pixbuf = cdk_pixbuf_scale_simple (pixbuf,
                     w * scale, h * scale,
-                    GDK_INTERP_BILINEAR);
+                    CDK_INTERP_BILINEAR);
     g_object_unref (pixbuf);
     return scaled_pixbuf;
 }
@@ -605,7 +605,7 @@ baul_icon_info_get_pixbuf_at_size (BaulIconInfo  *icon,
     scale = (double)forced_size / s;
     scaled_pixbuf = cdk_pixbuf_scale_simple (pixbuf,
                     w * scale, h * scale,
-                    GDK_INTERP_BILINEAR);
+                    CDK_INTERP_BILINEAR);
     g_object_unref (pixbuf);
     return scaled_pixbuf;
 }

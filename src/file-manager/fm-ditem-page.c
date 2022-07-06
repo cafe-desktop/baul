@@ -393,7 +393,7 @@ build_grid (CtkWidget *container,
             ctk_drag_dest_set (CTK_WIDGET (entry),
                                CTK_DEST_DEFAULT_MOTION | CTK_DEST_DEFAULT_HIGHLIGHT | CTK_DEST_DEFAULT_DROP,
                                target_table, G_N_ELEMENTS (target_table),
-                               GDK_ACTION_COPY | GDK_ACTION_MOVE);
+                               CDK_ACTION_COPY | CDK_ACTION_MOVE);
 
             g_signal_connect (entry, "drag_data_received",
                               G_CALLBACK (fm_ditem_page_url_drag_data_received),
@@ -404,7 +404,7 @@ build_grid (CtkWidget *container,
             ctk_drag_dest_set (CTK_WIDGET (entry),
                                CTK_DEST_DEFAULT_MOTION | CTK_DEST_DEFAULT_HIGHLIGHT | CTK_DEST_DEFAULT_DROP,
                                target_table, G_N_ELEMENTS (target_table),
-                               GDK_ACTION_COPY | GDK_ACTION_MOVE);
+                               CDK_ACTION_COPY | CDK_ACTION_MOVE);
 
             g_signal_connect (entry, "drag_data_received",
                               G_CALLBACK (fm_ditem_page_exec_drag_data_received),

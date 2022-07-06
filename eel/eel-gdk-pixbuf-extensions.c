@@ -189,7 +189,7 @@ eel_cdk_pixbuf_scale_to_fit (CdkPixbuf *pixbuf, int max_width, int max_height)
                                  max_width, max_height,
                                  &scaled_width, &scaled_height);
 
-    return cdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, GDK_INTERP_BILINEAR);
+    return cdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, CDK_INTERP_BILINEAR);
 }
 
 /* Returns a copy of pixbuf scaled down, preserving aspect ratio, to fit
@@ -246,7 +246,7 @@ eel_cdk_pixbuf_scale_to_min (CdkPixbuf *pixbuf, int min_width, int min_height)
                                  min_width, min_height,
                                  &scaled_width, &scaled_height);
 
-    return cdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, GDK_INTERP_BILINEAR);
+    return cdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, CDK_INTERP_BILINEAR);
 }
 
 gboolean
@@ -317,7 +317,7 @@ eel_cdk_pixbuf_scale_down (CdkPixbuf *pixbuf,
     source_rowstride = cdk_pixbuf_get_rowstride (pixbuf);
     src_pixels = cdk_pixbuf_get_pixels (pixbuf);
 
-    dest_pixbuf = cdk_pixbuf_new (GDK_COLORSPACE_RGB, has_alpha, 8,
+    dest_pixbuf = cdk_pixbuf_new (CDK_COLORSPACE_RGB, has_alpha, 8,
                                   dest_width, dest_height);
     dest = cdk_pixbuf_get_pixels (dest_pixbuf);
     dest_rowstride = cdk_pixbuf_get_rowstride (dest_pixbuf);

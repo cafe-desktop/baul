@@ -128,7 +128,7 @@ should_open_in_new_tab (void)
         return FALSE;
     }
 
-    if (event->type == GDK_BUTTON_PRESS || event->type == GDK_BUTTON_RELEASE)
+    if (event->type == CDK_BUTTON_PRESS || event->type == CDK_BUTTON_RELEASE)
     {
         return event->button.button == 2;
     }

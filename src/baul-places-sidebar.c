@@ -1046,7 +1046,7 @@ clicked_eject_button (BaulPlacesSidebar *sidebar,
     CdkEvent *event = ctk_get_current_event ();
     CdkEventButton *button_event = (CdkEventButton *) event;
 
-    if ((event->type == GDK_BUTTON_PRESS || event->type == GDK_BUTTON_RELEASE) &&
+    if ((event->type == CDK_BUTTON_PRESS || event->type == CDK_BUTTON_RELEASE) &&
          over_eject_button (sidebar, button_event->x, button_event->y, path)) {
         return TRUE;
     }
@@ -1189,7 +1189,7 @@ get_drag_data (CtkTreeView *tree_view,
                                         context,
                                         NULL);
 
-    if (target == GDK_NONE)
+    if (target == CDK_NONE)
     {
         return FALSE;
     }
@@ -1281,11 +1281,11 @@ drag_motion_callback (CtkTreeView *tree_view,
         if (sidebar->drag_data_received &&
             sidebar->drag_data_info == CTK_TREE_MODEL_ROW)
         {
-            action = GDK_ACTION_MOVE;
+            action = CDK_ACTION_MOVE;
         }
         else if (can_accept_items_as_bookmarks (sidebar->drag_list))
         {
-            action = GDK_ACTION_COPY;
+            action = CDK_ACTION_COPY;
         }
         else
         {
@@ -1512,7 +1512,7 @@ drag_data_received_callback (CtkWidget *widget,
 
     if (!sidebar->drag_data_received)
     {
-        if (ctk_selection_data_get_target (selection_data) != GDK_NONE &&
+        if (ctk_selection_data_get_target (selection_data) != CDK_NONE &&
                 info == TEXT_URI_LIST)
         {
             sidebar->drag_list = build_selection_list (ctk_selection_data_get_data (selection_data));
@@ -1592,7 +1592,7 @@ drag_data_received_callback (CtkWidget *widget,
         /* file transfer requested */
         real_action = cdk_drag_context_get_selected_action (context);
 
-        if (real_action == GDK_ACTION_ASK)
+        if (real_action == CDK_ACTION_ASK)
         {
             real_action =
                 baul_drag_drop_action_ask (CTK_WIDGET (tree_view),
@@ -2630,16 +2630,16 @@ bookmarks_key_press_event_cb (CtkWidget             *widget,
 
     modifiers = ctk_accelerator_get_default_mod_mask ();
 
-    if (event->keyval == GDK_KEY_Return ||
-        event->keyval == GDK_KEY_KP_Enter ||
-        event->keyval == GDK_KEY_ISO_Enter ||
-        event->keyval == GDK_KEY_space)
+    if (event->keyval == CDK_KEY_Return ||
+        event->keyval == CDK_KEY_KP_Enter ||
+        event->keyval == CDK_KEY_ISO_Enter ||
+        event->keyval == CDK_KEY_space)
     {
         CtkTreeModel *model;
 
-        if ((event->state & modifiers) == GDK_SHIFT_MASK)
+        if ((event->state & modifiers) == CDK_SHIFT_MASK)
             flags = BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
-        else if ((event->state & modifiers) == GDK_CONTROL_MASK)
+        else if ((event->state & modifiers) == CDK_CONTROL_MASK)
             flags = BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW;
 
         model = ctk_tree_view_get_model(sidebar->tree_view);
@@ -2651,21 +2651,21 @@ bookmarks_key_press_event_cb (CtkWidget             *widget,
         return TRUE;
     }
 
-    if (event->keyval == GDK_KEY_Down &&
-            (event->state & modifiers) == GDK_MOD1_MASK)
+    if (event->keyval == CDK_KEY_Down &&
+            (event->state & modifiers) == CDK_MOD1_MASK)
     {
         return eject_or_unmount_selection (sidebar);
     }
 
-    if ((event->keyval == GDK_KEY_Delete
-            || event->keyval == GDK_KEY_KP_Delete)
+    if ((event->keyval == CDK_KEY_Delete
+            || event->keyval == CDK_KEY_KP_Delete)
             && (event->state & modifiers) == 0)
     {
         remove_selected_bookmarks (sidebar);
         return TRUE;
     }
 
-    if ((event->keyval == GDK_KEY_F2)
+    if ((event->keyval == CDK_KEY_F2)
             && (event->state & modifiers) == 0)
     {
         rename_selected_bookmark (sidebar);
@@ -2833,7 +2833,7 @@ bookmarks_button_release_event_cb (CtkWidget *widget,
 
     path = NULL;
 
-    if (event->type != GDK_BUTTON_RELEASE)
+    if (event->type != CDK_BUTTON_RELEASE)
     {
         return TRUE;
     }
@@ -2972,7 +2972,7 @@ bookmarks_button_press_event_cb (CtkWidget             *widget,
                                  CdkEventButton        *event,
                                  BaulPlacesSidebar *sidebar)
 {
-    if (event->type != GDK_BUTTON_PRESS)
+    if (event->type != CDK_BUTTON_PRESS)
     {
         /* ignore multiple clicks */
         return TRUE;
@@ -2997,7 +2997,7 @@ bookmarks_button_press_event_cb (CtkWidget             *widget,
                                        &path, NULL, NULL, NULL);
 
         open_selected_bookmark (sidebar, model, path,
-                                event->state & GDK_CONTROL_MASK ?
+                                event->state & CDK_CONTROL_MASK ?
                                 BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW :
                                 BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
 
@@ -3315,14 +3315,14 @@ baul_places_sidebar_init (BaulPlacesSidebar *sidebar)
                                             NULL);
 
     ctk_tree_view_enable_model_drag_source (CTK_TREE_VIEW (tree_view),
-                                            GDK_BUTTON1_MASK,
+                                            CDK_BUTTON1_MASK,
                                             baul_shortcuts_source_targets,
                                             G_N_ELEMENTS (baul_shortcuts_source_targets),
-                                            GDK_ACTION_MOVE);
+                                            CDK_ACTION_MOVE);
     ctk_drag_dest_set (CTK_WIDGET (tree_view),
                        0,
                        baul_shortcuts_drop_targets, G_N_ELEMENTS (baul_shortcuts_drop_targets),
-                       GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+                       CDK_ACTION_MOVE | CDK_ACTION_COPY | CDK_ACTION_LINK);
 
     g_signal_connect (tree_view, "key-press-event",
                       G_CALLBACK (bookmarks_key_press_event_cb), sidebar);

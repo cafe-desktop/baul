@@ -134,8 +134,8 @@ zoom_popup_menu_show (CtkWidget *widget, CdkEventButton *event, BaulZoomControl 
     menu = create_zoom_menu (zoom_control);
     ctk_menu_popup_at_widget (menu,
                               widget,
-                              GDK_GRAVITY_SOUTH_WEST,
-                              GDK_GRAVITY_NORTH_WEST,
+                              CDK_GRAVITY_SOUTH_WEST,
+                              CDK_GRAVITY_NORTH_WEST,
                               (const CdkEvent*) event);
 }
 
@@ -147,8 +147,8 @@ zoom_popup_menu (CtkWidget *widget, BaulZoomControl *zoom_control)
     menu = create_zoom_menu (zoom_control);
     ctk_menu_popup_at_widget (menu,
                               widget,
-                              GDK_GRAVITY_SOUTH_WEST,
-                              GDK_GRAVITY_NORTH_WEST,
+                              CDK_GRAVITY_SOUTH_WEST,
+                              CDK_GRAVITY_NORTH_WEST,
                               NULL);
 
     ctk_menu_shell_select_first (CTK_MENU_SHELL (menu), FALSE);
@@ -160,7 +160,7 @@ baul_zoom_control_button_press_event (CtkWidget *widget,
                                       CdkEventButton *event,
                                       BaulZoomControl *zoom_control)
 {
-    if (event->type != GDK_BUTTON_PRESS)
+    if (event->type != CDK_BUTTON_PRESS)
     {
         return FALSE;
     }
@@ -273,10 +273,10 @@ baul_zoom_control_init (BaulZoomControl *zoom_control)
                                  _("Use the normal view size"));
 
     ctk_widget_add_events (CTK_WIDGET (zoom_control->details->zoom_button),
-                           GDK_BUTTON_PRESS_MASK
-                           | GDK_BUTTON_RELEASE_MASK
-                           | GDK_POINTER_MOTION_MASK
-                           | GDK_SCROLL_MASK);
+                           CDK_BUTTON_PRESS_MASK
+                           | CDK_BUTTON_RELEASE_MASK
+                           | CDK_POINTER_MOTION_MASK
+                           | CDK_SCROLL_MASK);
 
     g_signal_connect (G_OBJECT (zoom_control->details->zoom_button),
                       "button-press-event",
@@ -551,17 +551,17 @@ baul_zoom_control_scroll_event (CtkWidget *widget, CdkEventScroll *event)
 
     zoom_control = BAUL_ZOOM_CONTROL (widget);
 
-    if (event->type != GDK_SCROLL)
+    if (event->type != CDK_SCROLL)
     {
         return FALSE;
     }
 
-    if (event->direction == GDK_SCROLL_DOWN &&
+    if (event->direction == CDK_SCROLL_DOWN &&
             baul_zoom_control_can_zoom_out (zoom_control))
     {
         g_signal_emit (widget, signals[ZOOM_OUT], 0);
     }
-    else if (event->direction == GDK_SCROLL_UP &&
+    else if (event->direction == CDK_SCROLL_UP &&
              baul_zoom_control_can_zoom_in (zoom_control))
     {
         g_signal_emit (widget, signals[ZOOM_IN], 0);
@@ -651,32 +651,32 @@ baul_zoom_control_class_init (BaulZoomControlClass *class)
     binding_set = ctk_binding_set_by_class (class);
 
     ctk_binding_entry_add_signal (binding_set,
-				      GDK_KEY_KP_Subtract, 0,
+				      CDK_KEY_KP_Subtract, 0,
                                   "change_value",
                                   1, CTK_TYPE_SCROLL_TYPE,
                                   CTK_SCROLL_STEP_DOWN);
     ctk_binding_entry_add_signal (binding_set,
-				      GDK_KEY_minus, 0,
+				      CDK_KEY_minus, 0,
                                   "change_value",
                                   1, CTK_TYPE_SCROLL_TYPE,
                                   CTK_SCROLL_STEP_DOWN);
 
     ctk_binding_entry_add_signal (binding_set,
-				      GDK_KEY_KP_Equal, 0,
+				      CDK_KEY_KP_Equal, 0,
                                   "zoom_to_default",
                                   0);
     ctk_binding_entry_add_signal (binding_set,
-				      GDK_KEY_KP_Equal, 0,
+				      CDK_KEY_KP_Equal, 0,
                                   "zoom_to_default",
                                   0);
 
     ctk_binding_entry_add_signal (binding_set,
-				      GDK_KEY_KP_Add, 0,
+				      CDK_KEY_KP_Add, 0,
                                   "change_value",
                                   1, CTK_TYPE_SCROLL_TYPE,
                                   CTK_SCROLL_STEP_UP);
     ctk_binding_entry_add_signal (binding_set,
-				      GDK_KEY_plus, 0,
+				      CDK_KEY_plus, 0,
                                   "change_value",
                                   1, CTK_TYPE_SCROLL_TYPE,
                                   CTK_SCROLL_STEP_UP);

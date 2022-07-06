@@ -166,7 +166,7 @@ set_paste_sensitive_if_clipboard_contains_data (CtkActionGroup *action_group)
 {
     if (cdk_display_supports_selection_notification (cdk_display_get_default ()))
     {
-        ctk_clipboard_request_contents (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD),
+        ctk_clipboard_request_contents (ctk_clipboard_get (CDK_SELECTION_CLIPBOARD),
                                         cdk_atom_intern ("TARGETS", FALSE),
                                         received_clipboard_contents,
                                         g_object_ref (action_group));
@@ -336,7 +336,7 @@ merge_in_clipboard_menu_items (GObject *widget_as_object,
 
     set_paste_sensitive_if_clipboard_contains_data (target_data->action_group);
 
-    g_signal_connect (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD), "owner_change",
+    g_signal_connect (ctk_clipboard_get (CDK_SELECTION_CLIPBOARD), "owner_change",
                       G_CALLBACK (owner_change_callback), target_data);
 
     if (add_selection_callback)
@@ -363,7 +363,7 @@ merge_out_clipboard_menu_items (GObject *widget_as_object,
     ctk_ui_manager_remove_action_group (target_data->ui_manager,
                                         target_data->action_group);
 
-    g_signal_handlers_disconnect_matched (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD),
+    g_signal_handlers_disconnect_matched (ctk_clipboard_get (CDK_SELECTION_CLIPBOARD),
                                           G_SIGNAL_MATCH_FUNC | G_SIGNAL_MATCH_DATA,
                                           0, 0, NULL,
                                           G_CALLBACK (owner_change_callback),
@@ -654,7 +654,7 @@ CtkClipboard *
 baul_clipboard_get (CtkWidget *widget)
 {
     return ctk_clipboard_get_for_display (ctk_widget_get_display (CTK_WIDGET (widget)),
-                                          GDK_SELECTION_CLIPBOARD);
+                                          CDK_SELECTION_CLIPBOARD);
 }
 
 void

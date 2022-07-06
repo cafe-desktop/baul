@@ -887,9 +887,9 @@ seat_grab_prepare_window (CdkSeat *seat,
  * to the specified item, and also grabs the seat by calling cdk_seat_grab().
  * If @cursor is not NULL, then that cursor is used while the grab is active.
  *
- * Return value: If an item was already grabbed, it returns %GDK_GRAB_ALREADY_GRABBED. If
+ * Return value: If an item was already grabbed, it returns %CDK_GRAB_ALREADY_GRABBED. If
  * the specified item was hidden by calling eel_canvas_item_hide(), then it
- * returns %GDK_GRAB_NOT_VIEWABLE. Else, it returns the result of calling
+ * returns %CDK_GRAB_NOT_VIEWABLE. Else, it returns the result of calling
  * cdk_seat_grab().
  **/
 CdkGrabStatus
@@ -902,29 +902,29 @@ eel_canvas_item_grab (EelCanvasItem *item,
     CdkDisplay *display;
     CdkSeat *seat;
 
-    g_return_val_if_fail (EEL_IS_CANVAS_ITEM (item), GDK_GRAB_NOT_VIEWABLE);
+    g_return_val_if_fail (EEL_IS_CANVAS_ITEM (item), CDK_GRAB_NOT_VIEWABLE);
     g_return_val_if_fail (ctk_widget_get_mapped (CTK_WIDGET (item->canvas)),
-                          GDK_GRAB_NOT_VIEWABLE);
+                          CDK_GRAB_NOT_VIEWABLE);
 
     if (item->canvas->grabbed_item)
-        return GDK_GRAB_ALREADY_GRABBED;
+        return CDK_GRAB_ALREADY_GRABBED;
 
     if (!(item->flags & EEL_CANVAS_ITEM_MAPPED))
-        return GDK_GRAB_NOT_VIEWABLE;
+        return CDK_GRAB_NOT_VIEWABLE;
 
     display = ctk_widget_get_display (CTK_WIDGET (item->canvas));
     seat = cdk_display_get_default_seat (display);
 
     retval = cdk_seat_grab (seat,
                             ctk_layout_get_bin_window (CTK_LAYOUT (item->canvas)),
-                            GDK_SEAT_CAPABILITY_ALL_POINTING,
+                            CDK_SEAT_CAPABILITY_ALL_POINTING,
                             FALSE,
                             cursor,
                             event,
                             seat_grab_prepare_window,
                             NULL);
 
-    if (retval != GDK_GRAB_SUCCESS)
+    if (retval != CDK_GRAB_SUCCESS)
         return retval;
 
     item->canvas->grabbed_item = item;
@@ -1091,7 +1091,7 @@ eel_canvas_item_grab_focus (EelCanvasItem *item)
 
     if (focused_item)
     {
-        ev.focus_change.type = GDK_FOCUS_CHANGE;
+        ev.focus_change.type = CDK_FOCUS_CHANGE;
         ev.focus_change.window = ctk_layout_get_bin_window (CTK_LAYOUT (item->canvas));
         ev.focus_change.send_event = FALSE;
         ev.focus_change.in = FALSE;
@@ -1104,7 +1104,7 @@ eel_canvas_item_grab_focus (EelCanvasItem *item)
 
     if (focused_item)
     {
-        ev.focus_change.type = GDK_FOCUS_CHANGE;
+        ev.focus_change.type = CDK_FOCUS_CHANGE;
         ev.focus_change.window = ctk_layout_get_bin_window (CTK_LAYOUT (item->canvas));
         ev.focus_change.send_event = FALSE;
         ev.focus_change.in = TRUE;
@@ -2100,7 +2100,7 @@ eel_canvas_init (EelCanvas *canvas)
 
     canvas->pixels_per_unit = 1.0;
 
-    canvas->pick_event.type = GDK_LEAVE_NOTIFY;
+    canvas->pick_event.type = CDK_LEAVE_NOTIFY;
     canvas->pick_event.crossing.x = 0;
     canvas->pick_event.crossing.y = 0;
 
@@ -2265,15 +2265,15 @@ eel_canvas_realize (CtkWidget *widget)
 
     cdk_window_set_events (ctk_layout_get_bin_window (CTK_LAYOUT (canvas)),
     		       (cdk_window_get_events (ctk_layout_get_bin_window (CTK_LAYOUT (canvas)))
-                            | GDK_EXPOSURE_MASK
-                            | GDK_BUTTON_PRESS_MASK
-                            | GDK_BUTTON_RELEASE_MASK
-                            | GDK_POINTER_MOTION_MASK
-                            | GDK_KEY_PRESS_MASK
-                            | GDK_KEY_RELEASE_MASK
-                            | GDK_ENTER_NOTIFY_MASK
-                            | GDK_LEAVE_NOTIFY_MASK
-                            | GDK_FOCUS_CHANGE_MASK));
+                            | CDK_EXPOSURE_MASK
+                            | CDK_BUTTON_PRESS_MASK
+                            | CDK_BUTTON_RELEASE_MASK
+                            | CDK_POINTER_MOTION_MASK
+                            | CDK_KEY_PRESS_MASK
+                            | CDK_KEY_RELEASE_MASK
+                            | CDK_ENTER_NOTIFY_MASK
+                            | CDK_LEAVE_NOTIFY_MASK
+                            | CDK_FOCUS_CHANGE_MASK));
 
     /* Create our own temporary pixmap gc and realize all the items */
 
@@ -2486,34 +2486,34 @@ emit_event (EelCanvas *canvas, CdkEvent *event)
     {
         switch (event->type)
         {
-        case GDK_ENTER_NOTIFY:
-            mask = GDK_ENTER_NOTIFY_MASK;
+        case CDK_ENTER_NOTIFY:
+            mask = CDK_ENTER_NOTIFY_MASK;
             break;
 
-        case GDK_LEAVE_NOTIFY:
-            mask = GDK_LEAVE_NOTIFY_MASK;
+        case CDK_LEAVE_NOTIFY:
+            mask = CDK_LEAVE_NOTIFY_MASK;
             break;
 
-        case GDK_MOTION_NOTIFY:
-            mask = GDK_POINTER_MOTION_MASK;
+        case CDK_MOTION_NOTIFY:
+            mask = CDK_POINTER_MOTION_MASK;
             break;
 
-        case GDK_BUTTON_PRESS:
-        case GDK_2BUTTON_PRESS:
-        case GDK_3BUTTON_PRESS:
-            mask = GDK_BUTTON_PRESS_MASK;
+        case CDK_BUTTON_PRESS:
+        case CDK_2BUTTON_PRESS:
+        case CDK_3BUTTON_PRESS:
+            mask = CDK_BUTTON_PRESS_MASK;
             break;
 
-        case GDK_BUTTON_RELEASE:
-            mask = GDK_BUTTON_RELEASE_MASK;
+        case CDK_BUTTON_RELEASE:
+            mask = CDK_BUTTON_RELEASE_MASK;
             break;
 
-        case GDK_KEY_PRESS:
-            mask = GDK_KEY_PRESS_MASK;
+        case CDK_KEY_PRESS:
+            mask = CDK_KEY_PRESS_MASK;
             break;
 
-        case GDK_KEY_RELEASE:
-            mask = GDK_KEY_RELEASE_MASK;
+        case CDK_KEY_RELEASE:
+            mask = CDK_KEY_RELEASE_MASK;
             break;
 
         default:
@@ -2533,18 +2533,18 @@ emit_event (EelCanvas *canvas, CdkEvent *event)
 
     switch (ev.type)
     {
-    case GDK_ENTER_NOTIFY:
-    case GDK_LEAVE_NOTIFY:
+    case CDK_ENTER_NOTIFY:
+    case CDK_LEAVE_NOTIFY:
         eel_canvas_window_to_world (canvas,
                                     ev.crossing.x, ev.crossing.y,
                                     &ev.crossing.x, &ev.crossing.y);
         break;
 
-    case GDK_MOTION_NOTIFY:
-    case GDK_BUTTON_PRESS:
-    case GDK_2BUTTON_PRESS:
-    case GDK_3BUTTON_PRESS:
-    case GDK_BUTTON_RELEASE:
+    case CDK_MOTION_NOTIFY:
+    case CDK_BUTTON_PRESS:
+    case CDK_2BUTTON_PRESS:
+    case CDK_3BUTTON_PRESS:
+    case CDK_BUTTON_RELEASE:
         eel_canvas_window_to_world (canvas,
                                     ev.motion.x, ev.motion.y,
                                     &ev.motion.x, &ev.motion.y);
@@ -2559,9 +2559,9 @@ emit_event (EelCanvas *canvas, CdkEvent *event)
     item = canvas->current_item;
 
     if (canvas->focused_item
-            && ((event->type == GDK_KEY_PRESS) ||
-                (event->type == GDK_KEY_RELEASE) ||
-                (event->type == GDK_FOCUS_CHANGE)))
+            && ((event->type == CDK_KEY_PRESS) ||
+                (event->type == CDK_KEY_RELEASE) ||
+                (event->type == CDK_FOCUS_CHANGE)))
         item = canvas->focused_item;
 
     /* The event is propagated up the hierarchy (for if someone connected to
@@ -2604,11 +2604,11 @@ pick_current_item (EelCanvas *canvas, CdkEvent *event)
      * current item, but not enter on any other item.  This is more or less
      * like X pointer grabbing for canvas items.
      */
-    button_down = canvas->state & (GDK_BUTTON1_MASK
-                                   | GDK_BUTTON2_MASK
-                                   | GDK_BUTTON3_MASK
-                                   | GDK_BUTTON4_MASK
-                                   | GDK_BUTTON5_MASK);
+    button_down = canvas->state & (CDK_BUTTON1_MASK
+                                   | CDK_BUTTON2_MASK
+                                   | CDK_BUTTON3_MASK
+                                   | CDK_BUTTON4_MASK
+                                   | CDK_BUTTON5_MASK);
     if (!button_down)
         canvas->left_grabbed_item = FALSE;
 
@@ -2619,24 +2619,24 @@ pick_current_item (EelCanvas *canvas, CdkEvent *event)
      */
     if (event != &canvas->pick_event)
     {
-        if ((event->type == GDK_MOTION_NOTIFY) || (event->type == GDK_BUTTON_RELEASE))
+        if ((event->type == CDK_MOTION_NOTIFY) || (event->type == CDK_BUTTON_RELEASE))
         {
             /* these fields have the same offsets in both types of events */
 
-            canvas->pick_event.crossing.type       = GDK_ENTER_NOTIFY;
+            canvas->pick_event.crossing.type       = CDK_ENTER_NOTIFY;
             canvas->pick_event.crossing.window     = event->motion.window;
             canvas->pick_event.crossing.send_event = event->motion.send_event;
             canvas->pick_event.crossing.subwindow  = NULL;
             canvas->pick_event.crossing.x          = event->motion.x;
             canvas->pick_event.crossing.y          = event->motion.y;
-            canvas->pick_event.crossing.mode       = GDK_CROSSING_NORMAL;
-            canvas->pick_event.crossing.detail     = GDK_NOTIFY_NONLINEAR;
+            canvas->pick_event.crossing.mode       = CDK_CROSSING_NORMAL;
+            canvas->pick_event.crossing.detail     = CDK_NOTIFY_NONLINEAR;
             canvas->pick_event.crossing.focus      = FALSE;
             canvas->pick_event.crossing.state      = event->motion.state;
 
             /* these fields don't have the same offsets in both types of events */
 
-            if (event->type == GDK_MOTION_NOTIFY)
+            if (event->type == CDK_MOTION_NOTIFY)
             {
                 canvas->pick_event.crossing.x_root = event->motion.x_root;
                 canvas->pick_event.crossing.y_root = event->motion.y_root;
@@ -2658,11 +2658,11 @@ pick_current_item (EelCanvas *canvas, CdkEvent *event)
 
     /* LeaveNotify means that there is no current item, so we don't look for one */
 
-    if (canvas->pick_event.type != GDK_LEAVE_NOTIFY)
+    if (canvas->pick_event.type != CDK_LEAVE_NOTIFY)
     {
         /* these fields don't have the same offsets in both types of events */
 
-        if (canvas->pick_event.type == GDK_ENTER_NOTIFY)
+        if (canvas->pick_event.type == CDK_ENTER_NOTIFY)
         {
             x = canvas->pick_event.crossing.x;
             y = canvas->pick_event.crossing.y;
@@ -2704,9 +2704,9 @@ pick_current_item (EelCanvas *canvas, CdkEvent *event)
         CdkEvent new_event;
 
         new_event = canvas->pick_event;
-        new_event.type = GDK_LEAVE_NOTIFY;
+        new_event.type = CDK_LEAVE_NOTIFY;
 
-        new_event.crossing.detail = GDK_NOTIFY_ANCESTOR;
+        new_event.crossing.detail = CDK_NOTIFY_ANCESTOR;
         new_event.crossing.subwindow = NULL;
         canvas->in_repick = TRUE;
         retval = emit_event (canvas, &new_event);
@@ -2732,8 +2732,8 @@ pick_current_item (EelCanvas *canvas, CdkEvent *event)
         CdkEvent new_event;
 
         new_event = canvas->pick_event;
-        new_event.type = GDK_ENTER_NOTIFY;
-        new_event.crossing.detail = GDK_NOTIFY_ANCESTOR;
+        new_event.type = CDK_ENTER_NOTIFY;
+        new_event.crossing.detail = CDK_NOTIFY_ANCESTOR;
         new_event.crossing.subwindow = NULL;
         retval = emit_event (canvas, &new_event);
     }
@@ -2770,19 +2770,19 @@ eel_canvas_button (CtkWidget *widget, CdkEventButton *event)
     switch (event->button)
     {
     case 1:
-        mask = GDK_BUTTON1_MASK;
+        mask = CDK_BUTTON1_MASK;
         break;
     case 2:
-        mask = GDK_BUTTON2_MASK;
+        mask = CDK_BUTTON2_MASK;
         break;
     case 3:
-        mask = GDK_BUTTON3_MASK;
+        mask = CDK_BUTTON3_MASK;
         break;
     case 4:
-        mask = GDK_BUTTON4_MASK;
+        mask = CDK_BUTTON4_MASK;
         break;
     case 5:
-        mask = GDK_BUTTON5_MASK;
+        mask = CDK_BUTTON5_MASK;
         break;
     default:
         mask = 0;
@@ -2790,9 +2790,9 @@ eel_canvas_button (CtkWidget *widget, CdkEventButton *event)
 
     switch (event->type)
     {
-    case GDK_BUTTON_PRESS:
-    case GDK_2BUTTON_PRESS:
-    case GDK_3BUTTON_PRESS:
+    case CDK_BUTTON_PRESS:
+    case CDK_2BUTTON_PRESS:
+    case CDK_3BUTTON_PRESS:
         /* Pick the current item as if the button were not pressed, and
          * then process the event.
          */
@@ -2804,7 +2804,7 @@ eel_canvas_button (CtkWidget *widget, CdkEventButton *event)
         retval = emit_event (canvas, (CdkEvent *) event);
         break;
 
-    case GDK_BUTTON_RELEASE:
+    case CDK_BUTTON_RELEASE:
         /* Process the event as if the button were pressed, then repick
          * after the button has been released
          */
@@ -2855,7 +2855,7 @@ eel_canvas_key (CtkWidget *widget, CdkEventKey *event)
 
     if (emit_event (canvas, (CdkEvent *) event))
         return TRUE;
-    if (event->type == GDK_KEY_RELEASE)
+    if (event->type == CDK_KEY_RELEASE)
         return CTK_WIDGET_CLASS (canvas_parent_class)->key_release_event (widget, event);
     else
         return CTK_WIDGET_CLASS (canvas_parent_class)->key_press_event (widget, event);
@@ -3111,7 +3111,7 @@ add_idle (EelCanvas *canvas)
          * will be updated during the expose event.  canvas in
          * expose_event.
          */
-        canvas->idle_id = g_idle_add_full (GDK_PRIORITY_REDRAW - 20,
+        canvas->idle_id = g_idle_add_full (CDK_PRIORITY_REDRAW - 20,
                                            idle_handler, canvas, NULL);
     }
 }
@@ -3294,17 +3294,17 @@ eel_canvas_set_pixels_per_unit (EelCanvas *canvas, double n)
     window = NULL;
     if (ctk_widget_get_mapped (widget))
     {
-        attributes.window_type = GDK_WINDOW_CHILD;
+        attributes.window_type = CDK_WINDOW_CHILD;
         ctk_widget_get_allocation (widget, &allocation);
         attributes.x = allocation.x;
         attributes.y = allocation.y;
         attributes.width = allocation.width;
         attributes.height = allocation.height;
-        attributes.wclass = GDK_INPUT_OUTPUT;
+        attributes.wclass = CDK_INPUT_OUTPUT;
         attributes.visual = ctk_widget_get_visual (widget);
-        attributes.event_mask = GDK_VISIBILITY_NOTIFY_MASK;
+        attributes.event_mask = CDK_VISIBILITY_NOTIFY_MASK;
 
-        attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL;
+        attributes_mask = CDK_WA_X | CDK_WA_Y | CDK_WA_VISUAL;
 
         window = cdk_window_new (ctk_widget_get_parent_window (widget),
                                  &attributes, attributes_mask);
@@ -4028,7 +4028,7 @@ eel_canvas_item_class_init (EelCanvasItemClass *klass)
                       boolean_handled_accumulator, NULL,
                       eel_marshal_BOOLEAN__BOXED,
                       G_TYPE_BOOLEAN, 1,
-                      GDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
+                      CDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
 
     item_signals[ITEM_DESTROY] =
         g_signal_new ("destroy",

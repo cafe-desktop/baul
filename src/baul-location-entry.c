@@ -138,28 +138,28 @@ entry_would_have_inserted_characters (const CdkEventKey *event)
 {
     switch (event->keyval)
     {
-    case GDK_KEY_BackSpace:
-    case GDK_KEY_Clear:
-    case GDK_KEY_Insert:
-    case GDK_KEY_Delete:
-    case GDK_KEY_Home:
-    case GDK_KEY_End:
-    case GDK_KEY_KP_Home:
-    case GDK_KEY_KP_End:
-    case GDK_KEY_Left:
-    case GDK_KEY_Right:
-    case GDK_KEY_KP_Left:
-    case GDK_KEY_KP_Right:
-    case GDK_KEY_Return:
+    case CDK_KEY_BackSpace:
+    case CDK_KEY_Clear:
+    case CDK_KEY_Insert:
+    case CDK_KEY_Delete:
+    case CDK_KEY_Home:
+    case CDK_KEY_End:
+    case CDK_KEY_KP_Home:
+    case CDK_KEY_KP_End:
+    case CDK_KEY_Left:
+    case CDK_KEY_Right:
+    case CDK_KEY_KP_Left:
+    case CDK_KEY_KP_Right:
+    case CDK_KEY_Return:
         return FALSE;
     default:
         if (event->keyval >= 0x20 && event->keyval <= 0xFF)
         {
-            if ((event->state & GDK_CONTROL_MASK) != 0)
+            if ((event->state & CDK_CONTROL_MASK) != 0)
             {
                 return FALSE;
             }
-            if ((event->state & GDK_MOD1_MASK) != 0)
+            if ((event->state & CDK_MOD1_MASK) != 0)
             {
                 return FALSE;
             }
@@ -227,7 +227,7 @@ editable_event_after_callback (CtkEntry *entry,
     CtkEditable *editable;
     CdkEventKey *keyevent;
 
-    if (event->type != GDK_KEY_PRESS)
+    if (event->type != CDK_KEY_PRESS)
     {
         return;
     }
@@ -240,8 +240,8 @@ editable_event_after_callback (CtkEntry *entry,
      * likely an auto-completion. We ignore shift / control since
      * they can validly be used to extend the selection.
      */
-	if ((keyevent->keyval == GDK_KEY_Right || keyevent->keyval == GDK_KEY_End) &&
-            !(keyevent->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) &&
+	if ((keyevent->keyval == CDK_KEY_Right || keyevent->keyval == CDK_KEY_End) &&
+            !(keyevent->state & (CDK_SHIFT_MASK | CDK_CONTROL_MASK)) &&
             ctk_editable_get_selection_bounds (editable, NULL, NULL))
     {
         set_position_and_selection_to_end (editable);

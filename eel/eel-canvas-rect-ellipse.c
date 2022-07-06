@@ -157,14 +157,14 @@ eel_canvas_re_class_init (EelCanvasREClass *klass)
     (gobject_class,
      PROP_FILL_COLOR_RGBA,
      g_param_spec_boxed ("fill-color-rgba", NULL, NULL,
-                         GDK_TYPE_RGBA,
+                         CDK_TYPE_RGBA,
 
                          G_PARAM_READWRITE));
     g_object_class_install_property
     (gobject_class,
      PROP_OUTLINE_COLOR_RGBA,
      g_param_spec_boxed ("outline-color-rgba", NULL, NULL,
-                         GDK_TYPE_RGBA,
+                         CDK_TYPE_RGBA,
                          G_PARAM_READWRITE));
 
 	g_object_class_install_property

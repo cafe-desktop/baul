@@ -765,7 +765,7 @@ is_shift_pressed (void)
 
     display = cdk_display_get_default ();
     cdk_x11_display_error_trap_push (display);
-    status = XkbGetState (GDK_DISPLAY_XDISPLAY (display),
+    status = XkbGetState (CDK_DISPLAY_XDISPLAY (display),
                           XkbUseCoreKbd, &state);
     cdk_x11_display_error_trap_pop_ignored (display);
 
@@ -926,7 +926,7 @@ autorun_always_toggled (CtkToggleButton *togglebutton, AutorunDialogData *data)
 static gboolean
 combo_box_enter_ok (CtkWidget *togglebutton, CdkEventKey *event, CtkDialog *dialog)
 {
-    if (event->keyval == GDK_KEY_KP_Enter || event->keyval == GDK_KEY_Return)
+    if (event->keyval == CDK_KEY_KP_Enter || event->keyval == CDK_KEY_Return)
     {
         ctk_dialog_response (dialog, CTK_RESPONSE_OK);
         return TRUE;

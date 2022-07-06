@@ -272,7 +272,7 @@ path_bar_path_event_callback (BaulPathBar *path_bar,
     BaulWindowSlot *slot;
     BaulWindowOpenFlags flags;
 
-    if (event->type == GDK_BUTTON_RELEASE) {
+    if (event->type == CDK_BUTTON_RELEASE) {
         int mask;
 
         mask = event->state & ctk_accelerator_get_default_mod_mask ();
@@ -282,7 +282,7 @@ path_bar_path_event_callback (BaulPathBar *path_bar,
         {
             flags = BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
         }
-        else if (event->button == 1 && mask == GDK_CONTROL_MASK)
+        else if (event->button == 1 && mask == CDK_CONTROL_MASK)
         {
             flags = BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW;
         }
@@ -440,12 +440,12 @@ notebook_button_press_cb (CtkWidget *widget,
     BaulNavigationWindowPane *pane;
 
     pane = BAUL_NAVIGATION_WINDOW_PANE (user_data);
-    if (GDK_BUTTON_PRESS == event->type && 3 == event->button)
+    if (CDK_BUTTON_PRESS == event->type && 3 == event->button)
     {
         notebook_popup_menu_show (pane, event);
         return TRUE;
     }
-    else if (GDK_BUTTON_PRESS == event->type && 2 == event->button)
+    else if (CDK_BUTTON_PRESS == event->type && 2 == event->button)
     {
         BaulWindowPane *wpane;
         BaulWindowSlot *slot;

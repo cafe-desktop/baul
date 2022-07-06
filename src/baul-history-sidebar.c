@@ -191,7 +191,7 @@ button_press_event_callback (CtkWidget *widget,
                              CdkEventButton *event,
                              gpointer user_data)
 {
-    if (event->button == 2 && event->type == GDK_BUTTON_PRESS)
+    if (event->button == 2 && event->type == CDK_BUTTON_PRESS)
     {
         /* Open new tab on middle click. */
         BaulHistorySidebar *sidebar;

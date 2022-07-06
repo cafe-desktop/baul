@@ -142,7 +142,7 @@ button_press_cb (BaulNotebook *notebook,
 
     tab_clicked = find_tab_num_at_pos (notebook, event->x_root, event->y_root);
 
-    if (event->type == GDK_BUTTON_PRESS &&
+    if (event->type == CDK_BUTTON_PRESS &&
             (event->button == 3 || event->button == 2) &&
             (event->state & ctk_accelerator_get_default_mod_mask ()) == 0)
     {

@@ -23,8 +23,8 @@
             Ramiro Estrugo <ramiro@eazel.com>
 */
 
-#ifndef EEL_GDK_PIXBUF_EXTENSIONS_H
-#define EEL_GDK_PIXBUF_EXTENSIONS_H
+#ifndef EEL_CDK_PIXBUF_EXTENSIONS_H
+#define EEL_CDK_PIXBUF_EXTENSIONS_H
 
 #include <cdk-pixbuf/cdk-pixbuf.h>
 #include <cdk/cdk.h>
@@ -72,4 +72,4 @@ CdkPixbuf *          eel_cdk_pixbuf_scale_down                (CdkPixbuf *pixbuf
         int dest_width,
         int dest_height);
 
-#endif /* EEL_GDK_PIXBUF_EXTENSIONS_H */
+#endif /* EEL_CDK_PIXBUF_EXTENSIONS_H */

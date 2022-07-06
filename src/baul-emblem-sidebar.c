@@ -408,9 +408,9 @@ create_emblem_widget_with_pixbuf (BaulEmblemSidebar *emblem_sidebar,
     prelight_pixbuf = eel_create_spotlight_pixbuf (pixbuf);
 
 
-    ctk_drag_source_set (event_box, GDK_BUTTON1_MASK, drag_types,
+    ctk_drag_source_set (event_box, CDK_BUTTON1_MASK, drag_types,
                          G_N_ELEMENTS (drag_types),
-                         GDK_ACTION_COPY | GDK_ACTION_MOVE);
+                         CDK_ACTION_COPY | CDK_ACTION_MOVE);
 
     ctk_drag_source_set_icon_pixbuf (event_box, pixbuf);
 
@@ -951,7 +951,7 @@ baul_emblem_sidebar_create_container (BaulEmblemSidebar *emblem_sidebar)
     ctk_drag_dest_set (scroller,
                        CTK_DEST_DEFAULT_ALL,
                        dest_types, G_N_ELEMENTS (dest_types),
-                       GDK_ACTION_COPY | GDK_ACTION_MOVE);
+                       CDK_ACTION_COPY | CDK_ACTION_MOVE);
 
     g_signal_connect (scroller, "drag-data-received",
                       G_CALLBACK (baul_emblem_sidebar_drag_received_cb),

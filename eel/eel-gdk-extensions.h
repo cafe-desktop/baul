@@ -23,8 +23,8 @@
             Ramiro Estrugo <ramiro@eazel.com>
 */
 
-#ifndef EEL_GDK_EXTENSIONS_H
-#define EEL_GDK_EXTENSIONS_H
+#ifndef EEL_CDK_EXTENSIONS_H
+#define EEL_CDK_EXTENSIONS_H
 
 #include <cdk/cdk.h>
 
@@ -60,14 +60,14 @@ EEL_RGBA_COLOR_PACK((r), (g), (b), 0xFF)
 /* Bits returned by eel_cdk_parse_geometry */
 typedef enum
 {
-    EEL_GDK_NO_VALUE     = 0x00,
-    EEL_GDK_X_VALUE      = 0x01,
-    EEL_GDK_Y_VALUE      = 0x02,
-    EEL_GDK_WIDTH_VALUE  = 0x04,
-    EEL_GDK_HEIGHT_VALUE = 0x08,
-    EEL_GDK_ALL_VALUES   = 0x0f,
-    EEL_GDK_X_NEGATIVE   = 0x10,
-    EEL_GDK_Y_NEGATIVE   = 0x20
+    EEL_CDK_NO_VALUE     = 0x00,
+    EEL_CDK_X_VALUE      = 0x01,
+    EEL_CDK_Y_VALUE      = 0x02,
+    EEL_CDK_WIDTH_VALUE  = 0x04,
+    EEL_CDK_HEIGHT_VALUE = 0x08,
+    EEL_CDK_ALL_VALUES   = 0x0f,
+    EEL_CDK_X_NEGATIVE   = 0x10,
+    EEL_CDK_Y_NEGATIVE   = 0x20
 } EelCdkGeometryFlags;
 
 /* A gradient spec. is a string that contains a specifier for either a
@@ -119,4 +119,4 @@ EelCdkGeometryFlags eel_cdk_parse_geometry                 (const char          
         guint               *width_return,
         guint               *height_return);
 
-#endif /* EEL_GDK_EXTENSIONS_H */
+#endif /* EEL_CDK_EXTENSIONS_H */
