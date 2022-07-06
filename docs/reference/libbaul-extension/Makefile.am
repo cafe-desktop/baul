@@ -57,8 +57,8 @@ expand_content_files= \
 # Only needed if you are using gtkdoc-scangobj to dynamically query widget
 # signals and properties.
 # e.g. INCLUDES=-I$(top_srcdir) -I$(top_builddir) $(CTK_DEBUG_FLAGS)
-# e.g. CTKDOC_LIBS=$(top_builddir)/ctk/$(ctktargetlib)
-CTKDOC_CFLAGS = \
+# e.g. GTKDOC_LIBS=$(top_builddir)/ctk/$(ctktargetlib)
+GTKDOC_CFLAGS = \
 	$(CTK_DEBUG_FLAGS)                         \
 	-I$(srcdir)                                \
 	-I$(top_srcdir)                            \
@@ -68,7 +68,7 @@ CTKDOC_CFLAGS = \
 	$(LIBBAUL_EXTENSION_CFLAGS)            \
 	$(NULL)
 
-CTKDOC_LIBS = \
+GTKDOC_LIBS = \
 	$(top_builddir)/libbaul-extension/libbaul-extension.la       \
 	$(LIBBAUL_EXTENSION_LIBS)                                        \
 	$(NULL)
