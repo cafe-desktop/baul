@@ -472,11 +472,11 @@ msgstr "উভয় দিকে প্রসারিত করা"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "লেবেলের প্রদর্শিত টেক্সটের পংক্তির পারস্পরিক অবস্থান অনুসারে দিশা। এর ফলে "
 "চিহ্নিত স্থানের মধ্যে লেবেলের দিশা প্রভাবিত হবে না। লেবেলের দিশা পরিবর্তন "
-"সম্পর্কে জানতে GtkMisc::xalign দেখুন।"
+"সম্পর্কে জানতে CtkMisc::xalign দেখুন।"
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

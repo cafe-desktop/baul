@@ -50,8 +50,8 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 struct EelBackgroundPrivate
 {
-    GtkWidget *widget;
-    GtkWidget *front_widget;
+    CtkWidget *widget;
+    CtkWidget *front_widget;
     CafeBG *bg;
     char *color;
 
@@ -327,7 +327,7 @@ eel_background_ensure_realized (EelBackground *self)
 {
     int width, height;
     GdkWindow *window;
-    GtkStyleContext *style;
+    CtkStyleContext *style;
     GdkRGBA *c;
 
     /* Set the default color */
@@ -371,7 +371,7 @@ eel_background_ensure_realized (EelBackground *self)
 }
 
 void
-eel_background_draw (GtkWidget *widget,
+eel_background_draw (CtkWidget *widget,
                      cairo_t   *cr)
 {
     EelBackground *self = eel_get_widget_background (widget);
@@ -430,7 +430,7 @@ static void
 init_fade (EelBackground *self)
 {
     GSettings *cafe_background_preferences;
-    GtkWidget *widget = self->details->widget;
+    CtkWidget *widget = self->details->widget;
     gboolean do_fade;
 
     if (!self->details->is_desktop || widget == NULL || !ctk_widget_get_realized (widget)) {
@@ -493,7 +493,7 @@ on_fade_finished (CafeBGCrossfade *fade,
 
 static gboolean
 fade_to_surface (EelBackground   *self,
-                 GtkWidget       *widget,
+                 CtkWidget       *widget,
                  cairo_surface_t *surface)
 {
     if (self->details->fade == NULL ||
@@ -520,7 +520,7 @@ fade_to_surface (EelBackground   *self,
 static void
 eel_background_set_up_widget (EelBackground *self)
 {
-    GtkWidget *widget = self->details->widget;
+    CtkWidget *widget = self->details->widget;
 
     gboolean in_fade = FALSE;
 
@@ -572,7 +572,7 @@ background_changed_cb (EelBackground *self)
 }
 
 static void
-widget_queue_background_change (GtkWidget *widget,
+widget_queue_background_change (CtkWidget *widget,
                                 gpointer   user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
@@ -590,7 +590,7 @@ widget_queue_background_change (GtkWidget *widget,
  * EelBackgroundStyle so that it will match the chosen GTK+ theme.
  */
 static void
-widget_style_updated_cb (GtkWidget *widget,
+widget_style_updated_cb (CtkWidget *widget,
                          gpointer   user_data)
 {
     widget_queue_background_change (widget, user_data);
@@ -629,7 +629,7 @@ screen_size_changed (GdkScreen *screen, EelBackground *background)
 }
 
 static void
-widget_realized_setup (GtkWidget     *widget,
+widget_realized_setup (CtkWidget     *widget,
                        EelBackground *self)
 {
     if (!self->details->is_desktop) {
@@ -660,7 +660,7 @@ widget_realized_setup (GtkWidget     *widget,
 }
 
 static void
-widget_realize_cb (GtkWidget *widget,
+widget_realize_cb (CtkWidget *widget,
                    gpointer   user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
@@ -671,7 +671,7 @@ widget_realize_cb (GtkWidget *widget,
 }
 
 static void
-widget_unrealize_cb (GtkWidget *widget,
+widget_unrealize_cb (CtkWidget *widget,
                      gpointer   user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
@@ -692,7 +692,7 @@ widget_unrealize_cb (GtkWidget *widget,
 }
 
 static void
-on_widget_destroyed (GtkWidget *widget,
+on_widget_destroyed (CtkWidget *widget,
                      gpointer   user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
@@ -722,7 +722,7 @@ on_widget_destroyed (GtkWidget *widget,
    be straightforward.
 */
 EelBackground *
-eel_get_widget_background (GtkWidget *widget)
+eel_get_widget_background (CtkWidget *widget)
 {
     EelBackground *self;
     gpointer data;
@@ -1039,30 +1039,30 @@ eel_background_set_dropped_image (EelBackground *self,
 /* handle dropped colors */
 void
 eel_background_set_dropped_color (EelBackground *self,
-                                  GtkWidget     *widget,
+                                  CtkWidget     *widget,
                                   GdkDragAction  action,
                                   int            drop_location_x,
                                   int            drop_location_y,
-                                  const GtkSelectionData *selection_data)
+                                  const CtkSelectionData *selection_data)
 {
     guint16 *channels;
     char *color_spec, *gradient_spec;
     char *new_gradient_spec;
     int left_border, right_border, top_border, bottom_border;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     g_return_if_fail (EEL_IS_BACKGROUND (self));
     g_return_if_fail (GTK_IS_WIDGET (widget));
     g_return_if_fail (selection_data != NULL);
 
     /* Convert the selection data into a color spec. */
-    if (ctk_selection_data_get_length ((GtkSelectionData *) selection_data) != 8 ||
-            ctk_selection_data_get_format ((GtkSelectionData *) selection_data) != 16)
+    if (ctk_selection_data_get_length ((CtkSelectionData *) selection_data) != 8 ||
+            ctk_selection_data_get_format ((CtkSelectionData *) selection_data) != 16)
     {
         g_warning ("received invalid color data");
         return;
     }
-    channels = (guint16 *) ctk_selection_data_get_data ((GtkSelectionData *) selection_data);
+    channels = (guint16 *) ctk_selection_data_get_data ((CtkSelectionData *) selection_data);
     color_spec = g_strdup_printf ("#%02X%02X%02X",
                                   channels[0] >> 8,
                                   channels[1] >> 8,
@@ -1078,12 +1078,12 @@ eel_background_set_dropped_color (EelBackground *self,
     top_border = 32;
     bottom_border = allocation.height - 32;
 
-    /* If a custom background color isn't set, get the GtkStyleContext's bg color. */
+    /* If a custom background color isn't set, get the CtkStyleContext's bg color. */
 
     if (!self->details->color)
     {
 
-        GtkStyleContext *style = ctk_widget_get_style_context (widget);
+        CtkStyleContext *style = ctk_widget_get_style_context (widget);
         GdkRGBA bg;
         GdkRGBA *c;
 

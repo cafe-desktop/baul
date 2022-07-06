@@ -88,12 +88,12 @@ G_DEFINE_TYPE_WITH_PRIVATE (BaulDesktopWindow, baul_desktop_window,
 static void
 baul_desktop_window_init (BaulDesktopWindow *window)
 {
-    GtkAction *action;
+    CtkAction *action;
     AtkObject *accessible;
 
     window->details = baul_desktop_window_get_instance_private (window);
 
-    GtkStyleContext *context;
+    CtkStyleContext *context;
 
     context = ctk_widget_get_style_context (GTK_WIDGET (window));
     ctk_style_context_add_class (context, "baul-desktop-window");
@@ -217,7 +217,7 @@ baul_desktop_window_new (BaulApplication *application,
 }
 
 static void
-map (GtkWidget *widget)
+map (CtkWidget *widget)
 {
     /* Chain up to realize our children */
     GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->map (widget);
@@ -225,7 +225,7 @@ map (GtkWidget *widget)
 }
 
 static void
-unrealize (GtkWidget *widget)
+unrealize (CtkWidget *widget)
 {
     BaulDesktopWindow *window;
     BaulDesktopWindowPrivate *details;
@@ -283,7 +283,7 @@ set_desktop_window_id (BaulDesktopWindow *window,
 }
 
 static void
-realize (GtkWidget *widget)
+realize (CtkWidget *widget)
 {
     BaulDesktopWindow *window;
     BaulDesktopWindowPrivate *details;
@@ -307,7 +307,7 @@ realize (GtkWidget *widget)
 }
 
 static gboolean
-draw (GtkWidget *widget,
+draw (CtkWidget *widget,
       cairo_t   *cr)
 {
     eel_background_draw (widget, cr);
@@ -326,7 +326,7 @@ real_get_icon (BaulWindow *window,
 static void
 baul_desktop_window_class_init (BaulDesktopWindowClass *klass)
 {
-    GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
+    CtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
     BaulWindowClass *nclass = BAUL_WINDOW_CLASS (klass);
 
     wclass->realize = realize;

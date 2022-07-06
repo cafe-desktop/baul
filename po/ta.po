@@ -469,10 +469,10 @@ msgstr "சீரமை"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "தலைப்பு பட்டியின் உரையில் வரிகளின் ஒன்றுக்கொன்றான அமைப்பு. இது தலைப்புப் "
-"பட்டியின் இட அமைப்புள் அதை பாதிக்காது. அதற்கு GtkMisc::xalign ஐ பார்க்கவும்."
+"பட்டியின் இட அமைப்புள் அதை பாதிக்காது. அதற்கு CtkMisc::xalign ஐ பார்க்கவும்."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

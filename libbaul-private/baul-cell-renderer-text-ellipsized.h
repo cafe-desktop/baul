@@ -47,15 +47,15 @@ typedef struct _BaulCellRendererTextEllipsizedClass BaulCellRendererTextEllipsiz
 
 struct _BaulCellRendererTextEllipsized
 {
-    GtkCellRendererText parent;
+    CtkCellRendererText parent;
 };
 
 struct _BaulCellRendererTextEllipsizedClass
 {
-    GtkCellRendererTextClass parent_class;
+    CtkCellRendererTextClass parent_class;
 };
 
 GType		 baul_cell_renderer_text_ellipsized_get_type (void);
-GtkCellRenderer *baul_cell_renderer_text_ellipsized_new      (void);
+CtkCellRenderer *baul_cell_renderer_text_ellipsized_new      (void);
 
 #endif /* BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_H */

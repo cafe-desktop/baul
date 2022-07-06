@@ -58,11 +58,11 @@ static const char *names[] =
 	"Richard Wagner",
 };
 
-static GtkWidget *
+static CtkWidget *
 labeled_image_new (const char *text,
 		   const char *icon_name)
 {
-	GtkWidget *image;
+	CtkWidget *image;
 	GdkPixbuf *pixbuf = NULL;
 
 	if (icon_name) {
@@ -80,8 +80,8 @@ labeled_image_new (const char *text,
 
 
 static void
-image_table_child_enter_callback (GtkWidget *image_table,
-			       GtkWidget *item,
+image_table_child_enter_callback (CtkWidget *image_table,
+			       CtkWidget *item,
 			       gpointer callback_data)
 {
 #if 0
@@ -97,8 +97,8 @@ image_table_child_enter_callback (GtkWidget *image_table,
 }
 
 static void
-image_table_child_leave_callback (GtkWidget *image_table,
-			       GtkWidget *item,
+image_table_child_leave_callback (CtkWidget *image_table,
+			       CtkWidget *item,
 			       gpointer callback_data)
 {
 #if 0
@@ -114,8 +114,8 @@ image_table_child_leave_callback (GtkWidget *image_table,
 }
 
 static void
-image_table_child_pressed_callback (GtkWidget *image_table,
-			       GtkWidget *item,
+image_table_child_pressed_callback (CtkWidget *image_table,
+			       CtkWidget *item,
 			       gpointer callback_data)
 {
 	char *text;
@@ -129,8 +129,8 @@ image_table_child_pressed_callback (GtkWidget *image_table,
 }
 
 static void
-image_table_child_released_callback (GtkWidget *image_table,
-				  GtkWidget *item,
+image_table_child_released_callback (CtkWidget *image_table,
+				  CtkWidget *item,
 				  gpointer callback_data)
 {
 	char *text;
@@ -144,8 +144,8 @@ image_table_child_released_callback (GtkWidget *image_table,
 }
 
 static void
-image_table_child_clicked_callback (GtkWidget *image_table,
-				 GtkWidget *item,
+image_table_child_clicked_callback (CtkWidget *image_table,
+				 CtkWidget *item,
 				 gpointer callback_data)
 {
 	char *text;
@@ -175,12 +175,12 @@ foo_timeout (gpointer callback_data)
 }
 
 static void
-image_table_size_allocate (GtkWidget *image_table,
-			   GtkAllocation *allocation,
+image_table_size_allocate (CtkWidget *image_table,
+			   CtkAllocation *allocation,
 			   gpointer callback_data)
 {
 	static int recursion_count = 0;
-	GtkAllocation w_allocation;
+	CtkAllocation w_allocation;
 
 	g_return_if_fail (EEL_IS_IMAGE_TABLE (image_table));
 	g_return_if_fail (allocation != NULL);
@@ -201,13 +201,13 @@ image_table_size_allocate (GtkWidget *image_table,
 	recursion_count--;
 }
 
-static GtkWidget *
+static CtkWidget *
 image_table_new_scrolled (void)
 {
-	GtkWidget *scrolled;
-	GtkWidget *viewport;
-	GtkWidget *window;
-	GtkWidget *image_table;
+	CtkWidget *scrolled;
+	CtkWidget *viewport;
+	CtkWidget *window;
+	CtkWidget *image_table;
 	int i;
 
 	window = test_window_new ("Image Table Test", 10);
@@ -267,7 +267,7 @@ image_table_new_scrolled (void)
 
 	for (i = 0; i < 100; i++) {
 		char *text;
-		GtkWidget *image;
+		CtkWidget *image;
 
 		text = g_strdup_printf ("%s %d",
 					names[random () % G_N_ELEMENTS (names)],
@@ -289,7 +289,7 @@ image_table_new_scrolled (void)
 int
 main (int argc, char* argv[])
 {
-	GtkWidget *window = NULL;
+	CtkWidget *window = NULL;
 
 	test_init (&argc, &argv);
 

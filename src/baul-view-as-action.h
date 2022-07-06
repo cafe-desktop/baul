@@ -41,7 +41,7 @@ typedef struct _BaulViewAsActionPrivate BaulViewAsActionPrivate;
 
 struct _BaulViewAsAction
 {
-    GtkAction parent;
+    CtkAction parent;
 
     /*< private >*/
     BaulViewAsActionPrivate *priv;
@@ -49,7 +49,7 @@ struct _BaulViewAsAction
 
 struct _BaulViewAsActionClass
 {
-    GtkActionClass parent_class;
+    CtkActionClass parent_class;
 };
 
 GType    baul_view_as_action_get_type   (void);

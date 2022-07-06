@@ -12,18 +12,18 @@
 void       test_init                            (int                         *argc,
 						 char                      ***argv);
 int        test_quit                            (int                          exit_code);
-void       test_delete_event                    (GtkWidget                   *widget,
+void       test_delete_event                    (CtkWidget                   *widget,
 						 GdkEvent                    *event,
 						 gpointer                     callback_data);
-GtkWidget *test_window_new                      (const char                  *title,
+CtkWidget *test_window_new                      (const char                  *title,
 						 guint                        border_width);
-void       test_ctk_widget_set_background_image (GtkWidget                   *widget,
+void       test_ctk_widget_set_background_image (CtkWidget                   *widget,
 						 const char                  *image_name);
-void       test_ctk_widget_set_background_color (GtkWidget                   *widget,
+void       test_ctk_widget_set_background_color (CtkWidget                   *widget,
 						 const char                  *color_spec);
 GdkPixbuf *test_pixbuf_new_named                (const char                  *name,
 						 float                        scale);
-GtkWidget *test_label_new                       (const char                  *text,
+CtkWidget *test_label_new                       (const char                  *text,
 						 gboolean                     with_background,
 						 int                          num_sizes_larger);
 void       test_pixbuf_draw_rectangle_tiled     (GdkPixbuf                   *pixbuf,
@@ -33,7 +33,7 @@ void       test_pixbuf_draw_rectangle_tiled     (GdkPixbuf                   *pi
 						 int                          x1,
 						 int                          y1,
 						 int                          opacity);
-void       test_window_set_title_with_pid       (GtkWindow                   *window,
+void       test_window_set_title_with_pid       (CtkWindow                   *window,
 						 const char                  *title);
 
 #endif /* TEST_H */

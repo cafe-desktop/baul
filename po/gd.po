@@ -468,11 +468,11 @@ msgstr "Blocachadh"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "Co-thaobhadh nan loidhnichean ann an teacsa na leubail an coimeas ris a "
 "chèile. CHA DOIR seo buaidh air co-thaobhadh na leubail am broinn a' "
-"chuibhrinn aige. Seall GtkMisc::xalign airson sin."
+"chuibhrinn aige. Seall CtkMisc::xalign airson sin."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

@@ -30,7 +30,7 @@
 G_DEFINE_TYPE (EelBackgroundBox, eel_background_box, GTK_TYPE_EVENT_BOX)
 
 static gboolean
-eel_background_box_draw (GtkWidget *widget,
+eel_background_box_draw (CtkWidget *widget,
                          cairo_t *cr)
 {
     eel_background_draw (widget, cr);
@@ -48,12 +48,12 @@ eel_background_box_init (EelBackgroundBox *box)
 static void
 eel_background_box_class_init (EelBackgroundBoxClass *klass)
 {
-    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
     widget_class->draw = eel_background_box_draw;
 
 }
 
-GtkWidget*
+CtkWidget*
 eel_background_box_new (void)
 {
     EelBackgroundBox *background_box;

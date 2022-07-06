@@ -496,7 +496,7 @@ cancel_viewed_file_changed_callback (BaulWindowSlot *slot)
 }
 
 static void
-new_window_show_callback (GtkWidget *widget,
+new_window_show_callback (CtkWidget *widget,
                           gpointer user_data)
 {
     BaulWindow *window;
@@ -1034,7 +1034,7 @@ setup_new_spatial_window (BaulWindowSlot *slot, BaulFile *file)
                                     NULL);
         if (show_hidden_file_setting != NULL)
         {
-            GtkAction *action;
+            CtkAction *action;
 
             if (strcmp (show_hidden_file_setting, "1") == 0)
             {
@@ -1615,7 +1615,7 @@ location_has_really_changed (BaulWindowSlot *slot)
 
     if (slot->new_content_view != NULL)
     {
-        GtkWidget *widget;
+        CtkWidget *widget;
 
         widget = baul_view_get_widget (slot->new_content_view);
         /* Switch to the new content view. */
@@ -1661,7 +1661,7 @@ slot_add_extension_extra_widgets (BaulWindowSlot *slot)
 {
     GList *providers, *l;
     char *uri;
-    GtkWidget *widget = NULL;
+    CtkWidget *widget = NULL;
 
     providers = baul_extensions_get_for_type (BAUL_TYPE_LOCATION_WIDGET_PROVIDER);
 
@@ -1709,7 +1709,7 @@ baul_window_slot_show_x_content_bar (BaulWindowSlot *slot, GMount *mount, const 
         default_app = g_app_info_get_default_for_type (x_content_types[n], FALSE);
         if (default_app != NULL)
         {
-            GtkWidget *bar;
+            CtkWidget *bar;
             bar = baul_x_content_bar_new (mount, x_content_types[n]);
             ctk_widget_show (bar);
             baul_window_slot_add_extra_location_widget (slot, bar);
@@ -1722,7 +1722,7 @@ static void
 baul_window_slot_show_trash_bar (BaulWindowSlot *slot,
                                  BaulWindow *window)
 {
-    GtkWidget *bar;
+    CtkWidget *bar;
 
     bar = baul_trash_bar_new (window);
     ctk_widget_show (bar);

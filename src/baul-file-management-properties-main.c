@@ -33,7 +33,7 @@
 #include "baul-file-management-properties.h"
 
 static void
-baul_file_management_properties_main_close_callback (GtkDialog *dialog,
+baul_file_management_properties_main_close_callback (CtkDialog *dialog,
         int response_id)
 {
     if (response_id == GTK_RESPONSE_CLOSE)

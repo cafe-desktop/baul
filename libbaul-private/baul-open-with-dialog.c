@@ -48,17 +48,17 @@ struct _BaulOpenWithDialogDetails
     char *content_type;
     char *extension;
 
-    GtkWidget *label;
-    GtkWidget *entry;
-    GtkWidget *button;
-    GtkWidget *checkbox;
+    CtkWidget *label;
+    CtkWidget *entry;
+    CtkWidget *button;
+    CtkWidget *checkbox;
 
-    GtkWidget *desc_label;
+    CtkWidget *desc_label;
 
-    GtkWidget *open_label;
+    CtkWidget *open_label;
 
-    GtkWidget     *program_list;
-    GtkListStore  *program_list_store;
+    CtkWidget     *program_list;
+    CtkListStore  *program_list_store;
     GSList	      *add_icon_paths;
     gint	       add_items_idle_id;
     gint	       add_icons_idle_id;
@@ -352,8 +352,8 @@ response_cb (BaulOpenWithDialog *dialog,
         {
             if (g_app_info_delete (dialog->details->selected_app_info))
             {
-                GtkTreeModel *model;
-                GtkTreeIter iter;
+                CtkTreeModel *model;
+                CtkTreeIter iter;
                 GAppInfo *info, *selected;
 
                 selected = dialog->details->selected_app_info;
@@ -413,7 +413,7 @@ baul_open_with_dialog_class_init (BaulOpenWithDialogClass *class)
 }
 
 static void
-chooser_response_cb (GtkFileChooser *chooser,
+chooser_response_cb (CtkFileChooser *chooser,
                      int response,
                      gpointer user_data)
 {
@@ -445,11 +445,11 @@ chooser_response_cb (GtkFileChooser *chooser,
 }
 
 static void
-browse_clicked_cb (GtkWidget *button,
+browse_clicked_cb (CtkWidget *button,
                    gpointer user_data)
 {
     BaulOpenWithDialog *dialog;
-    GtkWidget *chooser;
+    CtkWidget *chooser;
 
     dialog = BAUL_OPEN_WITH_DIALOG (user_data);
 
@@ -476,7 +476,7 @@ browse_clicked_cb (GtkWidget *button,
 }
 
 static void
-entry_changed_cb (GtkWidget *entry,
+entry_changed_cb (CtkWidget *entry,
                   BaulOpenWithDialog *dialog)
 {
     /* We are writing in the entry, so we are not using a known appinfo anymore */
@@ -562,8 +562,8 @@ baul_open_with_dialog_add_icon_idle (BaulOpenWithDialog *dialog)
     cairo_surface_t *surface;
     GIcon           *icon;
     gboolean         long_operation;
-    GtkTreeIter      iter;
-    GtkTreePath     *path = NULL;
+    CtkTreeIter      iter;
+    CtkTreePath     *path = NULL;
 
     long_operation = FALSE;
     do
@@ -613,10 +613,10 @@ baul_open_with_dialog_add_icon_idle (BaulOpenWithDialog *dialog)
 
 
 static gboolean
-baul_open_with_search_equal_func (GtkTreeModel *model,
+baul_open_with_search_equal_func (CtkTreeModel *model,
                                   int column,
                                   const char *key,
-                                  GtkTreeIter *iter,
+                                  CtkTreeIter *iter,
                                   gpointer user_data)
 {
     char *name;
@@ -694,9 +694,9 @@ baul_open_with_search_equal_func (GtkTreeModel *model,
 static gboolean
 baul_open_with_dialog_add_items_idle (BaulOpenWithDialog *dialog)
 {
-    GtkCellRenderer   *renderer;
-    GtkTreeViewColumn *column;
-    GtkTreeModel      *sort;
+    CtkCellRenderer   *renderer;
+    CtkTreeViewColumn *column;
+    CtkTreeModel      *sort;
     GList             *all_applications;
     GList             *l;
 
@@ -714,8 +714,8 @@ baul_open_with_dialog_add_items_idle (BaulOpenWithDialog *dialog)
     for (l = all_applications; l; l = l->next)
     {
         GAppInfo *app = l->data;
-        GtkTreeIter     iter;
-        GtkTreePath    *path;
+        CtkTreeIter     iter;
+        CtkTreePath    *path;
 
         if (!g_app_info_supports_uris (app) &&
                 !g_app_info_supports_files (app))
@@ -776,11 +776,11 @@ baul_open_with_dialog_add_items_idle (BaulOpenWithDialog *dialog)
 }
 
 static void
-program_list_selection_changed (GtkTreeSelection  *selection,
+program_list_selection_changed (CtkTreeSelection  *selection,
                                 BaulOpenWithDialog *dialog)
 {
-    GtkTreeModel     *model;
-    GtkTreeIter       iter;
+    CtkTreeModel     *model;
+    CtkTreeIter       iter;
     GAppInfo *info;
 
     if (!ctk_tree_selection_get_selected (selection, &model, &iter))
@@ -820,12 +820,12 @@ program_list_selection_changed (GtkTreeSelection  *selection,
 }
 
 static void
-program_list_selection_activated (GtkTreeView       *view,
-                                  GtkTreePath       *path,
-                                  GtkTreeViewColumn *column,
+program_list_selection_activated (CtkTreeView       *view,
+                                  CtkTreePath       *path,
+                                  CtkTreeViewColumn *column,
                                   BaulOpenWithDialog *dialog)
 {
-    GtkTreeSelection *selection;
+    CtkTreeSelection *selection;
 
     /* update the entry with the info from the selection */
     selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (dialog->details->program_list));
@@ -835,7 +835,7 @@ program_list_selection_activated (GtkTreeView       *view,
 }
 
 static void
-expander_toggled (GtkWidget *expander, BaulOpenWithDialog *dialog)
+expander_toggled (CtkWidget *expander, BaulOpenWithDialog *dialog)
 {
     if (ctk_expander_get_expanded (GTK_EXPANDER (expander)) == TRUE)
     {
@@ -844,7 +844,7 @@ expander_toggled (GtkWidget *expander, BaulOpenWithDialog *dialog)
     }
     else
     {
-        GtkTreeSelection *selection;
+        CtkTreeSelection *selection;
 
         ctk_widget_grab_focus (dialog->details->program_list);
         selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (dialog->details->program_list));
@@ -855,13 +855,13 @@ expander_toggled (GtkWidget *expander, BaulOpenWithDialog *dialog)
 static void
 baul_open_with_dialog_init (BaulOpenWithDialog *dialog)
 {
-    GtkWidget *hbox;
-    GtkWidget *vbox;
-    GtkWidget *vbox2;
-    GtkWidget *label;
-    GtkWidget *scrolled_window;
-    GtkWidget *expander;
-    GtkTreeSelection *selection;
+    CtkWidget *hbox;
+    CtkWidget *vbox;
+    CtkWidget *vbox2;
+    CtkWidget *label;
+    CtkWidget *scrolled_window;
+    CtkWidget *expander;
+    CtkTreeSelection *selection;
 
     dialog->details = g_new0 (BaulOpenWithDialogDetails, 1);
 
@@ -1153,13 +1153,13 @@ set_uri_and_type (BaulOpenWithDialog *dialog,
 }
 
 
-static GtkWidget *
+static CtkWidget *
 real_baul_open_with_dialog_new (const char *uri,
                                 const char *mime_type,
                                 const char *extension,
                                 gboolean add_mode)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     dialog = ctk_widget_new (BAUL_TYPE_OPEN_WITH_DIALOG, NULL);
 
@@ -1168,7 +1168,7 @@ real_baul_open_with_dialog_new (const char *uri,
     return dialog;
 }
 
-GtkWidget *
+CtkWidget *
 baul_open_with_dialog_new (const char *uri,
                            const char *mime_type,
                            const char *extension)
@@ -1176,7 +1176,7 @@ baul_open_with_dialog_new (const char *uri,
     return real_baul_open_with_dialog_new (uri, mime_type, extension, FALSE);
 }
 
-GtkWidget *
+CtkWidget *
 baul_add_application_dialog_new (const char *uri,
                                  const char *mime_type)
 {
@@ -1187,7 +1187,7 @@ baul_add_application_dialog_new (const char *uri,
     return GTK_WIDGET (dialog);
 }
 
-GtkWidget *
+CtkWidget *
 baul_add_application_dialog_new_for_multiple_files (const char *extension,
         const char *mime_type)
 {

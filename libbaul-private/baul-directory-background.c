@@ -231,7 +231,7 @@ baul_background_weak_notify (gpointer data,
 
 /* key routine that hooks up a background and location */
 void
-baul_connect_background_to_file_metadata (GtkWidget     *widget,
+baul_connect_background_to_file_metadata (CtkWidget     *widget,
                                           BaulFile      *file,
                                           GdkDragAction  default_drag_action)
 {

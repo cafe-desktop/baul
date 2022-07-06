@@ -61,7 +61,7 @@ typedef enum
 } BaulLocationEntryAction;
 
 GType      baul_location_entry_get_type     	(void);
-GtkWidget* baul_location_entry_new          	(void);
+CtkWidget* baul_location_entry_new          	(void);
 void       baul_location_entry_set_special_text     (BaulLocationEntry *entry,
         const char            *special_text);
 void       baul_location_entry_set_secondary_action (BaulLocationEntry *entry,

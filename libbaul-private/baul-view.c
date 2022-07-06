@@ -100,7 +100,7 @@ baul_view_get_view_id (BaulView *view)
     return (* BAUL_VIEW_GET_IFACE (view)->get_view_id) (view);
 }
 
-GtkWidget *
+CtkWidget *
 baul_view_get_widget (BaulView *view)
 {
     g_return_val_if_fail (BAUL_IS_VIEW (view), NULL);

@@ -22,17 +22,17 @@ test_quit (int exit_code)
 }
 
 void
-test_delete_event (GtkWidget *widget,
+test_delete_event (CtkWidget *widget,
 		   GdkEvent *event,
 		   gpointer callback_data)
 {
 	test_quit (0);
 }
 
-GtkWidget *
+CtkWidget *
 test_window_new (const char *title, guint border_width)
 {
-	GtkWidget *window;
+	CtkWidget *window;
 
 	window = ctk_window_new (GTK_WINDOW_TOPLEVEL);
 
@@ -49,7 +49,7 @@ test_window_new (const char *title, guint border_width)
 }
 
 void
-test_ctk_widget_set_background_image (GtkWidget *widget,
+test_ctk_widget_set_background_image (CtkWidget *widget,
 				      const char *image_name)
 {
 	EelBackground *background;
@@ -68,7 +68,7 @@ test_ctk_widget_set_background_image (GtkWidget *widget,
 }
 
 void
-test_ctk_widget_set_background_color (GtkWidget *widget,
+test_ctk_widget_set_background_color (CtkWidget *widget,
 				      const char *color_spec)
 {
 	EelBackground *background;
@@ -119,12 +119,12 @@ test_pixbuf_new_named (const char *name, float scale)
 	return pixbuf;
 }
 
-GtkWidget *
+CtkWidget *
 test_label_new (const char *text,
 		gboolean with_background,
 		int num_sizes_larger)
 {
-	GtkWidget *label;
+	CtkWidget *label;
 
 	if (text == NULL) {
 		text = "Foo";
@@ -136,7 +136,7 @@ test_label_new (const char *text,
 }
 
 void
-test_window_set_title_with_pid (GtkWindow *window,
+test_window_set_title_with_pid (CtkWindow *window,
 				const char *title)
 {
 	char *tmp;

@@ -51,16 +51,16 @@ extern "C" {
     struct EelBackgroundBox
     {
         /* Superclass */
-        GtkEventBox event_box;
+        CtkEventBox event_box;
     };
 
     struct EelBackgroundBoxClass
     {
-        GtkEventBoxClass parent_class;
+        CtkEventBoxClass parent_class;
     };
 
     GType      eel_background_box_get_type (void);
-    GtkWidget *eel_background_box_new      (void);
+    CtkWidget *eel_background_box_new      (void);
 
 #ifdef __cplusplus
 }

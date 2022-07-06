@@ -475,11 +475,11 @@ msgstr "Sayfa ayarı"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "Birbirlerine bağlı olan etiket metinleri satırlarının hizalanması. Bu "
 "etiketlerin kendi içindeki hizalamalarını etkilemeyecektir. Bunun için "
-"GtkMisc::xalign'a bakın."
+"CtkMisc::xalign'a bakın."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

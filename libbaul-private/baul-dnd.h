@@ -79,12 +79,12 @@ typedef enum
 /* drag&drop-related information. */
 typedef struct
 {
-    GtkTargetList *target_list;
+    CtkTargetList *target_list;
 
     /* Stuff saved at "receive data" time needed later in the drag. */
     gboolean got_drop_data_type;
     BaulIconDndTargetType data_type;
-    GtkSelectionData *selection_data;
+    CtkSelectionData *selection_data;
     char *direct_save_uri;
 
     /* Start of the drag, in window coordinates. */
@@ -141,13 +141,13 @@ typedef void		(* BaulDragEachSelectedItemIterator)	(BaulDragEachSelectedItemData
         gpointer data);
 
 void			    baul_drag_init				(BaulDragInfo		      *drag_info,
-        const GtkTargetEntry		      *drag_types,
+        const CtkTargetEntry		      *drag_types,
         int				       drag_type_count,
         gboolean			       add_text_targets);
 void			    baul_drag_finalize			(BaulDragInfo		      *drag_info);
 BaulDragSelectionItem  *baul_drag_selection_item_new		(void);
 void			    baul_drag_destroy_selection_list	(GList				      *selection_list);
-GList			   *baul_drag_build_selection_list		(GtkSelectionData		      *data);
+GList			   *baul_drag_build_selection_list		(CtkSelectionData		      *data);
 
 GList *			    baul_drag_uri_list_from_selection_list	(const GList			      *selection_list);
 
@@ -165,9 +165,9 @@ void			    baul_drag_default_drop_action_for_icons (GdkDragContext			      *cont
 GdkDragAction		    baul_drag_default_drop_action_for_netscape_url (GdkDragContext			     *context);
 GdkDragAction		    baul_drag_default_drop_action_for_uri_list     (GdkDragContext			     *context,
         const char			     *target_uri_string);
-gboolean		    baul_drag_drag_data_get			(GtkWidget			      *widget,
+gboolean		    baul_drag_drag_data_get			(CtkWidget			      *widget,
         GdkDragContext			      *context,
-        GtkSelectionData		      *selection_data,
+        CtkSelectionData		      *selection_data,
         guint				       info,
         guint32			       time,
         gpointer			       container_context,
@@ -175,24 +175,24 @@ gboolean		    baul_drag_drag_data_get			(GtkWidget			      *widget,
 int			    baul_drag_modifier_based_action		(int				       default_action,
         int				       non_default_action);
 
-GdkDragAction		    baul_drag_drop_action_ask		(GtkWidget			      *widget,
+GdkDragAction		    baul_drag_drop_action_ask		(CtkWidget			      *widget,
         GdkDragAction			       possible_actions);
-GdkDragAction		    baul_drag_drop_background_ask		(GtkWidget			      *widget,
+GdkDragAction		    baul_drag_drop_background_ask		(CtkWidget			      *widget,
         GdkDragAction			       possible_actions);
 
-gboolean		    baul_drag_autoscroll_in_scroll_region	(GtkWidget			      *widget);
-void			    baul_drag_autoscroll_calculate_delta	(GtkWidget			      *widget,
+gboolean		    baul_drag_autoscroll_in_scroll_region	(CtkWidget			      *widget);
+void			    baul_drag_autoscroll_calculate_delta	(CtkWidget			      *widget,
         float				      *x_scroll_delta,
         float				      *y_scroll_delta);
 void			    baul_drag_autoscroll_start		(BaulDragInfo		      *drag_info,
-        GtkWidget			      *widget,
+        CtkWidget			      *widget,
         GSourceFunc			       callback,
         gpointer			       user_data);
 void			    baul_drag_autoscroll_stop		(BaulDragInfo		      *drag_info);
 
 gboolean		    baul_drag_selection_includes_special_link (GList			      *selection_list);
 
-void                        baul_drag_slot_proxy_init               (GtkWidget *widget,
+void                        baul_drag_slot_proxy_init               (CtkWidget *widget,
         BaulDragSlotProxyInfo *drag_info);
 
 #endif

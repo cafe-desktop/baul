@@ -44,34 +44,34 @@ G_BEGIN_DECLS
 
     typedef struct
     {
-        GtkBox parent;
+        CtkBox parent;
         BaulSidePanePrivate *details;
     } BaulSidePane;
 
     typedef struct
     {
-        GtkBoxClass parent_slot;
+        CtkBoxClass parent_slot;
 
         void (*close_requested) (BaulSidePane *side_pane);
         void (*switch_page) (BaulSidePane *side_pane,
-                             GtkWidget *child);
+                             CtkWidget *child);
     } BaulSidePaneClass;
 
     GType                  baul_side_pane_get_type        (void);
     BaulSidePane      *baul_side_pane_new             (void);
     void                   baul_side_pane_add_panel       (BaulSidePane *side_pane,
-            GtkWidget        *widget,
+            CtkWidget        *widget,
             const char       *title,
             const char       *tooltip);
     void                   baul_side_pane_remove_panel    (BaulSidePane *side_pane,
-            GtkWidget        *widget);
+            CtkWidget        *widget);
     void                   baul_side_pane_show_panel      (BaulSidePane *side_pane,
-            GtkWidget        *widget);
+            CtkWidget        *widget);
     void                   baul_side_pane_set_panel_image (BaulSidePane *side_pane,
-            GtkWidget        *widget,
+            CtkWidget        *widget,
             GdkPixbuf        *pixbuf);
-    GtkWidget             *baul_side_pane_get_current_panel (BaulSidePane *side_pane);
-    GtkWidget             *baul_side_pane_get_title        (BaulSidePane *side_pane);
+    CtkWidget             *baul_side_pane_get_current_panel (BaulSidePane *side_pane);
+    CtkWidget             *baul_side_pane_get_title        (BaulSidePane *side_pane);
 
 G_END_DECLS
 

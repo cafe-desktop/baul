@@ -141,7 +141,7 @@ baul_icon_info_new_for_pixbuf (GdkPixbuf *pixbuf,
 }
 
 static BaulIconInfo *
-baul_icon_info_new_for_icon_info (GtkIconInfo *icon_info,
+baul_icon_info_new_for_icon_info (CtkIconInfo *icon_info,
                                   gint         scale)
 {
     BaulIconInfo *icon;
@@ -325,8 +325,8 @@ baul_icon_info_lookup (GIcon *icon,
                        int size,
                        int scale)
 {
-    GtkIconTheme *icon_theme;
-    GtkIconInfo *ctkicon_info;
+    CtkIconTheme *icon_theme;
+    CtkIconInfo *ctkicon_info;
 
     BaulIconInfo *icon_info;
 
@@ -748,7 +748,7 @@ baul_icon_get_smaller_icon_size (guint size)
 }
 
 gint
-baul_get_icon_size_for_stock_size (GtkIconSize size)
+baul_get_icon_size_for_stock_size (CtkIconSize size)
 {
     gint w, h;
 
@@ -780,7 +780,7 @@ baul_icon_get_emblem_size_for_icon_size (guint size)
 gboolean
 baul_icon_theme_can_render (GThemedIcon *icon)
 {
-	GtkIconTheme *icon_theme;
+	CtkIconTheme *icon_theme;
 	const gchar * const *names;
 	gint idx;
 

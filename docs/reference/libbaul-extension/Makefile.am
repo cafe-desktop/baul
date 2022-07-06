@@ -47,7 +47,7 @@ content_files = \
 	version.xml \
 	$(NULL)
 
-# SGML files where ctk-doc abbrevations (#GtkWidget) are expanded
+# SGML files where ctk-doc abbrevations (#CtkWidget) are expanded
 # These files must be listed here *and* in content_files
 # e.g. expand_content_files=running.sgml
 expand_content_files= \

@@ -46,12 +46,12 @@ typedef struct _BaulConnectServerOperationPrivate
   BaulConnectServerOperationPrivate;
 
 typedef struct {
-	GtkMountOperation parent;
+	CtkMountOperation parent;
 	BaulConnectServerOperationPrivate *details;
 } BaulConnectServerOperation;
 
 typedef struct {
-	GtkMountOperationClass parent_class;
+	CtkMountOperationClass parent_class;
 } BaulConnectServerOperationClass;
 
 GType baul_connect_server_operation_get_type (void);

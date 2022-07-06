@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /* eel-ctk-container.h - Functions to simplify the implementations of
-  			 GtkContainer widgets.
+  			 CtkContainer widgets.
 
    Copyright (C) 2001 Ramiro Estrugo.
 
@@ -29,20 +29,20 @@
 #include <ctk/ctk.h>
 #include "eel-art-extensions.h"
 
-void eel_ctk_container_child_expose_event (GtkContainer   *container,
-        GtkWidget      *child,
+void eel_ctk_container_child_expose_event (CtkContainer   *container,
+        CtkWidget      *child,
         cairo_t        *cr);
 
-void eel_ctk_container_child_map          (GtkContainer   *container,
-        GtkWidget      *child);
-void eel_ctk_container_child_unmap        (GtkContainer   *container,
-        GtkWidget      *child);
-void eel_ctk_container_child_add          (GtkContainer   *container,
-        GtkWidget      *child);
-void eel_ctk_container_child_remove       (GtkContainer   *container,
-        GtkWidget      *child);
-void eel_ctk_container_child_size_allocate (GtkContainer *container,
-        GtkWidget *child,
+void eel_ctk_container_child_map          (CtkContainer   *container,
+        CtkWidget      *child);
+void eel_ctk_container_child_unmap        (CtkContainer   *container,
+        CtkWidget      *child);
+void eel_ctk_container_child_add          (CtkContainer   *container,
+        CtkWidget      *child);
+void eel_ctk_container_child_remove       (CtkContainer   *container,
+        CtkWidget      *child);
+void eel_ctk_container_child_size_allocate (CtkContainer *container,
+        CtkWidget *child,
         EelIRect child_geometry);
 
 #endif /* EEL_GTK_CONTAINER_H */

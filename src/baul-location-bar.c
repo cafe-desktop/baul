@@ -64,7 +64,7 @@ static const char untranslated_go_to_label[] = N_("Go To:");
 
 struct _BaulLocationBarPrivate
 {
-    GtkLabel *label;
+    CtkLabel *label;
     BaulEntry *entry;
 
     char *last_location;
@@ -88,13 +88,13 @@ enum {
 
 static guint signals[LAST_SIGNAL];
 
-static const GtkTargetEntry drag_types [] =
+static const CtkTargetEntry drag_types [] =
 {
     { BAUL_DND_URI_LIST_TYPE,   0, BAUL_DND_URI_LIST },
     { BAUL_DND_TEXT_PLAIN_TYPE, 0, BAUL_DND_TEXT_PLAIN },
 };
 
-static const GtkTargetEntry drop_types [] =
+static const CtkTargetEntry drop_types [] =
 {
     { BAUL_DND_URI_LIST_TYPE,   0, BAUL_DND_URI_LIST },
     { BAUL_DND_TEXT_PLAIN_TYPE, 0, BAUL_DND_TEXT_PLAIN },
@@ -103,7 +103,7 @@ static const GtkTargetEntry drop_types [] =
 G_DEFINE_TYPE_WITH_PRIVATE (BaulLocationBar, baul_location_bar, GTK_TYPE_BOX);
 
 static BaulNavigationWindow *
-baul_location_bar_get_window (GtkWidget *bar)
+baul_location_bar_get_window (CtkWidget *bar)
 {
     return BAUL_NAVIGATION_WINDOW (ctk_widget_get_ancestor (bar, BAUL_TYPE_WINDOW));
 }
@@ -147,11 +147,11 @@ emit_location_changed (BaulLocationBar *bar)
 }
 
 static void
-drag_data_received_callback (GtkWidget *widget,
+drag_data_received_callback (CtkWidget *widget,
                              GdkDragContext *context,
                              int x,
                              int y,
-                             GtkSelectionData *data,
+                             CtkSelectionData *data,
                              guint info,
                              guint32 time,
                              gpointer callback_data)
@@ -247,9 +247,9 @@ drag_data_received_callback (GtkWidget *widget,
 }
 
 static void
-drag_data_get_callback (GtkWidget *widget,
+drag_data_get_callback (CtkWidget *widget,
                         GdkDragContext *context,
-                        GtkSelectionData *selection_data,
+                        CtkSelectionData *selection_data,
                         guint info,
                         guint32 time,
                         gpointer callback_data)
@@ -284,7 +284,7 @@ drag_data_get_callback (GtkWidget *widget,
    we are imitating here. */
 
 static void
-style_set_handler (GtkWidget *widget, GtkStyleContext *previous_style)
+style_set_handler (CtkWidget *widget, CtkStyleContext *previous_style)
 {
     PangoLayout *layout;
     int width, width2;
@@ -314,13 +314,13 @@ style_set_handler (GtkWidget *widget, GtkStyleContext *previous_style)
 }
 
 static gboolean
-label_button_pressed_callback (GtkWidget             *widget,
+label_button_pressed_callback (CtkWidget             *widget,
                                GdkEventButton        *event)
 {
     BaulNavigationWindow *window;
     BaulWindowSlot       *slot;
     BaulView             *view;
-    GtkWidget                *label;
+    CtkWidget                *label;
 
     if (event->button != 3)
     {
@@ -344,7 +344,7 @@ label_button_pressed_callback (GtkWidget             *widget,
 }
 
 static void
-editable_activate_callback (GtkEntry *entry,
+editable_activate_callback (CtkEntry *entry,
                             gpointer user_data)
 {
     BaulLocationBar *self = user_data;
@@ -396,7 +396,7 @@ baul_location_bar_update_label (BaulLocationBar *bar)
 }
 
 static void
-editable_changed_callback (GtkEntry *entry,
+editable_changed_callback (CtkEntry *entry,
                            gpointer user_data)
 {
     baul_location_bar_update_label (BAUL_LOCATION_BAR (user_data));
@@ -445,7 +445,7 @@ static void
 baul_location_bar_class_init (BaulLocationBarClass *klass)
  {
     GObjectClass *gobject_class;
-    GtkBindingSet *binding_set;
+    CtkBindingSet *binding_set;
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = finalize;
@@ -477,9 +477,9 @@ baul_location_bar_class_init (BaulLocationBarClass *klass)
 static void
 baul_location_bar_init (BaulLocationBar *bar)
 {
-    GtkWidget *label;
-    GtkWidget *entry;
-    GtkWidget *event_box;
+    CtkWidget *label;
+    CtkWidget *entry;
+    CtkWidget *event_box;
 
     bar->details = baul_location_bar_get_instance_private (bar);
 
@@ -537,10 +537,10 @@ baul_location_bar_init (BaulLocationBar *bar)
     ctk_widget_show_all (GTK_WIDGET (bar));
 }
 
-GtkWidget *
+CtkWidget *
 baul_location_bar_new (BaulNavigationWindowPane *pane)
 {
-    GtkWidget *bar;
+    CtkWidget *bar;
     BaulLocationBar *location_bar;
 
     bar = ctk_widget_new (BAUL_TYPE_LOCATION_BAR, NULL);
@@ -594,11 +594,11 @@ baul_location_bar_set_location (BaulLocationBar *bar,
 }
 
 static void
-override_background_color (GtkWidget *widget,
+override_background_color (CtkWidget *widget,
                            GdkRGBA   *rgba)
 {
     gchar          *css;
-    GtkCssProvider *provider;
+    CtkCssProvider *provider;
 
     provider = ctk_css_provider_new ();
 
@@ -617,7 +617,7 @@ override_background_color (GtkWidget *widget,
 void
 baul_location_bar_set_active (BaulLocationBar *location_bar, gboolean is_active)
 {
-    GtkStyleContext *style;
+    CtkStyleContext *style;
     GdkRGBA color;
     GdkRGBA *c;
     static GdkRGBA bg_active;

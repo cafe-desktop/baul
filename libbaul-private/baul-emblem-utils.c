@@ -53,7 +53,7 @@
 GList *
 baul_emblem_list_available (void)
 {
-    GtkIconTheme *icon_theme;
+    CtkIconTheme *icon_theme;
     GList *list;
 
     icon_theme = ctk_icon_theme_get_default ();
@@ -64,7 +64,7 @@ baul_emblem_list_available (void)
 void
 baul_emblem_refresh_list (void)
 {
-    GtkIconTheme *icon_theme;
+    CtkIconTheme *icon_theme;
 
     icon_theme = ctk_icon_theme_get_default ();
     ctk_icon_theme_rescan_if_needed (icon_theme);
@@ -218,7 +218,7 @@ emblem_keyword_valid (const char *keyword)
 }
 
 gboolean
-baul_emblem_verify_keyword (GtkWindow *parent_window,
+baul_emblem_verify_keyword (CtkWindow *parent_window,
                             const char *keyword,
                             const char *display_name)
 {
@@ -258,7 +258,7 @@ void
 baul_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
                                    const char *keyword,
                                    const char *display_name,
-                                   GtkWindow *parent_window)
+                                   CtkWindow *parent_window)
 {
     char *basename, *path, *dir, *stat_dir;
     struct stat stat_buf;

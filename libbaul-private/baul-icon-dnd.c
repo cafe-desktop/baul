@@ -62,13 +62,13 @@
 #include "baul-file-utilities.h"
 #include "baul-file-changes-queue.h"
 
-static const GtkTargetEntry drag_types [] =
+static const CtkTargetEntry drag_types [] =
 {
     { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
 };
 
-static const GtkTargetEntry drop_types [] =
+static const CtkTargetEntry drop_types [] =
 {
     { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     /* prefer "_NETSCAPE_URL" over "text/uri-list" to satisfy web browsers. */
@@ -83,11 +83,11 @@ static const GtkTargetEntry drop_types [] =
     /* Must be last: */
     { BAUL_ICON_DND_ROOTWINDOW_DROP_TYPE,  0, BAUL_ICON_DND_ROOTWINDOW_DROP }
 };
-static void     stop_dnd_highlight         (GtkWidget      *widget);
-static void     dnd_highlight_queue_redraw (GtkWidget      *widget);
+static void     stop_dnd_highlight         (CtkWidget      *widget);
+static void     dnd_highlight_queue_redraw (CtkWidget      *widget);
 
-static GtkTargetList *drop_types_list = NULL;
-static GtkTargetList *drop_types_list_root = NULL;
+static CtkTargetList *drop_types_list = NULL;
+static CtkTargetList *drop_types_list_root = NULL;
 
 static char * baul_icon_container_find_drop_target (BaulIconContainer *container,
         GdkDragContext *context,
@@ -103,7 +103,7 @@ create_selection_shadow (BaulIconContainer *container,
     int max_x, max_y;
     int min_x, min_y;
     GList *p;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     if (list == NULL)
     {
@@ -200,7 +200,7 @@ canvas_rect_world_to_widget (EelCanvas *canvas,
                              EelIRect *widget_rect)
 {
     EelDRect window_rect;
-    GtkAdjustment *hadj, *vadj;
+    CtkAdjustment *hadj, *vadj;
 
     hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
     vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
@@ -320,9 +320,9 @@ each_icon_get_data_binder (BaulDragEachSelectedItemDataGet iteratee,
 
 /* Called when the data for drag&drop is needed */
 static void
-drag_data_get_callback (GtkWidget *widget,
+drag_data_get_callback (CtkWidget *widget,
                         GdkDragContext *context,
-                        GtkSelectionData *selection_data,
+                        CtkSelectionData *selection_data,
                         guint info,
                         guint32 time,
                         gpointer data)
@@ -363,8 +363,8 @@ baul_icon_container_position_shadow (BaulIconContainer *container,
 }
 
 static void
-baul_icon_container_dropped_icon_feedback (GtkWidget *widget,
-        GtkSelectionData *data,
+baul_icon_container_dropped_icon_feedback (CtkWidget *widget,
+        CtkSelectionData *data,
         int x, int y)
 {
     BaulIconContainer *container;
@@ -422,7 +422,7 @@ get_direct_save_filename (GdkDragContext *context)
 }
 
 static void
-set_direct_save_uri (GtkWidget *widget, GdkDragContext *context, BaulDragInfo *drag_info, int x, int y)
+set_direct_save_uri (CtkWidget *widget, GdkDragContext *context, BaulDragInfo *drag_info, int x, int y)
 {
     char *filename, *drop_target;
     gchar *uri;
@@ -469,9 +469,9 @@ set_direct_save_uri (GtkWidget *widget, GdkDragContext *context, BaulDragInfo *d
 
 /* FIXME bugzilla.gnome.org 47445: Needs to become a shared function */
 static void
-get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context, guint32 time, int x, int y)
+get_data_on_first_target_we_support (CtkWidget *widget, GdkDragContext *context, guint32 time, int x, int y)
 {
-    GtkTargetList *list;
+    CtkTargetList *list;
     GdkAtom target;
 
     if (drop_types_list == NULL)
@@ -546,7 +546,7 @@ baul_icon_container_ensure_drag_data (BaulIconContainer *container,
 }
 
 static void
-drag_end_callback (GtkWidget *widget,
+drag_end_callback (CtkWidget *widget,
                    GdkDragContext *context,
                    gpointer data)
 {
@@ -669,7 +669,7 @@ static void
 receive_dropped_color (BaulIconContainer *container,
                        int x, int y,
                        GdkDragAction action,
-                       GtkSelectionData *data)
+                       CtkSelectionData *data)
 {
     action = get_background_drag_action (container, action);
 
@@ -690,7 +690,7 @@ receive_dropped_color (BaulIconContainer *container,
 
 /* handle dropped tile images */
 static void
-receive_dropped_tile_image (BaulIconContainer *container, GdkDragAction action, GtkSelectionData *data)
+receive_dropped_tile_image (BaulIconContainer *container, GdkDragAction action, CtkSelectionData *data)
 {
     g_assert (data != NULL);
 
@@ -846,10 +846,10 @@ static int
 auto_scroll_timeout_callback (gpointer data)
 {
     BaulIconContainer *container;
-    GtkWidget *widget;
+    CtkWidget *widget;
     float x_scroll_delta, y_scroll_delta;
     GdkRectangle exposed_area;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     g_assert (BAUL_IS_ICON_CONTAINER (data));
     widget = GTK_WIDGET (data);
@@ -889,7 +889,7 @@ auto_scroll_timeout_callback (gpointer data)
     container->details->dnd_info->drag_info.start_x -= x_scroll_delta;
     container->details->dnd_info->drag_info.start_y -= y_scroll_delta;
 
-    /* Due to a glitch in GtkLayout, whe need to do an explicit draw of the exposed
+    /* Due to a glitch in CtkLayout, whe need to do an explicit draw of the exposed
      * area.
      * Calculate the size of the area we need to draw
      */
@@ -1023,7 +1023,7 @@ handle_nonlocal_move (BaulIconContainer *container,
     GList *source_uris, *p;
     GArray *source_item_locations;
     gboolean free_target_uri, is_rtl;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     if (container->details->dnd_info->drag_info.selection_list == NULL)
     {
@@ -1481,7 +1481,7 @@ baul_icon_container_free_drag_data (BaulIconContainer *container)
 }
 
 static void
-drag_leave_callback (GtkWidget *widget,
+drag_leave_callback (CtkWidget *widget,
                      GdkDragContext *context,
                      guint32 time,
                      gpointer data)
@@ -1501,7 +1501,7 @@ drag_leave_callback (GtkWidget *widget,
 }
 
 static void
-drag_begin_callback (GtkWidget      *widget,
+drag_begin_callback (CtkWidget      *widget,
                      GdkDragContext *context,
                      gpointer        data)
 {
@@ -1569,13 +1569,13 @@ baul_icon_dnd_begin_drag (BaulIconContainer *container,
 }
 
 static gboolean
-drag_highlight_draw (GtkWidget *widget,
+drag_highlight_draw (CtkWidget *widget,
                      cairo_t   *cr,
                      gpointer   user_data)
 {
     gint width, height;
     GdkWindow *window;
-    GtkStyleContext *style;
+    CtkStyleContext *style;
 
     window = ctk_widget_get_window (widget);
     width = gdk_window_get_width (window);
@@ -1598,11 +1598,11 @@ drag_highlight_draw (GtkWidget *widget,
 
 /* Queue a redraw of the dnd highlight rect */
 static void
-dnd_highlight_queue_redraw (GtkWidget *widget)
+dnd_highlight_queue_redraw (CtkWidget *widget)
 {
     BaulIconDndInfo *dnd_info;
     int width, height;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     dnd_info = BAUL_ICON_CONTAINER (widget)->details->dnd_info;
 
@@ -1633,10 +1633,10 @@ dnd_highlight_queue_redraw (GtkWidget *widget)
 }
 
 static void
-start_dnd_highlight (GtkWidget *widget)
+start_dnd_highlight (CtkWidget *widget)
 {
     BaulIconDndInfo *dnd_info;
-    GtkWidget *toplevel;
+    CtkWidget *toplevel;
 
     dnd_info = BAUL_ICON_CONTAINER (widget)->details->dnd_info;
 
@@ -1658,7 +1658,7 @@ start_dnd_highlight (GtkWidget *widget)
 }
 
 static void
-stop_dnd_highlight (GtkWidget *widget)
+stop_dnd_highlight (CtkWidget *widget)
 {
     BaulIconDndInfo *dnd_info;
 
@@ -1675,7 +1675,7 @@ stop_dnd_highlight (GtkWidget *widget)
 }
 
 static gboolean
-drag_motion_callback (GtkWidget *widget,
+drag_motion_callback (CtkWidget *widget,
                       GdkDragContext *context,
                       int x, int y,
                       guint32 time)
@@ -1703,7 +1703,7 @@ drag_motion_callback (GtkWidget *widget,
 }
 
 static gboolean
-drag_drop_callback (GtkWidget *widget,
+drag_drop_callback (CtkWidget *widget,
                     GdkDragContext *context,
                     int x,
                     int y,
@@ -1750,11 +1750,11 @@ baul_icon_dnd_end_drag (BaulIconContainer *container)
 */
 
 static void
-drag_data_received_callback (GtkWidget *widget,
+drag_data_received_callback (CtkWidget *widget,
                              GdkDragContext *context,
                              int x,
                              int y,
-                             GtkSelectionData *data,
+                             CtkSelectionData *data,
                              guint info,
                              guint32 time,
                              gpointer user_data)
@@ -1937,7 +1937,7 @@ drag_data_received_callback (GtkWidget *widget,
 void
 baul_icon_dnd_init (BaulIconContainer *container)
 {
-    GtkTargetList *targets;
+    CtkTargetList *targets;
     int n_elements;
 
     g_return_if_fail (container != NULL);

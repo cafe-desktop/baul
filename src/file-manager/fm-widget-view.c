@@ -71,12 +71,12 @@ fm_widget_view_add_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *d
 static void
 fm_widget_view_begin_loading (FMDirectoryView *view)
 {
-    GtkWindow *window;
+    CtkWindow *window;
     BaulFile *file;
     gchar *uri;
     GList *providers, *l;
     char *mimetype;
-    GtkWidget *widget;
+    CtkWidget *widget;
     FMWidgetView *widget_view;
 
     widget_view = FM_WIDGET_VIEW (view);
@@ -134,7 +134,7 @@ fm_widget_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirector
 {
 }
 
-static GtkWidget *
+static CtkWidget *
 fm_widget_view_get_background_widget (FMDirectoryView *view)
 {
     return GTK_WIDGET (view);

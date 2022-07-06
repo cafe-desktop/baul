@@ -37,7 +37,7 @@ typedef struct _BaulPathBarClass BaulPathBarClass;
 
 struct _BaulPathBar
 {
-    GtkContainer parent;
+    CtkContainer parent;
 
     GFile *root_path;
     GFile *home_path;
@@ -49,8 +49,8 @@ struct _BaulPathBar
     GList *button_list;
     GList *first_scrolled_button;
     GList *fake_root;
-    GtkWidget *up_slider_button;
-    GtkWidget *down_slider_button;
+    CtkWidget *up_slider_button;
+    CtkWidget *down_slider_button;
     guint settings_signal_id;
     gint icon_size;
     gint16 slider_width;
@@ -67,7 +67,7 @@ struct _BaulPathBar
 
 struct _BaulPathBarClass
 {
-    GtkContainerClass parent_class;
+    CtkContainerClass parent_class;
 
     void (* path_clicked)   (BaulPathBar  *path_bar,
                              GFile             *location);
@@ -82,10 +82,10 @@ GType    baul_path_bar_get_type (void) G_GNUC_CONST;
 gboolean baul_path_bar_set_path    (BaulPathBar *path_bar, GFile *file);
 
 GFile *  baul_path_bar_get_path_for_button (BaulPathBar *path_bar,
-        GtkWidget       *button);
+        CtkWidget       *button);
 
 void     baul_path_bar_clear_buttons (BaulPathBar *path_bar);
 
-GtkWidget * baul_path_bar_get_button_from_button_list_entry (gpointer entry);
+CtkWidget * baul_path_bar_get_button_from_button_list_entry (gpointer entry);
 
 #endif /* BAUL_PATHBAR_H */

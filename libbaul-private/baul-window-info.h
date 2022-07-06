@@ -167,7 +167,7 @@ extern "C" {
         void   (* view_visible)        (BaulWindowInfo *window,
                                         BaulView *view);
         void   (* close_window)       (BaulWindowInfo *window);
-        GtkUIManager *     (* get_ui_manager)   (BaulWindowInfo *window);
+        CtkUIManager *     (* get_ui_manager)   (BaulWindowInfo *window);
     };
 
     GType                             baul_window_info_get_type                 (void);
@@ -201,7 +201,7 @@ extern "C" {
     gboolean                          baul_window_info_get_initiated_unmount    (BaulWindowInfo                *window);
     void                              baul_window_info_set_initiated_unmount    (BaulWindowInfo                *window,
             gboolean initiated_unmount);
-    GtkUIManager *                    baul_window_info_get_ui_manager           (BaulWindowInfo                *window);
+    CtkUIManager *                    baul_window_info_get_ui_manager           (BaulWindowInfo                *window);
 
 #ifdef __cplusplus
 }

@@ -7,7 +7,7 @@
 #include <eel/eel-editable-label.h>
 
 static void
-quit (GtkWidget *widget, gpointer data)
+quit (CtkWidget *widget, gpointer data)
 {
 	ctk_main_quit ();
 }
@@ -15,9 +15,9 @@ quit (GtkWidget *widget, gpointer data)
 int
 main (int argc, char* argv[])
 {
-	GtkWidget *window;
-	GtkWidget *label;
-	GtkWidget *vbox;
+	CtkWidget *window;
+	CtkWidget *label;
+	CtkWidget *vbox;
 
 	ctk_init (&argc, &argv);
 

@@ -74,10 +74,10 @@ struct BaulWindowSlot
      *  1) an event box containing extra_location_widgets
      *  2) the view box for the content view
      */
-    GtkWidget *content_box;
-    GtkWidget *extra_location_frame;
-    GtkWidget *extra_location_widgets;
-    GtkWidget *view_box;
+    CtkWidget *content_box;
+    CtkWidget *extra_location_frame;
+    CtkWidget *extra_location_widgets;
+    CtkWidget *view_box;
 
     BaulView *content_view;
     BaulView *new_content_view;
@@ -185,7 +185,7 @@ void    baul_window_slot_set_status			   (BaulWindowSlot *slot,
         const char	 *status);
 
 void    baul_window_slot_add_extra_location_widget     (BaulWindowSlot *slot,
-        GtkWidget       *widget);
+        CtkWidget       *widget);
 void    baul_window_slot_remove_extra_location_widgets (BaulWindowSlot *slot);
 
 void    baul_window_slot_add_current_location_to_history_list (BaulWindowSlot *slot);

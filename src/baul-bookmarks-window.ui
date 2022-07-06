@@ -3,45 +3,45 @@
 <!--*- mode: xml -*-->
 <interface>
   <requires lib="ctk+" version="3.0"/>
-  <object class="GtkImage" id="image1">
+  <object class="CtkImage" id="image1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">help-browser</property>
   </object>
-  <object class="GtkImage" id="image2">
+  <object class="CtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">go-jump</property>
   </object>
-  <object class="GtkImage" id="image3">
+  <object class="CtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">list-remove</property>
   </object>
-  <object class="GtkImage" id="image4">
+  <object class="CtkImage" id="image4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">window-close</property>
   </object>
-  <object class="GtkDialog" id="bookmarks_dialog">
+  <object class="CtkDialog" id="bookmarks_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Edit Bookmarks</property>
     <property name="window_position">center</property>
     <property name="type_hint">normal</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
+      <object class="CtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
+          <object class="CtkButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="helpbutton1">
+              <object class="CtkButton" id="helpbutton1">
                 <property name="label" translatable="yes">_Help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -57,7 +57,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="bookmark_jump_button">
+              <object class="CtkButton" id="bookmark_jump_button">
                 <property name="label" translatable="yes">_Jump to</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -73,7 +73,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="bookmark_delete_button">
+              <object class="CtkButton" id="bookmark_delete_button">
                 <property name="label" translatable="yes">_Remove</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -89,7 +89,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button2">
+              <object class="CtkButton" id="button2">
                 <property name="label" translatable="yes">_Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -113,24 +113,24 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="hbox1">
+          <object class="CtkBox" id="hbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">5</property>
             <property name="spacing">18</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkAlignment" id="alignment1">
+              <object class="CtkAlignment" id="alignment1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkBox" id="vbox1">
+                  <object class="CtkBox" id="vbox1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label1">
+                      <object class="CtkLabel" id="label1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;_Bookmarks&lt;/b&gt;</property>
@@ -147,11 +147,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="hbox4">
+                      <object class="CtkBox" id="hbox4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkLabel" id="label4">
+                          <object class="CtkLabel" id="label4">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label">    </property>
@@ -165,19 +165,19 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkScrolledWindow" id="bookmark_list_window">
+                          <object class="CtkScrolledWindow" id="bookmark_list_window">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="hscrollbar_policy">never</property>
                             <property name="shadow_type">in</property>
                             <child>
-                              <object class="GtkTreeView" id="bookmark_tree_view">
+                              <object class="CtkTreeView" id="bookmark_tree_view">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="headers_visible">False</property>
                                 <property name="reorderable">True</property>
                                 <child internal-child="selection">
-                                  <object class="GtkTreeSelection"/>
+                                  <object class="CtkTreeSelection"/>
                                 </child>
                               </object>
                             </child>
@@ -205,23 +205,23 @@
               </packing>
             </child>
             <child>
-              <object class="GtkAlignment" id="alignment2">
+              <object class="CtkAlignment" id="alignment2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkBox" id="vbox2">
+                  <object class="CtkBox" id="vbox2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">18</property>
                     <child>
-                      <object class="GtkBox" id="vbox4">
+                      <object class="CtkBox" id="vbox4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="bookmark_name_label">
+                          <object class="CtkLabel" id="bookmark_name_label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">&lt;b&gt;_Name&lt;/b&gt;</property>
@@ -237,11 +237,11 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="hbox3">
+                          <object class="CtkBox" id="hbox3">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkLabel" id="label3">
+                              <object class="CtkLabel" id="label3">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label">    </property>
@@ -255,7 +255,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="bookmark_name_placeholder">
+                              <object class="CtkBox" id="bookmark_name_placeholder">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
@@ -283,13 +283,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="vbox3">
+                      <object class="CtkBox" id="vbox3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="bookmark_location_label">
+                          <object class="CtkLabel" id="bookmark_location_label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">&lt;b&gt;_Location&lt;/b&gt;</property>
@@ -305,11 +305,11 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="hbox2">
+                          <object class="CtkBox" id="hbox2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkLabel" id="label2">
+                              <object class="CtkLabel" id="label2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label">    </property>
@@ -323,7 +323,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="bookmark_location_placeholder">
+                              <object class="CtkBox" id="bookmark_location_placeholder">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>

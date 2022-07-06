@@ -51,8 +51,8 @@
 struct _BaulImagePropertiesPagePrivate
 {
     GCancellable *cancellable;
-    GtkWidget *vbox;
-    GtkWidget *loading_label;
+    CtkWidget *vbox;
+    CtkWidget *loading_label;
     GdkPixbufLoader *loader;
     gboolean got_size;
     gboolean pixbuf_still_loading;
@@ -135,11 +135,11 @@ file_close_callback (GObject      *object,
     page->details->cancellable = NULL;
 }
 
-static GtkWidget *
-append_label (GtkWidget *vbox,
+static CtkWidget *
+append_label (CtkWidget *vbox,
               const char *str)
 {
-    GtkWidget *label;
+    CtkWidget *label;
 
     label = ctk_label_new (NULL);
     ctk_label_set_markup (GTK_LABEL (label), str);
@@ -158,11 +158,11 @@ append_label (GtkWidget *vbox,
     return label;
 }
 
-static GtkWidget *
-append_label_take_str (GtkWidget *vbox,
+static CtkWidget *
+append_label_take_str (CtkWidget *vbox,
                        char *str)
 {
-    GtkWidget *retval;
+    CtkWidget *retval;
 
     retval = append_label (vbox, str);
     g_free (str);

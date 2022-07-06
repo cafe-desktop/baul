@@ -395,7 +395,7 @@ baul_undostack_manager_request_menu_update (BaulUndoStackManager *
  ** ****************************************************************/
 void
 baul_undostack_manager_redo (BaulUndoStackManager * manager,
-    GtkWidget * parent_view, BaulUndostackFinishCallback cb)
+    CtkWidget * parent_view, BaulUndostackFinishCallback cb)
 {
   BaulUndoStackManagerPrivate *priv = manager->priv;
 
@@ -583,7 +583,7 @@ baul_undostack_manager_redo (BaulUndoStackManager * manager,
  ** ****************************************************************/
 void
 baul_undostack_manager_undo (BaulUndoStackManager * manager,
-    GtkWidget * parent_view, BaulUndostackFinishCallback cb)
+    CtkWidget * parent_view, BaulUndostackFinishCallback cb)
 {
   BaulUndoStackManagerPrivate *priv = manager->priv;
   GList *uris = NULL;

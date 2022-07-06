@@ -73,18 +73,18 @@
 
 struct _BaulSpatialWindowPrivate
 {
-    GtkActionGroup *spatial_action_group; /* owned by ui_manager */
+    CtkActionGroup *spatial_action_group; /* owned by ui_manager */
     char *last_geometry;
     guint save_geometry_timeout_id;
 
     gboolean saved_data_on_close;
-    GtkWidget *content_box;
-    GtkWidget *location_button;
-    GtkWidget *location_label;
-    GtkWidget *location_icon;
+    CtkWidget *content_box;
+    CtkWidget *location_button;
+    CtkWidget *location_label;
+    CtkWidget *location_icon;
 };
 
-static const GtkTargetEntry location_button_drag_types[] =
+static const CtkTargetEntry location_button_drag_types[] =
 {
     { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
@@ -115,7 +115,7 @@ save_window_geometry_timeout (gpointer callback_data)
 }
 
 static gboolean
-baul_spatial_window_configure_event (GtkWidget *widget,
+baul_spatial_window_configure_event (CtkWidget *widget,
                                      GdkEventConfigure *event)
 {
     BaulSpatialWindow *window;
@@ -139,7 +139,7 @@ baul_spatial_window_configure_event (GtkWidget *widget,
 }
 
 static void
-baul_spatial_window_unrealize (GtkWidget *widget)
+baul_spatial_window_unrealize (CtkWidget *widget)
 {
     BaulSpatialWindow *window;
     BaulWindowSlot *slot;
@@ -162,7 +162,7 @@ baul_spatial_window_unrealize (GtkWidget *widget)
 }
 
 static gboolean
-baul_spatial_window_state_event (GtkWidget *widget,
+baul_spatial_window_state_event (CtkWidget *widget,
                                  GdkEventWindowState *event)
 {
     BaulWindow *window;
@@ -308,7 +308,7 @@ baul_spatial_window_save_show_hidden_files_mode (BaulSpatialWindow *window,
 }
 
 static void
-baul_spatial_window_show (GtkWidget *widget)
+baul_spatial_window_show (CtkWidget *widget)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -348,14 +348,14 @@ baul_spatial_window_show (GtkWidget *widget)
 }
 
 static void
-action_close_parent_folders_callback (GtkAction *action,
+action_close_parent_folders_callback (CtkAction *action,
                                       gpointer user_data)
 {
     baul_application_close_parent_windows (BAUL_SPATIAL_WINDOW (user_data));
 }
 
 static void
-action_close_all_folders_callback (GtkAction *action,
+action_close_all_folders_callback (CtkAction *action,
                                    gpointer user_data)
 {
     baul_application_close_all_spatial_windows ();
@@ -365,7 +365,7 @@ static void
 real_prompt_for_location (BaulWindow *window,
                           const char     *initial)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     dialog = baul_location_dialog_new (window);
     if (initial != NULL)
@@ -459,7 +459,7 @@ static void
 real_set_allow_up (BaulWindow *window, gboolean allow)
 {
     BaulSpatialWindow *spatial;
-    GtkAction *action;
+    CtkAction *action;
 
     spatial = BAUL_SPATIAL_WINDOW (window);
 
@@ -544,7 +544,7 @@ real_window_close (BaulWindow *window)
 }
 
 static void
-location_menu_item_activated_callback (GtkWidget *menu_item,
+location_menu_item_activated_callback (CtkWidget *menu_item,
                                        BaulWindow *window)
 {
     BaulWindowSlot *slot;
@@ -592,7 +592,7 @@ location_menu_item_activated_callback (GtkWidget *menu_item,
 }
 
 static void
-menu_deactivate_callback (GtkWidget *menu,
+menu_deactivate_callback (CtkWidget *menu,
                           gpointer   data)
 {
     GMainLoop *loop;
@@ -606,7 +606,7 @@ menu_deactivate_callback (GtkWidget *menu,
 }
 
 static gboolean
-location_button_pressed_callback (GtkWidget      *widget,
+location_button_pressed_callback (CtkWidget      *widget,
                                   GdkEventButton *event,
                                   BaulWindow *window)
 {
@@ -625,11 +625,11 @@ location_button_pressed_callback (GtkWidget      *widget,
 }
 
 static void
-location_button_clicked_callback (GtkWidget         *widget,
+location_button_clicked_callback (CtkWidget         *widget,
                                   BaulSpatialWindow *window)
 {
     BaulWindowSlot *slot;
-    GtkWidget *popup, *menu_item, *first_item = NULL;
+    CtkWidget *popup, *menu_item, *first_item = NULL;
     cairo_surface_t *surface = NULL;
     GFile *location;
     GFile *child_location;
@@ -755,7 +755,7 @@ get_dnd_icon_size (BaulSpatialWindow *window)
 }
 
 static void
-location_button_drag_begin_callback (GtkWidget             *widget,
+location_button_drag_begin_callback (CtkWidget             *widget,
                                      GdkDragContext        *context,
                                      BaulSpatialWindow *window)
 {
@@ -807,9 +807,9 @@ get_data_binder (BaulDragEachSelectedItemDataGet iteratee,
 }
 
 static void
-location_button_drag_data_get_callback (GtkWidget             *widget,
+location_button_drag_data_get_callback (CtkWidget             *widget,
                                         GdkDragContext        *context,
-                                        GtkSelectionData      *selection_data,
+                                        CtkSelectionData      *selection_data,
                                         guint                  info,
                                         guint                  time,
                                         BaulSpatialWindow *window)
@@ -871,7 +871,7 @@ baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
 }
 
 static void
-action_go_to_location_callback (GtkAction *action,
+action_go_to_location_callback (CtkAction *action,
                                 gpointer user_data)
 {
     BaulWindow *window;
@@ -882,7 +882,7 @@ action_go_to_location_callback (GtkAction *action,
 }
 
 static void
-action_add_bookmark_callback (GtkAction *action,
+action_add_bookmark_callback (CtkAction *action,
                               gpointer user_data)
 {
     BaulWindow *window;
@@ -896,14 +896,14 @@ action_add_bookmark_callback (GtkAction *action,
 }
 
 static void
-action_edit_bookmarks_callback (GtkAction *action,
+action_edit_bookmarks_callback (CtkAction *action,
                                 gpointer user_data)
 {
     baul_window_edit_bookmarks (BAUL_WINDOW (user_data));
 }
 
 static void
-action_search_callback (GtkAction *action,
+action_search_callback (CtkAction *action,
                         gpointer user_data)
 {
     BaulWindow *window;
@@ -919,7 +919,7 @@ action_search_callback (GtkAction *action,
     g_free (uri);
 }
 
-static const GtkActionEntry spatial_entries[] =
+static const CtkActionEntry spatial_entries[] =
 {
     /* name, icon name, label */ { SPATIAL_ACTION_PLACES, NULL, N_("_Places") },
     /* name, icon name, label */ {
@@ -954,11 +954,11 @@ static const GtkActionEntry spatial_entries[] =
 static void
 baul_spatial_window_init (BaulSpatialWindow *window)
 {
-    GtkWidget *arrow;
-    GtkWidget *hbox, *vbox;
-    GtkActionGroup *action_group;
-    GtkUIManager *ui_manager;
-    GtkTargetList *targets;
+    CtkWidget *arrow;
+    CtkWidget *hbox, *vbox;
+    CtkActionGroup *action_group;
+    CtkUIManager *ui_manager;
+    CtkTargetList *targets;
     const char *ui;
     BaulWindow *win;
     BaulWindowPane *pane;
@@ -1065,9 +1065,9 @@ baul_spatial_window_init (BaulSpatialWindow *window)
 static void
 baul_spatial_window_class_init (BaulSpatialWindowClass *klass)
 {
-    GtkBindingSet *binding_set;
+    CtkBindingSet *binding_set;
 	BaulWindowClass *nclass = BAUL_WINDOW_CLASS (klass);
-	GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
+	CtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
 
 	nclass->window_type = BAUL_WINDOW_SPATIAL;
 	nclass->bookmarks_placeholder = MENU_PATH_SPATIAL_BOOKMARKS_PLACEHOLDER;

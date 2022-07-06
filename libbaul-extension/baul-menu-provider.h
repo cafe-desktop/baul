@@ -63,26 +63,26 @@ struct _BaulMenuProviderIface {
     GTypeInterface g_iface;
 
     GList *(*get_file_items)       (BaulMenuProvider *provider,
-                                    GtkWidget        *window,
+                                    CtkWidget        *window,
                                     GList            *files);
     GList *(*get_background_items) (BaulMenuProvider *provider,
-                                    GtkWidget        *window,
+                                    CtkWidget        *window,
                                     BaulFileInfo     *current_folder);
     GList *(*get_toolbar_items)    (BaulMenuProvider *provider,
-                                    GtkWidget        *window,
+                                    CtkWidget        *window,
                                     BaulFileInfo     *current_folder);
 };
 
 /* Interface Functions */
 GType  baul_menu_provider_get_type             (void);
 GList *baul_menu_provider_get_file_items       (BaulMenuProvider *provider,
-                                                GtkWidget        *window,
+                                                CtkWidget        *window,
                                                 GList            *files);
 GList *baul_menu_provider_get_background_items (BaulMenuProvider *provider,
-                                                GtkWidget        *window,
+                                                CtkWidget        *window,
                                                 BaulFileInfo     *current_folder);
 GList *baul_menu_provider_get_toolbar_items    (BaulMenuProvider *provider,
-                                                GtkWidget        *window,
+                                                CtkWidget        *window,
                                                 BaulFileInfo     *current_folder);
 
 /* This function emit a signal to inform baul that its item list has changed. */

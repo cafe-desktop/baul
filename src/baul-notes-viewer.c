@@ -53,14 +53,14 @@ static void load_note_text_from_metadata             (BaulFile                  
         BaulNotesViewer               *notes);
 static void notes_save_metainfo                      (BaulNotesViewer               *notes);
 static void baul_notes_viewer_sidebar_iface_init (BaulSidebarIface              *iface);
-static void on_changed                               (GtkEditable                       *editable,
+static void on_changed                               (CtkEditable                       *editable,
         BaulNotesViewer               *notes);
 static void property_page_provider_iface_init        (BaulPropertyPageProviderIface *iface);
 static void sidebar_provider_iface_init              (BaulSidebarProviderIface       *iface);
 
 typedef struct
 {
-    GtkScrolledWindowClass parent;
+    CtkScrolledWindowClass parent;
 } BaulNotesViewerClass;
 
 typedef struct
@@ -89,8 +89,8 @@ G_DEFINE_TYPE_WITH_CODE (BaulNotesViewerProvider, baul_notes_viewer_provider, G_
 
 struct _BaulNotesViewerDetails
 {
-    GtkWidget *note_text_field;
-    GtkTextBuffer *text_buffer;
+    CtkWidget *note_text_field;
+    CtkTextBuffer *text_buffer;
     char *uri;
     BaulFile *file;
     guint save_timeout_id;
@@ -156,8 +156,8 @@ static void
 notes_save_metainfo (BaulNotesViewer *notes)
 {
     char *notes_text;
-    GtkTextIter start_iter;
-    GtkTextIter end_iter;
+    CtkTextIter start_iter;
+    CtkTextIter end_iter;
 
     if (notes->details->file == NULL)
     {
@@ -304,7 +304,7 @@ loading_uri_callback (BaulWindowInfo *window,
 }
 
 static gboolean
-on_text_field_focus_out_event (GtkWidget *widget,
+on_text_field_focus_out_event (CtkWidget *widget,
                                GdkEventFocus *event,
                                gpointer callback_data)
 {
@@ -316,7 +316,7 @@ on_text_field_focus_out_event (GtkWidget *widget,
 }
 
 static void
-on_changed (GtkEditable *editable, BaulNotesViewer *notes)
+on_changed (CtkEditable *editable, BaulNotesViewer *notes)
 {
     schedule_save (notes);
 }

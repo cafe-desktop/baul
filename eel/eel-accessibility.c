@@ -29,7 +29,7 @@
 #include "eel-accessibility.h"
 
 void
-eel_accessibility_set_up_label_widget_relation (GtkWidget *label, GtkWidget *widget)
+eel_accessibility_set_up_label_widget_relation (CtkWidget *label, CtkWidget *widget)
 {
     AtkObject *atk_widget, *atk_label;
 

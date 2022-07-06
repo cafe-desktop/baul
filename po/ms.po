@@ -474,11 +474,11 @@ msgstr "Justifikasi"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "Jajaran baris pada teks label relatif diantara satu sama lain. Ini TIDAK "
 "memberi kesan pada jajaran label di dalam peruntukannya. Lihat "
-"GtkMisc::xalign untuk itu"
+"CtkMisc::xalign untuk itu"
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

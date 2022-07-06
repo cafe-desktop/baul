@@ -71,7 +71,7 @@ baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self
     						   gpointer user_data)
 {
     BaulWindow *window;
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     widget = GTK_WIDGET (self);
 

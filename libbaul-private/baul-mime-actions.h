@@ -43,14 +43,14 @@ gboolean               baul_mime_has_any_applications_for_file        (BaulFile 
 
 gboolean               baul_mime_file_opens_in_view                   (BaulFile            *file);
 gboolean               baul_mime_file_opens_in_external_app           (BaulFile            *file);
-void                   baul_mime_activate_files                       (GtkWindow               *parent_window,
+void                   baul_mime_activate_files                       (CtkWindow               *parent_window,
         BaulWindowSlotInfo  *slot_info,
         GList                   *files,
         const char              *launch_directory,
         BaulWindowOpenMode   mode,
         BaulWindowOpenFlags  flags,
         gboolean                 user_confirmation);
-void                   baul_mime_activate_file                        (GtkWindow               *parent_window,
+void                   baul_mime_activate_file                        (CtkWindow               *parent_window,
         BaulWindowSlotInfo  *slot_info,
         BaulFile            *file,
         const char              *launch_directory,

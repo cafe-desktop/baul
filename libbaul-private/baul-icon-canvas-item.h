@@ -96,7 +96,7 @@ G_BEGIN_DECLS
             EelIRect                      canvas_rect);
     gboolean    baul_icon_canvas_item_hit_test_stretch_handles (BaulIconCanvasItem       *item,
             EelDPoint                     world_point,
-            GtkCornerType                *corner);
+            CtkCornerType                *corner);
     void        baul_icon_canvas_item_invalidate_label         (BaulIconCanvasItem       *item);
     void        baul_icon_canvas_item_invalidate_label_size    (BaulIconCanvasItem       *item);
     EelDRect    baul_icon_canvas_item_get_icon_rectangle       (const BaulIconCanvasItem *item);

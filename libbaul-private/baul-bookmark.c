@@ -214,7 +214,7 @@ baul_bookmark_get_has_custom_name (BaulBookmark *bookmark)
 
 cairo_surface_t *
 baul_bookmark_get_surface (BaulBookmark *bookmark,
-                           GtkIconSize stock_size)
+                           CtkIconSize stock_size)
 {
     cairo_surface_t *result;
     GIcon *icon;
@@ -601,15 +601,15 @@ create_image_cairo_for_bookmark (BaulBookmark *bookmark)
     return surface;
 }
 
-static GtkWidget *
+static CtkWidget *
 bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
                                            const gchar       *label_name)
 {
-    GtkWidget *icon;
-    GtkLabel *label;
+    CtkWidget *icon;
+    CtkLabel *label;
     gchar *concat;
 
-    GtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    CtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
     if (icon_surface)
         icon = ctk_image_new_from_surface (icon_surface);
@@ -617,7 +617,7 @@ bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
         icon = ctk_image_new ();
 
     concat = g_strconcat (label_name, "     ", NULL);
-    GtkWidget *label_menu = ctk_label_new (concat);
+    CtkWidget *label_menu = ctk_label_new (concat);
     g_free (concat);
 
     label = GTK_LABEL (label_menu);
@@ -625,7 +625,7 @@ bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
     ctk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
     ctk_label_set_max_width_chars (label, (ELLIPSISED_MENU_ITEM_MIN_CHARS + 2));
 
-    GtkWidget *menuitem = ctk_menu_item_new ();
+    CtkWidget *menuitem = ctk_menu_item_new ();
 
     ctk_container_add (GTK_CONTAINER (box), icon);
     ctk_container_add (GTK_CONTAINER (box), label_menu);
@@ -643,7 +643,7 @@ bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
  * @bookmark: The bookmark the menu item represents.
  * Return value: A newly-created bookmark, not yet shown.
  **/
-GtkWidget *
+CtkWidget *
 baul_bookmark_menu_item_new (BaulBookmark *bookmark)
 {
     cairo_surface_t *image_cairo;
@@ -652,7 +652,7 @@ baul_bookmark_menu_item_new (BaulBookmark *bookmark)
 
     if (strlen (bookmark->details->name) > 0)
     {
-        GtkWidget *menu_item;
+        CtkWidget *menu_item;
 
         menu_item = bookmark_image_menu_item_new_from_surface (image_cairo, bookmark->details->name);
 

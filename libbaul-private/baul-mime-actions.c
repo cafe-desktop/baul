@@ -72,7 +72,7 @@ typedef struct
 {
     BaulWindowSlotInfo *slot_info;
     gpointer window_info;
-    GtkWindow *parent_window;
+    CtkWindow *parent_window;
     GCancellable *cancellable;
     GList *locations;
     GList *mountables;
@@ -684,7 +684,7 @@ baul_mime_get_applications_for_files (GList *files)
 }
 
 static void
-trash_or_delete_files (GtkWindow *parent_window,
+trash_or_delete_files (CtkWindow *parent_window,
                        const GList *files,
                        gboolean delete_if_all_already_in_trash)
 {
@@ -707,13 +707,13 @@ trash_or_delete_files (GtkWindow *parent_window,
 }
 
 static void
-report_broken_symbolic_link (GtkWindow *parent_window, BaulFile *file)
+report_broken_symbolic_link (CtkWindow *parent_window, BaulFile *file)
 {
     char *target_path;
     char *display_name;
     char *prompt;
     char *detail;
-    GtkDialog *dialog;
+    CtkDialog *dialog;
     GList file_as_list;
     int response;
 
@@ -780,9 +780,9 @@ out:
 }
 
 static ActivationAction
-get_executable_text_file_action (GtkWindow *parent_window, BaulFile *file)
+get_executable_text_file_action (CtkWindow *parent_window, BaulFile *file)
 {
-    GtkDialog *dialog;
+    CtkDialog *dialog;
     char *file_name;
     char *prompt;
     char *detail;
@@ -1154,7 +1154,7 @@ unpause_activation_timed_cancel (ActivateParameters *parameters)
 
 
 static void
-activate_mount_op_active (GtkMountOperation *operation,
+activate_mount_op_active (CtkMountOperation *operation,
                           GParamSpec *pspec,
                           ActivateParameters *parameters)
 {
@@ -1173,11 +1173,11 @@ activate_mount_op_active (GtkMountOperation *operation,
 }
 
 static gboolean
-confirm_multiple_windows (GtkWindow *parent_window,
+confirm_multiple_windows (CtkWindow *parent_window,
                           int count,
                           gboolean use_tabs)
 {
-    GtkDialog *dialog;
+    CtkDialog *dialog;
     char *prompt;
     char *detail;
     int response;
@@ -1212,7 +1212,7 @@ confirm_multiple_windows (GtkWindow *parent_window,
 typedef struct
 {
     BaulWindowSlotInfo *slot_info;
-    GtkWindow *parent_window;
+    CtkWindow *parent_window;
     BaulFile *file;
     GList *files;
     BaulWindowOpenMode mode;
@@ -1221,7 +1221,7 @@ typedef struct
     gboolean user_confirmation;
     char *uri;
     GDBusProxy *proxy;
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 } ActivateParametersInstall;
 
 static void
@@ -1285,7 +1285,7 @@ application_selected_cb (BaulOpenWithDialog *dialog,
                          GAppInfo *app,
                          gpointer user_data)
 {
-    GtkWindow *parent_window;
+    CtkWindow *parent_window;
     BaulFile *file;
     GList files;
 
@@ -1300,9 +1300,9 @@ application_selected_cb (BaulOpenWithDialog *dialog,
 }
 
 static void
-choose_program (GtkDialog *message_dialog, int response, gpointer callback_data)
+choose_program (CtkDialog *message_dialog, int response, gpointer callback_data)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
     char *uri;
     char *mime_type;
     BaulFile *file;
@@ -1349,7 +1349,7 @@ choose_program (GtkDialog *message_dialog, int response, gpointer callback_data)
 static void
 show_unhandled_type_error (ActivateParametersInstall *parameters)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     char *mime_type = baul_file_get_mime_type (parameters->file);
     char *error_message = get_application_no_mime_type_handler_message (parameters->file, parameters->uri);
@@ -1483,7 +1483,7 @@ search_for_application_mime_type (ActivateParametersInstall *parameters_install,
 }
 
 static void
-application_unhandled_file_install (GtkDialog *dialog,
+application_unhandled_file_install (CtkDialog *dialog,
                                     gint response_id,
                                     ActivateParametersInstall *parameters_install)
 {
@@ -1506,7 +1506,7 @@ application_unhandled_file_install (GtkDialog *dialog,
 }
 
 static gboolean
-delete_cb (GtkDialog *dialog)
+delete_cb (CtkDialog *dialog)
 {
     ctk_dialog_response (dialog, GTK_RESPONSE_DELETE_EVENT);
     return TRUE;
@@ -1520,7 +1520,7 @@ pk_proxy_appeared_cb (GObject *source,
     ActivateParametersInstall *parameters_install = user_data;
     char *mime_type;
     char *error_message;
-    GtkWidget *dialog;
+    CtkWidget *dialog;
     GDBusProxy *proxy;
     GError *error = NULL;
 
@@ -1637,7 +1637,7 @@ out:
 
 typedef struct
 {
-    GtkWindow *parent_window;
+    CtkWindow *parent_window;
     BaulFile *file;
 } ActivateParametersDesktop;
 
@@ -1653,7 +1653,7 @@ activate_parameters_desktop_free (ActivateParametersDesktop *parameters_desktop)
 }
 
 static void
-untrusted_launcher_response_callback (GtkDialog *dialog,
+untrusted_launcher_response_callback (CtkDialog *dialog,
                                       int response_id,
                                       ActivateParametersDesktop *parameters)
 {
@@ -1703,7 +1703,7 @@ activate_desktop_file (ActivateParameters *parameters,
     if (!baul_file_is_trusted_link (file))
     {
         char *primary, *secondary, *display_name;
-        GtkWidget *dialog;
+        CtkWidget *dialog;
 
         /* copy the parts of parameters we are interested in as the orignal will be freed */
         parameters_desktop = g_new0 (ActivateParametersDesktop, 1);
@@ -2483,7 +2483,7 @@ activation_start_mountables (ActivateParameters *parameters)
  *
  **/
 void
-baul_mime_activate_files (GtkWindow *parent_window,
+baul_mime_activate_files (CtkWindow *parent_window,
                           BaulWindowSlotInfo *slot_info,
                           GList *files,
                           const char *launch_directory,
@@ -2579,7 +2579,7 @@ baul_mime_activate_files (GtkWindow *parent_window,
  **/
 
 void
-baul_mime_activate_file (GtkWindow *parent_window,
+baul_mime_activate_file (CtkWindow *parent_window,
                          BaulWindowSlotInfo *slot_info,
                          BaulFile *file,
                          const char *launch_directory,

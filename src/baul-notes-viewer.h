@@ -41,7 +41,7 @@ typedef struct _BaulNotesViewerDetails BaulNotesViewerDetails;
 
 typedef struct
 {
-    GtkScrolledWindow parent;
+    CtkScrolledWindow parent;
     BaulNotesViewerDetails *details;
 } BaulNotesViewer;
 

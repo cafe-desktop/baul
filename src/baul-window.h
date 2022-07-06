@@ -84,7 +84,7 @@ typedef struct _BaulWindowPrivate BaulWindowPrivate;
 
 typedef struct
 {
-    GtkWindowClass parent_spot;
+    CtkWindowClass parent_spot;
 
     BaulWindowType window_type;
     const char *bookmarks_placeholder;
@@ -119,7 +119,7 @@ typedef struct
 
 struct BaulWindow
 {
-    GtkWindow parent_object;
+    CtkWindow parent_object;
 
     BaulWindowPrivate *details;
 
@@ -164,6 +164,6 @@ void             baul_window_allow_up             (BaulWindow    *window,
         gboolean           allow);
 void             baul_window_allow_stop           (BaulWindow    *window,
         gboolean           allow);
-GtkUIManager *   baul_window_get_ui_manager       (BaulWindow    *window);
+CtkUIManager *   baul_window_get_ui_manager       (BaulWindow    *window);
 
 #endif

@@ -88,21 +88,21 @@ struct _FMPropertiesWindowPrivate {
 	GList *original_files;
 	GList *target_files;
 
-	GtkNotebook *notebook;
+	CtkNotebook *notebook;
 
-	GtkGrid *basic_grid;
+	CtkGrid *basic_grid;
 
-	GtkWidget *icon_button;
-	GtkWidget *icon_image;
-	GtkWidget *icon_chooser;
+	CtkWidget *icon_button;
+	CtkWidget *icon_image;
+	CtkWidget *icon_chooser;
 
-	GtkLabel *name_label;
-	GtkWidget *name_field;
+	CtkLabel *name_label;
+	CtkWidget *name_field;
 	unsigned int name_row;
 	char *pending_name;
 
-	GtkLabel *directory_contents_title_field;
-	GtkLabel *directory_contents_value_field;
+	CtkLabel *directory_contents_title_field;
+	CtkLabel *directory_contents_value_field;
 	guint update_directory_contents_timeout_id;
 	guint update_files_timeout_id;
 
@@ -159,7 +159,7 @@ enum {
 typedef struct {
 	GList *original_files;
 	GList *target_files;
-	GtkWidget *parent_widget;
+	CtkWidget *parent_widget;
 	char *pending_key;
 	GHashTable *pending_files;
 } StartupData;
@@ -172,7 +172,7 @@ enum {
 	TARGET_RESET_BACKGROUND
 };
 
-static const GtkTargetEntry target_table[] = {
+static const CtkTargetEntry target_table[] = {
 	{ "text/uri-list",  0, TARGET_URI_LIST },
 	{ "x-special/cafe-icon-list",  0, TARGET_CAFE_URI_LIST },
 	{ "x-special/cafe-reset-background", 0, TARGET_RESET_BACKGROUND }
@@ -197,20 +197,20 @@ static void directory_contents_value_field_update (FMPropertiesWindow *window);
 static void file_changed_callback                 (BaulFile       *file,
 						   gpointer            user_data);
 static void permission_button_update              (FMPropertiesWindow *window,
-						   GtkToggleButton    *button);
+						   CtkToggleButton    *button);
 static void permission_combo_update               (FMPropertiesWindow *window,
-						   GtkComboBox        *combo);
+						   CtkComboBox        *combo);
 static void value_field_update                    (FMPropertiesWindow *window,
-						   GtkLabel           *field);
+						   CtkLabel           *field);
 static void properties_window_update              (FMPropertiesWindow *window,
 						   GList              *files);
 static void is_directory_ready_callback           (BaulFile       *file,
 						   gpointer            data);
 static void cancel_group_change_callback          (FMPropertiesWindow *window);
 static void cancel_owner_change_callback          (FMPropertiesWindow *window);
-static void parent_widget_destroyed_callback      (GtkWidget          *widget,
+static void parent_widget_destroyed_callback      (CtkWidget          *widget,
 						   gpointer            callback_data);
-static void select_image_button_callback          (GtkWidget          *widget,
+static void select_image_button_callback          (CtkWidget          *widget,
 						   FMPropertiesWindow *properties_window);
 static void set_icon                              (const char         *icon_path,
 						   FMPropertiesWindow *properties_window);
@@ -225,12 +225,12 @@ static gboolean name_field_focus_out              (BaulEntry *name_field,
 						   gpointer callback_data);
 static void name_field_activate                   (BaulEntry *name_field,
 						   gpointer callback_data);
-static GtkLabel *attach_ellipsizing_value_label   (GtkGrid *grid,
-                                                   GtkWidget *sibling,
+static CtkLabel *attach_ellipsizing_value_label   (CtkGrid *grid,
+                                                   CtkWidget *sibling,
 
 						   const char *initial_text);
 
-static GtkWidget* create_pie_widget 		  (FMPropertiesWindow *window);
+static CtkWidget* create_pie_widget 		  (FMPropertiesWindow *window);
 
 G_DEFINE_TYPE_WITH_PRIVATE (FMPropertiesWindow, fm_properties_window, GTK_TYPE_DIALOG);
 
@@ -334,9 +334,9 @@ get_target_file (FMPropertiesWindow *window)
 }
 
 static void
-add_prompt (GtkWidget *vbox, const char *prompt_text, gboolean pack_at_start)
+add_prompt (CtkWidget *vbox, const char *prompt_text, gboolean pack_at_start)
 {
-	GtkWidget *prompt;
+	CtkWidget *prompt;
 
 	prompt = ctk_label_new (prompt_text);
    	ctk_label_set_justify (GTK_LABEL (prompt), GTK_JUSTIFY_LEFT);
@@ -350,9 +350,9 @@ add_prompt (GtkWidget *vbox, const char *prompt_text, gboolean pack_at_start)
 }
 
 static void
-add_prompt_and_separator (GtkWidget *vbox, const char *prompt_text)
+add_prompt_and_separator (CtkWidget *vbox, const char *prompt_text)
 {
-	GtkWidget *separator_line;
+	CtkWidget *separator_line;
 
 	add_prompt (vbox, prompt_text, FALSE);
 
@@ -483,15 +483,15 @@ reset_icon (FMPropertiesWindow *properties_window)
 
 
 static void
-fm_properties_window_drag_data_received (GtkWidget *widget, GdkDragContext *context,
+fm_properties_window_drag_data_received (CtkWidget *widget, GdkDragContext *context,
 					 int x, int y,
-					 GtkSelectionData *selection_data,
+					 CtkSelectionData *selection_data,
 					 guint info, guint time)
 {
 	char **uris;
 	gboolean exactly_one;
-	GtkImage *image;
- 	GtkWindow *window;
+	CtkImage *image;
+ 	CtkWindow *window;
 
 	image = GTK_IMAGE (widget);
  	window = GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (image)));
@@ -536,12 +536,12 @@ fm_properties_window_drag_data_received (GtkWidget *widget, GdkDragContext *cont
 	g_strfreev (uris);
 }
 
-static GtkWidget *
+static CtkWidget *
 create_image_widget (FMPropertiesWindow *window,
 		     gboolean is_customizable)
 {
- 	GtkWidget *button;
-	GtkWidget *image;
+ 	CtkWidget *button;
+	CtkWidget *image;
 
 	image = ctk_image_new ();
 	window->details->icon_image = image;
@@ -868,7 +868,7 @@ get_initial_emblem_state (FMPropertiesWindow *window,
 }
 
 static void
-emblem_button_toggled (GtkToggleButton *button,
+emblem_button_toggled (CtkToggleButton *button,
 		       FMPropertiesWindow *window)
 {
 	GList *l;
@@ -952,7 +952,7 @@ emblem_button_toggled (GtkToggleButton *button,
 
 static void
 emblem_button_update (FMPropertiesWindow *window,
-			GtkToggleButton *button)
+			CtkToggleButton *button)
 {
 	GList *l;
 	char *name;
@@ -1025,7 +1025,7 @@ clear_extension_pages (FMPropertiesWindow *window)
 {
 	int i;
 	int num_pages;
-	GtkWidget *page = NULL;
+	CtkWidget *page = NULL;
 
 	num_pages = ctk_notebook_get_n_pages
 				(GTK_NOTEBOOK (window->details->notebook));
@@ -1316,7 +1316,7 @@ file_list_all_directories (GList *file_list)
 }
 
 static void
-value_field_update_internal (GtkLabel *label,
+value_field_update_internal (CtkLabel *label,
 			     GList *file_list)
 {
 	const char *attribute_name;
@@ -1351,7 +1351,7 @@ value_field_update_internal (GtkLabel *label,
 }
 
 static void
-value_field_update (FMPropertiesWindow *window, GtkLabel *label)
+value_field_update (FMPropertiesWindow *window, CtkLabel *label)
 {
 	gboolean use_original;
 
@@ -1363,15 +1363,15 @@ value_field_update (FMPropertiesWindow *window, GtkLabel *label)
 				      window->details->target_files));
 }
 
-static GtkLabel *
-attach_label (GtkGrid *grid,
-              GtkWidget *sibling,
+static CtkLabel *
+attach_label (CtkGrid *grid,
+              CtkWidget *sibling,
 	      const char *initial_text,
 	      gboolean ellipsize_text,
 	      gboolean selectable,
 	      gboolean mnemonic)
 {
-	GtkWidget *label_field;
+	CtkWidget *label_field;
 
 	if (ellipsize_text) {
 		label_field = ctk_label_new (initial_text);
@@ -1404,32 +1404,32 @@ attach_label (GtkGrid *grid,
 	return GTK_LABEL (label_field);
 }
 
-static GtkLabel *
-attach_value_label (GtkGrid *grid,
-                    GtkWidget *sibling,
+static CtkLabel *
+attach_value_label (CtkGrid *grid,
+                    CtkWidget *sibling,
                     const char *initial_text)
 {
 	return attach_label (grid, sibling, initial_text, FALSE, TRUE, FALSE);
 }
 
-static GtkLabel *
-attach_ellipsizing_value_label (GtkGrid *grid,
-                                GtkWidget *sibling,
+static CtkLabel *
+attach_ellipsizing_value_label (CtkGrid *grid,
+                                CtkWidget *sibling,
                                 const char *initial_text)
 {
 	return attach_label (grid, sibling, initial_text, TRUE, TRUE, FALSE);
 }
 
-static GtkWidget*
+static CtkWidget*
 attach_value_field_internal (FMPropertiesWindow *window,
-			     GtkGrid *grid,
-			     GtkWidget *sibling,
+			     CtkGrid *grid,
+			     CtkWidget *sibling,
 			     const char *file_attribute_name,
 			     const char *inconsistent_string,
 			     gboolean show_original,
 			     gboolean ellipsize_text)
 {
-	GtkLabel *value_field;
+	CtkLabel *value_field;
 
 	if (ellipsize_text) {
 		value_field = attach_ellipsizing_value_label (grid, sibling, "");
@@ -1451,10 +1451,10 @@ attach_value_field_internal (FMPropertiesWindow *window,
 	return GTK_WIDGET(value_field);
 }
 
-static GtkWidget*
+static CtkWidget*
 attach_value_field (FMPropertiesWindow *window,
-		    GtkGrid *grid,
-		    GtkWidget *sibling,
+		    CtkGrid *grid,
+		    CtkWidget *sibling,
 		    const char *file_attribute_name,
 		    const char *inconsistent_string,
 		    gboolean show_original)
@@ -1467,10 +1467,10 @@ attach_value_field (FMPropertiesWindow *window,
 					    FALSE);
 }
 
-static GtkWidget*
+static CtkWidget*
 attach_ellipsizing_value_field (FMPropertiesWindow *window,
-				GtkGrid *grid,
-				GtkWidget *sibling,
+				CtkGrid *grid,
+				CtkWidget *sibling,
 		    		const char *file_attribute_name,
 				const char *inconsistent_string,
 				gboolean show_original)
@@ -1617,7 +1617,7 @@ unschedule_or_cancel_group_change (FMPropertiesWindow *window)
 }
 
 static void
-changed_group_callback (GtkComboBox *combo_box, BaulFile *file)
+changed_group_callback (CtkComboBox *combo_box, BaulFile *file)
 {
 	char *group;
 	char *cur_group;
@@ -1644,11 +1644,11 @@ changed_group_callback (GtkComboBox *combo_box, BaulFile *file)
 /* checks whether the given column at the first level
  * of model has the specified entries in the given order. */
 static gboolean
-tree_model_entries_equal (GtkTreeModel *model,
+tree_model_entries_equal (CtkTreeModel *model,
 			  unsigned int  column,
 			  GList        *entries)
 {
-	GtkTreeIter iter;
+	CtkTreeIter iter;
 	gboolean empty_model;
 
 	g_assert (GTK_IS_TREE_MODEL (model));
@@ -1686,16 +1686,16 @@ tree_model_entries_equal (GtkTreeModel *model,
 }
 
 static char *
-combo_box_get_active_entry (GtkComboBox *combo_box,
+combo_box_get_active_entry (CtkComboBox *combo_box,
 			    unsigned int column)
 {
-	GtkTreeIter iter;
+	CtkTreeIter iter;
 	char *val;
 
 	g_assert (GTK_IS_COMBO_BOX (combo_box));
 
 	if (ctk_combo_box_get_active_iter (GTK_COMBO_BOX (combo_box), &iter)) {
-		GtkTreeModel *model;
+		CtkTreeModel *model;
 
 		model = ctk_combo_box_get_model (combo_box);
 		g_assert (GTK_IS_TREE_MODEL (model));
@@ -1714,11 +1714,11 @@ combo_box_get_active_entry (GtkComboBox *combo_box,
  * or entry is NULL.
  * */
 static int
-tree_model_get_entry_index (GtkTreeModel *model,
+tree_model_get_entry_index (CtkTreeModel *model,
 			    unsigned int  column,
 			    const char   *entry)
 {
-	GtkTreeIter iter;
+	CtkTreeIter iter;
 	gboolean empty_model;
 
 	g_assert (GTK_IS_TREE_MODEL (model));
@@ -1751,12 +1751,12 @@ tree_model_get_entry_index (GtkTreeModel *model,
 
 
 static void
-synch_groups_combo_box (GtkComboBox *combo_box, BaulFile *file)
+synch_groups_combo_box (CtkComboBox *combo_box, BaulFile *file)
 {
 	GList *groups;
 	GList *node;
-	GtkTreeModel *model;
-	GtkListStore *store;
+	CtkTreeModel *model;
+	CtkListStore *store;
 	char *current_group_name;
 	int current_group_index;
 
@@ -1813,8 +1813,8 @@ synch_groups_combo_box (GtkComboBox *combo_box, BaulFile *file)
 }
 
 static gboolean
-combo_box_row_separator_func (GtkTreeModel *model,
-			      GtkTreeIter  *iter,
+combo_box_row_separator_func (CtkTreeModel *model,
+			      CtkTreeIter  *iter,
 			      gpointer      data)
 {
   	gchar *text;
@@ -1836,18 +1836,18 @@ combo_box_row_separator_func (GtkTreeModel *model,
   	return ret;
 }
 
-static GtkComboBox *
-attach_combo_box (GtkGrid *grid,
-                  GtkWidget *sibling,
+static CtkComboBox *
+attach_combo_box (CtkGrid *grid,
+                  CtkWidget *sibling,
                   gboolean two_columns)
 {
-	GtkWidget *combo_box;
+	CtkWidget *combo_box;
 
 	if (!two_columns) {
 		combo_box = ctk_combo_box_text_new ();
 	} else {
-		GtkTreeModel *model;
-		GtkCellRenderer *renderer;
+		CtkTreeModel *model;
+		CtkCellRenderer *renderer;
 
 		model = GTK_TREE_MODEL (ctk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING));
 		combo_box = ctk_combo_box_new_with_model (model);
@@ -1875,12 +1875,12 @@ attach_combo_box (GtkGrid *grid,
 	return GTK_COMBO_BOX (combo_box);
 }
 
-static GtkComboBox*
-attach_group_combo_box (GtkGrid *grid,
-                        GtkWidget *sibling,
+static CtkComboBox*
+attach_group_combo_box (CtkGrid *grid,
+                        CtkWidget *sibling,
                         BaulFile *file)
 {
-	GtkComboBox *combo_box;
+	CtkComboBox *combo_box;
 
 	combo_box = attach_combo_box (grid, sibling, FALSE);
 
@@ -2032,7 +2032,7 @@ unschedule_or_cancel_owner_change (FMPropertiesWindow *window)
 }
 
 static void
-changed_owner_callback (GtkComboBox *combo_box, BaulFile* file)
+changed_owner_callback (CtkComboBox *combo_box, BaulFile* file)
 {
 	char *owner_text;
 	char **name_array;
@@ -2064,13 +2064,13 @@ changed_owner_callback (GtkComboBox *combo_box, BaulFile* file)
 }
 
 static void
-synch_user_menu (GtkComboBox *combo_box, BaulFile *file)
+synch_user_menu (CtkComboBox *combo_box, BaulFile *file)
 {
 	GList *users;
 	GList *node;
-	GtkTreeModel *model;
-	GtkListStore *store;
-	GtkTreeIter iter;
+	CtkTreeModel *model;
+	CtkListStore *store;
+	CtkTreeIter iter;
 	char *user_name;
 	char *owner_name;
 	int owner_index;
@@ -2162,12 +2162,12 @@ synch_user_menu (GtkComboBox *combo_box, BaulFile *file)
     	g_list_free_full (users, g_free);
 }
 
-static GtkComboBox*
-attach_owner_combo_box (GtkGrid *grid,
-                        GtkWidget *sibling,
+static CtkComboBox*
+attach_owner_combo_box (CtkGrid *grid,
+                        CtkWidget *sibling,
                         BaulFile *file)
 {
-	GtkComboBox *combo_box;
+	CtkComboBox *combo_box;
 
 	combo_box = attach_combo_box (grid, sibling, TRUE);
 
@@ -2379,12 +2379,12 @@ schedule_directory_contents_update (FMPropertiesWindow *window)
 	}
 }
 
-static GtkLabel *
+static CtkLabel *
 attach_directory_contents_value_field (FMPropertiesWindow *window,
-                                       GtkGrid *grid,
-                                       GtkWidget *sibling)
+                                       CtkGrid *grid,
+                                       CtkWidget *sibling)
 {
-	GtkLabel *value_field;
+	CtkLabel *value_field;
 	GList *l;
 	BaulFile *file = NULL;
 
@@ -2411,8 +2411,8 @@ attach_directory_contents_value_field (FMPropertiesWindow *window,
 	return value_field;
 }
 
-static GtkLabel *
-attach_title_field (GtkGrid *grid,
+static CtkLabel *
+attach_title_field (CtkGrid *grid,
                     const char *title)
 {
 	return attach_label (grid, NULL, title, FALSE, FALSE, TRUE);
@@ -2425,14 +2425,14 @@ attach_title_field (GtkGrid *grid,
 
 static void
 append_title_value_pair (FMPropertiesWindow *window,
-                         GtkGrid *grid,
+                         CtkGrid *grid,
                          const char *title,
                          const char *file_attribute_name,
                          const char *inconsistent_state,
                          gboolean show_original)
 {
-	GtkLabel *title_label;
-	GtkWidget *value;
+	CtkLabel *title_label;
+	CtkWidget *value;
 
 	title_label = attach_title_field (grid, title);
 	value = attach_value_field (window, grid, GTK_WIDGET (title_label),
@@ -2444,14 +2444,14 @@ append_title_value_pair (FMPropertiesWindow *window,
 
 static void
 append_title_and_ellipsizing_value (FMPropertiesWindow *window,
-                                    GtkGrid *grid,
+                                    CtkGrid *grid,
                                     const char *title,
                                     const char *file_attribute_name,
                                     const char *inconsistent_state,
                                     gboolean show_original)
 {
-	GtkLabel *title_label;
-	GtkWidget *value;
+	CtkLabel *title_label;
+	CtkWidget *value;
 
 	title_label = attach_title_field (grid, title);
 	value = attach_ellipsizing_value_field (window, grid,
@@ -2464,9 +2464,9 @@ append_title_and_ellipsizing_value (FMPropertiesWindow *window,
 
 static void
 append_directory_contents_fields (FMPropertiesWindow *window,
-                                  GtkGrid *grid)
+                                  CtkGrid *grid)
 {
-	GtkLabel *title_field, *value_field;
+	CtkLabel *title_field, *value_field;
 	title_field = attach_title_field (grid, "");
 	window->details->directory_contents_title_field = title_field;
 	ctk_label_set_line_wrap (title_field, TRUE);
@@ -2477,11 +2477,11 @@ append_directory_contents_fields (FMPropertiesWindow *window,
 	ctk_label_set_mnemonic_widget (title_field, GTK_WIDGET(value_field));
 }
 
-static GtkWidget *
-create_page_with_hbox (GtkNotebook *notebook,
+static CtkWidget *
+create_page_with_hbox (CtkNotebook *notebook,
 		       const char *title)
 {
-	GtkWidget *hbox;
+	CtkWidget *hbox;
 
 	g_assert (GTK_IS_NOTEBOOK (notebook));
 	g_assert (title != NULL);
@@ -2495,11 +2495,11 @@ create_page_with_hbox (GtkNotebook *notebook,
 	return hbox;
 }
 
-static GtkWidget *
-create_page_with_vbox (GtkNotebook *notebook,
+static CtkWidget *
+create_page_with_vbox (CtkNotebook *notebook,
 		       const char *title)
 {
-	GtkWidget *vbox;
+	CtkWidget *vbox;
 
 	g_assert (GTK_IS_NOTEBOOK (notebook));
 	g_assert (title != NULL);
@@ -2513,16 +2513,16 @@ create_page_with_vbox (GtkNotebook *notebook,
 	return vbox;
 }
 
-static GtkWidget *
-append_blank_row (GtkGrid *grid)
+static CtkWidget *
+append_blank_row (CtkGrid *grid)
 {
 	return GTK_WIDGET (attach_title_field (grid, ""));
 }
 
 static void
-append_blank_slim_row (GtkGrid *grid)
+append_blank_slim_row (CtkGrid *grid)
 {
-	GtkWidget *w;
+	CtkWidget *w;
 	PangoAttribute *attribute;
 	PangoAttrList *attr_list;
 
@@ -2539,10 +2539,10 @@ append_blank_slim_row (GtkGrid *grid)
 	ctk_container_add (GTK_CONTAINER (grid), w);
 }
 
-static GtkWidget *
+static CtkWidget *
 create_grid_with_standard_properties (void)
 {
-	GtkWidget *grid;
+	CtkWidget *grid;
 
 	grid = ctk_grid_new ();
 	ctk_container_set_border_width (GTK_CONTAINER (grid), 6);
@@ -2716,13 +2716,13 @@ should_show_volume_usage (FMPropertiesWindow *window)
 }
 
 static void
-paint_used_legend (GtkWidget *widget,
+paint_used_legend (CtkWidget *widget,
                    cairo_t *cr,
                    gpointer data)
 {
 	FMPropertiesWindow *window;
 	gint width, height;
-	GtkAllocation allocation;
+	CtkAllocation allocation;
 
 	ctk_widget_get_allocation (widget, &allocation);
 
@@ -2745,12 +2745,12 @@ paint_used_legend (GtkWidget *widget,
 }
 
 static void
-paint_free_legend (GtkWidget *widget,
+paint_free_legend (CtkWidget *widget,
                    cairo_t *cr, gpointer data)
 {
 	FMPropertiesWindow *window;
 	gint width, height;
-	GtkAllocation allocation;
+	CtkAllocation allocation;
 
 	window = FM_PROPERTIES_WINDOW (data);
 	ctk_widget_get_allocation (widget, &allocation);
@@ -2772,7 +2772,7 @@ paint_free_legend (GtkWidget *widget,
 }
 
 static void
-paint_pie_chart (GtkWidget *widget,
+paint_pie_chart (CtkWidget *widget,
                  cairo_t *cr,
                  gpointer data)
 {
@@ -2781,7 +2781,7 @@ paint_pie_chart (GtkWidget *widget,
 	gint width, height;
 	double free, used;
 	double angle1, angle2, split, xc, yc, radius;
-	GtkAllocation allocation;
+	CtkAllocation allocation;
 
 	window = FM_PROPERTIES_WINDOW (data);
 	ctk_widget_get_allocation (widget, &allocation);
@@ -3041,20 +3041,20 @@ _pie_style_shade (GdkRGBA *a,
 }
 
 
-static GtkWidget*
+static CtkWidget*
 create_pie_widget (FMPropertiesWindow *window)
 {
 	BaulFile		*file;
-	GtkGrid                 *grid;
-	GtkStyleContext		*style;
+	CtkGrid                 *grid;
+	CtkStyleContext		*style;
 
-	GtkWidget 		*pie_canvas;
-	GtkWidget 		*used_canvas;
-	GtkWidget 		*used_label;
-	GtkWidget 		*free_canvas;
-	GtkWidget 		*free_label;
-	GtkWidget 		*capacity_label;
-	GtkWidget 		*fstype_label;
+	CtkWidget 		*pie_canvas;
+	CtkWidget 		*used_canvas;
+	CtkWidget 		*used_label;
+	CtkWidget 		*free_canvas;
+	CtkWidget 		*free_label;
+	CtkWidget 		*capacity_label;
+	CtkWidget 		*fstype_label;
 	gchar			*capacity;
 	gchar 			*used;
 	gchar 			*free;
@@ -3186,10 +3186,10 @@ create_pie_widget (FMPropertiesWindow *window)
 
 }
 
-static GtkWidget*
+static CtkWidget*
 create_volume_usage_widget (FMPropertiesWindow *window)
 {
-	GtkWidget *piewidget;
+	CtkWidget *piewidget;
 	gchar *uri;
 	BaulFile *file;
 	GFile *location;
@@ -3224,9 +3224,9 @@ create_volume_usage_widget (FMPropertiesWindow *window)
 static void
 create_basic_page (FMPropertiesWindow *window)
 {
-	GtkGrid *grid;
-	GtkWidget *icon_pixmap_widget;
-	GtkWidget *hbox, *vbox;
+	CtkGrid *grid;
+	CtkWidget *icon_pixmap_widget;
+	CtkWidget *hbox, *vbox;
 
 	hbox = create_page_with_hbox (window->details->notebook, _("Basic"));
 
@@ -3266,8 +3266,8 @@ create_basic_page (FMPropertiesWindow *window)
 	}
 
 	if (fm_ditem_page_should_show (window->details->target_files)) {
-		GtkSizeGroup *label_size_group;
-		GtkWidget *box;
+		CtkSizeGroup *label_size_group;
+		CtkWidget *box;
 
 		label_size_group = ctk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 		ctk_size_group_add_widget (label_size_group,
@@ -3348,7 +3348,7 @@ create_basic_page (FMPropertiesWindow *window)
 	}
 
 	if (should_show_volume_usage (window)) {
-		GtkWidget *volume_usage;
+		CtkWidget *volume_usage;
 
 		volume_usage = create_volume_usage_widget (window);
 		ctk_container_add_with_properties (GTK_CONTAINER (grid), volume_usage,
@@ -3439,7 +3439,7 @@ files_has_file (FMPropertiesWindow *window)
 static void
 create_emblems_page (FMPropertiesWindow *window)
 {
-	GtkWidget *emblems_table, *button, *scroller;
+	CtkWidget *emblems_table, *button, *scroller;
 	GdkPixbuf *pixbuf;
 	char *label;
 	GList *icons, *l;
@@ -3652,7 +3652,7 @@ initial_permission_state_consistent (FMPropertiesWindow *window,
 }
 
 static void
-permission_button_toggled (GtkToggleButton *button,
+permission_button_toggled (CtkToggleButton *button,
 			   FMPropertiesWindow *window)
 {
 	gboolean is_folder, is_special;
@@ -3709,7 +3709,7 @@ permission_button_toggled (GtkToggleButton *button,
 
 static void
 permission_button_update (FMPropertiesWindow *window,
-			  GtkToggleButton *button)
+			  CtkToggleButton *button)
 {
 	GList *l;
 	gboolean all_set;
@@ -3800,7 +3800,7 @@ permission_button_update (FMPropertiesWindow *window,
 
 static void
 set_up_permissions_checkbox (FMPropertiesWindow *window,
-			     GtkWidget *check_button,
+			     CtkWidget *check_button,
 			     guint32 permission,
 			     gboolean is_folder)
 {
@@ -3822,16 +3822,16 @@ set_up_permissions_checkbox (FMPropertiesWindow *window,
 				 0);
 }
 
-static GtkWidget *
+static CtkWidget *
 add_permissions_checkbox_with_label (FMPropertiesWindow *window,
-                                     GtkGrid *grid,
-                                     GtkWidget *sibling,
+                                     CtkGrid *grid,
+                                     CtkWidget *sibling,
                                      const char *label,
                                      guint32 permission_to_check,
-                                     GtkLabel *label_for,
+                                     CtkLabel *label_for,
                                      gboolean is_folder)
 {
-	GtkWidget *check_button;
+	CtkWidget *check_button;
 	gboolean a11y_enabled;
 
 	check_button = ctk_check_button_new_with_mnemonic (label);
@@ -3857,13 +3857,13 @@ add_permissions_checkbox_with_label (FMPropertiesWindow *window,
 	return check_button;
 }
 
-static GtkWidget *
+static CtkWidget *
 add_permissions_checkbox (FMPropertiesWindow *window,
-                          GtkGrid *grid,
-                          GtkWidget *sibling,
+                          CtkGrid *grid,
+                          CtkWidget *sibling,
                           CheckboxType type,
                           guint32 permission_to_check,
-                          GtkLabel *label_for,
+                          CtkLabel *label_for,
                           gboolean is_folder)
 {
 	const gchar *label;
@@ -3962,10 +3962,10 @@ permission_from_vfs (PermissionType type, guint32 vfs_perm)
 }
 
 static void
-permission_combo_changed (GtkWidget *combo, FMPropertiesWindow *window)
+permission_combo_changed (CtkWidget *combo, FMPropertiesWindow *window)
 {
-	GtkTreeIter iter;
-	GtkTreeModel *model;
+	CtkTreeIter iter;
+	CtkTreeModel *model;
 	gboolean is_folder, use_original;
 	PermissionType type;
 	int new_perm, mask;
@@ -3995,10 +3995,10 @@ permission_combo_changed (GtkWidget *combo, FMPropertiesWindow *window)
 }
 
 static void
-permission_combo_add_multiple_choice (GtkComboBox *combo, GtkTreeIter *iter)
+permission_combo_add_multiple_choice (CtkComboBox *combo, CtkTreeIter *iter)
 {
-	GtkTreeModel *model;
-	GtkListStore *store;
+	CtkTreeModel *model;
+	CtkListStore *store;
 	gboolean found;
 
 	model = ctk_combo_box_get_model (combo);
@@ -4024,16 +4024,16 @@ permission_combo_add_multiple_choice (GtkComboBox *combo, GtkTreeIter *iter)
 
 static void
 permission_combo_update (FMPropertiesWindow *window,
-			 GtkComboBox *combo)
+			 CtkComboBox *combo)
 {
 	PermissionType type;
 	PermissionValue perm, all_dir_perm, all_file_perm, all_perm;
 	gboolean is_folder, no_files, no_dirs, all_file_same, all_dir_same, all_same;
 	gboolean all_dir_cannot_set, all_file_cannot_set, sensitive;
-	GtkTreeIter iter;
+	CtkTreeIter iter;
 	int mask;
-	GtkTreeModel *model;
-	GtkListStore *store;
+	CtkTreeModel *model;
+	CtkListStore *store;
 	GList *l;
 	gboolean is_multi;
 
@@ -4203,15 +4203,15 @@ permission_combo_update (FMPropertiesWindow *window,
 }
 
 static void
-add_permissions_combo_box (FMPropertiesWindow *window, GtkGrid *grid,
+add_permissions_combo_box (FMPropertiesWindow *window, CtkGrid *grid,
 			   PermissionType type, gboolean is_folder,
 			   gboolean short_label)
 {
-	GtkWidget *combo;
-	GtkLabel *label;
-	GtkListStore *store;
-	GtkCellRenderer *cell;
-	GtkTreeIter iter;
+	CtkWidget *combo;
+	CtkLabel *label;
+	CtkListStore *store;
+	CtkCellRenderer *cell;
+	CtkTreeIter iter;
 
 	if (short_label) {
 		label = attach_title_field (grid, _("Access:"));
@@ -4277,14 +4277,14 @@ add_permissions_combo_box (FMPropertiesWindow *window, GtkGrid *grid,
 }
 
 
-static GtkWidget *
+static CtkWidget *
 append_special_execution_checkbox (FMPropertiesWindow *window,
-				   GtkGrid *grid,
-				   GtkWidget *sibling,
+				   CtkGrid *grid,
+				   CtkWidget *sibling,
 				   const char *label_text,
 				   guint32 permission_to_check)
 {
-	GtkWidget *check_button;
+	CtkWidget *check_button;
 
 	check_button = ctk_check_button_new_with_mnemonic (label_text);
 	ctk_widget_show (check_button);
@@ -4309,9 +4309,9 @@ append_special_execution_checkbox (FMPropertiesWindow *window,
 }
 
 static void
-append_special_execution_flags (FMPropertiesWindow *window, GtkGrid *grid)
+append_special_execution_flags (FMPropertiesWindow *window, CtkGrid *grid)
 {
-	GtkWidget *title;
+	CtkWidget *title;
 
 	append_blank_slim_row (grid);
 	title = GTK_WIDGET (attach_title_field (grid, _("Special flags:")));
@@ -4379,19 +4379,19 @@ get_initial_permissions (GList *file_list)
 }
 
 static void
-create_simple_permissions (FMPropertiesWindow *window, GtkGrid *page_grid)
+create_simple_permissions (FMPropertiesWindow *window, CtkGrid *page_grid)
 {
 	gboolean has_file, has_directory;
-	GtkLabel *group_label;
-	GtkLabel *owner_label;
-	GtkLabel *execute_label;
-	GtkWidget *value;
+	CtkLabel *group_label;
+	CtkLabel *owner_label;
+	CtkLabel *execute_label;
+	CtkWidget *value;
 
 	has_file = files_has_file (window);
 	has_directory = files_has_directory (window);
 
 	if (!is_multi_file_window (window) && baul_file_can_set_owner (get_target_file (window))) {
-		GtkComboBox *owner_combo_box;
+		CtkComboBox *owner_combo_box;
 
 		owner_label = attach_title_field (page_grid, _("_Owner:"));
 		/* Combo box in this case. */
@@ -4423,7 +4423,7 @@ create_simple_permissions (FMPropertiesWindow *window, GtkGrid *page_grid)
 	append_blank_slim_row (page_grid);
 
 	if (!is_multi_file_window (window) && baul_file_can_set_group (get_target_file (window))) {
-		GtkComboBox *group_combo_box;
+		CtkComboBox *group_combo_box;
 
 		group_label = attach_title_field (page_grid, _("_Group:"));
 
@@ -4482,14 +4482,14 @@ create_simple_permissions (FMPropertiesWindow *window, GtkGrid *page_grid)
 
 static void
 create_permission_checkboxes (FMPropertiesWindow *window,
-			      GtkGrid *page_grid,
+			      CtkGrid *page_grid,
 			      gboolean is_folder)
 {
-	GtkLabel *owner_perm_label;
-	GtkLabel *group_perm_label;
-	GtkLabel *other_perm_label;
-	GtkGrid *check_button_grid;
-	GtkWidget *w;
+	CtkLabel *owner_perm_label;
+	CtkLabel *group_perm_label;
+	CtkLabel *other_perm_label;
+	CtkGrid *check_button_grid;
+	CtkWidget *w;
 
 	owner_perm_label = attach_title_field (page_grid, _("Owner:"));
 	group_perm_label = attach_title_field (page_grid, _("Group:"));
@@ -4576,14 +4576,14 @@ create_permission_checkboxes (FMPropertiesWindow *window,
 }
 
 static void
-create_advanced_permissions (FMPropertiesWindow *window, GtkGrid *page_grid)
+create_advanced_permissions (FMPropertiesWindow *window, CtkGrid *page_grid)
 {
-	GtkLabel *group_label;
-	GtkLabel *owner_label;
+	CtkLabel *group_label;
+	CtkLabel *owner_label;
 	gboolean has_directory, has_file;
 
 	if (!is_multi_file_window (window) && baul_file_can_set_owner (get_target_file (window))) {
-		GtkComboBox *owner_combo_box;
+		CtkComboBox *owner_combo_box;
 
 		owner_label  = attach_title_field (page_grid, _("_Owner:"));
 		/* Combo box in this case. */
@@ -4593,7 +4593,7 @@ create_advanced_permissions (FMPropertiesWindow *window, GtkGrid *page_grid)
 		ctk_label_set_mnemonic_widget (owner_label,
 					       GTK_WIDGET (owner_combo_box));
 	} else {
-		GtkWidget *value;
+		CtkWidget *value;
 		owner_label = attach_title_field (page_grid, _("Owner:"));
 
 		/* Static text in this case. */
@@ -4607,7 +4607,7 @@ create_advanced_permissions (FMPropertiesWindow *window, GtkGrid *page_grid)
 	}
 
 	if (!is_multi_file_window (window) && baul_file_can_set_group (get_target_file (window))) {
-		GtkComboBox *group_combo_box;
+		CtkComboBox *group_combo_box;
 
 		group_label = attach_title_field (page_grid, _("_Group:"));
 
@@ -4667,7 +4667,7 @@ set_recursive_permissions_done (gpointer callback_data)
 
 
 static void
-apply_recursive_clicked (GtkWidget *recursive_button,
+apply_recursive_clicked (CtkWidget *recursive_button,
 			 FMPropertiesWindow *window)
 {
 	guint32 file_permission, file_permission_mask;
@@ -4675,12 +4675,12 @@ apply_recursive_clicked (GtkWidget *recursive_button,
 	guint32 vfs_mask, vfs_new_perm, p;
 	gboolean active, is_folder, is_special, use_original;
 	GList *l;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
+	CtkTreeModel *model;
+	CtkTreeIter iter;
 	PermissionType type;
 	int new_perm, mask;
-	GtkWidget *button = NULL;
-	GtkWidget *combo = NULL;
+	CtkWidget *button = NULL;
+	CtkWidget *combo = NULL;
 
 	file_permission = 0;
 	file_permission_mask = 0;
@@ -4778,7 +4778,7 @@ apply_recursive_clicked (GtkWidget *recursive_button,
 static void
 create_permissions_page (FMPropertiesWindow *window)
 {
-	GtkWidget *vbox;
+	CtkWidget *vbox;
 	GList *file_list;
 
 	vbox = create_page_with_vbox (window->details->notebook,
@@ -4789,7 +4789,7 @@ create_permissions_page (FMPropertiesWindow *window)
 	window->details->initial_permissions = NULL;
 
 	if (all_can_get_permissions (file_list) && all_can_get_permissions (window->details->target_files)) {
-		GtkGrid *page_grid;
+		CtkGrid *page_grid;
 
 		window->details->initial_permissions = get_initial_permissions (window->details->target_files);
 		window->details->has_recursive_apply = files_has_changable_permissions_directory (window);
@@ -4827,7 +4827,7 @@ create_permissions_page (FMPropertiesWindow *window)
 			 FALSE);
 
 		if (window->details->has_recursive_apply) {
-			GtkWidget *button, *hbox;
+			CtkWidget *button, *hbox;
 
 			hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 			ctk_widget_show (hbox);
@@ -4894,8 +4894,8 @@ append_extension_pages (FMPropertiesWindow *window)
 
 		for (l = pages; l != NULL; l = l->next) {
 			BaulPropertyPage *page;
-			GtkWidget *page_widget;
-			GtkWidget *label;
+			CtkWidget *page_widget;
+			CtkWidget *label;
 
 			page = BAUL_PROPERTY_PAGE (l->data);
 
@@ -4989,7 +4989,7 @@ static StartupData *
 startup_data_new (GList *original_files,
 		  GList *target_files,
 		  const char *pending_key,
-		  GtkWidget *parent_widget)
+		  CtkWidget *parent_widget)
 {
 	StartupData *data;
 	GList *l;
@@ -5085,7 +5085,7 @@ should_show_open_with (FMPropertiesWindow *window)
 static void
 create_open_with_page (FMPropertiesWindow *window)
 {
-	GtkWidget *vbox;
+	CtkWidget *vbox;
 	char *mime_type;
 
 	mime_type = baul_file_get_mime_type (get_target_file (window));
@@ -5125,7 +5125,7 @@ create_properties_window (StartupData *startup_data)
 {
 	FMPropertiesWindow *window;
 	GList *l;
-	GtkWidget *action_area;
+	CtkWidget *action_area;
 
 	window = FM_PROPERTIES_WINDOW (ctk_widget_new (fm_properties_window_get_type (), NULL));
 
@@ -5291,7 +5291,7 @@ remove_window (FMPropertiesWindow *window)
 	}
 }
 
-static GtkWindow *
+static CtkWindow *
 get_existing_window (GList *file_list)
 {
 	if (!file_list->next) {
@@ -5308,7 +5308,7 @@ cancel_create_properties_window_callback (gpointer callback_data)
 }
 
 static void
-parent_widget_destroyed_callback (GtkWidget *widget, gpointer callback_data)
+parent_widget_destroyed_callback (CtkWidget *widget, gpointer callback_data)
 {
 	g_assert (widget == ((StartupData *)callback_data)->parent_widget);
 
@@ -5379,13 +5379,13 @@ is_directory_ready_callback (BaulFile *file,
 
 void
 fm_properties_window_present (GList *original_files,
-			      GtkWidget *parent_widget)
+			      CtkWidget *parent_widget)
 {
 	GList *l, *next;
-	GtkWidget *parent_window;
+	CtkWidget *parent_window;
 	StartupData *startup_data;
 	GList *target_files;
-	GtkWindow *existing_window;
+	CtkWindow *existing_window;
 	char *pending_key;
 
 	g_return_if_fail (original_files != NULL);
@@ -5457,7 +5457,7 @@ fm_properties_window_present (GList *original_files,
 }
 
 static void
-real_response (GtkDialog *dialog,
+real_response (CtkDialog *dialog,
 	       int        response)
 {
 	GError *error = NULL;
@@ -5488,7 +5488,7 @@ real_response (GtkDialog *dialog,
 }
 
 static void
-real_destroy (GtkWidget *object)
+real_destroy (CtkWidget *object)
 {
 	FMPropertiesWindow *window;
 	GList *l;
@@ -5649,7 +5649,7 @@ set_icon (const char* icon_uri, FMPropertiesWindow *properties_window)
 }
 
 static void
-update_preview_callback (GtkFileChooser *icon_chooser,
+update_preview_callback (CtkFileChooser *icon_chooser,
 			 FMPropertiesWindow *window)
 {
 	GdkPixbuf *pixbuf, *scaled_pixbuf;
@@ -5663,7 +5663,7 @@ update_preview_callback (GtkFileChooser *icon_chooser,
 	}
 
 	if (pixbuf != NULL) {
-		GtkWidget *preview_widget;
+		CtkWidget *preview_widget;
 
 		preview_widget = ctk_file_chooser_get_preview_widget (icon_chooser);
 		ctk_file_chooser_set_preview_widget_active (icon_chooser, TRUE);
@@ -5696,7 +5696,7 @@ update_preview_callback (GtkFileChooser *icon_chooser,
 }
 
 static void
-custom_icon_file_chooser_response_cb (GtkDialog *dialog,
+custom_icon_file_chooser_response_cb (CtkDialog *dialog,
 				      gint response,
 				      FMPropertiesWindow *window)
 {
@@ -5721,10 +5721,10 @@ custom_icon_file_chooser_response_cb (GtkDialog *dialog,
 }
 
 static void
-select_image_button_callback (GtkWidget *widget,
+select_image_button_callback (CtkWidget *widget,
 			      FMPropertiesWindow *window)
 {
-	GtkWidget *dialog;
+	CtkWidget *dialog;
 	GList *l;
 	BaulFile *file;
 	char *image_path;
@@ -5735,8 +5735,8 @@ select_image_button_callback (GtkWidget *widget,
 	dialog = window->details->icon_chooser;
 
 	if (dialog == NULL) {
-		GtkWidget *preview;
-		GtkFileFilter *filter;
+		CtkWidget *preview;
+		CtkFileFilter *filter;
 
 		dialog = eel_file_chooser_dialog_new (_("Select Custom Icon"), GTK_WINDOW (window),
 						      GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -5807,7 +5807,7 @@ select_image_button_callback (GtkWidget *widget,
 static void
 fm_properties_window_class_init (FMPropertiesWindowClass *class)
 {
-	GtkBindingSet *binding_set;
+	CtkBindingSet *binding_set;
 
 	G_OBJECT_CLASS (class)->finalize = real_finalize;
 

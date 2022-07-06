@@ -37,7 +37,7 @@ finished_cb (BaulProgressInfo *info,
 int
 main (int argc, char* argv[])
 {
-	GtkWidget *window;
+	CtkWidget *window;
 	GList *sources;
 	GFile *dest;
 	GFile *source;

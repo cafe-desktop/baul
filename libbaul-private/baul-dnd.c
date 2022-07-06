@@ -66,7 +66,7 @@
 
 void
 baul_drag_init (BaulDragInfo     *drag_info,
-                const GtkTargetEntry *drag_types,
+                const CtkTargetEntry *drag_types,
                 int                   drag_type_count,
                 gboolean              add_text_targets)
 {
@@ -164,7 +164,7 @@ baul_drag_uri_list_from_array (const char **uris)
 }
 
 GList *
-baul_drag_build_selection_list (GtkSelectionData *data)
+baul_drag_build_selection_list (CtkSelectionData *data)
 {
     GList *result;
     const guchar *p, *oldp;
@@ -688,9 +688,9 @@ add_one_uri (const char *uri, int x, int y, int w, int h, gpointer data)
 /* Common function for drag_data_get_callback calls.
  * Returns FALSE if it doesn't handle drag data */
 gboolean
-baul_drag_drag_data_get (GtkWidget *widget,
+baul_drag_drag_data_get (CtkWidget *widget,
                          GdkDragContext *context,
-                         GtkSelectionData *selection_data,
+                         CtkSelectionData *selection_data,
                          guint info,
                          guint32 time,
                          gpointer container_context,
@@ -730,7 +730,7 @@ typedef struct
 } DropActionMenuData;
 
 static void
-menu_deactivate_callback (GtkWidget *menu,
+menu_deactivate_callback (CtkWidget *menu,
                           gpointer   data)
 {
     DropActionMenuData *damd;
@@ -742,7 +742,7 @@ menu_deactivate_callback (GtkWidget *menu,
 }
 
 static void
-drop_action_activated_callback (GtkWidget  *menu_item,
+drop_action_activated_callback (CtkWidget  *menu_item,
                                 gpointer    data)
 {
     DropActionMenuData *damd;
@@ -757,13 +757,13 @@ drop_action_activated_callback (GtkWidget  *menu_item,
 }
 
 static void
-append_drop_action_menu_item (GtkWidget          *menu,
+append_drop_action_menu_item (CtkWidget          *menu,
                               const char         *text,
                               GdkDragAction       action,
                               gboolean            sensitive,
                               DropActionMenuData *damd)
 {
-    GtkWidget *menu_item;
+    CtkWidget *menu_item;
 
     menu_item = ctk_menu_item_new_with_mnemonic (text);
     ctk_widget_set_sensitive (menu_item, sensitive);
@@ -782,11 +782,11 @@ append_drop_action_menu_item (GtkWidget          *menu,
 
 /* Pops up a menu of actions to perform on dropped files */
 GdkDragAction
-baul_drag_drop_action_ask (GtkWidget *widget,
+baul_drag_drop_action_ask (CtkWidget *widget,
                            GdkDragAction actions)
 {
-    GtkWidget *menu;
-    GtkWidget *menu_item;
+    CtkWidget *menu;
+    CtkWidget *menu_item;
     DropActionMenuData damd;
 
     /* Create the menu and set the sensitivity of the items based on the
@@ -845,11 +845,11 @@ baul_drag_drop_action_ask (GtkWidget *widget,
 }
 
 GdkDragAction
-baul_drag_drop_background_ask (GtkWidget *widget,
+baul_drag_drop_background_ask (CtkWidget *widget,
                                GdkDragAction actions)
 {
-    GtkWidget *menu;
-    GtkWidget *menu_item;
+    CtkWidget *menu;
+    CtkWidget *menu_item;
     DropActionMenuData damd;
 
     /* Create the menu and set the sensitivity of the items based on the
@@ -898,7 +898,7 @@ baul_drag_drop_background_ask (GtkWidget *widget,
 }
 
 gboolean
-baul_drag_autoscroll_in_scroll_region (GtkWidget *widget)
+baul_drag_autoscroll_in_scroll_region (CtkWidget *widget)
 {
     float x_scroll_delta, y_scroll_delta;
 
@@ -909,9 +909,9 @@ baul_drag_autoscroll_in_scroll_region (GtkWidget *widget)
 
 
 void
-baul_drag_autoscroll_calculate_delta (GtkWidget *widget, float *x_scroll_delta, float *y_scroll_delta)
+baul_drag_autoscroll_calculate_delta (CtkWidget *widget, float *x_scroll_delta, float *y_scroll_delta)
 {
-    GtkAllocation allocation;
+    CtkAllocation allocation;
     GdkDisplay *display;
     GdkSeat *seat;
     GdkDevice *pointer;
@@ -999,7 +999,7 @@ baul_drag_autoscroll_calculate_delta (GtkWidget *widget, float *x_scroll_delta, 
 
 void
 baul_drag_autoscroll_start (BaulDragInfo *drag_info,
-                            GtkWidget        *widget,
+                            CtkWidget        *widget,
                             GSourceFunc       callback,
                             gpointer          user_data)
 {
@@ -1058,7 +1058,7 @@ baul_drag_selection_includes_special_link (GList *selection_list)
 }
 
 static gboolean
-slot_proxy_drag_motion (GtkWidget          *widget,
+slot_proxy_drag_motion (CtkWidget          *widget,
                         GdkDragContext     *context,
                         int                 x,
                         int                 y,
@@ -1067,7 +1067,7 @@ slot_proxy_drag_motion (GtkWidget          *widget,
 {
     BaulDragSlotProxyInfo *drag_info;
     BaulWindowSlotInfo *target_slot;
-    GtkWidget *window;
+    CtkWidget *window;
     GdkAtom target;
     int action;
     char *target_uri;
@@ -1183,7 +1183,7 @@ out:
 }
 
 static void
-slot_proxy_drag_leave (GtkWidget          *widget,
+slot_proxy_drag_leave (CtkWidget          *widget,
                        GdkDragContext     *context,
                        unsigned int        time,
                        gpointer            user_data)
@@ -1197,7 +1197,7 @@ slot_proxy_drag_leave (GtkWidget          *widget,
 }
 
 static gboolean
-slot_proxy_drag_drop (GtkWidget          *widget,
+slot_proxy_drag_drop (CtkWidget          *widget,
                       GdkDragContext     *context,
                       int                 x,
                       int                 y,
@@ -1220,12 +1220,12 @@ slot_proxy_drag_drop (GtkWidget          *widget,
 
 
 static void
-slot_proxy_handle_drop (GtkWidget                *widget,
+slot_proxy_handle_drop (CtkWidget                *widget,
                         GdkDragContext           *context,
                         unsigned int              time,
                         BaulDragSlotProxyInfo *drag_info)
 {
-    GtkWidget *window;
+    CtkWidget *window;
     BaulWindowSlotInfo *target_slot;
     BaulView *target_view;
     char *target_uri;
@@ -1315,11 +1315,11 @@ slot_proxy_handle_drop (GtkWidget                *widget,
 }
 
 static void
-slot_proxy_drag_data_received (GtkWidget          *widget,
+slot_proxy_drag_data_received (CtkWidget          *widget,
                                GdkDragContext     *context,
                                int                 x,
                                int                 y,
-                               GtkSelectionData   *data,
+                               CtkSelectionData   *data,
                                unsigned int        info,
                                unsigned int        time,
                                gpointer            user_data)
@@ -1368,15 +1368,15 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
 }
 
 void
-baul_drag_slot_proxy_init (GtkWidget *widget,
+baul_drag_slot_proxy_init (CtkWidget *widget,
                            BaulDragSlotProxyInfo *drag_info)
 {
-    const GtkTargetEntry targets[] =
+    const CtkTargetEntry targets[] =
     {
         { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
         { BAUL_ICON_DND_NETSCAPE_URL_TYPE, 0, BAUL_ICON_DND_NETSCAPE_URL }
     };
-    GtkTargetList *target_list;
+    CtkTargetList *target_list;
 
     g_assert (GTK_IS_WIDGET (widget));
     g_assert (drag_info != NULL);

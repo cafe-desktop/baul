@@ -92,6 +92,6 @@ char * baul_get_accel_map_file (void);
 GHashTable * baul_trashed_files_get_original_directories (GList *files,
         GList **unhandled_files);
 void baul_restore_files_from_trash (GList *files,
-                                    GtkWindow *parent_window);
+                                    CtkWindow *parent_window);
 
 #endif /* BAUL_FILE_UTILITIES_H */

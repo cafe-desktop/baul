@@ -31,7 +31,7 @@
 #include <ctk/ctk.h>
 #include <libgail-util/gailtextutil.h>
 
-void eel_accessibility_set_up_label_widget_relation (GtkWidget *label, GtkWidget *widget);
+void eel_accessibility_set_up_label_widget_relation (CtkWidget *label, CtkWidget *widget);
 
 AtkObject    *eel_accessibility_for_object            (gpointer              object);
 gpointer      eel_accessibility_get_gobject           (AtkObject            *object);

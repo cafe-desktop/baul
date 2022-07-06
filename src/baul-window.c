@@ -97,7 +97,7 @@ typedef struct
 
 static void cancel_view_as_callback         (BaulWindowSlot      *slot);
 static void baul_window_info_iface_init (BaulWindowInfoIface *iface);
-static void action_view_as_callback         (GtkAction               *action,
+static void action_view_as_callback         (CtkAction               *action,
         ActivateViewData        *data);
 
 static GList *history_list;
@@ -133,9 +133,9 @@ static const struct
 static void
 baul_window_init (BaulWindow *window)
 {
-    GtkWidget *grid;
-    GtkWidget *menu;
-    GtkWidget *statusbar;
+    CtkWidget *grid;
+    CtkWidget *menu;
+    CtkWidget *statusbar;
 
     static const gchar css_custom[] =
       "#baul-extra-view-widget {"
@@ -143,7 +143,7 @@ baul_window_init (BaulWindow *window)
       "}";
 
     GError *error = NULL;
-    GtkCssProvider *provider = ctk_css_provider_new ();
+    CtkCssProvider *provider = ctk_css_provider_new ();
     ctk_css_provider_load_from_data (provider, css_custom, -1, &error);
 
     if (error != NULL) {
@@ -197,7 +197,7 @@ baul_window_init (BaulWindow *window)
                              G_CALLBACK (baul_window_load_extension_menus), window, G_CONNECT_SWAPPED);
 }
 
-/* Unconditionally synchronize the GtkUIManager of WINDOW. */
+/* Unconditionally synchronize the CtkUIManager of WINDOW. */
 static void
 baul_window_ui_update (BaulWindow *window)
 {
@@ -395,7 +395,7 @@ static void
 real_set_allow_up (BaulWindow *window,
                    gboolean        allow)
 {
-    GtkAction *action;
+    CtkAction *action;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -445,7 +445,7 @@ void
 baul_window_sync_allow_stop (BaulWindow *window,
                              BaulWindowSlot *slot)
 {
-    GtkAction *action;
+    CtkAction *action;
     gboolean allow_stop;
 
     g_assert (BAUL_IS_WINDOW (window));
@@ -479,7 +479,7 @@ baul_window_sync_allow_stop (BaulWindow *window,
 void
 baul_window_allow_reload (BaulWindow *window, gboolean allow)
 {
-    GtkAction *action;
+    CtkAction *action;
 
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -658,7 +658,7 @@ free_stored_viewers (BaulWindow *window)
 }
 
 static void
-baul_window_destroy (GtkWidget *object)
+baul_window_destroy (CtkWidget *object)
 {
     BaulWindow *window;
     GList *panes_copy;
@@ -1029,14 +1029,14 @@ baul_window_slot_close (BaulWindowSlot *slot)
 }
 
 static void
-baul_window_realize (GtkWidget *widget)
+baul_window_realize (CtkWidget *widget)
 {
     GTK_WIDGET_CLASS (baul_window_parent_class)->realize (widget);
     update_cursor (BAUL_WINDOW (widget));
 }
 
 static gboolean
-baul_window_key_press_event (GtkWidget *widget,
+baul_window_key_press_event (CtkWidget *widget,
                              GdkEventKey *event)
 {
     /* Fix for https://github.com/cafe-desktop/baul/issues/1024 */
@@ -1054,7 +1054,7 @@ baul_window_key_press_event (GtkWidget *widget,
         if (extra_window_keybindings[i].keyval == event->keyval)
         {
             const GList *action_groups;
-            GtkAction *action;
+            CtkAction *action;
 
             action = NULL;
 
@@ -1098,7 +1098,7 @@ free_activate_view_data (gpointer data)
 }
 
 static void
-action_view_as_callback (GtkAction *action,
+action_view_as_callback (CtkAction *action,
                          ActivateViewData *data)
 {
     BaulWindow *window;
@@ -1117,7 +1117,7 @@ action_view_as_callback (GtkAction *action,
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
-static GtkRadioAction *
+static CtkRadioAction *
 add_view_as_menu_item (BaulWindow *window,
                        const char *placeholder_path,
                        const char *identifier,
@@ -1125,7 +1125,7 @@ add_view_as_menu_item (BaulWindow *window,
                        guint merge_id)
 {
     const BaulViewInfo *info;
-    GtkRadioAction *action;
+    CtkRadioAction *action;
     char action_name[32];
     ActivateViewData *data;
 
@@ -1288,7 +1288,7 @@ baul_window_synch_view_as_menus (BaulWindow *window)
     int index;
     char action_name[32];
     GList *node;
-    GtkAction *action;
+    CtkAction *action;
 
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1472,7 +1472,7 @@ baul_window_load_view_as_menus (BaulWindow *window)
 void
 baul_window_display_error (BaulWindow *window, const char *error_msg)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
@@ -1517,7 +1517,7 @@ baul_window_sync_zoom_widgets (BaulWindow *window)
 {
     BaulWindowSlot *slot;
     BaulView *view;
-    GtkAction *action;
+    CtkAction *action;
     gboolean supports_zooming;
     gboolean can_zoom, can_zoom_in, can_zoom_out;
     BaulZoomLevel zoom_level;
@@ -1631,13 +1631,13 @@ baul_window_disconnect_content_view (BaulWindow *window,
 
 /**
  * baul_window_show:
- * @widget:	GtkWidget
+ * @widget:	CtkWidget
  *
  * Call parent and then show/hide window items
  * base on user prefs.
  */
 static void
-baul_window_show (GtkWidget *widget)
+baul_window_show (CtkWidget *widget)
 {
     BaulWindow *window;
 
@@ -1648,7 +1648,7 @@ baul_window_show (GtkWidget *widget)
     baul_window_ui_update (window);
 }
 
-GtkUIManager *
+CtkUIManager *
 baul_window_get_ui_manager (BaulWindow *window)
 {
     g_return_val_if_fail (BAUL_IS_WINDOW (window), NULL);
@@ -2140,7 +2140,7 @@ baul_window_info_iface_init (BaulWindowInfoIface *iface)
 static void
 baul_window_class_init (BaulWindowClass *class)
 {
-    GtkBindingSet *binding_set;
+    CtkBindingSet *binding_set;
 
     G_OBJECT_CLASS (class)->constructor = baul_window_constructor;
     G_OBJECT_CLASS (class)->constructed = baul_window_constructed;

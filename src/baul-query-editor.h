@@ -47,13 +47,13 @@ typedef struct BaulQueryEditorDetails BaulQueryEditorDetails;
 
 typedef struct BaulQueryEditor
 {
-    GtkBox parent;
+    CtkBox parent;
     BaulQueryEditorDetails *details;
 } BaulQueryEditor;
 
 typedef struct
 {
-    GtkBoxClass parent_class;
+    CtkBoxClass parent_class;
 
     void (* changed) (BaulQueryEditor  *editor,
                       BaulQuery        *query,
@@ -62,9 +62,9 @@ typedef struct
 } BaulQueryEditorClass;
 
 GType      baul_query_editor_get_type     	   (void);
-GtkWidget* baul_query_editor_new          	   (gboolean start_hidden,
+CtkWidget* baul_query_editor_new          	   (gboolean start_hidden,
         gboolean is_indexed);
-GtkWidget* baul_query_editor_new_with_bar      (gboolean start_hidden,
+CtkWidget* baul_query_editor_new_with_bar      (gboolean start_hidden,
         gboolean is_indexed,
         gboolean start_attached,
         BaulSearchBar *bar,

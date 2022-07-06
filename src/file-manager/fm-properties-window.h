@@ -48,13 +48,13 @@ typedef struct _FMPropertiesWindowPrivate FMPropertiesWindowPrivate;
 
 struct FMPropertiesWindow
 {
-    GtkDialog window;
+    CtkDialog window;
     FMPropertiesWindowPrivate *details;
 };
 
 struct FMPropertiesWindowClass
 {
-    GtkDialogClass parent_class;
+    CtkDialogClass parent_class;
 
     /* Keybinding signals */
     void (* close)    (FMPropertiesWindow *window);
@@ -65,6 +65,6 @@ typedef struct FMPropertiesWindowClass FMPropertiesWindowClass;
 GType   fm_properties_window_get_type   (void);
 
 void 	fm_properties_window_present 	(GList *files,
-        GtkWidget *parent_widget);
+        CtkWidget *parent_widget);
 
 #endif /* FM_PROPERTIES_WINDOW_H */

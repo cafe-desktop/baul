@@ -36,10 +36,10 @@ typedef void (*BaulApplicationChoiceCallback) (GAppInfo                      *ap
 
 void baul_launch_application                 (GAppInfo                          *application,
         GList                             *files,
-        GtkWindow                         *parent_window);
+        CtkWindow                         *parent_window);
 void baul_launch_application_by_uri          (GAppInfo                          *application,
         GList                             *uris,
-        GtkWindow                         *parent_window);
+        CtkWindow                         *parent_window);
 void baul_launch_application_from_command    (GdkScreen                         *screen,
         const char                        *name,
         const char                        *command_string,
@@ -53,6 +53,6 @@ void baul_launch_application_from_command_array (GdkScreen                      
 void baul_launch_desktop_file		 (GdkScreen                         *screen,
                                       const char                        *desktop_file_uri,
                                       const GList                       *parameter_uris,
-                                      GtkWindow                         *parent_window);
+                                      CtkWindow                         *parent_window);
 
 #endif /* BAUL_PROGRAM_CHOOSING_H */

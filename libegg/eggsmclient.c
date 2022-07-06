@@ -356,9 +356,9 @@ egg_sm_client_get (void)
         if (!global_client)
             global_client = g_object_new (EGG_TYPE_SM_CLIENT, NULL);
         /*FIXME
-          Disabling when root/not in CAFE in GtkApplication builds
+          Disabling when root/not in CAFE in CtkApplication builds
           as egg_sm_client_set_mode must be called prior to start of main loop
-          to stop baul restart but this is diffcult in GtkApplication */
+          to stop baul restart but this is diffcult in CtkApplication */
 
 		if (geteuid () == 0 || !running_in_cafe ()){
         global_client = g_object_new (EGG_TYPE_SM_CLIENT, NULL);

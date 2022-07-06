@@ -47,13 +47,13 @@ typedef struct BaulEmblemSidebarDetails BaulEmblemSidebarDetails;
 
 typedef struct
 {
-    GtkBox parent_slot;
+    CtkBox parent_slot;
     BaulEmblemSidebarDetails *details;
 } BaulEmblemSidebar;
 
 typedef struct
 {
-    GtkBoxClass parent_slot;
+    CtkBoxClass parent_slot;
 } BaulEmblemSidebarClass;
 
 GType	baul_emblem_sidebar_get_type     (void);

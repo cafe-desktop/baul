@@ -50,13 +50,13 @@ typedef struct _BaulZoomControlPrivate BaulZoomControlPrivate;
 
 struct BaulZoomControl
 {
-    GtkBox parent;
+    CtkBox parent;
     BaulZoomControlPrivate *details;
 };
 
 struct BaulZoomControlClass
 {
-    GtkBoxClass parent_class;
+    CtkBoxClass parent_class;
 
     void (*zoom_in)		(BaulZoomControl *control);
     void (*zoom_out) 	(BaulZoomControl *control);
@@ -66,11 +66,11 @@ struct BaulZoomControlClass
 
     /* Action signal for keybindings, do not connect to this */
     void (*change_value)    (BaulZoomControl *control,
-                             GtkScrollType scroll);
+                             CtkScrollType scroll);
 };
 
 GType             baul_zoom_control_get_type           (void);
-GtkWidget *       baul_zoom_control_new                (void);
+CtkWidget *       baul_zoom_control_new                (void);
 void              baul_zoom_control_set_zoom_level     (BaulZoomControl *zoom_control,
         BaulZoomLevel    zoom_level);
 void              baul_zoom_control_set_parameters     (BaulZoomControl *zoom_control,

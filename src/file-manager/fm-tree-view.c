@@ -78,8 +78,8 @@ typedef struct
 struct FMTreeViewDetails
 {
     BaulWindowInfo *window;
-    GtkTreeView *tree_widget;
-    GtkTreeModelSort *sort_model;
+    CtkTreeView *tree_widget;
+    CtkTreeModelSort *sort_model;
     FMTreeModel *child_model;
 
     GVolumeMonitor *volume_monitor;
@@ -95,20 +95,20 @@ struct FMTreeViewDetails
     guint show_selection_idle_id;
     gulong clipboard_handler_id;
 
-    GtkWidget *popup;
-    GtkWidget *popup_open;
-    GtkWidget *popup_open_in_new_window;
-    GtkWidget *popup_create_folder;
-    GtkWidget *popup_cut;
-    GtkWidget *popup_copy;
-    GtkWidget *popup_paste;
-    GtkWidget *popup_rename;
-    GtkWidget *popup_trash;
-    GtkWidget *popup_delete;
-    GtkWidget *popup_properties;
-    GtkWidget *popup_unmount_separator;
-    GtkWidget *popup_unmount;
-    GtkWidget *popup_eject;
+    CtkWidget *popup;
+    CtkWidget *popup_open;
+    CtkWidget *popup_open_in_new_window;
+    CtkWidget *popup_create_folder;
+    CtkWidget *popup_cut;
+    CtkWidget *popup_copy;
+    CtkWidget *popup_paste;
+    CtkWidget *popup_rename;
+    CtkWidget *popup_trash;
+    CtkWidget *popup_delete;
+    CtkWidget *popup_properties;
+    CtkWidget *popup_unmount_separator;
+    CtkWidget *popup_unmount;
+    CtkWidget *popup_eject;
     BaulFile *popup_file;
     guint popup_file_idle_handler;
 
@@ -129,7 +129,7 @@ static void  fm_tree_view_activate_file     (FMTreeView *view,
         BaulFile *file,
         BaulWindowOpenFlags flags);
 static GType fm_tree_view_provider_get_type (void);
-static GtkWindow *fm_tree_view_get_containing_window (FMTreeView *view);
+static CtkWindow *fm_tree_view_get_containing_window (FMTreeView *view);
 
 static void create_popup_menu (FMTreeView *view);
 
@@ -159,13 +159,13 @@ notify_clipboard_info (BaulClipboardMonitor *monitor,
 
 
 static gboolean
-show_iter_for_file (FMTreeView *view, BaulFile *file, GtkTreeIter *iter)
+show_iter_for_file (FMTreeView *view, BaulFile *file, CtkTreeIter *iter)
 {
-    GtkTreeModel *model;
+    CtkTreeModel *model;
     BaulFile *parent_file;
-    GtkTreeIter parent_iter;
-    GtkTreePath *path, *sort_path;
-    GtkTreeIter cur_iter;
+    CtkTreeIter parent_iter;
+    CtkTreePath *path, *sort_path;
+    CtkTreeIter cur_iter;
 
     if (view->details->child_model == NULL)
     {
@@ -237,8 +237,8 @@ show_selection_idle_callback (gpointer callback_data)
 {
     FMTreeView *view;
     BaulFile *file;
-    GtkTreeIter iter;
-    GtkTreePath *path, *sort_path;
+    CtkTreeIter iter;
+    CtkTreePath *path, *sort_path;
 
     view = FM_TREE_VIEW (callback_data);
 
@@ -309,8 +309,8 @@ schedule_select_and_show_location (FMTreeView *view, char *location)
 }
 
 static void
-row_loaded_callback (GtkTreeModel     *tree_model,
-                     GtkTreeIter      *iter,
+row_loaded_callback (CtkTreeModel     *tree_model,
+                     CtkTreeIter      *iter,
                      FMTreeView *view)
 {
     BaulFile *file, *tmp_file, *selection_file;
@@ -353,18 +353,18 @@ row_loaded_callback (GtkTreeModel     *tree_model,
 }
 
 static BaulFile *
-sort_model_iter_to_file (FMTreeView *view, GtkTreeIter *iter)
+sort_model_iter_to_file (FMTreeView *view, CtkTreeIter *iter)
 {
-    GtkTreeIter child_iter;
+    CtkTreeIter child_iter;
 
     ctk_tree_model_sort_convert_iter_to_child_iter (view->details->sort_model, &child_iter, iter);
     return fm_tree_model_iter_get_file (view->details->child_model, &child_iter);
 }
 
 static BaulFile *
-sort_model_path_to_file (FMTreeView *view, GtkTreePath *path)
+sort_model_path_to_file (FMTreeView *view, CtkTreePath *path)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (!ctk_tree_model_get_iter (GTK_TREE_MODEL (view->details->sort_model), &iter, path))
     {
@@ -489,8 +489,8 @@ cancel_activation (FMTreeView *view)
 }
 
 static void
-row_activated_callback (GtkTreeView *treeview, GtkTreePath *path,
-                        GtkTreeViewColumn *column, FMTreeView *view)
+row_activated_callback (CtkTreeView *treeview, CtkTreePath *path,
+                        CtkTreeViewColumn *column, FMTreeView *view)
 {
     if (ctk_tree_view_row_expanded (view->details->tree_widget, path))
     {
@@ -507,8 +507,8 @@ static gboolean
 selection_changed_timer_callback(FMTreeView *view)
 {
     BaulFileAttributes attributes;
-    GtkTreeIter iter;
-    GtkTreeSelection *selection;
+    CtkTreeIter iter;
+    CtkTreeSelection *selection;
 
     selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (view->details->tree_widget));
 
@@ -539,7 +539,7 @@ selection_changed_timer_callback(FMTreeView *view)
 }
 
 static void
-selection_changed_callback (GtkTreeSelection *selection,
+selection_changed_callback (CtkTreeSelection *selection,
                             FMTreeView *view)
 {
     GdkEvent *event;
@@ -572,7 +572,7 @@ selection_changed_callback (GtkTreeSelection *selection,
 }
 
 static int
-compare_rows (GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer callback_data)
+compare_rows (CtkTreeModel *model, CtkTreeIter *a, CtkTreeIter *b, gpointer callback_data)
 {
     BaulFile *file_a, *file_b;
     int result;
@@ -633,7 +633,7 @@ get_root_uri_callback (BaulTreeViewDragDest *dest,
 
 static BaulFile *
 get_file_for_path_callback (BaulTreeViewDragDest *dest,
-                            GtkTreePath *path,
+                            CtkTreePath *path,
                             gpointer user_data)
 {
     FMTreeView *view;
@@ -719,8 +719,8 @@ mount_removed_callback (GVolumeMonitor *volume_monitor,
 }
 
 static void
-clipboard_contents_received_callback (GtkClipboard     *clipboard,
-                                      GtkSelectionData *selection_data,
+clipboard_contents_received_callback (CtkClipboard     *clipboard,
+                                      CtkSelectionData *selection_data,
                                       gpointer          data)
 {
     FMTreeView *view;
@@ -758,10 +758,10 @@ is_parent_writable (BaulFile *file)
 }
 
 static gboolean
-button_pressed_callback (GtkTreeView *treeview, GdkEventButton *event,
+button_pressed_callback (CtkTreeView *treeview, GdkEventButton *event,
                          FMTreeView *view)
 {
-    GtkTreePath *path, *cursor_path;
+    CtkTreePath *path, *cursor_path;
     gboolean parent_file_is_writable;
     gboolean file_is_home_or_desktop;
     gboolean file_is_special_link;
@@ -920,21 +920,21 @@ fm_tree_view_activate_file (FMTreeView *view,
 }
 
 static void
-fm_tree_view_open_cb (GtkWidget *menu_item,
+fm_tree_view_open_cb (CtkWidget *menu_item,
                       FMTreeView *view)
 {
     fm_tree_view_activate_file (view, view->details->popup_file, 0);
 }
 
 static void
-fm_tree_view_open_in_new_tab_cb (GtkWidget *menu_item,
+fm_tree_view_open_in_new_tab_cb (CtkWidget *menu_item,
                                  FMTreeView *view)
 {
     fm_tree_view_activate_file (view, view->details->popup_file, BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
 }
 
 static void
-fm_tree_view_open_in_new_window_cb (GtkWidget *menu_item,
+fm_tree_view_open_in_new_window_cb (CtkWidget *menu_item,
                                     FMTreeView *view)
 {
     /* fm_tree_view_activate_file (view, view->details->popup_file, BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW); */
@@ -963,7 +963,7 @@ new_folder_done (GFile *new_folder, gpointer data)
 }
 
 static void
-fm_tree_view_create_folder_cb (GtkWidget *menu_item,
+fm_tree_view_create_folder_cb (CtkWidget *menu_item,
                                FMTreeView *view)
 {
     char *parent_uri;
@@ -983,8 +983,8 @@ copy_or_cut_files (FMTreeView *view,
 {
     char *status_string, *name;
     BaulClipboardInfo info;
-    GtkTargetList *target_list;
-    GtkTargetEntry *targets;
+    CtkTargetList *target_list;
+    CtkTargetEntry *targets;
     int n_targets;
 
     info.cut = cut;
@@ -1029,14 +1029,14 @@ copy_or_cut_files (FMTreeView *view,
 }
 
 static void
-fm_tree_view_cut_cb (GtkWidget *menu_item,
+fm_tree_view_cut_cb (CtkWidget *menu_item,
                      FMTreeView *view)
 {
     copy_or_cut_files (view, TRUE);
 }
 
 static void
-fm_tree_view_copy_cb (GtkWidget *menu_item,
+fm_tree_view_copy_cb (CtkWidget *menu_item,
                       FMTreeView *view)
 {
     copy_or_cut_files (view, FALSE);
@@ -1044,7 +1044,7 @@ fm_tree_view_copy_cb (GtkWidget *menu_item,
 
 static void
 paste_clipboard_data (FMTreeView *view,
-                      GtkSelectionData *selection_data,
+                      CtkSelectionData *selection_data,
                       char *destination_uri)
 {
     gboolean cut;
@@ -1078,8 +1078,8 @@ paste_clipboard_data (FMTreeView *view,
 }
 
 static void
-paste_into_clipboard_received_callback (GtkClipboard     *clipboard,
-                                        GtkSelectionData *selection_data,
+paste_into_clipboard_received_callback (CtkClipboard     *clipboard,
+                                        CtkSelectionData *selection_data,
                                         gpointer          data)
 {
     FMTreeView *view;
@@ -1095,7 +1095,7 @@ paste_into_clipboard_received_callback (GtkClipboard     *clipboard,
 }
 
 static void
-fm_tree_view_paste_cb (GtkWidget *menu_item,
+fm_tree_view_paste_cb (CtkWidget *menu_item,
                        FMTreeView *view)
 {
     ctk_clipboard_request_contents (baul_clipboard_get (GTK_WIDGET (view->details->tree_widget)),
@@ -1103,10 +1103,10 @@ fm_tree_view_paste_cb (GtkWidget *menu_item,
                                     paste_into_clipboard_received_callback, view);
 }
 
-static GtkWindow *
+static CtkWindow *
 fm_tree_view_get_containing_window (FMTreeView *view)
 {
-    GtkWidget *window;
+    CtkWidget *window;
 
     g_assert (FM_IS_TREE_VIEW (view));
 
@@ -1120,7 +1120,7 @@ fm_tree_view_get_containing_window (FMTreeView *view)
 }
 
 static void
-fm_tree_view_trash_cb (GtkWidget *menu_item,
+fm_tree_view_trash_cb (CtkWidget *menu_item,
                        FMTreeView *view)
 {
     GList *list;
@@ -1140,7 +1140,7 @@ fm_tree_view_trash_cb (GtkWidget *menu_item,
 }
 
 static void
-fm_tree_view_delete_cb (GtkWidget *menu_item,
+fm_tree_view_delete_cb (CtkWidget *menu_item,
                         FMTreeView *view)
 {
     GList *location_list;
@@ -1158,7 +1158,7 @@ fm_tree_view_delete_cb (GtkWidget *menu_item,
 }
 
 static void
-fm_tree_view_properties_cb (GtkWidget *menu_item,
+fm_tree_view_properties_cb (CtkWidget *menu_item,
                             FMTreeView *view)
 {
     GList *list;
@@ -1171,7 +1171,7 @@ fm_tree_view_properties_cb (GtkWidget *menu_item,
 }
 
 static void
-fm_tree_view_unmount_cb (GtkWidget *menu_item,
+fm_tree_view_unmount_cb (CtkWidget *menu_item,
                          FMTreeView *view)
 {
     BaulFile *file = view->details->popup_file;
@@ -1192,7 +1192,7 @@ fm_tree_view_unmount_cb (GtkWidget *menu_item,
 }
 
 static void
-fm_tree_view_eject_cb (GtkWidget *menu_item,
+fm_tree_view_eject_cb (CtkWidget *menu_item,
                        FMTreeView *view)
 {
     BaulFile *file = view->details->popup_file;
@@ -1229,7 +1229,7 @@ free_popup_file_in_idle_cb (gpointer data)
 }
 
 static void
-popup_menu_deactivated (GtkMenuShell *menu_shell, gpointer data)
+popup_menu_deactivated (CtkMenuShell *menu_shell, gpointer data)
 {
     FMTreeView *view;
 
@@ -1250,7 +1250,7 @@ popup_menu_deactivated (GtkMenuShell *menu_shell, gpointer data)
 static void
 create_popup_menu (FMTreeView *view)
 {
-    GtkWidget *popup, *menu_item;
+    CtkWidget *popup, *menu_item;
 
     if (view->details->popup != NULL)
     {
@@ -1393,8 +1393,8 @@ create_popup_menu (FMTreeView *view)
 static void
 create_tree (FMTreeView *view)
 {
-    GtkCellRenderer *cell;
-    GtkTreeViewColumn *column;
+    CtkCellRenderer *cell;
+    CtkTreeViewColumn *column;
     GVolumeMonitor *volume_monitor;
     char *home_uri;
     GList *mounts, *l;
@@ -1533,8 +1533,8 @@ update_filtering_from_preferences (FMTreeView *view)
 }
 
 static void
-parent_set_callback (GtkWidget        *widget,
-                     GtkWidget        *previous_parent,
+parent_set_callback (CtkWidget        *widget,
+                     CtkWidget        *previous_parent,
                      gpointer          callback_data)
 {
     FMTreeView *view;

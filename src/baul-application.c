@@ -537,7 +537,7 @@ check_required_directories (BaulApplication *application)
         GSList *l;
         char *error_string;
         const char *detail_string;
-        GtkDialog *dialog;
+        CtkDialog *dialog;
 
         ret = FALSE;
 
@@ -582,7 +582,7 @@ check_required_directories (BaulApplication *application)
 }
 
 static void
-menu_provider_items_updated_handler (BaulMenuProvider *provider, GtkWidget* parent_window, gpointer data)
+menu_provider_items_updated_handler (BaulMenuProvider *provider, CtkWidget* parent_window, gpointer data)
 {
 
     g_signal_emit_by_name (baul_signaller_get_current (),
@@ -621,21 +621,21 @@ automount_all_volumes_idle_cb (gpointer data)
 }
 
 static void
-selection_get_cb (GtkWidget          *widget,
-                  GtkSelectionData   *selection_data,
+selection_get_cb (CtkWidget          *widget,
+                  CtkSelectionData   *selection_data,
                   guint               info,
                   guint               time)
 {
     /* No extra targets atm */
 }
 
-static GtkWidget *
+static CtkWidget *
 get_desktop_manager_selection (GdkDisplay *display)
 {
     char selection_name[32];
     GdkAtom selection_atom;
     Window selection_owner;
-    GtkWidget *selection_widget;
+    CtkWidget *selection_widget;
 
     g_snprintf (selection_name, sizeof (selection_name), "_NET_DESKTOP_MANAGER_S0");
     selection_atom = gdk_atom_intern (selection_name, FALSE);
@@ -669,14 +669,14 @@ get_desktop_manager_selection (GdkDisplay *display)
 }
 
 static void
-desktop_unrealize_cb (GtkWidget        *widget,
-                      GtkWidget        *selection_widget)
+desktop_unrealize_cb (CtkWidget        *widget,
+                      CtkWidget        *selection_widget)
 {
     ctk_widget_destroy (selection_widget);
 }
 
 static gboolean
-selection_clear_event_cb (GtkWidget	        *widget,
+selection_clear_event_cb (CtkWidget	        *widget,
                           GdkEventSelection     *event,
                           BaulDesktopWindow *window)
 {
@@ -692,7 +692,7 @@ static void
 baul_application_create_desktop_windows (BaulApplication *application)
 {
     GdkDisplay *display;
-    GtkWidget *selection_widget;
+    CtkWidget *selection_widget;
 
     g_return_if_fail (baul_application_desktop_windows == NULL);
     g_return_if_fail (BAUL_IS_APPLICATION (application));
@@ -911,7 +911,7 @@ baul_application_close_all_spatial_windows (void)
 }
 
 static gboolean
-baul_window_delete_event_callback (GtkWidget *widget,
+baul_window_delete_event_callback (CtkWidget *widget,
                                    GdkEvent *event,
                                    gpointer user_data)
 {
@@ -2026,7 +2026,7 @@ baul_application_local_command_line (GApplication *application,
 }
 
 static void
-load_custom_css (GtkCssProvider *provider,
+load_custom_css (CtkCssProvider *provider,
                  const gchar *filename,
                  guint priority)
 {
@@ -2055,9 +2055,9 @@ load_custom_css (GtkCssProvider *provider,
 }
 
 static void
-reload_theme_css (GtkSettings    *settings,
+reload_theme_css (CtkSettings    *settings,
                   GParamSpec     *unused G_GNUC_UNUSED,
-                  GtkCssProvider *provider)
+                  CtkCssProvider *provider)
 {
     gchar *theme_name;
     gchar *css_theme_name;
@@ -2080,8 +2080,8 @@ reload_theme_css (GtkSettings    *settings,
 static void
 init_icons_and_styles (void)
 {
-    GtkSettings *settings = ctk_settings_get_default ();
-    GtkCssProvider *provider;
+    CtkSettings *settings = ctk_settings_get_default ();
+    CtkCssProvider *provider;
 
     /* add our custom CSS provider */
     load_custom_css (NULL, "baul.css", GTK_STYLE_PROVIDER_PRIORITY_THEME);
@@ -2143,7 +2143,7 @@ baul_application_save_accel_map (gpointer data)
 }
 
 static void
-queue_accel_map_save_callback (GtkAccelMap *object, gchar *accel_path,
+queue_accel_map_save_callback (CtkAccelMap *object, gchar *accel_path,
         guint accel_key, GdkModifierType accel_mods,
         gpointer user_data)
 {

@@ -59,15 +59,15 @@
 #define DEFAULT_LIGHT_INFO_COLOR "#FFFFFF"
 #define DEFAULT_DARK_INFO_COLOR  "#2A2A2A"
 
-static void                baul_sidebar_title_size_allocate     (GtkWidget             *widget,
-        							 GtkAllocation         *allocation);
+static void                baul_sidebar_title_size_allocate     (CtkWidget             *widget,
+        							 CtkAllocation         *allocation);
 static void                update_icon                          (BaulSidebarTitle      *sidebar_title);
-static GtkWidget *         sidebar_title_create_title_label     (void);
-static GtkWidget *         sidebar_title_create_more_info_label (void);
+static CtkWidget *         sidebar_title_create_title_label     (void);
+static CtkWidget *         sidebar_title_create_more_info_label (void);
 static void		   update_all 				(BaulSidebarTitle      *sidebar_title);
 static void		   update_more_info			(BaulSidebarTitle      *sidebar_title);
 static void		   update_title_font			(BaulSidebarTitle      *sidebar_title);
-static void                style_updated                        (GtkWidget             *widget);
+static void                style_updated                        (CtkWidget             *widget);
 static guint		   get_best_icon_size 			(BaulSidebarTitle      *sidebar_title);
 
 enum
@@ -89,10 +89,10 @@ struct _BaulSidebarTitlePrivate
     gboolean		 monitoring_count;
 
     char		*title_text;
-    GtkWidget		*icon;
-    GtkWidget		*title_label;
-    GtkWidget		*more_info_label;
-    GtkWidget		*emblem_box;
+    CtkWidget		*icon;
+    CtkWidget		*title_label;
+    CtkWidget		*more_info_label;
+    CtkWidget		*emblem_box;
 
     GdkRGBA		 label_colors [LAST_LABEL_COLOR];
     guint		 best_icon_size;
@@ -102,7 +102,7 @@ struct _BaulSidebarTitlePrivate
 G_DEFINE_TYPE_WITH_PRIVATE (BaulSidebarTitle, baul_sidebar_title, GTK_TYPE_BOX)
 
 static void
-style_updated (GtkWidget *widget)
+style_updated (CtkWidget *widget)
 {
     BaulSidebarTitle *sidebar_title;
 
@@ -199,7 +199,7 @@ baul_sidebar_title_finalize (GObject *object)
 static void
 baul_sidebar_title_class_init (BaulSidebarTitleClass *klass)
 {
-    GtkWidgetClass *widget_class;
+    CtkWidgetClass *widget_class;
 
     G_OBJECT_CLASS (klass)->finalize = baul_sidebar_title_finalize;
 
@@ -223,7 +223,7 @@ baul_sidebar_title_class_init (BaulSidebarTitleClass *klass)
 }
 
 /* return a new index title object */
-GtkWidget *
+CtkWidget *
 baul_sidebar_title_new (void)
 {
     return ctk_widget_new (baul_sidebar_title_get_type (), NULL);
@@ -240,7 +240,7 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
                                       EelBackground    *background)
 {
     GdkRGBA *light_info_color, *dark_info_color;
-    GtkStyleContext *style;
+    CtkStyleContext *style;
     GdkRGBA color;
     GdkRGBA *c;
 
@@ -344,7 +344,7 @@ static guint
 get_best_icon_size (BaulSidebarTitle *sidebar_title)
 {
     gint width;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     ctk_widget_get_allocation (GTK_WIDGET (sidebar_title), &allocation);
     width = allocation.width - TITLE_PADDING;
@@ -422,11 +422,11 @@ update_icon (BaulSidebarTitle *sidebar_title)
 }
 
 static void
-override_title_font (GtkWidget   *widget,
+override_title_font (CtkWidget   *widget,
                      const gchar *font)
 {
     gchar          *css;
-    GtkCssProvider *provider;
+    CtkCssProvider *provider;
     gchar          *tempsize;
 
     provider = ctk_css_provider_new ();
@@ -455,9 +455,9 @@ update_title_font (BaulSidebarTitle *sidebar_title)
 {
     int available_width, width;
     int max_fit_font_size, max_style_font_size;
-    GtkStyleContext *context;
-    GtkStateFlags    state;
-    GtkAllocation allocation;
+    CtkStyleContext *context;
+    CtkStateFlags    state;
+    CtkAllocation allocation;
     PangoFontDescription *title_font, *tmp_font;
     PangoLayout *layout;
 
@@ -517,7 +517,7 @@ update_title_font (BaulSidebarTitle *sidebar_title)
 static void
 update_title (BaulSidebarTitle *sidebar_title)
 {
-    GtkLabel *label;
+    CtkLabel *label;
     const char *text;
 
     label = GTK_LABEL (sidebar_title->details->title_label);
@@ -564,7 +564,7 @@ update_more_info (BaulSidebarTitle *sidebar_title)
     BaulFile *file;
     GString *info_string;
     char *component_info;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     file = sidebar_title->details->file;
 
@@ -626,7 +626,7 @@ update_more_info (BaulSidebarTitle *sidebar_title)
 static void
 add_emblem (BaulSidebarTitle *sidebar_title, GdkPixbuf *pixbuf)
 {
-    GtkWidget *image_widget;
+    CtkWidget *image_widget;
 
     image_widget = ctk_image_new_from_pixbuf (pixbuf);
     ctk_widget_show (image_widget);
@@ -647,7 +647,7 @@ update_emblems (BaulSidebarTitle *sidebar_title)
 
     /* First, deallocate any existing ones */
     ctk_container_foreach (GTK_CONTAINER (sidebar_title->details->emblem_box),
-                           (GtkCallback) ctk_widget_destroy,
+                           (CtkCallback) ctk_widget_destroy,
                            NULL);
 
     /* fetch the emblem icons from metadata */
@@ -775,14 +775,14 @@ baul_sidebar_title_set_file (BaulSidebarTitle *sidebar_title,
 }
 
 static void
-baul_sidebar_title_size_allocate (GtkWidget *widget,
-                                  GtkAllocation *allocation)
+baul_sidebar_title_size_allocate (CtkWidget *widget,
+                                  CtkAllocation *allocation)
 {
     BaulSidebarTitle *sidebar_title;
     guint16 old_width;
     guint best_icon_size;
     gint scale;
-    GtkAllocation old_allocation, new_allocation;
+    CtkAllocation old_allocation, new_allocation;
 
     sidebar_title = BAUL_SIDEBAR_TITLE (widget);
     scale = ctk_widget_get_scale_factor (widget);
@@ -812,12 +812,12 @@ baul_sidebar_title_size_allocate (GtkWidget *widget,
 gboolean
 baul_sidebar_title_hit_test_icon (BaulSidebarTitle *sidebar_title, int x, int y)
 {
-    GtkAllocation *allocation;
+    CtkAllocation *allocation;
     gboolean icon_hit;
 
     g_return_val_if_fail (BAUL_IS_SIDEBAR_TITLE (sidebar_title), FALSE);
 
-    allocation = g_new0 (GtkAllocation, 1);
+    allocation = g_new0 (CtkAllocation, 1);
     ctk_widget_get_allocation (GTK_WIDGET (sidebar_title->details->icon), allocation);
     g_return_val_if_fail (allocation != NULL, FALSE);
 
@@ -829,10 +829,10 @@ baul_sidebar_title_hit_test_icon (BaulSidebarTitle *sidebar_title, int x, int y)
     return icon_hit;
 }
 
-static GtkWidget *
+static CtkWidget *
 sidebar_title_create_title_label (void)
 {
-    GtkWidget *title_label;
+    CtkWidget *title_label;
 
     title_label = ctk_label_new ("");
     eel_ctk_label_make_bold (GTK_LABEL (title_label));
@@ -844,10 +844,10 @@ sidebar_title_create_title_label (void)
     return title_label;
 }
 
-static GtkWidget *
+static CtkWidget *
 sidebar_title_create_more_info_label (void)
 {
-    GtkWidget *more_info_label;
+    CtkWidget *more_info_label;
     PangoAttrList *attrs;
 
     attrs = pango_attr_list_new ();

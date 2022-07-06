@@ -68,7 +68,7 @@ typedef struct
     GObjectClass parent_class;
 
     void         (* row_loaded)      (FMTreeModel *tree_model,
-                                      GtkTreeIter       *iter);
+                                      CtkTreeIter       *iter);
 } FMTreeModelClass;
 
 GType              fm_tree_model_get_type                  (void);
@@ -78,7 +78,7 @@ void               fm_tree_model_set_show_hidden_files     (FMTreeModel *model,
 void               fm_tree_model_set_show_only_directories (FMTreeModel *model,
         gboolean           show_only_directories);
 BaulFile *     fm_tree_model_iter_get_file             (FMTreeModel *model,
-        GtkTreeIter       *iter);
+        CtkTreeIter       *iter);
 void               fm_tree_model_add_root_uri              (FMTreeModel *model,
         const char        *root_uri,
         const char        *display_name,
@@ -87,14 +87,14 @@ void               fm_tree_model_add_root_uri              (FMTreeModel *model,
 void               fm_tree_model_remove_root_uri           (FMTreeModel *model,
         const char        *root_uri);
 gboolean           fm_tree_model_iter_is_root              (FMTreeModel *model,
-        GtkTreeIter *iter);
+        CtkTreeIter *iter);
 int                fm_tree_model_iter_compare_roots        (FMTreeModel *model,
-        GtkTreeIter *iter_a,
-        GtkTreeIter *iter_b);
+        CtkTreeIter *iter_a,
+        CtkTreeIter *iter_b);
 gboolean           fm_tree_model_file_get_iter             (FMTreeModel *model,
-        GtkTreeIter *iter,
+        CtkTreeIter *iter,
         BaulFile *file,
-        GtkTreeIter *currentIter);
+        CtkTreeIter *currentIter);
 
 GMount *         fm_tree_model_get_mount_for_root_node_file
 (FMTreeModel  *model,

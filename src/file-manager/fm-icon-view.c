@@ -101,7 +101,7 @@ struct FMIconViewDetails
     const SortCriterion *sort;
     gboolean sort_reversed;
 
-    GtkActionGroup *icon_action_group;
+    CtkActionGroup *icon_action_group;
     guint icon_merge_id;
 
     int audio_preview_timeout;
@@ -224,7 +224,7 @@ G_DEFINE_TYPE_WITH_CODE (FMIconView, fm_icon_view, FM_TYPE_DIRECTORY_VIEW,
                                  fm_icon_view_iface_init));
 
 static void
-fm_icon_view_destroy (GtkWidget *object)
+fm_icon_view_destroy (CtkWidget *object)
 {
     FMIconView *icon_view;
 
@@ -402,7 +402,7 @@ clear_sort_criterion (FMIconView *icon_view)
 }
 
 static void
-action_stretch_callback (GtkAction *action,
+action_stretch_callback (CtkAction *action,
                          gpointer callback_data)
 {
     g_assert (FM_IS_ICON_VIEW (callback_data));
@@ -412,7 +412,7 @@ action_stretch_callback (GtkAction *action,
 }
 
 static void
-action_unstretch_callback (GtkAction *action,
+action_unstretch_callback (CtkAction *action,
                            gpointer callback_data)
 {
     g_assert (FM_IS_ICON_VIEW (callback_data));
@@ -448,7 +448,7 @@ fm_icon_view_real_clean_up (FMIconView *icon_view)
 }
 
 static void
-action_clean_up_callback (GtkAction *action, gpointer callback_data)
+action_clean_up_callback (CtkAction *action, gpointer callback_data)
 {
     fm_icon_view_clean_up (FM_ICON_VIEW (callback_data));
 }
@@ -465,7 +465,7 @@ set_tighter_layout (FMIconView *icon_view, gboolean new_value)
 }
 
 static void
-action_tighter_layout_callback (GtkAction *action,
+action_tighter_layout_callback (CtkAction *action,
                                 gpointer user_data)
 {
     g_assert (FM_IS_ICON_VIEW (user_data));
@@ -492,8 +492,8 @@ fm_icon_view_using_tighter_layout (FMIconView *icon_view)
 }
 
 static void
-action_sort_radio_callback (GtkAction *action,
-                            GtkRadioAction *current,
+action_sort_radio_callback (CtkAction *action,
+                            CtkRadioAction *current,
                             FMIconView *view)
 {
     BaulFileSortType sort_type;
@@ -731,7 +731,7 @@ static void
 update_layout_menus (FMIconView *view)
 {
     gboolean is_auto_layout;
-    GtkAction *action;
+    CtkAction *action;
     BaulFile *file;
 
     if (view->details->icon_action_group == NULL)
@@ -1273,7 +1273,7 @@ static void
 fm_icon_view_begin_loading (FMDirectoryView *view)
 {
     FMIconView *icon_view;
-    GtkWidget *icon_container;
+    CtkWidget *icon_container;
     BaulFile *file;
     char *sort_name;
 
@@ -1391,7 +1391,7 @@ fm_icon_view_end_loading (FMDirectoryView *view,
                           gboolean all_files_seen)
 {
     FMIconView *icon_view;
-    GtkWidget *icon_container;
+    CtkWidget *icon_container;
     BaulClipboardMonitor *monitor;
     BaulClipboardInfo *info;
 
@@ -1520,7 +1520,7 @@ fm_icon_view_can_zoom_out (FMDirectoryView *view)
            > BAUL_ZOOM_LEVEL_SMALLEST;
 }
 
-static GtkWidget *
+static CtkWidget *
 fm_icon_view_get_background_widget (FMDirectoryView *view)
 {
     g_return_val_if_fail (FM_IS_ICON_VIEW (view), NULL);
@@ -1600,7 +1600,7 @@ set_sort_criterion_by_sort_type (FMIconView *icon_view,
 
 
 static void
-action_reversed_order_callback (GtkAction *action,
+action_reversed_order_callback (CtkAction *action,
                                 gpointer user_data)
 {
     FMIconView *icon_view;
@@ -1618,7 +1618,7 @@ action_reversed_order_callback (GtkAction *action,
 }
 
 static void
-action_keep_aligned_callback (GtkAction *action,
+action_keep_aligned_callback (CtkAction *action,
                               gpointer user_data)
 {
     FMIconView *icon_view;
@@ -1704,7 +1704,7 @@ fm_icon_view_start_renaming_file (FMDirectoryView *view,
     (get_icon_container (FM_ICON_VIEW (view)), select_all);
 }
 
-static const GtkActionEntry icon_view_entries[] =
+static const CtkActionEntry icon_view_entries[] =
 {
     /* name, stock id, label */  { "Arrange Items", NULL, N_("Arran_ge Items") },
     /* name, stock id */         { "Stretch", NULL,
@@ -1724,7 +1724,7 @@ static const GtkActionEntry icon_view_entries[] =
     },
 };
 
-static const GtkToggleActionEntry icon_view_toggle_entries[] =
+static const CtkToggleActionEntry icon_view_toggle_entries[] =
 {
     /* name, stock id */      { "Tighter Layout", NULL,
         /* label, accelerator */    N_("Compact _Layout"), NULL,
@@ -1746,7 +1746,7 @@ static const GtkToggleActionEntry icon_view_toggle_entries[] =
     },
 };
 
-static const GtkRadioActionEntry arrange_radio_entries[] =
+static const CtkRadioActionEntry arrange_radio_entries[] =
 {
     {
         "Manual Layout", NULL,
@@ -1808,8 +1808,8 @@ static void
 fm_icon_view_merge_menus (FMDirectoryView *view)
 {
     FMIconView *icon_view;
-    GtkUIManager *ui_manager;
-    GtkActionGroup *action_group;
+    CtkUIManager *ui_manager;
+    CtkActionGroup *action_group;
     const char *ui;
 
     g_assert (FM_IS_ICON_VIEW (view));
@@ -1850,7 +1850,7 @@ fm_icon_view_merge_menus (FMDirectoryView *view)
      */
     if (!fm_icon_view_supports_auto_layout (icon_view))
     {
-        GtkAction *action;
+        CtkAction *action;
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         action = ctk_action_group_get_action (action_group,
@@ -1884,7 +1884,7 @@ static void
 fm_icon_view_unmerge_menus (FMDirectoryView *view)
 {
     FMIconView *icon_view;
-    GtkUIManager *ui_manager;
+    CtkUIManager *ui_manager;
 
     icon_view = FM_ICON_VIEW (view);
 
@@ -1905,7 +1905,7 @@ fm_icon_view_update_menus (FMDirectoryView *view)
     FMIconView *icon_view;
     GList *selection;
     int selection_count;
-    GtkAction *action;
+    CtkAction *action;
     BaulIconContainer *icon_container;
     gboolean editable;
 
@@ -2434,7 +2434,7 @@ icon_container_preview_callback (BaulIconContainer *container,
 
 static void
 renaming_icon_callback (BaulIconContainer *container,
-                        GtkWidget *widget,
+                        CtkWidget *widget,
                         gpointer callback_data)
 {
     FMDirectoryView *directory_view;
@@ -2475,7 +2475,7 @@ fm_icon_view_filter_by_screen (FMIconView *icon_view,
 }
 
 static void
-fm_icon_view_screen_changed (GtkWidget *widget,
+fm_icon_view_screen_changed (CtkWidget *widget,
                              GdkScreen *previous_screen)
 {
     FMDirectoryView *view;
@@ -2522,7 +2522,7 @@ fm_icon_view_screen_changed (GtkWidget *widget,
 }
 
 static gboolean
-fm_icon_view_scroll_event (GtkWidget *widget,
+fm_icon_view_scroll_event (CtkWidget *widget,
                            GdkEventScroll *scroll_event)
 {
     FMIconView *icon_view;
@@ -2991,7 +2991,7 @@ store_layout_timestamp (BaulIconContainer *container,
 }
 
 static gboolean
-focus_in_event_callback (GtkWidget *widget, GdkEventFocus *event, gpointer user_data)
+focus_in_event_callback (CtkWidget *widget, GdkEventFocus *event, gpointer user_data)
 {
     BaulWindowSlotInfo *slot_info;
     FMIconView *icon_view = FM_ICON_VIEW (user_data);

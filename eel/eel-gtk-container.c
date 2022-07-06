@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /* eel-ctk-container.c - Functions to simplify the implementations of
-  			 GtkContainer widgets.
+  			 CtkContainer widgets.
 
    Copyright (C) 2001 Ramiro Estrugo.
 
@@ -30,7 +30,7 @@
 /**
  * eel_ctk_container_child_expose_event:
  *
- * @container: A GtkContainer widget.
+ * @container: A CtkContainer widget.
  * @child: A child of @container or NULL;
  * @event: The expose event.
  *
@@ -41,8 +41,8 @@
  * non NO_WINDOW widgets to this function, in which case this function is a noop.
  */
 void
-eel_ctk_container_child_expose_event (GtkContainer *container,
-                                      GtkWidget *child,
+eel_ctk_container_child_expose_event (CtkContainer *container,
+                                      CtkWidget *child,
                                       cairo_t *cr)
 {
     g_return_if_fail (GTK_IS_CONTAINER (container));
@@ -60,15 +60,15 @@ eel_ctk_container_child_expose_event (GtkContainer *container,
 /**
  * eel_ctk_container_child_map:
  *
- * @container: A GtkContainer widget.
+ * @container: A CtkContainer widget.
  * @child: A child of @container or NULL;
  *
- * Map a child if needed.  This is usually called from the "GtkWidget::map"
+ * Map a child if needed.  This is usually called from the "CtkWidget::map"
  * method of the @container widget.  If @child is NULL, then this function is a noop.
  */
 void
-eel_ctk_container_child_map (GtkContainer *container,
-                             GtkWidget *child)
+eel_ctk_container_child_map (CtkContainer *container,
+                             CtkWidget *child)
 {
     g_return_if_fail (GTK_IS_CONTAINER (container));
 
@@ -88,15 +88,15 @@ eel_ctk_container_child_map (GtkContainer *container,
 /**
  * eel_ctk_container_child_unmap:
  *
- * @container: A GtkContainer widget.
+ * @container: A CtkContainer widget.
  * @child: A child of @container or NULL;
  *
- * Unmap a child if needed.  This is usually called from the "GtkWidget::unmap"
+ * Unmap a child if needed.  This is usually called from the "CtkWidget::unmap"
  * method of the @container widget.  If @child is NULL, then this function is a noop.
  */
 void
-eel_ctk_container_child_unmap (GtkContainer *container,
-                               GtkWidget *child)
+eel_ctk_container_child_unmap (CtkContainer *container,
+                               CtkWidget *child)
 {
     g_return_if_fail (GTK_IS_CONTAINER (container));
 
@@ -116,18 +116,18 @@ eel_ctk_container_child_unmap (GtkContainer *container,
 /**
  * eel_ctk_container_child_add:
  *
- * @container: A GtkContainer widget.
+ * @container: A CtkContainer widget.
  * @child: A non NULL unparented child.
  *
  * Add a @child to a @container.  The @child is realized, mapped
- * and resized if needed.  This is usually called from the "GtkContainer::add"
+ * and resized if needed.  This is usually called from the "CtkContainer::add"
  * method of the @container.  The @child cannot be NULL.
  */
 void
-eel_ctk_container_child_add (GtkContainer *container,
-                             GtkWidget *child)
+eel_ctk_container_child_add (CtkContainer *container,
+                             CtkWidget *child)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     g_return_if_fail (GTK_IS_CONTAINER (container));
     g_return_if_fail (GTK_IS_WIDGET (child));
@@ -156,16 +156,16 @@ eel_ctk_container_child_add (GtkContainer *container,
 /**
  * eel_ctk_container_child_remove:
  *
- * @container: A GtkContainer widget.
+ * @container: A CtkContainer widget.
  * @child: A non NULL child of @container.
  *
  * Remove @child from @container.  The @container is resized if needed.
- * This is usually called from the "GtkContainer::remove" method of the
+ * This is usually called from the "CtkContainer::remove" method of the
  * @container.  The child cannot be NULL.
  */
 void
-eel_ctk_container_child_remove (GtkContainer *container,
-                                GtkWidget *child)
+eel_ctk_container_child_remove (CtkContainer *container,
+                                CtkWidget *child)
 {
     gboolean child_was_visible;
 
@@ -186,20 +186,20 @@ eel_ctk_container_child_remove (GtkContainer *container,
 /**
  * eel_ctk_container_child_size_allocate:
  *
- * @container: A GtkContainer widget.
+ * @container: A CtkContainer widget.
  * @child: A child of @container or NULL;
  *
- * Invoke the "GtkWidget::size_allocate" method of @child.
- * This function is usually called from the "GtkWidget::size_allocate"
+ * Invoke the "CtkWidget::size_allocate" method of @child.
+ * This function is usually called from the "CtkWidget::size_allocate"
  * method of @container.  The child can be NULL, in which case this
  * function is a noop.
  */
 void
-eel_ctk_container_child_size_allocate (GtkContainer *container,
-                                       GtkWidget *child,
+eel_ctk_container_child_size_allocate (CtkContainer *container,
+                                       CtkWidget *child,
                                        EelIRect child_geometry)
 {
-    GtkAllocation child_allocation;
+    CtkAllocation child_allocation;
 
     g_return_if_fail (GTK_IS_CONTAINER (container));
 

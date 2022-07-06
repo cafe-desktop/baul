@@ -474,10 +474,10 @@ msgstr "Sorkizárás"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "A címke szövege sorainak igazítása egymáshoz. Ez NINCS hatással a címke "
-"elhelyezkedésére. Erre lásd a GtkMisc::xalign-t."
+"elhelyezkedésére. Erre lásd a CtkMisc::xalign-t."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

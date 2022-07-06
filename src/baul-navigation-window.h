@@ -114,9 +114,9 @@ void     baul_navigation_window_split_view_on        (BaulNavigationWindow *wind
 void     baul_navigation_window_split_view_off       (BaulNavigationWindow *window);
 gboolean baul_navigation_window_split_view_showing   (BaulNavigationWindow *window);
 
-gboolean baul_navigation_window_is_in_temporary_navigation_bar (GtkWidget *widget,
+gboolean baul_navigation_window_is_in_temporary_navigation_bar (CtkWidget *widget,
         BaulNavigationWindow *window);
-gboolean baul_navigation_window_is_in_temporary_search_bar (GtkWidget *widget,
+gboolean baul_navigation_window_is_in_temporary_search_bar (CtkWidget *widget,
         BaulNavigationWindow *window);
 
 #endif

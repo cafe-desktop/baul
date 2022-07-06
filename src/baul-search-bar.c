@@ -35,7 +35,7 @@
 
 struct BaulSearchBarDetails
 {
-    GtkWidget *entry;
+    CtkWidget *entry;
     gboolean entry_borrowed;
 };
 
@@ -73,7 +73,7 @@ static void
 baul_search_bar_class_init (BaulSearchBarClass *class)
 {
     GObjectClass *gobject_class;
-    GtkBindingSet *binding_set;
+    CtkBindingSet *binding_set;
 
     gobject_class = G_OBJECT_CLASS (class);
     gobject_class->finalize = finalize;
@@ -120,8 +120,8 @@ entry_has_text (BaulSearchBar *bar)
 }
 
 static void
-entry_icon_release_cb (GtkEntry *entry,
-                       GtkEntryIconPosition position,
+entry_icon_release_cb (CtkEntry *entry,
+                       CtkEntryIconPosition position,
                        GdkEvent *event,
                        BaulSearchBar *bar)
 {
@@ -129,7 +129,7 @@ entry_icon_release_cb (GtkEntry *entry,
 }
 
 static void
-entry_activate_cb (GtkWidget *entry, BaulSearchBar *bar)
+entry_activate_cb (CtkWidget *entry, BaulSearchBar *bar)
 {
     if (entry_has_text (bar) && !bar->details->entry_borrowed)
     {
@@ -138,7 +138,7 @@ entry_activate_cb (GtkWidget *entry, BaulSearchBar *bar)
 }
 
 static gboolean
-focus_in_event_callback (GtkWidget *widget,
+focus_in_event_callback (CtkWidget *widget,
                          GdkEventFocus *event,
                          gpointer user_data)
 {
@@ -154,9 +154,9 @@ focus_in_event_callback (GtkWidget *widget,
 static void
 baul_search_bar_init (BaulSearchBar *bar)
 {
-    GtkWidget *hbox;
-    GtkWidget *label;
-    GtkStyleContext *context;
+    CtkWidget *hbox;
+    CtkWidget *label;
+    CtkStyleContext *context;
 
     context = ctk_widget_get_style_context (GTK_WIDGET (bar));
     ctk_style_context_add_class (context, "baul-search-bar");
@@ -192,10 +192,10 @@ baul_search_bar_init (BaulSearchBar *bar)
     ctk_widget_show (bar->details->entry);
 }
 
-GtkWidget *
+CtkWidget *
 baul_search_bar_borrow_entry (BaulSearchBar *bar)
 {
-    GtkBindingSet *binding_set;
+    CtkBindingSet *binding_set;
 
     bar->details->entry_borrowed = TRUE;
 
@@ -207,7 +207,7 @@ baul_search_bar_borrow_entry (BaulSearchBar *bar)
 void
 baul_search_bar_return_entry (BaulSearchBar *bar)
 {
-    GtkBindingSet *binding_set;
+    CtkBindingSet *binding_set;
 
     bar->details->entry_borrowed = FALSE;
 
@@ -215,10 +215,10 @@ baul_search_bar_return_entry (BaulSearchBar *bar)
 	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
 }
 
-GtkWidget *
+CtkWidget *
 baul_search_bar_new (BaulWindow *window)
 {
-    GtkWidget *bar;
+    CtkWidget *bar;
     BaulSearchBar *search_bar;
 
     bar = g_object_new (BAUL_TYPE_SEARCH_BAR, NULL);

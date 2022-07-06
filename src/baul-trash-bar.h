@@ -40,19 +40,19 @@ typedef struct _BaulTrashBarPrivate BaulTrashBarPrivate;
 
 typedef struct
 {
-        GtkBox	box;
+        CtkBox	box;
         BaulTrashBarPrivate *priv;
 } BaulTrashBar;
 
 typedef struct
 {
-GtkBoxClass	    parent_class;
+CtkBoxClass	    parent_class;
 
 } BaulTrashBarClass;
 
 GType		 baul_trash_bar_get_type	(void) G_GNUC_CONST;
 
-GtkWidget       *baul_trash_bar_new         (BaulWindow *window);
+CtkWidget       *baul_trash_bar_new         (BaulWindow *window);
 
 G_END_DECLS
 

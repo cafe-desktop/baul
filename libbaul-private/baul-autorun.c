@@ -65,7 +65,7 @@ enum
 
 static gboolean should_autorun_mount (GMount *mount);
 
-static void baul_autorun_rebuild_combo_box (GtkWidget *combo_box);
+static void baul_autorun_rebuild_combo_box (CtkWidget *combo_box);
 
 void
 baul_autorun_get_preferences (const char *x_content_type,
@@ -192,8 +192,8 @@ baul_autorun_set_preferences (const char *x_content_type,
 }
 
 static gboolean
-combo_box_separator_func (GtkTreeModel *model,
-                          GtkTreeIter *iter,
+combo_box_separator_func (CtkTreeModel *model,
+                          CtkTreeIter *iter,
                           gpointer data)
 {
     char *str;
@@ -212,7 +212,7 @@ combo_box_separator_func (GtkTreeModel *model,
 typedef struct
 {
     guint changed_signal_id;
-    GtkWidget *combo_box;
+    CtkWidget *combo_box;
 
     char *x_content_type;
     gboolean include_ask;
@@ -270,7 +270,7 @@ handle_dialog_closure (BaulAutorunComboBoxData *data)
 }
 
 static void
-dialog_response_cb (GtkDialog *dialog,
+dialog_response_cb (CtkDialog *dialog,
                     gint response,
                     BaulAutorunComboBoxData *data)
 {
@@ -278,18 +278,18 @@ dialog_response_cb (GtkDialog *dialog,
 }
 
 static void
-dialog_destroy_cb (GtkWidget *object,
+dialog_destroy_cb (CtkWidget *object,
                    BaulAutorunComboBoxData *data)
 {
     handle_dialog_closure (data);
 }
 
 static void
-combo_box_changed (GtkComboBox *combo_box,
+combo_box_changed (CtkComboBox *combo_box,
                    BaulAutorunComboBoxData *data)
 {
-    GtkTreeIter iter;
-    GtkTreeModel *model;
+    CtkTreeIter iter;
+    CtkTreeModel *model;
     GAppInfo *app_info;
     char *x_content_type;
     int type;
@@ -365,7 +365,7 @@ combo_box_changed (GtkComboBox *combo_box,
 
     case AUTORUN_OTHER_APP:
     {
-        GtkWidget *dialog;
+        CtkWidget *dialog;
 
         data->other_application_selected = FALSE;
 
@@ -395,7 +395,7 @@ out:
 }
 
 static void
-baul_autorun_rebuild_combo_box (GtkWidget *combo_box)
+baul_autorun_rebuild_combo_box (CtkWidget *combo_box)
 {
     BaulAutorunComboBoxData *data;
     char *x_content_type;
@@ -459,7 +459,7 @@ baul_autorun_rebuild_combo_box (GtkWidget *combo_box)
  */
 
 void
-baul_autorun_prepare_combo_box (GtkWidget *combo_box,
+baul_autorun_prepare_combo_box (CtkWidget *combo_box,
                                 const char *x_content_type,
                                 gboolean include_ask,
                                 gboolean include_open_with_other_app,
@@ -470,8 +470,8 @@ baul_autorun_prepare_combo_box (GtkWidget *combo_box,
     GList *l;
     GList *app_info_list;
     GAppInfo *default_app_info;
-    GtkListStore *list_store;
-    GtkTreeIter iter;
+    CtkListStore *list_store;
+    CtkTreeIter iter;
     cairo_surface_t *surface;
     int icon_size, icon_scale;
     int set_active;
@@ -481,7 +481,7 @@ baul_autorun_prepare_combo_box (GtkWidget *combo_box,
     gboolean pref_ignore;
     gboolean pref_open_folder;
     BaulAutorunComboBoxData *data;
-    GtkCellRenderer *renderer;
+    CtkCellRenderer *renderer;
     gboolean new_data;
 
     baul_autorun_get_preferences (x_content_type, &pref_start_app, &pref_ignore, &pref_open_folder);
@@ -784,7 +784,7 @@ enum
 
 typedef struct
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     GMount *mount;
     gboolean should_eject;
@@ -847,7 +847,7 @@ autorun_dialog_mount_unmounted (GMount *mount, AutorunDialogData *data)
 }
 
 static void
-autorun_dialog_response (GtkDialog *dialog, gint response, AutorunDialogData *data)
+autorun_dialog_response (CtkDialog *dialog, gint response, AutorunDialogData *data)
 {
     switch (response)
     {
@@ -918,13 +918,13 @@ autorun_combo_changed (gboolean selected_ask,
 
 
 static void
-autorun_always_toggled (GtkToggleButton *togglebutton, AutorunDialogData *data)
+autorun_always_toggled (CtkToggleButton *togglebutton, AutorunDialogData *data)
 {
     data->remember = ctk_toggle_button_get_active (togglebutton);
 }
 
 static gboolean
-combo_box_enter_ok (GtkWidget *togglebutton, GdkEventKey *event, GtkDialog *dialog)
+combo_box_enter_ok (CtkWidget *togglebutton, GdkEventKey *event, CtkDialog *dialog)
 {
     if (event->keyval == GDK_KEY_KP_Enter || event->keyval == GDK_KEY_Return)
     {
@@ -939,15 +939,15 @@ static gboolean
 do_autorun_for_content_type (GMount *mount, const char *x_content_type, BaulAutorunOpenWindow open_window_func, gpointer user_data)
 {
     AutorunDialogData *data;
-    GtkWidget *dialog;
-    GtkWidget *hbox;
-    GtkWidget *vbox;
-    GtkWidget *label;
-    GtkWidget *combo_box;
-    GtkWidget *always_check_button;
-    GtkWidget *eject_button;
-    GtkWidget *image;
-    GtkWidget *action_area;
+    CtkWidget *dialog;
+    CtkWidget *hbox;
+    CtkWidget *vbox;
+    CtkWidget *label;
+    CtkWidget *combo_box;
+    CtkWidget *always_check_button;
+    CtkWidget *eject_button;
+    CtkWidget *image;
+    CtkWidget *action_area;
     char *markup;
     char *content_description;
     char *mount_name;
@@ -1164,7 +1164,7 @@ show_dialog:
 
     if (g_mount_can_eject (mount))
     {
-        GtkWidget *eject_image;
+        CtkWidget *eject_image;
         eject_button = ctk_button_new_with_mnemonic (_("_Eject"));
         surface = ctk_icon_theme_load_surface (ctk_icon_theme_get_default (),
                                                "media-eject",

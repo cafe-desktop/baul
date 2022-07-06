@@ -62,12 +62,12 @@
 
 typedef struct
 {
-    GtkScrolledWindow  parent;
-    GtkTreeView        *tree_view;
-    GtkCellRenderer    *eject_icon_cell_renderer;
+    CtkScrolledWindow  parent;
+    CtkTreeView        *tree_view;
+    CtkCellRenderer    *eject_icon_cell_renderer;
     char               *uri;
-    GtkListStore       *store;
-    GtkTreeModel       *filter_model;
+    CtkListStore       *store;
+    CtkTreeModel       *filter_model;
     BaulWindowInfo *window;
     BaulBookmarkList *bookmarks;
     GVolumeMonitor *volume_monitor;
@@ -81,31 +81,31 @@ typedef struct
     int       drag_data_info;
     gboolean  drop_occured;
 
-    GtkWidget *popup_menu;
-    GtkWidget *popup_menu_open_in_new_tab_item;
-    GtkWidget *popup_menu_remove_item;
-    GtkWidget *popup_menu_rename_item;
-    GtkWidget *popup_menu_separator_item;
-    GtkWidget *popup_menu_mount_item;
-    GtkWidget *popup_menu_unmount_item;
-    GtkWidget *popup_menu_eject_item;
-    GtkWidget *popup_menu_rescan_item;
-    GtkWidget *popup_menu_format_item;
-    GtkWidget *popup_menu_empty_trash_item;
-    GtkWidget *popup_menu_start_item;
-    GtkWidget *popup_menu_stop_item;
+    CtkWidget *popup_menu;
+    CtkWidget *popup_menu_open_in_new_tab_item;
+    CtkWidget *popup_menu_remove_item;
+    CtkWidget *popup_menu_rename_item;
+    CtkWidget *popup_menu_separator_item;
+    CtkWidget *popup_menu_mount_item;
+    CtkWidget *popup_menu_unmount_item;
+    CtkWidget *popup_menu_eject_item;
+    CtkWidget *popup_menu_rescan_item;
+    CtkWidget *popup_menu_format_item;
+    CtkWidget *popup_menu_empty_trash_item;
+    CtkWidget *popup_menu_start_item;
+    CtkWidget *popup_menu_stop_item;
 
     /* volume mounting - delayed open process */
     gboolean mounting;
     BaulWindowSlotInfo *go_to_after_mount_slot;
     BaulWindowOpenFlags go_to_after_mount_flags;
 
-    GtkTreePath *eject_highlight_path;
+    CtkTreePath *eject_highlight_path;
 } BaulPlacesSidebar;
 
 typedef struct
 {
-    GtkScrolledWindowClass parent;
+    CtkScrolledWindowClass parent;
 } BaulPlacesSidebarClass;
 
 typedef struct
@@ -158,14 +158,14 @@ static void  baul_places_sidebar_iface_init        (BaulSidebarIface         *if
 static void  sidebar_provider_iface_init               (BaulSidebarProviderIface *iface);
 static GType baul_places_sidebar_provider_get_type (void);
 static void  open_selected_bookmark                    (BaulPlacesSidebar        *sidebar,
-        GtkTreeModel                 *model,
-        GtkTreePath                  *path,
+        CtkTreeModel                 *model,
+        CtkTreePath                  *path,
         BaulWindowOpenFlags flags);
 
-static void  baul_places_sidebar_style_updated         (GtkWidget                    *widget);
+static void  baul_places_sidebar_style_updated         (CtkWidget                    *widget);
 
 static gboolean eject_or_unmount_bookmark              (BaulPlacesSidebar *sidebar,
-        GtkTreePath *path);
+        CtkTreePath *path);
 static gboolean eject_or_unmount_selection             (BaulPlacesSidebar *sidebar);
 static void  check_unmount_and_eject                   (GMount *mount,
         GVolume *volume,
@@ -183,13 +183,13 @@ enum
 };
 
 /* Target types for dragging from the shortcuts list */
-static const GtkTargetEntry baul_shortcuts_source_targets[] =
+static const CtkTargetEntry baul_shortcuts_source_targets[] =
 {
     { "GTK_TREE_MODEL_ROW", GTK_TARGET_SAME_WIDGET, GTK_TREE_MODEL_ROW }
 };
 
 /* Target types for dropping into the shortcuts list */
-static const GtkTargetEntry baul_shortcuts_drop_targets [] =
+static const CtkTargetEntry baul_shortcuts_drop_targets [] =
 {
     { "GTK_TREE_MODEL_ROW", GTK_TARGET_SAME_WIDGET, GTK_TREE_MODEL_ROW },
     { "text/uri-list", 0, TEXT_URI_LIST }
@@ -198,21 +198,21 @@ static const GtkTargetEntry baul_shortcuts_drop_targets [] =
 /* Drag and drop interface declarations */
 typedef struct
 {
-    GtkTreeModelFilter parent;
+    CtkTreeModelFilter parent;
 
     BaulPlacesSidebar *sidebar;
 } BaulShortcutsModelFilter;
 
 typedef struct
 {
-    GtkTreeModelFilterClass parent_class;
+    CtkTreeModelFilterClass parent_class;
 } BaulShortcutsModelFilterClass;
 
 #define BAUL_SHORTCUTS_MODEL_FILTER_TYPE (_baul_shortcuts_model_filter_get_type ())
 #define BAUL_SHORTCUTS_MODEL_FILTER(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_SHORTCUTS_MODEL_FILTER_TYPE, BaulShortcutsModelFilter))
 
 GType _baul_shortcuts_model_filter_get_type (void);
-static void baul_shortcuts_model_filter_drag_source_iface_init (GtkTreeDragSourceIface *iface);
+static void baul_shortcuts_model_filter_drag_source_iface_init (CtkTreeDragSourceIface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (BaulShortcutsModelFilter,
                          _baul_shortcuts_model_filter,
@@ -220,9 +220,9 @@ G_DEFINE_TYPE_WITH_CODE (BaulShortcutsModelFilter,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
                                  baul_shortcuts_model_filter_drag_source_iface_init));
 
-static GtkTreeModel *baul_shortcuts_model_filter_new (BaulPlacesSidebar *sidebar,
-        GtkTreeModel          *child_model,
-        GtkTreePath           *root);
+static CtkTreeModel *baul_shortcuts_model_filter_new (BaulPlacesSidebar *sidebar,
+        CtkTreeModel          *child_model,
+        CtkTreePath           *root);
 
 G_DEFINE_TYPE_WITH_CODE (BaulPlacesSidebar, baul_places_sidebar, GTK_TYPE_SCROLLED_WINDOW,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
@@ -283,12 +283,12 @@ is_built_in_bookmark (BaulFile *file)
     return built_in;
 }
 
-static GtkTreeIter
+static CtkTreeIter
 add_heading (BaulPlacesSidebar *sidebar,
          SectionType section_type,
          const gchar *title)
 {
-    GtkTreeIter iter, child_iter;
+    CtkTreeIter iter, child_iter;
 
     ctk_list_store_append (sidebar->store, &iter);
     ctk_list_store_set (sidebar->store, &iter,
@@ -333,7 +333,7 @@ check_heading_for_section (BaulPlacesSidebar *sidebar,
     }
 }
 
-static GtkTreeIter
+static CtkTreeIter
 add_place (BaulPlacesSidebar *sidebar,
            PlaceType place_type,
            SectionType section_type,
@@ -348,7 +348,7 @@ add_place (BaulPlacesSidebar *sidebar,
 {
     GdkPixbuf       *pixbuf;
     cairo_surface_t *surface;
-    GtkTreeIter      iter, child_iter;
+    CtkTreeIter      iter, child_iter;
     cairo_surface_t *eject;
     BaulIconInfo    *icon_info;
     int              icon_size;
@@ -433,8 +433,8 @@ compare_for_selection (BaulPlacesSidebar *sidebar,
                        const gchar *location,
                        const gchar *added_uri,
                        const gchar *last_uri,
-                       GtkTreeIter *iter,
-                       GtkTreePath **path)
+                       CtkTreeIter *iter,
+                       CtkTreePath **path)
 {
     int res;
 
@@ -464,10 +464,10 @@ static void
 update_places (BaulPlacesSidebar *sidebar)
 {
     BaulBookmark *bookmark;
-    GtkTreeSelection *selection;
-    GtkTreeIter last_iter;
-    GtkTreePath *select_path;
-    GtkTreeModel *model;
+    CtkTreeSelection *selection;
+    CtkTreeIter last_iter;
+    CtkTreePath *select_path;
+    CtkTreeModel *model;
     GVolumeMonitor *volume_monitor;
     GList *mounts, *l, *ll;
     GMount *mount;
@@ -981,14 +981,14 @@ static gboolean
 over_eject_button (BaulPlacesSidebar *sidebar,
                    gint x,
                    gint y,
-                   GtkTreePath **path)
+                   CtkTreePath **path)
 {
-    GtkTreeViewColumn *column;
+    CtkTreeViewColumn *column;
     int width, x_offset, hseparator;
     int eject_button_size;
     gboolean show_eject;
-    GtkTreeIter iter;
-    GtkTreeModel *model;
+    CtkTreeIter iter;
+    CtkTreeModel *model;
 
     *path = NULL;
     model = ctk_tree_view_get_model (sidebar->tree_view);
@@ -1041,7 +1041,7 @@ out:
 
 static gboolean
 clicked_eject_button (BaulPlacesSidebar *sidebar,
-                      GtkTreePath **path)
+                      CtkTreePath **path)
 {
     GdkEvent *event = ctk_get_current_event ();
     GdkEventButton *button_event = (GdkEventButton *) event;
@@ -1069,13 +1069,13 @@ loading_uri_callback (BaulWindowInfo *window,
                       char *location,
                       BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter       iter;
+    CtkTreeIter       iter;
     gboolean          valid;
     char             *uri;
 
     if (strcmp (sidebar->uri, location) != 0)
     {
-        GtkTreeSelection *selection;
+        CtkTreeSelection *selection;
 
         g_free (sidebar->uri);
         sidebar->uri = g_strdup (location);
@@ -1107,15 +1107,15 @@ loading_uri_callback (BaulWindowInfo *window,
 
 /* Computes the appropriate row and position for dropping */
 static gboolean
-compute_drop_position (GtkTreeView *tree_view,
+compute_drop_position (CtkTreeView *tree_view,
                        int                      x,
                        int                      y,
-                       GtkTreePath            **path,
-                       GtkTreeViewDropPosition *pos,
+                       CtkTreePath            **path,
+                       CtkTreeViewDropPosition *pos,
                        BaulPlacesSidebar *sidebar)
 {
-    GtkTreeModel *model;
-    GtkTreeIter iter;
+    CtkTreeModel *model;
+    CtkTreeIter iter;
     PlaceType place_type;
     SectionType section_type;
 
@@ -1179,7 +1179,7 @@ compute_drop_position (GtkTreeView *tree_view,
 }
 
 static gboolean
-get_drag_data (GtkTreeView *tree_view,
+get_drag_data (CtkTreeView *tree_view,
                GdkDragContext *context,
                unsigned int time)
 {
@@ -1246,17 +1246,17 @@ can_accept_items_as_bookmarks (const GList *items)
 }
 
 static gboolean
-drag_motion_callback (GtkTreeView *tree_view,
+drag_motion_callback (CtkTreeView *tree_view,
                       GdkDragContext *context,
                       int x,
                       int y,
                       unsigned int time,
                       BaulPlacesSidebar *sidebar)
 {
-    GtkTreePath *path;
-    GtkTreeViewDropPosition pos;
+    CtkTreePath *path;
+    CtkTreeViewDropPosition pos;
     int action = 0;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     char *uri;
     gboolean res;
 
@@ -1337,7 +1337,7 @@ drag_motion_callback (GtkTreeView *tree_view,
 }
 
 static void
-drag_leave_callback (GtkTreeView *tree_view,
+drag_leave_callback (CtkTreeView *tree_view,
                      GdkDragContext *context,
                      unsigned int time,
                      BaulPlacesSidebar *sidebar)
@@ -1350,7 +1350,7 @@ drag_leave_callback (GtkTreeView *tree_view,
 /* Parses a "text/uri-list" string and inserts its URIs as bookmarks */
 static void
 bookmarks_drop_uris (BaulPlacesSidebar *sidebar,
-                     GtkSelectionData      *selection_data,
+                     CtkSelectionData      *selection_data,
                      int                    position)
 {
     BaulBookmark *bookmark;
@@ -1447,9 +1447,9 @@ build_selection_list (const char *data)
 
 static gboolean
 get_selected_iter (BaulPlacesSidebar *sidebar,
-                   GtkTreeIter *iter)
+                   CtkTreeIter *iter)
 {
-    GtkTreeSelection *selection;
+    CtkTreeSelection *selection;
 
     selection = ctk_tree_view_get_selection (sidebar->tree_view);
 
@@ -1461,7 +1461,7 @@ static void
 reorder_bookmarks (BaulPlacesSidebar *sidebar,
                    int                new_position)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     PlaceType type;
     int old_position;
 
@@ -1487,21 +1487,21 @@ reorder_bookmarks (BaulPlacesSidebar *sidebar,
 }
 
 static void
-drag_data_received_callback (GtkWidget *widget,
+drag_data_received_callback (CtkWidget *widget,
                              GdkDragContext *context,
                              int x,
                              int y,
-                             GtkSelectionData *selection_data,
+                             CtkSelectionData *selection_data,
                              unsigned int info,
                              unsigned int time,
                              BaulPlacesSidebar *sidebar)
 {
-    GtkTreeView *tree_view;
-    GtkTreePath *tree_path;
-    GtkTreeViewDropPosition tree_pos;
-    GtkTreeIter iter;
+    CtkTreeView *tree_view;
+    CtkTreePath *tree_path;
+    CtkTreeViewDropPosition tree_pos;
+    CtkTreeIter iter;
     int position;
-    GtkTreeModel *model;
+    CtkTreeModel *model;
     char *drop_uri;
     GList *selection_list, *uris;
     PlaceType place_type;
@@ -1641,7 +1641,7 @@ out:
 }
 
 static gboolean
-drag_drop_callback (GtkTreeView *tree_view,
+drag_drop_callback (CtkTreeView *tree_view,
                     GdkDragContext *context,
                     int x,
                     int y,
@@ -1657,8 +1657,8 @@ drag_drop_callback (GtkTreeView *tree_view,
 
 /* Callback used when the file list's popup menu is detached */
 static void
-bookmarks_popup_menu_detach_cb (GtkWidget *attach_widget,
-                                GtkMenu   *menu)
+bookmarks_popup_menu_detach_cb (CtkWidget *attach_widget,
+                                CtkMenu   *menu)
 {
     BaulPlacesSidebar *sidebar;
 
@@ -1749,7 +1749,7 @@ check_visibility (GMount           *mount,
 static void
 bookmarks_check_popup_sensitivity (BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     PlaceType type;
     GDrive *drive = NULL;
     GVolume *volume = NULL;
@@ -1848,7 +1848,7 @@ bookmarks_check_popup_sensitivity (BaulPlacesSidebar *sidebar)
 
 /* Callback used when the selection in the shortcuts tree changes */
 static void
-bookmarks_selection_changed_cb (GtkTreeSelection      *selection,
+bookmarks_selection_changed_cb (CtkTreeSelection      *selection,
                                 BaulPlacesSidebar *sidebar)
 {
     bookmarks_check_popup_sensitivity (sidebar);
@@ -1928,12 +1928,12 @@ drive_start_from_bookmark_cb (GObject      *source_object,
 
 static void
 open_selected_bookmark (BaulPlacesSidebar   *sidebar,
-                        GtkTreeModel        *model,
-                        GtkTreePath         *path,
+                        CtkTreeModel        *model,
+                        CtkTreePath         *path,
                         BaulWindowOpenFlags  flags)
 {
     BaulWindowSlotInfo *slot;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     char *uri;
 
     if (!path)
@@ -2024,8 +2024,8 @@ static void
 open_shortcut_from_menu (BaulPlacesSidebar   *sidebar,
                          BaulWindowOpenFlags  flags)
 {
-    GtkTreeModel *model;
-    GtkTreePath *path;
+    CtkTreeModel *model;
+    CtkTreePath *path;
 
     model = ctk_tree_view_get_model (sidebar->tree_view);
     ctk_tree_view_get_cursor (sidebar->tree_view, &path, NULL);
@@ -2036,21 +2036,21 @@ open_shortcut_from_menu (BaulPlacesSidebar   *sidebar,
 }
 
 static void
-open_shortcut_cb (GtkMenuItem       *item,
+open_shortcut_cb (CtkMenuItem       *item,
                   BaulPlacesSidebar *sidebar)
 {
     open_shortcut_from_menu (sidebar, 0);
 }
 
 static void
-open_shortcut_in_new_window_cb (GtkMenuItem       *item,
+open_shortcut_in_new_window_cb (CtkMenuItem       *item,
                                 BaulPlacesSidebar *sidebar)
 {
     open_shortcut_from_menu (sidebar, BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW);
 }
 
 static void
-open_shortcut_in_new_tab_cb (GtkMenuItem       *item,
+open_shortcut_in_new_tab_cb (CtkMenuItem       *item,
                              BaulPlacesSidebar *sidebar)
 {
     open_shortcut_from_menu (sidebar, BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
@@ -2060,13 +2060,13 @@ open_shortcut_in_new_tab_cb (GtkMenuItem       *item,
 static void
 rename_selected_bookmark (BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (get_selected_iter (sidebar, &iter))
     {
-        GtkTreePath *path;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *cell;
+        CtkTreePath *path;
+        CtkTreeViewColumn *column;
+        CtkCellRenderer *cell;
         GList *renderers;
 
         path = ctk_tree_model_get_path (GTK_TREE_MODEL (sidebar->filter_model), &iter);
@@ -2082,7 +2082,7 @@ rename_selected_bookmark (BaulPlacesSidebar *sidebar)
 }
 
 static void
-rename_shortcut_cb (GtkMenuItem           *item,
+rename_shortcut_cb (CtkMenuItem           *item,
                     BaulPlacesSidebar *sidebar)
 {
     rename_selected_bookmark (sidebar);
@@ -2092,7 +2092,7 @@ rename_shortcut_cb (GtkMenuItem           *item,
 static void
 remove_selected_bookmarks (BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     PlaceType type;
     int index;
 
@@ -2118,17 +2118,17 @@ remove_selected_bookmarks (BaulPlacesSidebar *sidebar)
 }
 
 static void
-remove_shortcut_cb (GtkMenuItem           *item,
+remove_shortcut_cb (CtkMenuItem           *item,
                     BaulPlacesSidebar *sidebar)
 {
     remove_selected_bookmarks (sidebar);
 }
 
 static void
-mount_shortcut_cb (GtkMenuItem           *item,
+mount_shortcut_cb (CtkMenuItem           *item,
                    BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     GVolume *volume;
 
     if (!get_selected_iter (sidebar, &iter))
@@ -2173,7 +2173,7 @@ do_unmount (GMount *mount,
 static void
 do_unmount_selection (BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     GMount *mount;
 
     if (!get_selected_iter (sidebar, &iter))
@@ -2193,7 +2193,7 @@ do_unmount_selection (BaulPlacesSidebar *sidebar)
 }
 
 static void
-unmount_shortcut_cb (GtkMenuItem           *item,
+unmount_shortcut_cb (CtkMenuItem           *item,
                      BaulPlacesSidebar *sidebar)
 {
     do_unmount_selection (sidebar);
@@ -2338,10 +2338,10 @@ do_eject (GMount *mount,
 }
 
 static void
-eject_shortcut_cb (GtkMenuItem           *item,
+eject_shortcut_cb (CtkMenuItem           *item,
                    BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     GMount *mount;
     GVolume *volume;
     GDrive *drive;
@@ -2362,10 +2362,10 @@ eject_shortcut_cb (GtkMenuItem           *item,
 
 static gboolean
 eject_or_unmount_bookmark (BaulPlacesSidebar *sidebar,
-                           GtkTreePath *path)
+                           CtkTreePath *path)
 {
-    GtkTreeModel *model;
-    GtkTreeIter iter;
+    CtkTreeModel *model;
+    CtkTreeIter iter;
     gboolean can_unmount, can_eject;
     GMount *mount;
     GVolume *volume;
@@ -2417,8 +2417,8 @@ eject_or_unmount_bookmark (BaulPlacesSidebar *sidebar,
 static gboolean
 eject_or_unmount_selection (BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
-    GtkTreePath *path;
+    CtkTreeIter iter;
+    CtkTreePath *path;
     gboolean ret;
 
     if (!get_selected_iter (sidebar, &iter)) {
@@ -2465,10 +2465,10 @@ drive_poll_for_media_cb (GObject *source_object,
 }
 
 static void
-rescan_shortcut_cb (GtkMenuItem           *item,
+rescan_shortcut_cb (CtkMenuItem           *item,
                     BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     GDrive  *drive;
 
     if (!get_selected_iter (sidebar, &iter))
@@ -2488,7 +2488,7 @@ rescan_shortcut_cb (GtkMenuItem           *item,
 }
 
 static void
-format_shortcut_cb (GtkMenuItem           *item,
+format_shortcut_cb (CtkMenuItem           *item,
                     BaulPlacesSidebar *sidebar)
 {
     g_spawn_command_line_async ("gfloppy", NULL);
@@ -2522,10 +2522,10 @@ drive_start_cb (GObject      *source_object,
 }
 
 static void
-start_shortcut_cb (GtkMenuItem           *item,
+start_shortcut_cb (CtkMenuItem           *item,
                    BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     GDrive  *drive;
 
     if (!get_selected_iter (sidebar, &iter))
@@ -2583,10 +2583,10 @@ drive_stop_cb (GObject *source_object,
 }
 
 static void
-stop_shortcut_cb (GtkMenuItem           *item,
+stop_shortcut_cb (CtkMenuItem           *item,
                   BaulPlacesSidebar *sidebar)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     GDrive  *drive;
 
     if (!get_selected_iter (sidebar, &iter))
@@ -2612,20 +2612,20 @@ stop_shortcut_cb (GtkMenuItem           *item,
 }
 
 static void
-empty_trash_cb (GtkMenuItem           *item,
+empty_trash_cb (CtkMenuItem           *item,
                 BaulPlacesSidebar *sidebar)
 {
     baul_file_operations_empty_trash (GTK_WIDGET (sidebar->window));
 }
 
-/* Handler for GtkWidget::key-press-event on the shortcuts list */
+/* Handler for CtkWidget::key-press-event on the shortcuts list */
 static gboolean
-bookmarks_key_press_event_cb (GtkWidget             *widget,
+bookmarks_key_press_event_cb (CtkWidget             *widget,
                               GdkEventKey           *event,
                               BaulPlacesSidebar *sidebar)
 {
     guint modifiers;
-    GtkTreePath *path;
+    CtkTreePath *path;
     BaulWindowOpenFlags flags = 0;
 
     modifiers = ctk_accelerator_get_default_mod_mask ();
@@ -2635,7 +2635,7 @@ bookmarks_key_press_event_cb (GtkWidget             *widget,
         event->keyval == GDK_KEY_ISO_Enter ||
         event->keyval == GDK_KEY_space)
     {
-        GtkTreeModel *model;
+        CtkTreeModel *model;
 
         if ((event->state & modifiers) == GDK_SHIFT_MASK)
             flags = BAUL_WINDOW_OPEN_FLAG_NEW_TAB;
@@ -2679,7 +2679,7 @@ bookmarks_key_press_event_cb (GtkWidget             *widget,
 static void
 bookmarks_build_popup_menu (BaulPlacesSidebar *sidebar)
 {
-    GtkWidget *item;
+    CtkWidget *item;
 
     if (sidebar->popup_menu)
     {
@@ -2813,9 +2813,9 @@ bookmarks_popup_menu (BaulPlacesSidebar *sidebar,
                              event);
 }
 
-/* Callback used for the GtkWidget::popup-menu signal of the shortcuts list */
+/* Callback used for the CtkWidget::popup-menu signal of the shortcuts list */
 static gboolean
-bookmarks_popup_menu_cb (GtkWidget *widget,
+bookmarks_popup_menu_cb (CtkWidget *widget,
                          BaulPlacesSidebar *sidebar)
 {
     bookmarks_popup_menu (sidebar, NULL);
@@ -2823,13 +2823,13 @@ bookmarks_popup_menu_cb (GtkWidget *widget,
 }
 
 static gboolean
-bookmarks_button_release_event_cb (GtkWidget *widget,
+bookmarks_button_release_event_cb (CtkWidget *widget,
                                    GdkEventButton *event,
                                    BaulPlacesSidebar *sidebar)
 {
-    GtkTreePath *path;
-    GtkTreeModel *model;
-    GtkTreeView *tree_view;
+    CtkTreePath *path;
+    CtkTreeModel *model;
+    CtkTreeView *tree_view;
 
     path = NULL;
 
@@ -2869,9 +2869,9 @@ bookmarks_button_release_event_cb (GtkWidget *widget,
 
 static void
 update_eject_buttons (BaulPlacesSidebar *sidebar,
-                      GtkTreePath         *path)
+                      CtkTreePath         *path)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     gboolean icon_visible, path_same;
 
     icon_visible = TRUE;
@@ -2943,11 +2943,11 @@ update_eject_buttons (BaulPlacesSidebar *sidebar,
 }
 
 static gboolean
-bookmarks_motion_event_cb (GtkWidget             *widget,
+bookmarks_motion_event_cb (CtkWidget             *widget,
                            GdkEventMotion        *event,
                            BaulPlacesSidebar *sidebar)
 {
-    GtkTreePath *path;
+    CtkTreePath *path;
 
     path = NULL;
 
@@ -2968,7 +2968,7 @@ bookmarks_motion_event_cb (GtkWidget             *widget,
  * open in a new tab.
  */
 static gboolean
-bookmarks_button_press_event_cb (GtkWidget             *widget,
+bookmarks_button_press_event_cb (CtkWidget             *widget,
                                  GdkEventButton        *event,
                                  BaulPlacesSidebar *sidebar)
 {
@@ -2984,9 +2984,9 @@ bookmarks_button_press_event_cb (GtkWidget             *widget,
     }
     else if (event->button == 2)
     {
-        GtkTreeModel *model;
-        GtkTreePath *path;
-        GtkTreeView *tree_view;
+        CtkTreeModel *model;
+        CtkTreePath *path;
+        CtkTreeView *tree_view;
 
         tree_view = GTK_TREE_VIEW (widget);
         g_assert (tree_view == sidebar->tree_view);
@@ -3013,13 +3013,13 @@ bookmarks_button_press_event_cb (GtkWidget             *widget,
 
 
 static void
-bookmarks_edited (GtkCellRenderer       *cell,
+bookmarks_edited (CtkCellRenderer       *cell,
                   gchar                 *path_string,
                   gchar                 *new_text,
                   BaulPlacesSidebar *sidebar)
 {
-    GtkTreePath *path;
-    GtkTreeIter iter;
+    CtkTreePath *path;
+    CtkTreeIter iter;
     BaulBookmark *bookmark;
     int index;
 
@@ -3040,7 +3040,7 @@ bookmarks_edited (GtkCellRenderer       *cell,
 }
 
 static void
-bookmarks_editing_canceled (GtkCellRenderer       *cell,
+bookmarks_editing_canceled (CtkCellRenderer       *cell,
                             BaulPlacesSidebar *sidebar)
 {
     g_object_set (cell, "editable", FALSE, NULL);
@@ -3062,13 +3062,13 @@ trash_state_changed_cb (BaulTrashMonitor    *trash_monitor,
 }
 
 static gboolean
-tree_selection_func (GtkTreeSelection *selection,
-                     GtkTreeModel *model,
-                     GtkTreePath *path,
+tree_selection_func (CtkTreeSelection *selection,
+                     CtkTreeModel *model,
+                     CtkTreePath *path,
                      gboolean path_currently_selected,
                      gpointer user_data)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     PlaceType row_type;
 
     ctk_tree_model_get_iter (model, &iter, path);
@@ -3084,10 +3084,10 @@ tree_selection_func (GtkTreeSelection *selection,
 }
 
 static void
-icon_cell_renderer_func (GtkTreeViewColumn *column,
-                         GtkCellRenderer *cell,
-                         GtkTreeModel *model,
-                         GtkTreeIter *iter,
+icon_cell_renderer_func (CtkTreeViewColumn *column,
+                         CtkCellRenderer *cell,
+                         CtkTreeModel *model,
+                         CtkTreeIter *iter,
                          gpointer user_data)
 {
     PlaceType type;
@@ -3108,10 +3108,10 @@ icon_cell_renderer_func (GtkTreeViewColumn *column,
 }
 
 static void
-padding_cell_renderer_func (GtkTreeViewColumn *column,
-                            GtkCellRenderer *cell,
-                            GtkTreeModel *model,
-                            GtkTreeIter *iter,
+padding_cell_renderer_func (CtkTreeViewColumn *column,
+                            CtkCellRenderer *cell,
+                            CtkTreeModel *model,
+                            CtkTreeIter *iter,
                             gpointer user_data)
 {
     PlaceType type;
@@ -3136,10 +3136,10 @@ padding_cell_renderer_func (GtkTreeViewColumn *column,
 }
 
 static void
-heading_cell_renderer_func (GtkTreeViewColumn *column,
-                        GtkCellRenderer *cell,
-                        GtkTreeModel *model,
-                        GtkTreeIter *iter,
+heading_cell_renderer_func (CtkTreeViewColumn *column,
+                        CtkCellRenderer *cell,
+                        CtkTreeModel *model,
+                        CtkTreeIter *iter,
                         gpointer user_data)
 {
     PlaceType type;
@@ -3162,10 +3162,10 @@ heading_cell_renderer_func (GtkTreeViewColumn *column,
 static void
 baul_places_sidebar_init (BaulPlacesSidebar *sidebar)
 {
-    GtkTreeView       *tree_view;
-    GtkTreeViewColumn *col;
-    GtkCellRenderer   *cell;
-    GtkTreeSelection  *selection;
+    CtkTreeView       *tree_view;
+    CtkTreeViewColumn *col;
+    CtkCellRenderer   *cell;
+    CtkTreeSelection  *selection;
 
     sidebar->volume_monitor = g_volume_monitor_get ();
 
@@ -3487,7 +3487,7 @@ baul_places_sidebar_set_parent_window (BaulPlacesSidebar *sidebar,
 }
 
 static void
-baul_places_sidebar_style_updated (GtkWidget *widget)
+baul_places_sidebar_style_updated (CtkWidget *widget)
 {
     BaulPlacesSidebar *sidebar;
 
@@ -3544,13 +3544,13 @@ _baul_shortcuts_model_filter_init (BaulShortcutsModelFilter *model)
     model->sidebar = NULL;
 }
 
-/* GtkTreeDragSource::row_draggable implementation for the shortcuts filter model */
+/* CtkTreeDragSource::row_draggable implementation for the shortcuts filter model */
 static gboolean
-baul_shortcuts_model_filter_row_draggable (GtkTreeDragSource *drag_source,
-                                           GtkTreePath       *path)
+baul_shortcuts_model_filter_row_draggable (CtkTreeDragSource *drag_source,
+                                           CtkTreePath       *path)
 {
-    GtkTreeModel *model;
-    GtkTreeIter iter;
+    CtkTreeModel *model;
+    CtkTreeIter iter;
     PlaceType place_type;
     SectionType section_type;
 
@@ -3568,17 +3568,17 @@ baul_shortcuts_model_filter_row_draggable (GtkTreeDragSource *drag_source,
     return FALSE;
 }
 
-/* Fill the GtkTreeDragSourceIface vtable */
+/* Fill the CtkTreeDragSourceIface vtable */
 static void
-baul_shortcuts_model_filter_drag_source_iface_init (GtkTreeDragSourceIface *iface)
+baul_shortcuts_model_filter_drag_source_iface_init (CtkTreeDragSourceIface *iface)
 {
     iface->row_draggable = baul_shortcuts_model_filter_row_draggable;
 }
 
-static GtkTreeModel *
+static CtkTreeModel *
 baul_shortcuts_model_filter_new (BaulPlacesSidebar *sidebar,
-                                 GtkTreeModel          *child_model,
-                                 GtkTreePath           *root)
+                                 CtkTreeModel          *child_model,
+                                 CtkTreePath           *root)
 {
     BaulShortcutsModelFilter *model;
 

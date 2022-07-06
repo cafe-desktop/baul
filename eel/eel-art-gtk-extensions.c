@@ -28,16 +28,16 @@
 
 /**
  * eel_ctk_widget_get_bounds:
- * @ctk_widget: The source GtkWidget.
+ * @ctk_widget: The source CtkWidget.
  *
- * Return value: An EelIRect representation of the given GtkWidget's geometry
- * relative to its parent.  In the Gtk universe this is known as "allocation."
+ * Return value: An EelIRect representation of the given CtkWidget's geometry
+ * relative to its parent.  In the Ctk universe this is known as "allocation."
  *
  */
 EelIRect
-eel_ctk_widget_get_bounds (GtkWidget *ctk_widget)
+eel_ctk_widget_get_bounds (CtkWidget *ctk_widget)
 {
-    GtkAllocation allocation;
+    CtkAllocation allocation;
     g_return_val_if_fail (GTK_IS_WIDGET (ctk_widget), eel_irect_empty);
 
     ctk_widget_get_allocation (ctk_widget, &allocation);
@@ -49,16 +49,16 @@ eel_ctk_widget_get_bounds (GtkWidget *ctk_widget)
 
 /**
  * eel_ctk_widget_get_dimensions:
- * @ctk_widget: The source GtkWidget.
+ * @ctk_widget: The source CtkWidget.
  *
  * Return value: The widget's dimensions.  The returned dimensions are only valid
  *               after the widget's geometry has been "allocated" by its container.
  */
 EelDimensions
-eel_ctk_widget_get_dimensions (GtkWidget *ctk_widget)
+eel_ctk_widget_get_dimensions (CtkWidget *ctk_widget)
 {
     EelDimensions dimensions;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     g_return_val_if_fail (GTK_IS_WIDGET (ctk_widget), eel_dimensions_empty);
 

@@ -58,7 +58,7 @@
 
 /**
  * eel_ctk_window_get_geometry_string:
- * @window: a #GtkWindow
+ * @window: a #CtkWindow
  *
  * Obtains the geometry string for this window, suitable for
  * set_geometry_string(); assumes the window has NorthWest gravity
@@ -66,7 +66,7 @@
  * Return value: geometry string, must be freed
  **/
 char*
-eel_ctk_window_get_geometry_string (GtkWindow *window)
+eel_ctk_window_get_geometry_string (CtkWindow *window)
 {
     char *str;
     int w, h, x, y;
@@ -141,12 +141,12 @@ sanity_check_window_dimensions (guint *width, guint *height)
 /**
  * eel_ctk_window_set_initial_geometry:
  *
- * Sets the position and size of a GtkWindow before the
- * GtkWindow is shown. It is an error to call this on a window that
+ * Sets the position and size of a CtkWindow before the
+ * CtkWindow is shown. It is an error to call this on a window that
  * is already on-screen. Takes into account screen size, and does
  * some sanity-checking on the passed-in values.
  *
- * @window: A non-visible GtkWindow
+ * @window: A non-visible CtkWindow
  * @geometry_flags: A EelGdkGeometryFlags value defining which of
  * the following parameters have defined values
  * @left: pixel coordinate for left of window
@@ -155,7 +155,7 @@ sanity_check_window_dimensions (guint *width, guint *height)
  * @height: height of window in pixels
  */
 void
-eel_ctk_window_set_initial_geometry (GtkWindow *window,
+eel_ctk_window_set_initial_geometry (CtkWindow *window,
                                      EelGdkGeometryFlags geometry_flags,
                                      int left,
                                      int top,
@@ -215,13 +215,13 @@ eel_ctk_window_set_initial_geometry (GtkWindow *window,
 /**
  * eel_ctk_window_set_initial_geometry_from_string:
  *
- * Sets the position and size of a GtkWindow before the
- * GtkWindow is shown. The geometry is passed in as a string.
+ * Sets the position and size of a CtkWindow before the
+ * CtkWindow is shown. The geometry is passed in as a string.
  * It is an error to call this on a window that
  * is already on-screen. Takes into account screen size, and does
  * some sanity-checking on the passed-in values.
  *
- * @window: A non-visible GtkWindow
+ * @window: A non-visible CtkWindow
  * @geometry_string: A string suitable for use with eel_gdk_parse_geometry
  * @minimum_width: If the width from the string is smaller than this,
  * use this for the width.
@@ -230,7 +230,7 @@ eel_ctk_window_set_initial_geometry (GtkWindow *window,
  * @ignore_position: If true position data from string will be ignored.
  */
 void
-eel_ctk_window_set_initial_geometry_from_string (GtkWindow *window,
+eel_ctk_window_set_initial_geometry_from_string (CtkWindow *window,
         const char *geometry_string,
         guint minimum_width,
         guint minimum_height,
@@ -288,7 +288,7 @@ eel_ctk_window_set_initial_geometry_from_string (GtkWindow *window,
  * @event: The event that invoked this popup menu.
  **/
 void
-eel_pop_up_context_menu (GtkMenu	*menu,
+eel_pop_up_context_menu (CtkMenu	*menu,
                          GdkEventButton *event)
 {
     g_return_if_fail (GTK_IS_MENU (menu));
@@ -299,16 +299,16 @@ eel_pop_up_context_menu (GtkMenu	*menu,
     g_object_unref (menu);
 }
 
-GtkMenuItem *
-eel_ctk_menu_append_separator (GtkMenu *menu)
+CtkMenuItem *
+eel_ctk_menu_append_separator (CtkMenu *menu)
 {
     return eel_ctk_menu_insert_separator (menu, -1);
 }
 
-GtkMenuItem *
-eel_ctk_menu_insert_separator (GtkMenu *menu, int index)
+CtkMenuItem *
+eel_ctk_menu_insert_separator (CtkMenu *menu, int index)
 {
-    GtkWidget *menu_item;
+    CtkWidget *menu_item;
 
     menu_item = ctk_separator_menu_item_new ();
     ctk_widget_show (menu_item);
@@ -317,12 +317,12 @@ eel_ctk_menu_insert_separator (GtkMenu *menu, int index)
     return GTK_MENU_ITEM (menu_item);
 }
 
-GtkWidget *
-eel_ctk_menu_tool_button_get_button (GtkMenuToolButton *tool_button)
+CtkWidget *
+eel_ctk_menu_tool_button_get_button (CtkMenuToolButton *tool_button)
 {
-    GtkContainer *container;
+    CtkContainer *container;
     GList *children;
-    GtkWidget *button;
+    CtkWidget *button;
 
     g_return_val_if_fail (GTK_IS_MENU_TOOL_BUTTON (tool_button), NULL);
 
@@ -344,7 +344,7 @@ eel_ctk_menu_tool_button_get_button (GtkMenuToolButton *tool_button)
  * @label: The label.
  **/
 void
-eel_ctk_label_make_bold (GtkLabel *label)
+eel_ctk_label_make_bold (CtkLabel *label)
 {
     PangoFontDescription *font_desc;
 
@@ -368,12 +368,12 @@ eel_ctk_label_make_bold (GtkLabel *label)
 }
 
 static gboolean
-tree_view_button_press_callback (GtkWidget *tree_view,
+tree_view_button_press_callback (CtkWidget *tree_view,
                                  GdkEventButton *event,
                                  gpointer data)
 {
-    GtkTreePath *path;
-    GtkTreeViewColumn *column;
+    CtkTreePath *path;
+    CtkTreeViewColumn *column;
 
     if (event->button == 1 && event->type == GDK_BUTTON_PRESS)
     {
@@ -394,7 +394,7 @@ tree_view_button_press_callback (GtkWidget *tree_view,
 }
 
 void
-eel_ctk_tree_view_set_activate_on_single_click (GtkTreeView *tree_view,
+eel_ctk_tree_view_set_activate_on_single_click (CtkTreeView *tree_view,
         gboolean should_activate)
 {
     guint button_press_id;
@@ -424,10 +424,10 @@ eel_ctk_tree_view_set_activate_on_single_click (GtkTreeView *tree_view,
 }
 
 void
-eel_ctk_message_dialog_set_details_label (GtkMessageDialog *dialog,
+eel_ctk_message_dialog_set_details_label (CtkMessageDialog *dialog,
 				  const gchar *details_text)
 {
-	GtkWidget *content_area, *expander, *label;
+	CtkWidget *content_area, *expander, *label;
 
 	content_area = ctk_message_dialog_get_message_area (dialog);
 	expander = ctk_expander_new_with_mnemonic (_("Show more _details"));
@@ -445,14 +445,14 @@ eel_ctk_message_dialog_set_details_label (GtkMessageDialog *dialog,
 	ctk_widget_show (expander);
 }
 
-GtkWidget *
+CtkWidget *
 eel_image_menu_item_new_from_icon (const gchar *icon_name,
                                    const gchar *label_name)
 {
     gchar *concat;
-    GtkWidget *icon;
+    CtkWidget *icon;
     GSettings *icon_settings;
-    GtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    CtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
     icon_settings = g_settings_new ("org.cafe.interface");
     if ((icon_name) && (g_settings_get_boolean (icon_settings, "menus-have-icons")))
@@ -463,8 +463,8 @@ eel_image_menu_item_new_from_icon (const gchar *icon_name,
         icon = ctk_image_new ();
 
     concat = g_strconcat (label_name, "     ", NULL);
-    GtkWidget *label_menu = ctk_label_new_with_mnemonic (concat);
-    GtkWidget *menuitem = ctk_menu_item_new ();
+    CtkWidget *label_menu = ctk_label_new_with_mnemonic (concat);
+    CtkWidget *menuitem = ctk_menu_item_new ();
 
     ctk_container_add (GTK_CONTAINER (box), icon);
 
@@ -479,13 +479,13 @@ eel_image_menu_item_new_from_icon (const gchar *icon_name,
     return menuitem;
 }
 
-GtkWidget *
+CtkWidget *
 eel_image_menu_item_new_from_surface (cairo_surface_t *icon_surface,
                                       const gchar     *label_name)
 {
     gchar *concat;
-    GtkWidget *icon;
-    GtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    CtkWidget *icon;
+    CtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
     if (icon_surface)
         icon = ctk_image_new_from_surface (icon_surface);
@@ -493,8 +493,8 @@ eel_image_menu_item_new_from_surface (cairo_surface_t *icon_surface,
         icon = ctk_image_new ();
 
     concat = g_strconcat (label_name, "     ", NULL);
-    GtkWidget *label_menu = ctk_label_new (concat);
-    GtkWidget *menuitem = ctk_menu_item_new ();
+    CtkWidget *label_menu = ctk_label_new (concat);
+    CtkWidget *menuitem = ctk_menu_item_new ();
 
     ctk_container_add (GTK_CONTAINER (box), icon);
     ctk_container_add (GTK_CONTAINER (box), label_menu);
@@ -508,10 +508,10 @@ eel_image_menu_item_new_from_surface (cairo_surface_t *icon_surface,
 }
 
 gboolean
-eel_dialog_page_scroll_event_callback (GtkWidget *widget, GdkEventScroll *event, GtkWindow *window)
+eel_dialog_page_scroll_event_callback (CtkWidget *widget, GdkEventScroll *event, CtkWindow *window)
 {
-    GtkNotebook *notebook = GTK_NOTEBOOK (widget);
-    GtkWidget *child, *event_widget, *action_widget;
+    CtkNotebook *notebook = GTK_NOTEBOOK (widget);
+    CtkWidget *child, *event_widget, *action_widget;
 
     child = ctk_notebook_get_nth_page (notebook, ctk_notebook_get_current_page (notebook));
     if (child == NULL)

@@ -195,16 +195,16 @@ enum
 	EXT_STRUCT_COLUMN
 };
 
-static void baul_file_management_properties_dialog_update_media_sensitivity (GtkBuilder *builder);
+static void baul_file_management_properties_dialog_update_media_sensitivity (CtkBuilder *builder);
 
 static void
-baul_file_management_properties_size_group_create (GtkBuilder *builder,
+baul_file_management_properties_size_group_create (CtkBuilder *builder,
         char *prefix,
         int items)
 {
-    GtkSizeGroup *size_group;
+    CtkSizeGroup *size_group;
     int i;
-    GtkWidget *widget = NULL;
+    CtkWidget *widget = NULL;
 
     size_group = ctk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
@@ -221,7 +221,7 @@ baul_file_management_properties_size_group_create (GtkBuilder *builder,
 }
 
 static void
-preferences_show_help (GtkWindow *parent,
+preferences_show_help (CtkWindow *parent,
                        char const *helpfile,
                        char const *sect_id)
 {
@@ -240,7 +240,7 @@ preferences_show_help (GtkWindow *parent,
 
     if (error)
     {
-        GtkWidget *dialog;
+        CtkWidget *dialog;
 
         dialog = ctk_message_dialog_new (GTK_WINDOW (parent),
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -260,9 +260,9 @@ preferences_show_help (GtkWindow *parent,
 
 
 static void
-baul_file_management_properties_dialog_response_cb (GtkDialog *parent,
+baul_file_management_properties_dialog_response_cb (CtkDialog *parent,
         int response_id,
-        GtkBuilder *builder)
+        CtkBuilder *builder)
 {
     if (response_id == GTK_RESPONSE_HELP)
     {
@@ -330,7 +330,7 @@ free_column_names_array (GPtrArray *column_names)
 }
 
 static void
-create_icon_caption_combo_box_items (GtkComboBoxText *combo_box,
+create_icon_caption_combo_box_items (CtkComboBoxText *combo_box,
                                      GList *columns)
 {
     GList *l;
@@ -373,11 +373,11 @@ create_icon_caption_combo_box_items (GtkComboBoxText *combo_box,
 }
 
 static void
-icon_captions_changed_callback (GtkComboBox *combo_box,
+icon_captions_changed_callback (CtkComboBox *combo_box,
                                 gpointer user_data)
 {
     GPtrArray *captions;
-    GtkBuilder *builder;
+    CtkBuilder *builder;
     int i;
 
     builder = GTK_BUILDER (user_data);
@@ -386,7 +386,7 @@ icon_captions_changed_callback (GtkComboBox *combo_box,
 
     for (i = 0; icon_captions_components[i] != NULL; i++)
     {
-        GtkWidget *combo_box;
+        CtkWidget *combo_box;
         int active;
         GPtrArray *column_names;
         char *name;
@@ -410,11 +410,11 @@ icon_captions_changed_callback (GtkComboBox *combo_box,
 }
 
 static void
-update_caption_combo_box (GtkBuilder *builder,
+update_caption_combo_box (CtkBuilder *builder,
                           const char *combo_box_name,
                           const char *name)
 {
-    GtkWidget *combo_box;
+    CtkWidget *combo_box;
     int i;
     GPtrArray *column_names;
 
@@ -444,7 +444,7 @@ update_caption_combo_box (GtkBuilder *builder,
 }
 
 static void
-update_icon_captions_from_settings (GtkBuilder *builder)
+update_icon_captions_from_settings (CtkBuilder *builder)
 {
     char **captions;
     int i, j;
@@ -478,7 +478,7 @@ update_icon_captions_from_settings (GtkBuilder *builder)
 }
 
 static void
-baul_file_management_properties_dialog_setup_icon_caption_page (GtkBuilder *builder)
+baul_file_management_properties_dialog_setup_icon_caption_page (CtkBuilder *builder)
 {
     GList *columns;
     int i;
@@ -490,7 +490,7 @@ baul_file_management_properties_dialog_setup_icon_caption_page (GtkBuilder *buil
 
     for (i = 0; icon_captions_components[i] != NULL; i++)
     {
-        GtkWidget *combo_box;
+        CtkWidget *combo_box;
 
         combo_box = GTK_WIDGET (ctk_builder_get_object (builder,
                                 icon_captions_components[i]));
@@ -509,9 +509,9 @@ baul_file_management_properties_dialog_setup_icon_caption_page (GtkBuilder *buil
 }
 
 static void
-create_date_format_menu (GtkBuilder *builder)
+create_date_format_menu (CtkBuilder *builder)
 {
-    GtkComboBoxText *combo_box;
+    CtkComboBoxText *combo_box;
     gchar *date_string;
     GDateTime *now;
 
@@ -567,10 +567,10 @@ use_default_callback (BaulColumnChooser *chooser,
 }
 
 static void
-baul_file_management_properties_dialog_setup_list_column_page (GtkBuilder *builder)
+baul_file_management_properties_dialog_setup_list_column_page (CtkBuilder *builder)
 {
-    GtkWidget *chooser;
-    GtkWidget *box;
+    CtkWidget *chooser;
+    CtkWidget *box;
 
     chooser = baul_column_chooser_new (NULL);
     g_signal_connect (chooser, "changed",
@@ -587,17 +587,17 @@ baul_file_management_properties_dialog_setup_list_column_page (GtkBuilder *build
 }
 
 static void
-baul_file_management_properties_dialog_update_media_sensitivity (GtkBuilder *builder)
+baul_file_management_properties_dialog_update_media_sensitivity (CtkBuilder *builder)
 {
     ctk_widget_set_sensitive (GTK_WIDGET (ctk_builder_get_object (builder, "media_handling_vbox")),
                               ! g_settings_get_boolean (baul_media_preferences, BAUL_PREFERENCES_MEDIA_AUTORUN_NEVER));
 }
 
 static void
-other_type_combo_box_changed (GtkComboBox *combo_box, GtkComboBox *action_combo_box)
+other_type_combo_box_changed (CtkComboBox *combo_box, CtkComboBox *action_combo_box)
 {
-    GtkTreeIter iter;
-    GtkTreeModel *model;
+    CtkTreeIter iter;
+    CtkTreeModel *model;
     char *x_content_type;
 
     x_content_type = NULL;
@@ -631,11 +631,11 @@ static gulong extension_about_id = 0;
 static gulong extension_configure_id = 0;
 
 static void
-extension_about_clicked (GtkButton *button, Extension *ext)
+extension_about_clicked (CtkButton *button, Extension *ext)
 {
-    GtkAboutDialog *extension_about_dialog;
+    CtkAboutDialog *extension_about_dialog;
 
-    extension_about_dialog = (GtkAboutDialog *) ctk_about_dialog_new();
+    extension_about_dialog = (CtkAboutDialog *) ctk_about_dialog_new();
     ctk_about_dialog_set_program_name (extension_about_dialog, ext->name != NULL ? ext->name : ext->filename);
     ctk_about_dialog_set_comments (extension_about_dialog, ext->description);
     ctk_about_dialog_set_logo_icon_name (extension_about_dialog, ext->icon != NULL ? ext->icon : "system-run");
@@ -663,7 +663,7 @@ static int extension_configure_check (Extension *ext)
 }
 
 static void
-extension_configure_clicked (GtkButton *button, Extension *ext)
+extension_configure_clicked (CtkButton *button, Extension *ext)
 {
     if (extension_configure_check(ext)) {
         baul_configurable_run_config(BAUL_CONFIGURABLE(ext->module));
@@ -671,10 +671,10 @@ extension_configure_clicked (GtkButton *button, Extension *ext)
 }
 
 static void
-extension_list_selection_changed_about (GtkTreeSelection *selection, GtkButton *about_button)
+extension_list_selection_changed_about (CtkTreeSelection *selection, CtkButton *about_button)
 {
-    GtkTreeModel *model;
-    GtkTreeIter iter;
+    CtkTreeModel *model;
+    CtkTreeIter iter;
     Extension *ext;
 
     ctk_widget_set_sensitive (GTK_WIDGET (about_button), FALSE);
@@ -696,10 +696,10 @@ extension_list_selection_changed_about (GtkTreeSelection *selection, GtkButton *
 }
 
 static void
-extension_list_selection_changed_configure (GtkTreeSelection *selection, GtkButton *configure_button)
+extension_list_selection_changed_configure (CtkTreeSelection *selection, CtkButton *configure_button)
 {
-    GtkTreeModel *model;
-    GtkTreeIter iter;
+    CtkTreeModel *model;
+    CtkTreeIter iter;
     Extension *ext;
 
     ctk_widget_set_sensitive (GTK_WIDGET (configure_button), FALSE);
@@ -724,11 +724,11 @@ extension_list_selection_changed_configure (GtkTreeSelection *selection, GtkButt
 }
 
 static void
-extension_state_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
+extension_state_toggled (CtkCellRendererToggle *cell, gchar *path_str, gpointer data)
 {
-	GtkTreeIter iter;
-	GtkTreePath *path;
-	GtkTreeModel *model;
+	CtkTreeIter iter;
+	CtkTreePath *path;
+	CtkTreeModel *model;
     gboolean new_state;
     Extension *ext;
 
@@ -755,15 +755,15 @@ extension_state_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer 
 
 
 static void
-baul_file_management_properties_dialog_setup_media_page (GtkBuilder *builder)
+baul_file_management_properties_dialog_setup_media_page (CtkBuilder *builder)
 {
     unsigned int n;
     GList *l;
     GList *content_types;
-    GtkWidget *other_type_combo_box;
-    GtkListStore *other_type_list_store;
-    GtkCellRenderer *renderer;
-    GtkTreeIter iter;
+    CtkWidget *other_type_combo_box;
+    CtkListStore *other_type_list_store;
+    CtkCellRenderer *renderer;
+    CtkTreeIter iter;
     const char *s[] = {"media_audio_cdda_combobox",   "x-content/audio-cdda",
                        "media_video_dvd_combobox",    "x-content/video-dvd",
                        "media_music_player_combobox", "x-content/audio-player",
@@ -866,16 +866,16 @@ skip:
 }
 
 static void
-baul_file_management_properties_dialog_setup_extension_page (GtkBuilder *builder)
+baul_file_management_properties_dialog_setup_extension_page (CtkBuilder *builder)
 {
-    GtkCellRendererToggle *toggle;
-    GtkListStore *store;
-    GtkTreeView *view;
-    GtkTreeSelection *selection;
-    GtkTreeIter iter;
-    GtkIconTheme *icon_theme;
+    CtkCellRendererToggle *toggle;
+    CtkListStore *store;
+    CtkTreeView *view;
+    CtkTreeSelection *selection;
+    CtkTreeIter iter;
+    CtkIconTheme *icon_theme;
     cairo_surface_t *ext_surface_icon;
-    GtkButton *about_button, *configure_button;
+    CtkButton *about_button, *configure_button;
     gchar *ext_text_info;
 
     GList *extensions;
@@ -952,7 +952,7 @@ baul_file_management_properties_dialog_setup_extension_page (GtkBuilder *builder
 }
 
 static void
-bind_builder_bool (GtkBuilder *builder,
+bind_builder_bool (CtkBuilder *builder,
                    GSettings *settings,
                    const char *widget_name,
                    const char *prefs)
@@ -963,7 +963,7 @@ bind_builder_bool (GtkBuilder *builder,
 }
 
 static void
-bind_builder_bool_inverted (GtkBuilder *builder,
+bind_builder_bool_inverted (CtkBuilder *builder,
                             GSettings *settings,
                             const char *widget_name,
                             const char *prefs)
@@ -1004,7 +1004,7 @@ enum_set_mapping (const GValue       *value,
 }
 
 static void
-bind_builder_enum (GtkBuilder *builder,
+bind_builder_enum (CtkBuilder *builder,
                    GSettings *settings,
                    const char *widget_name,
                    const char *prefs,
@@ -1054,7 +1054,7 @@ uint_enum_set_mapping (const GValue       *value,
 }
 
 static void
-bind_builder_uint_enum (GtkBuilder *builder,
+bind_builder_uint_enum (CtkBuilder *builder,
             GSettings *settings,
             const char *widget_name,
             const char *prefs,
@@ -1108,14 +1108,14 @@ radio_mapping_get (GValue *gvalue,
  }
 
 static void
-bind_builder_radio (GtkBuilder *builder,
+bind_builder_radio (CtkBuilder *builder,
             GSettings *settings,
             const char **widget_names,
             const char *prefs,
             const char **values)
 {
     int i;
-    GtkWidget *button = NULL;
+    CtkWidget *button = NULL;
 
     for (i = 0; widget_names[i] != NULL; i++) {
         button = GTK_WIDGET (ctk_builder_get_object (builder, widget_names[i]));
@@ -1129,9 +1129,9 @@ bind_builder_radio (GtkBuilder *builder,
 }
 
 static  void
-baul_file_management_properties_dialog_setup (GtkBuilder *builder, GtkWindow *window)
+baul_file_management_properties_dialog_setup (CtkBuilder *builder, CtkWindow *window)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     /* setup UI */
     baul_file_management_properties_size_group_create (builder,
@@ -1279,7 +1279,7 @@ baul_file_management_properties_dialog_setup (GtkBuilder *builder, GtkWindow *wi
         ctk_window_set_screen (GTK_WINDOW (dialog), ctk_window_get_screen(window));
     }
 
-    GtkWidget *notebook = GTK_WIDGET (ctk_builder_get_object (builder, "notebook1"));
+    CtkWidget *notebook = GTK_WIDGET (ctk_builder_get_object (builder, "notebook1"));
     ctk_widget_add_events (GTK_WIDGET (notebook), GDK_SCROLL_MASK);
     g_signal_connect (GTK_WIDGET (notebook), "scroll-event",
                       G_CALLBACK (eel_dialog_page_scroll_event_callback),
@@ -1289,11 +1289,11 @@ baul_file_management_properties_dialog_setup (GtkBuilder *builder, GtkWindow *wi
 }
 
 static gboolean
-delete_event_callback (GtkWidget       *widget,
+delete_event_callback (CtkWidget       *widget,
                        GdkEventAny     *event,
                        gpointer         data)
 {
-    void (*response_callback) (GtkDialog *dialog,
+    void (*response_callback) (CtkDialog *dialog,
                                gint response_id);
 
     response_callback = data;
@@ -1304,9 +1304,9 @@ delete_event_callback (GtkWidget       *widget,
 }
 
 void
-baul_file_management_properties_dialog_show (GCallback close_callback, GtkWindow *window)
+baul_file_management_properties_dialog_show (GCallback close_callback, CtkWindow *window)
 {
-    GtkBuilder *builder;
+    CtkBuilder *builder;
 
     builder = ctk_builder_new ();
 

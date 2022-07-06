@@ -62,9 +62,9 @@ static EelDimensions wrap_table_irect_max_dimensions     (const EelDimensions *o
 static EelDimensions wrap_table_get_max_child_dimensions (const EelWrapTable  *wrap_table);
 static EelDimensions wrap_table_get_content_dimensions   (const EelWrapTable  *wrap_table);
 static EelIRect      wrap_table_get_content_bounds       (const EelWrapTable  *wrap_table);
-static gboolean      wrap_table_child_visible_in         (GtkWidget           *child,
-							  GtkWidget           *scrolled);
-static gboolean      wrap_table_child_focus_in           (GtkWidget           *widget,
+static gboolean      wrap_table_child_visible_in         (CtkWidget           *child,
+							  CtkWidget           *scrolled);
+static gboolean      wrap_table_child_focus_in           (CtkWidget           *widget,
         GdkEventFocus       *event,
         gpointer             data);
 static void          wrap_table_layout                   (EelWrapTable        *wrap_table);
@@ -175,10 +175,10 @@ eel_wrap_table_get_property (GObject    *object,
     }
 }
 
-/* GtkWidgetClass methods */
+/* CtkWidgetClass methods */
 static void
-eel_wrap_table_size_request (GtkWidget *widget,
-                             GtkRequisition *requisition)
+eel_wrap_table_size_request (CtkWidget *widget,
+                             CtkRequisition *requisition)
 {
     EelWrapTable *wrap_table;
     EelDimensions content_dimensions;
@@ -196,28 +196,28 @@ eel_wrap_table_size_request (GtkWidget *widget,
 }
 
 static void
-eel_wrap_table_get_preferred_width (GtkWidget *widget,
+eel_wrap_table_get_preferred_width (CtkWidget *widget,
                                     gint *minimum_width,
                                     gint *natural_width)
 {
-    GtkRequisition req;
+    CtkRequisition req;
     eel_wrap_table_size_request (widget, &req);
     *minimum_width = *natural_width = req.width;
 }
 
 static void
-eel_wrap_table_get_preferred_height (GtkWidget *widget,
+eel_wrap_table_get_preferred_height (CtkWidget *widget,
                                      gint *minimum_height,
                                      gint *natural_height)
 {
-    GtkRequisition req;
+    CtkRequisition req;
     eel_wrap_table_size_request (widget, &req);
     *minimum_height = *natural_height = req.height;
 }
 
 static void
-eel_wrap_table_size_allocate (GtkWidget *widget,
-                              GtkAllocation *allocation)
+eel_wrap_table_size_allocate (CtkWidget *widget,
+                              CtkAllocation *allocation)
 {
     EelWrapTable *wrap_table;
 
@@ -232,7 +232,7 @@ eel_wrap_table_size_allocate (GtkWidget *widget,
 }
 
 static int
-eel_wrap_table_draw (GtkWidget *widget,
+eel_wrap_table_draw (CtkWidget *widget,
                      cairo_t *cr)
 {
     EelWrapTable *wrap_table;
@@ -260,7 +260,7 @@ eel_wrap_table_draw (GtkWidget *widget,
 }
 
 static void
-eel_wrap_table_map (GtkWidget *widget)
+eel_wrap_table_map (CtkWidget *widget)
 {
     EelWrapTable *wrap_table;
     GList *iterator;
@@ -273,7 +273,7 @@ eel_wrap_table_map (GtkWidget *widget)
 
     for (iterator = wrap_table->details->children; iterator; iterator = iterator->next)
     {
-        GtkWidget *item;
+        CtkWidget *item;
 
         item = iterator->data;
 
@@ -285,7 +285,7 @@ eel_wrap_table_map (GtkWidget *widget)
 }
 
 static void
-eel_wrap_table_unmap (GtkWidget *widget)
+eel_wrap_table_unmap (CtkWidget *widget)
 {
     EelWrapTable *wrap_table;
     GList *iterator;
@@ -298,7 +298,7 @@ eel_wrap_table_unmap (GtkWidget *widget)
 
     for (iterator = wrap_table->details->children; iterator; iterator = iterator->next)
     {
-        GtkWidget *item;
+        CtkWidget *item;
 
         item = iterator->data;
 
@@ -310,7 +310,7 @@ eel_wrap_table_unmap (GtkWidget *widget)
 }
 
 static void
-eel_wrap_table_realize (GtkWidget *widget)
+eel_wrap_table_realize (CtkWidget *widget)
 {
     g_assert (EEL_IS_WRAP_TABLE (widget));
 
@@ -319,13 +319,13 @@ eel_wrap_table_realize (GtkWidget *widget)
     ctk_widget_queue_resize (widget);
 }
 
-/* GtkContainerClass methods */
+/* CtkContainerClass methods */
 static void
-eel_wrap_table_add (GtkContainer *container,
-                    GtkWidget *child)
+eel_wrap_table_add (CtkContainer *container,
+                    CtkWidget *child)
 {
     EelWrapTable *wrap_table;
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     g_assert (container != NULL);
     g_assert (EEL_IS_WRAP_TABLE (container));
@@ -362,8 +362,8 @@ eel_wrap_table_add (GtkContainer *container,
 }
 
 static void
-eel_wrap_table_remove (GtkContainer *container,
-                       GtkWidget *child)
+eel_wrap_table_remove (CtkContainer *container,
+                       CtkWidget *child)
 {
     EelWrapTable *wrap_table;
     gboolean child_was_visible;
@@ -392,9 +392,9 @@ eel_wrap_table_remove (GtkContainer *container,
 }
 
 static void
-eel_wrap_table_forall (GtkContainer *container,
+eel_wrap_table_forall (CtkContainer *container,
                        gboolean include_internals,
-                       GtkCallback callback,
+                       CtkCallback callback,
                        gpointer callback_data)
 {
     EelWrapTable *wrap_table;
@@ -415,7 +415,7 @@ eel_wrap_table_forall (GtkContainer *container,
 }
 
 static GType
-eel_wrap_table_child_type (GtkContainer   *container)
+eel_wrap_table_child_type (CtkContainer   *container)
 {
     return GTK_TYPE_WIDGET;
 }
@@ -425,15 +425,15 @@ static void
 eel_wrap_table_class_init (EelWrapTableClass *wrap_table_class)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS (wrap_table_class);
-    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (wrap_table_class);
-    GtkContainerClass *container_class = GTK_CONTAINER_CLASS (wrap_table_class);
+    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (wrap_table_class);
+    CtkContainerClass *container_class = GTK_CONTAINER_CLASS (wrap_table_class);
 
     /* GObjectClass */
     gobject_class->finalize = eel_wrap_table_finalize;
     gobject_class->set_property = eel_wrap_table_set_property;
     gobject_class->get_property = eel_wrap_table_get_property;
 
-    /* GtkWidgetClass */
+    /* CtkWidgetClass */
     widget_class->size_allocate = eel_wrap_table_size_allocate;
     widget_class->get_preferred_width = eel_wrap_table_get_preferred_width;
     widget_class->get_preferred_height = eel_wrap_table_get_preferred_height;
@@ -442,7 +442,7 @@ eel_wrap_table_class_init (EelWrapTableClass *wrap_table_class)
     widget_class->unmap = eel_wrap_table_unmap;
     widget_class->realize = eel_wrap_table_realize;
 
-    /* GtkContainerClass */
+    /* CtkContainerClass */
     container_class->add = eel_wrap_table_add;
     container_class->remove = eel_wrap_table_remove;
     container_class->forall = eel_wrap_table_forall;
@@ -512,7 +512,7 @@ wrap_table_layout (EelWrapTable *wrap_table)
     EelDimensions max_child_dimensions;
     EelIRect content_bounds;
     guint num_cols;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     g_assert (EEL_IS_WRAP_TABLE (wrap_table));
 
@@ -538,13 +538,13 @@ wrap_table_layout (EelWrapTable *wrap_table)
 
     for (iterator = wrap_table->details->children; iterator; iterator = iterator->next)
     {
-        GtkWidget *item;
+        CtkWidget *item;
 
         item = iterator->data;
 
         if (ctk_widget_get_visible (item))
         {
-            GtkAllocation item_allocation;
+            CtkAllocation item_allocation;
 
             if (wrap_table->details->homogeneous)
             {
@@ -567,7 +567,7 @@ wrap_table_layout (EelWrapTable *wrap_table)
             }
             else
             {
-                GtkRequisition item_requisition;
+                CtkRequisition item_requisition;
 
                 ctk_widget_get_preferred_size (item, &item_requisition, NULL);
 
@@ -648,13 +648,13 @@ wrap_table_get_max_child_dimensions (const EelWrapTable *wrap_table)
 
     for (iterator = wrap_table->details->children; iterator; iterator = iterator->next)
     {
-        GtkWidget *child;
+        CtkWidget *child;
 
         child = iterator->data;
 
         if (ctk_widget_get_visible (child))
         {
-            GtkRequisition child_requisition;
+            CtkRequisition child_requisition;
             EelDimensions child_dimensions;
 
             ctk_widget_get_preferred_size (child, &child_requisition, NULL);
@@ -742,10 +742,10 @@ wrap_table_get_content_bounds (const EelWrapTable *wrap_table)
  * the whole child rectangle is visible in the scrolled window
  **/
 static gboolean
-wrap_table_child_visible_in (GtkWidget *child, GtkWidget *scrolled)
+wrap_table_child_visible_in (CtkWidget *child, CtkWidget *scrolled)
 {
     gint x, y;
-    GtkAllocation child_alloc, scroll_alloc;
+    CtkAllocation child_alloc, scroll_alloc;
 
     ctk_widget_translate_coordinates (child, scrolled, 0, 0, &x, &y);
     ctk_widget_get_allocation(child, &child_alloc);
@@ -757,12 +757,12 @@ wrap_table_child_visible_in (GtkWidget *child, GtkWidget *scrolled)
 }
 
 static gboolean
-wrap_table_child_focus_in (GtkWidget *widget,
+wrap_table_child_focus_in (CtkWidget *widget,
                            GdkEventFocus *event,
                            gpointer data)
 {
     gint x, y;
-    GtkWidget *container, *viewport = NULL;
+    CtkWidget *container, *viewport = NULL;
 
     container = ctk_widget_get_parent (widget);
     if (container)
@@ -775,7 +775,7 @@ wrap_table_child_focus_in (GtkWidget *widget,
 
     if (!wrap_table_child_visible_in (widget, viewport))
     {
-        GtkAdjustment *hadj, *vadj;
+        CtkAdjustment *hadj, *vadj;
 
         hadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (viewport));
         vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (viewport));
@@ -793,7 +793,7 @@ wrap_table_child_focus_in (GtkWidget *widget,
  * eel_wrap_table_new:
  *
  */
-GtkWidget*
+CtkWidget*
 eel_wrap_table_new (gboolean homogeneous)
 {
     EelWrapTable *wrap_table;
@@ -888,7 +888,7 @@ eel_wrap_table_get_y_spacing (const EelWrapTable *wrap_table)
  *
  * Returns: Child found at given coordinates or NULL of no child is found.
  */
-GtkWidget *
+CtkWidget *
 eel_wrap_table_find_child_at_event_point (const EelWrapTable *wrap_table,
         int x,
         int y)
@@ -899,7 +899,7 @@ eel_wrap_table_find_child_at_event_point (const EelWrapTable *wrap_table,
 
     for (iterator = wrap_table->details->children; iterator; iterator = iterator->next)
     {
-        GtkWidget *child;
+        CtkWidget *child;
 
         child = iterator->data;
 
@@ -1041,7 +1041,7 @@ eel_wrap_table_get_homogeneous (const EelWrapTable *wrap_table)
  */
 void
 eel_wrap_table_reorder_child (EelWrapTable *wrap_table,
-                              GtkWidget *child,
+                              CtkWidget *child,
                               int position)
 {
     GList *node;
@@ -1060,7 +1060,7 @@ eel_wrap_table_reorder_child (EelWrapTable *wrap_table,
 
     for (node = wrap_table->details->children; node != NULL; node = node->next)
     {
-        GtkWidget *next_child;
+        CtkWidget *next_child;
         next_child = node->data;
 
         if (next_child == child)
@@ -1092,14 +1092,14 @@ eel_wrap_table_get_num_children (const EelWrapTable *wrap_table)
     return g_list_length (wrap_table->details->children);
 }
 
-GtkWidget *
+CtkWidget *
 eel_scrolled_wrap_table_new (gboolean homogeneous,
-                             GtkShadowType shadow_type,
-                             GtkWidget **wrap_table_out)
+                             CtkShadowType shadow_type,
+                             CtkWidget **wrap_table_out)
 {
-    GtkWidget *scrolled_window;
-    GtkWidget *wrap_table;
-    GtkWidget *viewport;
+    CtkWidget *scrolled_window;
+    CtkWidget *wrap_table;
+    CtkWidget *viewport;
 
     g_return_val_if_fail (wrap_table_out != NULL, NULL);
 

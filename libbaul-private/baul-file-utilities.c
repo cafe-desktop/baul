@@ -150,7 +150,7 @@ char* baul_get_user_directory(void)
 		/* Faltan permisos */
 		if (g_chmod(user_directory, DEFAULT_BAUL_DIRECTORY_MODE) != 0)
 		{
-			GtkWidget* dialog = ctk_message_dialog_new(
+			CtkWidget* dialog = ctk_message_dialog_new(
 				NULL,
 				GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_ERROR,
@@ -1218,7 +1218,7 @@ locations_from_file_list (GList *file_list)
 
 void
 baul_restore_files_from_trash (GList *files,
-                               GtkWindow *parent_window)
+                               CtkWindow *parent_window)
 {
     GHashTable *original_dirs_hash;
     GList *original_dirs, *unhandled_files;

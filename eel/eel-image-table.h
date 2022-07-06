@@ -71,26 +71,26 @@ extern "C" {
 
         /* Signals */
         void (* child_enter) (EelImageTable *image_table,
-                              GtkWidget *child,
+                              CtkWidget *child,
                               const EelImageTableEvent *event);
         void (* child_leave) (EelImageTable *image_table,
-                              GtkWidget *child,
+                              CtkWidget *child,
                               const EelImageTableEvent *event);
         void (* child_pressed) (EelImageTable *image_table,
-                                GtkWidget *child,
+                                CtkWidget *child,
                                 const EelImageTableEvent *event);
         void (* child_released) (EelImageTable *image_table,
-                                 GtkWidget *child,
+                                 CtkWidget *child,
                                  const EelImageTableEvent *event);
         void (* child_clicked) (EelImageTable *image_table,
-                                GtkWidget *child,
+                                CtkWidget *child,
                                 const EelImageTableEvent *event);
     };
 
-    /* Public GtkImageTable methods */
+    /* Public CtkImageTable methods */
     GType      eel_image_table_get_type         (void);
-    GtkWidget *eel_image_table_new              (gboolean       homogeneous);
-    GtkWidget *eel_image_table_add_empty_image  (EelImageTable *image_table);
+    CtkWidget *eel_image_table_new              (gboolean       homogeneous);
+    CtkWidget *eel_image_table_add_empty_image  (EelImageTable *image_table);
 
 #ifdef __cplusplus
 }

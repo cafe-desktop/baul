@@ -41,19 +41,19 @@ G_BEGIN_DECLS
 
     typedef struct
     {
-        GtkBox	box;
+        CtkBox	box;
 
         BaulXContentBarPrivate *priv;
     } BaulXContentBar;
 
     typedef struct
     {
-        GtkBoxClass	    parent_class;
+        CtkBoxClass	    parent_class;
     } BaulXContentBarClass;
 
     GType		 baul_x_content_bar_get_type	(void) G_GNUC_CONST;
 
-    GtkWidget	*baul_x_content_bar_new		   (GMount              *mount,
+    CtkWidget	*baul_x_content_bar_new		   (GMount              *mount,
             const char          *x_content_type);
     const char      *baul_x_content_bar_get_x_content_type (BaulXContentBar *bar);
     void             baul_x_content_bar_set_x_content_type (BaulXContentBar *bar,

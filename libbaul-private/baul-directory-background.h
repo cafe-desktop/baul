@@ -31,7 +31,7 @@
 #include "baul-file.h"
 #include "baul-icon-container.h"
 
-void     baul_connect_background_to_file_metadata    (GtkWidget         *widget,
+void     baul_connect_background_to_file_metadata    (CtkWidget         *widget,
                                                       BaulFile          *file,
                                                       GdkDragAction      default_drag_action);
 

@@ -286,7 +286,7 @@ baul_window_pane_new (BaulWindow *window)
 
 BaulWindowSlot *
 baul_window_pane_get_slot_for_content_box (BaulWindowPane *pane,
-        GtkWidget *content_box)
+        CtkWidget *content_box)
 {
     GList *l;
     BaulWindowSlot *slot = NULL;

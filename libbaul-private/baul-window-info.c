@@ -276,7 +276,7 @@ baul_window_info_set_backup_files_mode (BaulWindowInfo *window,
             mode);
 }
 
-GtkUIManager *
+CtkUIManager *
 baul_window_info_get_ui_manager (BaulWindowInfo *window)
 {
     g_return_val_if_fail (BAUL_IS_WINDOW_INFO (window), NULL);

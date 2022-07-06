@@ -66,10 +66,10 @@ typedef struct
 {
     BaulQueryEditorRowType type;
     BaulQueryEditor *editor;
-    GtkWidget *hbox;
-    GtkWidget *combo;
+    CtkWidget *hbox;
+    CtkWidget *combo;
 
-    GtkWidget *type_widget;
+    CtkWidget *type_widget;
 
     void *data;
 } BaulQueryEditorRow;
@@ -78,7 +78,7 @@ typedef struct
 typedef struct
 {
     const char *name;
-    GtkWidget * (*create_widgets)      (BaulQueryEditorRow *row);
+    CtkWidget * (*create_widgets)      (BaulQueryEditorRow *row);
     void        (*add_to_query)        (BaulQueryEditorRow *row,
                                         BaulQuery          *query);
     void        (*free_data)           (BaulQueryEditorRow *row);
@@ -89,12 +89,12 @@ typedef struct
 struct BaulQueryEditorDetails
 {
     gboolean is_indexed;
-    GtkWidget *entry;
+    CtkWidget *entry;
     gboolean change_frozen;
     guint typing_timeout_id;
     gboolean is_visible;
-    GtkWidget *invisible_vbox;
-    GtkWidget *visible_vbox;
+    CtkWidget *invisible_vbox;
+    CtkWidget *visible_vbox;
 
     GList *rows;
     char *last_set_query_text;
@@ -115,50 +115,50 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static void  baul_query_editor_class_init       (BaulQueryEditorClass *class);
 static void  baul_query_editor_init             (BaulQueryEditor      *editor);
 
-static void go_search_cb (GtkButton *clicked_button, BaulQueryEditor *editor);
+static void go_search_cb (CtkButton *clicked_button, BaulQueryEditor *editor);
 
-static void entry_activate_cb (GtkWidget *entry, BaulQueryEditor *editor);
-static void entry_changed_cb  (GtkWidget *entry, BaulQueryEditor *editor);
+static void entry_activate_cb (CtkWidget *entry, BaulQueryEditor *editor);
+static void entry_changed_cb  (CtkWidget *entry, BaulQueryEditor *editor);
 static void baul_query_editor_changed_force (BaulQueryEditor *editor,
         gboolean             force);
 static void baul_query_editor_changed (BaulQueryEditor *editor);
 static BaulQueryEditorRow * baul_query_editor_add_row (BaulQueryEditor *editor,
         BaulQueryEditorRowType type);
 
-static GtkWidget *location_row_create_widgets  (BaulQueryEditorRow *row);
+static CtkWidget *location_row_create_widgets  (BaulQueryEditorRow *row);
 static void       location_row_add_to_query    (BaulQueryEditorRow *row,
         BaulQuery          *query);
 static void       location_row_free_data       (BaulQueryEditorRow *row);
 static void       location_add_rows_from_query (BaulQueryEditor    *editor,
         BaulQuery          *query);
 
-static GtkWidget *tags_row_create_widgets      (BaulQueryEditorRow *row);
+static CtkWidget *tags_row_create_widgets      (BaulQueryEditorRow *row);
 static void       tags_row_add_to_query        (BaulQueryEditorRow *row,
                                                 BaulQuery          *query);
 static void       tags_row_free_data           (BaulQueryEditorRow *row);
 static void       tags_add_rows_from_query     (BaulQueryEditor    *editor,
                                                 BaulQuery          *query);
 
-static GtkWidget *type_row_create_widgets      (BaulQueryEditorRow *row);
+static CtkWidget *type_row_create_widgets      (BaulQueryEditorRow *row);
 static void       type_row_add_to_query        (BaulQueryEditorRow *row,
         BaulQuery          *query);
 static void       type_row_free_data           (BaulQueryEditorRow *row);
 static void       type_add_rows_from_query     (BaulQueryEditor    *editor,
         BaulQuery          *query);
-static GtkWidget   *modtime_row_create_widgets(BaulQueryEditorRow *row);
+static CtkWidget   *modtime_row_create_widgets(BaulQueryEditorRow *row);
 static void         modtime_row_add_to_query(BaulQueryEditorRow *row,
                                              BaulQuery *query);
 static void         modtime_row_free_data(BaulQueryEditorRow *row);
 static void         modtime_add_rows_from_query(BaulQueryEditor *editor,
                                                 BaulQuery *query);
-static GtkWidget   *size_row_create_widgets(BaulQueryEditorRow *row);
+static CtkWidget   *size_row_create_widgets(BaulQueryEditorRow *row);
 static void         size_row_add_to_query(BaulQueryEditorRow *row,
                                           BaulQuery *query);
 static void         size_row_free_data(BaulQueryEditorRow *row);
 static void         size_add_rows_from_query(BaulQueryEditor *editor,
                                              BaulQuery *query);
 
-static GtkWidget   *contained_text_row_create_widgets(BaulQueryEditorRow *row);
+static CtkWidget   *contained_text_row_create_widgets(BaulQueryEditorRow *row);
 static void         contained_text_row_add_to_query(BaulQueryEditorRow *row,
                                              BaulQuery *query);
 static void         contained_text_row_free_data(BaulQueryEditorRow *row);
@@ -260,7 +260,7 @@ static void
 baul_query_editor_class_init (BaulQueryEditorClass *class)
 {
     GObjectClass *gobject_class;
-    GtkBindingSet *binding_set;
+    CtkBindingSet *binding_set;
 
     gobject_class = G_OBJECT_CLASS (class);
     gobject_class->finalize = baul_query_editor_finalize;
@@ -289,7 +289,7 @@ baul_query_editor_class_init (BaulQueryEditorClass *class)
 }
 
 static void
-entry_activate_cb (GtkWidget *entry, BaulQueryEditor *editor)
+entry_activate_cb (CtkWidget *entry, BaulQueryEditor *editor)
 {
     if (editor->details->typing_timeout_id)
     {
@@ -317,7 +317,7 @@ typing_timeout_cb (gpointer user_data)
 #define TYPING_TIMEOUT 750
 
 static void
-entry_changed_cb (GtkWidget *entry, BaulQueryEditor *editor)
+entry_changed_cb (CtkWidget *entry, BaulQueryEditor *editor)
 {
     if (editor->details->change_frozen)
     {
@@ -336,7 +336,7 @@ entry_changed_cb (GtkWidget *entry, BaulQueryEditor *editor)
 }
 
 static void
-edit_clicked (GtkButton *button, BaulQueryEditor *editor)
+edit_clicked (CtkButton *button, BaulQueryEditor *editor)
 {
     baul_query_editor_set_visible (editor, TRUE);
     baul_query_editor_grab_focus (editor);
@@ -344,10 +344,10 @@ edit_clicked (GtkButton *button, BaulQueryEditor *editor)
 
 /* Location */
 
-static GtkWidget *
+static CtkWidget *
 location_row_create_widgets (BaulQueryEditorRow *row)
 {
-    GtkWidget *chooser;
+    CtkWidget *chooser;
 
     chooser = ctk_file_chooser_button_new (_("Select folder to search in"),
                                            GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
@@ -421,7 +421,7 @@ location_add_rows_from_query (BaulQueryEditor    *editor,
 
 /* Tags */
 static void
-tags_entry_changed_cb (GtkWidget *entry, gpointer *data)
+tags_entry_changed_cb (CtkWidget *entry, gpointer *data)
 {
   /* remove commas from string */
   const gchar *text = ctk_entry_get_text ( GTK_ENTRY (entry));
@@ -439,10 +439,10 @@ tags_entry_changed_cb (GtkWidget *entry, gpointer *data)
 
 #define MAX_TAGS_ENTRY_LEN 4096 // arbitrary value.
 
-static GtkWidget *
+static CtkWidget *
 tags_row_create_widgets (BaulQueryEditorRow *row)
 {
-    GtkWidget *entry = ctk_entry_new();
+    CtkWidget *entry = ctk_entry_new();
     ctk_entry_set_max_length (GTK_ENTRY (entry), MAX_TAGS_ENTRY_LEN);
     ctk_widget_set_tooltip_text (entry,
         _("Tags separated by spaces. "
@@ -464,7 +464,7 @@ static void
 tags_row_add_to_query (BaulQueryEditorRow *row,
                            BaulQuery      *query)
 {
-    GtkEntry *entry = GTK_ENTRY (row->type_widget);
+    CtkEntry *entry = GTK_ENTRY (row->type_widget);
     const gchar *tags = ctk_entry_get_text (entry);
 
     char **strv = g_strsplit (tags, " ", -1);
@@ -530,8 +530,8 @@ tags_add_rows_from_query (BaulQueryEditor *editor,
 /* Type */
 
 static gboolean
-type_separator_func (GtkTreeModel      *model,
-                     GtkTreeIter       *iter,
+type_separator_func (CtkTreeModel      *model,
+                     CtkTreeIter       *iter,
                      gpointer           data)
 {
     char *text;
@@ -695,10 +695,10 @@ static void
 type_add_custom_type (BaulQueryEditorRow *row,
                       const char *mime_type,
                       const char *description,
-                      GtkTreeIter *iter)
+                      CtkTreeIter *iter)
 {
-    GtkTreeModel *model;
-    GtkListStore *store;
+    CtkTreeModel *model;
+    CtkListStore *store;
 
     model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
     store = GTK_LIST_STORE (model);
@@ -712,11 +712,11 @@ type_add_custom_type (BaulQueryEditorRow *row,
 
 
 static void
-type_combo_changed (GtkComboBox *combo_box, BaulQueryEditorRow *row)
+type_combo_changed (CtkComboBox *combo_box, BaulQueryEditorRow *row)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     gboolean other;
-    GtkTreeModel *model;
+    CtkTreeModel *model;
 
     if (!ctk_combo_box_get_active_iter  (GTK_COMBO_BOX (row->type_widget),
                                          &iter))
@@ -730,20 +730,20 @@ type_combo_changed (GtkComboBox *combo_box, BaulQueryEditorRow *row)
     if (other)
     {
         GList *mime_infos, *l;
-        GtkWidget *dialog;
-        GtkWidget *scrolled, *treeview;
-        GtkListStore *store;
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
-        GtkWidget *toplevel;
-        GtkTreeSelection *selection;
+        CtkWidget *dialog;
+        CtkWidget *scrolled, *treeview;
+        CtkListStore *store;
+        CtkTreeViewColumn *column;
+        CtkCellRenderer *renderer;
+        CtkWidget *toplevel;
+        CtkTreeSelection *selection;
 
         mime_infos = g_content_types_get_registered ();
 
         store = ctk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
         for (l = mime_infos; l != NULL; l = l->next)
         {
-            GtkTreeIter iter;
+            CtkTreeIter iter;
             char *mime_type = l->data;
             char *description;
 
@@ -838,13 +838,13 @@ type_combo_changed (GtkComboBox *combo_box, BaulQueryEditorRow *row)
     baul_query_editor_changed (row->editor);
 }
 
-static GtkWidget *
+static CtkWidget *
 type_row_create_widgets (BaulQueryEditorRow *row)
 {
-    GtkWidget *combo;
-    GtkCellRenderer *cell;
-    GtkListStore *store;
-    GtkTreeIter iter;
+    CtkWidget *combo;
+    CtkCellRenderer *cell;
+    CtkListStore *store;
+    CtkTreeIter iter;
     int i;
 
     store = ctk_list_store_new (4, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_BOOLEAN);
@@ -896,10 +896,10 @@ static void
 type_row_add_to_query (BaulQueryEditorRow *row,
                        BaulQuery          *query)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     char **mimetypes;
     char *mimetype;
-    GtkTreeModel *model;
+    CtkTreeModel *model;
 
     if (!ctk_combo_box_get_active_iter  (GTK_COMBO_BOX (row->type_widget),
                                          &iter))
@@ -999,9 +999,9 @@ type_add_rows_from_query (BaulQueryEditor    *editor,
     GList *mime_types;
     char *mime_type;
     BaulQueryEditorRow *row;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     int i;
-    GtkTreeModel *model;
+    CtkTreeModel *model;
     GList *l;
 
     mime_types = baul_query_get_mime_types (query);
@@ -1057,15 +1057,15 @@ type_add_rows_from_query (BaulQueryEditor    *editor,
 /* End of row types */
 
 
-static GtkWidget *modtime_row_create_widgets(BaulQueryEditorRow *row)
+static CtkWidget *modtime_row_create_widgets(BaulQueryEditorRow *row)
 {
-    GtkWidget *hbox = NULL;
-    GtkWidget *combo = NULL;
-    GtkWidget *duration_combo = NULL;
-    GtkCellRenderer *cell = NULL;
-    GtkListStore *store = NULL;
-    GtkListStore *duration_store = NULL;
-    GtkTreeIter iter;
+    CtkWidget *hbox = NULL;
+    CtkWidget *combo = NULL;
+    CtkWidget *duration_combo = NULL;
+    CtkCellRenderer *cell = NULL;
+    CtkListStore *store = NULL;
+    CtkListStore *duration_store = NULL;
+    CtkTreeIter iter;
 
     hbox = ctk_box_new(GTK_ORIENTATION_HORIZONTAL, 7);
 
@@ -1120,12 +1120,12 @@ static GtkWidget *modtime_row_create_widgets(BaulQueryEditorRow *row)
 static void modtime_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
 {
     GList *children = NULL;
-    GtkWidget *combo = NULL;
-    GtkWidget *duration_combo = NULL;
-    GtkTreeModel *model = NULL;
-    GtkTreeModel *duration_model = NULL;
-    GtkTreeIter iter;
-    GtkTreeIter duration_iter;
+    CtkWidget *combo = NULL;
+    CtkWidget *duration_combo = NULL;
+    CtkTreeModel *model = NULL;
+    CtkTreeModel *duration_model = NULL;
+    CtkTreeIter iter;
+    CtkTreeIter duration_iter;
     gboolean is_greater = FALSE;
     GDateTime *now, *datetime;
     gint duration;
@@ -1196,15 +1196,15 @@ static void modtime_add_rows_from_query(BaulQueryEditor *editor, BaulQuery *quer
 }
 
 
-static GtkWidget *size_row_create_widgets(BaulQueryEditorRow *row)
+static CtkWidget *size_row_create_widgets(BaulQueryEditorRow *row)
 {
-    GtkWidget *hbox = NULL;
-    GtkWidget *combo = NULL;
-    GtkWidget *size_combo = NULL;
-    GtkCellRenderer *cell = NULL;
-    GtkListStore *store = NULL;
-    GtkListStore *size_store = NULL;
-    GtkTreeIter iter;
+    CtkWidget *hbox = NULL;
+    CtkWidget *combo = NULL;
+    CtkWidget *size_combo = NULL;
+    CtkCellRenderer *cell = NULL;
+    CtkListStore *store = NULL;
+    CtkListStore *size_store = NULL;
+    CtkTreeIter iter;
 
     hbox = ctk_box_new(GTK_ORIENTATION_HORIZONTAL, 7);
 
@@ -1295,12 +1295,12 @@ static GtkWidget *size_row_create_widgets(BaulQueryEditorRow *row)
 static void size_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
 {
     GList *children = NULL;
-    GtkWidget *combo = NULL;
-    GtkWidget *size_combo = NULL;
-    GtkTreeModel *model = NULL;
-    GtkTreeModel *size_model = NULL;
-    GtkTreeIter iter;
-    GtkTreeIter size_iter;
+    CtkWidget *combo = NULL;
+    CtkWidget *size_combo = NULL;
+    CtkTreeModel *model = NULL;
+    CtkTreeModel *size_model = NULL;
+    CtkTreeIter iter;
+    CtkTreeIter size_iter;
     gboolean is_greater = FALSE;
     gint64 size;
 
@@ -1338,10 +1338,10 @@ static void size_add_rows_from_query(BaulQueryEditor *editor, BaulQuery *query)
 {
 }
 
-static GtkWidget *
+static CtkWidget *
 contained_text_row_create_widgets (BaulQueryEditorRow *row)
 {
-    GtkWidget *entry = ctk_entry_new();
+    CtkWidget *entry = ctk_entry_new();
     ctk_widget_set_tooltip_text (entry,
         _("Matches files that contains specified text."));
 
@@ -1358,7 +1358,7 @@ contained_text_row_create_widgets (BaulQueryEditorRow *row)
 static void
 contained_text_row_add_to_query (BaulQueryEditorRow *row, BaulQuery *query)
 {
-    GtkEntry *entry = GTK_ENTRY (row->type_widget);
+    CtkEntry *entry = GTK_ENTRY (row->type_widget);
     const gchar *text = ctk_entry_get_text (entry);
 
     baul_query_set_contained_text (query, text);
@@ -1404,7 +1404,7 @@ get_next_free_type (BaulQueryEditor *editor)
 }
 
 static void
-remove_row_cb (GtkButton *clicked_button, BaulQueryEditorRow *row)
+remove_row_cb (CtkButton *clicked_button, BaulQueryEditorRow *row)
 {
     BaulQueryEditor *editor;
 
@@ -1427,7 +1427,7 @@ create_type_widgets (BaulQueryEditorRow *row)
 }
 
 static void
-row_type_combo_changed_cb (GtkComboBox *combo_box, BaulQueryEditorRow *row)
+row_type_combo_changed_cb (CtkComboBox *combo_box, BaulQueryEditorRow *row)
 {
     BaulQueryEditorRowType type;
 
@@ -1458,7 +1458,7 @@ static BaulQueryEditorRow *
 baul_query_editor_add_row (BaulQueryEditor *editor,
                            BaulQueryEditorRowType type)
 {
-    GtkWidget *hbox, *button, *image, *combo;
+    CtkWidget *hbox, *button, *image, *combo;
     BaulQueryEditorRow *row;
     int i;
 
@@ -1508,13 +1508,13 @@ baul_query_editor_add_row (BaulQueryEditor *editor,
 }
 
 static void
-go_search_cb (GtkButton *clicked_button, BaulQueryEditor *editor)
+go_search_cb (CtkButton *clicked_button, BaulQueryEditor *editor)
 {
     baul_query_editor_changed_force (editor, TRUE);
 }
 
 static void
-add_new_row_cb (GtkButton *clicked_button, BaulQueryEditor *editor)
+add_new_row_cb (CtkButton *clicked_button, BaulQueryEditor *editor)
 {
     baul_query_editor_add_row (editor, get_next_free_type (editor));
     baul_query_editor_changed (editor);
@@ -1523,7 +1523,7 @@ add_new_row_cb (GtkButton *clicked_button, BaulQueryEditor *editor)
 static void
 baul_query_editor_init (BaulQueryEditor *editor)
 {
-    GtkWidget *hbox, *label, *button;
+    CtkWidget *hbox, *label, *button;
     char *label_markup;
 
     editor->details = g_new0 (BaulQueryEditorDetails, 1);
@@ -1575,9 +1575,9 @@ baul_query_editor_set_default_query (BaulQueryEditor *editor)
 }
 
 static void
-finish_first_line (BaulQueryEditor *editor, GtkWidget *hbox, gboolean use_go)
+finish_first_line (BaulQueryEditor *editor, CtkWidget *hbox, gboolean use_go)
 {
-    GtkWidget *button, *image;
+    CtkWidget *button, *image;
 
     button = ctk_button_new ();
     image = ctk_image_new_from_icon_name ("add",
@@ -1620,7 +1620,7 @@ finish_first_line (BaulQueryEditor *editor, GtkWidget *hbox, gboolean use_go)
 static void
 setup_internal_entry (BaulQueryEditor *editor)
 {
-    GtkWidget *hbox, *label;
+    CtkWidget *hbox, *label;
     char *label_markup;
 
     /* Create visible part: */
@@ -1649,9 +1649,9 @@ setup_internal_entry (BaulQueryEditor *editor)
 }
 
 static void
-setup_external_entry (BaulQueryEditor *editor, GtkWidget *entry)
+setup_external_entry (BaulQueryEditor *editor, CtkWidget *entry)
 {
-    GtkWidget *hbox, *label;
+    CtkWidget *hbox, *label;
 
     /* Create visible part: */
     hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
@@ -1779,11 +1779,11 @@ baul_query_editor_clear_query (BaulQueryEditor *editor)
     editor->details->change_frozen = FALSE;
 }
 
-GtkWidget *
+CtkWidget *
 baul_query_editor_new (gboolean start_hidden,
                        gboolean is_indexed)
 {
-    GtkWidget *editor;
+    CtkWidget *editor;
 
     editor = g_object_new (BAUL_TYPE_QUERY_EDITOR, NULL);
 
@@ -1832,14 +1832,14 @@ attach_to_external_entry (BaulQueryEditor *editor)
     }
 }
 
-GtkWidget*
+CtkWidget*
 baul_query_editor_new_with_bar (gboolean start_hidden,
                                 gboolean is_indexed,
                                 gboolean start_attached,
                                 BaulSearchBar *bar,
                                 BaulWindowSlot *slot)
 {
-    GtkWidget *entry;
+    CtkWidget *entry;
     BaulQueryEditor *editor;
 
     editor = BAUL_QUERY_EDITOR (g_object_new (BAUL_TYPE_QUERY_EDITOR, NULL));

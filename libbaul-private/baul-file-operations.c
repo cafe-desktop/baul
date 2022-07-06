@@ -71,7 +71,7 @@
 typedef struct {
 	GIOSchedulerJob *io_job;
 	GTimer *time;
-	GtkWindow *parent_window;
+	CtkWindow *parent_window;
 	int screen_num;
 	int inhibit_cookie;
 	BaulProgressInfo *progress;
@@ -946,7 +946,7 @@ f (const char *format, ...) {
 
 static gpointer
 init_common (gsize job_size,
-	     GtkWindow *parent_window,
+	     CtkWindow *parent_window,
 	     gboolean should_start, gboolean can_pause)
 {
 	CommonJob *common;
@@ -1080,9 +1080,9 @@ can_delete_files_without_confirm (GList *files)
 }
 
 typedef struct {
-	GtkWindow **parent_window;
+	CtkWindow **parent_window;
 	gboolean ignore_close_box;
-	GtkMessageType message_type;
+	CtkMessageType message_type;
 	const char *primary_text;
 	const char *secondary_text;
 	const char *details_text;
@@ -1096,7 +1096,7 @@ static gboolean
 do_run_simple_dialog (gpointer _data)
 {
 	RunSimpleDialogData *data = _data;
-        GtkWidget *dialog;
+        CtkWidget *dialog;
 	int result;
 	int response_id;
 
@@ -1159,7 +1159,7 @@ do_run_simple_dialog (gpointer _data)
 static int
 run_simple_dialog_va (CommonJob *job,
 		      gboolean ignore_close_box,
-		      GtkMessageType message_type,
+		      CtkMessageType message_type,
 		      char *primary_text,
 		      char *secondary_text,
 		      const char *details_text,
@@ -1212,7 +1212,7 @@ run_simple_dialog_va (CommonJob *job,
 static int
 run_simple_dialog (CommonJob *job,
 		   gboolean ignore_close_box,
-		   GtkMessageType message_type,
+		   CtkMessageType message_type,
 		   char *primary_text,
 		   char *secondary_text,
 		   const char *details_text,
@@ -2070,7 +2070,7 @@ delete_job (GIOSchedulerJob *io_job,
 
 static void
 trash_or_delete_internal (GList                  *files,
-			  GtkWindow              *parent_window,
+			  CtkWindow              *parent_window,
 			  gboolean                try_trash,
 			  BaulDeleteCallback  done_callback,
 			  gpointer                done_callback_data)
@@ -2110,7 +2110,7 @@ trash_or_delete_internal (GList                  *files,
 
 void
 baul_file_operations_trash_or_delete (GList                  *files,
-					  GtkWindow              *parent_window,
+					  CtkWindow              *parent_window,
 					  BaulDeleteCallback  done_callback,
 					  gpointer                done_callback_data)
 {
@@ -2121,7 +2121,7 @@ baul_file_operations_trash_or_delete (GList                  *files,
 
 void
 baul_file_operations_delete (GList                  *files,
-				 GtkWindow              *parent_window,
+				 CtkWindow              *parent_window,
 				 BaulDeleteCallback  done_callback,
 				 gpointer                done_callback_data)
 {
@@ -2135,7 +2135,7 @@ baul_file_operations_delete (GList                  *files,
 typedef struct {
 	gboolean eject;
 	GMount *mount;
-	GtkWindow *parent_window;
+	CtkWindow *parent_window;
 	BaulUnmountCallback callback;
 	gpointer callback_data;
 } UnmountData;
@@ -2315,10 +2315,10 @@ has_trash_files (GMount *mount)
 
 
 static gint
-prompt_empty_trash (GtkWindow *parent_window)
+prompt_empty_trash (CtkWindow *parent_window)
 {
 	gint                    result;
-	GtkWidget               *dialog;
+	CtkWidget               *dialog;
 	GdkScreen               *screen;
 
 	screen = NULL;
@@ -2367,7 +2367,7 @@ prompt_empty_trash (GtkWindow *parent_window)
 }
 
 void
-baul_file_operations_unmount_mount_full (GtkWindow                      *parent_window,
+baul_file_operations_unmount_mount_full (CtkWindow                      *parent_window,
 					     GMount                         *mount,
 					     gboolean                        eject,
 					     gboolean                        check_trash,
@@ -2421,7 +2421,7 @@ baul_file_operations_unmount_mount_full (GtkWindow                      *parent_
 }
 
 void
-baul_file_operations_unmount_mount (GtkWindow                      *parent_window,
+baul_file_operations_unmount_mount (CtkWindow                      *parent_window,
 					GMount                         *mount,
 					gboolean                        eject,
 					gboolean                        check_trash)
@@ -2490,7 +2490,7 @@ volume_mount_cb (GObject *source_object,
 
 
 void
-baul_file_operations_mount_volume (GtkWindow *parent_window,
+baul_file_operations_mount_volume (CtkWindow *parent_window,
 				       GVolume *volume,
 				       gboolean allow_autorun)
 {
@@ -2499,7 +2499,7 @@ baul_file_operations_mount_volume (GtkWindow *parent_window,
 }
 
 void
-baul_file_operations_mount_volume_full (GtkWindow *parent_window,
+baul_file_operations_mount_volume_full (CtkWindow *parent_window,
 					    GVolume *volume,
 					    gboolean allow_autorun,
 					    BaulMountCallback mount_callback,
@@ -4026,7 +4026,7 @@ typedef struct {
 	GFile *src;
 	GFile *dest;
 	GFile *dest_dir;
-	GtkWindow *parent;
+	CtkWindow *parent;
 	ConflictResponseData *resp_data;
 } ConflictDialogData;
 
@@ -4034,7 +4034,7 @@ static gboolean
 do_run_conflict_dialog (gpointer _data)
 {
 	ConflictDialogData *data = _data;
-	GtkWidget *dialog;
+	CtkWidget *dialog;
 	int response;
 
 	dialog = baul_file_conflict_dialog_new (data->parent,
@@ -4734,7 +4734,7 @@ void
 baul_file_operations_copy (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
-			       GtkWindow *parent_window,
+			       CtkWindow *parent_window,
 			       BaulCopyCallback  done_callback,
 			       gpointer done_callback_data)
 {
@@ -5277,7 +5277,7 @@ void
 baul_file_operations_move (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
-			       GtkWindow *parent_window,
+			       CtkWindow *parent_window,
 			       BaulCopyCallback  done_callback,
 			       gpointer done_callback_data)
 {
@@ -5597,7 +5597,7 @@ void
 baul_file_operations_link (GList *files,
 			       GArray *relative_item_points,
 			       GFile *target_dir,
-			       GtkWindow *parent_window,
+			       CtkWindow *parent_window,
 			       BaulCopyCallback  done_callback,
 			       gpointer done_callback_data)
 {
@@ -5638,7 +5638,7 @@ baul_file_operations_link (GList *files,
 void
 baul_file_operations_duplicate (GList *files,
 				    GArray *relative_item_points,
-				    GtkWindow *parent_window,
+				    CtkWindow *parent_window,
 				    BaulCopyCallback  done_callback,
 				    gpointer done_callback_data)
 {
@@ -5878,14 +5878,14 @@ baul_file_operations_copy_move (const GList *item_uris,
 				    GArray *relative_item_points,
 				    const char *target_dir,
 				    GdkDragAction copy_action,
-				    GtkWidget *parent_view,
+				    CtkWidget *parent_view,
 				    BaulCopyCallback  done_callback,
 				    gpointer done_callback_data)
 {
 	GList *locations;
 	GList *p;
 	GFile *dest;
-	GtkWindow *parent_window;
+	CtkWindow *parent_window;
 	gboolean target_is_mapping;
 	gboolean have_nonmapping_source;
 
@@ -5917,7 +5917,7 @@ baul_file_operations_copy_move (const GList *item_uris,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	if (copy_action == GDK_ACTION_COPY) {
@@ -6273,18 +6273,18 @@ create_job (GIOSchedulerJob *io_job,
 }
 
 void
-baul_file_operations_new_folder (GtkWidget *parent_view,
+baul_file_operations_new_folder (CtkWidget *parent_view,
 				     GdkPoint *target_point,
 				     const char *parent_dir,
 				     BaulCreateCallback done_callback,
 				     gpointer done_callback_data)
 {
 	CreateJob *job;
-	GtkWindow *parent_window;
+	CtkWindow *parent_window;
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6311,7 +6311,7 @@ baul_file_operations_new_folder (GtkWidget *parent_view,
 }
 
 void
-baul_file_operations_new_file_from_template (GtkWidget *parent_view,
+baul_file_operations_new_file_from_template (CtkWidget *parent_view,
 						 GdkPoint *target_point,
 						 const char *parent_dir,
 						 const char *target_filename,
@@ -6320,11 +6320,11 @@ baul_file_operations_new_file_from_template (GtkWidget *parent_view,
 						 gpointer done_callback_data)
 {
 	CreateJob *job;
-	GtkWindow *parent_window;
+	CtkWindow *parent_window;
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6355,7 +6355,7 @@ baul_file_operations_new_file_from_template (GtkWidget *parent_view,
 }
 
 void
-baul_file_operations_new_file (GtkWidget *parent_view,
+baul_file_operations_new_file (CtkWidget *parent_view,
 				   GdkPoint *target_point,
 				   const char *parent_dir,
 				   const char *target_filename,
@@ -6365,11 +6365,11 @@ baul_file_operations_new_file (GtkWidget *parent_view,
 				   gpointer done_callback_data)
 {
 	CreateJob *job;
-	GtkWindow *parent_window;
+	CtkWindow *parent_window;
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6499,14 +6499,14 @@ empty_trash_job (GIOSchedulerJob *io_job,
 }
 
 void
-baul_file_operations_empty_trash (GtkWidget *parent_view)
+baul_file_operations_empty_trash (CtkWidget *parent_view)
 {
 	EmptyTrashJob *job;
-	GtkWindow *parent_window;
+	CtkWindow *parent_window;
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (EmptyTrashJob, parent_window, TRUE, FALSE);
@@ -6728,7 +6728,7 @@ mark_trusted_job (GIOSchedulerJob *io_job,
 
 void
 baul_file_mark_desktop_file_trusted (GFile *file,
-					 GtkWindow *parent_window,
+					 CtkWindow *parent_window,
 					 gboolean interactive,
 					 BaulOpCallback done_callback,
 					 gpointer done_callback_data)

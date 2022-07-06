@@ -68,7 +68,7 @@
 struct _FMDesktopIconViewPrivate
 {
     GdkWindow *root_window;
-    GtkActionGroup *desktop_action_group;
+    CtkActionGroup *desktop_action_group;
     guint desktop_merge_id;
 
     /* For the desktop rescanning
@@ -266,7 +266,7 @@ static void
 fm_desktop_icon_view_dispose (GObject *object)
 {
     FMDesktopIconView *icon_view;
-    GtkUIManager *ui_manager;
+    CtkUIManager *ui_manager;
 
     icon_view = FM_DESKTOP_ICON_VIEW (object);
 
@@ -371,7 +371,7 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
 }
 
 static void
-unrealized_callback (GtkWidget *widget, FMDesktopIconView *desktop_icon_view)
+unrealized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
 {
     g_return_if_fail (desktop_icon_view->priv->root_window != NULL);
 
@@ -383,11 +383,11 @@ unrealized_callback (GtkWidget *widget, FMDesktopIconView *desktop_icon_view)
 }
 
 static void
-realized_callback (GtkWidget *widget, FMDesktopIconView *desktop_icon_view)
+realized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
 {
     GdkWindow *root_window;
     GdkScreen *screen;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
     gint scale;
 
     g_return_if_fail (desktop_icon_view->priv->root_window == NULL);
@@ -548,8 +548,8 @@ static void
 fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 {
     BaulIconContainer *icon_container;
-    GtkAllocation allocation;
-    GtkAdjustment *hadj, *vadj;
+    CtkAllocation allocation;
+    CtkAdjustment *hadj, *vadj;
 
     desktop_icon_view->priv = fm_desktop_icon_view_get_instance_private (desktop_icon_view);
 
@@ -639,7 +639,7 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 }
 
 static void
-action_new_launcher_callback (GtkAction *action, gpointer data)
+action_new_launcher_callback (CtkAction *action, gpointer data)
 {
     char *desktop_directory;
 
@@ -657,7 +657,7 @@ action_new_launcher_callback (GtkAction *action, gpointer data)
 }
 
 static void
-action_change_background_callback (GtkAction *action,
+action_change_background_callback (CtkAction *action,
                                    gpointer data)
 {
     g_assert (FM_DIRECTORY_VIEW (data));
@@ -670,7 +670,7 @@ action_change_background_callback (GtkAction *action,
 }
 
 static void
-action_empty_trash_conditional_callback (GtkAction *action,
+action_empty_trash_conditional_callback (CtkAction *action,
         gpointer data)
 {
     g_assert (FM_IS_DIRECTORY_VIEW (data));
@@ -717,7 +717,7 @@ real_update_menus (FMDirectoryView *view)
     FMDesktopIconView *desktop_view;
     gboolean disable_command_line;
     gboolean include_empty_trash;
-    GtkAction *action;
+    CtkAction *action;
 
     g_assert (FM_IS_DESKTOP_ICON_VIEW (view));
 
@@ -756,7 +756,7 @@ real_update_menus (FMDirectoryView *view)
     }
 }
 
-static const GtkActionEntry desktop_view_entries[] =
+static const CtkActionEntry desktop_view_entries[] =
 {
     /* name, stock id */
     {
@@ -791,8 +791,8 @@ static void
 real_merge_menus (FMDirectoryView *view)
 {
     FMDesktopIconView *desktop_view;
-    GtkUIManager *ui_manager;
-    GtkActionGroup *action_group;
+    CtkUIManager *ui_manager;
+    CtkActionGroup *action_group;
     const char *ui;
 
     FM_DIRECTORY_VIEW_CLASS (fm_desktop_icon_view_parent_class)->merge_menus (view);

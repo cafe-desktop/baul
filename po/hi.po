@@ -466,11 +466,11 @@ msgstr "Justification"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "एक दूसरे के सापेक्ष, लेबल के पाठ की पंक्तियों की पंक्तिबद्धता. यह लेबल की "
 "पंक्तिबद्धता को उसके एलोकेशन के भीतर प्रभावित नहीं करता. इस हेतु देखें "
-"GtkMisc::xalign."
+"CtkMisc::xalign."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

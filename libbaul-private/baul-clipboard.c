@@ -41,15 +41,15 @@ typedef void (* SelectAllCallback)    (gpointer target);
 typedef void (* ConnectCallbacksFunc) (GObject            *object,
                                        TargetCallbackData *target_data);
 
-static void selection_changed_callback            (GtkWidget *widget,
+static void selection_changed_callback            (CtkWidget *widget,
         gpointer callback_data);
-static void owner_change_callback (GtkClipboard        *clipboard,
+static void owner_change_callback (CtkClipboard        *clipboard,
                                    GdkEventOwnerChange *event,
                                    gpointer callback_data);
 struct _TargetCallbackData
 {
-    GtkUIManager *ui_manager;
-    GtkActionGroup *action_group;
+    CtkUIManager *ui_manager;
+    CtkActionGroup *action_group;
     gboolean shares_selection_changes;
 
     SelectAllCallback select_all_callback;
@@ -85,7 +85,7 @@ paste_callback (gpointer target)
 static void
 editable_select_all_callback (gpointer target)
 {
-    GtkEditable *editable;
+    CtkEditable *editable;
 
     editable = GTK_EDITABLE (target);
     g_assert (editable != NULL);
@@ -103,28 +103,28 @@ text_view_select_all_callback (gpointer target)
 }
 
 static void
-action_cut_callback (GtkAction *action,
+action_cut_callback (CtkAction *action,
                      gpointer callback_data)
 {
     cut_callback (callback_data);
 }
 
 static void
-action_copy_callback (GtkAction *action,
+action_copy_callback (CtkAction *action,
                       gpointer callback_data)
 {
     copy_callback (callback_data);
 }
 
 static void
-action_paste_callback (GtkAction *action,
+action_paste_callback (CtkAction *action,
                        gpointer callback_data)
 {
     paste_callback (callback_data);
 }
 
 static void
-action_select_all_callback (GtkAction *action,
+action_select_all_callback (CtkAction *action,
                             gpointer callback_data)
 {
     TargetCallbackData *target_data;
@@ -138,12 +138,12 @@ action_select_all_callback (GtkAction *action,
 }
 
 static void
-received_clipboard_contents (GtkClipboard     *clipboard,
-                             GtkSelectionData *selection_data,
+received_clipboard_contents (CtkClipboard     *clipboard,
+                             CtkSelectionData *selection_data,
                              gpointer          data)
 {
-    GtkActionGroup *action_group;
-    GtkAction *action;
+    CtkActionGroup *action_group;
+    CtkAction *action;
 
     action_group = data;
 
@@ -162,7 +162,7 @@ received_clipboard_contents (GtkClipboard     *clipboard,
 
 
 static void
-set_paste_sensitive_if_clipboard_contains_data (GtkActionGroup *action_group)
+set_paste_sensitive_if_clipboard_contains_data (CtkActionGroup *action_group)
 {
     if (gdk_display_supports_selection_notification (gdk_display_get_default ()))
     {
@@ -173,7 +173,7 @@ set_paste_sensitive_if_clipboard_contains_data (GtkActionGroup *action_group)
     }
     else
     {
-        GtkAction *action;
+        CtkAction *action;
 
         /* If selection notification isn't supported, always activate Paste */
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -185,9 +185,9 @@ set_paste_sensitive_if_clipboard_contains_data (GtkActionGroup *action_group)
 }
 
 static void
-set_clipboard_menu_items_sensitive (GtkActionGroup *action_group)
+set_clipboard_menu_items_sensitive (CtkActionGroup *action_group)
 {
-    GtkAction *action;
+    CtkAction *action;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (action_group,
@@ -200,9 +200,9 @@ set_clipboard_menu_items_sensitive (GtkActionGroup *action_group)
 }
 
 static void
-set_clipboard_menu_items_insensitive (GtkActionGroup *action_group)
+set_clipboard_menu_items_insensitive (CtkActionGroup *action_group)
 {
-    GtkAction *action;
+    CtkAction *action;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (action_group,
@@ -215,7 +215,7 @@ set_clipboard_menu_items_insensitive (GtkActionGroup *action_group)
 }
 
 static gboolean
-clipboard_items_are_merged_in (GtkWidget *widget)
+clipboard_items_are_merged_in (CtkWidget *widget)
 {
     return GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget),
                             "Baul:clipboard_menu_items_merged"));
@@ -252,7 +252,7 @@ editable_disconnect_callbacks (GObject *object,
 }
 
 static void
-text_buffer_update_sensitivity (GtkTextBuffer *buffer,
+text_buffer_update_sensitivity (CtkTextBuffer *buffer,
                                 TargetCallbackData *target_data)
 {
     g_assert (GTK_IS_TEXT_BUFFER (buffer));
@@ -269,18 +269,18 @@ text_buffer_update_sensitivity (GtkTextBuffer *buffer,
 }
 
 static void
-text_buffer_delete_range (GtkTextBuffer *buffer,
-                          GtkTextIter   *iter1,
-                          GtkTextIter   *iter2,
+text_buffer_delete_range (CtkTextBuffer *buffer,
+                          CtkTextIter   *iter1,
+                          CtkTextIter   *iter2,
                           TargetCallbackData *target_data)
 {
     text_buffer_update_sensitivity (buffer, target_data);
 }
 
 static void
-text_buffer_mark_set (GtkTextBuffer *buffer,
-                      GtkTextIter *iter,
-                      GtkTextMark *mark,
+text_buffer_mark_set (CtkTextBuffer *buffer,
+                      CtkTextIter *iter,
+                      CtkTextMark *mark,
                       TargetCallbackData *target_data)
 {
     /* anonymous marks with NULL names refer to cursor moves */
@@ -294,7 +294,7 @@ static void
 text_view_connect_callbacks (GObject *object,
                              TargetCallbackData *target_data)
 {
-    GtkTextBuffer *buffer;
+    CtkTextBuffer *buffer;
 
     buffer = ctk_text_view_get_buffer (GTK_TEXT_VIEW (object));
     g_assert (buffer);
@@ -310,7 +310,7 @@ static void
 text_view_disconnect_callbacks (GObject *object,
                                 TargetCallbackData *target_data)
 {
-    GtkTextBuffer *buffer;
+    CtkTextBuffer *buffer;
 
     buffer = ctk_text_view_get_buffer (GTK_TEXT_VIEW (object));
     g_assert (buffer);
@@ -379,7 +379,7 @@ merge_out_clipboard_menu_items (GObject *widget_as_object,
 }
 
 static gboolean
-focus_changed_callback (GtkWidget *widget,
+focus_changed_callback (CtkWidget *widget,
                         GdkEventAny *event,
                         gpointer callback_data)
 {
@@ -403,11 +403,11 @@ focus_changed_callback (GtkWidget *widget,
 }
 
 static void
-selection_changed_callback (GtkWidget *widget,
+selection_changed_callback (CtkWidget *widget,
                             gpointer callback_data)
 {
     TargetCallbackData *target_data;
-    GtkEditable *editable;
+    CtkEditable *editable;
     int start, end;
 
     target_data = (TargetCallbackData *) callback_data;
@@ -427,7 +427,7 @@ selection_changed_callback (GtkWidget *widget,
 }
 
 static void
-owner_change_callback (GtkClipboard        *clipboard,
+owner_change_callback (CtkClipboard        *clipboard,
                        GdkEventOwnerChange *event,
                        gpointer callback_data)
 {
@@ -440,7 +440,7 @@ owner_change_callback (GtkClipboard        *clipboard,
 }
 
 static void
-target_destroy_callback (GtkWidget *object,
+target_destroy_callback (CtkWidget *object,
                          gpointer callback_data)
 {
     g_assert (callback_data != NULL);
@@ -458,7 +458,7 @@ target_data_free (TargetCallbackData *target_data)
     g_free (target_data);
 }
 
-static const GtkActionEntry clipboard_entries[] =
+static const CtkActionEntry clipboard_entries[] =
 {
     /* name, icon name */      { "Cut", "edit-cut",
         /* label, accelerator */    N_("Cu_t"), NULL,
@@ -483,14 +483,14 @@ static const GtkActionEntry clipboard_entries[] =
 };
 
 static TargetCallbackData *
-initialize_clipboard_component_with_callback_data (GtkEditable *target,
-        GtkUIManager *ui_manager,
+initialize_clipboard_component_with_callback_data (CtkEditable *target,
+        CtkUIManager *ui_manager,
         gboolean shares_selection_changes,
         SelectAllCallback select_all_callback,
         ConnectCallbacksFunc connect_callbacks,
         ConnectCallbacksFunc disconnect_callbacks)
 {
-    GtkActionGroup *action_group;
+    CtkActionGroup *action_group;
     TargetCallbackData *target_data;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -518,7 +518,7 @@ initialize_clipboard_component_with_callback_data (GtkEditable *target,
 
 static void
 baul_clipboard_real_set_up (gpointer target,
-                            GtkUIManager *ui_manager,
+                            CtkUIManager *ui_manager,
                             gboolean shares_selection_changes,
                             SelectAllCallback select_all_callback,
                             ConnectCallbacksFunc connect_callbacks,
@@ -556,8 +556,8 @@ baul_clipboard_real_set_up (gpointer target,
 }
 
 void
-baul_clipboard_set_up_editable (GtkEditable *target,
-                                GtkUIManager *ui_manager,
+baul_clipboard_set_up_editable (CtkEditable *target,
+                                CtkUIManager *ui_manager,
                                 gboolean shares_selection_changes)
 {
     g_return_if_fail (GTK_IS_EDITABLE (target));
@@ -571,8 +571,8 @@ baul_clipboard_set_up_editable (GtkEditable *target,
 }
 
 void
-baul_clipboard_set_up_text_view (GtkTextView *target,
-                                 GtkUIManager *ui_manager)
+baul_clipboard_set_up_text_view (CtkTextView *target,
+                                 CtkUIManager *ui_manager)
 {
     g_return_if_fail (GTK_IS_TEXT_VIEW (target));
     g_return_if_fail (GTK_IS_UI_MANAGER (ui_manager));
@@ -620,7 +620,7 @@ convert_lines_to_str_list (char **lines, gboolean *cut)
 }
 
 GList*
-baul_clipboard_get_uri_list_from_selection_data (GtkSelectionData *selection_data,
+baul_clipboard_get_uri_list_from_selection_data (CtkSelectionData *selection_data,
         gboolean *cut,
         GdkAtom copied_files_atom)
 {
@@ -650,19 +650,19 @@ baul_clipboard_get_uri_list_from_selection_data (GtkSelectionData *selection_dat
     return items;
 }
 
-GtkClipboard *
-baul_clipboard_get (GtkWidget *widget)
+CtkClipboard *
+baul_clipboard_get (CtkWidget *widget)
 {
     return ctk_clipboard_get_for_display (ctk_widget_get_display (GTK_WIDGET (widget)),
                                           GDK_SELECTION_CLIPBOARD);
 }
 
 void
-baul_clipboard_clear_if_colliding_uris (GtkWidget *widget,
+baul_clipboard_clear_if_colliding_uris (CtkWidget *widget,
                                         const GList *item_uris,
                                         GdkAtom copied_files_atom)
 {
-    GtkSelectionData *data;
+    CtkSelectionData *data;
     GList *clipboard_item_uris, *l;
     gboolean collision;
 

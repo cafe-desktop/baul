@@ -53,11 +53,11 @@
 
 struct _BaulInformationPanelPrivate
 {
-    GtkWidget *container;
+    CtkWidget *container;
     BaulWindowInfo *window;
     BaulSidebarTitle *title;
-    GtkWidget *button_box_centerer;
-    GtkWidget *button_box;
+    CtkWidget *button_box_centerer;
+    CtkWidget *button_box;
     gboolean has_buttons;
     BaulFile *file;
     guint file_changed_connection;
@@ -72,18 +72,18 @@ struct _BaulInformationPanelPrivate
 /* button assignments */
 #define CONTEXTUAL_MENU_BUTTON 3
 
-static gboolean baul_information_panel_press_event           (GtkWidget                    *widget,
+static gboolean baul_information_panel_press_event           (CtkWidget                    *widget,
         GdkEventButton               *event);
 static void     baul_information_panel_finalize              (GObject                      *object);
-static void     baul_information_panel_drag_data_received    (GtkWidget                    *widget,
+static void     baul_information_panel_drag_data_received    (CtkWidget                    *widget,
         GdkDragContext               *context,
         int                           x,
         int                           y,
-        GtkSelectionData             *selection_data,
+        CtkSelectionData             *selection_data,
         guint                         info,
         guint                         time);
 static void     baul_information_panel_read_defaults         (BaulInformationPanel     *information_panel);
-static void     baul_information_panel_style_updated         (GtkWidget                    *widget);
+static void     baul_information_panel_style_updated         (CtkWidget                    *widget);
 static void     baul_information_panel_theme_changed         (GSettings   *settings,
                                                               const gchar *key,
                                                               gpointer     user_data);
@@ -114,7 +114,7 @@ enum
     TARGET_CAFE_URI_LIST
 };
 
-static const GtkTargetEntry target_table[] =
+static const CtkTargetEntry target_table[] =
 {
     { "text/uri-list",  0, TARGET_URI_LIST },
     { "application/x-color", 0, TARGET_COLOR },
@@ -197,7 +197,7 @@ baul_information_panel_iface_init (BaulSidebarIface *iface)
 static void
 baul_information_panel_class_init (BaulInformationPanelClass *klass)
 {
-    GtkWidgetClass *widget_class;
+    CtkWidgetClass *widget_class;
     GObjectClass *gobject_class;
 
     gobject_class = G_OBJECT_CLASS (klass);
@@ -317,7 +317,7 @@ baul_information_panel_finalize (GObject *object)
 
 /* callback to handle resetting the background */
 static void
-reset_background_callback (GtkWidget *menu_item, GtkWidget *information_panel)
+reset_background_callback (CtkWidget *menu_item, CtkWidget *information_panel)
 {
     EelBackground *background;
 
@@ -347,10 +347,10 @@ information_panel_has_background (BaulInformationPanel *information_panel)
 }
 
 /* create the context menu */
-static GtkWidget *
+static CtkWidget *
 baul_information_panel_create_context_menu (BaulInformationPanel *information_panel)
 {
-    GtkWidget *menu, *menu_item;
+    CtkWidget *menu, *menu_item;
 
     menu = ctk_menu_new ();
     ctk_menu_set_screen (GTK_MENU (menu),
@@ -426,7 +426,7 @@ static InformationPanelPart
 hit_test (BaulInformationPanel *information_panel,
           int x, int y)
 {
-    GtkAllocation *allocation;
+    CtkAllocation *allocation;
     gboolean bg_hit;
 
     if (baul_sidebar_title_hit_test_icon (information_panel->details->title, x, y))
@@ -434,7 +434,7 @@ hit_test (BaulInformationPanel *information_panel,
         return ICON_PART;
     }
 
-    allocation = g_new0 (GtkAllocation, 1);
+    allocation = g_new0 (CtkAllocation, 1);
     ctk_widget_get_allocation (GTK_WIDGET (information_panel), allocation);
 
     bg_hit = allocation != NULL
@@ -479,11 +479,11 @@ static void
 receive_dropped_uri_list (BaulInformationPanel *information_panel,
                           GdkDragAction action,
                           int x, int y,
-                          GtkSelectionData *selection_data)
+                          CtkSelectionData *selection_data)
 {
     char **uris;
     gboolean exactly_one;
-    GtkWindow *window;
+    CtkWindow *window;
 
     uris = g_uri_list_extract_uris ((gchar *) ctk_selection_data_get_data (selection_data));
     exactly_one = uris[0] != NULL && (uris[1] == NULL || uris[1][0] == '\0');
@@ -575,7 +575,7 @@ static void
 receive_dropped_color (BaulInformationPanel *information_panel,
                        GdkDragAction action,
                        int x, int y,
-                       GtkSelectionData *selection_data)
+                       CtkSelectionData *selection_data)
 {
     guint16 *channels;
     char color_spec[8];
@@ -622,7 +622,7 @@ receive_dropped_color (BaulInformationPanel *information_panel,
 static void
 receive_dropped_keyword (BaulInformationPanel *information_panel,
                          int x, int y,
-                         GtkSelectionData *selection_data)
+                         CtkSelectionData *selection_data)
 {
     baul_drag_file_receive_dropped_keyword (information_panel->details->file,
                                             ctk_selection_data_get_data (selection_data));
@@ -632,9 +632,9 @@ receive_dropped_keyword (BaulInformationPanel *information_panel,
 }
 
 static void
-baul_information_panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
+baul_information_panel_drag_data_received (CtkWidget *widget, GdkDragContext *context,
         int x, int y,
-        GtkSelectionData *selection_data,
+        CtkSelectionData *selection_data,
         guint info, guint time)
 {
     BaulInformationPanel *information_panel;
@@ -677,7 +677,7 @@ baul_information_panel_drag_data_received (GtkWidget *widget, GdkDragContext *co
 
 /* handle the context menu if necessary */
 static gboolean
-baul_information_panel_press_event (GtkWidget *widget, GdkEventButton *event)
+baul_information_panel_press_event (CtkWidget *widget, GdkEventButton *event)
 {
     BaulInformationPanel *information_panel;
 
@@ -691,7 +691,7 @@ baul_information_panel_press_event (GtkWidget *widget, GdkEventButton *event)
     /* handle the context menu */
     if (event->button == CONTEXTUAL_MENU_BUTTON)
     {
-        GtkWidget *menu;
+        CtkWidget *menu;
 
         menu = baul_information_panel_create_context_menu (information_panel);
         eel_pop_up_context_menu (GTK_MENU(menu),
@@ -700,10 +700,10 @@ baul_information_panel_press_event (GtkWidget *widget, GdkEventButton *event)
     return TRUE;
 }
 
-static GtkWindow *
+static CtkWindow *
 baul_information_panel_get_window (BaulInformationPanel *information_panel)
 {
-    GtkWidget *result;
+    CtkWidget *result;
 
     result = ctk_widget_get_ancestor (GTK_WIDGET (information_panel), GTK_TYPE_WINDOW);
 
@@ -711,7 +711,7 @@ baul_information_panel_get_window (BaulInformationPanel *information_panel)
 }
 
 static void
-command_button_callback (GtkWidget *button, GAppInfo *application)
+command_button_callback (CtkWidget *button, GAppInfo *application)
 {
     BaulInformationPanel *information_panel;
     GList files;
@@ -729,7 +729,7 @@ command_button_callback (GtkWidget *button, GAppInfo *application)
    a shell to handle general ones */
 /* for now, we don't have any of these */
 static void
-metadata_button_callback (GtkWidget *button, const char *command_str)
+metadata_button_callback (CtkWidget *button, const char *command_str)
 {
     //BaulInformationPanel *self = BAUL_INFORMATION_PANEL (g_object_get_data (G_OBJECT (button), "user_data"));
 }
@@ -740,7 +740,7 @@ static void
 add_command_button (BaulInformationPanel *information_panel, GAppInfo *application)
 {
     char *temp_str;
-    GtkWidget *temp_button, *label;
+    CtkWidget *temp_button, *label;
 
     /* There's always at least the "Open with..." button */
     information_panel->details->has_buttons = TRUE;
@@ -776,7 +776,7 @@ add_buttons_from_metadata (BaulInformationPanel *information_panel, const char *
     char *button_name, *command_string;
     const char *term;
     int index;
-    GtkWidget *temp_button;
+    CtkWidget *temp_button;
 
     /* split the button specification into a set of terms */
     button_name = NULL;
@@ -958,7 +958,7 @@ title_changed_callback (BaulWindowInfo *window,
 
 /* ::style_set handler for the information_panel */
 static void
-baul_information_panel_style_updated (GtkWidget *widget)
+baul_information_panel_style_updated (CtkWidget *widget)
 {
     BaulInformationPanel *information_panel;
 

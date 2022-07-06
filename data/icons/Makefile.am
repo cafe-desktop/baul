@@ -28,7 +28,7 @@ ctk_update_icon_cache = $(UPDATE_ICON_CACHE) -f -t
 
 update-icon-cache:
 	@-if test -z "$(DESTDIR)" && ICON_UPDATE; then \
-		echo "Updating Gtk icon cache."; \
+		echo "Updating Ctk icon cache."; \
 		for theme in $(public_icons_themes); do \
 			$(ctk_update_icon_cache) $(datadir)/icons/$$theme; \
 		done; \

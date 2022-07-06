@@ -66,7 +66,7 @@ real_set_active (BaulWindowPane *pane, gboolean is_active)
 }
 
 static gboolean
-navigation_bar_focus_in_callback (GtkWidget *widget, GdkEventFocus *event, gpointer user_data)
+navigation_bar_focus_in_callback (CtkWidget *widget, GdkEventFocus *event, gpointer user_data)
 {
     BaulWindowPane *pane;
     pane = BAUL_WINDOW_PANE (user_data);
@@ -151,7 +151,7 @@ search_bar_activate_callback (BaulSearchBar *bar,
 }
 
 static void
-search_bar_cancel_callback (GtkWidget *widget,
+search_bar_cancel_callback (CtkWidget *widget,
                             BaulNavigationWindowPane *pane)
 {
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
@@ -161,7 +161,7 @@ search_bar_cancel_callback (GtkWidget *widget,
 }
 
 static void
-navigation_bar_cancel_callback (GtkWidget *widget,
+navigation_bar_cancel_callback (CtkWidget *widget,
                                 BaulNavigationWindowPane *pane)
 {
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
@@ -171,7 +171,7 @@ navigation_bar_cancel_callback (GtkWidget *widget,
 }
 
 static void
-navigation_bar_location_changed_callback (GtkWidget *widget,
+navigation_bar_location_changed_callback (CtkWidget *widget,
         const char *uri,
         BaulNavigationWindowPane *pane)
 {
@@ -188,7 +188,7 @@ navigation_bar_location_changed_callback (GtkWidget *widget,
 }
 
 static void
-path_bar_location_changed_callback (GtkWidget *widget,
+path_bar_location_changed_callback (CtkWidget *widget,
                                     GFile *location,
                                     BaulNavigationWindowPane *pane)
 {
@@ -224,7 +224,7 @@ location_button_should_be_active (BaulNavigationWindowPane *pane)
 }
 
 static void
-location_button_toggled_cb (GtkToggleButton *toggle,
+location_button_toggled_cb (CtkToggleButton *toggle,
                             BaulNavigationWindowPane *pane)
 {
     gboolean is_active;
@@ -239,11 +239,11 @@ location_button_toggled_cb (GtkToggleButton *toggle,
     baul_window_set_active_pane (BAUL_WINDOW_PANE (pane)->window, BAUL_WINDOW_PANE (pane));
 }
 
-static GtkWidget *
+static CtkWidget *
 location_button_create (BaulNavigationWindowPane *pane)
 {
-    GtkWidget *image;
-    GtkWidget *button;
+    CtkWidget *image;
+    CtkWidget *button;
 
     image = ctk_image_new_from_icon_name ("ctk-edit", GTK_ICON_SIZE_MENU);
     ctk_widget_show (image);
@@ -317,7 +317,7 @@ path_bar_path_event_callback (BaulPathBar *path_bar,
 }
 
 static void
-notebook_popup_menu_new_tab_cb (GtkMenuItem *menuitem,
+notebook_popup_menu_new_tab_cb (CtkMenuItem *menuitem,
     			gpointer user_data)
 {
     BaulWindowPane *pane;
@@ -327,7 +327,7 @@ notebook_popup_menu_new_tab_cb (GtkMenuItem *menuitem,
 }
 
 static void
-notebook_popup_menu_move_left_cb (GtkMenuItem *menuitem,
+notebook_popup_menu_move_left_cb (CtkMenuItem *menuitem,
                                   gpointer user_data)
 {
     BaulNavigationWindowPane *pane;
@@ -337,7 +337,7 @@ notebook_popup_menu_move_left_cb (GtkMenuItem *menuitem,
 }
 
 static void
-notebook_popup_menu_move_right_cb (GtkMenuItem *menuitem,
+notebook_popup_menu_move_right_cb (CtkMenuItem *menuitem,
                                    gpointer user_data)
 {
     BaulNavigationWindowPane *pane;
@@ -347,7 +347,7 @@ notebook_popup_menu_move_right_cb (GtkMenuItem *menuitem,
 }
 
 static void
-notebook_popup_menu_close_cb (GtkMenuItem *menuitem,
+notebook_popup_menu_close_cb (CtkMenuItem *menuitem,
                               gpointer user_data)
 {
     BaulWindowPane *pane;
@@ -362,8 +362,8 @@ static void
 notebook_popup_menu_show (BaulNavigationWindowPane *pane,
                           GdkEventButton *event)
 {
-    GtkWidget *popup;
-    GtkWidget *item;
+    CtkWidget *popup;
+    CtkWidget *item;
     gboolean can_move_left, can_move_right;
     BaulNotebook *notebook;
 
@@ -433,7 +433,7 @@ notebook_tab_close_requested (BaulNotebook *notebook,
 }
 
 static gboolean
-notebook_button_press_cb (GtkWidget *widget,
+notebook_button_press_cb (CtkWidget *widget,
                           GdkEventButton *event,
                           gpointer user_data)
 {
@@ -461,7 +461,7 @@ notebook_button_press_cb (GtkWidget *widget,
 }
 
 static gboolean
-notebook_popup_menu_cb (GtkWidget *widget,
+notebook_popup_menu_cb (CtkWidget *widget,
                         gpointer user_data)
 {
     BaulNavigationWindowPane *pane;
@@ -472,13 +472,13 @@ notebook_popup_menu_cb (GtkWidget *widget,
 }
 
 static gboolean
-notebook_switch_page_cb (GtkNotebook *notebook,
-                         GtkWidget *page,
+notebook_switch_page_cb (CtkNotebook *notebook,
+                         CtkWidget *page,
                          unsigned int page_num,
                          BaulNavigationWindowPane *pane)
 {
     BaulWindowSlot *slot;
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     widget = ctk_notebook_get_nth_page (GTK_NOTEBOOK (pane->notebook), page_num);
     g_assert (widget != NULL);
@@ -497,7 +497,7 @@ notebook_switch_page_cb (GtkNotebook *notebook,
 void
 baul_navigation_window_pane_remove_page (BaulNavigationWindowPane *pane, int page_num)
 {
-    GtkNotebook *notebook;
+    CtkNotebook *notebook;
     notebook = GTK_NOTEBOOK (pane->notebook);
 
     g_signal_handlers_block_by_func (notebook,
@@ -653,9 +653,9 @@ baul_navigation_window_pane_always_use_location_entry (BaulNavigationWindowPane 
 void
 baul_navigation_window_pane_setup (BaulNavigationWindowPane *pane)
 {
-    GtkWidget *hbox;
+    CtkWidget *hbox;
     BaulEntry *entry;
-    GtkSizeGroup *header_size_group;
+    CtkSizeGroup *header_size_group;
 
     pane->widget = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
@@ -782,7 +782,7 @@ baul_navigation_window_pane_set_bar_mode (BaulNavigationWindowPane *pane,
         BaulBarMode mode)
 {
     gboolean use_entry;
-    GtkWidget *focus_widget;
+    CtkWidget *focus_widget;
     BaulNavigationWindow *window;
 
     switch (mode)

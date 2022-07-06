@@ -49,7 +49,7 @@ extern "C" {
 
     struct _BaulNotebook
     {
-        GtkNotebook parent;
+        CtkNotebook parent;
 
         /*< private >*/
         BaulNotebookPrivate *priv;
@@ -57,7 +57,7 @@ extern "C" {
 
     struct _BaulNotebookClass
     {
-        GtkNotebookClass parent_class;
+        CtkNotebookClass parent_class;
 
         /* Signals */
         void	 (* tab_close_request)  (BaulNotebook *notebook,

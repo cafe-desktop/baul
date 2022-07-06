@@ -39,8 +39,8 @@ baul_cell_renderer_text_ellipsized_init (BaulCellRendererTextEllipsized *cell)
 }
 
 static void
-baul_cell_renderer_text_ellipsized_get_preferred_width (GtkCellRenderer *cell,
-        						    GtkWidget       *widget,
+baul_cell_renderer_text_ellipsized_get_preferred_width (CtkCellRenderer *cell,
+        						    CtkWidget       *widget,
         						    gint            *minimum_size,
         						    gint            *natural_size)
 {
@@ -62,12 +62,12 @@ baul_cell_renderer_text_ellipsized_get_preferred_width (GtkCellRenderer *cell,
 static void
 baul_cell_renderer_text_ellipsized_class_init (BaulCellRendererTextEllipsizedClass *klass)
 {
-    GtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (klass);
+    CtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (klass);
     cell_class->get_preferred_width = baul_cell_renderer_text_ellipsized_get_preferred_width;
 
 }
 
-GtkCellRenderer *
+CtkCellRenderer *
 baul_cell_renderer_text_ellipsized_new (void)
 {
     return g_object_new (BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED, NULL);

@@ -94,7 +94,7 @@ fm_empty_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory
 {
 }
 
-static GtkWidget *
+static CtkWidget *
 fm_empty_view_get_background_widget (FMDirectoryView *view)
 {
     return GTK_WIDGET (view);

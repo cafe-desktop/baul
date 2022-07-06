@@ -54,8 +54,8 @@ struct _BaulPropertyPageClass {
 
 GType             baul_property_page_get_type  (void);
 BaulPropertyPage *baul_property_page_new       (const char *name,
-                                                GtkWidget  *label,
-                                                GtkWidget  *page);
+                                                CtkWidget  *label,
+                                                CtkWidget  *page);
 
 /* BaulPropertyPage has the following properties:
  *   name (string)        - the identifier for the property page

@@ -44,8 +44,8 @@ enum
 
 struct _BaulTrashBarPrivate
 {
-    GtkWidget *empty_button;
-    GtkWidget *restore_button;
+    CtkWidget *empty_button;
+    CtkWidget *restore_button;
 
     BaulWindow *window;
     gulong selection_handler_id;
@@ -54,7 +54,7 @@ struct _BaulTrashBarPrivate
 G_DEFINE_TYPE_WITH_PRIVATE (BaulTrashBar, baul_trash_bar, GTK_TYPE_BOX);
 
 static void
-restore_button_clicked_cb (GtkWidget *button,
+restore_button_clicked_cb (CtkWidget *button,
                            BaulTrashBar *bar)
 {
     GList *locations, *files, *l;
@@ -166,9 +166,9 @@ baul_trash_bar_class_init (BaulTrashBarClass *klass)
 }
 
 static void
-empty_trash_callback (GtkWidget *button, gpointer data)
+empty_trash_callback (CtkWidget *button, gpointer data)
 {
-    GtkWidget *window;
+    CtkWidget *window;
 
     window = ctk_widget_get_toplevel (button);
 
@@ -178,8 +178,8 @@ empty_trash_callback (GtkWidget *button, gpointer data)
 static void
 baul_trash_bar_init (BaulTrashBar *bar)
 {
-    GtkWidget *label;
-    GtkWidget *hbox;
+    CtkWidget *label;
+    CtkWidget *hbox;
 
     bar->priv = baul_trash_bar_get_instance_private (bar);
 
@@ -226,7 +226,7 @@ baul_trash_bar_init (BaulTrashBar *bar)
                              0);
 }
 
-GtkWidget *
+CtkWidget *
 baul_trash_bar_new (BaulWindow *window)
 {
     GObject *bar;

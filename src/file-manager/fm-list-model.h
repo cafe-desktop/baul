@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* fm-list-model.h - a GtkTreeModel for file lists.
+/* fm-list-model.h - a CtkTreeModel for file lists.
 
    Copyright (C) 2001, 2002 Anders Carlsson
 
@@ -92,12 +92,12 @@ void     fm_list_model_clear                             (FMListModel          *
 gboolean fm_list_model_get_tree_iter_from_file           (FMListModel          *model,
         BaulFile         *file,
         BaulDirectory    *directory,
-        GtkTreeIter          *iter);
+        CtkTreeIter          *iter);
 GList *  fm_list_model_get_all_iters_for_file            (FMListModel          *model,
         BaulFile         *file);
 gboolean fm_list_model_get_first_iter_for_file           (FMListModel          *model,
         BaulFile         *file,
-        GtkTreeIter          *iter);
+        CtkTreeIter          *iter);
 void     fm_list_model_set_should_sort_directories_first (FMListModel          *model,
         gboolean              sort_directories_first);
 
@@ -111,16 +111,16 @@ void     fm_list_model_sort_files                        (FMListModel *model,
 BaulZoomLevel fm_list_model_get_zoom_level_from_column_id (int               column);
 int               fm_list_model_get_column_id_from_zoom_level (BaulZoomLevel zoom_level);
 
-BaulFile *    fm_list_model_file_for_path (FMListModel *model, GtkTreePath *path);
-gboolean          fm_list_model_load_subdirectory (FMListModel *model, GtkTreePath *path, BaulDirectory **directory);
-void              fm_list_model_unload_subdirectory (FMListModel *model, GtkTreeIter *iter);
+BaulFile *    fm_list_model_file_for_path (FMListModel *model, CtkTreePath *path);
+gboolean          fm_list_model_load_subdirectory (FMListModel *model, CtkTreePath *path, BaulDirectory **directory);
+void              fm_list_model_unload_subdirectory (FMListModel *model, CtkTreeIter *iter);
 
 void              fm_list_model_set_drag_view (FMListModel *model,
-        GtkTreeView *view,
+        CtkTreeView *view,
         int begin_x,
         int begin_y);
 
-GtkTargetList *   fm_list_model_get_drag_target_list (void);
+CtkTargetList *   fm_list_model_get_drag_target_list (void);
 
 int               fm_list_model_compare_func (FMListModel *model,
         BaulFile *file1,

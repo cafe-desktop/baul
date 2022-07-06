@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* baul-ui-utilities.c - helper functions for GtkUIManager stuff
+/* baul-ui-utilities.c - helper functions for CtkUIManager stuff
 
    Copyright (C) 2004 Red Hat, Inc.
 
@@ -36,9 +36,9 @@
 #include "baul-icon-info.h"
 
 void
-baul_ui_unmerge_ui (GtkUIManager *ui_manager,
+baul_ui_unmerge_ui (CtkUIManager *ui_manager,
                     guint *merge_id,
-                    GtkActionGroup **action_group)
+                    CtkActionGroup **action_group)
 {
     if (*merge_id != 0)
     {
@@ -55,10 +55,10 @@ baul_ui_unmerge_ui (GtkUIManager *ui_manager,
 }
 
 void
-baul_ui_prepare_merge_ui (GtkUIManager *ui_manager,
+baul_ui_prepare_merge_ui (CtkUIManager *ui_manager,
                           const char *name,
                           guint *merge_id,
-                          GtkActionGroup **action_group)
+                          CtkActionGroup **action_group)
 {
     *merge_id = ctk_ui_manager_new_merge_id (ui_manager);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -122,7 +122,7 @@ baul_ui_string_get (const char *filename)
 }
 
 static void
-extension_action_callback (GtkAction *action,
+extension_action_callback (CtkAction *action,
                            gpointer callback_data)
 {
     baul_menu_item_activate (BAUL_MENU_ITEM (callback_data));
@@ -147,7 +147,7 @@ extension_action_sensitive_callback (BaulMenuItem *item,
 static cairo_surface_t *
 get_action_icon (const char *icon_name,
                  int         size,
-                 GtkWidget  *parent_widget)
+                 CtkWidget  *parent_widget)
 {
     BaulIconInfo *info;
     cairo_surface_t *surface;
@@ -169,13 +169,13 @@ get_action_icon (const char *icon_name,
     return surface;
 }
 
-GtkAction *
+CtkAction *
 baul_action_from_menu_item (BaulMenuItem *item,
-                            GtkWidget    *parent_widget)
+                            CtkWidget    *parent_widget)
 {
     char *name, *label, *tip, *icon_name;
     gboolean sensitive, priority;
-    GtkAction *action;
+    CtkAction *action;
 
     g_object_get (G_OBJECT (item),
                   "name", &name, "label", &label,
@@ -224,12 +224,12 @@ baul_action_from_menu_item (BaulMenuItem *item,
     return action;
 }
 
-GtkAction *
-baul_toolbar_action_from_menu_item (BaulMenuItem *item, GtkWidget *parent_widget)
+CtkAction *
+baul_toolbar_action_from_menu_item (BaulMenuItem *item, CtkWidget *parent_widget)
 {
     char *name, *label, *tip, *icon_name;
     gboolean sensitive, priority;
-    GtkAction *action;
+    CtkAction *action;
 
     g_object_get (G_OBJECT (item),
                   "name", &name, "label", &label,

@@ -40,7 +40,7 @@ extern "C" {
     typedef struct _BaulSidebar BaulSidebar; /* dummy typedef */
     typedef struct _BaulSidebarIface BaulSidebarIface;
 
-    /* Must also be a GtkWidget */
+    /* Must also be a CtkWidget */
     struct _BaulSidebarIface
     {
         GTypeInterface g_iface;

@@ -53,7 +53,7 @@ extern "C" {
 
     struct _EelEditableLabel
     {
-        GtkWidget widget;
+        CtkWidget widget;
 
         /*< private >*/
         guint   jtype : 2;
@@ -72,9 +72,9 @@ extern "C" {
         int selection_anchor; /* cursor pos, byte index */
         int selection_end; /* byte index */
 
-        GtkWidget *popup_menu;
+        CtkWidget *popup_menu;
 
-        GtkIMContext *im_context;
+        CtkIMContext *im_context;
         gboolean need_im_reset;
         int preedit_length;	/* length of preedit string, in bytes */
         int preedit_cursor;	/* offset of cursor within preedit string, in chars */
@@ -84,17 +84,17 @@ extern "C" {
 
     struct _EelEditableLabelClass
     {
-        GtkWidgetClass parent_class;
+        CtkWidgetClass parent_class;
 
 
         void (* move_cursor)        (EelEditableLabel  *label,
-                                     GtkMovementStep    step,
+                                     CtkMovementStep    step,
                                      gint               count,
                                      gboolean           extend_selection);
         void (* insert_at_cursor)   (EelEditableLabel  *label,
                                      const gchar       *str);
         void (* delete_from_cursor) (EelEditableLabel  *label,
-                                     GtkDeleteType      type,
+                                     CtkDeleteType      type,
                                      gint               count);
         void (* cut_clipboard)      (EelEditableLabel  *label);
         void (* copy_clipboard)     (EelEditableLabel  *label);
@@ -103,17 +103,17 @@ extern "C" {
 
         /* Hook to customize right-click popup for selectable labels */
         void (* populate_popup)   (EelEditableLabel  *label,
-                                   GtkMenu           *menu);
+                                   CtkMenu           *menu);
     };
 
     GType                 eel_editable_label_get_type          (void) G_GNUC_CONST;
-    GtkWidget*            eel_editable_label_new                  (const char       *str);
+    CtkWidget*            eel_editable_label_new                  (const char       *str);
     void                  eel_editable_label_set_text             (EelEditableLabel *label,
             const char       *str);
     const gchar* eel_editable_label_get_text(EelEditableLabel* label);
     void                  eel_editable_label_set_justify          (EelEditableLabel *label,
-            GtkJustification  jtype);
-    GtkJustification      eel_editable_label_get_justify          (EelEditableLabel *label);
+            CtkJustification  jtype);
+    CtkJustification      eel_editable_label_get_justify          (EelEditableLabel *label);
     void                  eel_editable_label_set_line_wrap        (EelEditableLabel *label,
             gboolean          wrap);
     void                  eel_editable_label_set_line_wrap_mode   (EelEditableLabel *label,

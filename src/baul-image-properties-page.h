@@ -44,13 +44,13 @@ typedef struct _BaulImagePropertiesPagePrivate BaulImagePropertiesPagePrivate;
 
 typedef struct
 {
-    GtkBox parent;
+    CtkBox parent;
     BaulImagePropertiesPagePrivate *details;
 } BaulImagePropertiesPage;
 
 typedef struct
 {
-    GtkBoxClass parent;
+    CtkBoxClass parent;
 } BaulImagePropertiesPageClass;
 
 GType baul_image_properties_page_get_type (void);

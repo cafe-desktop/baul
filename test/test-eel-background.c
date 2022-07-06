@@ -9,7 +9,7 @@
 int
 main  (int argc, char *argv[])
 {
-	GtkWidget *window;
+	CtkWidget *window;
 	EelBackground *background;
 	char *image_uri;
 
