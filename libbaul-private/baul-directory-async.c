@@ -4150,7 +4150,7 @@ thumbnail_done (BaulDirectory *directory,
         {
             const char *thumb_mtime_str;
 
-            thumb_mtime_str = cdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::MTime");
+            thumb_mtime_str = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::MTime");
             if (thumb_mtime_str)
             {
                 thumb_mtime = atol (thumb_mtime_str);
@@ -4256,7 +4256,7 @@ thumbnail_loader_size_prepared (CdkPixbufLoader *loader,
             width = height * aspect_ratio;
         }
 
-        cdk_pixbuf_loader_set_size (loader, width, height);
+        gdk_pixbuf_loader_set_size (loader, width, height);
     }
 }
 
@@ -4270,7 +4270,7 @@ get_pixbuf_for_content (goffset file_len,
     gsize chunk_len;
     pixbuf = NULL;
 
-    loader = cdk_pixbuf_loader_new ();
+    loader = gdk_pixbuf_loader_new ();
     g_signal_connect (loader, "size-prepared",
                       G_CALLBACK (thumbnail_loader_size_prepared),
                       NULL);
@@ -4280,23 +4280,23 @@ get_pixbuf_for_content (goffset file_len,
     while (res && file_len > 0)
     {
         chunk_len = file_len;
-        res = cdk_pixbuf_loader_write (loader, (guchar *) file_contents, chunk_len, NULL);
+        res = gdk_pixbuf_loader_write (loader, (guchar *) file_contents, chunk_len, NULL);
         file_contents += chunk_len;
         file_len -= chunk_len;
     }
     if (res)
     {
-        res = cdk_pixbuf_loader_close (loader, NULL);
+        res = gdk_pixbuf_loader_close (loader, NULL);
     }
     if (res)
     {
-        pixbuf = g_object_ref (cdk_pixbuf_loader_get_pixbuf (loader));
+        pixbuf = g_object_ref (gdk_pixbuf_loader_get_pixbuf (loader));
     }
     g_object_unref (G_OBJECT (loader));
 
     if (pixbuf)
     {
-        pixbuf2 = cdk_pixbuf_apply_embedded_orientation (pixbuf);
+        pixbuf2 = gdk_pixbuf_apply_embedded_orientation (pixbuf);
         g_object_unref (pixbuf);
         pixbuf = pixbuf2;
     }

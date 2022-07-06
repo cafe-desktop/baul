@@ -177,7 +177,7 @@ baul_customization_data_new (const char *customization_name,
         temp_str = baul_pixmap_file ("chit_frame.png");
         if (temp_str != NULL)
         {
-            data->pattern_frame = cdk_pixbuf_new_from_file (temp_str, NULL);
+            data->pattern_frame = gdk_pixbuf_new_from_file (temp_str, NULL);
         }
         g_free (temp_str);
     }
@@ -248,7 +248,7 @@ baul_customization_data_get_next_element_for_display (BaulCustomizationData *dat
 
     image_file_name = get_file_path_for_mode (data,
                       g_file_info_get_name (current_file_info));
-    orig_pixbuf = cdk_pixbuf_new_from_file_at_scale (image_file_name,
+    orig_pixbuf = gdk_pixbuf_new_from_file_at_scale (image_file_name,
                   data->maximum_icon_width,
                   data->maximum_icon_height,
                   TRUE,
@@ -274,7 +274,7 @@ baul_customization_data_get_next_element_for_display (BaulCustomizationData *dat
     }
     else
     {
-        pixbuf = eel_cdk_pixbuf_scale_down_to_fit (orig_pixbuf,
+        pixbuf = eel_gdk_pixbuf_scale_down_to_fit (orig_pixbuf,
                  data->maximum_icon_width,
                  data->maximum_icon_height);
     }
@@ -393,15 +393,15 @@ baul_customization_make_pattern_chit (CdkPixbuf *pattern_tile, CdkPixbuf *frame,
     g_assert (pattern_tile != NULL);
     g_assert (frame != NULL);
 
-    frame_width = cdk_pixbuf_get_width (frame);
-    frame_height = cdk_pixbuf_get_height (frame);
-    pattern_width = cdk_pixbuf_get_width (pattern_tile);
-    pattern_height = cdk_pixbuf_get_height (pattern_tile);
+    frame_width = gdk_pixbuf_get_width (frame);
+    frame_height = gdk_pixbuf_get_height (frame);
+    pattern_width = gdk_pixbuf_get_width (pattern_tile);
+    pattern_height = gdk_pixbuf_get_height (pattern_tile);
 
-    pixbuf = cdk_pixbuf_copy (frame);
+    pixbuf = gdk_pixbuf_copy (frame);
 
     /* scale the pattern tile to the proper size */
-    cdk_pixbuf_scale (pattern_tile,
+    gdk_pixbuf_scale (pattern_tile,
                       pixbuf,
                       2, 2, frame_width - 8, frame_height - 8,
                       0, 0,
@@ -412,8 +412,8 @@ baul_customization_make_pattern_chit (CdkPixbuf *pattern_tile, CdkPixbuf *frame,
     /* if we're dragging, get rid of the light-colored halo */
     if (dragging)
     {
-        temp_pixbuf = cdk_pixbuf_new (CDK_COLORSPACE_RGB, TRUE, 8, frame_width - 8, frame_height - 8);
-        cdk_pixbuf_copy_area (pixbuf, 2, 2, frame_width - 8, frame_height - 8, temp_pixbuf, 0, 0);
+        temp_pixbuf = gdk_pixbuf_new (CDK_COLORSPACE_RGB, TRUE, 8, frame_width - 8, frame_height - 8);
+        gdk_pixbuf_copy_area (pixbuf, 2, 2, frame_width - 8, frame_height - 8, temp_pixbuf, 0, 0);
         g_object_unref (pixbuf);
         pixbuf = temp_pixbuf;
     }

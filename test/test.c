@@ -96,7 +96,7 @@ test_pixbuf_new_named (const char *name, float scale)
 		path = g_strdup_printf ("%s/%s", BAUL_DATADIR, name);
 	}
 
-	pixbuf = cdk_pixbuf_new_from_file (path, NULL);
+	pixbuf = gdk_pixbuf_new_from_file (path, NULL);
 
 	g_free (path);
 
@@ -104,10 +104,10 @@ test_pixbuf_new_named (const char *name, float scale)
 
 	if (scale != 1.0) {
 		CdkPixbuf *scaled;
-		float width = cdk_pixbuf_get_width (pixbuf) * scale;
-		float height = cdk_pixbuf_get_width (pixbuf) * scale;
+		float width = gdk_pixbuf_get_width (pixbuf) * scale;
+		float height = gdk_pixbuf_get_width (pixbuf) * scale;
 
-		scaled = cdk_pixbuf_scale_simple (pixbuf, width, height, CDK_INTERP_BILINEAR);
+		scaled = gdk_pixbuf_scale_simple (pixbuf, width, height, CDK_INTERP_BILINEAR);
 
 		g_object_unref (pixbuf);
 

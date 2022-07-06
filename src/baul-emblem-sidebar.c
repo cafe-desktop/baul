@@ -989,7 +989,7 @@ baul_emblem_sidebar_populate (BaulEmblemSidebar *emblem_sidebar)
     path = baul_pixmap_file ("erase.png");
     if (path != NULL)
     {
-        erase_pixbuf = cdk_pixbuf_new_from_file (path, NULL);
+        erase_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
     }
     g_free (path);
 

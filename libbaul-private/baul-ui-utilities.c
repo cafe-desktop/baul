@@ -295,7 +295,7 @@ baul_get_thumbnail_frame (void)
         image_path = baul_pixmap_file ("thumbnail_frame.png");
         if (image_path != NULL)
         {
-            thumbnail_frame = cdk_pixbuf_new_from_file (image_path, NULL);
+            thumbnail_frame = gdk_pixbuf_new_from_file (image_path, NULL);
         }
         g_free (image_path);
     }
