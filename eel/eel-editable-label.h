@@ -27,7 +27,7 @@
 #define __EEL_EDITABLE_LABEL_H__
 
 
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 #include <ctk/ctk.h>
 
 #ifdef __cplusplus

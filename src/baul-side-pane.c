@@ -23,7 +23,7 @@
 
 #include <config.h>
 
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 

@@ -26,7 +26,7 @@
 #include <ctk/ctk.h>
 #include <gio/gio.h>
 
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-ctk-macros.h>
 #include <eel/eel-vfs-extensions.h>
@@ -230,7 +230,7 @@ baul_bookmark_get_surface (BaulBookmark *bookmark,
     }
 
     pixel_size = baul_get_icon_size_for_stock_size (stock_size);
-    pixel_scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
+    pixel_scale = cdk_window_get_scale_factor (cdk_get_default_root_window ());
     info = baul_icon_info_lookup (icon, pixel_size, pixel_scale);
     result = baul_icon_info_get_surface_at_size (info, pixel_size);
     g_object_unref (info);

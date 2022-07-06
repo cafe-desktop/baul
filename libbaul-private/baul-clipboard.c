@@ -164,10 +164,10 @@ received_clipboard_contents (CtkClipboard     *clipboard,
 static void
 set_paste_sensitive_if_clipboard_contains_data (CtkActionGroup *action_group)
 {
-    if (gdk_display_supports_selection_notification (gdk_display_get_default ()))
+    if (cdk_display_supports_selection_notification (cdk_display_get_default ()))
     {
         ctk_clipboard_request_contents (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD),
-                                        gdk_atom_intern ("TARGETS", FALSE),
+                                        cdk_atom_intern ("TARGETS", FALSE),
                                         received_clipboard_contents,
                                         g_object_ref (action_group));
     }

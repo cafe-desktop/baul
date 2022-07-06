@@ -73,7 +73,7 @@ labeled_image_new (const char *text,
 
 	image = eel_labeled_image_new (text, pixbuf);
 
-	eel_gdk_pixbuf_unref_if_not_null (pixbuf);
+	eel_cdk_pixbuf_unref_if_not_null (pixbuf);
 
 	return image;
 }

@@ -23,7 +23,7 @@
 #ifndef BAUL_FILE_CHANGES_QUEUE_H
 #define BAUL_FILE_CHANGES_QUEUE_H
 
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 #include <gio/gio.h>
 
 void baul_file_changes_queue_file_added                      (GFile      *location);

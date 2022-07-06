@@ -31,8 +31,8 @@
 #include <config.h>
 #include <math.h>
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk/gdkx.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #ifdef HAVE_X11_XF86KEYSYM_H
@@ -1189,7 +1189,7 @@ baul_navigation_window_save_geometry (BaulNavigationWindow *window)
         char *geometry_string;
 
         geometry_string = eel_ctk_window_get_geometry_string (CTK_WINDOW (window));
-        is_maximized = gdk_window_get_state (ctk_widget_get_window (CTK_WIDGET (window)))
+        is_maximized = cdk_window_get_state (ctk_widget_get_window (CTK_WIDGET (window)))
                        & GDK_WINDOW_STATE_MAXIMIZED;
 
         if (!is_maximized)

@@ -25,7 +25,7 @@
 
 #include <config.h>
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
@@ -464,7 +464,7 @@ uri_is_local_image (const char *uri)
         return FALSE;
     }
 
-    pixbuf = gdk_pixbuf_new_from_file (image_path, NULL);
+    pixbuf = cdk_pixbuf_new_from_file (image_path, NULL);
     g_free (image_path);
 
     if (pixbuf == NULL)
@@ -649,16 +649,16 @@ baul_information_panel_drag_data_received (CtkWidget *widget, GdkDragContext *co
     case TARGET_CAFE_URI_LIST:
     case TARGET_URI_LIST:
         receive_dropped_uri_list (information_panel,
-                                  gdk_drag_context_get_selected_action (context), x, y, selection_data);
+                                  cdk_drag_context_get_selected_action (context), x, y, selection_data);
         break;
     case TARGET_COLOR:
         receive_dropped_color (information_panel,
-                               gdk_drag_context_get_selected_action (context), x, y, selection_data);
+                               cdk_drag_context_get_selected_action (context), x, y, selection_data);
         break;
     case TARGET_BGIMAGE:
         if (hit_test (information_panel, x, y) == BACKGROUND_PART)
             receive_dropped_uri_list (information_panel,
-                                      gdk_drag_context_get_selected_action (context), x, y, selection_data);
+                                      cdk_drag_context_get_selected_action (context), x, y, selection_data);
         break;
     case TARGET_BACKGROUND_RESET:
         background = eel_get_widget_background ( CTK_WIDGET (information_panel));

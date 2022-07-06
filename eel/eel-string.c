@@ -197,7 +197,7 @@ eel_str_capitalize (const char *string)
 }
 
 /* Note: eel_string_ellipsize_* that use a length in pixels
- * rather than characters can be found in eel_gdk_extensions.h
+ * rather than characters can be found in eel_cdk_extensions.h
  *
  * FIXME bugzilla.eazel.com 5089:
  * we should coordinate the names of eel_string_ellipsize_*

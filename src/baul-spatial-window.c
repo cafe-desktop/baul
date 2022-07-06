@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include <gdk/gdkkeysyms.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkkeysyms.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
@@ -240,7 +240,7 @@ baul_spatial_window_save_geometry (BaulSpatialWindow *window,
     if (ctk_widget_get_window (CTK_WIDGET (window)) &&
     	    ctk_widget_get_visible (CTK_WIDGET (window)) &&
 	    !BAUL_IS_DESKTOP_WINDOW (window) &&
-            !(gdk_window_get_state (ctk_widget_get_window (CTK_WIDGET(window))) & GDK_WINDOW_STATE_MAXIMIZED)) {
+            !(cdk_window_get_state (ctk_widget_get_window (CTK_WIDGET(window))) & GDK_WINDOW_STATE_MAXIMIZED)) {
 
         geometry_string = eel_ctk_window_get_geometry_string (CTK_WINDOW (window));
 
@@ -585,7 +585,7 @@ location_menu_item_activated_callback (CtkWidget *menu_item,
     }
 
     if (event != NULL) {
-        gdk_event_free (event);
+        cdk_event_free (event);
     }
 
     g_object_unref (current);

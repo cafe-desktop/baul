@@ -40,7 +40,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gdesktopappinfo.h>
@@ -250,7 +250,7 @@ main (int argc, char *argv[])
 
 	g_set_prgname ("baul");
 
-	gdk_set_allowed_backends ("x11");
+	cdk_set_allowed_backends ("x11");
 
 	if (g_file_test (DATADIR "/applications/baul.desktop", G_FILE_TEST_EXISTS)) {
 		egg_set_desktop_file (DATADIR "/applications/baul.desktop");

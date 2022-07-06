@@ -4557,7 +4557,7 @@ baul_file_get_icon (BaulFile *file,
 
 		pixbuf = baul_icon_info_get_pixbuf (icon);
 		if (pixbuf != NULL) {
-			if (!file->details->is_launcher && !gdk_pixbuf_get_has_alpha (pixbuf)) {
+			if (!file->details->is_launcher && !cdk_pixbuf_get_has_alpha (pixbuf)) {
 				baul_ui_frame_image (&pixbuf);
 			}
 			g_object_unref (icon);
@@ -4586,8 +4586,8 @@ baul_file_get_icon (BaulFile *file,
 
 			raw_pixbuf = g_object_ref (file->details->thumbnail);
 
-			w = gdk_pixbuf_get_width (raw_pixbuf);
-			h = gdk_pixbuf_get_height (raw_pixbuf);
+			w = cdk_pixbuf_get_width (raw_pixbuf);
+			h = cdk_pixbuf_get_height (raw_pixbuf);
 
 			s = MAX (w, h);
 			/* Don't scale up small thumbnails in the standard view */
@@ -4602,7 +4602,7 @@ baul_file_get_icon (BaulFile *file,
 				thumb_scale = (double) BAUL_ICON_SIZE_SMALLEST / s;
 			}
 
-			scaled_pixbuf = gdk_pixbuf_scale_simple (raw_pixbuf,
+			scaled_pixbuf = cdk_pixbuf_scale_simple (raw_pixbuf,
 								 MAX (w * thumb_scale, 1),
 								 MAX (h * thumb_scale, 1),
 								 GDK_INTERP_BILINEAR);
@@ -4611,7 +4611,7 @@ baul_file_get_icon (BaulFile *file,
 			   and for images with no alpha channel. */
 			gboolean is_image = file->details->mime_type &&
 				(strncmp (file->details->mime_type, "image/", 6) == 0);
-			if (!is_image || !gdk_pixbuf_get_has_alpha (raw_pixbuf)) {
+			if (!is_image || !cdk_pixbuf_get_has_alpha (raw_pixbuf)) {
 				baul_ui_frame_image (&scaled_pixbuf);
 			}
 

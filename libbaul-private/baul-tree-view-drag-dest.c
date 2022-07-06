@@ -115,9 +115,9 @@ ctk_tree_view_vertical_autoscroll (CtkTreeView *tree_view)
     vadjustment = ctk_scrollable_get_vadjustment (CTK_SCROLLABLE(tree_view));
 
     display = ctk_widget_get_display (CTK_WIDGET (tree_view));
-    seat = gdk_display_get_default_seat (display);
-    pointer = gdk_seat_get_pointer (seat);
-    gdk_window_get_device_position (window, pointer,
+    seat = cdk_display_get_default_seat (display);
+    pointer = cdk_seat_get_pointer (seat);
+    cdk_window_get_device_position (window, pointer,
                                     NULL, &y, NULL);
 
     y += ctk_adjustment_get_value (vadjustment);
@@ -201,8 +201,8 @@ highlight_draw (CtkWidget *widget,
     /* FIXMEchpe: is bin window right here??? */
     bin_window = ctk_tree_view_get_bin_window (CTK_TREE_VIEW (widget));
 
-    width = gdk_window_get_width(bin_window);
-    height = gdk_window_get_height(bin_window);
+    width = cdk_window_get_width(bin_window);
+    height = cdk_window_get_height(bin_window);
 
     style = ctk_widget_get_style_context (widget);
 
@@ -284,7 +284,7 @@ get_drag_data (BaulTreeViewDragDest *dest,
         return FALSE;
     }
 
-    if (target == gdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE) &&
+    if (target == cdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE) &&
             !dest->details->drop_occurred)
     {
         dest->details->drag_type = BAUL_ICON_DND_XDNDDIRECTSAVE;
@@ -474,7 +474,7 @@ get_drop_action (BaulTreeViewDragDest *dest,
 
         g_free (drop_target);
 
-        return gdk_drag_context_get_suggested_action (context);
+        return cdk_drag_context_get_suggested_action (context);
 
     case BAUL_ICON_DND_TEXT:
     case BAUL_ICON_DND_RAW:
@@ -534,7 +534,7 @@ drag_motion_callback (CtkWidget *widget,
     if (bin_window != NULL)
     {
         int bin_x, bin_y;
-        gdk_window_get_position (bin_window, &bin_x, &bin_y);
+        cdk_window_get_position (bin_window, &bin_x, &bin_y);
         if (bin_y <= y)
         {
             /* ignore drags on the header */
@@ -596,7 +596,7 @@ drag_motion_callback (CtkWidget *widget,
                            dest->details->tree_view);
     }
 
-    gdk_drag_status (context, action, time);
+    cdk_drag_status (context, action, time);
 
     return TRUE;
 }
@@ -659,7 +659,7 @@ receive_uris (BaulTreeViewDragDest *dest,
     drop_target = get_drop_target_uri_at_pos (dest, x, y);
     g_assert (drop_target != NULL);
 
-    real_action = gdk_drag_context_get_selected_action (context);
+    real_action = cdk_drag_context_get_selected_action (context);
 
     if (real_action == GDK_ACTION_ASK)
     {
@@ -745,7 +745,7 @@ receive_dropped_uri_list (BaulTreeViewDragDest *dest,
     g_signal_emit (dest, signals[HANDLE_URI_LIST], 0,
                    (char*) ctk_selection_data_get_data (dest->details->drag_data),
                    drop_target,
-                   gdk_drag_context_get_selected_action (context),
+                   cdk_drag_context_get_selected_action (context),
                    x, y);
 
     g_free (drop_target);
@@ -770,7 +770,7 @@ receive_dropped_text (BaulTreeViewDragDest *dest,
     text = ctk_selection_data_get_text (dest->details->drag_data);
     g_signal_emit (dest, signals[HANDLE_TEXT], 0,
                    (char *) text, drop_target,
-                   gdk_drag_context_get_selected_action (context),
+                   cdk_drag_context_get_selected_action (context),
                    x, y);
 
     g_free (text);
@@ -796,7 +796,7 @@ receive_dropped_raw (BaulTreeViewDragDest *dest,
     g_signal_emit (dest, signals[HANDLE_RAW], 0,
                    raw_data, length, drop_target,
                    dest->details->direct_save_uri,
-                   gdk_drag_context_get_selected_action (context),
+                   cdk_drag_context_get_selected_action (context),
                    x, y);
 
     g_free (drop_target);
@@ -820,7 +820,7 @@ receive_dropped_netscape_url (BaulTreeViewDragDest *dest,
     g_signal_emit (dest, signals[HANDLE_NETSCAPE_URL], 0,
                    (char*) ctk_selection_data_get_data (dest->details->drag_data),
                    drop_target,
-                   gdk_drag_context_get_selected_action (context),
+                   cdk_drag_context_get_selected_action (context),
                    x, y);
 
     g_free (drop_target);
@@ -875,7 +875,7 @@ receive_xds (BaulTreeViewDragDest *dest,
             && selection_data[0] == 'F')
     {
         ctk_drag_get_data (widget, context,
-                           gdk_atom_intern (BAUL_ICON_DND_RAW_TYPE,
+                           cdk_atom_intern (BAUL_ICON_DND_RAW_TYPE,
                                             FALSE),
                            time);
         return FALSE;
@@ -989,8 +989,8 @@ get_direct_save_filename (GdkDragContext *context)
     guchar *prop_text;
     gint prop_len;
 
-    if (!gdk_property_get (gdk_drag_context_get_source_window (context), gdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
-                           gdk_atom_intern ("text/plain", FALSE), 0, 1024, FALSE, NULL, NULL,
+    if (!cdk_property_get (cdk_drag_context_get_source_window (context), cdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
+                           cdk_atom_intern ("text/plain", FALSE), 0, 1024, FALSE, NULL, NULL,
                            &prop_len, &prop_text))
     {
         return NULL;
@@ -1045,9 +1045,9 @@ set_direct_save_uri (BaulTreeViewDragDest *dest,
             g_free (filename);
 
             /* Change the property */
-            gdk_property_change (gdk_drag_context_get_source_window (context),
-                                 gdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
-                                 gdk_atom_intern ("text/plain", FALSE), 8,
+            cdk_property_change (cdk_drag_context_get_source_window (context),
+                                 cdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
+                                 cdk_atom_intern ("text/plain", FALSE), 8,
                                  GDK_PROP_MODE_REPLACE, (const guchar *) uri,
                                  strlen (uri));
 

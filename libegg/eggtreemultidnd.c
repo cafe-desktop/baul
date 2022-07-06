@@ -171,7 +171,7 @@ stop_drag_check (CtkWidget *widget)
     priv_data = g_object_get_data (G_OBJECT (widget), EGG_TREE_MULTI_DND_STRING);
 
     for (l = priv_data->event_list; l != NULL; l = l->next)
-        gdk_event_free (l->data);
+        cdk_event_free (l->data);
 
     g_slist_free (priv_data->event_list);
     priv_data->event_list = NULL;
@@ -364,7 +364,7 @@ egg_tree_multi_drag_button_press_event (CtkWidget      *widget,
     if (priv_data->event_list)
     {
         /* save the event to be propagated in order */
-        priv_data->event_list = g_slist_append (priv_data->event_list, gdk_event_copy ((GdkEvent*)event));
+        priv_data->event_list = g_slist_append (priv_data->event_list, cdk_event_copy ((GdkEvent*)event));
         return TRUE;
     }
 
@@ -383,7 +383,7 @@ egg_tree_multi_drag_button_press_event (CtkWidget      *widget,
         priv_data->pressed_button = event->button;
         priv_data->x = event->x;
         priv_data->y = event->y;
-        priv_data->event_list = g_slist_append (priv_data->event_list, gdk_event_copy ((GdkEvent*)event));
+        priv_data->event_list = g_slist_append (priv_data->event_list, cdk_event_copy ((GdkEvent*)event));
         priv_data->motion_notify_handler =
             g_signal_connect (G_OBJECT (tree_view), "motion_notify_event", G_CALLBACK (egg_tree_multi_drag_motion_event), NULL);
         priv_data->button_release_handler =

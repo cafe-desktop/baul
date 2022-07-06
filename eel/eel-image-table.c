@@ -196,7 +196,7 @@ image_table_emit_signal (EelImageTable *image_table,
                          int y,
                          int button,
                          guint state,
-                         GdkEvent *gdk_event)
+                         GdkEvent *cdk_event)
 {
     EelImageTableEvent event;
 
@@ -208,7 +208,7 @@ image_table_emit_signal (EelImageTable *image_table,
     event.y = y;
     event.button = button;
     event.state = state;
-    event.event = gdk_event;
+    event.event = cdk_event;
 
     g_signal_emit (image_table,
                    image_table_signals[signal_index],

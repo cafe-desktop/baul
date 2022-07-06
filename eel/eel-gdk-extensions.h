@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-gdk-extensions.h: Graphics routines to augment what's in gdk.
+/* eel-cdk-extensions.h: Graphics routines to augment what's in cdk.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
 
@@ -26,7 +26,7 @@
 #ifndef EEL_GDK_EXTENSIONS_H
 #define EEL_GDK_EXTENSIONS_H
 
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 
 #define EEL_RGB_COLOR_RED	0xFF0000
 #define EEL_RGB_COLOR_GREEN	0x00FF00
@@ -57,7 +57,7 @@ EEL_RGBA_COLOR_PACK((r), (g), (b), 0xFF)
 #define EEL_RGBA_COLOR_GET_B(color) (((color) >> 0) & 0xff)
 #define EEL_RGBA_COLOR_GET_A(color) (((color) >> 24) & 0xff)
 
-/* Bits returned by eel_gdk_parse_geometry */
+/* Bits returned by eel_cdk_parse_geometry */
 typedef enum
 {
     EEL_GDK_NO_VALUE     = 0x00,
@@ -98,22 +98,22 @@ char *              eel_gradient_set_bottom_color_spec     (const char          
 /* A version of parse_color that substitutes a default color instead of returning
    a boolean to indicate it cannot be parsed.
 */
-void                eel_gdk_rgba_parse_with_white_default  (GdkRGBA             *parsed_color,
+void                eel_cdk_rgba_parse_with_white_default  (GdkRGBA             *parsed_color,
         const char          *color_spec);
 
 guint32             eel_rgb16_to_rgb                       (gushort              r,
         gushort              g,
         gushort              b);
-guint32             eel_gdk_rgba_to_rgb                    (const GdkRGBA       *color);
-GdkRGBA             eel_gdk_rgb_to_rgba                    (guint32              color);
+guint32             eel_cdk_rgba_to_rgb                    (const GdkRGBA       *color);
+GdkRGBA             eel_cdk_rgb_to_rgba                    (guint32              color);
 
-char *              eel_gdk_rgb_to_color_spec              (guint32              color);
+char *              eel_cdk_rgb_to_color_spec              (guint32              color);
 
-gboolean            eel_gdk_rgba_is_dark                   (const GdkRGBA       *color);
+gboolean            eel_cdk_rgba_is_dark                   (const GdkRGBA       *color);
 
 
 /* Wrapper for XParseGeometry */
-EelGdkGeometryFlags eel_gdk_parse_geometry                 (const char          *string,
+EelGdkGeometryFlags eel_cdk_parse_geometry                 (const char          *string,
         int                 *x_return,
         int                 *y_return,
         guint               *width_return,

@@ -27,10 +27,10 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <ctk/ctk.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 #include <gio/gdesktopappinfo.h>
 #include <X11/XKBlib.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <cairo-gobject.h>
 
 #include <eel/eel-glib-extensions.h>
@@ -763,11 +763,11 @@ is_shift_pressed (void)
 
     ret = FALSE;
 
-    display = gdk_display_get_default ();
-    gdk_x11_display_error_trap_push (display);
+    display = cdk_display_get_default ();
+    cdk_x11_display_error_trap_push (display);
     status = XkbGetState (GDK_DISPLAY_XDISPLAY (display),
                           XkbUseCoreKbd, &state);
-    gdk_x11_display_error_trap_pop_ignored (display);
+    cdk_x11_display_error_trap_pop_ignored (display);
 
     if (status == Success)
     {

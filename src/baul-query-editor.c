@@ -26,7 +26,7 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
 
 #include <eel/eel-ctk-macros.h>

@@ -351,18 +351,18 @@ baul_drag_default_drop_action_for_netscape_url (GdkDragContext *context)
 {
     /* Mozilla defaults to copy, but unless thats the
        only allowed thing (enforced by ctrl) we want to ASK */
-    if (gdk_drag_context_get_suggested_action (context) == GDK_ACTION_COPY &&
-            gdk_drag_context_get_actions (context) != GDK_ACTION_COPY)
+    if (cdk_drag_context_get_suggested_action (context) == GDK_ACTION_COPY &&
+            cdk_drag_context_get_actions (context) != GDK_ACTION_COPY)
     {
         return GDK_ACTION_ASK;
     }
-    else if (gdk_drag_context_get_suggested_action (context) == GDK_ACTION_MOVE)
+    else if (cdk_drag_context_get_suggested_action (context) == GDK_ACTION_MOVE)
     {
         /* Don't support move */
         return GDK_ACTION_COPY;
     }
 
-    return gdk_drag_context_get_suggested_action (context);
+    return cdk_drag_context_get_suggested_action (context);
 }
 
 static gboolean
@@ -430,18 +430,18 @@ baul_drag_default_drop_action_for_icons (GdkDragContext *context,
         return;
     }
 
-    actions = gdk_drag_context_get_actions (context) & (GDK_ACTION_MOVE | GDK_ACTION_COPY);
+    actions = cdk_drag_context_get_actions (context) & (GDK_ACTION_MOVE | GDK_ACTION_COPY);
     if (actions == 0)
     {
         /* We can't use copy or move, just go with the suggested action. */
-        *action = gdk_drag_context_get_suggested_action (context);
+        *action = cdk_drag_context_get_suggested_action (context);
         return;
     }
 
-    if (gdk_drag_context_get_suggested_action (context) == GDK_ACTION_ASK)
+    if (cdk_drag_context_get_suggested_action (context) == GDK_ACTION_ASK)
     {
         /* Don't override ask */
-        *action = gdk_drag_context_get_suggested_action (context);
+        *action = cdk_drag_context_get_suggested_action (context);
         return;
     }
 
@@ -540,7 +540,7 @@ baul_drag_default_drop_action_for_icons (GdkDragContext *context,
         }
         else
         {
-            *action = gdk_drag_context_get_suggested_action (context);
+            *action = cdk_drag_context_get_suggested_action (context);
         }
     }
     else
@@ -551,7 +551,7 @@ baul_drag_default_drop_action_for_icons (GdkDragContext *context,
         }
         else
         {
-            *action = gdk_drag_context_get_suggested_action (context);
+            *action = cdk_drag_context_get_suggested_action (context);
         }
     }
 
@@ -564,14 +564,14 @@ GdkDragAction
 baul_drag_default_drop_action_for_uri_list (GdkDragContext *context,
         const char *target_uri_string)
 {
-    if (eel_uri_is_trash (target_uri_string) && (gdk_drag_context_get_actions (context) & GDK_ACTION_MOVE))
+    if (eel_uri_is_trash (target_uri_string) && (cdk_drag_context_get_actions (context) & GDK_ACTION_MOVE))
     {
         /* Only move to Trash */
         return GDK_ACTION_MOVE;
     }
     else
     {
-        return gdk_drag_context_get_suggested_action (context);
+        return cdk_drag_context_get_suggested_action (context);
     }
 }
 
@@ -920,9 +920,9 @@ baul_drag_autoscroll_calculate_delta (CtkWidget *widget, float *x_scroll_delta, 
     g_assert (CTK_IS_WIDGET (widget));
 
     display = ctk_widget_get_display (widget);
-    seat = gdk_display_get_default_seat (display);
-    pointer = gdk_seat_get_pointer (seat);
-    gdk_window_get_device_position (ctk_widget_get_window (widget), pointer,
+    seat = cdk_display_get_default_seat (display);
+    pointer = cdk_seat_get_pointer (seat);
+    cdk_window_get_device_position (ctk_widget_get_window (widget), pointer,
                                     &x, &y, NULL);
 
     /* Find out if we are anywhere close to the tree view edges
@@ -1149,7 +1149,7 @@ out:
         ctk_drag_unhighlight (widget);
     }
 
-    gdk_drag_status (context, action, time);
+    cdk_drag_status (context, action, time);
 
     return TRUE;
 }
@@ -1278,7 +1278,7 @@ slot_proxy_handle_drop (CtkWidget                *widget,
             baul_view_drop_proxy_received_uris (target_view,
                                                 uri_list,
                                                 target_uri,
-                                                gdk_drag_context_get_selected_action (context));
+                                                cdk_drag_context_get_selected_action (context));
             g_list_free_full (uri_list, g_free);
         }
         else if (drag_info->info == BAUL_ICON_DND_URI_LIST)
@@ -1286,14 +1286,14 @@ slot_proxy_handle_drop (CtkWidget                *widget,
             baul_view_drop_proxy_received_uris (target_view,
                                                 drag_info->data.uri_list,
                                                 target_uri,
-                                                gdk_drag_context_get_selected_action (context));
+                                                cdk_drag_context_get_selected_action (context));
         }
         if (drag_info->info == BAUL_ICON_DND_NETSCAPE_URL)
         {
             baul_view_drop_proxy_received_netscape_url (target_view,
                     drag_info->data.netscape_url,
                     target_uri,
-                    gdk_drag_context_get_selected_action (context));
+                    cdk_drag_context_get_selected_action (context));
         }
 
 

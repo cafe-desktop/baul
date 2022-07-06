@@ -32,7 +32,7 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 #include <locale.h>
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 
 /* *****************************************************************
  Private fields

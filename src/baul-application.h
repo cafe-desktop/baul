@@ -28,7 +28,7 @@
 #define BAUL_APPLICATION_H
 
 #include <config.h>
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 #include <gio/gio.h>
 #include <ctk/ctk.h>
 

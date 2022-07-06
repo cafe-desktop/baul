@@ -53,10 +53,10 @@ extern "C" {
      * y2			double		RW		Bottommost coordinate of rectangle or ellipse
      * fill_color		string		W		X color specification for fill color,
      *							or NULL pointer for no color (transparent)
-     * fill_color_gdk	GdkColor*	RW		Allocated GdkColor for fill
+     * fill_color_cdk	GdkColor*	RW		Allocated GdkColor for fill
      * outline_color	string		W		X color specification for outline color,
      *							or NULL pointer for no color (transparent)
-     * outline_color_gdk	GdkColor*	RW		Allocated GdkColor for outline
+     * outline_color_cdk	GdkColor*	RW		Allocated GdkColor for outline
      * fill_stipple		GdkBitmap*	RW		Stipple pattern for fill
      * outline_stipple	GdkBitmap*	RW		Stipple pattern for outline
      * width_pixels		uint		RW		Width of the outline in pixels.  The outline will

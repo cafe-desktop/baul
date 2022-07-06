@@ -66,7 +66,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
-#include <gdk/gdkprivate.h>
+#include <cdk/cdkprivate.h>
 #include <ctk/ctk.h>
 #include <ctk/ctk-a11y.h>
 #include <glib/gi18n-lib.h>
@@ -873,7 +873,7 @@ seat_grab_prepare_window (GdkSeat *seat,
 			  GdkWindow *window,
 			  gpointer user_data)
 {
-	gdk_window_show (window);
+	cdk_window_show (window);
 }
 
 /**
@@ -884,13 +884,13 @@ seat_grab_prepare_window (GdkSeat *seat,
  * @event: The event, triggering the grab, if any.
  *
  * Specifies that all events that match the specified event mask should be sent
- * to the specified item, and also grabs the seat by calling gdk_seat_grab().
+ * to the specified item, and also grabs the seat by calling cdk_seat_grab().
  * If @cursor is not NULL, then that cursor is used while the grab is active.
  *
  * Return value: If an item was already grabbed, it returns %GDK_GRAB_ALREADY_GRABBED. If
  * the specified item was hidden by calling eel_canvas_item_hide(), then it
  * returns %GDK_GRAB_NOT_VIEWABLE. Else, it returns the result of calling
- * gdk_seat_grab().
+ * cdk_seat_grab().
  **/
 GdkGrabStatus
 eel_canvas_item_grab (EelCanvasItem *item,
@@ -913,9 +913,9 @@ eel_canvas_item_grab (EelCanvasItem *item,
         return GDK_GRAB_NOT_VIEWABLE;
 
     display = ctk_widget_get_display (CTK_WIDGET (item->canvas));
-    seat = gdk_display_get_default_seat (display);
+    seat = cdk_display_get_default_seat (display);
 
-    retval = gdk_seat_grab (seat,
+    retval = cdk_seat_grab (seat,
                             ctk_layout_get_bin_window (CTK_LAYOUT (item->canvas)),
                             GDK_SEAT_CAPABILITY_ALL_POINTING,
                             FALSE,
@@ -953,10 +953,10 @@ eel_canvas_item_ungrab (EelCanvasItem *item)
         return;
 
     display = ctk_widget_get_display (CTK_WIDGET (item->canvas));
-    seat = gdk_display_get_default_seat (display);
+    seat = cdk_display_get_default_seat (display);
 
     item->canvas->grabbed_item = NULL;
-    gdk_seat_ungrab (seat);
+    cdk_seat_ungrab (seat);
 }
 
 /**
@@ -2190,7 +2190,7 @@ eel_canvas_destroy (CtkWidget *object)
  * @void:
  *
  * Creates a new empty canvas.  If you wish to use the
- * &EelCanvasImage item inside this canvas, then you must push the gdk_imlib
+ * &EelCanvasImage item inside this canvas, then you must push the cdk_imlib
  * visual and colormap before calling this function, and they can be popped
  * afterwards.
  *
@@ -2263,8 +2263,8 @@ eel_canvas_realize (CtkWidget *widget)
 
     canvas = EEL_CANVAS (widget);
 
-    gdk_window_set_events (ctk_layout_get_bin_window (CTK_LAYOUT (canvas)),
-    		       (gdk_window_get_events (ctk_layout_get_bin_window (CTK_LAYOUT (canvas)))
+    cdk_window_set_events (ctk_layout_get_bin_window (CTK_LAYOUT (canvas)),
+    		       (cdk_window_get_events (ctk_layout_get_bin_window (CTK_LAYOUT (canvas)))
                             | GDK_EXPOSURE_MASK
                             | GDK_BUTTON_PRESS_MASK
                             | GDK_BUTTON_RELEASE_MASK
@@ -2921,7 +2921,7 @@ eel_cairo_get_clip_region (cairo_t *cr)
 
         cairo_rectangle_list_destroy (list);
 
-        if (!gdk_cairo_get_clip_rectangle (cr, &clip_rect))
+        if (!cdk_cairo_get_clip_rectangle (cr, &clip_rect))
             return NULL;
         return cairo_region_create_rectangle (&clip_rect);
     }
@@ -2956,7 +2956,7 @@ eel_canvas_draw (CtkWidget *widget, cairo_t *cr)
     GdkWindow *bin_window;
     cairo_region_t *region;
 
-    if (!gdk_cairo_get_clip_rectangle (cr, NULL))
+    if (!cdk_cairo_get_clip_rectangle (cr, NULL))
         return FALSE;
 
     bin_window = ctk_layout_get_bin_window (CTK_LAYOUT (widget));
@@ -3027,7 +3027,7 @@ eel_canvas_draw_background (EelCanvas *canvas,
     GdkRGBA color;
     GdkRGBA *c;
 
-    if (!gdk_cairo_get_clip_rectangle (cr, &rect))
+    if (!cdk_cairo_get_clip_rectangle (cr, &rect))
         return;
 
     cairo_save (cr);
@@ -3038,10 +3038,10 @@ eel_canvas_draw_background (EelCanvas *canvas,
                            CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                            &c, NULL);
     color = *c;
-    gdk_rgba_free (c);
+    cdk_rgba_free (c);
 
-    gdk_cairo_set_source_rgba (cr, &color);
-    gdk_cairo_rectangle (cr, &rect);
+    cdk_cairo_set_source_rgba (cr, &color);
+    cdk_cairo_rectangle (cr, &rect);
     cairo_fill (cr);
     cairo_restore (cr);
 }
@@ -3306,12 +3306,12 @@ eel_canvas_set_pixels_per_unit (EelCanvas *canvas, double n)
 
         attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL;
 
-        window = gdk_window_new (ctk_widget_get_parent_window (widget),
+        window = cdk_window_new (ctk_widget_get_parent_window (widget),
                                  &attributes, attributes_mask);
 
-        gdk_window_set_user_data (window, widget);
+        cdk_window_set_user_data (window, widget);
 
-        gdk_window_show (window);
+        cdk_window_show (window);
     }
 
     scroll_to (canvas, x1, y1);
@@ -3319,15 +3319,15 @@ eel_canvas_set_pixels_per_unit (EelCanvas *canvas, double n)
     /* If we created a an overlapping background None window, remove it how.
      *
      * TODO: We would like to temporarily set the bin_window background to
-     * None to avoid clearing the bin_window to the background, but gdk doesn't
+     * None to avoid clearing the bin_window to the background, but cdk doesn't
      * expose enought to let us do this, so we get a flash-effect here. At least
      * it looks better than scroll + expose.
      */
     if (window != NULL)
     {
-        gdk_window_hide (window);
-        gdk_window_set_user_data (window, NULL);
-        gdk_window_destroy (window);
+        cdk_window_hide (window);
+        cdk_window_set_user_data (window, NULL);
+        cdk_window_destroy (window);
     }
 
     canvas->need_repick = TRUE;
@@ -3469,7 +3469,7 @@ eel_canvas_request_redraw (EelCanvas *canvas, int x1, int y1, int x2, int y2)
     bbox.width = x2 - x1;
     bbox.height = y2 - y1;
 
-    gdk_window_invalidate_rect (ctk_layout_get_bin_window (CTK_LAYOUT (canvas)),
+    cdk_window_invalidate_rect (ctk_layout_get_bin_window (CTK_LAYOUT (canvas)),
                                 &bbox, FALSE);
 }
 
@@ -3701,7 +3701,7 @@ eel_canvas_item_accessible_is_item_in_window (EelCanvasItem *item,
     {
         int window_width, window_height;
 
-        gdk_window_get_geometry (ctk_widget_get_window (widget), NULL, NULL,
+        cdk_window_get_geometry (ctk_widget_get_window (widget), NULL, NULL,
                                  &window_width, &window_height);
         /*
                  * Check whether rectangles intersect
@@ -3770,13 +3770,13 @@ eel_canvas_item_accessible_get_extents (AtkComponent *component,
 
     canvas = CTK_WIDGET (item->canvas);
     window = ctk_widget_get_parent_window (canvas);
-    gdk_window_get_origin (window, &window_x, &window_y);
+    cdk_window_get_origin (window, &window_x, &window_y);
     *x = rect.x + window_x;
     *y = rect.y + window_y;
     if (coord_type == ATK_XY_WINDOW)
     {
-        window = gdk_window_get_toplevel (ctk_widget_get_window (canvas));
-        gdk_window_get_origin (window, &toplevel_x, &toplevel_y);
+        window = cdk_window_get_toplevel (ctk_widget_get_window (canvas));
+        cdk_window_get_origin (window, &toplevel_x, &toplevel_y);
         *x -= toplevel_x;
         *y -= toplevel_y;
     }

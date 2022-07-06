@@ -28,9 +28,9 @@
 #include <config.h>
 #include <math.h>
 #include <atk/atkaction.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 #include <glib/gi18n.h>
 #include <stdio.h>
 #include <string.h>
@@ -38,7 +38,7 @@
 #include <eel/eel-accessibility.h>
 #include <eel/eel-background.h>
 #include <eel/eel-vfs-extensions.h>
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-cafe-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-art-extensions.h>
@@ -360,10 +360,10 @@ icon_set_position (BaulIcon *icon,
         scale = ctk_widget_get_scale_factor (CTK_WIDGET (container));
         container_x = 0;
         container_y = 0;
-        container_width = WidthOfScreen (gdk_x11_screen_get_xscreen (gdk_screen_get_default ())) / scale - container_x
+        container_width = WidthOfScreen (cdk_x11_screen_get_xscreen (cdk_screen_get_default ())) / scale - container_x
                           - container->details->left_margin
                           - container->details->right_margin;
-        container_height = HeightOfScreen (gdk_x11_screen_get_xscreen (gdk_screen_get_default ())) / scale - container_y
+        container_height = HeightOfScreen (cdk_x11_screen_get_xscreen (cdk_screen_get_default ())) / scale - container_y
                            - container->details->top_margin
                            - container->details->bottom_margin;
         pixels_per_unit = EEL_CANVAS (container)->pixels_per_unit;
@@ -2763,10 +2763,10 @@ rubberband_timeout_callback (gpointer data)
         adj_changed = TRUE;
     }
     display = ctk_widget_get_display (widget);
-    seat = gdk_display_get_default_seat (display);
+    seat = cdk_display_get_default_seat (display);
 
-    gdk_window_get_device_position (ctk_widget_get_window (widget),
-                                    gdk_seat_get_pointer (seat),
+    cdk_window_get_device_position (ctk_widget_get_window (widget),
+                                    cdk_seat_get_pointer (seat),
                                     &x, &y, NULL);
 
     if (x < 0)
@@ -2910,7 +2910,7 @@ start_rubberbanding (BaulIconContainer *container,
 			       &c, NULL);
 
 	border_color = *c;
-	gdk_rgba_free (c);
+	cdk_rgba_free (c);
 
 	ctk_style_context_restore (context);
 
@@ -4917,16 +4917,16 @@ start_stretching (BaulIconContainer *container,
     switch (corner)
     {
     case CTK_CORNER_TOP_LEFT:
-        cursor = gdk_cursor_new_for_display (display, GDK_TOP_LEFT_CORNER);
+        cursor = cdk_cursor_new_for_display (display, GDK_TOP_LEFT_CORNER);
         break;
     case CTK_CORNER_BOTTOM_LEFT:
-        cursor = gdk_cursor_new_for_display (display, GDK_BOTTOM_LEFT_CORNER);
+        cursor = cdk_cursor_new_for_display (display, GDK_BOTTOM_LEFT_CORNER);
         break;
     case CTK_CORNER_TOP_RIGHT:
-        cursor = gdk_cursor_new_for_display (display, GDK_TOP_RIGHT_CORNER);
+        cursor = cdk_cursor_new_for_display (display, GDK_TOP_RIGHT_CORNER);
         break;
     case CTK_CORNER_BOTTOM_RIGHT:
-        cursor = gdk_cursor_new_for_display (display, GDK_BOTTOM_RIGHT_CORNER);
+        cursor = cdk_cursor_new_for_display (display, GDK_BOTTOM_RIGHT_CORNER);
         break;
     default:
         cursor = NULL;
@@ -4959,7 +4959,7 @@ start_stretching (BaulIconContainer *container,
     toplevel = ctk_widget_get_toplevel (CTK_WIDGET (container));
     if (toplevel != NULL && ctk_widget_get_realized (toplevel))
     {
-        gdk_window_focus (ctk_widget_get_window (toplevel), GDK_CURRENT_TIME);
+        cdk_window_focus (ctk_widget_get_window (toplevel), GDK_CURRENT_TIME);
     }
 
     return TRUE;
@@ -5272,24 +5272,24 @@ baul_icon_container_search_position_func (BaulIconContainer *container,
 
     cont_window = ctk_widget_get_window (CTK_WIDGET (container));
     scale = ctk_widget_get_scale_factor (CTK_WIDGET (container));
-    screen = gdk_window_get_screen (cont_window);
+    screen = cdk_window_get_screen (cont_window);
 
-    monitor_num = gdk_display_get_monitor_at_window (gdk_screen_get_display (screen),
+    monitor_num = cdk_display_get_monitor_at_window (cdk_screen_get_display (screen),
                                                      cont_window);
-    gdk_monitor_get_geometry (monitor_num, &monitor);
+    cdk_monitor_get_geometry (monitor_num, &monitor);
 
     ctk_widget_realize (search_dialog);
 
-    gdk_window_get_origin (cont_window, &cont_x, &cont_y);
+    cdk_window_get_origin (cont_window, &cont_x, &cont_y);
 
-    cont_width = gdk_window_get_width (cont_window);
-    cont_height = gdk_window_get_height (cont_window);
+    cont_width = cdk_window_get_width (cont_window);
+    cont_height = cdk_window_get_height (cont_window);
 
     ctk_widget_get_preferred_size (search_dialog, &requisition, NULL);
 
-    if (cont_x + cont_width - requisition.width > WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale)
+    if (cont_x + cont_width - requisition.width > WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale)
     {
-        x = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale - requisition.width;
+        x = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale - requisition.width;
     }
     else if (cont_x + cont_width - requisition.width < 0)
     {
@@ -5300,9 +5300,9 @@ baul_icon_container_search_position_func (BaulIconContainer *container,
         x = cont_x + cont_width - requisition.width;
     }
 
-    if (cont_y + cont_height > HeightOfScreen (gdk_x11_screen_get_xscreen (screen)))
+    if (cont_y + cont_height > HeightOfScreen (cdk_x11_screen_get_xscreen (screen)))
     {
-        y = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) - requisition.height;
+        y = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) - requisition.height;
     }
     else if (cont_y + cont_height < 0)     /* isn't really possible ... */
     {
@@ -5357,7 +5357,7 @@ send_focus_change (CtkWidget *widget, gboolean in)
 {
     GdkEvent *fevent;
 
-    fevent = gdk_event_new (GDK_FOCUS_CHANGE);
+    fevent = cdk_event_new (GDK_FOCUS_CHANGE);
 
     g_object_ref (widget);
     ((GdkEventFocus *) fevent)->in = in;
@@ -5373,7 +5373,7 @@ send_focus_change (CtkWidget *widget, gboolean in)
     g_object_notify (G_OBJECT (widget), "has-focus");
 
     g_object_unref (widget);
-    gdk_event_free (fevent);
+    cdk_event_free (fevent);
 }
 
 static void
@@ -6056,7 +6056,7 @@ key_press_event (CtkWidget *widget,
 
         /* Make a copy of the current text */
         old_text = g_strdup (ctk_entry_get_text (CTK_ENTRY (container->details->search_entry)));
-        new_event = gdk_event_copy ((GdkEvent *) event);
+        new_event = cdk_event_copy ((GdkEvent *) event);
         window = ((GdkEventKey *) new_event)->window;
         ((GdkEventKey *) new_event)->window = ctk_widget_get_window (container->details->search_entry);
         ctk_widget_realize (container->details->search_window);
@@ -6068,8 +6068,8 @@ key_press_event (CtkWidget *widget,
         screen = ctk_widget_get_screen (CTK_WIDGET (container));
         scale = ctk_widget_get_scale_factor (CTK_WIDGET (container));
         ctk_window_move (CTK_WINDOW (container->details->search_window),
-                         WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale + 1,
-                         HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale + 1);
+                         WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale + 1,
+                         HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale + 1);
         ctk_widget_show (container->details->search_window);
 
         /* Send the event to the window.  If the preedit_changed signal is emitted
@@ -6102,7 +6102,7 @@ key_press_event (CtkWidget *widget,
         }
 
         ((GdkEventKey *) new_event)->window = window;
-        gdk_event_free (new_event);
+        cdk_event_free (new_event);
     }
 
     return handled;

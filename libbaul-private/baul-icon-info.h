@@ -2,8 +2,8 @@
 #define BAUL_ICON_INFO_H
 
 #include <glib-object.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk/gdk.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <cdk/cdk.h>
 #include <gio/gio.h>
 #include <ctk/ctk.h>
 

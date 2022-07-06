@@ -521,7 +521,7 @@ static void
 eel_canvas_set_source_color (cairo_t *cr,
 			     GdkRGBA *rgba)
 {
-	gdk_cairo_set_source_rgba (cr, rgba);
+	cdk_cairo_set_source_rgba (cr, rgba);
 }
 
 #define DASH_ON 0.8

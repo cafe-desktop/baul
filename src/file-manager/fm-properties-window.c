@@ -27,12 +27,12 @@
 #include <cairo.h>
 
 #include <ctk/ctk.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <glib/gi18n.h>
 #include <sys/stat.h>
 
 #include <eel/eel-accessibility.h>
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-cafe-extensions.h>
 #include <eel/eel-ctk-extensions.h>
@@ -430,7 +430,7 @@ update_properties_window_icon (FMPropertiesWindow *window)
 		ctk_window_set_icon (CTK_WINDOW (window), pixbuf);
 	}
 
-	surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, ctk_widget_get_scale_factor (CTK_WIDGET (window)),
+	surface = cdk_cairo_surface_create_from_pixbuf (pixbuf, ctk_widget_get_scale_factor (CTK_WIDGET (window)),
 							ctk_widget_get_window (CTK_WIDGET (window)));
 	ctk_image_set_from_surface (CTK_IMAGE (window->details->icon_image), surface);
 
@@ -451,7 +451,7 @@ uri_is_local_image (const char *uri)
 		return FALSE;
 	}
 
-	pixbuf = gdk_pixbuf_new_from_file (image_path, NULL);
+	pixbuf = cdk_pixbuf_new_from_file (image_path, NULL);
 	g_free (image_path);
 
 	if (pixbuf == NULL) {
@@ -2737,10 +2737,10 @@ paint_used_legend (CtkWidget *widget,
 			  width - 4,
 			  height - 4);
 
-	gdk_cairo_set_source_rgba (cr, &window->details->used_color);
+	cdk_cairo_set_source_rgba (cr, &window->details->used_color);
 	cairo_fill_preserve (cr);
 
-	gdk_cairo_set_source_rgba (cr, &window->details->used_stroke_color);
+	cdk_cairo_set_source_rgba (cr, &window->details->used_stroke_color);
 	cairo_stroke (cr);
 }
 
@@ -2764,10 +2764,10 @@ paint_free_legend (CtkWidget *widget,
 			 width - 4,
 			 height - 4);
 
-	gdk_cairo_set_source_rgba (cr, &window->details->free_color);
+	cdk_cairo_set_source_rgba (cr, &window->details->free_color);
 	cairo_fill_preserve(cr);
 
-	gdk_cairo_set_source_rgba (cr, &window->details->free_stroke_color);
+	cdk_cairo_set_source_rgba (cr, &window->details->free_stroke_color);
 	cairo_stroke (cr);
 }
 
@@ -2824,10 +2824,10 @@ paint_pie_chart (CtkWidget *widget,
 			cairo_line_to (cr,xc,yc);
 		}
 
-		gdk_cairo_set_source_rgba (cr, &window->details->used_color);
+		cdk_cairo_set_source_rgba (cr, &window->details->used_color);
 		cairo_fill_preserve (cr);
 
-		gdk_cairo_set_source_rgba (cr, &window->details->used_stroke_color);
+		cdk_cairo_set_source_rgba (cr, &window->details->used_stroke_color);
 
 		cairo_stroke (cr);
 	}
@@ -2844,10 +2844,10 @@ paint_pie_chart (CtkWidget *widget,
 		}
 
 
-		gdk_cairo_set_source_rgba (cr, &window->details->free_color);
+		cdk_cairo_set_source_rgba (cr, &window->details->free_color);
 		cairo_fill_preserve(cr);
 
-		gdk_cairo_set_source_rgba (cr, &window->details->free_stroke_color);
+		cdk_cairo_set_source_rgba (cr, &window->details->free_stroke_color);
 
 		cairo_stroke (cr);
 	}
@@ -3524,8 +3524,8 @@ start_long_operation (FMPropertiesWindow *window)
 		GdkCursor * cursor;
 
 		display = ctk_widget_get_display (CTK_WIDGET (window));
-		cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
-		gdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), cursor);
+		cursor = cdk_cursor_new_for_display (display, GDK_WATCH);
+		cdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), cursor);
 		g_object_unref (cursor);
 	}
 	window->details->long_operation_underway ++;
@@ -3537,7 +3537,7 @@ end_long_operation (FMPropertiesWindow *window)
 	if (ctk_widget_get_window (CTK_WIDGET (window)) != NULL &&
 	    window->details->long_operation_underway == 1) {
 		/* finished !! */
-		gdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), NULL);
+		cdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), NULL);
 	}
 	window->details->long_operation_underway--;
 }
@@ -5659,7 +5659,7 @@ update_preview_callback (CtkFileChooser *icon_chooser,
 
 	filename = ctk_file_chooser_get_filename (icon_chooser);
 	if (filename != NULL) {
-		pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+		pixbuf = cdk_pixbuf_new_from_file (filename, NULL);
 	}
 
 	if (pixbuf != NULL) {
@@ -5668,13 +5668,13 @@ update_preview_callback (CtkFileChooser *icon_chooser,
 		preview_widget = ctk_file_chooser_get_preview_widget (icon_chooser);
 		ctk_file_chooser_set_preview_widget_active (icon_chooser, TRUE);
 
-		if (gdk_pixbuf_get_width (pixbuf) > PREVIEW_IMAGE_WIDTH) {
+		if (cdk_pixbuf_get_width (pixbuf) > PREVIEW_IMAGE_WIDTH) {
 			double scale;
 
-			scale = (double)gdk_pixbuf_get_height (pixbuf) /
-				gdk_pixbuf_get_width (pixbuf);
+			scale = (double)cdk_pixbuf_get_height (pixbuf) /
+				cdk_pixbuf_get_width (pixbuf);
 
-			scaled_pixbuf = gdk_pixbuf_scale_simple
+			scaled_pixbuf = cdk_pixbuf_scale_simple
 				(pixbuf,
 				 PREVIEW_IMAGE_WIDTH,
 				 scale * PREVIEW_IMAGE_WIDTH,

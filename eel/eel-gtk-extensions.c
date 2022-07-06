@@ -29,7 +29,7 @@
 #include <config.h>
 #include "eel-ctk-extensions.h"
 
-#include "eel-gdk-pixbuf-extensions.h"
+#include "eel-cdk-pixbuf-extensions.h"
 #include "eel-glib-extensions.h"
 #include "eel-cafe-extensions.h"
 #include "eel-marshal.h"
@@ -37,9 +37,9 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-#include <gdk/gdk.h>
-#include <gdk/gdkprivate.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdk.h>
+#include <cdk/cdkprivate.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n-lib.h>
 #include <math.h>
@@ -92,8 +92,8 @@ sanity_check_window_position (int *left, int *top)
     g_assert (left != NULL);
     g_assert (top != NULL);
 
-    screen = gdk_screen_get_default ();
-    scale = gdk_window_get_scale_factor (gdk_screen_get_root_window (screen));
+    screen = cdk_screen_get_default ();
+    scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
 
     /* Make sure the top of the window is on screen, for
      * draggability (might not be necessary with all window managers,
@@ -101,7 +101,7 @@ sanity_check_window_position (int *left, int *top)
      * isn't off the bottom of the screen, or so close to the bottom
      * that it might be obscured by the panel.
      */
-    *top = CLAMP (*top, 0, HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale - MINIMUM_ON_SCREEN_HEIGHT);
+    *top = CLAMP (*top, 0, HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale - MINIMUM_ON_SCREEN_HEIGHT);
 
     /* FIXME bugzilla.eazel.com 669:
      * If window has negative left coordinate, set_uposition sends it
@@ -114,7 +114,7 @@ sanity_check_window_position (int *left, int *top)
      * the screen, or so close to the right edge that it might be
      * obscured by the panel.
      */
-    *left = CLAMP (*left, 0, WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale - MINIMUM_ON_SCREEN_WIDTH);
+    *left = CLAMP (*left, 0, WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale - MINIMUM_ON_SCREEN_WIDTH);
 }
 
 static void
@@ -126,16 +126,16 @@ sanity_check_window_dimensions (guint *width, guint *height)
     g_assert (width != NULL);
     g_assert (height != NULL);
 
-    screen = gdk_screen_get_default ();
-    scale = gdk_window_get_scale_factor (gdk_screen_get_root_window (screen));
+    screen = cdk_screen_get_default ();
+    scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
 
     /* Pin the size of the window to the screen, so we don't end up in
      * a state where the window is so big essential parts of it can't
      * be reached (might not be necessary with all window managers,
      * but seems reasonable anyway).
      */
-    *width = MIN (*width, WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale);
-    *height = MIN (*height, HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale);
+    *width = MIN (*width, WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale);
+    *height = MIN (*height, HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale);
 }
 
 /**
@@ -183,8 +183,8 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
 
         screen = ctk_window_get_screen (window);
         scale = ctk_widget_get_scale_factor (CTK_WIDGET (window));
-        screen_width  = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
-        screen_height = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
+        screen_width  = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
+        screen_height = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
 
         /* This is sub-optimal. GDK doesn't allow us to set win_gravity
          * to South/East types, which should be done if using negative
@@ -222,7 +222,7 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
  * some sanity-checking on the passed-in values.
  *
  * @window: A non-visible CtkWindow
- * @geometry_string: A string suitable for use with eel_gdk_parse_geometry
+ * @geometry_string: A string suitable for use with eel_cdk_parse_geometry
  * @minimum_width: If the width from the string is smaller than this,
  * use this for the width.
  * @minimum_height: If the height from the string is smaller than this,
@@ -249,7 +249,7 @@ eel_ctk_window_set_initial_geometry_from_string (CtkWindow *window,
      */
     g_return_if_fail (!ctk_widget_get_visible (CTK_WIDGET (window)));
 
-    geometry_flags = eel_gdk_parse_geometry (geometry_string, &left, &top, &width, &height);
+    geometry_flags = eel_cdk_parse_geometry (geometry_string, &left, &top, &width, &height);
 
     /* Make sure the window isn't smaller than makes sense for this window.
      * Other sanity checks are performed in set_initial_geometry.

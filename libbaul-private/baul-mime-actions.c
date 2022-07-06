@@ -27,7 +27,7 @@
 
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkx.h>
 
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-stock-dialogs.h>

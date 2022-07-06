@@ -30,7 +30,7 @@
 #include <unistd.h>
 
 #include <ctk/ctk.h>
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-cafe-extensions.h>

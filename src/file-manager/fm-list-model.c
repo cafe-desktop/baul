@@ -277,7 +277,7 @@ fm_list_model_get_icon_scale (FMListModel *model)
                    &retval);
 
     if (retval == -1) {
-        retval = gdk_monitor_get_scale_factor (gdk_display_get_monitor (gdk_display_get_default (), 0));
+        retval = cdk_monitor_get_scale_factor (cdk_display_get_monitor (cdk_display_get_default (), 0));
     }
 
     return retval;
@@ -447,7 +447,7 @@ fm_list_model_get_value (CtkTreeModel *tree_model, CtkTreeIter *iter, int column
                 }
             }
 
-            surface = gdk_cairo_surface_create_from_pixbuf (icon, icon_scale, NULL);
+            surface = cdk_cairo_surface_create_from_pixbuf (icon, icon_scale, NULL);
             g_value_take_boxed (value, surface);
             g_object_unref (icon);
         }

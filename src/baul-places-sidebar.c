@@ -25,7 +25,7 @@
 #include <config.h>
 #include <cairo-gobject.h>
 
-#include <gdk/gdkkeysyms.h>
+#include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
@@ -241,7 +241,7 @@ get_eject_icon (gboolean highlighted)
     int icon_size, icon_scale;
 
     icon_size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
-    icon_scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
+    icon_scale = cdk_window_get_scale_factor (cdk_get_default_root_window ());
 
     eject_icon_info = baul_icon_info_lookup_from_name ("media-eject", icon_size, icon_scale);
     eject = baul_icon_info_get_pixbuf_at_size (eject_icon_info, icon_size);
@@ -253,7 +253,7 @@ get_eject_icon (gboolean highlighted)
         eject = high;
     }
 
-    eject_surface = gdk_cairo_surface_create_from_pixbuf (eject, icon_scale, NULL);
+    eject_surface = cdk_cairo_surface_create_from_pixbuf (eject, icon_scale, NULL);
 
     g_object_unref (eject_icon_info);
     g_object_unref (eject);
@@ -368,7 +368,7 @@ add_place (BaulPlacesSidebar *sidebar,
 
     if (pixbuf != NULL)
     {
-       surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, icon_scale, NULL);
+       surface = cdk_cairo_surface_create_from_pixbuf (pixbuf, icon_scale, NULL);
        g_object_unref (pixbuf);
     }
     else
@@ -1326,11 +1326,11 @@ drag_motion_callback (CtkTreeView *tree_view,
 
     if (action != 0)
     {
-        gdk_drag_status (context, action, time);
+        cdk_drag_status (context, action, time);
     }
     else
     {
-        gdk_drag_status (context, 0, time);
+        cdk_drag_status (context, 0, time);
     }
 
     return TRUE;
@@ -1590,13 +1590,13 @@ drag_data_received_callback (CtkWidget *widget,
         GdkDragAction real_action;
 
         /* file transfer requested */
-        real_action = gdk_drag_context_get_selected_action (context);
+        real_action = cdk_drag_context_get_selected_action (context);
 
         if (real_action == GDK_ACTION_ASK)
         {
             real_action =
                 baul_drag_drop_action_ask (CTK_WIDGET (tree_view),
-                                           gdk_drag_context_get_actions (context));
+                                           cdk_drag_context_get_actions (context));
         }
 
         if (real_action > 0)

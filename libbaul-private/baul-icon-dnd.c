@@ -36,13 +36,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <gdk/gdkkeysyms.h>
-#include <gdk/gdkx.h>
+#include <cdk/cdkkeysyms.h>
+#include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-background.h>
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-cafe-extensions.h>
 #include <eel/eel-graphic-effects.h>
@@ -397,8 +397,8 @@ get_direct_save_filename (GdkDragContext *context)
     guchar *prop_text;
     gint prop_len;
 
-    if (!gdk_property_get (gdk_drag_context_get_source_window (context), gdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
-                           gdk_atom_intern ("text/plain", FALSE), 0, 1024, FALSE, NULL, NULL,
+    if (!cdk_property_get (cdk_drag_context_get_source_window (context), cdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
+                           cdk_atom_intern ("text/plain", FALSE), 0, 1024, FALSE, NULL, NULL,
                            &prop_len, &prop_text))
     {
         return NULL;
@@ -454,9 +454,9 @@ set_direct_save_uri (CtkWidget *widget, GdkDragContext *context, BaulDragInfo *d
         g_object_unref (child);
 
         /* Change the uri property */
-        gdk_property_change (gdk_drag_context_get_source_window (context),
-                             gdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
-                             gdk_atom_intern ("text/plain", FALSE), 8,
+        cdk_property_change (cdk_drag_context_get_source_window (context),
+                             cdk_atom_intern (BAUL_ICON_DND_XDNDDIRECTSAVE_TYPE, FALSE),
+                             cdk_atom_intern ("text/plain", FALSE), 8,
                              GDK_PROP_MODE_REPLACE, (const guchar *) uri,
                              strlen (uri));
 
@@ -768,7 +768,7 @@ receive_dropped_netscape_url (BaulIconContainer *container, const char *encoded_
     g_signal_emit_by_name (container, "handle_netscape_url",
                            encoded_url,
                            drop_target,
-                           gdk_drag_context_get_selected_action (context),
+                           cdk_drag_context_get_selected_action (context),
                            x, y);
 
     g_free (drop_target);
@@ -790,7 +790,7 @@ receive_dropped_uri_list (BaulIconContainer *container, const char *uri_list, Gd
     g_signal_emit_by_name (container, "handle_uri_list",
                            uri_list,
                            drop_target,
-                           gdk_drag_context_get_selected_action (context),
+                           cdk_drag_context_get_selected_action (context),
                            x, y);
 
     g_free (drop_target);
@@ -812,7 +812,7 @@ receive_dropped_text (BaulIconContainer *container, const char *text, GdkDragCon
     g_signal_emit_by_name (container, "handle_text",
                            text,
                            drop_target,
-                           gdk_drag_context_get_selected_action (context),
+                           cdk_drag_context_get_selected_action (context),
                            x, y);
 
     g_free (drop_target);
@@ -836,7 +836,7 @@ receive_dropped_raw (BaulIconContainer *container, const char *raw_data, int len
                            length,
                            drop_target,
                            direct_save_uri,
-                           gdk_drag_context_get_selected_action (context),
+                           cdk_drag_context_get_selected_action (context),
                            x, y);
 
     g_free (drop_target);
@@ -983,7 +983,7 @@ handle_local_move (BaulIconContainer *container,
 
             screen = ctk_widget_get_screen (CTK_WIDGET (container));
             g_snprintf (screen_string, sizeof (screen_string), "%d",
-                        gdk_x11_screen_get_screen_number (screen));
+                        cdk_x11_screen_get_screen_number (screen));
             baul_file_set_metadata (file,
                                     BAUL_METADATA_KEY_SCREEN,
                                     NULL, screen_string);
@@ -1240,7 +1240,7 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
         return;
     }
 
-    real_action = gdk_drag_context_get_selected_action (context);
+    real_action = cdk_drag_context_get_selected_action (context);
 
     if (real_action == GDK_ACTION_ASK)
     {
@@ -1364,7 +1364,7 @@ baul_icon_container_get_drop_action (BaulIconContainer *container,
     case BAUL_ICON_DND_KEYWORD:
         if (icon != NULL)
         {
-            *action = gdk_drag_context_get_suggested_action (context);
+            *action = cdk_drag_context_get_suggested_action (context);
         }
         break;
 
@@ -1376,7 +1376,7 @@ baul_icon_container_get_drop_action (BaulIconContainer *container,
     case BAUL_ICON_DND_BGIMAGE:
     case BAUL_ICON_DND_RESET_BACKGROUND:
     case BAUL_ICON_DND_ROOTWINDOW_DROP:
-        *action = gdk_drag_context_get_suggested_action (context);
+        *action = cdk_drag_context_get_suggested_action (context);
         break;
 
     case BAUL_ICON_DND_TEXT:
@@ -1578,8 +1578,8 @@ drag_highlight_draw (CtkWidget *widget,
     CtkStyleContext *style;
 
     window = ctk_widget_get_window (widget);
-    width = gdk_window_get_width (window);
-    height = gdk_window_get_height (window);
+    width = cdk_window_get_width (window);
+    height = cdk_window_get_height (window);
 
     style = ctk_widget_get_style_context (widget);
 
@@ -1697,7 +1697,7 @@ drag_motion_callback (CtkWidget *widget,
         start_dnd_highlight (widget);
     }
 
-    gdk_drag_status (context, action, time);
+    cdk_drag_status (context, action, time);
 
     return TRUE;
 }
@@ -1822,14 +1822,14 @@ drag_data_received_callback (CtkWidget *widget,
         case BAUL_ICON_DND_COLOR:
             receive_dropped_color (BAUL_ICON_CONTAINER (widget),
                                    x, y,
-                                   gdk_drag_context_get_selected_action (context),
+                                   cdk_drag_context_get_selected_action (context),
                                    data);
             success = TRUE;
             break;
         case BAUL_ICON_DND_BGIMAGE:
             receive_dropped_tile_image
             (BAUL_ICON_CONTAINER (widget),
-             gdk_drag_context_get_selected_action (context),
+             cdk_drag_context_get_selected_action (context),
              data);
             break;
         case BAUL_ICON_DND_KEYWORD:
@@ -1892,7 +1892,7 @@ drag_data_received_callback (CtkWidget *widget,
                     selection_data[0] == 'F')
             {
                 ctk_drag_get_data (widget, context,
-                                   gdk_atom_intern (BAUL_ICON_DND_RAW_TYPE,
+                                   cdk_atom_intern (BAUL_ICON_DND_RAW_TYPE,
                                                     FALSE),
                                    time);
                 return;
@@ -1913,7 +1913,7 @@ drag_data_received_callback (CtkWidget *widget,
                 baul_file_changes_queue_schedule_position_set (
                     location,
                     p,
-                    gdk_x11_screen_get_screen_number (
+                    cdk_x11_screen_get_screen_number (
                         ctk_widget_get_screen (widget)));
                 g_object_unref (location);
                 baul_file_changes_consume_changes (TRUE);

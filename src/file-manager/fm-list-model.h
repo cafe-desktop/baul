@@ -23,7 +23,7 @@
 */
 
 #include <ctk/ctk.h>
-#include <gdk/gdk.h>
+#include <cdk/cdk.h>
 
 #include <libbaul-private/baul-file.h>
 #include <libbaul-private/baul-directory.h>

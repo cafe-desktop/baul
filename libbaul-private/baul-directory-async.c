@@ -4150,7 +4150,7 @@ thumbnail_done (BaulDirectory *directory,
         {
             const char *thumb_mtime_str;
 
-            thumb_mtime_str = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::MTime");
+            thumb_mtime_str = cdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::MTime");
             if (thumb_mtime_str)
             {
                 thumb_mtime = atol (thumb_mtime_str);
@@ -4256,7 +4256,7 @@ thumbnail_loader_size_prepared (GdkPixbufLoader *loader,
             width = height * aspect_ratio;
         }
 
-        gdk_pixbuf_loader_set_size (loader, width, height);
+        cdk_pixbuf_loader_set_size (loader, width, height);
     }
 }
 
@@ -4270,33 +4270,33 @@ get_pixbuf_for_content (goffset file_len,
     gsize chunk_len;
     pixbuf = NULL;
 
-    loader = gdk_pixbuf_loader_new ();
+    loader = cdk_pixbuf_loader_new ();
     g_signal_connect (loader, "size-prepared",
                       G_CALLBACK (thumbnail_loader_size_prepared),
                       NULL);
 
-    /* For some reason we have to write in chunks, or gdk-pixbuf fails */
+    /* For some reason we have to write in chunks, or cdk-pixbuf fails */
     res = TRUE;
     while (res && file_len > 0)
     {
         chunk_len = file_len;
-        res = gdk_pixbuf_loader_write (loader, (guchar *) file_contents, chunk_len, NULL);
+        res = cdk_pixbuf_loader_write (loader, (guchar *) file_contents, chunk_len, NULL);
         file_contents += chunk_len;
         file_len -= chunk_len;
     }
     if (res)
     {
-        res = gdk_pixbuf_loader_close (loader, NULL);
+        res = cdk_pixbuf_loader_close (loader, NULL);
     }
     if (res)
     {
-        pixbuf = g_object_ref (gdk_pixbuf_loader_get_pixbuf (loader));
+        pixbuf = g_object_ref (cdk_pixbuf_loader_get_pixbuf (loader));
     }
     g_object_unref (G_OBJECT (loader));
 
     if (pixbuf)
     {
-        pixbuf2 = gdk_pixbuf_apply_embedded_orientation (pixbuf);
+        pixbuf2 = cdk_pixbuf_apply_embedded_orientation (pixbuf);
         g_object_unref (pixbuf);
         pixbuf = pixbuf2;
     }
