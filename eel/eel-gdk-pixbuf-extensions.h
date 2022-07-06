@@ -30,17 +30,17 @@
 #include <cdk/cdk.h>
 #include <gio/gio.h>
 
-/* Loading a GdkPixbuf with a URI. */
-GdkPixbuf *          eel_cdk_pixbuf_load                      (const char            *uri);
-GdkPixbuf *          eel_cdk_pixbuf_load_from_stream          (GInputStream          *stream);
-GdkPixbuf *          eel_cdk_pixbuf_load_from_stream_at_size  (GInputStream          *stream,
+/* Loading a CdkPixbuf with a URI. */
+CdkPixbuf *          eel_cdk_pixbuf_load                      (const char            *uri);
+CdkPixbuf *          eel_cdk_pixbuf_load_from_stream          (GInputStream          *stream);
+CdkPixbuf *          eel_cdk_pixbuf_load_from_stream_at_size  (GInputStream          *stream,
         int                    size);
 
 
-GdkPixbuf *          eel_cdk_pixbuf_scale_down_to_fit         (GdkPixbuf             *pixbuf,
+CdkPixbuf *          eel_cdk_pixbuf_scale_down_to_fit         (CdkPixbuf             *pixbuf,
         int                    max_width,
         int                    max_height);
-GdkPixbuf *          eel_cdk_pixbuf_scale_to_fit              (GdkPixbuf             *pixbuf,
+CdkPixbuf *          eel_cdk_pixbuf_scale_to_fit              (CdkPixbuf             *pixbuf,
         int                    max_width,
         int                    max_height);
 double               eel_cdk_scale_to_fit_factor              (int                    width,
@@ -49,7 +49,7 @@ double               eel_cdk_scale_to_fit_factor              (int              
         int                    max_height,
         int                   *scaled_width,
         int                   *scaled_height);
-GdkPixbuf *          eel_cdk_pixbuf_scale_to_min              (GdkPixbuf             *pixbuf,
+CdkPixbuf *          eel_cdk_pixbuf_scale_to_min              (CdkPixbuf             *pixbuf,
         int                    min_width,
         int                    min_height);
 double              eel_cdk_scale_to_min_factor               (int                   width,
@@ -61,14 +61,14 @@ double              eel_cdk_scale_to_min_factor               (int              
 
 
 /* Save a pixbuf to a png file.  Return value indicates succss/TRUE or failure/FALSE */
-gboolean             eel_cdk_pixbuf_save_to_file              (const GdkPixbuf       *pixbuf,
+gboolean             eel_cdk_pixbuf_save_to_file              (const CdkPixbuf       *pixbuf,
         const char            *file_name);
-void                 eel_cdk_pixbuf_ref_if_not_null           (GdkPixbuf             *pixbuf_or_null);
-void                 eel_cdk_pixbuf_unref_if_not_null         (GdkPixbuf             *pixbuf_or_null);
+void                 eel_cdk_pixbuf_ref_if_not_null           (CdkPixbuf             *pixbuf_or_null);
+void                 eel_cdk_pixbuf_unref_if_not_null         (CdkPixbuf             *pixbuf_or_null);
 
 
 /* Scales large pixbufs down fast */
-GdkPixbuf *          eel_cdk_pixbuf_scale_down                (GdkPixbuf *pixbuf,
+CdkPixbuf *          eel_cdk_pixbuf_scale_down                (CdkPixbuf *pixbuf,
         int dest_width,
         int dest_height);
 

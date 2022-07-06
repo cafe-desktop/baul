@@ -188,7 +188,7 @@ row_activated_callback (CtkTreeView *tree_view,
 
 static gboolean
 button_press_event_callback (CtkWidget *widget,
-                             GdkEventButton *event,
+                             CdkEventButton *event,
                              gpointer user_data)
 {
     if (event->button == 2 && event->type == GDK_BUTTON_PRESS)
@@ -347,7 +347,7 @@ baul_history_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show History"));
 }
 
-static GdkPixbuf *
+static CdkPixbuf *
 baul_history_sidebar_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;

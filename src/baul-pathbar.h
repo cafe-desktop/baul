@@ -73,7 +73,7 @@ struct _BaulPathBarClass
                              GFile             *location);
 
     void (* path_event)     (BaulPathBar  *path_bar,
-                             GdkEventButton   *event,
+                             CdkEventButton   *event,
                              GFile            *location);
 };
 

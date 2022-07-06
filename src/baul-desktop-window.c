@@ -149,7 +149,7 @@ baul_desktop_window_update_directory (BaulDesktopWindow *window)
 }
 
 static void
-baul_desktop_window_screen_size_changed (GdkScreen             *screen,
+baul_desktop_window_screen_size_changed (CdkScreen             *screen,
         BaulDesktopWindow *window)
 {
     int width_request, height_request;
@@ -168,7 +168,7 @@ baul_desktop_window_screen_size_changed (GdkScreen             *screen,
 
 BaulDesktopWindow *
 baul_desktop_window_new (BaulApplication *application,
-                         GdkScreen           *screen)
+                         CdkScreen           *screen)
 {
     BaulDesktopWindow *window;
     int width_request, height_request;
@@ -192,7 +192,7 @@ baul_desktop_window_new (BaulApplication *application,
     ctk_window_set_default_size (CTK_WINDOW (window), -1, -1);
 
     /* Special sawmill setting*/
-    GdkWindow *cdkwin;
+    CdkWindow *cdkwin;
     ctk_widget_realize (CTK_WIDGET (window));
     cdkwin = ctk_widget_get_window (CTK_WIDGET (window));
     if (cdk_window_ensure_native (cdkwin)) {
@@ -229,7 +229,7 @@ unrealize (CtkWidget *widget)
 {
     BaulDesktopWindow *window;
     BaulDesktopWindowPrivate *details;
-    GdkWindow *root_window;
+    CdkWindow *root_window;
 
     window = BAUL_DESKTOP_WINDOW (widget);
     details = window->details;
@@ -250,9 +250,9 @@ unrealize (CtkWidget *widget)
 }
 
 static void
-set_wmspec_desktop_hint (GdkWindow *window)
+set_wmspec_desktop_hint (CdkWindow *window)
 {
-    GdkAtom atom;
+    CdkAtom atom;
 
     atom = cdk_atom_intern ("_NET_WM_WINDOW_TYPE_DESKTOP", FALSE);
 
@@ -264,12 +264,12 @@ set_wmspec_desktop_hint (GdkWindow *window)
 
 static void
 set_desktop_window_id (BaulDesktopWindow *window,
-                       GdkWindow             *cdkwindow)
+                       CdkWindow             *cdkwindow)
 {
     /* Tuck the desktop windows xid in the root to indicate we own the desktop.
      */
     Window window_xid;
-    GdkWindow *root_window;
+    CdkWindow *root_window;
 
     root_window = cdk_screen_get_root_window (
                       ctk_window_get_screen (CTK_WINDOW (window)));

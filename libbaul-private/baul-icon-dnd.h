@@ -47,9 +47,9 @@ typedef struct
 void   baul_icon_dnd_init                  (BaulIconContainer *container);
 void   baul_icon_dnd_fini                  (BaulIconContainer *container);
 void   baul_icon_dnd_begin_drag            (BaulIconContainer *container,
-        GdkDragAction          actions,
+        CdkDragAction          actions,
         gint                   button,
-        GdkEventMotion        *event,
+        CdkEventMotion        *event,
         int                    start_x,
         int                    start_y);
 void   baul_icon_dnd_end_drag              (BaulIconContainer *container);

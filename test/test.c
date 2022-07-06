@@ -23,7 +23,7 @@ test_quit (int exit_code)
 
 void
 test_delete_event (CtkWidget *widget,
-		   GdkEvent *event,
+		   CdkEvent *event,
 		   gpointer callback_data)
 {
 	test_quit (0);
@@ -81,10 +81,10 @@ test_ctk_widget_set_background_color (CtkWidget *widget,
 	eel_background_set_color (background, color_spec);
 }
 
-GdkPixbuf *
+CdkPixbuf *
 test_pixbuf_new_named (const char *name, float scale)
 {
-	GdkPixbuf *pixbuf;
+	CdkPixbuf *pixbuf;
 	char *path;
 
 	g_return_val_if_fail (name != NULL, NULL);
@@ -103,7 +103,7 @@ test_pixbuf_new_named (const char *name, float scale)
 	g_return_val_if_fail (pixbuf != NULL, NULL);
 
 	if (scale != 1.0) {
-		GdkPixbuf *scaled;
+		CdkPixbuf *scaled;
 		float width = cdk_pixbuf_get_width (pixbuf) * scale;
 		float height = cdk_pixbuf_get_width (pixbuf) * scale;
 

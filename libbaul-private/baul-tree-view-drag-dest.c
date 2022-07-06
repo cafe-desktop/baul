@@ -100,12 +100,12 @@ static const CtkTargetEntry drag_types [] =
 static void
 ctk_tree_view_vertical_autoscroll (CtkTreeView *tree_view)
 {
-    GdkRectangle visible_rect;
+    CdkRectangle visible_rect;
     CtkAdjustment *vadjustment;
-    GdkDisplay *display;
-    GdkSeat *seat;
-    GdkDevice *pointer;
-    GdkWindow *window;
+    CdkDisplay *display;
+    CdkSeat *seat;
+    CdkDevice *pointer;
+    CdkWindow *window;
     int y;
     int offset;
     float value;
@@ -193,7 +193,7 @@ highlight_draw (CtkWidget *widget,
 		cairo_t   *cr,
                 gpointer data)
 {
-    GdkWindow *bin_window;
+    CdkWindow *bin_window;
     int width;
     int height;
     CtkStyleContext *style;
@@ -270,10 +270,10 @@ clear_drag_dest_row (BaulTreeViewDragDest *dest)
 
 static gboolean
 get_drag_data (BaulTreeViewDragDest *dest,
-               GdkDragContext *context,
+               CdkDragContext *context,
                guint32 time)
 {
-    GdkAtom target;
+    CdkAtom target;
 
     target = ctk_drag_dest_find_target (CTK_WIDGET (dest->details->tree_view),
                                         context,
@@ -417,7 +417,7 @@ get_drop_target_uri_for_path (BaulTreeViewDragDest *dest,
 
 static guint
 get_drop_action (BaulTreeViewDragDest *dest,
-                 GdkDragContext *context,
+                 CdkDragContext *context,
                  CtkTreePath *path)
 {
     char *drop_target;
@@ -496,7 +496,7 @@ get_drop_action (BaulTreeViewDragDest *dest,
 
 static gboolean
 drag_motion_callback (CtkWidget *widget,
-                      GdkDragContext *context,
+                      CdkDragContext *context,
                       int x,
                       int y,
                       guint32 time,
@@ -507,7 +507,7 @@ drag_motion_callback (CtkWidget *widget,
     CtkTreePath *drop_path, *old_drop_path;
     CtkTreeIter drop_iter;
     CtkTreeViewDropPosition pos;
-    GdkWindow *bin_window;
+    CdkWindow *bin_window;
     guint action;
     gboolean res = TRUE;
 
@@ -603,7 +603,7 @@ drag_motion_callback (CtkWidget *widget,
 
 static void
 drag_leave_callback (CtkWidget *widget,
-                     GdkDragContext *context,
+                     CdkDragContext *context,
                      guint32 time,
                      gpointer data)
 {
@@ -649,12 +649,12 @@ get_drop_target_uri_at_pos (BaulTreeViewDragDest *dest, int x, int y)
 
 static void
 receive_uris (BaulTreeViewDragDest *dest,
-              GdkDragContext *context,
+              CdkDragContext *context,
               GList *source_uris,
               int x, int y)
 {
     char *drop_target;
-    GdkDragAction action, real_action;
+    CdkDragAction action, real_action;
 
     drop_target = get_drop_target_uri_at_pos (dest, x, y);
     g_assert (drop_target != NULL);
@@ -700,7 +700,7 @@ receive_uris (BaulTreeViewDragDest *dest,
 
 static void
 receive_dropped_icons (BaulTreeViewDragDest *dest,
-                       GdkDragContext *context,
+                       CdkDragContext *context,
                        int x, int y)
 {
     GList *source_uris;
@@ -729,7 +729,7 @@ receive_dropped_icons (BaulTreeViewDragDest *dest,
 
 static void
 receive_dropped_uri_list (BaulTreeViewDragDest *dest,
-                          GdkDragContext *context,
+                          CdkDragContext *context,
                           int x, int y)
 {
     char *drop_target;
@@ -753,7 +753,7 @@ receive_dropped_uri_list (BaulTreeViewDragDest *dest,
 
 static void
 receive_dropped_text (BaulTreeViewDragDest *dest,
-                      GdkDragContext *context,
+                      CdkDragContext *context,
                       int x, int y)
 {
     char *drop_target;
@@ -780,7 +780,7 @@ receive_dropped_text (BaulTreeViewDragDest *dest,
 static void
 receive_dropped_raw (BaulTreeViewDragDest *dest,
                      const char *raw_data, int length,
-                     GdkDragContext *context,
+                     CdkDragContext *context,
                      int x, int y)
 {
     char *drop_target;
@@ -804,7 +804,7 @@ receive_dropped_raw (BaulTreeViewDragDest *dest,
 
 static void
 receive_dropped_netscape_url (BaulTreeViewDragDest *dest,
-                              GdkDragContext *context,
+                              CdkDragContext *context,
                               int x, int y)
 {
     char *drop_target;
@@ -828,7 +828,7 @@ receive_dropped_netscape_url (BaulTreeViewDragDest *dest,
 
 static void
 receive_dropped_keyword (BaulTreeViewDragDest *dest,
-                         GdkDragContext *context,
+                         CdkDragContext *context,
                          int x, int y)
 {
     char *drop_target_uri;
@@ -858,7 +858,7 @@ static gboolean
 receive_xds (BaulTreeViewDragDest *dest,
              CtkWidget *widget,
              guint32 time,
-             GdkDragContext *context,
+             CdkDragContext *context,
              int x, int y)
 {
     GFile *location;
@@ -898,7 +898,7 @@ receive_xds (BaulTreeViewDragDest *dest,
 
 static gboolean
 drag_data_received_callback (CtkWidget *widget,
-                             GdkDragContext *context,
+                             CdkDragContext *context,
                              int x,
                              int y,
                              CtkSelectionData *selection_data,
@@ -984,7 +984,7 @@ drag_data_received_callback (CtkWidget *widget,
 }
 
 static char *
-get_direct_save_filename (GdkDragContext *context)
+get_direct_save_filename (CdkDragContext *context)
 {
     guchar *prop_text;
     gint prop_len;
@@ -1015,7 +1015,7 @@ get_direct_save_filename (GdkDragContext *context)
 
 static gboolean
 set_direct_save_uri (BaulTreeViewDragDest *dest,
-                     GdkDragContext *context,
+                     CdkDragContext *context,
                      int x, int y)
 {
     char *drop_uri;
@@ -1070,7 +1070,7 @@ set_direct_save_uri (BaulTreeViewDragDest *dest,
 
 static gboolean
 drag_drop_callback (CtkWidget *widget,
-                    GdkDragContext *context,
+                    CdkDragContext *context,
                     int x,
                     int y,
                     guint32 time,
@@ -1078,7 +1078,7 @@ drag_drop_callback (CtkWidget *widget,
 {
     BaulTreeViewDragDest *dest;
     guint info;
-    GdkAtom target;
+    CdkAtom target;
 
     dest = BAUL_TREE_VIEW_DRAG_DEST (data);
 

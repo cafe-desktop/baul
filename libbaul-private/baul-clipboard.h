@@ -44,11 +44,11 @@ void baul_clipboard_set_up_text_view           (CtkTextView        *target,
         CtkUIManager       *ui_manager);
 void baul_clipboard_clear_if_colliding_uris    (CtkWidget          *widget,
         const GList        *item_uris,
-        GdkAtom             copied_files_atom);
+        CdkAtom             copied_files_atom);
 CtkClipboard* baul_clipboard_get                (CtkWidget          *widget);
 GList* baul_clipboard_get_uri_list_from_selection_data
 (CtkSelectionData   *selection_data,
  gboolean           *cut,
- GdkAtom             copied_files_atom);
+ CdkAtom             copied_files_atom);
 
 #endif /* BAUL_CLIPBOARD_H */

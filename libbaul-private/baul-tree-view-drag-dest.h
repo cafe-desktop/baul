@@ -65,25 +65,25 @@ extern "C" {
         void (*move_copy_items) (BaulTreeViewDragDest *dest,
                                  const GList *item_uris,
                                  const char *target_uri,
-                                 GdkDragAction action,
+                                 CdkDragAction action,
                                  int x,
                                  int y);
         void (* handle_netscape_url) (BaulTreeViewDragDest *dest,
                                       const char *url,
                                       const char *target_uri,
-                                      GdkDragAction action,
+                                      CdkDragAction action,
                                       int x,
                                       int y);
         void (* handle_uri_list) (BaulTreeViewDragDest *dest,
                                   const char *uri_list,
                                   const char *target_uri,
-                                  GdkDragAction action,
+                                  CdkDragAction action,
                                   int x,
                                   int y);
         void (* handle_text)    (BaulTreeViewDragDest *dest,
                                  const char *text,
                                  const char *target_uri,
-                                 GdkDragAction action,
+                                 CdkDragAction action,
                                  int x,
                                  int y);
         void (* handle_raw)    (BaulTreeViewDragDest *dest,
@@ -91,7 +91,7 @@ extern "C" {
                                 int length,
                                 const char *target_uri,
                                 const char *direct_save_uri,
-                                GdkDragAction action,
+                                CdkDragAction action,
                                 int x,
                                 int y);
     };

@@ -427,8 +427,8 @@ update_cursor (BaulWindow *window)
 
     if (slot->allow_stop)
     {
-        GdkDisplay *display;
-        GdkCursor * cursor;
+        CdkDisplay *display;
+        CdkCursor * cursor;
 
         display = ctk_widget_get_display (CTK_WIDGET (window));
         cursor = cdk_cursor_new_for_display (display, GDK_WATCH);
@@ -561,7 +561,7 @@ baul_window_zoom_to_default (BaulWindow *window)
  * (The user can still stretch the window taller if desired).
  */
 static guint
-get_max_forced_height (GdkScreen *screen)
+get_max_forced_height (CdkScreen *screen)
 {
     gint scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
     return (HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale * 90) / 100;
@@ -571,7 +571,7 @@ get_max_forced_height (GdkScreen *screen)
  * (The user can still stretch the window wider if desired).
  */
 static guint
-get_max_forced_width (GdkScreen *screen)
+get_max_forced_width (CdkScreen *screen)
 {
     gint scale = cdk_window_get_scale_factor (cdk_screen_get_root_window (screen));
     return (WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale * 90) / 100;
@@ -584,7 +584,7 @@ get_max_forced_width (GdkScreen *screen)
 static void
 baul_window_set_initial_window_geometry (BaulWindow *window)
 {
-    GdkScreen *screen;
+    CdkScreen *screen;
     guint max_width_for_screen, max_height_for_screen;
 
     guint default_width = 0;
@@ -1037,7 +1037,7 @@ baul_window_realize (CtkWidget *widget)
 
 static gboolean
 baul_window_key_press_event (CtkWidget *widget,
-                             GdkEventKey *event)
+                             CdkEventKey *event)
 {
     /* Fix for https://github.com/cafe-desktop/baul/issues/1024 */
     if ((event->state & GDK_CONTROL_MASK) &&

@@ -1299,7 +1299,7 @@ fm_icon_view_begin_loading (FMDirectoryView *view)
     }
     else
     {
-        GdkDragAction default_action;
+        CdkDragAction default_action;
 
         if (baul_window_info_get_window_type (fm_directory_view_get_baul_window (view)) == BAUL_WINDOW_NAVIGATION)
         {
@@ -2042,7 +2042,7 @@ fm_icon_view_using_manual_layout (FMDirectoryView *view)
 
 static void
 fm_icon_view_widget_to_file_operation_position (FMDirectoryView *view,
-        GdkPoint *position)
+        CdkPoint *position)
 {
     g_assert (FM_IS_ICON_VIEW (view));
 
@@ -2082,7 +2082,7 @@ icon_container_activate_alternate_callback (BaulIconContainer *container,
 
     if (baul_window_info_get_window_type (window_info) == BAUL_WINDOW_NAVIGATION)
     {
-        GdkEvent *event;
+        CdkEvent *event;
 
         event = ctk_get_current_event ();
 
@@ -2091,17 +2091,17 @@ icon_container_activate_alternate_callback (BaulIconContainer *container,
                 event->type == GDK_2BUTTON_PRESS ||
                 event->type == GDK_3BUTTON_PRESS)
         {
-            GdkEventButton *button_event;
+            CdkEventButton *button_event;
 
-            button_event = (GdkEventButton *) event;
+            button_event = (CdkEventButton *) event;
             open_in_tab = (button_event->state & GDK_SHIFT_MASK) == 0;
         }
         else if (event->type == GDK_KEY_PRESS ||
                  event->type == GDK_KEY_RELEASE)
         {
-            GdkEventKey *key_event;
+            CdkEventKey *key_event;
 
-            key_event = (GdkEventKey *) event;
+            key_event = (CdkEventKey *) event;
             open_in_tab = !((key_event->state & GDK_SHIFT_MASK) != 0 &&
                             (key_event->state & GDK_CONTROL_MASK) != 0);
         }
@@ -2476,7 +2476,7 @@ fm_icon_view_filter_by_screen (FMIconView *icon_view,
 
 static void
 fm_icon_view_screen_changed (CtkWidget *widget,
-                             GdkScreen *previous_screen)
+                             CdkScreen *previous_screen)
 {
     FMDirectoryView *view;
     GList *files, *l;
@@ -2523,7 +2523,7 @@ fm_icon_view_screen_changed (CtkWidget *widget,
 
 static gboolean
 fm_icon_view_scroll_event (CtkWidget *widget,
-                           GdkEventScroll *scroll_event)
+                           CdkEventScroll *scroll_event)
 {
     FMIconView *icon_view;
     gboolean ret;
@@ -2566,7 +2566,7 @@ selection_changed_callback (BaulIconContainer *container,
 
 static void
 icon_container_context_click_selection_callback (BaulIconContainer *container,
-        GdkEventButton *event,
+        CdkEventButton *event,
         FMIconView *icon_view)
 {
     g_assert (BAUL_IS_ICON_CONTAINER (container));
@@ -2578,7 +2578,7 @@ icon_container_context_click_selection_callback (BaulIconContainer *container,
 
 static void
 icon_container_context_click_background_callback (BaulIconContainer *container,
-        GdkEventButton *event,
+        CdkEventButton *event,
         FMIconView *icon_view)
 {
     g_assert (BAUL_IS_ICON_CONTAINER (container));
@@ -2991,7 +2991,7 @@ store_layout_timestamp (BaulIconContainer *container,
 }
 
 static gboolean
-focus_in_event_callback (CtkWidget *widget, GdkEventFocus *event, gpointer user_data)
+focus_in_event_callback (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
 {
     BaulWindowSlotInfo *slot_info;
     FMIconView *icon_view = FM_ICON_VIEW (user_data);
@@ -3077,7 +3077,7 @@ create_icon_container (FMIconView *icon_view)
 static void
 icon_view_handle_netscape_url (BaulIconContainer *container, const char *encoded_url,
                                const char *target_uri,
-                               GdkDragAction action, int x, int y, FMIconView *view)
+                               CdkDragAction action, int x, int y, FMIconView *view)
 {
     fm_directory_view_handle_netscape_url_drop (FM_DIRECTORY_VIEW (view),
             encoded_url, target_uri, action, x, y);
@@ -3086,7 +3086,7 @@ icon_view_handle_netscape_url (BaulIconContainer *container, const char *encoded
 static void
 icon_view_handle_uri_list (BaulIconContainer *container, const char *item_uris,
                            const char *target_uri,
-                           GdkDragAction action, int x, int y, FMIconView *view)
+                           CdkDragAction action, int x, int y, FMIconView *view)
 {
     fm_directory_view_handle_uri_list_drop (FM_DIRECTORY_VIEW (view),
                                             item_uris, target_uri, action, x, y);
@@ -3095,7 +3095,7 @@ icon_view_handle_uri_list (BaulIconContainer *container, const char *item_uris,
 static void
 icon_view_handle_text (BaulIconContainer *container, const char *text,
                        const char *target_uri,
-                       GdkDragAction action, int x, int y, FMIconView *view)
+                       CdkDragAction action, int x, int y, FMIconView *view)
 {
     fm_directory_view_handle_text_drop (FM_DIRECTORY_VIEW (view),
                                         text, target_uri, action, x, y);
@@ -3104,7 +3104,7 @@ icon_view_handle_text (BaulIconContainer *container, const char *text,
 static void
 icon_view_handle_raw (BaulIconContainer *container, const char *raw_data,
                       int length, const char *target_uri, const char *direct_save_uri,
-                      GdkDragAction action, int x, int y, FMIconView *view)
+                      CdkDragAction action, int x, int y, FMIconView *view)
 {
     fm_directory_view_handle_raw_drop (FM_DIRECTORY_VIEW (view),
                                        raw_data, length, target_uri, direct_save_uri, action, x, y);

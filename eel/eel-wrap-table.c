@@ -65,7 +65,7 @@ static EelIRect      wrap_table_get_content_bounds       (const EelWrapTable  *w
 static gboolean      wrap_table_child_visible_in         (CtkWidget           *child,
 							  CtkWidget           *scrolled);
 static gboolean      wrap_table_child_focus_in           (CtkWidget           *widget,
-        GdkEventFocus       *event,
+        CdkEventFocus       *event,
         gpointer             data);
 static void          wrap_table_layout                   (EelWrapTable        *wrap_table);
 
@@ -758,7 +758,7 @@ wrap_table_child_visible_in (CtkWidget *child, CtkWidget *scrolled)
 
 static gboolean
 wrap_table_child_focus_in (CtkWidget *widget,
-                           GdkEventFocus *event,
+                           CdkEventFocus *event,
                            gpointer data)
 {
     gint x, y;

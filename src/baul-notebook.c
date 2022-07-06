@@ -135,7 +135,7 @@ find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
 
 static gboolean
 button_press_cb (BaulNotebook *notebook,
-                 GdkEventButton *event,
+                 CdkEventButton *event,
                  gpointer data)
 {
     int tab_clicked;

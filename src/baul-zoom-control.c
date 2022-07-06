@@ -127,7 +127,7 @@ zoom_button_clicked (CtkButton *button, BaulZoomControl *zoom_control)
 }
 
 static void
-zoom_popup_menu_show (CtkWidget *widget, GdkEventButton *event, BaulZoomControl *zoom_control)
+zoom_popup_menu_show (CtkWidget *widget, CdkEventButton *event, BaulZoomControl *zoom_control)
 {
     CtkMenu *menu;
 
@@ -136,7 +136,7 @@ zoom_popup_menu_show (CtkWidget *widget, GdkEventButton *event, BaulZoomControl 
                               widget,
                               GDK_GRAVITY_SOUTH_WEST,
                               GDK_GRAVITY_NORTH_WEST,
-                              (const GdkEvent*) event);
+                              (const CdkEvent*) event);
 }
 
 static void
@@ -157,7 +157,7 @@ zoom_popup_menu (CtkWidget *widget, BaulZoomControl *zoom_control)
 /* handle button presses */
 static gboolean
 baul_zoom_control_button_press_event (CtkWidget *widget,
-                                      GdkEventButton *event,
+                                      CdkEventButton *event,
                                       BaulZoomControl *zoom_control)
 {
     if (event->type != GDK_BUTTON_PRESS)
@@ -545,7 +545,7 @@ baul_zoom_control_can_zoom_out (BaulZoomControl *zoom_control)
 }
 
 static gboolean
-baul_zoom_control_scroll_event (CtkWidget *widget, GdkEventScroll *event)
+baul_zoom_control_scroll_event (CtkWidget *widget, CdkEventScroll *event)
 {
     BaulZoomControl *zoom_control;
 

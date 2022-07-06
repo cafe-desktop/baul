@@ -69,7 +69,7 @@ G_BEGIN_DECLS
             CtkWidget        *widget);
     void                   baul_side_pane_set_panel_image (BaulSidePane *side_pane,
             CtkWidget        *widget,
-            GdkPixbuf        *pixbuf);
+            CdkPixbuf        *pixbuf);
     CtkWidget             *baul_side_pane_get_current_panel (BaulSidePane *side_pane);
     CtkWidget             *baul_side_pane_get_title        (BaulSidePane *side_pane);
 

@@ -32,12 +32,12 @@ struct _BaulIconInfo
 
     gboolean sole_owner;
     gint64 last_use_time;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
 
     gboolean got_embedded_rect;
-    GdkRectangle embedded_rect;
+    CdkRectangle embedded_rect;
     gint n_attach_points;
-    GdkPoint *attach_points;
+    CdkPoint *attach_points;
     char *display_name;
     char *icon_name;
 
@@ -123,7 +123,7 @@ baul_icon_info_class_init (BaulIconInfoClass *icon_info_class)
 }
 
 BaulIconInfo *
-baul_icon_info_new_for_pixbuf (GdkPixbuf *pixbuf,
+baul_icon_info_new_for_pixbuf (CdkPixbuf *pixbuf,
                                gint       scale)
 {
     BaulIconInfo *icon;
@@ -145,7 +145,7 @@ baul_icon_info_new_for_icon_info (CtkIconInfo *icon_info,
                                   gint         scale)
 {
     BaulIconInfo *icon;
-    GdkPoint *points;
+    CdkPoint *points;
     gint n_points;
     const char *filename;
     char *basename;
@@ -333,7 +333,7 @@ baul_icon_info_lookup (GIcon *icon,
     icon_theme = ctk_icon_theme_get_default ();
 
     if (G_IS_LOADABLE_ICON (icon)) {
-        GdkPixbuf *pixbuf;
+        CdkPixbuf *pixbuf;
         IconKey lookup_key;
         IconKey *key;
         GInputStream *stream;
@@ -462,10 +462,10 @@ baul_icon_info_lookup_from_path (const char *path,
     return info;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_icon_info_get_pixbuf_nodefault (BaulIconInfo  *icon)
 {
-    GdkPixbuf *res;
+    CdkPixbuf *res;
 
     if (icon->pixbuf == NULL)
     {
@@ -490,7 +490,7 @@ baul_icon_info_get_pixbuf_nodefault (BaulIconInfo  *icon)
 cairo_surface_t *
 baul_icon_info_get_surface_nodefault (BaulIconInfo *icon)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
     pixbuf = baul_icon_info_get_pixbuf_nodefault (icon);
@@ -500,10 +500,10 @@ baul_icon_info_get_surface_nodefault (BaulIconInfo *icon)
     return surface;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_icon_info_get_pixbuf (BaulIconInfo *icon)
 {
-    GdkPixbuf *res;
+    CdkPixbuf *res;
 
     res = baul_icon_info_get_pixbuf_nodefault (icon);
     if (res == NULL)
@@ -525,7 +525,7 @@ baul_icon_info_get_pixbuf (BaulIconInfo *icon)
 cairo_surface_t *
 baul_icon_info_get_surface (BaulIconInfo *icon)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
     pixbuf = baul_icon_info_get_pixbuf (icon);
@@ -535,11 +535,11 @@ baul_icon_info_get_surface (BaulIconInfo *icon)
     return surface;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
         gsize              forced_size)
 {
-    GdkPixbuf *pixbuf, *scaled_pixbuf;
+    CdkPixbuf *pixbuf, *scaled_pixbuf;
     int w, h, s;
     double scale;
 
@@ -568,7 +568,7 @@ cairo_surface_t *
 baul_icon_info_get_surface_nodefault_at_size (BaulIconInfo *icon,
                                               gsize         forced_size)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
     pixbuf = baul_icon_info_get_pixbuf_nodefault_at_size (icon, forced_size);
@@ -581,11 +581,11 @@ baul_icon_info_get_surface_nodefault_at_size (BaulIconInfo *icon,
     return surface;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_icon_info_get_pixbuf_at_size (BaulIconInfo  *icon,
                                    gsize              forced_size)
 {
-    GdkPixbuf *pixbuf, *scaled_pixbuf;
+    CdkPixbuf *pixbuf, *scaled_pixbuf;
     int w, h, s;
     double scale;
 
@@ -614,7 +614,7 @@ cairo_surface_t *
 baul_icon_info_get_surface_at_size (BaulIconInfo *icon,
                                     gsize         forced_size)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
     pixbuf = baul_icon_info_get_pixbuf_at_size (icon, forced_size);
@@ -626,7 +626,7 @@ baul_icon_info_get_surface_at_size (BaulIconInfo *icon,
 
 gboolean
 baul_icon_info_get_embedded_rect (BaulIconInfo  *icon,
-                                  GdkRectangle      *rectangle)
+                                  CdkRectangle      *rectangle)
 {
     *rectangle = icon->embedded_rect;
     return icon->got_embedded_rect;
@@ -634,7 +634,7 @@ baul_icon_info_get_embedded_rect (BaulIconInfo  *icon,
 
 gboolean
 baul_icon_info_get_attach_points (BaulIconInfo  *icon,
-                                  GdkPoint         **points,
+                                  CdkPoint         **points,
                                   gint              *n_points)
 {
     *n_points = icon->n_attach_points;

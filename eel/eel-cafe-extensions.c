@@ -182,7 +182,7 @@ eel_cafe_make_terminal_command (const char *command)
 
 void
 eel_cafe_open_terminal_on_screen (const char *command,
-                                  GdkScreen  *screen)
+                                  CdkScreen  *screen)
 {
     char *command_line;
 

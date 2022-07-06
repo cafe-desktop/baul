@@ -170,12 +170,12 @@ baul_emblem_get_keyword_from_icon_name (const char *emblem)
     }
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_emblem_load_pixbuf_for_emblem (GFile *emblem)
 {
     GInputStream *stream;
-    GdkPixbuf *pixbuf;
-    GdkPixbuf *scaled;
+    CdkPixbuf *pixbuf;
+    CdkPixbuf *scaled;
 
     stream = (GInputStream *) g_file_read (emblem, NULL, NULL);
     if (!stream)
@@ -255,7 +255,7 @@ baul_emblem_verify_keyword (CtkWindow *parent_window,
 }
 
 void
-baul_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
+baul_emblem_install_custom_emblem (CdkPixbuf *pixbuf,
                                    const char *keyword,
                                    const char *display_name,
                                    CtkWindow *parent_window)

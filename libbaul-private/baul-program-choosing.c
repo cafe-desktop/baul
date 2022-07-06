@@ -197,8 +197,8 @@ baul_launch_application_by_uri (GAppInfo *application,
     BaulFile *file;
     gboolean result;
     GError *error;
-    GdkDisplay *display;
-    GdkAppLaunchContext *launch_context;
+    CdkDisplay *display;
+    CdkAppLaunchContext *launch_context;
     BaulIconInfo *icon;
     int count;
     GList *locations, *l;
@@ -310,7 +310,7 @@ baul_launch_application_by_uri (GAppInfo *application,
  * @...: Passed as parameters to the application after quoting each of them.
  */
 void
-baul_launch_application_from_command (GdkScreen  *screen,
+baul_launch_application_from_command (CdkScreen  *screen,
                                       const char *name,
                                       const char *command_string,
                                       gboolean use_terminal,
@@ -352,8 +352,8 @@ baul_launch_application_from_command (GdkScreen  *screen,
                                                        NULL);
         if (app_info != NULL)
         {
-            GdkAppLaunchContext *launch_context;
-            GdkDisplay *display;
+            CdkAppLaunchContext *launch_context;
+            CdkDisplay *display;
 
             display = cdk_screen_get_display (screen);
             launch_context = cdk_display_get_app_launch_context (display);
@@ -378,7 +378,7 @@ baul_launch_application_from_command (GdkScreen  *screen,
  * @parameters: Passed as parameters to the application after quoting each of them.
  */
 void
-baul_launch_application_from_command_array (GdkScreen  *screen,
+baul_launch_application_from_command_array (CdkScreen  *screen,
         const char *name,
         const char *command_string,
         gboolean use_terminal,
@@ -418,8 +418,8 @@ baul_launch_application_from_command_array (GdkScreen  *screen,
                                                        NULL);
         if (app_info != NULL)
         {
-            GdkAppLaunchContext *launch_context;
-            GdkDisplay *display;
+            CdkAppLaunchContext *launch_context;
+            CdkDisplay *display;
 
             display = cdk_screen_get_display (screen);
             launch_context = cdk_display_get_app_launch_context (display);
@@ -434,7 +434,7 @@ baul_launch_application_from_command_array (GdkScreen  *screen,
 }
 
 void
-baul_launch_desktop_file (GdkScreen   *screen,
+baul_launch_desktop_file (CdkScreen   *screen,
                           const char  *desktop_file_uri,
                           const GList *parameter_uris,
                           CtkWindow   *parent_window)
@@ -445,7 +445,7 @@ baul_launch_desktop_file (GdkScreen   *screen,
     GList *files;
     int total, count;
     GDesktopAppInfo *app_info;
-    GdkAppLaunchContext *context;
+    CdkAppLaunchContext *context;
     GFile *desktop_file;
     GFile *file = NULL;
 

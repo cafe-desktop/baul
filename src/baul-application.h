@@ -88,11 +88,11 @@ BaulWindow *     baul_application_get_spatial_window     (BaulApplication *appli
         BaulWindow      *requesting_window,
         const char      *startup_id,
         GFile           *location,
-        GdkScreen       *screen,
+        CdkScreen       *screen,
         gboolean        *existing);
 
 BaulWindow *     baul_application_create_navigation_window     (BaulApplication *application,
-        GdkScreen           *screen);
+        CdkScreen           *screen);
 void baul_application_close_all_navigation_windows (BaulApplication *self);
 void baul_application_close_parent_windows     (BaulSpatialWindow *window);
 void baul_application_close_all_spatial_windows  (void);

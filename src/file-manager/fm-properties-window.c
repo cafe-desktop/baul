@@ -138,10 +138,10 @@ struct _FMPropertiesWindowPrivate {
  	guint64 volume_capacity;
  	guint64 volume_free;
 
-	GdkRGBA used_color;
-	GdkRGBA free_color;
-	GdkRGBA used_stroke_color;
-	GdkRGBA free_stroke_color;
+	CdkRGBA used_color;
+	CdkRGBA free_color;
+	CdkRGBA used_stroke_color;
+	CdkRGBA free_stroke_color;
 };
 
 typedef enum {
@@ -221,7 +221,7 @@ static void remove_pending                        (StartupData        *data,
 static void append_extension_pages                (FMPropertiesWindow *window);
 
 static gboolean name_field_focus_out              (BaulEntry *name_field,
-						   GdkEventFocus *event,
+						   CdkEventFocus *event,
 						   gpointer callback_data);
 static void name_field_activate                   (BaulEntry *name_field,
 						   gpointer callback_data);
@@ -365,7 +365,7 @@ add_prompt_and_separator (CtkWidget *vbox, const char *prompt_text)
 static void
 get_image_for_properties_window (FMPropertiesWindow *window,
 				 char **icon_name,
-				 GdkPixbuf **icon_pixbuf)
+				 CdkPixbuf **icon_pixbuf)
 {
 	BaulIconInfo *icon, *new_icon;
 	GList *l;
@@ -418,7 +418,7 @@ get_image_for_properties_window (FMPropertiesWindow *window,
 static void
 update_properties_window_icon (FMPropertiesWindow *window)
 {
-	GdkPixbuf *pixbuf;
+	CdkPixbuf *pixbuf;
 	cairo_surface_t *surface;
 	char *name;
 
@@ -443,7 +443,7 @@ update_properties_window_icon (FMPropertiesWindow *window)
 static gboolean
 uri_is_local_image (const char *uri)
 {
-	GdkPixbuf *pixbuf;
+	CdkPixbuf *pixbuf;
 	char *image_path;
 
 	image_path = g_filename_from_uri (uri, NULL, NULL);
@@ -483,7 +483,7 @@ reset_icon (FMPropertiesWindow *properties_window)
 
 
 static void
-fm_properties_window_drag_data_received (CtkWidget *widget, GdkDragContext *context,
+fm_properties_window_drag_data_received (CtkWidget *widget, CdkDragContext *context,
 					 int x, int y,
 					 CtkSelectionData *selection_data,
 					 guint info, guint time)
@@ -806,7 +806,7 @@ name_field_done_editing (BaulEntry *name_field, FMPropertiesWindow *window)
 
 static gboolean
 name_field_focus_out (BaulEntry *name_field,
-		      GdkEventFocus *event,
+		      CdkEventFocus *event,
 		      gpointer callback_data)
 {
 	g_assert (FM_IS_PROPERTIES_WINDOW (callback_data));
@@ -3006,8 +3006,8 @@ hls_to_rgb (gdouble *h,
     }
 }
 static void
-_pie_style_shade (GdkRGBA *a,
-                  GdkRGBA *b,
+_pie_style_shade (CdkRGBA *a,
+                  CdkRGBA *b,
                   gdouble   k)
 {
   gdouble red;
@@ -3440,7 +3440,7 @@ static void
 create_emblems_page (FMPropertiesWindow *window)
 {
 	CtkWidget *emblems_table, *button, *scroller;
-	GdkPixbuf *pixbuf;
+	CdkPixbuf *pixbuf;
 	char *label;
 	GList *icons, *l;
 	BaulIconInfo *info;
@@ -3520,8 +3520,8 @@ start_long_operation (FMPropertiesWindow *window)
 {
 	if (window->details->long_operation_underway == 0) {
 		/* start long operation */
-		GdkDisplay *display;
-		GdkCursor * cursor;
+		CdkDisplay *display;
+		CdkCursor * cursor;
 
 		display = ctk_widget_get_display (CTK_WIDGET (window));
 		cursor = cdk_cursor_new_for_display (display, GDK_WATCH);
@@ -5652,7 +5652,7 @@ static void
 update_preview_callback (CtkFileChooser *icon_chooser,
 			 FMPropertiesWindow *window)
 {
-	GdkPixbuf *pixbuf, *scaled_pixbuf;
+	CdkPixbuf *pixbuf, *scaled_pixbuf;
 	char *filename;
 
 	pixbuf = NULL;

@@ -73,10 +73,10 @@ struct _BaulInformationPanelPrivate
 #define CONTEXTUAL_MENU_BUTTON 3
 
 static gboolean baul_information_panel_press_event           (CtkWidget                    *widget,
-        GdkEventButton               *event);
+        CdkEventButton               *event);
 static void     baul_information_panel_finalize              (GObject                      *object);
 static void     baul_information_panel_drag_data_received    (CtkWidget                    *widget,
-        GdkDragContext               *context,
+        CdkDragContext               *context,
         int                           x,
         int                           y,
         CtkSelectionData             *selection_data,
@@ -170,7 +170,7 @@ baul_information_panel_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show Information"));
 }
 
-static GdkPixbuf *
+static CdkPixbuf *
 baul_information_panel_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;
@@ -455,7 +455,7 @@ hit_test (BaulInformationPanel *information_panel,
 static gboolean
 uri_is_local_image (const char *uri)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     char *image_path;
 
     image_path = g_filename_from_uri (uri, NULL, NULL);
@@ -477,7 +477,7 @@ uri_is_local_image (const char *uri)
 
 static void
 receive_dropped_uri_list (BaulInformationPanel *information_panel,
-                          GdkDragAction action,
+                          CdkDragAction action,
                           int x, int y,
                           CtkSelectionData *selection_data)
 {
@@ -573,7 +573,7 @@ receive_dropped_uri_list (BaulInformationPanel *information_panel,
 
 static void
 receive_dropped_color (BaulInformationPanel *information_panel,
-                       GdkDragAction action,
+                       CdkDragAction action,
                        int x, int y,
                        CtkSelectionData *selection_data)
 {
@@ -632,7 +632,7 @@ receive_dropped_keyword (BaulInformationPanel *information_panel,
 }
 
 static void
-baul_information_panel_drag_data_received (CtkWidget *widget, GdkDragContext *context,
+baul_information_panel_drag_data_received (CtkWidget *widget, CdkDragContext *context,
         int x, int y,
         CtkSelectionData *selection_data,
         guint info, guint time)
@@ -677,7 +677,7 @@ baul_information_panel_drag_data_received (CtkWidget *widget, GdkDragContext *co
 
 /* handle the context menu if necessary */
 static gboolean
-baul_information_panel_press_event (CtkWidget *widget, GdkEventButton *event)
+baul_information_panel_press_event (CtkWidget *widget, CdkEventButton *event)
 {
     BaulInformationPanel *information_panel;
 

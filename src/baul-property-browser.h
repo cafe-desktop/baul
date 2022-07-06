@@ -63,8 +63,8 @@ struct BaulPropertyBrowserClass
 };
 
 GType                    baul_property_browser_get_type (void);
-BaulPropertyBrowser *baul_property_browser_new      (GdkScreen               *screen);
-void                     baul_property_browser_show     (GdkScreen               *screen);
+BaulPropertyBrowser *baul_property_browser_new      (CdkScreen               *screen);
+void                     baul_property_browser_show     (CdkScreen               *screen);
 void                     baul_property_browser_set_path (BaulPropertyBrowser *panel,
         const char              *new_path);
 

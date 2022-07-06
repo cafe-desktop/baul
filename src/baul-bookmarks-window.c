@@ -94,21 +94,21 @@ static void	on_row_activated			    (CtkTreeView	  *view,
         CtkTreeViewColumn    *column,
         gpointer		   user_data);
 static gboolean	on_button_pressed                           (CtkTreeView	  *view,
-        GdkEventButton       *event,
+        CdkEventButton       *event,
         gpointer		   user_data);
 static gboolean	on_key_pressed                              (CtkTreeView	  *view,
-        GdkEventKey          *event,
+        CdkEventKey          *event,
         gpointer		   user_data);
 static void     on_selection_changed                        (CtkTreeSelection     *treeselection,
         gpointer              user_data);
 
 static gboolean on_text_field_focus_out_event               (CtkWidget            *widget,
-        GdkEventFocus        *event,
+        CdkEventFocus        *event,
         gpointer              user_data);
 static void     on_uri_field_changed                        (CtkEditable          *editable,
         gpointer              user_data);
 static gboolean on_window_delete_event                      (CtkWidget            *widget,
-        GdkEvent             *event,
+        CdkEvent             *event,
         gpointer              user_data);
 static void     on_window_hide_event                        (CtkWidget            *widget,
         gpointer              user_data);
@@ -116,7 +116,7 @@ static void     on_window_destroy_event                     (CtkWidget          
         gpointer              user_data);
 static void     repopulate                                  (void);
 static void     set_up_close_accelerator                    (CtkWidget            *window);
-static void	open_selected_bookmark 			    (gpointer   user_data, GdkScreen *screen);
+static void	open_selected_bookmark 			    (gpointer   user_data, CdkScreen *screen);
 static void	update_bookmark_from_text		    (void);
 
 /* We store a pointer to the bookmark in a column so when an item is moved
@@ -565,7 +565,7 @@ on_name_field_changed (CtkEditable *editable,
 }
 
 static void
-open_selected_bookmark (gpointer user_data, GdkScreen *screen)
+open_selected_bookmark (gpointer user_data, CdkScreen *screen)
 {
     BaulBookmark *selected;
     BaulWindow *window;
@@ -621,7 +621,7 @@ static void
 on_jump_button_clicked (CtkButton *button,
                         gpointer   user_data)
 {
-    GdkScreen *screen;
+    CdkScreen *screen;
 
     screen = ctk_widget_get_screen (CTK_WIDGET (button));
     open_selected_bookmark (user_data, screen);
@@ -742,7 +742,7 @@ on_row_changed (CtkListStore *store,
 
 static gboolean
 on_button_pressed (CtkTreeView *view,
-                   GdkEventButton *event,
+                   CdkEventButton *event,
                    gpointer user_data)
 {
     update_bookmark_from_text ();
@@ -752,7 +752,7 @@ on_button_pressed (CtkTreeView *view,
 
 static gboolean
 on_key_pressed (CtkTreeView *view,
-                GdkEventKey *event,
+                CdkEventKey *event,
                 gpointer user_data)
 {
     if (event->keyval == GDK_KEY_Delete || event->keyval == GDK_KEY_KP_Delete)
@@ -772,7 +772,7 @@ on_row_activated (CtkTreeView       *view,
                   CtkTreeViewColumn *column,
                   gpointer           user_data)
 {
-    GdkScreen *screen;
+    CdkScreen *screen;
 
     screen = ctk_widget_get_screen (CTK_WIDGET (view));
     open_selected_bookmark (user_data, screen);
@@ -910,7 +910,7 @@ update_bookmark_from_text (void)
 
 static gboolean
 on_text_field_focus_out_event (CtkWidget *widget,
-                               GdkEventFocus *event,
+                               CdkEventFocus *event,
                                gpointer user_data)
 {
     g_assert (BAUL_IS_ENTRY (widget));
@@ -940,7 +940,7 @@ on_uri_field_changed (CtkEditable *editable,
 
 static gboolean
 on_window_delete_event (CtkWidget *widget,
-                        GdkEvent *event,
+                        CdkEvent *event,
                         gpointer user_data)
 {
     ctk_widget_hide (widget);
@@ -1082,7 +1082,7 @@ repopulate (void)
 
 static int
 handle_close_accelerator (CtkWindow *window,
-                          GdkEventKey *event,
+                          CdkEventKey *event,
                           gpointer user_data)
 {
     g_assert (CTK_IS_WINDOW (window));

@@ -757,7 +757,7 @@ static gboolean
 is_shift_pressed (void)
 {
     gboolean ret;
-    GdkDisplay *display;
+    CdkDisplay *display;
     XkbStateRec state;
     Bool status;
 
@@ -924,7 +924,7 @@ autorun_always_toggled (CtkToggleButton *togglebutton, AutorunDialogData *data)
 }
 
 static gboolean
-combo_box_enter_ok (CtkWidget *togglebutton, GdkEventKey *event, CtkDialog *dialog)
+combo_box_enter_ok (CtkWidget *togglebutton, CdkEventKey *event, CtkDialog *dialog)
 {
     if (event->keyval == GDK_KEY_KP_Enter || event->keyval == GDK_KEY_Return)
     {
@@ -952,7 +952,7 @@ do_autorun_for_content_type (GMount *mount, const char *x_content_type, BaulAuto
     char *content_description;
     char *mount_name;
     GIcon *icon;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
     BaulIconInfo *icon_info;
     int icon_size, icon_scale;

@@ -263,7 +263,7 @@ eel_canvas_re_set_property (GObject              *object,
         break;
 
     case PROP_FILL_COLOR_RGBA: {
-            GdkRGBA *color;
+            CdkRGBA *color;
 
             color = g_value_get_boxed (value);
 
@@ -278,7 +278,7 @@ eel_canvas_re_set_property (GObject              *object,
     }
 
     case PROP_OUTLINE_COLOR_RGBA: {
-            GdkRGBA *color;
+            CdkRGBA *color;
 
             color = g_value_get_boxed (value);
 
@@ -519,7 +519,7 @@ eel_canvas_rect_finalize (GObject *object)
 
 static void
 eel_canvas_set_source_color (cairo_t *cr,
-			     GdkRGBA *rgba)
+			     CdkRGBA *rgba)
 {
 	cdk_cairo_set_source_rgba (cr, rgba);
 }

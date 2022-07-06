@@ -61,7 +61,7 @@ struct BaulCustomizationData
 
     GHashTable *name_map_hash;
 
-    GdkPixbuf *pattern_frame;
+    CdkPixbuf *pattern_frame;
 
     int maximum_icon_height;
     int maximum_icon_width;
@@ -196,13 +196,13 @@ baul_customization_data_new (const char *customization_name,
 gboolean
 baul_customization_data_get_next_element_for_display (BaulCustomizationData *data,
         char **emblem_name,
-        GdkPixbuf **pixbuf_out,
+        CdkPixbuf **pixbuf_out,
         char **label_out)
 {
     GFileInfo *current_file_info;
     char *image_file_name;
-    GdkPixbuf *pixbuf;
-    GdkPixbuf *orig_pixbuf;
+    CdkPixbuf *pixbuf;
+    CdkPixbuf *orig_pixbuf;
     gboolean is_reset_image;
 
     g_return_val_if_fail (data != NULL, FALSE);
@@ -383,10 +383,10 @@ get_file_path_for_mode (const BaulCustomizationData *data,
 
 
 /* utility to make an attractive pattern image by compositing with a frame */
-GdkPixbuf*
-baul_customization_make_pattern_chit (GdkPixbuf *pattern_tile, GdkPixbuf *frame, gboolean dragging, gboolean is_reset)
+CdkPixbuf*
+baul_customization_make_pattern_chit (CdkPixbuf *pattern_tile, CdkPixbuf *frame, gboolean dragging, gboolean is_reset)
 {
-    GdkPixbuf *pixbuf, *temp_pixbuf;
+    CdkPixbuf *pixbuf, *temp_pixbuf;
     int frame_width, frame_height;
     int pattern_width, pattern_height;
 

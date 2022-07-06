@@ -195,7 +195,7 @@ baul_link_local_create (const char     *directory_uri,
                         const char     *display_name,
                         const char     *image,
                         const char     *target_uri,
-                        const GdkPoint *point,
+                        const CdkPoint *point,
                         int             screen,
                         gboolean        unique_filename)
 {

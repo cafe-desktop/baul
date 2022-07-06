@@ -88,11 +88,11 @@ typedef struct
 
     /* Operations on the container. */
     int          (* button_press) 	          (BaulIconContainer *container,
-            GdkEventButton *event);
+            CdkEventButton *event);
     void         (* context_click_background) (BaulIconContainer *container,
-            GdkEventButton *event);
+            CdkEventButton *event);
     void         (* middle_click) 		  (BaulIconContainer *container,
-                                           GdkEventButton *event);
+                                           CdkEventButton *event);
 
     /* Operations on icons. */
     void         (* activate)	  	  (BaulIconContainer *container,
@@ -100,30 +100,30 @@ typedef struct
     void         (* activate_alternate)       (BaulIconContainer *container,
             BaulIconData *data);
     void         (* context_click_selection)  (BaulIconContainer *container,
-            GdkEventButton *event);
+            CdkEventButton *event);
     void	     (* move_copy_items)	  (BaulIconContainer *container,
                                            const GList *item_uris,
-                                           GdkPoint *relative_item_points,
+                                           CdkPoint *relative_item_points,
                                            const char *target_uri,
-                                           GdkDragAction action,
+                                           CdkDragAction action,
                                            int x,
                                            int y);
     void	     (* handle_netscape_url)	  (BaulIconContainer *container,
             const char *url,
             const char *target_uri,
-            GdkDragAction action,
+            CdkDragAction action,
             int x,
             int y);
     void	     (* handle_uri_list)    	  (BaulIconContainer *container,
             const char *uri_list,
             const char *target_uri,
-            GdkDragAction action,
+            CdkDragAction action,
             int x,
             int y);
     void	     (* handle_text)		  (BaulIconContainer *container,
                                            const char *text,
                                            const char *target_uri,
-                                           GdkDragAction action,
+                                           CdkDragAction action,
                                            int x,
                                            int y);
     void	     (* handle_raw)		  (BaulIconContainer *container,
@@ -131,7 +131,7 @@ typedef struct
                                        int length,
                                        const char *target_uri,
                                        const char *direct_save_uri,
-                                       GdkDragAction action,
+                                       CdkDragAction action,
                                        int x,
                                        int y);
 
@@ -356,7 +356,7 @@ void              baul_icon_container_set_store_layout_timestamps   (BaulIconCon
         gboolean                store_layout);
 
 void              baul_icon_container_widget_to_file_operation_position (BaulIconContainer *container,
-        GdkPoint              *position);
+        CdkPoint              *position);
 
 
 #define CANVAS_WIDTH(container,allocation) ((allocation.width	  \

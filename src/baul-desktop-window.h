@@ -62,7 +62,7 @@ typedef struct
 
 GType                  baul_desktop_window_get_type            (void);
 BaulDesktopWindow *baul_desktop_window_new                 (BaulApplication *application,
-        GdkScreen           *screen);
+        CdkScreen           *screen);
 void                   baul_desktop_window_update_directory    (BaulDesktopWindow *window);
 gboolean               baul_desktop_window_loaded              (BaulDesktopWindow *window);
 

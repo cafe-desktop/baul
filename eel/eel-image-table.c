@@ -70,19 +70,19 @@ static void    signal_connect_while_realized        (CtkWidget          *object,
     						     CtkWidget          *realized_widget);
 /* Ancestor callbacks */
 static int     ancestor_enter_notify_event          (CtkWidget          *widget,
-        GdkEventCrossing   *event,
+        CdkEventCrossing   *event,
         gpointer            event_data);
 static int     ancestor_leave_notify_event          (CtkWidget          *widget,
-        GdkEventCrossing   *event,
+        CdkEventCrossing   *event,
         gpointer            event_data);
 static int     ancestor_motion_notify_event         (CtkWidget          *widget,
-        GdkEventMotion     *event,
+        CdkEventMotion     *event,
         gpointer            event_data);
 static int     ancestor_button_press_event          (CtkWidget          *widget,
-        GdkEventButton     *event,
+        CdkEventButton     *event,
         gpointer            event_data);
 static int     ancestor_button_release_event        (CtkWidget          *widget,
-        GdkEventButton     *event,
+        CdkEventButton     *event,
         gpointer            event_data);
 
 G_DEFINE_TYPE_WITH_PRIVATE (EelImageTable, eel_image_table, EEL_TYPE_WRAP_TABLE)
@@ -196,7 +196,7 @@ image_table_emit_signal (EelImageTable *image_table,
                          int y,
                          int button,
                          guint state,
-                         GdkEvent *cdk_event)
+                         CdkEvent *cdk_event)
 {
     EelImageTableEvent event;
 
@@ -292,7 +292,7 @@ static void
 image_table_handle_motion (EelImageTable *image_table,
                            int x,
                            int y,
-                           GdkEvent *event)
+                           CdkEvent *event)
 {
     CtkWidget *child;
     CtkWidget *leave_emit_child = NULL;
@@ -341,7 +341,7 @@ image_table_handle_motion (EelImageTable *image_table,
                                  y,
                                  0,
                                  0,
-                                 (GdkEvent *)event);
+                                 (CdkEvent *)event);
     }
 
     if (enter_emit_child != NULL)
@@ -353,7 +353,7 @@ image_table_handle_motion (EelImageTable *image_table,
                                  y,
                                  0,
                                  0,
-                                 (GdkEvent *)event);
+                                 (CdkEvent *)event);
     }
 }
 
@@ -460,21 +460,21 @@ signal_connect_while_realized (CtkWidget *object,
 
 static int
 ancestor_enter_notify_event (CtkWidget *widget,
-                             GdkEventCrossing *event,
+                             CdkEventCrossing *event,
                              gpointer event_data)
 {
     g_assert (CTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
     g_assert (event != NULL);
 
-    image_table_handle_motion (EEL_IMAGE_TABLE (event_data), event->x, event->y, (GdkEvent *) event);
+    image_table_handle_motion (EEL_IMAGE_TABLE (event_data), event->x, event->y, (CdkEvent *) event);
 
     return FALSE;
 }
 
 static int
 ancestor_leave_notify_event (CtkWidget *widget,
-                             GdkEventCrossing *event,
+                             CdkEventCrossing *event,
                              gpointer event_data)
 {
     EelIRect bounds;
@@ -493,28 +493,28 @@ ancestor_leave_notify_event (CtkWidget *widget,
         y = event->y;
     }
 
-    image_table_handle_motion (EEL_IMAGE_TABLE (event_data), x, y, (GdkEvent *) event);
+    image_table_handle_motion (EEL_IMAGE_TABLE (event_data), x, y, (CdkEvent *) event);
 
     return FALSE;
 }
 
 static int
 ancestor_motion_notify_event (CtkWidget *widget,
-                              GdkEventMotion *event,
+                              CdkEventMotion *event,
                               gpointer event_data)
 {
     g_assert (CTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
     g_assert (event != NULL);
 
-    image_table_handle_motion (EEL_IMAGE_TABLE (event_data), (int) event->x, (int) event->y, (GdkEvent *) event);
+    image_table_handle_motion (EEL_IMAGE_TABLE (event_data), (int) event->x, (int) event->y, (CdkEvent *) event);
 
     return FALSE;
 }
 
 static int
 ancestor_button_press_event (CtkWidget *widget,
-                             GdkEventButton *event,
+                             CdkEventButton *event,
                              gpointer event_data)
 {
     EelImageTable *image_table;
@@ -545,7 +545,7 @@ ancestor_button_press_event (CtkWidget *widget,
                                      event->y,
                                      event->button,
                                      event->state,
-                                     (GdkEvent *)event);
+                                     (CdkEvent *)event);
         }
     }
 
@@ -554,7 +554,7 @@ ancestor_button_press_event (CtkWidget *widget,
 
 static int
 ancestor_button_release_event (CtkWidget *widget,
-                               GdkEventButton *event,
+                               CdkEventButton *event,
                                gpointer event_data)
 {
     EelImageTable *image_table;
@@ -599,7 +599,7 @@ ancestor_button_release_event (CtkWidget *widget,
                                  event->y,
                                  event->button,
                                  event->state,
-                                 (GdkEvent *)event);
+                                 (CdkEvent *)event);
     }
 
     if (clicked_emit_child != NULL)
@@ -612,7 +612,7 @@ ancestor_button_release_event (CtkWidget *widget,
                                  event->y,
                                  event->button,
                                  event->state,
-                                 (GdkEvent *)event);
+                                 (CdkEvent *)event);
     }
 
     return FALSE;

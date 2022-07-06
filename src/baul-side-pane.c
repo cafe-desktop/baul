@@ -176,7 +176,7 @@ panel_item_activate_callback (CtkMenuItem *item,
 
 static gboolean
 select_button_press_callback (CtkWidget *widget,
-                              GdkEventButton *event,
+                              CdkEventButton *event,
                               gpointer user_data)
 {
     BaulSidePane *side_pane;
@@ -203,7 +203,7 @@ select_button_press_callback (CtkWidget *widget,
                                   widget,
                                   GDK_GRAVITY_SOUTH_WEST,
                                   GDK_GRAVITY_NORTH_WEST,
-                                  (const GdkEvent*) event);
+                                  (const CdkEvent*) event);
 
         return TRUE;
     }
@@ -212,7 +212,7 @@ select_button_press_callback (CtkWidget *widget,
 
 static gboolean
 select_button_key_press_callback (CtkWidget *widget,
-                                  GdkEventKey *event,
+                                  CdkEventKey *event,
                                   gpointer user_data)
 {
     BaulSidePane *side_pane;
@@ -229,7 +229,7 @@ select_button_key_press_callback (CtkWidget *widget,
                                   widget,
                                   GDK_GRAVITY_SOUTH_WEST,
                                   GDK_GRAVITY_NORTH_WEST,
-                                  (const GdkEvent*) event);
+                                  (const CdkEvent*) event);
         return TRUE;
     }
 
@@ -537,7 +537,7 @@ shortcut_clicked_callback (CtkWidget *button,
 static CtkWidget *
 create_shortcut (BaulSidePane *side_pane,
                  SidePanel *panel,
-                 GdkPixbuf *pixbuf)
+                 CdkPixbuf *pixbuf)
 {
     CtkWidget *button;
     CtkWidget *image;
@@ -561,7 +561,7 @@ create_shortcut (BaulSidePane *side_pane,
 void
 baul_side_pane_set_panel_image (BaulSidePane *side_pane,
                                 CtkWidget *widget,
-                                GdkPixbuf *pixbuf)
+                                CdkPixbuf *pixbuf)
 {
     SidePanel *panel;
     CtkWidget *image;

@@ -80,7 +80,7 @@ static gboolean
 should_open_in_new_tab (void)
 {
     /* FIXME this is duplicated */
-    GdkEvent *event;
+    CdkEvent *event;
 
     event = ctk_get_current_event ();
 

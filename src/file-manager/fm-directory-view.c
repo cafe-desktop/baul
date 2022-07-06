@@ -156,7 +156,7 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static GdkAtom copied_files_atom;
+static CdkAtom copied_files_atom;
 
 static char *scripts_directory_uri;
 static int scripts_directory_uri_length;
@@ -168,7 +168,7 @@ struct FMDirectoryViewDetails
 	BaulDirectory *model;
 	BaulFile *directory_as_file;
 	BaulFile *location_popup_directory_as_file;
-	GdkEventButton *location_popup_event;
+	CdkEventButton *location_popup_event;
 	CtkActionGroup *dir_action_group;
 	guint dir_merge_id;
 
@@ -260,7 +260,7 @@ struct FMDirectoryViewDetails
 
 	gboolean allow_moves;
 
-	GdkPoint context_menu_position;
+	CdkPoint context_menu_position;
 
 	gboolean undo_active;
 	gboolean redo_active;
@@ -302,11 +302,11 @@ static void     fm_directory_view_stop_loading                 (BaulView        
 static void     fm_directory_view_drop_proxy_received_uris     (FMDirectoryView *view,
 								const GList *source_uri_list,
 								const char *target_uri,
-								GdkDragAction action);
+								CdkDragAction action);
 static void     fm_directory_view_drop_proxy_received_netscape_url (FMDirectoryView *view,
 								    const char *netscape_url,
 								    const char *target_uri,
-								    GdkDragAction action);
+								    CdkDragAction action);
 static void     clipboard_changed_callback                     (BaulClipboardMonitor *monitor,
 								FMDirectoryView      *view);
 static void     open_one_in_new_window                         (gpointer              data,
@@ -333,7 +333,7 @@ static void     fm_directory_view_trash_state_changed_callback (BaulTrashMonitor
 static void     fm_directory_view_select_file                  (FMDirectoryView      *view,
 								BaulFile         *file);
 
-static GdkDragAction ask_link_action                           (FMDirectoryView      *view);
+static CdkDragAction ask_link_action                           (FMDirectoryView      *view);
 static void     update_templates_directory                     (FMDirectoryView *view);
 static void     user_dirs_changed                              (FMDirectoryView *view);
 static void     fm_directory_view_set_is_active                (FMDirectoryView *view,
@@ -395,7 +395,7 @@ static void action_location_properties_callback     (CtkAction *action,
 static void unschedule_pop_up_location_context_menu (FMDirectoryView *view);
 
 static inline void fm_directory_view_widget_to_file_operation_position (FMDirectoryView *view,
-									GdkPoint *position);
+									CdkPoint *position);
 static void        fm_directory_view_widget_to_file_operation_position_xy (FMDirectoryView *view,
 									   int *x, int *y);
 
@@ -2224,7 +2224,7 @@ fm_directory_view_finalize (GObject *object)
 
 	unschedule_pop_up_location_context_menu (view);
 	if (view->details->location_popup_event != NULL) {
-		cdk_event_free ((GdkEvent *) view->details->location_popup_event);
+		cdk_event_free ((CdkEvent *) view->details->location_popup_event);
 	}
 
 	g_hash_table_destroy (view->details->non_ready_files);
@@ -3757,7 +3757,7 @@ fm_directory_view_get_model (FMDirectoryView *view)
 	return view->details->model;
 }
 
-GdkAtom
+CdkAtom
 fm_directory_view_get_copied_files_atom (FMDirectoryView *view)
 {
 	g_return_val_if_fail (FM_IS_DIRECTORY_VIEW (view), GDK_NONE);
@@ -3790,8 +3790,8 @@ offset_drop_points (GArray *relative_item_points,
 	}
 
 	for (index = 0; index < relative_item_points->len; index++) {
-		g_array_index (relative_item_points, GdkPoint, index).x += x_offset;
-		g_array_index (relative_item_points, GdkPoint, index).y += y_offset;
+		g_array_index (relative_item_points, CdkPoint, index).x += x_offset;
+		g_array_index (relative_item_points, CdkPoint, index).y += y_offset;
 	}
 }
 
@@ -4092,7 +4092,7 @@ new_folder_done (GFile *new_folder, gpointer user_data)
 	FMDirectoryView *directory_view;
 	BaulFile *file;
 	char screen_string[32];
-	GdkScreen *screen;
+	CdkScreen *screen;
 	NewFolderData *data;
 
 	data = (NewFolderData *)user_data;
@@ -4159,7 +4159,7 @@ new_folder_data_new (FMDirectoryView *directory_view)
 	return data;
 }
 
-static GdkPoint *
+static CdkPoint *
 context_menu_to_file_operation_position (FMDirectoryView *directory_view)
 {
 	g_return_val_if_fail (FM_IS_DIRECTORY_VIEW (directory_view), NULL);
@@ -4178,7 +4178,7 @@ context_menu_to_file_operation_position (FMDirectoryView *directory_view)
 
 static void
 update_context_menu_position_from_event (FMDirectoryView *view,
-					 GdkEventButton  *event)
+					 CdkEventButton  *event)
 {
 	g_return_if_fail (FM_IS_DIRECTORY_VIEW (view));
 
@@ -4196,7 +4196,7 @@ fm_directory_view_new_folder (FMDirectoryView *directory_view)
 {
 	char *parent_uri;
 	NewFolderData *data;
-	GdkPoint *pos;
+	CdkPoint *pos;
 
 	data = new_folder_data_new (directory_view);
 
@@ -4240,7 +4240,7 @@ fm_directory_view_new_file_with_initial_contents (FMDirectoryView *directory_vie
 						  const char *filename,
 						  const char *initial_contents,
 						  int length,
-						  GdkPoint *pos)
+						  CdkPoint *pos)
 {
 	NewFolderData *data;
 
@@ -4263,7 +4263,7 @@ fm_directory_view_new_file (FMDirectoryView *directory_view,
 			    const char *parent_uri,
 			    BaulFile *source)
 {
-	GdkPoint *pos;
+	CdkPoint *pos;
 	NewFolderData *data;
 	char *source_uri;
 	char *container_uri;
@@ -5421,7 +5421,7 @@ static void
 run_script_callback (CtkAction *action, gpointer callback_data)
 {
 	ScriptLaunchParameters *launch_parameters;
-	GdkScreen *screen;
+	CdkScreen *screen;
 	GList *selected_files;
 	char *file_uri;
 	char *local_file_path;
@@ -7731,7 +7731,7 @@ pre_activate (FMDirectoryView *view,
 	      CtkAction *action,
 	      CtkActionGroup *action_group)
 {
-	GdkEvent *event;
+	CdkEvent *event;
 	CtkWidget *proxy;
 	gboolean activated_from_popup;
 
@@ -7744,7 +7744,7 @@ pre_activate (FMDirectoryView *view,
 
 	if (proxy != NULL) {
 		CtkWidget *toplevel;
-		GdkWindowTypeHint hint;
+		CdkWindowTypeHint hint;
 
 		toplevel = ctk_widget_get_toplevel (proxy);
 
@@ -7849,7 +7849,7 @@ can_paste_into_file (BaulFile *file)
 
 static void
 clipboard_targets_received (CtkClipboard     *clipboard,
-                            GdkAtom          *targets,
+                            CdkAtom          *targets,
                             int               n_targets,
 			    gpointer          user_data)
 {
@@ -9314,7 +9314,7 @@ real_update_menus (FMDirectoryView *view)
  **/
 void
 fm_directory_view_pop_up_selection_context_menu  (FMDirectoryView *view,
-						  GdkEventButton  *event)
+						  CdkEventButton  *event)
 {
 	g_assert (FM_IS_DIRECTORY_VIEW (view));
 
@@ -9345,7 +9345,7 @@ fm_directory_view_pop_up_selection_context_menu  (FMDirectoryView *view,
  **/
 void
 fm_directory_view_pop_up_background_context_menu (FMDirectoryView *view,
-						  GdkEventButton  *event)
+						  CdkEventButton  *event)
 {
 	g_assert (FM_IS_DIRECTORY_VIEW (view));
 
@@ -9403,15 +9403,15 @@ unschedule_pop_up_location_context_menu (FMDirectoryView *view)
 
 static void
 schedule_pop_up_location_context_menu (FMDirectoryView *view,
-				       GdkEventButton  *event,
+				       CdkEventButton  *event,
 				       BaulFile    *file)
 {
 	g_assert (BAUL_IS_FILE (file));
 
 	if (view->details->location_popup_event != NULL) {
-		cdk_event_free ((GdkEvent *) view->details->location_popup_event);
+		cdk_event_free ((CdkEvent *) view->details->location_popup_event);
 	}
-	view->details->location_popup_event = (GdkEventButton *) cdk_event_copy ((GdkEvent *)event);
+	view->details->location_popup_event = (CdkEventButton *) cdk_event_copy ((CdkEvent *)event);
 
 	if (file == view->details->location_popup_directory_as_file) {
 		if (baul_file_check_if_ready (file, BAUL_FILE_ATTRIBUTE_INFO |
@@ -9437,14 +9437,14 @@ schedule_pop_up_location_context_menu (FMDirectoryView *view,
  *
  * Pop up a context menu appropriate to the view globally.
  * @view: FMDirectoryView of interest.
- * @event: GdkEventButton triggering the popup.
+ * @event: CdkEventButton triggering the popup.
  * @location: The location the popup-menu should be created for,
  * or NULL for the currently displayed location.
  *
  **/
 void
 fm_directory_view_pop_up_location_context_menu (FMDirectoryView *view,
-						GdkEventButton  *event,
+						CdkEventButton  *event,
 						const char      *location)
 {
 	BaulFile *file;
@@ -9467,7 +9467,7 @@ static void
 fm_directory_view_drop_proxy_received_uris (FMDirectoryView *view,
 					    const GList *source_uri_list,
 					    const char *target_uri,
-					    GdkDragAction action)
+					    CdkDragAction action)
 {
 	char *container_uri;
 
@@ -9501,7 +9501,7 @@ static void
 fm_directory_view_drop_proxy_received_netscape_url (FMDirectoryView *view,
 						    const char *netscape_url,
 						    const char *target_uri,
-						    GdkDragAction action)
+						    CdkDragAction action)
 {
 	fm_directory_view_handle_netscape_url_drop (view,
 						    netscape_url,
@@ -10016,7 +10016,7 @@ fm_directory_view_select_file (FMDirectoryView *view, BaulFile *file)
  * fm_directory_view_get_selected_icon_locations:
  *
  * return an array of locations of selected icons if available
- * Return value: GArray of GdkPoints
+ * Return value: GArray of CdkPoints
  *
  **/
 GArray *
@@ -10362,7 +10362,7 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 		   baul_file_is_archive (target_file)) {
 		char *command, *quoted_uri, *tmp;
 		const GList *l;
-		GdkScreen  *screen;
+		CdkScreen  *screen;
 
 		/* Handle dropping onto a engrampa archiver file, instead of starting a move/copy */
 
@@ -10458,11 +10458,11 @@ revert_slashes (char *string)
 }
 
 
-static GdkDragAction
+static CdkDragAction
 ask_link_action (FMDirectoryView *view)
 {
 	int button_pressed;
-	GdkDragAction result;
+	CdkDragAction result;
 	CtkWindow *parent_window;
 	CtkWidget *dialog;
 
@@ -10538,7 +10538,7 @@ handle_netscape_url_drop_ask_cb (GObject *source_object,
 				 gpointer user_data)
 {
 	NetscapeUrlDropAsk *data;
-	GdkDragAction action;
+	CdkDragAction action;
 	GFileInfo *info;
 	GFile *f;
 	const char *mime_type;
@@ -10601,7 +10601,7 @@ handle_netscape_url_drop_timeout (gpointer user_data)
 
 static inline void
 fm_directory_view_widget_to_file_operation_position (FMDirectoryView *view,
-						     GdkPoint *position)
+						     CdkPoint *position)
 {
 	EEL_CALL_METHOD (FM_DIRECTORY_VIEW_CLASS, view,
 			 widget_to_file_operation_position,
@@ -10612,7 +10612,7 @@ static void
 fm_directory_view_widget_to_file_operation_position_xy (FMDirectoryView *view,
 							int *x, int *y)
 {
-	GdkPoint position;
+	CdkPoint position;
 
 	position.x = *x;
 	position.y = *y;
@@ -10625,11 +10625,11 @@ void
 fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 					    const char       *encoded_url,
 					    const char       *target_uri,
-					    GdkDragAction     action,
+					    CdkDragAction     action,
 					    int               x,
 					    int               y)
 {
-	GdkPoint point;
+	CdkPoint point;
 	char *url, *title;
 	char *container_uri;
 	char **bits;
@@ -10729,7 +10729,7 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 		}
 
 		if (!eel_str_is_empty (link_name)) {
-			GdkScreen *screen;
+			CdkScreen *screen;
 			int screen_num;
 			char *link_display_name;
 
@@ -10760,10 +10760,10 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 	} else {
 		GArray *points;
 
-		GdkPoint tmp_point = { 0, 0 };
+		CdkPoint tmp_point = { 0, 0 };
 
 		/* pass in a 1-item array of icon positions, relative to x, y */
-		points = g_array_new (FALSE, TRUE, sizeof (GdkPoint));
+		points = g_array_new (FALSE, TRUE, sizeof (CdkPoint));
 		g_array_append_val (points, tmp_point);
 
 		uri_list = g_list_append (uri_list, url);
@@ -10784,7 +10784,7 @@ void
 fm_directory_view_handle_uri_list_drop (FMDirectoryView  *view,
 					const char       *item_uris,
 					const char       *target_uri,
-					GdkDragAction     action,
+					CdkDragAction     action,
 					int               x,
 					int               y)
 {
@@ -10842,10 +10842,10 @@ fm_directory_view_handle_uri_list_drop (FMDirectoryView  *view,
 	}
 
 	if (n_uris == 1) {
-		GdkPoint tmp_point = { 0, 0 };
+		CdkPoint tmp_point = { 0, 0 };
 
 		/* pass in a 1-item array of icon positions, relative to x, y */
-		points = g_array_new (FALSE, TRUE, sizeof (GdkPoint));
+		points = g_array_new (FALSE, TRUE, sizeof (CdkPoint));
 		g_array_append_val (points, tmp_point);
 	} else {
 		points = NULL;
@@ -10869,13 +10869,13 @@ void
 fm_directory_view_handle_text_drop (FMDirectoryView  *view,
 				    const char       *text,
 				    const char       *target_uri,
-				    GdkDragAction     action,
+				    CdkDragAction     action,
 				    int               x,
 				    int               y)
 {
 	int length;
 	char *container_uri;
-	GdkPoint pos;
+	CdkPoint pos;
 
 	if (text == NULL) {
 		return;
@@ -10910,12 +10910,12 @@ fm_directory_view_handle_raw_drop (FMDirectoryView  *view,
 				    int               length,
 				    const char       *target_uri,
 				    const char       *direct_save_uri,
-				    GdkDragAction     action,
+				    CdkDragAction     action,
 				    int               x,
 				    int               y)
 {
 	char *container_uri, *filename;
-	GdkPoint pos;
+	CdkPoint pos;
 
 	if (raw_data == NULL) {
 		return;
@@ -10965,7 +10965,7 @@ static GArray *
 real_get_selected_icon_locations (FMDirectoryView *view)
 {
         /* By default, just return an empty list. */
-        return g_array_new (FALSE, TRUE, sizeof (GdkPoint));
+        return g_array_new (FALSE, TRUE, sizeof (CdkPoint));
 }
 
 static void
@@ -11017,7 +11017,7 @@ fm_directory_view_set_property (GObject         *object,
 
 gboolean
 fm_directory_view_handle_scroll_event (FMDirectoryView *directory_view,
-				       GdkEventScroll *event)
+				       CdkEventScroll *event)
 {
 	static gdouble total_delta_y = 0;
 	gdouble delta_x, delta_y;
@@ -11035,7 +11035,7 @@ fm_directory_view_handle_scroll_event (FMDirectoryView *directory_view,
 			return TRUE;
 
 		case GDK_SCROLL_SMOOTH:
-			cdk_event_get_scroll_deltas ((const GdkEvent *) event,
+			cdk_event_get_scroll_deltas ((const CdkEvent *) event,
 			                             &delta_x, &delta_y);
 
 			/* try to emulate a normal scrolling event by summing deltas */
@@ -11071,7 +11071,7 @@ fm_directory_view_handle_scroll_event (FMDirectoryView *directory_view,
 /* handle Shift+Scroll, which will cause a zoom-in/out */
 static gboolean
 fm_directory_view_scroll_event (CtkWidget *widget,
-				GdkEventScroll *event)
+				CdkEventScroll *event)
 {
 	FMDirectoryView *directory_view;
 

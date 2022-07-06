@@ -288,7 +288,7 @@ baul_view_update_menus (BaulView *view)
 
 void
 baul_view_pop_up_location_context_menu (BaulView   *view,
-                                        GdkEventButton *event,
+                                        CdkEventButton *event,
                                         const char     *location)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
@@ -303,7 +303,7 @@ void
 baul_view_drop_proxy_received_uris   (BaulView         *view,
                                       GList                *uris,
                                       const char           *target_location,
-                                      GdkDragAction         action)
+                                      CdkDragAction         action)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
 
@@ -317,7 +317,7 @@ void
 baul_view_drop_proxy_received_netscape_url (BaulView         *view,
         const char           *source_url,
         const char           *target_location,
-        GdkDragAction         action)
+        CdkDragAction         action)
 {
     g_return_if_fail (BAUL_IS_VIEW (view));
 

@@ -119,7 +119,7 @@ static gboolean
 should_open_in_new_tab (void)
 {
     /* FIXME this is duplicated */
-    GdkEvent *event;
+    CdkEvent *event;
 
     event = ctk_get_current_event ();
 
@@ -706,7 +706,7 @@ get_event_widget (CtkWidget *proxy)
 
 static gboolean
 proxy_button_press_event_cb (CtkButton *button,
-                             GdkEventButton *event,
+                             CdkEventButton *event,
                              gpointer user_data)
 {
     if (event->button == 2)
@@ -719,7 +719,7 @@ proxy_button_press_event_cb (CtkButton *button,
 
 static gboolean
 proxy_button_release_event_cb (CtkButton *button,
-                               GdkEventButton *event,
+                               CdkEventButton *event,
                                gpointer user_data)
 {
     if (event->button == 2)

@@ -92,7 +92,7 @@ baul_entry_finalize (GObject *object)
 }
 
 static gboolean
-baul_entry_key_press (CtkWidget *widget, GdkEventKey *event)
+baul_entry_key_press (CtkWidget *widget, CdkEventKey *event)
 {
     BaulEntry *entry;
     CtkEditable *editable;
@@ -151,7 +151,7 @@ baul_entry_key_press (CtkWidget *widget, GdkEventKey *event)
 }
 
 static gboolean
-baul_entry_motion_notify (CtkWidget *widget, GdkEventMotion *event)
+baul_entry_motion_notify (CtkWidget *widget, CdkEventMotion *event)
 {
     int result;
     gboolean old_had, new_had;
@@ -269,7 +269,7 @@ baul_entry_set_selection_bounds (CtkEditable *editable,
 
 static gboolean
 baul_entry_button_press (CtkWidget *widget,
-                         GdkEventButton *event)
+                         CdkEventButton *event)
 {
     gboolean result;
 
@@ -285,7 +285,7 @@ baul_entry_button_press (CtkWidget *widget,
 
 static gboolean
 baul_entry_button_release (CtkWidget *widget,
-                           GdkEventButton *event)
+                           CdkEventButton *event)
 {
     gboolean result;
 
@@ -346,7 +346,7 @@ baul_entry_delete_text (CtkEditable *editable, int start_pos, int end_pos)
  */
 static gboolean
 baul_entry_selection_clear (CtkWidget *widget,
-                            GdkEventSelection *event)
+                            CdkEventSelection *event)
 {
     g_assert (BAUL_IS_ENTRY (widget));
 

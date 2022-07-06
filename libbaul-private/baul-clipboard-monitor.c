@@ -60,7 +60,7 @@ struct _BaulClipboardMonitorPrivate
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-static GdkAtom copied_files_atom;
+static CdkAtom copied_files_atom;
 
 G_DEFINE_TYPE_WITH_PRIVATE (BaulClipboardMonitor, baul_clipboard_monitor, G_TYPE_OBJECT);
 
@@ -290,7 +290,7 @@ baul_get_clipboard_callback (CtkClipboard     *clipboard,
 {
     GList *l;
     BaulClipboardInfo *clipboard_info;
-    GdkAtom target;
+    CdkAtom target;
 
     clipboard_info =
         baul_clipboard_monitor_get_clipboard_info (baul_clipboard_monitor_get ());

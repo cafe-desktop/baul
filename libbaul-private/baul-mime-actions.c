@@ -1450,7 +1450,7 @@ search_for_application_dbus_call_notify_cb (GDBusProxy   *proxy,
 static void
 search_for_application_mime_type (ActivateParametersInstall *parameters_install, const gchar *mime_type)
 {
-    GdkWindow *window;
+    CdkWindow *window;
     guint xid = 0;
     const char *mime_types[2];
 
@@ -1657,7 +1657,7 @@ untrusted_launcher_response_callback (CtkDialog *dialog,
                                       int response_id,
                                       ActivateParametersDesktop *parameters)
 {
-    GdkScreen *screen;
+    CdkScreen *screen;
     char *uri;
     GFile *file;
 
@@ -1695,7 +1695,7 @@ activate_desktop_file (ActivateParameters *parameters,
                        BaulFile *file)
 {
     ActivateParametersDesktop *parameters_desktop;
-    GdkScreen *screen;
+    CdkScreen *screen;
     char *uri;
 
     screen = ctk_widget_get_screen (CTK_WIDGET (parameters->parent_window));
@@ -1784,7 +1784,7 @@ activate_files (ActivateParameters *parameters)
     char *executable_path, *quoted_path, *name;
     char *old_working_dir;
     ActivationAction action;
-    GdkScreen *screen;
+    CdkScreen *screen;
     LaunchLocation *location;
     ApplicationLaunchParameters *one_parameters = NULL;
 

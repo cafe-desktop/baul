@@ -2473,7 +2473,7 @@ reload_icon_positions (BaulIconContainer *container)
 /* Container-level icon handling functions.  */
 
 static gboolean
-button_event_modifies_selection (GdkEventButton *event)
+button_event_modifies_selection (CdkEventButton *event)
 {
     return (event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) != 0;
 }
@@ -2731,8 +2731,8 @@ rubberband_timeout_callback (gpointer data)
     double world_x, world_y;
     int x_scroll, y_scroll;
     int adj_x, adj_y;
-    GdkDisplay *display;
-    GdkSeat *seat;
+    CdkDisplay *display;
+    CdkSeat *seat;
     gboolean adj_changed;
     CtkAllocation allocation;
 
@@ -2869,13 +2869,13 @@ rubberband_timeout_callback (gpointer data)
 /*borrowed from Nemo, makes Baul rubberbanding follow same selectors as Nemo and presumably Nautilus */
 static void
 start_rubberbanding (BaulIconContainer *container,
-		     GdkEventButton *event)
+		     CdkEventButton *event)
 {
 	AtkObject *accessible;
 	BaulIconContainerDetails *details;
 	BaulIconRubberbandInfo *band_info;
-	GdkRGBA bg_color, border_color;
-	GdkRGBA *c;
+	CdkRGBA bg_color, border_color;
+	CdkRGBA *c;
 	GList *p;
 	BaulIcon *icon;
 	CtkStyleContext *context;
@@ -2949,7 +2949,7 @@ start_rubberbanding (BaulIconContainer *container,
 				 | GDK_BUTTON_RELEASE_MASK
 				 | GDK_SCROLL_MASK),
 				NULL,
-				(GdkEvent *)event);
+				(CdkEvent *)event);
 }
 
 static void
@@ -3828,7 +3828,7 @@ static void
 keyboard_move_to (BaulIconContainer *container,
                   BaulIcon *icon,
                   BaulIcon *from,
-                  GdkEventKey *event)
+                  CdkEventKey *event)
 {
     if (icon == NULL)
     {
@@ -3907,7 +3907,7 @@ keyboard_move_to (BaulIconContainer *container,
 
 static void
 keyboard_home (BaulIconContainer *container,
-               GdkEventKey *event)
+               CdkEventKey *event)
 {
     BaulIcon *from;
     BaulIcon *to;
@@ -3926,7 +3926,7 @@ keyboard_home (BaulIconContainer *container,
 
 static void
 keyboard_end (BaulIconContainer *container,
-              GdkEventKey *event)
+              CdkEventKey *event)
 {
     BaulIcon *to;
     BaulIcon *from;
@@ -3965,7 +3965,7 @@ record_arrow_key_start (BaulIconContainer *container,
 
 static void
 keyboard_arrow_key (BaulIconContainer *container,
-                    GdkEventKey *event,
+                    CdkEventKey *event,
                     CtkDirectionType direction,
                     IsBetterIconFunction better_start,
                     IsBetterIconFunction empty_start,
@@ -4074,7 +4074,7 @@ keyboard_arrow_key (BaulIconContainer *container,
 }
 
 static gboolean
-is_rectangle_selection_event (GdkEventKey *event)
+is_rectangle_selection_event (CdkEventKey *event)
 {
     return (event->state & GDK_CONTROL_MASK) != 0 &&
            (event->state & GDK_SHIFT_MASK) != 0;
@@ -4082,7 +4082,7 @@ is_rectangle_selection_event (GdkEventKey *event)
 
 static void
 keyboard_right (BaulIconContainer *container,
-                GdkEventKey *event)
+                CdkEventKey *event)
 {
     IsBetterIconFunction fallback;
     IsBetterIconFunction next_column_fallback;
@@ -4119,7 +4119,7 @@ keyboard_right (BaulIconContainer *container,
 
 static void
 keyboard_left (BaulIconContainer *container,
-               GdkEventKey *event)
+               CdkEventKey *event)
 {
     IsBetterIconFunction fallback;
     IsBetterIconFunction previous_column_fallback;
@@ -4156,7 +4156,7 @@ keyboard_left (BaulIconContainer *container,
 
 static void
 keyboard_down (BaulIconContainer *container,
-               GdkEventKey *event)
+               CdkEventKey *event)
 {
     IsBetterIconFunction fallback;
     IsBetterIconFunction next_row_fallback;
@@ -4206,7 +4206,7 @@ keyboard_down (BaulIconContainer *container,
 
 static void
 keyboard_up (BaulIconContainer *container,
-             GdkEventKey *event)
+             CdkEventKey *event)
 {
     IsBetterIconFunction fallback;
 
@@ -4242,7 +4242,7 @@ keyboard_up (BaulIconContainer *container,
 
 static void
 keyboard_space (BaulIconContainer *container,
-                GdkEventKey *event)
+                CdkEventKey *event)
 {
     BaulIcon *icon;
 
@@ -4308,7 +4308,7 @@ typedef struct
 static void
 select_previous_or_next_icon (BaulIconContainer *container,
                               gboolean next,
-                              GdkEventKey *event)
+                              CdkEventKey *event)
 {
     BaulIcon *icon;
     const GList *item;
@@ -4661,7 +4661,7 @@ style_updated (CtkWidget *widget)
 
 static gboolean
 button_press_event (CtkWidget *widget,
-                    GdkEventButton *event)
+                    CdkEventButton *event)
 {
     BaulIconContainer *container;
     gboolean selection_changed;
@@ -4762,7 +4762,7 @@ button_press_event (CtkWidget *widget,
 
 static void
 baul_icon_container_did_not_drag (BaulIconContainer *container,
-                                  GdkEventButton *event)
+                                  CdkEventButton *event)
 {
     BaulIconContainerDetails *details;
     gboolean selection_changed;
@@ -4892,15 +4892,15 @@ clear_drag_state (BaulIconContainer *container)
 
 static gboolean
 start_stretching (BaulIconContainer *container,
-		  GdkEvent *event)
+		  CdkEvent *event)
 {
     BaulIconContainerDetails *details;
     BaulIcon *icon;
     EelDPoint world_point;
     CtkWidget *toplevel;
-    GdkDisplay *display;
+    CdkDisplay *display;
     CtkCornerType corner;
-    GdkCursor *cursor;
+    CdkCursor *cursor;
 
     details = container->details;
     icon = details->stretch_icon;
@@ -5019,7 +5019,7 @@ continue_stretching (BaulIconContainer *container,
 
 static gboolean
 keyboard_stretching (BaulIconContainer *container,
-                     GdkEventKey           *event)
+                     CdkEventKey           *event)
 {
     BaulIcon *icon;
     guint size;
@@ -5131,7 +5131,7 @@ undo_stretching (BaulIconContainer *container)
 
 static gboolean
 button_release_event (CtkWidget *widget,
-                      GdkEventButton *event)
+                      CdkEventButton *event)
 {
     BaulIconContainer *container;
     BaulIconContainerDetails *details;
@@ -5182,13 +5182,13 @@ button_release_event (CtkWidget *widget,
 
 static int
 motion_notify_event (CtkWidget *widget,
-                     GdkEventMotion *event)
+                     CdkEventMotion *event)
 {
     BaulIconContainer *container;
     BaulIconContainerDetails *details;
     double world_x, world_y;
     int canvas_x, canvas_y;
-    GdkDragAction actions;
+    CdkDragAction actions;
 
     container = BAUL_ICON_CONTAINER (widget);
     details = container->details;
@@ -5263,11 +5263,11 @@ baul_icon_container_search_position_func (BaulIconContainer *container,
     gint cont_x, cont_y;
     gint cont_width, cont_height;
     gint scale;
-    GdkWindow *cont_window;
-    GdkScreen *screen;
+    CdkWindow *cont_window;
+    CdkScreen *screen;
     CtkRequisition requisition;
-    GdkMonitor *monitor_num;
-    GdkRectangle monitor;
+    CdkMonitor *monitor_num;
+    CdkRectangle monitor;
 
 
     cont_window = ctk_widget_get_window (CTK_WIDGET (container));
@@ -5355,12 +5355,12 @@ baul_icon_container_search_disable_popdown (CtkEntry *entry,
 static void
 send_focus_change (CtkWidget *widget, gboolean in)
 {
-    GdkEvent *fevent;
+    CdkEvent *fevent;
 
     fevent = cdk_event_new (GDK_FOCUS_CHANGE);
 
     g_object_ref (widget);
-    ((GdkEventFocus *) fevent)->in = in;
+    ((CdkEventFocus *) fevent)->in = in;
 
     ctk_widget_send_focus_change (widget, fevent);
 
@@ -5442,7 +5442,7 @@ baul_icon_container_search_activate (CtkEntry *entry,
 
 static gboolean
 baul_icon_container_search_delete_event (CtkWidget *widget,
-        GdkEventAny *event,
+        CdkEventAny *event,
         BaulIconContainer *container)
 {
     g_assert (CTK_IS_WIDGET (widget));
@@ -5454,7 +5454,7 @@ baul_icon_container_search_delete_event (CtkWidget *widget,
 
 static gboolean
 baul_icon_container_search_button_press_event (CtkWidget *widget,
-        GdkEventButton *event,
+        CdkEventButton *event,
         BaulIconContainer *container)
 {
     g_assert (CTK_IS_WIDGET (widget));
@@ -5618,7 +5618,7 @@ baul_icon_container_search_move (CtkWidget *window,
 
 static gboolean
 baul_icon_container_search_scroll_event (CtkWidget *widget,
-        GdkEventScroll *event,
+        CdkEventScroll *event,
         BaulIconContainer *container)
 {
     gboolean retval = FALSE;
@@ -5649,7 +5649,7 @@ baul_icon_container_search_scroll_event (CtkWidget *widget,
 
 static gboolean
 baul_icon_container_search_key_press_event (CtkWidget *widget,
-        GdkEventKey *event,
+        CdkEventKey *event,
         BaulIconContainer *container)
 {
     gboolean retval = FALSE;
@@ -5879,10 +5879,10 @@ baul_icon_container_start_interactive_search (BaulIconContainer *container)
 
 static gboolean
 handle_popups (BaulIconContainer *container,
-               GdkEventKey           *event,
+               CdkEventKey           *event,
                const char            *signal)
 {
-    GdkEventButton button_event = { 0 };
+    CdkEventButton button_event = { 0 };
 
     g_signal_emit_by_name (container, signal, &button_event);
 
@@ -5891,7 +5891,7 @@ handle_popups (BaulIconContainer *container,
 
 static int
 key_press_event (CtkWidget *widget,
-                 GdkEventKey *event)
+                 CdkEventKey *event)
 {
     BaulIconContainer *container;
     gboolean handled;
@@ -6042,12 +6042,12 @@ key_press_event (CtkWidget *widget,
             event->keyval != GDK_KEY_BackSpace &&
             event->keyval != GDK_KEY_Delete)
     {
-        GdkEvent *new_event;
-        GdkWindow *window;
+        CdkEvent *new_event;
+        CdkWindow *window;
         char *old_text;
         const char *new_text;
         gboolean retval;
-        GdkScreen *screen;
+        CdkScreen *screen;
         gboolean text_modified;
         gulong popup_menu_id;
         gint scale;
@@ -6056,9 +6056,9 @@ key_press_event (CtkWidget *widget,
 
         /* Make a copy of the current text */
         old_text = g_strdup (ctk_entry_get_text (CTK_ENTRY (container->details->search_entry)));
-        new_event = cdk_event_copy ((GdkEvent *) event);
-        window = ((GdkEventKey *) new_event)->window;
-        ((GdkEventKey *) new_event)->window = ctk_widget_get_window (container->details->search_entry);
+        new_event = cdk_event_copy ((CdkEvent *) event);
+        window = ((CdkEventKey *) new_event)->window;
+        ((CdkEventKey *) new_event)->window = ctk_widget_get_window (container->details->search_entry);
         ctk_widget_realize (container->details->search_window);
 
         popup_menu_id = g_signal_connect (container->details->search_entry,
@@ -6101,7 +6101,7 @@ key_press_event (CtkWidget *widget,
             }
         }
 
-        ((GdkEventKey *) new_event)->window = window;
+        ((CdkEventKey *) new_event)->window = window;
         cdk_event_free (new_event);
     }
 
@@ -6631,7 +6631,7 @@ update_selected (BaulIconContainer *container)
 }
 
 static gboolean
-handle_focus_in_event (CtkWidget *widget, GdkEventFocus *event, gpointer user_data)
+handle_focus_in_event (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
 {
     update_selected (BAUL_ICON_CONTAINER (widget));
 
@@ -6639,7 +6639,7 @@ handle_focus_in_event (CtkWidget *widget, GdkEventFocus *event, gpointer user_da
 }
 
 static gboolean
-handle_focus_out_event (CtkWidget *widget, GdkEventFocus *event, gpointer user_data)
+handle_focus_out_event (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
 {
     /* End renaming and commit change. */
     end_renaming_mode (BAUL_ICON_CONTAINER (widget), TRUE);
@@ -6806,13 +6806,13 @@ baul_icon_container_init (BaulIconContainer *container)
 typedef struct
 {
     BaulIconContainer *container;
-    GdkEventButton	      *event;
+    CdkEventButton	      *event;
 } ContextMenuParameters;
 
 static gboolean
 handle_icon_double_click (BaulIconContainer *container,
                           BaulIcon *icon,
-                          GdkEventButton *event)
+                          CdkEventButton *event)
 {
     BaulIconContainerDetails *details;
 
@@ -6858,7 +6858,7 @@ handle_icon_double_click (BaulIconContainer *container,
 static gboolean
 handle_icon_button_press (BaulIconContainer *container,
                           BaulIcon *icon,
-                          GdkEventButton *event)
+                          CdkEventButton *event)
 {
     BaulIconContainerDetails *details;
 
@@ -6910,7 +6910,7 @@ handle_icon_button_press (BaulIconContainer *container,
          */
         if (icon == container->details->stretch_icon)
         {
-            if (start_stretching (container, (GdkEvent *)event))
+            if (start_stretching (container, (CdkEvent *)event))
             {
                 return TRUE;
             }
@@ -6970,7 +6970,7 @@ handle_icon_button_press (BaulIconContainer *container,
 
 static int
 item_event_callback (EelCanvasItem *item,
-                     GdkEvent *event,
+                     CdkEvent *event,
                      gpointer data)
 {
     BaulIconContainer *container;
@@ -7569,14 +7569,14 @@ baul_icon_container_update_icon (BaulIconContainer *container,
     guint icon_size;
     guint min_image_size, max_image_size;
     BaulIconInfo *icon_info;
-    GdkPoint *attach_points;
+    CdkPoint *attach_points;
     int n_attach_points;
     gboolean has_embedded_text_rect;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     GList *emblem_pixbufs;
     char *editable_text, *additional_text;
     char *embedded_text;
-    GdkRectangle embedded_text_rect;
+    CdkRectangle embedded_text_rect;
     gboolean large_embedded_text;
     gboolean embedded_text_needs_loading;
     gboolean has_open_window;
@@ -8160,7 +8160,7 @@ baul_icon_container_invert_selection (BaulIconContainer *container)
 }
 
 
-/* Returns an array of GdkPoints of locations of the icons. */
+/* Returns an array of CdkPoints of locations of the icons. */
 static GArray *
 baul_icon_container_get_icon_locations (BaulIconContainer *container,
                                         GList *icons)
@@ -8169,14 +8169,14 @@ baul_icon_container_get_icon_locations (BaulIconContainer *container,
     GList *node;
     int index;
 
-    result = g_array_new (FALSE, TRUE, sizeof (GdkPoint));
+    result = g_array_new (FALSE, TRUE, sizeof (CdkPoint));
     result = g_array_set_size (result, g_list_length (icons));
 
     for (index = 0, node = icons; node != NULL; index++, node = node->next)
     {
-        g_array_index (result, GdkPoint, index).x =
+        g_array_index (result, CdkPoint, index).x =
             ((BaulIcon *)node->data)->x;
-        g_array_index (result, GdkPoint, index).y =
+        g_array_index (result, CdkPoint, index).y =
             ((BaulIcon *)node->data)->y;
     }
 
@@ -8187,7 +8187,7 @@ baul_icon_container_get_icon_locations (BaulIconContainer *container,
  * baul_icon_container_get_selected_icon_locations:
  * @container: An icon container widget.
  *
- * Returns an array of GdkPoints of locations of the selected icons.
+ * Returns an array of CdkPoints of locations of the selected icons.
  **/
 GArray *
 baul_icon_container_get_selected_icon_locations (BaulIconContainer *container)
@@ -9831,7 +9831,7 @@ baul_icon_container_accessible_select_all_selection (AtkSelection *accessible)
 
 void
 baul_icon_container_widget_to_file_operation_position (BaulIconContainer *container,
-        GdkPoint              *position)
+        CdkPoint              *position)
 {
     double x, y;
 

@@ -33,7 +33,7 @@
 
 /* CtkWindow */
 void                  eel_ctk_window_set_initial_geometry             (CtkWindow            *window,
-        EelGdkGeometryFlags   geometry_flags,
+        EelCdkGeometryFlags   geometry_flags,
         int                   left,
         int                   top,
         guint                 width,
@@ -48,7 +48,7 @@ char *                eel_ctk_window_get_geometry_string              (CtkWindow
 
 /* CtkMenu and CtkMenuItem */
 void                  eel_pop_up_context_menu                         (CtkMenu              *menu,
-        GdkEventButton       *event);
+        CdkEventButton       *event);
 CtkMenuItem *         eel_ctk_menu_append_separator                   (CtkMenu              *menu);
 CtkMenuItem *         eel_ctk_menu_insert_separator                   (CtkMenu              *menu,
         int                   index);
@@ -74,6 +74,6 @@ CtkWidget *           eel_image_menu_item_new_from_surface              (cairo_s
                                                                          const gchar        *label_name);
 
 gboolean              eel_dialog_page_scroll_event_callback           (CtkWidget            *widget,
-                                                                       GdkEventScroll       *event,
+                                                                       CdkEventScroll       *event,
                                                                        CtkWindow            *window);
 #endif /* EEL_CTK_EXTENSIONS_H */

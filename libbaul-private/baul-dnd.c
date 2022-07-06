@@ -346,8 +346,8 @@ baul_drag_items_on_desktop (const GList *selection_list)
 
 }
 
-GdkDragAction
-baul_drag_default_drop_action_for_netscape_url (GdkDragContext *context)
+CdkDragAction
+baul_drag_default_drop_action_for_netscape_url (CdkDragContext *context)
 {
     /* Mozilla defaults to copy, but unless thats the
        only allowed thing (enforced by ctrl) we want to ASK */
@@ -412,7 +412,7 @@ source_is_deletable (GFile *file)
 }
 
 void
-baul_drag_default_drop_action_for_icons (GdkDragContext *context,
+baul_drag_default_drop_action_for_icons (CdkDragContext *context,
         const char *target_uri_string, const GList *items,
         int *action)
 {
@@ -421,7 +421,7 @@ baul_drag_default_drop_action_for_icons (GdkDragContext *context,
     gboolean source_deletable;
     const char *dropped_uri;
     GFile *target, *dropped, *dropped_directory;
-    GdkDragAction actions;
+    CdkDragAction actions;
     BaulFile *dropped_file, *target_file;
 
     if (target_uri_string == NULL)
@@ -560,8 +560,8 @@ baul_drag_default_drop_action_for_icons (GdkDragContext *context,
 
 }
 
-GdkDragAction
-baul_drag_default_drop_action_for_uri_list (GdkDragContext *context,
+CdkDragAction
+baul_drag_default_drop_action_for_uri_list (CdkDragContext *context,
         const char *target_uri_string)
 {
     if (eel_uri_is_trash (target_uri_string) && (cdk_drag_context_get_actions (context) & GDK_ACTION_MOVE))
@@ -689,7 +689,7 @@ add_one_uri (const char *uri, int x, int y, int w, int h, gpointer data)
  * Returns FALSE if it doesn't handle drag data */
 gboolean
 baul_drag_drag_data_get (CtkWidget *widget,
-                         GdkDragContext *context,
+                         CdkDragContext *context,
                          CtkSelectionData *selection_data,
                          guint info,
                          guint32 time,
@@ -726,7 +726,7 @@ baul_drag_drag_data_get (CtkWidget *widget,
 typedef struct
 {
     GMainLoop *loop;
-    GdkDragAction chosen;
+    CdkDragAction chosen;
 } DropActionMenuData;
 
 static void
@@ -759,7 +759,7 @@ drop_action_activated_callback (CtkWidget  *menu_item,
 static void
 append_drop_action_menu_item (CtkWidget          *menu,
                               const char         *text,
-                              GdkDragAction       action,
+                              CdkDragAction       action,
                               gboolean            sensitive,
                               DropActionMenuData *damd)
 {
@@ -781,9 +781,9 @@ append_drop_action_menu_item (CtkWidget          *menu,
 }
 
 /* Pops up a menu of actions to perform on dropped files */
-GdkDragAction
+CdkDragAction
 baul_drag_drop_action_ask (CtkWidget *widget,
-                           GdkDragAction actions)
+                           CdkDragAction actions)
 {
     CtkWidget *menu;
     CtkWidget *menu_item;
@@ -844,9 +844,9 @@ baul_drag_drop_action_ask (CtkWidget *widget,
     return damd.chosen;
 }
 
-GdkDragAction
+CdkDragAction
 baul_drag_drop_background_ask (CtkWidget *widget,
-                               GdkDragAction actions)
+                               CdkDragAction actions)
 {
     CtkWidget *menu;
     CtkWidget *menu_item;
@@ -912,9 +912,9 @@ void
 baul_drag_autoscroll_calculate_delta (CtkWidget *widget, float *x_scroll_delta, float *y_scroll_delta)
 {
     CtkAllocation allocation;
-    GdkDisplay *display;
-    GdkSeat *seat;
-    GdkDevice *pointer;
+    CdkDisplay *display;
+    CdkSeat *seat;
+    CdkDevice *pointer;
     int x, y;
 
     g_assert (CTK_IS_WIDGET (widget));
@@ -1059,7 +1059,7 @@ baul_drag_selection_includes_special_link (GList *selection_list)
 
 static gboolean
 slot_proxy_drag_motion (CtkWidget          *widget,
-                        GdkDragContext     *context,
+                        CdkDragContext     *context,
                         int                 x,
                         int                 y,
                         unsigned int        time,
@@ -1068,7 +1068,7 @@ slot_proxy_drag_motion (CtkWidget          *widget,
     BaulDragSlotProxyInfo *drag_info;
     BaulWindowSlotInfo *target_slot;
     CtkWidget *window;
-    GdkAtom target;
+    CdkAtom target;
     int action;
     char *target_uri;
 
@@ -1184,7 +1184,7 @@ out:
 
 static void
 slot_proxy_drag_leave (CtkWidget          *widget,
-                       GdkDragContext     *context,
+                       CdkDragContext     *context,
                        unsigned int        time,
                        gpointer            user_data)
 {
@@ -1198,13 +1198,13 @@ slot_proxy_drag_leave (CtkWidget          *widget,
 
 static gboolean
 slot_proxy_drag_drop (CtkWidget          *widget,
-                      GdkDragContext     *context,
+                      CdkDragContext     *context,
                       int                 x,
                       int                 y,
                       unsigned int        time,
                       gpointer            user_data)
 {
-    GdkAtom target;
+    CdkAtom target;
     BaulDragSlotProxyInfo *drag_info;
 
     drag_info = user_data;
@@ -1221,7 +1221,7 @@ slot_proxy_drag_drop (CtkWidget          *widget,
 
 static void
 slot_proxy_handle_drop (CtkWidget                *widget,
-                        GdkDragContext           *context,
+                        CdkDragContext           *context,
                         unsigned int              time,
                         BaulDragSlotProxyInfo *drag_info)
 {
@@ -1316,7 +1316,7 @@ slot_proxy_handle_drop (CtkWidget                *widget,
 
 static void
 slot_proxy_drag_data_received (CtkWidget          *widget,
-                               GdkDragContext     *context,
+                               CdkDragContext     *context,
                                int                 x,
                                int                 y,
                                CtkSelectionData   *data,

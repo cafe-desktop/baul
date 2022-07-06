@@ -41,7 +41,7 @@ typedef struct
     BaulFileChangeKind kind;
     GFile *from;
     GFile *to;
-    GdkPoint point;
+    CdkPoint point;
     int screen;
 } BaulFileChange;
 
@@ -151,7 +151,7 @@ baul_file_changes_queue_file_moved (GFile *from,
 
 void
 baul_file_changes_queue_schedule_position_set (GFile *location,
-        GdkPoint point,
+        CdkPoint point,
         int screen)
 {
     BaulFileChange *new_item;

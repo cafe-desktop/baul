@@ -201,7 +201,7 @@ present_autorun_for_software_dialog (GMount *mount)
     GIcon *icon;
     int icon_size;
     BaulIconInfo *icon_info;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     CtkWidget *image;
     char *mount_name;
     CtkWidget *dialog;

@@ -71,7 +71,7 @@ G_BEGIN_DECLS
 
     /* attributes */
     void        baul_icon_canvas_item_set_image                (BaulIconCanvasItem       *item,
-            GdkPixbuf                    *image);
+            CdkPixbuf                    *image);
 
     cairo_surface_t* baul_icon_canvas_item_get_drag_surface    (BaulIconCanvasItem       *item);
 
@@ -80,10 +80,10 @@ G_BEGIN_DECLS
     void        baul_icon_canvas_item_set_show_stretch_handles (BaulIconCanvasItem       *item,
             gboolean                      show_stretch_handles);
     void        baul_icon_canvas_item_set_attach_points        (BaulIconCanvasItem       *item,
-            GdkPoint                     *attach_points,
+            CdkPoint                     *attach_points,
             int                           n_attach_points);
     void        baul_icon_canvas_item_set_embedded_text_rect   (BaulIconCanvasItem       *item,
-            const GdkRectangle           *text_rect);
+            const CdkRectangle           *text_rect);
     void        baul_icon_canvas_item_set_embedded_text        (BaulIconCanvasItem       *item,
             const char                   *text);
     double      baul_icon_canvas_item_get_max_text_width       (BaulIconCanvasItem       *item);

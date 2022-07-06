@@ -164,7 +164,7 @@ item_entry_free (ItemEntry *entry)
 }
 
 static void
-fm_ditem_page_url_drag_data_received (CtkWidget *widget, GdkDragContext *context,
+fm_ditem_page_url_drag_data_received (CtkWidget *widget, CdkDragContext *context,
                                       int x, int y,
                                       CtkSelectionData *selection_data,
                                       guint info, guint time,
@@ -198,7 +198,7 @@ fm_ditem_page_url_drag_data_received (CtkWidget *widget, GdkDragContext *context
 }
 
 static void
-fm_ditem_page_exec_drag_data_received (CtkWidget *widget, GdkDragContext *context,
+fm_ditem_page_exec_drag_data_received (CtkWidget *widget, CdkDragContext *context,
                                        int x, int y,
                                        CtkSelectionData *selection_data,
                                        guint info, guint time,
@@ -310,7 +310,7 @@ entry_activate_cb (CtkWidget *entry,
 
 static gboolean
 entry_focus_out_cb (CtkWidget *entry,
-                    GdkEventFocus *event,
+                    CdkEventFocus *event,
                     CtkWidget *container)
 {
     const char *uri;

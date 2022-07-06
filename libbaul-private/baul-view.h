@@ -121,17 +121,17 @@ extern "C" {
          * The view may display the popup synchronously, asynchronously
          * or not react to the popup request at all. */
         void           (* pop_up_location_context_menu) (BaulView   *view,
-                GdkEventButton *event,
+                CdkEventButton *event,
                 const char     *location);
 
         void           (* drop_proxy_received_uris)     (BaulView         *view,
                 GList                *uris,
                 const char           *target_location,
-                GdkDragAction         action);
+                CdkDragAction         action);
         void           (* drop_proxy_received_netscape_url) (BaulView         *view,
                 const char           *source_url,
                 const char           *target_location,
-                GdkDragAction         action);
+                CdkDragAction         action);
         void           (* set_is_active)                    (BaulView         *view,
                 gboolean              is_active);
 
@@ -171,18 +171,18 @@ extern "C" {
     gboolean          baul_view_can_zoom_out               (BaulView      *view);
     BaulZoomLevel baul_view_get_zoom_level             (BaulView      *view);
     void              baul_view_pop_up_location_context_menu (BaulView    *view,
-            GdkEventButton  *event,
+            CdkEventButton  *event,
             const char      *location);
     void              baul_view_grab_focus                 (BaulView      *view);
     void              baul_view_update_menus               (BaulView      *view);
     void              baul_view_drop_proxy_received_uris   (BaulView         *view,
             GList                *uris,
             const char           *target_location,
-            GdkDragAction         action);
+            CdkDragAction         action);
     void              baul_view_drop_proxy_received_netscape_url (BaulView         *view,
             const char           *source_url,
             const char           *target_location,
-            GdkDragAction         action);
+            CdkDragAction         action);
     void              baul_view_set_is_active              (BaulView      *view,
             gboolean           is_active);
 

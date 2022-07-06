@@ -13,7 +13,7 @@ void       test_init                            (int                         *ar
 						 char                      ***argv);
 int        test_quit                            (int                          exit_code);
 void       test_delete_event                    (CtkWidget                   *widget,
-						 GdkEvent                    *event,
+						 CdkEvent                    *event,
 						 gpointer                     callback_data);
 CtkWidget *test_window_new                      (const char                  *title,
 						 guint                        border_width);
@@ -21,12 +21,12 @@ void       test_ctk_widget_set_background_image (CtkWidget                   *wi
 						 const char                  *image_name);
 void       test_ctk_widget_set_background_color (CtkWidget                   *widget,
 						 const char                  *color_spec);
-GdkPixbuf *test_pixbuf_new_named                (const char                  *name,
+CdkPixbuf *test_pixbuf_new_named                (const char                  *name,
 						 float                        scale);
 CtkWidget *test_label_new                       (const char                  *text,
 						 gboolean                     with_background,
 						 int                          num_sizes_larger);
-void       test_pixbuf_draw_rectangle_tiled     (GdkPixbuf                   *pixbuf,
+void       test_pixbuf_draw_rectangle_tiled     (CdkPixbuf                   *pixbuf,
 						 const char                  *tile_name,
 						 int                          x0,
 						 int                          y0,
