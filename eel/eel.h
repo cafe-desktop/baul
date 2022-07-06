@@ -29,7 +29,7 @@
 #include "eel-art-ctk-extensions.h"
 #include "eel-background.h"
 #include "eel-cdk-extensions.h"
-#include "eel-cdk-pixbuf-extensions.h"
+#include "eel-gdk-pixbuf-extensions.h"
 #include "eel-glib-extensions.h"
 #include "eel-cafe-extensions.h"
 #include "eel-graphic-effects.h"

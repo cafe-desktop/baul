@@ -35,7 +35,7 @@
 
 #include <eel/eel-background.h>
 #include <eel/eel-cdk-extensions.h>
-#include <eel/eel-cdk-pixbuf-extensions.h>
+#include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 

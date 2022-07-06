@@ -31,14 +31,14 @@
 #include <config.h>
 #include <stdio.h>
 
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-wrap-table.h>
 #include <eel/eel-labeled-image.h>
 #include <eel/eel-graphic-effects.h>
-#include <eel/eel-cdk-pixbuf-extensions.h>
+#include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-ctk-extensions.h>
 

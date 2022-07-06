@@ -2,7 +2,7 @@ AC_PREREQ(2.54)
 
 dnl ===========================================================================
 
-m4_define(cdk-pixbuf_minver,           2.36.5)
+m4_define(gdk-pixbuf_minver,           2.36.5)
 m4_define(glib_minver,                 2.58.1)
 m4_define(gio_minver,                  2.50.0)
 m4_define(cafe_desktop_minver,         1.17.3)
@@ -34,7 +34,7 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AM_MAINTAINER_MODE
 AC_SUBST([ACLOCAL_AMFLAGS], ["\${ACLOCAL_FLAGS}"])
 
-AC_SUBST(CDKPIXBUF_REQUIRED, [cdk-pixbuf_minver])
+AC_SUBST(CDKPIXBUF_REQUIRED, [gdk-pixbuf_minver])
 AC_SUBST(GLIB_REQUIRED, [glib_minver])
 AC_SUBST(GIO_REQUIRED, [gio_minver])
 AC_SUBST(CAFE_DESKTOP_REQUIRED, [cafe_desktop_minver])
@@ -66,7 +66,7 @@ AC_PATH_PROG([GLA11Y], [gla11y], [true])
 AC_CHECK_LIB(m, floor)
 
 PKG_CHECK_MODULES(ALL, [
-    cdk-pixbuf-2.0 >= cdk-pixbuf_minver
+    gdk-pixbuf-2.0 >= gdk-pixbuf_minver
     glib-2.0 >= glib_minver
     cafe-desktop-2.0 >= cafe_desktop_minver
     gthread-2.0

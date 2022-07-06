@@ -41,7 +41,7 @@ eel_headers = \
 	eel-debug.h \
 	eel-editable-label.h \
 	eel-cdk-extensions.h \
-	eel-cdk-pixbuf-extensions.h \
+	eel-gdk-pixbuf-extensions.h \
 	eel-glib-extensions.h \
 	eel-cafe-extensions.h \
 	eel-graphic-effects.h \
@@ -70,7 +70,7 @@ libeel_2_la_SOURCES = \
 	eel-debug.c \
 	eel-editable-label.c \
 	eel-cdk-extensions.c \
-	eel-cdk-pixbuf-extensions.c \
+	eel-gdk-pixbuf-extensions.c \
 	eel-glib-extensions.c \
 	eel-cafe-extensions.c \
 	eel-graphic-effects.c \

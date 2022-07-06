@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-cdk-pixbuf-extensions.c: Routines to augment what's in cdk-pixbuf.
+/* eel-gdk-pixbuf-extensions.c: Routines to augment what's in gdk-pixbuf.
 
    Copyright (C) 2000 Eazel, Inc.
 
@@ -24,7 +24,7 @@
 */
 
 #include <config.h>
-#include "eel-cdk-pixbuf-extensions.h"
+#include "eel-gdk-pixbuf-extensions.h"
 
 #include "eel-debug.h"
 #include "eel-cdk-extensions.h"
@@ -32,7 +32,7 @@
 #include "eel-graphic-effects.h"
 #include "eel-lib-self-check-functions.h"
 #include "eel-string.h"
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <cdk/cdkprivate.h>
 #include <cdk/cdkx.h>
 #include <gio/gio.h>

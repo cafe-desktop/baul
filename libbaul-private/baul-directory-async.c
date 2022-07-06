@@ -4275,7 +4275,7 @@ get_pixbuf_for_content (goffset file_len,
                       G_CALLBACK (thumbnail_loader_size_prepared),
                       NULL);
 
-    /* For some reason we have to write in chunks, or cdk-pixbuf fails */
+    /* For some reason we have to write in chunks, or gdk-pixbuf fails */
     res = TRUE;
     while (res && file_len > 0)
     {

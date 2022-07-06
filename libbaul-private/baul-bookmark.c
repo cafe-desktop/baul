@@ -26,7 +26,7 @@
 #include <ctk/ctk.h>
 #include <gio/gio.h>
 
-#include <eel/eel-cdk-pixbuf-extensions.h>
+#include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-ctk-macros.h>
 #include <eel/eel-vfs-extensions.h>

@@ -37,7 +37,7 @@
 #include <glib/gi18n.h>
 #include <ctk/ctk.h>
 
-#include <eel/eel-cdk-pixbuf-extensions.h>
+#include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 
 #include "baul-file.h"

@@ -38,7 +38,7 @@
 #include <eel/eel-accessibility.h>
 #include <eel/eel-background.h>
 #include <eel/eel-vfs-extensions.h>
-#include <eel/eel-cdk-pixbuf-extensions.h>
+#include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-cafe-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-art-extensions.h>

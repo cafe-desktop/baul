@@ -27,7 +27,7 @@
 
 #include <config.h>
 
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <cdk/cdkx.h>
 #include <cdk/cdkkeysyms.h>
 #include <ctk/ctk.h>
