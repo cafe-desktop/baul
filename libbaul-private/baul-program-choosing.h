@@ -40,17 +40,17 @@ void baul_launch_application                 (GAppInfo                          
 void baul_launch_application_by_uri          (GAppInfo                          *application,
         GList                             *uris,
         CtkWindow                         *parent_window);
-void baul_launch_application_from_command    (GdkScreen                         *screen,
+void baul_launch_application_from_command    (CdkScreen                         *screen,
         const char                        *name,
         const char                        *command_string,
         gboolean                           use_terminal,
         ...) G_GNUC_NULL_TERMINATED;
-void baul_launch_application_from_command_array (GdkScreen                         *screen,
+void baul_launch_application_from_command_array (CdkScreen                         *screen,
         const char                        *name,
         const char                        *command_string,
         gboolean                           use_terminal,
         const char * const *               parameters);
-void baul_launch_desktop_file		 (GdkScreen                         *screen,
+void baul_launch_desktop_file		 (CdkScreen                         *screen,
                                       const char                        *desktop_file_uri,
                                       const GList                       *parameter_uris,
                                       CtkWindow                         *parent_window);

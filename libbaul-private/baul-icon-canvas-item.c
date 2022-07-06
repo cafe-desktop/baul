@@ -90,12 +90,12 @@ struct _BaulIconCanvasItemPrivate
 {
     /* The image, text, font. */
     double x, y;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *rendered_surface;
     GList *emblem_pixbufs;
     char *editable_text;		/* Text that can be modified by a renaming function */
     char *additional_text;		/* Text that cannot be modifed, such as file size, etc. */
-    GdkPoint *attach_points;
+    CdkPoint *attach_points;
     int n_attach_points;
 
     /* Size of the text at current font. */
@@ -140,7 +140,7 @@ struct _BaulIconCanvasItemPrivate
 
     guint is_visible : 1;
 
-    GdkRectangle embedded_text_rect;
+    CdkRectangle embedded_text_rect;
     char *embedded_text;
 
     /* Cached PangoLayouts. Only used if the icon is visible */
@@ -157,7 +157,7 @@ struct _BaulIconCanvasItemPrivate
     EelIRect bounds_cache_for_layout;
     EelIRect bounds_cache_for_entire_item;
 
-    GdkWindow *cursor_window;
+    CdkWindow *cursor_window;
 
     /* Accessibility bits */
     GailTextUtil *text_util;
@@ -216,10 +216,10 @@ static void     emblem_layout_reset                  (EmblemLayout              
     						      EelIRect                  icon_rect,
     						      gboolean			is_rtl);
 static gboolean emblem_layout_next                   (EmblemLayout              *layout,
-    						      GdkPixbuf                 **emblem_pixbuf,
+    						      CdkPixbuf                 **emblem_pixbuf,
     						      EelIRect                  *emblem_rect,
     						      gboolean			is_rtl);
-static void     draw_pixbuf                          (GdkPixbuf                 *pixbuf,
+static void     draw_pixbuf                          (CdkPixbuf                 *pixbuf,
     						      cairo_t                   *cr,
     						      int                       x,
     						      int                       y);
@@ -317,7 +317,7 @@ baul_icon_canvas_item_finalize (GObject *object)
  * and we won't have this requirement any more.
  */
 static gboolean
-pixbuf_is_acceptable (GdkPixbuf *pixbuf)
+pixbuf_is_acceptable (CdkPixbuf *pixbuf)
 {
     return cdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB
            && ((!cdk_pixbuf_get_has_alpha (pixbuf)
@@ -511,7 +511,7 @@ get_scaled_icon_size (BaulIconCanvasItem *item,
 		      gint *width,
 		      gint *height)
 {
-    GdkPixbuf *pixbuf = NULL;
+    CdkPixbuf *pixbuf = NULL;
     gint scale = 1;
 
     if (item != NULL) {
@@ -539,7 +539,7 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     int item_offset_x, item_offset_y;
     EelIRect icon_rect;
     EelIRect emblem_rect;
-    GdkPixbuf *emblem_pixbuf;
+    CdkPixbuf *emblem_pixbuf;
     EmblemLayout emblem_layout;
     double item_x, item_y;
     gboolean is_rtl;
@@ -616,7 +616,7 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
 
 void
 baul_icon_canvas_item_set_image (BaulIconCanvasItem *item,
-                                 GdkPixbuf *image)
+                                 CdkPixbuf *image)
 {
     BaulIconCanvasItemPrivate *details;
 
@@ -684,7 +684,7 @@ baul_icon_canvas_item_set_emblems (BaulIconCanvasItem *item,
 
 void
 baul_icon_canvas_item_set_attach_points (BaulIconCanvasItem *item,
-        GdkPoint *attach_points,
+        CdkPoint *attach_points,
         int n_attach_points)
 {
     g_free (item->details->attach_points);
@@ -693,7 +693,7 @@ baul_icon_canvas_item_set_attach_points (BaulIconCanvasItem *item,
 
     if (attach_points != NULL && n_attach_points != 0)
     {
-        item->details->attach_points = g_memdup (attach_points, n_attach_points * sizeof (GdkPoint));
+        item->details->attach_points = g_memdup (attach_points, n_attach_points * sizeof (CdkPoint));
         item->details->n_attach_points = n_attach_points;
     }
 
@@ -702,7 +702,7 @@ baul_icon_canvas_item_set_attach_points (BaulIconCanvasItem *item,
 
 void
 baul_icon_canvas_item_set_embedded_text_rect (BaulIconCanvasItem       *item,
-        const GdkRectangle           *text_rect)
+        const CdkRectangle           *text_rect)
 {
     item->details->embedded_text_rect = *text_rect;
 
@@ -883,7 +883,7 @@ baul_icon_canvas_item_update_bounds (BaulIconCanvasItem *item,
     EelIRect before, after, emblem_rect;
     EmblemLayout emblem_layout;
     EelCanvasItem *canvas_item;
-    GdkPixbuf *emblem_pixbuf;
+    CdkPixbuf *emblem_pixbuf;
     gboolean is_rtl;
 
     canvas_item = EEL_CANVAS_ITEM (item);
@@ -1467,10 +1467,10 @@ baul_icon_canvas_item_invalidate_label (BaulIconCanvasItem     *item)
 }
 
 
-static GdkPixbuf *
+static CdkPixbuf *
 get_knob_pixbuf (void)
 {
-    GdkPixbuf *knob_pixbuf;
+    CdkPixbuf *knob_pixbuf;
 
     knob_pixbuf = ctk_icon_theme_load_icon (ctk_icon_theme_get_default (),
                                             "stock-baul-knob",
@@ -1493,11 +1493,11 @@ draw_stretch_handles (BaulIconCanvasItem *item,
                       const EelIRect *rect)
 {
     CtkWidget *widget;
-    GdkPixbuf *knob_pixbuf;
+    CdkPixbuf *knob_pixbuf;
     int knob_width, knob_height;
     double dash = { 2.0 };
     CtkStyleContext *style;
-    GdkRGBA color;
+    CdkRGBA color;
 
     if (!item->details->show_stretch_handles)
     {
@@ -1550,13 +1550,13 @@ emblem_layout_reset (EmblemLayout *layout, BaulIconCanvasItem *icon_item, EelIRe
 
 static gboolean
 emblem_layout_next (EmblemLayout *layout,
-                    GdkPixbuf **emblem_pixbuf,
+                    CdkPixbuf **emblem_pixbuf,
                     EelIRect *emblem_rect,
                     gboolean is_rtl)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     int width, height, x, y;
-    GdkPoint *attach_points;
+    CdkPoint *attach_points;
 
     /* Check if we have layed out all of the pixbufs. */
     if (layout->emblem == NULL)
@@ -1695,7 +1695,7 @@ emblem_layout_next (EmblemLayout *layout,
 }
 
 static void
-draw_pixbuf (GdkPixbuf *pixbuf,
+draw_pixbuf (CdkPixbuf *pixbuf,
              cairo_t *cr,
              int x, int y)
 {
@@ -1710,9 +1710,9 @@ static cairo_surface_t *
 real_map_surface (BaulIconCanvasItem *icon_item)
 {
     EelCanvas *canvas;
-    GdkPixbuf *temp_pixbuf, *old_pixbuf;
-    GdkRGBA color;
-    GdkRGBA *c;
+    CdkPixbuf *temp_pixbuf, *old_pixbuf;
+    CdkRGBA color;
+    CdkRGBA *c;
     cairo_surface_t *surface;
 
     temp_pixbuf = icon_item->details->pixbuf;
@@ -1739,7 +1739,7 @@ real_map_surface (BaulIconCanvasItem *icon_item)
         if (icon_item->details->is_active)
         {
             char *audio_filename;
-            GdkPixbuf *audio_pixbuf;
+            CdkPixbuf *audio_pixbuf;
             int emblem_size;
 
             emblem_size = baul_icon_get_emblem_size_for_icon_size (cdk_pixbuf_get_width (temp_pixbuf));
@@ -1914,7 +1914,7 @@ baul_icon_canvas_item_draw (EelCanvasItem *item,
     BaulIconCanvasItemPrivate *details;
     EelIRect icon_rect, emblem_rect;
     EmblemLayout emblem_layout;
-    GdkPixbuf *emblem_pixbuf;
+    CdkPixbuf *emblem_pixbuf;
     cairo_surface_t *temp_surface;
     CtkStyleContext *context;
 
@@ -2094,13 +2094,13 @@ get_label_layout (PangoLayout **layout_cache,
 
 /* handle events */
 static int
-baul_icon_canvas_item_event (EelCanvasItem *item, GdkEvent *event)
+baul_icon_canvas_item_event (EelCanvasItem *item, CdkEvent *event)
 {
     BaulIconCanvasItem *icon_item;
-    GdkWindow *cursor_window;
+    CdkWindow *cursor_window;
 
     icon_item = BAUL_ICON_CANVAS_ITEM (item);
-    cursor_window = ((GdkEventAny *) event)->window;
+    cursor_window = ((CdkEventAny *) event)->window;
 
     switch (event->type)
     {
@@ -2116,7 +2116,7 @@ baul_icon_canvas_item_event (EelCanvasItem *item, GdkEvent *event)
             /* show a hand cursor */
             if (in_single_click_mode ())
             {
-                GdkCursor *cursor;
+                CdkCursor *cursor;
 
                 cursor = cdk_cursor_new_for_display (cdk_display_get_default(),
                                                      GDK_HAND2);
@@ -2182,7 +2182,7 @@ baul_icon_canvas_item_event (EelCanvasItem *item, GdkEvent *event)
 }
 
 static gboolean
-hit_test_pixbuf (GdkPixbuf *pixbuf, EelIRect pixbuf_location, EelIRect probe_rect)
+hit_test_pixbuf (CdkPixbuf *pixbuf, EelIRect pixbuf_location, EelIRect probe_rect)
 {
     EelIRect relative_rect, pixbuf_rect;
     int x, y;
@@ -2239,7 +2239,7 @@ hit_test (BaulIconCanvasItem *icon_item, EelIRect canvas_rect)
     BaulIconCanvasItemPrivate *details;
     EelIRect emblem_rect;
     EmblemLayout emblem_layout;
-    GdkPixbuf *emblem_pixbuf;
+    CdkPixbuf *emblem_pixbuf;
     gboolean is_rtl;
 
     details = icon_item->details;
@@ -2429,7 +2429,7 @@ baul_icon_canvas_item_ensure_bounds_up_to_date (BaulIconCanvasItem *icon_item)
     EelCanvasItem *item;
     gint width, height;
     EmblemLayout emblem_layout;
-    GdkPixbuf *emblem_pixbuf;
+    CdkPixbuf *emblem_pixbuf;
     gboolean is_rtl;
 
     details = icon_item->details;
@@ -2602,7 +2602,7 @@ hit_test_stretch_handle (BaulIconCanvasItem *item,
                          CtkCornerType *corner)
 {
     EelIRect icon_rect;
-    GdkPixbuf *knob_pixbuf;
+    CdkPixbuf *knob_pixbuf;
     int knob_width, knob_height;
     int hit_corner;
 
@@ -2893,7 +2893,7 @@ baul_icon_canvas_item_accessible_idle_do_action (gpointer data)
     BaulIconContainer *container;
     GList* selection;
     GList file_list;
-    GdkEventButton button_event = { 0 };
+    CdkEventButton button_event = { 0 };
     gint action_number;
 
     container = BAUL_ICON_CONTAINER (data);

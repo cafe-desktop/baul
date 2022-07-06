@@ -499,7 +499,7 @@ baul_navigation_window_tear_down_sidebar (BaulNavigationWindow *window)
 
 static gboolean
 baul_navigation_window_state_event (CtkWidget *widget,
-                                    GdkEventWindowState *event)
+                                    CdkEventWindowState *event)
 {
     if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED)
     {
@@ -517,7 +517,7 @@ baul_navigation_window_state_event (CtkWidget *widget,
 
 static gboolean
 baul_navigation_window_key_press_event (CtkWidget *widget,
-                                        GdkEventKey *event)
+                                        CdkEventKey *event)
 {
     BaulNavigationWindow *window;
     int i;
@@ -597,7 +597,7 @@ baul_navigation_window_key_press_event (CtkWidget *widget,
 
 static gboolean
 baul_navigation_window_button_press_event (CtkWidget *widget,
-        GdkEventButton *event)
+        CdkEventButton *event)
 {
     BaulNavigationWindow *window;
     gboolean handled;
@@ -677,7 +677,7 @@ baul_navigation_window_add_sidebar_panel (BaulNavigationWindow *window,
     char *label;
     char *tooltip;
     char *default_id;
-    GdkPixbuf *icon;
+    CdkPixbuf *icon;
 
     g_return_if_fail (BAUL_IS_NAVIGATION_WINDOW (window));
     g_return_if_fail (BAUL_IS_SIDEBAR (sidebar_panel));
@@ -916,7 +916,7 @@ side_panel_image_changed_callback (BaulSidebar *side_panel,
                                    gpointer callback_data)
 {
     BaulWindow *window;
-    GdkPixbuf *icon;
+    CdkPixbuf *icon;
 
     window = BAUL_WINDOW (callback_data);
 

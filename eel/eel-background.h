@@ -99,7 +99,7 @@ void                        eel_background_draw                  (CtkWidget     
 /* Handles a dragged color being dropped on a widget to change the background color. */
 void                        eel_background_set_dropped_color     (EelBackground   *self,
         							  CtkWidget       *widget,
-        							  GdkDragAction    action,
+        							  CdkDragAction    action,
         							  int              drop_location_x,
         							  int              drop_location_y,
         							  const CtkSelectionData
@@ -107,7 +107,7 @@ void                        eel_background_set_dropped_color     (EelBackground 
 
 /* Handles a special-case image name that means "reset to default background" too. */
 void                        eel_background_set_dropped_image     (EelBackground   *self,
-        							  GdkDragAction    action,
+        							  CdkDragAction    action,
         							  const gchar     *image_uri);
 
 /* Gets or creates a background so that it's attached to a widget. */

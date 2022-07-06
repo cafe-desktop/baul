@@ -61,7 +61,7 @@ struct EelBackgroundPrivate
     CafeBGCrossfade *fade;
     int bg_entire_width;
     int bg_entire_height;
-    GdkRGBA default_color;
+    CdkRGBA default_color;
     gboolean use_base;
 
     /* Is this background attached to desktop window */
@@ -156,7 +156,7 @@ eel_background_unrealize (EelBackground *self)
 
 static void
 make_color_inactive (EelBackground *self,
-                     GdkRGBA       *color)
+                     CdkRGBA       *color)
 {
     if (!self->details->is_active) {
         double intensity, saturation;
@@ -190,7 +190,7 @@ gchar *
 eel_bg_get_desktop_color (EelBackground *self)
 {
     CafeBGColorType type;
-    GdkRGBA    primary, secondary;
+    CdkRGBA    primary, secondary;
     char      *start_color, *color_spec;
     gboolean   use_gradient = TRUE;
     gboolean   is_horizontal = FALSE;
@@ -232,7 +232,7 @@ eel_bg_get_desktop_color (EelBackground *self)
 static void
 set_image_properties (EelBackground *self)
 {
-    GdkRGBA c;
+    CdkRGBA c;
 
     if (self->details->is_desktop && !self->details->color)
         self->details->color = eel_bg_get_desktop_color (self);
@@ -251,7 +251,7 @@ set_image_properties (EelBackground *self)
     }
     else
     {
-        GdkRGBA c1, c2;
+        CdkRGBA c1, c2;
         char *spec;
 
         spec = eel_gradient_get_start_color_spec (self->details->color);
@@ -309,14 +309,14 @@ drawable_get_adjusted_size (EelBackground *self,
 {
     if (self->details->is_desktop)
     {
-        GdkScreen *screen = ctk_widget_get_screen (self->details->widget);
+        CdkScreen *screen = ctk_widget_get_screen (self->details->widget);
         gint scale = ctk_widget_get_scale_factor (self->details->widget);
         *width = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
         *height = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale;
     }
     else
     {
-        GdkWindow *window = ctk_widget_get_window (self->details->widget);
+        CdkWindow *window = ctk_widget_get_window (self->details->widget);
         *width = cdk_window_get_width (window);
         *height = cdk_window_get_height (window);
     }
@@ -326,9 +326,9 @@ static gboolean
 eel_background_ensure_realized (EelBackground *self)
 {
     int width, height;
-    GdkWindow *window;
+    CdkWindow *window;
     CtkStyleContext *style;
-    GdkRGBA *c;
+    CdkRGBA *c;
 
     /* Set the default color */
     style = ctk_widget_get_style_context (self->details->widget);
@@ -375,7 +375,7 @@ eel_background_draw (CtkWidget *widget,
                      cairo_t   *cr)
 {
     EelBackground *self = eel_get_widget_background (widget);
-    GdkRGBA color;
+    CdkRGBA color;
     int width, height;
 
     if (self->details->fade != NULL &&
@@ -408,8 +408,8 @@ eel_background_draw (CtkWidget *widget,
 
 static void
 set_root_surface (EelBackground *self,
-                  GdkWindow     *window,
-                  GdkScreen     *screen)
+                  CdkWindow     *window,
+                  CdkScreen     *screen)
 {
     eel_background_ensure_realized (self);
 
@@ -483,7 +483,7 @@ init_fade (EelBackground *self)
 
 static void
 on_fade_finished (CafeBGCrossfade *fade,
-                  GdkWindow       *window,
+                  CdkWindow       *window,
 		  gpointer         user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
@@ -539,7 +539,7 @@ eel_background_set_up_widget (EelBackground *self)
 
     if (!in_fade)
     {
-        GdkWindow *window;
+        CdkWindow *window;
 
         if (EEL_IS_CANVAS (widget))
         {
@@ -616,7 +616,7 @@ eel_background_transitioned (CafeBG *bg, gpointer user_data)
 }
 
 static void
-screen_size_changed (GdkScreen *screen, EelBackground *background)
+screen_size_changed (CdkScreen *screen, EelBackground *background)
 {
     int w, h;
 
@@ -636,8 +636,8 @@ widget_realized_setup (CtkWidget     *widget,
         return;
     }
 
-    GdkScreen *screen = ctk_widget_get_screen (widget);
-    GdkWindow *window = cdk_screen_get_root_window (screen);
+    CdkScreen *screen = ctk_widget_get_screen (widget);
+    CdkWindow *window = cdk_screen_get_root_window (screen);
 
     if (self->details->screen_size_handler > 0)
     {
@@ -899,11 +899,11 @@ eel_background_set_active (EelBackground *self,
 gboolean
 eel_background_is_dark (EelBackground *self)
 {
-    GdkRectangle rect;
+    CdkRectangle rect;
 
     /* only check for the background on the 0th monitor */
-    GdkScreen *screen = cdk_screen_get_default ();
-    GdkDisplay *display = cdk_screen_get_display (screen);
+    CdkScreen *screen = cdk_screen_get_default ();
+    CdkDisplay *display = cdk_screen_get_display (screen);
     cdk_monitor_get_geometry (cdk_display_get_monitor (display, 0), &rect);
 
     return cafe_bg_is_dark (self->details->bg, rect.width, rect.height);
@@ -960,7 +960,7 @@ eel_background_set_image_uri (EelBackground *self,
  */
 static void
 eel_bg_set_image_uri_and_color (EelBackground *self,
-                                GdkDragAction  action,
+                                CdkDragAction  action,
                                 const gchar   *image_uri,
                                 const gchar   *color)
 {
@@ -1027,7 +1027,7 @@ eel_bg_load_from_system_gsettings (EelBackground *self,
 /* handle dropped images */
 void
 eel_background_set_dropped_image (EelBackground *self,
-                                  GdkDragAction  action,
+                                  CdkDragAction  action,
                                   const gchar   *image_uri)
 {
     /* Currently, we only support tiled images. So we set the placement. */
@@ -1040,7 +1040,7 @@ eel_background_set_dropped_image (EelBackground *self,
 void
 eel_background_set_dropped_color (EelBackground *self,
                                   CtkWidget     *widget,
-                                  GdkDragAction  action,
+                                  CdkDragAction  action,
                                   int            drop_location_x,
                                   int            drop_location_y,
                                   const CtkSelectionData *selection_data)
@@ -1084,8 +1084,8 @@ eel_background_set_dropped_color (EelBackground *self,
     {
 
         CtkStyleContext *style = ctk_widget_get_style_context (widget);
-        GdkRGBA bg;
-        GdkRGBA *c;
+        CdkRGBA bg;
+        CdkRGBA *c;
 
         ctk_style_context_get (style, CTK_STATE_FLAG_NORMAL,
                                CTK_STYLE_PROPERTY_BACKGROUND_COLOR,

@@ -121,7 +121,7 @@ typedef struct
     FMTreeView *view;
 } PrependURIParameters;
 
-static GdkAtom copied_files_atom;
+static CdkAtom copied_files_atom;
 
 static void  fm_tree_view_iface_init        (BaulSidebarIface         *iface);
 static void  sidebar_provider_iface_init    (BaulSidebarProviderIface *iface);
@@ -378,7 +378,7 @@ got_activation_uri_callback (BaulFile *file, gpointer callback_data)
 {
     char *uri, *file_uri;
     FMTreeView *view;
-    GdkScreen *screen;
+    CdkScreen *screen;
     GFile *location;
     BaulWindowSlotInfo *slot;
     gboolean open_in_same_slot;
@@ -542,7 +542,7 @@ static void
 selection_changed_callback (CtkTreeSelection *selection,
                             FMTreeView *view)
 {
-    GdkEvent *event;
+    CdkEvent *event;
     gboolean is_keyboard;
 
     if (view->details->selection_changed_timer)
@@ -647,7 +647,7 @@ static void
 move_copy_items_callback (BaulTreeViewDragDest *dest,
                           const GList *item_uris,
                           const char *target_uri,
-                          GdkDragAction action,
+                          CdkDragAction action,
                           int x,
                           int y,
                           gpointer user_data)
@@ -758,7 +758,7 @@ is_parent_writable (BaulFile *file)
 }
 
 static gboolean
-button_pressed_callback (CtkTreeView *treeview, GdkEventButton *event,
+button_pressed_callback (CtkTreeView *treeview, CdkEventButton *event,
                          FMTreeView *view)
 {
     CtkTreePath *path, *cursor_path;
@@ -867,7 +867,7 @@ button_pressed_callback (CtkTreeView *treeview, GdkEventButton *event,
         }
 
         ctk_menu_popup_at_pointer (CTK_MENU (view->details->popup),
-                                   (const GdkEvent*) event);
+                                   (const CdkEvent*) event);
 
         ctk_tree_view_set_cursor (view->details->tree_widget, cursor_path, NULL, FALSE);
         ctk_tree_path_free (cursor_path);
@@ -1718,7 +1718,7 @@ fm_tree_view_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show Tree"));
 }
 
-static GdkPixbuf *
+static CdkPixbuf *
 fm_tree_view_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;

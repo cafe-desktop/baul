@@ -68,7 +68,7 @@ typedef enum
     EEL_GDK_ALL_VALUES   = 0x0f,
     EEL_GDK_X_NEGATIVE   = 0x10,
     EEL_GDK_Y_NEGATIVE   = 0x20
-} EelGdkGeometryFlags;
+} EelCdkGeometryFlags;
 
 /* A gradient spec. is a string that contains a specifier for either a
    color or a gradient. If the string has a "-" in it, then it's a gradient.
@@ -98,22 +98,22 @@ char *              eel_gradient_set_bottom_color_spec     (const char          
 /* A version of parse_color that substitutes a default color instead of returning
    a boolean to indicate it cannot be parsed.
 */
-void                eel_cdk_rgba_parse_with_white_default  (GdkRGBA             *parsed_color,
+void                eel_cdk_rgba_parse_with_white_default  (CdkRGBA             *parsed_color,
         const char          *color_spec);
 
 guint32             eel_rgb16_to_rgb                       (gushort              r,
         gushort              g,
         gushort              b);
-guint32             eel_cdk_rgba_to_rgb                    (const GdkRGBA       *color);
-GdkRGBA             eel_cdk_rgb_to_rgba                    (guint32              color);
+guint32             eel_cdk_rgba_to_rgb                    (const CdkRGBA       *color);
+CdkRGBA             eel_cdk_rgb_to_rgba                    (guint32              color);
 
 char *              eel_cdk_rgb_to_color_spec              (guint32              color);
 
-gboolean            eel_cdk_rgba_is_dark                   (const GdkRGBA       *color);
+gboolean            eel_cdk_rgba_is_dark                   (const CdkRGBA       *color);
 
 
 /* Wrapper for XParseGeometry */
-EelGdkGeometryFlags eel_cdk_parse_geometry                 (const char          *string,
+EelCdkGeometryFlags eel_cdk_parse_geometry                 (const char          *string,
         int                 *x_return,
         int                 *y_return,
         guint               *width_return,

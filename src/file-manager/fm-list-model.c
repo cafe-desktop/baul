@@ -289,7 +289,7 @@ fm_list_model_get_value (CtkTreeModel *tree_model, CtkTreeIter *iter, int column
     FMListModel *model;
     FileEntry *file_entry;
     BaulFile *file;
-    GdkPixbuf *rendered_icon;
+    CdkPixbuf *rendered_icon;
     GIcon *emblemed_icon;
     GList *emblem_icons, *l;
     BaulZoomLevel zoom_level;
@@ -339,7 +339,7 @@ fm_list_model_get_value (CtkTreeModel *tree_model, CtkTreeIter *iter, int column
 
         if (file != NULL)
         {
-            GdkPixbuf *icon;
+            CdkPixbuf *icon;
             GIcon *gicon;
             BaulIconInfo *icon_info;
             GEmblem *emblem;
@@ -950,7 +950,7 @@ each_path_get_data_binder (BaulDragEachSelectedItemDataGet data_get,
     DragDataGetInfo *info;
     GList *l;
     char *uri;
-    GdkRectangle cell_area;
+    CdkRectangle cell_area;
     CtkTreeViewColumn *column;
     BaulFile *file = NULL;
     CtkTreeRowReference *row = NULL;

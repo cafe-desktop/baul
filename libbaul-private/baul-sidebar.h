@@ -52,7 +52,7 @@ extern "C" {
         const char *   (* get_sidebar_id)         (BaulSidebar *sidebar);
         char *         (* get_tab_label)          (BaulSidebar *sidebar);
         char *         (* get_tab_tooltip)        (BaulSidebar *sidebar);
-        GdkPixbuf *    (* get_tab_icon)           (BaulSidebar *sidebar);
+        CdkPixbuf *    (* get_tab_icon)           (BaulSidebar *sidebar);
         void           (* is_visible_changed)     (BaulSidebar *sidebar,
                 gboolean         is_visible);
 
@@ -73,7 +73,7 @@ extern "C" {
     const char *baul_sidebar_get_sidebar_id     (BaulSidebar *sidebar);
     char *      baul_sidebar_get_tab_label      (BaulSidebar *sidebar);
     char *      baul_sidebar_get_tab_tooltip    (BaulSidebar *sidebar);
-    GdkPixbuf * baul_sidebar_get_tab_icon       (BaulSidebar *sidebar);
+    CdkPixbuf * baul_sidebar_get_tab_icon       (BaulSidebar *sidebar);
     void        baul_sidebar_is_visible_changed (BaulSidebar *sidebar,
             gboolean         is_visible);
 

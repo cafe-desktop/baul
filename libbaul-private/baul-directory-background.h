@@ -33,6 +33,6 @@
 
 void     baul_connect_background_to_file_metadata    (CtkWidget         *widget,
                                                       BaulFile          *file,
-                                                      GdkDragAction      default_drag_action);
+                                                      CdkDragAction      default_drag_action);
 
 void     baul_connect_desktop_background_to_settings (BaulIconContainer *icon_container);

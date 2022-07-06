@@ -117,13 +117,13 @@ static void     baul_path_bar_forall                   (CtkContainer    *contain
 static void     baul_path_bar_scroll_up                (BaulPathBar *path_bar);
 static void     baul_path_bar_scroll_down              (BaulPathBar *path_bar);
 static gboolean baul_path_bar_scroll                   (CtkWidget       *path_bar,
-        GdkEventScroll  *scroll);
+        CdkEventScroll  *scroll);
 static void     baul_path_bar_stop_scrolling           (BaulPathBar *path_bar);
 static gboolean baul_path_bar_slider_button_press      (CtkWidget       *widget,
-        GdkEventButton  *event,
+        CdkEventButton  *event,
         BaulPathBar *path_bar);
 static gboolean baul_path_bar_slider_button_release    (CtkWidget       *widget,
-        GdkEventButton  *event,
+        CdkEventButton  *event,
         BaulPathBar *path_bar);
 static void     baul_path_bar_grab_notify              (CtkWidget       *widget,
         gboolean         was_grabbed);
@@ -133,7 +133,7 @@ static void     baul_path_bar_state_changed            (CtkWidget       *widget,
 static void     baul_path_bar_style_updated            (CtkWidget       *widget);
 
 static void     baul_path_bar_screen_changed           (CtkWidget       *widget,
-        GdkScreen       *previous_screen);
+        CdkScreen       *previous_screen);
 static void     baul_path_bar_check_icon_theme         (BaulPathBar *path_bar);
 static void     baul_path_bar_update_button_appearance (ButtonData      *button_data);
 static void     baul_path_bar_update_button_state      (ButtonData      *button_data,
@@ -259,7 +259,7 @@ slider_timeout (gpointer user_data)
 
 static void
 baul_path_bar_slider_drag_motion (CtkWidget      *widget,
-                                  GdkDragContext *context,
+                                  CdkDragContext *context,
                                   int             x,
                                   int             y,
                                   unsigned int    time,
@@ -289,7 +289,7 @@ baul_path_bar_slider_drag_motion (CtkWidget      *widget,
 
 static void
 baul_path_bar_slider_drag_leave (CtkWidget      *widget,
-                                 GdkDragContext *context,
+                                 CdkDragContext *context,
                                  unsigned int    time,
                                  gpointer        user_data)
 {
@@ -476,7 +476,7 @@ baul_path_bar_finalize (GObject *object)
 /* Removes the settings signal handler.  It's safe to call multiple times */
 static void
 remove_settings_signal (BaulPathBar *path_bar,
-                        GdkScreen  *screen)
+                        CdkScreen  *screen)
 {
     if (path_bar->settings_signal_id)
     {
@@ -889,7 +889,7 @@ baul_path_bar_style_updated (CtkWidget *widget)
 
 static void
 baul_path_bar_screen_changed (CtkWidget *widget,
-                              GdkScreen *previous_screen)
+                              CdkScreen *previous_screen)
 {
     if (CTK_WIDGET_CLASS (baul_path_bar_parent_class)->screen_changed)
     {
@@ -905,7 +905,7 @@ baul_path_bar_screen_changed (CtkWidget *widget,
 
 static gboolean
 baul_path_bar_scroll (CtkWidget      *widget,
-                      GdkEventScroll *event)
+                      CdkEventScroll *event)
 {
     BaulPathBar *path_bar;
 
@@ -1173,7 +1173,7 @@ baul_path_bar_stop_scrolling (BaulPathBar *path_bar)
 
 static gboolean
 baul_path_bar_slider_button_press (CtkWidget       *widget,
-                                   GdkEventButton  *event,
+                                   CdkEventButton  *event,
                                    BaulPathBar *path_bar)
 {
     if (!ctk_widget_has_focus (widget))
@@ -1213,7 +1213,7 @@ baul_path_bar_slider_button_press (CtkWidget       *widget,
 
 static gboolean
 baul_path_bar_slider_button_release (CtkWidget      *widget,
-                                     GdkEventButton *event,
+                                     CdkEventButton *event,
                                      BaulPathBar     *path_bar)
 {
     if (event->type != GDK_BUTTON_RELEASE)
@@ -1345,7 +1345,7 @@ button_clicked_cb (CtkWidget *button,
 
 static gboolean
 button_event_cb (CtkWidget *button,
-		 GdkEventButton *event,
+		 CdkEventButton *event,
 		 gpointer   data)
 {
         ButtonData *button_data;
@@ -1377,7 +1377,7 @@ button_event_cb (CtkWidget *button,
 
 static void
 button_drag_begin_cb (CtkWidget *widget,
-		      GdkDragContext *drag_context,
+		      CdkDragContext *drag_context,
 		      gpointer user_data)
 {
 	g_object_set_data (G_OBJECT (widget), "handle-button-release",
@@ -1696,7 +1696,7 @@ setup_button_type (ButtonData       *button_data,
 
 static void
 button_drag_data_get_cb (CtkWidget          *widget,
-                         GdkDragContext     *context,
+                         CdkDragContext     *context,
                          CtkSelectionData   *selection_data,
                          guint               info,
                          guint               time_,

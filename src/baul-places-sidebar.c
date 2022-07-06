@@ -235,7 +235,7 @@ G_DEFINE_TYPE_WITH_CODE (BaulPlacesSidebarProvider, baul_places_sidebar_provider
 static cairo_surface_t *
 get_eject_icon (gboolean highlighted)
 {
-    GdkPixbuf *eject;
+    CdkPixbuf *eject;
     cairo_surface_t *eject_surface;
     BaulIconInfo *eject_icon_info;
     int icon_size, icon_scale;
@@ -247,7 +247,7 @@ get_eject_icon (gboolean highlighted)
     eject = baul_icon_info_get_pixbuf_at_size (eject_icon_info, icon_size);
 
     if (highlighted) {
-        GdkPixbuf *high;
+        CdkPixbuf *high;
         high = eel_create_spotlight_pixbuf (eject);
         g_object_unref (eject);
         eject = high;
@@ -346,7 +346,7 @@ add_place (BaulPlacesSidebar *sidebar,
            const int index,
            const char *tooltip)
 {
-    GdkPixbuf       *pixbuf;
+    CdkPixbuf       *pixbuf;
     cairo_surface_t *surface;
     CtkTreeIter      iter, child_iter;
     cairo_surface_t *eject;
@@ -1043,8 +1043,8 @@ static gboolean
 clicked_eject_button (BaulPlacesSidebar *sidebar,
                       CtkTreePath **path)
 {
-    GdkEvent *event = ctk_get_current_event ();
-    GdkEventButton *button_event = (GdkEventButton *) event;
+    CdkEvent *event = ctk_get_current_event ();
+    CdkEventButton *button_event = (CdkEventButton *) event;
 
     if ((event->type == GDK_BUTTON_PRESS || event->type == GDK_BUTTON_RELEASE) &&
          over_eject_button (sidebar, button_event->x, button_event->y, path)) {
@@ -1180,10 +1180,10 @@ compute_drop_position (CtkTreeView *tree_view,
 
 static gboolean
 get_drag_data (CtkTreeView *tree_view,
-               GdkDragContext *context,
+               CdkDragContext *context,
                unsigned int time)
 {
-    GdkAtom target;
+    CdkAtom target;
 
     target = ctk_drag_dest_find_target (CTK_WIDGET (tree_view),
                                         context,
@@ -1247,7 +1247,7 @@ can_accept_items_as_bookmarks (const GList *items)
 
 static gboolean
 drag_motion_callback (CtkTreeView *tree_view,
-                      GdkDragContext *context,
+                      CdkDragContext *context,
                       int x,
                       int y,
                       unsigned int time,
@@ -1338,7 +1338,7 @@ drag_motion_callback (CtkTreeView *tree_view,
 
 static void
 drag_leave_callback (CtkTreeView *tree_view,
-                     GdkDragContext *context,
+                     CdkDragContext *context,
                      unsigned int time,
                      BaulPlacesSidebar *sidebar)
 {
@@ -1488,7 +1488,7 @@ reorder_bookmarks (BaulPlacesSidebar *sidebar,
 
 static void
 drag_data_received_callback (CtkWidget *widget,
-                             GdkDragContext *context,
+                             CdkDragContext *context,
                              int x,
                              int y,
                              CtkSelectionData *selection_data,
@@ -1587,7 +1587,7 @@ drag_data_received_callback (CtkWidget *widget,
     }
     else
     {
-        GdkDragAction real_action;
+        CdkDragAction real_action;
 
         /* file transfer requested */
         real_action = cdk_drag_context_get_selected_action (context);
@@ -1642,7 +1642,7 @@ out:
 
 static gboolean
 drag_drop_callback (CtkTreeView *tree_view,
-                    GdkDragContext *context,
+                    CdkDragContext *context,
                     int x,
                     int y,
                     unsigned int time,
@@ -2621,7 +2621,7 @@ empty_trash_cb (CtkMenuItem           *item,
 /* Handler for CtkWidget::key-press-event on the shortcuts list */
 static gboolean
 bookmarks_key_press_event_cb (CtkWidget             *widget,
-                              GdkEventKey           *event,
+                              CdkEventKey           *event,
                               BaulPlacesSidebar *sidebar)
 {
     guint modifiers;
@@ -2806,7 +2806,7 @@ bookmarks_update_popup_menu (BaulPlacesSidebar *sidebar)
 
 static void
 bookmarks_popup_menu (BaulPlacesSidebar *sidebar,
-                      GdkEventButton        *event)
+                      CdkEventButton        *event)
 {
     bookmarks_update_popup_menu (sidebar);
     eel_pop_up_context_menu (CTK_MENU(sidebar->popup_menu),
@@ -2824,7 +2824,7 @@ bookmarks_popup_menu_cb (CtkWidget *widget,
 
 static gboolean
 bookmarks_button_release_event_cb (CtkWidget *widget,
-                                   GdkEventButton *event,
+                                   CdkEventButton *event,
                                    BaulPlacesSidebar *sidebar)
 {
     CtkTreePath *path;
@@ -2944,7 +2944,7 @@ update_eject_buttons (BaulPlacesSidebar *sidebar,
 
 static gboolean
 bookmarks_motion_event_cb (CtkWidget             *widget,
-                           GdkEventMotion        *event,
+                           CdkEventMotion        *event,
                            BaulPlacesSidebar *sidebar)
 {
     CtkTreePath *path;
@@ -2969,7 +2969,7 @@ bookmarks_motion_event_cb (CtkWidget             *widget,
  */
 static gboolean
 bookmarks_button_press_event_cb (CtkWidget             *widget,
-                                 GdkEventButton        *event,
+                                 CdkEventButton        *event,
                                  BaulPlacesSidebar *sidebar)
 {
     if (event->type != GDK_BUTTON_PRESS)
@@ -3420,7 +3420,7 @@ baul_places_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show Places"));
 }
 
-static GdkPixbuf *
+static CdkPixbuf *
 baul_places_sidebar_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;

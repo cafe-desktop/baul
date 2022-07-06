@@ -116,7 +116,7 @@ save_window_geometry_timeout (gpointer callback_data)
 
 static gboolean
 baul_spatial_window_configure_event (CtkWidget *widget,
-                                     GdkEventConfigure *event)
+                                     CdkEventConfigure *event)
 {
     BaulSpatialWindow *window;
 
@@ -163,7 +163,7 @@ baul_spatial_window_unrealize (CtkWidget *widget)
 
 static gboolean
 baul_spatial_window_state_event (CtkWidget *widget,
-                                 GdkEventWindowState *event)
+                                 CdkEventWindowState *event)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -550,7 +550,7 @@ location_menu_item_activated_callback (CtkWidget *menu_item,
     BaulWindowSlot *slot;
     GFile *current;
     GFile *dest;
-    GdkEvent *event;
+    CdkEvent *event;
 
 	slot = baul_window_get_active_slot (window);
 	current = baul_window_slot_get_location (slot);
@@ -572,9 +572,9 @@ location_menu_item_activated_callback (CtkWidget *menu_item,
             selection = g_list_prepend (NULL, g_object_ref (child));
         }
 
-        if (event != NULL && ((GdkEventAny *) event)->type == GDK_BUTTON_RELEASE &&
-                (((GdkEventButton *) event)->button == 2 ||
-                 (((GdkEventButton *) event)->state & GDK_SHIFT_MASK) != 0)) {
+        if (event != NULL && ((CdkEventAny *) event)->type == GDK_BUTTON_RELEASE &&
+                (((CdkEventButton *) event)->button == 2 ||
+                 (((CdkEventButton *) event)->state & GDK_SHIFT_MASK) != 0)) {
             close_behind = TRUE;
         }
 
@@ -607,7 +607,7 @@ menu_deactivate_callback (CtkWidget *menu,
 
 static gboolean
 location_button_pressed_callback (CtkWidget      *widget,
-                                  GdkEventButton *event,
+                                  CdkEventButton *event,
                                   BaulWindow *window)
 {
 	BaulWindowSlot *slot;
@@ -756,7 +756,7 @@ get_dnd_icon_size (BaulSpatialWindow *window)
 
 static void
 location_button_drag_begin_callback (CtkWidget             *widget,
-                                     GdkDragContext        *context,
+                                     CdkDragContext        *context,
                                      BaulSpatialWindow *window)
 {
     BaulWindowSlot *slot;
@@ -808,7 +808,7 @@ get_data_binder (BaulDragEachSelectedItemDataGet iteratee,
 
 static void
 location_button_drag_data_get_callback (CtkWidget             *widget,
-                                        GdkDragContext        *context,
+                                        CdkDragContext        *context,
                                         CtkSelectionData      *selection_data,
                                         guint                  info,
                                         guint                  time,

@@ -141,7 +141,7 @@ static gboolean			default_sort_reversed_auto_value;
 static BaulZoomLevel        default_zoom_level_auto_value;
 static char **                  default_visible_columns_auto_value;
 static char **                  default_column_order_auto_value;
-static GdkCursor *              hand_cursor = NULL;
+static CdkCursor *              hand_cursor = NULL;
 
 static CtkTargetList *          source_target_list = NULL;
 
@@ -319,14 +319,14 @@ activate_selected_items_alternate (FMListView *view,
 }
 
 static gboolean
-button_event_modifies_selection (GdkEventButton *event)
+button_event_modifies_selection (CdkEventButton *event)
 {
     return (event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) != 0;
 }
 
 static void
 fm_list_view_did_not_drag (FMListView *view,
-                           GdkEventButton *event)
+                           CdkEventButton *event)
 {
     CtkTreeView *tree_view;
     CtkTreeSelection *selection;
@@ -373,7 +373,7 @@ fm_list_view_did_not_drag (FMListView *view,
 
 static void
 drag_data_get_callback (CtkWidget *widget,
-                        GdkDragContext *context,
+                        CdkDragContext *context,
                         CtkSelectionData *selection_data,
                         guint info,
                         guint time)
@@ -469,7 +469,7 @@ get_drag_surface (FMListView *view)
     CtkTreePath *path;
     CtkTreeIter iter;
     cairo_surface_t *ret;
-    GdkRectangle cell_area;
+    CdkRectangle cell_area;
 
     ret = NULL;
 
@@ -500,7 +500,7 @@ get_drag_surface (FMListView *view)
 
 static void
 drag_begin_callback (CtkWidget *widget,
-                     GdkDragContext *context,
+                     CdkDragContext *context,
                      FMListView *view)
 {
     GList *ref_list;
@@ -528,7 +528,7 @@ drag_begin_callback (CtkWidget *widget,
 
 static gboolean
 motion_notify_callback (CtkWidget *widget,
-                        GdkEventMotion *event,
+                        CdkEventMotion *event,
                         gpointer callback_data)
 {
     FMListView *view;
@@ -585,7 +585,7 @@ motion_notify_callback (CtkWidget *widget,
                                              source_target_list,
                                              GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK,
                                              view->details->drag_button,
-                                             (GdkEvent*)event,
+                                             (CdkEvent*)event,
                                              event->x,
                                              event->y);
         }
@@ -597,7 +597,7 @@ motion_notify_callback (CtkWidget *widget,
 
 static gboolean
 leave_notify_callback (CtkWidget *widget,
-                       GdkEventCrossing *event,
+                       CdkEventCrossing *event,
                        gpointer callback_data)
 {
     FMListView *view;
@@ -616,7 +616,7 @@ leave_notify_callback (CtkWidget *widget,
 
 static gboolean
 enter_notify_callback (CtkWidget *widget,
-                       GdkEventCrossing *event,
+                       CdkEventCrossing *event,
                        gpointer callback_data)
 {
     FMListView *view;
@@ -645,7 +645,7 @@ enter_notify_callback (CtkWidget *widget,
 }
 
 static void
-do_popup_menu (CtkWidget *widget, FMListView *view, GdkEventButton *event)
+do_popup_menu (CtkWidget *widget, FMListView *view, CdkEventButton *event)
 {
     if (tree_view_has_selection (CTK_TREE_VIEW (widget)))
     {
@@ -658,7 +658,7 @@ do_popup_menu (CtkWidget *widget, FMListView *view, GdkEventButton *event)
 }
 
 static gboolean
-button_press_callback (CtkWidget *widget, GdkEventButton *event, gpointer callback_data)
+button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callback_data)
 {
     FMListView *view;
     CtkTreeView *tree_view;
@@ -910,7 +910,7 @@ button_press_callback (CtkWidget *widget, GdkEventButton *event, gpointer callba
 
 static gboolean
 button_release_callback (CtkWidget *widget,
-                         GdkEventButton *event,
+                         CdkEventButton *event,
                          gpointer callback_data)
 {
     FMListView *view;
@@ -1104,11 +1104,11 @@ subdirectory_unloaded_callback (FMListModel *model,
 }
 
 static gboolean
-key_press_callback (CtkWidget *widget, GdkEventKey *event, gpointer callback_data)
+key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_data)
 {
     FMDirectoryView *view;
     FMListView *listview;
-    GdkEventButton button_event = { 0 };
+    CdkEventButton button_event = { 0 };
     gboolean handled;
     CtkTreeView *tree_view;
     CtkTreePath *path;
@@ -1447,7 +1447,7 @@ get_file_for_path_callback (BaulTreeViewDragDest *dest,
 /* Handles an URL received from Mozilla */
 static void
 list_view_handle_netscape_url (BaulTreeViewDragDest *dest, const char *encoded_url,
-                               const char *target_uri, GdkDragAction action, int x, int y, FMListView *view)
+                               const char *target_uri, CdkDragAction action, int x, int y, FMListView *view)
 {
     fm_directory_view_handle_netscape_url_drop (FM_DIRECTORY_VIEW (view),
             encoded_url, target_uri, action, x, y);
@@ -1456,7 +1456,7 @@ list_view_handle_netscape_url (BaulTreeViewDragDest *dest, const char *encoded_u
 static void
 list_view_handle_uri_list (BaulTreeViewDragDest *dest, const char *item_uris,
                            const char *target_uri,
-                           GdkDragAction action, int x, int y, FMListView *view)
+                           CdkDragAction action, int x, int y, FMListView *view)
 {
     fm_directory_view_handle_uri_list_drop (FM_DIRECTORY_VIEW (view),
                                             item_uris, target_uri, action, x, y);
@@ -1465,7 +1465,7 @@ list_view_handle_uri_list (BaulTreeViewDragDest *dest, const char *item_uris,
 static void
 list_view_handle_text (BaulTreeViewDragDest *dest, const char *text,
                        const char *target_uri,
-                       GdkDragAction action, int x, int y, FMListView *view)
+                       CdkDragAction action, int x, int y, FMListView *view)
 {
     fm_directory_view_handle_text_drop (FM_DIRECTORY_VIEW (view),
                                         text, target_uri, action, x, y);
@@ -1474,7 +1474,7 @@ list_view_handle_text (BaulTreeViewDragDest *dest, const char *text,
 static void
 list_view_handle_raw (BaulTreeViewDragDest *dest, const char *raw_data,
                       int length, const char *target_uri, const char *direct_save_uri,
-                      GdkDragAction action, int x, int y, FMListView *view)
+                      CdkDragAction action, int x, int y, FMListView *view)
 {
     fm_directory_view_handle_raw_drop (FM_DIRECTORY_VIEW (view),
                                        raw_data, length, target_uri, direct_save_uri,
@@ -1637,7 +1637,7 @@ filename_cell_data_func (CtkTreeViewColumn *column,
 }
 
 static gboolean
-focus_in_event_callback (CtkWidget *widget, GdkEventFocus *event, gpointer user_data)
+focus_in_event_callback (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
 {
     BaulWindowSlotInfo *slot_info;
     FMListView *list_view = FM_LIST_VIEW (user_data);
@@ -2961,7 +2961,7 @@ fm_list_view_start_renaming_file (FMDirectoryView *view,
 static void
 fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
 {
-    GdkDisplay *display;
+    CdkDisplay *display;
     FMListView *view;
     CtkTreeIter iter;
 
@@ -2990,7 +2990,7 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
 
         if (ctk_widget_get_realized (CTK_WIDGET (tree)))
         {
-            GdkWindow *win;
+            CdkWindow *win;
 
             win = ctk_widget_get_window (CTK_WIDGET (tree));
             cdk_window_set_cursor (win, NULL);
@@ -3301,8 +3301,8 @@ real_set_is_active (FMDirectoryView *view,
                     gboolean is_active)
 {
     CtkWidget *tree_view;
-    GdkRGBA color;
-    GdkRGBA *c;
+    CdkRGBA color;
+    CdkRGBA *c;
 
     tree_view = CTK_WIDGET (fm_list_view_get_tree_view (FM_LIST_VIEW (view)));
 

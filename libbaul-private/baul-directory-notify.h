@@ -42,7 +42,7 @@ typedef struct
 {
     GFile *location;
     gboolean set;
-    GdkPoint point;
+    CdkPoint point;
     int screen;
 } BaulFileChangesQueuePosition;
 

@@ -401,7 +401,7 @@ baul_window_slot_update_icon (BaulWindowSlot *slot)
         }
         else
         {
-            GdkPixbuf *pixbuf;
+            CdkPixbuf *pixbuf;
 
             pixbuf = baul_icon_info_get_pixbuf_nodefault (info);
 

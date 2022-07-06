@@ -66,7 +66,7 @@ real_set_active (BaulWindowPane *pane, gboolean is_active)
 }
 
 static gboolean
-navigation_bar_focus_in_callback (CtkWidget *widget, GdkEventFocus *event, gpointer user_data)
+navigation_bar_focus_in_callback (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
 {
     BaulWindowPane *pane;
     pane = BAUL_WINDOW_PANE (user_data);
@@ -265,7 +265,7 @@ location_button_create (BaulNavigationWindowPane *pane)
 static gboolean
 path_bar_path_event_callback (BaulPathBar *path_bar,
                    GFile *location,
-                   GdkEventButton *event,
+                   CdkEventButton *event,
                    BaulWindowPane *pane)
 
 {
@@ -360,7 +360,7 @@ notebook_popup_menu_close_cb (CtkMenuItem *menuitem,
 
 static void
 notebook_popup_menu_show (BaulNavigationWindowPane *pane,
-                          GdkEventButton *event)
+                          CdkEventButton *event)
 {
     CtkWidget *popup;
     CtkWidget *item;
@@ -420,7 +420,7 @@ notebook_popup_menu_show (BaulNavigationWindowPane *pane,
                                NULL);
 
     ctk_menu_popup_at_pointer (CTK_MENU (popup),
-                               (const GdkEvent*) event);
+                               (const CdkEvent*) event);
 }
 
 /* emitted when the user clicks the "close" button of tabs */
@@ -434,7 +434,7 @@ notebook_tab_close_requested (BaulNotebook *notebook,
 
 static gboolean
 notebook_button_press_cb (CtkWidget *widget,
-                          GdkEventButton *event,
+                          CdkEventButton *event,
                           gpointer user_data)
 {
     BaulNavigationWindowPane *pane;

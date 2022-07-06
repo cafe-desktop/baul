@@ -53,12 +53,12 @@ extern "C" {
      * y2			double		RW		Bottommost coordinate of rectangle or ellipse
      * fill_color		string		W		X color specification for fill color,
      *							or NULL pointer for no color (transparent)
-     * fill_color_cdk	GdkColor*	RW		Allocated GdkColor for fill
+     * fill_color_cdk	CdkColor*	RW		Allocated CdkColor for fill
      * outline_color	string		W		X color specification for outline color,
      *							or NULL pointer for no color (transparent)
-     * outline_color_cdk	GdkColor*	RW		Allocated GdkColor for outline
-     * fill_stipple		GdkBitmap*	RW		Stipple pattern for fill
-     * outline_stipple	GdkBitmap*	RW		Stipple pattern for outline
+     * outline_color_cdk	CdkColor*	RW		Allocated CdkColor for outline
+     * fill_stipple		CdkBitmap*	RW		Stipple pattern for fill
+     * outline_stipple	CdkBitmap*	RW		Stipple pattern for outline
      * width_pixels		uint		RW		Width of the outline in pixels.  The outline will
      *							not be scaled when the canvas zoom factor is changed.
      * width_units		double		RW		Width of the outline in canvas units.  The outline
@@ -84,8 +84,8 @@ extern "C" {
         double x1, y1, x2, y2;		/* Corners of item */
         double width;			/* Outline width */
 
-        GdkRGBA fill_color;
-        GdkRGBA outline_color;
+        CdkRGBA fill_color;
+        CdkRGBA outline_color;
 
 	gboolean outline_stippling;
 

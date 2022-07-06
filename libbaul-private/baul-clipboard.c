@@ -44,7 +44,7 @@ typedef void (* ConnectCallbacksFunc) (GObject            *object,
 static void selection_changed_callback            (CtkWidget *widget,
         gpointer callback_data);
 static void owner_change_callback (CtkClipboard        *clipboard,
-                                   GdkEventOwnerChange *event,
+                                   CdkEventOwnerChange *event,
                                    gpointer callback_data);
 struct _TargetCallbackData
 {
@@ -380,7 +380,7 @@ merge_out_clipboard_menu_items (GObject *widget_as_object,
 
 static gboolean
 focus_changed_callback (CtkWidget *widget,
-                        GdkEventAny *event,
+                        CdkEventAny *event,
                         gpointer callback_data)
 {
     /* Connect the component to the container if the widget has focus. */
@@ -428,7 +428,7 @@ selection_changed_callback (CtkWidget *widget,
 
 static void
 owner_change_callback (CtkClipboard        *clipboard,
-                       GdkEventOwnerChange *event,
+                       CdkEventOwnerChange *event,
                        gpointer callback_data)
 {
     TargetCallbackData *target_data;
@@ -622,7 +622,7 @@ convert_lines_to_str_list (char **lines, gboolean *cut)
 GList*
 baul_clipboard_get_uri_list_from_selection_data (CtkSelectionData *selection_data,
         gboolean *cut,
-        GdkAtom copied_files_atom)
+        CdkAtom copied_files_atom)
 {
     GList *items;
 
@@ -660,7 +660,7 @@ baul_clipboard_get (CtkWidget *widget)
 void
 baul_clipboard_clear_if_colliding_uris (CtkWidget *widget,
                                         const GList *item_uris,
-                                        GdkAtom copied_files_atom)
+                                        CdkAtom copied_files_atom)
 {
     CtkSelectionData *data;
     GList *clipboard_item_uris, *l;

@@ -94,7 +94,7 @@ struct _BaulSidebarTitlePrivate
     CtkWidget		*more_info_label;
     CtkWidget		*emblem_box;
 
-    GdkRGBA		 label_colors [LAST_LABEL_COLOR];
+    CdkRGBA		 label_colors [LAST_LABEL_COLOR];
     guint		 best_icon_size;
     gboolean		 determined_icon;
 };
@@ -230,7 +230,7 @@ baul_sidebar_title_new (void)
 }
 
 static void
-setup_gc_with_fg (BaulSidebarTitle *sidebar_title, int idx, GdkRGBA *color)
+setup_gc_with_fg (BaulSidebarTitle *sidebar_title, int idx, CdkRGBA *color)
 {
     sidebar_title->details->label_colors[idx] = *color;
 }
@@ -239,10 +239,10 @@ void
 baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
                                       EelBackground    *background)
 {
-    GdkRGBA *light_info_color, *dark_info_color;
+    CdkRGBA *light_info_color, *dark_info_color;
     CtkStyleContext *style;
-    GdkRGBA color;
-    GdkRGBA *c;
+    CdkRGBA color;
+    CdkRGBA *c;
 
     g_assert (BAUL_IS_SIDEBAR_TITLE (sidebar_title));
     g_return_if_fail (ctk_widget_get_realized (CTK_WIDGET (sidebar_title)));
@@ -256,13 +256,13 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
 
     if (!light_info_color)
     {
-        light_info_color = g_malloc (sizeof (GdkRGBA));
+        light_info_color = g_malloc (sizeof (CdkRGBA));
         cdk_rgba_parse (light_info_color, DEFAULT_LIGHT_INFO_COLOR);
     }
 
     if (!dark_info_color)
     {
-        dark_info_color = g_malloc (sizeof (GdkRGBA));
+        dark_info_color = g_malloc (sizeof (CdkRGBA));
         cdk_rgba_parse (dark_info_color, DEFAULT_DARK_INFO_COLOR);
     }
 
@@ -311,7 +311,7 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
     }
     else if (eel_background_is_dark (background))
     {
-        GdkRGBA tmp;
+        CdkRGBA tmp;
 
         cdk_rgba_parse (&tmp, "EFEFEF");
         setup_gc_with_fg (sidebar_title, LABEL_COLOR, &tmp);
@@ -319,7 +319,7 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
     }
     else     /* converse */
     {
-        GdkRGBA tmp;
+        CdkRGBA tmp;
 
         cdk_rgba_parse (&tmp, "000000");
         setup_gc_with_fg (sidebar_title, LABEL_COLOR, &tmp);
@@ -624,7 +624,7 @@ update_more_info (BaulSidebarTitle *sidebar_title)
 
 /* add a pixbuf to the emblem box */
 static void
-add_emblem (BaulSidebarTitle *sidebar_title, GdkPixbuf *pixbuf)
+add_emblem (BaulSidebarTitle *sidebar_title, CdkPixbuf *pixbuf)
 {
     CtkWidget *image_widget;
 
@@ -637,7 +637,7 @@ static void
 update_emblems (BaulSidebarTitle *sidebar_title)
 {
     GList *pixbufs, *p;
-    GdkPixbuf *pixbuf = NULL;
+    CdkPixbuf *pixbuf = NULL;
 
     /* exit if we don't have the file yet */
     if (sidebar_title->details->file == NULL)

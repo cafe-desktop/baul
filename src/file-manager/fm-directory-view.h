@@ -317,7 +317,7 @@ struct FMDirectoryViewClass
      * level-independent coordinate system.
      */
     void (* widget_to_file_operation_position) (FMDirectoryView *view,
-            GdkPoint        *position);
+            CdkPoint        *position);
 
     /* Preference change callbacks, overriden by icon and list views.
      * Icon and list views respond by synchronizing to the new preference
@@ -387,7 +387,7 @@ void                fm_directory_view_move_copy_items                  (const GL
         int               x,
         int               y,
         FMDirectoryView  *view);
-GdkAtom	            fm_directory_view_get_copied_files_atom            (FMDirectoryView  *view);
+CdkAtom	            fm_directory_view_get_copied_files_atom            (FMDirectoryView  *view);
 gboolean            fm_directory_view_get_active                       (FMDirectoryView  *view);
 
 /* Wrappers for signal emitters. These are normally called
@@ -426,11 +426,11 @@ BaulFile       *fm_directory_view_get_directory_as_file            (FMDirectoryV
 EelBackground *     fm_directory_view_get_background                   (FMDirectoryView  *view);
 gboolean            fm_directory_view_get_allow_moves                  (FMDirectoryView  *view);
 void                fm_directory_view_pop_up_background_context_menu   (FMDirectoryView  *view,
-        GdkEventButton   *event);
+        CdkEventButton   *event);
 void                fm_directory_view_pop_up_selection_context_menu    (FMDirectoryView  *view,
-        GdkEventButton   *event);
+        CdkEventButton   *event);
 void                fm_directory_view_pop_up_location_context_menu     (FMDirectoryView  *view,
-        GdkEventButton   *event,
+        CdkEventButton   *event,
         const char       *location);
 void                fm_directory_view_send_selection_change            (FMDirectoryView *view);
 gboolean            fm_directory_view_should_show_file                 (FMDirectoryView  *view,
@@ -446,23 +446,23 @@ void                fm_directory_view_set_show_foreign                 (FMDirect
         gboolean          show_foreign);
 void                fm_directory_view_init_view_iface                  (BaulViewIface *iface);
 gboolean            fm_directory_view_handle_scroll_event              (FMDirectoryView  *view,
-        GdkEventScroll   *event);
+        CdkEventScroll   *event);
 void                fm_directory_view_handle_netscape_url_drop         (FMDirectoryView  *view,
         const char       *encoded_url,
         const char       *target_uri,
-        GdkDragAction     action,
+        CdkDragAction     action,
         int               x,
         int               y);
 void                fm_directory_view_handle_uri_list_drop             (FMDirectoryView  *view,
         const char       *item_uris,
         const char       *target_uri,
-        GdkDragAction     action,
+        CdkDragAction     action,
         int               x,
         int               y);
 void                fm_directory_view_handle_text_drop                 (FMDirectoryView  *view,
         const char       *text,
         const char       *target_uri,
-        GdkDragAction     action,
+        CdkDragAction     action,
         int               x,
         int               y);
 void                fm_directory_view_handle_raw_drop                 (FMDirectoryView  *view,
@@ -470,7 +470,7 @@ void                fm_directory_view_handle_raw_drop                 (FMDirecto
         int               length,
         const char       *target_uri,
         const char       *direct_save_uri,
-        GdkDragAction     action,
+        CdkDragAction     action,
         int               x,
         int               y);
 void                fm_directory_view_freeze_updates                   (FMDirectoryView  *view);

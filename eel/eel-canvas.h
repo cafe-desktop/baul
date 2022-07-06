@@ -150,7 +150,7 @@ extern "C" {
         /* Unrealize an item */
         void (* unrealize) (EelCanvasItem *item);
 
-        /* Map an item - normally only need by items with their own GdkWindows */
+        /* Map an item - normally only need by items with their own CdkWindows */
         void (* map) (EelCanvasItem *item);
 
         /* Unmap an item */
@@ -181,7 +181,7 @@ extern "C" {
         /* Signal: an event ocurred for an item of this type.  The (x, y)
          * coordinates are in the canvas world coordinate system.
          */
-        gboolean (* event)                (EelCanvasItem *item, GdkEvent *event);
+        gboolean (* event)                (EelCanvasItem *item, CdkEvent *event);
 
         /* Reserved for future expansion */
         gpointer spare_vmethods [4];
@@ -251,10 +251,10 @@ extern "C" {
      * reported. If cursor is non-NULL, it will be used during the duration of the
      * grab. event is the event, triggering the grab. Returns the same values as cdk_seat_grab().
      */
-     GdkGrabStatus eel_canvas_item_grab (EelCanvasItem *item,
-                                         GdkEventMask event_mask,
-                                         GdkCursor *cursor,
-                                         const GdkEvent* event);
+     CdkGrabStatus eel_canvas_item_grab (EelCanvasItem *item,
+                                         CdkEventMask event_mask,
+                                         CdkCursor *cursor,
+                                         const CdkEvent* event);
 
     /* Ungrabs the seat -- the specified item must be the same that was passed to
      * eel_canvas_item_grab().
@@ -379,7 +379,7 @@ extern "C" {
         EelCanvasItem *focused_item;
 
         /* Event on which selection of current item is based */
-        GdkEvent pick_event;
+        CdkEvent pick_event;
 
         /* Scrolling region */
         double scroll_x1, scroll_y1;

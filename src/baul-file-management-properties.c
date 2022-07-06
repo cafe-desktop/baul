@@ -1290,7 +1290,7 @@ baul_file_management_properties_dialog_setup (CtkBuilder *builder, CtkWindow *wi
 
 static gboolean
 delete_event_callback (CtkWidget       *widget,
-                       GdkEventAny     *event,
+                       CdkEventAny     *event,
                        gpointer         data)
 {
     void (*response_callback) (CtkDialog *dialog,

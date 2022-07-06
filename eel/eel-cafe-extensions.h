@@ -34,6 +34,6 @@ char *        eel_cafe_make_terminal_command                         (const char
 
 /* Open up a new terminal, optionally passing in a command to execute */
 void          eel_cafe_open_terminal_on_screen                       (const char               *command,
-        GdkScreen                *screen);
+        CdkScreen                *screen);
 
 #endif /* EEL_CAFE_EXTENSIONS_H */

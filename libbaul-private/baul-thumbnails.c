@@ -485,7 +485,7 @@ thumbnail_thread_func (GTask        *task,
                        GCancellable *cancellable)
 {
     BaulThumbnailInfo *info = NULL;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     time_t current_orig_mtime = 0;
     time_t current_time;
     GList *node;

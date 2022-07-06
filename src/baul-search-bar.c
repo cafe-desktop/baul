@@ -122,7 +122,7 @@ entry_has_text (BaulSearchBar *bar)
 static void
 entry_icon_release_cb (CtkEntry *entry,
                        CtkEntryIconPosition position,
-                       GdkEvent *event,
+                       CdkEvent *event,
                        BaulSearchBar *bar)
 {
     g_signal_emit_by_name (entry, "activate", 0);
@@ -139,7 +139,7 @@ entry_activate_cb (CtkWidget *entry, BaulSearchBar *bar)
 
 static gboolean
 focus_in_event_callback (CtkWidget *widget,
-                         GdkEventFocus *event,
+                         CdkEventFocus *event,
                          gpointer user_data)
 {
     BaulSearchBar *bar;

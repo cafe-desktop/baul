@@ -134,7 +134,7 @@ try_to_expand_path (gpointer callback_data)
  * reason. This is a clone of code from CtkEntry.
  */
 static gboolean
-entry_would_have_inserted_characters (const GdkEventKey *event)
+entry_would_have_inserted_characters (const CdkEventKey *event)
 {
     switch (event->keyval)
     {
@@ -221,11 +221,11 @@ got_completion_data_callback (GFilenameCompleter *completer,
 
 static void
 editable_event_after_callback (CtkEntry *entry,
-                               GdkEvent *event,
+                               CdkEvent *event,
                                BaulLocationEntry *location_entry)
 {
     CtkEditable *editable;
-    GdkEventKey *keyevent;
+    CdkEventKey *keyevent;
 
     if (event->type != GDK_KEY_PRESS)
     {
@@ -233,7 +233,7 @@ editable_event_after_callback (CtkEntry *entry,
     }
 
     editable = CTK_EDITABLE (entry);
-    keyevent = (GdkEventKey *)event;
+    keyevent = (CdkEventKey *)event;
 
     /* After typing the right arrow key we move the selection to
      * the end, if we have a valid selection - since this is most
@@ -324,7 +324,7 @@ baul_location_entry_text_changed (BaulLocationEntry *entry,
 static void
 baul_location_entry_icon_release (CtkEntry *gentry,
                                   CtkEntryIconPosition position,
-                                  GdkEvent *event,
+                                  CdkEvent *event,
                                   gpointer unused)
 {
     switch (BAUL_LOCATION_ENTRY (gentry)->details->secondary_action)
@@ -342,7 +342,7 @@ baul_location_entry_icon_release (CtkEntry *gentry,
 
 static gboolean
 baul_location_entry_focus_in (CtkWidget     *widget,
-                              GdkEventFocus *event)
+                              CdkEventFocus *event)
 {
     BaulLocationEntry *entry = BAUL_LOCATION_ENTRY (widget);
 

@@ -53,7 +53,7 @@ extern "C" {
         int y;
         int button;
         guint state;
-        GdkEvent *event;
+        CdkEvent *event;
     } EelImageTableEvent;
 
     struct EelImageTable

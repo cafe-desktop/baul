@@ -321,7 +321,7 @@ eel_gradient_set_bottom_color_spec (const char *gradient_spec,
  * the spec. can't be parsed, instead of returning a boolean flag.
  */
 void
-eel_cdk_rgba_parse_with_white_default (GdkRGBA *color,
+eel_cdk_rgba_parse_with_white_default (CdkRGBA *color,
                                        const char *color_spec)
 {
     gboolean got_color;
@@ -360,14 +360,14 @@ eel_rgb16_to_rgb (gushort r, gushort g, gushort b)
 
 /**
  * eel_cdk_rgba_to_rgb
- * @color: A GdkRGBA style color.
+ * @color: A CdkRGBA style color.
  * Returns: An rgb value.
  *
- * Converts from a GdkRGBA style color to a cdk_rgb one.
+ * Converts from a CdkRGBA style color to a cdk_rgb one.
  * Alpha gets set to fully opaque
  */
 guint32
-eel_cdk_rgba_to_rgb (const GdkRGBA *color)
+eel_cdk_rgba_to_rgb (const CdkRGBA *color)
 {
     return eel_rgb16_to_rgb ((guint) (color->red * 65535),
                              (guint) (color->green * 65535),
@@ -378,15 +378,15 @@ eel_cdk_rgba_to_rgb (const GdkRGBA *color)
  * eel_cdk_rgb_to_rgba
  * @color: a cdk_rgb style value.
  *
- * Converts from a cdk_rgb value style to a GdkRGBA one.
+ * Converts from a cdk_rgb value style to a CdkRGBA one.
  * The cdk_rgb color alpha channel is ignored.
  *
- * Return value: A GdkRGBA structure version of the given RGB color.
+ * Return value: A CdkRGBA structure version of the given RGB color.
  */
-GdkRGBA
+CdkRGBA
 eel_cdk_rgb_to_rgba (guint32 color)
 {
-    GdkRGBA result;
+    CdkRGBA result;
 
     result.red = ((gdouble) ((color >> 16) & 0xFF)) / 0xFF;
     result.green = ((gdouble) ((color >> 8) & 0xFF)) / 0xFF;
@@ -419,7 +419,7 @@ eel_cdk_rgb_to_color_spec (const guint32 color)
  * Return true if the given color is `dark'
  */
 gboolean
-eel_cdk_rgba_is_dark (const GdkRGBA *color)
+eel_cdk_rgba_is_dark (const CdkRGBA *color)
 {
     int intensity;
 
@@ -430,12 +430,12 @@ eel_cdk_rgba_is_dark (const GdkRGBA *color)
     return intensity < 128;
 }
 
-EelGdkGeometryFlags
+EelCdkGeometryFlags
 eel_cdk_parse_geometry (const char *string, int *x_return, int *y_return,
                         guint *width_return, guint *height_return)
 {
     int x11_flags;
-    EelGdkGeometryFlags cdk_flags;
+    EelCdkGeometryFlags cdk_flags;
 
     g_return_val_if_fail (string != NULL, EEL_GDK_NO_VALUE);
     g_return_val_if_fail (x_return != NULL, EEL_GDK_NO_VALUE);
@@ -478,7 +478,7 @@ eel_cdk_parse_geometry (const char *string, int *x_return, int *y_return,
 #if ! defined (EEL_OMIT_SELF_CHECK)
 
 static char *
-eel_cdk_rgba_as_hex_string (GdkRGBA color)
+eel_cdk_rgba_as_hex_string (CdkRGBA color)
 {
     return g_strdup_printf ("%04X%04X%04X",
                             (guint) (color.red * 65535),
@@ -489,7 +489,7 @@ eel_cdk_rgba_as_hex_string (GdkRGBA color)
 static char *
 eel_self_check_parse (const char *color_spec)
 {
-    GdkRGBA color;
+    CdkRGBA color;
 
     eel_cdk_rgba_parse_with_white_default (&color, color_spec);
     return eel_cdk_rgba_as_hex_string (color);
@@ -498,7 +498,7 @@ eel_self_check_parse (const char *color_spec)
 static char *
 eel_self_check_cdk_rgb_to_color (guint32 color)
 {
-    GdkRGBA result;
+    CdkRGBA result;
 
     result = eel_cdk_rgb_to_rgba (color);
 

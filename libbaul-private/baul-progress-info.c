@@ -207,7 +207,7 @@ baul_progress_info_class_init (BaulProgressInfoClass *klass)
 
 static gboolean
 delete_event (CtkWidget *widget,
-              GdkEventAny *event)
+              CdkEventAny *event)
 {
     ctk_widget_hide (widget);
     return TRUE;

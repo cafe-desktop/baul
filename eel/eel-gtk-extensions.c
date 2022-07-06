@@ -86,7 +86,7 @@ eel_ctk_window_get_geometry_string (CtkWindow *window)
 static void
 sanity_check_window_position (int *left, int *top)
 {
-    GdkScreen *screen;
+    CdkScreen *screen;
     gint scale;
 
     g_assert (left != NULL);
@@ -120,7 +120,7 @@ sanity_check_window_position (int *left, int *top)
 static void
 sanity_check_window_dimensions (guint *width, guint *height)
 {
-    GdkScreen *screen;
+    CdkScreen *screen;
     gint scale;
 
     g_assert (width != NULL);
@@ -147,7 +147,7 @@ sanity_check_window_dimensions (guint *width, guint *height)
  * some sanity-checking on the passed-in values.
  *
  * @window: A non-visible CtkWindow
- * @geometry_flags: A EelGdkGeometryFlags value defining which of
+ * @geometry_flags: A EelCdkGeometryFlags value defining which of
  * the following parameters have defined values
  * @left: pixel coordinate for left of window
  * @top: pixel coordinate for top of window
@@ -156,7 +156,7 @@ sanity_check_window_dimensions (guint *width, guint *height)
  */
 void
 eel_ctk_window_set_initial_geometry (CtkWindow *window,
-                                     EelGdkGeometryFlags geometry_flags,
+                                     EelCdkGeometryFlags geometry_flags,
                                      int left,
                                      int top,
                                      guint width,
@@ -174,7 +174,7 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
 
     if ((geometry_flags & EEL_GDK_X_VALUE) && (geometry_flags & EEL_GDK_Y_VALUE))
     {
-        GdkScreen *screen;
+        CdkScreen *screen;
         int screen_width, screen_height;
         int scale;
 
@@ -238,7 +238,7 @@ eel_ctk_window_set_initial_geometry_from_string (CtkWindow *window,
 {
     int left, top;
     guint width, height;
-    EelGdkGeometryFlags geometry_flags;
+    EelCdkGeometryFlags geometry_flags;
 
     g_return_if_fail (CTK_IS_WINDOW (window));
     g_return_if_fail (geometry_string != NULL);
@@ -289,11 +289,11 @@ eel_ctk_window_set_initial_geometry_from_string (CtkWindow *window,
  **/
 void
 eel_pop_up_context_menu (CtkMenu	*menu,
-                         GdkEventButton *event)
+                         CdkEventButton *event)
 {
     g_return_if_fail (CTK_IS_MENU (menu));
 
-    ctk_menu_popup_at_pointer (menu, (const GdkEvent*) event);
+    ctk_menu_popup_at_pointer (menu, (const CdkEvent*) event);
 
     g_object_ref_sink (menu);
     g_object_unref (menu);
@@ -369,7 +369,7 @@ eel_ctk_label_make_bold (CtkLabel *label)
 
 static gboolean
 tree_view_button_press_callback (CtkWidget *tree_view,
-                                 GdkEventButton *event,
+                                 CdkEventButton *event,
                                  gpointer data)
 {
     CtkTreePath *path;
@@ -508,7 +508,7 @@ eel_image_menu_item_new_from_surface (cairo_surface_t *icon_surface,
 }
 
 gboolean
-eel_dialog_page_scroll_event_callback (CtkWidget *widget, GdkEventScroll *event, CtkWindow *window)
+eel_dialog_page_scroll_event_callback (CtkWidget *widget, CdkEventScroll *event, CtkWindow *window)
 {
     CtkNotebook *notebook = CTK_NOTEBOOK (widget);
     CtkWidget *child, *event_widget, *action_widget;
@@ -517,7 +517,7 @@ eel_dialog_page_scroll_event_callback (CtkWidget *widget, GdkEventScroll *event,
     if (child == NULL)
         return FALSE;
 
-    event_widget = ctk_get_event_widget ((GdkEvent *) event);
+    event_widget = ctk_get_event_widget ((CdkEvent *) event);
 
     /* Ignore scroll events from the content of the page */
     if (event_widget == NULL ||

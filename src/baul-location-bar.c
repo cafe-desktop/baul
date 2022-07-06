@@ -148,7 +148,7 @@ emit_location_changed (BaulLocationBar *bar)
 
 static void
 drag_data_received_callback (CtkWidget *widget,
-                             GdkDragContext *context,
+                             CdkDragContext *context,
                              int x,
                              int y,
                              CtkSelectionData *data,
@@ -223,7 +223,7 @@ drag_data_received_callback (CtkWidget *widget,
     if (new_windows_for_extras)
     {
         BaulApplication *application;
-        GdkScreen *screen;
+        CdkScreen *screen;
         int i;
         BaulWindow *new_window = NULL;
         GFile *location = NULL;
@@ -248,7 +248,7 @@ drag_data_received_callback (CtkWidget *widget,
 
 static void
 drag_data_get_callback (CtkWidget *widget,
-                        GdkDragContext *context,
+                        CdkDragContext *context,
                         CtkSelectionData *selection_data,
                         guint info,
                         guint32 time,
@@ -315,7 +315,7 @@ style_set_handler (CtkWidget *widget, CtkStyleContext *previous_style)
 
 static gboolean
 label_button_pressed_callback (CtkWidget             *widget,
-                               GdkEventButton        *event)
+                               CdkEventButton        *event)
 {
     BaulNavigationWindow *window;
     BaulWindowSlot       *slot;
@@ -595,7 +595,7 @@ baul_location_bar_set_location (BaulLocationBar *bar,
 
 static void
 override_background_color (CtkWidget *widget,
-                           GdkRGBA   *rgba)
+                           CdkRGBA   *rgba)
 {
     gchar          *css;
     CtkCssProvider *provider;
@@ -618,10 +618,10 @@ void
 baul_location_bar_set_active (BaulLocationBar *location_bar, gboolean is_active)
 {
     CtkStyleContext *style;
-    GdkRGBA color;
-    GdkRGBA *c;
-    static GdkRGBA bg_active;
-    static GdkRGBA bg_inactive;
+    CdkRGBA color;
+    CdkRGBA *c;
+    static CdkRGBA bg_active;
+    static CdkRGBA bg_inactive;
 
     style = ctk_widget_get_style_context (CTK_WIDGET (location_bar->details->entry));
 

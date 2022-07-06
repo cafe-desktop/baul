@@ -41,7 +41,7 @@
 #include "baul-file-attributes.h"
 
 static void baul_background_changed_cb (EelBackground *background,
-                                        GdkDragAction  action,
+                                        CdkDragAction  action,
                                         BaulFile      *file);
 
 static void
@@ -119,7 +119,7 @@ baul_background_theme_notify_cb (GSettings   *settings,
 /* handle the background changed signal */
 static void
 baul_background_changed_cb (EelBackground *background,
-                            GdkDragAction  action,
+                            CdkDragAction  action,
                             BaulFile   *file)
 {
     g_assert (EEL_IS_BACKGROUND (background));
@@ -135,14 +135,14 @@ baul_background_changed_cb (EelBackground *background,
     g_signal_handlers_block_by_func (file, G_CALLBACK (baul_background_settings_notify_cb),
                                      background);
 
-    if (action != (GdkDragAction) BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND &&
-            action != (GdkDragAction) BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
+    if (action != (CdkDragAction) BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND &&
+            action != (CdkDragAction) BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
     {
-        action = (GdkDragAction) GPOINTER_TO_INT (g_object_get_data (G_OBJECT (background),
+        action = (CdkDragAction) GPOINTER_TO_INT (g_object_get_data (G_OBJECT (background),
                                                   "default_drag_action"));
     }
 
-    if (action == (GdkDragAction) BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
+    if (action == (CdkDragAction) BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND)
     {
         baul_file_set_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_COLOR, NULL, NULL);
         baul_file_set_metadata (file, BAUL_METADATA_KEY_LOCATION_BACKGROUND_IMAGE, NULL, NULL);
@@ -233,7 +233,7 @@ baul_background_weak_notify (gpointer data,
 void
 baul_connect_background_to_file_metadata (CtkWidget     *widget,
                                           BaulFile      *file,
-                                          GdkDragAction  default_drag_action)
+                                          CdkDragAction  default_drag_action)
 {
     EelBackground *background;
     gpointer old_file;
@@ -313,7 +313,7 @@ baul_connect_background_to_file_metadata (CtkWidget     *widget,
 /* handle the desktop background "settings_changed" signal */
 static void
 desktop_background_changed_cb (EelBackground *background,
-                               GdkDragAction  action,
+                               CdkDragAction  action,
                                gpointer       user_data)
 {
     eel_bg_save_to_gsettings (background,

@@ -67,7 +67,7 @@
 
 struct _FMDesktopIconViewPrivate
 {
-    GdkWindow *root_window;
+    CdkWindow *root_window;
     CtkActionGroup *desktop_action_group;
     guint desktop_merge_id;
 
@@ -112,7 +112,7 @@ get_icon_container (FMDesktopIconView *icon_view)
 
 static void
 icon_container_set_workarea (BaulIconContainer *icon_container,
-                             GdkScreen             *screen,
+                             CdkScreen             *screen,
                              long                  *workareas,
                              int                    n_items)
 {
@@ -150,12 +150,12 @@ icon_container_set_workarea (BaulIconContainer *icon_container,
 
 static void
 net_workarea_changed (FMDesktopIconView *icon_view,
-                      GdkWindow         *window)
+                      CdkWindow         *window)
 {
-    GdkDisplay *display;
+    CdkDisplay *display;
     long *nworkareas = NULL;
     long *workareas = NULL;
-    GdkAtom type_returned;
+    CdkAtom type_returned;
     int format_returned;
     int length_returned;
     BaulIconContainer *icon_container;
@@ -224,7 +224,7 @@ net_workarea_changed (FMDesktopIconView *icon_view,
     }
     else
     {
-        GdkScreen *screen;
+        CdkScreen *screen;
 
         screen = cdk_window_get_screen (window);
 
@@ -239,9 +239,9 @@ net_workarea_changed (FMDesktopIconView *icon_view,
         g_free (workareas);
 }
 
-static GdkFilterReturn
-desktop_icon_view_property_filter (GdkXEvent *cdk_xevent,
-                                   GdkEvent *event,
+static CdkFilterReturn
+desktop_icon_view_property_filter (CdkXEvent *cdk_xevent,
+                                   CdkEvent *event,
                                    gpointer data)
 {
     XEvent *xevent = cdk_xevent;
@@ -319,13 +319,13 @@ fm_desktop_icon_view_class_init (FMDesktopIconViewClass *class)
 
 static void
 fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
-        GdkEventButton *event,
+        CdkEventButton *event,
         FMDesktopIconView *desktop_icon_view)
 {
     XButtonEvent x_event;
-    GdkDevice *keyboard = NULL, *pointer = NULL;
-    GdkSeat *seat;
-    GdkDisplay *display;
+    CdkDevice *keyboard = NULL, *pointer = NULL;
+    CdkSeat *seat;
+    CdkDisplay *display;
 
     seat = cdk_display_get_default_seat (ctk_widget_get_display (CTK_WIDGET (icon_container)));
     pointer = cdk_seat_get_pointer (seat);
@@ -385,8 +385,8 @@ unrealized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
 static void
 realized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
 {
-    GdkWindow *root_window;
-    GdkScreen *screen;
+    CdkWindow *root_window;
+    CdkScreen *screen;
     CtkAllocation allocation;
     gint scale;
 

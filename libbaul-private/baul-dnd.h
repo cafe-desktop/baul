@@ -158,15 +158,15 @@ gboolean		    baul_drag_items_local			(const char			      *target_uri,
 gboolean		    baul_drag_uris_local			(const char			      *target_uri,
         const GList			      *source_uri_list);
 gboolean		    baul_drag_items_on_desktop		(const GList			      *selection_list);
-void			    baul_drag_default_drop_action_for_icons (GdkDragContext			      *context,
+void			    baul_drag_default_drop_action_for_icons (CdkDragContext			      *context,
         const char			      *target_uri,
         const GList			      *items,
         int				      *action);
-GdkDragAction		    baul_drag_default_drop_action_for_netscape_url (GdkDragContext			     *context);
-GdkDragAction		    baul_drag_default_drop_action_for_uri_list     (GdkDragContext			     *context,
+CdkDragAction		    baul_drag_default_drop_action_for_netscape_url (CdkDragContext			     *context);
+CdkDragAction		    baul_drag_default_drop_action_for_uri_list     (CdkDragContext			     *context,
         const char			     *target_uri_string);
 gboolean		    baul_drag_drag_data_get			(CtkWidget			      *widget,
-        GdkDragContext			      *context,
+        CdkDragContext			      *context,
         CtkSelectionData		      *selection_data,
         guint				       info,
         guint32			       time,
@@ -175,10 +175,10 @@ gboolean		    baul_drag_drag_data_get			(CtkWidget			      *widget,
 int			    baul_drag_modifier_based_action		(int				       default_action,
         int				       non_default_action);
 
-GdkDragAction		    baul_drag_drop_action_ask		(CtkWidget			      *widget,
-        GdkDragAction			       possible_actions);
-GdkDragAction		    baul_drag_drop_background_ask		(CtkWidget			      *widget,
-        GdkDragAction			       possible_actions);
+CdkDragAction		    baul_drag_drop_action_ask		(CtkWidget			      *widget,
+        CdkDragAction			       possible_actions);
+CdkDragAction		    baul_drag_drop_background_ask		(CtkWidget			      *widget,
+        CdkDragAction			       possible_actions);
 
 gboolean		    baul_drag_autoscroll_in_scroll_region	(CtkWidget			      *widget);
 void			    baul_drag_autoscroll_calculate_delta	(CtkWidget			      *widget,

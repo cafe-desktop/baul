@@ -95,7 +95,7 @@ struct _BaulNotesViewerDetails
     BaulFile *file;
     guint save_timeout_id;
     char *previous_saved_text;
-    GdkPixbuf *icon;
+    CdkPixbuf *icon;
 };
 
 static gboolean
@@ -305,7 +305,7 @@ loading_uri_callback (BaulWindowInfo *window,
 
 static gboolean
 on_text_field_focus_out_event (CtkWidget *widget,
-                               GdkEventFocus *event,
+                               CdkEventFocus *event,
                                gpointer callback_data)
 {
     BaulNotesViewer *notes;
@@ -408,7 +408,7 @@ baul_notes_viewer_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show Notes"));
 }
 
-static GdkPixbuf *
+static CdkPixbuf *
 baul_notes_viewer_get_tab_icon (BaulSidebar *sidebar)
 {
     BaulNotesViewer *notes;

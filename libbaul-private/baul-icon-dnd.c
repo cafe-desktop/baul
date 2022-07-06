@@ -90,7 +90,7 @@ static CtkTargetList *drop_types_list = NULL;
 static CtkTargetList *drop_types_list_root = NULL;
 
 static char * baul_icon_container_find_drop_target (BaulIconContainer *container,
-        GdkDragContext *context,
+        CdkDragContext *context,
         int x, int y, gboolean *icon_hit,
         gboolean rewrite_desktop);
 
@@ -140,7 +140,7 @@ create_selection_shadow (BaulIconContainer *container,
     {
         BaulDragSelectionItem *item;
         int x1, y1, x2, y2;
-        GdkRGBA black = { 0, 0, 0, 1 };
+        CdkRGBA black = { 0, 0, 0, 1 };
 
         item = p->data;
 
@@ -321,7 +321,7 @@ each_icon_get_data_binder (BaulDragEachSelectedItemDataGet iteratee,
 /* Called when the data for drag&drop is needed */
 static void
 drag_data_get_callback (CtkWidget *widget,
-                        GdkDragContext *context,
+                        CdkDragContext *context,
                         CtkSelectionData *selection_data,
                         guint info,
                         guint32 time,
@@ -392,7 +392,7 @@ baul_icon_container_dropped_icon_feedback (CtkWidget *widget,
 }
 
 static char *
-get_direct_save_filename (GdkDragContext *context)
+get_direct_save_filename (CdkDragContext *context)
 {
     guchar *prop_text;
     gint prop_len;
@@ -422,7 +422,7 @@ get_direct_save_filename (GdkDragContext *context)
 }
 
 static void
-set_direct_save_uri (CtkWidget *widget, GdkDragContext *context, BaulDragInfo *drag_info, int x, int y)
+set_direct_save_uri (CtkWidget *widget, CdkDragContext *context, BaulDragInfo *drag_info, int x, int y)
 {
     char *filename, *drop_target;
     gchar *uri;
@@ -469,10 +469,10 @@ set_direct_save_uri (CtkWidget *widget, GdkDragContext *context, BaulDragInfo *d
 
 /* FIXME bugzilla.gnome.org 47445: Needs to become a shared function */
 static void
-get_data_on_first_target_we_support (CtkWidget *widget, GdkDragContext *context, guint32 time, int x, int y)
+get_data_on_first_target_we_support (CtkWidget *widget, CdkDragContext *context, guint32 time, int x, int y)
 {
     CtkTargetList *list;
-    GdkAtom target;
+    CdkAtom target;
 
     if (drop_types_list == NULL)
     {
@@ -532,7 +532,7 @@ get_data_on_first_target_we_support (CtkWidget *widget, GdkDragContext *context,
 
 static void
 baul_icon_container_ensure_drag_data (BaulIconContainer *container,
-                                      GdkDragContext *context,
+                                      CdkDragContext *context,
                                       guint32 time)
 {
     BaulIconDndInfo *dnd_info;
@@ -547,7 +547,7 @@ baul_icon_container_ensure_drag_data (BaulIconContainer *container,
 
 static void
 drag_end_callback (CtkWidget *widget,
-                   GdkDragContext *context,
+                   CdkDragContext *context,
                    gpointer data)
 {
     BaulIconContainer *container;
@@ -642,13 +642,13 @@ baul_icon_container_selection_items_local (BaulIconContainer *container,
     return result;
 }
 
-static GdkDragAction
+static CdkDragAction
 get_background_drag_action (BaulIconContainer *container,
-                            GdkDragAction action)
+                            CdkDragAction action)
 {
     /* FIXME: This function is very FMDirectoryView specific, and
      * should be moved out of baul-icon-dnd.c */
-    GdkDragAction valid_actions;
+    CdkDragAction valid_actions;
 
     if (action == GDK_ACTION_ASK)
     {
@@ -668,7 +668,7 @@ get_background_drag_action (BaulIconContainer *container,
 static void
 receive_dropped_color (BaulIconContainer *container,
                        int x, int y,
-                       GdkDragAction action,
+                       CdkDragAction action,
                        CtkSelectionData *data)
 {
     action = get_background_drag_action (container, action);
@@ -690,7 +690,7 @@ receive_dropped_color (BaulIconContainer *container,
 
 /* handle dropped tile images */
 static void
-receive_dropped_tile_image (BaulIconContainer *container, GdkDragAction action, CtkSelectionData *data)
+receive_dropped_tile_image (BaulIconContainer *container, CdkDragAction action, CtkSelectionData *data)
 {
     g_assert (data != NULL);
 
@@ -754,7 +754,7 @@ receive_dropped_keyword (BaulIconContainer *container, const char *keyword, int 
 
 /* handle dropped url */
 static void
-receive_dropped_netscape_url (BaulIconContainer *container, const char *encoded_url, GdkDragContext *context, int x, int y)
+receive_dropped_netscape_url (BaulIconContainer *container, const char *encoded_url, CdkDragContext *context, int x, int y)
 {
     char *drop_target;
 
@@ -776,7 +776,7 @@ receive_dropped_netscape_url (BaulIconContainer *container, const char *encoded_
 
 /* handle dropped uri list */
 static void
-receive_dropped_uri_list (BaulIconContainer *container, const char *uri_list, GdkDragContext *context, int x, int y)
+receive_dropped_uri_list (BaulIconContainer *container, const char *uri_list, CdkDragContext *context, int x, int y)
 {
     char *drop_target;
 
@@ -798,7 +798,7 @@ receive_dropped_uri_list (BaulIconContainer *container, const char *uri_list, Gd
 
 /* handle dropped text */
 static void
-receive_dropped_text (BaulIconContainer *container, const char *text, GdkDragContext *context, int x, int y)
+receive_dropped_text (BaulIconContainer *container, const char *text, CdkDragContext *context, int x, int y)
 {
     char *drop_target;
 
@@ -820,7 +820,7 @@ receive_dropped_text (BaulIconContainer *container, const char *text, GdkDragCon
 
 /* handle dropped raw data */
 static void
-receive_dropped_raw (BaulIconContainer *container, const char *raw_data, int length, const char *direct_save_uri, GdkDragContext *context, int x, int y)
+receive_dropped_raw (BaulIconContainer *container, const char *raw_data, int length, const char *direct_save_uri, CdkDragContext *context, int x, int y)
 {
     char *drop_target;
 
@@ -848,7 +848,7 @@ auto_scroll_timeout_callback (gpointer data)
     BaulIconContainer *container;
     CtkWidget *widget;
     float x_scroll_delta, y_scroll_delta;
-    GdkRectangle exposed_area;
+    CdkRectangle exposed_area;
     CtkAllocation allocation;
 
     g_assert (BAUL_IS_ICON_CONTAINER (data));
@@ -952,7 +952,7 @@ handle_local_move (BaulIconContainer *container,
     GList *moved_icons, *p;
     BaulFile *file;
     char screen_string[32];
-    GdkScreen *screen;
+    CdkScreen *screen;
     time_t now;
     BaulDragSelectionItem *item = NULL;
     BaulIcon *icon = NULL;
@@ -1015,7 +1015,7 @@ handle_local_move (BaulIconContainer *container,
 
 static void
 handle_nonlocal_move (BaulIconContainer *container,
-                      GdkDragAction action,
+                      CdkDragAction action,
                       int x, int y,
                       const char *target_uri,
                       gboolean icon_hit)
@@ -1040,7 +1040,7 @@ handle_nonlocal_move (BaulIconContainer *container,
 
     is_rtl = baul_icon_container_is_layout_rtl (container);
 
-    source_item_locations = g_array_new (FALSE, TRUE, sizeof (GdkPoint));
+    source_item_locations = g_array_new (FALSE, TRUE, sizeof (CdkPoint));
     if (!icon_hit)
     {
         int index;
@@ -1059,8 +1059,8 @@ handle_nonlocal_move (BaulIconContainer *container,
             item_x = ((BaulDragSelectionItem *)p->data)->icon_x;
             if (is_rtl)
                 item_x = -item_x - ((BaulDragSelectionItem *)p->data)->icon_width;
-            g_array_index (source_item_locations, GdkPoint, index).x = item_x;
-            g_array_index (source_item_locations, GdkPoint, index).y =
+            g_array_index (source_item_locations, CdkPoint, index).x = item_x;
+            g_array_index (source_item_locations, CdkPoint, index).y =
                 ((BaulDragSelectionItem *)p->data)->icon_y;
         }
     }
@@ -1098,7 +1098,7 @@ handle_nonlocal_move (BaulIconContainer *container,
 
 static char *
 baul_icon_container_find_drop_target (BaulIconContainer *container,
-                                      GdkDragContext *context,
+                                      CdkDragContext *context,
                                       int x, int y,
                                       gboolean *icon_hit,
                                       gboolean rewrite_desktop)
@@ -1224,14 +1224,14 @@ selection_is_image_file (GList *selection_list)
 
 static void
 baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
-        GdkDragContext *context,
+        CdkDragContext *context,
         int x, int y)
 {
     char *drop_target;
     gboolean local_move_only;
     double world_x, world_y;
     gboolean icon_hit;
-    GdkDragAction action, real_action;
+    CdkDragAction action, real_action;
 
     drop_target = NULL;
 
@@ -1263,7 +1263,7 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
         real_action = baul_drag_drop_action_ask (CTK_WIDGET (container), action);
     }
 
-    if (real_action == (GdkDragAction) BAUL_DND_ACTION_SET_AS_BACKGROUND)
+    if (real_action == (CdkDragAction) BAUL_DND_ACTION_SET_AS_BACKGROUND)
     {
         BaulDragSelectionItem *selected_item;
 
@@ -1310,7 +1310,7 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
 
 static void
 baul_icon_container_get_drop_action (BaulIconContainer *container,
-                                     GdkDragContext *context,
+                                     CdkDragContext *context,
                                      int x, int y,
                                      int *action)
 {
@@ -1410,7 +1410,7 @@ set_drop_target (BaulIconContainer *container,
 
 static void
 baul_icon_dnd_update_drop_target (BaulIconContainer *container,
-                                  GdkDragContext *context,
+                                  CdkDragContext *context,
                                   int x, int y)
 {
     BaulIcon *icon;
@@ -1482,7 +1482,7 @@ baul_icon_container_free_drag_data (BaulIconContainer *container)
 
 static void
 drag_leave_callback (CtkWidget *widget,
-                     GdkDragContext *context,
+                     CdkDragContext *context,
                      guint32 time,
                      gpointer data)
 {
@@ -1502,7 +1502,7 @@ drag_leave_callback (CtkWidget *widget,
 
 static void
 drag_begin_callback (CtkWidget      *widget,
-                     GdkDragContext *context,
+                     CdkDragContext *context,
                      gpointer        data)
 {
     BaulIconContainer *container;
@@ -1536,9 +1536,9 @@ drag_begin_callback (CtkWidget      *widget,
 
 void
 baul_icon_dnd_begin_drag (BaulIconContainer *container,
-                          GdkDragAction actions,
+                          CdkDragAction actions,
                           int button,
-                          GdkEventMotion *event,
+                          CdkEventMotion *event,
                           int                    start_x,
                           int                    start_y)
 {
@@ -1563,7 +1563,7 @@ baul_icon_dnd_begin_drag (BaulIconContainer *container,
                                     dnd_info->drag_info.target_list,
                                     actions,
                                     button,
-                                    (GdkEvent *) event,
+                                    (CdkEvent *) event,
                                     dnd_info->drag_info.start_x,
                                     dnd_info->drag_info.start_y);
 }
@@ -1574,7 +1574,7 @@ drag_highlight_draw (CtkWidget *widget,
                      gpointer   user_data)
 {
     gint width, height;
-    GdkWindow *window;
+    CdkWindow *window;
     CtkStyleContext *style;
 
     window = ctk_widget_get_window (widget);
@@ -1676,7 +1676,7 @@ stop_dnd_highlight (CtkWidget *widget)
 
 static gboolean
 drag_motion_callback (CtkWidget *widget,
-                      GdkDragContext *context,
+                      CdkDragContext *context,
                       int x, int y,
                       guint32 time)
 {
@@ -1704,7 +1704,7 @@ drag_motion_callback (CtkWidget *widget,
 
 static gboolean
 drag_drop_callback (CtkWidget *widget,
-                    GdkDragContext *context,
+                    CdkDragContext *context,
                     int x,
                     int y,
                     guint32 time,
@@ -1751,7 +1751,7 @@ baul_icon_dnd_end_drag (BaulIconContainer *container)
 
 static void
 drag_data_received_callback (CtkWidget *widget,
-                             GdkDragContext *context,
+                             CdkDragContext *context,
                              int x,
                              int y,
                              CtkSelectionData *data,
@@ -1902,7 +1902,7 @@ drag_data_received_callback (CtkWidget *widget,
                      selection_data[0] == 'F' &&
                      drag_info->direct_save_uri != NULL)
             {
-                GdkPoint p;
+                CdkPoint p;
                 GFile *location;
 
                 location = g_file_new_for_uri (drag_info->direct_save_uri);

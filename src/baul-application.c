@@ -225,7 +225,7 @@ baul_empty_callback_to_ensure_read() {
 static void
 open_window (BaulApplication *application,
              GFile *location,
-             GdkScreen *screen,
+             CdkScreen *screen,
              const char *geometry,
              gboolean browser_window)
 {
@@ -274,7 +274,7 @@ static void
 open_tabs (BaulApplication *application,
            GFile **locations,
            guint n_files,
-           GdkScreen *screen,
+           CdkScreen *screen,
            const char *geometry,
            gboolean browser_window)
 {
@@ -330,7 +330,7 @@ open_tabs (BaulApplication *application,
 static void
 open_windows (BaulApplication *application,
               GFile **files,
-              GdkScreen *screen,
+              CdkScreen *screen,
               const char *geometry,
               guint n_files,
               gboolean browser_window,
@@ -630,10 +630,10 @@ selection_get_cb (CtkWidget          *widget,
 }
 
 static CtkWidget *
-get_desktop_manager_selection (GdkDisplay *display)
+get_desktop_manager_selection (CdkDisplay *display)
 {
     char selection_name[32];
-    GdkAtom selection_atom;
+    CdkAtom selection_atom;
     Window selection_owner;
     CtkWidget *selection_widget;
 
@@ -677,7 +677,7 @@ desktop_unrealize_cb (CtkWidget        *widget,
 
 static gboolean
 selection_clear_event_cb (CtkWidget	        *widget,
-                          GdkEventSelection     *event,
+                          CdkEventSelection     *event,
                           BaulDesktopWindow *window)
 {
     ctk_widget_destroy (CTK_WIDGET (window));
@@ -691,7 +691,7 @@ selection_clear_event_cb (CtkWidget	        *widget,
 static void
 baul_application_create_desktop_windows (BaulApplication *application)
 {
-    GdkDisplay *display;
+    CdkDisplay *display;
     CtkWidget *selection_widget;
 
     g_return_if_fail (baul_application_desktop_windows == NULL);
@@ -912,7 +912,7 @@ baul_application_close_all_spatial_windows (void)
 
 static gboolean
 baul_window_delete_event_callback (CtkWidget *widget,
-                                   GdkEvent *event,
+                                   CdkEvent *event,
                                    gpointer user_data)
 {
     BaulWindow *window;
@@ -927,7 +927,7 @@ baul_window_delete_event_callback (CtkWidget *widget,
 static BaulWindow *
 create_window (BaulApplication *application,
                GType window_type,
-               GdkScreen *screen)
+               CdkScreen *screen)
 {
     BaulWindow *window;
 
@@ -964,7 +964,7 @@ baul_application_get_spatial_window (BaulApplication *application,
                                     BaulWindow      *requesting_window,
                                     const char      *startup_id,
                                     GFile           *location,
-                                    GdkScreen       *screen,
+                                    CdkScreen       *screen,
                                     gboolean        *existing)
 {
     BaulWindow *window;
@@ -1027,7 +1027,7 @@ baul_application_get_spatial_window (BaulApplication *application,
 
 BaulWindow *
 baul_application_create_navigation_window (BaulApplication *application,
-        GdkScreen           *screen)
+        CdkScreen           *screen)
 {
     BaulWindow *window;
     char *geometry_string;
@@ -1463,7 +1463,7 @@ baul_application_get_session_data (BaulApplication *self)
         xmlNewProp (win_node, "type", BAUL_IS_NAVIGATION_WINDOW (window) ? "navigation" : "spatial");
 
         if (BAUL_IS_NAVIGATION_WINDOW (window)) { /* spatial windows store their state as file metadata */
-            GdkWindow *cdk_window;
+            CdkWindow *cdk_window;
 
             tmp = eel_ctk_window_get_geometry_string (CTK_WINDOW (window));
             xmlNewProp (win_node, "geometry", tmp);
@@ -2144,7 +2144,7 @@ baul_application_save_accel_map (gpointer data)
 
 static void
 queue_accel_map_save_callback (CtkAccelMap *object, gchar *accel_path,
-        guint accel_key, GdkModifierType accel_mods,
+        guint accel_key, CdkModifierType accel_mods,
         gpointer user_data)
 {
     if (!save_of_accel_map_requested) {

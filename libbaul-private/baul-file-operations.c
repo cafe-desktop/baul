@@ -92,7 +92,7 @@ typedef struct {
 	GList *files;
 	GFile *destination;
 	GFile *desktop_location;
-	GdkPoint *icon_positions;
+	CdkPoint *icon_positions;
 	int n_icon_positions;
 	GHashTable *debuting_files;
 	BaulCopyCallback  done_callback;
@@ -116,7 +116,7 @@ typedef struct {
 	GFile *src;
 	char *src_data;
 	int length;
-	GdkPoint position;
+	CdkPoint position;
 	gboolean has_position;
 	GFile *created_file;
 	BaulCreateCallback done_callback;
@@ -971,7 +971,7 @@ init_common (gsize job_size,
 	common->inhibit_cookie = -1;
 	common->screen_num = 0;
 	if (parent_window) {
-		GdkScreen *screen;
+		CdkScreen *screen;
 
 		screen = ctk_widget_get_screen (CTK_WIDGET (parent_window));
 		common->screen_num = cdk_x11_screen_get_screen_number (screen);
@@ -2319,7 +2319,7 @@ prompt_empty_trash (CtkWindow *parent_window)
 {
 	gint                    result;
 	CtkWidget               *dialog;
-	GdkScreen               *screen;
+	CdkScreen               *screen;
 
 	screen = NULL;
 	if (parent_window != NULL) {
@@ -3436,7 +3436,7 @@ static void copy_move_file (CopyMoveJob *job,
 			    SourceInfo *source_info,
 			    TransferInfo *transfer_info,
 			    GHashTable *debuting_files,
-			    GdkPoint *point,
+			    CdkPoint *point,
 			    gboolean overwrite,
 			    gboolean *skipped_file,
 			    gboolean readonly_source_fs,
@@ -4129,7 +4129,7 @@ copy_move_file (CopyMoveJob *copy_job,
 		SourceInfo *source_info,
 		TransferInfo *transfer_info,
 		GHashTable *debuting_files,
-		GdkPoint *position,
+		CdkPoint *position,
 		gboolean overwrite,
 		gboolean *skipped_file,
 		gboolean readonly_source_fs,
@@ -4546,7 +4546,7 @@ copy_files (CopyMoveJob *job,
 	GList *l;
 	gboolean same_fs;
 	int i;
-	GdkPoint *point;
+	CdkPoint *point;
 	gboolean skipped_file;
 	gboolean unique_names;
 	GFile *dest;
@@ -4750,7 +4750,7 @@ baul_file_operations_copy (GList *files,
 	    relative_item_points->len > 0) {
 		job->icon_positions =
 			g_memdup (relative_item_points->data,
-				  sizeof (GdkPoint) * relative_item_points->len);
+				  sizeof (CdkPoint) * relative_item_points->len);
 		job->n_icon_positions = relative_item_points->len;
 	}
 	job->debuting_files = g_hash_table_new_full (g_file_hash, (GEqualFunc)g_file_equal, g_object_unref, NULL);
@@ -4797,13 +4797,13 @@ typedef struct {
 	GFile *file;
 	gboolean overwrite;
 	gboolean has_position;
-	GdkPoint position;
+	CdkPoint position;
 } MoveFileCopyFallback;
 
 static MoveFileCopyFallback *
 move_copy_file_callback_new (GFile *file,
 			     gboolean overwrite,
-			     GdkPoint *position)
+			     CdkPoint *position)
 {
 	MoveFileCopyFallback *fallback;
 
@@ -4841,7 +4841,7 @@ move_file_prepare (CopyMoveJob *move_job,
 		   gboolean same_fs,
 		   char **dest_fs_type,
 		   GHashTable *debuting_files,
-		   GdkPoint *position,
+		   CdkPoint *position,
 		   GList **fallback_files,
 		   int files_left)
 {
@@ -5066,7 +5066,7 @@ move_files_prepare (CopyMoveJob *job,
 	gboolean same_fs;
 	gboolean last_item;
 	int i;
-	GdkPoint *point;
+	CdkPoint *point;
 	int total, left;
 	GFile *src = NULL;
 
@@ -5127,7 +5127,7 @@ move_files (CopyMoveJob *job,
 	GList *l;
 	gboolean same_fs;
 	int i;
-	GdkPoint *point;
+	CdkPoint *point;
 	gboolean skipped_file;
 	MoveFileCopyFallback *fallback;
 	GFile *src = NULL;
@@ -5293,7 +5293,7 @@ baul_file_operations_move (GList *files,
 	    relative_item_points->len > 0) {
 		job->icon_positions =
 			g_memdup (relative_item_points->data,
-				  sizeof (GdkPoint) * relative_item_points->len);
+				  sizeof (CdkPoint) * relative_item_points->len);
 		job->n_icon_positions = relative_item_points->len;
 	}
 	job->debuting_files = g_hash_table_new_full (g_file_hash, (GEqualFunc)g_file_equal, g_object_unref, NULL);
@@ -5369,7 +5369,7 @@ link_file (CopyMoveJob *job,
 	   GFile *src, GFile *dest_dir,
 	   char **dest_fs_type,
 	   GHashTable *debuting_files,
-	   GdkPoint *position,
+	   CdkPoint *position,
 	   int files_left)
 {
 	GFile *src_dir, *dest, *new_dest;
@@ -5533,7 +5533,7 @@ link_job (GIOSchedulerJob *io_job,
 	CopyMoveJob *job;
 	CommonJob *common;
 	GFile *src;
-	GdkPoint *point;
+	CdkPoint *point;
 	char *dest_fs_type;
 	int total, left;
 	int i;
@@ -5612,7 +5612,7 @@ baul_file_operations_link (GList *files,
 	    relative_item_points->len > 0) {
 		job->icon_positions =
 			g_memdup (relative_item_points->data,
-				  sizeof (GdkPoint) * relative_item_points->len);
+				  sizeof (CdkPoint) * relative_item_points->len);
 		job->n_icon_positions = relative_item_points->len;
 	}
 	job->debuting_files = g_hash_table_new_full (g_file_hash, (GEqualFunc)g_file_equal, g_object_unref, NULL);
@@ -5653,7 +5653,7 @@ baul_file_operations_duplicate (GList *files,
 	    relative_item_points->len > 0) {
 		job->icon_positions =
 			g_memdup (relative_item_points->data,
-				  sizeof (GdkPoint) * relative_item_points->len);
+				  sizeof (CdkPoint) * relative_item_points->len);
 		job->n_icon_positions = relative_item_points->len;
 	}
 	job->debuting_files = g_hash_table_new_full (g_file_hash, (GEqualFunc)g_file_equal, g_object_unref, NULL);
@@ -5877,7 +5877,7 @@ void
 baul_file_operations_copy_move (const GList *item_uris,
 				    GArray *relative_item_points,
 				    const char *target_dir,
-				    GdkDragAction copy_action,
+				    CdkDragAction copy_action,
 				    CtkWidget *parent_view,
 				    BaulCopyCallback  done_callback,
 				    gpointer done_callback_data)
@@ -6274,7 +6274,7 @@ create_job (GIOSchedulerJob *io_job,
 
 void
 baul_file_operations_new_folder (CtkWidget *parent_view,
-				     GdkPoint *target_point,
+				     CdkPoint *target_point,
 				     const char *parent_dir,
 				     BaulCreateCallback done_callback,
 				     gpointer done_callback_data)
@@ -6312,7 +6312,7 @@ baul_file_operations_new_folder (CtkWidget *parent_view,
 
 void
 baul_file_operations_new_file_from_template (CtkWidget *parent_view,
-						 GdkPoint *target_point,
+						 CdkPoint *target_point,
 						 const char *parent_dir,
 						 const char *target_filename,
 						 const char *template_uri,
@@ -6356,7 +6356,7 @@ baul_file_operations_new_file_from_template (CtkWidget *parent_view,
 
 void
 baul_file_operations_new_file (CtkWidget *parent_view,
-				   GdkPoint *target_point,
+				   CdkPoint *target_point,
 				   const char *parent_dir,
 				   const char *target_filename,
 				   const char *initial_contents,

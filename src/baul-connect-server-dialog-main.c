@@ -71,7 +71,7 @@ baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self
 						   gpointer user_data)
 {
     GError *error;
-    GdkAppLaunchContext *launch_context;
+    CdkAppLaunchContext *launch_context;
     gchar *uri;
 
     display_location_res = g_simple_async_result_new (G_OBJECT (self),

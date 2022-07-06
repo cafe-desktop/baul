@@ -104,7 +104,7 @@ enum
 
 static void eel_canvas_item_class_init     (EelCanvasItemClass *klass);
 static void eel_canvas_item_init           (EelCanvasItem      *item);
-static int  emit_event                       (EelCanvas *canvas, GdkEvent *event);
+static int  emit_event                       (EelCanvas *canvas, CdkEvent *event);
 
 static guint item_signals[ITEM_LAST_SIGNAL] = { 0 };
 
@@ -869,8 +869,8 @@ eel_canvas_item_hide (EelCanvasItem *item)
  * Prepare the window for grabbing, i.e. show it.
  */
 static void
-seat_grab_prepare_window (GdkSeat *seat,
-			  GdkWindow *window,
+seat_grab_prepare_window (CdkSeat *seat,
+			  CdkWindow *window,
 			  gpointer user_data)
 {
 	cdk_window_show (window);
@@ -892,15 +892,15 @@ seat_grab_prepare_window (GdkSeat *seat,
  * returns %GDK_GRAB_NOT_VIEWABLE. Else, it returns the result of calling
  * cdk_seat_grab().
  **/
-GdkGrabStatus
+CdkGrabStatus
 eel_canvas_item_grab (EelCanvasItem *item,
-                      GdkEventMask event_mask,
-                      GdkCursor *cursor,
-                      const GdkEvent *event)
+                      CdkEventMask event_mask,
+                      CdkCursor *cursor,
+                      const CdkEvent *event)
 {
-    GdkGrabStatus retval;
-    GdkDisplay *display;
-    GdkSeat *seat;
+    CdkGrabStatus retval;
+    CdkDisplay *display;
+    CdkSeat *seat;
 
     g_return_val_if_fail (EEL_IS_CANVAS_ITEM (item), GDK_GRAB_NOT_VIEWABLE);
     g_return_val_if_fail (ctk_widget_get_mapped (CTK_WIDGET (item->canvas)),
@@ -944,8 +944,8 @@ eel_canvas_item_grab (EelCanvasItem *item,
 void
 eel_canvas_item_ungrab (EelCanvasItem *item)
 {
-    GdkDisplay *display;
-    GdkSeat *seat;
+    CdkDisplay *display;
+    CdkSeat *seat;
 
     g_return_if_fail (EEL_IS_CANVAS_ITEM (item));
 
@@ -1082,7 +1082,7 @@ void
 eel_canvas_item_grab_focus (EelCanvasItem *item)
 {
     EelCanvasItem *focused_item;
-    GdkEvent ev;
+    CdkEvent ev;
 
     g_return_if_fail (EEL_IS_CANVAS_ITEM (item));
     g_return_if_fail (ctk_widget_get_can_focus (CTK_WIDGET (item->canvas)));
@@ -1576,7 +1576,7 @@ eel_canvas_group_draw (EelCanvasItem  *item,
         if ((child->flags & EEL_CANVAS_ITEM_MAPPED) &&
                 (EEL_CANVAS_ITEM_GET_CLASS (child)->draw))
         {
-            GdkRectangle child_rect;
+            CdkRectangle child_rect;
 
             child_rect.x = child->x1;
             child_rect.y = child->y1;
@@ -1828,19 +1828,19 @@ static void eel_canvas_unrealize           (CtkWidget        *widget);
 static void eel_canvas_size_allocate       (CtkWidget        *widget,
         CtkAllocation    *allocation);
 static gint eel_canvas_button              (CtkWidget        *widget,
-        GdkEventButton   *event);
+        CdkEventButton   *event);
 static gint eel_canvas_motion              (CtkWidget        *widget,
-        GdkEventMotion   *event);
+        CdkEventMotion   *event);
 static gint eel_canvas_draw                (CtkWidget        *widget,
                                             cairo_t          *cr);
 static gint eel_canvas_key                 (CtkWidget        *widget,
-        GdkEventKey      *event);
+        CdkEventKey      *event);
 static gint eel_canvas_crossing            (CtkWidget        *widget,
-        GdkEventCrossing *event);
+        CdkEventCrossing *event);
 static gint eel_canvas_focus_in            (CtkWidget        *widget,
-        GdkEventFocus    *event);
+        CdkEventFocus    *event);
 static gint eel_canvas_focus_out           (CtkWidget        *widget,
-        GdkEventFocus    *event);
+        CdkEventFocus    *event);
 static void eel_canvas_request_update_real (EelCanvas      *canvas);
 static void eel_canvas_draw_background     (EelCanvas      *canvas,
                                             cairo_t        *cr);
@@ -2460,9 +2460,9 @@ eel_canvas_size_allocate (CtkWidget *widget, CtkAllocation *allocation)
  */
 
 static int
-emit_event (EelCanvas *canvas, GdkEvent *event)
+emit_event (EelCanvas *canvas, CdkEvent *event)
 {
-    GdkEvent ev;
+    CdkEvent ev;
     gint finished;
     EelCanvasItem *item;
     EelCanvasItem *parent;
@@ -2592,7 +2592,7 @@ emit_event (EelCanvas *canvas, GdkEvent *event)
  * Also emits enter/leave events for items as appropriate.
  */
 static int
-pick_current_item (EelCanvas *canvas, GdkEvent *event)
+pick_current_item (EelCanvas *canvas, CdkEvent *event)
 {
     int button_down;
     double x, y;
@@ -2701,7 +2701,7 @@ pick_current_item (EelCanvas *canvas, GdkEvent *event)
             && (canvas->current_item != NULL)
             && !canvas->left_grabbed_item)
     {
-        GdkEvent new_event;
+        CdkEvent new_event;
 
         new_event = canvas->pick_event;
         new_event.type = GDK_LEAVE_NOTIFY;
@@ -2729,7 +2729,7 @@ pick_current_item (EelCanvas *canvas, GdkEvent *event)
 
     if (canvas->current_item != NULL)
     {
-        GdkEvent new_event;
+        CdkEvent new_event;
 
         new_event = canvas->pick_event;
         new_event.type = GDK_ENTER_NOTIFY;
@@ -2743,7 +2743,7 @@ pick_current_item (EelCanvas *canvas, GdkEvent *event)
 
 /* Button event handler for the canvas */
 static gint
-eel_canvas_button (CtkWidget *widget, GdkEventButton *event)
+eel_canvas_button (CtkWidget *widget, CdkEventButton *event)
 {
     EelCanvas *canvas;
     int mask;
@@ -2798,10 +2798,10 @@ eel_canvas_button (CtkWidget *widget, GdkEventButton *event)
          */
         event->state ^= mask;
         canvas->state = event->state;
-        pick_current_item (canvas, (GdkEvent *) event);
+        pick_current_item (canvas, (CdkEvent *) event);
         event->state ^= mask;
         canvas->state = event->state;
-        retval = emit_event (canvas, (GdkEvent *) event);
+        retval = emit_event (canvas, (CdkEvent *) event);
         break;
 
     case GDK_BUTTON_RELEASE:
@@ -2809,10 +2809,10 @@ eel_canvas_button (CtkWidget *widget, GdkEventButton *event)
          * after the button has been released
          */
         canvas->state = event->state;
-        retval = emit_event (canvas, (GdkEvent *) event);
+        retval = emit_event (canvas, (CdkEvent *) event);
         event->state ^= mask;
         canvas->state = event->state;
-        pick_current_item (canvas, (GdkEvent *) event);
+        pick_current_item (canvas, (CdkEvent *) event);
         event->state ^= mask;
         break;
 
@@ -2825,7 +2825,7 @@ eel_canvas_button (CtkWidget *widget, GdkEventButton *event)
 
 /* Motion event handler for the canvas */
 static gint
-eel_canvas_motion (CtkWidget *widget, GdkEventMotion *event)
+eel_canvas_motion (CtkWidget *widget, CdkEventMotion *event)
 {
     EelCanvas *canvas;
 
@@ -2838,13 +2838,13 @@ eel_canvas_motion (CtkWidget *widget, GdkEventMotion *event)
         return FALSE;
 
     canvas->state = event->state;
-    pick_current_item (canvas, (GdkEvent *) event);
-    return emit_event (canvas, (GdkEvent *) event);
+    pick_current_item (canvas, (CdkEvent *) event);
+    return emit_event (canvas, (CdkEvent *) event);
 }
 
 /* Key event handler for the canvas */
 static gint
-eel_canvas_key (CtkWidget *widget, GdkEventKey *event)
+eel_canvas_key (CtkWidget *widget, CdkEventKey *event)
 {
     EelCanvas *canvas;
 
@@ -2853,7 +2853,7 @@ eel_canvas_key (CtkWidget *widget, GdkEventKey *event)
 
     canvas = EEL_CANVAS (widget);
 
-    if (emit_event (canvas, (GdkEvent *) event))
+    if (emit_event (canvas, (CdkEvent *) event))
         return TRUE;
     if (event->type == GDK_KEY_RELEASE)
         return CTK_WIDGET_CLASS (canvas_parent_class)->key_release_event (widget, event);
@@ -2864,7 +2864,7 @@ eel_canvas_key (CtkWidget *widget, GdkEventKey *event)
 
 /* Crossing event handler for the canvas */
 static gint
-eel_canvas_crossing (CtkWidget *widget, GdkEventCrossing *event)
+eel_canvas_crossing (CtkWidget *widget, CdkEventCrossing *event)
 {
     EelCanvas *canvas;
 
@@ -2877,33 +2877,33 @@ eel_canvas_crossing (CtkWidget *widget, GdkEventCrossing *event)
         return FALSE;
 
     canvas->state = event->state;
-    return pick_current_item (canvas, (GdkEvent *) event);
+    return pick_current_item (canvas, (CdkEvent *) event);
 }
 
 /* Focus in handler for the canvas */
 static gint
-eel_canvas_focus_in (CtkWidget *widget, GdkEventFocus *event)
+eel_canvas_focus_in (CtkWidget *widget, CdkEventFocus *event)
 {
     EelCanvas *canvas;
 
     canvas = EEL_CANVAS (widget);
 
     if (canvas->focused_item)
-        return emit_event (canvas, (GdkEvent *) event);
+        return emit_event (canvas, (CdkEvent *) event);
     else
         return FALSE;
 }
 
 /* Focus out handler for the canvas */
 static gint
-eel_canvas_focus_out (CtkWidget *widget, GdkEventFocus *event)
+eel_canvas_focus_out (CtkWidget *widget, CdkEventFocus *event)
 {
     EelCanvas *canvas;
 
     canvas = EEL_CANVAS (widget);
 
     if (canvas->focused_item)
-        return emit_event (canvas, (GdkEvent *) event);
+        return emit_event (canvas, (CdkEvent *) event);
     else
         return FALSE;
 }
@@ -2953,7 +2953,7 @@ static gboolean
 eel_canvas_draw (CtkWidget *widget, cairo_t *cr)
 {
     EelCanvas *canvas = EEL_CANVAS (widget);
-    GdkWindow *bin_window;
+    CdkWindow *bin_window;
     cairo_region_t *region;
 
     if (!cdk_cairo_get_clip_rectangle (cr, NULL))
@@ -3024,8 +3024,8 @@ eel_canvas_draw_background (EelCanvas *canvas,
 {
     cairo_rectangle_int_t rect;
     CtkStyleContext *style_context;
-    GdkRGBA color;
-    GdkRGBA *c;
+    CdkRGBA color;
+    CdkRGBA *c;
 
     if (!cdk_cairo_get_clip_rectangle (cr, &rect))
         return;
@@ -3255,8 +3255,8 @@ eel_canvas_set_pixels_per_unit (EelCanvas *canvas, double n)
     double cx, cy;
     int x1, y1;
     int center_x, center_y;
-    GdkWindow *window;
-    GdkWindowAttr attributes;
+    CdkWindow *window;
+    CdkWindowAttr attributes;
     gint attributes_mask;
     CtkAllocation allocation;
     CtkAdjustment *vadjustment, *hadjustment;
@@ -3457,7 +3457,7 @@ eel_canvas_request_update_real (EelCanvas *canvas)
 void
 eel_canvas_request_redraw (EelCanvas *canvas, int x1, int y1, int x2, int y2)
 {
-    GdkRectangle bbox;
+    CdkRectangle bbox;
 
     g_return_if_fail (EEL_IS_CANVAS (canvas));
 
@@ -3670,7 +3670,7 @@ eel_canvas_item_accessible_add_focus_handler (AtkComponent    *component,
 
 static void
 eel_canvas_item_accessible_get_item_extents (EelCanvasItem *item,
-        GdkRectangle  *rect)
+        CdkRectangle  *rect)
 {
     double bx1, bx2, by1, by2;
     gint scroll_x, scroll_y;
@@ -3691,7 +3691,7 @@ eel_canvas_item_accessible_get_item_extents (EelCanvasItem *item,
 
 static gboolean
 eel_canvas_item_accessible_is_item_in_window (EelCanvasItem *item,
-        GdkRectangle  *rect)
+        CdkRectangle  *rect)
 {
     CtkWidget *widget;
     gboolean retval;
@@ -3739,8 +3739,8 @@ eel_canvas_item_accessible_get_extents (AtkComponent *component,
     EelCanvasItem *item;
     gint window_x, window_y;
     gint toplevel_x, toplevel_y;
-    GdkRectangle rect;
-    GdkWindow *window;
+    CdkRectangle rect;
+    CdkWindow *window;
     CtkWidget *canvas;
 
     atk_gobj = ATK_GOBJECT_ACCESSIBLE (component);
@@ -3860,7 +3860,7 @@ eel_canvas_item_accessible_component_interface_init (AtkComponentIface *iface)
 static gboolean
 eel_canvas_item_accessible_is_item_on_screen (EelCanvasItem *item)
 {
-    GdkRectangle rect;
+    CdkRectangle rect;
 
     eel_canvas_item_accessible_get_item_extents (item, &rect);
     return eel_canvas_item_accessible_is_item_in_window (item, &rect);

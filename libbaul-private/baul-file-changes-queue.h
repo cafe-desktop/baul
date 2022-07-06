@@ -32,7 +32,7 @@ void baul_file_changes_queue_file_removed                    (GFile      *locati
 void baul_file_changes_queue_file_moved                      (GFile      *from,
         GFile      *to);
 void baul_file_changes_queue_schedule_position_set           (GFile      *location,
-        GdkPoint    point,
+        CdkPoint    point,
         int         screen);
 void baul_file_changes_queue_schedule_position_remove        (GFile      *location);
 
