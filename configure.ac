@@ -355,6 +355,6 @@ baul-$VERSION:
     PackageKit support:           $msg_packagekit
     Self check:                   $msg_self_check
 
-    baul-extension documentation: ${enable_ctk_doc}
+    baul-extension documentation: ${enable_gtk_doc}
     baul-extension introspection: ${found_introspection}
 "
