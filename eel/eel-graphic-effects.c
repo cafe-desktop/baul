@@ -37,7 +37,7 @@
 static GdkPixbuf *
 create_new_pixbuf (GdkPixbuf *src)
 {
-    g_assert (gdk_pixbuf_get_colorspace (src) == CDK_COLORSPACE_RGB);
+    g_assert (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB);
     g_assert ((!gdk_pixbuf_get_has_alpha (src)
                && gdk_pixbuf_get_n_channels (src) == 3)
               || (gdk_pixbuf_get_has_alpha (src)
@@ -72,7 +72,7 @@ eel_create_spotlight_pixbuf (GdkPixbuf* src)
     int width, height, has_alpha, src_row_stride, dst_row_stride;
     guchar *target_pixels, *original_pixels;
 
-    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == CDK_COLORSPACE_RGB, NULL);
+    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
     g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
                            && gdk_pixbuf_get_n_channels (src) == 3)
                           || (gdk_pixbuf_get_has_alpha (src)
@@ -141,7 +141,7 @@ eel_create_darkened_pixbuf (GdkPixbuf *src, int saturation, int darken)
     guchar r, g, b;
     GdkPixbuf *dest;
 
-    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == CDK_COLORSPACE_RGB, NULL);
+    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
     g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
                            && gdk_pixbuf_get_n_channels (src) == 3)
                           || (gdk_pixbuf_get_has_alpha (src)
@@ -198,7 +198,7 @@ eel_create_colorized_pixbuf (GdkPixbuf *src,
 
     gint red_value, green_value, blue_value;
 
-    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == CDK_COLORSPACE_RGB, NULL);
+    g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
     g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
                            && gdk_pixbuf_get_n_channels (src) == 3)
                           || (gdk_pixbuf_get_has_alpha (src)
@@ -300,7 +300,7 @@ eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset
     }
     else
     {
-        result_pixbuf = gdk_pixbuf_new (CDK_COLORSPACE_RGB, TRUE, 8, dest_width, dest_height);
+        result_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, dest_width, dest_height);
     }
     row_stride = gdk_pixbuf_get_rowstride (result_pixbuf);
     pixels_ptr = gdk_pixbuf_get_pixels (result_pixbuf);

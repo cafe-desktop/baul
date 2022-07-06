@@ -317,7 +317,7 @@ eel_gdk_pixbuf_scale_down (GdkPixbuf *pixbuf,
     source_rowstride = gdk_pixbuf_get_rowstride (pixbuf);
     src_pixels = gdk_pixbuf_get_pixels (pixbuf);
 
-    dest_pixbuf = gdk_pixbuf_new (CDK_COLORSPACE_RGB, has_alpha, 8,
+    dest_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, has_alpha, 8,
                                   dest_width, dest_height);
     dest = gdk_pixbuf_get_pixels (dest_pixbuf);
     dest_rowstride = gdk_pixbuf_get_rowstride (dest_pixbuf);

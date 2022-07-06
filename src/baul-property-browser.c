@@ -812,7 +812,7 @@ make_color_drag_image (BaulPropertyBrowser *property_browser, const char *color_
     char *pixels;
     CdkColor color;
 
-    color_square = gdk_pixbuf_new (CDK_COLORSPACE_RGB, TRUE, 8, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
+    color_square = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
 
     cdk_color_parse (color_spec, &color);
     color.red >>= 8;
