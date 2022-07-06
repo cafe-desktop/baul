@@ -319,7 +319,7 @@ baul_icon_canvas_item_finalize (GObject *object)
 static gboolean
 pixbuf_is_acceptable (GdkPixbuf *pixbuf)
 {
-    return gdk_pixbuf_get_colorspace (pixbuf) == CDK_COLORSPACE_RGB
+    return gdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB
            && ((!gdk_pixbuf_get_has_alpha (pixbuf)
                 && gdk_pixbuf_get_n_channels (pixbuf) == 3)
                || (gdk_pixbuf_get_has_alpha (pixbuf)

@@ -509,7 +509,7 @@ baul_icon_info_get_pixbuf (BaulIconInfo *icon)
     if (res == NULL)
     {
         res = gdk_pixbuf_new_from_data (baul_default_file_icon,
-                                        CDK_COLORSPACE_RGB,
+                                        GDK_COLORSPACE_RGB,
                                         TRUE,
                                         8,
                                         baul_default_file_icon_width,

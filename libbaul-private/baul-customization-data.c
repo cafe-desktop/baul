@@ -412,7 +412,7 @@ baul_customization_make_pattern_chit (GdkPixbuf *pattern_tile, GdkPixbuf *frame,
     /* if we're dragging, get rid of the light-colored halo */
     if (dragging)
     {
-        temp_pixbuf = gdk_pixbuf_new (CDK_COLORSPACE_RGB, TRUE, 8, frame_width - 8, frame_height - 8);
+        temp_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, frame_width - 8, frame_height - 8);
         gdk_pixbuf_copy_area (pixbuf, 2, 2, frame_width - 8, frame_height - 8, temp_pixbuf, 0, 0);
         g_object_unref (pixbuf);
         pixbuf = temp_pixbuf;
