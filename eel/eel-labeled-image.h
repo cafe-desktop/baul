@@ -89,7 +89,7 @@ extern "C" {
     /* Public CtkLabeledImage methods */
     GType           eel_labeled_image_get_type                         (void);
     CtkWidget *     eel_labeled_image_new                              (const char              *text,
-            CdkPixbuf               *pixbuf);
+            GdkPixbuf               *pixbuf);
     CtkWidget *     eel_labeled_image_new_from_file_name               (const char              *text,
             const char              *pixbuf_file_name);
     void            eel_labeled_image_set_label_position               (EelLabeledImage         *labeled_image,
@@ -129,28 +129,28 @@ extern "C" {
 
     /* Functions for creating stock CtkButtons with a labeled image child */
     CtkWidget *     eel_labeled_image_button_new                       (const char              *text,
-            CdkPixbuf               *pixbuf);
+            GdkPixbuf               *pixbuf);
     CtkWidget *     eel_labeled_image_button_new_from_file_name        (const char              *text,
             const char              *pixbuf_file_name);
     CtkWidget *     eel_labeled_image_toggle_button_new                (const char              *text,
-            CdkPixbuf               *pixbuf);
+            GdkPixbuf               *pixbuf);
     CtkWidget *     eel_labeled_image_toggle_button_new_from_file_name (const char              *text,
             const char              *pixbuf_file_name);
     CtkWidget *     eel_labeled_image_check_button_new                 (const char              *text,
-            CdkPixbuf               *pixbuf);
+            GdkPixbuf               *pixbuf);
     CtkWidget *     eel_labeled_image_check_button_new_from_file_name  (const char              *text,
             const char              *pixbuf_file_name);
     CtkWidget *     eel_labeled_image_radio_button_new                 (const char              *text,
-            CdkPixbuf               *pixbuf);
+            GdkPixbuf               *pixbuf);
     CtkWidget *     eel_labeled_image_radio_button_new_from_file_name  (const char              *text,
             const char              *pixbuf_file_name);
 
     /* These are proxies for methods in EelImage and EelLabel */
     void            eel_labeled_image_set_pixbuf                       (EelLabeledImage         *labeled_image,
-            CdkPixbuf               *pixbuf);
+            GdkPixbuf               *pixbuf);
     void            eel_labeled_image_set_pixbuf_from_file_name        (EelLabeledImage         *labeled_image,
             const char              *pixbuf_file_name);
-    CdkPixbuf*      eel_labeled_image_get_pixbuf                       (const EelLabeledImage   *labeled_image);
+    GdkPixbuf*      eel_labeled_image_get_pixbuf                       (const EelLabeledImage   *labeled_image);
     void            eel_labeled_image_set_text                         (EelLabeledImage         *labeled_image,
             const char              *text);
     char*           eel_labeled_image_get_text                         (const EelLabeledImage   *labeled_image);

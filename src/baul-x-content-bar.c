@@ -128,7 +128,7 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
         icon = g_app_info_get_icon (default_app);
         if (icon != NULL)
         {
-            CdkPixbuf *pixbuf;
+            GdkPixbuf *pixbuf;
             int icon_size, icon_scale;
             BaulIconInfo *icon_info;
             icon_size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_BUTTON);

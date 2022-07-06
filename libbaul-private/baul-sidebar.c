@@ -109,7 +109,7 @@ baul_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
     return (* BAUL_SIDEBAR_GET_IFACE (sidebar)->get_tab_tooltip) (sidebar);
 }
 
-CdkPixbuf *
+GdkPixbuf *
 baul_sidebar_get_tab_icon (BaulSidebar *sidebar)
 {
     g_return_val_if_fail (BAUL_IS_SIDEBAR (sidebar), NULL);

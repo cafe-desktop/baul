@@ -283,10 +283,10 @@ baul_toolbar_action_from_menu_item (BaulMenuItem *item, CtkWidget *parent_widget
     return action;
 }
 
-static CdkPixbuf *
+static GdkPixbuf *
 baul_get_thumbnail_frame (void)
 {
-    static CdkPixbuf *thumbnail_frame = NULL;
+    static GdkPixbuf *thumbnail_frame = NULL;
 
     if (thumbnail_frame == NULL)
     {
@@ -309,9 +309,9 @@ baul_get_thumbnail_frame (void)
 #define BAUL_THUMBNAIL_FRAME_BOTTOM 3
 
 void
-baul_ui_frame_image (CdkPixbuf **pixbuf)
+baul_ui_frame_image (GdkPixbuf **pixbuf)
 {
-    CdkPixbuf *pixbuf_with_frame, *frame;
+    GdkPixbuf *pixbuf_with_frame, *frame;
     int left_offset, top_offset, right_offset, bottom_offset;
 
     frame = baul_get_thumbnail_frame ();

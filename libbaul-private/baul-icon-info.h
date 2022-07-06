@@ -56,7 +56,7 @@ extern "C" {
 
     GType    baul_icon_info_get_type (void) G_GNUC_CONST;
 
-    BaulIconInfo *    baul_icon_info_new_for_pixbuf               (CdkPixbuf         *pixbuf,
+    BaulIconInfo *    baul_icon_info_new_for_pixbuf               (GdkPixbuf         *pixbuf,
             int                scale);
     BaulIconInfo *    baul_icon_info_lookup                       (GIcon             *icon,
             int                size,
@@ -68,15 +68,15 @@ extern "C" {
             int                size,
             int                scale);
     gboolean              baul_icon_info_is_fallback                  (BaulIconInfo  *icon);
-    CdkPixbuf *           baul_icon_info_get_pixbuf                   (BaulIconInfo  *icon);
+    GdkPixbuf *           baul_icon_info_get_pixbuf                   (BaulIconInfo  *icon);
     cairo_surface_t *     baul_icon_info_get_surface                  (BaulIconInfo  *icon);
-    CdkPixbuf *           baul_icon_info_get_pixbuf_nodefault         (BaulIconInfo  *icon);
+    GdkPixbuf *           baul_icon_info_get_pixbuf_nodefault         (BaulIconInfo  *icon);
     cairo_surface_t *     baul_icon_info_get_surface_nodefault        (BaulIconInfo  *icon);
-    CdkPixbuf *           baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
+    GdkPixbuf *           baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
             gsize              forced_size);
     cairo_surface_t *     baul_icon_info_get_surface_nodefault_at_size(BaulIconInfo  *icon,
             gsize              forced_size);
-    CdkPixbuf *           baul_icon_info_get_pixbuf_at_size           (BaulIconInfo  *icon,
+    GdkPixbuf *           baul_icon_info_get_pixbuf_at_size           (BaulIconInfo  *icon,
             gsize              forced_size);
     cairo_surface_t *     baul_icon_info_get_surface_at_size(BaulIconInfo  *icon,
             gsize              forced_size);

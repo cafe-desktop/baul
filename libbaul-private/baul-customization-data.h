@@ -52,7 +52,7 @@ BaulCustomizationData* baul_customization_data_new                          (con
  */
 gboolean                   baul_customization_data_get_next_element_for_display (BaulCustomizationData *data,
         char **object_name,
-        CdkPixbuf **object_pixbuf,
+        GdkPixbuf **object_pixbuf,
         char **object_label);
 gboolean                   baul_customization_data_private_data_was_displayed   (BaulCustomizationData *data);
 
@@ -60,8 +60,8 @@ void                       baul_customization_data_destroy                      
 
 
 
-CdkPixbuf*                 baul_customization_make_pattern_chit                 (CdkPixbuf *pattern_tile,
-        CdkPixbuf *frame,
+GdkPixbuf*                 baul_customization_make_pattern_chit                 (GdkPixbuf *pattern_tile,
+        GdkPixbuf *frame,
         gboolean dragging,
         gboolean is_reset);
 

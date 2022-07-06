@@ -34,8 +34,8 @@
 
 /* shared utility to create a new pixbuf from the passed-in one */
 
-static CdkPixbuf *
-create_new_pixbuf (CdkPixbuf *src)
+static GdkPixbuf *
+create_new_pixbuf (GdkPixbuf *src)
 {
     g_assert (gdk_pixbuf_get_colorspace (src) == CDK_COLORSPACE_RGB);
     g_assert ((!gdk_pixbuf_get_has_alpha (src)
@@ -64,10 +64,10 @@ lighten_component (guchar cur_value)
     return (guchar) new_value;
 }
 
-CdkPixbuf *
-eel_create_spotlight_pixbuf (CdkPixbuf* src)
+GdkPixbuf *
+eel_create_spotlight_pixbuf (GdkPixbuf* src)
 {
-    CdkPixbuf *dest;
+    GdkPixbuf *dest;
     int i, j;
     int width, height, has_alpha, src_row_stride, dst_row_stride;
     guchar *target_pixels, *original_pixels;
@@ -112,7 +112,7 @@ eel_create_spotlight_pixbuf (CdkPixbuf* src)
 cairo_surface_t *
 eel_create_spotlight_surface (cairo_surface_t* src, int scale)
 {
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
     cairo_surface_t *dest;
 
     pixbuf = gdk_pixbuf_get_from_surface (src, 0, 0,
@@ -128,8 +128,8 @@ eel_create_spotlight_surface (cairo_surface_t* src, int scale)
 
 /* saturation is 0-255, darken is 0-255 */
 
-CdkPixbuf *
-eel_create_darkened_pixbuf (CdkPixbuf *src, int saturation, int darken)
+GdkPixbuf *
+eel_create_darkened_pixbuf (GdkPixbuf *src, int saturation, int darken)
 {
     gint i, j;
     gint width, height, src_row_stride, dest_row_stride;
@@ -139,7 +139,7 @@ eel_create_darkened_pixbuf (CdkPixbuf *src, int saturation, int darken)
     guchar alpha;
     guchar negalpha;
     guchar r, g, b;
-    CdkPixbuf *dest;
+    GdkPixbuf *dest;
 
     g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == CDK_COLORSPACE_RGB, NULL);
     g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
@@ -186,15 +186,15 @@ eel_create_darkened_pixbuf (CdkPixbuf *src, int saturation, int darken)
 
 /* this routine colorizes the passed-in pixbuf by multiplying each pixel with the passed in color */
 
-CdkPixbuf *
-eel_create_colorized_pixbuf (CdkPixbuf *src,
+GdkPixbuf *
+eel_create_colorized_pixbuf (GdkPixbuf *src,
                              CdkRGBA *color)
 {
     int i, j;
     int width, height, has_alpha, src_row_stride, dst_row_stride;
     guchar *target_pixels;
     guchar *original_pixels;
-    CdkPixbuf *dest;
+    GdkPixbuf *dest;
 
     gint red_value, green_value, blue_value;
 
@@ -243,7 +243,7 @@ eel_create_colorized_pixbuf (CdkPixbuf *src,
 /* utility to stretch a frame to the desired size */
 
 static void
-draw_frame_row (CdkPixbuf *frame_image, int target_width, int source_width, int source_v_position, int dest_v_position, CdkPixbuf *result_pixbuf, int left_offset, int height)
+draw_frame_row (GdkPixbuf *frame_image, int target_width, int source_width, int source_v_position, int dest_v_position, GdkPixbuf *result_pixbuf, int left_offset, int height)
 {
     int remaining_width, h_offset;
 
@@ -262,7 +262,7 @@ draw_frame_row (CdkPixbuf *frame_image, int target_width, int source_width, int 
 
 /* utility to draw the middle section of the frame in a loop */
 static void
-draw_frame_column (CdkPixbuf *frame_image, int target_height, int source_height, int source_h_position, int dest_h_position, CdkPixbuf *result_pixbuf, int top_offset, int width)
+draw_frame_column (GdkPixbuf *frame_image, int target_height, int source_height, int source_h_position, int dest_h_position, GdkPixbuf *result_pixbuf, int top_offset, int width)
 {
     int remaining_height, v_offset;
 
@@ -280,11 +280,11 @@ draw_frame_column (CdkPixbuf *frame_image, int target_height, int source_height,
     }
 }
 
-CdkPixbuf *
-eel_stretch_frame_image (CdkPixbuf *frame_image, int left_offset, int top_offset, int right_offset, int bottom_offset,
+GdkPixbuf *
+eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset, int right_offset, int bottom_offset,
                          int dest_width, int dest_height, gboolean fill_flag)
 {
-    CdkPixbuf *result_pixbuf;
+    GdkPixbuf *result_pixbuf;
     guchar *pixels_ptr;
     int frame_width, frame_height;
     int row_stride;
@@ -344,10 +344,10 @@ eel_stretch_frame_image (CdkPixbuf *frame_image, int left_offset, int top_offset
 
 
 /* draw an arbitrary frame around an image, with the result passed back in a newly allocated pixbuf */
-CdkPixbuf *
-eel_embed_image_in_frame (CdkPixbuf *source_image, CdkPixbuf *frame_image, int left_offset, int top_offset, int right_offset, int bottom_offset)
+GdkPixbuf *
+eel_embed_image_in_frame (GdkPixbuf *source_image, GdkPixbuf *frame_image, int left_offset, int top_offset, int right_offset, int bottom_offset)
 {
-    CdkPixbuf *result_pixbuf;
+    GdkPixbuf *result_pixbuf;
     int source_width, source_height;
     int dest_width, dest_height;
 

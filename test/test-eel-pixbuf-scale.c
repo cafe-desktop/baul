@@ -12,7 +12,7 @@
 int
 main (int argc, char* argv[])
 {
-	CdkPixbuf *pixbuf, *scaled;
+	GdkPixbuf *pixbuf, *scaled;
 	GError *error;
 	struct timeval t1, t2;
 	int i;

@@ -13,7 +13,7 @@ main (int argc, char* argv[])
 	CtkWidget *window;
 	CtkWidget *emblems_table, *button, *scroller;
 	char *emblem_name, *stripped_name;
-	CdkPixbuf *pixbuf;
+	GdkPixbuf *pixbuf;
 	char *label;
 
 	test_init (&argc, &argv);

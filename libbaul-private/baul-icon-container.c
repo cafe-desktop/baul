@@ -7572,7 +7572,7 @@ baul_icon_container_update_icon (BaulIconContainer *container,
     CdkPoint *attach_points;
     int n_attach_points;
     gboolean has_embedded_text_rect;
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
     GList *emblem_pixbufs;
     char *editable_text, *additional_text;
     char *embedded_text;

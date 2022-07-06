@@ -952,7 +952,7 @@ do_autorun_for_content_type (GMount *mount, const char *x_content_type, BaulAuto
     char *content_description;
     char *mount_name;
     GIcon *icon;
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
     cairo_surface_t *surface;
     BaulIconInfo *icon_info;
     int icon_size, icon_scale;

@@ -16,7 +16,7 @@ button_callback (CtkWidget *button,
 
 static CtkWidget *
 labeled_image_button_window_new (const char *title,
-				 CdkPixbuf *pixbuf)
+				 GdkPixbuf *pixbuf)
 {
 	CtkWidget *window;
 	CtkWidget *vbox;
@@ -60,7 +60,7 @@ main (int argc, char* argv[])
 {
 	CtkWidget *labeled_image_window = NULL;
 	CtkWidget *labeled_image_button_window = NULL;
-	CdkPixbuf *pixbuf = NULL;
+	GdkPixbuf *pixbuf = NULL;
 
 	test_init (&argc, &argv);
 

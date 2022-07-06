@@ -81,10 +81,10 @@ test_ctk_widget_set_background_color (CtkWidget *widget,
 	eel_background_set_color (background, color_spec);
 }
 
-CdkPixbuf *
+GdkPixbuf *
 test_pixbuf_new_named (const char *name, float scale)
 {
-	CdkPixbuf *pixbuf;
+	GdkPixbuf *pixbuf;
 	char *path;
 
 	g_return_val_if_fail (name != NULL, NULL);
@@ -103,7 +103,7 @@ test_pixbuf_new_named (const char *name, float scale)
 	g_return_val_if_fail (pixbuf != NULL, NULL);
 
 	if (scale != 1.0) {
-		CdkPixbuf *scaled;
+		GdkPixbuf *scaled;
 		float width = gdk_pixbuf_get_width (pixbuf) * scale;
 		float height = gdk_pixbuf_get_width (pixbuf) * scale;
 

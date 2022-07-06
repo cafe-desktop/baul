@@ -115,7 +115,7 @@ struct _BaulPropertyBrowserPrivate
 
     int category_position;
 
-    CdkPixbuf *property_chit;
+    GdkPixbuf *property_chit;
 
     gboolean remove_mode;
     gboolean keep_around;
@@ -162,9 +162,9 @@ static void     element_clicked_callback                        (CtkWidget      
         const EelImageTableEvent *event,
         gpointer                       callback_data);
 
-static CdkPixbuf * make_drag_image                              (BaulPropertyBrowser       *property_browser,
+static GdkPixbuf * make_drag_image                              (BaulPropertyBrowser       *property_browser,
         const char                    *file_name);
-static CdkPixbuf * make_color_drag_image                        (BaulPropertyBrowser       *property_browser,
+static GdkPixbuf * make_color_drag_image                        (BaulPropertyBrowser       *property_browser,
         const char                    *color_spec,
         gboolean                       trim_edges);
 
@@ -535,7 +535,7 @@ baul_property_browser_drag_begin (CtkWidget *widget,
 {
     BaulPropertyBrowser *property_browser;
     CtkWidget *child;
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
     char *element_name;
 
     property_browser = BAUL_PROPERTY_BROWSER (widget);
@@ -717,10 +717,10 @@ ensure_file_is_image (GFile *file)
 
 /* create the appropriate pixbuf for the passed in file */
 
-static CdkPixbuf *
+static GdkPixbuf *
 make_drag_image (BaulPropertyBrowser *property_browser, const char* file_name)
 {
-    CdkPixbuf *pixbuf, *orig_pixbuf;
+    GdkPixbuf *pixbuf, *orig_pixbuf;
     char *image_file_name;
     gboolean is_reset;
 
@@ -803,11 +803,11 @@ make_drag_image (BaulPropertyBrowser *property_browser, const char* file_name)
 
 /* create a pixbuf and fill it with a color */
 
-static CdkPixbuf*
+static GdkPixbuf*
 make_color_drag_image (BaulPropertyBrowser *property_browser, const char *color_spec, gboolean trim_edges)
 {
-    CdkPixbuf *color_square;
-    CdkPixbuf *ret;
+    GdkPixbuf *color_square;
+    GdkPixbuf *ret;
     int row, col, stride;
     char *pixels;
     CdkColor color;
@@ -1043,7 +1043,7 @@ update_preview_cb (CtkFileChooser *fc,
 
     if (filename)
     {
-        CdkPixbuf *pixbuf;
+        GdkPixbuf *pixbuf;
 
         pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 
@@ -1527,7 +1527,7 @@ emblem_dialog_clicked (CtkWidget *dialog, int which_button, BaulPropertyBrowser 
         const char *new_keyword;
         char *stripped_keyword;
         GFile *emblem_file;
-        CdkPixbuf *pixbuf;
+        GdkPixbuf *pixbuf;
 
         /* update the image path from the file entry */
         if (property_browser->details->filename)
@@ -1785,7 +1785,7 @@ labeled_image_configure (EelLabeledImage *labeled_image)
 /* Make a color tile for a property */
 static CtkWidget *
 labeled_image_new (const char *text,
-                   CdkPixbuf *pixbuf,
+                   GdkPixbuf *pixbuf,
                    const char *property_name,
                    double scale_factor)
 {
@@ -1810,7 +1810,7 @@ make_properties_from_directories (BaulPropertyBrowser *property_browser)
 {
     char *object_name;
     char *object_label;
-    CdkPixbuf *object_pixbuf;
+    GdkPixbuf *object_pixbuf;
     EelImageTable *image_table;
     CtkWidget *reset_object = NULL;
     GList *icons, *l;
@@ -1994,7 +1994,7 @@ add_reset_property (BaulPropertyBrowser *property_browser)
 {
     char *reset_image_file_name;
     CtkWidget *reset_image;
-    CdkPixbuf *reset_pixbuf, *reset_chit;
+    GdkPixbuf *reset_pixbuf, *reset_chit;
 
     reset_chit = NULL;
 
@@ -2033,7 +2033,7 @@ make_properties_from_xml_node (BaulPropertyBrowser *property_browser,
                                xmlNodePtr node)
 {
     xmlNodePtr child_node;
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
     CtkWidget *new_property;
     char *deleted, *local, *color, *name;
 

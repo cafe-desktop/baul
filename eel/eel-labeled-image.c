@@ -1283,7 +1283,7 @@ labeled_image_show_label (const EelLabeledImage *labeled_image)
  */
 CtkWidget*
 eel_labeled_image_new (const char *text,
-                       CdkPixbuf *pixbuf)
+                       GdkPixbuf *pixbuf)
 {
     EelLabeledImage *labeled_image;
 
@@ -1829,7 +1829,7 @@ eel_labled_set_mnemonic_widget (CtkWidget *image_widget,
  */
 CtkWidget *
 eel_labeled_image_button_new (const char *text,
-                              CdkPixbuf *pixbuf)
+                              GdkPixbuf *pixbuf)
 {
     CtkWidget *button;
     CtkWidget *labeled_image;
@@ -1879,7 +1879,7 @@ eel_labeled_image_button_new_from_file_name (const char *text,
  */
 CtkWidget *
 eel_labeled_image_toggle_button_new (const char *text,
-                                     CdkPixbuf *pixbuf)
+                                     GdkPixbuf *pixbuf)
 {
     CtkWidget *toggle_button;
     CtkWidget *labeled_image;
@@ -1930,7 +1930,7 @@ eel_labeled_image_toggle_button_new_from_file_name (const char *text,
  */
 CtkWidget *
 eel_labeled_image_radio_button_new (const char *text,
-                                    CdkPixbuf  *pixbuf)
+                                    GdkPixbuf  *pixbuf)
 {
     CtkWidget *radio_button;
     CtkWidget *labeled_image;
@@ -2027,7 +2027,7 @@ button_focus_out_event_callback (CtkWidget *widget,
  */
 CtkWidget *
 eel_labeled_image_check_button_new (const char *text,
-                                    CdkPixbuf *pixbuf)
+                                    GdkPixbuf *pixbuf)
 {
     CtkWidget *check_button;
     CtkWidget *labeled_image;
@@ -2097,7 +2097,7 @@ eel_labeled_image_check_button_new_from_file_name (const char *text,
  */
 void
 eel_labeled_image_set_pixbuf (EelLabeledImage *labeled_image,
-                              CdkPixbuf *pixbuf)
+                              GdkPixbuf *pixbuf)
 {
     g_return_if_fail (EEL_IS_LABELED_IMAGE (labeled_image));
 

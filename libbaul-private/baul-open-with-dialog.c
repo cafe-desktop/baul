@@ -513,7 +513,7 @@ get_surface_for_icon (GIcon *icon)
         filename = g_file_get_path (g_file_icon_get_file (G_FILE_ICON (icon)));
         if (filename)
         {
-            CdkPixbuf *pixbuf;
+            GdkPixbuf *pixbuf;
             pixbuf = gdk_pixbuf_new_from_file_at_size (filename,
                                                        BAUL_OPEN_WITH_DIALOG_ICON_SIZE * icon_scale,
                                                        BAUL_OPEN_WITH_DIALOG_ICON_SIZE * icon_scale,
