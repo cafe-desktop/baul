@@ -1718,7 +1718,7 @@ fm_tree_view_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show Tree"));
 }
 
-static CdkPixbuf *
+static GdkPixbuf *
 fm_tree_view_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;

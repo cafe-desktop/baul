@@ -537,7 +537,7 @@ shortcut_clicked_callback (CtkWidget *button,
 static CtkWidget *
 create_shortcut (BaulSidePane *side_pane,
                  SidePanel *panel,
-                 CdkPixbuf *pixbuf)
+                 GdkPixbuf *pixbuf)
 {
     CtkWidget *button;
     CtkWidget *image;
@@ -561,7 +561,7 @@ create_shortcut (BaulSidePane *side_pane,
 void
 baul_side_pane_set_panel_image (BaulSidePane *side_pane,
                                 CtkWidget *widget,
-                                CdkPixbuf *pixbuf)
+                                GdkPixbuf *pixbuf)
 {
     SidePanel *panel;
     CtkWidget *image;

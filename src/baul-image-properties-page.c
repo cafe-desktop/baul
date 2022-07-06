@@ -53,7 +53,7 @@ struct _BaulImagePropertiesPagePrivate
     GCancellable *cancellable;
     CtkWidget *vbox;
     CtkWidget *loading_label;
-    CdkPixbufLoader *loader;
+    GdkPixbufLoader *loader;
     gboolean got_size;
     gboolean pixbuf_still_loading;
     char buffer[LOAD_BUFFER_SIZE];
@@ -386,7 +386,7 @@ load_finished (BaulImagePropertiesPage *page)
 
     if (page->details->got_size)
     {
-        CdkPixbufFormat *format;
+        GdkPixbufFormat *format;
         char *name, *desc;
 #ifdef HAVE_EXIF
         ExifData *exif_data;
@@ -528,7 +528,7 @@ file_read_callback (GObject      *object,
 }
 
 static void
-size_prepared_callback (CdkPixbufLoader *loader,
+size_prepared_callback (GdkPixbufLoader *loader,
                         int              width,
                         int              height,
                         gpointer         callback_data)

@@ -90,7 +90,7 @@ struct _BaulIconCanvasItemPrivate
 {
     /* The image, text, font. */
     double x, y;
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
     cairo_surface_t *rendered_surface;
     GList *emblem_pixbufs;
     char *editable_text;		/* Text that can be modified by a renaming function */
@@ -216,10 +216,10 @@ static void     emblem_layout_reset                  (EmblemLayout              
     						      EelIRect                  icon_rect,
     						      gboolean			is_rtl);
 static gboolean emblem_layout_next                   (EmblemLayout              *layout,
-    						      CdkPixbuf                 **emblem_pixbuf,
+    						      GdkPixbuf                 **emblem_pixbuf,
     						      EelIRect                  *emblem_rect,
     						      gboolean			is_rtl);
-static void     draw_pixbuf                          (CdkPixbuf                 *pixbuf,
+static void     draw_pixbuf                          (GdkPixbuf                 *pixbuf,
     						      cairo_t                   *cr,
     						      int                       x,
     						      int                       y);
@@ -317,7 +317,7 @@ baul_icon_canvas_item_finalize (GObject *object)
  * and we won't have this requirement any more.
  */
 static gboolean
-pixbuf_is_acceptable (CdkPixbuf *pixbuf)
+pixbuf_is_acceptable (GdkPixbuf *pixbuf)
 {
     return gdk_pixbuf_get_colorspace (pixbuf) == CDK_COLORSPACE_RGB
            && ((!gdk_pixbuf_get_has_alpha (pixbuf)
@@ -511,7 +511,7 @@ get_scaled_icon_size (BaulIconCanvasItem *item,
 		      gint *width,
 		      gint *height)
 {
-    CdkPixbuf *pixbuf = NULL;
+    GdkPixbuf *pixbuf = NULL;
     gint scale = 1;
 
     if (item != NULL) {
@@ -539,7 +539,7 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     int item_offset_x, item_offset_y;
     EelIRect icon_rect;
     EelIRect emblem_rect;
-    CdkPixbuf *emblem_pixbuf;
+    GdkPixbuf *emblem_pixbuf;
     EmblemLayout emblem_layout;
     double item_x, item_y;
     gboolean is_rtl;
@@ -616,7 +616,7 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
 
 void
 baul_icon_canvas_item_set_image (BaulIconCanvasItem *item,
-                                 CdkPixbuf *image)
+                                 GdkPixbuf *image)
 {
     BaulIconCanvasItemPrivate *details;
 
@@ -883,7 +883,7 @@ baul_icon_canvas_item_update_bounds (BaulIconCanvasItem *item,
     EelIRect before, after, emblem_rect;
     EmblemLayout emblem_layout;
     EelCanvasItem *canvas_item;
-    CdkPixbuf *emblem_pixbuf;
+    GdkPixbuf *emblem_pixbuf;
     gboolean is_rtl;
 
     canvas_item = EEL_CANVAS_ITEM (item);
@@ -1467,10 +1467,10 @@ baul_icon_canvas_item_invalidate_label (BaulIconCanvasItem     *item)
 }
 
 
-static CdkPixbuf *
+static GdkPixbuf *
 get_knob_pixbuf (void)
 {
-    CdkPixbuf *knob_pixbuf;
+    GdkPixbuf *knob_pixbuf;
 
     knob_pixbuf = ctk_icon_theme_load_icon (ctk_icon_theme_get_default (),
                                             "stock-baul-knob",
@@ -1493,7 +1493,7 @@ draw_stretch_handles (BaulIconCanvasItem *item,
                       const EelIRect *rect)
 {
     CtkWidget *widget;
-    CdkPixbuf *knob_pixbuf;
+    GdkPixbuf *knob_pixbuf;
     int knob_width, knob_height;
     double dash = { 2.0 };
     CtkStyleContext *style;
@@ -1550,11 +1550,11 @@ emblem_layout_reset (EmblemLayout *layout, BaulIconCanvasItem *icon_item, EelIRe
 
 static gboolean
 emblem_layout_next (EmblemLayout *layout,
-                    CdkPixbuf **emblem_pixbuf,
+                    GdkPixbuf **emblem_pixbuf,
                     EelIRect *emblem_rect,
                     gboolean is_rtl)
 {
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
     int width, height, x, y;
     CdkPoint *attach_points;
 
@@ -1695,7 +1695,7 @@ emblem_layout_next (EmblemLayout *layout,
 }
 
 static void
-draw_pixbuf (CdkPixbuf *pixbuf,
+draw_pixbuf (GdkPixbuf *pixbuf,
              cairo_t *cr,
              int x, int y)
 {
@@ -1710,7 +1710,7 @@ static cairo_surface_t *
 real_map_surface (BaulIconCanvasItem *icon_item)
 {
     EelCanvas *canvas;
-    CdkPixbuf *temp_pixbuf, *old_pixbuf;
+    GdkPixbuf *temp_pixbuf, *old_pixbuf;
     CdkRGBA color;
     CdkRGBA *c;
     cairo_surface_t *surface;
@@ -1739,7 +1739,7 @@ real_map_surface (BaulIconCanvasItem *icon_item)
         if (icon_item->details->is_active)
         {
             char *audio_filename;
-            CdkPixbuf *audio_pixbuf;
+            GdkPixbuf *audio_pixbuf;
             int emblem_size;
 
             emblem_size = baul_icon_get_emblem_size_for_icon_size (gdk_pixbuf_get_width (temp_pixbuf));
@@ -1914,7 +1914,7 @@ baul_icon_canvas_item_draw (EelCanvasItem *item,
     BaulIconCanvasItemPrivate *details;
     EelIRect icon_rect, emblem_rect;
     EmblemLayout emblem_layout;
-    CdkPixbuf *emblem_pixbuf;
+    GdkPixbuf *emblem_pixbuf;
     cairo_surface_t *temp_surface;
     CtkStyleContext *context;
 
@@ -2182,7 +2182,7 @@ baul_icon_canvas_item_event (EelCanvasItem *item, CdkEvent *event)
 }
 
 static gboolean
-hit_test_pixbuf (CdkPixbuf *pixbuf, EelIRect pixbuf_location, EelIRect probe_rect)
+hit_test_pixbuf (GdkPixbuf *pixbuf, EelIRect pixbuf_location, EelIRect probe_rect)
 {
     EelIRect relative_rect, pixbuf_rect;
     int x, y;
@@ -2239,7 +2239,7 @@ hit_test (BaulIconCanvasItem *icon_item, EelIRect canvas_rect)
     BaulIconCanvasItemPrivate *details;
     EelIRect emblem_rect;
     EmblemLayout emblem_layout;
-    CdkPixbuf *emblem_pixbuf;
+    GdkPixbuf *emblem_pixbuf;
     gboolean is_rtl;
 
     details = icon_item->details;
@@ -2429,7 +2429,7 @@ baul_icon_canvas_item_ensure_bounds_up_to_date (BaulIconCanvasItem *icon_item)
     EelCanvasItem *item;
     gint width, height;
     EmblemLayout emblem_layout;
-    CdkPixbuf *emblem_pixbuf;
+    GdkPixbuf *emblem_pixbuf;
     gboolean is_rtl;
 
     details = icon_item->details;
@@ -2602,7 +2602,7 @@ hit_test_stretch_handle (BaulIconCanvasItem *item,
                          CtkCornerType *corner)
 {
     EelIRect icon_rect;
-    CdkPixbuf *knob_pixbuf;
+    GdkPixbuf *knob_pixbuf;
     int knob_width, knob_height;
     int hit_corner;
 

@@ -170,7 +170,7 @@ baul_information_panel_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show Information"));
 }
 
-static CdkPixbuf *
+static GdkPixbuf *
 baul_information_panel_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;
@@ -455,7 +455,7 @@ hit_test (BaulInformationPanel *information_panel,
 static gboolean
 uri_is_local_image (const char *uri)
 {
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
     char *image_path;
 
     image_path = g_filename_from_uri (uri, NULL, NULL);

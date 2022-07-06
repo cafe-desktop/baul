@@ -624,7 +624,7 @@ update_more_info (BaulSidebarTitle *sidebar_title)
 
 /* add a pixbuf to the emblem box */
 static void
-add_emblem (BaulSidebarTitle *sidebar_title, CdkPixbuf *pixbuf)
+add_emblem (BaulSidebarTitle *sidebar_title, GdkPixbuf *pixbuf)
 {
     CtkWidget *image_widget;
 
@@ -637,7 +637,7 @@ static void
 update_emblems (BaulSidebarTitle *sidebar_title)
 {
     GList *pixbufs, *p;
-    CdkPixbuf *pixbuf = NULL;
+    GdkPixbuf *pixbuf = NULL;
 
     /* exit if we don't have the file yet */
     if (sidebar_title->details->file == NULL)

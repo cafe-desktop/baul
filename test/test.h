@@ -21,12 +21,12 @@ void       test_ctk_widget_set_background_image (CtkWidget                   *wi
 						 const char                  *image_name);
 void       test_ctk_widget_set_background_color (CtkWidget                   *widget,
 						 const char                  *color_spec);
-CdkPixbuf *test_pixbuf_new_named                (const char                  *name,
+GdkPixbuf *test_pixbuf_new_named                (const char                  *name,
 						 float                        scale);
 CtkWidget *test_label_new                       (const char                  *text,
 						 gboolean                     with_background,
 						 int                          num_sizes_larger);
-void       test_pixbuf_draw_rectangle_tiled     (CdkPixbuf                   *pixbuf,
+void       test_pixbuf_draw_rectangle_tiled     (GdkPixbuf                   *pixbuf,
 						 const char                  *tile_name,
 						 int                          x0,
 						 int                          y0,

@@ -235,7 +235,7 @@ G_DEFINE_TYPE_WITH_CODE (BaulPlacesSidebarProvider, baul_places_sidebar_provider
 static cairo_surface_t *
 get_eject_icon (gboolean highlighted)
 {
-    CdkPixbuf *eject;
+    GdkPixbuf *eject;
     cairo_surface_t *eject_surface;
     BaulIconInfo *eject_icon_info;
     int icon_size, icon_scale;
@@ -247,7 +247,7 @@ get_eject_icon (gboolean highlighted)
     eject = baul_icon_info_get_pixbuf_at_size (eject_icon_info, icon_size);
 
     if (highlighted) {
-        CdkPixbuf *high;
+        GdkPixbuf *high;
         high = eel_create_spotlight_pixbuf (eject);
         g_object_unref (eject);
         eject = high;
@@ -346,7 +346,7 @@ add_place (BaulPlacesSidebar *sidebar,
            const int index,
            const char *tooltip)
 {
-    CdkPixbuf       *pixbuf;
+    GdkPixbuf       *pixbuf;
     cairo_surface_t *surface;
     CtkTreeIter      iter, child_iter;
     cairo_surface_t *eject;
@@ -3420,7 +3420,7 @@ baul_places_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show Places"));
 }
 
-static CdkPixbuf *
+static GdkPixbuf *
 baul_places_sidebar_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;

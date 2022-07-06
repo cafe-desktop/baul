@@ -347,7 +347,7 @@ baul_history_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
     return g_strdup (_("Show History"));
 }
 
-static CdkPixbuf *
+static GdkPixbuf *
 baul_history_sidebar_get_tab_icon (BaulSidebar *sidebar)
 {
     return NULL;

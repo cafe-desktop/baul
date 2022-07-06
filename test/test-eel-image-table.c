@@ -63,7 +63,7 @@ labeled_image_new (const char *text,
 		   const char *icon_name)
 {
 	CtkWidget *image;
-	CdkPixbuf *pixbuf = NULL;
+	GdkPixbuf *pixbuf = NULL;
 
 	if (icon_name) {
 		float sizes[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0,

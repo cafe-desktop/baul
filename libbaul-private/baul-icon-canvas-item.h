@@ -71,7 +71,7 @@ G_BEGIN_DECLS
 
     /* attributes */
     void        baul_icon_canvas_item_set_image                (BaulIconCanvasItem       *item,
-            CdkPixbuf                    *image);
+            GdkPixbuf                    *image);
 
     cairo_surface_t* baul_icon_canvas_item_get_drag_surface    (BaulIconCanvasItem       *item);
 

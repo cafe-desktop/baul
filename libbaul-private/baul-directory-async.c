@@ -4128,7 +4128,7 @@ link_info_start (BaulDirectory *directory,
 static void
 thumbnail_done (BaulDirectory *directory,
                 BaulFile *file,
-                CdkPixbuf *pixbuf,
+                GdkPixbuf *pixbuf,
                 gboolean tried_original)
 {
     file->details->thumbnail_is_up_to_date = TRUE;
@@ -4202,7 +4202,7 @@ thumbnail_stop (BaulDirectory *directory)
 static void
 thumbnail_got_pixbuf (BaulDirectory *directory,
                       BaulFile *file,
-                      CdkPixbuf *pixbuf,
+                      GdkPixbuf *pixbuf,
                       gboolean tried_original)
 {
     baul_directory_ref (directory);
@@ -4231,7 +4231,7 @@ extern int cached_thumbnail_size;
 
 /* scale very large images down to the max. size we need */
 static void
-thumbnail_loader_size_prepared (CdkPixbufLoader *loader,
+thumbnail_loader_size_prepared (GdkPixbufLoader *loader,
                                 int width,
                                 int height,
                                 gpointer user_data)
@@ -4260,13 +4260,13 @@ thumbnail_loader_size_prepared (CdkPixbufLoader *loader,
     }
 }
 
-static CdkPixbuf *
+static GdkPixbuf *
 get_pixbuf_for_content (goffset file_len,
                         char *file_contents)
 {
     gboolean res;
-    CdkPixbuf *pixbuf, *pixbuf2;
-    CdkPixbufLoader *loader;
+    GdkPixbuf *pixbuf, *pixbuf2;
+    GdkPixbufLoader *loader;
     gsize chunk_len;
     pixbuf = NULL;
 
@@ -4314,7 +4314,7 @@ thumbnail_read_callback (GObject *source_object,
     char *file_contents;
     gboolean result;
     BaulDirectory *directory;
-    CdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf;
 
     state = user_data;
 
