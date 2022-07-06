@@ -123,39 +123,39 @@ baul_navigation_window_init (BaulNavigationWindow *window)
 
     CtkStyleContext *context;
 
-    context = ctk_widget_get_style_context (GTK_WIDGET (window));
+    context = ctk_widget_get_style_context (CTK_WIDGET (window));
     ctk_style_context_add_class (context, "baul-navigation-window");
 
     pane = baul_navigation_window_pane_new (win);
     win->details->panes = g_list_prepend (win->details->panes, pane);
 
-    window->details->header_size_group = ctk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
+    window->details->header_size_group = ctk_size_group_new (CTK_SIZE_GROUP_VERTICAL);
     ctk_size_group_set_ignore_hidden (window->details->header_size_group, FALSE);
 
-    window->details->content_paned = ctk_paned_new (GTK_ORIENTATION_HORIZONTAL);
+    window->details->content_paned = ctk_paned_new (CTK_ORIENTATION_HORIZONTAL);
     ctk_widget_set_hexpand (window->details->content_paned, TRUE);
     ctk_widget_set_vexpand (window->details->content_paned, TRUE);
-    ctk_grid_attach (GTK_GRID (BAUL_WINDOW (window)->details->grid),
+    ctk_grid_attach (CTK_GRID (BAUL_WINDOW (window)->details->grid),
                      window->details->content_paned,
                      0, 3, 1, 1);
     ctk_widget_show (window->details->content_paned);
 
-    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    ctk_paned_pack2 (GTK_PANED (window->details->content_paned), vbox,
+    vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
+    ctk_paned_pack2 (CTK_PANED (window->details->content_paned), vbox,
     		     TRUE, FALSE);
     ctk_widget_show (vbox);
 
-    hpaned = ctk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-    ctk_box_pack_start (GTK_BOX (vbox), hpaned, TRUE, TRUE, 0);
+    hpaned = ctk_paned_new (CTK_ORIENTATION_HORIZONTAL);
+    ctk_box_pack_start (CTK_BOX (vbox), hpaned, TRUE, TRUE, 0);
     ctk_widget_show (hpaned);
     window->details->split_view_hpane = hpaned;
 
-    ctk_box_pack_start (GTK_BOX (vbox), win->details->statusbar, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (vbox), win->details->statusbar, FALSE, FALSE, 0);
     ctk_widget_show (win->details->statusbar);
 
     baul_navigation_window_pane_setup (pane);
 
-    ctk_paned_pack1 (GTK_PANED(hpaned), pane->widget, TRUE, FALSE);
+    ctk_paned_pack1 (CTK_PANED(hpaned), pane->widget, TRUE, FALSE);
     ctk_widget_show (pane->widget);
 
     /* this has to be done after the location bar has been set up,
@@ -168,10 +168,10 @@ baul_navigation_window_init (BaulNavigationWindow *window)
 
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
     toolbar = ctk_ui_manager_get_widget (ui_manager, "/Toolbar");
-    ctk_style_context_add_class (ctk_widget_get_style_context (toolbar), GTK_STYLE_CLASS_PRIMARY_TOOLBAR);
+    ctk_style_context_add_class (ctk_widget_get_style_context (toolbar), CTK_STYLE_CLASS_PRIMARY_TOOLBAR);
     window->details->toolbar = toolbar;
     ctk_widget_set_hexpand (toolbar, TRUE);
-    ctk_grid_attach (GTK_GRID (BAUL_WINDOW (window)->details->grid),
+    ctk_grid_attach (CTK_GRID (BAUL_WINDOW (window)->details->grid),
                      toolbar,
                      0, 1, 1, 1);
     ctk_widget_show (toolbar);
@@ -318,7 +318,7 @@ remember_focus_widget (BaulNavigationWindow *window)
 
     navigation_window = BAUL_NAVIGATION_WINDOW (window);
 
-    focus_widget = ctk_window_get_focus (GTK_WINDOW (window));
+    focus_widget = ctk_window_get_focus (CTK_WINDOW (window));
     if (focus_widget != NULL &&
             !baul_navigation_window_is_in_temporary_navigation_bar (focus_widget, navigation_window) &&
             !baul_navigation_window_is_in_temporary_search_bar (focus_widget, navigation_window))
@@ -388,12 +388,12 @@ setup_side_pane_width (BaulNavigationWindow *window)
 
     g_return_if_fail (window->sidebar != NULL);
 
-    scale = ctk_widget_get_scale_factor (GTK_WIDGET (window->sidebar));
+    scale = ctk_widget_get_scale_factor (CTK_WIDGET (window->sidebar));
     window->details->side_pane_width =
         g_settings_get_int (baul_window_state,
                             BAUL_WINDOW_STATE_SIDEBAR_WIDTH) * scale;
 
-    ctk_paned_set_position (GTK_PANED (window->details->content_paned),
+    ctk_paned_set_position (CTK_PANED (window->details->content_paned),
                             window->details->side_pane_width);
 }
 
@@ -448,8 +448,8 @@ baul_navigation_window_set_up_sidebar (BaulNavigationWindow *window)
     ctk_size_group_add_widget (window->details->header_size_group,
                                title);
 
-    ctk_paned_pack1 (GTK_PANED (window->details->content_paned),
-                     GTK_WIDGET (window->sidebar),
+    ctk_paned_pack1 (CTK_PANED (window->details->content_paned),
+                     CTK_WIDGET (window->sidebar),
                      FALSE, FALSE);
 
     setup_side_pane_width (window);
@@ -470,7 +470,7 @@ baul_navigation_window_set_up_sidebar (BaulNavigationWindow *window)
                       G_CALLBACK (side_pane_switch_page_callback),
                       window);
 
-    ctk_widget_show (GTK_WIDGET (window->sidebar));
+    ctk_widget_show (CTK_WIDGET (window->sidebar));
 }
 
 static void
@@ -493,7 +493,7 @@ baul_navigation_window_tear_down_sidebar (BaulNavigationWindow *window)
                 sidebar_panel);
     }
 
-    ctk_widget_destroy (GTK_WIDGET (window->sidebar));
+    ctk_widget_destroy (CTK_WIDGET (window->sidebar));
     window->sidebar = NULL;
 }
 
@@ -507,9 +507,9 @@ baul_navigation_window_state_event (CtkWidget *widget,
                                 event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED);
     }
 
-    if (GTK_WIDGET_CLASS (parent_class)->window_state_event != NULL)
+    if (CTK_WIDGET_CLASS (parent_class)->window_state_event != NULL)
     {
-        return GTK_WIDGET_CLASS (parent_class)->window_state_event (widget, event);
+        return CTK_WIDGET_CLASS (parent_class)->window_state_event (widget, event);
     }
 
     return FALSE;
@@ -543,7 +543,7 @@ baul_navigation_window_key_press_event (CtkWidget *widget,
             slot = baul_window_get_active_slot (baulwin);
             pane = BAUL_NAVIGATION_WINDOW_PANE (slot->pane);
             baulnotebook = BAUL_NOTEBOOK (pane->notebook);
-            notebook = GTK_NOTEBOOK (baulnotebook);
+            notebook = CTK_NOTEBOOK (baulnotebook);
             pages = ctk_notebook_get_n_pages (notebook);
             page_num = ctk_notebook_get_current_page (notebook);
 
@@ -592,7 +592,7 @@ baul_navigation_window_key_press_event (CtkWidget *widget,
         }
     }
 
-    return GTK_WIDGET_CLASS (baul_navigation_window_parent_class)->key_press_event (widget, event);
+    return CTK_WIDGET_CLASS (baul_navigation_window_parent_class)->key_press_event (widget, event);
 }
 
 static gboolean
@@ -615,9 +615,9 @@ baul_navigation_window_button_press_event (CtkWidget *widget,
         baul_navigation_window_go_forward (window);
         handled = TRUE;
     }
-    else if (GTK_WIDGET_CLASS (baul_navigation_window_parent_class)->button_press_event)
+    else if (CTK_WIDGET_CLASS (baul_navigation_window_parent_class)->button_press_event)
     {
-        handled = GTK_WIDGET_CLASS (baul_navigation_window_parent_class)->button_press_event (widget, event);
+        handled = CTK_WIDGET_CLASS (baul_navigation_window_parent_class)->button_press_event (widget, event);
     }
     else
     {
@@ -643,7 +643,7 @@ baul_navigation_window_destroy (CtkWidget *object)
     window->details->content_paned = NULL;
     window->details->split_view_hpane = NULL;
 
-    GTK_WIDGET_CLASS (parent_class)->destroy (object);
+    CTK_WIDGET_CLASS (parent_class)->destroy (object);
 }
 
 static void
@@ -687,7 +687,7 @@ baul_navigation_window_add_sidebar_panel (BaulNavigationWindow *window,
     label = baul_sidebar_get_tab_label (sidebar_panel);
     tooltip = baul_sidebar_get_tab_tooltip (sidebar_panel);
     baul_side_pane_add_panel (window->sidebar,
-                              GTK_WIDGET (sidebar_panel),
+                              CTK_WIDGET (sidebar_panel),
                               label,
                               tooltip);
     g_free (tooltip);
@@ -695,7 +695,7 @@ baul_navigation_window_add_sidebar_panel (BaulNavigationWindow *window,
 
     icon = baul_sidebar_get_tab_icon (sidebar_panel);
     baul_side_pane_set_panel_image (BAUL_NAVIGATION_WINDOW (window)->sidebar,
-                                    GTK_WIDGET (sidebar_panel),
+                                    CTK_WIDGET (sidebar_panel),
                                     icon);
     if (icon)
     {
@@ -714,7 +714,7 @@ baul_navigation_window_add_sidebar_panel (BaulNavigationWindow *window,
     if (sidebar_id && default_id && !strcmp (sidebar_id, default_id))
     {
         baul_side_pane_show_panel (window->sidebar,
-                                   GTK_WIDGET (sidebar_panel));
+                                   CTK_WIDGET (sidebar_panel));
     }
     g_free (default_id);
 }
@@ -734,7 +734,7 @@ baul_navigation_window_remove_sidebar_panel (BaulNavigationWindow *window,
     g_signal_handlers_disconnect_by_func (sidebar_panel, side_panel_image_changed_callback, window);
 
     baul_side_pane_remove_panel (window->sidebar,
-                                 GTK_WIDGET (sidebar_panel));
+                                 CTK_WIDGET (sidebar_panel));
     window->sidebar_panels = g_list_remove (window->sidebar_panels, sidebar_panel);
     g_object_unref (sidebar_panel);
 }
@@ -807,7 +807,7 @@ real_sync_title (BaulWindow *window,
             window_title = eel_str_middle_truncate (slot->title, MAX_TITLE_LENGTH);
         }
 
-        ctk_window_set_title (GTK_WINDOW (window), window_title);
+        ctk_window_set_title (CTK_WINDOW (window), window_title);
         g_free (window_title);
     }
 
@@ -821,7 +821,7 @@ real_get_icon (BaulWindow *window,
                BaulWindowSlot *slot)
 {
     return baul_file_get_icon (slot->viewed_file,
-                               48, ctk_widget_get_scale_factor (GTK_WIDGET (window)),
+                               48, ctk_widget_get_scale_factor (CTK_WIDGET (window)),
                                BAUL_FILE_ICON_FLAGS_IGNORE_VISITING |
                                BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON);
 }
@@ -906,7 +906,7 @@ baul_navigation_window_set_search_button (BaulNavigationWindow *window,
     /* Block callback so we don't activate the action and thus focus the
        search entry */
     g_object_set_data (G_OBJECT (action), "blocked", GINT_TO_POINTER (1));
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), state);
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action), state);
     g_object_set_data (G_OBJECT (action), "blocked", NULL);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -922,7 +922,7 @@ side_panel_image_changed_callback (BaulSidebar *side_panel,
 
     icon = baul_sidebar_get_tab_icon (side_panel);
     baul_side_pane_set_panel_image (BAUL_NAVIGATION_WINDOW (window)->sidebar,
-                                    GTK_WIDGET (side_panel),
+                                    CTK_WIDGET (side_panel),
                                     icon);
     if (icon != NULL)
     {
@@ -1068,7 +1068,7 @@ baul_navigation_window_sidebar_showing (BaulNavigationWindow *window)
     g_return_val_if_fail (BAUL_IS_NAVIGATION_WINDOW (window), FALSE);
 
     return (window->sidebar != NULL)
-           && ctk_widget_get_visible (ctk_paned_get_child1 (GTK_PANED (window->details->content_paned)));
+           && ctk_widget_get_visible (ctk_paned_get_child1 (CTK_PANED (window->details->content_paned)));
 }
 
 /**
@@ -1174,7 +1174,7 @@ baul_navigation_window_show (CtkWidget *widget)
         baul_navigation_window_hide_status_bar (window);
     }
 
-    GTK_WIDGET_CLASS (parent_class)->show (widget);
+    CTK_WIDGET_CLASS (parent_class)->show (widget);
 }
 
 static void
@@ -1184,12 +1184,12 @@ baul_navigation_window_save_geometry (BaulNavigationWindow *window)
 
     g_assert (BAUL_IS_WINDOW (window));
 
-    if (ctk_widget_get_window (GTK_WIDGET (window)))
+    if (ctk_widget_get_window (CTK_WIDGET (window)))
     {
         char *geometry_string;
 
-        geometry_string = eel_ctk_window_get_geometry_string (GTK_WINDOW (window));
-        is_maximized = gdk_window_get_state (ctk_widget_get_window (GTK_WIDGET (window)))
+        geometry_string = eel_ctk_window_get_geometry_string (CTK_WINDOW (window));
+        is_maximized = gdk_window_get_state (ctk_widget_get_window (CTK_WIDGET (window)))
                        & GDK_WINDOW_STATE_MAXIMIZED;
 
         if (!is_maximized)
@@ -1263,7 +1263,7 @@ real_close_slot (BaulWindowPane *pane,
     int page_num;
     CtkNotebook *notebook;
 
-    notebook = GTK_NOTEBOOK (BAUL_NAVIGATION_WINDOW_PANE (pane)->notebook);
+    notebook = CTK_NOTEBOOK (BAUL_NAVIGATION_WINDOW_PANE (pane)->notebook);
 
     page_num = ctk_notebook_page_num (notebook, slot->content_box);
     g_assert (page_num >= 0);
@@ -1285,11 +1285,11 @@ baul_navigation_window_class_init (BaulNavigationWindowClass *class)
 
     G_OBJECT_CLASS (class)->finalize = baul_navigation_window_finalize;
 
-    GTK_WIDGET_CLASS (class)->destroy = baul_navigation_window_destroy;
-    GTK_WIDGET_CLASS (class)->show = baul_navigation_window_show;
-    GTK_WIDGET_CLASS (class)->window_state_event = baul_navigation_window_state_event;
-    GTK_WIDGET_CLASS (class)->key_press_event = baul_navigation_window_key_press_event;
-    GTK_WIDGET_CLASS (class)->button_press_event = baul_navigation_window_button_press_event;
+    CTK_WIDGET_CLASS (class)->destroy = baul_navigation_window_destroy;
+    CTK_WIDGET_CLASS (class)->show = baul_navigation_window_show;
+    CTK_WIDGET_CLASS (class)->window_state_event = baul_navigation_window_state_event;
+    CTK_WIDGET_CLASS (class)->key_press_event = baul_navigation_window_key_press_event;
+    CTK_WIDGET_CLASS (class)->button_press_event = baul_navigation_window_button_press_event;
     BAUL_WINDOW_CLASS (class)->sync_allow_stop = real_sync_allow_stop;
     BAUL_WINDOW_CLASS (class)->prompt_for_location = real_prompt_for_location;
     BAUL_WINDOW_CLASS (class)->sync_title = real_sync_title;
@@ -1333,7 +1333,7 @@ create_extra_pane (BaulNavigationWindow *window)
 
     baul_navigation_window_pane_setup (pane);
 
-    paned = GTK_PANED (window->details->split_view_hpane);
+    paned = CTK_PANED (window->details->split_view_hpane);
     if (ctk_paned_get_child1 (paned) == NULL)
     {
         ctk_paned_pack1 (paned, pane->widget, TRUE, FALSE);
@@ -1390,7 +1390,7 @@ baul_navigation_window_split_view_on (BaulNavigationWindow *window)
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window)->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_LOCATION_BAR);
-    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_pane_show_location_bar (pane, TRUE);
     }

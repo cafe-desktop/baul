@@ -73,7 +73,7 @@ baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self
     BaulWindow *window;
     CtkWidget *widget;
 
-    widget = GTK_WIDGET (self);
+    widget = CTK_WIDGET (self);
 
     display_location_res =
         g_simple_async_result_new (G_OBJECT (self),

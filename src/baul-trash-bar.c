@@ -51,7 +51,7 @@ struct _BaulTrashBarPrivate
     gulong selection_handler_id;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (BaulTrashBar, baul_trash_bar, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulTrashBar, baul_trash_bar, CTK_TYPE_BOX);
 
 static void
 restore_button_clicked_cb (CtkWidget *button,
@@ -67,7 +67,7 @@ restore_button_clicked_cb (CtkWidget *button,
         files = g_list_prepend (files, baul_file_get (l->data));
     }
 
-    baul_restore_files_from_trash (files, GTK_WINDOW (ctk_widget_get_toplevel (button)));
+    baul_restore_files_from_trash (files, CTK_WINDOW (ctk_widget_get_toplevel (button)));
 
     baul_file_list_free (files);
     g_list_free_full (locations, g_object_unref);
@@ -183,18 +183,18 @@ baul_trash_bar_init (BaulTrashBar *bar)
 
     bar->priv = baul_trash_bar_get_instance_private (bar);
 
-    hbox = GTK_WIDGET (bar);
+    hbox = CTK_WIDGET (bar);
 
     label = ctk_label_new (_("Trash"));
     ctk_widget_show (label);
 
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (bar), GTK_ORIENTATION_HORIZONTAL);
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (bar), CTK_ORIENTATION_HORIZONTAL);
 
-    ctk_box_pack_start (GTK_BOX (bar), label, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (bar), label, FALSE, FALSE, 0);
 
     bar->priv->empty_button = ctk_button_new_with_mnemonic (_("Empty _Trash"));
     ctk_widget_show (bar->priv->empty_button);
-    ctk_box_pack_end (GTK_BOX (hbox), bar->priv->empty_button, FALSE, FALSE, 0);
+    ctk_box_pack_end (CTK_BOX (hbox), bar->priv->empty_button, FALSE, FALSE, 0);
 
     ctk_widget_set_sensitive (bar->priv->empty_button,
                               !baul_trash_monitor_is_empty ());
@@ -208,7 +208,7 @@ baul_trash_bar_init (BaulTrashBar *bar)
 
     bar->priv->restore_button = ctk_button_new_with_mnemonic (_("Restore Selected Items"));
     ctk_widget_show (bar->priv->restore_button);
-    ctk_box_pack_end (GTK_BOX (hbox), bar->priv->restore_button, FALSE, FALSE, 6);
+    ctk_box_pack_end (CTK_BOX (hbox), bar->priv->restore_button, FALSE, FALSE, 6);
 
     ctk_widget_set_sensitive (bar->priv->restore_button, FALSE);
     ctk_widget_set_tooltip_text (bar->priv->restore_button,
@@ -233,5 +233,5 @@ baul_trash_bar_new (BaulWindow *window)
 
     bar = g_object_new (BAUL_TYPE_TRASH_BAR, "window", window, NULL);
 
-    return GTK_WIDGET (bar);
+    return CTK_WIDGET (bar);
 }

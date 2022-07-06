@@ -163,7 +163,7 @@ directory_ready_callback (BaulDirectory *directory,
     g_assert (callback_data != NULL);
 
     merged_callback = callback_data;
-    /*Prevent segfaults on the assert with GTK 3.23*/
+    /*Prevent segfaults on the assert with CTK 3.23*/
     if (merged_callback->non_ready_directories == NULL)
         return;
 

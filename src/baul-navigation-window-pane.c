@@ -55,14 +55,14 @@ real_set_active (BaulWindowPane *pane, gboolean is_active)
     /* path bar */
     for (l = BAUL_PATH_BAR (nav_pane->path_bar)->button_list; l; l = l->next)
     {
-        ctk_widget_set_sensitive (ctk_bin_get_child (GTK_BIN (baul_path_bar_get_button_from_button_list_entry (l->data))), is_active);
+        ctk_widget_set_sensitive (ctk_bin_get_child (CTK_BIN (baul_path_bar_get_button_from_button_list_entry (l->data))), is_active);
     }
 
     /* navigation bar (manual entry) */
     baul_location_bar_set_active (BAUL_LOCATION_BAR (nav_pane->navigation_bar), is_active);
 
     /* location button */
-    ctk_widget_set_sensitive (ctk_bin_get_child (GTK_BIN (nav_pane->location_button)), is_active);
+    ctk_widget_set_sensitive (ctk_bin_get_child (CTK_BIN (nav_pane->location_button)), is_active);
 }
 
 static gboolean
@@ -245,10 +245,10 @@ location_button_create (BaulNavigationWindowPane *pane)
     CtkWidget *image;
     CtkWidget *button;
 
-    image = ctk_image_new_from_icon_name ("ctk-edit", GTK_ICON_SIZE_MENU);
+    image = ctk_image_new_from_icon_name ("ctk-edit", CTK_ICON_SIZE_MENU);
     ctk_widget_show (image);
 
-    button = g_object_new (GTK_TYPE_TOGGLE_BUTTON,
+    button = g_object_new (CTK_TYPE_TOGGLE_BUTTON,
                    "image", image,
                    "focus-on-click", FALSE,
                    "active", location_button_should_be_active (pane),
@@ -374,23 +374,23 @@ notebook_popup_menu_show (BaulNavigationWindowPane *pane,
 
     popup = ctk_menu_new();
 
-    ctk_menu_set_reserve_toggle_size (GTK_MENU (popup), FALSE);
+    ctk_menu_set_reserve_toggle_size (CTK_MENU (popup), FALSE);
 
     item = eel_image_menu_item_new_from_icon (NULL, _("_New Tab"));
     g_signal_connect (item, "activate",
     		  G_CALLBACK (notebook_popup_menu_new_tab_cb),
     		  pane);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup),
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup),
     		       item);
 
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup),
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup),
     		       ctk_separator_menu_item_new ());
 
     item = eel_image_menu_item_new_from_icon (NULL, _("Move Tab _Left"));
     g_signal_connect (item, "activate",
                       G_CALLBACK (notebook_popup_menu_move_left_cb),
                       pane);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup),
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup),
                            item);
     ctk_widget_set_sensitive (item, can_move_left);
 
@@ -398,28 +398,28 @@ notebook_popup_menu_show (BaulNavigationWindowPane *pane,
     g_signal_connect (item, "activate",
                       G_CALLBACK (notebook_popup_menu_move_right_cb),
                       pane);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup),
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup),
                            item);
     ctk_widget_set_sensitive (item, can_move_right);
 
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup),
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup),
                            ctk_separator_menu_item_new ());
 
     item = eel_image_menu_item_new_from_icon ("window-close", _("_Close Tab"));
 
     g_signal_connect (item, "activate",
                       G_CALLBACK (notebook_popup_menu_close_cb), pane);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup),
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup),
                            item);
 
     ctk_widget_show_all (popup);
 
     /* TODO is this correct? */
-    ctk_menu_attach_to_widget (GTK_MENU (popup),
+    ctk_menu_attach_to_widget (CTK_MENU (popup),
                                pane->notebook,
                                NULL);
 
-    ctk_menu_popup_at_pointer (GTK_MENU (popup),
+    ctk_menu_popup_at_pointer (CTK_MENU (popup),
                                (const GdkEvent*) event);
 }
 
@@ -480,7 +480,7 @@ notebook_switch_page_cb (CtkNotebook *notebook,
     BaulWindowSlot *slot;
     CtkWidget *widget;
 
-    widget = ctk_notebook_get_nth_page (GTK_NOTEBOOK (pane->notebook), page_num);
+    widget = ctk_notebook_get_nth_page (CTK_NOTEBOOK (pane->notebook), page_num);
     g_assert (widget != NULL);
 
     /* find slot corresponding to the target page */
@@ -498,7 +498,7 @@ void
 baul_navigation_window_pane_remove_page (BaulNavigationWindowPane *pane, int page_num)
 {
     CtkNotebook *notebook;
-    notebook = GTK_NOTEBOOK (pane->notebook);
+    notebook = CTK_NOTEBOOK (pane->notebook);
 
     g_signal_handlers_block_by_func (notebook,
                                      G_CALLBACK (notebook_switch_page_cb),
@@ -522,7 +522,7 @@ baul_navigation_window_pane_add_slot_in_tab (BaulNavigationWindowPane *pane, Bau
                            slot,
                            (flags & BAUL_WINDOW_OPEN_SLOT_APPEND) != 0 ?
                            -1 :
-                           ctk_notebook_get_current_page (GTK_NOTEBOOK (notebook)) + 1,
+                           ctk_notebook_get_current_page (CTK_NOTEBOOK (notebook)) + 1,
                            FALSE);
     g_signal_handlers_unblock_by_func (notebook,
                                        G_CALLBACK (notebook_switch_page_cb),
@@ -644,7 +644,7 @@ baul_navigation_window_pane_always_use_location_entry (BaulNavigationWindowPane 
     g_signal_handlers_block_by_func (pane->location_button,
                                      G_CALLBACK (location_button_toggled_cb),
                                      pane);
-    ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pane->location_button), use_entry);
+    ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (pane->location_button), use_entry);
     g_signal_handlers_unblock_by_func (pane->location_button,
                                        G_CALLBACK (location_button_toggled_cb),
                                        pane);
@@ -657,12 +657,12 @@ baul_navigation_window_pane_setup (BaulNavigationWindowPane *pane)
     BaulEntry *entry;
     CtkSizeGroup *header_size_group;
 
-    pane->widget = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    pane->widget = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
 
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 12);
     pane->location_bar = hbox;
-    ctk_container_set_border_width (GTK_CONTAINER (hbox), 4);
-    ctk_box_pack_start (GTK_BOX (pane->widget), hbox,
+    ctk_container_set_border_width (CTK_CONTAINER (hbox), 4);
+    ctk_box_pack_start (CTK_BOX (pane->widget), hbox,
                         FALSE, FALSE, 0);
     ctk_widget_show (hbox);
 
@@ -671,7 +671,7 @@ baul_navigation_window_pane_setup (BaulNavigationWindowPane *pane)
     ctk_size_group_add_widget (header_size_group, pane->location_bar);
 
     pane->location_button = location_button_create (pane);
-    ctk_box_pack_start (GTK_BOX (hbox), pane->location_button, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), pane->location_button, FALSE, FALSE, 0);
     ctk_widget_show (pane->location_button);
 
     pane->path_bar = g_object_new (BAUL_TYPE_PATH_BAR, NULL);
@@ -683,7 +683,7 @@ baul_navigation_window_pane_setup (BaulNavigationWindowPane *pane)
     g_signal_connect_object (pane->path_bar, "path-event",
                              G_CALLBACK (path_bar_path_event_callback), pane, 0);
 
-    ctk_box_pack_start (GTK_BOX (hbox),
+    ctk_box_pack_start (CTK_BOX (hbox),
                         pane->path_bar,
                         TRUE, TRUE, 0);
 
@@ -696,7 +696,7 @@ baul_navigation_window_pane_setup (BaulNavigationWindowPane *pane)
     g_signal_connect (entry, "focus-in-event",
                       G_CALLBACK (navigation_bar_focus_in_callback), pane);
 
-    ctk_box_pack_start (GTK_BOX (hbox),
+    ctk_box_pack_start (CTK_BOX (hbox),
                         pane->navigation_bar,
                         TRUE, TRUE, 0);
 
@@ -707,12 +707,12 @@ baul_navigation_window_pane_setup (BaulNavigationWindowPane *pane)
                              G_CALLBACK (search_bar_cancel_callback), pane, 0);
     g_signal_connect_object (pane->search_bar, "focus-in",
                              G_CALLBACK (search_bar_focus_in_callback), pane, 0);
-    ctk_box_pack_start (GTK_BOX (hbox),
+    ctk_box_pack_start (CTK_BOX (hbox),
                         pane->search_bar,
                         TRUE, TRUE, 0);
 
     pane->notebook = g_object_new (BAUL_TYPE_NOTEBOOK, NULL);
-    ctk_box_pack_start (GTK_BOX (pane->widget), pane->notebook,
+    ctk_box_pack_start (CTK_BOX (pane->widget), pane->notebook,
                         TRUE, TRUE, 0);
     g_signal_connect (pane->notebook,
                       "tab-close-request",
@@ -730,10 +730,10 @@ baul_navigation_window_pane_setup (BaulNavigationWindowPane *pane)
                       G_CALLBACK (notebook_switch_page_cb),
                       pane);
 
-    ctk_notebook_set_show_tabs (GTK_NOTEBOOK (pane->notebook), FALSE);
-    ctk_notebook_set_show_border (GTK_NOTEBOOK (pane->notebook), FALSE);
+    ctk_notebook_set_show_tabs (CTK_NOTEBOOK (pane->notebook), FALSE);
+    ctk_notebook_set_show_border (CTK_NOTEBOOK (pane->notebook), FALSE);
     ctk_widget_show (pane->notebook);
-    ctk_container_set_border_width (GTK_CONTAINER (pane->notebook), 0);
+    ctk_container_set_border_width (CTK_CONTAINER (pane->notebook), 0);
 
     /* Ensure that the view has some minimal size and that other parts
      * of the UI (like location bar and tabs) don't request more and
@@ -813,7 +813,7 @@ baul_navigation_window_pane_set_bar_mode (BaulNavigationWindowPane *pane,
         g_signal_handlers_block_by_func (pane->location_button,
                          G_CALLBACK (location_button_toggled_cb),
                          pane);
-        ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pane->location_button),
+        ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (pane->location_button),
                           use_entry);
         g_signal_handlers_unblock_by_func (pane->location_button,
                            G_CALLBACK (location_button_toggled_cb),
@@ -821,7 +821,7 @@ baul_navigation_window_pane_set_bar_mode (BaulNavigationWindowPane *pane,
     }
 
     window = BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window);
-    focus_widget = ctk_window_get_focus (GTK_WINDOW (window));
+    focus_widget = ctk_window_get_focus (CTK_WINDOW (window));
     if (focus_widget != NULL && !baul_navigation_window_is_in_temporary_navigation_bar (focus_widget, window) &&
             !baul_navigation_window_is_in_temporary_search_bar (focus_widget, window))
     {

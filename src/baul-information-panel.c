@@ -201,7 +201,7 @@ baul_information_panel_class_init (BaulInformationPanelClass *klass)
     GObjectClass *gobject_class;
 
     gobject_class = G_OBJECT_CLASS (klass);
-    widget_class = GTK_WIDGET_CLASS (klass);
+    widget_class = CTK_WIDGET_CLASS (klass);
 
     gobject_class->finalize = baul_information_panel_finalize;
 
@@ -225,15 +225,15 @@ baul_information_panel_class_init (BaulInformationPanelClass *klass)
 static void
 make_button_box (BaulInformationPanel *information_panel)
 {
-    information_panel->details->button_box_centerer = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    information_panel->details->button_box_centerer = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 0);
 
-    ctk_box_pack_start (GTK_BOX (information_panel->details->container),
+    ctk_box_pack_start (CTK_BOX (information_panel->details->container),
                         information_panel->details->button_box_centerer, TRUE, TRUE, 0);
 
     information_panel->details->button_box = baul_keep_last_vertical_box_new (4);
-    ctk_container_set_border_width (GTK_CONTAINER (information_panel->details->button_box), 8);
+    ctk_container_set_border_width (CTK_CONTAINER (information_panel->details->button_box), 8);
     ctk_widget_show (information_panel->details->button_box);
-    ctk_box_pack_start (GTK_BOX (information_panel->details->button_box_centerer),
+    ctk_box_pack_start (CTK_BOX (information_panel->details->button_box_centerer),
                         information_panel->details->button_box,
                         TRUE, TRUE, 0);
     information_panel->details->has_buttons = FALSE;
@@ -250,20 +250,20 @@ baul_information_panel_init (BaulInformationPanel *information_panel)
     baul_information_panel_read_defaults (information_panel);
 
     /* enable mouse tracking */
-    ctk_widget_add_events (GTK_WIDGET (information_panel), GDK_POINTER_MOTION_MASK);
+    ctk_widget_add_events (CTK_WIDGET (information_panel), GDK_POINTER_MOTION_MASK);
 
     /* create the container box */
-    information_panel->details->container = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    ctk_container_set_border_width (GTK_CONTAINER (information_panel->details->container), 0);
+    information_panel->details->container = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
+    ctk_container_set_border_width (CTK_CONTAINER (information_panel->details->container), 0);
     ctk_widget_show (information_panel->details->container);
-    ctk_container_add (GTK_CONTAINER (information_panel),
+    ctk_container_add (CTK_CONTAINER (information_panel),
                        information_panel->details->container);
 
     /* allocate and install the index title widget */
     information_panel->details->title = BAUL_SIDEBAR_TITLE (baul_sidebar_title_new ());
-    ctk_widget_show (GTK_WIDGET (information_panel->details->title));
-    ctk_box_pack_start (GTK_BOX (information_panel->details->container),
-                        GTK_WIDGET (information_panel->details->title),
+    ctk_widget_show (CTK_WIDGET (information_panel->details->title));
+    ctk_box_pack_start (CTK_BOX (information_panel->details->container),
+                        CTK_WIDGET (information_panel->details->title),
                         FALSE, FALSE, 8);
 
     /* allocate and install the command button container */
@@ -284,8 +284,8 @@ baul_information_panel_init (BaulInformationPanel *information_panel)
               information_panel);
 
     /* prepare ourselves to receive dropped objects */
-    ctk_drag_dest_set (GTK_WIDGET (information_panel),
-                       GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_DROP,
+    ctk_drag_dest_set (CTK_WIDGET (information_panel),
+                       CTK_DEST_DEFAULT_MOTION | CTK_DEST_DEFAULT_HIGHLIGHT | CTK_DEST_DEFAULT_DROP,
                        target_table, G_N_ELEMENTS (target_table),
                        GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_ASK);
 }
@@ -336,7 +336,7 @@ information_panel_has_background (BaulInformationPanel *information_panel)
     char *color;
     char *image;
 
-    background = eel_get_widget_background (GTK_WIDGET(information_panel));
+    background = eel_get_widget_background (CTK_WIDGET(information_panel));
 
     color = eel_background_get_color (background);
     image = eel_background_get_image_uri (background);
@@ -353,13 +353,13 @@ baul_information_panel_create_context_menu (BaulInformationPanel *information_pa
     CtkWidget *menu, *menu_item;
 
     menu = ctk_menu_new ();
-    ctk_menu_set_screen (GTK_MENU (menu),
-                         ctk_widget_get_screen (GTK_WIDGET (information_panel)));
+    ctk_menu_set_screen (CTK_MENU (menu),
+                         ctk_widget_get_screen (CTK_WIDGET (information_panel)));
 
     /* add the reset background item, possibly disabled */
     menu_item = ctk_menu_item_new_with_mnemonic (_("Use _Default Background"));
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (menu), menu_item);
     ctk_widget_set_sensitive (menu_item, information_panel_has_background (information_panel));
     g_signal_connect_object (menu_item, "activate",
                              G_CALLBACK (reset_background_callback), information_panel, 0);
@@ -417,7 +417,7 @@ baul_information_panel_theme_changed (GSettings   *settings,
     information_panel = BAUL_INFORMATION_PANEL (user_data);
     baul_information_panel_read_defaults (information_panel);
     baul_information_panel_update_appearance (information_panel);
-    ctk_widget_queue_draw (GTK_WIDGET (information_panel)) ;
+    ctk_widget_queue_draw (CTK_WIDGET (information_panel)) ;
 }
 
 /* hit testing */
@@ -435,7 +435,7 @@ hit_test (BaulInformationPanel *information_panel,
     }
 
     allocation = g_new0 (CtkAllocation, 1);
-    ctk_widget_get_allocation (GTK_WIDGET (information_panel), allocation);
+    ctk_widget_get_allocation (CTK_WIDGET (information_panel), allocation);
 
     bg_hit = allocation != NULL
              && x >= allocation->x && y >= allocation->y
@@ -487,7 +487,7 @@ receive_dropped_uri_list (BaulInformationPanel *information_panel,
 
     uris = g_uri_list_extract_uris ((gchar *) ctk_selection_data_get_data (selection_data));
     exactly_one = uris[0] != NULL && (uris[1] == NULL || uris[1][0] == '\0');
-    window = GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (information_panel)));
+    window = CTK_WINDOW (ctk_widget_get_toplevel (CTK_WIDGET (information_panel)));
 
     switch (hit_test (information_panel, x, y))
     {
@@ -500,7 +500,7 @@ receive_dropped_uri_list (BaulInformationPanel *information_panel,
         {
             if (action == GDK_ACTION_ASK)
             {
-                action = baul_drag_drop_background_ask (GTK_WIDGET (information_panel),
+                action = baul_drag_drop_background_ask (CTK_WIDGET (information_panel),
                              BAUL_DND_ACTION_SET_AS_BACKGROUND | BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND);
             }
 
@@ -508,7 +508,7 @@ receive_dropped_uri_list (BaulInformationPanel *information_panel,
             {
                 EelBackground *background;
 
-                background = eel_get_widget_background (GTK_WIDGET (information_panel));
+                background = eel_get_widget_background (CTK_WIDGET (information_panel));
                 eel_background_set_dropped_image (background, action, uris[0]);
             }
         }
@@ -600,7 +600,7 @@ receive_dropped_color (BaulInformationPanel *information_panel,
     case BACKGROUND_PART:
         if (action == GDK_ACTION_ASK)
         {
-            action = baul_drag_drop_background_ask (GTK_WIDGET (information_panel),
+            action = baul_drag_drop_background_ask (CTK_WIDGET (information_panel),
                          BAUL_DND_ACTION_SET_AS_BACKGROUND | BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND);
         }
 
@@ -608,8 +608,8 @@ receive_dropped_color (BaulInformationPanel *information_panel,
         {
             EelBackground *background;
 
-            background = eel_get_widget_background (GTK_WIDGET (information_panel));
-            eel_background_set_dropped_color (background, GTK_WIDGET (information_panel),
+            background = eel_get_widget_background (CTK_WIDGET (information_panel));
+            eel_background_set_dropped_color (background, CTK_WIDGET (information_panel),
                                               action, x, y, selection_data);
         }
 
@@ -661,7 +661,7 @@ baul_information_panel_drag_data_received (CtkWidget *widget, GdkDragContext *co
                                       gdk_drag_context_get_selected_action (context), x, y, selection_data);
         break;
     case TARGET_BACKGROUND_RESET:
-        background = eel_get_widget_background ( GTK_WIDGET (information_panel));
+        background = eel_get_widget_background ( CTK_WIDGET (information_panel));
         if (background != NULL)
         {
             eel_background_reset (background);
@@ -694,7 +694,7 @@ baul_information_panel_press_event (CtkWidget *widget, GdkEventButton *event)
         CtkWidget *menu;
 
         menu = baul_information_panel_create_context_menu (information_panel);
-        eel_pop_up_context_menu (GTK_MENU(menu),
+        eel_pop_up_context_menu (CTK_MENU(menu),
                                  event);
     }
     return TRUE;
@@ -705,9 +705,9 @@ baul_information_panel_get_window (BaulInformationPanel *information_panel)
 {
     CtkWidget *result;
 
-    result = ctk_widget_get_ancestor (GTK_WIDGET (information_panel), GTK_TYPE_WINDOW);
+    result = ctk_widget_get_ancestor (CTK_WIDGET (information_panel), CTK_TYPE_WINDOW);
 
-    return result == NULL ? NULL : GTK_WINDOW (result);
+    return result == NULL ? NULL : CTK_WINDOW (result);
 }
 
 static void
@@ -747,10 +747,10 @@ add_command_button (BaulInformationPanel *information_panel, GAppInfo *applicati
 
     temp_str = g_strdup_printf (_("Open With %s"), g_app_info_get_display_name (application));
     temp_button = ctk_button_new_with_label (temp_str);
-    label = ctk_bin_get_child (GTK_BIN (temp_button));
-    ctk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_START);
+    label = ctk_bin_get_child (CTK_BIN (temp_button));
+    ctk_label_set_ellipsize (CTK_LABEL (label), PANGO_ELLIPSIZE_START);
     g_free (temp_str);
-    ctk_box_pack_start (GTK_BOX (information_panel->details->button_box),
+    ctk_box_pack_start (CTK_BOX (information_panel->details->button_box),
                         temp_button,
                         FALSE, FALSE,
                         0);
@@ -804,7 +804,7 @@ add_buttons_from_metadata (BaulInformationPanel *information_panel, const char *
                 if (button_name != NULL)
                 {
                     temp_button = ctk_button_new_with_label (button_name);
-                    ctk_box_pack_start (GTK_BOX (information_panel->details->button_box),
+                    ctk_box_pack_start (CTK_BOX (information_panel->details->button_box),
                                         temp_button,
                                         FALSE, FALSE,
                                         0);
@@ -843,7 +843,7 @@ baul_information_panel_update_buttons (BaulInformationPanel *information_panel)
     /* dispose of any existing buttons */
     if (information_panel->details->has_buttons)
     {
-        ctk_container_remove (GTK_CONTAINER (information_panel->details->container),
+        ctk_container_remove (CTK_CONTAINER (information_panel->details->container),
                               information_panel->details->button_box_centerer);
         make_button_box (information_panel);
     }
@@ -876,8 +876,8 @@ baul_information_panel_update_buttons (BaulInformationPanel *information_panel)
 static void
 baul_information_panel_update_appearance (BaulInformationPanel *information_panel)
 {
-    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (information_panel)),
-                                 GTK_STYLE_CLASS_VIEW);
+    ctk_style_context_add_class (ctk_widget_get_style_context (CTK_WIDGET (information_panel)),
+                                 CTK_STYLE_CLASS_VIEW);
 }
 
 static void

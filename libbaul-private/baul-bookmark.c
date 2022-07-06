@@ -592,7 +592,7 @@ create_image_cairo_for_bookmark (BaulBookmark *bookmark)
 {
     cairo_surface_t *surface;
 
-    surface = baul_bookmark_get_surface (bookmark, GTK_ICON_SIZE_MENU);
+    surface = baul_bookmark_get_surface (bookmark, CTK_ICON_SIZE_MENU);
     if (surface == NULL)
     {
         return NULL;
@@ -609,7 +609,7 @@ bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
     CtkLabel *label;
     gchar *concat;
 
-    CtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    CtkWidget *box = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
 
     if (icon_surface)
         icon = ctk_image_new_from_surface (icon_surface);
@@ -620,17 +620,17 @@ bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
     CtkWidget *label_menu = ctk_label_new (concat);
     g_free (concat);
 
-    label = GTK_LABEL (label_menu);
+    label = CTK_LABEL (label_menu);
     ctk_label_set_use_underline (label, FALSE);
     ctk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
     ctk_label_set_max_width_chars (label, (ELLIPSISED_MENU_ITEM_MIN_CHARS + 2));
 
     CtkWidget *menuitem = ctk_menu_item_new ();
 
-    ctk_container_add (GTK_CONTAINER (box), icon);
-    ctk_container_add (GTK_CONTAINER (box), label_menu);
+    ctk_container_add (CTK_CONTAINER (box), icon);
+    ctk_container_add (CTK_CONTAINER (box), label_menu);
 
-    ctk_container_add (GTK_CONTAINER (menuitem), box);
+    ctk_container_add (CTK_CONTAINER (menuitem), box);
     ctk_widget_show_all (menuitem);
 
     return menuitem;

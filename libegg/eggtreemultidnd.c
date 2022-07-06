@@ -254,14 +254,14 @@ egg_tree_multi_drag_drag_data_get (CtkWidget        *widget,
     TreeViewDragInfo *di;
     GList *path_list;
 
-    tree_view = GTK_TREE_VIEW (widget);
+    tree_view = CTK_TREE_VIEW (widget);
 
     model = ctk_tree_view_get_model (tree_view);
 
     if (model == NULL)
         return;
 
-    di = get_info (GTK_TREE_VIEW (widget));
+    di = get_info (CTK_TREE_VIEW (widget));
 
     if (di == NULL)
         return;
@@ -271,7 +271,7 @@ egg_tree_multi_drag_drag_data_get (CtkWidget        *widget,
     if (path_list == NULL)
         return;
 
-    /* We can implement the GTK_TREE_MODEL_ROW target generically for
+    /* We can implement the CTK_TREE_MODEL_ROW target generically for
      * any model; for DragSource models there are some other targets
      * we also support.
      */
@@ -304,16 +304,16 @@ egg_tree_multi_drag_motion_event (CtkWidget      *widget,
         CtkTreeModel *model;
         TreeViewDragInfo *di;
 
-        di = get_info (GTK_TREE_VIEW (widget));
+        di = get_info (CTK_TREE_VIEW (widget));
 
         if (di == NULL)
             return FALSE;
 
-        selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+        selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (widget));
         stop_drag_check (widget);
         ctk_tree_selection_selected_foreach (selection, selection_foreach, &path_list);
         path_list = g_list_reverse (path_list);
-        model = ctk_tree_view_get_model (GTK_TREE_VIEW (widget));
+        model = ctk_tree_view_get_model (CTK_TREE_VIEW (widget));
         if (egg_tree_multi_drag_source_row_draggable (EGG_TREE_MULTI_DRAG_SOURCE (model), path_list))
         {
             GdkDragContext *context;
@@ -350,7 +350,7 @@ egg_tree_multi_drag_button_press_event (CtkWidget      *widget,
     CtkTreeSelection *selection;
     EggTreeMultiDndData *priv_data;
 
-    tree_view = GTK_TREE_VIEW (widget);
+    tree_view = CTK_TREE_VIEW (widget);
     priv_data = g_object_get_data (G_OBJECT (tree_view), EGG_TREE_MULTI_DND_STRING);
     if (priv_data == NULL)
     {
@@ -411,7 +411,7 @@ egg_tree_multi_drag_button_press_event (CtkWidget      *widget,
 void
 egg_tree_multi_drag_add_drag_support (CtkTreeView *tree_view)
 {
-    g_return_if_fail (GTK_IS_TREE_VIEW (tree_view));
+    g_return_if_fail (CTK_IS_TREE_VIEW (tree_view));
     g_signal_connect (G_OBJECT (tree_view), "button_press_event", G_CALLBACK (egg_tree_multi_drag_button_press_event), NULL);
 }
 

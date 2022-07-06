@@ -38,7 +38,7 @@ struct _BaulConnectServerOperationPrivate {
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (BaulConnectServerOperation,
-	       baul_connect_server_operation, GTK_TYPE_MOUNT_OPERATION);
+	       baul_connect_server_operation, CTK_TYPE_MOUNT_OPERATION);
 
 static void
 fill_details_async_cb (GObject *source,

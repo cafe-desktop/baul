@@ -117,7 +117,7 @@ create_selection_shadow (BaulIconContainer *container,
     }
 
     canvas = EEL_CANVAS (container);
-    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (CTK_WIDGET (container), &allocation);
 
     /* Creating a big set of rectangles in the canvas can be expensive, so
            we try to be smart and only create the maximum number of rectangles
@@ -202,8 +202,8 @@ canvas_rect_world_to_widget (EelCanvas *canvas,
     EelDRect window_rect;
     CtkAdjustment *hadj, *vadj;
 
-    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
-    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
+    hadj = ctk_scrollable_get_hadjustment (CTK_SCROLLABLE (canvas));
+    vadj = ctk_scrollable_get_vadjustment (CTK_SCROLLABLE (canvas));
 
     eel_canvas_world_to_window (canvas,
                                 world_rect->x0, world_rect->y0,
@@ -223,8 +223,8 @@ canvas_widget_to_world (EelCanvas *canvas,
                         double *world_x, double *world_y)
 {
     eel_canvas_window_to_world (canvas,
-    			    widget_x + ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas))),
-    			    widget_y + ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas))),
+    			    widget_x + ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (CTK_SCROLLABLE (canvas))),
+    			    widget_y + ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (CTK_SCROLLABLE (canvas))),
                                 world_x, world_y);
 }
 
@@ -524,7 +524,7 @@ get_data_on_first_target_we_support (CtkWidget *widget, GdkDragContext *context,
             {
                 set_direct_save_uri (widget, context, drag_info, x, y);
             }
-            ctk_drag_get_data (GTK_WIDGET (widget), context,
+            ctk_drag_get_data (CTK_WIDGET (widget), context,
                                target, time);
         }
     }
@@ -541,7 +541,7 @@ baul_icon_container_ensure_drag_data (BaulIconContainer *container,
 
     if (!dnd_info->drag_info.got_drop_data_type)
     {
-        get_data_on_first_target_we_support (GTK_WIDGET (container), context, time, 0, 0);
+        get_data_on_first_target_we_support (CTK_WIDGET (container), context, time, 0, 0);
     }
 }
 
@@ -653,13 +653,13 @@ get_background_drag_action (BaulIconContainer *container,
     if (action == GDK_ACTION_ASK)
     {
         valid_actions = BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND;
-        if (!eel_background_is_desktop (eel_get_widget_background (GTK_WIDGET (container))))
+        if (!eel_background_is_desktop (eel_get_widget_background (CTK_WIDGET (container))))
         {
             valid_actions |= BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND;
         }
 
         action = baul_drag_drop_background_ask
-                 (GTK_WIDGET (container), valid_actions);
+                 (CTK_WIDGET (container), valid_actions);
     }
 
     return action;
@@ -682,8 +682,8 @@ receive_dropped_color (BaulIconContainer *container,
                         "dropped color on icon container displaying %s", uri);
         g_free (uri);
 
-        eel_background_set_dropped_color (eel_get_widget_background (GTK_WIDGET (container)),
-        				  GTK_WIDGET (container),
+        eel_background_set_dropped_color (eel_get_widget_background (CTK_WIDGET (container)),
+        				  CTK_WIDGET (container),
         				  action, x, y, data);
     }
 }
@@ -705,7 +705,7 @@ receive_dropped_tile_image (BaulIconContainer *container, GdkDragAction action, 
                         "dropped tile image on icon container displaying %s", uri);
         g_free (uri);
 
-        eel_background_set_dropped_image (eel_get_widget_background (GTK_WIDGET (container)),
+        eel_background_set_dropped_image (eel_get_widget_background (CTK_WIDGET (container)),
                                           action, ctk_selection_data_get_data (data));
     }
 }
@@ -852,7 +852,7 @@ auto_scroll_timeout_callback (gpointer data)
     CtkAllocation allocation;
 
     g_assert (BAUL_IS_ICON_CONTAINER (data));
-    widget = GTK_WIDGET (data);
+    widget = CTK_WIDGET (data);
     container = BAUL_ICON_CONTAINER (widget);
 
     if (container->details->dnd_info->drag_info.waiting_to_autoscroll
@@ -934,7 +934,7 @@ static void
 set_up_auto_scroll_if_needed (BaulIconContainer *container)
 {
     baul_drag_autoscroll_start (&container->details->dnd_info->drag_info,
-                                GTK_WIDGET (container),
+                                CTK_WIDGET (container),
                                 auto_scroll_timeout_callback,
                                 container);
 }
@@ -981,7 +981,7 @@ handle_local_move (BaulIconContainer *container,
 
             file = baul_file_get_by_uri (item->uri);
 
-            screen = ctk_widget_get_screen (GTK_WIDGET (container));
+            screen = ctk_widget_get_screen (CTK_WIDGET (container));
             g_snprintf (screen_string, sizeof (screen_string), "%d",
                         gdk_x11_screen_get_screen_number (screen));
             baul_file_set_metadata (file,
@@ -1075,7 +1075,7 @@ handle_nonlocal_move (BaulIconContainer *container,
 
     if (is_rtl)
     {
-        ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+        ctk_widget_get_allocation (CTK_WIDGET (container), &allocation);
         x = CANVAS_WIDTH (container, allocation) - x;
     }
 
@@ -1260,7 +1260,7 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
                 action |= BAUL_DND_ACTION_SET_AS_BACKGROUND;
             }
         }
-        real_action = baul_drag_drop_action_ask (GTK_WIDGET (container), action);
+        real_action = baul_drag_drop_action_ask (CTK_WIDGET (container), action);
     }
 
     if (real_action == (GdkDragAction) BAUL_DND_ACTION_SET_AS_BACKGROUND)
@@ -1268,7 +1268,7 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
         BaulDragSelectionItem *selected_item;
 
         selected_item = container->details->dnd_info->drag_info.selection_list->data;
-        eel_background_set_dropped_image (eel_get_widget_background (GTK_WIDGET (container)),
+        eel_background_set_dropped_image (eel_get_widget_background (CTK_WIDGET (container)),
                                           real_action, selected_item->uri);
         return;
     }
@@ -1276,8 +1276,8 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
     if (real_action > 0)
     {
         eel_canvas_window_to_world (EEL_CANVAS (container),
-    				    x + ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container))),
-    				    y + ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container))),
+    				    x + ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (CTK_SCROLLABLE (container))),
+    				    y + ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (CTK_SCROLLABLE (container))),
                                     &world_x, &world_y);
 
         drop_target = baul_icon_container_find_drop_target (container,
@@ -1514,9 +1514,9 @@ drag_begin_callback (CtkWidget      *widget,
     container = BAUL_ICON_CONTAINER (widget);
 
     start_x = container->details->dnd_info->drag_info.start_x +
-    	ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
+    	ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (CTK_SCROLLABLE (container)));
     start_y = container->details->dnd_info->drag_info.start_y +
-    	ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
+    	ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (CTK_SCROLLABLE (container)));
 
     /* create a pixmap and mask to drag with */
     surface = baul_icon_canvas_item_get_drag_surface (container->details->drag_icon->item);
@@ -1554,12 +1554,12 @@ baul_icon_dnd_begin_drag (BaulIconContainer *container,
            the way the canvas handles events.
     */
     dnd_info->drag_info.start_x = start_x -
-    	ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
+    	ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (CTK_SCROLLABLE (container)));
     dnd_info->drag_info.start_y = start_y -
-    	ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
+    	ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (CTK_SCROLLABLE (container)));
 
     /* start the drag */
-    ctk_drag_begin_with_coordinates (GTK_WIDGET (container),
+    ctk_drag_begin_with_coordinates (CTK_WIDGET (container),
                                     dnd_info->drag_info.target_list,
                                     actions,
                                     button,
@@ -1584,8 +1584,8 @@ drag_highlight_draw (CtkWidget *widget,
     style = ctk_widget_get_style_context (widget);
 
     ctk_style_context_save (style);
-    ctk_style_context_add_class (style, GTK_STYLE_CLASS_DND);
-    ctk_style_context_set_state (style, GTK_STATE_FLAG_FOCUSED);
+    ctk_style_context_add_class (style, CTK_STYLE_CLASS_DND);
+    ctk_style_context_set_state (style, CTK_STATE_FLAG_FOCUSED);
 
     ctk_render_frame (style,
                       cr,
@@ -1958,12 +1958,12 @@ baul_icon_dnd_init (BaulIconContainer *container)
         /* Don't set up rootwindow drop */
         n_elements -= 1;
     }
-    ctk_drag_dest_set (GTK_WIDGET (container),
+    ctk_drag_dest_set (CTK_WIDGET (container),
                        0,
                        drop_types, n_elements,
                        GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
-    targets = ctk_drag_dest_get_target_list (GTK_WIDGET (container));
+    targets = ctk_drag_dest_get_target_list (CTK_WIDGET (container));
     ctk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);
 
 

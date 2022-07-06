@@ -23,8 +23,8 @@
    Authors: Ramiro Estrugo <ramiro@eazel.com>
 */
 
-#ifndef EEL_GTK_CONTAINER_H
-#define EEL_GTK_CONTAINER_H
+#ifndef EEL_CTK_CONTAINER_H
+#define EEL_CTK_CONTAINER_H
 
 #include <ctk/ctk.h>
 #include "eel-art-extensions.h"
@@ -45,4 +45,4 @@ void eel_ctk_container_child_size_allocate (CtkContainer *container,
         CtkWidget *child,
         EelIRect child_geometry);
 
-#endif /* EEL_GTK_CONTAINER_H */
+#endif /* EEL_CTK_CONTAINER_H */

@@ -70,12 +70,12 @@ static gboolean      wrap_table_child_focus_in           (CtkWidget           *w
 static void          wrap_table_layout                   (EelWrapTable        *wrap_table);
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (EelWrapTable, eel_wrap_table, GTK_TYPE_CONTAINER)
+G_DEFINE_TYPE_WITH_PRIVATE (EelWrapTable, eel_wrap_table, CTK_TYPE_CONTAINER)
 
 static void
 eel_wrap_table_init (EelWrapTable *wrap_table)
 {
-    ctk_widget_set_has_window (GTK_WIDGET (wrap_table), FALSE);
+    ctk_widget_set_has_window (CTK_WIDGET (wrap_table), FALSE);
 
     wrap_table->details = eel_wrap_table_get_instance_private (wrap_table);
     wrap_table->details->x_justification = EEL_JUSTIFICATION_BEGINNING;
@@ -192,7 +192,7 @@ eel_wrap_table_size_request (CtkWidget *widget,
 
     /* The -1 tells Satan to use as much space as is available */
     requisition->width = -1;
-    requisition->height = content_dimensions.height + ctk_container_get_border_width (GTK_CONTAINER (widget)) * 2;
+    requisition->height = content_dimensions.height + ctk_container_get_border_width (CTK_CONTAINER (widget)) * 2;
 }
 
 static void
@@ -245,15 +245,15 @@ eel_wrap_table_draw (CtkWidget *widget,
 
     for (iterator = wrap_table->details->children; iterator; iterator = iterator->next)
     {
-        g_assert (GTK_IS_WIDGET (iterator->data));
-        ctk_container_propagate_draw (GTK_CONTAINER (widget),
-                                      GTK_WIDGET (iterator->data),
+        g_assert (CTK_IS_WIDGET (iterator->data));
+        ctk_container_propagate_draw (CTK_CONTAINER (widget),
+                                      CTK_WIDGET (iterator->data),
                                       cr);
     }
 
     /*Redraw the table once and only once to ensure it is displayed */
     if (wrap_table->details->drawn == FALSE){
-        ctk_widget_queue_allocate (GTK_WIDGET(widget));
+        ctk_widget_queue_allocate (CTK_WIDGET(widget));
         wrap_table->details->drawn = TRUE;
         }
     return FALSE;
@@ -314,7 +314,7 @@ eel_wrap_table_realize (CtkWidget *widget)
 {
     g_assert (EEL_IS_WRAP_TABLE (widget));
 
-    GTK_WIDGET_CLASS (eel_wrap_table_parent_class)->realize (widget);
+    CTK_WIDGET_CLASS (eel_wrap_table_parent_class)->realize (widget);
 
     ctk_widget_queue_resize (widget);
 }
@@ -329,12 +329,12 @@ eel_wrap_table_add (CtkContainer *container,
 
     g_assert (container != NULL);
     g_assert (EEL_IS_WRAP_TABLE (container));
-    g_assert (GTK_IS_WIDGET (child));
+    g_assert (CTK_IS_WIDGET (child));
 
-    widget = GTK_WIDGET (container);
+    widget = CTK_WIDGET (container);
     wrap_table = EEL_WRAP_TABLE (container);
 
-    ctk_widget_set_parent (child, GTK_WIDGET (container));
+    ctk_widget_set_parent (child, CTK_WIDGET (container));
 
     wrap_table->details->children = g_list_append (wrap_table->details->children, child);
 
@@ -369,7 +369,7 @@ eel_wrap_table_remove (CtkContainer *container,
     gboolean child_was_visible;
 
     g_assert (EEL_IS_WRAP_TABLE (container));
-    g_assert (GTK_IS_WIDGET (child));
+    g_assert (CTK_IS_WIDGET (child));
 
     wrap_table = EEL_WRAP_TABLE (container);;
 
@@ -379,7 +379,7 @@ eel_wrap_table_remove (CtkContainer *container,
 
     if (child_was_visible)
     {
-        ctk_widget_queue_resize (GTK_WIDGET (container));
+        ctk_widget_queue_resize (CTK_WIDGET (container));
     }
 
     if (wrap_table->details->is_scrolled)
@@ -408,16 +408,16 @@ eel_wrap_table_forall (CtkContainer *container,
 
     for (node = wrap_table->details->children; node != NULL; node = next)
     {
-        g_assert (GTK_IS_WIDGET (node->data));
+        g_assert (CTK_IS_WIDGET (node->data));
         next = node->next;
-        (* callback) (GTK_WIDGET (node->data), callback_data);
+        (* callback) (CTK_WIDGET (node->data), callback_data);
     }
 }
 
 static GType
 eel_wrap_table_child_type (CtkContainer   *container)
 {
-    return GTK_TYPE_WIDGET;
+    return CTK_TYPE_WIDGET;
 }
 
 /* Class init methods */
@@ -425,8 +425,8 @@ static void
 eel_wrap_table_class_init (EelWrapTableClass *wrap_table_class)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS (wrap_table_class);
-    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (wrap_table_class);
-    CtkContainerClass *container_class = GTK_CONTAINER_CLASS (wrap_table_class);
+    CtkWidgetClass *widget_class = CTK_WIDGET_CLASS (wrap_table_class);
+    CtkContainerClass *container_class = CTK_CONTAINER_CLASS (wrap_table_class);
 
     /* GObjectClass */
     gobject_class->finalize = eel_wrap_table_finalize;
@@ -465,16 +465,16 @@ eel_wrap_table_class_init (EelWrapTableClass *wrap_table_class)
     (gobject_class,
      PROP_X_JUSTIFICATION,
      g_param_spec_enum ("x_justification", NULL, NULL,
-                        GTK_TYPE_JUSTIFICATION,
-                        GTK_JUSTIFY_LEFT,
+                        CTK_TYPE_JUSTIFICATION,
+                        CTK_JUSTIFY_LEFT,
                         G_PARAM_READWRITE));
 
     g_object_class_install_property
     (gobject_class,
      PROP_Y_JUSTIFICATION,
      g_param_spec_enum ("y_justification", NULL, NULL,
-                        GTK_TYPE_JUSTIFICATION,
-                        GTK_JUSTIFY_LEFT,
+                        CTK_TYPE_JUSTIFICATION,
+                        CTK_JUSTIFY_LEFT,
                         G_PARAM_READWRITE));
 
     g_object_class_install_property
@@ -524,15 +524,15 @@ wrap_table_layout (EelWrapTable *wrap_table)
     pos.x = content_bounds.x0;
     pos.y = content_bounds.y0;
 
-    ctk_widget_get_allocation (GTK_WIDGET (wrap_table), &allocation);
+    ctk_widget_get_allocation (CTK_WIDGET (wrap_table), &allocation);
     num_cols = wrap_table_get_num_fitting (allocation.width -
-                                           ctk_container_get_border_width (GTK_CONTAINER (wrap_table)) * 2,
+                                           ctk_container_get_border_width (CTK_CONTAINER (wrap_table)) * 2,
                                            wrap_table->details->x_spacing,
                                            max_child_dimensions.width);
     if (num_cols != wrap_table->details->cols)
     {
         wrap_table->details->cols = num_cols;
-        ctk_widget_queue_resize (GTK_WIDGET (wrap_table));
+        ctk_widget_queue_resize (CTK_WIDGET (wrap_table));
         return;
     }
 
@@ -688,14 +688,14 @@ wrap_table_get_content_dimensions (const EelWrapTable *wrap_table)
         int num_cols;
         int num_rows;
 
-        dimensions = eel_ctk_widget_get_dimensions (GTK_WIDGET (wrap_table));
+        dimensions = eel_ctk_widget_get_dimensions (CTK_WIDGET (wrap_table));
         max_child_dimensions = wrap_table_get_max_child_dimensions (wrap_table);
 
         max_child_dimensions.width = MAX (max_child_dimensions.width, 1);
         max_child_dimensions.height = MAX (max_child_dimensions.height, 1);
 
         num_cols = wrap_table_get_num_fitting (dimensions.width -
-                                               ctk_container_get_border_width (GTK_CONTAINER (wrap_table)) * 2,
+                                               ctk_container_get_border_width (CTK_CONTAINER (wrap_table)) * 2,
                                                wrap_table->details->x_spacing,
                                                max_child_dimensions.width);
         num_rows = num_children / num_cols;
@@ -724,9 +724,9 @@ wrap_table_get_content_bounds (const EelWrapTable *wrap_table)
 
     g_assert (EEL_IS_WRAP_TABLE (wrap_table));
 
-    content_bounds = eel_ctk_widget_get_bounds (GTK_WIDGET (wrap_table));
+    content_bounds = eel_ctk_widget_get_bounds (CTK_WIDGET (wrap_table));
 
-    border = ctk_container_get_border_width (GTK_CONTAINER (wrap_table));
+    border = ctk_container_get_border_width (CTK_CONTAINER (wrap_table));
     content_bounds.x0 += border;
     content_bounds.y0 += border;
     content_bounds.x1 -= border;
@@ -770,15 +770,15 @@ wrap_table_child_focus_in (CtkWidget *widget,
         viewport = ctk_widget_get_parent (container);
     }
     g_assert (container && viewport);
-    g_assert (GTK_IS_VIEWPORT (viewport));
+    g_assert (CTK_IS_VIEWPORT (viewport));
     g_return_val_if_fail (ctk_widget_get_realized (viewport), FALSE);
 
     if (!wrap_table_child_visible_in (widget, viewport))
     {
         CtkAdjustment *hadj, *vadj;
 
-        hadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (viewport));
-        vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (viewport));
+        hadj = ctk_scrollable_get_vadjustment (CTK_SCROLLABLE (viewport));
+        vadj = ctk_scrollable_get_vadjustment (CTK_SCROLLABLE (viewport));
 
         ctk_widget_translate_coordinates (widget, container, 0, 0, &x, &y);
 
@@ -804,7 +804,7 @@ eel_wrap_table_new (gboolean homogeneous)
 
     wrap_table->details->drawn = FALSE;
 
-    return GTK_WIDGET (wrap_table);
+    return CTK_WIDGET (wrap_table);
 }
 
 /**
@@ -826,7 +826,7 @@ eel_wrap_table_set_x_spacing (EelWrapTable *wrap_table,
 
     wrap_table->details->x_spacing = x_spacing;
 
-    ctk_widget_queue_resize (GTK_WIDGET (wrap_table));
+    ctk_widget_queue_resize (CTK_WIDGET (wrap_table));
 }
 
 /**
@@ -862,7 +862,7 @@ eel_wrap_table_set_y_spacing (EelWrapTable *wrap_table,
 
     wrap_table->details->y_spacing = y_spacing;
 
-    ctk_widget_queue_resize (GTK_WIDGET (wrap_table));
+    ctk_widget_queue_resize (CTK_WIDGET (wrap_table));
 }
 
 /**
@@ -939,7 +939,7 @@ eel_wrap_table_set_x_justification (EelWrapTable *wrap_table,
     }
 
     wrap_table->details->x_justification = x_justification;
-    ctk_widget_queue_resize (GTK_WIDGET (wrap_table));
+    ctk_widget_queue_resize (CTK_WIDGET (wrap_table));
 }
 
 /**
@@ -976,7 +976,7 @@ eel_wrap_table_set_y_justification (EelWrapTable *wrap_table,
     }
 
     wrap_table->details->y_justification = y_justification;
-    ctk_widget_queue_resize (GTK_WIDGET (wrap_table));
+    ctk_widget_queue_resize (CTK_WIDGET (wrap_table));
 }
 
 /**
@@ -1007,7 +1007,7 @@ eel_wrap_table_set_homogeneous (EelWrapTable *wrap_table,
         wrap_table->details->homogeneous != homogeneous)
     {
         wrap_table->details->homogeneous = homogeneous;
-        ctk_widget_queue_resize (GTK_WIDGET (wrap_table));
+        ctk_widget_queue_resize (CTK_WIDGET (wrap_table));
     }
 }
 
@@ -1075,7 +1075,7 @@ eel_wrap_table_reorder_child (EelWrapTable *wrap_table,
     wrap_table->details->children = g_list_remove (wrap_table->details->children, child);
     wrap_table->details->children = g_list_insert (wrap_table->details->children, child, position);
 
-    ctk_widget_queue_resize (GTK_WIDGET (wrap_table));
+    ctk_widget_queue_resize (CTK_WIDGET (wrap_table));
 }
 
 /**
@@ -1104,21 +1104,21 @@ eel_scrolled_wrap_table_new (gboolean homogeneous,
     g_return_val_if_fail (wrap_table_out != NULL, NULL);
 
     scrolled_window = ctk_scrolled_window_new (NULL, NULL);
-    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                    GTK_POLICY_NEVER,
-                                    GTK_POLICY_AUTOMATIC);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (scrolled_window), FALSE);
+    ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (scrolled_window),
+                                    CTK_POLICY_NEVER,
+                                    CTK_POLICY_AUTOMATIC);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (scrolled_window), FALSE);
 
-    viewport = ctk_viewport_new (ctk_scrolled_window_get_hadjustment (GTK_SCROLLED_WINDOW (scrolled_window)),
-                                 ctk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolled_window)));
-    ctk_viewport_set_shadow_type (GTK_VIEWPORT (viewport),
+    viewport = ctk_viewport_new (ctk_scrolled_window_get_hadjustment (CTK_SCROLLED_WINDOW (scrolled_window)),
+                                 ctk_scrolled_window_get_vadjustment (CTK_SCROLLED_WINDOW (scrolled_window)));
+    ctk_viewport_set_shadow_type (CTK_VIEWPORT (viewport),
                                   shadow_type);
 
-    ctk_container_add (GTK_CONTAINER (scrolled_window),
+    ctk_container_add (CTK_CONTAINER (scrolled_window),
                        viewport);
 
     wrap_table = eel_wrap_table_new (homogeneous);
-    ctk_container_add (GTK_CONTAINER (viewport),
+    ctk_container_add (CTK_CONTAINER (viewport),
                        wrap_table);
 
     ctk_widget_show (wrap_table);

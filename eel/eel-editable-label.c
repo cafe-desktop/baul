@@ -1,4 +1,4 @@
-/* GTK - The GIMP Toolkit
+/* CTK - The GIMP Toolkit
  * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
  * This library is free software; you can redistribute it and/or
@@ -17,10 +17,10 @@
  */
 
 /*
- * Modified by the GTK+ Team and others 1997-2000.  See the AUTHORS
- * file for a list of people on the GTK+ Team.  See the ChangeLog
+ * Modified by the CTK+ Team and others 1997-2000.  See the AUTHORS
+ * file for a list of people on the CTK+ Team.  See the ChangeLog
  * files for a list of changes.  These files are distributed with
- * GTK+ at ftp://ftp.ctk.org/pub/ctk/.
+ * CTK+ at ftp://ftp.ctk.org/pub/ctk/.
  */
 
 #include <config.h>
@@ -197,9 +197,9 @@ static void     editable_real_set_position    (CtkEditable *editable,
         gint         position);
 static gint     editable_get_position         (CtkEditable *editable);
 
-G_DEFINE_TYPE_WITH_CODE (EelEditableLabel, eel_editable_label, GTK_TYPE_WIDGET,
+G_DEFINE_TYPE_WITH_CODE (EelEditableLabel, eel_editable_label, CTK_TYPE_WIDGET,
 
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE, eel_editable_label_editable_init));
+                         G_IMPLEMENT_INTERFACE (CTK_TYPE_EDITABLE, eel_editable_label_editable_init));
 
 static void
 add_move_binding (CtkBindingSet  *binding_set,
@@ -228,7 +228,7 @@ static void
 eel_editable_label_class_init (EelEditableLabelClass *class)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS (class);
-    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
+    CtkWidgetClass *widget_class = CTK_WIDGET_CLASS (class);
     CtkBindingSet *binding_set;
 
     gobject_class->set_property = eel_editable_label_set_property;
@@ -272,7 +272,7 @@ eel_editable_label_class_init (EelEditableLabelClass *class)
                       G_STRUCT_OFFSET (EelEditableLabelClass, move_cursor),
                       NULL, NULL,
                       eel_marshal_VOID__ENUM_INT_BOOLEAN,
-                      G_TYPE_NONE, 3, GTK_TYPE_MOVEMENT_STEP, G_TYPE_INT, G_TYPE_BOOLEAN);
+                      G_TYPE_NONE, 3, CTK_TYPE_MOVEMENT_STEP, G_TYPE_INT, G_TYPE_BOOLEAN);
 
     signals[COPY_CLIPBOARD] =
         g_signal_new ("copy_clipboard",
@@ -290,7 +290,7 @@ eel_editable_label_class_init (EelEditableLabelClass *class)
                       G_STRUCT_OFFSET (EelEditableLabelClass, populate_popup),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__OBJECT,
-                      G_TYPE_NONE, 1, GTK_TYPE_MENU);
+                      G_TYPE_NONE, 1, CTK_TYPE_MENU);
 
     signals[DELETE_FROM_CURSOR] =
         g_signal_new ("delete_from_cursor",
@@ -299,7 +299,7 @@ eel_editable_label_class_init (EelEditableLabelClass *class)
                       G_STRUCT_OFFSET (EelEditableLabelClass, delete_from_cursor),
                       NULL, NULL,
                       eel_marshal_VOID__ENUM_INT,
-                      G_TYPE_NONE, 2, GTK_TYPE_DELETE_TYPE, G_TYPE_INT);
+                      G_TYPE_NONE, 2, CTK_TYPE_DELETE_TYPE, G_TYPE_INT);
 
     signals[CUT_CLIPBOARD] =
         g_signal_new ("cut_clipboard",
@@ -341,8 +341,8 @@ eel_editable_label_class_init (EelEditableLabelClass *class)
                                      g_param_spec_enum ("justify",
                                              _("Justification"),
                                              _("The alignment of the lines in the text of the label relative to each other. This does NOT affect the alignment of the label within its allocation. See CtkMisc::xalign for that."),
-                                             GTK_TYPE_JUSTIFICATION,
-                                             GTK_JUSTIFY_LEFT,
+                                             CTK_TYPE_JUSTIFICATION,
+                                             CTK_JUSTIFY_LEFT,
                                              G_PARAM_READWRITE));
 
     g_object_class_install_property (gobject_class,
@@ -381,131 +381,131 @@ eel_editable_label_class_init (EelEditableLabelClass *class)
 
     /* Moving the insertion point */
     add_move_binding (binding_set, GDK_KEY_Right, 0,
-                      GTK_MOVEMENT_VISUAL_POSITIONS, 1);
+                      CTK_MOVEMENT_VISUAL_POSITIONS, 1);
 
     add_move_binding (binding_set, GDK_KEY_Left, 0,
-                      GTK_MOVEMENT_VISUAL_POSITIONS, -1);
+                      CTK_MOVEMENT_VISUAL_POSITIONS, -1);
 
     add_move_binding (binding_set, GDK_KEY_KP_Right, 0,
-                      GTK_MOVEMENT_VISUAL_POSITIONS, 1);
+                      CTK_MOVEMENT_VISUAL_POSITIONS, 1);
 
     add_move_binding (binding_set, GDK_KEY_KP_Left, 0,
-                      GTK_MOVEMENT_VISUAL_POSITIONS, -1);
+                      CTK_MOVEMENT_VISUAL_POSITIONS, -1);
 
     add_move_binding (binding_set, GDK_KEY_f, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_LOGICAL_POSITIONS, 1);
+                      CTK_MOVEMENT_LOGICAL_POSITIONS, 1);
 
     add_move_binding (binding_set, GDK_KEY_b, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_LOGICAL_POSITIONS, -1);
+                      CTK_MOVEMENT_LOGICAL_POSITIONS, -1);
 
     add_move_binding (binding_set, GDK_KEY_Right, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_WORDS, 1);
+                      CTK_MOVEMENT_WORDS, 1);
 
     add_move_binding (binding_set, GDK_KEY_Left, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_WORDS, -1);
+                      CTK_MOVEMENT_WORDS, -1);
 
     add_move_binding (binding_set, GDK_KEY_KP_Right, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_WORDS, 1);
+                      CTK_MOVEMENT_WORDS, 1);
 
     add_move_binding (binding_set, GDK_KEY_KP_Left, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_WORDS, -1);
+                      CTK_MOVEMENT_WORDS, -1);
 
     add_move_binding (binding_set, GDK_KEY_a, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_PARAGRAPH_ENDS, -1);
+                      CTK_MOVEMENT_PARAGRAPH_ENDS, -1);
 
     add_move_binding (binding_set, GDK_KEY_e, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_PARAGRAPH_ENDS, 1);
+                      CTK_MOVEMENT_PARAGRAPH_ENDS, 1);
 
     add_move_binding (binding_set, GDK_KEY_f, GDK_MOD1_MASK,
-                      GTK_MOVEMENT_WORDS, 1);
+                      CTK_MOVEMENT_WORDS, 1);
 
     add_move_binding (binding_set, GDK_KEY_b, GDK_MOD1_MASK,
-                      GTK_MOVEMENT_WORDS, -1);
+                      CTK_MOVEMENT_WORDS, -1);
 
     add_move_binding (binding_set, GDK_KEY_Home, 0,
-                      GTK_MOVEMENT_DISPLAY_LINE_ENDS, -1);
+                      CTK_MOVEMENT_DISPLAY_LINE_ENDS, -1);
 
     add_move_binding (binding_set, GDK_KEY_End, 0,
-                      GTK_MOVEMENT_DISPLAY_LINE_ENDS, 1);
+                      CTK_MOVEMENT_DISPLAY_LINE_ENDS, 1);
 
     add_move_binding (binding_set, GDK_KEY_KP_Home, 0,
-                      GTK_MOVEMENT_DISPLAY_LINE_ENDS, -1);
+                      CTK_MOVEMENT_DISPLAY_LINE_ENDS, -1);
 
     add_move_binding (binding_set, GDK_KEY_KP_End, 0,
-                      GTK_MOVEMENT_DISPLAY_LINE_ENDS, 1);
+                      CTK_MOVEMENT_DISPLAY_LINE_ENDS, 1);
 
     add_move_binding (binding_set, GDK_KEY_Home, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_BUFFER_ENDS, -1);
+                      CTK_MOVEMENT_BUFFER_ENDS, -1);
 
     add_move_binding (binding_set, GDK_KEY_End, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_BUFFER_ENDS, 1);
+                      CTK_MOVEMENT_BUFFER_ENDS, 1);
 
     add_move_binding (binding_set, GDK_KEY_KP_Home, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_BUFFER_ENDS, -1);
+                      CTK_MOVEMENT_BUFFER_ENDS, -1);
 
     add_move_binding (binding_set, GDK_KEY_KP_End, GDK_CONTROL_MASK,
-                      GTK_MOVEMENT_BUFFER_ENDS, 1);
+                      CTK_MOVEMENT_BUFFER_ENDS, 1);
 
     add_move_binding (binding_set, GDK_KEY_Up, 0,
-                      GTK_MOVEMENT_DISPLAY_LINES, -1);
+                      CTK_MOVEMENT_DISPLAY_LINES, -1);
 
     add_move_binding (binding_set, GDK_KEY_KP_Up, 0,
-                      GTK_MOVEMENT_DISPLAY_LINES, -1);
+                      CTK_MOVEMENT_DISPLAY_LINES, -1);
 
     add_move_binding (binding_set, GDK_KEY_Down, 0,
-                      GTK_MOVEMENT_DISPLAY_LINES, 1);
+                      CTK_MOVEMENT_DISPLAY_LINES, 1);
 
     add_move_binding (binding_set, GDK_KEY_KP_Down, 0,
-                      GTK_MOVEMENT_DISPLAY_LINES, 1);
+                      CTK_MOVEMENT_DISPLAY_LINES, 1);
 
     /* Select all
      */
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_a, GDK_CONTROL_MASK,
                                   "move_cursor", 3,
-                                  GTK_TYPE_MOVEMENT_STEP, GTK_MOVEMENT_BUFFER_ENDS,
+                                  CTK_TYPE_MOVEMENT_STEP, CTK_MOVEMENT_BUFFER_ENDS,
                                   G_TYPE_INT, -1,
                                   G_TYPE_BOOLEAN, FALSE);
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_a, GDK_CONTROL_MASK,
                                   "move_cursor", 3,
-                                  GTK_TYPE_MOVEMENT_STEP, GTK_MOVEMENT_BUFFER_ENDS,
+                                  CTK_TYPE_MOVEMENT_STEP, CTK_MOVEMENT_BUFFER_ENDS,
                                   G_TYPE_INT, 1,
                                   G_TYPE_BOOLEAN, TRUE);
 
     /* Deleting text */
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_Delete, 0,
                                   "delete_from_cursor", 2,
-                                  G_TYPE_ENUM, GTK_DELETE_CHARS,
+                                  G_TYPE_ENUM, CTK_DELETE_CHARS,
                                   G_TYPE_INT, 1);
 
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Delete, 0,
                                   "delete_from_cursor", 2,
-                                  G_TYPE_ENUM, GTK_DELETE_CHARS,
+                                  G_TYPE_ENUM, CTK_DELETE_CHARS,
                                   G_TYPE_INT, 1);
 
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, 0,
                                   "delete_from_cursor", 2,
-                                  G_TYPE_ENUM, GTK_DELETE_CHARS,
+                                  G_TYPE_ENUM, CTK_DELETE_CHARS,
                                   G_TYPE_INT, -1);
 
     /* Make this do the same as Backspace, to help with mis-typing */
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, GDK_SHIFT_MASK,
                                   "delete_from_cursor", 2,
-                                  G_TYPE_ENUM, GTK_DELETE_CHARS,
+                                  G_TYPE_ENUM, CTK_DELETE_CHARS,
                                   G_TYPE_INT, -1);
 
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_Delete, GDK_CONTROL_MASK,
                                   "delete_from_cursor", 2,
-                                  G_TYPE_ENUM, GTK_DELETE_WORD_ENDS,
+                                  G_TYPE_ENUM, CTK_DELETE_WORD_ENDS,
                                   G_TYPE_INT, 1);
 
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Delete, GDK_CONTROL_MASK,
                                   "delete_from_cursor", 2,
-                                  G_TYPE_ENUM, GTK_DELETE_WORD_ENDS,
+                                  G_TYPE_ENUM, CTK_DELETE_WORD_ENDS,
                                   G_TYPE_INT, 1);
 
     ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, GDK_CONTROL_MASK,
                                   "delete_from_cursor", 2,
-                                  G_TYPE_ENUM, GTK_DELETE_WORD_ENDS,
+                                  G_TYPE_ENUM, CTK_DELETE_WORD_ENDS,
                                   G_TYPE_INT, -1);
 
     /* Cut/copy/paste */
@@ -615,7 +615,7 @@ eel_editable_label_get_property (GObject     *object,
 static void
 eel_editable_label_init (EelEditableLabel *label)
 {
-    label->jtype = GTK_JUSTIFY_LEFT;
+    label->jtype = CTK_JUSTIFY_LEFT;
     label->wrap = FALSE;
     label->wrap_mode = PANGO_WRAP_WORD;
 
@@ -625,10 +625,10 @@ eel_editable_label_init (EelEditableLabel *label)
     label->text[0] = '\0';
     label->n_bytes = 0;
 
-    ctk_widget_set_can_focus (GTK_WIDGET (label), TRUE);
+    ctk_widget_set_can_focus (CTK_WIDGET (label), TRUE);
 
-    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (label)),
-                                 GTK_STYLE_CLASS_ENTRY);
+    ctk_style_context_add_class (ctk_widget_get_style_context (CTK_WIDGET (label)),
+                                 CTK_STYLE_CLASS_ENTRY);
 
     /* This object is completely private. No external entity can gain a reference
     * to it; so we create it here and destroy it in finalize().
@@ -664,7 +664,7 @@ eel_editable_label_new (const gchar *str)
     if (str && *str)
         eel_editable_label_set_text (label, str);
 
-    return GTK_WIDGET (label);
+    return CTK_WIDGET (label);
 }
 
 /**
@@ -690,7 +690,7 @@ eel_editable_label_set_text (EelEditableLabel *label,
     if (strcmp (label->text, str) == 0)
         return;
 
-    editable = GTK_EDITABLE (label);
+    editable = CTK_EDITABLE (label);
     ctk_editable_delete_text (editable, 0, -1);
     tmp_pos = 0;
     ctk_editable_insert_text (editable, str, strlen (str), &tmp_pos);
@@ -720,7 +720,7 @@ const gchar* eel_editable_label_get_text(EelEditableLabel* label)
  * @jtype: a #CtkJustification
  *
  * Sets the alignment of the lines in the text of the label relative to
- * each other.  %GTK_JUSTIFY_LEFT is the default value when the
+ * each other.  %CTK_JUSTIFY_LEFT is the default value when the
  * widget is first created with eel_editable_label_new(). If you instead want
  * to set the alignment of the label as a whole, use
  * ctk_misc_set_alignment() instead. eel_editable_label_set_justify() has no
@@ -731,7 +731,7 @@ eel_editable_label_set_justify (EelEditableLabel        *label,
                                 CtkJustification jtype)
 {
     g_return_if_fail (EEL_IS_EDITABLE_LABEL (label));
-    g_return_if_fail (jtype >= GTK_JUSTIFY_LEFT && jtype <= GTK_JUSTIFY_FILL);
+    g_return_if_fail (jtype >= CTK_JUSTIFY_LEFT && jtype <= CTK_JUSTIFY_FILL);
 
     if ((CtkJustification) label->jtype != jtype)
     {
@@ -741,7 +741,7 @@ eel_editable_label_set_justify (EelEditableLabel        *label,
         eel_editable_label_recompute (label);
 
         g_object_notify (G_OBJECT (label), "justify");
-        ctk_widget_queue_resize (GTK_WIDGET (label));
+        ctk_widget_queue_resize (CTK_WIDGET (label));
     }
 }
 
@@ -771,7 +771,7 @@ eel_editable_label_set_draw_outline (EelEditableLabel *label,
     {
         label->draw_outline = draw_outline;
 
-        ctk_widget_queue_draw (GTK_WIDGET (label));
+        ctk_widget_queue_draw (CTK_WIDGET (label));
     }
 
 }
@@ -799,7 +799,7 @@ eel_editable_label_set_line_wrap (EelEditableLabel *label,
         label->wrap = wrap;
         g_object_notify (G_OBJECT (label), "wrap");
 
-        ctk_widget_queue_resize (GTK_WIDGET (label));
+        ctk_widget_queue_resize (CTK_WIDGET (label));
     }
 }
 
@@ -814,7 +814,7 @@ eel_editable_label_set_line_wrap_mode (EelEditableLabel *label,
     {
         label->wrap_mode = mode;
 
-        ctk_widget_queue_resize (GTK_WIDGET (label));
+        ctk_widget_queue_resize (CTK_WIDGET (label));
     }
 
 }
@@ -926,7 +926,7 @@ static gint
 get_label_wrap_width (EelEditableLabel *label)
 {
     PangoLayout *layout;
-    CtkStyleContext *style = ctk_widget_get_style_context (GTK_WIDGET (label));
+    CtkStyleContext *style = ctk_widget_get_style_context (CTK_WIDGET (label));
     PangoFontDescription *desc;
 
     LabelWrapWidth *wrap_width = g_object_get_data (G_OBJECT (style), "ctk-label-wrap-width");
@@ -937,8 +937,8 @@ get_label_wrap_width (EelEditableLabel *label)
                                 wrap_width, label_wrap_width_free);
     }
 
-    ctk_style_context_get (style, ctk_widget_get_state_flags (GTK_WIDGET (label)),
-                           GTK_STYLE_PROPERTY_FONT, &desc,
+    ctk_style_context_get (style, ctk_widget_get_state_flags (CTK_WIDGET (label)),
+                           CTK_STYLE_PROPERTY_FONT, &desc,
                            NULL);
 
     if (wrap_width->font_desc && pango_font_description_equal (wrap_width->font_desc, desc))
@@ -949,7 +949,7 @@ get_label_wrap_width (EelEditableLabel *label)
 
     wrap_width->font_desc = pango_font_description_copy (desc);
 
-    layout = ctk_widget_create_pango_layout (GTK_WIDGET (label),
+    layout = ctk_widget_create_pango_layout (CTK_WIDGET (label),
              "This long string gives a good enough length for any line to have.");
     pango_layout_get_size (layout, &wrap_width->width, NULL);
     g_object_unref (layout);
@@ -973,7 +973,7 @@ eel_editable_label_ensure_layout (EelEditableLabel *label,
             include_preedit != label->layout_includes_preedit)
         eel_editable_label_clear_layout (label);
 
-    widget = GTK_WIDGET (label);
+    widget = CTK_WIDGET (label);
 
     if (label->layout == NULL)
     {
@@ -1026,16 +1026,16 @@ eel_editable_label_ensure_layout (EelEditableLabel *label,
 
         switch (label->jtype)
         {
-        case GTK_JUSTIFY_LEFT:
+        case CTK_JUSTIFY_LEFT:
             align = PANGO_ALIGN_LEFT;
             break;
-        case GTK_JUSTIFY_RIGHT:
+        case CTK_JUSTIFY_RIGHT:
             align = PANGO_ALIGN_RIGHT;
             break;
-        case GTK_JUSTIFY_CENTER:
+        case CTK_JUSTIFY_CENTER:
             align = PANGO_ALIGN_CENTER;
             break;
-        case GTK_JUSTIFY_FILL:
+        case CTK_JUSTIFY_FILL:
             /* FIXME: This just doesn't work to do this */
             align = PANGO_ALIGN_LEFT;
             pango_layout_set_justify (label->layout, TRUE);
@@ -1146,7 +1146,7 @@ eel_editable_label_size_request (CtkWidget      *widget,
      *
      * Instead of trying to detect changes to these quantities, if we
      * are wrapping, we just rewrap for each size request. Since
-     * size requisitions are cached by the GTK+ core, this is not
+     * size requisitions are cached by the CTK+ core, this is not
      * expensive.
      */
 
@@ -1207,7 +1207,7 @@ static void
 eel_editable_label_size_allocate (CtkWidget     *widget,
                                   CtkAllocation *allocation)
 {
-    (* GTK_WIDGET_CLASS (eel_editable_label_parent_class)->size_allocate) (widget, allocation);
+    (* CTK_WIDGET_CLASS (eel_editable_label_parent_class)->size_allocate) (widget, allocation);
 }
 
 static void
@@ -1222,8 +1222,8 @@ eel_editable_label_state_changed (CtkWidget   *widget,
     if (!ctk_widget_is_sensitive (widget))
         eel_editable_label_select_region (label, 0, 0);
 
-    if (GTK_WIDGET_CLASS (eel_editable_label_parent_class)->state_changed)
-        GTK_WIDGET_CLASS (eel_editable_label_parent_class)->state_changed (widget, prev_state);
+    if (CTK_WIDGET_CLASS (eel_editable_label_parent_class)->state_changed)
+        CTK_WIDGET_CLASS (eel_editable_label_parent_class)->state_changed (widget, prev_state);
 }
 
 static void
@@ -1235,7 +1235,7 @@ eel_editable_label_style_updated (CtkWidget *widget)
 
     label = EEL_EDITABLE_LABEL (widget);
 
-    GTK_WIDGET_CLASS (eel_editable_label_parent_class)->style_updated (widget);
+    CTK_WIDGET_CLASS (eel_editable_label_parent_class)->style_updated (widget);
 
     /* We have to clear the layout, fonts etc. may have changed */
     eel_editable_label_recompute (label);
@@ -1250,19 +1250,19 @@ eel_editable_label_direction_changed (CtkWidget        *widget,
     if (label->layout)
         pango_layout_context_changed (label->layout);
 
-    GTK_WIDGET_CLASS (eel_editable_label_parent_class)->direction_changed (widget, previous_dir);
+    CTK_WIDGET_CLASS (eel_editable_label_parent_class)->direction_changed (widget, previous_dir);
 }
 
 static gfloat
 ctk_align_to_gfloat (CtkAlign align)
 {
 	switch (align) {
-		case GTK_ALIGN_START:
+		case CTK_ALIGN_START:
 			return 0.0;
-		case GTK_ALIGN_END:
+		case CTK_ALIGN_END:
 			return 1.0;
-		case GTK_ALIGN_CENTER:
-		case GTK_ALIGN_FILL:
+		case CTK_ALIGN_CENTER:
+		case CTK_ALIGN_FILL:
 			return 0.5;
 		default:
 			return 0.0;
@@ -1281,11 +1281,11 @@ get_layout_location (EelEditableLabel  *label,
     gint margin_start, margin_end, margin_top, margin_bottom;
     CtkAllocation allocation;
 
-    widget = GTK_WIDGET (label);
+    widget = CTK_WIDGET (label);
     xalign = ctk_align_to_gfloat (ctk_widget_get_halign (widget));
     yalign = ctk_align_to_gfloat (ctk_widget_get_valign (widget));
 
-    if (ctk_widget_get_direction (widget) != GTK_TEXT_DIR_LTR)
+    if (ctk_widget_get_direction (widget) != CTK_TEXT_DIR_LTR)
         xalign = 1.0 - xalign;
 
     ctk_widget_get_preferred_size (widget, &req, NULL);
@@ -1467,9 +1467,9 @@ eel_editable_label_get_block_cursor_location (EelEditableLabel  *label,
 static void
 eel_editable_label_draw_cursor (EelEditableLabel  *label, cairo_t *cr, gint xoffset, gint yoffset)
 {
-    if (ctk_widget_is_drawable (GTK_WIDGET (label)))
+    if (ctk_widget_is_drawable (CTK_WIDGET (label)))
     {
-        CtkWidget *widget = GTK_WIDGET (label);
+        CtkWidget *widget = CTK_WIDGET (label);
 
         gboolean block;
         gboolean block_at_line_end;
@@ -1500,7 +1500,7 @@ eel_editable_label_draw_cursor (EelEditableLabel  *label, cairo_t *cr, gint xoff
         {
             GdkRGBA fg_color;
 
-            ctk_style_context_get_color (context, GTK_STATE_FLAG_NORMAL, &fg_color);
+            ctk_style_context_get_color (context, CTK_STATE_FLAG_NORMAL, &fg_color);
 
             cairo_save (cr);
             gdk_cairo_set_source_rgba (cr, &fg_color);
@@ -1524,8 +1524,8 @@ eel_editable_label_draw_cursor (EelEditableLabel  *label, cairo_t *cr, gint xoff
                 gdk_cairo_region (cr, clip);
                 cairo_clip (cr);
 
-                ctk_style_context_get (context, GTK_STATE_FLAG_FOCUSED,
-                                       GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                ctk_style_context_get (context, CTK_STATE_FLAG_FOCUSED,
+                                       CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                        &c, NULL);
                 color = *c;
                 gdk_rgba_free (c);
@@ -1614,10 +1614,10 @@ eel_editable_label_draw (CtkWidget *widget,
             cairo_clip (cr);
 
             state = ctk_widget_get_state_flags (widget);
-            state |= GTK_STATE_FLAG_SELECTED;
+            state |= CTK_STATE_FLAG_SELECTED;
 
             ctk_style_context_get (style, state,
-                                   GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                                   CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                    &c, NULL);
             background_color = *c;
             gdk_rgba_free (c);
@@ -1678,7 +1678,7 @@ eel_editable_label_realize (CtkWidget *widget)
     attributes.width = allocation.width;
     attributes.height = allocation.height;
     attributes.visual = ctk_widget_get_visual (widget);
-    display = ctk_widget_get_display (GTK_WIDGET (label));
+    display = ctk_widget_get_display (CTK_WIDGET (label));
     attributes.cursor = gdk_cursor_new_for_display (display, GDK_XTERM);
     attributes.event_mask = ctk_widget_get_events (widget) |
                             (GDK_EXPOSURE_MASK |
@@ -1713,19 +1713,19 @@ eel_editable_label_unrealize (CtkWidget *widget)
     /* Strange. Copied from CtkEntry, should be NULL? */
     ctk_im_context_set_client_window (label->im_context, NULL);
 
-    (* GTK_WIDGET_CLASS (eel_editable_label_parent_class)->unrealize) (widget);
+    (* CTK_WIDGET_CLASS (eel_editable_label_parent_class)->unrealize) (widget);
 }
 
 static void
 eel_editable_label_map (CtkWidget *widget)
 {
-    (* GTK_WIDGET_CLASS (eel_editable_label_parent_class)->map) (widget);
+    (* CTK_WIDGET_CLASS (eel_editable_label_parent_class)->map) (widget);
 }
 
 static void
 eel_editable_label_unmap (CtkWidget *widget)
 {
-    (* GTK_WIDGET_CLASS (eel_editable_label_parent_class)->unmap) (widget);
+    (* CTK_WIDGET_CLASS (eel_editable_label_parent_class)->unmap) (widget);
 }
 
 static void
@@ -1980,7 +1980,7 @@ clear_text_callback (CtkClipboard     *clipboard,
 
     label->selection_anchor = label->selection_end;
 
-    ctk_widget_queue_draw (GTK_WIDGET (label));
+    ctk_widget_queue_draw (CTK_WIDGET (label));
 }
 
 static void
@@ -2030,7 +2030,7 @@ eel_editable_label_select_region_index (EelEditableLabel *label,
             ctk_clipboard_clear (clipboard);
     }
 
-    ctk_widget_queue_draw (GTK_WIDGET (label));
+    ctk_widget_queue_draw (CTK_WIDGET (label));
 
     g_object_freeze_notify (G_OBJECT (label));
     g_object_notify (G_OBJECT (label), "cursor_position");
@@ -2160,7 +2160,7 @@ eel_editable_label_get_layout (EelEditableLabel *label)
  * into coordinates inside the #PangoLayout, e.g. to take some action
  * if some part of the label is clicked. Of course you will need to
  * create a #CtkEventBox to receive the events, and pack the label
- * inside it, since labels are a #GTK_NO_WINDOW widget. Remember
+ * inside it, since labels are a #CTK_NO_WINDOW widget. Remember
  * when using the #PangoLayout functions you need to convert to
  * and from pixels using PANGO_PIXELS() or #PANGO_SCALE.
  *
@@ -2202,7 +2202,7 @@ eel_editable_label_key_press (CtkWidget   *widget,
         return TRUE;
     }
 
-    if (GTK_WIDGET_CLASS (eel_editable_label_parent_class)->key_press_event (widget, event))
+    if (CTK_WIDGET_CLASS (eel_editable_label_parent_class)->key_press_event (widget, event))
         /* Activate key bindings
          */
         return TRUE;
@@ -2222,14 +2222,14 @@ eel_editable_label_key_release (CtkWidget   *widget,
         return TRUE;
     }
 
-    return GTK_WIDGET_CLASS (eel_editable_label_parent_class)->key_release_event (widget, event);
+    return CTK_WIDGET_CLASS (eel_editable_label_parent_class)->key_release_event (widget, event);
 }
 
 static void
 eel_editable_label_keymap_direction_changed (GdkKeymap *keymap,
         EelEditableLabel  *label)
 {
-    ctk_widget_queue_draw (GTK_WIDGET (label));
+    ctk_widget_queue_draw (CTK_WIDGET (label));
 }
 
 static gint
@@ -2301,10 +2301,10 @@ eel_editable_label_delete_text (EelEditableLabel *label,
         eel_editable_label_select_region_index (label, anchor, end);
 
         eel_editable_label_recompute (label);
-        ctk_widget_queue_resize (GTK_WIDGET (label));
+        ctk_widget_queue_resize (CTK_WIDGET (label));
 
         g_object_notify (G_OBJECT (label), "text");
-        g_signal_emit_by_name (GTK_EDITABLE (label), "changed");
+        g_signal_emit_by_name (CTK_EDITABLE (label), "changed");
     }
 }
 
@@ -2355,10 +2355,10 @@ eel_editable_label_insert_text (EelEditableLabel *label,
     *index += new_text_length;
 
     eel_editable_label_recompute (label);
-    ctk_widget_queue_resize (GTK_WIDGET (label));
+    ctk_widget_queue_resize (CTK_WIDGET (label));
 
     g_object_thaw_notify (G_OBJECT (label));
-    g_signal_emit_by_name (GTK_EDITABLE (label), "changed");
+    g_signal_emit_by_name (CTK_EDITABLE (label), "changed");
 }
 
 /* Used for im_commit_cb and inserting Unicode chars */
@@ -2366,7 +2366,7 @@ static void
 eel_editable_label_enter_text (EelEditableLabel *label,
                                const gchar    *str)
 {
-    CtkEditable *editable = GTK_EDITABLE (label);
+    CtkEditable *editable = CTK_EDITABLE (label);
     gint tmp_pos;
     gboolean old_need_im_reset;
 
@@ -2379,12 +2379,12 @@ eel_editable_label_enter_text (EelEditableLabel *label,
     else
     {
         if (label->overwrite_mode)
-            eel_editable_label_delete_from_cursor (label, GTK_DELETE_CHARS, 1);
+            eel_editable_label_delete_from_cursor (label, CTK_DELETE_CHARS, 1);
     }
 
     tmp_pos = g_utf8_pointer_to_offset (label->text,
                                         label->text + label->selection_anchor);
-    ctk_editable_insert_text (GTK_EDITABLE (label), str, strlen (str), &tmp_pos);
+    ctk_editable_insert_text (CTK_EDITABLE (label), str, strlen (str), &tmp_pos);
     tmp_pos = g_utf8_offset_to_pointer (label->text, tmp_pos) - label->text;
     eel_editable_label_select_region_index (label, tmp_pos, tmp_pos);
 
@@ -2418,7 +2418,7 @@ eel_editable_label_preedit_changed_cb (CtkIMContext *context,
     g_free (preedit_string);
 
     eel_editable_label_recompute (label);
-    ctk_widget_queue_resize (GTK_WIDGET (label));
+    ctk_widget_queue_resize (CTK_WIDGET (label));
 }
 
 static gboolean
@@ -2442,7 +2442,7 @@ eel_editable_label_delete_surrounding_cb (CtkIMContext *slave,
     gint current_pos;
 
     current_pos = g_utf8_pointer_to_offset (label->text, label->text + label->selection_anchor);
-    ctk_editable_delete_text (GTK_EDITABLE (label),
+    ctk_editable_delete_text (CTK_EDITABLE (label),
                               current_pos + offset,
                               current_pos + offset + n_chars);
 
@@ -2469,13 +2469,13 @@ get_better_cursor (EelEditableLabel *label,
                    gint      *y)
 {
     CtkTextDirection keymap_direction =
-        (gdk_keymap_get_direction (gdk_keymap_get_for_display (ctk_widget_get_display (GTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
-        GTK_TEXT_DIR_LTR : GTK_TEXT_DIR_RTL;
-    CtkTextDirection widget_direction = ctk_widget_get_direction (GTK_WIDGET (label));
+        (gdk_keymap_get_direction (gdk_keymap_get_for_display (ctk_widget_get_display (CTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
+        CTK_TEXT_DIR_LTR : CTK_TEXT_DIR_RTL;
+    CtkTextDirection widget_direction = ctk_widget_get_direction (CTK_WIDGET (label));
     gboolean split_cursor;
     PangoRectangle strong_pos, weak_pos;
 
-    g_object_get (ctk_widget_get_settings (GTK_WIDGET (label)),
+    g_object_get (ctk_widget_get_settings (CTK_WIDGET (label)),
                   "ctk-split-cursor", &split_cursor,
                   NULL);
 
@@ -2562,7 +2562,7 @@ eel_editable_label_move_visually (EelEditableLabel *label,
 
         eel_editable_label_ensure_layout (label, FALSE);
 
-        g_object_get (ctk_widget_get_settings (GTK_WIDGET (label)),
+        g_object_get (ctk_widget_get_settings (CTK_WIDGET (label)),
                       "ctk-split-cursor", &split_cursor,
                       NULL);
 
@@ -2571,10 +2571,10 @@ eel_editable_label_move_visually (EelEditableLabel *label,
         else
         {
             CtkTextDirection keymap_direction =
-                (gdk_keymap_get_direction (gdk_keymap_get_for_display (ctk_widget_get_display (GTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
-                GTK_TEXT_DIR_LTR : GTK_TEXT_DIR_RTL;
+                (gdk_keymap_get_direction (gdk_keymap_get_for_display (ctk_widget_get_display (CTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
+                CTK_TEXT_DIR_LTR : CTK_TEXT_DIR_RTL;
 
-            strong = keymap_direction == ctk_widget_get_direction (GTK_WIDGET (label));
+            strong = keymap_direction == ctk_widget_get_direction (CTK_WIDGET (label));
         }
 
         if (count > 0)
@@ -2721,8 +2721,8 @@ eel_editable_label_move_cursor (EelEditableLabel    *label,
          */
         switch (step)
         {
-        case GTK_MOVEMENT_DISPLAY_LINES:
-        case GTK_MOVEMENT_VISUAL_POSITIONS:
+        case CTK_MOVEMENT_DISPLAY_LINES:
+        case CTK_MOVEMENT_VISUAL_POSITIONS:
         {
             gint end_x, end_y;
             gint anchor_x, anchor_y;
@@ -2740,21 +2740,21 @@ eel_editable_label_move_cursor (EelEditableLabel    *label,
 
             break;
         }
-        case GTK_MOVEMENT_LOGICAL_POSITIONS:
-        case GTK_MOVEMENT_WORDS:
+        case CTK_MOVEMENT_LOGICAL_POSITIONS:
+        case CTK_MOVEMENT_WORDS:
             if (count < 0)
                 new_pos = MIN (label->selection_end, label->selection_anchor);
             else
                 new_pos = MAX (label->selection_end, label->selection_anchor);
             break;
-        case GTK_MOVEMENT_DISPLAY_LINE_ENDS:
-        case GTK_MOVEMENT_PARAGRAPH_ENDS:
-        case GTK_MOVEMENT_BUFFER_ENDS:
+        case CTK_MOVEMENT_DISPLAY_LINE_ENDS:
+        case CTK_MOVEMENT_PARAGRAPH_ENDS:
+        case CTK_MOVEMENT_BUFFER_ENDS:
             /* FIXME: Can do better here */
             new_pos = count < 0 ? 0 : strlen (label->text);
             break;
-        case GTK_MOVEMENT_PARAGRAPHS:
-        case GTK_MOVEMENT_PAGES:
+        case CTK_MOVEMENT_PARAGRAPHS:
+        case CTK_MOVEMENT_PAGES:
             break;
         default:
             g_assert_not_reached ();
@@ -2765,13 +2765,13 @@ eel_editable_label_move_cursor (EelEditableLabel    *label,
     {
         switch (step)
         {
-        case GTK_MOVEMENT_LOGICAL_POSITIONS:
+        case CTK_MOVEMENT_LOGICAL_POSITIONS:
             new_pos = eel_editable_label_move_logically (label, new_pos, count);
             break;
-        case GTK_MOVEMENT_VISUAL_POSITIONS:
+        case CTK_MOVEMENT_VISUAL_POSITIONS:
             new_pos = eel_editable_label_move_visually (label, new_pos, count);
             break;
-        case GTK_MOVEMENT_WORDS:
+        case CTK_MOVEMENT_WORDS:
             while (count > 0)
             {
                 new_pos = eel_editable_label_move_forward_word (label, new_pos);
@@ -2783,18 +2783,18 @@ eel_editable_label_move_cursor (EelEditableLabel    *label,
                 count++;
             }
             break;
-        case GTK_MOVEMENT_DISPLAY_LINE_ENDS:
-        case GTK_MOVEMENT_PARAGRAPH_ENDS:
-        case GTK_MOVEMENT_BUFFER_ENDS:
+        case CTK_MOVEMENT_DISPLAY_LINE_ENDS:
+        case CTK_MOVEMENT_PARAGRAPH_ENDS:
+        case CTK_MOVEMENT_BUFFER_ENDS:
             /* FIXME: Can do better here */
             new_pos = count < 0 ? 0 : strlen (label->text);
             break;
-        case GTK_MOVEMENT_DISPLAY_LINES:
+        case CTK_MOVEMENT_DISPLAY_LINES:
             new_pos = eel_editable_label_move_line (label, new_pos, count);
             break;
             break;
-        case GTK_MOVEMENT_PARAGRAPHS:
-        case GTK_MOVEMENT_PAGES:
+        case CTK_MOVEMENT_PARAGRAPHS:
+        case CTK_MOVEMENT_PAGES:
             break;
         default:
             g_assert_not_reached ();
@@ -2826,7 +2826,7 @@ eel_editable_label_delete_from_cursor (EelEditableLabel *label,
                                        CtkDeleteType     type,
                                        gint              count)
 {
-    CtkEditable *editable = GTK_EDITABLE (label);
+    CtkEditable *editable = CTK_EDITABLE (label);
     gint start_pos = label->selection_anchor;
     gint end_pos = label->selection_anchor;
 
@@ -2840,13 +2840,13 @@ eel_editable_label_delete_from_cursor (EelEditableLabel *label,
 
     switch (type)
     {
-    case GTK_DELETE_CHARS:
+    case CTK_DELETE_CHARS:
         end_pos = eel_editable_label_move_logically (label, start_pos, count);
         start_pos = g_utf8_pointer_to_offset (label->text, label->text + start_pos);
         end_pos = g_utf8_pointer_to_offset (label->text, label->text + end_pos);
-        ctk_editable_delete_text (GTK_EDITABLE (label), MIN (start_pos, end_pos), MAX (start_pos, end_pos));
+        ctk_editable_delete_text (CTK_EDITABLE (label), MIN (start_pos, end_pos), MAX (start_pos, end_pos));
         break;
-    case GTK_DELETE_WORDS:
+    case CTK_DELETE_WORDS:
         if (count < 0)
         {
             /* Move to end of current word, or if not on a word, end of previous word */
@@ -2861,7 +2861,7 @@ eel_editable_label_delete_from_cursor (EelEditableLabel *label,
         }
 
         /* Fall through */
-    case GTK_DELETE_WORD_ENDS:
+    case CTK_DELETE_WORD_ENDS:
         while (count < 0)
         {
             start_pos = eel_editable_label_move_backward_word (label, start_pos);
@@ -2875,21 +2875,21 @@ eel_editable_label_delete_from_cursor (EelEditableLabel *label,
         start_pos = g_utf8_pointer_to_offset (label->text, label->text + start_pos);
         end_pos = g_utf8_pointer_to_offset (label->text, label->text + end_pos);
 
-        ctk_editable_delete_text (GTK_EDITABLE (label), start_pos, end_pos);
+        ctk_editable_delete_text (CTK_EDITABLE (label), start_pos, end_pos);
         break;
-    case GTK_DELETE_DISPLAY_LINE_ENDS:
-    case GTK_DELETE_PARAGRAPH_ENDS:
+    case CTK_DELETE_DISPLAY_LINE_ENDS:
+    case CTK_DELETE_PARAGRAPH_ENDS:
         end_pos = g_utf8_pointer_to_offset (label->text, label->text + label->selection_anchor);
         if (count < 0)
-            ctk_editable_delete_text (GTK_EDITABLE (label), 0, end_pos);
+            ctk_editable_delete_text (CTK_EDITABLE (label), 0, end_pos);
         else
-            ctk_editable_delete_text (GTK_EDITABLE (label), end_pos, -1);
+            ctk_editable_delete_text (CTK_EDITABLE (label), end_pos, -1);
         break;
-    case GTK_DELETE_DISPLAY_LINES:
-    case GTK_DELETE_PARAGRAPHS:
-        ctk_editable_delete_text (GTK_EDITABLE (label), 0, -1);
+    case CTK_DELETE_DISPLAY_LINES:
+    case CTK_DELETE_PARAGRAPHS:
+        ctk_editable_delete_text (CTK_EDITABLE (label), 0, -1);
         break;
-    case GTK_DELETE_WHITESPACE:
+    case CTK_DELETE_WHITESPACE:
         /* TODO eel_editable_label_delete_whitespace (label); */
         break;
     }
@@ -2952,7 +2952,7 @@ eel_editable_label_cut_clipboard (EelEditableLabel *label)
                                     label->text + start, end - start);
             start = g_utf8_pointer_to_offset (label->text, label->text + start);
             end = g_utf8_pointer_to_offset (label->text, label->text + end);
-            ctk_editable_delete_text (GTK_EDITABLE (label), start, end);
+            ctk_editable_delete_text (CTK_EDITABLE (label), start, end);
         }
     }
 }
@@ -2963,7 +2963,7 @@ paste_received (CtkClipboard *clipboard,
                 gpointer      data)
 {
     EelEditableLabel *label = EEL_EDITABLE_LABEL (data);
-    CtkEditable *editable = GTK_EDITABLE (label);
+    CtkEditable *editable = CTK_EDITABLE (label);
     gint tmp_pos;
 
     if (text)
@@ -2973,7 +2973,7 @@ paste_received (CtkClipboard *clipboard,
 
         tmp_pos = g_utf8_pointer_to_offset (label->text,
                                             label->text + label->selection_anchor);
-        ctk_editable_insert_text (GTK_EDITABLE (label), text, strlen (text), &tmp_pos);
+        ctk_editable_insert_text (CTK_EDITABLE (label), text, strlen (text), &tmp_pos);
         tmp_pos = g_utf8_offset_to_pointer (label->text, tmp_pos) - label->text;
         eel_editable_label_select_region_index (label, tmp_pos, tmp_pos);
     }
@@ -2986,7 +2986,7 @@ eel_editable_label_paste (EelEditableLabel *label,
                           GdkAtom   selection)
 {
     g_object_ref (G_OBJECT (label));
-    ctk_clipboard_request_text (ctk_widget_get_clipboard (GTK_WIDGET (label), selection),
+    ctk_clipboard_request_text (ctk_widget_get_clipboard (CTK_WIDGET (label), selection),
                                 paste_received, label);
 }
 
@@ -3029,7 +3029,7 @@ append_action_signal (EelEditableLabel     *label,
     ctk_widget_set_sensitive (menuitem, sensitive);
 
     ctk_widget_show (menuitem);
-    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+    ctk_menu_shell_append (CTK_MENU_SHELL (menu), menuitem);
 }
 
 static void
@@ -3046,7 +3046,7 @@ static void
 eel_editable_label_toggle_overwrite (EelEditableLabel *label)
 {
     label->overwrite_mode = !label->overwrite_mode;
-    ctk_widget_queue_draw (GTK_WIDGET (label));
+    ctk_widget_queue_draw (CTK_WIDGET (label));
 }
 
 typedef struct
@@ -3069,7 +3069,7 @@ popup_targets_received (CtkClipboard     *clipboard,
     info = user_data;
     label = info->label;
 
-    if (ctk_widget_get_realized (GTK_WIDGET (label)))
+    if (ctk_widget_get_realized (CTK_WIDGET (label)))
     {
         CtkWidget *menuitem;
 
@@ -3078,10 +3078,10 @@ popup_targets_received (CtkClipboard     *clipboard,
 
         label->popup_menu = ctk_menu_new ();
 
-        ctk_menu_set_reserve_toggle_size (GTK_MENU (label->popup_menu), FALSE);
+        ctk_menu_set_reserve_toggle_size (CTK_MENU (label->popup_menu), FALSE);
 
-        ctk_menu_attach_to_widget (GTK_MENU (label->popup_menu),
-                                   GTK_WIDGET (label),
+        ctk_menu_attach_to_widget (CTK_MENU (label->popup_menu),
+                                   CTK_WIDGET (label),
                                    popup_menu_detach);
 
         have_selection =
@@ -3101,18 +3101,18 @@ popup_targets_received (CtkClipboard     *clipboard,
                                  G_CALLBACK (eel_editable_label_select_all), label,
                                  G_CONNECT_SWAPPED);
         ctk_widget_show (menuitem);
-        ctk_menu_shell_append (GTK_MENU_SHELL (label->popup_menu), menuitem);
+        ctk_menu_shell_append (CTK_MENU_SHELL (label->popup_menu), menuitem);
 
         g_signal_emit (label,
                        signals[POPULATE_POPUP], 0,
                        label->popup_menu);
 
         if (info->button)
-            ctk_menu_popup_at_pointer (GTK_MENU (label->popup_menu), NULL);
+            ctk_menu_popup_at_pointer (CTK_MENU (label->popup_menu), NULL);
         else
         {
-            ctk_menu_popup_at_pointer (GTK_MENU (label->popup_menu), NULL);
-            ctk_menu_shell_select_first (GTK_MENU_SHELL (label->popup_menu), FALSE);
+            ctk_menu_popup_at_pointer (CTK_MENU (label->popup_menu), NULL);
+            ctk_menu_shell_select_first (CTK_MENU_SHELL (label->popup_menu), FALSE);
         }
     }
 
@@ -3143,7 +3143,7 @@ eel_editable_label_do_popup (EelEditableLabel *label,
         info->time = ctk_get_current_event_time ();
     }
 
-    ctk_clipboard_request_contents (ctk_widget_get_clipboard (GTK_WIDGET (label), GDK_SELECTION_CLIPBOARD),
+    ctk_clipboard_request_contents (ctk_widget_get_clipboard (CTK_WIDGET (label), GDK_SELECTION_CLIPBOARD),
                                     gdk_atom_intern ("TARGETS", FALSE),
                                     popup_targets_received,
                                     info);
@@ -3392,7 +3392,7 @@ eel_editable_label_accessible_get_text (AtkText *text,
     CtkWidget *widget;
     EelEditableLabelAccessiblePrivate *priv;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return NULL;
@@ -3410,7 +3410,7 @@ eel_editable_label_accessible_get_character_at_offset (AtkText *text,
     gchar *string;
     gunichar unichar;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return '\0';
@@ -3445,7 +3445,7 @@ eel_editable_label_accessible_get_text_before_offset (AtkText         *text,
     EelEditableLabel *label;
     EelEditableLabelAccessiblePrivate *priv;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return NULL;
@@ -3471,7 +3471,7 @@ eel_editable_label_accessible_get_text_at_offset (AtkText          *text,
     EelEditableLabel *label;
     EelEditableLabelAccessiblePrivate *priv;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return NULL;
@@ -3497,7 +3497,7 @@ eel_editable_label_accessible_get_text_after_offset  (AtkText          *text,
     EelEditableLabel *label;
     EelEditableLabelAccessiblePrivate *priv;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return NULL;
@@ -3516,12 +3516,12 @@ eel_editable_label_accessible_get_caret_offset (AtkText *text)
 {
     CtkWidget *widget;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return 0;
 
-    return ctk_editable_get_position (GTK_EDITABLE (widget));
+    return ctk_editable_get_position (CTK_EDITABLE (widget));
 }
 
 static gboolean
@@ -3529,12 +3529,12 @@ eel_editable_label_accessible_set_caret_offset (AtkText *text, gint offset)
 {
     CtkWidget *widget;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return FALSE;
 
-    ctk_editable_set_position (GTK_EDITABLE (widget), offset);
+    ctk_editable_set_position (CTK_EDITABLE (widget), offset);
     return TRUE;
 }
 
@@ -3544,7 +3544,7 @@ eel_editable_label_accessible_get_character_count (AtkText *text)
     CtkWidget *widget;
     EelEditableLabel *label;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return 0;
@@ -3560,13 +3560,13 @@ eel_editable_label_accessible_get_n_selections (AtkText *text)
     EelEditableLabel *label;
     gint select_start, select_end;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return -1;
 
     label = EEL_EDITABLE_LABEL (widget);
-    ctk_editable_get_selection_bounds (GTK_EDITABLE (label), &select_start,
+    ctk_editable_get_selection_bounds (CTK_EDITABLE (label), &select_start,
                                        &select_end);
 
     if (select_start != select_end)
@@ -3584,7 +3584,7 @@ eel_editable_label_accessible_get_selection (AtkText *text,
     CtkWidget *widget;
     EelEditableLabel *label;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return NULL;
@@ -3596,10 +3596,10 @@ eel_editable_label_accessible_get_selection (AtkText *text,
         return NULL;
 
     label = EEL_EDITABLE_LABEL (widget);
-    ctk_editable_get_selection_bounds (GTK_EDITABLE (label), start_pos, end_pos);
+    ctk_editable_get_selection_bounds (CTK_EDITABLE (label), start_pos, end_pos);
 
     if (*start_pos != *end_pos)
-        return ctk_editable_get_chars (GTK_EDITABLE (label), *start_pos, *end_pos);
+        return ctk_editable_get_chars (CTK_EDITABLE (label), *start_pos, *end_pos);
     else
         return NULL;
 }
@@ -3613,13 +3613,13 @@ eel_editable_label_accessible_add_selection (AtkText *text,
     EelEditableLabel *label;
     gint select_start, select_end;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return FALSE;
 
     label = EEL_EDITABLE_LABEL (widget);
-    ctk_editable_get_selection_bounds (GTK_EDITABLE (label), &select_start,
+    ctk_editable_get_selection_bounds (CTK_EDITABLE (label), &select_start,
                                        &select_end);
 
     /* If there is already a selection, then don't allow another to be added,
@@ -3627,7 +3627,7 @@ eel_editable_label_accessible_add_selection (AtkText *text,
      */
     if (select_start == select_end)
     {
-        ctk_editable_select_region (GTK_EDITABLE (label), start_pos, end_pos);
+        ctk_editable_select_region (CTK_EDITABLE (label), start_pos, end_pos);
         return TRUE;
     }
     else
@@ -3642,7 +3642,7 @@ eel_editable_label_accessible_remove_selection (AtkText *text,
     EelEditableLabel *label;
     gint select_start, select_end, caret_pos;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return FALSE;
@@ -3651,7 +3651,7 @@ eel_editable_label_accessible_remove_selection (AtkText *text,
         return FALSE;
 
     label = EEL_EDITABLE_LABEL (widget);
-    ctk_editable_get_selection_bounds (GTK_EDITABLE (label), &select_start,
+    ctk_editable_get_selection_bounds (CTK_EDITABLE (label), &select_start,
                                        &select_end);
 
     if (select_start != select_end)
@@ -3659,8 +3659,8 @@ eel_editable_label_accessible_remove_selection (AtkText *text,
         /* Setting the start & end of the selected region to the caret position
          * turns off the selection.
          */
-        caret_pos = ctk_editable_get_position (GTK_EDITABLE (label));
-        ctk_editable_select_region (GTK_EDITABLE (label), caret_pos, caret_pos);
+        caret_pos = ctk_editable_get_position (CTK_EDITABLE (label));
+        ctk_editable_select_region (CTK_EDITABLE (label), caret_pos, caret_pos);
         return TRUE;
     }
     else
@@ -3677,7 +3677,7 @@ eel_editable_label_accessible_set_selection (AtkText *text,
     EelEditableLabel *label;
     gint select_start, select_end;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return FALSE;
@@ -3689,12 +3689,12 @@ eel_editable_label_accessible_set_selection (AtkText *text,
         return FALSE;
 
     label = EEL_EDITABLE_LABEL (widget);
-    ctk_editable_get_selection_bounds (GTK_EDITABLE (label), &select_start,
+    ctk_editable_get_selection_bounds (CTK_EDITABLE (label), &select_start,
                                        &select_end);
 
     if (select_start != select_end)
     {
-        ctk_editable_select_region (GTK_EDITABLE (label), start_pos, end_pos);
+        ctk_editable_select_region (CTK_EDITABLE (label), start_pos, end_pos);
         return TRUE;
     }
     else
@@ -3712,7 +3712,7 @@ eel_editable_label_accessible_get_run_attributes (AtkText *text,
     AtkAttributeSet *at_set = NULL;
     CtkTextDirection dir;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return NULL;
@@ -3720,7 +3720,7 @@ eel_editable_label_accessible_get_run_attributes (AtkText *text,
     label = EEL_EDITABLE_LABEL (widget);
 
     dir = ctk_widget_get_direction (widget);
-    if (dir == GTK_TEXT_DIR_RTL)
+    if (dir == CTK_TEXT_DIR_RTL)
     {
         at_set = gail_misc_add_attribute (at_set,
                                           ATK_TEXT_ATTR_DIRECTION,
@@ -3743,7 +3743,7 @@ eel_editable_label_accessible_get_default_attributes (AtkText *text)
     EelEditableLabel *label;
     AtkAttributeSet *at_set = NULL;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return NULL;
@@ -3770,7 +3770,7 @@ eel_editable_label_accessible_get_character_extents (AtkText      *text,
     PangoRectangle char_rect;
     gint index, cursor_index, x_layout, y_layout;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return;
@@ -3797,7 +3797,7 @@ eel_editable_label_accessible_get_offset_at_point (AtkText      *text,
     EelEditableLabel *label;
     gint index, cursor_index, x_layout, y_layout;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return -1;
@@ -3860,7 +3860,7 @@ eel_editable_label_accessible_set_text_contents (AtkEditableText *text,
     CtkWidget *widget;
     EelEditableLabel *label;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return;
@@ -3880,13 +3880,13 @@ eel_editable_label_accessible_insert_text (AtkEditableText *text,
     EelEditableLabel *label;
     CtkEditable *editable;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return;
 
     label = EEL_EDITABLE_LABEL (widget);
-    editable = GTK_EDITABLE (label);
+    editable = CTK_EDITABLE (label);
 
     ctk_editable_insert_text (editable, string, length, position);
 }
@@ -3901,13 +3901,13 @@ eel_editable_label_accessible_copy_text   (AtkEditableText *text,
     CtkEditable *editable;
     gchar *str;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return;
 
     label = EEL_EDITABLE_LABEL (widget);
-    editable = GTK_EDITABLE (label);
+    editable = CTK_EDITABLE (label);
     str = ctk_editable_get_chars (editable, start_pos, end_pos);
     ctk_clipboard_set_text (ctk_clipboard_get (GDK_NONE), str, -1);
 }
@@ -3922,13 +3922,13 @@ eel_editable_label_accessible_cut_text (AtkEditableText *text,
     CtkEditable *editable;
     gchar *str;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return;
 
     label = EEL_EDITABLE_LABEL (widget);
-    editable = GTK_EDITABLE (label);
+    editable = CTK_EDITABLE (label);
     str = ctk_editable_get_chars (editable, start_pos, end_pos);
     ctk_clipboard_set_text (ctk_clipboard_get (GDK_NONE), str, -1);
     ctk_editable_delete_text (editable, start_pos, end_pos);
@@ -3943,13 +3943,13 @@ eel_editable_label_accessible_delete_text (AtkEditableText *text,
     EelEditableLabel *label;
     CtkEditable *editable;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return;
 
     label = EEL_EDITABLE_LABEL (widget);
-    editable = GTK_EDITABLE (label);
+    editable = CTK_EDITABLE (label);
 
     ctk_editable_delete_text (editable, start_pos, end_pos);
 }
@@ -3962,7 +3962,7 @@ eel_editable_label_accessible_paste_received (CtkClipboard *clipboard,
     EelEditableLabelAccessiblePaste* paste_struct = (EelEditableLabelAccessiblePaste *)data;
 
     if (text)
-        ctk_editable_insert_text (GTK_EDITABLE (paste_struct->label), text, -1,
+        ctk_editable_insert_text (CTK_EDITABLE (paste_struct->label), text, -1,
                                   &(paste_struct->position));
 
     g_object_unref (paste_struct->label);
@@ -3976,12 +3976,12 @@ eel_editable_label_accessible_paste_text (AtkEditableText *text,
     CtkEditable *editable;
     EelEditableLabelAccessiblePaste paste_struct;
 
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (text));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (text));
     if (widget == NULL)
         /* State is defunct */
         return;
 
-    editable = GTK_EDITABLE (widget);
+    editable = CTK_EDITABLE (widget);
     if (!ctk_editable_get_editable (editable))
         return;
     paste_struct.label = EEL_EDITABLE_LABEL (widget);
@@ -4041,7 +4041,7 @@ eel_editable_label_accessible_insert_text_cb (EelEditableLabel *label,
     EelEditableLabelAccessiblePrivate *priv;
     gint *position = (gint *) arg3;
 
-    accessible = ctk_widget_get_accessible (GTK_WIDGET (label));
+    accessible = ctk_widget_get_accessible (CTK_WIDGET (label));
     priv = g_object_get_data (G_OBJECT (accessible), eel_editable_label_accessible_data);
     if (!priv->signal_name)
     {
@@ -4066,7 +4066,7 @@ eel_editable_label_accessible_delete_text_cb (EelEditableLabel *label,
 {
     AtkObject *accessible;
 
-    accessible = ctk_widget_get_accessible (GTK_WIDGET (label));
+    accessible = ctk_widget_get_accessible (CTK_WIDGET (label));
 
     /*
      * Zero length text deleted so ignore
@@ -4083,7 +4083,7 @@ eel_editable_label_accessible_changed_cb (EelEditableLabel *label)
     AtkObject *accessible;
     EelEditableLabelAccessiblePrivate *priv;
 
-    accessible = ctk_widget_get_accessible (GTK_WIDGET (label));
+    accessible = ctk_widget_get_accessible (CTK_WIDGET (label));
     priv = g_object_get_data (G_OBJECT (accessible), eel_editable_label_accessible_data);
     gail_text_util_text_setup (priv->textutil, eel_editable_label_get_text (label));
 }
@@ -4131,7 +4131,7 @@ eel_editable_label_accessible_notify_ctk (GObject    *obj,
     AtkObject *accessible;
     EelEditableLabel *label;
 
-    widget = GTK_WIDGET (obj);
+    widget = CTK_WIDGET (obj);
     label = EEL_EDITABLE_LABEL (widget);
     accessible = ctk_widget_get_accessible (widget);
 
@@ -4196,7 +4196,7 @@ static const gchar* eel_editable_label_accessible_get_name(AtkObject* accessible
     {
         CtkWidget* widget;
 
-        widget = ctk_accessible_get_widget(GTK_ACCESSIBLE(accessible));
+        widget = ctk_accessible_get_widget(CTK_ACCESSIBLE(accessible));
 
         if (widget == NULL)
         {
@@ -4217,7 +4217,7 @@ eel_editable_label_accessible_ref_state_set (AtkObject *accessible)
     CtkWidget *widget;
 
     state_set = a11y_parent_class->ref_state_set (accessible);
-    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (accessible));
 
     if (widget == NULL)
         return state_set;
@@ -4240,7 +4240,7 @@ eel_editable_label_accessible_finalize (GObject *object)
 
 G_DEFINE_TYPE_WITH_CODE (EelEditableLabelAccessible,
                          eel_editable_label_accessible,
-                         GTK_TYPE_WIDGET_ACCESSIBLE,
+                         CTK_TYPE_WIDGET_ACCESSIBLE,
                          G_IMPLEMENT_INTERFACE (ATK_TYPE_EDITABLE_TEXT,
                                                 atk_editable_text_interface_init)
                          G_IMPLEMENT_INTERFACE (ATK_TYPE_TEXT,

@@ -54,7 +54,7 @@ static void  baul_search_bar_init             (BaulSearchBar      *bar);
 
 EEL_CLASS_BOILERPLATE (BaulSearchBar,
                        baul_search_bar,
-                       GTK_TYPE_EVENT_BOX)
+                       CTK_TYPE_EVENT_BOX)
 
 
 static void
@@ -114,7 +114,7 @@ entry_has_text (BaulSearchBar *bar)
 {
     const char *text;
 
-    text = ctk_entry_get_text (GTK_ENTRY (bar->details->entry));
+    text = ctk_entry_get_text (CTK_ENTRY (bar->details->entry));
 
     return text != NULL && text[0] != '\0';
 }
@@ -158,29 +158,29 @@ baul_search_bar_init (BaulSearchBar *bar)
     CtkWidget *label;
     CtkStyleContext *context;
 
-    context = ctk_widget_get_style_context (GTK_WIDGET (bar));
+    context = ctk_widget_get_style_context (CTK_WIDGET (bar));
     ctk_style_context_add_class (context, "baul-search-bar");
 
     bar->details = g_new0 (BaulSearchBarDetails, 1);
 
-    ctk_event_box_set_visible_window (GTK_EVENT_BOX (bar), FALSE);
+    ctk_event_box_set_visible_window (CTK_EVENT_BOX (bar), FALSE);
 
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
     ctk_widget_set_margin_start (hbox, 6);
     ctk_widget_set_margin_end (hbox, 6);
     ctk_widget_show (hbox);
-    ctk_container_add (GTK_CONTAINER (bar), hbox);
+    ctk_container_add (CTK_CONTAINER (bar), hbox);
 
     label = ctk_label_new (_("Search:"));
     ctk_widget_show (label);
 
-    ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     bar->details->entry = ctk_entry_new ();
-    ctk_entry_set_icon_from_icon_name (GTK_ENTRY (bar->details->entry),
-                                   GTK_ENTRY_ICON_SECONDARY,
+    ctk_entry_set_icon_from_icon_name (CTK_ENTRY (bar->details->entry),
+                                   CTK_ENTRY_ICON_SECONDARY,
                                    "find");
-    ctk_box_pack_start (GTK_BOX (hbox), bar->details->entry, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), bar->details->entry, TRUE, TRUE, 0);
 
     g_signal_connect (bar->details->entry, "activate",
                       G_CALLBACK (entry_activate_cb), bar);
@@ -226,7 +226,7 @@ baul_search_bar_new (BaulWindow *window)
 
     /* Clipboard */
     baul_clipboard_set_up_editable
-    (GTK_EDITABLE (search_bar->details->entry),
+    (CTK_EDITABLE (search_bar->details->entry),
      baul_window_get_ui_manager (window),
      FALSE);
 
@@ -239,7 +239,7 @@ baul_search_bar_get_query (BaulSearchBar *bar)
     const char *query_text;
     BaulQuery *query;
 
-    query_text = ctk_entry_get_text (GTK_ENTRY (bar->details->entry));
+    query_text = ctk_entry_get_text (CTK_ENTRY (bar->details->entry));
 
     /* Empty string is a NULL query */
     if (query_text && query_text[0] == '\0')
@@ -262,5 +262,5 @@ baul_search_bar_grab_focus (BaulSearchBar *bar)
 void
 baul_search_bar_clear (BaulSearchBar *bar)
 {
-    ctk_entry_set_text (GTK_ENTRY (bar->details->entry), "");
+    ctk_entry_set_text (CTK_ENTRY (bar->details->entry), "");
 }

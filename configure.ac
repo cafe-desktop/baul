@@ -39,7 +39,7 @@ AC_SUBST(GLIB_REQUIRED, [glib_minver])
 AC_SUBST(GIO_REQUIRED, [gio_minver])
 AC_SUBST(CAFE_DESKTOP_REQUIRED, [cafe_desktop_minver])
 AC_SUBST(PANGO_REQUIRED, [pango_minver])
-AC_SUBST(GTK_REQUIRED, [ctk_minver])
+AC_SUBST(CTK_REQUIRED, [ctk_minver])
 AC_SUBST(XML_REQUIRED, [xml_minver])
 AC_SUBST(GAIL_REQUIRED, [gail_minver])
 
@@ -105,7 +105,7 @@ AH_TEMPLATE([bzopen])
 AH_TEMPLATE([bzread])
 AH_TEMPLATE([bzwrite])
 
-AC_DEFINE([HAVE_GTK_MULTIHEAD], [], [needed for egg-screen-exec functions])
+AC_DEFINE([HAVE_CTK_MULTIHEAD], [], [needed for egg-screen-exec functions])
 
 AH_TEMPLATE([HAVE_STARTUP_NOTIFICATION])
 AH_TEMPLATE([HAVE_EXIF])
@@ -115,7 +115,7 @@ AM_GNU_GETTEXT([external])
 
 dnl ==========================================================================
 
-GTK_DOC_CHECK([1.4])
+CTK_DOC_CHECK([1.4])
 
 dnl ==========================================================================
 

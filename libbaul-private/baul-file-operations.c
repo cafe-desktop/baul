@@ -973,7 +973,7 @@ init_common (gsize job_size,
 	if (parent_window) {
 		GdkScreen *screen;
 
-		screen = ctk_widget_get_screen (GTK_WIDGET (parent_window));
+		screen = ctk_widget_get_screen (CTK_WIDGET (parent_window));
 		common->screen_num = gdk_x11_screen_get_screen_number (screen);
 	}
 
@@ -1104,7 +1104,7 @@ do_run_simple_dialog (gpointer _data)
 	dialog = ctk_message_dialog_new (*data->parent_window,
 					 0,
 					 data->message_type,
-					 GTK_BUTTONS_NONE,
+					 CTK_BUTTONS_NONE,
 					 NULL);
 
 	g_object_set (dialog,
@@ -1123,27 +1123,27 @@ do_run_simple_dialog (gpointer _data)
 		}
 
 		if (g_strcmp0 (button_title, CANCEL) == 0)
-			eel_dialog_add_button (GTK_DIALOG (dialog), button_title, "process-stop", response_id);
+			eel_dialog_add_button (CTK_DIALOG (dialog), button_title, "process-stop", response_id);
 		else if (g_strcmp0 (button_title, DELETE) == 0)
-			eel_dialog_add_button (GTK_DIALOG (dialog), button_title, "edit-delete", response_id);
+			eel_dialog_add_button (CTK_DIALOG (dialog), button_title, "edit-delete", response_id);
 		else
-			ctk_dialog_add_button (GTK_DIALOG (dialog), button_title, response_id);
+			ctk_dialog_add_button (CTK_DIALOG (dialog), button_title, response_id);
 
-		ctk_dialog_set_default_response (GTK_DIALOG (dialog), response_id);
+		ctk_dialog_set_default_response (CTK_DIALOG (dialog), response_id);
 	}
 
 	if (data->details_text) {
-		eel_ctk_message_dialog_set_details_label (GTK_MESSAGE_DIALOG (dialog),
+		eel_ctk_message_dialog_set_details_label (CTK_MESSAGE_DIALOG (dialog),
 							  data->details_text);
 	}
 
 	/* Run it. */
         ctk_widget_show (dialog);
-        result = ctk_dialog_run (GTK_DIALOG (dialog));
+        result = ctk_dialog_run (CTK_DIALOG (dialog));
 
-	while ((result == GTK_RESPONSE_NONE || result == GTK_RESPONSE_DELETE_EVENT) && data->ignore_close_box) {
-		ctk_widget_show (GTK_WIDGET (dialog));
-		result = ctk_dialog_run (GTK_DIALOG (dialog));
+	while ((result == CTK_RESPONSE_NONE || result == CTK_RESPONSE_DELETE_EVENT) && data->ignore_close_box) {
+		ctk_widget_show (CTK_WIDGET (dialog));
+		result = ctk_dialog_run (CTK_DIALOG (dialog));
 	}
 
 	ctk_widget_destroy (dialog);
@@ -1248,7 +1248,7 @@ run_error (CommonJob *job,
 	va_start (varargs, show_all);
 	res = run_simple_dialog_va (job,
 				    FALSE,
-				    GTK_MESSAGE_ERROR,
+				    CTK_MESSAGE_ERROR,
 				    primary_text,
 				    secondary_text,
 				    details_text,
@@ -1272,7 +1272,7 @@ run_warning (CommonJob *job,
 	va_start (varargs, show_all);
 	res = run_simple_dialog_va (job,
 				    FALSE,
-				    GTK_MESSAGE_WARNING,
+				    CTK_MESSAGE_WARNING,
 				    primary_text,
 				    secondary_text,
 				    details_text,
@@ -1296,7 +1296,7 @@ run_question (CommonJob *job,
 	va_start (varargs, show_all);
 	res = run_simple_dialog_va (job,
 				    FALSE,
-				    GTK_MESSAGE_QUESTION,
+				    CTK_MESSAGE_QUESTION,
 				    primary_text,
 				    secondary_text,
 				    details_text,
@@ -1632,7 +1632,7 @@ delete_dir (CommonJob *job, GFile *dir,
 
 			g_error_free (error);
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				abort_job (job);
 			} else if (response == 1) {
 				/* Skip: Do Nothing */
@@ -1665,7 +1665,7 @@ delete_dir (CommonJob *job, GFile *dir,
 
 		g_error_free (error);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) {
 			/* Skip: Do Nothing  */
@@ -1696,7 +1696,7 @@ delete_dir (CommonJob *job, GFile *dir,
 						CANCEL, SKIP_ALL, SKIP,
 						NULL);
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				abort_job (job);
 			} else if (response == 1) { /* skip all */
 				job->skip_all_error = TRUE;
@@ -1773,7 +1773,7 @@ delete_file (CommonJob *job, GFile *file,
 					CANCEL, SKIP_ALL, SKIP,
 					NULL);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) { /* skip all */
 			job->skip_all_error = TRUE;
@@ -1916,7 +1916,7 @@ trash_files (CommonJob *job, GList *files, int *files_skipped)
 						 CANCEL, SKIP_ALL, SKIP, DELETE_ALL, DELETE,
 						 NULL);
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				((DeleteJob *) job)->user_cancel = TRUE;
 				abort_job (job);
 			} else if (response == 1) { /* skip all */
@@ -2323,45 +2323,45 @@ prompt_empty_trash (CtkWindow *parent_window)
 
 	screen = NULL;
 	if (parent_window != NULL) {
-		screen = ctk_widget_get_screen (GTK_WIDGET (parent_window));
+		screen = ctk_widget_get_screen (CTK_WIDGET (parent_window));
 	}
 
 	/* Do we need to be modal ? */
-	dialog = ctk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+	dialog = ctk_message_dialog_new (NULL, CTK_DIALOG_MODAL,
+					 CTK_MESSAGE_QUESTION, CTK_BUTTONS_NONE,
 					 _("Do you want to empty the trash before you unmount?"));
-	ctk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+	ctk_message_dialog_format_secondary_text (CTK_MESSAGE_DIALOG (dialog),
 						  _("In order to regain the "
 						    "free space on this volume "
 						    "the trash must be emptied. "
 						    "All trashed items on the volume "
 						    "will be permanently lost."));
 
-	ctk_dialog_add_button (GTK_DIALOG (dialog),
-	                       _("Do _not Empty Trash"), GTK_RESPONSE_REJECT);
+	ctk_dialog_add_button (CTK_DIALOG (dialog),
+	                       _("Do _not Empty Trash"), CTK_RESPONSE_REJECT);
 
-	eel_dialog_add_button (GTK_DIALOG (dialog),
-	                       CANCEL, "process-stop", GTK_RESPONSE_CANCEL);
+	eel_dialog_add_button (CTK_DIALOG (dialog),
+	                       CANCEL, "process-stop", CTK_RESPONSE_CANCEL);
 
-	ctk_dialog_add_button (GTK_DIALOG (dialog),
-	                       _("Empty _Trash"), GTK_RESPONSE_ACCEPT);
+	ctk_dialog_add_button (CTK_DIALOG (dialog),
+	                       _("Empty _Trash"), CTK_RESPONSE_ACCEPT);
 
-	ctk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-	ctk_window_set_title (GTK_WINDOW (dialog), ""); /* as per HIG */
-	ctk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
+	ctk_dialog_set_default_response (CTK_DIALOG (dialog), CTK_RESPONSE_ACCEPT);
+	ctk_window_set_title (CTK_WINDOW (dialog), ""); /* as per HIG */
+	ctk_window_set_skip_taskbar_hint (CTK_WINDOW (dialog), TRUE);
 	if (screen) {
-		ctk_window_set_screen (GTK_WINDOW (dialog), screen);
+		ctk_window_set_screen (CTK_WINDOW (dialog), screen);
 	}
 	atk_object_set_role (ctk_widget_get_accessible (dialog), ATK_ROLE_ALERT);
 
 	/* Make transient for the window group */
 	ctk_widget_realize (dialog);
 	if (screen != NULL) {
-		gdk_window_set_transient_for (ctk_widget_get_window (GTK_WIDGET (dialog)),
+		gdk_window_set_transient_for (ctk_widget_get_window (CTK_WIDGET (dialog)),
 				      		gdk_screen_get_root_window (screen));
 	}
 
-	result = ctk_dialog_run (GTK_DIALOG (dialog));
+	result = ctk_dialog_run (CTK_DIALOG (dialog));
 	ctk_widget_destroy (dialog);
 	return result;
 }
@@ -2392,7 +2392,7 @@ baul_file_operations_unmount_mount_full (CtkWindow                      *parent_
 
 		response = prompt_empty_trash (parent_window);
 
-		if (response == GTK_RESPONSE_ACCEPT) {
+		if (response == CTK_RESPONSE_ACCEPT) {
 			EmptyTrashJob *job;
 
 			job = op_job_new (EmptyTrashJob, parent_window, TRUE, FALSE);
@@ -2406,7 +2406,7 @@ baul_file_operations_unmount_mount_full (CtkWindow                      *parent_
 					   0,
 					   NULL);
 			return;
-		} else if (response == GTK_RESPONSE_CANCEL) {
+		} else if (response == CTK_RESPONSE_CANCEL) {
 			if (callback) {
 				callback (callback_data);
 			}
@@ -2664,7 +2664,7 @@ scan_dir (GFile *dir,
 
 			g_error_free (error);
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				abort_job (job);
 			} else if (response == 1) {
 				*source_info = saved_info;
@@ -2705,7 +2705,7 @@ scan_dir (GFile *dir,
 
 		g_error_free (error);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1 || response == 2) {
 			if (response == 1) {
@@ -2783,7 +2783,7 @@ scan_file (GFile *file,
 
 		g_error_free (error);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1 || response == 2) {
 			if (response == 1) {
@@ -2887,7 +2887,7 @@ verify_destination (CommonJob *job,
 
 		g_error_free (error);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) {
 			goto retry;
@@ -2957,7 +2957,7 @@ verify_destination (CommonJob *job,
 						RETRY,
 						NULL);
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				abort_job (job);
 			} else if (response == 2) {
 				goto retry;
@@ -3518,7 +3518,7 @@ create_dest_dir (CommonJob *job,
 
 		g_error_free (error);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) {
 			/* Skip: Do Nothing  */
@@ -3659,7 +3659,7 @@ copy_move_directory (CopyMoveJob *copy_job,
 
 			g_error_free (error);
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				abort_job (job);
 			} else if (response == 1) {
 				/* Skip: Do Nothing */
@@ -3704,7 +3704,7 @@ copy_move_directory (CopyMoveJob *copy_job,
 
 		g_error_free (error);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) {
 			/* Skip: Do Nothing  */
@@ -3744,7 +3744,7 @@ copy_move_directory (CopyMoveJob *copy_job,
 						CANCEL, SKIP_ALL, SKIP,
 						NULL);
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				abort_job (job);
 			} else if (response == 1) { /* skip all */
 				job->skip_all_error = TRUE;
@@ -3833,7 +3833,7 @@ remove_target_recursively (CommonJob *job,
 					CANCEL, SKIP_ALL, SKIP,
 					NULL);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) { /* skip all */
 			job->skip_all_error = TRUE;
@@ -3874,7 +3874,7 @@ remove_target_recursively (CommonJob *job,
 					CANCEL, SKIP_ALL, SKIP,
 					NULL);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) { /* skip all */
 			job->skip_all_error = TRUE;
@@ -4041,13 +4041,13 @@ do_run_conflict_dialog (gpointer _data)
 						    data->src,
 						    data->dest,
 						    data->dest_dir);
-	response = ctk_dialog_run (GTK_DIALOG (dialog));
+	response = ctk_dialog_run (CTK_DIALOG (dialog));
 
 	if (response == CONFLICT_RESPONSE_RENAME) {
 		data->resp_data->new_name =
 			baul_file_conflict_dialog_get_new_name (BAUL_FILE_CONFLICT_DIALOG (dialog));
-	} else if (response != GTK_RESPONSE_CANCEL ||
-		   response != GTK_RESPONSE_NONE) {
+	} else if (response != CTK_RESPONSE_CANCEL ||
+		   response != CTK_RESPONSE_NONE) {
 		   data->resp_data->apply_to_all =
 			   baul_file_conflict_dialog_get_apply_to_all
 				(BAUL_FILE_CONFLICT_DIALOG (dialog));
@@ -4191,7 +4191,7 @@ copy_move_file (CopyMoveJob *copy_job,
 					CANCEL, SKIP_ALL, SKIP,
 					NULL);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) { /* skip all */
 			job->skip_all_error = TRUE;
@@ -4224,7 +4224,7 @@ copy_move_file (CopyMoveJob *copy_job,
 					CANCEL, SKIP_ALL, SKIP,
 					NULL);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) { /* skip all */
 			job->skip_all_error = TRUE;
@@ -4374,8 +4374,8 @@ copy_move_file (CopyMoveJob *copy_job,
 
 		response = run_conflict_dialog (job, src, dest, dest_dir);
 
-		if (response->id == GTK_RESPONSE_CANCEL ||
-		    response->id == GTK_RESPONSE_DELETE_EVENT) {
+		if (response->id == CTK_RESPONSE_CANCEL ||
+		    response->id == CTK_RESPONSE_DELETE_EVENT) {
 			conflict_response_data_free (response);
 			abort_job (job);
 		} else if (response->id == CONFLICT_RESPONSE_SKIP) {
@@ -4453,7 +4453,7 @@ copy_move_file (CopyMoveJob *copy_job,
 
 				g_error_free (error);
 
-				if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+				if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 					abort_job (job);
 				} else if (response == 1) { /* skip all */
 					job->skip_all_error = TRUE;
@@ -4521,7 +4521,7 @@ copy_move_file (CopyMoveJob *copy_job,
 
 		g_error_free (error);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) { /* skip all */
 			job->skip_all_error = TRUE;
@@ -4884,7 +4884,7 @@ move_file_prepare (CopyMoveJob *move_job,
 					CANCEL, SKIP_ALL, SKIP,
 					NULL);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) { /* skip all */
 			job->skip_all_error = TRUE;
@@ -4974,8 +4974,8 @@ move_file_prepare (CopyMoveJob *move_job,
 
 		response = run_conflict_dialog (job, src, dest, dest_dir);
 
-		if (response->id == GTK_RESPONSE_CANCEL ||
-		    response->id == GTK_RESPONSE_DELETE_EVENT) {
+		if (response->id == CTK_RESPONSE_CANCEL ||
+		    response->id == CTK_RESPONSE_DELETE_EVENT) {
 			conflict_response_data_free (response);
 			abort_job (job);
 		} else if (response->id == CONFLICT_RESPONSE_SKIP) {
@@ -5040,7 +5040,7 @@ move_file_prepare (CopyMoveJob *move_job,
 
 		g_error_free (error);
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (job);
 		} else if (response == 1) { /* skip all */
 			job->skip_all_error = TRUE;
@@ -5489,7 +5489,7 @@ link_file (CopyMoveJob *job,
 			g_error_free (error);
 		}
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (common);
 		} else if (response == 1) { /* skip all */
 			common->skip_all_error = TRUE;
@@ -5917,7 +5917,7 @@ baul_file_operations_copy_move (const GList *item_uris,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, CTK_TYPE_WINDOW);
 	}
 
 	if (copy_action == GDK_ACTION_COPY) {
@@ -6248,7 +6248,7 @@ create_job (GIOSchedulerJob *io_job,
 
 			g_error_free (error);
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				abort_job (common);
 			} else if (response == 1) { /* skip */
 				/* do nothing */
@@ -6284,7 +6284,7 @@ baul_file_operations_new_folder (CtkWidget *parent_view,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, CTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6324,7 +6324,7 @@ baul_file_operations_new_file_from_template (CtkWidget *parent_view,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, CTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6369,7 +6369,7 @@ baul_file_operations_new_file (CtkWidget *parent_view,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, CTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6506,7 +6506,7 @@ baul_file_operations_empty_trash (CtkWidget *parent_view)
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, CTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (EmptyTrashJob, parent_window, TRUE, FALSE);
@@ -6574,7 +6574,7 @@ mark_desktop_file_trusted (CommonJob *common,
 		}
 
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (common);
 		} else if (response == 1) {
 			goto retry;
@@ -6614,7 +6614,7 @@ mark_desktop_file_trusted (CommonJob *common,
 				response = 0;
 			}
 
-			if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+			if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 				abort_job (common);
 			} else if (response == 1) {
 				goto retry;
@@ -6649,7 +6649,7 @@ mark_desktop_file_trusted (CommonJob *common,
 			response = 0;
 		}
 
-		if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+		if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 			abort_job (common);
 		} else if (response == 1) {
 			goto retry;
@@ -6684,7 +6684,7 @@ mark_desktop_file_trusted (CommonJob *common,
 					response = 0;
 				}
 
-				if (response == 0 || response == GTK_RESPONSE_DELETE_EVENT) {
+				if (response == 0 || response == CTK_RESPONSE_DELETE_EVENT) {
 					abort_job (common);
 				} else if (response == 1) {
 					goto retry;

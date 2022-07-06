@@ -69,7 +69,7 @@ get_quark_gobject (void)
 AtkObject *
 eel_accessibility_for_object (gpointer object)
 {
-    if (GTK_IS_WIDGET (object))
+    if (CTK_IS_WIDGET (object))
         return ctk_widget_get_accessible (object);
 
     return atk_gobject_accessible_for_object (object);
@@ -96,9 +96,9 @@ get_simple_text (gpointer object)
     GObject *gobject;
     EelAccessibleTextIface *aif;
 
-    if (GTK_IS_ACCESSIBLE (object))
+    if (CTK_IS_ACCESSIBLE (object))
     {
-        gobject = G_OBJECT (ctk_accessible_get_widget (GTK_ACCESSIBLE (object)));
+        gobject = G_OBJECT (ctk_accessible_get_widget (CTK_ACCESSIBLE (object)));
     }
     else
     {

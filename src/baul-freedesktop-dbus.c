@@ -145,7 +145,7 @@ skeleton_handle_show_item_properties_cb (BaulFreedesktopFileManager1 *object,
                                                       file,
                                                       gdk_screen_get_default (),
                                                       NULL);
-        fm_properties_window_present (files, GTK_WIDGET (window));
+        fm_properties_window_present (files, CTK_WIDGET (window));
         g_object_unref (file);
     }
 

@@ -98,9 +98,9 @@ application_cannot_open_location (GAppInfo *application,
                                                  parent_window);
 
         response = ctk_dialog_run (message_dialog);
-        ctk_widget_destroy (GTK_WIDGET (message_dialog));
+        ctk_widget_destroy (CTK_WIDGET (message_dialog));
 
-        if (response == GTK_RESPONSE_YES)
+        if (response == CTK_RESPONSE_YES)
         {
             LaunchParameters *launch_parameters;
 
@@ -225,7 +225,7 @@ baul_launch_application_by_uri (GAppInfo *application,
     locations = g_list_reverse (locations);
 
     if (parent_window != NULL) {
-            display = ctk_widget_get_display (GTK_WIDGET (parent_window));
+            display = ctk_widget_get_display (CTK_WIDGET (parent_window));
     } else {
             display = gdk_display_get_default ();
     }
@@ -239,7 +239,7 @@ baul_launch_application_by_uri (GAppInfo *application,
 
     file = baul_file_get_by_uri (uris->data);
     icon = baul_file_get_icon (file,
-                               48, ctk_widget_get_scale_factor (GTK_WIDGET (parent_window)),
+                               48, ctk_widget_get_scale_factor (CTK_WIDGET (parent_window)),
                                0);
     baul_file_unref (file);
     if (icon)
@@ -525,7 +525,7 @@ baul_launch_desktop_file (GdkScreen   *screen,
 
     error = NULL;
 
-    context = gdk_display_get_app_launch_context (ctk_widget_get_display (GTK_WIDGET (parent_window)));
+    context = gdk_display_get_app_launch_context (ctk_widget_get_display (CTK_WIDGET (parent_window)));
 
     /* TODO: Ideally we should accept a timestamp here instead of using GDK_CURRENT_TIME */
     gdk_app_launch_context_set_timestamp (context, GDK_CURRENT_TIME);

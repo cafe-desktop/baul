@@ -743,7 +743,7 @@ report_broken_symbolic_link (CtkWindow *parent_window, BaulFile *file)
 
     if (baul_file_is_in_trash (file))
     {
-        eel_run_simple_dialog (GTK_WIDGET (parent_window), FALSE, GTK_MESSAGE_WARNING,
+        eel_run_simple_dialog (CTK_WIDGET (parent_window), FALSE, CTK_MESSAGE_WARNING,
                                prompt, detail, "process-stop", NULL);
         goto out;
     }
@@ -751,7 +751,7 @@ report_broken_symbolic_link (CtkWindow *parent_window, BaulFile *file)
     dialog = eel_show_yes_no_dialog (prompt, detail, _("Mo_ve to Trash"), "process-stop",
                                      parent_window);
 
-    ctk_dialog_set_default_response (dialog, GTK_RESPONSE_CANCEL);
+    ctk_dialog_set_default_response (dialog, CTK_RESPONSE_CANCEL);
 
     /* Make this modal to avoid problems with reffing the view & file
      * to keep them around in case the view changes, which would then
@@ -763,9 +763,9 @@ report_broken_symbolic_link (CtkWindow *parent_window, BaulFile *file)
      */
 
     response = ctk_dialog_run (dialog);
-    ctk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (CTK_WIDGET (dialog));
 
-    if (response == GTK_RESPONSE_YES)
+    if (response == CTK_RESPONSE_YES)
     {
         file_as_list.data = file;
         file_as_list.next = NULL;
@@ -825,17 +825,17 @@ get_executable_text_file_action (CtkWindow *parent_window, BaulFile *file)
     eel_dialog_add_button (dialog,
                            _("_Cancel"),
                            "process-stop",
-                           GTK_RESPONSE_CANCEL);
+                           CTK_RESPONSE_CANCEL);
 
     ctk_dialog_add_button (dialog, _("_Run"), RESPONSE_RUN);
-    ctk_dialog_set_default_response (dialog, GTK_RESPONSE_CANCEL);
-    ctk_widget_show (GTK_WIDGET (dialog));
+    ctk_dialog_set_default_response (dialog, CTK_RESPONSE_CANCEL);
+    ctk_widget_show (CTK_WIDGET (dialog));
 
     g_free (prompt);
     g_free (detail);
 
     response = ctk_dialog_run (dialog);
-    ctk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (CTK_WIDGET (dialog));
 
     switch (response)
     {
@@ -1204,9 +1204,9 @@ confirm_multiple_windows (CtkWindow *parent_window,
     g_free (detail);
 
     response = ctk_dialog_run (dialog);
-    ctk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (CTK_WIDGET (dialog));
 
-    return response == GTK_RESPONSE_YES;
+    return response == CTK_RESPONSE_YES;
 }
 
 typedef struct
@@ -1289,7 +1289,7 @@ application_selected_cb (BaulOpenWithDialog *dialog,
     BaulFile *file;
     GList files;
 
-    parent_window = GTK_WINDOW (user_data);
+    parent_window = CTK_WINDOW (user_data);
 
     file = g_object_get_data (G_OBJECT (dialog), "mime-action:file");
 
@@ -1307,9 +1307,9 @@ choose_program (CtkDialog *message_dialog, int response, gpointer callback_data)
     char *mime_type;
     BaulFile *file;
 
-    if (response != GTK_RESPONSE_ACCEPT)
+    if (response != CTK_RESPONSE_ACCEPT)
     {
-        ctk_widget_destroy (GTK_WIDGET (message_dialog));
+        ctk_widget_destroy (CTK_WIDGET (message_dialog));
         return;
     }
 
@@ -1327,11 +1327,11 @@ choose_program (CtkDialog *message_dialog, int response, gpointer callback_data)
                             baul_file_ref (file),
                             (GDestroyNotify)baul_file_unref);
 
-    ctk_window_set_screen (GTK_WINDOW (dialog),
-                           ctk_widget_get_screen (GTK_WIDGET (callback_data)));
+    ctk_window_set_screen (CTK_WINDOW (dialog),
+                           ctk_widget_get_screen (CTK_WIDGET (callback_data)));
 
     /* Destroy the message dialog after ref:ing the file */
-    ctk_widget_destroy (GTK_WIDGET (message_dialog));
+    ctk_widget_destroy (CTK_WIDGET (message_dialog));
 
     ctk_widget_show (dialog);
 
@@ -1355,8 +1355,8 @@ show_unhandled_type_error (ActivateParametersInstall *parameters)
     char *error_message = get_application_no_mime_type_handler_message (parameters->file, parameters->uri);
     if (g_content_type_is_unknown (mime_type)) {
         dialog = ctk_message_dialog_new (parameters->parent_window,
-        				 GTK_DIALOG_DESTROY_WITH_PARENT,
-        				 GTK_MESSAGE_ERROR,
+        				 CTK_DIALOG_DESTROY_WITH_PARENT,
+        				 CTK_MESSAGE_ERROR,
         				 0,
         				 NULL);
         g_object_set (dialog,
@@ -1368,8 +1368,8 @@ show_unhandled_type_error (ActivateParametersInstall *parameters)
         text = g_strdup_printf (_("There is no application installed for %s files"), g_content_type_get_description (mime_type));
 
         dialog = ctk_message_dialog_new (parameters->parent_window,
-        				 GTK_DIALOG_DESTROY_WITH_PARENT,
-        				 GTK_MESSAGE_ERROR,
+        				 CTK_DIALOG_DESTROY_WITH_PARENT,
+        				 CTK_MESSAGE_ERROR,
         				 0,
         				 NULL);
         g_object_set (dialog,
@@ -1380,21 +1380,21 @@ show_unhandled_type_error (ActivateParametersInstall *parameters)
         g_free (text);
     }
 
-    ctk_dialog_add_button (GTK_DIALOG (dialog), _("_Select Application"), GTK_RESPONSE_ACCEPT);
+    ctk_dialog_add_button (CTK_DIALOG (dialog), _("_Select Application"), CTK_RESPONSE_ACCEPT);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_OK"),
                            "ctk-ok",
-                           GTK_RESPONSE_OK);
+                           CTK_RESPONSE_OK);
 
-    ctk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+    ctk_dialog_set_default_response (CTK_DIALOG (dialog), CTK_RESPONSE_OK);
 
     g_object_set_data_full (G_OBJECT (dialog),
                             "mime-action:file",
                             baul_file_ref (parameters->file),
                             (GDestroyNotify)baul_file_unref);
 
-    ctk_widget_show (GTK_WIDGET (dialog));
+    ctk_widget_show (CTK_WIDGET (dialog));
 
     g_signal_connect (dialog, "response",
                       G_CALLBACK (choose_program), parameters->parent_window);
@@ -1457,7 +1457,7 @@ search_for_application_mime_type (ActivateParametersInstall *parameters_install,
     g_assert (parameters_install->proxy != NULL);
 
     /* get XID from parent window */
-    window = ctk_widget_get_window (GTK_WIDGET (parameters_install->parent_window));
+    window = ctk_widget_get_window (CTK_WIDGET (parameters_install->parent_window));
     if (window != NULL)
     {
         xid = GDK_WINDOW_XID (window);
@@ -1487,10 +1487,10 @@ application_unhandled_file_install (CtkDialog *dialog,
                                     gint response_id,
                                     ActivateParametersInstall *parameters_install)
 {
-    ctk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (CTK_WIDGET (dialog));
     parameters_install->dialog = NULL;
 
-    if (response_id == GTK_RESPONSE_YES)
+    if (response_id == CTK_RESPONSE_YES)
     {
         char *mime_type;
 
@@ -1508,7 +1508,7 @@ application_unhandled_file_install (CtkDialog *dialog,
 static gboolean
 delete_cb (CtkDialog *dialog)
 {
-    ctk_dialog_response (dialog, GTK_RESPONSE_DELETE_EVENT);
+    ctk_dialog_response (dialog, CTK_RESPONSE_DELETE_EVENT);
     return TRUE;
 }
 
@@ -1545,14 +1545,14 @@ pk_proxy_appeared_cb (GObject *source,
                     parameters_install->uri);
     /* use a custom dialog to prompt the user to install new software */
     dialog = ctk_message_dialog_new (parameters_install->parent_window, 0,
-                                     GTK_MESSAGE_ERROR,
-                                     GTK_BUTTONS_YES_NO,
+                                     CTK_MESSAGE_ERROR,
+                                     CTK_BUTTONS_YES_NO,
                                      "%s", error_message);
-    ctk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+    ctk_message_dialog_format_secondary_text (CTK_MESSAGE_DIALOG (dialog),
             _("There is no application installed for %s files.\n"
               "Do you want to search for an application to open this file?"),
             g_content_type_get_description (mime_type));
-    ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+    ctk_window_set_resizable (CTK_WINDOW (dialog), FALSE);
 
     parameters_install->dialog = dialog;
     parameters_install->proxy = proxy;
@@ -1664,7 +1664,7 @@ untrusted_launcher_response_callback (CtkDialog *dialog,
     switch (response_id)
     {
     case RESPONSE_RUN:
-        screen = ctk_widget_get_screen (GTK_WIDGET (parameters->parent_window));
+        screen = ctk_widget_get_screen (CTK_WIDGET (parameters->parent_window));
         uri = baul_file_get_uri (parameters->file);
         baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
                         "directory view activate_callback launch_desktop_file window=%p: %s",
@@ -1686,7 +1686,7 @@ untrusted_launcher_response_callback (CtkDialog *dialog,
         break;
     }
 
-    ctk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (CTK_WIDGET (dialog));
     activate_parameters_desktop_free (parameters);
 }
 
@@ -1698,7 +1698,7 @@ activate_desktop_file (ActivateParameters *parameters,
     GdkScreen *screen;
     char *uri;
 
-    screen = ctk_widget_get_screen (GTK_WIDGET (parameters->parent_window));
+    screen = ctk_widget_get_screen (CTK_WIDGET (parameters->parent_window));
 
     if (!baul_file_is_trusted_link (file))
     {
@@ -1724,27 +1724,27 @@ activate_desktop_file (ActivateParameters *parameters,
 
 		dialog = ctk_message_dialog_new (parameters->parent_window,
 						 0,
-						 GTK_MESSAGE_WARNING,
-						 GTK_BUTTONS_NONE,
+						 CTK_MESSAGE_WARNING,
+						 CTK_BUTTONS_NONE,
 						 NULL);
 		g_object_set (dialog,
 			      "text", primary,
 			      "secondary-text", secondary,
 			      NULL);
-        ctk_dialog_add_button (GTK_DIALOG (dialog),
+        ctk_dialog_add_button (CTK_DIALOG (dialog),
                                _("_Launch Anyway"), RESPONSE_RUN);
         if (baul_file_can_set_permissions (file))
         {
-            ctk_dialog_add_button (GTK_DIALOG (dialog),
+            ctk_dialog_add_button (CTK_DIALOG (dialog),
                                    _("Mark as _Trusted"), RESPONSE_MARK_TRUSTED);
         }
 
-        eel_dialog_add_button (GTK_DIALOG (dialog),
+        eel_dialog_add_button (CTK_DIALOG (dialog),
                                _("_Cancel"),
                                "process-stop",
-                               GTK_RESPONSE_CANCEL);
+                               CTK_RESPONSE_CANCEL);
 
-        ctk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+        ctk_dialog_set_default_response (CTK_DIALOG (dialog), CTK_RESPONSE_CANCEL);
 
         g_signal_connect (dialog, "response",
                           G_CALLBACK (untrusted_launcher_response_callback),
@@ -1788,7 +1788,7 @@ activate_files (ActivateParameters *parameters)
     LaunchLocation *location;
     ApplicationLaunchParameters *one_parameters = NULL;
 
-    screen = ctk_widget_get_screen (GTK_WIDGET (parameters->parent_window));
+    screen = ctk_widget_get_screen (CTK_WIDGET (parameters->parent_window));
 
     launch_desktop_files = NULL;
     launch_files = NULL;

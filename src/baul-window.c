@@ -102,7 +102,7 @@ static void action_view_as_callback         (CtkAction               *action,
 
 static GList *history_list;
 
-G_DEFINE_TYPE_WITH_CODE (BaulWindow, baul_window, GTK_TYPE_WINDOW,
+G_DEFINE_TYPE_WITH_CODE (BaulWindow, baul_window, CTK_TYPE_WINDOW,
                          G_ADD_PRIVATE (BaulWindow)
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_WINDOW_INFO,
                                  baul_window_info_iface_init));
@@ -150,9 +150,9 @@ baul_window_init (BaulWindow *window)
             g_warning ("Can't parse BaulWindow's CSS custom description: %s\n", error->message);
             g_error_free (error);
     } else {
-            ctk_style_context_add_provider (ctk_widget_get_style_context (GTK_WIDGET (window)),
-                                            GTK_STYLE_PROVIDER (provider),
-                                            GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+            ctk_style_context_add_provider (ctk_widget_get_style_context (CTK_WIDGET (window)),
+                                            CTK_STYLE_PROVIDER (provider),
+                                            CTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     g_object_unref (provider);
@@ -164,24 +164,24 @@ baul_window_init (BaulWindow *window)
     window->details->show_hidden_files_mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT;
 
     /* Set initial window title */
-    ctk_window_set_title (GTK_WINDOW (window), _("Baul"));
+    ctk_window_set_title (CTK_WINDOW (window), _("Baul"));
 
     grid = ctk_grid_new ();
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (grid), CTK_ORIENTATION_VERTICAL);
     window->details->grid = grid;
     ctk_widget_show (grid);
-    ctk_container_add (GTK_CONTAINER (window), grid);
+    ctk_container_add (CTK_CONTAINER (window), grid);
 
     statusbar = ctk_statusbar_new ();
     ctk_widget_set_name (statusbar, "statusbar-noborder");
 
 /* set margin to zero to reduce size of statusbar */
-	ctk_widget_set_margin_top (GTK_WIDGET (statusbar), 0);
-	ctk_widget_set_margin_bottom (GTK_WIDGET (statusbar), 0);
+	ctk_widget_set_margin_top (CTK_WIDGET (statusbar), 0);
+	ctk_widget_set_margin_bottom (CTK_WIDGET (statusbar), 0);
 
     window->details->statusbar = statusbar;
     window->details->help_message_cid = ctk_statusbar_get_context_id
-                                        (GTK_STATUSBAR (statusbar), "help_message");
+                                        (CTK_STATUSBAR (statusbar), "help_message");
     /* Statusbar is packed in the subclasses */
 
     baul_window_initialize_menus (window);
@@ -190,7 +190,7 @@ baul_window_init (BaulWindow *window)
     window->details->menubar = menu;
     ctk_widget_set_hexpand (menu, TRUE);
     ctk_widget_show (menu);
-    ctk_grid_attach (GTK_GRID (grid), menu, 0, 0, 1, 1);
+    ctk_grid_attach (CTK_GRID (grid), menu, 0, 0, 1, 1);
 
     /* Register to menu provider extension signal managing menu updates */
     g_signal_connect_object (baul_signaller_get_current (), "popup_menu_changed",
@@ -213,11 +213,11 @@ baul_window_push_status (BaulWindow *window,
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
     /* clear any previous message, underflow is allowed */
-    ctk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar), 0);
+    ctk_statusbar_pop (CTK_STATUSBAR (window->details->statusbar), 0);
 
     if (text != NULL && text[0] != '\0')
     {
-        ctk_statusbar_push (GTK_STATUSBAR (window->details->statusbar), 0, text);
+        ctk_statusbar_push (CTK_STATUSBAR (window->details->statusbar), 0, text);
     }
 }
 
@@ -330,7 +330,7 @@ baul_window_new_window (BaulWindow *window)
         /*Create a new window*/
         new_window = baul_application_create_navigation_window (
                      window->application,
-        ctk_window_get_screen (GTK_WINDOW (window)));
+        ctk_window_get_screen (CTK_WINDOW (window)));
 
         /*Create a slot in the new window.*/
         new_slot = new_window->details->active_pane->active_slot;
@@ -430,14 +430,14 @@ update_cursor (BaulWindow *window)
         GdkDisplay *display;
         GdkCursor * cursor;
 
-        display = ctk_widget_get_display (GTK_WIDGET (window));
+        display = ctk_widget_get_display (CTK_WIDGET (window));
         cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
-        gdk_window_set_cursor (ctk_widget_get_window (GTK_WIDGET (window)), cursor);
+        gdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), cursor);
         g_object_unref (cursor);
     }
     else
     {
-        gdk_window_set_cursor (ctk_widget_get_window (GTK_WIDGET (window)), NULL);
+        gdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), NULL);
     }
 }
 
@@ -466,7 +466,7 @@ baul_window_sync_allow_stop (BaulWindow *window,
             G_GNUC_END_IGNORE_DEPRECATIONS;
         }
 
-        if (ctk_widget_get_realized (GTK_WIDGET (window)))
+        if (ctk_widget_get_realized (CTK_WIDGET (window)))
         {
             update_cursor (window);
         }
@@ -590,7 +590,7 @@ baul_window_set_initial_window_geometry (BaulWindow *window)
     guint default_width = 0;
     guint default_height = 0;
 
-    screen = ctk_window_get_screen (GTK_WINDOW (window));
+    screen = ctk_window_get_screen (CTK_WINDOW (window));
 
     max_width_for_screen = get_max_forced_width (screen);
     max_height_for_screen = get_max_forced_height (screen);
@@ -598,7 +598,7 @@ baul_window_set_initial_window_geometry (BaulWindow *window)
     EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      get_default_size, (window, &default_width, &default_height));
 
-    ctk_window_set_default_size (GTK_WINDOW (window),
+    ctk_window_set_default_size (CTK_WINDOW (window),
                                  MIN (default_width,
                                       max_width_for_screen),
                                  MIN (default_height,
@@ -673,7 +673,7 @@ baul_window_destroy (CtkWidget *object)
     g_assert (window->details->panes == NULL);
     g_assert (window->details->active_pane == NULL);
 
-    GTK_WIDGET_CLASS (baul_window_parent_class)->destroy (object);
+    CTK_WIDGET_CLASS (baul_window_parent_class)->destroy (object);
 }
 
 static void
@@ -739,7 +739,7 @@ baul_window_show_window (BaulWindow    *window)
         }
     }
 
-    ctk_widget_show (GTK_WIDGET (window));
+    ctk_widget_show (CTK_WIDGET (window));
 
     slot = window->details->active_pane->active_slot;
 
@@ -820,7 +820,7 @@ baul_window_close (BaulWindow *window)
     EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      close, (window));
 
-    ctk_widget_destroy (GTK_WIDGET (window));
+    ctk_widget_destroy (CTK_WIDGET (window));
 }
 
 BaulWindowSlot *
@@ -1031,7 +1031,7 @@ baul_window_slot_close (BaulWindowSlot *slot)
 static void
 baul_window_realize (CtkWidget *widget)
 {
-    GTK_WIDGET_CLASS (baul_window_parent_class)->realize (widget);
+    CTK_WIDGET_CLASS (baul_window_parent_class)->realize (widget);
     update_cursor (BAUL_WINDOW (widget));
 }
 
@@ -1078,7 +1078,7 @@ baul_window_key_press_event (CtkWidget *widget,
         }
     }
 
-    return GTK_WIDGET_CLASS (baul_window_parent_class)->key_press_event (widget, event);
+    return CTK_WIDGET_CLASS (baul_window_parent_class)->key_press_event (widget, event);
 }
 
 /*
@@ -1106,7 +1106,7 @@ action_view_as_callback (CtkAction *action,
     window = data->window;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         BaulWindowSlot *slot;
 
@@ -1154,7 +1154,7 @@ add_view_as_menu_item (BaulWindow *window,
 
         ctk_accel_map_add_entry (accel_path, accel_keyval, GDK_CONTROL_MASK);
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        ctk_action_set_accel_path (GTK_ACTION (action), accel_path);
+        ctk_action_set_accel_path (CTK_ACTION (action), accel_path);
         G_GNUC_END_IGNORE_DEPRECATIONS;
     }
 
@@ -1181,7 +1181,7 @@ add_view_as_menu_item (BaulWindow *window,
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     ctk_action_group_add_action (window->details->view_as_action_group,
-                                 GTK_ACTION (action));
+                                 CTK_ACTION (action));
     g_object_unref (action);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
@@ -1190,7 +1190,7 @@ add_view_as_menu_item (BaulWindow *window,
                            placeholder_path,
                            action_name,
                            action_name,
-                           GTK_UI_MANAGER_MENUITEM,
+                           CTK_UI_MANAGER_MENUITEM,
                            FALSE);
 
     return action; /* return value owned by group */
@@ -1237,7 +1237,7 @@ update_extra_viewer_in_view_as_menus (BaulWindow *window,
     if (window->details->extra_viewer_radio_action != NULL)
     {
         ctk_action_group_remove_action (window->details->view_as_action_group,
-                                        GTK_ACTION (window->details->extra_viewer_radio_action));
+                                        CTK_ACTION (window->details->extra_viewer_radio_action));
         window->details->extra_viewer_radio_action = NULL;
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -1331,7 +1331,7 @@ baul_window_synch_view_as_menus (BaulWindow *window)
                                      action_view_as_callback,
                                      NULL);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action), TRUE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_handlers_unblock_matched (action,
                                        G_SIGNAL_MATCH_FUNC,
@@ -1476,8 +1476,8 @@ baul_window_display_error (BaulWindow *window, const char *error_msg)
 
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
-    dialog = ctk_message_dialog_new (GTK_WINDOW (window), 0, GTK_MESSAGE_ERROR,
-                                     GTK_BUTTONS_OK, error_msg, NULL);
+    dialog = ctk_message_dialog_new (CTK_WINDOW (window), 0, CTK_MESSAGE_ERROR,
+                                     CTK_BUTTONS_OK, error_msg, NULL);
     ctk_widget_show (dialog);
 }
 
@@ -1643,7 +1643,7 @@ baul_window_show (CtkWidget *widget)
 
     window = BAUL_WINDOW (widget);
 
-    GTK_WIDGET_CLASS (baul_window_parent_class)->show (widget);
+    CTK_WIDGET_CLASS (baul_window_parent_class)->show (widget);
 
     baul_window_ui_update (window);
 }
@@ -1878,7 +1878,7 @@ baul_forget_history (void)
      * each window's current location bookmark from history list
      * so it doesn't get clobbered.
      */
-    for (window_node = ctk_application_get_windows (GTK_APPLICATION (app));
+    for (window_node = ctk_application_get_windows (CTK_APPLICATION (app));
             window_node != NULL;
             window_node = window_node->next)
     {
@@ -1921,7 +1921,7 @@ baul_forget_history (void)
     free_history_list ();
 
     /* Re-add each window's current location to history list. */
-    for (window_node = ctk_application_get_windows (GTK_APPLICATION (app));
+    for (window_node = ctk_application_get_windows (CTK_APPLICATION (app));
             window_node != NULL;
             window_node = window_node->next)
     {
@@ -2148,12 +2148,12 @@ baul_window_class_init (BaulWindowClass *class)
     G_OBJECT_CLASS (class)->set_property = baul_window_set_property;
     G_OBJECT_CLASS (class)->finalize = baul_window_finalize;
 
-    GTK_WIDGET_CLASS (class)->destroy = baul_window_destroy;
+    CTK_WIDGET_CLASS (class)->destroy = baul_window_destroy;
 
-    GTK_WIDGET_CLASS (class)->show = baul_window_show;
+    CTK_WIDGET_CLASS (class)->show = baul_window_show;
 
-    GTK_WIDGET_CLASS (class)->realize = baul_window_realize;
-    GTK_WIDGET_CLASS (class)->key_press_event = baul_window_key_press_event;
+    CTK_WIDGET_CLASS (class)->realize = baul_window_realize;
+    CTK_WIDGET_CLASS (class)->key_press_event = baul_window_key_press_event;
     class->get_title = real_get_title;
     class->sync_title = real_sync_title;
     class->set_allow_up = real_set_allow_up;

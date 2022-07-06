@@ -384,7 +384,7 @@ baul_connect_desktop_background_to_settings (BaulIconContainer *icon_container)
 {
     EelBackground *background;
 
-    background = eel_get_widget_background (GTK_WIDGET (icon_container));
+    background = eel_get_widget_background (CTK_WIDGET (icon_container));
 
     eel_background_set_desktop (background, TRUE);
 

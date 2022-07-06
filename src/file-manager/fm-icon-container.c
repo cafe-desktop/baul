@@ -123,7 +123,7 @@ fm_icon_container_get_icon_images (BaulIconContainer *container,
         flags |= BAUL_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT;
     }
 
-    scale = ctk_widget_get_scale_factor (GTK_WIDGET (icon_view));
+    scale = ctk_widget_get_scale_factor (CTK_WIDGET (icon_view));
 
     return baul_file_get_icon (file, size, scale, flags);
 }
@@ -607,8 +607,8 @@ fm_icon_container_class_init (FMIconContainerClass *klass)
 static void
 fm_icon_container_init (FMIconContainer *icon_container)
 {
-    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (icon_container)),
-                                 GTK_STYLE_CLASS_VIEW);
+    ctk_style_context_add_class (ctk_widget_get_style_context (CTK_WIDGET (icon_container)),
+                                 CTK_STYLE_CLASS_VIEW);
 }
 
 BaulIconContainer *
@@ -619,7 +619,7 @@ fm_icon_container_construct (FMIconContainer *icon_container, FMIconView *view)
     g_return_val_if_fail (FM_IS_ICON_VIEW (view), NULL);
 
     icon_container->view = view;
-    atk_obj = ctk_widget_get_accessible (GTK_WIDGET (icon_container));
+    atk_obj = ctk_widget_get_accessible (CTK_WIDGET (icon_container));
     atk_object_set_name (atk_obj, _("Icon View"));
 
     return BAUL_ICON_CONTAINER (icon_container);

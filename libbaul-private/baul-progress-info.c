@@ -223,7 +223,7 @@ status_icon_activate_cb (CtkStatusIcon *icon,
     }
     else
     {
-        ctk_window_present (GTK_WINDOW (progress_window));
+        ctk_window_present (CTK_WINDOW (progress_window));
     }
 }
 
@@ -237,24 +237,24 @@ get_progress_window ()
     if (progress_window != NULL)
         return progress_window;
 
-    progress_window = ctk_window_new (GTK_WINDOW_TOPLEVEL);
-    ctk_window_set_resizable (GTK_WINDOW (progress_window),
+    progress_window = ctk_window_new (CTK_WINDOW_TOPLEVEL);
+    ctk_window_set_resizable (CTK_WINDOW (progress_window),
                               FALSE);
-    ctk_container_set_border_width (GTK_CONTAINER (progress_window), 10);
+    ctk_container_set_border_width (CTK_CONTAINER (progress_window), 10);
 
-    ctk_window_set_title (GTK_WINDOW (progress_window),
+    ctk_window_set_title (CTK_WINDOW (progress_window),
                           _("File Operations"));
 
-    ctk_window_set_position (GTK_WINDOW (progress_window),
-                             GTK_WIN_POS_CENTER);
+    ctk_window_set_position (CTK_WINDOW (progress_window),
+                             CTK_WIN_POS_CENTER);
 
-    ctk_window_set_icon_name (GTK_WINDOW (progress_window),
+    ctk_window_set_icon_name (CTK_WINDOW (progress_window),
                               "system-file-manager");
 
-    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    ctk_box_set_spacing (GTK_BOX (vbox), 5);
+    vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
+    ctk_box_set_spacing (CTK_BOX (vbox), 5);
 
-    ctk_container_add (GTK_CONTAINER (progress_window),
+    ctk_container_add (CTK_CONTAINER (progress_window),
                        vbox);
 
     g_signal_connect (progress_window,
@@ -353,7 +353,7 @@ static CtkWidget *
 get_widgets_container ()
 {
     CtkWidget * window = get_progress_window ();
-    return ctk_bin_get_child (GTK_BIN (window));
+    return ctk_bin_get_child (CTK_BIN (window));
 }
 static void
 foreach_get_running_operations (CtkWidget * widget, int * n)
@@ -371,7 +371,7 @@ get_running_operations ()
     CtkWidget * container = get_widgets_container();
     int n = 0;
 
-    ctk_container_foreach (GTK_CONTAINER(container),
+    ctk_container_foreach (CTK_CONTAINER(container),
                         (CtkCallback)foreach_get_running_operations, &n);
     return n;
 }
@@ -396,7 +396,7 @@ get_first_queued_widget ()
     CtkWidget * container = get_widgets_container();
     CtkWidget * out = NULL;
 
-    ctk_container_foreach (GTK_CONTAINER(container),
+    ctk_container_foreach (CTK_CONTAINER(container),
                 (CtkCallback)foreach_get_queued_widget, &out);
     return out;
 }
@@ -426,9 +426,9 @@ start_button_update_view (ProgressWidgetData *data)
     curimage = g_object_get_data (G_OBJECT(button), STARTBT_DATA_CURIMAGE);
     if (curimage != toapply) {
         if (curimage != NULL)
-            ctk_container_remove (GTK_CONTAINER(button), curimage);
+            ctk_container_remove (CTK_CONTAINER(button), curimage);
 
-        ctk_container_add (GTK_CONTAINER(button), toapply);
+        ctk_container_add (CTK_CONTAINER(button), toapply);
         ctk_widget_show (toapply);
         g_object_set_data (G_OBJECT(button), STARTBT_DATA_CURIMAGE, toapply);
     }
@@ -463,7 +463,7 @@ progress_info_set_waiting(BaulProgressInfo *info, gboolean waiting)
 static void
 widget_reposition_as_queued (CtkWidget * widget)
 {
-    ctk_box_reorder_child (GTK_BOX(get_widgets_container ()), widget, n_progress_ops-1);
+    ctk_box_reorder_child (CTK_BOX(get_widgets_container ()), widget, n_progress_ops-1);
 }
 
 /* Reposition the widget so that it sits right before the first stopped widget */
@@ -476,7 +476,7 @@ widget_reposition_as_paused (CtkWidget * widget)
     gboolean abort = FALSE;
     CtkWidget * container = get_widgets_container();
 
-    children = ctk_container_get_children (GTK_CONTAINER(container));
+    children = ctk_container_get_children (CTK_CONTAINER(container));
 
     i = 0;
     for (child = children; child && !abort; child = child->next) {
@@ -494,7 +494,7 @@ widget_reposition_as_paused (CtkWidget * widget)
     i--;
     g_list_free (children);
 
-    ctk_box_reorder_child (GTK_BOX(container),
+    ctk_box_reorder_child (CTK_BOX(container),
                 widget, i);
 }
 
@@ -508,7 +508,7 @@ widget_reposition_as_running (CtkWidget * widget)
     int i, mypos = -1;
     CtkWidget * container = get_widgets_container();
 
-    children = ctk_container_get_children (GTK_CONTAINER(container));
+    children = ctk_container_get_children (CTK_CONTAINER(container));
 
     i = 0;
     for (child = children; child && !abort; child = child->next) {
@@ -529,7 +529,7 @@ widget_reposition_as_running (CtkWidget * widget)
     g_list_free (children);
 
     if (mypos == -1 || mypos > i) {
-        ctk_box_reorder_child (GTK_BOX(container),
+        ctk_box_reorder_child (CTK_BOX(container),
                     widget, i);
     }
 }
@@ -623,7 +623,7 @@ update_status_icon_and_window (void)
         if (window_shown)
         {
             if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_NOTIFICATIONS) &&
-                !ctk_window_is_active (GTK_WINDOW (get_progress_window ())))
+                !ctk_window_is_active (CTK_WINDOW (get_progress_window ())))
             {
                 NotifyNotification *notification;
 
@@ -644,7 +644,7 @@ update_status_icon_and_window (void)
     {
         ctk_widget_show_all (get_progress_window ());
         ctk_status_icon_set_visible (status_icon, TRUE);
-        ctk_window_present (GTK_WINDOW (get_progress_window ()));
+        ctk_window_present (CTK_WINDOW (get_progress_window ()));
         window_shown = TRUE;
     }
 }
@@ -774,9 +774,9 @@ start_button_init (ProgressWidgetData *data)
     data->btstart = button;
 
     pauseImage = ctk_image_new_from_icon_name (
-                "media-playback-pause", GTK_ICON_SIZE_BUTTON);
+                "media-playback-pause", CTK_ICON_SIZE_BUTTON);
     resumeImage = ctk_image_new_from_icon_name (
-                "media-playback-start", GTK_ICON_SIZE_BUTTON);
+                "media-playback-start", CTK_ICON_SIZE_BUTTON);
 
     g_object_ref (pauseImage);
     g_object_ref (resumeImage);
@@ -800,9 +800,9 @@ queue_button_init (ProgressWidgetData *data)
     button = ctk_button_new ();
     data->btqueue = button;
 
-    image = ctk_image_new_from_icon_name ("undo", GTK_ICON_SIZE_BUTTON);
+    image = ctk_image_new_from_icon_name ("undo", CTK_ICON_SIZE_BUTTON);
 
-    ctk_container_add (GTK_CONTAINER (button), image);
+    ctk_container_add (CTK_CONTAINER (button), image);
     atk_object_set_name (ctk_widget_get_accessible (button), _("Queue"));
     ctk_widget_set_tooltip_text (button, _("Queue"));
 
@@ -819,8 +819,8 @@ progress_widget_new (BaulProgressInfo *info)
     data->info = g_object_ref (info);
     data->state = STATE_INITIALIZED;
 
-    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    ctk_box_set_spacing (GTK_BOX (vbox), 5);
+    vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
+    ctk_box_set_spacing (CTK_BOX (vbox), 5);
 
 
     data->widget = vbox;
@@ -830,31 +830,31 @@ progress_widget_new (BaulProgressInfo *info)
 
     label = ctk_label_new ("status");
     ctk_widget_set_size_request (label, 500, -1);
-    ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    ctk_label_set_line_wrap_mode (GTK_LABEL (label), PANGO_WRAP_WORD_CHAR);
-    ctk_label_set_xalign (GTK_LABEL (label), 0.0);
-    ctk_box_pack_start (GTK_BOX (vbox),
+    ctk_label_set_line_wrap (CTK_LABEL (label), TRUE);
+    ctk_label_set_line_wrap_mode (CTK_LABEL (label), PANGO_WRAP_WORD_CHAR);
+    ctk_label_set_xalign (CTK_LABEL (label), 0.0);
+    ctk_box_pack_start (CTK_BOX (vbox),
                         label,
                         TRUE, FALSE,
                         0);
-    data->status = GTK_LABEL (label);
+    data->status = CTK_LABEL (label);
 
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 10);
 
     imgcancel = ctk_image_new_from_icon_name ("process-stop",
-                                              GTK_ICON_SIZE_BUTTON);
+                                              CTK_ICON_SIZE_BUTTON);
 
     btcancel = ctk_button_new ();
-    ctk_container_add (GTK_CONTAINER (btcancel), imgcancel);
+    ctk_container_add (CTK_CONTAINER (btcancel), imgcancel);
     atk_object_set_name (ctk_widget_get_accessible (btcancel), _("Cancel"));
     ctk_widget_set_tooltip_text (btcancel, _("Cancel"));
     g_signal_connect (btcancel, "clicked", (GCallback)cancel_clicked, data);
 
     progress_bar = ctk_progress_bar_new ();
-    data->progress_bar = GTK_PROGRESS_BAR (progress_bar);
+    data->progress_bar = CTK_PROGRESS_BAR (progress_bar);
     ctk_progress_bar_set_pulse_step (data->progress_bar, 0.05);
-    box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    ctk_box_pack_start (GTK_BOX (box),
+    box = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
+    ctk_box_pack_start (CTK_BOX (box),
                        progress_bar,
                        TRUE,FALSE,
                        0);
@@ -862,36 +862,36 @@ progress_widget_new (BaulProgressInfo *info)
     start_button_init (data);
     queue_button_init (data);
 
-    ctk_box_pack_start (GTK_BOX (hbox),
+    ctk_box_pack_start (CTK_BOX (hbox),
                         btcancel,
                         FALSE,FALSE,
                         0);
-    ctk_box_pack_start (GTK_BOX (hbox),
+    ctk_box_pack_start (CTK_BOX (hbox),
                        box,
                        TRUE,TRUE,
                        0);
-    ctk_box_pack_start (GTK_BOX (hbox),
+    ctk_box_pack_start (CTK_BOX (hbox),
                         data->btstart,
                         FALSE,FALSE,
                         0);
-    ctk_box_pack_start (GTK_BOX (hbox),
+    ctk_box_pack_start (CTK_BOX (hbox),
                         data->btqueue,
                         FALSE,FALSE,
                         0);
 
-    ctk_box_pack_start (GTK_BOX (vbox),
+    ctk_box_pack_start (CTK_BOX (vbox),
                         hbox,
                         FALSE,FALSE,
                         0);
 
     label = ctk_label_new ("details");
-    ctk_label_set_xalign (GTK_LABEL (label), 0.0);
-    ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    ctk_box_pack_start (GTK_BOX (vbox),
+    ctk_label_set_xalign (CTK_LABEL (label), 0.0);
+    ctk_label_set_line_wrap (CTK_LABEL (label), TRUE);
+    ctk_box_pack_start (CTK_BOX (vbox),
                         label,
                         TRUE, FALSE,
                         0);
-    data->details = GTK_LABEL (label);
+    data->details = CTK_LABEL (label);
 
     ctk_widget_show_all (data->widget);
 
@@ -920,7 +920,7 @@ handle_new_progress_info (BaulProgressInfo *info)
     window = get_progress_window ();
 
     progress = progress_widget_new (info);
-    ctk_box_pack_start (GTK_BOX (ctk_bin_get_child (GTK_BIN (window))),
+    ctk_box_pack_start (CTK_BOX (ctk_bin_get_child (CTK_BIN (window))),
                         progress,
                         FALSE, FALSE, 6);
 

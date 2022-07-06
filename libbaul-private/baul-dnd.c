@@ -767,7 +767,7 @@ append_drop_action_menu_item (CtkWidget          *menu,
 
     menu_item = ctk_menu_item_new_with_mnemonic (text);
     ctk_widget_set_sensitive (menu_item, sensitive);
-    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (menu), menu_item);
 
     g_object_set_data (G_OBJECT (menu_item),
                        "action",
@@ -793,7 +793,7 @@ baul_drag_drop_action_ask (CtkWidget *widget,
      * allowed actions.
      */
     menu = ctk_menu_new ();
-    ctk_menu_set_screen (GTK_MENU (menu), ctk_widget_get_screen (widget));
+    ctk_menu_set_screen (CTK_MENU (menu), ctk_widget_get_screen (widget));
 
     append_drop_action_menu_item (menu, _("_Move Here"),
                                   GDK_ACTION_MOVE,
@@ -815,10 +815,10 @@ baul_drag_drop_action_ask (CtkWidget *widget,
                                   (actions & BAUL_DND_ACTION_SET_AS_BACKGROUND) != 0,
                                   &damd);
 
-    eel_ctk_menu_append_separator (GTK_MENU (menu));
+    eel_ctk_menu_append_separator (CTK_MENU (menu));
 
     menu_item = ctk_menu_item_new_with_mnemonic (_("Cancel"));
-    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (menu), menu_item);
     ctk_widget_show (menu_item);
 
     damd.chosen = 0;
@@ -830,7 +830,7 @@ baul_drag_drop_action_ask (CtkWidget *widget,
 
     ctk_grab_add (menu);
 
-    ctk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
+    ctk_menu_popup_at_pointer (CTK_MENU (menu), NULL);
 
     g_main_loop_run (damd.loop);
 
@@ -856,7 +856,7 @@ baul_drag_drop_background_ask (CtkWidget *widget,
      * allowed actions.
      */
     menu = ctk_menu_new ();
-    ctk_menu_set_screen (GTK_MENU (menu), ctk_widget_get_screen (widget));
+    ctk_menu_set_screen (CTK_MENU (menu), ctk_widget_get_screen (widget));
 
     append_drop_action_menu_item (menu, _("Set as background for _all folders"),
                                   BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND,
@@ -868,10 +868,10 @@ baul_drag_drop_background_ask (CtkWidget *widget,
                                   (actions & BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND) != 0,
                                   &damd);
 
-    eel_ctk_menu_append_separator (GTK_MENU (menu));
+    eel_ctk_menu_append_separator (CTK_MENU (menu));
 
     menu_item = ctk_menu_item_new_with_mnemonic (_("Cancel"));
-    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (menu), menu_item);
     ctk_widget_show (menu_item);
 
     damd.chosen = 0;
@@ -883,7 +883,7 @@ baul_drag_drop_background_ask (CtkWidget *widget,
 
     ctk_grab_add (menu);
 
-    ctk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
+    ctk_menu_popup_at_pointer (CTK_MENU (menu), NULL);
 
     g_main_loop_run (damd.loop);
 
@@ -917,7 +917,7 @@ baul_drag_autoscroll_calculate_delta (CtkWidget *widget, float *x_scroll_delta, 
     GdkDevice *pointer;
     int x, y;
 
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
 
     display = ctk_widget_get_display (widget);
     seat = gdk_display_get_default_seat (display);
@@ -1378,7 +1378,7 @@ baul_drag_slot_proxy_init (CtkWidget *widget,
     };
     CtkTargetList *target_list;
 
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
     g_assert (drag_info != NULL);
 
     ctk_drag_dest_set (widget, 0,

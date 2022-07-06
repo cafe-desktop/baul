@@ -43,7 +43,7 @@
 /* Tell screen readers that this is a desktop window */
 
 G_DEFINE_TYPE (BaulDesktopWindowAccessible, baul_desktop_window_accessible,
-               GTK_TYPE_WINDOW_ACCESSIBLE);
+               CTK_TYPE_WINDOW_ACCESSIBLE);
 
 static AtkAttributeSet *
 desktop_get_attributes (AtkObject *accessible)
@@ -95,15 +95,15 @@ baul_desktop_window_init (BaulDesktopWindow *window)
 
     CtkStyleContext *context;
 
-    context = ctk_widget_get_style_context (GTK_WIDGET (window));
+    context = ctk_widget_get_style_context (CTK_WIDGET (window));
     ctk_style_context_add_class (context, "baul-desktop-window");
 
-    ctk_window_move (GTK_WINDOW (window), 0, 0);
+    ctk_window_move (CTK_WINDOW (window), 0, 0);
 
     /* shouldn't really be needed given our semantic type
      * of _NET_WM_TYPE_DESKTOP, but why not
      */
-    ctk_window_set_resizable (GTK_WINDOW (window),
+    ctk_window_set_resizable (CTK_WINDOW (window),
                               FALSE);
 
     g_object_set_data (G_OBJECT (window), "is_desktop_window",
@@ -120,7 +120,7 @@ baul_desktop_window_init (BaulDesktopWindow *window)
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Set the accessible name so that it doesn't inherit the cryptic desktop URI. */
-    accessible = ctk_widget_get_accessible (GTK_WIDGET (window));
+    accessible = ctk_widget_get_accessible (CTK_WIDGET (window));
 
     if (accessible) {
         atk_object_set_name (accessible, _("Desktop"));
@@ -130,7 +130,7 @@ baul_desktop_window_init (BaulDesktopWindow *window)
 static gint
 baul_desktop_window_delete_event (BaulDesktopWindow *window)
 {
-    /* Returning true tells GTK+ not to delete the window. */
+    /* Returning true tells CTK+ not to delete the window. */
     return TRUE;
 }
 
@@ -186,15 +186,15 @@ baul_desktop_window_new (BaulApplication *application,
                               "height_request", height_request,
                               "screen", screen,
                               NULL));
-    /* Stop wrong desktop window size in GTK 3.20*/
+    /* Stop wrong desktop window size in CTK 3.20*/
     /* We don't want to set a default size, which the parent does, since this */
     /* will cause the desktop window to open at the wrong size in ctk 3.20 */
-    ctk_window_set_default_size (GTK_WINDOW (window), -1, -1);
+    ctk_window_set_default_size (CTK_WINDOW (window), -1, -1);
 
     /* Special sawmill setting*/
     GdkWindow *gdkwin;
-    ctk_widget_realize (GTK_WIDGET (window));
-    gdkwin = ctk_widget_get_window (GTK_WIDGET (window));
+    ctk_widget_realize (CTK_WIDGET (window));
+    gdkwin = ctk_widget_get_window (CTK_WIDGET (window));
     if (gdk_window_ensure_native (gdkwin)) {
         Display *disp = GDK_DISPLAY_XDISPLAY (gdk_window_get_display (gdkwin));
         XClassHint *xch = XAllocClassHint ();
@@ -220,7 +220,7 @@ static void
 map (CtkWidget *widget)
 {
     /* Chain up to realize our children */
-    GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->map (widget);
+    CTK_WIDGET_CLASS (baul_desktop_window_parent_class)->map (widget);
     gdk_window_lower (ctk_widget_get_window (widget));
 }
 
@@ -235,18 +235,18 @@ unrealize (CtkWidget *widget)
     details = window->details;
 
     root_window = gdk_screen_get_root_window (
-                      ctk_window_get_screen (GTK_WINDOW (window)));
+                      ctk_window_get_screen (CTK_WINDOW (window)));
 
     gdk_property_delete (root_window,
                          gdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", TRUE));
 
     if (details->size_changed_id != 0) {
-        g_signal_handler_disconnect (ctk_window_get_screen (GTK_WINDOW (window)),
+        g_signal_handler_disconnect (ctk_window_get_screen (CTK_WINDOW (window)),
                          details->size_changed_id);
         details->size_changed_id = 0;
     }
 
-    GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->unrealize (widget);
+    CTK_WIDGET_CLASS (baul_desktop_window_parent_class)->unrealize (widget);
 }
 
 static void
@@ -272,7 +272,7 @@ set_desktop_window_id (BaulDesktopWindow *window,
     GdkWindow *root_window;
 
     root_window = gdk_screen_get_root_window (
-                      ctk_window_get_screen (GTK_WINDOW (window)));
+                      ctk_window_get_screen (CTK_WINDOW (window)));
 
     window_xid = GDK_WINDOW_XID (gdkwindow);
 
@@ -294,7 +294,7 @@ realize (CtkWidget *widget)
     ctk_widget_set_events (widget, ctk_widget_get_events (widget)
                            | GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
     /* Do the work of realizing. */
-    GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->realize (widget);
+    CTK_WIDGET_CLASS (baul_desktop_window_parent_class)->realize (widget);
 
     /* This is the new way to set up the desktop window */
     set_wmspec_desktop_hint (ctk_widget_get_window (widget));
@@ -302,7 +302,7 @@ realize (CtkWidget *widget)
     set_desktop_window_id (window, ctk_widget_get_window (widget));
 
     details->size_changed_id =
-        g_signal_connect (ctk_window_get_screen (GTK_WINDOW (window)), "size_changed",
+        g_signal_connect (ctk_window_get_screen (CTK_WINDOW (window)), "size_changed",
                           G_CALLBACK (baul_desktop_window_screen_size_changed), window);
 }
 
@@ -312,21 +312,21 @@ draw (CtkWidget *widget,
 {
     eel_background_draw (widget, cr);
 
-    return GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->draw (widget, cr);
+    return CTK_WIDGET_CLASS (baul_desktop_window_parent_class)->draw (widget, cr);
 }
 
 static BaulIconInfo *
 real_get_icon (BaulWindow *window,
                BaulWindowSlot *slot)
 {
-    gint scale = ctk_widget_get_scale_factor (GTK_WIDGET (window));
+    gint scale = ctk_widget_get_scale_factor (CTK_WIDGET (window));
     return baul_icon_info_lookup_from_name (BAUL_ICON_DESKTOP, 48, scale);
 }
 
 static void
 baul_desktop_window_class_init (BaulDesktopWindowClass *klass)
 {
-    CtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
+    CtkWidgetClass *wclass = CTK_WIDGET_CLASS (klass);
     BaulWindowClass *nclass = BAUL_WINDOW_CLASS (klass);
 
     wclass->realize = realize;

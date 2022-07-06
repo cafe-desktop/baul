@@ -382,7 +382,7 @@ drag_data_get_callback (CtkWidget *widget,
     CtkTreeModel *model;
     GList *ref_list;
 
-    tree_view = GTK_TREE_VIEW (widget);
+    tree_view = CTK_TREE_VIEW (widget);
 
     model = ctk_tree_view_get_model (tree_view);
 
@@ -519,7 +519,7 @@ drag_begin_callback (CtkWidget *widget,
     stop_drag_check (view);
     view->details->drag_started = TRUE;
 
-    ref_list = get_filtered_selection_refs (GTK_TREE_VIEW (widget));
+    ref_list = get_filtered_selection_refs (CTK_TREE_VIEW (widget));
     g_object_set_data_full (G_OBJECT (context),
                             "drag-info",
                             ref_list,
@@ -535,7 +535,7 @@ motion_notify_callback (CtkWidget *widget,
 
     view = FM_LIST_VIEW (callback_data);
 
-    if (event->window != ctk_tree_view_get_bin_window (GTK_TREE_VIEW (widget)))
+    if (event->window != ctk_tree_view_get_bin_window (CTK_TREE_VIEW (widget)))
     {
         return FALSE;
     }
@@ -545,7 +545,7 @@ motion_notify_callback (CtkWidget *widget,
         CtkTreePath *old_hover_path;
 
         old_hover_path = view->details->hover_path;
-        ctk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget),
+        ctk_tree_view_get_path_at_pos (CTK_TREE_VIEW (widget),
                                        event->x, event->y,
                                        &view->details->hover_path,
                                        NULL, NULL, NULL);
@@ -630,7 +630,7 @@ enter_notify_callback (CtkWidget *widget,
             ctk_tree_path_free (view->details->hover_path);
         }
 
-        ctk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget),
+        ctk_tree_view_get_path_at_pos (CTK_TREE_VIEW (widget),
                                        event->x, event->y,
                                        &view->details->hover_path,
                                        NULL, NULL, NULL);
@@ -647,7 +647,7 @@ enter_notify_callback (CtkWidget *widget,
 static void
 do_popup_menu (CtkWidget *widget, FMListView *view, GdkEventButton *event)
 {
-    if (tree_view_has_selection (GTK_TREE_VIEW (widget)))
+    if (tree_view_has_selection (CTK_TREE_VIEW (widget)))
     {
         fm_directory_view_pop_up_selection_context_menu (FM_DIRECTORY_VIEW (view), event);
     }
@@ -674,8 +674,8 @@ button_press_callback (CtkWidget *widget, GdkEventButton *event, gpointer callba
     gboolean on_expander;
 
     view = FM_LIST_VIEW (callback_data);
-    tree_view = GTK_TREE_VIEW (widget);
-    tree_view_class = GTK_WIDGET_GET_CLASS (tree_view);
+    tree_view = CTK_TREE_VIEW (widget);
+    tree_view_class = CTK_WIDGET_GET_CLASS (tree_view);
     selection = ctk_tree_view_get_selection (tree_view);
 
     /* Don't handle extra mouse buttons here */
@@ -1010,7 +1010,7 @@ unload_file_timeout (gpointer data)
         {
             CtkTreePath *path;
 
-            path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+            path = ctk_tree_model_get_path (CTK_TREE_MODEL (model), &iter);
 
             if (!ctk_tree_view_row_expanded (unload_data->view->details->tree_view,
                                              path))
@@ -1044,7 +1044,7 @@ row_collapsed_callback (CtkTreeView *treeview, CtkTreeIter *iter, CtkTreePath *p
     char *uri;
 
     view = FM_LIST_VIEW (callback_data);
-    model = GTK_TREE_MODEL (view->details->model);
+    model = CTK_TREE_MODEL (view->details->model);
 
     ctk_tree_model_get (model, iter,
                         FM_LIST_MODEL_FILE_COLUMN, &file,
@@ -1113,7 +1113,7 @@ key_press_callback (CtkWidget *widget, GdkEventKey *event, gpointer callback_dat
     CtkTreeView *tree_view;
     CtkTreePath *path;
 
-    tree_view = GTK_TREE_VIEW (widget);
+    tree_view = CTK_TREE_VIEW (widget);
 
     view = FM_DIRECTORY_VIEW (callback_data);
     listview = FM_LIST_VIEW (view);
@@ -1160,7 +1160,7 @@ key_press_callback (CtkWidget *widget, GdkEventKey *event, gpointer callback_dat
             handled = FALSE;
             break;
         }
-        if (!ctk_widget_has_focus (GTK_WIDGET (FM_LIST_VIEW (view)->details->tree_view)))
+        if (!ctk_widget_has_focus (CTK_WIDGET (FM_LIST_VIEW (view)->details->tree_view)))
         {
             handled = FALSE;
             break;
@@ -1177,7 +1177,7 @@ key_press_callback (CtkWidget *widget, GdkEventKey *event, gpointer callback_dat
         break;
     case GDK_KEY_Return:
     case GDK_KEY_KP_Enter:
-	if (GTK_IS_CELL_EDITABLE (listview->details->editable_widget) &&
+	if (CTK_IS_CELL_EDITABLE (listview->details->editable_widget) &&
 	    ((event->state & GDK_SHIFT_MASK) || (event->state & GDK_CONTROL_MASK)))
 	{
 		event->state = 0;
@@ -1234,7 +1234,7 @@ fm_list_view_reveal_selection (FMDirectoryView *view)
         {
             CtkTreePath *path;
 
-            path = ctk_tree_model_get_path (GTK_TREE_MODEL (list_view->details->model), &iter);
+            path = ctk_tree_model_get_path (CTK_TREE_MODEL (list_view->details->model), &iter);
 
             ctk_tree_view_scroll_to_cell (list_view->details->tree_view, path, NULL, FALSE, 0.0, 0.0);
 
@@ -1300,7 +1300,7 @@ sort_column_changed_callback (CtkTreeSortable *sortable,
     if (view->details->last_sort_attr != sort_attr &&
             sort_criterion_changes_due_to_user (view->details->tree_view))
     {
-        /* at this point, the sort order is always GTK_SORT_ASCENDING, if the sort column ID
+        /* at this point, the sort order is always CTK_SORT_ASCENDING, if the sort column ID
          * switched. Invert the sort order, if it's the default criterion with a reversed preference,
          * or if it makes sense for the attribute (i.e. date). */
         if (sort_attr == default_sort_attr)
@@ -1316,9 +1316,9 @@ sort_column_changed_callback (CtkTreeSortable *sortable,
         if (reversed)
         {
             g_signal_handlers_block_by_func (sortable, sort_column_changed_callback, view);
-            ctk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (view->details->model),
+            ctk_tree_sortable_set_sort_column_id (CTK_TREE_SORTABLE (view->details->model),
                                                   sort_column_id,
-                                                  GTK_SORT_DESCENDING);
+                                                  CTK_SORT_DESCENDING);
             g_signal_handlers_unblock_by_func (sortable, sort_column_changed_callback, view);
         }
     }
@@ -1342,7 +1342,7 @@ cell_renderer_editing_started_cb (CtkCellRenderer *renderer,
 {
     CtkEntry *entry;
 
-    entry = GTK_ENTRY (editable);
+    entry = CTK_ENTRY (editable);
     list_view->details->editable_widget = editable;
 
     /* Free a previously allocated original_name */
@@ -1351,7 +1351,7 @@ cell_renderer_editing_started_cb (CtkCellRenderer *renderer,
     list_view->details->original_name = g_strdup (ctk_entry_get_text (entry));
 
     baul_clipboard_set_up_editable
-    (GTK_EDITABLE (entry),
+    (CTK_EDITABLE (entry),
      fm_directory_view_get_ui_manager (FM_DIRECTORY_VIEW (list_view)),
      FALSE);
 }
@@ -1391,12 +1391,12 @@ cell_renderer_edited (CtkCellRendererText *cell,
 
     path = ctk_tree_path_new_from_string (path_str);
 
-    ctk_tree_model_get_iter (GTK_TREE_MODEL (view->details->model),
+    ctk_tree_model_get_iter (CTK_TREE_MODEL (view->details->model),
                              &iter, path);
 
     ctk_tree_path_free (path);
 
-    ctk_tree_model_get (GTK_TREE_MODEL (view->details->model),
+    ctk_tree_model_get (CTK_TREE_MODEL (view->details->model),
                         &iter,
                         FM_LIST_MODEL_FILE_COLUMN, &file,
                         -1);
@@ -1493,7 +1493,7 @@ move_copy_items_callback (BaulTreeViewDragDest *dest,
 {
     FMDirectoryView *view = user_data;
 
-    baul_clipboard_clear_if_colliding_uris (GTK_WIDGET (view),
+    baul_clipboard_clear_if_colliding_uris (CTK_WIDGET (view),
                                             item_uris,
                                             fm_directory_view_get_copied_files_atom (view));
     fm_directory_view_move_copy_items (item_uris,
@@ -1653,7 +1653,7 @@ static gint
 get_icon_scale_callback (FMListModel *model,
                          FMListView  *view)
 {
-    return ctk_widget_get_scale_factor (GTK_WIDGET (view->details->tree_view));
+    return ctk_widget_get_scale_factor (CTK_WIDGET (view->details->tree_view));
 }
 
 static void
@@ -1666,7 +1666,7 @@ create_and_set_up_tree_view (FMListView *view)
     GList *baul_columns;
     GList *l;
 
-    view->details->tree_view = GTK_TREE_VIEW (ctk_tree_view_new ());
+    view->details->tree_view = CTK_TREE_VIEW (ctk_tree_view_new ());
     view->details->columns = g_hash_table_new_full (g_str_hash,
                              g_str_equal,
                              (GDestroyNotify)g_free,
@@ -1674,7 +1674,7 @@ create_and_set_up_tree_view (FMListView *view)
     ctk_tree_view_set_enable_search (view->details->tree_view, TRUE);
 
     /* Don't handle backspace key. It's used to open the parent folder. */
-    binding_set = ctk_binding_set_by_class (GTK_WIDGET_GET_CLASS (view->details->tree_view));
+    binding_set = ctk_binding_set_by_class (CTK_WIDGET_GET_CLASS (view->details->tree_view));
 	ctk_binding_entry_remove (binding_set, GDK_KEY_BackSpace, 0);
 
     view->details->drag_dest =
@@ -1734,7 +1734,7 @@ create_and_set_up_tree_view (FMListView *view)
                              G_CALLBACK(focus_in_event_callback), view, 0);
 
     view->details->model = g_object_new (FM_TYPE_LIST_MODEL, NULL);
-    ctk_tree_view_set_model (view->details->tree_view, GTK_TREE_MODEL (view->details->model));
+    ctk_tree_view_set_model (view->details->tree_view, CTK_TREE_MODEL (view->details->model));
     /* Need the model for the dnd drop icon "accept" change */
     fm_list_model_set_drag_view (FM_LIST_MODEL (view->details->model),
                                  view->details->tree_view,  0, 0);
@@ -1748,7 +1748,7 @@ create_and_set_up_tree_view (FMListView *view)
     g_signal_connect_object (view->details->model, "get-icon-scale",
                              G_CALLBACK (get_icon_scale_callback), view, 0);
 
-    ctk_tree_selection_set_mode (ctk_tree_view_get_selection (view->details->tree_view), GTK_SELECTION_MULTIPLE);
+    ctk_tree_selection_set_mode (ctk_tree_view_get_selection (view->details->tree_view), CTK_SELECTION_MULTIPLE);
 
     baul_columns = baul_get_all_columns ();
 
@@ -1784,9 +1784,9 @@ create_and_set_up_tree_view (FMListView *view)
             ctk_tree_view_column_set_expand (view->details->file_name_column, TRUE);
 
             CtkStyleContext *context;
-            context = ctk_widget_get_style_context (GTK_WIDGET(view));
+            context = ctk_widget_get_style_context (CTK_WIDGET(view));
             font_size = PANGO_PIXELS (pango_font_description_get_size (
-                ctk_style_context_get_font (context, GTK_STATE_FLAG_NORMAL)));
+                ctk_style_context_get_font (context, CTK_STATE_FLAG_NORMAL)));
 
             ctk_tree_view_column_set_min_width (view->details->file_name_column, 20*font_size);
             ctk_tree_view_append_column (view->details->tree_view, view->details->file_name_column);
@@ -1853,11 +1853,11 @@ create_and_set_up_tree_view (FMListView *view)
                             default_column_order_auto_value,
                             default_visible_columns_auto_value);
 
-    ctk_widget_show (GTK_WIDGET (view->details->tree_view));
-    ctk_container_add (GTK_CONTAINER (view), GTK_WIDGET (view->details->tree_view));
+    ctk_widget_show (CTK_WIDGET (view->details->tree_view));
+    ctk_container_add (CTK_CONTAINER (view), CTK_WIDGET (view->details->tree_view));
 
 
-    atk_obj = ctk_widget_get_accessible (GTK_WIDGET (view->details->tree_view));
+    atk_obj = ctk_widget_get_accessible (CTK_WIDGET (view->details->tree_view));
     atk_object_set_name (atk_obj, _("List View"));
 }
 
@@ -1997,9 +1997,9 @@ set_sort_order_from_metadata_and_preferences (FMListView *list_view)
                     BAUL_METADATA_KEY_LIST_VIEW_SORT_REVERSED,
                     default_sort_reversed);
 
-    ctk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_view->details->model),
+    ctk_tree_sortable_set_sort_column_id (CTK_TREE_SORTABLE (list_view->details->model),
                                           sort_column_id,
-                                          sort_reversed ? GTK_SORT_DESCENDING : GTK_SORT_ASCENDING);
+                                          sort_reversed ? CTK_SORT_DESCENDING : CTK_SORT_ASCENDING);
 }
 
 static gboolean
@@ -2043,7 +2043,7 @@ set_zoom_level_from_metadata_and_preferences (FMListView *list_view)
         fm_list_view_set_zoom_level (list_view, level, TRUE);
 
         /* updated the rows after updating the font size */
-        ctk_tree_model_foreach (GTK_TREE_MODEL (list_view->details->model),
+        ctk_tree_model_foreach (CTK_TREE_MODEL (list_view->details->model),
                                 list_view_changed_foreach, NULL);
     }
 }
@@ -2071,7 +2071,7 @@ stop_cell_editing (FMListView *list_view)
      */
     column = list_view->details->file_name_column;
     if (column != NULL && list_view->details->editable_widget != NULL &&
-            GTK_IS_CELL_EDITABLE (list_view->details->editable_widget))
+            CTK_IS_CELL_EDITABLE (list_view->details->editable_widget))
     {
         ctk_cell_editable_editing_done (list_view->details->editable_widget);
     }
@@ -2142,7 +2142,7 @@ fm_list_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory 
         {
             CtkTreePath *file_path;
 
-            file_path = ctk_tree_model_get_path (GTK_TREE_MODEL (listview->details->model), &iter);
+            file_path = ctk_tree_model_get_path (CTK_TREE_MODEL (listview->details->model), &iter);
             ctk_tree_view_scroll_to_cell (listview->details->tree_view,
                                           file_path, NULL,
                                           FALSE, 0.0, 0.0);
@@ -2157,7 +2157,7 @@ fm_list_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory 
 static CtkWidget *
 fm_list_view_get_background_widget (FMDirectoryView *view)
 {
-    return GTK_WIDGET (view);
+    return CTK_WIDGET (view);
 }
 
 static void
@@ -2288,7 +2288,7 @@ fm_list_view_remove_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *
     path = NULL;
     row_reference = NULL;
     list_view = FM_LIST_VIEW (view);
-    tree_model = GTK_TREE_MODEL(list_view->details->model);
+    tree_model = CTK_TREE_MODEL(list_view->details->model);
 
     if (fm_list_model_get_tree_iter_from_file (list_view->details->model, file, directory, &iter))
     {
@@ -2427,7 +2427,7 @@ column_editor_response_callback (CtkWidget *dialog,
                                  int response_id,
                                  gpointer user_data)
 {
-    ctk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (CTK_WIDGET (dialog));
 }
 
 static void
@@ -2559,42 +2559,42 @@ create_column_editor (FMListView *view)
     g_free (name);
 
     window = ctk_dialog_new ();
-    ctk_window_set_title (GTK_WINDOW (window), str);
-    ctk_window_set_transient_for (GTK_WINDOW (window), GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (view))));
-    ctk_window_set_destroy_with_parent (GTK_WINDOW (window), TRUE);
+    ctk_window_set_title (CTK_WINDOW (window), str);
+    ctk_window_set_transient_for (CTK_WINDOW (window), CTK_WINDOW (ctk_widget_get_toplevel (CTK_WIDGET (view))));
+    ctk_window_set_destroy_with_parent (CTK_WINDOW (window), TRUE);
 
-    eel_dialog_add_button (GTK_DIALOG (window),
+    eel_dialog_add_button (CTK_DIALOG (window),
                            _("_Close"),
                            "window-close",
-                           GTK_RESPONSE_CLOSE);
+                           CTK_RESPONSE_CLOSE);
 
     g_free (str);
     g_signal_connect (window, "response",
                       G_CALLBACK (column_editor_response_callback), NULL);
 
-    ctk_window_set_default_size (GTK_WINDOW (window), 300, 400);
+    ctk_window_set_default_size (CTK_WINDOW (window), 300, 400);
 
-    box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    ctk_container_set_border_width (GTK_CONTAINER (box), 12);
+    box = ctk_box_new (CTK_ORIENTATION_VERTICAL, 12);
+    ctk_container_set_border_width (CTK_CONTAINER (box), 12);
     ctk_widget_show (box);
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (window))), box, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (window))), box, TRUE, TRUE, 0);
 
     label_text = _("Choose the order of information to appear in this folder:");
     str = g_strconcat ("<b>", label_text, "</b>", NULL);
     label = ctk_label_new (NULL);
-    ctk_label_set_markup (GTK_LABEL (label), str);
-    ctk_label_set_line_wrap (GTK_LABEL (label), FALSE);
-    ctk_label_set_xalign (GTK_LABEL (label), 0);
-    ctk_label_set_yalign (GTK_LABEL (label), 0);
+    ctk_label_set_markup (CTK_LABEL (label), str);
+    ctk_label_set_line_wrap (CTK_LABEL (label), FALSE);
+    ctk_label_set_xalign (CTK_LABEL (label), 0);
+    ctk_label_set_yalign (CTK_LABEL (label), 0);
     ctk_widget_show (label);
-    ctk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (box), label, FALSE, FALSE, 0);
 
     g_free (str);
 
     column_chooser = baul_column_chooser_new (file);
     ctk_widget_set_margin_start (column_chooser, 12);
     ctk_widget_show (column_chooser);
-    ctk_box_pack_start (GTK_BOX (box), column_chooser, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (box), column_chooser, TRUE, TRUE, 0);
 
     g_signal_connect (column_chooser, "changed",
                       G_CALLBACK (column_chooser_changed_callback),
@@ -2619,7 +2619,7 @@ action_visible_columns_callback (CtkAction *action,
 
     if (list_view->details->column_editor)
     {
-        ctk_window_present (GTK_WINDOW (list_view->details->column_editor));
+        ctk_window_present (CTK_WINDOW (list_view->details->column_editor));
     }
     else
     {
@@ -2725,10 +2725,10 @@ fm_list_view_reset_to_defaults (FMDirectoryView *view)
     default_sort_order = get_default_sort_order (file, &default_sort_reversed);
 
     ctk_tree_sortable_set_sort_column_id
-    (GTK_TREE_SORTABLE (FM_LIST_VIEW (view)->details->model),
+    (CTK_TREE_SORTABLE (FM_LIST_VIEW (view)->details->model),
      fm_list_model_get_sort_column_id_from_attribute (FM_LIST_VIEW (view)->details->model,
              g_quark_from_string (default_sort_order)),
-     default_sort_reversed ? GTK_SORT_DESCENDING : GTK_SORT_ASCENDING);
+     default_sort_reversed ? CTK_SORT_DESCENDING : CTK_SORT_ASCENDING);
 
     fm_list_view_set_zoom_level (FM_LIST_VIEW (view), get_default_zoom_level (), FALSE);
     set_columns_settings_from_metadata_and_preferences (FM_LIST_VIEW (view));
@@ -2808,7 +2808,7 @@ fm_list_view_set_zoom_level (FMListView *view,
     /* Select correctly scaled icons. */
     column = fm_list_model_get_column_id_from_zoom_level (new_level);
     ctk_tree_view_column_set_attributes (view->details->file_name_column,
-                                         GTK_CELL_RENDERER (view->details->pixbuf_cell),
+                                         CTK_CELL_RENDERER (view->details->pixbuf_cell),
                                          "surface", column,
                                          NULL);
 
@@ -2817,7 +2817,7 @@ fm_list_view_set_zoom_level (FMListView *view,
 
     /* Make all rows the same size. */
     icon_size = baul_get_icon_size_for_zoom_level (new_level);
-    ctk_cell_renderer_set_fixed_size (GTK_CELL_RENDERER (view->details->pixbuf_cell),
+    ctk_cell_renderer_set_fixed_size (CTK_CELL_RENDERER (view->details->pixbuf_cell),
                                       -1, icon_size);
 
     /* FIXME: https://bugzilla.gnome.org/show_bug.cgi?id=641518 */
@@ -2825,7 +2825,7 @@ fm_list_view_set_zoom_level (FMListView *view,
 
     fm_directory_view_update_menus (FM_DIRECTORY_VIEW (view));
 
-    ctk_tree_model_foreach (GTK_TREE_MODEL (view->details->model), list_view_changed_foreach, NULL);
+    ctk_tree_model_foreach (CTK_TREE_MODEL (view->details->model), list_view_changed_foreach, NULL);
 }
 
 static void
@@ -2915,7 +2915,7 @@ fm_list_view_start_renaming_file (FMDirectoryView *view,
     if (list_view->details->file_name_column && list_view->details->editable_widget)
     {
         ctk_editable_select_region (
-            GTK_EDITABLE (list_view->details->editable_widget),
+            CTK_EDITABLE (list_view->details->editable_widget),
             0,
             -1);
         return;
@@ -2929,7 +2929,7 @@ fm_list_view_start_renaming_file (FMDirectoryView *view,
     /* Freeze updates to the view to prevent losing rename focus when the tree view updates */
     fm_directory_view_freeze_updates (FM_DIRECTORY_VIEW (view));
 
-    path = ctk_tree_model_get_path (GTK_TREE_MODEL (list_view->details->model), &iter);
+    path = ctk_tree_model_get_path (CTK_TREE_MODEL (list_view->details->model), &iter);
 
     /* Make filename-cells editable. */
     g_object_set (G_OBJECT (list_view->details->file_name_cell),
@@ -2943,7 +2943,7 @@ fm_list_view_start_renaming_file (FMDirectoryView *view,
     ctk_tree_view_set_cursor_on_cell (list_view->details->tree_view,
                               path,
                               list_view->details->file_name_column,
-                              GTK_CELL_RENDERER (list_view->details->file_name_cell),
+                              CTK_CELL_RENDERER (list_view->details->file_name_cell),
                               TRUE);
 
     /* set cursor also triggers editing-started, where we save the editable widget */
@@ -2951,7 +2951,7 @@ fm_list_view_start_renaming_file (FMDirectoryView *view,
             eel_filename_get_rename_region (list_view->details->original_name,
                                             &start_offset, &end_offset);
 
-            ctk_editable_select_region (GTK_EDITABLE (list_view->details->editable_widget),
+            ctk_editable_select_region (CTK_EDITABLE (list_view->details->editable_widget),
                                         start_offset, end_offset);
     }
 
@@ -2966,7 +2966,7 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
     CtkTreeIter iter;
 
     view = FM_LIST_VIEW (directory_view);
-    display = ctk_widget_get_display (GTK_WIDGET (view));
+    display = ctk_widget_get_display (CTK_WIDGET (view));
 
     /* ensure that we unset the hand cursor and refresh underlined rows */
     if (click_policy_auto_value == BAUL_CLICK_POLICY_DOUBLE)
@@ -2975,10 +2975,10 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
 
         if (view->details->hover_path != NULL)
         {
-            if (ctk_tree_model_get_iter (GTK_TREE_MODEL (view->details->model),
+            if (ctk_tree_model_get_iter (CTK_TREE_MODEL (view->details->model),
                                          &iter, view->details->hover_path))
             {
-                ctk_tree_model_row_changed (GTK_TREE_MODEL (view->details->model),
+                ctk_tree_model_row_changed (CTK_TREE_MODEL (view->details->model),
                                             view->details->hover_path, &iter);
             }
 
@@ -2988,11 +2988,11 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
 
         tree = view->details->tree_view;
 
-        if (ctk_widget_get_realized (GTK_WIDGET (tree)))
+        if (ctk_widget_get_realized (CTK_WIDGET (tree)))
         {
             GdkWindow *win;
 
-            win = ctk_widget_get_window (GTK_WIDGET (tree));
+            win = ctk_widget_get_window (CTK_WIDGET (tree));
             gdk_window_set_cursor (win, NULL);
 
             if (display != NULL)
@@ -3195,12 +3195,12 @@ fm_list_view_get_first_visible_file (BaulView *view)
                                        0, 0,
                                        &path, NULL, NULL, NULL))
     {
-        ctk_tree_model_get_iter (GTK_TREE_MODEL (list_view->details->model),
+        ctk_tree_model_get_iter (CTK_TREE_MODEL (list_view->details->model),
                                  &iter, path);
 
         ctk_tree_path_free (path);
 
-        ctk_tree_model_get (GTK_TREE_MODEL (list_view->details->model),
+        ctk_tree_model_get (CTK_TREE_MODEL (list_view->details->model),
                             &iter,
                             FM_LIST_MODEL_FILE_COLUMN, &file,
                             -1);
@@ -3231,7 +3231,7 @@ fm_list_view_scroll_to_file (FMListView *view,
         return;
     }
 
-    path = ctk_tree_model_get_path (GTK_TREE_MODEL (view->details->model), &iter);
+    path = ctk_tree_model_get_path (CTK_TREE_MODEL (view->details->model), &iter);
 
     ctk_tree_view_scroll_to_cell (view->details->tree_view,
                                   path, NULL,
@@ -3304,11 +3304,11 @@ real_set_is_active (FMDirectoryView *view,
     GdkRGBA color;
     GdkRGBA *c;
 
-    tree_view = GTK_WIDGET (fm_list_view_get_tree_view (FM_LIST_VIEW (view)));
+    tree_view = CTK_WIDGET (fm_list_view_get_tree_view (FM_LIST_VIEW (view)));
 
     if (is_active)
     {
-        ctk_widget_override_background_color (tree_view, GTK_STATE_FLAG_NORMAL, NULL);
+        ctk_widget_override_background_color (tree_view, CTK_STATE_FLAG_NORMAL, NULL);
     }
     else
     {
@@ -3316,13 +3316,13 @@ real_set_is_active (FMDirectoryView *view,
 
         style = ctk_widget_get_style_context (tree_view);
 
-        ctk_style_context_get (style, GTK_STATE_FLAG_INSENSITIVE,
-                               GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+        ctk_style_context_get (style, CTK_STATE_FLAG_INSENSITIVE,
+                               CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                &c, NULL);
         color = *c;
         gdk_rgba_free (c);
 
-        ctk_widget_override_background_color (tree_view, GTK_STATE_FLAG_NORMAL, &color);
+        ctk_widget_override_background_color (tree_view, CTK_STATE_FLAG_NORMAL, &color);
     }
 
     EEL_CALL_PARENT (FM_DIRECTORY_VIEW_CLASS,

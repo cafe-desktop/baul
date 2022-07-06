@@ -112,9 +112,9 @@ ctk_tree_view_vertical_autoscroll (CtkTreeView *tree_view)
 
     window = ctk_tree_view_get_bin_window (tree_view);
 
-    vadjustment = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE(tree_view));
+    vadjustment = ctk_scrollable_get_vadjustment (CTK_SCROLLABLE(tree_view));
 
-    display = ctk_widget_get_display (GTK_WIDGET (tree_view));
+    display = ctk_widget_get_display (CTK_WIDGET (tree_view));
     seat = gdk_display_get_default_seat (display);
     pointer = gdk_seat_get_pointer (seat);
     gdk_window_get_device_position (window, pointer,
@@ -142,7 +142,7 @@ ctk_tree_view_vertical_autoscroll (CtkTreeView *tree_view)
 static int
 scroll_timeout (gpointer data)
 {
-    CtkTreeView *tree_view = GTK_TREE_VIEW (data);
+    CtkTreeView *tree_view = CTK_TREE_VIEW (data);
 
     ctk_tree_view_vertical_autoscroll (tree_view);
 
@@ -165,7 +165,7 @@ expand_timeout (gpointer data)
     CtkTreeView *tree_view;
     CtkTreePath *drop_path;
 
-    tree_view = GTK_TREE_VIEW (data);
+    tree_view = CTK_TREE_VIEW (data);
 
     ctk_tree_view_get_drag_dest_row (tree_view, &drop_path, NULL);
 
@@ -199,7 +199,7 @@ highlight_draw (CtkWidget *widget,
     CtkStyleContext *style;
 
     /* FIXMEchpe: is bin window right here??? */
-    bin_window = ctk_tree_view_get_bin_window (GTK_TREE_VIEW (widget));
+    bin_window = ctk_tree_view_get_bin_window (CTK_TREE_VIEW (widget));
 
     width = gdk_window_get_width(bin_window);
     height = gdk_window_get_height(bin_window);
@@ -226,7 +226,7 @@ set_widget_highlight (BaulTreeViewDragDest *dest, gboolean highlight)
         g_signal_handler_disconnect (dest->details->tree_view,
                                      dest->details->highlight_id);
         dest->details->highlight_id = 0;
-        ctk_widget_queue_draw (GTK_WIDGET (dest->details->tree_view));
+        ctk_widget_queue_draw (CTK_WIDGET (dest->details->tree_view));
     }
 
     if (highlight && !dest->details->highlight_id)
@@ -236,7 +236,7 @@ set_widget_highlight (BaulTreeViewDragDest *dest, gboolean highlight)
                                      "draw",
                                      G_CALLBACK (highlight_draw),
                                      dest, 0);
-        ctk_widget_queue_draw (GTK_WIDGET (dest->details->tree_view));
+        ctk_widget_queue_draw (CTK_WIDGET (dest->details->tree_view));
     }
 }
 
@@ -250,7 +250,7 @@ set_drag_dest_row (BaulTreeViewDragDest *dest,
         ctk_tree_view_set_drag_dest_row
         (dest->details->tree_view,
          path,
-         GTK_TREE_VIEW_DROP_INTO_OR_BEFORE);
+         CTK_TREE_VIEW_DROP_INTO_OR_BEFORE);
     }
     else
     {
@@ -275,7 +275,7 @@ get_drag_data (BaulTreeViewDragDest *dest,
 {
     GdkAtom target;
 
-    target = ctk_drag_dest_find_target (GTK_WIDGET (dest->details->tree_view),
+    target = ctk_drag_dest_find_target (CTK_WIDGET (dest->details->tree_view),
                                         context,
                                         NULL);
 
@@ -292,7 +292,7 @@ get_drag_data (BaulTreeViewDragDest *dest,
         return TRUE;
     }
 
-    ctk_drag_get_data (GTK_WIDGET (dest->details->tree_view),
+    ctk_drag_get_data (CTK_WIDGET (dest->details->tree_view),
                        context, target, time);
 
     return TRUE;
@@ -513,7 +513,7 @@ drag_motion_callback (CtkWidget *widget,
 
     dest = BAUL_TREE_VIEW_DRAG_DEST (data);
 
-    ctk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (widget),
+    ctk_tree_view_get_dest_row_at_pos (CTK_TREE_VIEW (widget),
                                        x, y, &path, &pos);
 
 
@@ -530,7 +530,7 @@ drag_motion_callback (CtkWidget *widget,
     drop_path = get_drop_path (dest, path);
 
     action = 0;
-    bin_window = ctk_tree_view_get_bin_window (GTK_TREE_VIEW (widget));
+    bin_window = ctk_tree_view_get_bin_window (CTK_TREE_VIEW (widget));
     if (bin_window != NULL)
     {
         int bin_x, bin_y;
@@ -542,7 +542,7 @@ drag_motion_callback (CtkWidget *widget,
         }
     }
 
-    ctk_tree_view_get_drag_dest_row (GTK_TREE_VIEW (widget), &old_drop_path,
+    ctk_tree_view_get_drag_dest_row (CTK_TREE_VIEW (widget), &old_drop_path,
                                      NULL);
 
     if (action)
@@ -550,7 +550,7 @@ drag_motion_callback (CtkWidget *widget,
         CtkTreeModel *model;
 
         set_drag_dest_row (dest, drop_path);
-        model = ctk_tree_view_get_model (GTK_TREE_VIEW (widget));
+        model = ctk_tree_view_get_model (CTK_TREE_VIEW (widget));
         if (drop_path == NULL || (old_drop_path != NULL &&
                                   ctk_tree_path_compare (old_drop_path, drop_path) != 0))
         {
@@ -673,7 +673,7 @@ receive_uris (BaulTreeViewDragDest *dest,
             action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK;
         }
         real_action = baul_drag_drop_action_ask
-                      (GTK_WIDGET (dest->details->tree_view), action);
+                      (CTK_WIDGET (dest->details->tree_view), action);
     }
 
     /* We only want to copy external uris */
@@ -1082,7 +1082,7 @@ drag_drop_callback (CtkWidget *widget,
 
     dest = BAUL_TREE_VIEW_DRAG_DEST (data);
 
-    target = ctk_drag_dest_find_target (GTK_WIDGET (dest->details->tree_view),
+    target = ctk_drag_dest_find_target (CTK_WIDGET (dest->details->tree_view),
                                         context,
                                         NULL);
     if (target == GDK_NONE)
@@ -1196,7 +1196,7 @@ baul_tree_view_drag_dest_class_init (BaulTreeViewDragDestClass *class)
                       NULL, NULL,
                       baul_marshal_OBJECT__BOXED,
                       BAUL_TYPE_FILE, 1,
-                      GTK_TYPE_TREE_PATH);
+                      CTK_TYPE_TREE_PATH);
     signals[MOVE_COPY_ITEMS] =
         g_signal_new ("move_copy_items",
                       G_TYPE_FROM_CLASS (class),
@@ -1286,11 +1286,11 @@ baul_tree_view_drag_dest_new (CtkTreeView *tree_view)
     g_object_weak_ref (G_OBJECT (dest->details->tree_view),
                        tree_view_weak_notify, dest);
 
-    ctk_drag_dest_set (GTK_WIDGET (tree_view),
+    ctk_drag_dest_set (CTK_WIDGET (tree_view),
                        0, drag_types, G_N_ELEMENTS (drag_types),
                        GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
-    targets = ctk_drag_dest_get_target_list (GTK_WIDGET (tree_view));
+    targets = ctk_drag_dest_get_target_list (CTK_WIDGET (tree_view));
     ctk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);
 
     g_signal_connect_object (tree_view,

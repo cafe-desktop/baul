@@ -88,7 +88,7 @@ try_to_expand_path (gpointer callback_data)
     int user_location_length, pos;
 
     entry = BAUL_LOCATION_ENTRY (callback_data);
-    editable = GTK_EDITABLE (entry);
+    editable = CTK_EDITABLE (entry);
     user_location = ctk_editable_get_chars (editable, 0, -1);
     user_location_length = g_utf8_strlen (user_location, -1);
     entry->details->idle_id = 0;
@@ -232,7 +232,7 @@ editable_event_after_callback (CtkEntry *entry,
         return;
     }
 
-    editable = GTK_EDITABLE (entry);
+    editable = CTK_EDITABLE (entry);
     keyevent = (GdkEventKey *)event;
 
     /* After typing the right arrow key we move the selection to
@@ -306,7 +306,7 @@ destroy (CtkWidget *object)
     g_free (entry->details->current_directory);
     entry->details->current_directory = NULL;
 
-    EEL_CALL_PARENT (GTK_WIDGET_CLASS, destroy, (object));
+    EEL_CALL_PARENT (CTK_WIDGET_CLASS, destroy, (object));
 }
 
 static void
@@ -349,11 +349,11 @@ baul_location_entry_focus_in (CtkWidget     *widget,
     if (entry->details->has_special_text)
     {
         entry->details->setting_special_text = TRUE;
-        ctk_entry_set_text (GTK_ENTRY (entry), "");
+        ctk_entry_set_text (CTK_ENTRY (entry), "");
         entry->details->setting_special_text = FALSE;
     }
 
-    return EEL_CALL_PARENT_WITH_RETURN_VALUE (GTK_WIDGET_CLASS, focus_in_event, (widget, event));
+    return EEL_CALL_PARENT_WITH_RETURN_VALUE (CTK_WIDGET_CLASS, focus_in_event, (widget, event));
 }
 
 static void
@@ -383,19 +383,19 @@ baul_location_entry_activate (CtkEntry *entry)
         g_free (uri_scheme);
     }
 
-    EEL_CALL_PARENT (GTK_ENTRY_CLASS, activate, (entry));
+    EEL_CALL_PARENT (CTK_ENTRY_CLASS, activate, (entry));
 }
 
 static void
 baul_location_entry_class_init (BaulLocationEntryClass *class)
 {
-    GTK_WIDGET_CLASS (class)->focus_in_event = baul_location_entry_focus_in;
+    CTK_WIDGET_CLASS (class)->focus_in_event = baul_location_entry_focus_in;
 
-    GTK_WIDGET_CLASS (class)->destroy = destroy;
+    CTK_WIDGET_CLASS (class)->destroy = destroy;
 
     G_OBJECT_CLASS (class)->finalize = finalize;
 
-    GTK_ENTRY_CLASS (class)->activate = baul_location_entry_activate;
+    CTK_ENTRY_CLASS (class)->activate = baul_location_entry_activate;
 }
 
 void
@@ -406,7 +406,7 @@ baul_location_entry_update_current_location (BaulLocationEntry *entry,
     entry->details->current_directory = g_strdup (location);
 
     baul_entry_set_text (BAUL_ENTRY (entry), location);
-    set_position_and_selection_to_end (GTK_EDITABLE (entry));
+    set_position_and_selection_to_end (CTK_EDITABLE (entry));
 }
 
 void
@@ -420,13 +420,13 @@ baul_location_entry_set_secondary_action (BaulLocationEntry *entry,
     switch (secondary_action)
     {
     case BAUL_LOCATION_ENTRY_ACTION_CLEAR:
-        ctk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
-                                           GTK_ENTRY_ICON_SECONDARY,
+        ctk_entry_set_icon_from_icon_name (CTK_ENTRY (entry),
+                                           CTK_ENTRY_ICON_SECONDARY,
                                            "edit-clear");
         break;
     case BAUL_LOCATION_ENTRY_ACTION_GOTO:
-        ctk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
-                                           GTK_ENTRY_ICON_SECONDARY,
+        ctk_entry_set_icon_from_icon_name (CTK_ENTRY (entry),
+                                           CTK_ENTRY_ICON_SECONDARY,
                                            "forward");
         break;
     default:
@@ -440,7 +440,7 @@ baul_location_entry_init (BaulLocationEntry *entry)
 {
     CtkStyleContext *context;
 
-    context = ctk_widget_get_style_context (GTK_WIDGET (entry));
+    context = ctk_widget_get_style_context (CTK_WIDGET (entry));
     ctk_style_context_add_class (context, "baul-location-entry");
 
     entry->details = g_new0 (BaulLocationEntryDetails, 1);
@@ -486,7 +486,7 @@ baul_location_entry_set_special_text (BaulLocationEntry *entry,
     entry->details->special_text = g_strdup (special_text);
 
     entry->details->setting_special_text = TRUE;
-    ctk_entry_set_text (GTK_ENTRY (entry), special_text);
+    ctk_entry_set_text (CTK_ENTRY (entry), special_text);
     entry->details->setting_special_text = FALSE;
 }
 

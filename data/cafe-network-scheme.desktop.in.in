@@ -8,7 +8,7 @@ StartupNotify=true
 Type=Application
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=network-workgroup
-Categories=GTK;System;Core;
+Categories=CTK;System;Core;
 # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 Keywords=bookmarks;browse;local;network;locations;CAFE;
 OnlyShowIn=CAFE;

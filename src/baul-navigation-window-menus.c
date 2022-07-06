@@ -122,7 +122,7 @@ forget_history_if_yes (CtkDialog *dialog, int response, gpointer callback_data)
     {
         baul_forget_history ();
     }
-    ctk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (CTK_WIDGET (dialog));
 }
 
 static void
@@ -133,16 +133,16 @@ forget_history_if_confirmed (BaulWindow *window)
     dialog = eel_create_question_dialog (_("Are you sure you want to clear the list "
                                            "of locations you have visited?"),
                                          NULL,
-                                         "process-stop", GTK_RESPONSE_CANCEL,
+                                         "process-stop", CTK_RESPONSE_CANCEL,
                                          "edit-clear", RESPONSE_FORGET,
-                                         GTK_WINDOW (window));
+                                         CTK_WINDOW (window));
 
-    ctk_widget_show (GTK_WIDGET (dialog));
+    ctk_widget_show (CTK_WIDGET (dialog));
 
     g_signal_connect (dialog, "response",
                       G_CALLBACK (forget_history_if_yes), NULL);
 
-    ctk_dialog_set_default_response (dialog, GTK_RESPONSE_CANCEL);
+    ctk_dialog_set_default_response (dialog, CTK_RESPONSE_CANCEL);
 }
 
 static void
@@ -191,7 +191,7 @@ action_show_hide_toolbar_callback (CtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_toolbar (window);
     }
@@ -213,7 +213,7 @@ action_show_hide_sidebar_callback (CtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_sidebar (window);
     }
@@ -251,7 +251,7 @@ action_show_hide_location_bar_callback (CtkAction *action,
     window = BAUL_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    is_active = ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+    is_active = ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Do the active pane first, because this will trigger an update of the menu items,
@@ -273,7 +273,7 @@ action_show_hide_statusbar_callback (CtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_status_bar (window);
     }
@@ -294,7 +294,7 @@ action_split_view_callback (CtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    is_active = ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+    is_active = ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
     if (is_active != baul_navigation_window_split_view_showing (window))
     {
@@ -326,27 +326,27 @@ baul_navigation_window_update_show_hide_menu_items (BaulNavigationWindow *window
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_TOOLBAR);
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_toolbar_showing (window));
 
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_SIDEBAR);
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_sidebar_showing (window));
 
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_LOCATION_BAR);
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_pane_location_bar_showing (BAUL_NAVIGATION_WINDOW_PANE (BAUL_WINDOW (window)->details->active_pane)));
 
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_STATUSBAR);
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_status_bar_showing (window));
 
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_EXTRA_PANE);
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_split_view_showing (window));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -425,7 +425,7 @@ show_bogus_history_window (BaulWindow *window,
 
     eel_show_warning_dialog (_("The history location doesn't exist."),
                              detail,
-                             GTK_WINDOW (window));
+                             CTK_WINDOW (window));
 
     g_object_unref (file);
     g_free (uri_for_display);
@@ -440,10 +440,10 @@ connect_proxy_cb (CtkActionGroup *action_group,
 {
     CtkLabel *label;
 
-    if (!GTK_IS_MENU_ITEM (proxy))
+    if (!CTK_IS_MENU_ITEM (proxy))
         return;
 
-    label = GTK_LABEL (ctk_bin_get_child (GTK_BIN (proxy)));
+    label = CTK_LABEL (ctk_bin_get_child (CTK_BIN (proxy)));
 
     ctk_label_set_use_underline (label, FALSE);
     ctk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
@@ -639,7 +639,7 @@ action_folder_window_callback (CtkAction *action,
              current_window,
              NULL,
              current_location,
-             ctk_window_get_screen (GTK_WINDOW (current_window)),
+             ctk_window_get_screen (CTK_WINDOW (current_window)),
              NULL);
 
     baul_window_go_to (window, current_location);
@@ -677,7 +677,7 @@ action_show_search_callback (CtkAction *action,
         ctk_action_group_get_action (window->details->navigation_action_group,
                                      BAUL_ACTION_SEARCH);
 
-    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (search_action)))
+    if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (search_action)))
     {
         /* Already visible, just show it */
         baul_navigation_window_show_search (window);
@@ -685,7 +685,7 @@ action_show_search_callback (CtkAction *action,
     else
     {
         /* Otherwise, enable */
-        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (search_action),
+        ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (search_action),
                                       TRUE);
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -708,7 +708,7 @@ action_show_hide_search_callback (CtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    var_action = ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+    var_action = ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (var_action)
@@ -809,7 +809,7 @@ action_tab_change_action_activate_callback (CtkAction *action, gpointer user_dat
     if (window && window->details->active_pane)
     {
         CtkNotebook *notebook;
-        notebook = GTK_NOTEBOOK (BAUL_NAVIGATION_WINDOW_PANE (window->details->active_pane)->notebook);
+        notebook = CTK_NOTEBOOK (BAUL_NAVIGATION_WINDOW_PANE (window->details->active_pane)->notebook);
         if (notebook)
         {
             int num;
@@ -1034,7 +1034,7 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
                                "/",
                                action_name,
                                action_name,
-                               GTK_UI_MANAGER_ACCELERATOR,
+                               CTK_UI_MANAGER_ACCELERATOR,
                                FALSE);
 
     }

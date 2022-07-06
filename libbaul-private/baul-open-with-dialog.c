@@ -90,7 +90,7 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
-G_DEFINE_TYPE (BaulOpenWithDialog, baul_open_with_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (BaulOpenWithDialog, baul_open_with_dialog, CTK_TYPE_DIALOG);
 
 static void
 baul_open_with_dialog_finalize (GObject *object)
@@ -144,7 +144,7 @@ check_application (BaulOpenWithDialog *dialog)
 
     if (command == NULL)
     {
-        command = g_strdup (ctk_entry_get_text (GTK_ENTRY (dialog->details->entry)));
+        command = g_strdup (ctk_entry_get_text (CTK_ENTRY (dialog->details->entry)));
     }
 
     g_shell_parse_argv (command, &argc, &argv, &error);
@@ -152,7 +152,7 @@ check_application (BaulOpenWithDialog *dialog)
     {
         eel_show_error_dialog (_("Could not run application"),
                                error->message,
-                               GTK_WINDOW (dialog));
+                               CTK_WINDOW (dialog));
         g_error_free (error);
         retval = FALSE;
         goto cleanup;
@@ -168,7 +168,7 @@ check_application (BaulOpenWithDialog *dialog)
 
         eel_show_error_dialog (_("Could not find application"),
                                error_message,
-                               GTK_WINDOW (dialog));
+                               CTK_WINDOW (dialog));
         g_free (error_message);
         retval = FALSE;
         goto cleanup;
@@ -236,7 +236,7 @@ add_or_find_application (BaulOpenWithDialog *dialog)
         char *app_name;
         const char *commandline;
 
-        commandline = ctk_entry_get_text (GTK_ENTRY (dialog->details->entry));
+        commandline = ctk_entry_get_text (CTK_ENTRY (dialog->details->entry));
         app_name = get_app_name (commandline, &error);
         if (app_name != NULL)
         {
@@ -253,7 +253,7 @@ add_or_find_application (BaulOpenWithDialog *dialog)
         message = g_strdup_printf (_("Could not add application to the application database: %s"), error ? error->message : _("Unknown error"));
         eel_show_error_dialog (_("Could not add application"),
                                message,
-                               GTK_WINDOW (dialog));
+                               CTK_WINDOW (dialog));
         g_free (message);
 
         if (error)
@@ -263,7 +263,7 @@ add_or_find_application (BaulOpenWithDialog *dialog)
     }
 
     should_set_default = (dialog->details->add_mode) ||
-                          ctk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->details->checkbox));
+                          ctk_toggle_button_get_active (CTK_TOGGLE_BUTTON (dialog->details->checkbox));
     success = TRUE;
 
     if (should_set_default)
@@ -305,7 +305,7 @@ add_or_find_application (BaulOpenWithDialog *dialog)
         message = g_strdup_printf (_("Could not set application as the default: %s"), error->message);
         eel_show_error_dialog (_("Could not set as default application"),
                                message,
-                               GTK_WINDOW (dialog));
+                               CTK_WINDOW (dialog));
         g_free (message);
         g_error_free (error);
     }
@@ -342,7 +342,7 @@ response_cb (BaulOpenWithDialog *dialog,
                 emit_application_selected (dialog, application);
                 g_object_unref (application);
 
-                ctk_widget_destroy (GTK_WIDGET (dialog));
+                ctk_widget_destroy (CTK_WIDGET (dialog));
             }
         }
 
@@ -359,7 +359,7 @@ response_cb (BaulOpenWithDialog *dialog,
                 selected = dialog->details->selected_app_info;
                 dialog->details->selected_app_info = NULL;
 
-                model = GTK_TREE_MODEL (dialog->details->program_list_store);
+                model = CTK_TREE_MODEL (dialog->details->program_list_store);
                 if (ctk_tree_model_get_iter_first (model, &iter))
                 {
                     do
@@ -380,10 +380,10 @@ response_cb (BaulOpenWithDialog *dialog,
             }
         }
         break;
-    case GTK_RESPONSE_NONE:
-    case GTK_RESPONSE_DELETE_EVENT:
-    case GTK_RESPONSE_CANCEL:
-        ctk_widget_destroy (GTK_WIDGET (dialog));
+    case CTK_RESPONSE_NONE:
+    case CTK_RESPONSE_DELETE_EVENT:
+    case CTK_RESPONSE_CANCEL:
+        ctk_widget_destroy (CTK_WIDGET (dialog));
         break;
     default :
         g_assert_not_reached ();
@@ -421,7 +421,7 @@ chooser_response_cb (CtkFileChooser *chooser,
 
     dialog = BAUL_OPEN_WITH_DIALOG (user_data);
 
-    if (response == GTK_RESPONSE_OK)
+    if (response == CTK_RESPONSE_OK)
     {
         char *filename;
 
@@ -433,15 +433,15 @@ chooser_response_cb (CtkFileChooser *chooser,
 
             quoted_text = g_shell_quote (filename);
 
-            ctk_entry_set_text (GTK_ENTRY (dialog->details->entry),
+            ctk_entry_set_text (CTK_ENTRY (dialog->details->entry),
                                 quoted_text);
-            ctk_editable_set_position (GTK_EDITABLE (dialog->details->entry), -1);
+            ctk_editable_set_position (CTK_EDITABLE (dialog->details->entry), -1);
             g_free (quoted_text);
             g_free (filename);
         }
     }
 
-    ctk_widget_destroy (GTK_WIDGET (chooser));
+    ctk_widget_destroy (CTK_WIDGET (chooser));
 }
 
 static void
@@ -454,22 +454,22 @@ browse_clicked_cb (CtkWidget *button,
     dialog = BAUL_OPEN_WITH_DIALOG (user_data);
 
     chooser = eel_file_chooser_dialog_new (_("Select an Application"),
-                                           GTK_WINDOW (dialog),
-                                           GTK_FILE_CHOOSER_ACTION_OPEN,
+                                           CTK_WINDOW (dialog),
+                                           CTK_FILE_CHOOSER_ACTION_OPEN,
                                            "process-stop",
-                                           GTK_RESPONSE_CANCEL,
+                                           CTK_RESPONSE_CANCEL,
                                            "document-open",
-                                           GTK_RESPONSE_OK,
+                                           CTK_RESPONSE_OK,
                                            NULL);
-    ctk_window_set_destroy_with_parent (GTK_WINDOW (chooser), TRUE);
+    ctk_window_set_destroy_with_parent (CTK_WINDOW (chooser), TRUE);
     g_signal_connect (chooser, "response",
                       G_CALLBACK (chooser_response_cb), dialog);
-    ctk_dialog_set_default_response (GTK_DIALOG (chooser),
-                                     GTK_RESPONSE_OK);
-    ctk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
-    ctk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (chooser),
+    ctk_dialog_set_default_response (CTK_DIALOG (chooser),
+                                     CTK_RESPONSE_OK);
+    ctk_file_chooser_set_local_only (CTK_FILE_CHOOSER (chooser), TRUE);
+    ctk_file_chooser_set_select_multiple (CTK_FILE_CHOOSER (chooser),
                                           FALSE);
-    ctk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
+    ctk_file_chooser_set_current_folder (CTK_FILE_CHOOSER (chooser),
                                          "/usr/bin");
 
     ctk_widget_show (chooser);
@@ -486,7 +486,7 @@ entry_changed_cb (CtkWidget *entry,
         dialog->details->selected_app_info = NULL;
     }
 
-    if (ctk_entry_get_text (GTK_ENTRY (dialog->details->entry))[0] == '\000')
+    if (ctk_entry_get_text (CTK_ENTRY (dialog->details->entry))[0] == '\000')
     {
         ctk_widget_set_sensitive (dialog->details->button, FALSE);
     }
@@ -548,7 +548,7 @@ get_surface_for_icon (GIcon *icon)
                                                    BAUL_OPEN_WITH_DIALOG_ICON_SIZE,
                                                    icon_scale,
                                                    NULL,
-                                                   GTK_ICON_LOOKUP_FORCE_SIZE,
+                                                   CTK_ICON_LOOKUP_FORCE_SIZE,
                                                    NULL);
             g_free (icon_no_extension);
         }
@@ -579,7 +579,7 @@ baul_open_with_dialog_add_icon_idle (BaulOpenWithDialog *dialog)
         dialog->details->add_icon_paths = g_slist_delete_link (dialog->details->add_icon_paths,
                                           dialog->details->add_icon_paths);
 
-        if (!ctk_tree_model_get_iter (GTK_TREE_MODEL (dialog->details->program_list_store),
+        if (!ctk_tree_model_get_iter (CTK_TREE_MODEL (dialog->details->program_list_store),
                                       &iter, path))
         {
             ctk_tree_path_free (path);
@@ -588,7 +588,7 @@ baul_open_with_dialog_add_icon_idle (BaulOpenWithDialog *dialog)
 
         ctk_tree_path_free (path);
 
-        ctk_tree_model_get (GTK_TREE_MODEL (dialog->details->program_list_store), &iter,
+        ctk_tree_model_get (CTK_TREE_MODEL (dialog->details->program_list_store), &iter,
                             COLUMN_GICON, &icon, -1);
 
         if (icon == NULL)
@@ -708,7 +708,7 @@ baul_open_with_dialog_add_items_idle (BaulOpenWithDialog *dialog)
                                           G_TYPE_STRING,
                                           G_TYPE_STRING,
                                           G_TYPE_STRING);
-    sort = ctk_tree_model_sort_new_with_model (GTK_TREE_MODEL (dialog->details->program_list_store));
+    sort = ctk_tree_model_sort_new_with_model (CTK_TREE_MODEL (dialog->details->program_list_store));
     all_applications = g_app_info_get_all ();
 
     for (l = all_applications; l; l = l->next)
@@ -731,7 +731,7 @@ baul_open_with_dialog_add_items_idle (BaulOpenWithDialog *dialog)
                             COLUMN_EXEC,      g_app_info_get_executable,
                             -1);
 
-        path = ctk_tree_model_get_path (GTK_TREE_MODEL (dialog->details->program_list_store), &iter);
+        path = ctk_tree_model_get_path (CTK_TREE_MODEL (dialog->details->program_list_store), &iter);
         if (path != NULL)
         {
             dialog->details->add_icon_paths = g_slist_prepend (dialog->details->add_icon_paths, path);
@@ -739,11 +739,11 @@ baul_open_with_dialog_add_items_idle (BaulOpenWithDialog *dialog)
     }
     g_list_free (all_applications);
 
-    ctk_tree_view_set_model (GTK_TREE_VIEW (dialog->details->program_list),
-                             GTK_TREE_MODEL (sort));
-    ctk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort),
-                                          COLUMN_NAME, GTK_SORT_ASCENDING);
-    ctk_tree_view_set_search_equal_func (GTK_TREE_VIEW (dialog->details->program_list),
+    ctk_tree_view_set_model (CTK_TREE_VIEW (dialog->details->program_list),
+                             CTK_TREE_MODEL (sort));
+    ctk_tree_sortable_set_sort_column_id (CTK_TREE_SORTABLE (sort),
+                                          COLUMN_NAME, CTK_SORT_ASCENDING);
+    ctk_tree_view_set_search_equal_func (CTK_TREE_VIEW (dialog->details->program_list),
                                          baul_open_with_search_equal_func,
                                          NULL, NULL);
 
@@ -760,7 +760,7 @@ baul_open_with_dialog_add_items_idle (BaulOpenWithDialog *dialog)
                                          "text", COLUMN_NAME,
                                          NULL);
     ctk_tree_view_column_set_sort_column_id (column, COLUMN_NAME);
-    ctk_tree_view_append_column (GTK_TREE_VIEW (dialog->details->program_list), column);
+    ctk_tree_view_append_column (CTK_TREE_VIEW (dialog->details->program_list), column);
 
     dialog->details->add_icon_paths = g_slist_reverse (dialog->details->add_icon_paths);
 
@@ -786,7 +786,7 @@ program_list_selection_changed (CtkTreeSelection  *selection,
     if (!ctk_tree_selection_get_selected (selection, &model, &iter))
     {
         ctk_widget_set_sensitive (dialog->details->button, FALSE);
-        ctk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+        ctk_dialog_set_response_sensitive (CTK_DIALOG (dialog),
                                            RESPONSE_REMOVE,
                                            FALSE);
         return;
@@ -802,12 +802,12 @@ program_list_selection_changed (CtkTreeSelection  *selection,
         return;
     }
 
-    ctk_entry_set_text (GTK_ENTRY (dialog->details->entry),
+    ctk_entry_set_text (CTK_ENTRY (dialog->details->entry),
                         sure_string (g_app_info_get_executable (info)));
-    ctk_label_set_text (GTK_LABEL (dialog->details->desc_label),
+    ctk_label_set_text (CTK_LABEL (dialog->details->desc_label),
                         sure_string (g_app_info_get_description (info)));
     ctk_widget_set_sensitive (dialog->details->button, TRUE);
-    ctk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+    ctk_dialog_set_response_sensitive (CTK_DIALOG (dialog),
                                        RESPONSE_REMOVE,
                                        g_app_info_can_delete (info));
 
@@ -828,26 +828,26 @@ program_list_selection_activated (CtkTreeView       *view,
     CtkTreeSelection *selection;
 
     /* update the entry with the info from the selection */
-    selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (dialog->details->program_list));
+    selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (dialog->details->program_list));
     program_list_selection_changed (selection, dialog);
 
-    ctk_dialog_response (GTK_DIALOG (&dialog->parent), RESPONSE_OPEN);
+    ctk_dialog_response (CTK_DIALOG (&dialog->parent), RESPONSE_OPEN);
 }
 
 static void
 expander_toggled (CtkWidget *expander, BaulOpenWithDialog *dialog)
 {
-    if (ctk_expander_get_expanded (GTK_EXPANDER (expander)) == TRUE)
+    if (ctk_expander_get_expanded (CTK_EXPANDER (expander)) == TRUE)
     {
         ctk_widget_grab_focus (dialog->details->entry);
-        ctk_window_resize (GTK_WINDOW (dialog), 400, 1);
+        ctk_window_resize (CTK_WINDOW (dialog), 400, 1);
     }
     else
     {
         CtkTreeSelection *selection;
 
         ctk_widget_grab_focus (dialog->details->program_list);
-        selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (dialog->details->program_list));
+        selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (dialog->details->program_list));
         program_list_selection_changed (selection, dialog);
     }
 }
@@ -865,23 +865,23 @@ baul_open_with_dialog_init (BaulOpenWithDialog *dialog)
 
     dialog->details = g_new0 (BaulOpenWithDialogDetails, 1);
 
-    ctk_window_set_title (GTK_WINDOW (dialog), _("Open With"));
-    ctk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-    ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-    ctk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
+    ctk_window_set_title (CTK_WINDOW (dialog), _("Open With"));
+    ctk_container_set_border_width (CTK_CONTAINER (dialog), 5);
+    ctk_window_set_resizable (CTK_WINDOW (dialog), FALSE);
+    ctk_window_set_destroy_with_parent (CTK_WINDOW (dialog), TRUE);
 
-    ctk_box_set_spacing (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
+    ctk_box_set_spacing (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), 2);
 
-    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    ctk_container_set_border_width (GTK_CONTAINER (vbox), 5);
+    vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 12);
+    ctk_container_set_border_width (CTK_CONTAINER (vbox), 5);
 
-    vbox2 = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    ctk_box_pack_start (GTK_BOX (vbox), vbox2, TRUE, TRUE, 0);
+    vbox2 = ctk_box_new (CTK_ORIENTATION_VERTICAL, 6);
+    ctk_box_pack_start (CTK_BOX (vbox), vbox2, TRUE, TRUE, 0);
 
     dialog->details->label = ctk_label_new ("");
-    ctk_label_set_xalign (GTK_LABEL (dialog->details->label), 0.0);
-    ctk_label_set_line_wrap (GTK_LABEL (dialog->details->label), TRUE);
-    ctk_box_pack_start (GTK_BOX (vbox2), dialog->details->label,
+    ctk_label_set_xalign (CTK_LABEL (dialog->details->label), 0.0);
+    ctk_label_set_line_wrap (CTK_LABEL (dialog->details->label), TRUE);
+    ctk_box_pack_start (CTK_BOX (vbox2), dialog->details->label,
                         FALSE, FALSE, 0);
     ctk_widget_show (dialog->details->label);
 
@@ -889,30 +889,30 @@ baul_open_with_dialog_init (BaulOpenWithDialog *dialog)
     scrolled_window = ctk_scrolled_window_new (NULL, NULL);
     ctk_widget_set_size_request (scrolled_window, 400, 300);
 
-    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
-                                         GTK_SHADOW_IN);
-    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                    GTK_POLICY_AUTOMATIC,
-                                    GTK_POLICY_AUTOMATIC);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (scrolled_window), FALSE);
+    ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (scrolled_window),
+                                         CTK_SHADOW_IN);
+    ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (scrolled_window),
+                                    CTK_POLICY_AUTOMATIC,
+                                    CTK_POLICY_AUTOMATIC);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (scrolled_window), FALSE);
 
     dialog->details->program_list = ctk_tree_view_new ();
-    ctk_tree_view_set_headers_visible (GTK_TREE_VIEW (dialog->details->program_list),
+    ctk_tree_view_set_headers_visible (CTK_TREE_VIEW (dialog->details->program_list),
                                        FALSE);
-    ctk_container_add (GTK_CONTAINER (scrolled_window), dialog->details->program_list);
+    ctk_container_add (CTK_CONTAINER (scrolled_window), dialog->details->program_list);
 
-    ctk_box_pack_start (GTK_BOX (vbox2), scrolled_window, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (vbox2), scrolled_window, TRUE, TRUE, 0);
 
     dialog->details->desc_label = ctk_label_new (_("Select an application to view its description."));
-    ctk_label_set_xalign (GTK_LABEL (dialog->details->desc_label), 0.0);
-    ctk_label_set_justify (GTK_LABEL (dialog->details->desc_label), GTK_JUSTIFY_LEFT);
-    ctk_label_set_max_width_chars (GTK_LABEL (dialog->details->desc_label), 54);
-    ctk_label_set_line_wrap (GTK_LABEL (dialog->details->desc_label), TRUE);
-    ctk_label_set_single_line_mode (GTK_LABEL (dialog->details->desc_label), FALSE);
-    ctk_box_pack_start (GTK_BOX (vbox2), dialog->details->desc_label, FALSE, FALSE, 0);
+    ctk_label_set_xalign (CTK_LABEL (dialog->details->desc_label), 0.0);
+    ctk_label_set_justify (CTK_LABEL (dialog->details->desc_label), CTK_JUSTIFY_LEFT);
+    ctk_label_set_max_width_chars (CTK_LABEL (dialog->details->desc_label), 54);
+    ctk_label_set_line_wrap (CTK_LABEL (dialog->details->desc_label), TRUE);
+    ctk_label_set_single_line_mode (CTK_LABEL (dialog->details->desc_label), FALSE);
+    ctk_box_pack_start (CTK_BOX (vbox2), dialog->details->desc_label, FALSE, FALSE, 0);
 
-    selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (dialog->details->program_list));
-    ctk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+    selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (dialog->details->program_list));
+    ctk_tree_selection_set_mode (selection, CTK_SELECTION_SINGLE);
     g_signal_connect (selection, "changed",
                       G_CALLBACK (program_list_selection_changed),
                       dialog);
@@ -925,53 +925,53 @@ baul_open_with_dialog_init (BaulOpenWithDialog *dialog)
                                          dialog, NULL);
 
 
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), vbox, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), vbox, TRUE, TRUE, 0);
     ctk_widget_show_all (vbox);
 
 
     expander = ctk_expander_new_with_mnemonic (_("_Use a custom command"));
-    ctk_box_pack_start (GTK_BOX (vbox), expander, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (vbox), expander, FALSE, FALSE, 0);
     g_signal_connect_after (expander, "activate", G_CALLBACK (expander_toggled), dialog);
 
     ctk_widget_show (expander);
 
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    ctk_container_add (GTK_CONTAINER (expander), hbox);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
+    ctk_container_add (CTK_CONTAINER (expander), hbox);
     ctk_widget_show (hbox);
 
     dialog->details->entry = ctk_entry_new ();
-    ctk_entry_set_activates_default (GTK_ENTRY (dialog->details->entry), TRUE);
+    ctk_entry_set_activates_default (CTK_ENTRY (dialog->details->entry), TRUE);
 
-    ctk_box_pack_start (GTK_BOX (hbox), dialog->details->entry,
+    ctk_box_pack_start (CTK_BOX (hbox), dialog->details->entry,
                         TRUE, TRUE, 0);
     ctk_widget_show (dialog->details->entry);
 
     dialog->details->button = ctk_button_new_with_mnemonic (_("_Browse..."));
     g_signal_connect (dialog->details->button, "clicked",
                       G_CALLBACK (browse_clicked_cb), dialog);
-    ctk_box_pack_start (GTK_BOX (hbox), dialog->details->button, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), dialog->details->button, FALSE, FALSE, 0);
     ctk_widget_show (dialog->details->button);
 
     /* Add remember this application checkbox - only visible in open mode */
     dialog->details->checkbox = ctk_check_button_new ();
-    ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->details->checkbox), TRUE);
-    ctk_button_set_use_underline (GTK_BUTTON (dialog->details->checkbox), TRUE);
-    ctk_widget_show (GTK_WIDGET (dialog->details->checkbox));
-    ctk_box_pack_start (GTK_BOX (vbox), dialog->details->checkbox, FALSE, FALSE, 0);
+    ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (dialog->details->checkbox), TRUE);
+    ctk_button_set_use_underline (CTK_BUTTON (dialog->details->checkbox), TRUE);
+    ctk_widget_show (CTK_WIDGET (dialog->details->checkbox));
+    ctk_box_pack_start (CTK_BOX (vbox), dialog->details->checkbox, FALSE, FALSE, 0);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Remove"),
                            "list-remove",
                            RESPONSE_REMOVE);
 
-    ctk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+    ctk_dialog_set_response_sensitive (CTK_DIALOG (dialog),
                                        RESPONSE_REMOVE,
                                        FALSE);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Cancel"),
                            "process-stop",
-                           GTK_RESPONSE_CANCEL);
+                           CTK_RESPONSE_CANCEL);
 
 
     /* Create a custom stock icon */
@@ -982,26 +982,26 @@ baul_open_with_dialog_init (BaulOpenWithDialog *dialog)
     g_signal_connect (G_OBJECT (dialog->details->entry), "changed",
                       G_CALLBACK (entry_changed_cb), dialog);
 
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 2);
     ctk_widget_show (hbox);
 
     label = ctk_label_new_with_mnemonic (_("_Open"));
-    ctk_label_set_mnemonic_widget (GTK_LABEL (label), GTK_WIDGET (dialog->details->button));
+    ctk_label_set_mnemonic_widget (CTK_LABEL (label), CTK_WIDGET (dialog->details->button));
     ctk_widget_show (label);
     dialog->details->open_label = label;
 
-    ctk_box_pack_start (GTK_BOX (hbox), label, TRUE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), label, TRUE, FALSE, 0);
 
     ctk_widget_show (dialog->details->button);
     ctk_widget_set_can_default (dialog->details->button, TRUE);
 
-    ctk_container_add (GTK_CONTAINER (dialog->details->button), hbox);
+    ctk_container_add (CTK_CONTAINER (dialog->details->button), hbox);
 
-    ctk_dialog_add_action_widget (GTK_DIALOG (dialog),
+    ctk_dialog_add_action_widget (CTK_DIALOG (dialog),
                                   dialog->details->button, RESPONSE_OPEN);
 
 
-    ctk_dialog_set_default_response (GTK_DIALOG (dialog),
+    ctk_dialog_set_default_response (CTK_DIALOG (dialog),
                                      RESPONSE_OPEN);
 
     g_signal_connect (dialog, "response",
@@ -1079,7 +1079,7 @@ set_uri_and_type (BaulOpenWithDialog *dialog,
                 checkbox_text = g_strdup_printf (_("_Remember this application for %s documents"),
                                                  dialog->details->extension);
 
-                ctk_button_set_label (GTK_BUTTON (dialog->details->checkbox), checkbox_text);
+                ctk_button_set_label (CTK_BUTTON (dialog->details->checkbox), checkbox_text);
                 g_free (checkbox_text);
             }
             g_free (emname);
@@ -1122,7 +1122,7 @@ set_uri_and_type (BaulOpenWithDialog *dialog,
                 checkbox_text = g_strdup_printf (_("_Remember this application for \"%s\" files"),
                                                  description);
 
-                ctk_button_set_label (GTK_BUTTON (dialog->details->checkbox), checkbox_text);
+                ctk_button_set_label (CTK_BUTTON (dialog->details->checkbox), checkbox_text);
                 g_free (checkbox_text);
             }
             g_free (emname);
@@ -1141,12 +1141,12 @@ set_uri_and_type (BaulOpenWithDialog *dialog,
     {
         ctk_widget_hide (dialog->details->checkbox);
 
-        ctk_label_set_text_with_mnemonic (GTK_LABEL (dialog->details->open_label),
+        ctk_label_set_text_with_mnemonic (CTK_LABEL (dialog->details->open_label),
                                           _("_Add"));
-        ctk_window_set_title (GTK_WINDOW (dialog), _("Add Application"));
+        ctk_window_set_title (CTK_WINDOW (dialog), _("Add Application"));
     }
 
-    ctk_label_set_markup (GTK_LABEL (dialog->details->label), label);
+    ctk_label_set_markup (CTK_LABEL (dialog->details->label), label);
 
     g_free (label);
     g_free (name);
@@ -1184,7 +1184,7 @@ baul_add_application_dialog_new (const char *uri,
 
     dialog = BAUL_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (uri, mime_type, NULL, TRUE));
 
-    return GTK_WIDGET (dialog);
+    return CTK_WIDGET (dialog);
 }
 
 CtkWidget *
@@ -1195,6 +1195,6 @@ baul_add_application_dialog_new_for_multiple_files (const char *extension,
 
     dialog = BAUL_OPEN_WITH_DIALOG (real_baul_open_with_dialog_new (NULL, mime_type, extension, TRUE));
 
-    return GTK_WIDGET (dialog);
+    return CTK_WIDGET (dialog);
 }
 

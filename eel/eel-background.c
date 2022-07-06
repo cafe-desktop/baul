@@ -333,13 +333,13 @@ eel_background_ensure_realized (EelBackground *self)
     /* Set the default color */
     style = ctk_widget_get_style_context (self->details->widget);
     ctk_style_context_save (style);
-    ctk_style_context_set_state (style, GTK_STATE_FLAG_NORMAL);
+    ctk_style_context_set_state (style, CTK_STATE_FLAG_NORMAL);
     if (self->details->use_base) {
-        ctk_style_context_add_class (style, GTK_STYLE_CLASS_VIEW);
+        ctk_style_context_add_class (style, CTK_STYLE_CLASS_VIEW);
     }
 
     ctk_style_context_get (style, ctk_style_context_get_state (style),
-                           GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                           CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                            &c, NULL);
     self->details->default_color = *c;
     gdk_rgba_free (c);
@@ -543,7 +543,7 @@ eel_background_set_up_widget (EelBackground *self)
 
         if (EEL_IS_CANVAS (widget))
         {
-            window = ctk_layout_get_bin_window (GTK_LAYOUT (widget));
+            window = ctk_layout_get_bin_window (CTK_LAYOUT (widget));
         }
         else
         {
@@ -587,7 +587,7 @@ widget_queue_background_change (CtkWidget *widget,
 }
 
 /* Callback used when the style of a widget changes.  We have to regenerate its
- * EelBackgroundStyle so that it will match the chosen GTK+ theme.
+ * EelBackgroundStyle so that it will match the chosen CTK+ theme.
  */
 static void
 widget_style_updated_cb (CtkWidget *widget,
@@ -677,13 +677,13 @@ widget_unrealize_cb (CtkWidget *widget,
     EelBackground *self = EEL_BACKGROUND (user_data);
 
     if (self->details->screen_size_handler > 0) {
-        g_signal_handler_disconnect (ctk_widget_get_screen (GTK_WIDGET (widget)),
+        g_signal_handler_disconnect (ctk_widget_get_screen (CTK_WIDGET (widget)),
                                      self->details->screen_size_handler);
         self->details->screen_size_handler = 0;
     }
 
     if (self->details->screen_monitors_handler > 0) {
-        g_signal_handler_disconnect (ctk_widget_get_screen (GTK_WIDGET (widget)),
+        g_signal_handler_disconnect (ctk_widget_get_screen (CTK_WIDGET (widget)),
                                      self->details->screen_monitors_handler);
         self->details->screen_monitors_handler = 0;
     }
@@ -728,7 +728,7 @@ eel_get_widget_background (CtkWidget *widget)
     gpointer data;
     GList *l;
 
-    g_return_val_if_fail (GTK_IS_WIDGET (widget), NULL);
+    g_return_val_if_fail (CTK_IS_WIDGET (widget), NULL);
 
     /* Check for an existing background. */
     data = g_object_get_data (G_OBJECT (widget), "eel_background");
@@ -1052,7 +1052,7 @@ eel_background_set_dropped_color (EelBackground *self,
     CtkAllocation allocation;
 
     g_return_if_fail (EEL_IS_BACKGROUND (self));
-    g_return_if_fail (GTK_IS_WIDGET (widget));
+    g_return_if_fail (CTK_IS_WIDGET (widget));
     g_return_if_fail (selection_data != NULL);
 
     /* Convert the selection data into a color spec. */
@@ -1087,8 +1087,8 @@ eel_background_set_dropped_color (EelBackground *self,
         GdkRGBA bg;
         GdkRGBA *c;
 
-        ctk_style_context_get (style, GTK_STATE_FLAG_NORMAL,
-                               GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+        ctk_style_context_get (style, CTK_STATE_FLAG_NORMAL,
+                               CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                &c, NULL);
         bg = *c;
         gdk_rgba_free (c);

@@ -15,7 +15,7 @@ main  (int argc, char *argv[])
 
 	ctk_init (&argc, &argv);
 
-	window = ctk_window_new (GTK_WINDOW_TOPLEVEL);
+	window = ctk_window_new (CTK_WINDOW_TOPLEVEL);
 	g_signal_connect (window, "destroy",
 			    ctk_main_quit, NULL);
 

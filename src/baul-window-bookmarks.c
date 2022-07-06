@@ -51,12 +51,12 @@ remove_bookmarks_for_uri_if_yes (CtkDialog *dialog, int response, gpointer callb
 {
     BaulWindow *window;
 
-    g_assert (GTK_IS_DIALOG (dialog));
+    g_assert (CTK_IS_DIALOG (dialog));
     g_assert (callback_data != NULL);
 
     window = callback_data;
 
-    if (response == GTK_RESPONSE_YES)
+    if (response == CTK_RESPONSE_YES)
     {
         const char *uri;
 
@@ -64,7 +64,7 @@ remove_bookmarks_for_uri_if_yes (CtkDialog *dialog, int response, gpointer callb
         baul_bookmark_list_delete_items_with_uri (window->details->bookmark_list, uri);
     }
 
-    ctk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (CTK_WIDGET (dialog));
 }
 
 static void
@@ -87,13 +87,13 @@ show_bogus_bookmark_window (BaulWindow *window,
     dialog = eel_show_yes_no_dialog (prompt, detail,
                                      _("Bookmark for Nonexistent Location"),
                                      "process-stop",
-                                     GTK_WINDOW (window));
+                                     CTK_WINDOW (window));
 
     g_signal_connect (dialog, "response",
                       G_CALLBACK (remove_bookmarks_for_uri_if_yes), window);
     g_object_set_data_full (G_OBJECT (dialog), "uri", g_file_get_uri (location), g_free);
 
-    ctk_dialog_set_default_response (dialog, GTK_RESPONSE_NO);
+    ctk_dialog_set_default_response (dialog, CTK_RESPONSE_NO);
 
     g_object_unref (location);
     g_free (uri_for_display);
@@ -128,7 +128,7 @@ baul_bookmarks_exiting (void)
     if (bookmarks_window != NULL)
     {
         baul_bookmarks_window_save_geometry (bookmarks_window);
-        ctk_widget_destroy (GTK_WIDGET (bookmarks_window));
+        ctk_widget_destroy (CTK_WIDGET (bookmarks_window));
     }
 }
 
@@ -165,7 +165,7 @@ baul_window_edit_bookmarks (BaulWindow *window)
     dialog = get_or_create_bookmarks_window (window);
 
     ctk_window_set_screen (
-        dialog, ctk_window_get_screen (GTK_WINDOW (window)));
+        dialog, ctk_window_get_screen (CTK_WINDOW (window)));
     ctk_window_present (dialog);
 }
 
@@ -197,10 +197,10 @@ connect_proxy_cb (CtkActionGroup *action_group,
 {
     CtkLabel *label;
 
-    if (!GTK_IS_MENU_ITEM (proxy))
+    if (!CTK_IS_MENU_ITEM (proxy))
         return;
 
-    label = GTK_LABEL (ctk_bin_get_child (GTK_BIN (proxy)));
+    label = CTK_LABEL (ctk_bin_get_child (CTK_BIN (proxy)));
 
     ctk_label_set_use_underline (label, FALSE);
     ctk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);

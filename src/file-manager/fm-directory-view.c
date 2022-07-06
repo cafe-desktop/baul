@@ -415,7 +415,7 @@ static void action_undo_callback (CtkAction *action, gpointer callback_data);
 
 static void action_redo_callback (CtkAction *action, gpointer callback_data);
 
-EEL_CLASS_BOILERPLATE (FMDirectoryView, fm_directory_view, GTK_TYPE_SCROLLED_WINDOW)
+EEL_CLASS_BOILERPLATE (FMDirectoryView, fm_directory_view, CTK_TYPE_SCROLLED_WINDOW)
 
 EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (fm_directory_view, add_file)
 EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (fm_directory_view, bump_zoom_level)
@@ -633,12 +633,12 @@ fm_directory_view_get_containing_window (FMDirectoryView *view)
 
 	g_assert (FM_IS_DIRECTORY_VIEW (view));
 
-	window = ctk_widget_get_ancestor (GTK_WIDGET (view), GTK_TYPE_WINDOW);
+	window = ctk_widget_get_ancestor (CTK_WIDGET (view), CTK_TYPE_WINDOW);
 	if (window == NULL) {
 		return NULL;
 	}
 
-	return GTK_WINDOW (window);
+	return CTK_WINDOW (window);
 }
 
 static gboolean
@@ -669,9 +669,9 @@ fm_directory_view_confirm_multiple (CtkWindow *parent_window,
 	g_free (detail);
 
 	response = ctk_dialog_run (dialog);
-	ctk_widget_destroy (GTK_WIDGET (dialog));
+	ctk_widget_destroy (CTK_WIDGET (dialog));
 
-	return response == GTK_RESPONSE_YES;
+	return response == CTK_RESPONSE_YES;
 }
 
 static gboolean
@@ -902,7 +902,7 @@ application_selected_cb (BaulOpenWithDialog *dialog,
 	BaulFile *file;
 	GList files;
 
-	parent_window = GTK_WINDOW (user_data);
+	parent_window = CTK_WINDOW (user_data);
 
 	file = g_object_get_data (G_OBJECT (dialog), "directory-view:file");
 
@@ -933,8 +933,8 @@ choose_program (FMDirectoryView *view,
 				g_object_ref (file),
 				(GDestroyNotify)g_object_unref);
 
-	ctk_window_set_screen (GTK_WINDOW (dialog),
-			       ctk_widget_get_screen (GTK_WIDGET (view)));
+	ctk_window_set_screen (CTK_WINDOW (dialog),
+			       ctk_widget_get_screen (CTK_WIDGET (view)));
 	ctk_widget_show (dialog);
 
 	g_signal_connect_object (dialog,
@@ -1161,11 +1161,11 @@ pattern_select_response_cb (CtkWidget *dialog, int response, gpointer user_data)
 	view = FM_DIRECTORY_VIEW (user_data);
 
 	switch (response) {
-	case GTK_RESPONSE_OK :
+	case CTK_RESPONSE_OK :
 		entry = g_object_get_data (G_OBJECT (dialog), "entry");
 		directory = fm_directory_view_get_model (view);
 		selection = baul_directory_match_pattern (directory,
-					ctk_entry_get_text (GTK_ENTRY (entry)));
+					ctk_entry_get_text (CTK_ENTRY (entry)));
 
 		if (selection) {
 			fm_directory_view_set_selection (view, selection);
@@ -1174,19 +1174,19 @@ pattern_select_response_cb (CtkWidget *dialog, int response, gpointer user_data)
 			fm_directory_view_reveal_selection(view);
 		}
 		/* fall through */
-	case GTK_RESPONSE_NONE :
-	case GTK_RESPONSE_DELETE_EVENT :
-	case GTK_RESPONSE_CANCEL :
-		ctk_widget_destroy (GTK_WIDGET (dialog));
+	case CTK_RESPONSE_NONE :
+	case CTK_RESPONSE_DELETE_EVENT :
+	case CTK_RESPONSE_CANCEL :
+		ctk_widget_destroy (CTK_WIDGET (dialog));
 		break;
-	case GTK_RESPONSE_HELP :
+	case CTK_RESPONSE_HELP :
 		error = NULL;
-		ctk_show_uri_on_window (GTK_WINDOW (dialog),
+		ctk_show_uri_on_window (CTK_WINDOW (dialog),
 			                "help:cafe-user-guide/baul-select-pattern",
 			                ctk_get_current_event_time (), &error);
 		if (error) {
 			eel_show_error_dialog (_("There was an error displaying help."), error->message,
-					       GTK_WINDOW (dialog));
+					       CTK_WINDOW (dialog));
 			g_error_free (error);
 		}
 		break;
@@ -1206,64 +1206,64 @@ select_pattern (FMDirectoryView *view)
 	char *example_pattern;
 
 	dialog = ctk_dialog_new ();
-	ctk_window_set_title (GTK_WINDOW (dialog), _("Select Items Matching"));
-	ctk_window_set_transient_for (GTK_WINDOW (dialog), fm_directory_view_get_containing_window (view));
-	ctk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
+	ctk_window_set_title (CTK_WINDOW (dialog), _("Select Items Matching"));
+	ctk_window_set_transient_for (CTK_WINDOW (dialog), fm_directory_view_get_containing_window (view));
+	ctk_window_set_destroy_with_parent (CTK_WINDOW (dialog), TRUE);
 
-	eel_dialog_add_button (GTK_DIALOG (dialog),
+	eel_dialog_add_button (CTK_DIALOG (dialog),
 			       _("_Help"),
 			       "help-browser",
-			       GTK_RESPONSE_HELP);
+			       CTK_RESPONSE_HELP);
 
-	eel_dialog_add_button (GTK_DIALOG (dialog),
+	eel_dialog_add_button (CTK_DIALOG (dialog),
 			       _("_Cancel"),
 			       "process-stop",
-			       GTK_RESPONSE_CANCEL);
+			       CTK_RESPONSE_CANCEL);
 
-	eel_dialog_add_button (GTK_DIALOG (dialog),
+	eel_dialog_add_button (CTK_DIALOG (dialog),
 			       _("_OK"),
 			       "ctk-ok",
-			       GTK_RESPONSE_OK);
+			       CTK_RESPONSE_OK);
 
-	ctk_dialog_set_default_response (GTK_DIALOG (dialog),
-					 GTK_RESPONSE_OK);
-	ctk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	ctk_box_set_spacing (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
+	ctk_dialog_set_default_response (CTK_DIALOG (dialog),
+					 CTK_RESPONSE_OK);
+	ctk_container_set_border_width (CTK_CONTAINER (dialog), 5);
+	ctk_box_set_spacing (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), 2);
 
 	label = ctk_label_new_with_mnemonic (_("_Pattern:"));
 
-	ctk_widget_set_halign (label, GTK_ALIGN_START);
+	ctk_widget_set_halign (label, CTK_ALIGN_START);
 
 	example = ctk_label_new (NULL);
-	ctk_widget_set_halign (example, GTK_ALIGN_START);
+	ctk_widget_set_halign (example, CTK_ALIGN_START);
 	example_pattern = g_strdup_printf ("<b>%s</b><i>%s</i>",
 					   _("Examples: "),
 					   "*.png, file\?\?.txt, pict*.\?\?\?");
-	ctk_label_set_markup (GTK_LABEL (example), example_pattern);
+	ctk_label_set_markup (CTK_LABEL (example), example_pattern);
 	g_free (example_pattern);
-	ctk_widget_set_halign (example, GTK_ALIGN_START);
+	ctk_widget_set_halign (example, CTK_ALIGN_START);
 
 	entry = ctk_entry_new ();
-	ctk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
+	ctk_entry_set_activates_default (CTK_ENTRY (entry), TRUE);
 	ctk_widget_set_hexpand (entry, TRUE);
 
 	grid = ctk_grid_new ();
 	g_object_set (grid,
-		      "orientation", GTK_ORIENTATION_VERTICAL,
+		      "orientation", CTK_ORIENTATION_VERTICAL,
 		      "border-width", 6,
 		      "row-spacing", 6,
 		      "column-spacing", 12,
 		      NULL);
 
-	ctk_container_add (GTK_CONTAINER (grid), label);
-	ctk_grid_attach_next_to (GTK_GRID (grid), entry, label,
-				 GTK_POS_RIGHT, 1, 1);
-	ctk_grid_attach_next_to (GTK_GRID (grid), example, entry,
-				 GTK_POS_BOTTOM, 1, 1);
+	ctk_container_add (CTK_CONTAINER (grid), label);
+	ctk_grid_attach_next_to (CTK_GRID (grid), entry, label,
+				 CTK_POS_RIGHT, 1, 1);
+	ctk_grid_attach_next_to (CTK_GRID (grid), example, entry,
+				 CTK_POS_BOTTOM, 1, 1);
 
-	ctk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
+	ctk_label_set_mnemonic_widget (CTK_LABEL (label), entry);
 	ctk_widget_show_all (grid);
-	ctk_container_add (GTK_CONTAINER (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), grid);
+	ctk_container_add (CTK_CONTAINER (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), grid);
 
 	g_object_set_data (G_OBJECT (dialog), "entry", entry);
 	g_signal_connect (dialog, "response",
@@ -1339,7 +1339,7 @@ query_name_entry_changed_cb  (CtkWidget *entry, CtkWidget *button)
 	const char *text;
 	gboolean sensitive;
 
-	text = ctk_entry_get_text (GTK_ENTRY (entry));
+	text = ctk_entry_get_text (CTK_ENTRY (entry));
 
 	sensitive = (text != NULL) && (*text != 0);
 
@@ -1363,43 +1363,43 @@ action_save_search_as_callback (CtkAction *action,
 		search = BAUL_SEARCH_DIRECTORY (directory_view->details->model);
 
 		dialog = ctk_dialog_new ();
-		ctk_window_set_title (GTK_WINDOW (dialog), _("Save Search as"));
-		ctk_window_set_transient_for (GTK_WINDOW (dialog), fm_directory_view_get_containing_window (directory_view));
+		ctk_window_set_title (CTK_WINDOW (dialog), _("Save Search as"));
+		ctk_window_set_transient_for (CTK_WINDOW (dialog), fm_directory_view_get_containing_window (directory_view));
 
-		eel_dialog_add_button (GTK_DIALOG (dialog),
+		eel_dialog_add_button (CTK_DIALOG (dialog),
 				       _("_Cancel"),
 				       "process-stop",
-				       GTK_RESPONSE_CANCEL);
+				       CTK_RESPONSE_CANCEL);
 
-		save_button = eel_dialog_add_button (GTK_DIALOG (dialog), _("_Save"),
-						     "document-save", GTK_RESPONSE_OK);
+		save_button = eel_dialog_add_button (CTK_DIALOG (dialog), _("_Save"),
+						     "document-save", CTK_RESPONSE_OK);
 
-		ctk_dialog_set_default_response (GTK_DIALOG (dialog),
-						 GTK_RESPONSE_OK);
-		ctk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-		ctk_box_set_spacing (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
-		ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+		ctk_dialog_set_default_response (CTK_DIALOG (dialog),
+						 CTK_RESPONSE_OK);
+		ctk_container_set_border_width (CTK_CONTAINER (dialog), 5);
+		ctk_box_set_spacing (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), 2);
+		ctk_window_set_resizable (CTK_WINDOW (dialog), FALSE);
 
 		grid = ctk_grid_new ();
 		g_object_set (grid,
-			      "orientation", GTK_ORIENTATION_VERTICAL,
+			      "orientation", CTK_ORIENTATION_VERTICAL,
 			      "border-width", 5,
 			      "row-spacing", 6,
 			      "column-spacing", 12,
 			      NULL);
-		ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), grid, TRUE, TRUE, 0);
+		ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), grid, TRUE, TRUE, 0);
 		ctk_widget_show (grid);
 
 		label = ctk_label_new_with_mnemonic (_("Search _name:"));
-		ctk_label_set_xalign (GTK_LABEL (label), 0.0);
-		ctk_container_add (GTK_CONTAINER (grid), label);
+		ctk_label_set_xalign (CTK_LABEL (label), 0.0);
+		ctk_container_add (CTK_CONTAINER (grid), label);
 		ctk_widget_show (label);
 		entry = ctk_entry_new ();
 		ctk_widget_set_hexpand (entry, TRUE);
-		ctk_grid_attach_next_to (GTK_GRID (grid), entry, label,
-					 GTK_POS_RIGHT, 1, 1);
-		ctk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
-		ctk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
+		ctk_grid_attach_next_to (CTK_GRID (grid), entry, label,
+					 CTK_POS_RIGHT, 1, 1);
+		ctk_entry_set_activates_default (CTK_ENTRY (entry), TRUE);
+		ctk_label_set_mnemonic_widget (CTK_LABEL (label), entry);
 
 		ctk_widget_set_sensitive (save_button, FALSE);
 		g_signal_connect (entry, "changed",
@@ -1407,29 +1407,29 @@ action_save_search_as_callback (CtkAction *action,
 
 		ctk_widget_show (entry);
 		label = ctk_label_new_with_mnemonic (_("_Folder:"));
-		ctk_label_set_xalign (GTK_LABEL (label), 0.0);
-		ctk_container_add (GTK_CONTAINER (grid), label);
+		ctk_label_set_xalign (CTK_LABEL (label), 0.0);
+		ctk_container_add (CTK_CONTAINER (grid), label);
 		ctk_widget_show (label);
 
 		chooser = ctk_file_chooser_button_new (_("Select Folder to Save Search In"),
-						      GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+						      CTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
 		ctk_widget_set_hexpand (chooser, TRUE);
-		ctk_grid_attach_next_to (GTK_GRID (grid), chooser, label,
-					 GTK_POS_RIGHT, 1, 1);
-		ctk_label_set_mnemonic_widget (GTK_LABEL (label), chooser);
+		ctk_grid_attach_next_to (CTK_GRID (grid), chooser, label,
+					 CTK_POS_RIGHT, 1, 1);
+		ctk_label_set_mnemonic_widget (CTK_LABEL (label), chooser);
 		ctk_widget_show (chooser);
 
-		ctk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
+		ctk_file_chooser_set_local_only (CTK_FILE_CHOOSER (chooser), TRUE);
 
-		ctk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
+		ctk_file_chooser_set_current_folder (CTK_FILE_CHOOSER (chooser),
 						     g_get_home_dir ());
 
-		if (ctk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
+		if (ctk_dialog_run (CTK_DIALOG (dialog)) == CTK_RESPONSE_OK) {
 			const char *entry_text;
 			char *filename, *filename_utf8, *dirname, *path, *uri;
 			GFile *location;
 
-			entry_text = ctk_entry_get_text (GTK_ENTRY (entry));
+			entry_text = ctk_entry_get_text (CTK_ENTRY (entry));
 			if (g_str_has_suffix (entry_text, BAUL_SAVED_SEARCH_EXTENSION)) {
 				filename_utf8 = g_strdup (entry_text);
 			} else {
@@ -1439,7 +1439,7 @@ action_save_search_as_callback (CtkAction *action,
 			filename = g_filename_from_utf8 (filename_utf8, -1, NULL, NULL, NULL);
 			g_free (filename_utf8);
 
-			dirname = ctk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+			dirname = ctk_file_chooser_get_filename (CTK_FILE_CHOOSER (chooser));
 
 			path = g_build_filename (dirname, filename, NULL);
 			g_free (filename);
@@ -1467,7 +1467,7 @@ action_empty_trash_callback (CtkAction *action,
 {
         g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
 
-	baul_file_operations_empty_trash (GTK_WIDGET (callback_data));
+	baul_file_operations_empty_trash (CTK_WIDGET (callback_data));
 }
 
 static void
@@ -1505,7 +1505,7 @@ action_new_launcher_callback (CtkAction *action,
 	window = fm_directory_view_get_containing_window (view);
 	baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER,
 			    "directory view create new launcher in window=%p: %s", window, parent_uri);
-	baul_launch_application_from_command (ctk_widget_get_screen (GTK_WIDGET (view)),
+	baul_launch_application_from_command (ctk_widget_get_screen (CTK_WIDGET (view)),
 						  "cafe-desktop-item-edit",
 						  "cafe-desktop-item-edit",
 						  FALSE,
@@ -1531,12 +1531,12 @@ action_properties_callback (CtkAction *action,
 
 			files = g_list_append (NULL, baul_file_ref (view->details->directory_as_file));
 
-			fm_properties_window_present (files, GTK_WIDGET (view));
+			fm_properties_window_present (files, CTK_WIDGET (view));
 
 			baul_file_list_free (files);
 		}
 	} else {
-		fm_properties_window_present (selection, GTK_WIDGET (view));
+		fm_properties_window_present (selection, CTK_WIDGET (view));
 	}
         baul_file_list_free (selection);
 }
@@ -1555,7 +1555,7 @@ action_location_properties_callback (CtkAction *action,
 
 	files = g_list_append (NULL, baul_file_ref (view->details->location_popup_directory_as_file));
 
-	fm_properties_window_present (files, GTK_WIDGET (view));
+	fm_properties_window_present (files, CTK_WIDGET (view));
 
 	baul_file_list_free (files);
 }
@@ -1872,7 +1872,7 @@ slot_inactive (BaulWindowSlot *slot,
 	       FMDirectoryView *view)
 {
 	g_assert (view->details->active ||
-		  ctk_widget_get_parent (GTK_WIDGET (view)) == NULL);
+		  ctk_widget_get_parent (CTK_WIDGET (view)) == NULL);
 	view->details->active = FALSE;
 
 	fm_directory_view_unmerge_menus (view);
@@ -1884,9 +1884,9 @@ fm_directory_view_grab_focus (BaulView *view)
 {
 	/* focus the child of the scrolled window if it exists */
 	CtkWidget *child;
-	child = ctk_bin_get_child (GTK_BIN (view));
+	child = ctk_bin_get_child (CTK_BIN (view));
 	if (child) {
-		ctk_widget_grab_focus (GTK_WIDGET (child));
+		ctk_widget_grab_focus (CTK_WIDGET (child));
 	}
 }
 
@@ -1899,7 +1899,7 @@ view_iface_update_menus (BaulView *view)
 static CtkWidget *
 fm_directory_view_get_widget (BaulView *view)
 {
-	return GTK_WIDGET (view);
+	return CTK_WIDGET (view);
 }
 
 static int
@@ -2025,13 +2025,13 @@ fm_directory_view_init (FMDirectoryView *view)
 				       (GDestroyNotify)file_and_directory_free,
 				       NULL);
 
-	ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view),
-					GTK_POLICY_AUTOMATIC,
-					GTK_POLICY_AUTOMATIC);
-	ctk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (view), NULL);
-	ctk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (view), NULL);
-	ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (view), GTK_SHADOW_ETCHED_IN);
-	ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (view), FALSE);
+	ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (view),
+					CTK_POLICY_AUTOMATIC,
+					CTK_POLICY_AUTOMATIC);
+	ctk_scrolled_window_set_hadjustment (CTK_SCROLLED_WINDOW (view), NULL);
+	ctk_scrolled_window_set_vadjustment (CTK_SCROLLED_WINDOW (view), NULL);
+	ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (view), CTK_SHADOW_ETCHED_IN);
+	ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (view), FALSE);
 
 	set_up_scripts_directory_global ();
 	scripts_directory = baul_directory_get_by_uri (scripts_directory_uri);
@@ -2068,7 +2068,7 @@ fm_directory_view_init (FMDirectoryView *view)
         g_signal_connect_object (baul_signaller_get_current (), "popup_menu_changed",
                          G_CALLBACK (fm_directory_view_update_menus), view, G_CONNECT_SWAPPED);
 
-	ctk_widget_show (GTK_WIDGET (view));
+	ctk_widget_show (CTK_WIDGET (view));
 
 	g_signal_connect_swapped (baul_preferences,
 							  "changed::" BAUL_PREFERENCES_ENABLE_DELETE,
@@ -2199,7 +2199,7 @@ fm_directory_view_destroy (CtkWidget *object)
 		view->details->directory_as_file = NULL;
 	}
 
-	EEL_CALL_PARENT (GTK_WIDGET_CLASS, destroy, (object));
+	EEL_CALL_PARENT (CTK_WIDGET_CLASS, destroy, (object));
 }
 
 static void
@@ -3825,7 +3825,7 @@ fm_directory_view_create_links_for_files (FMDirectoryView *view, GList *files,
         copy_move_done_data = pre_copy_move (view);
 	dir_uri = fm_directory_view_get_backing_uri (view);
 	baul_file_operations_copy_move (uris, relative_item_points, dir_uri, GDK_ACTION_LINK,
-					    GTK_WIDGET (view), copy_move_done_callback, copy_move_done_data);
+					    CTK_WIDGET (view), copy_move_done_callback, copy_move_done_data);
 	g_free (dir_uri);
 	g_list_free_full (uris, g_free);
 }
@@ -3858,7 +3858,7 @@ fm_directory_view_duplicate_selection (FMDirectoryView *view, GList *files,
 
         copy_move_done_data = pre_copy_move (view);
 	baul_file_operations_copy_move (uris, relative_item_points, NULL, GDK_ACTION_COPY,
-		GTK_WIDGET (view), copy_move_done_callback, copy_move_done_data);
+		CTK_WIDGET (view), copy_move_done_callback, copy_move_done_data);
 	g_list_free_full (uris, g_free);
 }
 
@@ -4111,7 +4111,7 @@ new_folder_done (GFile *new_folder, gpointer user_data)
 		goto fail;
 	}
 
-	screen = ctk_widget_get_screen (GTK_WIDGET (directory_view));
+	screen = ctk_widget_get_screen (CTK_WIDGET (directory_view));
 	g_snprintf (screen_string, sizeof (screen_string), "%d", gdk_x11_screen_get_screen_number (screen));
 
 
@@ -4210,7 +4210,7 @@ fm_directory_view_new_folder (FMDirectoryView *directory_view)
 	pos = context_menu_to_file_operation_position (directory_view);
 
 	parent_uri = fm_directory_view_get_backing_uri (directory_view);
-	baul_file_operations_new_folder (GTK_WIDGET (directory_view),
+	baul_file_operations_new_folder (CTK_WIDGET (directory_view),
 					     pos, parent_uri,
 					     new_folder_done, data);
 
@@ -4252,7 +4252,7 @@ fm_directory_view_new_file_with_initial_contents (FMDirectoryView *directory_vie
 		pos = context_menu_to_file_operation_position (directory_view);
 	}
 
-	baul_file_operations_new_file (GTK_WIDGET (directory_view),
+	baul_file_operations_new_file (CTK_WIDGET (directory_view),
 					   pos, parent_uri, filename,
 					   initial_contents, length,
 					   new_folder_done, data);
@@ -4293,7 +4293,7 @@ fm_directory_view_new_file (FMDirectoryView *directory_view,
 
 	source_uri = baul_file_get_uri (source);
 
-	baul_file_operations_new_file_from_template (GTK_WIDGET (directory_view),
+	baul_file_operations_new_file_from_template (CTK_WIDGET (directory_view),
 							 pos,
 							 parent_uri != NULL ? parent_uri : container_uri,
 							 NULL,
@@ -4478,7 +4478,7 @@ add_submenu (CtkUIManager *ui_manager,
 				       parent_path,
 				       escaped_submenu_name,
 				       action_name,
-				       GTK_UI_MANAGER_MENU,
+				       CTK_UI_MANAGER_MENU,
 				       FALSE);
 		g_free (action_name);
 		g_free (escaped_label);
@@ -4557,14 +4557,14 @@ add_application_to_open_with_menu (FMDirectoryView *view,
 			       menu_placeholder,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	path = g_strdup_printf ("%s/%s", menu_placeholder, action_name);
 	menuitem = ctk_ui_manager_get_widget (
 			baul_window_info_get_ui_manager (view->details->window),
 			path);
-	ctk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
+	ctk_image_menu_item_set_always_show_image (CTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 	g_free (path);
 
 	ctk_ui_manager_add_ui (baul_window_info_get_ui_manager (view->details->window),
@@ -4572,14 +4572,14 @@ add_application_to_open_with_menu (FMDirectoryView *view,
 			       popup_placeholder,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	path = g_strdup_printf ("%s/%s", popup_placeholder, action_name);
 	menuitem = ctk_ui_manager_get_widget (
 			baul_window_info_get_ui_manager (view->details->window),
 			path);
-	ctk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
+	ctk_image_menu_item_set_always_show_image (CTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 
 	g_free (path);
 	g_free (action_name);
@@ -4637,14 +4637,14 @@ add_parent_folder_to_open_menu (FMDirectoryView *view,
 			       menu_placeholder,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	path = g_strdup_printf ("%s/%s", menu_placeholder, action_name);
 	menuitem = ctk_ui_manager_get_widget (
 			baul_window_info_get_ui_manager (view->details->window),
 			path);
-	ctk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
+	ctk_image_menu_item_set_always_show_image (CTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 	g_free (path);
 
 	ctk_ui_manager_add_ui (baul_window_info_get_ui_manager (view->details->window),
@@ -4652,14 +4652,14 @@ add_parent_folder_to_open_menu (FMDirectoryView *view,
 			       popup_placeholder,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	path = g_strdup_printf ("%s/%s", popup_placeholder, action_name);
 	menuitem = ctk_ui_manager_get_widget (
 			baul_window_info_get_ui_manager (view->details->window),
 			path);
-	ctk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
+	ctk_image_menu_item_set_always_show_image (CTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 
 	g_free (path);
 	g_free (action_name);
@@ -4795,7 +4795,7 @@ reset_open_with_menu (FMDirectoryView *view, GList *selection)
 				       menu_path,
 				       "separator",
 				       NULL,
-				       GTK_UI_MANAGER_SEPARATOR,
+				       CTK_UI_MANAGER_SEPARATOR,
 				       FALSE);
 
 		add_application_to_open_with_menu (view,
@@ -4933,7 +4933,7 @@ extension_action_callback (CtkAction *action,
 	/* Make sure the selected menu item is valid for the final sniffed
 	 * mime type */
 	g_object_get (data->item, "name", &item_name, NULL);
-	items = get_all_extension_menu_items (ctk_widget_get_toplevel (GTK_WIDGET (data->view)),
+	items = get_all_extension_menu_items (ctk_widget_get_toplevel (CTK_WIDGET (data->view)),
 					      data->selection);
 
 	is_valid = search_in_menu_items (items, item_name);
@@ -4958,7 +4958,7 @@ get_menu_icon (const char *icon_name,
 	cairo_surface_t *surface;
 	int size, scale;
 
-	size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+	size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
 	scale = ctk_widget_get_scale_factor (widget);
 
 	if (g_path_is_absolute (icon_name)) {
@@ -4980,7 +4980,7 @@ get_menu_icon_for_file (BaulFile  *file,
 	cairo_surface_t *surface;
 	int size, scale;
 
-	size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+	size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
 	scale = ctk_widget_get_scale_factor (widget);
 
 	info = baul_file_get_icon (file, size, scale, 0);
@@ -5017,7 +5017,7 @@ add_extension_action_for_files (FMDirectoryView *view,
 	if (icon != NULL) {
 		cairo_surface_t *surface;
 
-		surface = get_menu_icon (icon, GTK_WIDGET (view));
+		surface = get_menu_icon (icon, CTK_WIDGET (view));
 
 		if (surface != NULL) {
 			g_object_set_data_full (G_OBJECT (action), "menu-icon",
@@ -5044,7 +5044,7 @@ add_extension_action_for_files (FMDirectoryView *view,
 
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 	ctk_action_group_add_action (view->details->extensions_menu_action_group,
-				     GTK_ACTION (action));
+				     CTK_ACTION (action));
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 	g_object_unref (action);
 
@@ -5090,7 +5090,7 @@ add_extension_menu_items (FMDirectoryView *view,
 				       path,
 				       action_name,
 				       action_name,
-				       (menu != NULL) ? GTK_UI_MANAGER_MENU : GTK_UI_MANAGER_MENUITEM,
+				       (menu != NULL) ? CTK_UI_MANAGER_MENU : CTK_UI_MANAGER_MENUITEM,
 				       FALSE);
 		g_free (path);
 
@@ -5100,7 +5100,7 @@ add_extension_menu_items (FMDirectoryView *view,
 				       path,
 				       action_name,
 				       action_name,
-				       (menu != NULL) ? GTK_UI_MANAGER_MENU : GTK_UI_MANAGER_MENUITEM,
+				       (menu != NULL) ? CTK_UI_MANAGER_MENU : CTK_UI_MANAGER_MENUITEM,
 				       FALSE);
 		g_free (path);
 
@@ -5143,7 +5143,7 @@ reset_extension_actions_menu (FMDirectoryView *view, GList *selection)
 				      &view->details->extensions_menu_merge_id,
 				      &view->details->extensions_menu_action_group);
 
-	items = get_all_extension_menu_items (ctk_widget_get_toplevel (GTK_WIDGET (view)),
+	items = get_all_extension_menu_items (ctk_widget_get_toplevel (CTK_WIDGET (view)),
 					      selection);
 	if (items != NULL) {
 		add_extension_menu_items (view, selection, items, "");
@@ -5354,7 +5354,7 @@ static void set_script_environment_variables(FMDirectoryView* view, GList* selec
 
 	g_free(uri);
 
-	geometry_string = eel_ctk_window_get_geometry_string(GTK_WINDOW (fm_directory_view_get_containing_window (view)));
+	geometry_string = eel_ctk_window_get_geometry_string(CTK_WINDOW (fm_directory_view_get_containing_window (view)));
 
 	g_setenv("BAUL_SCRIPT_WINDOW_GEOMETRY", geometry_string, TRUE);
 	g_setenv("NAUTILUS_SCRIPT_WINDOW_GEOMETRY", geometry_string, TRUE); // compatibilidad GNOME
@@ -5447,7 +5447,7 @@ run_script_callback (CtkAction *action, gpointer callback_data)
 	parameters = get_file_names_as_parameter_array (selected_files,
 						        launch_parameters->directory_view->details->model);
 
-	screen = ctk_widget_get_screen (GTK_WIDGET (launch_parameters->directory_view));
+	screen = ctk_widget_get_screen (CTK_WIDGET (launch_parameters->directory_view));
 
 	name = baul_file_get_name (launch_parameters->file);
 	/* FIXME: handle errors with dialog? Or leave up to each script? */
@@ -5501,7 +5501,7 @@ add_script_to_scripts_menus (FMDirectoryView *directory_view,
 				 NULL);
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 
-	surface = get_menu_icon_for_file (file, GTK_WIDGET (directory_view));
+	surface = get_menu_icon_for_file (file, CTK_WIDGET (directory_view));
 	if (surface != NULL) {
 		g_object_set_data_full (G_OBJECT (action), "menu-icon",
 					surface,
@@ -5526,21 +5526,21 @@ add_script_to_scripts_menus (FMDirectoryView *directory_view,
 			       menu_path,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 	ctk_ui_manager_add_ui (ui_manager,
 			       directory_view->details->scripts_merge_id,
 			       popup_path,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 	ctk_ui_manager_add_ui (ui_manager,
 			       directory_view->details->scripts_merge_id,
 			       popup_bg_path,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	g_free (name);
@@ -5567,7 +5567,7 @@ add_submenu_to_directory_menus (FMDirectoryView *directory_view,
 	ui_manager = baul_window_info_get_ui_manager (directory_view->details->window);
 	uri = baul_file_get_uri (file);
 	name = baul_file_get_display_name (file);
-	surface = get_menu_icon_for_file (file, GTK_WIDGET (directory_view));
+	surface = get_menu_icon_for_file (file, CTK_WIDGET (directory_view));
 	add_submenu (ui_manager, action_group, merge_id, menu_path, uri, name, surface, TRUE);
 	add_submenu (ui_manager, action_group, merge_id, popup_path, uri, name, surface, FALSE);
 	add_submenu (ui_manager, action_group, merge_id, popup_bg_path, uri, name, surface, FALSE);
@@ -5759,7 +5759,7 @@ add_template_to_templates_menus (FMDirectoryView *directory_view,
 				 NULL);
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 
-	surface = get_menu_icon_for_file (file, GTK_WIDGET (directory_view));
+	surface = get_menu_icon_for_file (file, CTK_WIDGET (directory_view));
 	if (surface != NULL) {
 		g_object_set_data_full (G_OBJECT (action), "menu-icon",
 					surface,
@@ -5784,7 +5784,7 @@ add_template_to_templates_menus (FMDirectoryView *directory_view,
 			       menu_path,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	ctk_ui_manager_add_ui (ui_manager,
@@ -5792,7 +5792,7 @@ add_template_to_templates_menus (FMDirectoryView *directory_view,
 			       popup_bg_path,
 			       action_name,
 			       action_name,
-			       GTK_UI_MANAGER_MENUITEM,
+			       CTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	g_free (escaped_label);
@@ -6033,11 +6033,11 @@ create_popup_menu (FMDirectoryView *view, const char *popup_path)
 
 	menu = ctk_ui_manager_get_widget (baul_window_info_get_ui_manager (view->details->window),
 					  popup_path);
-	ctk_menu_set_screen (GTK_MENU (menu),
-			     ctk_widget_get_screen (GTK_WIDGET (view)));
-	ctk_widget_show (GTK_WIDGET (menu));
+	ctk_menu_set_screen (CTK_MENU (menu),
+			     ctk_widget_get_screen (CTK_WIDGET (view)));
+	ctk_widget_show (CTK_WIDGET (menu));
 
-	return GTK_MENU (menu);
+	return CTK_MENU (menu);
 }
 
 static void
@@ -6063,7 +6063,7 @@ copy_or_cut_files (FMDirectoryView *view,
         targets = ctk_target_table_new_from_list (target_list, &n_targets);
         ctk_target_list_unref (target_list);
 
-	ctk_clipboard_set_with_data (baul_clipboard_get (GTK_WIDGET (view)),
+	ctk_clipboard_set_with_data (baul_clipboard_get (CTK_WIDGET (view)),
 				     targets, n_targets,
 				     baul_get_clipboard_callback, baul_clear_clipboard_callback,
 				     NULL);
@@ -6284,7 +6284,7 @@ paste_clipboard_data (FMDirectoryView *view,
 
 		/* If items are cut then remove from clipboard */
 		if (cut) {
-			ctk_clipboard_clear (baul_clipboard_get (GTK_WIDGET (view)));
+			ctk_clipboard_clear (baul_clipboard_get (CTK_WIDGET (view)));
 		}
 
     		g_list_free_full (item_uris, g_free);
@@ -6353,7 +6353,7 @@ action_paste_files_callback (CtkAction *action,
 	view = FM_DIRECTORY_VIEW (callback_data);
 
 	g_object_ref (view);
-	ctk_clipboard_request_contents (baul_clipboard_get (GTK_WIDGET (view)),
+	ctk_clipboard_request_contents (baul_clipboard_get (CTK_WIDGET (view)),
 					copied_files_atom,
 					paste_clipboard_received_callback,
 					view);
@@ -6373,7 +6373,7 @@ paste_into (FMDirectoryView *view,
 	data->view = g_object_ref (view);
 	data->target = baul_file_ref (target);
 
-	ctk_clipboard_request_contents (baul_clipboard_get (GTK_WIDGET (view)),
+	ctk_clipboard_request_contents (baul_clipboard_get (CTK_WIDGET (view)),
 					copied_files_atom,
 					paste_into_clipboard_received_callback,
 					data);
@@ -6405,7 +6405,7 @@ real_action_undo (FMDirectoryView *view)
 	view->details->redo_active = FALSE;
 	fm_directory_view_update_menus (view);
 
-	baul_undostack_manager_undo (manager, GTK_WIDGET (view), finish_undoredo_callback);
+	baul_undostack_manager_undo (manager, CTK_WIDGET (view), finish_undoredo_callback);
 }
 
 static void
@@ -6418,7 +6418,7 @@ real_action_redo (FMDirectoryView *view)
 	view->details->redo_active = FALSE;
 	fm_directory_view_update_menus (view);
 
-	baul_undostack_manager_redo (manager, GTK_WIDGET (view), finish_undoredo_callback);
+	baul_undostack_manager_redo (manager, CTK_WIDGET (view), finish_undoredo_callback);
 }
 
 static void
@@ -7019,27 +7019,27 @@ connect_to_server_response_callback (CtkDialog *dialog,
 	const char *name;
 	char *icon;
 
-	entry = GTK_ENTRY (data);
+	entry = CTK_ENTRY (data);
 
 	switch (response_id) {
-	case GTK_RESPONSE_OK:
+	case CTK_RESPONSE_OK:
 		uri = g_object_get_data (G_OBJECT (dialog), "link-uri");
 		icon = g_object_get_data (G_OBJECT (dialog), "link-icon");
 		name = ctk_entry_get_text (entry);
 		cafe_vfs_connect_to_server (uri, (char *)name, icon);
-		ctk_widget_destroy (GTK_WIDGET (dialog));
+		ctk_widget_destroy (CTK_WIDGET (dialog));
 		break;
-	case GTK_RESPONSE_NONE:
-	case GTK_RESPONSE_DELETE_EVENT:
-	case GTK_RESPONSE_CANCEL:
-		ctk_widget_destroy (GTK_WIDGET (dialog));
+	case CTK_RESPONSE_NONE:
+	case CTK_RESPONSE_DELETE_EVENT:
+	case CTK_RESPONSE_CANCEL:
+		ctk_widget_destroy (CTK_WIDGET (dialog));
 		break;
 	default :
 		g_assert_not_reached ();
 	}
 #endif
 	/* FIXME: the above code should make a server connection permanent */
-	ctk_widget_destroy (GTK_WIDGET (dialog));
+	ctk_widget_destroy (CTK_WIDGET (dialog));
 }
 
 static void
@@ -7048,8 +7048,8 @@ entry_activate_callback (CtkEntry *entry,
 {
 	CtkDialog *dialog;
 
-	dialog = GTK_DIALOG (user_data);
-	ctk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+	dialog = CTK_DIALOG (user_data);
+	ctk_dialog_response (CTK_DIALOG (dialog), CTK_RESPONSE_OK);
 }
 
 static void
@@ -7075,7 +7075,7 @@ action_connect_to_server_link_callback (CtkAction *action,
 	}
 
 	file = BAUL_FILE (selection->data);
-	scale = ctk_widget_get_scale_factor (GTK_WIDGET (view));
+	scale = ctk_widget_get_scale_factor (CTK_WIDGET (view));
 
 	uri = baul_file_get_activation_uri (file);
 	icon = baul_file_get_icon (file, BAUL_ICON_SIZE_STANDARD, scale, 0);
@@ -7092,37 +7092,37 @@ action_connect_to_server_link_callback (CtkAction *action,
 		title = g_strdup_printf (_("Connect to Server %s"), name);
 
 		dialog = ctk_dialog_new ();
-		ctk_window_set_title (GTK_WINDOW (dialog), title);
-		ctk_window_set_transient_for (GTK_WINDOW (dialog), fm_directory_view_get_containing_window (view));
+		ctk_window_set_title (CTK_WINDOW (dialog), title);
+		ctk_window_set_transient_for (CTK_WINDOW (dialog), fm_directory_view_get_containing_window (view));
 
-		eel_dialog_add_button (GTK_DIALOG (dialog),
+		eel_dialog_add_button (CTK_DIALOG (dialog),
 				       _("_Cancel"),
 				       "process-stop",
-				       GTK_RESPONSE_CANCEL);
+				       CTK_RESPONSE_CANCEL);
 
-		ctk_dialog_add_button (GTK_DIALOG (dialog),
+		ctk_dialog_add_button (CTK_DIALOG (dialog),
 				       _("_Connect"),
-				       GTK_RESPONSE_OK);
+				       CTK_RESPONSE_OK);
 
 		g_object_set_data_full (G_OBJECT (dialog), "link-uri", g_strdup (uri), g_free);
 		g_object_set_data_full (G_OBJECT (dialog), "link-icon", g_strdup (icon_name), g_free);
 
-		ctk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-		ctk_box_set_spacing (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
+		ctk_container_set_border_width (CTK_CONTAINER (dialog), 5);
+		ctk_box_set_spacing (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), 2);
 
-		box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+		box = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 12);
 		ctk_widget_show (box);
-		ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))),
+		ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))),
 				    box, TRUE, TRUE, 0);
 
 		label = ctk_label_new_with_mnemonic (_("Link _name:"));
 		ctk_widget_show (label);
 
-		ctk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 12);
+		ctk_box_pack_start (CTK_BOX (box), label, TRUE, TRUE, 12);
 
 		entry = ctk_entry_new ();
 		if (name) {
-			ctk_entry_set_text (GTK_ENTRY (entry), name);
+			ctk_entry_set_text (CTK_ENTRY (entry), name);
 		}
 		g_signal_connect (entry,
 				  "activate",
@@ -7130,12 +7130,12 @@ action_connect_to_server_link_callback (CtkAction *action,
 				  dialog);
 
 		ctk_widget_show (entry);
-		ctk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
+		ctk_label_set_mnemonic_widget (CTK_LABEL (label), entry);
 
-		ctk_box_pack_start (GTK_BOX (box), entry, TRUE, TRUE, 12);
+		ctk_box_pack_start (CTK_BOX (box), entry, TRUE, TRUE, 12);
 
-		ctk_dialog_set_default_response (GTK_DIALOG (dialog),
-						 GTK_RESPONSE_OK);
+		ctk_dialog_set_default_response (CTK_DIALOG (dialog),
+						 CTK_RESPONSE_OK);
 		g_signal_connect (dialog, "response",
 				  G_CALLBACK (connect_to_server_response_callback),
 				  entry);
@@ -7710,16 +7710,16 @@ connect_proxy (FMDirectoryView *view,
 	G_GNUC_END_IGNORE_DEPRECATIONS;
 
 	if (strcmp (action_name, FM_ACTION_NEW_EMPTY_FILE) == 0 &&
-	    GTK_IS_IMAGE_MENU_ITEM (proxy)) {
+	    CTK_IS_IMAGE_MENU_ITEM (proxy)) {
 		cairo_surface_t *surface;
 
-		surface = get_menu_icon ("text-x-generic", GTK_WIDGET (view));
+		surface = get_menu_icon ("text-x-generic", CTK_WIDGET (view));
 
 		if (surface != NULL) {
 			CtkWidget *image;
 
 			image = ctk_image_new_from_surface (surface);
-			ctk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (proxy), image);
+			ctk_image_menu_item_set_image (CTK_IMAGE_MENU_ITEM (proxy), image);
 
 			cairo_surface_destroy (surface);
 		}
@@ -7748,8 +7748,8 @@ pre_activate (FMDirectoryView *view,
 
 		toplevel = ctk_widget_get_toplevel (proxy);
 
-		if (GTK_IS_WINDOW (toplevel)) {
-			hint = ctk_window_get_type_hint (GTK_WINDOW (toplevel));
+		if (CTK_IS_WINDOW (toplevel)) {
+			hint = ctk_window_get_type_hint (CTK_WINDOW (toplevel));
 
 			if (hint == GDK_WINDOW_TYPE_HINT_POPUP_MENU) {
 				activated_from_popup = TRUE;
@@ -8656,7 +8656,7 @@ real_update_paste_menu (FMDirectoryView *view,
 
 	/* Ask the clipboard */
 	g_object_ref (view); /* Need to keep the object alive until we get the reply */
-	ctk_clipboard_request_targets (baul_clipboard_get (GTK_WIDGET (view)),
+	ctk_clipboard_request_targets (baul_clipboard_get (CTK_WIDGET (view)),
 				       clipboard_targets_received,
 				       view);
 }
@@ -8981,7 +8981,7 @@ real_update_menus (FMDirectoryView *view)
 
 	/* Only force displaying the icon if it is an application icon */
 	ctk_image_menu_item_set_always_show_image (
-		GTK_IMAGE_MENU_ITEM (menuitem), app_icon != NULL);
+		CTK_IMAGE_MENU_ITEM (menuitem), app_icon != NULL);
 
 	menuitem = ctk_ui_manager_get_widget (
 			baul_window_info_get_ui_manager (view->details->window),
@@ -8989,7 +8989,7 @@ real_update_menus (FMDirectoryView *view)
 
 	/* Only force displaying the icon if it is an application icon */
 	ctk_image_menu_item_set_always_show_image (
-		GTK_IMAGE_MENU_ITEM (menuitem), app_icon != NULL);
+		CTK_IMAGE_MENU_ITEM (menuitem), app_icon != NULL);
 
 	if (app_icon == NULL) {
 		app_icon = g_themed_icon_new ("document-open");
@@ -9479,14 +9479,14 @@ fm_directory_view_drop_proxy_received_uris (FMDirectoryView *view,
 
 	if (action == GDK_ACTION_ASK) {
 		action = baul_drag_drop_action_ask
-			(GTK_WIDGET (view),
+			(CTK_WIDGET (view),
 			 GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 		if (action == 0) {
 			return;
 		}
 	}
 
-	baul_clipboard_clear_if_colliding_uris (GTK_WIDGET (view),
+	baul_clipboard_clear_if_colliding_uris (CTK_WIDGET (view),
 						    source_uri_list,
 						    fm_directory_view_get_copied_files_atom (view));
 
@@ -10352,7 +10352,7 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 	if (target_file != NULL && baul_file_is_launcher (target_file)) {
 		baul_file_unref (target_file);
 		baul_launch_desktop_file (
-				ctk_widget_get_screen (GTK_WIDGET (view)),
+				ctk_widget_get_screen (CTK_WIDGET (view)),
 				target_uri, item_uris,
 				fm_directory_view_get_containing_window (view));
 		return;
@@ -10382,7 +10382,7 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 			g_free (quoted_uri);
 		}
 
-		screen = ctk_widget_get_screen (GTK_WIDGET (view));
+		screen = ctk_widget_get_screen (CTK_WIDGET (view));
 		if (screen == NULL) {
 			screen = gdk_screen_get_default ();
 		}
@@ -10396,7 +10396,7 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 
 	baul_file_operations_copy_move
 		(item_uris, relative_item_points,
-		 target_uri, copy_action, GTK_WIDGET (view),
+		 target_uri, copy_action, CTK_WIDGET (view),
 		 copy_move_done_callback, pre_copy_move (view));
 }
 
@@ -10471,35 +10471,35 @@ ask_link_action (FMDirectoryView *view)
 	/* Don't use desktop window as parent, since that means
 	   we show up an all desktops etc */
 	if (! FM_IS_DESKTOP_ICON_VIEW (view)) {
-		parent_window = GTK_WINDOW (fm_directory_view_get_containing_window (view));
+		parent_window = CTK_WINDOW (fm_directory_view_get_containing_window (view));
 	}
 
 	dialog = ctk_message_dialog_new (parent_window,
-					 GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_QUESTION,
-					 GTK_BUTTONS_NONE,
+					 CTK_DIALOG_DESTROY_WITH_PARENT,
+					 CTK_MESSAGE_QUESTION,
+					 CTK_BUTTONS_NONE,
 					 _("Download location?"));
 
-	ctk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+	ctk_message_dialog_format_secondary_text (CTK_MESSAGE_DIALOG (dialog),
 						  _("You can download it or make a link to it."));
 
-	ctk_dialog_add_button (GTK_DIALOG (dialog),
+	ctk_dialog_add_button (CTK_DIALOG (dialog),
 			       _("Make a _Link"), 0);
 
-	eel_dialog_add_button (GTK_DIALOG (dialog),
+	eel_dialog_add_button (CTK_DIALOG (dialog),
 			       _("_Cancel"),
 			       "process-stop", 1);
 
-	ctk_dialog_add_button (GTK_DIALOG (dialog),
+	ctk_dialog_add_button (CTK_DIALOG (dialog),
 			       _("_Download"), 2);
 
-	ctk_window_set_title (GTK_WINDOW (dialog), ""); /* as per HIG */
-	ctk_window_set_focus_on_map (GTK_WINDOW (dialog), TRUE);
-	ctk_dialog_set_default_response (GTK_DIALOG (dialog), 2);
+	ctk_window_set_title (CTK_WINDOW (dialog), ""); /* as per HIG */
+	ctk_window_set_focus_on_map (CTK_WINDOW (dialog), TRUE);
+	ctk_dialog_set_default_response (CTK_DIALOG (dialog), 2);
 
-	ctk_window_present (GTK_WINDOW (dialog));
+	ctk_window_present (CTK_WINDOW (dialog));
 
-	button_pressed = ctk_dialog_run (GTK_DIALOG (dialog));
+	button_pressed = ctk_dialog_run (CTK_DIALOG (dialog));
 
 	ctk_widget_destroy (dialog);
 
@@ -10508,7 +10508,7 @@ ask_link_action (FMDirectoryView *view)
 		result = GDK_ACTION_LINK;
 		break;
 	case 1:
-	case GTK_RESPONSE_DELETE_EVENT:
+	case CTK_RESPONSE_DELETE_EVENT:
 		result = 0;
 		break;
 	case 2:
@@ -10742,7 +10742,7 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 			point.x = x;
 			point.y = y;
 
-			screen = ctk_widget_get_screen (GTK_WIDGET (view));
+			screen = ctk_widget_get_screen (CTK_WIDGET (view));
 			screen_num = gdk_x11_screen_get_screen_number (screen);
 
 			baul_link_local_create (target_uri != NULL ? target_uri : container_uri,
@@ -10806,7 +10806,7 @@ fm_directory_view_handle_uri_list_drop (FMDirectoryView  *view,
 
 	if (action == GDK_ACTION_ASK) {
 		action = baul_drag_drop_action_ask
-			(GTK_WIDGET (view),
+			(CTK_WIDGET (view),
 			 GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 		if (action == 0) {
 			g_free (container_uri);
@@ -11080,7 +11080,7 @@ fm_directory_view_scroll_event (CtkWidget *widget,
 		return TRUE;
 	}
 
-	return GTK_WIDGET_CLASS (parent_class)->scroll_event (widget, event);
+	return CTK_WIDGET_CLASS (parent_class)->scroll_event (widget, event);
 }
 
 
@@ -11096,8 +11096,8 @@ fm_directory_view_parent_set (CtkWidget *widget,
 	parent = ctk_widget_get_parent (widget);
 	g_assert (parent == NULL || old_parent == NULL);
 
-	if (GTK_WIDGET_CLASS (parent_class)->parent_set != NULL) {
-		GTK_WIDGET_CLASS (parent_class)->parent_set (widget, old_parent);
+	if (CTK_WIDGET_CLASS (parent_class)->parent_set != NULL) {
+		CTK_WIDGET_CLASS (parent_class)->parent_set (widget, old_parent);
 	}
 
 	if (parent != NULL) {
@@ -11123,8 +11123,8 @@ fm_directory_view_class_init (FMDirectoryViewClass *klass)
 	CtkScrolledWindowClass *scrolled_window_class;
 	CtkBindingSet *binding_set;
 
-	widget_class = GTK_WIDGET_CLASS (klass);
-	scrolled_window_class = GTK_SCROLLED_WINDOW_CLASS (klass);
+	widget_class = CTK_WIDGET_CLASS (klass);
+	scrolled_window_class = CTK_SCROLLED_WINDOW_CLASS (klass);
 
 	G_OBJECT_CLASS (klass)->set_property = fm_directory_view_set_property;
 	G_OBJECT_CLASS (klass)->finalize = fm_directory_view_finalize;

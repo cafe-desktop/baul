@@ -649,7 +649,7 @@ save_file_async (BaulBookmarkList *bookmarks,
 
         bookmark = BAUL_BOOKMARK (l->data);
 
-        /* make sure we save label if it has one for compatibility with GTK 2.7 and 2.8 */
+        /* make sure we save label if it has one for compatibility with CTK 2.7 and 2.8 */
         if (baul_bookmark_get_has_custom_name (bookmark))
         {
             char *label, *uri;

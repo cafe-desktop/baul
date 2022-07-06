@@ -512,7 +512,7 @@ extern "C" {
     void eel_canvas_w2c_d (EelCanvas *canvas, double wx, double wy, double *cx, double *cy);
     void eel_canvas_c2w (EelCanvas *canvas, int cx, int cy, double *wx, double *wy);
 
-    /* This function takes in coordinates relative to the GTK_LAYOUT
+    /* This function takes in coordinates relative to the CTK_LAYOUT
      * (canvas)->bin_window and converts them to world coordinates.
      * These days canvas coordinates and window coordinates are the same, but
      * these are left for backwards compat reasons.

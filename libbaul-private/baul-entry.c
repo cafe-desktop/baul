@@ -54,8 +54,8 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 static void baul_entry_editable_init (CtkEditableInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (BaulEntry, baul_entry, GTK_TYPE_ENTRY,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
+G_DEFINE_TYPE_WITH_CODE (BaulEntry, baul_entry, CTK_TYPE_ENTRY,
+                         G_IMPLEMENT_INTERFACE (CTK_TYPE_EDITABLE,
                                  baul_entry_editable_init));
 
 static CtkEditableInterface *parent_editable_interface = NULL;
@@ -100,7 +100,7 @@ baul_entry_key_press (CtkWidget *widget, GdkEventKey *event)
     gboolean result;
 
     entry = BAUL_ENTRY (widget);
-    editable = GTK_EDITABLE (widget);
+    editable = CTK_EDITABLE (widget);
 
     if (!ctk_editable_get_editable (editable))
     {
@@ -120,7 +120,7 @@ baul_entry_key_press (CtkWidget *widget, GdkEventKey *event)
         {
             int position;
 
-            position = strlen (ctk_entry_get_text (GTK_ENTRY (editable)));
+            position = strlen (ctk_entry_get_text (CTK_ENTRY (editable)));
             ctk_editable_select_region (editable, position, position);
             return TRUE;
         }
@@ -132,7 +132,7 @@ baul_entry_key_press (CtkWidget *widget, GdkEventKey *event)
 
     old_has = ctk_editable_get_selection_bounds (editable, NULL, NULL);
 
-    result = GTK_WIDGET_CLASS (baul_entry_parent_class)->key_press_event (widget, event);
+    result = CTK_WIDGET_CLASS (baul_entry_parent_class)->key_press_event (widget, event);
 
     /* Pressing a key usually changes the selection if there is a selection.
      * If there is not selection, we can save work by not emitting a signal.
@@ -158,11 +158,11 @@ baul_entry_motion_notify (CtkWidget *widget, GdkEventMotion *event)
     int old_start, old_end, new_start, new_end;
     CtkEditable *editable;
 
-    editable = GTK_EDITABLE (widget);
+    editable = CTK_EDITABLE (widget);
 
     old_had = ctk_editable_get_selection_bounds (editable, &old_start, &old_end);
 
-    result = GTK_WIDGET_CLASS (baul_entry_parent_class)->motion_notify_event (widget, event);
+    result = CTK_WIDGET_CLASS (baul_entry_parent_class)->motion_notify_event (widget, event);
 
     /* Send a signal if dragging the mouse caused the selection to change. */
     if (result)
@@ -189,8 +189,8 @@ baul_entry_select_all (BaulEntry *entry)
 {
     g_return_if_fail (BAUL_IS_ENTRY (entry));
 
-    ctk_editable_set_position (GTK_EDITABLE (entry), -1);
-    ctk_editable_select_region (GTK_EDITABLE (entry), 0, -1);
+    ctk_editable_set_position (CTK_EDITABLE (entry), -1);
+    ctk_editable_select_region (CTK_EDITABLE (entry), 0, -1);
 }
 
 static gboolean
@@ -251,7 +251,7 @@ baul_entry_set_text (BaulEntry *entry, const gchar *text)
     g_return_if_fail (BAUL_IS_ENTRY (entry));
 
     entry->details->user_edit = FALSE;
-    ctk_entry_set_text (GTK_ENTRY (entry), text);
+    ctk_entry_set_text (CTK_ENTRY (entry), text);
     entry->details->user_edit = TRUE;
 
     g_signal_emit (entry, signals[SELECTION_CHANGED], 0);
@@ -273,7 +273,7 @@ baul_entry_button_press (CtkWidget *widget,
 {
     gboolean result;
 
-    result = GTK_WIDGET_CLASS (baul_entry_parent_class)->button_press_event (widget, event);
+    result = CTK_WIDGET_CLASS (baul_entry_parent_class)->button_press_event (widget, event);
 
     if (result)
     {
@@ -289,7 +289,7 @@ baul_entry_button_release (CtkWidget *widget,
 {
     gboolean result;
 
-    result = GTK_WIDGET_CLASS (baul_entry_parent_class)->button_release_event (widget, event);
+    result = CTK_WIDGET_CLASS (baul_entry_parent_class)->button_release_event (widget, event);
 
     if (result)
     {
@@ -336,7 +336,7 @@ baul_entry_delete_text (CtkEditable *editable, int start_pos, int end_pos)
     g_signal_emit (editable, signals[SELECTION_CHANGED], 0);
 }
 
-/* Overridden to work around GTK bug. The selection_clear_event is queued
+/* Overridden to work around CTK bug. The selection_clear_event is queued
  * when the selection changes. Changing the selection to NULL and then
  * back to the original selection owner still sends the event, so the
  * selection owner then gets the selection ripped away from it. We ran into
@@ -355,7 +355,7 @@ baul_entry_selection_clear (CtkWidget *widget,
         return FALSE;
     }
 
-    return GTK_WIDGET_CLASS (baul_entry_parent_class)->selection_clear_event (widget, event);
+    return CTK_WIDGET_CLASS (baul_entry_parent_class)->selection_clear_event (widget, event);
 }
 
 static void
@@ -379,7 +379,7 @@ baul_entry_class_init (BaulEntryClass *class)
     CtkWidgetClass *widget_class;
     GObjectClass *gobject_class;
 
-    widget_class = GTK_WIDGET_CLASS (class);
+    widget_class = CTK_WIDGET_CLASS (class);
     gobject_class = G_OBJECT_CLASS (class);
 
     widget_class->button_press_event = baul_entry_button_press;

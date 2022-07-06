@@ -49,7 +49,7 @@ enum
     PROP_X_CONTENT_TYPE,
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (BaulXContentBar, baul_x_content_bar, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulXContentBar, baul_x_content_bar, CTK_TYPE_BOX)
 
 void
 baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_content_type)
@@ -111,7 +111,7 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
     }
 
 
-    ctk_label_set_text (GTK_LABEL (bar->priv->label), message);
+    ctk_label_set_text (CTK_LABEL (bar->priv->label), message);
     ctk_widget_show (bar->priv->label);
 
     /* TODO: We really need a CtkBrowserBackButton-ish widget here.. until then, we only
@@ -131,8 +131,8 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
             GdkPixbuf *pixbuf;
             int icon_size, icon_scale;
             BaulIconInfo *icon_info;
-            icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_BUTTON);
-            icon_scale = ctk_widget_get_scale_factor (GTK_WIDGET (bar));
+            icon_size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_BUTTON);
+            icon_scale = ctk_widget_get_scale_factor (CTK_WIDGET (bar));
             icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
             pixbuf = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
             image = ctk_image_new_from_pixbuf (pixbuf);
@@ -147,8 +147,8 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
         name = g_app_info_get_display_name (default_app);
         button_text = g_strdup_printf (_("Open %s"), name);
 
-        ctk_button_set_image (GTK_BUTTON (bar->priv->button), image);
-        ctk_button_set_label (GTK_BUTTON (bar->priv->button), button_text);
+        ctk_button_set_image (CTK_BUTTON (bar->priv->button), image);
+        ctk_button_set_label (CTK_BUTTON (bar->priv->button), button_text);
         ctk_widget_show (bar->priv->button);
         g_free (button_text);
         g_object_unref (default_app);
@@ -298,18 +298,18 @@ baul_x_content_bar_init (BaulXContentBar *bar)
 
     bar->priv = baul_x_content_bar_get_instance_private (bar);
 
-    hbox = GTK_WIDGET (bar);
+    hbox = CTK_WIDGET (bar);
 
     bar->priv->label = ctk_label_new (NULL);
-    ctk_label_set_ellipsize (GTK_LABEL (bar->priv->label), PANGO_ELLIPSIZE_END);
+    ctk_label_set_ellipsize (CTK_LABEL (bar->priv->label), PANGO_ELLIPSIZE_END);
 
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (bar), GTK_ORIENTATION_HORIZONTAL);
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (bar), CTK_ORIENTATION_HORIZONTAL);
 
-    ctk_label_set_xalign (GTK_LABEL (bar->priv->label), 0.0);
-    ctk_box_pack_start (GTK_BOX (bar), bar->priv->label, TRUE, TRUE, 0);
+    ctk_label_set_xalign (CTK_LABEL (bar->priv->label), 0.0);
+    ctk_box_pack_start (CTK_BOX (bar), bar->priv->label, TRUE, TRUE, 0);
 
     bar->priv->button = ctk_button_new ();
-    ctk_box_pack_end (GTK_BOX (hbox), bar->priv->button, FALSE, FALSE, 0);
+    ctk_box_pack_end (CTK_BOX (hbox), bar->priv->button, FALSE, FALSE, 0);
 
     g_signal_connect (bar->priv->button,
                       "clicked",
@@ -328,5 +328,5 @@ baul_x_content_bar_new (GMount *mount,
                         "x-content-type", x_content_type,
                         NULL);
 
-    return GTK_WIDGET (bar);
+    return CTK_WIDGET (bar);
 }

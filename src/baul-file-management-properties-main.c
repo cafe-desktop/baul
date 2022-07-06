@@ -36,7 +36,7 @@ static void
 baul_file_management_properties_main_close_callback (CtkDialog *dialog,
         int response_id)
 {
-    if (response_id == GTK_RESPONSE_CLOSE)
+    if (response_id == CTK_RESPONSE_CLOSE)
     {
         ctk_main_quit ();
     }

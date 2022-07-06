@@ -104,17 +104,17 @@ static gboolean      labeled_image_show_image             (const EelLabeledImage
 
 static guint labeled_image_signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (EelLabeledImage, eel_labeled_image, GTK_TYPE_CONTAINER)
+G_DEFINE_TYPE_WITH_PRIVATE (EelLabeledImage, eel_labeled_image, CTK_TYPE_CONTAINER)
 
 static void
 eel_labeled_image_init (EelLabeledImage *labeled_image)
 {
-    ctk_widget_set_has_window (GTK_WIDGET (labeled_image), FALSE);
+    ctk_widget_set_has_window (CTK_WIDGET (labeled_image), FALSE);
 
     labeled_image->details = eel_labeled_image_get_instance_private (labeled_image);
     labeled_image->details->show_label = TRUE;
     labeled_image->details->show_image = TRUE;
-    labeled_image->details->label_position = GTK_POS_BOTTOM;
+    labeled_image->details->label_position = CTK_POS_BOTTOM;
     labeled_image->details->spacing = DEFAULT_SPACING;
     labeled_image->details->x_padding = DEFAULT_X_PADDING;
     labeled_image->details->y_padding = DEFAULT_Y_PADDING;
@@ -142,7 +142,7 @@ eel_labeled_image_destroy (CtkWidget *object)
         ctk_widget_destroy (labeled_image->details->label);
     }
 
-    GTK_WIDGET_CLASS (eel_labeled_image_parent_class)->destroy (object);
+    CTK_WIDGET_CLASS (eel_labeled_image_parent_class)->destroy (object);
 }
 
 /* GObjectClass methods */
@@ -240,7 +240,7 @@ eel_labeled_image_get_property (GObject    *object,
         else
         {
             g_value_set_string (value,
-                                ctk_label_get_text (GTK_LABEL (
+                                ctk_label_get_text (CTK_LABEL (
                                         labeled_image->details->label)));
         }
         break;
@@ -346,12 +346,12 @@ eel_labeled_image_size_allocate (CtkWidget *widget,
     ctk_widget_set_allocation (widget, allocation);
 
     label_bounds = eel_labeled_image_get_label_bounds (labeled_image);
-    eel_ctk_container_child_size_allocate (GTK_CONTAINER (widget),
+    eel_ctk_container_child_size_allocate (CTK_CONTAINER (widget),
                                            labeled_image->details->label,
                                            label_bounds);
 
     image_bounds = eel_labeled_image_get_image_bounds (labeled_image);
-    eel_ctk_container_child_size_allocate (GTK_CONTAINER (widget),
+    eel_ctk_container_child_size_allocate (CTK_CONTAINER (widget),
                                            labeled_image->details->image,
                                            image_bounds);
 }
@@ -372,8 +372,8 @@ eel_labeled_image_draw (CtkWidget *widget,
     context = ctk_widget_get_style_context (widget);
     ctk_style_context_save (context);
 
-    if (ctk_widget_get_state_flags (widget) == GTK_STATE_FLAG_SELECTED ||
-            ctk_widget_get_state_flags (widget) == GTK_STATE_FLAG_ACTIVE)
+    if (ctk_widget_get_state_flags (widget) == CTK_STATE_FLAG_SELECTED ||
+            ctk_widget_get_state_flags (widget) == CTK_STATE_FLAG_ACTIVE)
     {
         label_bounds = eel_labeled_image_get_label_bounds (EEL_LABELED_IMAGE (widget));
 
@@ -393,14 +393,14 @@ eel_labeled_image_draw (CtkWidget *widget,
 
     if (labeled_image_show_label (labeled_image))
     {
-        eel_ctk_container_child_expose_event (GTK_CONTAINER (widget),
+        eel_ctk_container_child_expose_event (CTK_CONTAINER (widget),
                                               labeled_image->details->label,
                                               cr);
     }
 
     if (labeled_image_show_image (labeled_image))
     {
-        eel_ctk_container_child_expose_event (GTK_CONTAINER (widget),
+        eel_ctk_container_child_expose_event (CTK_CONTAINER (widget),
                                               labeled_image->details->image,
                                               cr);
     }
@@ -408,7 +408,7 @@ eel_labeled_image_draw (CtkWidget *widget,
     if (ctk_widget_has_focus (widget))
     {
         label_bounds = eel_labeled_image_get_image_bounds (EEL_LABELED_IMAGE (widget));
-        ctk_widget_set_state_flags (widget, GTK_STATE_FLAG_NORMAL, TRUE);
+        ctk_widget_set_state_flags (widget, CTK_STATE_FLAG_NORMAL, TRUE);
         ctk_render_focus (context,
                           cr,
                           label_bounds.x0, label_bounds.y0,
@@ -434,12 +434,12 @@ eel_labeled_image_map (CtkWidget *widget)
 
     if (labeled_image_show_label (labeled_image))
     {
-        eel_ctk_container_child_map (GTK_CONTAINER (widget), labeled_image->details->label);
+        eel_ctk_container_child_map (CTK_CONTAINER (widget), labeled_image->details->label);
     }
 
     if (labeled_image_show_image (labeled_image))
     {
-        eel_ctk_container_child_map (GTK_CONTAINER (widget), labeled_image->details->image);
+        eel_ctk_container_child_map (CTK_CONTAINER (widget), labeled_image->details->image);
     }
 }
 
@@ -454,8 +454,8 @@ eel_labeled_image_unmap (CtkWidget *widget)
 
     ctk_widget_set_mapped (widget, FALSE);
 
-    eel_ctk_container_child_unmap (GTK_CONTAINER (widget), labeled_image->details->label);
-    eel_ctk_container_child_unmap (GTK_CONTAINER (widget), labeled_image->details->image);
+    eel_ctk_container_child_unmap (CTK_CONTAINER (widget), labeled_image->details->label);
+    eel_ctk_container_child_unmap (CTK_CONTAINER (widget), labeled_image->details->image);
 }
 
 /* CtkContainerClass methods */
@@ -463,7 +463,7 @@ static void
 eel_labeled_image_add (CtkContainer *container,
                        CtkWidget *child)
 {
-    g_assert (GTK_IS_LABEL (child) || GTK_IS_IMAGE (child));
+    g_assert (CTK_IS_LABEL (child) || CTK_IS_IMAGE (child));
 
     eel_ctk_container_child_add (container, child);
 }
@@ -474,7 +474,7 @@ eel_labeled_image_remove (CtkContainer *container,
 {
     EelLabeledImage *labeled_image;
 
-    g_assert (GTK_IS_LABEL (child) || GTK_IS_IMAGE (child));
+    g_assert (CTK_IS_LABEL (child) || CTK_IS_IMAGE (child));
 
     labeled_image = EEL_LABELED_IMAGE (container);;
 
@@ -525,8 +525,8 @@ static void
 eel_labeled_image_class_init (EelLabeledImageClass *labeled_image_class)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS (labeled_image_class);
-    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (labeled_image_class);
-    CtkContainerClass *container_class = GTK_CONTAINER_CLASS (labeled_image_class);
+    CtkWidgetClass *widget_class = CTK_WIDGET_CLASS (labeled_image_class);
+    CtkContainerClass *container_class = CTK_CONTAINER_CLASS (labeled_image_class);
     CtkBindingSet *binding_set;
 
     /* GObjectClass */
@@ -595,8 +595,8 @@ eel_labeled_image_class_init (EelLabeledImageClass *labeled_image_class)
         gobject_class,
         PROP_LABEL_POSITION,
         g_param_spec_enum ("label_position", NULL, NULL,
-                           GTK_TYPE_POSITION_TYPE,
-                           GTK_POS_BOTTOM,
+                           CTK_TYPE_POSITION_TYPE,
+                           CTK_POS_BOTTOM,
                            G_PARAM_READWRITE));
 
     g_object_class_install_property (
@@ -738,7 +738,7 @@ labeled_image_get_image_bounds_fill (const EelLabeledImage *labeled_image)
     }
 
     content_bounds = labeled_image_get_content_bounds (labeled_image);
-    bounds = eel_ctk_widget_get_bounds (GTK_WIDGET (labeled_image));
+    bounds = eel_ctk_widget_get_bounds (CTK_WIDGET (labeled_image));
 
     if (!labeled_image_show_label (labeled_image))
     {
@@ -748,28 +748,28 @@ labeled_image_get_image_bounds_fill (const EelLabeledImage *labeled_image)
     {
         switch (labeled_image->details->label_position)
         {
-        case GTK_POS_LEFT:
+        case CTK_POS_LEFT:
             image_bounds.y0 = bounds.y0;
             image_bounds.x0 = content_bounds.x1 - image_dimensions.width;
             image_bounds.y1 = bounds.y1;
             image_bounds.x1 = bounds.x1;
             break;
 
-        case GTK_POS_RIGHT:
+        case CTK_POS_RIGHT:
             image_bounds.y0 = bounds.y0;
             image_bounds.x0 = bounds.x0;
             image_bounds.y1 = bounds.y1;
             image_bounds.x1 = content_bounds.x0 + image_dimensions.width;
             break;
 
-        case GTK_POS_TOP:
+        case CTK_POS_TOP:
             image_bounds.x0 = bounds.x0;
             image_bounds.y0 = content_bounds.y1 - image_dimensions.height;
             image_bounds.x1 = bounds.x1;
             image_bounds.y1 = bounds.y1;
             break;
 
-        case GTK_POS_BOTTOM:
+        case CTK_POS_BOTTOM:
             image_bounds.x0 = bounds.x0;
             image_bounds.y0 = bounds.y0;
             image_bounds.x1 = bounds.x1;
@@ -838,28 +838,28 @@ eel_labeled_image_get_image_bounds (const EelLabeledImage *labeled_image)
     {
         switch (labeled_image->details->label_position)
         {
-        case GTK_POS_LEFT:
+        case CTK_POS_LEFT:
             image_bounds.x0 = content_bounds.x1 - image_dimensions.width;
             image_bounds.y0 =
                 content_bounds.y0 +
                 (eel_irect_get_height (content_bounds) - image_dimensions.height) / 2;
             break;
 
-        case GTK_POS_RIGHT:
+        case CTK_POS_RIGHT:
             image_bounds.x0 = content_bounds.x0;
             image_bounds.y0 =
                 content_bounds.y0 +
                 (eel_irect_get_height (content_bounds) - image_dimensions.height) / 2;
             break;
 
-        case GTK_POS_TOP:
+        case CTK_POS_TOP:
             image_bounds.x0 =
                 content_bounds.x0 +
                 (eel_irect_get_width (content_bounds) - image_dimensions.width) / 2;
             image_bounds.y0 = content_bounds.y1 - image_dimensions.height;
             break;
 
-        case GTK_POS_BOTTOM:
+        case CTK_POS_BOTTOM:
             image_bounds.x0 =
                 content_bounds.x0 +
                 (eel_irect_get_width (content_bounds) - image_dimensions.width) / 2;
@@ -909,7 +909,7 @@ labeled_image_get_label_bounds_fill (const EelLabeledImage *labeled_image)
     }
 
     content_bounds = labeled_image_get_content_bounds (labeled_image);
-    bounds = eel_ctk_widget_get_bounds (GTK_WIDGET (labeled_image));
+    bounds = eel_ctk_widget_get_bounds (CTK_WIDGET (labeled_image));
 
     /* Only the label is shown */
     if (!labeled_image_show_image (labeled_image))
@@ -921,28 +921,28 @@ labeled_image_get_label_bounds_fill (const EelLabeledImage *labeled_image)
     {
         switch (labeled_image->details->label_position)
         {
-        case GTK_POS_LEFT:
+        case CTK_POS_LEFT:
             label_bounds.y0 = bounds.y0;
             label_bounds.x0 = bounds.x0;
             label_bounds.y1 = bounds.y1;
             label_bounds.x1 = content_bounds.x0 + label_dimensions.width;
             break;
 
-        case GTK_POS_RIGHT:
+        case CTK_POS_RIGHT:
             label_bounds.y0 = bounds.y0;
             label_bounds.x0 = content_bounds.x1 - label_dimensions.width;
             label_bounds.y1 = bounds.y1;
             label_bounds.x1 = bounds.x1;
             break;
 
-        case GTK_POS_TOP:
+        case CTK_POS_TOP:
             label_bounds.x0 = bounds.x0;
             label_bounds.y0 = bounds.y0;
             label_bounds.x1 = bounds.x1;
             label_bounds.y1 = content_bounds.y0 + label_dimensions.height;
             break;
 
-        case GTK_POS_BOTTOM:
+        case CTK_POS_BOTTOM:
             label_bounds.x0 = bounds.x0;
             label_bounds.y0 = content_bounds.y1 - label_dimensions.height;
             label_bounds.x1 = bounds.x1;
@@ -999,28 +999,28 @@ eel_labeled_image_get_label_bounds (const EelLabeledImage *labeled_image)
     {
         switch (labeled_image->details->label_position)
         {
-        case GTK_POS_LEFT:
+        case CTK_POS_LEFT:
             label_bounds.x0 = content_bounds.x0;
             label_bounds.y0 =
                 content_bounds.y0 +
                 (eel_irect_get_height (content_bounds) - label_dimensions.height) / 2;
             break;
 
-        case GTK_POS_RIGHT:
+        case CTK_POS_RIGHT:
             label_bounds.x0 = content_bounds.x1 - label_dimensions.width;
             label_bounds.y0 =
                 content_bounds.y0 +
                 (eel_irect_get_height (content_bounds) - label_dimensions.height) / 2;
             break;
 
-        case GTK_POS_TOP:
+        case CTK_POS_TOP:
             label_bounds.x0 =
                 content_bounds.x0 +
                 (eel_irect_get_width (content_bounds) - label_dimensions.width) / 2;
             label_bounds.y0 = content_bounds.y0;
             break;
 
-        case GTK_POS_BOTTOM:
+        case CTK_POS_BOTTOM:
             label_bounds.x0 =
                 content_bounds.x0 +
                 (eel_irect_get_width (content_bounds) - label_dimensions.width) / 2;
@@ -1053,8 +1053,8 @@ labeled_image_update_alignments (EelLabeledImage *labeled_image)
             float x_alignment;
             float y_alignment;
 
-            x_alignment = ctk_label_get_xalign (GTK_LABEL (labeled_image->details->label));
-            y_alignment = ctk_label_get_yalign (GTK_LABEL (labeled_image->details->label));
+            x_alignment = ctk_label_get_xalign (CTK_LABEL (labeled_image->details->label));
+            y_alignment = ctk_label_get_yalign (CTK_LABEL (labeled_image->details->label));
 
             /* Only the label is shown */
             if (!labeled_image_show_image (labeled_image))
@@ -1067,22 +1067,22 @@ labeled_image_update_alignments (EelLabeledImage *labeled_image)
             {
                 switch (labeled_image->details->label_position)
                 {
-                case GTK_POS_LEFT:
+                case CTK_POS_LEFT:
                     x_alignment = 1.0;
                     y_alignment = 0.5;
                     break;
 
-                case GTK_POS_RIGHT:
+                case CTK_POS_RIGHT:
                     x_alignment = 0.0;
                     y_alignment = 0.5;
                     break;
 
-                case GTK_POS_TOP:
+                case CTK_POS_TOP:
                     x_alignment = 0.5;
                     y_alignment = 1.0;
                     break;
 
-                case GTK_POS_BOTTOM:
+                case CTK_POS_BOTTOM:
                     x_alignment = 0.5;
                     y_alignment = 0.0;
                     break;
@@ -1090,8 +1090,8 @@ labeled_image_update_alignments (EelLabeledImage *labeled_image)
 
             }
 
-            ctk_label_set_xalign (GTK_LABEL (labeled_image->details->label), x_alignment);
-            ctk_label_set_yalign (GTK_LABEL (labeled_image->details->label), y_alignment);
+            ctk_label_set_xalign (CTK_LABEL (labeled_image->details->label), x_alignment);
+            ctk_label_set_yalign (CTK_LABEL (labeled_image->details->label), y_alignment);
         }
     }
 
@@ -1116,22 +1116,22 @@ labeled_image_update_alignments (EelLabeledImage *labeled_image)
             {
                 switch (labeled_image->details->label_position)
                 {
-                case GTK_POS_LEFT:
+                case CTK_POS_LEFT:
                     x_alignment = 0.0;
                     y_alignment = 0.5;
                     break;
 
-                case GTK_POS_RIGHT:
+                case CTK_POS_RIGHT:
                     x_alignment = 1.0;
                     y_alignment = 0.5;
                     break;
 
-                case GTK_POS_TOP:
+                case CTK_POS_TOP:
                     x_alignment = 0.5;
                     y_alignment = 0.0;
                     break;
 
-                case GTK_POS_BOTTOM:
+                case CTK_POS_BOTTOM:
                     x_alignment = 0.5;
                     y_alignment = 1.0;
                     break;
@@ -1165,15 +1165,15 @@ labeled_image_get_content_dimensions (const EelLabeledImage *labeled_image)
             image_dimensions.width + labeled_image->details->spacing + label_dimensions.width;
         switch (labeled_image->details->label_position)
         {
-        case GTK_POS_LEFT:
-        case GTK_POS_RIGHT:
+        case CTK_POS_LEFT:
+        case CTK_POS_RIGHT:
             content_dimensions.width =
                 image_dimensions.width + labeled_image->details->spacing + label_dimensions.width;
             content_dimensions.height = MAX (image_dimensions.height, label_dimensions.height);
             break;
 
-        case GTK_POS_TOP:
-        case GTK_POS_BOTTOM:
+        case CTK_POS_TOP:
+        case CTK_POS_BOTTOM:
             content_dimensions.width = MAX (image_dimensions.width, label_dimensions.width);
             content_dimensions.height =
                 image_dimensions.height + labeled_image->details->spacing + label_dimensions.height;
@@ -1205,7 +1205,7 @@ labeled_image_get_content_bounds (const EelLabeledImage *labeled_image)
 
     g_assert (EEL_IS_LABELED_IMAGE (labeled_image));
 
-    bounds = eel_ctk_widget_get_bounds (GTK_WIDGET (labeled_image));
+    bounds = eel_ctk_widget_get_bounds (CTK_WIDGET (labeled_image));
 
     content_dimensions = labeled_image_get_content_dimensions (labeled_image);
     content_bounds = eel_irect_align (bounds,
@@ -1228,7 +1228,7 @@ labeled_image_ensure_label (EelLabeledImage *labeled_image)
     }
 
     labeled_image->details->label = ctk_label_new (NULL);
-    ctk_container_add (GTK_CONTAINER (labeled_image), labeled_image->details->label);
+    ctk_container_add (CTK_CONTAINER (labeled_image), labeled_image->details->label);
     ctk_widget_show (labeled_image->details->label);
 }
 
@@ -1243,7 +1243,7 @@ labeled_image_ensure_image (EelLabeledImage *labeled_image)
     }
 
     labeled_image->details->image = ctk_image_new ();
-    ctk_container_add (GTK_CONTAINER (labeled_image), labeled_image->details->image);
+    ctk_container_add (CTK_CONTAINER (labeled_image), labeled_image->details->image);
     ctk_widget_show (labeled_image->details->image);
 }
 
@@ -1301,7 +1301,7 @@ eel_labeled_image_new (const char *text,
 
     labeled_image_update_alignments (labeled_image);
 
-    return GTK_WIDGET (labeled_image);
+    return CTK_WIDGET (labeled_image);
 }
 
 /**
@@ -1323,7 +1323,7 @@ eel_labeled_image_new_from_file_name (const char *text,
 
     labeled_image = EEL_LABELED_IMAGE (eel_labeled_image_new (text, NULL));
     eel_labeled_image_set_pixbuf_from_file_name (labeled_image, pixbuf_file_name);
-    return GTK_WIDGET (labeled_image);
+    return CTK_WIDGET (labeled_image);
 }
 
 /**
@@ -1333,17 +1333,17 @@ eel_labeled_image_new_from_file_name (const char *text,
  *
  * Set the position of the label with respect to the image as follows:
  *
- * GTK_POS_LEFT:
+ * CTK_POS_LEFT:
  *   [ <label> <image> ]
  *
- * GTK_POS_RIGHT:
+ * CTK_POS_RIGHT:
  *   [ <image> <label> ]
  *
- * GTK_POS_TOP:
+ * CTK_POS_TOP:
  *   [ <label> ]
  *   [ <image> ]
  *
- * GTK_POS_BOTTOM:
+ * CTK_POS_BOTTOM:
  *   [ <image> ]
  *   [ <label> ]
  *
@@ -1353,8 +1353,8 @@ eel_labeled_image_set_label_position (EelLabeledImage *labeled_image,
                                       CtkPositionType label_position)
 {
     g_return_if_fail (EEL_IS_LABELED_IMAGE (labeled_image));
-    g_return_if_fail (label_position >= GTK_POS_LEFT);
-    g_return_if_fail (label_position <= GTK_POS_BOTTOM);
+    g_return_if_fail (label_position >= CTK_POS_LEFT);
+    g_return_if_fail (label_position <= CTK_POS_BOTTOM);
 
     if (labeled_image->details->label_position == label_position)
     {
@@ -1365,7 +1365,7 @@ eel_labeled_image_set_label_position (EelLabeledImage *labeled_image,
 
     labeled_image_update_alignments (labeled_image);
 
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1418,7 +1418,7 @@ eel_labeled_image_set_show_label (EelLabeledImage *labeled_image,
 
     labeled_image_update_alignments (labeled_image);
 
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1471,7 +1471,7 @@ eel_labeled_image_set_show_image (EelLabeledImage *labeled_image,
 
     labeled_image_update_alignments (labeled_image);
 
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1514,7 +1514,7 @@ eel_labeled_image_set_fixed_image_height (EelLabeledImage *labeled_image,
 
     labeled_image_update_alignments (labeled_image);
 
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1533,9 +1533,9 @@ eel_labeled_image_set_selected (EelLabeledImage *labeled_image,
     CtkStateType state;
     g_return_if_fail (EEL_IS_LABELED_IMAGE (labeled_image));
 
-    state = selected ? GTK_STATE_FLAG_SELECTED : GTK_STATE_FLAG_NORMAL;
+    state = selected ? CTK_STATE_FLAG_SELECTED : CTK_STATE_FLAG_NORMAL;
 
-    ctk_widget_set_state_flags (GTK_WIDGET (labeled_image), state, TRUE);
+    ctk_widget_set_state_flags (CTK_WIDGET (labeled_image), state, TRUE);
     ctk_widget_set_state_flags (labeled_image->details->image, state, TRUE);
     ctk_widget_set_state_flags (labeled_image->details->label, state, TRUE);
 
@@ -1553,7 +1553,7 @@ eel_labeled_image_get_selected (EelLabeledImage *labeled_image)
 {
     g_return_val_if_fail (EEL_IS_LABELED_IMAGE (labeled_image), FALSE);
 
-    return ctk_widget_get_state_flags (GTK_WIDGET (labeled_image)) == GTK_STATE_FLAG_SELECTED;
+    return ctk_widget_get_state_flags (CTK_WIDGET (labeled_image)) == CTK_STATE_FLAG_SELECTED;
 }
 
 /**
@@ -1581,7 +1581,7 @@ eel_labeled_image_set_spacing (EelLabeledImage *labeled_image,
 
     labeled_image_update_alignments (labeled_image);
 
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1621,7 +1621,7 @@ eel_labeled_image_set_x_padding (EelLabeledImage *labeled_image,
 
     labeled_image->details->x_padding = x_padding;
     labeled_image_update_alignments (labeled_image);
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1661,7 +1661,7 @@ eel_labeled_image_set_y_padding (EelLabeledImage *labeled_image,
 
     labeled_image->details->y_padding = y_padding;
     labeled_image_update_alignments (labeled_image);
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1702,7 +1702,7 @@ eel_labeled_image_set_x_alignment (EelLabeledImage *labeled_image,
     }
 
     labeled_image->details->x_alignment = x_alignment;
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1743,7 +1743,7 @@ eel_labeled_image_set_y_alignment (EelLabeledImage *labeled_image,
     }
 
     labeled_image->details->y_alignment = y_alignment;
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1786,7 +1786,7 @@ eel_labeled_image_set_fill (EelLabeledImage *labeled_image,
 
     labeled_image_update_alignments (labeled_image);
 
-    ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+    ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
 }
 
 /**
@@ -1816,7 +1816,7 @@ eel_labled_set_mnemonic_widget (CtkWidget *image_widget,
 
     if (image->details->label)
         ctk_label_set_mnemonic_widget
-        (GTK_LABEL (image->details->label), mnemonic_widget);
+        (CTK_LABEL (image->details->label), mnemonic_widget);
 }
 
 /**
@@ -1836,7 +1836,7 @@ eel_labeled_image_button_new (const char *text,
 
     button = g_object_new (eel_labeled_image_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new (text, pixbuf);
-    ctk_container_add (GTK_CONTAINER (button), labeled_image);
+    ctk_container_add (CTK_CONTAINER (button), labeled_image);
     eel_labled_set_mnemonic_widget (labeled_image, button);
     ctk_widget_show (labeled_image);
 
@@ -1862,7 +1862,7 @@ eel_labeled_image_button_new_from_file_name (const char *text,
 
     button = g_object_new (eel_labeled_image_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new_from_file_name (text, pixbuf_file_name);
-    ctk_container_add (GTK_CONTAINER (button), labeled_image);
+    ctk_container_add (CTK_CONTAINER (button), labeled_image);
     eel_labled_set_mnemonic_widget (labeled_image, button);
     ctk_widget_show (labeled_image);
 
@@ -1886,7 +1886,7 @@ eel_labeled_image_toggle_button_new (const char *text,
 
     toggle_button = g_object_new (eel_labeled_image_toggle_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new (text, pixbuf);
-    ctk_container_add (GTK_CONTAINER (toggle_button), labeled_image);
+    ctk_container_add (CTK_CONTAINER (toggle_button), labeled_image);
     eel_labled_set_mnemonic_widget (labeled_image, toggle_button);
     ctk_widget_show (labeled_image);
 
@@ -1912,7 +1912,7 @@ eel_labeled_image_toggle_button_new_from_file_name (const char *text,
 
     toggle_button = g_object_new (eel_labeled_image_toggle_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new_from_file_name (text, pixbuf_file_name);
-    ctk_container_add (GTK_CONTAINER (toggle_button), labeled_image);
+    ctk_container_add (CTK_CONTAINER (toggle_button), labeled_image);
     eel_labled_set_mnemonic_widget (labeled_image, toggle_button);
     ctk_widget_show (labeled_image);
 
@@ -1937,7 +1937,7 @@ eel_labeled_image_radio_button_new (const char *text,
 
     radio_button = g_object_new (eel_labeled_image_radio_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new (text, pixbuf);
-    ctk_container_add (GTK_CONTAINER (radio_button), labeled_image);
+    ctk_container_add (CTK_CONTAINER (radio_button), labeled_image);
     eel_labled_set_mnemonic_widget (labeled_image, radio_button);
     ctk_widget_show (labeled_image);
 
@@ -1964,7 +1964,7 @@ eel_labeled_image_radio_button_new_from_file_name (const char *text,
 
     radio_button = g_object_new (eel_labeled_image_radio_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new_from_file_name (text, pixbuf_file_name);
-    ctk_container_add (GTK_CONTAINER (radio_button), labeled_image);
+    ctk_container_add (CTK_CONTAINER (radio_button), labeled_image);
     eel_labled_set_mnemonic_widget (labeled_image, radio_button);
     ctk_widget_show (labeled_image);
 
@@ -1983,7 +1983,7 @@ static void
 button_leave_callback (CtkWidget *widget,
                        gpointer callback_data)
 {
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
 
     if (ctk_widget_is_drawable (widget))
     {
@@ -2010,7 +2010,7 @@ button_focus_out_event_callback (CtkWidget *widget,
                                  GdkEventFocus *event,
                                  gpointer callback_data)
 {
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
 
     button_leave_callback (widget, callback_data);
 
@@ -2034,7 +2034,7 @@ eel_labeled_image_check_button_new (const char *text,
 
     check_button = g_object_new (eel_labeled_image_check_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new (text, pixbuf);
-    ctk_container_add (GTK_CONTAINER (check_button), labeled_image);
+    ctk_container_add (CTK_CONTAINER (check_button), labeled_image);
     eel_labled_set_mnemonic_widget (labeled_image, check_button);
     ctk_widget_show (labeled_image);
 
@@ -2069,7 +2069,7 @@ eel_labeled_image_check_button_new_from_file_name (const char *text,
 
     check_button = g_object_new (eel_labeled_image_check_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new_from_file_name (text, pixbuf_file_name);
-    ctk_container_add (GTK_CONTAINER (check_button), labeled_image);
+    ctk_container_add (CTK_CONTAINER (check_button), labeled_image);
     eel_labled_set_mnemonic_widget (labeled_image, check_button);
     ctk_widget_show (labeled_image);
 
@@ -2109,12 +2109,12 @@ eel_labeled_image_set_pixbuf (EelLabeledImage *labeled_image,
             labeled_image->details->image = NULL;
         }
 
-        ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+        ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
     }
     else
     {
         labeled_image_ensure_image (labeled_image);
-        ctk_image_set_from_pixbuf (GTK_IMAGE (labeled_image->details->image), pixbuf);
+        ctk_image_set_from_pixbuf (CTK_IMAGE (labeled_image->details->image), pixbuf);
     }
 }
 
@@ -2125,7 +2125,7 @@ eel_labeled_image_set_pixbuf_from_file_name (EelLabeledImage *labeled_image,
     g_return_if_fail (EEL_IS_LABELED_IMAGE (labeled_image));
 
     labeled_image_ensure_image (labeled_image);
-    ctk_image_set_from_file (GTK_IMAGE (labeled_image->details->image), pixbuf_file_name);
+    ctk_image_set_from_file (CTK_IMAGE (labeled_image->details->image), pixbuf_file_name);
 }
 
 /**
@@ -2154,13 +2154,13 @@ eel_labeled_image_set_text (EelLabeledImage *labeled_image,
             labeled_image->details->label = NULL;
         }
 
-        ctk_widget_queue_resize (GTK_WIDGET (labeled_image));
+        ctk_widget_queue_resize (CTK_WIDGET (labeled_image));
     }
     else
     {
         labeled_image_ensure_label (labeled_image);
         ctk_label_set_text_with_mnemonic
-        (GTK_LABEL (labeled_image->details->label), text);
+        (CTK_LABEL (labeled_image->details->label), text);
     }
 }
 
@@ -2174,14 +2174,14 @@ eel_labeled_image_get_text (const EelLabeledImage *labeled_image)
         return NULL;
     }
 
-    return g_strdup (ctk_label_get_text (GTK_LABEL (labeled_image->details->label)));
+    return g_strdup (ctk_label_get_text (CTK_LABEL (labeled_image->details->label)));
 }
 
 void
 eel_labeled_image_set_can_focus (EelLabeledImage *labeled_image,
                                  gboolean         can_focus)
 {
-    ctk_widget_set_can_focus (GTK_WIDGET (labeled_image), can_focus);
+    ctk_widget_set_can_focus (CTK_WIDGET (labeled_image), can_focus);
 }
 
 static AtkObjectClass *a11y_parent_class = NULL;
@@ -2200,13 +2200,13 @@ get_image (gpointer object)
 {
     CtkWidget *widget;
 
-    if (!(widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (object))))
+    if (!(widget = ctk_accessible_get_widget (CTK_ACCESSIBLE (object))))
     {
         return NULL;
     }
 
-    if (GTK_IS_BUTTON (widget))
-        widget = ctk_bin_get_child (GTK_BIN (widget));
+    if (CTK_IS_BUTTON (widget))
+        widget = ctk_bin_get_child (CTK_BIN (widget));
 
     return EEL_LABELED_IMAGE (widget);
 }
@@ -2219,7 +2219,7 @@ static const gchar* eel_labeled_image_accessible_get_name(AtkObject* accessible)
 
     if (labeled_image && labeled_image->details && labeled_image->details->label)
     {
-        return ctk_label_get_text(GTK_LABEL(labeled_image->details->label));
+        return ctk_label_get_text(CTK_LABEL(labeled_image->details->label));
     }
 
     g_warning("no label on '%p'", labeled_image);
@@ -2269,7 +2269,7 @@ struct _EelLabeledImageAccessibleClass
 
 G_DEFINE_TYPE_WITH_CODE (EelLabeledImageAccessible,
                          eel_labeled_image_accessible,
-                         GTK_TYPE_CONTAINER_ACCESSIBLE,
+                         CTK_TYPE_CONTAINER_ACCESSIBLE,
                          G_IMPLEMENT_INTERFACE (ATK_TYPE_IMAGE,
                                                 eel_labeled_image_accessible_image_interface_init));
 static void
@@ -2313,7 +2313,7 @@ eel_labeled_image_button_get_type (void)
         };
 
         type = g_type_register_static
-               (GTK_TYPE_BUTTON,
+               (CTK_TYPE_BUTTON,
                 "EelLabeledImageButton", &info, 0);
     }
 
@@ -2341,7 +2341,7 @@ eel_labeled_image_check_button_get_type (void)
         };
 
         type = g_type_register_static
-               (GTK_TYPE_CHECK_BUTTON,
+               (CTK_TYPE_CHECK_BUTTON,
                 "EelLabeledImageCheckButton", &info, 0);
     }
 
@@ -2369,7 +2369,7 @@ eel_labeled_image_toggle_button_get_type (void)
         };
 
         type = g_type_register_static
-               (GTK_TYPE_TOGGLE_BUTTON,
+               (CTK_TYPE_TOGGLE_BUTTON,
                 "EelLabeledImageToggleButton", &info, 0);
     }
 
@@ -2398,7 +2398,7 @@ eel_labeled_image_radio_button_get_type (void)
         };
 
         type = g_type_register_static
-               (GTK_TYPE_RADIO_BUTTON,
+               (CTK_TYPE_RADIO_BUTTON,
                 "EelLabeledImageRadioButton", &info, 0);
     }
 

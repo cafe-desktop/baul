@@ -51,7 +51,7 @@ autorun_software_dialog_destroy (AutorunSoftwareDialogData *data)
                                           G_CALLBACK (autorun_software_dialog_mount_unmounted),
                                           data);
 
-    ctk_widget_destroy (GTK_WIDGET (data->dialog));
+    ctk_widget_destroy (CTK_WIDGET (data->dialog));
     g_object_unref (data->mount);
     g_free (data);
 }
@@ -185,11 +185,11 @@ out:
         CtkWidget *dialog;
         dialog = ctk_message_dialog_new_with_markup (NULL, /* TODO: parent window? */
                  0,
-                 GTK_MESSAGE_ERROR,
-                 GTK_BUTTONS_OK,
+                 CTK_MESSAGE_ERROR,
+                 CTK_BUTTONS_OK,
                  _("<big><b>Error autorunning software</b></big>"));
-        ctk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", error_string);
-        ctk_dialog_run (GTK_DIALOG (dialog));
+        ctk_message_dialog_format_secondary_text (CTK_MESSAGE_DIALOG (dialog), "%s", error_string);
+        ctk_dialog_run (CTK_DIALOG (dialog));
         ctk_widget_destroy (dialog);
         g_free (error_string);
     }
@@ -211,10 +211,10 @@ present_autorun_for_software_dialog (GMount *mount)
 
     dialog = ctk_message_dialog_new_with_markup (NULL, /* TODO: parent window? */
              0,
-             GTK_MESSAGE_OTHER,
-             GTK_BUTTONS_CANCEL,
+             CTK_MESSAGE_OTHER,
+             CTK_BUTTONS_CANCEL,
              _("<big><b>This medium contains software intended to be automatically started. Would you like to run it?</b></big>"));
-    ctk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+    ctk_message_dialog_format_secondary_text (CTK_MESSAGE_DIALOG (dialog),
             _("The software will run directly from the medium \"%s\". "
               "You should never run software that you don't trust.\n"
               "\n"
@@ -228,17 +228,17 @@ present_autorun_for_software_dialog (GMount *mount)
 
 
     icon = g_mount_get_icon (mount);
-    icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_DIALOG);
+    icon_size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_DIALOG);
     icon_info = baul_icon_info_lookup (icon, icon_size,
-                                       ctk_widget_get_scale_factor (GTK_WIDGET (dialog)));
+                                       ctk_widget_get_scale_factor (CTK_WIDGET (dialog)));
     pixbuf = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
     image = ctk_image_new_from_pixbuf (pixbuf);
-    ctk_widget_set_halign (image, GTK_ALIGN_CENTER);
-    ctk_widget_set_valign (image, GTK_ALIGN_START);
-    ctk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
+    ctk_widget_set_halign (image, CTK_ALIGN_CENTER);
+    ctk_widget_set_valign (image, CTK_ALIGN_START);
+    ctk_message_dialog_set_image (CTK_MESSAGE_DIALOG (dialog), image);
 
-    ctk_window_set_title (GTK_WINDOW (dialog), mount_name);
-    ctk_window_set_icon (GTK_WINDOW (dialog), pixbuf);
+    ctk_window_set_title (CTK_WINDOW (dialog), mount_name);
+    ctk_window_set_icon (CTK_WINDOW (dialog), pixbuf);
 
     data = g_new0 (AutorunSoftwareDialogData, 1);
     data->dialog = dialog;
@@ -249,13 +249,13 @@ present_autorun_for_software_dialog (GMount *mount)
                       G_CALLBACK (autorun_software_dialog_mount_unmounted),
                       data);
 
-    ctk_dialog_add_button (GTK_DIALOG (dialog),
+    ctk_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Run"),
-                           GTK_RESPONSE_OK);
+                           CTK_RESPONSE_OK);
 
     ctk_widget_show_all (dialog);
 
-    if (ctk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
+    if (ctk_dialog_run (CTK_DIALOG (dialog)) == CTK_RESPONSE_OK)
     {
         ctk_widget_destroy (dialog);
         autorun (mount);

@@ -68,7 +68,7 @@ main (int argc, char* argv[])
 	baul_file_operations_copy (sources,
 				       NULL /* GArray *relative_item_points */,
 				       dest,
-				       GTK_WINDOW (window),
+				       CTK_WINDOW (window),
 				       copy_done, NULL);
 
 	infos = baul_get_all_progress_info ();

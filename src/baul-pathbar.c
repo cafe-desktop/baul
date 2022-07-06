@@ -91,7 +91,7 @@ struct _ButtonData
 
 G_DEFINE_TYPE (BaulPathBar,
                baul_path_bar,
-               GTK_TYPE_CONTAINER);
+               CTK_TYPE_CONTAINER);
 
 static void     baul_path_bar_finalize                 (GObject         *object);
 static void     baul_path_bar_dispose                  (GObject         *object);
@@ -152,9 +152,9 @@ get_slider_button (BaulPathBar  *path_bar,
     button = ctk_button_new ();
     ctk_widget_set_focus_on_click (button, FALSE);
     ctk_widget_add_events (button, GDK_SCROLL_MASK);
-    ctk_container_add (GTK_CONTAINER (button),
-                       ctk_image_new_from_icon_name (arrow_type, GTK_ICON_SIZE_MENU));
-    ctk_container_add (GTK_CONTAINER (path_bar), button);
+    ctk_container_add (CTK_CONTAINER (button),
+                       ctk_image_new_from_icon_name (arrow_type, CTK_ICON_SIZE_MENU));
+    ctk_container_add (CTK_CONTAINER (path_bar), button);
     ctk_widget_show_all (button);
 
     return button;
@@ -170,7 +170,7 @@ update_button_types (BaulPathBar *path_bar)
     {
         ButtonData *button_data;
         button_data = BUTTON_DATA (list->data);
-        if (ctk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button_data->button)))
+        if (ctk_toggle_button_get_active (CTK_TOGGLE_BUTTON (button_data->button)))
         {
             /*Increase the reference count on path so it does not get cleared
              *by baul_path_bar_clear_buttons during baul_path_bar_update_path
@@ -213,7 +213,7 @@ trash_state_changed_cb (BaulTrashMonitor *monitor,
     gint scale;
 
     file = g_file_new_for_uri ("trash:///");
-    scale = ctk_widget_get_scale_factor (GTK_WIDGET (path_bar));
+    scale = ctk_widget_get_scale_factor (CTK_WIDGET (path_bar));
     for (list = path_bar->button_list; list; list = list->next)
     {
         ButtonData *button_data;
@@ -227,7 +227,7 @@ trash_state_changed_cb (BaulTrashMonitor *monitor,
             icon = baul_trash_monitor_get_icon ();
             icon_info = baul_icon_info_lookup (icon, BAUL_PATH_BAR_ICON_SIZE, scale);
             surface = baul_icon_info_get_surface_at_size (icon_info, BAUL_PATH_BAR_ICON_SIZE);
-            ctk_image_set_from_surface (GTK_IMAGE (button_data->image), surface);
+            ctk_image_set_from_surface (CTK_IMAGE (button_data->image), surface);
         }
     }
     g_object_unref (file);
@@ -242,7 +242,7 @@ slider_timeout (gpointer user_data)
 
     path_bar->drag_slider_timeout = 0;
 
-    if (ctk_widget_get_visible (GTK_WIDGET (path_bar)))
+    if (ctk_widget_get_visible (CTK_WIDGET (path_bar)))
     {
         if (path_bar->drag_slider_timeout_for_up_button)
         {
@@ -310,18 +310,18 @@ baul_path_bar_init (BaulPathBar *path_bar)
     char *p;
     CtkStyleContext *context;
 
-    context = ctk_widget_get_style_context (GTK_WIDGET (path_bar));
+    context = ctk_widget_get_style_context (CTK_WIDGET (path_bar));
     ctk_style_context_add_class (context, "baul-pathbar");
 
-    ctk_widget_set_has_window (GTK_WIDGET (path_bar), FALSE);
-    ctk_widget_set_redraw_on_allocate (GTK_WIDGET (path_bar), FALSE);
+    ctk_widget_set_has_window (CTK_WIDGET (path_bar), FALSE);
+    ctk_widget_set_redraw_on_allocate (CTK_WIDGET (path_bar), FALSE);
 
     path_bar->spacing = 3;
     path_bar->up_slider_button = get_slider_button (path_bar, "pan-start-symbolic");
     path_bar->down_slider_button = get_slider_button (path_bar, "pan-end-symbolic");
-    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (path_bar->up_slider_button)),
+    ctk_style_context_add_class (ctk_widget_get_style_context (CTK_WIDGET (path_bar->up_slider_button)),
                                  "slider-button");
-    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (path_bar->down_slider_button)),
+    ctk_style_context_add_class (ctk_widget_get_style_context (CTK_WIDGET (path_bar->down_slider_button)),
                                  "slider-button");
 
     path_bar->icon_size = BAUL_PATH_BAR_ICON_SIZE;
@@ -348,9 +348,9 @@ baul_path_bar_init (BaulPathBar *path_bar)
     g_signal_connect (path_bar->down_slider_button, "button_press_event", G_CALLBACK (baul_path_bar_slider_button_press), path_bar);
     g_signal_connect (path_bar->down_slider_button, "button_release_event", G_CALLBACK (baul_path_bar_slider_button_release), path_bar);
 
-    ctk_drag_dest_set (GTK_WIDGET (path_bar->up_slider_button),
+    ctk_drag_dest_set (CTK_WIDGET (path_bar->up_slider_button),
                        0, NULL, 0, 0);
-    ctk_drag_dest_set_track_motion (GTK_WIDGET (path_bar->up_slider_button), TRUE);
+    ctk_drag_dest_set_track_motion (CTK_WIDGET (path_bar->up_slider_button), TRUE);
     g_signal_connect (path_bar->up_slider_button,
                       "drag-motion",
                       G_CALLBACK (baul_path_bar_slider_drag_motion),
@@ -360,9 +360,9 @@ baul_path_bar_init (BaulPathBar *path_bar)
                       G_CALLBACK (baul_path_bar_slider_drag_leave),
                       path_bar);
 
-    ctk_drag_dest_set (GTK_WIDGET (path_bar->down_slider_button),
+    ctk_drag_dest_set (CTK_WIDGET (path_bar->down_slider_button),
                        0, NULL, 0, 0);
-    ctk_drag_dest_set_track_motion (GTK_WIDGET (path_bar->up_slider_button), TRUE);
+    ctk_drag_dest_set_track_motion (CTK_WIDGET (path_bar->up_slider_button), TRUE);
     g_signal_connect (path_bar->down_slider_button,
                       "drag-motion",
                       G_CALLBACK (baul_path_bar_slider_drag_motion),
@@ -492,7 +492,7 @@ remove_settings_signal (BaulPathBar *path_bar,
 static void
 baul_path_bar_dispose (GObject *object)
 {
-    remove_settings_signal (BAUL_PATH_BAR (object), ctk_widget_get_screen (GTK_WIDGET (object)));
+    remove_settings_signal (BAUL_PATH_BAR (object), ctk_widget_get_screen (CTK_WIDGET (object)));
 
     G_OBJECT_CLASS (baul_path_bar_parent_class)->dispose (object);
 }
@@ -614,7 +614,7 @@ baul_path_bar_unmap (CtkWidget *widget)
 {
     baul_path_bar_stop_scrolling (BAUL_PATH_BAR (widget));
 
-    GTK_WIDGET_CLASS (baul_path_bar_parent_class)->unmap (widget);
+    CTK_WIDGET_CLASS (baul_path_bar_parent_class)->unmap (widget);
 }
 
 /* This is a tad complicated */
@@ -765,7 +765,7 @@ baul_path_bar_size_allocate (CtkWidget     *widget,
     child_allocation.y = allocation->y;
     child_allocation.height = allocation->height;
 
-    if (direction == GTK_TEXT_DIR_RTL)
+    if (direction == CTK_TEXT_DIR_RTL)
     {
         child_allocation.x = allocation->x + allocation->width;
 
@@ -795,12 +795,12 @@ baul_path_bar_size_allocate (CtkWidget     *widget,
         ctk_widget_get_allocation (widget, &widget_allocation);
 
         child_allocation.width = child_requisition.width;
-        if (direction == GTK_TEXT_DIR_RTL)
+        if (direction == CTK_TEXT_DIR_RTL)
         {
             child_allocation.x -= child_allocation.width;
         }
         /* Check to see if we've don't have any more space to allocate buttons */
-        if (need_sliders && direction == GTK_TEXT_DIR_RTL)
+        if (need_sliders && direction == CTK_TEXT_DIR_RTL)
         {
             if (child_allocation.x - path_bar->spacing - path_bar->slider_width < widget_allocation.x)
             {
@@ -809,7 +809,7 @@ baul_path_bar_size_allocate (CtkWidget     *widget,
         }
         else
         {
-            if (need_sliders && direction == GTK_TEXT_DIR_LTR)
+            if (need_sliders && direction == CTK_TEXT_DIR_LTR)
             {
                 if (child_allocation.x + child_allocation.width + path_bar->spacing + path_bar->slider_width > widget_allocation.x + allocation_width)
 
@@ -822,7 +822,7 @@ baul_path_bar_size_allocate (CtkWidget     *widget,
         ctk_widget_set_child_visible (BUTTON_DATA (list->data)->button, TRUE);
         ctk_widget_size_allocate (child, &child_allocation);
 
-        if (direction == GTK_TEXT_DIR_RTL)
+        if (direction == CTK_TEXT_DIR_RTL)
         {
             child_allocation.x -= path_bar->spacing;
             down_slider_offset = child_allocation.x - allocation->x - path_bar->slider_width;
@@ -879,9 +879,9 @@ baul_path_bar_size_allocate (CtkWidget     *widget,
 static void
 baul_path_bar_style_updated (CtkWidget *widget)
 {
-    if (GTK_WIDGET_CLASS (baul_path_bar_parent_class)->style_updated)
+    if (CTK_WIDGET_CLASS (baul_path_bar_parent_class)->style_updated)
     {
-        GTK_WIDGET_CLASS (baul_path_bar_parent_class)->style_updated (widget);
+        CTK_WIDGET_CLASS (baul_path_bar_parent_class)->style_updated (widget);
     }
 
     baul_path_bar_check_icon_theme (BAUL_PATH_BAR (widget));
@@ -891,9 +891,9 @@ static void
 baul_path_bar_screen_changed (CtkWidget *widget,
                               GdkScreen *previous_screen)
 {
-    if (GTK_WIDGET_CLASS (baul_path_bar_parent_class)->screen_changed)
+    if (CTK_WIDGET_CLASS (baul_path_bar_parent_class)->screen_changed)
     {
-        GTK_WIDGET_CLASS (baul_path_bar_parent_class)->screen_changed (widget, previous_screen);
+        CTK_WIDGET_CLASS (baul_path_bar_parent_class)->screen_changed (widget, previous_screen);
     }
     /* We might nave a new settings, so we remove the old one */
     if (previous_screen)
@@ -935,7 +935,7 @@ static void
 baul_path_bar_add (CtkContainer *container,
                    CtkWidget    *widget)
 {
-    ctk_widget_set_parent (widget, GTK_WIDGET (container));
+    ctk_widget_set_parent (widget, CTK_WIDGET (container));
 }
 
 static void
@@ -946,7 +946,7 @@ baul_path_bar_remove_1 (CtkContainer *container,
     ctk_widget_unparent (widget);
     if (was_visible)
     {
-        ctk_widget_queue_resize (GTK_WIDGET (container));
+        ctk_widget_queue_resize (CTK_WIDGET (container));
     }
 }
 
@@ -1039,9 +1039,9 @@ baul_path_bar_scroll_down (BaulPathBar *path_bar)
         return;
     }
 
-    ctk_widget_queue_resize (GTK_WIDGET (path_bar));
+    ctk_widget_queue_resize (CTK_WIDGET (path_bar));
 
-    direction = ctk_widget_get_direction (GTK_WIDGET (path_bar));
+    direction = ctk_widget_get_direction (CTK_WIDGET (path_bar));
 
     /* We find the button at the 'down' end that we have to make */
     /* visible */
@@ -1070,11 +1070,11 @@ baul_path_bar_scroll_down (BaulPathBar *path_bar)
     }
 
     ctk_widget_get_allocation (BUTTON_DATA (down_button->data)->button, &button_allocation);
-    ctk_widget_get_allocation (GTK_WIDGET (path_bar), &allocation);
+    ctk_widget_get_allocation (CTK_WIDGET (path_bar), &allocation);
     ctk_widget_get_allocation (path_bar->down_slider_button, &slider_allocation);
 
     space_needed = button_allocation.width + path_bar->spacing;
-    if (direction == GTK_TEXT_DIR_RTL)
+    if (direction == CTK_TEXT_DIR_RTL)
     {
         space_available = slider_allocation.x - allocation.x;
     }
@@ -1108,7 +1108,7 @@ baul_path_bar_scroll_up (BaulPathBar *path_bar)
         return;
     }
 
-    ctk_widget_queue_resize (GTK_WIDGET (path_bar));
+    ctk_widget_queue_resize (CTK_WIDGET (path_bar));
 
     for (list = g_list_last (path_bar->button_list); list; list = list->prev)
     {
@@ -1301,7 +1301,7 @@ baul_path_bar_check_icon_theme (BaulPathBar *path_bar)
         return;
     }
 
-    settings = ctk_settings_get_for_screen (ctk_widget_get_screen (GTK_WIDGET (path_bar)));
+    settings = ctk_settings_get_for_screen (ctk_widget_get_screen (CTK_WIDGET (path_bar)));
     path_bar->settings_signal_id = g_signal_connect (settings, "notify", G_CALLBACK (settings_notify_cb), path_bar);
 
     change_icon_theme (path_bar);
@@ -1313,7 +1313,7 @@ baul_path_bar_clear_buttons (BaulPathBar *path_bar)
 {
     while (path_bar->button_list != NULL)
     {
-        ctk_container_remove (GTK_CONTAINER (path_bar), BUTTON_DATA (path_bar->button_list->data)->button);
+        ctk_container_remove (CTK_CONTAINER (path_bar), BUTTON_DATA (path_bar->button_list->data)->button);
     }
     path_bar->first_scrolled_button = NULL;
     path_bar->fake_root = NULL;
@@ -1338,7 +1338,7 @@ button_clicked_cb (CtkWidget *button,
     button_list = g_list_find (path_bar->button_list, button_data);
     g_assert (button_list != NULL);
 
-    ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+    ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (button), TRUE);
 
     g_signal_emit (path_bar, path_bar_signals [PATH_CLICKED], 0, button_data->path);
 }
@@ -1388,7 +1388,7 @@ button_drag_begin_cb (CtkWidget *widget,
 static BaulIconInfo *
 get_type_icon_info (ButtonData *button_data)
 {
-    gint icon_scale = ctk_widget_get_scale_factor (GTK_WIDGET (button_data->button));
+    gint icon_scale = ctk_widget_get_scale_factor (CTK_WIDGET (button_data->button));
 
     switch (button_data->type)
     {
@@ -1484,8 +1484,8 @@ set_label_padding_size (ButtonData *button_data)
     pixel size difference between bold and normal fonts is not always even and
     will give an off-by-one error when dividing by 2 */
 
-    ctk_widget_set_margin_start (GTK_WIDGET (button_data->label), pad_left);
-    ctk_widget_set_margin_end (GTK_WIDGET (button_data->label), pad_right);
+    ctk_widget_set_margin_start (CTK_WIDGET (button_data->label), pad_left);
+    ctk_widget_set_margin_end (CTK_WIDGET (button_data->label), pad_right);
 
     g_object_unref (layout);
 }
@@ -1497,20 +1497,20 @@ baul_path_bar_update_button_appearance (ButtonData *button_data)
 
     if (button_data->label != NULL)
     {
-        if (ctk_label_get_use_markup (GTK_LABEL (button_data->label)))
+        if (ctk_label_get_use_markup (CTK_LABEL (button_data->label)))
         {
             char *markup;
 
             markup = g_markup_printf_escaped ("<b>%s</b>", dir_name);
-            ctk_label_set_markup (GTK_LABEL (button_data->label), markup);
+            ctk_label_set_markup (CTK_LABEL (button_data->label), markup);
 
-            ctk_widget_set_margin_end (GTK_WIDGET (button_data->label), 0);
-            ctk_widget_set_margin_start (GTK_WIDGET (button_data->label), 0);
+            ctk_widget_set_margin_end (CTK_WIDGET (button_data->label), 0);
+            ctk_widget_set_margin_start (CTK_WIDGET (button_data->label), 0);
             g_free(markup);
         }
         else
         {
-            ctk_label_set_text (GTK_LABEL (button_data->label), dir_name);
+            ctk_label_set_text (CTK_LABEL (button_data->label), dir_name);
             set_label_padding_size (button_data);
         }
     }
@@ -1519,8 +1519,8 @@ baul_path_bar_update_button_appearance (ButtonData *button_data)
     {
         if (button_data->custom_icon)
         {
-            ctk_image_set_from_surface (GTK_IMAGE (button_data->image), button_data->custom_icon);
-            ctk_widget_show (GTK_WIDGET (button_data->image));
+            ctk_image_set_from_surface (CTK_IMAGE (button_data->image), button_data->custom_icon);
+            ctk_widget_show (CTK_WIDGET (button_data->image));
         }
         else
         {
@@ -1538,15 +1538,15 @@ baul_path_bar_update_button_appearance (ButtonData *button_data)
 
             if (surface != NULL)
             {
-                ctk_image_set_from_surface (GTK_IMAGE (button_data->image), surface);
+                ctk_image_set_from_surface (CTK_IMAGE (button_data->image), surface);
                 ctk_style_context_add_class (ctk_widget_get_style_context (button_data->button),
                                              "image-button");
-                ctk_widget_show (GTK_WIDGET (button_data->image));
+                ctk_widget_show (CTK_WIDGET (button_data->image));
                 cairo_surface_destroy (surface);
             }
             else
             {
-                ctk_widget_hide (GTK_WIDGET (button_data->image));
+                ctk_widget_hide (CTK_WIDGET (button_data->image));
                 ctk_style_context_remove_class (ctk_widget_get_style_context (button_data->button),
                                                 "image-button");
             }
@@ -1566,10 +1566,10 @@ baul_path_bar_update_button_state (ButtonData *button_data,
 
     baul_path_bar_update_button_appearance (button_data);
 
-    if (ctk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button_data->button)) != current_dir)
+    if (ctk_toggle_button_get_active (CTK_TOGGLE_BUTTON (button_data->button)) != current_dir)
     {
         button_data->ignore_changes = TRUE;
-        ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_data->button), current_dir);
+        ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (button_data->button), current_dir);
         button_data->ignore_changes = FALSE;
     }
 }
@@ -1593,7 +1593,7 @@ setup_file_path_mounted_mount (GFile *location, ButtonData *button_data)
     volume_monitor = g_volume_monitor_get ();
     mounts = g_volume_monitor_get_mounts (volume_monitor);
 
-    scale = ctk_widget_get_scale_factor (GTK_WIDGET (button_data->button));
+    scale = ctk_widget_get_scale_factor (CTK_WIDGET (button_data->button));
     for (l = mounts; l != NULL; l = l->next)
     {
         mount = l->data;
@@ -1850,7 +1850,7 @@ button_data_file_changed (BaulFile *file,
             {
                 for (idx = 0; idx <= position; idx++)
                 {
-                    ctk_container_remove (GTK_CONTAINER (path_bar),
+                    ctk_container_remove (CTK_CONTAINER (path_bar),
                                           BUTTON_DATA (path_bar->button_list->data)->button);
                 }
             }
@@ -1922,17 +1922,17 @@ make_directory_button (BaulPathBar  *path_bar,
     /* Fall through */
     case DEFAULT_LOCATION_BUTTON:
         button_data->label = ctk_label_new (NULL);
-        child = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-        ctk_box_pack_start (GTK_BOX (child), button_data->image, FALSE, FALSE, 0);
-        ctk_box_pack_start (GTK_BOX (child), button_data->label, FALSE, FALSE, 0);
+        child = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 2);
+        ctk_box_pack_start (CTK_BOX (child), button_data->image, FALSE, FALSE, 0);
+        ctk_box_pack_start (CTK_BOX (child), button_data->label, FALSE, FALSE, 0);
 
         break;
     case NORMAL_BUTTON:
     default:
         button_data->label = ctk_label_new (NULL);
-        child = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-        ctk_box_pack_start (GTK_BOX (child), button_data->image, FALSE, FALSE, 0);
-        ctk_box_pack_start (GTK_BOX (child), button_data->label, FALSE, FALSE, 0);
+        child = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 2);
+        ctk_box_pack_start (CTK_BOX (child), button_data->image, FALSE, FALSE, 0);
+        ctk_box_pack_start (CTK_BOX (child), button_data->label, FALSE, FALSE, 0);
         button_data->is_base_dir = base_dir;
     }
 
@@ -1957,7 +1957,7 @@ make_directory_button (BaulPathBar  *path_bar,
 
     button_data->file_is_hidden = file_is_hidden;
 
-    ctk_container_add (GTK_CONTAINER (button_data->button), child);
+    ctk_container_add (CTK_CONTAINER (button_data->button), child);
     ctk_widget_show_all (button_data->button);
 
     baul_path_bar_update_button_state (button_data, current_dir);
@@ -2046,7 +2046,7 @@ baul_path_bar_check_parent_path (BaulPathBar *path_bar,
         if (!ctk_widget_get_child_visible (BUTTON_DATA (current_path->data)->button))
         {
             path_bar->first_scrolled_button = current_path;
-            ctk_widget_queue_resize (GTK_WIDGET (path_bar));
+            ctk_widget_queue_resize (CTK_WIDGET (path_bar));
         }
         return TRUE;
     }
@@ -2107,7 +2107,7 @@ baul_path_bar_update_path (BaulPathBar *path_bar,
     {
         CtkWidget *button;
         button = BUTTON_DATA (l->data)->button;
-        ctk_container_add (GTK_CONTAINER (path_bar), button);
+        ctk_container_add (CTK_CONTAINER (path_bar), button);
     }
 
     if (path_bar->current_path != NULL)
@@ -2155,7 +2155,7 @@ baul_path_bar_get_path_for_button (BaulPathBar *path_bar,
     GList *list;
 
     g_return_val_if_fail (BAUL_IS_PATH_BAR (path_bar), NULL);
-    g_return_val_if_fail (GTK_IS_BUTTON (button), NULL);
+    g_return_val_if_fail (CTK_IS_BUTTON (button), NULL);
 
     for (list = path_bar->button_list; list; list = list->next)
     {

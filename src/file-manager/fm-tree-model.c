@@ -133,13 +133,13 @@ static void report_node_contents_changed   (FMTreeModel *model,
         TreeNode          *node);
 
 G_DEFINE_TYPE_WITH_CODE (FMTreeModel, fm_tree_model, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
+                         G_IMPLEMENT_INTERFACE (CTK_TYPE_TREE_MODEL,
                                  fm_tree_model_tree_model_init));
 
 static CtkTreeModelFlags
 fm_tree_model_get_flags (CtkTreeModel *tree_model)
 {
-    return GTK_TREE_MODEL_ITERS_PERSIST;
+    return CTK_TREE_MODEL_ITERS_PERSIST;
 }
 
 static void
@@ -268,7 +268,7 @@ get_menu_icon (GIcon *icon)
     cairo_surface_t *surface;
     int size, scale;
 
-    size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+    size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
     scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
 
     info = baul_icon_info_lookup (icon, size, scale);
@@ -295,7 +295,7 @@ get_menu_icon_for_file (TreeNode *node,
     GIcon *gicon, *emblemed_icon;
     GIcon *emblem_icon = NULL;
 
-    size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+    size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
     scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
 
     gicon = baul_file_get_gicon (file, flags);
@@ -635,8 +635,8 @@ report_row_inserted (FMTreeModel *model, CtkTreeIter *iter)
 {
     CtkTreePath *path;
 
-    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
-    ctk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, iter);
+    path = ctk_tree_model_get_path (CTK_TREE_MODEL (model), iter);
+    ctk_tree_model_row_inserted (CTK_TREE_MODEL (model), path, iter);
     ctk_tree_path_free (path);
 }
 
@@ -645,8 +645,8 @@ report_row_contents_changed (FMTreeModel *model, CtkTreeIter *iter)
 {
     CtkTreePath *path;
 
-    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
-    ctk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
+    path = ctk_tree_model_get_path (CTK_TREE_MODEL (model), iter);
+    ctk_tree_model_row_changed (CTK_TREE_MODEL (model), path, iter);
     ctk_tree_path_free (path);
 }
 
@@ -655,8 +655,8 @@ report_row_has_child_toggled (FMTreeModel *model, CtkTreeIter *iter)
 {
     CtkTreePath *path;
 
-    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
-    ctk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model), path, iter);
+    path = ctk_tree_model_get_path (CTK_TREE_MODEL (model), iter);
+    ctk_tree_model_row_has_child_toggled (CTK_TREE_MODEL (model), path, iter);
     ctk_tree_path_free (path);
 }
 
@@ -666,7 +666,7 @@ get_node_path (FMTreeModel *model, TreeNode *node)
     CtkTreeIter iter;
 
     make_iter_for_node (node, &iter, model->details->stamp);
-    return ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+    return ctk_tree_model_get_path (CTK_TREE_MODEL (model), &iter);
 }
 
 static void
@@ -692,9 +692,9 @@ report_dummy_row_deleted (FMTreeModel *model, TreeNode *parent)
         CtkTreePath *path;
 
         make_iter_for_node (parent, &iter, model->details->stamp);
-        path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+        path = ctk_tree_model_get_path (CTK_TREE_MODEL (model), &iter);
         ctk_tree_path_append_index (path, 0);
-        ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+        ctk_tree_model_row_deleted (CTK_TREE_MODEL (model), path);
         ctk_tree_path_free (path);
     }
     abandon_dummy_row_ref_count (model, parent);
@@ -818,7 +818,7 @@ destroy_node (FMTreeModel *model, TreeNode *node)
     path = get_node_path (model, node);
 
     /* Report row_deleted before actually deleting */
-    ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+    ctk_tree_model_row_deleted (CTK_TREE_MODEL (model), path);
     ctk_tree_path_free (path);
 
     destroy_node_without_reporting (model, node);
@@ -949,7 +949,7 @@ reparent_node (FMTreeModel *model, TreeNode *node)
     path = get_node_path (model, node);
 
     /* Report row_deleted before actually deleting */
-    ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+    ctk_tree_model_row_deleted (CTK_TREE_MODEL (model), path);
     ctk_tree_path_free (path);
 
     abandon_node_ref_count (model, node);
@@ -1809,7 +1809,7 @@ fm_tree_model_remove_root_uri (FMTreeModel *model, const char *uri)
         path = get_node_path (model, node);
 
         /* Report row_deleted before actually deleting */
-        ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+        ctk_tree_model_row_deleted (CTK_TREE_MODEL (model), path);
         ctk_tree_path_free (path);
 
         if (node->prev)
@@ -2092,7 +2092,7 @@ fm_tree_model_class_init (FMTreeModelClass *class)
                       NULL, NULL,
                       g_cclosure_marshal_VOID__BOXED,
                       G_TYPE_NONE, 1,
-                      GTK_TYPE_TREE_ITER);
+                      CTK_TYPE_TREE_ITER);
 }
 
 static void

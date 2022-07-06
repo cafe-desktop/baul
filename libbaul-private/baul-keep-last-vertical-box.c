@@ -29,7 +29,7 @@
 static void	baul_keep_last_vertical_box_size_allocate 	  (CtkWidget 			    *widget,
         CtkAllocation 		    *allocation);
 
-G_DEFINE_TYPE (BaulKeepLastVerticalBox, baul_keep_last_vertical_box, GTK_TYPE_BOX)
+G_DEFINE_TYPE (BaulKeepLastVerticalBox, baul_keep_last_vertical_box, CTK_TYPE_BOX)
 
 #define parent_class baul_keep_last_vertical_box_parent_class
 
@@ -48,7 +48,7 @@ baul_keep_last_vertical_box_class_init (BaulKeepLastVerticalBoxClass *klass)
 static void
 baul_keep_last_vertical_box_init (BaulKeepLastVerticalBox *box)
 {
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (box), GTK_ORIENTATION_VERTICAL);
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (box), CTK_ORIENTATION_VERTICAL);
 }
 
 
@@ -71,16 +71,16 @@ baul_keep_last_vertical_box_new (gint spacing)
 
     box = BAUL_KEEP_LAST_VERTICAL_BOX (ctk_widget_new (baul_keep_last_vertical_box_get_type (), NULL));
 
-    ctk_box_set_spacing (GTK_BOX (box), spacing);
+    ctk_box_set_spacing (CTK_BOX (box), spacing);
 
     /* If homogeneous is TRUE and there are too many items to fit
      * naturally, they will be squashed together to fit in the space.
      * We want the ones that don't fit to be not shown at all, so
      * we set homogeneous to FALSE.
      */
-    ctk_box_set_homogeneous (GTK_BOX (box), FALSE);
+    ctk_box_set_homogeneous (CTK_BOX (box), FALSE);
 
-    return GTK_WIDGET (box);
+    return CTK_WIDGET (box);
 }
 
 static void
@@ -93,9 +93,9 @@ baul_keep_last_vertical_box_size_allocate (CtkWidget *widget,
     g_return_if_fail (BAUL_IS_KEEP_LAST_VERTICAL_BOX (widget));
     g_return_if_fail (allocation != NULL);
 
-    GTK_WIDGET_CLASS (baul_keep_last_vertical_box_parent_class)->size_allocate (widget, allocation);
+    CTK_WIDGET_CLASS (baul_keep_last_vertical_box_parent_class)->size_allocate (widget, allocation);
 
-    children = ctk_container_get_children (GTK_CONTAINER (widget));
+    children = ctk_container_get_children (CTK_CONTAINER (widget));
     l = g_list_last (children);
 
     if (l != NULL)

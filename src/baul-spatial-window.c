@@ -122,7 +122,7 @@ baul_spatial_window_configure_event (CtkWidget *widget,
 
     window = BAUL_SPATIAL_WINDOW (widget);
 
-    GTK_WIDGET_CLASS (baul_spatial_window_parent_class)->configure_event (widget, event);
+    CTK_WIDGET_CLASS (baul_spatial_window_parent_class)->configure_event (widget, event);
 
     /* Only save the geometry if the user hasn't resized the window
      * for a second. Otherwise delay the callback another second.
@@ -147,7 +147,7 @@ baul_spatial_window_unrealize (CtkWidget *widget)
     window = BAUL_SPATIAL_WINDOW (widget);
     slot = baul_window_get_active_slot (BAUL_WINDOW (window));
 
-    GTK_WIDGET_CLASS (baul_spatial_window_parent_class)->unrealize (widget);
+    CTK_WIDGET_CLASS (baul_spatial_window_parent_class)->unrealize (widget);
 
     if (window->details->save_geometry_timeout_id != 0)
     {
@@ -205,9 +205,9 @@ baul_spatial_window_state_event (CtkWidget *widget,
 
     }
 
-    if (GTK_WIDGET_CLASS (baul_spatial_window_parent_class)->window_state_event != NULL)
+    if (CTK_WIDGET_CLASS (baul_spatial_window_parent_class)->window_state_event != NULL)
     {
-        return GTK_WIDGET_CLASS (baul_spatial_window_parent_class)->window_state_event (widget, event);
+        return CTK_WIDGET_CLASS (baul_spatial_window_parent_class)->window_state_event (widget, event);
     }
 
     return FALSE;
@@ -237,12 +237,12 @@ baul_spatial_window_save_geometry (BaulSpatialWindow *window,
         return;
     }
 
-    if (ctk_widget_get_window (GTK_WIDGET (window)) &&
-    	    ctk_widget_get_visible (GTK_WIDGET (window)) &&
+    if (ctk_widget_get_window (CTK_WIDGET (window)) &&
+    	    ctk_widget_get_visible (CTK_WIDGET (window)) &&
 	    !BAUL_IS_DESKTOP_WINDOW (window) &&
-            !(gdk_window_get_state (ctk_widget_get_window (GTK_WIDGET(window))) & GDK_WINDOW_STATE_MAXIMIZED)) {
+            !(gdk_window_get_state (ctk_widget_get_window (CTK_WIDGET(window))) & GDK_WINDOW_STATE_MAXIMIZED)) {
 
-        geometry_string = eel_ctk_window_get_geometry_string (GTK_WINDOW (window));
+        geometry_string = eel_ctk_window_get_geometry_string (CTK_WINDOW (window));
 
         if (!g_strcmp0 (window->details->last_geometry, geometry_string)) {
         	/* Don't save geometry if it's the same as before. */
@@ -317,7 +317,7 @@ baul_spatial_window_show (CtkWidget *widget)
     window = BAUL_WINDOW (widget);
     slot = baul_window_get_active_slot (window);
 
-    GTK_WIDGET_CLASS (baul_spatial_window_parent_class)->show (widget);
+    CTK_WIDGET_CLASS (baul_spatial_window_parent_class)->show (widget);
 
     if (slot != NULL && slot->query_editor != NULL)
     {
@@ -382,7 +382,7 @@ real_get_icon (BaulWindow *window,
                BaulWindowSlot *slot)
 {
     return baul_file_get_icon (slot->viewed_file,
-                               48, ctk_widget_get_scale_factor (GTK_WIDGET (window)),
+                               48, ctk_widget_get_scale_factor (CTK_WIDGET (window)),
                                BAUL_FILE_ICON_FLAGS_IGNORE_VISITING |
                                BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON);
 }
@@ -400,14 +400,14 @@ sync_window_title (BaulWindow *window)
 
     if (slot->title == NULL || slot->title[0] == '\0')
     {
-        ctk_window_set_title (GTK_WINDOW (window), _("Baul"));
+        ctk_window_set_title (CTK_WINDOW (window), _("Baul"));
     }
     else
     {
         char *window_title;
 
         window_title = eel_str_middle_truncate (slot->title, MAX_TITLE_LENGTH);
-        ctk_window_set_title (GTK_WINDOW (window), window_title);
+        ctk_window_set_title (CTK_WINDOW (window), window_title);
         g_free (window_title);
     }
 }
@@ -487,7 +487,7 @@ real_open_slot (BaulWindowPane *pane,
 
     slot = g_object_new (BAUL_TYPE_WINDOW_SLOT, NULL);
     slot->pane = pane;
-    ctk_container_add (GTK_CONTAINER (BAUL_SPATIAL_WINDOW (pane->window)->details->content_box),
+    ctk_container_add (CTK_CONTAINER (BAUL_SPATIAL_WINDOW (pane->window)->details->content_box),
                        slot->content_box);
     ctk_widget_show (slot->content_box);
     return slot;
@@ -639,7 +639,7 @@ location_button_clicked_callback (CtkWidget         *widget,
 
     popup = ctk_menu_new ();
 
-    ctk_menu_set_reserve_toggle_size (GTK_MENU (popup), FALSE);
+    ctk_menu_set_reserve_toggle_size (CTK_MENU (popup), FALSE);
 
     first_item = NULL;
 
@@ -658,7 +658,7 @@ location_button_clicked_callback (CtkWidget         *widget,
         surface = NULL;
 
         surface = baul_file_get_icon_surface (file,
-                                              baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
+                                              baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU),
                                               TRUE,
                                               ctk_widget_get_scale_factor (widget),
                                               BAUL_FILE_ICON_FLAGS_IGNORE_VISITING);
@@ -694,7 +694,7 @@ location_button_clicked_callback (CtkWidget         *widget,
                                     (GDestroyNotify)g_object_unref);
         }
 
-        ctk_menu_shell_prepend (GTK_MENU_SHELL (popup), menu_item);
+        ctk_menu_shell_prepend (CTK_MENU_SHELL (popup), menu_item);
 
         if (child_location) {
             g_object_unref (child_location);
@@ -710,7 +710,7 @@ location_button_clicked_callback (CtkWidget         *widget,
         g_object_unref (location);
     }
 
-    ctk_menu_set_screen (GTK_MENU (popup), ctk_widget_get_screen (widget));
+    ctk_menu_set_screen (CTK_MENU (popup), ctk_widget_get_screen (widget));
 
     loop = g_main_loop_new (NULL, FALSE);
 
@@ -719,13 +719,13 @@ location_button_clicked_callback (CtkWidget         *widget,
                       loop);
 
     ctk_grab_add (popup);
-    ctk_menu_popup_at_widget (GTK_MENU (popup),
+    ctk_menu_popup_at_widget (CTK_MENU (popup),
                               widget,
                               GDK_GRAVITY_SOUTH_WEST,
                               GDK_GRAVITY_NORTH_WEST,
                               NULL);
 
-    ctk_menu_shell_select_item (GTK_MENU_SHELL (popup), first_item);
+    ctk_menu_shell_select_item (CTK_MENU_SHELL (popup), first_item);
     g_main_loop_run (loop);
     ctk_grab_remove (popup);
     g_main_loop_unref (loop);
@@ -832,7 +832,7 @@ baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
 
         /* FIXME: monitor for name change... */
         name = baul_file_get_display_name (file);
-        ctk_label_set_label (GTK_LABEL (window->details->location_label),
+        ctk_label_set_label (CTK_LABEL (window->details->location_label),
                              name);
         g_free (name);
         ctk_widget_set_sensitive (window->details->location_button, TRUE);
@@ -843,20 +843,20 @@ baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
             cairo_surface_t *surface;
 
             surface = baul_file_get_icon_surface (file,
-                                                  baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
+                                                  baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU),
                                                   TRUE,
                                                   ctk_widget_get_scale_factor (window->details->location_button),
                                                   BAUL_FILE_ICON_FLAGS_IGNORE_VISITING);
 
             if (surface != NULL)
             {
-                ctk_image_set_from_surface (GTK_IMAGE (window->details->location_icon), surface);
+                ctk_image_set_from_surface (CTK_IMAGE (window->details->location_icon), surface);
                 cairo_surface_destroy (surface);
             }
             else
             {
-                ctk_image_set_from_icon_name (GTK_IMAGE (window->details->location_icon),
-                                              "document-open", GTK_ICON_SIZE_MENU);
+                ctk_image_set_from_icon_name (CTK_IMAGE (window->details->location_icon),
+                                              "document-open", CTK_ICON_SIZE_MENU);
             }
         }
         g_object_unref (file);
@@ -864,7 +864,7 @@ baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
     }
     else
     {
-        ctk_label_set_label (GTK_LABEL (window->details->location_label),
+        ctk_label_set_label (CTK_LABEL (window->details->location_label),
                              "");
         ctk_widget_set_sensitive (window->details->location_button, FALSE);
     }
@@ -968,7 +968,7 @@ baul_spatial_window_init (BaulSpatialWindow *window)
     win = BAUL_WINDOW (window);
 
     ctk_widget_set_hexpand (win->details->statusbar, TRUE);
-    ctk_grid_attach (GTK_GRID (win->details->grid),
+    ctk_grid_attach (CTK_GRID (win->details->grid),
                      win->details->statusbar,
                      0, 5, 1, 1);
     ctk_widget_show (win->details->statusbar);
@@ -976,11 +976,11 @@ baul_spatial_window_init (BaulSpatialWindow *window)
     pane = baul_window_pane_new (win);
     win->details->panes = g_list_prepend (win->details->panes, pane);
 
-    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    ctk_box_set_homogeneous (GTK_BOX (vbox), TRUE);
+    vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
+    ctk_box_set_homogeneous (CTK_BOX (vbox), TRUE);
     ctk_widget_set_hexpand (vbox, TRUE);
     ctk_widget_set_vexpand (vbox, TRUE);
-    ctk_grid_attach (GTK_GRID (BAUL_WINDOW (window)->details->grid),
+    ctk_grid_attach (CTK_GRID (BAUL_WINDOW (window)->details->grid),
                      vbox,
                      0, 1, 1, 3);
 
@@ -992,28 +992,28 @@ baul_spatial_window_init (BaulSpatialWindow *window)
                       "button-press-event",
                       G_CALLBACK (location_button_pressed_callback),
                       window);
-    ctk_button_set_relief (GTK_BUTTON (window->details->location_button),
-                           GTK_RELIEF_NORMAL);
+    ctk_button_set_relief (CTK_BUTTON (window->details->location_button),
+                           CTK_RELIEF_NORMAL);
 
     ctk_widget_show (window->details->location_button);
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
-    ctk_container_add (GTK_CONTAINER (window->details->location_button),
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 3);
+    ctk_container_add (CTK_CONTAINER (window->details->location_button),
                        hbox);
     ctk_widget_show (hbox);
 
-    window->details->location_icon = ctk_image_new_from_icon_name ("document-open", GTK_ICON_SIZE_MENU);
-    ctk_box_pack_start (GTK_BOX (hbox), window->details->location_icon, FALSE, FALSE, 0);
+    window->details->location_icon = ctk_image_new_from_icon_name ("document-open", CTK_ICON_SIZE_MENU);
+    ctk_box_pack_start (CTK_BOX (hbox), window->details->location_icon, FALSE, FALSE, 0);
     ctk_widget_show (window->details->location_icon);
 
     window->details->location_label = ctk_label_new ("");
-    ctk_label_set_ellipsize (GTK_LABEL (window->details->location_label), PANGO_ELLIPSIZE_END);
-    ctk_label_set_max_width_chars (GTK_LABEL (window->details->location_label), MAX_SHORTNAME_PATH);
-    ctk_box_pack_start (GTK_BOX (hbox), window->details->location_label,
+    ctk_label_set_ellipsize (CTK_LABEL (window->details->location_label), PANGO_ELLIPSIZE_END);
+    ctk_label_set_max_width_chars (CTK_LABEL (window->details->location_label), MAX_SHORTNAME_PATH);
+    ctk_box_pack_start (CTK_BOX (hbox), window->details->location_label,
                         FALSE, FALSE, 0);
     ctk_widget_show (window->details->location_label);
 
-    arrow = ctk_image_new_from_icon_name ("pan-down-symbolic", GTK_ICON_SIZE_BUTTON);
-    ctk_box_pack_start (GTK_BOX (hbox), arrow, FALSE, FALSE, 0);
+    arrow = ctk_image_new_from_icon_name ("pan-down-symbolic", CTK_ICON_SIZE_BUTTON);
+    ctk_box_pack_start (CTK_BOX (hbox), arrow, FALSE, FALSE, 0);
     ctk_widget_show (arrow);
 
     ctk_drag_source_set (window->details->location_button,
@@ -1036,11 +1036,11 @@ baul_spatial_window_init (BaulSpatialWindow *window)
     g_signal_connect (window->details->location_button,
                       "clicked",
                       G_CALLBACK (location_button_clicked_callback), window);
-    ctk_box_pack_start (GTK_BOX (BAUL_WINDOW (window)->details->statusbar),
+    ctk_box_pack_start (CTK_BOX (BAUL_WINDOW (window)->details->statusbar),
                         window->details->location_button,
                         FALSE, TRUE, 0);
 
-    ctk_box_reorder_child (GTK_BOX (BAUL_WINDOW (window)->details->statusbar),
+    ctk_box_reorder_child (CTK_BOX (BAUL_WINDOW (window)->details->statusbar),
                            window->details->location_button, 0);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -1067,7 +1067,7 @@ baul_spatial_window_class_init (BaulSpatialWindowClass *klass)
 {
     CtkBindingSet *binding_set;
 	BaulWindowClass *nclass = BAUL_WINDOW_CLASS (klass);
-	CtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
+	CtkWidgetClass *wclass = CTK_WIDGET_CLASS (klass);
 
 	nclass->window_type = BAUL_WINDOW_SPATIAL;
 	nclass->bookmarks_placeholder = MENU_PATH_SPATIAL_BOOKMARKS_PLACEHOLDER;

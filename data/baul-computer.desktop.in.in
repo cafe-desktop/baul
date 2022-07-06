@@ -8,7 +8,7 @@ Icon=computer
 Terminal=false
 StartupNotify=true
 Type=Application
-Categories=GTK;System;Core;
+Categories=CTK;System;Core;
 # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 Keywords=browse;disks;folders;local;remote;computer;CAFE;
 OnlyShowIn=CAFE;

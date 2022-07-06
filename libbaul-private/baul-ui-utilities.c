@@ -140,7 +140,7 @@ extension_action_sensitive_callback (BaulMenuItem *item,
                   NULL);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    ctk_action_set_sensitive (GTK_ACTION (user_data), value);
+    ctk_action_set_sensitive (CTK_ACTION (user_data), value);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -196,7 +196,7 @@ baul_action_from_menu_item (BaulMenuItem *item,
         cairo_surface_t *surface;
 
         surface = get_action_icon (icon_name,
-                                   baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
+                                   baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU),
                                    parent_widget);
         if (surface != NULL)
         {
@@ -250,7 +250,7 @@ baul_toolbar_action_from_menu_item (BaulMenuItem *item, CtkWidget *parent_widget
         cairo_surface_t *surface;
 
         surface = get_action_icon (icon_name,
-                                   baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_LARGE_TOOLBAR),
+                                   baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_LARGE_TOOLBAR),
                                    parent_widget);
         if (surface != NULL)
         {

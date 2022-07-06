@@ -54,7 +54,7 @@ enum
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (BaulNavigationAction, baul_navigation_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulNavigationAction, baul_navigation_action, CTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 static gboolean
@@ -81,7 +81,7 @@ activate_back_or_forward_menu_item (CtkMenuItem *menu_item,
 {
     int index;
 
-    g_assert (GTK_IS_MENU_ITEM (menu_item));
+    g_assert (CTK_IS_MENU_ITEM (menu_item));
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
     index = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu_item), "user_data"));
@@ -127,14 +127,14 @@ fill_menu (BaulNavigationWindow *window,
         if (menu_item) {
             list_void = FALSE;
             g_object_set_data (G_OBJECT (menu_item), "user_data", GINT_TO_POINTER (index));
-            ctk_widget_show (GTK_WIDGET (menu_item));
+            ctk_widget_show (CTK_WIDGET (menu_item));
             g_signal_connect_object (menu_item, "activate",
                                      back
                                      ? G_CALLBACK (activate_back_menu_item_callback)
                                      : G_CALLBACK (activate_forward_menu_item_callback),
                                      window, 0);
 
-            ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+            ctk_menu_shell_append (CTK_MENU_SHELL (menu), menu_item);
         }
 
         list = g_list_next (list);
@@ -143,7 +143,7 @@ fill_menu (BaulNavigationWindow *window,
 
     if (list_void)
     {
-        ctk_menu_shell_append (GTK_MENU_SHELL (menu),
+        ctk_menu_shell_append (CTK_MENU_SHELL (menu),
                                eel_image_menu_item_new_from_icon ("dialog-error", _("folder removed")));
         if (back)
         {
@@ -173,10 +173,10 @@ show_menu_callback (CtkMenuToolButton *button,
 
     menu = ctk_menu_tool_button_get_menu (button);
 
-    children = ctk_container_get_children (GTK_CONTAINER (menu));
+    children = ctk_container_get_children (CTK_CONTAINER (menu));
     for (li = children; li; li = li->next)
     {
-        ctk_container_remove (GTK_CONTAINER (menu), li->data);
+        ctk_container_remove (CTK_CONTAINER (menu), li->data);
     }
     g_list_free (children);
 
@@ -223,17 +223,17 @@ proxy_button_release_event_cb (CtkButton *button,
 static void
 connect_proxy (CtkAction *action, CtkWidget *proxy)
 {
-    if (GTK_IS_MENU_TOOL_BUTTON (proxy))
+    if (CTK_IS_MENU_TOOL_BUTTON (proxy))
     {
         BaulNavigationAction *naction = BAUL_NAVIGATION_ACTION (action);
-        CtkMenuToolButton *button = GTK_MENU_TOOL_BUTTON (proxy);
+        CtkMenuToolButton *button = CTK_MENU_TOOL_BUTTON (proxy);
         CtkWidget *menu;
         CtkWidget *child;
 
         /* set an empty menu, so the arrow button becomes sensitive */
         menu = ctk_menu_new ();
 
-        ctk_menu_set_reserve_toggle_size (GTK_MENU (menu), FALSE);
+        ctk_menu_set_reserve_toggle_size (CTK_MENU (menu), FALSE);
 
         ctk_menu_tool_button_set_menu (button, menu);
 
@@ -251,26 +251,26 @@ connect_proxy (CtkAction *action, CtkWidget *proxy)
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    (* GTK_ACTION_CLASS (baul_navigation_action_parent_class)->connect_proxy) (action, proxy);
+    (* CTK_ACTION_CLASS (baul_navigation_action_parent_class)->connect_proxy) (action, proxy);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
 disconnect_proxy (CtkAction *action, CtkWidget *proxy)
 {
-    if (GTK_IS_MENU_TOOL_BUTTON (proxy))
+    if (CTK_IS_MENU_TOOL_BUTTON (proxy))
     {
         CtkWidget *child;
 
         g_signal_handlers_disconnect_by_func (proxy, G_CALLBACK (show_menu_callback), action);
 
-        child = eel_ctk_menu_tool_button_get_button (GTK_MENU_TOOL_BUTTON (proxy));
+        child = eel_ctk_menu_tool_button_get_button (CTK_MENU_TOOL_BUTTON (proxy));
         g_signal_handlers_disconnect_by_func (child, G_CALLBACK (proxy_button_press_event_cb), NULL);
         g_signal_handlers_disconnect_by_func (child, G_CALLBACK (proxy_button_release_event_cb), NULL);
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    (* GTK_ACTION_CLASS (baul_navigation_action_parent_class)->disconnect_proxy) (action, proxy);
+    (* CTK_ACTION_CLASS (baul_navigation_action_parent_class)->disconnect_proxy) (action, proxy);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -338,14 +338,14 @@ baul_navigation_action_class_init (BaulNavigationActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    CtkActionClass *action_class = GTK_ACTION_CLASS (class);
+    CtkActionClass *action_class = CTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     object_class->finalize = baul_navigation_action_finalize;
     object_class->set_property = baul_navigation_action_set_property;
     object_class->get_property = baul_navigation_action_get_property;
 
-    action_class->toolbar_item_type = GTK_TYPE_MENU_TOOL_BUTTON;
+    action_class->toolbar_item_type = CTK_TYPE_MENU_TOOL_BUTTON;
     action_class->connect_proxy = connect_proxy;
     action_class->disconnect_proxy = disconnect_proxy;
 
