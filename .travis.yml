@@ -90,7 +90,7 @@ requires:
     - cppcheck
     - git
     - gobject-introspection
-    - ctk-doc-tools
+    - gtk-doc-tools
     - intltool
     - libdconf-dev
     - libexempi-dev
@@ -142,7 +142,7 @@ requires:
     - clang-tools
     - git
     - gobject-introspection
-    - ctk-doc-tools
+    - gtk-doc-tools
     - intltool
     - libdconf-dev
     - libexempi-dev

@@ -10,7 +10,7 @@ DOC_MODULE=libbaul-extension
 DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.xml
 
 # The directory containing the source code. Relative to $(srcdir).
-# ctk-doc will search all .c & .h files beneath here for inline comments
+# gtk-doc will search all .c & .h files beneath here for inline comments
 # documenting the functions and macros.
 # e.g. DOC_SOURCE_DIR=../../../libbaul-extension
 DOC_SOURCE_DIR=$(top_srcdir)/libbaul-extension
@@ -47,7 +47,7 @@ content_files = \
 	version.xml \
 	$(NULL)
 
-# SGML files where ctk-doc abbrevations (#CtkWidget) are expanded
+# SGML files where gtk-doc abbrevations (#CtkWidget) are expanded
 # These files must be listed here *and* in content_files
 # e.g. expand_content_files=running.sgml
 expand_content_files= \
@@ -73,8 +73,8 @@ CTKDOC_LIBS = \
 	$(LIBBAUL_EXTENSION_LIBS)                                        \
 	$(NULL)
 
-# This includes the standard ctk-doc make rules, copied by ctkdocize.
-include $(top_srcdir)/ctk-doc.make
+# This includes the standard gtk-doc make rules, copied by ctkdocize.
+include $(top_srcdir)/gtk-doc.make
 
 # Other files to distribute
 # e.g. EXTRA_DIST += version.xml.in
