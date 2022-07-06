@@ -189,7 +189,7 @@ eel_gdk_pixbuf_scale_to_fit (GdkPixbuf *pixbuf, int max_width, int max_height)
                                  max_width, max_height,
                                  &scaled_width, &scaled_height);
 
-    return gdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, CDK_INTERP_BILINEAR);
+    return gdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, GDK_INTERP_BILINEAR);
 }
 
 /* Returns a copy of pixbuf scaled down, preserving aspect ratio, to fit
@@ -246,7 +246,7 @@ eel_gdk_pixbuf_scale_to_min (GdkPixbuf *pixbuf, int min_width, int min_height)
                                  min_width, min_height,
                                  &scaled_width, &scaled_height);
 
-    return gdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, CDK_INTERP_BILINEAR);
+    return gdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, GDK_INTERP_BILINEAR);
 }
 
 gboolean

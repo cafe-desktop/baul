@@ -4605,7 +4605,7 @@ baul_file_get_icon (BaulFile *file,
 			scaled_pixbuf = gdk_pixbuf_scale_simple (raw_pixbuf,
 								 MAX (w * thumb_scale, 1),
 								 MAX (h * thumb_scale, 1),
-								 CDK_INTERP_BILINEAR);
+								 GDK_INTERP_BILINEAR);
 
 			/* Render frames only for thumbnails of non-image files
 			   and for images with no alpha channel. */
