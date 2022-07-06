@@ -183,10 +183,10 @@ baul_emblem_load_pixbuf_for_emblem (GFile *emblem)
         return NULL;
     }
 
-    pixbuf = eel_cdk_pixbuf_load_from_stream (stream);
+    pixbuf = eel_gdk_pixbuf_load_from_stream (stream);
     g_return_val_if_fail (pixbuf != NULL, NULL);
 
-    scaled = eel_cdk_pixbuf_scale_down_to_fit (pixbuf,
+    scaled = eel_gdk_pixbuf_scale_down_to_fit (pixbuf,
              BAUL_ICON_SIZE_STANDARD,
              BAUL_ICON_SIZE_STANDARD);
 
@@ -293,7 +293,7 @@ baul_emblem_install_custom_emblem (CdkPixbuf *pixbuf,
     g_free (basename);
 
     /* save the image */
-    if (eel_cdk_pixbuf_save_to_file (pixbuf, path) != TRUE)
+    if (eel_gdk_pixbuf_save_to_file (pixbuf, path) != TRUE)
     {
         eel_show_error_dialog (_("The emblem cannot be installed."),
                                _("Sorry, unable to save custom emblem."),

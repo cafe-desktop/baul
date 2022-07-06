@@ -303,13 +303,13 @@ get_types_table (void)
             g_hash_table_new_full (g_str_hash, g_str_equal,
                                    g_free, NULL);
 
-        format_list = cdk_pixbuf_get_formats ();
+        format_list = gdk_pixbuf_get_formats ();
         for (l = format_list; l; l = l->next)
         {
             char **types;
             int i;
 
-            types = cdk_pixbuf_format_get_mime_types (l->data);
+            types = gdk_pixbuf_format_get_mime_types (l->data);
 
             for (i = 0; types[i] != NULL; i++)
             {

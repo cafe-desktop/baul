@@ -464,7 +464,7 @@ uri_is_local_image (const char *uri)
         return FALSE;
     }
 
-    pixbuf = cdk_pixbuf_new_from_file (image_path, NULL);
+    pixbuf = gdk_pixbuf_new_from_file (image_path, NULL);
     g_free (image_path);
 
     if (pixbuf == NULL)

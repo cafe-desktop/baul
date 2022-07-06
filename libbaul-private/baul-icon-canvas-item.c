@@ -319,12 +319,12 @@ baul_icon_canvas_item_finalize (GObject *object)
 static gboolean
 pixbuf_is_acceptable (CdkPixbuf *pixbuf)
 {
-    return cdk_pixbuf_get_colorspace (pixbuf) == CDK_COLORSPACE_RGB
-           && ((!cdk_pixbuf_get_has_alpha (pixbuf)
-                && cdk_pixbuf_get_n_channels (pixbuf) == 3)
-               || (cdk_pixbuf_get_has_alpha (pixbuf)
-                   && cdk_pixbuf_get_n_channels (pixbuf) == 4))
-           && cdk_pixbuf_get_bits_per_sample (pixbuf) == 8;
+    return gdk_pixbuf_get_colorspace (pixbuf) == CDK_COLORSPACE_RGB
+           && ((!gdk_pixbuf_get_has_alpha (pixbuf)
+                && gdk_pixbuf_get_n_channels (pixbuf) == 3)
+               || (gdk_pixbuf_get_has_alpha (pixbuf)
+                   && gdk_pixbuf_get_n_channels (pixbuf) == 4))
+           && gdk_pixbuf_get_bits_per_sample (pixbuf) == 8;
 }
 
 static void
@@ -523,9 +523,9 @@ get_scaled_icon_size (BaulIconCanvasItem *item,
     }
 
     if (width)
-        *width = (pixbuf == NULL) ? 0 : (cdk_pixbuf_get_width (pixbuf) / scale);
+        *width = (pixbuf == NULL) ? 0 : (gdk_pixbuf_get_width (pixbuf) / scale);
     if (height)
-        *height = (pixbuf == NULL) ? 0 : (cdk_pixbuf_get_height (pixbuf) / scale);
+        *height = (pixbuf == NULL) ? 0 : (gdk_pixbuf_get_height (pixbuf) / scale);
 }
 
 cairo_surface_t *
@@ -598,8 +598,8 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     {
         cdk_cairo_set_source_pixbuf (cr, emblem_pixbuf, emblem_rect.x0, emblem_rect.y0);
         cairo_rectangle (cr, emblem_rect.x0, emblem_rect.y0,
-                         cdk_pixbuf_get_width (emblem_pixbuf),
-                         cdk_pixbuf_get_height (emblem_pixbuf));
+                         gdk_pixbuf_get_width (emblem_pixbuf),
+                         gdk_pixbuf_get_height (emblem_pixbuf));
         cairo_fill (cr);
     }
 
@@ -1480,7 +1480,7 @@ get_knob_pixbuf (void)
         char *knob_filename;
 
         knob_filename = baul_pixmap_file ("knob.png");
-        knob_pixbuf = cdk_pixbuf_new_from_file (knob_filename, NULL);
+        knob_pixbuf = gdk_pixbuf_new_from_file (knob_filename, NULL);
         g_free (knob_filename);
     }
 
@@ -1510,8 +1510,8 @@ draw_stretch_handles (BaulIconCanvasItem *item,
     cairo_save (cr);
 
     knob_pixbuf = get_knob_pixbuf ();
-    knob_width = cdk_pixbuf_get_width (knob_pixbuf);
-    knob_height = cdk_pixbuf_get_height (knob_pixbuf);
+    knob_width = gdk_pixbuf_get_width (knob_pixbuf);
+    knob_height = gdk_pixbuf_get_height (knob_pixbuf);
 
     /* first draw the box */
     ctk_style_context_get_color (style, CTK_STATE_FLAG_SELECTED, &color);
@@ -1566,8 +1566,8 @@ emblem_layout_next (EmblemLayout *layout,
 
     /* Get the pixbuf. */
     pixbuf = layout->emblem->data;
-    width = cdk_pixbuf_get_width (pixbuf);
-    height = cdk_pixbuf_get_height (pixbuf);
+    width = gdk_pixbuf_get_width (pixbuf);
+    height = gdk_pixbuf_get_height (pixbuf);
 
 
     /* Advance to the next emblem. */
@@ -1742,12 +1742,12 @@ real_map_surface (BaulIconCanvasItem *icon_item)
             CdkPixbuf *audio_pixbuf;
             int emblem_size;
 
-            emblem_size = baul_icon_get_emblem_size_for_icon_size (cdk_pixbuf_get_width (temp_pixbuf));
+            emblem_size = baul_icon_get_emblem_size_for_icon_size (gdk_pixbuf_get_width (temp_pixbuf));
             /* Load the audio symbol. */
             audio_filename = baul_pixmap_file ("audio.svg");
             if (audio_filename != NULL)
             {
-                audio_pixbuf = cdk_pixbuf_new_from_file_at_scale (audio_filename,
+                audio_pixbuf = gdk_pixbuf_new_from_file_at_scale (audio_filename,
                                emblem_size, emblem_size,
                                TRUE,
                                NULL);
@@ -1760,12 +1760,12 @@ real_map_surface (BaulIconCanvasItem *icon_item)
             /* Composite it onto the icon. */
             if (audio_pixbuf != NULL)
             {
-                cdk_pixbuf_composite
+                gdk_pixbuf_composite
                 (audio_pixbuf,
                  temp_pixbuf,
                  0, 0,
-                 cdk_pixbuf_get_width (audio_pixbuf),
-                 cdk_pixbuf_get_height (audio_pixbuf),
+                 gdk_pixbuf_get_width (audio_pixbuf),
+                 gdk_pixbuf_get_height (audio_pixbuf),
                  0, 0,
                  1.0, 1.0,
                  CDK_INTERP_BILINEAR, 0xFF);
@@ -2201,8 +2201,8 @@ hit_test_pixbuf (CdkPixbuf *pixbuf, EelIRect pixbuf_location, EelIRect probe_rec
     relative_rect.y1 = probe_rect.y1 - pixbuf_location.y0;
     pixbuf_rect.x0 = 0;
     pixbuf_rect.y0 = 0;
-    pixbuf_rect.x1 = cdk_pixbuf_get_width (pixbuf);
-    pixbuf_rect.y1 = cdk_pixbuf_get_height (pixbuf);
+    pixbuf_rect.x1 = gdk_pixbuf_get_width (pixbuf);
+    pixbuf_rect.y1 = gdk_pixbuf_get_height (pixbuf);
     eel_irect_intersect (&relative_rect, &relative_rect, &pixbuf_rect);
     if (eel_irect_is_empty (&relative_rect))
     {
@@ -2210,19 +2210,19 @@ hit_test_pixbuf (CdkPixbuf *pixbuf, EelIRect pixbuf_location, EelIRect probe_rec
     }
 
     /* If there's no alpha channel, it's opaque and we have a hit. */
-    if (!cdk_pixbuf_get_has_alpha (pixbuf))
+    if (!gdk_pixbuf_get_has_alpha (pixbuf))
     {
         return TRUE;
     }
-    g_assert (cdk_pixbuf_get_n_channels (pixbuf) == 4);
+    g_assert (gdk_pixbuf_get_n_channels (pixbuf) == 4);
 
     /* Check the alpha channel of the pixel to see if we have a hit. */
     for (x = relative_rect.x0; x < relative_rect.x1; x++)
     {
         for (y = relative_rect.y0; y < relative_rect.y1; y++)
         {
-            pixel = cdk_pixbuf_get_pixels (pixbuf)
-                    + y * cdk_pixbuf_get_rowstride (pixbuf)
+            pixel = gdk_pixbuf_get_pixels (pixbuf)
+                    + y * gdk_pixbuf_get_rowstride (pixbuf)
                     + x * 4;
             if (pixel[3] > 1)
             {
@@ -2622,8 +2622,8 @@ hit_test_stretch_handle (BaulIconCanvasItem *item,
     }
 
     knob_pixbuf = get_knob_pixbuf ();
-    knob_width = cdk_pixbuf_get_width (knob_pixbuf);
-    knob_height = cdk_pixbuf_get_height (knob_pixbuf);
+    knob_width = gdk_pixbuf_get_width (knob_pixbuf);
+    knob_height = gdk_pixbuf_get_height (knob_pixbuf);
     g_object_unref (knob_pixbuf);
 
     /* Check for hits in the stretch handles. */
