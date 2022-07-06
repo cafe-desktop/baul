@@ -30,7 +30,7 @@
 #include "eel-glib-extensions.h"
 #include "eel-lib-self-check-functions.h"
 #include "eel-string.h"
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <cdk/cdkprivate.h>
 #include <cdk/cdk.h>
 #include <cdk/cdkx.h>

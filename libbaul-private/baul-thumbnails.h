@@ -25,7 +25,7 @@
 #ifndef BAUL_THUMBNAILS_H
 #define BAUL_THUMBNAILS_H
 
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "baul-file.h"
 

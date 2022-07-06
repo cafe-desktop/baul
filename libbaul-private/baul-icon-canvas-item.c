@@ -25,7 +25,7 @@
 #include <config.h>
 #include <math.h>
 #include <glib/gi18n.h>
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <ctk/ctk.h>
 #include <cdk/cdk.h>
 #include <glib/gi18n.h>
@@ -37,7 +37,7 @@
 
 #include <eel/eel-art-extensions.h>
 #include <eel/eel-cdk-extensions.h>
-#include <eel/eel-cdk-pixbuf-extensions.h>
+#include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-graphic-effects.h>
 #include <eel/eel-ctk-macros.h>
@@ -313,7 +313,7 @@ baul_icon_canvas_item_finalize (GObject *object)
 }
 
 /* Currently we require pixbufs in this format (for hit testing).
- * Perhaps cdk-pixbuf will be changed so it can do the hit testing
+ * Perhaps gdk-pixbuf will be changed so it can do the hit testing
  * and we won't have this requirement any more.
  */
 static gboolean

@@ -31,7 +31,7 @@
 #include <config.h>
 #include <math.h>
 
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <cdk/cdkx.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>

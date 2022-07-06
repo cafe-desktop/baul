@@ -140,7 +140,7 @@
   * avoid variables set but not used
   * eel-canvas: Fix warning: Undefined or garbage value returned to caller
   * baul-window: Fix garbage value
-  * eel-cdk-pixbuf-extensions: Fix division by zero
+  * eel-gdk-pixbuf-extensions: Fix division by zero
   * baul-file: Fix use of memory after it is freed
   * baul-icon-container: Fix use of memory after it is freed
   * Fix attempt to free released memory
@@ -418,7 +418,7 @@
   * Add size_request to IconContainer to work around unncecessary relayouting
   * IconCanvasItem: fix overlapping filenames on hover
   * eel: remove unneeded #include with condition
-  * eel: remove some unused code from eel-cdk-pixbuf-extensions
+  * eel: remove some unused code from eel-gdk-pixbuf-extensions
   * fix build warning (no const needed there)
   * fix build with gcc 4.9.2 (looks like it's in c89 mode by default)
   * search: added tag support (xattr::xdg.tags).

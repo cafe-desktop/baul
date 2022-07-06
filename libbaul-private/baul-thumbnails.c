@@ -37,7 +37,7 @@
 #define CAFE_DESKTOP_USE_UNSTABLE_API
 #include <libcafe-desktop/cafe-desktop-thumbnail.h>
 
-#include <eel/eel-cdk-pixbuf-extensions.h>
+#include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-graphic-effects.h>
 #include <eel/eel-string.h>
 #include <eel/eel-debug.h>

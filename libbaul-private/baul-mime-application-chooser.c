@@ -29,7 +29,7 @@
 #include <string.h>
 
 #include <glib/gi18n-lib.h>
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <ctk/ctk.h>
 #include <gio/gio.h>
 

@@ -30,7 +30,7 @@
 #ifndef BAUL_CUSTOMIZATION_DATA_H
 #define BAUL_CUSTOMIZATION_DATA_H
 
-#include <cdk-pixbuf/cdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <ctk/ctk.h>
 
 #define RESET_IMAGE_NAME "reset.png"
