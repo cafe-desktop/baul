@@ -531,7 +531,7 @@ msgstr "প্রতিলেপন (_P)"
 msgid "Select All"
 msgstr "সব নির্বাচন করুন"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "বিবরণ প্রদর্শন করা হবে (_d)"
 

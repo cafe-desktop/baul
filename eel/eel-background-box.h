@@ -26,7 +26,7 @@
 #define EEL_BACKGROUND_BOX_H
 
 #include <glib.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #ifdef __cplusplus
 extern "C" {

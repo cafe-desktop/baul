@@ -24,7 +24,7 @@
 #ifndef _BAUL_PLACES_SIDEBAR_H
 #define _BAUL_PLACES_SIDEBAR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-view.h>
 #include <libbaul-private/baul-window-info.h>

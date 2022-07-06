@@ -30,7 +30,7 @@
 #define BAUL_CONFIGURABLE_H
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "baul-extension-types.h"
 #include "baul-file-info.h"
 #include "baul-menu.h"

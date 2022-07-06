@@ -28,7 +28,7 @@
 #include <atk/atkobject.h>
 #include <atk/atkregistry.h>
 #include <atk/atkobjectfactory.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <libgail-util/gailtextutil.h>
 
 void eel_accessibility_set_up_label_widget_relation (GtkWidget *label, GtkWidget *widget);

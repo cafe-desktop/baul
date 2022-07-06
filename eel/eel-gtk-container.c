@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-gtk-container.c - Functions to simplify the implementations of
+/* eel-ctk-container.c - Functions to simplify the implementations of
   			 GtkContainer widgets.
 
    Copyright (C) 2001 Ramiro Estrugo.
@@ -24,11 +24,11 @@
 */
 
 #include <config.h>
-#include "eel-gtk-container.h"
+#include "eel-ctk-container.h"
 #include "eel-art-extensions.h"
 
 /**
- * eel_gtk_container_child_expose_event:
+ * eel_ctk_container_child_expose_event:
  *
  * @container: A GtkContainer widget.
  * @child: A child of @container or NULL;
@@ -41,7 +41,7 @@
  * non NO_WINDOW widgets to this function, in which case this function is a noop.
  */
 void
-eel_gtk_container_child_expose_event (GtkContainer *container,
+eel_ctk_container_child_expose_event (GtkContainer *container,
                                       GtkWidget *child,
                                       cairo_t *cr)
 {
@@ -54,11 +54,11 @@ eel_gtk_container_child_expose_event (GtkContainer *container,
 
     g_return_if_fail (GTK_IS_WIDGET (child));
 
-    gtk_container_propagate_draw (container, child, cr);
+    ctk_container_propagate_draw (container, child, cr);
 }
 
 /**
- * eel_gtk_container_child_map:
+ * eel_ctk_container_child_map:
  *
  * @container: A GtkContainer widget.
  * @child: A child of @container or NULL;
@@ -67,7 +67,7 @@ eel_gtk_container_child_expose_event (GtkContainer *container,
  * method of the @container widget.  If @child is NULL, then this function is a noop.
  */
 void
-eel_gtk_container_child_map (GtkContainer *container,
+eel_ctk_container_child_map (GtkContainer *container,
                              GtkWidget *child)
 {
     g_return_if_fail (GTK_IS_CONTAINER (container));
@@ -77,16 +77,16 @@ eel_gtk_container_child_map (GtkContainer *container,
         return;
     }
 
-    g_return_if_fail (gtk_widget_get_parent (child) == GTK_WIDGET (container));
+    g_return_if_fail (ctk_widget_get_parent (child) == GTK_WIDGET (container));
 
-    if (gtk_widget_get_visible (child) && !gtk_widget_get_mapped (child))
+    if (ctk_widget_get_visible (child) && !ctk_widget_get_mapped (child))
     {
-        gtk_widget_map (child);
+        ctk_widget_map (child);
     }
 }
 
 /**
- * eel_gtk_container_child_unmap:
+ * eel_ctk_container_child_unmap:
  *
  * @container: A GtkContainer widget.
  * @child: A child of @container or NULL;
@@ -95,7 +95,7 @@ eel_gtk_container_child_map (GtkContainer *container,
  * method of the @container widget.  If @child is NULL, then this function is a noop.
  */
 void
-eel_gtk_container_child_unmap (GtkContainer *container,
+eel_ctk_container_child_unmap (GtkContainer *container,
                                GtkWidget *child)
 {
     g_return_if_fail (GTK_IS_CONTAINER (container));
@@ -105,16 +105,16 @@ eel_gtk_container_child_unmap (GtkContainer *container,
         return;
     }
 
-    g_return_if_fail (gtk_widget_get_parent (child) == GTK_WIDGET (container));
+    g_return_if_fail (ctk_widget_get_parent (child) == GTK_WIDGET (container));
 
-    if (gtk_widget_get_visible (child) && gtk_widget_get_mapped (child))
+    if (ctk_widget_get_visible (child) && ctk_widget_get_mapped (child))
     {
-        gtk_widget_unmap (child);
+        ctk_widget_unmap (child);
     }
 }
 
 /**
- * eel_gtk_container_child_add:
+ * eel_ctk_container_child_add:
  *
  * @container: A GtkContainer widget.
  * @child: A non NULL unparented child.
@@ -124,7 +124,7 @@ eel_gtk_container_child_unmap (GtkContainer *container,
  * method of the @container.  The @child cannot be NULL.
  */
 void
-eel_gtk_container_child_add (GtkContainer *container,
+eel_ctk_container_child_add (GtkContainer *container,
                              GtkWidget *child)
 {
     GtkWidget *widget;
@@ -134,27 +134,27 @@ eel_gtk_container_child_add (GtkContainer *container,
 
     widget = GTK_WIDGET (container);
 
-    gtk_widget_set_parent (child, widget);
+    ctk_widget_set_parent (child, widget);
 
-    if (gtk_widget_get_realized (widget))
+    if (ctk_widget_get_realized (widget))
     {
-        gtk_widget_realize (child);
+        ctk_widget_realize (child);
     }
 
-    if (gtk_widget_get_mapped (widget)
-            && gtk_widget_get_visible (child))
+    if (ctk_widget_get_mapped (widget)
+            && ctk_widget_get_visible (child))
     {
-        if (gtk_widget_get_mapped (widget))
+        if (ctk_widget_get_mapped (widget))
         {
-            gtk_widget_map (child);
+            ctk_widget_map (child);
         }
 
-        gtk_widget_queue_resize (child);
+        ctk_widget_queue_resize (child);
     }
 }
 
 /**
- * eel_gtk_container_child_remove:
+ * eel_ctk_container_child_remove:
  *
  * @container: A GtkContainer widget.
  * @child: A non NULL child of @container.
@@ -164,27 +164,27 @@ eel_gtk_container_child_add (GtkContainer *container,
  * @container.  The child cannot be NULL.
  */
 void
-eel_gtk_container_child_remove (GtkContainer *container,
+eel_ctk_container_child_remove (GtkContainer *container,
                                 GtkWidget *child)
 {
     gboolean child_was_visible;
 
     g_return_if_fail (GTK_IS_CONTAINER (container));
     g_return_if_fail (GTK_IS_WIDGET (child));
-    g_return_if_fail (gtk_widget_get_parent (child) == GTK_WIDGET (container));
+    g_return_if_fail (ctk_widget_get_parent (child) == GTK_WIDGET (container));
 
-    child_was_visible = gtk_widget_get_visible (child);
+    child_was_visible = ctk_widget_get_visible (child);
 
-    gtk_widget_unparent (child);
+    ctk_widget_unparent (child);
 
     if (child_was_visible)
     {
-        gtk_widget_queue_resize (GTK_WIDGET (container));
+        ctk_widget_queue_resize (GTK_WIDGET (container));
     }
 }
 
 /**
- * eel_gtk_container_child_size_allocate:
+ * eel_ctk_container_child_size_allocate:
  *
  * @container: A GtkContainer widget.
  * @child: A child of @container or NULL;
@@ -195,7 +195,7 @@ eel_gtk_container_child_remove (GtkContainer *container,
  * function is a noop.
  */
 void
-eel_gtk_container_child_size_allocate (GtkContainer *container,
+eel_ctk_container_child_size_allocate (GtkContainer *container,
                                        GtkWidget *child,
                                        EelIRect child_geometry)
 {
@@ -209,7 +209,7 @@ eel_gtk_container_child_size_allocate (GtkContainer *container,
     }
 
     g_return_if_fail (GTK_IS_WIDGET (child));
-    g_return_if_fail (gtk_widget_get_parent (child) == GTK_WIDGET (container));
+    g_return_if_fail (ctk_widget_get_parent (child) == GTK_WIDGET (container));
 
     if (eel_irect_is_empty (&child_geometry))
     {
@@ -221,5 +221,5 @@ eel_gtk_container_child_size_allocate (GtkContainer *container,
     child_allocation.width = eel_irect_get_width (child_geometry);
     child_allocation.height = eel_irect_get_height (child_geometry);
 
-    gtk_widget_size_allocate (child, &child_allocation);
+    ctk_widget_size_allocate (child, &child_allocation);
 }

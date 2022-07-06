@@ -520,7 +520,7 @@ msgstr "ચોંટાડો (_P)"
 msgid "Select All"
 msgstr "બધુ પસંદ કરો"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "ઘણી વિગતો બતાવો (_d)"
 

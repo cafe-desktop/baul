@@ -522,7 +522,7 @@ msgstr "Փակցնել"
 msgid "Select All"
 msgstr "Ընտրել բոլորը"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Ցույց տալ ավելի շատ _մանրամասներ"
 

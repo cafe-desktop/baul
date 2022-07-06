@@ -25,7 +25,7 @@
 #ifndef BAUL_FILE_H
 #define BAUL_FILE_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 #include "baul-file-attributes.h"

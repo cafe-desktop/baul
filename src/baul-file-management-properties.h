@@ -26,7 +26,7 @@
 #define BAUL_FILE_MANAGEMENT_PROPERTIES_H
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #ifdef __cplusplus
 extern "C" {

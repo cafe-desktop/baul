@@ -48,7 +48,7 @@ baul_keep_last_vertical_box_class_init (BaulKeepLastVerticalBoxClass *klass)
 static void
 baul_keep_last_vertical_box_init (BaulKeepLastVerticalBox *box)
 {
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (box), GTK_ORIENTATION_VERTICAL);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (box), GTK_ORIENTATION_VERTICAL);
 }
 
 
@@ -69,16 +69,16 @@ baul_keep_last_vertical_box_new (gint spacing)
 {
     BaulKeepLastVerticalBox *box;
 
-    box = BAUL_KEEP_LAST_VERTICAL_BOX (gtk_widget_new (baul_keep_last_vertical_box_get_type (), NULL));
+    box = BAUL_KEEP_LAST_VERTICAL_BOX (ctk_widget_new (baul_keep_last_vertical_box_get_type (), NULL));
 
-    gtk_box_set_spacing (GTK_BOX (box), spacing);
+    ctk_box_set_spacing (GTK_BOX (box), spacing);
 
     /* If homogeneous is TRUE and there are too many items to fit
      * naturally, they will be squashed together to fit in the space.
      * We want the ones that don't fit to be not shown at all, so
      * we set homogeneous to FALSE.
      */
-    gtk_box_set_homogeneous (GTK_BOX (box), FALSE);
+    ctk_box_set_homogeneous (GTK_BOX (box), FALSE);
 
     return GTK_WIDGET (box);
 }
@@ -95,7 +95,7 @@ baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
 
     GTK_WIDGET_CLASS (baul_keep_last_vertical_box_parent_class)->size_allocate (widget, allocation);
 
-    children = gtk_container_get_children (GTK_CONTAINER (widget));
+    children = ctk_container_get_children (GTK_CONTAINER (widget));
     l = g_list_last (children);
 
     if (l != NULL)
@@ -105,7 +105,7 @@ baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
         last_child = l->data;
         l = l->prev;
 
-        gtk_widget_get_allocation (last_child, &last_child_allocation);
+        ctk_widget_get_allocation (last_child, &last_child_allocation);
 
         /* If last child doesn't fit vertically, prune items from the end of the
          * list one at a time until it does.
@@ -120,7 +120,7 @@ baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
                 child = l->data;
                 l = l->prev;
 
-                gtk_widget_get_allocation (child, &child_allocation);
+                ctk_widget_get_allocation (child, &child_allocation);
 
                 /* Reallocate this child's position so that it does not appear.
                  * Setting the width & height to 0 is not enough, as
@@ -131,19 +131,19 @@ baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
                  * with having other hidden children.
                  *
                  * Note that these children are having their size allocated twice,
-                 * once by gtk_vbox_size_allocate and then again here. I don't
+                 * once by ctk_vbox_size_allocate and then again here. I don't
                  * know of any problems with this, but holler if you do.
                  */
                 tiny_allocation.x = tiny_allocation.y = -1;
                 tiny_allocation.height = tiny_allocation.width = 0;
-                gtk_widget_size_allocate (child, &tiny_allocation);
+                ctk_widget_size_allocate (child, &tiny_allocation);
 
                 /* We're done if the special last item fits now. */
                 if (child_allocation.y + last_child_allocation.height <=
                         allocation->y + allocation->height)
                 {
                     last_child_allocation.y = child_allocation.y;
-                    gtk_widget_size_allocate (last_child, &last_child_allocation);
+                    ctk_widget_size_allocate (last_child, &last_child_allocation);
                     break;
                 }
 
@@ -156,7 +156,7 @@ baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
                 {
                     last_child_allocation.y = allocation->y;
                     last_child_allocation.height = allocation->height;
-                    gtk_widget_size_allocate (last_child, &last_child_allocation);
+                    ctk_widget_size_allocate (last_child, &last_child_allocation);
                 }
             }
         }

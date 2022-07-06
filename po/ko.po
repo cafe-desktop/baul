@@ -523,7 +523,7 @@ msgstr "붙여넣기(_P)"
 msgid "Select All"
 msgstr "모두 선택"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "자세한 정보 표시(_D)"
 

@@ -33,14 +33,14 @@
 #include <unistd.h>
 
 #include <X11/Xatom.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-vfs-extensions.h>
 
 #include <libbaul-private/baul-desktop-icon-file.h>
@@ -105,9 +105,9 @@ static BaulIconContainer *
 get_icon_container (FMDesktopIconView *icon_view)
 {
     g_return_val_if_fail (FM_IS_DESKTOP_ICON_VIEW (icon_view), NULL);
-    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view))), NULL);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (ctk_bin_get_child (GTK_BIN (icon_view))), NULL);
 
-    return BAUL_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view)));
+    return BAUL_ICON_CONTAINER (ctk_bin_get_child (GTK_BIN (icon_view)));
 }
 
 static void
@@ -168,7 +168,7 @@ net_workarea_changed (FMDesktopIconView *icon_view,
      * workareas array is going to be (each desktop will have four
      * elements in the workareas array describing
      * x,y,width,height) */
-    display = gtk_widget_get_display (GTK_WIDGET (icon_view));
+    display = ctk_widget_get_display (GTK_WIDGET (icon_view));
     gdk_x11_display_error_trap_push (display);
     if (!gdk_property_get (window,
                            gdk_atom_intern ("_NET_NUMBER_OF_DESKTOPS", FALSE),
@@ -327,7 +327,7 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
     GdkSeat *seat;
     GdkDisplay *display;
 
-    seat = gdk_display_get_default_seat (gtk_widget_get_display (GTK_WIDGET (icon_container)));
+    seat = gdk_display_get_default_seat (ctk_widget_get_display (GTK_WIDGET (icon_container)));
     pointer = gdk_seat_get_pointer (seat);
     keyboard = gdk_seat_get_keyboard (seat);
 
@@ -345,7 +345,7 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
     }
 
     /* Stop the event because we don't want anyone else dealing with it. */
-    display = gtk_widget_get_display (GTK_WIDGET (icon_container));
+    display = ctk_widget_get_display (GTK_WIDGET (icon_container));
     gdk_display_flush (display);
     g_signal_stop_emission_by_name (icon_container, "middle_click");
 
@@ -392,8 +392,8 @@ realized_callback (GtkWidget *widget, FMDesktopIconView *desktop_icon_view)
 
     g_return_if_fail (desktop_icon_view->priv->root_window == NULL);
 
-    screen = gtk_widget_get_screen (widget);
-    scale = gtk_widget_get_scale_factor (widget);
+    screen = ctk_widget_get_screen (widget);
+    scale = ctk_widget_get_scale_factor (widget);
 
     /* Ugly HACK for the problem that the views realize at the
      * wrong size and then get resized. (This is a problem with
@@ -405,7 +405,7 @@ realized_callback (GtkWidget *widget, FMDesktopIconView *desktop_icon_view)
     allocation.y = 0;
     allocation.width = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
     allocation.height = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
-    gtk_widget_size_allocate (GTK_WIDGET(get_icon_container(desktop_icon_view)),
+    ctk_widget_size_allocate (GTK_WIDGET(get_icon_container(desktop_icon_view)),
                               &allocation);
 
     root_window = gdk_screen_get_root_window (screen);
@@ -581,22 +581,22 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
     baul_icon_container_set_store_layout_timestamps (icon_container, TRUE);
 
     /* Set allocation to be at 0, 0 */
-    gtk_widget_get_allocation (GTK_WIDGET (icon_container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (icon_container), &allocation);
     allocation.x = 0;
     allocation.y = 0;
-    gtk_widget_set_allocation (GTK_WIDGET (icon_container), &allocation);
+    ctk_widget_set_allocation (GTK_WIDGET (icon_container), &allocation);
 
-    gtk_widget_queue_resize (GTK_WIDGET (icon_container));
+    ctk_widget_queue_resize (GTK_WIDGET (icon_container));
 
-    hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (icon_container));
-    vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (icon_container));
+    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (icon_container));
+    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (icon_container));
 
-    gtk_adjustment_set_value (hadj, 0);
-    gtk_adjustment_set_value (vadj, 0);
+    ctk_adjustment_set_value (hadj, 0);
+    ctk_adjustment_set_value (vadj, 0);
 
-    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (desktop_icon_view),
+    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (desktop_icon_view),
                                          GTK_SHADOW_NONE);
-    gtk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (desktop_icon_view), FALSE);
+    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (desktop_icon_view), FALSE);
 
     fm_directory_view_ignore_hidden_file_preferences
     (FM_DIRECTORY_VIEW (desktop_icon_view));
@@ -606,7 +606,7 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 
     /* Set our default layout mode */
     baul_icon_container_set_layout_mode (icon_container,
-                                         gtk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
+                                         ctk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
                                          BAUL_ICON_LAYOUT_T_B_R_L :
                                          BAUL_ICON_LAYOUT_T_B_L_R);
 
@@ -647,7 +647,7 @@ action_new_launcher_callback (GtkAction *action, gpointer data)
 
     desktop_directory = baul_get_desktop_directory ();
 
-    baul_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (data)),
+    baul_launch_application_from_command (ctk_widget_get_screen (GTK_WIDGET (data)),
                                           "cafe-desktop-item-edit",
                                           "cafe-desktop-item-edit",
                                           FALSE,
@@ -662,7 +662,7 @@ action_change_background_callback (GtkAction *action,
 {
     g_assert (FM_DIRECTORY_VIEW (data));
 
-    baul_launch_application_from_command (gtk_widget_get_screen (GTK_WIDGET (data)),
+    baul_launch_application_from_command (ctk_widget_get_screen (GTK_WIDGET (data)),
                                           _("Background"),
                                           "cafe-appearance-properties",
                                           FALSE,
@@ -728,18 +728,18 @@ real_update_menus (FMDirectoryView *view)
     /* New Launcher */
     disable_command_line = g_settings_get_boolean (cafe_lockdown_preferences, BAUL_PREFERENCES_LOCKDOWN_COMMAND_LINE);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (desktop_view->priv->desktop_action_group,
+    action = ctk_action_group_get_action (desktop_view->priv->desktop_action_group,
                                           FM_ACTION_NEW_LAUNCHER_DESKTOP);
-    gtk_action_set_visible (action,
+    ctk_action_set_visible (action,
                             !disable_command_line);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Empty Trash */
     include_empty_trash = trash_link_is_selection (view);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (desktop_view->priv->desktop_action_group,
+    action = ctk_action_group_get_action (desktop_view->priv->desktop_action_group,
                                           FM_ACTION_EMPTY_TRASH_CONDITIONAL);
-    gtk_action_set_visible (action,
+    ctk_action_set_visible (action,
                             include_empty_trash);
     G_GNUC_END_IGNORE_DEPRECATIONS;
     if (include_empty_trash)
@@ -749,7 +749,7 @@ real_update_menus (FMDirectoryView *view)
         label = g_strdup (_("E_mpty Trash"));
         g_object_set (action , "label", label, NULL);
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        gtk_action_set_sensitive (action,
+        ctk_action_set_sensitive (action,
                                   !baul_trash_monitor_is_empty ());
         G_GNUC_END_IGNORE_DEPRECATIONS;
         g_free (label);
@@ -802,21 +802,21 @@ real_merge_menus (FMDirectoryView *view)
     ui_manager = fm_directory_view_get_ui_manager (view);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action_group = gtk_action_group_new ("DesktopViewActions");
-    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+    action_group = ctk_action_group_new ("DesktopViewActions");
+    ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     desktop_view->priv->desktop_action_group = action_group;
-    gtk_action_group_add_actions (action_group,
+    ctk_action_group_add_actions (action_group,
                                   desktop_view_entries, G_N_ELEMENTS (desktop_view_entries),
                                   view);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
 
-    gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
+    ctk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui manager */
 
     ui = baul_ui_string_get ("baul-desktop-icon-view-ui.xml");
     desktop_view->priv->desktop_merge_id =
-        gtk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
+        ctk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
 }
 
 static gboolean

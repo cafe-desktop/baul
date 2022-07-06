@@ -26,7 +26,7 @@
 #include <math.h>
 #include <glib/gi18n.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gdk/gdk.h>
 #include <glib/gi18n.h>
 #include <atk/atkimage.h>
@@ -40,7 +40,7 @@
 #include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-graphic-effects.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-string.h>
 #include <eel/eel-accessibility.h>
 
@@ -518,7 +518,7 @@ get_scaled_icon_size (BaulIconCanvasItem *item,
         EelCanvas *canvas;
 
         canvas = EEL_CANVAS_ITEM (item)->canvas;
-        scale = gtk_widget_get_scale_factor (GTK_WIDGET (canvas));
+        scale = ctk_widget_get_scale_factor (GTK_WIDGET (canvas));
         pixbuf = item->details->pixbuf;
     }
 
@@ -550,10 +550,10 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     g_return_val_if_fail (BAUL_IS_ICON_CANVAS_ITEM (item), NULL);
 
     canvas = EEL_CANVAS_ITEM (item)->canvas;
-    context = gtk_widget_get_style_context (GTK_WIDGET (canvas));
+    context = ctk_widget_get_style_context (GTK_WIDGET (canvas));
 
-    gtk_style_context_save (context);
-    gtk_style_context_add_class (context, "baul-canvas-item");
+    ctk_style_context_save (context);
+    ctk_style_context_add_class (context, "baul-canvas-item");
 
     /* Assume we're updated so canvas item data is right */
 
@@ -570,16 +570,16 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     width = EEL_CANVAS_ITEM (item)->x2 - EEL_CANVAS_ITEM (item)->x1;
     height = EEL_CANVAS_ITEM (item)->y2 - EEL_CANVAS_ITEM (item)->y1;
 
-    surface = gdk_window_create_similar_surface (gtk_widget_get_window (GTK_WIDGET (canvas)),
+    surface = gdk_window_create_similar_surface (ctk_widget_get_window (GTK_WIDGET (canvas)),
     						 CAIRO_CONTENT_COLOR_ALPHA,
     						 width, height);
 
     cr = cairo_create (surface);
 
     drag_surface = gdk_cairo_surface_create_from_pixbuf (item->details->pixbuf,
-                                                         gtk_widget_get_scale_factor (GTK_WIDGET (canvas)),
-                                                         gtk_widget_get_window (GTK_WIDGET (canvas)));
-    gtk_render_icon_surface (context, cr, drag_surface,
+                                                         ctk_widget_get_scale_factor (GTK_WIDGET (canvas)),
+                                                         ctk_widget_get_window (GTK_WIDGET (canvas)));
+    ctk_render_icon_surface (context, cr, drag_surface,
                              item_offset_x, item_offset_y);
     cairo_surface_destroy (drag_surface);
 
@@ -608,7 +608,7 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     draw_label_text (item, cr, FALSE, icon_rect);
     cairo_destroy (cr);
 
-    gtk_style_context_restore (context);
+    ctk_style_context_restore (context);
 
     return surface;
 
@@ -1274,7 +1274,7 @@ draw_label_text (BaulIconCanvasItem *item,
     }
 
     container = BAUL_ICON_CONTAINER (EEL_CANVAS_ITEM (item)->canvas);
-    context = gtk_widget_get_style_context (GTK_WIDGET (container));
+    context = ctk_widget_get_style_context (GTK_WIDGET (container));
 
     text_rect = compute_text_rectangle (item, icon_rect, TRUE, BOUNDS_USAGE_FOR_DISPLAY);
 
@@ -1291,11 +1291,11 @@ draw_label_text (BaulIconCanvasItem *item,
 
     max_text_width = floor (baul_icon_canvas_item_get_max_text_width (item));
 
-    base_state = gtk_widget_get_state_flags (GTK_WIDGET (container));
+    base_state = ctk_widget_get_state_flags (GTK_WIDGET (container));
     base_state &= ~(GTK_STATE_FLAG_SELECTED | GTK_STATE_FLAG_PRELIGHT);
     state = base_state;
 
-    gtk_widget_style_get (GTK_WIDGET (container),
+    ctk_widget_style_get (GTK_WIDGET (container),
                           "activate_prelight_icon_label", &prelight_label,
                           NULL);
 
@@ -1326,17 +1326,17 @@ draw_label_text (BaulIconCanvasItem *item,
     }
 
     if (draw_frame) {
-            gtk_style_context_save (context);
-            gtk_style_context_set_state (context, state);
+            ctk_style_context_save (context);
+            ctk_style_context_set_state (context, state);
 
-            gtk_render_frame (context, cr,
+            ctk_render_frame (context, cr,
                               frame_x, frame_y,
                               frame_w, frame_h);
-            gtk_render_background (context, cr,
+            ctk_render_background (context, cr,
                                    frame_x, frame_y,
                                    frame_w, frame_h);
 
-            gtk_style_context_restore (context);
+            ctk_style_context_restore (context);
     }
 
     if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
@@ -1364,14 +1364,14 @@ draw_label_text (BaulIconCanvasItem *item,
         editable_layout = get_label_layout (&item->details->editable_text_layout, item, item->details->editable_text);
         prepare_pango_layout_for_draw (item, editable_layout);
 
-        gtk_style_context_save (context);
-        gtk_style_context_set_state (context, state);
+        ctk_style_context_save (context);
+        ctk_style_context_set_state (context, state);
 
-        gtk_render_layout (context, cr,
+        ctk_render_layout (context, cr,
                            x, text_rect.y0 + TEXT_BACK_PADDING_Y,
                            editable_layout);
 
-        gtk_style_context_restore (context);
+        ctk_style_context_restore (context);
     }
 
     if (have_additional &&
@@ -1386,15 +1386,15 @@ draw_label_text (BaulIconCanvasItem *item,
         additional_layout = get_label_layout (&item->details->additional_text_layout, item, item->details->additional_text);
         prepare_pango_layout_for_draw (item, additional_layout);
 
-        gtk_style_context_save (context);
-        gtk_style_context_set_state (context, state);
-        gtk_style_context_add_class (context, "dim-label");
+        ctk_style_context_save (context);
+        ctk_style_context_set_state (context, state);
+        ctk_style_context_add_class (context, "dim-label");
 
-        gtk_render_layout (context, cr,
+        ctk_render_layout (context, cr,
                            x, text_rect.y0 + details->editable_text_height + LABEL_LINE_SPACING + TEXT_BACK_PADDING_Y,
                            additional_layout);
 
-        gtk_style_context_restore (context);
+        ctk_style_context_restore (context);
     }
 
     if (!create_mask && item->details->is_highlighted_as_keyboard_focus)
@@ -1403,17 +1403,17 @@ draw_label_text (BaulIconCanvasItem *item,
                 state = GTK_STATE_FLAG_SELECTED;
         }
 
-        gtk_style_context_save (context);
-        gtk_style_context_set_state (context, state);
+        ctk_style_context_save (context);
+        ctk_style_context_set_state (context, state);
 
-        gtk_render_focus (context,
+        ctk_render_focus (context,
                           cr,
                          text_rect.x0,
                          text_rect.y0,
                          text_rect.x1 - text_rect.x0,
                          text_rect.y1 - text_rect.y0);
 
-        gtk_style_context_restore (context);
+        ctk_style_context_restore (context);
     }
 
     if (editable_layout != NULL)
@@ -1472,7 +1472,7 @@ get_knob_pixbuf (void)
 {
     GdkPixbuf *knob_pixbuf;
 
-    knob_pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+    knob_pixbuf = ctk_icon_theme_load_icon (ctk_icon_theme_get_default (),
                                             "stock-baul-knob",
                                             8, 0, NULL);
     if (!knob_pixbuf)
@@ -1505,7 +1505,7 @@ draw_stretch_handles (BaulIconCanvasItem *item,
     }
 
     widget = GTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas);
-    style = gtk_widget_get_style_context (widget);
+    style = ctk_widget_get_style_context (widget);
 
     cairo_save (cr);
 
@@ -1514,7 +1514,7 @@ draw_stretch_handles (BaulIconCanvasItem *item,
     knob_height = gdk_pixbuf_get_height (knob_pixbuf);
 
     /* first draw the box */
-    gtk_style_context_get_color (style, GTK_STATE_FLAG_SELECTED, &color);
+    ctk_style_context_get_color (style, GTK_STATE_FLAG_SELECTED, &color);
     gdk_cairo_set_source_rgba (cr, &color);
 
     cairo_set_dash (cr, &dash, 1, 0);
@@ -1782,14 +1782,14 @@ real_map_surface (BaulIconCanvasItem *icon_item)
     {
         GtkStyleContext *style;
 
-        style = gtk_widget_get_style_context (GTK_WIDGET (canvas));
+        style = ctk_widget_get_style_context (GTK_WIDGET (canvas));
 
-        if (gtk_widget_has_focus (GTK_WIDGET (canvas))) {
-                gtk_style_context_get (style, GTK_STATE_FLAG_SELECTED,
+        if (ctk_widget_has_focus (GTK_WIDGET (canvas))) {
+                ctk_style_context_get (style, GTK_STATE_FLAG_SELECTED,
                                        GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                        &c, NULL);
         } else {
-                gtk_style_context_get (style, GTK_STATE_FLAG_ACTIVE,
+                ctk_style_context_get (style, GTK_STATE_FLAG_ACTIVE,
                                        GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                        &c, NULL);
         }
@@ -1804,8 +1804,8 @@ real_map_surface (BaulIconCanvasItem *icon_item)
     }
 
     surface = gdk_cairo_surface_create_from_pixbuf (temp_pixbuf,
-                                                    gtk_widget_get_scale_factor (GTK_WIDGET (canvas)),
-                                                    gtk_widget_get_window (GTK_WIDGET (canvas)));
+                                                    ctk_widget_get_scale_factor (GTK_WIDGET (canvas)),
+                                                    ctk_widget_get_window (GTK_WIDGET (canvas)));
     g_object_unref (temp_pixbuf);
 
     return surface;
@@ -1820,7 +1820,7 @@ map_surface (BaulIconCanvasItem *icon_item)
             && icon_item->details->rendered_is_highlighted_for_selection == icon_item->details->is_highlighted_for_selection
             && icon_item->details->rendered_is_highlighted_for_drop == icon_item->details->is_highlighted_for_drop
             && icon_item->details->rendered_is_highlighted_for_clipboard == icon_item->details->is_highlighted_for_clipboard
-            && (icon_item->details->is_highlighted_for_selection && icon_item->details->rendered_is_focused == gtk_widget_has_focus (GTK_WIDGET (EEL_CANVAS_ITEM (icon_item)->canvas)))))
+            && (icon_item->details->is_highlighted_for_selection && icon_item->details->rendered_is_focused == ctk_widget_has_focus (GTK_WIDGET (EEL_CANVAS_ITEM (icon_item)->canvas)))))
     {
         if (icon_item->details->rendered_surface != NULL)
         {
@@ -1832,7 +1832,7 @@ map_surface (BaulIconCanvasItem *icon_item)
         icon_item->details->rendered_is_highlighted_for_selection = icon_item->details->is_highlighted_for_selection;
         icon_item->details->rendered_is_highlighted_for_drop = icon_item->details->is_highlighted_for_drop;
         icon_item->details->rendered_is_highlighted_for_clipboard = icon_item->details->is_highlighted_for_clipboard;
-        icon_item->details->rendered_is_focused = gtk_widget_has_focus (GTK_WIDGET (EEL_CANVAS_ITEM (icon_item)->canvas));
+        icon_item->details->rendered_is_focused = ctk_widget_has_focus (GTK_WIDGET (EEL_CANVAS_ITEM (icon_item)->canvas));
     }
 
     cairo_surface_reference (icon_item->details->rendered_surface);
@@ -1867,7 +1867,7 @@ draw_embedded_text (BaulIconCanvasItem *item,
         PangoContext *context;
         PangoFontDescription *desc;
 
-        context = gtk_widget_get_pango_context (widget);
+        context = ctk_widget_get_pango_context (widget);
         layout = pango_layout_new (context);
         pango_layout_set_text (layout, item->details->embedded_text, -1);
 
@@ -1881,9 +1881,9 @@ draw_embedded_text (BaulIconCanvasItem *item,
         }
     }
 
-    style_context = gtk_widget_get_style_context (widget);
-    gtk_style_context_save (style_context);
-    gtk_style_context_add_class (style_context, "icon-embedded-text");
+    style_context = ctk_widget_get_style_context (widget);
+    ctk_style_context_save (style_context);
+    ctk_style_context_add_class (style_context, "icon-embedded-text");
 
     cairo_save (cr);
 
@@ -1894,12 +1894,12 @@ draw_embedded_text (BaulIconCanvasItem *item,
                      item->details->embedded_text_rect.height);
     cairo_clip (cr);
 
-    gtk_render_layout (style_context, cr,
+    ctk_render_layout (style_context, cr,
                        x + item->details->embedded_text_rect.x,
                        y + item->details->embedded_text_rect.y,
                        layout);
 
-    gtk_style_context_restore (style_context);
+    ctk_style_context_restore (style_context);
     cairo_restore (cr);
 }
 
@@ -1930,15 +1930,15 @@ baul_icon_canvas_item_draw (EelCanvasItem *item,
         return;
     }
 
-    context = gtk_widget_get_style_context (GTK_WIDGET (container));
-    gtk_style_context_save (context);
-    gtk_style_context_add_class (context, "baul-canvas-item");
+    context = ctk_widget_get_style_context (GTK_WIDGET (container));
+    ctk_style_context_save (context);
+    ctk_style_context_add_class (context, "baul-canvas-item");
 
     icon_rect = icon_item->details->canvas_rect;
 
     temp_surface = map_surface (icon_item);
 
-    gtk_render_icon_surface (context, cr,
+    ctk_render_icon_surface (context, cr,
                              temp_surface,
                              icon_rect.x0, icon_rect.y0);
     cairo_surface_destroy (temp_surface);
@@ -1960,7 +1960,7 @@ baul_icon_canvas_item_draw (EelCanvasItem *item,
     /* Draw the label text. */
     draw_label_text (icon_item, cr, FALSE, icon_rect);
 
-    gtk_style_context_restore (context);
+    ctk_style_context_restore (context);
 }
 
 #define ZERO_WIDTH_SPACE "\xE2\x80\x8B"
@@ -1988,7 +1988,7 @@ create_label_layout (BaulIconCanvasItem *item,
     canvas_item = EEL_CANVAS_ITEM (item);
 
     container = BAUL_ICON_CONTAINER (canvas_item->canvas);
-    context = gtk_widget_get_pango_context (GTK_WIDGET (canvas_item->canvas));
+    context = ctk_widget_get_pango_context (GTK_WIDGET (canvas_item->canvas));
     layout = pango_layout_new (context);
     #if PANGO_CHECK_VERSION (1, 44, 0)
     attr_list = pango_attr_list_new ();
@@ -3091,7 +3091,7 @@ baul_icon_canvas_item_accessible_get_parent (AtkObject *accessible)
         return NULL;
     }
 
-    return gtk_widget_get_accessible (GTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas));
+    return ctk_widget_get_accessible (GTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas));
 }
 
 static int

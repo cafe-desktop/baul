@@ -532,7 +532,7 @@ msgstr "_Lim inn"
 msgid "Select All"
 msgstr "Velg alt"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Vis flere _detaljer"
 

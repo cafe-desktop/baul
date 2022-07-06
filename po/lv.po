@@ -524,7 +524,7 @@ msgstr "_Izlikt"
 msgid "Select All"
 msgstr "Izvēlēties visu"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Parādīt vairāk _detaļu"
 

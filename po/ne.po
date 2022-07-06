@@ -522,7 +522,7 @@ msgstr "टाँस्नुहोस्"
 msgid "Select All"
 msgstr "सबै चयन गर्नुहोस्"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "विस्तृत विवरण देखाउनुहोस्"
 

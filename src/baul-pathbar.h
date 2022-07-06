@@ -21,7 +21,7 @@
 #ifndef BAUL_PATHBAR_H
 #define BAUL_PATHBAR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 typedef struct _BaulPathBar      BaulPathBar;

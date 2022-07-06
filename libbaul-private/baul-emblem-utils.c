@@ -35,7 +35,7 @@
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-stock-dialogs.h>
@@ -56,8 +56,8 @@ baul_emblem_list_available (void)
     GtkIconTheme *icon_theme;
     GList *list;
 
-    icon_theme = gtk_icon_theme_get_default ();
-    list = gtk_icon_theme_list_icons (icon_theme, "Emblems");
+    icon_theme = ctk_icon_theme_get_default ();
+    list = ctk_icon_theme_list_icons (icon_theme, "Emblems");
     return list;
 }
 
@@ -66,8 +66,8 @@ baul_emblem_refresh_list (void)
 {
     GtkIconTheme *icon_theme;
 
-    icon_theme = gtk_icon_theme_get_default ();
-    gtk_icon_theme_rescan_if_needed (icon_theme);
+    icon_theme = ctk_icon_theme_get_default ();
+    ctk_icon_theme_rescan_if_needed (icon_theme);
 }
 
 char *

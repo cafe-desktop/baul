@@ -521,7 +521,7 @@ msgstr "_Pê veke"
 msgid "Select All"
 msgstr "Hemûyan Hilbijêre"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Hîn zêde _kîtekîtan nîşan bide"
 

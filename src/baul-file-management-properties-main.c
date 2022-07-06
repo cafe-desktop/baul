@@ -24,7 +24,7 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <libbaul-private/baul-global-preferences.h>
@@ -38,7 +38,7 @@ baul_file_management_properties_main_close_callback (GtkDialog *dialog,
 {
     if (response_id == GTK_RESPONSE_CLOSE)
     {
-        gtk_main_quit ();
+        ctk_main_quit ();
     }
 }
 
@@ -49,7 +49,7 @@ main (int argc, char *argv[])
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
 
-    gtk_init (&argc, &argv);
+    ctk_init (&argc, &argv);
 
     baul_global_preferences_init ();
 
@@ -57,7 +57,7 @@ main (int argc, char *argv[])
 
     baul_file_management_properties_dialog_show (G_CALLBACK (baul_file_management_properties_main_close_callback), NULL);
 
-    gtk_main ();
+    ctk_main ();
 
     return 0;
 }

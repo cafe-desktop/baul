@@ -38,7 +38,7 @@
 
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-background.h>
@@ -46,8 +46,8 @@
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-cafe-extensions.h>
 #include <eel/eel-graphic-effects.h>
-#include <eel/eel-gtk-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-extensions.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-string.h>
 #include <eel/eel-vfs-extensions.h>
@@ -117,7 +117,7 @@ create_selection_shadow (BaulIconContainer *container,
     }
 
     canvas = EEL_CANVAS (container);
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
 
     /* Creating a big set of rectangles in the canvas can be expensive, so
            we try to be smart and only create the maximum number of rectangles
@@ -202,8 +202,8 @@ canvas_rect_world_to_widget (EelCanvas *canvas,
     EelDRect window_rect;
     GtkAdjustment *hadj, *vadj;
 
-    hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
-    vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
+    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
+    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
 
     eel_canvas_world_to_window (canvas,
                                 world_rect->x0, world_rect->y0,
@@ -211,10 +211,10 @@ canvas_rect_world_to_widget (EelCanvas *canvas,
     eel_canvas_world_to_window (canvas,
                                 world_rect->x1, world_rect->y1,
                                 &window_rect.x1, &window_rect.y1);
-    widget_rect->x0 = (int) window_rect.x0 - gtk_adjustment_get_value (hadj);
-    widget_rect->y0 = (int) window_rect.y0 - gtk_adjustment_get_value (vadj);
-    widget_rect->x1 = (int) window_rect.x1 - gtk_adjustment_get_value (hadj);
-    widget_rect->y1 = (int) window_rect.y1 - gtk_adjustment_get_value (vadj);
+    widget_rect->x0 = (int) window_rect.x0 - ctk_adjustment_get_value (hadj);
+    widget_rect->y0 = (int) window_rect.y0 - ctk_adjustment_get_value (vadj);
+    widget_rect->x1 = (int) window_rect.x1 - ctk_adjustment_get_value (hadj);
+    widget_rect->y1 = (int) window_rect.y1 - ctk_adjustment_get_value (vadj);
 }
 
 static void
@@ -223,8 +223,8 @@ canvas_widget_to_world (EelCanvas *canvas,
                         double *world_x, double *world_y)
 {
     eel_canvas_window_to_world (canvas,
-    			    widget_x + gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas))),
-    			    widget_y + gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas))),
+    			    widget_x + ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas))),
+    			    widget_y + ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas))),
                                 world_x, world_y);
 }
 
@@ -476,15 +476,15 @@ get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context,
 
     if (drop_types_list == NULL)
     {
-        drop_types_list = gtk_target_list_new (drop_types,
+        drop_types_list = ctk_target_list_new (drop_types,
                                                G_N_ELEMENTS (drop_types) - 1);
-        gtk_target_list_add_text_targets (drop_types_list, BAUL_ICON_DND_TEXT);
+        ctk_target_list_add_text_targets (drop_types_list, BAUL_ICON_DND_TEXT);
     }
     if (drop_types_list_root == NULL)
     {
-        drop_types_list_root = gtk_target_list_new (drop_types,
+        drop_types_list_root = ctk_target_list_new (drop_types,
                                G_N_ELEMENTS (drop_types));
-        gtk_target_list_add_text_targets (drop_types_list_root, BAUL_ICON_DND_TEXT);
+        ctk_target_list_add_text_targets (drop_types_list_root, BAUL_ICON_DND_TEXT);
     }
 
     if (baul_icon_container_get_is_desktop (BAUL_ICON_CONTAINER (widget)))
@@ -496,7 +496,7 @@ get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context,
         list = drop_types_list;
     }
 
-    target = gtk_drag_dest_find_target (widget, context, list);
+    target = ctk_drag_dest_find_target (widget, context, list);
     if (target != GDK_NONE)
     {
         guint info;
@@ -505,7 +505,7 @@ get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context,
 
         drag_info = &(BAUL_ICON_CONTAINER (widget)->details->dnd_info->drag_info);
 
-        found = gtk_target_list_find (list, target, &info);
+        found = ctk_target_list_find (list, target, &info);
         g_assert (found);
 
         /* Don't get_data for destructive ops */
@@ -524,7 +524,7 @@ get_data_on_first_target_we_support (GtkWidget *widget, GdkDragContext *context,
             {
                 set_direct_save_uri (widget, context, drag_info, x, y);
             }
-            gtk_drag_get_data (GTK_WIDGET (widget), context,
+            ctk_drag_get_data (GTK_WIDGET (widget), context,
                                target, time);
         }
     }
@@ -706,7 +706,7 @@ receive_dropped_tile_image (BaulIconContainer *container, GdkDragAction action, 
         g_free (uri);
 
         eel_background_set_dropped_image (eel_get_widget_background (GTK_WIDGET (container)),
-                                          action, gtk_selection_data_get_data (data));
+                                          action, ctk_selection_data_get_data (data));
     }
 }
 
@@ -893,7 +893,7 @@ auto_scroll_timeout_callback (gpointer data)
      * area.
      * Calculate the size of the area we need to draw
      */
-    gtk_widget_get_allocation (widget, &allocation);
+    ctk_widget_get_allocation (widget, &allocation);
     exposed_area.x = allocation.x;
     exposed_area.y = allocation.y;
     exposed_area.width = allocation.width;
@@ -921,7 +921,7 @@ auto_scroll_timeout_callback (gpointer data)
     exposed_area.x -= allocation.x;
     exposed_area.y -= allocation.y;
 
-    gtk_widget_queue_draw_area (widget,
+    ctk_widget_queue_draw_area (widget,
                                 exposed_area.x,
                                 exposed_area.y,
                                 exposed_area.width,
@@ -981,7 +981,7 @@ handle_local_move (BaulIconContainer *container,
 
             file = baul_file_get_by_uri (item->uri);
 
-            screen = gtk_widget_get_screen (GTK_WIDGET (container));
+            screen = ctk_widget_get_screen (GTK_WIDGET (container));
             g_snprintf (screen_string, sizeof (screen_string), "%d",
                         gdk_x11_screen_get_screen_number (screen));
             baul_file_set_metadata (file,
@@ -1075,7 +1075,7 @@ handle_nonlocal_move (BaulIconContainer *container,
 
     if (is_rtl)
     {
-        gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+        ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
         x = CANVAS_WIDTH (container, allocation) - x;
     }
 
@@ -1276,8 +1276,8 @@ baul_icon_container_receive_dropped_icons (BaulIconContainer *container,
     if (real_action > 0)
     {
         eel_canvas_window_to_world (EEL_CANVAS (container),
-    				    x + gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container))),
-    				    y + gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container))),
+    				    x + ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container))),
+    				    y + ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container))),
                                     &world_x, &world_y);
 
         drop_target = baul_icon_container_find_drop_target (container,
@@ -1469,7 +1469,7 @@ baul_icon_container_free_drag_data (BaulIconContainer *container)
 
     if (dnd_info->drag_info.selection_data != NULL)
     {
-        gtk_selection_data_free (dnd_info->drag_info.selection_data);
+        ctk_selection_data_free (dnd_info->drag_info.selection_data);
         dnd_info->drag_info.selection_data = NULL;
     }
 
@@ -1514,9 +1514,9 @@ drag_begin_callback (GtkWidget      *widget,
     container = BAUL_ICON_CONTAINER (widget);
 
     start_x = container->details->dnd_info->drag_info.start_x +
-    	gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
+    	ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
     start_y = container->details->dnd_info->drag_info.start_y +
-    	gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
+    	ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
 
     /* create a pixmap and mask to drag with */
     surface = baul_icon_canvas_item_get_drag_surface (container->details->drag_icon->item);
@@ -1530,7 +1530,7 @@ drag_begin_callback (GtkWidget      *widget,
     y_offset = start_y - winy;
 
     cairo_surface_set_device_offset (surface, -x_offset, -y_offset);
-    gtk_drag_set_icon_surface (context, surface);
+    ctk_drag_set_icon_surface (context, surface);
     cairo_surface_destroy (surface);
 }
 
@@ -1554,12 +1554,12 @@ baul_icon_dnd_begin_drag (BaulIconContainer *container,
            the way the canvas handles events.
     */
     dnd_info->drag_info.start_x = start_x -
-    	gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
+    	ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
     dnd_info->drag_info.start_y = start_y -
-    	gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
+    	ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
 
     /* start the drag */
-    gtk_drag_begin_with_coordinates (GTK_WIDGET (container),
+    ctk_drag_begin_with_coordinates (GTK_WIDGET (container),
                                     dnd_info->drag_info.target_list,
                                     actions,
                                     button,
@@ -1577,21 +1577,21 @@ drag_highlight_draw (GtkWidget *widget,
     GdkWindow *window;
     GtkStyleContext *style;
 
-    window = gtk_widget_get_window (widget);
+    window = ctk_widget_get_window (widget);
     width = gdk_window_get_width (window);
     height = gdk_window_get_height (window);
 
-    style = gtk_widget_get_style_context (widget);
+    style = ctk_widget_get_style_context (widget);
 
-    gtk_style_context_save (style);
-    gtk_style_context_add_class (style, GTK_STYLE_CLASS_DND);
-    gtk_style_context_set_state (style, GTK_STATE_FLAG_FOCUSED);
+    ctk_style_context_save (style);
+    ctk_style_context_add_class (style, GTK_STYLE_CLASS_DND);
+    ctk_style_context_set_state (style, GTK_STATE_FLAG_FOCUSED);
 
-    gtk_render_frame (style,
+    ctk_render_frame (style,
                       cr,
                       0, 0, width, height);
 
-    gtk_style_context_restore (style);
+    ctk_style_context_restore (style);
 
     return FALSE;
 }
@@ -1611,23 +1611,23 @@ dnd_highlight_queue_redraw (GtkWidget *widget)
         return;
     }
 
-    gtk_widget_get_allocation (widget, &allocation);
+    ctk_widget_get_allocation (widget, &allocation);
     width = allocation.width;
     height = allocation.height;
 
     /* we don't know how wide the shadow is exactly,
      * so we expose a 10-pixel wide border
      */
-    gtk_widget_queue_draw_area (widget,
+    ctk_widget_queue_draw_area (widget,
                                 0, 0,
                                 width, 10);
-    gtk_widget_queue_draw_area (widget,
+    ctk_widget_queue_draw_area (widget,
                                 0, 0,
                                 10, height);
-    gtk_widget_queue_draw_area (widget,
+    ctk_widget_queue_draw_area (widget,
                                 0, height - 10,
                                 width, 10);
-    gtk_widget_queue_draw_area (widget,
+    ctk_widget_queue_draw_area (widget,
                                 width - 10, 0,
                                 10, height);
 }
@@ -1640,7 +1640,7 @@ start_dnd_highlight (GtkWidget *widget)
 
     dnd_info = BAUL_ICON_CONTAINER (widget)->details->dnd_info;
 
-    toplevel = gtk_widget_get_toplevel (widget);
+    toplevel = ctk_widget_get_toplevel (widget);
     if (toplevel != NULL &&
             g_object_get_data (G_OBJECT (toplevel), "is_desktop_window"))
     {
@@ -1783,17 +1783,17 @@ drag_data_received_callback (GtkWidget *widget,
         /* Save the data so we can do the actual work on drop. */
         if (drag_info->selection_data != NULL)
         {
-            gtk_selection_data_free (drag_info->selection_data);
+            ctk_selection_data_free (drag_info->selection_data);
         }
-        drag_info->selection_data = gtk_selection_data_copy (data);
+        drag_info->selection_data = ctk_selection_data_copy (data);
         break;
 
         /* Netscape keeps sending us the data, even though we accept the first drag */
     case BAUL_ICON_DND_NETSCAPE_URL:
         if (drag_info->selection_data != NULL)
         {
-            gtk_selection_data_free (drag_info->selection_data);
-            drag_info->selection_data = gtk_selection_data_copy (data);
+            ctk_selection_data_free (drag_info->selection_data);
+            drag_info->selection_data = ctk_selection_data_copy (data);
         }
         break;
     case BAUL_ICON_DND_ROOTWINDOW_DROP:
@@ -1835,22 +1835,22 @@ drag_data_received_callback (GtkWidget *widget,
         case BAUL_ICON_DND_KEYWORD:
             receive_dropped_keyword
             (BAUL_ICON_CONTAINER (widget),
-             (char *) gtk_selection_data_get_data (data), x, y);
+             (char *) ctk_selection_data_get_data (data), x, y);
             break;
         case BAUL_ICON_DND_NETSCAPE_URL:
             receive_dropped_netscape_url
             (BAUL_ICON_CONTAINER (widget),
-             (char *) gtk_selection_data_get_data (data), context, x, y);
+             (char *) ctk_selection_data_get_data (data), context, x, y);
             success = TRUE;
             break;
         case BAUL_ICON_DND_URI_LIST:
             receive_dropped_uri_list
             (BAUL_ICON_CONTAINER (widget),
-             (char *) gtk_selection_data_get_data (data), context, x, y);
+             (char *) ctk_selection_data_get_data (data), context, x, y);
             success = TRUE;
             break;
         case BAUL_ICON_DND_TEXT:
-            tmp = gtk_selection_data_get_text (data);
+            tmp = ctk_selection_data_get_text (data);
             receive_dropped_text
             (BAUL_ICON_CONTAINER (widget),
              (char *) tmp, context, x, y);
@@ -1858,8 +1858,8 @@ drag_data_received_callback (GtkWidget *widget,
             g_free (tmp);
             break;
         case BAUL_ICON_DND_RAW:
-            length = gtk_selection_data_get_length (data);
-            tmp_raw = gtk_selection_data_get_data (data);
+            length = ctk_selection_data_get_length (data);
+            tmp_raw = ctk_selection_data_get_data (data);
             receive_dropped_raw
             (BAUL_ICON_CONTAINER (widget),
              tmp_raw, length, drag_info->direct_save_uri,
@@ -1872,7 +1872,7 @@ drag_data_received_callback (GtkWidget *widget,
             {
                 eel_background_reset (background);
             }
-            gtk_drag_finish (context, FALSE, FALSE, time);
+            ctk_drag_finish (context, FALSE, FALSE, time);
             break;
         case BAUL_ICON_DND_ROOTWINDOW_DROP:
             /* Do nothing, everything is done by the sender */
@@ -1883,15 +1883,15 @@ drag_data_received_callback (GtkWidget *widget,
             gint selection_length;
             gint selection_format;
 
-            selection_data = gtk_selection_data_get_data (drag_info->selection_data);
-            selection_length = gtk_selection_data_get_length (drag_info->selection_data);
-            selection_format = gtk_selection_data_get_format (drag_info->selection_data);
+            selection_data = ctk_selection_data_get_data (drag_info->selection_data);
+            selection_length = ctk_selection_data_get_length (drag_info->selection_data);
+            selection_format = ctk_selection_data_get_format (drag_info->selection_data);
 
             if (selection_format == 8 &&
                     selection_length == 1 &&
                     selection_data[0] == 'F')
             {
-                gtk_drag_get_data (widget, context,
+                ctk_drag_get_data (widget, context,
                                    gdk_atom_intern (BAUL_ICON_DND_RAW_TYPE,
                                                     FALSE),
                                    time);
@@ -1914,7 +1914,7 @@ drag_data_received_callback (GtkWidget *widget,
                     location,
                     p,
                     gdk_x11_screen_get_screen_number (
-                        gtk_widget_get_screen (widget)));
+                        ctk_widget_get_screen (widget)));
                 g_object_unref (location);
                 baul_file_changes_consume_changes (TRUE);
                 success = TRUE;
@@ -1922,7 +1922,7 @@ drag_data_received_callback (GtkWidget *widget,
             break;
         } /* BAUL_ICON_DND_XDNDDIRECTSAVE */
         }
-        gtk_drag_finish (context, success, FALSE, time);
+        ctk_drag_finish (context, success, FALSE, time);
 
         baul_icon_container_free_drag_data (BAUL_ICON_CONTAINER (widget));
 
@@ -1958,13 +1958,13 @@ baul_icon_dnd_init (BaulIconContainer *container)
         /* Don't set up rootwindow drop */
         n_elements -= 1;
     }
-    gtk_drag_dest_set (GTK_WIDGET (container),
+    ctk_drag_dest_set (GTK_WIDGET (container),
                        0,
                        drop_types, n_elements,
                        GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
-    targets = gtk_drag_dest_get_target_list (GTK_WIDGET (container));
-    gtk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);
+    targets = ctk_drag_dest_get_target_list (GTK_WIDGET (container));
+    ctk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);
 
 
     /* Messages for outgoing drag. */

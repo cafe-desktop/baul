@@ -3,7 +3,7 @@
 #ifndef __BAUL_RECENT_H__
 #define __BAUL_RECENT_H__
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 #include "baul-file.h"

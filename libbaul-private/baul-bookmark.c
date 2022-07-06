@@ -23,12 +23,12 @@
 */
 
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 #include <eel/eel-gdk-pixbuf-extensions.h>
-#include <eel/eel-gtk-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-extensions.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-vfs-extensions.h>
 
 #include "baul-bookmark.h"
@@ -609,29 +609,29 @@ bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
     GtkLabel *label;
     gchar *concat;
 
-    GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    GtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
     if (icon_surface)
-        icon = gtk_image_new_from_surface (icon_surface);
+        icon = ctk_image_new_from_surface (icon_surface);
     else
-        icon = gtk_image_new ();
+        icon = ctk_image_new ();
 
     concat = g_strconcat (label_name, "     ", NULL);
-    GtkWidget *label_menu = gtk_label_new (concat);
+    GtkWidget *label_menu = ctk_label_new (concat);
     g_free (concat);
 
     label = GTK_LABEL (label_menu);
-    gtk_label_set_use_underline (label, FALSE);
-    gtk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
-    gtk_label_set_max_width_chars (label, (ELLIPSISED_MENU_ITEM_MIN_CHARS + 2));
+    ctk_label_set_use_underline (label, FALSE);
+    ctk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
+    ctk_label_set_max_width_chars (label, (ELLIPSISED_MENU_ITEM_MIN_CHARS + 2));
 
-    GtkWidget *menuitem = gtk_menu_item_new ();
+    GtkWidget *menuitem = ctk_menu_item_new ();
 
-    gtk_container_add (GTK_CONTAINER (box), icon);
-    gtk_container_add (GTK_CONTAINER (box), label_menu);
+    ctk_container_add (GTK_CONTAINER (box), icon);
+    ctk_container_add (GTK_CONTAINER (box), label_menu);
 
-    gtk_container_add (GTK_CONTAINER (menuitem), box);
-    gtk_widget_show_all (menuitem);
+    ctk_container_add (GTK_CONTAINER (menuitem), box);
+    ctk_widget_show_all (menuitem);
 
     return menuitem;
 }

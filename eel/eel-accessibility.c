@@ -23,7 +23,7 @@
 	Michael Meeks   <michael@ximian.com>
 */
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <atk/atkrelationset.h>
 
 #include "eel-accessibility.h"
@@ -33,8 +33,8 @@ eel_accessibility_set_up_label_widget_relation (GtkWidget *label, GtkWidget *wid
 {
     AtkObject *atk_widget, *atk_label;
 
-    atk_label = gtk_widget_get_accessible (label);
-    atk_widget = gtk_widget_get_accessible (widget);
+    atk_label = ctk_widget_get_accessible (label);
+    atk_widget = ctk_widget_get_accessible (widget);
 
     /* Create the label -> widget relation */
     atk_object_add_relationship (atk_label, ATK_RELATION_LABEL_FOR, atk_widget);
@@ -70,7 +70,7 @@ AtkObject *
 eel_accessibility_for_object (gpointer object)
 {
     if (GTK_IS_WIDGET (object))
-        return gtk_widget_get_accessible (object);
+        return ctk_widget_get_accessible (object);
 
     return atk_gobject_accessible_for_object (object);
 }
@@ -98,7 +98,7 @@ get_simple_text (gpointer object)
 
     if (GTK_IS_ACCESSIBLE (object))
     {
-        gobject = G_OBJECT (gtk_accessible_get_widget (GTK_ACCESSIBLE (object)));
+        gobject = G_OBJECT (ctk_accessible_get_widget (GTK_ACCESSIBLE (object)));
     }
     else
     {
@@ -206,7 +206,7 @@ eel_accessibility_text_get_character_count (AtkText *text)
     GailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, -1);
 
-    return gtk_text_buffer_get_char_count (util->buffer);
+    return ctk_text_buffer_get_char_count (util->buffer);
 }
 
 GType

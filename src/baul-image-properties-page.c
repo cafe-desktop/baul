@@ -26,7 +26,7 @@
 #include <config.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #ifdef HAVE_EXIF
@@ -141,19 +141,19 @@ append_label (GtkWidget *vbox,
 {
     GtkWidget *label;
 
-    label = gtk_label_new (NULL);
-    gtk_label_set_markup (GTK_LABEL (label), str);
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_label_set_yalign (GTK_LABEL (label), 0);
-    gtk_label_set_selectable (GTK_LABEL (label), TRUE);
+    label = ctk_label_new (NULL);
+    ctk_label_set_markup (GTK_LABEL (label), str);
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_label_set_yalign (GTK_LABEL (label), 0);
+    ctk_label_set_selectable (GTK_LABEL (label), TRUE);
 
     /* setting can_focus to FALSE will allow to make the label
      * selectable but without the cursor showing.
      */
-    gtk_widget_set_can_focus (label, FALSE);
+    ctk_widget_set_can_focus (label, FALSE);
 
-    gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
-    gtk_widget_show (label);
+    ctk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+    ctk_widget_show (label);
 
     return label;
 }
@@ -378,7 +378,7 @@ append_xmpdata_string (XmpPtr xmp, BaulImagePropertiesPage *page)
 static void
 load_finished (BaulImagePropertiesPage *page)
 {
-    gtk_widget_destroy (page->details->loading_label);
+    ctk_widget_destroy (page->details->loading_label);
 
     if (page->details->loader != NULL) {
         gdk_pixbuf_loader_close (page->details->loader, NULL);
@@ -643,20 +643,20 @@ baul_image_properties_page_init (BaulImagePropertiesPage *page)
 {
     page->details = baul_image_properties_page_get_instance_private (page);
 
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (page), GTK_ORIENTATION_VERTICAL);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (page), GTK_ORIENTATION_VERTICAL);
 
-    gtk_box_set_homogeneous (GTK_BOX (page), FALSE);
-    gtk_box_set_spacing (GTK_BOX (page), 2);
-    gtk_container_set_border_width (GTK_CONTAINER (page), 6);
+    ctk_box_set_homogeneous (GTK_BOX (page), FALSE);
+    ctk_box_set_spacing (GTK_BOX (page), 2);
+    ctk_container_set_border_width (GTK_CONTAINER (page), 6);
 
-    page->details->vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+    page->details->vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
     page->details->loading_label =
         append_label (page->details->vbox,_("loading..."));
-    gtk_box_pack_start (GTK_BOX (page),
+    ctk_box_pack_start (GTK_BOX (page),
                         page->details->vbox,
                         FALSE, TRUE, 2);
 
-    gtk_widget_show_all (GTK_WIDGET (page));
+    ctk_widget_show_all (GTK_WIDGET (page));
 }
 
 static GList *
@@ -705,7 +705,7 @@ get_property_pages (BaulPropertyPageProvider *provider,
 
     real_page = baul_property_page_new
                 ("BaulImagePropertiesPage::property_page",
-                 gtk_label_new (_("Image")),
+                 ctk_label_new (_("Image")),
                  GTK_WIDGET (page));
     pages = g_list_append (pages, real_page);
 

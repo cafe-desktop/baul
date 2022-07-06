@@ -26,7 +26,7 @@
 #ifndef FM_PROPERTIES_WINDOW_H
 #define FM_PROPERTIES_WINDOW_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-file.h>
 

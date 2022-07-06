@@ -30,14 +30,14 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #ifdef HAVE_X11_XF86KEYSYM_H
 #include <X11/XF86keysym.h>
 #endif
 
 #include <eel/eel-debug.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-string.h>
 
 #include <libbaul-private/baul-file-utilities.h>
@@ -143,14 +143,14 @@ baul_window_init (BaulWindow *window)
       "}";
 
     GError *error = NULL;
-    GtkCssProvider *provider = gtk_css_provider_new ();
-    gtk_css_provider_load_from_data (provider, css_custom, -1, &error);
+    GtkCssProvider *provider = ctk_css_provider_new ();
+    ctk_css_provider_load_from_data (provider, css_custom, -1, &error);
 
     if (error != NULL) {
             g_warning ("Can't parse BaulWindow's CSS custom description: %s\n", error->message);
             g_error_free (error);
     } else {
-            gtk_style_context_add_provider (gtk_widget_get_style_context (GTK_WIDGET (window)),
+            ctk_style_context_add_provider (ctk_widget_get_style_context (GTK_WIDGET (window)),
                                             GTK_STYLE_PROVIDER (provider),
                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
@@ -164,33 +164,33 @@ baul_window_init (BaulWindow *window)
     window->details->show_hidden_files_mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT;
 
     /* Set initial window title */
-    gtk_window_set_title (GTK_WINDOW (window), _("Baul"));
+    ctk_window_set_title (GTK_WINDOW (window), _("Baul"));
 
-    grid = gtk_grid_new ();
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
+    grid = ctk_grid_new ();
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
     window->details->grid = grid;
-    gtk_widget_show (grid);
-    gtk_container_add (GTK_CONTAINER (window), grid);
+    ctk_widget_show (grid);
+    ctk_container_add (GTK_CONTAINER (window), grid);
 
-    statusbar = gtk_statusbar_new ();
-    gtk_widget_set_name (statusbar, "statusbar-noborder");
+    statusbar = ctk_statusbar_new ();
+    ctk_widget_set_name (statusbar, "statusbar-noborder");
 
 /* set margin to zero to reduce size of statusbar */
-	gtk_widget_set_margin_top (GTK_WIDGET (statusbar), 0);
-	gtk_widget_set_margin_bottom (GTK_WIDGET (statusbar), 0);
+	ctk_widget_set_margin_top (GTK_WIDGET (statusbar), 0);
+	ctk_widget_set_margin_bottom (GTK_WIDGET (statusbar), 0);
 
     window->details->statusbar = statusbar;
-    window->details->help_message_cid = gtk_statusbar_get_context_id
+    window->details->help_message_cid = ctk_statusbar_get_context_id
                                         (GTK_STATUSBAR (statusbar), "help_message");
     /* Statusbar is packed in the subclasses */
 
     baul_window_initialize_menus (window);
 
-    menu = gtk_ui_manager_get_widget (window->details->ui_manager, "/MenuBar");
+    menu = ctk_ui_manager_get_widget (window->details->ui_manager, "/MenuBar");
     window->details->menubar = menu;
-    gtk_widget_set_hexpand (menu, TRUE);
-    gtk_widget_show (menu);
-    gtk_grid_attach (GTK_GRID (grid), menu, 0, 0, 1, 1);
+    ctk_widget_set_hexpand (menu, TRUE);
+    ctk_widget_show (menu);
+    ctk_grid_attach (GTK_GRID (grid), menu, 0, 0, 1, 1);
 
     /* Register to menu provider extension signal managing menu updates */
     g_signal_connect_object (baul_signaller_get_current (), "popup_menu_changed",
@@ -203,7 +203,7 @@ baul_window_ui_update (BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 
-    gtk_ui_manager_ensure_update (window->details->ui_manager);
+    ctk_ui_manager_ensure_update (window->details->ui_manager);
 }
 
 static void
@@ -213,11 +213,11 @@ baul_window_push_status (BaulWindow *window,
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
     /* clear any previous message, underflow is allowed */
-    gtk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar), 0);
+    ctk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar), 0);
 
     if (text != NULL && text[0] != '\0')
     {
-        gtk_statusbar_push (GTK_STATUSBAR (window->details->statusbar), 0, text);
+        ctk_statusbar_push (GTK_STATUSBAR (window->details->statusbar), 0, text);
     }
 }
 
@@ -330,7 +330,7 @@ baul_window_new_window (BaulWindow *window)
         /*Create a new window*/
         new_window = baul_application_create_navigation_window (
                      window->application,
-        gtk_window_get_screen (GTK_WINDOW (window)));
+        ctk_window_get_screen (GTK_WINDOW (window)));
 
         /*Create a slot in the new window.*/
         new_slot = new_window->details->active_pane->active_slot;
@@ -400,12 +400,12 @@ real_set_allow_up (BaulWindow *window,
     g_assert (BAUL_IS_WINDOW (window));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (window->details->main_action_group,
+    action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_UP);
-    gtk_action_set_sensitive (action, allow);
-    action = gtk_action_group_get_action (window->details->main_action_group,
+    ctk_action_set_sensitive (action, allow);
+    action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_UP_ACCEL);
-    gtk_action_set_sensitive (action, allow);
+    ctk_action_set_sensitive (action, allow);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -430,14 +430,14 @@ update_cursor (BaulWindow *window)
         GdkDisplay *display;
         GdkCursor * cursor;
 
-        display = gtk_widget_get_display (GTK_WIDGET (window));
+        display = ctk_widget_get_display (GTK_WIDGET (window));
         cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
-        gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (window)), cursor);
+        gdk_window_set_cursor (ctk_widget_get_window (GTK_WIDGET (window)), cursor);
         g_object_unref (cursor);
     }
     else
     {
-        gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (window)), NULL);
+        gdk_window_set_cursor (ctk_widget_get_window (GTK_WIDGET (window)), NULL);
     }
 }
 
@@ -451,9 +451,9 @@ baul_window_sync_allow_stop (BaulWindow *window,
     g_assert (BAUL_IS_WINDOW (window));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (window->details->main_action_group,
+    action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_STOP);
-    allow_stop = gtk_action_get_sensitive (action);
+    allow_stop = ctk_action_get_sensitive (action);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (slot != window->details->active_pane->active_slot ||
@@ -462,11 +462,11 @@ baul_window_sync_allow_stop (BaulWindow *window,
         if (slot == window->details->active_pane->active_slot)
         {
             G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-            gtk_action_set_sensitive (action, slot->allow_stop);
+            ctk_action_set_sensitive (action, slot->allow_stop);
             G_GNUC_END_IGNORE_DEPRECATIONS;
         }
 
-        if (gtk_widget_get_realized (GTK_WIDGET (window)))
+        if (ctk_widget_get_realized (GTK_WIDGET (window)))
         {
             update_cursor (window);
         }
@@ -484,9 +484,9 @@ baul_window_allow_reload (BaulWindow *window, gboolean allow)
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (window->details->main_action_group,
+    action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_RELOAD);
-    gtk_action_set_sensitive (action, allow);
+    ctk_action_set_sensitive (action, allow);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -590,7 +590,7 @@ baul_window_set_initial_window_geometry (BaulWindow *window)
     guint default_width = 0;
     guint default_height = 0;
 
-    screen = gtk_window_get_screen (GTK_WINDOW (window));
+    screen = ctk_window_get_screen (GTK_WINDOW (window));
 
     max_width_for_screen = get_max_forced_width (screen);
     max_height_for_screen = get_max_forced_height (screen);
@@ -598,7 +598,7 @@ baul_window_set_initial_window_geometry (BaulWindow *window)
     EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      get_default_size, (window, &default_width, &default_height));
 
-    gtk_window_set_default_size (GTK_WINDOW (window),
+    ctk_window_set_default_size (GTK_WINDOW (window),
                                  MIN (default_width,
                                       max_width_for_screen),
                                  MIN (default_height,
@@ -739,7 +739,7 @@ baul_window_show_window (BaulWindow    *window)
         }
     }
 
-    gtk_widget_show (GTK_WIDGET (window));
+    ctk_widget_show (GTK_WIDGET (window));
 
     slot = window->details->active_pane->active_slot;
 
@@ -820,7 +820,7 @@ baul_window_close (BaulWindow *window)
     EEL_CALL_METHOD (BAUL_WINDOW_CLASS, window,
                      close, (window));
 
-    gtk_widget_destroy (GTK_WIDGET (window));
+    ctk_widget_destroy (GTK_WIDGET (window));
 }
 
 BaulWindowSlot *
@@ -1058,18 +1058,18 @@ baul_window_key_press_event (GtkWidget *widget,
 
             action = NULL;
 
-            action_groups = gtk_ui_manager_get_action_groups (window->details->ui_manager);
+            action_groups = ctk_ui_manager_get_action_groups (window->details->ui_manager);
             G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
             while (action_groups != NULL && action == NULL)
             {
-                action = gtk_action_group_get_action (action_groups->data, extra_window_keybindings[i].action);
+                action = ctk_action_group_get_action (action_groups->data, extra_window_keybindings[i].action);
                 action_groups = action_groups->next;
             }
 
             g_assert (action != NULL);
-            if (gtk_action_is_sensitive (action))
+            if (ctk_action_is_sensitive (action))
             {
-                gtk_action_activate (action);
+                ctk_action_activate (action);
                 return TRUE;
             }
             G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -1106,7 +1106,7 @@ action_view_as_callback (GtkAction *action,
     window = data->window;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
         BaulWindowSlot *slot;
 
@@ -1133,7 +1133,7 @@ add_view_as_menu_item (BaulWindow *window,
 
     g_snprintf (action_name, sizeof (action_name), "view_as_%d", index);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_radio_action_new (action_name,
+    action = ctk_radio_action_new (action_name,
                                    _(info->view_menu_label_with_mnemonic),
                                    _(info->display_location_label),
                                    NULL,
@@ -1152,17 +1152,17 @@ add_view_as_menu_item (BaulWindow *window,
         accel_keyval = gdk_keyval_from_name (accel);
 		g_assert (accel_keyval != GDK_KEY_VoidSymbol);
 
-        gtk_accel_map_add_entry (accel_path, accel_keyval, GDK_CONTROL_MASK);
+        ctk_accel_map_add_entry (accel_path, accel_keyval, GDK_CONTROL_MASK);
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        gtk_action_set_accel_path (GTK_ACTION (action), accel_path);
+        ctk_action_set_accel_path (GTK_ACTION (action), accel_path);
         G_GNUC_END_IGNORE_DEPRECATIONS;
     }
 
     if (window->details->view_as_radio_action != NULL)
     {
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        gtk_radio_action_set_group (action,
-                                    gtk_radio_action_get_group (window->details->view_as_radio_action));
+        ctk_radio_action_set_group (action,
+                                    ctk_radio_action_get_group (window->details->view_as_radio_action));
         G_GNUC_END_IGNORE_DEPRECATIONS;
     }
     else if (index != 0)
@@ -1180,12 +1180,12 @@ add_view_as_menu_item (BaulWindow *window,
                            data, (GClosureNotify) free_activate_view_data, 0);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    gtk_action_group_add_action (window->details->view_as_action_group,
+    ctk_action_group_add_action (window->details->view_as_action_group,
                                  GTK_ACTION (action));
     g_object_unref (action);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    gtk_ui_manager_add_ui (window->details->ui_manager,
+    ctk_ui_manager_add_ui (window->details->ui_manager,
                            merge_id,
                            placeholder_path,
                            action_name,
@@ -1228,7 +1228,7 @@ update_extra_viewer_in_view_as_menus (BaulWindow *window,
 
     if (window->details->extra_viewer_merge_id != 0)
     {
-        gtk_ui_manager_remove_ui (window->details->ui_manager,
+        ctk_ui_manager_remove_ui (window->details->ui_manager,
                                   window->details->extra_viewer_merge_id);
         window->details->extra_viewer_merge_id = 0;
     }
@@ -1236,7 +1236,7 @@ update_extra_viewer_in_view_as_menus (BaulWindow *window,
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (window->details->extra_viewer_radio_action != NULL)
     {
-        gtk_action_group_remove_action (window->details->view_as_action_group,
+        ctk_action_group_remove_action (window->details->view_as_action_group,
                                         GTK_ACTION (window->details->extra_viewer_radio_action));
         window->details->extra_viewer_radio_action = NULL;
     }
@@ -1244,7 +1244,7 @@ update_extra_viewer_in_view_as_menus (BaulWindow *window,
 
     if (id != NULL)
     {
-        window->details->extra_viewer_merge_id = gtk_ui_manager_new_merge_id (window->details->ui_manager);
+        window->details->extra_viewer_merge_id = ctk_ui_manager_new_merge_id (window->details->ui_manager);
         window->details->extra_viewer_radio_action =
             add_view_as_menu_item (window,
                                    BAUL_MENU_PATH_EXTRA_VIEWER_PLACEHOLDER,
@@ -1319,7 +1319,7 @@ baul_window_synch_view_as_menus (BaulWindow *window)
 
     g_snprintf (action_name, sizeof (action_name), "view_as_%d", index);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (window->details->view_as_action_group,
+    action = ctk_action_group_get_action (window->details->view_as_action_group,
                                           action_name);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
@@ -1331,7 +1331,7 @@ baul_window_synch_view_as_menus (BaulWindow *window)
                                      action_view_as_callback,
                                      NULL);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_handlers_unblock_matched (action,
                                        G_SIGNAL_MATCH_FUNC,
@@ -1370,20 +1370,20 @@ load_view_as_menu (BaulWindow *window)
 
     if (window->details->short_list_merge_id != 0)
     {
-        gtk_ui_manager_remove_ui (window->details->ui_manager,
+        ctk_ui_manager_remove_ui (window->details->ui_manager,
                                   window->details->short_list_merge_id);
         window->details->short_list_merge_id = 0;
     }
     if (window->details->extra_viewer_merge_id != 0)
     {
-        gtk_ui_manager_remove_ui (window->details->ui_manager,
+        ctk_ui_manager_remove_ui (window->details->ui_manager,
                                   window->details->extra_viewer_merge_id);
         window->details->extra_viewer_merge_id = 0;
         window->details->extra_viewer_radio_action = NULL;
     }
     if (window->details->view_as_action_group != NULL)
     {
-        gtk_ui_manager_remove_action_group (window->details->ui_manager,
+        ctk_ui_manager_remove_action_group (window->details->ui_manager,
                                             window->details->view_as_action_group);
         window->details->view_as_action_group = NULL;
     }
@@ -1391,11 +1391,11 @@ load_view_as_menu (BaulWindow *window)
 
     refresh_stored_viewers (window);
 
-    merge_id = gtk_ui_manager_new_merge_id (window->details->ui_manager);
+    merge_id = ctk_ui_manager_new_merge_id (window->details->ui_manager);
     window->details->short_list_merge_id = merge_id;
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    window->details->view_as_action_group = gtk_action_group_new ("ViewAsGroup");
-    gtk_action_group_set_translation_domain (window->details->view_as_action_group, GETTEXT_PACKAGE);
+    window->details->view_as_action_group = ctk_action_group_new ("ViewAsGroup");
+    ctk_action_group_set_translation_domain (window->details->view_as_action_group, GETTEXT_PACKAGE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
     window->details->view_as_radio_action = NULL;
 
@@ -1415,7 +1415,7 @@ load_view_as_menu (BaulWindow *window)
                     merge_id);
         }
     }
-    gtk_ui_manager_insert_action_group (window->details->ui_manager,
+    ctk_ui_manager_insert_action_group (window->details->ui_manager,
                                         window->details->view_as_action_group,
                                         -1);
     g_object_unref (window->details->view_as_action_group); /* owned by ui_manager */
@@ -1476,9 +1476,9 @@ baul_window_display_error (BaulWindow *window, const char *error_msg)
 
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
-    dialog = gtk_message_dialog_new (GTK_WINDOW (window), 0, GTK_MESSAGE_ERROR,
+    dialog = ctk_message_dialog_new (GTK_WINDOW (window), 0, GTK_MESSAGE_ERROR,
                                      GTK_BUTTONS_OK, error_msg, NULL);
-    gtk_widget_show (dialog);
+    ctk_widget_show (dialog);
 }
 
 static char *
@@ -1545,20 +1545,20 @@ baul_window_sync_zoom_widgets (BaulWindow *window)
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (window->details->main_action_group,
+    action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_ZOOM_IN);
-    gtk_action_set_visible (action, supports_zooming);
-    gtk_action_set_sensitive (action, can_zoom_in);
+    ctk_action_set_visible (action, supports_zooming);
+    ctk_action_set_sensitive (action, can_zoom_in);
 
-    action = gtk_action_group_get_action (window->details->main_action_group,
+    action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_ZOOM_OUT);
-    gtk_action_set_visible (action, supports_zooming);
-    gtk_action_set_sensitive (action, can_zoom_out);
+    ctk_action_set_visible (action, supports_zooming);
+    ctk_action_set_sensitive (action, can_zoom_out);
 
-    action = gtk_action_group_get_action (window->details->main_action_group,
+    action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_ZOOM_NORMAL);
-    gtk_action_set_visible (action, supports_zooming);
-    gtk_action_set_sensitive (action, can_zoom);
+    ctk_action_set_visible (action, supports_zooming);
+    ctk_action_set_sensitive (action, can_zoom);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     g_signal_emit (window, signals[ZOOM_CHANGED], 0,
@@ -1878,7 +1878,7 @@ baul_forget_history (void)
      * each window's current location bookmark from history list
      * so it doesn't get clobbered.
      */
-    for (window_node = gtk_application_get_windows (GTK_APPLICATION (app));
+    for (window_node = ctk_application_get_windows (GTK_APPLICATION (app));
             window_node != NULL;
             window_node = window_node->next)
     {
@@ -1921,7 +1921,7 @@ baul_forget_history (void)
     free_history_list ();
 
     /* Re-add each window's current location to history list. */
-    for (window_node = gtk_application_get_windows (GTK_APPLICATION (app));
+    for (window_node = ctk_application_get_windows (GTK_APPLICATION (app));
             window_node != NULL;
             window_node = window_node->next)
     {
@@ -2210,13 +2210,13 @@ baul_window_class_init (BaulWindowClass *class)
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
 
-    binding_set = gtk_binding_set_by_class (class);
-	gtk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, 0,
+    binding_set = ctk_binding_set_by_class (class);
+	ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, 0,
                                   "go_up", 1,
                                   G_TYPE_BOOLEAN, FALSE);
-	gtk_binding_entry_add_signal (binding_set, GDK_KEY_F5, 0,
+	ctk_binding_entry_add_signal (binding_set, GDK_KEY_F5, 0,
                                   "reload", 0);
-	gtk_binding_entry_add_signal (binding_set, GDK_KEY_slash, 0,
+	ctk_binding_entry_add_signal (binding_set, GDK_KEY_slash, 0,
                                   "prompt-for-location", 1,
                                   G_TYPE_STRING, "/");
 

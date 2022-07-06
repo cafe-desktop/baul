@@ -24,7 +24,7 @@
 #include <config.h>
 #include <gmodule.h>
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-debug.h>
 
 #include "baul-module.h"

@@ -515,7 +515,7 @@ msgstr "سرېښل_"
 msgid "Select All"
 msgstr "ټول ټاکل"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "نورې _خبرتياوې ښودل"
 

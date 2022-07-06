@@ -26,7 +26,7 @@
 #define BAUL_VIEW_H
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 /* For BaulZoomLevel */
 #include "baul-icon-info.h"

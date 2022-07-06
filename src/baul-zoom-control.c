@@ -34,14 +34,14 @@
 
 #include <atk/atkaction.h>
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
-#include <gtk/gtk-a11y.h>
+#include <ctk/ctk.h>
+#include <ctk/ctk-a11y.h>
 #include <gdk/gdkkeysyms.h>
 
 #include <eel/eel-accessibility.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-graphic-effects.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include <libbaul-private/baul-file-utilities.h>
 #include <libbaul-private/baul-global-preferences.h>
@@ -132,7 +132,7 @@ zoom_popup_menu_show (GtkWidget *widget, GdkEventButton *event, BaulZoomControl 
     GtkMenu *menu;
 
     menu = create_zoom_menu (zoom_control);
-    gtk_menu_popup_at_widget (menu,
+    ctk_menu_popup_at_widget (menu,
                               widget,
                               GDK_GRAVITY_SOUTH_WEST,
                               GDK_GRAVITY_NORTH_WEST,
@@ -145,13 +145,13 @@ zoom_popup_menu (GtkWidget *widget, BaulZoomControl *zoom_control)
     GtkMenu *menu;
 
     menu = create_zoom_menu (zoom_control);
-    gtk_menu_popup_at_widget (menu,
+    ctk_menu_popup_at_widget (menu,
                               widget,
                               GDK_GRAVITY_SOUTH_WEST,
                               GDK_GRAVITY_NORTH_WEST,
                               NULL);
 
-    gtk_menu_shell_select_first (GTK_MENU_SHELL (menu), FALSE);
+    ctk_menu_shell_select_first (GTK_MENU_SHELL (menu), FALSE);
 }
 
 /* handle button presses */
@@ -210,12 +210,12 @@ set_label_size (BaulZoomControl *zoom_control)
     int width;
     int height;
 
-    text = gtk_label_get_text (GTK_LABEL (zoom_control->details->zoom_label));
-    layout = gtk_label_get_layout (GTK_LABEL (zoom_control->details->zoom_label));
+    text = ctk_label_get_text (GTK_LABEL (zoom_control->details->zoom_label));
+    layout = ctk_label_get_layout (GTK_LABEL (zoom_control->details->zoom_label));
     pango_layout_set_text (layout, "100%", -1);
     pango_layout_get_pixel_size (layout, &width, &height);
-    gtk_widget_set_size_request (zoom_control->details->zoom_label, width, height);
-    gtk_label_set_text (GTK_LABEL (zoom_control->details->zoom_label),
+    ctk_widget_set_size_request (zoom_control->details->zoom_label, width, height);
+    ctk_label_set_text (GTK_LABEL (zoom_control->details->zoom_label),
                         text);
 }
 
@@ -248,31 +248,31 @@ baul_zoom_control_init (BaulZoomControl *zoom_control)
                     GINT_TO_POINTER (i));
     }
 
-    image = gtk_image_new_from_icon_name ("zoom-out", GTK_ICON_SIZE_MENU);
-    zoom_control->details->zoom_out = gtk_button_new ();
-    gtk_widget_set_focus_on_click (zoom_control->details->zoom_out, FALSE);
-    gtk_button_set_relief (GTK_BUTTON (zoom_control->details->zoom_out),
+    image = ctk_image_new_from_icon_name ("zoom-out", GTK_ICON_SIZE_MENU);
+    zoom_control->details->zoom_out = ctk_button_new ();
+    ctk_widget_set_focus_on_click (zoom_control->details->zoom_out, FALSE);
+    ctk_button_set_relief (GTK_BUTTON (zoom_control->details->zoom_out),
                            GTK_RELIEF_NONE);
-    gtk_widget_set_tooltip_text (zoom_control->details->zoom_out,
+    ctk_widget_set_tooltip_text (zoom_control->details->zoom_out,
                                  _("Decrease the view size"));
     g_signal_connect (G_OBJECT (zoom_control->details->zoom_out),
                       "clicked", G_CALLBACK (zoom_out_clicked),
                       zoom_control);
 
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (zoom_control), GTK_ORIENTATION_HORIZONTAL);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (zoom_control), GTK_ORIENTATION_HORIZONTAL);
 
-    gtk_container_add (GTK_CONTAINER (zoom_control->details->zoom_out), image);
-    gtk_box_pack_start (GTK_BOX (zoom_control),
+    ctk_container_add (GTK_CONTAINER (zoom_control->details->zoom_out), image);
+    ctk_box_pack_start (GTK_BOX (zoom_control),
                         zoom_control->details->zoom_out, FALSE, FALSE, 0);
 
-    zoom_control->details->zoom_button = gtk_button_new ();
-    gtk_widget_set_focus_on_click (zoom_control->details->zoom_button, FALSE);
-    gtk_button_set_relief (GTK_BUTTON (zoom_control->details->zoom_button),
+    zoom_control->details->zoom_button = ctk_button_new ();
+    ctk_widget_set_focus_on_click (zoom_control->details->zoom_button, FALSE);
+    ctk_button_set_relief (GTK_BUTTON (zoom_control->details->zoom_button),
                            GTK_RELIEF_NONE);
-    gtk_widget_set_tooltip_text (zoom_control->details->zoom_button,
+    ctk_widget_set_tooltip_text (zoom_control->details->zoom_button,
                                  _("Use the normal view size"));
 
-    gtk_widget_add_events (GTK_WIDGET (zoom_control->details->zoom_button),
+    ctk_widget_add_events (GTK_WIDGET (zoom_control->details->zoom_button),
                            GDK_BUTTON_PRESS_MASK
                            | GDK_BUTTON_RELEASE_MASK
                            | GDK_POINTER_MOTION_MASK
@@ -291,43 +291,43 @@ baul_zoom_control_init (BaulZoomControl *zoom_control)
                       "popup-menu", G_CALLBACK (zoom_popup_menu),
                       zoom_control);
 
-    zoom_control->details->zoom_label = gtk_label_new ("100%");
+    zoom_control->details->zoom_label = ctk_label_new ("100%");
     g_signal_connect (zoom_control->details->zoom_label,
                       "style_set",
                       G_CALLBACK (label_style_set_callback),
                       zoom_control);
     set_label_size (zoom_control);
 
-    gtk_container_add (GTK_CONTAINER (zoom_control->details->zoom_button), zoom_control->details->zoom_label);
+    ctk_container_add (GTK_CONTAINER (zoom_control->details->zoom_button), zoom_control->details->zoom_label);
 
-    gtk_box_pack_start (GTK_BOX (zoom_control),
+    ctk_box_pack_start (GTK_BOX (zoom_control),
                         zoom_control->details->zoom_button, TRUE, TRUE, 0);
 
-    image = gtk_image_new_from_icon_name ("zoom-in", GTK_ICON_SIZE_MENU);
-    zoom_control->details->zoom_in = gtk_button_new ();
-    gtk_widget_set_focus_on_click (zoom_control->details->zoom_in, FALSE);
-    gtk_button_set_relief (GTK_BUTTON (zoom_control->details->zoom_in),
+    image = ctk_image_new_from_icon_name ("zoom-in", GTK_ICON_SIZE_MENU);
+    zoom_control->details->zoom_in = ctk_button_new ();
+    ctk_widget_set_focus_on_click (zoom_control->details->zoom_in, FALSE);
+    ctk_button_set_relief (GTK_BUTTON (zoom_control->details->zoom_in),
                            GTK_RELIEF_NONE);
-    gtk_widget_set_tooltip_text (zoom_control->details->zoom_in,
+    ctk_widget_set_tooltip_text (zoom_control->details->zoom_in,
                                  _("Increase the view size"));
     g_signal_connect (G_OBJECT (zoom_control->details->zoom_in),
                       "clicked", G_CALLBACK (zoom_in_clicked),
                       zoom_control);
 
-    gtk_container_add (GTK_CONTAINER (zoom_control->details->zoom_in), image);
-    gtk_box_pack_start (GTK_BOX (zoom_control),
+    ctk_container_add (GTK_CONTAINER (zoom_control->details->zoom_in), image);
+    ctk_box_pack_start (GTK_BOX (zoom_control),
                         zoom_control->details->zoom_in, FALSE, FALSE, 0);
 
-    gtk_widget_show_all (zoom_control->details->zoom_out);
-    gtk_widget_show_all (zoom_control->details->zoom_button);
-    gtk_widget_show_all (zoom_control->details->zoom_in);
+    ctk_widget_show_all (zoom_control->details->zoom_out);
+    ctk_widget_show_all (zoom_control->details->zoom_button);
+    ctk_widget_show_all (zoom_control->details->zoom_in);
 }
 
 /* Allocate a new zoom control */
 GtkWidget *
 baul_zoom_control_new (void)
 {
-    return gtk_widget_new (baul_zoom_control_get_type (), NULL);
+    return ctk_widget_new (baul_zoom_control_get_type (), NULL);
 }
 
 static void
@@ -336,14 +336,14 @@ baul_zoom_control_redraw (BaulZoomControl *zoom_control)
     int percent;
     char *num_str;
 
-    gtk_widget_set_sensitive (zoom_control->details->zoom_in,
+    ctk_widget_set_sensitive (zoom_control->details->zoom_in,
                               baul_zoom_control_can_zoom_in (zoom_control));
-    gtk_widget_set_sensitive (zoom_control->details->zoom_out,
+    ctk_widget_set_sensitive (zoom_control->details->zoom_out,
                               baul_zoom_control_can_zoom_out (zoom_control));
 
     percent = floor ((100.0 * baul_get_relative_icon_size_for_zoom_level (zoom_control->details->zoom_level)) + .2);
     num_str = g_strdup_printf ("%d%%", percent);
-    gtk_label_set_text (GTK_LABEL (zoom_control->details->zoom_label), num_str);
+    ctk_label_set_text (GTK_LABEL (zoom_control->details->zoom_label), num_str);
     g_free (num_str);
 }
 
@@ -365,7 +365,7 @@ zoom_menu_callback (GtkMenuItem *item, gpointer callback_data)
     }
 
     /* Don't send the signal if the menuitem was toggled off */
-    if (!gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (item)))
+    if (!ctk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (item)))
     {
         return;
     }
@@ -408,19 +408,19 @@ create_zoom_menu_item (BaulZoomControl *zoom_control, GtkMenu *menu,
 
     radio_item_group = previous_radio_item == NULL
                        ? NULL
-                       : gtk_radio_menu_item_get_group (previous_radio_item);
-    menu_item = gtk_radio_menu_item_new_with_label (radio_item_group, item_text);
+                       : ctk_radio_menu_item_get_group (previous_radio_item);
+    menu_item = ctk_radio_menu_item_new_with_label (radio_item_group, item_text);
     g_free (item_text);
 
-    gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item),
+    ctk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item),
                                     zoom_level == zoom_control->details->zoom_level);
 
     g_object_set_data (G_OBJECT (menu_item), "zoom_level", GINT_TO_POINTER (zoom_level));
     g_signal_connect_object (menu_item, "activate",
                              G_CALLBACK (zoom_menu_callback), zoom_control, 0);
 
-    gtk_widget_show (menu_item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    ctk_widget_show (menu_item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
     zoom_control->details->marking_menu_items = FALSE;
 
@@ -434,7 +434,7 @@ create_zoom_menu (BaulZoomControl *zoom_control)
     GtkRadioMenuItem *previous_item;
     GList *node;
 
-    menu = GTK_MENU (gtk_menu_new ());
+    menu = GTK_MENU (ctk_menu_new ());
 
     previous_item = NULL;
     for (node = zoom_control->details->preferred_zoom_levels; node != NULL; node = node->next)
@@ -589,7 +589,7 @@ baul_zoom_control_class_init (BaulZoomControlClass *class)
     widget_class = GTK_WIDGET_CLASS (class);
 
 
-    gtk_widget_class_set_accessible_type (widget_class,
+    ctk_widget_class_set_accessible_type (widget_class,
                                           baul_zoom_control_accessible_get_type ());
 
     widget_class->scroll_event = baul_zoom_control_scroll_event;
@@ -648,34 +648,34 @@ baul_zoom_control_class_init (BaulZoomControlClass *class)
                       g_cclosure_marshal_VOID__ENUM,
                       G_TYPE_NONE, 1, GTK_TYPE_SCROLL_TYPE);
 
-    binding_set = gtk_binding_set_by_class (class);
+    binding_set = ctk_binding_set_by_class (class);
 
-    gtk_binding_entry_add_signal (binding_set,
+    ctk_binding_entry_add_signal (binding_set,
 				      GDK_KEY_KP_Subtract, 0,
                                   "change_value",
                                   1, GTK_TYPE_SCROLL_TYPE,
                                   GTK_SCROLL_STEP_DOWN);
-    gtk_binding_entry_add_signal (binding_set,
+    ctk_binding_entry_add_signal (binding_set,
 				      GDK_KEY_minus, 0,
                                   "change_value",
                                   1, GTK_TYPE_SCROLL_TYPE,
                                   GTK_SCROLL_STEP_DOWN);
 
-    gtk_binding_entry_add_signal (binding_set,
+    ctk_binding_entry_add_signal (binding_set,
 				      GDK_KEY_KP_Equal, 0,
                                   "zoom_to_default",
                                   0);
-    gtk_binding_entry_add_signal (binding_set,
+    ctk_binding_entry_add_signal (binding_set,
 				      GDK_KEY_KP_Equal, 0,
                                   "zoom_to_default",
                                   0);
 
-    gtk_binding_entry_add_signal (binding_set,
+    ctk_binding_entry_add_signal (binding_set,
 				      GDK_KEY_KP_Add, 0,
                                   "change_value",
                                   1, GTK_TYPE_SCROLL_TYPE,
                                   GTK_SCROLL_STEP_UP);
-    gtk_binding_entry_add_signal (binding_set,
+    ctk_binding_entry_add_signal (binding_set,
 				      GDK_KEY_plus, 0,
                                   "change_value",
                                   1, GTK_TYPE_SCROLL_TYPE,
@@ -689,7 +689,7 @@ baul_zoom_control_accessible_do_action (AtkAction *accessible, int i)
 
     g_assert (i >= 0 && i < NUM_ACTIONS);
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return FALSE;
@@ -739,7 +739,7 @@ baul_zoom_control_accessible_get_current_value (AtkValue *accessible,
 
     g_value_init (value, G_TYPE_INT);
 
-    control = BAUL_ZOOM_CONTROL (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
+    control = BAUL_ZOOM_CONTROL (ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
     if (!control)
     {
         g_value_set_int (value, BAUL_ZOOM_LEVEL_STANDARD);
@@ -757,7 +757,7 @@ baul_zoom_control_accessible_get_maximum_value (AtkValue *accessible,
 
     g_value_init (value, G_TYPE_INT);
 
-    control = BAUL_ZOOM_CONTROL (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
+    control = BAUL_ZOOM_CONTROL (ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
     if (!control)
     {
         g_value_set_int (value, BAUL_ZOOM_LEVEL_STANDARD);
@@ -775,7 +775,7 @@ baul_zoom_control_accessible_get_minimum_value (AtkValue *accessible,
 
     g_value_init (value, G_TYPE_INT);
 
-    control = BAUL_ZOOM_CONTROL (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
+    control = BAUL_ZOOM_CONTROL (ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
     if (!control)
     {
         g_value_set_int (value, BAUL_ZOOM_LEVEL_STANDARD);
@@ -825,7 +825,7 @@ baul_zoom_control_accessible_set_current_value (AtkValue *accessible,
     BaulZoomControl *control;
     BaulZoomLevel zoom;
 
-    control = BAUL_ZOOM_CONTROL (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
+    control = BAUL_ZOOM_CONTROL (ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
     if (!control)
     {
         return FALSE;
@@ -907,7 +907,7 @@ baul_zoom_control_accessible_init (BaulZoomControlAccessible *accessible)
 void
 baul_zoom_control_set_active_appearance (BaulZoomControl *zoom_control, gboolean is_active)
 {
-    gtk_widget_set_sensitive (gtk_bin_get_child (GTK_BIN (zoom_control->details->zoom_in)), is_active);
-    gtk_widget_set_sensitive (gtk_bin_get_child (GTK_BIN (zoom_control->details->zoom_out)), is_active);
-    gtk_widget_set_sensitive (zoom_control->details->zoom_label, is_active);
+    ctk_widget_set_sensitive (ctk_bin_get_child (GTK_BIN (zoom_control->details->zoom_in)), is_active);
+    ctk_widget_set_sensitive (ctk_bin_get_child (GTK_BIN (zoom_control->details->zoom_out)), is_active);
+    ctk_widget_set_sensitive (zoom_control->details->zoom_label, is_active);
 }

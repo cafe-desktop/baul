@@ -67,8 +67,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <gdk/gdkprivate.h>
-#include <gtk/gtk.h>
-#include <gtk/gtk-a11y.h>
+#include <ctk/ctk.h>
+#include <ctk/ctk-a11y.h>
 #include <glib/gi18n-lib.h>
 #include <cairo/cairo-gobject.h>
 #include "eel-canvas.h"
@@ -374,8 +374,8 @@ eel_canvas_item_realize (EelCanvasItem *item)
     if (item->parent && !(item->parent->flags & EEL_CANVAS_ITEM_REALIZED))
         (* EEL_CANVAS_ITEM_GET_CLASS (item->parent)->realize) (item->parent);
 
-    if (item->parent == NULL && !gtk_widget_get_realized (GTK_WIDGET (item->canvas)))
-        gtk_widget_realize (GTK_WIDGET (item->canvas));
+    if (item->parent == NULL && !ctk_widget_get_realized (GTK_WIDGET (item->canvas)))
+        ctk_widget_realize (GTK_WIDGET (item->canvas));
 
     item->flags |= EEL_CANVAS_ITEM_REALIZED;
 
@@ -556,8 +556,8 @@ eel_canvas_item_move (EelCanvasItem *item, double dx, double dy)
 static void
 eel_canvas_queue_resize (EelCanvas *canvas)
 {
-    if (gtk_widget_is_drawable (GTK_WIDGET (canvas)))
-            gtk_widget_queue_resize (GTK_WIDGET (canvas));
+    if (ctk_widget_is_drawable (GTK_WIDGET (canvas)))
+            ctk_widget_queue_resize (GTK_WIDGET (canvas));
 }
 
 /* Convenience function to reorder items in a group's child list.  This puts the
@@ -828,7 +828,7 @@ eel_canvas_item_show (EelCanvasItem *item)
         else
         {
             if (!(item->flags & EEL_CANVAS_ITEM_MAPPED) &&
-                    gtk_widget_get_mapped (GTK_WIDGET (item->canvas)))
+                    ctk_widget_get_mapped (GTK_WIDGET (item->canvas)))
                 (* EEL_CANVAS_ITEM_GET_CLASS (item)->map) (item);
         }
 
@@ -903,7 +903,7 @@ eel_canvas_item_grab (EelCanvasItem *item,
     GdkSeat *seat;
 
     g_return_val_if_fail (EEL_IS_CANVAS_ITEM (item), GDK_GRAB_NOT_VIEWABLE);
-    g_return_val_if_fail (gtk_widget_get_mapped (GTK_WIDGET (item->canvas)),
+    g_return_val_if_fail (ctk_widget_get_mapped (GTK_WIDGET (item->canvas)),
                           GDK_GRAB_NOT_VIEWABLE);
 
     if (item->canvas->grabbed_item)
@@ -912,11 +912,11 @@ eel_canvas_item_grab (EelCanvasItem *item,
     if (!(item->flags & EEL_CANVAS_ITEM_MAPPED))
         return GDK_GRAB_NOT_VIEWABLE;
 
-    display = gtk_widget_get_display (GTK_WIDGET (item->canvas));
+    display = ctk_widget_get_display (GTK_WIDGET (item->canvas));
     seat = gdk_display_get_default_seat (display);
 
     retval = gdk_seat_grab (seat,
-                            gtk_layout_get_bin_window (GTK_LAYOUT (item->canvas)),
+                            ctk_layout_get_bin_window (GTK_LAYOUT (item->canvas)),
                             GDK_SEAT_CAPABILITY_ALL_POINTING,
                             FALSE,
                             cursor,
@@ -952,7 +952,7 @@ eel_canvas_item_ungrab (EelCanvasItem *item)
     if (item->canvas->grabbed_item != item)
         return;
 
-    display = gtk_widget_get_display (GTK_WIDGET (item->canvas));
+    display = ctk_widget_get_display (GTK_WIDGET (item->canvas));
     seat = gdk_display_get_default_seat (display);
 
     item->canvas->grabbed_item = NULL;
@@ -1085,14 +1085,14 @@ eel_canvas_item_grab_focus (EelCanvasItem *item)
     GdkEvent ev;
 
     g_return_if_fail (EEL_IS_CANVAS_ITEM (item));
-    g_return_if_fail (gtk_widget_get_can_focus (GTK_WIDGET (item->canvas)));
+    g_return_if_fail (ctk_widget_get_can_focus (GTK_WIDGET (item->canvas)));
 
     focused_item = item->canvas->focused_item;
 
     if (focused_item)
     {
         ev.focus_change.type = GDK_FOCUS_CHANGE;
-        ev.focus_change.window = gtk_layout_get_bin_window (GTK_LAYOUT (item->canvas));
+        ev.focus_change.window = ctk_layout_get_bin_window (GTK_LAYOUT (item->canvas));
         ev.focus_change.send_event = FALSE;
         ev.focus_change.in = FALSE;
 
@@ -1100,12 +1100,12 @@ eel_canvas_item_grab_focus (EelCanvasItem *item)
     }
 
     item->canvas->focused_item = item;
-    gtk_widget_grab_focus (GTK_WIDGET (item->canvas));
+    ctk_widget_grab_focus (GTK_WIDGET (item->canvas));
 
     if (focused_item)
     {
         ev.focus_change.type = GDK_FOCUS_CHANGE;
-        ev.focus_change.window = gtk_layout_get_bin_window (GTK_LAYOUT (item->canvas));
+        ev.focus_change.window = ctk_layout_get_bin_window (GTK_LAYOUT (item->canvas));
         ev.focus_change.send_event = FALSE;
         ev.focus_change.in = TRUE;
 
@@ -1877,7 +1877,7 @@ eel_canvas_get_type (void)
             (GInstanceInitFunc) eel_canvas_init
         };
 
-        canvas_type = g_type_register_static (gtk_layout_get_type (),
+        canvas_type = g_type_register_static (ctk_layout_get_type (),
                                               "EelCanvas",
                                               &canvas_info,
                                               0);
@@ -1936,11 +1936,11 @@ eel_canvas_accessible_initialize (AtkObject *obj,
         ATK_OBJECT_CLASS (accessible_parent_class)->initialize (obj, data);
 
     canvas = EEL_CANVAS (data);
-    g_signal_connect (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas)),
+    g_signal_connect (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas)),
                       "value_changed",
                       G_CALLBACK (eel_canvas_accessible_adjustment_changed),
                       obj);
-    g_signal_connect (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas)),
+    g_signal_connect (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas)),
                       "value_changed",
                       G_CALLBACK (eel_canvas_accessible_adjustment_changed),
                       obj);
@@ -1957,7 +1957,7 @@ eel_canvas_accessible_get_n_children (AtkObject* obj)
     EelCanvasGroup *root_group;
 
     accessible = GTK_ACCESSIBLE (obj);
-    widget = gtk_accessible_get_widget (accessible);
+    widget = ctk_accessible_get_widget (accessible);
     if (widget == NULL)
     {
         /* State is defunct */
@@ -1989,7 +1989,7 @@ eel_canvas_accessible_ref_child (AtkObject *obj,
     }
 
     accessible = GTK_ACCESSIBLE (obj);
-    widget = gtk_accessible_get_widget (accessible);
+    widget = ctk_accessible_get_widget (accessible);
     if (widget == NULL)
     {
         /* State is defunct */
@@ -2070,7 +2070,7 @@ eel_canvas_class_init (EelCanvasClass *klass)
                       G_TYPE_NONE, 1,
                       CAIRO_GOBJECT_TYPE_CONTEXT);
 
-    gtk_widget_class_set_accessible_type (widget_class, eel_canvas_accessible_get_type ());
+    ctk_widget_class_set_accessible_type (widget_class, eel_canvas_accessible_get_type ());
 }
 
 /* Callback used when the root item of a canvas is destroyed.  The user should
@@ -2087,13 +2087,13 @@ static void
 eel_canvas_init (EelCanvas *canvas)
 {
     guint width, height;
-    gtk_widget_set_can_focus (GTK_WIDGET (canvas), TRUE);
+    ctk_widget_set_can_focus (GTK_WIDGET (canvas), TRUE);
 
-    gtk_widget_set_redraw_on_allocate (GTK_WIDGET (canvas), FALSE);
+    ctk_widget_set_redraw_on_allocate (GTK_WIDGET (canvas), FALSE);
 
     canvas->scroll_x1 = 0.0;
     canvas->scroll_y1 = 0.0;
-    gtk_layout_get_size (GTK_LAYOUT (canvas),
+    ctk_layout_get_size (GTK_LAYOUT (canvas),
                          &width, &height);
     canvas->scroll_x2 = width;
     canvas->scroll_y2 = height;
@@ -2104,8 +2104,8 @@ eel_canvas_init (EelCanvas *canvas)
     canvas->pick_event.crossing.x = 0;
     canvas->pick_event.crossing.y = 0;
 
-    gtk_scrollable_set_hadjustment (GTK_SCROLLABLE (canvas), NULL);
-    gtk_scrollable_set_vadjustment (GTK_SCROLLABLE (canvas), NULL);
+    ctk_scrollable_set_hadjustment (GTK_SCROLLABLE (canvas), NULL);
+    ctk_scrollable_set_vadjustment (GTK_SCROLLABLE (canvas), NULL);
 
     /* Create the root item as a special case */
 
@@ -2263,8 +2263,8 @@ eel_canvas_realize (GtkWidget *widget)
 
     canvas = EEL_CANVAS (widget);
 
-    gdk_window_set_events (gtk_layout_get_bin_window (GTK_LAYOUT (canvas)),
-    		       (gdk_window_get_events (gtk_layout_get_bin_window (GTK_LAYOUT (canvas)))
+    gdk_window_set_events (ctk_layout_get_bin_window (GTK_LAYOUT (canvas)),
+    		       (gdk_window_get_events (ctk_layout_get_bin_window (GTK_LAYOUT (canvas)))
                             | GDK_EXPOSURE_MASK
                             | GDK_BUTTON_PRESS_MASK
                             | GDK_BUTTON_RELEASE_MASK
@@ -2315,7 +2315,7 @@ scroll_to (EelCanvas *canvas, int cx, int cy)
     GtkAdjustment *vadjustment, *hadjustment;
     guint width, height;
 
-    gtk_widget_get_allocation (GTK_WIDGET (canvas), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (canvas), &allocation);
     canvas_width = allocation.width;
     canvas_height = allocation.height;
 
@@ -2390,28 +2390,28 @@ scroll_to (EelCanvas *canvas, int cx, int cy)
             canvas->root->flags |= EEL_CANVAS_ITEM_NEED_DEEP_UPDATE;
             eel_canvas_request_update (canvas);
         }
-        gtk_widget_queue_draw (GTK_WIDGET (canvas));
+        ctk_widget_queue_draw (GTK_WIDGET (canvas));
     }
 
-    hadjustment = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
-    vadjustment = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
+    hadjustment = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
+    vadjustment = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
 
-    if (((int) gtk_adjustment_get_value (hadjustment)) != cx)
+    if (((int) ctk_adjustment_get_value (hadjustment)) != cx)
     {
-        gtk_adjustment_set_value (hadjustment, cx);
+        ctk_adjustment_set_value (hadjustment, cx);
         changed_x = TRUE;
     }
 
-    if (((int) gtk_adjustment_get_value (vadjustment)) != cy)
+    if (((int) ctk_adjustment_get_value (vadjustment)) != cy)
     {
-        gtk_adjustment_set_value (vadjustment, cy);
+        ctk_adjustment_set_value (vadjustment, cy);
         changed_y = TRUE;
     }
 
-    gtk_layout_get_size (&canvas->layout, &width, &height);
+    ctk_layout_get_size (&canvas->layout, &width, &height);
     if ((scroll_width != (int) width )|| (scroll_height != (int) height))
     {
-        gtk_layout_set_size (GTK_LAYOUT (canvas), scroll_width, scroll_height);
+        ctk_layout_set_size (GTK_LAYOUT (canvas), scroll_width, scroll_height);
     }
 
     /* Signal GtkLayout that it should do a redraw. */
@@ -2438,18 +2438,18 @@ eel_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
     /* Recenter the view, if appropriate */
 
-    hadjustment = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
-    vadjustment = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
+    hadjustment = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
+    vadjustment = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
 
-    gtk_adjustment_set_page_size (hadjustment, allocation->width);
-    gtk_adjustment_set_page_increment (hadjustment, allocation->width / 2);
+    ctk_adjustment_set_page_size (hadjustment, allocation->width);
+    ctk_adjustment_set_page_increment (hadjustment, allocation->width / 2);
 
-    gtk_adjustment_set_page_size (vadjustment, allocation->height);
-    gtk_adjustment_set_page_increment (vadjustment, allocation->height / 2);
+    ctk_adjustment_set_page_size (vadjustment, allocation->height);
+    ctk_adjustment_set_page_increment (vadjustment, allocation->height / 2);
 
     scroll_to (canvas,
-               gtk_adjustment_get_value (hadjustment),
-               gtk_adjustment_get_value (vadjustment));
+               ctk_adjustment_get_value (hadjustment),
+               ctk_adjustment_get_value (vadjustment));
 
     g_signal_emit_by_name (hadjustment, "changed");
     g_signal_emit_by_name (vadjustment, "changed");
@@ -2469,7 +2469,7 @@ emit_event (EelCanvas *canvas, GdkEvent *event)
     guint mask;
 
     /* Could be an old pick event */
-    if (!gtk_widget_get_realized (GTK_WIDGET (canvas)))
+    if (!ctk_widget_get_realized (GTK_WIDGET (canvas)))
     {
         return FALSE;
     }
@@ -2764,7 +2764,7 @@ eel_canvas_button (GtkWidget *widget, GdkEventButton *event)
      * dispatch normally regardless of the event's window if an item has
      * has a pointer grab in effect
      */
-    if (!canvas->grabbed_item && event->window != gtk_layout_get_bin_window (GTK_LAYOUT (canvas)))
+    if (!canvas->grabbed_item && event->window != ctk_layout_get_bin_window (GTK_LAYOUT (canvas)))
         return retval;
 
     switch (event->button)
@@ -2834,7 +2834,7 @@ eel_canvas_motion (GtkWidget *widget, GdkEventMotion *event)
 
     canvas = EEL_CANVAS (widget);
 
-    if (event->window != gtk_layout_get_bin_window (GTK_LAYOUT (canvas)))
+    if (event->window != ctk_layout_get_bin_window (GTK_LAYOUT (canvas)))
         return FALSE;
 
     canvas->state = event->state;
@@ -2873,7 +2873,7 @@ eel_canvas_crossing (GtkWidget *widget, GdkEventCrossing *event)
 
     canvas = EEL_CANVAS (widget);
 
-    if (event->window != gtk_layout_get_bin_window (GTK_LAYOUT (canvas)))
+    if (event->window != ctk_layout_get_bin_window (GTK_LAYOUT (canvas)))
         return FALSE;
 
     canvas->state = event->state;
@@ -2959,14 +2959,14 @@ eel_canvas_draw (GtkWidget *widget, cairo_t *cr)
     if (!gdk_cairo_get_clip_rectangle (cr, NULL))
         return FALSE;
 
-    bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (widget));
+    bin_window = ctk_layout_get_bin_window (GTK_LAYOUT (widget));
 
-    if (!gtk_cairo_should_draw_window (cr, bin_window))
+    if (!ctk_cairo_should_draw_window (cr, bin_window))
         return FALSE;
 
     cairo_save (cr);
 
-    gtk_cairo_transform_to_window (cr, widget, bin_window);
+    ctk_cairo_transform_to_window (cr, widget, bin_window);
 
     region = eel_cairo_get_clip_region (cr);
     if (region == NULL) {
@@ -3032,9 +3032,9 @@ eel_canvas_draw_background (EelCanvas *canvas,
 
     cairo_save (cr);
     /* By default, we use the style background. */
-    style_context = gtk_widget_get_style_context (GTK_WIDGET (canvas));
+    style_context = ctk_widget_get_style_context (GTK_WIDGET (canvas));
 
-    gtk_style_context_get (style_context, GTK_STATE_FLAG_NORMAL,
+    ctk_style_context_get (style_context, GTK_STATE_FLAG_NORMAL,
                            GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                            &c, NULL);
     color = *c;
@@ -3164,12 +3164,12 @@ eel_canvas_set_scroll_region (EelCanvas *canvas, double x1, double y1, double x2
      * Set the new scrolling region.  If possible, do not move the visible contents of the
      * canvas.
      */
-    hadjustment = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
-    vadjustment = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
+    hadjustment = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
+    vadjustment = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
 
     eel_canvas_c2w (canvas,
-                    gtk_adjustment_get_value (hadjustment) + canvas->zoom_xofs,
-                    gtk_adjustment_get_value (vadjustment) + canvas->zoom_yofs,
+                    ctk_adjustment_get_value (hadjustment) + canvas->zoom_xofs,
+                    ctk_adjustment_get_value (vadjustment) + canvas->zoom_yofs,
                     /*canvas->zoom_xofs,
                     canvas->zoom_yofs,*/
                     &wxofs, &wyofs);
@@ -3231,12 +3231,12 @@ eel_canvas_set_center_scroll_region (EelCanvas *canvas,
 
     canvas->center_scroll_region = center_scroll_region != 0;
 
-    hadjustment = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (&canvas->layout));
-    vadjustment = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (&canvas->layout));
+    hadjustment = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (&canvas->layout));
+    vadjustment = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (&canvas->layout));
 
     scroll_to (canvas,
-               gtk_adjustment_get_value (hadjustment),
-               gtk_adjustment_get_value (vadjustment));
+               ctk_adjustment_get_value (hadjustment),
+               ctk_adjustment_get_value (vadjustment));
 }
 
 
@@ -3266,15 +3266,15 @@ eel_canvas_set_pixels_per_unit (EelCanvas *canvas, double n)
 
     widget = GTK_WIDGET (canvas);
 
-    gtk_widget_get_allocation (widget, &allocation);
+    ctk_widget_get_allocation (widget, &allocation);
     center_x = allocation.width / 2;
     center_y = allocation.height / 2;
 
     /* Find the coordinates of the screen center in units. */
-    hadjustment = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
-    vadjustment = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
-    cx = (gtk_adjustment_get_value (hadjustment) + center_x) / canvas->pixels_per_unit + canvas->scroll_x1 + canvas->zoom_xofs;
-    cy = (gtk_adjustment_get_value (vadjustment) + center_y) / canvas->pixels_per_unit + canvas->scroll_y1 + canvas->zoom_yofs;
+    hadjustment = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
+    vadjustment = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
+    cx = (ctk_adjustment_get_value (hadjustment) + center_x) / canvas->pixels_per_unit + canvas->scroll_x1 + canvas->zoom_xofs;
+    cy = (ctk_adjustment_get_value (vadjustment) + center_y) / canvas->pixels_per_unit + canvas->scroll_y1 + canvas->zoom_yofs;
 
     /* Now calculate the new offset of the upper left corner. (round not truncate) */
     x1 = ((cx - canvas->scroll_x1) * n) - center_x + .5;
@@ -3292,21 +3292,21 @@ eel_canvas_set_pixels_per_unit (EelCanvas *canvas, double n)
      * scrolling the window scroll causing exposes.
      */
     window = NULL;
-    if (gtk_widget_get_mapped (widget))
+    if (ctk_widget_get_mapped (widget))
     {
         attributes.window_type = GDK_WINDOW_CHILD;
-        gtk_widget_get_allocation (widget, &allocation);
+        ctk_widget_get_allocation (widget, &allocation);
         attributes.x = allocation.x;
         attributes.y = allocation.y;
         attributes.width = allocation.width;
         attributes.height = allocation.height;
         attributes.wclass = GDK_INPUT_OUTPUT;
-        attributes.visual = gtk_widget_get_visual (widget);
+        attributes.visual = ctk_widget_get_visual (widget);
         attributes.event_mask = GDK_VISIBILITY_NOTIFY_MASK;
 
         attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL;
 
-        window = gdk_window_new (gtk_widget_get_parent_window (widget),
+        window = gdk_window_new (ctk_widget_get_parent_window (widget),
                                  &attributes, attributes_mask);
 
         gdk_window_set_user_data (window, widget);
@@ -3368,14 +3368,14 @@ eel_canvas_get_scroll_offsets (EelCanvas *canvas, int *cx, int *cy)
 
     g_return_if_fail (EEL_IS_CANVAS (canvas));
 
-    hadjustment = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
-    vadjustment = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
+    hadjustment = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas));
+    vadjustment = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas));
 
     if (cx)
-        *cx = gtk_adjustment_get_value (hadjustment);
+        *cx = ctk_adjustment_get_value (hadjustment);
 
     if (cy)
-        *cy = gtk_adjustment_get_value (vadjustment);
+        *cy = ctk_adjustment_get_value (vadjustment);
 }
 
 /**
@@ -3461,7 +3461,7 @@ eel_canvas_request_redraw (EelCanvas *canvas, int x1, int y1, int x2, int y2)
 
     g_return_if_fail (EEL_IS_CANVAS (canvas));
 
-    if (!gtk_widget_is_drawable (GTK_WIDGET (canvas))
+    if (!ctk_widget_is_drawable (GTK_WIDGET (canvas))
             || (x1 >= x2) || (y1 >= y2)) return;
 
     bbox.x = x1;
@@ -3469,7 +3469,7 @@ eel_canvas_request_redraw (EelCanvas *canvas, int x1, int y1, int x2, int y2)
     bbox.width = x2 - x1;
     bbox.height = y2 - y1;
 
-    gdk_window_invalidate_rect (gtk_layout_get_bin_window (GTK_LAYOUT (canvas)),
+    gdk_window_invalidate_rect (ctk_layout_get_bin_window (GTK_LAYOUT (canvas)),
                                 &bbox, FALSE);
 }
 
@@ -3697,11 +3697,11 @@ eel_canvas_item_accessible_is_item_in_window (EelCanvasItem *item,
     gboolean retval;
 
     widget = GTK_WIDGET (item->canvas);
-    if (gtk_widget_get_window (widget))
+    if (ctk_widget_get_window (widget))
     {
         int window_width, window_height;
 
-        gdk_window_get_geometry (gtk_widget_get_window (widget), NULL, NULL,
+        gdk_window_get_geometry (ctk_widget_get_window (widget), NULL, NULL,
                                  &window_width, &window_height);
         /*
                  * Check whether rectangles intersect
@@ -3769,13 +3769,13 @@ eel_canvas_item_accessible_get_extents (AtkComponent *component,
     }
 
     canvas = GTK_WIDGET (item->canvas);
-    window = gtk_widget_get_parent_window (canvas);
+    window = ctk_widget_get_parent_window (canvas);
     gdk_window_get_origin (window, &window_x, &window_y);
     *x = rect.x + window_x;
     *y = rect.y + window_y;
     if (coord_type == ATK_XY_WINDOW)
     {
-        window = gdk_window_get_toplevel (gtk_widget_get_window (canvas));
+        window = gdk_window_get_toplevel (ctk_widget_get_window (canvas));
         gdk_window_get_origin (window, &toplevel_x, &toplevel_y);
         *x -= toplevel_x;
         *y -= toplevel_y;
@@ -3829,10 +3829,10 @@ eel_canvas_item_accessible_grab_focus (AtkComponent *component)
     }
 
     eel_canvas_item_grab_focus (item);
-    toplevel = gtk_widget_get_toplevel (GTK_WIDGET (item->canvas));
-    if (gtk_widget_is_toplevel (toplevel))
+    toplevel = ctk_widget_get_toplevel (GTK_WIDGET (item->canvas));
+    if (ctk_widget_is_toplevel (toplevel))
     {
-        gtk_window_present (GTK_WINDOW (toplevel));
+        ctk_window_present (GTK_WINDOW (toplevel));
     }
 
     return TRUE;
@@ -3903,7 +3903,7 @@ eel_canvas_item_accessible_ref_state_set (AtkObject *accessible)
                 atk_state_set_add_state (state_set, ATK_STATE_SHOWING);
             }
         }
-        if (gtk_widget_get_can_focus (GTK_WIDGET (item->canvas)))
+        if (ctk_widget_get_can_focus (GTK_WIDGET (item->canvas)))
         {
             atk_state_set_add_state (state_set, ATK_STATE_FOCUSABLE);
 

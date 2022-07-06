@@ -28,7 +28,7 @@
 #ifndef BAUL_BOOKMARKS_WINDOW_H
 #define BAUL_BOOKMARKS_WINDOW_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "baul-bookmark-list.h"
 #include "baul-window.h"
 

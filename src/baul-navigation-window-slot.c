@@ -22,7 +22,7 @@
    Author: Christian Neumair <cneumair@gnome.org>
 */
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 
 #include <libbaul-private/baul-window-slot-info.h>
 #include <libbaul-private/baul-file.h>
@@ -178,7 +178,7 @@ baul_navigation_window_slot_update_query_editor (BaulWindowSlot *slot)
         }
 
         baul_window_slot_add_extra_location_widget (slot, query_editor);
-        gtk_widget_show (query_editor);
+        ctk_widget_show (query_editor);
         baul_query_editor_grab_focus (BAUL_QUERY_EDITOR (query_editor));
     }
 
@@ -195,11 +195,11 @@ baul_navigation_window_slot_active (BaulWindowSlot *slot)
     pane = BAUL_NAVIGATION_WINDOW_PANE (slot->pane);
     window = BAUL_NAVIGATION_WINDOW (slot->pane->window);
 
-    page_num = gtk_notebook_page_num (GTK_NOTEBOOK (pane->notebook),
+    page_num = ctk_notebook_page_num (GTK_NOTEBOOK (pane->notebook),
                                       slot->content_box);
     g_assert (page_num >= 0);
 
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (pane->notebook), page_num);
+    ctk_notebook_set_current_page (GTK_NOTEBOOK (pane->notebook), page_num);
 
     EEL_CALL_PARENT (BAUL_WINDOW_SLOT_CLASS, active, (slot));
 

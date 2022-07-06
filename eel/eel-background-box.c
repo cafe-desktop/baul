@@ -34,8 +34,8 @@ eel_background_box_draw (GtkWidget *widget,
                          cairo_t *cr)
 {
     eel_background_draw (widget, cr);
-    gtk_container_propagate_draw (GTK_CONTAINER (widget),
-                                  gtk_bin_get_child (GTK_BIN (widget)),
+    ctk_container_propagate_draw (GTK_CONTAINER (widget),
+                                  ctk_bin_get_child (GTK_BIN (widget)),
                                   cr);
     return TRUE;
 }
@@ -58,7 +58,7 @@ eel_background_box_new (void)
 {
     EelBackgroundBox *background_box;
 
-    background_box = EEL_BACKGROUND_BOX (gtk_widget_new (eel_background_box_get_type (), NULL));
+    background_box = EEL_BACKGROUND_BOX (ctk_widget_new (eel_background_box_get_type (), NULL));
 
     return GTK_WIDGET (background_box);
 }

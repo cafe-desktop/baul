@@ -26,8 +26,8 @@ labeled_image_button_window_new (const char *title,
 	GtkWidget *plain;
 
 	window = test_window_new (title, 20);
-	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
-	gtk_container_add (GTK_CONTAINER (window), vbox);
+	vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 10);
+	ctk_container_add (GTK_CONTAINER (window), vbox);
 
 	if (1) button = eel_labeled_image_button_new ("GtkButton with LabeledImage", pixbuf);
 	if (1) toggle_button = eel_labeled_image_toggle_button_new ("GtkToggleButton with LabeledImage", pixbuf);
@@ -37,10 +37,10 @@ labeled_image_button_window_new (const char *title,
 		eel_labeled_image_set_can_focus (EEL_LABELED_IMAGE (plain), TRUE);
 	}
 
-	if (button) gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
-	if (toggle_button) gtk_box_pack_start (GTK_BOX (vbox), toggle_button, TRUE, TRUE, 0);
-	if (check_button) gtk_box_pack_start (GTK_BOX (vbox), check_button, TRUE, TRUE, 0);
-	if (plain) gtk_box_pack_start (GTK_BOX (vbox), plain, TRUE, TRUE, 0);
+	if (button) ctk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
+	if (toggle_button) ctk_box_pack_start (GTK_BOX (vbox), toggle_button, TRUE, TRUE, 0);
+	if (check_button) ctk_box_pack_start (GTK_BOX (vbox), check_button, TRUE, TRUE, 0);
+	if (plain) ctk_box_pack_start (GTK_BOX (vbox), plain, TRUE, TRUE, 0);
 
 	if (button) {
 		g_signal_connect (button, "enter", G_CALLBACK (button_callback), "enter");
@@ -50,7 +50,7 @@ labeled_image_button_window_new (const char *title,
 		g_signal_connect (button, "clicked", G_CALLBACK (button_callback), "clicked");
 	}
 
-	gtk_widget_show_all (vbox);
+	ctk_widget_show_all (vbox);
 
 	return window;
 }
@@ -69,10 +69,10 @@ main (int argc, char* argv[])
 
 	eel_gdk_pixbuf_unref_if_not_null (pixbuf);
 
-	if (labeled_image_window) gtk_widget_show (labeled_image_window);
-	if (labeled_image_button_window) gtk_widget_show (labeled_image_button_window);
+	if (labeled_image_window) ctk_widget_show (labeled_image_window);
+	if (labeled_image_button_window) ctk_widget_show (labeled_image_button_window);
 
-	gtk_main ();
+	ctk_main ();
 
 	return test_quit (EXIT_SUCCESS);
 }

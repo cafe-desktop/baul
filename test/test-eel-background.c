@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-background.h>
 
@@ -13,11 +13,11 @@ main  (int argc, char *argv[])
 	EelBackground *background;
 	char *image_uri;
 
-	gtk_init (&argc, &argv);
+	ctk_init (&argc, &argv);
 
-	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	window = ctk_window_new (GTK_WINDOW_TOPLEVEL);
 	g_signal_connect (window, "destroy",
-			    gtk_main_quit, NULL);
+			    ctk_main_quit, NULL);
 
 	background = eel_get_widget_background (window);
 
@@ -32,8 +32,8 @@ main  (int argc, char *argv[])
 	g_free (image_uri);
 
 
-	gtk_widget_show_all (window);
-	gtk_main ();
+	ctk_widget_show_all (window);
+	ctk_main ();
 
 	return 0;
 }

@@ -26,7 +26,7 @@
 #ifndef BAUL_CLIPBOARD_H
 #define BAUL_CLIPBOARD_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 /* This makes this editable or text view put clipboard commands into
  * the passed UI manager when the editable/text view is in focus.

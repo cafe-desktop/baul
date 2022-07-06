@@ -20,7 +20,7 @@
     border-radius: 3px;
     color: #000000;
     text-shadow: none;
-    background-image: -gtk-gradient(linear,
+    background-image: -ctk-gradient(linear,
                                     left top, left bottom,
                                     from       (shade(rgba(255,255,255,1), 0.86)),
                                     color-stop (0.15, shade(rgba(255,255,255,1), 0.96)),

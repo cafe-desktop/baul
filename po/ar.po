@@ -529,7 +529,7 @@ msgstr "ا_لصق"
 msgid "Select All"
 msgstr "اختر الكل"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "أ_ظهر مزيدًا من التّفاصيل"
 

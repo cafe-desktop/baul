@@ -25,7 +25,7 @@
 #include <string.h>
 #include <glib/gi18n.h>
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-glib-extensions.h>
 
 #include "baul-query.h"

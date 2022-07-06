@@ -7,7 +7,7 @@ m4_define(glib_minver,                 2.58.1)
 m4_define(gio_minver,                  2.50.0)
 m4_define(cafe_desktop_minver,         1.17.3)
 m4_define(pango_minver,                1.1.2)
-m4_define(gtk_minver,                  3.22.0)
+m4_define(ctk_minver,                  3.22.0)
 m4_define(xml_minver,                  2.4.7)
 m4_define(exif_minver,                 0.6.14)
 m4_define(exempi_minver,               1.99.5)
@@ -39,7 +39,7 @@ AC_SUBST(GLIB_REQUIRED, [glib_minver])
 AC_SUBST(GIO_REQUIRED, [gio_minver])
 AC_SUBST(CAFE_DESKTOP_REQUIRED, [cafe_desktop_minver])
 AC_SUBST(PANGO_REQUIRED, [pango_minver])
-AC_SUBST(GTK_REQUIRED, [gtk_minver])
+AC_SUBST(GTK_REQUIRED, [ctk_minver])
 AC_SUBST(XML_REQUIRED, [xml_minver])
 AC_SUBST(GAIL_REQUIRED, [gail_minver])
 
@@ -73,7 +73,7 @@ PKG_CHECK_MODULES(ALL, [
     gio-unix-2.0
     gio-2.0 >= gio_minver
     pango >= pango_minver
-    gtk+-3.0 >= gtk_minver
+    ctk+-3.0 >= ctk_minver
     libnotify
     libxml-2.0 >= xml_minver
     gail-3.0 >= gail_minver
@@ -262,14 +262,14 @@ AC_SUBST(WARNING_CFLAGS)
 dnl ==========================================================================
 
 dnl libegg
-LIBEGG_MODULES="gtk+-3.0"
+LIBEGG_MODULES="ctk+-3.0"
 LIBEGG_CFLAGS="`$PKG_CONFIG --cflags $LIBEGG_MODULES`"
 AC_SUBST(LIBEGG_CFLAGS)
 LIBEGG_LIBS="`$PKG_CONFIG --libs $LIBEGG_MODULES`"
 AC_SUBST(LIBEGG_LIBS)
 
 dnl libbaul-extension
-LIBBAUL_EXTENSION_MODULES="glib-2.0 gtk+-3.0"
+LIBBAUL_EXTENSION_MODULES="glib-2.0 ctk+-3.0"
 LIBBAUL_EXTENSION_CFLAGS="`$PKG_CONFIG --cflags $LIBBAUL_EXTENSION_MODULES`"
 AC_SUBST(LIBBAUL_EXTENSION_CFLAGS)
 LIBBAUL_EXTENSION_LIBS="`$PKG_CONFIG --libs $LIBBAUL_EXTENSION_MODULES`"
@@ -277,7 +277,7 @@ AC_SUBST(LIBBAUL_EXTENSION_LIBS)
 
 dnl core baul
 PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])
-CORE_MODULES="glib-2.0 $GMODULE_ADD cafe-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 gail-3.0 libxml-2.0 $EXTRA_CORE_MODULES gtk+-3.0 x11"
+CORE_MODULES="glib-2.0 $GMODULE_ADD cafe-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 gail-3.0 libxml-2.0 $EXTRA_CORE_MODULES ctk+-3.0 x11"
 CORE_CFLAGS="`$PKG_CONFIG --cflags $CORE_MODULES`"
 AC_SUBST(CORE_CFLAGS)
 CORE_LIBS="`$PKG_CONFIG --libs $CORE_MODULES`"
@@ -313,7 +313,7 @@ AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
 AC_ARG_ENABLE(icon-update, AC_HELP_STRING([--disable-icon-update],
                                         [Disable icon cache update]))
 if (test "$enable_icon_update" != no); then
-        AC_PATH_PROG(UPDATE_ICON_CACHE, [gtk-update-icon-cache])
+        AC_PATH_PROG(UPDATE_ICON_CACHE, [ctk-update-icon-cache])
 fi
 AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
 
@@ -355,6 +355,6 @@ baul-$VERSION:
     PackageKit support:           $msg_packagekit
     Self check:                   $msg_self_check
 
-    baul-extension documentation: ${enable_gtk_doc}
+    baul-extension documentation: ${enable_ctk_doc}
     baul-extension introspection: ${found_introspection}
 "

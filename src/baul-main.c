@@ -41,7 +41,7 @@
 #include <unistd.h>
 
 #include <gdk/gdkx.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gdesktopappinfo.h>
 #include <libxml/parser.h>

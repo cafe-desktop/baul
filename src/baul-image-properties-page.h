@@ -24,7 +24,7 @@
 #ifndef BAUL_IMAGE_PROPERTIES_PAGE_H
 #define BAUL_IMAGE_PROPERTIES_PAGE_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 G_BEGIN_DECLS
 

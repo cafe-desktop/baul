@@ -539,7 +539,7 @@ msgstr "_Plakken"
 msgid "Select All"
 msgstr "Alles kiezen"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Meer _details weergeven"
 

@@ -25,7 +25,7 @@
 #ifndef BAUL_COLUMN_CHOOSER_H
 #define BAUL_COLUMN_CHOOSER_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include "baul-file.h"
 

@@ -26,7 +26,7 @@
 #include <string.h>
 
 #include <glib/gi18n-lib.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-autorun.h>
 #include <libbaul-private/baul-icon-info.h>
@@ -111,8 +111,8 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
     }
 
 
-    gtk_label_set_text (GTK_LABEL (bar->priv->label), message);
-    gtk_widget_show (bar->priv->label);
+    ctk_label_set_text (GTK_LABEL (bar->priv->label), message);
+    ctk_widget_show (bar->priv->label);
 
     /* TODO: We really need a GtkBrowserBackButton-ish widget here.. until then, we only
      *       show the default application. */
@@ -132,10 +132,10 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
             int icon_size, icon_scale;
             BaulIconInfo *icon_info;
             icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_BUTTON);
-            icon_scale = gtk_widget_get_scale_factor (GTK_WIDGET (bar));
+            icon_scale = ctk_widget_get_scale_factor (GTK_WIDGET (bar));
             icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
             pixbuf = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
-            image = gtk_image_new_from_pixbuf (pixbuf);
+            image = ctk_image_new_from_pixbuf (pixbuf);
             g_object_unref (pixbuf);
             g_object_unref (icon_info);
         }
@@ -147,15 +147,15 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
         name = g_app_info_get_display_name (default_app);
         button_text = g_strdup_printf (_("Open %s"), name);
 
-        gtk_button_set_image (GTK_BUTTON (bar->priv->button), image);
-        gtk_button_set_label (GTK_BUTTON (bar->priv->button), button_text);
-        gtk_widget_show (bar->priv->button);
+        ctk_button_set_image (GTK_BUTTON (bar->priv->button), image);
+        ctk_button_set_label (GTK_BUTTON (bar->priv->button), button_text);
+        ctk_widget_show (bar->priv->button);
         g_free (button_text);
         g_object_unref (default_app);
     }
     else
     {
-        gtk_widget_hide (bar->priv->button);
+        ctk_widget_hide (bar->priv->button);
     }
 
     g_free (message);
@@ -300,16 +300,16 @@ baul_x_content_bar_init (BaulXContentBar *bar)
 
     hbox = GTK_WIDGET (bar);
 
-    bar->priv->label = gtk_label_new (NULL);
-    gtk_label_set_ellipsize (GTK_LABEL (bar->priv->label), PANGO_ELLIPSIZE_END);
+    bar->priv->label = ctk_label_new (NULL);
+    ctk_label_set_ellipsize (GTK_LABEL (bar->priv->label), PANGO_ELLIPSIZE_END);
 
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (bar), GTK_ORIENTATION_HORIZONTAL);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (bar), GTK_ORIENTATION_HORIZONTAL);
 
-    gtk_label_set_xalign (GTK_LABEL (bar->priv->label), 0.0);
-    gtk_box_pack_start (GTK_BOX (bar), bar->priv->label, TRUE, TRUE, 0);
+    ctk_label_set_xalign (GTK_LABEL (bar->priv->label), 0.0);
+    ctk_box_pack_start (GTK_BOX (bar), bar->priv->label, TRUE, TRUE, 0);
 
-    bar->priv->button = gtk_button_new ();
-    gtk_box_pack_end (GTK_BOX (hbox), bar->priv->button, FALSE, FALSE, 0);
+    bar->priv->button = ctk_button_new ();
+    ctk_box_pack_end (GTK_BOX (hbox), bar->priv->button, FALSE, FALSE, 0);
 
     g_signal_connect (bar->priv->button,
                       "clicked",

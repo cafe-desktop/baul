@@ -27,7 +27,7 @@
 
 #include <glib/gi18n.h>
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 
 #include "baul-vfs-file.h"
 #include "baul-directory-notify.h"

@@ -25,7 +25,7 @@
 #ifndef BAUL_BOOKMARK_H
 #define BAUL_BOOKMARK_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 typedef struct BaulBookmark BaulBookmark;
 

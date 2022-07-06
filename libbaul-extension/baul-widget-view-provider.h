@@ -23,7 +23,7 @@
 #define __BAUL_WIDGET_VIEW_PROVIDER_H__  1
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "baul-file-info.h"
 #include "baul-extension-types.h"
 

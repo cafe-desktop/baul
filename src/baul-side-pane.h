@@ -24,7 +24,7 @@
 #ifndef BAUL_SIDE_PANE_H
 #define BAUL_SIDE_PANE_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 G_BEGIN_DECLS
 

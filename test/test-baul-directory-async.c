@@ -1,4 +1,4 @@
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <unistd.h>
 
 #include <libbaul-private/baul-directory.h>
@@ -11,7 +11,7 @@ void *client1, *client2;
 static gboolean
 quit_cb (gpointer data)
 {
-	gtk_main_quit ();
+	ctk_main_quit ();
 
 	return FALSE;
 }
@@ -84,7 +84,7 @@ main (int argc, char **argv)
 	client1 = g_new0 (int, 1);
 	client2 = g_new0 (int, 1);
 
-	gtk_init (&argc, &argv);
+	ctk_init (&argc, &argv);
 
 	query = baul_query_new ();
 	baul_query_set_text (query, "richard hult");
@@ -100,6 +100,6 @@ main (int argc, char **argv)
 					     NULL, NULL);
 
 
-	gtk_main ();
+	ctk_main ();
 	return 0;
 }

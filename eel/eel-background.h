@@ -43,7 +43,7 @@
 */
 
 #include <gdk/gdk.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 

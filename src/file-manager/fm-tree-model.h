@@ -29,7 +29,7 @@
 
 #include <glib-object.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 #include <libbaul-private/baul-file.h>

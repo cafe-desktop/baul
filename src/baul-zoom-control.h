@@ -28,7 +28,7 @@
 #ifndef BAUL_ZOOM_CONTROL_H
 #define BAUL_ZOOM_CONTROL_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-icon-info.h> /* For BaulZoomLevel */
 

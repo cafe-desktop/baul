@@ -26,7 +26,7 @@
 #ifndef BAUL_PROGRAM_CHOOSING_H
 #define BAUL_PROGRAM_CHOOSING_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 #include "baul-file.h"

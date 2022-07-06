@@ -26,7 +26,7 @@
 #ifndef BAUL_ZOOM_ACTION_H
 #define BAUL_ZOOM_ACTION_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_ZOOM_ACTION            (baul_zoom_action_get_type ())
 #define BAUL_ZOOM_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_ZOOM_ACTION, BaulZoomAction))

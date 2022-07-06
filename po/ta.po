@@ -522,7 +522,7 @@ msgstr "_ஒட்டு"
 msgid "Select All"
 msgstr "அனைத்தையும் தேர்வு செய்"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "(_d)அதிக தகவலை காட்டு"
 

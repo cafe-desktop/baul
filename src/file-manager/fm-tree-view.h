@@ -29,7 +29,7 @@
 #ifndef FM_TREE_VIEW_H
 #define FM_TREE_VIEW_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define FM_TYPE_TREE_VIEW fm_tree_view_get_type()
 #define FM_TREE_VIEW(obj) \

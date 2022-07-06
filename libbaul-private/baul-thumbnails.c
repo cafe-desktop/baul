@@ -31,7 +31,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <sys/wait.h>
 
 #define CAFE_DESKTOP_USE_UNSTABLE_API

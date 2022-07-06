@@ -538,7 +538,7 @@ msgstr "V_ložit"
 msgid "Select All"
 msgstr "Vybrat vše"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Zobrazit více _podrobností"
 

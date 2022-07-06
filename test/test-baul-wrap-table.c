@@ -20,31 +20,31 @@ main (int argc, char* argv[])
 
 	window = test_window_new ("Wrap Table Test", 10);
 
-	gtk_window_set_default_size (GTK_WINDOW (window), 400, 300);
+	ctk_window_set_default_size (GTK_WINDOW (window), 400, 300);
 
 	/* The emblems wrapped table */
 	emblems_table = eel_wrap_table_new (TRUE);
 
-	gtk_widget_show (emblems_table);
-	gtk_container_set_border_width (GTK_CONTAINER (emblems_table), 8);
+	ctk_widget_show (emblems_table);
+	ctk_container_set_border_width (GTK_CONTAINER (emblems_table), 8);
 
-	scroller = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroller),
+	scroller = ctk_scrolled_window_new (NULL, NULL);
+	ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroller),
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
 
 	/* Viewport */
-	gtk_container_add (GTK_CONTAINER (scroller),
+	ctk_container_add (GTK_CONTAINER (scroller),
 					   emblems_table);
 
-	gtk_container_add (GTK_CONTAINER (window), scroller);
+	ctk_container_add (GTK_CONTAINER (window), scroller);
 
-	gtk_widget_show (scroller);
+	ctk_widget_show (scroller);
 
 #if 0
 	/* Get rid of default lowered shadow appearance.
 	 * This must be done after the widget is realized, due to
-	 * an apparent bug in gtk_viewport_set_shadow_type.
+	 * an apparent bug in ctk_viewport_set_shadow_type.
 	 */
  	g_signal_connect (GTK_BIN (scroller->child),
 			  "realize",
@@ -83,14 +83,14 @@ main (int argc, char* argv[])
 					stripped_name,
 					(GDestroyNotify) g_free);
 
-		gtk_container_add (GTK_CONTAINER (emblems_table), button);
+		ctk_container_add (GTK_CONTAINER (emblems_table), button);
 	}
 
-	gtk_widget_show_all (emblems_table);
+	ctk_widget_show_all (emblems_table);
 
-	gtk_widget_show (window);
+	ctk_widget_show (window);
 
-	gtk_main ();
+	ctk_main ();
 
 	return 0;
 }

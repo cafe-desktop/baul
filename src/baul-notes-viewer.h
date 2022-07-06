@@ -26,7 +26,7 @@
 #ifndef _BAUL_NOTES_VIEWER_H
 #define _BAUL_NOTES_VIEWER_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-view.h>
 #include <libbaul-private/baul-window-info.h>

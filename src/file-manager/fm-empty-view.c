@@ -27,7 +27,7 @@
 #include <glib/gi18n.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-vfs-extensions.h>
 
 #include <libbaul-private/baul-file-utilities.h>
@@ -66,7 +66,7 @@ fm_empty_view_add_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *di
 
     g_timer_start (timer);
     icon = baul_file_get_icon_surface (file, baul_get_icon_size_for_zoom_level (BAUL_ZOOM_LEVEL_STANDARD),
-                                       TRUE, gtk_widget_get_scale_factor (GTK_WIDGET(view)), 0);
+                                       TRUE, ctk_widget_get_scale_factor (GTK_WIDGET(view)), 0);
 
     elaps = g_timer_elapsed (timer, NULL);
     g_timer_stop (timer);
@@ -277,7 +277,7 @@ fm_empty_view_scroll_to_file (BaulView *view,
 static void
 fm_empty_view_grab_focus (BaulView *view)
 {
-    gtk_widget_grab_focus (GTK_WIDGET (view));
+    ctk_widget_grab_focus (GTK_WIDGET (view));
 }
 
 static void

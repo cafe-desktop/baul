@@ -37,15 +37,15 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gdk/gdkx.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <libnotify/notify.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #define CAFE_DESKTOP_USE_UNSTABLE_API
 #include <libcafe-desktop/cafe-bg.h>
 
-#include <eel/eel-gtk-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-extensions.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-stock-dialogs.h>
 
 #include <libbaul-private/baul-debug-log.h>
@@ -256,11 +256,11 @@ open_window (BaulApplication *application,
 
     baul_window_go_to (window, location);
 
-    if (geometry != NULL && !gtk_widget_get_visible (GTK_WIDGET (window))) {
+    if (geometry != NULL && !ctk_widget_get_visible (GTK_WIDGET (window))) {
         /* never maximize windows opened from shell if a
          * custom geometry has been requested. */
-        gtk_window_unmaximize (GTK_WINDOW (window));
-        eel_gtk_window_set_initial_geometry_from_string (GTK_WINDOW (window),
+        ctk_window_unmaximize (GTK_WINDOW (window));
+        eel_ctk_window_set_initial_geometry_from_string (GTK_WINDOW (window),
                                  geometry,
                                  APPLICATION_WINDOW_MIN_WIDTH,
                                  APPLICATION_WINDOW_MIN_HEIGHT,
@@ -315,11 +315,11 @@ open_tabs (BaulApplication *application,
         g_free (uri);
     }
 
-    if (geometry != NULL && !gtk_widget_get_visible (GTK_WIDGET (window))) {
+    if (geometry != NULL && !ctk_widget_get_visible (GTK_WIDGET (window))) {
         /* never maximize windows opened from shell if a
          * custom geometry has been requested. */
-        gtk_window_unmaximize (GTK_WINDOW (window));
-        eel_gtk_window_set_initial_geometry_from_string (GTK_WINDOW (window),
+        ctk_window_unmaximize (GTK_WINDOW (window));
+        eel_ctk_window_set_initial_geometry_from_string (GTK_WINDOW (window),
                                                          geometry,
                                                          APPLICATION_WINDOW_MIN_WIDTH,
                                                          APPLICATION_WINDOW_MIN_HEIGHT,
@@ -431,8 +431,8 @@ baul_application_quit (BaulApplication *self)
     GApplication *app = G_APPLICATION (self);
     GList *windows;
 
-    windows = gtk_application_get_windows (GTK_APPLICATION (app));
-    g_list_foreach (windows, (GFunc) gtk_widget_destroy, NULL);
+    windows = ctk_application_get_windows (GTK_APPLICATION (app));
+    g_list_foreach (windows, (GFunc) ctk_widget_destroy, NULL);
     /* we have been asked to force quit */
     g_application_quit (G_APPLICATION (self));
 }
@@ -567,7 +567,7 @@ check_required_directories (BaulApplication *application)
         dialog = eel_show_error_dialog (error_string, detail_string, NULL);
         /* We need the main event loop so the user has a chance to see the dialog. */
 
-        gtk_application_add_window (GTK_APPLICATION (application),
+        ctk_application_add_window (GTK_APPLICATION (application),
                                     GTK_WINDOW (dialog));
 
         g_string_free (directories_as_string, TRUE);
@@ -648,14 +648,14 @@ get_desktop_manager_selection (GdkDisplay *display)
         return NULL;
     }
 
-    selection_widget = gtk_invisible_new_for_screen (gdk_display_get_default_screen (display));
+    selection_widget = ctk_invisible_new_for_screen (gdk_display_get_default_screen (display));
     /* We need this for gdk_x11_get_server_time() */
-    gtk_widget_add_events (selection_widget, GDK_PROPERTY_CHANGE_MASK);
+    ctk_widget_add_events (selection_widget, GDK_PROPERTY_CHANGE_MASK);
 
-    if (gtk_selection_owner_set_for_display (display,
+    if (ctk_selection_owner_set_for_display (display,
             selection_widget,
             selection_atom,
-            gdk_x11_get_server_time (gtk_widget_get_window (selection_widget))))
+            gdk_x11_get_server_time (ctk_widget_get_window (selection_widget))))
     {
 
         g_signal_connect (selection_widget, "selection_get",
@@ -663,7 +663,7 @@ get_desktop_manager_selection (GdkDisplay *display)
         return selection_widget;
     }
 
-    gtk_widget_destroy (selection_widget);
+    ctk_widget_destroy (selection_widget);
 
     return NULL;
 }
@@ -672,7 +672,7 @@ static void
 desktop_unrealize_cb (GtkWidget        *widget,
                       GtkWidget        *selection_widget)
 {
-    gtk_widget_destroy (selection_widget);
+    ctk_widget_destroy (selection_widget);
 }
 
 static gboolean
@@ -680,7 +680,7 @@ selection_clear_event_cb (GtkWidget	        *widget,
                           GdkEventSelection     *event,
                           BaulDesktopWindow *window)
 {
-    gtk_widget_destroy (GTK_WIDGET (window));
+    ctk_widget_destroy (GTK_WIDGET (window));
 
     baul_application_desktop_windows =
         g_list_remove (baul_application_desktop_windows, window);
@@ -715,12 +715,12 @@ baul_application_create_desktop_windows (BaulApplication *application)
         /* We realize it immediately so that the BAUL_DESKTOP_WINDOW_ID
            property is set so cafe-settings-daemon doesn't try to set the
            background. And we do a gdk_display_flush() to be sure X gets it. */
-        gtk_widget_realize (GTK_WIDGET (window));
+        ctk_widget_realize (GTK_WIDGET (window));
         gdk_display_flush (display);
 
         baul_application_desktop_windows =
             g_list_prepend (baul_application_desktop_windows, window);
-            gtk_application_add_window (GTK_APPLICATION (application),
+            ctk_application_add_window (GTK_APPLICATION (application),
 							    GTK_WINDOW (window));
     }
 }
@@ -738,7 +738,7 @@ baul_application_close_desktop (void)
 {
     if (baul_application_desktop_windows != NULL)
     {
-        g_list_free_full (baul_application_desktop_windows, (GDestroyNotify) gtk_widget_destroy);
+        g_list_free_full (baul_application_desktop_windows, (GDestroyNotify) ctk_widget_destroy);
         baul_application_desktop_windows = NULL;
     }
 }
@@ -748,7 +748,7 @@ baul_application_close_all_navigation_windows (BaulApplication *self)
 {
     GList *list_copy;
     GList *l;
-    list_copy = g_list_copy (gtk_application_get_windows (GTK_APPLICATION (self)));
+    list_copy = g_list_copy (ctk_application_get_windows (GTK_APPLICATION (self)));
     /* First hide all window to get the feeling of quick response */
     for (l = list_copy; l != NULL; l = l->next)
     {
@@ -758,7 +758,7 @@ baul_application_close_all_navigation_windows (BaulApplication *self)
 
         if (BAUL_IS_NAVIGATION_WINDOW (window))
         {
-            gtk_widget_hide (GTK_WIDGET (window));
+            ctk_widget_hide (GTK_WIDGET (window));
         }
     }
 
@@ -892,7 +892,7 @@ baul_application_close_all_spatial_windows (void)
 
         if (BAUL_IS_SPATIAL_WINDOW (window))
         {
-            gtk_widget_hide (GTK_WIDGET (window));
+            ctk_widget_hide (GTK_WIDGET (window));
         }
     }
 
@@ -933,7 +933,7 @@ create_window (BaulApplication *application,
 
     g_return_val_if_fail (BAUL_IS_APPLICATION (application), NULL);
 
-    window = BAUL_WINDOW (gtk_widget_new (window_type,
+    window = BAUL_WINDOW (ctk_widget_new (window_type,
                                           "app", application,
                                           "screen", screen,
                                           NULL));
@@ -941,7 +941,7 @@ create_window (BaulApplication *application,
                            G_CALLBACK (baul_window_delete_event_callback), NULL, NULL,
                            G_CONNECT_AFTER);
 
-    gtk_application_add_window (GTK_APPLICATION (application),
+    ctk_application_add_window (GTK_APPLICATION (application),
 				    GTK_WINDOW (window));
 
     /* Do not yet show the window. It will be shown later on if it can
@@ -993,11 +993,11 @@ baul_application_get_spatial_window (BaulApplication *application,
         int orig_x, orig_y, orig_width, orig_height;
         int new_x, new_y, new_width, new_height;
 
-        gtk_window_get_position (GTK_WINDOW (requesting_window),
+        ctk_window_get_position (GTK_WINDOW (requesting_window),
                                  &orig_x, &orig_y);
-        gtk_window_get_size (GTK_WINDOW (requesting_window),
+        ctk_window_get_size (GTK_WINDOW (requesting_window),
                              &orig_width, &orig_height);
-        gtk_window_get_default_size (GTK_WINDOW (window),
+        ctk_window_get_default_size (GTK_WINDOW (window),
                                      &new_width, &new_height);
 
         new_x = orig_x + (orig_width - new_width) / 2;
@@ -1009,7 +1009,7 @@ baul_application_get_spatial_window (BaulApplication *application,
             new_y += 10;
         }
 
-        gtk_window_move (GTK_WINDOW (window), new_x, new_y);
+        ctk_window_move (GTK_WINDOW (window), new_x, new_y);
     }
 
     baul_application_spatial_window_list = g_list_prepend (baul_application_spatial_window_list, window);
@@ -1040,11 +1040,11 @@ baul_application_create_navigation_window (BaulApplication *application,
                     BAUL_WINDOW_STATE_MAXIMIZED);
     if (maximized)
     {
-        gtk_window_maximize (GTK_WINDOW (window));
+        ctk_window_maximize (GTK_WINDOW (window));
     }
     else
     {
-        gtk_window_unmaximize (GTK_WINDOW (window));
+        ctk_window_unmaximize (GTK_WINDOW (window));
     }
 
     geometry_string = g_settings_get_string (baul_window_state,
@@ -1052,7 +1052,7 @@ baul_application_create_navigation_window (BaulApplication *application,
     if (geometry_string != NULL &&
             geometry_string[0] != 0)
     {
-        eel_gtk_window_set_initial_geometry_from_string
+        eel_ctk_window_set_initial_geometry_from_string
         (GTK_WINDOW (window),
          geometry_string,
          BAUL_NAVIGATION_WINDOW_MIN_WIDTH,
@@ -1178,7 +1178,7 @@ drive_eject_button_pressed (GDrive *drive,
 {
     GMountOperation *mount_op;
 
-    mount_op = gtk_mount_operation_new (NULL);
+    mount_op = ctk_mount_operation_new (NULL);
     g_drive_eject_with_operation (drive, 0, mount_op, NULL, drive_eject_cb, NULL);
     g_object_unref (mount_op);
 }
@@ -1307,7 +1307,7 @@ mount_removed_callback (GVolumeMonitor *monitor,
     unclosed_slot = FALSE;
 
     /* Check and see if any of the open windows are displaying contents from the unmounted mount */
-    window_list = gtk_application_get_windows (GTK_APPLICATION (application));
+    window_list = ctk_application_get_windows (GTK_APPLICATION (application));
     root = g_mount_get_root (mount);
     /* Construct a list of windows to be closed. Do not add the non-closable windows to the list. */
     for (node = window_list; node != NULL; node = node->next)
@@ -1431,7 +1431,7 @@ baul_application_get_session_data (BaulApplication *self)
             break;
         }
     }
-    window_list = gtk_application_get_windows (GTK_APPLICATION (self));
+    window_list = ctk_application_get_windows (GTK_APPLICATION (self));
     for (l = window_list; l != NULL; l = l->next) {
         xmlNodePtr win_node, slot_node;
         BaulWindow *window;
@@ -1465,11 +1465,11 @@ baul_application_get_session_data (BaulApplication *self)
         if (BAUL_IS_NAVIGATION_WINDOW (window)) { /* spatial windows store their state as file metadata */
             GdkWindow *gdk_window;
 
-            tmp = eel_gtk_window_get_geometry_string (GTK_WINDOW (window));
+            tmp = eel_ctk_window_get_geometry_string (GTK_WINDOW (window));
             xmlNewProp (win_node, "geometry", tmp);
             g_free (tmp);
 
-            gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
+            gdk_window = ctk_widget_get_window (GTK_WIDGET (window));
 
             if (gdk_window &&
                 gdk_window_get_state (gdk_window) & GDK_WINDOW_STATE_MAXIMIZED) {
@@ -1658,7 +1658,7 @@ baul_application_load_session (BaulApplication *application)
                     geometry = xmlGetProp (node, "geometry");
                     if (geometry != NULL)
                     {
-                        eel_gtk_window_set_initial_geometry_from_string
+                        eel_ctk_window_set_initial_geometry_from_string
                         (GTK_WINDOW (window),
                          geometry,
                          BAUL_NAVIGATION_WINDOW_MIN_WIDTH,
@@ -1669,29 +1669,29 @@ baul_application_load_session (BaulApplication *application)
 
                     if (xmlHasProp (node, "maximized"))
                     {
-                        gtk_window_maximize (GTK_WINDOW (window));
+                        ctk_window_maximize (GTK_WINDOW (window));
                     }
                     else
                     {
-                        gtk_window_unmaximize (GTK_WINDOW (window));
+                        ctk_window_unmaximize (GTK_WINDOW (window));
                     }
 
                     if (xmlHasProp (node, "sticky"))
                     {
-                        gtk_window_stick (GTK_WINDOW (window));
+                        ctk_window_stick (GTK_WINDOW (window));
                     }
                     else
                     {
-                        gtk_window_unstick (GTK_WINDOW (window));
+                        ctk_window_unstick (GTK_WINDOW (window));
                     }
 
                     if (xmlHasProp (node, "keep-above"))
                     {
-                        gtk_window_set_keep_above (GTK_WINDOW (window), TRUE);
+                        ctk_window_set_keep_above (GTK_WINDOW (window), TRUE);
                     }
                     else
                     {
-                        gtk_window_set_keep_above (GTK_WINDOW (window), FALSE);
+                        ctk_window_set_keep_above (GTK_WINDOW (window), FALSE);
                     }
 
                     for (i = 0, slot_node = node->children; slot_node != NULL; slot_node = slot_node->next)
@@ -1897,7 +1897,7 @@ baul_application_local_command_line (GApplication *application,
 
     context = g_option_context_new (_("\n\nBrowse the file system with the file manager"));
     g_option_context_add_main_entries (context, options, NULL);
-    g_option_context_add_group (context, gtk_get_option_group (TRUE));
+    g_option_context_add_group (context, ctk_get_option_group (TRUE));
 
 	g_option_context_add_group (context, egg_sm_client_get_option_group ());
 
@@ -2036,16 +2036,16 @@ load_custom_css (GtkCssProvider *provider,
     if (provider)
         g_object_ref (provider);
     else
-        provider = gtk_css_provider_new ();
+        provider = ctk_css_provider_new ();
 
-    gtk_css_provider_load_from_path (provider, path, &error);
+    ctk_css_provider_load_from_path (provider, path, &error);
 
     if (error != NULL) {
         g_warning ("Can't parse Baul' CSS custom description '%s': %s\n",
                    filename, error->message);
         g_error_free (error);
     } else {
-        gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+        ctk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                                    GTK_STYLE_PROVIDER (provider),
                                                    priority);
     }
@@ -2063,14 +2063,14 @@ reload_theme_css (GtkSettings    *settings,
     gchar *css_theme_name;
     gchar *path;
 
-    g_object_get (settings, "gtk-theme-name", &theme_name, NULL);
+    g_object_get (settings, "ctk-theme-name", &theme_name, NULL);
     css_theme_name = g_strconcat ("baul-desktop-", theme_name, ".css", NULL);
     path = g_build_filename (BAUL_DATADIR, css_theme_name, NULL);
 
     if (g_file_test (path, G_FILE_TEST_EXISTS))
         load_custom_css (provider, css_theme_name, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     else /* just empty the provider */
-        gtk_css_provider_load_from_data (provider, "", 0, NULL);
+        ctk_css_provider_load_from_data (provider, "", 0, NULL);
 
     g_free (path);
     g_free (css_theme_name);
@@ -2080,7 +2080,7 @@ reload_theme_css (GtkSettings    *settings,
 static void
 init_icons_and_styles (void)
 {
-    GtkSettings *settings = gtk_settings_get_default ();
+    GtkSettings *settings = ctk_settings_get_default ();
     GtkCssProvider *provider;
 
     /* add our custom CSS provider */
@@ -2088,13 +2088,13 @@ init_icons_and_styles (void)
     /* add our desktop CSS provider,  ensures the desktop background does not get covered */
     load_custom_css (NULL, "baul-desktop.css", GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     /* add theme-specific desktop CSS */
-    provider = gtk_css_provider_new ();
+    provider = ctk_css_provider_new ();
     reload_theme_css (settings, NULL, provider);
-    g_signal_connect_data (settings, "notify::gtk-theme-name", G_CALLBACK (reload_theme_css),
+    g_signal_connect_data (settings, "notify::ctk-theme-name", G_CALLBACK (reload_theme_css),
                            provider, (GClosureNotify) g_object_unref, 0);
 
     /* initialize search path for custom icons */
-    gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
+    ctk_icon_theme_append_search_path (ctk_icon_theme_get_default (),
                        BAUL_DATADIR G_DIR_SEPARATOR_S "icons");
 }
 
@@ -2133,7 +2133,7 @@ baul_application_save_accel_map (gpointer data)
         char *accel_map_filename;
          accel_map_filename = baul_get_accel_map_file ();
          if (accel_map_filename) {
-             gtk_accel_map_save (accel_map_filename);
+             ctk_accel_map_save (accel_map_filename);
              g_free (accel_map_filename);
          }
         save_of_accel_map_requested = FALSE;
@@ -2155,18 +2155,18 @@ queue_accel_map_save_callback (GtkAccelMap *object, gchar *accel_path,
 }
 
 static void
-init_gtk_accels (void)
+init_ctk_accels (void)
 {
     char *accel_map_filename;
 
     /* load accelerator map, and register save callback */
     accel_map_filename = baul_get_accel_map_file ();
     if (accel_map_filename) {
-        gtk_accel_map_load (accel_map_filename);
+        ctk_accel_map_load (accel_map_filename);
         g_free (accel_map_filename);
     }
 
-    g_signal_connect (gtk_accel_map_get (), "changed",
+    g_signal_connect (ctk_accel_map_get (), "changed",
               G_CALLBACK (queue_accel_map_save_callback), NULL);
 }
 
@@ -2178,7 +2178,7 @@ baul_application_startup (GApplication *app)
     gboolean exit_with_last_window;
     exit_with_last_window = TRUE;
 
-    /* chain up to the GTK+ implementation early, so gtk_init()
+    /* chain up to the GTK+ implementation early, so ctk_init()
      * is called for us.
      */
     G_APPLICATION_CLASS (baul_application_parent_class)->startup (app);
@@ -2218,7 +2218,7 @@ baul_application_startup (GApplication *app)
 
     /* initialize theming */
     init_icons_and_styles ();
-    init_gtk_accels ();
+    init_ctk_accels ();
 
     /* initialize baul modules */
     baul_module_setup ();

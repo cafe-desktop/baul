@@ -82,13 +82,13 @@ baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self
 
     if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER)) {
         window = baul_application_create_navigation_window (application,
-        						    gtk_widget_get_screen (widget));
+        						    ctk_widget_get_screen (widget));
     } else {
     	window = baul_application_get_spatial_window (application,
     							  NULL,
     							  NULL,
     							  location,
-    							  gtk_widget_get_screen (widget),
+    							  ctk_widget_get_screen (widget),
     							  NULL);
     }
 

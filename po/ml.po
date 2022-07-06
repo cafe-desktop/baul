@@ -524,7 +524,7 @@ msgstr "ഒട്ടിയ്ക്കുക"
 msgid "Select All"
 msgstr "എല്ലാം തെരഞ്ഞെടുക്കുക"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "അറുതല്‍ വിവരങ്ങള്‍ കാണിക്കുക (_d)"
 

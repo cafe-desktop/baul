@@ -26,10 +26,10 @@
 #include "eel-stock-dialogs.h"
 
 #include "eel-glib-extensions.h"
-#include "eel-gtk-extensions.h"
+#include "eel-ctk-extensions.h"
 
 #include <glib/gi18n-lib.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define TIMED_WAIT_STANDARD_DURATION 2000
 #define TIMED_WAIT_MIN_TIME_UP 3000
@@ -103,7 +103,7 @@ timed_wait_delayed_close_timeout_callback (gpointer callback_data)
                                           G_CALLBACK (timed_wait_delayed_close_destroy_dialog_callback),
                                           GUINT_TO_POINTER (handler_id));
 
-	gtk_widget_destroy (GTK_WIDGET (callback_data));
+	ctk_widget_destroy (GTK_WIDGET (callback_data));
 
     return FALSE;
 }
@@ -153,7 +153,7 @@ timed_wait_free (TimedWait *wait)
         }
         else
         {
-            gtk_widget_destroy (GTK_WIDGET (wait->dialog));
+            ctk_widget_destroy (GTK_WIDGET (wait->dialog));
         }
     }
 
@@ -188,7 +188,7 @@ trash_dialog_response_callback (GtkDialog *dialog,
                                 int response_id,
                                 TimedWait *wait)
 {
-    gtk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 GtkWidget*
@@ -199,14 +199,14 @@ eel_dialog_add_button (GtkDialog   *dialog,
 {
     GtkWidget *button;
 
-    button = gtk_button_new_with_mnemonic (button_text);
-    gtk_button_set_image (GTK_BUTTON (button), gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON));
+    button = ctk_button_new_with_mnemonic (button_text);
+    ctk_button_set_image (GTK_BUTTON (button), ctk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON));
 
-    gtk_button_set_use_underline (GTK_BUTTON (button), TRUE);
-    gtk_style_context_add_class (gtk_widget_get_style_context (button), "text-button");
-    gtk_widget_set_can_default (button, TRUE);
-    gtk_widget_show (button);
-    gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, response_id);
+    ctk_button_set_use_underline (GTK_BUTTON (button), TRUE);
+    ctk_style_context_add_class (ctk_widget_get_style_context (button), "text-button");
+    ctk_widget_set_can_default (button, TRUE);
+    ctk_widget_show (button);
+    ctk_dialog_add_action_widget (GTK_DIALOG (dialog), button, response_id);
 
     return button;
 }
@@ -228,7 +228,7 @@ eel_file_chooser_dialog_new_valist (const gchar          *title,
                            NULL);
 
     if (parent)
-        gtk_window_set_transient_for (GTK_WINDOW (result), parent);
+        ctk_window_set_transient_for (GTK_WINDOW (result), parent);
 
     while (button_text)
         {
@@ -241,7 +241,7 @@ eel_file_chooser_dialog_new_valist (const gchar          *title,
             else if (g_strcmp0 (button_text, "document-revert") == 0)
                 eel_dialog_add_button (GTK_DIALOG (result), _("_Revert"), button_text, response_id);
             else
-                gtk_dialog_add_button (GTK_DIALOG (result), button_text, response_id);
+                ctk_dialog_add_button (GTK_DIALOG (result), button_text, response_id);
 
             button_text = va_arg (varargs, const gchar *);
         }
@@ -278,8 +278,8 @@ timed_wait_callback (gpointer callback_data)
     wait = callback_data;
 
     /* Put up the timed wait window. */
-    button = wait->cancel_callback != NULL ? "process-stop" : "gtk-ok";
-	dialog = GTK_DIALOG (gtk_message_dialog_new (wait->parent_window,
+    button = wait->cancel_callback != NULL ? "process-stop" : "ctk-ok";
+	dialog = GTK_DIALOG (ctk_message_dialog_new (wait->parent_window,
 						     0,
 						     GTK_MESSAGE_INFO,
 						     GTK_BUTTONS_NONE,
@@ -295,18 +295,18 @@ timed_wait_callback (gpointer callback_data)
     else
         eel_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), button, GTK_RESPONSE_OK);
 
-    gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+    ctk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
     /* The contents are often very small, causing tiny little
-     * dialogs with their titles clipped if you just let gtk
+     * dialogs with their titles clipped if you just let ctk
      * sizing do its thing. This enforces a minimum width to
      * make it more likely that the title won't be clipped.
      */
-    gtk_window_set_default_size (GTK_WINDOW (dialog),
+    ctk_window_set_default_size (GTK_WINDOW (dialog),
                                  TIMED_WAIT_MINIMUM_DIALOG_WIDTH,
                                  -1);
     wait->dialog_creation_time = g_get_monotonic_time ();
-    gtk_widget_show (GTK_WIDGET (dialog));
+    ctk_widget_show (GTK_WIDGET (dialog));
 
     /* FIXME bugzilla.eazel.com 2441:
      * Could parent here, but it's complicated because we
@@ -415,7 +415,7 @@ eel_run_simple_dialog (GtkWidget *parent, gboolean ignore_close_box,
     chosen_parent = NULL;
     if (parent != NULL)
     {
-        top_widget = gtk_widget_get_toplevel (parent);
+        top_widget = ctk_widget_get_toplevel (parent);
         if (GTK_IS_WINDOW (top_widget))
         {
             chosen_parent = top_widget;
@@ -423,7 +423,7 @@ eel_run_simple_dialog (GtkWidget *parent, gboolean ignore_close_box,
     }
 
     /* Create the dialog. */
-	dialog = gtk_message_dialog_new (GTK_WINDOW (chosen_parent),
+	dialog = ctk_message_dialog_new (GTK_WINDOW (chosen_parent),
 					 0,
 					 message_type,
 					 GTK_BUTTONS_NONE,
@@ -451,20 +451,20 @@ eel_run_simple_dialog (GtkWidget *parent, gboolean ignore_close_box,
         else
             eel_dialog_add_button (GTK_DIALOG (dialog), _("_OK"), button_title, response_id);
 
-        gtk_dialog_set_default_response (GTK_DIALOG (dialog), response_id);
+        ctk_dialog_set_default_response (GTK_DIALOG (dialog), response_id);
         response_id++;
     }
     va_end (button_title_args);
 
     /* Run it. */
-    gtk_widget_show (dialog);
-    result = gtk_dialog_run (GTK_DIALOG (dialog));
+    ctk_widget_show (dialog);
+    result = ctk_dialog_run (GTK_DIALOG (dialog));
     while ((result == GTK_RESPONSE_NONE || result == GTK_RESPONSE_DELETE_EVENT) && ignore_close_box)
     {
-        gtk_widget_show (GTK_WIDGET (dialog));
-        result = gtk_dialog_run (GTK_DIALOG (dialog));
+        ctk_widget_show (GTK_WIDGET (dialog));
+        result = ctk_dialog_run (GTK_DIALOG (dialog));
     }
-	gtk_widget_destroy (dialog);
+	ctk_widget_destroy (dialog);
 
     return result;
 }
@@ -478,7 +478,7 @@ create_message_dialog (const char *primary_text,
 {
     GtkWidget *dialog;
 
-	dialog = gtk_message_dialog_new (parent,
+	dialog = ctk_message_dialog_new (parent,
 					 0,
 					 type,
 					 buttons_type,
@@ -505,13 +505,13 @@ show_message_dialog (const char *primary_text,
     dialog = create_message_dialog (primary_text, secondary_text, type,
                                     buttons_type, parent);
     if (details_text != NULL) {
-        eel_gtk_message_dialog_set_details_label (GTK_MESSAGE_DIALOG (dialog),
+        eel_ctk_message_dialog_set_details_label (GTK_MESSAGE_DIALOG (dialog),
 						  details_text);
     }
-    gtk_widget_show (GTK_WIDGET (dialog));
+    ctk_widget_show (GTK_WIDGET (dialog));
 
     g_signal_connect (dialog, "response",
-			  G_CALLBACK (gtk_widget_destroy), NULL);
+			  G_CALLBACK (ctk_widget_destroy), NULL);
 
     return dialog;
 }
@@ -526,7 +526,7 @@ show_ok_dialog (const char *primary_text,
 
     dialog = show_message_dialog (primary_text, secondary_text, type,
                                   GTK_BUTTONS_OK, NULL, parent);
-    gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+    ctk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
     return dialog;
 }
@@ -613,7 +613,7 @@ eel_show_yes_no_dialog (const char *primary_text,
                                          no_label, GTK_RESPONSE_CANCEL,
                                          yes_label, GTK_RESPONSE_YES,
                                          GTK_WINDOW (parent));
-    gtk_widget_show (GTK_WIDGET (dialog));
+    ctk_widget_show (GTK_WIDGET (dialog));
     return dialog;
 }
 
@@ -650,14 +650,14 @@ eel_create_question_dialog (const char *primary_text,
     if (g_strcmp0 (answer_1, "process-stop") == 0)
         eel_dialog_add_button (dialog, _("_Cancel"), answer_1, response_1);
     else
-        gtk_dialog_add_button (dialog, answer_1, response_1);
+        ctk_dialog_add_button (dialog, answer_1, response_1);
 
-    if (g_strcmp0 (answer_2, "gtk-ok") == 0)
+    if (g_strcmp0 (answer_2, "ctk-ok") == 0)
         eel_dialog_add_button (dialog, _("_OK"), answer_2, response_2);
     else if (g_strcmp0 (answer_2, "edit-clear") == 0)
         eel_dialog_add_button (dialog, _("_Clear"), answer_2, response_2);
     else
-        gtk_dialog_add_button (dialog, answer_2, response_2);
+        ctk_dialog_add_button (dialog, answer_2, response_2);
 
     return dialog;
 }

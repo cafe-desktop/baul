@@ -29,7 +29,7 @@
 #include <string.h>
 #include <cairo-gobject.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <libegg/eggtreemultidnd.h>
@@ -209,11 +209,11 @@ fm_list_model_get_iter (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreePath
     ptr = NULL;
 
     files = model->details->files;
-    for (d = 0; d < gtk_tree_path_get_depth (path); d++)
+    for (d = 0; d < ctk_tree_path_get_depth (path); d++)
     {
         int i;
 
-        i = gtk_tree_path_get_indices (path)[d];
+        i = ctk_tree_path_get_indices (path)[d];
 
         if (files == NULL || i >= g_sequence_get_length (files))
         {
@@ -249,11 +249,11 @@ fm_list_model_get_path (GtkTreeModel *tree_model, GtkTreeIter *iter)
         return NULL;
     }
 
-    path = gtk_tree_path_new ();
+    path = ctk_tree_path_new ();
     ptr = iter->user_data;
     while (ptr != NULL)
     {
-        gtk_tree_path_prepend_index (path, g_sequence_iter_get_position (ptr));
+        ctk_tree_path_prepend_index (path, g_sequence_iter_get_position (ptr));
         file_entry = g_sequence_get (ptr);
         if (file_entry->parent != NULL)
         {
@@ -361,22 +361,22 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
             {
                 GtkTreePath *path_a;
 
-                gtk_tree_view_get_drag_dest_row (model->details->drag_view,
+                ctk_tree_view_get_drag_dest_row (model->details->drag_view,
                                                  &path_a,
                                                  NULL);
                 if (path_a != NULL)
                 {
                     GtkTreePath *path_b;
 
-                    path_b = gtk_tree_model_get_path (tree_model, iter);
+                    path_b = ctk_tree_model_get_path (tree_model, iter);
 
-                    if (gtk_tree_path_compare (path_a, path_b) == 0)
+                    if (ctk_tree_path_compare (path_a, path_b) == 0)
                     {
                         flags |= BAUL_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT;
                     }
 
-                    gtk_tree_path_free (path_a);
-                    gtk_tree_path_free (path_b);
+                    ctk_tree_path_free (path_a);
+                    ctk_tree_path_free (path_b);
                 }
             }
 
@@ -833,9 +833,9 @@ fm_list_model_sort_file_entries (FMListModel *model, GSequence *files, GtkTreePa
 
         if (file_entry->files != NULL)
         {
-            gtk_tree_path_append_index (path, i);
+            ctk_tree_path_append_index (path, i);
             fm_list_model_sort_file_entries (model, file_entry->files, path);
-            gtk_tree_path_up (path);
+            ctk_tree_path_up (path);
         }
 
         old_order[i] = ptr;
@@ -857,15 +857,15 @@ fm_list_model_sort_file_entries (FMListModel *model, GSequence *files, GtkTreePa
     g_assert (new_order != NULL);
 
     has_iter = FALSE;
-    if (gtk_tree_path_get_depth (path) != 0)
+    if (ctk_tree_path_get_depth (path) != 0)
     {
         gboolean get_iter_result;
         has_iter = TRUE;
-        get_iter_result = gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
+        get_iter_result = ctk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
         g_assert (get_iter_result);
     }
 
-    gtk_tree_model_rows_reordered (GTK_TREE_MODEL (model),
+    ctk_tree_model_rows_reordered (GTK_TREE_MODEL (model),
                                    path, has_iter ? &iter : NULL, new_order);
 
     g_free (old_order);
@@ -877,11 +877,11 @@ fm_list_model_sort (FMListModel *model)
 {
     GtkTreePath *path;
 
-    path = gtk_tree_path_new ();
+    path = ctk_tree_path_new ();
 
     fm_list_model_sort_file_entries (model, model->details->files, path);
 
-    gtk_tree_path_free (path);
+    ctk_tree_path_free (path);
 }
 
 static gboolean
@@ -927,7 +927,7 @@ fm_list_model_set_sort_column_id (GtkTreeSortable *sortable, gint sort_column_id
     model->details->order = order;
 
     fm_list_model_sort (model);
-    gtk_tree_sortable_sort_column_changed (sortable);
+    ctk_tree_sortable_sort_column_changed (sortable);
 }
 
 static gboolean
@@ -960,18 +960,18 @@ each_path_get_data_binder (BaulDragEachSelectedItemDataGet data_get,
 
     g_return_if_fail (info->model->details->drag_view);
 
-    column = gtk_tree_view_get_column (info->model->details->drag_view, 0);
+    column = ctk_tree_view_get_column (info->model->details->drag_view, 0);
 
     for (l = info->path_list; l != NULL; l = l->next)
     {
         row = l->data;
 
-        path = gtk_tree_row_reference_get_path (row);
+        path = ctk_tree_row_reference_get_path (row);
         file = fm_list_model_file_for_path (info->model, path);
 
         if (file)
         {
-            gtk_tree_view_get_cell_area
+            ctk_tree_view_get_cell_area
             (info->model->details->drag_view,
              path,
              column,
@@ -990,7 +990,7 @@ each_path_get_data_binder (BaulDragEachSelectedItemDataGet data_get,
             baul_file_unref (file);
         }
 
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
     }
 }
 
@@ -1013,8 +1013,8 @@ fm_list_model_multi_drag_data_get (EggTreeMultiDragSource *drag_source,
         drag_target_list = fm_list_model_get_drag_target_list ();
     }
 
-    if (gtk_target_list_find (drag_target_list,
-                              gtk_selection_data_get_target (selection_data),
+    if (ctk_target_list_find (drag_target_list,
+                              ctk_selection_data_get_target (selection_data),
                               &target_info))
     {
         baul_drag_drag_data_get (NULL,
@@ -1052,9 +1052,9 @@ add_dummy_row (FMListModel *model, FileEntry *parent_entry)
     iter.stamp = model->details->stamp;
     iter.user_data = dummy_file_entry->ptr;
 
-    path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
-    gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
-    gtk_tree_path_free (path);
+    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+    ctk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
+    ctk_tree_path_free (path);
 }
 
 gboolean
@@ -1133,14 +1133,14 @@ fm_list_model_add_file (FMListModel *model, BaulFile *file,
     iter.stamp = model->details->stamp;
     iter.user_data = file_entry->ptr;
 
-    path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
     if (replace_dummy)
     {
-        gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
+        ctk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
     }
     else
     {
-        gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
+        ctk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
     }
 
     if (baul_file_is_directory (file))
@@ -1149,10 +1149,10 @@ fm_list_model_add_file (FMListModel *model, BaulFile *file,
 
         add_dummy_row (model, file_entry);
 
-        gtk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model),
+        ctk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model),
                                               path, &iter);
     }
-    gtk_tree_path_free (path);
+    ctk_tree_path_free (path);
 
     return TRUE;
 }
@@ -1195,14 +1195,14 @@ fm_list_model_file_changed (FMListModel *model, BaulFile *file,
         if (parent_file_entry == NULL)
         {
             has_iter = FALSE;
-            parent_path = gtk_tree_path_new ();
+            parent_path = ctk_tree_path_new ();
             files = model->details->files;
         }
         else
         {
             has_iter = TRUE;
             fm_list_model_ptr_to_iter (model, parent_file_entry->ptr, &iter);
-            parent_path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+            parent_path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
             files = parent_file_entry->files;
         }
 
@@ -1223,17 +1223,17 @@ fm_list_model_file_changed (FMListModel *model, BaulFile *file,
             }
         }
 
-        gtk_tree_model_rows_reordered (GTK_TREE_MODEL (model),
+        ctk_tree_model_rows_reordered (GTK_TREE_MODEL (model),
                                        parent_path, has_iter ? &iter : NULL, new_order);
 
-        gtk_tree_path_free (parent_path);
+        ctk_tree_path_free (parent_path);
         g_free (new_order);
     }
 
     fm_list_model_ptr_to_iter (model, ptr, &iter);
-    path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
-    gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
-    gtk_tree_path_free (path);
+    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+    ctk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
+    ctk_tree_path_free (path);
 }
 
 gboolean
@@ -1277,12 +1277,12 @@ fm_list_model_remove (FMListModel *model, GtkTreeIter *iter)
             }
             else
             {
-                path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
-                gtk_tree_path_append_index (path, 0);
+                path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
+                ctk_tree_path_append_index (path, 0);
                 model->details->stamp++;
                 g_sequence_remove (child_ptr);
-                gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
-                gtk_tree_path_free (path);
+                ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+                ctk_tree_path_free (path);
             }
 
             /* the parent iter didn't actually change */
@@ -1323,22 +1323,22 @@ fm_list_model_remove (FMListModel *model, GtkTreeIter *iter)
                              file_entry->subdirectory);
     }
 
-    path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
+    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
 
     g_sequence_remove (ptr);
     model->details->stamp++;
-    gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+    ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
 
-    gtk_tree_path_free (path);
+    ctk_tree_path_free (path);
 
     if (parent_file_entry && g_sequence_get_length (parent_file_entry->files) == 0)
     {
         parent_iter.stamp = model->details->stamp;
         parent_iter.user_data = parent_file_entry->ptr;
-        path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), &parent_iter);
-        gtk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model),
+        path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &parent_iter);
+        ctk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model),
                                               path, &parent_iter);
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
     }
 }
 
@@ -1391,10 +1391,10 @@ fm_list_model_file_for_path (FMListModel *model, GtkTreePath *path)
     GtkTreeIter iter;
 
     file = NULL;
-    if (gtk_tree_model_get_iter (GTK_TREE_MODEL (model),
+    if (ctk_tree_model_get_iter (GTK_TREE_MODEL (model),
                                  &iter, path))
     {
-        gtk_tree_model_get (GTK_TREE_MODEL (model),
+        ctk_tree_model_get (GTK_TREE_MODEL (model),
                             &iter,
                             FM_LIST_MODEL_FILE_COLUMN, &file,
                             -1);
@@ -1409,7 +1409,7 @@ fm_list_model_load_subdirectory (FMListModel *model, GtkTreePath *path, BaulDire
     FileEntry *file_entry;
     BaulDirectory *subdirectory;
 
-    if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path))
+    if (!ctk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path))
     {
         return FALSE;
     }
@@ -1638,8 +1638,8 @@ fm_list_model_get_drag_target_list ()
 {
     GtkTargetList *target_list;
 
-    target_list = gtk_target_list_new (drag_types, G_N_ELEMENTS (drag_types));
-    gtk_target_list_add_text_targets (target_list, BAUL_ICON_DND_TEXT);
+    target_list = ctk_target_list_new (drag_types, G_N_ELEMENTS (drag_types));
+    ctk_target_list_add_text_targets (target_list, BAUL_ICON_DND_TEXT);
 
     return target_list;
 }
@@ -1830,9 +1830,9 @@ fm_list_model_subdirectory_done_loading (FMListModel *model, BaulDirectory *dire
             iter.stamp = model->details->stamp;
             iter.user_data = dummy_ptr;
 
-            path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
-            gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
-            gtk_tree_path_free (path);
+            path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+            ctk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
+            ctk_tree_path_free (path);
         }
     }
 }
@@ -1852,10 +1852,10 @@ refresh_row (gpointer data,
     iters = fm_list_model_get_all_iters_for_file (model, file);
     for (l = iters; l != NULL; l = l->next)
     {
-        path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), l->data);
-        gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, l->data);
+        path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), l->data);
+        ctk_tree_model_row_changed (GTK_TREE_MODEL (model), path, l->data);
 
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
     }
 
     g_list_free_full (iters, g_free);

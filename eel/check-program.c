@@ -24,7 +24,7 @@
 
 #include <config.h>
 #include <gdk/gdk.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <libxml/parser.h>
 #include <stdlib.h>
 
@@ -42,7 +42,7 @@ main (int argc, char *argv[])
 
 
     LIBXML_TEST_VERSION
-    gtk_init (&argc, &argv);
+    ctk_init (&argc, &argv);
 
     /* Run the checks for eel twice. */
 

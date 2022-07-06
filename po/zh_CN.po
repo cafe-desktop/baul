@@ -527,7 +527,7 @@ msgstr "粘贴(_P)"
 msgid "Select All"
 msgstr "全选"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "显示更多详情"
 

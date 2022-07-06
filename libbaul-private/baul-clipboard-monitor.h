@@ -25,7 +25,7 @@
 #ifndef BAUL_CLIPBOARD_MONITOR_H
 #define BAUL_CLIPBOARD_MONITOR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_CLIPBOARD_MONITOR baul_clipboard_monitor_get_type()
 #define BAUL_CLIPBOARD_MONITOR(obj) \

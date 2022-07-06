@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <sys/types.h>
@@ -39,8 +39,8 @@
 
 #include <eel/eel-background.h>
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-extensions.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-string.h>
 #include <eel/eel-vfs-extensions.h>
@@ -292,7 +292,7 @@ fm_icon_view_finalize (GObject *object)
 static BaulIconContainer *
 get_icon_container (FMIconView *icon_view)
 {
-    return BAUL_ICON_CONTAINER (gtk_bin_get_child (GTK_BIN (icon_view)));
+    return BAUL_ICON_CONTAINER (ctk_bin_get_child (GTK_BIN (icon_view)));
 }
 
 static gboolean
@@ -472,7 +472,7 @@ action_tighter_layout_callback (GtkAction *action,
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     set_tighter_layout (FM_ICON_VIEW (user_data),
-                        gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)));
+                        ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -499,7 +499,7 @@ action_sort_radio_callback (GtkAction *action,
     BaulFileSortType sort_type;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    sort_type = gtk_radio_action_get_current_value (current);
+    sort_type = ctk_radio_action_get_current_value (current);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Note that id might be a toggle item.
@@ -749,58 +749,58 @@ update_layout_menus (FMIconView *view)
 
         /* Mark sort criterion. */
         action_name = is_auto_layout ? view->details->sort->action : FM_ACTION_MANUAL_LAYOUT;
-        action = gtk_action_group_get_action (view->details->icon_action_group,
+        action = ctk_action_group_get_action (view->details->icon_action_group,
                                               action_name);
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 
-        action = gtk_action_group_get_action (view->details->icon_action_group,
+        action = ctk_action_group_get_action (view->details->icon_action_group,
                                               FM_ACTION_TIGHTER_LAYOUT);
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                       fm_icon_view_using_tighter_layout (view));
-        gtk_action_set_sensitive (action, fm_icon_view_supports_tighter_layout (view));
-        gtk_action_set_visible (action, fm_icon_view_supports_tighter_layout (view));
+        ctk_action_set_sensitive (action, fm_icon_view_supports_tighter_layout (view));
+        ctk_action_set_visible (action, fm_icon_view_supports_tighter_layout (view));
 
-        action = gtk_action_group_get_action (view->details->icon_action_group,
+        action = ctk_action_group_get_action (view->details->icon_action_group,
                                               FM_ACTION_REVERSED_ORDER);
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                       view->details->sort_reversed);
-        gtk_action_set_sensitive (action, is_auto_layout);
+        ctk_action_set_sensitive (action, is_auto_layout);
 
-        action = gtk_action_group_get_action (view->details->icon_action_group,
+        action = ctk_action_group_get_action (view->details->icon_action_group,
                                               FM_ACTION_SORT_TRASH_TIME);
 
         if (file != NULL && baul_file_is_in_trash (file))
         {
-            gtk_action_set_visible (action, TRUE);
+            ctk_action_set_visible (action, TRUE);
         }
         else
         {
-            gtk_action_set_visible (action, FALSE);
+            ctk_action_set_visible (action, FALSE);
         }
     }
 
-    action = gtk_action_group_get_action (view->details->icon_action_group,
+    action = ctk_action_group_get_action (view->details->icon_action_group,
                                           FM_ACTION_MANUAL_LAYOUT);
-    gtk_action_set_visible (action,
+    ctk_action_set_visible (action,
                             fm_icon_view_supports_manual_layout (view));
 
     /* Clean Up is only relevant for manual layout */
-    action = gtk_action_group_get_action (view->details->icon_action_group,
+    action = ctk_action_group_get_action (view->details->icon_action_group,
                                           FM_ACTION_CLEAN_UP);
-    gtk_action_set_sensitive (action, !is_auto_layout);
+    ctk_action_set_sensitive (action, !is_auto_layout);
 
     if (FM_IS_DESKTOP_ICON_VIEW (view))
     {
-        gtk_action_set_label (action, _("_Organize Desktop by Name"));
+        ctk_action_set_label (action, _("_Organize Desktop by Name"));
     }
 
-    action = gtk_action_group_get_action (view->details->icon_action_group,
+    action = ctk_action_group_get_action (view->details->icon_action_group,
                                           FM_ACTION_KEEP_ALIGNED);
-    gtk_action_set_visible (action,
+    ctk_action_set_visible (action,
                             fm_icon_view_supports_keep_aligned (view));
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                   baul_icon_container_is_keep_aligned (get_icon_container (view)));
-    gtk_action_set_sensitive (action, !is_auto_layout);
+    ctk_action_set_sensitive (action, !is_auto_layout);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -1609,7 +1609,7 @@ action_reversed_order_callback (GtkAction *action,
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (set_sort_reversed (icon_view,
-                           gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action))))
+                           ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action))))
     {
         baul_icon_container_sort (get_icon_container (icon_view));
         fm_icon_view_reveal_selection (FM_DIRECTORY_VIEW (icon_view));
@@ -1628,7 +1628,7 @@ action_keep_aligned_callback (GtkAction *action,
     icon_view = FM_ICON_VIEW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    keep_aligned = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+    keep_aligned = ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (icon_view));
@@ -1821,16 +1821,16 @@ fm_icon_view_merge_menus (FMDirectoryView *view)
     ui_manager = fm_directory_view_get_ui_manager (FM_DIRECTORY_VIEW (icon_view));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action_group = gtk_action_group_new ("IconViewActions");
-    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+    action_group = ctk_action_group_new ("IconViewActions");
+    ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     icon_view->details->icon_action_group = action_group;
-    gtk_action_group_add_actions (action_group,
+    ctk_action_group_add_actions (action_group,
                                   icon_view_entries, G_N_ELEMENTS (icon_view_entries),
                                   icon_view);
-    gtk_action_group_add_toggle_actions (action_group,
+    ctk_action_group_add_toggle_actions (action_group,
                                          icon_view_toggle_entries, G_N_ELEMENTS (icon_view_toggle_entries),
                                          icon_view);
-    gtk_action_group_add_radio_actions (action_group,
+    ctk_action_group_add_radio_actions (action_group,
                                         arrange_radio_entries,
                                         G_N_ELEMENTS (arrange_radio_entries),
                                         -1,
@@ -1838,12 +1838,12 @@ fm_icon_view_merge_menus (FMDirectoryView *view)
                                         icon_view);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
+    ctk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui manager */
 
     ui = baul_ui_string_get ("baul-icon-view-ui.xml");
     icon_view->details->icon_merge_id =
-        gtk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
+        ctk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
 
     /* Do one-time state-setting here; context-dependent state-setting
      * is done in update_menus.
@@ -1853,22 +1853,22 @@ fm_icon_view_merge_menus (FMDirectoryView *view)
         GtkAction *action;
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        action = gtk_action_group_get_action (action_group,
+        action = ctk_action_group_get_action (action_group,
                                               FM_ACTION_ARRANGE_ITEMS);
-        gtk_action_set_visible (action, FALSE);
+        ctk_action_set_visible (action, FALSE);
         G_GNUC_END_IGNORE_DEPRECATIONS;
     }
 
     if (fm_icon_view_supports_scaling (icon_view))
     {
-        gtk_ui_manager_add_ui (ui_manager,
+        ctk_ui_manager_add_ui (ui_manager,
                                icon_view->details->icon_merge_id,
                                POPUP_PATH_ICON_APPEARANCE,
                                FM_ACTION_STRETCH,
                                FM_ACTION_STRETCH,
                                GTK_UI_MANAGER_MENUITEM,
                                FALSE);
-        gtk_ui_manager_add_ui (ui_manager,
+        ctk_ui_manager_add_ui (ui_manager,
                                icon_view->details->icon_merge_id,
                                POPUP_PATH_ICON_APPEARANCE,
                                FM_ACTION_UNSTRETCH,
@@ -1918,36 +1918,36 @@ fm_icon_view_update_menus (FMDirectoryView *view)
     icon_container = get_icon_container (icon_view);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (icon_view->details->icon_action_group,
+    action = ctk_action_group_get_action (icon_view->details->icon_action_group,
                                           FM_ACTION_STRETCH);
-    gtk_action_set_sensitive (action,
+    ctk_action_set_sensitive (action,
                               selection_count == 1
                               && icon_container != NULL
                               && !baul_icon_container_has_stretch_handles (icon_container));
 
-    gtk_action_set_visible (action,
+    ctk_action_set_visible (action,
                             fm_icon_view_supports_scaling (icon_view));
 
-    action = gtk_action_group_get_action (icon_view->details->icon_action_group,
+    action = ctk_action_group_get_action (icon_view->details->icon_action_group,
                                           FM_ACTION_UNSTRETCH);
     g_object_set (action, "label",
                   eel_g_list_more_than_one_item (selection)
                   ? _("Restore Icons' Original Si_zes")
                   : _("Restore Icon's Original Si_ze"),
                   NULL);
-    gtk_action_set_sensitive (action,
+    ctk_action_set_sensitive (action,
                               icon_container != NULL
                               && baul_icon_container_is_stretched (icon_container));
 
-    gtk_action_set_visible (action,
+    ctk_action_set_visible (action,
                             fm_icon_view_supports_scaling (icon_view));
 
     baul_file_list_free (selection);
 
     editable = fm_directory_view_is_editable (view);
-    action = gtk_action_group_get_action (icon_view->details->icon_action_group,
+    action = ctk_action_group_get_action (icon_view->details->icon_action_group,
                                           FM_ACTION_MANUAL_LAYOUT);
-    gtk_action_set_sensitive (action, editable);
+    ctk_action_set_sensitive (action, editable);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -2084,7 +2084,7 @@ icon_container_activate_alternate_callback (BaulIconContainer *container,
     {
         GdkEvent *event;
 
-        event = gtk_get_current_event ();
+        event = ctk_get_current_event ();
 
         if (event->type == GDK_BUTTON_PRESS ||
                 event->type == GDK_BUTTON_RELEASE ||
@@ -2585,7 +2585,7 @@ icon_container_context_click_background_callback (BaulIconContainer *container,
     g_assert (FM_IS_ICON_VIEW (icon_view));
 
     /* FIXME: passing event from here won't work
-     * for gtk_menu_popup_at_pointer (in eel_pop_up_context_menu() )
+     * for ctk_menu_popup_at_pointer (in eel_pop_up_context_menu() )
      * if the menu is being triggered from here by the menu key
      */
     fm_directory_view_pop_up_background_context_menu
@@ -3010,7 +3010,7 @@ create_icon_container (FMIconView *icon_view)
 
     icon_container = fm_icon_container_new (icon_view);
 
-    gtk_widget_set_can_focus (GTK_WIDGET (icon_container), TRUE);
+    ctk_widget_set_can_focus (GTK_WIDGET (icon_container), TRUE);
 
     g_signal_connect_object (icon_container, "focus_in_event",
                              G_CALLBACK (focus_in_event_callback), icon_view, 0);
@@ -3063,12 +3063,12 @@ create_icon_container (FMIconView *icon_view)
     g_signal_connect_object (icon_container, "store_layout_timestamp",
                              G_CALLBACK (store_layout_timestamp), icon_view, 0);
 
-    gtk_container_add (GTK_CONTAINER (icon_view),
+    ctk_container_add (GTK_CONTAINER (icon_view),
                        GTK_WIDGET (icon_container));
 
     fm_icon_view_update_click_mode (icon_view);
 
-    gtk_widget_show (GTK_WIDGET (icon_container));
+    ctk_widget_show (GTK_WIDGET (icon_container));
 
     return icon_container;
 }
@@ -3169,7 +3169,7 @@ fm_icon_view_set_property (GObject         *object,
         if (icon_view->details->compact)
         {
             baul_icon_container_set_layout_mode (get_icon_container (icon_view),
-                                                 gtk_widget_get_direction (GTK_WIDGET(icon_view)) == GTK_TEXT_DIR_RTL ?
+                                                 ctk_widget_get_direction (GTK_WIDGET(icon_view)) == GTK_TEXT_DIR_RTL ?
                                                  BAUL_ICON_LAYOUT_T_B_R_L :
                                                  BAUL_ICON_LAYOUT_T_B_L_R);
             baul_icon_container_set_forced_icon_size (get_icon_container (icon_view),
@@ -3297,7 +3297,7 @@ fm_icon_view_init (FMIconView *icon_view)
     static gboolean setup_sound_preview = FALSE;
     BaulIconContainer *icon_container;
 
-    g_return_if_fail (gtk_bin_get_child (GTK_BIN (icon_view)) == NULL);
+    g_return_if_fail (ctk_bin_get_child (GTK_BIN (icon_view)) == NULL);
 
     icon_view->details = g_new0 (FMIconViewDetails, 1);
     icon_view->details->sort = &sort_criteria[0];
@@ -3307,7 +3307,7 @@ fm_icon_view_init (FMIconView *icon_view)
 
     /* Set our default layout mode */
     baul_icon_container_set_layout_mode (icon_container,
-                                         gtk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
+                                         ctk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
                                          BAUL_ICON_LAYOUT_R_L_T_B :
                                          BAUL_ICON_LAYOUT_L_R_T_B);
 
@@ -3375,7 +3375,7 @@ fm_icon_view_create (BaulWindowSlotInfo *slot)
                          "compact", FALSE,
                          NULL);
 
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (view)), GTK_STYLE_CLASS_VIEW);
+    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (view)), GTK_STYLE_CLASS_VIEW);
 
     return BAUL_VIEW (view);
 }
@@ -3390,7 +3390,7 @@ fm_compact_view_create (BaulWindowSlotInfo *slot)
                          "compact", TRUE,
                          NULL);
 
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (view)), GTK_STYLE_CLASS_VIEW);
+    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (view)), GTK_STYLE_CLASS_VIEW);
 
     return BAUL_VIEW (view);
 }

@@ -26,7 +26,7 @@
 #define BAUL_PROPERTY_PAGE_H
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "baul-extension-types.h"
 
 G_BEGIN_DECLS

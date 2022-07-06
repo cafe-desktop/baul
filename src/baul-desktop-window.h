@@ -32,7 +32,7 @@
 #include "baul-application.h"
 #include "baul-spatial-window.h"
 
-#include <gtk/gtk-a11y.h>
+#include <ctk/ctk-a11y.h>
 
 #define BAUL_TYPE_DESKTOP_WINDOW baul_desktop_window_get_type()
 #define BAUL_DESKTOP_WINDOW(obj) \

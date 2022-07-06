@@ -522,7 +522,7 @@ msgstr "У_баци"
 msgid "Select All"
 msgstr "Изабери све"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Прикажи _више података"
 

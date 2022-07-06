@@ -32,7 +32,7 @@
 #include "baul-file-utilities.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <string.h>
 
 typedef struct _TargetCallbackData TargetCallbackData;
@@ -90,8 +90,8 @@ editable_select_all_callback (gpointer target)
     editable = GTK_EDITABLE (target);
     g_assert (editable != NULL);
 
-    gtk_editable_set_position (editable, -1);
-    gtk_editable_select_region (editable, 0, -1);
+    ctk_editable_set_position (editable, -1);
+    ctk_editable_select_region (editable, 0, -1);
 }
 
 static void
@@ -148,12 +148,12 @@ received_clipboard_contents (GtkClipboard     *clipboard,
     action_group = data;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (action_group,
+    action = ctk_action_group_get_action (action_group,
                                           "Paste");
     if (action != NULL)
     {
-        gtk_action_set_sensitive (action,
-                                  gtk_selection_data_targets_include_text (selection_data));
+        ctk_action_set_sensitive (action,
+                                  ctk_selection_data_targets_include_text (selection_data));
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
@@ -166,7 +166,7 @@ set_paste_sensitive_if_clipboard_contains_data (GtkActionGroup *action_group)
 {
     if (gdk_display_supports_selection_notification (gdk_display_get_default ()))
     {
-        gtk_clipboard_request_contents (gtk_clipboard_get (GDK_SELECTION_CLIPBOARD),
+        ctk_clipboard_request_contents (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD),
                                         gdk_atom_intern ("TARGETS", FALSE),
                                         received_clipboard_contents,
                                         g_object_ref (action_group));
@@ -177,9 +177,9 @@ set_paste_sensitive_if_clipboard_contains_data (GtkActionGroup *action_group)
 
         /* If selection notification isn't supported, always activate Paste */
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        action = gtk_action_group_get_action (action_group,
+        action = ctk_action_group_get_action (action_group,
                                               "Paste");
-        gtk_action_set_sensitive (action, TRUE);
+        ctk_action_set_sensitive (action, TRUE);
         G_GNUC_END_IGNORE_DEPRECATIONS;
     }
 }
@@ -190,12 +190,12 @@ set_clipboard_menu_items_sensitive (GtkActionGroup *action_group)
     GtkAction *action;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (action_group,
+    action = ctk_action_group_get_action (action_group,
                                           "Cut");
-    gtk_action_set_sensitive (action, TRUE);
-    action = gtk_action_group_get_action (action_group,
+    ctk_action_set_sensitive (action, TRUE);
+    action = ctk_action_group_get_action (action_group,
                                           "Copy");
-    gtk_action_set_sensitive (action, TRUE);
+    ctk_action_set_sensitive (action, TRUE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -205,12 +205,12 @@ set_clipboard_menu_items_insensitive (GtkActionGroup *action_group)
     GtkAction *action;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (action_group,
+    action = ctk_action_group_get_action (action_group,
                                           "Cut");
-    gtk_action_set_sensitive (action, FALSE);
-    action = gtk_action_group_get_action (action_group,
+    ctk_action_set_sensitive (action, FALSE);
+    action = ctk_action_group_get_action (action_group,
                                           "Copy");
-    gtk_action_set_sensitive (action, FALSE);
+    ctk_action_set_sensitive (action, FALSE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -258,7 +258,7 @@ text_buffer_update_sensitivity (GtkTextBuffer *buffer,
     g_assert (GTK_IS_TEXT_BUFFER (buffer));
     g_assert (target_data != NULL);
 
-    if (gtk_text_buffer_get_selection_bounds (buffer, NULL, NULL))
+    if (ctk_text_buffer_get_selection_bounds (buffer, NULL, NULL))
     {
         set_clipboard_menu_items_sensitive (target_data->action_group);
     }
@@ -284,7 +284,7 @@ text_buffer_mark_set (GtkTextBuffer *buffer,
                       TargetCallbackData *target_data)
 {
     /* anonymous marks with NULL names refer to cursor moves */
-    if (gtk_text_mark_get_name (mark) != NULL)
+    if (ctk_text_mark_get_name (mark) != NULL)
     {
         text_buffer_update_sensitivity (buffer, target_data);
     }
@@ -296,7 +296,7 @@ text_view_connect_callbacks (GObject *object,
 {
     GtkTextBuffer *buffer;
 
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (object));
+    buffer = ctk_text_view_get_buffer (GTK_TEXT_VIEW (object));
     g_assert (buffer);
 
     g_signal_connect_after (buffer, "mark-set",
@@ -312,7 +312,7 @@ text_view_disconnect_callbacks (GObject *object,
 {
     GtkTextBuffer *buffer;
 
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (object));
+    buffer = ctk_text_view_get_buffer (GTK_TEXT_VIEW (object));
     g_assert (buffer);
 
     g_signal_handlers_disconnect_matched (buffer,
@@ -331,12 +331,12 @@ merge_in_clipboard_menu_items (GObject *widget_as_object,
 
     add_selection_callback = target_data->shares_selection_changes;
 
-    gtk_ui_manager_insert_action_group (target_data->ui_manager,
+    ctk_ui_manager_insert_action_group (target_data->ui_manager,
                                         target_data->action_group, 0);
 
     set_paste_sensitive_if_clipboard_contains_data (target_data->action_group);
 
-    g_signal_connect (gtk_clipboard_get (GDK_SELECTION_CLIPBOARD), "owner_change",
+    g_signal_connect (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD), "owner_change",
                       G_CALLBACK (owner_change_callback), target_data);
 
     if (add_selection_callback)
@@ -360,10 +360,10 @@ merge_out_clipboard_menu_items (GObject *widget_as_object,
 
     g_assert (target_data != NULL);
 
-    gtk_ui_manager_remove_action_group (target_data->ui_manager,
+    ctk_ui_manager_remove_action_group (target_data->ui_manager,
                                         target_data->action_group);
 
-    g_signal_handlers_disconnect_matched (gtk_clipboard_get (GDK_SELECTION_CLIPBOARD),
+    g_signal_handlers_disconnect_matched (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD),
                                           G_SIGNAL_MATCH_FUNC | G_SIGNAL_MATCH_DATA,
                                           0, 0, NULL,
                                           G_CALLBACK (owner_change_callback),
@@ -384,7 +384,7 @@ focus_changed_callback (GtkWidget *widget,
                         gpointer callback_data)
 {
     /* Connect the component to the container if the widget has focus. */
-    if (gtk_widget_has_focus (widget))
+    if (ctk_widget_has_focus (widget))
     {
         if (!clipboard_items_are_merged_in (widget))
         {
@@ -416,7 +416,7 @@ selection_changed_callback (GtkWidget *widget,
     editable = GTK_EDITABLE (widget);
     g_assert (editable != NULL);
 
-    if (gtk_editable_get_selection_bounds (editable, &start, &end) && start != end)
+    if (ctk_editable_get_selection_bounds (editable, &start, &end) && start != end)
     {
         set_clipboard_menu_items_sensitive (target_data->action_group);
     }
@@ -494,9 +494,9 @@ initialize_clipboard_component_with_callback_data (GtkEditable *target,
     TargetCallbackData *target_data;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action_group = gtk_action_group_new ("ClipboardActions");
-    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
-    gtk_action_group_add_actions (action_group,
+    action_group = ctk_action_group_new ("ClipboardActions");
+    ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+    ctk_action_group_add_actions (action_group,
                                   clipboard_entries, G_N_ELEMENTS (clipboard_entries),
                                   target);
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -626,8 +626,8 @@ baul_clipboard_get_uri_list_from_selection_data (GtkSelectionData *selection_dat
 {
     GList *items;
 
-    if (gtk_selection_data_get_data_type (selection_data) != copied_files_atom
-            || gtk_selection_data_get_length (selection_data) <= 0)
+    if (ctk_selection_data_get_data_type (selection_data) != copied_files_atom
+            || ctk_selection_data_get_length (selection_data) <= 0)
     {
         items = NULL;
     }
@@ -637,11 +637,11 @@ baul_clipboard_get_uri_list_from_selection_data (GtkSelectionData *selection_dat
         guchar *data;
         /* Not sure why it's legal to assume there's an extra byte
          * past the end of the selection data that it's safe to write
-         * to. But gtk_editable_selection_received does this, so I
+         * to. But ctk_editable_selection_received does this, so I
          * think it is OK.
          */
-        data = (guchar *) gtk_selection_data_get_data (selection_data);
-        data[gtk_selection_data_get_length (selection_data)] = '\0';
+        data = (guchar *) ctk_selection_data_get_data (selection_data);
+        data[ctk_selection_data_get_length (selection_data)] = '\0';
         lines = g_strsplit (data, "\n", 0);
         items = convert_lines_to_str_list (lines, cut);
         g_strfreev (lines);
@@ -653,7 +653,7 @@ baul_clipboard_get_uri_list_from_selection_data (GtkSelectionData *selection_dat
 GtkClipboard *
 baul_clipboard_get (GtkWidget *widget)
 {
-    return gtk_clipboard_get_for_display (gtk_widget_get_display (GTK_WIDGET (widget)),
+    return ctk_clipboard_get_for_display (ctk_widget_get_display (GTK_WIDGET (widget)),
                                           GDK_SELECTION_CLIPBOARD);
 }
 
@@ -667,7 +667,7 @@ baul_clipboard_clear_if_colliding_uris (GtkWidget *widget,
     gboolean collision;
 
     collision = FALSE;
-    data = gtk_clipboard_wait_for_contents (baul_clipboard_get (widget),
+    data = ctk_clipboard_wait_for_contents (baul_clipboard_get (widget),
                                             copied_files_atom);
     if (data == NULL) {
         return;
@@ -685,7 +685,7 @@ baul_clipboard_clear_if_colliding_uris (GtkWidget *widget,
     }
 
     if (collision) {
-        gtk_clipboard_clear (baul_clipboard_get (widget));
+        ctk_clipboard_clear (baul_clipboard_get (widget));
     }
 
     if (clipboard_item_uris) {

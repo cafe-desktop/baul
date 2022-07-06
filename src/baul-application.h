@@ -30,7 +30,7 @@
 #include <config.h>
 #include <gdk/gdk.h>
 #include <gio/gio.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libegg/eggsmclient.h>
 

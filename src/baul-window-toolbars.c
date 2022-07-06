@@ -29,12 +29,12 @@
 #include <config.h>
 #include <unistd.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-cafe-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-string.h>
 
 #include <libbaul-extension/baul-menu-provider.h>
@@ -69,10 +69,10 @@ baul_navigation_window_set_spinner_active (BaulNavigationWindow *window,
 
     window->details->spinner_active = allow;
     if (allow) {
-        gtk_widget_show (window->details->spinner);
-        gtk_spinner_start (GTK_SPINNER (window->details->spinner));
+        ctk_widget_show (window->details->spinner);
+        ctk_spinner_start (GTK_SPINNER (window->details->spinner));
     } else {
-        gtk_widget_hide (window->details->spinner);
+        ctk_widget_hide (window->details->spinner);
     }
 }
 
@@ -87,20 +87,20 @@ baul_navigation_window_activate_spinner (BaulNavigationWindow *window)
         return;
     }
 
-    item = gtk_tool_item_new ();
-    gtk_widget_show (GTK_WIDGET (item));
-    gtk_tool_item_set_expand (item, TRUE);
-    gtk_toolbar_insert (GTK_TOOLBAR (window->details->toolbar),
+    item = ctk_tool_item_new ();
+    ctk_widget_show (GTK_WIDGET (item));
+    ctk_tool_item_set_expand (item, TRUE);
+    ctk_toolbar_insert (GTK_TOOLBAR (window->details->toolbar),
                         item, -1);
 
-    spinner = gtk_spinner_new ();
-    gtk_widget_show (GTK_WIDGET (spinner));
+    spinner = ctk_spinner_new ();
+    ctk_widget_show (GTK_WIDGET (spinner));
 
-    item = gtk_tool_item_new ();
-    gtk_container_add (GTK_CONTAINER (item), spinner);
-    gtk_widget_show (GTK_WIDGET (item));
+    item = ctk_tool_item_new ();
+    ctk_container_add (GTK_CONTAINER (item), spinner);
+    ctk_widget_show (GTK_WIDGET (item));
 
-    gtk_toolbar_insert (GTK_TOOLBAR (window->details->toolbar),
+    ctk_toolbar_insert (GTK_TOOLBAR (window->details->toolbar),
                         item, -1);
 
     window->details->spinner = spinner;
@@ -159,26 +159,26 @@ baul_navigation_window_load_extension_toolbar_items (BaulNavigationWindow *windo
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
     if (window->details->extensions_toolbar_merge_id != 0)
     {
-        gtk_ui_manager_remove_ui (ui_manager,
+        ctk_ui_manager_remove_ui (ui_manager,
                                   window->details->extensions_toolbar_merge_id);
         window->details->extensions_toolbar_merge_id = 0;
     }
 
     if (window->details->extensions_toolbar_action_group != NULL)
     {
-        gtk_ui_manager_remove_action_group (ui_manager,
+        ctk_ui_manager_remove_action_group (ui_manager,
                                             window->details->extensions_toolbar_action_group);
         window->details->extensions_toolbar_action_group = NULL;
     }
 
-    merge_id = gtk_ui_manager_new_merge_id (ui_manager);
+    merge_id = ctk_ui_manager_new_merge_id (ui_manager);
     window->details->extensions_toolbar_merge_id = merge_id;
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action_group = gtk_action_group_new ("ExtensionsToolbarGroup");
+    action_group = ctk_action_group_new ("ExtensionsToolbarGroup");
     window->details->extensions_toolbar_action_group = action_group;
-    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+    ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
-    gtk_ui_manager_insert_action_group (ui_manager, action_group, -1);
+    ctk_ui_manager_insert_action_group (ui_manager, action_group, -1);
     g_object_unref (action_group); /* owned by ui manager */
 
     items = get_extension_toolbar_items (window);
@@ -190,14 +190,14 @@ baul_navigation_window_load_extension_toolbar_items (BaulNavigationWindow *windo
         action = baul_toolbar_action_from_menu_item (item, GTK_WIDGET (window));
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        gtk_action_group_add_action (action_group,
+        ctk_action_group_add_action (action_group,
                                      GTK_ACTION (action));
         g_object_unref (action);
 
-        action_name = gtk_action_get_name (action);
+        action_name = ctk_action_get_name (action);
         G_GNUC_END_IGNORE_DEPRECATIONS;
 
-        gtk_ui_manager_add_ui (ui_manager,
+        ctk_ui_manager_add_ui (ui_manager,
                                merge_id,
                                TOOLBAR_PATH_EXTENSION_ACTIONS,
                                action_name,

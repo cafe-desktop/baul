@@ -452,7 +452,7 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: ../eel/eel-gtk-extensions.c:432
+#: ../eel/eel-ctk-extensions.c:432
 msgid "Show more _details"
 msgstr ""
 

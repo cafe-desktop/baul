@@ -25,7 +25,7 @@
 */
 
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <cairo-xlib.h>
 #include <gdk/gdkx.h>
 #include <gio/gio.h>
@@ -309,14 +309,14 @@ drawable_get_adjusted_size (EelBackground *self,
 {
     if (self->details->is_desktop)
     {
-        GdkScreen *screen = gtk_widget_get_screen (self->details->widget);
-        gint scale = gtk_widget_get_scale_factor (self->details->widget);
+        GdkScreen *screen = ctk_widget_get_screen (self->details->widget);
+        gint scale = ctk_widget_get_scale_factor (self->details->widget);
         *width = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
         *height = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
     }
     else
     {
-        GdkWindow *window = gtk_widget_get_window (self->details->widget);
+        GdkWindow *window = ctk_widget_get_window (self->details->widget);
         *width = gdk_window_get_width (window);
         *height = gdk_window_get_height (window);
     }
@@ -331,20 +331,20 @@ eel_background_ensure_realized (EelBackground *self)
     GdkRGBA *c;
 
     /* Set the default color */
-    style = gtk_widget_get_style_context (self->details->widget);
-    gtk_style_context_save (style);
-    gtk_style_context_set_state (style, GTK_STATE_FLAG_NORMAL);
+    style = ctk_widget_get_style_context (self->details->widget);
+    ctk_style_context_save (style);
+    ctk_style_context_set_state (style, GTK_STATE_FLAG_NORMAL);
     if (self->details->use_base) {
-        gtk_style_context_add_class (style, GTK_STYLE_CLASS_VIEW);
+        ctk_style_context_add_class (style, GTK_STYLE_CLASS_VIEW);
     }
 
-    gtk_style_context_get (style, gtk_style_context_get_state (style),
+    ctk_style_context_get (style, ctk_style_context_get_state (style),
                            GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                            &c, NULL);
     self->details->default_color = *c;
     gdk_rgba_free (c);
 
-    gtk_style_context_restore (style);
+    ctk_style_context_restore (style);
 
     /* If the window size is the same as last time, don't update */
     drawable_get_adjusted_size (self, &width, &height);
@@ -358,7 +358,7 @@ eel_background_ensure_realized (EelBackground *self)
 
     set_image_properties (self);
 
-    window = gtk_widget_get_window (self->details->widget);
+    window = ctk_widget_get_window (self->details->widget);
     self->details->bg_surface = cafe_bg_create_surface (self->details->bg,
         						window, width, height,
         						self->details->is_desktop);
@@ -433,7 +433,7 @@ init_fade (EelBackground *self)
     GtkWidget *widget = self->details->widget;
     gboolean do_fade;
 
-    if (!self->details->is_desktop || widget == NULL || !gtk_widget_get_realized (widget)) {
+    if (!self->details->is_desktop || widget == NULL || !ctk_widget_get_realized (widget)) {
         return;
     }
 
@@ -470,7 +470,7 @@ init_fade (EelBackground *self)
         if (self->details->bg_surface == NULL)
         {
             cairo_surface_t *start_surface;
-            start_surface = cafe_bg_get_surface_from_root (gtk_widget_get_screen (widget));
+            start_surface = cafe_bg_get_surface_from_root (ctk_widget_get_screen (widget));
             cafe_bg_crossfade_set_start_surface (self->details->fade, start_surface);
             cairo_surface_destroy (start_surface);
         }
@@ -524,7 +524,7 @@ eel_background_set_up_widget (EelBackground *self)
 
     gboolean in_fade = FALSE;
 
-    if (!gtk_widget_get_realized (widget))
+    if (!ctk_widget_get_realized (widget))
         return;
 
     eel_background_ensure_realized (self);
@@ -532,7 +532,7 @@ eel_background_set_up_widget (EelBackground *self)
     if (self->details->bg_surface == NULL)
         return;
 
-    gtk_widget_queue_draw (widget);
+    ctk_widget_queue_draw (widget);
 
     if (self->details->fade != NULL)
         in_fade = fade_to_surface (self, widget, self->details->bg_surface);
@@ -543,16 +543,16 @@ eel_background_set_up_widget (EelBackground *self)
 
         if (EEL_IS_CANVAS (widget))
         {
-            window = gtk_layout_get_bin_window (GTK_LAYOUT (widget));
+            window = ctk_layout_get_bin_window (GTK_LAYOUT (widget));
         }
         else
         {
-            window = gtk_widget_get_window (widget);
+            window = ctk_widget_get_window (widget);
         }
 
         if (self->details->is_desktop)
         {
-            set_root_surface (self, window, gtk_widget_get_screen (widget));
+            set_root_surface (self, window, ctk_widget_get_screen (widget));
         }
     }
 }
@@ -636,7 +636,7 @@ widget_realized_setup (GtkWidget     *widget,
         return;
     }
 
-    GdkScreen *screen = gtk_widget_get_screen (widget);
+    GdkScreen *screen = ctk_widget_get_screen (widget);
     GdkWindow *window = gdk_screen_get_root_window (screen);
 
     if (self->details->screen_size_handler > 0)
@@ -654,7 +654,7 @@ widget_realized_setup (GtkWidget     *widget,
         g_signal_connect (screen, "monitors-changed", G_CALLBACK (screen_size_changed), self);
 
     self->details->use_common_surface =
-        (gdk_window_get_visual (window) == gtk_widget_get_visual (widget)) ? TRUE : FALSE;
+        (gdk_window_get_visual (window) == ctk_widget_get_visual (widget)) ? TRUE : FALSE;
 
     init_fade (self);
 }
@@ -677,13 +677,13 @@ widget_unrealize_cb (GtkWidget *widget,
     EelBackground *self = EEL_BACKGROUND (user_data);
 
     if (self->details->screen_size_handler > 0) {
-        g_signal_handler_disconnect (gtk_widget_get_screen (GTK_WIDGET (widget)),
+        g_signal_handler_disconnect (ctk_widget_get_screen (GTK_WIDGET (widget)),
                                      self->details->screen_size_handler);
         self->details->screen_size_handler = 0;
     }
 
     if (self->details->screen_monitors_handler > 0) {
-        g_signal_handler_disconnect (gtk_widget_get_screen (GTK_WIDGET (widget)),
+        g_signal_handler_disconnect (ctk_widget_get_screen (GTK_WIDGET (widget)),
                                      self->details->screen_monitors_handler);
         self->details->screen_monitors_handler = 0;
     }
@@ -858,12 +858,12 @@ eel_background_set_desktop (EelBackground *self,
     if (is_desktop)
     {
         self->details->widget =
-          gtk_widget_get_toplevel (self->details->front_widget);
+          ctk_widget_get_toplevel (self->details->front_widget);
 
         desktop_bg_objects = g_list_prepend (desktop_bg_objects,
                                              G_OBJECT (self));
 
-        if (gtk_widget_get_realized (self->details->widget))
+        if (ctk_widget_get_realized (self->details->widget))
         {
             widget_realized_setup (self->details->widget, self);
         }
@@ -890,7 +890,7 @@ eel_background_set_active (EelBackground *self,
     {
         self->details->is_active = is_active;
         set_image_properties (self);
-        gtk_widget_queue_draw (self->details->widget);
+        ctk_widget_queue_draw (self->details->widget);
     }
 }
 
@@ -1056,13 +1056,13 @@ eel_background_set_dropped_color (EelBackground *self,
     g_return_if_fail (selection_data != NULL);
 
     /* Convert the selection data into a color spec. */
-    if (gtk_selection_data_get_length ((GtkSelectionData *) selection_data) != 8 ||
-            gtk_selection_data_get_format ((GtkSelectionData *) selection_data) != 16)
+    if (ctk_selection_data_get_length ((GtkSelectionData *) selection_data) != 8 ||
+            ctk_selection_data_get_format ((GtkSelectionData *) selection_data) != 16)
     {
         g_warning ("received invalid color data");
         return;
     }
-    channels = (guint16 *) gtk_selection_data_get_data ((GtkSelectionData *) selection_data);
+    channels = (guint16 *) ctk_selection_data_get_data ((GtkSelectionData *) selection_data);
     color_spec = g_strdup_printf ("#%02X%02X%02X",
                                   channels[0] >> 8,
                                   channels[1] >> 8,
@@ -1072,7 +1072,7 @@ eel_background_set_dropped_color (EelBackground *self,
        For the moment, this is hard-wired, but later the widget will have to have some
        say in where the borders are.
     */
-    gtk_widget_get_allocation (widget, &allocation);
+    ctk_widget_get_allocation (widget, &allocation);
     left_border = 32;
     right_border = allocation.width - 32;
     top_border = 32;
@@ -1083,11 +1083,11 @@ eel_background_set_dropped_color (EelBackground *self,
     if (!self->details->color)
     {
 
-        GtkStyleContext *style = gtk_widget_get_style_context (widget);
+        GtkStyleContext *style = ctk_widget_get_style_context (widget);
         GdkRGBA bg;
         GdkRGBA *c;
 
-        gtk_style_context_get (style, GTK_STATE_FLAG_NORMAL,
+        ctk_style_context_get (style, GTK_STATE_FLAG_NORMAL,
                                GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                &c, NULL);
         bg = *c;

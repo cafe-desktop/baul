@@ -31,7 +31,7 @@ baul_recent_get_manager (void)
 
     if (manager == NULL)
     {
-        manager = gtk_recent_manager_get_default ();
+        manager = ctk_recent_manager_get_default ();
     }
 
     return manager;
@@ -69,7 +69,7 @@ baul_recent_add_file (BaulFile *file,
     recent_data.groups = NULL;
     recent_data.is_private = FALSE;
 
-    gtk_recent_manager_add_full (baul_recent_get_manager (),
+    ctk_recent_manager_add_full (baul_recent_get_manager (),
                                  uri, &recent_data);
 
     g_free (recent_data.mime_type);

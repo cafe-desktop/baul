@@ -24,7 +24,7 @@
 #ifndef BAUL_LOCATION_DIALOG_H
 #define BAUL_LOCATION_DIALOG_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "baul-window.h"
 
 #define BAUL_TYPE_LOCATION_DIALOG         (baul_location_dialog_get_type ())

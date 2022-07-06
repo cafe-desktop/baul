@@ -31,7 +31,7 @@
 #include <cairo-gobject.h>
 
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-graphic-effects.h>
 
@@ -635,9 +635,9 @@ report_row_inserted (FMTreeModel *model, GtkTreeIter *iter)
 {
     GtkTreePath *path;
 
-    path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
-    gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, iter);
-    gtk_tree_path_free (path);
+    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
+    ctk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, iter);
+    ctk_tree_path_free (path);
 }
 
 static void
@@ -645,9 +645,9 @@ report_row_contents_changed (FMTreeModel *model, GtkTreeIter *iter)
 {
     GtkTreePath *path;
 
-    path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
-    gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
-    gtk_tree_path_free (path);
+    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
+    ctk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
+    ctk_tree_path_free (path);
 }
 
 static void
@@ -655,9 +655,9 @@ report_row_has_child_toggled (FMTreeModel *model, GtkTreeIter *iter)
 {
     GtkTreePath *path;
 
-    path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
-    gtk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model), path, iter);
-    gtk_tree_path_free (path);
+    path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
+    ctk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model), path, iter);
+    ctk_tree_path_free (path);
 }
 
 static GtkTreePath *
@@ -666,7 +666,7 @@ get_node_path (FMTreeModel *model, TreeNode *node)
     GtkTreeIter iter;
 
     make_iter_for_node (node, &iter, model->details->stamp);
-    return gtk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+    return ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
 }
 
 static void
@@ -692,10 +692,10 @@ report_dummy_row_deleted (FMTreeModel *model, TreeNode *parent)
         GtkTreePath *path;
 
         make_iter_for_node (parent, &iter, model->details->stamp);
-        path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
-        gtk_tree_path_append_index (path, 0);
-        gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
-        gtk_tree_path_free (path);
+        path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
+        ctk_tree_path_append_index (path, 0);
+        ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+        ctk_tree_path_free (path);
     }
     abandon_dummy_row_ref_count (model, parent);
 }
@@ -818,8 +818,8 @@ destroy_node (FMTreeModel *model, TreeNode *node)
     path = get_node_path (model, node);
 
     /* Report row_deleted before actually deleting */
-    gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
-    gtk_tree_path_free (path);
+    ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+    ctk_tree_path_free (path);
 
     destroy_node_without_reporting (model, node);
 
@@ -949,8 +949,8 @@ reparent_node (FMTreeModel *model, TreeNode *node)
     path = get_node_path (model, node);
 
     /* Report row_deleted before actually deleting */
-    gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
-    gtk_tree_path_free (path);
+    ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+    ctk_tree_path_free (path);
 
     abandon_node_ref_count (model, node);
     tree_node_unparent (model, node);
@@ -1283,10 +1283,10 @@ fm_tree_model_get_iter (GtkTreeModel *model, GtkTreeIter *iter, GtkTreePath *pat
     GtkTreeIter parent;
     int depth, i;
 
-    indices = gtk_tree_path_get_indices (path);
-    depth = gtk_tree_path_get_depth (path);
+    indices = ctk_tree_path_get_indices (path);
+    depth = ctk_tree_path_get_depth (path);
 
-    if (! gtk_tree_model_iter_nth_child (model, iter, NULL, indices[0]))
+    if (! ctk_tree_model_iter_nth_child (model, iter, NULL, indices[0]))
     {
         return FALSE;
     }
@@ -1295,7 +1295,7 @@ fm_tree_model_get_iter (GtkTreeModel *model, GtkTreeIter *iter, GtkTreePath *pat
     {
         parent = *iter;
 
-        if (! gtk_tree_model_iter_nth_child (model, iter, &parent, indices[i]))
+        if (! ctk_tree_model_iter_nth_child (model, iter, &parent, indices[i]))
         {
             return FALSE;
         }
@@ -1323,7 +1323,7 @@ fm_tree_model_get_path (GtkTreeModel *model, GtkTreeIter *iter)
 
         if (parent == NULL)
         {
-            return gtk_tree_path_new ();
+            return ctk_tree_path_new ();
         }
     }
     else
@@ -1339,8 +1339,8 @@ fm_tree_model_get_path (GtkTreeModel *model, GtkTreeIter *iter)
             {
                 i++;
             }
-            path = gtk_tree_path_new ();
-            gtk_tree_path_append_index (path, i);
+            path = ctk_tree_path_new ();
+            ctk_tree_path_append_index (path, i);
             return path;
         }
     }
@@ -1352,7 +1352,7 @@ fm_tree_model_get_path (GtkTreeModel *model, GtkTreeIter *iter)
 
     path = fm_tree_model_get_path (model, &parent_iter);
 
-    gtk_tree_path_append_index (path, tree_node_get_child_index (parent, node));
+    ctk_tree_path_append_index (path, tree_node_get_child_index (parent, node));
 
     return path;
 }
@@ -1809,8 +1809,8 @@ fm_tree_model_remove_root_uri (FMTreeModel *model, const char *uri)
         path = get_node_path (model, node);
 
         /* Report row_deleted before actually deleting */
-        gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
-        gtk_tree_path_free (path);
+        ctk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+        ctk_tree_path_free (path);
 
         if (node->prev)
         {
@@ -1904,7 +1904,7 @@ fm_tree_model_iter_get_file (FMTreeModel *model, GtkTreeIter *iter)
 }
 
 /* This is used to work around some sort order stability problems
-   with gtktreemodelsort */
+   with ctktreemodelsort */
 int
 fm_tree_model_iter_compare_roots (FMTreeModel *model,
                                   GtkTreeIter *iter_a,

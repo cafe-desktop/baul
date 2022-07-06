@@ -28,7 +28,7 @@
 #ifndef FM_DIRECTORY_VIEW_H
 #define FM_DIRECTORY_VIEW_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 #include <eel/eel-background.h>

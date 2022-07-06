@@ -26,7 +26,7 @@
 #ifndef FM_ERROR_REPORTING_H
 #define FM_ERROR_REPORTING_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-file.h>
 

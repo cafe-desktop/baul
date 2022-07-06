@@ -518,7 +518,7 @@ msgstr "_Ncamathelisa"
 msgid "Select All"
 msgstr "Khetha Konke"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Bonisa _iinkcukacha ezongezelelweyo"
 

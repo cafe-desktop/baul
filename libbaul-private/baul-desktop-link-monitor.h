@@ -25,7 +25,7 @@
 #ifndef BAUL_DESKTOP_LINK_MONITOR_H
 #define BAUL_DESKTOP_LINK_MONITOR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include "baul-desktop-link.h"
 

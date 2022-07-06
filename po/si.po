@@ -516,7 +516,7 @@ msgstr "අලවන්න (_P)"
 msgid "Select All"
 msgstr "සියල්ල තෝරන්න"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "වැඩි විස්තර පෙන්වන්න (_d)"
 

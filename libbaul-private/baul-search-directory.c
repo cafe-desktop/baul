@@ -23,7 +23,7 @@
 #include <config.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 #include <sys/time.h>
 

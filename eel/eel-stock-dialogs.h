@@ -25,7 +25,7 @@
 #ifndef EEL_STOCK_DIALOGS_H
 #define EEL_STOCK_DIALOGS_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 typedef void (* EelCancelCallback) (gpointer callback_data);
 

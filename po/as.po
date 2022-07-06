@@ -530,7 +530,7 @@ msgstr "আঠা লগাওক (_P)"
 msgid "Select All"
 msgstr "সমস্ত নিৰ্ব্বাচন কৰক"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "অতিৰিক্ত বিৱৰণ প্ৰদৰ্শন কৰা হ'ব (_d)"
 

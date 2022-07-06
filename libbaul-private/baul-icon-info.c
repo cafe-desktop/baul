@@ -23,7 +23,7 @@
 #include "baul-icon-info.h"
 #include "baul-icon-names.h"
 #include "baul-default-file-icon.h"
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 struct _BaulIconInfo
@@ -152,20 +152,20 @@ baul_icon_info_new_for_icon_info (GtkIconInfo *icon_info,
 
     icon = g_object_new (BAUL_TYPE_ICON_INFO, NULL);
 
-    icon->pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    icon->pixbuf = ctk_icon_info_load_icon (icon_info, NULL);
 
-    icon->got_embedded_rect = gtk_icon_info_get_embedded_rect (icon_info,
+    icon->got_embedded_rect = ctk_icon_info_get_embedded_rect (icon_info,
                               &icon->embedded_rect);
 
-    if (gtk_icon_info_get_attach_points (icon_info, &points, &n_points))
+    if (ctk_icon_info_get_attach_points (icon_info, &points, &n_points))
     {
         icon->n_attach_points = n_points;
         icon->attach_points = points;
     }
 
-    icon->display_name = g_strdup (gtk_icon_info_get_display_name (icon_info));
+    icon->display_name = g_strdup (ctk_icon_info_get_display_name (icon_info));
 
-    filename = gtk_icon_info_get_filename (icon_info);
+    filename = ctk_icon_info_get_filename (icon_info);
     if (filename != NULL)
     {
         char *p;
@@ -326,11 +326,11 @@ baul_icon_info_lookup (GIcon *icon,
                        int scale)
 {
     GtkIconTheme *icon_theme;
-    GtkIconInfo *gtkicon_info;
+    GtkIconInfo *ctkicon_info;
 
     BaulIconInfo *icon_info;
 
-    icon_theme = gtk_icon_theme_get_default ();
+    icon_theme = ctk_icon_theme_get_default ();
 
     if (G_IS_LOADABLE_ICON (icon)) {
         GdkPixbuf *pixbuf;
@@ -370,12 +370,12 @@ baul_icon_info_lookup (GIcon *icon,
         }
 
         if (!pixbuf) {
-            gtkicon_info = gtk_icon_theme_lookup_icon_for_scale (icon_theme,
+            ctkicon_info = ctk_icon_theme_lookup_icon_for_scale (icon_theme,
                                                                  "text-x-generic",
                                                                  size,
                                                                  scale,
                                                                  GTK_ICON_LOOKUP_FORCE_SIZE);
-            pixbuf = gtk_icon_info_load_icon (gtkicon_info, NULL);
+            pixbuf = ctk_icon_info_load_icon (ctkicon_info, NULL);
         }
 
 
@@ -404,24 +404,24 @@ baul_icon_info_lookup (GIcon *icon,
             return g_object_ref (icon_info);
         }
 
-        gtkicon_info = NULL;
+        ctkicon_info = NULL;
 
-        gtkicon_info = gtk_icon_theme_lookup_by_gicon_for_scale (icon_theme,
+        ctkicon_info = ctk_icon_theme_lookup_by_gicon_for_scale (icon_theme,
                                                                  icon,
                                                                  size,
                                                                  scale,
                                                                  GTK_ICON_LOOKUP_FORCE_SIZE);
 
-        if (!gtkicon_info) {
-            gtkicon_info = gtk_icon_theme_lookup_icon_for_scale (icon_theme,
+        if (!ctkicon_info) {
+            ctkicon_info = ctk_icon_theme_lookup_icon_for_scale (icon_theme,
                                                                  "text-x-generic",
                                                                  size,
                                                                  scale,
                                                                  GTK_ICON_LOOKUP_FORCE_SIZE);
         }
 
-        icon_info = baul_icon_info_new_for_icon_info (gtkicon_info, scale);
-        g_object_unref (gtkicon_info);
+        icon_info = baul_icon_info_new_for_icon_info (ctkicon_info, scale);
+        g_object_unref (ctkicon_info);
 
         key = icon_key_new (icon,scale, size);
         g_hash_table_insert (themed_icon_cache, key, icon_info);
@@ -752,7 +752,7 @@ baul_get_icon_size_for_stock_size (GtkIconSize size)
 {
     gint w, h;
 
-    if (gtk_icon_size_lookup (size, &w, &h))
+    if (ctk_icon_size_lookup (size, &w, &h))
     {
         return MAX (w, h);
     }
@@ -786,10 +786,10 @@ baul_icon_theme_can_render (GThemedIcon *icon)
 
 	names = g_themed_icon_get_names (icon);
 
-	icon_theme = gtk_icon_theme_get_default ();
+	icon_theme = ctk_icon_theme_get_default ();
 
 	for (idx = 0; names[idx] != NULL; idx++) {
-		if (gtk_icon_theme_has_icon (icon_theme, names[idx])) {
+		if (ctk_icon_theme_has_icon (icon_theme, names[idx])) {
 			return TRUE;
 		}
 	}

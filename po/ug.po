@@ -522,7 +522,7 @@ msgstr "چاپلا(_P)"
 msgid "Select All"
 msgstr "ھەممىنى تاللا"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "تەپسىلاتىنى كۆرسەت(_D)"
 

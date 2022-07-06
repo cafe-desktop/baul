@@ -28,7 +28,7 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-dnd.h>
 
@@ -91,26 +91,26 @@ find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
     GtkWidget *page;
     GtkAllocation allocation;
 
-    tab_pos = gtk_notebook_get_tab_pos (GTK_NOTEBOOK (notebook));
+    tab_pos = ctk_notebook_get_tab_pos (GTK_NOTEBOOK (notebook));
 
-    while ((page = gtk_notebook_get_nth_page (nb, page_num)))
+    while ((page = ctk_notebook_get_nth_page (nb, page_num)))
     {
         GtkWidget *tab;
         gint max_x, max_y;
         gint x_root, y_root;
 
-        tab = gtk_notebook_get_tab_label (nb, page);
+        tab = ctk_notebook_get_tab_label (nb, page);
         g_return_val_if_fail (tab != NULL, -1);
 
-        if (!gtk_widget_get_mapped (GTK_WIDGET (tab)))
+        if (!ctk_widget_get_mapped (GTK_WIDGET (tab)))
         {
             page_num++;
             continue;
         }
 
-        gdk_window_get_origin (gtk_widget_get_window (tab),
+        gdk_window_get_origin (ctk_widget_get_window (tab),
                                &x_root, &y_root);
-        gtk_widget_get_allocation (tab, &allocation);
+        ctk_widget_get_allocation (tab, &allocation);
 
         max_x = x_root + allocation.x + allocation.width;
         max_y = y_root + allocation.y + allocation.height;
@@ -144,7 +144,7 @@ button_press_cb (BaulNotebook *notebook,
 
     if (event->type == GDK_BUTTON_PRESS &&
             (event->button == 3 || event->button == 2) &&
-            (event->state & gtk_accelerator_get_default_mod_mask ()) == 0)
+            (event->state & ctk_accelerator_get_default_mod_mask ()) == 0)
     {
         if (tab_clicked == -1)
         {
@@ -155,7 +155,7 @@ button_press_cb (BaulNotebook *notebook,
         }
 
         /* switch to the page the mouse is over, but don't consume the event */
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), tab_clicked);
+        ctk_notebook_set_current_page (GTK_NOTEBOOK (notebook), tab_clicked);
     }
 
     return FALSE;
@@ -166,12 +166,12 @@ baul_notebook_init (BaulNotebook *notebook)
 {
     GtkStyleContext *context;
 
-    context = gtk_widget_get_style_context (GTK_WIDGET (notebook));
-    gtk_style_context_add_class (context, "baul-notebook");
+    context = ctk_widget_get_style_context (GTK_WIDGET (notebook));
+    ctk_style_context_add_class (context, "baul-notebook");
 
-    gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
-    gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
-    gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+    ctk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
+    ctk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
+    ctk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 
     g_signal_connect (notebook, "button-press-event",
                       (GCallback)button_press_cb, NULL);
@@ -187,7 +187,7 @@ baul_notebook_sync_loading (BaulNotebook *notebook,
     g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
     g_return_if_fail (BAUL_IS_WINDOW_SLOT (slot));
 
-    tab_label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (notebook), slot->content_box);
+    tab_label = ctk_notebook_get_tab_label (GTK_NOTEBOOK (notebook), slot->content_box);
     g_return_if_fail (GTK_IS_WIDGET (tab_label));
 
     spinner = GTK_WIDGET (g_object_get_data (G_OBJECT (tab_label), "spinner"));
@@ -203,15 +203,15 @@ baul_notebook_sync_loading (BaulNotebook *notebook,
 
     if (slot->allow_stop)
     {
-        gtk_widget_hide (icon);
-        gtk_widget_show (spinner);
-        gtk_spinner_start (GTK_SPINNER (spinner));
+        ctk_widget_hide (icon);
+        ctk_widget_show (spinner);
+        ctk_spinner_start (GTK_SPINNER (spinner));
     }
     else
     {
-        gtk_spinner_stop (GTK_SPINNER (spinner));
-        gtk_widget_hide (spinner);
-        gtk_widget_show (icon);
+        ctk_spinner_stop (GTK_SPINNER (spinner));
+        ctk_widget_hide (spinner);
+        ctk_widget_show (icon);
     }
 }
 
@@ -225,13 +225,13 @@ baul_notebook_sync_tab_label (BaulNotebook *notebook,
     g_return_if_fail (BAUL_IS_WINDOW_SLOT (slot));
     g_return_if_fail (GTK_IS_WIDGET (slot->content_box));
 
-    hbox = gtk_notebook_get_tab_label (GTK_NOTEBOOK (notebook), slot->content_box);
+    hbox = ctk_notebook_get_tab_label (GTK_NOTEBOOK (notebook), slot->content_box);
     g_return_if_fail (GTK_IS_WIDGET (hbox));
 
     label = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
     g_return_if_fail (GTK_IS_WIDGET (label));
 
-    gtk_label_set_text (GTK_LABEL (label), slot->title);
+    ctk_label_set_text (GTK_LABEL (label), slot->title);
 
     if (slot->location != NULL)
     {
@@ -241,12 +241,12 @@ baul_notebook_sync_tab_label (BaulNotebook *notebook,
          * so it covers all of the tab label.
          */
         location_name = g_file_get_parse_name (slot->location);
-        gtk_widget_set_tooltip_text (gtk_widget_get_parent (label), location_name);
+        ctk_widget_set_tooltip_text (ctk_widget_get_parent (label), location_name);
         g_free (location_name);
     }
     else
     {
-        gtk_widget_set_tooltip_text (gtk_widget_get_parent (label), NULL);
+        ctk_widget_set_tooltip_text (ctk_widget_get_parent (label), NULL);
     }
 }
 
@@ -256,7 +256,7 @@ close_button_clicked_cb (GtkWidget *widget,
 {
     GtkWidget *notebook;
 
-    notebook = gtk_widget_get_ancestor (slot->content_box, BAUL_TYPE_NOTEBOOK);
+    notebook = ctk_widget_get_ancestor (slot->content_box, BAUL_TYPE_NOTEBOOK);
     if (notebook != NULL)
     {
         g_signal_emit (notebook, signals[TAB_CLOSE_REQUEST], 0, slot);
@@ -271,52 +271,52 @@ build_tab_label (BaulNotebook *nb, BaulWindowSlot *slot)
 
     /* set hbox spacing and label padding (see below) so that there's an
      * equal amount of space around the label */
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
-    gtk_widget_show (hbox);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
+    ctk_widget_show (hbox);
 
     /* setup load feedback */
-    spinner = gtk_spinner_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
+    spinner = ctk_spinner_new ();
+    ctk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
 
     /* setup site icon, empty by default */
-    icon = gtk_image_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    icon = ctk_image_new ();
+    ctk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
     /* don't show the icon */
 
     /* setup label */
-    label = gtk_label_new (NULL);
-    gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
-    gtk_label_set_single_line_mode (GTK_LABEL (label), TRUE);
-    gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-    gtk_label_set_yalign (GTK_LABEL (label), 0.5);
+    label = ctk_label_new (NULL);
+    ctk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+    ctk_label_set_single_line_mode (GTK_LABEL (label), TRUE);
+    ctk_label_set_xalign (GTK_LABEL (label), 0.0);
+    ctk_label_set_yalign (GTK_LABEL (label), 0.5);
 
-    gtk_widget_set_margin_start (label, 0);
-    gtk_widget_set_margin_end (label, 0);
-    gtk_widget_set_margin_top (label, 0);
-    gtk_widget_set_margin_bottom (label, 0);
+    ctk_widget_set_margin_start (label, 0);
+    ctk_widget_set_margin_end (label, 0);
+    ctk_widget_set_margin_top (label, 0);
+    ctk_widget_set_margin_bottom (label, 0);
 
-    gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
-    gtk_widget_show (label);
+    ctk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+    ctk_widget_show (label);
 
     /* setup close button */
-    close_button = gtk_button_new ();
-    gtk_button_set_relief (GTK_BUTTON (close_button),
+    close_button = ctk_button_new ();
+    ctk_button_set_relief (GTK_BUTTON (close_button),
                            GTK_RELIEF_NONE);
     /* don't allow focus on the close button */
-    gtk_widget_set_focus_on_click (close_button, FALSE);
+    ctk_widget_set_focus_on_click (close_button, FALSE);
 
-    gtk_widget_set_name (close_button, "baul-tab-close-button");
+    ctk_widget_set_name (close_button, "baul-tab-close-button");
 
-    image = gtk_image_new_from_icon_name ("window-close", GTK_ICON_SIZE_MENU);
-    gtk_widget_set_tooltip_text (close_button, _("Close tab"));
+    image = ctk_image_new_from_icon_name ("window-close", GTK_ICON_SIZE_MENU);
+    ctk_widget_set_tooltip_text (close_button, _("Close tab"));
     g_signal_connect_object (close_button, "clicked",
                              G_CALLBACK (close_button_clicked_cb), slot, 0);
 
-    gtk_container_add (GTK_CONTAINER (close_button), image);
-    gtk_widget_show (image);
+    ctk_container_add (GTK_CONTAINER (close_button), image);
+    ctk_widget_show (image);
 
-    gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
-    gtk_widget_show (close_button);
+    ctk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
+    ctk_widget_show (close_button);
 
     drag_info = g_new0 (BaulDragSlotProxyInfo, 1);
     drag_info->target_slot = slot;
@@ -348,9 +348,9 @@ baul_notebook_insert_page (GtkNotebook *gnotebook,
                menu_label,
                position);
 
-    gtk_notebook_set_show_tabs (gnotebook,
-                                gtk_notebook_get_n_pages (gnotebook) > 1);
-    gtk_notebook_set_tab_reorderable (gnotebook, tab_widget, TRUE);
+    ctk_notebook_set_show_tabs (gnotebook,
+                                ctk_notebook_get_n_pages (gnotebook) > 1);
+    ctk_notebook_set_tab_reorderable (gnotebook, tab_widget, TRUE);
 
     return position;
 }
@@ -369,12 +369,12 @@ baul_notebook_add_tab (BaulNotebook *notebook,
 
     tab_label = build_tab_label (notebook, slot);
 
-    position = gtk_notebook_insert_page (GTK_NOTEBOOK (notebook),
+    position = ctk_notebook_insert_page (GTK_NOTEBOOK (notebook),
                                          slot->content_box,
                                          tab_label,
                                          position);
 
-    gtk_container_child_set (GTK_CONTAINER (notebook),
+    ctk_container_child_set (GTK_CONTAINER (notebook),
                              slot->content_box,
                              "tab-expand", TRUE,
                              NULL);
@@ -383,14 +383,14 @@ baul_notebook_add_tab (BaulNotebook *notebook,
     baul_notebook_sync_loading (notebook, slot);
 
 
-    /* FIXME gtk bug! */
-    /* FIXME: this should be fixed in gtk 2.12; check & remove this! */
+    /* FIXME ctk bug! */
+    /* FIXME: this should be fixed in ctk 2.12; check & remove this! */
     /* The signal handler may have reordered the tabs */
-    position = gtk_notebook_page_num (gnotebook, slot->content_box);
+    position = ctk_notebook_page_num (gnotebook, slot->content_box);
 
     if (jump_to)
     {
-        gtk_notebook_set_current_page (gnotebook, position);
+        ctk_notebook_set_current_page (gnotebook, position);
 
     }
 
@@ -404,8 +404,8 @@ baul_notebook_remove (GtkContainer *container,
     GtkNotebook *gnotebook = GTK_NOTEBOOK (container);
     GTK_CONTAINER_CLASS (baul_notebook_parent_class)->remove (container, tab_widget);
 
-    gtk_notebook_set_show_tabs (gnotebook,
-                                gtk_notebook_get_n_pages (gnotebook) > 1);
+    ctk_notebook_set_show_tabs (gnotebook,
+                                ctk_notebook_get_n_pages (gnotebook) > 1);
 
 }
 
@@ -426,9 +426,9 @@ baul_notebook_reorder_current_child_relative (BaulNotebook *notebook,
 
     gnotebook = GTK_NOTEBOOK (notebook);
 
-    page = gtk_notebook_get_current_page (gnotebook);
-    child = gtk_notebook_get_nth_page (gnotebook, page);
-    gtk_notebook_reorder_child (gnotebook, child, page + offset);
+    page = ctk_notebook_get_current_page (gnotebook);
+    child = ctk_notebook_get_nth_page (gnotebook, page);
+    ctk_notebook_reorder_child (gnotebook, child, page + offset);
 }
 
 void
@@ -447,8 +447,8 @@ baul_notebook_set_current_page_relative (BaulNotebook *notebook,
 
     gnotebook = GTK_NOTEBOOK (notebook);
 
-    page = gtk_notebook_get_current_page (gnotebook);
-    gtk_notebook_set_current_page (gnotebook, page + offset);
+    page = ctk_notebook_get_current_page (gnotebook);
+    ctk_notebook_set_current_page (gnotebook, page + offset);
 
 }
 
@@ -462,8 +462,8 @@ baul_notebook_is_valid_relative_position (BaulNotebook *notebook,
 
     gnotebook = GTK_NOTEBOOK (notebook);
 
-    page = gtk_notebook_get_current_page (gnotebook);
-    n_pages = gtk_notebook_get_n_pages (gnotebook) - 1;
+    page = ctk_notebook_get_current_page (gnotebook);
+    n_pages = ctk_notebook_get_n_pages (gnotebook) - 1;
     if (page < 0 ||
             (offset < 0 && page < -offset) ||
             (offset > 0 && page > n_pages - offset))

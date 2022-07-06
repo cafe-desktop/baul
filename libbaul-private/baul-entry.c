@@ -27,11 +27,11 @@
 #include <config.h>
 #include <string.h>
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-gdk-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 
 #include "baul-entry.h"
 #include "baul-global-preferences.h"
@@ -71,7 +71,7 @@ baul_entry_init (BaulEntry *entry)
 GtkWidget *
 baul_entry_new (void)
 {
-    return gtk_widget_new (BAUL_TYPE_ENTRY, NULL);
+    return ctk_widget_new (BAUL_TYPE_ENTRY, NULL);
 }
 
 static void
@@ -102,7 +102,7 @@ baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
     entry = BAUL_ENTRY (widget);
     editable = GTK_EDITABLE (widget);
 
-    if (!gtk_editable_get_editable (editable))
+    if (!ctk_editable_get_editable (editable))
     {
         return FALSE;
     }
@@ -116,12 +116,12 @@ baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
          * should position the insertion point at the end of
          * the selection.
          */
-        if (entry->details->special_tab_handling && gtk_editable_get_selection_bounds (editable, NULL, NULL))
+        if (entry->details->special_tab_handling && ctk_editable_get_selection_bounds (editable, NULL, NULL))
         {
             int position;
 
-            position = strlen (gtk_entry_get_text (GTK_ENTRY (editable)));
-            gtk_editable_select_region (editable, position, position);
+            position = strlen (ctk_entry_get_text (GTK_ENTRY (editable)));
+            ctk_editable_select_region (editable, position, position);
             return TRUE;
         }
         break;
@@ -130,7 +130,7 @@ baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
         break;
     }
 
-    old_has = gtk_editable_get_selection_bounds (editable, NULL, NULL);
+    old_has = ctk_editable_get_selection_bounds (editable, NULL, NULL);
 
     result = GTK_WIDGET_CLASS (baul_entry_parent_class)->key_press_event (widget, event);
 
@@ -139,7 +139,7 @@ baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
      */
     if (result)
     {
-        new_has = gtk_editable_get_selection_bounds (editable, NULL, NULL);
+        new_has = ctk_editable_get_selection_bounds (editable, NULL, NULL);
         if (old_has || new_has)
         {
             g_signal_emit (widget, signals[SELECTION_CHANGED], 0);
@@ -160,14 +160,14 @@ baul_entry_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 
     editable = GTK_EDITABLE (widget);
 
-    old_had = gtk_editable_get_selection_bounds (editable, &old_start, &old_end);
+    old_had = ctk_editable_get_selection_bounds (editable, &old_start, &old_end);
 
     result = GTK_WIDGET_CLASS (baul_entry_parent_class)->motion_notify_event (widget, event);
 
     /* Send a signal if dragging the mouse caused the selection to change. */
     if (result)
     {
-        new_had = gtk_editable_get_selection_bounds (editable, &new_start, &new_end);
+        new_had = ctk_editable_get_selection_bounds (editable, &new_start, &new_end);
         if (old_had != new_had || (old_had && (old_start != new_start || old_end != new_end)))
         {
             g_signal_emit (widget, signals[SELECTION_CHANGED], 0);
@@ -189,8 +189,8 @@ baul_entry_select_all (BaulEntry *entry)
 {
     g_return_if_fail (BAUL_IS_ENTRY (entry));
 
-    gtk_editable_set_position (GTK_EDITABLE (entry), -1);
-    gtk_editable_select_region (GTK_EDITABLE (entry), 0, -1);
+    ctk_editable_set_position (GTK_EDITABLE (entry), -1);
+    ctk_editable_select_region (GTK_EDITABLE (entry), 0, -1);
 }
 
 static gboolean
@@ -223,7 +223,7 @@ baul_entry_select_all_at_idle (BaulEntry *entry)
     g_return_if_fail (BAUL_IS_ENTRY (entry));
 
     /* If the text cursor position changes in this routine
-     * then gtk_entry_key_press will unselect (and we want
+     * then ctk_entry_key_press will unselect (and we want
      * to move the text cursor position to the end).
      */
 
@@ -236,7 +236,7 @@ baul_entry_select_all_at_idle (BaulEntry *entry)
 /**
  * baul_entry_set_text
  *
- * This function wraps gtk_entry_set_text.  It sets undo_registered
+ * This function wraps ctk_entry_set_text.  It sets undo_registered
  * to TRUE and preserves the old value for a later restore.  This is
  * done so the programmatic changes to the entry do not register
  * with the undo manager.
@@ -251,7 +251,7 @@ baul_entry_set_text (BaulEntry *entry, const gchar *text)
     g_return_if_fail (BAUL_IS_ENTRY (entry));
 
     entry->details->user_edit = FALSE;
-    gtk_entry_set_text (GTK_ENTRY (entry), text);
+    ctk_entry_set_text (GTK_ENTRY (entry), text);
     entry->details->user_edit = TRUE;
 
     g_signal_emit (entry, signals[SELECTION_CHANGED], 0);
@@ -342,7 +342,7 @@ baul_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
  * selection owner then gets the selection ripped away from it. We ran into
  * this with type-completion behavior in BaulLocationBar (see bug 5313).
  * There's a FIXME comment that seems to be about this same issue in
- * gtk+/gtkselection.c, gtk_selection_clear.
+ * ctk+/ctkselection.c, ctk_selection_clear.
  */
 static gboolean
 baul_entry_selection_clear (GtkWidget *widget,
@@ -350,7 +350,7 @@ baul_entry_selection_clear (GtkWidget *widget,
 {
     g_assert (BAUL_IS_ENTRY (widget));
 
-    if (gdk_selection_owner_get (event->selection) == gtk_widget_get_window (widget))
+    if (gdk_selection_owner_get (event->selection) == ctk_widget_get_window (widget))
     {
         return FALSE;
     }

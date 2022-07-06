@@ -23,10 +23,10 @@
 */
 
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-debug.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-glib-extensions.h>
 
 #include "baul-clipboard-monitor.h"
@@ -85,7 +85,7 @@ baul_clipboard_monitor_get (void)
         clipboard_monitor = BAUL_CLIPBOARD_MONITOR (g_object_new (BAUL_TYPE_CLIPBOARD_MONITOR, NULL));
         eel_debug_call_at_shutdown (destroy_clipboard_monitor);
 
-        clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+        clipboard = ctk_clipboard_get (GDK_SELECTION_CLIPBOARD);
         g_signal_connect (clipboard, "owner_change",
                           G_CALLBACK (baul_clipboard_monitor_emit_changed), NULL);
     }
@@ -295,9 +295,9 @@ baul_get_clipboard_callback (GtkClipboard     *clipboard,
     clipboard_info =
         baul_clipboard_monitor_get_clipboard_info (baul_clipboard_monitor_get ());
 
-    target = gtk_selection_data_get_target (selection_data);
+    target = ctk_selection_data_get_target (selection_data);
 
-    if (gtk_targets_include_uri (&target, 1))
+    if (ctk_targets_include_uri (&target, 1))
     {
         char **uris;
         int i;
@@ -313,17 +313,17 @@ baul_get_clipboard_callback (GtkClipboard     *clipboard,
 
         uris[i] = NULL;
 
-        gtk_selection_data_set_uris (selection_data, uris);
+        ctk_selection_data_set_uris (selection_data, uris);
 
         g_strfreev (uris);
     }
-    else if (gtk_targets_include_text (&target, 1))
+    else if (ctk_targets_include_text (&target, 1))
     {
         char *str;
         gsize len;
 
         str = convert_file_list_to_string (clipboard_info, TRUE, &len);
-        gtk_selection_data_set_text (selection_data, str, len);
+        ctk_selection_data_set_text (selection_data, str, len);
         g_free (str);
     }
     else if (target == copied_files_atom)
@@ -332,7 +332,7 @@ baul_get_clipboard_callback (GtkClipboard     *clipboard,
         gsize len;
 
         str = convert_file_list_to_string (clipboard_info, FALSE, &len);
-        gtk_selection_data_set (selection_data, copied_files_atom, 8, str, len);
+        ctk_selection_data_set (selection_data, copied_files_atom, 8, str, len);
         g_free (str);
     }
 }

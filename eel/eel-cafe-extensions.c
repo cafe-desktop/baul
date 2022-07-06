@@ -30,7 +30,7 @@
 
 #include "eel-cafe-extensions.h"
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <libcafe-desktop/cafe-desktop-utils.h>
 
 

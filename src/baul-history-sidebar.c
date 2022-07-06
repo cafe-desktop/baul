@@ -27,11 +27,11 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <cairo-gobject.h>
 
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include <libbaul-private/baul-bookmark.h>
 #include <libbaul-private/baul-global-preferences.h>
@@ -97,9 +97,9 @@ update_history (BaulHistorySidebar *sidebar)
     BaulBookmark         *bookmark = NULL;
     cairo_surface_t      *surface = NULL;
 
-    store = GTK_LIST_STORE (gtk_tree_view_get_model (sidebar->tree_view));
+    store = GTK_LIST_STORE (ctk_tree_view_get_model (sidebar->tree_view));
 
-    gtk_list_store_clear (store);
+    ctk_list_store_clear (store);
 
     history = baul_window_info_get_history (sidebar->window);
     for (l = history; l != NULL; l = l->next)
@@ -110,8 +110,8 @@ update_history (BaulHistorySidebar *sidebar)
 
         surface = baul_bookmark_get_surface (bookmark, GTK_ICON_SIZE_MENU);
         name = baul_bookmark_get_name (bookmark);
-        gtk_list_store_append (store, &iter);
-        gtk_list_store_set (store, &iter,
+        ctk_list_store_append (store, &iter);
+        ctk_list_store_set (store, &iter,
                             HISTORY_SIDEBAR_COLUMN_ICON, surface,
                             HISTORY_SIDEBAR_COLUMN_NAME, name,
                             HISTORY_SIDEBAR_COLUMN_BOOKMARK, bookmark,
@@ -126,11 +126,11 @@ update_history (BaulHistorySidebar *sidebar)
     }
     g_list_free_full (history, g_object_unref);
 
-    selection = GTK_TREE_SELECTION (gtk_tree_view_get_selection (sidebar->tree_view));
+    selection = GTK_TREE_SELECTION (ctk_tree_view_get_selection (sidebar->tree_view));
 
-    if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
+    if (ctk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
     {
-        gtk_tree_selection_select_iter (selection, &iter);
+        ctk_tree_selection_select_iter (selection, &iter);
     }
 }
 
@@ -152,14 +152,14 @@ open_selected_item (BaulHistorySidebar *sidebar,
     BaulBookmark *bookmark;
     GFile *location;
 
-    model = gtk_tree_view_get_model (sidebar->tree_view);
+    model = ctk_tree_view_get_model (sidebar->tree_view);
 
-    if (!gtk_tree_model_get_iter (model, &iter, path))
+    if (!ctk_tree_model_get_iter (model, &iter, path))
     {
         return;
     }
 
-    gtk_tree_model_get
+    ctk_tree_model_get
     (model, &iter, HISTORY_SIDEBAR_COLUMN_BOOKMARK, &bookmark, -1);
 
     /* Navigate to the clicked location. */
@@ -200,14 +200,14 @@ button_press_event_callback (GtkWidget *widget,
         sidebar = BAUL_HISTORY_SIDEBAR (user_data);
         g_assert (sidebar->tree_view == GTK_TREE_VIEW (widget));
 
-        if (gtk_tree_view_get_path_at_pos (sidebar->tree_view,
+        if (ctk_tree_view_get_path_at_pos (sidebar->tree_view,
                                            event->x, event->y,
                                            &path, NULL, NULL, NULL))
         {
             open_selected_item (sidebar,
                                 path,
                                 BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
-            gtk_tree_path_free (path);
+            ctk_tree_path_free (path);
         }
     }
 
@@ -221,7 +221,7 @@ update_click_policy (BaulHistorySidebar *sidebar)
 
     policy = g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_CLICK_POLICY);
 
-    eel_gtk_tree_view_set_activate_on_single_click
+    eel_ctk_tree_view_set_activate_on_single_click
     (sidebar->tree_view, policy == BAUL_CLICK_POLICY_SINGLE);
 }
 
@@ -244,50 +244,50 @@ baul_history_sidebar_init (BaulHistorySidebar *sidebar)
     GtkListStore      *store;
     GtkTreeSelection  *selection;
 
-    tree_view = GTK_TREE_VIEW (gtk_tree_view_new ());
-    gtk_tree_view_set_headers_visible (tree_view, FALSE);
-    gtk_widget_show (GTK_WIDGET (tree_view));
+    tree_view = GTK_TREE_VIEW (ctk_tree_view_new ());
+    ctk_tree_view_set_headers_visible (tree_view, FALSE);
+    ctk_widget_show (GTK_WIDGET (tree_view));
 
-    col = GTK_TREE_VIEW_COLUMN (gtk_tree_view_column_new ());
+    col = GTK_TREE_VIEW_COLUMN (ctk_tree_view_column_new ());
 
-    cell = gtk_cell_renderer_pixbuf_new ();
-    gtk_tree_view_column_pack_start (col, cell, FALSE);
-    gtk_tree_view_column_set_attributes (col, cell,
+    cell = ctk_cell_renderer_pixbuf_new ();
+    ctk_tree_view_column_pack_start (col, cell, FALSE);
+    ctk_tree_view_column_set_attributes (col, cell,
                                          "surface", HISTORY_SIDEBAR_COLUMN_ICON,
                                          NULL);
 
-    cell = gtk_cell_renderer_text_new ();
-    gtk_tree_view_column_pack_start (col, cell, TRUE);
-    gtk_tree_view_column_set_attributes (col, cell,
+    cell = ctk_cell_renderer_text_new ();
+    ctk_tree_view_column_pack_start (col, cell, TRUE);
+    ctk_tree_view_column_set_attributes (col, cell,
                                          "text", HISTORY_SIDEBAR_COLUMN_NAME,
                                          NULL);
 
-    gtk_tree_view_column_set_fixed_width (col, BAUL_ICON_SIZE_SMALLER);
-    gtk_tree_view_append_column (tree_view, col);
+    ctk_tree_view_column_set_fixed_width (col, BAUL_ICON_SIZE_SMALLER);
+    ctk_tree_view_append_column (tree_view, col);
 
-    store = gtk_list_store_new (HISTORY_SIDEBAR_COLUMN_COUNT,
+    store = ctk_list_store_new (HISTORY_SIDEBAR_COLUMN_COUNT,
                                 CAIRO_GOBJECT_TYPE_SURFACE,
                                 G_TYPE_STRING,
                                 BAUL_TYPE_BOOKMARK);
 
-    gtk_tree_view_set_model (tree_view, GTK_TREE_MODEL (store));
+    ctk_tree_view_set_model (tree_view, GTK_TREE_MODEL (store));
     g_object_unref (store);
 
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sidebar),
+    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sidebar),
                                     GTK_POLICY_AUTOMATIC,
                                     GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
-    gtk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
-    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sidebar), GTK_SHADOW_IN);
-    gtk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (sidebar), FALSE);
+    ctk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
+    ctk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
+    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sidebar), GTK_SHADOW_IN);
+    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (sidebar), FALSE);
 
-    gtk_container_add (GTK_CONTAINER (sidebar), GTK_WIDGET (tree_view));
-    gtk_widget_show (GTK_WIDGET (sidebar));
+    ctk_container_add (GTK_CONTAINER (sidebar), GTK_WIDGET (tree_view));
+    ctk_widget_show (GTK_WIDGET (sidebar));
 
     sidebar->tree_view = tree_view;
 
-    selection = gtk_tree_view_get_selection (tree_view);
-    gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+    selection = ctk_tree_view_get_selection (tree_view);
+    ctk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 
     g_signal_connect_object
     (tree_view, "row_activated",

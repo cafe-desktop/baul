@@ -34,13 +34,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-string.h>
 
@@ -89,7 +89,7 @@ try_to_expand_path (gpointer callback_data)
 
     entry = BAUL_LOCATION_ENTRY (callback_data);
     editable = GTK_EDITABLE (entry);
-    user_location = gtk_editable_get_chars (editable, 0, -1);
+    user_location = ctk_editable_get_chars (editable, 0, -1);
     user_location_length = g_utf8_strlen (user_location, -1);
     entry->details->idle_id = 0;
 
@@ -117,10 +117,10 @@ try_to_expand_path (gpointer callback_data)
     if (suffix != NULL)
     {
         pos = user_location_length;
-        gtk_editable_insert_text (editable,
+        ctk_editable_insert_text (editable,
                                   suffix, -1,  &pos);
         pos = user_location_length;
-        gtk_editable_select_region (editable, pos, -1);
+        ctk_editable_select_region (editable, pos, -1);
 
         g_free (suffix);
     }
@@ -174,7 +174,7 @@ get_editable_number_of_chars (GtkEditable *editable)
     char *text;
     int length;
 
-    text = gtk_editable_get_chars (editable, 0, -1);
+    text = ctk_editable_get_chars (editable, 0, -1);
     length = g_utf8_strlen (text, -1);
     g_free (text);
     return length;
@@ -186,8 +186,8 @@ set_position_and_selection_to_end (GtkEditable *editable)
     int end;
 
     end = get_editable_number_of_chars (editable);
-    gtk_editable_select_region (editable, end, end);
-    gtk_editable_set_position (editable, end);
+    ctk_editable_select_region (editable, end, end);
+    ctk_editable_set_position (editable, end);
 }
 
 static gboolean
@@ -197,14 +197,14 @@ position_and_selection_are_at_end (GtkEditable *editable)
     int start_sel, end_sel;
 
     end = get_editable_number_of_chars (editable);
-    if (gtk_editable_get_selection_bounds (editable, &start_sel, &end_sel))
+    if (ctk_editable_get_selection_bounds (editable, &start_sel, &end_sel))
     {
         if (start_sel != end || end_sel != end)
         {
             return FALSE;
         }
     }
-    return gtk_editable_get_position (editable) == end;
+    return ctk_editable_get_position (editable) == end;
 }
 
 static void
@@ -242,7 +242,7 @@ editable_event_after_callback (GtkEntry *entry,
      */
 	if ((keyevent->keyval == GDK_KEY_Right || keyevent->keyval == GDK_KEY_End) &&
             !(keyevent->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) &&
-            gtk_editable_get_selection_bounds (editable, NULL, NULL))
+            ctk_editable_get_selection_bounds (editable, NULL, NULL))
     {
         set_position_and_selection_to_end (editable);
     }
@@ -333,7 +333,7 @@ baul_location_entry_icon_release (GtkEntry *gentry,
         g_signal_emit_by_name (gentry, "activate", gentry);
         break;
     case BAUL_LOCATION_ENTRY_ACTION_CLEAR:
-        gtk_entry_set_text (gentry, "");
+        ctk_entry_set_text (gentry, "");
         break;
     default:
         g_assert_not_reached ();
@@ -349,7 +349,7 @@ baul_location_entry_focus_in (GtkWidget     *widget,
     if (entry->details->has_special_text)
     {
         entry->details->setting_special_text = TRUE;
-        gtk_entry_set_text (GTK_ENTRY (entry), "");
+        ctk_entry_set_text (GTK_ENTRY (entry), "");
         entry->details->setting_special_text = FALSE;
     }
 
@@ -364,7 +364,7 @@ baul_location_entry_activate (GtkEntry *entry)
     gchar *uri_scheme = NULL;
 
     loc_entry = BAUL_LOCATION_ENTRY (entry);
-    entry_text = gtk_entry_get_text (entry);
+    entry_text = ctk_entry_get_text (entry);
 
     if (entry_text != NULL && *entry_text != '\0')
     {
@@ -376,7 +376,7 @@ baul_location_entry_activate (GtkEntry *entry)
 
             /* Fix non absolute paths */
             full_path = g_build_filename (loc_entry->details->current_directory, entry_text, NULL);
-            gtk_entry_set_text (entry, full_path);
+            ctk_entry_set_text (entry, full_path);
             g_free (full_path);
         }
 
@@ -420,12 +420,12 @@ baul_location_entry_set_secondary_action (BaulLocationEntry *entry,
     switch (secondary_action)
     {
     case BAUL_LOCATION_ENTRY_ACTION_CLEAR:
-        gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
+        ctk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
                                            GTK_ENTRY_ICON_SECONDARY,
                                            "edit-clear");
         break;
     case BAUL_LOCATION_ENTRY_ACTION_GOTO:
-        gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
+        ctk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
                                            GTK_ENTRY_ICON_SECONDARY,
                                            "forward");
         break;
@@ -440,8 +440,8 @@ baul_location_entry_init (BaulLocationEntry *entry)
 {
     GtkStyleContext *context;
 
-    context = gtk_widget_get_style_context (GTK_WIDGET (entry));
-    gtk_style_context_add_class (context, "baul-location-entry");
+    context = ctk_widget_get_style_context (GTK_WIDGET (entry));
+    ctk_style_context_add_class (context, "baul-location-entry");
 
     entry->details = g_new0 (BaulLocationEntryDetails, 1);
 
@@ -471,7 +471,7 @@ baul_location_entry_new (void)
 {
     GtkWidget *entry;
 
-    entry = gtk_widget_new (BAUL_TYPE_LOCATION_ENTRY, NULL);
+    entry = ctk_widget_new (BAUL_TYPE_LOCATION_ENTRY, NULL);
 
     return entry;
 }
@@ -486,7 +486,7 @@ baul_location_entry_set_special_text (BaulLocationEntry *entry,
     entry->details->special_text = g_strdup (special_text);
 
     entry->details->setting_special_text = TRUE;
-    gtk_entry_set_text (GTK_ENTRY (entry), special_text);
+    ctk_entry_set_text (GTK_ENTRY (entry), special_text);
     entry->details->setting_special_text = FALSE;
 }
 

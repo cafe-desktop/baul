@@ -525,7 +525,7 @@ msgstr "_Pegar"
 msgid "Select All"
 msgstr "Tot seleccionar"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Visualizar mai de _detalhs"
 

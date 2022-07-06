@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include <glib/gi18n-lib.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-file-operations.h>
 #include <libbaul-private/baul-file-utilities.h>
@@ -67,7 +67,7 @@ restore_button_clicked_cb (GtkWidget *button,
         files = g_list_prepend (files, baul_file_get (l->data));
     }
 
-    baul_restore_files_from_trash (files, GTK_WINDOW (gtk_widget_get_toplevel (button)));
+    baul_restore_files_from_trash (files, GTK_WINDOW (ctk_widget_get_toplevel (button)));
 
     baul_file_list_free (files);
     g_list_free_full (locations, g_object_unref);
@@ -81,7 +81,7 @@ selection_changed_cb (BaulWindow *window,
 
     count = baul_window_info_get_selection_count (BAUL_WINDOW_INFO (window));
 
-    gtk_widget_set_sensitive (bar->priv->restore_button, (count > 0));
+    ctk_widget_set_sensitive (bar->priv->restore_button, (count > 0));
 }
 
 static void
@@ -140,7 +140,7 @@ baul_trash_bar_trash_state_changed (BaulTrashMonitor *trash_monitor,
 
     bar = BAUL_TRASH_BAR (data);
 
-    gtk_widget_set_sensitive (bar->priv->empty_button,
+    ctk_widget_set_sensitive (bar->priv->empty_button,
                               !baul_trash_monitor_is_empty ());
 }
 
@@ -170,7 +170,7 @@ empty_trash_callback (GtkWidget *button, gpointer data)
 {
     GtkWidget *window;
 
-    window = gtk_widget_get_toplevel (button);
+    window = ctk_widget_get_toplevel (button);
 
     baul_file_operations_empty_trash (window);
 }
@@ -185,20 +185,20 @@ baul_trash_bar_init (BaulTrashBar *bar)
 
     hbox = GTK_WIDGET (bar);
 
-    label = gtk_label_new (_("Trash"));
-    gtk_widget_show (label);
+    label = ctk_label_new (_("Trash"));
+    ctk_widget_show (label);
 
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (bar), GTK_ORIENTATION_HORIZONTAL);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (bar), GTK_ORIENTATION_HORIZONTAL);
 
-    gtk_box_pack_start (GTK_BOX (bar), label, FALSE, FALSE, 0);
+    ctk_box_pack_start (GTK_BOX (bar), label, FALSE, FALSE, 0);
 
-    bar->priv->empty_button = gtk_button_new_with_mnemonic (_("Empty _Trash"));
-    gtk_widget_show (bar->priv->empty_button);
-    gtk_box_pack_end (GTK_BOX (hbox), bar->priv->empty_button, FALSE, FALSE, 0);
+    bar->priv->empty_button = ctk_button_new_with_mnemonic (_("Empty _Trash"));
+    ctk_widget_show (bar->priv->empty_button);
+    ctk_box_pack_end (GTK_BOX (hbox), bar->priv->empty_button, FALSE, FALSE, 0);
 
-    gtk_widget_set_sensitive (bar->priv->empty_button,
+    ctk_widget_set_sensitive (bar->priv->empty_button,
                               !baul_trash_monitor_is_empty ());
-    gtk_widget_set_tooltip_text (bar->priv->empty_button,
+    ctk_widget_set_tooltip_text (bar->priv->empty_button,
                                  _("Delete all items in the Trash"));
 
     g_signal_connect (bar->priv->empty_button,
@@ -206,12 +206,12 @@ baul_trash_bar_init (BaulTrashBar *bar)
                       G_CALLBACK (empty_trash_callback),
                       bar);
 
-    bar->priv->restore_button = gtk_button_new_with_mnemonic (_("Restore Selected Items"));
-    gtk_widget_show (bar->priv->restore_button);
-    gtk_box_pack_end (GTK_BOX (hbox), bar->priv->restore_button, FALSE, FALSE, 6);
+    bar->priv->restore_button = ctk_button_new_with_mnemonic (_("Restore Selected Items"));
+    ctk_widget_show (bar->priv->restore_button);
+    ctk_box_pack_end (GTK_BOX (hbox), bar->priv->restore_button, FALSE, FALSE, 6);
 
-    gtk_widget_set_sensitive (bar->priv->restore_button, FALSE);
-    gtk_widget_set_tooltip_text (bar->priv->restore_button,
+    ctk_widget_set_sensitive (bar->priv->restore_button, FALSE);
+    ctk_widget_set_tooltip_text (bar->priv->restore_button,
                                  _("Restore selected items to their original position"));
 
     g_signal_connect (bar->priv->restore_button,

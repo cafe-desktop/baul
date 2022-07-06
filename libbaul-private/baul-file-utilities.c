@@ -150,7 +150,7 @@ char* baul_get_user_directory(void)
 		/* Faltan permisos */
 		if (g_chmod(user_directory, DEFAULT_BAUL_DIRECTORY_MODE) != 0)
 		{
-			GtkWidget* dialog = gtk_message_dialog_new(
+			GtkWidget* dialog = ctk_message_dialog_new(
 				NULL,
 				GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_ERROR,
@@ -158,8 +158,8 @@ char* baul_get_user_directory(void)
 				"The path for the directory containing baul settings need read and write permissions: %s",
 				user_directory);
 
-			gtk_dialog_run(GTK_DIALOG(dialog));
-			gtk_widget_destroy(dialog);
+			ctk_dialog_run(GTK_DIALOG(dialog));
+			ctk_widget_destroy(dialog);
 
 			exit(0);
 		}

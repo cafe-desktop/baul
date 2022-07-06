@@ -1,4 +1,4 @@
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-search-engine.h>
 
@@ -26,7 +26,7 @@ static void
 finished_cb (BaulSearchEngine *engine)
 {
 	g_print ("finished!\n");
-//	gtk_main_quit ();
+//	ctk_main_quit ();
 }
 
 int
@@ -35,7 +35,7 @@ main (int argc, char* argv[])
 	BaulSearchEngine *engine;
 	BaulQuery *query;
 
-	gtk_init (&argc, &argv);
+	ctk_init (&argc, &argv);
 
 	engine = baul_search_engine_new ();
 	g_signal_connect (engine, "hits-added",
@@ -52,6 +52,6 @@ main (int argc, char* argv[])
 
 	baul_search_engine_start (engine);
 
-	gtk_main ();
+	ctk_main ();
 	return 0;
 }

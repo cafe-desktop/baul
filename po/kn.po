@@ -523,7 +523,7 @@ msgstr "ಅಂಟಿಸು(_P)"
 msgid "Select All"
 msgstr "ಎಲ್ಲವನ್ನೂ ಅಯ್ಕೆಮಾಡು"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "ಹೆಚ್ಚಿನ ವಿವರಗಳನ್ನು ತೋರಿಸು(_d)"
 

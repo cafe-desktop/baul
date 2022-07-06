@@ -22,7 +22,7 @@
    Authors: Anders Carlsson <andersca@gnu.org>
 */
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gdk/gdk.h>
 
 #include <libbaul-private/baul-file.h>

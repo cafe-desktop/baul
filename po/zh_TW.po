@@ -521,7 +521,7 @@ msgstr "貼上(_P)"
 msgid "Select All"
 msgstr "選取所有"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "顯示更多訊息(_D)"
 

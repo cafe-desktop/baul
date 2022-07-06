@@ -526,7 +526,7 @@ msgstr "ה_דבק"
 msgid "Select All"
 msgstr "בחירת הכול"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "הצג _פרטים נוספים"
 
