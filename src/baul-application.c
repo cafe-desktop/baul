@@ -640,7 +640,7 @@ get_desktop_manager_selection (CdkDisplay *display)
     g_snprintf (selection_name, sizeof (selection_name), "_NET_DESKTOP_MANAGER_S0");
     selection_atom = cdk_atom_intern (selection_name, FALSE);
 
-    selection_owner = XGetSelectionOwner (GDK_DISPLAY_XDISPLAY (display),
+    selection_owner = XGetSelectionOwner (CDK_DISPLAY_XDISPLAY (display),
                                           cdk_x11_atom_to_xatom_for_display (display,
                                                   selection_atom));
     if (selection_owner != None)
@@ -650,7 +650,7 @@ get_desktop_manager_selection (CdkDisplay *display)
 
     selection_widget = ctk_invisible_new_for_screen (cdk_display_get_default_screen (display));
     /* We need this for cdk_x11_get_server_time() */
-    ctk_widget_add_events (selection_widget, GDK_PROPERTY_CHANGE_MASK);
+    ctk_widget_add_events (selection_widget, CDK_PROPERTY_CHANGE_MASK);
 
     if (ctk_selection_owner_set_for_display (display,
             selection_widget,
@@ -1472,17 +1472,17 @@ baul_application_get_session_data (BaulApplication *self)
             cdk_window = ctk_widget_get_window (CTK_WIDGET (window));
 
             if (cdk_window &&
-                cdk_window_get_state (cdk_window) & GDK_WINDOW_STATE_MAXIMIZED) {
+                cdk_window_get_state (cdk_window) & CDK_WINDOW_STATE_MAXIMIZED) {
                 xmlNewProp (win_node, "maximized", "TRUE");
             }
 
             if (cdk_window &&
-                cdk_window_get_state (cdk_window) & GDK_WINDOW_STATE_STICKY) {
+                cdk_window_get_state (cdk_window) & CDK_WINDOW_STATE_STICKY) {
                 xmlNewProp (win_node, "sticky", "TRUE");
             }
 
             if (cdk_window &&
-                cdk_window_get_state (cdk_window) & GDK_WINDOW_STATE_ABOVE) {
+                cdk_window_get_state (cdk_window) & CDK_WINDOW_STATE_ABOVE) {
                 xmlNewProp (win_node, "keep-above", "TRUE");
             }
         }

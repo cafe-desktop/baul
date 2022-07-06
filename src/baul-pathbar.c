@@ -151,7 +151,7 @@ get_slider_button (BaulPathBar  *path_bar,
 
     button = ctk_button_new ();
     ctk_widget_set_focus_on_click (button, FALSE);
-    ctk_widget_add_events (button, GDK_SCROLL_MASK);
+    ctk_widget_add_events (button, CDK_SCROLL_MASK);
     ctk_container_add (CTK_CONTAINER (button),
                        ctk_image_new_from_icon_name (arrow_type, CTK_ICON_SIZE_MENU));
     ctk_container_add (CTK_CONTAINER (path_bar), button);
@@ -426,7 +426,7 @@ baul_path_bar_class_init (BaulPathBarClass *path_bar_class)
                       NULL, NULL, NULL,
                       G_TYPE_BOOLEAN, 2,
                       G_TYPE_FILE,
-                      GDK_TYPE_EVENT);
+                      CDK_TYPE_EVENT);
 
     ctk_container_class_handle_border_width (container_class);
 }
@@ -913,17 +913,17 @@ baul_path_bar_scroll (CtkWidget      *widget,
 
     switch (event->direction)
     {
-    case GDK_SCROLL_RIGHT:
-    case GDK_SCROLL_DOWN:
+    case CDK_SCROLL_RIGHT:
+    case CDK_SCROLL_DOWN:
         baul_path_bar_scroll_down (path_bar);
         return TRUE;
 
-    case GDK_SCROLL_LEFT:
-    case GDK_SCROLL_UP:
+    case CDK_SCROLL_LEFT:
+    case CDK_SCROLL_UP:
         baul_path_bar_scroll_up (path_bar);
         return TRUE;
 
-    case GDK_SCROLL_SMOOTH:
+    case CDK_SCROLL_SMOOTH:
         break;
     }
 
@@ -1181,7 +1181,7 @@ baul_path_bar_slider_button_press (CtkWidget       *widget,
         ctk_widget_grab_focus (widget);
     }
 
-    if (event->type != GDK_BUTTON_PRESS || event->button != 1)
+    if (event->type != CDK_BUTTON_PRESS || event->button != 1)
     {
         return FALSE;
     }
@@ -1216,7 +1216,7 @@ baul_path_bar_slider_button_release (CtkWidget      *widget,
                                      CdkEventButton *event,
                                      BaulPathBar     *path_bar)
 {
-    if (event->type != GDK_BUTTON_RELEASE)
+    if (event->type != CDK_BUTTON_RELEASE)
     {
         return FALSE;
     }
@@ -1356,12 +1356,12 @@ button_event_cb (CtkWidget *button,
         button_data = BUTTON_DATA (data);
         path_bar = BAUL_PATH_BAR (ctk_widget_get_parent (button));
 
-	if (event->type == GDK_BUTTON_PRESS) {
+	if (event->type == CDK_BUTTON_PRESS) {
 		g_object_set_data (G_OBJECT (button), "handle-button-release",
 				   GINT_TO_POINTER (TRUE));
 	}
 
-	if (event->type == GDK_BUTTON_RELEASE &&
+	if (event->type == CDK_BUTTON_RELEASE &&
 	    !GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (button),
 						  "handle-button-release"))) {
 		return FALSE;
@@ -1737,13 +1737,13 @@ setup_button_drag_source (ButtonData *button_data)
     };
 
     ctk_drag_source_set (button_data->button,
-                         GDK_BUTTON1_MASK |
-                         GDK_BUTTON2_MASK,
+                         CDK_BUTTON1_MASK |
+                         CDK_BUTTON2_MASK,
                          NULL, 0,
-                         GDK_ACTION_MOVE |
-                         GDK_ACTION_COPY |
-                         GDK_ACTION_LINK |
-                         GDK_ACTION_ASK);
+                         CDK_ACTION_MOVE |
+                         CDK_ACTION_COPY |
+                         CDK_ACTION_LINK |
+                         CDK_ACTION_ASK);
 
     target_list = ctk_target_list_new (targets, G_N_ELEMENTS (targets));
     ctk_target_list_add_uri_targets (target_list, BAUL_ICON_DND_URI_LIST);
@@ -1903,7 +1903,7 @@ make_directory_button (BaulPathBar  *path_bar,
     ctk_style_context_add_class (ctk_widget_get_style_context (button_data->button),
                                  "text-button");
     ctk_widget_set_focus_on_click (button_data->button, FALSE);
-    ctk_widget_add_events (button_data->button, GDK_SCROLL_MASK);
+    ctk_widget_add_events (button_data->button, CDK_SCROLL_MASK);
     /* TODO update button type when xdg directories change */
 
     button_data->drag_info.target_location = g_object_ref (path);

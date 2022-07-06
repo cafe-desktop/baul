@@ -554,7 +554,7 @@ selection_changed_callback (CtkTreeSelection *selection,
     event = ctk_get_current_event ();
     if (event)
     {
-        is_keyboard = (event->type == GDK_KEY_PRESS || event->type == GDK_KEY_RELEASE);
+        is_keyboard = (event->type == CDK_KEY_PRESS || event->type == CDK_KEY_RELEASE);
         cdk_event_free (event);
 
         if (is_keyboard)
@@ -874,7 +874,7 @@ button_pressed_callback (CtkTreeView *treeview, CdkEventButton *event,
 
         return TRUE;
     }
-    else if (event->button == 2 && event->type == GDK_BUTTON_PRESS)
+    else if (event->button == 2 && event->type == CDK_BUTTON_PRESS)
     {
         BaulFile *file;
 
@@ -888,7 +888,7 @@ button_pressed_callback (CtkTreeView *treeview, CdkEventButton *event,
         if (file)
         {
             fm_tree_view_activate_file (view, file,
-                                        (event->state & GDK_CONTROL_MASK) != 0 ?
+                                        (event->state & CDK_CONTROL_MASK) != 0 ?
                                         BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW :
                                         BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
             baul_file_unref (file);
@@ -1063,7 +1063,7 @@ paste_clipboard_data (FMTreeView *view,
     {
         baul_file_operations_copy_move
         (item_uris, NULL, destination_uri,
-         cut ? GDK_ACTION_MOVE : GDK_ACTION_COPY,
+         cut ? CDK_ACTION_MOVE : CDK_ACTION_COPY,
          CTK_WIDGET (view->details->tree_widget),
          NULL, NULL);
 

@@ -2475,7 +2475,7 @@ reload_icon_positions (BaulIconContainer *container)
 static gboolean
 button_event_modifies_selection (CdkEventButton *event)
 {
-    return (event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) != 0;
+    return (event->state & (CDK_CONTROL_MASK | CDK_SHIFT_MASK)) != 0;
 }
 
 /* invalidate the cached label sizes for all the icons */
@@ -2945,9 +2945,9 @@ start_rubberbanding (BaulIconContainer *container,
 	}
 
 	eel_canvas_item_grab (band_info->selection_rectangle,
-				(GDK_POINTER_MOTION_MASK
-				 | GDK_BUTTON_RELEASE_MASK
-				 | GDK_SCROLL_MASK),
+				(CDK_POINTER_MOTION_MASK
+				 | CDK_BUTTON_RELEASE_MASK
+				 | CDK_SCROLL_MASK),
 				NULL,
 				(CdkEvent *)event);
 }
@@ -3836,8 +3836,8 @@ keyboard_move_to (BaulIconContainer *container,
     }
 
     if (event != NULL &&
-            (event->state & GDK_CONTROL_MASK) != 0 &&
-            (event->state & GDK_SHIFT_MASK) == 0)
+            (event->state & CDK_CONTROL_MASK) != 0 &&
+            (event->state & CDK_SHIFT_MASK) == 0)
     {
         /* Move the keyboard focus. Use Control modifier
          * rather than Alt to avoid Sawfish conflict.
@@ -3846,9 +3846,9 @@ keyboard_move_to (BaulIconContainer *container,
         container->details->keyboard_rubberband_start = NULL;
     }
     else if (event != NULL &&
-             ((event->state & GDK_CONTROL_MASK) != 0 ||
+             ((event->state & CDK_CONTROL_MASK) != 0 ||
               !container->details->auto_layout) &&
-             (event->state & GDK_SHIFT_MASK) != 0)
+             (event->state & CDK_SHIFT_MASK) != 0)
     {
         /* Do rubberband selection */
         EelDRect rect;
@@ -3868,8 +3868,8 @@ keyboard_move_to (BaulIconContainer *container,
         }
     }
     else if (event != NULL &&
-             (event->state & GDK_CONTROL_MASK) == 0 &&
-             (event->state & GDK_SHIFT_MASK) != 0)
+             (event->state & CDK_CONTROL_MASK) == 0 &&
+             (event->state & CDK_SHIFT_MASK) != 0)
     {
         /* Select range */
         BaulIcon *start_icon;
@@ -4076,8 +4076,8 @@ keyboard_arrow_key (BaulIconContainer *container,
 static gboolean
 is_rectangle_selection_event (CdkEventKey *event)
 {
-    return (event->state & GDK_CONTROL_MASK) != 0 &&
-           (event->state & GDK_SHIFT_MASK) != 0;
+    return (event->state & CDK_CONTROL_MASK) != 0 &&
+           (event->state & CDK_SHIFT_MASK) != 0;
 }
 
 static void
@@ -4253,8 +4253,8 @@ keyboard_space (BaulIconContainer *container,
                           container->details->keyboard_focus,
                           NULL, NULL);
     }
-    else if ((event->state & GDK_CONTROL_MASK) != 0 &&
-             (event->state & GDK_SHIFT_MASK) == 0)
+    else if ((event->state & CDK_CONTROL_MASK) != 0 &&
+             (event->state & CDK_SHIFT_MASK) == 0)
     {
         /* Control-space toggles the selection state of the current icon. */
         if (container->details->keyboard_focus != NULL)
@@ -4285,7 +4285,7 @@ keyboard_space (BaulIconContainer *container,
             }
         }
     }
-    else if ((event->state & GDK_SHIFT_MASK) != 0)
+    else if ((event->state & CDK_SHIFT_MASK) != 0)
     {
         activate_selected_items_alternate (container, NULL);
     }
@@ -4675,7 +4675,7 @@ button_press_event (CtkWidget *widget,
     clear_keyboard_focus (container);
     clear_keyboard_rubberband_start (container);
 
-    if (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS)
+    if (event->type == CDK_2BUTTON_PRESS || event->type == CDK_3BUTTON_PRESS)
     {
         /* We use our own double-click detection. */
         return TRUE;
@@ -4698,7 +4698,7 @@ button_press_event (CtkWidget *widget,
     }
 
     if (event->button == DRAG_BUTTON &&
-            event->type == GDK_BUTTON_PRESS)
+            event->type == CDK_BUTTON_PRESS)
     {
         /* Clear the last click icon for double click */
         container->details->double_click_icon[1] = container->details->double_click_icon[0];
@@ -4774,8 +4774,8 @@ baul_icon_container_did_not_drag (BaulIconContainer *container,
     details = container->details;
 
     if (details->icon_selected_on_button_down &&
-            ((event->state & GDK_CONTROL_MASK) != 0 ||
-             (event->state & GDK_SHIFT_MASK) == 0))
+            ((event->state & CDK_CONTROL_MASK) != 0 ||
+             (event->state & CDK_SHIFT_MASK) == 0))
     {
         if (button_event_modifies_selection (event))
         {
@@ -4917,16 +4917,16 @@ start_stretching (BaulIconContainer *container,
     switch (corner)
     {
     case CTK_CORNER_TOP_LEFT:
-        cursor = cdk_cursor_new_for_display (display, GDK_TOP_LEFT_CORNER);
+        cursor = cdk_cursor_new_for_display (display, CDK_TOP_LEFT_CORNER);
         break;
     case CTK_CORNER_BOTTOM_LEFT:
-        cursor = cdk_cursor_new_for_display (display, GDK_BOTTOM_LEFT_CORNER);
+        cursor = cdk_cursor_new_for_display (display, CDK_BOTTOM_LEFT_CORNER);
         break;
     case CTK_CORNER_TOP_RIGHT:
-        cursor = cdk_cursor_new_for_display (display, GDK_TOP_RIGHT_CORNER);
+        cursor = cdk_cursor_new_for_display (display, CDK_TOP_RIGHT_CORNER);
         break;
     case CTK_CORNER_BOTTOM_RIGHT:
-        cursor = cdk_cursor_new_for_display (display, GDK_BOTTOM_RIGHT_CORNER);
+        cursor = cdk_cursor_new_for_display (display, CDK_BOTTOM_RIGHT_CORNER);
         break;
     default:
         cursor = NULL;
@@ -4947,8 +4947,8 @@ start_stretching (BaulIconContainer *container,
                    &details->stretch_start.icon_size);
 
     eel_canvas_item_grab (EEL_CANVAS_ITEM (icon->item),
-                          (GDK_POINTER_MOTION_MASK
-                           | GDK_BUTTON_RELEASE_MASK),
+                          (CDK_POINTER_MOTION_MASK
+                           | CDK_BUTTON_RELEASE_MASK),
                           cursor,
                           event);
 
@@ -4959,7 +4959,7 @@ start_stretching (BaulIconContainer *container,
     toplevel = ctk_widget_get_toplevel (CTK_WIDGET (container));
     if (toplevel != NULL && ctk_widget_get_realized (toplevel))
     {
-        cdk_window_focus (ctk_widget_get_window (toplevel), GDK_CURRENT_TIME);
+        cdk_window_focus (ctk_widget_get_window (toplevel), CDK_CURRENT_TIME);
     }
 
     return TRUE;
@@ -5035,17 +5035,17 @@ keyboard_stretching (BaulIconContainer *container,
 
     switch (event->keyval)
     {
-    case GDK_KEY_equal:
-    case GDK_KEY_plus:
-    case GDK_KEY_KP_Add:
+    case CDK_KEY_equal:
+    case CDK_KEY_plus:
+    case CDK_KEY_KP_Add:
         icon_set_size (container, icon, size + 5, FALSE, FALSE);
         break;
-    case GDK_KEY_minus:
-    case GDK_KEY_KP_Subtract:
+    case CDK_KEY_minus:
+    case CDK_KEY_KP_Subtract:
         icon_set_size (container, icon, size - 5, FALSE, FALSE);
         break;
-    case GDK_KEY_0:
-    case GDK_KEY_KP_0:
+    case CDK_KEY_0:
+    case CDK_KEY_KP_0:
         baul_icon_container_move_icon (container, icon,
                                        icon->x, icon->y,
                                        1.0,
@@ -5223,13 +5223,13 @@ motion_notify_event (CtkWidget *widget,
                                 &canvas_x,
                                 &canvas_y);
 
-                actions = GDK_ACTION_COPY
-                          | GDK_ACTION_LINK
-                          | GDK_ACTION_ASK;
+                actions = CDK_ACTION_COPY
+                          | CDK_ACTION_LINK
+                          | CDK_ACTION_ASK;
 
                 if (container->details->drag_allow_moves)
                 {
-                    actions |= GDK_ACTION_MOVE;
+                    actions |= CDK_ACTION_MOVE;
                 }
 
                 baul_icon_dnd_begin_drag (container,
@@ -5357,14 +5357,14 @@ send_focus_change (CtkWidget *widget, gboolean in)
 {
     CdkEvent *fevent;
 
-    fevent = cdk_event_new (GDK_FOCUS_CHANGE);
+    fevent = cdk_event_new (CDK_FOCUS_CHANGE);
 
     g_object_ref (widget);
     ((CdkEventFocus *) fevent)->in = in;
 
     ctk_widget_send_focus_change (widget, fevent);
 
-    fevent->focus_change.type = GDK_FOCUS_CHANGE;
+    fevent->focus_change.type = CDK_FOCUS_CHANGE;
     fevent->focus_change.window = g_object_ref (ctk_widget_get_window (widget));
     fevent->focus_change.in = in;
 
@@ -5623,12 +5623,12 @@ baul_icon_container_search_scroll_event (CtkWidget *widget,
 {
     gboolean retval = FALSE;
 
-    if (event->direction == GDK_SCROLL_UP)
+    if (event->direction == CDK_SCROLL_UP)
     {
         baul_icon_container_search_move (widget, container, TRUE);
         retval = TRUE;
     }
-    else if (event->direction == GDK_SCROLL_DOWN)
+    else if (event->direction == CDK_SCROLL_DOWN)
     {
         baul_icon_container_search_move (widget, container, FALSE);
         retval = TRUE;
@@ -5658,14 +5658,14 @@ baul_icon_container_search_key_press_event (CtkWidget *widget,
     g_assert (BAUL_IS_ICON_CONTAINER (container));
 
     /* close window and cancel the search */
-    if (event->keyval == GDK_KEY_Escape || event->keyval == GDK_KEY_Tab)
+    if (event->keyval == CDK_KEY_Escape || event->keyval == CDK_KEY_Tab)
     {
         baul_icon_container_search_dialog_hide (widget, container);
         return TRUE;
     }
 
     /* close window and activate alternate */
-    if (event->keyval == GDK_KEY_Return && event->state & GDK_SHIFT_MASK)
+    if (event->keyval == CDK_KEY_Return && event->state & CDK_SHIFT_MASK)
     {
         baul_icon_container_search_dialog_hide (widget,
                                                 container);
@@ -5675,28 +5675,28 @@ baul_icon_container_search_key_press_event (CtkWidget *widget,
     }
 
     /* select previous matching iter */
-    if (event->keyval == GDK_KEY_Up || event->keyval == GDK_KEY_KP_Up)
+    if (event->keyval == CDK_KEY_Up || event->keyval == CDK_KEY_KP_Up)
     {
         baul_icon_container_search_move (widget, container, TRUE);
         retval = TRUE;
     }
 
-    if (((event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) == (GDK_CONTROL_MASK | GDK_SHIFT_MASK))
-            && (event->keyval == GDK_KEY_g || event->keyval == GDK_KEY_G))
+    if (((event->state & (CDK_CONTROL_MASK | CDK_SHIFT_MASK)) == (CDK_CONTROL_MASK | CDK_SHIFT_MASK))
+            && (event->keyval == CDK_KEY_g || event->keyval == CDK_KEY_G))
     {
         baul_icon_container_search_move (widget, container, TRUE);
         retval = TRUE;
     }
 
     /* select next matching iter */
-    if (event->keyval == GDK_KEY_Down || event->keyval == GDK_KEY_KP_Down)
+    if (event->keyval == CDK_KEY_Down || event->keyval == CDK_KEY_KP_Down)
     {
         baul_icon_container_search_move (widget, container, FALSE);
         retval = TRUE;
     }
 
-    if (((event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) == GDK_CONTROL_MASK)
-            && (event->keyval == GDK_KEY_g || event->keyval == GDK_KEY_G))
+    if (((event->state & (CDK_CONTROL_MASK | CDK_SHIFT_MASK)) == CDK_CONTROL_MASK)
+            && (event->keyval == CDK_KEY_g || event->keyval == CDK_KEY_G))
     {
         baul_icon_container_search_move (widget, container, FALSE);
         retval = TRUE;
@@ -5767,7 +5767,7 @@ baul_icon_container_ensure_interactive_directory (BaulIconContainer *container)
 
     ctk_window_set_modal (CTK_WINDOW (container->details->search_window), TRUE);
     ctk_window_set_type_hint (CTK_WINDOW (container->details->search_window),
-                              GDK_WINDOW_TYPE_HINT_COMBO);
+                              CDK_WINDOW_TYPE_HINT_COMBO);
 
     g_signal_connect (container->details->search_window, "delete_event",
                       G_CALLBACK (baul_icon_container_search_delete_event),
@@ -5903,12 +5903,12 @@ key_press_event (CtkWidget *widget,
     {
         switch (event->keyval)
         {
-        case GDK_KEY_Return:
-        case GDK_KEY_KP_Enter:
+        case CDK_KEY_Return:
+        case CDK_KEY_KP_Enter:
             end_renaming_mode (container, TRUE);
             handled = TRUE;
             break;
-        case GDK_KEY_Escape:
+        case CDK_KEY_Escape:
             end_renaming_mode (container, FALSE);
             handled = TRUE;
             break;
@@ -5920,67 +5920,67 @@ key_press_event (CtkWidget *widget,
     {
         switch (event->keyval)
         {
-        case GDK_KEY_Home:
-        case GDK_KEY_KP_Home:
+        case CDK_KEY_Home:
+        case CDK_KEY_KP_Home:
             keyboard_home (container, event);
             handled = TRUE;
             break;
-        case GDK_KEY_End:
-        case GDK_KEY_KP_End:
+        case CDK_KEY_End:
+        case CDK_KEY_KP_End:
             keyboard_end (container, event);
             handled = TRUE;
             break;
-        case GDK_KEY_Left:
-        case GDK_KEY_KP_Left:
+        case CDK_KEY_Left:
+        case CDK_KEY_KP_Left:
             /* Don't eat Alt-Left, as that is used for history browsing */
-            if ((event->state & GDK_MOD1_MASK) == 0)
+            if ((event->state & CDK_MOD1_MASK) == 0)
             {
                 keyboard_left (container, event);
                 handled = TRUE;
             }
             break;
-        case GDK_KEY_Up:
-        case GDK_KEY_KP_Up:
+        case CDK_KEY_Up:
+        case CDK_KEY_KP_Up:
             /* Don't eat Alt-Up, as that is used for alt-shift-Up */
-            if ((event->state & GDK_MOD1_MASK) == 0)
+            if ((event->state & CDK_MOD1_MASK) == 0)
             {
                 keyboard_up (container, event);
                 handled = TRUE;
             }
             break;
-        case GDK_KEY_Right:
-        case GDK_KEY_KP_Right:
+        case CDK_KEY_Right:
+        case CDK_KEY_KP_Right:
             /* Don't eat Alt-Right, as that is used for history browsing */
-            if ((event->state & GDK_MOD1_MASK) == 0)
+            if ((event->state & CDK_MOD1_MASK) == 0)
             {
                 keyboard_right (container, event);
                 handled = TRUE;
             }
             break;
-        case GDK_KEY_Down:
-        case GDK_KEY_KP_Down:
+        case CDK_KEY_Down:
+        case CDK_KEY_KP_Down:
             /* Don't eat Alt-Down, as that is used for Open */
-            if ((event->state & GDK_MOD1_MASK) == 0)
+            if ((event->state & CDK_MOD1_MASK) == 0)
             {
                 keyboard_down (container, event);
                 handled = TRUE;
             }
             break;
-        case GDK_KEY_space:
+        case CDK_KEY_space:
             keyboard_space (container, event);
             handled = TRUE;
             break;
 #ifndef TAB_NAVIGATION_DISABLED
-        case GDK_KEY_Tab:
-        case GDK_KEY_ISO_Left_Tab:
+        case CDK_KEY_Tab:
+        case CDK_KEY_ISO_Left_Tab:
             select_previous_or_next_icon (container,
-                                          (event->state & GDK_SHIFT_MASK) == 0, event);
+                                          (event->state & CDK_SHIFT_MASK) == 0, event);
             handled = TRUE;
             break;
 #endif
-        case GDK_KEY_Return:
-        case GDK_KEY_KP_Enter:
-            if ((event->state & GDK_SHIFT_MASK) != 0)
+        case CDK_KEY_Return:
+        case CDK_KEY_KP_Enter:
+            if ((event->state & CDK_SHIFT_MASK) != 0)
             {
                 activate_selected_items_alternate (container, NULL);
             }
@@ -5991,35 +5991,35 @@ key_press_event (CtkWidget *widget,
 
             handled = TRUE;
             break;
-        case GDK_KEY_Escape:
+        case CDK_KEY_Escape:
             handled = undo_stretching (container);
             break;
-        case GDK_KEY_plus:
-        case GDK_KEY_minus:
-        case GDK_KEY_equal:
-        case GDK_KEY_KP_Add:
-        case GDK_KEY_KP_Subtract:
-        case GDK_KEY_0:
-        case GDK_KEY_KP_0:
-            if (event->state & GDK_CONTROL_MASK)
+        case CDK_KEY_plus:
+        case CDK_KEY_minus:
+        case CDK_KEY_equal:
+        case CDK_KEY_KP_Add:
+        case CDK_KEY_KP_Subtract:
+        case CDK_KEY_0:
+        case CDK_KEY_KP_0:
+            if (event->state & CDK_CONTROL_MASK)
             {
                 handled = keyboard_stretching (container, event);
             }
             break;
-        case GDK_KEY_F10:
+        case CDK_KEY_F10:
             /* handle Ctrl+F10 because we want to display the
              * background popup even if something is selected.
              * The other cases are handled by popup_menu().
              */
-            if (event->state & GDK_CONTROL_MASK)
+            if (event->state & CDK_CONTROL_MASK)
             {
                 handled = handle_popups (container, event,
                                          "context_click_background");
             }
             break;
-        case GDK_KEY_v:
+        case CDK_KEY_v:
             /* Eat Control + v to not enable type ahead */
-            if ((event->state & GDK_CONTROL_MASK) != 0)
+            if ((event->state & CDK_CONTROL_MASK) != 0)
             {
                 handled = TRUE;
             }
@@ -6038,9 +6038,9 @@ key_press_event (CtkWidget *widget,
      * start the typeahead find capabilities.
      * Copied from BaulIconContainer */
     if (!handled &&
-            event->keyval != GDK_KEY_slash /* don't steal slash key event, used for "go to" */ &&
-            event->keyval != GDK_KEY_BackSpace &&
-            event->keyval != GDK_KEY_Delete)
+            event->keyval != CDK_KEY_slash /* don't steal slash key event, used for "go to" */ &&
+            event->keyval != CDK_KEY_BackSpace &&
+            event->keyval != CDK_KEY_Delete)
     {
         CdkEvent *new_event;
         CdkWindow *window;
@@ -6232,7 +6232,7 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
                         NULL, NULL,
                         baul_marshal_BOOLEAN__POINTER,
                         G_TYPE_BOOLEAN, 1,
-                        GDK_TYPE_EVENT);
+                        CDK_TYPE_EVENT);
     signals[ACTIVATE]
         = g_signal_new ("activate",
                         G_TYPE_FROM_CLASS (class),
@@ -6367,7 +6367,7 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
                         G_TYPE_POINTER,
                         G_TYPE_POINTER,
                         G_TYPE_POINTER,
-                        GDK_TYPE_DRAG_ACTION,
+                        CDK_TYPE_DRAG_ACTION,
                         G_TYPE_INT,
                         G_TYPE_INT);
     signals[HANDLE_NETSCAPE_URL]
@@ -6381,7 +6381,7 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
                         G_TYPE_NONE, 5,
                         G_TYPE_STRING,
                         G_TYPE_STRING,
-                        GDK_TYPE_DRAG_ACTION,
+                        CDK_TYPE_DRAG_ACTION,
                         G_TYPE_INT,
                         G_TYPE_INT);
     signals[HANDLE_URI_LIST]
@@ -6395,7 +6395,7 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
                         G_TYPE_NONE, 5,
                         G_TYPE_STRING,
                         G_TYPE_STRING,
-                        GDK_TYPE_DRAG_ACTION,
+                        CDK_TYPE_DRAG_ACTION,
                         G_TYPE_INT,
                         G_TYPE_INT);
     signals[HANDLE_TEXT]
@@ -6409,7 +6409,7 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
                         G_TYPE_NONE, 5,
                         G_TYPE_STRING,
                         G_TYPE_STRING,
-                        GDK_TYPE_DRAG_ACTION,
+                        CDK_TYPE_DRAG_ACTION,
                         G_TYPE_INT,
                         G_TYPE_INT);
     signals[HANDLE_RAW]
@@ -6425,7 +6425,7 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
                         G_TYPE_INT,
                         G_TYPE_STRING,
                         G_TYPE_STRING,
-                        GDK_TYPE_DRAG_ACTION,
+                        CDK_TYPE_DRAG_ACTION,
                         G_TYPE_INT,
                         G_TYPE_INT);
     signals[GET_CONTAINER_URI]
@@ -6586,19 +6586,19 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
             g_param_spec_boxed ("selection_box_rgba",
                                 "Selection Box RGBA",
                                 "Color of the selection box",
-                                GDK_TYPE_RGBA,
+                                CDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
     ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boxed ("light_info_rgba",
                                 "Light Info RGBA",
                                 "Color used for information text against a dark background",
-                                GDK_TYPE_RGBA,
+                                CDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
     ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boxed ("dark_info_rgba",
                                 "Dark Info RGBA",
                                 "Color used for information text against a light background",
-                                GDK_TYPE_RGBA,
+                                CDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
     ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boolean ("activate_prelight_icon_label",
@@ -6610,8 +6610,8 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
 
     binding_set = ctk_binding_set_by_class (class);
 
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_f, GDK_CONTROL_MASK, "start_interactive_search", 0);
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_F, GDK_CONTROL_MASK, "start_interactive_search", 0);
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_f, CDK_CONTROL_MASK, "start_interactive_search", 0);
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_F, CDK_CONTROL_MASK, "start_interactive_search", 0);
 }
 
 static void
@@ -6833,8 +6833,8 @@ handle_icon_double_click (BaulIconContainer *container,
             activate_selected_items (container);
             return TRUE;
         }
-        else if ((event->state & GDK_CONTROL_MASK) == 0 &&
-                 (event->state & GDK_SHIFT_MASK) != 0)
+        else if ((event->state & CDK_CONTROL_MASK) == 0 &&
+                 (event->state & CDK_SHIFT_MASK) != 0)
         {
             activate_selected_items_alternate (container, icon);
             return TRUE;
@@ -6864,7 +6864,7 @@ handle_icon_button_press (BaulIconContainer *container,
 
     details = container->details;
 
-    if (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS)
+    if (event->type == CDK_2BUTTON_PRESS || event->type == CDK_3BUTTON_PRESS)
     {
         return TRUE;
     }
@@ -6877,7 +6877,7 @@ handle_icon_button_press (BaulIconContainer *container,
     }
 
     if ((event->button == DRAG_BUTTON) &&
-            event->type == GDK_BUTTON_PRESS)
+            event->type == CDK_BUTTON_PRESS)
     {
         /* The next double click has to be on this icon */
         details->double_click_icon[1] = details->double_click_icon[0];
@@ -6923,7 +6923,7 @@ handle_icon_button_press (BaulIconContainer *container,
     details->icon_selected_on_button_down = icon->is_selected;
 
     if ((event->button == DRAG_BUTTON || event->button == MIDDLE_BUTTON) &&
-            (event->state & GDK_SHIFT_MASK) != 0)
+            (event->state & CDK_SHIFT_MASK) != 0)
     {
         BaulIcon *start_icon;
 
@@ -6934,7 +6934,7 @@ handle_icon_button_press (BaulIconContainer *container,
             details->range_selection_base_icon = icon;
         }
         if (select_range (container, start_icon, icon,
-                          (event->state & GDK_CONTROL_MASK) == 0))
+                          (event->state & CDK_CONTROL_MASK) == 0))
         {
             g_signal_emit (container,
                            signals[SELECTION_CHANGED], 0);
@@ -6983,7 +6983,7 @@ item_event_callback (EelCanvasItem *item,
 
     switch (event->type)
     {
-    case GDK_BUTTON_PRESS:
+    case CDK_BUTTON_PRESS:
         if (handle_icon_button_press (container, icon, &event->button))
         {
             /* Stop the event from being passed along further. Returning

@@ -755,7 +755,7 @@ on_key_pressed (CtkTreeView *view,
                 CdkEventKey *event,
                 gpointer user_data)
 {
-    if (event->keyval == GDK_KEY_Delete || event->keyval == GDK_KEY_KP_Delete)
+    if (event->keyval == CDK_KEY_Delete || event->keyval == CDK_KEY_KP_Delete)
     {
         bookmarks_delete_bookmark ();
         return TRUE;
@@ -1089,7 +1089,7 @@ handle_close_accelerator (CtkWindow *window,
     g_assert (event != NULL);
     g_assert (user_data == NULL);
 
-	if (event->state & GDK_CONTROL_MASK && event->keyval == GDK_KEY_w) {
+	if (event->state & CDK_CONTROL_MASK && event->keyval == CDK_KEY_w) {
         ctk_widget_hide (CTK_WIDGET (window));
         return TRUE;
     }

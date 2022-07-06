@@ -319,7 +319,7 @@ baul_icon_canvas_item_finalize (GObject *object)
 static gboolean
 pixbuf_is_acceptable (CdkPixbuf *pixbuf)
 {
-    return cdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB
+    return cdk_pixbuf_get_colorspace (pixbuf) == CDK_COLORSPACE_RGB
            && ((!cdk_pixbuf_get_has_alpha (pixbuf)
                 && cdk_pixbuf_get_n_channels (pixbuf) == 3)
                || (cdk_pixbuf_get_has_alpha (pixbuf)
@@ -1768,7 +1768,7 @@ real_map_surface (BaulIconCanvasItem *icon_item)
                  cdk_pixbuf_get_height (audio_pixbuf),
                  0, 0,
                  1.0, 1.0,
-                 GDK_INTERP_BILINEAR, 0xFF);
+                 CDK_INTERP_BILINEAR, 0xFF);
 
                 g_object_unref (audio_pixbuf);
             }
@@ -2104,7 +2104,7 @@ baul_icon_canvas_item_event (EelCanvasItem *item, CdkEvent *event)
 
     switch (event->type)
     {
-    case GDK_ENTER_NOTIFY:
+    case CDK_ENTER_NOTIFY:
         if (!icon_item->details->is_prelit)
         {
             icon_item->details->is_prelit = TRUE;
@@ -2119,7 +2119,7 @@ baul_icon_canvas_item_event (EelCanvasItem *item, CdkEvent *event)
                 CdkCursor *cursor;
 
                 cursor = cdk_cursor_new_for_display (cdk_display_get_default(),
-                                                     GDK_HAND2);
+                                                     CDK_HAND2);
                 cdk_window_set_cursor (cursor_window, cursor);
                 g_object_unref (cursor);
 
@@ -2142,7 +2142,7 @@ baul_icon_canvas_item_event (EelCanvasItem *item, CdkEvent *event)
         }
         return TRUE;
 
-    case GDK_LEAVE_NOTIFY:
+    case CDK_LEAVE_NOTIFY:
         if (icon_item->details->is_prelit
                 || icon_item->details->is_highlighted_for_drop)
         {

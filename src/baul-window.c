@@ -431,7 +431,7 @@ update_cursor (BaulWindow *window)
         CdkCursor * cursor;
 
         display = ctk_widget_get_display (CTK_WIDGET (window));
-        cursor = cdk_cursor_new_for_display (display, GDK_WATCH);
+        cursor = cdk_cursor_new_for_display (display, CDK_WATCH);
         cdk_window_set_cursor (ctk_widget_get_window (CTK_WIDGET (window)), cursor);
         g_object_unref (cursor);
     }
@@ -1040,7 +1040,7 @@ baul_window_key_press_event (CtkWidget *widget,
                              CdkEventKey *event)
 {
     /* Fix for https://github.com/cafe-desktop/baul/issues/1024 */
-    if ((event->state & GDK_CONTROL_MASK) &&
+    if ((event->state & CDK_CONTROL_MASK) &&
         ((event->keyval == '.') || (event->keyval == ';')))
         return TRUE;
 
@@ -1150,9 +1150,9 @@ add_view_as_menu_item (BaulWindow *window,
         g_snprintf (accel_path, sizeof (accel_path), "<Baul-Window>/%s", action_name);
 
         accel_keyval = cdk_keyval_from_name (accel);
-		g_assert (accel_keyval != GDK_KEY_VoidSymbol);
+		g_assert (accel_keyval != CDK_KEY_VoidSymbol);
 
-        ctk_accel_map_add_entry (accel_path, accel_keyval, GDK_CONTROL_MASK);
+        ctk_accel_map_add_entry (accel_path, accel_keyval, CDK_CONTROL_MASK);
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         ctk_action_set_accel_path (CTK_ACTION (action), accel_path);
         G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -2211,12 +2211,12 @@ baul_window_class_init (BaulWindowClass *class)
                       G_TYPE_NONE, 0);
 
     binding_set = ctk_binding_set_by_class (class);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, 0,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_BackSpace, 0,
                                   "go_up", 1,
                                   G_TYPE_BOOLEAN, FALSE);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_F5, 0,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_F5, 0,
                                   "reload", 0);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_slash, 0,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_slash, 0,
                                   "prompt-for-location", 1,
                                   G_TYPE_STRING, "/");
 

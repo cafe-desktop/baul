@@ -527,8 +527,8 @@ baul_launch_desktop_file (CdkScreen   *screen,
 
     context = cdk_display_get_app_launch_context (ctk_widget_get_display (CTK_WIDGET (parent_window)));
 
-    /* TODO: Ideally we should accept a timestamp here instead of using GDK_CURRENT_TIME */
-    cdk_app_launch_context_set_timestamp (context, GDK_CURRENT_TIME);
+    /* TODO: Ideally we should accept a timestamp here instead of using CDK_CURRENT_TIME */
+    cdk_app_launch_context_set_timestamp (context, CDK_CURRENT_TIME);
     cdk_app_launch_context_set_screen (context,
                                        ctk_window_get_screen (parent_window));
     g_desktop_app_info_launch_uris_as_manager (app_info,

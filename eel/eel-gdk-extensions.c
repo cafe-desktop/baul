@@ -437,39 +437,39 @@ eel_cdk_parse_geometry (const char *string, int *x_return, int *y_return,
     int x11_flags;
     EelCdkGeometryFlags cdk_flags;
 
-    g_return_val_if_fail (string != NULL, EEL_GDK_NO_VALUE);
-    g_return_val_if_fail (x_return != NULL, EEL_GDK_NO_VALUE);
-    g_return_val_if_fail (y_return != NULL, EEL_GDK_NO_VALUE);
-    g_return_val_if_fail (width_return != NULL, EEL_GDK_NO_VALUE);
-    g_return_val_if_fail (height_return != NULL, EEL_GDK_NO_VALUE);
+    g_return_val_if_fail (string != NULL, EEL_CDK_NO_VALUE);
+    g_return_val_if_fail (x_return != NULL, EEL_CDK_NO_VALUE);
+    g_return_val_if_fail (y_return != NULL, EEL_CDK_NO_VALUE);
+    g_return_val_if_fail (width_return != NULL, EEL_CDK_NO_VALUE);
+    g_return_val_if_fail (height_return != NULL, EEL_CDK_NO_VALUE);
 
     x11_flags = XParseGeometry (string, x_return, y_return,
                                 width_return, height_return);
 
-    cdk_flags = EEL_GDK_NO_VALUE;
+    cdk_flags = EEL_CDK_NO_VALUE;
     if (x11_flags & XValue)
     {
-        cdk_flags |= EEL_GDK_X_VALUE;
+        cdk_flags |= EEL_CDK_X_VALUE;
     }
     if (x11_flags & YValue)
     {
-        cdk_flags |= EEL_GDK_Y_VALUE;
+        cdk_flags |= EEL_CDK_Y_VALUE;
     }
     if (x11_flags & WidthValue)
     {
-        cdk_flags |= EEL_GDK_WIDTH_VALUE;
+        cdk_flags |= EEL_CDK_WIDTH_VALUE;
     }
     if (x11_flags & HeightValue)
     {
-        cdk_flags |= EEL_GDK_HEIGHT_VALUE;
+        cdk_flags |= EEL_CDK_HEIGHT_VALUE;
     }
     if (x11_flags & XNegative)
     {
-        cdk_flags |= EEL_GDK_X_NEGATIVE;
+        cdk_flags |= EEL_CDK_X_NEGATIVE;
     }
     if (x11_flags & YNegative)
     {
-        cdk_flags |= EEL_GDK_Y_NEGATIVE;
+        cdk_flags |= EEL_CDK_Y_NEGATIVE;
     }
 
     return cdk_flags;

@@ -501,10 +501,10 @@ static gboolean
 baul_navigation_window_state_event (CtkWidget *widget,
                                     CdkEventWindowState *event)
 {
-    if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED)
+    if (event->changed_mask & CDK_WINDOW_STATE_MAXIMIZED)
     {
         g_settings_set_boolean (baul_window_state, BAUL_WINDOW_STATE_MAXIMIZED,
-                                event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED);
+                                event->new_window_state & CDK_WINDOW_STATE_MAXIMIZED);
     }
 
     if (CTK_WIDGET_CLASS (parent_class)->window_state_event != NULL)
@@ -524,7 +524,7 @@ baul_navigation_window_key_press_event (CtkWidget *widget,
 
     window = BAUL_NAVIGATION_WINDOW (widget);
 
-    if (event->state & GDK_CONTROL_MASK)
+    if (event->state & CDK_CONTROL_MASK)
     {
         GSettings *settings = g_settings_new ("org.cafe.baul.preferences");
         gboolean handled = FALSE;
@@ -547,7 +547,7 @@ baul_navigation_window_key_press_event (CtkWidget *widget,
             pages = ctk_notebook_get_n_pages (notebook);
             page_num = ctk_notebook_get_current_page (notebook);
 
-            if (event->keyval == GDK_KEY_ISO_Left_Tab)
+            if (event->keyval == CDK_KEY_ISO_Left_Tab)
             {
                 if (page_num != 0)
                     ctk_notebook_prev_page (notebook);
@@ -555,7 +555,7 @@ baul_navigation_window_key_press_event (CtkWidget *widget,
                     ctk_notebook_set_current_page (notebook, (pages - 1));
                 handled = TRUE;
             }
-            if (event->keyval == GDK_KEY_Tab)
+            if (event->keyval == CDK_KEY_Tab)
             {
                 if (page_num != (pages -1))
                     ctk_notebook_next_page (notebook);
@@ -1190,7 +1190,7 @@ baul_navigation_window_save_geometry (BaulNavigationWindow *window)
 
         geometry_string = eel_ctk_window_get_geometry_string (CTK_WINDOW (window));
         is_maximized = cdk_window_get_state (ctk_widget_get_window (CTK_WIDGET (window)))
-                       & GDK_WINDOW_STATE_MAXIMIZED;
+                       & CDK_WINDOW_STATE_MAXIMIZED;
 
         if (!is_maximized)
         {

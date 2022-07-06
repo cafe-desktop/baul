@@ -5908,11 +5908,11 @@ baul_file_operations_copy_move (const GList *item_uris,
 		}
 	}
 
-	if (target_is_mapping && have_nonmapping_source && copy_action == GDK_ACTION_MOVE) {
+	if (target_is_mapping && have_nonmapping_source && copy_action == CDK_ACTION_MOVE) {
 		/* never move to "burn:///", but fall back to copy.
 		 * This is a workaround, because otherwise the source files would be removed.
 		 */
-		copy_action = GDK_ACTION_COPY;
+		copy_action = CDK_ACTION_COPY;
 	}
 
 	parent_window = NULL;
@@ -5920,7 +5920,7 @@ baul_file_operations_copy_move (const GList *item_uris,
 		parent_window = (CtkWindow *)ctk_widget_get_ancestor (parent_view, CTK_TYPE_WINDOW);
 	}
 
-	if (copy_action == GDK_ACTION_COPY) {
+	if (copy_action == CDK_ACTION_COPY) {
 		GFile *src_dir;
 
 		src_dir = g_file_get_parent (locations->data);
@@ -5942,7 +5942,7 @@ baul_file_operations_copy_move (const GList *item_uris,
 			g_object_unref (src_dir);
 		}
 
-	} else if (copy_action == GDK_ACTION_MOVE) {
+	} else if (copy_action == CDK_ACTION_MOVE) {
 		if (g_file_has_uri_scheme (dest, "trash")) {
 			MoveTrashCBData *cb_data;
 

@@ -351,15 +351,15 @@ baul_drag_default_drop_action_for_netscape_url (CdkDragContext *context)
 {
     /* Mozilla defaults to copy, but unless thats the
        only allowed thing (enforced by ctrl) we want to ASK */
-    if (cdk_drag_context_get_suggested_action (context) == GDK_ACTION_COPY &&
-            cdk_drag_context_get_actions (context) != GDK_ACTION_COPY)
+    if (cdk_drag_context_get_suggested_action (context) == CDK_ACTION_COPY &&
+            cdk_drag_context_get_actions (context) != CDK_ACTION_COPY)
     {
-        return GDK_ACTION_ASK;
+        return CDK_ACTION_ASK;
     }
-    else if (cdk_drag_context_get_suggested_action (context) == GDK_ACTION_MOVE)
+    else if (cdk_drag_context_get_suggested_action (context) == CDK_ACTION_MOVE)
     {
         /* Don't support move */
-        return GDK_ACTION_COPY;
+        return CDK_ACTION_COPY;
     }
 
     return cdk_drag_context_get_suggested_action (context);
@@ -430,7 +430,7 @@ baul_drag_default_drop_action_for_icons (CdkDragContext *context,
         return;
     }
 
-    actions = cdk_drag_context_get_actions (context) & (GDK_ACTION_MOVE | GDK_ACTION_COPY);
+    actions = cdk_drag_context_get_actions (context) & (CDK_ACTION_MOVE | CDK_ACTION_COPY);
     if (actions == 0)
     {
         /* We can't use copy or move, just go with the suggested action. */
@@ -438,7 +438,7 @@ baul_drag_default_drop_action_for_icons (CdkDragContext *context,
         return;
     }
 
-    if (cdk_drag_context_get_suggested_action (context) == GDK_ACTION_ASK)
+    if (cdk_drag_context_get_suggested_action (context) == CDK_ACTION_ASK)
     {
         /* Don't override ask */
         *action = cdk_drag_context_get_suggested_action (context);
@@ -457,9 +457,9 @@ baul_drag_default_drop_action_for_icons (CdkDragContext *context,
     if (eel_uri_is_trash (target_uri_string))
     {
         /* Only move to Trash */
-        if (actions & GDK_ACTION_MOVE)
+        if (actions & CDK_ACTION_MOVE)
         {
-            *action = GDK_ACTION_MOVE;
+            *action = CDK_ACTION_MOVE;
         }
 
         baul_file_unref (dropped_file);
@@ -469,9 +469,9 @@ baul_drag_default_drop_action_for_icons (CdkDragContext *context,
     }
     else if (dropped_file != NULL && baul_file_is_launcher (dropped_file))
     {
-        if (actions & GDK_ACTION_MOVE)
+        if (actions & CDK_ACTION_MOVE)
         {
-            *action = GDK_ACTION_MOVE;
+            *action = CDK_ACTION_MOVE;
         }
         baul_file_unref (dropped_file);
         baul_file_unref (target_file);
@@ -487,9 +487,9 @@ baul_drag_default_drop_action_for_icons (CdkDragContext *context,
         if (eel_uri_is_desktop (dropped_uri))
         {
             /* Only move to Desktop icons */
-            if (actions & GDK_ACTION_MOVE)
+            if (actions & CDK_ACTION_MOVE)
             {
-                *action = GDK_ACTION_MOVE;
+                *action = CDK_ACTION_MOVE;
             }
 
             g_object_unref (target);
@@ -500,7 +500,7 @@ baul_drag_default_drop_action_for_icons (CdkDragContext *context,
     }
     else if (target_file != NULL && baul_file_is_archive (target_file))
     {
-        *action = GDK_ACTION_COPY;
+        *action = CDK_ACTION_COPY;
 
         baul_file_unref (dropped_file);
         baul_file_unref (target_file);
@@ -534,9 +534,9 @@ baul_drag_default_drop_action_for_icons (CdkDragContext *context,
     if ((same_fs && source_deletable) || target_is_source_parent ||
             g_file_has_uri_scheme (dropped, "trash"))
     {
-        if (actions & GDK_ACTION_MOVE)
+        if (actions & CDK_ACTION_MOVE)
         {
-            *action = GDK_ACTION_MOVE;
+            *action = CDK_ACTION_MOVE;
         }
         else
         {
@@ -545,9 +545,9 @@ baul_drag_default_drop_action_for_icons (CdkDragContext *context,
     }
     else
     {
-        if (actions & GDK_ACTION_COPY)
+        if (actions & CDK_ACTION_COPY)
         {
-            *action = GDK_ACTION_COPY;
+            *action = CDK_ACTION_COPY;
         }
         else
         {
@@ -564,10 +564,10 @@ CdkDragAction
 baul_drag_default_drop_action_for_uri_list (CdkDragContext *context,
         const char *target_uri_string)
 {
-    if (eel_uri_is_trash (target_uri_string) && (cdk_drag_context_get_actions (context) & GDK_ACTION_MOVE))
+    if (eel_uri_is_trash (target_uri_string) && (cdk_drag_context_get_actions (context) & CDK_ACTION_MOVE))
     {
         /* Only move to Trash */
-        return GDK_ACTION_MOVE;
+        return CDK_ACTION_MOVE;
     }
     else
     {
@@ -796,18 +796,18 @@ baul_drag_drop_action_ask (CtkWidget *widget,
     ctk_menu_set_screen (CTK_MENU (menu), ctk_widget_get_screen (widget));
 
     append_drop_action_menu_item (menu, _("_Move Here"),
-                                  GDK_ACTION_MOVE,
-                                  (actions & GDK_ACTION_MOVE) != 0,
+                                  CDK_ACTION_MOVE,
+                                  (actions & CDK_ACTION_MOVE) != 0,
                                   &damd);
 
     append_drop_action_menu_item (menu, _("_Copy Here"),
-                                  GDK_ACTION_COPY,
-                                  (actions & GDK_ACTION_COPY) != 0,
+                                  CDK_ACTION_COPY,
+                                  (actions & CDK_ACTION_COPY) != 0,
                                   &damd);
 
     append_drop_action_menu_item (menu, _("_Link Here"),
-                                  GDK_ACTION_LINK,
-                                  (actions & GDK_ACTION_LINK) != 0,
+                                  CDK_ACTION_LINK,
+                                  (actions & CDK_ACTION_LINK) != 0,
                                   &damd);
 
     append_drop_action_menu_item (menu, _("Set as _Background"),
@@ -1088,7 +1088,7 @@ slot_proxy_drag_motion (CtkWidget          *widget,
     {
         target = ctk_drag_dest_find_target (widget, context, NULL);
 
-        if (target == GDK_NONE)
+        if (target == CDK_NONE)
         {
             goto out;
         }
@@ -1383,10 +1383,10 @@ baul_drag_slot_proxy_init (CtkWidget *widget,
 
     ctk_drag_dest_set (widget, 0,
                        NULL, 0,
-                       GDK_ACTION_MOVE |
-                       GDK_ACTION_COPY |
-                       GDK_ACTION_LINK |
-                       GDK_ACTION_ASK);
+                       CDK_ACTION_MOVE |
+                       CDK_ACTION_COPY |
+                       CDK_ACTION_LINK |
+                       CDK_ACTION_ASK);
 
     target_list = ctk_target_list_new (targets, G_N_ELEMENTS (targets));
     ctk_target_list_add_uri_targets (target_list, BAUL_ICON_DND_URI_LIST);

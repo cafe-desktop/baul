@@ -3760,7 +3760,7 @@ fm_directory_view_get_model (FMDirectoryView *view)
 CdkAtom
 fm_directory_view_get_copied_files_atom (FMDirectoryView *view)
 {
-	g_return_val_if_fail (FM_IS_DIRECTORY_VIEW (view), GDK_NONE);
+	g_return_val_if_fail (FM_IS_DIRECTORY_VIEW (view), CDK_NONE);
 
 	return copied_files_atom;
 }
@@ -3824,7 +3824,7 @@ fm_directory_view_create_links_for_files (FMDirectoryView *view, GList *files,
 
         copy_move_done_data = pre_copy_move (view);
 	dir_uri = fm_directory_view_get_backing_uri (view);
-	baul_file_operations_copy_move (uris, relative_item_points, dir_uri, GDK_ACTION_LINK,
+	baul_file_operations_copy_move (uris, relative_item_points, dir_uri, CDK_ACTION_LINK,
 					    CTK_WIDGET (view), copy_move_done_callback, copy_move_done_data);
 	g_free (dir_uri);
 	g_list_free_full (uris, g_free);
@@ -3857,7 +3857,7 @@ fm_directory_view_duplicate_selection (FMDirectoryView *view, GList *files,
 			    DUPLICATE_VERTICAL_ICON_OFFSET);
 
         copy_move_done_data = pre_copy_move (view);
-	baul_file_operations_copy_move (uris, relative_item_points, NULL, GDK_ACTION_COPY,
+	baul_file_operations_copy_move (uris, relative_item_points, NULL, CDK_ACTION_COPY,
 		CTK_WIDGET (view), copy_move_done_callback, copy_move_done_data);
 	g_list_free_full (uris, g_free);
 }
@@ -6174,7 +6174,7 @@ action_copy_to_next_pane_callback (CtkAction *action, gpointer callback_data)
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 	move_copy_selection_to_next_pane (view,
-					  GDK_ACTION_COPY);
+					  CDK_ACTION_COPY);
 }
 
 static void
@@ -6192,7 +6192,7 @@ action_move_to_next_pane_callback (CtkAction *action, gpointer callback_data)
 	dest_location = baul_window_slot_info_get_current_location (slot);
 	g_return_if_fail (dest_location != NULL);
 
-	move_copy_selection_to_location (view, GDK_ACTION_MOVE, dest_location);
+	move_copy_selection_to_location (view, CDK_ACTION_MOVE, dest_location);
 }
 
 static void
@@ -6204,7 +6204,7 @@ action_copy_to_home_callback (CtkAction *action, gpointer callback_data)
 	view = FM_DIRECTORY_VIEW (callback_data);
 
 	dest_location = baul_get_home_directory_uri ();
-	move_copy_selection_to_location (view, GDK_ACTION_COPY, dest_location);
+	move_copy_selection_to_location (view, CDK_ACTION_COPY, dest_location);
 	g_free (dest_location);
 }
 
@@ -6217,7 +6217,7 @@ action_move_to_home_callback (CtkAction *action, gpointer callback_data)
 	view = FM_DIRECTORY_VIEW (callback_data);
 
 	dest_location = baul_get_home_directory_uri ();
-	move_copy_selection_to_location (view, GDK_ACTION_MOVE, dest_location);
+	move_copy_selection_to_location (view, CDK_ACTION_MOVE, dest_location);
 	g_free (dest_location);
 }
 
@@ -6230,7 +6230,7 @@ action_copy_to_desktop_callback (CtkAction *action, gpointer callback_data)
 	view = FM_DIRECTORY_VIEW (callback_data);
 
 	dest_location = baul_get_desktop_directory_uri ();
-	move_copy_selection_to_location (view, GDK_ACTION_COPY, dest_location);
+	move_copy_selection_to_location (view, CDK_ACTION_COPY, dest_location);
 	g_free (dest_location);
 }
 
@@ -6243,7 +6243,7 @@ action_move_to_desktop_callback (CtkAction *action, gpointer callback_data)
 	view = FM_DIRECTORY_VIEW (callback_data);
 
 	dest_location = baul_get_desktop_directory_uri ();
-	move_copy_selection_to_location (view, GDK_ACTION_MOVE, dest_location);
+	move_copy_selection_to_location (view, CDK_ACTION_MOVE, dest_location);
 	g_free (dest_location);
 }
 
@@ -6278,7 +6278,7 @@ paste_clipboard_data (FMDirectoryView *view,
 						      _("There is nothing on the clipboard to paste."));
 	} else {
 		fm_directory_view_move_copy_items (item_uris, NULL, destination_uri,
-						   cut ? GDK_ACTION_MOVE : GDK_ACTION_COPY,
+						   cut ? CDK_ACTION_MOVE : CDK_ACTION_COPY,
 						   0, 0,
 						   view);
 
@@ -7751,7 +7751,7 @@ pre_activate (FMDirectoryView *view,
 		if (CTK_IS_WINDOW (toplevel)) {
 			hint = ctk_window_get_type_hint (CTK_WINDOW (toplevel));
 
-			if (hint == GDK_WINDOW_TYPE_HINT_POPUP_MENU) {
+			if (hint == CDK_WINDOW_TYPE_HINT_POPUP_MENU) {
 				activated_from_popup = TRUE;
 			}
 		}
@@ -9477,10 +9477,10 @@ fm_directory_view_drop_proxy_received_uris (FMDirectoryView *view,
 		g_assert (container_uri != NULL);
 	}
 
-	if (action == GDK_ACTION_ASK) {
+	if (action == CDK_ACTION_ASK) {
 		action = baul_drag_drop_action_ask
 			(CTK_WIDGET (view),
-			 GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+			 CDK_ACTION_MOVE | CDK_ACTION_COPY | CDK_ACTION_LINK);
 		if (action == 0) {
 			return;
 		}
@@ -10356,7 +10356,7 @@ fm_directory_view_move_copy_items (const GList *item_uris,
 				target_uri, item_uris,
 				fm_directory_view_get_containing_window (view));
 		return;
-	} else if (copy_action == GDK_ACTION_COPY &&
+	} else if (copy_action == CDK_ACTION_COPY &&
 		   baul_is_engrampa_installed () &&
 		   target_file != NULL &&
 		   baul_file_is_archive (target_file)) {
@@ -10505,14 +10505,14 @@ ask_link_action (FMDirectoryView *view)
 
 	switch (button_pressed) {
 	case 0:
-		result = GDK_ACTION_LINK;
+		result = CDK_ACTION_LINK;
 		break;
 	case 1:
 	case CTK_RESPONSE_DELETE_EVENT:
 		result = 0;
 		break;
 	case 2:
-		result = GDK_ACTION_COPY;
+		result = CDK_ACTION_COPY;
 		break;
 	default:
 		g_assert_not_reached ();
@@ -10557,12 +10557,12 @@ handle_netscape_url_drop_ask_cb (GObject *source_object,
 	    (g_content_type_equals (mime_type, "text/html") ||
 	     g_content_type_equals (mime_type, "text/xml")  ||
 	     g_content_type_equals (mime_type, "application/xhtml+xml"))) {
-		action = GDK_ACTION_LINK;
+		action = CDK_ACTION_LINK;
 	} else if (mime_type != NULL &&
 		   g_content_type_equals (mime_type, "text/plain")) {
 		action = ask_link_action (data->view);
 	} else {
-		action = GDK_ACTION_COPY;
+		action = CDK_ACTION_COPY;
 	}
 	if (info) {
 		g_object_unref (info);
@@ -10673,7 +10673,7 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 		title = bits[1];
 	}
 
-	if (action == GDK_ACTION_ASK) {
+	if (action == CDK_ACTION_ASK) {
 		NetscapeUrlDropAsk *data;
 
 		f = g_file_new_for_uri (url);
@@ -10701,12 +10701,12 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 
 	fm_directory_view_widget_to_file_operation_position_xy (view, &x, &y);
 
-	/* We don't support GDK_ACTION_ASK or GDK_ACTION_PRIVATE
+	/* We don't support CDK_ACTION_ASK or CDK_ACTION_PRIVATE
 	 * and we don't support combinations either. */
-	if ((action != GDK_ACTION_DEFAULT) &&
-	    (action != GDK_ACTION_COPY) &&
-	    (action != GDK_ACTION_MOVE) &&
-	    (action != GDK_ACTION_LINK)) {
+	if ((action != CDK_ACTION_DEFAULT) &&
+	    (action != CDK_ACTION_COPY) &&
+	    (action != CDK_ACTION_MOVE) &&
+	    (action != CDK_ACTION_LINK)) {
 		eel_show_warning_dialog (_("Drag and drop is not supported."),
 					 _("An invalid drag type was used."),
 					 fm_directory_view_get_containing_window (view));
@@ -10715,7 +10715,7 @@ fm_directory_view_handle_netscape_url_drop (FMDirectoryView  *view,
 		return;
 	}
 
-	if (action == GDK_ACTION_LINK) {
+	if (action == CDK_ACTION_LINK) {
 		char *link_name;
 
 		if (eel_str_is_empty (title)) {
@@ -10804,22 +10804,22 @@ fm_directory_view_handle_uri_list_drop (FMDirectoryView  *view,
 		g_assert (container_uri != NULL);
 	}
 
-	if (action == GDK_ACTION_ASK) {
+	if (action == CDK_ACTION_ASK) {
 		action = baul_drag_drop_action_ask
 			(CTK_WIDGET (view),
-			 GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+			 CDK_ACTION_MOVE | CDK_ACTION_COPY | CDK_ACTION_LINK);
 		if (action == 0) {
 			g_free (container_uri);
 			return;
 		}
 	}
 
-	/* We don't support GDK_ACTION_ASK or GDK_ACTION_PRIVATE
+	/* We don't support CDK_ACTION_ASK or CDK_ACTION_PRIVATE
 	 * and we don't support combinations either. */
-	if ((action != GDK_ACTION_DEFAULT) &&
-	    (action != GDK_ACTION_COPY) &&
-	    (action != GDK_ACTION_MOVE) &&
-	    (action != GDK_ACTION_LINK)) {
+	if ((action != CDK_ACTION_DEFAULT) &&
+	    (action != CDK_ACTION_COPY) &&
+	    (action != CDK_ACTION_MOVE) &&
+	    (action != CDK_ACTION_LINK)) {
 		eel_show_warning_dialog (_("Drag and drop is not supported."),
 					 _("An invalid drag type was used."),
 					 fm_directory_view_get_containing_window (view));
@@ -10881,7 +10881,7 @@ fm_directory_view_handle_text_drop (FMDirectoryView  *view,
 		return;
 	}
 
-	g_return_if_fail (action == GDK_ACTION_COPY);
+	g_return_if_fail (action == CDK_ACTION_COPY);
 
 	container_uri = NULL;
 	if (target_uri == NULL) {
@@ -10921,7 +10921,7 @@ fm_directory_view_handle_raw_drop (FMDirectoryView  *view,
 		return;
 	}
 
-	g_return_if_fail (action == GDK_ACTION_COPY);
+	g_return_if_fail (action == CDK_ACTION_COPY);
 
 	container_uri = NULL;
 	if (target_uri == NULL) {
@@ -11022,19 +11022,19 @@ fm_directory_view_handle_scroll_event (FMDirectoryView *directory_view,
 	static gdouble total_delta_y = 0;
 	gdouble delta_x, delta_y;
 
-	if (event->state & GDK_CONTROL_MASK) {
+	if (event->state & CDK_CONTROL_MASK) {
 		switch (event->direction) {
-		case GDK_SCROLL_UP:
+		case CDK_SCROLL_UP:
 			/* Zoom In */
 			fm_directory_view_bump_zoom_level (directory_view, 1);
 			return TRUE;
 
-		case GDK_SCROLL_DOWN:
+		case CDK_SCROLL_DOWN:
 			/* Zoom Out */
 			fm_directory_view_bump_zoom_level (directory_view, -1);
 			return TRUE;
 
-		case GDK_SCROLL_SMOOTH:
+		case CDK_SCROLL_SMOOTH:
 			cdk_event_get_scroll_deltas ((const CdkEvent *) event,
 			                             &delta_x, &delta_y);
 
@@ -11056,8 +11056,8 @@ fm_directory_view_handle_scroll_event (FMDirectoryView *directory_view,
 				return TRUE;
 			}
 
-		case GDK_SCROLL_LEFT:
-		case GDK_SCROLL_RIGHT:
+		case CDK_SCROLL_LEFT:
+		case CDK_SCROLL_RIGHT:
 			break;
 
 		default:
@@ -11285,13 +11285,13 @@ fm_directory_view_class_init (FMDirectoryViewClass *klass)
 			      G_TYPE_BOOLEAN, 0);
 
 	binding_set = ctk_binding_set_by_class (klass);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Delete, 0,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_Delete, 0,
 				      "trash", 0);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Delete, 0,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_KP_Delete, 0,
 				      "trash", 0);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Delete, GDK_SHIFT_MASK,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_Delete, CDK_SHIFT_MASK,
 				      "delete", 0);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Delete, GDK_SHIFT_MASK,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_KP_Delete, CDK_SHIFT_MASK,
 				      "delete", 0);
 
 	klass->trash = real_trash;

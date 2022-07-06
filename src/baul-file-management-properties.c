@@ -1280,7 +1280,7 @@ baul_file_management_properties_dialog_setup (CtkBuilder *builder, CtkWindow *wi
     }
 
     CtkWidget *notebook = CTK_WIDGET (ctk_builder_get_object (builder, "notebook1"));
-    ctk_widget_add_events (CTK_WIDGET (notebook), GDK_SCROLL_MASK);
+    ctk_widget_add_events (CTK_WIDGET (notebook), CDK_SCROLL_MASK);
     g_signal_connect (CTK_WIDGET (notebook), "scroll-event",
                       G_CALLBACK (eel_dialog_page_scroll_event_callback),
                       window);

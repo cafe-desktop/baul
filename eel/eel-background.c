@@ -939,7 +939,7 @@ eel_bg_set_image_uri_helper (EelBackground *self,
     g_free (filename);
 
     if (emit_signal)
-        g_signal_emit (self, signals[SETTINGS_CHANGED], 0, GDK_ACTION_COPY);
+        g_signal_emit (self, signals[SETTINGS_CHANGED], 0, CDK_ACTION_COPY);
 
     set_image_properties (self);
 }

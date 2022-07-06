@@ -321,7 +321,7 @@ activate_selected_items_alternate (FMListView *view,
 static gboolean
 button_event_modifies_selection (CdkEventButton *event)
 {
-    return (event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) != 0;
+    return (event->state & (CDK_CONTROL_MASK | CDK_SHIFT_MASK)) != 0;
 }
 
 static void
@@ -339,8 +339,8 @@ fm_list_view_did_not_drag (FMListView *view,
                                        &path, NULL, NULL, NULL))
     {
         if ((event->button == 1 || event->button == 2)
-                && ((event->state & GDK_CONTROL_MASK) != 0 ||
-                    (event->state & GDK_SHIFT_MASK) == 0)
+                && ((event->state & CDK_CONTROL_MASK) != 0 ||
+                    (event->state & CDK_SHIFT_MASK) == 0)
                 && view->details->row_selected_on_button_down)
         {
             if (!button_event_modifies_selection (event))
@@ -583,7 +583,7 @@ motion_notify_callback (CtkWidget *widget,
         {
             ctk_drag_begin_with_coordinates (widget,
                                              source_target_list,
-                                             GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK,
+                                             CDK_ACTION_MOVE | CDK_ACTION_COPY | CDK_ACTION_LINK | CDK_ACTION_ASK,
                                              view->details->drag_button,
                                              (CdkEvent*)event,
                                              event->x,
@@ -738,7 +738,7 @@ button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callba
         /* Keep track of path of last click so double clicks only happen
          * on the same item */
         if ((event->button == 1 || event->button == 2)  &&
-                event->type == GDK_BUTTON_PRESS)
+                event->type == CDK_BUTTON_PRESS)
         {
             if (view->details->double_click_path[1])
             {
@@ -747,7 +747,7 @@ button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callba
             view->details->double_click_path[1] = view->details->double_click_path[0];
             view->details->double_click_path[0] = ctk_tree_path_copy (path);
         }
-        if (event->type == GDK_2BUTTON_PRESS)
+        if (event->type == CDK_2BUTTON_PRESS)
         {
             /* Double clicking does not trigger a D&D action. */
             view->details->drag_button = 0;
@@ -768,7 +768,7 @@ button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callba
                     }
                 }
                 else if (event->button == 1 &&
-                         (event->state & GDK_SHIFT_MASK) != 0)
+                         (event->state & CDK_SHIFT_MASK) != 0)
                 {
                     BaulFile *file;
                     file = fm_list_model_file_for_path (view->details->model, path);
@@ -799,8 +799,8 @@ button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callba
             }
 
             if ((event->button == 1 || event->button == 2) &&
-                    ((event->state & GDK_CONTROL_MASK) != 0 ||
-                     (event->state & GDK_SHIFT_MASK) == 0))
+                    ((event->state & CDK_CONTROL_MASK) != 0 ||
+                     (event->state & CDK_SHIFT_MASK) == 0))
             {
                 view->details->row_selected_on_button_down = ctk_tree_selection_path_is_selected (selection, path);
                 if (view->details->row_selected_on_button_down)
@@ -808,13 +808,13 @@ button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callba
                     call_parent = on_expander;
                     view->details->ignore_button_release = call_parent;
                 }
-                else if ((event->state & GDK_CONTROL_MASK) != 0)
+                else if ((event->state & CDK_CONTROL_MASK) != 0)
                 {
                     GList *selected_rows;
                     GList *l;
 
                     call_parent = FALSE;
-                    if ((event->state & GDK_SHIFT_MASK) != 0)
+                    if ((event->state & CDK_SHIFT_MASK) != 0)
                     {
                         CtkTreePath *cursor;
                         ctk_tree_view_get_cursor (tree_view, &cursor, NULL);
@@ -863,7 +863,7 @@ button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callba
             }
 
             if ((event->button == 1 || event->button == 2) &&
-                    event->type == GDK_BUTTON_PRESS)
+                    event->type == CDK_BUTTON_PRESS)
             {
                 view->details->drag_started = FALSE;
                 view->details->drag_button = event->button;
@@ -882,7 +882,7 @@ button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callba
     else
     {
         if ((event->button == 1 || event->button == 2)  &&
-                event->type == GDK_BUTTON_PRESS)
+                event->type == CDK_BUTTON_PRESS)
         {
             if (view->details->double_click_path[1])
             {
@@ -1121,14 +1121,14 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
 
     switch (event->keyval)
     {
-    case GDK_KEY_F10:
-        if (event->state & GDK_CONTROL_MASK)
+    case CDK_KEY_F10:
+        if (event->state & CDK_CONTROL_MASK)
         {
             fm_directory_view_pop_up_background_context_menu (view, &button_event);
             handled = TRUE;
         }
         break;
-    case GDK_KEY_Right:
+    case CDK_KEY_Right:
         ctk_tree_view_get_cursor (tree_view, &path, NULL);
         if (path)
         {
@@ -1137,7 +1137,7 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
         }
         handled = TRUE;
         break;
-	case GDK_KEY_Left:
+	case CDK_KEY_Left:
         ctk_tree_view_get_cursor (tree_view, &path, NULL);
         if (path)
         {
@@ -1154,8 +1154,8 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
         }
         handled = TRUE;
         break;
-    case GDK_KEY_space:
-        if (event->state & GDK_CONTROL_MASK)
+    case CDK_KEY_space:
+        if (event->state & CDK_CONTROL_MASK)
         {
             handled = FALSE;
             break;
@@ -1165,7 +1165,7 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
             handled = FALSE;
             break;
         }
-        if ((event->state & GDK_SHIFT_MASK) != 0)
+        if ((event->state & CDK_SHIFT_MASK) != 0)
         {
             activate_selected_items_alternate (FM_LIST_VIEW (view), NULL, TRUE);
         }
@@ -1175,17 +1175,17 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
         }
         handled = TRUE;
         break;
-    case GDK_KEY_Return:
-    case GDK_KEY_KP_Enter:
+    case CDK_KEY_Return:
+    case CDK_KEY_KP_Enter:
 	if (CTK_IS_CELL_EDITABLE (listview->details->editable_widget) &&
-	    ((event->state & GDK_SHIFT_MASK) || (event->state & GDK_CONTROL_MASK)))
+	    ((event->state & CDK_SHIFT_MASK) || (event->state & CDK_CONTROL_MASK)))
 	{
 		event->state = 0;
 		handled = FALSE;
 	}
 	else
 	{
-	        if ((event->state & GDK_SHIFT_MASK) != 0)
+	        if ((event->state & CDK_SHIFT_MASK) != 0)
 	        {
 	            activate_selected_items_alternate (FM_LIST_VIEW (view), NULL, TRUE);
 	        }
@@ -1196,9 +1196,9 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
 	        handled = TRUE;
 	}
         break;
-    case GDK_KEY_v:
+    case CDK_KEY_v:
         /* Eat Control + v to not enable type ahead */
-        if ((event->state & GDK_CONTROL_MASK) != 0)
+        if ((event->state & CDK_CONTROL_MASK) != 0)
         {
             handled = TRUE;
         }
@@ -1675,7 +1675,7 @@ create_and_set_up_tree_view (FMListView *view)
 
     /* Don't handle backspace key. It's used to open the parent folder. */
     binding_set = ctk_binding_set_by_class (CTK_WIDGET_GET_CLASS (view->details->tree_view));
-	ctk_binding_entry_remove (binding_set, GDK_KEY_BackSpace, 0);
+	ctk_binding_entry_remove (binding_set, CDK_KEY_BackSpace, 0);
 
     view->details->drag_dest =
         baul_tree_view_drag_dest_new (view->details->tree_view);
@@ -3008,7 +3008,7 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
     {
         if (hand_cursor == NULL)
         {
-            hand_cursor = cdk_cursor_new_for_display (display, GDK_HAND2);
+            hand_cursor = cdk_cursor_new_for_display (display, CDK_HAND2);
         }
     }
 }

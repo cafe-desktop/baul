@@ -285,7 +285,7 @@ baul_query_editor_class_init (BaulQueryEditorClass *class)
                       G_TYPE_NONE, 0);
 
     binding_set = ctk_binding_set_by_class (class);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_Escape, 0, "cancel", 0);
 }
 
 static void

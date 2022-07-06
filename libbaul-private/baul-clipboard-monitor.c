@@ -85,7 +85,7 @@ baul_clipboard_monitor_get (void)
         clipboard_monitor = BAUL_CLIPBOARD_MONITOR (g_object_new (BAUL_TYPE_CLIPBOARD_MONITOR, NULL));
         eel_debug_call_at_shutdown (destroy_clipboard_monitor);
 
-        clipboard = ctk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+        clipboard = ctk_clipboard_get (CDK_SELECTION_CLIPBOARD);
         g_signal_connect (clipboard, "owner_change",
                           G_CALLBACK (baul_clipboard_monitor_emit_changed), NULL);
     }

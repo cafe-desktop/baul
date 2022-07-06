@@ -368,7 +368,7 @@ egg_tree_multi_drag_button_press_event (CtkWidget      *widget,
         return TRUE;
     }
 
-    if (event->type == GDK_2BUTTON_PRESS)
+    if (event->type == CDK_2BUTTON_PRESS)
         return FALSE;
 
     ctk_tree_view_get_path_at_pos (tree_view,

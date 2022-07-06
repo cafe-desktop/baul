@@ -208,7 +208,7 @@ add_move_binding (CtkBindingSet  *binding_set,
                   CtkMovementStep step,
                   gint            count)
 {
-    g_assert ((modmask & GDK_SHIFT_MASK) == 0);
+    g_assert ((modmask & CDK_SHIFT_MASK) == 0);
 
     ctk_binding_entry_add_signal (binding_set, keyval, modmask,
                                   "move_cursor", 3,
@@ -217,7 +217,7 @@ add_move_binding (CtkBindingSet  *binding_set,
                                   G_TYPE_BOOLEAN, FALSE);
 
     /* Selection-extending version */
-    ctk_binding_entry_add_signal (binding_set, keyval, modmask | GDK_SHIFT_MASK,
+    ctk_binding_entry_add_signal (binding_set, keyval, modmask | CDK_SHIFT_MASK,
                                   "move_cursor", 3,
                                   G_TYPE_ENUM, step,
                                   G_TYPE_INT, count,
@@ -380,154 +380,154 @@ eel_editable_label_class_init (EelEditableLabelClass *class)
     binding_set = ctk_binding_set_by_class (class);
 
     /* Moving the insertion point */
-    add_move_binding (binding_set, GDK_KEY_Right, 0,
+    add_move_binding (binding_set, CDK_KEY_Right, 0,
                       CTK_MOVEMENT_VISUAL_POSITIONS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_Left, 0,
+    add_move_binding (binding_set, CDK_KEY_Left, 0,
                       CTK_MOVEMENT_VISUAL_POSITIONS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_Right, 0,
+    add_move_binding (binding_set, CDK_KEY_KP_Right, 0,
                       CTK_MOVEMENT_VISUAL_POSITIONS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_Left, 0,
+    add_move_binding (binding_set, CDK_KEY_KP_Left, 0,
                       CTK_MOVEMENT_VISUAL_POSITIONS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_f, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_f, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_LOGICAL_POSITIONS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_b, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_b, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_LOGICAL_POSITIONS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_Right, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_Right, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_WORDS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_Left, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_Left, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_WORDS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_Right, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_KP_Right, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_WORDS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_Left, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_KP_Left, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_WORDS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_a, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_a, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_PARAGRAPH_ENDS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_e, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_e, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_PARAGRAPH_ENDS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_f, GDK_MOD1_MASK,
+    add_move_binding (binding_set, CDK_KEY_f, CDK_MOD1_MASK,
                       CTK_MOVEMENT_WORDS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_b, GDK_MOD1_MASK,
+    add_move_binding (binding_set, CDK_KEY_b, CDK_MOD1_MASK,
                       CTK_MOVEMENT_WORDS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_Home, 0,
+    add_move_binding (binding_set, CDK_KEY_Home, 0,
                       CTK_MOVEMENT_DISPLAY_LINE_ENDS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_End, 0,
+    add_move_binding (binding_set, CDK_KEY_End, 0,
                       CTK_MOVEMENT_DISPLAY_LINE_ENDS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_Home, 0,
+    add_move_binding (binding_set, CDK_KEY_KP_Home, 0,
                       CTK_MOVEMENT_DISPLAY_LINE_ENDS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_End, 0,
+    add_move_binding (binding_set, CDK_KEY_KP_End, 0,
                       CTK_MOVEMENT_DISPLAY_LINE_ENDS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_Home, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_Home, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_BUFFER_ENDS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_End, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_End, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_BUFFER_ENDS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_Home, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_KP_Home, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_BUFFER_ENDS, -1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_End, GDK_CONTROL_MASK,
+    add_move_binding (binding_set, CDK_KEY_KP_End, CDK_CONTROL_MASK,
                       CTK_MOVEMENT_BUFFER_ENDS, 1);
 
-    add_move_binding (binding_set, GDK_KEY_Up, 0,
+    add_move_binding (binding_set, CDK_KEY_Up, 0,
                       CTK_MOVEMENT_DISPLAY_LINES, -1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_Up, 0,
+    add_move_binding (binding_set, CDK_KEY_KP_Up, 0,
                       CTK_MOVEMENT_DISPLAY_LINES, -1);
 
-    add_move_binding (binding_set, GDK_KEY_Down, 0,
+    add_move_binding (binding_set, CDK_KEY_Down, 0,
                       CTK_MOVEMENT_DISPLAY_LINES, 1);
 
-    add_move_binding (binding_set, GDK_KEY_KP_Down, 0,
+    add_move_binding (binding_set, CDK_KEY_KP_Down, 0,
                       CTK_MOVEMENT_DISPLAY_LINES, 1);
 
     /* Select all
      */
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_a, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_a, CDK_CONTROL_MASK,
                                   "move_cursor", 3,
                                   CTK_TYPE_MOVEMENT_STEP, CTK_MOVEMENT_BUFFER_ENDS,
                                   G_TYPE_INT, -1,
                                   G_TYPE_BOOLEAN, FALSE);
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_a, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_a, CDK_CONTROL_MASK,
                                   "move_cursor", 3,
                                   CTK_TYPE_MOVEMENT_STEP, CTK_MOVEMENT_BUFFER_ENDS,
                                   G_TYPE_INT, 1,
                                   G_TYPE_BOOLEAN, TRUE);
 
     /* Deleting text */
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_Delete, 0,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_Delete, 0,
                                   "delete_from_cursor", 2,
                                   G_TYPE_ENUM, CTK_DELETE_CHARS,
                                   G_TYPE_INT, 1);
 
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Delete, 0,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_KP_Delete, 0,
                                   "delete_from_cursor", 2,
                                   G_TYPE_ENUM, CTK_DELETE_CHARS,
                                   G_TYPE_INT, 1);
 
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, 0,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_BackSpace, 0,
                                   "delete_from_cursor", 2,
                                   G_TYPE_ENUM, CTK_DELETE_CHARS,
                                   G_TYPE_INT, -1);
 
     /* Make this do the same as Backspace, to help with mis-typing */
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, GDK_SHIFT_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_BackSpace, CDK_SHIFT_MASK,
                                   "delete_from_cursor", 2,
                                   G_TYPE_ENUM, CTK_DELETE_CHARS,
                                   G_TYPE_INT, -1);
 
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_Delete, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_Delete, CDK_CONTROL_MASK,
                                   "delete_from_cursor", 2,
                                   G_TYPE_ENUM, CTK_DELETE_WORD_ENDS,
                                   G_TYPE_INT, 1);
 
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Delete, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_KP_Delete, CDK_CONTROL_MASK,
                                   "delete_from_cursor", 2,
                                   G_TYPE_ENUM, CTK_DELETE_WORD_ENDS,
                                   G_TYPE_INT, 1);
 
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_BackSpace, CDK_CONTROL_MASK,
                                   "delete_from_cursor", 2,
                                   G_TYPE_ENUM, CTK_DELETE_WORD_ENDS,
                                   G_TYPE_INT, -1);
 
     /* Cut/copy/paste */
 
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_x, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_x, CDK_CONTROL_MASK,
                                   "cut_clipboard", 0);
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_c, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_c, CDK_CONTROL_MASK,
                                   "copy_clipboard", 0);
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_v, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_v, CDK_CONTROL_MASK,
                                   "paste_clipboard", 0);
 
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_Delete, GDK_SHIFT_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_Delete, CDK_SHIFT_MASK,
                                   "cut_clipboard", 0);
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_Insert, GDK_CONTROL_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_Insert, CDK_CONTROL_MASK,
                                   "copy_clipboard", 0);
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_Insert, GDK_SHIFT_MASK,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_Insert, CDK_SHIFT_MASK,
                                   "paste_clipboard", 0);
 
     /* Overwrite */
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_Insert, 0,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_Insert, 0,
                                   "toggle_overwrite", 0);
-    ctk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Insert, 0,
+    ctk_binding_entry_add_signal (binding_set, CDK_KEY_KP_Insert, 0,
                                   "toggle_overwrite", 0);
 }
 
@@ -1671,27 +1671,27 @@ eel_editable_label_realize (CtkWidget *widget)
     label = EEL_EDITABLE_LABEL (widget);
     ctk_widget_get_allocation (widget, &allocation);
 
-    attributes.wclass = GDK_INPUT_OUTPUT;
-    attributes.window_type = GDK_WINDOW_CHILD;
+    attributes.wclass = CDK_INPUT_OUTPUT;
+    attributes.window_type = CDK_WINDOW_CHILD;
     attributes.x = allocation.x;
     attributes.y = allocation.y;
     attributes.width = allocation.width;
     attributes.height = allocation.height;
     attributes.visual = ctk_widget_get_visual (widget);
     display = ctk_widget_get_display (CTK_WIDGET (label));
-    attributes.cursor = cdk_cursor_new_for_display (display, GDK_XTERM);
+    attributes.cursor = cdk_cursor_new_for_display (display, CDK_XTERM);
     attributes.event_mask = ctk_widget_get_events (widget) |
-                            (GDK_EXPOSURE_MASK |
-                             GDK_BUTTON_PRESS_MASK |
-                             GDK_BUTTON_RELEASE_MASK |
-                             GDK_BUTTON1_MOTION_MASK |
-                             GDK_BUTTON3_MOTION_MASK |
-                             GDK_POINTER_MOTION_HINT_MASK |
-                             GDK_POINTER_MOTION_MASK |
-                             GDK_ENTER_NOTIFY_MASK |
-                             GDK_LEAVE_NOTIFY_MASK);
+                            (CDK_EXPOSURE_MASK |
+                             CDK_BUTTON_PRESS_MASK |
+                             CDK_BUTTON_RELEASE_MASK |
+                             CDK_BUTTON1_MOTION_MASK |
+                             CDK_BUTTON3_MOTION_MASK |
+                             CDK_POINTER_MOTION_HINT_MASK |
+                             CDK_POINTER_MOTION_MASK |
+                             CDK_ENTER_NOTIFY_MASK |
+                             CDK_LEAVE_NOTIFY_MASK);
 
-    attributes_mask = GDK_WA_X | GDK_WA_Y  | GDK_WA_VISUAL | GDK_WA_CURSOR;
+    attributes_mask = CDK_WA_X | CDK_WA_Y  | CDK_WA_VISUAL | CDK_WA_CURSOR;
 
     window = cdk_window_new (ctk_widget_get_parent_window (widget),
                              &attributes, attributes_mask);
@@ -1823,13 +1823,13 @@ eel_editable_label_button_press (CtkWidget      *widget,
         if (!ctk_widget_has_focus (widget))
             ctk_widget_grab_focus (widget);
 
-        if (event->type == GDK_3BUTTON_PRESS)
+        if (event->type == CDK_3BUTTON_PRESS)
         {
             eel_editable_label_select_region_index (label, 0, strlen (label->text));
             return TRUE;
         }
 
-        if (event->type == GDK_2BUTTON_PRESS)
+        if (event->type == CDK_2BUTTON_PRESS)
         {
             eel_editable_label_select_word (label);
             return TRUE;
@@ -1839,7 +1839,7 @@ eel_editable_label_button_press (CtkWidget      *widget,
 
         if ((label->selection_anchor !=
                 label->selection_end) &&
-                (event->state & GDK_SHIFT_MASK))
+                (event->state & CDK_SHIFT_MASK))
         {
             gint min, max;
 
@@ -1864,9 +1864,9 @@ eel_editable_label_button_press (CtkWidget      *widget,
         }
         else
         {
-            if (event->type == GDK_3BUTTON_PRESS)
+            if (event->type == CDK_3BUTTON_PRESS)
                 eel_editable_label_select_region_index (label, 0, strlen (label->text));
-            else if (event->type == GDK_2BUTTON_PRESS)
+            else if (event->type == CDK_2BUTTON_PRESS)
                 eel_editable_label_select_word (label);
             else
                 /* start a replacement */
@@ -1875,16 +1875,16 @@ eel_editable_label_button_press (CtkWidget      *widget,
 
         return TRUE;
     }
-    else if (event->button == 2 && event->type == GDK_BUTTON_PRESS)
+    else if (event->button == 2 && event->type == CDK_BUTTON_PRESS)
     {
         get_layout_index (label, event->x, event->y, &index);
 
         eel_editable_label_select_region_index (label, index, index);
-        eel_editable_label_paste (label, GDK_SELECTION_PRIMARY);
+        eel_editable_label_paste (label, CDK_SELECTION_PRIMARY);
 
         return TRUE;
     }
-    else if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
+    else if (event->button == 3 && event->type == CDK_BUTTON_PRESS)
     {
         eel_editable_label_do_popup (label, event);
 
@@ -1919,7 +1919,7 @@ eel_editable_label_motion (CtkWidget      *widget,
 
     label = EEL_EDITABLE_LABEL (widget);
 
-    if ((event->state & GDK_BUTTON1_MASK) == 0)
+    if ((event->state & CDK_BUTTON1_MASK) == 0)
         return FALSE;
 
     cdk_window_get_device_position (ctk_widget_get_window (widget),
@@ -2002,7 +2002,7 @@ eel_editable_label_select_region_index (EelEditableLabel *label,
     label->selection_anchor = anchor_index;
     label->selection_end = end_index;
 
-    clipboard = ctk_clipboard_get (GDK_SELECTION_PRIMARY);
+    clipboard = ctk_clipboard_get (CDK_SELECTION_PRIMARY);
 
     if (anchor_index != end_index)
     {
@@ -2920,7 +2920,7 @@ eel_editable_label_copy_clipboard (EelEditableLabel *label)
             start = len;
 
         if (start != end)
-            ctk_clipboard_set_text (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD),
+            ctk_clipboard_set_text (ctk_clipboard_get (CDK_SELECTION_CLIPBOARD),
                                     label->text + start, end - start);
     }
 }
@@ -2948,7 +2948,7 @@ eel_editable_label_cut_clipboard (EelEditableLabel *label)
 
         if (start != end)
         {
-            ctk_clipboard_set_text (ctk_clipboard_get (GDK_SELECTION_CLIPBOARD),
+            ctk_clipboard_set_text (ctk_clipboard_get (CDK_SELECTION_CLIPBOARD),
                                     label->text + start, end - start);
             start = g_utf8_pointer_to_offset (label->text, label->text + start);
             end = g_utf8_pointer_to_offset (label->text, label->text + end);
@@ -2993,7 +2993,7 @@ eel_editable_label_paste (EelEditableLabel *label,
 static void
 eel_editable_label_paste_clipboard (EelEditableLabel *label)
 {
-    eel_editable_label_paste (label, GDK_NONE);
+    eel_editable_label_paste (label, CDK_NONE);
 }
 
 static void
@@ -3143,7 +3143,7 @@ eel_editable_label_do_popup (EelEditableLabel *label,
         info->time = ctk_get_current_event_time ();
     }
 
-    ctk_clipboard_request_contents (ctk_widget_get_clipboard (CTK_WIDGET (label), GDK_SELECTION_CLIPBOARD),
+    ctk_clipboard_request_contents (ctk_widget_get_clipboard (CTK_WIDGET (label), CDK_SELECTION_CLIPBOARD),
                                     cdk_atom_intern ("TARGETS", FALSE),
                                     popup_targets_received,
                                     info);
@@ -3909,7 +3909,7 @@ eel_editable_label_accessible_copy_text   (AtkEditableText *text,
     label = EEL_EDITABLE_LABEL (widget);
     editable = CTK_EDITABLE (label);
     str = ctk_editable_get_chars (editable, start_pos, end_pos);
-    ctk_clipboard_set_text (ctk_clipboard_get (GDK_NONE), str, -1);
+    ctk_clipboard_set_text (ctk_clipboard_get (CDK_NONE), str, -1);
 }
 
 static void
@@ -3930,7 +3930,7 @@ eel_editable_label_accessible_cut_text (AtkEditableText *text,
     label = EEL_EDITABLE_LABEL (widget);
     editable = CTK_EDITABLE (label);
     str = ctk_editable_get_chars (editable, start_pos, end_pos);
-    ctk_clipboard_set_text (ctk_clipboard_get (GDK_NONE), str, -1);
+    ctk_clipboard_set_text (ctk_clipboard_get (CDK_NONE), str, -1);
     ctk_editable_delete_text (editable, start_pos, end_pos);
 }
 
@@ -3988,7 +3988,7 @@ eel_editable_label_accessible_paste_text (AtkEditableText *text,
     paste_struct.position = position;
 
     g_object_ref (paste_struct.label);
-    ctk_clipboard_request_text (ctk_clipboard_get (GDK_NONE),
+    ctk_clipboard_request_text (ctk_clipboard_get (CDK_NONE),
                                 eel_editable_label_accessible_paste_received, &paste_struct);
 }
 

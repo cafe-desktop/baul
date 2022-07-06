@@ -211,14 +211,14 @@ baul_sidebar_title_class_init (BaulSidebarTitleClass *klass)
             g_param_spec_boxed ("light_info_rgba",
                                 "Light Info RGBA",
                                 "Color used for information text against a dark background",
-                                GDK_TYPE_RGBA,
+                                CDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
 
     ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boxed ("dark_info_rgba",
                                 "Dark Info RGBA",
                                 "Color used for information text against a light background",
-                                GDK_TYPE_RGBA,
+                                CDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
 }
 

@@ -567,13 +567,13 @@ eel_labeled_image_class_init (EelLabeledImageClass *labeled_image_class)
     binding_set = ctk_binding_set_by_class (gobject_class);
 
     ctk_binding_entry_add_signal (binding_set,
-                                  GDK_KEY_Return, 0,
+                                  CDK_KEY_Return, 0,
                                   "activate", 0);
     ctk_binding_entry_add_signal (binding_set,
-                                  GDK_KEY_KP_Enter, 0,
+                                  CDK_KEY_KP_Enter, 0,
                                   "activate", 0);
     ctk_binding_entry_add_signal (binding_set,
-                                  GDK_KEY_space, 0,
+                                  CDK_KEY_space, 0,
                                   "activate", 0);
 
 
@@ -582,7 +582,7 @@ eel_labeled_image_class_init (EelLabeledImageClass *labeled_image_class)
         gobject_class,
         PROP_PIXBUF,
         g_param_spec_object ("pixbuf", NULL, NULL,
-                             GDK_TYPE_PIXBUF, G_PARAM_READWRITE));
+                             CDK_TYPE_PIXBUF, G_PARAM_READWRITE));
 
     g_object_class_install_property (
         gobject_class,

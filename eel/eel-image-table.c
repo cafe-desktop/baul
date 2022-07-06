@@ -116,12 +116,12 @@ eel_image_table_realize (CtkWidget *widget)
     g_assert (CTK_IS_WIDGET (windowed_ancestor));
 
     ctk_widget_add_events (windowed_ancestor,
-                           GDK_BUTTON_PRESS_MASK
-                           | GDK_BUTTON_RELEASE_MASK
-                           | GDK_BUTTON_MOTION_MASK
-                           | GDK_ENTER_NOTIFY_MASK
-                           | GDK_LEAVE_NOTIFY_MASK
-                           | GDK_POINTER_MOTION_MASK);
+                           CDK_BUTTON_PRESS_MASK
+                           | CDK_BUTTON_RELEASE_MASK
+                           | CDK_BUTTON_MOTION_MASK
+                           | CDK_ENTER_NOTIFY_MASK
+                           | CDK_LEAVE_NOTIFY_MASK
+                           | CDK_POINTER_MOTION_MASK);
 
 
     signal_connect_while_realized (windowed_ancestor,

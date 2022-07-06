@@ -1021,7 +1021,7 @@ fm_list_model_multi_drag_data_get (EggTreeMultiDragSource *drag_source,
                                  NULL,
                                  selection_data,
                                  target_info,
-                                 GDK_CURRENT_TIME,
+                                 CDK_CURRENT_TIME,
                                  &context,
                                  each_path_get_data_binder);
         return TRUE;

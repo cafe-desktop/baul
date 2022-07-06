@@ -176,31 +176,31 @@ baul_spatial_window_state_event (CtkWidget *widget,
     if (!BAUL_IS_DESKTOP_WINDOW (widget))
     {
 
-        if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED &&
+        if (event->changed_mask & CDK_WINDOW_STATE_MAXIMIZED &&
                 viewed_file != NULL)
         {
             baul_file_set_boolean_metadata (viewed_file,
                                             BAUL_METADATA_KEY_WINDOW_MAXIMIZED,
                                             FALSE,
-                                            event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED);
+                                            event->new_window_state & CDK_WINDOW_STATE_MAXIMIZED);
         }
 
-        if (event->changed_mask & GDK_WINDOW_STATE_STICKY &&
+        if (event->changed_mask & CDK_WINDOW_STATE_STICKY &&
                 viewed_file != NULL)
         {
             baul_file_set_boolean_metadata (viewed_file,
                                             BAUL_METADATA_KEY_WINDOW_STICKY,
                                             FALSE,
-                                            event->new_window_state & GDK_WINDOW_STATE_STICKY);
+                                            event->new_window_state & CDK_WINDOW_STATE_STICKY);
         }
 
-        if (event->changed_mask & GDK_WINDOW_STATE_ABOVE &&
+        if (event->changed_mask & CDK_WINDOW_STATE_ABOVE &&
                 viewed_file != NULL)
         {
             baul_file_set_boolean_metadata (viewed_file,
                                             BAUL_METADATA_KEY_WINDOW_KEEP_ABOVE,
                                             FALSE,
-                                            event->new_window_state & GDK_WINDOW_STATE_ABOVE);
+                                            event->new_window_state & CDK_WINDOW_STATE_ABOVE);
         }
 
     }
@@ -240,7 +240,7 @@ baul_spatial_window_save_geometry (BaulSpatialWindow *window,
     if (ctk_widget_get_window (CTK_WIDGET (window)) &&
     	    ctk_widget_get_visible (CTK_WIDGET (window)) &&
 	    !BAUL_IS_DESKTOP_WINDOW (window) &&
-            !(cdk_window_get_state (ctk_widget_get_window (CTK_WIDGET(window))) & GDK_WINDOW_STATE_MAXIMIZED)) {
+            !(cdk_window_get_state (ctk_widget_get_window (CTK_WIDGET(window))) & CDK_WINDOW_STATE_MAXIMIZED)) {
 
         geometry_string = eel_ctk_window_get_geometry_string (CTK_WINDOW (window));
 
@@ -572,9 +572,9 @@ location_menu_item_activated_callback (CtkWidget *menu_item,
             selection = g_list_prepend (NULL, g_object_ref (child));
         }
 
-        if (event != NULL && ((CdkEventAny *) event)->type == GDK_BUTTON_RELEASE &&
+        if (event != NULL && ((CdkEventAny *) event)->type == CDK_BUTTON_RELEASE &&
                 (((CdkEventButton *) event)->button == 2 ||
-                 (((CdkEventButton *) event)->state & GDK_SHIFT_MASK) != 0)) {
+                 (((CdkEventButton *) event)->state & CDK_SHIFT_MASK) != 0)) {
             close_behind = TRUE;
         }
 
@@ -721,8 +721,8 @@ location_button_clicked_callback (CtkWidget         *widget,
     ctk_grab_add (popup);
     ctk_menu_popup_at_widget (CTK_MENU (popup),
                               widget,
-                              GDK_GRAVITY_SOUTH_WEST,
-                              GDK_GRAVITY_NORTH_WEST,
+                              CDK_GRAVITY_SOUTH_WEST,
+                              CDK_GRAVITY_NORTH_WEST,
                               NULL);
 
     ctk_menu_shell_select_item (CTK_MENU_SHELL (popup), first_item);
@@ -1017,9 +1017,9 @@ baul_spatial_window_init (BaulSpatialWindow *window)
     ctk_widget_show (arrow);
 
     ctk_drag_source_set (window->details->location_button,
-                         GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, location_button_drag_types,
+                         CDK_BUTTON1_MASK | CDK_BUTTON2_MASK, location_button_drag_types,
                          G_N_ELEMENTS (location_button_drag_types),
-                         GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK);
+                         CDK_ACTION_MOVE | CDK_ACTION_COPY | CDK_ACTION_LINK | CDK_ACTION_ASK);
     g_signal_connect (window->details->location_button,
                       "drag_begin",
                       G_CALLBACK (location_button_drag_begin_callback),
@@ -1090,10 +1090,10 @@ baul_spatial_window_class_init (BaulSpatialWindowClass *klass)
 	G_OBJECT_CLASS (klass)->finalize = baul_spatial_window_finalize;
 
 	binding_set = ctk_binding_set_by_class (klass);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, GDK_SHIFT_MASK,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_BackSpace, CDK_SHIFT_MASK,
                                   "go_up", 1,
                                   G_TYPE_BOOLEAN, TRUE);
-	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Up, GDK_SHIFT_MASK | GDK_MOD1_MASK,
+	ctk_binding_entry_add_signal (binding_set, CDK_KEY_Up, CDK_SHIFT_MASK | CDK_MOD1_MASK,
                                   "go_up", 1,
                                   G_TYPE_BOOLEAN, TRUE);
 }

@@ -292,7 +292,7 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
     /* set the title and standard close accelerator */
     ctk_window_set_title (CTK_WINDOW (widget), _("Backgrounds and Emblems"));
 
-    ctk_window_set_type_hint (CTK_WINDOW (widget), GDK_WINDOW_TYPE_HINT_DIALOG);
+    ctk_window_set_type_hint (CTK_WINDOW (widget), CDK_WINDOW_TYPE_HINT_DIALOG);
 
     CtkStyleContext *context;
 
@@ -812,7 +812,7 @@ make_color_drag_image (BaulPropertyBrowser *property_browser, const char *color_
     char *pixels;
     CdkColor color;
 
-    color_square = cdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
+    color_square = cdk_pixbuf_new (CDK_COLORSPACE_RGB, TRUE, 8, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
 
     cdk_color_parse (color_spec, &color);
     color.red >>= 8;
@@ -1758,7 +1758,7 @@ element_clicked_callback (CtkWidget *image_table,
 
     ctk_drag_begin_with_coordinates (CTK_WIDGET (property_browser),
                                      target_list,
-                                     GDK_ACTION_ASK | GDK_ACTION_MOVE | GDK_ACTION_COPY,
+                                     CDK_ACTION_ASK | CDK_ACTION_MOVE | CDK_ACTION_COPY,
                                      event->button,
                                      event->event,
                                      event->x,
@@ -1767,7 +1767,7 @@ element_clicked_callback (CtkWidget *image_table,
     ctk_target_list_unref (target_list);
 
     /* optionally (if the shift key is down) hide the property browser - it will later be destroyed when the drag ends */
-    property_browser->details->keep_around = (event->state & GDK_SHIFT_MASK) == 0;
+    property_browser->details->keep_around = (event->state & CDK_SHIFT_MASK) == 0;
     if (! property_browser->details->keep_around)
     {
         ctk_widget_hide (CTK_WIDGET (property_browser));

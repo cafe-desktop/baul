@@ -259,7 +259,7 @@ desktop_icon_view_property_filter (CdkXEvent *cdk_xevent,
         break;
     }
 
-    return GDK_FILTER_CONTINUE;
+    return CDK_FILTER_CONTINUE;
 }
 
 static void
@@ -352,9 +352,9 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
     /* build an X event to represent the middle click. */
     x_event.type = ButtonPress;
     x_event.send_event = True;
-    x_event.display = GDK_DISPLAY_XDISPLAY (cdk_display_get_default ());
-    x_event.window = GDK_ROOT_WINDOW ();
-    x_event.root = GDK_ROOT_WINDOW ();
+    x_event.display = CDK_DISPLAY_XDISPLAY (cdk_display_get_default ());
+    x_event.window = CDK_ROOT_WINDOW ();
+    x_event.root = CDK_ROOT_WINDOW ();
     x_event.subwindow = 0;
     x_event.time = event->time;
     x_event.x = event->x;
@@ -366,7 +366,7 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
     x_event.same_screen = True;
 
     /* Send it to the root window, the window manager will handle it. */
-    XSendEvent (GDK_DISPLAY_XDISPLAY (cdk_display_get_default ()), GDK_ROOT_WINDOW (), True,
+    XSendEvent (CDK_DISPLAY_XDISPLAY (cdk_display_get_default ()), CDK_ROOT_WINDOW (), True,
                 ButtonPressMask, (XEvent *) &x_event);
 }
 
@@ -416,7 +416,7 @@ realized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
     net_workarea_changed (desktop_icon_view, root_window);
 
     /* Setup the property filter */
-    cdk_window_set_events (root_window, GDK_PROPERTY_CHANGE_MASK);
+    cdk_window_set_events (root_window, CDK_PROPERTY_CHANGE_MASK);
     cdk_window_add_filter (root_window,
                            desktop_icon_view_property_filter,
                            desktop_icon_view);
