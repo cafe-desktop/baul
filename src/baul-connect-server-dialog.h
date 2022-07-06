@@ -25,7 +25,7 @@
 #define BAUL_CONNECT_SERVER_DIALOG_H
 
 #include <gio/gio.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include "baul-window.h"
 

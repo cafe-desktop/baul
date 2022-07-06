@@ -24,7 +24,7 @@
 #ifndef BAUL_QUERY_EDITOR_H
 #define BAUL_QUERY_EDITOR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-query.h>
 #include <libbaul-private/baul-window-info.h>

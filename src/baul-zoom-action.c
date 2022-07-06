@@ -25,9 +25,9 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include "baul-zoom-action.h"
 #include "baul-zoom-control.h"
@@ -63,8 +63,8 @@ zoom_changed_callback (BaulWindow *window,
 {
     if (supports_zooming)
     {
-        gtk_widget_set_sensitive (zoom_control, can_zoom);
-        gtk_widget_show (zoom_control);
+        ctk_widget_set_sensitive (zoom_control, can_zoom);
+        ctk_widget_show (zoom_control);
         if (can_zoom)
         {
             baul_zoom_control_set_zoom_level (BAUL_ZOOM_CONTROL (zoom_control),
@@ -73,7 +73,7 @@ zoom_changed_callback (BaulWindow *window,
     }
     else
     {
-        gtk_widget_hide (zoom_control);
+        ctk_widget_hide (zoom_control);
     }
 }
 
@@ -89,8 +89,8 @@ connect_proxy (GtkAction *action,
         GtkWidget *zoom_control;
 
         zoom_control = baul_zoom_control_new ();
-        gtk_container_add (GTK_CONTAINER (item),  zoom_control);
-        gtk_widget_show (zoom_control);
+        ctk_container_add (GTK_CONTAINER (item),  zoom_control);
+        ctk_widget_show (zoom_control);
 
         g_signal_connect_object (zoom_control, "zoom_in",
                                  G_CALLBACK (baul_window_zoom_in),
@@ -126,7 +126,7 @@ disconnect_proxy (GtkAction *action,
         BaulNavigationWindow *window = zaction->priv->window;
         GtkWidget *child;
 
-        child = gtk_bin_get_child (GTK_BIN (item));
+        child = ctk_bin_get_child (GTK_BIN (item));
 
         g_signal_handlers_disconnect_by_func (window, G_CALLBACK (zoom_changed_callback), child);
 

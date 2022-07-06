@@ -24,7 +24,7 @@
 #include <config.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-glib-extensions.h>
@@ -174,7 +174,7 @@ fm_ditem_page_url_drag_data_received (GtkWidget *widget, GdkDragContext *context
     gboolean exactly_one;
     char *path;
 
-    uris = g_strsplit (gtk_selection_data_get_data (selection_data), "\r\n", 0);
+    uris = g_strsplit (ctk_selection_data_get_data (selection_data), "\r\n", 0);
     exactly_one = uris[0] != NULL && (uris[1] == NULL || uris[1][0] == '\0');
 
     if (!exactly_one)
@@ -186,12 +186,12 @@ fm_ditem_page_url_drag_data_received (GtkWidget *widget, GdkDragContext *context
     path = g_filename_from_uri (uris[0], NULL, NULL);
     if (path != NULL)
     {
-        gtk_entry_set_text (entry, path);
+        ctk_entry_set_text (entry, path);
         g_free (path);
     }
     else
     {
-        gtk_entry_set_text (entry, uris[0]);
+        ctk_entry_set_text (entry, uris[0]);
     }
 
     g_strfreev (uris);
@@ -209,7 +209,7 @@ fm_ditem_page_exec_drag_data_received (GtkWidget *widget, GdkDragContext *contex
     BaulFile *file;
     char *uri, *exec;
 
-    uris = g_strsplit (gtk_selection_data_get_data (selection_data), "\r\n", 0);
+    uris = g_strsplit (ctk_selection_data_get_data (selection_data), "\r\n", 0);
     exactly_one = uris[0] != NULL && (uris[1] == NULL || uris[1][0] == '\0');
 
     if (!exactly_one)
@@ -248,9 +248,9 @@ fm_ditem_page_exec_drag_data_received (GtkWidget *widget, GdkDragContext *contex
             g_key_file_free (key_file);
         }
     }
-    gtk_entry_set_text (entry,
+    ctk_entry_set_text (entry,
                         uri?uri:"");
-    gtk_widget_grab_focus (GTK_WIDGET (entry));
+    ctk_widget_grab_focus (GTK_WIDGET (entry));
 
     g_free (uri);
 
@@ -265,7 +265,7 @@ save_entry (GtkEntry *entry, GKeyFile *key_file, const char *uri)
     const char *val;
 
     item_entry = g_object_get_data (G_OBJECT (entry), "item_entry");
-    val = gtk_entry_get_text (entry);
+    val = ctk_entry_get_text (entry);
 
     if (strcmp (val, item_entry->current_value) == 0)
     {
@@ -334,10 +334,10 @@ build_grid (GtkWidget *container,
     GtkWidget *label;
     GtkWidget *entry = NULL;
 
-    grid = gtk_grid_new ();
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
-    gtk_grid_set_row_spacing (GTK_GRID (grid), 6);
-    gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
+    grid = ctk_grid_new ();
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
+    ctk_grid_set_row_spacing (GTK_GRID (grid), 6);
+    ctk_grid_set_column_spacing (GTK_GRID (grid), 12);
 
     for (l = entries; l; l = l->next)
     {
@@ -345,14 +345,14 @@ build_grid (GtkWidget *container,
         char *label_text;
 
         label_text = g_strdup_printf ("%s:", item_entry->description);
-        label = gtk_label_new (label_text);
-        gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+        label = ctk_label_new (label_text);
+        ctk_label_set_use_markup (GTK_LABEL (label), TRUE);
         g_free (label_text);
-        gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-        gtk_size_group_add_widget (label_size_group, label);
+        ctk_label_set_xalign (GTK_LABEL (label), 0.0);
+        ctk_size_group_add_widget (label_size_group, label);
 
-        entry = gtk_entry_new ();
-        gtk_widget_set_hexpand (entry, TRUE);
+        entry = ctk_entry_new ();
+        ctk_widget_set_hexpand (entry, TRUE);
 
 
         if (item_entry->localized)
@@ -371,11 +371,11 @@ build_grid (GtkWidget *container,
         }
 
         item_entry->current_value = g_strdup (val?val:"");
-        gtk_entry_set_text (GTK_ENTRY (entry), item_entry->current_value);
+        ctk_entry_set_text (GTK_ENTRY (entry), item_entry->current_value);
         g_free (val);
 
-        gtk_container_add (GTK_CONTAINER (grid), label);
-        gtk_grid_attach_next_to (GTK_GRID (grid), entry, label,
+        ctk_container_add (GTK_CONTAINER (grid), label);
+        ctk_grid_attach_next_to (GTK_GRID (grid), entry, label,
                                   GTK_POS_RIGHT, 1, 1);
 
         g_signal_connect (entry, "activate",
@@ -390,7 +390,7 @@ build_grid (GtkWidget *container,
 
         if (item_entry->filename)
         {
-            gtk_drag_dest_set (GTK_WIDGET (entry),
+            ctk_drag_dest_set (GTK_WIDGET (entry),
                                GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_DROP,
                                target_table, G_N_ELEMENTS (target_table),
                                GDK_ACTION_COPY | GDK_ACTION_MOVE);
@@ -401,7 +401,7 @@ build_grid (GtkWidget *container,
         }
         else if (strcmp (item_entry->field, "Exec") == 0)
         {
-            gtk_drag_dest_set (GTK_WIDGET (entry),
+            ctk_drag_dest_set (GTK_WIDGET (entry),
                                GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_DROP,
                                target_table, G_N_ELEMENTS (target_table),
                                GDK_ACTION_COPY | GDK_ACTION_MOVE);
@@ -413,11 +413,11 @@ build_grid (GtkWidget *container,
     }
 
     /* append dummy row */
-    label = gtk_label_new ("");
-    gtk_container_add (GTK_CONTAINER (grid), label);
-    gtk_size_group_add_widget (label_size_group, label);
+    label = ctk_label_new ("");
+    ctk_container_add (GTK_CONTAINER (grid), label);
+    ctk_size_group_add_widget (label_size_group, label);
 
-    gtk_widget_show_all (grid);
+    ctk_widget_show_all (grid);
     return grid;
 }
 
@@ -472,9 +472,9 @@ build_grid:
     grid = build_grid (box, key_file, label_size_group, entries);
     g_list_free (entries);
 
-    gtk_box_pack_start (GTK_BOX (box), grid, FALSE, TRUE, 0);
+    ctk_box_pack_start (GTK_BOX (box), grid, FALSE, TRUE, 0);
 
-    gtk_widget_show_all (GTK_WIDGET (box));
+    ctk_widget_show_all (GTK_WIDGET (box));
 }
 
 
@@ -530,7 +530,7 @@ fm_ditem_page_make_box (GtkSizeGroup *label_size_group,
 
     g_assert (fm_ditem_page_should_show (files));
 
-    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+    box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
     g_object_set_data_full (G_OBJECT (box), "label-size-group",
                             label_size_group, (GDestroyNotify) g_object_unref);
 

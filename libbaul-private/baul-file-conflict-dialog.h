@@ -28,7 +28,7 @@
 
 #include <glib-object.h>
 #include <gio/gio.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_FILE_CONFLICT_DIALOG \
 	(baul_file_conflict_dialog_get_type ())

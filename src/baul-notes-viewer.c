@@ -27,11 +27,11 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-debug.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include <libbaul-private/baul-file-attributes.h>
 #include <libbaul-private/baul-file.h>
@@ -174,9 +174,9 @@ notes_save_metainfo (BaulNotesViewer *notes)
                                      G_CALLBACK (load_note_text_from_metadata),
                                      notes);
 
-    gtk_text_buffer_get_start_iter (notes->details->text_buffer, &start_iter);
-    gtk_text_buffer_get_end_iter (notes->details->text_buffer, &end_iter);
-    notes_text = gtk_text_buffer_get_text (notes->details->text_buffer,
+    ctk_text_buffer_get_start_iter (notes->details->text_buffer, &start_iter);
+    ctk_text_buffer_get_end_iter (notes->details->text_buffer, &end_iter);
+    notes_text = ctk_text_buffer_get_text (notes->details->text_buffer,
                                            &start_iter,
                                            &end_iter,
                                            FALSE);
@@ -220,7 +220,7 @@ load_note_text_from_metadata (BaulFile *file,
                                          0, 0, NULL,
                                          G_CALLBACK (on_changed),
                                          notes);
-        gtk_text_buffer_set_text (notes->details->text_buffer, saved_text, -1);
+        ctk_text_buffer_set_text (notes->details->text_buffer, saved_text, -1);
         g_signal_handlers_unblock_matched (notes->details->text_buffer,
                                            G_SIGNAL_MATCH_FUNC | G_SIGNAL_MATCH_DATA,
                                            0, 0, NULL,
@@ -265,7 +265,7 @@ notes_load_metainfo (BaulNotesViewer *notes)
                                      0, 0, NULL,
                                      G_CALLBACK (on_changed),
                                      notes);
-    gtk_text_buffer_set_text (notes->details->text_buffer, "", -1);
+    ctk_text_buffer_set_text (notes->details->text_buffer, "", -1);
     g_signal_handlers_unblock_matched (notes->details->text_buffer,
                                        G_SIGNAL_MATCH_FUNC | G_SIGNAL_MATCH_DATA,
                                        0, 0, NULL,
@@ -338,29 +338,29 @@ baul_notes_viewer_init (BaulNotesViewer *sidebar)
     details->icon = baul_icon_info_get_pixbuf (info);
 
     /* create the text container */
-    details->text_buffer = gtk_text_buffer_new (NULL);
-    details->note_text_field = gtk_text_view_new_with_buffer (details->text_buffer);
+    details->text_buffer = ctk_text_buffer_new (NULL);
+    details->note_text_field = ctk_text_view_new_with_buffer (details->text_buffer);
 
-    gtk_text_view_set_editable (GTK_TEXT_VIEW (details->note_text_field), TRUE);
-    gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (details->note_text_field),
+    ctk_text_view_set_editable (GTK_TEXT_VIEW (details->note_text_field), TRUE);
+    ctk_text_view_set_wrap_mode (GTK_TEXT_VIEW (details->note_text_field),
                                  GTK_WRAP_WORD);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sidebar),
+    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sidebar),
                                     GTK_POLICY_AUTOMATIC,
                                     GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sidebar),
+    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sidebar),
                                          GTK_SHADOW_IN);
-    gtk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
-    gtk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
-    gtk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (sidebar), FALSE);
+    ctk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
+    ctk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
+    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (sidebar), FALSE);
 
-    gtk_container_add (GTK_CONTAINER (sidebar), details->note_text_field);
+    ctk_container_add (GTK_CONTAINER (sidebar), details->note_text_field);
 
     g_signal_connect (details->note_text_field, "focus_out_event",
                       G_CALLBACK (on_text_field_focus_out_event), sidebar);
     g_signal_connect (details->text_buffer, "changed",
                       G_CALLBACK (on_changed), sidebar);
 
-    gtk_widget_show_all (GTK_WIDGET (sidebar));
+    ctk_widget_show_all (GTK_WIDGET (sidebar));
 
 }
 
@@ -503,7 +503,7 @@ get_property_pages (BaulPropertyPageProvider *provider,
 
     page = baul_property_page_new
            ("BaulNotesViewer::property_page",
-            gtk_label_new (_("Notes")),
+            ctk_label_new (_("Notes")),
             GTK_WIDGET (viewer));
     pages = g_list_append (pages, page);
 

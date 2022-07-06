@@ -76,19 +76,19 @@ file_icons_changed (BaulFile *file,
     surface = baul_file_get_icon_surface (fcd->details->destination,
                                           BAUL_ICON_SIZE_LARGE,
                                           FALSE,
-                                          gtk_widget_get_scale_factor (fcd->details->dest_image),
+                                          ctk_widget_get_scale_factor (fcd->details->dest_image),
                                           BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS);
 
-    gtk_image_set_from_surface (GTK_IMAGE (fcd->details->dest_image), surface);
+    ctk_image_set_from_surface (GTK_IMAGE (fcd->details->dest_image), surface);
     cairo_surface_destroy (surface);
 
     surface = baul_file_get_icon_surface (fcd->details->source,
                                           BAUL_ICON_SIZE_LARGE,
                                           FALSE,
-                                          gtk_widget_get_scale_factor (fcd->details->src_image),
+                                          ctk_widget_get_scale_factor (fcd->details->src_image),
                                           BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS);
 
-    gtk_image_set_from_surface (GTK_IMAGE (fcd->details->src_image), surface);
+    ctk_image_set_from_surface (GTK_IMAGE (fcd->details->src_image), surface);
     cairo_surface_destroy (surface);
 }
 
@@ -207,13 +207,13 @@ file_list_ready_cb (GList *files,
     secondary_text = g_strdup_printf ("%s\n%s", message, message_extra);
     g_free (message);
 
-    label = gtk_label_new (primary_text);
-    gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    gtk_label_set_line_wrap_mode (GTK_LABEL (label), PANGO_WRAP_WORD_CHAR);
-    gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-    gtk_box_pack_start (GTK_BOX (details->titles_vbox),
+    label = ctk_label_new (primary_text);
+    ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+    ctk_label_set_line_wrap_mode (GTK_LABEL (label), PANGO_WRAP_WORD_CHAR);
+    ctk_label_set_xalign (GTK_LABEL (label), 0.0);
+    ctk_box_pack_start (GTK_BOX (details->titles_vbox),
                         label, FALSE, FALSE, 0);
-    gtk_widget_show (label);
+    ctk_widget_show (label);
 
     attr_list = pango_attr_list_new ();
     pango_attr_list_insert (attr_list, pango_attr_weight_new (PANGO_WEIGHT_BOLD));
@@ -223,13 +223,13 @@ file_list_ready_cb (GList *files,
                   NULL);
 
     pango_attr_list_unref (attr_list);
-    label = gtk_label_new (secondary_text);
-    gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    gtk_label_set_max_width_chars (GTK_LABEL (label), 60);
-    gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-    gtk_box_pack_start (GTK_BOX (details->titles_vbox),
+    label = ctk_label_new (secondary_text);
+    ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+    ctk_label_set_max_width_chars (GTK_LABEL (label), 60);
+    ctk_label_set_xalign (GTK_LABEL (label), 0.0);
+    ctk_box_pack_start (GTK_BOX (details->titles_vbox),
                         label, FALSE, FALSE, 0);
-    gtk_widget_show (label);
+    ctk_widget_show (label);
     g_free (primary_text);
     g_free (secondary_text);
 
@@ -237,27 +237,27 @@ file_list_ready_cb (GList *files,
     surface = baul_file_get_icon_surface (dest,
                                           BAUL_ICON_SIZE_LARGE,
                                           TRUE,
-                                          gtk_widget_get_scale_factor (fcd->details->titles_vbox),
+                                          ctk_widget_get_scale_factor (fcd->details->titles_vbox),
                                           BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS);
-    details->dest_image = gtk_image_new_from_surface (surface);
-    gtk_box_pack_start (GTK_BOX (details->first_hbox),
+    details->dest_image = ctk_image_new_from_surface (surface);
+    ctk_box_pack_start (GTK_BOX (details->first_hbox),
                         details->dest_image, FALSE, FALSE, 0);
-    gtk_widget_show (details->dest_image);
+    ctk_widget_show (details->dest_image);
     cairo_surface_destroy (surface);
 
     surface = baul_file_get_icon_surface (src,
                                           BAUL_ICON_SIZE_LARGE,
                                           TRUE,
-                                          gtk_widget_get_scale_factor (fcd->details->titles_vbox),
+                                          ctk_widget_get_scale_factor (fcd->details->titles_vbox),
                                           BAUL_FILE_ICON_FLAGS_USE_THUMBNAILS);
-    details->src_image = gtk_image_new_from_surface (surface);
-    gtk_box_pack_start (GTK_BOX (details->second_hbox),
+    details->src_image = ctk_image_new_from_surface (surface);
+    ctk_box_pack_start (GTK_BOX (details->second_hbox),
                         details->src_image, FALSE, FALSE, 0);
-    gtk_widget_show (details->src_image);
+    ctk_widget_show (details->src_image);
     cairo_surface_destroy (surface);
 
     /* Set up labels */
-    label = gtk_label_new (NULL);
+    label = ctk_label_new (NULL);
     date = baul_file_get_string_attribute (dest,
                                            "date_modified");
     size = baul_file_get_string_attribute (dest, "size");
@@ -285,11 +285,11 @@ file_list_ready_cb (GList *files,
     g_string_append_printf (str, "%s %s", _("Last modified:"), date);
 
     label_text = str->str;
-    gtk_label_set_markup (GTK_LABEL (label),
+    ctk_label_set_markup (GTK_LABEL (label),
                           label_text);
-    gtk_box_pack_start (GTK_BOX (details->first_hbox),
+    ctk_box_pack_start (GTK_BOX (details->first_hbox),
                         label, FALSE, FALSE, 0);
-    gtk_widget_show (label);
+    ctk_widget_show (label);
 
     g_free (size);
     g_free (type);
@@ -297,7 +297,7 @@ file_list_ready_cb (GList *files,
     g_string_erase (str, 0, -1);
 
     /* Second label */
-    label = gtk_label_new (NULL);
+    label = ctk_label_new (NULL);
     date = baul_file_get_string_attribute (src,
                                            "date_modified");
     size = baul_file_get_string_attribute (src, "size");
@@ -324,11 +324,11 @@ file_list_ready_cb (GList *files,
     g_string_append_printf (str, "%s %s", _("Last modified:"), date);
     label_text = g_string_free (str, FALSE);
 
-    gtk_label_set_markup (GTK_LABEL (label),
+    ctk_label_set_markup (GTK_LABEL (label),
                           label_text);
-    gtk_box_pack_start (GTK_BOX (details->second_hbox),
+    ctk_box_pack_start (GTK_BOX (details->second_hbox),
                         label, FALSE, FALSE, 0);
-    gtk_widget_show (label);
+    ctk_widget_show (label);
 
     g_free (size);
     g_free (date);
@@ -339,18 +339,18 @@ file_list_ready_cb (GList *files,
     edit_name = baul_file_get_edit_name (dest);
     details->conflict_name = edit_name;
 
-    gtk_entry_set_text (GTK_ENTRY (details->entry), edit_name);
+    ctk_entry_set_text (GTK_ENTRY (details->entry), edit_name);
 
     if (source_is_dir && dest_is_dir)
     {
-        gtk_button_set_label (GTK_BUTTON (details->replace_button),
+        ctk_button_set_label (GTK_BUTTON (details->replace_button),
                               _("Merge"));
     }
 
     /* If meld is installed, and source and destination arent binary
      * files, show the diff button
      */
-    gtk_widget_hide (details->diff_button);
+    ctk_widget_hide (details->diff_button);
     if (!source_is_dir && !dest_is_dir)
     {
         gchar *meld_found = g_find_program_in_path ("meld");
@@ -363,7 +363,7 @@ file_list_ready_cb (GList *files,
             dest_is_binary = baul_file_is_binary (details->destination);
 
             if (!src_is_binary && !dest_is_binary)
-                gtk_widget_show (details->diff_button);
+                ctk_widget_show (details->diff_button);
         }
     }
 
@@ -422,25 +422,25 @@ entry_text_changed_cb (GtkEditable *entry,
     /* The rename button is visible only if there's text
      * in the entry.
      */
-    if  (g_strcmp0 (gtk_entry_get_text (GTK_ENTRY (entry)), "") != 0 &&
-            g_strcmp0 (gtk_entry_get_text (GTK_ENTRY (entry)), details->conflict_name) != 0)
+    if  (g_strcmp0 (ctk_entry_get_text (GTK_ENTRY (entry)), "") != 0 &&
+            g_strcmp0 (ctk_entry_get_text (GTK_ENTRY (entry)), details->conflict_name) != 0)
     {
-        gtk_widget_hide (details->replace_button);
-        gtk_widget_show (details->rename_button);
+        ctk_widget_hide (details->replace_button);
+        ctk_widget_show (details->rename_button);
 
-        gtk_widget_set_sensitive (details->checkbox, FALSE);
+        ctk_widget_set_sensitive (details->checkbox, FALSE);
 
-        gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+        ctk_dialog_set_default_response (GTK_DIALOG (dialog),
                                          CONFLICT_RESPONSE_RENAME);
     }
     else
     {
-        gtk_widget_hide (details->rename_button);
-        gtk_widget_show (details->replace_button);
+        ctk_widget_hide (details->rename_button);
+        ctk_widget_show (details->replace_button);
 
-        gtk_widget_set_sensitive (details->checkbox, TRUE);
+        ctk_widget_set_sensitive (details->checkbox, TRUE);
 
-        gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+        ctk_dialog_set_default_response (GTK_DIALOG (dialog),
                                          CONFLICT_RESPONSE_REPLACE);
     }
 }
@@ -454,16 +454,16 @@ expander_activated_cb (GtkExpander *w,
 
     details = dialog->details;
 
-    if (!gtk_expander_get_expanded (w))
+    if (!ctk_expander_get_expanded (w))
     {
-        if (g_strcmp0 (gtk_entry_get_text (GTK_ENTRY (details->entry)),
+        if (g_strcmp0 (ctk_entry_get_text (GTK_ENTRY (details->entry)),
                        details->conflict_name) == 0)
         {
-            gtk_widget_grab_focus (details->entry);
+            ctk_widget_grab_focus (details->entry);
 
             eel_filename_get_rename_region (details->conflict_name,
                                             &start_pos, &end_pos);
-            gtk_editable_select_region (GTK_EDITABLE (details->entry),
+            ctk_editable_select_region (GTK_EDITABLE (details->entry),
                                         start_pos, end_pos);
         }
     }
@@ -477,24 +477,24 @@ checkbox_toggled_cb (GtkToggleButton *t,
 
     details = dialog->details;
 
-    gtk_widget_set_sensitive (details->expander,
-                              !gtk_toggle_button_get_active (t));
-    gtk_widget_set_sensitive (details->rename_button,
-                              !gtk_toggle_button_get_active (t));
+    ctk_widget_set_sensitive (details->expander,
+                              !ctk_toggle_button_get_active (t));
+    ctk_widget_set_sensitive (details->rename_button,
+                              !ctk_toggle_button_get_active (t));
 
-    if  (!gtk_toggle_button_get_active (t) &&
-            g_strcmp0 (gtk_entry_get_text (GTK_ENTRY (details->entry)),
+    if  (!ctk_toggle_button_get_active (t) &&
+            g_strcmp0 (ctk_entry_get_text (GTK_ENTRY (details->entry)),
                        "") != 0 &&
-            g_strcmp0 (gtk_entry_get_text (GTK_ENTRY (details->entry)),
+            g_strcmp0 (ctk_entry_get_text (GTK_ENTRY (details->entry)),
                        details->conflict_name) != 0)
     {
-        gtk_widget_hide (details->replace_button);
-        gtk_widget_show (details->rename_button);
+        ctk_widget_hide (details->replace_button);
+        ctk_widget_show (details->rename_button);
     }
     else
     {
-        gtk_widget_hide (details->rename_button);
-        gtk_widget_show (details->replace_button);
+        ctk_widget_hide (details->rename_button);
+        ctk_widget_show (details->replace_button);
     }
 }
 
@@ -507,12 +507,12 @@ reset_button_clicked_cb (GtkButton *w,
 
     details = dialog->details;
 
-    gtk_entry_set_text (GTK_ENTRY (details->entry),
+    ctk_entry_set_text (GTK_ENTRY (details->entry),
                         details->conflict_name);
-    gtk_widget_grab_focus (details->entry);
+    ctk_widget_grab_focus (details->entry);
     eel_filename_get_rename_region (details->conflict_name,
                                     &start_pos, &end_pos);
-    gtk_editable_select_region (GTK_EDITABLE (details->entry),
+    ctk_editable_select_region (GTK_EDITABLE (details->entry),
                                 start_pos, end_pos);
 
 }
@@ -568,81 +568,81 @@ baul_file_conflict_dialog_init (BaulFileConflictDialog *fcd)
     dialog = GTK_DIALOG (fcd);
 
     /* Setup the main hbox */
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-    dialog_area = gtk_dialog_get_content_area (dialog);
-    gtk_box_pack_start (GTK_BOX (dialog_area), hbox, FALSE, FALSE, 0);
-    gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+    dialog_area = ctk_dialog_get_content_area (dialog);
+    ctk_box_pack_start (GTK_BOX (dialog_area), hbox, FALSE, FALSE, 0);
+    ctk_container_set_border_width (GTK_CONTAINER (hbox), 6);
 
     /* Setup the dialog image */
-    widget = gtk_image_new_from_icon_name ("dialog-warning",
+    widget = ctk_image_new_from_icon_name ("dialog-warning",
                                        GTK_ICON_SIZE_DIALOG);
-    gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
-    gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
-    gtk_widget_set_valign (widget, GTK_ALIGN_START);
+    ctk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
+    ctk_widget_set_halign (widget, GTK_ALIGN_CENTER);
+    ctk_widget_set_valign (widget, GTK_ALIGN_START);
 
     /* Setup the vbox containing the dialog body */
-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+    ctk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
     /* Setup the vbox for the dialog labels */
-    widget = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 0);
+    widget = ctk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+    ctk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 0);
     details->titles_vbox = widget;
 
     /* Setup the hboxes to pack file infos into */
-    vbox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    gtk_widget_set_halign (vbox2, GTK_ALIGN_START);
-    gtk_widget_set_valign (vbox2, GTK_ALIGN_START);
-    gtk_widget_set_margin_start (vbox2, 12);
-    gtk_box_pack_start (GTK_BOX (vbox), vbox2, FALSE, FALSE, 0);
+    vbox2 = ctk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+    ctk_widget_set_halign (vbox2, GTK_ALIGN_START);
+    ctk_widget_set_valign (vbox2, GTK_ALIGN_START);
+    ctk_widget_set_margin_start (vbox2, 12);
+    ctk_box_pack_start (GTK_BOX (vbox), vbox2, FALSE, FALSE, 0);
 
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-    gtk_box_pack_start (GTK_BOX (vbox2), hbox, FALSE, FALSE, 0);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+    ctk_box_pack_start (GTK_BOX (vbox2), hbox, FALSE, FALSE, 0);
     details->first_hbox = hbox;
 
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-    gtk_box_pack_start (GTK_BOX (vbox2), hbox, FALSE, FALSE, 0);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+    ctk_box_pack_start (GTK_BOX (vbox2), hbox, FALSE, FALSE, 0);
     details->second_hbox = hbox;
 
     /* Setup the expander for the rename action */
-    details->expander = gtk_expander_new_with_mnemonic (_("Select a new name for the _destination"));
-    gtk_box_pack_start (GTK_BOX (vbox2), details->expander, FALSE, FALSE, 0);
+    details->expander = ctk_expander_new_with_mnemonic (_("Select a new name for the _destination"));
+    ctk_box_pack_start (GTK_BOX (vbox2), details->expander, FALSE, FALSE, 0);
     g_signal_connect (details->expander, "activate",
                       G_CALLBACK (expander_activated_cb), dialog);
 
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    gtk_container_add (GTK_CONTAINER (details->expander), hbox);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    ctk_container_add (GTK_CONTAINER (details->expander), hbox);
 
-    widget = gtk_entry_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), widget, TRUE, TRUE, 6);
+    widget = ctk_entry_new ();
+    ctk_box_pack_start (GTK_BOX (hbox), widget, TRUE, TRUE, 6);
     details->entry = widget;
     g_signal_connect (widget, "changed",
                       G_CALLBACK (entry_text_changed_cb), dialog);
 
-    widget = gtk_button_new_with_label (_("Reset"));
-    gtk_button_set_image (GTK_BUTTON (widget),
-                          gtk_image_new_from_icon_name ("edit-undo",
+    widget = ctk_button_new_with_label (_("Reset"));
+    ctk_button_set_image (GTK_BUTTON (widget),
+                          ctk_image_new_from_icon_name ("edit-undo",
                                   GTK_ICON_SIZE_MENU));
-    gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
+    ctk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
     g_signal_connect (widget, "clicked",
                       G_CALLBACK (reset_button_clicked_cb), dialog);
 
-    gtk_widget_show_all (vbox2);
+    ctk_widget_show_all (vbox2);
 
     /* Setup the diff button for text files */
-    details->diff_button = gtk_button_new_with_label (_("Differences..."));
-    gtk_button_set_image (GTK_BUTTON (details->diff_button),
-                          gtk_image_new_from_icon_name ("edit-find",
+    details->diff_button = ctk_button_new_with_label (_("Differences..."));
+    ctk_button_set_image (GTK_BUTTON (details->diff_button),
+                          ctk_image_new_from_icon_name ("edit-find",
                                   GTK_ICON_SIZE_MENU));
-    gtk_box_pack_start (GTK_BOX (vbox), details->diff_button, FALSE, FALSE, 6);
+    ctk_box_pack_start (GTK_BOX (vbox), details->diff_button, FALSE, FALSE, 6);
     g_signal_connect (details->diff_button, "clicked",
                       G_CALLBACK (diff_button_clicked_cb), dialog);
-    gtk_widget_hide (details->diff_button);
+    ctk_widget_hide (details->diff_button);
 
     /* Setup the checkbox to apply the action to all files */
-    widget = gtk_check_button_new_with_mnemonic (_("Apply this action to all files and folders"));
+    widget = ctk_check_button_new_with_mnemonic (_("Apply this action to all files and folders"));
 
-    gtk_box_pack_start (GTK_BOX (vbox),
+    ctk_box_pack_start (GTK_BOX (vbox),
                         widget, FALSE, FALSE, 0);
     details->checkbox = widget;
     g_signal_connect (widget, "toggled",
@@ -654,28 +654,28 @@ baul_file_conflict_dialog_init (BaulFileConflictDialog *fcd)
                            "process-stop",
                            GTK_RESPONSE_CANCEL);
 
-    gtk_dialog_add_button (dialog,
+    ctk_dialog_add_button (dialog,
                            _("_Skip"),
                            CONFLICT_RESPONSE_SKIP);
 
     details->rename_button =
-        gtk_dialog_add_button (dialog,
+        ctk_dialog_add_button (dialog,
                                _("Re_name"),
                                CONFLICT_RESPONSE_RENAME);
-    gtk_widget_hide (details->rename_button);
+    ctk_widget_hide (details->rename_button);
 
     details->replace_button =
-        gtk_dialog_add_button (dialog,
+        ctk_dialog_add_button (dialog,
                                _("Replace"),
                                CONFLICT_RESPONSE_REPLACE);
-    gtk_widget_grab_focus (details->replace_button);
+    ctk_widget_grab_focus (details->replace_button);
 
     /* Setup HIG properties */
-    gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-    gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (dialog)), 14);
-    gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+    ctk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+    ctk_box_set_spacing (GTK_BOX (ctk_dialog_get_content_area (dialog)), 14);
+    ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
-    gtk_widget_show_all (dialog_area);
+    ctk_widget_show_all (dialog_area);
 }
 
 static void
@@ -719,14 +719,14 @@ baul_file_conflict_dialog_class_init (BaulFileConflictDialogClass *klass)
 char *
 baul_file_conflict_dialog_get_new_name (BaulFileConflictDialog *dialog)
 {
-    return g_strdup (gtk_entry_get_text
+    return g_strdup (ctk_entry_get_text
                      (GTK_ENTRY (dialog->details->entry)));
 }
 
 gboolean
 baul_file_conflict_dialog_get_apply_to_all (BaulFileConflictDialog *dialog)
 {
-    return gtk_toggle_button_get_active
+    return ctk_toggle_button_get_active
            (GTK_TOGGLE_BUTTON (dialog->details->checkbox));
 }
 
@@ -761,7 +761,7 @@ baul_file_conflict_dialog_new (GtkWindow *parent,
                                 source,
                                 destination,
                                 dest_dir);
-    gtk_window_set_transient_for (GTK_WINDOW (dialog),
+    ctk_window_set_transient_for (GTK_WINDOW (dialog),
                                   parent);
     return dialog;
 }

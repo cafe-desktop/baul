@@ -27,7 +27,7 @@
 #ifndef BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_H
 #define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_CELL_RENDERER_TEXT_ELLIPSIZED baul_cell_renderer_text_ellipsized_get_type()
 #define BAUL_CELL_RENDERER_TEXT_ELLIPSIZED(obj) \

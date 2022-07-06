@@ -522,7 +522,7 @@ msgstr "_Umetni"
 msgid "Select All"
 msgstr "Izaberi sve"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Pokaži više _detalja"
 

@@ -524,7 +524,7 @@ msgstr "G_reamaigh"
 msgid "Select All"
 msgstr "Roghnaigh Gach Rud"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Taispeáin tuilleadh _mionsonraí"
 

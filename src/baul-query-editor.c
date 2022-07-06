@@ -27,9 +27,9 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 
@@ -284,8 +284,8 @@ baul_query_editor_class_init (BaulQueryEditorClass *class)
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
 
-    binding_set = gtk_binding_set_by_class (class);
-	gtk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
+    binding_set = ctk_binding_set_by_class (class);
+	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
 }
 
 static void
@@ -349,18 +349,18 @@ location_row_create_widgets (BaulQueryEditorRow *row)
 {
     GtkWidget *chooser;
 
-    chooser = gtk_file_chooser_button_new (_("Select folder to search in"),
+    chooser = ctk_file_chooser_button_new (_("Select folder to search in"),
                                            GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
-    gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
-    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
+    ctk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
+    ctk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
                                          g_get_home_dir ());
-    gtk_widget_show (chooser);
+    ctk_widget_show (chooser);
 
     g_signal_connect_swapped (chooser, "current-folder-changed",
                               G_CALLBACK (baul_query_editor_changed),
                               row->editor);
 
-    gtk_box_pack_start (GTK_BOX (row->hbox), chooser, FALSE, FALSE, 0);
+    ctk_box_pack_start (GTK_BOX (row->hbox), chooser, FALSE, FALSE, 0);
 
     return chooser;
 }
@@ -371,7 +371,7 @@ location_row_add_to_query (BaulQueryEditorRow *row,
 {
     char *folder, *uri;
 
-    folder = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (row->type_widget));
+    folder = ctk_file_chooser_get_filename (GTK_FILE_CHOOSER (row->type_widget));
     if (folder == NULL)
     {
         /* I don't know why, but i got NULL here on initial search in browser mode
@@ -413,7 +413,7 @@ location_add_rows_from_query (BaulQueryEditor    *editor,
 
     row = baul_query_editor_add_row (editor,
                                      BAUL_QUERY_EDITOR_ROW_LOCATION);
-    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (row->type_widget),
+    ctk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (row->type_widget),
                                          folder);
 
     g_free (folder);
@@ -424,7 +424,7 @@ static void
 tags_entry_changed_cb (GtkWidget *entry, gpointer *data)
 {
   /* remove commas from string */
-  const gchar *text = gtk_entry_get_text ( GTK_ENTRY (entry));
+  const gchar *text = ctk_entry_get_text ( GTK_ENTRY (entry));
   if (g_strrstr (text, ",") == NULL) {
     return;
   }
@@ -433,7 +433,7 @@ tags_entry_changed_cb (GtkWidget *entry, gpointer *data)
   gchar *sanitized = g_strjoinv ("", words);
   g_strfreev (words);
 
-  gtk_entry_set_text (GTK_ENTRY (entry), sanitized);
+  ctk_entry_set_text (GTK_ENTRY (entry), sanitized);
   g_free(sanitized);
 }
 
@@ -442,18 +442,18 @@ tags_entry_changed_cb (GtkWidget *entry, gpointer *data)
 static GtkWidget *
 tags_row_create_widgets (BaulQueryEditorRow *row)
 {
-    GtkWidget *entry = gtk_entry_new();
-    gtk_entry_set_max_length (GTK_ENTRY (entry), MAX_TAGS_ENTRY_LEN);
-    gtk_widget_set_tooltip_text (entry,
+    GtkWidget *entry = ctk_entry_new();
+    ctk_entry_set_max_length (GTK_ENTRY (entry), MAX_TAGS_ENTRY_LEN);
+    ctk_widget_set_tooltip_text (entry,
         _("Tags separated by spaces. "
           "Matches files that contains ALL specified tags."));
 
-    gtk_entry_set_placeholder_text (GTK_ENTRY (entry),
+    ctk_entry_set_placeholder_text (GTK_ENTRY (entry),
         _("Tags separated by spaces. "
           "Matches files that contains ALL specified tags."));
 
-    gtk_widget_show (entry);
-    gtk_box_pack_start (GTK_BOX (row->hbox), entry, TRUE, TRUE, 0);
+    ctk_widget_show (entry);
+    ctk_box_pack_start (GTK_BOX (row->hbox), entry, TRUE, TRUE, 0);
     g_signal_connect (entry, "changed", G_CALLBACK (tags_entry_changed_cb), entry);
     g_signal_connect (entry, "activate", G_CALLBACK (go_search_cb), row->editor);
 
@@ -465,7 +465,7 @@ tags_row_add_to_query (BaulQueryEditorRow *row,
                            BaulQuery      *query)
 {
     GtkEntry *entry = GTK_ENTRY (row->type_widget);
-    const gchar *tags = gtk_entry_get_text (entry);
+    const gchar *tags = ctk_entry_get_text (entry);
 
     char **strv = g_strsplit (tags, " ", -1);
     guint len = g_strv_length (strv);
@@ -522,7 +522,7 @@ tags_add_rows_from_query (BaulQueryEditor *editor,
     gchar *tags_str = xattr_tags_list_to_str (tags);
     g_list_free_full (tags, g_free);
 
-    gtk_entry_set_text (GTK_ENTRY (row->type_widget), tags_str);
+    ctk_entry_set_text (GTK_ENTRY (row->type_widget), tags_str);
     g_free (tags_str);
 }
 
@@ -537,7 +537,7 @@ type_separator_func (GtkTreeModel      *model,
     char *text;
     gboolean res;
 
-    gtk_tree_model_get (model, iter, 0, &text, -1);
+    ctk_tree_model_get (model, iter, 0, &text, -1);
 
     res = text != NULL && strcmp (text, "---") == 0;
 
@@ -700,11 +700,11 @@ type_add_custom_type (BaulQueryEditorRow *row,
     GtkTreeModel *model;
     GtkListStore *store;
 
-    model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+    model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
     store = GTK_LIST_STORE (model);
 
-    gtk_list_store_append (store, iter);
-    gtk_list_store_set (store, iter,
+    ctk_list_store_append (store, iter);
+    ctk_list_store_set (store, iter,
                         0, description,
                         2, mime_type,
                         -1);
@@ -718,14 +718,14 @@ type_combo_changed (GtkComboBox *combo_box, BaulQueryEditorRow *row)
     gboolean other;
     GtkTreeModel *model;
 
-    if (!gtk_combo_box_get_active_iter  (GTK_COMBO_BOX (row->type_widget),
+    if (!ctk_combo_box_get_active_iter  (GTK_COMBO_BOX (row->type_widget),
                                          &iter))
     {
         return;
     }
 
-    model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
-    gtk_tree_model_get (model, &iter, 3, &other, -1);
+    model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+    ctk_tree_model_get (model, &iter, 3, &other, -1);
 
     if (other)
     {
@@ -740,7 +740,7 @@ type_combo_changed (GtkComboBox *combo_box, BaulQueryEditorRow *row)
 
         mime_infos = g_content_types_get_registered ();
 
-        store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+        store = ctk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
         for (l = mime_infos; l != NULL; l = l->next)
         {
             GtkTreeIter iter;
@@ -753,8 +753,8 @@ type_combo_changed (GtkComboBox *combo_box, BaulQueryEditorRow *row)
                 description = g_strdup (mime_type);
             }
 
-            gtk_list_store_append (store, &iter);
-            gtk_list_store_set (store, &iter,
+            ctk_list_store_append (store, &iter);
+            ctk_list_store_set (store, &iter,
                                 0, description,
                                 1, mime_type,
                                 -1);
@@ -766,73 +766,73 @@ type_combo_changed (GtkComboBox *combo_box, BaulQueryEditorRow *row)
 
 
 
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (combo_box));
+        toplevel = ctk_widget_get_toplevel (GTK_WIDGET (combo_box));
 
-        dialog = gtk_dialog_new ();
-        gtk_window_set_title (GTK_WINDOW (dialog), _("Select type"));
-        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+        dialog = ctk_dialog_new ();
+        ctk_window_set_title (GTK_WINDOW (dialog), _("Select type"));
+        ctk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
 
         eel_dialog_add_button (GTK_DIALOG (dialog),
                                _("_OK"),
-                               "gtk-ok",
+                               "ctk-ok",
                                GTK_RESPONSE_OK);
 
-        gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 600);
+        ctk_window_set_default_size (GTK_WINDOW (dialog), 400, 600);
 
-        scrolled = gtk_scrolled_window_new (NULL, NULL);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
+        scrolled = ctk_scrolled_window_new (NULL, NULL);
+        ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
                                         GTK_POLICY_AUTOMATIC,
                                         GTK_POLICY_AUTOMATIC);
-        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
+        ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
                                              GTK_SHADOW_IN);
-        gtk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (scrolled),
+        ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (scrolled),
                                                    FALSE);
 
-        gtk_widget_show (scrolled);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), scrolled, TRUE, TRUE, 6);
+        ctk_widget_show (scrolled);
+        ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), scrolled, TRUE, TRUE, 6);
 
-        treeview = gtk_tree_view_new ();
-        gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
+        treeview = ctk_tree_view_new ();
+        ctk_tree_view_set_model (GTK_TREE_VIEW (treeview),
                                  GTK_TREE_MODEL (store));
-        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store), 0,
+        ctk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store), 0,
                                               GTK_SORT_ASCENDING);
 
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-        gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+        selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+        ctk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 
 
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new_with_attributes ("Name",
+        renderer = ctk_cell_renderer_text_new ();
+        column = ctk_tree_view_column_new_with_attributes ("Name",
                  renderer,
                  "text",
                  0,
                  NULL);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-        gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
+        ctk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+        ctk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
 
-        gtk_widget_show (treeview);
-        gtk_container_add (GTK_CONTAINER (scrolled), treeview);
+        ctk_widget_show (treeview);
+        ctk_container_add (GTK_CONTAINER (scrolled), treeview);
 
-        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
+        if (ctk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
         {
             char *mimetype, *description;
 
-            gtk_tree_selection_get_selected (selection, NULL, &iter);
-            gtk_tree_model_get (GTK_TREE_MODEL (store), &iter,
+            ctk_tree_selection_get_selected (selection, NULL, &iter);
+            ctk_tree_model_get (GTK_TREE_MODEL (store), &iter,
                                 0, &description,
                                 1, &mimetype,
                                 -1);
 
             type_add_custom_type (row, mimetype, description, &iter);
-            gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
+            ctk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
                                             &iter);
         }
         else
         {
-            gtk_combo_box_set_active (GTK_COMBO_BOX (row->type_widget), 0);
+            ctk_combo_box_set_active (GTK_COMBO_BOX (row->type_widget), 0);
         }
 
-        gtk_widget_destroy (dialog);
+        ctk_widget_destroy (dialog);
     }
 
     baul_query_editor_changed (row->editor);
@@ -847,47 +847,47 @@ type_row_create_widgets (BaulQueryEditorRow *row)
     GtkTreeIter iter;
     int i;
 
-    store = gtk_list_store_new (4, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_BOOLEAN);
-    combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (store));
+    store = ctk_list_store_new (4, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_BOOLEAN);
+    combo = ctk_combo_box_new_with_model (GTK_TREE_MODEL (store));
     g_object_unref (store);
 
-    cell = gtk_cell_renderer_text_new ();
-    gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), cell, TRUE);
-    gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), cell,
+    cell = ctk_cell_renderer_text_new ();
+    ctk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), cell, TRUE);
+    ctk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), cell,
                                     "text", 0,
                                     NULL);
-    gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX (combo),
+    ctk_combo_box_set_row_separator_func (GTK_COMBO_BOX (combo),
                                           type_separator_func,
                                           NULL, NULL);
 
-    gtk_list_store_append (store, &iter);
-    gtk_list_store_set (store, &iter, 0, _("Any"), -1);
-    gtk_list_store_append (store, &iter);
-    gtk_list_store_set (store, &iter, 0, "---",  -1);
+    ctk_list_store_append (store, &iter);
+    ctk_list_store_set (store, &iter, 0, _("Any"), -1);
+    ctk_list_store_append (store, &iter);
+    ctk_list_store_set (store, &iter, 0, "---",  -1);
 
     for (i = 0; i < G_N_ELEMENTS (mime_type_groups); i++)
     {
-        gtk_list_store_append (store, &iter);
-        gtk_list_store_set (store, &iter,
+        ctk_list_store_append (store, &iter);
+        ctk_list_store_set (store, &iter,
                             0, gettext (mime_type_groups[i].name),
                             1, mime_type_groups[i].mimetypes,
                             -1);
     }
 
-    gtk_list_store_append (store, &iter);
-    gtk_list_store_set (store, &iter, 0, "---",  -1);
-    gtk_list_store_append (store, &iter);
-    gtk_list_store_set (store, &iter, 0, _("Other Type..."), 3, TRUE, -1);
+    ctk_list_store_append (store, &iter);
+    ctk_list_store_set (store, &iter, 0, "---",  -1);
+    ctk_list_store_append (store, &iter);
+    ctk_list_store_set (store, &iter, 0, _("Other Type..."), 3, TRUE, -1);
 
-    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
+    ctk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
     g_signal_connect (combo, "changed",
                       G_CALLBACK (type_combo_changed),
                       row);
 
-    gtk_widget_show (combo);
+    ctk_widget_show (combo);
 
-    gtk_box_pack_start (GTK_BOX (row->hbox), combo, FALSE, FALSE, 0);
+    ctk_box_pack_start (GTK_BOX (row->hbox), combo, FALSE, FALSE, 0);
 
     return combo;
 }
@@ -901,14 +901,14 @@ type_row_add_to_query (BaulQueryEditorRow *row,
     char *mimetype;
     GtkTreeModel *model;
 
-    if (!gtk_combo_box_get_active_iter  (GTK_COMBO_BOX (row->type_widget),
+    if (!ctk_combo_box_get_active_iter  (GTK_COMBO_BOX (row->type_widget),
                                          &iter))
     {
         return;
     }
 
-    model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
-    gtk_tree_model_get (model, &iter, 1, &mimetypes, 2, &mimetype, -1);
+    model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+    ctk_tree_model_get (model, &iter, 1, &mimetypes, 2, &mimetype, -1);
 
     if (mimetypes != NULL)
     {
@@ -1022,10 +1022,10 @@ type_add_rows_from_query (BaulQueryEditor    *editor,
             row = baul_query_editor_add_row (editor,
                                              BAUL_QUERY_EDITOR_ROW_TYPE);
 
-            model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+            model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
 
-            gtk_tree_model_iter_nth_child (model, &iter, NULL, i + 2);
-            gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
+            ctk_tree_model_iter_nth_child (model, &iter, NULL, i + 2);
+            ctk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
                                             &iter);
         }
     }
@@ -1044,10 +1044,10 @@ type_add_rows_from_query (BaulQueryEditor    *editor,
 
         row = baul_query_editor_add_row (editor,
                                          BAUL_QUERY_EDITOR_ROW_TYPE);
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+        model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
 
         type_add_custom_type (row, mime_type, desc, &iter);
-        gtk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
+        ctk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
                                         &iter);
     }
 
@@ -1067,52 +1067,52 @@ static GtkWidget *modtime_row_create_widgets(BaulQueryEditorRow *row)
     GtkListStore *duration_store = NULL;
     GtkTreeIter iter;
 
-    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 7);
+    hbox = ctk_box_new(GTK_ORIENTATION_HORIZONTAL, 7);
 
-    store = gtk_list_store_new(2, G_TYPE_BOOLEAN, G_TYPE_STRING);
-    combo = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
+    store = ctk_list_store_new(2, G_TYPE_BOOLEAN, G_TYPE_STRING);
+    combo = ctk_combo_box_new_with_model(GTK_TREE_MODEL(store));
     g_object_unref(store);
 
-    cell = gtk_cell_renderer_text_new();
-    gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), cell, TRUE);
-    gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), cell, "text", 1,
+    cell = ctk_cell_renderer_text_new();
+    ctk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), cell, TRUE);
+    ctk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), cell, "text", 1,
                                    NULL);
 
-    gtk_list_store_append(store, &iter);
-    gtk_list_store_set(store, &iter, 0, FALSE, 1, _("Less than or equal to"), -1);
-    gtk_list_store_append(store, &iter);
-    gtk_list_store_set(store, &iter, 0, TRUE, 1, _("Greater than or equal to"), -1);
+    ctk_list_store_append(store, &iter);
+    ctk_list_store_set(store, &iter, 0, FALSE, 1, _("Less than or equal to"), -1);
+    ctk_list_store_append(store, &iter);
+    ctk_list_store_set(store, &iter, 0, TRUE, 1, _("Greater than or equal to"), -1);
 
-    gtk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
+    ctk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
 
-    duration_store = gtk_list_store_new(2, G_TYPE_INT, G_TYPE_STRING);
-    duration_combo = gtk_combo_box_new_with_model(GTK_TREE_MODEL(duration_store));
+    duration_store = ctk_list_store_new(2, G_TYPE_INT, G_TYPE_STRING);
+    duration_combo = ctk_combo_box_new_with_model(GTK_TREE_MODEL(duration_store));
     g_object_unref(duration_store);
 
-    gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(duration_combo), cell, TRUE);
-    gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(duration_combo), cell,
+    ctk_cell_layout_pack_start(GTK_CELL_LAYOUT(duration_combo), cell, TRUE);
+    ctk_cell_layout_set_attributes(GTK_CELL_LAYOUT(duration_combo), cell,
                                    "text", 1, NULL);
 
-    gtk_list_store_append(duration_store, &iter);
-    gtk_list_store_set(duration_store, &iter, 0, DURATION_ONE_HOUR, 1, _("1 Hour"), -1);
-    gtk_list_store_append(duration_store, &iter);
-    gtk_list_store_set(duration_store, &iter, 0, DURATION_ONE_DAY, 1, _("1 Day"), -1);
-    gtk_list_store_append(duration_store, &iter);
-    gtk_list_store_set(duration_store, &iter, 0, DURATION_ONE_WEEK, 1, _("1 Week"), -1);
-    gtk_list_store_append(duration_store, &iter);
-    gtk_list_store_set(duration_store, &iter, 0, DURATION_ONE_MONTH, 1, _("1 Month"), -1);
-    gtk_list_store_append(duration_store, &iter);
-    gtk_list_store_set(duration_store, &iter, 0, DURATION_SIX_MONTHS, 1, _("6 Months"), -1);
-    gtk_list_store_append(duration_store, &iter);
-    gtk_list_store_set(duration_store, &iter, 0, DURATION_ONE_YEAR, 1, _("1 Year"), -1);
+    ctk_list_store_append(duration_store, &iter);
+    ctk_list_store_set(duration_store, &iter, 0, DURATION_ONE_HOUR, 1, _("1 Hour"), -1);
+    ctk_list_store_append(duration_store, &iter);
+    ctk_list_store_set(duration_store, &iter, 0, DURATION_ONE_DAY, 1, _("1 Day"), -1);
+    ctk_list_store_append(duration_store, &iter);
+    ctk_list_store_set(duration_store, &iter, 0, DURATION_ONE_WEEK, 1, _("1 Week"), -1);
+    ctk_list_store_append(duration_store, &iter);
+    ctk_list_store_set(duration_store, &iter, 0, DURATION_ONE_MONTH, 1, _("1 Month"), -1);
+    ctk_list_store_append(duration_store, &iter);
+    ctk_list_store_set(duration_store, &iter, 0, DURATION_SIX_MONTHS, 1, _("6 Months"), -1);
+    ctk_list_store_append(duration_store, &iter);
+    ctk_list_store_set(duration_store, &iter, 0, DURATION_ONE_YEAR, 1, _("1 Year"), -1);
 
-    gtk_combo_box_set_active(GTK_COMBO_BOX(duration_combo), 0);
+    ctk_combo_box_set_active(GTK_COMBO_BOX(duration_combo), 0);
 
-    gtk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(hbox), duration_combo, FALSE, FALSE, 0);
-    gtk_widget_show_all(hbox);
+    ctk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
+    ctk_box_pack_start(GTK_BOX(hbox), duration_combo, FALSE, FALSE, 0);
+    ctk_widget_show_all(hbox);
 
-    gtk_box_pack_start(GTK_BOX(row->hbox), hbox, FALSE, FALSE, 0);
+    ctk_box_pack_start(GTK_BOX(row->hbox), hbox, FALSE, FALSE, 0);
 
     return hbox;
 }
@@ -1134,7 +1134,7 @@ static void modtime_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
     if (!GTK_IS_CONTAINER(row->type_widget))
         return;
 
-    children = gtk_container_get_children(GTK_CONTAINER(row->type_widget));
+    children = ctk_container_get_children(GTK_CONTAINER(row->type_widget));
     if (g_list_length(children) != 2)
         return;
 
@@ -1143,16 +1143,16 @@ static void modtime_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
     if (!combo || !duration_combo)
         return;
 
-    if (!gtk_combo_box_get_active_iter(GTK_COMBO_BOX(combo), &iter) ||
-        !gtk_combo_box_get_active_iter(GTK_COMBO_BOX(duration_combo), &duration_iter)) {
+    if (!ctk_combo_box_get_active_iter(GTK_COMBO_BOX(combo), &iter) ||
+        !ctk_combo_box_get_active_iter(GTK_COMBO_BOX(duration_combo), &duration_iter)) {
         return;
     }
 
-    model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
-    gtk_tree_model_get(model, &iter, 0, &is_greater, -1);
+    model = ctk_combo_box_get_model(GTK_COMBO_BOX(combo));
+    ctk_tree_model_get(model, &iter, 0, &is_greater, -1);
 
-    duration_model = gtk_combo_box_get_model(GTK_COMBO_BOX(duration_combo));
-    gtk_tree_model_get(duration_model, &duration_iter, 0, &duration, -1);
+    duration_model = ctk_combo_box_get_model(GTK_COMBO_BOX(duration_combo));
+    ctk_tree_model_get(duration_model, &duration_iter, 0, &duration, -1);
 
     now = g_date_time_new_now_local ();
     datetime = now;
@@ -1206,88 +1206,88 @@ static GtkWidget *size_row_create_widgets(BaulQueryEditorRow *row)
     GtkListStore *size_store = NULL;
     GtkTreeIter iter;
 
-    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 7);
+    hbox = ctk_box_new(GTK_ORIENTATION_HORIZONTAL, 7);
 
-    store = gtk_list_store_new(2, G_TYPE_BOOLEAN, G_TYPE_STRING);
-    combo = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
+    store = ctk_list_store_new(2, G_TYPE_BOOLEAN, G_TYPE_STRING);
+    combo = ctk_combo_box_new_with_model(GTK_TREE_MODEL(store));
     g_object_unref(store);
 
-    cell = gtk_cell_renderer_text_new();
-    gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), cell, TRUE);
-    gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), cell, "text", 1,
+    cell = ctk_cell_renderer_text_new();
+    ctk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), cell, TRUE);
+    ctk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), cell, "text", 1,
                                    NULL);
 
-    gtk_list_store_append(store, &iter);
-    gtk_list_store_set(store, &iter, 0, FALSE, 1, _("Less than or equal to"), -1);
-    gtk_list_store_append(store, &iter);
-    gtk_list_store_set(store, &iter, 0, TRUE, 1, _("Greater than or equal to"), -1);
+    ctk_list_store_append(store, &iter);
+    ctk_list_store_set(store, &iter, 0, FALSE, 1, _("Less than or equal to"), -1);
+    ctk_list_store_append(store, &iter);
+    ctk_list_store_set(store, &iter, 0, TRUE, 1, _("Greater than or equal to"), -1);
 
-    gtk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
+    ctk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
 
-    size_store = gtk_list_store_new(2, G_TYPE_INT64, G_TYPE_STRING);
-    size_combo = gtk_combo_box_new_with_model(GTK_TREE_MODEL(size_store));
+    size_store = ctk_list_store_new(2, G_TYPE_INT64, G_TYPE_STRING);
+    size_combo = ctk_combo_box_new_with_model(GTK_TREE_MODEL(size_store));
     g_object_unref(size_store);
 
-    gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(size_combo), cell, TRUE);
-    gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(size_combo), cell, "text",
+    ctk_cell_layout_pack_start(GTK_CELL_LAYOUT(size_combo), cell, TRUE);
+    ctk_cell_layout_set_attributes(GTK_CELL_LAYOUT(size_combo), cell, "text",
                                    1, NULL);
 
     if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_USE_IEC_UNITS))
     {
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 10240, 1, _("10 KiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 102400, 1, _("100 KiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 512000, 1, _("500 KiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 1048576, 1, _("1 MiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 5242880, 1, _("5 MiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 10485760, 1, _("10 MiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 104857600, 1, _("100 MiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 524288000, 1, _("500 MiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 1073741824, 1, _("1 GiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 2147483648, 1, _("2 GiB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 4294967296, 1, _("4 GiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 10240, 1, _("10 KiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 102400, 1, _("100 KiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 512000, 1, _("500 KiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 1048576, 1, _("1 MiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 5242880, 1, _("5 MiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 10485760, 1, _("10 MiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 104857600, 1, _("100 MiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 524288000, 1, _("500 MiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 1073741824, 1, _("1 GiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 2147483648, 1, _("2 GiB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 4294967296, 1, _("4 GiB"), -1);
     } else {
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 10000, 1, _("10 KB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 100000, 1, _("100 KB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 500000, 1, _("500 KB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 1000000, 1, _("1 MB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 5000000, 1, _("5 MB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 10000000, 1, _("10 MB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 100000000, 1, _("100 MB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 500000000, 1, _("500 MB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 1000000000, 1, _("1 GB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 2000000000, 1, _("2 GB"), -1);
-        gtk_list_store_append(size_store, &iter);
-        gtk_list_store_set(size_store, &iter, 0, 4000000000, 1, _("4 GB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 10000, 1, _("10 KB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 100000, 1, _("100 KB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 500000, 1, _("500 KB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 1000000, 1, _("1 MB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 5000000, 1, _("5 MB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 10000000, 1, _("10 MB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 100000000, 1, _("100 MB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 500000000, 1, _("500 MB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 1000000000, 1, _("1 GB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 2000000000, 1, _("2 GB"), -1);
+        ctk_list_store_append(size_store, &iter);
+        ctk_list_store_set(size_store, &iter, 0, 4000000000, 1, _("4 GB"), -1);
     }
 
-    gtk_combo_box_set_active(GTK_COMBO_BOX(size_combo), 0);
+    ctk_combo_box_set_active(GTK_COMBO_BOX(size_combo), 0);
 
-    gtk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(hbox), size_combo, FALSE, FALSE, 0);
-    gtk_widget_show_all(hbox);
+    ctk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
+    ctk_box_pack_start(GTK_BOX(hbox), size_combo, FALSE, FALSE, 0);
+    ctk_widget_show_all(hbox);
 
-    gtk_box_pack_start(GTK_BOX(row->hbox), hbox, FALSE, FALSE, 0);
+    ctk_box_pack_start(GTK_BOX(row->hbox), hbox, FALSE, FALSE, 0);
 
     return hbox;
 }
@@ -1307,7 +1307,7 @@ static void size_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
     if (!GTK_IS_CONTAINER(row->type_widget))
         return;
 
-    children = gtk_container_get_children(GTK_CONTAINER(row->type_widget));
+    children = ctk_container_get_children(GTK_CONTAINER(row->type_widget));
     if (g_list_length(children) != 2)
         return;
 
@@ -1316,16 +1316,16 @@ static void size_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
     if (!combo || !size_combo)
         return;
 
-    if (!gtk_combo_box_get_active_iter(GTK_COMBO_BOX(combo), &iter) ||
-        !gtk_combo_box_get_active_iter(GTK_COMBO_BOX(size_combo), &size_iter)) {
+    if (!ctk_combo_box_get_active_iter(GTK_COMBO_BOX(combo), &iter) ||
+        !ctk_combo_box_get_active_iter(GTK_COMBO_BOX(size_combo), &size_iter)) {
         return;
     }
 
-    model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
-    gtk_tree_model_get(model, &iter, 0, &is_greater, -1);
+    model = ctk_combo_box_get_model(GTK_COMBO_BOX(combo));
+    ctk_tree_model_get(model, &iter, 0, &is_greater, -1);
 
-    size_model = gtk_combo_box_get_model(GTK_COMBO_BOX(size_combo));
-    gtk_tree_model_get(size_model, &size_iter, 0, &size, -1);
+    size_model = ctk_combo_box_get_model(GTK_COMBO_BOX(size_combo));
+    ctk_tree_model_get(size_model, &size_iter, 0, &size, -1);
 
     baul_query_set_size(query, is_greater ? size : -size);
 }
@@ -1341,15 +1341,15 @@ static void size_add_rows_from_query(BaulQueryEditor *editor, BaulQuery *query)
 static GtkWidget *
 contained_text_row_create_widgets (BaulQueryEditorRow *row)
 {
-    GtkWidget *entry = gtk_entry_new();
-    gtk_widget_set_tooltip_text (entry,
+    GtkWidget *entry = ctk_entry_new();
+    ctk_widget_set_tooltip_text (entry,
         _("Matches files that contains specified text."));
 
-    gtk_entry_set_placeholder_text (GTK_ENTRY (entry),
+    ctk_entry_set_placeholder_text (GTK_ENTRY (entry),
         _("Matches files that contains specified text."));
 
-    gtk_widget_show (entry);
-    gtk_box_pack_start (GTK_BOX (row->hbox), entry, TRUE, TRUE, 0);
+    ctk_widget_show (entry);
+    ctk_box_pack_start (GTK_BOX (row->hbox), entry, TRUE, TRUE, 0);
     g_signal_connect (entry, "activate", G_CALLBACK (go_search_cb), row->editor);
 
     return entry;
@@ -1359,7 +1359,7 @@ static void
 contained_text_row_add_to_query (BaulQueryEditorRow *row, BaulQuery *query)
 {
     GtkEntry *entry = GTK_ENTRY (row->type_widget);
-    const gchar *text = gtk_entry_get_text (entry);
+    const gchar *text = ctk_entry_get_text (entry);
 
     baul_query_set_contained_text (query, text);
 }
@@ -1409,7 +1409,7 @@ remove_row_cb (GtkButton *clicked_button, BaulQueryEditorRow *row)
     BaulQueryEditor *editor;
 
     editor = row->editor;
-    gtk_container_remove (GTK_CONTAINER (editor->details->visible_vbox),
+    ctk_container_remove (GTK_CONTAINER (editor->details->visible_vbox),
                           row->hbox);
 
     editor->details->rows = g_list_remove (editor->details->rows, row);
@@ -1431,7 +1431,7 @@ row_type_combo_changed_cb (GtkComboBox *combo_box, BaulQueryEditorRow *row)
 {
     BaulQueryEditorRowType type;
 
-    type = gtk_combo_box_get_active (combo_box);
+    type = ctk_combo_box_get_active (combo_box);
 
     if (type == row->type)
     {
@@ -1440,7 +1440,7 @@ row_type_combo_changed_cb (GtkComboBox *combo_box, BaulQueryEditorRow *row)
 
     if (row->type_widget != NULL)
     {
-        gtk_widget_destroy (row->type_widget);
+        ctk_widget_destroy (row->type_widget);
         row->type_widget = NULL;
     }
 
@@ -1466,21 +1466,21 @@ baul_query_editor_add_row (BaulQueryEditor *editor,
     row->editor = editor;
     row->type = type;
 
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
     row->hbox = hbox;
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
+    ctk_widget_show (hbox);
+    ctk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
 
-    combo = gtk_combo_box_text_new ();
+    combo = ctk_combo_box_text_new ();
     row->combo = combo;
     for (i = 0; i < BAUL_QUERY_EDITOR_ROW_LAST; i++)
     {
-        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), gettext (row_type[i].name));
+        ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), gettext (row_type[i].name));
     }
-    gtk_widget_show (combo);
-    gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0);
+    ctk_widget_show (combo);
+    ctk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0);
 
-    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), row->type);
+    ctk_combo_box_set_active (GTK_COMBO_BOX (combo), row->type);
 
     editor->details->rows = g_list_append (editor->details->rows, row);
 
@@ -1489,20 +1489,20 @@ baul_query_editor_add_row (BaulQueryEditor *editor,
 
     create_type_widgets (row);
 
-    button = gtk_button_new ();
-    image = gtk_image_new_from_icon_name ("remove",
+    button = ctk_button_new ();
+    image = ctk_image_new_from_icon_name ("remove",
                                       GTK_ICON_SIZE_SMALL_TOOLBAR);
-    gtk_container_add (GTK_CONTAINER (button), image);
-    gtk_widget_show (image);
-    gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-    gtk_widget_show (button);
+    ctk_container_add (GTK_CONTAINER (button), image);
+    ctk_widget_show (image);
+    ctk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+    ctk_widget_show (button);
 
     g_signal_connect (button, "clicked",
                       G_CALLBACK (remove_row_cb), row);
-    gtk_widget_set_tooltip_text (button,
+    ctk_widget_set_tooltip_text (button,
                                  _("Remove this criterion from the search"));
 
-    gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+    ctk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
     return row;
 }
@@ -1529,38 +1529,38 @@ baul_query_editor_init (BaulQueryEditor *editor)
     editor->details = g_new0 (BaulQueryEditorDetails, 1);
     editor->details->is_visible = TRUE;
 
-    editor->details->invisible_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (editor), GTK_ORIENTATION_VERTICAL);
-    gtk_box_pack_start (GTK_BOX (editor), editor->details->invisible_vbox,
+    editor->details->invisible_vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (editor), GTK_ORIENTATION_VERTICAL);
+    ctk_box_pack_start (GTK_BOX (editor), editor->details->invisible_vbox,
                         FALSE, FALSE, 0);
-    editor->details->visible_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (editor), GTK_ORIENTATION_VERTICAL);
-    gtk_box_pack_start (GTK_BOX (editor), editor->details->visible_vbox,
+    editor->details->visible_vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (editor), GTK_ORIENTATION_VERTICAL);
+    ctk_box_pack_start (GTK_BOX (editor), editor->details->visible_vbox,
                         FALSE, FALSE, 0);
     /* Only show visible vbox */
-    gtk_widget_show (editor->details->visible_vbox);
+    ctk_widget_show (editor->details->visible_vbox);
 
     /* Create invisible part: */
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    gtk_box_pack_start (GTK_BOX (editor->details->invisible_vbox),
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    ctk_box_pack_start (GTK_BOX (editor->details->invisible_vbox),
                         hbox, FALSE, FALSE, 0);
-    gtk_widget_show (hbox);
+    ctk_widget_show (hbox);
 
-    label = gtk_label_new ("");
+    label = ctk_label_new ("");
     label_markup = g_strconcat ("<b>", _("Search Folder"), "</b>", NULL);
-    gtk_label_set_markup (GTK_LABEL (label), label_markup);
+    ctk_label_set_markup (GTK_LABEL (label), label_markup);
     g_free (label_markup);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    gtk_widget_show (label);
+    ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    ctk_widget_show (label);
 
-    button = gtk_button_new_with_label (_("Edit"));
-    gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-    gtk_widget_show (button);
+    button = ctk_button_new_with_label (_("Edit"));
+    ctk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+    ctk_widget_show (button);
 
     g_signal_connect (button, "clicked",
                       G_CALLBACK (edit_clicked), editor);
 
-    gtk_widget_set_tooltip_text (button,
+    ctk_widget_set_tooltip_text (button,
                                  _("Edit the saved search"));
 }
 
@@ -1579,41 +1579,41 @@ finish_first_line (BaulQueryEditor *editor, GtkWidget *hbox, gboolean use_go)
 {
     GtkWidget *button, *image;
 
-    button = gtk_button_new ();
-    image = gtk_image_new_from_icon_name ("add",
+    button = ctk_button_new ();
+    image = ctk_image_new_from_icon_name ("add",
                                       GTK_ICON_SIZE_SMALL_TOOLBAR);
-    gtk_container_add (GTK_CONTAINER (button), image);
-    gtk_widget_show (image);
-    gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-    gtk_widget_show (button);
+    ctk_container_add (GTK_CONTAINER (button), image);
+    ctk_widget_show (image);
+    ctk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+    ctk_widget_show (button);
 
     g_signal_connect (button, "clicked",
                       G_CALLBACK (add_new_row_cb), editor);
 
-    gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+    ctk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
-    gtk_widget_set_tooltip_text (button,
+    ctk_widget_set_tooltip_text (button,
                                  _("Add a new criterion to this search"));
 
     if (!editor->details->is_indexed)
     {
         if (use_go)
         {
-            button = gtk_button_new_with_label (_("Go"));
+            button = ctk_button_new_with_label (_("Go"));
         }
         else
         {
-            button = gtk_button_new_with_label (_("Reload"));
+            button = ctk_button_new_with_label (_("Reload"));
         }
-        gtk_widget_show (button);
+        ctk_widget_show (button);
 
-        gtk_widget_set_tooltip_text (button,
+        ctk_widget_set_tooltip_text (button,
                                      _("Perform or update the search"));
 
         g_signal_connect (button, "clicked",
                           G_CALLBACK (go_search_cb), editor);
 
-        gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+        ctk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
     }
 }
 
@@ -1624,26 +1624,26 @@ setup_internal_entry (BaulQueryEditor *editor)
     char *label_markup;
 
     /* Create visible part: */
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    ctk_widget_show (hbox);
+    ctk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new ("");
+    label = ctk_label_new ("");
     label_markup = g_strconcat ("<b>", _("_Search for:"), "</b>", NULL);
-    gtk_label_set_markup_with_mnemonic (GTK_LABEL (label), label_markup);
+    ctk_label_set_markup_with_mnemonic (GTK_LABEL (label), label_markup);
     g_free (label_markup);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    ctk_widget_show (label);
+    ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    editor->details->entry = gtk_entry_new ();
-    gtk_label_set_mnemonic_widget (GTK_LABEL (label), editor->details->entry);
-    gtk_box_pack_start (GTK_BOX (hbox), editor->details->entry, TRUE, TRUE, 0);
+    editor->details->entry = ctk_entry_new ();
+    ctk_label_set_mnemonic_widget (GTK_LABEL (label), editor->details->entry);
+    ctk_box_pack_start (GTK_BOX (hbox), editor->details->entry, TRUE, TRUE, 0);
 
     g_signal_connect (editor->details->entry, "activate",
                       G_CALLBACK (entry_activate_cb), editor);
     g_signal_connect (editor->details->entry, "changed",
                       G_CALLBACK (entry_changed_cb), editor);
-    gtk_widget_show (editor->details->entry);
+    ctk_widget_show (editor->details->entry);
 
     finish_first_line (editor, hbox, TRUE);
 }
@@ -1654,13 +1654,13 @@ setup_external_entry (BaulQueryEditor *editor, GtkWidget *entry)
     GtkWidget *hbox, *label;
 
     /* Create visible part: */
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    ctk_widget_show (hbox);
+    ctk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Search results"));
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    label = ctk_label_new (_("Search results"));
+    ctk_widget_show (label);
+    ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     editor->details->entry = entry;
     g_signal_connect (editor->details->entry, "activate",
@@ -1679,13 +1679,13 @@ baul_query_editor_set_visible (BaulQueryEditor *editor,
     editor->details->is_visible = visible;
     if (visible)
     {
-        gtk_widget_show (editor->details->visible_vbox);
-        gtk_widget_hide (editor->details->invisible_vbox);
+        ctk_widget_show (editor->details->visible_vbox);
+        ctk_widget_hide (editor->details->invisible_vbox);
     }
     else
     {
-        gtk_widget_hide (editor->details->visible_vbox);
-        gtk_widget_show (editor->details->invisible_vbox);
+        ctk_widget_hide (editor->details->visible_vbox);
+        ctk_widget_show (editor->details->invisible_vbox);
     }
 }
 
@@ -1694,7 +1694,7 @@ query_is_valid (BaulQueryEditor *editor)
 {
     const char *text;
 
-    text = gtk_entry_get_text (GTK_ENTRY (editor->details->entry));
+    text = ctk_entry_get_text (GTK_ENTRY (editor->details->entry));
 
     return text != NULL && text[0] != '\0';
 }
@@ -1729,7 +1729,7 @@ baul_query_editor_grab_focus (BaulQueryEditor *editor)
 {
     if (editor->details->is_visible)
     {
-        gtk_widget_grab_focus (editor->details->entry);
+        ctk_widget_grab_focus (editor->details->entry);
     }
 }
 
@@ -1746,7 +1746,7 @@ baul_query_editor_get_query (BaulQueryEditor *editor)
         return NULL;
     }
 
-    query_text = gtk_entry_get_text (GTK_ENTRY (editor->details->entry));
+    query_text = ctk_entry_get_text (GTK_ENTRY (editor->details->entry));
 
     /* Empty string is a NULL query */
     if (query_text && query_text[0] == '\0')
@@ -1771,7 +1771,7 @@ void
 baul_query_editor_clear_query (BaulQueryEditor *editor)
 {
     editor->details->change_frozen = TRUE;
-    gtk_entry_set_text (GTK_ENTRY (editor->details->entry), "");
+    ctk_entry_set_text (GTK_ENTRY (editor->details->entry), "");
 
     g_free (editor->details->last_set_query_text);
     editor->details->last_set_query_text = g_strdup ("");
@@ -1826,7 +1826,7 @@ attach_to_external_entry (BaulQueryEditor *editor)
                                            editor);
 
         editor->details->change_frozen = TRUE;
-        gtk_entry_set_text (GTK_ENTRY (editor->details->entry),
+        ctk_entry_set_text (GTK_ENTRY (editor->details->entry),
                             editor->details->last_set_query_text);
         editor->details->change_frozen = FALSE;
     }
@@ -1889,7 +1889,7 @@ baul_query_editor_set_query (BaulQueryEditor *editor, BaulQuery *query)
     }
 
     editor->details->change_frozen = TRUE;
-    gtk_entry_set_text (GTK_ENTRY (editor->details->entry), text);
+    ctk_entry_set_text (GTK_ENTRY (editor->details->entry), text);
 
     for (type = 0; type < BAUL_QUERY_EDITOR_ROW_LAST; type++)
     {

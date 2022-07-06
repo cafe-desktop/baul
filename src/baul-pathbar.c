@@ -21,7 +21,7 @@
 #include <config.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
@@ -149,13 +149,13 @@ get_slider_button (BaulPathBar  *path_bar,
 {
     GtkWidget *button;
 
-    button = gtk_button_new ();
-    gtk_widget_set_focus_on_click (button, FALSE);
-    gtk_widget_add_events (button, GDK_SCROLL_MASK);
-    gtk_container_add (GTK_CONTAINER (button),
-                       gtk_image_new_from_icon_name (arrow_type, GTK_ICON_SIZE_MENU));
-    gtk_container_add (GTK_CONTAINER (path_bar), button);
-    gtk_widget_show_all (button);
+    button = ctk_button_new ();
+    ctk_widget_set_focus_on_click (button, FALSE);
+    ctk_widget_add_events (button, GDK_SCROLL_MASK);
+    ctk_container_add (GTK_CONTAINER (button),
+                       ctk_image_new_from_icon_name (arrow_type, GTK_ICON_SIZE_MENU));
+    ctk_container_add (GTK_CONTAINER (path_bar), button);
+    ctk_widget_show_all (button);
 
     return button;
 }
@@ -170,7 +170,7 @@ update_button_types (BaulPathBar *path_bar)
     {
         ButtonData *button_data;
         button_data = BUTTON_DATA (list->data);
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button_data->button)))
+        if (ctk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button_data->button)))
         {
             /*Increase the reference count on path so it does not get cleared
              *by baul_path_bar_clear_buttons during baul_path_bar_update_path
@@ -213,7 +213,7 @@ trash_state_changed_cb (BaulTrashMonitor *monitor,
     gint scale;
 
     file = g_file_new_for_uri ("trash:///");
-    scale = gtk_widget_get_scale_factor (GTK_WIDGET (path_bar));
+    scale = ctk_widget_get_scale_factor (GTK_WIDGET (path_bar));
     for (list = path_bar->button_list; list; list = list->next)
     {
         ButtonData *button_data;
@@ -227,7 +227,7 @@ trash_state_changed_cb (BaulTrashMonitor *monitor,
             icon = baul_trash_monitor_get_icon ();
             icon_info = baul_icon_info_lookup (icon, BAUL_PATH_BAR_ICON_SIZE, scale);
             surface = baul_icon_info_get_surface_at_size (icon_info, BAUL_PATH_BAR_ICON_SIZE);
-            gtk_image_set_from_surface (GTK_IMAGE (button_data->image), surface);
+            ctk_image_set_from_surface (GTK_IMAGE (button_data->image), surface);
         }
     }
     g_object_unref (file);
@@ -242,7 +242,7 @@ slider_timeout (gpointer user_data)
 
     path_bar->drag_slider_timeout = 0;
 
-    if (gtk_widget_get_visible (GTK_WIDGET (path_bar)))
+    if (ctk_widget_get_visible (GTK_WIDGET (path_bar)))
     {
         if (path_bar->drag_slider_timeout_for_up_button)
         {
@@ -274,9 +274,9 @@ baul_path_bar_slider_drag_motion (GtkWidget      *widget,
     {
         GtkSettings *settings;
 
-        settings = gtk_widget_get_settings (widget);
+        settings = ctk_widget_get_settings (widget);
 
-        g_object_get (settings, "gtk-timeout-expand", &timeout, NULL);
+        g_object_get (settings, "ctk-timeout-expand", &timeout, NULL);
         path_bar->drag_slider_timeout =
             g_timeout_add (timeout,
                            slider_timeout,
@@ -310,18 +310,18 @@ baul_path_bar_init (BaulPathBar *path_bar)
     char *p;
     GtkStyleContext *context;
 
-    context = gtk_widget_get_style_context (GTK_WIDGET (path_bar));
-    gtk_style_context_add_class (context, "baul-pathbar");
+    context = ctk_widget_get_style_context (GTK_WIDGET (path_bar));
+    ctk_style_context_add_class (context, "baul-pathbar");
 
-    gtk_widget_set_has_window (GTK_WIDGET (path_bar), FALSE);
-    gtk_widget_set_redraw_on_allocate (GTK_WIDGET (path_bar), FALSE);
+    ctk_widget_set_has_window (GTK_WIDGET (path_bar), FALSE);
+    ctk_widget_set_redraw_on_allocate (GTK_WIDGET (path_bar), FALSE);
 
     path_bar->spacing = 3;
     path_bar->up_slider_button = get_slider_button (path_bar, "pan-start-symbolic");
     path_bar->down_slider_button = get_slider_button (path_bar, "pan-end-symbolic");
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (path_bar->up_slider_button)),
+    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (path_bar->up_slider_button)),
                                  "slider-button");
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (path_bar->down_slider_button)),
+    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (path_bar->down_slider_button)),
                                  "slider-button");
 
     path_bar->icon_size = BAUL_PATH_BAR_ICON_SIZE;
@@ -348,9 +348,9 @@ baul_path_bar_init (BaulPathBar *path_bar)
     g_signal_connect (path_bar->down_slider_button, "button_press_event", G_CALLBACK (baul_path_bar_slider_button_press), path_bar);
     g_signal_connect (path_bar->down_slider_button, "button_release_event", G_CALLBACK (baul_path_bar_slider_button_release), path_bar);
 
-    gtk_drag_dest_set (GTK_WIDGET (path_bar->up_slider_button),
+    ctk_drag_dest_set (GTK_WIDGET (path_bar->up_slider_button),
                        0, NULL, 0, 0);
-    gtk_drag_dest_set_track_motion (GTK_WIDGET (path_bar->up_slider_button), TRUE);
+    ctk_drag_dest_set_track_motion (GTK_WIDGET (path_bar->up_slider_button), TRUE);
     g_signal_connect (path_bar->up_slider_button,
                       "drag-motion",
                       G_CALLBACK (baul_path_bar_slider_drag_motion),
@@ -360,9 +360,9 @@ baul_path_bar_init (BaulPathBar *path_bar)
                       G_CALLBACK (baul_path_bar_slider_drag_leave),
                       path_bar);
 
-    gtk_drag_dest_set (GTK_WIDGET (path_bar->down_slider_button),
+    ctk_drag_dest_set (GTK_WIDGET (path_bar->down_slider_button),
                        0, NULL, 0, 0);
-    gtk_drag_dest_set_track_motion (GTK_WIDGET (path_bar->up_slider_button), TRUE);
+    ctk_drag_dest_set_track_motion (GTK_WIDGET (path_bar->up_slider_button), TRUE);
     g_signal_connect (path_bar->down_slider_button,
                       "drag-motion",
                       G_CALLBACK (baul_path_bar_slider_drag_motion),
@@ -428,7 +428,7 @@ baul_path_bar_class_init (BaulPathBarClass *path_bar_class)
                       G_TYPE_FILE,
                       GDK_TYPE_EVENT);
 
-    gtk_container_class_handle_border_width (container_class);
+    ctk_container_class_handle_border_width (container_class);
 }
 
 
@@ -482,7 +482,7 @@ remove_settings_signal (BaulPathBar *path_bar,
     {
         GtkSettings *settings;
 
-        settings = gtk_settings_get_for_screen (screen);
+        settings = ctk_settings_get_for_screen (screen);
         g_signal_handler_disconnect (settings,
                                      path_bar->settings_signal_id);
         path_bar->settings_signal_id = 0;
@@ -492,7 +492,7 @@ remove_settings_signal (BaulPathBar *path_bar,
 static void
 baul_path_bar_dispose (GObject *object)
 {
-    remove_settings_signal (BAUL_PATH_BAR (object), gtk_widget_get_screen (GTK_WIDGET (object)));
+    remove_settings_signal (BAUL_PATH_BAR (object), ctk_widget_get_screen (GTK_WIDGET (object)));
 
     G_OBJECT_CLASS (baul_path_bar_parent_class)->dispose (object);
 }
@@ -523,8 +523,8 @@ baul_path_bar_get_preferred_width (GtkWidget *widget,
 
     for (list = path_bar->button_list; list; list = list->next) {
     	button_data = BUTTON_DATA (list->data);
-    	gtk_widget_get_preferred_width (button_data->button, &child_min, &child_nat);
-    	gtk_widget_get_preferred_height (button_data->button, &child_height, NULL);
+    	ctk_widget_get_preferred_width (button_data->button, &child_min, &child_nat);
+    	ctk_widget_get_preferred_height (button_data->button, &child_height, NULL);
     	height = MAX (height, child_height);
 
     	if (button_data->type == NORMAL_BUTTON) {
@@ -541,10 +541,10 @@ baul_path_bar_get_preferred_width (GtkWidget *widget,
     /* Theoretically, the slider could be bigger than the other button.  But we're
      * not going to worry about that now.
      */
-    gtk_widget_get_preferred_width (path_bar->down_slider_button,
+    ctk_widget_get_preferred_width (path_bar->down_slider_button,
                                     &slider_width,
                                     NULL);
-    gtk_widget_get_preferred_width (path_bar->up_slider_button,
+    ctk_widget_get_preferred_width (path_bar->up_slider_button,
                                     &slider_width,
                                     NULL);
 
@@ -573,7 +573,7 @@ baul_path_bar_get_preferred_height (GtkWidget *widget,
 
     for (list = path_bar->button_list; list; list = list->next) {
     	button_data = BUTTON_DATA (list->data);
-    	gtk_widget_get_preferred_height (button_data->button, &child_min, &child_nat);
+    	ctk_widget_get_preferred_height (button_data->button, &child_min, &child_nat);
 
     	*minimum = MAX (*minimum, child_min);
     	*natural = MAX (*natural, child_nat);
@@ -589,22 +589,22 @@ baul_path_bar_update_slider_buttons (BaulPathBar *path_bar)
         GtkWidget *button;
 
         button = BUTTON_DATA (path_bar->button_list->data)->button;
-        if (gtk_widget_get_child_visible (button))
+        if (ctk_widget_get_child_visible (button))
         {
-            gtk_widget_set_sensitive (path_bar->down_slider_button, FALSE);
+            ctk_widget_set_sensitive (path_bar->down_slider_button, FALSE);
         }
         else
         {
-            gtk_widget_set_sensitive (path_bar->down_slider_button, TRUE);
+            ctk_widget_set_sensitive (path_bar->down_slider_button, TRUE);
         }
         button = BUTTON_DATA (g_list_last (path_bar->button_list)->data)->button;
-        if (gtk_widget_get_child_visible (button))
+        if (ctk_widget_get_child_visible (button))
         {
-            gtk_widget_set_sensitive (path_bar->up_slider_button, FALSE);
+            ctk_widget_set_sensitive (path_bar->up_slider_button, FALSE);
         }
         else
         {
-            gtk_widget_set_sensitive (path_bar->up_slider_button, TRUE);
+            ctk_widget_set_sensitive (path_bar->up_slider_button, TRUE);
         }
     }
 }
@@ -640,14 +640,14 @@ baul_path_bar_size_allocate (GtkWidget     *widget,
     down_slider_offset = 0;
     path_bar = BAUL_PATH_BAR (widget);
 
-    gtk_widget_set_allocation (widget, allocation);
+    ctk_widget_set_allocation (widget, allocation);
 
     /* No path is set so we don't have to allocate anything. */
     if (path_bar->button_list == NULL)
     {
         return;
     }
-    direction = gtk_widget_get_direction (widget);
+    direction = ctk_widget_get_direction (widget);
 
     allocation_width = allocation->width;
 
@@ -661,14 +661,14 @@ baul_path_bar_size_allocate (GtkWidget     *widget,
         width = 0;
     }
 
-    gtk_widget_get_preferred_size (BUTTON_DATA (path_bar->button_list->data)->button,
+    ctk_widget_get_preferred_size (BUTTON_DATA (path_bar->button_list->data)->button,
     				   &child_requisition, NULL);
     width += child_requisition.width;
 
     for (list = path_bar->button_list->next; list; list = list->next)
     {
         child = BUTTON_DATA (list->data)->button;
-        gtk_widget_get_preferred_size (child, &child_requisition, NULL);
+        ctk_widget_get_preferred_size (child, &child_requisition, NULL);
         width += child_requisition.width + path_bar->spacing;
 
         if (list == path_bar->fake_root)
@@ -710,14 +710,14 @@ baul_path_bar_size_allocate (GtkWidget     *widget,
         * button, then count backwards.
         */
         /* Count down the path chain towards the end. */
-        gtk_widget_get_preferred_size (BUTTON_DATA (first_button->data)->button,
+        ctk_widget_get_preferred_size (BUTTON_DATA (first_button->data)->button,
         			       &child_requisition, NULL);
         width = child_requisition.width;
         list = first_button->prev;
         while (list && !reached_end)
         {
             child = BUTTON_DATA (list->data)->button;
-            gtk_widget_get_preferred_size (child, &child_requisition, NULL);
+            ctk_widget_get_preferred_size (child, &child_requisition, NULL);
 
             if (width + child_requisition.width + path_bar->spacing + slider_space > allocation_width)
             {
@@ -743,7 +743,7 @@ baul_path_bar_size_allocate (GtkWidget     *widget,
         while (first_button->next && ! reached_end)
         {
             child = BUTTON_DATA (first_button->next->data)->button;
-            gtk_widget_get_preferred_size (child, &child_requisition, NULL);
+            ctk_widget_get_preferred_size (child, &child_requisition, NULL);
 
             if (width + child_requisition.width + path_bar->spacing + slider_space > allocation_width)
             {
@@ -790,9 +790,9 @@ baul_path_bar_size_allocate (GtkWidget     *widget,
     for (list = first_button; list; list = list->prev)
     {
         child = BUTTON_DATA (list->data)->button;
-        gtk_widget_get_preferred_size (child, &child_requisition, NULL);
+        ctk_widget_get_preferred_size (child, &child_requisition, NULL);
 
-        gtk_widget_get_allocation (widget, &widget_allocation);
+        ctk_widget_get_allocation (widget, &widget_allocation);
 
         child_allocation.width = child_requisition.width;
         if (direction == GTK_TEXT_DIR_RTL)
@@ -819,8 +819,8 @@ baul_path_bar_size_allocate (GtkWidget     *widget,
             }
         }
 
-        gtk_widget_set_child_visible (BUTTON_DATA (list->data)->button, TRUE);
-        gtk_widget_size_allocate (child, &child_allocation);
+        ctk_widget_set_child_visible (BUTTON_DATA (list->data)->button, TRUE);
+        ctk_widget_size_allocate (child, &child_allocation);
 
         if (direction == GTK_TEXT_DIR_RTL)
         {
@@ -838,41 +838,41 @@ baul_path_bar_size_allocate (GtkWidget     *widget,
     /* Now we go hide all the widgets that don't fit */
     while (list)
     {
-        gtk_widget_set_child_visible (BUTTON_DATA (list->data)->button, FALSE);
+        ctk_widget_set_child_visible (BUTTON_DATA (list->data)->button, FALSE);
         list = list->prev;
     }
     for (list = first_button->next; list; list = list->next)
     {
-        gtk_widget_set_child_visible (BUTTON_DATA (list->data)->button, FALSE);
+        ctk_widget_set_child_visible (BUTTON_DATA (list->data)->button, FALSE);
     }
 
     if (need_sliders || path_bar->fake_root)
     {
         child_allocation.width = path_bar->slider_width;
         child_allocation.x = up_slider_offset + allocation->x;
-        gtk_widget_size_allocate (path_bar->up_slider_button, &child_allocation);
+        ctk_widget_size_allocate (path_bar->up_slider_button, &child_allocation);
 
-        gtk_widget_set_child_visible (path_bar->up_slider_button, TRUE);
-        gtk_widget_show_all (path_bar->up_slider_button);
+        ctk_widget_set_child_visible (path_bar->up_slider_button, TRUE);
+        ctk_widget_show_all (path_bar->up_slider_button);
     }
     else
     {
-        gtk_widget_set_child_visible (path_bar->up_slider_button, FALSE);
+        ctk_widget_set_child_visible (path_bar->up_slider_button, FALSE);
     }
 
     if (need_sliders)
     {
         child_allocation.width = path_bar->slider_width;
         child_allocation.x = down_slider_offset + allocation->x;
-        gtk_widget_size_allocate (path_bar->down_slider_button, &child_allocation);
+        ctk_widget_size_allocate (path_bar->down_slider_button, &child_allocation);
 
-        gtk_widget_set_child_visible (path_bar->down_slider_button, TRUE);
-        gtk_widget_show_all (path_bar->down_slider_button);
+        ctk_widget_set_child_visible (path_bar->down_slider_button, TRUE);
+        ctk_widget_show_all (path_bar->down_slider_button);
         baul_path_bar_update_slider_buttons (path_bar);
     }
     else
     {
-        gtk_widget_set_child_visible (path_bar->down_slider_button, FALSE);
+        ctk_widget_set_child_visible (path_bar->down_slider_button, FALSE);
     }
 }
 
@@ -935,18 +935,18 @@ static void
 baul_path_bar_add (GtkContainer *container,
                    GtkWidget    *widget)
 {
-    gtk_widget_set_parent (widget, GTK_WIDGET (container));
+    ctk_widget_set_parent (widget, GTK_WIDGET (container));
 }
 
 static void
 baul_path_bar_remove_1 (GtkContainer *container,
                         GtkWidget    *widget)
 {
-    gboolean was_visible = gtk_widget_get_visible (widget);
-    gtk_widget_unparent (widget);
+    gboolean was_visible = ctk_widget_get_visible (widget);
+    ctk_widget_unparent (widget);
     if (was_visible)
     {
-        gtk_widget_queue_resize (GTK_WIDGET (container));
+        ctk_widget_queue_resize (GTK_WIDGET (container));
     }
 }
 
@@ -1039,15 +1039,15 @@ baul_path_bar_scroll_down (BaulPathBar *path_bar)
         return;
     }
 
-    gtk_widget_queue_resize (GTK_WIDGET (path_bar));
+    ctk_widget_queue_resize (GTK_WIDGET (path_bar));
 
-    direction = gtk_widget_get_direction (GTK_WIDGET (path_bar));
+    direction = ctk_widget_get_direction (GTK_WIDGET (path_bar));
 
     /* We find the button at the 'down' end that we have to make */
     /* visible */
     for (list = path_bar->button_list; list; list = list->next)
     {
-        if (list->next && gtk_widget_get_child_visible (BUTTON_DATA (list->next->data)->button))
+        if (list->next && ctk_widget_get_child_visible (BUTTON_DATA (list->next->data)->button))
         {
             down_button = list;
             break;
@@ -1062,16 +1062,16 @@ baul_path_bar_scroll_down (BaulPathBar *path_bar)
     /* Find the last visible button on the 'up' end */
     for (list = g_list_last (path_bar->button_list); list; list = list->prev)
     {
-        if (gtk_widget_get_child_visible (BUTTON_DATA (list->data)->button))
+        if (ctk_widget_get_child_visible (BUTTON_DATA (list->data)->button))
         {
             up_button = list;
             break;
         }
     }
 
-    gtk_widget_get_allocation (BUTTON_DATA (down_button->data)->button, &button_allocation);
-    gtk_widget_get_allocation (GTK_WIDGET (path_bar), &allocation);
-    gtk_widget_get_allocation (path_bar->down_slider_button, &slider_allocation);
+    ctk_widget_get_allocation (BUTTON_DATA (down_button->data)->button, &button_allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (path_bar), &allocation);
+    ctk_widget_get_allocation (path_bar->down_slider_button, &slider_allocation);
 
     space_needed = button_allocation.width + path_bar->spacing;
     if (direction == GTK_TEXT_DIR_RTL)
@@ -1088,7 +1088,7 @@ baul_path_bar_scroll_down (BaulPathBar *path_bar)
     * need space_needed space to make the button fit.  So we walk down
     * from the end, removing buttons until we get all the space we
     * need. */
-    gtk_widget_get_allocation (BUTTON_DATA (up_button->data)->button, &button_allocation);
+    ctk_widget_get_allocation (BUTTON_DATA (up_button->data)->button, &button_allocation);
     while (space_available < space_needed && up_button)
     {
         space_available += button_allocation.width + path_bar->spacing;
@@ -1108,11 +1108,11 @@ baul_path_bar_scroll_up (BaulPathBar *path_bar)
         return;
     }
 
-    gtk_widget_queue_resize (GTK_WIDGET (path_bar));
+    ctk_widget_queue_resize (GTK_WIDGET (path_bar));
 
     for (list = g_list_last (path_bar->button_list); list; list = list->prev)
     {
-        if (list->prev && gtk_widget_get_child_visible (BUTTON_DATA (list->prev->data)->button))
+        if (list->prev && ctk_widget_get_child_visible (BUTTON_DATA (list->prev->data)->button))
         {
             if (list->prev == path_bar->fake_root)
             {
@@ -1131,13 +1131,13 @@ baul_path_bar_scroll_timeout (BaulPathBar *path_bar)
 
     if (path_bar->timer)
     {
-        if (gtk_widget_has_focus (path_bar->up_slider_button))
+        if (ctk_widget_has_focus (path_bar->up_slider_button))
         {
             baul_path_bar_scroll_up (path_bar);
         }
         else
         {
-            if (gtk_widget_has_focus (path_bar->down_slider_button))
+            if (ctk_widget_has_focus (path_bar->down_slider_button))
             {
                 baul_path_bar_scroll_down (path_bar);
             }
@@ -1176,9 +1176,9 @@ baul_path_bar_slider_button_press (GtkWidget       *widget,
                                    GdkEventButton  *event,
                                    BaulPathBar *path_bar)
 {
-    if (!gtk_widget_has_focus (widget))
+    if (!ctk_widget_has_focus (widget))
     {
-        gtk_widget_grab_focus (widget);
+        ctk_widget_grab_focus (widget);
     }
 
     if (event->type != GDK_BUTTON_PRESS || event->button != 1)
@@ -1241,7 +1241,7 @@ static void
 baul_path_bar_state_changed (GtkWidget    *widget,
                              GtkStateType  previous_state)
 {
-    if (!gtk_widget_get_sensitive (widget))
+    if (!ctk_widget_get_sensitive (widget))
     {
         baul_path_bar_stop_scrolling (BAUL_PATH_BAR (widget));
     }
@@ -1285,7 +1285,7 @@ settings_notify_cb (GObject    *object,
 
     name = g_param_spec_get_name (pspec);
 
-    if (! strcmp (name, "gtk-icon-theme-name") || ! strcmp (name, "gtk-icon-sizes"))
+    if (! strcmp (name, "ctk-icon-theme-name") || ! strcmp (name, "ctk-icon-sizes"))
     {
         change_icon_theme (path_bar);
     }
@@ -1301,7 +1301,7 @@ baul_path_bar_check_icon_theme (BaulPathBar *path_bar)
         return;
     }
 
-    settings = gtk_settings_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (path_bar)));
+    settings = ctk_settings_get_for_screen (ctk_widget_get_screen (GTK_WIDGET (path_bar)));
     path_bar->settings_signal_id = g_signal_connect (settings, "notify", G_CALLBACK (settings_notify_cb), path_bar);
 
     change_icon_theme (path_bar);
@@ -1313,7 +1313,7 @@ baul_path_bar_clear_buttons (BaulPathBar *path_bar)
 {
     while (path_bar->button_list != NULL)
     {
-        gtk_container_remove (GTK_CONTAINER (path_bar), BUTTON_DATA (path_bar->button_list->data)->button);
+        ctk_container_remove (GTK_CONTAINER (path_bar), BUTTON_DATA (path_bar->button_list->data)->button);
     }
     path_bar->first_scrolled_button = NULL;
     path_bar->fake_root = NULL;
@@ -1333,12 +1333,12 @@ button_clicked_cb (GtkWidget *button,
         return;
     }
 
-    path_bar = BAUL_PATH_BAR (gtk_widget_get_parent (button));
+    path_bar = BAUL_PATH_BAR (ctk_widget_get_parent (button));
 
     button_list = g_list_find (path_bar->button_list, button_data);
     g_assert (button_list != NULL);
 
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+    ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 
     g_signal_emit (path_bar, path_bar_signals [PATH_CLICKED], 0, button_data->path);
 }
@@ -1354,7 +1354,7 @@ button_event_cb (GtkWidget *button,
         gboolean retval;
 
         button_data = BUTTON_DATA (data);
-        path_bar = BAUL_PATH_BAR (gtk_widget_get_parent (button));
+        path_bar = BAUL_PATH_BAR (ctk_widget_get_parent (button));
 
 	if (event->type == GDK_BUTTON_PRESS) {
 		g_object_set_data (G_OBJECT (button), "handle-button-release",
@@ -1388,7 +1388,7 @@ button_drag_begin_cb (GtkWidget *widget,
 static BaulIconInfo *
 get_type_icon_info (ButtonData *button_data)
 {
-    gint icon_scale = gtk_widget_get_scale_factor (GTK_WIDGET (button_data->button));
+    gint icon_scale = ctk_widget_get_scale_factor (GTK_WIDGET (button_data->button));
 
     switch (button_data->type)
     {
@@ -1470,7 +1470,7 @@ set_label_padding_size (ButtonData *button_data)
     gint pad_left, pad_right;
     gchar *markup;
 
-    layout = gtk_widget_create_pango_layout (button_data->label, dir_name);
+    layout = ctk_widget_create_pango_layout (button_data->label, dir_name);
     pango_layout_get_pixel_size (layout, &width, &height);
 
     markup = g_markup_printf_escaped ("<b>%s</b>", dir_name);
@@ -1484,8 +1484,8 @@ set_label_padding_size (ButtonData *button_data)
     pixel size difference between bold and normal fonts is not always even and
     will give an off-by-one error when dividing by 2 */
 
-    gtk_widget_set_margin_start (GTK_WIDGET (button_data->label), pad_left);
-    gtk_widget_set_margin_end (GTK_WIDGET (button_data->label), pad_right);
+    ctk_widget_set_margin_start (GTK_WIDGET (button_data->label), pad_left);
+    ctk_widget_set_margin_end (GTK_WIDGET (button_data->label), pad_right);
 
     g_object_unref (layout);
 }
@@ -1497,20 +1497,20 @@ baul_path_bar_update_button_appearance (ButtonData *button_data)
 
     if (button_data->label != NULL)
     {
-        if (gtk_label_get_use_markup (GTK_LABEL (button_data->label)))
+        if (ctk_label_get_use_markup (GTK_LABEL (button_data->label)))
         {
             char *markup;
 
             markup = g_markup_printf_escaped ("<b>%s</b>", dir_name);
-            gtk_label_set_markup (GTK_LABEL (button_data->label), markup);
+            ctk_label_set_markup (GTK_LABEL (button_data->label), markup);
 
-            gtk_widget_set_margin_end (GTK_WIDGET (button_data->label), 0);
-            gtk_widget_set_margin_start (GTK_WIDGET (button_data->label), 0);
+            ctk_widget_set_margin_end (GTK_WIDGET (button_data->label), 0);
+            ctk_widget_set_margin_start (GTK_WIDGET (button_data->label), 0);
             g_free(markup);
         }
         else
         {
-            gtk_label_set_text (GTK_LABEL (button_data->label), dir_name);
+            ctk_label_set_text (GTK_LABEL (button_data->label), dir_name);
             set_label_padding_size (button_data);
         }
     }
@@ -1519,8 +1519,8 @@ baul_path_bar_update_button_appearance (ButtonData *button_data)
     {
         if (button_data->custom_icon)
         {
-            gtk_image_set_from_surface (GTK_IMAGE (button_data->image), button_data->custom_icon);
-            gtk_widget_show (GTK_WIDGET (button_data->image));
+            ctk_image_set_from_surface (GTK_IMAGE (button_data->image), button_data->custom_icon);
+            ctk_widget_show (GTK_WIDGET (button_data->image));
         }
         else
         {
@@ -1538,16 +1538,16 @@ baul_path_bar_update_button_appearance (ButtonData *button_data)
 
             if (surface != NULL)
             {
-                gtk_image_set_from_surface (GTK_IMAGE (button_data->image), surface);
-                gtk_style_context_add_class (gtk_widget_get_style_context (button_data->button),
+                ctk_image_set_from_surface (GTK_IMAGE (button_data->image), surface);
+                ctk_style_context_add_class (ctk_widget_get_style_context (button_data->button),
                                              "image-button");
-                gtk_widget_show (GTK_WIDGET (button_data->image));
+                ctk_widget_show (GTK_WIDGET (button_data->image));
                 cairo_surface_destroy (surface);
             }
             else
             {
-                gtk_widget_hide (GTK_WIDGET (button_data->image));
-                gtk_style_context_remove_class (gtk_widget_get_style_context (button_data->button),
+                ctk_widget_hide (GTK_WIDGET (button_data->image));
+                ctk_style_context_remove_class (ctk_widget_get_style_context (button_data->button),
                                                 "image-button");
             }
         }
@@ -1566,10 +1566,10 @@ baul_path_bar_update_button_state (ButtonData *button_data,
 
     baul_path_bar_update_button_appearance (button_data);
 
-    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button_data->button)) != current_dir)
+    if (ctk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button_data->button)) != current_dir)
     {
         button_data->ignore_changes = TRUE;
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_data->button), current_dir);
+        ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_data->button), current_dir);
         button_data->ignore_changes = FALSE;
     }
 }
@@ -1593,7 +1593,7 @@ setup_file_path_mounted_mount (GFile *location, ButtonData *button_data)
     volume_monitor = g_volume_monitor_get ();
     mounts = g_volume_monitor_get_mounts (volume_monitor);
 
-    scale = gtk_widget_get_scale_factor (GTK_WIDGET (button_data->button));
+    scale = ctk_widget_get_scale_factor (GTK_WIDGET (button_data->button));
     for (l = mounts; l != NULL; l = l->next)
     {
         mount = l->data;
@@ -1715,13 +1715,13 @@ button_drag_data_get_cb (GtkWidget          *widget,
         char *tmp;
 
         tmp = g_strdup_printf ("%s\r\n", uri_list[0]);
-        gtk_selection_data_set (selection_data, gtk_selection_data_get_target (selection_data),
+        ctk_selection_data_set (selection_data, ctk_selection_data_get_target (selection_data),
                                 8, tmp, strlen (tmp));
         g_free (tmp);
     }
     else if (info == BAUL_ICON_DND_URI_LIST)
     {
-        gtk_selection_data_set_uris (selection_data, uri_list);
+        ctk_selection_data_set_uris (selection_data, uri_list);
     }
 
     g_free (uri_list[0]);
@@ -1736,7 +1736,7 @@ setup_button_drag_source (ButtonData *button_data)
         { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST }
     };
 
-    gtk_drag_source_set (button_data->button,
+    ctk_drag_source_set (button_data->button,
                          GDK_BUTTON1_MASK |
                          GDK_BUTTON2_MASK,
                          NULL, 0,
@@ -1745,10 +1745,10 @@ setup_button_drag_source (ButtonData *button_data)
                          GDK_ACTION_LINK |
                          GDK_ACTION_ASK);
 
-    target_list = gtk_target_list_new (targets, G_N_ELEMENTS (targets));
-    gtk_target_list_add_uri_targets (target_list, BAUL_ICON_DND_URI_LIST);
-    gtk_drag_source_set_target_list (button_data->button, target_list);
-    gtk_target_list_unref (target_list);
+    target_list = ctk_target_list_new (targets, G_N_ELEMENTS (targets));
+    ctk_target_list_add_uri_targets (target_list, BAUL_ICON_DND_URI_LIST);
+    ctk_drag_source_set_target_list (button_data->button, target_list);
+    ctk_target_list_unref (target_list);
 
     g_signal_connect (button_data->button, "drag-data-get",
                       G_CALLBACK (button_drag_data_get_cb),
@@ -1764,7 +1764,7 @@ button_data_file_changed (BaulFile *file,
     BaulPathBar *path_bar;
     gboolean renamed, child;
 
-    path_bar = (BaulPathBar *) gtk_widget_get_ancestor (button_data->button,
+    path_bar = (BaulPathBar *) ctk_widget_get_ancestor (button_data->button,
                BAUL_TYPE_PATH_BAR);
     if (path_bar == NULL)
     {
@@ -1850,7 +1850,7 @@ button_data_file_changed (BaulFile *file,
             {
                 for (idx = 0; idx <= position; idx++)
                 {
-                    gtk_container_remove (GTK_CONTAINER (path_bar),
+                    ctk_container_remove (GTK_CONTAINER (path_bar),
                                           BUTTON_DATA (path_bar->button_list->data)->button);
                 }
             }
@@ -1899,16 +1899,16 @@ make_directory_button (BaulPathBar  *path_bar,
     button_data = g_new0 (ButtonData, 1);
 
     setup_button_type (button_data, path_bar, path);
-    button_data->button = gtk_toggle_button_new ();
-    gtk_style_context_add_class (gtk_widget_get_style_context (button_data->button),
+    button_data->button = ctk_toggle_button_new ();
+    ctk_style_context_add_class (ctk_widget_get_style_context (button_data->button),
                                  "text-button");
-    gtk_widget_set_focus_on_click (button_data->button, FALSE);
-    gtk_widget_add_events (button_data->button, GDK_SCROLL_MASK);
+    ctk_widget_set_focus_on_click (button_data->button, FALSE);
+    ctk_widget_add_events (button_data->button, GDK_SCROLL_MASK);
     /* TODO update button type when xdg directories change */
 
     button_data->drag_info.target_location = g_object_ref (path);
 
-    button_data->image = gtk_image_new ();
+    button_data->image = ctk_image_new ();
 
     switch (button_data->type)
     {
@@ -1921,18 +1921,18 @@ make_directory_button (BaulPathBar  *path_bar,
     case MOUNT_BUTTON:
     /* Fall through */
     case DEFAULT_LOCATION_BUTTON:
-        button_data->label = gtk_label_new (NULL);
-        child = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-        gtk_box_pack_start (GTK_BOX (child), button_data->image, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (child), button_data->label, FALSE, FALSE, 0);
+        button_data->label = ctk_label_new (NULL);
+        child = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+        ctk_box_pack_start (GTK_BOX (child), button_data->image, FALSE, FALSE, 0);
+        ctk_box_pack_start (GTK_BOX (child), button_data->label, FALSE, FALSE, 0);
 
         break;
     case NORMAL_BUTTON:
     default:
-        button_data->label = gtk_label_new (NULL);
-        child = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-        gtk_box_pack_start (GTK_BOX (child), button_data->image, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (child), button_data->label, FALSE, FALSE, 0);
+        button_data->label = ctk_label_new (NULL);
+        child = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+        ctk_box_pack_start (GTK_BOX (child), button_data->image, FALSE, FALSE, 0);
+        ctk_box_pack_start (GTK_BOX (child), button_data->label, FALSE, FALSE, 0);
         button_data->is_base_dir = base_dir;
     }
 
@@ -1957,8 +1957,8 @@ make_directory_button (BaulPathBar  *path_bar,
 
     button_data->file_is_hidden = file_is_hidden;
 
-    gtk_container_add (GTK_CONTAINER (button_data->button), child);
-    gtk_widget_show_all (button_data->button);
+    ctk_container_add (GTK_CONTAINER (button_data->button), child);
+    ctk_widget_show_all (button_data->button);
 
     baul_path_bar_update_button_state (button_data, current_dir);
 
@@ -2043,10 +2043,10 @@ baul_path_bar_check_parent_path (BaulPathBar *path_bar,
                                                (list == current_path) ? TRUE : FALSE);
         }
 
-        if (!gtk_widget_get_child_visible (BUTTON_DATA (current_path->data)->button))
+        if (!ctk_widget_get_child_visible (BUTTON_DATA (current_path->data)->button))
         {
             path_bar->first_scrolled_button = current_path;
-            gtk_widget_queue_resize (GTK_WIDGET (path_bar));
+            ctk_widget_queue_resize (GTK_WIDGET (path_bar));
         }
         return TRUE;
     }
@@ -2107,7 +2107,7 @@ baul_path_bar_update_path (BaulPathBar *path_bar,
     {
         GtkWidget *button;
         button = BUTTON_DATA (l->data)->button;
-        gtk_container_add (GTK_CONTAINER (path_bar), button);
+        ctk_container_add (GTK_CONTAINER (path_bar), button);
     }
 
     if (path_bar->current_path != NULL)

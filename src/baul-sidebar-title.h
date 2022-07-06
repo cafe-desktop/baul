@@ -29,7 +29,7 @@
 #ifndef BAUL_SIDEBAR_TITLE_H
 #define BAUL_SIDEBAR_TITLE_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-background.h>
 

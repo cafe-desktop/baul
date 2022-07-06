@@ -515,7 +515,7 @@ msgstr "साटू (_P)"
 msgid "Select All"
 msgstr ""
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "बेसी विवरण देखाबू (_d)"
 

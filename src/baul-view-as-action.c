@@ -25,9 +25,9 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include <libbaul-private/baul-view-factory.h>
 
@@ -89,7 +89,7 @@ view_as_menu_switch_views_callback (GtkComboBox *combo_box, BaulNavigationWindow
     g_assert (GTK_IS_COMBO_BOX (combo_box));
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
-    active = gtk_combo_box_get_active (combo_box);
+    active = ctk_combo_box_get_active (combo_box);
 
     if (active < 0)
     {
@@ -121,10 +121,10 @@ view_as_changed_callback (BaulWindow *window,
      * is no function to clear all items and also no function to obtain
      * the number of items in a combobox.
      */
-    model = gtk_combo_box_get_model (combo_box);
+    model = ctk_combo_box_get_model (combo_box);
     g_return_if_fail (GTK_IS_LIST_STORE (model));
     store = GTK_LIST_STORE (model);
-    gtk_list_store_clear (store);
+    ctk_list_store_clear (store);
 
     slot = baul_window_get_active_slot (window);
 
@@ -134,7 +134,7 @@ view_as_changed_callback (BaulWindow *window,
             node = node->next, ++index)
     {
         info = baul_view_factory_lookup (node->data);
-        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box), _(info->view_combo_label));
+        ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box), _(info->view_combo_label));
 
         if (baul_window_slot_content_view_matches_iid (slot, (char *)node->data))
         {
@@ -155,15 +155,15 @@ view_as_changed_callback (BaulWindow *window,
 
         id = baul_window_slot_get_content_view_id (slot);
         info = baul_view_factory_lookup (id);
-        gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box),
+        ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box),
                                         _(info->view_combo_label));
         selected_index = index;
     }
-    gtk_combo_box_set_active (combo_box, selected_index);
+    ctk_combo_box_set_active (combo_box, selected_index);
     if (g_list_length (window->details->short_list_viewers) == 1) {
-        gtk_widget_hide(GTK_WIDGET(combo_box));
+        ctk_widget_hide(GTK_WIDGET(combo_box));
     } else {
-        gtk_widget_show(GTK_WIDGET(combo_box));
+        ctk_widget_show(GTK_WIDGET(combo_box));
     }
 }
 
@@ -183,16 +183,16 @@ connect_proxy (GtkAction *action,
         /* Option menu for content view types; it's empty here, filled in when a uri is set.
          * Pack it into vbox so it doesn't grow vertically when location bar does.
          */
-        view_as_menu_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 4);
-        gtk_widget_show (view_as_menu_vbox);
+        view_as_menu_vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 4);
+        ctk_widget_show (view_as_menu_vbox);
 
-        gtk_container_add (GTK_CONTAINER (item), view_as_menu_vbox);
+        ctk_container_add (GTK_CONTAINER (item), view_as_menu_vbox);
 
-        view_as_combo_box = gtk_combo_box_text_new ();
+        view_as_combo_box = ctk_combo_box_text_new ();
 
-        gtk_widget_set_focus_on_click (view_as_combo_box, FALSE);
-        gtk_box_pack_end (GTK_BOX (view_as_menu_vbox), view_as_combo_box, TRUE, FALSE, 0);
-        gtk_widget_show (view_as_combo_box);
+        ctk_widget_set_focus_on_click (view_as_combo_box, FALSE);
+        ctk_box_pack_end (GTK_BOX (view_as_menu_vbox), view_as_combo_box, TRUE, FALSE, 0);
+        ctk_widget_show (view_as_combo_box);
         g_signal_connect_object (view_as_combo_box, "changed",
                                  G_CALLBACK (view_as_menu_switch_views_callback), window, 0);
 

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-eel-gtk-extensions.c - Access gtk/gdk attributes as libeel rectangles.
+/* eel-eel-ctk-extensions.c - Access ctk/gdk attributes as libeel rectangles.
 
    Copyright (C) 2000 Eazel, Inc.
 
@@ -24,23 +24,23 @@
 
 #include <config.h>
 
-#include "eel-art-gtk-extensions.h"
+#include "eel-art-ctk-extensions.h"
 
 /**
- * eel_gtk_widget_get_bounds:
- * @gtk_widget: The source GtkWidget.
+ * eel_ctk_widget_get_bounds:
+ * @ctk_widget: The source GtkWidget.
  *
  * Return value: An EelIRect representation of the given GtkWidget's geometry
  * relative to its parent.  In the Gtk universe this is known as "allocation."
  *
  */
 EelIRect
-eel_gtk_widget_get_bounds (GtkWidget *gtk_widget)
+eel_ctk_widget_get_bounds (GtkWidget *ctk_widget)
 {
     GtkAllocation allocation;
-    g_return_val_if_fail (GTK_IS_WIDGET (gtk_widget), eel_irect_empty);
+    g_return_val_if_fail (GTK_IS_WIDGET (ctk_widget), eel_irect_empty);
 
-    gtk_widget_get_allocation (gtk_widget, &allocation);
+    ctk_widget_get_allocation (ctk_widget, &allocation);
     return eel_irect_assign (allocation.x,
                              allocation.y,
                              (int) allocation.width,
@@ -48,21 +48,21 @@ eel_gtk_widget_get_bounds (GtkWidget *gtk_widget)
 }
 
 /**
- * eel_gtk_widget_get_dimensions:
- * @gtk_widget: The source GtkWidget.
+ * eel_ctk_widget_get_dimensions:
+ * @ctk_widget: The source GtkWidget.
  *
  * Return value: The widget's dimensions.  The returned dimensions are only valid
  *               after the widget's geometry has been "allocated" by its container.
  */
 EelDimensions
-eel_gtk_widget_get_dimensions (GtkWidget *gtk_widget)
+eel_ctk_widget_get_dimensions (GtkWidget *ctk_widget)
 {
     EelDimensions dimensions;
     GtkAllocation allocation;
 
-    g_return_val_if_fail (GTK_IS_WIDGET (gtk_widget), eel_dimensions_empty);
+    g_return_val_if_fail (GTK_IS_WIDGET (ctk_widget), eel_dimensions_empty);
 
-    gtk_widget_get_allocation (gtk_widget, &allocation);
+    ctk_widget_get_allocation (ctk_widget, &allocation);
     dimensions.width = (int) allocation.width;
     dimensions.height = (int) allocation.height;
 

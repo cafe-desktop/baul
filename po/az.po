@@ -520,7 +520,7 @@ msgstr "_Yapışdır"
 msgid "Select All"
 msgstr "Hamısını Seç"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Daha çox _seçim göstər"
 

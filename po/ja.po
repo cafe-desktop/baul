@@ -529,7 +529,7 @@ msgstr "貼り付け(_P)"
 msgid "Select All"
 msgstr "すべて選択"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "詳細表示(_D)"
 

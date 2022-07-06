@@ -26,7 +26,7 @@
 
 #include <X11/Xatom.h>
 #include <gdk/gdkx.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 
@@ -95,32 +95,32 @@ baul_desktop_window_init (BaulDesktopWindow *window)
 
     GtkStyleContext *context;
 
-    context = gtk_widget_get_style_context (GTK_WIDGET (window));
-    gtk_style_context_add_class (context, "baul-desktop-window");
+    context = ctk_widget_get_style_context (GTK_WIDGET (window));
+    ctk_style_context_add_class (context, "baul-desktop-window");
 
-    gtk_window_move (GTK_WINDOW (window), 0, 0);
+    ctk_window_move (GTK_WINDOW (window), 0, 0);
 
     /* shouldn't really be needed given our semantic type
      * of _NET_WM_TYPE_DESKTOP, but why not
      */
-    gtk_window_set_resizable (GTK_WINDOW (window),
+    ctk_window_set_resizable (GTK_WINDOW (window),
                               FALSE);
 
     g_object_set_data (G_OBJECT (window), "is_desktop_window",
                        GINT_TO_POINTER (1));
 
-    gtk_widget_hide (BAUL_WINDOW (window)->details->statusbar);
-    gtk_widget_hide (BAUL_WINDOW (window)->details->menubar);
+    ctk_widget_hide (BAUL_WINDOW (window)->details->statusbar);
+    ctk_widget_hide (BAUL_WINDOW (window)->details->menubar);
 
     /* Don't allow close action on desktop */
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (BAUL_WINDOW (window)->details->main_action_group,
+    action = ctk_action_group_get_action (BAUL_WINDOW (window)->details->main_action_group,
                                           BAUL_ACTION_CLOSE);
-    gtk_action_set_sensitive (action, FALSE);
+    ctk_action_set_sensitive (action, FALSE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Set the accessible name so that it doesn't inherit the cryptic desktop URI. */
-    accessible = gtk_widget_get_accessible (GTK_WIDGET (window));
+    accessible = ctk_widget_get_accessible (GTK_WIDGET (window));
 
     if (accessible) {
         atk_object_set_name (accessible, _("Desktop"));
@@ -180,7 +180,7 @@ baul_desktop_window_new (BaulApplication *application,
     height_request = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
 
     window = BAUL_DESKTOP_WINDOW
-             (gtk_widget_new (baul_desktop_window_get_type(),
+             (ctk_widget_new (baul_desktop_window_get_type(),
                               "app", application,
                               "width_request", width_request,
                               "height_request", height_request,
@@ -188,13 +188,13 @@ baul_desktop_window_new (BaulApplication *application,
                               NULL));
     /* Stop wrong desktop window size in GTK 3.20*/
     /* We don't want to set a default size, which the parent does, since this */
-    /* will cause the desktop window to open at the wrong size in gtk 3.20 */
-    gtk_window_set_default_size (GTK_WINDOW (window), -1, -1);
+    /* will cause the desktop window to open at the wrong size in ctk 3.20 */
+    ctk_window_set_default_size (GTK_WINDOW (window), -1, -1);
 
     /* Special sawmill setting*/
     GdkWindow *gdkwin;
-    gtk_widget_realize (GTK_WIDGET (window));
-    gdkwin = gtk_widget_get_window (GTK_WIDGET (window));
+    ctk_widget_realize (GTK_WIDGET (window));
+    gdkwin = ctk_widget_get_window (GTK_WIDGET (window));
     if (gdk_window_ensure_native (gdkwin)) {
         Display *disp = GDK_DISPLAY_XDISPLAY (gdk_window_get_display (gdkwin));
         XClassHint *xch = XAllocClassHint ();
@@ -221,7 +221,7 @@ map (GtkWidget *widget)
 {
     /* Chain up to realize our children */
     GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->map (widget);
-    gdk_window_lower (gtk_widget_get_window (widget));
+    gdk_window_lower (ctk_widget_get_window (widget));
 }
 
 static void
@@ -235,13 +235,13 @@ unrealize (GtkWidget *widget)
     details = window->details;
 
     root_window = gdk_screen_get_root_window (
-                      gtk_window_get_screen (GTK_WINDOW (window)));
+                      ctk_window_get_screen (GTK_WINDOW (window)));
 
     gdk_property_delete (root_window,
                          gdk_atom_intern ("BAUL_DESKTOP_WINDOW_ID", TRUE));
 
     if (details->size_changed_id != 0) {
-        g_signal_handler_disconnect (gtk_window_get_screen (GTK_WINDOW (window)),
+        g_signal_handler_disconnect (ctk_window_get_screen (GTK_WINDOW (window)),
                          details->size_changed_id);
         details->size_changed_id = 0;
     }
@@ -272,7 +272,7 @@ set_desktop_window_id (BaulDesktopWindow *window,
     GdkWindow *root_window;
 
     root_window = gdk_screen_get_root_window (
-                      gtk_window_get_screen (GTK_WINDOW (window)));
+                      ctk_window_get_screen (GTK_WINDOW (window)));
 
     window_xid = GDK_WINDOW_XID (gdkwindow);
 
@@ -291,18 +291,18 @@ realize (GtkWidget *widget)
     details = window->details;
 
     /* Make sure we get keyboard events */
-    gtk_widget_set_events (widget, gtk_widget_get_events (widget)
+    ctk_widget_set_events (widget, ctk_widget_get_events (widget)
                            | GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
     /* Do the work of realizing. */
     GTK_WIDGET_CLASS (baul_desktop_window_parent_class)->realize (widget);
 
     /* This is the new way to set up the desktop window */
-    set_wmspec_desktop_hint (gtk_widget_get_window (widget));
+    set_wmspec_desktop_hint (ctk_widget_get_window (widget));
 
-    set_desktop_window_id (window, gtk_widget_get_window (widget));
+    set_desktop_window_id (window, ctk_widget_get_window (widget));
 
     details->size_changed_id =
-        g_signal_connect (gtk_window_get_screen (GTK_WINDOW (window)), "size_changed",
+        g_signal_connect (ctk_window_get_screen (GTK_WINDOW (window)), "size_changed",
                           G_CALLBACK (baul_desktop_window_screen_size_changed), window);
 }
 
@@ -319,7 +319,7 @@ static BaulIconInfo *
 real_get_icon (BaulWindow *window,
                BaulWindowSlot *slot)
 {
-    gint scale = gtk_widget_get_scale_factor (GTK_WIDGET (window));
+    gint scale = ctk_widget_get_scale_factor (GTK_WIDGET (window));
     return baul_icon_info_lookup_from_name (BAUL_ICON_DESKTOP, 48, scale);
 }
 
@@ -334,7 +334,7 @@ baul_desktop_window_class_init (BaulDesktopWindowClass *klass)
     wclass->map = map;
     wclass->draw = draw;
 
-    gtk_widget_class_set_accessible_type (wclass, BAUL_TYPE_DESKTOP_WINDOW_ACCESSIBLE);
+    ctk_widget_class_set_accessible_type (wclass, BAUL_TYPE_DESKTOP_WINDOW_ACCESSIBLE);
 
     nclass->window_type = BAUL_WINDOW_DESKTOP;
     nclass->get_icon = real_get_icon;

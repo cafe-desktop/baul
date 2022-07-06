@@ -29,7 +29,7 @@
 #include <locale.h>
 
 #include <libxml/parser.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-glib-extensions.h>
@@ -82,7 +82,7 @@ should_open_in_new_tab (void)
     /* FIXME this is duplicated */
     GdkEvent *event;
 
-    event = gtk_get_current_event ();
+    event = ctk_get_current_event ();
 
     if (event == NULL)
     {
@@ -122,7 +122,7 @@ forget_history_if_yes (GtkDialog *dialog, int response, gpointer callback_data)
     {
         baul_forget_history ();
     }
-    gtk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
@@ -137,12 +137,12 @@ forget_history_if_confirmed (BaulWindow *window)
                                          "edit-clear", RESPONSE_FORGET,
                                          GTK_WINDOW (window));
 
-    gtk_widget_show (GTK_WIDGET (dialog));
+    ctk_widget_show (GTK_WIDGET (dialog));
 
     g_signal_connect (dialog, "response",
                       G_CALLBACK (forget_history_if_yes), NULL);
 
-    gtk_dialog_set_default_response (dialog, GTK_RESPONSE_CANCEL);
+    ctk_dialog_set_default_response (dialog, GTK_RESPONSE_CANCEL);
 }
 
 static void
@@ -191,7 +191,7 @@ action_show_hide_toolbar_callback (GtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_toolbar (window);
     }
@@ -213,7 +213,7 @@ action_show_hide_sidebar_callback (GtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_sidebar (window);
     }
@@ -251,7 +251,7 @@ action_show_hide_location_bar_callback (GtkAction *action,
     window = BAUL_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    is_active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+    is_active = ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Do the active pane first, because this will trigger an update of the menu items,
@@ -273,7 +273,7 @@ action_show_hide_statusbar_callback (GtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_status_bar (window);
     }
@@ -294,7 +294,7 @@ action_split_view_callback (GtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    is_active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+    is_active = ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
     if (is_active != baul_navigation_window_split_view_showing (window))
     {
@@ -324,29 +324,29 @@ baul_navigation_window_update_show_hide_menu_items (BaulNavigationWindow *window
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (window->details->navigation_action_group,
+    action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_TOOLBAR);
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_toolbar_showing (window));
 
-    action = gtk_action_group_get_action (window->details->navigation_action_group,
+    action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_SIDEBAR);
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_sidebar_showing (window));
 
-    action = gtk_action_group_get_action (window->details->navigation_action_group,
+    action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_LOCATION_BAR);
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_pane_location_bar_showing (BAUL_NAVIGATION_WINDOW_PANE (BAUL_WINDOW (window)->details->active_pane)));
 
-    action = gtk_action_group_get_action (window->details->navigation_action_group,
+    action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_STATUSBAR);
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_status_bar_showing (window));
 
-    action = gtk_action_group_get_action (window->details->navigation_action_group,
+    action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_EXTRA_PANE);
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_split_view_showing (window));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -359,9 +359,9 @@ baul_navigation_window_update_spatial_menu_item (BaulNavigationWindow *window)
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (window->details->navigation_action_group,
+    action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_FOLDER_WINDOW);
-    gtk_action_set_visible (action,
+    ctk_action_set_visible (action,
                             !g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
@@ -398,13 +398,13 @@ baul_navigation_window_remove_go_menu_items (BaulNavigationWindow *window)
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
     if (window->details->go_menu_merge_id != 0)
     {
-        gtk_ui_manager_remove_ui (ui_manager,
+        ctk_ui_manager_remove_ui (ui_manager,
                                   window->details->go_menu_merge_id);
         window->details->go_menu_merge_id = 0;
     }
     if (window->details->go_menu_action_group != NULL)
     {
-        gtk_ui_manager_remove_action_group (ui_manager,
+        ctk_ui_manager_remove_action_group (ui_manager,
                                             window->details->go_menu_action_group);
         window->details->go_menu_action_group = NULL;
     }
@@ -443,11 +443,11 @@ connect_proxy_cb (GtkActionGroup *action_group,
     if (!GTK_IS_MENU_ITEM (proxy))
         return;
 
-    label = GTK_LABEL (gtk_bin_get_child (GTK_BIN (proxy)));
+    label = GTK_LABEL (ctk_bin_get_child (GTK_BIN (proxy)));
 
-    gtk_label_set_use_underline (label, FALSE);
-    gtk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
-    gtk_label_set_max_width_chars (label, MENU_ITEM_MAX_WIDTH_CHARS);
+    ctk_label_set_use_underline (label, FALSE);
+    ctk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
+    ctk_label_set_max_width_chars (label, MENU_ITEM_MAX_WIDTH_CHARS);
 }
 
 /**
@@ -473,14 +473,14 @@ refresh_go_menu (BaulNavigationWindow *window)
 
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
 
-    window->details->go_menu_merge_id = gtk_ui_manager_new_merge_id (ui_manager);
+    window->details->go_menu_merge_id = ctk_ui_manager_new_merge_id (ui_manager);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    window->details->go_menu_action_group = gtk_action_group_new ("GoMenuGroup");
+    window->details->go_menu_action_group = ctk_action_group_new ("GoMenuGroup");
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_connect (window->details->go_menu_action_group, "connect-proxy",
                       G_CALLBACK (connect_proxy_cb), NULL);
 
-    gtk_ui_manager_insert_action_group (ui_manager,
+    ctk_ui_manager_insert_action_group (ui_manager,
                                         window->details->go_menu_action_group,
                                         -1);
     g_object_unref (window->details->go_menu_action_group);
@@ -583,12 +583,12 @@ baul_navigation_window_update_split_view_actions_sensitivity (BaulNavigationWind
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     /* switch to next pane */
-    action = gtk_action_group_get_action (action_group, "SplitViewNextPane");
-    gtk_action_set_sensitive (action, have_multiple_panes);
+    action = ctk_action_group_get_action (action_group, "SplitViewNextPane");
+    ctk_action_set_sensitive (action, have_multiple_panes);
 
     /* same location */
-    action = gtk_action_group_get_action (action_group, "SplitViewSameLocation");
-    gtk_action_set_sensitive (action, have_multiple_panes && !next_pane_is_in_same_location);
+    action = ctk_action_group_get_action (action_group, "SplitViewSameLocation");
+    ctk_action_set_sensitive (action, have_multiple_panes && !next_pane_is_in_same_location);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* clean up */
@@ -639,7 +639,7 @@ action_folder_window_callback (GtkAction *action,
              current_window,
              NULL,
              current_location,
-             gtk_window_get_screen (GTK_WINDOW (current_window)),
+             ctk_window_get_screen (GTK_WINDOW (current_window)),
              NULL);
 
     baul_window_go_to (window, current_location);
@@ -674,10 +674,10 @@ action_show_search_callback (GtkAction *action,
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     search_action =
-        gtk_action_group_get_action (window->details->navigation_action_group,
+        ctk_action_group_get_action (window->details->navigation_action_group,
                                      BAUL_ACTION_SEARCH);
 
-    if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (search_action)))
+    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (search_action)))
     {
         /* Already visible, just show it */
         baul_navigation_window_show_search (window);
@@ -685,7 +685,7 @@ action_show_search_callback (GtkAction *action,
     else
     {
         /* Otherwise, enable */
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (search_action),
+        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (search_action),
                                       TRUE);
     }
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -708,7 +708,7 @@ action_show_hide_search_callback (GtkAction *action,
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    var_action = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+    var_action = ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (var_action)
@@ -814,9 +814,9 @@ action_tab_change_action_activate_callback (GtkAction *action, gpointer user_dat
         {
             int num;
             num = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (action), "num"));
-            if (num < gtk_notebook_get_n_pages (notebook))
+            if (num < ctk_notebook_get_n_pages (notebook))
             {
-                gtk_notebook_set_current_page (notebook, num);
+                ctk_notebook_set_current_page (notebook, num);
             }
         }
     }
@@ -945,13 +945,13 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
     int i;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action_group = gtk_action_group_new ("NavigationActions");
-    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+    action_group = ctk_action_group_new ("NavigationActions");
+    ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     window->details->navigation_action_group = action_group;
-    gtk_action_group_add_actions (action_group,
+    ctk_action_group_add_actions (action_group,
                                   navigation_entries, G_N_ELEMENTS (navigation_entries),
                                   window);
-    gtk_action_group_add_toggle_actions (action_group,
+    ctk_action_group_add_toggle_actions (action_group,
                                          navigation_toggle_entries, G_N_ELEMENTS (navigation_toggle_entries),
                                          window);
 
@@ -967,7 +967,7 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
                            NULL);
     g_signal_connect (action, "activate",
                       G_CALLBACK (action_back_callback), window);
-    gtk_action_group_add_action_with_accel (action_group,
+    ctk_action_group_add_action_with_accel (action_group,
                                             action,
                                             "<alt>Left");
     g_object_unref (action);
@@ -984,7 +984,7 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
                            NULL);
     g_signal_connect (action, "activate",
                       G_CALLBACK (action_forward_callback), window);
-    gtk_action_group_add_action_with_accel (action_group,
+    ctk_action_group_add_action_with_accel (action_group,
                                             action,
                                             "<alt>Right");
 
@@ -996,7 +996,7 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
                            "window", window,
                            "is_important", FALSE,
                            NULL);
-    gtk_action_group_add_action (action_group,
+    ctk_action_group_add_action (action_group,
                                  action);
     g_object_unref (action);
 
@@ -1006,7 +1006,7 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
                            "window", window,
                            "is_important", FALSE,
                            NULL);
-    gtk_action_group_add_action (action_group,
+    ctk_action_group_add_action (action_group,
                                  action);
     g_object_unref (action);
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -1021,16 +1021,16 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
 
         snprintf(action_name, sizeof (action_name), "Tab%d", i);
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        action = gtk_action_new (action_name, NULL, NULL, NULL);
+        action = ctk_action_new (action_name, NULL, NULL, NULL);
         g_object_set_data (G_OBJECT (action), "num", GINT_TO_POINTER (i));
         g_signal_connect (action, "activate",
                           G_CALLBACK (action_tab_change_action_activate_callback), window);
         snprintf(accelerator, sizeof (accelerator), "<alt>%d", (i+1)%10);
-        gtk_action_group_add_action_with_accel (action_group, action, accelerator);
+        ctk_action_group_add_action_with_accel (action_group, action, accelerator);
         g_object_unref (action);
         G_GNUC_END_IGNORE_DEPRECATIONS;
-        gtk_ui_manager_add_ui (ui_manager,
-                               gtk_ui_manager_new_merge_id (ui_manager),
+        ctk_ui_manager_add_ui (ui_manager,
+                               ctk_ui_manager_new_merge_id (ui_manager),
                                "/",
                                action_name,
                                action_name,
@@ -1040,14 +1040,14 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (action_group, BAUL_ACTION_SEARCH);
+    action = ctk_action_group_get_action (action_group, BAUL_ACTION_SEARCH);
     g_object_set (action, "short_label", _("_Search"), NULL);
 
-    action = gtk_action_group_get_action (action_group, "ShowSearch");
-    gtk_action_set_sensitive (action, TRUE);
+    action = ctk_action_group_get_action (action_group, "ShowSearch");
+    ctk_action_set_sensitive (action, TRUE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
-    gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
+    ctk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui_manager */
 
     g_signal_connect (window, "loading_uri",
@@ -1073,7 +1073,7 @@ baul_navigation_window_initialize_menus (BaulNavigationWindow *window)
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
 
     ui = baul_ui_string_get ("baul-navigation-window-ui.xml");
-    gtk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
+    ctk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
 
     baul_navigation_window_update_show_hide_menu_items (window);
     baul_navigation_window_update_spatial_menu_item (window);

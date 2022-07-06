@@ -26,7 +26,7 @@
 #define BAUL_FILE_UTILITIES_H
 
 #include <gio/gio.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_SAVED_SEARCH_EXTENSION ".savedSearch"
 #define BAUL_SAVED_SEARCH_MIMETYPE "application/x-cafe-saved-search"

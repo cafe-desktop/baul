@@ -26,7 +26,7 @@
 #ifndef BAUL_TRASH_MONITOR_H
 #define BAUL_TRASH_MONITOR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 typedef struct BaulTrashMonitor BaulTrashMonitor;

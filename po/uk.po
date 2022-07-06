@@ -536,7 +536,7 @@ msgstr "Вст_авити"
 msgid "Select All"
 msgstr "Виділити усе"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Показати _докладно"
 

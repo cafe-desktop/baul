@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-image-table.h>
 
@@ -167,7 +167,7 @@ foo_timeout (gpointer callback_data)
 	recursion_count++;
 
 	g_print ("%s(%d)\n", G_STRFUNC, recursion_count);
-	gtk_widget_queue_resize (GTK_WIDGET (callback_data));
+	ctk_widget_queue_resize (GTK_WIDGET (callback_data));
 
 	recursion_count--;
 
@@ -190,10 +190,10 @@ image_table_size_allocate (GtkWidget *image_table,
 
 	if (0) g_timeout_add (0, foo_timeout, callback_data);
 
-	/*gtk_widget_queue_resize (GTK_WIDGET (callback_data));*/
+	/*ctk_widget_queue_resize (GTK_WIDGET (callback_data));*/
 
-	gtk_widget_get_allocation (GTK_WIDGET (image_table), &w_allocation);
-	if (0) gtk_widget_size_allocate (GTK_WIDGET (image_table),
+	ctk_widget_get_allocation (GTK_WIDGET (image_table), &w_allocation);
+	if (0) ctk_widget_size_allocate (GTK_WIDGET (image_table),
 					 &w_allocation);
 
 	g_print ("%s(%d)\n", G_STRFUNC, recursion_count);
@@ -212,19 +212,19 @@ image_table_new_scrolled (void)
 
 	window = test_window_new ("Image Table Test", 10);
 
-	gtk_window_set_default_size (GTK_WINDOW (window), 400, 300);
+	ctk_window_set_default_size (GTK_WINDOW (window), 400, 300);
 
 	/* Scrolled window */
-	scrolled = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
+	scrolled = ctk_scrolled_window_new (NULL, NULL);
+	ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
-	gtk_container_add (GTK_CONTAINER (window), scrolled);
+	ctk_container_add (GTK_CONTAINER (window), scrolled);
 
 	/* Viewport */
- 	viewport = gtk_viewport_new (NULL, NULL);
-	gtk_viewport_set_shadow_type (GTK_VIEWPORT (viewport), GTK_SHADOW_OUT);
-	gtk_container_add (GTK_CONTAINER (scrolled), viewport);
+ 	viewport = ctk_viewport_new (NULL, NULL);
+	ctk_viewport_set_shadow_type (GTK_VIEWPORT (viewport), GTK_SHADOW_OUT);
+	ctk_container_add (GTK_CONTAINER (scrolled), viewport);
 
 	image_table = eel_image_table_new (FALSE);
 
@@ -238,7 +238,7 @@ image_table_new_scrolled (void)
 	eel_wrap_table_set_y_justification (EEL_WRAP_TABLE (image_table),
 						 EEL_JUSTIFICATION_END);
 
-	gtk_container_add (GTK_CONTAINER (viewport), image_table);
+	ctk_container_add (GTK_CONTAINER (viewport), image_table);
 
 	g_signal_connect (image_table,
 			    "child_enter",
@@ -275,13 +275,13 @@ image_table_new_scrolled (void)
 		image = labeled_image_new (text, pixbuf_name);
 		g_free (text);
 
-		gtk_container_add (GTK_CONTAINER (image_table), image);
-		gtk_widget_show (image);
+		ctk_container_add (GTK_CONTAINER (image_table), image);
+		ctk_widget_show (image);
 	}
 
-	gtk_widget_show (viewport);
-	gtk_widget_show (scrolled);
-	gtk_widget_show (image_table);
+	ctk_widget_show (viewport);
+	ctk_widget_show (scrolled);
+	ctk_widget_show (image_table);
 
 	return window;
 }
@@ -295,9 +295,9 @@ main (int argc, char* argv[])
 
 	window = image_table_new_scrolled ();
 
-	gtk_widget_show (window);
+	ctk_widget_show (window);
 
-	gtk_main ();
+	ctk_main ();
 
 	return 0;
 }

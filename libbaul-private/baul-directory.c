@@ -23,11 +23,11 @@
 */
 
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <string.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 
 #include "baul-directory-private.h"
 #include "baul-directory-notify.h"
@@ -1755,7 +1755,7 @@ baul_self_check_directory (void)
 
     while (g_hash_table_size (directories) != 0)
     {
-        gtk_main_iteration ();
+        ctk_main_iteration ();
     }
 
     EEL_CHECK_INTEGER_RESULT (g_hash_table_size (directories), 0);
@@ -1772,7 +1772,7 @@ baul_self_check_directory (void)
 
     while (!got_files_flag)
     {
-        gtk_main_iteration ();
+        ctk_main_iteration ();
     }
 
     EEL_CHECK_BOOLEAN_RESULT (directory->details->file_list == NULL, TRUE);

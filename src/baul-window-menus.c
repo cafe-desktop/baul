@@ -29,11 +29,11 @@
 #include <locale.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include <libbaul-extension/baul-menu-provider.h>
 #include <libbaul-private/baul-extensions.h>
@@ -121,7 +121,7 @@ should_open_in_new_tab (void)
     /* FIXME this is duplicated */
     GdkEvent *event;
 
-    event = gtk_get_current_event ();
+    event = ctk_get_current_event ();
 
     if (event == NULL)
     {
@@ -194,7 +194,7 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
     g_snprintf (action_name, sizeof (action_name), "%s%d", parent_id, index_in_parent);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_new (action_name,
+    action = ctk_action_new (action_name,
                              name,
                              _("Go to the location specified by this bookmark"),
                              NULL);
@@ -210,13 +210,13 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
                            bookmark_holder_free_cover, 0);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    gtk_action_group_add_action (action_group,
+    ctk_action_group_add_action (action_group,
                                  GTK_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     g_object_unref (action);
 
-    gtk_ui_manager_add_ui (window->details->ui_manager,
+    ctk_ui_manager_add_ui (window->details->ui_manager,
                            merge_id,
                            parent_path,
                            action_name,
@@ -225,9 +225,9 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
                            FALSE);
 
     path = g_strdup_printf ("%s/%s", parent_path, action_name);
-    menuitem = gtk_ui_manager_get_widget (window->details->ui_manager,
+    menuitem = ctk_ui_manager_get_widget (window->details->ui_manager,
                                           path);
-    gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem),
+    ctk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem),
             TRUE);
 
     cairo_surface_destroy (surface);
@@ -257,7 +257,7 @@ action_connect_to_server_callback (GtkAction *action,
 
     dialog = baul_connect_server_dialog_new (window);
 
-    gtk_widget_show (dialog);
+    ctk_widget_show (dialog);
 }
 
 static void
@@ -400,7 +400,7 @@ action_show_hidden_files_callback (GtkAction *action,
     window = BAUL_WINDOW (callback_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
         mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_ENABLE;
     }
@@ -423,7 +423,7 @@ action_show_backup_files_callback (GtkAction *action,
     window = BAUL_WINDOW (callback_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
     {
         mode = BAUL_WINDOW_SHOW_BACKUP_FILES_ENABLE;
     }
@@ -448,12 +448,12 @@ show_hidden_files_preference_callback (gpointer callback_data)
         GtkAction *action;
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        action = gtk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
+        action = ctk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
         g_assert (GTK_IS_ACTION (action));
 
         /* update button */
         g_signal_handlers_block_by_func (action, action_show_hidden_files_callback, window);
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                       g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_HIDDEN_FILES));
         G_GNUC_END_IGNORE_DEPRECATIONS;
         g_signal_handlers_unblock_by_func (action, action_show_hidden_files_callback, window);
@@ -476,12 +476,12 @@ show_backup_files_preference_callback (gpointer callback_data)
         GtkAction *action;
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        action = gtk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
+        action = ctk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
         g_assert (GTK_IS_ACTION (action));
 
         /* update button */
         g_signal_handlers_block_by_func (action, action_show_backup_files_callback, window);
-        gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                       g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_BACKUP_FILES));
         G_GNUC_END_IGNORE_DEPRECATIONS;
         g_signal_handlers_unblock_by_func (action, action_show_backup_files_callback, window);
@@ -497,7 +497,7 @@ preferences_respond_callback (GtkDialog *dialog,
 {
     if (response_id == GTK_RESPONSE_CLOSE)
     {
-        gtk_widget_destroy (GTK_WIDGET (dialog));
+        ctk_widget_destroy (GTK_WIDGET (dialog));
     }
 }
 
@@ -520,7 +520,7 @@ action_backgrounds_and_emblems_callback (GtkAction *action,
 
     window = GTK_WINDOW (user_data);
 
-    baul_property_browser_show (gtk_window_get_screen (window));
+    baul_property_browser_show (ctk_window_get_screen (window));
 }
 
 #define ABOUT_GROUP "About"
@@ -570,7 +570,7 @@ action_about_baul_callback (GtkAction *action,
 
     license_trans = g_strjoin ("\n\n", _(license[0]), _(license[1]), _(license[2]), NULL);
 
-    gtk_show_about_dialog (GTK_WINDOW (user_data),
+    ctk_show_about_dialog (GTK_WINDOW (user_data),
                            "program-name", _("Baul"),
                            "title", _("About Baul"),
                            "version", VERSION,
@@ -612,28 +612,28 @@ action_baul_manual_callback (GtkAction *action,
     error = NULL;
     window = BAUL_WINDOW (user_data);
 
-    gtk_show_uri_on_window (GTK_WINDOW (window),
+    ctk_show_uri_on_window (GTK_WINDOW (window),
                             BAUL_IS_DESKTOP_WINDOW (window)
                                ? "help:cafe-user-guide"
                                : "help:cafe-user-guide/gosbaul-1",
-                            gtk_get_current_event_time (), &error);
+                            ctk_get_current_event_time (), &error);
 
     if (error)
     {
         GtkWidget *dialog;
 
-        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+        dialog = ctk_message_dialog_new (GTK_WINDOW (window),
                                          GTK_DIALOG_MODAL,
                                          GTK_MESSAGE_ERROR,
                                          GTK_BUTTONS_OK,
                                          _("There was an error displaying help: \n%s"),
                                          error->message);
         g_signal_connect (G_OBJECT (dialog), "response",
-                          G_CALLBACK (gtk_widget_destroy),
+                          G_CALLBACK (ctk_widget_destroy),
                           NULL);
 
-        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-        gtk_widget_show (dialog);
+        ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+        ctk_widget_show (dialog);
         g_error_free (error);
     }
 }
@@ -646,14 +646,14 @@ menu_item_select_cb (GtkMenuItem *proxy,
     char *message;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_activatable_get_related_action (GTK_ACTIVATABLE (proxy));
+    action = ctk_activatable_get_related_action (GTK_ACTIVATABLE (proxy));
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_return_if_fail (action != NULL);
 
     g_object_get (G_OBJECT (action), "tooltip", &message, NULL);
     if (message)
     {
-        gtk_statusbar_push (GTK_STATUSBAR (window->details->statusbar),
+        ctk_statusbar_push (GTK_STATUSBAR (window->details->statusbar),
                             window->details->help_message_cid, message);
         g_free (message);
     }
@@ -663,7 +663,7 @@ static void
 menu_item_deselect_cb (GtkMenuItem *proxy,
                        BaulWindow *window)
 {
-    gtk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar),
+    ctk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar),
                        window->details->help_message_cid);
 }
 
@@ -684,12 +684,12 @@ get_event_widget (GtkWidget *proxy)
     }
     else if (GTK_IS_MENU_TOOL_BUTTON (proxy))
     {
-        widget = eel_gtk_menu_tool_button_get_button (GTK_MENU_TOOL_BUTTON (proxy));
+        widget = eel_ctk_menu_tool_button_get_button (GTK_MENU_TOOL_BUTTON (proxy));
     }
     else if (GTK_IS_TOOL_BUTTON (proxy))
     {
         /* The tool button's button is the direct child */
-        widget = gtk_bin_get_child (GTK_BIN (proxy));
+        widget = ctk_bin_get_child (GTK_BIN (proxy));
     }
     else if (GTK_IS_BUTTON (proxy))
     {
@@ -780,8 +780,8 @@ connect_proxy_cb (GtkUIManager *manager,
         icon = g_object_get_data (G_OBJECT (action), "menu-icon");
         if (icon != NULL)
         {
-            gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (proxy),
-                                           gtk_image_new_from_surface (icon));
+            ctk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (proxy),
+                                           ctk_image_new_from_surface (icon));
         }
     }
     if (GTK_IS_TOOL_BUTTON (proxy))
@@ -789,9 +789,9 @@ connect_proxy_cb (GtkUIManager *manager,
         icon = g_object_get_data (G_OBJECT (action), "toolbar-icon");
         if (icon != NULL)
         {
-            widget = gtk_image_new_from_surface (icon);
-            gtk_widget_show (widget);
-            gtk_tool_button_set_icon_widget (GTK_TOOL_BUTTON (proxy),
+            widget = ctk_image_new_from_surface (icon);
+            ctk_widget_show (widget);
+            ctk_tool_button_set_icon_widget (GTK_TOOL_BUTTON (proxy),
                                              widget);
         }
     }
@@ -819,7 +819,7 @@ trash_state_changed_cb (BaulTrashMonitor *monitor,
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action_group = window->details->main_action_group;
-    action = gtk_action_group_get_action (action_group, "Go to Trash");
+    action = ctk_action_group_get_action (action_group, "Go to Trash");
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     gicon = baul_trash_monitor_get_icon ();
@@ -989,34 +989,34 @@ baul_window_initialize_menus (BaulWindow *window)
     const char *ui;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action_group = gtk_action_group_new ("ShellActions");
-    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+    action_group = ctk_action_group_new ("ShellActions");
+    ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     window->details->main_action_group = action_group;
-    gtk_action_group_add_actions (action_group,
+    ctk_action_group_add_actions (action_group,
                                   main_entries, G_N_ELEMENTS (main_entries),
                                   window);
-    gtk_action_group_add_toggle_actions (action_group,
+    ctk_action_group_add_toggle_actions (action_group,
                                          main_toggle_entries, G_N_ELEMENTS (main_toggle_entries),
                                          window);
 
-    action = gtk_action_group_get_action (action_group, BAUL_ACTION_UP);
+    action = ctk_action_group_get_action (action_group, BAUL_ACTION_UP);
     g_object_set (action, "short_label", _("_Up"), NULL);
 
-    action = gtk_action_group_get_action (action_group, BAUL_ACTION_HOME);
+    action = ctk_action_group_get_action (action_group, BAUL_ACTION_HOME);
     g_object_set (action, "short_label", _("_Home"), NULL);
 
-    action = gtk_action_group_get_action (action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
+    action = ctk_action_group_get_action (action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
     g_signal_handlers_block_by_func (action, action_show_hidden_files_callback, window);
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                   g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_HIDDEN_FILES));
     g_signal_handlers_unblock_by_func (action, action_show_hidden_files_callback, window);
     g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_SHOW_HIDDEN_FILES,
                               G_CALLBACK(show_hidden_files_preference_callback),
                               window);
 
-    action = gtk_action_group_get_action (action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
+    action = ctk_action_group_get_action (action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
     g_signal_handlers_block_by_func (action, action_show_backup_files_callback, window);
-    gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                   g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_BACKUP_FILES));
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_handlers_unblock_by_func (action, action_show_backup_files_callback, window);
@@ -1025,21 +1025,21 @@ baul_window_initialize_menus (BaulWindow *window)
                               G_CALLBACK(show_backup_files_preference_callback),
                               window);
 
-    window->details->ui_manager = gtk_ui_manager_new ();
+    window->details->ui_manager = ctk_ui_manager_new ();
     ui_manager = window->details->ui_manager;
-    gtk_window_add_accel_group (GTK_WINDOW (window),
-                                gtk_ui_manager_get_accel_group (ui_manager));
+    ctk_window_add_accel_group (GTK_WINDOW (window),
+                                ctk_ui_manager_get_accel_group (ui_manager));
 
     g_signal_connect (ui_manager, "connect_proxy",
                       G_CALLBACK (connect_proxy_cb), window);
     g_signal_connect (ui_manager, "disconnect_proxy",
                       G_CALLBACK (disconnect_proxy_cb), window);
 
-    gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
+    ctk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui manager */
 
     ui = baul_ui_string_get ("baul-shell-ui.xml");
-    gtk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
+    ctk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
 
     baul_window_initialize_trash_icon_monitor (window);
 }
@@ -1117,12 +1117,12 @@ add_extension_menu_items (BaulWindow *window,
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         action = baul_action_from_menu_item (item, GTK_WIDGET (window));
-        gtk_action_group_add_action_with_accel (action_group, action, NULL);
-        action_name = gtk_action_get_name (action);
+        ctk_action_group_add_action_with_accel (action_group, action, NULL);
+        action_name = ctk_action_get_name (action);
         G_GNUC_END_IGNORE_DEPRECATIONS;
 
         path = g_build_path ("/", POPUP_PATH_EXTENSION_ACTIONS, subdirectory, NULL);
-        gtk_ui_manager_add_ui (ui_manager,
+        ctk_ui_manager_add_ui (ui_manager,
                                merge_id,
                                path,
                                action_name,
@@ -1132,7 +1132,7 @@ add_extension_menu_items (BaulWindow *window,
         g_free (path);
 
         path = g_build_path ("/", MENU_PATH_EXTENSION_ACTIONS, subdirectory, NULL);
-        gtk_ui_manager_add_ui (ui_manager,
+        ctk_ui_manager_add_ui (ui_manager,
                                merge_id,
                                path,
                                action_name,
@@ -1150,7 +1150,7 @@ add_extension_menu_items (BaulWindow *window,
             children = baul_menu_get_items (menu);
 
             G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-            subdir = g_build_path ("/", subdirectory, "/", gtk_action_get_name (action), NULL);
+            subdir = g_build_path ("/", subdirectory, "/", ctk_action_get_name (action), NULL);
             G_GNUC_END_IGNORE_DEPRECATIONS;
             add_extension_menu_items (window,
                                       merge_id,
@@ -1173,26 +1173,26 @@ baul_window_load_extension_menus (BaulWindow *window)
 
     if (window->details->extensions_menu_merge_id != 0)
     {
-        gtk_ui_manager_remove_ui (window->details->ui_manager,
+        ctk_ui_manager_remove_ui (window->details->ui_manager,
                                   window->details->extensions_menu_merge_id);
         window->details->extensions_menu_merge_id = 0;
     }
 
     if (window->details->extensions_menu_action_group != NULL)
     {
-        gtk_ui_manager_remove_action_group (window->details->ui_manager,
+        ctk_ui_manager_remove_action_group (window->details->ui_manager,
                                             window->details->extensions_menu_action_group);
         window->details->extensions_menu_action_group = NULL;
     }
 
-    merge_id = gtk_ui_manager_new_merge_id (window->details->ui_manager);
+    merge_id = ctk_ui_manager_new_merge_id (window->details->ui_manager);
     window->details->extensions_menu_merge_id = merge_id;
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action_group = gtk_action_group_new ("ExtensionsMenuGroup");
+    action_group = ctk_action_group_new ("ExtensionsMenuGroup");
     window->details->extensions_menu_action_group = action_group;
-    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+    ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
-    gtk_ui_manager_insert_action_group (window->details->ui_manager, action_group, 0);
+    ctk_ui_manager_insert_action_group (window->details->ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui manager */
 
     items = get_extension_menus (window);

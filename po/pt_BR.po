@@ -550,7 +550,7 @@ msgstr "C_olar"
 msgid "Select All"
 msgstr "Selecionar tudo"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Mostrar mais _detalhes"
 

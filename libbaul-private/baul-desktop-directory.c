@@ -25,10 +25,10 @@
 */
 
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 
 #include "baul-desktop-directory.h"
 #include "baul-directory-private.h"

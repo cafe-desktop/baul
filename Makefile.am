@@ -25,7 +25,7 @@ EXTRA_DIST = \
 DISTCHECK_CONFIGURE_FLAGS = \
 	--disable-update-mimedb \
 	--disable-icon-update \
-	--enable-gtk-doc \
+	--enable-ctk-doc \
 	--disable-self-check \
 	CFLAGS='-Wno-deprecated-declarations'
 

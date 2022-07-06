@@ -31,11 +31,11 @@
 
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
-#include <eel/eel-gtk-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-extensions.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-string.h>
 
 #include <libbaul-private/baul-dnd.h>
@@ -237,12 +237,12 @@ baul_spatial_window_save_geometry (BaulSpatialWindow *window,
         return;
     }
 
-    if (gtk_widget_get_window (GTK_WIDGET (window)) &&
-    	    gtk_widget_get_visible (GTK_WIDGET (window)) &&
+    if (ctk_widget_get_window (GTK_WIDGET (window)) &&
+    	    ctk_widget_get_visible (GTK_WIDGET (window)) &&
 	    !BAUL_IS_DESKTOP_WINDOW (window) &&
-            !(gdk_window_get_state (gtk_widget_get_window (GTK_WIDGET(window))) & GDK_WINDOW_STATE_MAXIMIZED)) {
+            !(gdk_window_get_state (ctk_widget_get_window (GTK_WIDGET(window))) & GDK_WINDOW_STATE_MAXIMIZED)) {
 
-        geometry_string = eel_gtk_window_get_geometry_string (GTK_WINDOW (window));
+        geometry_string = eel_ctk_window_get_geometry_string (GTK_WINDOW (window));
 
         if (!g_strcmp0 (window->details->last_geometry, geometry_string)) {
         	/* Don't save geometry if it's the same as before. */
@@ -374,7 +374,7 @@ real_prompt_for_location (BaulWindow *window,
                                            initial);
     }
 
-    gtk_widget_show (dialog);
+    ctk_widget_show (dialog);
 }
 
 static BaulIconInfo *
@@ -382,7 +382,7 @@ real_get_icon (BaulWindow *window,
                BaulWindowSlot *slot)
 {
     return baul_file_get_icon (slot->viewed_file,
-                               48, gtk_widget_get_scale_factor (GTK_WIDGET (window)),
+                               48, ctk_widget_get_scale_factor (GTK_WIDGET (window)),
                                BAUL_FILE_ICON_FLAGS_IGNORE_VISITING |
                                BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON);
 }
@@ -400,14 +400,14 @@ sync_window_title (BaulWindow *window)
 
     if (slot->title == NULL || slot->title[0] == '\0')
     {
-        gtk_window_set_title (GTK_WINDOW (window), _("Baul"));
+        ctk_window_set_title (GTK_WINDOW (window), _("Baul"));
     }
     else
     {
         char *window_title;
 
         window_title = eel_str_middle_truncate (slot->title, MAX_TITLE_LENGTH);
-        gtk_window_set_title (GTK_WINDOW (window), window_title);
+        ctk_window_set_title (GTK_WINDOW (window), window_title);
         g_free (window_title);
     }
 }
@@ -464,9 +464,9 @@ real_set_allow_up (BaulWindow *window, gboolean allow)
     spatial = BAUL_SPATIAL_WINDOW (window);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_group_get_action (spatial->details->spatial_action_group,
+    action = ctk_action_group_get_action (spatial->details->spatial_action_group,
                                           SPATIAL_ACTION_CLOSE_PARENT_FOLDERS);
-    gtk_action_set_sensitive (action, allow);
+    ctk_action_set_sensitive (action, allow);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     BAUL_WINDOW_CLASS (baul_spatial_window_parent_class)->set_allow_up (window, allow);
@@ -487,9 +487,9 @@ real_open_slot (BaulWindowPane *pane,
 
     slot = g_object_new (BAUL_TYPE_WINDOW_SLOT, NULL);
     slot->pane = pane;
-    gtk_container_add (GTK_CONTAINER (BAUL_SPATIAL_WINDOW (pane->window)->details->content_box),
+    ctk_container_add (GTK_CONTAINER (BAUL_SPATIAL_WINDOW (pane->window)->details->content_box),
                        slot->content_box);
-    gtk_widget_show (slot->content_box);
+    ctk_widget_show (slot->content_box);
     return slot;
 }
 
@@ -556,7 +556,7 @@ location_menu_item_activated_callback (GtkWidget *menu_item,
 	current = baul_window_slot_get_location (slot);
 	dest = g_object_get_data (G_OBJECT (menu_item), "location");
 
-    event = gtk_get_current_event();
+    event = ctk_get_current_event();
 
     if (!g_file_equal (current, dest))
     {
@@ -637,9 +637,9 @@ location_button_clicked_callback (GtkWidget         *widget,
 
     slot = baul_window_get_active_slot (BAUL_WINDOW (window));
 
-    popup = gtk_menu_new ();
+    popup = ctk_menu_new ();
 
-    gtk_menu_set_reserve_toggle_size (GTK_MENU (popup), FALSE);
+    ctk_menu_set_reserve_toggle_size (GTK_MENU (popup), FALSE);
 
     first_item = NULL;
 
@@ -660,7 +660,7 @@ location_button_clicked_callback (GtkWidget         *widget,
         surface = baul_file_get_icon_surface (file,
                                               baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
                                               TRUE,
-                                              gtk_widget_get_scale_factor (widget),
+                                              ctk_widget_get_scale_factor (widget),
                                               BAUL_FILE_ICON_FLAGS_IGNORE_VISITING);
 
         if (surface != NULL)
@@ -677,7 +677,7 @@ location_button_clicked_callback (GtkWidget         *widget,
             first_item = menu_item;
         }
 
-        gtk_widget_show (menu_item);
+        ctk_widget_show (menu_item);
         g_signal_connect (menu_item, "activate",
                           G_CALLBACK (location_menu_item_activated_callback),
                           window);
@@ -694,7 +694,7 @@ location_button_clicked_callback (GtkWidget         *widget,
                                     (GDestroyNotify)g_object_unref);
         }
 
-        gtk_menu_shell_prepend (GTK_MENU_SHELL (popup), menu_item);
+        ctk_menu_shell_prepend (GTK_MENU_SHELL (popup), menu_item);
 
         if (child_location) {
             g_object_unref (child_location);
@@ -710,7 +710,7 @@ location_button_clicked_callback (GtkWidget         *widget,
         g_object_unref (location);
     }
 
-    gtk_menu_set_screen (GTK_MENU (popup), gtk_widget_get_screen (widget));
+    ctk_menu_set_screen (GTK_MENU (popup), ctk_widget_get_screen (widget));
 
     loop = g_main_loop_new (NULL, FALSE);
 
@@ -718,16 +718,16 @@ location_button_clicked_callback (GtkWidget         *widget,
                       G_CALLBACK (menu_deactivate_callback),
                       loop);
 
-    gtk_grab_add (popup);
-    gtk_menu_popup_at_widget (GTK_MENU (popup),
+    ctk_grab_add (popup);
+    ctk_menu_popup_at_widget (GTK_MENU (popup),
                               widget,
                               GDK_GRAVITY_SOUTH_WEST,
                               GDK_GRAVITY_NORTH_WEST,
                               NULL);
 
-    gtk_menu_shell_select_item (GTK_MENU_SHELL (popup), first_item);
+    ctk_menu_shell_select_item (GTK_MENU_SHELL (popup), first_item);
     g_main_loop_run (loop);
-    gtk_grab_remove (popup);
+    ctk_grab_remove (popup);
     g_main_loop_unref (loop);
     g_object_ref_sink (popup);
     g_object_unref (popup);
@@ -767,10 +767,10 @@ location_button_drag_begin_callback (GtkWidget             *widget,
     surface = baul_file_get_icon_surface (slot->viewed_file,
                                           get_dnd_icon_size (window),
                                           FALSE,
-                                          gtk_widget_get_scale_factor (widget),
+                                          ctk_widget_get_scale_factor (widget),
                                           BAUL_FILE_ICON_FLAGS_IGNORE_VISITING | BAUL_FILE_ICON_FLAGS_FOR_DRAG_ACCEPT);
 
-    gtk_drag_set_icon_surface (context, surface);
+    ctk_drag_set_icon_surface (context, surface);
 
     cairo_surface_destroy (surface);
 }
@@ -832,10 +832,10 @@ baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
 
         /* FIXME: monitor for name change... */
         name = baul_file_get_display_name (file);
-        gtk_label_set_label (GTK_LABEL (window->details->location_label),
+        ctk_label_set_label (GTK_LABEL (window->details->location_label),
                              name);
         g_free (name);
-        gtk_widget_set_sensitive (window->details->location_button, TRUE);
+        ctk_widget_set_sensitive (window->details->location_button, TRUE);
 
         error = baul_file_get_file_info_error (file);
         if (error == NULL)
@@ -845,17 +845,17 @@ baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
             surface = baul_file_get_icon_surface (file,
                                                   baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU),
                                                   TRUE,
-                                                  gtk_widget_get_scale_factor (window->details->location_button),
+                                                  ctk_widget_get_scale_factor (window->details->location_button),
                                                   BAUL_FILE_ICON_FLAGS_IGNORE_VISITING);
 
             if (surface != NULL)
             {
-                gtk_image_set_from_surface (GTK_IMAGE (window->details->location_icon), surface);
+                ctk_image_set_from_surface (GTK_IMAGE (window->details->location_icon), surface);
                 cairo_surface_destroy (surface);
             }
             else
             {
-                gtk_image_set_from_icon_name (GTK_IMAGE (window->details->location_icon),
+                ctk_image_set_from_icon_name (GTK_IMAGE (window->details->location_icon),
                                               "document-open", GTK_ICON_SIZE_MENU);
             }
         }
@@ -864,9 +864,9 @@ baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
     }
     else
     {
-        gtk_label_set_label (GTK_LABEL (window->details->location_label),
+        ctk_label_set_label (GTK_LABEL (window->details->location_label),
                              "");
-        gtk_widget_set_sensitive (window->details->location_button, FALSE);
+        ctk_widget_set_sensitive (window->details->location_button, FALSE);
     }
 }
 
@@ -967,56 +967,56 @@ baul_spatial_window_init (BaulSpatialWindow *window)
 
     win = BAUL_WINDOW (window);
 
-    gtk_widget_set_hexpand (win->details->statusbar, TRUE);
-    gtk_grid_attach (GTK_GRID (win->details->grid),
+    ctk_widget_set_hexpand (win->details->statusbar, TRUE);
+    ctk_grid_attach (GTK_GRID (win->details->grid),
                      win->details->statusbar,
                      0, 5, 1, 1);
-    gtk_widget_show (win->details->statusbar);
+    ctk_widget_show (win->details->statusbar);
 
     pane = baul_window_pane_new (win);
     win->details->panes = g_list_prepend (win->details->panes, pane);
 
-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    gtk_box_set_homogeneous (GTK_BOX (vbox), TRUE);
-    gtk_widget_set_hexpand (vbox, TRUE);
-    gtk_widget_set_vexpand (vbox, TRUE);
-    gtk_grid_attach (GTK_GRID (BAUL_WINDOW (window)->details->grid),
+    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    ctk_box_set_homogeneous (GTK_BOX (vbox), TRUE);
+    ctk_widget_set_hexpand (vbox, TRUE);
+    ctk_widget_set_vexpand (vbox, TRUE);
+    ctk_grid_attach (GTK_GRID (BAUL_WINDOW (window)->details->grid),
                      vbox,
                      0, 1, 1, 3);
 
-    gtk_widget_show (vbox);
+    ctk_widget_show (vbox);
     window->details->content_box = vbox;
 
-    window->details->location_button = gtk_button_new ();
+    window->details->location_button = ctk_button_new ();
     g_signal_connect (window->details->location_button,
                       "button-press-event",
                       G_CALLBACK (location_button_pressed_callback),
                       window);
-    gtk_button_set_relief (GTK_BUTTON (window->details->location_button),
+    ctk_button_set_relief (GTK_BUTTON (window->details->location_button),
                            GTK_RELIEF_NORMAL);
 
-    gtk_widget_show (window->details->location_button);
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
-    gtk_container_add (GTK_CONTAINER (window->details->location_button),
+    ctk_widget_show (window->details->location_button);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
+    ctk_container_add (GTK_CONTAINER (window->details->location_button),
                        hbox);
-    gtk_widget_show (hbox);
+    ctk_widget_show (hbox);
 
-    window->details->location_icon = gtk_image_new_from_icon_name ("document-open", GTK_ICON_SIZE_MENU);
-    gtk_box_pack_start (GTK_BOX (hbox), window->details->location_icon, FALSE, FALSE, 0);
-    gtk_widget_show (window->details->location_icon);
+    window->details->location_icon = ctk_image_new_from_icon_name ("document-open", GTK_ICON_SIZE_MENU);
+    ctk_box_pack_start (GTK_BOX (hbox), window->details->location_icon, FALSE, FALSE, 0);
+    ctk_widget_show (window->details->location_icon);
 
-    window->details->location_label = gtk_label_new ("");
-    gtk_label_set_ellipsize (GTK_LABEL (window->details->location_label), PANGO_ELLIPSIZE_END);
-    gtk_label_set_max_width_chars (GTK_LABEL (window->details->location_label), MAX_SHORTNAME_PATH);
-    gtk_box_pack_start (GTK_BOX (hbox), window->details->location_label,
+    window->details->location_label = ctk_label_new ("");
+    ctk_label_set_ellipsize (GTK_LABEL (window->details->location_label), PANGO_ELLIPSIZE_END);
+    ctk_label_set_max_width_chars (GTK_LABEL (window->details->location_label), MAX_SHORTNAME_PATH);
+    ctk_box_pack_start (GTK_BOX (hbox), window->details->location_label,
                         FALSE, FALSE, 0);
-    gtk_widget_show (window->details->location_label);
+    ctk_widget_show (window->details->location_label);
 
-    arrow = gtk_image_new_from_icon_name ("pan-down-symbolic", GTK_ICON_SIZE_BUTTON);
-    gtk_box_pack_start (GTK_BOX (hbox), arrow, FALSE, FALSE, 0);
-    gtk_widget_show (arrow);
+    arrow = ctk_image_new_from_icon_name ("pan-down-symbolic", GTK_ICON_SIZE_BUTTON);
+    ctk_box_pack_start (GTK_BOX (hbox), arrow, FALSE, FALSE, 0);
+    ctk_widget_show (arrow);
 
-    gtk_drag_source_set (window->details->location_button,
+    ctk_drag_source_set (window->details->location_button,
                          GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, location_button_drag_types,
                          G_N_ELEMENTS (location_button_drag_types),
                          GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK);
@@ -1029,35 +1029,35 @@ baul_spatial_window_init (BaulSpatialWindow *window)
                       G_CALLBACK (location_button_drag_data_get_callback),
                       window);
 
-    targets = gtk_drag_source_get_target_list (window->details->location_button);
-    gtk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);
+    targets = ctk_drag_source_get_target_list (window->details->location_button);
+    ctk_target_list_add_text_targets (targets, BAUL_ICON_DND_TEXT);
 
-    gtk_widget_set_sensitive (window->details->location_button, FALSE);
+    ctk_widget_set_sensitive (window->details->location_button, FALSE);
     g_signal_connect (window->details->location_button,
                       "clicked",
                       G_CALLBACK (location_button_clicked_callback), window);
-    gtk_box_pack_start (GTK_BOX (BAUL_WINDOW (window)->details->statusbar),
+    ctk_box_pack_start (GTK_BOX (BAUL_WINDOW (window)->details->statusbar),
                         window->details->location_button,
                         FALSE, TRUE, 0);
 
-    gtk_box_reorder_child (GTK_BOX (BAUL_WINDOW (window)->details->statusbar),
+    ctk_box_reorder_child (GTK_BOX (BAUL_WINDOW (window)->details->statusbar),
                            window->details->location_button, 0);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action_group = gtk_action_group_new ("SpatialActions");
-    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+    action_group = ctk_action_group_new ("SpatialActions");
+    ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     window->details->spatial_action_group = action_group;
-    gtk_action_group_add_actions (action_group,
+    ctk_action_group_add_actions (action_group,
                                   spatial_entries, G_N_ELEMENTS (spatial_entries),
                                   window);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
-    gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
+    ctk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui manager */
 
     ui = baul_ui_string_get ("baul-spatial-window-ui.xml");
-    gtk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
+    ctk_ui_manager_add_ui_from_string (ui_manager, ui, -1, NULL);
 
     baul_window_set_active_pane (win, pane);
 }
@@ -1089,11 +1089,11 @@ baul_spatial_window_class_init (BaulSpatialWindowClass *klass)
 
 	G_OBJECT_CLASS (klass)->finalize = baul_spatial_window_finalize;
 
-	binding_set = gtk_binding_set_by_class (klass);
-	gtk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, GDK_SHIFT_MASK,
+	binding_set = ctk_binding_set_by_class (klass);
+	ctk_binding_entry_add_signal (binding_set, GDK_KEY_BackSpace, GDK_SHIFT_MASK,
                                   "go_up", 1,
                                   G_TYPE_BOOLEAN, TRUE);
-	gtk_binding_entry_add_signal (binding_set, GDK_KEY_Up, GDK_SHIFT_MASK | GDK_MOD1_MASK,
+	ctk_binding_entry_add_signal (binding_set, GDK_KEY_Up, GDK_SHIFT_MASK | GDK_MOD1_MASK,
                                   "go_up", 1,
                                   G_TYPE_BOOLEAN, TRUE);
 }

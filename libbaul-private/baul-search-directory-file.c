@@ -26,7 +26,7 @@
 #include <config.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-glib-extensions.h>

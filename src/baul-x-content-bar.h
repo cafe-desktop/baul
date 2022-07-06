@@ -25,7 +25,7 @@
 #ifndef __BAUL_X_CONTENT_BAR_H
 #define __BAUL_X_CONTENT_BAR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 G_BEGIN_DECLS

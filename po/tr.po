@@ -529,7 +529,7 @@ msgstr "Y_apıştır"
 msgid "Select All"
 msgstr "Tümünü Seç"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Daha fazla _ayrıntı göster"
 

@@ -27,7 +27,7 @@
 #ifndef EEL_CAFE_EXTENSIONS_H
 #define EEL_CAFE_EXTENSIONS_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 /* Return a command string containing the path to a terminal on this system. */
 char *        eel_cafe_make_terminal_command                         (const char               *command);

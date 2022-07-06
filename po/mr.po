@@ -521,7 +521,7 @@ msgstr "चिकटवा (_P)"
 msgid "Select All"
 msgstr "सर्वांची निवड करा"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "सखोल माहिती दाखवा(_D)"
 

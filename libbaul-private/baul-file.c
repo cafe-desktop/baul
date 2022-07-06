@@ -24,7 +24,7 @@
 
 #include <config.h>
 #include <grp.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
 #include <gio/gio.h>
@@ -40,9 +40,9 @@
 
 #include <eel/eel-debug.h>
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-vfs-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-string.h>
 
 #include <libbaul-extension/baul-file-info.h>
@@ -8655,7 +8655,7 @@ baul_file_class_init (BaulFileClass *class)
 							  G_CALLBACK (show_thumbnails_changed_callback),
 							  NULL);
 
-	icon_theme = gtk_icon_theme_get_default ();
+	icon_theme = ctk_icon_theme_get_default ();
 	g_signal_connect_object (icon_theme,
 				 "changed",
 				 G_CALLBACK (icon_theme_changed_callback),

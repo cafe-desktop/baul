@@ -30,7 +30,7 @@
 #ifndef BAUL_LOCATION_BAR_H
 #define BAUL_LOCATION_BAR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-private/baul-entry.h>
 

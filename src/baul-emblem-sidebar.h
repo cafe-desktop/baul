@@ -27,7 +27,7 @@
 #ifndef BAUL_EMBLEM_SIDEBAR_H
 #define BAUL_EMBLEM_SIDEBAR_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_EMBLEM_SIDEBAR baul_emblem_sidebar_get_type()
 #define BAUL_EMBLEM_SIDEBAR(obj) \

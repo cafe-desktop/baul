@@ -534,7 +534,7 @@ msgstr "Klistra _in"
 msgid "Select All"
 msgstr "Markera allt"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Visa fler _detaljer"
 

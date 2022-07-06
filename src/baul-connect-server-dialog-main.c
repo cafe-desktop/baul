@@ -29,7 +29,7 @@
 #include <stdlib.h>
 
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gdk/gdk.h>
 
 #include <eel/eel-stock-dialogs.h>
@@ -48,7 +48,7 @@ main_dialog_destroyed (GtkWidget *widget,
     /* this only happens when user clicks "cancel"
      * on the main dialog or when we are all done.
      */
-    gtk_main_quit ();
+    ctk_main_quit ();
 }
 
 gboolean
@@ -81,10 +81,10 @@ baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self
     error = NULL;
     uri = g_file_get_uri (location);
 
-    launch_context = gdk_display_get_app_launch_context (gtk_widget_get_display (GTK_WIDGET (self)));
+    launch_context = gdk_display_get_app_launch_context (ctk_widget_get_display (GTK_WIDGET (self)));
 
     gdk_app_launch_context_set_screen (launch_context,
-                                       gtk_widget_get_screen (GTK_WIDGET (self)));
+                                       ctk_widget_get_screen (GTK_WIDGET (self)));
 
     g_app_info_launch_default_for_uri (uri,
                                        G_APP_LAUNCH_CONTEXT (launch_context),
@@ -118,7 +118,7 @@ main (int argc, char *argv[])
        the initial newlines are between the command line arg and the description */
     context = g_option_context_new (N_("\n\nAdd connect to server mount"));
     g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
-    g_option_context_add_group (context, gtk_get_option_group (TRUE));
+    g_option_context_add_group (context, ctk_get_option_group (TRUE));
 
     if (!g_option_context_parse (context, &argc, &argv, &error))
     {
@@ -132,16 +132,16 @@ main (int argc, char *argv[])
 
     baul_global_preferences_init ();
 
-    gtk_window_set_default_icon_name (BAUL_ICON_FOLDER);
+    ctk_window_set_default_icon_name (BAUL_ICON_FOLDER);
 
     dialog = baul_connect_server_dialog_new (NULL);
 
     g_signal_connect (dialog, "destroy",
                       G_CALLBACK (main_dialog_destroyed), NULL);
 
-    gtk_widget_show (dialog);
+    ctk_widget_show (dialog);
 
-    gtk_main ();
+    ctk_main ();
 
     return 0;
 }

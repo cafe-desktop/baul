@@ -525,7 +525,7 @@ msgstr "A_pegar"
 msgid "Select All"
 msgstr "Esbillar too"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Amosar más _detalles"
 

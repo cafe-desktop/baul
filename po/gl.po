@@ -533,7 +533,7 @@ msgstr "_Pegar"
 msgid "Select All"
 msgstr "Seleccionar todo"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Amosar máis _detalles"
 

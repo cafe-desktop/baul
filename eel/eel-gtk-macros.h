@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   eel-gtk-macros.h: Macros to reduce boilerplate when using GTK.
+   eel-ctk-macros.h: Macros to reduce boilerplate when using GTK.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -99,7 +99,7 @@ G_STMT_START {                                                                \
 #endif /* EEL_DISABLE_DEPRECATED */
 
 /* Call a virtual function. Useful when the virtual function is not a
- * signal, otherwise you want to gtk_signal emit. Nice because it
+ * signal, otherwise you want to ctk_signal emit. Nice because it
  * documents what it's doing and there is less chance for a typo.
  */
 #define EEL_CALL_METHOD(class_cast_macro, object, signal, parameters)         \

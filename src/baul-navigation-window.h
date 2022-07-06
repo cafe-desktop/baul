@@ -30,7 +30,7 @@
 #ifndef BAUL_NAVIGATION_WINDOW_H
 #define BAUL_NAVIGATION_WINDOW_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-glib-extensions.h>
 

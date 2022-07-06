@@ -27,13 +27,13 @@
 /* FIXME: This should really be back in Baul, not here in Eel. */
 
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <stdio.h>
 #include <string.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-string.h>
 #include <eel/eel-vfs-extensions.h>
 
@@ -70,12 +70,12 @@ baul_drag_init (BaulDragInfo     *drag_info,
                 int                   drag_type_count,
                 gboolean              add_text_targets)
 {
-    drag_info->target_list = gtk_target_list_new (drag_types,
+    drag_info->target_list = ctk_target_list_new (drag_types,
                              drag_type_count);
 
     if (add_text_targets)
     {
-        gtk_target_list_add_text_targets (drag_info->target_list,
+        ctk_target_list_add_text_targets (drag_info->target_list,
                                           BAUL_ICON_DND_TEXT);
     }
 
@@ -86,7 +86,7 @@ baul_drag_init (BaulDragInfo     *drag_info,
 void
 baul_drag_finalize (BaulDragInfo *drag_info)
 {
-    gtk_target_list_unref (drag_info->target_list);
+    ctk_target_list_unref (drag_info->target_list);
     baul_drag_destroy_selection_list (drag_info->selection_list);
 
     g_free (drag_info);
@@ -171,8 +171,8 @@ baul_drag_build_selection_list (GtkSelectionData *data)
     int size;
 
     result = NULL;
-    oldp = gtk_selection_data_get_data (data);
-    size = gtk_selection_data_get_length (data);
+    oldp = ctk_selection_data_get_data (data);
+    size = ctk_selection_data_get_length (data);
 
     while (size > 0)
     {
@@ -715,8 +715,8 @@ baul_drag_drag_data_get (GtkWidget *widget,
         return FALSE;
     }
 
-    gtk_selection_data_set (selection_data,
-                            gtk_selection_data_get_target (selection_data),
+    ctk_selection_data_set (selection_data,
+                            ctk_selection_data_get_target (selection_data),
                             8, result->str, result->len);
     g_string_free (result, TRUE);
 
@@ -765,9 +765,9 @@ append_drop_action_menu_item (GtkWidget          *menu,
 {
     GtkWidget *menu_item;
 
-    menu_item = gtk_menu_item_new_with_mnemonic (text);
-    gtk_widget_set_sensitive (menu_item, sensitive);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    menu_item = ctk_menu_item_new_with_mnemonic (text);
+    ctk_widget_set_sensitive (menu_item, sensitive);
+    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
     g_object_set_data (G_OBJECT (menu_item),
                        "action",
@@ -777,7 +777,7 @@ append_drop_action_menu_item (GtkWidget          *menu,
                       G_CALLBACK (drop_action_activated_callback),
                       damd);
 
-    gtk_widget_show (menu_item);
+    ctk_widget_show (menu_item);
 }
 
 /* Pops up a menu of actions to perform on dropped files */
@@ -792,8 +792,8 @@ baul_drag_drop_action_ask (GtkWidget *widget,
     /* Create the menu and set the sensitivity of the items based on the
      * allowed actions.
      */
-    menu = gtk_menu_new ();
-    gtk_menu_set_screen (GTK_MENU (menu), gtk_widget_get_screen (widget));
+    menu = ctk_menu_new ();
+    ctk_menu_set_screen (GTK_MENU (menu), ctk_widget_get_screen (widget));
 
     append_drop_action_menu_item (menu, _("_Move Here"),
                                   GDK_ACTION_MOVE,
@@ -815,11 +815,11 @@ baul_drag_drop_action_ask (GtkWidget *widget,
                                   (actions & BAUL_DND_ACTION_SET_AS_BACKGROUND) != 0,
                                   &damd);
 
-    eel_gtk_menu_append_separator (GTK_MENU (menu));
+    eel_ctk_menu_append_separator (GTK_MENU (menu));
 
-    menu_item = gtk_menu_item_new_with_mnemonic (_("Cancel"));
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-    gtk_widget_show (menu_item);
+    menu_item = ctk_menu_item_new_with_mnemonic (_("Cancel"));
+    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    ctk_widget_show (menu_item);
 
     damd.chosen = 0;
     damd.loop = g_main_loop_new (NULL, FALSE);
@@ -828,13 +828,13 @@ baul_drag_drop_action_ask (GtkWidget *widget,
                       G_CALLBACK (menu_deactivate_callback),
                       &damd);
 
-    gtk_grab_add (menu);
+    ctk_grab_add (menu);
 
-    gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
+    ctk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
 
     g_main_loop_run (damd.loop);
 
-    gtk_grab_remove (menu);
+    ctk_grab_remove (menu);
 
     g_main_loop_unref (damd.loop);
 
@@ -855,8 +855,8 @@ baul_drag_drop_background_ask (GtkWidget *widget,
     /* Create the menu and set the sensitivity of the items based on the
      * allowed actions.
      */
-    menu = gtk_menu_new ();
-    gtk_menu_set_screen (GTK_MENU (menu), gtk_widget_get_screen (widget));
+    menu = ctk_menu_new ();
+    ctk_menu_set_screen (GTK_MENU (menu), ctk_widget_get_screen (widget));
 
     append_drop_action_menu_item (menu, _("Set as background for _all folders"),
                                   BAUL_DND_ACTION_SET_AS_GLOBAL_BACKGROUND,
@@ -868,11 +868,11 @@ baul_drag_drop_background_ask (GtkWidget *widget,
                                   (actions & BAUL_DND_ACTION_SET_AS_FOLDER_BACKGROUND) != 0,
                                   &damd);
 
-    eel_gtk_menu_append_separator (GTK_MENU (menu));
+    eel_ctk_menu_append_separator (GTK_MENU (menu));
 
-    menu_item = gtk_menu_item_new_with_mnemonic (_("Cancel"));
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-    gtk_widget_show (menu_item);
+    menu_item = ctk_menu_item_new_with_mnemonic (_("Cancel"));
+    ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    ctk_widget_show (menu_item);
 
     damd.chosen = 0;
     damd.loop = g_main_loop_new (NULL, FALSE);
@@ -881,13 +881,13 @@ baul_drag_drop_background_ask (GtkWidget *widget,
                       G_CALLBACK (menu_deactivate_callback),
                       &damd);
 
-    gtk_grab_add (menu);
+    ctk_grab_add (menu);
 
-    gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
+    ctk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
 
     g_main_loop_run (damd.loop);
 
-    gtk_grab_remove (menu);
+    ctk_grab_remove (menu);
 
     g_main_loop_unref (damd.loop);
 
@@ -919,10 +919,10 @@ baul_drag_autoscroll_calculate_delta (GtkWidget *widget, float *x_scroll_delta, 
 
     g_assert (GTK_IS_WIDGET (widget));
 
-    display = gtk_widget_get_display (widget);
+    display = ctk_widget_get_display (widget);
     seat = gdk_display_get_default_seat (display);
     pointer = gdk_seat_get_pointer (seat);
-    gdk_window_get_device_position (gtk_widget_get_window (widget), pointer,
+    gdk_window_get_device_position (ctk_widget_get_window (widget), pointer,
                                     &x, &y, NULL);
 
     /* Find out if we are anywhere close to the tree view edges
@@ -936,7 +936,7 @@ baul_drag_autoscroll_calculate_delta (GtkWidget *widget, float *x_scroll_delta, 
         *x_scroll_delta = (float)(x - AUTO_SCROLL_MARGIN);
     }
 
-    gtk_widget_get_allocation (widget, &allocation);
+    ctk_widget_get_allocation (widget, &allocation);
     if (x > allocation.width - AUTO_SCROLL_MARGIN)
     {
         if (*x_scroll_delta != 0)
@@ -1076,24 +1076,24 @@ slot_proxy_drag_motion (GtkWidget          *widget,
 
     action = 0;
 
-    if (gtk_drag_get_source_widget (context) == widget)
+    if (ctk_drag_get_source_widget (context) == widget)
     {
         goto out;
     }
 
-    window = gtk_widget_get_toplevel (widget);
+    window = ctk_widget_get_toplevel (widget);
     g_assert (BAUL_IS_WINDOW_INFO (window));
 
     if (!drag_info->have_data)
     {
-        target = gtk_drag_dest_find_target (widget, context, NULL);
+        target = ctk_drag_dest_find_target (widget, context, NULL);
 
         if (target == GDK_NONE)
         {
             goto out;
         }
 
-        gtk_drag_get_data (widget, context, target, time);
+        ctk_drag_get_data (widget, context, target, time);
     }
 
     target_uri = NULL;
@@ -1142,11 +1142,11 @@ slot_proxy_drag_motion (GtkWidget          *widget,
 out:
     if (action != 0)
     {
-        gtk_drag_highlight (widget);
+        ctk_drag_highlight (widget);
     }
     else
     {
-        gtk_drag_unhighlight (widget);
+        ctk_drag_unhighlight (widget);
     }
 
     gdk_drag_status (context, action, time);
@@ -1192,7 +1192,7 @@ slot_proxy_drag_leave (GtkWidget          *widget,
 
     drag_info = user_data;
 
-    gtk_drag_unhighlight (widget);
+    ctk_drag_unhighlight (widget);
     drag_info_clear (drag_info);
 }
 
@@ -1212,8 +1212,8 @@ slot_proxy_drag_drop (GtkWidget          *widget,
 
     drag_info->drop_occured = TRUE;
 
-    target = gtk_drag_dest_find_target (widget, context, NULL);
-    gtk_drag_get_data (widget, context, target, time);
+    target = ctk_drag_dest_find_target (widget, context, NULL);
+    ctk_drag_get_data (widget, context, target, time);
 
     return TRUE;
 }
@@ -1233,12 +1233,12 @@ slot_proxy_handle_drop (GtkWidget                *widget,
     if (!drag_info->have_data ||
             !drag_info->have_valid_data)
     {
-        gtk_drag_finish (context, FALSE, FALSE, time);
+        ctk_drag_finish (context, FALSE, FALSE, time);
         drag_info_clear (drag_info);
         return;
     }
 
-    window = gtk_widget_get_toplevel (widget);
+    window = ctk_widget_get_toplevel (widget);
     g_assert (BAUL_IS_WINDOW_INFO (window));
 
     if (drag_info->target_slot != NULL)
@@ -1297,11 +1297,11 @@ slot_proxy_handle_drop (GtkWidget                *widget,
         }
 
 
-        gtk_drag_finish (context, TRUE, FALSE, time);
+        ctk_drag_finish (context, TRUE, FALSE, time);
     }
     else
     {
-        gtk_drag_finish (context, FALSE, FALSE, time);
+        ctk_drag_finish (context, FALSE, FALSE, time);
     }
 
     if (target_view != NULL)
@@ -1334,7 +1334,7 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
     drag_info->have_data = TRUE;
     drag_info->info = info;
 
-    if (gtk_selection_data_get_length (data) < 0)
+    if (ctk_selection_data_get_length (data) < 0)
     {
         drag_info->have_valid_data = FALSE;
         return;
@@ -1348,7 +1348,7 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
     }
     else if (info == BAUL_ICON_DND_URI_LIST)
     {
-        uris = gtk_selection_data_get_uris (data);
+        uris = ctk_selection_data_get_uris (data);
         drag_info->data.uri_list = baul_drag_uri_list_from_array ((const char **) uris);
         g_strfreev (uris);
 
@@ -1356,7 +1356,7 @@ slot_proxy_drag_data_received (GtkWidget          *widget,
     }
     else if (info == BAUL_ICON_DND_NETSCAPE_URL)
     {
-        drag_info->data.netscape_url = g_strdup ((char *) gtk_selection_data_get_data (data));
+        drag_info->data.netscape_url = g_strdup ((char *) ctk_selection_data_get_data (data));
 
         drag_info->have_valid_data = drag_info->data.netscape_url != NULL;
     }
@@ -1381,17 +1381,17 @@ baul_drag_slot_proxy_init (GtkWidget *widget,
     g_assert (GTK_IS_WIDGET (widget));
     g_assert (drag_info != NULL);
 
-    gtk_drag_dest_set (widget, 0,
+    ctk_drag_dest_set (widget, 0,
                        NULL, 0,
                        GDK_ACTION_MOVE |
                        GDK_ACTION_COPY |
                        GDK_ACTION_LINK |
                        GDK_ACTION_ASK);
 
-    target_list = gtk_target_list_new (targets, G_N_ELEMENTS (targets));
-    gtk_target_list_add_uri_targets (target_list, BAUL_ICON_DND_URI_LIST);
-    gtk_drag_dest_set_target_list (widget, target_list);
-    gtk_target_list_unref (target_list);
+    target_list = ctk_target_list_new (targets, G_N_ELEMENTS (targets));
+    ctk_target_list_add_uri_targets (target_list, BAUL_ICON_DND_URI_LIST);
+    ctk_drag_dest_set_target_list (widget, target_list);
+    ctk_target_list_unref (target_list);
 
     g_signal_connect (widget, "drag-motion",
                       G_CALLBACK (slot_proxy_drag_motion),

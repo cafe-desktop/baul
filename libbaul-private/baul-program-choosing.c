@@ -26,7 +26,7 @@
 #include <config.h>
 #include <stdlib.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
@@ -93,12 +93,12 @@ application_cannot_open_location (GAppInfo *application,
 
         message_dialog = eel_show_yes_no_dialog (prompt,
                                                  message,
-                                                 "gtk-ok",
+                                                 "ctk-ok",
                                                  "process-stop",
                                                  parent_window);
 
-        response = gtk_dialog_run (message_dialog);
-        gtk_widget_destroy (GTK_WIDGET (message_dialog));
+        response = ctk_dialog_run (message_dialog);
+        ctk_widget_destroy (GTK_WIDGET (message_dialog));
 
         if (response == GTK_RESPONSE_YES)
         {
@@ -225,7 +225,7 @@ baul_launch_application_by_uri (GAppInfo *application,
     locations = g_list_reverse (locations);
 
     if (parent_window != NULL) {
-            display = gtk_widget_get_display (GTK_WIDGET (parent_window));
+            display = ctk_widget_get_display (GTK_WIDGET (parent_window));
     } else {
             display = gdk_display_get_default ();
     }
@@ -234,12 +234,12 @@ baul_launch_application_by_uri (GAppInfo *application,
 
     if (parent_window != NULL) {
         gdk_app_launch_context_set_screen (launch_context,
-                                           gtk_window_get_screen (parent_window));
+                                           ctk_window_get_screen (parent_window));
     }
 
     file = baul_file_get_by_uri (uris->data);
     icon = baul_file_get_icon (file,
-                               48, gtk_widget_get_scale_factor (GTK_WIDGET (parent_window)),
+                               48, ctk_widget_get_scale_factor (GTK_WIDGET (parent_window)),
                                0);
     baul_file_unref (file);
     if (icon)
@@ -525,12 +525,12 @@ baul_launch_desktop_file (GdkScreen   *screen,
 
     error = NULL;
 
-    context = gdk_display_get_app_launch_context (gtk_widget_get_display (GTK_WIDGET (parent_window)));
+    context = gdk_display_get_app_launch_context (ctk_widget_get_display (GTK_WIDGET (parent_window)));
 
     /* TODO: Ideally we should accept a timestamp here instead of using GDK_CURRENT_TIME */
     gdk_app_launch_context_set_timestamp (context, GDK_CURRENT_TIME);
     gdk_app_launch_context_set_screen (context,
-                                       gtk_window_get_screen (parent_window));
+                                       ctk_window_get_screen (parent_window));
     g_desktop_app_info_launch_uris_as_manager (app_info,
                                                (GList *) parameter_uris,
                                                G_APP_LAUNCH_CONTEXT (context),

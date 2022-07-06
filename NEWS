@@ -51,9 +51,9 @@
   * fm-directory-view: add icon to "empty trash" into "File" menu
   * gla11y: use version 0.3 which already defaults to using python3
   * baul-places-sidebar: add icon to "empty trash"
-  * spatial-window: replace geprecated gtk_menu_popup
-  * property-browser: replace deprecated gtk_drag_begin
-  * fm-list-view: replace deprecated gtk_drag_begin
+  * spatial-window: replace geprecated ctk_menu_popup
+  * property-browser: replace deprecated ctk_drag_begin
+  * fm-list-view: replace deprecated ctk_drag_begin
   * Show thumbnails in list view
   * file-manager: reduce the scope of some variables
   * preferences: Render extension icons as cairo_surfaces
@@ -203,7 +203,7 @@
   * baul-bookmark: Fix memory leak
   * fm-properties-window: Fix memory leaks
   * baul-desktop-link-monitor: Fix memory leak
-  * eel-gtk-extensions: Fix memory leaks
+  * eel-ctk-extensions: Fix memory leaks
 
 ### baul 1.21.3
 
@@ -237,39 +237,39 @@
 ### baul 1.21.2
 
   * update translations
-  * eel-gtk-extensions: show icons in right-click menus only if "menus-have-icons" set
+  * eel-ctk-extensions: show icons in right-click menus only if "menus-have-icons" set
   * baul-sidebar-title: Fix: images broken in sidebar
   * baul-progress-info.c: show notifications in begin/end of progress
-  * baul-progress-info.c: avoid deprecated 'gtk_status_icon_get_visible'
+  * baul-progress-info.c: avoid deprecated 'ctk_status_icon_get_visible'
   * baul-sidebar-title: fix [-Wmaybe-uninitialized] warning
   * desktop window: Add is-desktop AtkObject attribute
   * baul-desktop-window.c: Fix: baul crashes unexpectedly
-  * avoid deprecated 'gtk_widget_override_font'
-  * avoid deprecated 'gtk_window_set_wmclass'
+  * avoid deprecated 'ctk_widget_override_font'
+  * avoid deprecated 'ctk_window_set_wmclass'
   * baul-bookmark.c: drop unused variable
   * baul-bookmark.c: Fix icons in bookmarks
-  * icon-container: avoid deprecated 'gtk_style_context_get_border_color'
-  * avoid deprecated 'gtk_dialog_get_action_area'
+  * icon-container: avoid deprecated 'ctk_style_context_get_border_color'
+  * avoid deprecated 'ctk_dialog_get_action_area'
   * Pathbar button: fix poor response to right-click
-  * editable-label: avoid deprecated 'gtk_im_multicontext_append_menuitems'
+  * editable-label: avoid deprecated 'ctk_im_multicontext_append_menuitems'
   * zoom-control: use NULL instead of uninitialized variable
   * remove unused function
   * use NULL instead of uninitialized variable
   * eel-editable-label.c: avoid deprecated 'gdk_keymap_get_default'
-  * eel-editable-label: avoid deprecated gtk_style_context_set_background
-  * eel-gtk-extensions: replace deprecated gtk_menu_popup function
+  * eel-editable-label: avoid deprecated ctk_style_context_set_background
+  * eel-ctk-extensions: replace deprecated ctk_menu_popup function
   * zoom-control: don't use eel_pop_up_context_menu function
-  * Replace deprecated gtk_menu_popup
+  * Replace deprecated ctk_menu_popup
   * libbaul-private: replace deprecated gdk_error_trap functions
   * fm-desktop-icon-view: replace deprecated gdk_error_trap_push/pop functions
   * replace deprecated gdk_flush
   * libbaul-private: fix -Wlogical-not-parentheses build warning
-  * avoid deprecated 'gtk_style_context_get_background_color'
+  * avoid deprecated 'ctk_style_context_get_background_color'
 
 ### baul 1.21.1
 
   * Translations update
-  * baul-spatial-window.c: avoid deprecated 'gtk_vbox_new'
+  * baul-spatial-window.c: avoid deprecated 'ctk_vbox_new'
   * Eliminate accessible children-changed event flood on container repopulation
   * Eliminate accessible children-changed event flood during update all
   * Emit accessible-name-change signal for icons only when icons are renamed
@@ -292,7 +292,7 @@
   * properties-window: support HiDpi for the properties window icon
   * Support HiDpi icons
   * canvas-container: listen to scale factor to invalidate icons
-  * canvas-item: use gtk_render_icon_surface for the DnD surface
+  * canvas-item: use ctk_render_icon_surface for the DnD surface
   * desktop-canvas-view: scale desktop workarea
   * baul-side-pane.c: avoid deprecated GtkImageMenuItem
   * baul-navigation-window-pane.c: avoid deprecated GtkImageMenuItem
@@ -311,23 +311,23 @@
 
   * Translations update
   * baul-query-editor.c: add #include <eel/eel-stock-dialogs.h>
-  * avoid 'gtk_file_chooser_dialog_new' with stock ids
-  * avoid gtk_dialog_new_with_buttons with stock ids
-  * avoid gtk_dialog_add_buttons with stock ids
+  * avoid 'ctk_file_chooser_dialog_new' with stock ids
+  * avoid ctk_dialog_new_with_buttons with stock ids
+  * avoid ctk_dialog_add_buttons with stock ids
   * baul-file-management-properties.ui: avoid deprecated GtkVBox and GtkHBox
   * baul-bookmarks-window.ui: avoid deprecated:
   * rename cafe_dialog_add_button to eel_dialog_add_button
   * use development version
   * avoid eel_create_question_dialog with stock ids
   * avoid eel_run_simple_dialog with stock ids
-  * eel-stock-dialogs: avoid gtk_dialog_add_button with stock ids
-  * baul-file-operations: avoid gtk_dialog_add_buttons with stock ids
+  * eel-stock-dialogs: avoid ctk_dialog_add_button with stock ids
+  * baul-file-operations: avoid ctk_dialog_add_buttons with stock ids
   * remove runtime warning in usage of baul_clipboard_set_up_editable
-  * baul-file-conflict-dialog: avoid gtk_dialog_add_buttons with stock id
+  * baul-file-conflict-dialog: avoid ctk_dialog_add_buttons with stock id
   * avoid deprecated GtkButton:use-stock
   * can selected all the search keywords with Ctrl+a. #918
-  * baul-autorun: avoid gtk_dialog_add_buttons with stock ids
-  * eel-editable-label.c: avoid gtk_image_menu_item_new_from_stock
+  * baul-autorun: avoid ctk_dialog_add_buttons with stock ids
+  * eel-editable-label.c: avoid ctk_image_menu_item_new_from_stock
   * baul-file-management-properties.ui: avoid stock properties:
   * Toolbar: find icon: use icon name instead the stock id
   * baul-bookmarks-window.ui: avoid deprecated GtkButton:use-stock
@@ -374,7 +374,7 @@
 ### baul 1.19.1
 
   * Translations update
-  * gtk 3.22: avoid deprecated gdk_screen_get_monitor... functions:
+  * ctk 3.22: avoid deprecated gdk_screen_get_monitor... functions:
   * Adds columns autosizing
   * Refresh all rows on zoom change
   * Forces widget redraw on zoom
@@ -387,9 +387,9 @@
   * avoid deprecated gdk_screen_width/height
   * avoid deprecated gdk_screen_get_width/height
   * avoid deprecated gdk_screen_make_display_name
-  * libegg: replace deprecated gtk_drag_begin
+  * libegg: replace deprecated ctk_drag_begin
   * eggsmclient: fix a build warning because of -Wcomment
-  * don't use deprecated gtk_show_uri
+  * don't use deprecated ctk_show_uri
   * avoid deprecated gdk_screen_get_number
   * Fix browsing/autorun media on insertion
   * fix vertical Compact View scrolling in fm_icon_view_scroll_event()
@@ -403,7 +403,7 @@
   * Translations update
   * restore DBus interface initialization
   * CSS: Load a different baul-desktop.css with GTK 3.14
-  * Use gtk+-3 bookmarks location
+  * Use ctk+-3 bookmarks location
   * Open With dialog: force icon size
   * file: make baul_file_get_gicon return custom icons too (#765)
   * Expand grid width to canvas
@@ -431,7 +431,7 @@
   * NEWS: use consistent, project wide, markdown-like formatting to make
     generating release announcements easier
   * Build: require libcafe-desktop >= 1.17.3
-  * Move to GTK+3 (require GTK+ >= 3.14), drop GTK+2 code and --with-gtk
+  * Move to GTK+3 (require GTK+ >= 3.14), drop GTK+2 code and --with-ctk
     build option
   * Port from libunique to GtkApplication
   * Implement copy queue and pausing

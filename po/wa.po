@@ -520,7 +520,7 @@ msgstr "C_laper"
 msgid "Select All"
 msgstr "Tchoezi totafwait"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Mostrer pus di _detays"
 

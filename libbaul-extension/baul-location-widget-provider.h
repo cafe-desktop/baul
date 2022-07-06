@@ -33,7 +33,7 @@
 #define BAUL_LOCATION_WIDGET_PROVIDER_H
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "baul-extension-types.h"
 
 G_BEGIN_DECLS

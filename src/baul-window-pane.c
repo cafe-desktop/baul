@@ -22,7 +22,7 @@
    Author: Holger Berndt <berndth@gmx.de>
 */
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 
 #include "baul-window-pane.h"
 #include "baul-window-private.h"

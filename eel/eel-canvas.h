@@ -37,8 +37,8 @@
 #ifndef EEL_CANVAS_H
 #define EEL_CANVAS_H
 
-#include <gtk/gtk.h>
-#include <gtk/gtk-a11y.h>
+#include <ctk/ctk.h>
+#include <ctk/ctk-a11y.h>
 #include <gdk/gdk.h>
 #include <stdarg.h>
 

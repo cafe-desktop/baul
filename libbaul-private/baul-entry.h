@@ -27,7 +27,7 @@
 #ifndef BAUL_ENTRY_H
 #define BAUL_ENTRY_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -31,7 +31,7 @@
 #define BAUL_MENU_PROVIDER_H
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "baul-extension-types.h"
 #include "baul-file-info.h"
 #include "baul-menu.h"

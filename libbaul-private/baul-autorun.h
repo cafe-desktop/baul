@@ -40,7 +40,7 @@
 #ifndef BAUL_AUTORUN_H
 #define BAUL_AUTORUN_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-background.h>
 

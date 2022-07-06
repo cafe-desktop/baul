@@ -26,7 +26,7 @@
 #ifndef BAUL_OPEN_WITH_DIALOG_H
 #define BAUL_OPEN_WITH_DIALOG_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 #define BAUL_TYPE_OPEN_WITH_DIALOG         (baul_open_with_dialog_get_type ())

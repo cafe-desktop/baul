@@ -24,7 +24,7 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gio/gio.h>
 
@@ -42,13 +42,13 @@ baul_ui_unmerge_ui (GtkUIManager *ui_manager,
 {
     if (*merge_id != 0)
     {
-        gtk_ui_manager_remove_ui (ui_manager,
+        ctk_ui_manager_remove_ui (ui_manager,
                                   *merge_id);
         *merge_id = 0;
     }
     if (*action_group != NULL)
     {
-        gtk_ui_manager_remove_action_group (ui_manager,
+        ctk_ui_manager_remove_action_group (ui_manager,
                                             *action_group);
         *action_group = NULL;
     }
@@ -60,12 +60,12 @@ baul_ui_prepare_merge_ui (GtkUIManager *ui_manager,
                           guint *merge_id,
                           GtkActionGroup **action_group)
 {
-    *merge_id = gtk_ui_manager_new_merge_id (ui_manager);
+    *merge_id = ctk_ui_manager_new_merge_id (ui_manager);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    *action_group = gtk_action_group_new (name);
-    gtk_action_group_set_translation_domain (*action_group, GETTEXT_PACKAGE);
+    *action_group = ctk_action_group_new (name);
+    ctk_action_group_set_translation_domain (*action_group, GETTEXT_PACKAGE);
     G_GNUC_END_IGNORE_DEPRECATIONS;
-    gtk_ui_manager_insert_action_group (ui_manager, *action_group, 0);
+    ctk_ui_manager_insert_action_group (ui_manager, *action_group, 0);
     g_object_unref (*action_group); /* owned by ui manager */
 }
 
@@ -140,7 +140,7 @@ extension_action_sensitive_callback (BaulMenuItem *item,
                   NULL);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    gtk_action_set_sensitive (GTK_ACTION (user_data), value);
+    ctk_action_set_sensitive (GTK_ACTION (user_data), value);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -153,7 +153,7 @@ get_action_icon (const char *icon_name,
     cairo_surface_t *surface;
     int scale;
 
-    scale = gtk_widget_get_scale_factor (parent_widget);
+    scale = ctk_widget_get_scale_factor (parent_widget);
 
     if (g_path_is_absolute (icon_name))
     {
@@ -185,7 +185,7 @@ baul_action_from_menu_item (BaulMenuItem *item,
                   NULL);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_new (name,
+    action = ctk_action_new (name,
                              label,
                              tip,
                              icon_name);
@@ -207,7 +207,7 @@ baul_action_from_menu_item (BaulMenuItem *item,
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    gtk_action_set_sensitive (action, sensitive);
+    ctk_action_set_sensitive (action, sensitive);
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_object_set (action, "is-important", priority, NULL);
 
@@ -239,7 +239,7 @@ baul_toolbar_action_from_menu_item (BaulMenuItem *item, GtkWidget *parent_widget
                   NULL);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = gtk_action_new (name,
+    action = ctk_action_new (name,
                              label,
                              tip,
                              icon_name);
@@ -261,7 +261,7 @@ baul_toolbar_action_from_menu_item (BaulMenuItem *item, GtkWidget *parent_widget
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    gtk_action_set_sensitive (action, sensitive);
+    ctk_action_set_sensitive (action, sensitive);
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_object_set (action, "is-important", priority, NULL);
 

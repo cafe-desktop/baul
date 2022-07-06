@@ -26,7 +26,7 @@
 #ifndef BAUL_MIME_APPLICATION_CHOOSER_H
 #define BAUL_MIME_APPLICATION_CHOOSER_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_MIME_APPLICATION_CHOOSER         (baul_mime_application_chooser_get_type ())
 #define BAUL_MIME_APPLICATION_CHOOSER(obj)         (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_MIME_APPLICATION_CHOOSER, BaulMimeApplicationChooser))

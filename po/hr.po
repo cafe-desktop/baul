@@ -524,7 +524,7 @@ msgstr "_Zalijepi"
 msgid "Select All"
 msgstr "Odaberi sve"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Prikaži više _pojedinosti"
 

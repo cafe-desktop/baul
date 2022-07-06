@@ -26,11 +26,11 @@
 #include "eel-image-table.h"
 
 #include "eel-art-extensions.h"
-#include "eel-art-gtk-extensions.h"
-#include "eel-gtk-extensions.h"
+#include "eel-art-ctk-extensions.h"
+#include "eel-ctk-extensions.h"
 #include "eel-labeled-image.h"
 #include "eel-marshal.h"
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 /* Arguments */
 enum
@@ -90,7 +90,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (EelImageTable, eel_image_table, EEL_TYPE_WRAP_TABLE)
 static void
 eel_image_table_init (EelImageTable *image_table)
 {
-    gtk_widget_set_has_window (GTK_WIDGET (image_table), FALSE);
+    ctk_widget_set_has_window (GTK_WIDGET (image_table), FALSE);
 
     image_table->details = eel_image_table_get_instance_private (image_table);
 }
@@ -115,7 +115,7 @@ eel_image_table_realize (GtkWidget *widget)
     windowed_ancestor = find_windowed_ancestor (widget);
     g_assert (GTK_IS_WIDGET (windowed_ancestor));
 
-    gtk_widget_add_events (windowed_ancestor,
+    ctk_widget_add_events (windowed_ancestor,
                            GDK_BUTTON_PRESS_MASK
                            | GDK_BUTTON_RELEASE_MASK
                            | GDK_BUTTON_MOTION_MASK
@@ -302,7 +302,7 @@ image_table_handle_motion (EelImageTable *image_table,
 
     child = eel_wrap_table_find_child_at_event_point (EEL_WRAP_TABLE (image_table), x, y);
 
-    if (child && !gtk_widget_get_sensitive (child))
+    if (child && !ctk_widget_get_sensitive (child))
     {
         return;
     }
@@ -362,9 +362,9 @@ find_windowed_ancestor (GtkWidget *widget)
 {
     g_return_val_if_fail (GTK_IS_WIDGET (widget), NULL);
 
-    while (widget && !gtk_widget_get_has_window (widget))
+    while (widget && !ctk_widget_get_has_window (widget))
     {
-        widget = gtk_widget_get_parent (widget);
+        widget = ctk_widget_get_parent (widget);
     }
 
     return widget;
@@ -431,7 +431,7 @@ signal_connect_while_realized (GtkWidget *object,
     g_return_if_fail (name[0] != '\0');
     g_return_if_fail (callback != NULL);
     g_return_if_fail (GTK_IS_WIDGET (realized_widget));
-    g_return_if_fail (gtk_widget_get_realized (realized_widget));
+    g_return_if_fail (ctk_widget_get_realized (realized_widget));
 
     info = g_new0 (RealizeDisconnectInfo, 1);
 
@@ -485,7 +485,7 @@ ancestor_leave_notify_event (GtkWidget *widget,
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
     g_assert (event != NULL);
 
-    bounds = eel_gtk_widget_get_bounds (GTK_WIDGET (event_data));
+    bounds = eel_ctk_widget_get_bounds (GTK_WIDGET (event_data));
 
     if (eel_irect_contains_point (bounds, event->x, event->y))
     {
@@ -528,7 +528,7 @@ ancestor_button_press_event (GtkWidget *widget,
 
     child = eel_wrap_table_find_child_at_event_point (EEL_WRAP_TABLE (image_table), event->x, event->y);
 
-    if (child && !gtk_widget_get_sensitive (child))
+    if (child && !ctk_widget_get_sensitive (child))
     {
         return FALSE;
     }
@@ -570,7 +570,7 @@ ancestor_button_release_event (GtkWidget *widget,
 
     child = eel_wrap_table_find_child_at_event_point (EEL_WRAP_TABLE (image_table), event->x, event->y);
 
-    if (child && !gtk_widget_get_sensitive (child))
+    if (child && !ctk_widget_get_sensitive (child))
     {
         return FALSE;
     }
@@ -626,7 +626,7 @@ eel_image_table_new (gboolean homogeneous)
 {
     EelImageTable *image_table;
 
-    image_table = EEL_IMAGE_TABLE (gtk_widget_new (eel_image_table_get_type (), NULL));
+    image_table = EEL_IMAGE_TABLE (ctk_widget_new (eel_image_table_get_type (), NULL));
 
     eel_wrap_table_set_homogeneous (EEL_WRAP_TABLE (image_table), homogeneous);
 
@@ -651,8 +651,8 @@ eel_image_table_add_empty_image (EelImageTable *image_table)
     g_return_val_if_fail (EEL_IS_IMAGE_TABLE (image_table), NULL);
 
     empty = eel_labeled_image_new (NULL, NULL);
-    gtk_container_add (GTK_CONTAINER (image_table), empty);
-    gtk_widget_set_sensitive (empty, FALSE);
+    ctk_container_add (GTK_CONTAINER (image_table), empty);
+    ctk_widget_set_sensitive (empty, FALSE);
 
     return empty;
 }

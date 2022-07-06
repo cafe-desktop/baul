@@ -423,7 +423,7 @@ msgstr ""
 msgid "Input Methods"
 msgstr ""
 
-#: ../eel/eel-gtk-extensions.c:445
+#: ../eel/eel-ctk-extensions.c:445
 msgid "Show more _details"
 msgstr ""
 

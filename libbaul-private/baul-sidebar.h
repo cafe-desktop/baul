@@ -26,7 +26,7 @@
 #define BAUL_SIDEBAR_H
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #ifdef __cplusplus
 extern "C" {

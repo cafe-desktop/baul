@@ -35,12 +35,12 @@
 #include <string.h>
 
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-accessibility.h>
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-string.h>
 #include <eel/eel-vfs-extensions.h>
@@ -105,7 +105,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (BaulLocationBar, baul_location_bar, GTK_TYPE_BOX);
 static BaulNavigationWindow *
 baul_location_bar_get_window (GtkWidget *bar)
 {
-    return BAUL_NAVIGATION_WINDOW (gtk_widget_get_ancestor (bar, BAUL_TYPE_WINDOW));
+    return BAUL_NAVIGATION_WINDOW (ctk_widget_get_ancestor (bar, BAUL_TYPE_WINDOW));
 }
 
 /**
@@ -126,7 +126,7 @@ baul_location_bar_get_location (BaulLocationBar *bar)
     char *user_location, *uri;
     GFile *location;
 
-    user_location = gtk_editable_get_chars (GTK_EDITABLE (bar->details->entry), 0, -1);
+    user_location = ctk_editable_get_chars (GTK_EDITABLE (bar->details->entry), 0, -1);
     location = g_file_parse_name (user_location);
     g_free (user_location);
     uri = g_file_get_uri (location);
@@ -165,13 +165,13 @@ drag_data_received_callback (GtkWidget *widget,
     g_assert (data != NULL);
     g_assert (callback_data == NULL);
 
-    names = g_uri_list_extract_uris (gtk_selection_data_get_data (data));
+    names = g_uri_list_extract_uris (ctk_selection_data_get_data (data));
 
     if (names == NULL || *names == NULL)
     {
         g_warning ("No D&D URI's");
         g_strfreev (names);
-        gtk_drag_finish (context, FALSE, FALSE, time);
+        ctk_drag_finish (context, FALSE, FALSE, time);
         return;
     }
 
@@ -196,14 +196,14 @@ drag_data_received_callback (GtkWidget *widget,
                                            name_count),
                                   name_count);
         /* eel_run_simple_dialog should really take in pairs
-         * like gtk_dialog_new_with_buttons() does. */
+         * like ctk_dialog_new_with_buttons() does. */
         new_windows_for_extras = eel_run_simple_dialog
                                  (GTK_WIDGET (window),
                                   TRUE,
                                   GTK_MESSAGE_QUESTION,
                                   prompt,
                                   detail,
-                                  "process-stop", "gtk-ok",
+                                  "process-stop", "ctk-ok",
                                   NULL) != 0 /* CAFE_OK */;
 
         g_free (prompt);
@@ -212,7 +212,7 @@ drag_data_received_callback (GtkWidget *widget,
         if (!new_windows_for_extras)
         {
             g_strfreev (names);
-            gtk_drag_finish (context, FALSE, FALSE, time);
+            ctk_drag_finish (context, FALSE, FALSE, time);
             return;
         }
     }
@@ -229,7 +229,7 @@ drag_data_received_callback (GtkWidget *widget,
         GFile *location = NULL;
 
         application = BAUL_WINDOW (window)->application;
-        screen = gtk_window_get_screen (GTK_WINDOW (window));
+        screen = ctk_window_get_screen (GTK_WINDOW (window));
 
         for (i = 1; names[i] != NULL; ++i)
         {
@@ -243,7 +243,7 @@ drag_data_received_callback (GtkWidget *widget,
 
     g_strfreev (names);
 
-    gtk_drag_finish (context, TRUE, FALSE, time);
+    ctk_drag_finish (context, TRUE, FALSE, time);
 }
 
 static void
@@ -266,8 +266,8 @@ drag_data_get_callback (GtkWidget *widget,
     {
     case BAUL_DND_URI_LIST:
     case BAUL_DND_TEXT_PLAIN:
-        gtk_selection_data_set (selection_data,
-                                gtk_selection_data_get_target (selection_data),
+        ctk_selection_data_set (selection_data,
+                                ctk_selection_data_get_target (selection_data),
                                 8, (guchar *) entry_text,
                                 eel_strlen (entry_text));
         break;
@@ -280,7 +280,7 @@ drag_data_get_callback (GtkWidget *widget,
 /* routine that determines the usize for the label widget as larger
    then the size of the largest string and then sets it to that so
    that we don't have localization problems. see
-   gtk_label_finalize_lines in gtklabel.c (line 618) for the code that
+   ctk_label_finalize_lines in ctklabel.c (line 618) for the code that
    we are imitating here. */
 
 static void
@@ -291,7 +291,7 @@ style_set_handler (GtkWidget *widget, GtkStyleContext *previous_style)
     int xpad;
     gint margin_start, margin_end;
 
-    layout = gtk_label_get_layout (GTK_LABEL(widget));
+    layout = ctk_label_get_layout (GTK_LABEL(widget));
 
     layout = pango_layout_copy (layout);
 
@@ -302,13 +302,13 @@ style_set_handler (GtkWidget *widget, GtkStyleContext *previous_style)
     pango_layout_get_pixel_size (layout, &width2, NULL);
     width = MAX (width, width2);
 
-    margin_start = gtk_widget_get_margin_start (widget);
-    margin_end = gtk_widget_get_margin_end (widget);
+    margin_start = ctk_widget_get_margin_start (widget);
+    margin_end = ctk_widget_get_margin_end (widget);
     xpad = margin_start + margin_end;
 
     width += 2 * xpad;
 
-    gtk_widget_set_size_request (widget, width, -1);
+    ctk_widget_set_size_request (widget, width, -1);
 
     g_object_unref (layout);
 }
@@ -327,13 +327,13 @@ label_button_pressed_callback (GtkWidget             *widget,
         return FALSE;
     }
 
-    window = baul_location_bar_get_window (gtk_widget_get_parent (widget));
+    window = baul_location_bar_get_window (ctk_widget_get_parent (widget));
     slot = BAUL_WINDOW (window)->details->active_pane->active_slot;
     view = slot->content_view;
-    label = gtk_bin_get_child (GTK_BIN (widget));
+    label = ctk_bin_get_child (GTK_BIN (widget));
     /* only pop-up if the URI in the entry matches the displayed location */
     if (view == NULL ||
-            strcmp (gtk_label_get_text (GTK_LABEL (label)), LOCATION_LABEL))
+            strcmp (ctk_label_get_text (GTK_LABEL (label)), LOCATION_LABEL))
     {
         return FALSE;
     }
@@ -350,7 +350,7 @@ editable_activate_callback (GtkEntry *entry,
     BaulLocationBar *self = user_data;
     const char *entry_text;
 
-    entry_text = gtk_entry_get_text (entry);
+    entry_text = ctk_entry_get_text (entry);
     if (entry_text != NULL && *entry_text != '\0')
     {
             emit_location_changed (self);
@@ -371,22 +371,22 @@ baul_location_bar_update_label (BaulLocationBar *bar)
     GFile *last_location;
 
     if (bar->details->last_location == NULL){
-        gtk_label_set_text (GTK_LABEL (bar->details->label), GO_TO_LABEL);
+        ctk_label_set_text (GTK_LABEL (bar->details->label), GO_TO_LABEL);
         baul_location_entry_set_secondary_action (BAUL_LOCATION_ENTRY (bar->details->entry),
                                                   BAUL_LOCATION_ENTRY_ACTION_GOTO);
         return;
     }
 
-    current_text = gtk_entry_get_text (GTK_ENTRY (bar->details->entry));
+    current_text = ctk_entry_get_text (GTK_ENTRY (bar->details->entry));
     location = g_file_parse_name (current_text);
     last_location = g_file_parse_name (bar->details->last_location);
 
     if (g_file_equal (last_location, location)) {
-        gtk_label_set_text (GTK_LABEL (bar->details->label), LOCATION_LABEL);
+        ctk_label_set_text (GTK_LABEL (bar->details->label), LOCATION_LABEL);
         baul_location_entry_set_secondary_action (BAUL_LOCATION_ENTRY (bar->details->entry),
                                                   BAUL_LOCATION_ENTRY_ACTION_CLEAR);
     } else {
-        gtk_label_set_text (GTK_LABEL (bar->details->label), GO_TO_LABEL);
+        ctk_label_set_text (GTK_LABEL (bar->details->label), GO_TO_LABEL);
         baul_location_entry_set_secondary_action (BAUL_LOCATION_ENTRY (bar->details->entry),
                                                   BAUL_LOCATION_ENTRY_ACTION_GOTO);
     }
@@ -408,7 +408,7 @@ baul_location_bar_activate (BaulLocationBar *bar)
     /* Put the keyboard focus in the text field when switching to this mode,
      * and select all text for easy overtyping
      */
-    gtk_widget_grab_focus (GTK_WIDGET (bar->details->entry));
+    ctk_widget_grab_focus (GTK_WIDGET (bar->details->entry));
     baul_entry_select_all (bar->details->entry);
 }
 
@@ -470,8 +470,8 @@ baul_location_bar_class_init (BaulLocationBarClass *klass)
             g_cclosure_marshal_VOID__STRING,
             G_TYPE_NONE, 1, G_TYPE_STRING);
 
-    binding_set = gtk_binding_set_by_class (klass);
-    gtk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
+    binding_set = ctk_binding_set_by_class (klass);
+    ctk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0, "cancel", 0);
 }
 
 static void
@@ -483,22 +483,22 @@ baul_location_bar_init (BaulLocationBar *bar)
 
     bar->details = baul_location_bar_get_instance_private (bar);
 
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (bar),
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (bar),
                                     GTK_ORIENTATION_HORIZONTAL);
 
-    event_box = gtk_event_box_new ();
-    gtk_event_box_set_visible_window (GTK_EVENT_BOX (event_box), FALSE);
+    event_box = ctk_event_box_new ();
+    ctk_event_box_set_visible_window (GTK_EVENT_BOX (event_box), FALSE);
 
-    gtk_container_set_border_width (GTK_CONTAINER (event_box), 4);
-    label = gtk_label_new (LOCATION_LABEL);
-    gtk_container_add   (GTK_CONTAINER (event_box), label);
-    gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_RIGHT);
-    gtk_label_set_xalign (GTK_LABEL (label), 1.0);
-    gtk_label_set_yalign (GTK_LABEL (label), 0.5);
+    ctk_container_set_border_width (GTK_CONTAINER (event_box), 4);
+    label = ctk_label_new (LOCATION_LABEL);
+    ctk_container_add   (GTK_CONTAINER (event_box), label);
+    ctk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_RIGHT);
+    ctk_label_set_xalign (GTK_LABEL (label), 1.0);
+    ctk_label_set_yalign (GTK_LABEL (label), 0.5);
     g_signal_connect (label, "style_set",
                       G_CALLBACK (style_set_handler), NULL);
 
-    gtk_box_pack_start (GTK_BOX (bar), event_box, FALSE, TRUE, 4);
+    ctk_box_pack_start (GTK_BOX (bar), event_box, FALSE, TRUE, 4);
 
     entry = baul_location_entry_new ();
 
@@ -507,7 +507,7 @@ baul_location_bar_init (BaulLocationBar *bar)
     g_signal_connect_object (entry, "changed",
                              G_CALLBACK (editable_changed_callback), bar, 0);
 
-    gtk_box_pack_start (GTK_BOX (bar), entry, TRUE, TRUE, 0);
+    ctk_box_pack_start (GTK_BOX (bar), entry, TRUE, TRUE, 0);
 
     eel_accessibility_set_up_label_widget_relation (label, entry);
 
@@ -516,7 +516,7 @@ baul_location_bar_init (BaulLocationBar *bar)
                       G_CALLBACK (label_button_pressed_callback), NULL);
 
     /* Drag source */
-    gtk_drag_source_set (GTK_WIDGET (event_box),
+    ctk_drag_source_set (GTK_WIDGET (event_box),
                          GDK_BUTTON1_MASK | GDK_BUTTON3_MASK,
                          drag_types, G_N_ELEMENTS (drag_types),
                          GDK_ACTION_COPY | GDK_ACTION_LINK);
@@ -524,7 +524,7 @@ baul_location_bar_init (BaulLocationBar *bar)
                              G_CALLBACK (drag_data_get_callback), bar, 0);
 
     /* Drag dest. */
-    gtk_drag_dest_set (GTK_WIDGET (bar),
+    ctk_drag_dest_set (GTK_WIDGET (bar),
                        GTK_DEST_DEFAULT_ALL,
                        drop_types, G_N_ELEMENTS (drop_types),
                        GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
@@ -534,7 +534,7 @@ baul_location_bar_init (BaulLocationBar *bar)
     bar->details->label = GTK_LABEL (label);
     bar->details->entry = BAUL_ENTRY (entry);
 
-    gtk_widget_show_all (GTK_WIDGET (bar));
+    ctk_widget_show_all (GTK_WIDGET (bar));
 }
 
 GtkWidget *
@@ -543,7 +543,7 @@ baul_location_bar_new (BaulNavigationWindowPane *pane)
     GtkWidget *bar;
     BaulLocationBar *location_bar;
 
-    bar = gtk_widget_new (BAUL_TYPE_LOCATION_BAR, NULL);
+    bar = ctk_widget_new (BAUL_TYPE_LOCATION_BAR, NULL);
     location_bar = BAUL_LOCATION_BAR (bar);
 
     /* Clipboard */
@@ -600,14 +600,14 @@ override_background_color (GtkWidget *widget,
     gchar          *css;
     GtkCssProvider *provider;
 
-    provider = gtk_css_provider_new ();
+    provider = ctk_css_provider_new ();
 
     css = g_strdup_printf ("entry { background-color: %s;}",
                            gdk_rgba_to_string (rgba));
-    gtk_css_provider_load_from_data (provider, css, -1, NULL);
+    ctk_css_provider_load_from_data (provider, css, -1, NULL);
     g_free (css);
 
-    gtk_style_context_add_provider (gtk_widget_get_style_context (widget),
+    ctk_style_context_add_provider (ctk_widget_get_style_context (widget),
                                     GTK_STYLE_PROVIDER (provider),
                                     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     g_object_unref (provider);
@@ -623,14 +623,14 @@ baul_location_bar_set_active (BaulLocationBar *location_bar, gboolean is_active)
     static GdkRGBA bg_active;
     static GdkRGBA bg_inactive;
 
-    style = gtk_widget_get_style_context (GTK_WIDGET (location_bar->details->entry));
+    style = ctk_widget_get_style_context (GTK_WIDGET (location_bar->details->entry));
 
     if (is_active)
-        gtk_style_context_get (style, GTK_STATE_FLAG_NORMAL,
+        ctk_style_context_get (style, GTK_STATE_FLAG_NORMAL,
                                GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                &c, NULL);
     else
-        gtk_style_context_get (style, GTK_STATE_FLAG_INSENSITIVE,
+        ctk_style_context_get (style, GTK_STATE_FLAG_INSENSITIVE,
                                GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                &c, NULL);
 

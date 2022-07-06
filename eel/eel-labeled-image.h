@@ -47,7 +47,7 @@
 #define EEL_LABELED_IMAGE_H
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "eel-art-extensions.h"
 
 #ifdef __cplusplus

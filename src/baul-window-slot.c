@@ -22,7 +22,7 @@
    Author: Christian Neumair <cneumair@gnome.org>
 */
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-string.h>
 
 #include <libbaul-private/baul-file.h>
@@ -89,7 +89,7 @@ real_update_query_editor (BaulWindowSlot *slot)
         slot->query_editor = BAUL_QUERY_EDITOR (query_editor);
 
         baul_window_slot_add_extra_location_widget (slot, query_editor);
-        gtk_widget_show (query_editor);
+        ctk_widget_show (query_editor);
         g_signal_connect_object (query_editor, "changed",
                                  G_CALLBACK (query_editor_changed_callback), slot, 0);
 
@@ -182,29 +182,29 @@ baul_window_slot_init (BaulWindowSlot *slot)
 {
     GtkWidget *content_box, *eventbox, *extras_vbox, *frame;
 
-    content_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    content_box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     slot->content_box = content_box;
-    gtk_widget_show (content_box);
+    ctk_widget_show (content_box);
 
-    frame = gtk_frame_new (NULL);
-    gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
-    gtk_box_pack_start (GTK_BOX (content_box), frame, FALSE, FALSE, 0);
+    frame = ctk_frame_new (NULL);
+    ctk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
+    ctk_box_pack_start (GTK_BOX (content_box), frame, FALSE, FALSE, 0);
     slot->extra_location_frame = frame;
 
-    eventbox = gtk_event_box_new ();
-    gtk_widget_set_name (eventbox, "baul-extra-view-widget");
-    gtk_container_add (GTK_CONTAINER (frame), eventbox);
-    gtk_widget_show (eventbox);
+    eventbox = ctk_event_box_new ();
+    ctk_widget_set_name (eventbox, "baul-extra-view-widget");
+    ctk_container_add (GTK_CONTAINER (frame), eventbox);
+    ctk_widget_show (eventbox);
 
-    extras_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    gtk_container_set_border_width (GTK_CONTAINER (extras_vbox), 6);
+    extras_vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+    ctk_container_set_border_width (GTK_CONTAINER (extras_vbox), 6);
     slot->extra_location_widgets = extras_vbox;
-    gtk_container_add (GTK_CONTAINER (eventbox), extras_vbox);
-    gtk_widget_show (extras_vbox);
+    ctk_container_add (GTK_CONTAINER (eventbox), extras_vbox);
+    ctk_widget_show (extras_vbox);
 
-    slot->view_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    gtk_box_pack_start (GTK_BOX (content_box), slot->view_box, TRUE, TRUE, 0);
-    gtk_widget_show (slot->view_box);
+    slot->view_box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    ctk_box_pack_start (GTK_BOX (content_box), slot->view_box, TRUE, TRUE, 0);
+    ctk_widget_show (slot->view_box);
 
     slot->title = g_strdup (_("Loading..."));
 }
@@ -391,12 +391,12 @@ baul_window_slot_update_icon (BaulWindowSlot *slot)
              * if we're setting to the same icon. This happens a lot e.g. when
              * the trash directory changes due to the file count changing.
              */
-            if (g_strcmp0 (icon_name, gtk_window_get_icon_name (GTK_WINDOW (window))) != 0)
+            if (g_strcmp0 (icon_name, ctk_window_get_icon_name (GTK_WINDOW (window))) != 0)
             {
                 if (g_strcmp0 (icon_name, "text-x-generic") == 0)
-                    gtk_window_set_icon_name (GTK_WINDOW (window), "folder-saved-search");
+                    ctk_window_set_icon_name (GTK_WINDOW (window), "folder-saved-search");
                 else
-                    gtk_window_set_icon_name (GTK_WINDOW (window), icon_name);
+                    ctk_window_set_icon_name (GTK_WINDOW (window), icon_name);
             }
         }
         else
@@ -407,7 +407,7 @@ baul_window_slot_update_icon (BaulWindowSlot *slot)
 
             if (pixbuf)
             {
-                gtk_window_set_icon (GTK_WINDOW (window), pixbuf);
+                ctk_window_set_icon (GTK_WINDOW (window), pixbuf);
                 g_object_unref (pixbuf);
             }
         }
@@ -480,7 +480,7 @@ baul_window_slot_set_content_view_widget (BaulWindowSlot *slot,
         baul_window_slot_disconnect_content_view (slot, slot->content_view);
 
         widget = baul_view_get_widget (slot->content_view);
-        gtk_widget_destroy (widget);
+        ctk_widget_destroy (widget);
         g_object_unref (slot->content_view);
         slot->content_view = NULL;
     }
@@ -488,10 +488,10 @@ baul_window_slot_set_content_view_widget (BaulWindowSlot *slot,
     if (new_view != NULL)
     {
         widget = baul_view_get_widget (new_view);
-        gtk_box_pack_start (GTK_BOX (slot->view_box), widget,
+        ctk_box_pack_start (GTK_BOX (slot->view_box), widget,
                             TRUE, TRUE, 0);
 
-        gtk_widget_show (widget);
+        ctk_widget_show (widget);
 
         slot->content_view = new_view;
         g_object_ref (slot->content_view);
@@ -545,7 +545,7 @@ baul_window_slot_update_query_editor (BaulWindowSlot *slot)
 {
     if (slot->query_editor != NULL)
     {
-        gtk_widget_destroy (GTK_WIDGET (slot->query_editor));
+        ctk_widget_destroy (GTK_WIDGET (slot->query_editor));
         g_assert (slot->query_editor == NULL);
     }
 
@@ -562,25 +562,25 @@ remove_all (GtkWidget *widget,
     GtkContainer *container;
     container = GTK_CONTAINER (data);
 
-    gtk_container_remove (container, widget);
+    ctk_container_remove (container, widget);
 }
 
 void
 baul_window_slot_remove_extra_location_widgets (BaulWindowSlot *slot)
 {
-    gtk_container_foreach (GTK_CONTAINER (slot->extra_location_widgets),
+    ctk_container_foreach (GTK_CONTAINER (slot->extra_location_widgets),
                            remove_all,
                            slot->extra_location_widgets);
-    gtk_widget_hide (slot->extra_location_frame);
+    ctk_widget_hide (slot->extra_location_frame);
 }
 
 void
 baul_window_slot_add_extra_location_widget (BaulWindowSlot *slot,
         GtkWidget *widget)
 {
-    gtk_box_pack_start (GTK_BOX (slot->extra_location_widgets),
+    ctk_box_pack_start (GTK_BOX (slot->extra_location_widgets),
                         widget, TRUE, TRUE, 0);
-    gtk_widget_show (slot->extra_location_frame);
+    ctk_widget_show (slot->extra_location_frame);
 }
 
 void
@@ -646,7 +646,7 @@ baul_window_slot_dispose (GObject *object)
     if (slot->content_view)
     {
         widget = baul_view_get_widget (slot->content_view);
-        gtk_widget_destroy (widget);
+        ctk_widget_destroy (widget);
         g_object_unref (slot->content_view);
         slot->content_view = NULL;
     }
@@ -654,7 +654,7 @@ baul_window_slot_dispose (GObject *object)
     if (slot->new_content_view)
     {
         widget = baul_view_get_widget (slot->new_content_view);
-        gtk_widget_destroy (widget);
+        ctk_widget_destroy (widget);
         g_object_unref (slot->new_content_view);
         slot->new_content_view = NULL;
     }

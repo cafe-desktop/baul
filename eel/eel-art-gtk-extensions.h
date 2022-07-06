@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* eel-art-gtk-extensions.h - Access gtk/gdk attributes as libart rectangles.
+/* eel-art-ctk-extensions.h - Access ctk/gdk attributes as libart rectangles.
 
    Copyright (C) 2000 Eazel, Inc.
 
@@ -22,7 +22,7 @@
    Authors: Ramiro Estrugo <ramiro@eazel.com>
 */
 
-/* The following functions accept gtk/gdk structures and
+/* The following functions accept ctk/gdk structures and
  * return their bounds and dimensions, where:
  *
  * bounds: The (x,y) and (width, height) of something.
@@ -35,7 +35,7 @@
 #ifndef EEL_ART_GTK_EXTENSIONS_H
 #define EEL_ART_GTK_EXTENSIONS_H
 
-#include "eel-gtk-extensions.h"
+#include "eel-ctk-extensions.h"
 #include "eel-art-extensions.h"
 
 #ifdef __cplusplus
@@ -43,8 +43,8 @@ extern "C" {
 #endif
 
     /* GtkWidget bounds and dimensions */
-    EelIRect      eel_gtk_widget_get_bounds                 (GtkWidget    *widget);
-    EelDimensions eel_gtk_widget_get_dimensions             (GtkWidget    *widget);
+    EelIRect      eel_ctk_widget_get_bounds                 (GtkWidget    *widget);
+    EelDimensions eel_ctk_widget_get_dimensions             (GtkWidget    *widget);
 
 #ifdef __cplusplus
 }

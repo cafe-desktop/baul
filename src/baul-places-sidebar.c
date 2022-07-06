@@ -26,13 +26,13 @@
 #include <cairo-gobject.h>
 
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <libnotify/notify.h>
 
 #include <eel/eel-debug.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-graphic-effects.h>
 #include <eel/eel-string.h>
@@ -290,8 +290,8 @@ add_heading (BaulPlacesSidebar *sidebar,
 {
     GtkTreeIter iter, child_iter;
 
-    gtk_list_store_append (sidebar->store, &iter);
-    gtk_list_store_set (sidebar->store, &iter,
+    ctk_list_store_append (sidebar->store, &iter);
+    ctk_list_store_set (sidebar->store, &iter,
                 PLACES_SIDEBAR_COLUMN_ROW_TYPE, PLACES_HEADING,
                 PLACES_SIDEBAR_COLUMN_SECTION_TYPE, section_type,
                 PLACES_SIDEBAR_COLUMN_HEADING_TEXT, title,
@@ -299,8 +299,8 @@ add_heading (BaulPlacesSidebar *sidebar,
                 PLACES_SIDEBAR_COLUMN_NO_EJECT, TRUE,
                 -1);
 
-    gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (sidebar->filter_model));
-    gtk_tree_model_filter_convert_child_iter_to_iter (GTK_TREE_MODEL_FILTER (sidebar->filter_model),
+    ctk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (sidebar->filter_model));
+    ctk_tree_model_filter_convert_child_iter_to_iter (GTK_TREE_MODEL_FILTER (sidebar->filter_model),
                               &child_iter,
                               &iter);
 
@@ -360,7 +360,7 @@ add_place (BaulPlacesSidebar *sidebar,
     check_heading_for_section (sidebar, section_type);
 
     icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
-    icon_scale = gtk_widget_get_scale_factor (GTK_WIDGET (sidebar));
+    icon_scale = ctk_widget_get_scale_factor (GTK_WIDGET (sidebar));
     icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
 
     pixbuf = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
@@ -399,8 +399,8 @@ add_place (BaulPlacesSidebar *sidebar,
         eject = NULL;
     }
 
-    gtk_list_store_append (sidebar->store, &iter);
-    gtk_list_store_set (sidebar->store, &iter,
+    ctk_list_store_append (sidebar->store, &iter);
+    ctk_list_store_set (sidebar->store, &iter,
                         PLACES_SIDEBAR_COLUMN_ICON, surface,
                         PLACES_SIDEBAR_COLUMN_NAME, name,
                         PLACES_SIDEBAR_COLUMN_URI, uri,
@@ -421,8 +421,8 @@ add_place (BaulPlacesSidebar *sidebar,
     {
        cairo_surface_destroy (surface);
     }
-    gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (sidebar->filter_model));
-    gtk_tree_model_filter_convert_child_iter_to_iter (GTK_TREE_MODEL_FILTER (sidebar->filter_model),
+    ctk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (sidebar->filter_model));
+    ctk_tree_model_filter_convert_child_iter_to_iter (GTK_TREE_MODEL_FILTER (sidebar->filter_model),
             &child_iter,
             &iter);
     return child_iter;
@@ -445,16 +445,16 @@ compare_for_selection (BaulPlacesSidebar *sidebar,
         /* last_uri always comes first */
         if (*path != NULL)
         {
-            gtk_tree_path_free (*path);
+            ctk_tree_path_free (*path);
         }
-        *path = gtk_tree_model_get_path (sidebar->filter_model,
+        *path = ctk_tree_model_get_path (sidebar->filter_model,
                                          iter);
     }
     else if (g_strcmp0 (location, added_uri) == 0)
     {
         if (*path == NULL)
         {
-            *path = gtk_tree_model_get_path (sidebar->filter_model,
+            *path = ctk_tree_model_get_path (sidebar->filter_model,
                                              iter);
         }
     }
@@ -491,14 +491,14 @@ update_places (BaulPlacesSidebar *sidebar)
     select_path = NULL;
     bookmark = NULL;
 
-    selection = gtk_tree_view_get_selection (sidebar->tree_view);
-    if (gtk_tree_selection_get_selected (selection, &model, &last_iter))
+    selection = ctk_tree_view_get_selection (sidebar->tree_view);
+    if (ctk_tree_selection_get_selected (selection, &model, &last_iter))
     {
-        gtk_tree_model_get (model,
+        ctk_tree_model_get (model,
                             &last_iter,
                             PLACES_SIDEBAR_COLUMN_URI, &last_uri, -1);
     }
-    gtk_list_store_clear (sidebar->store);
+    ctk_list_store_clear (sidebar->store);
 
     sidebar->devices_header_added = FALSE;
     sidebar->bookmarks_header_added = FALSE;
@@ -895,11 +895,11 @@ update_places (BaulPlacesSidebar *sidebar)
     g_free (location);
 
     if (select_path != NULL) {
-        gtk_tree_selection_select_path (selection, select_path);
+        ctk_tree_selection_select_path (selection, select_path);
     }
 
     if (select_path != NULL) {
-        gtk_tree_path_free (select_path);
+        ctk_tree_path_free (select_path);
     }
 
     g_free (last_uri);
@@ -991,14 +991,14 @@ over_eject_button (BaulPlacesSidebar *sidebar,
     GtkTreeModel *model;
 
     *path = NULL;
-    model = gtk_tree_view_get_model (sidebar->tree_view);
+    model = ctk_tree_view_get_model (sidebar->tree_view);
 
-   if (gtk_tree_view_get_path_at_pos (sidebar->tree_view,
+   if (ctk_tree_view_get_path_at_pos (sidebar->tree_view,
                                       x, y,
                                       path, &column, NULL, NULL)) {
 
-        gtk_tree_model_get_iter (model, &iter, *path);
-        gtk_tree_model_get (model, &iter,
+        ctk_tree_model_get_iter (model, &iter, *path);
+        ctk_tree_model_get (model, &iter,
                             PLACES_SIDEBAR_COLUMN_EJECT, &show_eject,
                             -1);
 
@@ -1006,20 +1006,20 @@ over_eject_button (BaulPlacesSidebar *sidebar,
             goto out;
         }
 
-        gtk_widget_style_get (GTK_WIDGET (sidebar->tree_view),
+        ctk_widget_style_get (GTK_WIDGET (sidebar->tree_view),
                               "horizontal-separator",&hseparator,
                               NULL);
         /* Reload cell attributes for this particular row */
-        gtk_tree_view_column_cell_set_cell_data (column,
+        ctk_tree_view_column_cell_set_cell_data (column,
                                                  model, &iter, FALSE, FALSE);
 
-        gtk_tree_view_column_cell_get_position (column,
+        ctk_tree_view_column_cell_get_position (column,
                                                 sidebar->eject_icon_cell_renderer,
                                                 &x_offset, &width);
 
         eject_button_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
 
-       /* This is kinda weird, but we have to do it to workaround gtk+ expanding
+       /* This is kinda weird, but we have to do it to workaround ctk+ expanding
        * the eject cell renderer (even thought we told it not to) and we then
        * had to set it right-aligned */
         x_offset += width - hseparator - EJECT_BUTTON_XPAD - eject_button_size;
@@ -1032,7 +1032,7 @@ over_eject_button (BaulPlacesSidebar *sidebar,
 
 out:
     if (*path != NULL) {
-        gtk_tree_path_free (*path);
+        ctk_tree_path_free (*path);
         *path = NULL;
     }
 
@@ -1043,7 +1043,7 @@ static gboolean
 clicked_eject_button (BaulPlacesSidebar *sidebar,
                       GtkTreePath **path)
 {
-    GdkEvent *event = gtk_get_current_event ();
+    GdkEvent *event = ctk_get_current_event ();
     GdkEventButton *button_event = (GdkEventButton *) event;
 
     if ((event->type == GDK_BUTTON_PRESS || event->type == GDK_BUTTON_RELEASE) &&
@@ -1081,13 +1081,13 @@ loading_uri_callback (BaulWindowInfo *window,
         sidebar->uri = g_strdup (location);
 
         /* set selection if any place matches location */
-        selection = gtk_tree_view_get_selection (sidebar->tree_view);
-        gtk_tree_selection_unselect_all (selection);
-        valid = gtk_tree_model_get_iter_first (sidebar->filter_model, &iter);
+        selection = ctk_tree_view_get_selection (sidebar->tree_view);
+        ctk_tree_selection_unselect_all (selection);
+        valid = ctk_tree_model_get_iter_first (sidebar->filter_model, &iter);
 
         while (valid)
         {
-            gtk_tree_model_get (sidebar->filter_model, &iter,
+            ctk_tree_model_get (sidebar->filter_model, &iter,
                                 PLACES_SIDEBAR_COLUMN_URI, &uri,
                                 -1);
             if (uri != NULL)
@@ -1095,12 +1095,12 @@ loading_uri_callback (BaulWindowInfo *window,
                 if (strcmp (uri, location) == 0)
                 {
                     g_free (uri);
-                    gtk_tree_selection_select_iter (selection, &iter);
+                    ctk_tree_selection_select_iter (selection, &iter);
                     break;
                 }
                 g_free (uri);
             }
-            valid = gtk_tree_model_iter_next (sidebar->filter_model, &iter);
+            valid = ctk_tree_model_iter_next (sidebar->filter_model, &iter);
         }
     }
 }
@@ -1119,7 +1119,7 @@ compute_drop_position (GtkTreeView *tree_view,
     PlaceType place_type;
     SectionType section_type;
 
-    if (!gtk_tree_view_get_dest_row_at_pos (tree_view,
+    if (!ctk_tree_view_get_dest_row_at_pos (tree_view,
                                             x,
                                             y,
                                             path,
@@ -1127,10 +1127,10 @@ compute_drop_position (GtkTreeView *tree_view,
         return FALSE;
     }
 
-    model = gtk_tree_view_get_model (tree_view);
+    model = ctk_tree_view_get_model (tree_view);
 
-    gtk_tree_model_get_iter (model, &iter, *path);
-    gtk_tree_model_get (model, &iter,
+    ctk_tree_model_get_iter (model, &iter, *path);
+    ctk_tree_model_get (model, &iter,
                         PLACES_SIDEBAR_COLUMN_ROW_TYPE, &place_type,
                         PLACES_SIDEBAR_COLUMN_SECTION_TYPE, &section_type,
                         -1);
@@ -1142,7 +1142,7 @@ compute_drop_position (GtkTreeView *tree_view,
          * is a special case, so we can create new bookmarks by dragging
          * at the beginning or end of the bookmark list.
          */
-        gtk_tree_path_free (*path);
+        ctk_tree_path_free (*path);
         *path = NULL;
 
         return FALSE;
@@ -1152,7 +1152,7 @@ compute_drop_position (GtkTreeView *tree_view,
         sidebar->drag_data_received &&
         sidebar->drag_data_info == GTK_TREE_MODEL_ROW) {
         /* don't allow dropping bookmarks into non-bookmark areas */
-        gtk_tree_path_free (*path);
+        ctk_tree_path_free (*path);
         *path = NULL;
 
         return FALSE;
@@ -1185,7 +1185,7 @@ get_drag_data (GtkTreeView *tree_view,
 {
     GdkAtom target;
 
-    target = gtk_drag_dest_find_target (GTK_WIDGET (tree_view),
+    target = ctk_drag_dest_find_target (GTK_WIDGET (tree_view),
                                         context,
                                         NULL);
 
@@ -1194,7 +1194,7 @@ get_drag_data (GtkTreeView *tree_view,
         return FALSE;
     }
 
-    gtk_drag_get_data (GTK_WIDGET (tree_view),
+    ctk_drag_get_data (GTK_WIDGET (tree_view),
                        context, target, time);
 
     return TRUE;
@@ -1300,9 +1300,9 @@ drag_motion_callback (GtkTreeView *tree_view,
         }
         else
         {
-            gtk_tree_model_get_iter (sidebar->filter_model,
+            ctk_tree_model_get_iter (sidebar->filter_model,
                                      &iter, path);
-            gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model),
+            ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model),
                                 &iter,
                                 PLACES_SIDEBAR_COLUMN_URI, &uri,
                                 -1);
@@ -1314,11 +1314,11 @@ drag_motion_callback (GtkTreeView *tree_view,
     }
 
     if (action != 0) {
-        gtk_tree_view_set_drag_dest_row (tree_view, path, pos);
+        ctk_tree_view_set_drag_dest_row (tree_view, path, pos);
     }
 
     if (path != NULL) {
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
     }
 
  out:
@@ -1343,7 +1343,7 @@ drag_leave_callback (GtkTreeView *tree_view,
                      BaulPlacesSidebar *sidebar)
 {
     free_drag_data (sidebar);
-    gtk_tree_view_set_drag_dest_row (tree_view, NULL, GTK_TREE_VIEW_DROP_BEFORE);
+    ctk_tree_view_set_drag_dest_row (tree_view, NULL, GTK_TREE_VIEW_DROP_BEFORE);
     g_signal_stop_emission_by_name (tree_view, "drag-leave");
 }
 
@@ -1361,7 +1361,7 @@ bookmarks_drop_uris (BaulPlacesSidebar *sidebar,
     GIcon *icon;
     BaulFile *file = NULL;
 
-    uris = gtk_selection_data_get_uris (selection_data);
+    uris = ctk_selection_data_get_uris (selection_data);
     if (!uris)
         return;
 
@@ -1451,9 +1451,9 @@ get_selected_iter (BaulPlacesSidebar *sidebar,
 {
     GtkTreeSelection *selection;
 
-    selection = gtk_tree_view_get_selection (sidebar->tree_view);
+    selection = ctk_tree_view_get_selection (sidebar->tree_view);
 
-    return gtk_tree_selection_get_selected (selection, NULL, iter);
+    return ctk_tree_selection_get_selected (selection, NULL, iter);
 }
 
 /* Reorders the selected bookmark to the specified position */
@@ -1470,7 +1470,7 @@ reorder_bookmarks (BaulPlacesSidebar *sidebar,
     if (!get_selected_iter (sidebar, &iter))
         return;
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_ROW_TYPE, &type,
                         PLACES_SIDEBAR_COLUMN_INDEX, &old_position,
                         -1);
@@ -1512,10 +1512,10 @@ drag_data_received_callback (GtkWidget *widget,
 
     if (!sidebar->drag_data_received)
     {
-        if (gtk_selection_data_get_target (selection_data) != GDK_NONE &&
+        if (ctk_selection_data_get_target (selection_data) != GDK_NONE &&
                 info == TEXT_URI_LIST)
         {
-            sidebar->drag_list = build_selection_list (gtk_selection_data_get_data (selection_data));
+            sidebar->drag_list = build_selection_list (ctk_selection_data_get_data (selection_data));
         }
         else
         {
@@ -1542,14 +1542,14 @@ drag_data_received_callback (GtkWidget *widget,
     if (tree_pos == GTK_TREE_VIEW_DROP_BEFORE ||
         tree_pos == GTK_TREE_VIEW_DROP_AFTER)
     {
-        model = gtk_tree_view_get_model (tree_view);
+        model = ctk_tree_view_get_model (tree_view);
 
-        if (!gtk_tree_model_get_iter (model, &iter, tree_path))
+        if (!ctk_tree_model_get_iter (model, &iter, tree_path))
         {
             goto out;
         }
 
-        gtk_tree_model_get (model, &iter,
+        ctk_tree_model_get (model, &iter,
                             PLACES_SIDEBAR_COLUMN_SECTION_TYPE, &section_type,
                             PLACES_SIDEBAR_COLUMN_ROW_TYPE, &place_type,
                             PLACES_SIDEBAR_COLUMN_INDEX, &position,
@@ -1601,17 +1601,17 @@ drag_data_received_callback (GtkWidget *widget,
 
         if (real_action > 0)
         {
-            model = gtk_tree_view_get_model (tree_view);
+            model = ctk_tree_view_get_model (tree_view);
 
-            gtk_tree_model_get_iter (model, &iter, tree_path);
-            gtk_tree_model_get (model, &iter,
+            ctk_tree_model_get_iter (model, &iter, tree_path);
+            ctk_tree_model_get (model, &iter,
                                 PLACES_SIDEBAR_COLUMN_URI, &drop_uri,
                                 -1);
 
             switch (info)
             {
             case TEXT_URI_LIST:
-                selection_list = build_selection_list (gtk_selection_data_get_data (selection_data));
+                selection_list = build_selection_list (ctk_selection_data_get_data (selection_data));
                 uris = uri_list_from_selection (selection_list);
                 baul_file_operations_copy_move (uris, NULL, drop_uri,
                                                 real_action, GTK_WIDGET (tree_view),
@@ -1635,9 +1635,9 @@ drag_data_received_callback (GtkWidget *widget,
 out:
     sidebar->drop_occured = FALSE;
     free_drag_data (sidebar);
-    gtk_drag_finish (context, success, FALSE, time);
+    ctk_drag_finish (context, success, FALSE, time);
 
-    gtk_tree_path_free (tree_path);
+    ctk_tree_path_free (tree_path);
 }
 
 static gboolean
@@ -1773,7 +1773,7 @@ bookmarks_check_popup_sensitivity (BaulPlacesSidebar *sidebar)
 
     if (get_selected_iter (sidebar, &iter))
     {
-        gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+        ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                             PLACES_SIDEBAR_COLUMN_ROW_TYPE, &type,
                             PLACES_SIDEBAR_COLUMN_DRIVE, &drive,
                             PLACES_SIDEBAR_COLUMN_VOLUME, &volume,
@@ -1782,11 +1782,11 @@ bookmarks_check_popup_sensitivity (BaulPlacesSidebar *sidebar)
                             -1);
     }
 
-    gtk_widget_show (sidebar->popup_menu_open_in_new_tab_item);
+    ctk_widget_show (sidebar->popup_menu_open_in_new_tab_item);
 
-    gtk_widget_set_sensitive (sidebar->popup_menu_remove_item, (type == PLACES_BOOKMARK));
-    gtk_widget_set_sensitive (sidebar->popup_menu_rename_item, (type == PLACES_BOOKMARK));
-    gtk_widget_set_sensitive (sidebar->popup_menu_empty_trash_item, !baul_trash_monitor_is_empty ());
+    ctk_widget_set_sensitive (sidebar->popup_menu_remove_item, (type == PLACES_BOOKMARK));
+    ctk_widget_set_sensitive (sidebar->popup_menu_rename_item, (type == PLACES_BOOKMARK));
+    ctk_widget_set_sensitive (sidebar->popup_menu_empty_trash_item, !baul_trash_monitor_is_empty ());
 
     check_visibility (mount, volume, drive,
                       &show_mount, &show_unmount, &show_eject, &show_rescan, &show_format, &show_start, &show_stop);
@@ -1798,41 +1798,41 @@ bookmarks_check_popup_sensitivity (BaulPlacesSidebar *sidebar)
     show_empty_trash = (uri != NULL) &&
                        (!strcmp (uri, "trash:///"));
 
-    gtk_widget_set_visible (sidebar->popup_menu_separator_item,
+    ctk_widget_set_visible (sidebar->popup_menu_separator_item,
                               show_mount || show_unmount || show_eject || show_format || show_empty_trash);
-    gtk_widget_set_visible (sidebar->popup_menu_mount_item, show_mount);
-    gtk_widget_set_visible (sidebar->popup_menu_unmount_item, show_unmount);
-    gtk_widget_set_visible (sidebar->popup_menu_eject_item, show_eject);
-    gtk_widget_set_visible (sidebar->popup_menu_rescan_item, show_rescan);
-    gtk_widget_set_visible (sidebar->popup_menu_format_item, show_format);
-    gtk_widget_set_visible (sidebar->popup_menu_start_item, show_start);
-    gtk_widget_set_visible (sidebar->popup_menu_stop_item, show_stop);
-    gtk_widget_set_visible (sidebar->popup_menu_empty_trash_item, show_empty_trash);
+    ctk_widget_set_visible (sidebar->popup_menu_mount_item, show_mount);
+    ctk_widget_set_visible (sidebar->popup_menu_unmount_item, show_unmount);
+    ctk_widget_set_visible (sidebar->popup_menu_eject_item, show_eject);
+    ctk_widget_set_visible (sidebar->popup_menu_rescan_item, show_rescan);
+    ctk_widget_set_visible (sidebar->popup_menu_format_item, show_format);
+    ctk_widget_set_visible (sidebar->popup_menu_start_item, show_start);
+    ctk_widget_set_visible (sidebar->popup_menu_stop_item, show_stop);
+    ctk_widget_set_visible (sidebar->popup_menu_empty_trash_item, show_empty_trash);
 
     /* Adjust start/stop items to reflect the type of the drive */
-    gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Start"));
-    gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Stop"));
+    ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Start"));
+    ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Stop"));
     if ((show_start || show_stop) && drive != NULL)
     {
         switch (g_drive_get_start_stop_type (drive))
         {
         case G_DRIVE_START_STOP_TYPE_SHUTDOWN:
             /* start() for type G_DRIVE_START_STOP_TYPE_SHUTDOWN is normally not used */
-            gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Power On"));
-            gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Safely Remove Drive"));
+            ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Power On"));
+            ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Safely Remove Drive"));
             break;
         case G_DRIVE_START_STOP_TYPE_NETWORK:
-            gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Connect Drive"));
-            gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Disconnect Drive"));
+            ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Connect Drive"));
+            ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Disconnect Drive"));
             break;
         case G_DRIVE_START_STOP_TYPE_MULTIDISK:
-            gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Start Multi-disk Device"));
-            gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Stop Multi-disk Device"));
+            ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Start Multi-disk Device"));
+            ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Stop Multi-disk Device"));
             break;
         case G_DRIVE_START_STOP_TYPE_PASSWORD:
             /* stop() for type G_DRIVE_START_STOP_TYPE_PASSWORD is normally not used */
-            gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Unlock Drive"));
-            gtk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Lock Drive"));
+            ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_start_item), _("_Unlock Drive"));
+            ctk_menu_item_set_label (GTK_MENU_ITEM (sidebar->popup_menu_stop_item), _("_Lock Drive"));
             break;
 
         default:
@@ -1886,7 +1886,7 @@ volume_mounted_cb (GVolume *volume,
 
                 cur = BAUL_WINDOW (sidebar->window);
                 new = baul_application_create_navigation_window (cur->application,
-                        gtk_window_get_screen (GTK_WINDOW (cur)));
+                        ctk_window_get_screen (GTK_WINDOW (cur)));
                 baul_window_go_to (new, location);
             }
         }
@@ -1941,12 +1941,12 @@ open_selected_bookmark (BaulPlacesSidebar   *sidebar,
         return;
     }
 
-    if (!gtk_tree_model_get_iter (model, &iter, path))
+    if (!ctk_tree_model_get_iter (model, &iter, path))
     {
         return;
     }
 
-    gtk_tree_model_get (model, &iter, PLACES_SIDEBAR_COLUMN_URI, &uri, -1);
+    ctk_tree_model_get (model, &iter, PLACES_SIDEBAR_COLUMN_URI, &uri, -1);
 
     if (uri != NULL)
     {
@@ -1970,7 +1970,7 @@ open_selected_bookmark (BaulPlacesSidebar   *sidebar,
 
             cur = BAUL_WINDOW (sidebar->window);
             new = baul_application_create_navigation_window (cur->application,
-                    gtk_window_get_screen (GTK_WINDOW (cur)));
+                    ctk_window_get_screen (GTK_WINDOW (cur)));
             baul_window_go_to (new, location);
         }
         g_object_unref (location);
@@ -1982,7 +1982,7 @@ open_selected_bookmark (BaulPlacesSidebar   *sidebar,
         GDrive *drive;
         GVolume *volume;
 
-        gtk_tree_model_get (model, &iter,
+        ctk_tree_model_get (model, &iter,
                             PLACES_SIDEBAR_COLUMN_DRIVE, &drive,
                             PLACES_SIDEBAR_COLUMN_VOLUME, &volume,
                             -1);
@@ -2008,7 +2008,7 @@ open_selected_bookmark (BaulPlacesSidebar   *sidebar,
         {
             GMountOperation *mount_op;
 
-            mount_op = gtk_mount_operation_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (sidebar))));
+            mount_op = ctk_mount_operation_new (GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (sidebar))));
             g_drive_start (drive, G_DRIVE_START_NONE, mount_op, NULL, drive_start_from_bookmark_cb, NULL);
             g_object_unref (mount_op);
         }
@@ -2027,12 +2027,12 @@ open_shortcut_from_menu (BaulPlacesSidebar   *sidebar,
     GtkTreeModel *model;
     GtkTreePath *path;
 
-    model = gtk_tree_view_get_model (sidebar->tree_view);
-    gtk_tree_view_get_cursor (sidebar->tree_view, &path, NULL);
+    model = ctk_tree_view_get_model (sidebar->tree_view);
+    ctk_tree_view_get_cursor (sidebar->tree_view, &path, NULL);
 
     open_selected_bookmark (sidebar, model, path, flags);
 
-    gtk_tree_path_free (path);
+    ctk_tree_path_free (path);
 }
 
 static void
@@ -2069,15 +2069,15 @@ rename_selected_bookmark (BaulPlacesSidebar *sidebar)
         GtkCellRenderer *cell;
         GList *renderers;
 
-        path = gtk_tree_model_get_path (GTK_TREE_MODEL (sidebar->filter_model), &iter);
-        column = gtk_tree_view_get_column (GTK_TREE_VIEW (sidebar->tree_view), 0);
-        renderers = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (column));
+        path = ctk_tree_model_get_path (GTK_TREE_MODEL (sidebar->filter_model), &iter);
+        column = ctk_tree_view_get_column (GTK_TREE_VIEW (sidebar->tree_view), 0);
+        renderers = ctk_cell_layout_get_cells (GTK_CELL_LAYOUT (column));
         cell = g_list_nth_data (renderers, 6);
         g_list_free (renderers);
         g_object_set (cell, "editable", TRUE, NULL);
-        gtk_tree_view_set_cursor_on_cell (GTK_TREE_VIEW (sidebar->tree_view),
+        ctk_tree_view_set_cursor_on_cell (GTK_TREE_VIEW (sidebar->tree_view),
                                           path, column, cell, TRUE);
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
     }
 }
 
@@ -2101,7 +2101,7 @@ remove_selected_bookmarks (BaulPlacesSidebar *sidebar)
         return;
     }
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_ROW_TYPE, &type,
                         -1);
 
@@ -2110,7 +2110,7 @@ remove_selected_bookmarks (BaulPlacesSidebar *sidebar)
         return;
     }
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_INDEX, &index,
                         -1);
 
@@ -2136,7 +2136,7 @@ mount_shortcut_cb (GtkMenuItem           *item,
         return;
     }
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_VOLUME, &volume,
                         -1);
 
@@ -2181,7 +2181,7 @@ do_unmount_selection (BaulPlacesSidebar *sidebar)
         return;
     }
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_MOUNT, &mount,
                         -1);
 
@@ -2312,7 +2312,7 @@ do_eject (GMount *mount,
 
     GMountOperation *mount_op;
 
-    mount_op = gtk_mount_operation_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (sidebar))));
+    mount_op = ctk_mount_operation_new (GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (sidebar))));
 
     if (mount != NULL)
     {
@@ -2351,7 +2351,7 @@ eject_shortcut_cb (GtkMenuItem           *item,
         return;
     }
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_MOUNT, &mount,
                         PLACES_SIDEBAR_COLUMN_VOLUME, &volume,
                         PLACES_SIDEBAR_COLUMN_DRIVE, &drive,
@@ -2378,12 +2378,12 @@ eject_or_unmount_bookmark (BaulPlacesSidebar *sidebar,
     {
         return FALSE;
     }
-    if (!gtk_tree_model_get_iter (model, &iter, path))
+    if (!ctk_tree_model_get_iter (model, &iter, path))
     {
         return FALSE;
     }
 
-    gtk_tree_model_get (model, &iter,
+    ctk_tree_model_get (model, &iter,
                         PLACES_SIDEBAR_COLUMN_MOUNT, &mount,
                         PLACES_SIDEBAR_COLUMN_VOLUME, &volume,
                         PLACES_SIDEBAR_COLUMN_DRIVE, &drive,
@@ -2425,14 +2425,14 @@ eject_or_unmount_selection (BaulPlacesSidebar *sidebar)
         return FALSE;
     }
 
-    path = gtk_tree_model_get_path (GTK_TREE_MODEL (sidebar->filter_model), &iter);
+    path = ctk_tree_model_get_path (GTK_TREE_MODEL (sidebar->filter_model), &iter);
     if (path == NULL) {
         return FALSE;
     }
 
     ret = eject_or_unmount_bookmark (sidebar, path);
 
-    gtk_tree_path_free (path);
+    ctk_tree_path_free (path);
 
     return ret;
 }
@@ -2476,7 +2476,7 @@ rescan_shortcut_cb (GtkMenuItem           *item,
         return;
     }
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_DRIVE, &drive,
                         -1);
 
@@ -2533,7 +2533,7 @@ start_shortcut_cb (GtkMenuItem           *item,
         return;
     }
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_DRIVE, &drive,
                         -1);
 
@@ -2541,7 +2541,7 @@ start_shortcut_cb (GtkMenuItem           *item,
     {
         GMountOperation *mount_op;
 
-        mount_op = gtk_mount_operation_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (sidebar))));
+        mount_op = ctk_mount_operation_new (GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (sidebar))));
 
         g_drive_start (drive, G_DRIVE_START_NONE, mount_op, NULL, drive_start_cb, NULL);
 
@@ -2594,7 +2594,7 @@ stop_shortcut_cb (GtkMenuItem           *item,
         return;
     }
 
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_DRIVE, &drive,
                         -1);
 
@@ -2602,7 +2602,7 @@ stop_shortcut_cb (GtkMenuItem           *item,
     {
         GMountOperation *mount_op;
 
-        mount_op = gtk_mount_operation_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (sidebar))));
+        mount_op = ctk_mount_operation_new (GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (sidebar))));
         baul_window_info_set_initiated_unmount (sidebar->window, TRUE);
         g_drive_stop (drive, G_MOUNT_UNMOUNT_NONE, mount_op, NULL, drive_stop_cb,
                       g_object_ref (sidebar->window));
@@ -2628,7 +2628,7 @@ bookmarks_key_press_event_cb (GtkWidget             *widget,
     GtkTreePath *path;
     BaulWindowOpenFlags flags = 0;
 
-    modifiers = gtk_accelerator_get_default_mod_mask ();
+    modifiers = ctk_accelerator_get_default_mod_mask ();
 
     if (event->keyval == GDK_KEY_Return ||
         event->keyval == GDK_KEY_KP_Enter ||
@@ -2642,12 +2642,12 @@ bookmarks_key_press_event_cb (GtkWidget             *widget,
         else if ((event->state & modifiers) == GDK_CONTROL_MASK)
             flags = BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW;
 
-        model = gtk_tree_view_get_model(sidebar->tree_view);
-        gtk_tree_view_get_cursor(sidebar->tree_view, &path, NULL);
+        model = ctk_tree_view_get_model(sidebar->tree_view);
+        ctk_tree_view_get_cursor(sidebar->tree_view, &path, NULL);
 
         open_selected_bookmark(sidebar, model, path, flags);
 
-        gtk_tree_path_free(path);
+        ctk_tree_path_free(path);
         return TRUE;
     }
 
@@ -2686,11 +2686,11 @@ bookmarks_build_popup_menu (BaulPlacesSidebar *sidebar)
         return;
     }
 
-    sidebar->popup_menu = gtk_menu_new ();
+    sidebar->popup_menu = ctk_menu_new ();
 
-    gtk_menu_set_reserve_toggle_size (GTK_MENU (sidebar->popup_menu), FALSE);
+    ctk_menu_set_reserve_toggle_size (GTK_MENU (sidebar->popup_menu), FALSE);
 
-    gtk_menu_attach_to_widget (GTK_MENU (sidebar->popup_menu),
+    ctk_menu_attach_to_widget (GTK_MENU (sidebar->popup_menu),
                                GTK_WIDGET (sidebar),
                                bookmarks_popup_menu_detach_cb);
 
@@ -2698,23 +2698,23 @@ bookmarks_build_popup_menu (BaulPlacesSidebar *sidebar)
 
     g_signal_connect (item, "activate",
                       G_CALLBACK (open_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon (NULL, _("Open in New _Tab"));
     sidebar->popup_menu_open_in_new_tab_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (open_shortcut_in_new_tab_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon (NULL, _("Open in New _Window"));
     g_signal_connect (item, "activate",
                       G_CALLBACK (open_shortcut_in_new_window_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
-    eel_gtk_menu_append_separator (GTK_MENU (sidebar->popup_menu));
+    eel_ctk_menu_append_separator (GTK_MENU (sidebar->popup_menu));
 
     item = eel_image_menu_item_new_from_icon ("list-remove", _("Remove"));
 
@@ -2722,69 +2722,69 @@ bookmarks_build_popup_menu (BaulPlacesSidebar *sidebar)
 
     g_signal_connect (item, "activate",
                       G_CALLBACK (remove_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon (NULL, _("Rename..."));
     sidebar->popup_menu_rename_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (rename_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     /* Mount/Unmount/Eject menu items */
 
     sidebar->popup_menu_separator_item =
-        GTK_WIDGET (eel_gtk_menu_append_separator (GTK_MENU (sidebar->popup_menu)));
+        GTK_WIDGET (eel_ctk_menu_append_separator (GTK_MENU (sidebar->popup_menu)));
 
     item = eel_image_menu_item_new_from_icon (NULL, _("_Mount"));
     sidebar->popup_menu_mount_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (mount_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon ("media-eject", _("_Unmount"));
     sidebar->popup_menu_unmount_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (unmount_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon ("media-eject", _("_Eject"));
     sidebar->popup_menu_eject_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (eject_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon (NULL, _("_Detect Media"));
     sidebar->popup_menu_rescan_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (rescan_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon (NULL, _("_Format"));
     sidebar->popup_menu_format_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (format_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon (NULL, _("_Start"));
     sidebar->popup_menu_start_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (start_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     item = eel_image_menu_item_new_from_icon (NULL, _("_Stop"));
     sidebar->popup_menu_stop_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (stop_shortcut_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     /* Empty Trash menu item */
 
@@ -2792,8 +2792,8 @@ bookmarks_build_popup_menu (BaulPlacesSidebar *sidebar)
     sidebar->popup_menu_empty_trash_item = item;
     g_signal_connect (item, "activate",
                       G_CALLBACK (empty_trash_cb), sidebar);
-    gtk_widget_show (item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
+    ctk_widget_show (item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (sidebar->popup_menu), item);
 
     bookmarks_check_popup_sensitivity (sidebar);
 }
@@ -2841,27 +2841,27 @@ bookmarks_button_release_event_cb (GtkWidget *widget,
     if (clicked_eject_button (sidebar, &path))
     {
         eject_or_unmount_bookmark (sidebar, path);
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
         return FALSE;
     }
 
     tree_view = GTK_TREE_VIEW (widget);
-    model = gtk_tree_view_get_model (tree_view);
+    model = ctk_tree_view_get_model (tree_view);
 
     if (event->button == 1)
     {
 
-        if (event->window != gtk_tree_view_get_bin_window (tree_view))
+        if (event->window != ctk_tree_view_get_bin_window (tree_view))
         {
             return FALSE;
         }
 
-        gtk_tree_view_get_path_at_pos (tree_view, (int) event->x, (int) event->y,
+        ctk_tree_view_get_path_at_pos (tree_view, (int) event->x, (int) event->y,
                                        &path, NULL, NULL, NULL);
 
         open_selected_bookmark (sidebar, model, path, 0);
 
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
     }
 
     return FALSE;
@@ -2883,7 +2883,7 @@ update_eject_buttons (BaulPlacesSidebar *sidebar,
 
     path_same = (path != NULL) &&
         (sidebar->eject_highlight_path != NULL) &&
-        (gtk_tree_path_compare (sidebar->eject_highlight_path, path) == 0);
+        (ctk_tree_path_compare (sidebar->eject_highlight_path, path) == 0);
 
     if (path_same) {
         /* Same path - highlight up to date */
@@ -2891,11 +2891,11 @@ update_eject_buttons (BaulPlacesSidebar *sidebar,
     }
 
     if (path) {
-        gtk_tree_model_get_iter (GTK_TREE_MODEL (sidebar->filter_model),
+        ctk_tree_model_get_iter (GTK_TREE_MODEL (sidebar->filter_model),
                      &iter,
                      path);
 
-        gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model),
+        ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model),
                     &iter,
                     PLACES_SIDEBAR_COLUMN_EJECT, &icon_visible,
                     -1);
@@ -2906,17 +2906,17 @@ update_eject_buttons (BaulPlacesSidebar *sidebar,
          * an eject button area.
          */
         if (sidebar->eject_highlight_path) {
-            gtk_tree_model_get_iter (GTK_TREE_MODEL (sidebar->store),
+            ctk_tree_model_get_iter (GTK_TREE_MODEL (sidebar->store),
                          &iter,
                          sidebar->eject_highlight_path);
 
-            gtk_list_store_set (sidebar->store,
+            ctk_list_store_set (sidebar->store,
                         &iter,
                         PLACES_SIDEBAR_COLUMN_EJECT_ICON, get_eject_icon (FALSE),
                         -1);
-            gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (sidebar->filter_model));
+            ctk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (sidebar->filter_model));
 
-            gtk_tree_path_free (sidebar->eject_highlight_path);
+            ctk_tree_path_free (sidebar->eject_highlight_path);
             sidebar->eject_highlight_path = NULL;
         }
 
@@ -2929,16 +2929,16 @@ update_eject_buttons (BaulPlacesSidebar *sidebar,
         /* add highlighting to the selected path, as the icon is visible and
          * we're hovering it.
          */
-        gtk_tree_model_get_iter (GTK_TREE_MODEL (sidebar->store),
+        ctk_tree_model_get_iter (GTK_TREE_MODEL (sidebar->store),
                      &iter,
                      path);
-        gtk_list_store_set (sidebar->store,
+        ctk_list_store_set (sidebar->store,
                     &iter,
                     PLACES_SIDEBAR_COLUMN_EJECT_ICON, get_eject_icon (TRUE),
                     -1);
-        gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (sidebar->filter_model));
+        ctk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (sidebar->filter_model));
 
-        sidebar->eject_highlight_path = gtk_tree_path_copy (path);
+        sidebar->eject_highlight_path = ctk_tree_path_copy (path);
     }
 }
 
@@ -2953,7 +2953,7 @@ bookmarks_motion_event_cb (GtkWidget             *widget,
 
     if (over_eject_button (sidebar, event->x, event->y, &path)) {
         update_eject_buttons (sidebar, path);
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
 
         return TRUE;
     }
@@ -2991,9 +2991,9 @@ bookmarks_button_press_event_cb (GtkWidget             *widget,
         tree_view = GTK_TREE_VIEW (widget);
         g_assert (tree_view == sidebar->tree_view);
 
-        model = gtk_tree_view_get_model (tree_view);
+        model = ctk_tree_view_get_model (tree_view);
 
-        gtk_tree_view_get_path_at_pos (tree_view, (int) event->x, (int) event->y,
+        ctk_tree_view_get_path_at_pos (tree_view, (int) event->x, (int) event->y,
                                        &path, NULL, NULL, NULL);
 
         open_selected_bookmark (sidebar, model, path,
@@ -3003,7 +3003,7 @@ bookmarks_button_press_event_cb (GtkWidget             *widget,
 
         if (path != NULL)
         {
-            gtk_tree_path_free (path);
+            ctk_tree_path_free (path);
             return TRUE;
         }
     }
@@ -3025,12 +3025,12 @@ bookmarks_edited (GtkCellRenderer       *cell,
 
     g_object_set (cell, "editable", FALSE, NULL);
 
-    path = gtk_tree_path_new_from_string (path_string);
-    gtk_tree_model_get_iter (GTK_TREE_MODEL (sidebar->filter_model), &iter, path);
-    gtk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
+    path = ctk_tree_path_new_from_string (path_string);
+    ctk_tree_model_get_iter (GTK_TREE_MODEL (sidebar->filter_model), &iter, path);
+    ctk_tree_model_get (GTK_TREE_MODEL (sidebar->filter_model), &iter,
                         PLACES_SIDEBAR_COLUMN_INDEX, &index,
                         -1);
-    gtk_tree_path_free (path);
+    ctk_tree_path_free (path);
     bookmark = baul_bookmark_list_item_at (sidebar->bookmarks, index);
 
     if (bookmark != NULL)
@@ -3071,8 +3071,8 @@ tree_selection_func (GtkTreeSelection *selection,
     GtkTreeIter iter;
     PlaceType row_type;
 
-    gtk_tree_model_get_iter (model, &iter, path);
-    gtk_tree_model_get (model, &iter,
+    ctk_tree_model_get_iter (model, &iter, path);
+    ctk_tree_model_get (model, &iter,
                 PLACES_SIDEBAR_COLUMN_ROW_TYPE, &row_type,
                 -1);
 
@@ -3092,7 +3092,7 @@ icon_cell_renderer_func (GtkTreeViewColumn *column,
 {
     PlaceType type;
 
-    gtk_tree_model_get (model, iter,
+    ctk_tree_model_get (model, iter,
                 PLACES_SIDEBAR_COLUMN_ROW_TYPE, &type,
                 -1);
 
@@ -3116,7 +3116,7 @@ padding_cell_renderer_func (GtkTreeViewColumn *column,
 {
     PlaceType type;
 
-    gtk_tree_model_get (model, iter,
+    ctk_tree_model_get (model, iter,
                         PLACES_SIDEBAR_COLUMN_ROW_TYPE, &type,
                         -1);
 
@@ -3144,7 +3144,7 @@ heading_cell_renderer_func (GtkTreeViewColumn *column,
 {
     PlaceType type;
 
-    gtk_tree_model_get (model, iter,
+    ctk_tree_model_get (model, iter,
                         PLACES_SIDEBAR_COLUMN_ROW_TYPE, &type,
                         -1);
 
@@ -3169,31 +3169,31 @@ baul_places_sidebar_init (BaulPlacesSidebar *sidebar)
 
     sidebar->volume_monitor = g_volume_monitor_get ();
 
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sidebar),
+    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sidebar),
                                     GTK_POLICY_NEVER,
                                     GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
-    gtk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
-    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sidebar), GTK_SHADOW_IN);
-    gtk_scrolled_window_set_overlay_scrolling(GTK_SCROLLED_WINDOW (sidebar), FALSE);
+    ctk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
+    ctk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
+    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sidebar), GTK_SHADOW_IN);
+    ctk_scrolled_window_set_overlay_scrolling(GTK_SCROLLED_WINDOW (sidebar), FALSE);
 
     /* tree view */
-    tree_view = GTK_TREE_VIEW (gtk_tree_view_new ());
-    gtk_tree_view_set_headers_visible (tree_view, FALSE);
+    tree_view = GTK_TREE_VIEW (ctk_tree_view_new ());
+    ctk_tree_view_set_headers_visible (tree_view, FALSE);
 
-    col = GTK_TREE_VIEW_COLUMN (gtk_tree_view_column_new ());
+    col = GTK_TREE_VIEW_COLUMN (ctk_tree_view_column_new ());
 
     /* initial padding */
-    cell = gtk_cell_renderer_text_new ();
-    gtk_tree_view_column_pack_start (col, cell, FALSE);
+    cell = ctk_cell_renderer_text_new ();
+    ctk_tree_view_column_pack_start (col, cell, FALSE);
     g_object_set (cell,
                   "xpad", 6,
                   NULL);
 
     /* headings */
-    cell = gtk_cell_renderer_text_new ();
-    gtk_tree_view_column_pack_start (col, cell, FALSE);
-    gtk_tree_view_column_set_attributes (col, cell,
+    cell = ctk_cell_renderer_text_new ();
+    ctk_tree_view_column_pack_start (col, cell, FALSE);
+    ctk_tree_view_column_set_attributes (col, cell,
                                          "text", PLACES_SIDEBAR_COLUMN_HEADING_TEXT,
                                          NULL);
     g_object_set (cell,
@@ -3202,31 +3202,31 @@ baul_places_sidebar_init (BaulPlacesSidebar *sidebar)
                   "ypad", 1,
                   "xpad", 0,
                   NULL);
-    gtk_tree_view_column_set_cell_data_func (col, cell,
+    ctk_tree_view_column_set_cell_data_func (col, cell,
                          heading_cell_renderer_func,
                          sidebar, NULL);
 
     /* icon padding */
-    cell = gtk_cell_renderer_text_new ();
-    gtk_tree_view_column_pack_start (col, cell, FALSE);
-    gtk_tree_view_column_set_cell_data_func (col, cell,
+    cell = ctk_cell_renderer_text_new ();
+    ctk_tree_view_column_pack_start (col, cell, FALSE);
+    ctk_tree_view_column_set_cell_data_func (col, cell,
                                              padding_cell_renderer_func,
                                              sidebar, NULL);
 
     /* icon renderer */
-    cell = gtk_cell_renderer_pixbuf_new ();
-    gtk_tree_view_column_pack_start (col, cell, FALSE);
-    gtk_tree_view_column_set_attributes (col, cell,
+    cell = ctk_cell_renderer_pixbuf_new ();
+    ctk_tree_view_column_pack_start (col, cell, FALSE);
+    ctk_tree_view_column_set_attributes (col, cell,
                                          "surface", PLACES_SIDEBAR_COLUMN_ICON,
                                          NULL);
-    gtk_tree_view_column_set_cell_data_func (col, cell,
+    ctk_tree_view_column_set_cell_data_func (col, cell,
                                              icon_cell_renderer_func,
                                              sidebar, NULL);
 
     /* eject text renderer */
-    cell = gtk_cell_renderer_text_new ();
-    gtk_tree_view_column_pack_start (col, cell, TRUE);
-    gtk_tree_view_column_set_attributes (col, cell,
+    cell = ctk_cell_renderer_text_new ();
+    ctk_tree_view_column_pack_start (col, cell, TRUE);
+    ctk_tree_view_column_set_attributes (col, cell,
                                          "text", PLACES_SIDEBAR_COLUMN_NAME,
                                          "visible", PLACES_SIDEBAR_COLUMN_EJECT,
                                          NULL);
@@ -3236,27 +3236,27 @@ baul_places_sidebar_init (BaulPlacesSidebar *sidebar)
                   NULL);
 
     /* eject icon renderer */
-    cell = gtk_cell_renderer_pixbuf_new ();
+    cell = ctk_cell_renderer_pixbuf_new ();
     sidebar->eject_icon_cell_renderer = cell;
     g_object_set (cell,
                   "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE,
                   "stock-size", GTK_ICON_SIZE_MENU,
                   "xpad", EJECT_BUTTON_XPAD,
-                  /* align right, because for some reason gtk+ expands
+                  /* align right, because for some reason ctk+ expands
                   this even though we tell it not to. */
                   "xalign", 1.0,
                   NULL);
-    gtk_tree_view_column_pack_start (col, cell, FALSE);
-    gtk_tree_view_column_set_attributes (col, cell,
+    ctk_tree_view_column_pack_start (col, cell, FALSE);
+    ctk_tree_view_column_set_attributes (col, cell,
                                          "visible", PLACES_SIDEBAR_COLUMN_EJECT,
                                          "surface", PLACES_SIDEBAR_COLUMN_EJECT_ICON,
                                          NULL);
 
     /* normal text renderer */
-    cell = gtk_cell_renderer_text_new ();
-    gtk_tree_view_column_pack_start (col, cell, TRUE);
+    cell = ctk_cell_renderer_text_new ();
+    ctk_tree_view_column_pack_start (col, cell, TRUE);
     g_object_set (G_OBJECT (cell), "editable", FALSE, NULL);
-    gtk_tree_view_column_set_attributes (col, cell,
+    ctk_tree_view_column_set_attributes (col, cell,
                                          "text", PLACES_SIDEBAR_COLUMN_NAME,
                                          "visible", PLACES_SIDEBAR_COLUMN_NO_EJECT,
                                          "editable-set", PLACES_SIDEBAR_COLUMN_BOOKMARK,
@@ -3272,10 +3272,10 @@ baul_places_sidebar_init (BaulPlacesSidebar *sidebar)
                       G_CALLBACK (bookmarks_editing_canceled), sidebar);
 
     /* this is required to align the eject buttons to the right */
-    gtk_tree_view_column_set_max_width (GTK_TREE_VIEW_COLUMN (col), BAUL_ICON_SIZE_SMALLER);
-    gtk_tree_view_append_column (tree_view, col);
+    ctk_tree_view_column_set_max_width (GTK_TREE_VIEW_COLUMN (col), BAUL_ICON_SIZE_SMALLER);
+    ctk_tree_view_append_column (tree_view, col);
 
-    sidebar->store = gtk_list_store_new (PLACES_SIDEBAR_COLUMN_COUNT,
+    sidebar->store = ctk_list_store_new (PLACES_SIDEBAR_COLUMN_COUNT,
                                          G_TYPE_INT,
                                          G_TYPE_STRING,
                                          G_TYPE_DRIVE,
@@ -3292,34 +3292,34 @@ baul_places_sidebar_init (BaulPlacesSidebar *sidebar)
                                          G_TYPE_INT,
                                          G_TYPE_STRING);
 
-    gtk_tree_view_set_tooltip_column (tree_view, PLACES_SIDEBAR_COLUMN_TOOLTIP);
+    ctk_tree_view_set_tooltip_column (tree_view, PLACES_SIDEBAR_COLUMN_TOOLTIP);
 
     sidebar->filter_model = baul_shortcuts_model_filter_new (sidebar,
                             GTK_TREE_MODEL (sidebar->store),
                             NULL);
 
-    gtk_tree_view_set_model (tree_view, sidebar->filter_model);
-    gtk_container_add (GTK_CONTAINER (sidebar), GTK_WIDGET (tree_view));
-    gtk_widget_show (GTK_WIDGET (tree_view));
+    ctk_tree_view_set_model (tree_view, sidebar->filter_model);
+    ctk_container_add (GTK_CONTAINER (sidebar), GTK_WIDGET (tree_view));
+    ctk_widget_show (GTK_WIDGET (tree_view));
 
-    gtk_widget_show (GTK_WIDGET (sidebar));
+    ctk_widget_show (GTK_WIDGET (sidebar));
     sidebar->tree_view = tree_view;
 
-    gtk_tree_view_set_search_column (tree_view, PLACES_SIDEBAR_COLUMN_NAME);
-    selection = gtk_tree_view_get_selection (tree_view);
-    gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+    ctk_tree_view_set_search_column (tree_view, PLACES_SIDEBAR_COLUMN_NAME);
+    selection = ctk_tree_view_get_selection (tree_view);
+    ctk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 
-    gtk_tree_selection_set_select_function (selection,
+    ctk_tree_selection_set_select_function (selection,
                                             tree_selection_func,
                                             sidebar,
                                             NULL);
 
-    gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (tree_view),
+    ctk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (tree_view),
                                             GDK_BUTTON1_MASK,
                                             baul_shortcuts_source_targets,
                                             G_N_ELEMENTS (baul_shortcuts_source_targets),
                                             GDK_ACTION_MOVE);
-    gtk_drag_dest_set (GTK_WIDGET (tree_view),
+    ctk_drag_dest_set (GTK_WIDGET (tree_view),
                        0,
                        baul_shortcuts_drop_targets, G_N_ELEMENTS (baul_shortcuts_drop_targets),
                        GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
@@ -3347,7 +3347,7 @@ baul_places_sidebar_init (BaulPlacesSidebar *sidebar)
     g_signal_connect (tree_view, "button-release-event",
                       G_CALLBACK (bookmarks_button_release_event_cb), sidebar);
 
-    eel_gtk_tree_view_set_activate_on_single_click (sidebar->tree_view,
+    eel_ctk_tree_view_set_activate_on_single_click (sidebar->tree_view,
             TRUE);
 
     g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_DESKTOP_IS_HOME_DIR,
@@ -3376,7 +3376,7 @@ baul_places_sidebar_dispose (GObject *object)
     free_drag_data (sidebar);
 
     if (sidebar->eject_highlight_path != NULL) {
-        gtk_tree_path_free (sidebar->eject_highlight_path);
+        ctk_tree_path_free (sidebar->eject_highlight_path);
         sidebar->eject_highlight_path = NULL;
     }
 
@@ -3556,8 +3556,8 @@ baul_shortcuts_model_filter_row_draggable (GtkTreeDragSource *drag_source,
 
     model = GTK_TREE_MODEL (drag_source);
 
-    gtk_tree_model_get_iter (model, &iter, path);
-    gtk_tree_model_get (model, &iter,
+    ctk_tree_model_get_iter (model, &iter, path);
+    ctk_tree_model_get (model, &iter,
                         PLACES_SIDEBAR_COLUMN_ROW_TYPE, &place_type,
                         PLACES_SIDEBAR_COLUMN_SECTION_TYPE, &section_type,
                         -1);

@@ -10,23 +10,23 @@ DOC_MODULE=libbaul-extension
 DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.xml
 
 # The directory containing the source code. Relative to $(srcdir).
-# gtk-doc will search all .c & .h files beneath here for inline comments
+# ctk-doc will search all .c & .h files beneath here for inline comments
 # documenting the functions and macros.
 # e.g. DOC_SOURCE_DIR=../../../libbaul-extension
 DOC_SOURCE_DIR=$(top_srcdir)/libbaul-extension
 
-# Extra options to supply to gtkdoc-scan.
+# Extra options to supply to ctkdoc-scan.
 # e.g. SCAN_OPTIONS=--deprecated-guards="GTK_DISABLE_DEPRECATED" 
 #SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED"
 
-# Extra options to supply to gtkdoc-mkdb.
+# Extra options to supply to ctkdoc-mkdb.
 MKDB_OPTIONS=--sgml-mode --output-format=xml
 
-# Extra options to supply to gtkdoc-mktmpl
+# Extra options to supply to ctkdoc-mktmpl
 # e.g. MKTMPL_OPTIONS=--only-section-tmpl
 MKTMPL_OPTIONS=
 
-# Extra options to supply to gtkdoc-fixref. Not normally needed.
+# Extra options to supply to ctkdoc-fixref. Not normally needed.
 # e.g. FIXXREF_OPTIONS=--extra-dir=../gdk-pixbuf/html --extra-dir=../gdk/html
 FIXXREF_OPTIONS=
 
@@ -47,17 +47,17 @@ content_files = \
 	version.xml \
 	$(NULL)
 
-# SGML files where gtk-doc abbrevations (#GtkWidget) are expanded
+# SGML files where ctk-doc abbrevations (#GtkWidget) are expanded
 # These files must be listed here *and* in content_files
 # e.g. expand_content_files=running.sgml
 expand_content_files= \
 		$(NULL)
 
-# CFLAGS and LDFLAGS for compiling gtkdoc-scangobj with your library.
-# Only needed if you are using gtkdoc-scangobj to dynamically query widget
+# CFLAGS and LDFLAGS for compiling ctkdoc-scangobj with your library.
+# Only needed if you are using ctkdoc-scangobj to dynamically query widget
 # signals and properties.
 # e.g. INCLUDES=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
-# e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
+# e.g. GTKDOC_LIBS=$(top_builddir)/ctk/$(ctktargetlib)
 GTKDOC_CFLAGS = \
 	$(GTK_DEBUG_FLAGS)                         \
 	-I$(srcdir)                                \
@@ -73,8 +73,8 @@ GTKDOC_LIBS = \
 	$(LIBBAUL_EXTENSION_LIBS)                                        \
 	$(NULL)
 
-# This includes the standard gtk-doc make rules, copied by gtkdocize.
-include $(top_srcdir)/gtk-doc.make
+# This includes the standard ctk-doc make rules, copied by ctkdocize.
+include $(top_srcdir)/ctk-doc.make
 
 # Other files to distribute
 # e.g. EXTRA_DIST += version.xml.in

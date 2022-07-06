@@ -39,13 +39,13 @@
 #include <glib/gstdio.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 #include <glib.h>
 #include <libnotify/notify.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-vfs-extensions.h>
 
@@ -973,7 +973,7 @@ init_common (gsize job_size,
 	if (parent_window) {
 		GdkScreen *screen;
 
-		screen = gtk_widget_get_screen (GTK_WIDGET (parent_window));
+		screen = ctk_widget_get_screen (GTK_WIDGET (parent_window));
 		common->screen_num = gdk_x11_screen_get_screen_number (screen);
 	}
 
@@ -1101,7 +1101,7 @@ do_run_simple_dialog (gpointer _data)
 	int response_id;
 
 	/* Create the dialog. */
-	dialog = gtk_message_dialog_new (*data->parent_window,
+	dialog = ctk_message_dialog_new (*data->parent_window,
 					 0,
 					 data->message_type,
 					 GTK_BUTTONS_NONE,
@@ -1127,26 +1127,26 @@ do_run_simple_dialog (gpointer _data)
 		else if (g_strcmp0 (button_title, DELETE) == 0)
 			eel_dialog_add_button (GTK_DIALOG (dialog), button_title, "edit-delete", response_id);
 		else
-			gtk_dialog_add_button (GTK_DIALOG (dialog), button_title, response_id);
+			ctk_dialog_add_button (GTK_DIALOG (dialog), button_title, response_id);
 
-		gtk_dialog_set_default_response (GTK_DIALOG (dialog), response_id);
+		ctk_dialog_set_default_response (GTK_DIALOG (dialog), response_id);
 	}
 
 	if (data->details_text) {
-		eel_gtk_message_dialog_set_details_label (GTK_MESSAGE_DIALOG (dialog),
+		eel_ctk_message_dialog_set_details_label (GTK_MESSAGE_DIALOG (dialog),
 							  data->details_text);
 	}
 
 	/* Run it. */
-        gtk_widget_show (dialog);
-        result = gtk_dialog_run (GTK_DIALOG (dialog));
+        ctk_widget_show (dialog);
+        result = ctk_dialog_run (GTK_DIALOG (dialog));
 
 	while ((result == GTK_RESPONSE_NONE || result == GTK_RESPONSE_DELETE_EVENT) && data->ignore_close_box) {
-		gtk_widget_show (GTK_WIDGET (dialog));
-		result = gtk_dialog_run (GTK_DIALOG (dialog));
+		ctk_widget_show (GTK_WIDGET (dialog));
+		result = ctk_dialog_run (GTK_DIALOG (dialog));
 	}
 
-	gtk_widget_destroy (dialog);
+	ctk_widget_destroy (dialog);
 
 	data->result = result;
 
@@ -2196,7 +2196,7 @@ do_unmount (UnmountData *data)
 {
 	GMountOperation *mount_op;
 
-	mount_op = gtk_mount_operation_new (data->parent_window);
+	mount_op = ctk_mount_operation_new (data->parent_window);
 	if (data->eject) {
 		g_mount_eject_with_operation (data->mount,
 					      0,
@@ -2323,46 +2323,46 @@ prompt_empty_trash (GtkWindow *parent_window)
 
 	screen = NULL;
 	if (parent_window != NULL) {
-		screen = gtk_widget_get_screen (GTK_WIDGET (parent_window));
+		screen = ctk_widget_get_screen (GTK_WIDGET (parent_window));
 	}
 
 	/* Do we need to be modal ? */
-	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+	dialog = ctk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
 					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
 					 _("Do you want to empty the trash before you unmount?"));
-	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+	ctk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("In order to regain the "
 						    "free space on this volume "
 						    "the trash must be emptied. "
 						    "All trashed items on the volume "
 						    "will be permanently lost."));
 
-	gtk_dialog_add_button (GTK_DIALOG (dialog),
+	ctk_dialog_add_button (GTK_DIALOG (dialog),
 	                       _("Do _not Empty Trash"), GTK_RESPONSE_REJECT);
 
 	eel_dialog_add_button (GTK_DIALOG (dialog),
 	                       CANCEL, "process-stop", GTK_RESPONSE_CANCEL);
 
-	gtk_dialog_add_button (GTK_DIALOG (dialog),
+	ctk_dialog_add_button (GTK_DIALOG (dialog),
 	                       _("Empty _Trash"), GTK_RESPONSE_ACCEPT);
 
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-	gtk_window_set_title (GTK_WINDOW (dialog), ""); /* as per HIG */
-	gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
+	ctk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
+	ctk_window_set_title (GTK_WINDOW (dialog), ""); /* as per HIG */
+	ctk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog), TRUE);
 	if (screen) {
-		gtk_window_set_screen (GTK_WINDOW (dialog), screen);
+		ctk_window_set_screen (GTK_WINDOW (dialog), screen);
 	}
-	atk_object_set_role (gtk_widget_get_accessible (dialog), ATK_ROLE_ALERT);
+	atk_object_set_role (ctk_widget_get_accessible (dialog), ATK_ROLE_ALERT);
 
 	/* Make transient for the window group */
-	gtk_widget_realize (dialog);
+	ctk_widget_realize (dialog);
 	if (screen != NULL) {
-		gdk_window_set_transient_for (gtk_widget_get_window (GTK_WIDGET (dialog)),
+		gdk_window_set_transient_for (ctk_widget_get_window (GTK_WIDGET (dialog)),
 				      		gdk_screen_get_root_window (screen));
 	}
 
-	result = gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (dialog);
+	result = ctk_dialog_run (GTK_DIALOG (dialog));
+	ctk_widget_destroy (dialog);
 	return result;
 }
 
@@ -2507,7 +2507,7 @@ baul_file_operations_mount_volume_full (GtkWindow *parent_window,
 {
 	GMountOperation *mount_op;
 
-	mount_op = gtk_mount_operation_new (parent_window);
+	mount_op = ctk_mount_operation_new (parent_window);
 	g_mount_operation_set_password_save (mount_op, G_PASSWORD_SAVE_FOR_SESSION);
 	g_object_set_data (G_OBJECT (mount_op),
 			   "mount-callback",
@@ -4041,7 +4041,7 @@ do_run_conflict_dialog (gpointer _data)
 						    data->src,
 						    data->dest,
 						    data->dest_dir);
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	response = ctk_dialog_run (GTK_DIALOG (dialog));
 
 	if (response == CONFLICT_RESPONSE_RENAME) {
 		data->resp_data->new_name =
@@ -4055,7 +4055,7 @@ do_run_conflict_dialog (gpointer _data)
 
 	data->resp_data->id = response;
 
-	gtk_widget_destroy (dialog);
+	ctk_widget_destroy (dialog);
 
 	return FALSE;
 }
@@ -5917,7 +5917,7 @@ baul_file_operations_copy_move (const GList *item_uris,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)gtk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	if (copy_action == GDK_ACTION_COPY) {
@@ -6284,7 +6284,7 @@ baul_file_operations_new_folder (GtkWidget *parent_view,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)gtk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6324,7 +6324,7 @@ baul_file_operations_new_file_from_template (GtkWidget *parent_view,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)gtk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6369,7 +6369,7 @@ baul_file_operations_new_file (GtkWidget *parent_view,
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)gtk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (CreateJob, parent_window, TRUE, FALSE);
@@ -6506,7 +6506,7 @@ baul_file_operations_empty_trash (GtkWidget *parent_view)
 
 	parent_window = NULL;
 	if (parent_view) {
-		parent_window = (GtkWindow *)gtk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
+		parent_window = (GtkWindow *)ctk_widget_get_ancestor (parent_view, GTK_TYPE_WINDOW);
 	}
 
 	job = op_job_new (EmptyTrashJob, parent_window, TRUE, FALSE);

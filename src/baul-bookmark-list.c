@@ -124,7 +124,7 @@ baul_bookmark_list_get_legacy_file (void)
     GFile *file;
 
     filename = g_build_filename (g_get_home_dir (),
-                                 ".gtk-bookmarks",
+                                 ".ctk-bookmarks",
                                  NULL);
     file = g_file_new_for_path (filename);
 
@@ -140,7 +140,7 @@ baul_bookmark_list_get_file (void)
     GFile *file;
 
     filename = g_build_filename (g_get_user_config_dir (),
-                                 "gtk-3.0",
+                                 "ctk-3.0",
                                  "bookmarks",
                                  NULL);
     file = g_file_new_for_path (filename);
@@ -543,7 +543,7 @@ load_file_finish (BaulBookmarkList *bookmarks,
             /* Ignore empty or invalid lines that cannot be parsed properly */
             if (lines[i][0] != '\0' && lines[i][0] != ' ')
             {
-                /* gtk 2.7/2.8 might have labels appended to bookmarks which are separated by a space */
+                /* ctk 2.7/2.8 might have labels appended to bookmarks which are separated by a space */
                 /* we must seperate the bookmark uri and the potential label */
                 char *space, *label;
 

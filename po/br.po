@@ -524,7 +524,7 @@ msgstr "_Pegañ"
 msgid "Select All"
 msgstr "Diuz pep tra"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Diskouez muioc'h a vunu_doù"
 

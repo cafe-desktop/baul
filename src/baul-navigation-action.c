@@ -29,9 +29,9 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include "baul-navigation-action.h"
 #include "baul-navigation-window.h"
@@ -63,7 +63,7 @@ should_open_in_new_tab (void)
     /* FIXME this is duplicated */
     GdkEvent *event;
 
-    event = gtk_get_current_event ();
+    event = ctk_get_current_event ();
     if (event->type == GDK_BUTTON_PRESS || event->type == GDK_BUTTON_RELEASE)
     {
         return event->button.button == 2;
@@ -127,14 +127,14 @@ fill_menu (BaulNavigationWindow *window,
         if (menu_item) {
             list_void = FALSE;
             g_object_set_data (G_OBJECT (menu_item), "user_data", GINT_TO_POINTER (index));
-            gtk_widget_show (GTK_WIDGET (menu_item));
+            ctk_widget_show (GTK_WIDGET (menu_item));
             g_signal_connect_object (menu_item, "activate",
                                      back
                                      ? G_CALLBACK (activate_back_menu_item_callback)
                                      : G_CALLBACK (activate_forward_menu_item_callback),
                                      window, 0);
 
-            gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+            ctk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
         }
 
         list = g_list_next (list);
@@ -143,7 +143,7 @@ fill_menu (BaulNavigationWindow *window,
 
     if (list_void)
     {
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu),
+        ctk_menu_shell_append (GTK_MENU_SHELL (menu),
                                eel_image_menu_item_new_from_icon ("dialog-error", _("folder removed")));
         if (back)
         {
@@ -171,12 +171,12 @@ show_menu_callback (GtkMenuToolButton *button,
     p = action->priv;
     window = action->priv->window;
 
-    menu = gtk_menu_tool_button_get_menu (button);
+    menu = ctk_menu_tool_button_get_menu (button);
 
-    children = gtk_container_get_children (GTK_CONTAINER (menu));
+    children = ctk_container_get_children (GTK_CONTAINER (menu));
     for (li = children; li; li = li->next)
     {
-        gtk_container_remove (GTK_CONTAINER (menu), li->data);
+        ctk_container_remove (GTK_CONTAINER (menu), li->data);
     }
     g_list_free (children);
 
@@ -231,13 +231,13 @@ connect_proxy (GtkAction *action, GtkWidget *proxy)
         GtkWidget *child;
 
         /* set an empty menu, so the arrow button becomes sensitive */
-        menu = gtk_menu_new ();
+        menu = ctk_menu_new ();
 
-        gtk_menu_set_reserve_toggle_size (GTK_MENU (menu), FALSE);
+        ctk_menu_set_reserve_toggle_size (GTK_MENU (menu), FALSE);
 
-        gtk_menu_tool_button_set_menu (button, menu);
+        ctk_menu_tool_button_set_menu (button, menu);
 
-        gtk_menu_tool_button_set_arrow_tooltip_text (button,
+        ctk_menu_tool_button_set_arrow_tooltip_text (button,
                 naction->priv->arrow_tooltip);
 
         g_signal_connect (proxy, "show-menu",
@@ -245,7 +245,7 @@ connect_proxy (GtkAction *action, GtkWidget *proxy)
 
         /* Make sure that middle click works. Note that there is some code duplication
          * between here and baul-window-menus.c */
-        child = eel_gtk_menu_tool_button_get_button (button);
+        child = eel_ctk_menu_tool_button_get_button (button);
         g_signal_connect (child, "button-press-event", G_CALLBACK (proxy_button_press_event_cb), NULL);
         g_signal_connect (child, "button-release-event", G_CALLBACK (proxy_button_release_event_cb), NULL);
     }
@@ -264,7 +264,7 @@ disconnect_proxy (GtkAction *action, GtkWidget *proxy)
 
         g_signal_handlers_disconnect_by_func (proxy, G_CALLBACK (show_menu_callback), action);
 
-        child = eel_gtk_menu_tool_button_get_button (GTK_MENU_TOOL_BUTTON (proxy));
+        child = eel_ctk_menu_tool_button_get_button (GTK_MENU_TOOL_BUTTON (proxy));
         g_signal_handlers_disconnect_by_func (child, G_CALLBACK (proxy_button_press_event_cb), NULL);
         g_signal_handlers_disconnect_by_func (child, G_CALLBACK (proxy_button_release_event_cb), NULL);
     }

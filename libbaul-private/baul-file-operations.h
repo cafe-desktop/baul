@@ -27,7 +27,7 @@
 #ifndef BAUL_FILE_OPERATIONS_H
 #define BAUL_FILE_OPERATIONS_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 
 typedef void (* BaulCopyCallback)      (GHashTable *debuting_uris,

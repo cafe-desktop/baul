@@ -31,7 +31,7 @@ finished_cb (BaulProgressInfo *info,
 	     gpointer data)
 {
 	g_print ("Finished\n");
-	gtk_main_quit ();
+	ctk_main_quit ();
 }
 
 int
@@ -63,7 +63,7 @@ main (int argc, char* argv[])
 
 	window = test_window_new ("copy test", 5);
 
-	gtk_widget_show (window);
+	ctk_widget_show (window);
 
 	baul_file_operations_copy (sources,
 				       NULL /* GArray *relative_item_points */,
@@ -83,7 +83,7 @@ main (int argc, char* argv[])
 	g_signal_connect (progress_info, "progress-changed", (GCallback)progress_changed_cb, NULL);
 	g_signal_connect (progress_info, "finished", (GCallback)finished_cb, NULL);
 
-	gtk_main ();
+	ctk_main ();
 
 	return 0;
 }

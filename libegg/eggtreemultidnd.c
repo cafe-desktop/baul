@@ -22,7 +22,7 @@
 #endif
 
 #include <string.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "eggtreemultidnd.h"
 
 #define EGG_TREE_MULTI_DND_STRING "EggTreeMultiDndString"
@@ -38,7 +38,7 @@ typedef struct
     GSList *event_list;
 } EggTreeMultiDndData;
 
-/* CUT-N-PASTE from gtktreeview.c */
+/* CUT-N-PASTE from ctktreeview.c */
 typedef struct _TreeViewDragInfo TreeViewDragInfo;
 struct _TreeViewDragInfo
 {
@@ -190,7 +190,7 @@ egg_tree_multi_drag_button_release_event (GtkWidget      *widget,
     priv_data = g_object_get_data (G_OBJECT (widget), EGG_TREE_MULTI_DND_STRING);
 
     for (l = priv_data->event_list; l != NULL; l = l->next)
-        gtk_propagate_event (widget, l->data);
+        ctk_propagate_event (widget, l->data);
 
     stop_drag_check (widget);
 
@@ -207,13 +207,13 @@ selection_foreach (GtkTreeModel *model,
 
     list_ptr = (GList **) data;
 
-    *list_ptr = g_list_prepend (*list_ptr, gtk_tree_row_reference_new (model, path));
+    *list_ptr = g_list_prepend (*list_ptr, ctk_tree_row_reference_new (model, path));
 }
 
 static void
 path_list_free (GList *path_list)
 {
-    g_list_foreach (path_list, (GFunc) gtk_tree_row_reference_free, NULL);
+    g_list_foreach (path_list, (GFunc) ctk_tree_row_reference_free, NULL);
     g_list_free (path_list);
 }
 
@@ -234,11 +234,11 @@ get_context_data (GdkDragContext *context)
                               "egg-tree-view-multi-source-row");
 }
 
-/* CUT-N-PASTE from gtktreeview.c */
+/* CUT-N-PASTE from ctktreeview.c */
 static TreeViewDragInfo*
 get_info (GtkTreeView *tree_view)
 {
-    return g_object_get_data (G_OBJECT (tree_view), "gtk-tree-view-drag-info");
+    return g_object_get_data (G_OBJECT (tree_view), "ctk-tree-view-drag-info");
 }
 
 
@@ -256,7 +256,7 @@ egg_tree_multi_drag_drag_data_get (GtkWidget        *widget,
 
     tree_view = GTK_TREE_VIEW (widget);
 
-    model = gtk_tree_view_get_model (tree_view);
+    model = ctk_tree_view_get_model (tree_view);
 
     if (model == NULL)
         return;
@@ -293,7 +293,7 @@ egg_tree_multi_drag_motion_event (GtkWidget      *widget,
 
     priv_data = g_object_get_data (G_OBJECT (widget), EGG_TREE_MULTI_DND_STRING);
 
-    if (gtk_drag_check_threshold (widget,
+    if (ctk_drag_check_threshold (widget,
                                   priv_data->x,
                                   priv_data->y,
                                   event->x,
@@ -309,24 +309,24 @@ egg_tree_multi_drag_motion_event (GtkWidget      *widget,
         if (di == NULL)
             return FALSE;
 
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+        selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (widget));
         stop_drag_check (widget);
-        gtk_tree_selection_selected_foreach (selection, selection_foreach, &path_list);
+        ctk_tree_selection_selected_foreach (selection, selection_foreach, &path_list);
         path_list = g_list_reverse (path_list);
-        model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+        model = ctk_tree_view_get_model (GTK_TREE_VIEW (widget));
         if (egg_tree_multi_drag_source_row_draggable (EGG_TREE_MULTI_DRAG_SOURCE (model), path_list))
         {
             GdkDragContext *context;
 
-            context = gtk_drag_begin_with_coordinates (widget,
-                                                       gtk_drag_source_get_target_list (widget),
+            context = ctk_drag_begin_with_coordinates (widget,
+                                                       ctk_drag_source_get_target_list (widget),
                                                        di->source_actions,
                                                        priv_data->pressed_button,
                                                        (GdkEvent*)event,
                                                        event->x,
                                                        event->y);
             set_context_data (context, path_list);
-            gtk_drag_set_icon_default (context);
+            ctk_drag_set_icon_default (context);
 
         }
         else
@@ -371,14 +371,14 @@ egg_tree_multi_drag_button_press_event (GtkWidget      *widget,
     if (event->type == GDK_2BUTTON_PRESS)
         return FALSE;
 
-    gtk_tree_view_get_path_at_pos (tree_view,
+    ctk_tree_view_get_path_at_pos (tree_view,
                                    event->x, event->y,
                                    &path, &column,
                                    &cell_x, &cell_y);
 
-    selection = gtk_tree_view_get_selection (tree_view);
+    selection = ctk_tree_view_get_selection (tree_view);
 
-    if (path && gtk_tree_selection_path_is_selected (selection, path))
+    if (path && ctk_tree_selection_path_is_selected (selection, path))
     {
         priv_data->pressed_button = event->button;
         priv_data->x = event->x;
@@ -395,14 +395,14 @@ egg_tree_multi_drag_button_press_event (GtkWidget      *widget,
                 g_signal_connect (G_OBJECT (tree_view), "drag_data_get", G_CALLBACK (egg_tree_multi_drag_drag_data_get), NULL);
         }
 
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
 
         return TRUE;
     }
 
     if (path)
     {
-        gtk_tree_path_free (path);
+        ctk_tree_path_free (path);
     }
 
     return FALSE;

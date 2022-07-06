@@ -29,7 +29,7 @@
 #include <math.h>
 #include <atk/atkaction.h>
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
 #include <stdio.h>
@@ -40,7 +40,7 @@
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-cafe-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-art-extensions.h>
 #include <eel/eel-editable-label.h>
 #include <eel/eel-string.h>
@@ -357,7 +357,7 @@ icon_set_position (BaulIcon *icon,
 
         For now, we have a cheesy workaround:
         */
-        scale = gtk_widget_get_scale_factor (GTK_WIDGET (container));
+        scale = ctk_widget_get_scale_factor (GTK_WIDGET (container));
         container_x = 0;
         container_y = 0;
         container_width = WidthOfScreen (gdk_x11_screen_get_xscreen (gdk_screen_get_default ())) / scale - container_x
@@ -594,22 +594,22 @@ baul_icon_container_scroll (BaulIconContainer *container,
     GtkAdjustment *hadj, *vadj;
     int old_h_value, old_v_value;
 
-    hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
-    vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
+    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
+    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
 
     /* Store the old ajustment values so we can tell if we
      * ended up actually scrolling. We may not have in a case
      * where the resulting value got pinned to the adjustment
      * min or max.
      */
-    old_h_value = gtk_adjustment_get_value (hadj);
-    old_v_value = gtk_adjustment_get_value (vadj);
+    old_h_value = ctk_adjustment_get_value (hadj);
+    old_v_value = ctk_adjustment_get_value (vadj);
 
-    gtk_adjustment_set_value (hadj, gtk_adjustment_get_value (hadj) + delta_x);
-    gtk_adjustment_set_value (vadj, gtk_adjustment_get_value (vadj) + delta_y);
+    ctk_adjustment_set_value (hadj, ctk_adjustment_get_value (hadj) + delta_x);
+    ctk_adjustment_set_value (vadj, ctk_adjustment_get_value (vadj) + delta_y);
 
     /* return TRUE if we did scroll */
-    return gtk_adjustment_get_value (hadj) != old_h_value || gtk_adjustment_get_value (vadj) != old_v_value;
+    return ctk_adjustment_get_value (hadj) != old_h_value || ctk_adjustment_get_value (vadj) != old_v_value;
 }
 
 static void
@@ -748,10 +748,10 @@ reveal_icon (BaulIconContainer *container,
 
     set_pending_icon_to_reveal (container, NULL);
 
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
 
-    hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
-    vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
+    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
+    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
 
     if (baul_icon_container_is_auto_layout (container)) {
         /* ensure that we reveal the entire row/column */
@@ -759,19 +759,19 @@ reveal_icon (BaulIconContainer *container,
     } else {
         item_get_canvas_bounds (EEL_CANVAS_ITEM (icon->item), &bounds, TRUE);
     }
-    if (bounds.y0 < gtk_adjustment_get_value (vadj)) {
-        gtk_adjustment_set_value (vadj, bounds.y0);
-    } else if (bounds.y1 > gtk_adjustment_get_value (vadj) + allocation.height) {
-        gtk_adjustment_set_value (vadj, bounds.y1 - allocation.height);
+    if (bounds.y0 < ctk_adjustment_get_value (vadj)) {
+        ctk_adjustment_set_value (vadj, bounds.y0);
+    } else if (bounds.y1 > ctk_adjustment_get_value (vadj) + allocation.height) {
+        ctk_adjustment_set_value (vadj, bounds.y1 - allocation.height);
     }
 
-    if (bounds.x0 < gtk_adjustment_get_value (hadj)) {
-        gtk_adjustment_set_value (hadj, bounds.x0);
-    } else if (bounds.x1 > gtk_adjustment_get_value (hadj) + allocation.width) {
+    if (bounds.x0 < ctk_adjustment_get_value (hadj)) {
+        ctk_adjustment_set_value (hadj, bounds.x0);
+    } else if (bounds.x1 > ctk_adjustment_get_value (hadj) + allocation.width) {
         if (bounds.x1 - allocation.width > bounds.x0) {
-            gtk_adjustment_set_value (hadj, bounds.x0);
+            ctk_adjustment_set_value (hadj, bounds.x0);
         } else {
-            gtk_adjustment_set_value (hadj, bounds.x1 - allocation.width);
+            ctk_adjustment_set_value (hadj, bounds.x1 - allocation.width);
         }
     }
 }
@@ -1068,13 +1068,13 @@ canvas_set_scroll_region_include_visible_area (EelCanvas *canvas,
     GtkAllocation allocation;
 
     eel_canvas_get_scroll_region (canvas, &old_x1, &old_y1, &old_x2, &old_y2);
-    gtk_widget_get_allocation (GTK_WIDGET (canvas), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (canvas), &allocation);
 
     width = (allocation.width) / canvas->pixels_per_unit;
     height = (allocation.height) / canvas->pixels_per_unit;
 
-    old_scroll_x = gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas)));
-    old_scroll_y = gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas)));
+    old_scroll_x = ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (canvas)));
+    old_scroll_y = ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (canvas)));
 
     x1 = MIN (x1, old_x1 + old_scroll_x);
     y1 = MIN (y1, old_y1 + old_scroll_y);
@@ -1100,7 +1100,7 @@ baul_icon_container_update_scroll_region (BaulIconContainer *container)
     if (baul_icon_container_get_is_fixed_size (container))
     {
         /* Set the scroll region to the size of the container allocation */
-        gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+        ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
         eel_canvas_set_scroll_region
         (EEL_CANVAS (container),
          (double) - container->details->left_margin / pixels_per_unit,
@@ -1159,7 +1159,7 @@ baul_icon_container_update_scroll_region (BaulIconContainer *container)
      * x can be < 0 and > allocation */
     if (baul_icon_container_is_auto_layout (container))
     {
-        gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+        ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
         x1 = MIN (x1, 0);
         x2 = MAX (x2, allocation.width / pixels_per_unit);
         y1 = 0;
@@ -1198,19 +1198,19 @@ baul_icon_container_update_scroll_region (BaulIconContainer *container)
          x1, y1, x2, y2);
     }
 
-    hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
-    vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
+    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
+    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
 
     /* Scroll by 1/4 icon each time you click. */
     step_increment = baul_get_icon_size_for_zoom_level
                      (container->details->zoom_level) / 4;
-    if (gtk_adjustment_get_step_increment (hadj) != step_increment)
+    if (ctk_adjustment_get_step_increment (hadj) != step_increment)
     {
-        gtk_adjustment_set_step_increment (hadj, step_increment);
+        ctk_adjustment_set_step_increment (hadj, step_increment);
     }
-    if (gtk_adjustment_get_step_increment (vadj) != step_increment)
+    if (ctk_adjustment_get_step_increment (vadj) != step_increment)
     {
-        gtk_adjustment_set_step_increment (vadj, step_increment);
+        ctk_adjustment_set_step_increment (vadj, step_increment);
     }
 }
 
@@ -1369,7 +1369,7 @@ lay_down_icons_horizontal (BaulIconContainer *container,
     }
 
     positions = g_array_new (FALSE, FALSE, sizeof (IconPositions));
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
 
     /* Lay out icons a line at a time. */
     canvas_width = CANVAS_WIDTH(container, allocation);
@@ -1611,7 +1611,7 @@ lay_down_icons_vertical (BaulIconContainer *container,
     }
 
     positions = g_array_new (FALSE, FALSE, sizeof (IconPositions));
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
 
     /* Lay out icons a column at a time. */
     canvas_height = CANVAS_HEIGHT(container, allocation);
@@ -1738,7 +1738,7 @@ snap_position (BaulIconContainer *container,
     icon_width = icon_position.x1 - icon_position.x0;
     icon_height = icon_position.y1 - icon_position.y0;
 
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
     total_width = CANVAS_WIDTH (container, allocation);
     total_height = CANVAS_HEIGHT (container, allocation);
 
@@ -1813,7 +1813,7 @@ placement_grid_new (BaulIconContainer *container, gboolean tight)
     GtkAllocation allocation;
 
     /* Get container dimensions */
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
     width  = CANVAS_WIDTH(container, allocation);
     height = CANVAS_HEIGHT(container, allocation);
 
@@ -1957,7 +1957,7 @@ find_empty_location (BaulIconContainer *container,
     GtkAllocation allocation;
 
     /* Get container dimensions */
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
     canvas_width  = CANVAS_WIDTH(container, allocation);
     canvas_height = CANVAS_HEIGHT(container, allocation);
 
@@ -2083,7 +2083,7 @@ get_mirror_x_position (BaulIconContainer *container, BaulIcon *icon, double x)
     EelDRect icon_bounds;
     GtkAllocation allocation;
 
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
     icon_bounds = baul_icon_canvas_item_get_icon_rectangle (icon->item);
 
     return CANVAS_WIDTH(container, allocation) - x - (icon_bounds.x1 - icon_bounds.x0);
@@ -2122,7 +2122,7 @@ lay_down_icons_vertical_desktop (BaulIconContainer *container, GList *icons)
     GtkAllocation allocation;
 
     /* Get container dimensions */
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
     height = CANVAS_HEIGHT(container, allocation);
 
     /* Determine which icons have and have not been placed */
@@ -2747,25 +2747,25 @@ rubberband_timeout_callback (gpointer data)
               EEL_IS_CANVAS_RECT (band_info->selection_rectangle));
 
     adj_changed = FALSE;
-    gtk_widget_get_allocation (widget, &allocation);
+    ctk_widget_get_allocation (widget, &allocation);
 
-    adj_x = gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
+    adj_x = ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
     if (adj_x != band_info->last_adj_x)
     {
         band_info->last_adj_x = adj_x;
         adj_changed = TRUE;
     }
 
-    adj_y = gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
+    adj_y = ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
     if (adj_y != band_info->last_adj_y)
     {
         band_info->last_adj_y = adj_y;
         adj_changed = TRUE;
     }
-    display = gtk_widget_get_display (widget);
+    display = ctk_widget_get_display (widget);
     seat = gdk_display_get_default_seat (display);
 
-    gdk_window_get_device_position (gtk_widget_get_window (widget),
+    gdk_window_get_device_position (ctk_widget_get_window (widget),
                                     gdk_seat_get_pointer (seat),
                                     &x, &y, NULL);
 
@@ -2809,8 +2809,8 @@ rubberband_timeout_callback (gpointer data)
 
     /* Remember to convert from widget to scrolled window coords */
     eel_canvas_window_to_world (EEL_CANVAS (container),
-    			    x + gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container))),
-    			    y + gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container))),
+    			    x + ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container))),
+    			    y + ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container))),
                                 &world_x, &world_y);
 
     if (world_x < band_info->start_x)
@@ -2895,24 +2895,24 @@ start_rubberbanding (BaulIconContainer *container,
 		(EEL_CANVAS (container), event->x, event->y,
 		 &band_info->start_x, &band_info->start_y);
 
-	context = gtk_widget_get_style_context (GTK_WIDGET (container));
-	gtk_style_context_save (context);
-	gtk_style_context_add_class (context, GTK_STYLE_CLASS_RUBBERBAND);
+	context = ctk_widget_get_style_context (GTK_WIDGET (container));
+	ctk_style_context_save (context);
+	ctk_style_context_add_class (context, GTK_STYLE_CLASS_RUBBERBAND);
 
-	gtk_style_context_get (context, GTK_STATE_FLAG_NORMAL,
+	ctk_style_context_get (context, GTK_STATE_FLAG_NORMAL,
 			       GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
 			       &c, NULL);
 
 	bg_color = *c;
 
-	gtk_style_context_get (context, GTK_STATE_FLAG_NORMAL,
+	ctk_style_context_get (context, GTK_STATE_FLAG_NORMAL,
 			       GTK_STYLE_PROPERTY_BORDER_COLOR,
 			       &c, NULL);
 
 	border_color = *c;
 	gdk_rgba_free (c);
 
-	gtk_style_context_restore (context);
+	ctk_style_context_restore (context);
 
 	band_info->selection_rectangle = eel_canvas_item_new
 		(eel_canvas_root
@@ -2932,8 +2932,8 @@ start_rubberbanding (BaulIconContainer *container,
 	atk_object_set_name (accessible, "selection");
 	atk_object_set_description (accessible, _("The selection rectangle"));
 
-	band_info->prev_x = event->x - gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
-	band_info->prev_y = event->y - gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
+	band_info->prev_x = event->x - ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
+	band_info->prev_y = event->y - ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
 
 	band_info->active = TRUE;
 
@@ -3071,7 +3071,7 @@ get_cmp_point_x (BaulIconContainer *container,
 {
     if (container->details->label_position == BAUL_ICON_LABEL_POSITION_BESIDE)
     {
-        if (gtk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
+        if (ctk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
         {
             return icon_rect.x0;
         }
@@ -4097,7 +4097,7 @@ keyboard_right (BaulIconContainer *container,
 
     next_column_fallback = NULL;
     if (baul_icon_container_is_layout_vertical (container) &&
-            gtk_widget_get_direction (GTK_WIDGET (container)) != GTK_TEXT_DIR_RTL)
+            ctk_widget_get_direction (GTK_WIDGET (container)) != GTK_TEXT_DIR_RTL)
     {
         next_column_fallback = next_column_bottommost;
     }
@@ -4134,7 +4134,7 @@ keyboard_left (BaulIconContainer *container,
 
     previous_column_fallback = NULL;
     if (baul_icon_container_is_layout_vertical (container) &&
-            gtk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
+            ctk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
     {
         previous_column_fallback = previous_column_lowest;
     }
@@ -4166,7 +4166,7 @@ keyboard_down (BaulIconContainer *container,
             baul_icon_container_is_layout_vertical (container) &&
             !is_rectangle_selection_event (event))
     {
-        if (gtk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
+        if (ctk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
         {
             fallback = previous_column_highest;
         }
@@ -4179,7 +4179,7 @@ keyboard_down (BaulIconContainer *container,
     next_row_fallback = NULL;
     if (!baul_icon_container_is_layout_vertical (container))
     {
-        if (gtk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
+        if (ctk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
         {
             next_row_fallback = next_row_leftmost;
         }
@@ -4215,7 +4215,7 @@ keyboard_up (BaulIconContainer *container,
             baul_icon_container_is_layout_vertical (container) &&
             !is_rectangle_selection_event (event))
     {
-        if (gtk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
+        if (ctk_widget_get_direction (GTK_WIDGET (container)) == GTK_TEXT_DIR_RTL)
         {
             fallback = next_column_bottommost;
         }
@@ -4401,7 +4401,7 @@ destroy (GtkWidget *object)
     /* destroy interactive search dialog */
     if (container->details->search_window)
     {
-        gtk_widget_destroy (container->details->search_window);
+        ctk_widget_destroy (container->details->search_window);
         container->details->search_window = NULL;
         container->details->search_entry = NULL;
         if (container->details->typeselect_flush_timeout)
@@ -4477,7 +4477,7 @@ size_allocate (GtkWidget *widget,
     container = BAUL_ICON_CONTAINER (widget);
 
     need_layout_redone = !container->details->has_been_allocated;
-    gtk_widget_get_allocation (widget, &wid_allocation);
+    ctk_widget_get_allocation (widget, &wid_allocation);
 
     if (allocation->width != wid_allocation.width)
     {
@@ -4609,11 +4609,11 @@ realize (GtkWidget *widget)
     /* Set up DnD.  */
     baul_icon_dnd_init (container);
 
-    hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (widget));
+    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (widget));
     g_signal_connect (hadj, "value_changed",
                       G_CALLBACK (handle_hadjustment_changed), widget);
 
-    vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (widget));
+    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (widget));
     g_signal_connect (vadj, "value_changed",
                       G_CALLBACK (handle_vadjustment_changed), widget);
 
@@ -4652,7 +4652,7 @@ style_updated (GtkWidget *widget)
            GTK_WIDGET_CLASS (baul_icon_container_parent_class)->style_updated (widget);
     }
 
-    if (gtk_widget_get_realized (widget))
+    if (ctk_widget_get_realized (widget))
     {
         invalidate_labels (container);
         baul_icon_container_request_update_all (container);
@@ -4687,9 +4687,9 @@ button_press_event (GtkWidget *widget,
     /* Move focus to icon container, unless we're still renaming (to avoid exiting
      * renaming mode)
      */
-    if (!gtk_widget_has_focus (widget) && !(is_renaming (container) || is_renaming_pending (container)))
+    if (!ctk_widget_has_focus (widget) && !(is_renaming (container) || is_renaming_pending (container)))
     {
-        gtk_widget_grab_focus (widget);
+        ctk_widget_grab_focus (widget);
     }
 
     if (clicked_on_icon)
@@ -4803,8 +4803,8 @@ baul_icon_container_did_not_drag (BaulIconContainer *container,
              event->button == MIDDLE_BUTTON))
     {
         /* Determine click count */
-        g_object_get (G_OBJECT (gtk_widget_get_settings (GTK_WIDGET (container))),
-                      "gtk-double-click-time", &double_click_time,
+        g_object_get (G_OBJECT (ctk_widget_get_settings (GTK_WIDGET (container))),
+                      "ctk-double-click-time", &double_click_time,
                       NULL);
         current_time = g_get_monotonic_time ();
         if (current_time - last_click_time < double_click_time * 1000)
@@ -4858,8 +4858,8 @@ clicked_within_double_click_interval (BaulIconContainer *container)
     gint64 current_time;
 
     /* Determine click count */
-    g_object_get (G_OBJECT (gtk_widget_get_settings (GTK_WIDGET (container))),
-                  "gtk-double-click-time", &double_click_time,
+    g_object_get (G_OBJECT (ctk_widget_get_settings (GTK_WIDGET (container))),
+                  "ctk-double-click-time", &double_click_time,
                   NULL);
     current_time = g_get_monotonic_time ();
     if (current_time - last_click_time < double_click_time * 1000)
@@ -4904,7 +4904,7 @@ start_stretching (BaulIconContainer *container,
 
     details = container->details;
     icon = details->stretch_icon;
-    display = gtk_widget_get_display (GTK_WIDGET (container));
+    display = ctk_widget_get_display (GTK_WIDGET (container));
 
     /* Check if we hit the stretch handles. */
     world_point.x = details->drag_x;
@@ -4956,10 +4956,10 @@ start_stretching (BaulIconContainer *container,
         g_object_unref (cursor);
 
     /* Ensure the window itself is focused.. */
-    toplevel = gtk_widget_get_toplevel (GTK_WIDGET (container));
-    if (toplevel != NULL && gtk_widget_get_realized (toplevel))
+    toplevel = ctk_widget_get_toplevel (GTK_WIDGET (container));
+    if (toplevel != NULL && ctk_widget_get_realized (toplevel))
     {
-        gdk_window_focus (gtk_widget_get_window (toplevel), GDK_CURRENT_TIME);
+        gdk_window_focus (ctk_widget_get_window (toplevel), GDK_CURRENT_TIME);
     }
 
     return TRUE;
@@ -5206,7 +5206,7 @@ motion_notify_event (GtkWidget *widget,
             eel_canvas_window_to_world
             (EEL_CANVAS (container), event->x, event->y, &world_x, &world_y);
 
-            if (gtk_drag_check_threshold (widget,
+            if (ctk_drag_check_threshold (widget,
                                           details->drag_x,
                                           details->drag_y,
                                           world_x,
@@ -5270,22 +5270,22 @@ baul_icon_container_search_position_func (BaulIconContainer *container,
     GdkRectangle monitor;
 
 
-    cont_window = gtk_widget_get_window (GTK_WIDGET (container));
-    scale = gtk_widget_get_scale_factor (GTK_WIDGET (container));
+    cont_window = ctk_widget_get_window (GTK_WIDGET (container));
+    scale = ctk_widget_get_scale_factor (GTK_WIDGET (container));
     screen = gdk_window_get_screen (cont_window);
 
     monitor_num = gdk_display_get_monitor_at_window (gdk_screen_get_display (screen),
                                                      cont_window);
     gdk_monitor_get_geometry (monitor_num, &monitor);
 
-    gtk_widget_realize (search_dialog);
+    ctk_widget_realize (search_dialog);
 
     gdk_window_get_origin (cont_window, &cont_x, &cont_y);
 
     cont_width = gdk_window_get_width (cont_window);
     cont_height = gdk_window_get_height (cont_window);
 
-    gtk_widget_get_preferred_size (search_dialog, &requisition, NULL);
+    ctk_widget_get_preferred_size (search_dialog, &requisition, NULL);
 
     if (cont_x + cont_width - requisition.width > WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale)
     {
@@ -5313,7 +5313,7 @@ baul_icon_container_search_position_func (BaulIconContainer *container,
         y = cont_y + cont_height;
     }
 
-    gtk_window_move (GTK_WINDOW (search_dialog), x, y);
+    ctk_window_move (GTK_WINDOW (search_dialog), x, y);
 }
 
 static gboolean
@@ -5351,7 +5351,7 @@ baul_icon_container_search_disable_popdown (GtkEntry *entry,
                       data);
 }
 
-/* Cut and paste from gtkwindow.c */
+/* Cut and paste from ctkwindow.c */
 static void
 send_focus_change (GtkWidget *widget, gboolean in)
 {
@@ -5362,13 +5362,13 @@ send_focus_change (GtkWidget *widget, gboolean in)
     g_object_ref (widget);
     ((GdkEventFocus *) fevent)->in = in;
 
-    gtk_widget_send_focus_change (widget, fevent);
+    ctk_widget_send_focus_change (widget, fevent);
 
     fevent->focus_change.type = GDK_FOCUS_CHANGE;
-    fevent->focus_change.window = g_object_ref (gtk_widget_get_window (widget));
+    fevent->focus_change.window = g_object_ref (ctk_widget_get_window (widget));
     fevent->focus_change.in = in;
 
-    gtk_widget_event (widget, fevent);
+    ctk_widget_event (widget, fevent);
 
     g_object_notify (G_OBJECT (widget), "has-focus");
 
@@ -5399,8 +5399,8 @@ baul_icon_container_search_dialog_hide (GtkWidget *search_dialog,
 
     /* send focus-in event */
     send_focus_change (GTK_WIDGET (container->details->search_entry), FALSE);
-    gtk_widget_hide (search_dialog);
-    gtk_entry_set_text (GTK_ENTRY (container->details->search_entry), "");
+    ctk_widget_hide (search_dialog);
+    ctk_entry_set_text (GTK_ENTRY (container->details->search_entry), "");
 }
 
 static gboolean
@@ -5461,7 +5461,7 @@ baul_icon_container_search_button_press_event (GtkWidget *widget,
 
     baul_icon_container_search_dialog_hide (widget, container);
 
-    if (event->window == gtk_layout_get_bin_window (GTK_LAYOUT (container)))
+    if (event->window == ctk_layout_get_bin_window (GTK_LAYOUT (container)))
     {
         button_press_event (GTK_WIDGET (container), event);
     }
@@ -5576,7 +5576,7 @@ baul_icon_container_search_move (GtkWidget *window,
     gint len;
     const gchar *text;
 
-    text = gtk_entry_get_text (GTK_ENTRY (container->details->search_entry));
+    text = ctk_entry_get_text (GTK_ENTRY (container->details->search_entry));
 
     g_assert (text != NULL);
 
@@ -5726,7 +5726,7 @@ baul_icon_container_search_init (GtkWidget   *entry,
     g_assert (GTK_IS_ENTRY (entry));
     g_assert (BAUL_IS_ICON_CONTAINER (container));
 
-    text = gtk_entry_get_text (GTK_ENTRY (entry));
+    text = ctk_entry_get_text (GTK_ENTRY (entry));
     len = strlen (text);
 
     /* search */
@@ -5763,10 +5763,10 @@ baul_icon_container_ensure_interactive_directory (BaulIconContainer *container)
         return;
     }
 
-    container->details->search_window = gtk_window_new (GTK_WINDOW_POPUP);
+    container->details->search_window = ctk_window_new (GTK_WINDOW_POPUP);
 
-    gtk_window_set_modal (GTK_WINDOW (container->details->search_window), TRUE);
-    gtk_window_set_type_hint (GTK_WINDOW (container->details->search_window),
+    ctk_window_set_modal (GTK_WINDOW (container->details->search_window), TRUE);
+    ctk_window_set_type_hint (GTK_WINDOW (container->details->search_window),
                               GDK_WINDOW_TYPE_HINT_COMBO);
 
     g_signal_connect (container->details->search_window, "delete_event",
@@ -5782,19 +5782,19 @@ baul_icon_container_ensure_interactive_directory (BaulIconContainer *container)
                       G_CALLBACK (baul_icon_container_search_scroll_event),
                       container);
 
-    frame = gtk_frame_new (NULL);
-    gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
-    gtk_widget_show (frame);
-    gtk_container_add (GTK_CONTAINER (container->details->search_window), frame);
+    frame = ctk_frame_new (NULL);
+    ctk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
+    ctk_widget_show (frame);
+    ctk_container_add (GTK_CONTAINER (container->details->search_window), frame);
 
-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    gtk_widget_show (vbox);
-    gtk_container_add (GTK_CONTAINER (frame), vbox);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), 3);
+    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    ctk_widget_show (vbox);
+    ctk_container_add (GTK_CONTAINER (frame), vbox);
+    ctk_container_set_border_width (GTK_CONTAINER (vbox), 3);
 
     /* add entry */
-    container->details->search_entry = gtk_entry_new ();
-    gtk_widget_show (container->details->search_entry);
+    container->details->search_entry = ctk_entry_new ();
+    ctk_widget_show (container->details->search_entry);
     g_signal_connect (container->details->search_entry, "populate_popup",
                       G_CALLBACK (baul_icon_container_search_disable_popdown),
                       container);
@@ -5805,9 +5805,9 @@ baul_icon_container_ensure_interactive_directory (BaulIconContainer *container)
                       "preedit-changed",
                       G_CALLBACK (baul_icon_container_search_preedit_changed),
                       container);
-    gtk_container_add (GTK_CONTAINER (vbox), container->details->search_entry);
+    ctk_container_add (GTK_CONTAINER (vbox), container->details->search_entry);
 
-    gtk_widget_realize (container->details->search_entry);
+    ctk_widget_realize (container->details->search_entry);
 }
 
 /* Pops up the interactive search entry.  If keybinding is TRUE then the user
@@ -5823,12 +5823,12 @@ baul_icon_container_real_start_interactive_search (BaulIconContainer *container,
     GtkWidgetClass *entry_parent_class;
 
     if (container->details->search_window != NULL &&
-            gtk_widget_get_visible (container->details->search_window))
+            ctk_widget_get_visible (container->details->search_window))
     {
         return TRUE;
     }
 
-    if (!gtk_widget_has_focus (GTK_WIDGET (container)))
+    if (!ctk_widget_has_focus (GTK_WIDGET (container)))
     {
         return FALSE;
     }
@@ -5837,12 +5837,12 @@ baul_icon_container_real_start_interactive_search (BaulIconContainer *container,
 
     if (keybinding)
     {
-        gtk_entry_set_text (GTK_ENTRY (container->details->search_entry), "");
+        ctk_entry_set_text (GTK_ENTRY (container->details->search_entry), "");
     }
 
     /* done, show it */
     baul_icon_container_search_position_func (container, container->details->search_window);
-    gtk_widget_show (container->details->search_window);
+    ctk_widget_show (container->details->search_window);
     if (container->details->search_entry_changed_id == 0)
     {
         container->details->search_entry_changed_id =
@@ -6055,35 +6055,35 @@ key_press_event (GtkWidget *widget,
         baul_icon_container_ensure_interactive_directory (container);
 
         /* Make a copy of the current text */
-        old_text = g_strdup (gtk_entry_get_text (GTK_ENTRY (container->details->search_entry)));
+        old_text = g_strdup (ctk_entry_get_text (GTK_ENTRY (container->details->search_entry)));
         new_event = gdk_event_copy ((GdkEvent *) event);
         window = ((GdkEventKey *) new_event)->window;
-        ((GdkEventKey *) new_event)->window = gtk_widget_get_window (container->details->search_entry);
-        gtk_widget_realize (container->details->search_window);
+        ((GdkEventKey *) new_event)->window = ctk_widget_get_window (container->details->search_entry);
+        ctk_widget_realize (container->details->search_window);
 
         popup_menu_id = g_signal_connect (container->details->search_entry,
-                                          "popup_menu", G_CALLBACK (gtk_true), NULL);
+                                          "popup_menu", G_CALLBACK (ctk_true), NULL);
 
         /* Move the entry off screen */
-        screen = gtk_widget_get_screen (GTK_WIDGET (container));
-        scale = gtk_widget_get_scale_factor (GTK_WIDGET (container));
-        gtk_window_move (GTK_WINDOW (container->details->search_window),
+        screen = ctk_widget_get_screen (GTK_WIDGET (container));
+        scale = ctk_widget_get_scale_factor (GTK_WIDGET (container));
+        ctk_window_move (GTK_WINDOW (container->details->search_window),
                          WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale + 1,
                          HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale + 1);
-        gtk_widget_show (container->details->search_window);
+        ctk_widget_show (container->details->search_window);
 
         /* Send the event to the window.  If the preedit_changed signal is emitted
          * during this event, we will set priv->imcontext_changed  */
         container->details->imcontext_changed = FALSE;
-        retval = gtk_widget_event (container->details->search_entry, new_event);
-        gtk_widget_hide (container->details->search_window);
+        retval = ctk_widget_event (container->details->search_entry, new_event);
+        ctk_widget_hide (container->details->search_window);
 
         g_signal_handler_disconnect (container->details->search_entry,
                                      popup_menu_id);
 
         /* We check to make sure that the entry tried to handle the text, and that
          * the text has changed. */
-        new_text = gtk_entry_get_text (GTK_ENTRY (container->details->search_entry));
+        new_text = ctk_entry_get_text (GTK_ENTRY (container->details->search_entry));
         text_modified = strcmp (old_text, new_text) != 0;
         g_free (old_text);
         if (container->details->imcontext_changed ||    /* we're in a preedit */
@@ -6091,12 +6091,12 @@ key_press_event (GtkWidget *widget,
         {
             if (baul_icon_container_real_start_interactive_search (container, FALSE))
             {
-                gtk_widget_grab_focus (GTK_WIDGET (container));
+                ctk_widget_grab_focus (GTK_WIDGET (container));
                 return TRUE;
             }
             else
             {
-                gtk_entry_set_text (GTK_ENTRY (container->details->search_entry), "");
+                ctk_entry_set_text (GTK_ENTRY (container->details->search_entry), "");
                 return FALSE;
             }
         }
@@ -6576,31 +6576,31 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
     widget_class->style_updated = style_updated;
     widget_class->grab_notify = grab_notify_cb;
 
-    gtk_widget_class_set_accessible_type (widget_class, baul_icon_container_accessible_get_type ());
+    ctk_widget_class_set_accessible_type (widget_class, baul_icon_container_accessible_get_type ());
 
     canvas_class = EEL_CANVAS_CLASS (class);
     canvas_class->draw_background = draw_canvas_background;
     class->start_interactive_search = baul_icon_container_start_interactive_search;
 
-    gtk_widget_class_install_style_property (widget_class,
+    ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boxed ("selection_box_rgba",
                                 "Selection Box RGBA",
                                 "Color of the selection box",
                                 GDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
-    gtk_widget_class_install_style_property (widget_class,
+    ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boxed ("light_info_rgba",
                                 "Light Info RGBA",
                                 "Color used for information text against a dark background",
                                 GDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
-    gtk_widget_class_install_style_property (widget_class,
+    ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boxed ("dark_info_rgba",
                                 "Dark Info RGBA",
                                 "Color used for information text against a light background",
                                 GDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
-    gtk_widget_class_install_style_property (widget_class,
+    ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boolean ("activate_prelight_icon_label",
                                   "Activate Prelight Icon Label",
                                   "Whether icon labels should make use of its prelight color in prelight state",
@@ -6608,10 +6608,10 @@ baul_icon_container_class_init (BaulIconContainerClass *class)
                                   G_PARAM_READABLE));
 
 
-    binding_set = gtk_binding_set_by_class (class);
+    binding_set = ctk_binding_set_by_class (class);
 
-    gtk_binding_entry_add_signal (binding_set, GDK_KEY_f, GDK_CONTROL_MASK, "start_interactive_search", 0);
-    gtk_binding_entry_add_signal (binding_set, GDK_KEY_F, GDK_CONTROL_MASK, "start_interactive_search", 0);
+    ctk_binding_entry_add_signal (binding_set, GDK_KEY_f, GDK_CONTROL_MASK, "start_interactive_search", 0);
+    ctk_binding_entry_add_signal (binding_set, GDK_KEY_F, GDK_CONTROL_MASK, "start_interactive_search", 0);
 }
 
 static void
@@ -7000,7 +7000,7 @@ item_event_callback (EelCanvasItem *item,
 GtkWidget *
 baul_icon_container_new (void)
 {
-    return gtk_widget_new (BAUL_TYPE_ICON_CONTAINER, NULL);
+    return ctk_widget_new (BAUL_TYPE_ICON_CONTAINER, NULL);
 }
 
 /* Clear all of the icons in the container. */
@@ -7071,9 +7071,9 @@ baul_icon_container_get_first_visible_icon (BaulIconContainer *container)
     gboolean better_icon;
     gboolean compare_lt;
 
-    hadj_v = gtk_adjustment_get_value (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
-    vadj_v = gtk_adjustment_get_value (gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
-    h_page_size = gtk_adjustment_get_page_size (gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
+    hadj_v = ctk_adjustment_get_value (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
+    vadj_v = ctk_adjustment_get_value (ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container)));
+    h_page_size = ctk_adjustment_get_page_size (ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container)));
 
     if (baul_icon_container_is_layout_rtl (container))
     {
@@ -7161,9 +7161,9 @@ baul_icon_container_scroll_to_icon (BaulIconContainer  *container,
     GtkAllocation allocation;
     BaulIcon *icon = NULL;
 
-    hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
-    vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
+    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
 
     /* We need to force a relayout now if there are updates queued
      * since we need the final positions */
@@ -7185,12 +7185,12 @@ baul_icon_container_scroll_to_icon (BaulIconContainer  *container,
 
             if (baul_icon_container_is_layout_vertical (container)) {
                 if (baul_icon_container_is_layout_rtl (container)) {
-                    gtk_adjustment_set_value (hadj, bounds.x1 - allocation.width);
+                    ctk_adjustment_set_value (hadj, bounds.x1 - allocation.width);
                 } else {
-                    gtk_adjustment_set_value (hadj, bounds.x0);
+                    ctk_adjustment_set_value (hadj, bounds.x0);
                 }
             } else {
-                gtk_adjustment_set_value (vadj, bounds.y0);
+                ctk_adjustment_set_value (vadj, bounds.y0);
             }
         }
 
@@ -7481,14 +7481,14 @@ baul_icon_container_update_visible_icons (BaulIconContainer *container)
     GtkAllocation allocation;
     BaulIcon *icon = NULL;
 
-    hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
-    vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
-    gtk_widget_get_allocation (GTK_WIDGET (container), &allocation);
+    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (container));
+    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (container));
+    ctk_widget_get_allocation (GTK_WIDGET (container), &allocation);
 
-    min_x = gtk_adjustment_get_value (hadj);
+    min_x = ctk_adjustment_get_value (hadj);
     max_x = min_x + allocation.width;
 
-    min_y = gtk_adjustment_get_value (vadj);
+    min_y = ctk_adjustment_get_value (vadj);
     max_y = min_y + allocation.height;
 
     eel_canvas_c2w (EEL_CANVAS (container),
@@ -7929,7 +7929,7 @@ baul_icon_container_layout_now (BaulIconContainer *container)
     /* Also need to make sure we're properly resized, for instance
      * newly added files may trigger a change in the size allocation and
      * thus toggle scrollbars on */
-    gtk_container_check_resize (GTK_CONTAINER (gtk_widget_get_parent (GTK_WIDGET (container))));
+    ctk_container_check_resize (GTK_CONTAINER (ctk_widget_get_parent (GTK_WIDGET (container))));
 }
 
 /**
@@ -9009,11 +9009,11 @@ baul_icon_container_start_renaming_selected_item (BaulIconContainer *container,
             eel_editable_label_set_justify (EEL_EDITABLE_LABEL (details->rename_widget), GTK_JUSTIFY_CENTER);
         }
 
-        gtk_widget_set_margin_start (details->rename_widget, 1);
-        gtk_widget_set_margin_end (details->rename_widget, 1);
-        gtk_widget_set_margin_top (details->rename_widget, 1);
-        gtk_widget_set_margin_bottom (details->rename_widget, 1);
-        gtk_layout_put (GTK_LAYOUT (container),
+        ctk_widget_set_margin_start (details->rename_widget, 1);
+        ctk_widget_set_margin_end (details->rename_widget, 1);
+        ctk_widget_set_margin_top (details->rename_widget, 1);
+        ctk_widget_set_margin_bottom (details->rename_widget, 1);
+        ctk_layout_put (GTK_LAYOUT (container),
                         details->rename_widget, 0, 0);
     }
 
@@ -9026,7 +9026,7 @@ baul_icon_container_start_renaming_selected_item (BaulIconContainer *container,
     {
         PangoContext *context;
 
-        context = gtk_widget_get_pango_context (GTK_WIDGET (container));
+        context = ctk_widget_get_pango_context (GTK_WIDGET (container));
         desc = pango_font_description_copy (pango_context_get_font_description (context));
         pango_font_description_set_size (desc,
                                          pango_font_description_get_size (desc) +
@@ -9066,11 +9066,11 @@ baul_icon_container_start_renaming_selected_item (BaulIconContainer *container,
         x = x - width / 2 - 1;
     }
 
-    gtk_layout_move (GTK_LAYOUT (container),
+    ctk_layout_move (GTK_LAYOUT (container),
                      details->rename_widget,
                      x, y);
 
-    gtk_widget_set_size_request (details->rename_widget,
+    ctk_widget_set_size_request (details->rename_widget,
                                  width, -1);
     eel_editable_label_set_text (EEL_EDITABLE_LABEL (details->rename_widget),
                                  editable_text);
@@ -9083,8 +9083,8 @@ baul_icon_container_start_renaming_selected_item (BaulIconContainer *container,
     {
         eel_filename_get_rename_region (editable_text, &start_offset, &end_offset);
     }
-    gtk_widget_show (details->rename_widget);
-    gtk_widget_grab_focus (details->rename_widget);
+    ctk_widget_show (details->rename_widget);
+    ctk_widget_grab_focus (details->rename_widget);
 
     eel_editable_label_select_region (EEL_EDITABLE_LABEL (details->rename_widget),
                                       start_offset,
@@ -9124,7 +9124,7 @@ end_renaming_mode (BaulIconContainer *container, gboolean commit)
         set_pending_icon_to_reveal (container, icon);
     }
 
-    gtk_widget_grab_focus (GTK_WIDGET (container));
+    ctk_widget_grab_focus (GTK_WIDGET (container));
 
     if (commit)
     {
@@ -9146,7 +9146,7 @@ end_renaming_mode (BaulIconContainer *container, gboolean commit)
         }
     }
 
-    gtk_widget_hide (container->details->rename_widget);
+    ctk_widget_hide (container->details->rename_widget);
 
     g_free (container->details->original_text);
 
@@ -9247,8 +9247,8 @@ baul_icon_container_set_is_desktop (BaulIconContainer *container,
     if (is_desktop) {
             GtkStyleContext *context;
 
-            context = gtk_widget_get_style_context (GTK_WIDGET (container));
-            gtk_style_context_add_class (context, "baul-desktop");
+            context = ctk_widget_get_style_context (GTK_WIDGET (container));
+            ctk_style_context_add_class (context, "baul-desktop");
     }
 }
 
@@ -9282,7 +9282,7 @@ baul_icon_container_set_use_drop_shadows (BaulIconContainer  *container,
     container->details->drop_shadows_requested = use_drop_shadows;
     container->details->use_drop_shadows = use_drop_shadows;
 
-    gtk_widget_queue_draw (GTK_WIDGET (container));
+    ctk_widget_queue_draw (GTK_WIDGET (container));
 }
 
 /* handle theme changes */
@@ -9303,7 +9303,7 @@ baul_icon_container_set_font (BaulIconContainer *container,
 
     invalidate_labels (container);
     baul_icon_container_request_update_all (container);
-    gtk_widget_queue_draw (GTK_WIDGET (container));
+    ctk_widget_queue_draw (GTK_WIDGET (container));
 }
 
 void
@@ -9457,7 +9457,7 @@ baul_icon_container_accessible_do_action (AtkAction *accessible, int i)
 
     g_return_val_if_fail (i < LAST_ACTION, FALSE);
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return FALSE;
@@ -9569,7 +9569,7 @@ baul_icon_container_accessible_update_selection (AtkObject *accessible)
     GList *l;
     BaulIcon *icon = NULL;
 
-    container = BAUL_ICON_CONTAINER (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
+    container = BAUL_ICON_CONTAINER (ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
 
     priv = accessible_get_priv (accessible);
 
@@ -9667,7 +9667,7 @@ baul_icon_container_accessible_add_selection (AtkSelection *accessible,
     BaulIconContainer *container;
     BaulIcon *icon;
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return FALSE;
@@ -9698,7 +9698,7 @@ baul_icon_container_accessible_clear_selection (AtkSelection *accessible)
     GtkWidget *widget;
     BaulIconContainer *container;
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return FALSE;
@@ -9762,7 +9762,7 @@ baul_icon_container_accessible_is_child_selected (AtkSelection *accessible,
     BaulIcon *icon;
     GtkWidget *widget;
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return FALSE;
@@ -9783,7 +9783,7 @@ baul_icon_container_accessible_remove_selection (AtkSelection *accessible,
     BaulIcon *icon;
     GtkWidget *widget;
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return FALSE;
@@ -9816,7 +9816,7 @@ baul_icon_container_accessible_select_all_selection (AtkSelection *accessible)
     BaulIconContainer *container;
     GtkWidget *widget;
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return FALSE;
@@ -9870,7 +9870,7 @@ baul_icon_container_accessible_get_n_children (AtkObject *accessible)
     GtkWidget *widget;
     gint i;
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return FALSE;
@@ -9894,7 +9894,7 @@ baul_icon_container_accessible_ref_child (AtkObject *accessible, int i)
     BaulIcon *icon;
     GtkWidget *widget;
 
-    widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
+    widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible));
     if (!widget)
     {
         return NULL;
@@ -9916,7 +9916,7 @@ baul_icon_container_accessible_ref_child (AtkObject *accessible, int i)
         {
             if (container->details->rename_widget)
             {
-                atk_object = gtk_widget_get_accessible (container->details->rename_widget);
+                atk_object = ctk_widget_get_accessible (container->details->rename_widget);
                 g_object_ref (atk_object);
 
                 return atk_object;
@@ -9949,7 +9949,7 @@ baul_icon_container_accessible_initialize (AtkObject *accessible,
         baul_icon_container_accessible_update_selection
         (ATK_OBJECT (accessible));
 
-        container = BAUL_ICON_CONTAINER (gtk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
+        container = BAUL_ICON_CONTAINER (ctk_accessible_get_widget (GTK_ACCESSIBLE (accessible)));
         g_signal_connect (G_OBJECT (container), "selection_changed",
                           G_CALLBACK (baul_icon_container_accessible_selection_changed_cb),
                           accessible);

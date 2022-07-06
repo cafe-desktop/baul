@@ -23,10 +23,10 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-stock-dialogs.h>
 
 #include <libbaul-private/baul-file-utilities.h>
@@ -70,7 +70,7 @@ open_current_location (BaulLocationDialog *dialog)
     GFile *location;
     char *user_location;
 
-    user_location = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->entry), 0, -1);
+    user_location = ctk_editable_get_chars (GTK_EDITABLE (dialog->details->entry), 0, -1);
     location = g_file_parse_name (user_location);
     baul_window_go_to (dialog->details->window, location);
     g_object_unref (location);
@@ -88,18 +88,18 @@ response_callback (BaulLocationDialog *dialog,
     {
     case RESPONSE_OPEN :
         open_current_location (dialog);
-        gtk_widget_destroy (GTK_WIDGET (dialog));
+        ctk_widget_destroy (GTK_WIDGET (dialog));
         break;
     case GTK_RESPONSE_NONE :
     case GTK_RESPONSE_DELETE_EVENT :
     case GTK_RESPONSE_CANCEL :
-        gtk_widget_destroy (GTK_WIDGET (dialog));
+        ctk_widget_destroy (GTK_WIDGET (dialog));
         break;
     case GTK_RESPONSE_HELP :
         error = NULL;
-        gtk_show_uri_on_window (GTK_WINDOW (dialog),
+        ctk_show_uri_on_window (GTK_WINDOW (dialog),
                                 "help:cafe-user-guide/baul-open-location",
-                                gtk_get_current_event_time (), &error);
+                                ctk_get_current_event_time (), &error);
         if (error)
         {
             eel_show_error_dialog (_("There was an error displaying help."), error->message,
@@ -120,9 +120,9 @@ entry_activate_callback (GtkEntry *entry,
 
     dialog = BAUL_LOCATION_DIALOG (user_data);
 
-    if (gtk_entry_get_text_length (GTK_ENTRY (dialog->details->entry)) != 0)
+    if (ctk_entry_get_text_length (GTK_ENTRY (dialog->details->entry)) != 0)
     {
-        gtk_dialog_response (GTK_DIALOG (dialog), RESPONSE_OPEN);
+        ctk_dialog_response (GTK_DIALOG (dialog), RESPONSE_OPEN);
     }
 }
 
@@ -139,13 +139,13 @@ entry_text_changed (GObject *object, GParamSpec *spec, gpointer user_data)
 
     dialog = BAUL_LOCATION_DIALOG (user_data);
 
-    if (gtk_entry_get_text_length (GTK_ENTRY (dialog->details->entry)) != 0)
+    if (ctk_entry_get_text_length (GTK_ENTRY (dialog->details->entry)) != 0)
     {
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_OPEN, TRUE);
+        ctk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_OPEN, TRUE);
     }
     else
     {
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_OPEN, FALSE);
+        ctk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_OPEN, FALSE);
     }
 }
 
@@ -157,35 +157,35 @@ baul_location_dialog_init (BaulLocationDialog *dialog)
 
     dialog->details = g_new0 (BaulLocationDialogDetails, 1);
 
-    gtk_window_set_title (GTK_WINDOW (dialog), _("Open Location"));
-    gtk_window_set_default_size (GTK_WINDOW (dialog), 300, -1);
-    gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
-    gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-    gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
+    ctk_window_set_title (GTK_WINDOW (dialog), _("Open Location"));
+    ctk_window_set_default_size (GTK_WINDOW (dialog), 300, -1);
+    ctk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
+    ctk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+    ctk_box_set_spacing (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
 
-    box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-    gtk_container_set_border_width (GTK_CONTAINER (box), 5);
-    gtk_widget_show (box);
+    box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+    ctk_container_set_border_width (GTK_CONTAINER (box), 5);
+    ctk_widget_show (box);
 
-    label = gtk_label_new_with_mnemonic (_("_Location:"));
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
+    label = ctk_label_new_with_mnemonic (_("_Location:"));
+    ctk_widget_show (label);
+    ctk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
     dialog->details->entry = baul_location_entry_new ();
-    gtk_entry_set_width_chars (GTK_ENTRY (dialog->details->entry), 30);
+    ctk_entry_set_width_chars (GTK_ENTRY (dialog->details->entry), 30);
     g_signal_connect_after (dialog->details->entry,
                             "activate",
                             G_CALLBACK (entry_activate_callback),
                             dialog);
 
-    gtk_widget_show (dialog->details->entry);
+    ctk_widget_show (dialog->details->entry);
 
-    gtk_label_set_mnemonic_widget (GTK_LABEL (label), dialog->details->entry);
+    ctk_label_set_mnemonic_widget (GTK_LABEL (label), dialog->details->entry);
 
-    gtk_box_pack_start (GTK_BOX (box), dialog->details->entry,
+    ctk_box_pack_start (GTK_BOX (box), dialog->details->entry,
                         TRUE, TRUE, 0);
 
-    gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
+    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))),
                         box, FALSE, TRUE, 0);
 
     eel_dialog_add_button (GTK_DIALOG (dialog),
@@ -203,7 +203,7 @@ baul_location_dialog_init (BaulLocationDialog *dialog)
                            "document-open",
                            RESPONSE_OPEN);
 
-    gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+    ctk_dialog_set_default_response (GTK_DIALOG (dialog),
                                      RESPONSE_OPEN);
 
     g_signal_connect (dialog->details->entry, "notify::text",
@@ -221,14 +221,14 @@ baul_location_dialog_new (BaulWindow *window)
     GtkWidget *dialog;
     GFile *location;
 
-    dialog = gtk_widget_new (BAUL_TYPE_LOCATION_DIALOG, NULL);
+    dialog = ctk_widget_new (BAUL_TYPE_LOCATION_DIALOG, NULL);
     loc_dialog = BAUL_LOCATION_DIALOG (dialog);
 
     if (window)
     {
-        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
-        gtk_window_set_screen (GTK_WINDOW (dialog),
-                               gtk_window_get_screen (GTK_WINDOW (window)));
+        ctk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
+        ctk_window_set_screen (GTK_WINDOW (dialog),
+                               ctk_window_get_screen (GTK_WINDOW (window)));
         loc_dialog->details->window = window;
         location = window->details->active_pane->active_slot->location;
     }
@@ -252,7 +252,7 @@ baul_location_dialog_new (BaulWindow *window)
         g_free (formatted_location);
     }
 
-    gtk_widget_grab_focus (loc_dialog->details->entry);
+    ctk_widget_grab_focus (loc_dialog->details->entry);
 
     return dialog;
 }

@@ -519,7 +519,7 @@ msgstr "_Infögen"
 msgid "Select All"
 msgstr "All markeren"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Mehr _Details opwiesen"
 

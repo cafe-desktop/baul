@@ -31,7 +31,7 @@
 #ifndef BAUL_NAVIGATION_ACTION_H
 #define BAUL_NAVIGATION_ACTION_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_NAVIGATION_ACTION            (baul_navigation_action_get_type ())
 #define BAUL_NAVIGATION_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_NAVIGATION_ACTION, BaulNavigationAction))

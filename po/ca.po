@@ -531,7 +531,7 @@ msgstr "_Enganxa"
 msgid "Select All"
 msgstr "Selecciona-ho tot"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Mostra més _detalls"
 

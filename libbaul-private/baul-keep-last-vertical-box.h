@@ -26,7 +26,7 @@
 #ifndef BAUL_KEEP_LAST_VERTICAL_BOX_H
 #define BAUL_KEEP_LAST_VERTICAL_BOX_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_KEEP_LAST_VERTICAL_BOX baul_keep_last_vertical_box_get_type()
 #define BAUL_KEEP_LAST_VERTICAL_BOX(obj) \

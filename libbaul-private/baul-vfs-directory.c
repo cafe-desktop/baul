@@ -25,7 +25,7 @@
 
 #include <config.h>
 
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 
 #include "baul-vfs-directory.h"
 #include "baul-directory-private.h"

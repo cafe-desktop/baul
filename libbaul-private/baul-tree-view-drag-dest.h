@@ -30,7 +30,7 @@
 #ifndef BAUL_TREE_VIEW_DRAG_DEST_H
 #define BAUL_TREE_VIEW_DRAG_DEST_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include "baul-file.h"
 

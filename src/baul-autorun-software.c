@@ -29,7 +29,7 @@
 #include <time.h>
 #include <errno.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 
@@ -51,7 +51,7 @@ autorun_software_dialog_destroy (AutorunSoftwareDialogData *data)
                                           G_CALLBACK (autorun_software_dialog_mount_unmounted),
                                           data);
 
-    gtk_widget_destroy (GTK_WIDGET (data->dialog));
+    ctk_widget_destroy (GTK_WIDGET (data->dialog));
     g_object_unref (data->mount);
     g_free (data);
 }
@@ -183,14 +183,14 @@ out:
     if (error_string != NULL)
     {
         GtkWidget *dialog;
-        dialog = gtk_message_dialog_new_with_markup (NULL, /* TODO: parent window? */
+        dialog = ctk_message_dialog_new_with_markup (NULL, /* TODO: parent window? */
                  0,
                  GTK_MESSAGE_ERROR,
                  GTK_BUTTONS_OK,
                  _("<big><b>Error autorunning software</b></big>"));
-        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", error_string);
-        gtk_dialog_run (GTK_DIALOG (dialog));
-        gtk_widget_destroy (dialog);
+        ctk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", error_string);
+        ctk_dialog_run (GTK_DIALOG (dialog));
+        ctk_widget_destroy (dialog);
         g_free (error_string);
     }
 }
@@ -209,12 +209,12 @@ present_autorun_for_software_dialog (GMount *mount)
 
     mount_name = g_mount_get_name (mount);
 
-    dialog = gtk_message_dialog_new_with_markup (NULL, /* TODO: parent window? */
+    dialog = ctk_message_dialog_new_with_markup (NULL, /* TODO: parent window? */
              0,
              GTK_MESSAGE_OTHER,
              GTK_BUTTONS_CANCEL,
              _("<big><b>This medium contains software intended to be automatically started. Would you like to run it?</b></big>"));
-    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+    ctk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
             _("The software will run directly from the medium \"%s\". "
               "You should never run software that you don't trust.\n"
               "\n"
@@ -230,15 +230,15 @@ present_autorun_for_software_dialog (GMount *mount)
     icon = g_mount_get_icon (mount);
     icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_DIALOG);
     icon_info = baul_icon_info_lookup (icon, icon_size,
-                                       gtk_widget_get_scale_factor (GTK_WIDGET (dialog)));
+                                       ctk_widget_get_scale_factor (GTK_WIDGET (dialog)));
     pixbuf = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
-    image = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_widget_set_halign (image, GTK_ALIGN_CENTER);
-    gtk_widget_set_valign (image, GTK_ALIGN_START);
-    gtk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
+    image = ctk_image_new_from_pixbuf (pixbuf);
+    ctk_widget_set_halign (image, GTK_ALIGN_CENTER);
+    ctk_widget_set_valign (image, GTK_ALIGN_START);
+    ctk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
 
-    gtk_window_set_title (GTK_WINDOW (dialog), mount_name);
-    gtk_window_set_icon (GTK_WINDOW (dialog), pixbuf);
+    ctk_window_set_title (GTK_WINDOW (dialog), mount_name);
+    ctk_window_set_icon (GTK_WINDOW (dialog), pixbuf);
 
     data = g_new0 (AutorunSoftwareDialogData, 1);
     data->dialog = dialog;
@@ -249,15 +249,15 @@ present_autorun_for_software_dialog (GMount *mount)
                       G_CALLBACK (autorun_software_dialog_mount_unmounted),
                       data);
 
-    gtk_dialog_add_button (GTK_DIALOG (dialog),
+    ctk_dialog_add_button (GTK_DIALOG (dialog),
                            _("_Run"),
                            GTK_RESPONSE_OK);
 
-    gtk_widget_show_all (dialog);
+    ctk_widget_show_all (dialog);
 
-    if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
+    if (ctk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
     {
-        gtk_widget_destroy (dialog);
+        ctk_widget_destroy (dialog);
         autorun (mount);
     }
 
@@ -277,7 +277,7 @@ main (int argc, char *argv[])
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
 
-    gtk_init (&argc, &argv);
+    ctk_init (&argc, &argv);
 
     if (argc != 2)
     {

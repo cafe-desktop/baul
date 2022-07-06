@@ -24,7 +24,7 @@
 #ifndef BAUL_UI_UTILITIES_H
 #define BAUL_UI_UTILITIES_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <libbaul-extension/baul-menu-item.h>
 

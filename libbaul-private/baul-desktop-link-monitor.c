@@ -23,13 +23,13 @@
 */
 
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <string.h>
 
 #include <eel/eel-debug.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-stock-dialogs.h>

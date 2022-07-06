@@ -517,7 +517,7 @@ msgstr "Co_llar"
 msgid "Select All"
 msgstr "Selecter omnicos"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Monstrar plu _detallies"
 

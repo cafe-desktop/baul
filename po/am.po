@@ -518,7 +518,7 @@ msgstr "_መለጠፊያ "
 msgid "Select All"
 msgstr "ሁሉንም ይምረጡ"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "ተጨማሪ _ዝርዝሮች ማሳያ "
 

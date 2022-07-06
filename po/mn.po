@@ -525,7 +525,7 @@ msgstr "_Буулгах"
 msgid "Select All"
 msgstr "Бүгдийг сонгох"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Илүү _нарийвчилж харуулах"
 

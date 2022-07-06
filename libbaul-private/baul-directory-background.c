@@ -27,11 +27,11 @@
 */
 
 #include <config.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <string.h>
 
 #include <eel/eel-gdk-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-background.h>
 
 #include "baul-directory-background.h"

@@ -33,7 +33,7 @@ libeel_2_la_LIBADD = \
 eel_headers = \
 	eel-accessibility.h \
 	eel-art-extensions.h \
-	eel-art-gtk-extensions.h \
+	eel-art-ctk-extensions.h \
 	eel-background.h \
 	eel-background-box.h \
 	eel-canvas.h \
@@ -45,9 +45,9 @@ eel_headers = \
 	eel-glib-extensions.h \
 	eel-cafe-extensions.h \
 	eel-graphic-effects.h \
-	eel-gtk-container.h \
-	eel-gtk-extensions.h \
-	eel-gtk-macros.h \
+	eel-ctk-container.h \
+	eel-ctk-extensions.h \
+	eel-ctk-macros.h \
 	eel-image-table.h \
 	eel-labeled-image.h \
 	eel-self-checks.h \
@@ -62,7 +62,7 @@ eel_headers = \
 libeel_2_la_SOURCES = \
 	eel-accessibility.c \
 	eel-art-extensions.c \
-	eel-art-gtk-extensions.c \
+	eel-art-ctk-extensions.c \
 	eel-background.c \
 	eel-background-box.c \
 	eel-canvas.c \
@@ -74,8 +74,8 @@ libeel_2_la_SOURCES = \
 	eel-glib-extensions.c \
 	eel-cafe-extensions.c \
 	eel-graphic-effects.c \
-	eel-gtk-container.c \
-	eel-gtk-extensions.c \
+	eel-ctk-container.c \
+	eel-ctk-extensions.c \
 	eel-image-table.c \
 	eel-labeled-image.c \
 	eel-lib-self-check-functions.c \

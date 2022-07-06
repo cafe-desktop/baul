@@ -541,7 +541,7 @@ msgstr "E_infügen"
 msgid "Select All"
 msgstr "Alles markieren"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "_Mehr Details anzeigen"
 

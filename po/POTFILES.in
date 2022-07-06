@@ -14,7 +14,7 @@ data/cafe-network-scheme.desktop.in.in
 eel/eel-canvas.c
 eel/eel-editable-label.c
 eel/eel-glib-extensions.c
-eel/eel-gtk-extensions.c
+eel/eel-ctk-extensions.c
 eel/eel-cafe-extensions.c
 eel/eel-stock-dialogs.c
 eel/eel-vfs-extensions.c

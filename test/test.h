@@ -3,7 +3,7 @@
 
 #include <config.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-debug.h>
 #include <eel/eel.h>
@@ -17,9 +17,9 @@ void       test_delete_event                    (GtkWidget                   *wi
 						 gpointer                     callback_data);
 GtkWidget *test_window_new                      (const char                  *title,
 						 guint                        border_width);
-void       test_gtk_widget_set_background_image (GtkWidget                   *widget,
+void       test_ctk_widget_set_background_image (GtkWidget                   *widget,
 						 const char                  *image_name);
-void       test_gtk_widget_set_background_color (GtkWidget                   *widget,
+void       test_ctk_widget_set_background_color (GtkWidget                   *widget,
 						 const char                  *color_spec);
 GdkPixbuf *test_pixbuf_new_named                (const char                  *name,
 						 float                        scale);

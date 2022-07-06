@@ -27,7 +27,7 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include <eel/eel-stock-dialogs.h>
 
@@ -159,11 +159,11 @@ connect_dialog_restore_info_bar (BaulConnectServerDialog *dialog,
 				 GtkMessageType message_type)
 {
 	if (dialog->details->info_bar_content != NULL) {
-		gtk_widget_destroy (dialog->details->info_bar_content);
+		ctk_widget_destroy (dialog->details->info_bar_content);
 		dialog->details->info_bar_content = NULL;
 	}
 
-	gtk_info_bar_set_message_type (GTK_INFO_BAR (dialog->details->info_bar),
+	ctk_info_bar_set_message_type (GTK_INFO_BAR (dialog->details->info_bar),
 				       message_type);
 }
 
@@ -176,28 +176,28 @@ connect_dialog_set_connecting (BaulConnectServerDialog *dialog)
 	gint width, height;
 
 	connect_dialog_restore_info_bar (dialog, GTK_MESSAGE_INFO);
-	gtk_widget_show (dialog->details->info_bar);
+	ctk_widget_show (dialog->details->info_bar);
 
-	content_area = gtk_info_bar_get_content_area (GTK_INFO_BAR (dialog->details->info_bar));
+	content_area = ctk_info_bar_get_content_area (GTK_INFO_BAR (dialog->details->info_bar));
 
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-	gtk_container_add (GTK_CONTAINER (content_area), hbox);
-	gtk_widget_show (hbox);
+	hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+	ctk_container_add (GTK_CONTAINER (content_area), hbox);
+	ctk_widget_show (hbox);
 
 	dialog->details->info_bar_content = hbox;
 
-	widget = gtk_spinner_new ();
-	gtk_icon_size_lookup (GTK_ICON_SIZE_SMALL_TOOLBAR, &width, &height);
-	gtk_widget_set_size_request (widget, width, height);
-	gtk_spinner_start (GTK_SPINNER (widget));
-	gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
-	gtk_widget_show (widget);
+	widget = ctk_spinner_new ();
+	ctk_icon_size_lookup (GTK_ICON_SIZE_SMALL_TOOLBAR, &width, &height);
+	ctk_widget_set_size_request (widget, width, height);
+	ctk_spinner_start (GTK_SPINNER (widget));
+	ctk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
+	ctk_widget_show (widget);
 
-	widget = gtk_label_new (_("Connecting..."));
-	gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
-	gtk_widget_show (widget);
+	widget = ctk_label_new (_("Connecting..."));
+	ctk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
+	ctk_widget_show (widget);
 
-	gtk_widget_set_sensitive (dialog->details->connect_button, FALSE);
+	ctk_widget_set_sensitive (dialog->details->connect_button, FALSE);
 }
 
 static void
@@ -207,25 +207,25 @@ connect_dialog_gvfs_error (BaulConnectServerDialog *dialog)
 
 	connect_dialog_restore_info_bar (dialog, GTK_MESSAGE_ERROR);
 
-	content_area = gtk_info_bar_get_content_area (GTK_INFO_BAR (dialog->details->info_bar));
+	content_area = ctk_info_bar_get_content_area (GTK_INFO_BAR (dialog->details->info_bar));
 
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-	gtk_container_add (GTK_CONTAINER (content_area), hbox);
-	gtk_widget_show (hbox);
+	hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+	ctk_container_add (GTK_CONTAINER (content_area), hbox);
+	ctk_widget_show (hbox);
 
-	image = gtk_image_new_from_icon_name ("dialog-error", GTK_ICON_SIZE_SMALL_TOOLBAR);
-	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 6);
-	gtk_widget_show (image);
+	image = ctk_image_new_from_icon_name ("dialog-error", GTK_ICON_SIZE_SMALL_TOOLBAR);
+	ctk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 6);
+	ctk_widget_show (image);
 
-	label = gtk_label_new (_("Can't load the supported server method list.\n"
+	label = ctk_label_new (_("Can't load the supported server method list.\n"
 				 "Please check your GVfs installation."));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 6);
-	gtk_widget_show (label);
+	ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 6);
+	ctk_widget_show (label);
 
-	gtk_widget_set_sensitive (dialog->details->connect_button, FALSE);
-	gtk_widget_set_sensitive (dialog->details->primary_grid, FALSE);
+	ctk_widget_set_sensitive (dialog->details->connect_button, FALSE);
+	ctk_widget_set_sensitive (dialog->details->primary_grid, FALSE);
 
-	gtk_widget_show (dialog->details->info_bar);
+	ctk_widget_show (dialog->details->info_bar);
 }
 
 static void
@@ -238,7 +238,7 @@ iconized_entry_restore (gpointer data,
 	entry = data;
 	dialog = user_data;
 
-	gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
+	ctk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
 				       GTK_ENTRY_ICON_SECONDARY,
 				       NULL);
 
@@ -265,11 +265,11 @@ iconize_entry (BaulConnectServerDialog *dialog,
 		dialog->details->iconized_entries =
 			g_list_prepend (dialog->details->iconized_entries, entry);
 
-		gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
+		ctk_entry_set_icon_from_icon_name (GTK_ENTRY (entry),
 					       GTK_ENTRY_ICON_SECONDARY,
 					       "dialog-warning");
 
-		gtk_widget_grab_focus (entry);
+		ctk_widget_grab_focus (entry);
 
 		g_signal_connect (entry, "changed",
 				  G_CALLBACK (iconized_entry_changed_cb), dialog);
@@ -286,27 +286,27 @@ connect_dialog_set_info_bar_error (BaulConnectServerDialog *dialog,
 
 	connect_dialog_restore_info_bar (dialog, GTK_MESSAGE_WARNING);
 
-	content_area = gtk_info_bar_get_content_area (GTK_INFO_BAR (dialog->details->info_bar));
+	content_area = ctk_info_bar_get_content_area (GTK_INFO_BAR (dialog->details->info_bar));
 	entry = NULL;
 
 	switch (error->code) {
 	case G_IO_ERROR_FAILED_HANDLED:
 		return;
 	case G_IO_ERROR_NOT_FOUND:
-		folder = gtk_entry_get_text (GTK_ENTRY (dialog->details->folder_entry));
-		server = gtk_entry_get_text (GTK_ENTRY (dialog->details->server_entry));
+		folder = ctk_entry_get_text (GTK_ENTRY (dialog->details->folder_entry));
+		server = ctk_entry_get_text (GTK_ENTRY (dialog->details->server_entry));
 		str = g_strdup_printf (_("The folder \"%s\" cannot be opened on \"%s\"."),
 				       folder, server);
-		label = gtk_label_new (str);
+		label = ctk_label_new (str);
 		entry = dialog->details->folder_entry;
 
 		g_free (str);
 
 		break;
 	case G_IO_ERROR_HOST_NOT_FOUND:
-		server = gtk_entry_get_text (GTK_ENTRY (dialog->details->server_entry));
+		server = ctk_entry_get_text (GTK_ENTRY (dialog->details->server_entry));
 		str = g_strdup_printf (_("The server at \"%s\" cannot be found."), server);
-		label = gtk_label_new (str);
+		label = ctk_label_new (str);
 		entry = dialog->details->server_entry;
 
 		g_free (str);
@@ -314,24 +314,24 @@ connect_dialog_set_info_bar_error (BaulConnectServerDialog *dialog,
 		break;
 	case G_IO_ERROR_FAILED:
 	default:
-		label = gtk_label_new (error->message);
+		label = ctk_label_new (error->message);
 		break;
 	}
 
-	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-	gtk_widget_show (dialog->details->info_bar);
+	ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+	ctk_widget_show (dialog->details->info_bar);
 
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-	gtk_box_pack_start (GTK_BOX (content_area), hbox, FALSE, FALSE, 6);
-	gtk_widget_show (hbox);
+	hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+	ctk_box_pack_start (GTK_BOX (content_area), hbox, FALSE, FALSE, 6);
+	ctk_widget_show (hbox);
 
-	icon = gtk_image_new_from_icon_name ("dialog-warning",
+	icon = ctk_image_new_from_icon_name ("dialog-warning",
 					 GTK_ICON_SIZE_SMALL_TOOLBAR);
-	gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 6);
-	gtk_widget_show (icon);
+	ctk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 6);
+	ctk_widget_show (icon);
 
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 6);
-	gtk_widget_show (label);
+	ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 6);
+	ctk_widget_show (label);
 
 	if (entry != NULL) {
 		iconize_entry (dialog, entry);
@@ -339,9 +339,9 @@ connect_dialog_set_info_bar_error (BaulConnectServerDialog *dialog,
 
 	dialog->details->info_bar_content = hbox;
 
-	gtk_button_set_label (GTK_BUTTON (dialog->details->connect_button),
+	ctk_button_set_label (GTK_BUTTON (dialog->details->connect_button),
 			      _("Try Again"));
-	gtk_widget_set_sensitive (dialog->details->connect_button, TRUE);
+	ctk_widget_set_sensitive (dialog->details->connect_button, TRUE);
 }
 
 static void
@@ -354,19 +354,19 @@ connect_dialog_finish_fill (BaulConnectServerDialog *dialog)
 	op = G_MOUNT_OPERATION (dialog->details->fill_operation);
 
 	if (flags & G_ASK_PASSWORD_NEED_PASSWORD) {
-		g_mount_operation_set_password (op, gtk_entry_get_text (GTK_ENTRY (dialog->details->password_entry)));
+		g_mount_operation_set_password (op, ctk_entry_get_text (GTK_ENTRY (dialog->details->password_entry)));
 	}
 
 	if (flags & G_ASK_PASSWORD_NEED_USERNAME) {
-		g_mount_operation_set_username (op, gtk_entry_get_text (GTK_ENTRY (dialog->details->user_entry)));
+		g_mount_operation_set_username (op, ctk_entry_get_text (GTK_ENTRY (dialog->details->user_entry)));
 	}
 
 	if (flags & G_ASK_PASSWORD_NEED_DOMAIN) {
-		g_mount_operation_set_domain (op, gtk_entry_get_text (GTK_ENTRY (dialog->details->domain_entry)));
+		g_mount_operation_set_domain (op, ctk_entry_get_text (GTK_ENTRY (dialog->details->domain_entry)));
 	}
 
 	if (flags & G_ASK_PASSWORD_SAVING_SUPPORTED &&
-	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->details->remember_checkbox))) {
+	    ctk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->details->remember_checkbox))) {
 		g_mount_operation_set_password_save (op, G_PASSWORD_SAVE_PERMANENTLY);
 	}
 
@@ -394,20 +394,20 @@ connect_dialog_request_additional_details (BaulConnectServerDialog *self,
 
 	connect_dialog_restore_info_bar (self, GTK_MESSAGE_WARNING);
 
-	content_area = gtk_info_bar_get_content_area (GTK_INFO_BAR (self->details->info_bar));
+	content_area = ctk_info_bar_get_content_area (GTK_INFO_BAR (self->details->info_bar));
 
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-	gtk_box_pack_start (GTK_BOX (content_area), hbox, FALSE, FALSE, 6);
-	gtk_widget_show (hbox);
+	hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+	ctk_box_pack_start (GTK_BOX (content_area), hbox, FALSE, FALSE, 6);
+	ctk_widget_show (hbox);
 
-	icon = gtk_image_new_from_icon_name ("dialog-warning",
+	icon = ctk_image_new_from_icon_name ("dialog-warning",
 					 GTK_ICON_SIZE_SMALL_TOOLBAR);
-	gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 6);
-	gtk_widget_show (icon);
+	ctk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 6);
+	ctk_widget_show (icon);
 
-	label = gtk_label_new (_("Please verify your user details."));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 6);
-	gtk_widget_show (label);
+	label = ctk_label_new (_("Please verify your user details."));
+	ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 6);
+	ctk_widget_show (label);
 
 	if (flags & G_ASK_PASSWORD_NEED_PASSWORD) {
 		iconize_entry (self, self->details->password_entry);
@@ -415,7 +415,7 @@ connect_dialog_request_additional_details (BaulConnectServerDialog *self,
 
 	if (flags & G_ASK_PASSWORD_NEED_USERNAME) {
 		if (default_user != NULL && g_strcmp0 (default_user, "") != 0) {
-			gtk_entry_set_text (GTK_ENTRY (self->details->user_entry),
+			ctk_entry_set_text (GTK_ENTRY (self->details->user_entry),
 					    default_user);
 		} else {
 			iconize_entry (self, self->details->user_entry);
@@ -424,7 +424,7 @@ connect_dialog_request_additional_details (BaulConnectServerDialog *self,
 
 	if (flags & G_ASK_PASSWORD_NEED_DOMAIN) {
 		if (default_domain != NULL && g_strcmp0 (default_domain, "") != 0) {
-			gtk_entry_set_text (GTK_ENTRY (self->details->domain_entry),
+			ctk_entry_set_text (GTK_ENTRY (self->details->domain_entry),
 					    default_domain);
 		} else {
 			iconize_entry (self, self->details->domain_entry);
@@ -433,8 +433,8 @@ connect_dialog_request_additional_details (BaulConnectServerDialog *self,
 
 	self->details->info_bar_content = hbox;
 
-	gtk_widget_set_sensitive (self->details->connect_button, TRUE);
-	gtk_button_set_label (GTK_BUTTON (self->details->connect_button),
+	ctk_widget_set_sensitive (self->details->connect_button, TRUE);
+	ctk_button_set_label (GTK_BUTTON (self->details->connect_button),
 			      _("Continue"));
 
 	if (!(flags & G_ASK_PASSWORD_SAVING_SUPPORTED)) {
@@ -442,9 +442,9 @@ connect_dialog_request_additional_details (BaulConnectServerDialog *self,
 					     self->details->password_sensitive_id);
 		self->details->password_sensitive_id = 0;
 
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->details->remember_checkbox),
+		ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->details->remember_checkbox),
 					      FALSE);
-		gtk_widget_set_sensitive (self->details->remember_checkbox, FALSE);
+		ctk_widget_set_sensitive (self->details->remember_checkbox, FALSE);
 	}
 }
 
@@ -466,7 +466,7 @@ display_location_async_cb (GObject *source,
 		connect_dialog_set_info_bar_error (dialog, error);
 		g_error_free (error);
 	} else {
-		gtk_widget_destroy (GTK_WIDGET (dialog));
+		ctk_widget_destroy (GTK_WIDGET (dialog));
 	}
 }
 
@@ -492,7 +492,7 @@ mount_enclosing_ready_cb (GObject *source,
 								       display_location_async_cb, NULL);
 	} else {
 		if (dialog->details->should_destroy) {
-			gtk_widget_destroy (GTK_WIDGET (dialog));
+			ctk_widget_destroy (GTK_WIDGET (dialog));
 		} else {
 			connect_dialog_set_info_bar_error (dialog, error);
 		}
@@ -529,13 +529,13 @@ connect_dialog_connect_to_server (BaulConnectServerDialog *dialog)
     double port;
 
     /* Get our method info */
-    gtk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog->details->type_combo), &iter);
-    gtk_tree_model_get (gtk_combo_box_get_model (GTK_COMBO_BOX (dialog->details->type_combo)),
+    ctk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog->details->type_combo), &iter);
+    ctk_tree_model_get (ctk_combo_box_get_model (GTK_COMBO_BOX (dialog->details->type_combo)),
                         &iter, 0, &index, -1);
     g_assert (index < G_N_ELEMENTS (methods) && index >= 0);
     meth = &(methods[index]);
 
-    server = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->server_entry), 0, -1);
+    server = ctk_editable_get_chars (GTK_EDITABLE (dialog->details->server_entry), 0, -1);
 
     user = NULL;
 	initial_path = g_strdup ("");
@@ -551,7 +551,7 @@ connect_dialog_connect_to_server (BaulConnectServerDialog *dialog)
 		/* SMB/AFP special case */
 		g_free (initial_path);
 
-    	t = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->share_entry), 0, -1);
+    	t = ctk_editable_get_chars (GTK_EDITABLE (dialog->details->share_entry), 0, -1);
     	initial_path = g_strconcat ("/", t, NULL);
 
         g_free (t);
@@ -559,13 +559,13 @@ connect_dialog_connect_to_server (BaulConnectServerDialog *dialog)
 
     /* username */
     if (!user) {
-    	t = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->user_entry), 0, -1);
+    	t = ctk_editable_get_chars (GTK_EDITABLE (dialog->details->user_entry), 0, -1);
     	user = g_uri_escape_string (t, G_URI_RESERVED_CHARS_ALLOWED_IN_USERINFO, FALSE);
     	g_free (t);
     }
 
     /* domain */
-    domain = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->domain_entry), 0, -1);
+    domain = ctk_editable_get_chars (GTK_EDITABLE (dialog->details->domain_entry), 0, -1);
 
     if (strlen (domain) != 0) {
     	t = user;
@@ -575,7 +575,7 @@ connect_dialog_connect_to_server (BaulConnectServerDialog *dialog)
     }
 
     /* folder */
-    folder = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->folder_entry), 0, -1);
+    folder = ctk_editable_get_chars (GTK_EDITABLE (dialog->details->folder_entry), 0, -1);
 
     if (folder[0] != 0 &&
         folder[0] != '/') {
@@ -593,7 +593,7 @@ connect_dialog_connect_to_server (BaulConnectServerDialog *dialog)
     g_free (t);
 
     /* port */
-	port = gtk_spin_button_get_value (GTK_SPIN_BUTTON (dialog->details->port_spinbutton));
+	port = ctk_spin_button_get_value (GTK_SPIN_BUTTON (dialog->details->port_spinbutton));
 
     if (port != 0 && port != meth->default_port) {
     	port_str = g_strdup_printf ("%d", (int) port);
@@ -622,14 +622,14 @@ connect_dialog_connect_to_server (BaulConnectServerDialog *dialog)
     g_free (uri);
 
     /* add to bookmarks */
-    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->details->bookmark_checkbox)))
+    if (ctk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->details->bookmark_checkbox)))
     {
         char *name;
         BaulBookmark *bookmark;
         BaulBookmarkList *list;
         GIcon *icon;
 
-        name = gtk_editable_get_chars (GTK_EDITABLE (dialog->details->name_entry), 0, -1);
+        name = ctk_editable_get_chars (GTK_EDITABLE (dialog->details->name_entry), 0, -1);
         icon = g_themed_icon_new (BAUL_ICON_FOLDER_REMOTE);
         bookmark = baul_bookmark_new (location, strlen (name) ? name : NULL, TRUE, icon);
         list = baul_bookmark_list_new ();
@@ -686,7 +686,7 @@ connect_dialog_destroy (BaulConnectServerDialog *dialog)
 	if (connect_dialog_abort_mount_operation (dialog)) {
     	dialog->details->should_destroy = TRUE;
     } else {
-    	gtk_widget_destroy (GTK_WIDGET (dialog));
+    	ctk_widget_destroy (GTK_WIDGET (dialog));
     }
 }
 
@@ -709,9 +709,9 @@ connect_dialog_response_cb (BaulConnectServerDialog *dialog,
         break;
     case GTK_RESPONSE_HELP :
         error = NULL;
-        gtk_show_uri_on_window (GTK_WINDOW (dialog),
+        ctk_show_uri_on_window (GTK_WINDOW (dialog),
                                 "help:cafe-user-guide/baul-server-connect",
-                                gtk_get_current_event_time (), &error);
+                                ctk_get_current_event_time (), &error);
         if (error)
         {
             eel_show_error_dialog (_("There was an error displaying help."), error->message,
@@ -728,10 +728,10 @@ static void
 connect_dialog_cleanup (BaulConnectServerDialog *dialog)
 {
 	/* hide the infobar */
-	gtk_widget_hide (dialog->details->info_bar);
+	ctk_widget_hide (dialog->details->info_bar);
 
 	/* set the connect button label back to 'Connect' */
-	gtk_button_set_label (GTK_BUTTON (dialog->details->connect_button),
+	ctk_button_set_label (GTK_BUTTON (dialog->details->connect_button),
 			      _("C_onnect"));
 
 	/* if there was a pending mount operation, cancel it. */
@@ -766,7 +766,7 @@ connect_dialog_setup_for_type (BaulConnectServerDialog *dialog)
 	connect_dialog_cleanup (dialog);
 
 	/* get our method info */
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog->details->type_combo),
+	if (!ctk_combo_box_get_active_iter (GTK_COMBO_BOX (dialog->details->type_combo),
 					    &iter)) {
 		/* there are no entries in the combo, something is wrong
 		 * with our GVfs installation.
@@ -776,7 +776,7 @@ connect_dialog_setup_for_type (BaulConnectServerDialog *dialog)
 		return;
 	}
 
-    gtk_tree_model_get (gtk_combo_box_get_model (GTK_COMBO_BOX (dialog->details->type_combo)),
+    ctk_tree_model_get (ctk_combo_box_get_model (GTK_COMBO_BOX (dialog->details->type_combo)),
                         &iter, 0, &index, -1);
     g_assert (index < G_N_ELEMENTS (methods) && index >= 0);
     meth = &(methods[index]);
@@ -820,9 +820,9 @@ sensitive_entry_changed_callback (GtkEditable *editable,
 {
     guint length;
 
-    length = gtk_entry_get_text_length (GTK_ENTRY (editable));
+    length = ctk_entry_get_text_length (GTK_ENTRY (editable));
 
-	gtk_widget_set_sensitive (widget, length > 0);
+	ctk_widget_set_sensitive (widget, length > 0);
 }
 
 static void
@@ -851,94 +851,94 @@ baul_connect_server_dialog_init (BaulConnectServerDialog *dialog)
 
     dialog->details = baul_connect_server_dialog_get_instance_private (dialog);
 
-    content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+    content_area = ctk_dialog_get_content_area (GTK_DIALOG (dialog));
 
     /* set dialog properties */
-    gtk_window_set_title (GTK_WINDOW (dialog), _("Connect to Server"));
-    gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
-    gtk_box_set_spacing (GTK_BOX (content_area), 2);
-    gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+    ctk_window_set_title (GTK_WINDOW (dialog), _("Connect to Server"));
+    ctk_container_set_border_width (GTK_CONTAINER (dialog), 6);
+    ctk_box_set_spacing (GTK_BOX (content_area), 2);
+    ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
 	/* infobar */
-	dialog->details->info_bar = gtk_info_bar_new ();
-	gtk_info_bar_set_message_type (GTK_INFO_BAR (dialog->details->info_bar),
+	dialog->details->info_bar = ctk_info_bar_new ();
+	ctk_info_bar_set_message_type (GTK_INFO_BAR (dialog->details->info_bar),
 				       GTK_MESSAGE_INFO);
-	gtk_box_pack_start (GTK_BOX (content_area), dialog->details->info_bar,
+	ctk_box_pack_start (GTK_BOX (content_area), dialog->details->info_bar,
 			    FALSE, FALSE, 6);
 
     /* server settings label */
-    label = gtk_label_new (NULL);
+    label = ctk_label_new (NULL);
     str = g_strdup_printf ("<b>%s</b>", _("Server Details"));
-    gtk_label_set_markup (GTK_LABEL (label), str);
+    ctk_label_set_markup (GTK_LABEL (label), str);
     g_free (str);
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_box_pack_start (GTK_BOX (content_area), label, FALSE, FALSE, 6);
-    gtk_widget_show (label);
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_box_pack_start (GTK_BOX (content_area), label, FALSE, FALSE, 6);
+    ctk_widget_show (label);
 
-    grid = gtk_grid_new ();
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
-    gtk_grid_set_row_spacing (GTK_GRID (grid), 6);
-    gtk_grid_set_column_spacing (GTK_GRID (grid), 3);
-    gtk_widget_set_halign (grid, GTK_ALIGN_START);
-    gtk_widget_set_valign (grid, GTK_ALIGN_START);
-    gtk_widget_set_margin_start (grid, 12);
-    gtk_widget_show (grid);
-    gtk_box_pack_start (GTK_BOX (content_area), grid, TRUE, TRUE, 0);
+    grid = ctk_grid_new ();
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
+    ctk_grid_set_row_spacing (GTK_GRID (grid), 6);
+    ctk_grid_set_column_spacing (GTK_GRID (grid), 3);
+    ctk_widget_set_halign (grid, GTK_ALIGN_START);
+    ctk_widget_set_valign (grid, GTK_ALIGN_START);
+    ctk_widget_set_margin_start (grid, 12);
+    ctk_widget_show (grid);
+    ctk_box_pack_start (GTK_BOX (content_area), grid, TRUE, TRUE, 0);
 
     dialog->details->primary_grid = grid;
 
     /* first row: server entry + port spinbutton */
-    label = gtk_label_new_with_mnemonic (_("_Server:"));
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_container_add (GTK_CONTAINER (grid), label);
-    gtk_widget_show (label);
+    label = ctk_label_new_with_mnemonic (_("_Server:"));
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_container_add (GTK_CONTAINER (grid), label);
+    ctk_widget_show (label);
 
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    gtk_widget_show (hbox);
-    gtk_grid_attach_next_to (GTK_GRID (grid), hbox, label,
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    ctk_widget_show (hbox);
+    ctk_grid_attach_next_to (GTK_GRID (grid), hbox, label,
                              GTK_POS_RIGHT,
                              1, 1);
 
-    dialog->details->server_entry = gtk_entry_new ();
-    gtk_entry_set_activates_default (GTK_ENTRY (dialog->details->server_entry), TRUE);
-    gtk_box_pack_start (GTK_BOX (hbox), dialog->details->server_entry, FALSE, FALSE, 0);
-    gtk_label_set_mnemonic_widget (GTK_LABEL (label), dialog->details->server_entry);
-    gtk_widget_show (dialog->details->server_entry);
+    dialog->details->server_entry = ctk_entry_new ();
+    ctk_entry_set_activates_default (GTK_ENTRY (dialog->details->server_entry), TRUE);
+    ctk_box_pack_start (GTK_BOX (hbox), dialog->details->server_entry, FALSE, FALSE, 0);
+    ctk_label_set_mnemonic_widget (GTK_LABEL (label), dialog->details->server_entry);
+    ctk_widget_show (dialog->details->server_entry);
 
     /* port */
-    label = gtk_label_new_with_mnemonic (_("_Port:"));
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    gtk_widget_show (label);
+    label = ctk_label_new_with_mnemonic (_("_Port:"));
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    ctk_widget_show (label);
 
     dialog->details->port_spinbutton =
-    	gtk_spin_button_new_with_range (0.0, 65535.0, 1.0);
+    	ctk_spin_button_new_with_range (0.0, 65535.0, 1.0);
     g_object_set (dialog->details->port_spinbutton,
     	      "digits", 0,
     	      "numeric", TRUE,
     	      "update-policy", GTK_UPDATE_IF_VALID,
     	      NULL);
-    gtk_box_pack_start (GTK_BOX (hbox), dialog->details->port_spinbutton,
+    ctk_box_pack_start (GTK_BOX (hbox), dialog->details->port_spinbutton,
     		    FALSE, FALSE, 0);
-    gtk_label_set_mnemonic_widget (GTK_LABEL (label), dialog->details->port_spinbutton);
-    gtk_widget_show (dialog->details->port_spinbutton);
+    ctk_label_set_mnemonic_widget (GTK_LABEL (label), dialog->details->port_spinbutton);
+    ctk_widget_show (dialog->details->port_spinbutton);
 
     /* second row: type combobox */
-    label = gtk_label_new (_("Type:"));
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_container_add (GTK_CONTAINER (grid), label);
-    gtk_widget_show (label);
+    label = ctk_label_new (_("Type:"));
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_container_add (GTK_CONTAINER (grid), label);
+    ctk_widget_show (label);
 
-    dialog->details->type_combo = combo = gtk_combo_box_new ();
+    dialog->details->type_combo = combo = ctk_combo_box_new ();
 
     /* each row contains: method index, textual description */
-    store = gtk_list_store_new (2, G_TYPE_INT, G_TYPE_STRING);
-    gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (store));
+    store = ctk_list_store_new (2, G_TYPE_INT, G_TYPE_STRING);
+    ctk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (store));
     g_object_unref (store);
 
-    renderer = gtk_cell_renderer_text_new ();
-    gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
-    gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo), renderer, "text", 1);
+    renderer = ctk_cell_renderer_text_new ();
+    ctk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
+    ctk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo), renderer, "text", 1);
 
     for (i = 0; i < G_N_ELEMENTS (methods); i++)
     {
@@ -969,8 +969,8 @@ baul_connect_server_dialog_init (BaulConnectServerDialog *dialog)
             }
         }
 
-        gtk_list_store_append (store, &iter);
-        gtk_list_store_set (store, &iter,
+        ctk_list_store_append (store, &iter);
+        ctk_list_store_set (store, &iter,
                             0, i,
                             1, get_method_description (&(methods[i])),
                             -1);
@@ -978,132 +978,132 @@ baul_connect_server_dialog_init (BaulConnectServerDialog *dialog)
 
         if (methods[i].flags & DEFAULT_METHOD)
         {
-            gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
+            ctk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
         }
     }
 
-    if (gtk_combo_box_get_active (GTK_COMBO_BOX (combo)) < 0)
+    if (ctk_combo_box_get_active (GTK_COMBO_BOX (combo)) < 0)
     {
         /* default method not available, use any other */
-        gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
+        ctk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
     }
 
-    gtk_widget_show (combo);
-    gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
-    gtk_grid_attach_next_to (GTK_GRID (grid), combo, label,
+    ctk_widget_show (combo);
+    ctk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
+    ctk_grid_attach_next_to (GTK_GRID (grid), combo, label,
                              GTK_POS_RIGHT, 1, 1);
     g_signal_connect_swapped (combo, "changed",
 				  G_CALLBACK (connect_dialog_setup_for_type),
     			  dialog);
 
     /* third row: share entry */
-    label = gtk_label_new (_("Share:"));
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_container_add (GTK_CONTAINER (grid), label);
+    label = ctk_label_new (_("Share:"));
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_container_add (GTK_CONTAINER (grid), label);
 
-    dialog->details->share_entry = gtk_entry_new ();
-    gtk_entry_set_activates_default (GTK_ENTRY (dialog->details->share_entry), TRUE);
-    gtk_grid_attach_next_to (GTK_GRID (grid), dialog->details->share_entry, label,
+    dialog->details->share_entry = ctk_entry_new ();
+    ctk_entry_set_activates_default (GTK_ENTRY (dialog->details->share_entry), TRUE);
+    ctk_grid_attach_next_to (GTK_GRID (grid), dialog->details->share_entry, label,
                              GTK_POS_RIGHT, 1, 1);
 
     bind_visibility (dialog, dialog->details->share_entry, label);
 
     /* fourth row: folder entry */
-    label = gtk_label_new (_("Folder:"));
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_container_add (GTK_CONTAINER (grid), label);
-    gtk_widget_show (label);
-    dialog->details->folder_entry = gtk_entry_new ();
-    gtk_entry_set_text (GTK_ENTRY (dialog->details->folder_entry), "/");
-    gtk_entry_set_activates_default (GTK_ENTRY (dialog->details->folder_entry), TRUE);
-    gtk_grid_attach_next_to (GTK_GRID (grid), dialog->details->folder_entry, label,
+    label = ctk_label_new (_("Folder:"));
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_container_add (GTK_CONTAINER (grid), label);
+    ctk_widget_show (label);
+    dialog->details->folder_entry = ctk_entry_new ();
+    ctk_entry_set_text (GTK_ENTRY (dialog->details->folder_entry), "/");
+    ctk_entry_set_activates_default (GTK_ENTRY (dialog->details->folder_entry), TRUE);
+    ctk_grid_attach_next_to (GTK_GRID (grid), dialog->details->folder_entry, label,
                              GTK_POS_RIGHT, 1, 1);
-    gtk_widget_show (dialog->details->folder_entry);
+    ctk_widget_show (dialog->details->folder_entry);
 
     /* user details label */
-    label = gtk_label_new (NULL);
+    label = ctk_label_new (NULL);
     str = g_strdup_printf ("<b>%s</b>", _("User Details"));
-    gtk_label_set_markup (GTK_LABEL (label), str);
+    ctk_label_set_markup (GTK_LABEL (label), str);
     g_free (str);
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_box_pack_start (GTK_BOX (content_area), label, FALSE, FALSE, 6);
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_box_pack_start (GTK_BOX (content_area), label, FALSE, FALSE, 6);
 
-    grid = gtk_grid_new ();
-    gtk_grid_set_row_spacing (GTK_GRID (grid), 6);
-    gtk_grid_set_column_spacing (GTK_GRID (grid), 3);
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
-    gtk_widget_set_halign (grid, GTK_ALIGN_START);
-    gtk_widget_set_valign (grid, GTK_ALIGN_START);
-    gtk_widget_set_margin_start (grid, 12);
-    gtk_widget_show (grid);
-    gtk_box_pack_start (GTK_BOX (content_area), grid, TRUE, TRUE, 0);
+    grid = ctk_grid_new ();
+    ctk_grid_set_row_spacing (GTK_GRID (grid), 6);
+    ctk_grid_set_column_spacing (GTK_GRID (grid), 3);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
+    ctk_widget_set_halign (grid, GTK_ALIGN_START);
+    ctk_widget_set_valign (grid, GTK_ALIGN_START);
+    ctk_widget_set_margin_start (grid, 12);
+    ctk_widget_show (grid);
+    ctk_box_pack_start (GTK_BOX (content_area), grid, TRUE, TRUE, 0);
 
     bind_visibility (dialog, grid, label);
     dialog->details->user_details = grid;
 
     /* first row: domain entry */
-    label = gtk_label_new (_("Domain Name:"));
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_container_add (GTK_CONTAINER (grid), label);
+    label = ctk_label_new (_("Domain Name:"));
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_container_add (GTK_CONTAINER (grid), label);
 
-    dialog->details->domain_entry = gtk_entry_new ();
-    gtk_entry_set_activates_default (GTK_ENTRY (dialog->details->domain_entry), TRUE);
-    gtk_grid_attach_next_to (GTK_GRID (grid), dialog->details->domain_entry, label,
+    dialog->details->domain_entry = ctk_entry_new ();
+    ctk_entry_set_activates_default (GTK_ENTRY (dialog->details->domain_entry), TRUE);
+    ctk_grid_attach_next_to (GTK_GRID (grid), dialog->details->domain_entry, label,
                              GTK_POS_RIGHT, 1, 1);
 
     bind_visibility (dialog, dialog->details->domain_entry, label);
 
     /* second row: username entry */
-    label = gtk_label_new (_("User Name:"));
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_container_add (GTK_CONTAINER (grid), label);
+    label = ctk_label_new (_("User Name:"));
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_container_add (GTK_CONTAINER (grid), label);
 
-    dialog->details->user_entry = gtk_entry_new ();
-    gtk_entry_set_activates_default (GTK_ENTRY (dialog->details->user_entry), TRUE);
-    gtk_grid_attach_next_to (GTK_GRID (grid), dialog->details->user_entry, label,
+    dialog->details->user_entry = ctk_entry_new ();
+    ctk_entry_set_activates_default (GTK_ENTRY (dialog->details->user_entry), TRUE);
+    ctk_grid_attach_next_to (GTK_GRID (grid), dialog->details->user_entry, label,
                              GTK_POS_RIGHT, 1, 1);
 
     bind_visibility (dialog, dialog->details->user_entry, label);
 
     /* third row: password entry */
-    label = gtk_label_new (_("Password:"));
-    gtk_label_set_xalign (GTK_LABEL (label), 0);
-    gtk_container_add (GTK_CONTAINER (grid), label);
+    label = ctk_label_new (_("Password:"));
+    ctk_label_set_xalign (GTK_LABEL (label), 0);
+    ctk_container_add (GTK_CONTAINER (grid), label);
 
-    dialog->details->password_entry = gtk_entry_new ();
-    gtk_entry_set_activates_default (GTK_ENTRY (dialog->details->password_entry), TRUE);
-    gtk_entry_set_visibility (GTK_ENTRY (dialog->details->password_entry), FALSE);
-    gtk_grid_attach_next_to (GTK_GRID (grid), dialog->details->password_entry, label,
+    dialog->details->password_entry = ctk_entry_new ();
+    ctk_entry_set_activates_default (GTK_ENTRY (dialog->details->password_entry), TRUE);
+    ctk_entry_set_visibility (GTK_ENTRY (dialog->details->password_entry), FALSE);
+    ctk_grid_attach_next_to (GTK_GRID (grid), dialog->details->password_entry, label,
                              GTK_POS_RIGHT, 1, 1);
 
     bind_visibility (dialog, dialog->details->password_entry, label);
 
     /* fourth row: remember checkbox */
-    checkbox = gtk_check_button_new_with_label (_("Remember this password"));
-    gtk_grid_attach_next_to (GTK_GRID (grid), checkbox, dialog->details->password_entry,
+    checkbox = ctk_check_button_new_with_label (_("Remember this password"));
+    ctk_grid_attach_next_to (GTK_GRID (grid), checkbox, dialog->details->password_entry,
                              GTK_POS_BOTTOM, 1, 1);
     dialog->details->remember_checkbox = checkbox;
 
     bind_visibility (dialog, dialog->details->password_entry, checkbox);
 
     /* add as bookmark */
-    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    gtk_box_pack_start (GTK_BOX (content_area), vbox, FALSE, FALSE, 6);
+    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 12);
+    ctk_box_pack_start (GTK_BOX (content_area), vbox, FALSE, FALSE, 6);
 
-    dialog->details->bookmark_checkbox = gtk_check_button_new_with_mnemonic (_("Add _bookmark"));
-    gtk_box_pack_start (GTK_BOX (vbox), dialog->details->bookmark_checkbox, TRUE, TRUE, 0);
-    gtk_widget_show (dialog->details->bookmark_checkbox);
+    dialog->details->bookmark_checkbox = ctk_check_button_new_with_mnemonic (_("Add _bookmark"));
+    ctk_box_pack_start (GTK_BOX (vbox), dialog->details->bookmark_checkbox, TRUE, TRUE, 0);
+    ctk_widget_show (dialog->details->bookmark_checkbox);
 
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+    ctk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 
-    label = gtk_label_new (_("Bookmark Name:"));
-    gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+    label = ctk_label_new (_("Bookmark Name:"));
+    ctk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
-    dialog->details->name_entry = gtk_entry_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), dialog->details->name_entry, TRUE, TRUE, 0);
+    dialog->details->name_entry = ctk_entry_new ();
+    ctk_box_pack_start (GTK_BOX (hbox), dialog->details->name_entry, TRUE, TRUE, 0);
 
-    gtk_widget_show_all (vbox);
+    ctk_widget_show_all (vbox);
 
     g_object_bind_property (dialog->details->bookmark_checkbox, "active",
                             dialog->details->name_entry, "sensitive",
@@ -1120,10 +1120,10 @@ baul_connect_server_dialog_init (BaulConnectServerDialog *dialog)
                            "process-stop",
                            GTK_RESPONSE_CANCEL);
 
-    connect_button = gtk_dialog_add_button (GTK_DIALOG (dialog),
+    connect_button = ctk_dialog_add_button (GTK_DIALOG (dialog),
     					_("C_onnect"),
     					RESPONSE_CONNECT);
-    gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+    ctk_dialog_set_default_response (GTK_DIALOG (dialog),
                                      RESPONSE_CONNECT);
 	dialog->details->connect_button = connect_button;
 
@@ -1172,13 +1172,13 @@ baul_connect_server_dialog_new (BaulWindow *window)
     BaulConnectServerDialog *conndlg;
     GtkWidget *dialog;
 
-    dialog = gtk_widget_new (BAUL_TYPE_CONNECT_SERVER_DIALOG, NULL);
+    dialog = ctk_widget_new (BAUL_TYPE_CONNECT_SERVER_DIALOG, NULL);
     conndlg = BAUL_CONNECT_SERVER_DIALOG (dialog);
 
     if (window)
     {
-        gtk_window_set_screen (GTK_WINDOW (dialog),
-                               gtk_window_get_screen (GTK_WINDOW (window)));
+        ctk_window_set_screen (GTK_WINDOW (dialog),
+                               ctk_window_get_screen (GTK_WINDOW (window)));
         conndlg->details->application = window->application;
     }
 
@@ -1215,7 +1215,7 @@ baul_connect_server_dialog_fill_details_async (BaulConnectServerDialog *self,
 
 	if (set_flags & G_ASK_PASSWORD_NEED_PASSWORD) {
 		/* provide the password */
-		str = gtk_entry_get_text (GTK_ENTRY (self->details->password_entry));
+		str = ctk_entry_get_text (GTK_ENTRY (self->details->password_entry));
 
 		if (str != NULL && g_strcmp0 (str, "") != 0 &&
 		    !self->details->last_password_set) {
@@ -1224,7 +1224,7 @@ baul_connect_server_dialog_fill_details_async (BaulConnectServerDialog *self,
 			set_flags ^= G_ASK_PASSWORD_NEED_PASSWORD;
 
 			if (flags & G_ASK_PASSWORD_SAVING_SUPPORTED &&
-			    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->details->remember_checkbox))) {
+			    ctk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->details->remember_checkbox))) {
 				g_mount_operation_set_password_save (G_MOUNT_OPERATION (operation),
 								     G_PASSWORD_SAVE_PERMANENTLY);
 			}
@@ -1235,7 +1235,7 @@ baul_connect_server_dialog_fill_details_async (BaulConnectServerDialog *self,
 
 	if (set_flags & G_ASK_PASSWORD_NEED_USERNAME) {
 		/* see if the default username is different from ours */
-		str = gtk_entry_get_text (GTK_ENTRY (self->details->user_entry));
+		str = ctk_entry_get_text (GTK_ENTRY (self->details->user_entry));
 
 		if (str != NULL && g_strcmp0 (str, "") != 0 &&
 		    g_strcmp0 (str, default_user) != 0) {
@@ -1247,7 +1247,7 @@ baul_connect_server_dialog_fill_details_async (BaulConnectServerDialog *self,
 
 	if (set_flags & G_ASK_PASSWORD_NEED_DOMAIN) {
 		/* see if the default domain is different from ours */
-		str = gtk_entry_get_text (GTK_ENTRY (self->details->domain_entry));
+		str = ctk_entry_get_text (GTK_ENTRY (self->details->domain_entry));
 
 		if (str != NULL && g_strcmp0 (str, "") &&
 		    g_strcmp0 (str, default_domain) != 0) {

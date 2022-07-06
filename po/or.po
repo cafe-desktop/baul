@@ -521,7 +521,7 @@ msgstr "ଲଗାନ୍ତୁ (_P)"
 msgid "Select All"
 msgstr "ସବୁ ମନୋନୀତ କର"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "ଅଧିକ ବିସ୍ତ୍ରୁତ ବିବରଣୀକୁ ଦେଖାନ୍ତୁ (_d)"
 

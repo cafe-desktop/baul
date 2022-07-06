@@ -521,7 +521,7 @@ msgstr "Кірі_стіру"
 msgid "Select All"
 msgstr "Барлығын таңдау"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "_Көбірек ақпарат шығару"
 

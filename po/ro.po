@@ -534,7 +534,7 @@ msgstr "_Lipește"
 msgid "Select All"
 msgstr "Selectare tot"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Arată mai multe _detailii"
 

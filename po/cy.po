@@ -516,7 +516,7 @@ msgstr "_Gludo"
 msgid "Select All"
 msgstr "Dewis popeth"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Dangos _manylion pellach"
 

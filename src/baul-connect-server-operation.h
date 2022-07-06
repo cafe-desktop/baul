@@ -26,7 +26,7 @@
 #define __BAUL_CONNECT_SERVER_OPERATION_H__
 
 #include <gio/gio.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include "baul-connect-server-dialog.h"
 

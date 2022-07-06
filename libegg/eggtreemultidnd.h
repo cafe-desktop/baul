@@ -20,7 +20,7 @@
 #ifndef __EGG_TREE_MULTI_DND_H__
 #define __EGG_TREE_MULTI_DND_H__
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #ifdef __cplusplus
 extern "C" {

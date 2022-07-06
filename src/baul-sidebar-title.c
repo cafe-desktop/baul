@@ -29,7 +29,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <pango/pango.h>
 #include <glib/gi18n.h>
 
@@ -37,7 +37,7 @@
 #include <eel/eel-gdk-extensions.h>
 #include <eel/eel-gdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include <libbaul-private/baul-file-attributes.h>
 #include <libbaul-private/baul-global-preferences.h>
@@ -120,26 +120,26 @@ baul_sidebar_title_init (BaulSidebarTitle *sidebar_title)
 {
     sidebar_title->details = baul_sidebar_title_get_instance_private (sidebar_title);
 
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (sidebar_title), GTK_ORIENTATION_VERTICAL);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (sidebar_title), GTK_ORIENTATION_VERTICAL);
 
     /* Create the icon */
-    sidebar_title->details->icon = gtk_image_new ();
-    gtk_box_pack_start (GTK_BOX (sidebar_title), sidebar_title->details->icon, 0, 0, 0);
-    gtk_widget_show (sidebar_title->details->icon);
+    sidebar_title->details->icon = ctk_image_new ();
+    ctk_box_pack_start (GTK_BOX (sidebar_title), sidebar_title->details->icon, 0, 0, 0);
+    ctk_widget_show (sidebar_title->details->icon);
 
     /* Create the title label */
     sidebar_title->details->title_label = sidebar_title_create_title_label ();
-    gtk_box_pack_start (GTK_BOX (sidebar_title), sidebar_title->details->title_label, 0, 0, 0);
-    gtk_widget_show (sidebar_title->details->title_label);
+    ctk_box_pack_start (GTK_BOX (sidebar_title), sidebar_title->details->title_label, 0, 0, 0);
+    ctk_widget_show (sidebar_title->details->title_label);
 
     /* Create the more info label */
     sidebar_title->details->more_info_label = sidebar_title_create_more_info_label ();
-    gtk_box_pack_start (GTK_BOX (sidebar_title), sidebar_title->details->more_info_label, 0, 0, 0);
-    gtk_widget_show (sidebar_title->details->more_info_label);
+    ctk_box_pack_start (GTK_BOX (sidebar_title), sidebar_title->details->more_info_label, 0, 0, 0);
+    ctk_widget_show (sidebar_title->details->more_info_label);
 
-    sidebar_title->details->emblem_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_widget_show (sidebar_title->details->emblem_box);
-    gtk_box_pack_start (GTK_BOX (sidebar_title), sidebar_title->details->emblem_box, 0, 0, 0);
+    sidebar_title->details->emblem_box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    ctk_widget_show (sidebar_title->details->emblem_box);
+    ctk_box_pack_start (GTK_BOX (sidebar_title), sidebar_title->details->emblem_box, 0, 0, 0);
 
     sidebar_title->details->best_icon_size = get_best_icon_size (sidebar_title);
     /* Keep track of changes in graphics trade offs */
@@ -207,14 +207,14 @@ baul_sidebar_title_class_init (BaulSidebarTitleClass *klass)
     widget_class->size_allocate = baul_sidebar_title_size_allocate;
     widget_class->style_updated = style_updated;
 
-    gtk_widget_class_install_style_property (widget_class,
+    ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boxed ("light_info_rgba",
                                 "Light Info RGBA",
                                 "Color used for information text against a dark background",
                                 GDK_TYPE_RGBA,
                                 G_PARAM_READABLE));
 
-    gtk_widget_class_install_style_property (widget_class,
+    ctk_widget_class_install_style_property (widget_class,
             g_param_spec_boxed ("dark_info_rgba",
                                 "Dark Info RGBA",
                                 "Color used for information text against a light background",
@@ -226,7 +226,7 @@ baul_sidebar_title_class_init (BaulSidebarTitleClass *klass)
 GtkWidget *
 baul_sidebar_title_new (void)
 {
-    return gtk_widget_new (baul_sidebar_title_get_type (), NULL);
+    return ctk_widget_new (baul_sidebar_title_get_type (), NULL);
 }
 
 static void
@@ -245,11 +245,11 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
     GdkRGBA *c;
 
     g_assert (BAUL_IS_SIDEBAR_TITLE (sidebar_title));
-    g_return_if_fail (gtk_widget_get_realized (GTK_WIDGET (sidebar_title)));
+    g_return_if_fail (ctk_widget_get_realized (GTK_WIDGET (sidebar_title)));
 
     /* read the info colors from the current theme; use a reasonable default if undefined */
-    style = gtk_widget_get_style_context (GTK_WIDGET (sidebar_title));
-    gtk_style_context_get_style (style,
+    style = ctk_widget_get_style_context (GTK_WIDGET (sidebar_title));
+    ctk_style_context_get_style (style,
                                  "light_info_color", &light_info_color,
                                  "dark_info_color", &dark_info_color,
                                  NULL);
@@ -266,16 +266,16 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
         gdk_rgba_parse (dark_info_color, DEFAULT_DARK_INFO_COLOR);
     }
 
-    gtk_style_context_get_color (style, GTK_STATE_FLAG_SELECTED, &color);
+    ctk_style_context_get_color (style, GTK_STATE_FLAG_SELECTED, &color);
     setup_gc_with_fg (sidebar_title, LABEL_COLOR_HIGHLIGHT, &color);
 
-    gtk_style_context_get_color (style, GTK_STATE_FLAG_ACTIVE, &color);
+    ctk_style_context_get_color (style, GTK_STATE_FLAG_ACTIVE, &color);
     setup_gc_with_fg (sidebar_title, LABEL_COLOR_ACTIVE, &color);
 
-    gtk_style_context_get_color (style, GTK_STATE_FLAG_PRELIGHT, &color);
+    ctk_style_context_get_color (style, GTK_STATE_FLAG_PRELIGHT, &color);
     setup_gc_with_fg (sidebar_title, LABEL_COLOR_PRELIGHT, &color);
 
-    gtk_style_context_get (style, GTK_STATE_FLAG_SELECTED,
+    ctk_style_context_get (style, GTK_STATE_FLAG_SELECTED,
                            GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                            &c, NULL);
     color = *c;
@@ -283,7 +283,7 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
     setup_gc_with_fg (sidebar_title, LABEL_INFO_COLOR_HIGHLIGHT,
                       eel_gdk_rgba_is_dark (&color) ? light_info_color : dark_info_color);
 
-    gtk_style_context_get (style, GTK_STATE_FLAG_ACTIVE,
+    ctk_style_context_get (style, GTK_STATE_FLAG_ACTIVE,
                            GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                            &c, NULL);
     color = *c;
@@ -294,13 +294,13 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
 
     /* If EelBackground is not set in the widget, we can safely
      * use the foreground color from the theme, because it will
-     * always be displayed against the gtk background */
+     * always be displayed against the ctk background */
     if (!eel_background_is_set(background))
     {
-        gtk_style_context_get_color (style, GTK_STATE_FLAG_NORMAL, &color);
+        ctk_style_context_get_color (style, GTK_STATE_FLAG_NORMAL, &color);
         setup_gc_with_fg (sidebar_title, LABEL_COLOR, &color);
 
-        gtk_style_context_get (style, GTK_STATE_FLAG_NORMAL,
+        ctk_style_context_get (style, GTK_STATE_FLAG_NORMAL,
                                GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                &color, NULL);
         color = *c;
@@ -346,7 +346,7 @@ get_best_icon_size (BaulSidebarTitle *sidebar_title)
     gint width;
     GtkAllocation allocation;
 
-    gtk_widget_get_allocation (GTK_WIDGET (sidebar_title), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (sidebar_title), &allocation);
     width = allocation.width - TITLE_PADDING;
 
     if (width < 0)
@@ -373,7 +373,7 @@ update_icon (BaulSidebarTitle *sidebar_title)
 
     /* see if the current content view is specifying an icon */
     icon_name = get_property_from_component (sidebar_title, "icon_name");
-    icon_scale = gtk_widget_get_scale_factor (GTK_WIDGET (sidebar_title));
+    icon_scale = ctk_widget_get_scale_factor (GTK_WIDGET (sidebar_title));
 
     surface = NULL;
 
@@ -411,7 +411,7 @@ update_icon (BaulSidebarTitle *sidebar_title)
 
     if (!leave_surface_unchanged)
     {
-        gtk_image_set_from_surface (GTK_IMAGE (sidebar_title->details->icon), surface);
+        ctk_image_set_from_surface (GTK_IMAGE (sidebar_title->details->icon), surface);
     }
 
     if (surface != NULL)
@@ -429,7 +429,7 @@ override_title_font (GtkWidget   *widget,
     GtkCssProvider *provider;
     gchar          *tempsize;
 
-    provider = gtk_css_provider_new ();
+    provider = ctk_css_provider_new ();
     tempsize = g_strdup (font);
 
     g_strreverse (tempsize);
@@ -441,10 +441,10 @@ override_title_font (GtkWidget   *widget,
     tempfont [strlen (font) - strlen (tempsize)] = 0;
 
     css = g_strdup_printf ("label { font-family: %s; font-size: %spt; }", tempfont, tempsize);
-    gtk_css_provider_load_from_data (provider, css, -1, NULL);
+    ctk_css_provider_load_from_data (provider, css, -1, NULL);
     g_free (css);
 
-    gtk_style_context_add_provider (gtk_widget_get_style_context (widget),
+    ctk_style_context_add_provider (ctk_widget_get_style_context (widget),
                                     GTK_STYLE_PROVIDER (provider),
                                     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     g_object_unref (provider);
@@ -468,7 +468,7 @@ update_title_font (BaulSidebarTitle *sidebar_title)
         return;
     }
 
-    gtk_widget_get_allocation (GTK_WIDGET (sidebar_title), &allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (sidebar_title), &allocation);
     available_width = allocation.width - TITLE_PADDING;
 
     /* No work to do */
@@ -477,9 +477,9 @@ update_title_font (BaulSidebarTitle *sidebar_title)
         return;
     }
 
-    context = gtk_widget_get_style_context (GTK_WIDGET (sidebar_title));
-    state = gtk_widget_get_state_flags (GTK_WIDGET (sidebar_title));
-    gtk_style_context_get (context, state, GTK_STYLE_PROPERTY_FONT, &title_font, NULL);
+    context = ctk_widget_get_style_context (GTK_WIDGET (sidebar_title));
+    state = ctk_widget_get_state_flags (GTK_WIDGET (sidebar_title));
+    ctk_style_context_get (context, state, GTK_STYLE_PROPERTY_FONT, &title_font, NULL);
     max_style_font_size = pango_font_description_get_size (title_font) * 1.8 / PANGO_SCALE;
     if (max_style_font_size < MIN_TITLE_FONT_SIZE + 1)
     {
@@ -487,7 +487,7 @@ update_title_font (BaulSidebarTitle *sidebar_title)
     }
 
     /* Calculate largest-fitting font size */
-    layout = pango_layout_new (gtk_widget_get_pango_context (sidebar_title->details->title_label));
+    layout = pango_layout_new (ctk_widget_get_pango_context (sidebar_title->details->title_label));
     pango_layout_set_text (layout, sidebar_title->details->title_text, -1);
     pango_layout_set_font_description (layout, title_font);
     tmp_font = pango_font_description_new ();
@@ -523,11 +523,11 @@ update_title (BaulSidebarTitle *sidebar_title)
     label = GTK_LABEL (sidebar_title->details->title_label);
     text = sidebar_title->details->title_text;
 
-    if (g_strcmp0 (text, gtk_label_get_text (label)) == 0)
+    if (g_strcmp0 (text, ctk_label_get_text (label)) == 0)
     {
         return;
     }
-    gtk_label_set_text (label, text);
+    ctk_label_set_text (label, text);
     update_title_font (sidebar_title);
 }
 
@@ -601,14 +601,14 @@ update_more_info (BaulSidebarTitle *sidebar_title)
                             baul_file_get_string_attribute (file, "size"));
         }
 
-        gtk_widget_get_allocation (GTK_WIDGET (sidebar_title), &allocation);
+        ctk_widget_get_allocation (GTK_WIDGET (sidebar_title), &allocation);
         sidebar_width = allocation.width - 2 * SIDEBAR_INFO_MARGIN;
         if (sidebar_width > MINIMUM_INFO_WIDTH)
         {
             char *date_modified_str;
             PangoLayout *layout;
 
-            layout = pango_layout_copy (gtk_label_get_layout (GTK_LABEL (sidebar_title->details->more_info_label)));
+            layout = pango_layout_copy (ctk_label_get_layout (GTK_LABEL (sidebar_title->details->more_info_label)));
             pango_layout_set_width (layout, -1);
             date_modified_str = baul_file_fit_modified_date_as_string
                                 (file, sidebar_width, measure_width_callback, NULL, layout);
@@ -616,7 +616,7 @@ update_more_info (BaulSidebarTitle *sidebar_title)
             append_and_eat (info_string, "\n", date_modified_str);
         }
     }
-    gtk_label_set_text (GTK_LABEL (sidebar_title->details->more_info_label),
+    ctk_label_set_text (GTK_LABEL (sidebar_title->details->more_info_label),
                         info_string->str);
 
     g_string_free (info_string, TRUE);
@@ -628,9 +628,9 @@ add_emblem (BaulSidebarTitle *sidebar_title, GdkPixbuf *pixbuf)
 {
     GtkWidget *image_widget;
 
-    image_widget = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_widget_show (image_widget);
-    gtk_container_add (GTK_CONTAINER (sidebar_title->details->emblem_box), image_widget);
+    image_widget = ctk_image_new_from_pixbuf (pixbuf);
+    ctk_widget_show (image_widget);
+    ctk_container_add (GTK_CONTAINER (sidebar_title->details->emblem_box), image_widget);
 }
 
 static void
@@ -646,8 +646,8 @@ update_emblems (BaulSidebarTitle *sidebar_title)
     }
 
     /* First, deallocate any existing ones */
-    gtk_container_foreach (GTK_CONTAINER (sidebar_title->details->emblem_box),
-                           (GtkCallback) gtk_widget_destroy,
+    ctk_container_foreach (GTK_CONTAINER (sidebar_title->details->emblem_box),
+                           (GtkCallback) ctk_widget_destroy,
                            NULL);
 
     /* fetch the emblem icons from metadata */
@@ -785,14 +785,14 @@ baul_sidebar_title_size_allocate (GtkWidget *widget,
     GtkAllocation old_allocation, new_allocation;
 
     sidebar_title = BAUL_SIDEBAR_TITLE (widget);
-    scale = gtk_widget_get_scale_factor (widget);
+    scale = ctk_widget_get_scale_factor (widget);
 
-    gtk_widget_get_allocation (widget, &old_allocation);
+    ctk_widget_get_allocation (widget, &old_allocation);
     old_width = old_allocation.width;
 
     GTK_WIDGET_CLASS (baul_sidebar_title_parent_class)->size_allocate (widget, allocation);
 
-    gtk_widget_get_allocation (widget, &new_allocation);
+    ctk_widget_get_allocation (widget, &new_allocation);
 
     if (old_width != new_allocation.width)
     {
@@ -818,7 +818,7 @@ baul_sidebar_title_hit_test_icon (BaulSidebarTitle *sidebar_title, int x, int y)
     g_return_val_if_fail (BAUL_IS_SIDEBAR_TITLE (sidebar_title), FALSE);
 
     allocation = g_new0 (GtkAllocation, 1);
-    gtk_widget_get_allocation (GTK_WIDGET (sidebar_title->details->icon), allocation);
+    ctk_widget_get_allocation (GTK_WIDGET (sidebar_title->details->icon), allocation);
     g_return_val_if_fail (allocation != NULL, FALSE);
 
     icon_hit = x >= allocation->x && y >= allocation->y
@@ -834,12 +834,12 @@ sidebar_title_create_title_label (void)
 {
     GtkWidget *title_label;
 
-    title_label = gtk_label_new ("");
-    eel_gtk_label_make_bold (GTK_LABEL (title_label));
-    gtk_label_set_line_wrap (GTK_LABEL (title_label), TRUE);
-    gtk_label_set_justify (GTK_LABEL (title_label), GTK_JUSTIFY_CENTER);
-    gtk_label_set_selectable (GTK_LABEL (title_label), TRUE);
-    gtk_label_set_ellipsize (GTK_LABEL (title_label), PANGO_ELLIPSIZE_END);
+    title_label = ctk_label_new ("");
+    eel_ctk_label_make_bold (GTK_LABEL (title_label));
+    ctk_label_set_line_wrap (GTK_LABEL (title_label), TRUE);
+    ctk_label_set_justify (GTK_LABEL (title_label), GTK_JUSTIFY_CENTER);
+    ctk_label_set_selectable (GTK_LABEL (title_label), TRUE);
+    ctk_label_set_ellipsize (GTK_LABEL (title_label), PANGO_ELLIPSIZE_END);
 
     return title_label;
 }
@@ -853,14 +853,14 @@ sidebar_title_create_more_info_label (void)
     attrs = pango_attr_list_new ();
     pango_attr_list_insert (attrs, pango_attr_scale_new (PANGO_SCALE_SMALL));
 
-    more_info_label = gtk_label_new ("");
+    more_info_label = ctk_label_new ("");
 
-    gtk_label_set_attributes (GTK_LABEL (more_info_label), attrs);
+    ctk_label_set_attributes (GTK_LABEL (more_info_label), attrs);
     pango_attr_list_unref (attrs);
 
-    gtk_label_set_justify (GTK_LABEL (more_info_label), GTK_JUSTIFY_CENTER);
-    gtk_label_set_selectable (GTK_LABEL (more_info_label), TRUE);
-    gtk_label_set_ellipsize (GTK_LABEL (more_info_label), PANGO_ELLIPSIZE_END);
+    ctk_label_set_justify (GTK_LABEL (more_info_label), GTK_JUSTIFY_CENTER);
+    ctk_label_set_selectable (GTK_LABEL (more_info_label), TRUE);
+    ctk_label_set_ellipsize (GTK_LABEL (more_info_label), PANGO_ELLIPSIZE_END);
 
     return more_info_label;
 }

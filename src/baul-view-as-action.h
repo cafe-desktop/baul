@@ -26,7 +26,7 @@
 #ifndef BAUL_VIEW_AS_ACTION_H
 #define BAUL_VIEW_AS_ACTION_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #define BAUL_TYPE_VIEW_AS_ACTION            (baul_view_as_action_get_type ())
 #define BAUL_VIEW_AS_ACTION(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BAUL_TYPE_VIEW_AS_ACTION, BaulViewAsAction))

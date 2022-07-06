@@ -32,7 +32,7 @@
 #include <eel/eel-debug.h>
 #include <eel/eel-stock-dialogs.h>
 #include <eel/eel-vfs-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 
 #include "baul-actions.h"
 #include "baul-bookmark-list.h"
@@ -64,7 +64,7 @@ remove_bookmarks_for_uri_if_yes (GtkDialog *dialog, int response, gpointer callb
         baul_bookmark_list_delete_items_with_uri (window->details->bookmark_list, uri);
     }
 
-    gtk_widget_destroy (GTK_WIDGET (dialog));
+    ctk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
@@ -93,7 +93,7 @@ show_bogus_bookmark_window (BaulWindow *window,
                       G_CALLBACK (remove_bookmarks_for_uri_if_yes), window);
     g_object_set_data_full (G_OBJECT (dialog), "uri", g_file_get_uri (location), g_free);
 
-    gtk_dialog_set_default_response (dialog, GTK_RESPONSE_NO);
+    ctk_dialog_set_default_response (dialog, GTK_RESPONSE_NO);
 
     g_object_unref (location);
     g_free (uri_for_display);
@@ -128,7 +128,7 @@ baul_bookmarks_exiting (void)
     if (bookmarks_window != NULL)
     {
         baul_bookmarks_window_save_geometry (bookmarks_window);
-        gtk_widget_destroy (GTK_WIDGET (bookmarks_window));
+        ctk_widget_destroy (GTK_WIDGET (bookmarks_window));
     }
 }
 
@@ -164,9 +164,9 @@ baul_window_edit_bookmarks (BaulWindow *window)
 
     dialog = get_or_create_bookmarks_window (window);
 
-    gtk_window_set_screen (
-        dialog, gtk_window_get_screen (GTK_WINDOW (window)));
-    gtk_window_present (dialog);
+    ctk_window_set_screen (
+        dialog, ctk_window_get_screen (GTK_WINDOW (window)));
+    ctk_window_present (dialog);
 }
 
 static void
@@ -177,13 +177,13 @@ remove_bookmarks_menu_items (BaulWindow *window)
     ui_manager = baul_window_get_ui_manager (window);
     if (window->details->bookmarks_merge_id != 0)
     {
-        gtk_ui_manager_remove_ui (ui_manager,
+        ctk_ui_manager_remove_ui (ui_manager,
                                   window->details->bookmarks_merge_id);
         window->details->bookmarks_merge_id = 0;
     }
     if (window->details->bookmarks_action_group != NULL)
     {
-        gtk_ui_manager_remove_action_group (ui_manager,
+        ctk_ui_manager_remove_action_group (ui_manager,
                                             window->details->bookmarks_action_group);
         window->details->bookmarks_action_group = NULL;
     }
@@ -200,11 +200,11 @@ connect_proxy_cb (GtkActionGroup *action_group,
     if (!GTK_IS_MENU_ITEM (proxy))
         return;
 
-    label = GTK_LABEL (gtk_bin_get_child (GTK_BIN (proxy)));
+    label = GTK_LABEL (ctk_bin_get_child (GTK_BIN (proxy)));
 
-    gtk_label_set_use_underline (label, FALSE);
-    gtk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
-    gtk_label_set_max_width_chars (label, MENU_ITEM_MAX_WIDTH_CHARS);
+    ctk_label_set_use_underline (label, FALSE);
+    ctk_label_set_ellipsize (label, PANGO_ELLIPSIZE_END);
+    ctk_label_set_max_width_chars (label, MENU_ITEM_MAX_WIDTH_CHARS);
 }
 
 static void
@@ -229,14 +229,14 @@ update_bookmarks (BaulWindow *window)
 
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
 
-    window->details->bookmarks_merge_id = gtk_ui_manager_new_merge_id (ui_manager);
+    window->details->bookmarks_merge_id = ctk_ui_manager_new_merge_id (ui_manager);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    window->details->bookmarks_action_group = gtk_action_group_new ("BookmarksGroup");
+    window->details->bookmarks_action_group = ctk_action_group_new ("BookmarksGroup");
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_connect (window->details->bookmarks_action_group, "connect-proxy",
                       G_CALLBACK (connect_proxy_cb), NULL);
 
-    gtk_ui_manager_insert_action_group (ui_manager,
+    ctk_ui_manager_insert_action_group (ui_manager,
                                         window->details->bookmarks_action_group,
                                         -1);
     g_object_unref (window->details->bookmarks_action_group);

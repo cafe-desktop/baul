@@ -27,7 +27,7 @@
 #ifndef BAUL_DND_H
 #define BAUL_DND_H
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 
 #include "baul-window-slot-info.h"
 

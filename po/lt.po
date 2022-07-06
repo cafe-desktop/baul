@@ -523,7 +523,7 @@ msgstr "Į_dėti"
 msgid "Select All"
 msgstr "Pažymėti viską"
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Ro_dyti išsamesnę informaciją"
 

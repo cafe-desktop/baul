@@ -28,7 +28,7 @@
 #include <config.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <glib.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 #include <libxml/parser.h>
 #include <stdlib.h>
@@ -37,7 +37,7 @@
 #include <eel/eel-gdk-extensions.h>
 #include <eel/eel-gdk-extensions.h>
 #include <eel/eel-gdk-pixbuf-extensions.h>
-#include <eel/eel-gtk-extensions.h>
+#include <eel/eel-ctk-extensions.h>
 #include <eel/eel-string.h>
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-xml-extensions.h>

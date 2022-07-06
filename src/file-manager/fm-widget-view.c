@@ -26,7 +26,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-macros.h>
 #include <eel/eel-vfs-extensions.h>
 
 #include <libbaul-private/baul-file-utilities.h>
@@ -111,7 +111,7 @@ fm_widget_view_begin_loading (FMDirectoryView *view)
     g_free (uri);
 
     widget = baul_widget_view_provider_get_widget (widget_view->provider);
-    gtk_container_add (GTK_CONTAINER(widget_view), widget);
+    ctk_container_add (GTK_CONTAINER(widget_view), widget);
 
     window = fm_directory_view_get_containing_window (view);
     baul_widget_view_provider_set_window (widget_view->provider, window);
@@ -325,7 +325,7 @@ fm_widget_view_scroll_to_file (BaulView *view, const char *uri)
 static void
 fm_widget_view_grab_focus (BaulView *view)
 {
-    gtk_widget_grab_focus (GTK_WIDGET (view));
+    ctk_widget_grab_focus (GTK_WIDGET (view));
 }
 
 static void

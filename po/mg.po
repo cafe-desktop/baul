@@ -516,7 +516,7 @@ msgstr "_Apetao"
 msgid "Select All"
 msgstr ""
 
-#: eel/eel-gtk-extensions.c:433
+#: eel/eel-ctk-extensions.c:433
 msgid "Show more _details"
 msgstr "Asehoy amin'ny _antsipiriany"
 

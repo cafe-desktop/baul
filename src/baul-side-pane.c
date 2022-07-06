@@ -24,12 +24,12 @@
 #include <config.h>
 
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
 #include <eel/eel-glib-extensions.h>
-#include <eel/eel-gtk-extensions.h>
-#include <eel/eel-gtk-macros.h>
+#include <eel/eel-ctk-extensions.h>
+#include <eel/eel-ctk-macros.h>
 
 #include "baul-side-pane.h"
 
@@ -105,12 +105,12 @@ switch_page_callback (GtkWidget *notebook,
     side_pane = BAUL_SIDE_PANE (user_data);
 
     panel = panel_for_widget (side_pane,
-                              gtk_notebook_get_nth_page (GTK_NOTEBOOK (side_pane->details->notebook),
+                              ctk_notebook_get_nth_page (GTK_NOTEBOOK (side_pane->details->notebook),
                                       page_num));
 
     if (panel && side_pane->details->title_label)
     {
-        gtk_label_set_text (GTK_LABEL (side_pane->details->title_label),
+        ctk_label_set_text (GTK_LABEL (side_pane->details->title_label),
                             panel->title);
     }
 
@@ -123,9 +123,9 @@ select_panel (BaulSidePane *side_pane, SidePanel *panel)
 {
     int page_num;
 
-    page_num = gtk_notebook_page_num
+    page_num = ctk_notebook_page_num
                (GTK_NOTEBOOK (side_pane->details->notebook), panel->widget);
-    gtk_notebook_set_current_page
+    ctk_notebook_set_current_page
     (GTK_NOTEBOOK (side_pane->details->notebook), page_num);
 }
 
@@ -189,17 +189,17 @@ select_button_press_callback (GtkWidget *widget,
         GtkAllocation allocation;
         gint width;
 
-        gtk_widget_get_allocation (widget, &allocation);
+        ctk_widget_get_allocation (widget, &allocation);
         width = allocation.width;
-        gtk_widget_set_size_request (side_pane->details->menu, -1, -1);
-        gtk_widget_get_preferred_size (side_pane->details->menu, &requisition, NULL);
-        gtk_widget_set_size_request (side_pane->details->menu,
+        ctk_widget_set_size_request (side_pane->details->menu, -1, -1);
+        ctk_widget_get_preferred_size (side_pane->details->menu, &requisition, NULL);
+        ctk_widget_set_size_request (side_pane->details->menu,
                                      MAX (width, requisition.width), -1);
 
-        gtk_widget_grab_focus (widget);
+        ctk_widget_grab_focus (widget);
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-        gtk_menu_popup_at_widget (GTK_MENU (side_pane->details->menu),
+        ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+        ctk_menu_popup_at_widget (GTK_MENU (side_pane->details->menu),
                                   widget,
                                   GDK_GRAVITY_SOUTH_WEST,
                                   GDK_GRAVITY_NORTH_WEST,
@@ -224,8 +224,8 @@ select_button_key_press_callback (GtkWidget *widget,
         event->keyval == GDK_KEY_Return ||
         event->keyval == GDK_KEY_KP_Enter)
     {
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-        gtk_menu_popup_at_widget (GTK_MENU (side_pane->details->menu),
+        ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+        ctk_menu_popup_at_widget (GTK_MENU (side_pane->details->menu),
                                   widget,
                                   GDK_GRAVITY_SOUTH_WEST,
                                   GDK_GRAVITY_NORTH_WEST,
@@ -255,7 +255,7 @@ menu_deactivate_callback (GtkWidget *widget,
 
     menu_button = GTK_WIDGET (user_data);
 
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (menu_button), FALSE);
+    ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (menu_button), FALSE);
 }
 
 static void
@@ -283,19 +283,19 @@ baul_side_pane_init (BaulSidePane *side_pane)
 
     GtkStyleContext *context;
 
-    context = gtk_widget_get_style_context (GTK_WIDGET (side_pane));
-    gtk_style_context_add_class (context, "baul-side-pane");
+    context = ctk_widget_get_style_context (GTK_WIDGET (side_pane));
+    ctk_style_context_add_class (context, "baul-side-pane");
 
-    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_container_set_border_width (GTK_CONTAINER (hbox), 4);
+    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    ctk_container_set_border_width (GTK_CONTAINER (hbox), 4);
     side_pane->details->title_hbox = hbox;
-    gtk_widget_show (hbox);
-    gtk_orientable_set_orientation (GTK_ORIENTABLE (side_pane), GTK_ORIENTATION_VERTICAL);
-    gtk_box_pack_start (GTK_BOX (side_pane), hbox, FALSE, FALSE, 0);
+    ctk_widget_show (hbox);
+    ctk_orientable_set_orientation (GTK_ORIENTABLE (side_pane), GTK_ORIENTATION_VERTICAL);
+    ctk_box_pack_start (GTK_BOX (side_pane), hbox, FALSE, FALSE, 0);
 
-    select_button = gtk_toggle_button_new ();
-    gtk_button_set_relief (GTK_BUTTON (select_button), GTK_RELIEF_NONE);
-    gtk_widget_show (select_button);
+    select_button = ctk_toggle_button_new ();
+    ctk_button_set_relief (GTK_BUTTON (select_button), GTK_RELIEF_NONE);
+    ctk_widget_show (select_button);
 
     g_signal_connect (select_button,
                       "button_press_event",
@@ -306,51 +306,51 @@ baul_side_pane_init (BaulSidePane *side_pane)
                       G_CALLBACK (select_button_key_press_callback),
                       side_pane);
 
-    select_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_widget_show (select_hbox);
+    select_hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    ctk_widget_show (select_hbox);
 
-    side_pane->details->title_label = gtk_label_new ("");
+    side_pane->details->title_label = ctk_label_new ("");
     eel_add_weak_pointer (&side_pane->details->title_label);
 
-    gtk_widget_show (side_pane->details->title_label);
-    gtk_box_pack_start (GTK_BOX (select_hbox),
+    ctk_widget_show (side_pane->details->title_label);
+    ctk_box_pack_start (GTK_BOX (select_hbox),
                         side_pane->details->title_label,
                         FALSE, FALSE, 0);
 
-    arrow = gtk_image_new_from_icon_name ("pan-down-symbolic", GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (arrow);
-    gtk_box_pack_end (GTK_BOX (select_hbox), arrow, FALSE, FALSE, 0);
+    arrow = ctk_image_new_from_icon_name ("pan-down-symbolic", GTK_ICON_SIZE_BUTTON);
+    ctk_widget_show (arrow);
+    ctk_box_pack_end (GTK_BOX (select_hbox), arrow, FALSE, FALSE, 0);
 
-    gtk_container_add (GTK_CONTAINER (select_button), select_hbox);
-    gtk_box_pack_start (GTK_BOX (hbox), select_button, TRUE, TRUE, 0);
+    ctk_container_add (GTK_CONTAINER (select_button), select_hbox);
+    ctk_box_pack_start (GTK_BOX (hbox), select_button, TRUE, TRUE, 0);
 
-    close_button = gtk_button_new ();
-    gtk_button_set_relief (GTK_BUTTON (close_button), GTK_RELIEF_NONE);
+    close_button = ctk_button_new ();
+    ctk_button_set_relief (GTK_BUTTON (close_button), GTK_RELIEF_NONE);
     g_signal_connect (close_button,
                       "clicked",
                       G_CALLBACK (close_clicked_callback),
                       side_pane);
 
-    gtk_widget_show (close_button);
+    ctk_widget_show (close_button);
 
-    image = gtk_image_new_from_icon_name ("window-close",
+    image = ctk_image_new_from_icon_name ("window-close",
                                       GTK_ICON_SIZE_MENU);
-    gtk_widget_show (image);
+    ctk_widget_show (image);
 
-    gtk_container_add (GTK_CONTAINER (close_button), image);
+    ctk_container_add (GTK_CONTAINER (close_button), image);
 
-    gtk_box_pack_end (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
+    ctk_box_pack_end (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
 
-    side_pane->details->shortcut_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_widget_show (side_pane->details->shortcut_box);
-    gtk_box_pack_end (GTK_BOX (hbox),
+    side_pane->details->shortcut_box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    ctk_widget_show (side_pane->details->shortcut_box);
+    ctk_box_pack_end (GTK_BOX (hbox),
                       side_pane->details->shortcut_box,
                       FALSE, FALSE, 0);
 
-    side_pane->details->notebook = gtk_notebook_new ();
-    gtk_notebook_set_show_tabs (GTK_NOTEBOOK (side_pane->details->notebook),
+    side_pane->details->notebook = ctk_notebook_new ();
+    ctk_notebook_set_show_tabs (GTK_NOTEBOOK (side_pane->details->notebook),
                                 FALSE);
-    gtk_notebook_set_show_border (GTK_NOTEBOOK (side_pane->details->notebook),
+    ctk_notebook_set_show_border (GTK_NOTEBOOK (side_pane->details->notebook),
                                   FALSE);
     g_signal_connect_object (side_pane->details->notebook,
                              "switch_page",
@@ -358,26 +358,26 @@ baul_side_pane_init (BaulSidePane *side_pane)
                              side_pane,
                              0);
 
-    gtk_widget_show (side_pane->details->notebook);
+    ctk_widget_show (side_pane->details->notebook);
 
-    gtk_box_pack_start (GTK_BOX (side_pane), side_pane->details->notebook,
+    ctk_box_pack_start (GTK_BOX (side_pane), side_pane->details->notebook,
                         TRUE, TRUE, 0);
 
-    side_pane->details->menu = gtk_menu_new ();
+    side_pane->details->menu = ctk_menu_new ();
 
-    gtk_menu_set_reserve_toggle_size (GTK_MENU (side_pane->details->menu), FALSE);
+    ctk_menu_set_reserve_toggle_size (GTK_MENU (side_pane->details->menu), FALSE);
 
     g_signal_connect (side_pane->details->menu,
                       "deactivate",
                       G_CALLBACK (menu_deactivate_callback),
                       select_button);
-    gtk_menu_attach_to_widget (GTK_MENU (side_pane->details->menu),
+    ctk_menu_attach_to_widget (GTK_MENU (side_pane->details->menu),
                                GTK_WIDGET (side_pane),
                                menu_detach_callback);
 
-    gtk_widget_show (side_pane->details->menu);
+    ctk_widget_show (side_pane->details->menu);
 
-    gtk_widget_set_tooltip_text (close_button,
+    ctk_widget_set_tooltip_text (close_button,
                                  _("Close the side pane"));
 }
 
@@ -390,7 +390,7 @@ baul_side_pane_dispose (GObject *object)
 
     if (side_pane->details->menu)
     {
-        gtk_menu_detach (GTK_MENU (side_pane->details->menu));
+        ctk_menu_detach (GTK_MENU (side_pane->details->menu));
         side_pane->details->menu = NULL;
     }
 
@@ -418,7 +418,7 @@ baul_side_pane_finalize (GObject *object)
 BaulSidePane *
 baul_side_pane_new (void)
 {
-    return BAUL_SIDE_PANE (gtk_widget_new (baul_side_pane_get_type (), NULL));
+    return BAUL_SIDE_PANE (ctk_widget_new (baul_side_pane_get_type (), NULL));
 }
 
 void
@@ -441,12 +441,12 @@ baul_side_pane_add_panel (BaulSidePane *side_pane,
     panel->tooltip = g_strdup (tooltip);
     panel->widget = widget;
 
-    gtk_widget_show (widget);
+    ctk_widget_show (widget);
 
     panel->menu_item = eel_image_menu_item_new_from_icon (NULL, title);
 
-    gtk_widget_show (panel->menu_item);
-    gtk_menu_shell_append (GTK_MENU_SHELL (side_pane->details->menu),
+    ctk_widget_show (panel->menu_item);
+    ctk_menu_shell_append (GTK_MENU_SHELL (side_pane->details->menu),
                            panel->menu_item);
     g_object_set_data (G_OBJECT (panel->menu_item), "panel-item", panel);
 
@@ -458,7 +458,7 @@ baul_side_pane_add_panel (BaulSidePane *side_pane,
     side_pane->details->panels = g_list_append (side_pane->details->panels,
                                  panel);
 
-    gtk_notebook_append_page (GTK_NOTEBOOK (side_pane->details->notebook),
+    ctk_notebook_append_page (GTK_NOTEBOOK (side_pane->details->notebook),
                               widget,
                               NULL);
 }
@@ -482,11 +482,11 @@ baul_side_pane_remove_panel (BaulSidePane *side_pane,
     {
         int page_num;
 
-        page_num = gtk_notebook_page_num (GTK_NOTEBOOK (side_pane->details->notebook),
+        page_num = ctk_notebook_page_num (GTK_NOTEBOOK (side_pane->details->notebook),
                                           widget);
-        gtk_notebook_remove_page (GTK_NOTEBOOK (side_pane->details->notebook),
+        ctk_notebook_remove_page (GTK_NOTEBOOK (side_pane->details->notebook),
                                   page_num);
-        gtk_container_remove (GTK_CONTAINER (side_pane->details->menu),
+        ctk_container_remove (GTK_CONTAINER (side_pane->details->menu),
                               panel->menu_item);
 
         side_pane->details->panels =
@@ -513,9 +513,9 @@ baul_side_pane_show_panel (BaulSidePane *side_pane,
 
     g_return_if_fail (panel != NULL);
 
-    page_num = gtk_notebook_page_num (GTK_NOTEBOOK (side_pane->details->notebook),
+    page_num = ctk_notebook_page_num (GTK_NOTEBOOK (side_pane->details->notebook),
                                       widget);
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (side_pane->details->notebook),
+    ctk_notebook_set_current_page (GTK_NOTEBOOK (side_pane->details->notebook),
                                    page_num);
 }
 
@@ -542,18 +542,18 @@ create_shortcut (BaulSidePane *side_pane,
     GtkWidget *button;
     GtkWidget *image;
 
-    button = gtk_button_new ();
-    gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+    button = ctk_button_new ();
+    ctk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
 
     g_object_set_data (G_OBJECT (button), "side-page", panel->widget);
     g_signal_connect (button, "clicked",
                       G_CALLBACK (shortcut_clicked_callback), side_pane);
 
-    gtk_widget_set_tooltip_text (button, panel->tooltip);
+    ctk_widget_set_tooltip_text (button, panel->tooltip);
 
-    image = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_widget_show (image);
-    gtk_container_add (GTK_CONTAINER (button), image);
+    image = ctk_image_new_from_pixbuf (pixbuf);
+    ctk_widget_show (image);
+    ctk_container_add (GTK_CONTAINER (button), image);
 
     return button;
 }
@@ -578,8 +578,8 @@ baul_side_pane_set_panel_image (BaulSidePane *side_pane,
 
     if (pixbuf)
     {
-        image = gtk_image_new_from_pixbuf (pixbuf);
-        gtk_widget_show (image);
+        image = ctk_image_new_from_pixbuf (pixbuf);
+        ctk_widget_show (image);
     }
     else
     {
@@ -588,15 +588,15 @@ baul_side_pane_set_panel_image (BaulSidePane *side_pane,
 
     if (panel->shortcut)
     {
-        gtk_widget_destroy (panel->shortcut);
+        ctk_widget_destroy (panel->shortcut);
         panel->shortcut = NULL;
     }
 
     if (pixbuf)
     {
         panel->shortcut = create_shortcut (side_pane, panel, pixbuf);
-        gtk_widget_show (panel->shortcut);
-        gtk_box_pack_start (GTK_BOX (side_pane->details->shortcut_box),
+        ctk_widget_show (panel->shortcut);
+        ctk_box_pack_start (GTK_BOX (side_pane->details->shortcut_box),
                             panel->shortcut,
                             FALSE, FALSE, 0);
     }
@@ -607,8 +607,8 @@ baul_side_pane_get_current_panel (BaulSidePane *side_pane)
 {
     int index;
 
-    index = gtk_notebook_get_current_page (GTK_NOTEBOOK (side_pane->details->notebook));
-    return gtk_notebook_get_nth_page (GTK_NOTEBOOK (side_pane->details->notebook), index);
+    index = ctk_notebook_get_current_page (GTK_NOTEBOOK (side_pane->details->notebook));
+    return ctk_notebook_get_nth_page (GTK_NOTEBOOK (side_pane->details->notebook), index);
 }
 
 GtkWidget *

@@ -29,7 +29,7 @@
 
 #include <glib.h>
 
-#include <gtk/gtk.h>
+#include <ctk/ctk.h>
 #include "baul-window-slot.h"
 
 #ifdef __cplusplus
