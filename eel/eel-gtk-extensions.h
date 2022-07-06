@@ -31,49 +31,49 @@
 #include <ctk/ctk.h>
 #include "eel-gdk-extensions.h"
 
-/* GtkWindow */
-void                  eel_ctk_window_set_initial_geometry             (GtkWindow            *window,
+/* CtkWindow */
+void                  eel_ctk_window_set_initial_geometry             (CtkWindow            *window,
         EelGdkGeometryFlags   geometry_flags,
         int                   left,
         int                   top,
         guint                 width,
         guint                 height);
-void                  eel_ctk_window_set_initial_geometry_from_string (GtkWindow            *window,
+void                  eel_ctk_window_set_initial_geometry_from_string (CtkWindow            *window,
         const char           *geometry_string,
         guint                 minimum_width,
         guint                 minimum_height,
         gboolean		     ignore_position);
-char *                eel_ctk_window_get_geometry_string              (GtkWindow            *window);
+char *                eel_ctk_window_get_geometry_string              (CtkWindow            *window);
 
 
-/* GtkMenu and GtkMenuItem */
-void                  eel_pop_up_context_menu                         (GtkMenu              *menu,
+/* CtkMenu and CtkMenuItem */
+void                  eel_pop_up_context_menu                         (CtkMenu              *menu,
         GdkEventButton       *event);
-GtkMenuItem *         eel_ctk_menu_append_separator                   (GtkMenu              *menu);
-GtkMenuItem *         eel_ctk_menu_insert_separator                   (GtkMenu              *menu,
+CtkMenuItem *         eel_ctk_menu_append_separator                   (CtkMenu              *menu);
+CtkMenuItem *         eel_ctk_menu_insert_separator                   (CtkMenu              *menu,
         int                   index);
 
-/* GtkMenuToolButton */
-GtkWidget *           eel_ctk_menu_tool_button_get_button             (GtkMenuToolButton    *tool_button);
+/* CtkMenuToolButton */
+CtkWidget *           eel_ctk_menu_tool_button_get_button             (CtkMenuToolButton    *tool_button);
 
-/* GtkLabel */
-void                  eel_ctk_label_make_bold                         (GtkLabel             *label);
+/* CtkLabel */
+void                  eel_ctk_label_make_bold                         (CtkLabel             *label);
 
-/* GtkTreeView */
-void                  eel_ctk_tree_view_set_activate_on_single_click  (GtkTreeView          *tree_view,
+/* CtkTreeView */
+void                  eel_ctk_tree_view_set_activate_on_single_click  (CtkTreeView          *tree_view,
                                                                        gboolean              should_activate);
 
-/* GtkMessageDialog */
-void                  eel_ctk_message_dialog_set_details_label        (GtkMessageDialog     *dialog,
+/* CtkMessageDialog */
+void                  eel_ctk_message_dialog_set_details_label        (CtkMessageDialog     *dialog,
                                                                        const gchar          *details_text);
 
-GtkWidget *           eel_image_menu_item_new_from_icon               (const gchar          *icon_name,
+CtkWidget *           eel_image_menu_item_new_from_icon               (const gchar          *icon_name,
                                                                        const gchar          *label_name);
 
-GtkWidget *           eel_image_menu_item_new_from_surface              (cairo_surface_t    *icon_surface,
+CtkWidget *           eel_image_menu_item_new_from_surface              (cairo_surface_t    *icon_surface,
                                                                          const gchar        *label_name);
 
-gboolean              eel_dialog_page_scroll_event_callback           (GtkWidget            *widget,
+gboolean              eel_dialog_page_scroll_event_callback           (CtkWidget            *widget,
                                                                        GdkEventScroll       *event,
-                                                                       GtkWindow            *window);
+                                                                       CtkWindow            *window);
 #endif /* EEL_GTK_EXTENSIONS_H */

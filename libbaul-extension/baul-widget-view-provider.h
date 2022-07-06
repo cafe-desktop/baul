@@ -40,7 +40,7 @@ typedef struct _BaulWidgetViewProviderIface  BaulWidgetViewProviderIface;
 /**
  * BaulWidgetViewProviderIface:
  * @supports_uri: Whether this extension works for this uri
- * @get_widget: Returns a #GtkWidget.
+ * @get_widget: Returns a #CtkWidget.
  *   See baul_widget_view_provider_get_widget() for details.
  * @add_file: Adds a file to this widget view.
  * @set_location: Set location to this widget view.
@@ -58,10 +58,10 @@ struct _BaulWidgetViewProviderIface {
                                  const char *uri,
                                  GFileType file_type,
                                  const char *mime_type);
-    GtkWidget* (*get_widget)     (BaulWidgetViewProvider *provider);
+    CtkWidget* (*get_widget)     (BaulWidgetViewProvider *provider);
     void       (*add_file)       (BaulWidgetViewProvider *provider, BaulFile *file, BaulFile *directory);
     void       (*set_location)   (BaulWidgetViewProvider *provider, const char *location);
-    void       (*set_window)     (BaulWidgetViewProvider *provider, GtkWindow *window);
+    void       (*set_window)     (BaulWidgetViewProvider *provider, CtkWindow *window);
     guint      (*get_item_count) (BaulWidgetViewProvider *provider);
     gchar*     (*get_first_visible_file) (BaulWidgetViewProvider *provider);
     void       (*clear)          (BaulWidgetViewProvider *provider);
@@ -70,14 +70,14 @@ struct _BaulWidgetViewProviderIface {
 /* Interface Functions */
 GType      baul_widget_view_provider_get_type       (void);
 
-GtkWidget *baul_widget_view_provider_get_widget     (BaulWidgetViewProvider *provider);
+CtkWidget *baul_widget_view_provider_get_widget     (BaulWidgetViewProvider *provider);
 void       baul_widget_view_provider_add_file       (BaulWidgetViewProvider *provider,
                                                      BaulFile *file,
                                                      BaulFile *directory);
 void       baul_widget_view_provider_set_location   (BaulWidgetViewProvider *provider,
                                                      const char *location);
 void       baul_widget_view_provider_set_window     (BaulWidgetViewProvider *provider,
-                                                     GtkWindow *window);
+                                                     CtkWindow *window);
 guint      baul_widget_view_provider_get_item_count (BaulWidgetViewProvider *provider);
 gchar*     baul_widget_view_provider_get_first_visible_file (BaulWidgetViewProvider *provider);
 void       baul_widget_view_provider_clear          (BaulWidgetViewProvider *provider);

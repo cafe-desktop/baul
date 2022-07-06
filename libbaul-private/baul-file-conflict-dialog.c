@@ -50,17 +50,17 @@ struct _BaulFileConflictDialogPrivate
     gulong dest_handler_id;
 
     /* UI objects */
-    GtkWidget *titles_vbox;
-    GtkWidget *first_hbox;
-    GtkWidget *second_hbox;
-    GtkWidget *expander;
-    GtkWidget *entry;
-    GtkWidget *checkbox;
-    GtkWidget *rename_button;
-    GtkWidget *diff_button;
-    GtkWidget *replace_button;
-    GtkWidget *dest_image;
-    GtkWidget *src_image;
+    CtkWidget *titles_vbox;
+    CtkWidget *first_hbox;
+    CtkWidget *second_hbox;
+    CtkWidget *expander;
+    CtkWidget *entry;
+    CtkWidget *checkbox;
+    CtkWidget *rename_button;
+    CtkWidget *diff_button;
+    CtkWidget *replace_button;
+    CtkWidget *dest_image;
+    CtkWidget *src_image;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (BaulFileConflictDialog,
@@ -107,7 +107,7 @@ file_list_ready_cb (GList *files,
     char *label_text;
     char *size, *date, *type = NULL;
     cairo_surface_t *surface;
-    GtkWidget *label;
+    CtkWidget *label;
     GString *str;
     PangoAttrList *attr_list;
 
@@ -393,7 +393,7 @@ build_dialog_appearance (BaulFileConflictDialog *fcd)
 }
 
 static void
-set_source_and_destination (GtkWidget *w,
+set_source_and_destination (CtkWidget *w,
                             GFile *source,
                             GFile *destination,
                             GFile *dest_dir)
@@ -412,7 +412,7 @@ set_source_and_destination (GtkWidget *w,
 }
 
 static void
-entry_text_changed_cb (GtkEditable *entry,
+entry_text_changed_cb (CtkEditable *entry,
                        BaulFileConflictDialog *dialog)
 {
     BaulFileConflictDialogPrivate *details;
@@ -446,7 +446,7 @@ entry_text_changed_cb (GtkEditable *entry,
 }
 
 static void
-expander_activated_cb (GtkExpander *w,
+expander_activated_cb (CtkExpander *w,
                        BaulFileConflictDialog *dialog)
 {
     BaulFileConflictDialogPrivate *details;
@@ -470,7 +470,7 @@ expander_activated_cb (GtkExpander *w,
 }
 
 static void
-checkbox_toggled_cb (GtkToggleButton *t,
+checkbox_toggled_cb (CtkToggleButton *t,
                      BaulFileConflictDialog *dialog)
 {
     BaulFileConflictDialogPrivate *details;
@@ -499,7 +499,7 @@ checkbox_toggled_cb (GtkToggleButton *t,
 }
 
 static void
-reset_button_clicked_cb (GtkButton *w,
+reset_button_clicked_cb (CtkButton *w,
                          BaulFileConflictDialog *dialog)
 {
     BaulFileConflictDialogPrivate *details;
@@ -518,7 +518,7 @@ reset_button_clicked_cb (GtkButton *w,
 }
 
 static void
-diff_button_clicked_cb (GtkButton *w,
+diff_button_clicked_cb (CtkButton *w,
                         BaulFileConflictDialog *dialog)
 {
     BaulFileConflictDialogPrivate *details;
@@ -559,10 +559,10 @@ diff_button_clicked_cb (GtkButton *w,
 static void
 baul_file_conflict_dialog_init (BaulFileConflictDialog *fcd)
 {
-    GtkWidget *hbox, *vbox, *vbox2;
-    GtkWidget *widget, *dialog_area;
+    CtkWidget *hbox, *vbox, *vbox2;
+    CtkWidget *widget, *dialog_area;
     BaulFileConflictDialogPrivate *details;
-    GtkDialog *dialog;
+    CtkDialog *dialog;
 
     details = fcd->details = baul_file_conflict_dialog_get_instance_private (fcd);
     dialog = GTK_DIALOG (fcd);
@@ -730,13 +730,13 @@ baul_file_conflict_dialog_get_apply_to_all (BaulFileConflictDialog *dialog)
            (GTK_TOGGLE_BUTTON (dialog->details->checkbox));
 }
 
-GtkWidget *
-baul_file_conflict_dialog_new (GtkWindow *parent,
+CtkWidget *
+baul_file_conflict_dialog_new (CtkWindow *parent,
                                GFile *source,
                                GFile *destination,
                                GFile *dest_dir)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
     BaulFile *src, *dest;
     gboolean source_is_dir, dest_is_dir;
 

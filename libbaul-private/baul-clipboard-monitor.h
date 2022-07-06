@@ -72,10 +72,10 @@ void baul_clipboard_monitor_set_clipboard_info (BaulClipboardMonitor *monitor,
 BaulClipboardInfo * baul_clipboard_monitor_get_clipboard_info (BaulClipboardMonitor *monitor);
 void baul_clipboard_monitor_emit_changed (void);
 
-void baul_clear_clipboard_callback (GtkClipboard *clipboard,
+void baul_clear_clipboard_callback (CtkClipboard *clipboard,
                                     gpointer      user_data);
-void baul_get_clipboard_callback   (GtkClipboard     *clipboard,
-                                    GtkSelectionData *selection_data,
+void baul_get_clipboard_callback   (CtkClipboard     *clipboard,
+                                    CtkSelectionData *selection_data,
                                     guint             info,
                                     gpointer          user_data);
 

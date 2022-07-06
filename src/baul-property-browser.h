@@ -53,13 +53,13 @@ typedef struct _BaulPropertyBrowserPrivate BaulPropertyBrowserPrivate;
 
 struct BaulPropertyBrowser
 {
-    GtkWindow window;
+    CtkWindow window;
     BaulPropertyBrowserPrivate *details;
 };
 
 struct BaulPropertyBrowserClass
 {
-    GtkWindowClass parent_class;
+    CtkWindowClass parent_class;
 };
 
 GType                    baul_property_browser_get_type (void);

@@ -75,7 +75,7 @@ should_open_in_new_tab (void)
 }
 
 static void
-activate_back_or_forward_menu_item (GtkMenuItem *menu_item,
+activate_back_or_forward_menu_item (CtkMenuItem *menu_item,
                                     BaulNavigationWindow *window,
                                     gboolean back)
 {
@@ -90,27 +90,27 @@ activate_back_or_forward_menu_item (GtkMenuItem *menu_item,
 }
 
 static void
-activate_back_menu_item_callback (GtkMenuItem *menu_item, BaulNavigationWindow *window)
+activate_back_menu_item_callback (CtkMenuItem *menu_item, BaulNavigationWindow *window)
 {
     activate_back_or_forward_menu_item (menu_item, window, TRUE);
 }
 
 static void
-activate_forward_menu_item_callback (GtkMenuItem *menu_item, BaulNavigationWindow *window)
+activate_forward_menu_item_callback (CtkMenuItem *menu_item, BaulNavigationWindow *window)
 {
     activate_back_or_forward_menu_item (menu_item, window, FALSE);
 }
 
 static void
 fill_menu (BaulNavigationWindow *window,
-           GtkWidget *menu,
+           CtkWidget *menu,
            gboolean back)
 {
     BaulNavigationWindowSlot *slot;
     int index;
     GList *list;
     gboolean list_void;
-    GtkWidget *menu_item = NULL;
+    CtkWidget *menu_item = NULL;
 
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
@@ -159,12 +159,12 @@ fill_menu (BaulNavigationWindow *window,
 }
 
 static void
-show_menu_callback (GtkMenuToolButton *button,
+show_menu_callback (CtkMenuToolButton *button,
                     BaulNavigationAction *action)
 {
     BaulNavigationActionPrivate *p;
     BaulNavigationWindow *window;
-    GtkWidget *menu;
+    CtkWidget *menu;
     GList *children;
     GList *li;
 
@@ -195,7 +195,7 @@ show_menu_callback (GtkMenuToolButton *button,
 }
 
 static gboolean
-proxy_button_press_event_cb (GtkButton *button,
+proxy_button_press_event_cb (CtkButton *button,
                              GdkEventButton *event,
                              gpointer user_data)
 {
@@ -208,7 +208,7 @@ proxy_button_press_event_cb (GtkButton *button,
 }
 
 static gboolean
-proxy_button_release_event_cb (GtkButton *button,
+proxy_button_release_event_cb (CtkButton *button,
                                GdkEventButton *event,
                                gpointer user_data)
 {
@@ -221,14 +221,14 @@ proxy_button_release_event_cb (GtkButton *button,
 }
 
 static void
-connect_proxy (GtkAction *action, GtkWidget *proxy)
+connect_proxy (CtkAction *action, CtkWidget *proxy)
 {
     if (GTK_IS_MENU_TOOL_BUTTON (proxy))
     {
         BaulNavigationAction *naction = BAUL_NAVIGATION_ACTION (action);
-        GtkMenuToolButton *button = GTK_MENU_TOOL_BUTTON (proxy);
-        GtkWidget *menu;
-        GtkWidget *child;
+        CtkMenuToolButton *button = GTK_MENU_TOOL_BUTTON (proxy);
+        CtkWidget *menu;
+        CtkWidget *child;
 
         /* set an empty menu, so the arrow button becomes sensitive */
         menu = ctk_menu_new ();
@@ -256,11 +256,11 @@ connect_proxy (GtkAction *action, GtkWidget *proxy)
 }
 
 static void
-disconnect_proxy (GtkAction *action, GtkWidget *proxy)
+disconnect_proxy (CtkAction *action, CtkWidget *proxy)
 {
     if (GTK_IS_MENU_TOOL_BUTTON (proxy))
     {
-        GtkWidget *child;
+        CtkWidget *child;
 
         g_signal_handlers_disconnect_by_func (proxy, G_CALLBACK (show_menu_callback), action);
 
@@ -338,7 +338,7 @@ baul_navigation_action_class_init (BaulNavigationActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    GtkActionClass *action_class = GTK_ACTION_CLASS (class);
+    CtkActionClass *action_class = GTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     object_class->finalize = baul_navigation_action_finalize;

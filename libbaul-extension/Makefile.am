@@ -73,7 +73,7 @@ introspection_files = \
 	$(libbaul_extension_include_HEADERS) \
 	$(libbaul_extension_la_SOURCES)
 Baul-2.0.gir: libbaul-extension.la Makefile
-Baul_2_0_gir_INCLUDES = Gtk-3.0 Gio-2.0 GLib-2.0
+Baul_2_0_gir_INCLUDES = Ctk-3.0 Gio-2.0 GLib-2.0
 Baul_2_0_gir_CFLAGS = \
 	-I$(top_srcdir) \
 	-I$(top_builddir) \

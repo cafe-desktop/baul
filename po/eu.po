@@ -469,11 +469,11 @@ msgstr "Justifikazioa"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "Etiketaren testuko lerroen bata bestearekiko lerrokatzea. Honek EZ dio "
 "eragiten bere esleipenaren barruko etiketaren lerrokatzeari. Ikus "
-"GtkMisc::xalign horretarako."
+"CtkMisc::xalign horretarako."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

@@ -63,7 +63,7 @@ typedef struct _BaulApplicationPrivate BaulApplicationPrivate;
 
 typedef struct
 {
-    GtkApplication parent;
+    CtkApplication parent;
     BaulApplicationPrivate *priv;
 
     EggSMClient* smclient;
@@ -77,7 +77,7 @@ typedef struct
 
 typedef struct
 {
-	GtkApplicationClass parent_class;
+	CtkApplicationClass parent_class;
 } BaulApplicationClass;
 
 GType baul_application_get_type (void);

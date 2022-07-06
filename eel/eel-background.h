@@ -36,7 +36,7 @@
    on top of it. This is used when the tiled image can't be loaded for
    some reason (or just has not been loaded yet).
 
-   The EelBackground object is easier to modify than a GtkStyle.
+   The EelBackground object is easier to modify than a CtkStyle.
    You can just call eel_get_window_background and modify the
    returned background directly, unlike a style, which must be copied,
    modified and then set.
@@ -93,16 +93,16 @@ gboolean                    eel_background_is_dark               (EelBackground 
 gboolean                    eel_background_is_set                (EelBackground   *self);
 
 /* Helper function for widgets using EelBackground */
-void                        eel_background_draw                  (GtkWidget       *widget,
+void                        eel_background_draw                  (CtkWidget       *widget,
         							  cairo_t         *cr);
 
 /* Handles a dragged color being dropped on a widget to change the background color. */
 void                        eel_background_set_dropped_color     (EelBackground   *self,
-        							  GtkWidget       *widget,
+        							  CtkWidget       *widget,
         							  GdkDragAction    action,
         							  int              drop_location_x,
         							  int              drop_location_y,
-        							  const GtkSelectionData
+        							  const CtkSelectionData
         							                  *dropped_color);
 
 /* Handles a special-case image name that means "reset to default background" too. */
@@ -111,7 +111,7 @@ void                        eel_background_set_dropped_image     (EelBackground 
         							  const gchar     *image_uri);
 
 /* Gets or creates a background so that it's attached to a widget. */
-EelBackground *             eel_get_widget_background            (GtkWidget       *widget);
+EelBackground *             eel_get_widget_background            (CtkWidget       *widget);
 
 /* Thin-wrappers around cafe_bg gsettings functions */
 void			    eel_bg_save_to_gsettings             (EelBackground   *self,

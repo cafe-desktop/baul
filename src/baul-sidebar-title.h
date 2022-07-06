@@ -51,17 +51,17 @@ typedef struct _BaulSidebarTitlePrivate BaulSidebarTitlePrivate;
 
 typedef struct
 {
-    GtkBox box;
+    CtkBox box;
     BaulSidebarTitlePrivate *details;
 } BaulSidebarTitle;
 
 typedef struct
 {
-    GtkBoxClass parent_class;
+    CtkBoxClass parent_class;
 } BaulSidebarTitleClass;
 
 GType      baul_sidebar_title_get_type          (void);
-GtkWidget *baul_sidebar_title_new               (void);
+CtkWidget *baul_sidebar_title_new               (void);
 void       baul_sidebar_title_set_file          (BaulSidebarTitle *sidebar_title,
         BaulFile         *file,
         const char           *initial_text);

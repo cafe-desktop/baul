@@ -86,14 +86,14 @@ baul_menu_provider_get_type (void)
 /**
  * baul_menu_provider_get_file_items:
  * @provider: a #BaulMenuProvider
- * @window: the parent #GtkWidget window
+ * @window: the parent #CtkWidget window
  * @files: (element-type BaulFileInfo): a list of #BaulFileInfo
  *
  * Returns: (element-type BaulMenuItem) (transfer full): the provided list of #BaulMenuItem
  */
 GList *
 baul_menu_provider_get_file_items (BaulMenuProvider *provider,
-                                   GtkWidget        *window,
+                                   CtkWidget        *window,
                                    GList            *files)
 {
     g_return_val_if_fail (BAUL_IS_MENU_PROVIDER (provider), NULL);
@@ -109,14 +109,14 @@ baul_menu_provider_get_file_items (BaulMenuProvider *provider,
 /**
  * baul_menu_provider_get_background_items:
  * @provider: a #BaulMenuProvider
- * @window: the parent #GtkWidget window
+ * @window: the parent #CtkWidget window
  * @current_folder: the folder for which background items are requested
  *
  * Returns: (element-type BaulMenuItem) (transfer full): the provided list of #BaulMenuItem
  */
 GList *
 baul_menu_provider_get_background_items (BaulMenuProvider *provider,
-                                         GtkWidget        *window,
+                                         CtkWidget        *window,
                                          BaulFileInfo     *current_folder)
 {
     g_return_val_if_fail (BAUL_IS_MENU_PROVIDER (provider), NULL);
@@ -133,14 +133,14 @@ baul_menu_provider_get_background_items (BaulMenuProvider *provider,
 /**
  * baul_menu_provider_get_toolbar_items:
  * @provider: a #BaulMenuProvider
- * @window: the parent #GtkWidget window
+ * @window: the parent #CtkWidget window
  * @current_folder: the folder for which toolbar items are requested
  *
  * Returns: (element-type BaulMenuItem) (transfer full): the provided list of #BaulMenuItem
  */
 GList *
 baul_menu_provider_get_toolbar_items (BaulMenuProvider *provider,
-                                      GtkWidget        *window,
+                                      CtkWidget        *window,
                                       BaulFileInfo     *current_folder)
 {
     g_return_val_if_fail (BAUL_IS_MENU_PROVIDER (provider), NULL);

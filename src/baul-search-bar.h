@@ -46,13 +46,13 @@ typedef struct BaulSearchBarDetails BaulSearchBarDetails;
 
 typedef struct BaulSearchBar
 {
-    GtkEventBox parent;
+    CtkEventBox parent;
     BaulSearchBarDetails *details;
 } BaulSearchBar;
 
 typedef struct
 {
-    GtkEventBoxClass parent_class;
+    CtkEventBoxClass parent_class;
 
     void (* activate) (BaulSearchBar *bar);
     void (* cancel)   (BaulSearchBar *bar);
@@ -60,9 +60,9 @@ typedef struct
 } BaulSearchBarClass;
 
 GType      baul_search_bar_get_type     	(void);
-GtkWidget* baul_search_bar_new          	(BaulWindow *window);
+CtkWidget* baul_search_bar_new          	(BaulWindow *window);
 
-GtkWidget *    baul_search_bar_borrow_entry  (BaulSearchBar *bar);
+CtkWidget *    baul_search_bar_borrow_entry  (BaulSearchBar *bar);
 void           baul_search_bar_return_entry  (BaulSearchBar *bar);
 void           baul_search_bar_grab_focus    (BaulSearchBar *bar);
 BaulQuery *baul_search_bar_get_query     (BaulSearchBar *bar);

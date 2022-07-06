@@ -50,13 +50,13 @@
 
 struct _BaulTreeViewDragDestDetails
 {
-    GtkTreeView *tree_view;
+    CtkTreeView *tree_view;
 
     gboolean drop_occurred;
 
     gboolean have_drag_data;
     guint drag_type;
-    GtkSelectionData *drag_data;
+    CtkSelectionData *drag_data;
     GList *drag_list;
 
     guint highlight_id;
@@ -85,7 +85,7 @@ G_DEFINE_TYPE (BaulTreeViewDragDest, baul_tree_view_drag_dest,
 
 #define parent_class baul_tree_view_drag_dest_parent_class
 
-static const GtkTargetEntry drag_types [] =
+static const CtkTargetEntry drag_types [] =
 {
     { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     /* prefer "_NETSCAPE_URL" over "text/uri-list" to satisfy web browsers. */
@@ -98,10 +98,10 @@ static const GtkTargetEntry drag_types [] =
 
 
 static void
-ctk_tree_view_vertical_autoscroll (GtkTreeView *tree_view)
+ctk_tree_view_vertical_autoscroll (CtkTreeView *tree_view)
 {
     GdkRectangle visible_rect;
-    GtkAdjustment *vadjustment;
+    CtkAdjustment *vadjustment;
     GdkDisplay *display;
     GdkSeat *seat;
     GdkDevice *pointer;
@@ -142,7 +142,7 @@ ctk_tree_view_vertical_autoscroll (GtkTreeView *tree_view)
 static int
 scroll_timeout (gpointer data)
 {
-    GtkTreeView *tree_view = GTK_TREE_VIEW (data);
+    CtkTreeView *tree_view = GTK_TREE_VIEW (data);
 
     ctk_tree_view_vertical_autoscroll (tree_view);
 
@@ -162,8 +162,8 @@ remove_scroll_timeout (BaulTreeViewDragDest *dest)
 static int
 expand_timeout (gpointer data)
 {
-    GtkTreeView *tree_view;
-    GtkTreePath *drop_path;
+    CtkTreeView *tree_view;
+    CtkTreePath *drop_path;
 
     tree_view = GTK_TREE_VIEW (data);
 
@@ -189,14 +189,14 @@ remove_expand_timeout (BaulTreeViewDragDest *dest)
 }
 
 static gboolean
-highlight_draw (GtkWidget *widget,
+highlight_draw (CtkWidget *widget,
 		cairo_t   *cr,
                 gpointer data)
 {
     GdkWindow *bin_window;
     int width;
     int height;
-    GtkStyleContext *style;
+    CtkStyleContext *style;
 
     /* FIXMEchpe: is bin window right here??? */
     bin_window = ctk_tree_view_get_bin_window (GTK_TREE_VIEW (widget));
@@ -242,7 +242,7 @@ set_widget_highlight (BaulTreeViewDragDest *dest, gboolean highlight)
 
 static void
 set_drag_dest_row (BaulTreeViewDragDest *dest,
-                   GtkTreePath *path)
+                   CtkTreePath *path)
 {
     if (path)
     {
@@ -330,7 +330,7 @@ get_root_uri (BaulTreeViewDragDest *dest)
 }
 
 static BaulFile *
-file_for_path (BaulTreeViewDragDest *dest, GtkTreePath *path)
+file_for_path (BaulTreeViewDragDest *dest, CtkTreePath *path)
 {
     BaulFile *file;
 
@@ -356,12 +356,12 @@ file_for_path (BaulTreeViewDragDest *dest, GtkTreePath *path)
     return file;
 }
 
-static GtkTreePath *
+static CtkTreePath *
 get_drop_path (BaulTreeViewDragDest *dest,
-               GtkTreePath *path)
+               CtkTreePath *path)
 {
     BaulFile *file;
-    GtkTreePath *ret;
+    CtkTreePath *ret;
 
     if (!path || !dest->details->have_drag_data)
     {
@@ -398,7 +398,7 @@ get_drop_path (BaulTreeViewDragDest *dest,
 
 static char *
 get_drop_target_uri_for_path (BaulTreeViewDragDest *dest,
-                              GtkTreePath *path)
+                              CtkTreePath *path)
 {
     BaulFile *file;
     char *target;
@@ -418,7 +418,7 @@ get_drop_target_uri_for_path (BaulTreeViewDragDest *dest,
 static guint
 get_drop_action (BaulTreeViewDragDest *dest,
                  GdkDragContext *context,
-                 GtkTreePath *path)
+                 CtkTreePath *path)
 {
     char *drop_target;
     int action;
@@ -495,7 +495,7 @@ get_drop_action (BaulTreeViewDragDest *dest,
 }
 
 static gboolean
-drag_motion_callback (GtkWidget *widget,
+drag_motion_callback (CtkWidget *widget,
                       GdkDragContext *context,
                       int x,
                       int y,
@@ -503,10 +503,10 @@ drag_motion_callback (GtkWidget *widget,
                       gpointer data)
 {
     BaulTreeViewDragDest *dest;
-    GtkTreePath *path;
-    GtkTreePath *drop_path, *old_drop_path;
-    GtkTreeIter drop_iter;
-    GtkTreeViewDropPosition pos;
+    CtkTreePath *path;
+    CtkTreePath *drop_path, *old_drop_path;
+    CtkTreeIter drop_iter;
+    CtkTreeViewDropPosition pos;
     GdkWindow *bin_window;
     guint action;
     gboolean res = TRUE;
@@ -547,7 +547,7 @@ drag_motion_callback (GtkWidget *widget,
 
     if (action)
     {
-        GtkTreeModel *model;
+        CtkTreeModel *model;
 
         set_drag_dest_row (dest, drop_path);
         model = ctk_tree_view_get_model (GTK_TREE_VIEW (widget));
@@ -602,7 +602,7 @@ drag_motion_callback (GtkWidget *widget,
 }
 
 static void
-drag_leave_callback (GtkWidget *widget,
+drag_leave_callback (CtkWidget *widget,
                      GdkDragContext *context,
                      guint32 time,
                      gpointer data)
@@ -623,9 +623,9 @@ static char *
 get_drop_target_uri_at_pos (BaulTreeViewDragDest *dest, int x, int y)
 {
     char *drop_target;
-    GtkTreePath *path;
-    GtkTreePath *drop_path;
-    GtkTreeViewDropPosition pos;
+    CtkTreePath *path;
+    CtkTreePath *drop_path;
+    CtkTreeViewDropPosition pos;
 
     ctk_tree_view_get_dest_row_at_pos (dest->details->tree_view, x, y,
                                        &path, &pos);
@@ -856,7 +856,7 @@ receive_dropped_keyword (BaulTreeViewDragDest *dest,
 
 static gboolean
 receive_xds (BaulTreeViewDragDest *dest,
-             GtkWidget *widget,
+             CtkWidget *widget,
              guint32 time,
              GdkDragContext *context,
              int x, int y)
@@ -897,11 +897,11 @@ receive_xds (BaulTreeViewDragDest *dest,
 
 
 static gboolean
-drag_data_received_callback (GtkWidget *widget,
+drag_data_received_callback (CtkWidget *widget,
                              GdkDragContext *context,
                              int x,
                              int y,
-                             GtkSelectionData *selection_data,
+                             CtkSelectionData *selection_data,
                              guint info,
                              guint32 time,
                              gpointer data)
@@ -975,7 +975,7 @@ drag_data_received_callback (GtkWidget *widget,
         }
     }
 
-    /* appease GtkTreeView by preventing its drag_data_receive
+    /* appease CtkTreeView by preventing its drag_data_receive
      * from being called */
     g_signal_stop_emission_by_name (dest->details->tree_view,
                                     "drag_data_received");
@@ -1069,7 +1069,7 @@ set_direct_save_uri (BaulTreeViewDragDest *dest,
 }
 
 static gboolean
-drag_drop_callback (GtkWidget *widget,
+drag_drop_callback (CtkWidget *widget,
                     GdkDragContext *context,
                     int x,
                     int y,
@@ -1275,10 +1275,10 @@ baul_tree_view_drag_dest_class_init (BaulTreeViewDragDestClass *class)
 
 
 BaulTreeViewDragDest *
-baul_tree_view_drag_dest_new (GtkTreeView *tree_view)
+baul_tree_view_drag_dest_new (CtkTreeView *tree_view)
 {
     BaulTreeViewDragDest *dest;
-    GtkTargetList *targets;
+    CtkTargetList *targets;
 
     dest = g_object_new (BAUL_TYPE_TREE_VIEW_DRAG_DEST, NULL);
 

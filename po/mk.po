@@ -469,11 +469,11 @@ msgstr "Порамнување"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "Подредувањето на линиите во текстот на насловот релативни една на друга. Ова"
 " нема влијание врз подредувањето на насловот во неговиоата алокација. "
-"Погледнете го GtkNisc::xaling за тоа."
+"Погледнете го CtkNisc::xaling за тоа."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

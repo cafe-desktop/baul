@@ -41,13 +41,13 @@
 
 #define AFTER_ALL_TABS -1
 
-static int  baul_notebook_insert_page	 (GtkNotebook *notebook,
-        GtkWidget *child,
-        GtkWidget *tab_label,
-        GtkWidget *menu_label,
+static int  baul_notebook_insert_page	 (CtkNotebook *notebook,
+        CtkWidget *child,
+        CtkWidget *tab_label,
+        CtkWidget *menu_label,
         int position);
-static void baul_notebook_remove	 (GtkContainer *container,
-                                      GtkWidget *tab_widget);
+static void baul_notebook_remove	 (CtkContainer *container,
+                                      CtkWidget *tab_widget);
 
 enum
 {
@@ -63,8 +63,8 @@ static void
 baul_notebook_class_init (BaulNotebookClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
-    GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
-    GtkNotebookClass *notebook_class = GTK_NOTEBOOK_CLASS (klass);
+    CtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
+    CtkNotebookClass *notebook_class = GTK_NOTEBOOK_CLASS (klass);
 
     container_class->remove = baul_notebook_remove;
 
@@ -85,17 +85,17 @@ baul_notebook_class_init (BaulNotebookClass *klass)
 static gint
 find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
 {
-    GtkPositionType tab_pos;
+    CtkPositionType tab_pos;
     int page_num = 0;
-    GtkNotebook *nb = GTK_NOTEBOOK (notebook);
-    GtkWidget *page;
-    GtkAllocation allocation;
+    CtkNotebook *nb = GTK_NOTEBOOK (notebook);
+    CtkWidget *page;
+    CtkAllocation allocation;
 
     tab_pos = ctk_notebook_get_tab_pos (GTK_NOTEBOOK (notebook));
 
     while ((page = ctk_notebook_get_nth_page (nb, page_num)))
     {
-        GtkWidget *tab;
+        CtkWidget *tab;
         gint max_x, max_y;
         gint x_root, y_root;
 
@@ -164,7 +164,7 @@ button_press_cb (BaulNotebook *notebook,
 static void
 baul_notebook_init (BaulNotebook *notebook)
 {
-    GtkStyleContext *context;
+    CtkStyleContext *context;
 
     context = ctk_widget_get_style_context (GTK_WIDGET (notebook));
     ctk_style_context_add_class (context, "baul-notebook");
@@ -181,7 +181,7 @@ void
 baul_notebook_sync_loading (BaulNotebook *notebook,
                             BaulWindowSlot *slot)
 {
-    GtkWidget *tab_label, *spinner, *icon;
+    CtkWidget *tab_label, *spinner, *icon;
     gboolean active;
 
     g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
@@ -219,7 +219,7 @@ void
 baul_notebook_sync_tab_label (BaulNotebook *notebook,
                               BaulWindowSlot *slot)
 {
-    GtkWidget *hbox, *label;
+    CtkWidget *hbox, *label;
 
     g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
     g_return_if_fail (BAUL_IS_WINDOW_SLOT (slot));
@@ -251,10 +251,10 @@ baul_notebook_sync_tab_label (BaulNotebook *notebook,
 }
 
 static void
-close_button_clicked_cb (GtkWidget *widget,
+close_button_clicked_cb (CtkWidget *widget,
                          BaulWindowSlot *slot)
 {
-    GtkWidget *notebook;
+    CtkWidget *notebook;
 
     notebook = ctk_widget_get_ancestor (slot->content_box, BAUL_TYPE_NOTEBOOK);
     if (notebook != NULL)
@@ -263,11 +263,11 @@ close_button_clicked_cb (GtkWidget *widget,
     }
 }
 
-static GtkWidget *
+static CtkWidget *
 build_tab_label (BaulNotebook *nb, BaulWindowSlot *slot)
 {
     BaulDragSlotProxyInfo *drag_info;
-    GtkWidget *hbox, *label, *close_button, *image, *spinner, *icon;
+    CtkWidget *hbox, *label, *close_button, *image, *spinner, *icon;
 
     /* set hbox spacing and label padding (see below) so that there's an
      * equal amount of space around the label */
@@ -334,10 +334,10 @@ build_tab_label (BaulNotebook *nb, BaulWindowSlot *slot)
 }
 
 static int
-baul_notebook_insert_page (GtkNotebook *gnotebook,
-                           GtkWidget *tab_widget,
-                           GtkWidget *tab_label,
-                           GtkWidget *menu_label,
+baul_notebook_insert_page (CtkNotebook *gnotebook,
+                           CtkWidget *tab_widget,
+                           CtkWidget *tab_label,
+                           CtkWidget *menu_label,
                            int position)
 {
     g_assert (GTK_IS_WIDGET (tab_widget));
@@ -361,8 +361,8 @@ baul_notebook_add_tab (BaulNotebook *notebook,
                        int position,
                        gboolean jump_to)
 {
-    GtkNotebook *gnotebook = GTK_NOTEBOOK (notebook);
-    GtkWidget *tab_label;
+    CtkNotebook *gnotebook = GTK_NOTEBOOK (notebook);
+    CtkWidget *tab_label;
 
     g_return_val_if_fail (BAUL_IS_NOTEBOOK (notebook), -1);
     g_return_val_if_fail (BAUL_IS_WINDOW_SLOT (slot), -1);
@@ -398,10 +398,10 @@ baul_notebook_add_tab (BaulNotebook *notebook,
 }
 
 static void
-baul_notebook_remove (GtkContainer *container,
-                      GtkWidget *tab_widget)
+baul_notebook_remove (CtkContainer *container,
+                      CtkWidget *tab_widget)
 {
-    GtkNotebook *gnotebook = GTK_NOTEBOOK (container);
+    CtkNotebook *gnotebook = GTK_NOTEBOOK (container);
     GTK_CONTAINER_CLASS (baul_notebook_parent_class)->remove (container, tab_widget);
 
     ctk_notebook_set_show_tabs (gnotebook,
@@ -413,8 +413,8 @@ void
 baul_notebook_reorder_current_child_relative (BaulNotebook *notebook,
         int offset)
 {
-    GtkNotebook *gnotebook;
-    GtkWidget *child;
+    CtkNotebook *gnotebook;
+    CtkWidget *child;
     int page;
 
     g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
@@ -435,7 +435,7 @@ void
 baul_notebook_set_current_page_relative (BaulNotebook *notebook,
         int offset)
 {
-    GtkNotebook *gnotebook;
+    CtkNotebook *gnotebook;
     int page;
 
     g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
@@ -456,7 +456,7 @@ static gboolean
 baul_notebook_is_valid_relative_position (BaulNotebook *notebook,
         int offset)
 {
-    GtkNotebook *gnotebook;
+    CtkNotebook *gnotebook;
     int page;
     int n_pages;
 

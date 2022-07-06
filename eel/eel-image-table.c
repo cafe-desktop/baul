@@ -42,8 +42,8 @@ enum
 /* Detail member struct */
 struct EelImageTablePrivate
 {
-    GtkWidget *child_under_pointer;
-    GtkWidget *child_being_pressed;
+    CtkWidget *child_under_pointer;
+    CtkWidget *child_being_pressed;
 };
 
 /* Signals */
@@ -61,27 +61,27 @@ typedef enum
 static guint image_table_signals[LAST_SIGNAL] = { 0 };
 
 /* Ancestor methods */
-GtkWidget *    find_windowed_ancestor               (GtkWidget          *widget);
+CtkWidget *    find_windowed_ancestor               (CtkWidget          *widget);
 
-static void    signal_connect_while_realized        (GtkWidget          *object,
+static void    signal_connect_while_realized        (CtkWidget          *object,
     						     const char         *name,
     						     GCallback           callback,
     						     gpointer            callback_data,
-    						     GtkWidget          *realized_widget);
+    						     CtkWidget          *realized_widget);
 /* Ancestor callbacks */
-static int     ancestor_enter_notify_event          (GtkWidget          *widget,
+static int     ancestor_enter_notify_event          (CtkWidget          *widget,
         GdkEventCrossing   *event,
         gpointer            event_data);
-static int     ancestor_leave_notify_event          (GtkWidget          *widget,
+static int     ancestor_leave_notify_event          (CtkWidget          *widget,
         GdkEventCrossing   *event,
         gpointer            event_data);
-static int     ancestor_motion_notify_event         (GtkWidget          *widget,
+static int     ancestor_motion_notify_event         (CtkWidget          *widget,
         GdkEventMotion     *event,
         gpointer            event_data);
-static int     ancestor_button_press_event          (GtkWidget          *widget,
+static int     ancestor_button_press_event          (CtkWidget          *widget,
         GdkEventButton     *event,
         gpointer            event_data);
-static int     ancestor_button_release_event        (GtkWidget          *widget,
+static int     ancestor_button_release_event        (CtkWidget          *widget,
         GdkEventButton     *event,
         gpointer            event_data);
 
@@ -103,9 +103,9 @@ eel_image_table_finalize (GObject *object)
 }
 
 static void
-eel_image_table_realize (GtkWidget *widget)
+eel_image_table_realize (CtkWidget *widget)
 {
-    GtkWidget *windowed_ancestor;
+    CtkWidget *windowed_ancestor;
 
     g_assert (EEL_IS_IMAGE_TABLE (widget));
 
@@ -155,10 +155,10 @@ eel_image_table_realize (GtkWidget *widget)
     				   widget);
 }
 
-/* GtkContainerClass methods */
+/* CtkContainerClass methods */
 static void
-eel_image_table_remove (GtkContainer *container,
-                        GtkWidget *child)
+eel_image_table_remove (CtkContainer *container,
+                        CtkWidget *child)
 {
     EelImageTable *image_table;
 
@@ -181,7 +181,7 @@ eel_image_table_remove (GtkContainer *container,
 }
 
 static GType
-eel_image_table_child_type (GtkContainer *container)
+eel_image_table_child_type (CtkContainer *container)
 {
     return EEL_TYPE_LABELED_IMAGE;
 }
@@ -190,7 +190,7 @@ eel_image_table_child_type (GtkContainer *container)
 
 static void
 image_table_emit_signal (EelImageTable *image_table,
-                         GtkWidget *child,
+                         CtkWidget *child,
                          guint signal_index,
                          int x,
                          int y,
@@ -221,16 +221,16 @@ static void
 eel_image_table_class_init (EelImageTableClass *image_table_class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (image_table_class);
-    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (image_table_class);
-    GtkContainerClass *container_class = GTK_CONTAINER_CLASS (image_table_class);
+    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (image_table_class);
+    CtkContainerClass *container_class = GTK_CONTAINER_CLASS (image_table_class);
 
     /* GObjectClass */
     object_class->finalize = eel_image_table_finalize;
 
-    /* GtkWidgetClass */
+    /* CtkWidgetClass */
     widget_class->realize = eel_image_table_realize;
 
-    /* GtkContainerClass */
+    /* CtkContainerClass */
     container_class->remove = eel_image_table_remove;
     container_class->child_type = eel_image_table_child_type;
 
@@ -294,9 +294,9 @@ image_table_handle_motion (EelImageTable *image_table,
                            int y,
                            GdkEvent *event)
 {
-    GtkWidget *child;
-    GtkWidget *leave_emit_child = NULL;
-    GtkWidget *enter_emit_child = NULL;
+    CtkWidget *child;
+    CtkWidget *leave_emit_child = NULL;
+    CtkWidget *enter_emit_child = NULL;
 
     g_assert (EEL_IS_IMAGE_TABLE (image_table));
 
@@ -357,8 +357,8 @@ image_table_handle_motion (EelImageTable *image_table,
     }
 }
 
-GtkWidget *
-find_windowed_ancestor (GtkWidget *widget)
+CtkWidget *
+find_windowed_ancestor (CtkWidget *widget)
 {
     g_return_val_if_fail (GTK_IS_WIDGET (widget), NULL);
 
@@ -375,7 +375,7 @@ typedef struct
     GObject *object;
     guint object_destroy_handler;
 
-    GtkWidget *realized_widget;
+    CtkWidget *realized_widget;
     guint realized_widget_destroy_handler;
     guint realized_widget_unrealized_handler;
 
@@ -418,11 +418,11 @@ while_realized_disconnecter (GObject *object,
  * or &widget are destroyed.
  **/
 static void
-signal_connect_while_realized (GtkWidget *object,
+signal_connect_while_realized (CtkWidget *object,
     				const char *name,
     				GCallback callback,
     				gpointer callback_data,
-    				GtkWidget *realized_widget)
+    				CtkWidget *realized_widget)
 {
     RealizeDisconnectInfo *info;
 
@@ -459,7 +459,7 @@ signal_connect_while_realized (GtkWidget *object,
 }
 
 static int
-ancestor_enter_notify_event (GtkWidget *widget,
+ancestor_enter_notify_event (CtkWidget *widget,
                              GdkEventCrossing *event,
                              gpointer event_data)
 {
@@ -473,7 +473,7 @@ ancestor_enter_notify_event (GtkWidget *widget,
 }
 
 static int
-ancestor_leave_notify_event (GtkWidget *widget,
+ancestor_leave_notify_event (CtkWidget *widget,
                              GdkEventCrossing *event,
                              gpointer event_data)
 {
@@ -499,7 +499,7 @@ ancestor_leave_notify_event (GtkWidget *widget,
 }
 
 static int
-ancestor_motion_notify_event (GtkWidget *widget,
+ancestor_motion_notify_event (CtkWidget *widget,
                               GdkEventMotion *event,
                               gpointer event_data)
 {
@@ -513,12 +513,12 @@ ancestor_motion_notify_event (GtkWidget *widget,
 }
 
 static int
-ancestor_button_press_event (GtkWidget *widget,
+ancestor_button_press_event (CtkWidget *widget,
                              GdkEventButton *event,
                              gpointer event_data)
 {
     EelImageTable *image_table;
-    GtkWidget *child;
+    CtkWidget *child;
 
     g_assert (GTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
@@ -553,14 +553,14 @@ ancestor_button_press_event (GtkWidget *widget,
 }
 
 static int
-ancestor_button_release_event (GtkWidget *widget,
+ancestor_button_release_event (CtkWidget *widget,
                                GdkEventButton *event,
                                gpointer event_data)
 {
     EelImageTable *image_table;
-    GtkWidget *child;
-    GtkWidget *released_emit_child = NULL;
-    GtkWidget *clicked_emit_child = NULL;
+    CtkWidget *child;
+    CtkWidget *released_emit_child = NULL;
+    CtkWidget *clicked_emit_child = NULL;
 
     g_assert (GTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
@@ -621,7 +621,7 @@ ancestor_button_release_event (GtkWidget *widget,
 /**
  * eel_image_table_new:
  */
-GtkWidget*
+CtkWidget*
 eel_image_table_new (gboolean homogeneous)
 {
     EelImageTable *image_table;
@@ -643,10 +643,10 @@ eel_image_table_new (gboolean homogeneous)
  * Returns: The empty child - A EelLabeledImage widget with no label
  *          or pixbuf.
  */
-GtkWidget *
+CtkWidget *
 eel_image_table_add_empty_image (EelImageTable *image_table)
 {
-    GtkWidget *empty;
+    CtkWidget *empty;
 
     g_return_val_if_fail (EEL_IS_IMAGE_TABLE (image_table), NULL);
 

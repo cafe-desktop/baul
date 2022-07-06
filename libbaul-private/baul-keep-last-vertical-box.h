@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* baul-keep-last-vertical-box.h: Subclass of GtkBox that clips off
+/* baul-keep-last-vertical-box.h: Subclass of CtkBox that clips off
  				      items that don't fit, except the last one.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -45,15 +45,15 @@ typedef struct BaulKeepLastVerticalBoxClass BaulKeepLastVerticalBoxClass;
 
 struct BaulKeepLastVerticalBox
 {
-    GtkBox parent;
+    CtkBox parent;
 };
 
 struct BaulKeepLastVerticalBoxClass
 {
-    GtkBoxClass parent_class;
+    CtkBoxClass parent_class;
 };
 
 GType      baul_keep_last_vertical_box_get_type  (void);
-GtkWidget *baul_keep_last_vertical_box_new       (gint spacing);
+CtkWidget *baul_keep_last_vertical_box_new       (gint spacing);
 
 #endif /* BAUL_KEEP_LAST_VERTICAL_BOX_H */

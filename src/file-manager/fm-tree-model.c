@@ -51,7 +51,7 @@ static guint tree_model_signals[LAST_SIGNAL] = { 0 };
 
 typedef gboolean (* FilePredicate) (BaulFile *);
 
-/* The user_data of the GtkTreeIter is the TreeNode pointer.
+/* The user_data of the CtkTreeIter is the TreeNode pointer.
  * It's NULL for the dummy node. If it's NULL, then user_data2
  * is the TreeNode pointer to the parent.
  */
@@ -125,7 +125,7 @@ typedef struct
     FMTreeModel *model;
 } DoneLoadingParameters;
 
-static void fm_tree_model_tree_model_init (GtkTreeModelIface *iface);
+static void fm_tree_model_tree_model_init (CtkTreeModelIface *iface);
 static void schedule_monitoring_update     (FMTreeModel *model);
 static void destroy_node_without_reporting (FMTreeModel *model,
         TreeNode          *node);
@@ -136,8 +136,8 @@ G_DEFINE_TYPE_WITH_CODE (FMTreeModel, fm_tree_model, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
                                  fm_tree_model_tree_model_init));
 
-static GtkTreeModelFlags
-fm_tree_model_get_flags (GtkTreeModel *tree_model)
+static CtkTreeModelFlags
+fm_tree_model_get_flags (CtkTreeModel *tree_model)
 {
     return GTK_TREE_MODEL_ITERS_PERSIST;
 }
@@ -494,7 +494,7 @@ tree_node_get_child_index (TreeNode *parent, TreeNode *child)
 }
 
 static gboolean
-make_iter_invalid (GtkTreeIter *iter)
+make_iter_invalid (CtkTreeIter *iter)
 {
     iter->stamp = 0;
     iter->user_data = NULL;
@@ -504,7 +504,7 @@ make_iter_invalid (GtkTreeIter *iter)
 }
 
 static gboolean
-make_iter_for_node (TreeNode *node, GtkTreeIter *iter, int stamp)
+make_iter_for_node (TreeNode *node, CtkTreeIter *iter, int stamp)
 {
     if (node == NULL)
     {
@@ -518,7 +518,7 @@ make_iter_for_node (TreeNode *node, GtkTreeIter *iter, int stamp)
 }
 
 static gboolean
-make_iter_for_dummy_row (TreeNode *parent, GtkTreeIter *iter, int stamp)
+make_iter_for_dummy_row (TreeNode *parent, CtkTreeIter *iter, int stamp)
 {
     g_assert (tree_node_has_dummy_child (parent));
     g_assert (parent != NULL);
@@ -561,7 +561,7 @@ create_node_for_file (FMTreeModelRoot *root, BaulFile *file)
 #ifdef LOG_REF_COUNTS
 
 static char *
-get_node_uri (GtkTreeIter *iter)
+get_node_uri (CtkTreeIter *iter)
 {
     TreeNode *node, *parent;
     char *parent_uri, *node_uri;
@@ -631,9 +631,9 @@ abandon_dummy_row_ref_count (FMTreeModel *model, TreeNode *node)
 }
 
 static void
-report_row_inserted (FMTreeModel *model, GtkTreeIter *iter)
+report_row_inserted (FMTreeModel *model, CtkTreeIter *iter)
 {
-    GtkTreePath *path;
+    CtkTreePath *path;
 
     path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
     ctk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, iter);
@@ -641,9 +641,9 @@ report_row_inserted (FMTreeModel *model, GtkTreeIter *iter)
 }
 
 static void
-report_row_contents_changed (FMTreeModel *model, GtkTreeIter *iter)
+report_row_contents_changed (FMTreeModel *model, CtkTreeIter *iter)
 {
-    GtkTreePath *path;
+    CtkTreePath *path;
 
     path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
     ctk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
@@ -651,19 +651,19 @@ report_row_contents_changed (FMTreeModel *model, GtkTreeIter *iter)
 }
 
 static void
-report_row_has_child_toggled (FMTreeModel *model, GtkTreeIter *iter)
+report_row_has_child_toggled (FMTreeModel *model, CtkTreeIter *iter)
 {
-    GtkTreePath *path;
+    CtkTreePath *path;
 
     path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
     ctk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model), path, iter);
     ctk_tree_path_free (path);
 }
 
-static GtkTreePath *
+static CtkTreePath *
 get_node_path (FMTreeModel *model, TreeNode *node)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     make_iter_for_node (node, &iter, model->details->stamp);
     return ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
@@ -672,7 +672,7 @@ get_node_path (FMTreeModel *model, TreeNode *node)
 static void
 report_dummy_row_inserted (FMTreeModel *model, TreeNode *parent)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (!parent->inserted)
     {
@@ -685,11 +685,11 @@ report_dummy_row_inserted (FMTreeModel *model, TreeNode *parent)
 static void
 report_dummy_row_deleted (FMTreeModel *model, TreeNode *parent)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (parent->inserted)
     {
-        GtkTreePath *path;
+        CtkTreePath *path;
 
         make_iter_for_node (parent, &iter, model->details->stamp);
         path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
@@ -703,7 +703,7 @@ report_dummy_row_deleted (FMTreeModel *model, TreeNode *parent)
 static void
 report_node_inserted (FMTreeModel *model, TreeNode *node)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     make_iter_for_node (node, &iter, model->details->stamp);
     report_row_inserted (model, &iter);
@@ -724,7 +724,7 @@ report_node_inserted (FMTreeModel *model, TreeNode *node)
 static void
 report_node_contents_changed (FMTreeModel *model, TreeNode *node)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (!node->inserted)
     {
@@ -737,7 +737,7 @@ report_node_contents_changed (FMTreeModel *model, TreeNode *node)
 static void
 report_node_has_child_toggled (FMTreeModel *model, TreeNode *node)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (!node->inserted)
     {
@@ -750,7 +750,7 @@ report_node_has_child_toggled (FMTreeModel *model, TreeNode *node)
 static void
 report_dummy_row_contents_changed (FMTreeModel *model, TreeNode *parent)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (!parent->inserted)
     {
@@ -810,7 +810,7 @@ destroy_node (FMTreeModel *model, TreeNode *node)
 {
     TreeNode *parent;
     gboolean parent_had_dummy_child;
-    GtkTreePath *path;
+    CtkTreePath *path;
 
     parent = node->parent;
     parent_had_dummy_child = tree_node_has_dummy_child (parent);
@@ -936,7 +936,7 @@ insert_node (FMTreeModel *model, TreeNode *parent, TreeNode *node)
 static void
 reparent_node (FMTreeModel *model, TreeNode *node)
 {
-    GtkTreePath *path;
+    CtkTreePath *path;
     TreeNode *new_parent;
 
     new_parent = get_parent_node_from_file (node->root, node->file);
@@ -1137,7 +1137,7 @@ done_loading_callback (BaulDirectory *directory,
 {
     BaulFile *file;
     TreeNode *node;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     file = baul_directory_get_corresponding_file (directory);
     node = get_node_from_file (root, file);
@@ -1207,13 +1207,13 @@ start_monitoring_directory (FMTreeModel *model, TreeNode *node)
 }
 
 static int
-fm_tree_model_get_n_columns (GtkTreeModel *model)
+fm_tree_model_get_n_columns (CtkTreeModel *model)
 {
     return FM_TREE_MODEL_NUM_COLUMNS;
 }
 
 static GType
-fm_tree_model_get_column_type (GtkTreeModel *model, int index)
+fm_tree_model_get_column_type (CtkTreeModel *model, int index)
 {
     switch (index)
     {
@@ -1233,7 +1233,7 @@ fm_tree_model_get_column_type (GtkTreeModel *model, int index)
 }
 
 static gboolean
-iter_is_valid (FMTreeModel *model, const GtkTreeIter *iter)
+iter_is_valid (FMTreeModel *model, const CtkTreeIter *iter)
 {
     TreeNode *node, *parent;
 
@@ -1277,10 +1277,10 @@ iter_is_valid (FMTreeModel *model, const GtkTreeIter *iter)
 }
 
 static gboolean
-fm_tree_model_get_iter (GtkTreeModel *model, GtkTreeIter *iter, GtkTreePath *path)
+fm_tree_model_get_iter (CtkTreeModel *model, CtkTreeIter *iter, CtkTreePath *path)
 {
     int *indices;
-    GtkTreeIter parent;
+    CtkTreeIter parent;
     int depth, i;
 
     indices = ctk_tree_path_get_indices (path);
@@ -1304,13 +1304,13 @@ fm_tree_model_get_iter (GtkTreeModel *model, GtkTreeIter *iter, GtkTreePath *pat
     return TRUE;
 }
 
-static GtkTreePath *
-fm_tree_model_get_path (GtkTreeModel *model, GtkTreeIter *iter)
+static CtkTreePath *
+fm_tree_model_get_path (CtkTreeModel *model, CtkTreeIter *iter)
 {
     FMTreeModel *tree_model;
     TreeNode *node, *parent, *cnode;
-    GtkTreePath *path;
-    GtkTreeIter parent_iter;
+    CtkTreePath *path;
+    CtkTreeIter parent_iter;
 
     g_return_val_if_fail (FM_IS_TREE_MODEL (model), NULL);
     tree_model = FM_TREE_MODEL (model);
@@ -1358,7 +1358,7 @@ fm_tree_model_get_path (GtkTreeModel *model, GtkTreeIter *iter)
 }
 
 static void
-fm_tree_model_get_value (GtkTreeModel *model, GtkTreeIter *iter, int column, GValue *value)
+fm_tree_model_get_value (CtkTreeModel *model, CtkTreeIter *iter, int column, GValue *value)
 {
     TreeNode *node;
 
@@ -1406,7 +1406,7 @@ fm_tree_model_get_value (GtkTreeModel *model, GtkTreeIter *iter, int column, GVa
 }
 
 static gboolean
-fm_tree_model_iter_next (GtkTreeModel *model, GtkTreeIter *iter)
+fm_tree_model_iter_next (CtkTreeModel *model, CtkTreeIter *iter)
 {
     TreeNode *node, *parent, *next;
 
@@ -1429,7 +1429,7 @@ fm_tree_model_iter_next (GtkTreeModel *model, GtkTreeIter *iter)
 }
 
 static gboolean
-fm_tree_model_iter_children (GtkTreeModel *model, GtkTreeIter *iter, GtkTreeIter *parent_iter)
+fm_tree_model_iter_children (CtkTreeModel *model, CtkTreeIter *iter, CtkTreeIter *parent_iter)
 {
     TreeNode *parent;
 
@@ -1450,7 +1450,7 @@ fm_tree_model_iter_children (GtkTreeModel *model, GtkTreeIter *iter, GtkTreeIter
 }
 
 static gboolean
-fm_tree_model_iter_parent (GtkTreeModel *model, GtkTreeIter *iter, GtkTreeIter *child_iter)
+fm_tree_model_iter_parent (CtkTreeModel *model, CtkTreeIter *iter, CtkTreeIter *child_iter)
 {
     TreeNode *child, *parent;
 
@@ -1472,7 +1472,7 @@ fm_tree_model_iter_parent (GtkTreeModel *model, GtkTreeIter *iter, GtkTreeIter *
 }
 
 static gboolean
-fm_tree_model_iter_has_child (GtkTreeModel *model, GtkTreeIter *iter)
+fm_tree_model_iter_has_child (CtkTreeModel *model, CtkTreeIter *iter)
 {
     gboolean has_child;
     TreeNode *node;
@@ -1494,7 +1494,7 @@ fm_tree_model_iter_has_child (GtkTreeModel *model, GtkTreeIter *iter)
 }
 
 static int
-fm_tree_model_iter_n_children (GtkTreeModel *model, GtkTreeIter *iter)
+fm_tree_model_iter_n_children (CtkTreeModel *model, CtkTreeIter *iter)
 {
     TreeNode *parent, *node;
     int n;
@@ -1523,8 +1523,8 @@ fm_tree_model_iter_n_children (GtkTreeModel *model, GtkTreeIter *iter)
 }
 
 static gboolean
-fm_tree_model_iter_nth_child (GtkTreeModel *model, GtkTreeIter *iter,
-                              GtkTreeIter *parent_iter, int n)
+fm_tree_model_iter_nth_child (CtkTreeModel *model, CtkTreeIter *iter,
+                              CtkTreeIter *parent_iter, int n)
 {
     FMTreeModel *tree_model;
     TreeNode *parent, *node;
@@ -1635,7 +1635,7 @@ stop_monitoring (FMTreeModel *model)
 }
 
 static void
-fm_tree_model_ref_node (GtkTreeModel *model, GtkTreeIter *iter)
+fm_tree_model_ref_node (CtkTreeModel *model, CtkTreeIter *iter)
 {
     TreeNode *node, *parent;
 
@@ -1679,7 +1679,7 @@ fm_tree_model_ref_node (GtkTreeModel *model, GtkTreeIter *iter)
 }
 
 static void
-fm_tree_model_unref_node (GtkTreeModel *model, GtkTreeIter *iter)
+fm_tree_model_unref_node (CtkTreeModel *model, CtkTreeIter *iter)
 {
     TreeNode *node, *parent;
 
@@ -1794,7 +1794,7 @@ fm_tree_model_remove_root_uri (FMTreeModel *model, const char *uri)
 
     if (node)
     {
-        GtkTreePath *path;
+        CtkTreePath *path;
         FMTreeModelRoot *root;
 
         /* remove the node */
@@ -1892,7 +1892,7 @@ fm_tree_model_set_show_only_directories (FMTreeModel *model,
 }
 
 BaulFile *
-fm_tree_model_iter_get_file (FMTreeModel *model, GtkTreeIter *iter)
+fm_tree_model_iter_get_file (FMTreeModel *model, CtkTreeIter *iter)
 {
     TreeNode *node;
 
@@ -1907,8 +1907,8 @@ fm_tree_model_iter_get_file (FMTreeModel *model, GtkTreeIter *iter)
    with ctktreemodelsort */
 int
 fm_tree_model_iter_compare_roots (FMTreeModel *model,
-                                  GtkTreeIter *iter_a,
-                                  GtkTreeIter *iter_b)
+                                  CtkTreeIter *iter_a,
+                                  CtkTreeIter *iter_b)
 {
     TreeNode *a, *b, *n;
 
@@ -1942,7 +1942,7 @@ fm_tree_model_iter_compare_roots (FMTreeModel *model,
 }
 
 gboolean
-fm_tree_model_iter_is_root (FMTreeModel *model, GtkTreeIter *iter)
+fm_tree_model_iter_is_root (FMTreeModel *model, CtkTreeIter *iter)
 {
     TreeNode *node;
 
@@ -1961,9 +1961,9 @@ fm_tree_model_iter_is_root (FMTreeModel *model, GtkTreeIter *iter)
 
 gboolean
 fm_tree_model_file_get_iter (FMTreeModel *model,
-                             GtkTreeIter *iter,
+                             CtkTreeIter *iter,
                              BaulFile *file,
-                             GtkTreeIter *current_iter)
+                             CtkTreeIter *current_iter)
 {
     TreeNode *node, *root_node;
 
@@ -2096,7 +2096,7 @@ fm_tree_model_class_init (FMTreeModelClass *class)
 }
 
 static void
-fm_tree_model_tree_model_init (GtkTreeModelIface *iface)
+fm_tree_model_tree_model_init (CtkTreeModelIface *iface)
 {
     iface->get_flags = fm_tree_model_get_flags;
     iface->get_n_columns = fm_tree_model_get_n_columns;

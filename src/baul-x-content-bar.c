@@ -35,8 +35,8 @@
 
 struct _BaulXContentBarPrivate
 {
-    GtkWidget *label;
-    GtkWidget *button;
+    CtkWidget *label;
+    CtkWidget *button;
 
     char *x_content_type;
     GMount *mount;
@@ -114,7 +114,7 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
     ctk_label_set_text (GTK_LABEL (bar->priv->label), message);
     ctk_widget_show (bar->priv->label);
 
-    /* TODO: We really need a GtkBrowserBackButton-ish widget here.. until then, we only
+    /* TODO: We really need a CtkBrowserBackButton-ish widget here.. until then, we only
      *       show the default application. */
 
     default_app = g_app_info_get_default_for_type (x_content_type, FALSE);
@@ -123,7 +123,7 @@ baul_x_content_bar_set_x_content_type (BaulXContentBar *bar, const char *x_conte
         char *button_text;
         const char *name;
         GIcon *icon;
-        GtkWidget *image;
+        CtkWidget *image;
 
         icon = g_app_info_get_icon (default_app);
         if (icon != NULL)
@@ -275,7 +275,7 @@ baul_x_content_bar_class_init (BaulXContentBarClass *klass)
 }
 
 static void
-button_clicked_callback (GtkWidget *button, BaulXContentBar *bar)
+button_clicked_callback (CtkWidget *button, BaulXContentBar *bar)
 {
     GAppInfo *default_app;
 
@@ -294,7 +294,7 @@ button_clicked_callback (GtkWidget *button, BaulXContentBar *bar)
 static void
 baul_x_content_bar_init (BaulXContentBar *bar)
 {
-    GtkWidget *hbox;
+    CtkWidget *hbox;
 
     bar->priv = baul_x_content_bar_get_instance_private (bar);
 
@@ -317,7 +317,7 @@ baul_x_content_bar_init (BaulXContentBar *bar)
                       bar);
 }
 
-GtkWidget *
+CtkWidget *
 baul_x_content_bar_new (GMount *mount,
                         const char *x_content_type)
 {

@@ -61,7 +61,7 @@ extern "C" {
 
         char *(*get_root_uri) (BaulTreeViewDragDest *dest);
         BaulFile *(*get_file_for_path) (BaulTreeViewDragDest *dest,
-                                        GtkTreePath *path);
+                                        CtkTreePath *path);
         void (*move_copy_items) (BaulTreeViewDragDest *dest,
                                  const GList *item_uris,
                                  const char *target_uri,
@@ -97,7 +97,7 @@ extern "C" {
     };
 
     GType                     baul_tree_view_drag_dest_get_type (void);
-    BaulTreeViewDragDest *baul_tree_view_drag_dest_new      (GtkTreeView *tree_view);
+    BaulTreeViewDragDest *baul_tree_view_drag_dest_new      (CtkTreeView *tree_view);
 
 #ifdef __cplusplus
 }

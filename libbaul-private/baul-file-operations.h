@@ -48,16 +48,16 @@ void baul_file_operations_copy_move   (const GList               *item_uris,
                                        GArray                    *relative_item_points,
                                        const char                *target_dir_uri,
                                        GdkDragAction              copy_action,
-                                       GtkWidget                 *parent_view,
+                                       CtkWidget                 *parent_view,
                                        BaulCopyCallback       done_callback,
                                        gpointer                   done_callback_data);
-void baul_file_operations_empty_trash (GtkWidget                 *parent_view);
-void baul_file_operations_new_folder  (GtkWidget                 *parent_view,
+void baul_file_operations_empty_trash (CtkWidget                 *parent_view);
+void baul_file_operations_new_folder  (CtkWidget                 *parent_view,
                                        GdkPoint                  *target_point,
                                        const char                *parent_dir_uri,
                                        BaulCreateCallback     done_callback,
                                        gpointer                   done_callback_data);
-void baul_file_operations_new_file    (GtkWidget                 *parent_view,
+void baul_file_operations_new_file    (CtkWidget                 *parent_view,
                                        GdkPoint                  *target_point,
                                        const char                *parent_dir,
                                        const char                *target_filename,
@@ -65,7 +65,7 @@ void baul_file_operations_new_file    (GtkWidget                 *parent_view,
                                        int                        length,
                                        BaulCreateCallback     done_callback,
                                        gpointer                   data);
-void baul_file_operations_new_file_from_template (GtkWidget               *parent_view,
+void baul_file_operations_new_file_from_template (CtkWidget               *parent_view,
         GdkPoint                *target_point,
         const char              *parent_dir,
         const char              *target_filename,
@@ -74,11 +74,11 @@ void baul_file_operations_new_file_from_template (GtkWidget               *paren
         gpointer                 data);
 
 void baul_file_operations_delete          (GList                  *files,
-        GtkWindow              *parent_window,
+        CtkWindow              *parent_window,
         BaulDeleteCallback  done_callback,
         gpointer                done_callback_data);
 void baul_file_operations_trash_or_delete (GList                  *files,
-        GtkWindow              *parent_window,
+        CtkWindow              *parent_window,
         BaulDeleteCallback  done_callback,
         gpointer                done_callback_data);
 
@@ -90,20 +90,20 @@ void baul_file_set_permissions_recursive (const char                     *direct
         BaulOpCallback              callback,
         gpointer                        callback_data);
 
-void baul_file_operations_unmount_mount (GtkWindow                      *parent_window,
+void baul_file_operations_unmount_mount (CtkWindow                      *parent_window,
         GMount                         *mount,
         gboolean                        eject,
         gboolean                        check_trash);
-void baul_file_operations_unmount_mount_full (GtkWindow                 *parent_window,
+void baul_file_operations_unmount_mount_full (CtkWindow                 *parent_window,
         GMount                    *mount,
         gboolean                   eject,
         gboolean                   check_trash,
         BaulUnmountCallback    callback,
         gpointer                   callback_data);
-void baul_file_operations_mount_volume  (GtkWindow                      *parent_window,
+void baul_file_operations_mount_volume  (CtkWindow                      *parent_window,
         GVolume                        *volume,
         gboolean                        allow_autorun);
-void baul_file_operations_mount_volume_full (GtkWindow                      *parent_window,
+void baul_file_operations_mount_volume_full (CtkWindow                      *parent_window,
         GVolume                        *volume,
         gboolean                        allow_autorun,
         BaulMountCallback           mount_callback,
@@ -112,28 +112,28 @@ void baul_file_operations_mount_volume_full (GtkWindow                      *par
 void baul_file_operations_copy      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
-                                     GtkWindow            *parent_window,
+                                     CtkWindow            *parent_window,
                                      BaulCopyCallback  done_callback,
                                      gpointer              done_callback_data);
 void baul_file_operations_move      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
-                                     GtkWindow            *parent_window,
+                                     CtkWindow            *parent_window,
                                      BaulCopyCallback  done_callback,
                                      gpointer              done_callback_data);
 void baul_file_operations_duplicate (GList                *files,
                                      GArray               *relative_item_points,
-                                     GtkWindow            *parent_window,
+                                     CtkWindow            *parent_window,
                                      BaulCopyCallback  done_callback,
                                      gpointer              done_callback_data);
 void baul_file_operations_link      (GList                *files,
                                      GArray               *relative_item_points,
                                      GFile                *target_dir,
-                                     GtkWindow            *parent_window,
+                                     CtkWindow            *parent_window,
                                      BaulCopyCallback  done_callback,
                                      gpointer              done_callback_data);
 void baul_file_mark_desktop_file_trusted (GFile           *file,
-        GtkWindow        *parent_window,
+        CtkWindow        *parent_window,
         gboolean          interactive,
         BaulOpCallback done_callback,
         gpointer          done_callback_data);

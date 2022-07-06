@@ -188,10 +188,10 @@ extern "C" {
     };
 
 
-    /* Standard Gtk function */
+    /* Standard Ctk function */
     GType eel_canvas_item_get_type (void) G_GNUC_CONST;
 
-    /* Create a canvas item using the standard Gtk argument mechanism.  The item is
+    /* Create a canvas item using the standard Ctk argument mechanism.  The item is
      * automatically inserted at the top of the specified canvas group.  The last
      * argument must be a NULL pointer.
      */
@@ -204,7 +204,7 @@ extern "C" {
     void eel_canvas_item_construct (EelCanvasItem *item, EelCanvasGroup *parent,
                                     const gchar *first_arg_name, va_list args);
 
-    /* Configure an item using the standard Gtk argument mechanism.  The last
+    /* Configure an item using the standard Ctk argument mechanism.  The last
      * argument must be a NULL pointer.
      */
     void eel_canvas_item_set (EelCanvasItem *item, const gchar *first_arg_name, ...);
@@ -344,7 +344,7 @@ extern "C" {
     };
 
 
-    /* Standard Gtk function */
+    /* Standard Ctk function */
     GType eel_canvas_group_get_type (void) G_GNUC_CONST;
 
 
@@ -361,7 +361,7 @@ extern "C" {
 
     struct _EelCanvas
     {
-        GtkLayout layout;
+        CtkLayout layout;
 
         /* Root canvas group */
         EelCanvasItem *root;
@@ -431,7 +431,7 @@ extern "C" {
 
     struct _EelCanvasClass
     {
-        GtkLayoutClass parent_class;
+        CtkLayoutClass parent_class;
 
         /* Draw the background for the area given.
          */
@@ -446,7 +446,7 @@ extern "C" {
     };
 
 
-    /* Standard Gtk function */
+    /* Standard Ctk function */
     GType eel_canvas_get_type (void) G_GNUC_CONST;
 
     /* Creates a new canvas.  You should check that the canvas is created with the
@@ -456,7 +456,7 @@ extern "C" {
      * You should call eel_canvas_set_scroll_region() soon after calling this
      * function to set the desired scrolling limits for the canvas.
      */
-    GtkWidget *eel_canvas_new (void);
+    CtkWidget *eel_canvas_new (void);
 
     /* Returns the root canvas item group of the canvas */
     EelCanvasGroup *eel_canvas_root (EelCanvas *canvas);
@@ -531,12 +531,12 @@ extern "C" {
 
     struct _EelCanvasAccessible
     {
-        GtkContainerAccessible parent;
+        CtkContainerAccessible parent;
     };
 
     struct _EelCanvasAccessibleClass
     {
-        GtkContainerAccessibleClass parent_class;
+        CtkContainerAccessibleClass parent_class;
     };
 
     GType eel_canvas_item_accessible_get_type (void);
@@ -546,12 +546,12 @@ extern "C" {
 
     struct _EelCanvasItemAccessible
     {
-        GtkAccessible parent;
+        CtkAccessible parent;
     };
 
     struct _EelCanvasItemAccessibleClass
     {
-        GtkAccessibleClass parent_class;
+        CtkAccessibleClass parent_class;
     };
 
 #ifdef __cplusplus

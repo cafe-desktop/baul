@@ -229,7 +229,7 @@ static PangoLayout *get_label_layout                 (PangoLayout               
 
 static gboolean hit_test_stretch_handle              (BaulIconCanvasItem        *item,
     						      EelIRect                  canvas_rect,
-    						      GtkCornerType *corner);
+    						      CtkCornerType *corner);
 static void      draw_embedded_text                  (BaulIconCanvasItem        *icon_item,
     						      cairo_t                   *cr,
     						      int                       x,
@@ -544,7 +544,7 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     double item_x, item_y;
     gboolean is_rtl;
     cairo_t *cr;
-    GtkStyleContext *context;
+    CtkStyleContext *context;
     cairo_surface_t *drag_surface;
 
     g_return_val_if_fail (BAUL_IS_ICON_CANVAS_ITEM (item), NULL);
@@ -1250,8 +1250,8 @@ draw_label_text (BaulIconCanvasItem *item,
     BaulIconContainer *container;
     PangoLayout *editable_layout;
     PangoLayout *additional_layout;
-    GtkStyleContext *context;
-    GtkStateFlags state, base_state;
+    CtkStyleContext *context;
+    CtkStateFlags state, base_state;
     gboolean have_editable, have_additional;
     gboolean needs_highlight, prelight_label, is_rtl_label_beside;
     EelIRect text_rect;
@@ -1492,11 +1492,11 @@ draw_stretch_handles (BaulIconCanvasItem *item,
                       cairo_t *cr,
                       const EelIRect *rect)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
     GdkPixbuf *knob_pixbuf;
     int knob_width, knob_height;
     double dash = { 2.0 };
-    GtkStyleContext *style;
+    CtkStyleContext *style;
     GdkRGBA color;
 
     if (!item->details->show_stretch_handles)
@@ -1780,7 +1780,7 @@ real_map_surface (BaulIconCanvasItem *icon_item)
     if (icon_item->details->is_highlighted_for_selection
             || icon_item->details->is_highlighted_for_drop)
     {
-        GtkStyleContext *style;
+        CtkStyleContext *style;
 
         style = ctk_widget_get_style_context (GTK_WIDGET (canvas));
 
@@ -1846,8 +1846,8 @@ draw_embedded_text (BaulIconCanvasItem *item,
                     int x, int y)
 {
     PangoLayout *layout;
-    GtkWidget *widget;
-    GtkStyleContext *style_context;
+    CtkWidget *widget;
+    CtkStyleContext *style_context;
 
     if (item->details->embedded_text == NULL ||
             item->details->embedded_text_rect.width == 0 ||
@@ -1916,7 +1916,7 @@ baul_icon_canvas_item_draw (EelCanvasItem *item,
     EmblemLayout emblem_layout;
     GdkPixbuf *emblem_pixbuf;
     cairo_surface_t *temp_surface;
-    GtkStyleContext *context;
+    CtkStyleContext *context;
 
     container = BAUL_ICON_CONTAINER (item->canvas);
     gboolean is_rtl;
@@ -2599,7 +2599,7 @@ baul_icon_canvas_item_set_show_stretch_handles (BaulIconCanvasItem *item,
 static gboolean
 hit_test_stretch_handle (BaulIconCanvasItem *item,
                          EelIRect probe_canvas_rect,
-                         GtkCornerType *corner)
+                         CtkCornerType *corner)
 {
     EelIRect icon_rect;
     GdkPixbuf *knob_pixbuf;
@@ -2651,7 +2651,7 @@ hit_test_stretch_handle (BaulIconCanvasItem *item,
 gboolean
 baul_icon_canvas_item_hit_test_stretch_handles (BaulIconCanvasItem *item,
         EelDPoint world_point,
-        GtkCornerType *corner)
+        CtkCornerType *corner)
 {
     EelIRect canvas_rect;
 

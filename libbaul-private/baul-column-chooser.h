@@ -45,21 +45,21 @@ typedef struct _BaulColumnChooserPrivate BaulColumnChooserPrivate;
 
 typedef struct
 {
-    GtkBox parent;
+    CtkBox parent;
 
     BaulColumnChooserPrivate *details;
 } BaulColumnChooser;
 
 typedef struct
 {
-    GtkBoxClass parent_slot;
+    CtkBoxClass parent_slot;
 
     void (*changed) (BaulColumnChooser *chooser);
     void (*use_default) (BaulColumnChooser *chooser);
 } BaulColumnChooserClass;
 
 GType      baul_column_chooser_get_type            (void);
-GtkWidget *baul_column_chooser_new                 (BaulFile *file);
+CtkWidget *baul_column_chooser_new                 (BaulFile *file);
 void       baul_column_chooser_set_settings    (BaulColumnChooser   *chooser,
         char                   **visible_columns,
         char                   **column_order);

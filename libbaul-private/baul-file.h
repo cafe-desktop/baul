@@ -480,7 +480,7 @@ void                    baul_file_set_has_open_window               (BaulFile   
 gboolean                baul_file_is_thumbnailing                   (BaulFile                   *file);
 
 /* Convenience functions for dealing with a list of BaulFile objects that each have a ref.
- * These are just convenient names for functions that work on lists of GtkObject *.
+ * These are just convenient names for functions that work on lists of CtkObject *.
  */
 GList *                 baul_file_list_ref                          (GList                          *file_list);
 void                    baul_file_list_unref                        (GList                          *file_list);

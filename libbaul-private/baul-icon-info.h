@@ -97,7 +97,7 @@ extern "C" {
     guint baul_icon_get_larger_icon_size             (guint              size);
     guint baul_icon_get_smaller_icon_size            (guint              size);
 
-    gint  baul_get_icon_size_for_stock_size          (GtkIconSize        size);
+    gint  baul_get_icon_size_for_stock_size          (CtkIconSize        size);
     guint baul_icon_get_emblem_size_for_icon_size    (guint              size);
 
 gboolean baul_icon_theme_can_render              (GThemedIcon *icon);

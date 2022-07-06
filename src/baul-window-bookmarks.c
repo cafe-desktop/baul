@@ -42,12 +42,12 @@
 
 #define MENU_ITEM_MAX_WIDTH_CHARS 32
 
-static GtkWindow *bookmarks_window = NULL;
+static CtkWindow *bookmarks_window = NULL;
 
 static void refresh_bookmarks_menu (BaulWindow *window);
 
 static void
-remove_bookmarks_for_uri_if_yes (GtkDialog *dialog, int response, gpointer callback_data)
+remove_bookmarks_for_uri_if_yes (CtkDialog *dialog, int response, gpointer callback_data)
 {
     BaulWindow *window;
 
@@ -71,7 +71,7 @@ static void
 show_bogus_bookmark_window (BaulWindow *window,
                             BaulBookmark *bookmark)
 {
-    GtkDialog *dialog;
+    CtkDialog *dialog;
     GFile *location;
     char *uri_for_display;
     char *prompt;
@@ -100,7 +100,7 @@ show_bogus_bookmark_window (BaulWindow *window,
     g_free (detail);
 }
 
-static GtkWindow *
+static CtkWindow *
 get_or_create_bookmarks_window (BaulWindow *window)
 {
     if (bookmarks_window == NULL)
@@ -160,7 +160,7 @@ baul_window_add_bookmark_for_current_location (BaulWindow *window)
 void
 baul_window_edit_bookmarks (BaulWindow *window)
 {
-    GtkWindow *dialog;
+    CtkWindow *dialog;
 
     dialog = get_or_create_bookmarks_window (window);
 
@@ -172,7 +172,7 @@ baul_window_edit_bookmarks (BaulWindow *window)
 static void
 remove_bookmarks_menu_items (BaulWindow *window)
 {
-    GtkUIManager *ui_manager;
+    CtkUIManager *ui_manager;
 
     ui_manager = baul_window_get_ui_manager (window);
     if (window->details->bookmarks_merge_id != 0)
@@ -190,12 +190,12 @@ remove_bookmarks_menu_items (BaulWindow *window)
 }
 
 static void
-connect_proxy_cb (GtkActionGroup *action_group,
-                  GtkAction *action,
-                  GtkWidget *proxy,
+connect_proxy_cb (CtkActionGroup *action_group,
+                  CtkAction *action,
+                  CtkWidget *proxy,
                   gpointer dummy)
 {
-    GtkLabel *label;
+    CtkLabel *label;
 
     if (!GTK_IS_MENU_ITEM (proxy))
         return;
@@ -212,7 +212,7 @@ update_bookmarks (BaulWindow *window)
 {
     guint bookmark_count;
     guint index;
-    GtkUIManager *ui_manager;
+    CtkUIManager *ui_manager;
     BaulBookmarkList *bookmarks;
     BaulBookmark *bookmark = NULL;
 

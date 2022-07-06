@@ -37,17 +37,17 @@
  * text selection changes.  The BaulEntry widget
  * is currently the only editable in baul that shares selection
  * changes. */
-void baul_clipboard_set_up_editable            (GtkEditable        *target,
-        GtkUIManager       *ui_manager,
+void baul_clipboard_set_up_editable            (CtkEditable        *target,
+        CtkUIManager       *ui_manager,
         gboolean            shares_selection_changes);
-void baul_clipboard_set_up_text_view           (GtkTextView        *target,
-        GtkUIManager       *ui_manager);
-void baul_clipboard_clear_if_colliding_uris    (GtkWidget          *widget,
+void baul_clipboard_set_up_text_view           (CtkTextView        *target,
+        CtkUIManager       *ui_manager);
+void baul_clipboard_clear_if_colliding_uris    (CtkWidget          *widget,
         const GList        *item_uris,
         GdkAtom             copied_files_atom);
-GtkClipboard* baul_clipboard_get                (GtkWidget          *widget);
+CtkClipboard* baul_clipboard_get                (CtkWidget          *widget);
 GList* baul_clipboard_get_uri_list_from_selection_data
-(GtkSelectionData   *selection_data,
+(CtkSelectionData   *selection_data,
  gboolean           *cut,
  GdkAtom             copied_files_atom);
 

@@ -496,11 +496,11 @@ msgstr "Justowanie"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "Wzajemne wyrównanie wierszy tekstu etykiety względem siebie. Nie wpływa to "
 "na wyrównanie etykiety wewnątrz przydzielonego jej obszaru - to określa "
-"atrybut GtkMisc::xalign."
+"atrybut CtkMisc::xalign."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

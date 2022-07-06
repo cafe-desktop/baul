@@ -49,7 +49,7 @@ typedef struct _BaulLocationWidgetProviderIface  BaulLocationWidgetProviderIface
 /**
  * BaulLocationWidgetProviderIface:
  * @g_iface: The parent interface.
- * @get_widget: Returns a #GtkWidget.
+ * @get_widget: Returns a #CtkWidget.
  *   See baul_location_widget_provider_get_widget() for details.
  *
  * Interface for extensions to provide additional location widgets.
@@ -57,16 +57,16 @@ typedef struct _BaulLocationWidgetProviderIface  BaulLocationWidgetProviderIface
 struct _BaulLocationWidgetProviderIface {
     GTypeInterface g_iface;
 
-    GtkWidget *(*get_widget) (BaulLocationWidgetProvider *provider,
+    CtkWidget *(*get_widget) (BaulLocationWidgetProvider *provider,
                               const char                 *uri,
-                              GtkWidget                  *window);
+                              CtkWidget                  *window);
 };
 
 /* Interface Functions */
 GType      baul_location_widget_provider_get_type   (void);
-GtkWidget *baul_location_widget_provider_get_widget (BaulLocationWidgetProvider *provider,
+CtkWidget *baul_location_widget_provider_get_widget (BaulLocationWidgetProvider *provider,
                                                      const char                 *uri,
-                                                     GtkWidget                  *window);
+                                                     CtkWidget                  *window);
 G_END_DECLS
 
 #endif

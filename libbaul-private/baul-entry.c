@@ -1,8 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /* BaulEntry: one-line text editing widget. This consists of bug fixes
- * and other improvements to GtkEntry, and all the changes could be rolled
- * into GtkEntry some day.
+ * and other improvements to CtkEntry, and all the changes could be rolled
+ * into CtkEntry some day.
  *
  * Copyright (C) 2000 Eazel, Inc.
  *
@@ -52,13 +52,13 @@ enum
 };
 static guint signals[LAST_SIGNAL] = { 0 };
 
-static void baul_entry_editable_init (GtkEditableInterface *iface);
+static void baul_entry_editable_init (CtkEditableInterface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (BaulEntry, baul_entry, GTK_TYPE_ENTRY,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
                                  baul_entry_editable_init));
 
-static GtkEditableInterface *parent_editable_interface = NULL;
+static CtkEditableInterface *parent_editable_interface = NULL;
 
 static void
 baul_entry_init (BaulEntry *entry)
@@ -68,7 +68,7 @@ baul_entry_init (BaulEntry *entry)
     entry->details->user_edit = TRUE;
 }
 
-GtkWidget *
+CtkWidget *
 baul_entry_new (void)
 {
     return ctk_widget_new (BAUL_TYPE_ENTRY, NULL);
@@ -92,10 +92,10 @@ baul_entry_finalize (GObject *object)
 }
 
 static gboolean
-baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
+baul_entry_key_press (CtkWidget *widget, GdkEventKey *event)
 {
     BaulEntry *entry;
-    GtkEditable *editable;
+    CtkEditable *editable;
     gboolean old_has, new_has;
     gboolean result;
 
@@ -151,12 +151,12 @@ baul_entry_key_press (GtkWidget *widget, GdkEventKey *event)
 }
 
 static gboolean
-baul_entry_motion_notify (GtkWidget *widget, GdkEventMotion *event)
+baul_entry_motion_notify (CtkWidget *widget, GdkEventMotion *event)
 {
     int result;
     gboolean old_had, new_had;
     int old_start, old_end, new_start, new_end;
-    GtkEditable *editable;
+    CtkEditable *editable;
 
     editable = GTK_EDITABLE (widget);
 
@@ -258,7 +258,7 @@ baul_entry_set_text (BaulEntry *entry, const gchar *text)
 }
 
 static void
-baul_entry_set_selection_bounds (GtkEditable *editable,
+baul_entry_set_selection_bounds (CtkEditable *editable,
                                  int start_pos,
                                  int end_pos)
 {
@@ -268,7 +268,7 @@ baul_entry_set_selection_bounds (GtkEditable *editable,
 }
 
 static gboolean
-baul_entry_button_press (GtkWidget *widget,
+baul_entry_button_press (CtkWidget *widget,
                          GdkEventButton *event)
 {
     gboolean result;
@@ -284,7 +284,7 @@ baul_entry_button_press (GtkWidget *widget,
 }
 
 static gboolean
-baul_entry_button_release (GtkWidget *widget,
+baul_entry_button_release (CtkWidget *widget,
                            GdkEventButton *event)
 {
     gboolean result;
@@ -300,7 +300,7 @@ baul_entry_button_release (GtkWidget *widget,
 }
 
 static void
-baul_entry_insert_text (GtkEditable *editable, const gchar *text,
+baul_entry_insert_text (CtkEditable *editable, const gchar *text,
                         int length, int *position)
 {
     BaulEntry *entry;
@@ -319,7 +319,7 @@ baul_entry_insert_text (GtkEditable *editable, const gchar *text,
 }
 
 static void
-baul_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
+baul_entry_delete_text (CtkEditable *editable, int start_pos, int end_pos)
 {
     BaulEntry *entry;
 
@@ -345,7 +345,7 @@ baul_entry_delete_text (GtkEditable *editable, int start_pos, int end_pos)
  * ctk+/ctkselection.c, ctk_selection_clear.
  */
 static gboolean
-baul_entry_selection_clear (GtkWidget *widget,
+baul_entry_selection_clear (CtkWidget *widget,
                             GdkEventSelection *event)
 {
     g_assert (BAUL_IS_ENTRY (widget));
@@ -359,7 +359,7 @@ baul_entry_selection_clear (GtkWidget *widget,
 }
 
 static void
-baul_entry_editable_init (GtkEditableInterface *iface)
+baul_entry_editable_init (CtkEditableInterface *iface)
 {
     parent_editable_interface = g_type_interface_peek_parent (iface);
 
@@ -376,7 +376,7 @@ baul_entry_editable_init (GtkEditableInterface *iface)
 static void
 baul_entry_class_init (BaulEntryClass *class)
 {
-    GtkWidgetClass *widget_class;
+    CtkWidgetClass *widget_class;
     GObjectClass *gobject_class;
 
     widget_class = GTK_WIDGET_CLASS (class);

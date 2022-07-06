@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* baul-ui-utilities.h - helper functions for GtkUIManager stuff
+/* baul-ui-utilities.h - helper functions for CtkUIManager stuff
 
    Copyright (C) 2004 Red Hat, Inc.
 
@@ -30,15 +30,15 @@
 
 char *      baul_get_ui_directory              (void);
 char *      baul_ui_file                       (const char        *partial_path);
-void        baul_ui_unmerge_ui                 (GtkUIManager      *ui_manager,
+void        baul_ui_unmerge_ui                 (CtkUIManager      *ui_manager,
         guint             *merge_id,
-        GtkActionGroup   **action_group);
-void        baul_ui_prepare_merge_ui           (GtkUIManager      *ui_manager,
+        CtkActionGroup   **action_group);
+void        baul_ui_prepare_merge_ui           (CtkUIManager      *ui_manager,
         const char        *name,
         guint             *merge_id,
-        GtkActionGroup   **action_group);
-GtkAction * baul_action_from_menu_item         (BaulMenuItem  *item, GtkWidget *parent_widget);
-GtkAction * baul_toolbar_action_from_menu_item (BaulMenuItem  *item, GtkWidget *parent_widget);
+        CtkActionGroup   **action_group);
+CtkAction * baul_action_from_menu_item         (BaulMenuItem  *item, CtkWidget *parent_widget);
+CtkAction * baul_toolbar_action_from_menu_item (BaulMenuItem  *item, CtkWidget *parent_widget);
 const char *baul_ui_string_get                 (const char        *filename);
 void   baul_ui_frame_image                     (GdkPixbuf        **pixbuf);
 

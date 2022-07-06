@@ -52,7 +52,7 @@ enum
     TARGET_URI_LIST
 };
 
-static const GtkTargetEntry target_table[] =
+static const CtkTargetEntry target_table[] =
 {
     { "text/uri-list",  0, TARGET_URI_LIST }
 };
@@ -164,11 +164,11 @@ item_entry_free (ItemEntry *entry)
 }
 
 static void
-fm_ditem_page_url_drag_data_received (GtkWidget *widget, GdkDragContext *context,
+fm_ditem_page_url_drag_data_received (CtkWidget *widget, GdkDragContext *context,
                                       int x, int y,
-                                      GtkSelectionData *selection_data,
+                                      CtkSelectionData *selection_data,
                                       guint info, guint time,
-                                      GtkEntry *entry)
+                                      CtkEntry *entry)
 {
     char **uris;
     gboolean exactly_one;
@@ -198,11 +198,11 @@ fm_ditem_page_url_drag_data_received (GtkWidget *widget, GdkDragContext *context
 }
 
 static void
-fm_ditem_page_exec_drag_data_received (GtkWidget *widget, GdkDragContext *context,
+fm_ditem_page_exec_drag_data_received (CtkWidget *widget, GdkDragContext *context,
                                        int x, int y,
-                                       GtkSelectionData *selection_data,
+                                       CtkSelectionData *selection_data,
                                        guint info, guint time,
-                                       GtkEntry *entry)
+                                       CtkEntry *entry)
 {
     char **uris;
     gboolean exactly_one;
@@ -258,7 +258,7 @@ fm_ditem_page_exec_drag_data_received (GtkWidget *widget, GdkDragContext *contex
 }
 
 static void
-save_entry (GtkEntry *entry, GKeyFile *key_file, const char *uri)
+save_entry (CtkEntry *entry, GKeyFile *key_file, const char *uri)
 {
     GError *error;
     ItemEntry *item_entry;
@@ -297,8 +297,8 @@ save_entry (GtkEntry *entry, GKeyFile *key_file, const char *uri)
 }
 
 static void
-entry_activate_cb (GtkWidget *entry,
-                   GtkWidget *container)
+entry_activate_cb (CtkWidget *entry,
+                   CtkWidget *container)
 {
     const char *uri;
     GKeyFile *key_file;
@@ -309,9 +309,9 @@ entry_activate_cb (GtkWidget *entry,
 }
 
 static gboolean
-entry_focus_out_cb (GtkWidget *entry,
+entry_focus_out_cb (CtkWidget *entry,
                     GdkEventFocus *event,
-                    GtkWidget *container)
+                    CtkWidget *container)
 {
     const char *uri;
     GKeyFile *key_file;
@@ -322,17 +322,17 @@ entry_focus_out_cb (GtkWidget *entry,
     return FALSE;
 }
 
-static GtkWidget *
-build_grid (GtkWidget *container,
+static CtkWidget *
+build_grid (CtkWidget *container,
              GKeyFile *key_file,
-             GtkSizeGroup *label_size_group,
+             CtkSizeGroup *label_size_group,
              GList *entries)
 {
     GList *l;
     char *val;
-    GtkWidget *grid;
-    GtkWidget *label;
-    GtkWidget *entry = NULL;
+    CtkWidget *grid;
+    CtkWidget *label;
+    CtkWidget *entry = NULL;
 
     grid = ctk_grid_new ();
     ctk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
@@ -422,11 +422,11 @@ build_grid (GtkWidget *container,
 }
 
 static void
-create_page (GKeyFile *key_file, GtkWidget *box)
+create_page (GKeyFile *key_file, CtkWidget *box)
 {
-    GtkWidget *grid;
+    CtkWidget *grid;
     GList *entries;
-    GtkSizeGroup *label_size_group;
+    CtkSizeGroup *label_size_group;
     char *type;
 
     entries = NULL;
@@ -483,7 +483,7 @@ ditem_read_cb (GObject *source_object,
                GAsyncResult *res,
                gpointer user_data)
 {
-    GtkWidget *box;
+    CtkWidget *box;
     gsize file_size;
     char *file_contents;
 
@@ -510,7 +510,7 @@ ditem_read_cb (GObject *source_object,
 
 static void
 fm_ditem_page_create_begin (const char *uri,
-                            GtkWidget *box)
+                            CtkWidget *box)
 {
     GFile *location;
 
@@ -520,13 +520,13 @@ fm_ditem_page_create_begin (const char *uri,
     g_object_unref (location);
 }
 
-GtkWidget *
-fm_ditem_page_make_box (GtkSizeGroup *label_size_group,
+CtkWidget *
+fm_ditem_page_make_box (CtkSizeGroup *label_size_group,
                         GList *files)
 {
     BaulFileInfo *info;
     char *uri;
-    GtkWidget *box;
+    CtkWidget *box;
 
     g_assert (fm_ditem_page_should_show (files));
 

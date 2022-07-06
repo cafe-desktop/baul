@@ -130,7 +130,7 @@ baul_navigation_window_slot_update_query_editor (BaulWindowSlot *slot)
 {
     BaulDirectory *directory;
     BaulSearchDirectory *search_directory;
-    GtkWidget *query_editor;
+    CtkWidget *query_editor;
 
     g_assert (slot->pane->window != NULL);
 

@@ -169,18 +169,18 @@ struct FMDirectoryViewDetails
 	BaulFile *directory_as_file;
 	BaulFile *location_popup_directory_as_file;
 	GdkEventButton *location_popup_event;
-	GtkActionGroup *dir_action_group;
+	CtkActionGroup *dir_action_group;
 	guint dir_merge_id;
 
 	GList *scripts_directory_list;
-	GtkActionGroup *scripts_action_group;
+	CtkActionGroup *scripts_action_group;
 	guint scripts_merge_id;
 
 	GList *templates_directory_list;
-	GtkActionGroup *templates_action_group;
+	CtkActionGroup *templates_action_group;
 	guint templates_merge_id;
 
-	GtkActionGroup *extensions_menu_action_group;
+	CtkActionGroup *extensions_menu_action_group;
 	guint extensions_menu_merge_id;
 
 	guint display_selection_idle_id;
@@ -228,7 +228,7 @@ struct FMDirectoryViewDetails
 
 	/* flag to indicate that no file updates should be dispatched to subclasses.
 	 * This is a workaround for bug #87701 that prevents the list view from
-	 * losing focus when the underlying GtkTreeView is updated.
+	 * losing focus when the underlying CtkTreeView is updated.
 	 */
 	gboolean updates_frozen;
 	guint	 updates_queued;
@@ -253,7 +253,7 @@ struct FMDirectoryViewDetails
 	gboolean selection_change_is_due_to_shell;
 	gboolean send_selection_change_to_shell;
 
-	GtkActionGroup *open_with_action_group;
+	CtkActionGroup *open_with_action_group;
 	guint open_with_merge_id;
 
 	GList *subdirectory_list;
@@ -286,7 +286,7 @@ static void     fm_directory_view_duplicate_selection          (FMDirectoryView 
 static void     fm_directory_view_create_links_for_files       (FMDirectoryView      *view,
 								GList                *files,
 								GArray               *item_locations);
-static void     trash_or_delete_files                          (GtkWindow            *parent_window,
+static void     trash_or_delete_files                          (CtkWindow            *parent_window,
 								const GList          *files,
 								gboolean              delete_if_all_already_in_trash,
 								FMDirectoryView      *view);
@@ -341,55 +341,55 @@ static void     fm_directory_view_set_is_active                (FMDirectoryView 
 
 static gboolean file_list_all_are_folders                      (GList *file_list);
 
-static void action_open_scripts_folder_callback    (GtkAction *action,
+static void action_open_scripts_folder_callback    (CtkAction *action,
 						    gpointer   callback_data);
-static void action_cut_files_callback              (GtkAction *action,
+static void action_cut_files_callback              (CtkAction *action,
 						    gpointer   callback_data);
-static void action_copy_files_callback             (GtkAction *action,
+static void action_copy_files_callback             (CtkAction *action,
 						    gpointer   callback_data);
-static void action_paste_files_callback            (GtkAction *action,
+static void action_paste_files_callback            (CtkAction *action,
 						    gpointer   callback_data);
-static void action_copy_to_next_pane_callback      (GtkAction *action,
+static void action_copy_to_next_pane_callback      (CtkAction *action,
 						    gpointer   callback_data);
-static void action_move_to_next_pane_callback      (GtkAction *action,
+static void action_move_to_next_pane_callback      (CtkAction *action,
 						    gpointer   callback_data);
-static void action_rename_callback                 (GtkAction *action,
+static void action_rename_callback                 (CtkAction *action,
 						    gpointer   callback_data);
-static void action_rename_select_all_callback      (GtkAction *action,
+static void action_rename_select_all_callback      (CtkAction *action,
 						    gpointer   callback_data);
-static void action_paste_files_into_callback       (GtkAction *action,
+static void action_paste_files_into_callback       (CtkAction *action,
 						    gpointer   callback_data);
-static void action_connect_to_server_link_callback (GtkAction *action,
+static void action_connect_to_server_link_callback (CtkAction *action,
 						    gpointer   data);
-static void action_mount_volume_callback           (GtkAction *action,
+static void action_mount_volume_callback           (CtkAction *action,
 						    gpointer   data);
-static void action_unmount_volume_callback         (GtkAction *action,
+static void action_unmount_volume_callback         (CtkAction *action,
 						    gpointer   data);
-static void action_format_volume_callback          (GtkAction *action,
+static void action_format_volume_callback          (CtkAction *action,
 						    gpointer   data);
-static void action_start_volume_callback           (GtkAction *action,
+static void action_start_volume_callback           (CtkAction *action,
 						    gpointer   data);
-static void action_stop_volume_callback            (GtkAction *action,
+static void action_stop_volume_callback            (CtkAction *action,
 						    gpointer   data);
-static void action_detect_media_callback           (GtkAction *action,
+static void action_detect_media_callback           (CtkAction *action,
 						    gpointer   data);
 
 /* location popup-related actions */
 
-static void action_location_open_alternate_callback (GtkAction *action,
+static void action_location_open_alternate_callback (CtkAction *action,
 						     gpointer   callback_data);
-static void action_location_open_folder_window_callback (GtkAction *action,
+static void action_location_open_folder_window_callback (CtkAction *action,
 							 gpointer   callback_data);
 
-static void action_location_cut_callback            (GtkAction *action,
+static void action_location_cut_callback            (CtkAction *action,
 						     gpointer   callback_data);
-static void action_location_copy_callback           (GtkAction *action,
+static void action_location_copy_callback           (CtkAction *action,
 						     gpointer   callback_data);
-static void action_location_trash_callback          (GtkAction *action,
+static void action_location_trash_callback          (CtkAction *action,
 						     gpointer   callback_data);
-static void action_location_delete_callback         (GtkAction *action,
+static void action_location_delete_callback         (CtkAction *action,
 						     gpointer   callback_data);
-static void action_location_properties_callback     (GtkAction *action,
+static void action_location_properties_callback     (CtkAction *action,
 						     gpointer   callback_data);
 
 static void unschedule_pop_up_location_context_menu (FMDirectoryView *view);
@@ -411,9 +411,9 @@ static void real_action_undo (FMDirectoryView *view);
 
 static void real_action_redo (FMDirectoryView *view);
 
-static void action_undo_callback (GtkAction *action, gpointer callback_data);
+static void action_undo_callback (CtkAction *action, gpointer callback_data);
 
-static void action_redo_callback (GtkAction *action, gpointer callback_data);
+static void action_redo_callback (CtkAction *action, gpointer callback_data);
 
 EEL_CLASS_BOILERPLATE (FMDirectoryView, fm_directory_view, GTK_TYPE_SCROLLED_WINDOW)
 
@@ -622,14 +622,14 @@ fm_directory_view_get_baul_window_slot (FMDirectoryView  *view)
 	return view->details->slot;
 }
 
-/* Returns the GtkWindow that this directory view occupies, or NULL
- * if at the moment this directory view is not in a GtkWindow or the
- * GtkWindow cannot be determined. Primarily used for parenting dialogs.
+/* Returns the CtkWindow that this directory view occupies, or NULL
+ * if at the moment this directory view is not in a CtkWindow or the
+ * CtkWindow cannot be determined. Primarily used for parenting dialogs.
  */
-GtkWindow *
+CtkWindow *
 fm_directory_view_get_containing_window (FMDirectoryView *view)
 {
-	GtkWidget *window;
+	CtkWidget *window;
 
 	g_assert (FM_IS_DIRECTORY_VIEW (view));
 
@@ -642,11 +642,11 @@ fm_directory_view_get_containing_window (FMDirectoryView *view)
 }
 
 static gboolean
-fm_directory_view_confirm_multiple (GtkWindow *parent_window,
+fm_directory_view_confirm_multiple (CtkWindow *parent_window,
 				    int count,
 				    gboolean tabs)
 {
-	GtkDialog *dialog;
+	CtkDialog *dialog;
 	char *prompt;
 	char *detail;
 	int response;
@@ -772,7 +772,7 @@ fm_directory_view_activate_file (FMDirectoryView *view,
 }
 
 static void
-action_open_callback (GtkAction *action,
+action_open_callback (CtkAction *action,
 		      gpointer callback_data)
 {
 	GList *selection;
@@ -790,7 +790,7 @@ action_open_callback (GtkAction *action,
 }
 
 static void
-action_open_close_parent_callback (GtkAction *action,
+action_open_close_parent_callback (CtkAction *action,
 				   gpointer callback_data)
 {
 	GList *selection;
@@ -809,12 +809,12 @@ action_open_close_parent_callback (GtkAction *action,
 
 
 static void
-action_open_alternate_callback (GtkAction *action,
+action_open_alternate_callback (CtkAction *action,
 				gpointer callback_data)
 {
 	FMDirectoryView *view;
 	GList *selection;
-	GtkWindow *window;
+	CtkWindow *window;
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 	selection = fm_directory_view_get_selection (view);
@@ -829,12 +829,12 @@ action_open_alternate_callback (GtkAction *action,
 }
 
 static void
-action_open_new_tab_callback (GtkAction *action,
+action_open_new_tab_callback (CtkAction *action,
 			      gpointer callback_data)
 {
 	FMDirectoryView *view;
 	GList *selection;
-	GtkWindow *window;
+	CtkWindow *window;
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 	selection = fm_directory_view_get_selection (view);
@@ -853,12 +853,12 @@ action_open_new_tab_callback (GtkAction *action,
 }
 
 static void
-action_open_folder_window_callback (GtkAction *action,
+action_open_folder_window_callback (CtkAction *action,
 				gpointer callback_data)
 {
 	FMDirectoryView *view;
 	GList *selection;
-	GtkWindow *window;
+	CtkWindow *window;
 
 	view = FM_DIRECTORY_VIEW (callback_data);
 	selection = fm_directory_view_get_selection (view);
@@ -878,7 +878,7 @@ open_location (FMDirectoryView *directory_view,
 	       BaulWindowOpenMode mode,
 	       BaulWindowOpenFlags flags)
 {
-	GtkWindow *window;
+	CtkWindow *window;
 	GFile *location;
 
 	g_assert (FM_IS_DIRECTORY_VIEW (directory_view));
@@ -898,7 +898,7 @@ application_selected_cb (BaulOpenWithDialog *dialog,
 			 GAppInfo *app,
 			 gpointer user_data)
 {
-	GtkWindow *parent_window;
+	CtkWindow *parent_window;
 	BaulFile *file;
 	GList files;
 
@@ -916,7 +916,7 @@ static void
 choose_program (FMDirectoryView *view,
 		BaulFile *file)
 {
-	GtkWidget *dialog;
+	CtkWidget *dialog;
 	char *uri;
 	char *mime_type;
 
@@ -965,7 +965,7 @@ open_with_other_program (FMDirectoryView *view)
 }
 
 static void
-action_other_application_callback (GtkAction *action,
+action_other_application_callback (CtkAction *action,
 				   gpointer callback_data)
 {
 	g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
@@ -996,7 +996,7 @@ static gboolean
 real_trash (FMDirectoryView *view)
 {
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-	GtkAction *action;
+	CtkAction *action;
 
 	action = ctk_action_group_get_action (view->details->dir_action_group,
 					      FM_ACTION_TRASH);
@@ -1010,7 +1010,7 @@ real_trash (FMDirectoryView *view)
 }
 
 static void
-action_trash_callback (GtkAction *action,
+action_trash_callback (CtkAction *action,
 		       gpointer callback_data)
 {
         trash_or_delete_selected_files (FM_DIRECTORY_VIEW (callback_data));
@@ -1042,14 +1042,14 @@ delete_selected_files (FMDirectoryView *view)
 }
 
 static void
-action_delete_callback (GtkAction *action,
+action_delete_callback (CtkAction *action,
 			gpointer callback_data)
 {
         delete_selected_files (FM_DIRECTORY_VIEW (callback_data));
 }
 
 static void
-action_restore_from_trash_callback (GtkAction *action,
+action_restore_from_trash_callback (CtkAction *action,
 				    gpointer callback_data)
 {
 	FMDirectoryView *view;
@@ -1069,7 +1069,7 @@ static gboolean
 real_delete (FMDirectoryView *view)
 {
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-	GtkAction *action;
+	CtkAction *action;
 
 	action = ctk_action_group_get_action (view->details->dir_action_group,
 					      FM_ACTION_TRASH);
@@ -1083,7 +1083,7 @@ real_delete (FMDirectoryView *view)
 }
 
 static void
-action_duplicate_callback (GtkAction *action,
+action_duplicate_callback (CtkAction *action,
 			   gpointer callback_data)
 {
         FMDirectoryView *view;
@@ -1109,7 +1109,7 @@ action_duplicate_callback (GtkAction *action,
 }
 
 static void
-action_create_link_callback (GtkAction *action,
+action_create_link_callback (CtkAction *action,
 			     gpointer callback_data)
 {
         FMDirectoryView *view;
@@ -1131,7 +1131,7 @@ action_create_link_callback (GtkAction *action,
 }
 
 static void
-action_select_all_callback (GtkAction *action,
+action_select_all_callback (CtkAction *action,
 			    gpointer callback_data)
 {
 	g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
@@ -1140,7 +1140,7 @@ action_select_all_callback (GtkAction *action,
 }
 
 static void
-action_invert_selection_callback (GtkAction *action,
+action_invert_selection_callback (CtkAction *action,
 				  gpointer callback_data)
 {
 	g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
@@ -1150,11 +1150,11 @@ action_invert_selection_callback (GtkAction *action,
 
 
 static void
-pattern_select_response_cb (GtkWidget *dialog, int response, gpointer user_data)
+pattern_select_response_cb (CtkWidget *dialog, int response, gpointer user_data)
 {
 	FMDirectoryView *view;
 	BaulDirectory *directory;
-	GtkWidget *entry;
+	CtkWidget *entry;
 	GList *selection;
 	GError *error;
 
@@ -1198,11 +1198,11 @@ pattern_select_response_cb (GtkWidget *dialog, int response, gpointer user_data)
 static void
 select_pattern (FMDirectoryView *view)
 {
-	GtkWidget *dialog;
-	GtkWidget *label;
-	GtkWidget *example;
-	GtkWidget *grid;
-	GtkWidget *entry;
+	CtkWidget *dialog;
+	CtkWidget *label;
+	CtkWidget *example;
+	CtkWidget *grid;
+	CtkWidget *entry;
 	char *example_pattern;
 
 	dialog = ctk_dialog_new ();
@@ -1273,7 +1273,7 @@ select_pattern (FMDirectoryView *view)
 }
 
 static void
-action_select_pattern_callback (GtkAction *action,
+action_select_pattern_callback (CtkAction *action,
 				gpointer callback_data)
 {
 	g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
@@ -1282,7 +1282,7 @@ action_select_pattern_callback (GtkAction *action,
 }
 
 static void
-action_reset_to_defaults_callback (GtkAction *action,
+action_reset_to_defaults_callback (CtkAction *action,
 				   gpointer callback_data)
 {
 	g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
@@ -1314,7 +1314,7 @@ backup_files_mode_changed (BaulWindow *window,
 }
 
 static void
-action_save_search_callback (GtkAction *action,
+action_save_search_callback (CtkAction *action,
 			     gpointer callback_data)
 {
 	FMDirectoryView	*directory_view;
@@ -1334,7 +1334,7 @@ action_save_search_callback (GtkAction *action,
 }
 
 static void
-query_name_entry_changed_cb  (GtkWidget *entry, GtkWidget *button)
+query_name_entry_changed_cb  (CtkWidget *entry, CtkWidget *button)
 {
 	const char *text;
 	gboolean sensitive;
@@ -1348,7 +1348,7 @@ query_name_entry_changed_cb  (GtkWidget *entry, GtkWidget *button)
 
 
 static void
-action_save_search_as_callback (GtkAction *action,
+action_save_search_as_callback (CtkAction *action,
 				gpointer callback_data)
 {
 	FMDirectoryView	*directory_view;
@@ -1358,7 +1358,7 @@ action_save_search_as_callback (GtkAction *action,
 	if (directory_view->details->model &&
 	    BAUL_IS_SEARCH_DIRECTORY (directory_view->details->model)) {
 		BaulSearchDirectory *search;
-		GtkWidget *dialog, *grid, *label, *entry, *chooser, *save_button;
+		CtkWidget *dialog, *grid, *label, *entry, *chooser, *save_button;
 
 		search = BAUL_SEARCH_DIRECTORY (directory_view->details->model);
 
@@ -1462,7 +1462,7 @@ action_save_search_as_callback (GtkAction *action,
 
 
 static void
-action_empty_trash_callback (GtkAction *action,
+action_empty_trash_callback (CtkAction *action,
 			     gpointer callback_data)
 {
         g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
@@ -1471,7 +1471,7 @@ action_empty_trash_callback (GtkAction *action,
 }
 
 static void
-action_new_folder_callback (GtkAction *action,
+action_new_folder_callback (CtkAction *action,
 			    gpointer callback_data)
 {
         g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
@@ -1480,7 +1480,7 @@ action_new_folder_callback (GtkAction *action,
 }
 
 static void
-action_new_empty_file_callback (GtkAction *action,
+action_new_empty_file_callback (CtkAction *action,
 				gpointer callback_data)
 {
         g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
@@ -1489,12 +1489,12 @@ action_new_empty_file_callback (GtkAction *action,
 }
 
 static void
-action_new_launcher_callback (GtkAction *action,
+action_new_launcher_callback (CtkAction *action,
 			      gpointer callback_data)
 {
 	char *parent_uri;
 	FMDirectoryView *view;
-	GtkWindow *window;
+	CtkWindow *window;
 
 	g_assert (FM_IS_DIRECTORY_VIEW (callback_data));
 
@@ -1515,7 +1515,7 @@ action_new_launcher_callback (GtkAction *action,
 }
 
 static void
-action_properties_callback (GtkAction *action,
+action_properties_callback (CtkAction *action,
 			    gpointer callback_data)
 {
         FMDirectoryView *view;
@@ -1542,7 +1542,7 @@ action_properties_callback (GtkAction *action,
 }
 
 static void
-action_location_properties_callback (GtkAction *action,
+action_location_properties_callback (CtkAction *action,
 				     gpointer   callback_data)
 {
 	FMDirectoryView *view;
@@ -1883,7 +1883,7 @@ static void
 fm_directory_view_grab_focus (BaulView *view)
 {
 	/* focus the child of the scrolled window if it exists */
-	GtkWidget *child;
+	CtkWidget *child;
 	child = ctk_bin_get_child (GTK_BIN (view));
 	if (child) {
 		ctk_widget_grab_focus (GTK_WIDGET (child));
@@ -1896,7 +1896,7 @@ view_iface_update_menus (BaulView *view)
 	fm_directory_view_update_menus (FM_DIRECTORY_VIEW (view));
 }
 
-static GtkWidget *
+static CtkWidget *
 fm_directory_view_get_widget (BaulView *view)
 {
 	return GTK_WIDGET (view);
@@ -2112,7 +2112,7 @@ fm_directory_view_init (FMDirectoryView *view)
 static void
 real_unmerge_menus (FMDirectoryView *view)
 {
-	GtkUIManager *ui_manager;
+	CtkUIManager *ui_manager;
 
 	if (view->details->window == NULL) {
 		return;
@@ -2138,7 +2138,7 @@ real_unmerge_menus (FMDirectoryView *view)
 }
 
 static void
-fm_directory_view_destroy (GtkWidget *object)
+fm_directory_view_destroy (CtkWidget *object)
 {
 	FMDirectoryView *view;
 	GList *node, *next;
@@ -2569,7 +2569,7 @@ done_loading (FMDirectoryView *view,
 
 			if (FM_IS_LIST_VIEW (view)) {
 				/* HACK: We should be able to directly call reveal_selection here,
-				 * but at this point the GtkTreeView hasn't allocated the new nodes
+				 * but at this point the CtkTreeView hasn't allocated the new nodes
 				 * yet, and it has a bug in the scroll calculation dealing with this
 				 * special case. It would always make the selection the top row, even
 				 * if no scrolling would be neccessary to reveal it. So we let it
@@ -3251,14 +3251,14 @@ schedule_changes (FMDirectoryView *view)
 }
 
 static void
-action_undo_callback (GtkAction *action,
+action_undo_callback (CtkAction *action,
 			gpointer callback_data)
 {
 	real_action_undo (FM_DIRECTORY_VIEW (callback_data));
 }
 
 static void
-action_redo_callback (GtkAction *action,
+action_redo_callback (CtkAction *action,
 			gpointer callback_data)
 {
 	real_action_redo (FM_DIRECTORY_VIEW (callback_data));
@@ -3270,7 +3270,7 @@ files_added_callback (BaulDirectory *directory,
 		      gpointer callback_data)
 {
 	FMDirectoryView *view;
-	GtkWindow *window;
+	CtkWindow *window;
 	char *uri;
 
 	view = FM_DIRECTORY_VIEW (callback_data);
@@ -3297,7 +3297,7 @@ files_changed_callback (BaulDirectory *directory,
 			gpointer callback_data)
 {
 	FMDirectoryView *view;
-	GtkWindow *window;
+	CtkWindow *window;
 	char *uri;
 
 	view = FM_DIRECTORY_VIEW (callback_data);
@@ -3643,7 +3643,7 @@ fm_directory_view_can_zoom_out (FMDirectoryView *view)
 		 can_zoom_out, (view));
 }
 
-GtkWidget *
+CtkWidget *
 fm_directory_view_get_background_widget (FMDirectoryView *view)
 {
 	g_return_val_if_fail (FM_IS_DIRECTORY_VIEW (view), NULL);
@@ -3731,7 +3731,7 @@ fm_directory_view_get_item_count (FMDirectoryView *view)
 		 get_item_count, (view));
 }
 
-GtkUIManager *
+CtkUIManager *
 fm_directory_view_get_ui_manager (FMDirectoryView  *view)
 {
 	if (view->details->window == NULL) {
@@ -3943,7 +3943,7 @@ trash_or_delete_done_cb (GHashTable *debuting_uris,
 }
 
 static void
-trash_or_delete_files (GtkWindow *parent_window,
+trash_or_delete_files (CtkWindow *parent_window,
 		       const GList *files,
 		       gboolean delete_if_all_already_in_trash,
 		       FMDirectoryView *view)
@@ -4021,7 +4021,7 @@ rename_file (FMDirectoryView *view, BaulFile *new_file)
 	   This is a work around bug in listview. After the rename is
 	   enabled we will get file changes due to info about the new
 	   file being read, which will cause the model to change. When
-	   the model changes GtkTreeView clears the editing. This hack just
+	   the model changes CtkTreeView clears the editing. This hack just
 	   delays editing for some time to try to avoid this problem.
 	   A major problem is that the selection of the row causes us
 	   to load the slow mimetype for the file, which leads to a
@@ -4339,7 +4339,7 @@ fm_directory_view_get_directory_as_file (FMDirectoryView *view)
 }
 
 static void
-open_with_launch_application_callback (GtkAction *action,
+open_with_launch_application_callback (CtkAction *action,
 				       gpointer callback_data)
 {
 	ApplicationLaunchParameters *launch_parameters;
@@ -4352,7 +4352,7 @@ open_with_launch_application_callback (GtkAction *action,
 }
 
 static void
-open_parent_folder_callback (GtkAction *action,
+open_parent_folder_callback (CtkAction *action,
 			     gpointer callback_data)
 {
 	gchar *uri;
@@ -4429,8 +4429,8 @@ escape_action_path (const char *action_path)
 
 
 static void
-add_submenu (GtkUIManager *ui_manager,
-	     GtkActionGroup *action_group,
+add_submenu (CtkUIManager *ui_manager,
+	     CtkActionGroup *action_group,
 	     guint merge_id,
 	     const char *parent_path,
 	     const char *uri,
@@ -4450,7 +4450,7 @@ add_submenu (GtkUIManager *ui_manager,
 		escaped_label = eel_str_double_underscores (label);
 
 		if (add_action) {
-			GtkAction *action;
+			CtkAction *action;
 
 			G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 			action = ctk_action_new (action_name,
@@ -4502,9 +4502,9 @@ add_application_to_open_with_menu (FMDirectoryView *view,
 	char *action_name;
 	char *escaped_app;
 	char *path;
-	GtkAction *action;
+	CtkAction *action;
 	GIcon *app_icon;
-	GtkWidget *menuitem;
+	CtkWidget *menuitem;
 
 	launch_parameters = application_launch_parameters_new
 		(application, files, view);
@@ -4599,8 +4599,8 @@ add_parent_folder_to_open_menu (FMDirectoryView *view,
 	char *label;
 	char *action_name;
 	char *path;
-	GtkAction *action;
-	GtkWidget *menuitem;
+	CtkAction *action;
+	CtkWidget *menuitem;
 
 	file = g_list_first(files)->data;
 
@@ -4727,8 +4727,8 @@ reset_open_with_menu (FMDirectoryView *view, GList *selection)
 	int index;
 	gboolean other_applications_visible;
 	gboolean open_with_chooser_visible;
-	GtkUIManager *ui_manager;
-	GtkAction *action;
+	CtkUIManager *ui_manager;
+	CtkAction *action;
 	GAppInfo *default_app;
 
 	/* Clear any previous inserted items in the applications and viewers placeholders */
@@ -4840,7 +4840,7 @@ reset_open_with_menu (FMDirectoryView *view, GList *selection)
 }
 
 static GList *
-get_all_extension_menu_items (GtkWidget *window,
+get_all_extension_menu_items (CtkWidget *window,
 			      GList *selection)
 {
 	GList *items;
@@ -4871,7 +4871,7 @@ typedef struct
 	BaulMenuItem *item;
 	FMDirectoryView *view;
 	GList *selection;
-	GtkAction *action;
+	CtkAction *action;
 } ExtensionActionCallbackData;
 
 
@@ -4919,7 +4919,7 @@ search_in_menu_items (GList* items, const char *item_name)
 }
 
 static void
-extension_action_callback (GtkAction *action,
+extension_action_callback (CtkAction *action,
 			   gpointer callback_data)
 {
 	ExtensionActionCallbackData *data;
@@ -4952,7 +4952,7 @@ extension_action_callback (GtkAction *action,
 
 static cairo_surface_t *
 get_menu_icon (const char *icon_name,
-	       GtkWidget  *widget)
+	       CtkWidget  *widget)
 {
 	BaulIconInfo *info;
 	cairo_surface_t *surface;
@@ -4974,7 +4974,7 @@ get_menu_icon (const char *icon_name,
 
 static cairo_surface_t *
 get_menu_icon_for_file (BaulFile  *file,
-			GtkWidget *widget)
+			CtkWidget *widget)
 {
 	BaulIconInfo *info;
 	cairo_surface_t *surface;
@@ -4990,14 +4990,14 @@ get_menu_icon_for_file (BaulFile  *file,
 	return surface;
 }
 
-static GtkAction *
+static CtkAction *
 add_extension_action_for_files (FMDirectoryView *view,
 				BaulMenuItem *item,
 				GList *files)
 {
 	char *name, *label, *tip, *icon;
 	gboolean sensitive, priority;
-	GtkAction *action;
+	CtkAction *action;
 	ExtensionActionCallbackData *data;
 
 	g_object_get (G_OBJECT (item),
@@ -5062,7 +5062,7 @@ add_extension_menu_items (FMDirectoryView *view,
 			  GList *menu_items,
 			  const char *subdirectory)
 {
-	GtkUIManager *ui_manager;
+	CtkUIManager *ui_manager;
 	GList *l;
 
 	ui_manager = baul_window_info_get_ui_manager (view->details->window);
@@ -5070,7 +5070,7 @@ add_extension_menu_items (FMDirectoryView *view,
 	for (l = menu_items; l; l = l->next) {
 		BaulMenuItem *item;
 		BaulMenu *menu;
-		GtkAction *action;
+		CtkAction *action;
 		const gchar *action_name;
 		char *path;
 
@@ -5129,7 +5129,7 @@ static void
 reset_extension_actions_menu (FMDirectoryView *view, GList *selection)
 {
 	GList *items;
-	GtkUIManager *ui_manager;
+	CtkUIManager *ui_manager;
 
 	/* Clear any previous inserted items in the extension actions placeholder */
 	ui_manager = baul_window_info_get_ui_manager (view->details->window);
@@ -5418,7 +5418,7 @@ static void unset_script_environment_variables(void)
 }
 
 static void
-run_script_callback (GtkAction *action, gpointer callback_data)
+run_script_callback (CtkAction *action, gpointer callback_data)
 {
 	ScriptLaunchParameters *launch_parameters;
 	GdkScreen *screen;
@@ -5428,7 +5428,7 @@ run_script_callback (GtkAction *action, gpointer callback_data)
 	char *quoted_path;
 	char *old_working_dir;
 	char **parameters, *name;
-	GtkWindow *window;
+	CtkWindow *window;
 
 	launch_parameters = (ScriptLaunchParameters *) callback_data;
 
@@ -5482,8 +5482,8 @@ add_script_to_scripts_menus (FMDirectoryView *directory_view,
 	char *action_name;
 	char *escaped_label;
 	cairo_surface_t *surface;
-	GtkUIManager *ui_manager;
-	GtkAction *action;
+	CtkUIManager *ui_manager;
+	CtkAction *action;
 
 	name = baul_file_get_display_name (file);
 	uri = baul_file_get_uri (file);
@@ -5552,7 +5552,7 @@ add_script_to_scripts_menus (FMDirectoryView *directory_view,
 
 static void
 add_submenu_to_directory_menus (FMDirectoryView *directory_view,
-				GtkActionGroup *action_group,
+				CtkActionGroup *action_group,
 				guint merge_id,
 				BaulFile *file,
 				const char *menu_path,
@@ -5562,7 +5562,7 @@ add_submenu_to_directory_menus (FMDirectoryView *directory_view,
 	char *name;
 	cairo_surface_t *surface;
 	char *uri;
-	GtkUIManager *ui_manager;
+	CtkUIManager *ui_manager;
 
 	ui_manager = baul_window_info_get_ui_manager (directory_view->details->window);
 	uri = baul_file_get_uri (file);
@@ -5672,8 +5672,8 @@ update_scripts_menu (FMDirectoryView *view)
 {
 	gboolean any_scripts;
 	GList *sorted_copy, *node;
-	GtkUIManager *ui_manager;
-	GtkAction *action;
+	CtkUIManager *ui_manager;
+	CtkAction *action;
 	BaulDirectory *directory = NULL;
 
 	/* There is a race condition here.  If we don't mark the scripts menu as
@@ -5717,7 +5717,7 @@ update_scripts_menu (FMDirectoryView *view)
 }
 
 static void
-create_template_callback (GtkAction *action, gpointer callback_data)
+create_template_callback (CtkAction *action, gpointer callback_data)
 {
 	CreateTemplateParameters *parameters;
 
@@ -5737,8 +5737,8 @@ add_template_to_templates_menus (FMDirectoryView *directory_view,
 	cairo_surface_t *surface;
 	char *action_name;
 	CreateTemplateParameters *parameters;
-	GtkUIManager *ui_manager;
-	GtkAction *action;
+	CtkUIManager *ui_manager;
+	CtkAction *action;
 
 	tmp = baul_file_get_display_name (file);
 	name = eel_filename_strip_extension (tmp);
@@ -5936,8 +5936,8 @@ update_templates_menu (FMDirectoryView *view)
 {
 	gboolean any_templates;
 	GList *sorted_copy, *node;
-	GtkUIManager *ui_manager;
-	GtkAction *action;
+	CtkUIManager *ui_manager;
+	CtkAction *action;
 	char *templates_directory_uri;
 	BaulDirectory *directory = NULL;
 
@@ -5993,7 +5993,7 @@ update_templates_menu (FMDirectoryView *view)
 
 
 static void
-action_open_scripts_folder_callback (GtkAction *action,
+action_open_scripts_folder_callback (CtkAction *action,
 				     gpointer callback_data)
 {
 	FMDirectoryView *view;
@@ -6026,10 +6026,10 @@ action_open_scripts_folder_callback (GtkAction *action,
 		 fm_directory_view_get_containing_window (view));
 }
 
-static GtkMenu *
+static CtkMenu *
 create_popup_menu (FMDirectoryView *view, const char *popup_path)
 {
-	GtkWidget *menu;
+	CtkWidget *menu;
 
 	menu = ctk_ui_manager_get_widget (baul_window_info_get_ui_manager (view->details->window),
 					  popup_path);
@@ -6048,8 +6048,8 @@ copy_or_cut_files (FMDirectoryView *view,
 	int count;
 	char *status_string;
 	BaulClipboardInfo info;
-        GtkTargetList *target_list;
-        GtkTargetEntry *targets;
+        CtkTargetList *target_list;
+        CtkTargetEntry *targets;
         int n_targets;
 
 	info.files = clipboard_contents;
@@ -6110,7 +6110,7 @@ copy_or_cut_files (FMDirectoryView *view,
 }
 
 static void
-action_copy_files_callback (GtkAction *action,
+action_copy_files_callback (CtkAction *action,
 			    gpointer callback_data)
 {
 	FMDirectoryView *view;
@@ -6168,7 +6168,7 @@ move_copy_selection_to_next_pane (FMDirectoryView *view,
 }
 
 static void
-action_copy_to_next_pane_callback (GtkAction *action, gpointer callback_data)
+action_copy_to_next_pane_callback (CtkAction *action, gpointer callback_data)
 {
 	FMDirectoryView *view;
 
@@ -6178,7 +6178,7 @@ action_copy_to_next_pane_callback (GtkAction *action, gpointer callback_data)
 }
 
 static void
-action_move_to_next_pane_callback (GtkAction *action, gpointer callback_data)
+action_move_to_next_pane_callback (CtkAction *action, gpointer callback_data)
 {
 	BaulWindowSlotInfo *slot;
 	char *dest_location;
@@ -6196,7 +6196,7 @@ action_move_to_next_pane_callback (GtkAction *action, gpointer callback_data)
 }
 
 static void
-action_copy_to_home_callback (GtkAction *action, gpointer callback_data)
+action_copy_to_home_callback (CtkAction *action, gpointer callback_data)
 {
 	FMDirectoryView *view;
 	char *dest_location;
@@ -6209,7 +6209,7 @@ action_copy_to_home_callback (GtkAction *action, gpointer callback_data)
 }
 
 static void
-action_move_to_home_callback (GtkAction *action, gpointer callback_data)
+action_move_to_home_callback (CtkAction *action, gpointer callback_data)
 {
 	FMDirectoryView *view;
 	char *dest_location;
@@ -6222,7 +6222,7 @@ action_move_to_home_callback (GtkAction *action, gpointer callback_data)
 }
 
 static void
-action_copy_to_desktop_callback (GtkAction *action, gpointer callback_data)
+action_copy_to_desktop_callback (CtkAction *action, gpointer callback_data)
 {
 	FMDirectoryView *view;
 	char *dest_location;
@@ -6235,7 +6235,7 @@ action_copy_to_desktop_callback (GtkAction *action, gpointer callback_data)
 }
 
 static void
-action_move_to_desktop_callback (GtkAction *action, gpointer callback_data)
+action_move_to_desktop_callback (CtkAction *action, gpointer callback_data)
 {
 	FMDirectoryView *view;
 	char *dest_location;
@@ -6248,7 +6248,7 @@ action_move_to_desktop_callback (GtkAction *action, gpointer callback_data)
 }
 
 static void
-action_cut_files_callback (GtkAction *action,
+action_cut_files_callback (CtkAction *action,
 			   gpointer callback_data)
 {
 	FMDirectoryView *view;
@@ -6263,7 +6263,7 @@ action_cut_files_callback (GtkAction *action,
 
 static void
 paste_clipboard_data (FMDirectoryView *view,
-		      GtkSelectionData *selection_data,
+		      CtkSelectionData *selection_data,
 		      char *destination_uri)
 {
 	gboolean cut;
@@ -6292,8 +6292,8 @@ paste_clipboard_data (FMDirectoryView *view,
 }
 
 static void
-paste_clipboard_received_callback (GtkClipboard     *clipboard,
-				   GtkSelectionData *selection_data,
+paste_clipboard_received_callback (CtkClipboard     *clipboard,
+				   CtkSelectionData *selection_data,
 				   gpointer          data)
 {
 	FMDirectoryView *view;
@@ -6318,8 +6318,8 @@ typedef struct {
 } PasteIntoData;
 
 static void
-paste_into_clipboard_received_callback (GtkClipboard     *clipboard,
-					GtkSelectionData *selection_data,
+paste_into_clipboard_received_callback (CtkClipboard     *clipboard,
+					CtkSelectionData *selection_data,
 					gpointer          callback_data)
 {
 	PasteIntoData *data;
@@ -6345,7 +6345,7 @@ paste_into_clipboard_received_callback (GtkClipboard     *clipboard,
 }
 
 static void
-action_paste_files_callback (GtkAction *action,
+action_paste_files_callback (CtkAction *action,
 			     gpointer callback_data)
 {
 	FMDirectoryView *view;
@@ -6380,7 +6380,7 @@ paste_into (FMDirectoryView *view,
 }
 
 static void
-action_paste_files_into_callback (GtkAction *action,
+action_paste_files_into_callback (CtkAction *action,
 				  gpointer callback_data)
 {
 	FMDirectoryView *view;
@@ -6448,14 +6448,14 @@ real_action_rename (FMDirectoryView *view,
 }
 
 static void
-action_rename_callback (GtkAction *action,
+action_rename_callback (CtkAction *action,
 			gpointer callback_data)
 {
 	real_action_rename (FM_DIRECTORY_VIEW (callback_data), FALSE);
 }
 
 static void
-action_rename_select_all_callback (GtkAction *action,
+action_rename_select_all_callback (CtkAction *action,
 				   gpointer callback_data)
 {
 	real_action_rename (FM_DIRECTORY_VIEW (callback_data), TRUE);
@@ -6535,7 +6535,7 @@ file_stop_callback (BaulFile  *file,
 }
 
 static void
-action_mount_volume_callback (GtkAction *action,
+action_mount_volume_callback (CtkAction *action,
 			      gpointer data)
 {
 	GList *selection, *l;
@@ -6561,7 +6561,7 @@ action_mount_volume_callback (GtkAction *action,
 }
 
 static void
-action_unmount_volume_callback (GtkAction *action,
+action_unmount_volume_callback (CtkAction *action,
 				gpointer data)
 {
 	GList *selection, *l;
@@ -6587,7 +6587,7 @@ action_unmount_volume_callback (GtkAction *action,
 }
 
 static void
-action_format_volume_callback (GtkAction *action,
+action_format_volume_callback (CtkAction *action,
 			       gpointer   data)
 {
 #ifdef TODO_GIO
@@ -6610,7 +6610,7 @@ action_format_volume_callback (GtkAction *action,
 }
 
 static void
-action_eject_volume_callback (GtkAction *action,
+action_eject_volume_callback (CtkAction *action,
 			      gpointer data)
 {
 	GList *selection, *l;
@@ -6652,7 +6652,7 @@ file_start_callback (BaulFile  *file,
 }
 
 static void
-action_start_volume_callback (GtkAction *action,
+action_start_volume_callback (CtkAction *action,
 			      gpointer   data)
 {
 	GList *selection, *l;
@@ -6677,7 +6677,7 @@ action_start_volume_callback (GtkAction *action,
 }
 
 static void
-action_stop_volume_callback (GtkAction *action,
+action_stop_volume_callback (CtkAction *action,
 			     gpointer   data)
 {
 	GList *selection, *l;
@@ -6702,7 +6702,7 @@ action_stop_volume_callback (GtkAction *action,
 }
 
 static void
-action_detect_media_callback (GtkAction *action,
+action_detect_media_callback (CtkAction *action,
 			      gpointer   data)
 {
 	GList *selection, *l;
@@ -6723,7 +6723,7 @@ action_detect_media_callback (GtkAction *action,
 }
 
 static void
-action_self_mount_volume_callback (GtkAction *action,
+action_self_mount_volume_callback (CtkAction *action,
 				   gpointer data)
 {
 	BaulFile *file;
@@ -6744,7 +6744,7 @@ action_self_mount_volume_callback (GtkAction *action,
 }
 
 static void
-action_self_unmount_volume_callback (GtkAction *action,
+action_self_unmount_volume_callback (CtkAction *action,
 				     gpointer data)
 {
 	BaulFile *file;
@@ -6765,7 +6765,7 @@ action_self_unmount_volume_callback (GtkAction *action,
 }
 
 static void
-action_self_eject_volume_callback (GtkAction *action,
+action_self_eject_volume_callback (CtkAction *action,
 				   gpointer data)
 {
 	BaulFile *file;
@@ -6786,7 +6786,7 @@ action_self_eject_volume_callback (GtkAction *action,
 }
 
 static void
-action_self_format_volume_callback (GtkAction *action,
+action_self_format_volume_callback (CtkAction *action,
 				    gpointer   data)
 {
 	BaulFile *file;
@@ -6807,7 +6807,7 @@ action_self_format_volume_callback (GtkAction *action,
 }
 
 static void
-action_self_start_volume_callback (GtkAction *action,
+action_self_start_volume_callback (CtkAction *action,
 				   gpointer   data)
 {
 	BaulFile *file;
@@ -6827,7 +6827,7 @@ action_self_start_volume_callback (GtkAction *action,
 }
 
 static void
-action_self_stop_volume_callback (GtkAction *action,
+action_self_stop_volume_callback (CtkAction *action,
 				  gpointer   data)
 {
 	BaulFile *file;
@@ -6848,7 +6848,7 @@ action_self_stop_volume_callback (GtkAction *action,
 }
 
 static void
-action_self_detect_media_callback (GtkAction *action,
+action_self_detect_media_callback (CtkAction *action,
 				   gpointer   data)
 {
 	BaulFile *file;
@@ -6865,7 +6865,7 @@ action_self_detect_media_callback (GtkAction *action,
 }
 
 static void
-action_location_mount_volume_callback (GtkAction *action,
+action_location_mount_volume_callback (CtkAction *action,
 				       gpointer data)
 {
 	BaulFile *file;
@@ -6886,7 +6886,7 @@ action_location_mount_volume_callback (GtkAction *action,
 }
 
 static void
-action_location_unmount_volume_callback (GtkAction *action,
+action_location_unmount_volume_callback (CtkAction *action,
 					 gpointer data)
 {
 	BaulFile *file;
@@ -6908,7 +6908,7 @@ action_location_unmount_volume_callback (GtkAction *action,
 }
 
 static void
-action_location_eject_volume_callback (GtkAction *action,
+action_location_eject_volume_callback (CtkAction *action,
 				       gpointer data)
 {
 	BaulFile *file;
@@ -6930,7 +6930,7 @@ action_location_eject_volume_callback (GtkAction *action,
 }
 
 static void
-action_location_format_volume_callback (GtkAction *action,
+action_location_format_volume_callback (CtkAction *action,
 					gpointer   data)
 {
 	BaulFile *file;
@@ -6951,7 +6951,7 @@ action_location_format_volume_callback (GtkAction *action,
 }
 
 static void
-action_location_start_volume_callback (GtkAction *action,
+action_location_start_volume_callback (CtkAction *action,
 				       gpointer   data)
 {
 	BaulFile *file;
@@ -6971,7 +6971,7 @@ action_location_start_volume_callback (GtkAction *action,
 }
 
 static void
-action_location_stop_volume_callback (GtkAction *action,
+action_location_stop_volume_callback (CtkAction *action,
 				      gpointer   data)
 {
 	BaulFile *file;
@@ -6992,7 +6992,7 @@ action_location_stop_volume_callback (GtkAction *action,
 }
 
 static void
-action_location_detect_media_callback (GtkAction *action,
+action_location_detect_media_callback (CtkAction *action,
 				       gpointer   data)
 {
 	BaulFile *file;
@@ -7009,12 +7009,12 @@ action_location_detect_media_callback (GtkAction *action,
 }
 
 static void
-connect_to_server_response_callback (GtkDialog *dialog,
+connect_to_server_response_callback (CtkDialog *dialog,
 				     int response_id,
 				     gpointer data)
 {
 #ifdef GIO_CONVERSION_DONE
-	GtkEntry *entry;
+	CtkEntry *entry;
 	char *uri;
 	const char *name;
 	char *icon;
@@ -7043,17 +7043,17 @@ connect_to_server_response_callback (GtkDialog *dialog,
 }
 
 static void
-entry_activate_callback (GtkEntry *entry,
+entry_activate_callback (CtkEntry *entry,
 			 gpointer user_data)
 {
-	GtkDialog *dialog;
+	CtkDialog *dialog;
 
 	dialog = GTK_DIALOG (user_data);
 	ctk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 }
 
 static void
-action_connect_to_server_link_callback (GtkAction *action,
+action_connect_to_server_link_callback (CtkAction *action,
 					gpointer data)
 {
 	BaulFile *file;
@@ -7083,10 +7083,10 @@ action_connect_to_server_link_callback (GtkAction *action,
 	name = baul_file_get_display_name (file);
 
 	if (uri != NULL) {
-		GtkWidget *dialog;
-		GtkWidget *label;
-		GtkWidget *entry;
-		GtkWidget *box;
+		CtkWidget *dialog;
+		CtkWidget *label;
+		CtkWidget *entry;
+		CtkWidget *box;
 		char *title;
 
 		title = g_strdup_printf (_("Connect to Server %s"), name);
@@ -7148,7 +7148,7 @@ action_connect_to_server_link_callback (GtkAction *action,
 }
 
 static void
-action_location_open_alternate_callback (GtkAction *action,
+action_location_open_alternate_callback (CtkAction *action,
 					 gpointer   callback_data)
 {
 	FMDirectoryView *view;
@@ -7168,7 +7168,7 @@ action_location_open_alternate_callback (GtkAction *action,
 }
 
 static void
-action_location_open_in_new_tab_callback (GtkAction *action,
+action_location_open_in_new_tab_callback (CtkAction *action,
 					  gpointer   callback_data)
 {
 	FMDirectoryView *view;
@@ -7188,7 +7188,7 @@ action_location_open_in_new_tab_callback (GtkAction *action,
 }
 
 static void
-action_location_open_folder_window_callback (GtkAction *action,
+action_location_open_folder_window_callback (CtkAction *action,
 					     gpointer   callback_data)
 {
 	FMDirectoryView *view;
@@ -7206,7 +7206,7 @@ action_location_open_folder_window_callback (GtkAction *action,
 }
 
 static void
-action_location_cut_callback (GtkAction *action,
+action_location_cut_callback (CtkAction *action,
 			      gpointer   callback_data)
 {
 	FMDirectoryView *view;
@@ -7224,7 +7224,7 @@ action_location_cut_callback (GtkAction *action,
 }
 
 static void
-action_location_copy_callback (GtkAction *action,
+action_location_copy_callback (CtkAction *action,
 			       gpointer   callback_data)
 {
 	FMDirectoryView *view;
@@ -7242,7 +7242,7 @@ action_location_copy_callback (GtkAction *action,
 }
 
 static void
-action_location_paste_files_into_callback (GtkAction *action,
+action_location_paste_files_into_callback (CtkAction *action,
 					   gpointer callback_data)
 {
 	FMDirectoryView *view;
@@ -7257,7 +7257,7 @@ action_location_paste_files_into_callback (GtkAction *action,
 }
 
 static void
-action_location_trash_callback (GtkAction *action,
+action_location_trash_callback (CtkAction *action,
 				gpointer   callback_data)
 {
 	FMDirectoryView *view;
@@ -7277,7 +7277,7 @@ action_location_trash_callback (GtkAction *action,
 }
 
 static void
-action_location_delete_callback (GtkAction *action,
+action_location_delete_callback (CtkAction *action,
 				 gpointer   callback_data)
 {
 	FMDirectoryView *view;
@@ -7300,7 +7300,7 @@ action_location_delete_callback (GtkAction *action,
 }
 
 static void
-action_location_restore_from_trash_callback (GtkAction *action,
+action_location_restore_from_trash_callback (CtkAction *action,
 					     gpointer callback_data)
 {
 	FMDirectoryView *view;
@@ -7385,7 +7385,7 @@ fm_directory_view_init_show_backup_files (FMDirectoryView *view)
 
 }
 
-static const GtkActionEntry directory_view_entries[] = {
+static const CtkActionEntry directory_view_entries[] = {
   /* name, icon name, label */ { "New Documents", "document-new", N_("Create _Document") },
   /* name, icon name, label */ { "Open With", NULL, N_("Open Wit_h"),
                                  NULL, N_("Choose a program with which to open the selected item") },
@@ -7699,9 +7699,9 @@ static const GtkActionEntry directory_view_entries[] = {
 
 static void
 connect_proxy (FMDirectoryView *view,
-	       GtkAction *action,
-	       GtkWidget *proxy,
-	       GtkActionGroup *action_group)
+	       CtkAction *action,
+	       CtkWidget *proxy,
+	       CtkActionGroup *action_group)
 {
 	const gchar *action_name;
 
@@ -7716,7 +7716,7 @@ connect_proxy (FMDirectoryView *view,
 		surface = get_menu_icon ("text-x-generic", GTK_WIDGET (view));
 
 		if (surface != NULL) {
-			GtkWidget *image;
+			CtkWidget *image;
 
 			image = ctk_image_new_from_surface (surface);
 			ctk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (proxy), image);
@@ -7728,11 +7728,11 @@ connect_proxy (FMDirectoryView *view,
 
 static void
 pre_activate (FMDirectoryView *view,
-	      GtkAction *action,
-	      GtkActionGroup *action_group)
+	      CtkAction *action,
+	      CtkActionGroup *action_group)
 {
 	GdkEvent *event;
-	GtkWidget *proxy;
+	CtkWidget *proxy;
 	gboolean activated_from_popup;
 
 	/* check whether action was activated through a popup menu.
@@ -7743,7 +7743,7 @@ pre_activate (FMDirectoryView *view,
 	proxy = ctk_get_event_widget (event);
 
 	if (proxy != NULL) {
-		GtkWidget *toplevel;
+		CtkWidget *toplevel;
 		GdkWindowTypeHint hint;
 
 		toplevel = ctk_widget_get_toplevel (proxy);
@@ -7765,9 +7765,9 @@ pre_activate (FMDirectoryView *view,
 static void
 real_merge_menus (FMDirectoryView *view)
 {
-	GtkActionGroup *action_group;
-	GtkUIManager *ui_manager;
-	GtkAction *action;
+	CtkActionGroup *action_group;
+	CtkUIManager *ui_manager;
+	CtkAction *action;
 	const char *ui;
 	char *tooltip;
 
@@ -7848,7 +7848,7 @@ can_paste_into_file (BaulFile *file)
 }
 
 static void
-clipboard_targets_received (GtkClipboard     *clipboard,
+clipboard_targets_received (CtkClipboard     *clipboard,
                             GdkAtom          *targets,
                             int               n_targets,
 			    gpointer          user_data)
@@ -7857,7 +7857,7 @@ clipboard_targets_received (GtkClipboard     *clipboard,
 	gboolean can_paste;
 	GList *selection;
 	int count;
-	GtkAction *action;
+	CtkAction *action;
 
 	view = FM_DIRECTORY_VIEW (user_data);
 	can_paste = FALSE;
@@ -8150,7 +8150,7 @@ files_is_none_directory (GList *files)
 }
 
 static void
-update_restore_from_trash_action (GtkAction *action,
+update_restore_from_trash_action (CtkAction *action,
 				  GList *files,
 				  gboolean is_self)
 {
@@ -8280,7 +8280,7 @@ real_update_menus_volumes (FMDirectoryView *view,
 	gboolean show_self_stop;
 	gboolean show_self_poll;
 	GDriveStartStopType self_start_stop_type;
-	GtkAction *action;
+	CtkAction *action;
 
 	show_mount = (selection != NULL);
 	show_unmount = (selection != NULL);
@@ -8512,7 +8512,7 @@ real_update_menus_volumes (FMDirectoryView *view,
 static void
 real_update_location_menu_volumes (FMDirectoryView *view)
 {
-	GtkAction *action;
+	CtkAction *action;
 	BaulFile *file;
 	gboolean show_mount;
 	gboolean show_unmount;
@@ -8632,7 +8632,7 @@ real_update_paste_menu (FMDirectoryView *view,
 	gboolean can_paste_files_into;
 	gboolean selection_is_read_only;
 	gboolean is_read_only;
-	GtkAction *action;
+	CtkAction *action;
 
 	selection_is_read_only = selection_count == 1 &&
 		(!baul_file_can_write (BAUL_FILE (selection->data)) &&
@@ -8664,7 +8664,7 @@ real_update_paste_menu (FMDirectoryView *view,
 static void
 real_update_location_menu (FMDirectoryView *view)
 {
-	GtkAction *action;
+	CtkAction *action;
 	BaulFile *file;
 	gboolean is_special_link;
 	gboolean is_desktop_or_home_dir;
@@ -8880,10 +8880,10 @@ real_update_menus (FMDirectoryView *view)
 	gboolean save_search_sensitive;
 	gboolean show_save_search_as;
 	gboolean show_open_folder_window;
-	GtkAction *action;
+	CtkAction *action;
 	GAppInfo *app;
 	GIcon *app_icon;
-	GtkWidget *menuitem;
+	CtkWidget *menuitem;
 	gboolean next_pane_is_writable;
 	gboolean show_properties;
 
@@ -9588,7 +9588,7 @@ fm_directory_view_notify_selection_changed (FMDirectoryView *view)
 
 	if (baul_debug_log_is_domain_enabled (BAUL_DEBUG_LOG_DOMAIN_USER)) {
 		GList *selection;
-		GtkWindow *window;
+		CtkWindow *window;
 
 		selection = fm_directory_view_get_selection (view);
 
@@ -10463,8 +10463,8 @@ ask_link_action (FMDirectoryView *view)
 {
 	int button_pressed;
 	GdkDragAction result;
-	GtkWindow *parent_window;
-	GtkWidget *dialog;
+	CtkWindow *parent_window;
+	CtkWidget *dialog;
 
 	parent_window = NULL;
 
@@ -11070,7 +11070,7 @@ fm_directory_view_handle_scroll_event (FMDirectoryView *directory_view,
 
 /* handle Shift+Scroll, which will cause a zoom-in/out */
 static gboolean
-fm_directory_view_scroll_event (GtkWidget *widget,
+fm_directory_view_scroll_event (CtkWidget *widget,
 				GdkEventScroll *event)
 {
 	FMDirectoryView *directory_view;
@@ -11085,11 +11085,11 @@ fm_directory_view_scroll_event (GtkWidget *widget,
 
 
 static void
-fm_directory_view_parent_set (GtkWidget *widget,
-			      GtkWidget *old_parent)
+fm_directory_view_parent_set (CtkWidget *widget,
+			      CtkWidget *old_parent)
 {
 	FMDirectoryView *view;
-	GtkWidget *parent;
+	CtkWidget *parent;
 
 	view = FM_DIRECTORY_VIEW (widget);
 
@@ -11119,9 +11119,9 @@ fm_directory_view_parent_set (GtkWidget *widget,
 static void
 fm_directory_view_class_init (FMDirectoryViewClass *klass)
 {
-	GtkWidgetClass *widget_class;
-	GtkScrolledWindowClass *scrolled_window_class;
-	GtkBindingSet *binding_set;
+	CtkWidgetClass *widget_class;
+	CtkScrolledWindowClass *scrolled_window_class;
+	CtkBindingSet *binding_set;
 
 	widget_class = GTK_WIDGET_CLASS (klass);
 	scrolled_window_class = GTK_SCROLLED_WINDOW_CLASS (klass);
@@ -11134,7 +11134,7 @@ fm_directory_view_class_init (FMDirectoryViewClass *klass)
 	widget_class->scroll_event = fm_directory_view_scroll_event;
 	widget_class->parent_set = fm_directory_view_parent_set;
 
-	/* Get rid of the strange 3-pixel gap that GtkScrolledWindow
+	/* Get rid of the strange 3-pixel gap that CtkScrolledWindow
 	 * uses by default. It does us no good.
 	 */
 	scrolled_window_class->scrollbar_spacing = 0;
@@ -11325,7 +11325,7 @@ undo_redo_menu_update_callback (BaulUndoStackManager* manager, gpointer arg, gpo
 static void
 undo_update_menu (FMDirectoryView *view)
 {
-	GtkAction *action;
+	CtkAction *action;
 	gboolean available = FALSE;
 	gchar* label;
 	gchar* tooltip;

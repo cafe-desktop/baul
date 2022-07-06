@@ -1820,32 +1820,32 @@ enum
 
 static void eel_canvas_class_init          (EelCanvasClass *klass);
 static void eel_canvas_init                (EelCanvas      *canvas);
-static void eel_canvas_destroy             (GtkWidget        *object);
-static void eel_canvas_map                 (GtkWidget        *widget);
-static void eel_canvas_unmap               (GtkWidget        *widget);
-static void eel_canvas_realize             (GtkWidget        *widget);
-static void eel_canvas_unrealize           (GtkWidget        *widget);
-static void eel_canvas_size_allocate       (GtkWidget        *widget,
-        GtkAllocation    *allocation);
-static gint eel_canvas_button              (GtkWidget        *widget,
+static void eel_canvas_destroy             (CtkWidget        *object);
+static void eel_canvas_map                 (CtkWidget        *widget);
+static void eel_canvas_unmap               (CtkWidget        *widget);
+static void eel_canvas_realize             (CtkWidget        *widget);
+static void eel_canvas_unrealize           (CtkWidget        *widget);
+static void eel_canvas_size_allocate       (CtkWidget        *widget,
+        CtkAllocation    *allocation);
+static gint eel_canvas_button              (CtkWidget        *widget,
         GdkEventButton   *event);
-static gint eel_canvas_motion              (GtkWidget        *widget,
+static gint eel_canvas_motion              (CtkWidget        *widget,
         GdkEventMotion   *event);
-static gint eel_canvas_draw                (GtkWidget        *widget,
+static gint eel_canvas_draw                (CtkWidget        *widget,
                                             cairo_t          *cr);
-static gint eel_canvas_key                 (GtkWidget        *widget,
+static gint eel_canvas_key                 (CtkWidget        *widget,
         GdkEventKey      *event);
-static gint eel_canvas_crossing            (GtkWidget        *widget,
+static gint eel_canvas_crossing            (CtkWidget        *widget,
         GdkEventCrossing *event);
-static gint eel_canvas_focus_in            (GtkWidget        *widget,
+static gint eel_canvas_focus_in            (CtkWidget        *widget,
         GdkEventFocus    *event);
-static gint eel_canvas_focus_out           (GtkWidget        *widget,
+static gint eel_canvas_focus_out           (CtkWidget        *widget,
         GdkEventFocus    *event);
 static void eel_canvas_request_update_real (EelCanvas      *canvas);
 static void eel_canvas_draw_background     (EelCanvas      *canvas,
                                             cairo_t        *cr);
 
-static GtkLayoutClass *canvas_parent_class;
+static CtkLayoutClass *canvas_parent_class;
 
 static guint canvas_signals[LAST_SIGNAL] = { 0 };
 
@@ -1915,7 +1915,7 @@ eel_canvas_set_property (GObject      *object,
 }
 
 static void
-eel_canvas_accessible_adjustment_changed (GtkAdjustment *adjustment,
+eel_canvas_accessible_adjustment_changed (CtkAdjustment *adjustment,
         gpointer       data)
 {
     AtkObject *atk_obj;
@@ -1951,8 +1951,8 @@ eel_canvas_accessible_initialize (AtkObject *obj,
 static gint
 eel_canvas_accessible_get_n_children (AtkObject* obj)
 {
-    GtkAccessible *accessible;
-    GtkWidget *widget;
+    CtkAccessible *accessible;
+    CtkWidget *widget;
     EelCanvas *canvas;
     EelCanvasGroup *root_group;
 
@@ -1976,8 +1976,8 @@ static AtkObject*
 eel_canvas_accessible_ref_child (AtkObject *obj,
                                  gint       i)
 {
-    GtkAccessible *accessible;
-    GtkWidget *widget;
+    CtkAccessible *accessible;
+    CtkWidget *widget;
     EelCanvas *canvas;
     EelCanvasGroup *root_group;
     AtkObject *atk_object;
@@ -2030,10 +2030,10 @@ static void
 eel_canvas_class_init (EelCanvasClass *klass)
 {
     GObjectClass   *gobject_class;
-    GtkWidgetClass *widget_class;
+    CtkWidgetClass *widget_class;
 
     gobject_class = (GObjectClass *)klass;
-    widget_class  = (GtkWidgetClass *) klass;
+    widget_class  = (CtkWidgetClass *) klass;
 
     canvas_parent_class = g_type_class_peek_parent (klass);
 
@@ -2077,7 +2077,7 @@ eel_canvas_class_init (EelCanvasClass *klass)
  * never ever do this, so we panic if this happens.
  */
 static void
-panic_root_destroyed (GtkWidget *object, gpointer data)
+panic_root_destroyed (CtkWidget *object, gpointer data)
 {
     g_error ("Eeeek, root item %p of canvas %p was destroyed!", object, data);
 }
@@ -2156,7 +2156,7 @@ shutdown_transients (EelCanvas *canvas)
 
 /* Destroy handler for EelCanvas */
 static void
-eel_canvas_destroy (GtkWidget *object)
+eel_canvas_destroy (CtkWidget *object)
 {
     EelCanvas *canvas;
 
@@ -2196,7 +2196,7 @@ eel_canvas_destroy (GtkWidget *object)
  *
  * Return value: A newly-created canvas.
  **/
-GtkWidget *
+CtkWidget *
 eel_canvas_new (void)
 {
     return GTK_WIDGET (g_object_new (eel_canvas_get_type (), NULL));
@@ -2204,7 +2204,7 @@ eel_canvas_new (void)
 
 /* Map handler for the canvas */
 static void
-eel_canvas_map (GtkWidget *widget)
+eel_canvas_map (CtkWidget *widget)
 {
     EelCanvas *canvas;
 
@@ -2227,7 +2227,7 @@ eel_canvas_map (GtkWidget *widget)
 
 /* Unmap handler for the canvas */
 static void
-eel_canvas_unmap (GtkWidget *widget)
+eel_canvas_unmap (CtkWidget *widget)
 {
     EelCanvas *canvas;
 
@@ -2250,7 +2250,7 @@ eel_canvas_unmap (GtkWidget *widget)
 
 /* Realize handler for the canvas */
 static void
-eel_canvas_realize (GtkWidget *widget)
+eel_canvas_realize (CtkWidget *widget)
 {
     EelCanvas *canvas;
 
@@ -2282,7 +2282,7 @@ eel_canvas_realize (GtkWidget *widget)
 
 /* Unrealize handler for the canvas */
 static void
-eel_canvas_unrealize (GtkWidget *widget)
+eel_canvas_unrealize (CtkWidget *widget)
 {
     EelCanvas *canvas;
 
@@ -2311,8 +2311,8 @@ scroll_to (EelCanvas *canvas, int cx, int cy)
     int old_zoom_xofs, old_zoom_yofs;
     int changed_x = FALSE, changed_y = FALSE;
     int canvas_width, canvas_height;
-    GtkAllocation allocation;
-    GtkAdjustment *vadjustment, *hadjustment;
+    CtkAllocation allocation;
+    CtkAdjustment *vadjustment, *hadjustment;
     guint width, height;
 
     ctk_widget_get_allocation (GTK_WIDGET (canvas), &allocation);
@@ -2414,7 +2414,7 @@ scroll_to (EelCanvas *canvas, int cx, int cy)
         ctk_layout_set_size (GTK_LAYOUT (canvas), scroll_width, scroll_height);
     }
 
-    /* Signal GtkLayout that it should do a redraw. */
+    /* Signal CtkLayout that it should do a redraw. */
     if (changed_x)
         g_signal_emit_by_name (hadjustment, "value_changed");
     if (changed_y)
@@ -2423,10 +2423,10 @@ scroll_to (EelCanvas *canvas, int cx, int cy)
 
 /* Size allocation handler for the canvas */
 static void
-eel_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
+eel_canvas_size_allocate (CtkWidget *widget, CtkAllocation *allocation)
 {
     EelCanvas *canvas;
-    GtkAdjustment *vadjustment, *hadjustment;
+    CtkAdjustment *vadjustment, *hadjustment;
 
     g_return_if_fail (EEL_IS_CANVAS (widget));
     g_return_if_fail (allocation != NULL);
@@ -2566,7 +2566,7 @@ emit_event (EelCanvas *canvas, GdkEvent *event)
 
     /* The event is propagated up the hierarchy (for if someone connected to
      * a group instead of a leaf event), and emission is stopped if a
-     * handler returns TRUE, just like for GtkWidget events.
+     * handler returns TRUE, just like for CtkWidget events.
      */
 
     finished = FALSE;
@@ -2743,7 +2743,7 @@ pick_current_item (EelCanvas *canvas, GdkEvent *event)
 
 /* Button event handler for the canvas */
 static gint
-eel_canvas_button (GtkWidget *widget, GdkEventButton *event)
+eel_canvas_button (CtkWidget *widget, GdkEventButton *event)
 {
     EelCanvas *canvas;
     int mask;
@@ -2825,7 +2825,7 @@ eel_canvas_button (GtkWidget *widget, GdkEventButton *event)
 
 /* Motion event handler for the canvas */
 static gint
-eel_canvas_motion (GtkWidget *widget, GdkEventMotion *event)
+eel_canvas_motion (CtkWidget *widget, GdkEventMotion *event)
 {
     EelCanvas *canvas;
 
@@ -2844,7 +2844,7 @@ eel_canvas_motion (GtkWidget *widget, GdkEventMotion *event)
 
 /* Key event handler for the canvas */
 static gint
-eel_canvas_key (GtkWidget *widget, GdkEventKey *event)
+eel_canvas_key (CtkWidget *widget, GdkEventKey *event)
 {
     EelCanvas *canvas;
 
@@ -2864,7 +2864,7 @@ eel_canvas_key (GtkWidget *widget, GdkEventKey *event)
 
 /* Crossing event handler for the canvas */
 static gint
-eel_canvas_crossing (GtkWidget *widget, GdkEventCrossing *event)
+eel_canvas_crossing (CtkWidget *widget, GdkEventCrossing *event)
 {
     EelCanvas *canvas;
 
@@ -2882,7 +2882,7 @@ eel_canvas_crossing (GtkWidget *widget, GdkEventCrossing *event)
 
 /* Focus in handler for the canvas */
 static gint
-eel_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
+eel_canvas_focus_in (CtkWidget *widget, GdkEventFocus *event)
 {
     EelCanvas *canvas;
 
@@ -2896,7 +2896,7 @@ eel_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
 
 /* Focus out handler for the canvas */
 static gint
-eel_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
+eel_canvas_focus_out (CtkWidget *widget, GdkEventFocus *event)
 {
     EelCanvas *canvas;
 
@@ -2950,7 +2950,7 @@ eel_cairo_get_clip_region (cairo_t *cr)
 
 /* Expose handler for the canvas */
 static gboolean
-eel_canvas_draw (GtkWidget *widget, cairo_t *cr)
+eel_canvas_draw (CtkWidget *widget, cairo_t *cr)
 {
     EelCanvas *canvas = EEL_CANVAS (widget);
     GdkWindow *bin_window;
@@ -3023,7 +3023,7 @@ eel_canvas_draw_background (EelCanvas *canvas,
                             cairo_t   *cr)
 {
     cairo_rectangle_int_t rect;
-    GtkStyleContext *style_context;
+    CtkStyleContext *style_context;
     GdkRGBA color;
     GdkRGBA *c;
 
@@ -3150,7 +3150,7 @@ eel_canvas_set_scroll_region (EelCanvas *canvas, double x1, double y1, double x2
 {
     double wxofs, wyofs;
     int xofs, yofs;
-    GtkAdjustment *vadjustment, *hadjustment;
+    CtkAdjustment *vadjustment, *hadjustment;
 
     g_return_if_fail (EEL_IS_CANVAS (canvas));
 
@@ -3225,7 +3225,7 @@ void
 eel_canvas_set_center_scroll_region (EelCanvas *canvas,
                                      gboolean center_scroll_region)
 {
-    GtkAdjustment *vadjustment, *hadjustment;
+    CtkAdjustment *vadjustment, *hadjustment;
 
     g_return_if_fail (EEL_IS_CANVAS (canvas));
 
@@ -3251,15 +3251,15 @@ eel_canvas_set_center_scroll_region (EelCanvas *canvas,
 void
 eel_canvas_set_pixels_per_unit (EelCanvas *canvas, double n)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
     double cx, cy;
     int x1, y1;
     int center_x, center_y;
     GdkWindow *window;
     GdkWindowAttr attributes;
     gint attributes_mask;
-    GtkAllocation allocation;
-    GtkAdjustment *vadjustment, *hadjustment;
+    CtkAllocation allocation;
+    CtkAdjustment *vadjustment, *hadjustment;
 
     g_return_if_fail (EEL_IS_CANVAS (canvas));
     g_return_if_fail (n > EEL_CANVAS_EPSILON);
@@ -3364,7 +3364,7 @@ eel_canvas_scroll_to (EelCanvas *canvas, int cx, int cy)
 void
 eel_canvas_get_scroll_offsets (EelCanvas *canvas, int *cx, int *cy)
 {
-    GtkAdjustment *vadjustment, *hadjustment;
+    CtkAdjustment *vadjustment, *hadjustment;
 
     g_return_if_fail (EEL_IS_CANVAS (canvas));
 
@@ -3693,7 +3693,7 @@ static gboolean
 eel_canvas_item_accessible_is_item_in_window (EelCanvasItem *item,
         GdkRectangle  *rect)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
     gboolean retval;
 
     widget = GTK_WIDGET (item->canvas);
@@ -3741,7 +3741,7 @@ eel_canvas_item_accessible_get_extents (AtkComponent *component,
     gint toplevel_x, toplevel_y;
     GdkRectangle rect;
     GdkWindow *window;
-    GtkWidget *canvas;
+    CtkWidget *canvas;
 
     atk_gobj = ATK_GOBJECT_ACCESSIBLE (component);
     obj = atk_gobject_accessible_get_object (atk_gobj);
@@ -3816,7 +3816,7 @@ eel_canvas_item_accessible_grab_focus (AtkComponent *component)
     AtkGObjectAccessible *atk_gobj;
     GObject *obj;
     EelCanvasItem *item;
-    GtkWidget *toplevel;
+    CtkWidget *toplevel;
 
     atk_gobj = ATK_GOBJECT_ACCESSIBLE (component);
     obj = atk_gobject_accessible_get_object (atk_gobj);

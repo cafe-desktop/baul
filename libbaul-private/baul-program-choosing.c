@@ -61,7 +61,7 @@ static void
 application_cannot_open_location (GAppInfo *application,
                                   BaulFile *file,
                                   const char *uri_scheme,
-                                  GtkWindow *parent_window)
+                                  CtkWindow *parent_window)
 {
 #ifdef NEW_MIME_COMPLETE
     char *prompt;
@@ -72,7 +72,7 @@ application_cannot_open_location (GAppInfo *application,
 
     if (baul_mime_has_any_applications_for_file (file))
     {
-        GtkDialog *message_dialog;
+        CtkDialog *message_dialog;
         int response;
 
         if (application != NULL)
@@ -155,7 +155,7 @@ application_cannot_open_location (GAppInfo *application,
 void
 baul_launch_application (GAppInfo *application,
                          GList *files,
-                         GtkWindow *parent_window)
+                         CtkWindow *parent_window)
 {
     GList *uris, *l;
 
@@ -192,7 +192,7 @@ gather_pid_callback (GDesktopAppInfo *appinfo,
 void
 baul_launch_application_by_uri (GAppInfo *application,
                                 GList *uris,
-                                GtkWindow *parent_window)
+                                CtkWindow *parent_window)
 {
     BaulFile *file;
     gboolean result;
@@ -437,7 +437,7 @@ void
 baul_launch_desktop_file (GdkScreen   *screen,
                           const char  *desktop_file_uri,
                           const GList *parameter_uris,
-                          GtkWindow   *parent_window)
+                          CtkWindow   *parent_window)
 {
     GError *error;
     char *desktop_file_path;

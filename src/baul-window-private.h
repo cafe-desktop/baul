@@ -42,20 +42,20 @@ struct _BaulNavigationWindowPane;
 /* FIXME bugzilla.gnome.org 42575: Migrate more fields into here. */
 struct _BaulWindowPrivate
 {
-    GtkWidget *grid;
+    CtkWidget *grid;
 
-    GtkWidget *statusbar;
-    GtkWidget *menubar;
+    CtkWidget *statusbar;
+    CtkWidget *menubar;
 
-    GtkUIManager *ui_manager;
-    GtkActionGroup *main_action_group; /* owned by ui_manager */
+    CtkUIManager *ui_manager;
+    CtkActionGroup *main_action_group; /* owned by ui_manager */
     guint help_message_cid;
 
     /* Menus. */
     guint extensions_menu_merge_id;
-    GtkActionGroup *extensions_menu_action_group;
+    CtkActionGroup *extensions_menu_action_group;
 
-    GtkActionGroup *bookmarks_action_group;
+    CtkActionGroup *bookmarks_action_group;
     guint bookmarks_merge_id;
     BaulBookmarkList *bookmark_list;
 
@@ -67,9 +67,9 @@ struct _BaulWindowPrivate
     char *extra_viewer;
 
     /* View As choices */
-    GtkActionGroup *view_as_action_group; /* owned by ui_manager */
-    GtkRadioAction *view_as_radio_action;
-    GtkRadioAction *extra_viewer_radio_action;
+    CtkActionGroup *view_as_action_group; /* owned by ui_manager */
+    CtkRadioAction *view_as_radio_action;
+    CtkRadioAction *extra_viewer_radio_action;
     guint short_list_merge_id;
     guint extra_viewer_merge_id;
 
@@ -93,36 +93,36 @@ struct _BaulWindowPrivate
 
 struct _BaulNavigationWindowPrivate
 {
-    GtkWidget *content_paned;
-    GtkWidget *content_box;
-    GtkActionGroup *navigation_action_group; /* owned by ui_manager */
+    CtkWidget *content_paned;
+    CtkWidget *content_box;
+    CtkActionGroup *navigation_action_group; /* owned by ui_manager */
 
-    GtkSizeGroup *header_size_group;
+    CtkSizeGroup *header_size_group;
 
     /* Side Pane */
     int side_pane_width;
     BaulSidebar *current_side_panel;
 
     /* Menus */
-    GtkActionGroup *go_menu_action_group;
+    CtkActionGroup *go_menu_action_group;
     guint refresh_go_menu_idle_id;
     guint go_menu_merge_id;
 
     /* Toolbar */
-    GtkWidget *toolbar;
+    CtkWidget *toolbar;
 
     guint extensions_toolbar_merge_id;
-    GtkActionGroup *extensions_toolbar_action_group;
+    CtkActionGroup *extensions_toolbar_action_group;
 
     /* spinner */
     gboolean    spinner_active;
-    GtkWidget  *spinner;
+    CtkWidget  *spinner;
 
     /* focus widget before the location bar has been shown temporarily */
-    GtkWidget *last_focus_widget;
+    CtkWidget *last_focus_widget;
 
     /* split view */
-    GtkWidget *split_view_hpane;
+    CtkWidget *split_view_hpane;
 };
 
 #define BAUL_MENU_PATH_BACK_ITEM			"/menu/Go/Back"
@@ -177,7 +177,7 @@ void               baul_menus_append_bookmark_to_menu                (BaulWindow
         const char        *parent_path,
         const char        *parent_id,
         guint              index_in_parent,
-        GtkActionGroup    *action_group,
+        CtkActionGroup    *action_group,
         guint              merge_id,
         GCallback          refresh_callback,
         BaulBookmarkFailedCallback failed_callback);

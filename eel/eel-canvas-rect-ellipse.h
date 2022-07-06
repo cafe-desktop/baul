@@ -102,7 +102,7 @@ extern "C" {
     };
 
 
-    /* Standard Gtk function */
+    /* Standard Ctk function */
     GType eel_canvas_re_get_type (void) G_GNUC_CONST;
 
 
@@ -135,7 +135,7 @@ extern "C" {
     };
 
 
-    /* Standard Gtk function */
+    /* Standard Ctk function */
     GType eel_canvas_rect_get_type (void) G_GNUC_CONST;
 
 #ifdef __cplusplus

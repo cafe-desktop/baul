@@ -38,7 +38,7 @@
 
 typedef struct
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
     GMount *mount;
 } AutorunSoftwareDialogData;
 
@@ -182,7 +182,7 @@ out:
 
     if (error_string != NULL)
     {
-        GtkWidget *dialog;
+        CtkWidget *dialog;
         dialog = ctk_message_dialog_new_with_markup (NULL, /* TODO: parent window? */
                  0,
                  GTK_MESSAGE_ERROR,
@@ -202,9 +202,9 @@ present_autorun_for_software_dialog (GMount *mount)
     int icon_size;
     BaulIconInfo *icon_info;
     GdkPixbuf *pixbuf;
-    GtkWidget *image;
+    CtkWidget *image;
     char *mount_name;
-    GtkWidget *dialog;
+    CtkWidget *dialog;
     AutorunSoftwareDialogData *data;
 
     mount_name = g_mount_get_name (mount);

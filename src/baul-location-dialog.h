@@ -38,17 +38,17 @@ typedef struct _BaulLocationDialogDetails BaulLocationDialogDetails;
 
 struct _BaulLocationDialog
 {
-    GtkDialog parent;
+    CtkDialog parent;
     BaulLocationDialogDetails *details;
 };
 
 struct _BaulLocationDialogClass
 {
-    GtkDialogClass parent_class;
+    CtkDialogClass parent_class;
 };
 
 GType      baul_location_dialog_get_type     (void);
-GtkWidget* baul_location_dialog_new          (BaulWindow         *window);
+CtkWidget* baul_location_dialog_new          (BaulWindow         *window);
 void       baul_location_dialog_set_location (BaulLocationDialog *dialog,
         const char             *location);
 

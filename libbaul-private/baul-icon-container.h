@@ -225,7 +225,7 @@ typedef struct
             BaulIconData *data,
             const char *text);
     void         (* renaming_icon)            (BaulIconContainer *container,
-            GtkWidget *renaming_widget);
+            CtkWidget *renaming_widget);
     void	     (* icon_stretch_started)     (BaulIconContainer *container,
             BaulIconData *data);
     void	     (* icon_stretch_ended)       (BaulIconContainer *container,
@@ -241,9 +241,9 @@ typedef struct
     gboolean     (* start_interactive_search) (BaulIconContainer *container);
 } BaulIconContainerClass;
 
-/* GtkObject */
+/* CtkObject */
 GType             baul_icon_container_get_type                      (void);
-GtkWidget *       baul_icon_container_new                           (void);
+CtkWidget *       baul_icon_container_new                           (void);
 
 
 /* adding, removing, and managing icons */

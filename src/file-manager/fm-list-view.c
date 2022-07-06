@@ -67,28 +67,28 @@
 
 struct FMListViewDetails
 {
-    GtkTreeView *tree_view;
+    CtkTreeView *tree_view;
     FMListModel *model;
-    GtkActionGroup *list_action_group;
+    CtkActionGroup *list_action_group;
     guint list_merge_id;
 
-    GtkTreeViewColumn   *file_name_column;
+    CtkTreeViewColumn   *file_name_column;
     int file_name_column_num;
 
-    GtkCellRendererPixbuf *pixbuf_cell;
-    GtkCellRendererText   *file_name_cell;
+    CtkCellRendererPixbuf *pixbuf_cell;
+    CtkCellRendererText   *file_name_cell;
     GList *cells;
-    GtkCellEditable *editable_widget;
+    CtkCellEditable *editable_widget;
 
     BaulZoomLevel zoom_level;
 
     BaulTreeViewDragDest *drag_dest;
 
-    GtkTreePath *double_click_path[2]; /* Both clicks in a double click need to be on the same row */
+    CtkTreePath *double_click_path[2]; /* Both clicks in a double click need to be on the same row */
 
-    GtkTreePath *new_selection_path;   /* Path of the new selection after removing a file */
+    CtkTreePath *new_selection_path;   /* Path of the new selection after removing a file */
 
-    GtkTreePath *hover_path;
+    CtkTreePath *hover_path;
 
     guint drag_button;
     int drag_x;
@@ -103,7 +103,7 @@ struct FMListViewDetails
     gboolean menus_ready;
 
     GHashTable *columns;
-    GtkWidget *column_editor;
+    CtkWidget *column_editor;
 
     char *original_name;
 
@@ -119,7 +119,7 @@ struct FMListViewDetails
 struct SelectionForeachData
 {
     GList *list;
-    GtkTreeSelection *selection;
+    CtkTreeSelection *selection;
 };
 
 /*
@@ -143,7 +143,7 @@ static char **                  default_visible_columns_auto_value;
 static char **                  default_column_order_auto_value;
 static GdkCursor *              hand_cursor = NULL;
 
-static GtkTargetList *          source_target_list = NULL;
+static CtkTargetList *          source_target_list = NULL;
 
 static GList *fm_list_view_get_selection                   (FMDirectoryView   *view);
 static GList *fm_list_view_get_selection_for_file_transfer (FMDirectoryView   *view);
@@ -208,7 +208,7 @@ get_default_sort_order (BaulFile *file, gboolean *reversed)
 }
 
 static void
-list_selection_changed_callback (GtkTreeSelection *selection, gpointer user_data)
+list_selection_changed_callback (CtkTreeSelection *selection, gpointer user_data)
 {
     FMDirectoryView *view;
 
@@ -220,16 +220,16 @@ list_selection_changed_callback (GtkTreeSelection *selection, gpointer user_data
 /* Move these to eel? */
 
 static void
-tree_selection_foreach_set_boolean (GtkTreeModel *model,
-                                    GtkTreePath *path,
-                                    GtkTreeIter *iter,
+tree_selection_foreach_set_boolean (CtkTreeModel *model,
+                                    CtkTreePath *path,
+                                    CtkTreeIter *iter,
                                     gpointer callback_data)
 {
     * (gboolean *) callback_data = TRUE;
 }
 
 static gboolean
-tree_selection_not_empty (GtkTreeSelection *selection)
+tree_selection_not_empty (CtkTreeSelection *selection)
 {
     gboolean not_empty;
 
@@ -241,7 +241,7 @@ tree_selection_not_empty (GtkTreeSelection *selection)
 }
 
 static gboolean
-tree_view_has_selection (GtkTreeView *view)
+tree_view_has_selection (CtkTreeView *view)
 {
     return tree_selection_not_empty (ctk_tree_view_get_selection (view));
 }
@@ -328,9 +328,9 @@ static void
 fm_list_view_did_not_drag (FMListView *view,
                            GdkEventButton *event)
 {
-    GtkTreeView *tree_view;
-    GtkTreeSelection *selection;
-    GtkTreePath *path;
+    CtkTreeView *tree_view;
+    CtkTreeSelection *selection;
+    CtkTreePath *path;
 
     tree_view = view->details->tree_view;
     selection = ctk_tree_view_get_selection (tree_view);
@@ -372,14 +372,14 @@ fm_list_view_did_not_drag (FMListView *view,
 }
 
 static void
-drag_data_get_callback (GtkWidget *widget,
+drag_data_get_callback (CtkWidget *widget,
                         GdkDragContext *context,
-                        GtkSelectionData *selection_data,
+                        CtkSelectionData *selection_data,
                         guint info,
                         guint time)
 {
-    GtkTreeView *tree_view;
-    GtkTreeModel *model;
+    CtkTreeView *tree_view;
+    CtkTreeModel *model;
     GList *ref_list;
 
     tree_view = GTK_TREE_VIEW (widget);
@@ -407,14 +407,14 @@ drag_data_get_callback (GtkWidget *widget,
 }
 
 static void
-filtered_selection_foreach (GtkTreeModel *model,
-                            GtkTreePath *path,
-                            GtkTreeIter *iter,
+filtered_selection_foreach (CtkTreeModel *model,
+                            CtkTreePath *path,
+                            CtkTreeIter *iter,
                             gpointer data)
 {
     struct SelectionForeachData *selection_data;
-    GtkTreeIter parent;
-    GtkTreeIter child;
+    CtkTreeIter parent;
+    CtkTreeIter child;
 
     selection_data = data;
 
@@ -438,7 +438,7 @@ filtered_selection_foreach (GtkTreeModel *model,
 }
 
 static GList *
-get_filtered_selection_refs (GtkTreeView *tree_view)
+get_filtered_selection_refs (CtkTreeView *tree_view)
 {
     struct SelectionForeachData selection_data;
 
@@ -466,8 +466,8 @@ stop_drag_check (FMListView *view)
 static cairo_surface_t *
 get_drag_surface (FMListView *view)
 {
-    GtkTreePath *path;
-    GtkTreeIter iter;
+    CtkTreePath *path;
+    CtkTreeIter iter;
     cairo_surface_t *ret;
     GdkRectangle cell_area;
 
@@ -478,7 +478,7 @@ get_drag_surface (FMListView *view)
                                        view->details->drag_y,
                                        &path, NULL, NULL, NULL))
     {
-        GtkTreeModel *model;
+        CtkTreeModel *model;
 
         model = ctk_tree_view_get_model (view->details->tree_view);
         ctk_tree_model_get_iter (model, &iter, path);
@@ -499,7 +499,7 @@ get_drag_surface (FMListView *view)
 }
 
 static void
-drag_begin_callback (GtkWidget *widget,
+drag_begin_callback (CtkWidget *widget,
                      GdkDragContext *context,
                      FMListView *view)
 {
@@ -527,7 +527,7 @@ drag_begin_callback (GtkWidget *widget,
 }
 
 static gboolean
-motion_notify_callback (GtkWidget *widget,
+motion_notify_callback (CtkWidget *widget,
                         GdkEventMotion *event,
                         gpointer callback_data)
 {
@@ -542,7 +542,7 @@ motion_notify_callback (GtkWidget *widget,
 
     if (click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE)
     {
-        GtkTreePath *old_hover_path;
+        CtkTreePath *old_hover_path;
 
         old_hover_path = view->details->hover_path;
         ctk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget),
@@ -596,7 +596,7 @@ motion_notify_callback (GtkWidget *widget,
 }
 
 static gboolean
-leave_notify_callback (GtkWidget *widget,
+leave_notify_callback (CtkWidget *widget,
                        GdkEventCrossing *event,
                        gpointer callback_data)
 {
@@ -615,7 +615,7 @@ leave_notify_callback (GtkWidget *widget,
 }
 
 static gboolean
-enter_notify_callback (GtkWidget *widget,
+enter_notify_callback (CtkWidget *widget,
                        GdkEventCrossing *event,
                        gpointer callback_data)
 {
@@ -645,7 +645,7 @@ enter_notify_callback (GtkWidget *widget,
 }
 
 static void
-do_popup_menu (GtkWidget *widget, FMListView *view, GdkEventButton *event)
+do_popup_menu (CtkWidget *widget, FMListView *view, GdkEventButton *event)
 {
     if (tree_view_has_selection (GTK_TREE_VIEW (widget)))
     {
@@ -658,14 +658,14 @@ do_popup_menu (GtkWidget *widget, FMListView *view, GdkEventButton *event)
 }
 
 static gboolean
-button_press_callback (GtkWidget *widget, GdkEventButton *event, gpointer callback_data)
+button_press_callback (CtkWidget *widget, GdkEventButton *event, gpointer callback_data)
 {
     FMListView *view;
-    GtkTreeView *tree_view;
-    GtkTreePath *path;
+    CtkTreeView *tree_view;
+    CtkTreePath *path;
     gboolean call_parent;
-    GtkTreeSelection *selection;
-    GtkWidgetClass *tree_view_class;
+    CtkTreeSelection *selection;
+    CtkWidgetClass *tree_view_class;
     gint64 current_time;
     static gint64 last_click_time = 0;
     static int click_count = 0;
@@ -729,7 +729,7 @@ button_press_callback (GtkWidget *widget, GdkEventButton *event, gpointer callba
                               "horizontal-separator", &horizontal_separator,
                               NULL);
         /* TODO we should not hardcode this extra padding. It is
-         * EXPANDER_EXTRA_PADDING from GtkTreeView.
+         * EXPANDER_EXTRA_PADDING from CtkTreeView.
          */
         expander_size += 4;
         on_expander = (event->x <= horizontal_separator / 2 +
@@ -816,7 +816,7 @@ button_press_callback (GtkWidget *widget, GdkEventButton *event, gpointer callba
                     call_parent = FALSE;
                     if ((event->state & GDK_SHIFT_MASK) != 0)
                     {
-                        GtkTreePath *cursor;
+                        CtkTreePath *cursor;
                         ctk_tree_view_get_cursor (tree_view, &cursor, NULL);
                         if (cursor != NULL)
                         {
@@ -840,7 +840,7 @@ button_press_callback (GtkWidget *widget, GdkEventButton *event, gpointer callba
                     l = selected_rows;
                     while (l != NULL)
                     {
-                        GtkTreePath *p = l->data;
+                        CtkTreePath *p = l->data;
                         l = l->next;
                         ctk_tree_selection_select_path (selection, p);
                         ctk_tree_path_free (p);
@@ -909,7 +909,7 @@ button_press_callback (GtkWidget *widget, GdkEventButton *event, gpointer callba
 }
 
 static gboolean
-button_release_callback (GtkWidget *widget,
+button_release_callback (CtkWidget *widget,
                          GdkEventButton *event,
                          gpointer callback_data)
 {
@@ -930,7 +930,7 @@ button_release_callback (GtkWidget *widget,
 }
 
 static gboolean
-popup_menu_callback (GtkWidget *widget, gpointer callback_data)
+popup_menu_callback (CtkWidget *widget, gpointer callback_data)
 {
     FMListView *view;
 
@@ -948,7 +948,7 @@ subdirectory_done_loading_callback (BaulDirectory *directory, FMListView *view)
 }
 
 static void
-row_expanded_callback (GtkTreeView *treeview, GtkTreeIter *iter, GtkTreePath *path, gpointer callback_data)
+row_expanded_callback (CtkTreeView *treeview, CtkTreeIter *iter, CtkTreePath *path, gpointer callback_data)
 {
     FMListView *view;
     BaulDirectory *directory;
@@ -995,7 +995,7 @@ static gboolean
 unload_file_timeout (gpointer data)
 {
     struct UnloadDelayData *unload_data = data;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (unload_data->view != NULL)
     {
@@ -1008,7 +1008,7 @@ unload_file_timeout (gpointer data)
                 unload_data->directory,
                 &iter))
         {
-            GtkTreePath *path;
+            CtkTreePath *path;
 
             path = ctk_tree_model_get_path (GTK_TREE_MODEL (model), &iter);
 
@@ -1033,14 +1033,14 @@ unload_file_timeout (gpointer data)
 }
 
 static void
-row_collapsed_callback (GtkTreeView *treeview, GtkTreeIter *iter, GtkTreePath *path, gpointer callback_data)
+row_collapsed_callback (CtkTreeView *treeview, CtkTreeIter *iter, CtkTreePath *path, gpointer callback_data)
 {
     FMListView *view;
     BaulFile *file;
     BaulDirectory *directory;
-    GtkTreeIter parent;
+    CtkTreeIter parent;
     struct UnloadDelayData *unload_data;
-    GtkTreeModel *model;
+    CtkTreeModel *model;
     char *uri;
 
     view = FM_LIST_VIEW (callback_data);
@@ -1079,8 +1079,8 @@ row_collapsed_callback (GtkTreeView *treeview, GtkTreeIter *iter, GtkTreePath *p
 }
 
 static void
-row_activated_callback (GtkTreeView *treeview, GtkTreePath *path,
-                        GtkTreeViewColumn *column, FMListView *view)
+row_activated_callback (CtkTreeView *treeview, CtkTreePath *path,
+                        CtkTreeViewColumn *column, FMListView *view)
 {
     activate_selected_items (view);
 }
@@ -1104,14 +1104,14 @@ subdirectory_unloaded_callback (FMListModel *model,
 }
 
 static gboolean
-key_press_callback (GtkWidget *widget, GdkEventKey *event, gpointer callback_data)
+key_press_callback (CtkWidget *widget, GdkEventKey *event, gpointer callback_data)
 {
     FMDirectoryView *view;
     FMListView *listview;
     GdkEventButton button_event = { 0 };
     gboolean handled;
-    GtkTreeView *tree_view;
-    GtkTreePath *path;
+    CtkTreeView *tree_view;
+    CtkTreePath *path;
 
     tree_view = GTK_TREE_VIEW (widget);
 
@@ -1225,14 +1225,14 @@ fm_list_view_reveal_selection (FMDirectoryView *view)
     {
         FMListView *list_view;
         BaulFile *file;
-        GtkTreeIter iter;
+        CtkTreeIter iter;
 
         list_view = FM_LIST_VIEW (view);
         file = selection->data;
 
         if (fm_list_model_get_first_iter_for_file (list_view->details->model, file, &iter))
         {
-            GtkTreePath *path;
+            CtkTreePath *path;
 
             path = ctk_tree_model_get_path (GTK_TREE_MODEL (list_view->details->model), &iter);
 
@@ -1246,11 +1246,11 @@ fm_list_view_reveal_selection (FMDirectoryView *view)
 }
 
 static gboolean
-sort_criterion_changes_due_to_user (GtkTreeView *tree_view)
+sort_criterion_changes_due_to_user (CtkTreeView *tree_view)
 {
     GList *columns, *p;
     gboolean ret;
-    GtkTreeViewColumn *column = NULL;
+    CtkTreeViewColumn *column = NULL;
     GSignalInvocationHint *ihint = NULL;
 
     ret = FALSE;
@@ -1274,12 +1274,12 @@ sort_criterion_changes_due_to_user (GtkTreeView *tree_view)
 }
 
 static void
-sort_column_changed_callback (GtkTreeSortable *sortable,
+sort_column_changed_callback (CtkTreeSortable *sortable,
                               FMListView *view)
 {
     BaulFile *file;
     gint sort_column_id, default_sort_column_id;
-    GtkSortType reversed;
+    CtkSortType reversed;
     GQuark sort_attr, default_sort_attr;
     char *reversed_attr, *default_reversed_attr;
     gboolean default_sort_reversed;
@@ -1335,12 +1335,12 @@ sort_column_changed_callback (GtkTreeSortable *sortable,
 }
 
 static void
-cell_renderer_editing_started_cb (GtkCellRenderer *renderer,
-                                  GtkCellEditable *editable,
+cell_renderer_editing_started_cb (CtkCellRenderer *renderer,
+                                  CtkCellEditable *editable,
                                   const gchar *path_str,
                                   FMListView *list_view)
 {
-    GtkEntry *entry;
+    CtkEntry *entry;
 
     entry = GTK_ENTRY (editable);
     list_view->details->editable_widget = editable;
@@ -1357,7 +1357,7 @@ cell_renderer_editing_started_cb (GtkCellRenderer *renderer,
 }
 
 static void
-cell_renderer_editing_canceled (GtkCellRendererText *cell,
+cell_renderer_editing_canceled (CtkCellRendererText *cell,
                                 FMListView          *view)
 {
     view->details->editable_widget = NULL;
@@ -1366,14 +1366,14 @@ cell_renderer_editing_canceled (GtkCellRendererText *cell,
 }
 
 static void
-cell_renderer_edited (GtkCellRendererText *cell,
+cell_renderer_edited (CtkCellRendererText *cell,
                       const char          *path_str,
                       const char          *new_text,
                       FMListView          *view)
 {
-    GtkTreePath *path;
+    CtkTreePath *path;
     BaulFile *file;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     view->details->editable_widget = NULL;
 
@@ -1434,7 +1434,7 @@ get_root_uri_callback (BaulTreeViewDragDest *dest,
 
 static BaulFile *
 get_file_for_path_callback (BaulTreeViewDragDest *dest,
-                            GtkTreePath *path,
+                            CtkTreePath *path,
                             gpointer user_data)
 {
     FMListView *view;
@@ -1513,7 +1513,7 @@ apply_columns_settings (FMListView *list_view,
     BaulFile *file;
     GList *old_view_columns, *view_columns;
     GHashTable *visible_columns_hash;
-    GtkTreeViewColumn *prev_view_column;
+    CtkTreeViewColumn *prev_view_column;
     GList *l;
     int i;
 
@@ -1547,7 +1547,7 @@ apply_columns_settings (FMListView *list_view,
 
         if (g_hash_table_lookup (visible_columns_hash, lowercase) != NULL)
         {
-            GtkTreeViewColumn *view_column;
+            CtkTreeViewColumn *view_column;
 
             view_column = g_hash_table_lookup (list_view->details->columns, name);
             if (view_column != NULL)
@@ -1593,10 +1593,10 @@ apply_columns_settings (FMListView *list_view,
 }
 
 static void
-filename_cell_data_func (GtkTreeViewColumn *column,
-                         GtkCellRenderer   *renderer,
-                         GtkTreeModel      *model,
-                         GtkTreeIter       *iter,
+filename_cell_data_func (CtkTreeViewColumn *column,
+                         CtkCellRenderer   *renderer,
+                         CtkTreeModel      *model,
+                         CtkTreeIter       *iter,
                          FMListView        *view)
 {
     char *text;
@@ -1608,7 +1608,7 @@ filename_cell_data_func (GtkTreeViewColumn *column,
 
     if (click_policy_auto_value == BAUL_CLICK_POLICY_SINGLE)
     {
-        GtkTreePath *path;
+        CtkTreePath *path;
 
         path = ctk_tree_model_get_path (model, iter);
 
@@ -1637,7 +1637,7 @@ filename_cell_data_func (GtkTreeViewColumn *column,
 }
 
 static gboolean
-focus_in_event_callback (GtkWidget *widget, GdkEventFocus *event, gpointer user_data)
+focus_in_event_callback (CtkWidget *widget, GdkEventFocus *event, gpointer user_data)
 {
     BaulWindowSlotInfo *slot_info;
     FMListView *list_view = FM_LIST_VIEW (user_data);
@@ -1659,9 +1659,9 @@ get_icon_scale_callback (FMListModel *model,
 static void
 create_and_set_up_tree_view (FMListView *view)
 {
-    GtkCellRenderer *cell;
-    GtkTreeViewColumn *column;
-    GtkBindingSet *binding_set;
+    CtkCellRenderer *cell;
+    CtkTreeViewColumn *column;
+    CtkBindingSet *binding_set;
     AtkObject *atk_obj;
     GList *baul_columns;
     GList *l;
@@ -1778,12 +1778,12 @@ create_and_set_up_tree_view (FMListView *view)
 
             /* Create the file name column */
             cell = ctk_cell_renderer_pixbuf_new ();
-            view->details->pixbuf_cell = (GtkCellRendererPixbuf *)cell;
+            view->details->pixbuf_cell = (CtkCellRendererPixbuf *)cell;
 
             view->details->file_name_column = ctk_tree_view_column_new ();
             ctk_tree_view_column_set_expand (view->details->file_name_column, TRUE);
 
-            GtkStyleContext *context;
+            CtkStyleContext *context;
             context = ctk_widget_get_style_context (GTK_WIDGET(view));
             font_size = PANGO_PIXELS (pango_font_description_get_size (
                 ctk_style_context_get_font (context, GTK_STATE_FLAG_NORMAL)));
@@ -1813,14 +1813,14 @@ create_and_set_up_tree_view (FMListView *view)
                         "ellipsize", PANGO_ELLIPSIZE_END,
                         "ellipsize-set", TRUE,
                         NULL);
-            view->details->file_name_cell = (GtkCellRendererText *)cell;
+            view->details->file_name_cell = (CtkCellRendererText *)cell;
             g_signal_connect (cell, "edited", G_CALLBACK (cell_renderer_edited), view);
             g_signal_connect (cell, "editing-canceled", G_CALLBACK (cell_renderer_editing_canceled), view);
             g_signal_connect (cell, "editing-started", G_CALLBACK (cell_renderer_editing_started_cb), view);
 
             ctk_tree_view_column_pack_start (view->details->file_name_column, cell, TRUE);
             ctk_tree_view_column_set_cell_data_func (view->details->file_name_column, cell,
-                    (GtkTreeCellDataFunc) filename_cell_data_func,
+                    (CtkTreeCellDataFunc) filename_cell_data_func,
                     view, NULL);
         }
         else
@@ -2003,9 +2003,9 @@ set_sort_order_from_metadata_and_preferences (FMListView *list_view)
 }
 
 static gboolean
-list_view_changed_foreach (GtkTreeModel *model,
-                           GtkTreePath  *path,
-                           GtkTreeIter  *iter,
+list_view_changed_foreach (CtkTreeModel *model,
+                           CtkTreePath  *path,
+                           CtkTreeIter  *iter,
                            gpointer      data)
 {
     ctk_tree_model_row_changed (model, path, iter);
@@ -2063,7 +2063,7 @@ fm_list_view_begin_loading (FMDirectoryView *view)
 static void
 stop_cell_editing (FMListView *list_view)
 {
-    GtkTreeViewColumn *column;
+    CtkTreeViewColumn *column;
 
     /* Stop an ongoing rename to commit the name changes when the user
      * changes directories without exiting cell edit mode. It also prevents
@@ -2124,7 +2124,7 @@ static void
 fm_list_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
     FMListView *listview;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     listview = FM_LIST_VIEW (view);
 
@@ -2140,7 +2140,7 @@ fm_list_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory 
          */
         if (fm_list_model_get_tree_iter_from_file (listview->details->model, file, directory, &iter))
         {
-            GtkTreePath *file_path;
+            CtkTreePath *file_path;
 
             file_path = ctk_tree_model_get_path (GTK_TREE_MODEL (listview->details->model), &iter);
             ctk_tree_view_scroll_to_cell (listview->details->tree_view,
@@ -2154,14 +2154,14 @@ fm_list_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory 
     }
 }
 
-static GtkWidget *
+static CtkWidget *
 fm_list_view_get_background_widget (FMDirectoryView *view)
 {
     return GTK_WIDGET (view);
 }
 
 static void
-fm_list_view_get_selection_foreach_func (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+fm_list_view_get_selection_foreach_func (CtkTreeModel *model, CtkTreePath *path, CtkTreeIter *iter, gpointer data)
 {
     GList **list;
     BaulFile *file;
@@ -2192,11 +2192,11 @@ fm_list_view_get_selection (FMDirectoryView *view)
 }
 
 static void
-fm_list_view_get_selection_for_file_transfer_foreach_func (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+fm_list_view_get_selection_for_file_transfer_foreach_func (CtkTreeModel *model, CtkTreePath *path, CtkTreeIter *iter, gpointer data)
 {
     BaulFile *file;
     struct SelectionForeachData *selection_data;
-    GtkTreeIter parent, child;
+    CtkTreeIter parent, child;
 
     selection_data = data;
 
@@ -2278,12 +2278,12 @@ fm_list_view_end_file_changes (FMDirectoryView *view)
 static void
 fm_list_view_remove_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
 {
-    GtkTreePath *path;
-    GtkTreeIter iter;
-    GtkTreeIter temp_iter;
-    GtkTreeRowReference* row_reference;
+    CtkTreePath *path;
+    CtkTreeIter iter;
+    CtkTreeIter temp_iter;
+    CtkTreeRowReference* row_reference;
     FMListView *list_view;
-    GtkTreeModel* tree_model;
+    CtkTreeModel* tree_model;
 
     path = NULL;
     row_reference = NULL;
@@ -2292,8 +2292,8 @@ fm_list_view_remove_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *
 
     if (fm_list_model_get_tree_iter_from_file (list_view->details->model, file, directory, &iter))
     {
-        GtkTreePath *file_path;
-        GtkTreeSelection *selection;
+        CtkTreePath *file_path;
+        CtkTreeSelection *selection;
 
         selection = ctk_tree_view_get_selection (list_view->details->tree_view);
         file_path = ctk_tree_model_get_path (tree_model, &iter);
@@ -2348,7 +2348,7 @@ static void
 fm_list_view_set_selection (FMDirectoryView *view, GList *selection)
 {
     FMListView *list_view;
-    GtkTreeSelection *tree_selection;
+    CtkTreeSelection *tree_selection;
     GList *node;
     GList *iters, *l;
     BaulFile *file = NULL;
@@ -2368,7 +2368,7 @@ fm_list_view_set_selection (FMDirectoryView *view, GList *selection)
         for (l = iters; l != NULL; l = l->next)
         {
             ctk_tree_selection_select_iter (tree_selection,
-                                            (GtkTreeIter *)l->data);
+                                            (CtkTreeIter *)l->data);
         }
     	g_list_free_full (iters, g_free);
     }
@@ -2381,7 +2381,7 @@ static void
 fm_list_view_invert_selection (FMDirectoryView *view)
 {
     FMListView *list_view;
-    GtkTreeSelection *tree_selection;
+    CtkTreeSelection *tree_selection;
     GList *node;
     GList *iters, *l;
     BaulFile *file = NULL;
@@ -2405,7 +2405,7 @@ fm_list_view_invert_selection (FMDirectoryView *view)
         for (l = iters; l != NULL; l = l->next)
         {
             ctk_tree_selection_unselect_iter (tree_selection,
-                                              (GtkTreeIter *)l->data);
+                                              (CtkTreeIter *)l->data);
         }
     	g_list_free_full (iters, g_free);
     }
@@ -2423,7 +2423,7 @@ fm_list_view_select_all (FMDirectoryView *view)
 }
 
 static void
-column_editor_response_callback (GtkWidget *dialog,
+column_editor_response_callback (CtkWidget *dialog,
                                  int response_id,
                                  gpointer user_data)
 {
@@ -2541,13 +2541,13 @@ column_chooser_use_default_callback (BaulColumnChooser *chooser,
     g_strfreev (default_order);
 }
 
-static GtkWidget *
+static CtkWidget *
 create_column_editor (FMListView *view)
 {
-    GtkWidget *window;
-    GtkWidget *label;
-    GtkWidget *box;
-    GtkWidget *column_chooser;
+    CtkWidget *window;
+    CtkWidget *label;
+    CtkWidget *box;
+    CtkWidget *column_chooser;
     BaulFile *file;
     char *str;
     char *name;
@@ -2610,7 +2610,7 @@ create_column_editor (FMListView *view)
 }
 
 static void
-action_visible_columns_callback (GtkAction *action,
+action_visible_columns_callback (CtkAction *action,
                                  gpointer callback_data)
 {
     FMListView *list_view;
@@ -2630,7 +2630,7 @@ action_visible_columns_callback (GtkAction *action,
     }
 }
 
-static const GtkActionEntry list_view_entries[] =
+static const CtkActionEntry list_view_entries[] =
 {
     /* name, stock id */     { "Visible Columns", NULL,
         /* label, accelerator */   N_("Visible _Columns..."), NULL,
@@ -2643,8 +2643,8 @@ static void
 fm_list_view_merge_menus (FMDirectoryView *view)
 {
     FMListView *list_view;
-    GtkUIManager *ui_manager;
-    GtkActionGroup *action_group;
+    CtkUIManager *ui_manager;
+    CtkActionGroup *action_group;
     const char *ui;
 
     EEL_CALL_PARENT (FM_DIRECTORY_VIEW_CLASS, merge_menus, (view));
@@ -2675,7 +2675,7 @@ static void
 fm_list_view_unmerge_menus (FMDirectoryView *view)
 {
     FMListView *list_view;
-    GtkUIManager *ui_manager;
+    CtkUIManager *ui_manager;
 
     list_view = FM_LIST_VIEW (view);
 
@@ -2905,8 +2905,8 @@ fm_list_view_start_renaming_file (FMDirectoryView *view,
                                   gboolean select_all)
 {
     FMListView *list_view;
-    GtkTreeIter iter;
-    GtkTreePath *path;
+    CtkTreeIter iter;
+    CtkTreePath *path;
     gint start_offset, end_offset;
 
     list_view = FM_LIST_VIEW (view);
@@ -2963,7 +2963,7 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
 {
     GdkDisplay *display;
     FMListView *view;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     view = FM_LIST_VIEW (directory_view);
     display = ctk_widget_get_display (GTK_WIDGET (view));
@@ -2971,7 +2971,7 @@ fm_list_view_click_policy_changed (FMDirectoryView *directory_view)
     /* ensure that we unset the hand cursor and refresh underlined rows */
     if (click_policy_auto_value == BAUL_CLICK_POLICY_DOUBLE)
     {
-        GtkTreeView *tree;
+        CtkTreeView *tree;
 
         if (view->details->hover_path != NULL)
         {
@@ -3185,8 +3185,8 @@ static char *
 fm_list_view_get_first_visible_file (BaulView *view)
 {
     BaulFile *file;
-    GtkTreePath *path;
-    GtkTreeIter iter;
+    CtkTreePath *path;
+    CtkTreeIter iter;
     FMListView *list_view;
 
     list_view = FM_LIST_VIEW (view);
@@ -3223,8 +3223,8 @@ static void
 fm_list_view_scroll_to_file (FMListView *view,
                              BaulFile *file)
 {
-    GtkTreePath *path;
-    GtkTreeIter iter;
+    CtkTreePath *path;
+    CtkTreeIter iter;
 
     if (!fm_list_model_get_first_iter_for_file (view->details->model, file, &iter))
     {
@@ -3300,7 +3300,7 @@ static void
 real_set_is_active (FMDirectoryView *view,
                     gboolean is_active)
 {
-    GtkWidget *tree_view;
+    CtkWidget *tree_view;
     GdkRGBA color;
     GdkRGBA *c;
 
@@ -3312,7 +3312,7 @@ real_set_is_active (FMDirectoryView *view,
     }
     else
     {
-        GtkStyleContext *style;
+        CtkStyleContext *style;
 
         style = ctk_widget_get_style_context (tree_view);
 
@@ -3517,7 +3517,7 @@ fm_list_view_register (void)
     baul_view_factory_register (&fm_list_view);
 }
 
-GtkTreeView*
+CtkTreeView*
 fm_list_view_get_tree_view (FMListView *list_view)
 {
     return list_view->details->tree_view;

@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* baul-keep-last-vertical-box.c: Subclass of GtkBox that clips off
+/* baul-keep-last-vertical-box.c: Subclass of CtkBox that clips off
  				      items that don't fit, except the last one.
 
    Copyright (C) 2000 Eazel, Inc.
@@ -26,8 +26,8 @@
 #include <config.h>
 #include "baul-keep-last-vertical-box.h"
 
-static void	baul_keep_last_vertical_box_size_allocate 	  (GtkWidget 			    *widget,
-        GtkAllocation 		    *allocation);
+static void	baul_keep_last_vertical_box_size_allocate 	  (CtkWidget 			    *widget,
+        CtkAllocation 		    *allocation);
 
 G_DEFINE_TYPE (BaulKeepLastVerticalBox, baul_keep_last_vertical_box, GTK_TYPE_BOX)
 
@@ -37,9 +37,9 @@ G_DEFINE_TYPE (BaulKeepLastVerticalBox, baul_keep_last_vertical_box, GTK_TYPE_BO
 static void
 baul_keep_last_vertical_box_class_init (BaulKeepLastVerticalBoxClass *klass)
 {
-    GtkWidgetClass *widget_class;
+    CtkWidgetClass *widget_class;
 
-    widget_class = (GtkWidgetClass *) klass;
+    widget_class = (CtkWidgetClass *) klass;
 
     widget_class->size_allocate = baul_keep_last_vertical_box_size_allocate;
 }
@@ -64,7 +64,7 @@ baul_keep_last_vertical_box_init (BaulKeepLastVerticalBox *box)
  *
  * Return value: A new BaulKeepLastVerticalBox
  */
-GtkWidget *
+CtkWidget *
 baul_keep_last_vertical_box_new (gint spacing)
 {
     BaulKeepLastVerticalBox *box;
@@ -84,11 +84,11 @@ baul_keep_last_vertical_box_new (gint spacing)
 }
 
 static void
-baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
-        GtkAllocation *allocation)
+baul_keep_last_vertical_box_size_allocate (CtkWidget *widget,
+        CtkAllocation *allocation)
 {
     GList *children, *l;
-    GtkAllocation last_child_allocation, child_allocation, tiny_allocation;
+    CtkAllocation last_child_allocation, child_allocation, tiny_allocation;
 
     g_return_if_fail (BAUL_IS_KEEP_LAST_VERTICAL_BOX (widget));
     g_return_if_fail (allocation != NULL);
@@ -100,7 +100,7 @@ baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
 
     if (l != NULL)
     {
-        GtkWidget *last_child;
+        CtkWidget *last_child;
 
         last_child = l->data;
         l = l->prev;
@@ -113,7 +113,7 @@ baul_keep_last_vertical_box_size_allocate (GtkWidget *widget,
         if (last_child_allocation.y + last_child_allocation.height >
                 allocation->y + allocation->height)
         {
-            GtkWidget *child = NULL;
+            CtkWidget *child = NULL;
 
             while (l != NULL)
             {

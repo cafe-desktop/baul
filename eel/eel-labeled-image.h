@@ -26,7 +26,7 @@
  * widgets.  These internal widgets are can be a EelLabel and/or a
  * EelImage.  These internal widgets are created as needed.  That means
  * that EelLabeledImage can always be used for "free" instead of a
- * EelLabel or EelImage.  The only overhead is that of the GtkObject
+ * EelLabel or EelImage.  The only overhead is that of the CtkObject
  * machinery.
  *
  * The position of the label with respect to the image is controlled by the
@@ -38,7 +38,7 @@
  * as is available.
  *
  * LabeledImage also has x_padding/y_padding and x_alignment/y_alignment
- * attributes that behave exaclty as those in the GtkMisc class.
+ * attributes that behave exaclty as those in the CtkMisc class.
  *
  * Note that the alignments are ignored if the fill attribute is TRUE.
  */
@@ -73,7 +73,7 @@ extern "C" {
     struct EelLabeledImage
     {
         /* Superclass */
-        GtkContainer container;
+        CtkContainer container;
 
         /* Private things */
         EelLabeledImagePrivate *details;
@@ -81,20 +81,20 @@ extern "C" {
 
     struct EelLabeledImageClass
     {
-        GtkContainerClass parent_class;
+        CtkContainerClass parent_class;
 
         void (*activate) (EelLabeledImage *image);
     };
 
-    /* Public GtkLabeledImage methods */
+    /* Public CtkLabeledImage methods */
     GType           eel_labeled_image_get_type                         (void);
-    GtkWidget *     eel_labeled_image_new                              (const char              *text,
+    CtkWidget *     eel_labeled_image_new                              (const char              *text,
             GdkPixbuf               *pixbuf);
-    GtkWidget *     eel_labeled_image_new_from_file_name               (const char              *text,
+    CtkWidget *     eel_labeled_image_new_from_file_name               (const char              *text,
             const char              *pixbuf_file_name);
     void            eel_labeled_image_set_label_position               (EelLabeledImage         *labeled_image,
-            GtkPositionType          label_position);
-    GtkPositionType eel_labeled_image_get_label_position               (const EelLabeledImage   *labeled_image);
+            CtkPositionType          label_position);
+    CtkPositionType eel_labeled_image_get_label_position               (const EelLabeledImage   *labeled_image);
     void            eel_labeled_image_set_show_label                   (EelLabeledImage         *labeled_image,
             gboolean                 show_label);
     gboolean        eel_labeled_image_get_show_label                   (const EelLabeledImage   *labeled_image);
@@ -127,22 +127,22 @@ extern "C" {
             gboolean                 selected);
     gboolean        eel_labeled_image_get_selected                     (EelLabeledImage         *labeled_image);
 
-    /* Functions for creating stock GtkButtons with a labeled image child */
-    GtkWidget *     eel_labeled_image_button_new                       (const char              *text,
+    /* Functions for creating stock CtkButtons with a labeled image child */
+    CtkWidget *     eel_labeled_image_button_new                       (const char              *text,
             GdkPixbuf               *pixbuf);
-    GtkWidget *     eel_labeled_image_button_new_from_file_name        (const char              *text,
+    CtkWidget *     eel_labeled_image_button_new_from_file_name        (const char              *text,
             const char              *pixbuf_file_name);
-    GtkWidget *     eel_labeled_image_toggle_button_new                (const char              *text,
+    CtkWidget *     eel_labeled_image_toggle_button_new                (const char              *text,
             GdkPixbuf               *pixbuf);
-    GtkWidget *     eel_labeled_image_toggle_button_new_from_file_name (const char              *text,
+    CtkWidget *     eel_labeled_image_toggle_button_new_from_file_name (const char              *text,
             const char              *pixbuf_file_name);
-    GtkWidget *     eel_labeled_image_check_button_new                 (const char              *text,
+    CtkWidget *     eel_labeled_image_check_button_new                 (const char              *text,
             GdkPixbuf               *pixbuf);
-    GtkWidget *     eel_labeled_image_check_button_new_from_file_name  (const char              *text,
+    CtkWidget *     eel_labeled_image_check_button_new_from_file_name  (const char              *text,
             const char              *pixbuf_file_name);
-    GtkWidget *     eel_labeled_image_radio_button_new                 (const char              *text,
+    CtkWidget *     eel_labeled_image_radio_button_new                 (const char              *text,
             GdkPixbuf               *pixbuf);
-    GtkWidget *     eel_labeled_image_radio_button_new_from_file_name  (const char              *text,
+    CtkWidget *     eel_labeled_image_radio_button_new_from_file_name  (const char              *text,
             const char              *pixbuf_file_name);
 
     /* These are proxies for methods in EelImage and EelLabel */

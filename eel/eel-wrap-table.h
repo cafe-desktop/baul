@@ -51,7 +51,7 @@ extern "C" {
     struct EelWrapTable
     {
         /* Superclass */
-        GtkContainer container;
+        CtkContainer container;
 
         /* Private things */
         EelWrapTablePrivate *details;
@@ -59,7 +59,7 @@ extern "C" {
 
     struct EelWrapTableClass
     {
-        GtkContainerClass parent_class;
+        CtkContainerClass parent_class;
     };
 
     typedef enum
@@ -69,16 +69,16 @@ extern "C" {
         EEL_JUSTIFICATION_END
     } EelJustification;
 
-    /* Public GtkWrapTable methods */
+    /* Public CtkWrapTable methods */
     GType            eel_wrap_table_get_type                  (void);
-    GtkWidget *      eel_wrap_table_new                       (gboolean            homogeneous);
+    CtkWidget *      eel_wrap_table_new                       (gboolean            homogeneous);
     void             eel_wrap_table_set_x_spacing             (EelWrapTable       *wrap_table,
             guint               x_spacing);
     guint            eel_wrap_table_get_x_spacing             (const EelWrapTable *wrap_table);
     void             eel_wrap_table_set_y_spacing             (EelWrapTable       *wrap_table,
             guint               y_spacing);
     guint            eel_wrap_table_get_y_spacing             (const EelWrapTable *wrap_table);
-    GtkWidget *      eel_wrap_table_find_child_at_event_point (const EelWrapTable *wrap_table,
+    CtkWidget *      eel_wrap_table_find_child_at_event_point (const EelWrapTable *wrap_table,
             int                 x,
             int                 y);
     void             eel_wrap_table_set_x_justification       (EelWrapTable       *wrap_table,
@@ -91,13 +91,13 @@ extern "C" {
             gboolean            homogeneous);
     gboolean         eel_wrap_table_get_homogeneous           (const EelWrapTable *wrap_table);
     void             eel_wrap_table_reorder_child             (EelWrapTable       *wrap_table,
-            GtkWidget          *child,
+            CtkWidget          *child,
             int                 position);
     guint            eel_wrap_table_get_num_children          (const EelWrapTable *wrap_table);
 
-    GtkWidget *      eel_scrolled_wrap_table_new              (gboolean            homogeneous,
-            GtkShadowType       shadow_type,
-            GtkWidget         **wrap_table_out);
+    CtkWidget *      eel_scrolled_wrap_table_new              (gboolean            homogeneous,
+            CtkShadowType       shadow_type,
+            CtkWidget         **wrap_table_out);
 
 #ifdef __cplusplus
 }

@@ -53,20 +53,20 @@ typedef struct _BaulLocationBarPrivate BaulLocationBarPrivate;
 
 typedef struct BaulLocationBar
 {
-    GtkHBox parent;
+    CtkHBox parent;
     BaulLocationBarPrivate *details;
 } BaulLocationBar;
 
 typedef struct
 {
-    GtkHBoxClass parent_class;
+    CtkHBoxClass parent_class;
 
-    /* for GtkBindingSet */
+    /* for CtkBindingSet */
     void         (* cancel)           (BaulLocationBar *bar);
 } BaulLocationBarClass;
 
 GType      baul_location_bar_get_type     	(void);
-GtkWidget* baul_location_bar_new          	(BaulNavigationWindowPane *pane);
+CtkWidget* baul_location_bar_new          	(BaulNavigationWindowPane *pane);
 void       baul_location_bar_set_active     (BaulLocationBar *location_bar,
         gboolean is_active);
 BaulEntry * baul_location_bar_get_entry (BaulLocationBar *location_bar);

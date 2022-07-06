@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.20.2 -->
 <interface>
   <requires lib="ctk+" version="3.0"/>
-  <object class="GtkListStore" id="extension_store">
+  <object class="CtkListStore" id="extension_store">
     <columns>
       <!-- column-name ext-state -->
       <column type="gboolean"/>
@@ -14,27 +14,27 @@
       <column type="gpointer"/>
     </columns>
   </object>
-  <object class="GtkImage" id="image1">
+  <object class="CtkImage" id="image1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">help-about</property>
   </object>
-  <object class="GtkImage" id="image2">
+  <object class="CtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">preferences-desktop</property>
   </object>
-  <object class="GtkImage" id="image3">
+  <object class="CtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">help-browser</property>
   </object>
-  <object class="GtkImage" id="image4">
+  <object class="CtkImage" id="image4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">window-close</property>
   </object>
-  <object class="GtkListStore" id="model1">
+  <object class="CtkListStore" id="model1">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -51,7 +51,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model10">
+  <object class="CtkListStore" id="model10">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -68,7 +68,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model2">
+  <object class="CtkListStore" id="model2">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -106,7 +106,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model3">
+  <object class="CtkListStore" id="model3">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -135,7 +135,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model4">
+  <object class="CtkListStore" id="model4">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -164,7 +164,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model5">
+  <object class="CtkListStore" id="model5">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -193,7 +193,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model6">
+  <object class="CtkListStore" id="model6">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -210,7 +210,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model7">
+  <object class="CtkListStore" id="model7">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -227,7 +227,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model8">
+  <object class="CtkListStore" id="model8">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -265,7 +265,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model9">
+  <object class="CtkListStore" id="model9">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -282,7 +282,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkDialog" id="file_management_dialog">
+  <object class="CtkDialog" id="file_management_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">File Management Preferences</property>
@@ -291,17 +291,17 @@
     <property name="default_height">600</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
+      <object class="CtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
+          <object class="CtkButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="helpbutton1">
+              <object class="CtkButton" id="helpbutton1">
                 <property name="label" translatable="yes">_Help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -317,7 +317,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="closebutton1">
+              <object class="CtkButton" id="closebutton1">
                 <property name="label" translatable="yes">_Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -341,25 +341,25 @@
           </packing>
         </child>
         <child>
-          <object class="GtkNotebook" id="notebook1">
+          <object class="CtkNotebook" id="notebook1">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="border_width">5</property>
             <child>
-              <object class="GtkBox" id="vbox1">
+              <object class="CtkBox" id="vbox1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">18</property>
                 <child>
-                  <object class="GtkBox" id="vbox2">
+                  <object class="CtkBox" id="vbox2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label4">
+                      <object class="CtkLabel" id="label4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Default View&lt;/b&gt;</property>
@@ -373,23 +373,23 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment2">
+                      <object class="CtkAlignment" id="alignment2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox14">
+                          <object class="CtkBox" id="vbox14">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox" id="hbox34">
+                              <object class="CtkBox" id="hbox34">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="views_label_0">
+                                  <object class="CtkLabel" id="views_label_0">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">View _new folders using:</property>
@@ -404,12 +404,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="default_view_combobox">
+                                  <object class="CtkComboBox" id="default_view_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model1</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer1"/>
+                                      <object class="CtkCellRendererText" id="renderer1"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -429,12 +429,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="hbox11">
+                              <object class="CtkBox" id="hbox11">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="views_label_1">
+                                  <object class="CtkLabel" id="views_label_1">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">_Arrange items:</property>
@@ -449,12 +449,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="sort_order_combobox">
+                                  <object class="CtkComboBox" id="sort_order_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model2</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer2"/>
+                                      <object class="CtkCellRendererText" id="renderer2"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -474,7 +474,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="sort_folders_first_checkbutton">
+                              <object class="CtkCheckButton" id="sort_folders_first_checkbutton">
                                 <property name="label" translatable="yes">Sort _folders before files</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -489,7 +489,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="hidden_files_checkbutton">
+                              <object class="CtkCheckButton" id="hidden_files_checkbutton">
                                 <property name="label" translatable="yes">Show hidden files</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -504,7 +504,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="backup_files_checkbutton">
+                              <object class="CtkCheckButton" id="backup_files_checkbutton">
                                 <property name="label" translatable="yes">Show backup files</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -535,13 +535,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox3">
+                  <object class="CtkBox" id="vbox3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label5">
+                      <object class="CtkLabel" id="label5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Icon View Defaults&lt;/b&gt;</property>
@@ -555,23 +555,23 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment1">
+                      <object class="CtkAlignment" id="alignment1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox16">
+                          <object class="CtkBox" id="vbox16">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox" id="hbox35">
+                              <object class="CtkBox" id="hbox35">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="views_label_2">
+                                  <object class="CtkLabel" id="views_label_2">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Default _zoom level:</property>
@@ -586,12 +586,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="icon_view_zoom_combobox">
+                                  <object class="CtkComboBox" id="icon_view_zoom_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model3</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer3"/>
+                                      <object class="CtkCellRendererText" id="renderer3"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -611,7 +611,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="compact_layout_checkbutton">
+                              <object class="CtkCheckButton" id="compact_layout_checkbutton">
                                 <property name="label" translatable="yes">_Use compact layout</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -626,7 +626,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="labels_beside_icons_checkbutton">
+                              <object class="CtkCheckButton" id="labels_beside_icons_checkbutton">
                                 <property name="label" translatable="yes">_Text beside icons</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -657,13 +657,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox">
+                  <object class="CtkBox" id="vbox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label">
+                      <object class="CtkLabel" id="label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Compact View Defaults&lt;/b&gt;</property>
@@ -677,23 +677,23 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment">
+                      <object class="CtkAlignment" id="alignment">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox42">
+                          <object class="CtkBox" id="vbox42">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox" id="hbox">
+                              <object class="CtkBox" id="hbox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="views_label_4">
+                                  <object class="CtkLabel" id="views_label_4">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">_Default zoom level:</property>
@@ -708,12 +708,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="compact_view_zoom_combobox">
+                                  <object class="CtkComboBox" id="compact_view_zoom_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model4</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer4"/>
+                                      <object class="CtkCellRendererText" id="renderer4"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -733,7 +733,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="all_columns_same_width_checkbutton">
+                              <object class="CtkCheckButton" id="all_columns_same_width_checkbutton">
                                 <property name="label" translatable="yes">A_ll columns have the same width</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -764,13 +764,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox4">
+                  <object class="CtkBox" id="vbox4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label6">
+                      <object class="CtkLabel" id="label6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;List View Defaults&lt;/b&gt;</property>
@@ -784,23 +784,23 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment3">
+                      <object class="CtkAlignment" id="alignment3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox15">
+                          <object class="CtkBox" id="vbox15">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox" id="hbox36">
+                              <object class="CtkBox" id="hbox36">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="views_label_3">
+                                  <object class="CtkLabel" id="views_label_3">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">D_efault zoom level:</property>
@@ -815,12 +815,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="list_view_zoom_combobox">
+                                  <object class="CtkComboBox" id="list_view_zoom_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model5</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer5"/>
+                                      <object class="CtkCellRendererText" id="renderer5"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -840,7 +840,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="show_icons_in_list_view">
+                              <object class="CtkCheckButton" id="show_icons_in_list_view">
                                 <property name="label" translatable="yes">_Show icons</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -871,13 +871,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox24">
+                  <object class="CtkBox" id="vbox24">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label25">
+                      <object class="CtkLabel" id="label25">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Tree View Defaults&lt;/b&gt;</property>
@@ -891,18 +891,18 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment4">
+                      <object class="CtkAlignment" id="alignment4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox25">
+                          <object class="CtkBox" id="vbox25">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkCheckButton" id="treeview_folders_checkbutton">
+                              <object class="CtkCheckButton" id="treeview_folders_checkbutton">
                                 <property name="label" translatable="yes">Show _only folders</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -935,7 +935,7 @@
               </object>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label1">
+              <object class="CtkLabel" id="label1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Views</property>
@@ -945,20 +945,20 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="vbox5">
+              <object class="CtkBox" id="vbox5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">18</property>
                 <child>
-                  <object class="GtkBox" id="vbox6">
+                  <object class="CtkBox" id="vbox6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label10">
+                      <object class="CtkLabel" id="label10">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Behavior&lt;/b&gt;</property>
@@ -972,17 +972,17 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment5">
+                      <object class="CtkAlignment" id="alignment5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox17">
+                          <object class="CtkBox" id="vbox17">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkRadioButton" id="single_click_radiobutton">
+                              <object class="CtkRadioButton" id="single_click_radiobutton">
                                 <property name="label" translatable="yes">_Single click to open items</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -997,7 +997,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkRadioButton" id="double_click_radiobutton">
+                              <object class="CtkRadioButton" id="double_click_radiobutton">
                                 <property name="label" translatable="yes">_Double click to open items</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1014,7 +1014,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="always_use_browser_checkbutton">
+                              <object class="CtkCheckButton" id="always_use_browser_checkbutton">
                                 <property name="label" translatable="yes">Open each _folder in its own window</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1045,13 +1045,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox7">
+                  <object class="CtkBox" id="vbox7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label12">
+                      <object class="CtkLabel" id="label12">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Executable Text Files&lt;/b&gt;</property>
@@ -1065,18 +1065,18 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment6">
+                      <object class="CtkAlignment" id="alignment6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox18">
+                          <object class="CtkBox" id="vbox18">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkRadioButton" id="scripts_execute_radiobutton">
+                              <object class="CtkRadioButton" id="scripts_execute_radiobutton">
                                 <property name="label" translatable="yes">_Run executable text files when they are opened</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1091,7 +1091,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkRadioButton" id="scripts_view_radiobutton">
+                              <object class="CtkRadioButton" id="scripts_view_radiobutton">
                                 <property name="label" translatable="yes">_View executable text files when they are opened</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1107,7 +1107,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkRadioButton" id="scripts_confirm_radiobutton">
+                              <object class="CtkRadioButton" id="scripts_confirm_radiobutton">
                                 <property name="label" translatable="yes">_Ask each time</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1139,13 +1139,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox8">
+                  <object class="CtkBox" id="vbox8">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label14">
+                      <object class="CtkLabel" id="label14">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Trash&lt;/b&gt;</property>
@@ -1159,18 +1159,18 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment7">
+                      <object class="CtkAlignment" id="alignment7">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox19">
+                          <object class="CtkBox" id="vbox19">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkCheckButton" id="trash_confirm_checkbutton">
+                              <object class="CtkCheckButton" id="trash_confirm_checkbutton">
                                 <property name="label" translatable="yes">Ask before _emptying the Trash or deleting files</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1185,7 +1185,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="trash_confirm_trash_checkbutton">
+                              <object class="CtkCheckButton" id="trash_confirm_trash_checkbutton">
                                 <property name="label" translatable="yes">Ask before moving files to the _Trash</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1200,7 +1200,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="trash_delete_checkbutton">
+                              <object class="CtkCheckButton" id="trash_delete_checkbutton">
                                 <property name="label" translatable="yes">I_nclude a Delete command that bypasses Trash</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -1236,7 +1236,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label2">
+              <object class="CtkLabel" id="label2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Behavior</property>
@@ -1247,20 +1247,20 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="vbox26">
+              <object class="CtkBox" id="vbox26">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">18</property>
                 <child>
-                  <object class="GtkBox" id="vbox27">
+                  <object class="CtkBox" id="vbox27">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label28">
+                      <object class="CtkLabel" id="label28">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Icon Captions&lt;/b&gt;</property>
@@ -1274,18 +1274,18 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment8">
+                      <object class="CtkAlignment" id="alignment8">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox28">
+                          <object class="CtkBox" id="vbox28">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkLabel" id="label29">
+                              <object class="CtkLabel" id="label29">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">Choose the order of information to appear beneath icon names. More information will appear when zooming in closer.</property>
@@ -1299,11 +1299,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="hbox28">
+                              <object class="CtkBox" id="hbox28">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkLabel" id="captions_label_0">
+                                  <object class="CtkLabel" id="captions_label_0">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                   </object>
@@ -1314,7 +1314,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBoxText" id="captions_0_combobox">
+                                  <object class="CtkComboBoxText" id="captions_0_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                   </object>
@@ -1332,11 +1332,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="hbox29">
+                              <object class="CtkBox" id="hbox29">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkLabel" id="captions_label_1">
+                                  <object class="CtkLabel" id="captions_label_1">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="use_underline">True</property>
@@ -1348,7 +1348,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBoxText" id="captions_1_combobox">
+                                  <object class="CtkComboBoxText" id="captions_1_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                   </object>
@@ -1366,11 +1366,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="hbox30">
+                              <object class="CtkBox" id="hbox30">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkLabel" id="captions_label_2">
+                                  <object class="CtkLabel" id="captions_label_2">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                   </object>
@@ -1381,7 +1381,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBoxText" id="captions_2_combobox">
+                                  <object class="CtkComboBoxText" id="captions_2_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                   </object>
@@ -1415,13 +1415,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox31">
+                  <object class="CtkBox" id="vbox31">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label34">
+                      <object class="CtkLabel" id="label34">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Date&lt;/b&gt;</property>
@@ -1435,17 +1435,17 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment9">
+                      <object class="CtkAlignment" id="alignment9">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="hbox33">
+                          <object class="CtkBox" id="hbox33">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">12</property>
                             <child>
-                              <object class="GtkLabel" id="label36">
+                              <object class="CtkLabel" id="label36">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">_Format:</property>
@@ -1459,7 +1459,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBoxText" id="date_format_combobox">
+                              <object class="CtkComboBoxText" id="date_format_combobox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -1486,13 +1486,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox32">
+                  <object class="CtkBox" id="vbox32">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label40">
+                      <object class="CtkLabel" id="label40">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Size&lt;/b&gt;</property>
@@ -1506,12 +1506,12 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment14">
+                      <object class="CtkAlignment" id="alignment14">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkCheckButton" id="use_iec_units">
+                          <object class="CtkCheckButton" id="use_iec_units">
                             <property name="label" translatable="yes">_Show file sizes with IEC units</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -1540,7 +1540,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label24">
+              <object class="CtkLabel" id="label24">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Display</property>
@@ -1551,20 +1551,20 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="vbox29">
+              <object class="CtkBox" id="vbox29">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">18</property>
                 <child>
-                  <object class="GtkBox" id="vbox30">
+                  <object class="CtkBox" id="vbox30">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label31">
+                      <object class="CtkLabel" id="label31">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;List Columns&lt;/b&gt;</property>
@@ -1578,18 +1578,18 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment21">
+                      <object class="CtkAlignment" id="alignment21">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="list_columns_vbox">
+                          <object class="CtkBox" id="list_columns_vbox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkLabel" id="label33">
+                              <object class="CtkLabel" id="label33">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">Choose the order of information to appear in the list view.</property>
@@ -1627,7 +1627,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label30">
+              <object class="CtkLabel" id="label30">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">List Columns</property>
@@ -1638,20 +1638,20 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="vbox9">
+              <object class="CtkBox" id="vbox9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">18</property>
                 <child>
-                  <object class="GtkBox" id="vbox10">
+                  <object class="CtkBox" id="vbox10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label16">
+                      <object class="CtkLabel" id="label16">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Text Files&lt;/b&gt;</property>
@@ -1665,23 +1665,23 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment10">
+                      <object class="CtkAlignment" id="alignment10">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox20">
+                          <object class="CtkBox" id="vbox20">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox" id="hbox24">
+                              <object class="CtkBox" id="hbox24">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="preview_label_0">
+                                  <object class="CtkLabel" id="preview_label_0">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Show te_xt in icons:</property>
@@ -1696,12 +1696,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="preview_text_combobox">
+                                  <object class="CtkComboBox" id="preview_text_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model6</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer6"/>
+                                      <object class="CtkCellRendererText" id="renderer6"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -1737,13 +1737,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox11">
+                  <object class="CtkBox" id="vbox11">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label18">
+                      <object class="CtkLabel" id="label18">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Other Previewable Files&lt;/b&gt;</property>
@@ -1757,23 +1757,23 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment11">
+                      <object class="CtkAlignment" id="alignment11">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox21">
+                          <object class="CtkBox" id="vbox21">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox" id="hbox20">
+                              <object class="CtkBox" id="hbox20">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="preview_label_1">
+                                  <object class="CtkLabel" id="preview_label_1">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Show _thumbnails:</property>
@@ -1788,12 +1788,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="preview_image_combobox">
+                                  <object class="CtkComboBox" id="preview_image_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model7</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer7"/>
+                                      <object class="CtkCellRendererText" id="renderer7"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -1813,12 +1813,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="hbox21">
+                              <object class="CtkBox" id="hbox21">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="preview_label_2">
+                                  <object class="CtkLabel" id="preview_label_2">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">_Only for files smaller than:</property>
@@ -1833,12 +1833,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="preview_image_size_combobox">
+                                  <object class="CtkComboBox" id="preview_image_size_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model8</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer8"/>
+                                      <object class="CtkCellRendererText" id="renderer8"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -1874,13 +1874,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox12">
+                  <object class="CtkBox" id="vbox12">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label20">
+                      <object class="CtkLabel" id="label20">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Sound Files&lt;/b&gt;</property>
@@ -1894,23 +1894,23 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment12">
+                      <object class="CtkAlignment" id="alignment12">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox22">
+                          <object class="CtkBox" id="vbox22">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox" id="hbox22">
+                              <object class="CtkBox" id="hbox22">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="preview_label_3">
+                                  <object class="CtkLabel" id="preview_label_3">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Preview _sound files:</property>
@@ -1925,12 +1925,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="preview_sound_combobox">
+                                  <object class="CtkComboBox" id="preview_sound_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model9</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer9"/>
+                                      <object class="CtkCellRendererText" id="renderer9"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -1966,13 +1966,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="vbox13">
+                  <object class="CtkBox" id="vbox13">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label22">
+                      <object class="CtkLabel" id="label22">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">&lt;b&gt;Folders&lt;/b&gt;</property>
@@ -1986,23 +1986,23 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment13">
+                      <object class="CtkAlignment" id="alignment13">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="vbox23">
+                          <object class="CtkBox" id="vbox23">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox" id="hbox23">
+                              <object class="CtkBox" id="hbox23">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkLabel" id="preview_label_4">
+                                  <object class="CtkLabel" id="preview_label_4">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Count _number of items:</property>
@@ -2017,12 +2017,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkComboBox" id="preview_folder_combobox">
+                                  <object class="CtkComboBox" id="preview_folder_combobox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">model10</property>
                                     <child>
-                                      <object class="GtkCellRendererText" id="renderer10"/>
+                                      <object class="CtkCellRendererText" id="renderer10"/>
                                       <attributes>
                                         <attribute name="text">0</attribute>
                                       </attributes>
@@ -2063,7 +2063,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label3">
+              <object class="CtkLabel" id="label3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Preview</property>
@@ -2074,26 +2074,26 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="vbox34">
+              <object class="CtkBox" id="vbox34">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkBox" id="media_handling_vbox">
+                  <object class="CtkBox" id="media_handling_vbox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkBox" id="vbox44">
+                      <object class="CtkBox" id="vbox44">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="label42">
+                          <object class="CtkLabel" id="label42">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">&lt;b&gt;Media Handling&lt;/b&gt;</property>
@@ -2107,18 +2107,18 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkAlignment" id="alignment18">
+                          <object class="CtkAlignment" id="alignment18">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="left_padding">12</property>
                             <child>
-                              <object class="GtkBox" id="vbox52">
+                              <object class="CtkBox" id="vbox52">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
-                                  <object class="GtkLabel" id="label60">
+                                  <object class="CtkLabel" id="label60">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Choose what happens when inserting media or connecting devices to the system</property>
@@ -2133,7 +2133,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkTable" id="table4">
+                                  <object class="CtkTable" id="table4">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="n_rows">5</property>
@@ -2141,7 +2141,7 @@
                                     <property name="column_spacing">6</property>
                                     <property name="row_spacing">6</property>
                                     <child>
-                                      <object class="GtkLabel" id="label44">
+                                      <object class="CtkLabel" id="label44">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">CD _Audio:</property>
@@ -2155,7 +2155,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label50">
+                                      <object class="CtkLabel" id="label50">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">_DVD Video:</property>
@@ -2171,7 +2171,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="media_audio_cdda_combobox">
+                                      <object class="CtkComboBox" id="media_audio_cdda_combobox">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                       </object>
@@ -2182,7 +2182,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="media_video_dvd_combobox">
+                                      <object class="CtkComboBox" id="media_video_dvd_combobox">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                       </object>
@@ -2196,7 +2196,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label54">
+                                      <object class="CtkLabel" id="label54">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">_Music Player:</property>
@@ -2212,7 +2212,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="media_music_player_combobox">
+                                      <object class="CtkComboBox" id="media_music_player_combobox">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                       </object>
@@ -2226,7 +2226,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label59">
+                                      <object class="CtkLabel" id="label59">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">_Photos:</property>
@@ -2242,7 +2242,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="media_dcf_combobox">
+                                      <object class="CtkComboBox" id="media_dcf_combobox">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                       </object>
@@ -2256,7 +2256,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label57">
+                                      <object class="CtkLabel" id="label57">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">_Software:</property>
@@ -2272,7 +2272,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="media_software_combobox">
+                                      <object class="CtkComboBox" id="media_software_combobox">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                       </object>
@@ -2309,13 +2309,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="vbox50">
+                      <object class="CtkBox" id="vbox50">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="label61">
+                          <object class="CtkLabel" id="label61">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">&lt;b&gt;Other Media&lt;/b&gt;</property>
@@ -2329,18 +2329,18 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkAlignment" id="alignment20">
+                          <object class="CtkAlignment" id="alignment20">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="left_padding">12</property>
                             <child>
-                              <object class="GtkBox" id="vbox51">
+                              <object class="CtkBox" id="vbox51">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
-                                  <object class="GtkLabel" id="label65">
+                                  <object class="CtkLabel" id="label65">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Less common media formats can be configured here</property>
@@ -2355,7 +2355,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkTable" id="table5">
+                                  <object class="CtkTable" id="table5">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="n_rows">2</property>
@@ -2363,7 +2363,7 @@
                                     <property name="column_spacing">6</property>
                                     <property name="row_spacing">6</property>
                                     <child>
-                                      <object class="GtkComboBox" id="media_other_type_combobox">
+                                      <object class="CtkComboBox" id="media_other_type_combobox">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                       </object>
@@ -2374,7 +2374,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label64">
+                                      <object class="CtkLabel" id="label64">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">Acti_on:</property>
@@ -2390,7 +2390,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="media_other_action_combobox">
+                                      <object class="CtkComboBox" id="media_other_action_combobox">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                       </object>
@@ -2404,7 +2404,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="label63">
+                                      <object class="CtkLabel" id="label63">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">_Type:</property>
@@ -2448,7 +2448,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="media_autorun_never_checkbutton">
+                  <object class="CtkCheckButton" id="media_autorun_never_checkbutton">
                     <property name="label" translatable="yes">_Never prompt or start programs on media insertion</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -2463,7 +2463,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="media_automount_open_checkbutton">
+                  <object class="CtkCheckButton" id="media_automount_open_checkbutton">
                     <property name="label" translatable="yes">B_rowse media when inserted</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -2483,7 +2483,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label38">
+              <object class="CtkLabel" id="label38">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Media</property>
@@ -2494,14 +2494,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="extension_manager_box">
+              <object class="CtkBox" id="extension_manager_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkLabel" id="label7">
+                  <object class="CtkLabel" id="label7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">&lt;b&gt;Available _Extensions:&lt;/b&gt;</property>
@@ -2516,12 +2516,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                  <object class="CtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkTreeView" id="extension_view">
+                      <object class="CtkTreeView" id="extension_view">
                         <property name="width_request">100</property>
                         <property name="height_request">270</property>
                         <property name="visible">True</property>
@@ -2530,15 +2530,15 @@
                         <property name="headers_visible">False</property>
                         <property name="rules_hint">True</property>
                         <child internal-child="selection">
-                          <object class="GtkTreeSelection"/>
+                          <object class="CtkTreeSelection"/>
                         </child>
                         <child>
-                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                          <object class="CtkTreeViewColumn" id="treeviewcolumn1">
                             <property name="resizable">True</property>
                             <property name="title" translatable="yes">column</property>
                             <property name="clickable">True</property>
                             <child>
-                              <object class="GtkCellRendererToggle" id="extension_toggle"/>
+                              <object class="CtkCellRendererToggle" id="extension_toggle"/>
                               <attributes>
                                 <attribute name="active">0</attribute>
                               </attributes>
@@ -2546,11 +2546,11 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                          <object class="CtkTreeViewColumn" id="treeviewcolumn2">
                             <property name="resizable">True</property>
                             <property name="title" translatable="yes">Extension</property>
                             <child>
-                              <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
+                              <object class="CtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
                               <attributes>
                                 <attribute name="surface">1</attribute>
                               </attributes>
@@ -2558,10 +2558,10 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                          <object class="CtkTreeViewColumn" id="treeviewcolumn3">
                             <property name="title" translatable="yes">column</property>
                             <child>
-                              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                              <object class="CtkCellRendererText" id="cellrenderertext1"/>
                               <attributes>
                                 <attribute name="markup">2</attribute>
                               </attributes>
@@ -2578,13 +2578,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHButtonBox" id="hbuttonbox1">
+                  <object class="CtkHButtonBox" id="hbuttonbox1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">8</property>
                     <property name="layout_style">end</property>
                     <child>
-                      <object class="GtkButton" id="about_extension_button">
+                      <object class="CtkButton" id="about_extension_button">
                         <property name="label" translatable="yes">_About Extension</property>
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
@@ -2600,7 +2600,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="configure_extension_button">
+                      <object class="CtkButton" id="configure_extension_button">
                         <property name="label" translatable="yes">C_onfigure Extension</property>
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
@@ -2628,7 +2628,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label39">
+              <object class="CtkLabel" id="label39">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Extensions</property>

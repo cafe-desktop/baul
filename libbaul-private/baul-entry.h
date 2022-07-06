@@ -1,8 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /* BaulEntry: one-line text editing widget. This consists of bug fixes
- * and other improvements to GtkEntry, and all the changes could be rolled
- * into GtkEntry some day.
+ * and other improvements to CtkEntry, and all the changes could be rolled
+ * into CtkEntry some day.
  *
  * Copyright (C) 2000 Eazel, Inc.
  *
@@ -49,20 +49,20 @@ extern "C" {
 
     typedef struct
     {
-        GtkEntry parent;
+        CtkEntry parent;
         BaulEntryDetails *details;
     } BaulEntry;
 
     typedef struct
     {
-        GtkEntryClass parent_class;
+        CtkEntryClass parent_class;
 
         void (*user_changed)      (BaulEntry *entry);
         void (*selection_changed) (BaulEntry *entry);
     } BaulEntryClass;
 
     GType       baul_entry_get_type                 (void);
-    GtkWidget  *baul_entry_new                      (void);
+    CtkWidget  *baul_entry_new                      (void);
     void        baul_entry_set_text                 (BaulEntry *entry,
             const char    *text);
     void        baul_entry_select_all               (BaulEntry *entry);

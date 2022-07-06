@@ -8561,7 +8561,7 @@ mime_type_data_changed_callback (GObject *signaller, gpointer user_data)
 }
 
 static void
-icon_theme_changed_callback (GtkIconTheme *icon_theme,
+icon_theme_changed_callback (CtkIconTheme *icon_theme,
 			     gpointer user_data)
 {
 	/* Clear all pixmap caches as the icon => pixmap lookup changed */
@@ -8577,7 +8577,7 @@ icon_theme_changed_callback (GtkIconTheme *icon_theme,
 static void
 baul_file_class_init (BaulFileClass *class)
 {
-	GtkIconTheme *icon_theme;
+	CtkIconTheme *icon_theme;
 
 	baul_file_info_getter = baul_file_get_internal;
 

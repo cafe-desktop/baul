@@ -52,7 +52,7 @@
 
 typedef struct
 {
-    GtkScrolledWindowClass parent;
+    CtkScrolledWindowClass parent;
 } BaulHistorySidebarClass;
 
 typedef struct
@@ -77,7 +77,7 @@ enum
 static void  baul_history_sidebar_iface_init        (BaulSidebarIface         *iface);
 static void  sidebar_provider_iface_init                (BaulSidebarProviderIface *iface);
 static GType baul_history_sidebar_provider_get_type (void);
-static void  baul_history_sidebar_style_updated	        (GtkWidget *widget);
+static void  baul_history_sidebar_style_updated	        (CtkWidget *widget);
 
 G_DEFINE_TYPE_WITH_CODE (BaulHistorySidebar, baul_history_sidebar, GTK_TYPE_SCROLLED_WINDOW,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
@@ -90,9 +90,9 @@ G_DEFINE_TYPE_WITH_CODE (BaulHistorySidebarProvider, baul_history_sidebar_provid
 static void
 update_history (BaulHistorySidebar *sidebar)
 {
-    GtkListStore         *store;
-    GtkTreeSelection     *selection;
-    GtkTreeIter           iter;
+    CtkListStore         *store;
+    CtkTreeSelection     *selection;
+    CtkTreeIter           iter;
     GList *l, *history;
     BaulBookmark         *bookmark = NULL;
     cairo_surface_t      *surface = NULL;
@@ -143,12 +143,12 @@ history_changed_callback (GObject *signaller,
 
 static void
 open_selected_item (BaulHistorySidebar *sidebar,
-                    GtkTreePath *path,
+                    CtkTreePath *path,
                     BaulWindowOpenFlags flags)
 {
     BaulWindowSlotInfo *slot;
-    GtkTreeModel *model;
-    GtkTreeIter iter;
+    CtkTreeModel *model;
+    CtkTreeIter iter;
     BaulBookmark *bookmark;
     GFile *location;
 
@@ -173,9 +173,9 @@ open_selected_item (BaulHistorySidebar *sidebar,
 }
 
 static void
-row_activated_callback (GtkTreeView *tree_view,
-                        GtkTreePath *path,
-                        GtkTreeViewColumn *column,
+row_activated_callback (CtkTreeView *tree_view,
+                        CtkTreePath *path,
+                        CtkTreeViewColumn *column,
                         gpointer user_data)
 {
     BaulHistorySidebar *sidebar;
@@ -187,7 +187,7 @@ row_activated_callback (GtkTreeView *tree_view,
 }
 
 static gboolean
-button_press_event_callback (GtkWidget *widget,
+button_press_event_callback (CtkWidget *widget,
                              GdkEventButton *event,
                              gpointer user_data)
 {
@@ -195,7 +195,7 @@ button_press_event_callback (GtkWidget *widget,
     {
         /* Open new tab on middle click. */
         BaulHistorySidebar *sidebar;
-        GtkTreePath *path;
+        CtkTreePath *path;
 
         sidebar = BAUL_HISTORY_SIDEBAR (user_data);
         g_assert (sidebar->tree_view == GTK_TREE_VIEW (widget));
@@ -238,11 +238,11 @@ click_policy_changed_callback (gpointer user_data)
 static void
 baul_history_sidebar_init (BaulHistorySidebar *sidebar)
 {
-    GtkTreeView       *tree_view;
-    GtkTreeViewColumn *col;
-    GtkCellRenderer   *cell;
-    GtkListStore      *store;
-    GtkTreeSelection  *selection;
+    CtkTreeView       *tree_view;
+    CtkTreeViewColumn *col;
+    CtkCellRenderer   *cell;
+    CtkListStore      *store;
+    CtkTreeSelection  *selection;
 
     tree_view = GTK_TREE_VIEW (ctk_tree_view_new ());
     ctk_tree_view_set_headers_visible (tree_view, FALSE);
@@ -379,7 +379,7 @@ baul_history_sidebar_set_parent_window (BaulHistorySidebar *sidebar,
 }
 
 static void
-baul_history_sidebar_style_updated (GtkWidget *widget)
+baul_history_sidebar_style_updated (CtkWidget *widget)
 {
     BaulHistorySidebar *sidebar;
 

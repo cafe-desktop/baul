@@ -79,8 +79,8 @@ baul_navigation_window_set_spinner_active (BaulNavigationWindow *window,
 void
 baul_navigation_window_activate_spinner (BaulNavigationWindow *window)
 {
-    GtkToolItem *item;
-    GtkWidget *spinner;
+    CtkToolItem *item;
+    CtkWidget *spinner;
 
     if (window->details->spinner != NULL)
     {
@@ -147,12 +147,12 @@ get_extension_toolbar_items (BaulNavigationWindow *window)
 void
 baul_navigation_window_load_extension_toolbar_items (BaulNavigationWindow *window)
 {
-    GtkUIManager *ui_manager;
+    CtkUIManager *ui_manager;
     GList *items;
     GList *l;
     guint merge_id;
-    GtkActionGroup *action_group;
-    GtkAction *action = NULL;
+    CtkActionGroup *action_group;
+    CtkAction *action = NULL;
     BaulMenuItem *item = NULL;
     const gchar *action_name = NULL;
 

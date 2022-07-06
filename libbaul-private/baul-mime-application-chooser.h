@@ -39,19 +39,19 @@ typedef struct _BaulMimeApplicationChooserDetails BaulMimeApplicationChooserDeta
 
 struct _BaulMimeApplicationChooser
 {
-    GtkBox parent;
+    CtkBox parent;
     BaulMimeApplicationChooserDetails *details;
 };
 
 struct _BaulMimeApplicationChooserClass
 {
-    GtkBoxClass parent_class;
+    CtkBoxClass parent_class;
 };
 
 GType      baul_mime_application_chooser_get_type (void);
-GtkWidget* baul_mime_application_chooser_new      (const char *uri,
+CtkWidget* baul_mime_application_chooser_new      (const char *uri,
         const char *mime_type);
-GtkWidget* baul_mime_application_chooser_new_for_multiple_files (GList *uris,
+CtkWidget* baul_mime_application_chooser_new_for_multiple_files (GList *uris,
         const char *mime_type);
 
 #endif /* BAUL_MIME_APPLICATION_CHOOSER_H */

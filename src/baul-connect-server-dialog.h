@@ -46,18 +46,18 @@ typedef struct _BaulConnectServerDialogPrivate BaulConnectServerDialogPrivate;
 
 struct _BaulConnectServerDialog
 {
-    GtkDialog parent;
+    CtkDialog parent;
     BaulConnectServerDialogPrivate *details;
 };
 
 struct _BaulConnectServerDialogClass
 {
-    GtkDialogClass parent_class;
+    CtkDialogClass parent_class;
 };
 
 GType baul_connect_server_dialog_get_type (void);
 
-GtkWidget* baul_connect_server_dialog_new (BaulWindow *window);
+CtkWidget* baul_connect_server_dialog_new (BaulWindow *window);
 
 void baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self,
 							    BaulApplication *application,

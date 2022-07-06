@@ -82,7 +82,7 @@
   * desktop: Force no borders on desktop items by default
   * desktop: Always draw the items label frame
   * [ci] debian build: show all the warnings of deprecated functions
-  * suppress GtkAction deprecations warnings
+  * suppress CtkAction deprecations warnings
   * update translations
   * Remove trailing whitespaces
   * src: reduce the scope of some variables
@@ -280,7 +280,7 @@
   * sidebar popup menu: show "media-eject" icon
   * Add sort criterion by reversed extension segments
   * set icon names instead stock ids in some places
-  * baul-spatial-window.c: avoid deprecated GtkImageMenuItem
+  * baul-spatial-window.c: avoid deprecated CtkImageMenuItem
   * Fix warnings from HiDPI commits
   * sidebar: Respect sidebar dimensions on HiDPI
   * HiDPI: Convert Pixbufs to Cairo Surfaces
@@ -294,16 +294,16 @@
   * canvas-container: listen to scale factor to invalidate icons
   * canvas-item: use ctk_render_icon_surface for the DnD surface
   * desktop-canvas-view: scale desktop workarea
-  * baul-side-pane.c: avoid deprecated GtkImageMenuItem
-  * baul-navigation-window-pane.c: avoid deprecated GtkImageMenuItem
+  * baul-side-pane.c: avoid deprecated CtkImageMenuItem
+  * baul-navigation-window-pane.c: avoid deprecated CtkImageMenuItem
   * baul-navigation-window-menus.c: drop unused variable
-  * baul-navigation-window-menus.c: avoid deprecated GtkImageMenuItem
-  * baul-bookmark: avoid deprecated GtkImageMenuItem
-  * baul-places-sidebar.c: avoid deprecated GtkImageMenuItem
-  * baul-emblem-sidebar.c: avoid deprecated GtkImageMenuItem
+  * baul-navigation-window-menus.c: avoid deprecated CtkImageMenuItem
+  * baul-bookmark: avoid deprecated CtkImageMenuItem
+  * baul-places-sidebar.c: avoid deprecated CtkImageMenuItem
+  * baul-emblem-sidebar.c: avoid deprecated CtkImageMenuItem
   * fm-tree-view.c: drop unused variable
   * modify code error: end the statement with a semicolon
-  * fm-tree-view.c: avoid deprecated GtkImageMenuItem
+  * fm-tree-view.c: avoid deprecated CtkImageMenuItem
   * rename 'cafe_image_menu_item...' to 'eel_image_menu_item_new_from_icon'
   * eel-editable-label.c: avoid 'append_action_signal' with stock ids
 
@@ -314,7 +314,7 @@
   * avoid 'ctk_file_chooser_dialog_new' with stock ids
   * avoid ctk_dialog_new_with_buttons with stock ids
   * avoid ctk_dialog_add_buttons with stock ids
-  * baul-file-management-properties.ui: avoid deprecated GtkVBox and GtkHBox
+  * baul-file-management-properties.ui: avoid deprecated CtkVBox and CtkHBox
   * baul-bookmarks-window.ui: avoid deprecated:
   * rename cafe_dialog_add_button to eel_dialog_add_button
   * use development version
@@ -324,16 +324,16 @@
   * baul-file-operations: avoid ctk_dialog_add_buttons with stock ids
   * remove runtime warning in usage of baul_clipboard_set_up_editable
   * baul-file-conflict-dialog: avoid ctk_dialog_add_buttons with stock id
-  * avoid deprecated GtkButton:use-stock
+  * avoid deprecated CtkButton:use-stock
   * can selected all the search keywords with Ctrl+a. #918
   * baul-autorun: avoid ctk_dialog_add_buttons with stock ids
   * eel-editable-label.c: avoid ctk_image_menu_item_new_from_stock
   * baul-file-management-properties.ui: avoid stock properties:
   * Toolbar: find icon: use icon name instead the stock id
-  * baul-bookmarks-window.ui: avoid deprecated GtkButton:use-stock
+  * baul-bookmarks-window.ui: avoid deprecated CtkButton:use-stock
   * BAUL_TYPE_NAVIGATION_ACTION: avoid deprecated property "stock_id"
   * fix backgrounds and emblems dialog content rendering
-  * avoid deprecated GtkStock
+  * avoid deprecated CtkStock
 
 ### baul 1.20.0
 
@@ -433,7 +433,7 @@
   * Build: require libcafe-desktop >= 1.17.3
   * Move to GTK+3 (require GTK+ >= 3.14), drop GTK+2 code and --with-ctk
     build option
-  * Port from libunique to GtkApplication
+  * Port from libunique to CtkApplication
   * Implement copy queue and pausing
   * Add option for asking confirmation before moving files to trash
   * Add support for back/forward mouse buttons for directory navigation
@@ -479,7 +479,7 @@
 
 ### baul 1.16.0
 
-  * Use GtkAboutDialog instead of CafeAboutDialog
+  * Use CtkAboutDialog instead of CafeAboutDialog
   * Pathbar: always show right arrow button
   * Fix changing taskbar icon when switching between tabs with different icons
   * Fix lots of warnings when building docs for libbaul-extension

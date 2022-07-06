@@ -44,7 +44,7 @@ static void finish_rename (BaulFile *file, gboolean stop_timer, GError *error);
 void
 fm_report_error_loading_directory (BaulFile *file,
                                    GError *error,
-                                   GtkWindow *parent_window)
+                                   CtkWindow *parent_window)
 {
     char *file_name;
     char *message;
@@ -96,7 +96,7 @@ void
 fm_report_error_renaming_file (BaulFile *file,
                                const char *new_name,
                                GError *error,
-                               GtkWindow *parent_window)
+                               CtkWindow *parent_window)
 {
     char *original_name, *original_name_truncated;
     char *new_name_truncated;
@@ -170,7 +170,7 @@ fm_report_error_renaming_file (BaulFile *file,
 void
 fm_report_error_setting_group (BaulFile *file,
                                GError *error,
-                               GtkWindow *parent_window)
+                               CtkWindow *parent_window)
 {
     char *file_name;
     char *message;
@@ -216,7 +216,7 @@ fm_report_error_setting_group (BaulFile *file,
 void
 fm_report_error_setting_owner (BaulFile *file,
                                GError *error,
-                               GtkWindow *parent_window)
+                               CtkWindow *parent_window)
 {
     char *file_name;
     char *message;
@@ -239,7 +239,7 @@ fm_report_error_setting_owner (BaulFile *file,
 void
 fm_report_error_setting_permissions (BaulFile *file,
                                      GError *error,
-                                     GtkWindow *parent_window)
+                                     CtkWindow *parent_window)
 {
     char *file_name;
     char *message;

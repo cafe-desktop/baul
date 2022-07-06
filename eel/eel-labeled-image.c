@@ -68,9 +68,9 @@ enum
 /* Detail member struct */
 struct EelLabeledImagePrivate
 {
-    GtkWidget *image;
-    GtkWidget *label;
-    GtkPositionType label_position;
+    CtkWidget *image;
+    CtkWidget *label;
+    CtkPositionType label_position;
     gboolean show_label;
     gboolean show_image;
     guint spacing;
@@ -88,7 +88,7 @@ static GType         eel_labeled_image_check_button_get_type  (void);
 static GType         eel_labeled_image_radio_button_get_type  (void);
 static GType         eel_labeled_image_toggle_button_get_type (void);
 
-/* GtkWidgetClass methods */
+/* CtkWidgetClass methods */
 static GType eel_labeled_image_accessible_get_type (void);
 
 /* Private EelLabeledImage methods */
@@ -126,7 +126,7 @@ eel_labeled_image_init (EelLabeledImage *labeled_image)
 }
 
 static void
-eel_labeled_image_destroy (GtkWidget *object)
+eel_labeled_image_destroy (CtkWidget *object)
 {
     EelLabeledImage *labeled_image;
 
@@ -286,10 +286,10 @@ eel_labeled_image_get_property (GObject    *object,
     }
 }
 
-/* GtkWidgetClass methods */
+/* CtkWidgetClass methods */
 static void
-eel_labeled_image_size_request (GtkWidget *widget,
-                                GtkRequisition *requisition)
+eel_labeled_image_size_request (CtkWidget *widget,
+                                CtkRequisition *requisition)
 {
     EelLabeledImage *labeled_image;
     EelDimensions content_dimensions;
@@ -311,28 +311,28 @@ eel_labeled_image_size_request (GtkWidget *widget,
 }
 
 static void
-eel_labeled_image_get_preferred_width (GtkWidget *widget,
+eel_labeled_image_get_preferred_width (CtkWidget *widget,
                                        gint *minimum_width,
                                        gint *natural_width)
 {
-    GtkRequisition req;
+    CtkRequisition req;
     eel_labeled_image_size_request (widget, &req);
     *minimum_width = *natural_width = req.width;
 }
 
 static void
-eel_labeled_image_get_preferred_height (GtkWidget *widget,
+eel_labeled_image_get_preferred_height (CtkWidget *widget,
                                         gint *minimum_height,
                                         gint *natural_height)
 {
-    GtkRequisition req;
+    CtkRequisition req;
     eel_labeled_image_size_request (widget, &req);
     *minimum_height = *natural_height = req.height;
 }
 
 static void
-eel_labeled_image_size_allocate (GtkWidget *widget,
-                                 GtkAllocation *allocation)
+eel_labeled_image_size_allocate (CtkWidget *widget,
+                                 CtkAllocation *allocation)
 {
     EelLabeledImage *labeled_image;
     EelIRect image_bounds;
@@ -357,12 +357,12 @@ eel_labeled_image_size_allocate (GtkWidget *widget,
 }
 
 static int
-eel_labeled_image_draw (GtkWidget *widget,
+eel_labeled_image_draw (CtkWidget *widget,
                         cairo_t *cr)
 {
     EelLabeledImage *labeled_image;
     EelIRect label_bounds;
-    GtkStyleContext *context;
+    CtkStyleContext *context;
 
     g_assert (EEL_IS_LABELED_IMAGE (widget));
     g_assert (ctk_widget_get_realized (widget));
@@ -422,7 +422,7 @@ eel_labeled_image_draw (GtkWidget *widget,
 }
 
 static void
-eel_labeled_image_map (GtkWidget *widget)
+eel_labeled_image_map (CtkWidget *widget)
 {
     EelLabeledImage *labeled_image;
 
@@ -444,7 +444,7 @@ eel_labeled_image_map (GtkWidget *widget)
 }
 
 static void
-eel_labeled_image_unmap (GtkWidget *widget)
+eel_labeled_image_unmap (CtkWidget *widget)
 {
     EelLabeledImage *labeled_image;
 
@@ -458,10 +458,10 @@ eel_labeled_image_unmap (GtkWidget *widget)
     eel_ctk_container_child_unmap (GTK_CONTAINER (widget), labeled_image->details->image);
 }
 
-/* GtkContainerClass methods */
+/* CtkContainerClass methods */
 static void
-eel_labeled_image_add (GtkContainer *container,
-                       GtkWidget *child)
+eel_labeled_image_add (CtkContainer *container,
+                       CtkWidget *child)
 {
     g_assert (GTK_IS_LABEL (child) || GTK_IS_IMAGE (child));
 
@@ -469,8 +469,8 @@ eel_labeled_image_add (GtkContainer *container,
 }
 
 static void
-eel_labeled_image_remove (GtkContainer *container,
-                          GtkWidget *child)
+eel_labeled_image_remove (CtkContainer *container,
+                          CtkWidget *child)
 {
     EelLabeledImage *labeled_image;
 
@@ -494,9 +494,9 @@ eel_labeled_image_remove (GtkContainer *container,
 }
 
 static void
-eel_labeled_image_forall (GtkContainer *container,
+eel_labeled_image_forall (CtkContainer *container,
                           gboolean include_internals,
-                          GtkCallback callback,
+                          CtkCallback callback,
                           gpointer callback_data)
 {
     EelLabeledImage *labeled_image;
@@ -525,9 +525,9 @@ static void
 eel_labeled_image_class_init (EelLabeledImageClass *labeled_image_class)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS (labeled_image_class);
-    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (labeled_image_class);
-    GtkContainerClass *container_class = GTK_CONTAINER_CLASS (labeled_image_class);
-    GtkBindingSet *binding_set;
+    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (labeled_image_class);
+    CtkContainerClass *container_class = GTK_CONTAINER_CLASS (labeled_image_class);
+    CtkBindingSet *binding_set;
 
     /* GObjectClass */
     gobject_class->set_property = eel_labeled_image_set_property;
@@ -536,7 +536,7 @@ eel_labeled_image_class_init (EelLabeledImageClass *labeled_image_class)
     widget_class->destroy = eel_labeled_image_destroy;
 
 
-    /* GtkWidgetClass */
+    /* CtkWidgetClass */
     widget_class->size_allocate = eel_labeled_image_size_allocate;
     widget_class->get_preferred_width = eel_labeled_image_get_preferred_width;
     widget_class->get_preferred_height = eel_labeled_image_get_preferred_height;
@@ -548,7 +548,7 @@ eel_labeled_image_class_init (EelLabeledImageClass *labeled_image_class)
     ctk_widget_class_set_accessible_type (widget_class, eel_labeled_image_accessible_get_type ());
 
 
-    /* GtkContainerClass */
+    /* CtkContainerClass */
     container_class->add = eel_labeled_image_add;
     container_class->remove = eel_labeled_image_remove;
     container_class->forall = eel_labeled_image_forall;
@@ -677,7 +677,7 @@ static EelDimensions
 labeled_image_get_image_dimensions (const EelLabeledImage *labeled_image)
 {
     EelDimensions image_dimensions;
-    GtkRequisition image_requisition;
+    CtkRequisition image_requisition;
 
     g_assert (EEL_IS_LABELED_IMAGE (labeled_image));
 
@@ -703,7 +703,7 @@ static EelDimensions
 labeled_image_get_label_dimensions (const EelLabeledImage *labeled_image)
 {
     EelDimensions label_dimensions;
-    GtkRequisition label_requisition;
+    CtkRequisition label_requisition;
 
     g_assert (EEL_IS_LABELED_IMAGE (labeled_image));
 
@@ -793,7 +793,7 @@ eel_labeled_image_get_image_bounds (const EelLabeledImage *labeled_image)
 {
     EelDimensions image_dimensions;
     EelDimensions label_dimensions;
-    GtkRequisition image_requisition;
+    CtkRequisition image_requisition;
     EelIRect image_bounds;
     EelIRect content_bounds;
 
@@ -1278,10 +1278,10 @@ labeled_image_show_label (const EelLabeledImage *labeled_image)
  * be created as neeeded.
  *
  * Thus, using this widget in place of EelImage or EelLabel is "free" with
- * only the GtkWidget and function call overhead.
+ * only the CtkWidget and function call overhead.
  *
  */
-GtkWidget*
+CtkWidget*
 eel_labeled_image_new (const char *text,
                        GdkPixbuf *pixbuf)
 {
@@ -1313,7 +1313,7 @@ eel_labeled_image_new (const char *text,
  * NULL then the LabeledImage will show a label.
  *
  */
-GtkWidget*
+CtkWidget*
 eel_labeled_image_new_from_file_name (const char *text,
                                       const char *pixbuf_file_name)
 {
@@ -1350,7 +1350,7 @@ eel_labeled_image_new_from_file_name (const char *text,
  */
 void
 eel_labeled_image_set_label_position (EelLabeledImage *labeled_image,
-                                      GtkPositionType label_position)
+                                      CtkPositionType label_position)
 {
     g_return_if_fail (EEL_IS_LABELED_IMAGE (labeled_image));
     g_return_if_fail (label_position >= GTK_POS_LEFT);
@@ -1374,7 +1374,7 @@ eel_labeled_image_set_label_position (EelLabeledImage *labeled_image,
  *
  * Returns an enumeration indicating the position of the label with respect to the image.
  */
-GtkPositionType
+CtkPositionType
 eel_labeled_image_get_label_position (const EelLabeledImage *labeled_image)
 {
     g_return_val_if_fail (EEL_IS_LABELED_IMAGE (labeled_image), 0);
@@ -1530,7 +1530,7 @@ void
 eel_labeled_image_set_selected (EelLabeledImage *labeled_image,
                                 gboolean selected)
 {
-    GtkStateType state;
+    CtkStateType state;
     g_return_if_fail (EEL_IS_LABELED_IMAGE (labeled_image));
 
     state = selected ? GTK_STATE_FLAG_SELECTED : GTK_STATE_FLAG_NORMAL;
@@ -1604,7 +1604,7 @@ eel_labeled_image_get_spacing (const EelLabeledImage *labeled_image)
  * @x_padding: The new horizontal padding.
  *
  * Set horizontal padding for the EelLabeledImage.  The padding
- * attribute work just like that in GtkMisc.
+ * attribute work just like that in CtkMisc.
  */
 void
 eel_labeled_image_set_x_padding (EelLabeledImage *labeled_image,
@@ -1644,7 +1644,7 @@ eel_labeled_image_get_x_padding (const EelLabeledImage *labeled_image)
  * @x_padding: The new vertical padding.
  *
  * Set vertical padding for the EelLabeledImage.  The padding
- * attribute work just like that in GtkMisc.
+ * attribute work just like that in CtkMisc.
  */
 void
 eel_labeled_image_set_y_padding (EelLabeledImage *labeled_image,
@@ -1685,7 +1685,7 @@ eel_labeled_image_get_y_padding (const EelLabeledImage *labeled_image)
  *
  * Set horizontal alignment for the EelLabeledImage's content.
  * The 'content' is the union of the image and label.  The alignment
- * attribute work just like that in GtkMisc.
+ * attribute work just like that in CtkMisc.
  */
 void
 eel_labeled_image_set_x_alignment (EelLabeledImage *labeled_image,
@@ -1726,7 +1726,7 @@ eel_labeled_image_get_x_alignment (const EelLabeledImage *labeled_image)
  *
  * Set vertical alignment for the EelLabeledImage's content.
  * The 'content' is the union of the image and label.  The alignment
- * attribute work just like that in GtkMisc.
+ * attribute work just like that in CtkMisc.
  */
 void
 eel_labeled_image_set_y_alignment (EelLabeledImage *labeled_image,
@@ -1805,8 +1805,8 @@ eel_labeled_image_get_fill (const EelLabeledImage *labeled_image)
 }
 
 static void
-eel_labled_set_mnemonic_widget (GtkWidget *image_widget,
-                                GtkWidget *mnemonic_widget)
+eel_labled_set_mnemonic_widget (CtkWidget *image_widget,
+                                CtkWidget *mnemonic_widget)
 {
     EelLabeledImage *image;
 
@@ -1824,15 +1824,15 @@ eel_labled_set_mnemonic_widget (GtkWidget *image_widget,
  * @text: Text to use for label or NULL.
  * @pixbuf: Pixbuf to use for image or NULL.
  *
- * Create a stock GtkButton with a EelLabeledImage child.
+ * Create a stock CtkButton with a EelLabeledImage child.
  *
  */
-GtkWidget *
+CtkWidget *
 eel_labeled_image_button_new (const char *text,
                               GdkPixbuf *pixbuf)
 {
-    GtkWidget *button;
-    GtkWidget *labeled_image;
+    CtkWidget *button;
+    CtkWidget *labeled_image;
 
     button = g_object_new (eel_labeled_image_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new (text, pixbuf);
@@ -1848,15 +1848,15 @@ eel_labeled_image_button_new (const char *text,
  * @text: Text to use for label or NULL.
  * @pixbuf_file_name: Name of pixbuf to use for image.  Cannot be NULL.
  *
- * Create a stock GtkToggleButton with a EelLabeledImage child.
+ * Create a stock CtkToggleButton with a EelLabeledImage child.
  *
  */
-GtkWidget *
+CtkWidget *
 eel_labeled_image_button_new_from_file_name (const char *text,
         const char *pixbuf_file_name)
 {
-    GtkWidget *button;
-    GtkWidget *labeled_image;
+    CtkWidget *button;
+    CtkWidget *labeled_image;
 
     g_return_val_if_fail (pixbuf_file_name != NULL, NULL);
 
@@ -1874,15 +1874,15 @@ eel_labeled_image_button_new_from_file_name (const char *text,
  * @text: Text to use for label or NULL.
  * @pixbuf: Pixbuf to use for image or NULL.
  *
- * Create a stock GtkToggleButton with a EelLabeledImage child.
+ * Create a stock CtkToggleButton with a EelLabeledImage child.
  *
  */
-GtkWidget *
+CtkWidget *
 eel_labeled_image_toggle_button_new (const char *text,
                                      GdkPixbuf *pixbuf)
 {
-    GtkWidget *toggle_button;
-    GtkWidget *labeled_image;
+    CtkWidget *toggle_button;
+    CtkWidget *labeled_image;
 
     toggle_button = g_object_new (eel_labeled_image_toggle_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new (text, pixbuf);
@@ -1898,15 +1898,15 @@ eel_labeled_image_toggle_button_new (const char *text,
  * @text: Text to use for label or NULL.
  * @pixbuf_file_name: Name of pixbuf to use for image.  Cannot be NULL.
  *
- * Create a stock GtkToggleButton with a EelLabeledImage child.
+ * Create a stock CtkToggleButton with a EelLabeledImage child.
  *
  */
-GtkWidget *
+CtkWidget *
 eel_labeled_image_toggle_button_new_from_file_name (const char *text,
         const char *pixbuf_file_name)
 {
-    GtkWidget *toggle_button;
-    GtkWidget *labeled_image;
+    CtkWidget *toggle_button;
+    CtkWidget *labeled_image;
 
     g_return_val_if_fail (pixbuf_file_name != NULL, NULL);
 
@@ -1924,16 +1924,16 @@ eel_labeled_image_toggle_button_new_from_file_name (const char *text,
  * @text: Text to use for label or NULL.
  * @pixbuf: Pixbuf to use for image or NULL.
  *
- * Create a stock GtkToggleButton with a EelLabeledImage child.
+ * Create a stock CtkToggleButton with a EelLabeledImage child.
  *
  * Returns: the new radio button.
  */
-GtkWidget *
+CtkWidget *
 eel_labeled_image_radio_button_new (const char *text,
                                     GdkPixbuf  *pixbuf)
 {
-    GtkWidget *radio_button;
-    GtkWidget *labeled_image;
+    CtkWidget *radio_button;
+    CtkWidget *labeled_image;
 
     radio_button = g_object_new (eel_labeled_image_radio_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new (text, pixbuf);
@@ -1949,16 +1949,16 @@ eel_labeled_image_radio_button_new (const char *text,
  * @text: Text to use for label or NULL.
  * @pixbuf_file_name: Name of pixbuf to use for image.  Cannot be NULL.
  *
- * Create a stock GtkRadioButton with a EelLabeledImage child.
+ * Create a stock CtkRadioButton with a EelLabeledImage child.
  *
  * Returns: the new radio button.
  */
-GtkWidget *
+CtkWidget *
 eel_labeled_image_radio_button_new_from_file_name (const char *text,
         const char *pixbuf_file_name)
 {
-    GtkWidget *radio_button;
-    GtkWidget *labeled_image;
+    CtkWidget *radio_button;
+    CtkWidget *labeled_image;
 
     g_return_val_if_fail (pixbuf_file_name != NULL, NULL);
 
@@ -1972,7 +1972,7 @@ eel_labeled_image_radio_button_new_from_file_name (const char *text,
 }
 
 /*
- * Workaround some bugs in GtkCheckButton where the widget
+ * Workaround some bugs in CtkCheckButton where the widget
  * does not redraw properly after leave or focus out events
  *
  * The workaround is to draw a little bit more than the
@@ -1980,7 +1980,7 @@ eel_labeled_image_radio_button_new_from_file_name (const char *text,
  * widget does not properly redraw its edges.
  */
 static void
-button_leave_callback (GtkWidget *widget,
+button_leave_callback (CtkWidget *widget,
                        gpointer callback_data)
 {
     g_assert (GTK_IS_WIDGET (widget));
@@ -2006,7 +2006,7 @@ button_leave_callback (GtkWidget *widget,
 }
 
 static gint
-button_focus_out_event_callback (GtkWidget *widget,
+button_focus_out_event_callback (CtkWidget *widget,
                                  GdkEventFocus *event,
                                  gpointer callback_data)
 {
@@ -2022,15 +2022,15 @@ button_focus_out_event_callback (GtkWidget *widget,
  * @text: Text to use for label or NULL.
  * @pixbuf: Pixbuf to use for image or NULL.
  *
- * Create a stock GtkCheckButton with a EelLabeledImage child.
+ * Create a stock CtkCheckButton with a EelLabeledImage child.
  *
  */
-GtkWidget *
+CtkWidget *
 eel_labeled_image_check_button_new (const char *text,
                                     GdkPixbuf *pixbuf)
 {
-    GtkWidget *check_button;
-    GtkWidget *labeled_image;
+    CtkWidget *check_button;
+    CtkWidget *labeled_image;
 
     check_button = g_object_new (eel_labeled_image_check_button_get_type (), NULL);
     labeled_image = eel_labeled_image_new (text, pixbuf);
@@ -2039,7 +2039,7 @@ eel_labeled_image_check_button_new (const char *text,
     ctk_widget_show (labeled_image);
 
     /*
-     * Workaround some bugs in GtkCheckButton where the widget
+     * Workaround some bugs in CtkCheckButton where the widget
      * does not redraw properly after leave or focus out events
      */
     g_signal_connect (check_button, "leave",
@@ -2055,15 +2055,15 @@ eel_labeled_image_check_button_new (const char *text,
  * @text: Text to use for label or NULL.
  * @pixbuf_file_name: Name of pixbuf to use for image.  Cannot be NULL.
  *
- * Create a stock GtkCheckButton with a EelLabeledImage child.
+ * Create a stock CtkCheckButton with a EelLabeledImage child.
  *
  */
-GtkWidget *
+CtkWidget *
 eel_labeled_image_check_button_new_from_file_name (const char *text,
         const char *pixbuf_file_name)
 {
-    GtkWidget *check_button;
-    GtkWidget *labeled_image;
+    CtkWidget *check_button;
+    CtkWidget *labeled_image;
 
     g_return_val_if_fail (pixbuf_file_name != NULL, NULL);
 
@@ -2198,7 +2198,7 @@ eel_labeled_image_accessible_initialize (AtkObject *accessible,
 static EelLabeledImage *
 get_image (gpointer object)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     if (!(widget = ctk_accessible_get_widget (GTK_ACCESSIBLE (object))))
     {
@@ -2233,7 +2233,7 @@ eel_labeled_image_accessible_image_get_size (AtkImage *image,
         gint     *height)
 {
     EelLabeledImage *labeled_image;
-    GtkAllocation allocation;
+    CtkAllocation allocation;
 
     labeled_image = get_image (image);
 
@@ -2259,12 +2259,12 @@ typedef struct _EelLabeledImageAccessibleClass EelLabeledImageAccessibleClass;
 
 struct _EelLabeledImageAccessible
 {
-    GtkContainerAccessible parent;
+    CtkContainerAccessible parent;
 };
 
 struct _EelLabeledImageAccessibleClass
 {
-    GtkContainerAccessibleClass parent_class;
+    CtkContainerAccessibleClass parent_class;
 };
 
 G_DEFINE_TYPE_WITH_CODE (EelLabeledImageAccessible,
@@ -2288,7 +2288,7 @@ eel_labeled_image_accessible_init (EelLabeledImageAccessible *accessible)
 }
 
 static void
-eel_labeled_image_button_class_init (GtkWidgetClass *klass)
+eel_labeled_image_button_class_init (CtkWidgetClass *klass)
 {
 }
 
@@ -2301,13 +2301,13 @@ eel_labeled_image_button_get_type (void)
     {
         GTypeInfo info =
         {
-            sizeof (GtkButtonClass),
+            sizeof (CtkButtonClass),
             (GBaseInitFunc) NULL,
             (GBaseFinalizeFunc) NULL,
             (GClassInitFunc) eel_labeled_image_button_class_init,
             NULL, /* class_finalize */
             NULL, /* class_data */
-            sizeof (GtkButton),
+            sizeof (CtkButton),
             0, /* n_preallocs */
             (GInstanceInitFunc) NULL
         };
@@ -2329,13 +2329,13 @@ eel_labeled_image_check_button_get_type (void)
     {
         GTypeInfo info =
         {
-            sizeof (GtkCheckButtonClass),
+            sizeof (CtkCheckButtonClass),
             (GBaseInitFunc) NULL,
             (GBaseFinalizeFunc) NULL,
             (GClassInitFunc) eel_labeled_image_button_class_init,
             NULL, /* class_finalize */
             NULL, /* class_data */
-            sizeof (GtkCheckButton),
+            sizeof (CtkCheckButton),
             0, /* n_preallocs */
             (GInstanceInitFunc) NULL
         };
@@ -2357,13 +2357,13 @@ eel_labeled_image_toggle_button_get_type (void)
     {
         GTypeInfo info =
         {
-            sizeof (GtkToggleButtonClass),
+            sizeof (CtkToggleButtonClass),
             (GBaseInitFunc) NULL,
             (GBaseFinalizeFunc) NULL,
             (GClassInitFunc) eel_labeled_image_button_class_init,
             NULL, /* class_finalize */
             NULL, /* class_data */
-            sizeof (GtkToggleButton),
+            sizeof (CtkToggleButton),
             0, /* n_preallocs */
             (GInstanceInitFunc) NULL
         };
@@ -2386,13 +2386,13 @@ eel_labeled_image_radio_button_get_type (void)
     {
         GTypeInfo info =
         {
-            sizeof (GtkRadioButtonClass),
+            sizeof (CtkRadioButtonClass),
             (GBaseInitFunc) NULL,
             (GBaseFinalizeFunc) NULL,
             (GClassInitFunc) eel_labeled_image_button_class_init,
             NULL, /* class_finalize */
             NULL, /* class_data */
-            sizeof (GtkRadioButton),
+            sizeof (CtkRadioButton),
             0, /* n_preallocs */
             (GInstanceInitFunc) NULL
         };

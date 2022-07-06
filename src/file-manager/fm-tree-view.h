@@ -49,14 +49,14 @@ typedef struct FMTreeViewDetails FMTreeViewDetails;
 
 typedef struct
 {
-    GtkScrolledWindow parent;
+    CtkScrolledWindow parent;
 
     FMTreeViewDetails *details;
 } FMTreeView;
 
 typedef struct
 {
-    GtkScrolledWindowClass parent_class;
+    CtkScrolledWindowClass parent_class;
 } FMTreeViewClass;
 
 GType fm_tree_view_get_type (void);

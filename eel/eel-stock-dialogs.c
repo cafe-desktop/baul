@@ -45,13 +45,13 @@ typedef struct
 
     /* Parameters for creation of the window. */
     char *wait_message;
-    GtkWindow *parent_window;
+    CtkWindow *parent_window;
 
     /* Timer to determine when we need to create the window. */
     guint timeout_handler_id;
 
     /* Window, once it's created. */
-    GtkDialog *dialog;
+    CtkDialog *dialog;
 
     /* system time (microseconds) when dialog was created */
     gint64 dialog_creation_time;
@@ -60,7 +60,7 @@ typedef struct
 
 static GHashTable *timed_wait_hash_table;
 
-static void timed_wait_dialog_destroy_callback (GtkWidget *object, gpointer callback_data);
+static void timed_wait_dialog_destroy_callback (CtkWidget *object, gpointer callback_data);
 
 static guint
 timed_wait_hash (gconstpointer value)
@@ -86,7 +86,7 @@ timed_wait_hash_equal (gconstpointer value1, gconstpointer value2)
 }
 
 static void
-timed_wait_delayed_close_destroy_dialog_callback (GtkWidget *object, gpointer callback_data)
+timed_wait_delayed_close_destroy_dialog_callback (CtkWidget *object, gpointer callback_data)
 {
     g_source_remove (GPOINTER_TO_UINT (callback_data));
 }
@@ -162,7 +162,7 @@ timed_wait_free (TimedWait *wait)
 }
 
 static void
-timed_wait_dialog_destroy_callback (GtkWidget *object, gpointer callback_data)
+timed_wait_dialog_destroy_callback (CtkWidget *object, gpointer callback_data)
 {
     TimedWait *wait;
 
@@ -184,20 +184,20 @@ timed_wait_dialog_destroy_callback (GtkWidget *object, gpointer callback_data)
 }
 
 static void
-trash_dialog_response_callback (GtkDialog *dialog,
+trash_dialog_response_callback (CtkDialog *dialog,
                                 int response_id,
                                 TimedWait *wait)
 {
     ctk_widget_destroy (GTK_WIDGET (dialog));
 }
 
-GtkWidget*
-eel_dialog_add_button (GtkDialog   *dialog,
+CtkWidget*
+eel_dialog_add_button (CtkDialog   *dialog,
                        const gchar *button_text,
                        const gchar *icon_name,
                              gint   response_id)
 {
-    GtkWidget *button;
+    CtkWidget *button;
 
     button = ctk_button_new_with_mnemonic (button_text);
     ctk_button_set_image (GTK_BUTTON (button), ctk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON));
@@ -211,14 +211,14 @@ eel_dialog_add_button (GtkDialog   *dialog,
     return button;
 }
 
-static GtkWidget *
+static CtkWidget *
 eel_file_chooser_dialog_new_valist (const gchar          *title,
-                                    GtkWindow            *parent,
-                                    GtkFileChooserAction  action,
+                                    CtkWindow            *parent,
+                                    CtkFileChooserAction  action,
                                     const gchar          *first_button_text,
                                     va_list               varargs)
 {
-    GtkWidget *result;
+    CtkWidget *result;
     const char *button_text = first_button_text;
     gint response_id;
 
@@ -249,14 +249,14 @@ eel_file_chooser_dialog_new_valist (const gchar          *title,
     return result;
 }
 
-GtkWidget *
+CtkWidget *
 eel_file_chooser_dialog_new (const gchar          *title,
-                             GtkWindow            *parent,
-                             GtkFileChooserAction  action,
+                             CtkWindow            *parent,
+                             CtkFileChooserAction  action,
                              const gchar          *first_button_text,
                              ...)
 {
-    GtkWidget *result;
+    CtkWidget *result;
     va_list varargs;
 
     va_start (varargs, first_button_text);
@@ -272,7 +272,7 @@ static gboolean
 timed_wait_callback (gpointer callback_data)
 {
     TimedWait *wait;
-    GtkDialog *dialog;
+    CtkDialog *dialog;
     const char *button;
 
     wait = callback_data;
@@ -336,7 +336,7 @@ eel_timed_wait_start_with_duration (int duration,
                                     EelCancelCallback cancel_callback,
                                     gpointer callback_data,
                                     const char *wait_message,
-                                    GtkWindow *parent_window)
+                                    CtkWindow *parent_window)
 {
     TimedWait *wait;
 
@@ -374,7 +374,7 @@ void
 eel_timed_wait_start (EelCancelCallback cancel_callback,
                       gpointer callback_data,
                       const char *wait_message,
-                      GtkWindow *parent_window)
+                      CtkWindow *parent_window)
 {
     eel_timed_wait_start_with_duration
     (TIMED_WAIT_STANDARD_DURATION,
@@ -401,13 +401,13 @@ eel_timed_wait_stop (EelCancelCallback cancel_callback,
 }
 
 int
-eel_run_simple_dialog (GtkWidget *parent, gboolean ignore_close_box,
-                       GtkMessageType message_type, const char *primary_text,
+eel_run_simple_dialog (CtkWidget *parent, gboolean ignore_close_box,
+                       CtkMessageType message_type, const char *primary_text,
                        const char *secondary_text, ...)
 {
     va_list button_title_args;
-    GtkWidget *dialog;
-    GtkWidget *top_widget, *chosen_parent;
+    CtkWidget *dialog;
+    CtkWidget *top_widget, *chosen_parent;
     int result;
     int response_id;
 
@@ -469,14 +469,14 @@ eel_run_simple_dialog (GtkWidget *parent, gboolean ignore_close_box,
     return result;
 }
 
-static GtkDialog *
+static CtkDialog *
 create_message_dialog (const char *primary_text,
                        const char *secondary_text,
-                       GtkMessageType type,
-                       GtkButtonsType buttons_type,
-                       GtkWindow *parent)
+                       CtkMessageType type,
+                       CtkButtonsType buttons_type,
+                       CtkWindow *parent)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
 	dialog = ctk_message_dialog_new (parent,
 					 0,
@@ -492,15 +492,15 @@ create_message_dialog (const char *primary_text,
     return GTK_DIALOG (dialog);
 }
 
-static GtkDialog *
+static CtkDialog *
 show_message_dialog (const char *primary_text,
                      const char *secondary_text,
-                     GtkMessageType type,
-                     GtkButtonsType buttons_type,
+                     CtkMessageType type,
+                     CtkButtonsType buttons_type,
                      const char *details_text,
-                     GtkWindow *parent)
+                     CtkWindow *parent)
 {
-    GtkDialog *dialog;
+    CtkDialog *dialog;
 
     dialog = create_message_dialog (primary_text, secondary_text, type,
                                     buttons_type, parent);
@@ -516,13 +516,13 @@ show_message_dialog (const char *primary_text,
     return dialog;
 }
 
-static GtkDialog *
+static CtkDialog *
 show_ok_dialog (const char *primary_text,
                 const char *secondary_text,
-                GtkMessageType type,
-                GtkWindow *parent)
+                CtkMessageType type,
+                CtkWindow *parent)
 {
-    GtkDialog *dialog;
+    CtkDialog *dialog;
 
     dialog = show_message_dialog (primary_text, secondary_text, type,
                                   GTK_BUTTONS_OK, NULL, parent);
@@ -531,23 +531,23 @@ show_ok_dialog (const char *primary_text,
     return dialog;
 }
 
-GtkDialog *
+CtkDialog *
 eel_show_info_dialog (const char *primary_text,
                       const char *secondary_text,
-                      GtkWindow *parent)
+                      CtkWindow *parent)
 {
     return show_ok_dialog (primary_text,
                            secondary_text,
                            GTK_MESSAGE_INFO, parent);
 }
 
-GtkDialog *
+CtkDialog *
 eel_show_info_dialog_with_details (const char *primary_text,
                                    const char *secondary_text,
                                    const char *detailed_info,
-                                   GtkWindow *parent)
+                                   CtkWindow *parent)
 {
-    GtkDialog *dialog;
+    CtkDialog *dialog;
 
     if (detailed_info == NULL
             || strcmp (primary_text, detailed_info) == 0)
@@ -567,10 +567,10 @@ eel_show_info_dialog_with_details (const char *primary_text,
 }
 
 
-GtkDialog *
+CtkDialog *
 eel_show_warning_dialog (const char *primary_text,
                          const char *secondary_text,
-                         GtkWindow *parent)
+                         CtkWindow *parent)
 {
     return show_ok_dialog (primary_text,
                            secondary_text,
@@ -578,10 +578,10 @@ eel_show_warning_dialog (const char *primary_text,
 }
 
 
-GtkDialog *
+CtkDialog *
 eel_show_error_dialog (const char *primary_text,
                        const char *secondary_text,
-                       GtkWindow *parent)
+                       CtkWindow *parent)
 {
     return show_ok_dialog (primary_text,
                            secondary_text,
@@ -600,14 +600,14 @@ eel_show_error_dialog (const char *primary_text,
  * @no_label: The label of the "no" button.
  * @parent: The parent window for this dialog.
  */
-GtkDialog *
+CtkDialog *
 eel_show_yes_no_dialog (const char *primary_text,
                         const char *secondary_text,
                         const char *yes_label,
                         const char *no_label,
-                        GtkWindow *parent)
+                        CtkWindow *parent)
 {
-    GtkDialog *dialog = NULL;
+    CtkDialog *dialog = NULL;
     dialog = eel_create_question_dialog (primary_text,
                                          secondary_text,
                                          no_label, GTK_RESPONSE_CANCEL,
@@ -630,16 +630,16 @@ eel_show_yes_no_dialog (const char *primary_text,
  * @answer_1: The label of the 2nd-to-leftmost button (index 1)
  * @parent: The parent window for this dialog.
  */
-GtkDialog *
+CtkDialog *
 eel_create_question_dialog (const char *primary_text,
                             const char *secondary_text,
                             const char *answer_1,
                             int response_1,
                             const char *answer_2,
                             int response_2,
-                            GtkWindow *parent)
+                            CtkWindow *parent)
 {
-    GtkDialog *dialog;
+    CtkDialog *dialog;
 
     dialog = create_message_dialog (primary_text,
                                     secondary_text,

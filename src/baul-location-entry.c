@@ -55,7 +55,7 @@
 
 struct BaulLocationEntryDetails
 {
-    GtkLabel *label;
+    CtkLabel *label;
 
     char *current_directory;
     GFilenameCompleter *completer;
@@ -83,7 +83,7 @@ static gboolean
 try_to_expand_path (gpointer callback_data)
 {
     BaulLocationEntry *entry;
-    GtkEditable *editable;
+    CtkEditable *editable;
     char *suffix, *user_location, *uri_scheme;
     int user_location_length, pos;
 
@@ -129,9 +129,9 @@ try_to_expand_path (gpointer callback_data)
 }
 
 /* Until we have a more elegant solution, this is how we figure out if
- * the GtkEntry inserted characters, assuming that the return value is
- * TRUE indicating that the GtkEntry consumed the key event for some
- * reason. This is a clone of code from GtkEntry.
+ * the CtkEntry inserted characters, assuming that the return value is
+ * TRUE indicating that the CtkEntry consumed the key event for some
+ * reason. This is a clone of code from CtkEntry.
  */
 static gboolean
 entry_would_have_inserted_characters (const GdkEventKey *event)
@@ -169,7 +169,7 @@ entry_would_have_inserted_characters (const GdkEventKey *event)
 }
 
 static int
-get_editable_number_of_chars (GtkEditable *editable)
+get_editable_number_of_chars (CtkEditable *editable)
 {
     char *text;
     int length;
@@ -181,7 +181,7 @@ get_editable_number_of_chars (GtkEditable *editable)
 }
 
 static void
-set_position_and_selection_to_end (GtkEditable *editable)
+set_position_and_selection_to_end (CtkEditable *editable)
 {
     int end;
 
@@ -191,7 +191,7 @@ set_position_and_selection_to_end (GtkEditable *editable)
 }
 
 static gboolean
-position_and_selection_are_at_end (GtkEditable *editable)
+position_and_selection_are_at_end (CtkEditable *editable)
 {
     int end;
     int start_sel, end_sel;
@@ -220,11 +220,11 @@ got_completion_data_callback (GFilenameCompleter *completer,
 }
 
 static void
-editable_event_after_callback (GtkEntry *entry,
+editable_event_after_callback (CtkEntry *entry,
                                GdkEvent *event,
                                BaulLocationEntry *location_entry)
 {
-    GtkEditable *editable;
+    CtkEditable *editable;
     GdkEventKey *keyevent;
 
     if (event->type != GDK_KEY_PRESS)
@@ -290,7 +290,7 @@ finalize (GObject *object)
 }
 
 static void
-destroy (GtkWidget *object)
+destroy (CtkWidget *object)
 {
     BaulLocationEntry *entry;
 
@@ -322,8 +322,8 @@ baul_location_entry_text_changed (BaulLocationEntry *entry,
 }
 
 static void
-baul_location_entry_icon_release (GtkEntry *gentry,
-                                  GtkEntryIconPosition position,
+baul_location_entry_icon_release (CtkEntry *gentry,
+                                  CtkEntryIconPosition position,
                                   GdkEvent *event,
                                   gpointer unused)
 {
@@ -341,7 +341,7 @@ baul_location_entry_icon_release (GtkEntry *gentry,
 }
 
 static gboolean
-baul_location_entry_focus_in (GtkWidget     *widget,
+baul_location_entry_focus_in (CtkWidget     *widget,
                               GdkEventFocus *event)
 {
     BaulLocationEntry *entry = BAUL_LOCATION_ENTRY (widget);
@@ -357,7 +357,7 @@ baul_location_entry_focus_in (GtkWidget     *widget,
 }
 
 static void
-baul_location_entry_activate (GtkEntry *entry)
+baul_location_entry_activate (CtkEntry *entry)
 {
     BaulLocationEntry *loc_entry;
     const gchar *entry_text;
@@ -438,7 +438,7 @@ baul_location_entry_set_secondary_action (BaulLocationEntry *entry,
 static void
 baul_location_entry_init (BaulLocationEntry *entry)
 {
-    GtkStyleContext *context;
+    CtkStyleContext *context;
 
     context = ctk_widget_get_style_context (GTK_WIDGET (entry));
     ctk_style_context_add_class (context, "baul-location-entry");
@@ -466,10 +466,10 @@ baul_location_entry_init (BaulLocationEntry *entry)
                       G_CALLBACK (got_completion_data_callback), entry);
 }
 
-GtkWidget *
+CtkWidget *
 baul_location_entry_new (void)
 {
-    GtkWidget *entry;
+    CtkWidget *entry;
 
     entry = ctk_widget_new (BAUL_TYPE_LOCATION_ENTRY, NULL);
 

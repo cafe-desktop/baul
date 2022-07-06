@@ -32,9 +32,9 @@
 #include "baul-bookmark-list.h"
 #include "baul-window.h"
 
-GtkWindow *create_bookmarks_window                 (BaulBookmarkList *bookmarks,
+CtkWindow *create_bookmarks_window                 (BaulBookmarkList *bookmarks,
                                                     BaulWindow       *window_source);
-void       baul_bookmarks_window_save_geometry     (GtkWindow        *window);
+void       baul_bookmarks_window_save_geometry     (CtkWindow        *window);
 void	   edit_bookmarks_dialog_set_signals	   (BaulWindow       *window);
 
 #endif /* BAUL_BOOKMARKS_WINDOW_H */

@@ -73,14 +73,14 @@ baul_location_widget_provider_get_type (void)
  * baul_location_widget_provider_get_widget:
  * @provider: a #BaulLocationWidgetProvider
  * @uri: the URI of the location
- * @window: parent #GtkWindow
+ * @window: parent #CtkWindow
  *
  * Returns: (transfer none): the location widget for @provider at @uri
  */
-GtkWidget *
+CtkWidget *
 baul_location_widget_provider_get_widget (BaulLocationWidgetProvider *provider,
                                           const char                 *uri,
-                                          GtkWidget                  *window)
+                                          CtkWidget                  *window)
 {
     g_return_val_if_fail (BAUL_IS_LOCATION_WIDGET_PROVIDER (provider), NULL);
     g_return_val_if_fail (BAUL_LOCATION_WIDGET_PROVIDER_GET_IFACE (provider)->get_widget != NULL, NULL);

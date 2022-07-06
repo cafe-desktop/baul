@@ -42,7 +42,7 @@
 static GSimpleAsyncResult *display_location_res = NULL;
 
 static void
-main_dialog_destroyed (GtkWidget *widget,
+main_dialog_destroyed (CtkWidget *widget,
                        gpointer   user_data)
 {
     /* this only happens when user clicks "cancel"
@@ -105,7 +105,7 @@ baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self
 int
 main (int argc, char *argv[])
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
     GOptionContext *context;
     GError *error;
 

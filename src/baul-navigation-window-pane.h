@@ -47,24 +47,24 @@ struct _BaulNavigationWindowPane
 {
     BaulWindowPane parent;
 
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     /* location bar */
-    GtkWidget *location_bar;
-    GtkWidget *location_button;
-    GtkWidget *navigation_bar;
-    GtkWidget *path_bar;
-    GtkWidget *search_bar;
+    CtkWidget *location_bar;
+    CtkWidget *location_button;
+    CtkWidget *navigation_bar;
+    CtkWidget *path_bar;
+    CtkWidget *search_bar;
 
     gboolean temporary_navigation_bar;
     gboolean temporary_location_bar;
     gboolean temporary_search_bar;
 
     /* notebook */
-    GtkWidget *notebook;
+    CtkWidget *notebook;
 
     /* split view */
-    GtkWidget *split_view_hpane;
+    CtkWidget *split_view_hpane;
 };
 
 GType    baul_navigation_window_pane_get_type (void);

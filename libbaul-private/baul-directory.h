@@ -223,7 +223,7 @@ gboolean           baul_directory_is_in_trash              (BaulDirectory       
 gboolean           baul_directory_is_not_empty             (BaulDirectory         *directory);
 
 /* Convenience functions for dealing with a list of BaulDirectory objects that each have a ref.
- * These are just convenient names for functions that work on lists of GtkObject *.
+ * These are just convenient names for functions that work on lists of CtkObject *.
  */
 GList *            baul_directory_list_ref                 (GList                     *directory_list);
 void               baul_directory_list_unref               (GList                     *directory_list);

@@ -469,10 +469,10 @@ msgstr "ഉഭയക്രമീകരണം"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "ലേബല്‍ പദാവലിയിലെ വരികള്‍ തമ്മിലുള്ള ചേര്‍ച്ച. ഇതു് ലേബലിന്റെ സ്ഥാനത്തുള്ള "
-"ചേര്‍ച്ചയെ ബാധിക്കില്ല, അതിനായി GtkMisc::xalign കാണുക."
+"ചേര്‍ച്ചയെ ബാധിക്കില്ല, അതിനായി CtkMisc::xalign കാണുക."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

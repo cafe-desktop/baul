@@ -24,10 +24,10 @@
 
 #define DEFAULT_APP_EXEC "gio open %u"
 
-static GtkRecentManager *
+static CtkRecentManager *
 baul_recent_get_manager (void)
 {
-    static GtkRecentManager *manager = NULL;
+    static CtkRecentManager *manager = NULL;
 
     if (manager == NULL)
     {
@@ -41,7 +41,7 @@ void
 baul_recent_add_file (BaulFile *file,
                       GAppInfo *application)
 {
-    GtkRecentData recent_data;
+    CtkRecentData recent_data;
     char *uri;
 
     uri = baul_file_get_uri (file);

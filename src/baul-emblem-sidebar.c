@@ -54,10 +54,10 @@
 struct BaulEmblemSidebarDetails
 {
     BaulWindowInfo *window;
-    GtkWidget *emblems_table;
-    GtkWidget *popup;
-    GtkWidget *popup_remove;
-    GtkWidget *popup_rename;
+    CtkWidget *emblems_table;
+    CtkWidget *popup;
+    CtkWidget *popup_remove;
+    CtkWidget *popup_rename;
 
     char *popup_emblem_keyword;
     char *popup_emblem_display_name;
@@ -74,7 +74,7 @@ static void baul_emblem_sidebar_iface_init        (BaulSidebarIface         *ifa
 static void sidebar_provider_iface_init           (BaulSidebarProviderIface *iface);
 static GType baul_emblem_sidebar_provider_get_type (void);
 
-static const GtkTargetEntry drag_types[] =
+static const CtkTargetEntry drag_types[] =
 {
     {"property/keyword", 0, 0 }
 };
@@ -86,7 +86,7 @@ enum
     TARGET_NETSCAPE_URL
 };
 
-static const GtkTargetEntry dest_types[] =
+static const CtkTargetEntry dest_types[] =
 {
     {"text/uri-list", 0, TARGET_URI_LIST},
     {"text/plain", 0, TARGET_URI},
@@ -120,9 +120,9 @@ G_DEFINE_TYPE_WITH_CODE (BaulEmblemSidebarProvider, baul_emblem_sidebar_provider
                                  sidebar_provider_iface_init));
 
 static void
-baul_emblem_sidebar_drag_data_get_cb (GtkWidget *widget,
+baul_emblem_sidebar_drag_data_get_cb (CtkWidget *widget,
                                       GdkDragContext *context,
-                                      GtkSelectionData *data,
+                                      CtkSelectionData *data,
                                       guint info,
                                       guint time,
                                       BaulEmblemSidebar *emblem_sidebar)
@@ -139,7 +139,7 @@ baul_emblem_sidebar_drag_data_get_cb (GtkWidget *widget,
 }
 
 static void
-baul_emblem_sidebar_enter_notify_cb (GtkWidget *widget,
+baul_emblem_sidebar_enter_notify_cb (CtkWidget *widget,
                                      BaulEmblemSidebar *emblem_sidebar)
 {
     GdkPixbuf *pixbuf;
@@ -152,7 +152,7 @@ baul_emblem_sidebar_enter_notify_cb (GtkWidget *widget,
 }
 
 static void
-baul_emblem_sidebar_leave_notify_cb (GtkWidget *widget,
+baul_emblem_sidebar_leave_notify_cb (CtkWidget *widget,
                                      BaulEmblemSidebar *emblem_sidebar)
 {
     GdkPixbuf *pixbuf;
@@ -165,7 +165,7 @@ baul_emblem_sidebar_leave_notify_cb (GtkWidget *widget,
 }
 
 static gboolean
-baul_emblem_sidebar_button_press_cb (GtkWidget *widget,
+baul_emblem_sidebar_button_press_cb (CtkWidget *widget,
                                      GdkEventButton *event,
                                      BaulEmblemSidebar *emblem_sidebar)
 {
@@ -212,7 +212,7 @@ emblems_changed_callback (GObject *signaller,
 }
 
 static void
-baul_emblem_sidebar_delete_cb (GtkWidget *menu_item,
+baul_emblem_sidebar_delete_cb (CtkWidget *menu_item,
                                BaulEmblemSidebar *emblem_sidebar)
 {
     if (baul_emblem_remove_emblem (emblem_sidebar->details->popup_emblem_keyword))
@@ -231,10 +231,10 @@ baul_emblem_sidebar_delete_cb (GtkWidget *menu_item,
 }
 
 static void
-rename_dialog_response_cb (GtkWidget *dialog, int response,
+rename_dialog_response_cb (CtkWidget *dialog, int response,
                            BaulEmblemSidebar *emblem_sidebar)
 {
-    GtkWidget *entry;
+    CtkWidget *entry;
     char *keyword, *name;
 
     keyword = g_object_get_data (G_OBJECT (dialog), "emblem-keyword");
@@ -275,12 +275,12 @@ rename_dialog_response_cb (GtkWidget *dialog, int response,
     g_free (name);
 }
 
-static GtkWidget *
+static CtkWidget *
 create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar,
                              const char *keyword, const char *orig_name,
                              GdkPixbuf *pixbuf)
 {
-    GtkWidget *dialog, *label, *image, *entry, *hbox;
+    CtkWidget *dialog, *label, *image, *entry, *hbox;
 
     image = ctk_image_new_from_pixbuf (pixbuf);
     entry = ctk_entry_new ();
@@ -340,10 +340,10 @@ create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar,
 }
 
 static void
-baul_emblem_sidebar_rename_cb (GtkWidget *menu_item,
+baul_emblem_sidebar_rename_cb (CtkWidget *menu_item,
                                BaulEmblemSidebar *emblem_sidebar)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     dialog = create_rename_emblem_dialog (emblem_sidebar,
                                           emblem_sidebar->details->popup_emblem_keyword,
@@ -358,7 +358,7 @@ baul_emblem_sidebar_rename_cb (GtkWidget *menu_item,
 static void
 create_popup_menu (BaulEmblemSidebar *emblem_sidebar)
 {
-    GtkWidget *popup, *menu_item;
+    CtkWidget *popup, *menu_item;
 
     popup = ctk_menu_new ();
 
@@ -387,13 +387,13 @@ create_popup_menu (BaulEmblemSidebar *emblem_sidebar)
     emblem_sidebar->details->popup = popup;
 }
 
-static GtkWidget *
+static CtkWidget *
 create_emblem_widget_with_pixbuf (BaulEmblemSidebar *emblem_sidebar,
                                   const char *keyword,
                                   const char *display_name,
                                   GdkPixbuf *pixbuf)
 {
-    GtkWidget *image, *event_box;
+    CtkWidget *image, *event_box;
     GdkPixbuf *prelight_pixbuf;
 
     image = eel_labeled_image_new (display_name, pixbuf);
@@ -448,11 +448,11 @@ create_emblem_widget_with_pixbuf (BaulEmblemSidebar *emblem_sidebar,
 
 }
 
-static GtkWidget *
+static CtkWidget *
 create_emblem_widget (BaulEmblemSidebar *emblem_sidebar,
                       const char *name)
 {
-    GtkWidget *ret;
+    CtkWidget *ret;
     const char *display_name;
     char *keyword;
     GdkPixbuf *pixbuf;
@@ -478,7 +478,7 @@ create_emblem_widget (BaulEmblemSidebar *emblem_sidebar,
 }
 
 static void
-emblem_name_entry_changed_cb (GtkWidget *entry, Emblem *emblem)
+emblem_name_entry_changed_cb (CtkWidget *entry, Emblem *emblem)
 {
     char *text;
 
@@ -530,16 +530,16 @@ destroy_emblem_list (GSList *list)
     g_slist_free (list);
 }
 
-static GtkWidget *
+static CtkWidget *
 create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
                            GSList *emblems)
 {
-    GtkWidget *dialog, *label, *table;
-    GtkWidget *first_entry, *entry, *scroller;
+    CtkWidget *dialog, *label, *table;
+    CtkWidget *first_entry, *entry, *scroller;
     GSList *list;
     int num_emblems;
-    GtkWidget *image = NULL;
-    GtkWidget *hbox = NULL;
+    CtkWidget *image = NULL;
+    CtkWidget *hbox = NULL;
     Emblem *emblem = NULL;
 
     first_entry = NULL;
@@ -638,7 +638,7 @@ create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
 }
 
 static void
-remove_widget (GtkWidget *widget, GtkContainer *container)
+remove_widget (CtkWidget *widget, CtkContainer *container)
 {
     ctk_container_remove (container, widget);
 }
@@ -649,14 +649,14 @@ baul_emblem_sidebar_refresh (BaulEmblemSidebar *emblem_sidebar)
     baul_emblem_refresh_list ();
 
     ctk_container_foreach (GTK_CONTAINER (emblem_sidebar->details->emblems_table),
-                           (GtkCallback)remove_widget,
+                           (CtkCallback)remove_widget,
                            emblem_sidebar->details->emblems_table);
 
     baul_emblem_sidebar_populate (emblem_sidebar);
 }
 
 static void
-add_emblems_dialog_response_cb (GtkWidget *dialog, int response,
+add_emblems_dialog_response_cb (CtkWidget *dialog, int response,
                                 BaulEmblemSidebar *emblem_sidebar)
 {
     Emblem *emblem;
@@ -723,7 +723,7 @@ static void
 show_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
                          GSList *emblems)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     g_return_if_fail (emblems != NULL);
 
@@ -742,11 +742,11 @@ show_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
 }
 
 static void
-baul_emblem_sidebar_drag_received_cb (GtkWidget *widget,
+baul_emblem_sidebar_drag_received_cb (CtkWidget *widget,
                                       GdkDragContext *drag_context,
                                       gint x,
                                       gint y,
-                                      GtkSelectionData *data,
+                                      CtkSelectionData *data,
                                       guint info,
                                       guint time,
                                       BaulEmblemSidebar *emblem_sidebar)
@@ -937,10 +937,10 @@ baul_emblem_sidebar_drag_received_cb (GtkWidget *widget,
     }
 }
 
-static GtkWidget *
+static CtkWidget *
 baul_emblem_sidebar_create_container (BaulEmblemSidebar *emblem_sidebar)
 {
-    GtkWidget *emblems_table, *scroller;
+    CtkWidget *emblems_table, *scroller;
 
     /* The emblems wrapped table */
     scroller = eel_scrolled_wrap_table_new (TRUE, GTK_SHADOW_IN, &emblems_table);
@@ -980,7 +980,7 @@ static void
 baul_emblem_sidebar_populate (BaulEmblemSidebar *emblem_sidebar)
 {
     GList *icons, *l, *widgets;
-    GtkWidget *emblem_widget;
+    CtkWidget *emblem_widget;
     char *path;
     GdkPixbuf *erase_pixbuf;
 
@@ -1046,7 +1046,7 @@ baul_emblem_sidebar_populate (BaulEmblemSidebar *emblem_sidebar)
 static void
 baul_emblem_sidebar_init (BaulEmblemSidebar *emblem_sidebar)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     emblem_sidebar->details = g_new0 (BaulEmblemSidebarDetails, 1);
 

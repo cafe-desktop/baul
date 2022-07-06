@@ -41,7 +41,7 @@ typedef struct _BaulZoomActionPrivate BaulZoomActionPrivate;
 
 struct _BaulZoomAction
 {
-    GtkAction parent;
+    CtkAction parent;
 
     /*< private >*/
     BaulZoomActionPrivate *priv;
@@ -49,7 +49,7 @@ struct _BaulZoomAction
 
 struct _BaulZoomActionClass
 {
-    GtkActionClass parent_class;
+    CtkActionClass parent_class;
 };
 
 GType    baul_zoom_action_get_type   (void);

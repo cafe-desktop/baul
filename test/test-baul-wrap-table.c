@@ -10,8 +10,8 @@ int
 main (int argc, char* argv[])
 {
 	BaulCustomizationData *customization_data;
-	GtkWidget *window;
-	GtkWidget *emblems_table, *button, *scroller;
+	CtkWidget *window;
+	CtkWidget *emblems_table, *button, *scroller;
 	char *emblem_name, *stripped_name;
 	GdkPixbuf *pixbuf;
 	char *label;

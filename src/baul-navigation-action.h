@@ -52,7 +52,7 @@ typedef enum
 
 struct _BaulNavigationAction
 {
-    GtkAction parent;
+    CtkAction parent;
 
     /*< private >*/
     BaulNavigationActionPrivate *priv;
@@ -60,7 +60,7 @@ struct _BaulNavigationAction
 
 struct _BaulNavigationActionClass
 {
-    GtkActionClass parent_class;
+    CtkActionClass parent_class;
 };
 
 GType    baul_navigation_action_get_type   (void);

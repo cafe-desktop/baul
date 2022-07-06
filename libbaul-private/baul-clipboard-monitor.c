@@ -42,7 +42,7 @@
  * other clients
  *
  * This is fixed with the XFIXES extensions, which recent versions
- * of Gtk+ supports as the owner_change signal on GtkClipboard. We
+ * of Ctk+ supports as the owner_change signal on CtkClipboard. We
  * use this now, but keep the old code since not all X servers support
  * XFIXES.
  */
@@ -80,7 +80,7 @@ baul_clipboard_monitor_get (void)
 {
     if (clipboard_monitor == NULL)
     {
-        GtkClipboard *clipboard;
+        CtkClipboard *clipboard;
 
         clipboard_monitor = BAUL_CLIPBOARD_MONITOR (g_object_new (BAUL_TYPE_CLIPBOARD_MONITOR, NULL));
         eel_debug_call_at_shutdown (destroy_clipboard_monitor);
@@ -214,7 +214,7 @@ baul_clipboard_monitor_get_clipboard_info (BaulClipboardMonitor *monitor)
 }
 
 void
-baul_clear_clipboard_callback (GtkClipboard *clipboard,
+baul_clear_clipboard_callback (CtkClipboard *clipboard,
                                gpointer      user_data)
 {
     baul_clipboard_monitor_set_clipboard_info
@@ -283,8 +283,8 @@ convert_file_list_to_string (BaulClipboardInfo *info,
 }
 
 void
-baul_get_clipboard_callback (GtkClipboard     *clipboard,
-                             GtkSelectionData *selection_data,
+baul_get_clipboard_callback (CtkClipboard     *clipboard,
+                             CtkSelectionData *selection_data,
                              guint             info,
                              gpointer          user_data)
 {

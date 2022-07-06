@@ -468,10 +468,10 @@ msgstr "Joondus"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "Sildi tekstis sõltuvad ridade joondused üksteisest. See EI mõjuta siltide "
-"paigutuse joondust. Tutvu GtkMisc::xalign'iga lähemalt."
+"paigutuse joondust. Tutvu CtkMisc::xalign'iga lähemalt."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

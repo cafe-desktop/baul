@@ -94,7 +94,7 @@ char *                baul_bookmark_get_scroll_pos         (BaulBookmark      *b
 
 /* Helper functions for displaying bookmarks */
 cairo_surface_t *     baul_bookmark_get_surface            (BaulBookmark      *bookmark,
-        GtkIconSize            icon_size);
-GtkWidget *           baul_bookmark_menu_item_new          (BaulBookmark      *bookmark);
+        CtkIconSize            icon_size);
+CtkWidget *           baul_bookmark_menu_item_new          (BaulBookmark      *bookmark);
 
 #endif /* BAUL_BOOKMARK_H */

@@ -52,13 +52,13 @@ typedef struct _BaulFileConflictDialogPrivate BaulFileConflictDialogPrivate;
 
 struct _BaulFileConflictDialog
 {
-    GtkDialog parent;
+    CtkDialog parent;
     BaulFileConflictDialogPrivate *details;
 };
 
 struct _BaulFileConflictDialogClass
 {
-    GtkDialogClass parent_class;
+    CtkDialogClass parent_class;
 };
 
 enum
@@ -70,7 +70,7 @@ enum
 
 GType baul_file_conflict_dialog_get_type (void) G_GNUC_CONST;
 
-GtkWidget* baul_file_conflict_dialog_new              (GtkWindow *parent,
+CtkWidget* baul_file_conflict_dialog_new              (CtkWindow *parent,
         GFile *source,
         GFile *destination,
         GFile *dest_dir);

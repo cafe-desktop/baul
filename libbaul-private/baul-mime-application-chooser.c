@@ -51,15 +51,15 @@ struct _BaulMimeApplicationChooserDetails
 
     guint refresh_timeout;
 
-    GtkWidget *label;
-    GtkWidget *entry;
-    GtkWidget *treeview;
-    GtkWidget *remove_button;
+    CtkWidget *label;
+    CtkWidget *entry;
+    CtkWidget *treeview;
+    CtkWidget *remove_button;
 
     gboolean for_multiple_files;
 
-    GtkListStore *model;
-    GtkCellRenderer *toggle_renderer;
+    CtkListStore *model;
+    CtkCellRenderer *toggle_renderer;
 };
 
 enum
@@ -116,13 +116,13 @@ baul_mime_application_chooser_class_init (BaulMimeApplicationChooserClass *class
 }
 
 static void
-default_toggled_cb (GtkCellRendererToggle *renderer,
+default_toggled_cb (CtkCellRendererToggle *renderer,
                     const char *path_str,
                     gpointer user_data)
 {
     BaulMimeApplicationChooser *chooser;
-    GtkTreeIter iter;
-    GtkTreePath *path;
+    CtkTreeIter iter;
+    CtkTreePath *path;
     GError *error;
 
     chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
@@ -180,8 +180,8 @@ default_toggled_cb (GtkCellRendererToggle *renderer,
 static GAppInfo *
 get_selected_application (BaulMimeApplicationChooser *chooser)
 {
-    GtkTreeIter iter;
-    GtkTreeSelection *selection;
+    CtkTreeIter iter;
+    CtkTreeSelection *selection;
     GAppInfo *info;
 
     selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (chooser->details->treeview));
@@ -201,7 +201,7 @@ get_selected_application (BaulMimeApplicationChooser *chooser)
 }
 
 static void
-selection_changed_cb (GtkTreeSelection *selection,
+selection_changed_cb (CtkTreeSelection *selection,
                       gpointer user_data)
 {
     BaulMimeApplicationChooser *chooser;
@@ -224,14 +224,14 @@ selection_changed_cb (GtkTreeSelection *selection,
     }
 }
 
-static GtkWidget *
+static CtkWidget *
 create_tree_view (BaulMimeApplicationChooser *chooser)
 {
-    GtkWidget *treeview;
-    GtkListStore *store;
-    GtkTreeViewColumn *column;
-    GtkCellRenderer *renderer;
-    GtkTreeSelection *selection;
+    CtkWidget *treeview;
+    CtkListStore *store;
+    CtkTreeViewColumn *column;
+    CtkCellRenderer *renderer;
+    CtkTreeSelection *selection;
 
     treeview = ctk_tree_view_new ();
     ctk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
@@ -289,11 +289,11 @@ create_tree_view (BaulMimeApplicationChooser *chooser)
 }
 
 static void
-add_clicked_cb (GtkButton *button,
+add_clicked_cb (CtkButton *button,
                 gpointer user_data)
 {
     BaulMimeApplicationChooser *chooser;
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
@@ -313,7 +313,7 @@ add_clicked_cb (GtkButton *button,
 }
 
 static void
-remove_clicked_cb (GtkButton *button,
+remove_clicked_cb (CtkButton *button,
                    gpointer user_data)
 {
     BaulMimeApplicationChooser *chooser;
@@ -344,7 +344,7 @@ remove_clicked_cb (GtkButton *button,
 }
 
 static void
-reset_clicked_cb (GtkButton *button,
+reset_clicked_cb (CtkButton *button,
                   gpointer   user_data)
 {
     BaulMimeApplicationChooser *chooser;
@@ -371,9 +371,9 @@ mime_type_data_changed_cb (GObject *signaller,
 static void
 baul_mime_application_chooser_init (BaulMimeApplicationChooser *chooser)
 {
-    GtkWidget *box;
-    GtkWidget *scrolled;
-    GtkWidget *button;
+    CtkWidget *box;
+    CtkWidget *scrolled;
+    CtkWidget *button;
 
     chooser->details = g_new0 (BaulMimeApplicationChooserDetails, 1);
 
@@ -504,8 +504,8 @@ refresh_model (BaulMimeApplicationChooser *chooser)
     GList *applications;
     GAppInfo *default_app;
     GList *l;
-    GtkTreeSelection *selection;
-    GtkTreeViewColumn *column;
+    CtkTreeSelection *selection;
+    CtkTreeViewColumn *column;
 
     column = ctk_tree_view_get_column (GTK_TREE_VIEW (chooser->details->treeview), 0);
     ctk_tree_view_column_set_visible (column, TRUE);
@@ -517,7 +517,7 @@ refresh_model (BaulMimeApplicationChooser *chooser)
 
     for (l = applications; l != NULL; l = l->next)
     {
-        GtkTreeIter iter;
+        CtkTreeIter iter;
         gboolean is_default;
         GAppInfo *application;
         char *escaped;
@@ -553,7 +553,7 @@ refresh_model (BaulMimeApplicationChooser *chooser)
     }
     else
     {
-        GtkTreeIter iter;
+        CtkTreeIter iter;
         char *name;
 
         ctk_tree_view_column_set_visible (column, FALSE);
@@ -714,11 +714,11 @@ set_uri_and_type_for_multiple_files (BaulMimeApplicationChooser *chooser,
     return TRUE;
 }
 
-GtkWidget *
+CtkWidget *
 baul_mime_application_chooser_new (const char *uri,
                                    const char *mime_type)
 {
-    GtkWidget *chooser;
+    CtkWidget *chooser;
 
     chooser = ctk_widget_new (BAUL_TYPE_MIME_APPLICATION_CHOOSER, NULL);
 
@@ -727,11 +727,11 @@ baul_mime_application_chooser_new (const char *uri,
     return chooser;
 }
 
-GtkWidget *
+CtkWidget *
 baul_mime_application_chooser_new_for_multiple_files (GList *uris,
         const char *mime_type)
 {
-    GtkWidget *chooser;
+    CtkWidget *chooser;
 
     chooser = ctk_widget_new (BAUL_TYPE_MIME_APPLICATION_CHOOSER, NULL);
 

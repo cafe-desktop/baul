@@ -71,36 +71,36 @@ typedef enum
 
 struct _BaulPropertyBrowserPrivate
 {
-    GtkWidget *container;
+    CtkWidget *container;
 
-    GtkWidget *content_container;
-    GtkWidget *content_frame;
-    GtkWidget *content_table;
+    CtkWidget *content_container;
+    CtkWidget *content_frame;
+    CtkWidget *content_table;
 
-    GtkWidget *category_container;
-    GtkWidget *category_box;
+    CtkWidget *category_container;
+    CtkWidget *category_box;
 
-    GtkWidget *title_box;
-    GtkWidget *title_label;
-    GtkWidget *help_label;
+    CtkWidget *title_box;
+    CtkWidget *title_label;
+    CtkWidget *help_label;
 
-    GtkWidget *bottom_box;
+    CtkWidget *bottom_box;
 
-    GtkWidget *add_button;
-    GtkWidget *add_button_image;
-    GtkWidget *remove_button;
-    GtkWidget *remove_button_image;
+    CtkWidget *add_button;
+    CtkWidget *add_button_image;
+    CtkWidget *remove_button;
+    CtkWidget *remove_button_image;
 
-    GtkWidget *patterns_dialog;
-    GtkWidget *colors_dialog;
-    GtkWidget *emblems_dialog;
+    CtkWidget *patterns_dialog;
+    CtkWidget *colors_dialog;
+    CtkWidget *emblems_dialog;
 
-    GtkWidget *keyword;
-    GtkWidget *emblem_image;
-    GtkWidget *image_button;
+    CtkWidget *keyword;
+    CtkWidget *emblem_image;
+    CtkWidget *image_button;
 
-    GtkWidget *color_picker;
-    GtkWidget *color_name;
+    CtkWidget *color_picker;
+    CtkWidget *color_name;
 
     GList *keywords;
 
@@ -129,27 +129,27 @@ static void     baul_property_browser_set_dragged_file      (BaulPropertyBrowser
         const char                    *dragged_file_name);
 static void     baul_property_browser_set_drag_type         (BaulPropertyBrowser       *property_browser,
         const char                    *new_drag_type);
-static void     add_new_button_callback                         (GtkWidget                     *widget,
+static void     add_new_button_callback                         (CtkWidget                     *widget,
         BaulPropertyBrowser       *property_browser);
 static void     cancel_remove_mode                              (BaulPropertyBrowser       *property_browser);
-static void     done_button_callback                            (GtkWidget                     *widget,
-        GtkWidget                     *property_browser);
-static void     help_button_callback                            (GtkWidget                     *widget,
-        GtkWidget                     *property_browser);
-static void     remove_button_callback                          (GtkWidget                     *widget,
+static void     done_button_callback                            (CtkWidget                     *widget,
+        CtkWidget                     *property_browser);
+static void     help_button_callback                            (CtkWidget                     *widget,
+        CtkWidget                     *property_browser);
+static void     remove_button_callback                          (CtkWidget                     *widget,
         BaulPropertyBrowser       *property_browser);
-static gboolean baul_property_browser_delete_event_callback (GtkWidget                     *widget,
+static gboolean baul_property_browser_delete_event_callback (CtkWidget                     *widget,
         GdkEvent                      *event,
         gpointer                       user_data);
-static void     baul_property_browser_hide_callback         (GtkWidget                     *widget,
+static void     baul_property_browser_hide_callback         (CtkWidget                     *widget,
         gpointer                       user_data);
-static void     baul_property_browser_drag_end              (GtkWidget                     *widget,
+static void     baul_property_browser_drag_end              (CtkWidget                     *widget,
         GdkDragContext                *context);
-static void     baul_property_browser_drag_begin            (GtkWidget                     *widget,
+static void     baul_property_browser_drag_begin            (CtkWidget                     *widget,
         GdkDragContext                *context);
-static void     baul_property_browser_drag_data_get         (GtkWidget                     *widget,
+static void     baul_property_browser_drag_data_get         (CtkWidget                     *widget,
         GdkDragContext                *context,
-        GtkSelectionData              *selection_data,
+        CtkSelectionData              *selection_data,
         guint                          info,
         guint32                        time);
 static void     emit_emblems_changed_signal                     (void);
@@ -157,8 +157,8 @@ static void     emblems_changed_callback                        (GObject        
         BaulPropertyBrowser       *property_browser);
 
 /* misc utilities */
-static void     element_clicked_callback                        (GtkWidget                     *image_table,
-        GtkWidget                     *child,
+static void     element_clicked_callback                        (CtkWidget                     *image_table,
+        CtkWidget                     *child,
         const EelImageTableEvent *event,
         gpointer                       callback_data);
 
@@ -191,7 +191,7 @@ enum
     PROPERTY_TYPE
 };
 
-static GtkTargetEntry drag_types[] =
+static CtkTargetEntry drag_types[] =
 {
     { "text/uri-list",  0, PROPERTY_TYPE }
 };
@@ -250,7 +250,7 @@ baul_property_browser_dispose (GObject *object)
 static void
 baul_property_browser_class_init (BaulPropertyBrowserClass *klass)
 {
-    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
     G_OBJECT_CLASS (klass)->dispose = baul_property_browser_dispose;
     widget_class->drag_begin = baul_property_browser_drag_begin;
@@ -263,9 +263,9 @@ baul_property_browser_class_init (BaulPropertyBrowserClass *klass)
 static void
 baul_property_browser_init (BaulPropertyBrowser *property_browser)
 {
-    GtkWidget *widget, *temp_box, *temp_hbox, *temp_frame, *vbox;
-    GtkWidget *temp_button;
-    GtkWidget *viewport;
+    CtkWidget *widget, *temp_box, *temp_hbox, *temp_frame, *vbox;
+    CtkWidget *temp_button;
+    CtkWidget *viewport;
     PangoAttrList *attrs;
     char *temp_str;
 
@@ -294,7 +294,7 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
 
     ctk_window_set_type_hint (GTK_WINDOW (widget), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-    GtkStyleContext *context;
+    CtkStyleContext *context;
 
     context = ctk_widget_get_style_context (GTK_WIDGET (property_browser));
     ctk_style_context_add_class (context, "baul-property-browser");
@@ -472,7 +472,7 @@ baul_property_browser_new (GdkScreen *screen)
 void
 baul_property_browser_show (GdkScreen *screen)
 {
-    static GtkWindow *browser = NULL;
+    static CtkWindow *browser = NULL;
 
     if (browser == NULL)
     {
@@ -488,7 +488,7 @@ baul_property_browser_show (GdkScreen *screen)
 }
 
 static gboolean
-baul_property_browser_delete_event_callback (GtkWidget *widget,
+baul_property_browser_delete_event_callback (CtkWidget *widget,
         GdkEvent  *event,
         gpointer   user_data)
 {
@@ -498,7 +498,7 @@ baul_property_browser_delete_event_callback (GtkWidget *widget,
 }
 
 static void
-baul_property_browser_hide_callback (GtkWidget *widget,
+baul_property_browser_hide_callback (CtkWidget *widget,
                                      gpointer   user_data)
 {
     BaulPropertyBrowser *property_browser;
@@ -530,11 +530,11 @@ baul_property_browser_set_drag_type (BaulPropertyBrowser *property_browser,
 }
 
 static void
-baul_property_browser_drag_begin (GtkWidget *widget,
+baul_property_browser_drag_begin (CtkWidget *widget,
                                   GdkDragContext *context)
 {
     BaulPropertyBrowser *property_browser;
-    GtkWidget *child;
+    CtkWidget *child;
     GdkPixbuf *pixbuf;
     char *element_name;
 
@@ -585,9 +585,9 @@ baul_property_browser_drag_begin (GtkWidget *widget,
 /* drag and drop data get handler */
 
 static void
-baul_property_browser_drag_data_get (GtkWidget *widget,
+baul_property_browser_drag_data_get (CtkWidget *widget,
                                      GdkDragContext *context,
-                                     GtkSelectionData *selection_data,
+                                     CtkSelectionData *selection_data,
                                      guint info,
                                      guint32 time)
 {
@@ -677,7 +677,7 @@ baul_property_browser_drag_data_get (GtkWidget *widget,
 /* drag and drop end handler, where we destroy ourselves, since the transaction is complete */
 
 static void
-baul_property_browser_drag_end (GtkWidget *widget, GdkDragContext *context)
+baul_property_browser_drag_end (CtkWidget *widget, GdkDragContext *context)
 {
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
     if (!property_browser->details->keep_around)
@@ -858,7 +858,7 @@ make_color_drag_image (BaulPropertyBrowser *property_browser, const char *color_
 /* this callback handles button presses on the category widget. It maintains the active state */
 
 static void
-category_toggled_callback (GtkWidget *widget, char *category_name)
+category_toggled_callback (CtkWidget *widget, char *category_name)
 {
     BaulPropertyBrowser *property_browser;
 
@@ -1034,8 +1034,8 @@ baul_property_browser_remove_element (BaulPropertyBrowser *property_browser, Eel
 }
 
 static void
-update_preview_cb (GtkFileChooser *fc,
-                   GtkImage *preview)
+update_preview_cb (CtkFileChooser *fc,
+                   CtkImage *preview)
 {
     char *filename;
 
@@ -1060,12 +1060,12 @@ update_preview_cb (GtkFileChooser *fc,
 }
 
 static void
-icon_button_clicked_cb (GtkButton *b,
+icon_button_clicked_cb (CtkButton *b,
                         BaulPropertyBrowser *browser)
 {
-    GtkWidget *dialog;
-    GtkFileFilter *filter;
-    GtkWidget *preview;
+    CtkWidget *dialog;
+    CtkFileFilter *filter;
+    CtkWidget *preview;
     int res;
 
     dialog = eel_file_chooser_dialog_new (_("Select an Image File for the New Emblem"),
@@ -1100,14 +1100,14 @@ icon_button_clicked_cb (GtkButton *b,
 }
 
 /* here's where we create the emblem dialog */
-static GtkWidget*
+static CtkWidget*
 baul_emblem_dialog_new (BaulPropertyBrowser *property_browser)
 {
-    GtkWidget *widget;
-    GtkWidget *button;
-    GtkWidget *dialog;
-    GtkWidget *label;
-    GtkWidget *grid = ctk_grid_new ();
+    CtkWidget *widget;
+    CtkWidget *button;
+    CtkWidget *dialog;
+    CtkWidget *label;
+    CtkWidget *grid = ctk_grid_new ();
 
     dialog = ctk_dialog_new ();
     ctk_window_set_title (GTK_WINDOW (dialog), _("Create a New Emblem"));
@@ -1181,13 +1181,13 @@ baul_emblem_dialog_new (BaulPropertyBrowser *property_browser)
 
 /* create the color selection dialog */
 
-static GtkWidget*
+static CtkWidget*
 baul_color_selection_dialog_new (BaulPropertyBrowser *property_browser)
 {
-    GtkWidget *widget;
-    GtkWidget *dialog;
+    CtkWidget *widget;
+    CtkWidget *dialog;
 
-    GtkWidget *grid = ctk_grid_new ();
+    CtkWidget *grid = ctk_grid_new ();
 
     dialog = ctk_dialog_new ();
     ctk_window_set_title (GTK_WINDOW (dialog), _("Create a New Color:"));
@@ -1242,7 +1242,7 @@ baul_color_selection_dialog_new (BaulPropertyBrowser *property_browser)
 
 /* add the newly selected file to the browser images */
 static void
-add_pattern_to_browser (GtkDialog *dialog, gint response_id, gpointer data)
+add_pattern_to_browser (CtkDialog *dialog, gint response_id, gpointer data)
 {
     char *directory_path, *destination_name;
     char *basename;
@@ -1314,7 +1314,7 @@ add_pattern_to_browser (GtkDialog *dialog, gint response_id, gpointer data)
 static void
 add_new_pattern (BaulPropertyBrowser *property_browser)
 {
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     if (property_browser->details->patterns_dialog)
     {
@@ -1322,8 +1322,8 @@ add_new_pattern (BaulPropertyBrowser *property_browser)
     }
     else
     {
-        GtkFileFilter *filter;
-        GtkWidget *preview;
+        CtkFileFilter *filter;
+        CtkWidget *preview;
 
         property_browser->details->patterns_dialog = dialog =
                     eel_file_chooser_dialog_new (_("Select an Image File to Add as a Pattern"),
@@ -1417,7 +1417,7 @@ add_color_to_file (BaulPropertyBrowser *property_browser, const char *color_spec
 
 /* handle the OK button being pushed on the color selection dialog */
 static void
-add_color_to_browser (GtkWidget *widget, gint which_button, gpointer data)
+add_color_to_browser (CtkWidget *widget, gint which_button, gpointer data)
 {
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
@@ -1455,7 +1455,7 @@ add_color_to_browser (GtkWidget *widget, gint which_button, gpointer data)
 
 /* create the color selection dialog, pre-set with the color that was just selected */
 static void
-show_color_selection_window (GtkWidget *widget, gpointer data)
+show_color_selection_window (CtkWidget *widget, gpointer data)
 {
     GdkColor color;
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
@@ -1493,8 +1493,8 @@ add_new_color (BaulPropertyBrowser *property_browser)
     }
     else
     {
-        GtkColorSelectionDialog *color_dialog;
-        GtkWidget *ok_button, *cancel_button, *help_button;
+        CtkColorSelectionDialog *color_dialog;
+        CtkWidget *ok_button, *cancel_button, *help_button;
 
         property_browser->details->colors_dialog = ctk_color_selection_dialog_new (_("Select a Color to Add"));
         color_dialog = GTK_COLOR_SELECTION_DIALOG (property_browser->details->colors_dialog);
@@ -1518,7 +1518,7 @@ add_new_color (BaulPropertyBrowser *property_browser)
 
 /* here's where we handle clicks in the emblem dialog buttons */
 static void
-emblem_dialog_clicked (GtkWidget *dialog, int which_button, BaulPropertyBrowser *property_browser)
+emblem_dialog_clicked (CtkWidget *dialog, int which_button, BaulPropertyBrowser *property_browser)
 {
     char *emblem_path;
 
@@ -1634,7 +1634,7 @@ cancel_remove_mode (BaulPropertyBrowser *property_browser)
 /* handle the add_new button */
 
 static void
-add_new_button_callback(GtkWidget *widget, BaulPropertyBrowser *property_browser)
+add_new_button_callback(CtkWidget *widget, BaulPropertyBrowser *property_browser)
 {
     /* handle remove mode, where we act as a cancel button */
     if (property_browser->details->remove_mode)
@@ -1661,7 +1661,7 @@ add_new_button_callback(GtkWidget *widget, BaulPropertyBrowser *property_browser
 
 /* handle the "done" button */
 static void
-done_button_callback (GtkWidget *widget, GtkWidget *property_browser)
+done_button_callback (CtkWidget *widget, CtkWidget *property_browser)
 {
     cancel_remove_mode (BAUL_PROPERTY_BROWSER (property_browser));
     ctk_widget_hide (property_browser);
@@ -1669,7 +1669,7 @@ done_button_callback (GtkWidget *widget, GtkWidget *property_browser)
 
 /* handle the "help" button */
 static void
-help_button_callback (GtkWidget *widget, GtkWidget *property_browser)
+help_button_callback (CtkWidget *widget, CtkWidget *property_browser)
 {
     GError *error = NULL;
 
@@ -1679,7 +1679,7 @@ help_button_callback (GtkWidget *widget, GtkWidget *property_browser)
 
     if (error)
     {
-        GtkWidget *dialog;
+        CtkWidget *dialog;
 
         dialog = ctk_message_dialog_new (GTK_WINDOW (property_browser),
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -1699,7 +1699,7 @@ help_button_callback (GtkWidget *widget, GtkWidget *property_browser)
 
 /* handle the "remove" button */
 static void
-remove_button_callback(GtkWidget *widget, BaulPropertyBrowser *property_browser)
+remove_button_callback(CtkWidget *widget, BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->remove_mode)
     {
@@ -1714,13 +1714,13 @@ remove_button_callback(GtkWidget *widget, BaulPropertyBrowser *property_browser)
 /* this callback handles clicks on the image or color based content content elements */
 
 static void
-element_clicked_callback (GtkWidget *image_table,
-                          GtkWidget *child,
+element_clicked_callback (CtkWidget *image_table,
+                          CtkWidget *child,
                           const EelImageTableEvent *event,
                           gpointer callback_data)
 {
     BaulPropertyBrowser *property_browser;
-    GtkTargetList *target_list;
+    CtkTargetList *target_list;
     const char *element_name;
 
     g_return_if_fail (EEL_IS_IMAGE_TABLE (image_table));
@@ -1783,13 +1783,13 @@ labeled_image_configure (EelLabeledImage *labeled_image)
 }
 
 /* Make a color tile for a property */
-static GtkWidget *
+static CtkWidget *
 labeled_image_new (const char *text,
                    GdkPixbuf *pixbuf,
                    const char *property_name,
                    double scale_factor)
 {
-    GtkWidget *labeled_image;
+    CtkWidget *labeled_image;
 
     labeled_image = eel_labeled_image_new (text, pixbuf);
     labeled_image_configure (EEL_LABELED_IMAGE (labeled_image));
@@ -1812,9 +1812,9 @@ make_properties_from_directories (BaulPropertyBrowser *property_browser)
     char *object_label;
     GdkPixbuf *object_pixbuf;
     EelImageTable *image_table;
-    GtkWidget *reset_object = NULL;
+    CtkWidget *reset_object = NULL;
     GList *icons, *l;
-    GtkWidget *property_image;
+    CtkWidget *property_image;
     guint num_images;
 
     g_return_if_fail (BAUL_IS_PROPERTY_BROWSER (property_browser));
@@ -1937,7 +1937,7 @@ make_properties_from_directories (BaulPropertyBrowser *property_browser)
      */
     if (property_browser->details->category_type == BAUL_PROPERTY_EMBLEM)
     {
-        GtkWidget *blank;
+        CtkWidget *blank;
         char *path;
 
         blank = eel_image_table_add_empty_image (image_table);
@@ -1993,7 +1993,7 @@ static void
 add_reset_property (BaulPropertyBrowser *property_browser)
 {
     char *reset_image_file_name;
-    GtkWidget *reset_image;
+    CtkWidget *reset_image;
     GdkPixbuf *reset_pixbuf, *reset_chit;
 
     reset_chit = NULL;
@@ -2034,7 +2034,7 @@ make_properties_from_xml_node (BaulPropertyBrowser *property_browser,
 {
     xmlNodePtr child_node;
     GdkPixbuf *pixbuf;
-    GtkWidget *new_property;
+    CtkWidget *new_property;
     char *deleted, *local, *color, *name;
 
     gboolean local_only = property_browser->details->remove_mode;
@@ -2109,11 +2109,11 @@ make_category(BaulPropertyBrowser *property_browser, const char* path, const cha
 }
 
 /* Create a category button */
-static GtkWidget *
+static CtkWidget *
 property_browser_category_button_new (const char *display_name,
                                       const char *image)
 {
-    GtkWidget *button;
+    CtkWidget *button;
     char *file_name;
 
     g_return_val_if_fail (display_name != NULL, NULL);
@@ -2145,9 +2145,9 @@ make_category_link (BaulPropertyBrowser *property_browser,
                     const char *name,
                     const char *display_name,
                     const char *image,
-                    GtkRadioButton **group)
+                    CtkRadioButton **group)
 {
-    GtkWidget *button;
+    CtkWidget *button;
 
     g_return_if_fail (name != NULL);
     g_return_if_fail (image != NULL);
@@ -2192,8 +2192,8 @@ baul_property_browser_update_contents (BaulPropertyBrowser *property_browser)
 {
     xmlNodePtr cur_node;
     xmlDocPtr document;
-    GtkWidget *viewport;
-    GtkRadioButton *group;
+    CtkWidget *viewport;
+    CtkRadioButton *group;
     gboolean got_categories;
     char *name, *image, *type, *description, *display_name, *path, *mode;
 

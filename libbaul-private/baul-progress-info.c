@@ -95,7 +95,7 @@ struct _BaulProgressInfoClass
 
 static GList *active_progress_infos = NULL;
 
-static GtkStatusIcon *status_icon = NULL;
+static CtkStatusIcon *status_icon = NULL;
 static int n_progress_ops = 0;
 static void update_status_icon_and_window (void);
 
@@ -206,7 +206,7 @@ baul_progress_info_class_init (BaulProgressInfoClass *klass)
 }
 
 static gboolean
-delete_event (GtkWidget *widget,
+delete_event (CtkWidget *widget,
               GdkEventAny *event)
 {
     ctk_widget_hide (widget);
@@ -214,8 +214,8 @@ delete_event (GtkWidget *widget,
 }
 
 static void
-status_icon_activate_cb (GtkStatusIcon *icon,
-                         GtkWidget *progress_window)
+status_icon_activate_cb (CtkStatusIcon *icon,
+                         CtkWidget *progress_window)
 {
     if (ctk_widget_get_visible (progress_window))
     {
@@ -228,11 +228,11 @@ status_icon_activate_cb (GtkStatusIcon *icon,
 }
 
 /* Creates a Singleton progress_window */
-static GtkWidget *
+static CtkWidget *
 get_progress_window ()
 {
-    static GtkWidget *progress_window = NULL;
-    GtkWidget *vbox;
+    static CtkWidget *progress_window = NULL;
+    CtkWidget *vbox;
 
     if (progress_window != NULL)
         return progress_window;
@@ -288,13 +288,13 @@ is_op_paused (ProgressWidgetState state) {
 
 typedef struct _ProgressWidgetData
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
     BaulProgressInfo *info;
-    GtkLabel *status;
-    GtkLabel *details;
-    GtkProgressBar *progress_bar;
-    GtkWidget *btstart;
-    GtkWidget *btqueue;
+    CtkLabel *status;
+    CtkLabel *details;
+    CtkProgressBar *progress_bar;
+    CtkWidget *btstart;
+    CtkWidget *btqueue;
     ProgressWidgetState state;
 } ProgressWidgetData;
 
@@ -349,14 +349,14 @@ update_data (ProgressWidgetData *data)
 }
 
 /* You should always check return value */
-static GtkWidget *
+static CtkWidget *
 get_widgets_container ()
 {
-    GtkWidget * window = get_progress_window ();
+    CtkWidget * window = get_progress_window ();
     return ctk_bin_get_child (GTK_BIN (window));
 }
 static void
-foreach_get_running_operations (GtkWidget * widget, int * n)
+foreach_get_running_operations (CtkWidget * widget, int * n)
 {
     ProgressWidgetData *data = (ProgressWidgetData*) g_object_get_data (
                 G_OBJECT(widget), "data");
@@ -368,16 +368,16 @@ foreach_get_running_operations (GtkWidget * widget, int * n)
 static int
 get_running_operations ()
 {
-    GtkWidget * container = get_widgets_container();
+    CtkWidget * container = get_widgets_container();
     int n = 0;
 
     ctk_container_foreach (GTK_CONTAINER(container),
-                        (GtkCallback)foreach_get_running_operations, &n);
+                        (CtkCallback)foreach_get_running_operations, &n);
     return n;
 }
 
 static void
-foreach_get_queued_widget (GtkWidget * widget, GtkWidget ** out)
+foreach_get_queued_widget (CtkWidget * widget, CtkWidget ** out)
 {
     if (*out == NULL) {
         ProgressWidgetData *data;
@@ -390,22 +390,22 @@ foreach_get_queued_widget (GtkWidget * widget, GtkWidget ** out)
     }
 }
 
-static GtkWidget *
+static CtkWidget *
 get_first_queued_widget ()
 {
-    GtkWidget * container = get_widgets_container();
-    GtkWidget * out = NULL;
+    CtkWidget * container = get_widgets_container();
+    CtkWidget * out = NULL;
 
     ctk_container_foreach (GTK_CONTAINER(container),
-                (GtkCallback)foreach_get_queued_widget, &out);
+                (CtkCallback)foreach_get_queued_widget, &out);
     return out;
 }
 
 static void
 start_button_update_view (ProgressWidgetData *data)
 {
-    GtkWidget *toapply, *curimage;
-    GtkWidget *button = data->btstart;
+    CtkWidget *toapply, *curimage;
+    CtkWidget *button = data->btstart;
     ProgressWidgetState state = data->state;
     gboolean as_pause;
 
@@ -440,7 +440,7 @@ start_button_update_view (ProgressWidgetData *data)
 static void
 queue_button_update_view (ProgressWidgetData *data)
 {
-    GtkWidget *button = data->btqueue;
+    CtkWidget *button = data->btqueue;
     ProgressWidgetState state = data->state;
 
     if ( (!data->info->can_pause) ||
@@ -461,20 +461,20 @@ progress_info_set_waiting(BaulProgressInfo *info, gboolean waiting)
 }
 
 static void
-widget_reposition_as_queued (GtkWidget * widget)
+widget_reposition_as_queued (CtkWidget * widget)
 {
     ctk_box_reorder_child (GTK_BOX(get_widgets_container ()), widget, n_progress_ops-1);
 }
 
 /* Reposition the widget so that it sits right before the first stopped widget */
 static void
-widget_reposition_as_paused (GtkWidget * widget)
+widget_reposition_as_paused (CtkWidget * widget)
 {
     int i;
     GList *children, *child;
     ProgressWidgetData *data = NULL;
     gboolean abort = FALSE;
-    GtkWidget * container = get_widgets_container();
+    CtkWidget * container = get_widgets_container();
 
     children = ctk_container_get_children (GTK_CONTAINER(container));
 
@@ -500,13 +500,13 @@ widget_reposition_as_paused (GtkWidget * widget)
 
 /* Reposition the widget so that it sits right after the last running widget */
 static void
-widget_reposition_as_running (GtkWidget * widget)
+widget_reposition_as_running (CtkWidget * widget)
 {
     GList *children, *child;
     ProgressWidgetData *data = NULL;
     gboolean abort = FALSE;
     int i, mypos = -1;
-    GtkWidget * container = get_widgets_container();
+    CtkWidget * container = get_widgets_container();
 
     children = ctk_container_get_children (GTK_CONTAINER(container));
 
@@ -569,7 +569,7 @@ static void
 update_queue ()
 {
     if (get_running_operations () == 0) {
-        GtkWidget *next;
+        CtkWidget *next;
 
         next = get_first_queued_widget ();
 
@@ -679,7 +679,7 @@ baul_progress_info_disable_pause (BaulProgressInfo *info)
 }
 
 static void
-cancel_clicked (GtkWidget *button,
+cancel_clicked (CtkWidget *button,
                 ProgressWidgetData *data)
 {
     baul_progress_info_cancel (data->info);
@@ -725,7 +725,7 @@ baul_progress_info_get_ready (BaulProgressInfo *info)
 }
 
 static void
-start_clicked (GtkWidget *startbt,
+start_clicked (CtkWidget *startbt,
                ProgressWidgetData *data)
 {
     switch (data->state) {
@@ -744,7 +744,7 @@ start_clicked (GtkWidget *startbt,
 }
 
 static void
-queue_clicked (GtkWidget *queuebt,
+queue_clicked (CtkWidget *queuebt,
                ProgressWidgetData *data)
 {
     switch (data->state) {
@@ -769,8 +769,8 @@ unref_callback (gpointer data)
 static void
 start_button_init (ProgressWidgetData *data)
 {
-    GtkWidget *pauseImage, *resumeImage;
-    GtkWidget *button = ctk_button_new ();
+    CtkWidget *pauseImage, *resumeImage;
+    CtkWidget *button = ctk_button_new ();
     data->btstart = button;
 
     pauseImage = ctk_image_new_from_icon_name (
@@ -795,7 +795,7 @@ start_button_init (ProgressWidgetData *data)
 static void
 queue_button_init (ProgressWidgetData *data)
 {
-    GtkWidget *button, *image;
+    CtkWidget *button, *image;
 
     button = ctk_button_new ();
     data->btqueue = button;
@@ -809,11 +809,11 @@ queue_button_init (ProgressWidgetData *data)
     g_signal_connect (button, "clicked", (GCallback)queue_clicked, data);
 }
 
-static GtkWidget *
+static CtkWidget *
 progress_widget_new (BaulProgressInfo *info)
 {
     ProgressWidgetData *data;
-    GtkWidget *label, *progress_bar, *hbox, *vbox, *box, *btcancel, *imgcancel;
+    CtkWidget *label, *progress_bar, *hbox, *vbox, *box, *btcancel, *imgcancel;
 
     data = g_new0 (ProgressWidgetData, 1);
     data->info = g_object_ref (info);
@@ -915,7 +915,7 @@ progress_widget_new (BaulProgressInfo *info)
 static void
 handle_new_progress_info (BaulProgressInfo *info)
 {
-    GtkWidget *window, *progress;
+    CtkWidget *window, *progress;
 
     window = get_progress_window ();
 

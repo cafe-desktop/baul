@@ -111,11 +111,11 @@ baul_undostack_manager_add_action(BaulUndoStackManager* manager,
 
 void
 baul_undostack_manager_undo(BaulUndoStackManager* manager,
-    GtkWidget *parent_view, BaulUndostackFinishCallback cb);
+    CtkWidget *parent_view, BaulUndostackFinishCallback cb);
 
 void
 baul_undostack_manager_redo(BaulUndoStackManager* manager,
-    GtkWidget *parent_view, BaulUndostackFinishCallback cb);
+    CtkWidget *parent_view, BaulUndostackFinishCallback cb);
 
 BaulUndoStackActionData*
 baul_undostack_manager_data_new(BaulUndoStackActionType type,

@@ -187,7 +187,7 @@ struct BaulIconContainerDetails
 
     /* Renaming Details */
     gboolean renaming;
-    GtkWidget *rename_widget;	/* Editable text item */
+    CtkWidget *rename_widget;	/* Editable text item */
     char *original_text;			/* Copy of editable text for later compare */
 
     /* Idle ID. */
@@ -215,7 +215,7 @@ struct BaulIconContainerDetails
      */
     int arrow_key_start_x;
     int arrow_key_start_y;
-    GtkDirectionType arrow_key_direction;
+    CtkDirectionType arrow_key_direction;
 
     /* Mode settings. */
     gboolean single_click_mode;
@@ -282,8 +282,8 @@ struct BaulIconContainerDetails
     gboolean disable_popdown;
     gboolean imcontext_changed;
     int selected_iter;
-    GtkWidget *search_window;
-    GtkWidget *search_entry;
+    CtkWidget *search_window;
+    CtkWidget *search_entry;
     guint search_entry_changed_id;
     guint typeselect_flush_timeout;
 };

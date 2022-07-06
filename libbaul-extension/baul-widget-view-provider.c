@@ -70,11 +70,11 @@ baul_widget_view_provider_get_type (void)
  * baul_widget_view_provider_get_widget:
  * @provider: a #BaulWidgetViewProvider
  *
- * Return a #GtkWidget to show the current location content.
+ * Return a #CtkWidget to show the current location content.
  *
- * Returns: The #GtkWidget used to show the contents.
+ * Returns: The #CtkWidget used to show the contents.
  **/
-GtkWidget *
+CtkWidget *
 baul_widget_view_provider_get_widget (BaulWidgetViewProvider *provider)
 {
     g_return_val_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider), NULL);
@@ -117,11 +117,11 @@ void baul_widget_view_provider_set_location (BaulWidgetViewProvider *provider, c
 /**
  * baul_widget_view_provider_set_window:
  * @provider: a #BaulWidgetViewProvider
- * @window: parent #GtkWindow
+ * @window: parent #CtkWindow
  *
- * Set parent #GtkWindow of this #BaulWidgetViewProvider.
+ * Set parent #CtkWindow of this #BaulWidgetViewProvider.
  **/
-void baul_widget_view_provider_set_window (BaulWidgetViewProvider *provider, GtkWindow *window)
+void baul_widget_view_provider_set_window (BaulWidgetViewProvider *provider, CtkWindow *window)
 {
     g_return_if_fail (BAUL_IS_WIDGET_VIEW_PROVIDER (provider));
     g_return_if_fail (BAUL_WIDGET_VIEW_PROVIDER_GET_IFACE (provider)->set_window != NULL);

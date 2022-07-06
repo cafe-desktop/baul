@@ -89,7 +89,7 @@ void baul_window_pane_sync_search_widgets  (BaulWindowPane *pane);
 void baul_window_pane_set_active (BaulWindowPane *pane, gboolean is_active);
 void baul_window_pane_slot_close (BaulWindowPane *pane, BaulWindowSlot *slot);
 
-BaulWindowSlot* baul_window_pane_get_slot_for_content_box (BaulWindowPane *pane, GtkWidget *content_box);
+BaulWindowSlot* baul_window_pane_get_slot_for_content_box (BaulWindowPane *pane, CtkWidget *content_box);
 void baul_window_pane_switch_to (BaulWindowPane *pane);
 void baul_window_pane_grab_focus (BaulWindowPane *pane);
 

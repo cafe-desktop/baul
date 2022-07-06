@@ -49,24 +49,24 @@ struct _BaulConnectServerDialogPrivate
 {
     BaulApplication *application;
 
-    GtkWidget *primary_grid;
-    GtkWidget *user_details;
-    GtkWidget *port_spinbutton;
+    CtkWidget *primary_grid;
+    CtkWidget *user_details;
+    CtkWidget *port_spinbutton;
 
-    GtkWidget *info_bar;
-    GtkWidget *info_bar_content;
+    CtkWidget *info_bar;
+    CtkWidget *info_bar_content;
 
-    GtkWidget *type_combo;
-    GtkWidget *server_entry;
-    GtkWidget *share_entry;
-    GtkWidget *folder_entry;
-    GtkWidget *domain_entry;
-    GtkWidget *user_entry;
-    GtkWidget *password_entry;
-    GtkWidget *remember_checkbox;
-    GtkWidget *connect_button;
-    GtkWidget *bookmark_checkbox;
-    GtkWidget *name_entry;
+    CtkWidget *type_combo;
+    CtkWidget *server_entry;
+    CtkWidget *share_entry;
+    CtkWidget *folder_entry;
+    CtkWidget *domain_entry;
+    CtkWidget *user_entry;
+    CtkWidget *password_entry;
+    CtkWidget *remember_checkbox;
+    CtkWidget *connect_button;
+    CtkWidget *bookmark_checkbox;
+    CtkWidget *name_entry;
 
     GList *iconized_entries;
 
@@ -82,9 +82,9 @@ struct _BaulConnectServerDialogPrivate
 G_DEFINE_TYPE_WITH_PRIVATE (BaulConnectServerDialog, baul_connect_server_dialog,
 	       GTK_TYPE_DIALOG)
 
-static void sensitive_entry_changed_callback (GtkEditable *editable,
-					      GtkWidget *widget);
-static void iconized_entry_changed_cb (GtkEditable *entry,
+static void sensitive_entry_changed_callback (CtkEditable *editable,
+					      CtkWidget *widget);
+static void iconized_entry_changed_cb (CtkEditable *entry,
 				       BaulConnectServerDialog *dialog);
 
 enum
@@ -156,7 +156,7 @@ get_method_description (struct MethodInfo *meth)
 
 static void
 connect_dialog_restore_info_bar (BaulConnectServerDialog *dialog,
-				 GtkMessageType message_type)
+				 CtkMessageType message_type)
 {
 	if (dialog->details->info_bar_content != NULL) {
 		ctk_widget_destroy (dialog->details->info_bar_content);
@@ -170,9 +170,9 @@ connect_dialog_restore_info_bar (BaulConnectServerDialog *dialog,
 static void
 connect_dialog_set_connecting (BaulConnectServerDialog *dialog)
 {
-	GtkWidget *hbox;
-	GtkWidget *widget;
-	GtkWidget *content_area;
+	CtkWidget *hbox;
+	CtkWidget *widget;
+	CtkWidget *content_area;
 	gint width, height;
 
 	connect_dialog_restore_info_bar (dialog, GTK_MESSAGE_INFO);
@@ -203,7 +203,7 @@ connect_dialog_set_connecting (BaulConnectServerDialog *dialog)
 static void
 connect_dialog_gvfs_error (BaulConnectServerDialog *dialog)
 {
-	GtkWidget *hbox, *image, *content_area, *label;
+	CtkWidget *hbox, *image, *content_area, *label;
 
 	connect_dialog_restore_info_bar (dialog, GTK_MESSAGE_ERROR);
 
@@ -232,7 +232,7 @@ static void
 iconized_entry_restore (gpointer data,
 			gpointer user_data)
 {
-	GtkEntry *entry;
+	CtkEntry *entry;
 	BaulConnectServerDialog *dialog;
 
 	entry = data;
@@ -248,7 +248,7 @@ iconized_entry_restore (gpointer data,
 }
 
 static void
-iconized_entry_changed_cb (GtkEditable *entry,
+iconized_entry_changed_cb (CtkEditable *entry,
 			   BaulConnectServerDialog *dialog)
 {
 	dialog->details->iconized_entries =
@@ -259,7 +259,7 @@ iconized_entry_changed_cb (GtkEditable *entry,
 
 static void
 iconize_entry (BaulConnectServerDialog *dialog,
-	       GtkWidget *entry)
+	       CtkWidget *entry)
 {
 	if (!g_list_find (dialog->details->iconized_entries, entry)) {
 		dialog->details->iconized_entries =
@@ -280,7 +280,7 @@ static void
 connect_dialog_set_info_bar_error (BaulConnectServerDialog *dialog,
 				   GError *error)
 {
-	GtkWidget *content_area, *label, *entry, *hbox, *icon;
+	CtkWidget *content_area, *label, *entry, *hbox, *icon;
 	gchar *str;
 	const gchar *folder, *server;
 
@@ -388,7 +388,7 @@ connect_dialog_request_additional_details (BaulConnectServerDialog *self,
 					   const gchar *default_user,
 					   const gchar *default_domain)
 {
-	GtkWidget *content_area, *label, *hbox, *icon;
+	CtkWidget *content_area, *label, *hbox, *icon;
 
 	self->details->fill_details_flags = flags;
 
@@ -523,7 +523,7 @@ connect_dialog_connect_to_server (BaulConnectServerDialog *dialog)
     struct MethodInfo *meth;
     GFile *location;
     int index;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     char *user, *initial_path, *server, *folder, *domain, *port_str;
     char *t, *join, *uri;
     double port;
@@ -761,7 +761,7 @@ connect_dialog_setup_for_type (BaulConnectServerDialog *dialog)
 {
     struct MethodInfo *meth;
     int index;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
 	connect_dialog_cleanup (dialog);
 
@@ -815,8 +815,8 @@ connect_dialog_setup_for_type (BaulConnectServerDialog *dialog)
 }
 
 static void
-sensitive_entry_changed_callback (GtkEditable *editable,
-				  GtkWidget *widget)
+sensitive_entry_changed_callback (CtkEditable *editable,
+				  CtkWidget *widget)
 {
     guint length;
 
@@ -827,8 +827,8 @@ sensitive_entry_changed_callback (GtkEditable *editable,
 
 static void
 bind_visibility (BaulConnectServerDialog *dialog,
-		 GtkWidget *source,
-		 GtkWidget *dest)
+		 CtkWidget *source,
+		 CtkWidget *dest)
 {
     g_object_bind_property (source,
     			"visible",
@@ -840,12 +840,12 @@ bind_visibility (BaulConnectServerDialog *dialog,
 static void
 baul_connect_server_dialog_init (BaulConnectServerDialog *dialog)
 {
-    GtkWidget *label;
-    GtkWidget *content_area;
-    GtkWidget *combo, *grid;
-    GtkWidget *vbox, *hbox, *connect_button, *checkbox;
-    GtkListStore *store;
-    GtkCellRenderer *renderer;
+    CtkWidget *label;
+    CtkWidget *content_area;
+    CtkWidget *combo, *grid;
+    CtkWidget *vbox, *hbox, *connect_button, *checkbox;
+    CtkListStore *store;
+    CtkCellRenderer *renderer;
     gchar *str;
     int i;
 
@@ -942,7 +942,7 @@ baul_connect_server_dialog_init (BaulConnectServerDialog *dialog)
 
     for (i = 0; i < G_N_ELEMENTS (methods); i++)
     {
-        GtkTreeIter iter;
+        CtkTreeIter iter;
         const gchar * const *supported;
 
 		/* skip methods that don't have corresponding gvfs uri schemes */
@@ -1166,11 +1166,11 @@ baul_connect_server_dialog_class_init (BaulConnectServerDialogClass *class)
 	oclass->finalize = baul_connect_server_dialog_finalize;
 }
 
-GtkWidget *
+CtkWidget *
 baul_connect_server_dialog_new (BaulWindow *window)
 {
     BaulConnectServerDialog *conndlg;
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     dialog = ctk_widget_new (BAUL_TYPE_CONNECT_SERVER_DIALOG, NULL);
     conndlg = BAUL_CONNECT_SERVER_DIALOG (dialog);

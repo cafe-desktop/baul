@@ -60,10 +60,10 @@ enum
 
 struct _BaulZoomControlPrivate
 {
-    GtkWidget *zoom_in;
-    GtkWidget *zoom_out;
-    GtkWidget *zoom_label;
-    GtkWidget *zoom_button;
+    CtkWidget *zoom_in;
+    CtkWidget *zoom_out;
+    CtkWidget *zoom_label;
+    CtkWidget *zoom_button;
 
     BaulZoomLevel zoom_level;
     BaulZoomLevel min_zoom_level;
@@ -101,7 +101,7 @@ static const char * const baul_zoom_control_accessible_action_descriptions[] =
     N_("Use the normal view size")
 };
 
-static GtkMenu *create_zoom_menu (BaulZoomControl *zoom_control);
+static CtkMenu *create_zoom_menu (BaulZoomControl *zoom_control);
 
 static GType baul_zoom_control_accessible_get_type (void);
 
@@ -121,15 +121,15 @@ baul_zoom_control_finalize (GObject *object)
 }
 
 static void
-zoom_button_clicked (GtkButton *button, BaulZoomControl *zoom_control)
+zoom_button_clicked (CtkButton *button, BaulZoomControl *zoom_control)
 {
     g_signal_emit (zoom_control, signals[ZOOM_TO_DEFAULT], 0);
 }
 
 static void
-zoom_popup_menu_show (GtkWidget *widget, GdkEventButton *event, BaulZoomControl *zoom_control)
+zoom_popup_menu_show (CtkWidget *widget, GdkEventButton *event, BaulZoomControl *zoom_control)
 {
-    GtkMenu *menu;
+    CtkMenu *menu;
 
     menu = create_zoom_menu (zoom_control);
     ctk_menu_popup_at_widget (menu,
@@ -140,9 +140,9 @@ zoom_popup_menu_show (GtkWidget *widget, GdkEventButton *event, BaulZoomControl 
 }
 
 static void
-zoom_popup_menu (GtkWidget *widget, BaulZoomControl *zoom_control)
+zoom_popup_menu (CtkWidget *widget, BaulZoomControl *zoom_control)
 {
-    GtkMenu *menu;
+    CtkMenu *menu;
 
     menu = create_zoom_menu (zoom_control);
     ctk_menu_popup_at_widget (menu,
@@ -156,7 +156,7 @@ zoom_popup_menu (GtkWidget *widget, BaulZoomControl *zoom_control)
 
 /* handle button presses */
 static gboolean
-baul_zoom_control_button_press_event (GtkWidget *widget,
+baul_zoom_control_button_press_event (CtkWidget *widget,
                                       GdkEventButton *event,
                                       BaulZoomControl *zoom_control)
 {
@@ -183,7 +183,7 @@ baul_zoom_control_button_press_event (GtkWidget *widget,
 }
 
 static void
-zoom_out_clicked (GtkButton *button,
+zoom_out_clicked (CtkButton *button,
                   BaulZoomControl *zoom_control)
 {
     if (baul_zoom_control_can_zoom_out (zoom_control))
@@ -193,7 +193,7 @@ zoom_out_clicked (GtkButton *button,
 }
 
 static void
-zoom_in_clicked (GtkButton *button,
+zoom_in_clicked (CtkButton *button,
                  BaulZoomControl *zoom_control)
 {
     if (baul_zoom_control_can_zoom_in (zoom_control))
@@ -220,8 +220,8 @@ set_label_size (BaulZoomControl *zoom_control)
 }
 
 static void
-label_style_set_callback (GtkWidget *label,
-                          GtkStyleContext *style,
+label_style_set_callback (CtkWidget *label,
+                          CtkStyleContext *style,
                           gpointer user_data)
 {
     set_label_size (BAUL_ZOOM_CONTROL (user_data));
@@ -230,7 +230,7 @@ label_style_set_callback (GtkWidget *label,
 static void
 baul_zoom_control_init (BaulZoomControl *zoom_control)
 {
-    GtkWidget *image;
+    CtkWidget *image;
     int i;
 
     zoom_control->details = baul_zoom_control_get_instance_private (zoom_control);
@@ -324,7 +324,7 @@ baul_zoom_control_init (BaulZoomControl *zoom_control)
 }
 
 /* Allocate a new zoom control */
-GtkWidget *
+CtkWidget *
 baul_zoom_control_new (void)
 {
     return ctk_widget_new (baul_zoom_control_get_type (), NULL);
@@ -350,7 +350,7 @@ baul_zoom_control_redraw (BaulZoomControl *zoom_control)
 /* routines to create and handle the zoom menu */
 
 static void
-zoom_menu_callback (GtkMenuItem *item, gpointer callback_data)
+zoom_menu_callback (CtkMenuItem *item, gpointer callback_data)
 {
     BaulZoomLevel zoom_level;
     BaulZoomControl *zoom_control;
@@ -388,12 +388,12 @@ zoom_menu_callback (GtkMenuItem *item, gpointer callback_data)
     }
 }
 
-static GtkRadioMenuItem *
-create_zoom_menu_item (BaulZoomControl *zoom_control, GtkMenu *menu,
+static CtkRadioMenuItem *
+create_zoom_menu_item (BaulZoomControl *zoom_control, CtkMenu *menu,
                        BaulZoomLevel zoom_level,
-                       GtkRadioMenuItem *previous_radio_item)
+                       CtkRadioMenuItem *previous_radio_item)
 {
-    GtkWidget *menu_item;
+    CtkWidget *menu_item;
     char *item_text;
     GSList *radio_item_group;
     int percent;
@@ -427,11 +427,11 @@ create_zoom_menu_item (BaulZoomControl *zoom_control, GtkMenu *menu,
     return GTK_RADIO_MENU_ITEM (menu_item);
 }
 
-static GtkMenu *
+static CtkMenu *
 create_zoom_menu (BaulZoomControl *zoom_control)
 {
-    GtkMenu *menu;
-    GtkRadioMenuItem *previous_item;
+    CtkMenu *menu;
+    CtkRadioMenuItem *previous_item;
     GList *node;
 
     menu = GTK_MENU (ctk_menu_new ());
@@ -448,7 +448,7 @@ create_zoom_menu (BaulZoomControl *zoom_control)
 
 static void
 baul_zoom_control_change_value (BaulZoomControl *zoom_control,
-                                GtkScrollType scroll)
+                                CtkScrollType scroll)
 {
     switch (scroll)
     {
@@ -545,7 +545,7 @@ baul_zoom_control_can_zoom_out (BaulZoomControl *zoom_control)
 }
 
 static gboolean
-baul_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
+baul_zoom_control_scroll_event (CtkWidget *widget, GdkEventScroll *event)
 {
     BaulZoomControl *zoom_control;
 
@@ -581,8 +581,8 @@ baul_zoom_control_scroll_event (GtkWidget *widget, GdkEventScroll *event)
 static void
 baul_zoom_control_class_init (BaulZoomControlClass *class)
 {
-    GtkWidgetClass *widget_class;
-    GtkBindingSet *binding_set;
+    CtkWidgetClass *widget_class;
+    CtkBindingSet *binding_set;
 
     G_OBJECT_CLASS (class)->finalize = baul_zoom_control_finalize;
 
@@ -685,7 +685,7 @@ baul_zoom_control_class_init (BaulZoomControlClass *class)
 static gboolean
 baul_zoom_control_accessible_do_action (AtkAction *accessible, int i)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     g_assert (i >= 0 && i < NUM_ACTIONS);
 
@@ -873,12 +873,12 @@ typedef struct _BaulZoomControlAccessibleClass BaulZoomControlAccessibleClass;
 
 struct _BaulZoomControlAccessible
 {
-    GtkContainerAccessible parent;
+    CtkContainerAccessible parent;
 };
 
 struct _BaulZoomControlAccessibleClass
 {
-    GtkContainerAccessibleClass parent_class;
+    CtkContainerAccessibleClass parent_class;
 };
 
 G_DEFINE_TYPE_WITH_CODE (BaulZoomControlAccessible,

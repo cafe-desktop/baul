@@ -467,10 +467,10 @@ msgstr "Слагање редова"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "Поравнање редова у тексту натписа у међусобном односу. Ово не утиче на "
-"поравнање натписа на додељеном му простору. Погледајте „GtkMisc::xalign“ за "
+"поравнање натписа на додељеном му простору. Погледајте „CtkMisc::xalign“ за "
 "то."
 
 #: eel/eel-editable-label.c:351

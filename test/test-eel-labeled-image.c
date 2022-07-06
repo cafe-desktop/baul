@@ -5,7 +5,7 @@
 static const char pixbuf_name[] = "/usr/share/pixmaps/cafe-globe.png";
 
 static void
-button_callback (GtkWidget *button,
+button_callback (CtkWidget *button,
 		 gpointer callback_data)
 {
 	const char *info = callback_data;
@@ -14,24 +14,24 @@ button_callback (GtkWidget *button,
 	g_print ("%s(%p)\n", info, button);
 }
 
-static GtkWidget *
+static CtkWidget *
 labeled_image_button_window_new (const char *title,
 				 GdkPixbuf *pixbuf)
 {
-	GtkWidget *window;
-	GtkWidget *vbox;
-	GtkWidget *button;
-	GtkWidget *toggle_button;
-	GtkWidget *check_button;
-	GtkWidget *plain;
+	CtkWidget *window;
+	CtkWidget *vbox;
+	CtkWidget *button;
+	CtkWidget *toggle_button;
+	CtkWidget *check_button;
+	CtkWidget *plain;
 
 	window = test_window_new (title, 20);
 	vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 10);
 	ctk_container_add (GTK_CONTAINER (window), vbox);
 
-	if (1) button = eel_labeled_image_button_new ("GtkButton with LabeledImage", pixbuf);
-	if (1) toggle_button = eel_labeled_image_toggle_button_new ("GtkToggleButton with LabeledImage", pixbuf);
-	if (1) check_button = eel_labeled_image_check_button_new ("GtkCheckButton with LabeledImage", pixbuf);
+	if (1) button = eel_labeled_image_button_new ("CtkButton with LabeledImage", pixbuf);
+	if (1) toggle_button = eel_labeled_image_toggle_button_new ("CtkToggleButton with LabeledImage", pixbuf);
+	if (1) check_button = eel_labeled_image_check_button_new ("CtkCheckButton with LabeledImage", pixbuf);
 	if (1) {
 		plain = eel_labeled_image_new ("Plain LabeledImage", pixbuf);
 		eel_labeled_image_set_can_focus (EEL_LABELED_IMAGE (plain), TRUE);
@@ -58,14 +58,14 @@ labeled_image_button_window_new (const char *title,
 int
 main (int argc, char* argv[])
 {
-	GtkWidget *labeled_image_window = NULL;
-	GtkWidget *labeled_image_button_window = NULL;
+	CtkWidget *labeled_image_window = NULL;
+	CtkWidget *labeled_image_button_window = NULL;
 	GdkPixbuf *pixbuf = NULL;
 
 	test_init (&argc, &argv);
 
 	if (1) pixbuf = test_pixbuf_new_named (pixbuf_name, 1.0);
-	if (1) labeled_image_button_window = labeled_image_button_window_new ("LabeledImage in GtkButton Test", pixbuf);
+	if (1) labeled_image_button_window = labeled_image_button_window_new ("LabeledImage in CtkButton Test", pixbuf);
 
 	eel_gdk_pixbuf_unref_if_not_null (pixbuf);
 

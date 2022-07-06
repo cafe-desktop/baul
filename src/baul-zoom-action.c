@@ -59,7 +59,7 @@ zoom_changed_callback (BaulWindow *window,
                        gboolean can_zoom,
                        gboolean can_zoom_in,
                        gboolean can_zoom_out,
-                       GtkWidget *zoom_control)
+                       CtkWidget *zoom_control)
 {
     if (supports_zooming)
     {
@@ -78,15 +78,15 @@ zoom_changed_callback (BaulWindow *window,
 }
 
 static void
-connect_proxy (GtkAction *action,
-               GtkWidget *proxy)
+connect_proxy (CtkAction *action,
+               CtkWidget *proxy)
 {
     if (GTK_IS_TOOL_ITEM (proxy))
     {
-        GtkToolItem *item = GTK_TOOL_ITEM (proxy);
+        CtkToolItem *item = GTK_TOOL_ITEM (proxy);
         BaulZoomAction *zaction = BAUL_ZOOM_ACTION (action);
         BaulNavigationWindow *window = zaction->priv->window;
-        GtkWidget *zoom_control;
+        CtkWidget *zoom_control;
 
         zoom_control = baul_zoom_control_new ();
         ctk_container_add (GTK_CONTAINER (item),  zoom_control);
@@ -116,15 +116,15 @@ connect_proxy (GtkAction *action,
 }
 
 static void
-disconnect_proxy (GtkAction *action,
-                  GtkWidget *proxy)
+disconnect_proxy (CtkAction *action,
+                  CtkWidget *proxy)
 {
     if (GTK_IS_TOOL_ITEM (proxy))
     {
-        GtkToolItem *item = GTK_TOOL_ITEM (proxy);
+        CtkToolItem *item = GTK_TOOL_ITEM (proxy);
         BaulZoomAction *zaction = BAUL_ZOOM_ACTION (action);
         BaulNavigationWindow *window = zaction->priv->window;
-        GtkWidget *child;
+        CtkWidget *child;
 
         child = ctk_bin_get_child (GTK_BIN (item));
 
@@ -184,7 +184,7 @@ baul_zoom_action_class_init (BaulZoomActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    GtkActionClass *action_class = GTK_ACTION_CLASS (class);
+    CtkActionClass *action_class = GTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     object_class->finalize = baul_zoom_action_finalize;

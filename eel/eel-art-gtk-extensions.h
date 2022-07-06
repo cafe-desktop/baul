@@ -42,9 +42,9 @@
 extern "C" {
 #endif
 
-    /* GtkWidget bounds and dimensions */
-    EelIRect      eel_ctk_widget_get_bounds                 (GtkWidget    *widget);
-    EelDimensions eel_ctk_widget_get_dimensions             (GtkWidget    *widget);
+    /* CtkWidget bounds and dimensions */
+    EelIRect      eel_ctk_widget_get_bounds                 (CtkWidget    *widget);
+    EelDimensions eel_ctk_widget_get_dimensions             (CtkWidget    *widget);
 
 #ifdef __cplusplus
 }

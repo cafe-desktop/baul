@@ -82,7 +82,7 @@ activate_extra_viewer (BaulWindow *window)
 }
 
 static void
-view_as_menu_switch_views_callback (GtkComboBox *combo_box, BaulNavigationWindow *window)
+view_as_menu_switch_views_callback (CtkComboBox *combo_box, BaulNavigationWindow *window)
 {
     int active;
 
@@ -107,14 +107,14 @@ view_as_menu_switch_views_callback (GtkComboBox *combo_box, BaulNavigationWindow
 
 static void
 view_as_changed_callback (BaulWindow *window,
-                          GtkComboBox *combo_box)
+                          CtkComboBox *combo_box)
 {
     BaulWindowSlot *slot;
     GList *node;
     int index;
     int selected_index = -1;
-    GtkTreeModel *model;
-    GtkListStore *store;
+    CtkTreeModel *model;
+    CtkListStore *store;
     const BaulViewInfo *info;
 
     /* Clear the contents of ComboBox in a wacky way because there
@@ -169,16 +169,16 @@ view_as_changed_callback (BaulWindow *window,
 
 
 static void
-connect_proxy (GtkAction *action,
-               GtkWidget *proxy)
+connect_proxy (CtkAction *action,
+               CtkWidget *proxy)
 {
     if (GTK_IS_TOOL_ITEM (proxy))
     {
-        GtkToolItem *item = GTK_TOOL_ITEM (proxy);
+        CtkToolItem *item = GTK_TOOL_ITEM (proxy);
         BaulViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
         BaulNavigationWindow *window = vaction->priv->window;
-        GtkWidget *view_as_menu_vbox;
-        GtkWidget *view_as_combo_box;
+        CtkWidget *view_as_menu_vbox;
+        CtkWidget *view_as_combo_box;
 
         /* Option menu for content view types; it's empty here, filled in when a uri is set.
          * Pack it into vbox so it doesn't grow vertically when location bar does.
@@ -207,8 +207,8 @@ connect_proxy (GtkAction *action,
 }
 
 static void
-disconnect_proxy (GtkAction *action,
-                  GtkWidget *proxy)
+disconnect_proxy (CtkAction *action,
+                  CtkWidget *proxy)
 {
     if (GTK_IS_TOOL_ITEM (proxy))
     {
@@ -272,7 +272,7 @@ baul_view_as_action_class_init (BaulViewAsActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    GtkActionClass *action_class = GTK_ACTION_CLASS (class);
+    CtkActionClass *action_class = GTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     object_class->finalize = baul_view_as_action_finalize;

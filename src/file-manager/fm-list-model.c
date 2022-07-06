@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* fm-list-model.h - a GtkTreeModel for file lists.
+/* fm-list-model.h - a CtkTreeModel for file lists.
 
    Copyright (C) 2001, 2002 Anders Carlsson
    Copyright (C) 2003, Soeren Sandmann
@@ -60,8 +60,8 @@ static guint list_model_signals[LAST_SIGNAL] = { 0 };
 static int fm_list_model_file_entry_compare_func (gconstpointer a,
         gconstpointer b,
         gpointer      user_data);
-static void fm_list_model_tree_model_init (GtkTreeModelIface *iface);
-static void fm_list_model_sortable_init (GtkTreeSortableIface *iface);
+static void fm_list_model_tree_model_init (CtkTreeModelIface *iface);
+static void fm_list_model_sortable_init (CtkTreeSortableIface *iface);
 static void fm_list_model_multi_drag_source_init (EggTreeMultiDragSourceIface *iface);
 
 struct FMListModelDetails
@@ -73,11 +73,11 @@ struct FMListModelDetails
     int stamp;
 
     GQuark sort_attribute;
-    GtkSortType order;
+    CtkSortType order;
 
     gboolean sort_directories_first;
 
-    GtkTreeView *drag_view;
+    CtkTreeView *drag_view;
     int drag_begin_x;
     int drag_begin_y;
 
@@ -114,13 +114,13 @@ G_DEFINE_TYPE_WITH_CODE (FMListModel, fm_list_model, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (EGG_TYPE_TREE_MULTI_DRAG_SOURCE,
                                  fm_list_model_multi_drag_source_init));
 
-static const GtkTargetEntry drag_types [] =
+static const CtkTargetEntry drag_types [] =
 {
     { BAUL_ICON_DND_CAFE_ICON_LIST_TYPE, 0, BAUL_ICON_DND_CAFE_ICON_LIST },
     { BAUL_ICON_DND_URI_LIST_TYPE, 0, BAUL_ICON_DND_URI_LIST },
 };
 
-static GtkTargetList *drag_target_list = NULL;
+static CtkTargetList *drag_target_list = NULL;
 
 static void
 file_entry_free (FileEntry *file_entry)
@@ -142,20 +142,20 @@ file_entry_free (FileEntry *file_entry)
     g_free (file_entry);
 }
 
-static GtkTreeModelFlags
-fm_list_model_get_flags (GtkTreeModel *tree_model)
+static CtkTreeModelFlags
+fm_list_model_get_flags (CtkTreeModel *tree_model)
 {
     return GTK_TREE_MODEL_ITERS_PERSIST;
 }
 
 static int
-fm_list_model_get_n_columns (GtkTreeModel *tree_model)
+fm_list_model_get_n_columns (CtkTreeModel *tree_model)
 {
     return FM_LIST_MODEL_NUM_COLUMNS + FM_LIST_MODEL (tree_model)->details->columns->len;
 }
 
 static GType
-fm_list_model_get_column_type (GtkTreeModel *tree_model, int index)
+fm_list_model_get_column_type (CtkTreeModel *tree_model, int index)
 {
     switch (index)
     {
@@ -186,7 +186,7 @@ fm_list_model_get_column_type (GtkTreeModel *tree_model, int index)
 }
 
 static void
-fm_list_model_ptr_to_iter (FMListModel *model, GSequenceIter *ptr, GtkTreeIter *iter)
+fm_list_model_ptr_to_iter (FMListModel *model, GSequenceIter *ptr, CtkTreeIter *iter)
 {
     g_assert (!g_sequence_iter_is_end (ptr));
     if (iter != NULL)
@@ -197,7 +197,7 @@ fm_list_model_ptr_to_iter (FMListModel *model, GSequenceIter *ptr, GtkTreeIter *
 }
 
 static gboolean
-fm_list_model_get_iter (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreePath *path)
+fm_list_model_get_iter (CtkTreeModel *tree_model, CtkTreeIter *iter, CtkTreePath *path)
 {
     FMListModel *model;
     GSequence *files;
@@ -230,10 +230,10 @@ fm_list_model_get_iter (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreePath
     return TRUE;
 }
 
-static GtkTreePath *
-fm_list_model_get_path (GtkTreeModel *tree_model, GtkTreeIter *iter)
+static CtkTreePath *
+fm_list_model_get_path (CtkTreeModel *tree_model, CtkTreeIter *iter)
 {
-    GtkTreePath *path;
+    CtkTreePath *path;
     FMListModel *model;
     GSequenceIter *ptr;
     FileEntry *file_entry;
@@ -284,7 +284,7 @@ fm_list_model_get_icon_scale (FMListModel *model)
 }
 
 static void
-fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column, GValue *value)
+fm_list_model_get_value (CtkTreeModel *tree_model, CtkTreeIter *iter, int column, GValue *value)
 {
     FMListModel *model;
     FileEntry *file_entry;
@@ -359,14 +359,14 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
                     BAUL_FILE_ICON_FLAGS_USE_MOUNT_ICON_AS_EMBLEM;
             if (model->details->drag_view != NULL)
             {
-                GtkTreePath *path_a;
+                CtkTreePath *path_a;
 
                 ctk_tree_view_get_drag_dest_row (model->details->drag_view,
                                                  &path_a,
                                                  NULL);
                 if (path_a != NULL)
                 {
-                    GtkTreePath *path_b;
+                    CtkTreePath *path_b;
 
                     path_b = ctk_tree_model_get_path (tree_model, iter);
 
@@ -496,7 +496,7 @@ fm_list_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, int column
 }
 
 static gboolean
-fm_list_model_iter_next (GtkTreeModel *tree_model, GtkTreeIter *iter)
+fm_list_model_iter_next (CtkTreeModel *tree_model, CtkTreeIter *iter)
 {
     FMListModel *model;
 
@@ -510,7 +510,7 @@ fm_list_model_iter_next (GtkTreeModel *tree_model, GtkTreeIter *iter)
 }
 
 static gboolean
-fm_list_model_iter_children (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeIter *parent)
+fm_list_model_iter_children (CtkTreeModel *tree_model, CtkTreeIter *iter, CtkTreeIter *parent)
 {
     FMListModel *model;
     GSequence *files;
@@ -540,7 +540,7 @@ fm_list_model_iter_children (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTre
 }
 
 static gboolean
-fm_list_model_iter_has_child (GtkTreeModel *tree_model, GtkTreeIter *iter)
+fm_list_model_iter_has_child (CtkTreeModel *tree_model, CtkTreeIter *iter)
 {
     FileEntry *file_entry;
 
@@ -555,7 +555,7 @@ fm_list_model_iter_has_child (GtkTreeModel *tree_model, GtkTreeIter *iter)
 }
 
 static int
-fm_list_model_iter_n_children (GtkTreeModel *tree_model, GtkTreeIter *iter)
+fm_list_model_iter_n_children (CtkTreeModel *tree_model, CtkTreeIter *iter)
 {
     FMListModel *model;
     GSequence *files;
@@ -577,7 +577,7 @@ fm_list_model_iter_n_children (GtkTreeModel *tree_model, GtkTreeIter *iter)
 }
 
 static gboolean
-fm_list_model_iter_nth_child (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeIter *parent, int n)
+fm_list_model_iter_nth_child (CtkTreeModel *tree_model, CtkTreeIter *iter, CtkTreeIter *parent, int n)
 {
     FMListModel *model;
     GSequenceIter *child;
@@ -610,7 +610,7 @@ fm_list_model_iter_nth_child (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTr
 }
 
 static gboolean
-fm_list_model_iter_parent (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeIter *child)
+fm_list_model_iter_parent (CtkTreeModel *tree_model, CtkTreeIter *iter, CtkTreeIter *child)
 {
     FMListModel *model;
     FileEntry *file_entry;
@@ -680,8 +680,8 @@ dir_to_iters (struct GetIters *data,
     ptr = g_hash_table_lookup (reverse_map, data->file);
     if (ptr)
     {
-        GtkTreeIter *iter;
-        iter = g_new0 (GtkTreeIter, 1);
+        CtkTreeIter *iter;
+        iter = g_new0 (CtkTreeIter, 1);
         fm_list_model_ptr_to_iter (data->model, ptr, iter);
         data->iters = g_list_prepend (data->iters, iter);
     }
@@ -719,7 +719,7 @@ fm_list_model_get_all_iters_for_file (FMListModel *model, BaulFile *file)
 gboolean
 fm_list_model_get_first_iter_for_file (FMListModel          *model,
                                        BaulFile         *file,
-                                       GtkTreeIter          *iter)
+                                       CtkTreeIter          *iter)
 {
     GList *list;
     gboolean res;
@@ -730,7 +730,7 @@ fm_list_model_get_first_iter_for_file (FMListModel          *model,
     if (list != NULL)
     {
         res = TRUE;
-        *iter = *(GtkTreeIter *)list->data;
+        *iter = *(CtkTreeIter *)list->data;
     }
     g_list_free_full (list, g_free);
 
@@ -741,7 +741,7 @@ fm_list_model_get_first_iter_for_file (FMListModel          *model,
 gboolean
 fm_list_model_get_tree_iter_from_file (FMListModel *model, BaulFile *file,
                                        BaulDirectory *directory,
-                                       GtkTreeIter *iter)
+                                       CtkTreeIter *iter)
 {
     GSequenceIter *ptr;
 
@@ -806,10 +806,10 @@ fm_list_model_compare_func (FMListModel *model,
 }
 
 static void
-fm_list_model_sort_file_entries (FMListModel *model, GSequence *files, GtkTreePath *path)
+fm_list_model_sort_file_entries (FMListModel *model, GSequence *files, CtkTreePath *path)
 {
     GSequenceIter **old_order;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     int *new_order;
     int length;
     int i;
@@ -875,7 +875,7 @@ fm_list_model_sort_file_entries (FMListModel *model, GSequence *files, GtkTreePa
 static void
 fm_list_model_sort (FMListModel *model)
 {
-    GtkTreePath *path;
+    CtkTreePath *path;
 
     path = ctk_tree_path_new ();
 
@@ -885,9 +885,9 @@ fm_list_model_sort (FMListModel *model)
 }
 
 static gboolean
-fm_list_model_get_sort_column_id (GtkTreeSortable *sortable,
+fm_list_model_get_sort_column_id (CtkTreeSortable *sortable,
                                   gint            *sort_column_id,
-                                  GtkSortType     *order)
+                                  CtkSortType     *order)
 {
     FMListModel *model;
     int id;
@@ -916,7 +916,7 @@ fm_list_model_get_sort_column_id (GtkTreeSortable *sortable,
 }
 
 static void
-fm_list_model_set_sort_column_id (GtkTreeSortable *sortable, gint sort_column_id, GtkSortType order)
+fm_list_model_set_sort_column_id (CtkTreeSortable *sortable, gint sort_column_id, CtkSortType order)
 {
     FMListModel *model;
 
@@ -931,7 +931,7 @@ fm_list_model_set_sort_column_id (GtkTreeSortable *sortable, gint sort_column_id
 }
 
 static gboolean
-fm_list_model_has_default_sort_func (GtkTreeSortable *sortable)
+fm_list_model_has_default_sort_func (CtkTreeSortable *sortable)
 {
     return FALSE;
 }
@@ -951,10 +951,10 @@ each_path_get_data_binder (BaulDragEachSelectedItemDataGet data_get,
     GList *l;
     char *uri;
     GdkRectangle cell_area;
-    GtkTreeViewColumn *column;
+    CtkTreeViewColumn *column;
     BaulFile *file = NULL;
-    GtkTreeRowReference *row = NULL;
-    GtkTreePath *path = NULL;
+    CtkTreeRowReference *row = NULL;
+    CtkTreePath *path = NULL;
 
     info = context;
 
@@ -997,7 +997,7 @@ each_path_get_data_binder (BaulDragEachSelectedItemDataGet data_get,
 static gboolean
 fm_list_model_multi_drag_data_get (EggTreeMultiDragSource *drag_source,
                                    GList *path_list,
-                                   GtkSelectionData *selection_data)
+                                   CtkSelectionData *selection_data)
 {
     FMListModel *model;
     DragDataGetInfo context;
@@ -1042,8 +1042,8 @@ static void
 add_dummy_row (FMListModel *model, FileEntry *parent_entry)
 {
     FileEntry *dummy_file_entry;
-    GtkTreeIter iter;
-    GtkTreePath *path;
+    CtkTreeIter iter;
+    CtkTreePath *path;
 
     dummy_file_entry = g_new0 (FileEntry, 1);
     dummy_file_entry->parent = parent_entry;
@@ -1061,8 +1061,8 @@ gboolean
 fm_list_model_add_file (FMListModel *model, BaulFile *file,
                         BaulDirectory *directory)
 {
-    GtkTreeIter iter;
-    GtkTreePath *path;
+    CtkTreeIter iter;
+    CtkTreePath *path;
     FileEntry *file_entry;
     GSequenceIter *ptr, *parent_ptr;
     GSequence *files;
@@ -1162,8 +1162,8 @@ fm_list_model_file_changed (FMListModel *model, BaulFile *file,
                             BaulDirectory *directory)
 {
     FileEntry *parent_file_entry;
-    GtkTreeIter iter;
-    GtkTreePath *path;
+    CtkTreeIter iter;
+    CtkTreePath *path;
     GSequenceIter *ptr;
     int pos_before, pos_after;
     gboolean has_iter;
@@ -1183,7 +1183,7 @@ fm_list_model_file_changed (FMListModel *model, BaulFile *file,
 
     if (pos_before != pos_after)
     {
-        GtkTreePath *parent_path;
+        CtkTreePath *parent_path;
         int length, i, old;
         int *new_order;
         GSequence *files;
@@ -1249,12 +1249,12 @@ fm_list_model_get_length (FMListModel *model)
 }
 
 static void
-fm_list_model_remove (FMListModel *model, GtkTreeIter *iter)
+fm_list_model_remove (FMListModel *model, CtkTreeIter *iter)
 {
     GSequenceIter *ptr;
     FileEntry *file_entry, *parent_file_entry;
-    GtkTreePath *path;
-    GtkTreeIter parent_iter;
+    CtkTreePath *path;
+    CtkTreeIter parent_iter;
 
     ptr = iter->user_data;
     file_entry = g_sequence_get (ptr);
@@ -1346,7 +1346,7 @@ void
 fm_list_model_remove_file (FMListModel *model, BaulFile *file,
                            BaulDirectory *directory)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     if (fm_list_model_get_tree_iter_from_file (model, file, directory, &iter))
     {
@@ -1357,7 +1357,7 @@ fm_list_model_remove_file (FMListModel *model, BaulFile *file,
 static void
 fm_list_model_clear_directory (FMListModel *model, GSequence *files)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     FileEntry *file_entry = NULL;
 
     while (g_sequence_get_length (files) > 0)
@@ -1385,10 +1385,10 @@ fm_list_model_clear (FMListModel *model)
 }
 
 BaulFile *
-fm_list_model_file_for_path (FMListModel *model, GtkTreePath *path)
+fm_list_model_file_for_path (FMListModel *model, CtkTreePath *path)
 {
     BaulFile *file;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     file = NULL;
     if (ctk_tree_model_get_iter (GTK_TREE_MODEL (model),
@@ -1403,9 +1403,9 @@ fm_list_model_file_for_path (FMListModel *model, GtkTreePath *path)
 }
 
 gboolean
-fm_list_model_load_subdirectory (FMListModel *model, GtkTreePath *path, BaulDirectory **directory)
+fm_list_model_load_subdirectory (FMListModel *model, CtkTreePath *path, BaulDirectory **directory)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     FileEntry *file_entry;
     BaulDirectory *subdirectory;
 
@@ -1445,10 +1445,10 @@ fm_list_model_load_subdirectory (FMListModel *model, GtkTreePath *path, BaulDire
 
 /* removes all children of the subfolder and unloads the subdirectory */
 void
-fm_list_model_unload_subdirectory (FMListModel *model, GtkTreeIter *iter)
+fm_list_model_unload_subdirectory (FMListModel *model, CtkTreeIter *iter)
 {
     FileEntry *file_entry;
-    GtkTreeIter child_iter;
+    CtkTreeIter child_iter;
 
     file_entry = g_sequence_get (iter->user_data);
     if (file_entry->file == NULL ||
@@ -1620,7 +1620,7 @@ fm_list_model_get_column_id_from_zoom_level (BaulZoomLevel zoom_level)
 
 void
 fm_list_model_set_drag_view (FMListModel *model,
-                             GtkTreeView *view,
+                             CtkTreeView *view,
                              int drag_begin_x,
                              int drag_begin_y)
 {
@@ -1633,10 +1633,10 @@ fm_list_model_set_drag_view (FMListModel *model,
     model->details->drag_begin_y = drag_begin_y;
 }
 
-GtkTargetList *
+CtkTargetList *
 fm_list_model_get_drag_target_list ()
 {
-    GtkTargetList *target_list;
+    CtkTargetList *target_list;
 
     target_list = ctk_target_list_new (drag_types, G_N_ELEMENTS (drag_types));
     ctk_target_list_add_text_targets (target_list, BAUL_ICON_DND_TEXT);
@@ -1756,7 +1756,7 @@ fm_list_model_class_init (FMListModelClass *klass)
 }
 
 static void
-fm_list_model_tree_model_init (GtkTreeModelIface *iface)
+fm_list_model_tree_model_init (CtkTreeModelIface *iface)
 {
     iface->get_flags = fm_list_model_get_flags;
     iface->get_n_columns = fm_list_model_get_n_columns;
@@ -1773,7 +1773,7 @@ fm_list_model_tree_model_init (GtkTreeModelIface *iface)
 }
 
 static void
-fm_list_model_sortable_init (GtkTreeSortableIface *iface)
+fm_list_model_sortable_init (CtkTreeSortableIface *iface)
 {
     iface->get_sort_column_id = fm_list_model_get_sort_column_id;
     iface->set_sort_column_id = fm_list_model_set_sort_column_id;
@@ -1791,7 +1791,7 @@ fm_list_model_multi_drag_source_init (EggTreeMultiDragSourceIface *iface)
 void
 fm_list_model_subdirectory_done_loading (FMListModel *model, BaulDirectory *directory)
 {
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     FileEntry *file_entry;
     GSequenceIter *parent_ptr, *dummy_ptr;
     GSequence *files;
@@ -1822,7 +1822,7 @@ fm_list_model_subdirectory_done_loading (FMListModel *model, BaulDirectory *dire
         dummy_entry = g_sequence_get (dummy_ptr);
         if (dummy_entry->file == NULL)
         {
-            GtkTreePath *path;
+            CtkTreePath *path;
 
             /* was the dummy file */
             file_entry->loaded = 1;
@@ -1844,7 +1844,7 @@ refresh_row (gpointer data,
     BaulFile *file;
     FMListModel *model;
     GList *iters, *l;
-    GtkTreePath *path = NULL;
+    CtkTreePath *path = NULL;
 
     model = user_data;
     file = data;

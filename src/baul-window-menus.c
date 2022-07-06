@@ -139,7 +139,7 @@ should_open_in_new_tab (void)
 }
 
 static void
-activate_bookmark_in_menu_item (GtkAction *action, gpointer user_data)
+activate_bookmark_in_menu_item (CtkAction *action, gpointer user_data)
 {
     BookmarkHolder *holder;
 
@@ -169,7 +169,7 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
                                     const char *parent_path,
                                     const char *parent_id,
                                     guint index_in_parent,
-                                    GtkActionGroup *action_group,
+                                    CtkActionGroup *action_group,
                                     guint merge_id,
                                     GCallback refresh_callback,
                                     BaulBookmarkFailedCallback failed_callback)
@@ -179,8 +179,8 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
     char *name;
     char *path;
     cairo_surface_t *surface;
-    GtkAction *action;
-    GtkWidget *menuitem;
+    CtkAction *action;
+    CtkWidget *menuitem;
 
     g_assert (BAUL_IS_WINDOW (window));
     g_assert (BAUL_IS_BOOKMARK (bookmark));
@@ -236,7 +236,7 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
 }
 
 static void
-action_close_window_slot_callback (GtkAction *action,
+action_close_window_slot_callback (CtkAction *action,
                                    gpointer user_data)
 {
     BaulWindow *window;
@@ -249,11 +249,11 @@ action_close_window_slot_callback (GtkAction *action,
 }
 
 static void
-action_connect_to_server_callback (GtkAction *action,
+action_connect_to_server_callback (CtkAction *action,
                                    gpointer user_data)
 {
     BaulWindow *window = BAUL_WINDOW (user_data);
-    GtkWidget *dialog;
+    CtkWidget *dialog;
 
     dialog = baul_connect_server_dialog_new (window);
 
@@ -261,7 +261,7 @@ action_connect_to_server_callback (GtkAction *action,
 }
 
 static void
-action_stop_callback (GtkAction *action,
+action_stop_callback (CtkAction *action,
                       gpointer user_data)
 {
     BaulWindow *window;
@@ -274,7 +274,7 @@ action_stop_callback (GtkAction *action,
 }
 
 static void
-action_home_callback (GtkAction *action,
+action_home_callback (CtkAction *action,
                       gpointer user_data)
 {
     BaulWindow *window;
@@ -288,7 +288,7 @@ action_home_callback (GtkAction *action,
 }
 
 static void
-action_go_to_computer_callback (GtkAction *action,
+action_go_to_computer_callback (CtkAction *action,
                                 gpointer user_data)
 {
     BaulWindow *window;
@@ -306,7 +306,7 @@ action_go_to_computer_callback (GtkAction *action,
 }
 
 static void
-action_go_to_network_callback (GtkAction *action,
+action_go_to_network_callback (CtkAction *action,
                                gpointer user_data)
 {
     BaulWindow *window;
@@ -324,7 +324,7 @@ action_go_to_network_callback (GtkAction *action,
 }
 
 static void
-action_go_to_templates_callback (GtkAction *action,
+action_go_to_templates_callback (CtkAction *action,
                                  gpointer user_data)
 {
     BaulWindow *window;
@@ -345,7 +345,7 @@ action_go_to_templates_callback (GtkAction *action,
 }
 
 static void
-action_go_to_trash_callback (GtkAction *action,
+action_go_to_trash_callback (CtkAction *action,
                              gpointer user_data)
 {
     BaulWindow *window;
@@ -363,35 +363,35 @@ action_go_to_trash_callback (GtkAction *action,
 }
 
 static void
-action_reload_callback (GtkAction *action,
+action_reload_callback (CtkAction *action,
                         gpointer user_data)
 {
     baul_window_reload (BAUL_WINDOW (user_data));
 }
 
 static void
-action_zoom_in_callback (GtkAction *action,
+action_zoom_in_callback (CtkAction *action,
                          gpointer user_data)
 {
     baul_window_zoom_in (BAUL_WINDOW (user_data));
 }
 
 static void
-action_zoom_out_callback (GtkAction *action,
+action_zoom_out_callback (CtkAction *action,
                           gpointer user_data)
 {
     baul_window_zoom_out (BAUL_WINDOW (user_data));
 }
 
 static void
-action_zoom_normal_callback (GtkAction *action,
+action_zoom_normal_callback (CtkAction *action,
                              gpointer user_data)
 {
     baul_window_zoom_to_default (BAUL_WINDOW (user_data));
 }
 
 static void
-action_show_hidden_files_callback (GtkAction *action,
+action_show_hidden_files_callback (CtkAction *action,
                                    gpointer callback_data)
 {
     BaulWindow *window;
@@ -414,7 +414,7 @@ action_show_hidden_files_callback (GtkAction *action,
 }
 
 static void
-action_show_backup_files_callback (GtkAction *action,
+action_show_backup_files_callback (CtkAction *action,
                                    gpointer callback_data)
 {
     BaulWindow *window;
@@ -445,7 +445,7 @@ show_hidden_files_preference_callback (gpointer callback_data)
 
     if (window->details->show_hidden_files_mode == BAUL_WINDOW_SHOW_HIDDEN_FILES_DEFAULT)
     {
-        GtkAction *action;
+        CtkAction *action;
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         action = ctk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
@@ -473,7 +473,7 @@ show_backup_files_preference_callback (gpointer callback_data)
 
     if (window->details->show_backup_files_mode == BAUL_WINDOW_SHOW_BACKUP_FILES_DEFAULT)
     {
-        GtkAction *action;
+        CtkAction *action;
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         action = ctk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
@@ -492,7 +492,7 @@ show_backup_files_preference_callback (gpointer callback_data)
 }
 
 static void
-preferences_respond_callback (GtkDialog *dialog,
+preferences_respond_callback (CtkDialog *dialog,
                               gint response_id)
 {
     if (response_id == GTK_RESPONSE_CLOSE)
@@ -502,10 +502,10 @@ preferences_respond_callback (GtkDialog *dialog,
 }
 
 static void
-action_preferences_callback (GtkAction *action,
+action_preferences_callback (CtkAction *action,
                              gpointer user_data)
 {
-    GtkWindow *window;
+    CtkWindow *window;
 
     window = GTK_WINDOW (user_data);
 
@@ -513,10 +513,10 @@ action_preferences_callback (GtkAction *action,
 }
 
 static void
-action_backgrounds_and_emblems_callback (GtkAction *action,
+action_backgrounds_and_emblems_callback (CtkAction *action,
         gpointer user_data)
 {
-    GtkWindow *window;
+    CtkWindow *window;
 
     window = GTK_WINDOW (user_data);
 
@@ -527,7 +527,7 @@ action_backgrounds_and_emblems_callback (GtkAction *action,
 #define EMAILIFY(string) (g_strdelimit ((string), "%", '@'))
 
 static void
-action_about_baul_callback (GtkAction *action,
+action_about_baul_callback (CtkAction *action,
                             gpointer user_data)
 {
     const gchar *license[] =
@@ -596,14 +596,14 @@ action_about_baul_callback (GtkAction *action,
 }
 
 static void
-action_up_callback (GtkAction *action,
+action_up_callback (CtkAction *action,
                     gpointer user_data)
 {
     baul_window_go_up (BAUL_WINDOW (user_data), FALSE, should_open_in_new_tab ());
 }
 
 static void
-action_baul_manual_callback (GtkAction *action,
+action_baul_manual_callback (CtkAction *action,
                              gpointer user_data)
 {
     BaulWindow *window;
@@ -620,7 +620,7 @@ action_baul_manual_callback (GtkAction *action,
 
     if (error)
     {
-        GtkWidget *dialog;
+        CtkWidget *dialog;
 
         dialog = ctk_message_dialog_new (GTK_WINDOW (window),
                                          GTK_DIALOG_MODAL,
@@ -639,10 +639,10 @@ action_baul_manual_callback (GtkAction *action,
 }
 
 static void
-menu_item_select_cb (GtkMenuItem *proxy,
+menu_item_select_cb (CtkMenuItem *proxy,
                      BaulWindow *window)
 {
-    GtkAction *action;
+    CtkAction *action;
     char *message;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -660,17 +660,17 @@ menu_item_select_cb (GtkMenuItem *proxy,
 }
 
 static void
-menu_item_deselect_cb (GtkMenuItem *proxy,
+menu_item_deselect_cb (CtkMenuItem *proxy,
                        BaulWindow *window)
 {
     ctk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar),
                        window->details->help_message_cid);
 }
 
-static GtkWidget *
-get_event_widget (GtkWidget *proxy)
+static CtkWidget *
+get_event_widget (CtkWidget *proxy)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     /**
      * Finding the interesting widget requires internal knowledge of
@@ -705,7 +705,7 @@ get_event_widget (GtkWidget *proxy)
 }
 
 static gboolean
-proxy_button_press_event_cb (GtkButton *button,
+proxy_button_press_event_cb (CtkButton *button,
                              GdkEventButton *event,
                              gpointer user_data)
 {
@@ -718,7 +718,7 @@ proxy_button_press_event_cb (GtkButton *button,
 }
 
 static gboolean
-proxy_button_release_event_cb (GtkButton *button,
+proxy_button_release_event_cb (CtkButton *button,
                                GdkEventButton *event,
                                gpointer user_data)
 {
@@ -731,12 +731,12 @@ proxy_button_release_event_cb (GtkButton *button,
 }
 
 static void
-disconnect_proxy_cb (GtkUIManager *manager,
-                     GtkAction *action,
-                     GtkWidget *proxy,
+disconnect_proxy_cb (CtkUIManager *manager,
+                     CtkAction *action,
+                     CtkWidget *proxy,
                      BaulWindow *window)
 {
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     if (GTK_IS_MENU_ITEM (proxy))
     {
@@ -760,13 +760,13 @@ disconnect_proxy_cb (GtkUIManager *manager,
 }
 
 static void
-connect_proxy_cb (GtkUIManager *manager,
-                  GtkAction *action,
-                  GtkWidget *proxy,
+connect_proxy_cb (CtkUIManager *manager,
+                  CtkAction *action,
+                  CtkWidget *proxy,
                   BaulWindow *window)
 {
     cairo_surface_t *icon;
-    GtkWidget *widget;
+    CtkWidget *widget;
 
     if (GTK_IS_MENU_ITEM (proxy))
     {
@@ -813,8 +813,8 @@ trash_state_changed_cb (BaulTrashMonitor *monitor,
                         gboolean state,
                         BaulWindow *window)
 {
-    GtkActionGroup *action_group;
-    GtkAction *action;
+    CtkActionGroup *action_group;
+    CtkAction *action;
     GIcon *gicon;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -844,7 +844,7 @@ baul_window_initialize_trash_icon_monitor (BaulWindow *window)
                       G_CALLBACK (trash_state_changed_cb), window);
 }
 
-static const GtkActionEntry main_entries[] =
+static const CtkActionEntry main_entries[] =
 {
     /* name, icon name, label */ { "File", NULL, N_("_File") },
     /* name, icon name, label */ { "Edit", NULL, N_("_Edit") },
@@ -957,7 +957,7 @@ static const GtkActionEntry main_entries[] =
     },
 };
 
-static const GtkToggleActionEntry main_toggle_entries[] =
+static const CtkToggleActionEntry main_toggle_entries[] =
 {
     /* name, icon name */        { "Show Hidden Files", NULL,
         /* label, accelerator */       N_("Show _Hidden Files"), "<control>H",
@@ -983,9 +983,9 @@ static const GtkToggleActionEntry main_toggle_entries[] =
 void
 baul_window_initialize_menus (BaulWindow *window)
 {
-    GtkActionGroup *action_group;
-    GtkUIManager *ui_manager;
-    GtkAction *action;
+    CtkActionGroup *action_group;
+    CtkUIManager *ui_manager;
+    CtkAction *action;
     const char *ui;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
@@ -1094,11 +1094,11 @@ get_extension_menus (BaulWindow *window)
 static void
 add_extension_menu_items (BaulWindow *window,
                           guint merge_id,
-                          GtkActionGroup *action_group,
+                          CtkActionGroup *action_group,
                           GList *menu_items,
                           const char *subdirectory)
 {
-    GtkUIManager *ui_manager;
+    CtkUIManager *ui_manager;
     GList *l;
 
     ui_manager = window->details->ui_manager;
@@ -1107,7 +1107,7 @@ add_extension_menu_items (BaulWindow *window,
     {
         BaulMenuItem *item;
         BaulMenu *menu;
-        GtkAction *action;
+        CtkAction *action;
         char *path;
         const gchar *action_name;
 
@@ -1167,7 +1167,7 @@ add_extension_menu_items (BaulWindow *window,
 void
 baul_window_load_extension_menus (BaulWindow *window)
 {
-    GtkActionGroup *action_group;
+    CtkActionGroup *action_group;
     GList *items;
     guint merge_id;
 

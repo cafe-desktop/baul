@@ -110,18 +110,18 @@ static const struct
 static void
 baul_navigation_window_init (BaulNavigationWindow *window)
 {
-    GtkUIManager *ui_manager;
-    GtkWidget *toolbar;
+    CtkUIManager *ui_manager;
+    CtkWidget *toolbar;
     BaulWindow *win;
     BaulNavigationWindowPane *pane;
-    GtkWidget *hpaned;
-    GtkWidget *vbox;
+    CtkWidget *hpaned;
+    CtkWidget *vbox;
 
     win = BAUL_WINDOW (window);
 
     window->details = baul_navigation_window_get_instance_private (window);
 
-    GtkStyleContext *context;
+    CtkStyleContext *context;
 
     context = ctk_widget_get_style_context (GTK_WIDGET (window));
     ctk_style_context_add_class (context, "baul-navigation-window");
@@ -277,7 +277,7 @@ baul_navigation_window_unset_focus_widget (BaulNavigationWindow *window)
 }
 
 gboolean
-baul_navigation_window_is_in_temporary_navigation_bar (GtkWidget *widget,
+baul_navigation_window_is_in_temporary_navigation_bar (CtkWidget *widget,
         BaulNavigationWindow *window)
 {
     GList *walk;
@@ -294,7 +294,7 @@ baul_navigation_window_is_in_temporary_navigation_bar (GtkWidget *widget,
 }
 
 gboolean
-baul_navigation_window_is_in_temporary_search_bar (GtkWidget *widget,
+baul_navigation_window_is_in_temporary_search_bar (CtkWidget *widget,
         BaulNavigationWindow *window)
 {
     GList *walk;
@@ -314,7 +314,7 @@ static void
 remember_focus_widget (BaulNavigationWindow *window)
 {
     BaulNavigationWindow *navigation_window;
-    GtkWidget *focus_widget;
+    CtkWidget *focus_widget;
 
     navigation_window = BAUL_NAVIGATION_WINDOW (window);
 
@@ -350,7 +350,7 @@ baul_navigation_window_restore_focus_widget (BaulNavigationWindow *window)
 }
 
 static void
-side_pane_close_requested_callback (GtkWidget *widget,
+side_pane_close_requested_callback (CtkWidget *widget,
                                     gpointer user_data)
 {
     BaulNavigationWindow *window;
@@ -361,8 +361,8 @@ side_pane_close_requested_callback (GtkWidget *widget,
 }
 
 static void
-side_pane_size_allocate_callback (GtkWidget *widget,
-                                  GtkAllocation *allocation,
+side_pane_size_allocate_callback (CtkWidget *widget,
+                                  CtkAllocation *allocation,
                                   gpointer user_data)
 {
     BaulNavigationWindow *window;
@@ -418,7 +418,7 @@ set_current_side_panel (BaulNavigationWindow *window,
 
 static void
 side_pane_switch_page_callback (BaulSidePane *side_pane,
-                                GtkWidget *widget,
+                                CtkWidget *widget,
                                 BaulNavigationWindow *window)
 {
     const char *id;
@@ -440,7 +440,7 @@ side_pane_switch_page_callback (BaulSidePane *side_pane,
 static void
 baul_navigation_window_set_up_sidebar (BaulNavigationWindow *window)
 {
-    GtkWidget *title;
+    CtkWidget *title;
 
     window->sidebar = baul_side_pane_new ();
 
@@ -498,7 +498,7 @@ baul_navigation_window_tear_down_sidebar (BaulNavigationWindow *window)
 }
 
 static gboolean
-baul_navigation_window_state_event (GtkWidget *widget,
+baul_navigation_window_state_event (CtkWidget *widget,
                                     GdkEventWindowState *event)
 {
     if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED)
@@ -516,7 +516,7 @@ baul_navigation_window_state_event (GtkWidget *widget,
 }
 
 static gboolean
-baul_navigation_window_key_press_event (GtkWidget *widget,
+baul_navigation_window_key_press_event (CtkWidget *widget,
                                         GdkEventKey *event)
 {
     BaulNavigationWindow *window;
@@ -535,7 +535,7 @@ baul_navigation_window_key_press_event (GtkWidget *widget,
             BaulWindowSlot *slot;
             BaulNavigationWindowPane *pane;
             BaulNotebook *baulnotebook;
-            GtkNotebook *notebook;
+            CtkNotebook *notebook;
             int pages;
             int page_num;
 
@@ -574,7 +574,7 @@ baul_navigation_window_key_press_event (GtkWidget *widget,
     {
         if (extra_navigation_window_keybindings[i].keyval == event->keyval)
         {
-            GtkAction *action;
+            CtkAction *action;
 
             G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
             action = ctk_action_group_get_action (window->details->navigation_action_group,
@@ -596,7 +596,7 @@ baul_navigation_window_key_press_event (GtkWidget *widget,
 }
 
 static gboolean
-baul_navigation_window_button_press_event (GtkWidget *widget,
+baul_navigation_window_button_press_event (CtkWidget *widget,
         GdkEventButton *event)
 {
     BaulNavigationWindow *window;
@@ -627,7 +627,7 @@ baul_navigation_window_button_press_event (GtkWidget *widget,
 }
 
 static void
-baul_navigation_window_destroy (GtkWidget *object)
+baul_navigation_window_destroy (CtkWidget *object)
 {
     BaulNavigationWindow *window;
 
@@ -754,7 +754,7 @@ baul_navigation_window_go_forward (BaulNavigationWindow *window)
 void
 baul_navigation_window_allow_back (BaulNavigationWindow *window, gboolean allow)
 {
-    GtkAction *action;
+    CtkAction *action;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
@@ -767,7 +767,7 @@ baul_navigation_window_allow_back (BaulNavigationWindow *window, gboolean allow)
 void
 baul_navigation_window_allow_forward (BaulNavigationWindow *window, gboolean allow)
 {
-    GtkAction *action;
+    CtkAction *action;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
@@ -897,7 +897,7 @@ void
 baul_navigation_window_set_search_button (BaulNavigationWindow *window,
         gboolean state)
 {
-    GtkAction *action;
+    CtkAction *action;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
@@ -940,7 +940,7 @@ side_panel_image_changed_callback (BaulSidebar *side_panel,
 static void
 add_sidebar_panels (BaulNavigationWindow *window)
 {
-    GtkWidget *current;
+    CtkWidget *current;
     GList *providers;
     GList *p;
     BaulSidebar *sidebar_panel = NULL;
@@ -1104,13 +1104,13 @@ baul_navigation_window_get_base_page_index (BaulNavigationWindow *window)
 
 /**
  * baul_navigation_window_show:
- * @widget: a #GtkWidget.
+ * @widget: a #CtkWidget.
  *
  * Call parent and then show/hide window items
  * base on user prefs.
  */
 static void
-baul_navigation_window_show (GtkWidget *widget)
+baul_navigation_window_show (CtkWidget *widget)
 {
     BaulNavigationWindow *window;
     gboolean show_location_bar;
@@ -1261,7 +1261,7 @@ real_close_slot (BaulWindowPane *pane,
                  BaulWindowSlot *slot)
 {
     int page_num;
-    GtkNotebook *notebook;
+    CtkNotebook *notebook;
 
     notebook = GTK_NOTEBOOK (BAUL_NAVIGATION_WINDOW_PANE (pane)->notebook);
 
@@ -1323,7 +1323,7 @@ create_extra_pane (BaulNavigationWindow *window)
     BaulWindow *win;
     BaulNavigationWindowPane *pane;
     BaulWindowSlot *slot;
-    GtkPaned *paned;
+    CtkPaned *paned;
 
     win = BAUL_WINDOW (window);
 
@@ -1358,7 +1358,7 @@ baul_navigation_window_split_view_on (BaulNavigationWindow *window)
     BaulNavigationWindowPane *pane;
     BaulWindowSlot *slot, *old_active_slot;
     GFile *location;
-    GtkAction *action;
+    CtkAction *action;
 
     win = BAUL_WINDOW (window);
 

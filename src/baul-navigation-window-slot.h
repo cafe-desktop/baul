@@ -50,7 +50,7 @@ struct BaulNavigationWindowSlot
     BaulWindowSlot parent;
 
     BaulBarMode bar_mode;
-    GtkTreeModel *viewer_model;
+    CtkTreeModel *viewer_model;
     int num_viewers;
 
     /* Back/Forward chain, and history list.

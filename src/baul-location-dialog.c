@@ -37,7 +37,7 @@
 
 struct _BaulLocationDialogDetails
 {
-    GtkWidget *entry;
+    CtkWidget *entry;
     BaulWindow *window;
 };
 
@@ -113,7 +113,7 @@ response_callback (BaulLocationDialog *dialog,
 }
 
 static void
-entry_activate_callback (GtkEntry *entry,
+entry_activate_callback (CtkEntry *entry,
                          gpointer user_data)
 {
     BaulLocationDialog *dialog;
@@ -152,8 +152,8 @@ entry_text_changed (GObject *object, GParamSpec *spec, gpointer user_data)
 static void
 baul_location_dialog_init (BaulLocationDialog *dialog)
 {
-    GtkWidget *box;
-    GtkWidget *label;
+    CtkWidget *box;
+    CtkWidget *label;
 
     dialog->details = g_new0 (BaulLocationDialogDetails, 1);
 
@@ -214,11 +214,11 @@ baul_location_dialog_init (BaulLocationDialog *dialog)
                       dialog);
 }
 
-GtkWidget *
+CtkWidget *
 baul_location_dialog_new (BaulWindow *window)
 {
     BaulLocationDialog *loc_dialog;
-    GtkWidget *dialog;
+    CtkWidget *dialog;
     GFile *location;
 
     dialog = ctk_widget_new (BAUL_TYPE_LOCATION_DIALOG, NULL);

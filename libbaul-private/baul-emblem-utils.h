@@ -30,13 +30,13 @@
 GList *    baul_emblem_list_available             (void);
 void       baul_emblem_refresh_list               (void);
 gboolean   baul_emblem_should_show_in_list        (const char *emblem);
-gboolean   baul_emblem_verify_keyword             (GtkWindow *parent_window,
+gboolean   baul_emblem_verify_keyword             (CtkWindow *parent_window,
         const char *keyword,
         const char *display_name);
 void       baul_emblem_install_custom_emblem      (GdkPixbuf  *pixbuf,
         const char *keyword,
         const char *display_name,
-        GtkWindow  *parent_window);
+        CtkWindow  *parent_window);
 
 gboolean   baul_emblem_remove_emblem              (const char *keyword);
 gboolean   baul_emblem_rename_emblem              (const char *keyword,

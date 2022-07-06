@@ -33,61 +33,61 @@ typedef void (* EelCancelCallback) (gpointer callback_data);
 void       eel_timed_wait_start               (EelCancelCallback  cancel_callback,
         gpointer           callback_data,
         const char        *wait_message,
-        GtkWindow         *parent_window);
+        CtkWindow         *parent_window);
 void       eel_timed_wait_start_with_duration (int                duration,
         EelCancelCallback  cancel_callback,
         gpointer           callback_data,
         const char        *wait_message,
-        GtkWindow         *parent_window);
+        CtkWindow         *parent_window);
 void       eel_timed_wait_stop                (EelCancelCallback  cancel_callback,
         gpointer           callback_data);
 
 /* Basic dialog with buttons. */
-int        eel_run_simple_dialog              (GtkWidget         *parent,
+int        eel_run_simple_dialog              (CtkWidget         *parent,
         gboolean           ignore_close_box,
-        GtkMessageType     message_type,
+        CtkMessageType     message_type,
         const char        *primary_text,
         const char        *secondary_text,
         ...);
-GtkWidget* eel_dialog_add_button (GtkDialog   *dialog,
+CtkWidget* eel_dialog_add_button (CtkDialog   *dialog,
         const gchar *button_text,
         const gchar *icon_name,
               gint   response_id);
-GtkWidget* eel_file_chooser_dialog_new (const gchar *title,
-        GtkWindow            *parent,
-        GtkFileChooserAction  action,
+CtkWidget* eel_file_chooser_dialog_new (const gchar *title,
+        CtkWindow            *parent,
+        CtkFileChooserAction  action,
         const gchar          *first_button_text,
                               ...);
 
 /* Variations on cafe stock dialogs; these do line wrapping, we don't
  * bother with non-parented versions, we allow setting the title,
- * primary, and secondary messages, and we return GtkDialog pointers
- * instead of GtkWidget pointers.
+ * primary, and secondary messages, and we return CtkDialog pointers
+ * instead of CtkWidget pointers.
  */
-GtkDialog *eel_show_info_dialog               (const char        *primary_text,
+CtkDialog *eel_show_info_dialog               (const char        *primary_text,
         const char        *secondary_text,
-        GtkWindow         *parent);
-GtkDialog *eel_show_info_dialog_with_details  (const char        *primary_text,
+        CtkWindow         *parent);
+CtkDialog *eel_show_info_dialog_with_details  (const char        *primary_text,
         const char        *secondary_text,
         const char        *detailed_informative_message,
-        GtkWindow         *parent);
-GtkDialog *eel_show_warning_dialog            (const char        *primary_text,
+        CtkWindow         *parent);
+CtkDialog *eel_show_warning_dialog            (const char        *primary_text,
         const char        *secondary_text,
-        GtkWindow         *parent);
-GtkDialog *eel_show_error_dialog              (const char        *primary_text,
+        CtkWindow         *parent);
+CtkDialog *eel_show_error_dialog              (const char        *primary_text,
         const char        *secondary_text,
-        GtkWindow         *parent);
-GtkDialog *eel_show_yes_no_dialog             (const char        *primary_text,
+        CtkWindow         *parent);
+CtkDialog *eel_show_yes_no_dialog             (const char        *primary_text,
         const char        *secondary_text,
         const char        *yes_label,
         const char        *no_label,
-        GtkWindow         *parent);
-GtkDialog *eel_create_question_dialog         (const char        *primary_text,
+        CtkWindow         *parent);
+CtkDialog *eel_create_question_dialog         (const char        *primary_text,
         const char        *secondary_text,
         const char        *answer_one,
         int                response_one,
         const char        *answer_two,
         int                response_two,
-        GtkWindow         *parent);
+        CtkWindow         *parent);
 
 #endif /* EEL_STOCK_DIALOGS_H */

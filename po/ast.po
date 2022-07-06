@@ -469,11 +469,11 @@ msgstr "Xustificación"
 msgid ""
 "The alignment of the lines in the text of the label relative to each other. "
 "This does NOT affect the alignment of the label within its allocation. See "
-"GtkMisc::xalign for that."
+"CtkMisc::xalign for that."
 msgstr ""
 "L'alliniación de les llinies nel testu de la etiqueta relativa a cada otra. "
 "Esto NUN afeuta a la alliniación de la etiqueta dientro de la so asignación."
-" Llea GtkMisc::xalign pa facer eso."
+" Llea CtkMisc::xalign pa facer eso."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"

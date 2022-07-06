@@ -58,6 +58,6 @@ typedef struct
 
 GType fm_list_view_get_type (void);
 void  fm_list_view_register (void);
-GtkTreeView* fm_list_view_get_tree_view (FMListView *list_view);
+CtkTreeView* fm_list_view_get_tree_view (FMListView *list_view);
 
 #endif /* FM_LIST_VIEW_H */

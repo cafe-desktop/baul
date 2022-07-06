@@ -62,7 +62,7 @@ extern "C" {
 
         /* Get the widget for this view, can be the same object or a different
            object owned by the view. Doesn't ref the widget. */
-        GtkWidget *    (* get_widget)             (BaulView          *view);
+        CtkWidget *    (* get_widget)             (BaulView          *view);
 
         /* Called to tell the view to start loading a location, or to reload it.
            The view responds with a load_underway as soon as it starts loading,
@@ -148,7 +148,7 @@ extern "C" {
     GType             baul_view_get_type             (void);
 
     const char *      baul_view_get_view_id                (BaulView      *view);
-    GtkWidget *       baul_view_get_widget                 (BaulView      *view);
+    CtkWidget *       baul_view_get_widget                 (BaulView      *view);
     void              baul_view_load_location              (BaulView      *view,
             const char        *location_uri);
     void              baul_view_stop_loading               (BaulView      *view);

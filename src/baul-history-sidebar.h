@@ -40,8 +40,8 @@
 
 typedef struct
 {
-    GtkScrolledWindow parent;
-    GtkTreeView *tree_view;
+    CtkScrolledWindow parent;
+    CtkTreeView *tree_view;
     BaulWindowInfo *window;
 } BaulHistorySidebar;
 

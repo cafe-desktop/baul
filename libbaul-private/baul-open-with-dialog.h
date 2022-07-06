@@ -40,25 +40,25 @@ typedef struct _BaulOpenWithDialogDetails BaulOpenWithDialogDetails;
 
 struct _BaulOpenWithDialog
 {
-    GtkDialog parent;
+    CtkDialog parent;
     BaulOpenWithDialogDetails *details;
 };
 
 struct _BaulOpenWithDialogClass
 {
-    GtkDialogClass parent_class;
+    CtkDialogClass parent_class;
 
     void (*application_selected) (BaulOpenWithDialog *dialog,
                                   GAppInfo *application);
 };
 
 GType      baul_open_with_dialog_get_type (void);
-GtkWidget* baul_open_with_dialog_new      (const char *uri,
+CtkWidget* baul_open_with_dialog_new      (const char *uri,
         const char *mime_type,
         const char *extension);
-GtkWidget* baul_add_application_dialog_new (const char *uri,
+CtkWidget* baul_add_application_dialog_new (const char *uri,
         const char *mime_type);
-GtkWidget* baul_add_application_dialog_new_for_multiple_files (const char *extension,
+CtkWidget* baul_add_application_dialog_new_for_multiple_files (const char *extension,
         const char *mime_type);
 
 

@@ -60,13 +60,13 @@ typedef struct FMDirectoryViewDetails FMDirectoryViewDetails;
 
 struct FMDirectoryView
 {
-    GtkScrolledWindow parent;
+    CtkScrolledWindow parent;
     FMDirectoryViewDetails *details;
 };
 
 struct FMDirectoryViewClass
 {
-    GtkScrolledWindowClass parent_class;
+    CtkScrolledWindowClass parent_class;
 
     /* The 'clear' signal is emitted to empty the view of its contents.
      * It must be replaced by each subclass.
@@ -218,7 +218,7 @@ struct FMDirectoryViewClass
     /* get_background is a function pointer that subclasses must
      * override to return the EelBackground for this view.
      */
-    GtkWidget * (* get_background_widget)	(FMDirectoryView *view);
+    CtkWidget * (* get_background_widget)	(FMDirectoryView *view);
 
     /* merge_menus is a function pointer that subclasses can override to
      * add their own menu items to the window's menu bar.
@@ -360,7 +360,7 @@ void                fm_directory_view_stop                             (FMDirect
 guint               fm_directory_view_get_item_count                   (FMDirectoryView  *view);
 gboolean            fm_directory_view_can_zoom_in                      (FMDirectoryView  *view);
 gboolean            fm_directory_view_can_zoom_out                     (FMDirectoryView  *view);
-GtkWidget *         fm_directory_view_get_background_widget            (FMDirectoryView  *view);
+CtkWidget *         fm_directory_view_get_background_widget            (FMDirectoryView  *view);
 void                fm_directory_view_bump_zoom_level                  (FMDirectoryView  *view,
         int               zoom_increment);
 void                fm_directory_view_zoom_to_level                    (FMDirectoryView  *view,
@@ -418,10 +418,10 @@ void                fm_directory_view_stop_batching_selection_changes  (FMDirect
 void                fm_directory_view_queue_file_change                (FMDirectoryView  *view,
         BaulFile     *file);
 void                fm_directory_view_notify_selection_changed         (FMDirectoryView  *view);
-GtkUIManager *      fm_directory_view_get_ui_manager                   (FMDirectoryView  *view);
+CtkUIManager *      fm_directory_view_get_ui_manager                   (FMDirectoryView  *view);
 char **             fm_directory_view_get_emblem_names_to_exclude      (FMDirectoryView  *view);
 BaulDirectory  *fm_directory_view_get_model                        (FMDirectoryView  *view);
-GtkWindow	   *fm_directory_view_get_containing_window	       (FMDirectoryView  *view);
+CtkWindow	   *fm_directory_view_get_containing_window	       (FMDirectoryView  *view);
 BaulFile       *fm_directory_view_get_directory_as_file            (FMDirectoryView  *view);
 EelBackground *     fm_directory_view_get_background                   (FMDirectoryView  *view);
 gboolean            fm_directory_view_get_allow_moves                  (FMDirectoryView  *view);

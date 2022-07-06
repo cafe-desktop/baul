@@ -55,7 +55,7 @@ typedef void (*BaulAutorunComboBoxChanged) (gboolean selected_ask,
 typedef void (*BaulAutorunOpenWindow) (GMount *mount, gpointer user_data);
 typedef void (*BaulAutorunGetContent) (char **content, gpointer user_data);
 
-void baul_autorun_prepare_combo_box (GtkWidget *combo_box,
+void baul_autorun_prepare_combo_box (CtkWidget *combo_box,
                                      const char *x_content_type,
                                      gboolean include_ask,
                                      gboolean include_open_with_other_app,

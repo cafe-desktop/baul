@@ -40,7 +40,7 @@ extern "C" {
      * routines are left.
      */
 
-    GtkWidget *fm_ditem_page_make_box (GtkSizeGroup *label_size_group,
+    CtkWidget *fm_ditem_page_make_box (CtkSizeGroup *label_size_group,
                                        GList *files);
     gboolean   fm_ditem_page_should_show (GList *files);
 

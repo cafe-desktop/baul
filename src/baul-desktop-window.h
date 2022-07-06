@@ -70,12 +70,12 @@ gboolean               baul_desktop_window_loaded              (BaulDesktopWindo
 
 typedef struct
 {
-  GtkWindowAccessible parent_spot;
+  CtkWindowAccessible parent_spot;
 } BaulDesktopWindowAccessible;
 
 typedef struct
 {
-  GtkWindowAccessibleClass parent_spot;
+  CtkWindowAccessibleClass parent_spot;
 } BaulDesktopWindowAccessibleClass;
 
 #endif /* BAUL_DESKTOP_WINDOW_H */

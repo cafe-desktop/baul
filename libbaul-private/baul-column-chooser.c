@@ -33,12 +33,12 @@
 
 struct _BaulColumnChooserPrivate
 {
-    GtkTreeView *view;
-    GtkListStore *store;
+    CtkTreeView *view;
+    CtkListStore *store;
 
-    GtkWidget *move_up_button;
-    GtkWidget *move_down_button;
-    GtkWidget *use_default_button;
+    CtkWidget *move_up_button;
+    CtkWidget *move_down_button;
+    CtkWidget *use_default_button;
 
     BaulFile *file;
 };
@@ -133,8 +133,8 @@ baul_column_chooser_class_init (BaulColumnChooserClass *chooser_class)
 static void
 update_buttons (BaulColumnChooser *chooser)
 {
-    GtkTreeSelection *selection;
-    GtkTreeIter iter;
+    CtkTreeSelection *selection;
+    CtkTreeIter iter;
 
     selection = ctk_tree_view_get_selection (chooser->details->view);
 
@@ -143,8 +143,8 @@ update_buttons (BaulColumnChooser *chooser)
         gboolean visible;
         gboolean top;
         gboolean bottom;
-        GtkTreePath *first;
-        GtkTreePath *path;
+        CtkTreePath *first;
+        CtkTreePath *path;
 
         ctk_tree_model_get (GTK_TREE_MODEL (chooser->details->store),
                             &iter,
@@ -185,13 +185,13 @@ list_changed (BaulColumnChooser *chooser)
 }
 
 static void
-visible_toggled_callback (GtkCellRendererToggle *cell,
+visible_toggled_callback (CtkCellRendererToggle *cell,
                           char *path_string,
                           gpointer user_data)
 {
     BaulColumnChooser *chooser;
-    GtkTreePath *path;
-    GtkTreeIter iter;
+    CtkTreePath *path;
+    CtkTreeIter iter;
     gboolean visible;
 
     chooser = BAUL_COLUMN_CHOOSER (user_data);
@@ -208,14 +208,14 @@ visible_toggled_callback (GtkCellRendererToggle *cell,
 }
 
 static void
-selection_changed_callback (GtkTreeSelection *selection, gpointer user_data)
+selection_changed_callback (CtkTreeSelection *selection, gpointer user_data)
 {
     update_buttons (BAUL_COLUMN_CHOOSER (user_data));
 }
 
 static void
-row_deleted_callback (GtkTreeModel *model,
-                      GtkTreePath *path,
+row_deleted_callback (CtkTreeModel *model,
+                      CtkTreePath *path,
                       gpointer user_data)
 {
     list_changed (BAUL_COLUMN_CHOOSER (user_data));
@@ -224,11 +224,11 @@ row_deleted_callback (GtkTreeModel *model,
 static void
 add_tree_view (BaulColumnChooser *chooser)
 {
-    GtkWidget *scrolled;
-    GtkWidget *view;
-    GtkListStore *store;
-    GtkCellRenderer *cell;
-    GtkTreeSelection *selection;
+    CtkWidget *scrolled;
+    CtkWidget *view;
+    CtkListStore *store;
+    CtkCellRenderer *cell;
+    CtkTreeSelection *selection;
 
     view = ctk_tree_view_new ();
     ctk_tree_view_set_headers_visible (GTK_TREE_VIEW (view), FALSE);
@@ -287,11 +287,11 @@ add_tree_view (BaulColumnChooser *chooser)
 }
 
 static void
-move_up_clicked_callback (GtkWidget *button, gpointer user_data)
+move_up_clicked_callback (CtkWidget *button, gpointer user_data)
 {
     BaulColumnChooser *chooser;
-    GtkTreeIter iter;
-    GtkTreeSelection *selection;
+    CtkTreeIter iter;
+    CtkTreeSelection *selection;
 
     chooser = BAUL_COLUMN_CHOOSER (user_data);
 
@@ -299,8 +299,8 @@ move_up_clicked_callback (GtkWidget *button, gpointer user_data)
 
     if (ctk_tree_selection_get_selected (selection, NULL, &iter))
     {
-        GtkTreePath *path;
-        GtkTreeIter prev;
+        CtkTreePath *path;
+        CtkTreeIter prev;
 
         path = ctk_tree_model_get_path (GTK_TREE_MODEL (chooser->details->store), &iter);
         ctk_tree_path_prev (path);
@@ -317,11 +317,11 @@ move_up_clicked_callback (GtkWidget *button, gpointer user_data)
 }
 
 static void
-move_down_clicked_callback (GtkWidget *button, gpointer user_data)
+move_down_clicked_callback (CtkWidget *button, gpointer user_data)
 {
     BaulColumnChooser *chooser;
-    GtkTreeIter iter;
-    GtkTreeSelection *selection;
+    CtkTreeIter iter;
+    CtkTreeSelection *selection;
 
     chooser = BAUL_COLUMN_CHOOSER (user_data);
 
@@ -329,7 +329,7 @@ move_down_clicked_callback (GtkWidget *button, gpointer user_data)
 
     if (ctk_tree_selection_get_selected (selection, NULL, &iter))
     {
-        GtkTreeIter next;
+        CtkTreeIter next;
 
         next = iter;
 
@@ -345,17 +345,17 @@ move_down_clicked_callback (GtkWidget *button, gpointer user_data)
 }
 
 static void
-use_default_clicked_callback (GtkWidget *button, gpointer user_data)
+use_default_clicked_callback (CtkWidget *button, gpointer user_data)
 {
     g_signal_emit (BAUL_COLUMN_CHOOSER (user_data),
                    signals[USE_DEFAULT], 0);
 }
 
-static GtkWidget *
+static CtkWidget *
 button_new_with_mnemonic (const gchar *icon_name, const gchar *str)
 {
-    GtkWidget *image;
-    GtkWidget *button;
+    CtkWidget *image;
+    CtkWidget *button;
 
     button = ctk_button_new_with_mnemonic (str);
     image = ctk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON);
@@ -368,8 +368,8 @@ button_new_with_mnemonic (const gchar *icon_name, const gchar *str)
 static void
 add_buttons (BaulColumnChooser *chooser)
 {
-    GtkWidget *box;
-    GtkWidget *separator;
+    CtkWidget *box;
+    CtkWidget *separator;
 
     box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 8);
     ctk_widget_show (box);
@@ -420,7 +420,7 @@ populate_tree (BaulColumnChooser *chooser)
 
     for (l = columns; l != NULL; l = l->next)
     {
-        GtkTreeIter iter;
+        CtkTreeIter iter;
         BaulColumn *column;
         char *name;
         char *label;
@@ -478,7 +478,7 @@ set_visible_columns (BaulColumnChooser *chooser,
                      char **visible_columns)
 {
     GHashTable *visible_columns_hash;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
     int i;
 
     visible_columns_hash = g_hash_table_new (g_str_hash, g_str_equal);
@@ -521,7 +521,7 @@ static char **
 get_column_names (BaulColumnChooser *chooser, gboolean only_visible)
 {
     GPtrArray *ret;
-    GtkTreeIter iter;
+    CtkTreeIter iter;
 
     ret = g_ptr_array_new ();
     if (ctk_tree_model_get_iter_first (GTK_TREE_MODEL (chooser->details->store),
@@ -553,7 +553,7 @@ get_column_names (BaulColumnChooser *chooser, gboolean only_visible)
 static gboolean
 get_column_iter (BaulColumnChooser *chooser,
                  BaulColumn *column,
-                 GtkTreeIter *iter)
+                 CtkTreeIter *iter)
 {
     char *column_name;
 
@@ -593,7 +593,7 @@ set_column_order (BaulColumnChooser *chooser,
 {
     GList *columns;
     GList *l;
-    GtkTreePath *path;
+    CtkTreePath *path;
 
     columns = baul_get_columns_for_file (chooser->details->file);
     columns = baul_sort_columns (columns, column_order);
@@ -605,11 +605,11 @@ set_column_order (BaulColumnChooser *chooser,
     path = ctk_tree_path_new_first ();
     for (l = columns; l != NULL; l = l->next)
     {
-        GtkTreeIter iter;
+        CtkTreeIter iter;
 
         if (get_column_iter (chooser, BAUL_COLUMN (l->data), &iter))
         {
-            GtkTreeIter before;
+            CtkTreeIter before;
             if (path)
             {
                 ctk_tree_model_get_iter (GTK_TREE_MODEL (chooser->details->store),
@@ -662,7 +662,7 @@ baul_column_chooser_get_settings (BaulColumnChooser *chooser,
     *column_order = get_column_names (chooser, FALSE);
 }
 
-GtkWidget *
+CtkWidget *
 baul_column_chooser_new (BaulFile *file)
 {
     return g_object_new (BAUL_TYPE_COLUMN_CHOOSER, "file", file, NULL);

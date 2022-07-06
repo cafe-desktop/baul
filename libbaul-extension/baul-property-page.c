@@ -37,8 +37,8 @@ enum {
 
 struct _BaulPropertyPageDetails {
     char *name;
-    GtkWidget *label;
-    GtkWidget *page;
+    CtkWidget *label;
+    CtkWidget *page;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -68,8 +68,8 @@ static GObjectClass *parent_class = NULL;
  */
 BaulPropertyPage *
 baul_property_page_new (const char *name,
-                        GtkWidget *label,
-                        GtkWidget *page_widget)
+                        CtkWidget *label,
+                        CtkWidget *page_widget)
 {
     BaulPropertyPage *page;
 

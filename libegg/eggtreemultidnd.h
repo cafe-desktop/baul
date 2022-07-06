@@ -44,7 +44,7 @@ extern "C" {
 
         gboolean     (* drag_data_get)        (EggTreeMultiDragSource   *drag_source,
                                                GList                    *path_list,
-                                               GtkSelectionData         *selection_data);
+                                               CtkSelectionData         *selection_data);
 
         gboolean     (* drag_data_delete)     (EggTreeMultiDragSource *drag_source,
                                                GList                  *path_list);
@@ -66,8 +66,8 @@ extern "C" {
      */
     gboolean egg_tree_multi_drag_source_drag_data_get    (EggTreeMultiDragSource *drag_source,
             GList                  *path_list,
-            GtkSelectionData       *selection_data);
-    void     egg_tree_multi_drag_add_drag_support        (GtkTreeView            *tree_view);
+            CtkSelectionData       *selection_data);
+    void     egg_tree_multi_drag_add_drag_support        (CtkTreeView            *tree_view);
 
 
 
