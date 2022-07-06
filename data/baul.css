@@ -1,5 +1,5 @@
 /*Sane defaults for themes that do not specify them, themes can override these */
-/*This is loaded with GTK_STYLE_PROVIDER_PRIORITY_THEME so themes can override */
+/*This is loaded with CTK_STYLE_PROVIDER_PRIORITY_THEME so themes can override */
 
 .baul-canvas-item {
     border-radius: 3px;

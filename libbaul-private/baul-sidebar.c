@@ -78,7 +78,7 @@ baul_sidebar_get_type (void)
         type = g_type_register_static (G_TYPE_INTERFACE,
                                        "BaulSidebar",
                                        &info, 0);
-        g_type_interface_add_prerequisite (type, GTK_TYPE_WIDGET);
+        g_type_interface_add_prerequisite (type, CTK_TYPE_WIDGET);
     }
 
     return type;

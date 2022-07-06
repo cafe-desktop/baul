@@ -25,8 +25,8 @@
             Ramiro Estrugo <ramiro@eazel.com>
 */
 
-#ifndef EEL_GTK_EXTENSIONS_H
-#define EEL_GTK_EXTENSIONS_H
+#ifndef EEL_CTK_EXTENSIONS_H
+#define EEL_CTK_EXTENSIONS_H
 
 #include <ctk/ctk.h>
 #include "eel-gdk-extensions.h"
@@ -76,4 +76,4 @@ CtkWidget *           eel_image_menu_item_new_from_surface              (cairo_s
 gboolean              eel_dialog_page_scroll_event_callback           (CtkWidget            *widget,
                                                                        GdkEventScroll       *event,
                                                                        CtkWindow            *window);
-#endif /* EEL_GTK_EXTENSIONS_H */
+#endif /* EEL_CTK_EXTENSIONS_H */

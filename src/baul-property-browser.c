@@ -197,7 +197,7 @@ static CtkTargetEntry drag_types[] =
 };
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (BaulPropertyBrowser, baul_property_browser, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulPropertyBrowser, baul_property_browser, CTK_TYPE_WINDOW)
 
 
 /* Destroy the three dialogs for adding patterns/colors/emblems if any of them
@@ -250,7 +250,7 @@ baul_property_browser_dispose (GObject *object)
 static void
 baul_property_browser_class_init (BaulPropertyBrowserClass *klass)
 {
-    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    CtkWidgetClass *widget_class = CTK_WIDGET_CLASS (klass);
 
     G_OBJECT_CLASS (klass)->dispose = baul_property_browser_dispose;
     widget_class->drag_begin = baul_property_browser_drag_begin;
@@ -269,7 +269,7 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
     PangoAttrList *attrs;
     char *temp_str;
 
-    widget = GTK_WIDGET (property_browser);
+    widget = CTK_WIDGET (property_browser);
 
     property_browser->details = baul_property_browser_get_instance_private (property_browser);
 
@@ -285,30 +285,30 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
     g_free (temp_str);
 
     /* set the initial size of the property browser */
-    ctk_window_set_default_size (GTK_WINDOW (property_browser),
+    ctk_window_set_default_size (CTK_WINDOW (property_browser),
                                  PROPERTY_BROWSER_WIDTH,
                                  PROPERTY_BROWSER_HEIGHT);
 
     /* set the title and standard close accelerator */
-    ctk_window_set_title (GTK_WINDOW (widget), _("Backgrounds and Emblems"));
+    ctk_window_set_title (CTK_WINDOW (widget), _("Backgrounds and Emblems"));
 
-    ctk_window_set_type_hint (GTK_WINDOW (widget), GDK_WINDOW_TYPE_HINT_DIALOG);
+    ctk_window_set_type_hint (CTK_WINDOW (widget), GDK_WINDOW_TYPE_HINT_DIALOG);
 
     CtkStyleContext *context;
 
-    context = ctk_widget_get_style_context (GTK_WIDGET (property_browser));
+    context = ctk_widget_get_style_context (CTK_WIDGET (property_browser));
     ctk_style_context_add_class (context, "baul-property-browser");
 
     /* create the main vbox. */
-    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    ctk_container_set_border_width (GTK_CONTAINER (vbox), 12);
+    vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 12);
+    ctk_container_set_border_width (CTK_CONTAINER (vbox), 12);
     ctk_widget_show (vbox);
-    ctk_container_add (GTK_CONTAINER (property_browser), vbox);
+    ctk_container_add (CTK_CONTAINER (property_browser), vbox);
 
     /* create the container box */
-    property_browser->details->container = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    ctk_widget_show (GTK_WIDGET (property_browser->details->container));
-    ctk_box_pack_start (GTK_BOX (vbox),
+    property_browser->details->container = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
+    ctk_widget_show (CTK_WIDGET (property_browser->details->container));
+    ctk_box_pack_start (CTK_BOX (vbox),
                         property_browser->details->container,
                         TRUE, TRUE, 0);
 
@@ -318,26 +318,26 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
 
     viewport = ctk_viewport_new (NULL, NULL);
     ctk_widget_show (viewport);
-    ctk_viewport_set_shadow_type(GTK_VIEWPORT(viewport), GTK_SHADOW_NONE);
+    ctk_viewport_set_shadow_type(CTK_VIEWPORT(viewport), CTK_SHADOW_NONE);
 
-    ctk_box_pack_start (GTK_BOX (property_browser->details->container),
+    ctk_box_pack_start (CTK_BOX (property_browser->details->container),
                         property_browser->details->category_container, FALSE, FALSE, 0);
     ctk_widget_show (property_browser->details->category_container);
-    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (property_browser->details->category_container),
-                                    GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (property_browser->details->category_container),
+    ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (property_browser->details->category_container),
+                                    CTK_POLICY_NEVER, CTK_POLICY_AUTOMATIC);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (property_browser->details->category_container),
                                                FALSE);
 
     /* allocate a table to hold the category selector */
-    property_browser->details->category_box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    ctk_container_add(GTK_CONTAINER(viewport), property_browser->details->category_box);
-    ctk_container_add (GTK_CONTAINER (property_browser->details->category_container), viewport);
-    ctk_widget_show (GTK_WIDGET (property_browser->details->category_box));
+    property_browser->details->category_box = ctk_box_new (CTK_ORIENTATION_VERTICAL, 6);
+    ctk_container_add(CTK_CONTAINER(viewport), property_browser->details->category_box);
+    ctk_container_add (CTK_CONTAINER (property_browser->details->category_container), viewport);
+    ctk_widget_show (CTK_WIDGET (property_browser->details->category_box));
 
     /* make the content container vbox */
-    property_browser->details->content_container = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+    property_browser->details->content_container = ctk_box_new (CTK_ORIENTATION_VERTICAL, 6);
     ctk_widget_show (property_browser->details->content_container);
-    ctk_box_pack_start (GTK_BOX (property_browser->details->container),
+    ctk_box_pack_start (CTK_BOX (property_browser->details->container),
                         property_browser->details->content_container,
                         TRUE, TRUE, 0);
 
@@ -345,62 +345,62 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
     property_browser->details->title_box = ctk_event_box_new();
 
     ctk_widget_show(property_browser->details->title_box);
-    ctk_box_pack_start (GTK_BOX(property_browser->details->content_container),
+    ctk_box_pack_start (CTK_BOX(property_browser->details->content_container),
                         property_browser->details->title_box,
                         FALSE, FALSE, 0);
 
     temp_frame = ctk_frame_new(NULL);
-    ctk_frame_set_shadow_type(GTK_FRAME(temp_frame), GTK_SHADOW_NONE);
+    ctk_frame_set_shadow_type(CTK_FRAME(temp_frame), CTK_SHADOW_NONE);
     ctk_widget_show(temp_frame);
-    ctk_container_add(GTK_CONTAINER(property_browser->details->title_box), temp_frame);
+    ctk_container_add(CTK_CONTAINER(property_browser->details->title_box), temp_frame);
 
-    temp_hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    temp_hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 0);
     ctk_widget_show(temp_hbox);
 
-    ctk_container_add(GTK_CONTAINER(temp_frame), temp_hbox);
+    ctk_container_add(CTK_CONTAINER(temp_frame), temp_hbox);
 
     /* add the title label */
     attrs = pango_attr_list_new ();
     pango_attr_list_insert (attrs, pango_attr_scale_new (PANGO_SCALE_X_LARGE));
     pango_attr_list_insert (attrs, pango_attr_weight_new (PANGO_WEIGHT_BOLD));
     property_browser->details->title_label = ctk_label_new ("");
-    ctk_label_set_attributes (GTK_LABEL (property_browser->details->title_label), attrs);
+    ctk_label_set_attributes (CTK_LABEL (property_browser->details->title_label), attrs);
     pango_attr_list_unref (attrs);
 
     ctk_widget_show(property_browser->details->title_label);
-    ctk_box_pack_start (GTK_BOX(temp_hbox), property_browser->details->title_label, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX(temp_hbox), property_browser->details->title_label, FALSE, FALSE, 0);
 
     /* add the help label */
     property_browser->details->help_label = ctk_label_new  ("");
     ctk_widget_show(property_browser->details->help_label);
-    ctk_box_pack_end (GTK_BOX (temp_hbox), property_browser->details->help_label, FALSE, FALSE, 0);
+    ctk_box_pack_end (CTK_BOX (temp_hbox), property_browser->details->help_label, FALSE, FALSE, 0);
 
     /* add the bottom box to hold the command buttons */
     temp_box = ctk_event_box_new();
     ctk_widget_show(temp_box);
 
-    property_browser->details->bottom_box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    property_browser->details->bottom_box = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
     ctk_widget_show (property_browser->details->bottom_box);
 
-    ctk_box_pack_end (GTK_BOX (vbox), temp_box, FALSE, FALSE, 0);
-    ctk_container_add (GTK_CONTAINER (temp_box), property_browser->details->bottom_box);
+    ctk_box_pack_end (CTK_BOX (vbox), temp_box, FALSE, FALSE, 0);
+    ctk_container_add (CTK_CONTAINER (temp_box), property_browser->details->bottom_box);
 
     /* create the "help" button */
     temp_button = ctk_button_new_with_mnemonic (_("_Help"));
-    ctk_button_set_image (GTK_BUTTON (temp_button), ctk_image_new_from_icon_name ("help-browser", GTK_ICON_SIZE_BUTTON));
+    ctk_button_set_image (CTK_BUTTON (temp_button), ctk_image_new_from_icon_name ("help-browser", CTK_ICON_SIZE_BUTTON));
 
     ctk_widget_show (temp_button);
-    ctk_box_pack_start (GTK_BOX (property_browser->details->bottom_box), temp_button, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (property_browser->details->bottom_box), temp_button, FALSE, FALSE, 0);
     g_signal_connect_object (temp_button, "clicked", G_CALLBACK (help_button_callback), property_browser, 0);
 
     /* create the "close" button */
     temp_button = ctk_button_new_with_mnemonic (_("_Close"));
-    ctk_button_set_image (GTK_BUTTON (temp_button), ctk_image_new_from_icon_name ("window-close", GTK_ICON_SIZE_BUTTON));
+    ctk_button_set_image (CTK_BUTTON (temp_button), ctk_image_new_from_icon_name ("window-close", CTK_ICON_SIZE_BUTTON));
 
     ctk_widget_set_can_default (temp_button, TRUE);
 
     ctk_widget_show (temp_button);
-    ctk_box_pack_end (GTK_BOX (property_browser->details->bottom_box), temp_button, FALSE, FALSE, 0);
+    ctk_box_pack_end (CTK_BOX (property_browser->details->bottom_box), temp_button, FALSE, FALSE, 0);
     ctk_widget_grab_default (temp_button);
     ctk_widget_grab_focus (temp_button);
     g_signal_connect_object (temp_button, "clicked", G_CALLBACK (done_button_callback), property_browser, 0);
@@ -408,12 +408,12 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
     /* create the "remove" button */
     property_browser->details->remove_button = ctk_button_new_with_mnemonic (_("_Remove..."));
 
-    property_browser->details->remove_button_image = ctk_image_new_from_icon_name ("list-remove", GTK_ICON_SIZE_BUTTON);
-    ctk_button_set_image (GTK_BUTTON (property_browser->details->remove_button),
+    property_browser->details->remove_button_image = ctk_image_new_from_icon_name ("list-remove", CTK_ICON_SIZE_BUTTON);
+    ctk_button_set_image (CTK_BUTTON (property_browser->details->remove_button),
                           property_browser->details->remove_button_image);
     ctk_widget_show_all (property_browser->details->remove_button);
 
-    ctk_box_pack_end (GTK_BOX (property_browser->details->bottom_box),
+    ctk_box_pack_end (CTK_BOX (property_browser->details->bottom_box),
                       property_browser->details->remove_button, FALSE, FALSE, 0);
 
     g_signal_connect_object (property_browser->details->remove_button, "clicked",
@@ -422,12 +422,12 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
     /* now create the "add new" button */
     property_browser->details->add_button = ctk_button_new_with_mnemonic (_("Add new..."));
 
-    property_browser->details->add_button_image = ctk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_BUTTON);
-    ctk_button_set_image (GTK_BUTTON (property_browser->details->add_button),
+    property_browser->details->add_button_image = ctk_image_new_from_icon_name ("list-add", CTK_ICON_SIZE_BUTTON);
+    ctk_button_set_image (CTK_BUTTON (property_browser->details->add_button),
                           property_browser->details->add_button_image);
     ctk_widget_show_all (property_browser->details->add_button);
 
-    ctk_box_pack_end (GTK_BOX(property_browser->details->bottom_box),
+    ctk_box_pack_end (CTK_BOX(property_browser->details->bottom_box),
                       property_browser->details->add_button, FALSE, FALSE, 0);
 
     g_signal_connect_object (property_browser->details->add_button, "clicked",
@@ -461,8 +461,8 @@ baul_property_browser_new (GdkScreen *screen)
     browser = BAUL_PROPERTY_BROWSER
               (ctk_widget_new (baul_property_browser_get_type (), NULL));
 
-    ctk_window_set_screen (GTK_WINDOW (browser), screen);
-    ctk_widget_show (GTK_WIDGET(browser));
+    ctk_window_set_screen (CTK_WINDOW (browser), screen);
+    ctk_widget_show (CTK_WIDGET(browser));
 
     return browser;
 }
@@ -476,7 +476,7 @@ baul_property_browser_show (GdkScreen *screen)
 
     if (browser == NULL)
     {
-        browser = GTK_WINDOW (baul_property_browser_new (screen));
+        browser = CTK_WINDOW (baul_property_browser_new (screen));
         g_object_add_weak_pointer (G_OBJECT (browser),
                                    (gpointer *) &browser);
     }
@@ -682,7 +682,7 @@ baul_property_browser_drag_end (CtkWidget *widget, GdkDragContext *context)
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
     if (!property_browser->details->keep_around)
     {
-        ctk_widget_hide (GTK_WIDGET (widget));
+        ctk_widget_hide (CTK_WIDGET (widget));
     }
 }
 
@@ -978,7 +978,7 @@ remove_pattern(BaulPropertyBrowser *property_browser, const char* pattern_name)
     {
         char *message = g_strdup_printf (_("Sorry, but pattern %s could not be deleted."), pattern_name);
         char *detail = _("Check that you have permission to delete the pattern.");
-        eel_show_error_dialog (message, detail, GTK_WINDOW (property_browser));
+        eel_show_error_dialog (message, detail, CTK_WINDOW (property_browser));
         g_free (message);
     }
 
@@ -995,7 +995,7 @@ remove_emblem (BaulPropertyBrowser *property_browser, const char* emblem_name)
     {
         char *message = g_strdup_printf (_("Sorry, but emblem %s could not be deleted."), emblem_name);
         char *detail = _("Check that you have permission to delete the emblem.");
-        eel_show_error_dialog (message, detail, GTK_WINDOW (property_browser));
+        eel_show_error_dialog (message, detail, CTK_WINDOW (property_browser));
         g_free (message);
     }
     else
@@ -1069,31 +1069,31 @@ icon_button_clicked_cb (CtkButton *b,
     int res;
 
     dialog = eel_file_chooser_dialog_new (_("Select an Image File for the New Emblem"),
-                                          GTK_WINDOW (browser),
-                                          GTK_FILE_CHOOSER_ACTION_OPEN,
-                                          "process-stop", GTK_RESPONSE_CANCEL,
-                                          "document-open", GTK_RESPONSE_ACCEPT,
+                                          CTK_WINDOW (browser),
+                                          CTK_FILE_CHOOSER_ACTION_OPEN,
+                                          "process-stop", CTK_RESPONSE_CANCEL,
+                                          "document-open", CTK_RESPONSE_ACCEPT,
                                           NULL);
-    ctk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog),
+    ctk_file_chooser_set_current_folder (CTK_FILE_CHOOSER (dialog),
                                          DATADIR "/pixmaps");
     filter = ctk_file_filter_new ();
     ctk_file_filter_add_pixbuf_formats (filter);
-    ctk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), filter);
+    ctk_file_chooser_set_filter (CTK_FILE_CHOOSER (dialog), filter);
 
     preview = ctk_image_new ();
-    ctk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (dialog),
+    ctk_file_chooser_set_preview_widget (CTK_FILE_CHOOSER (dialog),
                                          preview);
     g_signal_connect (dialog, "update-preview",
                       G_CALLBACK (update_preview_cb), preview);
 
-    res = ctk_dialog_run (GTK_DIALOG (dialog));
+    res = ctk_dialog_run (CTK_DIALOG (dialog));
 
-    if (res == GTK_RESPONSE_ACCEPT)
+    if (res == CTK_RESPONSE_ACCEPT)
     {
         /* update the image */
         g_free (browser->details->filename);
-        browser->details->filename = ctk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-        ctk_image_set_from_file (GTK_IMAGE (browser->details->image_button), browser->details->filename);
+        browser->details->filename = ctk_file_chooser_get_filename (CTK_FILE_CHOOSER (dialog));
+        ctk_image_set_from_file (CTK_IMAGE (browser->details->image_button), browser->details->filename);
     }
 
     ctk_widget_destroy (dialog);
@@ -1110,47 +1110,47 @@ baul_emblem_dialog_new (BaulPropertyBrowser *property_browser)
     CtkWidget *grid = ctk_grid_new ();
 
     dialog = ctk_dialog_new ();
-    ctk_window_set_title (GTK_WINDOW (dialog), _("Create a New Emblem"));
-    ctk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (property_browser));
+    ctk_window_set_title (CTK_WINDOW (dialog), _("Create a New Emblem"));
+    ctk_window_set_transient_for (CTK_WINDOW (dialog), CTK_WINDOW (property_browser));
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Cancel"),
                            "process-stop",
-                           GTK_RESPONSE_CANCEL);
+                           CTK_RESPONSE_CANCEL);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_OK"),
                            "ctk-ok",
-                           GTK_RESPONSE_OK);
+                           CTK_RESPONSE_OK);
 
     /* install the grid in the dialog */
-    ctk_container_set_border_width (GTK_CONTAINER (grid), 5);
-    ctk_grid_set_row_spacing (GTK_GRID (grid), 6);
-    ctk_grid_set_column_spacing (GTK_GRID (grid), 12);
+    ctk_container_set_border_width (CTK_CONTAINER (grid), 5);
+    ctk_grid_set_row_spacing (CTK_GRID (grid), 6);
+    ctk_grid_set_column_spacing (CTK_GRID (grid), 12);
     ctk_widget_show (grid);
 
-    ctk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
-    ctk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-    ctk_box_set_spacing (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
-    ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), grid, TRUE, TRUE, 0);
-    ctk_dialog_set_default_response (GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+    ctk_window_set_resizable (CTK_WINDOW (dialog), TRUE);
+    ctk_container_set_border_width (CTK_CONTAINER (dialog), 5);
+    ctk_box_set_spacing (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), 2);
+    ctk_window_set_resizable (CTK_WINDOW (dialog), FALSE);
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), grid, TRUE, TRUE, 0);
+    ctk_dialog_set_default_response (CTK_DIALOG(dialog), CTK_RESPONSE_OK);
 
     /* make the keyword label and field */
 
     widget = ctk_label_new_with_mnemonic(_("_Keyword:"));
-    ctk_label_set_xalign (GTK_LABEL (widget), 0.0);
+    ctk_label_set_xalign (CTK_LABEL (widget), 0.0);
     ctk_widget_show(widget);
-    ctk_grid_attach(GTK_GRID(grid), widget, 0, 0, 1, 1);
+    ctk_grid_attach(CTK_GRID(grid), widget, 0, 0, 1, 1);
 
     property_browser->details->keyword = ctk_entry_new ();
-    ctk_entry_set_activates_default (GTK_ENTRY (property_browser->details->keyword), TRUE);
-    ctk_entry_set_max_length (GTK_ENTRY (property_browser->details->keyword), 24);
+    ctk_entry_set_activates_default (CTK_ENTRY (property_browser->details->keyword), TRUE);
+    ctk_entry_set_max_length (CTK_ENTRY (property_browser->details->keyword), 24);
     ctk_widget_show(property_browser->details->keyword);
-    ctk_grid_attach(GTK_GRID(grid), property_browser->details->keyword, 1, 0, 1, 1);
+    ctk_grid_attach(CTK_GRID(grid), property_browser->details->keyword, 1, 0, 1, 1);
     ctk_widget_grab_focus(property_browser->details->keyword);
-    ctk_label_set_mnemonic_widget (GTK_LABEL (widget),
-                                   GTK_WIDGET (property_browser->details->keyword));
+    ctk_label_set_mnemonic_widget (CTK_LABEL (widget),
+                                   CTK_WIDGET (property_browser->details->keyword));
 
     /* default image is the generic emblem */
     g_free (property_browser->details->image_path);
@@ -1158,23 +1158,23 @@ baul_emblem_dialog_new (BaulPropertyBrowser *property_browser)
 
     /* set up a file chooser to pick the image file */
     label = ctk_label_new_with_mnemonic (_("_Image:"));
-    ctk_label_set_xalign (GTK_LABEL (label), 0.0);
+    ctk_label_set_xalign (CTK_LABEL (label), 0.0);
     ctk_widget_show (label);
-    ctk_grid_attach (GTK_GRID(grid), label, 0, 1, 1, 1);
+    ctk_grid_attach (CTK_GRID(grid), label, 0, 1, 1, 1);
 
-    widget = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    widget = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 0);
     ctk_widget_show (widget);
 
     button = ctk_button_new ();
     property_browser->details->image_button = ctk_image_new_from_file (property_browser->details->image_path);
-    ctk_button_set_image (GTK_BUTTON (button), property_browser->details->image_button);
+    ctk_button_set_image (CTK_BUTTON (button), property_browser->details->image_button);
     g_signal_connect (button, "clicked", G_CALLBACK (icon_button_clicked_cb),
                       property_browser);
-    ctk_label_set_mnemonic_widget (GTK_LABEL (label), button);
+    ctk_label_set_mnemonic_widget (CTK_LABEL (label), button);
 
     ctk_widget_show (button);
-    ctk_grid_attach (GTK_GRID (grid), widget, 1, 1, 1, 1);
-    ctk_box_pack_start (GTK_BOX (widget), button, FALSE, FALSE, 0);
+    ctk_grid_attach (CTK_GRID (grid), widget, 1, 1, 1, 1);
+    ctk_box_pack_start (CTK_BOX (widget), button, FALSE, FALSE, 0);
 
     return dialog;
 }
@@ -1190,38 +1190,38 @@ baul_color_selection_dialog_new (BaulPropertyBrowser *property_browser)
     CtkWidget *grid = ctk_grid_new ();
 
     dialog = ctk_dialog_new ();
-    ctk_window_set_title (GTK_WINDOW (dialog), _("Create a New Color:"));
-    ctk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (property_browser));
+    ctk_window_set_title (CTK_WINDOW (dialog), _("Create a New Color:"));
+    ctk_window_set_transient_for (CTK_WINDOW (dialog), CTK_WINDOW (property_browser));
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Cancel"),
                            "process-stop",
-                           GTK_RESPONSE_CANCEL);
+                           CTK_RESPONSE_CANCEL);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_OK"),
                            "ctk-ok",
-                           GTK_RESPONSE_OK);
+                           CTK_RESPONSE_OK);
 
     /* install the grid in the dialog */
     ctk_widget_show (grid);
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), grid, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), grid, TRUE, TRUE, 0);
 
-    ctk_dialog_set_default_response (GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+    ctk_dialog_set_default_response (CTK_DIALOG(dialog), CTK_RESPONSE_OK);
 
     /* make the name label and field */
 
     widget = ctk_label_new_with_mnemonic(_("Color _name:"));
     ctk_widget_show(widget);
-    ctk_grid_attach(GTK_GRID(grid), widget, 0, 0, 1, 1);
+    ctk_grid_attach(CTK_GRID(grid), widget, 0, 0, 1, 1);
 
     property_browser->details->color_name = ctk_entry_new ();
-    ctk_entry_set_activates_default (GTK_ENTRY (property_browser->details->color_name), TRUE);
-    ctk_entry_set_max_length (GTK_ENTRY (property_browser->details->color_name), 24);
+    ctk_entry_set_activates_default (CTK_ENTRY (property_browser->details->color_name), TRUE);
+    ctk_entry_set_max_length (CTK_ENTRY (property_browser->details->color_name), 24);
     ctk_widget_grab_focus (property_browser->details->color_name);
-    ctk_label_set_mnemonic_widget (GTK_LABEL (widget), property_browser->details->color_name);
+    ctk_label_set_mnemonic_widget (CTK_LABEL (widget), property_browser->details->color_name);
     ctk_widget_show(property_browser->details->color_name);
-    ctk_grid_attach(GTK_GRID(grid), property_browser->details->color_name, 1, 0, 1, 1);
+    ctk_grid_attach(CTK_GRID(grid), property_browser->details->color_name, 1, 0, 1, 1);
     ctk_widget_grab_focus(property_browser->details->color_name);
 
     /* default image is the generic emblem */
@@ -1229,13 +1229,13 @@ baul_color_selection_dialog_new (BaulPropertyBrowser *property_browser)
 
     widget = ctk_label_new_with_mnemonic(_("Color _value:"));
     ctk_widget_show(widget);
-    ctk_grid_attach(GTK_GRID(grid), widget, 0, 1, 1, 1);
+    ctk_grid_attach(CTK_GRID(grid), widget, 0, 1, 1, 1);
 
     property_browser->details->color_picker = ctk_color_button_new ();
     ctk_widget_show (property_browser->details->color_picker);
-    ctk_label_set_mnemonic_widget (GTK_LABEL (widget), property_browser->details->color_picker);
+    ctk_label_set_mnemonic_widget (CTK_LABEL (widget), property_browser->details->color_picker);
 
-    ctk_grid_attach(GTK_GRID(grid), property_browser->details->color_picker, 1, 1, 1, 1);
+    ctk_grid_attach(CTK_GRID(grid), property_browser->details->color_picker, 1, 1, 1, 1);
 
     return dialog;
 }
@@ -1251,13 +1251,13 @@ add_pattern_to_browser (CtkDialog *dialog, gint response_id, gpointer data)
 
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
-    if (response_id != GTK_RESPONSE_ACCEPT)
+    if (response_id != CTK_RESPONSE_ACCEPT)
     {
-        ctk_widget_hide (GTK_WIDGET (dialog));
+        ctk_widget_hide (CTK_WIDGET (dialog));
         return;
     }
 
-    selected = ctk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
+    selected = ctk_file_chooser_get_file (CTK_FILE_CHOOSER (dialog));
 
     /* don't allow the user to change the reset image */
     basename = g_file_get_basename (selected);
@@ -1295,7 +1295,7 @@ add_pattern_to_browser (CtkDialog *dialog, gint response_id, gpointer data)
                       NULL, NULL, NULL, NULL))
     {
         char *message = g_strdup_printf (_("Sorry, but the pattern %s could not be installed."), basename);
-        eel_show_error_dialog (message, NULL, GTK_WINDOW (property_browser));
+        eel_show_error_dialog (message, NULL, CTK_WINDOW (property_browser));
         g_free (message);
     }
     g_object_unref (selected);
@@ -1306,7 +1306,7 @@ add_pattern_to_browser (CtkDialog *dialog, gint response_id, gpointer data)
     /* update the property browser's contents to show the new one */
     baul_property_browser_update_contents (property_browser);
 
-    ctk_widget_hide (GTK_WIDGET (dialog));
+    ctk_widget_hide (CTK_WIDGET (dialog));
 }
 
 /* here's where we initiate adding a new pattern by putting up a file selector */
@@ -1318,7 +1318,7 @@ add_new_pattern (BaulPropertyBrowser *property_browser)
 
     if (property_browser->details->patterns_dialog)
     {
-        ctk_window_present (GTK_WINDOW (property_browser->details->patterns_dialog));
+        ctk_window_present (CTK_WINDOW (property_browser->details->patterns_dialog));
     }
     else
     {
@@ -1327,21 +1327,21 @@ add_new_pattern (BaulPropertyBrowser *property_browser)
 
         property_browser->details->patterns_dialog = dialog =
                     eel_file_chooser_dialog_new (_("Select an Image File to Add as a Pattern"),
-                            GTK_WINDOW (property_browser),
-                            GTK_FILE_CHOOSER_ACTION_OPEN,
-                            "process-stop", GTK_RESPONSE_CANCEL,
-                            "document-open", GTK_RESPONSE_ACCEPT,
+                            CTK_WINDOW (property_browser),
+                            CTK_FILE_CHOOSER_ACTION_OPEN,
+                            "process-stop", CTK_RESPONSE_CANCEL,
+                            "document-open", CTK_RESPONSE_ACCEPT,
                             NULL);
-        ctk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog),
+        ctk_file_chooser_set_current_folder (CTK_FILE_CHOOSER (dialog),
                                              DATADIR "/baul/patterns/");
         filter = ctk_file_filter_new ();
         ctk_file_filter_add_pixbuf_formats (filter);
-        ctk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), filter);
+        ctk_file_chooser_set_filter (CTK_FILE_CHOOSER (dialog), filter);
 
-        ctk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), FALSE);
+        ctk_file_chooser_set_local_only (CTK_FILE_CHOOSER (dialog), FALSE);
 
         preview = ctk_image_new ();
-        ctk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (dialog),
+        ctk_file_chooser_set_preview_widget (CTK_FILE_CHOOSER (dialog),
                                              preview);
         g_signal_connect (dialog, "update-preview",
                           G_CALLBACK (update_preview_cb), preview);
@@ -1350,7 +1350,7 @@ add_new_pattern (BaulPropertyBrowser *property_browser)
                           G_CALLBACK (add_pattern_to_browser),
                           property_browser);
 
-        ctk_widget_show (GTK_WIDGET (dialog));
+        ctk_widget_show (CTK_WIDGET (dialog));
 
         if (property_browser->details->patterns_dialog)
             eel_add_weak_pointer (&property_browser->details->patterns_dialog);
@@ -1408,7 +1408,7 @@ add_color_to_file (BaulPropertyBrowser *property_browser, const char *color_spec
         {
             eel_show_error_dialog (_("The color cannot be installed."),
                                    _("Sorry, but you must specify an unused color name for the new color."),
-                                   GTK_WINDOW (property_browser));
+                                   CTK_WINDOW (property_browser));
         }
     }
 
@@ -1421,23 +1421,23 @@ add_color_to_browser (CtkWidget *widget, gint which_button, gpointer data)
 {
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
-    if (which_button == GTK_RESPONSE_OK)
+    if (which_button == CTK_RESPONSE_OK)
     {
         char * color_spec;
         const char *color_name;
         char *stripped_color_name;
         GdkColor color;
 
-        ctk_color_button_get_color (GTK_COLOR_BUTTON (property_browser->details->color_picker), &color);
+        ctk_color_button_get_color (CTK_COLOR_BUTTON (property_browser->details->color_picker), &color);
         color_spec = gdk_color_to_string (&color);
 
-        color_name = ctk_entry_get_text (GTK_ENTRY (property_browser->details->color_name));
+        color_name = ctk_entry_get_text (CTK_ENTRY (property_browser->details->color_name));
         stripped_color_name = g_strstrip (g_strdup (color_name));
         if (strlen (stripped_color_name) == 0)
         {
             eel_show_error_dialog (_("The color cannot be installed."),
                                    _("Sorry, but you must specify a non-blank name for the new color."),
-                                   GTK_WINDOW (property_browser));
+                                   CTK_WINDOW (property_browser));
 
         }
         else
@@ -1460,8 +1460,8 @@ show_color_selection_window (CtkWidget *widget, gpointer data)
     GdkColor color;
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
-    ctk_color_selection_get_current_color (GTK_COLOR_SELECTION
-                                           (ctk_color_selection_dialog_get_color_selection (GTK_COLOR_SELECTION_DIALOG (property_browser->details->colors_dialog))),
+    ctk_color_selection_get_current_color (CTK_COLOR_SELECTION
+                                           (ctk_color_selection_dialog_get_color_selection (CTK_COLOR_SELECTION_DIALOG (property_browser->details->colors_dialog))),
                                            &color);
     ctk_widget_destroy (property_browser->details->colors_dialog);
 
@@ -1469,7 +1469,7 @@ show_color_selection_window (CtkWidget *widget, gpointer data)
     property_browser->details->colors_dialog = baul_color_selection_dialog_new (property_browser);
 
     /* set the color to the one picked by the selector */
-    ctk_color_button_set_color (GTK_COLOR_BUTTON (property_browser->details->color_picker), &color);
+    ctk_color_button_set_color (CTK_COLOR_BUTTON (property_browser->details->color_picker), &color);
 
     /* connect the signals to the new dialog */
 
@@ -1477,8 +1477,8 @@ show_color_selection_window (CtkWidget *widget, gpointer data)
 
     g_signal_connect_object (property_browser->details->colors_dialog, "response",
                              G_CALLBACK (add_color_to_browser), property_browser, 0);
-    ctk_window_set_position (GTK_WINDOW (property_browser->details->colors_dialog), GTK_WIN_POS_MOUSE);
-    ctk_widget_show (GTK_WIDGET(property_browser->details->colors_dialog));
+    ctk_window_set_position (CTK_WINDOW (property_browser->details->colors_dialog), CTK_WIN_POS_MOUSE);
+    ctk_widget_show (CTK_WIDGET(property_browser->details->colors_dialog));
 }
 
 
@@ -1489,7 +1489,7 @@ add_new_color (BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->colors_dialog)
     {
-        ctk_window_present (GTK_WINDOW (property_browser->details->colors_dialog));
+        ctk_window_present (CTK_WINDOW (property_browser->details->colors_dialog));
     }
     else
     {
@@ -1497,7 +1497,7 @@ add_new_color (BaulPropertyBrowser *property_browser)
         CtkWidget *ok_button, *cancel_button, *help_button;
 
         property_browser->details->colors_dialog = ctk_color_selection_dialog_new (_("Select a Color to Add"));
-        color_dialog = GTK_COLOR_SELECTION_DIALOG (property_browser->details->colors_dialog);
+        color_dialog = CTK_COLOR_SELECTION_DIALOG (property_browser->details->colors_dialog);
 
         eel_add_weak_pointer (&property_browser->details->colors_dialog);
 
@@ -1511,8 +1511,8 @@ add_new_color (BaulPropertyBrowser *property_browser)
                                  G_CALLBACK (ctk_widget_destroy), color_dialog, G_CONNECT_SWAPPED);
         ctk_widget_hide (help_button);
 
-        ctk_window_set_position (GTK_WINDOW (color_dialog), GTK_WIN_POS_MOUSE);
-        ctk_widget_show (GTK_WIDGET(color_dialog));
+        ctk_window_set_position (CTK_WINDOW (color_dialog), CTK_WIN_POS_MOUSE);
+        ctk_widget_show (CTK_WIDGET(color_dialog));
     }
 }
 
@@ -1522,7 +1522,7 @@ emblem_dialog_clicked (CtkWidget *dialog, int which_button, BaulPropertyBrowser 
 {
     char *emblem_path;
 
-    if (which_button == GTK_RESPONSE_OK)
+    if (which_button == CTK_RESPONSE_OK)
     {
         const char *new_keyword;
         char *stripped_keyword;
@@ -1543,7 +1543,7 @@ emblem_dialog_clicked (CtkWidget *dialog, int which_button, BaulPropertyBrowser 
             {
                 char *message = g_strdup_printf
                                 (_("Sorry, but \"%s\" is not a usable image file."), emblem_path);
-                eel_show_error_dialog (_("The file is not an image."), message, GTK_WINDOW (property_browser));
+                eel_show_error_dialog (_("The file is not an image."), message, CTK_WINDOW (property_browser));
                 g_free (message);
                 g_free (emblem_path);
                 emblem_path = NULL;
@@ -1561,11 +1561,11 @@ emblem_dialog_clicked (CtkWidget *dialog, int which_button, BaulPropertyBrowser 
         {
             char *message = g_strdup_printf
                             (_("Sorry, but \"%s\" is not a usable image file."), property_browser->details->image_path);
-            eel_show_error_dialog (_("The file is not an image."), message, GTK_WINDOW (property_browser));
+            eel_show_error_dialog (_("The file is not an image."), message, CTK_WINDOW (property_browser));
             g_free (message);
         }
 
-        new_keyword = ctk_entry_get_text(GTK_ENTRY(property_browser->details->keyword));
+        new_keyword = ctk_entry_get_text(CTK_ENTRY(property_browser->details->keyword));
         if (new_keyword == NULL)
         {
             stripped_keyword = NULL;
@@ -1579,7 +1579,7 @@ emblem_dialog_clicked (CtkWidget *dialog, int which_button, BaulPropertyBrowser 
         baul_emblem_install_custom_emblem (pixbuf,
                                            stripped_keyword,
                                            stripped_keyword,
-                                           GTK_WINDOW (property_browser));
+                                           CTK_WINDOW (property_browser));
         if (pixbuf != NULL)
             g_object_unref (pixbuf);
 
@@ -1604,7 +1604,7 @@ add_new_emblem (BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->emblems_dialog)
     {
-        ctk_window_present (GTK_WINDOW (property_browser->details->emblems_dialog));
+        ctk_window_present (CTK_WINDOW (property_browser->details->emblems_dialog));
     }
     else
     {
@@ -1614,8 +1614,8 @@ add_new_emblem (BaulPropertyBrowser *property_browser)
 
         g_signal_connect_object (property_browser->details->emblems_dialog, "response",
                                  G_CALLBACK (emblem_dialog_clicked), property_browser, 0);
-        ctk_window_set_position (GTK_WINDOW (property_browser->details->emblems_dialog), GTK_WIN_POS_MOUSE);
-        ctk_widget_show (GTK_WIDGET(property_browser->details->emblems_dialog));
+        ctk_window_set_position (CTK_WINDOW (property_browser->details->emblems_dialog), CTK_WIN_POS_MOUSE);
+        ctk_widget_show (CTK_WIDGET(property_browser->details->emblems_dialog));
     }
 }
 
@@ -1673,7 +1673,7 @@ help_button_callback (CtkWidget *widget, CtkWidget *property_browser)
 {
     GError *error = NULL;
 
-    ctk_show_uri_on_window (GTK_WINDOW (property_browser),
+    ctk_show_uri_on_window (CTK_WINDOW (property_browser),
                             "help:cafe-user-guide/gosbaul-50",
                             ctk_get_current_event_time (), &error);
 
@@ -1681,17 +1681,17 @@ help_button_callback (CtkWidget *widget, CtkWidget *property_browser)
     {
         CtkWidget *dialog;
 
-        dialog = ctk_message_dialog_new (GTK_WINDOW (property_browser),
-                                         GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_OK,
+        dialog = ctk_message_dialog_new (CTK_WINDOW (property_browser),
+                                         CTK_DIALOG_DESTROY_WITH_PARENT,
+                                         CTK_MESSAGE_ERROR,
+                                         CTK_BUTTONS_OK,
                                          _("There was an error displaying help: \n%s"),
                                          error->message);
 
         g_signal_connect (G_OBJECT (dialog),
                           "response", G_CALLBACK (ctk_widget_destroy),
                           NULL);
-        ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+        ctk_window_set_resizable (CTK_WINDOW (dialog), FALSE);
         ctk_widget_show (dialog);
         g_error_free (error);
     }
@@ -1756,7 +1756,7 @@ element_clicked_callback (CtkWidget *image_table,
 
     g_object_set_data (G_OBJECT (property_browser), "dragged-image", child);
 
-    ctk_drag_begin_with_coordinates (GTK_WIDGET (property_browser),
+    ctk_drag_begin_with_coordinates (CTK_WIDGET (property_browser),
                                      target_list,
                                      GDK_ACTION_ASK | GDK_ACTION_MOVE | GDK_ACTION_COPY,
                                      event->button,
@@ -1770,7 +1770,7 @@ element_clicked_callback (CtkWidget *image_table,
     property_browser->details->keep_around = (event->state & GDK_SHIFT_MASK) == 0;
     if (! property_browser->details->keep_around)
     {
-        ctk_widget_hide (GTK_WIDGET (property_browser));
+        ctk_widget_hide (CTK_WIDGET (property_browser));
     }
 }
 
@@ -1873,7 +1873,7 @@ make_properties_from_directories (BaulPropertyBrowser *property_browser)
             property_browser->details->keywords = g_list_prepend (property_browser->details->keywords,
                                                   keyword);
 
-            ctk_container_add (GTK_CONTAINER (image_table), property_image);
+            ctk_container_add (CTK_CONTAINER (image_table), property_image);
             ctk_widget_show (property_image);
 
             g_free (object_name);
@@ -1907,7 +1907,7 @@ make_properties_from_directories (BaulPropertyBrowser *property_browser)
 
             property_image = labeled_image_new (object_label, object_pixbuf, object_name, PANGO_SCALE_LARGE);
 
-            ctk_container_add (GTK_CONTAINER (image_table), property_image);
+            ctk_container_add (CTK_CONTAINER (image_table), property_image);
             ctk_widget_show (property_image);
 
             /* Keep track of ERASE objects to place them prominently later */
@@ -1963,7 +1963,7 @@ make_properties_from_directories (BaulPropertyBrowser *property_browser)
         property_image = labeled_image_new (_("Erase"), object_pixbuf, "erase", PANGO_SCALE_LARGE);
         eel_labeled_image_set_fixed_image_height (EEL_LABELED_IMAGE (property_image), MAX_EMBLEM_HEIGHT);
 
-        ctk_container_add (GTK_CONTAINER (image_table), property_image);
+        ctk_container_add (CTK_CONTAINER (image_table), property_image);
         ctk_widget_show (property_image);
 
         eel_wrap_table_reorder_child (EEL_WRAP_TABLE (image_table),
@@ -2008,7 +2008,7 @@ add_reset_property (BaulPropertyBrowser *property_browser)
     g_free (reset_image_file_name);
 
     reset_image = labeled_image_new (_("Reset"), reset_chit != NULL ? reset_chit : reset_pixbuf, RESET_IMAGE_NAME, PANGO_SCALE_MEDIUM);
-    ctk_container_add (GTK_CONTAINER (property_browser->details->content_table), reset_image);
+    ctk_container_add (CTK_CONTAINER (property_browser->details->content_table), reset_image);
     eel_wrap_table_reorder_child (EEL_WRAP_TABLE (property_browser->details->content_table),
                                   reset_image,
                                   0);
@@ -2079,7 +2079,7 @@ make_properties_from_xml_node (BaulPropertyBrowser *property_browser,
             /* make the tile from the pixmap and name */
             new_property = labeled_image_new (name, pixbuf, color, PANGO_SCALE_LARGE);
 
-            ctk_container_add (GTK_CONTAINER (property_browser->details->content_table), new_property);
+            ctk_container_add (CTK_CONTAINER (property_browser->details->content_table), new_property);
             ctk_widget_show (new_property);
 
             g_object_unref (pixbuf);
@@ -2098,7 +2098,7 @@ make_category(BaulPropertyBrowser *property_browser, const char* path, const cha
 {
 
     /* set up the description in the help label */
-    ctk_label_set_text (GTK_LABEL (property_browser->details->help_label), description);
+    ctk_label_set_text (CTK_LABEL (property_browser->details->help_label), description);
 
     /* case out on the mode */
     if (strcmp (mode, "directory") == 0)
@@ -2129,10 +2129,10 @@ property_browser_category_button_new (const char *display_name,
         button = eel_labeled_image_radio_button_new (display_name, NULL);
     }
 
-    ctk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
+    ctk_toggle_button_set_mode (CTK_TOGGLE_BUTTON (button), FALSE);
 
     /* We also want all of the buttons to be the same height */
-    eel_labeled_image_set_fixed_image_height (EEL_LABELED_IMAGE (ctk_bin_get_child (GTK_BIN (button))), STANDARD_BUTTON_IMAGE_HEIGHT);
+    eel_labeled_image_set_fixed_image_height (EEL_LABELED_IMAGE (ctk_bin_get_child (CTK_BIN (button))), STANDARD_BUTTON_IMAGE_HEIGHT);
 
     g_free (file_name);
 
@@ -2159,21 +2159,21 @@ make_category_link (BaulPropertyBrowser *property_browser,
 
     if (*group)
     {
-        ctk_radio_button_set_group (GTK_RADIO_BUTTON (button),
+        ctk_radio_button_set_group (CTK_RADIO_BUTTON (button),
                                     ctk_radio_button_get_group (*group));
     }
     else
     {
-        *group = GTK_RADIO_BUTTON (button);
+        *group = CTK_RADIO_BUTTON (button);
     }
 
     /* if the button represents the current category, highlight it */
     if (property_browser->details->category &&
             strcmp (property_browser->details->category, name) == 0)
-        ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+        ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (button), TRUE);
 
     /* Place it in the category box */
-    ctk_box_pack_start (GTK_BOX (property_browser->details->category_box),
+    ctk_box_pack_start (CTK_BOX (property_browser->details->category_box),
                         button, FALSE, FALSE, 0);
 
     property_browser->details->category_position += 1;
@@ -2213,16 +2213,16 @@ baul_property_browser_update_contents (BaulPropertyBrowser *property_browser)
     /* allocate a new container, with a scrollwindow and viewport */
     property_browser->details->content_frame = ctk_scrolled_window_new (NULL, NULL);
     ctk_widget_set_vexpand (property_browser->details->content_frame, TRUE);
-    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (property_browser->details->content_frame),
-                                         GTK_SHADOW_IN);
+    ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (property_browser->details->content_frame),
+                                         CTK_SHADOW_IN);
     viewport = ctk_viewport_new (NULL, NULL);
     ctk_widget_show(viewport);
-    ctk_viewport_set_shadow_type(GTK_VIEWPORT(viewport), GTK_SHADOW_IN);
-    ctk_container_add (GTK_CONTAINER (property_browser->details->content_container), property_browser->details->content_frame);
+    ctk_viewport_set_shadow_type(CTK_VIEWPORT(viewport), CTK_SHADOW_IN);
+    ctk_container_add (CTK_CONTAINER (property_browser->details->content_container), property_browser->details->content_frame);
     ctk_widget_show (property_browser->details->content_frame);
-    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (property_browser->details->content_frame),
-                                    GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (property_browser->details->content_frame),
+    ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (property_browser->details->content_frame),
+                                    CTK_POLICY_NEVER, CTK_POLICY_AUTOMATIC);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (property_browser->details->content_frame),
                                                FALSE);
 
     /* allocate a table to hold the content widgets */
@@ -2235,9 +2235,9 @@ baul_property_browser_update_contents (BaulPropertyBrowser *property_browser)
     g_signal_connect_object (property_browser->details->content_table, "child_pressed",
                              G_CALLBACK (element_clicked_callback), property_browser, 0);
 
-    ctk_container_add(GTK_CONTAINER(viewport), property_browser->details->content_table);
-    ctk_container_add (GTK_CONTAINER (property_browser->details->content_frame), viewport);
-    ctk_widget_show (GTK_WIDGET (property_browser->details->content_table));
+    ctk_container_add(CTK_CONTAINER(viewport), property_browser->details->content_table);
+    ctk_container_add (CTK_CONTAINER (property_browser->details->content_frame), viewport);
+    ctk_widget_show (CTK_WIDGET (property_browser->details->content_table));
 
     /* iterate through the xml file to generate the widgets */
     got_categories = property_browser->details->category_position >= 0;
@@ -2308,7 +2308,7 @@ baul_property_browser_update_contents (BaulPropertyBrowser *property_browser)
 
     if (property_browser->details->category == NULL)
     {
-        ctk_label_set_text (GTK_LABEL (property_browser->details->title_label), _("Select a Category:"));
+        ctk_label_set_text (CTK_LABEL (property_browser->details->title_label), _("Select a Category:"));
         ctk_widget_hide(property_browser->details->add_button);
         ctk_widget_hide(property_browser->details->remove_button);
 
@@ -2346,12 +2346,12 @@ baul_property_browser_update_contents (BaulPropertyBrowser *property_browser)
         }
 
         /* enable the "add new" button and update it's name and icon */
-        ctk_image_set_from_icon_name (GTK_IMAGE(property_browser->details->add_button_image), icon_name,
-                                      GTK_ICON_SIZE_BUTTON);
+        ctk_image_set_from_icon_name (CTK_IMAGE(property_browser->details->add_button_image), icon_name,
+                                      CTK_ICON_SIZE_BUTTON);
 
         if (text != NULL)
         {
-            ctk_button_set_label (GTK_BUTTON (property_browser->details->add_button), text);
+            ctk_button_set_label (CTK_BUTTON (property_browser->details->add_button), text);
 
         }
         ctk_widget_show (property_browser->details->add_button);
@@ -2398,7 +2398,7 @@ baul_property_browser_update_contents (BaulPropertyBrowser *property_browser)
         if (label_text)
         {
             ctk_label_set_text_with_mnemonic
-            (GTK_LABEL (property_browser->details->title_label), label_text);
+            (CTK_LABEL (property_browser->details->title_label), label_text);
         }
         g_free(label_text);
 
@@ -2429,7 +2429,7 @@ baul_property_browser_update_contents (BaulPropertyBrowser *property_browser)
             ctk_widget_show(property_browser->details->remove_button);
         if (text != NULL)
         {
-            ctk_button_set_label (GTK_BUTTON (property_browser->details->remove_button), text);
+            ctk_button_set_label (CTK_BUTTON (property_browser->details->remove_button), text);
         }
     }
 }

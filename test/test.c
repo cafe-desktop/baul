@@ -34,16 +34,16 @@ test_window_new (const char *title, guint border_width)
 {
 	CtkWidget *window;
 
-	window = ctk_window_new (GTK_WINDOW_TOPLEVEL);
+	window = ctk_window_new (CTK_WINDOW_TOPLEVEL);
 
 	if (title != NULL) {
-		ctk_window_set_title (GTK_WINDOW (window), title);
+		ctk_window_set_title (CTK_WINDOW (window), title);
 	}
 
 	g_signal_connect (window, "delete_event",
                           G_CALLBACK (test_delete_event), NULL);
 
-	ctk_container_set_border_width (GTK_CONTAINER (window), border_width);
+	ctk_container_set_border_width (CTK_CONTAINER (window), border_width);
 
 	return window;
 }
@@ -55,7 +55,7 @@ test_ctk_widget_set_background_image (CtkWidget *widget,
 	EelBackground *background;
 	char *uri;
 
-	g_return_if_fail (GTK_IS_WIDGET (widget));
+	g_return_if_fail (CTK_IS_WIDGET (widget));
 	g_return_if_fail (image_name != NULL);
 
 	background = eel_get_widget_background (widget);
@@ -73,7 +73,7 @@ test_ctk_widget_set_background_color (CtkWidget *widget,
 {
 	EelBackground *background;
 
-	g_return_if_fail (GTK_IS_WIDGET (widget));
+	g_return_if_fail (CTK_IS_WIDGET (widget));
 	g_return_if_fail (color_spec != NULL);
 
 	background = eel_get_widget_background (widget);
@@ -141,10 +141,10 @@ test_window_set_title_with_pid (CtkWindow *window,
 {
 	char *tmp;
 
-	g_return_if_fail (GTK_IS_WINDOW (window));
+	g_return_if_fail (CTK_IS_WINDOW (window));
 
 	tmp = g_strdup_printf ("%lu: %s", (gulong) getpid (), title);
-	ctk_window_set_title (GTK_WINDOW (window), tmp);
+	ctk_window_set_title (CTK_WINDOW (window), tmp);
 	g_free (tmp);
 }
 

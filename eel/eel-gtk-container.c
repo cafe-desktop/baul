@@ -45,14 +45,14 @@ eel_ctk_container_child_expose_event (CtkContainer *container,
                                       CtkWidget *child,
                                       cairo_t *cr)
 {
-    g_return_if_fail (GTK_IS_CONTAINER (container));
+    g_return_if_fail (CTK_IS_CONTAINER (container));
 
     if (child == NULL)
     {
         return;
     }
 
-    g_return_if_fail (GTK_IS_WIDGET (child));
+    g_return_if_fail (CTK_IS_WIDGET (child));
 
     ctk_container_propagate_draw (container, child, cr);
 }
@@ -70,14 +70,14 @@ void
 eel_ctk_container_child_map (CtkContainer *container,
                              CtkWidget *child)
 {
-    g_return_if_fail (GTK_IS_CONTAINER (container));
+    g_return_if_fail (CTK_IS_CONTAINER (container));
 
     if (child == NULL)
     {
         return;
     }
 
-    g_return_if_fail (ctk_widget_get_parent (child) == GTK_WIDGET (container));
+    g_return_if_fail (ctk_widget_get_parent (child) == CTK_WIDGET (container));
 
     if (ctk_widget_get_visible (child) && !ctk_widget_get_mapped (child))
     {
@@ -98,14 +98,14 @@ void
 eel_ctk_container_child_unmap (CtkContainer *container,
                                CtkWidget *child)
 {
-    g_return_if_fail (GTK_IS_CONTAINER (container));
+    g_return_if_fail (CTK_IS_CONTAINER (container));
 
     if (child == NULL)
     {
         return;
     }
 
-    g_return_if_fail (ctk_widget_get_parent (child) == GTK_WIDGET (container));
+    g_return_if_fail (ctk_widget_get_parent (child) == CTK_WIDGET (container));
 
     if (ctk_widget_get_visible (child) && ctk_widget_get_mapped (child))
     {
@@ -129,10 +129,10 @@ eel_ctk_container_child_add (CtkContainer *container,
 {
     CtkWidget *widget;
 
-    g_return_if_fail (GTK_IS_CONTAINER (container));
-    g_return_if_fail (GTK_IS_WIDGET (child));
+    g_return_if_fail (CTK_IS_CONTAINER (container));
+    g_return_if_fail (CTK_IS_WIDGET (child));
 
-    widget = GTK_WIDGET (container);
+    widget = CTK_WIDGET (container);
 
     ctk_widget_set_parent (child, widget);
 
@@ -169,9 +169,9 @@ eel_ctk_container_child_remove (CtkContainer *container,
 {
     gboolean child_was_visible;
 
-    g_return_if_fail (GTK_IS_CONTAINER (container));
-    g_return_if_fail (GTK_IS_WIDGET (child));
-    g_return_if_fail (ctk_widget_get_parent (child) == GTK_WIDGET (container));
+    g_return_if_fail (CTK_IS_CONTAINER (container));
+    g_return_if_fail (CTK_IS_WIDGET (child));
+    g_return_if_fail (ctk_widget_get_parent (child) == CTK_WIDGET (container));
 
     child_was_visible = ctk_widget_get_visible (child);
 
@@ -179,7 +179,7 @@ eel_ctk_container_child_remove (CtkContainer *container,
 
     if (child_was_visible)
     {
-        ctk_widget_queue_resize (GTK_WIDGET (container));
+        ctk_widget_queue_resize (CTK_WIDGET (container));
     }
 }
 
@@ -201,15 +201,15 @@ eel_ctk_container_child_size_allocate (CtkContainer *container,
 {
     CtkAllocation child_allocation;
 
-    g_return_if_fail (GTK_IS_CONTAINER (container));
+    g_return_if_fail (CTK_IS_CONTAINER (container));
 
     if (child == NULL)
     {
         return;
     }
 
-    g_return_if_fail (GTK_IS_WIDGET (child));
-    g_return_if_fail (ctk_widget_get_parent (child) == GTK_WIDGET (container));
+    g_return_if_fail (CTK_IS_WIDGET (child));
+    g_return_if_fail (ctk_widget_get_parent (child) == CTK_WIDGET (container));
 
     if (eel_irect_is_empty (&child_geometry))
     {

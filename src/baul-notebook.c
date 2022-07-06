@@ -57,14 +57,14 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (BaulNotebook, baul_notebook, GTK_TYPE_NOTEBOOK);
+G_DEFINE_TYPE (BaulNotebook, baul_notebook, CTK_TYPE_NOTEBOOK);
 
 static void
 baul_notebook_class_init (BaulNotebookClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
-    CtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
-    CtkNotebookClass *notebook_class = GTK_NOTEBOOK_CLASS (klass);
+    CtkContainerClass *container_class = CTK_CONTAINER_CLASS (klass);
+    CtkNotebookClass *notebook_class = CTK_NOTEBOOK_CLASS (klass);
 
     container_class->remove = baul_notebook_remove;
 
@@ -87,11 +87,11 @@ find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
 {
     CtkPositionType tab_pos;
     int page_num = 0;
-    CtkNotebook *nb = GTK_NOTEBOOK (notebook);
+    CtkNotebook *nb = CTK_NOTEBOOK (notebook);
     CtkWidget *page;
     CtkAllocation allocation;
 
-    tab_pos = ctk_notebook_get_tab_pos (GTK_NOTEBOOK (notebook));
+    tab_pos = ctk_notebook_get_tab_pos (CTK_NOTEBOOK (notebook));
 
     while ((page = ctk_notebook_get_nth_page (nb, page_num)))
     {
@@ -102,7 +102,7 @@ find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
         tab = ctk_notebook_get_tab_label (nb, page);
         g_return_val_if_fail (tab != NULL, -1);
 
-        if (!ctk_widget_get_mapped (GTK_WIDGET (tab)))
+        if (!ctk_widget_get_mapped (CTK_WIDGET (tab)))
         {
             page_num++;
             continue;
@@ -115,14 +115,14 @@ find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
         max_x = x_root + allocation.x + allocation.width;
         max_y = y_root + allocation.y + allocation.height;
 
-        if (((tab_pos == GTK_POS_TOP)
-                || (tab_pos == GTK_POS_BOTTOM))
+        if (((tab_pos == CTK_POS_TOP)
+                || (tab_pos == CTK_POS_BOTTOM))
                 &&(abs_x<=max_x))
         {
             return page_num;
         }
-        else if (((tab_pos == GTK_POS_LEFT)
-                  || (tab_pos == GTK_POS_RIGHT))
+        else if (((tab_pos == CTK_POS_LEFT)
+                  || (tab_pos == CTK_POS_RIGHT))
                  && (abs_y<=max_y))
         {
             return page_num;
@@ -155,7 +155,7 @@ button_press_cb (BaulNotebook *notebook,
         }
 
         /* switch to the page the mouse is over, but don't consume the event */
-        ctk_notebook_set_current_page (GTK_NOTEBOOK (notebook), tab_clicked);
+        ctk_notebook_set_current_page (CTK_NOTEBOOK (notebook), tab_clicked);
     }
 
     return FALSE;
@@ -166,12 +166,12 @@ baul_notebook_init (BaulNotebook *notebook)
 {
     CtkStyleContext *context;
 
-    context = ctk_widget_get_style_context (GTK_WIDGET (notebook));
+    context = ctk_widget_get_style_context (CTK_WIDGET (notebook));
     ctk_style_context_add_class (context, "baul-notebook");
 
-    ctk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
-    ctk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
-    ctk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+    ctk_notebook_set_scrollable (CTK_NOTEBOOK (notebook), TRUE);
+    ctk_notebook_set_show_border (CTK_NOTEBOOK (notebook), FALSE);
+    ctk_notebook_set_show_tabs (CTK_NOTEBOOK (notebook), FALSE);
 
     g_signal_connect (notebook, "button-press-event",
                       (GCallback)button_press_cb, NULL);
@@ -187,11 +187,11 @@ baul_notebook_sync_loading (BaulNotebook *notebook,
     g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
     g_return_if_fail (BAUL_IS_WINDOW_SLOT (slot));
 
-    tab_label = ctk_notebook_get_tab_label (GTK_NOTEBOOK (notebook), slot->content_box);
-    g_return_if_fail (GTK_IS_WIDGET (tab_label));
+    tab_label = ctk_notebook_get_tab_label (CTK_NOTEBOOK (notebook), slot->content_box);
+    g_return_if_fail (CTK_IS_WIDGET (tab_label));
 
-    spinner = GTK_WIDGET (g_object_get_data (G_OBJECT (tab_label), "spinner"));
-    icon = GTK_WIDGET (g_object_get_data (G_OBJECT (tab_label), "icon"));
+    spinner = CTK_WIDGET (g_object_get_data (G_OBJECT (tab_label), "spinner"));
+    icon = CTK_WIDGET (g_object_get_data (G_OBJECT (tab_label), "icon"));
     g_return_if_fail (spinner != NULL && icon != NULL);
 
     active = FALSE;
@@ -205,11 +205,11 @@ baul_notebook_sync_loading (BaulNotebook *notebook,
     {
         ctk_widget_hide (icon);
         ctk_widget_show (spinner);
-        ctk_spinner_start (GTK_SPINNER (spinner));
+        ctk_spinner_start (CTK_SPINNER (spinner));
     }
     else
     {
-        ctk_spinner_stop (GTK_SPINNER (spinner));
+        ctk_spinner_stop (CTK_SPINNER (spinner));
         ctk_widget_hide (spinner);
         ctk_widget_show (icon);
     }
@@ -223,15 +223,15 @@ baul_notebook_sync_tab_label (BaulNotebook *notebook,
 
     g_return_if_fail (BAUL_IS_NOTEBOOK (notebook));
     g_return_if_fail (BAUL_IS_WINDOW_SLOT (slot));
-    g_return_if_fail (GTK_IS_WIDGET (slot->content_box));
+    g_return_if_fail (CTK_IS_WIDGET (slot->content_box));
 
-    hbox = ctk_notebook_get_tab_label (GTK_NOTEBOOK (notebook), slot->content_box);
-    g_return_if_fail (GTK_IS_WIDGET (hbox));
+    hbox = ctk_notebook_get_tab_label (CTK_NOTEBOOK (notebook), slot->content_box);
+    g_return_if_fail (CTK_IS_WIDGET (hbox));
 
-    label = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
-    g_return_if_fail (GTK_IS_WIDGET (label));
+    label = CTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
+    g_return_if_fail (CTK_IS_WIDGET (label));
 
-    ctk_label_set_text (GTK_LABEL (label), slot->title);
+    ctk_label_set_text (CTK_LABEL (label), slot->title);
 
     if (slot->location != NULL)
     {
@@ -271,51 +271,51 @@ build_tab_label (BaulNotebook *nb, BaulWindowSlot *slot)
 
     /* set hbox spacing and label padding (see below) so that there's an
      * equal amount of space around the label */
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 4);
     ctk_widget_show (hbox);
 
     /* setup load feedback */
     spinner = ctk_spinner_new ();
-    ctk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), spinner, FALSE, FALSE, 0);
 
     /* setup site icon, empty by default */
     icon = ctk_image_new ();
-    ctk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), icon, FALSE, FALSE, 0);
     /* don't show the icon */
 
     /* setup label */
     label = ctk_label_new (NULL);
-    ctk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
-    ctk_label_set_single_line_mode (GTK_LABEL (label), TRUE);
-    ctk_label_set_xalign (GTK_LABEL (label), 0.0);
-    ctk_label_set_yalign (GTK_LABEL (label), 0.5);
+    ctk_label_set_ellipsize (CTK_LABEL (label), PANGO_ELLIPSIZE_END);
+    ctk_label_set_single_line_mode (CTK_LABEL (label), TRUE);
+    ctk_label_set_xalign (CTK_LABEL (label), 0.0);
+    ctk_label_set_yalign (CTK_LABEL (label), 0.5);
 
     ctk_widget_set_margin_start (label, 0);
     ctk_widget_set_margin_end (label, 0);
     ctk_widget_set_margin_top (label, 0);
     ctk_widget_set_margin_bottom (label, 0);
 
-    ctk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), label, TRUE, TRUE, 0);
     ctk_widget_show (label);
 
     /* setup close button */
     close_button = ctk_button_new ();
-    ctk_button_set_relief (GTK_BUTTON (close_button),
-                           GTK_RELIEF_NONE);
+    ctk_button_set_relief (CTK_BUTTON (close_button),
+                           CTK_RELIEF_NONE);
     /* don't allow focus on the close button */
     ctk_widget_set_focus_on_click (close_button, FALSE);
 
     ctk_widget_set_name (close_button, "baul-tab-close-button");
 
-    image = ctk_image_new_from_icon_name ("window-close", GTK_ICON_SIZE_MENU);
+    image = ctk_image_new_from_icon_name ("window-close", CTK_ICON_SIZE_MENU);
     ctk_widget_set_tooltip_text (close_button, _("Close tab"));
     g_signal_connect_object (close_button, "clicked",
                              G_CALLBACK (close_button_clicked_cb), slot, 0);
 
-    ctk_container_add (GTK_CONTAINER (close_button), image);
+    ctk_container_add (CTK_CONTAINER (close_button), image);
     ctk_widget_show (image);
 
-    ctk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), close_button, FALSE, FALSE, 0);
     ctk_widget_show (close_button);
 
     drag_info = g_new0 (BaulDragSlotProxyInfo, 1);
@@ -340,9 +340,9 @@ baul_notebook_insert_page (CtkNotebook *gnotebook,
                            CtkWidget *menu_label,
                            int position)
 {
-    g_assert (GTK_IS_WIDGET (tab_widget));
+    g_assert (CTK_IS_WIDGET (tab_widget));
 
-    position = GTK_NOTEBOOK_CLASS (baul_notebook_parent_class)->insert_page (gnotebook,
+    position = CTK_NOTEBOOK_CLASS (baul_notebook_parent_class)->insert_page (gnotebook,
                tab_widget,
                tab_label,
                menu_label,
@@ -361,7 +361,7 @@ baul_notebook_add_tab (BaulNotebook *notebook,
                        int position,
                        gboolean jump_to)
 {
-    CtkNotebook *gnotebook = GTK_NOTEBOOK (notebook);
+    CtkNotebook *gnotebook = CTK_NOTEBOOK (notebook);
     CtkWidget *tab_label;
 
     g_return_val_if_fail (BAUL_IS_NOTEBOOK (notebook), -1);
@@ -369,12 +369,12 @@ baul_notebook_add_tab (BaulNotebook *notebook,
 
     tab_label = build_tab_label (notebook, slot);
 
-    position = ctk_notebook_insert_page (GTK_NOTEBOOK (notebook),
+    position = ctk_notebook_insert_page (CTK_NOTEBOOK (notebook),
                                          slot->content_box,
                                          tab_label,
                                          position);
 
-    ctk_container_child_set (GTK_CONTAINER (notebook),
+    ctk_container_child_set (CTK_CONTAINER (notebook),
                              slot->content_box,
                              "tab-expand", TRUE,
                              NULL);
@@ -401,8 +401,8 @@ static void
 baul_notebook_remove (CtkContainer *container,
                       CtkWidget *tab_widget)
 {
-    CtkNotebook *gnotebook = GTK_NOTEBOOK (container);
-    GTK_CONTAINER_CLASS (baul_notebook_parent_class)->remove (container, tab_widget);
+    CtkNotebook *gnotebook = CTK_NOTEBOOK (container);
+    CTK_CONTAINER_CLASS (baul_notebook_parent_class)->remove (container, tab_widget);
 
     ctk_notebook_set_show_tabs (gnotebook,
                                 ctk_notebook_get_n_pages (gnotebook) > 1);
@@ -424,7 +424,7 @@ baul_notebook_reorder_current_child_relative (BaulNotebook *notebook,
         return;
     }
 
-    gnotebook = GTK_NOTEBOOK (notebook);
+    gnotebook = CTK_NOTEBOOK (notebook);
 
     page = ctk_notebook_get_current_page (gnotebook);
     child = ctk_notebook_get_nth_page (gnotebook, page);
@@ -445,7 +445,7 @@ baul_notebook_set_current_page_relative (BaulNotebook *notebook,
         return;
     }
 
-    gnotebook = GTK_NOTEBOOK (notebook);
+    gnotebook = CTK_NOTEBOOK (notebook);
 
     page = ctk_notebook_get_current_page (gnotebook);
     ctk_notebook_set_current_page (gnotebook, page + offset);
@@ -460,7 +460,7 @@ baul_notebook_is_valid_relative_position (BaulNotebook *notebook,
     int page;
     int n_pages;
 
-    gnotebook = GTK_NOTEBOOK (notebook);
+    gnotebook = CTK_NOTEBOOK (notebook);
 
     page = ctk_notebook_get_current_page (gnotebook);
     n_pages = ctk_notebook_get_n_pages (gnotebook) - 1;

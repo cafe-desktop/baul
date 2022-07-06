@@ -111,7 +111,7 @@ fm_widget_view_begin_loading (FMDirectoryView *view)
     g_free (uri);
 
     widget = baul_widget_view_provider_get_widget (widget_view->provider);
-    ctk_container_add (GTK_CONTAINER(widget_view), widget);
+    ctk_container_add (CTK_CONTAINER(widget_view), widget);
 
     window = fm_directory_view_get_containing_window (view);
     baul_widget_view_provider_set_window (widget_view->provider, window);
@@ -137,7 +137,7 @@ fm_widget_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirector
 static CtkWidget *
 fm_widget_view_get_background_widget (FMDirectoryView *view)
 {
-    return GTK_WIDGET (view);
+    return CTK_WIDGET (view);
 }
 
 static GList *
@@ -325,7 +325,7 @@ fm_widget_view_scroll_to_file (BaulView *view, const char *uri)
 static void
 fm_widget_view_grab_focus (BaulView *view)
 {
-    ctk_widget_grab_focus (GTK_WIDGET (view));
+    ctk_widget_grab_focus (CTK_WIDGET (view));
 }
 
 static void

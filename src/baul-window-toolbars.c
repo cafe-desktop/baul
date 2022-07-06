@@ -70,7 +70,7 @@ baul_navigation_window_set_spinner_active (BaulNavigationWindow *window,
     window->details->spinner_active = allow;
     if (allow) {
         ctk_widget_show (window->details->spinner);
-        ctk_spinner_start (GTK_SPINNER (window->details->spinner));
+        ctk_spinner_start (CTK_SPINNER (window->details->spinner));
     } else {
         ctk_widget_hide (window->details->spinner);
     }
@@ -88,19 +88,19 @@ baul_navigation_window_activate_spinner (BaulNavigationWindow *window)
     }
 
     item = ctk_tool_item_new ();
-    ctk_widget_show (GTK_WIDGET (item));
+    ctk_widget_show (CTK_WIDGET (item));
     ctk_tool_item_set_expand (item, TRUE);
-    ctk_toolbar_insert (GTK_TOOLBAR (window->details->toolbar),
+    ctk_toolbar_insert (CTK_TOOLBAR (window->details->toolbar),
                         item, -1);
 
     spinner = ctk_spinner_new ();
-    ctk_widget_show (GTK_WIDGET (spinner));
+    ctk_widget_show (CTK_WIDGET (spinner));
 
     item = ctk_tool_item_new ();
-    ctk_container_add (GTK_CONTAINER (item), spinner);
-    ctk_widget_show (GTK_WIDGET (item));
+    ctk_container_add (CTK_CONTAINER (item), spinner);
+    ctk_widget_show (CTK_WIDGET (item));
 
-    ctk_toolbar_insert (GTK_TOOLBAR (window->details->toolbar),
+    ctk_toolbar_insert (CTK_TOOLBAR (window->details->toolbar),
                         item, -1);
 
     window->details->spinner = spinner;
@@ -134,7 +134,7 @@ get_extension_toolbar_items (BaulNavigationWindow *window)
         provider = BAUL_MENU_PROVIDER (l->data);
         file_items = baul_menu_provider_get_toolbar_items
                      (provider,
-                      GTK_WIDGET (window),
+                      CTK_WIDGET (window),
                       slot->viewed_file);
         items = g_list_concat (items, file_items);
     }
@@ -187,11 +187,11 @@ baul_navigation_window_load_extension_toolbar_items (BaulNavigationWindow *windo
     {
         item = BAUL_MENU_ITEM (l->data);
 
-        action = baul_toolbar_action_from_menu_item (item, GTK_WIDGET (window));
+        action = baul_toolbar_action_from_menu_item (item, CTK_WIDGET (window));
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         ctk_action_group_add_action (action_group,
-                                     GTK_ACTION (action));
+                                     CTK_ACTION (action));
         g_object_unref (action);
 
         action_name = ctk_action_get_name (action);
@@ -202,7 +202,7 @@ baul_navigation_window_load_extension_toolbar_items (BaulNavigationWindow *windo
                                TOOLBAR_PATH_EXTENSION_ACTIONS,
                                action_name,
                                action_name,
-                               GTK_UI_MANAGER_TOOLITEM,
+                               CTK_UI_MANAGER_TOOLITEM,
                                FALSE);
 
         g_object_unref (item);

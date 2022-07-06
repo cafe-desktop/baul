@@ -27,15 +27,15 @@
 
 #include "eel-background.h"
 
-G_DEFINE_TYPE (EelBackgroundBox, eel_background_box, GTK_TYPE_EVENT_BOX)
+G_DEFINE_TYPE (EelBackgroundBox, eel_background_box, CTK_TYPE_EVENT_BOX)
 
 static gboolean
 eel_background_box_draw (CtkWidget *widget,
                          cairo_t *cr)
 {
     eel_background_draw (widget, cr);
-    ctk_container_propagate_draw (GTK_CONTAINER (widget),
-                                  ctk_bin_get_child (GTK_BIN (widget)),
+    ctk_container_propagate_draw (CTK_CONTAINER (widget),
+                                  ctk_bin_get_child (CTK_BIN (widget)),
                                   cr);
     return TRUE;
 }
@@ -48,7 +48,7 @@ eel_background_box_init (EelBackgroundBox *box)
 static void
 eel_background_box_class_init (EelBackgroundBoxClass *klass)
 {
-    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    CtkWidgetClass *widget_class = CTK_WIDGET_CLASS (klass);
     widget_class->draw = eel_background_box_draw;
 
 }
@@ -60,5 +60,5 @@ eel_background_box_new (void)
 
     background_box = EEL_BACKGROUND_BOX (ctk_widget_new (eel_background_box_get_type (), NULL));
 
-    return GTK_WIDGET (background_box);
+    return CTK_WIDGET (background_box);
 }

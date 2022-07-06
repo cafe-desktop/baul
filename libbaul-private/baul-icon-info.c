@@ -374,7 +374,7 @@ baul_icon_info_lookup (GIcon *icon,
                                                                  "text-x-generic",
                                                                  size,
                                                                  scale,
-                                                                 GTK_ICON_LOOKUP_FORCE_SIZE);
+                                                                 CTK_ICON_LOOKUP_FORCE_SIZE);
             pixbuf = ctk_icon_info_load_icon (ctkicon_info, NULL);
         }
 
@@ -410,14 +410,14 @@ baul_icon_info_lookup (GIcon *icon,
                                                                  icon,
                                                                  size,
                                                                  scale,
-                                                                 GTK_ICON_LOOKUP_FORCE_SIZE);
+                                                                 CTK_ICON_LOOKUP_FORCE_SIZE);
 
         if (!ctkicon_info) {
             ctkicon_info = ctk_icon_theme_lookup_icon_for_scale (icon_theme,
                                                                  "text-x-generic",
                                                                  size,
                                                                  scale,
-                                                                 GTK_ICON_LOOKUP_FORCE_SIZE);
+                                                                 CTK_ICON_LOOKUP_FORCE_SIZE);
         }
 
         icon_info = baul_icon_info_new_for_icon_info (ctkicon_info, scale);

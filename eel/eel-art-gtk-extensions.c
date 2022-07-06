@@ -38,7 +38,7 @@ EelIRect
 eel_ctk_widget_get_bounds (CtkWidget *ctk_widget)
 {
     CtkAllocation allocation;
-    g_return_val_if_fail (GTK_IS_WIDGET (ctk_widget), eel_irect_empty);
+    g_return_val_if_fail (CTK_IS_WIDGET (ctk_widget), eel_irect_empty);
 
     ctk_widget_get_allocation (ctk_widget, &allocation);
     return eel_irect_assign (allocation.x,
@@ -60,7 +60,7 @@ eel_ctk_widget_get_dimensions (CtkWidget *ctk_widget)
     EelDimensions dimensions;
     CtkAllocation allocation;
 
-    g_return_val_if_fail (GTK_IS_WIDGET (ctk_widget), eel_dimensions_empty);
+    g_return_val_if_fail (CTK_IS_WIDGET (ctk_widget), eel_dimensions_empty);
 
     ctk_widget_get_allocation (ctk_widget, &allocation);
     dimensions.width = (int) allocation.width;

@@ -182,28 +182,28 @@ baul_window_slot_init (BaulWindowSlot *slot)
 {
     CtkWidget *content_box, *eventbox, *extras_vbox, *frame;
 
-    content_box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    content_box = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
     slot->content_box = content_box;
     ctk_widget_show (content_box);
 
     frame = ctk_frame_new (NULL);
-    ctk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
-    ctk_box_pack_start (GTK_BOX (content_box), frame, FALSE, FALSE, 0);
+    ctk_frame_set_shadow_type (CTK_FRAME (frame), CTK_SHADOW_ETCHED_IN);
+    ctk_box_pack_start (CTK_BOX (content_box), frame, FALSE, FALSE, 0);
     slot->extra_location_frame = frame;
 
     eventbox = ctk_event_box_new ();
     ctk_widget_set_name (eventbox, "baul-extra-view-widget");
-    ctk_container_add (GTK_CONTAINER (frame), eventbox);
+    ctk_container_add (CTK_CONTAINER (frame), eventbox);
     ctk_widget_show (eventbox);
 
-    extras_vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    ctk_container_set_border_width (GTK_CONTAINER (extras_vbox), 6);
+    extras_vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 6);
+    ctk_container_set_border_width (CTK_CONTAINER (extras_vbox), 6);
     slot->extra_location_widgets = extras_vbox;
-    ctk_container_add (GTK_CONTAINER (eventbox), extras_vbox);
+    ctk_container_add (CTK_CONTAINER (eventbox), extras_vbox);
     ctk_widget_show (extras_vbox);
 
-    slot->view_box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    ctk_box_pack_start (GTK_BOX (content_box), slot->view_box, TRUE, TRUE, 0);
+    slot->view_box = ctk_box_new (CTK_ORIENTATION_VERTICAL, 0);
+    ctk_box_pack_start (CTK_BOX (content_box), slot->view_box, TRUE, TRUE, 0);
     ctk_widget_show (slot->view_box);
 
     slot->title = g_strdup (_("Loading..."));
@@ -391,12 +391,12 @@ baul_window_slot_update_icon (BaulWindowSlot *slot)
              * if we're setting to the same icon. This happens a lot e.g. when
              * the trash directory changes due to the file count changing.
              */
-            if (g_strcmp0 (icon_name, ctk_window_get_icon_name (GTK_WINDOW (window))) != 0)
+            if (g_strcmp0 (icon_name, ctk_window_get_icon_name (CTK_WINDOW (window))) != 0)
             {
                 if (g_strcmp0 (icon_name, "text-x-generic") == 0)
-                    ctk_window_set_icon_name (GTK_WINDOW (window), "folder-saved-search");
+                    ctk_window_set_icon_name (CTK_WINDOW (window), "folder-saved-search");
                 else
-                    ctk_window_set_icon_name (GTK_WINDOW (window), icon_name);
+                    ctk_window_set_icon_name (CTK_WINDOW (window), icon_name);
             }
         }
         else
@@ -407,7 +407,7 @@ baul_window_slot_update_icon (BaulWindowSlot *slot)
 
             if (pixbuf)
             {
-                ctk_window_set_icon (GTK_WINDOW (window), pixbuf);
+                ctk_window_set_icon (CTK_WINDOW (window), pixbuf);
                 g_object_unref (pixbuf);
             }
         }
@@ -488,7 +488,7 @@ baul_window_slot_set_content_view_widget (BaulWindowSlot *slot,
     if (new_view != NULL)
     {
         widget = baul_view_get_widget (new_view);
-        ctk_box_pack_start (GTK_BOX (slot->view_box), widget,
+        ctk_box_pack_start (CTK_BOX (slot->view_box), widget,
                             TRUE, TRUE, 0);
 
         ctk_widget_show (widget);
@@ -545,7 +545,7 @@ baul_window_slot_update_query_editor (BaulWindowSlot *slot)
 {
     if (slot->query_editor != NULL)
     {
-        ctk_widget_destroy (GTK_WIDGET (slot->query_editor));
+        ctk_widget_destroy (CTK_WIDGET (slot->query_editor));
         g_assert (slot->query_editor == NULL);
     }
 
@@ -560,7 +560,7 @@ remove_all (CtkWidget *widget,
             gpointer data)
 {
     CtkContainer *container;
-    container = GTK_CONTAINER (data);
+    container = CTK_CONTAINER (data);
 
     ctk_container_remove (container, widget);
 }
@@ -568,7 +568,7 @@ remove_all (CtkWidget *widget,
 void
 baul_window_slot_remove_extra_location_widgets (BaulWindowSlot *slot)
 {
-    ctk_container_foreach (GTK_CONTAINER (slot->extra_location_widgets),
+    ctk_container_foreach (CTK_CONTAINER (slot->extra_location_widgets),
                            remove_all,
                            slot->extra_location_widgets);
     ctk_widget_hide (slot->extra_location_frame);
@@ -578,7 +578,7 @@ void
 baul_window_slot_add_extra_location_widget (BaulWindowSlot *slot,
         CtkWidget *widget)
 {
-    ctk_box_pack_start (GTK_BOX (slot->extra_location_widgets),
+    ctk_box_pack_start (CTK_BOX (slot->extra_location_widgets),
                         widget, TRUE, TRUE, 0);
     ctk_widget_show (slot->extra_location_frame);
 }

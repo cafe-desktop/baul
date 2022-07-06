@@ -370,8 +370,8 @@ combo_box_changed (CtkComboBox *combo_box,
         data->other_application_selected = FALSE;
 
         dialog = baul_add_application_dialog_new (NULL, x_content_type);
-        ctk_window_set_transient_for (GTK_WINDOW (dialog),
-                                      GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (combo_box))));
+        ctk_window_set_transient_for (CTK_WINDOW (dialog),
+                                      CTK_WINDOW (ctk_widget_get_toplevel (CTK_WIDGET (combo_box))));
         g_signal_connect (dialog, "application_selected",
                           G_CALLBACK (other_application_selected),
                           data);
@@ -379,7 +379,7 @@ combo_box_changed (CtkComboBox *combo_box,
                           G_CALLBACK (dialog_response_cb), data);
         g_signal_connect (dialog, "destroy",
                           G_CALLBACK (dialog_destroy_cb), data);
-        ctk_widget_show (GTK_WIDGET (dialog));
+        ctk_widget_show (CTK_WIDGET (dialog));
 
         break;
     }
@@ -452,7 +452,7 @@ baul_autorun_rebuild_combo_box (CtkWidget *combo_box)
  *
  * where "Frobnicator App" have been set up using "Open with other
  * Application...". However this is not accessible (which is a
- * GTK+ issue) but probably not a big deal.
+ * CTK+ issue) but probably not a big deal.
  *
  * And we only want show these buttons (e.g. [x]) for associations with
  * GAppInfo instances that are deletable.
@@ -487,7 +487,7 @@ baul_autorun_prepare_combo_box (CtkWidget *combo_box,
     baul_autorun_get_preferences (x_content_type, &pref_start_app, &pref_ignore, &pref_open_folder);
     pref_ask = !pref_start_app && !pref_ignore && !pref_open_folder;
 
-    icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+    icon_size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
     icon_scale = ctk_widget_get_scale_factor (combo_box);
 
     set_active = -1;
@@ -670,26 +670,26 @@ baul_autorun_prepare_combo_box (CtkWidget *combo_box,
     }
     g_list_free_full (app_info_list, g_object_unref);
 
-    ctk_combo_box_set_model (GTK_COMBO_BOX (combo_box), GTK_TREE_MODEL (list_store));
+    ctk_combo_box_set_model (CTK_COMBO_BOX (combo_box), CTK_TREE_MODEL (list_store));
     g_object_unref (G_OBJECT (list_store));
 
-    ctk_cell_layout_clear (GTK_CELL_LAYOUT (combo_box));
+    ctk_cell_layout_clear (CTK_CELL_LAYOUT (combo_box));
 
     renderer = ctk_cell_renderer_pixbuf_new ();
-    ctk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, FALSE);
-    ctk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), renderer,
+    ctk_cell_layout_pack_start (CTK_CELL_LAYOUT (combo_box), renderer, FALSE);
+    ctk_cell_layout_set_attributes (CTK_CELL_LAYOUT (combo_box), renderer,
                                     "surface", COLUMN_AUTORUN_SURFACE,
                                     NULL);
     renderer = ctk_cell_renderer_text_new ();
-    ctk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, TRUE);
-    ctk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), renderer,
+    ctk_cell_layout_pack_start (CTK_CELL_LAYOUT (combo_box), renderer, TRUE);
+    ctk_cell_layout_set_attributes (CTK_CELL_LAYOUT (combo_box), renderer,
                                     "text", COLUMN_AUTORUN_NAME,
                                     NULL);
-    ctk_combo_box_set_row_separator_func (GTK_COMBO_BOX (combo_box), combo_box_separator_func, NULL, NULL);
+    ctk_combo_box_set_row_separator_func (CTK_COMBO_BOX (combo_box), combo_box_separator_func, NULL, NULL);
 
     if (num_apps == 0)
     {
-        ctk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 0);
+        ctk_combo_box_set_active (CTK_COMBO_BOX (combo_box), 0);
         ctk_widget_set_sensitive (combo_box, FALSE);
     }
     else
@@ -697,23 +697,23 @@ baul_autorun_prepare_combo_box (CtkWidget *combo_box,
         ctk_widget_set_sensitive (combo_box, TRUE);
         if (pref_ask && include_ask)
         {
-            ctk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 0);
+            ctk_combo_box_set_active (CTK_COMBO_BOX (combo_box), 0);
         }
         else if (pref_ignore)
         {
-            ctk_combo_box_set_active (GTK_COMBO_BOX (combo_box), include_ask ? 1 : 0);
+            ctk_combo_box_set_active (CTK_COMBO_BOX (combo_box), include_ask ? 1 : 0);
         }
         else if (pref_open_folder)
         {
-            ctk_combo_box_set_active (GTK_COMBO_BOX (combo_box), include_ask ? 2 : 1);
+            ctk_combo_box_set_active (CTK_COMBO_BOX (combo_box), include_ask ? 2 : 1);
         }
         else if (set_active != -1)
         {
-            ctk_combo_box_set_active (GTK_COMBO_BOX (combo_box), set_active);
+            ctk_combo_box_set_active (CTK_COMBO_BOX (combo_box), set_active);
         }
         else
         {
-            ctk_combo_box_set_active (GTK_COMBO_BOX (combo_box), include_ask ? 1 : 0);
+            ctk_combo_box_set_active (CTK_COMBO_BOX (combo_box), include_ask ? 1 : 0);
         }
 
         /* See if we have an old data around */
@@ -829,7 +829,7 @@ autorun_dialog_destroy (AutorunDialogData *data)
                                           G_CALLBACK (autorun_dialog_mount_unmounted),
                                           data);
 
-    ctk_widget_destroy (GTK_WIDGET (data->dialog));
+    ctk_widget_destroy (CTK_WIDGET (data->dialog));
     if (data->selected_app != NULL)
     {
         g_object_unref (data->selected_app);
@@ -852,18 +852,18 @@ autorun_dialog_response (CtkDialog *dialog, gint response, AutorunDialogData *da
     switch (response)
     {
     case AUTORUN_DIALOG_RESPONSE_EJECT:
-        baul_file_operations_unmount_mount (GTK_WINDOW (dialog),
+        baul_file_operations_unmount_mount (CTK_WINDOW (dialog),
                                             data->mount,
                                             data->should_eject,
                                             FALSE);
         break;
 
-    case GTK_RESPONSE_NONE:
+    case CTK_RESPONSE_NONE:
         /* window was closed */
         break;
-    case GTK_RESPONSE_CANCEL:
+    case CTK_RESPONSE_CANCEL:
         break;
-    case GTK_RESPONSE_OK:
+    case CTK_RESPONSE_OK:
         /* do the selected action */
 
         if (data->remember)
@@ -928,7 +928,7 @@ combo_box_enter_ok (CtkWidget *togglebutton, GdkEventKey *event, CtkDialog *dial
 {
     if (event->keyval == GDK_KEY_KP_Enter || event->keyval == GDK_KEY_Return)
     {
-        ctk_dialog_response (dialog, GTK_RESPONSE_OK);
+        ctk_dialog_response (dialog, CTK_RESPONSE_OK);
         return TRUE;
     }
     return FALSE;
@@ -1013,12 +1013,12 @@ show_dialog:
 
     dialog = ctk_dialog_new ();
 
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), hbox, TRUE, TRUE, 0);
-    ctk_container_set_border_width (GTK_CONTAINER (hbox), 12);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 12);
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), hbox, TRUE, TRUE, 0);
+    ctk_container_set_border_width (CTK_CONTAINER (hbox), 12);
 
     icon = g_mount_get_icon (mount);
-    icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_DIALOG);
+    icon_size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_DIALOG);
     icon_scale = ctk_widget_get_scale_factor (dialog);
     icon_info = baul_icon_info_lookup (icon, icon_size, icon_scale);
     pixbuf = baul_icon_info_get_pixbuf_at_size (icon_info, icon_size);
@@ -1026,18 +1026,18 @@ show_dialog:
     g_object_unref (icon_info);
     g_object_unref (icon);
     image = ctk_image_new_from_surface (surface);
-    ctk_widget_set_halign (image, GTK_ALIGN_CENTER);
-    ctk_widget_set_valign (image, GTK_ALIGN_START);
-    ctk_box_pack_start (GTK_BOX (hbox), image, TRUE, TRUE, 0);
+    ctk_widget_set_halign (image, CTK_ALIGN_CENTER);
+    ctk_widget_set_valign (image, CTK_ALIGN_START);
+    ctk_box_pack_start (CTK_BOX (hbox), image, TRUE, TRUE, 0);
     /* also use the icon on the dialog */
-    ctk_window_set_title (GTK_WINDOW (dialog), mount_name);
-    ctk_window_set_icon (GTK_WINDOW (dialog), pixbuf);
-    ctk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+    ctk_window_set_title (CTK_WINDOW (dialog), mount_name);
+    ctk_window_set_icon (CTK_WINDOW (dialog), pixbuf);
+    ctk_window_set_position (CTK_WINDOW (dialog), CTK_WIN_POS_CENTER);
     g_object_unref (pixbuf);
     cairo_surface_destroy (surface);
 
-    vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-    ctk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
+    vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 12);
+    ctk_box_pack_start (CTK_BOX (hbox), vbox, TRUE, TRUE, 0);
 
     label = ctk_label_new (NULL);
 
@@ -1105,23 +1105,23 @@ show_dialog:
         media_greeting = _("You have just inserted a medium.");
     }
     markup = g_strdup_printf ("<big><b>%s %s</b></big>", media_greeting, _("Choose what application to launch."));
-    ctk_label_set_markup (GTK_LABEL (label), markup);
+    ctk_label_set_markup (CTK_LABEL (label), markup);
     g_free (markup);
-    ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    ctk_label_set_max_width_chars (GTK_LABEL (label), 50);
-    ctk_label_set_xalign (GTK_LABEL (label), 0);
-    ctk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+    ctk_label_set_line_wrap (CTK_LABEL (label), TRUE);
+    ctk_label_set_max_width_chars (CTK_LABEL (label), 50);
+    ctk_label_set_xalign (CTK_LABEL (label), 0);
+    ctk_box_pack_start (CTK_BOX (vbox), label, TRUE, TRUE, 0);
 
     label = ctk_label_new (NULL);
     content_description = g_content_type_get_description (x_content_type);
     markup = g_strdup_printf (_("Select how to open \"%s\" and whether to perform this action in the future for other media of type \"%s\"."), mount_name, content_description);
     g_free (content_description);
-    ctk_label_set_markup (GTK_LABEL (label), markup);
+    ctk_label_set_markup (CTK_LABEL (label), markup);
     g_free (markup);
-    ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    ctk_label_set_max_width_chars (GTK_LABEL (label), 50);
-    ctk_label_set_xalign (GTK_LABEL (label), 0);
-    ctk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+    ctk_label_set_line_wrap (CTK_LABEL (label), TRUE);
+    ctk_label_set_max_width_chars (CTK_LABEL (label), 50);
+    ctk_label_set_xalign (CTK_LABEL (label), 0);
+    ctk_box_pack_start (CTK_BOX (vbox), label, TRUE, TRUE, 0);
 
     data = g_new0 (AutorunDialogData, 1);
     data->dialog = dialog;
@@ -1140,27 +1140,27 @@ show_dialog:
                       G_CALLBACK (combo_box_enter_ok),
                       dialog);
 
-    ctk_box_pack_start (GTK_BOX (vbox), combo_box, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (vbox), combo_box, TRUE, TRUE, 0);
 
     always_check_button = ctk_check_button_new_with_mnemonic (_("_Always perform this action"));
-    ctk_toggle_button_set_active (GTK_TOGGLE_BUTTON (always_check_button), data->remember);
+    ctk_toggle_button_set_active (CTK_TOGGLE_BUTTON (always_check_button), data->remember);
     g_signal_connect (G_OBJECT (always_check_button),
                       "toggled",
                       G_CALLBACK (autorun_always_toggled),
                       data);
-    ctk_box_pack_start (GTK_BOX (vbox), always_check_button, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (vbox), always_check_button, TRUE, TRUE, 0);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Cancel"),
                            "process-stop",
-                           GTK_RESPONSE_CANCEL);
+                           CTK_RESPONSE_CANCEL);
 
-    action_area = ctk_widget_get_parent (eel_dialog_add_button (GTK_DIALOG (dialog),
+    action_area = ctk_widget_get_parent (eel_dialog_add_button (CTK_DIALOG (dialog),
                                                                 _("_OK"),
                                                                 "ctk-ok",
-                                                                GTK_RESPONSE_OK));
+                                                                CTK_RESPONSE_OK));
 
-    ctk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+    ctk_dialog_set_default_response (CTK_DIALOG (dialog), CTK_RESPONSE_OK);
 
     if (g_mount_can_eject (mount))
     {
@@ -1168,14 +1168,14 @@ show_dialog:
         eject_button = ctk_button_new_with_mnemonic (_("_Eject"));
         surface = ctk_icon_theme_load_surface (ctk_icon_theme_get_default (),
                                                "media-eject",
-                                               baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_BUTTON),
+                                               baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_BUTTON),
                                                icon_scale,
                                                NULL,
                                                0,
                                                NULL);
         eject_image = ctk_image_new_from_surface (surface);
         cairo_surface_destroy (surface);
-        ctk_button_set_image (GTK_BUTTON (eject_button), eject_image);
+        ctk_button_set_image (CTK_BUTTON (eject_button), eject_image);
         data->should_eject = TRUE;
     }
     else
@@ -1183,8 +1183,8 @@ show_dialog:
         eject_button = ctk_button_new_with_mnemonic (_("_Unmount"));
         data->should_eject = FALSE;
     }
-    ctk_dialog_add_action_widget (GTK_DIALOG (dialog), eject_button, AUTORUN_DIALOG_RESPONSE_EJECT);
-    ctk_button_box_set_child_secondary (GTK_BUTTON_BOX (action_area), eject_button, TRUE);
+    ctk_dialog_add_action_widget (CTK_DIALOG (dialog), eject_button, AUTORUN_DIALOG_RESPONSE_EJECT);
+    ctk_button_box_set_child_secondary (CTK_BUTTON_BOX (action_area), eject_button, TRUE);
 
     /* show the dialog */
     ctk_widget_show_all (dialog);

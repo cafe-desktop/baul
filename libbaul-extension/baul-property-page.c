@@ -74,8 +74,8 @@ baul_property_page_new (const char *name,
     BaulPropertyPage *page;
 
     g_return_val_if_fail (name != NULL, NULL);
-    g_return_val_if_fail (label != NULL && GTK_IS_WIDGET (label), NULL);
-    g_return_val_if_fail (page_widget != NULL && GTK_IS_WIDGET (page_widget),
+    g_return_val_if_fail (label != NULL && CTK_IS_WIDGET (label), NULL);
+    g_return_val_if_fail (page_widget != NULL && CTK_IS_WIDGET (page_widget),
                           NULL);
 
     page = g_object_new (BAUL_TYPE_PROPERTY_PAGE,
@@ -210,14 +210,14 @@ baul_property_page_class_init (BaulPropertyPageClass *class)
                                      g_param_spec_object ("label",
                                              "Label",
                                              "Label widget to display in the notebook tab",
-                                             GTK_TYPE_WIDGET,
+                                             CTK_TYPE_WIDGET,
                                              G_PARAM_READWRITE));
     g_object_class_install_property (G_OBJECT_CLASS (class),
                                      PROP_PAGE,
                                      g_param_spec_object ("page",
                                              "Page",
                                              "Widget for the property page",
-                                             GTK_TYPE_WIDGET,
+                                             CTK_TYPE_WIDGET,
                                              G_PARAM_READWRITE));
 }
 

@@ -111,7 +111,7 @@ typedef struct
     GObjectClass parent;
 } BaulEmblemSidebarProviderClass;
 
-G_DEFINE_TYPE_WITH_CODE (BaulEmblemSidebar, baul_emblem_sidebar, GTK_TYPE_BOX,
+G_DEFINE_TYPE_WITH_CODE (BaulEmblemSidebar, baul_emblem_sidebar, CTK_TYPE_BOX,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_emblem_sidebar_iface_init));
 
@@ -190,7 +190,7 @@ baul_emblem_sidebar_button_press_cb (CtkWidget *widget,
         ctk_widget_set_sensitive (emblem_sidebar->details->popup_rename,
                                   baul_emblem_can_rename_emblem (keyword));
 
-        ctk_menu_popup_at_pointer (GTK_MENU (emblem_sidebar->details->popup),
+        ctk_menu_popup_at_pointer (CTK_MENU (emblem_sidebar->details->popup),
                                              (const GdkEvent*) event);
     }
 
@@ -239,13 +239,13 @@ rename_dialog_response_cb (CtkWidget *dialog, int response,
 
     keyword = g_object_get_data (G_OBJECT (dialog), "emblem-keyword");
 
-    if (response == GTK_RESPONSE_CANCEL)
+    if (response == CTK_RESPONSE_CANCEL)
     {
         g_free (keyword);
         ctk_widget_destroy (dialog);
         return;
     }
-    else if (response == GTK_RESPONSE_HELP)
+    else if (response == CTK_RESPONSE_HELP)
     {
         g_message ("Implement me!");
         return;
@@ -253,7 +253,7 @@ rename_dialog_response_cb (CtkWidget *dialog, int response,
 
     entry = g_object_get_data (G_OBJECT (dialog), "entry");
 
-    name = g_strdup (ctk_entry_get_text (GTK_ENTRY (entry)));
+    name = g_strdup (ctk_entry_get_text (CTK_ENTRY (entry)));
 
     ctk_widget_destroy (dialog);
 
@@ -286,26 +286,26 @@ create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar,
     entry = ctk_entry_new ();
 
     dialog = ctk_dialog_new ();
-    ctk_window_set_title (GTK_WINDOW (dialog), _("Rename Emblem"));
-    ctk_window_set_transient_for (GTK_WINDOW (dialog), NULL);
+    ctk_window_set_title (CTK_WINDOW (dialog), _("Rename Emblem"));
+    ctk_window_set_transient_for (CTK_WINDOW (dialog), NULL);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Cancel"),
                            "process-stop",
-                           GTK_RESPONSE_CANCEL);
+                           CTK_RESPONSE_CANCEL);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_OK"),
                            "ctk-ok",
-                           GTK_RESPONSE_OK);
+                           CTK_RESPONSE_OK);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Help"),
                            "help-browser",
-                           GTK_RESPONSE_HELP);
+                           CTK_RESPONSE_HELP);
 
-    ctk_dialog_set_default_response (GTK_DIALOG (dialog),
-                                     GTK_RESPONSE_OK);
+    ctk_dialog_set_default_response (CTK_DIALOG (dialog),
+                                     CTK_RESPONSE_OK);
 
     g_object_set_data (G_OBJECT (dialog), "emblem-keyword",
                        g_strdup (keyword));
@@ -314,25 +314,25 @@ create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar,
 
     label = ctk_label_new (_("Enter a new name for the displayed emblem:"));
     ctk_widget_show (label);
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), label,
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), label,
                         FALSE, FALSE, 8);
 
 
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 8);
-    ctk_box_pack_start (GTK_BOX (hbox), image, TRUE, TRUE, 8);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 8);
+    ctk_box_pack_start (CTK_BOX (hbox), image, TRUE, TRUE, 8);
 
-    ctk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
+    ctk_entry_set_activates_default (CTK_ENTRY (entry), TRUE);
 
-    ctk_box_pack_start (GTK_BOX (hbox), entry, TRUE, FALSE, 8);
+    ctk_box_pack_start (CTK_BOX (hbox), entry, TRUE, FALSE, 8);
     ctk_widget_show_all (hbox);
 
     /* it would be nice to have the text selected, ready to be overwritten
      * by the user, but that doesn't seem possible.
      */
     ctk_widget_grab_focus (entry);
-    ctk_entry_set_text (GTK_ENTRY (entry), orig_name);
+    ctk_entry_set_text (CTK_ENTRY (entry), orig_name);
 
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), hbox,
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), hbox,
                         TRUE, TRUE, 8);
 
 
@@ -362,7 +362,7 @@ create_popup_menu (BaulEmblemSidebar *emblem_sidebar)
 
     popup = ctk_menu_new ();
 
-    ctk_menu_set_reserve_toggle_size (GTK_MENU (popup), FALSE);
+    ctk_menu_set_reserve_toggle_size (CTK_MENU (popup), FALSE);
 
     /* add the "rename" menu item */
     menu_item = eel_image_menu_item_new_from_icon ("document-properties", _("Rename"));
@@ -371,7 +371,7 @@ create_popup_menu (BaulEmblemSidebar *emblem_sidebar)
                       G_CALLBACK (baul_emblem_sidebar_rename_cb),
                       emblem_sidebar);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     emblem_sidebar->details->popup_rename = menu_item;
 
     /* add "delete" menu item */
@@ -381,7 +381,7 @@ create_popup_menu (BaulEmblemSidebar *emblem_sidebar)
                       G_CALLBACK (baul_emblem_sidebar_delete_cb),
                       emblem_sidebar);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     emblem_sidebar->details->popup_remove = menu_item;
 
     emblem_sidebar->details->popup = popup;
@@ -403,7 +403,7 @@ create_emblem_widget_with_pixbuf (BaulEmblemSidebar *emblem_sidebar,
     eel_labeled_image_set_spacing (EEL_LABELED_IMAGE (image),
                                    EMBLEM_LABEL_SPACING);
     event_box = ctk_event_box_new ();
-    ctk_container_add (GTK_CONTAINER (event_box), image);
+    ctk_container_add (CTK_CONTAINER (event_box), image);
 
     prelight_pixbuf = eel_create_spotlight_pixbuf (pixbuf);
 
@@ -484,7 +484,7 @@ emblem_name_entry_changed_cb (CtkWidget *entry, Emblem *emblem)
 
     g_free (emblem->name);
 
-    text = ctk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
+    text = ctk_editable_get_chars (CTK_EDITABLE (entry), 0, -1);
 
     emblem->name = g_strdup (text);
 }
@@ -545,26 +545,26 @@ create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
     first_entry = NULL;
 
     dialog = ctk_dialog_new ();
-    ctk_window_set_title (GTK_WINDOW (dialog), _("Add Emblems..."));
-    ctk_window_set_transient_for (GTK_WINDOW (dialog), NULL);
+    ctk_window_set_title (CTK_WINDOW (dialog), _("Add Emblems..."));
+    ctk_window_set_transient_for (CTK_WINDOW (dialog), NULL);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Cancel"),
                            "process-stop",
-                           GTK_RESPONSE_CANCEL);
+                           CTK_RESPONSE_CANCEL);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_OK"),
                            "ctk-ok",
-                           GTK_RESPONSE_OK);
+                           CTK_RESPONSE_OK);
 
-    eel_dialog_add_button (GTK_DIALOG (dialog),
+    eel_dialog_add_button (CTK_DIALOG (dialog),
                            _("_Help"),
                            "help-browser",
-                           GTK_RESPONSE_HELP);
+                           CTK_RESPONSE_HELP);
 
-    ctk_dialog_set_default_response (GTK_DIALOG (dialog),
-                                     GTK_RESPONSE_OK);
+    ctk_dialog_set_default_response (CTK_DIALOG (dialog),
+                                     CTK_RESPONSE_OK);
 
     /* FIXME:  make a better message */
     if (g_slist_length (emblems) > 1)
@@ -576,12 +576,12 @@ create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
         label = ctk_label_new (_("Enter a descriptive name next to the emblem.  This name will be used in other places to identify the emblem."));
     }
 
-    ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))),
+    ctk_label_set_line_wrap (CTK_LABEL (label), TRUE);
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))),
                         label, FALSE, FALSE, 8);
     ctk_widget_show (label);
 
-    scroller = eel_scrolled_wrap_table_new (TRUE, GTK_SHADOW_NONE, &table);
+    scroller = eel_scrolled_wrap_table_new (TRUE, CTK_SHADOW_NONE, &table);
     eel_wrap_table_set_x_spacing (EEL_WRAP_TABLE (table), 8);
     eel_wrap_table_set_y_spacing (EEL_WRAP_TABLE (table), 8);
 
@@ -598,17 +598,17 @@ create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
 
         image = ctk_image_new_from_pixbuf (emblem->pixbuf);
 
-        hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        ctk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+        hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 0);
+        ctk_box_pack_start (CTK_BOX (hbox), image, FALSE, FALSE, 0);
 
         entry = ctk_entry_new ();
-        ctk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
+        ctk_entry_set_activates_default (CTK_ENTRY (entry), TRUE);
         g_signal_connect (entry, "changed",
                           G_CALLBACK (emblem_name_entry_changed_cb),
                           emblem);
 
-        ctk_box_pack_start (GTK_BOX (hbox), entry, FALSE, FALSE, 0);
-        ctk_container_add (GTK_CONTAINER (table), hbox);
+        ctk_box_pack_start (CTK_BOX (hbox), entry, FALSE, FALSE, 0);
+        ctk_container_add (CTK_CONTAINER (table), hbox);
 
         if (num_emblems == 0)
         {
@@ -618,8 +618,8 @@ create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
         num_emblems++;
     }
 
-    ctk_container_set_border_width (GTK_CONTAINER (dialog), 8);
-    ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))),
+    ctk_container_set_border_width (CTK_CONTAINER (dialog), 8);
+    ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))),
                         scroller, TRUE, TRUE, 8);
     ctk_widget_show_all (scroller);
 
@@ -628,7 +628,7 @@ create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
     /* we expand the window to hold up to about 4 emblems, but after that
      * let the scroller do its thing.  Is there a better way to do this?
      */
-    ctk_window_set_default_size (GTK_WINDOW (dialog), 400,
+    ctk_window_set_default_size (CTK_WINDOW (dialog), 400,
                                  MIN (120+(60*num_emblems), 350));
 
     g_object_set_data_full (G_OBJECT (dialog), "emblems-to-add",
@@ -648,7 +648,7 @@ baul_emblem_sidebar_refresh (BaulEmblemSidebar *emblem_sidebar)
 {
     baul_emblem_refresh_list ();
 
-    ctk_container_foreach (GTK_CONTAINER (emblem_sidebar->details->emblems_table),
+    ctk_container_foreach (CTK_CONTAINER (emblem_sidebar->details->emblems_table),
                            (CtkCallback)remove_widget,
                            emblem_sidebar->details->emblems_table);
 
@@ -665,15 +665,15 @@ add_emblems_dialog_response_cb (CtkWidget *dialog, int response,
 
     switch (response)
     {
-    case GTK_RESPONSE_CANCEL:
+    case CTK_RESPONSE_CANCEL:
         ctk_widget_destroy (dialog);
         break;
 
-    case GTK_RESPONSE_HELP:
+    case CTK_RESPONSE_HELP:
         g_message ("Implement me!");
         break;
 
-    case GTK_RESPONSE_OK:
+    case CTK_RESPONSE_OK:
         emblems = g_object_get_data (G_OBJECT (dialog),
                                      "emblems-to-add");
 
@@ -690,7 +690,7 @@ add_emblems_dialog_response_cb (CtkWidget *dialog, int response,
 
             keyword = baul_emblem_create_unique_keyword (emblem->name);
             if (!baul_emblem_verify_keyword
-                    (GTK_WINDOW (dialog), keyword, emblem->name))
+                    (CTK_WINDOW (dialog), keyword, emblem->name))
             {
                 g_free (keyword);
                 return;
@@ -709,7 +709,7 @@ add_emblems_dialog_response_cb (CtkWidget *dialog, int response,
             baul_emblem_install_custom_emblem (emblem->pixbuf,
                                                emblem->keyword,
                                                emblem->name,
-                                               GTK_WINDOW (dialog));
+                                               CTK_WINDOW (dialog));
         }
 
         ctk_widget_destroy (dialog);
@@ -738,7 +738,7 @@ show_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
                       G_CALLBACK (add_emblems_dialog_response_cb),
                       emblem_sidebar);
 
-    ctk_window_present (GTK_WINDOW (dialog));
+    ctk_window_present (CTK_WINDOW (dialog));
 }
 
 static void
@@ -943,13 +943,13 @@ baul_emblem_sidebar_create_container (BaulEmblemSidebar *emblem_sidebar)
     CtkWidget *emblems_table, *scroller;
 
     /* The emblems wrapped table */
-    scroller = eel_scrolled_wrap_table_new (TRUE, GTK_SHADOW_IN, &emblems_table);
+    scroller = eel_scrolled_wrap_table_new (TRUE, CTK_SHADOW_IN, &emblems_table);
 
-    ctk_container_set_border_width (GTK_CONTAINER (emblems_table), 8);
+    ctk_container_set_border_width (CTK_CONTAINER (emblems_table), 8);
 
     /* set up dnd for adding emblems */
     ctk_drag_dest_set (scroller,
-                       GTK_DEST_DEFAULT_ALL,
+                       CTK_DEST_DEFAULT_ALL,
                        dest_types, G_N_ELEMENTS (dest_types),
                        GDK_ACTION_COPY | GDK_ACTION_MOVE);
 
@@ -999,7 +999,7 @@ baul_emblem_sidebar_populate (BaulEmblemSidebar *emblem_sidebar)
                         ERASE_EMBLEM_KEYWORD,
                         _("Erase"),
                         erase_pixbuf);
-        ctk_container_add (GTK_CONTAINER
+        ctk_container_add (CTK_CONTAINER
                            (emblem_sidebar->details->emblems_table),
                            emblem_widget);
     }
@@ -1034,7 +1034,7 @@ baul_emblem_sidebar_populate (BaulEmblemSidebar *emblem_sidebar)
     while (l != NULL)
     {
         ctk_container_add
-        (GTK_CONTAINER (emblem_sidebar->details->emblems_table),
+        (CTK_CONTAINER (emblem_sidebar->details->emblems_table),
          l->data);
         l = l->next;
     }
@@ -1059,8 +1059,8 @@ baul_emblem_sidebar_init (BaulEmblemSidebar *emblem_sidebar)
                              "emblems_changed",
                              G_CALLBACK (emblems_changed_callback), emblem_sidebar, 0);
 
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (emblem_sidebar), GTK_ORIENTATION_VERTICAL);
-    ctk_box_pack_start (GTK_BOX (emblem_sidebar), widget,
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (emblem_sidebar), CTK_ORIENTATION_VERTICAL);
+    ctk_box_pack_start (CTK_BOX (emblem_sidebar), widget,
                         TRUE, TRUE, 0);
 }
 

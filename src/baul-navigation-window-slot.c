@@ -195,11 +195,11 @@ baul_navigation_window_slot_active (BaulWindowSlot *slot)
     pane = BAUL_NAVIGATION_WINDOW_PANE (slot->pane);
     window = BAUL_NAVIGATION_WINDOW (slot->pane->window);
 
-    page_num = ctk_notebook_page_num (GTK_NOTEBOOK (pane->notebook),
+    page_num = ctk_notebook_page_num (CTK_NOTEBOOK (pane->notebook),
                                       slot->content_box);
     g_assert (page_num >= 0);
 
-    ctk_notebook_set_current_page (GTK_NOTEBOOK (pane->notebook), page_num);
+    ctk_notebook_set_current_page (CTK_NOTEBOOK (pane->notebook), page_num);
 
     EEL_CALL_PARENT (BAUL_WINDOW_SLOT_CLASS, active, (slot));
 

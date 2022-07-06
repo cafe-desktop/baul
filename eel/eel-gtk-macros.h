@@ -1,6 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
 
-   eel-ctk-macros.h: Macros to reduce boilerplate when using GTK.
+   eel-ctk-macros.h: Macros to reduce boilerplate when using CTK.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
 
@@ -23,16 +23,16 @@
             Ramiro Estrugo <ramiro@eazel.com>
 */
 
-#ifndef EEL_GTK_MACROS_H
-#define EEL_GTK_MACROS_H
+#ifndef EEL_CTK_MACROS_H
+#define EEL_CTK_MACROS_H
 
 #ifndef EEL_DISABLE_DEPRECATED
 
-/* Define a parent_class global and a get_type function for a GTK class.
+/* Define a parent_class global and a get_type function for a CTK class.
    Since this is boilerplate, it's better not to repeat it over and over again.
    Called like this:
 
-       EEL_CLASS_BOILERPLATE (EelBookmark, eel_bookmark, GTK_TYPE_OBJECT)
+       EEL_CLASS_BOILERPLATE (EelBookmark, eel_bookmark, CTK_TYPE_OBJECT)
 
    The parent_class_type parameter is guaranteed to be evaluated only once
    so it can be an expression, even an expression that contains a function call.
@@ -175,4 +175,4 @@ g_assert (EEL_ACCESS_METHOD (class_cast_macro, object, method) != NULL)
 (EEL_ACCESS_METHOD (class_cast_macro, object, method) ? 0 :                   \
 	EEL_INVOKE_METHOD (class_cast_macro, object, method, parameters))
 
-#endif /* EEL_GTK_MACROS_H */
+#endif /* EEL_CTK_MACROS_H */

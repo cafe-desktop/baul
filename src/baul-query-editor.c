@@ -213,7 +213,7 @@ static BaulQueryEditorRowOps row_type[] =
 
 EEL_CLASS_BOILERPLATE (BaulQueryEditor,
                        baul_query_editor,
-                       GTK_TYPE_BOX)
+                       CTK_TYPE_BOX)
 
 static void
 baul_query_editor_finalize (GObject *object)
@@ -350,9 +350,9 @@ location_row_create_widgets (BaulQueryEditorRow *row)
     CtkWidget *chooser;
 
     chooser = ctk_file_chooser_button_new (_("Select folder to search in"),
-                                           GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
-    ctk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
-    ctk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
+                                           CTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+    ctk_file_chooser_set_local_only (CTK_FILE_CHOOSER (chooser), TRUE);
+    ctk_file_chooser_set_current_folder (CTK_FILE_CHOOSER (chooser),
                                          g_get_home_dir ());
     ctk_widget_show (chooser);
 
@@ -360,7 +360,7 @@ location_row_create_widgets (BaulQueryEditorRow *row)
                               G_CALLBACK (baul_query_editor_changed),
                               row->editor);
 
-    ctk_box_pack_start (GTK_BOX (row->hbox), chooser, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (row->hbox), chooser, FALSE, FALSE, 0);
 
     return chooser;
 }
@@ -371,7 +371,7 @@ location_row_add_to_query (BaulQueryEditorRow *row,
 {
     char *folder, *uri;
 
-    folder = ctk_file_chooser_get_filename (GTK_FILE_CHOOSER (row->type_widget));
+    folder = ctk_file_chooser_get_filename (CTK_FILE_CHOOSER (row->type_widget));
     if (folder == NULL)
     {
         /* I don't know why, but i got NULL here on initial search in browser mode
@@ -413,7 +413,7 @@ location_add_rows_from_query (BaulQueryEditor    *editor,
 
     row = baul_query_editor_add_row (editor,
                                      BAUL_QUERY_EDITOR_ROW_LOCATION);
-    ctk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (row->type_widget),
+    ctk_file_chooser_set_current_folder (CTK_FILE_CHOOSER (row->type_widget),
                                          folder);
 
     g_free (folder);
@@ -424,7 +424,7 @@ static void
 tags_entry_changed_cb (CtkWidget *entry, gpointer *data)
 {
   /* remove commas from string */
-  const gchar *text = ctk_entry_get_text ( GTK_ENTRY (entry));
+  const gchar *text = ctk_entry_get_text ( CTK_ENTRY (entry));
   if (g_strrstr (text, ",") == NULL) {
     return;
   }
@@ -433,7 +433,7 @@ tags_entry_changed_cb (CtkWidget *entry, gpointer *data)
   gchar *sanitized = g_strjoinv ("", words);
   g_strfreev (words);
 
-  ctk_entry_set_text (GTK_ENTRY (entry), sanitized);
+  ctk_entry_set_text (CTK_ENTRY (entry), sanitized);
   g_free(sanitized);
 }
 
@@ -443,17 +443,17 @@ static CtkWidget *
 tags_row_create_widgets (BaulQueryEditorRow *row)
 {
     CtkWidget *entry = ctk_entry_new();
-    ctk_entry_set_max_length (GTK_ENTRY (entry), MAX_TAGS_ENTRY_LEN);
+    ctk_entry_set_max_length (CTK_ENTRY (entry), MAX_TAGS_ENTRY_LEN);
     ctk_widget_set_tooltip_text (entry,
         _("Tags separated by spaces. "
           "Matches files that contains ALL specified tags."));
 
-    ctk_entry_set_placeholder_text (GTK_ENTRY (entry),
+    ctk_entry_set_placeholder_text (CTK_ENTRY (entry),
         _("Tags separated by spaces. "
           "Matches files that contains ALL specified tags."));
 
     ctk_widget_show (entry);
-    ctk_box_pack_start (GTK_BOX (row->hbox), entry, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (row->hbox), entry, TRUE, TRUE, 0);
     g_signal_connect (entry, "changed", G_CALLBACK (tags_entry_changed_cb), entry);
     g_signal_connect (entry, "activate", G_CALLBACK (go_search_cb), row->editor);
 
@@ -464,7 +464,7 @@ static void
 tags_row_add_to_query (BaulQueryEditorRow *row,
                            BaulQuery      *query)
 {
-    CtkEntry *entry = GTK_ENTRY (row->type_widget);
+    CtkEntry *entry = CTK_ENTRY (row->type_widget);
     const gchar *tags = ctk_entry_get_text (entry);
 
     char **strv = g_strsplit (tags, " ", -1);
@@ -522,7 +522,7 @@ tags_add_rows_from_query (BaulQueryEditor *editor,
     gchar *tags_str = xattr_tags_list_to_str (tags);
     g_list_free_full (tags, g_free);
 
-    ctk_entry_set_text (GTK_ENTRY (row->type_widget), tags_str);
+    ctk_entry_set_text (CTK_ENTRY (row->type_widget), tags_str);
     g_free (tags_str);
 }
 
@@ -700,8 +700,8 @@ type_add_custom_type (BaulQueryEditorRow *row,
     CtkTreeModel *model;
     CtkListStore *store;
 
-    model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
-    store = GTK_LIST_STORE (model);
+    model = ctk_combo_box_get_model (CTK_COMBO_BOX (row->type_widget));
+    store = CTK_LIST_STORE (model);
 
     ctk_list_store_append (store, iter);
     ctk_list_store_set (store, iter,
@@ -718,13 +718,13 @@ type_combo_changed (CtkComboBox *combo_box, BaulQueryEditorRow *row)
     gboolean other;
     CtkTreeModel *model;
 
-    if (!ctk_combo_box_get_active_iter  (GTK_COMBO_BOX (row->type_widget),
+    if (!ctk_combo_box_get_active_iter  (CTK_COMBO_BOX (row->type_widget),
                                          &iter))
     {
         return;
     }
 
-    model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+    model = ctk_combo_box_get_model (CTK_COMBO_BOX (row->type_widget));
     ctk_tree_model_get (model, &iter, 3, &other, -1);
 
     if (other)
@@ -766,39 +766,39 @@ type_combo_changed (CtkComboBox *combo_box, BaulQueryEditorRow *row)
 
 
 
-        toplevel = ctk_widget_get_toplevel (GTK_WIDGET (combo_box));
+        toplevel = ctk_widget_get_toplevel (CTK_WIDGET (combo_box));
 
         dialog = ctk_dialog_new ();
-        ctk_window_set_title (GTK_WINDOW (dialog), _("Select type"));
-        ctk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+        ctk_window_set_title (CTK_WINDOW (dialog), _("Select type"));
+        ctk_window_set_transient_for (CTK_WINDOW (dialog), CTK_WINDOW (toplevel));
 
-        eel_dialog_add_button (GTK_DIALOG (dialog),
+        eel_dialog_add_button (CTK_DIALOG (dialog),
                                _("_OK"),
                                "ctk-ok",
-                               GTK_RESPONSE_OK);
+                               CTK_RESPONSE_OK);
 
-        ctk_window_set_default_size (GTK_WINDOW (dialog), 400, 600);
+        ctk_window_set_default_size (CTK_WINDOW (dialog), 400, 600);
 
         scrolled = ctk_scrolled_window_new (NULL, NULL);
-        ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
-                                        GTK_POLICY_AUTOMATIC,
-                                        GTK_POLICY_AUTOMATIC);
-        ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
-                                             GTK_SHADOW_IN);
-        ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (scrolled),
+        ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (scrolled),
+                                        CTK_POLICY_AUTOMATIC,
+                                        CTK_POLICY_AUTOMATIC);
+        ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (scrolled),
+                                             CTK_SHADOW_IN);
+        ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (scrolled),
                                                    FALSE);
 
         ctk_widget_show (scrolled);
-        ctk_box_pack_start (GTK_BOX (ctk_dialog_get_content_area (GTK_DIALOG (dialog))), scrolled, TRUE, TRUE, 6);
+        ctk_box_pack_start (CTK_BOX (ctk_dialog_get_content_area (CTK_DIALOG (dialog))), scrolled, TRUE, TRUE, 6);
 
         treeview = ctk_tree_view_new ();
-        ctk_tree_view_set_model (GTK_TREE_VIEW (treeview),
-                                 GTK_TREE_MODEL (store));
-        ctk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store), 0,
-                                              GTK_SORT_ASCENDING);
+        ctk_tree_view_set_model (CTK_TREE_VIEW (treeview),
+                                 CTK_TREE_MODEL (store));
+        ctk_tree_sortable_set_sort_column_id (CTK_TREE_SORTABLE (store), 0,
+                                              CTK_SORT_ASCENDING);
 
-        selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-        ctk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+        selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (treeview));
+        ctk_tree_selection_set_mode (selection, CTK_SELECTION_BROWSE);
 
 
         renderer = ctk_cell_renderer_text_new ();
@@ -807,29 +807,29 @@ type_combo_changed (CtkComboBox *combo_box, BaulQueryEditorRow *row)
                  "text",
                  0,
                  NULL);
-        ctk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-        ctk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
+        ctk_tree_view_append_column (CTK_TREE_VIEW (treeview), column);
+        ctk_tree_view_set_headers_visible (CTK_TREE_VIEW (treeview), FALSE);
 
         ctk_widget_show (treeview);
-        ctk_container_add (GTK_CONTAINER (scrolled), treeview);
+        ctk_container_add (CTK_CONTAINER (scrolled), treeview);
 
-        if (ctk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
+        if (ctk_dialog_run (CTK_DIALOG (dialog)) == CTK_RESPONSE_OK)
         {
             char *mimetype, *description;
 
             ctk_tree_selection_get_selected (selection, NULL, &iter);
-            ctk_tree_model_get (GTK_TREE_MODEL (store), &iter,
+            ctk_tree_model_get (CTK_TREE_MODEL (store), &iter,
                                 0, &description,
                                 1, &mimetype,
                                 -1);
 
             type_add_custom_type (row, mimetype, description, &iter);
-            ctk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
+            ctk_combo_box_set_active_iter  (CTK_COMBO_BOX (row->type_widget),
                                             &iter);
         }
         else
         {
-            ctk_combo_box_set_active (GTK_COMBO_BOX (row->type_widget), 0);
+            ctk_combo_box_set_active (CTK_COMBO_BOX (row->type_widget), 0);
         }
 
         ctk_widget_destroy (dialog);
@@ -848,15 +848,15 @@ type_row_create_widgets (BaulQueryEditorRow *row)
     int i;
 
     store = ctk_list_store_new (4, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_BOOLEAN);
-    combo = ctk_combo_box_new_with_model (GTK_TREE_MODEL (store));
+    combo = ctk_combo_box_new_with_model (CTK_TREE_MODEL (store));
     g_object_unref (store);
 
     cell = ctk_cell_renderer_text_new ();
-    ctk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), cell, TRUE);
-    ctk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), cell,
+    ctk_cell_layout_pack_start (CTK_CELL_LAYOUT (combo), cell, TRUE);
+    ctk_cell_layout_set_attributes (CTK_CELL_LAYOUT (combo), cell,
                                     "text", 0,
                                     NULL);
-    ctk_combo_box_set_row_separator_func (GTK_COMBO_BOX (combo),
+    ctk_combo_box_set_row_separator_func (CTK_COMBO_BOX (combo),
                                           type_separator_func,
                                           NULL, NULL);
 
@@ -879,7 +879,7 @@ type_row_create_widgets (BaulQueryEditorRow *row)
     ctk_list_store_append (store, &iter);
     ctk_list_store_set (store, &iter, 0, _("Other Type..."), 3, TRUE, -1);
 
-    ctk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
+    ctk_combo_box_set_active (CTK_COMBO_BOX (combo), 0);
 
     g_signal_connect (combo, "changed",
                       G_CALLBACK (type_combo_changed),
@@ -887,7 +887,7 @@ type_row_create_widgets (BaulQueryEditorRow *row)
 
     ctk_widget_show (combo);
 
-    ctk_box_pack_start (GTK_BOX (row->hbox), combo, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (row->hbox), combo, FALSE, FALSE, 0);
 
     return combo;
 }
@@ -901,13 +901,13 @@ type_row_add_to_query (BaulQueryEditorRow *row,
     char *mimetype;
     CtkTreeModel *model;
 
-    if (!ctk_combo_box_get_active_iter  (GTK_COMBO_BOX (row->type_widget),
+    if (!ctk_combo_box_get_active_iter  (CTK_COMBO_BOX (row->type_widget),
                                          &iter))
     {
         return;
     }
 
-    model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+    model = ctk_combo_box_get_model (CTK_COMBO_BOX (row->type_widget));
     ctk_tree_model_get (model, &iter, 1, &mimetypes, 2, &mimetype, -1);
 
     if (mimetypes != NULL)
@@ -1022,10 +1022,10 @@ type_add_rows_from_query (BaulQueryEditor    *editor,
             row = baul_query_editor_add_row (editor,
                                              BAUL_QUERY_EDITOR_ROW_TYPE);
 
-            model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+            model = ctk_combo_box_get_model (CTK_COMBO_BOX (row->type_widget));
 
             ctk_tree_model_iter_nth_child (model, &iter, NULL, i + 2);
-            ctk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
+            ctk_combo_box_set_active_iter  (CTK_COMBO_BOX (row->type_widget),
                                             &iter);
         }
     }
@@ -1044,10 +1044,10 @@ type_add_rows_from_query (BaulQueryEditor    *editor,
 
         row = baul_query_editor_add_row (editor,
                                          BAUL_QUERY_EDITOR_ROW_TYPE);
-        model = ctk_combo_box_get_model (GTK_COMBO_BOX (row->type_widget));
+        model = ctk_combo_box_get_model (CTK_COMBO_BOX (row->type_widget));
 
         type_add_custom_type (row, mime_type, desc, &iter);
-        ctk_combo_box_set_active_iter  (GTK_COMBO_BOX (row->type_widget),
+        ctk_combo_box_set_active_iter  (CTK_COMBO_BOX (row->type_widget),
                                         &iter);
     }
 
@@ -1067,15 +1067,15 @@ static CtkWidget *modtime_row_create_widgets(BaulQueryEditorRow *row)
     CtkListStore *duration_store = NULL;
     CtkTreeIter iter;
 
-    hbox = ctk_box_new(GTK_ORIENTATION_HORIZONTAL, 7);
+    hbox = ctk_box_new(CTK_ORIENTATION_HORIZONTAL, 7);
 
     store = ctk_list_store_new(2, G_TYPE_BOOLEAN, G_TYPE_STRING);
-    combo = ctk_combo_box_new_with_model(GTK_TREE_MODEL(store));
+    combo = ctk_combo_box_new_with_model(CTK_TREE_MODEL(store));
     g_object_unref(store);
 
     cell = ctk_cell_renderer_text_new();
-    ctk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), cell, TRUE);
-    ctk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), cell, "text", 1,
+    ctk_cell_layout_pack_start(CTK_CELL_LAYOUT(combo), cell, TRUE);
+    ctk_cell_layout_set_attributes(CTK_CELL_LAYOUT(combo), cell, "text", 1,
                                    NULL);
 
     ctk_list_store_append(store, &iter);
@@ -1083,14 +1083,14 @@ static CtkWidget *modtime_row_create_widgets(BaulQueryEditorRow *row)
     ctk_list_store_append(store, &iter);
     ctk_list_store_set(store, &iter, 0, TRUE, 1, _("Greater than or equal to"), -1);
 
-    ctk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
+    ctk_combo_box_set_active(CTK_COMBO_BOX(combo), 0);
 
     duration_store = ctk_list_store_new(2, G_TYPE_INT, G_TYPE_STRING);
-    duration_combo = ctk_combo_box_new_with_model(GTK_TREE_MODEL(duration_store));
+    duration_combo = ctk_combo_box_new_with_model(CTK_TREE_MODEL(duration_store));
     g_object_unref(duration_store);
 
-    ctk_cell_layout_pack_start(GTK_CELL_LAYOUT(duration_combo), cell, TRUE);
-    ctk_cell_layout_set_attributes(GTK_CELL_LAYOUT(duration_combo), cell,
+    ctk_cell_layout_pack_start(CTK_CELL_LAYOUT(duration_combo), cell, TRUE);
+    ctk_cell_layout_set_attributes(CTK_CELL_LAYOUT(duration_combo), cell,
                                    "text", 1, NULL);
 
     ctk_list_store_append(duration_store, &iter);
@@ -1106,13 +1106,13 @@ static CtkWidget *modtime_row_create_widgets(BaulQueryEditorRow *row)
     ctk_list_store_append(duration_store, &iter);
     ctk_list_store_set(duration_store, &iter, 0, DURATION_ONE_YEAR, 1, _("1 Year"), -1);
 
-    ctk_combo_box_set_active(GTK_COMBO_BOX(duration_combo), 0);
+    ctk_combo_box_set_active(CTK_COMBO_BOX(duration_combo), 0);
 
-    ctk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
-    ctk_box_pack_start(GTK_BOX(hbox), duration_combo, FALSE, FALSE, 0);
+    ctk_box_pack_start(CTK_BOX(hbox), combo, FALSE, FALSE, 0);
+    ctk_box_pack_start(CTK_BOX(hbox), duration_combo, FALSE, FALSE, 0);
     ctk_widget_show_all(hbox);
 
-    ctk_box_pack_start(GTK_BOX(row->hbox), hbox, FALSE, FALSE, 0);
+    ctk_box_pack_start(CTK_BOX(row->hbox), hbox, FALSE, FALSE, 0);
 
     return hbox;
 }
@@ -1131,27 +1131,27 @@ static void modtime_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
     gint duration;
     gint64 timestamp;
 
-    if (!GTK_IS_CONTAINER(row->type_widget))
+    if (!CTK_IS_CONTAINER(row->type_widget))
         return;
 
-    children = ctk_container_get_children(GTK_CONTAINER(row->type_widget));
+    children = ctk_container_get_children(CTK_CONTAINER(row->type_widget));
     if (g_list_length(children) != 2)
         return;
 
-    combo = GTK_WIDGET(g_list_nth(children, 0)->data);
-    duration_combo = GTK_WIDGET(g_list_nth(children, 1)->data);
+    combo = CTK_WIDGET(g_list_nth(children, 0)->data);
+    duration_combo = CTK_WIDGET(g_list_nth(children, 1)->data);
     if (!combo || !duration_combo)
         return;
 
-    if (!ctk_combo_box_get_active_iter(GTK_COMBO_BOX(combo), &iter) ||
-        !ctk_combo_box_get_active_iter(GTK_COMBO_BOX(duration_combo), &duration_iter)) {
+    if (!ctk_combo_box_get_active_iter(CTK_COMBO_BOX(combo), &iter) ||
+        !ctk_combo_box_get_active_iter(CTK_COMBO_BOX(duration_combo), &duration_iter)) {
         return;
     }
 
-    model = ctk_combo_box_get_model(GTK_COMBO_BOX(combo));
+    model = ctk_combo_box_get_model(CTK_COMBO_BOX(combo));
     ctk_tree_model_get(model, &iter, 0, &is_greater, -1);
 
-    duration_model = ctk_combo_box_get_model(GTK_COMBO_BOX(duration_combo));
+    duration_model = ctk_combo_box_get_model(CTK_COMBO_BOX(duration_combo));
     ctk_tree_model_get(duration_model, &duration_iter, 0, &duration, -1);
 
     now = g_date_time_new_now_local ();
@@ -1206,15 +1206,15 @@ static CtkWidget *size_row_create_widgets(BaulQueryEditorRow *row)
     CtkListStore *size_store = NULL;
     CtkTreeIter iter;
 
-    hbox = ctk_box_new(GTK_ORIENTATION_HORIZONTAL, 7);
+    hbox = ctk_box_new(CTK_ORIENTATION_HORIZONTAL, 7);
 
     store = ctk_list_store_new(2, G_TYPE_BOOLEAN, G_TYPE_STRING);
-    combo = ctk_combo_box_new_with_model(GTK_TREE_MODEL(store));
+    combo = ctk_combo_box_new_with_model(CTK_TREE_MODEL(store));
     g_object_unref(store);
 
     cell = ctk_cell_renderer_text_new();
-    ctk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), cell, TRUE);
-    ctk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), cell, "text", 1,
+    ctk_cell_layout_pack_start(CTK_CELL_LAYOUT(combo), cell, TRUE);
+    ctk_cell_layout_set_attributes(CTK_CELL_LAYOUT(combo), cell, "text", 1,
                                    NULL);
 
     ctk_list_store_append(store, &iter);
@@ -1222,14 +1222,14 @@ static CtkWidget *size_row_create_widgets(BaulQueryEditorRow *row)
     ctk_list_store_append(store, &iter);
     ctk_list_store_set(store, &iter, 0, TRUE, 1, _("Greater than or equal to"), -1);
 
-    ctk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
+    ctk_combo_box_set_active(CTK_COMBO_BOX(combo), 0);
 
     size_store = ctk_list_store_new(2, G_TYPE_INT64, G_TYPE_STRING);
-    size_combo = ctk_combo_box_new_with_model(GTK_TREE_MODEL(size_store));
+    size_combo = ctk_combo_box_new_with_model(CTK_TREE_MODEL(size_store));
     g_object_unref(size_store);
 
-    ctk_cell_layout_pack_start(GTK_CELL_LAYOUT(size_combo), cell, TRUE);
-    ctk_cell_layout_set_attributes(GTK_CELL_LAYOUT(size_combo), cell, "text",
+    ctk_cell_layout_pack_start(CTK_CELL_LAYOUT(size_combo), cell, TRUE);
+    ctk_cell_layout_set_attributes(CTK_CELL_LAYOUT(size_combo), cell, "text",
                                    1, NULL);
 
     if (g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_USE_IEC_UNITS))
@@ -1281,13 +1281,13 @@ static CtkWidget *size_row_create_widgets(BaulQueryEditorRow *row)
         ctk_list_store_set(size_store, &iter, 0, 4000000000, 1, _("4 GB"), -1);
     }
 
-    ctk_combo_box_set_active(GTK_COMBO_BOX(size_combo), 0);
+    ctk_combo_box_set_active(CTK_COMBO_BOX(size_combo), 0);
 
-    ctk_box_pack_start(GTK_BOX(hbox), combo, FALSE, FALSE, 0);
-    ctk_box_pack_start(GTK_BOX(hbox), size_combo, FALSE, FALSE, 0);
+    ctk_box_pack_start(CTK_BOX(hbox), combo, FALSE, FALSE, 0);
+    ctk_box_pack_start(CTK_BOX(hbox), size_combo, FALSE, FALSE, 0);
     ctk_widget_show_all(hbox);
 
-    ctk_box_pack_start(GTK_BOX(row->hbox), hbox, FALSE, FALSE, 0);
+    ctk_box_pack_start(CTK_BOX(row->hbox), hbox, FALSE, FALSE, 0);
 
     return hbox;
 }
@@ -1304,27 +1304,27 @@ static void size_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
     gboolean is_greater = FALSE;
     gint64 size;
 
-    if (!GTK_IS_CONTAINER(row->type_widget))
+    if (!CTK_IS_CONTAINER(row->type_widget))
         return;
 
-    children = ctk_container_get_children(GTK_CONTAINER(row->type_widget));
+    children = ctk_container_get_children(CTK_CONTAINER(row->type_widget));
     if (g_list_length(children) != 2)
         return;
 
-    combo = GTK_WIDGET(g_list_nth(children, 0)->data);
-    size_combo = GTK_WIDGET(g_list_nth(children, 1)->data);
+    combo = CTK_WIDGET(g_list_nth(children, 0)->data);
+    size_combo = CTK_WIDGET(g_list_nth(children, 1)->data);
     if (!combo || !size_combo)
         return;
 
-    if (!ctk_combo_box_get_active_iter(GTK_COMBO_BOX(combo), &iter) ||
-        !ctk_combo_box_get_active_iter(GTK_COMBO_BOX(size_combo), &size_iter)) {
+    if (!ctk_combo_box_get_active_iter(CTK_COMBO_BOX(combo), &iter) ||
+        !ctk_combo_box_get_active_iter(CTK_COMBO_BOX(size_combo), &size_iter)) {
         return;
     }
 
-    model = ctk_combo_box_get_model(GTK_COMBO_BOX(combo));
+    model = ctk_combo_box_get_model(CTK_COMBO_BOX(combo));
     ctk_tree_model_get(model, &iter, 0, &is_greater, -1);
 
-    size_model = ctk_combo_box_get_model(GTK_COMBO_BOX(size_combo));
+    size_model = ctk_combo_box_get_model(CTK_COMBO_BOX(size_combo));
     ctk_tree_model_get(size_model, &size_iter, 0, &size, -1);
 
     baul_query_set_size(query, is_greater ? size : -size);
@@ -1345,11 +1345,11 @@ contained_text_row_create_widgets (BaulQueryEditorRow *row)
     ctk_widget_set_tooltip_text (entry,
         _("Matches files that contains specified text."));
 
-    ctk_entry_set_placeholder_text (GTK_ENTRY (entry),
+    ctk_entry_set_placeholder_text (CTK_ENTRY (entry),
         _("Matches files that contains specified text."));
 
     ctk_widget_show (entry);
-    ctk_box_pack_start (GTK_BOX (row->hbox), entry, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (row->hbox), entry, TRUE, TRUE, 0);
     g_signal_connect (entry, "activate", G_CALLBACK (go_search_cb), row->editor);
 
     return entry;
@@ -1358,7 +1358,7 @@ contained_text_row_create_widgets (BaulQueryEditorRow *row)
 static void
 contained_text_row_add_to_query (BaulQueryEditorRow *row, BaulQuery *query)
 {
-    CtkEntry *entry = GTK_ENTRY (row->type_widget);
+    CtkEntry *entry = CTK_ENTRY (row->type_widget);
     const gchar *text = ctk_entry_get_text (entry);
 
     baul_query_set_contained_text (query, text);
@@ -1409,7 +1409,7 @@ remove_row_cb (CtkButton *clicked_button, BaulQueryEditorRow *row)
     BaulQueryEditor *editor;
 
     editor = row->editor;
-    ctk_container_remove (GTK_CONTAINER (editor->details->visible_vbox),
+    ctk_container_remove (CTK_CONTAINER (editor->details->visible_vbox),
                           row->hbox);
 
     editor->details->rows = g_list_remove (editor->details->rows, row);
@@ -1466,21 +1466,21 @@ baul_query_editor_add_row (BaulQueryEditor *editor,
     row->editor = editor;
     row->type = type;
 
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
     row->hbox = hbox;
     ctk_widget_show (hbox);
-    ctk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
 
     combo = ctk_combo_box_text_new ();
     row->combo = combo;
     for (i = 0; i < BAUL_QUERY_EDITOR_ROW_LAST; i++)
     {
-        ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), gettext (row_type[i].name));
+        ctk_combo_box_text_append_text (CTK_COMBO_BOX_TEXT (combo), gettext (row_type[i].name));
     }
     ctk_widget_show (combo);
-    ctk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), combo, FALSE, FALSE, 0);
 
-    ctk_combo_box_set_active (GTK_COMBO_BOX (combo), row->type);
+    ctk_combo_box_set_active (CTK_COMBO_BOX (combo), row->type);
 
     editor->details->rows = g_list_append (editor->details->rows, row);
 
@@ -1491,10 +1491,10 @@ baul_query_editor_add_row (BaulQueryEditor *editor,
 
     button = ctk_button_new ();
     image = ctk_image_new_from_icon_name ("remove",
-                                      GTK_ICON_SIZE_SMALL_TOOLBAR);
-    ctk_container_add (GTK_CONTAINER (button), image);
+                                      CTK_ICON_SIZE_SMALL_TOOLBAR);
+    ctk_container_add (CTK_CONTAINER (button), image);
     ctk_widget_show (image);
-    ctk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+    ctk_button_set_relief (CTK_BUTTON (button), CTK_RELIEF_NONE);
     ctk_widget_show (button);
 
     g_signal_connect (button, "clicked",
@@ -1502,7 +1502,7 @@ baul_query_editor_add_row (BaulQueryEditor *editor,
     ctk_widget_set_tooltip_text (button,
                                  _("Remove this criterion from the search"));
 
-    ctk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+    ctk_box_pack_end (CTK_BOX (hbox), button, FALSE, FALSE, 0);
 
     return row;
 }
@@ -1529,32 +1529,32 @@ baul_query_editor_init (BaulQueryEditor *editor)
     editor->details = g_new0 (BaulQueryEditorDetails, 1);
     editor->details->is_visible = TRUE;
 
-    editor->details->invisible_vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (editor), GTK_ORIENTATION_VERTICAL);
-    ctk_box_pack_start (GTK_BOX (editor), editor->details->invisible_vbox,
+    editor->details->invisible_vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 6);
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (editor), CTK_ORIENTATION_VERTICAL);
+    ctk_box_pack_start (CTK_BOX (editor), editor->details->invisible_vbox,
                         FALSE, FALSE, 0);
-    editor->details->visible_vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (editor), GTK_ORIENTATION_VERTICAL);
-    ctk_box_pack_start (GTK_BOX (editor), editor->details->visible_vbox,
+    editor->details->visible_vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 6);
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (editor), CTK_ORIENTATION_VERTICAL);
+    ctk_box_pack_start (CTK_BOX (editor), editor->details->visible_vbox,
                         FALSE, FALSE, 0);
     /* Only show visible vbox */
     ctk_widget_show (editor->details->visible_vbox);
 
     /* Create invisible part: */
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    ctk_box_pack_start (GTK_BOX (editor->details->invisible_vbox),
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
+    ctk_box_pack_start (CTK_BOX (editor->details->invisible_vbox),
                         hbox, FALSE, FALSE, 0);
     ctk_widget_show (hbox);
 
     label = ctk_label_new ("");
     label_markup = g_strconcat ("<b>", _("Search Folder"), "</b>", NULL);
-    ctk_label_set_markup (GTK_LABEL (label), label_markup);
+    ctk_label_set_markup (CTK_LABEL (label), label_markup);
     g_free (label_markup);
-    ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), label, FALSE, FALSE, 0);
     ctk_widget_show (label);
 
     button = ctk_button_new_with_label (_("Edit"));
-    ctk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+    ctk_box_pack_end (CTK_BOX (hbox), button, FALSE, FALSE, 0);
     ctk_widget_show (button);
 
     g_signal_connect (button, "clicked",
@@ -1581,16 +1581,16 @@ finish_first_line (BaulQueryEditor *editor, CtkWidget *hbox, gboolean use_go)
 
     button = ctk_button_new ();
     image = ctk_image_new_from_icon_name ("add",
-                                      GTK_ICON_SIZE_SMALL_TOOLBAR);
-    ctk_container_add (GTK_CONTAINER (button), image);
+                                      CTK_ICON_SIZE_SMALL_TOOLBAR);
+    ctk_container_add (CTK_CONTAINER (button), image);
     ctk_widget_show (image);
-    ctk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+    ctk_button_set_relief (CTK_BUTTON (button), CTK_RELIEF_NONE);
     ctk_widget_show (button);
 
     g_signal_connect (button, "clicked",
                       G_CALLBACK (add_new_row_cb), editor);
 
-    ctk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+    ctk_box_pack_end (CTK_BOX (hbox), button, FALSE, FALSE, 0);
 
     ctk_widget_set_tooltip_text (button,
                                  _("Add a new criterion to this search"));
@@ -1613,7 +1613,7 @@ finish_first_line (BaulQueryEditor *editor, CtkWidget *hbox, gboolean use_go)
         g_signal_connect (button, "clicked",
                           G_CALLBACK (go_search_cb), editor);
 
-        ctk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+        ctk_box_pack_end (CTK_BOX (hbox), button, FALSE, FALSE, 0);
     }
 }
 
@@ -1624,20 +1624,20 @@ setup_internal_entry (BaulQueryEditor *editor)
     char *label_markup;
 
     /* Create visible part: */
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
     ctk_widget_show (hbox);
-    ctk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
 
     label = ctk_label_new ("");
     label_markup = g_strconcat ("<b>", _("_Search for:"), "</b>", NULL);
-    ctk_label_set_markup_with_mnemonic (GTK_LABEL (label), label_markup);
+    ctk_label_set_markup_with_mnemonic (CTK_LABEL (label), label_markup);
     g_free (label_markup);
     ctk_widget_show (label);
-    ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     editor->details->entry = ctk_entry_new ();
-    ctk_label_set_mnemonic_widget (GTK_LABEL (label), editor->details->entry);
-    ctk_box_pack_start (GTK_BOX (hbox), editor->details->entry, TRUE, TRUE, 0);
+    ctk_label_set_mnemonic_widget (CTK_LABEL (label), editor->details->entry);
+    ctk_box_pack_start (CTK_BOX (hbox), editor->details->entry, TRUE, TRUE, 0);
 
     g_signal_connect (editor->details->entry, "activate",
                       G_CALLBACK (entry_activate_cb), editor);
@@ -1654,13 +1654,13 @@ setup_external_entry (BaulQueryEditor *editor, CtkWidget *entry)
     CtkWidget *hbox, *label;
 
     /* Create visible part: */
-    hbox = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    hbox = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
     ctk_widget_show (hbox);
-    ctk_box_pack_start (GTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (editor->details->visible_vbox), hbox, FALSE, FALSE, 0);
 
     label = ctk_label_new (_("Search results"));
     ctk_widget_show (label);
-    ctk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     editor->details->entry = entry;
     g_signal_connect (editor->details->entry, "activate",
@@ -1694,7 +1694,7 @@ query_is_valid (BaulQueryEditor *editor)
 {
     const char *text;
 
-    text = ctk_entry_get_text (GTK_ENTRY (editor->details->entry));
+    text = ctk_entry_get_text (CTK_ENTRY (editor->details->entry));
 
     return text != NULL && text[0] != '\0';
 }
@@ -1746,7 +1746,7 @@ baul_query_editor_get_query (BaulQueryEditor *editor)
         return NULL;
     }
 
-    query_text = ctk_entry_get_text (GTK_ENTRY (editor->details->entry));
+    query_text = ctk_entry_get_text (CTK_ENTRY (editor->details->entry));
 
     /* Empty string is a NULL query */
     if (query_text && query_text[0] == '\0')
@@ -1771,7 +1771,7 @@ void
 baul_query_editor_clear_query (BaulQueryEditor *editor)
 {
     editor->details->change_frozen = TRUE;
-    ctk_entry_set_text (GTK_ENTRY (editor->details->entry), "");
+    ctk_entry_set_text (CTK_ENTRY (editor->details->entry), "");
 
     g_free (editor->details->last_set_query_text);
     editor->details->last_set_query_text = g_strdup ("");
@@ -1826,7 +1826,7 @@ attach_to_external_entry (BaulQueryEditor *editor)
                                            editor);
 
         editor->details->change_frozen = TRUE;
-        ctk_entry_set_text (GTK_ENTRY (editor->details->entry),
+        ctk_entry_set_text (CTK_ENTRY (editor->details->entry),
                             editor->details->last_set_query_text);
         editor->details->change_frozen = FALSE;
     }
@@ -1866,7 +1866,7 @@ baul_query_editor_new_with_bar (gboolean start_hidden,
                              G_CALLBACK (detach_from_external_entry),
                              editor, G_CONNECT_SWAPPED);
 
-    return GTK_WIDGET (editor);
+    return CTK_WIDGET (editor);
 }
 
 void
@@ -1889,7 +1889,7 @@ baul_query_editor_set_query (BaulQueryEditor *editor, BaulQuery *query)
     }
 
     editor->details->change_frozen = TRUE;
-    ctk_entry_set_text (GTK_ENTRY (editor->details->entry), text);
+    ctk_entry_set_text (CTK_ENTRY (editor->details->entry), text);
 
     for (type = 0; type < BAUL_QUERY_EDITOR_ROW_LAST; type++)
     {

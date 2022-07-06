@@ -74,7 +74,7 @@ typedef struct
 } BaulNotesViewerProviderClass;
 
 
-G_DEFINE_TYPE_WITH_CODE (BaulNotesViewer, baul_notes_viewer, GTK_TYPE_SCROLLED_WINDOW,
+G_DEFINE_TYPE_WITH_CODE (BaulNotesViewer, baul_notes_viewer, CTK_TYPE_SCROLLED_WINDOW,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  baul_notes_viewer_sidebar_iface_init));
 
@@ -341,26 +341,26 @@ baul_notes_viewer_init (BaulNotesViewer *sidebar)
     details->text_buffer = ctk_text_buffer_new (NULL);
     details->note_text_field = ctk_text_view_new_with_buffer (details->text_buffer);
 
-    ctk_text_view_set_editable (GTK_TEXT_VIEW (details->note_text_field), TRUE);
-    ctk_text_view_set_wrap_mode (GTK_TEXT_VIEW (details->note_text_field),
-                                 GTK_WRAP_WORD);
-    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sidebar),
-                                    GTK_POLICY_AUTOMATIC,
-                                    GTK_POLICY_AUTOMATIC);
-    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sidebar),
-                                         GTK_SHADOW_IN);
-    ctk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
-    ctk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (sidebar), NULL);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (sidebar), FALSE);
+    ctk_text_view_set_editable (CTK_TEXT_VIEW (details->note_text_field), TRUE);
+    ctk_text_view_set_wrap_mode (CTK_TEXT_VIEW (details->note_text_field),
+                                 CTK_WRAP_WORD);
+    ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (sidebar),
+                                    CTK_POLICY_AUTOMATIC,
+                                    CTK_POLICY_AUTOMATIC);
+    ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (sidebar),
+                                         CTK_SHADOW_IN);
+    ctk_scrolled_window_set_hadjustment (CTK_SCROLLED_WINDOW (sidebar), NULL);
+    ctk_scrolled_window_set_vadjustment (CTK_SCROLLED_WINDOW (sidebar), NULL);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (sidebar), FALSE);
 
-    ctk_container_add (GTK_CONTAINER (sidebar), details->note_text_field);
+    ctk_container_add (CTK_CONTAINER (sidebar), details->note_text_field);
 
     g_signal_connect (details->note_text_field, "focus_out_event",
                       G_CALLBACK (on_text_field_focus_out_event), sidebar);
     g_signal_connect (details->text_buffer, "changed",
                       G_CALLBACK (on_changed), sidebar);
 
-    ctk_widget_show_all (GTK_WIDGET (sidebar));
+    ctk_widget_show_all (CTK_WIDGET (sidebar));
 
 }
 
@@ -457,7 +457,7 @@ baul_notes_viewer_set_parent_window (BaulNotesViewer *sidebar,
     notes_load_metainfo (sidebar);
 
     baul_clipboard_set_up_text_view
-    (GTK_TEXT_VIEW (sidebar->details->note_text_field),
+    (CTK_TEXT_VIEW (sidebar->details->note_text_field),
      baul_window_info_get_ui_manager (window));
 }
 
@@ -504,7 +504,7 @@ get_property_pages (BaulPropertyPageProvider *provider,
     page = baul_property_page_new
            ("BaulNotesViewer::property_page",
             ctk_label_new (_("Notes")),
-            GTK_WIDGET (viewer));
+            CTK_WIDGET (viewer));
     pages = g_list_append (pages, page);
 
     return pages;

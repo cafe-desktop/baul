@@ -206,14 +206,14 @@ baul_file_management_properties_size_group_create (CtkBuilder *builder,
     int i;
     CtkWidget *widget = NULL;
 
-    size_group = ctk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+    size_group = ctk_size_group_new (CTK_SIZE_GROUP_HORIZONTAL);
 
     for (i = 0; i < items; i++)
     {
         char *item_name;
 
         item_name = g_strdup_printf ("%s_%d", prefix, i);
-        widget = GTK_WIDGET (ctk_builder_get_object (builder, item_name));
+        widget = CTK_WIDGET (ctk_builder_get_object (builder, item_name));
         ctk_size_group_add_widget (size_group, widget);
         g_free (item_name);
     }
@@ -242,17 +242,17 @@ preferences_show_help (CtkWindow *parent,
     {
         CtkWidget *dialog;
 
-        dialog = ctk_message_dialog_new (GTK_WINDOW (parent),
-                                         GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_OK,
+        dialog = ctk_message_dialog_new (CTK_WINDOW (parent),
+                                         CTK_DIALOG_DESTROY_WITH_PARENT,
+                                         CTK_MESSAGE_ERROR,
+                                         CTK_BUTTONS_OK,
                                          _("There was an error displaying help: \n%s"),
                                          error->message);
 
         g_signal_connect (G_OBJECT (dialog),
                           "response", G_CALLBACK (ctk_widget_destroy),
                           NULL);
-        ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+        ctk_window_set_resizable (CTK_WINDOW (dialog), FALSE);
         ctk_widget_show (dialog);
         g_error_free (error);
     }
@@ -264,11 +264,11 @@ baul_file_management_properties_dialog_response_cb (CtkDialog *parent,
         int response_id,
         CtkBuilder *builder)
 {
-    if (response_id == GTK_RESPONSE_HELP)
+    if (response_id == CTK_RESPONSE_HELP)
     {
         char *section;
 
-        switch (ctk_notebook_get_current_page (GTK_NOTEBOOK (ctk_builder_get_object (builder, "notebook1"))))
+        switch (ctk_notebook_get_current_page (CTK_NOTEBOOK (ctk_builder_get_object (builder, "notebook1"))))
         {
         default:
         case 0:
@@ -290,9 +290,9 @@ baul_file_management_properties_dialog_response_cb (CtkDialog *parent,
             section = "gosbaul-61";
             break;
         }
-        preferences_show_help (GTK_WINDOW (parent), "cafe-user-guide", section);
+        preferences_show_help (CTK_WINDOW (parent), "cafe-user-guide", section);
     }
-    else if (response_id == GTK_RESPONSE_CLOSE)
+    else if (response_id == CTK_RESPONSE_CLOSE)
     {
         g_signal_handlers_disconnect_by_func (baul_media_preferences,
                                               baul_file_management_properties_dialog_update_media_sensitivity,
@@ -380,7 +380,7 @@ icon_captions_changed_callback (CtkComboBox *combo_box,
     CtkBuilder *builder;
     int i;
 
-    builder = GTK_BUILDER (user_data);
+    builder = CTK_BUILDER (user_data);
 
     captions = g_ptr_array_new ();
 
@@ -391,9 +391,9 @@ icon_captions_changed_callback (CtkComboBox *combo_box,
         GPtrArray *column_names;
         char *name;
 
-        combo_box = GTK_WIDGET (ctk_builder_get_object
+        combo_box = CTK_WIDGET (ctk_builder_get_object
                                 (builder, icon_captions_components[i]));
-        active = ctk_combo_box_get_active (GTK_COMBO_BOX (combo_box));
+        active = ctk_combo_box_get_active (CTK_COMBO_BOX (combo_box));
 
         column_names = g_object_get_data (G_OBJECT (combo_box),
                                           "column_names");
@@ -418,7 +418,7 @@ update_caption_combo_box (CtkBuilder *builder,
     int i;
     GPtrArray *column_names;
 
-    combo_box = GTK_WIDGET (ctk_builder_get_object (builder, combo_box_name));
+    combo_box = CTK_WIDGET (ctk_builder_get_object (builder, combo_box_name));
 
     g_signal_handlers_block_by_func
     (combo_box,
@@ -432,7 +432,7 @@ update_caption_combo_box (CtkBuilder *builder,
     {
         if (!strcmp (name, g_ptr_array_index (column_names, i)))
         {
-            ctk_combo_box_set_active (GTK_COMBO_BOX (combo_box), i);
+            ctk_combo_box_set_active (CTK_COMBO_BOX (combo_box), i);
             break;
         }
     }
@@ -492,10 +492,10 @@ baul_file_management_properties_dialog_setup_icon_caption_page (CtkBuilder *buil
     {
         CtkWidget *combo_box;
 
-        combo_box = GTK_WIDGET (ctk_builder_get_object (builder,
+        combo_box = CTK_WIDGET (ctk_builder_get_object (builder,
                                 icon_captions_components[i]));
 
-        create_icon_caption_combo_box_items (GTK_COMBO_BOX_TEXT (combo_box), columns);
+        create_icon_caption_combo_box_items (CTK_COMBO_BOX_TEXT (combo_box), columns);
         ctk_widget_set_sensitive (combo_box, writable);
 
         g_signal_connect (combo_box, "changed",
@@ -515,22 +515,22 @@ create_date_format_menu (CtkBuilder *builder)
     gchar *date_string;
     GDateTime *now;
 
-    combo_box = GTK_COMBO_BOX_TEXT
+    combo_box = CTK_COMBO_BOX_TEXT
             (ctk_builder_get_object (builder,
                                      BAUL_FILE_MANAGEMENT_PROPERTIES_DATE_FORMAT_WIDGET));
 
     now = g_date_time_new_now_local ();
 
     date_string = g_date_time_format (now, "%c");
-    ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box), date_string);
+    ctk_combo_box_text_append_text (CTK_COMBO_BOX_TEXT (combo_box), date_string);
     g_free (date_string);
 
     date_string = g_date_time_format (now, "%Y-%m-%d %H:%M:%S");
-    ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box), date_string);
+    ctk_combo_box_text_append_text (CTK_COMBO_BOX_TEXT (combo_box), date_string);
     g_free (date_string);
 
     date_string = g_date_time_format (now, _("today at %-I:%M:%S %p"));
-    ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box), date_string);
+    ctk_combo_box_text_append_text (CTK_COMBO_BOX_TEXT (combo_box), date_string);
     g_free (date_string);
 
     g_date_time_unref (now);
@@ -581,15 +581,15 @@ baul_file_management_properties_dialog_setup_list_column_page (CtkBuilder *build
     set_columns_from_settings (BAUL_COLUMN_CHOOSER (chooser));
 
     ctk_widget_show (chooser);
-    box = GTK_WIDGET (ctk_builder_get_object (builder, "list_columns_vbox"));
+    box = CTK_WIDGET (ctk_builder_get_object (builder, "list_columns_vbox"));
 
-    ctk_box_pack_start (GTK_BOX (box), chooser, TRUE, TRUE, 0);
+    ctk_box_pack_start (CTK_BOX (box), chooser, TRUE, TRUE, 0);
 }
 
 static void
 baul_file_management_properties_dialog_update_media_sensitivity (CtkBuilder *builder)
 {
-    ctk_widget_set_sensitive (GTK_WIDGET (ctk_builder_get_object (builder, "media_handling_vbox")),
+    ctk_widget_set_sensitive (CTK_WIDGET (ctk_builder_get_object (builder, "media_handling_vbox")),
                               ! g_settings_get_boolean (baul_media_preferences, BAUL_PREFERENCES_MEDIA_AUTORUN_NEVER));
 }
 
@@ -617,7 +617,7 @@ other_type_combo_box_changed (CtkComboBox *combo_box, CtkComboBox *action_combo_
                         2, &x_content_type,
                         -1);
 
-    baul_autorun_prepare_combo_box (GTK_WIDGET (action_combo_box),
+    baul_autorun_prepare_combo_box (CTK_WIDGET (action_combo_box),
                                     x_content_type,
                                     TRUE,
                                     TRUE,
@@ -643,10 +643,10 @@ extension_about_clicked (CtkButton *button, Extension *ext)
     ctk_about_dialog_set_authors (extension_about_dialog, (const gchar **) ext->author);
     ctk_about_dialog_set_version (extension_about_dialog, ext->version);
     ctk_about_dialog_set_website (extension_about_dialog, ext->website);
-    ctk_window_set_title (GTK_WINDOW(extension_about_dialog), _("About Extension"));
-    ctk_window_set_icon_name (GTK_WINDOW(extension_about_dialog), ext->icon != NULL ? ext->icon : "system-run");
-    ctk_dialog_run (GTK_DIALOG (extension_about_dialog));
-    ctk_widget_destroy (GTK_WIDGET (extension_about_dialog));
+    ctk_window_set_title (CTK_WINDOW(extension_about_dialog), _("About Extension"));
+    ctk_window_set_icon_name (CTK_WINDOW(extension_about_dialog), ext->icon != NULL ? ext->icon : "system-run");
+    ctk_dialog_run (CTK_DIALOG (extension_about_dialog));
+    ctk_widget_destroy (CTK_WIDGET (extension_about_dialog));
 }
 
 static int extension_configure_check (Extension *ext)
@@ -677,7 +677,7 @@ extension_list_selection_changed_about (CtkTreeSelection *selection, CtkButton *
     CtkTreeIter iter;
     Extension *ext;
 
-    ctk_widget_set_sensitive (GTK_WIDGET (about_button), FALSE);
+    ctk_widget_set_sensitive (CTK_WIDGET (about_button), FALSE);
 
     if (extension_about_id > 0)
     {
@@ -690,7 +690,7 @@ extension_list_selection_changed_about (CtkTreeSelection *selection, CtkButton *
 
     ctk_tree_model_get (model, &iter, EXT_STRUCT_COLUMN, &ext, -1);
     if (ext != NULL) {
-        ctk_widget_set_sensitive (GTK_WIDGET (about_button), TRUE);
+        ctk_widget_set_sensitive (CTK_WIDGET (about_button), TRUE);
         extension_about_id = g_signal_connect (about_button, "clicked", G_CALLBACK (extension_about_clicked), ext);
     }
 }
@@ -702,7 +702,7 @@ extension_list_selection_changed_configure (CtkTreeSelection *selection, CtkButt
     CtkTreeIter iter;
     Extension *ext;
 
-    ctk_widget_set_sensitive (GTK_WIDGET (configure_button), FALSE);
+    ctk_widget_set_sensitive (CTK_WIDGET (configure_button), FALSE);
 
     if (extension_configure_id > 0)
     {
@@ -717,7 +717,7 @@ extension_list_selection_changed_configure (CtkTreeSelection *selection, CtkButt
     if (ext != NULL) {
         // Unconfigurable extensions remain unconfigurable.
         if (extension_configure_check(ext)) {
-            ctk_widget_set_sensitive (GTK_WIDGET (configure_button), TRUE);
+            ctk_widget_set_sensitive (CTK_WIDGET (configure_button), TRUE);
             extension_configure_id = g_signal_connect (configure_button, "clicked", G_CALLBACK (extension_configure_clicked), ext);
         }
     }
@@ -733,7 +733,7 @@ extension_state_toggled (CtkCellRendererToggle *cell, gchar *path_str, gpointer 
     Extension *ext;
 
 	path = ctk_tree_path_new_from_string (path_str);
-	model = ctk_tree_view_get_model (GTK_TREE_VIEW (data));
+	model = ctk_tree_view_get_model (CTK_TREE_VIEW (data));
 
     g_object_get (G_OBJECT (cell), "active", &new_state, NULL);
     ctk_tree_model_get_iter_from_string (model, &iter, path_str);
@@ -746,7 +746,7 @@ extension_state_toggled (CtkCellRendererToggle *cell, gchar *path_str, gpointer 
 
         if (baul_extension_set_state (ext, new_state))
         {
-            ctk_list_store_set (GTK_LIST_STORE (model), &iter,
+            ctk_list_store_set (CTK_LIST_STORE (model), &iter,
                                 EXT_STATE_COLUMN, new_state, -1);
         }
     }
@@ -774,19 +774,19 @@ baul_file_management_properties_dialog_setup_media_page (CtkBuilder *builder)
 
     for (n = 0; s[n*2] != NULL; n++)
     {
-        baul_autorun_prepare_combo_box (GTK_WIDGET (ctk_builder_get_object (builder, s[n*2])), s[n*2 + 1],
+        baul_autorun_prepare_combo_box (CTK_WIDGET (ctk_builder_get_object (builder, s[n*2])), s[n*2 + 1],
                                         TRUE, TRUE, TRUE, NULL, NULL);
     }
 
-    other_type_combo_box = GTK_WIDGET (ctk_builder_get_object (builder, "media_other_type_combobox"));
+    other_type_combo_box = CTK_WIDGET (ctk_builder_get_object (builder, "media_other_type_combobox"));
 
     other_type_list_store = ctk_list_store_new (3,
                             CAIRO_GOBJECT_TYPE_SURFACE,
                             G_TYPE_STRING,
                             G_TYPE_STRING);
 
-    ctk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (other_type_list_store),
-                                          1, GTK_SORT_ASCENDING);
+    ctk_tree_sortable_set_sort_column_id (CTK_TREE_SORTABLE (other_type_list_store),
+                                          1, CTK_SORT_ASCENDING);
 
 
     content_types = g_content_types_get_registered ();
@@ -810,7 +810,7 @@ baul_file_management_properties_dialog_setup_media_page (CtkBuilder *builder)
             }
         }
 
-        icon_size = baul_get_icon_size_for_stock_size (GTK_ICON_SIZE_MENU);
+        icon_size = baul_get_icon_size_for_stock_size (CTK_ICON_SIZE_MENU);
         icon_scale = ctk_widget_get_scale_factor (other_type_combo_box);
 
         description = g_content_type_get_description (content_type);
@@ -842,16 +842,16 @@ skip:
     g_list_foreach (content_types, (GFunc) g_free, NULL);
     g_list_free (content_types);
 
-    ctk_combo_box_set_model (GTK_COMBO_BOX (other_type_combo_box), GTK_TREE_MODEL (other_type_list_store));
+    ctk_combo_box_set_model (CTK_COMBO_BOX (other_type_combo_box), CTK_TREE_MODEL (other_type_list_store));
 
     renderer = ctk_cell_renderer_pixbuf_new ();
-    ctk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, FALSE);
-    ctk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
+    ctk_cell_layout_pack_start (CTK_CELL_LAYOUT (other_type_combo_box), renderer, FALSE);
+    ctk_cell_layout_set_attributes (CTK_CELL_LAYOUT (other_type_combo_box), renderer,
                                     "surface", 0,
                                     NULL);
     renderer = ctk_cell_renderer_text_new ();
-    ctk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, TRUE);
-    ctk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
+    ctk_cell_layout_pack_start (CTK_CELL_LAYOUT (other_type_combo_box), renderer, TRUE);
+    ctk_cell_layout_set_attributes (CTK_CELL_LAYOUT (other_type_combo_box), renderer,
                                     "text", 1,
                                     NULL);
 
@@ -860,7 +860,7 @@ skip:
                       G_CALLBACK (other_type_combo_box_changed),
                       ctk_builder_get_object (builder, "media_other_action_combobox"));
 
-    ctk_combo_box_set_active (GTK_COMBO_BOX (other_type_combo_box), 0);
+    ctk_combo_box_set_active (CTK_COMBO_BOX (other_type_combo_box), 0);
 
     baul_file_management_properties_dialog_update_media_sensitivity (builder);
 }
@@ -883,12 +883,12 @@ baul_file_management_properties_dialog_setup_extension_page (CtkBuilder *builder
 
     extensions = baul_extensions_get_list ();
 
-    view = GTK_TREE_VIEW (
+    view = CTK_TREE_VIEW (
                     ctk_builder_get_object (builder, "extension_view"));
-    store = GTK_LIST_STORE (
+    store = CTK_LIST_STORE (
                     ctk_builder_get_object (builder, "extension_store"));
 
-    toggle = GTK_CELL_RENDERER_TOGGLE (
+    toggle = CTK_CELL_RENDERER_TOGGLE (
                     ctk_builder_get_object (builder, "extension_toggle"));
     g_object_set (toggle, "xpad", 6, NULL);
 
@@ -904,14 +904,14 @@ baul_file_management_properties_dialog_setup_extension_page (CtkBuilder *builder
         if (ext->icon != NULL)
         {
             ext_surface_icon = ctk_icon_theme_load_surface (icon_theme, ext->icon,
-                                                            24, ctk_widget_get_scale_factor (GTK_WIDGET (view)),
-                                                            NULL, GTK_ICON_LOOKUP_USE_BUILTIN, NULL);
+                                                            24, ctk_widget_get_scale_factor (CTK_WIDGET (view)),
+                                                            NULL, CTK_ICON_LOOKUP_USE_BUILTIN, NULL);
         }
         else
         {
             ext_surface_icon = ctk_icon_theme_load_surface (icon_theme, "system-run",
-                                                            24, ctk_widget_get_scale_factor (GTK_WIDGET (view)),
-                                                            NULL, GTK_ICON_LOOKUP_USE_BUILTIN, NULL);
+                                                            24, ctk_widget_get_scale_factor (CTK_WIDGET (view)),
+                                                            NULL, CTK_ICON_LOOKUP_USE_BUILTIN, NULL);
         }
 
         if (ext->description != NULL)
@@ -938,11 +938,11 @@ baul_file_management_properties_dialog_setup_extension_page (CtkBuilder *builder
             cairo_surface_destroy (ext_surface_icon);
     }
 
-    about_button = GTK_BUTTON (ctk_builder_get_object (builder, "about_extension_button"));
-    configure_button = GTK_BUTTON (ctk_builder_get_object (builder, "configure_extension_button"));
+    about_button = CTK_BUTTON (ctk_builder_get_object (builder, "about_extension_button"));
+    configure_button = CTK_BUTTON (ctk_builder_get_object (builder, "configure_extension_button"));
 
     selection = ctk_tree_view_get_selection (view);
-    ctk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+    ctk_tree_selection_set_mode (selection, CTK_SELECTION_SINGLE);
     g_signal_connect (selection, "changed",
                       G_CALLBACK (extension_list_selection_changed_about),
                       about_button);
@@ -1118,7 +1118,7 @@ bind_builder_radio (CtkBuilder *builder,
     CtkWidget *button = NULL;
 
     for (i = 0; widget_names[i] != NULL; i++) {
-        button = GTK_WIDGET (ctk_builder_get_object (builder, widget_names[i]));
+        button = CTK_WIDGET (ctk_builder_get_object (builder, widget_names[i]));
 
         g_settings_bind_with_mapping (settings, prefs,
                                       button, "active",
@@ -1265,23 +1265,23 @@ baul_file_management_properties_dialog_setup (CtkBuilder *builder, CtkWindow *wi
 
 
     /* UI callbacks */
-    dialog = GTK_WIDGET (ctk_builder_get_object (builder, "file_management_dialog"));
+    dialog = CTK_WIDGET (ctk_builder_get_object (builder, "file_management_dialog"));
     g_signal_connect_data (G_OBJECT (dialog), "response",
                            G_CALLBACK (baul_file_management_properties_dialog_response_cb),
                            g_object_ref (builder),
                            (GClosureNotify)g_object_unref,
                            0);
 
-    ctk_window_set_icon_name (GTK_WINDOW (dialog), "system-file-manager");
+    ctk_window_set_icon_name (CTK_WINDOW (dialog), "system-file-manager");
 
     if (window)
     {
-        ctk_window_set_screen (GTK_WINDOW (dialog), ctk_window_get_screen(window));
+        ctk_window_set_screen (CTK_WINDOW (dialog), ctk_window_get_screen(window));
     }
 
-    CtkWidget *notebook = GTK_WIDGET (ctk_builder_get_object (builder, "notebook1"));
-    ctk_widget_add_events (GTK_WIDGET (notebook), GDK_SCROLL_MASK);
-    g_signal_connect (GTK_WIDGET (notebook), "scroll-event",
+    CtkWidget *notebook = CTK_WIDGET (ctk_builder_get_object (builder, "notebook1"));
+    ctk_widget_add_events (CTK_WIDGET (notebook), GDK_SCROLL_MASK);
+    g_signal_connect (CTK_WIDGET (notebook), "scroll-event",
                       G_CALLBACK (eel_dialog_page_scroll_event_callback),
                       window);
 
@@ -1298,7 +1298,7 @@ delete_event_callback (CtkWidget       *widget,
 
     response_callback = data;
 
-    response_callback (GTK_DIALOG (widget), GTK_RESPONSE_CLOSE);
+    response_callback (CTK_DIALOG (widget), CTK_RESPONSE_CLOSE);
 
     return TRUE;
 }

@@ -604,14 +604,14 @@ baul_window_slot_open_location_full (BaulWindowSlot *slot,
     } else if (target_navigation) {
         target_window = baul_application_create_navigation_window
             (window->application,
-             ctk_window_get_screen (GTK_WINDOW (window)));
+             ctk_window_get_screen (CTK_WINDOW (window)));
     } else {
         target_window = baul_application_get_spatial_window
             (window->application,
              window,
              NULL,
              location,
-             ctk_window_get_screen (GTK_WINDOW (window)),
+             ctk_window_get_screen (CTK_WINDOW (window)),
              &existing);
     }
 
@@ -621,7 +621,7 @@ baul_window_slot_open_location_full (BaulWindowSlot *slot,
     if (existing) {
         target_slot = target_window->details->active_pane->active_slot;
 
-        ctk_window_present (GTK_WINDOW (target_window));
+        ctk_window_present (CTK_WINDOW (target_window));
 
         if (new_selection != NULL && slot->content_view != NULL) {
             baul_view_set_selection (target_slot->content_view, new_selection);
@@ -659,7 +659,7 @@ baul_window_slot_open_location_full (BaulWindowSlot *slot,
     {
         if (BAUL_IS_SPATIAL_WINDOW (window) && !BAUL_IS_DESKTOP_WINDOW (window))
         {
-            if (ctk_widget_get_visible (GTK_WIDGET (target_window)))
+            if (ctk_widget_get_visible (CTK_WIDGET (target_window)))
             {
                 baul_window_close (window);
             }
@@ -810,7 +810,7 @@ report_current_content_view_failure_to_user (BaulWindowSlot *slot)
     message = baul_window_slot_get_view_startup_error_label (slot);
     eel_show_error_dialog (message,
                            _("You can choose another view or go to a different location."),
-                           GTK_WINDOW (window));
+                           CTK_WINDOW (window));
     g_free (message);
 }
 
@@ -829,7 +829,7 @@ report_nascent_content_view_failure_to_user (BaulWindowSlot *slot,
     message = baul_window_slot_get_view_error_label (slot);
     eel_show_error_dialog (message,
                            _("The location cannot be displayed with this viewer."),
-                           GTK_WINDOW (window));
+                           CTK_WINDOW (window));
     g_free (message);
 }
 
@@ -1049,7 +1049,7 @@ setup_new_spatial_window (BaulWindowSlot *slot, BaulFile *file)
             /* Update the UI, since we initialize it to the default */
             action = ctk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
             ctk_action_block_activate (action);
-            ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+            ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                           window->details->show_hidden_files_mode == BAUL_WINDOW_SHOW_HIDDEN_FILES_ENABLE);
             ctk_action_unblock_activate (action);
             G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -1065,33 +1065,33 @@ setup_new_spatial_window (BaulWindowSlot *slot, BaulFile *file)
                     (file, BAUL_METADATA_KEY_WINDOW_MAXIMIZED, FALSE);
         if (maximized)
         {
-            ctk_window_maximize (GTK_WINDOW (window));
+            ctk_window_maximize (CTK_WINDOW (window));
         }
         else
         {
-            ctk_window_unmaximize (GTK_WINDOW (window));
+            ctk_window_unmaximize (CTK_WINDOW (window));
         }
 
         sticky = baul_file_get_boolean_metadata
                  (file, BAUL_METADATA_KEY_WINDOW_STICKY, FALSE);
         if (sticky)
         {
-            ctk_window_stick (GTK_WINDOW (window));
+            ctk_window_stick (CTK_WINDOW (window));
         }
         else
         {
-            ctk_window_unstick (GTK_WINDOW (window));
+            ctk_window_unstick (CTK_WINDOW (window));
         }
 
         above = baul_file_get_boolean_metadata
                 (file, BAUL_METADATA_KEY_WINDOW_KEEP_ABOVE, FALSE);
         if (above)
         {
-            ctk_window_set_keep_above (GTK_WINDOW (window), TRUE);
+            ctk_window_set_keep_above (CTK_WINDOW (window), TRUE);
         }
         else
         {
-            ctk_window_set_keep_above (GTK_WINDOW (window), FALSE);
+            ctk_window_set_keep_above (CTK_WINDOW (window), FALSE);
         }
 
         geometry_string = baul_file_get_metadata
@@ -1099,7 +1099,7 @@ setup_new_spatial_window (BaulWindowSlot *slot, BaulFile *file)
         if (geometry_string != NULL)
         {
             eel_ctk_window_set_initial_geometry_from_string
-            (GTK_WINDOW (window),
+            (CTK_WINDOW (window),
              geometry_string,
              BAUL_SPATIAL_WINDOW_MIN_WIDTH,
              BAUL_SPATIAL_WINDOW_MIN_HEIGHT,
@@ -1216,7 +1216,7 @@ got_file_info_for_view_selection_callback (BaulFile *file,
 
         slot->tried_mount = TRUE;
 
-        mount_op = ctk_mount_operation_new (GTK_WINDOW (window));
+        mount_op = ctk_mount_operation_new (CTK_WINDOW (window));
         g_mount_operation_set_password_save (mount_op, G_PASSWORD_SAVE_FOR_SESSION);
         location = baul_file_get_location (file);
         data = g_new0 (MountNotMountedData, 1);
@@ -1297,7 +1297,7 @@ got_file_info_for_view_selection_callback (BaulFile *file,
 
     if (view_id != NULL)
     {
-        if (!ctk_widget_get_visible (GTK_WIDGET (window)) && BAUL_IS_SPATIAL_WINDOW (window))
+        if (!ctk_widget_get_visible (CTK_WIDGET (window)) && BAUL_IS_SPATIAL_WINDOW (window))
         {
             /* We now have the metadata to set up the window position, etc */
             setup_new_spatial_window (slot, file);
@@ -1314,7 +1314,7 @@ got_file_info_for_view_selection_callback (BaulFile *file,
                                             location, error);
         }
 
-        if (!ctk_widget_get_visible (GTK_WIDGET (window)))
+        if (!ctk_widget_get_visible (CTK_WIDGET (window)))
         {
             BaulApplication *app;
 
@@ -1324,7 +1324,7 @@ got_file_info_for_view_selection_callback (BaulFile *file,
             /* if this is the only window, we don't want to quit, so we redirect it to home */
             app = BAUL_APPLICATION (g_application_get_default ());
 
-            if (g_list_length (ctk_application_get_windows (GTK_APPLICATION (app))) == 1) {
+            if (g_list_length (ctk_application_get_windows (CTK_APPLICATION (app))) == 1) {
 
                 /* the user could have typed in a home directory that doesn't exist,
                    in which case going home would cause an infinite loop, so we
@@ -1348,13 +1348,13 @@ got_file_info_for_view_selection_callback (BaulFile *file,
                 }
                 else
                 {
-                    ctk_widget_destroy (GTK_WIDGET (window));
+                    ctk_widget_destroy (CTK_WIDGET (window));
                 }
             }
             else
             {
                 /* Since this is a window, destroying it will also unref it. */
-                ctk_widget_destroy (GTK_WIDGET (window));
+                ctk_widget_destroy (CTK_WIDGET (window));
             }
         }
         else
@@ -1671,7 +1671,7 @@ slot_add_extension_extra_widgets (BaulWindowSlot *slot)
         BaulLocationWidgetProvider *provider;
 
         provider = BAUL_LOCATION_WIDGET_PROVIDER (l->data);
-        widget = baul_location_widget_provider_get_widget (provider, uri, GTK_WIDGET (slot->pane->window));
+        widget = baul_location_widget_provider_get_widget (provider, uri, CTK_WIDGET (slot->pane->window));
         if (widget != NULL)
         {
             baul_window_slot_add_extra_location_widget (slot, widget);
@@ -2081,7 +2081,7 @@ baul_window_report_view_failed (BaulWindow *window,
         }
         else
         {
-            if (!ctk_widget_get_visible (GTK_WIDGET (window)))
+            if (!ctk_widget_get_visible (CTK_WIDGET (window)))
             {
                 do_close_window = TRUE;
             }
@@ -2100,7 +2100,7 @@ baul_window_report_view_failed (BaulWindow *window,
 
     if (do_close_window)
     {
-        ctk_widget_destroy (GTK_WIDGET (window));
+        ctk_widget_destroy (CTK_WIDGET (window));
     }
 }
 

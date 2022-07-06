@@ -189,7 +189,7 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
     name = baul_bookmark_get_name (bookmark);
 
     /* Create menu item with surface */
-    surface = baul_bookmark_get_surface (bookmark, GTK_ICON_SIZE_MENU);
+    surface = baul_bookmark_get_surface (bookmark, CTK_ICON_SIZE_MENU);
 
     g_snprintf (action_name, sizeof (action_name), "%s%d", parent_id, index_in_parent);
 
@@ -211,7 +211,7 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     ctk_action_group_add_action (action_group,
-                                 GTK_ACTION (action));
+                                 CTK_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     g_object_unref (action);
@@ -221,13 +221,13 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
                            parent_path,
                            action_name,
                            action_name,
-                           GTK_UI_MANAGER_MENUITEM,
+                           CTK_UI_MANAGER_MENUITEM,
                            FALSE);
 
     path = g_strdup_printf ("%s/%s", parent_path, action_name);
     menuitem = ctk_ui_manager_get_widget (window->details->ui_manager,
                                           path);
-    ctk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem),
+    ctk_image_menu_item_set_always_show_image (CTK_IMAGE_MENU_ITEM (menuitem),
             TRUE);
 
     cairo_surface_destroy (surface);
@@ -400,7 +400,7 @@ action_show_hidden_files_callback (CtkAction *action,
     window = BAUL_WINDOW (callback_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_ENABLE;
     }
@@ -423,7 +423,7 @@ action_show_backup_files_callback (CtkAction *action,
     window = BAUL_WINDOW (callback_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    if (ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)))
+    if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         mode = BAUL_WINDOW_SHOW_BACKUP_FILES_ENABLE;
     }
@@ -449,11 +449,11 @@ show_hidden_files_preference_callback (gpointer callback_data)
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         action = ctk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
-        g_assert (GTK_IS_ACTION (action));
+        g_assert (CTK_IS_ACTION (action));
 
         /* update button */
         g_signal_handlers_block_by_func (action, action_show_hidden_files_callback, window);
-        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                       g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_HIDDEN_FILES));
         G_GNUC_END_IGNORE_DEPRECATIONS;
         g_signal_handlers_unblock_by_func (action, action_show_hidden_files_callback, window);
@@ -477,11 +477,11 @@ show_backup_files_preference_callback (gpointer callback_data)
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         action = ctk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
-        g_assert (GTK_IS_ACTION (action));
+        g_assert (CTK_IS_ACTION (action));
 
         /* update button */
         g_signal_handlers_block_by_func (action, action_show_backup_files_callback, window);
-        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                       g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_BACKUP_FILES));
         G_GNUC_END_IGNORE_DEPRECATIONS;
         g_signal_handlers_unblock_by_func (action, action_show_backup_files_callback, window);
@@ -495,9 +495,9 @@ static void
 preferences_respond_callback (CtkDialog *dialog,
                               gint response_id)
 {
-    if (response_id == GTK_RESPONSE_CLOSE)
+    if (response_id == CTK_RESPONSE_CLOSE)
     {
-        ctk_widget_destroy (GTK_WIDGET (dialog));
+        ctk_widget_destroy (CTK_WIDGET (dialog));
     }
 }
 
@@ -507,7 +507,7 @@ action_preferences_callback (CtkAction *action,
 {
     CtkWindow *window;
 
-    window = GTK_WINDOW (user_data);
+    window = CTK_WINDOW (user_data);
 
     baul_file_management_properties_dialog_show (G_CALLBACK (preferences_respond_callback), window);
 }
@@ -518,7 +518,7 @@ action_backgrounds_and_emblems_callback (CtkAction *action,
 {
     CtkWindow *window;
 
-    window = GTK_WINDOW (user_data);
+    window = CTK_WINDOW (user_data);
 
     baul_property_browser_show (ctk_window_get_screen (window));
 }
@@ -570,7 +570,7 @@ action_about_baul_callback (CtkAction *action,
 
     license_trans = g_strjoin ("\n\n", _(license[0]), _(license[1]), _(license[2]), NULL);
 
-    ctk_show_about_dialog (GTK_WINDOW (user_data),
+    ctk_show_about_dialog (CTK_WINDOW (user_data),
                            "program-name", _("Baul"),
                            "title", _("About Baul"),
                            "version", VERSION,
@@ -612,7 +612,7 @@ action_baul_manual_callback (CtkAction *action,
     error = NULL;
     window = BAUL_WINDOW (user_data);
 
-    ctk_show_uri_on_window (GTK_WINDOW (window),
+    ctk_show_uri_on_window (CTK_WINDOW (window),
                             BAUL_IS_DESKTOP_WINDOW (window)
                                ? "help:cafe-user-guide"
                                : "help:cafe-user-guide/gosbaul-1",
@@ -622,17 +622,17 @@ action_baul_manual_callback (CtkAction *action,
     {
         CtkWidget *dialog;
 
-        dialog = ctk_message_dialog_new (GTK_WINDOW (window),
-                                         GTK_DIALOG_MODAL,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_OK,
+        dialog = ctk_message_dialog_new (CTK_WINDOW (window),
+                                         CTK_DIALOG_MODAL,
+                                         CTK_MESSAGE_ERROR,
+                                         CTK_BUTTONS_OK,
                                          _("There was an error displaying help: \n%s"),
                                          error->message);
         g_signal_connect (G_OBJECT (dialog), "response",
                           G_CALLBACK (ctk_widget_destroy),
                           NULL);
 
-        ctk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+        ctk_window_set_resizable (CTK_WINDOW (dialog), FALSE);
         ctk_widget_show (dialog);
         g_error_free (error);
     }
@@ -646,14 +646,14 @@ menu_item_select_cb (CtkMenuItem *proxy,
     char *message;
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    action = ctk_activatable_get_related_action (GTK_ACTIVATABLE (proxy));
+    action = ctk_activatable_get_related_action (CTK_ACTIVATABLE (proxy));
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_return_if_fail (action != NULL);
 
     g_object_get (G_OBJECT (action), "tooltip", &message, NULL);
     if (message)
     {
-        ctk_statusbar_push (GTK_STATUSBAR (window->details->statusbar),
+        ctk_statusbar_push (CTK_STATUSBAR (window->details->statusbar),
                             window->details->help_message_cid, message);
         g_free (message);
     }
@@ -663,7 +663,7 @@ static void
 menu_item_deselect_cb (CtkMenuItem *proxy,
                        BaulWindow *window)
 {
-    ctk_statusbar_pop (GTK_STATUSBAR (window->details->statusbar),
+    ctk_statusbar_pop (CTK_STATUSBAR (window->details->statusbar),
                        window->details->help_message_cid);
 }
 
@@ -677,21 +677,21 @@ get_event_widget (CtkWidget *proxy)
      * the widgets in question. This can't be helped, but by keeping
      * the sneaky code in one place, it can easily be updated.
      */
-    if (GTK_IS_MENU_ITEM (proxy))
+    if (CTK_IS_MENU_ITEM (proxy))
     {
         /* Menu items already forward middle clicks */
         widget = NULL;
     }
-    else if (GTK_IS_MENU_TOOL_BUTTON (proxy))
+    else if (CTK_IS_MENU_TOOL_BUTTON (proxy))
     {
-        widget = eel_ctk_menu_tool_button_get_button (GTK_MENU_TOOL_BUTTON (proxy));
+        widget = eel_ctk_menu_tool_button_get_button (CTK_MENU_TOOL_BUTTON (proxy));
     }
-    else if (GTK_IS_TOOL_BUTTON (proxy))
+    else if (CTK_IS_TOOL_BUTTON (proxy))
     {
         /* The tool button's button is the direct child */
-        widget = ctk_bin_get_child (GTK_BIN (proxy));
+        widget = ctk_bin_get_child (CTK_BIN (proxy));
     }
-    else if (GTK_IS_BUTTON (proxy))
+    else if (CTK_IS_BUTTON (proxy))
     {
         widget = proxy;
     }
@@ -738,7 +738,7 @@ disconnect_proxy_cb (CtkUIManager *manager,
 {
     CtkWidget *widget;
 
-    if (GTK_IS_MENU_ITEM (proxy))
+    if (CTK_IS_MENU_ITEM (proxy))
     {
         g_signal_handlers_disconnect_by_func
         (proxy, G_CALLBACK (menu_item_select_cb), window);
@@ -768,7 +768,7 @@ connect_proxy_cb (CtkUIManager *manager,
     cairo_surface_t *icon;
     CtkWidget *widget;
 
-    if (GTK_IS_MENU_ITEM (proxy))
+    if (CTK_IS_MENU_ITEM (proxy))
     {
         g_signal_connect (proxy, "select",
                           G_CALLBACK (menu_item_select_cb), window);
@@ -780,18 +780,18 @@ connect_proxy_cb (CtkUIManager *manager,
         icon = g_object_get_data (G_OBJECT (action), "menu-icon");
         if (icon != NULL)
         {
-            ctk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (proxy),
+            ctk_image_menu_item_set_image (CTK_IMAGE_MENU_ITEM (proxy),
                                            ctk_image_new_from_surface (icon));
         }
     }
-    if (GTK_IS_TOOL_BUTTON (proxy))
+    if (CTK_IS_TOOL_BUTTON (proxy))
     {
         icon = g_object_get_data (G_OBJECT (action), "toolbar-icon");
         if (icon != NULL)
         {
             widget = ctk_image_new_from_surface (icon);
             ctk_widget_show (widget);
-            ctk_tool_button_set_icon_widget (GTK_TOOL_BUTTON (proxy),
+            ctk_tool_button_set_icon_widget (CTK_TOOL_BUTTON (proxy),
                                              widget);
         }
     }
@@ -1007,7 +1007,7 @@ baul_window_initialize_menus (BaulWindow *window)
 
     action = ctk_action_group_get_action (action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
     g_signal_handlers_block_by_func (action, action_show_hidden_files_callback, window);
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_HIDDEN_FILES));
     g_signal_handlers_unblock_by_func (action, action_show_hidden_files_callback, window);
     g_signal_connect_swapped (baul_preferences, "changed::" BAUL_PREFERENCES_SHOW_HIDDEN_FILES,
@@ -1016,7 +1016,7 @@ baul_window_initialize_menus (BaulWindow *window)
 
     action = ctk_action_group_get_action (action_group, BAUL_ACTION_SHOW_BACKUP_FILES);
     g_signal_handlers_block_by_func (action, action_show_backup_files_callback, window);
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_BACKUP_FILES));
     G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_handlers_unblock_by_func (action, action_show_backup_files_callback, window);
@@ -1027,7 +1027,7 @@ baul_window_initialize_menus (BaulWindow *window)
 
     window->details->ui_manager = ctk_ui_manager_new ();
     ui_manager = window->details->ui_manager;
-    ctk_window_add_accel_group (GTK_WINDOW (window),
+    ctk_window_add_accel_group (CTK_WINDOW (window),
                                 ctk_ui_manager_get_accel_group (ui_manager));
 
     g_signal_connect (ui_manager, "connect_proxy",
@@ -1081,7 +1081,7 @@ get_extension_menus (BaulWindow *window)
 
         provider = BAUL_MENU_PROVIDER (l->data);
         file_items = baul_menu_provider_get_background_items (provider,
-                     GTK_WIDGET (window),
+                     CTK_WIDGET (window),
                      slot->viewed_file);
         items = g_list_concat (items, file_items);
     }
@@ -1116,7 +1116,7 @@ add_extension_menu_items (BaulWindow *window,
         g_object_get (item, "menu", &menu, NULL);
 
         G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-        action = baul_action_from_menu_item (item, GTK_WIDGET (window));
+        action = baul_action_from_menu_item (item, CTK_WIDGET (window));
         ctk_action_group_add_action_with_accel (action_group, action, NULL);
         action_name = ctk_action_get_name (action);
         G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -1127,7 +1127,7 @@ add_extension_menu_items (BaulWindow *window,
                                path,
                                action_name,
                                action_name,
-                               (menu != NULL) ? GTK_UI_MANAGER_MENU : GTK_UI_MANAGER_MENUITEM,
+                               (menu != NULL) ? CTK_UI_MANAGER_MENU : CTK_UI_MANAGER_MENUITEM,
                                FALSE);
         g_free (path);
 
@@ -1137,7 +1137,7 @@ add_extension_menu_items (BaulWindow *window,
                                path,
                                action_name,
                                action_name,
-                               (menu != NULL) ? GTK_UI_MANAGER_MENU : GTK_UI_MANAGER_MENUITEM,
+                               (menu != NULL) ? CTK_UI_MANAGER_MENU : CTK_UI_MANAGER_MENUITEM,
                                FALSE);
         g_free (path);
 

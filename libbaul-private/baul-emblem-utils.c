@@ -226,14 +226,14 @@ baul_emblem_verify_keyword (CtkWindow *parent_window,
     {
         eel_show_error_dialog (_("The emblem cannot be installed."),
                                _("Sorry, but you must specify a non-blank keyword for the new emblem."),
-                               GTK_WINDOW (parent_window));
+                               CTK_WINDOW (parent_window));
         return FALSE;
     }
     else if (!emblem_keyword_valid (keyword))
     {
         eel_show_error_dialog (_("The emblem cannot be installed."),
                                _("Sorry, but emblem keywords can only contain letters, spaces and numbers."),
-                               GTK_WINDOW (parent_window));
+                               CTK_WINDOW (parent_window));
         return FALSE;
     }
     else if (is_reserved_keyword (keyword))
@@ -246,7 +246,7 @@ baul_emblem_verify_keyword (CtkWindow *parent_window,
          */
         error_string = g_strdup_printf (_("Sorry, but there is already an emblem named \"%s\"."), display_name);
         eel_show_error_dialog (_("Please choose a different emblem name."), error_string,
-                               GTK_WINDOW (parent_window));
+                               CTK_WINDOW (parent_window));
         g_free (error_string);
         return FALSE;
     }
@@ -282,7 +282,7 @@ baul_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
     {
         eel_show_error_dialog (_("The emblem cannot be installed."),
                                _("Sorry, unable to save custom emblem."),
-                               GTK_WINDOW (parent_window));
+                               CTK_WINDOW (parent_window));
         g_free (dir);
         g_free (stat_dir);
         return;
@@ -297,7 +297,7 @@ baul_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
     {
         eel_show_error_dialog (_("The emblem cannot be installed."),
                                _("Sorry, unable to save custom emblem."),
-                               GTK_WINDOW (parent_window));
+                               CTK_WINDOW (parent_window));
         g_free (dir);
         g_free (stat_dir);
         g_free (path);
@@ -321,7 +321,7 @@ baul_emblem_install_custom_emblem (GdkPixbuf *pixbuf,
         {
             eel_show_error_dialog (_("The emblem cannot be installed."),
                                    _("Sorry, unable to save custom emblem name."),
-                                   GTK_WINDOW (parent_window));
+                                   CTK_WINDOW (parent_window));
             g_free (contents);
             g_free (path);
             g_free (stat_dir);

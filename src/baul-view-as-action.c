@@ -44,7 +44,7 @@ struct _BaulViewAsActionPrivate
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (BaulViewAsAction, baul_view_as_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulViewAsAction, baul_view_as_action, CTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 enum
@@ -86,7 +86,7 @@ view_as_menu_switch_views_callback (CtkComboBox *combo_box, BaulNavigationWindow
 {
     int active;
 
-    g_assert (GTK_IS_COMBO_BOX (combo_box));
+    g_assert (CTK_IS_COMBO_BOX (combo_box));
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
     active = ctk_combo_box_get_active (combo_box);
@@ -122,8 +122,8 @@ view_as_changed_callback (BaulWindow *window,
      * the number of items in a combobox.
      */
     model = ctk_combo_box_get_model (combo_box);
-    g_return_if_fail (GTK_IS_LIST_STORE (model));
-    store = GTK_LIST_STORE (model);
+    g_return_if_fail (CTK_IS_LIST_STORE (model));
+    store = CTK_LIST_STORE (model);
     ctk_list_store_clear (store);
 
     slot = baul_window_get_active_slot (window);
@@ -134,7 +134,7 @@ view_as_changed_callback (BaulWindow *window,
             node = node->next, ++index)
     {
         info = baul_view_factory_lookup (node->data);
-        ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box), _(info->view_combo_label));
+        ctk_combo_box_text_append_text (CTK_COMBO_BOX_TEXT (combo_box), _(info->view_combo_label));
 
         if (baul_window_slot_content_view_matches_iid (slot, (char *)node->data))
         {
@@ -155,15 +155,15 @@ view_as_changed_callback (BaulWindow *window,
 
         id = baul_window_slot_get_content_view_id (slot);
         info = baul_view_factory_lookup (id);
-        ctk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo_box),
+        ctk_combo_box_text_append_text (CTK_COMBO_BOX_TEXT (combo_box),
                                         _(info->view_combo_label));
         selected_index = index;
     }
     ctk_combo_box_set_active (combo_box, selected_index);
     if (g_list_length (window->details->short_list_viewers) == 1) {
-        ctk_widget_hide(GTK_WIDGET(combo_box));
+        ctk_widget_hide(CTK_WIDGET(combo_box));
     } else {
-        ctk_widget_show(GTK_WIDGET(combo_box));
+        ctk_widget_show(CTK_WIDGET(combo_box));
     }
 }
 
@@ -172,9 +172,9 @@ static void
 connect_proxy (CtkAction *action,
                CtkWidget *proxy)
 {
-    if (GTK_IS_TOOL_ITEM (proxy))
+    if (CTK_IS_TOOL_ITEM (proxy))
     {
-        CtkToolItem *item = GTK_TOOL_ITEM (proxy);
+        CtkToolItem *item = CTK_TOOL_ITEM (proxy);
         BaulViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
         BaulNavigationWindow *window = vaction->priv->window;
         CtkWidget *view_as_menu_vbox;
@@ -183,15 +183,15 @@ connect_proxy (CtkAction *action,
         /* Option menu for content view types; it's empty here, filled in when a uri is set.
          * Pack it into vbox so it doesn't grow vertically when location bar does.
          */
-        view_as_menu_vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 4);
+        view_as_menu_vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 4);
         ctk_widget_show (view_as_menu_vbox);
 
-        ctk_container_add (GTK_CONTAINER (item), view_as_menu_vbox);
+        ctk_container_add (CTK_CONTAINER (item), view_as_menu_vbox);
 
         view_as_combo_box = ctk_combo_box_text_new ();
 
         ctk_widget_set_focus_on_click (view_as_combo_box, FALSE);
-        ctk_box_pack_end (GTK_BOX (view_as_menu_vbox), view_as_combo_box, TRUE, FALSE, 0);
+        ctk_box_pack_end (CTK_BOX (view_as_menu_vbox), view_as_combo_box, TRUE, FALSE, 0);
         ctk_widget_show (view_as_combo_box);
         g_signal_connect_object (view_as_combo_box, "changed",
                                  G_CALLBACK (view_as_menu_switch_views_callback), window, 0);
@@ -202,7 +202,7 @@ connect_proxy (CtkAction *action,
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    (* GTK_ACTION_CLASS (parent_class)->connect_proxy) (action, proxy);
+    (* CTK_ACTION_CLASS (parent_class)->connect_proxy) (action, proxy);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -210,7 +210,7 @@ static void
 disconnect_proxy (CtkAction *action,
                   CtkWidget *proxy)
 {
-    if (GTK_IS_TOOL_ITEM (proxy))
+    if (CTK_IS_TOOL_ITEM (proxy))
     {
         BaulViewAsAction *vaction = BAUL_VIEW_AS_ACTION (action);
         BaulNavigationWindow *window = vaction->priv->window;
@@ -221,7 +221,7 @@ disconnect_proxy (CtkAction *action,
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    (* GTK_ACTION_CLASS (parent_class)->disconnect_proxy) (action, proxy);
+    (* CTK_ACTION_CLASS (parent_class)->disconnect_proxy) (action, proxy);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -272,7 +272,7 @@ baul_view_as_action_class_init (BaulViewAsActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    CtkActionClass *action_class = GTK_ACTION_CLASS (class);
+    CtkActionClass *action_class = CTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     object_class->finalize = baul_view_as_action_finalize;
@@ -281,7 +281,7 @@ baul_view_as_action_class_init (BaulViewAsActionClass *class)
 
     parent_class = g_type_class_peek_parent (class);
 
-    action_class->toolbar_item_type = GTK_TYPE_TOOL_ITEM;
+    action_class->toolbar_item_type = CTK_TYPE_TOOL_ITEM;
     action_class->connect_proxy = connect_proxy;
     action_class->disconnect_proxy = disconnect_proxy;
 

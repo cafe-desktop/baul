@@ -71,7 +71,7 @@ eel_ctk_window_get_geometry_string (CtkWindow *window)
     char *str;
     int w, h, x, y;
 
-    g_return_val_if_fail (GTK_IS_WINDOW (window), NULL);
+    g_return_val_if_fail (CTK_IS_WINDOW (window), NULL);
     g_return_val_if_fail (ctk_window_get_gravity (window) ==
                           GDK_GRAVITY_NORTH_WEST, NULL);
 
@@ -164,13 +164,13 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
 {
     int real_left, real_top;
 
-    g_return_if_fail (GTK_IS_WINDOW (window));
+    g_return_if_fail (CTK_IS_WINDOW (window));
 
     /* Setting the default size doesn't work when the window is already showing.
      * Someday we could make this move an already-showing window, but we don't
      * need that functionality yet.
      */
-    g_return_if_fail (!ctk_widget_get_visible (GTK_WIDGET (window)));
+    g_return_if_fail (!ctk_widget_get_visible (CTK_WIDGET (window)));
 
     if ((geometry_flags & EEL_GDK_X_VALUE) && (geometry_flags & EEL_GDK_Y_VALUE))
     {
@@ -182,7 +182,7 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
         real_top = top;
 
         screen = ctk_window_get_screen (window);
-        scale = ctk_widget_get_scale_factor (GTK_WIDGET (window));
+        scale = ctk_widget_get_scale_factor (CTK_WIDGET (window));
         screen_width  = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
         screen_height = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
 
@@ -208,7 +208,7 @@ eel_ctk_window_set_initial_geometry (CtkWindow *window,
     if ((geometry_flags & EEL_GDK_WIDTH_VALUE) && (geometry_flags & EEL_GDK_HEIGHT_VALUE))
     {
         sanity_check_window_dimensions (&width, &height);
-        ctk_window_set_default_size (GTK_WINDOW (window), (int)width, (int)height);
+        ctk_window_set_default_size (CTK_WINDOW (window), (int)width, (int)height);
     }
 }
 
@@ -240,14 +240,14 @@ eel_ctk_window_set_initial_geometry_from_string (CtkWindow *window,
     guint width, height;
     EelGdkGeometryFlags geometry_flags;
 
-    g_return_if_fail (GTK_IS_WINDOW (window));
+    g_return_if_fail (CTK_IS_WINDOW (window));
     g_return_if_fail (geometry_string != NULL);
 
     /* Setting the default size doesn't work when the window is already showing.
      * Someday we could make this move an already-showing window, but we don't
      * need that functionality yet.
      */
-    g_return_if_fail (!ctk_widget_get_visible (GTK_WIDGET (window)));
+    g_return_if_fail (!ctk_widget_get_visible (CTK_WIDGET (window)));
 
     geometry_flags = eel_gdk_parse_geometry (geometry_string, &left, &top, &width, &height);
 
@@ -291,7 +291,7 @@ void
 eel_pop_up_context_menu (CtkMenu	*menu,
                          GdkEventButton *event)
 {
-    g_return_if_fail (GTK_IS_MENU (menu));
+    g_return_if_fail (CTK_IS_MENU (menu));
 
     ctk_menu_popup_at_pointer (menu, (const GdkEvent*) event);
 
@@ -312,9 +312,9 @@ eel_ctk_menu_insert_separator (CtkMenu *menu, int index)
 
     menu_item = ctk_separator_menu_item_new ();
     ctk_widget_show (menu_item);
-    ctk_menu_shell_insert (GTK_MENU_SHELL (menu), menu_item, index);
+    ctk_menu_shell_insert (CTK_MENU_SHELL (menu), menu_item, index);
 
-    return GTK_MENU_ITEM (menu_item);
+    return CTK_MENU_ITEM (menu_item);
 }
 
 CtkWidget *
@@ -324,13 +324,13 @@ eel_ctk_menu_tool_button_get_button (CtkMenuToolButton *tool_button)
     GList *children;
     CtkWidget *button;
 
-    g_return_val_if_fail (GTK_IS_MENU_TOOL_BUTTON (tool_button), NULL);
+    g_return_val_if_fail (CTK_IS_MENU_TOOL_BUTTON (tool_button), NULL);
 
     /* The menu tool button's button is the first child
      * of the child hbox. */
-    container = GTK_CONTAINER (ctk_bin_get_child (GTK_BIN (tool_button)));
+    container = CTK_CONTAINER (ctk_bin_get_child (CTK_BIN (tool_button)));
     children = ctk_container_get_children (container);
-    button = GTK_WIDGET (children->data);
+    button = CTK_WIDGET (children->data);
 
     g_list_free (children);
 
@@ -377,7 +377,7 @@ tree_view_button_press_callback (CtkWidget *tree_view,
 
     if (event->button == 1 && event->type == GDK_BUTTON_PRESS)
     {
-        if (ctk_tree_view_get_path_at_pos (GTK_TREE_VIEW (tree_view),
+        if (ctk_tree_view_get_path_at_pos (CTK_TREE_VIEW (tree_view),
                                            event->x, event->y,
                                            &path,
                                            &column,
@@ -385,7 +385,7 @@ tree_view_button_press_callback (CtkWidget *tree_view,
                                            NULL))
         {
             ctk_tree_view_row_activated
-            (GTK_TREE_VIEW (tree_view), path, column);
+            (CTK_TREE_VIEW (tree_view), path, column);
             ctk_tree_path_free (path);
         }
     }
@@ -431,15 +431,15 @@ eel_ctk_message_dialog_set_details_label (CtkMessageDialog *dialog,
 
 	content_area = ctk_message_dialog_get_message_area (dialog);
 	expander = ctk_expander_new_with_mnemonic (_("Show more _details"));
-	ctk_expander_set_spacing (GTK_EXPANDER (expander), 6);
+	ctk_expander_set_spacing (CTK_EXPANDER (expander), 6);
 
 	label = ctk_label_new (details_text);
-	ctk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-	ctk_label_set_selectable (GTK_LABEL (label), TRUE);
-	ctk_label_set_xalign (GTK_LABEL (label), 0);
+	ctk_label_set_line_wrap (CTK_LABEL (label), TRUE);
+	ctk_label_set_selectable (CTK_LABEL (label), TRUE);
+	ctk_label_set_xalign (CTK_LABEL (label), 0);
 
-	ctk_container_add (GTK_CONTAINER (expander), label);
-	ctk_box_pack_start (GTK_BOX (content_area), expander, FALSE, FALSE, 0);
+	ctk_container_add (CTK_CONTAINER (expander), label);
+	ctk_box_pack_start (CTK_BOX (content_area), expander, FALSE, FALSE, 0);
 
 	ctk_widget_show (label);
 	ctk_widget_show (expander);
@@ -452,12 +452,12 @@ eel_image_menu_item_new_from_icon (const gchar *icon_name,
     gchar *concat;
     CtkWidget *icon;
     GSettings *icon_settings;
-    CtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    CtkWidget *box = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
 
     icon_settings = g_settings_new ("org.cafe.interface");
     if ((icon_name) && (g_settings_get_boolean (icon_settings, "menus-have-icons")))
         /*Load the icon if user has icons in menus turned on*/
-        icon = ctk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
+        icon = ctk_image_new_from_icon_name (icon_name, CTK_ICON_SIZE_MENU);
     else
         /*Load an empty icon to hold the space*/
         icon = ctk_image_new ();
@@ -466,11 +466,11 @@ eel_image_menu_item_new_from_icon (const gchar *icon_name,
     CtkWidget *label_menu = ctk_label_new_with_mnemonic (concat);
     CtkWidget *menuitem = ctk_menu_item_new ();
 
-    ctk_container_add (GTK_CONTAINER (box), icon);
+    ctk_container_add (CTK_CONTAINER (box), icon);
 
-    ctk_container_add (GTK_CONTAINER (box), label_menu);
+    ctk_container_add (CTK_CONTAINER (box), label_menu);
 
-    ctk_container_add (GTK_CONTAINER (menuitem), box);
+    ctk_container_add (CTK_CONTAINER (menuitem), box);
     ctk_widget_show_all (menuitem);
 
     g_object_unref(icon_settings);
@@ -485,7 +485,7 @@ eel_image_menu_item_new_from_surface (cairo_surface_t *icon_surface,
 {
     gchar *concat;
     CtkWidget *icon;
-    CtkWidget *box = ctk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    CtkWidget *box = ctk_box_new (CTK_ORIENTATION_HORIZONTAL, 6);
 
     if (icon_surface)
         icon = ctk_image_new_from_surface (icon_surface);
@@ -496,10 +496,10 @@ eel_image_menu_item_new_from_surface (cairo_surface_t *icon_surface,
     CtkWidget *label_menu = ctk_label_new (concat);
     CtkWidget *menuitem = ctk_menu_item_new ();
 
-    ctk_container_add (GTK_CONTAINER (box), icon);
-    ctk_container_add (GTK_CONTAINER (box), label_menu);
+    ctk_container_add (CTK_CONTAINER (box), icon);
+    ctk_container_add (CTK_CONTAINER (box), label_menu);
 
-    ctk_container_add (GTK_CONTAINER (menuitem), box);
+    ctk_container_add (CTK_CONTAINER (menuitem), box);
     ctk_widget_show_all (menuitem);
 
     g_free (concat);
@@ -510,7 +510,7 @@ eel_image_menu_item_new_from_surface (cairo_surface_t *icon_surface,
 gboolean
 eel_dialog_page_scroll_event_callback (CtkWidget *widget, GdkEventScroll *event, CtkWindow *window)
 {
-    CtkNotebook *notebook = GTK_NOTEBOOK (widget);
+    CtkNotebook *notebook = CTK_NOTEBOOK (widget);
     CtkWidget *child, *event_widget, *action_widget;
 
     child = ctk_notebook_get_nth_page (notebook, ctk_notebook_get_current_page (notebook));
@@ -526,11 +526,11 @@ eel_dialog_page_scroll_event_callback (CtkWidget *widget, GdkEventScroll *event,
         return FALSE;
 
     /* And also from the action widgets */
-    action_widget = ctk_notebook_get_action_widget (notebook, GTK_PACK_START);
+    action_widget = ctk_notebook_get_action_widget (notebook, CTK_PACK_START);
     if (event_widget == action_widget ||
         (action_widget != NULL && ctk_widget_is_ancestor (event_widget, action_widget)))
         return FALSE;
-    action_widget = ctk_notebook_get_action_widget (notebook, GTK_PACK_END);
+    action_widget = ctk_notebook_get_action_widget (notebook, CTK_PACK_END);
     if (event_widget == action_widget ||
         (action_widget != NULL && ctk_widget_is_ancestor (event_widget, action_widget)))
         return FALSE;
@@ -546,15 +546,15 @@ eel_dialog_page_scroll_event_callback (CtkWidget *widget, GdkEventScroll *event,
         break;
     case GDK_SCROLL_SMOOTH:
         switch (ctk_notebook_get_tab_pos (notebook)) {
-            case GTK_POS_LEFT:
-            case GTK_POS_RIGHT:
+            case CTK_POS_LEFT:
+            case CTK_POS_RIGHT:
                 if (event->delta_y > 0)
                     ctk_notebook_next_page (notebook);
                 else if (event->delta_y < 0)
                     ctk_notebook_prev_page (notebook);
                 break;
-            case GTK_POS_TOP:
-            case GTK_POS_BOTTOM:
+            case CTK_POS_TOP:
+            case CTK_POS_BOTTOM:
                 if (event->delta_x > 0)
                     ctk_notebook_next_page (notebook);
                 else if (event->delta_x < 0)

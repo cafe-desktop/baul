@@ -49,7 +49,7 @@ enum
 };
 
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-G_DEFINE_TYPE_WITH_PRIVATE (BaulZoomAction, baul_zoom_action, GTK_TYPE_ACTION)
+G_DEFINE_TYPE_WITH_PRIVATE (BaulZoomAction, baul_zoom_action, CTK_TYPE_ACTION)
 G_GNUC_END_IGNORE_DEPRECATIONS;
 
 static void
@@ -81,15 +81,15 @@ static void
 connect_proxy (CtkAction *action,
                CtkWidget *proxy)
 {
-    if (GTK_IS_TOOL_ITEM (proxy))
+    if (CTK_IS_TOOL_ITEM (proxy))
     {
-        CtkToolItem *item = GTK_TOOL_ITEM (proxy);
+        CtkToolItem *item = CTK_TOOL_ITEM (proxy);
         BaulZoomAction *zaction = BAUL_ZOOM_ACTION (action);
         BaulNavigationWindow *window = zaction->priv->window;
         CtkWidget *zoom_control;
 
         zoom_control = baul_zoom_control_new ();
-        ctk_container_add (GTK_CONTAINER (item),  zoom_control);
+        ctk_container_add (CTK_CONTAINER (item),  zoom_control);
         ctk_widget_show (zoom_control);
 
         g_signal_connect_object (zoom_control, "zoom_in",
@@ -111,7 +111,7 @@ connect_proxy (CtkAction *action,
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    (* GTK_ACTION_CLASS (parent_class)->connect_proxy) (action, proxy);
+    (* CTK_ACTION_CLASS (parent_class)->connect_proxy) (action, proxy);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -119,21 +119,21 @@ static void
 disconnect_proxy (CtkAction *action,
                   CtkWidget *proxy)
 {
-    if (GTK_IS_TOOL_ITEM (proxy))
+    if (CTK_IS_TOOL_ITEM (proxy))
     {
-        CtkToolItem *item = GTK_TOOL_ITEM (proxy);
+        CtkToolItem *item = CTK_TOOL_ITEM (proxy);
         BaulZoomAction *zaction = BAUL_ZOOM_ACTION (action);
         BaulNavigationWindow *window = zaction->priv->window;
         CtkWidget *child;
 
-        child = ctk_bin_get_child (GTK_BIN (item));
+        child = ctk_bin_get_child (CTK_BIN (item));
 
         g_signal_handlers_disconnect_by_func (window, G_CALLBACK (zoom_changed_callback), child);
 
     }
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    (* GTK_ACTION_CLASS (parent_class)->disconnect_proxy) (action, proxy);
+    (* CTK_ACTION_CLASS (parent_class)->disconnect_proxy) (action, proxy);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -184,7 +184,7 @@ baul_zoom_action_class_init (BaulZoomActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    CtkActionClass *action_class = GTK_ACTION_CLASS (class);
+    CtkActionClass *action_class = CTK_ACTION_CLASS (class);
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     object_class->finalize = baul_zoom_action_finalize;
@@ -193,7 +193,7 @@ baul_zoom_action_class_init (BaulZoomActionClass *class)
 
     parent_class = g_type_class_peek_parent (class);
 
-    action_class->toolbar_item_type = GTK_TYPE_TOOL_ITEM;
+    action_class->toolbar_item_type = CTK_TYPE_TOOL_ITEM;
     action_class->connect_proxy = connect_proxy;
     action_class->disconnect_proxy = disconnect_proxy;
 

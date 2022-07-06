@@ -65,7 +65,7 @@ enum
 };
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (BaulColumnChooser, baul_column_chooser, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulColumnChooser, baul_column_chooser, CTK_TYPE_BOX);
 
 static void baul_column_chooser_constructed (GObject *object);
 
@@ -146,12 +146,12 @@ update_buttons (BaulColumnChooser *chooser)
         CtkTreePath *first;
         CtkTreePath *path;
 
-        ctk_tree_model_get (GTK_TREE_MODEL (chooser->details->store),
+        ctk_tree_model_get (CTK_TREE_MODEL (chooser->details->store),
                             &iter,
                             COLUMN_VISIBLE, &visible,
                             -1);
 
-        path = ctk_tree_model_get_path (GTK_TREE_MODEL (chooser->details->store),
+        path = ctk_tree_model_get_path (CTK_TREE_MODEL (chooser->details->store),
                                         &iter);
         first = ctk_tree_path_new_first ();
 
@@ -160,7 +160,7 @@ update_buttons (BaulColumnChooser *chooser)
         ctk_tree_path_free (path);
         ctk_tree_path_free (first);
 
-        bottom = !ctk_tree_model_iter_next (GTK_TREE_MODEL (chooser->details->store),
+        bottom = !ctk_tree_model_iter_next (CTK_TREE_MODEL (chooser->details->store),
                                             &iter);
 
         ctk_widget_set_sensitive (chooser->details->move_up_button,
@@ -197,9 +197,9 @@ visible_toggled_callback (CtkCellRendererToggle *cell,
     chooser = BAUL_COLUMN_CHOOSER (user_data);
 
     path = ctk_tree_path_new_from_string (path_string);
-    ctk_tree_model_get_iter (GTK_TREE_MODEL (chooser->details->store),
+    ctk_tree_model_get_iter (CTK_TREE_MODEL (chooser->details->store),
                              &iter, path);
-    ctk_tree_model_get (GTK_TREE_MODEL (chooser->details->store),
+    ctk_tree_model_get (CTK_TREE_MODEL (chooser->details->store),
                         &iter, COLUMN_VISIBLE, &visible, -1);
     ctk_list_store_set (chooser->details->store,
                         &iter, COLUMN_VISIBLE, !visible, -1);
@@ -231,20 +231,20 @@ add_tree_view (BaulColumnChooser *chooser)
     CtkTreeSelection *selection;
 
     view = ctk_tree_view_new ();
-    ctk_tree_view_set_headers_visible (GTK_TREE_VIEW (view), FALSE);
+    ctk_tree_view_set_headers_visible (CTK_TREE_VIEW (view), FALSE);
 
     store = ctk_list_store_new (NUM_COLUMNS,
                                 G_TYPE_BOOLEAN,
                                 G_TYPE_STRING,
                                 G_TYPE_STRING);
 
-    ctk_tree_view_set_model (GTK_TREE_VIEW (view),
-                             GTK_TREE_MODEL (store));
+    ctk_tree_view_set_model (CTK_TREE_VIEW (view),
+                             CTK_TREE_MODEL (store));
     g_object_unref (store);
 
-    ctk_tree_view_set_reorderable (GTK_TREE_VIEW (view), TRUE);
+    ctk_tree_view_set_reorderable (CTK_TREE_VIEW (view), TRUE);
 
-    selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (view));
+    selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (view));
     g_signal_connect (selection, "changed",
                       G_CALLBACK (selection_changed_callback), chooser);
 
@@ -253,7 +253,7 @@ add_tree_view (BaulColumnChooser *chooser)
     g_signal_connect (G_OBJECT (cell), "toggled",
                       G_CALLBACK (visible_toggled_callback), chooser);
 
-    ctk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (view),
+    ctk_tree_view_insert_column_with_attributes (CTK_TREE_VIEW (view),
             -1, NULL,
             cell,
             "active", COLUMN_VISIBLE,
@@ -261,29 +261,29 @@ add_tree_view (BaulColumnChooser *chooser)
 
     cell = ctk_cell_renderer_text_new ();
 
-    ctk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (view),
+    ctk_tree_view_insert_column_with_attributes (CTK_TREE_VIEW (view),
             -1, NULL,
             cell,
             "text", COLUMN_LABEL,
             NULL);
 
-    chooser->details->view = GTK_TREE_VIEW (view);
+    chooser->details->view = CTK_TREE_VIEW (view);
     chooser->details->store = store;
 
     ctk_widget_show (view);
 
     scrolled = ctk_scrolled_window_new (NULL, NULL);
-    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
-                                         GTK_SHADOW_IN);
-    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
-                                    GTK_POLICY_AUTOMATIC,
-                                    GTK_POLICY_AUTOMATIC);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (scrolled), FALSE);
+    ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (scrolled),
+                                         CTK_SHADOW_IN);
+    ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (scrolled),
+                                    CTK_POLICY_AUTOMATIC,
+                                    CTK_POLICY_AUTOMATIC);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (scrolled), FALSE);
 
-    ctk_widget_show (GTK_WIDGET (scrolled));
+    ctk_widget_show (CTK_WIDGET (scrolled));
 
-    ctk_container_add (GTK_CONTAINER (scrolled), view);
-    ctk_box_pack_start (GTK_BOX (chooser), scrolled, TRUE, TRUE, 0);
+    ctk_container_add (CTK_CONTAINER (scrolled), view);
+    ctk_box_pack_start (CTK_BOX (chooser), scrolled, TRUE, TRUE, 0);
 }
 
 static void
@@ -302,9 +302,9 @@ move_up_clicked_callback (CtkWidget *button, gpointer user_data)
         CtkTreePath *path;
         CtkTreeIter prev;
 
-        path = ctk_tree_model_get_path (GTK_TREE_MODEL (chooser->details->store), &iter);
+        path = ctk_tree_model_get_path (CTK_TREE_MODEL (chooser->details->store), &iter);
         ctk_tree_path_prev (path);
-        if (ctk_tree_model_get_iter (GTK_TREE_MODEL (chooser->details->store), &prev, path))
+        if (ctk_tree_model_get_iter (CTK_TREE_MODEL (chooser->details->store), &prev, path))
         {
             ctk_list_store_move_before (chooser->details->store,
                                         &iter,
@@ -333,7 +333,7 @@ move_down_clicked_callback (CtkWidget *button, gpointer user_data)
 
         next = iter;
 
-        if (ctk_tree_model_iter_next (GTK_TREE_MODEL (chooser->details->store), &next))
+        if (ctk_tree_model_iter_next (CTK_TREE_MODEL (chooser->details->store), &next))
         {
             ctk_list_store_move_after (chooser->details->store,
                                        &iter,
@@ -358,9 +358,9 @@ button_new_with_mnemonic (const gchar *icon_name, const gchar *str)
     CtkWidget *button;
 
     button = ctk_button_new_with_mnemonic (str);
-    image = ctk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON);
+    image = ctk_image_new_from_icon_name (icon_name, CTK_ICON_SIZE_BUTTON);
 
-    ctk_button_set_image (GTK_BUTTON (button), image);
+    ctk_button_set_image (CTK_BUTTON (button), image);
 
     return button;
 }
@@ -371,7 +371,7 @@ add_buttons (BaulColumnChooser *chooser)
     CtkWidget *box;
     CtkWidget *separator;
 
-    box = ctk_box_new (GTK_ORIENTATION_VERTICAL, 8);
+    box = ctk_box_new (CTK_ORIENTATION_VERTICAL, 8);
     ctk_widget_show (box);
 
     chooser->details->move_up_button = button_new_with_mnemonic ("go-up",
@@ -381,7 +381,7 @@ add_buttons (BaulColumnChooser *chooser)
                       chooser);
     ctk_widget_show_all (chooser->details->move_up_button);
     ctk_widget_set_sensitive (chooser->details->move_up_button, FALSE);
-    ctk_box_pack_start (GTK_BOX (box), chooser->details->move_up_button,
+    ctk_box_pack_start (CTK_BOX (box), chooser->details->move_up_button,
                         FALSE, FALSE, 0);
 
     chooser->details->move_down_button = button_new_with_mnemonic ("go-down",
@@ -391,22 +391,22 @@ add_buttons (BaulColumnChooser *chooser)
                       chooser);
     ctk_widget_show_all (chooser->details->move_down_button);
     ctk_widget_set_sensitive (chooser->details->move_down_button, FALSE);
-    ctk_box_pack_start (GTK_BOX (box), chooser->details->move_down_button,
+    ctk_box_pack_start (CTK_BOX (box), chooser->details->move_down_button,
                         FALSE, FALSE, 0);
 
-    separator = ctk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+    separator = ctk_separator_new (CTK_ORIENTATION_HORIZONTAL);
     ctk_widget_show (separator);
-    ctk_box_pack_start (GTK_BOX (box), separator, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (box), separator, FALSE, FALSE, 0);
 
     chooser->details->use_default_button = ctk_button_new_with_mnemonic (_("Use De_fault"));
     g_signal_connect (chooser->details->use_default_button,
                       "clicked",  G_CALLBACK (use_default_clicked_callback),
                       chooser);
     ctk_widget_show (chooser->details->use_default_button);
-    ctk_box_pack_start (GTK_BOX (box), chooser->details->use_default_button,
+    ctk_box_pack_start (CTK_BOX (box), chooser->details->use_default_button,
                         FALSE, FALSE, 0);
 
-    ctk_box_pack_start (GTK_BOX (chooser), box,
+    ctk_box_pack_start (CTK_BOX (chooser), box,
                         FALSE, FALSE, 0);
 }
 
@@ -466,7 +466,7 @@ baul_column_chooser_init (BaulColumnChooser *chooser)
     g_object_set (G_OBJECT (chooser),
                   "homogeneous", FALSE,
                   "spacing", 8,
-                  "orientation", GTK_ORIENTATION_HORIZONTAL,
+                  "orientation", CTK_ORIENTATION_HORIZONTAL,
                   NULL);
 
     add_tree_view (chooser);
@@ -489,7 +489,7 @@ set_visible_columns (BaulColumnChooser *chooser,
                              visible_columns[i]);
     }
 
-    if (ctk_tree_model_get_iter_first (GTK_TREE_MODEL (chooser->details->store),
+    if (ctk_tree_model_get_iter_first (CTK_TREE_MODEL (chooser->details->store),
                                        &iter))
     {
         do
@@ -497,7 +497,7 @@ set_visible_columns (BaulColumnChooser *chooser,
             char *name;
             gboolean visible;
 
-            ctk_tree_model_get (GTK_TREE_MODEL (chooser->details->store),
+            ctk_tree_model_get (CTK_TREE_MODEL (chooser->details->store),
                                 &iter,
                                 COLUMN_NAME, &name,
                                 -1);
@@ -511,7 +511,7 @@ set_visible_columns (BaulColumnChooser *chooser,
             g_free (name);
 
         }
-        while (ctk_tree_model_iter_next (GTK_TREE_MODEL (chooser->details->store), &iter));
+        while (ctk_tree_model_iter_next (CTK_TREE_MODEL (chooser->details->store), &iter));
     }
 
     g_hash_table_destroy (visible_columns_hash);
@@ -524,14 +524,14 @@ get_column_names (BaulColumnChooser *chooser, gboolean only_visible)
     CtkTreeIter iter;
 
     ret = g_ptr_array_new ();
-    if (ctk_tree_model_get_iter_first (GTK_TREE_MODEL (chooser->details->store),
+    if (ctk_tree_model_get_iter_first (CTK_TREE_MODEL (chooser->details->store),
                                        &iter))
     {
         do
         {
             char *name;
             gboolean visible;
-            ctk_tree_model_get (GTK_TREE_MODEL (chooser->details->store),
+            ctk_tree_model_get (CTK_TREE_MODEL (chooser->details->store),
                                 &iter,
                                 COLUMN_VISIBLE, &visible,
                                 COLUMN_NAME, &name,
@@ -543,7 +543,7 @@ get_column_names (BaulColumnChooser *chooser, gboolean only_visible)
             }
 
         }
-        while (ctk_tree_model_iter_next (GTK_TREE_MODEL (chooser->details->store), &iter));
+        while (ctk_tree_model_iter_next (CTK_TREE_MODEL (chooser->details->store), &iter));
     }
     g_ptr_array_add (ret, NULL);
 
@@ -559,7 +559,7 @@ get_column_iter (BaulColumnChooser *chooser,
 
     g_object_get (BAUL_COLUMN (column), "name", &column_name, NULL);
 
-    if (ctk_tree_model_get_iter_first (GTK_TREE_MODEL (chooser->details->store),
+    if (ctk_tree_model_get_iter_first (CTK_TREE_MODEL (chooser->details->store),
                                        iter))
     {
         do
@@ -567,7 +567,7 @@ get_column_iter (BaulColumnChooser *chooser,
             char *name;
 
 
-            ctk_tree_model_get (GTK_TREE_MODEL (chooser->details->store),
+            ctk_tree_model_get (CTK_TREE_MODEL (chooser->details->store),
                                 iter,
                                 COLUMN_NAME, &name,
                                 -1);
@@ -580,7 +580,7 @@ get_column_iter (BaulColumnChooser *chooser,
 
             g_free (name);
         }
-        while (ctk_tree_model_iter_next (GTK_TREE_MODEL (chooser->details->store), iter));
+        while (ctk_tree_model_iter_next (CTK_TREE_MODEL (chooser->details->store), iter));
     }
     g_free (column_name);
     return FALSE;
@@ -612,7 +612,7 @@ set_column_order (BaulColumnChooser *chooser,
             CtkTreeIter before;
             if (path)
             {
-                ctk_tree_model_get_iter (GTK_TREE_MODEL (chooser->details->store),
+                ctk_tree_model_get_iter (CTK_TREE_MODEL (chooser->details->store),
                                          &before, path);
                 ctk_list_store_move_after (chooser->details->store,
                                            &iter, &before);

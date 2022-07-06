@@ -252,7 +252,7 @@ fm_icon_view_destroy (CtkWidget *object)
         icon_view->details->icons_not_positioned = NULL;
     }
 
-    GTK_WIDGET_CLASS (fm_icon_view_parent_class)->destroy (object);
+    CTK_WIDGET_CLASS (fm_icon_view_parent_class)->destroy (object);
 }
 
 static void
@@ -292,7 +292,7 @@ fm_icon_view_finalize (GObject *object)
 static BaulIconContainer *
 get_icon_container (FMIconView *icon_view)
 {
-    return BAUL_ICON_CONTAINER (ctk_bin_get_child (GTK_BIN (icon_view)));
+    return BAUL_ICON_CONTAINER (ctk_bin_get_child (CTK_BIN (icon_view)));
 }
 
 static gboolean
@@ -472,7 +472,7 @@ action_tighter_layout_callback (CtkAction *action,
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     set_tighter_layout (FM_ICON_VIEW (user_data),
-                        ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)));
+                        ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
@@ -751,18 +751,18 @@ update_layout_menus (FMIconView *view)
         action_name = is_auto_layout ? view->details->sort->action : FM_ACTION_MANUAL_LAYOUT;
         action = ctk_action_group_get_action (view->details->icon_action_group,
                                               action_name);
-        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+        ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action), TRUE);
 
         action = ctk_action_group_get_action (view->details->icon_action_group,
                                               FM_ACTION_TIGHTER_LAYOUT);
-        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                       fm_icon_view_using_tighter_layout (view));
         ctk_action_set_sensitive (action, fm_icon_view_supports_tighter_layout (view));
         ctk_action_set_visible (action, fm_icon_view_supports_tighter_layout (view));
 
         action = ctk_action_group_get_action (view->details->icon_action_group,
                                               FM_ACTION_REVERSED_ORDER);
-        ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+        ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                       view->details->sort_reversed);
         ctk_action_set_sensitive (action, is_auto_layout);
 
@@ -798,7 +798,7 @@ update_layout_menus (FMIconView *view)
                                           FM_ACTION_KEEP_ALIGNED);
     ctk_action_set_visible (action,
                             fm_icon_view_supports_keep_aligned (view));
-    ctk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+    ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   baul_icon_container_is_keep_aligned (get_icon_container (view)));
     ctk_action_set_sensitive (action, !is_auto_layout);
     G_GNUC_END_IGNORE_DEPRECATIONS;
@@ -1281,7 +1281,7 @@ fm_icon_view_begin_loading (FMDirectoryView *view)
 
     icon_view = FM_ICON_VIEW (view);
     file = fm_directory_view_get_directory_as_file (view);
-    icon_container = GTK_WIDGET (get_icon_container (icon_view));
+    icon_container = CTK_WIDGET (get_icon_container (icon_view));
 
     baul_icon_container_begin_loading (BAUL_ICON_CONTAINER (icon_container));
 
@@ -1397,7 +1397,7 @@ fm_icon_view_end_loading (FMDirectoryView *view,
 
     icon_view = FM_ICON_VIEW (view);
 
-    icon_container = GTK_WIDGET (get_icon_container (icon_view));
+    icon_container = CTK_WIDGET (get_icon_container (icon_view));
     baul_icon_container_end_loading (BAUL_ICON_CONTAINER (icon_container), all_files_seen);
 
     monitor = baul_clipboard_monitor_get ();
@@ -1525,7 +1525,7 @@ fm_icon_view_get_background_widget (FMDirectoryView *view)
 {
     g_return_val_if_fail (FM_IS_ICON_VIEW (view), NULL);
 
-    return GTK_WIDGET (get_icon_container (FM_ICON_VIEW (view)));
+    return CTK_WIDGET (get_icon_container (FM_ICON_VIEW (view)));
 }
 
 static gboolean
@@ -1609,7 +1609,7 @@ action_reversed_order_callback (CtkAction *action,
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (set_sort_reversed (icon_view,
-                           ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action))))
+                           ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action))))
     {
         baul_icon_container_sort (get_icon_container (icon_view));
         fm_icon_view_reveal_selection (FM_DIRECTORY_VIEW (icon_view));
@@ -1628,7 +1628,7 @@ action_keep_aligned_callback (CtkAction *action,
     icon_view = FM_ICON_VIEW (user_data);
 
     G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-    keep_aligned = ctk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+    keep_aligned = ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action));
     G_GNUC_END_IGNORE_DEPRECATIONS;
 
     file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (icon_view));
@@ -1866,14 +1866,14 @@ fm_icon_view_merge_menus (FMDirectoryView *view)
                                POPUP_PATH_ICON_APPEARANCE,
                                FM_ACTION_STRETCH,
                                FM_ACTION_STRETCH,
-                               GTK_UI_MANAGER_MENUITEM,
+                               CTK_UI_MANAGER_MENUITEM,
                                FALSE);
         ctk_ui_manager_add_ui (ui_manager,
                                icon_view->details->icon_merge_id,
                                POPUP_PATH_ICON_APPEARANCE,
                                FM_ACTION_UNSTRETCH,
                                FM_ACTION_UNSTRETCH,
-                               GTK_UI_MANAGER_MENUITEM,
+                               CTK_UI_MANAGER_MENUITEM,
                                FALSE);
     }
 
@@ -2441,7 +2441,7 @@ renaming_icon_callback (BaulIconContainer *container,
 
     directory_view = FM_DIRECTORY_VIEW (callback_data);
     baul_clipboard_set_up_editable
-    (GTK_EDITABLE (widget),
+    (CTK_EDITABLE (widget),
      fm_directory_view_get_ui_manager (directory_view),
      FALSE);
 }
@@ -2481,9 +2481,9 @@ fm_icon_view_screen_changed (CtkWidget *widget,
     FMDirectoryView *view;
     GList *files, *l;
 
-    if (GTK_WIDGET_CLASS (fm_icon_view_parent_class)->screen_changed)
+    if (CTK_WIDGET_CLASS (fm_icon_view_parent_class)->screen_changed)
     {
-        GTK_WIDGET_CLASS (fm_icon_view_parent_class)->screen_changed (widget, previous_screen);
+        CTK_WIDGET_CLASS (fm_icon_view_parent_class)->screen_changed (widget, previous_screen);
     }
 
     view = FM_DIRECTORY_VIEW (widget);
@@ -2551,7 +2551,7 @@ fm_icon_view_scroll_event (CtkWidget *widget,
         }
     }
 
-    return GTK_WIDGET_CLASS (fm_icon_view_parent_class)->scroll_event (widget, scroll_event);
+    return CTK_WIDGET_CLASS (fm_icon_view_parent_class)->scroll_event (widget, scroll_event);
 }
 
 static void
@@ -2902,7 +2902,7 @@ icon_view_move_copy_items (BaulIconContainer *container,
                            int x, int y,
                            FMDirectoryView *view)
 {
-    baul_clipboard_clear_if_colliding_uris (GTK_WIDGET (view),
+    baul_clipboard_clear_if_colliding_uris (CTK_WIDGET (view),
                                             item_uris,
                                             fm_directory_view_get_copied_files_atom (view));
     fm_directory_view_move_copy_items (item_uris, relative_item_points, target_dir,
@@ -3010,7 +3010,7 @@ create_icon_container (FMIconView *icon_view)
 
     icon_container = fm_icon_container_new (icon_view);
 
-    ctk_widget_set_can_focus (GTK_WIDGET (icon_container), TRUE);
+    ctk_widget_set_can_focus (CTK_WIDGET (icon_container), TRUE);
 
     g_signal_connect_object (icon_container, "focus_in_event",
                              G_CALLBACK (focus_in_event_callback), icon_view, 0);
@@ -3063,12 +3063,12 @@ create_icon_container (FMIconView *icon_view)
     g_signal_connect_object (icon_container, "store_layout_timestamp",
                              G_CALLBACK (store_layout_timestamp), icon_view, 0);
 
-    ctk_container_add (GTK_CONTAINER (icon_view),
-                       GTK_WIDGET (icon_container));
+    ctk_container_add (CTK_CONTAINER (icon_view),
+                       CTK_WIDGET (icon_container));
 
     fm_icon_view_update_click_mode (icon_view);
 
-    ctk_widget_show (GTK_WIDGET (icon_container));
+    ctk_widget_show (CTK_WIDGET (icon_container));
 
     return icon_container;
 }
@@ -3169,7 +3169,7 @@ fm_icon_view_set_property (GObject         *object,
         if (icon_view->details->compact)
         {
             baul_icon_container_set_layout_mode (get_icon_container (icon_view),
-                                                 ctk_widget_get_direction (GTK_WIDGET(icon_view)) == GTK_TEXT_DIR_RTL ?
+                                                 ctk_widget_get_direction (CTK_WIDGET(icon_view)) == CTK_TEXT_DIR_RTL ?
                                                  BAUL_ICON_LAYOUT_T_B_R_L :
                                                  BAUL_ICON_LAYOUT_T_B_L_R);
             baul_icon_container_set_forced_icon_size (get_icon_container (icon_view),
@@ -3195,9 +3195,9 @@ fm_icon_view_class_init (FMIconViewClass *klass)
     G_OBJECT_CLASS (klass)->set_property = fm_icon_view_set_property;
     G_OBJECT_CLASS (klass)->finalize = fm_icon_view_finalize;
 
-    GTK_WIDGET_CLASS (klass)->destroy = fm_icon_view_destroy;
-    GTK_WIDGET_CLASS (klass)->screen_changed = fm_icon_view_screen_changed;
-    GTK_WIDGET_CLASS (klass)->scroll_event = fm_icon_view_scroll_event;
+    CTK_WIDGET_CLASS (klass)->destroy = fm_icon_view_destroy;
+    CTK_WIDGET_CLASS (klass)->screen_changed = fm_icon_view_screen_changed;
+    CTK_WIDGET_CLASS (klass)->scroll_event = fm_icon_view_scroll_event;
 
     fm_directory_view_class->add_file = fm_icon_view_add_file;
     fm_directory_view_class->flush_added_files = fm_icon_view_flush_added_files;
@@ -3297,7 +3297,7 @@ fm_icon_view_init (FMIconView *icon_view)
     static gboolean setup_sound_preview = FALSE;
     BaulIconContainer *icon_container;
 
-    g_return_if_fail (ctk_bin_get_child (GTK_BIN (icon_view)) == NULL);
+    g_return_if_fail (ctk_bin_get_child (CTK_BIN (icon_view)) == NULL);
 
     icon_view->details = g_new0 (FMIconViewDetails, 1);
     icon_view->details->sort = &sort_criteria[0];
@@ -3307,7 +3307,7 @@ fm_icon_view_init (FMIconView *icon_view)
 
     /* Set our default layout mode */
     baul_icon_container_set_layout_mode (icon_container,
-                                         ctk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
+                                         ctk_widget_get_direction (CTK_WIDGET(icon_container)) == CTK_TEXT_DIR_RTL ?
                                          BAUL_ICON_LAYOUT_R_L_T_B :
                                          BAUL_ICON_LAYOUT_L_R_T_B);
 
@@ -3375,7 +3375,7 @@ fm_icon_view_create (BaulWindowSlotInfo *slot)
                          "compact", FALSE,
                          NULL);
 
-    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (view)), GTK_STYLE_CLASS_VIEW);
+    ctk_style_context_add_class (ctk_widget_get_style_context (CTK_WIDGET (view)), CTK_STYLE_CLASS_VIEW);
 
     return BAUL_VIEW (view);
 }
@@ -3390,7 +3390,7 @@ fm_compact_view_create (BaulWindowSlotInfo *slot)
                          "compact", TRUE,
                          NULL);
 
-    ctk_style_context_add_class (ctk_widget_get_style_context (GTK_WIDGET (view)), GTK_STYLE_CLASS_VIEW);
+    ctk_style_context_add_class (ctk_widget_get_style_context (CTK_WIDGET (view)), CTK_STYLE_CLASS_VIEW);
 
     return BAUL_VIEW (view);
 }

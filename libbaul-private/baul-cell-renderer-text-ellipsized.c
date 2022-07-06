@@ -27,7 +27,7 @@
 #include "baul-cell-renderer-text-ellipsized.h"
 
 G_DEFINE_TYPE (BaulCellRendererTextEllipsized, baul_cell_renderer_text_ellipsized,
-               GTK_TYPE_CELL_RENDERER_TEXT);
+               CTK_TYPE_CELL_RENDERER_TEXT);
 
 static void
 baul_cell_renderer_text_ellipsized_init (BaulCellRendererTextEllipsized *cell)
@@ -49,7 +49,7 @@ baul_cell_renderer_text_ellipsized_get_preferred_width (CtkCellRenderer *cell,
                   "ellipsize-set", FALSE,
                   NULL);
 
-    GTK_CELL_RENDERER_CLASS
+    CTK_CELL_RENDERER_CLASS
             (baul_cell_renderer_text_ellipsized_parent_class)->get_preferred_width (cell, widget,
         										minimum_size, natural_size);
 
@@ -62,7 +62,7 @@ baul_cell_renderer_text_ellipsized_get_preferred_width (CtkCellRenderer *cell,
 static void
 baul_cell_renderer_text_ellipsized_class_init (BaulCellRendererTextEllipsizedClass *klass)
 {
-    CtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (klass);
+    CtkCellRendererClass *cell_class = CTK_CELL_RENDERER_CLASS (klass);
     cell_class->get_preferred_width = baul_cell_renderer_text_ellipsized_get_preferred_width;
 
 }

@@ -87,7 +87,7 @@ editable_select_all_callback (gpointer target)
 {
     CtkEditable *editable;
 
-    editable = GTK_EDITABLE (target);
+    editable = CTK_EDITABLE (target);
     g_assert (editable != NULL);
 
     ctk_editable_set_position (editable, -1);
@@ -97,7 +97,7 @@ editable_select_all_callback (gpointer target)
 static void
 text_view_select_all_callback (gpointer target)
 {
-    g_assert (GTK_IS_TEXT_VIEW (target));
+    g_assert (CTK_IS_TEXT_VIEW (target));
 
     g_signal_emit_by_name (target, "select-all", TRUE);
 }
@@ -236,7 +236,7 @@ editable_connect_callbacks (GObject *object,
 {
     g_signal_connect_after (object, "selection_changed",
                             G_CALLBACK (selection_changed_callback), target_data);
-    selection_changed_callback (GTK_WIDGET (object),
+    selection_changed_callback (CTK_WIDGET (object),
                                 target_data);
 }
 
@@ -255,7 +255,7 @@ static void
 text_buffer_update_sensitivity (CtkTextBuffer *buffer,
                                 TargetCallbackData *target_data)
 {
-    g_assert (GTK_IS_TEXT_BUFFER (buffer));
+    g_assert (CTK_IS_TEXT_BUFFER (buffer));
     g_assert (target_data != NULL);
 
     if (ctk_text_buffer_get_selection_bounds (buffer, NULL, NULL))
@@ -296,7 +296,7 @@ text_view_connect_callbacks (GObject *object,
 {
     CtkTextBuffer *buffer;
 
-    buffer = ctk_text_view_get_buffer (GTK_TEXT_VIEW (object));
+    buffer = ctk_text_view_get_buffer (CTK_TEXT_VIEW (object));
     g_assert (buffer);
 
     g_signal_connect_after (buffer, "mark-set",
@@ -312,7 +312,7 @@ text_view_disconnect_callbacks (GObject *object,
 {
     CtkTextBuffer *buffer;
 
-    buffer = ctk_text_view_get_buffer (GTK_TEXT_VIEW (object));
+    buffer = ctk_text_view_get_buffer (CTK_TEXT_VIEW (object));
     g_assert (buffer);
 
     g_signal_handlers_disconnect_matched (buffer,
@@ -413,7 +413,7 @@ selection_changed_callback (CtkWidget *widget,
     target_data = (TargetCallbackData *) callback_data;
     g_assert (target_data != NULL);
 
-    editable = GTK_EDITABLE (widget);
+    editable = CTK_EDITABLE (widget);
     g_assert (editable != NULL);
 
     if (ctk_editable_get_selection_bounds (editable, &start, &end) && start != end)
@@ -552,7 +552,7 @@ baul_clipboard_real_set_up (gpointer target,
     /* Call the focus changed callback once to merge if the window is
      * already in focus.
      */
-    focus_changed_callback (GTK_WIDGET (target), NULL, target_data);
+    focus_changed_callback (CTK_WIDGET (target), NULL, target_data);
 }
 
 void
@@ -560,8 +560,8 @@ baul_clipboard_set_up_editable (CtkEditable *target,
                                 CtkUIManager *ui_manager,
                                 gboolean shares_selection_changes)
 {
-    g_return_if_fail (GTK_IS_EDITABLE (target));
-    g_return_if_fail (GTK_IS_UI_MANAGER (ui_manager));
+    g_return_if_fail (CTK_IS_EDITABLE (target));
+    g_return_if_fail (CTK_IS_UI_MANAGER (ui_manager));
 
     baul_clipboard_real_set_up (target, ui_manager,
                                 shares_selection_changes,
@@ -574,8 +574,8 @@ void
 baul_clipboard_set_up_text_view (CtkTextView *target,
                                  CtkUIManager *ui_manager)
 {
-    g_return_if_fail (GTK_IS_TEXT_VIEW (target));
-    g_return_if_fail (GTK_IS_UI_MANAGER (ui_manager));
+    g_return_if_fail (CTK_IS_TEXT_VIEW (target));
+    g_return_if_fail (CTK_IS_UI_MANAGER (ui_manager));
 
     baul_clipboard_real_set_up (target, ui_manager, TRUE,
                                 text_view_select_all_callback,
@@ -653,7 +653,7 @@ baul_clipboard_get_uri_list_from_selection_data (CtkSelectionData *selection_dat
 CtkClipboard *
 baul_clipboard_get (CtkWidget *widget)
 {
-    return ctk_clipboard_get_for_display (ctk_widget_get_display (GTK_WIDGET (widget)),
+    return ctk_clipboard_get_for_display (ctk_widget_get_display (CTK_WIDGET (widget)),
                                           GDK_SELECTION_CLIPBOARD);
 }
 

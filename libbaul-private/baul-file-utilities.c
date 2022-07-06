@@ -152,13 +152,13 @@ char* baul_get_user_directory(void)
 		{
 			CtkWidget* dialog = ctk_message_dialog_new(
 				NULL,
-				GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_ERROR,
-				GTK_BUTTONS_CLOSE,
+				CTK_DIALOG_DESTROY_WITH_PARENT,
+				CTK_MESSAGE_ERROR,
+				CTK_BUTTONS_CLOSE,
 				"The path for the directory containing baul settings need read and write permissions: %s",
 				user_directory);
 
-			ctk_dialog_run(GTK_DIALOG(dialog));
+			ctk_dialog_run(CTK_DIALOG(dialog));
 			ctk_widget_destroy(dialog);
 
 			exit(0);

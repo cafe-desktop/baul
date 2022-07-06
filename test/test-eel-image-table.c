@@ -162,12 +162,12 @@ static int
 foo_timeout (gpointer callback_data)
 {
 	static int recursion_count = 0;
-	g_return_val_if_fail (GTK_IS_WINDOW (callback_data), FALSE);
+	g_return_val_if_fail (CTK_IS_WINDOW (callback_data), FALSE);
 
 	recursion_count++;
 
 	g_print ("%s(%d)\n", G_STRFUNC, recursion_count);
-	ctk_widget_queue_resize (GTK_WIDGET (callback_data));
+	ctk_widget_queue_resize (CTK_WIDGET (callback_data));
 
 	recursion_count--;
 
@@ -184,16 +184,16 @@ image_table_size_allocate (CtkWidget *image_table,
 
 	g_return_if_fail (EEL_IS_IMAGE_TABLE (image_table));
 	g_return_if_fail (allocation != NULL);
-	g_return_if_fail (GTK_IS_WINDOW (callback_data));
+	g_return_if_fail (CTK_IS_WINDOW (callback_data));
 
 	recursion_count++;
 
 	if (0) g_timeout_add (0, foo_timeout, callback_data);
 
-	/*ctk_widget_queue_resize (GTK_WIDGET (callback_data));*/
+	/*ctk_widget_queue_resize (CTK_WIDGET (callback_data));*/
 
-	ctk_widget_get_allocation (GTK_WIDGET (image_table), &w_allocation);
-	if (0) ctk_widget_size_allocate (GTK_WIDGET (image_table),
+	ctk_widget_get_allocation (CTK_WIDGET (image_table), &w_allocation);
+	if (0) ctk_widget_size_allocate (CTK_WIDGET (image_table),
 					 &w_allocation);
 
 	g_print ("%s(%d)\n", G_STRFUNC, recursion_count);
@@ -212,19 +212,19 @@ image_table_new_scrolled (void)
 
 	window = test_window_new ("Image Table Test", 10);
 
-	ctk_window_set_default_size (GTK_WINDOW (window), 400, 300);
+	ctk_window_set_default_size (CTK_WINDOW (window), 400, 300);
 
 	/* Scrolled window */
 	scrolled = ctk_scrolled_window_new (NULL, NULL);
-	ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
-					GTK_POLICY_NEVER,
-					GTK_POLICY_AUTOMATIC);
-	ctk_container_add (GTK_CONTAINER (window), scrolled);
+	ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (scrolled),
+					CTK_POLICY_NEVER,
+					CTK_POLICY_AUTOMATIC);
+	ctk_container_add (CTK_CONTAINER (window), scrolled);
 
 	/* Viewport */
  	viewport = ctk_viewport_new (NULL, NULL);
-	ctk_viewport_set_shadow_type (GTK_VIEWPORT (viewport), GTK_SHADOW_OUT);
-	ctk_container_add (GTK_CONTAINER (scrolled), viewport);
+	ctk_viewport_set_shadow_type (CTK_VIEWPORT (viewport), CTK_SHADOW_OUT);
+	ctk_container_add (CTK_CONTAINER (scrolled), viewport);
 
 	image_table = eel_image_table_new (FALSE);
 
@@ -238,7 +238,7 @@ image_table_new_scrolled (void)
 	eel_wrap_table_set_y_justification (EEL_WRAP_TABLE (image_table),
 						 EEL_JUSTIFICATION_END);
 
-	ctk_container_add (GTK_CONTAINER (viewport), image_table);
+	ctk_container_add (CTK_CONTAINER (viewport), image_table);
 
 	g_signal_connect (image_table,
 			    "child_enter",
@@ -275,7 +275,7 @@ image_table_new_scrolled (void)
 		image = labeled_image_new (text, pixbuf_name);
 		g_free (text);
 
-		ctk_container_add (GTK_CONTAINER (image_table), image);
+		ctk_container_add (CTK_CONTAINER (image_table), image);
 		ctk_widget_show (image);
 	}
 

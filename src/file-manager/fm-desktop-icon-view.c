@@ -105,9 +105,9 @@ static BaulIconContainer *
 get_icon_container (FMDesktopIconView *icon_view)
 {
     g_return_val_if_fail (FM_IS_DESKTOP_ICON_VIEW (icon_view), NULL);
-    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (ctk_bin_get_child (GTK_BIN (icon_view))), NULL);
+    g_return_val_if_fail (BAUL_IS_ICON_CONTAINER (ctk_bin_get_child (CTK_BIN (icon_view))), NULL);
 
-    return BAUL_ICON_CONTAINER (ctk_bin_get_child (GTK_BIN (icon_view)));
+    return BAUL_ICON_CONTAINER (ctk_bin_get_child (CTK_BIN (icon_view)));
 }
 
 static void
@@ -168,7 +168,7 @@ net_workarea_changed (FMDesktopIconView *icon_view,
      * workareas array is going to be (each desktop will have four
      * elements in the workareas array describing
      * x,y,width,height) */
-    display = ctk_widget_get_display (GTK_WIDGET (icon_view));
+    display = ctk_widget_get_display (CTK_WIDGET (icon_view));
     gdk_x11_display_error_trap_push (display);
     if (!gdk_property_get (window,
                            gdk_atom_intern ("_NET_NUMBER_OF_DESKTOPS", FALSE),
@@ -327,7 +327,7 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
     GdkSeat *seat;
     GdkDisplay *display;
 
-    seat = gdk_display_get_default_seat (ctk_widget_get_display (GTK_WIDGET (icon_container)));
+    seat = gdk_display_get_default_seat (ctk_widget_get_display (CTK_WIDGET (icon_container)));
     pointer = gdk_seat_get_pointer (seat);
     keyboard = gdk_seat_get_keyboard (seat);
 
@@ -345,7 +345,7 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
     }
 
     /* Stop the event because we don't want anyone else dealing with it. */
-    display = ctk_widget_get_display (GTK_WIDGET (icon_container));
+    display = ctk_widget_get_display (CTK_WIDGET (icon_container));
     gdk_display_flush (display);
     g_signal_stop_emission_by_name (icon_container, "middle_click");
 
@@ -405,7 +405,7 @@ realized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
     allocation.y = 0;
     allocation.width = WidthOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
     allocation.height = HeightOfScreen (gdk_x11_screen_get_xscreen (screen)) / scale;
-    ctk_widget_size_allocate (GTK_WIDGET(get_icon_container(desktop_icon_view)),
+    ctk_widget_size_allocate (CTK_WIDGET(get_icon_container(desktop_icon_view)),
                               &allocation);
 
     root_window = gdk_screen_get_root_window (screen);
@@ -581,22 +581,22 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
     baul_icon_container_set_store_layout_timestamps (icon_container, TRUE);
 
     /* Set allocation to be at 0, 0 */
-    ctk_widget_get_allocation (GTK_WIDGET (icon_container), &allocation);
+    ctk_widget_get_allocation (CTK_WIDGET (icon_container), &allocation);
     allocation.x = 0;
     allocation.y = 0;
-    ctk_widget_set_allocation (GTK_WIDGET (icon_container), &allocation);
+    ctk_widget_set_allocation (CTK_WIDGET (icon_container), &allocation);
 
-    ctk_widget_queue_resize (GTK_WIDGET (icon_container));
+    ctk_widget_queue_resize (CTK_WIDGET (icon_container));
 
-    hadj = ctk_scrollable_get_hadjustment (GTK_SCROLLABLE (icon_container));
-    vadj = ctk_scrollable_get_vadjustment (GTK_SCROLLABLE (icon_container));
+    hadj = ctk_scrollable_get_hadjustment (CTK_SCROLLABLE (icon_container));
+    vadj = ctk_scrollable_get_vadjustment (CTK_SCROLLABLE (icon_container));
 
     ctk_adjustment_set_value (hadj, 0);
     ctk_adjustment_set_value (vadj, 0);
 
-    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (desktop_icon_view),
-                                         GTK_SHADOW_NONE);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (desktop_icon_view), FALSE);
+    ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (desktop_icon_view),
+                                         CTK_SHADOW_NONE);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (desktop_icon_view), FALSE);
 
     fm_directory_view_ignore_hidden_file_preferences
     (FM_DIRECTORY_VIEW (desktop_icon_view));
@@ -606,7 +606,7 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 
     /* Set our default layout mode */
     baul_icon_container_set_layout_mode (icon_container,
-                                         ctk_widget_get_direction (GTK_WIDGET(icon_container)) == GTK_TEXT_DIR_RTL ?
+                                         ctk_widget_get_direction (CTK_WIDGET(icon_container)) == CTK_TEXT_DIR_RTL ?
                                          BAUL_ICON_LAYOUT_T_B_R_L :
                                          BAUL_ICON_LAYOUT_T_B_L_R);
 
@@ -647,7 +647,7 @@ action_new_launcher_callback (CtkAction *action, gpointer data)
 
     desktop_directory = baul_get_desktop_directory ();
 
-    baul_launch_application_from_command (ctk_widget_get_screen (GTK_WIDGET (data)),
+    baul_launch_application_from_command (ctk_widget_get_screen (CTK_WIDGET (data)),
                                           "cafe-desktop-item-edit",
                                           "cafe-desktop-item-edit",
                                           FALSE,
@@ -662,7 +662,7 @@ action_change_background_callback (CtkAction *action,
 {
     g_assert (FM_DIRECTORY_VIEW (data));
 
-    baul_launch_application_from_command (ctk_widget_get_screen (GTK_WIDGET (data)),
+    baul_launch_application_from_command (ctk_widget_get_screen (CTK_WIDGET (data)),
                                           _("Background"),
                                           "cafe-appearance-properties",
                                           FALSE,
@@ -675,7 +675,7 @@ action_empty_trash_conditional_callback (CtkAction *action,
 {
     g_assert (FM_IS_DIRECTORY_VIEW (data));
 
-    baul_file_operations_empty_trash (GTK_WIDGET (data));
+    baul_file_operations_empty_trash (CTK_WIDGET (data));
 }
 
 static gboolean

@@ -518,7 +518,7 @@ get_scaled_icon_size (BaulIconCanvasItem *item,
         EelCanvas *canvas;
 
         canvas = EEL_CANVAS_ITEM (item)->canvas;
-        scale = ctk_widget_get_scale_factor (GTK_WIDGET (canvas));
+        scale = ctk_widget_get_scale_factor (CTK_WIDGET (canvas));
         pixbuf = item->details->pixbuf;
     }
 
@@ -550,7 +550,7 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     g_return_val_if_fail (BAUL_IS_ICON_CANVAS_ITEM (item), NULL);
 
     canvas = EEL_CANVAS_ITEM (item)->canvas;
-    context = ctk_widget_get_style_context (GTK_WIDGET (canvas));
+    context = ctk_widget_get_style_context (CTK_WIDGET (canvas));
 
     ctk_style_context_save (context);
     ctk_style_context_add_class (context, "baul-canvas-item");
@@ -570,15 +570,15 @@ baul_icon_canvas_item_get_drag_surface (BaulIconCanvasItem *item)
     width = EEL_CANVAS_ITEM (item)->x2 - EEL_CANVAS_ITEM (item)->x1;
     height = EEL_CANVAS_ITEM (item)->y2 - EEL_CANVAS_ITEM (item)->y1;
 
-    surface = gdk_window_create_similar_surface (ctk_widget_get_window (GTK_WIDGET (canvas)),
+    surface = gdk_window_create_similar_surface (ctk_widget_get_window (CTK_WIDGET (canvas)),
     						 CAIRO_CONTENT_COLOR_ALPHA,
     						 width, height);
 
     cr = cairo_create (surface);
 
     drag_surface = gdk_cairo_surface_create_from_pixbuf (item->details->pixbuf,
-                                                         ctk_widget_get_scale_factor (GTK_WIDGET (canvas)),
-                                                         ctk_widget_get_window (GTK_WIDGET (canvas)));
+                                                         ctk_widget_get_scale_factor (CTK_WIDGET (canvas)),
+                                                         ctk_widget_get_window (CTK_WIDGET (canvas)));
     ctk_render_icon_surface (context, cr, drag_surface,
                              item_offset_x, item_offset_y);
     cairo_surface_destroy (drag_surface);
@@ -1274,7 +1274,7 @@ draw_label_text (BaulIconCanvasItem *item,
     }
 
     container = BAUL_ICON_CONTAINER (EEL_CANVAS_ITEM (item)->canvas);
-    context = ctk_widget_get_style_context (GTK_WIDGET (container));
+    context = ctk_widget_get_style_context (CTK_WIDGET (container));
 
     text_rect = compute_text_rectangle (item, icon_rect, TRUE, BOUNDS_USAGE_FOR_DISPLAY);
 
@@ -1291,11 +1291,11 @@ draw_label_text (BaulIconCanvasItem *item,
 
     max_text_width = floor (baul_icon_canvas_item_get_max_text_width (item));
 
-    base_state = ctk_widget_get_state_flags (GTK_WIDGET (container));
-    base_state &= ~(GTK_STATE_FLAG_SELECTED | GTK_STATE_FLAG_PRELIGHT);
+    base_state = ctk_widget_get_state_flags (CTK_WIDGET (container));
+    base_state &= ~(CTK_STATE_FLAG_SELECTED | CTK_STATE_FLAG_PRELIGHT);
     state = base_state;
 
-    ctk_widget_style_get (GTK_WIDGET (container),
+    ctk_widget_style_get (CTK_WIDGET (container),
                           "activate_prelight_icon_label", &prelight_label,
                           NULL);
 
@@ -1303,7 +1303,7 @@ draw_label_text (BaulIconCanvasItem *item,
     if (!needs_highlight && have_editable &&
         details->text_width > 0 && details->text_height > 0 &&
         prelight_label && item->details->is_prelit) {
-            state |= GTK_STATE_FLAG_PRELIGHT;
+            state |= CTK_STATE_FLAG_PRELIGHT;
 
             frame_x = text_rect.x0;
             frame_y = text_rect.y0;
@@ -1315,7 +1315,7 @@ draw_label_text (BaulIconCanvasItem *item,
              * but drawing it already allows the theme to change that. */
 
             if (needs_highlight)
-                state |= GTK_STATE_FLAG_SELECTED;
+                state |= CTK_STATE_FLAG_SELECTED;
 
             frame_x = is_rtl_label_beside ? text_rect.x0 + item->details->text_dx : text_rect.x0;
             frame_y = text_rect.y0;
@@ -1354,11 +1354,11 @@ draw_label_text (BaulIconCanvasItem *item,
         state = base_state;
 
         if (prelight_label && item->details->is_prelit) {
-                state |= GTK_STATE_FLAG_PRELIGHT;
+                state |= CTK_STATE_FLAG_PRELIGHT;
         }
 
         if (needs_highlight) {
-                state |= GTK_STATE_FLAG_SELECTED;
+                state |= CTK_STATE_FLAG_SELECTED;
         }
 
         editable_layout = get_label_layout (&item->details->editable_text_layout, item, item->details->editable_text);
@@ -1380,7 +1380,7 @@ draw_label_text (BaulIconCanvasItem *item,
         state = base_state;
 
         if (needs_highlight) {
-                state |= GTK_STATE_FLAG_SELECTED;
+                state |= CTK_STATE_FLAG_SELECTED;
         }
 
         additional_layout = get_label_layout (&item->details->additional_text_layout, item, item->details->additional_text);
@@ -1400,7 +1400,7 @@ draw_label_text (BaulIconCanvasItem *item,
     if (!create_mask && item->details->is_highlighted_as_keyboard_focus)
     {
         if (needs_highlight) {
-                state = GTK_STATE_FLAG_SELECTED;
+                state = CTK_STATE_FLAG_SELECTED;
         }
 
         ctk_style_context_save (context);
@@ -1504,7 +1504,7 @@ draw_stretch_handles (BaulIconCanvasItem *item,
         return;
     }
 
-    widget = GTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas);
+    widget = CTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas);
     style = ctk_widget_get_style_context (widget);
 
     cairo_save (cr);
@@ -1514,7 +1514,7 @@ draw_stretch_handles (BaulIconCanvasItem *item,
     knob_height = gdk_pixbuf_get_height (knob_pixbuf);
 
     /* first draw the box */
-    ctk_style_context_get_color (style, GTK_STATE_FLAG_SELECTED, &color);
+    ctk_style_context_get_color (style, CTK_STATE_FLAG_SELECTED, &color);
     gdk_cairo_set_source_rgba (cr, &color);
 
     cairo_set_dash (cr, &dash, 1, 0);
@@ -1782,15 +1782,15 @@ real_map_surface (BaulIconCanvasItem *icon_item)
     {
         CtkStyleContext *style;
 
-        style = ctk_widget_get_style_context (GTK_WIDGET (canvas));
+        style = ctk_widget_get_style_context (CTK_WIDGET (canvas));
 
-        if (ctk_widget_has_focus (GTK_WIDGET (canvas))) {
-                ctk_style_context_get (style, GTK_STATE_FLAG_SELECTED,
-                                       GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+        if (ctk_widget_has_focus (CTK_WIDGET (canvas))) {
+                ctk_style_context_get (style, CTK_STATE_FLAG_SELECTED,
+                                       CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                        &c, NULL);
         } else {
-                ctk_style_context_get (style, GTK_STATE_FLAG_ACTIVE,
-                                       GTK_STYLE_PROPERTY_BACKGROUND_COLOR,
+                ctk_style_context_get (style, CTK_STATE_FLAG_ACTIVE,
+                                       CTK_STYLE_PROPERTY_BACKGROUND_COLOR,
                                        &c, NULL);
         }
 
@@ -1804,8 +1804,8 @@ real_map_surface (BaulIconCanvasItem *icon_item)
     }
 
     surface = gdk_cairo_surface_create_from_pixbuf (temp_pixbuf,
-                                                    ctk_widget_get_scale_factor (GTK_WIDGET (canvas)),
-                                                    ctk_widget_get_window (GTK_WIDGET (canvas)));
+                                                    ctk_widget_get_scale_factor (CTK_WIDGET (canvas)),
+                                                    ctk_widget_get_window (CTK_WIDGET (canvas)));
     g_object_unref (temp_pixbuf);
 
     return surface;
@@ -1820,7 +1820,7 @@ map_surface (BaulIconCanvasItem *icon_item)
             && icon_item->details->rendered_is_highlighted_for_selection == icon_item->details->is_highlighted_for_selection
             && icon_item->details->rendered_is_highlighted_for_drop == icon_item->details->is_highlighted_for_drop
             && icon_item->details->rendered_is_highlighted_for_clipboard == icon_item->details->is_highlighted_for_clipboard
-            && (icon_item->details->is_highlighted_for_selection && icon_item->details->rendered_is_focused == ctk_widget_has_focus (GTK_WIDGET (EEL_CANVAS_ITEM (icon_item)->canvas)))))
+            && (icon_item->details->is_highlighted_for_selection && icon_item->details->rendered_is_focused == ctk_widget_has_focus (CTK_WIDGET (EEL_CANVAS_ITEM (icon_item)->canvas)))))
     {
         if (icon_item->details->rendered_surface != NULL)
         {
@@ -1832,7 +1832,7 @@ map_surface (BaulIconCanvasItem *icon_item)
         icon_item->details->rendered_is_highlighted_for_selection = icon_item->details->is_highlighted_for_selection;
         icon_item->details->rendered_is_highlighted_for_drop = icon_item->details->is_highlighted_for_drop;
         icon_item->details->rendered_is_highlighted_for_clipboard = icon_item->details->is_highlighted_for_clipboard;
-        icon_item->details->rendered_is_focused = ctk_widget_has_focus (GTK_WIDGET (EEL_CANVAS_ITEM (icon_item)->canvas));
+        icon_item->details->rendered_is_focused = ctk_widget_has_focus (CTK_WIDGET (EEL_CANVAS_ITEM (icon_item)->canvas));
     }
 
     cairo_surface_reference (icon_item->details->rendered_surface);
@@ -1856,7 +1856,7 @@ draw_embedded_text (BaulIconCanvasItem *item,
         return;
     }
 
-    widget = GTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas);
+    widget = CTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas);
 
     if (item->details->embedded_text_layout != NULL)
     {
@@ -1930,7 +1930,7 @@ baul_icon_canvas_item_draw (EelCanvasItem *item,
         return;
     }
 
-    context = ctk_widget_get_style_context (GTK_WIDGET (container));
+    context = ctk_widget_get_style_context (CTK_WIDGET (container));
     ctk_style_context_save (context);
     ctk_style_context_add_class (context, "baul-canvas-item");
 
@@ -1988,7 +1988,7 @@ create_label_layout (BaulIconCanvasItem *item,
     canvas_item = EEL_CANVAS_ITEM (item);
 
     container = BAUL_ICON_CONTAINER (canvas_item->canvas);
-    context = ctk_widget_get_pango_context (GTK_WIDGET (canvas_item->canvas));
+    context = ctk_widget_get_pango_context (CTK_WIDGET (canvas_item->canvas));
     layout = pango_layout_new (context);
     #if PANGO_CHECK_VERSION (1, 44, 0)
     attr_list = pango_attr_list_new ();
@@ -2631,16 +2631,16 @@ hit_test_stretch_handle (BaulIconCanvasItem *item,
     if (probe_canvas_rect.x0 < icon_rect.x0 + knob_width)
     {
         if (probe_canvas_rect.y0 < icon_rect.y0 + knob_height)
-            hit_corner = GTK_CORNER_TOP_LEFT;
+            hit_corner = CTK_CORNER_TOP_LEFT;
         else if (probe_canvas_rect.y1 >= icon_rect.y1 - knob_height)
-            hit_corner = GTK_CORNER_BOTTOM_LEFT;
+            hit_corner = CTK_CORNER_BOTTOM_LEFT;
     }
     else if (probe_canvas_rect.x1 >= icon_rect.x1 - knob_width)
     {
         if (probe_canvas_rect.y0 < icon_rect.y0 + knob_height)
-            hit_corner = GTK_CORNER_TOP_RIGHT;
+            hit_corner = CTK_CORNER_TOP_RIGHT;
         else if (probe_canvas_rect.y1 >= icon_rect.y1 - knob_height)
-            hit_corner = GTK_CORNER_BOTTOM_RIGHT;
+            hit_corner = CTK_CORNER_BOTTOM_RIGHT;
     }
     if (corner)
         *corner = hit_corner;
@@ -3091,7 +3091,7 @@ baul_icon_canvas_item_accessible_get_parent (AtkObject *accessible)
         return NULL;
     }
 
-    return ctk_widget_get_accessible (GTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas));
+    return ctk_widget_get_accessible (CTK_WIDGET (EEL_CANVAS_ITEM (item)->canvas));
 }
 
 static int

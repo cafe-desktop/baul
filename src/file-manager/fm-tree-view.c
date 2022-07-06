@@ -133,7 +133,7 @@ static CtkWindow *fm_tree_view_get_containing_window (FMTreeView *view);
 
 static void create_popup_menu (FMTreeView *view);
 
-G_DEFINE_TYPE_WITH_CODE (FMTreeView, fm_tree_view, GTK_TYPE_SCROLLED_WINDOW,
+G_DEFINE_TYPE_WITH_CODE (FMTreeView, fm_tree_view, CTK_TYPE_SCROLLED_WINDOW,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_SIDEBAR,
                                  fm_tree_view_iface_init));
 #define parent_class fm_tree_view_parent_class
@@ -171,7 +171,7 @@ show_iter_for_file (FMTreeView *view, BaulFile *file, CtkTreeIter *iter)
     {
         return FALSE;
     }
-    model = GTK_TREE_MODEL (view->details->child_model);
+    model = CTK_TREE_MODEL (view->details->child_model);
 
     /* check if file is visible in the same root as the currently selected folder is */
     ctk_tree_view_get_cursor (view->details->tree_widget, &path, NULL);
@@ -271,12 +271,12 @@ show_selection_idle_callback (gpointer callback_data)
     }
     view->details->selecting = FALSE;
 
-    path = ctk_tree_model_get_path (GTK_TREE_MODEL (view->details->child_model), &iter);
+    path = ctk_tree_model_get_path (CTK_TREE_MODEL (view->details->child_model), &iter);
     sort_path = ctk_tree_model_sort_convert_child_path_to_path
                 (view->details->sort_model, path);
     ctk_tree_path_free (path);
     ctk_tree_view_set_cursor (view->details->tree_widget, sort_path, NULL, FALSE);
-    if (ctk_widget_get_realized (GTK_WIDGET (view->details->tree_widget)))
+    if (ctk_widget_get_realized (CTK_WIDGET (view->details->tree_widget)))
     {
         ctk_tree_view_scroll_to_cell (view->details->tree_widget, sort_path, NULL, FALSE, 0, 0);
     }
@@ -366,7 +366,7 @@ sort_model_path_to_file (FMTreeView *view, CtkTreePath *path)
 {
     CtkTreeIter iter;
 
-    if (!ctk_tree_model_get_iter (GTK_TREE_MODEL (view->details->sort_model), &iter, path))
+    if (!ctk_tree_model_get_iter (CTK_TREE_MODEL (view->details->sort_model), &iter, path))
     {
         return NULL;
     }
@@ -385,7 +385,7 @@ got_activation_uri_callback (BaulFile *file, gpointer callback_data)
 
     view = FM_TREE_VIEW (callback_data);
 
-    screen = ctk_widget_get_screen (GTK_WIDGET (view->details->tree_widget));
+    screen = ctk_widget_get_screen (CTK_WIDGET (view->details->tree_widget));
 
     g_assert (file == view->details->activation_file);
 
@@ -510,7 +510,7 @@ selection_changed_timer_callback(FMTreeView *view)
     CtkTreeIter iter;
     CtkTreeSelection *selection;
 
-    selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (view->details->tree_widget));
+    selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (view->details->tree_widget));
 
     /* no activation if popup menu is open */
     if (view->details->popup_file != NULL)
@@ -656,7 +656,7 @@ move_copy_items_callback (BaulTreeViewDragDest *dest,
 
     view = FM_TREE_VIEW (user_data);
 
-    baul_clipboard_clear_if_colliding_uris (GTK_WIDGET (view),
+    baul_clipboard_clear_if_colliding_uris (CTK_WIDGET (view),
                                             item_uris,
                                             copied_files_atom);
     baul_file_operations_copy_move
@@ -664,7 +664,7 @@ move_copy_items_callback (BaulTreeViewDragDest *dest,
      NULL,
      target_uri,
      action,
-     GTK_WIDGET (view->details->tree_widget),
+     CTK_WIDGET (view->details->tree_widget),
      NULL, NULL);
 }
 
@@ -806,7 +806,7 @@ button_pressed_callback (CtkTreeView *treeview, GdkEventButton *event,
         if (baul_file_is_directory (view->details->popup_file) &&
                 baul_file_can_write (view->details->popup_file))
         {
-            ctk_clipboard_request_contents (baul_clipboard_get (GTK_WIDGET (view->details->tree_widget)),
+            ctk_clipboard_request_contents (baul_clipboard_get (CTK_WIDGET (view->details->tree_widget)),
                                             copied_files_atom,
                                             clipboard_contents_received_callback, g_object_ref (view));
         }
@@ -866,7 +866,7 @@ button_pressed_callback (CtkTreeView *treeview, GdkEventButton *event,
             ctk_widget_hide (view->details->popup_unmount_separator);
         }
 
-        ctk_menu_popup_at_pointer (GTK_MENU (view->details->popup),
+        ctk_menu_popup_at_pointer (CTK_MENU (view->details->popup),
                                    (const GdkEvent*) event);
 
         ctk_tree_view_set_cursor (view->details->tree_widget, cursor_path, NULL, FALSE);
@@ -957,7 +957,7 @@ new_folder_done (GFile *new_folder, gpointer data)
      */
     list = g_list_prepend (NULL, baul_file_get (new_folder));
 
-    fm_properties_window_present (list, GTK_WIDGET (data));
+    fm_properties_window_present (list, CTK_WIDGET (data));
 
     baul_file_list_free (list);
 }
@@ -969,7 +969,7 @@ fm_tree_view_create_folder_cb (CtkWidget *menu_item,
     char *parent_uri;
 
     parent_uri = baul_file_get_uri (view->details->popup_file);
-    baul_file_operations_new_folder (GTK_WIDGET (view->details->tree_widget),
+    baul_file_operations_new_folder (CTK_WIDGET (view->details->tree_widget),
                                      NULL,
                                      parent_uri,
                                      new_folder_done, view->details->tree_widget);
@@ -998,7 +998,7 @@ copy_or_cut_files (FMTreeView *view,
     targets = ctk_target_table_new_from_list (target_list, &n_targets);
     ctk_target_list_unref (target_list);
 
-    ctk_clipboard_set_with_data (baul_clipboard_get (GTK_WIDGET (view->details->tree_widget)),
+    ctk_clipboard_set_with_data (baul_clipboard_get (CTK_WIDGET (view->details->tree_widget)),
                                  targets, n_targets,
                                  baul_get_clipboard_callback, baul_clear_clipboard_callback,
                                  NULL);
@@ -1064,13 +1064,13 @@ paste_clipboard_data (FMTreeView *view,
         baul_file_operations_copy_move
         (item_uris, NULL, destination_uri,
          cut ? GDK_ACTION_MOVE : GDK_ACTION_COPY,
-         GTK_WIDGET (view->details->tree_widget),
+         CTK_WIDGET (view->details->tree_widget),
          NULL, NULL);
 
         /* If items are cut then remove from clipboard */
         if (cut)
         {
-            ctk_clipboard_clear (baul_clipboard_get (GTK_WIDGET (view)));
+            ctk_clipboard_clear (baul_clipboard_get (CTK_WIDGET (view)));
         }
 
     	g_list_free_full (item_uris, g_free);
@@ -1098,7 +1098,7 @@ static void
 fm_tree_view_paste_cb (CtkWidget *menu_item,
                        FMTreeView *view)
 {
-    ctk_clipboard_request_contents (baul_clipboard_get (GTK_WIDGET (view->details->tree_widget)),
+    ctk_clipboard_request_contents (baul_clipboard_get (CTK_WIDGET (view->details->tree_widget)),
                                     copied_files_atom,
                                     paste_into_clipboard_received_callback, view);
 }
@@ -1110,13 +1110,13 @@ fm_tree_view_get_containing_window (FMTreeView *view)
 
     g_assert (FM_IS_TREE_VIEW (view));
 
-    window = ctk_widget_get_ancestor (GTK_WIDGET (view), GTK_TYPE_WINDOW);
+    window = ctk_widget_get_ancestor (CTK_WIDGET (view), CTK_TYPE_WINDOW);
     if (window == NULL)
     {
         return NULL;
     }
 
-    return GTK_WINDOW (window);
+    return CTK_WINDOW (window);
 }
 
 static void
@@ -1165,7 +1165,7 @@ fm_tree_view_properties_cb (CtkWidget *menu_item,
 
     list = g_list_prepend (NULL, baul_file_ref (view->details->popup_file));
 
-    fm_properties_window_present (list, GTK_WIDGET (view->details->tree_widget));
+    fm_properties_window_present (list, CTK_WIDGET (view->details->tree_widget));
 
     baul_file_list_free (list);
 }
@@ -1260,7 +1260,7 @@ create_popup_menu (FMTreeView *view)
 
     popup = ctk_menu_new ();
 
-    ctk_menu_set_reserve_toggle_size (GTK_MENU (popup), FALSE);
+    ctk_menu_set_reserve_toggle_size (CTK_MENU (popup), FALSE);
 
     g_signal_connect (popup, "deactivate",
                       G_CALLBACK (popup_menu_deactivated),
@@ -1273,7 +1273,7 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_open_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_open = menu_item;
 
     /* add the "open in new tab" menu item */
@@ -1282,7 +1282,7 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_open_in_new_tab_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_open_in_new_window = menu_item;
 
     /* add the "open in new window" menu item */
@@ -1291,10 +1291,10 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_open_in_new_window_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_open_in_new_window = menu_item;
 
-    eel_ctk_menu_append_separator (GTK_MENU (popup));
+    eel_ctk_menu_append_separator (CTK_MENU (popup));
 
     /* add the "create folder" menu item */
     menu_item = eel_image_menu_item_new_from_icon (NULL, _("Create _Folder"));
@@ -1302,10 +1302,10 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_create_folder_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_create_folder = menu_item;
 
-    eel_ctk_menu_append_separator (GTK_MENU (popup));
+    eel_ctk_menu_append_separator (CTK_MENU (popup));
 
     /* add the "cut folder" menu item */
     menu_item = eel_image_menu_item_new_from_icon ("edit-cut", _("Cu_t"));
@@ -1313,7 +1313,7 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_cut_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_cut = menu_item;
 
     /* add the "copy folder" menu item */
@@ -1322,7 +1322,7 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_copy_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_copy = menu_item;
 
     /* add the "paste files into folder" menu item */
@@ -1331,10 +1331,10 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_paste_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_paste = menu_item;
 
-    eel_ctk_menu_append_separator (GTK_MENU (popup));
+    eel_ctk_menu_append_separator (CTK_MENU (popup));
 
     /* add the "move to trash" menu item */
     menu_item = eel_image_menu_item_new_from_icon (BAUL_ICON_TRASH_FULL, _("Mo_ve to Trash"));
@@ -1342,7 +1342,7 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_trash_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_trash = menu_item;
 
     /* add the "delete" menu item */
@@ -1351,10 +1351,10 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_delete_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_delete = menu_item;
 
-    eel_ctk_menu_append_separator (GTK_MENU (popup));
+    eel_ctk_menu_append_separator (CTK_MENU (popup));
 
     /* add the "Unmount" menu item */
     menu_item = eel_image_menu_item_new_from_icon ("media-eject", _("_Unmount"));
@@ -1362,7 +1362,7 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_unmount_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_unmount = menu_item;
 
     /* add the "Eject" menu item */
@@ -1371,12 +1371,12 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_eject_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_eject = menu_item;
 
     /* add the unmount separator menu item */
     view->details->popup_unmount_separator =
-        GTK_WIDGET (eel_ctk_menu_append_separator (GTK_MENU (popup)));
+        CTK_WIDGET (eel_ctk_menu_append_separator (CTK_MENU (popup)));
 
     /* add the "properties" menu item */
     menu_item = eel_image_menu_item_new_from_icon ("document-properties", _("_Properties"));
@@ -1384,7 +1384,7 @@ create_popup_menu (FMTreeView *view)
                       G_CALLBACK (fm_tree_view_properties_cb),
                       view);
     ctk_widget_show (menu_item);
-    ctk_menu_shell_append (GTK_MENU_SHELL (popup), menu_item);
+    ctk_menu_shell_append (CTK_MENU_SHELL (popup), menu_item);
     view->details->popup_properties = menu_item;
 
     view->details->popup = popup;
@@ -1403,13 +1403,13 @@ create_tree (FMTreeView *view)
     BaulWindowSlotInfo *slot;
 
     view->details->child_model = fm_tree_model_new ();
-    view->details->sort_model = GTK_TREE_MODEL_SORT
-                                (ctk_tree_model_sort_new_with_model (GTK_TREE_MODEL (view->details->child_model)));
-    view->details->tree_widget = GTK_TREE_VIEW
-                                 (ctk_tree_view_new_with_model (GTK_TREE_MODEL (view->details->sort_model)));
+    view->details->sort_model = CTK_TREE_MODEL_SORT
+                                (ctk_tree_model_sort_new_with_model (CTK_TREE_MODEL (view->details->child_model)));
+    view->details->tree_widget = CTK_TREE_VIEW
+                                 (ctk_tree_view_new_with_model (CTK_TREE_MODEL (view->details->sort_model)));
     g_object_unref (view->details->sort_model);
 
-    ctk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (view->details->sort_model),
+    ctk_tree_sortable_set_default_sort_func (CTK_TREE_SORTABLE (view->details->sort_model),
             compare_rows, view, NULL);
 
     g_signal_connect_object
@@ -1481,12 +1481,12 @@ create_tree (FMTreeView *view)
 
     ctk_tree_view_append_column (view->details->tree_widget, column);
 
-    ctk_widget_show (GTK_WIDGET (view->details->tree_widget));
+    ctk_widget_show (CTK_WIDGET (view->details->tree_widget));
 
-    ctk_container_add (GTK_CONTAINER (view),
-                       GTK_WIDGET (view->details->tree_widget));
+    ctk_container_add (CTK_CONTAINER (view),
+                       CTK_WIDGET (view->details->tree_widget));
 
-    g_signal_connect_object (ctk_tree_view_get_selection (GTK_TREE_VIEW (view->details->tree_widget)), "changed",
+    g_signal_connect_object (ctk_tree_view_get_selection (CTK_TREE_VIEW (view->details->tree_widget)), "changed",
                              G_CALLBACK (selection_changed_callback), view, 0);
 
     g_signal_connect (G_OBJECT (view->details->tree_widget),
@@ -1570,15 +1570,15 @@ fm_tree_view_init (FMTreeView *view)
 {
     view->details = g_new0 (FMTreeViewDetails, 1);
 
-    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view),
-                                    GTK_POLICY_AUTOMATIC,
-                                    GTK_POLICY_AUTOMATIC);
-    ctk_scrolled_window_set_hadjustment (GTK_SCROLLED_WINDOW (view), NULL);
-    ctk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (view), NULL);
-    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (view), GTK_SHADOW_IN);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (view), FALSE);
+    ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (view),
+                                    CTK_POLICY_AUTOMATIC,
+                                    CTK_POLICY_AUTOMATIC);
+    ctk_scrolled_window_set_hadjustment (CTK_SCROLLED_WINDOW (view), NULL);
+    ctk_scrolled_window_set_vadjustment (CTK_SCROLLED_WINDOW (view), NULL);
+    ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (view), CTK_SHADOW_IN);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (view), FALSE);
 
-    ctk_widget_show (GTK_WIDGET (view));
+    ctk_widget_show (CTK_WIDGET (view));
 
     g_signal_connect_object (view, "parent_set",
                              G_CALLBACK (parent_set_callback), view, 0);

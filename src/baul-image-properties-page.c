@@ -95,7 +95,7 @@ typedef struct
 static GType baul_image_properties_page_provider_get_type (void);
 static void  property_page_provider_iface_init                (BaulPropertyPageProviderIface *iface);
 
-G_DEFINE_TYPE_WITH_PRIVATE (BaulImagePropertiesPage, baul_image_properties_page, GTK_TYPE_BOX);
+G_DEFINE_TYPE_WITH_PRIVATE (BaulImagePropertiesPage, baul_image_properties_page, CTK_TYPE_BOX);
 
 G_DEFINE_TYPE_WITH_CODE (BaulImagePropertiesPageProvider, baul_image_properties_page_provider, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (BAUL_TYPE_PROPERTY_PAGE_PROVIDER,
@@ -142,17 +142,17 @@ append_label (CtkWidget *vbox,
     CtkWidget *label;
 
     label = ctk_label_new (NULL);
-    ctk_label_set_markup (GTK_LABEL (label), str);
-    ctk_label_set_xalign (GTK_LABEL (label), 0);
-    ctk_label_set_yalign (GTK_LABEL (label), 0);
-    ctk_label_set_selectable (GTK_LABEL (label), TRUE);
+    ctk_label_set_markup (CTK_LABEL (label), str);
+    ctk_label_set_xalign (CTK_LABEL (label), 0);
+    ctk_label_set_yalign (CTK_LABEL (label), 0);
+    ctk_label_set_selectable (CTK_LABEL (label), TRUE);
 
     /* setting can_focus to FALSE will allow to make the label
      * selectable but without the cursor showing.
      */
     ctk_widget_set_can_focus (label, FALSE);
 
-    ctk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+    ctk_box_pack_start (CTK_BOX (vbox), label, FALSE, FALSE, 0);
     ctk_widget_show (label);
 
     return label;
@@ -643,20 +643,20 @@ baul_image_properties_page_init (BaulImagePropertiesPage *page)
 {
     page->details = baul_image_properties_page_get_instance_private (page);
 
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (page), GTK_ORIENTATION_VERTICAL);
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (page), CTK_ORIENTATION_VERTICAL);
 
-    ctk_box_set_homogeneous (GTK_BOX (page), FALSE);
-    ctk_box_set_spacing (GTK_BOX (page), 2);
-    ctk_container_set_border_width (GTK_CONTAINER (page), 6);
+    ctk_box_set_homogeneous (CTK_BOX (page), FALSE);
+    ctk_box_set_spacing (CTK_BOX (page), 2);
+    ctk_container_set_border_width (CTK_CONTAINER (page), 6);
 
-    page->details->vbox = ctk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+    page->details->vbox = ctk_box_new (CTK_ORIENTATION_VERTICAL, 6);
     page->details->loading_label =
         append_label (page->details->vbox,_("loading..."));
-    ctk_box_pack_start (GTK_BOX (page),
+    ctk_box_pack_start (CTK_BOX (page),
                         page->details->vbox,
                         FALSE, TRUE, 2);
 
-    ctk_widget_show_all (GTK_WIDGET (page));
+    ctk_widget_show_all (CTK_WIDGET (page));
 }
 
 static GList *
@@ -706,7 +706,7 @@ get_property_pages (BaulPropertyPageProvider *provider,
     real_page = baul_property_page_new
                 ("BaulImagePropertiesPage::property_page",
                  ctk_label_new (_("Image")),
-                 GTK_WIDGET (page));
+                 CTK_WIDGET (page));
     pages = g_list_append (pages, real_page);
 
     return pages;

@@ -71,7 +71,7 @@ enum
     NUM_COLUMNS
 };
 
-G_DEFINE_TYPE (BaulMimeApplicationChooser, baul_mime_application_chooser, GTK_TYPE_BOX);
+G_DEFINE_TYPE (BaulMimeApplicationChooser, baul_mime_application_chooser, CTK_TYPE_BOX);
 
 static void refresh_model             (BaulMimeApplicationChooser *chooser);
 static void refresh_model_soon        (BaulMimeApplicationChooser *chooser);
@@ -128,14 +128,14 @@ default_toggled_cb (CtkCellRendererToggle *renderer,
     chooser = BAUL_MIME_APPLICATION_CHOOSER (user_data);
 
     path = ctk_tree_path_new_from_string (path_str);
-    if (ctk_tree_model_get_iter (GTK_TREE_MODEL (chooser->details->model),
+    if (ctk_tree_model_get_iter (CTK_TREE_MODEL (chooser->details->model),
                                  &iter, path))
     {
         gboolean is_default;
         gboolean success;
         GAppInfo *info;
 
-        ctk_tree_model_get (GTK_TREE_MODEL (chooser->details->model),
+        ctk_tree_model_get (CTK_TREE_MODEL (chooser->details->model),
                             &iter,
                             COLUMN_DEFAULT, &is_default,
                             COLUMN_APPINFO, &info,
@@ -164,7 +164,7 @@ default_toggled_cb (CtkCellRendererToggle *renderer,
                 message = g_strdup_printf (_("Could not set application as the default: %s"), error->message);
                 eel_show_error_dialog (_("Could not set as default application"),
                                        message,
-                                       GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (chooser))));
+                                       CTK_WINDOW (ctk_widget_get_toplevel (CTK_WIDGET (chooser))));
                 g_free (message);
                 g_error_free (error);
             }
@@ -184,14 +184,14 @@ get_selected_application (BaulMimeApplicationChooser *chooser)
     CtkTreeSelection *selection;
     GAppInfo *info;
 
-    selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (chooser->details->treeview));
+    selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (chooser->details->treeview));
 
     info = NULL;
     if (ctk_tree_selection_get_selected (selection,
                                          NULL,
                                          &iter))
     {
-        ctk_tree_model_get (GTK_TREE_MODEL (chooser->details->model),
+        ctk_tree_model_get (CTK_TREE_MODEL (chooser->details->model),
                             &iter,
                             COLUMN_APPINFO, &info,
                             -1);
@@ -234,25 +234,25 @@ create_tree_view (BaulMimeApplicationChooser *chooser)
     CtkTreeSelection *selection;
 
     treeview = ctk_tree_view_new ();
-    ctk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
+    ctk_tree_view_set_headers_visible (CTK_TREE_VIEW (treeview), FALSE);
 
     store = ctk_list_store_new (NUM_COLUMNS,
                                 G_TYPE_APP_INFO,
                                 G_TYPE_BOOLEAN,
                                 G_TYPE_ICON,
                                 G_TYPE_STRING);
-    ctk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
+    ctk_tree_sortable_set_sort_column_id (CTK_TREE_SORTABLE (store),
                                           COLUMN_NAME,
-                                          GTK_SORT_ASCENDING);
-    ctk_tree_view_set_model (GTK_TREE_VIEW (treeview),
-                             GTK_TREE_MODEL (store));
+                                          CTK_SORT_ASCENDING);
+    ctk_tree_view_set_model (CTK_TREE_VIEW (treeview),
+                             CTK_TREE_MODEL (store));
     chooser->details->model = store;
 
     renderer = ctk_cell_renderer_toggle_new ();
     g_signal_connect (renderer, "toggled",
                       G_CALLBACK (default_toggled_cb),
                       chooser);
-    ctk_cell_renderer_toggle_set_radio (GTK_CELL_RENDERER_TOGGLE (renderer),
+    ctk_cell_renderer_toggle_set_radio (CTK_CELL_RENDERER_TOGGLE (renderer),
                                         TRUE);
 
     column = ctk_tree_view_column_new_with_attributes (_("Default"),
@@ -260,17 +260,17 @@ create_tree_view (BaulMimeApplicationChooser *chooser)
              "active",
              COLUMN_DEFAULT,
              NULL);
-    ctk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+    ctk_tree_view_append_column (CTK_TREE_VIEW (treeview), column);
     chooser->details->toggle_renderer = renderer;
 
     renderer = ctk_cell_renderer_pixbuf_new ();
-    g_object_set (renderer, "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
+    g_object_set (renderer, "stock-size", CTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
     column = ctk_tree_view_column_new_with_attributes (_("Icon"),
              renderer,
              "gicon",
              COLUMN_ICON,
              NULL);
-    ctk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+    ctk_tree_view_append_column (CTK_TREE_VIEW (treeview), column);
 
     renderer = ctk_cell_renderer_text_new ();
     column = ctk_tree_view_column_new_with_attributes (_("Name"),
@@ -278,9 +278,9 @@ create_tree_view (BaulMimeApplicationChooser *chooser)
              "markup",
              COLUMN_NAME,
              NULL);
-    ctk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+    ctk_tree_view_append_column (CTK_TREE_VIEW (treeview), column);
 
-    selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+    selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (treeview));
     g_signal_connect (selection, "changed",
                       G_CALLBACK (selection_changed_cb),
                       chooser);
@@ -307,8 +307,8 @@ add_clicked_cb (CtkButton *button,
         dialog = baul_add_application_dialog_new (chooser->details->uri,
                  chooser->details->orig_mime_type);
     }
-    ctk_window_set_screen (GTK_WINDOW (dialog),
-                           ctk_widget_get_screen (GTK_WIDGET (chooser)));
+    ctk_window_set_screen (CTK_WINDOW (dialog),
+                           ctk_widget_get_screen (CTK_WIDGET (chooser)));
     ctk_widget_show (dialog);
 }
 
@@ -333,7 +333,7 @@ remove_clicked_cb (CtkButton *button,
         {
             eel_show_error_dialog (_("Could not remove application"),
                                    error->message,
-                                   GTK_WINDOW (ctk_widget_get_toplevel (GTK_WIDGET (chooser))));
+                                   CTK_WINDOW (ctk_widget_get_toplevel (CTK_WIDGET (chooser))));
             g_error_free (error);
 
         }
@@ -379,65 +379,65 @@ baul_mime_application_chooser_init (BaulMimeApplicationChooser *chooser)
 
     chooser->details->for_multiple_files = FALSE;
 
-    ctk_orientable_set_orientation (GTK_ORIENTABLE (chooser), GTK_ORIENTATION_VERTICAL);
+    ctk_orientable_set_orientation (CTK_ORIENTABLE (chooser), CTK_ORIENTATION_VERTICAL);
 
-    ctk_container_set_border_width (GTK_CONTAINER (chooser), 8);
-    ctk_box_set_spacing (GTK_BOX (chooser), 0);
-    ctk_box_set_homogeneous (GTK_BOX (chooser), FALSE);
+    ctk_container_set_border_width (CTK_CONTAINER (chooser), 8);
+    ctk_box_set_spacing (CTK_BOX (chooser), 0);
+    ctk_box_set_homogeneous (CTK_BOX (chooser), FALSE);
 
     chooser->details->label = ctk_label_new ("");
-    ctk_label_set_xalign (GTK_LABEL (chooser->details->label), 0);
-    ctk_label_set_line_wrap (GTK_LABEL (chooser->details->label), TRUE);
-    ctk_label_set_line_wrap_mode (GTK_LABEL (chooser->details->label),
+    ctk_label_set_xalign (CTK_LABEL (chooser->details->label), 0);
+    ctk_label_set_line_wrap (CTK_LABEL (chooser->details->label), TRUE);
+    ctk_label_set_line_wrap_mode (CTK_LABEL (chooser->details->label),
                                   PANGO_WRAP_WORD_CHAR);
-    ctk_box_pack_start (GTK_BOX (chooser), chooser->details->label,
+    ctk_box_pack_start (CTK_BOX (chooser), chooser->details->label,
                         FALSE, FALSE, 0);
 
     ctk_widget_show (chooser->details->label);
 
     scrolled = ctk_scrolled_window_new (NULL, NULL);
 
-    ctk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
-                                    GTK_POLICY_AUTOMATIC,
-                                    GTK_POLICY_AUTOMATIC);
-    ctk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
-                                         GTK_SHADOW_IN);
-    ctk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (scrolled), FALSE);
+    ctk_scrolled_window_set_policy (CTK_SCROLLED_WINDOW (scrolled),
+                                    CTK_POLICY_AUTOMATIC,
+                                    CTK_POLICY_AUTOMATIC);
+    ctk_scrolled_window_set_shadow_type (CTK_SCROLLED_WINDOW (scrolled),
+                                         CTK_SHADOW_IN);
+    ctk_scrolled_window_set_overlay_scrolling (CTK_SCROLLED_WINDOW (scrolled), FALSE);
 
     ctk_widget_show (scrolled);
-    ctk_box_pack_start (GTK_BOX (chooser), scrolled, TRUE, TRUE, 6);
+    ctk_box_pack_start (CTK_BOX (chooser), scrolled, TRUE, TRUE, 6);
 
     chooser->details->treeview = create_tree_view (chooser);
     ctk_widget_show (chooser->details->treeview);
 
-    ctk_container_add (GTK_CONTAINER (scrolled),
+    ctk_container_add (CTK_CONTAINER (scrolled),
                        chooser->details->treeview);
 
-    box = ctk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
-    ctk_box_set_spacing (GTK_BOX (box), 6);
-    ctk_button_box_set_layout (GTK_BUTTON_BOX (box), GTK_BUTTONBOX_END);
-    ctk_box_pack_start (GTK_BOX (chooser), box, FALSE, FALSE, 6);
+    box = ctk_button_box_new (CTK_ORIENTATION_HORIZONTAL);
+    ctk_box_set_spacing (CTK_BOX (box), 6);
+    ctk_button_box_set_layout (CTK_BUTTON_BOX (box), CTK_BUTTONBOX_END);
+    ctk_box_pack_start (CTK_BOX (chooser), box, FALSE, FALSE, 6);
     ctk_widget_show (box);
 
     button = ctk_button_new_with_mnemonic (_("_Add"));
-    ctk_button_set_image (GTK_BUTTON (button), ctk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_BUTTON));
+    ctk_button_set_image (CTK_BUTTON (button), ctk_image_new_from_icon_name ("list-add", CTK_ICON_SIZE_BUTTON));
 
     g_signal_connect (button, "clicked",
                       G_CALLBACK (add_clicked_cb),
                       chooser);
 
     ctk_widget_show (button);
-    ctk_container_add (GTK_CONTAINER (box), button);
+    ctk_container_add (CTK_CONTAINER (box), button);
 
     button = ctk_button_new_with_mnemonic (_("_Remove"));
-    ctk_button_set_image (GTK_BUTTON (button), ctk_image_new_from_icon_name ("list-remove", GTK_ICON_SIZE_BUTTON));
+    ctk_button_set_image (CTK_BUTTON (button), ctk_image_new_from_icon_name ("list-remove", CTK_ICON_SIZE_BUTTON));
 
     g_signal_connect (button, "clicked",
                       G_CALLBACK (remove_clicked_cb),
                       chooser);
 
     ctk_widget_show (button);
-    ctk_container_add (GTK_CONTAINER (box), button);
+    ctk_container_add (CTK_CONTAINER (box), button);
 
     chooser->details->remove_button = button;
 
@@ -447,7 +447,7 @@ baul_mime_application_chooser_init (BaulMimeApplicationChooser *chooser)
                       chooser);
 
     ctk_widget_show (button);
-    ctk_container_add (GTK_CONTAINER (box), button);
+    ctk_container_add (CTK_CONTAINER (box), button);
 
     g_signal_connect (baul_signaller_get_current (),
                       "mime_data_changed",
@@ -507,7 +507,7 @@ refresh_model (BaulMimeApplicationChooser *chooser)
     CtkTreeSelection *selection;
     CtkTreeViewColumn *column;
 
-    column = ctk_tree_view_get_column (GTK_TREE_VIEW (chooser->details->treeview), 0);
+    column = ctk_tree_view_get_column (CTK_TREE_VIEW (chooser->details->treeview), 0);
     ctk_tree_view_column_set_visible (column, TRUE);
 
     ctk_list_store_clear (chooser->details->model);
@@ -542,14 +542,14 @@ refresh_model (BaulMimeApplicationChooser *chooser)
         g_free (escaped);
     }
 
-    selection = ctk_tree_view_get_selection (GTK_TREE_VIEW (chooser->details->treeview));
+    selection = ctk_tree_view_get_selection (CTK_TREE_VIEW (chooser->details->treeview));
 
     if (applications)
     {
         g_object_set (chooser->details->toggle_renderer,
                       "visible", TRUE,
                       NULL);
-        ctk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+        ctk_tree_selection_set_mode (selection, CTK_SELECTION_SINGLE);
     }
     else
     {
@@ -565,7 +565,7 @@ refresh_model (BaulMimeApplicationChooser *chooser)
                             -1);
         g_free (name);
 
-        ctk_tree_selection_set_mode (selection, GTK_SELECTION_NONE);
+        ctk_tree_selection_set_mode (selection, CTK_SELECTION_NONE);
     }
 
     if (default_app)
@@ -635,7 +635,7 @@ set_uri_and_type (BaulMimeApplicationChooser *chooser,
                              emname, chooser->details->type_description);
     g_free (emname);
 
-    ctk_label_set_markup (GTK_LABEL (chooser->details->label), label);
+    ctk_label_set_markup (CTK_LABEL (chooser->details->label), label);
 
     g_free (label);
     g_free (name);
@@ -705,7 +705,7 @@ set_uri_and_type_for_multiple_files (BaulMimeApplicationChooser *chooser,
 
     label = g_strdup_printf (_("Open all files of type \"%s\" with:"),
                              chooser->details->type_description);
-    ctk_label_set_markup (GTK_LABEL (chooser->details->label), label);
+    ctk_label_set_markup (CTK_LABEL (chooser->details->label), label);
 
     g_free (label);
 

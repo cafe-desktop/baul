@@ -90,7 +90,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (EelImageTable, eel_image_table, EEL_TYPE_WRAP_TABLE)
 static void
 eel_image_table_init (EelImageTable *image_table)
 {
-    ctk_widget_set_has_window (GTK_WIDGET (image_table), FALSE);
+    ctk_widget_set_has_window (CTK_WIDGET (image_table), FALSE);
 
     image_table->details = eel_image_table_get_instance_private (image_table);
 }
@@ -110,10 +110,10 @@ eel_image_table_realize (CtkWidget *widget)
     g_assert (EEL_IS_IMAGE_TABLE (widget));
 
     /* Chain realize */
-    GTK_WIDGET_CLASS (eel_image_table_parent_class)->realize (widget);
+    CTK_WIDGET_CLASS (eel_image_table_parent_class)->realize (widget);
 
     windowed_ancestor = find_windowed_ancestor (widget);
-    g_assert (GTK_IS_WIDGET (windowed_ancestor));
+    g_assert (CTK_IS_WIDGET (windowed_ancestor));
 
     ctk_widget_add_events (windowed_ancestor,
                            GDK_BUTTON_PRESS_MASK
@@ -177,7 +177,7 @@ eel_image_table_remove (CtkContainer *container,
         image_table->details->child_being_pressed = NULL;
     }
 
-    GTK_CONTAINER_CLASS (eel_image_table_parent_class)->remove (container, child);
+    CTK_CONTAINER_CLASS (eel_image_table_parent_class)->remove (container, child);
 }
 
 static GType
@@ -201,7 +201,7 @@ image_table_emit_signal (EelImageTable *image_table,
     EelImageTableEvent event;
 
     g_assert (EEL_IS_IMAGE_TABLE (image_table));
-    g_assert (GTK_IS_WIDGET (child));
+    g_assert (CTK_IS_WIDGET (child));
     g_assert (signal_index < LAST_SIGNAL);
 
     event.x = x;
@@ -221,8 +221,8 @@ static void
 eel_image_table_class_init (EelImageTableClass *image_table_class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (image_table_class);
-    CtkWidgetClass *widget_class = GTK_WIDGET_CLASS (image_table_class);
-    CtkContainerClass *container_class = GTK_CONTAINER_CLASS (image_table_class);
+    CtkWidgetClass *widget_class = CTK_WIDGET_CLASS (image_table_class);
+    CtkContainerClass *container_class = CTK_CONTAINER_CLASS (image_table_class);
 
     /* GObjectClass */
     object_class->finalize = eel_image_table_finalize;
@@ -243,7 +243,7 @@ eel_image_table_class_init (EelImageTableClass *image_table_class)
                                        eel_marshal_VOID__OBJECT_POINTER,
                                        G_TYPE_NONE,
                                        2,
-                                       GTK_TYPE_WIDGET,
+                                       CTK_TYPE_WIDGET,
                                        G_TYPE_POINTER);
     image_table_signals[CHILD_LEAVE] = g_signal_new ("child_leave",
                                        G_TYPE_FROM_CLASS (object_class),
@@ -253,7 +253,7 @@ eel_image_table_class_init (EelImageTableClass *image_table_class)
                                        eel_marshal_VOID__OBJECT_POINTER,
                                        G_TYPE_NONE,
                                        2,
-                                       GTK_TYPE_WIDGET,
+                                       CTK_TYPE_WIDGET,
                                        G_TYPE_POINTER);
     image_table_signals[CHILD_PRESSED] = g_signal_new ("child_pressed",
                                          G_TYPE_FROM_CLASS (object_class),
@@ -263,7 +263,7 @@ eel_image_table_class_init (EelImageTableClass *image_table_class)
                                          eel_marshal_VOID__OBJECT_POINTER,
                                          G_TYPE_NONE,
                                          2,
-                                         GTK_TYPE_WIDGET,
+                                         CTK_TYPE_WIDGET,
                                          G_TYPE_POINTER);
     image_table_signals[CHILD_RELEASED] = g_signal_new ("child_released",
                                           G_TYPE_FROM_CLASS (object_class),
@@ -273,7 +273,7 @@ eel_image_table_class_init (EelImageTableClass *image_table_class)
                                           eel_marshal_VOID__OBJECT_POINTER,
                                           G_TYPE_NONE,
                                           2,
-                                          GTK_TYPE_WIDGET,
+                                          CTK_TYPE_WIDGET,
                                           G_TYPE_POINTER);
     image_table_signals[CHILD_CLICKED] = g_signal_new ("child_clicked",
                                          G_TYPE_FROM_CLASS (object_class),
@@ -283,7 +283,7 @@ eel_image_table_class_init (EelImageTableClass *image_table_class)
                                          eel_marshal_VOID__OBJECT_POINTER,
                                          G_TYPE_NONE,
                                          2,
-                                         GTK_TYPE_WIDGET,
+                                         CTK_TYPE_WIDGET,
                                          G_TYPE_POINTER);
 
 }
@@ -360,7 +360,7 @@ image_table_handle_motion (EelImageTable *image_table,
 CtkWidget *
 find_windowed_ancestor (CtkWidget *widget)
 {
-    g_return_val_if_fail (GTK_IS_WIDGET (widget), NULL);
+    g_return_val_if_fail (CTK_IS_WIDGET (widget), NULL);
 
     while (widget && !ctk_widget_get_has_window (widget))
     {
@@ -426,11 +426,11 @@ signal_connect_while_realized (CtkWidget *object,
 {
     RealizeDisconnectInfo *info;
 
-    g_return_if_fail (GTK_IS_WIDGET (object));
+    g_return_if_fail (CTK_IS_WIDGET (object));
     g_return_if_fail (name != NULL);
     g_return_if_fail (name[0] != '\0');
     g_return_if_fail (callback != NULL);
-    g_return_if_fail (GTK_IS_WIDGET (realized_widget));
+    g_return_if_fail (CTK_IS_WIDGET (realized_widget));
     g_return_if_fail (ctk_widget_get_realized (realized_widget));
 
     info = g_new0 (RealizeDisconnectInfo, 1);
@@ -463,7 +463,7 @@ ancestor_enter_notify_event (CtkWidget *widget,
                              GdkEventCrossing *event,
                              gpointer event_data)
 {
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
     g_assert (event != NULL);
 
@@ -481,11 +481,11 @@ ancestor_leave_notify_event (CtkWidget *widget,
     int x = -1;
     int y = -1;
 
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
     g_assert (event != NULL);
 
-    bounds = eel_ctk_widget_get_bounds (GTK_WIDGET (event_data));
+    bounds = eel_ctk_widget_get_bounds (CTK_WIDGET (event_data));
 
     if (eel_irect_contains_point (bounds, event->x, event->y))
     {
@@ -503,7 +503,7 @@ ancestor_motion_notify_event (CtkWidget *widget,
                               GdkEventMotion *event,
                               gpointer event_data)
 {
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
     g_assert (event != NULL);
 
@@ -520,7 +520,7 @@ ancestor_button_press_event (CtkWidget *widget,
     EelImageTable *image_table;
     CtkWidget *child;
 
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
     g_assert (event != NULL);
 
@@ -562,7 +562,7 @@ ancestor_button_release_event (CtkWidget *widget,
     CtkWidget *released_emit_child = NULL;
     CtkWidget *clicked_emit_child = NULL;
 
-    g_assert (GTK_IS_WIDGET (widget));
+    g_assert (CTK_IS_WIDGET (widget));
     g_assert (EEL_IS_IMAGE_TABLE (event_data));
     g_assert (event != NULL);
 
@@ -630,7 +630,7 @@ eel_image_table_new (gboolean homogeneous)
 
     eel_wrap_table_set_homogeneous (EEL_WRAP_TABLE (image_table), homogeneous);
 
-    return GTK_WIDGET (image_table);
+    return CTK_WIDGET (image_table);
 }
 
 /**
@@ -651,7 +651,7 @@ eel_image_table_add_empty_image (EelImageTable *image_table)
     g_return_val_if_fail (EEL_IS_IMAGE_TABLE (image_table), NULL);
 
     empty = eel_labeled_image_new (NULL, NULL);
-    ctk_container_add (GTK_CONTAINER (image_table), empty);
+    ctk_container_add (CTK_CONTAINER (image_table), empty);
     ctk_widget_set_sensitive (empty, FALSE);
 
     return empty;
