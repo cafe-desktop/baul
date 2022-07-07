@@ -230,9 +230,7 @@ update_bookmarks (BaulWindow *window)
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
 
     window->details->bookmarks_merge_id = ctk_ui_manager_new_merge_id (ui_manager);
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     window->details->bookmarks_action_group = ctk_action_group_new ("BookmarksGroup");
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_connect (window->details->bookmarks_action_group, "connect-proxy",
                       G_CALLBACK (connect_proxy_cb), NULL);
 

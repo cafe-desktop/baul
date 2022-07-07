@@ -399,14 +399,12 @@ real_set_allow_up (BaulWindow *window,
 
     g_assert (BAUL_IS_WINDOW (window));
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_UP);
     ctk_action_set_sensitive (action, allow);
     action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_UP_ACCEL);
     ctk_action_set_sensitive (action, allow);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 void
@@ -450,20 +448,16 @@ baul_window_sync_allow_stop (BaulWindow *window,
 
     g_assert (BAUL_IS_WINDOW (window));
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_STOP);
     allow_stop = ctk_action_get_sensitive (action);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (slot != window->details->active_pane->active_slot ||
             allow_stop != slot->allow_stop)
     {
         if (slot == window->details->active_pane->active_slot)
         {
-            G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
             ctk_action_set_sensitive (action, slot->allow_stop);
-            G_GNUC_END_IGNORE_DEPRECATIONS;
         }
 
         if (ctk_widget_get_realized (CTK_WIDGET (window)))
@@ -483,11 +477,9 @@ baul_window_allow_reload (BaulWindow *window, gboolean allow)
 
     g_return_if_fail (BAUL_IS_WINDOW (window));
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_RELOAD);
     ctk_action_set_sensitive (action, allow);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 void
@@ -1059,7 +1051,6 @@ baul_window_key_press_event (CtkWidget *widget,
             action = NULL;
 
             action_groups = ctk_ui_manager_get_action_groups (window->details->ui_manager);
-            G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
             while (action_groups != NULL && action == NULL)
             {
                 action = ctk_action_group_get_action (action_groups->data, extra_window_keybindings[i].action);
@@ -1072,7 +1063,6 @@ baul_window_key_press_event (CtkWidget *widget,
                 ctk_action_activate (action);
                 return TRUE;
             }
-            G_GNUC_END_IGNORE_DEPRECATIONS;
 
             break;
         }
@@ -1105,7 +1095,6 @@ action_view_as_callback (CtkAction *action,
 
     window = data->window;
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         BaulWindowSlot *slot;
@@ -1114,7 +1103,6 @@ action_view_as_callback (CtkAction *action,
         baul_window_slot_set_content_view (slot,
                                            data->id);
     }
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static CtkRadioAction *
@@ -1132,13 +1120,11 @@ add_view_as_menu_item (BaulWindow *window,
     info = baul_view_factory_lookup (identifier);
 
     g_snprintf (action_name, sizeof (action_name), "view_as_%d", index);
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_radio_action_new (action_name,
                                    _(info->view_menu_label_with_mnemonic),
                                    _(info->display_location_label),
                                    NULL,
                                    0);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (index >= 1 && index <= 9)
     {
@@ -1153,17 +1139,13 @@ add_view_as_menu_item (BaulWindow *window,
 		g_assert (accel_keyval != CDK_KEY_VoidSymbol);
 
         ctk_accel_map_add_entry (accel_path, accel_keyval, CDK_CONTROL_MASK);
-        G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         ctk_action_set_accel_path (CTK_ACTION (action), accel_path);
-        G_GNUC_END_IGNORE_DEPRECATIONS;
     }
 
     if (window->details->view_as_radio_action != NULL)
     {
-        G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         ctk_radio_action_set_group (action,
                                     ctk_radio_action_get_group (window->details->view_as_radio_action));
-        G_GNUC_END_IGNORE_DEPRECATIONS;
     }
     else if (index != 0)
     {
@@ -1179,11 +1161,9 @@ add_view_as_menu_item (BaulWindow *window,
                            G_CALLBACK (action_view_as_callback),
                            data, (GClosureNotify) free_activate_view_data, 0);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     ctk_action_group_add_action (window->details->view_as_action_group,
                                  CTK_ACTION (action));
     g_object_unref (action);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     ctk_ui_manager_add_ui (window->details->ui_manager,
                            merge_id,
@@ -1233,14 +1213,12 @@ update_extra_viewer_in_view_as_menus (BaulWindow *window,
         window->details->extra_viewer_merge_id = 0;
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (window->details->extra_viewer_radio_action != NULL)
     {
         ctk_action_group_remove_action (window->details->view_as_action_group,
                                         CTK_ACTION (window->details->extra_viewer_radio_action));
         window->details->extra_viewer_radio_action = NULL;
     }
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (id != NULL)
     {
@@ -1318,10 +1296,8 @@ baul_window_synch_view_as_menus (BaulWindow *window)
     }
 
     g_snprintf (action_name, sizeof (action_name), "view_as_%d", index);
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->view_as_action_group,
                                           action_name);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Don't trigger the action callback when we're synchronizing */
     g_signal_handlers_block_matched (action,
@@ -1330,9 +1306,7 @@ baul_window_synch_view_as_menus (BaulWindow *window)
                                      NULL,
                                      action_view_as_callback,
                                      NULL);
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action), TRUE);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_handlers_unblock_matched (action,
                                        G_SIGNAL_MATCH_FUNC,
                                        0, 0,
@@ -1393,10 +1367,8 @@ load_view_as_menu (BaulWindow *window)
 
     merge_id = ctk_ui_manager_new_merge_id (window->details->ui_manager);
     window->details->short_list_merge_id = merge_id;
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     window->details->view_as_action_group = ctk_action_group_new ("ViewAsGroup");
     ctk_action_group_set_translation_domain (window->details->view_as_action_group, GETTEXT_PACKAGE);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     window->details->view_as_radio_action = NULL;
 
     if (g_list_length (window->details->short_list_viewers) > 1) {
@@ -1544,7 +1516,6 @@ baul_window_sync_zoom_widgets (BaulWindow *window)
         can_zoom_out = FALSE;
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->main_action_group,
                                           BAUL_ACTION_ZOOM_IN);
     ctk_action_set_visible (action, supports_zooming);
@@ -1559,7 +1530,6 @@ baul_window_sync_zoom_widgets (BaulWindow *window)
                                           BAUL_ACTION_ZOOM_NORMAL);
     ctk_action_set_visible (action, supports_zooming);
     ctk_action_set_sensitive (action, can_zoom);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     g_signal_emit (window, signals[ZOOM_CHANGED], 0,
                    zoom_level, supports_zooming, can_zoom,

@@ -190,7 +190,6 @@ action_show_hide_toolbar_callback (CtkAction *action,
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_toolbar (window);
@@ -199,7 +198,6 @@ action_show_hide_toolbar_callback (CtkAction *action,
     {
         baul_navigation_window_hide_toolbar (window);
     }
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 
@@ -212,7 +210,6 @@ action_show_hide_sidebar_callback (CtkAction *action,
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_sidebar (window);
@@ -221,7 +218,6 @@ action_show_hide_sidebar_callback (CtkAction *action,
     {
         baul_navigation_window_hide_sidebar (window);
     }
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -250,9 +246,7 @@ action_show_hide_location_bar_callback (CtkAction *action,
 
     window = BAUL_WINDOW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     is_active = ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action));
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Do the active pane first, because this will trigger an update of the menu items,
      * which in turn relies on the active pane. */
@@ -272,7 +266,6 @@ action_show_hide_statusbar_callback (CtkAction *action,
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
     {
         baul_navigation_window_show_status_bar (window);
@@ -281,7 +274,6 @@ action_show_hide_statusbar_callback (CtkAction *action,
     {
         baul_navigation_window_hide_status_bar (window);
     }
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -293,9 +285,7 @@ action_split_view_callback (CtkAction *action,
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     is_active = ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action));
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     if (is_active != baul_navigation_window_split_view_showing (window))
     {
         BaulWindow *baul_window;
@@ -323,7 +313,6 @@ baul_navigation_window_update_show_hide_menu_items (BaulNavigationWindow *window
 
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_TOOLBAR);
     ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
@@ -348,7 +337,6 @@ baul_navigation_window_update_show_hide_menu_items (BaulNavigationWindow *window
                                           BAUL_ACTION_SHOW_HIDE_EXTRA_PANE);
     ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   baul_navigation_window_split_view_showing (window));
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 void
@@ -358,12 +346,10 @@ baul_navigation_window_update_spatial_menu_item (BaulNavigationWindow *window)
 
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_FOLDER_WINDOW);
     ctk_action_set_visible (action,
                             !g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_BROWSER));
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -474,9 +460,7 @@ refresh_go_menu (BaulNavigationWindow *window)
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
 
     window->details->go_menu_merge_id = ctk_ui_manager_new_merge_id (ui_manager);
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     window->details->go_menu_action_group = ctk_action_group_new ("GoMenuGroup");
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     g_signal_connect (window->details->go_menu_action_group, "connect-proxy",
                       G_CALLBACK (connect_proxy_cb), NULL);
 
@@ -581,7 +565,6 @@ baul_navigation_window_update_split_view_actions_sensitivity (BaulNavigationWind
         next_pane_is_in_same_location = FALSE;
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     /* switch to next pane */
     action = ctk_action_group_get_action (action_group, "SplitViewNextPane");
     ctk_action_set_sensitive (action, have_multiple_panes);
@@ -589,7 +572,6 @@ baul_navigation_window_update_split_view_actions_sensitivity (BaulNavigationWind
     /* same location */
     action = ctk_action_group_get_action (action_group, "SplitViewSameLocation");
     ctk_action_set_sensitive (action, have_multiple_panes && !next_pane_is_in_same_location);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* clean up */
     if (active_pane_location)
@@ -672,7 +654,6 @@ action_show_search_callback (CtkAction *action,
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     search_action =
         ctk_action_group_get_action (window->details->navigation_action_group,
                                      BAUL_ACTION_SEARCH);
@@ -688,7 +669,6 @@ action_show_search_callback (CtkAction *action,
         ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (search_action),
                                       TRUE);
     }
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -707,9 +687,7 @@ action_show_hide_search_callback (CtkAction *action,
 
     window = BAUL_NAVIGATION_WINDOW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     var_action = ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action));
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (var_action)
     {
@@ -944,7 +922,6 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
     CtkAction *action;
     int i;
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action_group = ctk_action_group_new ("NavigationActions");
     ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     window->details->navigation_action_group = action_group;
@@ -1009,7 +986,6 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
     ctk_action_group_add_action (action_group,
                                  action);
     g_object_unref (action);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
 
@@ -1020,7 +996,6 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
         gchar accelerator[80];
 
         snprintf(action_name, sizeof (action_name), "Tab%d", i);
-        G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         action = ctk_action_new (action_name, NULL, NULL, NULL);
         g_object_set_data (G_OBJECT (action), "num", GINT_TO_POINTER (i));
         g_signal_connect (action, "activate",
@@ -1028,7 +1003,6 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
         snprintf(accelerator, sizeof (accelerator), "<alt>%d", (i+1)%10);
         ctk_action_group_add_action_with_accel (action_group, action, accelerator);
         g_object_unref (action);
-        G_GNUC_END_IGNORE_DEPRECATIONS;
         ctk_ui_manager_add_ui (ui_manager,
                                ctk_ui_manager_new_merge_id (ui_manager),
                                "/",
@@ -1039,13 +1013,11 @@ baul_navigation_window_initialize_actions (BaulNavigationWindow *window)
 
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (action_group, BAUL_ACTION_SEARCH);
     g_object_set (action, "short_label", _("_Search"), NULL);
 
     action = ctk_action_group_get_action (action_group, "ShowSearch");
     ctk_action_set_sensitive (action, TRUE);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     ctk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui_manager */

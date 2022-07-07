@@ -576,7 +576,6 @@ baul_navigation_window_key_press_event (CtkWidget *widget,
         {
             CtkAction *action;
 
-            G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
             action = ctk_action_group_get_action (window->details->navigation_action_group,
                                                   extra_navigation_window_keybindings[i].action);
 
@@ -586,7 +585,6 @@ baul_navigation_window_key_press_event (CtkWidget *widget,
                 ctk_action_activate (action);
                 return TRUE;
             }
-            G_GNUC_END_IGNORE_DEPRECATIONS;
 
             break;
         }
@@ -756,12 +754,10 @@ baul_navigation_window_allow_back (BaulNavigationWindow *window, gboolean allow)
 {
     CtkAction *action;
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_BACK);
 
     ctk_action_set_sensitive (action, allow);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 void
@@ -769,12 +765,10 @@ baul_navigation_window_allow_forward (BaulNavigationWindow *window, gboolean all
 {
     CtkAction *action;
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           BAUL_ACTION_FORWARD);
 
     ctk_action_set_sensitive (action, allow);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -899,7 +893,6 @@ baul_navigation_window_set_search_button (BaulNavigationWindow *window,
 {
     CtkAction *action;
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (window->details->navigation_action_group,
                                           "Search");
 
@@ -908,7 +901,6 @@ baul_navigation_window_set_search_button (BaulNavigationWindow *window,
     g_object_set_data (G_OBJECT (action), "blocked", GINT_TO_POINTER (1));
     ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action), state);
     g_object_set_data (G_OBJECT (action), "blocked", NULL);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -1387,7 +1379,6 @@ baul_navigation_window_split_view_on (BaulNavigationWindow *window)
     baul_window_slot_go_to (slot, location, FALSE);
     g_object_unref (location);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (BAUL_NAVIGATION_WINDOW (BAUL_WINDOW_PANE (pane)->window)->details->navigation_action_group,
                                           BAUL_ACTION_SHOW_HIDE_LOCATION_BAR);
     if (ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)))
@@ -1398,7 +1389,6 @@ baul_navigation_window_split_view_on (BaulNavigationWindow *window)
     {
         baul_navigation_window_pane_hide_location_bar (pane, TRUE);
     }
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 void

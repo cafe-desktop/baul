@@ -173,11 +173,9 @@ baul_navigation_window_load_extension_toolbar_items (BaulNavigationWindow *windo
 
     merge_id = ctk_ui_manager_new_merge_id (ui_manager);
     window->details->extensions_toolbar_merge_id = merge_id;
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action_group = ctk_action_group_new ("ExtensionsToolbarGroup");
     window->details->extensions_toolbar_action_group = action_group;
     ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     ctk_ui_manager_insert_action_group (ui_manager, action_group, -1);
     g_object_unref (action_group); /* owned by ui manager */
 
@@ -189,13 +187,11 @@ baul_navigation_window_load_extension_toolbar_items (BaulNavigationWindow *windo
 
         action = baul_toolbar_action_from_menu_item (item, CTK_WIDGET (window));
 
-        G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         ctk_action_group_add_action (action_group,
                                      CTK_ACTION (action));
         g_object_unref (action);
 
         action_name = ctk_action_get_name (action);
-        G_GNUC_END_IGNORE_DEPRECATIONS;
 
         ctk_ui_manager_add_ui (ui_manager,
                                merge_id,

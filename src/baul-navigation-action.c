@@ -53,9 +53,7 @@ enum
     PROP_WINDOW
 };
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 G_DEFINE_TYPE_WITH_PRIVATE (BaulNavigationAction, baul_navigation_action, CTK_TYPE_ACTION)
-G_GNUC_END_IGNORE_DEPRECATIONS;
 
 static gboolean
 should_open_in_new_tab (void)
@@ -250,9 +248,7 @@ connect_proxy (CtkAction *action, CtkWidget *proxy)
         g_signal_connect (child, "button-release-event", G_CALLBACK (proxy_button_release_event_cb), NULL);
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     (* CTK_ACTION_CLASS (baul_navigation_action_parent_class)->connect_proxy) (action, proxy);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -269,9 +265,7 @@ disconnect_proxy (CtkAction *action, CtkWidget *proxy)
         g_signal_handlers_disconnect_by_func (child, G_CALLBACK (proxy_button_release_event_cb), NULL);
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     (* CTK_ACTION_CLASS (baul_navigation_action_parent_class)->disconnect_proxy) (action, proxy);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -337,9 +331,7 @@ static void
 baul_navigation_action_class_init (BaulNavigationActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     CtkActionClass *action_class = CTK_ACTION_CLASS (class);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     object_class->finalize = baul_navigation_action_finalize;
     object_class->set_property = baul_navigation_action_set_property;

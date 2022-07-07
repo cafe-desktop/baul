@@ -470,10 +470,8 @@ action_tighter_layout_callback (CtkAction *action,
 {
     g_assert (FM_IS_ICON_VIEW (user_data));
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     set_tighter_layout (FM_ICON_VIEW (user_data),
                         ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action)));
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 
@@ -498,9 +496,7 @@ action_sort_radio_callback (CtkAction *action,
 {
     BaulFileSortType sort_type;
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     sort_type = ctk_radio_action_get_current_value (current);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Note that id might be a toggle item.
      * Ignore non-sort ids so that they don't cause sorting.
@@ -742,7 +738,6 @@ update_layout_menus (FMIconView *view)
     is_auto_layout = fm_icon_view_using_auto_layout (view);
     file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (view));
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (fm_icon_view_supports_auto_layout (view))
     {
         const char *action_name;
@@ -801,7 +796,6 @@ update_layout_menus (FMIconView *view)
     ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                   baul_icon_container_is_keep_aligned (get_icon_container (view)));
     ctk_action_set_sensitive (action, !is_auto_layout);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 
@@ -1607,14 +1601,12 @@ action_reversed_order_callback (CtkAction *action,
 
     icon_view = FM_ICON_VIEW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     if (set_sort_reversed (icon_view,
                            ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action))))
     {
         baul_icon_container_sort (get_icon_container (icon_view));
         fm_icon_view_reveal_selection (FM_DIRECTORY_VIEW (icon_view));
     }
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -1627,9 +1619,7 @@ action_keep_aligned_callback (CtkAction *action,
 
     icon_view = FM_ICON_VIEW (user_data);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     keep_aligned = ctk_toggle_action_get_active (CTK_TOGGLE_ACTION (action));
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     file = fm_directory_view_get_directory_as_file (FM_DIRECTORY_VIEW (icon_view));
     fm_icon_view_set_directory_keep_aligned (icon_view,
@@ -1820,7 +1810,6 @@ fm_icon_view_merge_menus (FMDirectoryView *view)
 
     ui_manager = fm_directory_view_get_ui_manager (FM_DIRECTORY_VIEW (icon_view));
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action_group = ctk_action_group_new ("IconViewActions");
     ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     icon_view->details->icon_action_group = action_group;
@@ -1836,7 +1825,6 @@ fm_icon_view_merge_menus (FMDirectoryView *view)
                                         -1,
                                         G_CALLBACK (action_sort_radio_callback),
                                         icon_view);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     ctk_ui_manager_insert_action_group (ui_manager, action_group, 0);
     g_object_unref (action_group); /* owned by ui manager */
@@ -1852,11 +1840,9 @@ fm_icon_view_merge_menus (FMDirectoryView *view)
     {
         CtkAction *action;
 
-        G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         action = ctk_action_group_get_action (action_group,
                                               FM_ACTION_ARRANGE_ITEMS);
         ctk_action_set_visible (action, FALSE);
-        G_GNUC_END_IGNORE_DEPRECATIONS;
     }
 
     if (fm_icon_view_supports_scaling (icon_view))
@@ -1917,7 +1903,6 @@ fm_icon_view_update_menus (FMDirectoryView *view)
     selection_count = g_list_length (selection);
     icon_container = get_icon_container (icon_view);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (icon_view->details->icon_action_group,
                                           FM_ACTION_STRETCH);
     ctk_action_set_sensitive (action,
@@ -1948,7 +1933,6 @@ fm_icon_view_update_menus (FMDirectoryView *view)
     action = ctk_action_group_get_action (icon_view->details->icon_action_group,
                                           FM_ACTION_MANUAL_LAYOUT);
     ctk_action_set_sensitive (action, editable);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void

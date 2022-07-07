@@ -43,9 +43,7 @@ struct _BaulViewAsActionPrivate
     BaulNavigationWindow *window;
 };
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
 G_DEFINE_TYPE_WITH_PRIVATE (BaulViewAsAction, baul_view_as_action, CTK_TYPE_ACTION)
-G_GNUC_END_IGNORE_DEPRECATIONS;
 
 enum
 {
@@ -201,9 +199,7 @@ connect_proxy (CtkAction *action,
                           view_as_combo_box);
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     (* CTK_ACTION_CLASS (parent_class)->connect_proxy) (action, proxy);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -220,9 +216,7 @@ disconnect_proxy (CtkAction *action,
                                               0, 0, NULL, G_CALLBACK (view_as_changed_callback), NULL);
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     (* CTK_ACTION_CLASS (parent_class)->disconnect_proxy) (action, proxy);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void
@@ -271,9 +265,7 @@ static void
 baul_view_as_action_class_init (BaulViewAsActionClass *class)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (class);
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     CtkActionClass *action_class = CTK_ACTION_CLASS (class);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     object_class->finalize = baul_view_as_action_finalize;
     object_class->set_property = baul_view_as_action_set_property;
