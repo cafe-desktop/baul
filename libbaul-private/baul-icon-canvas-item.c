@@ -386,7 +386,7 @@ baul_icon_canvas_item_set_property (GObject        *object,
         details->editable_text = g_strdup (g_value_get_string (value));
         if (details->text_util)
         {
-            gail_text_util_text_setup (details->text_util,
+            cail_text_util_text_setup (details->text_util,
                                        details->editable_text);
         }
 
@@ -3636,8 +3636,8 @@ baul_icon_canvas_item_accessible_factory_create_accessible (GObject *for_object)
             g_string_append_c (item_text, ' ');
         g_string_append (item_text, item->details->additional_text);
     }
-    item->details->text_util = gail_text_util_new ();
-    gail_text_util_text_setup (item->details->text_util,
+    item->details->text_util = cail_text_util_new ();
+    cail_text_util_text_setup (item->details->text_util,
                                item_text->str);
     g_string_free (item_text, TRUE);
 

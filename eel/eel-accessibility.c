@@ -133,7 +133,7 @@ eel_accessibility_text_get_text (AtkText *text,
     GailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, NULL);
 
-    return gail_text_util_get_substring (util, start_pos, end_pos);
+    return cail_text_util_get_substring (util, start_pos, end_pos);
 }
 
 gunichar
@@ -146,7 +146,7 @@ eel_accessibility_text_get_character_at_offset (AtkText *text,
     GailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, 0);
 
-    txt = gail_text_util_get_substring (util, sucks1, sucks2);
+    txt = cail_text_util_get_substring (util, sucks1, sucks2);
 
     index = g_utf8_offset_to_pointer (txt, offset);
     c = g_utf8_get_char (index);
@@ -165,7 +165,7 @@ eel_accessibility_text_get_text_before_offset (AtkText	      *text,
     GailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, NULL);
 
-    return gail_text_util_get_text (
+    return cail_text_util_get_text (
                util, NULL, CAIL_BEFORE_OFFSET,
                boundary_type, offset, start_offset, end_offset);
 }
@@ -180,7 +180,7 @@ eel_accessibility_text_get_text_at_offset (AtkText        *text,
     GailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, NULL);
 
-    return gail_text_util_get_text (
+    return cail_text_util_get_text (
                util, NULL, CAIL_AT_OFFSET,
                boundary_type, offset, start_offset, end_offset);
 }
@@ -195,7 +195,7 @@ eel_accessibility_text_get_text_after_offset  (AtkText	      *text,
     GailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, NULL);
 
-    return gail_text_util_get_text (
+    return cail_text_util_get_text (
                util, NULL, CAIL_AFTER_OFFSET,
                boundary_type, offset, start_offset, end_offset);
 }
