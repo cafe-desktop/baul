@@ -90,7 +90,7 @@ eel_accessibility_get_gobject (AtkObject *object)
     return g_object_get_qdata (G_OBJECT (object), get_quark_gobject ());
 }
 
-static GailTextUtil *
+static CailTextUtil *
 get_simple_text (gpointer object)
 {
     GObject *gobject;
@@ -130,7 +130,7 @@ eel_accessibility_text_get_text (AtkText *text,
                                  gint     start_pos,
                                  gint     end_pos)
 {
-    GailTextUtil *util = get_simple_text (text);
+    CailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, NULL);
 
     return cail_text_util_get_substring (util, start_pos, end_pos);
@@ -143,7 +143,7 @@ eel_accessibility_text_get_character_at_offset (AtkText *text,
     char *txt, *index;
     gint sucks1 = 0, sucks2 = -1;
     gunichar c;
-    GailTextUtil *util = get_simple_text (text);
+    CailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, 0);
 
     txt = cail_text_util_get_substring (util, sucks1, sucks2);
@@ -162,7 +162,7 @@ eel_accessibility_text_get_text_before_offset (AtkText	      *text,
         gint           *start_offset,
         gint           *end_offset)
 {
-    GailTextUtil *util = get_simple_text (text);
+    CailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, NULL);
 
     return cail_text_util_get_text (
@@ -177,7 +177,7 @@ eel_accessibility_text_get_text_at_offset (AtkText        *text,
         gint           *start_offset,
         gint           *end_offset)
 {
-    GailTextUtil *util = get_simple_text (text);
+    CailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, NULL);
 
     return cail_text_util_get_text (
@@ -192,7 +192,7 @@ eel_accessibility_text_get_text_after_offset  (AtkText	      *text,
         gint           *start_offset,
         gint           *end_offset)
 {
-    GailTextUtil *util = get_simple_text (text);
+    CailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, NULL);
 
     return cail_text_util_get_text (
@@ -203,7 +203,7 @@ eel_accessibility_text_get_text_after_offset  (AtkText	      *text,
 gint
 eel_accessibility_text_get_character_count (AtkText *text)
 {
-    GailTextUtil *util = get_simple_text (text);
+    CailTextUtil *util = get_simple_text (text);
     g_return_val_if_fail (util != NULL, -1);
 
     return ctk_text_buffer_get_char_count (util->buffer);

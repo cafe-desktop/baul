@@ -160,7 +160,7 @@ struct _BaulIconCanvasItemPrivate
     CdkWindow *cursor_window;
 
     /* Accessibility bits */
-    GailTextUtil *text_util;
+    CailTextUtil *text_util;
 };
 
 /* Object argument IDs. */
@@ -2835,7 +2835,7 @@ baul_icon_canvas_item_class_init (BaulIconCanvasItemClass *class)
 				       baul_icon_canvas_item_accessible_factory_get_type ());
 }
 
-static GailTextUtil *
+static CailTextUtil *
 baul_icon_canvas_item_get_text (GObject *text)
 {
 	return BAUL_ICON_CANVAS_ITEM (text)->details->text_util;

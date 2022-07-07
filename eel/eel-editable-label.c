@@ -3357,7 +3357,7 @@ static const char* eel_editable_label_accessible_data = "eel-editable-label-acce
 
 typedef struct
 {
-    GailTextUtil *textutil;
+    CailTextUtil *textutil;
     gint         selection_anchor;
     gint         selection_end;
     gchar        *signal_name;
