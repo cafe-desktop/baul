@@ -41,7 +41,7 @@ AC_SUBST(CAFE_DESKTOP_REQUIRED, [cafe_desktop_minver])
 AC_SUBST(PANGO_REQUIRED, [pango_minver])
 AC_SUBST(CTK_REQUIRED, [ctk_minver])
 AC_SUBST(XML_REQUIRED, [xml_minver])
-AC_SUBST(GAIL_REQUIRED, [gail_minver])
+AC_SUBST(CAIL_REQUIRED, [gail_minver])
 
 dnl We need to decrement current by one in the calculation of the age because
 dnl the library was started with version "1:0:0" instead of "0:0:0"

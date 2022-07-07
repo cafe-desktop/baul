@@ -166,7 +166,7 @@ eel_accessibility_text_get_text_before_offset (AtkText	      *text,
     g_return_val_if_fail (util != NULL, NULL);
 
     return gail_text_util_get_text (
-               util, NULL, GAIL_BEFORE_OFFSET,
+               util, NULL, CAIL_BEFORE_OFFSET,
                boundary_type, offset, start_offset, end_offset);
 }
 
@@ -181,7 +181,7 @@ eel_accessibility_text_get_text_at_offset (AtkText        *text,
     g_return_val_if_fail (util != NULL, NULL);
 
     return gail_text_util_get_text (
-               util, NULL, GAIL_AT_OFFSET,
+               util, NULL, CAIL_AT_OFFSET,
                boundary_type, offset, start_offset, end_offset);
 }
 
@@ -196,7 +196,7 @@ eel_accessibility_text_get_text_after_offset  (AtkText	      *text,
     g_return_val_if_fail (util != NULL, NULL);
 
     return gail_text_util_get_text (
-               util, NULL, GAIL_AFTER_OFFSET,
+               util, NULL, CAIL_AFTER_OFFSET,
                boundary_type, offset, start_offset, end_offset);
 }
 

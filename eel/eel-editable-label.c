@@ -3455,7 +3455,7 @@ eel_editable_label_accessible_get_text_before_offset (AtkText         *text,
 
     return gail_text_util_get_text (priv->textutil,
                                     eel_editable_label_get_layout (label),
-                                    GAIL_BEFORE_OFFSET,
+                                    CAIL_BEFORE_OFFSET,
                                     boundary_type, offset,
                                     start_offset, end_offset);
 }
@@ -3481,7 +3481,7 @@ eel_editable_label_accessible_get_text_at_offset (AtkText          *text,
     priv = g_object_get_data (G_OBJECT (text), eel_editable_label_accessible_data);
     return gail_text_util_get_text (priv->textutil,
                                     eel_editable_label_get_layout (label),
-                                    GAIL_AT_OFFSET,
+                                    CAIL_AT_OFFSET,
                                     boundary_type, offset,
                                     start_offset, end_offset);
 }
@@ -3506,7 +3506,7 @@ eel_editable_label_accessible_get_text_after_offset  (AtkText          *text,
     priv = g_object_get_data (G_OBJECT (text), eel_editable_label_accessible_data);
     return gail_text_util_get_text (priv->textutil,
                                     eel_editable_label_get_layout (label),
-                                    GAIL_AFTER_OFFSET,
+                                    CAIL_AFTER_OFFSET,
                                     boundary_type, offset,
                                     start_offset, end_offset);
 }
