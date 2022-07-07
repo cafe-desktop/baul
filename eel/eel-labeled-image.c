@@ -582,7 +582,7 @@ eel_labeled_image_class_init (EelLabeledImageClass *labeled_image_class)
         gobject_class,
         PROP_PIXBUF,
         g_param_spec_object ("pixbuf", NULL, NULL,
-                             CDK_TYPE_PIXBUF, G_PARAM_READWRITE));
+                             GDK_TYPE_PIXBUF, G_PARAM_READWRITE));
 
     g_object_class_install_property (
         gobject_class,
