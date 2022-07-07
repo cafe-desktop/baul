@@ -61,10 +61,8 @@ baul_ui_prepare_merge_ui (CtkUIManager *ui_manager,
                           CtkActionGroup **action_group)
 {
     *merge_id = ctk_ui_manager_new_merge_id (ui_manager);
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     *action_group = ctk_action_group_new (name);
     ctk_action_group_set_translation_domain (*action_group, GETTEXT_PACKAGE);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     ctk_ui_manager_insert_action_group (ui_manager, *action_group, 0);
     g_object_unref (*action_group); /* owned by ui manager */
 }
@@ -139,9 +137,7 @@ extension_action_sensitive_callback (BaulMenuItem *item,
                   "sensitive", &value,
                   NULL);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     ctk_action_set_sensitive (CTK_ACTION (user_data), value);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static cairo_surface_t *
@@ -184,12 +180,10 @@ baul_action_from_menu_item (BaulMenuItem *item,
                   "priority", &priority,
                   NULL);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_new (name,
                              label,
                              tip,
                              icon_name);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (icon_name != NULL)
     {
@@ -206,9 +200,7 @@ baul_action_from_menu_item (BaulMenuItem *item,
         }
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     ctk_action_set_sensitive (action, sensitive);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     g_object_set (action, "is-important", priority, NULL);
 
     g_signal_connect_data (action, "activate",
@@ -238,12 +230,10 @@ baul_toolbar_action_from_menu_item (BaulMenuItem *item, CtkWidget *parent_widget
                   "priority", &priority,
                   NULL);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_new (name,
                              label,
                              tip,
                              icon_name);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     if (icon_name != NULL)
     {
@@ -260,9 +250,7 @@ baul_toolbar_action_from_menu_item (BaulMenuItem *item, CtkWidget *parent_widget
         }
     }
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     ctk_action_set_sensitive (action, sensitive);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
     g_object_set (action, "is-important", priority, NULL);
 
     g_signal_connect_data (action, "activate",

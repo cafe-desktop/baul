@@ -463,11 +463,9 @@ real_set_allow_up (BaulWindow *window, gboolean allow)
 
     spatial = BAUL_SPATIAL_WINDOW (window);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (spatial->details->spatial_action_group,
                                           SPATIAL_ACTION_CLOSE_PARENT_FOLDERS);
     ctk_action_set_sensitive (action, allow);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     BAUL_WINDOW_CLASS (baul_spatial_window_parent_class)->set_allow_up (window, allow);
 }
@@ -1043,14 +1041,12 @@ baul_spatial_window_init (BaulSpatialWindow *window)
     ctk_box_reorder_child (CTK_BOX (BAUL_WINDOW (window)->details->statusbar),
                            window->details->location_button, 0);
 
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action_group = ctk_action_group_new ("SpatialActions");
     ctk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
     window->details->spatial_action_group = action_group;
     ctk_action_group_add_actions (action_group,
                                   spatial_entries, G_N_ELEMENTS (spatial_entries),
                                   window);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     ui_manager = baul_window_get_ui_manager (BAUL_WINDOW (window));
     ctk_ui_manager_insert_action_group (ui_manager, action_group, 0);

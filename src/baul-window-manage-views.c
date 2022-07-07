@@ -1045,14 +1045,12 @@ setup_new_spatial_window (BaulWindowSlot *slot, BaulFile *file)
                 window->details->show_hidden_files_mode = BAUL_WINDOW_SHOW_HIDDEN_FILES_DISABLE;
             }
 
-            G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
             /* Update the UI, since we initialize it to the default */
             action = ctk_action_group_get_action (window->details->main_action_group, BAUL_ACTION_SHOW_HIDDEN_FILES);
             ctk_action_block_activate (action);
             ctk_toggle_action_set_active (CTK_TOGGLE_ACTION (action),
                                           window->details->show_hidden_files_mode == BAUL_WINDOW_SHOW_HIDDEN_FILES_ENABLE);
             ctk_action_unblock_activate (action);
-            G_GNUC_END_IGNORE_DEPRECATIONS;
         }
         else
         {

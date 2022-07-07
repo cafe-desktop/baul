@@ -113,11 +113,9 @@ baul_desktop_window_init (BaulDesktopWindow *window)
     ctk_widget_hide (BAUL_WINDOW (window)->details->menubar);
 
     /* Don't allow close action on desktop */
-    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     action = ctk_action_group_get_action (BAUL_WINDOW (window)->details->main_action_group,
                                           BAUL_ACTION_CLOSE);
     ctk_action_set_sensitive (action, FALSE);
-    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     /* Set the accessible name so that it doesn't inherit the cryptic desktop URI. */
     accessible = ctk_widget_get_accessible (CTK_WIDGET (window));
