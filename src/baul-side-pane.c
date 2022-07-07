@@ -570,7 +570,7 @@ baul_side_pane_set_panel_image (BaulSidePane *side_pane,
     g_return_if_fail (BAUL_IS_SIDE_PANE (side_pane));
     g_return_if_fail (widget != NULL);
     g_return_if_fail (CTK_IS_WIDGET (widget));
-    g_return_if_fail (pixbuf == NULL || CDK_IS_PIXBUF (pixbuf));
+    g_return_if_fail (pixbuf == NULL || GDK_IS_PIXBUF (pixbuf));
 
     panel = panel_for_widget (side_pane, widget);
 
