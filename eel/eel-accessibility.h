@@ -80,7 +80,7 @@ typedef struct
 {
     GTypeInterface parent;
 
-    GailTextUtil *(*get_text)   (GObject *text);
+    CailTextUtil *(*get_text)   (GObject *text);
     PangoLayout  *(*get_layout) (GObject *text);
 } EelAccessibleTextIface;
 
