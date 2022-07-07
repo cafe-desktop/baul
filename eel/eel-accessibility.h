@@ -29,7 +29,7 @@
 #include <atk/atkregistry.h>
 #include <atk/atkobjectfactory.h>
 #include <ctk/ctk.h>
-#include <libgail-util/gailtextutil.h>
+#include <libcail-util/cailtextutil.h>
 
 void eel_accessibility_set_up_label_widget_relation (CtkWidget *label, CtkWidget *widget);
 
@@ -86,7 +86,7 @@ typedef struct
 
 GType eel_accessible_text_get_type      (void);
 
-/* From gail - should be unneccessary when AtkObjectFactory is fixed */
+/* From cail - should be unneccessary when AtkObjectFactory is fixed */
 #define EEL_ACCESSIBLE_FACTORY(type, factory_name, type_as_function, opt_create_accessible)	\
 										\
 static GType									\

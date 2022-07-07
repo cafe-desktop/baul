@@ -32,7 +32,7 @@
 #include "eel-accessibility.h"
 #include "eel-ctk-extensions.h"
 
-#include <libgail-util/gailmisc.h>
+#include <libcail-util/cailmisc.h>
 
 #include <glib/gi18n-lib.h>
 #include <pango/pango.h>
@@ -3398,7 +3398,7 @@ eel_editable_label_accessible_get_text (AtkText *text,
         return NULL;
 
     priv = g_object_get_data (G_OBJECT (text), eel_editable_label_accessible_data);
-    return gail_text_util_get_substring (priv->textutil, start_pos, end_pos);
+    return cail_text_util_get_substring (priv->textutil, start_pos, end_pos);
 }
 
 static gunichar
@@ -3416,7 +3416,7 @@ eel_editable_label_accessible_get_character_at_offset (AtkText *text,
         return '\0';
 
     priv = g_object_get_data (G_OBJECT (text), eel_editable_label_accessible_data);
-    string = gail_text_util_get_substring (priv->textutil, 0, -1);
+    string = cail_text_util_get_substring (priv->textutil, 0, -1);
     if (offset >= g_utf8_strlen (string, -1))
     {
         unichar = '\0';
@@ -3453,7 +3453,7 @@ eel_editable_label_accessible_get_text_before_offset (AtkText         *text,
     label = EEL_EDITABLE_LABEL (widget);
     priv = g_object_get_data (G_OBJECT (text), eel_editable_label_accessible_data);
 
-    return gail_text_util_get_text (priv->textutil,
+    return cail_text_util_get_text (priv->textutil,
                                     eel_editable_label_get_layout (label),
                                     CAIL_BEFORE_OFFSET,
                                     boundary_type, offset,
@@ -3479,7 +3479,7 @@ eel_editable_label_accessible_get_text_at_offset (AtkText          *text,
 
     label = EEL_EDITABLE_LABEL (widget);
     priv = g_object_get_data (G_OBJECT (text), eel_editable_label_accessible_data);
-    return gail_text_util_get_text (priv->textutil,
+    return cail_text_util_get_text (priv->textutil,
                                     eel_editable_label_get_layout (label),
                                     CAIL_AT_OFFSET,
                                     boundary_type, offset,
@@ -3504,7 +3504,7 @@ eel_editable_label_accessible_get_text_after_offset  (AtkText          *text,
 
     label = EEL_EDITABLE_LABEL (widget);
     priv = g_object_get_data (G_OBJECT (text), eel_editable_label_accessible_data);
-    return gail_text_util_get_text (priv->textutil,
+    return cail_text_util_get_text (priv->textutil,
                                     eel_editable_label_get_layout (label),
                                     CAIL_AFTER_OFFSET,
                                     boundary_type, offset,
@@ -3722,12 +3722,12 @@ eel_editable_label_accessible_get_run_attributes (AtkText *text,
     dir = ctk_widget_get_direction (widget);
     if (dir == CTK_TEXT_DIR_RTL)
     {
-        at_set = gail_misc_add_attribute (at_set,
+        at_set = cail_misc_add_attribute (at_set,
                                           ATK_TEXT_ATTR_DIRECTION,
                                           g_strdup (atk_text_attribute_get_value (ATK_TEXT_ATTR_DIRECTION, dir)));
     }
 
-    at_set = gail_misc_layout_get_run_attributes (at_set,
+    at_set = cail_misc_layout_get_run_attributes (at_set,
              eel_editable_label_get_layout (label),
              label->text,
              offset,
@@ -3750,7 +3750,7 @@ eel_editable_label_accessible_get_default_attributes (AtkText *text)
 
     label = EEL_EDITABLE_LABEL (widget);
 
-    at_set = gail_misc_get_default_attributes (at_set,
+    at_set = cail_misc_get_default_attributes (at_set,
              eel_editable_label_get_layout (label),
              widget);
     return at_set;
@@ -3783,7 +3783,7 @@ eel_editable_label_accessible_get_character_extents (AtkText      *text,
         index += label->preedit_length;
     pango_layout_index_to_pos (eel_editable_label_get_layout(label), index, &char_rect);
 
-    gail_misc_get_extents_from_pango_rectangle (widget, &char_rect,
+    cail_misc_get_extents_from_pango_rectangle (widget, &char_rect,
             x_layout, y_layout, x, y, width, height, coords);
 }
 
@@ -3806,7 +3806,7 @@ eel_editable_label_accessible_get_offset_at_point (AtkText      *text,
 
     eel_editable_label_get_layout_offsets (label, &x_layout, &y_layout);
 
-    index = gail_misc_get_index_at_point_in_layout (widget,
+    index = cail_misc_get_index_at_point_in_layout (widget,
             eel_editable_label_get_layout(label), x_layout, y_layout, x, y, coords);
     if (index == -1)
     {
@@ -4085,7 +4085,7 @@ eel_editable_label_accessible_changed_cb (EelEditableLabel *label)
 
     accessible = ctk_widget_get_accessible (CTK_WIDGET (label));
     priv = g_object_get_data (G_OBJECT (accessible), eel_editable_label_accessible_data);
-    gail_text_util_text_setup (priv->textutil, eel_editable_label_get_text (label));
+    cail_text_util_text_setup (priv->textutil, eel_editable_label_get_text (label));
 }
 
 static gboolean
@@ -4167,8 +4167,8 @@ eel_editable_label_accessible_initialize (AtkObject *accessible,
 
     label = EEL_EDITABLE_LABEL (widget);
     priv = g_new0 (EelEditableLabelAccessiblePrivate, 1);
-    priv->textutil = gail_text_util_new ();
-    gail_text_util_text_setup (priv->textutil, eel_editable_label_get_text (EEL_EDITABLE_LABEL (widget)));
+    priv->textutil = cail_text_util_new ();
+    cail_text_util_text_setup (priv->textutil, eel_editable_label_get_text (EEL_EDITABLE_LABEL (widget)));
     priv->selection_anchor = label->selection_anchor;
     priv->selection_end = label->selection_end;
     g_object_set_data (G_OBJECT (accessible), eel_editable_label_accessible_data, priv);

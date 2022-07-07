@@ -11,7 +11,7 @@ m4_define(ctk_minver,                  3.22.0)
 m4_define(xml_minver,                  2.4.7)
 m4_define(exif_minver,                 0.6.14)
 m4_define(exempi_minver,               1.99.5)
-m4_define(gail_minver,                 3.0.0)
+m4_define(cail_minver,                 3.0.0)
 m4_define(notify_minver,               0.7.0)
 
 
@@ -41,7 +41,7 @@ AC_SUBST(CAFE_DESKTOP_REQUIRED, [cafe_desktop_minver])
 AC_SUBST(PANGO_REQUIRED, [pango_minver])
 AC_SUBST(CTK_REQUIRED, [ctk_minver])
 AC_SUBST(XML_REQUIRED, [xml_minver])
-AC_SUBST(CAIL_REQUIRED, [gail_minver])
+AC_SUBST(CAIL_REQUIRED, [cail_minver])
 
 dnl We need to decrement current by one in the calculation of the age because
 dnl the library was started with version "1:0:0" instead of "0:0:0"
@@ -76,7 +76,7 @@ PKG_CHECK_MODULES(ALL, [
     ctk+-3.0 >= ctk_minver
     libnotify
     libxml-2.0 >= xml_minver
-    gail-3.0 >= gail_minver
+    cail-3.0 >= cail_minver
 ])
 dnl ==========================================================================
 
@@ -277,7 +277,7 @@ AC_SUBST(LIBBAUL_EXTENSION_LIBS)
 
 dnl core baul
 PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])
-CORE_MODULES="glib-2.0 $GMODULE_ADD cafe-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 gail-3.0 libxml-2.0 $EXTRA_CORE_MODULES ctk+-3.0 x11"
+CORE_MODULES="glib-2.0 $GMODULE_ADD cafe-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 cail-3.0 libxml-2.0 $EXTRA_CORE_MODULES ctk+-3.0 x11"
 CORE_CFLAGS="`$PKG_CONFIG --cflags $CORE_MODULES`"
 AC_SUBST(CORE_CFLAGS)
 CORE_LIBS="`$PKG_CONFIG --libs $CORE_MODULES`"
