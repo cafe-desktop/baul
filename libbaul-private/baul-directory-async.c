@@ -1459,7 +1459,7 @@ baul_directory_call_when_ready_internal (BaulDirectory *directory,
     /* Add the new callback to the list. */
     directory->details->call_when_ready_list = g_list_prepend
             (directory->details->call_when_ready_list,
-             g_memdup (&callback, sizeof (callback)));
+             g_memdup2 (&callback, sizeof (callback)));
     request_counter_add_request (directory->details->call_when_ready_counters,
                                  callback.request);
 

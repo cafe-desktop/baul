@@ -4749,7 +4749,7 @@ baul_file_operations_copy (GList *files,
 	if (relative_item_points != NULL &&
 	    relative_item_points->len > 0) {
 		job->icon_positions =
-			g_memdup (relative_item_points->data,
+			g_memdup2 (relative_item_points->data,
 				  sizeof (CdkPoint) * relative_item_points->len);
 		job->n_icon_positions = relative_item_points->len;
 	}
@@ -5292,7 +5292,7 @@ baul_file_operations_move (GList *files,
 	if (relative_item_points != NULL &&
 	    relative_item_points->len > 0) {
 		job->icon_positions =
-			g_memdup (relative_item_points->data,
+			g_memdup2 (relative_item_points->data,
 				  sizeof (CdkPoint) * relative_item_points->len);
 		job->n_icon_positions = relative_item_points->len;
 	}
@@ -5611,7 +5611,7 @@ baul_file_operations_link (GList *files,
 	if (relative_item_points != NULL &&
 	    relative_item_points->len > 0) {
 		job->icon_positions =
-			g_memdup (relative_item_points->data,
+			g_memdup2 (relative_item_points->data,
 				  sizeof (CdkPoint) * relative_item_points->len);
 		job->n_icon_positions = relative_item_points->len;
 	}
@@ -5652,7 +5652,7 @@ baul_file_operations_duplicate (GList *files,
 	if (relative_item_points != NULL &&
 	    relative_item_points->len > 0) {
 		job->icon_positions =
-			g_memdup (relative_item_points->data,
+			g_memdup2 (relative_item_points->data,
 				  sizeof (CdkPoint) * relative_item_points->len);
 		job->n_icon_positions = relative_item_points->len;
 	}
@@ -6380,7 +6380,7 @@ baul_file_operations_new_file (CtkWidget *parent_view,
 		job->position = *target_point;
 		job->has_position = TRUE;
 	}
-	job->src_data = g_memdup (initial_contents, length);
+	job->src_data = g_memdup2 (initial_contents, length);
 	job->length = length;
 	job->filename = g_strdup (target_filename);
 

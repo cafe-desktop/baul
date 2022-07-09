@@ -693,7 +693,7 @@ baul_icon_canvas_item_set_attach_points (BaulIconCanvasItem *item,
 
     if (attach_points != NULL && n_attach_points != 0)
     {
-        item->details->attach_points = g_memdup (attach_points, n_attach_points * sizeof (CdkPoint));
+        item->details->attach_points = g_memdup2 (attach_points, n_attach_points * sizeof (CdkPoint));
         item->details->n_attach_points = n_attach_points;
     }
 
