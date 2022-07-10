@@ -1567,7 +1567,7 @@ baul_directory_match_pattern (BaulDirectory *directory, const char *pattern)
         file = BAUL_FILE (l->data);
         name = baul_file_get_display_name (file);
 
-        if (g_pattern_match_string (spec, name))
+        if (g_pattern_spec_match_string (spec, name))
         {
             ret = g_list_prepend(ret, baul_file_ref (file));
         }
