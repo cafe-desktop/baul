@@ -1858,13 +1858,9 @@ make_properties_from_directories (BaulPropertyBrowser *property_browser)
             }
             info = baul_icon_info_lookup_from_name (icon_name, BAUL_ICON_SIZE_STANDARD, 1);
             object_pixbuf = baul_icon_info_get_pixbuf_at_size (info, BAUL_ICON_SIZE_STANDARD);
-            object_label = g_strdup (baul_icon_info_get_display_name (info));
             g_object_unref (info);
 
-            if (object_label == NULL)
-            {
-                object_label = g_strdup (object_name);
-            }
+            object_label = g_strdup (object_name);
 
             property_image = labeled_image_new (object_label, object_pixbuf, object_name, PANGO_SCALE_LARGE);
             eel_labeled_image_set_fixed_image_height (EEL_LABELED_IMAGE (property_image), MAX_EMBLEM_HEIGHT);
