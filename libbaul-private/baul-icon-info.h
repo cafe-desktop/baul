@@ -80,8 +80,6 @@ extern "C" {
             gsize              forced_size);
     cairo_surface_t *     baul_icon_info_get_surface_at_size(BaulIconInfo  *icon,
             gsize              forced_size);
-    gboolean              baul_icon_info_get_embedded_rect            (BaulIconInfo  *icon,
-            CdkRectangle      *rectangle);
     gboolean              baul_icon_info_get_attach_points            (BaulIconInfo  *icon,
             CdkPoint         **points,
             gint              *n_points);

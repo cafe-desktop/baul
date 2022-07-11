@@ -34,8 +34,6 @@ struct _BaulIconInfo
     gint64 last_use_time;
     GdkPixbuf *pixbuf;
 
-    gboolean got_embedded_rect;
-    CdkRectangle embedded_rect;
     gint n_attach_points;
     CdkPoint *attach_points;
     char *icon_name;
@@ -150,10 +148,8 @@ baul_icon_info_new_for_icon_info (CtkIconInfo *icon_info,
 
     icon->pixbuf = ctk_icon_info_load_icon (icon_info, NULL);
 
-    icon->got_embedded_rect = ctk_icon_info_get_embedded_rect (icon_info,
-                              &icon->embedded_rect);
-
     filename = ctk_icon_info_get_filename (icon_info);
+
     if (filename != NULL)
     {
         char *p;
@@ -610,14 +606,6 @@ baul_icon_info_get_surface_at_size (BaulIconInfo *icon,
     g_object_unref (pixbuf);
 
     return surface;
-}
-
-gboolean
-baul_icon_info_get_embedded_rect (BaulIconInfo  *icon,
-                                  CdkRectangle      *rectangle)
-{
-    *rectangle = icon->embedded_rect;
-    return icon->got_embedded_rect;
 }
 
 gboolean

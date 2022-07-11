@@ -198,10 +198,6 @@ static void          process_pending_icon_to_rename                 (BaulIconCon
 static void          baul_icon_container_stop_monitor_top_left  (BaulIconContainer *container,
         BaulIconData      *data,
         gconstpointer          client);
-static void          baul_icon_container_start_monitor_top_left (BaulIconContainer *container,
-        BaulIconData      *data,
-        gconstpointer          client,
-        gboolean               large_text);
 static void          handle_hadjustment_changed                     (CtkAdjustment         *adjustment,
         BaulIconContainer *container);
 static void          handle_vadjustment_changed                     (CtkAdjustment         *adjustment,
@@ -7430,20 +7426,6 @@ baul_icon_container_unfreeze_updates (BaulIconContainer *container)
 }
 
 static void
-baul_icon_container_start_monitor_top_left (BaulIconContainer *container,
-        BaulIconData *data,
-        gconstpointer client,
-        gboolean large_text)
-{
-    BaulIconContainerClass *klass;
-
-    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
-    g_assert (klass->start_monitor_top_left != NULL);
-
-    klass->start_monitor_top_left (container, data, client, large_text);
-}
-
-static void
 baul_icon_container_stop_monitor_top_left (BaulIconContainer *container,
         BaulIconData *data,
         gconstpointer client)
@@ -7571,7 +7553,6 @@ baul_icon_container_update_icon (BaulIconContainer *container,
     BaulIconInfo *icon_info;
     CdkPoint *attach_points;
     int n_attach_points;
-    gboolean has_embedded_text_rect;
     GdkPixbuf *pixbuf;
     GList *emblem_pixbufs;
     char *editable_text, *additional_text;
@@ -7623,14 +7604,6 @@ baul_icon_container_update_icon (BaulIconContainer *container,
     else
         pixbuf = baul_icon_info_get_pixbuf (icon_info);
     baul_icon_info_get_attach_points (icon_info, &attach_points, &n_attach_points);
-    has_embedded_text_rect = baul_icon_info_get_embedded_rect (icon_info,
-                             &embedded_text_rect);
-
-    if (has_embedded_text_rect && embedded_text_needs_loading)
-    {
-        icon->is_monitored = TRUE;
-        baul_icon_container_start_monitor_top_left (container, icon->data, icon, large_embedded_text);
-    }
 
     baul_icon_container_get_icon_text (container,
                                        icon->data,
