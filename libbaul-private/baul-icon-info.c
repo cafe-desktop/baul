@@ -143,8 +143,6 @@ baul_icon_info_new_for_icon_info (CtkIconInfo *icon_info,
                                   gint         scale)
 {
     BaulIconInfo *icon;
-    CdkPoint *points;
-    gint n_points;
     const char *filename;
     char *basename;
 
@@ -154,12 +152,6 @@ baul_icon_info_new_for_icon_info (CtkIconInfo *icon_info,
 
     icon->got_embedded_rect = ctk_icon_info_get_embedded_rect (icon_info,
                               &icon->embedded_rect);
-
-    if (ctk_icon_info_get_attach_points (icon_info, &points, &n_points))
-    {
-        icon->n_attach_points = n_points;
-        icon->attach_points = points;
-    }
 
     filename = ctk_icon_info_get_filename (icon_info);
     if (filename != NULL)
