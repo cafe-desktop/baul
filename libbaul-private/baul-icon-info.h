@@ -85,7 +85,6 @@ extern "C" {
     gboolean              baul_icon_info_get_attach_points            (BaulIconInfo  *icon,
             CdkPoint         **points,
             gint              *n_points);
-    const char* baul_icon_info_get_display_name(BaulIconInfo* icon);
     const char* baul_icon_info_get_used_name(BaulIconInfo* icon);
 
     void                  baul_icon_info_clear_caches                 (void);

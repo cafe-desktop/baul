@@ -38,7 +38,6 @@ struct _BaulIconInfo
     CdkRectangle embedded_rect;
     gint n_attach_points;
     CdkPoint *attach_points;
-    char *display_name;
     char *icon_name;
 
     gint  orig_scale;
@@ -105,7 +104,6 @@ baul_icon_info_finalize (GObject *object)
         g_object_unref (icon->pixbuf);
     }
     g_free (icon->attach_points);
-    g_free (icon->display_name);
     g_free (icon->icon_name);
 
     G_OBJECT_CLASS (baul_icon_info_parent_class)->finalize (object);
@@ -162,8 +160,6 @@ baul_icon_info_new_for_icon_info (CtkIconInfo *icon_info,
         icon->n_attach_points = n_points;
         icon->attach_points = points;
     }
-
-    icon->display_name = g_strdup (ctk_icon_info_get_display_name (icon_info));
 
     filename = ctk_icon_info_get_filename (icon_info);
     if (filename != NULL)
@@ -640,11 +636,6 @@ baul_icon_info_get_attach_points (BaulIconInfo  *icon,
     *n_points = icon->n_attach_points;
     *points = icon->attach_points;
     return icon->n_attach_points != 0;
-}
-
-const char* baul_icon_info_get_display_name(BaulIconInfo* icon)
-{
-    return icon->display_name;
 }
 
 const char* baul_icon_info_get_used_name(BaulIconInfo* icon)

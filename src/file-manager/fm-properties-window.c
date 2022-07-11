@@ -3482,12 +3482,9 @@ create_emblems_page (FMPropertiesWindow *window)
 			continue;
 		}
 
-		label = g_strdup (baul_icon_info_get_display_name (info));
 		g_object_unref (info);
 
-		if (label == NULL) {
-			label = baul_emblem_get_keyword_from_icon_name (emblem_name);
-		}
+		label = baul_emblem_get_keyword_from_icon_name (emblem_name);
 
 		button = eel_labeled_image_check_button_new (label, pixbuf);
 		eel_labeled_image_set_fixed_image_height (EEL_LABELED_IMAGE (ctk_bin_get_child (CTK_BIN (button))), STANDARD_EMBLEM_HEIGHT * scale);

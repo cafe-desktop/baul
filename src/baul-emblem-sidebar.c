@@ -462,13 +462,8 @@ create_emblem_widget (BaulEmblemSidebar *emblem_sidebar,
 
     pixbuf = baul_icon_info_get_pixbuf_at_size (info, BAUL_ICON_SIZE_STANDARD);
 
-    display_name = baul_icon_info_get_display_name (info);
-
     keyword = baul_emblem_get_keyword_from_icon_name (name);
-    if (display_name == NULL)
-    {
-        display_name = keyword;
-    }
+    display_name = keyword;
 
     ret = create_emblem_widget_with_pixbuf (emblem_sidebar, keyword,
                                             display_name, pixbuf);
