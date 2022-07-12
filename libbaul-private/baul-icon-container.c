@@ -195,9 +195,6 @@ static inline void   icon_get_bounding_box                          (BaulIcon   
 static gboolean      is_renaming                                    (BaulIconContainer *container);
 static gboolean      is_renaming_pending                            (BaulIconContainer *container);
 static void          process_pending_icon_to_rename                 (BaulIconContainer *container);
-static void          baul_icon_container_stop_monitor_top_left  (BaulIconContainer *container,
-        BaulIconData      *data,
-        gconstpointer          client);
 static void          handle_hadjustment_changed                     (CtkAdjustment         *adjustment,
         BaulIconContainer *container);
 static void          handle_vadjustment_changed                     (CtkAdjustment         *adjustment,
@@ -7005,7 +7002,6 @@ baul_icon_container_clear (BaulIconContainer *container)
 {
     BaulIconContainerDetails *details;
     GList *p;
-    BaulIcon *icon = NULL;
 
     g_return_if_fail (BAUL_IS_ICON_CONTAINER (container));
 
@@ -7029,13 +7025,6 @@ baul_icon_container_clear (BaulIconContainer *container)
 
     for (p = details->icons; p != NULL; p = p->next)
     {
-        icon = p->data;
-        if (icon->is_monitored)
-        {
-            baul_icon_container_stop_monitor_top_left (container,
-                    icon->data,
-                    icon);
-        }
         icon_free (p->data);
     }
     g_list_free (details->icons);
@@ -7308,12 +7297,6 @@ icon_destroy (BaulIconContainer *container,
         details->stretch_icon = NULL;
     }
 
-    if (icon->is_monitored)
-    {
-        baul_icon_container_stop_monitor_top_left (container,
-                icon->data,
-                icon);
-    }
     icon_free (icon);
 
     if (was_selected)
@@ -7424,20 +7407,6 @@ baul_icon_container_unfreeze_updates (BaulIconContainer *container)
 
     klass->unfreeze_updates (container);
 }
-
-static void
-baul_icon_container_stop_monitor_top_left (BaulIconContainer *container,
-        BaulIconData *data,
-        gconstpointer client)
-{
-    BaulIconContainerClass *klass;
-
-    klass = BAUL_ICON_CONTAINER_GET_CLASS (container);
-    g_return_if_fail (klass->stop_monitor_top_left != NULL);
-
-    klass->stop_monitor_top_left (container, data, client);
-}
-
 
 static void
 baul_icon_container_prioritize_thumbnailing (BaulIconContainer *container,
