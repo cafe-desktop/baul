@@ -1775,6 +1775,7 @@ create_and_set_up_tree_view (FMListView *view)
         if (!strcmp (name, "name"))
         {
             int font_size;
+            const PangoFontDescription *font_description;
 
             /* Create the file name column */
             cell = ctk_cell_renderer_pixbuf_new ();
@@ -1785,8 +1786,12 @@ create_and_set_up_tree_view (FMListView *view)
 
             CtkStyleContext *context;
             context = ctk_widget_get_style_context (CTK_WIDGET(view));
-            font_size = PANGO_PIXELS (pango_font_description_get_size (
-                ctk_style_context_get_font (context, CTK_STATE_FLAG_NORMAL)));
+
+            ctk_style_context_get (context,
+                                   CTK_STATE_FLAG_NORMAL, 
+                                   CTK_STYLE_PROPERTY_FONT, &font_description, NULL);
+
+            font_size = PANGO_PIXELS (pango_font_description_get_size (font_description));
 
             ctk_tree_view_column_set_min_width (view->details->file_name_column, 20*font_size);
             ctk_tree_view_append_column (view->details->tree_view, view->details->file_name_column);
