@@ -1,0 +1,3 @@
+drop 'is_monitored' and 'baul_icon_container_stop_monitor_top_left'
+
+icon->is_monitored is always FALSE
