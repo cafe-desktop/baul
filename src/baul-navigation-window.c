@@ -130,7 +130,6 @@ baul_navigation_window_init (BaulNavigationWindow *window)
     win->details->panes = g_list_prepend (win->details->panes, pane);
 
     window->details->header_size_group = ctk_size_group_new (CTK_SIZE_GROUP_VERTICAL);
-    ctk_size_group_set_ignore_hidden (window->details->header_size_group, FALSE);
 
     window->details->content_paned = ctk_paned_new (CTK_ORIENTATION_HORIZONTAL);
     ctk_widget_set_hexpand (window->details->content_paned, TRUE);
