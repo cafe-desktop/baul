@@ -47,7 +47,7 @@
 #define EMBLEM_NAME_SYMLINK "emblem-symbolic-link"
 #define EMBLEM_NAME_NOREAD  "emblem-noread"
 #define EMBLEM_NAME_NOWRITE "emblem-nowrite"
-#define EMBLEM_NAME_NOTE    "emblem-note"
+#define EMBLEM_NAME_NOTE    "emblem-notes"
 #define EMBLEM_NAME_SHARED  "emblem-shared"
 
 GList *

@@ -8,9 +8,9 @@ public_icons = \
 	$(NULL)
 
 private_icons = \
-	hicolor_emblems_16x16_emblem-note.png \
-	hicolor_emblems_24x24_emblem-note.png \
-	hicolor_emblems_48x48_emblem-note.png \
+	hicolor_emblems_16x16_emblem-notes.png \
+	hicolor_emblems_24x24_emblem-notes.png \
+	hicolor_emblems_48x48_emblem-notes.png \
 	$(NULL)
 
 noinst_DATA = \

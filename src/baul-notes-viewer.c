@@ -334,7 +334,7 @@ baul_notes_viewer_init (BaulNotesViewer *sidebar)
     details->uri = g_strdup ("");
 
     scale = cdk_window_get_scale_factor (cdk_get_default_root_window ());
-    info = baul_icon_info_lookup_from_name ("emblem-note", 16, scale);
+    info = baul_icon_info_lookup_from_name ("emblem-notes", 16, scale);
     details->icon = baul_icon_info_get_pixbuf (info);
 
     /* create the text container */
