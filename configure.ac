@@ -54,8 +54,7 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AM_DISABLE_STATIC
-AM_PROG_LIBTOOL
+LT_INIT([disable-static])
 PKG_PROG_PKG_CONFIG
 dnl Give error and exit if we dont have pkgconfig
 if test "x$PKG_CONFIG" = "x"; then
