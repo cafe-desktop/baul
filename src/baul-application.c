@@ -2083,6 +2083,9 @@ init_icons_and_styles (void)
     CtkSettings *settings = ctk_settings_get_default ();
     CtkCssProvider *provider;
 
+    g_object_set (settings, "ctk-button-images", TRUE, NULL);
+    g_object_set (settings, "ctk-menu-images", TRUE, NULL);
+
     /* add our custom CSS provider */
     load_custom_css (NULL, "baul.css", CTK_STYLE_PROVIDER_PRIORITY_THEME);
     /* add our desktop CSS provider,  ensures the desktop background does not get covered */
