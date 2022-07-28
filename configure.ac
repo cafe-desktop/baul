@@ -241,9 +241,9 @@ if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
         SAVE_CFLAGS="$CFLAGS"
         CFLAGS="$CFLAGS $option"
         AC_MSG_CHECKING([whether gcc understands $option])
-        AC_TRY_COMPILE([], [],
+        AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[]])],
             has_option=yes,
-            has_option=no,)
+            has_option=no)
         if test $has_option = yes; then
             WARNING_CFLAGS="$WARNING_CFLAGS $option"
         fi
