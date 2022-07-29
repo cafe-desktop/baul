@@ -5,7 +5,7 @@ noinst_LTLIBRARIES=libbaul-file-manager.la
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	$(CORE_CFLAGS) \
-	$(WARNING_CFLAGS) \
+	$(WARN_CFLAGS) \
 	-DBAUL_DATADIR=\""$(datadir)/baul"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	$(DISABLE_DEPRECATED_CFLAGS) \
