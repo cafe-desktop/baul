@@ -21,7 +21,7 @@ dnl Interface break is not allowed.
 m4_define(baul_extension_current,  5)
 m4_define(baul_extension_revision, 0)
 
-AC_INIT([baul], [1.24.0], [https://cafe-desktop.org])
+AC_INIT([baul], [1.25.0], [https://cafe-desktop.org])
 
 dnl ---------------------------------------------------------------------------
 
