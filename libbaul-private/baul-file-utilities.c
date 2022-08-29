@@ -950,13 +950,13 @@ baul_find_existing_uri_in_hierarchy (GFile *location)
 }
 
 gboolean
-baul_is_engrampa_installed (void)
+baul_is_grapa_installed (void)
 {
     static int installed = -1;
 
     if (installed < 0)
     {
-        gchar *found = g_find_program_in_path ("engrampa");
+        gchar *found = g_find_program_in_path ("grapa");
         installed = found ? 1 : 0;
         g_free (found);
     }

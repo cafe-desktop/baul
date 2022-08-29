@@ -71,7 +71,7 @@ char *   baul_pixmap_file                        (const char *partial_path);
 /* Locate a file in either the uers directory or the datadir. */
 char *   baul_get_data_file_path                 (const char *partial_path);
 
-gboolean baul_is_engrampa_installed              (void);
+gboolean baul_is_grapa_installed              (void);
 
 /* Inhibit/Uninhibit CAFE Power Manager */
 int    baul_inhibit_power_manager                (const char *message) G_GNUC_WARN_UNUSED_RESULT;

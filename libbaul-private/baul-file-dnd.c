@@ -63,7 +63,7 @@ baul_drag_can_accept_files (BaulFile *drop_target_item)
         return TRUE;
     }
 
-    if (baul_is_engrampa_installed () &&
+    if (baul_is_grapa_installed () &&
             baul_file_is_archive (drop_target_item))
     {
         return TRUE;
