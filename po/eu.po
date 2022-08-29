@@ -2,25 +2,25 @@
 # Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Egoitz Rodriguez <egoitzro@gmail.com>, 2018
 # Alexander Gabilondo <alexgabi@disroot.org>, 2019
 # Asier Iturralde Sarasola <asier.iturralde@gmail.com>, 2019
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: baul 1.23.2\n"
 "Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
-"POT-Creation-Date: 2020-01-10 11:11+0100\n"
+"POT-Creation-Date: 2022-08-29 14:25+0200\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
 "Language-Team: Basque (https://www.transifex.com/cafe/teams/13566/eu/)\n"
+"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/browser.xml.in:5
@@ -287,15 +287,15 @@ msgstr "_Ikurrak"
 msgid "Drag an emblem to an object to add it to the object"
 msgstr "Arrastatu ikur bat objektu batetara, objektuari ikur hori gehitzeko"
 
-#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:1000
-#: src/baul-property-browser.c:1963
+#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:995
+#: src/baul-property-browser.c:1959
 msgid "Erase"
 msgstr "Ezabatu"
 
 #: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:3
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
-#: src/baul-spatial-window.c:399 src/baul-window.c:167
-#: src/baul-window-menus.c:574
+#: src/baul-spatial-window.c:403 src/baul-window.c:167
+#: src/baul-window-menus.c:562
 msgid "Baul"
 msgstr "Baul"
 
@@ -306,8 +306,8 @@ msgstr "CAFE mahaigain ingurunerako fitxategi-kudeatzailea"
 #: data/baul.appdata.xml.in:10
 msgid ""
 "Baul is the official file manager for the CAFE desktop. It allows for "
-"browsing directories, as well as previewing files and launching applications"
-" associated with them. It is also responsible for handling the icons on the "
+"browsing directories, as well as previewing files and launching applications "
+"associated with them. It is also responsible for handling the icons on the "
 "CAFE desktop. It works on local and remote file systems."
 msgstr ""
 
@@ -321,12 +321,6 @@ msgstr ""
 msgid "Autorun Prompt"
 msgstr "Autoexekuzioaren galdera"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-autorun-software.desktop.in.in:7
-msgid "application-x-executable"
-msgstr ""
-
 #: data/baul-browser.desktop.in.in:4
 msgid "File Browser"
 msgstr "Fitxategi-arakatzailea"
@@ -335,15 +329,7 @@ msgstr "Fitxategi-arakatzailea"
 msgid "Browse the file system with the file manager"
 msgstr "Arakatu fitxategi-sistema fitxategi-kudeatzailearekin"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-browser.desktop.in.in:9 data/baul.desktop.in.in:7
-#: data/baul-file-management-properties.desktop.in.in:7
-msgid "system-file-manager"
-msgstr ""
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
 msgid "files;browser;manager;CAFE;"
 msgstr ""
@@ -353,21 +339,14 @@ msgstr ""
 msgid "Computer"
 msgstr "Ordenagailua"
 
-#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:940
+#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:925
 msgid ""
 "Browse all local and remote disks and folders accessible from this computer"
 msgstr ""
 "Arakatu ordenagailu honetatik atzi daitezkeen lokaleko eta urruneko disko "
 "eta karpeta guztiak"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-computer.desktop.in.in:8
-msgid "computer"
-msgstr ""
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
 msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr ""
@@ -384,8 +363,7 @@ msgstr "Fitxategi-kudeaketa"
 msgid "Change the behaviour and appearance of file manager windows"
 msgstr "Fitxategi-kudeatzaileen leihoen portaera eta itxura aldatu"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
 msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
@@ -394,29 +372,16 @@ msgstr ""
 msgid "Open Folder"
 msgstr "Ireki karpeta"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-folder-handler.desktop.in.in:10
-msgid "folder-open"
-msgstr ""
-
 #: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1421
 msgid "Home Folder"
 msgstr "Karpeta nagusia"
 
 #: data/baul-home.desktop.in.in:4 src/baul-places-sidebar.c:527
-#: src/baul-window-menus.c:935
+#: src/baul-window-menus.c:920
 msgid "Open your personal folder"
 msgstr "Ireki karpeta pertsonala"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-home.desktop.in.in:8
-msgid "user-home"
-msgstr ""
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
 msgid "home;personal;folder;open;CAFE;"
 msgstr ""
@@ -429,18 +394,11 @@ msgstr "Gordetako bilaketa"
 msgid "Network"
 msgstr "Sarea"
 
-#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:930
 msgid "Browse bookmarked and local network locations"
 msgstr "Arakatu laster-markatutako eta sare lokaleko kokalekuak"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/cafe-network-scheme.desktop.in.in:11
-msgid "network-workgroup"
-msgstr ""
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
 msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
@@ -472,8 +430,8 @@ msgid ""
 "CtkMisc::xalign for that."
 msgstr ""
 "Etiketaren testuko lerroen bata bestearekiko lerrokatzea. Honek EZ dio "
-"eragiten bere esleipenaren barruko etiketaren lerrokatzeari. Ikus "
-"CtkMisc::xalign horretarako."
+"eragiten bere esleipenaren barruko etiketaren lerrokatzeari. Ikus CtkMisc::"
+"xalign horretarako."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"
@@ -502,22 +460,22 @@ msgstr ""
 "Hautapenaren aurkako muturraren kokapenaren posizioa kurtsoretik hasita "
 "(karakteretan)."
 
-#: eel/eel-editable-label.c:3092 libbaul-private/baul-clipboard.c:464
-#: src/file-manager/fm-directory-view.c:7451
-#: src/file-manager/fm-directory-view.c:7618
+#: eel/eel-editable-label.c:3092 libbaul-private/baul-clipboard.c:456
+#: src/file-manager/fm-directory-view.c:7409
+#: src/file-manager/fm-directory-view.c:7576
 #: src/file-manager/fm-tree-view.c:1311
 msgid "Cu_t"
 msgstr "_Ebaki"
 
-#: eel/eel-editable-label.c:3094 libbaul-private/baul-clipboard.c:469
-#: src/file-manager/fm-directory-view.c:7455
-#: src/file-manager/fm-directory-view.c:7622
+#: eel/eel-editable-label.c:3094 libbaul-private/baul-clipboard.c:461
+#: src/file-manager/fm-directory-view.c:7413
+#: src/file-manager/fm-directory-view.c:7580
 #: src/file-manager/fm-tree-view.c:1320
 msgid "_Copy"
 msgstr "_Kopiatu"
 
-#: eel/eel-editable-label.c:3096 libbaul-private/baul-clipboard.c:474
-#: src/file-manager/fm-directory-view.c:7459
+#: eel/eel-editable-label.c:3096 libbaul-private/baul-clipboard.c:466
+#: src/file-manager/fm-directory-view.c:7417
 msgid "_Paste"
 msgstr "_Itsatsi"
 
@@ -538,19 +496,19 @@ msgstr "Erakutsi _xehetasun gehiago"
 #: libbaul-private/baul-mime-actions.c:1743
 #: libbaul-private/baul-open-with-dialog.c:972
 #: src/baul-connect-server-dialog.c:1119 src/baul-emblem-sidebar.c:293
-#: src/baul-emblem-sidebar.c:552 src/baul-location-dialog.c:197
+#: src/baul-emblem-sidebar.c:547 src/baul-location-dialog.c:197
 #: src/baul-property-browser.c:1117 src/baul-property-browser.c:1197
-#: src/file-manager/fm-directory-view.c:1219
-#: src/file-manager/fm-directory-view.c:1370
-#: src/file-manager/fm-directory-view.c:7099
-#: src/file-manager/fm-directory-view.c:10490
+#: src/file-manager/fm-directory-view.c:1215
+#: src/file-manager/fm-directory-view.c:1366
+#: src/file-manager/fm-directory-view.c:7057
+#: src/file-manager/fm-directory-view.c:10394
 msgid "_Cancel"
 msgstr "_Utzi"
 
 #: eel/eel-stock-dialogs.c:240 libbaul-private/baul-open-with-dialog.c:988
 #: src/baul-location-dialog.c:202 src/baul-places-sidebar.c:2697
-#: src/file-manager/fm-directory-view.c:7415
-#: src/file-manager/fm-directory-view.c:8975
+#: src/file-manager/fm-directory-view.c:7373
+#: src/file-manager/fm-directory-view.c:8899
 #: src/file-manager/fm-tree-view.c:1271
 msgid "_Open"
 msgstr "_Ireki"
@@ -566,9 +524,9 @@ msgstr "Eragiketa hau geldiarazi dezakezu 'Utzi' botoian klik eginez."
 #: eel/eel-stock-dialogs.c:296 eel/eel-stock-dialogs.c:452
 #: eel/eel-stock-dialogs.c:656 libbaul-private/baul-autorun.c:1159
 #: libbaul-private/baul-mime-actions.c:1386 src/baul-emblem-sidebar.c:298
-#: src/baul-emblem-sidebar.c:557 src/baul-property-browser.c:1122
+#: src/baul-emblem-sidebar.c:552 src/baul-property-browser.c:1122
 #: src/baul-property-browser.c:1202 src/baul-query-editor.c:776
-#: src/file-manager/fm-directory-view.c:1224
+#: src/file-manager/fm-directory-view.c:1220
 msgid "_OK"
 msgstr ""
 
@@ -681,39 +639,39 @@ msgid "_Always perform this action"
 msgstr "_Beti landu ekintza hau"
 
 #: libbaul-private/baul-autorun.c:1168 src/baul-places-sidebar.c:2754
-#: src/file-manager/fm-directory-view.c:7542
-#: src/file-manager/fm-directory-view.c:7570
-#: src/file-manager/fm-directory-view.c:7651
+#: src/file-manager/fm-directory-view.c:7500
+#: src/file-manager/fm-directory-view.c:7528
+#: src/file-manager/fm-directory-view.c:7609
 #: src/file-manager/fm-tree-view.c:1369
 msgid "_Eject"
 msgstr "E_gotzi"
 
 #: libbaul-private/baul-autorun.c:1183 src/baul-places-sidebar.c:2747
-#: src/file-manager/fm-directory-view.c:7538
-#: src/file-manager/fm-directory-view.c:7566
-#: src/file-manager/fm-directory-view.c:7647
+#: src/file-manager/fm-directory-view.c:7496
+#: src/file-manager/fm-directory-view.c:7524
+#: src/file-manager/fm-directory-view.c:7605
 #: src/file-manager/fm-tree-view.c:1360
 msgid "_Unmount"
 msgstr "_Desmuntatu"
 
-#: libbaul-private/baul-clipboard.c:465
+#: libbaul-private/baul-clipboard.c:457
 msgid "Cut the selected text to the clipboard"
 msgstr "Hautatutako testua ebaki eta arbelera eracafen du"
 
-#: libbaul-private/baul-clipboard.c:470
+#: libbaul-private/baul-clipboard.c:462
 msgid "Copy the selected text to the clipboard"
 msgstr "Hautatutako testua arbelean kopiatzen du"
 
-#: libbaul-private/baul-clipboard.c:475
+#: libbaul-private/baul-clipboard.c:467
 msgid "Paste the text stored on the clipboard"
 msgstr "Arbelean gordetako testua itsasten du"
 
-#: libbaul-private/baul-clipboard.c:479
-#: src/file-manager/fm-directory-view.c:7471
+#: libbaul-private/baul-clipboard.c:471
+#: src/file-manager/fm-directory-view.c:7429
 msgid "Select _All"
 msgstr "Hautatu _dena"
 
-#: libbaul-private/baul-clipboard.c:480
+#: libbaul-private/baul-clipboard.c:472
 msgid "Select all the text in a text field"
 msgstr "Testu-eremuko testu osoa hautatzen du"
 
@@ -731,7 +689,7 @@ msgstr "_Erabili lehenetsia"
 
 #: libbaul-private/baul-column-utilities.c:46
 #: libbaul-private/baul-mime-application-chooser.c:276
-#: src/file-manager/fm-list-view.c:1802
+#: src/file-manager/fm-list-view.c:1807
 msgid "Name"
 msgstr "Izena"
 
@@ -797,7 +755,7 @@ msgid "The group of the file."
 msgstr "Fitxategiaren taldea"
 
 #: libbaul-private/baul-column-utilities.c:108
-#: src/file-manager/fm-properties-window.c:4788
+#: src/file-manager/fm-properties-window.c:4782
 msgid "Permissions"
 msgstr "Baimenak"
 
@@ -866,7 +824,7 @@ msgstr "Fitxategiaren jatorrizko kokalekua zakarrontzira mugitu aurretik "
 #: libbaul-private/baul-customization-data.c:435
 #: libbaul-private/baul-file-conflict-dialog.c:622
 #: libbaul-private/baul-mime-application-chooser.c:444
-#: src/baul-property-browser.c:2010
+#: src/baul-property-browser.c:2006
 msgid "Reset"
 msgstr "Berrezarri"
 
@@ -882,6 +840,7 @@ msgstr "mahaigainean"
 #. * warning, put "%.0s" somewhere in the string, which will
 #. * match the user name string passed by the C code, but not
 #. * put the user name in the final string.
+#.
 #: libbaul-private/baul-desktop-link.c:111
 #, c-format
 msgid "%s's Home"
@@ -1136,7 +1095,7 @@ msgstr "Taldea ezartzea ez dago baimendua"
 msgid "Specified group '%s' doesn't exist"
 msgstr "Zehaztutako '%s' taldea ez da existitzen"
 
-#: libbaul-private/baul-file.c:6199 src/file-manager/fm-directory-view.c:2397
+#: libbaul-private/baul-file.c:6199 src/file-manager/fm-directory-view.c:2393
 #, c-format
 msgid "%'u item"
 msgid_plural "%'u items"
@@ -1183,7 +1142,7 @@ msgid "unknown MIME type"
 msgstr "MIME mota ezezaguna"
 
 #: libbaul-private/baul-file.c:6702
-#: src/file-manager/fm-properties-window.c:1302
+#: src/file-manager/fm-properties-window.c:1299
 msgid "unknown"
 msgstr "ezezaguna"
 
@@ -1196,7 +1155,7 @@ msgid "link"
 msgstr "esteka"
 
 #: libbaul-private/baul-file.c:6778 libbaul-private/baul-file-operations.c:406
-#: src/file-manager/fm-directory-view.c:10736
+#: src/file-manager/fm-directory-view.c:10640
 #, c-format
 msgid "Link to %s"
 msgstr "Estekatu hona: %s"
@@ -1259,12 +1218,14 @@ msgstr "Ordezkatzeak bere edukia gainidaztea eragingo du."
 #: libbaul-private/baul-file-conflict-dialog.c:190
 #, c-format
 msgid "An older file with the same name already exists in \"%s\"."
-msgstr "Izen bereko fitxategi zaharrago bat existitzen da dagoeneko \"%s\"-(e)n."
+msgstr ""
+"Izen bereko fitxategi zaharrago bat existitzen da dagoeneko \"%s\"-(e)n."
 
 #: libbaul-private/baul-file-conflict-dialog.c:196
 #, c-format
 msgid "A newer file with the same name already exists in \"%s\"."
-msgstr "Izen bereko fitxategi berriago bat existitzen da dagoeneko \"%s\"-(e)n."
+msgstr ""
+"Izen bereko fitxategi berriago bat existitzen da dagoeneko \"%s\"-(e)n."
 
 #: libbaul-private/baul-file-conflict-dialog.c:202
 #, c-format
@@ -1286,14 +1247,14 @@ msgstr "Jatorrizko fitxategia"
 
 #: libbaul-private/baul-file-conflict-dialog.c:277
 #: libbaul-private/baul-file-conflict-dialog.c:316
-#: src/file-manager/fm-properties-window.c:3306
+#: src/file-manager/fm-properties-window.c:3303
 msgid "Size:"
 msgstr "Tamaina:"
 
 #: libbaul-private/baul-file-conflict-dialog.c:282
 #: libbaul-private/baul-file-conflict-dialog.c:321
 #: src/baul-connect-server-dialog.c:927
-#: src/file-manager/fm-properties-window.c:3288
+#: src/file-manager/fm-properties-window.c:3285
 msgid "Type:"
 msgstr "Mota:"
 
@@ -1362,9 +1323,9 @@ msgid "_Retry"
 msgstr "_Saiatu berriro"
 
 #: libbaul-private/baul-file-operations.c:187 src/baul-emblem-sidebar.c:378
-#: src/file-manager/fm-directory-view.c:7503
-#: src/file-manager/fm-directory-view.c:7635
-#: src/file-manager/fm-directory-view.c:9136
+#: src/file-manager/fm-directory-view.c:7461
+#: src/file-manager/fm-directory-view.c:7593
+#: src/file-manager/fm-directory-view.c:9051
 #: src/file-manager/fm-tree-view.c:1349
 msgid "_Delete"
 msgstr "_Ezabatu"
@@ -1430,6 +1391,7 @@ msgstr "Beste esteka hona: %s"
 #. Translators: Feel free to leave out the "st" suffix
 #. * if there's no way to do that nicely for a
 #. * particular language.
+#.
 #: libbaul-private/baul-file-operations.c:426
 #, c-format
 msgid "%'dst link to %s"
@@ -1453,6 +1415,7 @@ msgstr "%'d. esteka %s(e)rako"
 #. Translators:
 #. * Feel free to leave out the st, nd, rd and th suffix or
 #. * make some or all of them match.
+#.
 #. Translators: tag used to detect the first copy of a file
 #: libbaul-private/baul-file-operations.c:477
 msgid " (copy)"
@@ -1513,11 +1476,10 @@ msgstr "%s (beste kopia bat)%s"
 msgid "%s (%'dth copy)%s"
 msgstr "%s (%'d. kopia)%s"
 
-#. Translators: if in your language there's no difference between 1st, 2nd,
-#. 3rd and nth
-#. * plurals, you can leave the st, nd, rd suffixes out and just make all the
-#. translated
+#. Translators: if in your language there's no difference between 1st, 2nd, 3rd and nth
+#. * plurals, you can leave the st, nd, rd suffixes out and just make all the translated
 #. * strings look like "%s (copy %'d)%s".
+#.
 #. Translators: appended to x1st file copy
 #: libbaul-private/baul-file-operations.c:527
 #, c-format
@@ -1626,8 +1588,8 @@ msgid "Deleting files"
 msgstr "Fitxategiak ezabatzen"
 
 #. Translators: %T will expand to a time like "2 minutes".
-#. * The singular/plural form will be used depending on the remaining time
-#. (i.e. the %T argument).
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
+#.
 #: libbaul-private/baul-file-operations.c:1547
 msgid "%T left"
 msgid_plural "%T left"
@@ -1655,7 +1617,8 @@ msgstr ""
 #: libbaul-private/baul-file-operations.c:3648
 msgid ""
 "There was an error getting information about the files in the folder \"%B\"."
-msgstr "Errorea gertatu da \"%B\" karpetako fitxategien informazioa eskuratzean."
+msgstr ""
+"Errorea gertatu da \"%B\" karpetako fitxategien informazioa eskuratzean."
 
 #: libbaul-private/baul-file-operations.c:1630
 #: libbaul-private/baul-file-operations.c:3657
@@ -1901,20 +1864,17 @@ msgid_plural "Duplicating %'d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#. Translators: %S will expand to a size like "2 bytes" or "3 MB", so
-#. something like "4 kb of 4 MB"
+#. Translators: %S will expand to a size like "2 bytes" or "3 MB", so something like "4 kb of 4 MB"
 #: libbaul-private/baul-file-operations.c:3100
 #, c-format
 msgid "%S of %S"
 msgstr "%S / %S"
 
-#. Translators: %S will expand to a size like "2 bytes" or "3 MB", %T to a
-#. time duration like
-#. * "2 minutes". So the whole thing will be something like "2 kb of 4 MB -- 2
-#. hours left (4kb/sec)"
+#. Translators: %S will expand to a size like "2 bytes" or "3 MB", %T to a time duration like
+#. * "2 minutes". So the whole thing will be something like "2 kb of 4 MB -- 2 hours left (4kb/sec)"
 #. *
-#. * The singular/plural form will be used depending on the remaining time
-#. (i.e. the %T argument).
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
+#.
 #: libbaul-private/baul-file-operations.c:3113
 msgid "%S of %S — %T left (%S/sec)"
 msgid_plural "%S of %S — %T left (%S/sec)"
@@ -2111,7 +2071,7 @@ msgstr "Ezin izan da \"%s\"(r)en jatorrizko kokalekua zehaztu"
 msgid "The item cannot be restored from trash"
 msgstr "Ezin da elementua zakarrontzitik berreskuratu."
 
-#: libbaul-private/baul-icon-container.c:2933
+#: libbaul-private/baul-icon-container.c:2926
 msgid "The selection rectangle"
 msgstr "Hautapen-errektangelua"
 
@@ -2135,10 +2095,10 @@ msgid "This link cannot be used, because its target \"%s\" doesn't exist."
 msgstr "Esteka hori ezin da erabili, bere \"%s\" helburua ez dagoelako."
 
 #: libbaul-private/baul-mime-actions.c:751
-#: src/file-manager/fm-directory-view.c:7499
-#: src/file-manager/fm-directory-view.c:7631
-#: src/file-manager/fm-directory-view.c:8770
-#: src/file-manager/fm-directory-view.c:9114
+#: src/file-manager/fm-directory-view.c:7457
+#: src/file-manager/fm-directory-view.c:7589
+#: src/file-manager/fm-directory-view.c:8698
+#: src/file-manager/fm-directory-view.c:9030
 #: src/file-manager/fm-tree-view.c:1340
 msgid "Mo_ve to Trash"
 msgstr "_Bota zakarrontzira"
@@ -2184,10 +2144,10 @@ msgid_plural "This will open %d separate windows."
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-mime-actions.c:1277
-#: src/baul-window-manage-views.c:2134 src/baul-window-manage-views.c:2142
-#: src/baul-window-manage-views.c:2162 src/baul-window-manage-views.c:2176
-#: src/baul-window-manage-views.c:2182 src/baul-window-manage-views.c:2209
+#: libbaul-private/baul-mime-actions.c:1277 src/baul-window-manage-views.c:2132
+#: src/baul-window-manage-views.c:2140 src/baul-window-manage-views.c:2160
+#: src/baul-window-manage-views.c:2174 src/baul-window-manage-views.c:2180
+#: src/baul-window-manage-views.c:2207
 #, c-format
 msgid "Could not display \"%s\"."
 msgstr "Ezin izan da \"%s\" bistaratu."
@@ -2245,12 +2205,12 @@ msgstr "Markatu _fidagarri gisa"
 
 #: libbaul-private/baul-mime-actions.c:2038
 #: libbaul-private/baul-mime-actions.c:2348
-#: src/file-manager/fm-directory-view.c:6475
+#: src/file-manager/fm-directory-view.c:6433
 msgid "Unable to mount location"
 msgstr "Ezin da kokalekua muntatu"
 
 #: libbaul-private/baul-mime-actions.c:2436
-#: src/file-manager/fm-directory-view.c:6649
+#: src/file-manager/fm-directory-view.c:6607
 msgid "Unable to start location"
 msgstr "Ezin da kokalekua abiatu"
 
@@ -2316,7 +2276,8 @@ msgstr "Ezezaguna"
 #: libbaul-private/baul-mime-application-chooser.c:634
 #, c-format
 msgid "Select an application to open %s and other files of type \"%s\""
-msgstr "Hautatu aplikazio bat %s eta \"%s\" motako beste fitxategiak irekitzeko"
+msgstr ""
+"Hautatu aplikazio bat %s eta \"%s\" motako beste fitxategiak irekitzeko"
 
 #: libbaul-private/baul-mime-application-chooser.c:706
 #, c-format
@@ -2354,7 +2315,7 @@ msgid "Select an Application"
 msgstr "Hautatu aplikazio bat"
 
 #: libbaul-private/baul-open-with-dialog.c:868
-#: src/file-manager/fm-properties-window.c:5122
+#: src/file-manager/fm-properties-window.c:5116
 msgid "Open With"
 msgstr "Ireki honekin"
 
@@ -2423,7 +2384,9 @@ msgstr "Huts egin du irekitzean, beste aplikazio bat aukeratu nahi duzu?"
 #: libbaul-private/baul-program-choosing.c:81
 #: libbaul-private/baul-program-choosing.c:121
 #, c-format
-msgid "\"%s\" cannot open \"%s\" because \"%s\" cannot access files at \"%s\" locations."
+msgid ""
+"\"%s\" cannot open \"%s\" because \"%s\" cannot access files at \"%s\" "
+"locations."
 msgstr ""
 "\"%s\"(e)k ezin du \"%s\" ireki, \"%s\"(e)k ezin dituelako \"%s\" "
 "helbideetako fitxategiak atzitu."
@@ -2439,21 +2402,21 @@ msgid ""
 "The default action cannot open \"%s\" because it cannot access files at "
 "\"%s\" locations."
 msgstr ""
-"Ekintza lehenetsiak ezin du \"%s\" ireki, ezin dituelako \"%s\" helbideetako"
-" fitxategiak atzitu."
+"Ekintza lehenetsiak ezin du \"%s\" ireki, ezin dituelako \"%s\" helbideetako "
+"fitxategiak atzitu."
 
 #: libbaul-private/baul-program-choosing.c:124
 msgid ""
-"No other applications are available to view this file. If you copy this file"
-" onto your computer, you may be able to open it."
+"No other applications are available to view this file. If you copy this file "
+"onto your computer, you may be able to open it."
 msgstr ""
-"Ez dago beste aplikaziorik eskuragarri fitxategi hau ikusteko. Fitxategi hau"
-" zure ordenagailura kopiatzen baduzu, agian irekitzeko gai izango zara."
+"Ez dago beste aplikaziorik eskuragarri fitxategi hau ikusteko. Fitxategi hau "
+"zure ordenagailura kopiatzen baduzu, agian irekitzeko gai izango zara."
 
 #: libbaul-private/baul-program-choosing.c:132
 msgid ""
-"No other actions are available to view this file. If you copy this file onto"
-" your computer, you may be able to open it."
+"No other actions are available to view this file. If you copy this file onto "
+"your computer, you may be able to open it."
 msgstr ""
 "Ez dago beste ekintzarik eskuragarri fitxategi hau ikusteko. Fitxategi hau "
 "zure ordenagailura kopiatzen baduzu, agian irekitzeko gai izango zara."
@@ -2478,8 +2441,7 @@ msgstr "Honek jaregiteko helburuak fitxategi lokalak bakarrik onartzen ditu."
 
 #: libbaul-private/baul-program-choosing.c:507
 msgid ""
-"To open non-local files copy them to a local folder and then drop them "
-"again."
+"To open non-local files copy them to a local folder and then drop them again."
 msgstr ""
 "Lokalak ez diren fitxategiak irekitzeko, kopiatu karpeta lokal batera eta "
 "berriro jaregin."
@@ -2938,8 +2900,8 @@ msgstr "Arakatzailearen leihoetan ireki berri diren fitxak non kokatu."
 #: libbaul-private/org.cafe.baul.gschema.xml:77
 msgid ""
 "If set to \"after-current-tab\", then new tabs are inserted after the "
-"current tab. If set to \"end\", then new tabs are appended to the end of the"
-" tab list."
+"current tab. If set to \"end\", then new tabs are appended to the end of the "
+"tab list."
 msgstr ""
 "\"after-current-tab\" ezartzen bada, fitxa berriak uneko fitxaren ondoren "
 "txertatuko dira. \"end\" ezartzen bada, fitxa berriak fitxen zerrendaren "
@@ -3017,8 +2979,8 @@ msgstr "Fitxategiak zakarrontzira mugitzen diren berrespena eskatu ala ez"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:107
 msgid ""
-"If set to true, then Baul will ask for confirmation when you attempt to move"
-" files to the Trash."
+"If set to true, then Baul will ask for confirmation when you attempt to move "
+"files to the Trash."
 msgstr ""
 "Egia ezartzen bada, Baul-k berrespena eskatuko du fitxategiak zakarrontzira "
 "mugitu nahi dituzunean."
@@ -3071,8 +3033,7 @@ msgstr ""
 "\"always\" (beti) ezartzen bada, beti erakutsiko da elementu-kopurua, baita "
 "direktorioa urruneko zerbitzari batean badago ere. \"local-only\" (lokalak "
 "bakarrik) ezartzen bada, fitxategi-sistema lokaletakoak bakarrik kontatzen "
-"ditu. \"never\" (inoiz ez) ezartzen bada, ez ditu inoiz elementuak "
-"kontatuko."
+"ditu. \"never\" (inoiz ez) ezartzen bada, ez ditu inoiz elementuak kontatuko."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:128
 msgid "Type of click used to launch/open files"
@@ -3097,8 +3058,8 @@ msgid ""
 "\"ask\" to ask what to do via a dialog, and \"display\" to display them as "
 "text files."
 msgstr ""
-"Zer egin testu-fitxategi exekutagarriekin aktibatzen direnean (klik bakarrez"
-" edo bikoitzez). Balio posibleak hauek dira: \"launch\" (abiarazi) programa "
+"Zer egin testu-fitxategi exekutagarriekin aktibatzen direnean (klik bakarrez "
+"edo bikoitzez). Balio posibleak hauek dira: \"launch\" (abiarazi) programa "
 "gisa abiarazteko, \"ask\" (galdetu) zer egin galdetzeko elkarrizketa-koadro "
 "baten bidez, eta \"display\" (bistaratu) testu-fitxategi gisa bistaratzeko."
 
@@ -3126,18 +3087,19 @@ msgid ""
 "will determine if any action is taken inside of Baul when either is pressed."
 msgstr ""
 "\"Aurrera\" eta \"Atzera\" botoidun saguak dituzten erabiltzaileentzako, "
-"gako honek zehaztuko du Baul barruan ekintzarik landuko den botoi hauetariko"
-" bat sakatzean."
+"gako honek zehaztuko du Baul barruan ekintzarik landuko den botoi hauetariko "
+"bat sakatzean."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:148
 msgid "Mouse button to activate the \"Forward\" command in browser window"
-msgstr "Saguaren botoia \"Aurrera\" komandoa aktibatzeko arakatzailearen leihoan"
+msgstr ""
+"Saguaren botoia \"Aurrera\" komandoa aktibatzeko arakatzailearen leihoan"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:149
 msgid ""
-"For users with mice that have buttons for \"Forward\" and \"Back\", this key"
-" will set which button activates the \"Forward\" command in a browser "
-"window. Possible values range between 6 and 14."
+"For users with mice that have buttons for \"Forward\" and \"Back\", this key "
+"will set which button activates the \"Forward\" command in a browser window. "
+"Possible values range between 6 and 14."
 msgstr ""
 "\"Aurrera\" eta \"Atzera\" botoidun saguak dituzten erabiltzaileentzako, "
 "gako honek \"Aurrera\" komandoa zein botoik aktibatuko duen arakatzailearen "
@@ -3145,12 +3107,13 @@ msgstr ""
 
 #: libbaul-private/org.cafe.baul.gschema.xml:153
 msgid "Mouse button to activate the \"Back\" command in browser window"
-msgstr "Saguaren botoia \"Atzera\" komandoa aktibatzeko arakatzailearen leihoan"
+msgstr ""
+"Saguaren botoia \"Atzera\" komandoa aktibatzeko arakatzailearen leihoan"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:154
 msgid ""
-"For users with mice that have buttons for \"Forward\" and \"Back\", this key"
-" will set which button activates the \"Back\" command in a browser window. "
+"For users with mice that have buttons for \"Forward\" and \"Back\", this key "
+"will set which button activates the \"Back\" command in a browser window. "
 "Possible values range between 6 and 14."
 msgstr ""
 "\"Aurrera\" eta \"Atzera\" botoidun saguak dituzten erabiltzaileentzako, "
@@ -3252,16 +3215,16 @@ msgstr "Alderantzikatu leiho berrien ordena"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:194
 msgid ""
-"If true, files in new windows will be sorted in reverse order. ie, if sorted"
-" by name, then instead of sorting the files from \"a\" to \"z\", they will "
-"be sorted from \"z\" to \"a\"; if sorted by size, instead of being "
+"If true, files in new windows will be sorted in reverse order. ie, if sorted "
+"by name, then instead of sorting the files from \"a\" to \"z\", they will be "
+"sorted from \"z\" to \"a\"; if sorted by size, instead of being "
 "incrementally they will be sorted decrementally."
 msgstr ""
 "Egia bada, leiho berrietako fitxategiak alderantzizko ordenan ordenatuko "
-"dira. Adibidez, izenaren arabera antolatuz gero, fitxategiak \"a\"-tik "
-"\"z\"-ra ordenatu beharrean \"z\"-tik \"a\"-ra ordenatuko dira; tamainaren "
-"arabera ordenatuz gero, txikitik handira ordenatu beharrean handitik txikira"
-" ordenatuko dira."
+"dira. Adibidez, izenaren arabera antolatuz gero, fitxategiak \"a\"-tik \"z\"-"
+"ra ordenatu beharrean \"z\"-tik \"a\"-ra ordenatuko dira; tamainaren arabera "
+"ordenatuz gero, txikitik handira ordenatu beharrean handitik txikira "
+"ordenatuko dira."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:198
 msgid "Baul uses the users home folder as the desktop"
@@ -3269,8 +3232,8 @@ msgstr "Baul-k erabiltzailearen etxeko karpeta mahaigain bezala erabiltzen du"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:199
 msgid ""
-"If set to true, then Baul will use the user's home folder as the desktop. If"
-" it is false, then it will use ~/Desktop as the desktop."
+"If set to true, then Baul will use the user's home folder as the desktop. If "
+"it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
 "Egia ezartzen bada, Baul-ek erabiltzailearen etxeko direktorioa mahaigain "
 "gisa erabiliko du. Faltsua bada, \"~/Desktop\" erabiliko du mahaigain gisa."
@@ -3290,8 +3253,7 @@ msgstr "Atzeko planoko kolore lehenetsia"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:209
 msgid ""
-"Color for the default folder background. Only used if background_set is "
-"true."
+"Color for the default folder background. Only used if background_set is true."
 msgstr ""
 "Karpeten atzeko planoaren kolore  lehenetsia. 'background_set' egia denean "
 "soilik erabiltzen da."
@@ -3313,8 +3275,7 @@ msgstr "Albo-paneleko atzeko plano pertsonalizatua"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:219
 msgid "Whether a custom default side pane background has been set."
-msgstr ""
-"Albo-panelean atzeko plano lehenetsi pertsonalizatua ezarri den ala ez"
+msgstr "Albo-panelean atzeko plano lehenetsi pertsonalizatua ezarri den ala ez"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:223
 msgid "Default Side Pane Background Color"
@@ -3428,8 +3389,8 @@ msgid ""
 "\"date_accessed\", \"owner\", \"group\", \"permissions\", "
 "\"octal_permissions\" and \"mime_type\"."
 msgstr ""
-"Ikono-ikuspegiko eta mahaigaineko ikonoen azpiko epigrafe-zerrenda. Agertzen"
-" den epigrafe-kopurua zoom-mailaren araberakoa da. Hauek dira zenbait balio "
+"Ikono-ikuspegiko eta mahaigaineko ikonoen azpiko epigrafe-zerrenda. Agertzen "
+"den epigrafe-kopurua zoom-mailaren araberakoa da. Hauek dira zenbait balio "
 "posible: \"size\" (tamaina), \"type\" (mota), \"date_modified\" (aldatze-"
 "data), \"date_changed\" (aldaketa-data), \"date_accessed\" (atzipen-data), "
 "\"owner\" (jabea), \"group\" (taldea), \"permissions\" (baimenak), "
@@ -3493,21 +3454,21 @@ msgid ""
 "larger (200%), largest (400%)"
 msgstr ""
 "Fitxategi-izen luzeegien zatiak, zoom mailaren arabera, elipsiekin nola "
-"ordezkatu zehazten duen katea. Zerrendako sarrera bakoitza \"Zoom "
-"Maila:Osokoa\" formakoa da. Zehaztutako zoom maila bakoitzean, dagokion "
-"zenbaki osoa 0 baino handiagoa bada, fitxategi-izenak ez ditu emandako "
-"lerroak baino gehiago izango. Zenbakia 0 edo txikiagoa bada, ez zaio mugarik"
-" jarriko bistaratutako lerro kopuruari zoom maila horretan. Zoom mailarik "
-"zehazten ez duen \"Osokoa\" formako sarrera lehenetsia ere onartzen da. "
-"Honek zoom maila guztientzako gehienezko lerro kopurua zehazten du. "
-"Adibidez: 0 - beti bistaratu fitxategi-izen luzeak; 3 - laburtu hiru lerro "
-"baino luzeagoak diren fitxategi-izenak; smallest:5,smaller:4,0 - laburtu 5 "
-"lerro baino luzeagoak diren fitxategi-izenak \"smallest\", txikiena, zoom "
-"mailan eta 4 lerro baino luzeagoak \"smaller\", txikiagoa, zoom mailan. "
-"Beste zoom mailetan fitxategi-izenak ez dira laburtuko. Zoomaren maila "
-"erabilgarriak: smallest, txikiena (% 33), smaller, txikiagoa (% 50), small, "
-"txikia (% 66), standard, estandarra (% 100), large, handia (% 150), larger, "
-"handiagoa (% 200), largest, handiena (% 400)"
+"ordezkatu zehazten duen katea. Zerrendako sarrera bakoitza \"Zoom Maila:"
+"Osokoa\" formakoa da. Zehaztutako zoom maila bakoitzean, dagokion zenbaki "
+"osoa 0 baino handiagoa bada, fitxategi-izenak ez ditu emandako lerroak baino "
+"gehiago izango. Zenbakia 0 edo txikiagoa bada, ez zaio mugarik jarriko "
+"bistaratutako lerro kopuruari zoom maila horretan. Zoom mailarik zehazten ez "
+"duen \"Osokoa\" formako sarrera lehenetsia ere onartzen da. Honek zoom maila "
+"guztientzako gehienezko lerro kopurua zehazten du. Adibidez: 0 - beti "
+"bistaratu fitxategi-izen luzeak; 3 - laburtu hiru lerro baino luzeagoak "
+"diren fitxategi-izenak; smallest:5,smaller:4,0 - laburtu 5 lerro baino "
+"luzeagoak diren fitxategi-izenak \"smallest\", txikiena, zoom mailan eta 4 "
+"lerro baino luzeagoak \"smaller\", txikiagoa, zoom mailan. Beste zoom "
+"mailetan fitxategi-izenak ez dira laburtuko. Zoomaren maila erabilgarriak: "
+"smallest, txikiena (% 33), smaller, txikiagoa (% 50), small, txikia (% 66), "
+"standard, estandarra (% 100), large, handia (% 150), larger, handiagoa (% "
+"200), largest, handiena (% 400)"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:332
 msgid "Default compact view zoom level"
@@ -3560,8 +3521,8 @@ msgstr "Karpetak zuhaitzaren albo-panelean bakarrik erakutsi"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:368
 msgid ""
-"If set to true, Baul will only show folders in the tree side pane. Otherwise"
-" it will show both folders and files."
+"If set to true, Baul will only show folders in the tree side pane. Otherwise "
+"it will show both folders and files."
 msgstr ""
 "Egia ezartzen bada, Baul-ek direktorioak zuhaitzaren albo-panelean bakarrik "
 "erakutsiko ditu. Bestela, direktorioak eta fitxategiak biak erakutsiko ditu."
@@ -3592,8 +3553,8 @@ msgstr "Ordenagailua ikonoa ikusgai mahaigainean"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:386
 msgid ""
-"If this is set to true, an icon linking to the computer location will be put"
-" on the desktop."
+"If this is set to true, an icon linking to the computer location will be put "
+"on the desktop."
 msgstr ""
 "Hemen egia ezartzen bada, ordenagailuaren helbidearekin estekatuta dagoen "
 "ikonoa mahaigainean agertuko da."
@@ -3679,20 +3640,20 @@ msgid ""
 "This name can be set if you want a custom name for the network servers icon "
 "on the desktop."
 msgstr ""
-"Izen hori ezar dezakezu, mahaigaineko sareko zerbitzarien ikonoarentzat izen"
-" pertsonalizatua nahi baduzu."
+"Izen hori ezar dezakezu, mahaigaineko sareko zerbitzarien ikonoarentzat izen "
+"pertsonalizatua nahi baduzu."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:426
 msgid ""
-"An integer specifying how parts of overlong file names should be replaced by"
-" ellipses on the desktop. If the number is larger than 0, the file name will"
-" not exceed the given number of lines. If the number is 0 or smaller, no "
+"An integer specifying how parts of overlong file names should be replaced by "
+"ellipses on the desktop. If the number is larger than 0, the file name will "
+"not exceed the given number of lines. If the number is 0 or smaller, no "
 "limit is imposed on the number of displayed lines."
 msgstr ""
 "Mahaigainean fitxategi izen luzeegien zatiak elipseekin nola ordeztu behar "
 "diren zehazten duen zenbaki oso bat. Zenbakia 0 baino handiagoa bada, "
-"fitxategi-izenak ez du adierazitako lerro-kopurua gaindituko. Zenbakia 0 edo"
-" txikiagoa bada, ez zaio mugarik ezarriko bistaratutako lerro kopuruari."
+"fitxategi-izenak ez du adierazitako lerro-kopurua gaindituko. Zenbakia 0 edo "
+"txikiagoa bada, ez zaio mugarik ezarriko bistaratutako lerro kopuruari."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:433
 msgid "The geometry string for a navigation window."
@@ -3700,8 +3661,8 @@ msgstr "Nabigazio leiho batentzako geometria katea."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:434
 msgid ""
-"A string containing the saved geometry and coordinates string for navigation"
-" windows."
+"A string containing the saved geometry and coordinates string for navigation "
+"windows."
 msgstr ""
 "Gordetako geometria eta nabigazio leihoentzako koordenatuak dituen katea."
 
@@ -3790,8 +3751,7 @@ msgstr ""
 #: libbaul-private/org.cafe.media-handling.gschema.xml:10
 msgid "Whether to automatically open a folder for automounted media"
 msgstr ""
-"Automatikoki muntatutako euskarriaren karpeta automatikoki irekiko den ala "
-"ez"
+"Automatikoki muntatutako euskarriaren karpeta automatikoki irekiko den ala ez"
 
 #: libbaul-private/org.cafe.media-handling.gschema.xml:11
 msgid ""
@@ -3830,8 +3790,8 @@ msgid ""
 "application in the preference capplet. The preferred application for the "
 "given type will be started on insertion on media matching these types."
 msgstr ""
-"Erabiltzaileak hobespenen miniaplikazioan aplikazio bat abiarazteko aukeratu"
-" duen x-content/* moten zerrenda. Emandako motaren aplikazio lehenetsia "
+"Erabiltzaileak hobespenen miniaplikazioan aplikazio bat abiarazteko aukeratu "
+"duen x-content/* moten zerrenda. Emandako motaren aplikazio lehenetsia "
 "abiaraziko da mota hauekin bat datorren euskarria sartzean."
 
 #: libbaul-private/org.cafe.media-handling.gschema.xml:25
@@ -3844,8 +3804,8 @@ msgid ""
 "the preference capplet. No prompt will be shown nor will any matching "
 "application be started on insertion of media matching these types."
 msgstr ""
-"Erabiltzaileak hobespenen miniaplikazioan \"Ezer ez egin\" aukeratu duen "
-"x-content/* moten zerrenda. Ez da galderarik egingo ezta aplikaziorik "
+"Erabiltzaileak hobespenen miniaplikazioan \"Ezer ez egin\" aukeratu duen x-"
+"content/* moten zerrenda. Ez da galderarik egingo ezta aplikaziorik "
 "abiaraziko mota hauekin bat datorren euskarria sartzean."
 
 #: libbaul-private/org.cafe.media-handling.gschema.xml:30
@@ -3858,8 +3818,8 @@ msgid ""
 "the preferences capplet. A folder window will be opened on insertion of "
 "media matching these types."
 msgstr ""
-"Erabiltzaileak hobespenen miniaplikazioan \"Ireki karpeta\" aukeratu duen "
-"x-content/* moten zerrenda. Karpetaren leihoa irekiko da mota hauekin bat "
+"Erabiltzaileak hobespenen miniaplikazioan \"Ireki karpeta\" aukeratu duen x-"
+"content/* moten zerrenda. Karpetaren leihoa irekiko da mota hauekin bat "
 "datorren euskarria sartzean."
 
 #: libegg/eggdesktopfile.c:166
@@ -4051,16 +4011,18 @@ msgstr ""
 #: src/baul-autorun-software.c:218
 #, c-format
 msgid ""
-"The software will run directly from the medium \"%s\". You should never run software that you don't trust.\n"
+"The software will run directly from the medium \"%s\". You should never run "
+"software that you don't trust.\n"
 "\n"
 "If in doubt, press Cancel."
 msgstr ""
-"Softwarea zuzenean \"%s\" euskarritik exekutatuko da. Fidatzen ez zaren softwarea inoiz ez zenuke exekutatu behar.\n"
+"Softwarea zuzenean \"%s\" euskarritik exekutatuko da. Fidatzen ez zaren "
+"softwarea inoiz ez zenuke exekutatu behar.\n"
 "\n"
 "Zalantza izanez gero, sakatu 'Utzi' botoia."
 
 #: src/baul-bookmarks-window.c:163 src/baul-file-management-properties.c:249
-#: src/baul-property-browser.c:1688 src/baul-window-menus.c:629
+#: src/baul-property-browser.c:1688 src/baul-window-menus.c:618
 #, c-format
 msgid ""
 "There was an error displaying help: \n"
@@ -4078,11 +4040,11 @@ msgid "Edit Bookmarks"
 msgstr "Editatu laster-markak"
 
 #: src/baul-bookmarks-window.ui:45 src/baul-connect-server-dialog.c:1114
-#: src/baul-emblem-sidebar.c:303 src/baul-emblem-sidebar.c:562
+#: src/baul-emblem-sidebar.c:303 src/baul-emblem-sidebar.c:557
 #: src/baul-file-management-properties.ui:305 src/baul-location-dialog.c:192
-#: src/baul-property-browser.c:389 src/baul-window-menus.c:852
-#: src/file-manager/fm-directory-view.c:1214
-#: src/file-manager/fm-properties-window.c:5233
+#: src/baul-property-browser.c:389 src/baul-window-menus.c:837
+#: src/file-manager/fm-directory-view.c:1210
+#: src/file-manager/fm-properties-window.c:5227
 msgid "_Help"
 msgstr "_Laguntza"
 
@@ -4091,9 +4053,9 @@ msgid "_Jump to"
 msgstr ""
 
 #: src/baul-bookmarks-window.ui:93 src/baul-file-management-properties.ui:321
-#: src/baul-property-browser.c:397 src/baul-window-menus.c:854
-#: src/file-manager/fm-list-view.c:2567
-#: src/file-manager/fm-properties-window.c:5238
+#: src/baul-property-browser.c:397 src/baul-window-menus.c:839
+#: src/file-manager/fm-list-view.c:2572
+#: src/file-manager/fm-properties-window.c:5232
 msgid "_Close"
 msgstr "_Itxi"
 
@@ -4172,8 +4134,8 @@ msgid "Continue"
 msgstr "Jarraitu"
 
 #: src/baul-connect-server-dialog.c:717 src/baul-location-dialog.c:105
-#: src/file-manager/fm-directory-view.c:1188
-#: src/file-manager/fm-properties-window.c:5475
+#: src/file-manager/fm-directory-view.c:1184
+#: src/file-manager/fm-properties-window.c:5469
 msgid "There was an error displaying help."
 msgstr "Errorea gertatu da laguntza bistaratzean."
 
@@ -4245,7 +4207,7 @@ msgstr ""
 "\n"
 "Gehitu muntai-puntua zerbitzariaren konexioari"
 
-#: src/baul-desktop-window.c:126 src/baul-desktop-window.c:319
+#: src/baul-desktop-window.c:124 src/baul-desktop-window.c:205
 #: src/baul-pathbar.c:1453 src/baul-places-sidebar.c:542
 msgid "Desktop"
 msgstr "Mahaigaina"
@@ -4257,8 +4219,8 @@ msgstr "Ezin izan da '%s' izeneko ikurra kendu."
 
 #: src/baul-emblem-sidebar.c:227 src/baul-emblem-sidebar.c:269
 msgid ""
-"This is probably because the emblem is a permanent one, and not one that you"
-" added yourself."
+"This is probably because the emblem is a permanent one, and not one that you "
+"added yourself."
 msgstr "Agian ikur iraunkorra izango da eta ez zuk gehitutakoa."
 
 #: src/baul-emblem-sidebar.c:268
@@ -4278,11 +4240,11 @@ msgstr "Idatzi bistaratutako ikurraren izen berria:"
 msgid "Rename"
 msgstr "Berrizendatu"
 
-#: src/baul-emblem-sidebar.c:548
+#: src/baul-emblem-sidebar.c:543
 msgid "Add Emblems..."
 msgstr "Gehitu ikurrak..."
 
-#: src/baul-emblem-sidebar.c:572
+#: src/baul-emblem-sidebar.c:567
 msgid ""
 "Enter a descriptive name next to each emblem.  This name will be used in "
 "other places to identify the emblem."
@@ -4290,7 +4252,7 @@ msgstr ""
 "Idatzi izen deskriptibo bat ikur bakoitzaren ondoan. Izen hori beste "
 "lekuetan erabiliko da ikurra identifikatzeko."
 
-#: src/baul-emblem-sidebar.c:576
+#: src/baul-emblem-sidebar.c:571
 msgid ""
 "Enter a descriptive name next to the emblem.  This name will be used in "
 "other places to identify the emblem."
@@ -4298,45 +4260,46 @@ msgstr ""
 "Idatzi izen deskriptibo bat ikurraren ondoan. Izen hori beste lekuetan "
 "erabiliko da ikurra identifikatzeko."
 
-#: src/baul-emblem-sidebar.c:818
+#: src/baul-emblem-sidebar.c:813
 msgid "Some of the files could not be added as emblems."
 msgstr "Fitxategi batzuk ezin dira ikur gisa gehitu."
 
-#: src/baul-emblem-sidebar.c:818 src/baul-emblem-sidebar.c:822
+#: src/baul-emblem-sidebar.c:813 src/baul-emblem-sidebar.c:817
 msgid "The emblems do not appear to be valid images."
 msgstr "Ikurrak ez dirudite baliozko irudiak."
 
-#: src/baul-emblem-sidebar.c:822
+#: src/baul-emblem-sidebar.c:817
 msgid "None of the files could be added as emblems."
 msgstr "Ezin izan da fitxategirik gehitu ikur gisa."
 
-#: src/baul-emblem-sidebar.c:867 src/baul-emblem-sidebar.c:929
+#: src/baul-emblem-sidebar.c:862 src/baul-emblem-sidebar.c:924
 #, c-format
 msgid "The file '%s' does not appear to be a valid image."
 msgstr "'%s' fitxategiak ez dirudi baliozko irudia."
 
-#: src/baul-emblem-sidebar.c:871
+#: src/baul-emblem-sidebar.c:866
 msgid "The dragged file does not appear to be a valid image."
 msgstr "Arrastatutako fitxategiak ez dirudi baliozko irudia."
 
-#: src/baul-emblem-sidebar.c:873 src/baul-emblem-sidebar.c:930
+#: src/baul-emblem-sidebar.c:868 src/baul-emblem-sidebar.c:925
 msgid "The emblem cannot be added."
 msgstr "Ezin izan da ikurra gehitu."
 
-#: src/baul-emblem-sidebar.c:1102 src/file-manager/fm-properties-window.c:3463
+#: src/baul-emblem-sidebar.c:1097 src/file-manager/fm-properties-window.c:3460
 msgid "Emblems"
 msgstr "Ikurrak"
 
-#: src/baul-emblem-sidebar.c:1108
+#: src/baul-emblem-sidebar.c:1103
 msgid "Show Emblems"
 msgstr "Erakutsi ikurrak"
 
 #. Translators: this is referred to captions under icons.
 #. Translators: this is referred to the permissions
 #. * the user has in a directory.
+#.
 #: src/baul-file-management-properties.c:342
-#: src/file-manager/fm-properties-window.c:4239
-#: src/file-manager/fm-properties-window.c:4250
+#: src/file-manager/fm-properties-window.c:4233
+#: src/file-manager/fm-properties-window.c:4244
 msgid "None"
 msgstr "Bat ere ez"
 
@@ -4348,21 +4311,21 @@ msgstr "Hedapenari buruz"
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:44
 #: src/file-manager/fm-icon-container.c:623
-#: src/file-manager/fm-icon-view.c:3436
+#: src/file-manager/fm-icon-view.c:3420
 msgid "Icon View"
 msgstr "Ikono-ikuspegia"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:47
-#: src/file-manager/fm-list-view.c:1861 src/file-manager/fm-list-view.c:3498
+#: src/file-manager/fm-list-view.c:1866 src/file-manager/fm-list-view.c:3501
 msgid "List View"
 msgstr "Ikusi zerrendan"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:50
-#: src/file-manager/fm-icon-view.c:3451
+#: src/file-manager/fm-icon-view.c:3435
 msgid "Compact View"
 msgstr "Ikuspegi trinkoa"
 
@@ -4929,24 +4892,20 @@ msgid "You cannot assign more than one custom icon at a time."
 msgstr ""
 "Ezin dituzu ikono pertsonalizatu bat baino gehiago aldi berean esleitu."
 
-#: src/baul-information-panel.c:527
-#: src/file-manager/fm-properties-window.c:515
+#: src/baul-information-panel.c:527 src/file-manager/fm-properties-window.c:512
 msgid "Please drag just one image to set a custom icon."
 msgstr "Arrastatu irudi bakarra ikono pertsonalizatu bat ezartzeko."
 
-#: src/baul-information-panel.c:554
-#: src/file-manager/fm-properties-window.c:526
+#: src/baul-information-panel.c:554 src/file-manager/fm-properties-window.c:523
 msgid "The file that you dropped is not local."
 msgstr "Jaregin duzun fitxategia ez da lokala."
 
-#: src/baul-information-panel.c:555
-#: src/file-manager/fm-properties-window.c:527
-#: src/file-manager/fm-properties-window.c:533
+#: src/baul-information-panel.c:555 src/file-manager/fm-properties-window.c:524
+#: src/file-manager/fm-properties-window.c:530
 msgid "You can only use local images as custom icons."
 msgstr "Irudi lokalak bakarrik erabil ditzakezu ikono pertsonal gisa."
 
-#: src/baul-information-panel.c:562
-#: src/file-manager/fm-properties-window.c:532
+#: src/baul-information-panel.c:562 src/file-manager/fm-properties-window.c:529
 msgid "The file that you dropped is not an image."
 msgstr "Jaregin duzun fitxategia ez da irudia."
 
@@ -4954,12 +4913,12 @@ msgstr "Jaregin duzun fitxategia ez da irudia."
 msgid "You can only use images as custom icons."
 msgstr "Irudiak bakarrik erabil ditzakezu ikono pertsonal gisa."
 
-#: src/baul-information-panel.c:748 src/file-manager/fm-directory-view.c:4515
+#: src/baul-information-panel.c:748 src/file-manager/fm-directory-view.c:4507
 #, c-format
 msgid "Open With %s"
 msgstr "Ireki honekin: %s"
 
-#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3319
+#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3316
 msgid "Location:"
 msgstr "Kokapena:"
 
@@ -4982,11 +4941,11 @@ msgstr "Ireki helbidea"
 msgid "_Location:"
 msgstr "_Kokalekua:"
 
-#: src/baul-navigation-action.c:147
+#: src/baul-navigation-action.c:145
 msgid "folder removed"
 msgstr ""
 
-#: src/baul-navigation-window.c:801
+#: src/baul-navigation-window.c:794
 #, c-format
 msgid "%s - File Browser"
 msgstr "%s - fitxategi-arakatzailea"
@@ -4995,230 +4954,228 @@ msgstr "%s - fitxategi-arakatzailea"
 msgid "Are you sure you want to clear the list of locations you have visited?"
 msgstr "Ziur zaude bisitatu dituzun helbideen zerrenda garbitu nahi duzula?"
 
-#: src/baul-navigation-window-menus.c:424 src/baul-window-bookmarks.c:85
+#: src/baul-navigation-window-menus.c:410 src/baul-window-bookmarks.c:85
 #, c-format
 msgid "The location \"%s\" does not exist."
 msgstr "\"%s\" helbiderik ez dago."
 
-#: src/baul-navigation-window-menus.c:426
+#: src/baul-navigation-window-menus.c:412
 msgid "The history location doesn't exist."
 msgstr "Historiaren helbidea ez dago."
 
-#: src/baul-navigation-window-menus.c:827
+#: src/baul-navigation-window-menus.c:805
 msgid "_Go"
 msgstr "_Joan"
 
-#: src/baul-navigation-window-menus.c:828
+#: src/baul-navigation-window-menus.c:806
 msgid "_Bookmarks"
 msgstr "_Laster-markak"
 
-#: src/baul-navigation-window-menus.c:829
+#: src/baul-navigation-window-menus.c:807
 msgid "_Tabs"
 msgstr "_Fitxak"
 
-#: src/baul-navigation-window-menus.c:830
+#: src/baul-navigation-window-menus.c:808
 msgid "New _Window"
 msgstr "Leiho _berria"
 
-#: src/baul-navigation-window-menus.c:831
+#: src/baul-navigation-window-menus.c:809
 msgid "Open another Baul window for the displayed location"
 msgstr "Bistaratutako helbidearentzat beste Baul leiho bat irekitzen du"
 
-#: src/baul-navigation-window-menus.c:834
+#: src/baul-navigation-window-menus.c:812
 msgid "New _Tab"
 msgstr "_Fitxa berria"
 
-#: src/baul-navigation-window-menus.c:835
+#: src/baul-navigation-window-menus.c:813
 msgid "Open another tab for the displayed location"
 msgstr "Bistaratutako helbidearentzat beste fitxa bat irekitzen du"
 
-#: src/baul-navigation-window-menus.c:838
+#: src/baul-navigation-window-menus.c:816
 msgid "Open Folder W_indow"
 msgstr "Ireki karpeta-_leihoa"
 
-#: src/baul-navigation-window-menus.c:839
+#: src/baul-navigation-window-menus.c:817
 msgid "Open a folder window for the displayed location"
 msgstr "Ireki bistaratutako helbidearen karpeta-leihoa"
 
-#: src/baul-navigation-window-menus.c:842
+#: src/baul-navigation-window-menus.c:820
 msgid "Close _All Windows"
 msgstr "Itxi leiho _guztiak"
 
-#: src/baul-navigation-window-menus.c:843
+#: src/baul-navigation-window-menus.c:821
 msgid "Close all Navigation windows"
 msgstr "Itxi nabigazioko leiho guztiak"
 
-#: src/baul-navigation-window-menus.c:846
+#: src/baul-navigation-window-menus.c:824
 msgid "_Location..."
 msgstr "_Helbidea..."
 
-#: src/baul-navigation-window-menus.c:847 src/baul-spatial-window.c:923
+#: src/baul-navigation-window-menus.c:825 src/baul-spatial-window.c:925
 msgid "Specify a location to open"
 msgstr "Zehaztu helbidea irekitzeko"
 
-#: src/baul-navigation-window-menus.c:850
+#: src/baul-navigation-window-menus.c:828
 msgid "Clea_r History"
 msgstr "_Garbitu historia"
 
-#: src/baul-navigation-window-menus.c:851
+#: src/baul-navigation-window-menus.c:829
 msgid "Clear contents of Go menu and Back/Forward lists"
 msgstr "Joan menuaren eta Atzera/Aurrera zerrenden edukia garbitzen du"
 
-#: src/baul-navigation-window-menus.c:854
+#: src/baul-navigation-window-menus.c:832
 msgid "S_witch to Other Pane"
 msgstr "Aldatu beste panelera"
 
-#: src/baul-navigation-window-menus.c:855
+#: src/baul-navigation-window-menus.c:833
 msgid "Move focus to the other pane in a split view window"
 msgstr "Eraman fokua ikuspegi zatitutako leihoaren beste panelera."
 
-#: src/baul-navigation-window-menus.c:858
+#: src/baul-navigation-window-menus.c:836
 msgid "Sa_me Location as Other Pane"
 msgstr "Beste _paneleko kokaleku bera"
 
-#: src/baul-navigation-window-menus.c:859
+#: src/baul-navigation-window-menus.c:837
 msgid "Go to the same location as in the extra pane"
 msgstr "Joan panel gehigarrian dagoen kokaleku berdinera"
 
-#: src/baul-navigation-window-menus.c:862 src/baul-spatial-window.c:936
+#: src/baul-navigation-window-menus.c:840 src/baul-spatial-window.c:938
 msgid "_Add Bookmark"
 msgstr "_Gehitu laster-marka"
 
-#: src/baul-navigation-window-menus.c:863 src/baul-spatial-window.c:937
+#: src/baul-navigation-window-menus.c:841 src/baul-spatial-window.c:939
 msgid "Add a bookmark for the current location to this menu"
 msgstr "Menu honetan uneko helbidearen laster-marka gehitzen du"
 
-#: src/baul-navigation-window-menus.c:866 src/baul-spatial-window.c:940
+#: src/baul-navigation-window-menus.c:844 src/baul-spatial-window.c:942
 msgid "_Edit Bookmarks..."
 msgstr "_Editatu laster-markak..."
 
-#: src/baul-navigation-window-menus.c:867 src/baul-spatial-window.c:941
+#: src/baul-navigation-window-menus.c:845 src/baul-spatial-window.c:943
 msgid "Display a window that allows editing the bookmarks in this menu"
 msgstr "Menu honetako laster-markak editatzeko leihoa bistaratzen du"
 
-#: src/baul-navigation-window-menus.c:871
+#: src/baul-navigation-window-menus.c:849
 msgid "_Previous Tab"
 msgstr "_Aurreko fitxa"
 
-#: src/baul-navigation-window-menus.c:872
+#: src/baul-navigation-window-menus.c:850
 msgid "Activate previous tab"
 msgstr "Aktibatu aurreko fitxa"
 
-#: src/baul-navigation-window-menus.c:876
+#: src/baul-navigation-window-menus.c:854
 msgid "_Next Tab"
 msgstr "_Hurrengo fitxa"
 
-#: src/baul-navigation-window-menus.c:877
+#: src/baul-navigation-window-menus.c:855
 msgid "Activate next tab"
 msgstr "Aktibatu hurrengo fitxa"
 
-#: src/baul-navigation-window-menus.c:881
-#: src/baul-navigation-window-pane.c:389
+#: src/baul-navigation-window-menus.c:859 src/baul-navigation-window-pane.c:389
 msgid "Move Tab _Left"
 msgstr "Eraman fitxa e_zkerrera"
 
-#: src/baul-navigation-window-menus.c:882
+#: src/baul-navigation-window-menus.c:860
 msgid "Move current tab to left"
 msgstr "Uneko fitxa ezkerrera eracafen du"
 
-#: src/baul-navigation-window-menus.c:886
-#: src/baul-navigation-window-pane.c:397
+#: src/baul-navigation-window-menus.c:864 src/baul-navigation-window-pane.c:397
 msgid "Move Tab _Right"
 msgstr "Eraman fitxa e_skuinera"
 
-#: src/baul-navigation-window-menus.c:887
+#: src/baul-navigation-window-menus.c:865
 msgid "Move current tab to right"
 msgstr "Uneko fitxa eskuinera eracafen du"
 
-#: src/baul-navigation-window-menus.c:891
+#: src/baul-navigation-window-menus.c:869
 msgid "S_how Search"
 msgstr "E_rakutsi bilaketa"
 
-#: src/baul-navigation-window-menus.c:892
+#: src/baul-navigation-window-menus.c:870
 msgid "Show search"
 msgstr "Erakutsi bilaketa"
 
-#: src/baul-navigation-window-menus.c:900
+#: src/baul-navigation-window-menus.c:878
 msgid "_Main Toolbar"
 msgstr "Tresna-barra _nagusia"
 
-#: src/baul-navigation-window-menus.c:901
+#: src/baul-navigation-window-menus.c:879
 msgid "Change the visibility of this window's main toolbar"
 msgstr "Aldatu leiho honetako tresna-barra nagusiaren ikusgaitasuna"
 
-#: src/baul-navigation-window-menus.c:906
+#: src/baul-navigation-window-menus.c:884
 msgid "_Side Pane"
 msgstr "Albo-_panela"
 
-#: src/baul-navigation-window-menus.c:907
+#: src/baul-navigation-window-menus.c:885
 msgid "Change the visibility of this window's side pane"
 msgstr "Leiho honetako albo-panela erakusten/ezkutatzen du"
 
-#: src/baul-navigation-window-menus.c:912
+#: src/baul-navigation-window-menus.c:890
 msgid "Location _Bar"
 msgstr "_Helbide-barra"
 
-#: src/baul-navigation-window-menus.c:913
+#: src/baul-navigation-window-menus.c:891
 msgid "Change the visibility of this window's location bar"
 msgstr "Leiho honetako helbide-barra erakusten/ezkutatzen du"
 
-#: src/baul-navigation-window-menus.c:918
+#: src/baul-navigation-window-menus.c:896
 msgid "St_atusbar"
 msgstr "_Egoera-barra"
 
-#: src/baul-navigation-window-menus.c:919
+#: src/baul-navigation-window-menus.c:897
 msgid "Change the visibility of this window's statusbar"
 msgstr "Leiho honetako egoera-barra erakusten/ezkutatzen du"
 
-#: src/baul-navigation-window-menus.c:924 src/baul-spatial-window.c:944
+#: src/baul-navigation-window-menus.c:902 src/baul-spatial-window.c:946
 msgid "_Search for Files..."
 msgstr "_Bilatu fitxategiak..."
 
-#: src/baul-navigation-window-menus.c:926
+#: src/baul-navigation-window-menus.c:904
 msgid "Search documents and folders by name"
 msgstr "Bilatu dokumentuak eta karpetak izenaren arabera"
 
-#: src/baul-navigation-window-menus.c:932
+#: src/baul-navigation-window-menus.c:910
 msgid "E_xtra Pane"
 msgstr "_Panel gehigarria"
 
-#: src/baul-navigation-window-menus.c:933
+#: src/baul-navigation-window-menus.c:911
 msgid "Open an extra folder view side-by-side"
 msgstr "Ireki karpetaren ikuspegi gehigarria alboz albo"
 
-#: src/baul-navigation-window-menus.c:960
+#: src/baul-navigation-window-menus.c:937
 msgid "_Back"
 msgstr "_Atzera"
 
-#: src/baul-navigation-window-menus.c:962
+#: src/baul-navigation-window-menus.c:939
 msgid "Go to the previous visited location"
 msgstr "Joan bisitatutako aurreko kokapenera"
 
-#: src/baul-navigation-window-menus.c:963
+#: src/baul-navigation-window-menus.c:940
 msgid "Back history"
 msgstr "Atzera joan historian"
 
-#: src/baul-navigation-window-menus.c:977
+#: src/baul-navigation-window-menus.c:954
 msgid "_Forward"
 msgstr "A_urrera"
 
-#: src/baul-navigation-window-menus.c:979
+#: src/baul-navigation-window-menus.c:956
 msgid "Go to the next visited location"
 msgstr "Joan bisitatutako hurrengo kokapenera"
 
-#: src/baul-navigation-window-menus.c:980
+#: src/baul-navigation-window-menus.c:957
 msgid "Forward history"
 msgstr "Aurrera joan historian"
 
-#: src/baul-navigation-window-menus.c:995
+#: src/baul-navigation-window-menus.c:972
 msgid "_Zoom"
 msgstr "_Zooma"
 
-#: src/baul-navigation-window-menus.c:1005
+#: src/baul-navigation-window-menus.c:982
 msgid "_View As"
 msgstr "Ikusi _honela"
 
-#: src/baul-navigation-window-menus.c:1044
+#: src/baul-navigation-window-menus.c:1017
 msgid "_Search"
 msgstr "_Bilatu"
 
@@ -5284,25 +5241,25 @@ msgid "Browse the contents of the network"
 msgstr "Arakatu sareko edukia"
 
 #: src/baul-places-sidebar.c:1813 src/baul-places-sidebar.c:2775
-#: src/file-manager/fm-directory-view.c:7550
-#: src/file-manager/fm-directory-view.c:7578
-#: src/file-manager/fm-directory-view.c:7659
-#: src/file-manager/fm-directory-view.c:8360
-#: src/file-manager/fm-directory-view.c:8364
-#: src/file-manager/fm-directory-view.c:8454
-#: src/file-manager/fm-directory-view.c:8458
-#: src/file-manager/fm-directory-view.c:8566
-#: src/file-manager/fm-directory-view.c:8570
+#: src/file-manager/fm-directory-view.c:7508
+#: src/file-manager/fm-directory-view.c:7536
+#: src/file-manager/fm-directory-view.c:7617
+#: src/file-manager/fm-directory-view.c:8303
+#: src/file-manager/fm-directory-view.c:8307
+#: src/file-manager/fm-directory-view.c:8395
+#: src/file-manager/fm-directory-view.c:8399
+#: src/file-manager/fm-directory-view.c:8505
+#: src/file-manager/fm-directory-view.c:8509
 msgid "_Start"
 msgstr "_Abiatu"
 
 #: src/baul-places-sidebar.c:1814 src/baul-places-sidebar.c:2782
-#: src/baul-window-menus.c:879 src/file-manager/fm-directory-view.c:7554
-#: src/file-manager/fm-directory-view.c:7582
-#: src/file-manager/fm-directory-view.c:7663
-#: src/file-manager/fm-directory-view.c:8389
-#: src/file-manager/fm-directory-view.c:8483
-#: src/file-manager/fm-directory-view.c:8595
+#: src/baul-window-menus.c:864 src/file-manager/fm-directory-view.c:7512
+#: src/file-manager/fm-directory-view.c:7540
+#: src/file-manager/fm-directory-view.c:7621
+#: src/file-manager/fm-directory-view.c:8332
+#: src/file-manager/fm-directory-view.c:8424
+#: src/file-manager/fm-directory-view.c:8534
 msgid "_Stop"
 msgstr "_Gelditu"
 
@@ -5310,9 +5267,9 @@ msgstr "_Gelditu"
 msgid "_Power On"
 msgstr "_Piztu"
 
-#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8393
-#: src/file-manager/fm-directory-view.c:8487
-#: src/file-manager/fm-directory-view.c:8599
+#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8336
+#: src/file-manager/fm-directory-view.c:8428
+#: src/file-manager/fm-directory-view.c:8538
 msgid "_Safely Remove Drive"
 msgstr "_Kendu unitatea modu seguruan"
 
@@ -5332,14 +5289,14 @@ msgstr "_Abiatu disko anitzeko gailua"
 msgid "_Stop Multi-disk Device"
 msgstr "_Gelditu disko anitzeko gailua"
 
-#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8470
-#: src/file-manager/fm-directory-view.c:8582
+#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8411
+#: src/file-manager/fm-directory-view.c:8521
 msgid "_Unlock Drive"
 msgstr "_Desblokeatu unitatea"
 
-#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8405
-#: src/file-manager/fm-directory-view.c:8499
-#: src/file-manager/fm-directory-view.c:8611
+#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8348
+#: src/file-manager/fm-directory-view.c:8440
+#: src/file-manager/fm-directory-view.c:8550
 msgid "_Lock Drive"
 msgstr "_Blokeatu unitatea"
 
@@ -5358,16 +5315,16 @@ msgstr "Ezin da euskarri aldakorren %s berreskuratu"
 msgid "Unable to stop %s"
 msgstr "Ezin da %s gelditu"
 
-#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7427
-#: src/file-manager/fm-directory-view.c:7608
-#: src/file-manager/fm-directory-view.c:8709
-#: src/file-manager/fm-directory-view.c:9056
+#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7385
+#: src/file-manager/fm-directory-view.c:7566
+#: src/file-manager/fm-directory-view.c:8643
+#: src/file-manager/fm-directory-view.c:8976
 #: src/file-manager/fm-tree-view.c:1280
 msgid "Open in New _Tab"
 msgstr "Ireki _fitxa berrian"
 
-#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8684
-#: src/file-manager/fm-directory-view.c:9015
+#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8620
+#: src/file-manager/fm-directory-view.c:8937
 #: src/file-manager/fm-tree-view.c:1289
 msgid "Open in New _Window"
 msgstr "Ireki leiho _berrian"
@@ -5380,21 +5337,21 @@ msgstr "Kendu"
 msgid "Rename..."
 msgstr "Berrizendatu"
 
-#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7534
-#: src/file-manager/fm-directory-view.c:7562
-#: src/file-manager/fm-directory-view.c:7643
+#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7492
+#: src/file-manager/fm-directory-view.c:7520
+#: src/file-manager/fm-directory-view.c:7601
 msgid "_Mount"
 msgstr "_Muntatu"
 
-#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7558
-#: src/file-manager/fm-directory-view.c:7586
-#: src/file-manager/fm-directory-view.c:7667
+#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7516
+#: src/file-manager/fm-directory-view.c:7544
+#: src/file-manager/fm-directory-view.c:7625
 msgid "_Detect Media"
 msgstr "_Detektatu euskarria"
 
-#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7546
-#: src/file-manager/fm-directory-view.c:7574
-#: src/file-manager/fm-directory-view.c:7655
+#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7504
+#: src/file-manager/fm-directory-view.c:7532
+#: src/file-manager/fm-directory-view.c:7613
 msgid "_Format"
 msgstr "_Forcafeatu"
 
@@ -5506,59 +5463,59 @@ msgstr "'%s' ez da irudi-fitxategi erabilgarria."
 msgid "The file is not an image."
 msgstr "Fitxategia ez da irudi bat."
 
-#: src/baul-property-browser.c:2311
+#: src/baul-property-browser.c:2307
 msgid "Select a Category:"
 msgstr "Hautatu kategoria bat:"
 
-#: src/baul-property-browser.c:2325
+#: src/baul-property-browser.c:2321
 msgid "C_ancel Remove"
 msgstr "_Utzi kentzea bertan behera"
 
-#: src/baul-property-browser.c:2334
+#: src/baul-property-browser.c:2330
 msgid "_Add a New Pattern..."
 msgstr "_Gehitu eredu berria..."
 
-#: src/baul-property-browser.c:2337
+#: src/baul-property-browser.c:2333
 msgid "_Add a New Color..."
 msgstr "_Gehitu kolore berria..."
 
-#: src/baul-property-browser.c:2340
+#: src/baul-property-browser.c:2336
 msgid "_Add a New Emblem..."
 msgstr "_Gehitu ikur berria..."
 
-#: src/baul-property-browser.c:2366
+#: src/baul-property-browser.c:2362
 msgid "Click on a pattern to remove it"
 msgstr "Egin klik kendu nahi duzun ereduan"
 
-#: src/baul-property-browser.c:2369
+#: src/baul-property-browser.c:2365
 msgid "Click on a color to remove it"
 msgstr "Egin klik kendu nahi duzun kolorean"
 
-#: src/baul-property-browser.c:2372
+#: src/baul-property-browser.c:2368
 msgid "Click on an emblem to remove it"
 msgstr "Egin klik kendu nahi duzun ikurrean"
 
-#: src/baul-property-browser.c:2384
+#: src/baul-property-browser.c:2380
 msgid "Patterns:"
 msgstr "Ereduak:"
 
-#: src/baul-property-browser.c:2387
+#: src/baul-property-browser.c:2383
 msgid "Colors:"
 msgstr "Koloreak:"
 
-#: src/baul-property-browser.c:2390
+#: src/baul-property-browser.c:2386
 msgid "Emblems:"
 msgstr "Ikurrak:"
 
-#: src/baul-property-browser.c:2412
+#: src/baul-property-browser.c:2408
 msgid "_Remove a Pattern..."
 msgstr "_Kendu eredu bat..."
 
-#: src/baul-property-browser.c:2415
+#: src/baul-property-browser.c:2411
 msgid "_Remove a Color..."
 msgstr "_Kendu kolore bat..."
 
-#: src/baul-property-browser.c:2418
+#: src/baul-property-browser.c:2414
 msgid "_Remove an Emblem..."
 msgstr "_Kendu ikur bat..."
 
@@ -5773,38 +5730,38 @@ msgstr "Bilatu:"
 msgid "Close the side pane"
 msgstr "Itxi albo-panela"
 
-#: src/baul-spatial-window.c:920
+#: src/baul-spatial-window.c:922
 msgid "_Places"
 msgstr "_Lekuak"
 
-#: src/baul-spatial-window.c:922
+#: src/baul-spatial-window.c:924
 msgid "Open _Location..."
 msgstr "Ireki _helbidea..."
 
-#: src/baul-spatial-window.c:927
+#: src/baul-spatial-window.c:929
 msgid "Close P_arent Folders"
 msgstr "Itxi karpeta g_urasoa"
 
-#: src/baul-spatial-window.c:928
+#: src/baul-spatial-window.c:930
 msgid "Close this folder's parents"
 msgstr "Itxi karpeta honen gurasoak"
 
-#: src/baul-spatial-window.c:932
+#: src/baul-spatial-window.c:934
 msgid "Clos_e All Folders"
 msgstr "_Itxi karpeta guztiak"
 
-#: src/baul-spatial-window.c:933
+#: src/baul-spatial-window.c:935
 msgid "Close all folder windows"
 msgstr "Itxi karpeta-leiho guztiak"
 
-#: src/baul-spatial-window.c:945
+#: src/baul-spatial-window.c:947
 msgid "Locate documents and folders on this computer by name or content"
 msgstr ""
 "Lokalizatu dokumentuak eta karpetak ordenagailu honetan izen edo edukiaren "
 "arabera"
 
-#: src/baul-trash-bar.c:202 src/file-manager/fm-desktop-icon-view.c:785
-#: src/file-manager/fm-directory-view.c:7448
+#: src/baul-trash-bar.c:202 src/file-manager/fm-desktop-icon-view.c:779
+#: src/file-manager/fm-directory-view.c:7406
 msgid "Delete all items in the Trash"
 msgstr "Ezabatu zakarrontziko elementu guztiak"
 
@@ -5818,8 +5775,8 @@ msgstr "Berrezarri hautatutako elementuak jatorrizko kokalekuetara"
 
 #: src/baul-window-bookmarks.c:83
 msgid ""
-"Do you want to remove any bookmarks with the non-existing location from your"
-" list?"
+"Do you want to remove any bookmarks with the non-existing location from your "
+"list?"
 msgstr ""
 "Existitzen ez diren helbideen laster-markak kendu nahi dituzu zerrendatik?"
 
@@ -5835,61 +5792,60 @@ msgstr "Aukeratu beste ikuspegi bat edo joan beste helbide batera."
 msgid "The location cannot be displayed with this viewer."
 msgstr "Ikustaile honekin ezin da helbidea bistaratu."
 
-#: src/baul-window-manage-views.c:1444
+#: src/baul-window-manage-views.c:1442
 msgid "Content View"
 msgstr "Eduki-ikuspegia"
 
-#: src/baul-window-manage-views.c:1445
+#: src/baul-window-manage-views.c:1443
 msgid "View of the current folder"
 msgstr "Ikusi uneko karpeta"
 
-#: src/baul-window-manage-views.c:2137
+#: src/baul-window-manage-views.c:2135
 msgid "Baul has no installed viewer capable of displaying the folder."
-msgstr ""
-"Baul-ek ez du karpeta bistaratzeko gauza den ikustailerik instalatuta."
+msgstr "Baul-ek ez du karpeta bistaratzeko gauza den ikustailerik instalatuta."
 
-#: src/baul-window-manage-views.c:2145
+#: src/baul-window-manage-views.c:2143
 msgid "The location is not a folder."
 msgstr "Helbidea ez da karpeta."
 
-#: src/baul-window-manage-views.c:2154
+#: src/baul-window-manage-views.c:2152
 #, c-format
 msgid "Could not find \"%s\"."
 msgstr "Ezin izan da \"%s\" aurkitu."
 
-#: src/baul-window-manage-views.c:2157
+#: src/baul-window-manage-views.c:2155
 msgid "Please check the spelling and try again."
 msgstr "Egiaztatu ondo idatzita dagoela eta saiatu berriro."
 
-#: src/baul-window-manage-views.c:2166
+#: src/baul-window-manage-views.c:2164
 #, c-format
 msgid "Baul cannot handle \"%s\" locations."
 msgstr "Baul-ek ezin du \"%s\" helbiderik kudeatu."
 
-#: src/baul-window-manage-views.c:2171
+#: src/baul-window-manage-views.c:2169
 msgid "Baul cannot handle this kind of location."
 msgstr "Baul-ek ezin du honelako helbiderik kudeatu."
 
-#: src/baul-window-manage-views.c:2178
+#: src/baul-window-manage-views.c:2176
 msgid "Unable to mount the location."
 msgstr "Ezin da helbidea muntatu."
 
-#: src/baul-window-manage-views.c:2184
+#: src/baul-window-manage-views.c:2182
 msgid "Access was denied."
 msgstr "Atzipena debekatu da."
 
-#: src/baul-window-manage-views.c:2193
+#: src/baul-window-manage-views.c:2191
 #, c-format
 msgid "Could not display \"%s\", because the host could not be found."
 msgstr "Ezin izan da \"%s\" bistaratu, ostalaria ez delako aurkitu."
 
-#: src/baul-window-manage-views.c:2195
+#: src/baul-window-manage-views.c:2193
 msgid ""
 "Check that the spelling is correct and that your proxy settings are correct."
 msgstr ""
 "Egiaztatu ondo idatzita dagoela eta zure proxy-ezarpenak zuzenak direla."
 
-#: src/baul-window-manage-views.c:2211
+#: src/baul-window-manage-views.c:2209
 #, c-format
 msgid ""
 "Error: %s\n"
@@ -5898,11 +5854,11 @@ msgstr ""
 "Errorea: %s\n"
 "Hautatu beste ikustaile bat eta saiatu berriro."
 
-#: src/baul-window-menus.c:199
+#: src/baul-window-menus.c:198
 msgid "Go to the location specified by this bookmark"
 msgstr "Laster-marka honek zehaztutako helbidera joaten da"
 
-#: src/baul-window-menus.c:535
+#: src/baul-window-menus.c:523
 msgid ""
 "Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -5913,76 +5869,77 @@ msgstr ""
 "ek argitaratutako GNU Lizentzia Publiko Orokorraren 2. bertsioan, edo "
 "(nahiago baduzu) beste berriago batean, jasotako baldintzak betez gero."
 
-#: src/baul-window-menus.c:539
+#: src/baul-window-menus.c:527
 msgid ""
 "Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
 "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
 "details."
 msgstr ""
-"Baul erabilgarria izango delakoan banatzen da, baina, INOLAKO BERMERIK GABE;"
-" era berean, ez da bermatzen beraren EGOKITASUNA MERKATURATZEKO edo HELBURU "
+"Baul erabilgarria izango delakoan banatzen da, baina, INOLAKO BERMERIK GABE; "
+"era berean, ez da bermatzen beraren EGOKITASUNA MERKATURATZEKO edo HELBURU "
 "PARTIKULARRETARAKO ERABILTZEKO. Argibide gehiago nahi izanez gero, ikus GNU "
 "Lizentzia Publiko Orokorra."
 
-#: src/baul-window-menus.c:543
+#: src/baul-window-menus.c:531
 msgid ""
-"You should have received a copy of the GNU General Public License along with"
-" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"You should have received a copy of the GNU General Public License along with "
+"Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
-"Baul programarekin batera GNU Lizentzia Publiko Orokorraren kopia bat jasoko"
-" zenuen; hala ez bada, idatzi hona: Free SoftwareFoundation, Inc., 51 "
+"Baul programarekin batera GNU Lizentzia Publiko Orokorraren kopia bat jasoko "
+"zenuen; hala ez bada, idatzi hona: Free SoftwareFoundation, Inc., 51 "
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
-#: src/baul-window-menus.c:575
+#: src/baul-window-menus.c:563
 msgid "About Baul"
 msgstr ""
 
-#: src/baul-window-menus.c:577
+#: src/baul-window-menus.c:565
 msgid ""
 "Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
 "Baul-ek zure fitxategi eta karpetak antolatzea uzten dizu, bai ordenagailu "
 "lokalean bai sarean."
 
-#: src/baul-window-menus.c:580
+#: src/baul-window-menus.c:568
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Baul authors"
+"Copyright © 2011-2020 The Caja authors\n"
+"Copyright © 2022 Pablo Barciela"
 msgstr ""
 
-#: src/baul-window-menus.c:586
+#: src/baul-window-menus.c:575
 msgid "translator-credits"
 msgstr ""
 "Asier Iturralde Sarasola <asier.iturralde@gmail.com>\n"
 "Aritz Jorge Sánchez"
 
-#: src/baul-window-menus.c:589
+#: src/baul-window-menus.c:578
 msgid "CAFE Web Site"
 msgstr "CAFE Webgunea"
 
-#: src/baul-window-menus.c:849
+#: src/baul-window-menus.c:834
 msgid "_File"
 msgstr "_Fitxategia"
 
-#: src/baul-window-menus.c:850
+#: src/baul-window-menus.c:835
 msgid "_Edit"
 msgstr "_Editatu"
 
-#: src/baul-window-menus.c:851
+#: src/baul-window-menus.c:836
 msgid "_View"
 msgstr "_Ikusi"
 
-#: src/baul-window-menus.c:855
+#: src/baul-window-menus.c:840
 msgid "Close this folder"
 msgstr "Itxi karpeta hau"
 
-#: src/baul-window-menus.c:860
+#: src/baul-window-menus.c:845
 msgid "_Backgrounds and Emblems..."
 msgstr "_Atzeko planoak eta ikurrak..."
 
-#: src/baul-window-menus.c:861
+#: src/baul-window-menus.c:846
 msgid ""
 "Display patterns, colors, and emblems that can be used to customize "
 "appearance"
@@ -5990,135 +5947,135 @@ msgstr ""
 "Itxura pertsonalizatzeko erabil daitezkeen ereduak, koloreak eta ikurrak "
 "bistaratzen ditu"
 
-#: src/baul-window-menus.c:866
+#: src/baul-window-menus.c:851
 msgid "Prefere_nces"
 msgstr "Hobes_penak"
 
-#: src/baul-window-menus.c:867
+#: src/baul-window-menus.c:852
 msgid "Edit Baul preferences"
 msgstr "Baul-en hobespenak editatzen ditu"
 
-#: src/baul-window-menus.c:870
+#: src/baul-window-menus.c:855
 msgid "Open _Parent"
 msgstr "Ireki g_urasoa"
 
-#: src/baul-window-menus.c:871
+#: src/baul-window-menus.c:856
 msgid "Open the parent folder"
 msgstr "Ireki gurasoa den karpeta"
 
-#: src/baul-window-menus.c:880
+#: src/baul-window-menus.c:865
 msgid "Stop loading the current location"
 msgstr "Gelditu uneko helbidea kargatzea"
 
-#: src/baul-window-menus.c:884
+#: src/baul-window-menus.c:869
 msgid "_Reload"
 msgstr "_Birkargatu"
 
-#: src/baul-window-menus.c:885
+#: src/baul-window-menus.c:870
 msgid "Reload the current location"
 msgstr "Kargatu berriro uneko helbidea"
 
-#: src/baul-window-menus.c:889
+#: src/baul-window-menus.c:874
 msgid "_Contents"
 msgstr "_Edukia"
 
-#: src/baul-window-menus.c:890
+#: src/baul-window-menus.c:875
 msgid "Display Baul help"
 msgstr "Baul-en laguntza bistaratzen du"
 
-#: src/baul-window-menus.c:894
+#: src/baul-window-menus.c:879
 msgid "_About"
 msgstr "Honi _buruz"
 
-#: src/baul-window-menus.c:895
+#: src/baul-window-menus.c:880
 msgid "Display credits for the creators of Baul"
 msgstr "Baul-ren sortzaileen kredituak bistaratzen ditu"
 
-#: src/baul-window-menus.c:899
+#: src/baul-window-menus.c:884
 msgid "Zoom _In"
 msgstr "_Zooma handiagotu"
 
-#: src/baul-window-menus.c:900 src/baul-zoom-control.c:99
+#: src/baul-window-menus.c:885 src/baul-zoom-control.c:99
 #: src/baul-zoom-control.c:312
 msgid "Increase the view size"
 msgstr "Handiagotu ikuspegiaren tamaina"
 
-#: src/baul-window-menus.c:914
+#: src/baul-window-menus.c:899
 msgid "Zoom _Out"
 msgstr "_Txikiagotu"
 
-#: src/baul-window-menus.c:915 src/baul-zoom-control.c:100
+#: src/baul-window-menus.c:900 src/baul-zoom-control.c:100
 #: src/baul-zoom-control.c:257
 msgid "Decrease the view size"
 msgstr "Gutxiagotu ikuspegiaren tamaina"
 
-#: src/baul-window-menus.c:924
+#: src/baul-window-menus.c:909
 msgid "Normal Si_ze"
 msgstr "Tamaina _normala"
 
-#: src/baul-window-menus.c:925 src/baul-zoom-control.c:101
+#: src/baul-window-menus.c:910 src/baul-zoom-control.c:101
 #: src/baul-zoom-control.c:273
 msgid "Use the normal view size"
 msgstr "Erabili ikuspegi normalaren tamaina"
 
-#: src/baul-window-menus.c:929
+#: src/baul-window-menus.c:914
 msgid "Connect to _Server..."
 msgstr "Konektatu _zerbitzarira..."
 
-#: src/baul-window-menus.c:930
+#: src/baul-window-menus.c:915
 msgid "Connect to a remote computer or shared disk"
 msgstr "Konektatu urruneko zerbitzari edo partekatutako disko batekin"
 
-#: src/baul-window-menus.c:934 src/file-manager/fm-directory-view.c:7683
-#: src/file-manager/fm-directory-view.c:7687
+#: src/baul-window-menus.c:919 src/file-manager/fm-directory-view.c:7641
+#: src/file-manager/fm-directory-view.c:7645
 msgid "_Home Folder"
 msgstr "_Karpeta nagusia"
 
-#: src/baul-window-menus.c:939
+#: src/baul-window-menus.c:924
 msgid "_Computer"
 msgstr "_Ordenagailua"
 
-#: src/baul-window-menus.c:944
+#: src/baul-window-menus.c:929
 msgid "_Network"
 msgstr "_Sarea"
 
-#: src/baul-window-menus.c:949
+#: src/baul-window-menus.c:934
 msgid "T_emplates"
 msgstr "_Txantiloiak"
 
-#: src/baul-window-menus.c:950
+#: src/baul-window-menus.c:935
 msgid "Open your personal templates folder"
 msgstr "Ireki txantiloien karpeta pertsonala"
 
-#: src/baul-window-menus.c:954
+#: src/baul-window-menus.c:939
 msgid "_Trash"
 msgstr "_Zakarrontzia"
 
-#: src/baul-window-menus.c:955
+#: src/baul-window-menus.c:940
 msgid "Open your personal trash folder"
 msgstr "Ireki zakarrontziaren karpeta pertsonala"
 
-#: src/baul-window-menus.c:963
+#: src/baul-window-menus.c:948
 msgid "Show _Hidden Files"
 msgstr "Erakutsi ezkutuko _fitxategiak"
 
-#: src/baul-window-menus.c:964
+#: src/baul-window-menus.c:949
 msgid "Toggle the display of hidden files in the current window"
 msgstr "Txandakatu fitxategi ezkutuak bistaratzea uneko leihoan"
 
-#: src/baul-window-menus.c:969
+#: src/baul-window-menus.c:954
 msgid "Show Bac_kup Files"
 msgstr ""
 
-#: src/baul-window-menus.c:970
+#: src/baul-window-menus.c:955
 msgid "Toggle the display of backup files in the current window"
 msgstr ""
 
-#: src/baul-window-menus.c:1003
+#: src/baul-window-menus.c:987
 msgid "_Up"
 msgstr "_Gora"
 
-#: src/baul-window-menus.c:1006
+#: src/baul-window-menus.c:990
 msgid "_Home"
 msgstr "_Karpeta nagusia"
 
@@ -6196,56 +6153,56 @@ msgstr "Ezarri uneko ikuspegiaren zoom-maila"
 msgid "Background"
 msgstr "Atzeko planoa"
 
-#: src/file-manager/fm-desktop-icon-view.c:749
-#: src/file-manager/fm-directory-view.c:7447
-#: src/file-manager/fm-directory-view.c:9186
+#: src/file-manager/fm-desktop-icon-view.c:745
+#: src/file-manager/fm-directory-view.c:7405
+#: src/file-manager/fm-directory-view.c:9099
 msgid "E_mpty Trash"
 msgstr "_Hustu zakarrontzia"
 
-#: src/file-manager/fm-desktop-icon-view.c:765
-#: src/file-manager/fm-directory-view.c:7411
+#: src/file-manager/fm-desktop-icon-view.c:759
+#: src/file-manager/fm-directory-view.c:7369
 msgid "Create L_auncher..."
 msgstr "Sortu a_biarazlea..."
 
-#: src/file-manager/fm-desktop-icon-view.c:767
-#: src/file-manager/fm-directory-view.c:7412
+#: src/file-manager/fm-desktop-icon-view.c:761
+#: src/file-manager/fm-directory-view.c:7370
 msgid "Create a new launcher"
 msgstr "Sortu abiarazle berria"
 
-#: src/file-manager/fm-desktop-icon-view.c:774
+#: src/file-manager/fm-desktop-icon-view.c:768
 msgid "Change Desktop _Background"
 msgstr "Aldatu _mahaigainaren atzeko planoa"
 
-#: src/file-manager/fm-desktop-icon-view.c:776
+#: src/file-manager/fm-desktop-icon-view.c:770
 msgid ""
 "Show a window that lets you set your desktop background's pattern or color"
 msgstr ""
 "Zure mahaigaineko atzeko planoaren eredua edo kolorea ezartzeko aukera "
 "ecafen dizun leihoa erakusten du"
 
-#: src/file-manager/fm-desktop-icon-view.c:783
+#: src/file-manager/fm-desktop-icon-view.c:777
 msgid "Empty Trash"
 msgstr "Hustu zakarrontzia"
 
-#: src/file-manager/fm-desktop-icon-view.c:886
+#: src/file-manager/fm-desktop-icon-view.c:878
 msgid "Desktop View"
 msgstr ""
 
-#: src/file-manager/fm-desktop-icon-view.c:887
-#: src/file-manager/fm-directory-view.c:7691
-#: src/file-manager/fm-directory-view.c:7695
+#: src/file-manager/fm-desktop-icon-view.c:879
+#: src/file-manager/fm-directory-view.c:7649
+#: src/file-manager/fm-directory-view.c:7653
 msgid "_Desktop"
 msgstr "_Mahaigaina"
 
-#: src/file-manager/fm-desktop-icon-view.c:888
+#: src/file-manager/fm-desktop-icon-view.c:880
 msgid "The desktop view encountered an error."
 msgstr "Mahaigainaren ikuspegiak errorea aurkitu du."
 
-#: src/file-manager/fm-desktop-icon-view.c:889
+#: src/file-manager/fm-desktop-icon-view.c:881
 msgid "The desktop view encountered an error while starting up."
 msgstr "Mahaigainaren ikuspegiak errorea aurkitu du abiaraztean."
 
-#: src/file-manager/fm-desktop-icon-view.c:890
+#: src/file-manager/fm-desktop-icon-view.c:882
 msgid "Display this location with the desktop view."
 msgstr ""
 
@@ -6263,75 +6220,74 @@ msgid_plural "This will open %'d separate windows."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:1209
+#: src/file-manager/fm-directory-view.c:1205
 msgid "Select Items Matching"
 msgstr "Hautatu bat datozen elementuak"
 
-#: src/file-manager/fm-directory-view.c:1233
+#: src/file-manager/fm-directory-view.c:1229
 msgid "_Pattern:"
 msgstr "_Eredua:"
 
-#: src/file-manager/fm-directory-view.c:1240
+#: src/file-manager/fm-directory-view.c:1236
 msgid "Examples: "
 msgstr "Adibideak: "
 
-#: src/file-manager/fm-directory-view.c:1366
+#: src/file-manager/fm-directory-view.c:1362
 msgid "Save Search as"
 msgstr "Gorde bilaketa honela"
 
-#: src/file-manager/fm-directory-view.c:1374
+#: src/file-manager/fm-directory-view.c:1370
 msgid "_Save"
 msgstr "_Gorde"
 
-#: src/file-manager/fm-directory-view.c:1393
+#: src/file-manager/fm-directory-view.c:1389
 msgid "Search _name:"
 msgstr "Bilaketaren i_zena:"
 
-#: src/file-manager/fm-directory-view.c:1409
+#: src/file-manager/fm-directory-view.c:1405
 msgid "_Folder:"
 msgstr "Kar_peta:"
 
-#: src/file-manager/fm-directory-view.c:1414
+#: src/file-manager/fm-directory-view.c:1410
 msgid "Select Folder to Save Search In"
 msgstr "Hautatu karpeta bertan bilaketa gordetzeko"
 
-#: src/file-manager/fm-directory-view.c:2310
-#: src/file-manager/fm-directory-view.c:2347
+#: src/file-manager/fm-directory-view.c:2306
+#: src/file-manager/fm-directory-view.c:2343
 #, c-format
 msgid "\"%s\" selected"
 msgstr "\"%s\" hautatuta"
 
-#: src/file-manager/fm-directory-view.c:2312
+#: src/file-manager/fm-directory-view.c:2308
 #, c-format
 msgid "%'d folder selected"
 msgid_plural "%'d folders selected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:2322
+#: src/file-manager/fm-directory-view.c:2318
 #, c-format
 msgid " (containing %'d item)"
 msgid_plural " (containing %'d items)"
 msgstr[0] ""
 msgstr[1] ""
 
-#. Translators: this is preceded with a string of form 'N folders' (N more
-#. than 1)
-#: src/file-manager/fm-directory-view.c:2333
+#. Translators: this is preceded with a string of form 'N folders' (N more than 1)
+#: src/file-manager/fm-directory-view.c:2329
 #, c-format
 msgid " (containing a total of %'d item)"
 msgid_plural " (containing a total of %'d items)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:2350
+#: src/file-manager/fm-directory-view.c:2346
 #, c-format
 msgid "%'d item selected"
 msgid_plural "%'d items selected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:2357
+#: src/file-manager/fm-directory-view.c:2353
 #, c-format
 msgid "%'d other item selected"
 msgid_plural "%'d other items selected"
@@ -6342,85 +6298,91 @@ msgstr[1] ""
 #. * needs to use something other than parentheses. The
 #. * first message gives the number of items selected;
 #. * the message in parentheses the size of those items.
-#: src/file-manager/fm-directory-view.c:2376
+#.
+#: src/file-manager/fm-directory-view.c:2372
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/file-manager/fm-directory-view.c:2389
+#: src/file-manager/fm-directory-view.c:2385
 #, c-format
 msgid "Free space: %s"
 msgstr "Leku librea: %s"
 
-#: src/file-manager/fm-directory-view.c:2400
+#: src/file-manager/fm-directory-view.c:2396
 #, c-format
 msgid "%s, Free space: %s"
 msgstr "%s, leku librea: %s"
 
-#: src/file-manager/fm-directory-view.c:2415
+#: src/file-manager/fm-directory-view.c:2411
 #, c-format
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: src/file-manager/fm-directory-view.c:2434
-#: src/file-manager/fm-directory-view.c:2448
+#: src/file-manager/fm-directory-view.c:2430
+#: src/file-manager/fm-directory-view.c:2444
 #, c-format
 msgid "%s%s, %s"
 msgstr "%s%s, %s"
 
-#: src/file-manager/fm-directory-view.c:2461
+#: src/file-manager/fm-directory-view.c:2457
 #, c-format
 msgid "%s%s, %s, %s"
 msgstr "%s%s, %s, %s"
 
-#: src/file-manager/fm-directory-view.c:4517
+#: src/file-manager/fm-directory-view.c:4509
 #, c-format
 msgid "Use \"%s\" to open the selected item"
 msgid_plural "Use \"%s\" to open the selected items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:4612
+#: src/file-manager/fm-directory-view.c:4598
 msgid "Open parent location"
 msgstr "Ireki kokaleku gurasoa"
 
-#: src/file-manager/fm-directory-view.c:4613
+#: src/file-manager/fm-directory-view.c:4599
 msgid "Open parent location for the selected item"
 msgstr "Ireki hautatutako elementuaren kokaleku gurasoa"
 
-#: src/file-manager/fm-directory-view.c:5490
+#: src/file-manager/fm-directory-view.c:5460
 #, c-format
 msgid "Run \"%s\" on any selected items"
 msgstr "Exekutatu \"%s\" hautatutako elementuetan"
 
-#: src/file-manager/fm-directory-view.c:5748
+#: src/file-manager/fm-directory-view.c:5712
 #, c-format
 msgid "Create Document from template \"%s\""
 msgstr "Sortu dokumentua \"%s\" txantiloitik"
 
-#: src/file-manager/fm-directory-view.c:6006
+#: src/file-manager/fm-directory-view.c:5964
 msgid "All executable files in this folder will appear in the Scripts menu."
 msgstr ""
 "Karpeta honetako fitxategi exekutagarri guztiak agertuko dira Script-en "
 "menuan."
 
-#: src/file-manager/fm-directory-view.c:6008
+#: src/file-manager/fm-directory-view.c:5966
 msgid ""
-"Choosing a script from the menu will run that script with any selected items"
-" as input."
+"Choosing a script from the menu will run that script with any selected items "
+"as input."
 msgstr ""
 "Menuko script bat aukeratzen baduzu, script hori exekutatuko da hautatutako "
 "edozein elementu sarrera moduan erabilita."
 
-#: src/file-manager/fm-directory-view.c:6010
+#: src/file-manager/fm-directory-view.c:5968
 msgid ""
-"All executable files in this folder will appear in the Scripts menu. Choosing a script from the menu will run that script.\n"
+"All executable files in this folder will appear in the Scripts menu. "
+"Choosing a script from the menu will run that script.\n"
 "\n"
-"When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
+"When executed from a local folder, scripts will be passed the selected file "
+"names. When executed from a remote folder (e.g. a folder showing web or ftp "
+"content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which "
+"the scripts may use:\n"
 "\n"
-"BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
+"BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files "
+"(only if local)\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_URIS: newline-delimited URIs for selected files\n"
 "\n"
@@ -6428,19 +6390,28 @@ msgid ""
 "\n"
 "BAUL_SCRIPT_WINDOW_GEOMETRY: position and size of current window\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: newline-delimited paths for selected files in the inactive pane of a split-view window (only if local)\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: newline-delimited paths for "
+"selected files in the inactive pane of a split-view window (only if local)\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: newline-delimited URIs for selected files in the inactive pane of a split-view window\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: newline-delimited URIs for selected "
+"files in the inactive pane of a split-view window\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI for current location in the inactive pane of a split-view window"
+"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI for current location in the inactive "
+"pane of a split-view window"
 msgstr ""
-"Karpeta honetako fitxategi exekutagarri guztiak agertuko dira Script-en menuan. Menuko script bat aukeratzen baduzu, script hori exekutatuko da.\n"
+"Karpeta honetako fitxategi exekutagarri guztiak agertuko dira Script-en "
+"menuan. Menuko script bat aukeratzen baduzu, script hori exekutatuko da.\n"
 "\n"
-"Karpeta lokaletik exekutatzen direnean, script-ei hautatutako fitxategien izenak pasatuko zaizkie. Urruneko karpeta batetik exekutatzen direnean (web edo ftp edukia duen karpeta batetik, adibidez), script-ei ez zaie parametrorik pasatuko.\n"
+"Karpeta lokaletik exekutatzen direnean, script-ei hautatutako fitxategien "
+"izenak pasatuko zaizkie. Urruneko karpeta batetik exekutatzen direnean (web "
+"edo ftp edukia duen karpeta batetik, adibidez), script-ei ez zaie "
+"parametrorik pasatuko.\n"
 "\n"
-"Edozein kasutan, script-ek erabili beharko dituzten ondoko ingurune-aldagaiak ezarriko ditu Baul-ek:\n"
+"Edozein kasutan, script-ek erabili beharko dituzten ondoko ingurune-"
+"aldagaiak ezarriko ditu Baul-ek:\n"
 "\n"
-"BAUL_SCRIPT_SELECTED_FILE_PATHS: hautatutako fitxategien bide-izenak lerro-jauziz mugatuta (lokaletarako bakarrik)\n"
+"BAUL_SCRIPT_SELECTED_FILE_PATHS: hautatutako fitxategien bide-izenak lerro-"
+"jauziz mugatuta (lokaletarako bakarrik)\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_URIS: hautatutako fitxategien URIak lerro-jauziz\n"
 "mugatuta\n"
@@ -6449,25 +6420,29 @@ msgstr ""
 "\n"
 "BAUL_SCRIPT_WINDOW_GEOMETRY: uneko leihoaren posizioa eta tamaina\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: hautatutako fitxategien bide-izenak lerro-jauziz mugatuta ikuspegi zatitutako leihoaren (lokalean soilik) panel inaktiboan\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: hautatutako fitxategien bide-"
+"izenak lerro-jauziz mugatuta ikuspegi zatitutako leihoaren (lokalean soilik) "
+"panel inaktiboan\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: hautatutako fitxategien URIak lerro-jauziz mugatuta ikuspegi zatitutako leihoaren panel inaktiboan\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: hautatutako fitxategien URIak lerro-"
+"jauziz mugatuta ikuspegi zatitutako leihoaren panel inaktiboan\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: uneko helbidearen URIa ikuspegi zatitutako leihoaren panel inaktiboan"
+"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: uneko helbidearen URIa ikuspegi "
+"zatitutako leihoaren panel inaktiboan"
 
-#: src/file-manager/fm-directory-view.c:6080
+#: src/file-manager/fm-directory-view.c:6038
 #: src/file-manager/fm-tree-view.c:1014
 #, c-format
 msgid "\"%s\" will be moved if you select the Paste command"
 msgstr "\"%s\" lekuz aldatuko da 'Itsatsi' komandoa hautatzen baduzu"
 
-#: src/file-manager/fm-directory-view.c:6084
+#: src/file-manager/fm-directory-view.c:6042
 #: src/file-manager/fm-tree-view.c:1020
 #, c-format
 msgid "\"%s\" will be copied if you select the Paste command"
 msgstr "\"%s\" kopiatu egingo da 'Itsatsi' komandoa hautatzen baduzu"
 
-#: src/file-manager/fm-directory-view.c:6091
+#: src/file-manager/fm-directory-view.c:6049
 #, c-format
 msgid "The %'d selected item will be moved if you select the Paste command"
 msgid_plural ""
@@ -6475,7 +6450,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:6098
+#: src/file-manager/fm-directory-view.c:6056
 #, c-format
 msgid "The %'d selected item will be copied if you select the Paste command"
 msgid_plural ""
@@ -6483,157 +6458,157 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:6278
+#: src/file-manager/fm-directory-view.c:6236
 #: src/file-manager/fm-tree-view.c:1060
 msgid "There is nothing on the clipboard to paste."
 msgstr "Arbelean ez dago itsasteko ezer."
 
-#: src/file-manager/fm-directory-view.c:6496
+#: src/file-manager/fm-directory-view.c:6454
 msgid "Unable to unmount location"
 msgstr "Ezin da kokalekua desmuntatu"
 
-#: src/file-manager/fm-directory-view.c:6517
+#: src/file-manager/fm-directory-view.c:6475
 msgid "Unable to eject location"
 msgstr "Ezin da kokalekua egotzi"
 
-#: src/file-manager/fm-directory-view.c:6532
+#: src/file-manager/fm-directory-view.c:6490
 msgid "Unable to stop drive"
 msgstr "Ezin da unitatea gelditu"
 
-#: src/file-manager/fm-directory-view.c:7092
+#: src/file-manager/fm-directory-view.c:7050
 #, c-format
 msgid "Connect to Server %s"
 msgstr "Konektatu %s zerbitzarira"
 
-#: src/file-manager/fm-directory-view.c:7104
-#: src/file-manager/fm-directory-view.c:8368
-#: src/file-manager/fm-directory-view.c:8462
-#: src/file-manager/fm-directory-view.c:8574
+#: src/file-manager/fm-directory-view.c:7062
+#: src/file-manager/fm-directory-view.c:8311
+#: src/file-manager/fm-directory-view.c:8403
+#: src/file-manager/fm-directory-view.c:8513
 msgid "_Connect"
 msgstr "_Konektatu"
 
-#: src/file-manager/fm-directory-view.c:7118
+#: src/file-manager/fm-directory-view.c:7076
 msgid "Link _name:"
 msgstr "Estekaren _izena:"
 
-#: src/file-manager/fm-directory-view.c:7389
+#: src/file-manager/fm-directory-view.c:7347
 msgid "Create _Document"
 msgstr "Sortu _dokumentua"
 
-#: src/file-manager/fm-directory-view.c:7390
+#: src/file-manager/fm-directory-view.c:7348
 msgid "Open Wit_h"
 msgstr "I_reki honekin"
 
-#: src/file-manager/fm-directory-view.c:7391
+#: src/file-manager/fm-directory-view.c:7349
 msgid "Choose a program with which to open the selected item"
 msgstr "Aukeratu programa bat hautatutako elementua irekitzeko"
 
-#: src/file-manager/fm-directory-view.c:7393
-#: src/file-manager/fm-directory-view.c:7672
+#: src/file-manager/fm-directory-view.c:7351
+#: src/file-manager/fm-directory-view.c:7630
 #: src/file-manager/fm-tree-view.c:1382
 msgid "_Properties"
 msgstr "_Propietateak"
 
-#: src/file-manager/fm-directory-view.c:7394
-#: src/file-manager/fm-directory-view.c:9173
+#: src/file-manager/fm-directory-view.c:7352
+#: src/file-manager/fm-directory-view.c:9086
 msgid "View or modify the properties of each selected item"
 msgstr "Hautatutako elementuen propietateak erakutsi edo aldatzen ditu"
 
-#: src/file-manager/fm-directory-view.c:7401
+#: src/file-manager/fm-directory-view.c:7359
 #: src/file-manager/fm-tree-view.c:1300
 msgid "Create _Folder"
 msgstr "Sortu _karpeta"
 
-#: src/file-manager/fm-directory-view.c:7402
+#: src/file-manager/fm-directory-view.c:7360
 msgid "Create a new empty folder inside this folder"
 msgstr "Sortu karpeta huts berria karpeta honen barruan"
 
-#: src/file-manager/fm-directory-view.c:7404
+#: src/file-manager/fm-directory-view.c:7362
 msgid "No templates installed"
 msgstr "Ez daude txantiloirik instalatuta"
 
 #. Translators: this is used to indicate that a file doesn't contain anything
 #. label, accelerator
-#: src/file-manager/fm-directory-view.c:7407
+#: src/file-manager/fm-directory-view.c:7365
 msgid "_Empty File"
 msgstr "Fitxategi _hutsa"
 
-#: src/file-manager/fm-directory-view.c:7408
+#: src/file-manager/fm-directory-view.c:7366
 msgid "Create a new empty file inside this folder"
 msgstr "Sortu fitxategi huts berria karpeta honen barruan"
 
-#: src/file-manager/fm-directory-view.c:7416
+#: src/file-manager/fm-directory-view.c:7374
 msgid "Open the selected item in this window"
 msgstr "Ireki hautatutako elementua leiho honetan"
 
-#: src/file-manager/fm-directory-view.c:7423
-#: src/file-manager/fm-directory-view.c:7604
+#: src/file-manager/fm-directory-view.c:7381
+#: src/file-manager/fm-directory-view.c:7562
 msgid "Open in Navigation Window"
 msgstr "Ireki nabigazio leihoan"
 
-#: src/file-manager/fm-directory-view.c:7424
+#: src/file-manager/fm-directory-view.c:7382
 msgid "Open each selected item in a navigation window"
 msgstr "Ireki hautatutako elementu bakoitza nabigazio leiho batean"
 
-#: src/file-manager/fm-directory-view.c:7428
+#: src/file-manager/fm-directory-view.c:7386
 msgid "Open each selected item in a new tab"
 msgstr "Ireki hautatutako elementu bakoitza fitxa berri batean"
 
-#: src/file-manager/fm-directory-view.c:7431
-#: src/file-manager/fm-directory-view.c:7613
+#: src/file-manager/fm-directory-view.c:7389
+#: src/file-manager/fm-directory-view.c:7571
 msgid "Open in _Folder Window"
 msgstr "Ireki karpeta-_leihoan"
 
-#: src/file-manager/fm-directory-view.c:7432
+#: src/file-manager/fm-directory-view.c:7390
 msgid "Open each selected item in a folder window"
 msgstr "Ireki hautatutako elementu bakoitza karpeta-leiho batean"
 
-#: src/file-manager/fm-directory-view.c:7435
+#: src/file-manager/fm-directory-view.c:7393
 msgid "Other _Application..."
 msgstr "Beste _aplikazioa..."
 
-#: src/file-manager/fm-directory-view.c:7436
-#: src/file-manager/fm-directory-view.c:7440
+#: src/file-manager/fm-directory-view.c:7394
+#: src/file-manager/fm-directory-view.c:7398
 msgid "Choose another application with which to open the selected item"
 msgstr "Aukeratu beste aplikazio bat hautatutako elementua irekitzeko"
 
-#: src/file-manager/fm-directory-view.c:7439
+#: src/file-manager/fm-directory-view.c:7397
 msgid "Open With Other _Application..."
 msgstr "Ireki beste _aplikazio batekin..."
 
-#: src/file-manager/fm-directory-view.c:7443
+#: src/file-manager/fm-directory-view.c:7401
 msgid "_Open Scripts Folder"
 msgstr "I_reki script-en karpeta"
 
-#: src/file-manager/fm-directory-view.c:7444
+#: src/file-manager/fm-directory-view.c:7402
 msgid "Show the folder containing the scripts that appear in this menu"
 msgstr "Menu honetan agertzen diren script-ak dituen karpeta erakusten du"
 
-#: src/file-manager/fm-directory-view.c:7452
+#: src/file-manager/fm-directory-view.c:7410
 msgid "Prepare the selected files to be moved with a Paste command"
 msgstr ""
 "Hautatutako fitxategiak 'Itsatsi' komandoaren bidez lekuz aldatzeko "
 "prestatzen ditu"
 
-#: src/file-manager/fm-directory-view.c:7456
+#: src/file-manager/fm-directory-view.c:7414
 msgid "Prepare the selected files to be copied with a Paste command"
 msgstr ""
 "Hautatutako fitxategiak 'Itsatsi' komandoaren bidez kopiatzeko prestatzen "
 "ditu"
 
-#: src/file-manager/fm-directory-view.c:7460
+#: src/file-manager/fm-directory-view.c:7418
 msgid "Move or copy files previously selected by a Cut or Copy command"
 msgstr ""
 "Aurrez hautatutako fitxategiak 'Ebaki' edo 'Kopiatu' komandoen bidez lekuz "
 "aldatu edo kopiatu ditu"
 
-#: src/file-manager/fm-directory-view.c:7465
-#: src/file-manager/fm-directory-view.c:7626
+#: src/file-manager/fm-directory-view.c:7423
+#: src/file-manager/fm-directory-view.c:7584
 #: src/file-manager/fm-tree-view.c:1329
 msgid "_Paste Into Folder"
 msgstr "I_tsatsi karpetan"
 
-#: src/file-manager/fm-directory-view.c:7466
+#: src/file-manager/fm-directory-view.c:7424
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into the "
 "selected folder"
@@ -6641,207 +6616,207 @@ msgstr ""
 "Aurrez hautatutako fitxategiak 'Ebaki' edo 'Kopiatu' komandoen bidez lekuz "
 "aldatu edo kopiatu ditu hautatutako karpetan"
 
-#: src/file-manager/fm-directory-view.c:7468
+#: src/file-manager/fm-directory-view.c:7426
 msgid "Cop_y to"
 msgstr "K_opiatu hona"
 
-#: src/file-manager/fm-directory-view.c:7469
+#: src/file-manager/fm-directory-view.c:7427
 msgid "M_ove to"
 msgstr "_Eraman hona"
 
-#: src/file-manager/fm-directory-view.c:7472
+#: src/file-manager/fm-directory-view.c:7430
 msgid "Select all items in this window"
 msgstr "Hautatu leiho honetako elementu guztiak"
 
-#: src/file-manager/fm-directory-view.c:7475
+#: src/file-manager/fm-directory-view.c:7433
 msgid "Select I_tems Matching..."
 msgstr "Hautatu _bat datozten elementuak..."
 
-#: src/file-manager/fm-directory-view.c:7476
+#: src/file-manager/fm-directory-view.c:7434
 msgid "Select items in this window matching a given pattern"
 msgstr "Hautatu emandako ereduarekin bat datozen leiho honetako elementuak"
 
-#: src/file-manager/fm-directory-view.c:7479
+#: src/file-manager/fm-directory-view.c:7437
 msgid "_Invert Selection"
 msgstr "_Alderantzikatu hautapena"
 
-#: src/file-manager/fm-directory-view.c:7480
+#: src/file-manager/fm-directory-view.c:7438
 msgid "Select all and only the items that are not currently selected"
 msgstr "Hautatu guztiak eta unean hautatu gabe dauden elementuak soilik"
 
-#: src/file-manager/fm-directory-view.c:7483
+#: src/file-manager/fm-directory-view.c:7441
 msgid "D_uplicate"
 msgstr "_Bikoiztu"
 
-#: src/file-manager/fm-directory-view.c:7484
+#: src/file-manager/fm-directory-view.c:7442
 msgid "Duplicate each selected item"
 msgstr "Hautatutako elementu guztiak bikoizten ditu"
 
-#: src/file-manager/fm-directory-view.c:7487
-#: src/file-manager/fm-directory-view.c:9156
+#: src/file-manager/fm-directory-view.c:7445
+#: src/file-manager/fm-directory-view.c:9070
 msgid "Ma_ke Link"
 msgid_plural "Ma_ke Links"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:7488
+#: src/file-manager/fm-directory-view.c:7446
 msgid "Create a symbolic link for each selected item"
 msgstr "Sortu esteka sinboliko bat hautatutako elementu bakoitzerako"
 
-#: src/file-manager/fm-directory-view.c:7491
+#: src/file-manager/fm-directory-view.c:7449
 msgid "_Rename..."
 msgstr "Be_rrizendatu..."
 
-#: src/file-manager/fm-directory-view.c:7492
+#: src/file-manager/fm-directory-view.c:7450
 msgid "Rename selected item"
 msgstr "Izena aldatu hautatutako elementuari"
 
-#: src/file-manager/fm-directory-view.c:7500
-#: src/file-manager/fm-directory-view.c:9115
+#: src/file-manager/fm-directory-view.c:7458
+#: src/file-manager/fm-directory-view.c:9031
 msgid "Move each selected item to the Trash"
 msgstr "Hautatutako elementu guztiak zakarrontzira botatzen ditu"
 
-#: src/file-manager/fm-directory-view.c:7504
+#: src/file-manager/fm-directory-view.c:7462
 msgid "Delete each selected item, without moving to the Trash"
 msgstr "Ezabatu hautatutako elementu bakoitza, zakarrontzira bota gabe"
 
-#: src/file-manager/fm-directory-view.c:7507
-#: src/file-manager/fm-directory-view.c:7639
+#: src/file-manager/fm-directory-view.c:7465
+#: src/file-manager/fm-directory-view.c:7597
 msgid "_Restore"
 msgstr "_Berrezarri"
 
-#: src/file-manager/fm-directory-view.c:7511
+#: src/file-manager/fm-directory-view.c:7469
 msgid "_Undo"
 msgstr "_Desegin"
 
-#: src/file-manager/fm-directory-view.c:7512
-#: src/file-manager/fm-directory-view.c:11345
+#: src/file-manager/fm-directory-view.c:7470
+#: src/file-manager/fm-directory-view.c:11247
 msgid "Undo the last action"
 msgstr "Azken ekintza desegiten du"
 
-#: src/file-manager/fm-directory-view.c:7515
+#: src/file-manager/fm-directory-view.c:7473
 msgid "_Redo"
 msgstr "_Berregin"
 
-#: src/file-manager/fm-directory-view.c:7516
-#: src/file-manager/fm-directory-view.c:11365
+#: src/file-manager/fm-directory-view.c:7474
+#: src/file-manager/fm-directory-view.c:11265
 msgid "Redo the last undone action"
 msgstr "Berregin desegindako azken ekintza"
 
-#: src/file-manager/fm-directory-view.c:7526
+#: src/file-manager/fm-directory-view.c:7484
 msgid "Reset View to _Defaults"
 msgstr "Berrezarri ikuspegia _lehenetsietara"
 
-#: src/file-manager/fm-directory-view.c:7527
+#: src/file-manager/fm-directory-view.c:7485
 msgid "Reset sorting order and zoom level to match preferences for this view"
 msgstr ""
-"Ordenatzeko modua eta zoom-maila berrezartzen du ikuspegi honen hobespenekin"
-" bat etortzeko"
+"Ordenatzeko modua eta zoom-maila berrezartzen du ikuspegi honen hobespenekin "
+"bat etortzeko"
 
-#: src/file-manager/fm-directory-view.c:7530
+#: src/file-manager/fm-directory-view.c:7488
 msgid "Connect To This Server"
 msgstr "Konektatu zerbitzarira"
 
-#: src/file-manager/fm-directory-view.c:7531
+#: src/file-manager/fm-directory-view.c:7489
 msgid "Make a permanent connection to this server"
 msgstr "Egin konexio finkoa zerbitzarira"
 
-#: src/file-manager/fm-directory-view.c:7535
+#: src/file-manager/fm-directory-view.c:7493
 msgid "Mount the selected volume"
 msgstr "Muntatu hautatutako bolumena"
 
-#: src/file-manager/fm-directory-view.c:7539
+#: src/file-manager/fm-directory-view.c:7497
 msgid "Unmount the selected volume"
 msgstr "Desmuntatu hautatutako bolumena"
 
-#: src/file-manager/fm-directory-view.c:7543
+#: src/file-manager/fm-directory-view.c:7501
 msgid "Eject the selected volume"
 msgstr "Egotzi hautatutako bolumena"
 
-#: src/file-manager/fm-directory-view.c:7547
+#: src/file-manager/fm-directory-view.c:7505
 msgid "Format the selected volume"
 msgstr "Eman formatua hautatutako bolumenari"
 
-#: src/file-manager/fm-directory-view.c:7551
+#: src/file-manager/fm-directory-view.c:7509
 msgid "Start the selected volume"
 msgstr "Hasi hautatutako bolumena"
 
-#: src/file-manager/fm-directory-view.c:7555
-#: src/file-manager/fm-directory-view.c:8596
+#: src/file-manager/fm-directory-view.c:7513
+#: src/file-manager/fm-directory-view.c:8535
 msgid "Stop the selected volume"
 msgstr "Gelditu hautatutako bolumena"
 
-#: src/file-manager/fm-directory-view.c:7559
-#: src/file-manager/fm-directory-view.c:7587
-#: src/file-manager/fm-directory-view.c:7668
+#: src/file-manager/fm-directory-view.c:7517
+#: src/file-manager/fm-directory-view.c:7545
+#: src/file-manager/fm-directory-view.c:7626
 msgid "Detect media in the selected drive"
 msgstr "Detektatu euskarria hautatutako unitatean"
 
-#: src/file-manager/fm-directory-view.c:7563
+#: src/file-manager/fm-directory-view.c:7521
 msgid "Mount the volume associated with the open folder"
 msgstr "Muntatu bolumena (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7567
+#: src/file-manager/fm-directory-view.c:7525
 msgid "Unmount the volume associated with the open folder"
 msgstr "Desmuntatu bolumena (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7571
+#: src/file-manager/fm-directory-view.c:7529
 msgid "Eject the volume associated with the open folder"
 msgstr "Egotzi bolumena (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7575
+#: src/file-manager/fm-directory-view.c:7533
 msgid "Format the volume associated with the open folder"
 msgstr "Eman formatu bolumenari (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7579
+#: src/file-manager/fm-directory-view.c:7537
 msgid "Start the volume associated with the open folder"
 msgstr "Abiatu bolumena (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7583
+#: src/file-manager/fm-directory-view.c:7541
 msgid "Stop the volume associated with the open folder"
 msgstr "Gelditu bolumena (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7590
+#: src/file-manager/fm-directory-view.c:7548
 msgid "Open File and Close window"
 msgstr "Ireki fitxategia eta itxi leihoa"
 
-#: src/file-manager/fm-directory-view.c:7594
+#: src/file-manager/fm-directory-view.c:7552
 msgid "Sa_ve Search"
 msgstr "_Gorde bilaketa"
 
-#: src/file-manager/fm-directory-view.c:7595
+#: src/file-manager/fm-directory-view.c:7553
 msgid "Save the edited search"
 msgstr "Gorde editatutako bilaketa"
 
-#: src/file-manager/fm-directory-view.c:7598
+#: src/file-manager/fm-directory-view.c:7556
 msgid "Sa_ve Search As..."
 msgstr "Gorde bilaketa _honela..."
 
-#: src/file-manager/fm-directory-view.c:7599
+#: src/file-manager/fm-directory-view.c:7557
 msgid "Save the current search as a file"
 msgstr "Gorde uneko bilaketa fitxategi gisa"
 
-#: src/file-manager/fm-directory-view.c:7605
+#: src/file-manager/fm-directory-view.c:7563
 msgid "Open this folder in a navigation window"
 msgstr "Ireki karpeta nabigazio leihoan"
 
-#: src/file-manager/fm-directory-view.c:7609
+#: src/file-manager/fm-directory-view.c:7567
 msgid "Open this folder in a new tab"
 msgstr "Ireki karpeta hau fitxa berri batean"
 
-#: src/file-manager/fm-directory-view.c:7614
+#: src/file-manager/fm-directory-view.c:7572
 msgid "Open this folder in a folder window"
 msgstr "Ireki karpeta hau karpeta-leiho batean"
 
-#: src/file-manager/fm-directory-view.c:7619
+#: src/file-manager/fm-directory-view.c:7577
 msgid "Prepare this folder to be moved with a Paste command"
 msgstr "Karpeta prestatzen du 'Itsatsi' komandoaren bidez lekuz aldatzeko"
 
-#: src/file-manager/fm-directory-view.c:7623
+#: src/file-manager/fm-directory-view.c:7581
 msgid "Prepare this folder to be copied with a Paste command"
 msgstr "Karpeta prestatzen du 'Itsatsi' komandoaren bidez kopiatzeko"
 
-#: src/file-manager/fm-directory-view.c:7627
+#: src/file-manager/fm-directory-view.c:7585
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into this "
 "folder"
@@ -6849,349 +6824,350 @@ msgstr ""
 "Aurrez hautatutako fitxategiak 'Ebaki' edo 'Kopiatu' komandoen bidez lekuz "
 "aldatu edo kopiatu karpeta honetan"
 
-#: src/file-manager/fm-directory-view.c:7632
+#: src/file-manager/fm-directory-view.c:7590
 msgid "Move this folder to the Trash"
 msgstr "Bota karpeta zakarrontzira"
 
-#: src/file-manager/fm-directory-view.c:7636
+#: src/file-manager/fm-directory-view.c:7594
 msgid "Delete this folder, without moving to the Trash"
 msgstr "Ezabatu karpeta, zakarrontzira bota gabe"
 
-#: src/file-manager/fm-directory-view.c:7644
+#: src/file-manager/fm-directory-view.c:7602
 msgid "Mount the volume associated with this folder"
 msgstr "Muntatu bolumena (karpeta honekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7648
+#: src/file-manager/fm-directory-view.c:7606
 msgid "Unmount the volume associated with this folder"
 msgstr "Desmuntatu bolumena (karpeta honekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7652
+#: src/file-manager/fm-directory-view.c:7610
 msgid "Eject the volume associated with this folder"
 msgstr "Egotzi bolumena (karpeta honekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7656
+#: src/file-manager/fm-directory-view.c:7614
 msgid "Format the volume associated with this folder"
 msgstr "Eman formatu bolumenari (karpeta honekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7660
+#: src/file-manager/fm-directory-view.c:7618
 msgid "Start the volume associated with this folder"
 msgstr "Abiatu bolumena (karpeta honekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7664
+#: src/file-manager/fm-directory-view.c:7622
 msgid "Stop the volume associated with this folder"
 msgstr "Gelditu bolumena (karpeta honekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:7673
+#: src/file-manager/fm-directory-view.c:7631
 msgid "View or modify the properties of this folder"
 msgstr "Ikusi edo aldatu karpeta honen propietateak"
 
-#: src/file-manager/fm-directory-view.c:7676
-#: src/file-manager/fm-directory-view.c:7679
+#: src/file-manager/fm-directory-view.c:7634
+#: src/file-manager/fm-directory-view.c:7637
 msgid "_Other pane"
 msgstr "_Beste panela"
 
-#: src/file-manager/fm-directory-view.c:7677
+#: src/file-manager/fm-directory-view.c:7635
 msgid "Copy the current selection to the other pane in the window"
 msgstr "Kopiatu uneko hautapena leihoko beste panelean"
 
-#: src/file-manager/fm-directory-view.c:7680
+#: src/file-manager/fm-directory-view.c:7638
 msgid "Move the current selection to the other pane in the window"
 msgstr "Eraman uneko hautapena leihoaren beste panelera"
 
-#: src/file-manager/fm-directory-view.c:7684
+#: src/file-manager/fm-directory-view.c:7642
 msgid "Copy the current selection to the home folder"
 msgstr "Kopiatu uneko hautapena karpeta nagusian"
 
-#: src/file-manager/fm-directory-view.c:7688
+#: src/file-manager/fm-directory-view.c:7646
 msgid "Move the current selection to the home folder"
 msgstr "Eraman uneko hautapena karpeta nagusira"
 
-#: src/file-manager/fm-directory-view.c:7692
+#: src/file-manager/fm-directory-view.c:7650
 msgid "Copy the current selection to the desktop"
 msgstr "Kopiatu uneko hautapena mahaigainean"
 
-#: src/file-manager/fm-directory-view.c:7696
+#: src/file-manager/fm-directory-view.c:7654
 msgid "Move the current selection to the desktop"
 msgstr "Eraman uneko hautapena mahaigainera"
 
 #. Translators: %s is a directory
-#: src/file-manager/fm-directory-view.c:7786
+#: src/file-manager/fm-directory-view.c:7740
 #, c-format
 msgid "Run or manage scripts from %s"
 msgstr "Exekutatu edo kudeatu %s direktorioko script-ak"
 
-#: src/file-manager/fm-directory-view.c:7789
+#: src/file-manager/fm-directory-view.c:7742
 msgid "_Scripts"
 msgstr "_Script-ak"
 
-#: src/file-manager/fm-directory-view.c:8205
+#: src/file-manager/fm-directory-view.c:8151
 #, c-format
 msgid "Move the open folder out of the trash to \"%s\""
 msgstr "Eraman irekitako karpeta zakarrontzitik hona: \"%s\""
 
-#: src/file-manager/fm-directory-view.c:8208
+#: src/file-manager/fm-directory-view.c:8154
 #, c-format
 msgid "Move the selected folder out of the trash to \"%s\""
 msgid_plural "Move the selected folders out of the trash to \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8212
+#: src/file-manager/fm-directory-view.c:8158
 msgid "Move the selected folder out of the trash"
 msgid_plural "Move the selected folders out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8218
+#: src/file-manager/fm-directory-view.c:8164
 #, c-format
 msgid "Move the selected file out of the trash to \"%s\""
 msgid_plural "Move the selected files out of the trash to \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8222
+#: src/file-manager/fm-directory-view.c:8168
 msgid "Move the selected file out of the trash"
 msgid_plural "Move the selected files out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8228
+#: src/file-manager/fm-directory-view.c:8174
 #, c-format
 msgid "Move the selected item out of the trash to \"%s\""
 msgid_plural "Move the selected items out of the trash to \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8232
+#: src/file-manager/fm-directory-view.c:8178
 msgid "Move the selected item out of the trash"
 msgid_plural "Move the selected items out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8361
-#: src/file-manager/fm-directory-view.c:8365
-#: src/file-manager/fm-directory-view.c:8567
-#: src/file-manager/fm-directory-view.c:8571
+#: src/file-manager/fm-directory-view.c:8304
+#: src/file-manager/fm-directory-view.c:8308
+#: src/file-manager/fm-directory-view.c:8506
+#: src/file-manager/fm-directory-view.c:8510
 msgid "Start the selected drive"
 msgstr "Abiatu hautatutako unitatea"
 
-#: src/file-manager/fm-directory-view.c:8369
-#: src/file-manager/fm-directory-view.c:8575
+#: src/file-manager/fm-directory-view.c:8312
+#: src/file-manager/fm-directory-view.c:8514
 msgid "Connect to the selected drive"
 msgstr "Konektatu hautatutako unitatearekin"
 
-#: src/file-manager/fm-directory-view.c:8372
-#: src/file-manager/fm-directory-view.c:8466
-#: src/file-manager/fm-directory-view.c:8578
+#: src/file-manager/fm-directory-view.c:8315
+#: src/file-manager/fm-directory-view.c:8407
+#: src/file-manager/fm-directory-view.c:8517
 msgid "_Start Multi-disk Drive"
 msgstr "_Abiatu disko anitzeko unitatea"
 
-#: src/file-manager/fm-directory-view.c:8373
-#: src/file-manager/fm-directory-view.c:8579
+#: src/file-manager/fm-directory-view.c:8316
+#: src/file-manager/fm-directory-view.c:8518
 msgid "Start the selected multi-disk drive"
 msgstr "Abiatu hautatutako disko anitzeko unitatea"
 
-#: src/file-manager/fm-directory-view.c:8376
+#: src/file-manager/fm-directory-view.c:8319
 msgid "U_nlock Drive"
 msgstr "_Desblokeatu unitatea"
 
-#: src/file-manager/fm-directory-view.c:8377
-#: src/file-manager/fm-directory-view.c:8583
+#: src/file-manager/fm-directory-view.c:8320
+#: src/file-manager/fm-directory-view.c:8522
 msgid "Unlock the selected drive"
 msgstr "Desblokeatu hautatutako unitatea"
 
-#: src/file-manager/fm-directory-view.c:8390
+#: src/file-manager/fm-directory-view.c:8333
 msgid "Stop the selected drive"
 msgstr "Gelditu hautatutako unitatea"
 
-#: src/file-manager/fm-directory-view.c:8394
-#: src/file-manager/fm-directory-view.c:8600
+#: src/file-manager/fm-directory-view.c:8337
+#: src/file-manager/fm-directory-view.c:8539
 msgid "Safely remove the selected drive"
 msgstr "Kendu hautatutako unitatea modu seguruan"
 
-#: src/file-manager/fm-directory-view.c:8397
-#: src/file-manager/fm-directory-view.c:8491
-#: src/file-manager/fm-directory-view.c:8603
+#: src/file-manager/fm-directory-view.c:8340
+#: src/file-manager/fm-directory-view.c:8432
+#: src/file-manager/fm-directory-view.c:8542
 msgid "_Disconnect"
 msgstr "_Deskonektatu"
 
-#: src/file-manager/fm-directory-view.c:8398
-#: src/file-manager/fm-directory-view.c:8604
+#: src/file-manager/fm-directory-view.c:8341
+#: src/file-manager/fm-directory-view.c:8543
 msgid "Disconnect the selected drive"
 msgstr "Deskonektatu hautatutako unitatea"
 
-#: src/file-manager/fm-directory-view.c:8401
-#: src/file-manager/fm-directory-view.c:8495
-#: src/file-manager/fm-directory-view.c:8607
+#: src/file-manager/fm-directory-view.c:8344
+#: src/file-manager/fm-directory-view.c:8436
+#: src/file-manager/fm-directory-view.c:8546
 msgid "_Stop Multi-disk Drive"
 msgstr "_Gelditu disko anitzeko unitatea"
 
-#: src/file-manager/fm-directory-view.c:8402
-#: src/file-manager/fm-directory-view.c:8608
+#: src/file-manager/fm-directory-view.c:8345
+#: src/file-manager/fm-directory-view.c:8547
 msgid "Stop the selected multi-disk drive"
 msgstr "Gelditu hautatutako disko anitzeko unitatea"
 
-#: src/file-manager/fm-directory-view.c:8406
-#: src/file-manager/fm-directory-view.c:8612
+#: src/file-manager/fm-directory-view.c:8349
+#: src/file-manager/fm-directory-view.c:8551
 msgid "Lock the selected drive"
 msgstr "Blokeatu hautatutako unitatea"
 
-#: src/file-manager/fm-directory-view.c:8455
-#: src/file-manager/fm-directory-view.c:8459
+#: src/file-manager/fm-directory-view.c:8396
+#: src/file-manager/fm-directory-view.c:8400
 msgid "Start the drive associated with the open folder"
 msgstr "Abiatu unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8463
+#: src/file-manager/fm-directory-view.c:8404
 msgid "Connect to the drive associated with the open folder"
 msgstr "Konektatu unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8467
+#: src/file-manager/fm-directory-view.c:8408
 msgid "Start the multi-disk drive associated with the open folder"
 msgstr "Abiatu disko anitzeko unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8471
+#: src/file-manager/fm-directory-view.c:8412
 msgid "Unlock the drive associated with the open folder"
 msgstr "Desblokeatu unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8484
+#: src/file-manager/fm-directory-view.c:8425
 msgid "_Stop the drive associated with the open folder"
 msgstr "_Gelditu unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8488
+#: src/file-manager/fm-directory-view.c:8429
 msgid "Safely remove the drive associated with the open folder"
 msgstr "Kendu modu seguruan unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8492
+#: src/file-manager/fm-directory-view.c:8433
 msgid "Disconnect the drive associated with the open folder"
 msgstr "Deskonektatu unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8496
+#: src/file-manager/fm-directory-view.c:8437
 msgid "Stop the multi-disk drive associated with the open folder"
 msgstr "Gelditu disko anitzeko unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8500
+#: src/file-manager/fm-directory-view.c:8441
 msgid "Lock the drive associated with the open folder"
 msgstr "Blokeatu unitatea (irekitako karpetarekin elkartutakoa)"
 
-#: src/file-manager/fm-directory-view.c:8686
-#: src/file-manager/fm-directory-view.c:9024
+#: src/file-manager/fm-directory-view.c:8622
+#: src/file-manager/fm-directory-view.c:8946
 msgid "Browse in New _Window"
 msgstr "Arakatu _leiho berrian"
 
-#: src/file-manager/fm-directory-view.c:8692
-#: src/file-manager/fm-directory-view.c:9034
+#: src/file-manager/fm-directory-view.c:8628
+#: src/file-manager/fm-directory-view.c:8956
 msgid "_Browse Folder"
 msgid_plural "_Browse Folders"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8711
-#: src/file-manager/fm-directory-view.c:9065
+#: src/file-manager/fm-directory-view.c:8645
+#: src/file-manager/fm-directory-view.c:8985
 msgid "Browse in New _Tab"
 msgstr "Arakatu _fitxa berrian"
 
-#: src/file-manager/fm-directory-view.c:8766
-#: src/file-manager/fm-directory-view.c:9110
+#: src/file-manager/fm-directory-view.c:8694
+#: src/file-manager/fm-directory-view.c:9026
 msgid "_Delete Permanently"
 msgstr "_Ezabatu behin betiko"
 
-#: src/file-manager/fm-directory-view.c:8767
+#: src/file-manager/fm-directory-view.c:8695
 msgid "Delete the open folder permanently"
 msgstr "Ezabatu irekitako karpeta behin betiko"
 
-#: src/file-manager/fm-directory-view.c:8771
+#: src/file-manager/fm-directory-view.c:8699
 msgid "Move the open folder to the Trash"
 msgstr "Bota irekitako karpeta zakarrontzira"
 
-#: src/file-manager/fm-directory-view.c:8962
+#: src/file-manager/fm-directory-view.c:8886
 #, c-format
 msgid "_Open With %s"
 msgstr "Ireki _honekin: %s"
 
-#: src/file-manager/fm-directory-view.c:9017
+#: src/file-manager/fm-directory-view.c:8939
 #, c-format
 msgid "Open in %'d New _Window"
 msgid_plural "Open in %'d New _Windows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:9026
+#: src/file-manager/fm-directory-view.c:8948
 #, c-format
 msgid "Browse in %'d New _Window"
 msgid_plural "Browse in %'d New _Windows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:9058
+#: src/file-manager/fm-directory-view.c:8978
 #, c-format
 msgid "Open in %'d New _Tab"
 msgid_plural "Open in %'d New _Tabs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:9067
+#: src/file-manager/fm-directory-view.c:8987
 #, c-format
 msgid "Browse in %'d New _Tab"
 msgid_plural "Browse in %'d New _Tabs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:9111
+#: src/file-manager/fm-directory-view.c:9027
 msgid "Delete all selected items permanently"
 msgstr "Hautatutako elementu guztiak behin betiko ezabatzen ditu"
 
-#: src/file-manager/fm-directory-view.c:9171
+#: src/file-manager/fm-directory-view.c:9084
 msgid "View or modify the properties of the open folder"
 msgstr "Ikusi edo aldatu irekitako karpetaren propietateak"
 
-#: src/file-manager/fm-directory-view.c:10481
+#: src/file-manager/fm-directory-view.c:10385
 msgid "Download location?"
 msgstr "Deskargatu helbidea?"
 
-#: src/file-manager/fm-directory-view.c:10484
+#: src/file-manager/fm-directory-view.c:10388
 msgid "You can download it or make a link to it."
 msgstr "Deskarga edo esteka bat sor dezakezu."
 
-#: src/file-manager/fm-directory-view.c:10487
+#: src/file-manager/fm-directory-view.c:10391
 msgid "Make a _Link"
 msgstr "Sortu _esteka"
 
-#: src/file-manager/fm-directory-view.c:10494
+#: src/file-manager/fm-directory-view.c:10398
 msgid "_Download"
 msgstr "_Deskargatu"
 
-#: src/file-manager/fm-directory-view.c:10651
-#: src/file-manager/fm-directory-view.c:10710
-#: src/file-manager/fm-directory-view.c:10823
+#: src/file-manager/fm-directory-view.c:10555
+#: src/file-manager/fm-directory-view.c:10614
+#: src/file-manager/fm-directory-view.c:10727
 msgid "Drag and drop is not supported."
 msgstr "Arrastatu eta jaregitea ez dago onartuta."
 
-#: src/file-manager/fm-directory-view.c:10652
+#: src/file-manager/fm-directory-view.c:10556
 msgid "Drag and drop is only supported on local file systems."
 msgstr ""
 "Arrastatu eta jaregitea fitxategi-sistema lokalekin bakarrik egin daiteke."
 
-#: src/file-manager/fm-directory-view.c:10711
-#: src/file-manager/fm-directory-view.c:10824
+#: src/file-manager/fm-directory-view.c:10615
+#: src/file-manager/fm-directory-view.c:10728
 msgid "An invalid drag type was used."
 msgstr "Arrastatze mota baliogabea erabili da."
 
 #. Translators: This is the filename used for when you dnd text to a directory
-#: src/file-manager/fm-directory-view.c:10901
+#: src/file-manager/fm-directory-view.c:10805
 msgid "dropped text.txt"
 msgstr "testua.txt jareginda"
 
 #. Translators: This is the filename used for when you dnd raw
 #. * data to a directory, if the source didn't supply a name.
-#: src/file-manager/fm-directory-view.c:10947
+#.
+#: src/file-manager/fm-directory-view.c:10851
 msgid "dropped data"
 msgstr "datuak jareginda"
 
-#: src/file-manager/fm-directory-view.c:11344
+#: src/file-manager/fm-directory-view.c:11246
 msgid "Undo"
 msgstr "Desegin"
 
-#: src/file-manager/fm-directory-view.c:11364
+#: src/file-manager/fm-directory-view.c:11264
 msgid "Redo"
 msgstr "Berregin"
 
@@ -7225,7 +7201,8 @@ msgstr ""
 
 #: src/file-manager/fm-error-reporting.c:72
 #, c-format
-msgid "You do not have the permissions necessary to view the contents of \"%s\"."
+msgid ""
+"You do not have the permissions necessary to view the contents of \"%s\"."
 msgstr "Ez duzu behar adinako baimenik \"%s\"(r)en edukia ikusteko."
 
 #: src/file-manager/fm-error-reporting.c:76
@@ -7252,8 +7229,10 @@ msgstr ""
 
 #: src/file-manager/fm-error-reporting.c:125
 #, c-format
-msgid "There is no \"%s\" in this folder. Perhaps it was just moved or deleted?"
-msgstr "Karpeta honetan ez dago \"%s\"(r)ik. Lekuz aldatu edo ezabatu egin duzu?"
+msgid ""
+"There is no \"%s\" in this folder. Perhaps it was just moved or deleted?"
+msgstr ""
+"Karpeta honetan ez dago \"%s\"(r)ik. Lekuz aldatu edo ezabatu egin duzu?"
 
 #: src/file-manager/fm-error-reporting.c:130
 #, c-format
@@ -7263,8 +7242,8 @@ msgstr "Ez duzu behar adina baimenik \"%s\"(r)i izena aldatzeko."
 #: src/file-manager/fm-error-reporting.c:136
 #, c-format
 msgid ""
-"The name \"%s\" is not valid because it contains the character \"/\". Please"
-" use a different name."
+"The name \"%s\" is not valid because it contains the character \"/\". Please "
+"use a different name."
 msgstr ""
 "\"%s\"izena ez da baliozkoa, \"/\" karakterea duelako. Erabili beste izen "
 "bat."
@@ -7285,7 +7264,8 @@ msgstr "Ezin izan da elementua berrizendatu."
 
 #: src/file-manager/fm-error-reporting.c:191
 #, c-format
-msgid "You do not have the permissions necessary to change the group of \"%s\"."
+msgid ""
+"You do not have the permissions necessary to change the group of \"%s\"."
 msgstr "Ez duzu behar adinako baimenik \"%s\"(r)en taldea aldatzeko."
 
 #: src/file-manager/fm-error-reporting.c:205
@@ -7324,7 +7304,7 @@ msgstr "\"%s\"izenaren ordez \"%s\" jarriko da."
 msgid "by _Name"
 msgstr "_Izenaren arabera"
 
-#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1760
+#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1750
 msgid "Keep icons sorted by name in rows"
 msgstr "Ikonoak errenkadetan ipintzen ditu izenaren arabera antolatuta"
 
@@ -7332,7 +7312,7 @@ msgstr "Ikonoak errenkadetan ipintzen ditu izenaren arabera antolatuta"
 msgid "by _Size"
 msgstr "_Tamainaren arabera"
 
-#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1766
+#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1756
 msgid "Keep icons sorted by size in rows"
 msgstr "Ikonoak errenkadetan ipintzen ditu tamainaren arabera antolatuta"
 
@@ -7340,7 +7320,7 @@ msgstr "Ikonoak errenkadetan ipintzen ditu tamainaren arabera antolatuta"
 msgid "by S_ize on Disk"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1772
+#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1762
 msgid "Keep icons sorted by disk usage in rows"
 msgstr ""
 
@@ -7348,7 +7328,7 @@ msgstr ""
 msgid "by _Type"
 msgstr "_Motaren arabera"
 
-#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1778
+#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1768
 msgid "Keep icons sorted by type in rows"
 msgstr "Ikonoak errenkadetan ipintzen ditu motaren arabera antolatuta"
 
@@ -7356,7 +7336,7 @@ msgstr "Ikonoak errenkadetan ipintzen ditu motaren arabera antolatuta"
 msgid "by Modification _Date"
 msgstr "Aldatze-_dataren arabera"
 
-#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1784
+#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1774
 msgid "Keep icons sorted by modification date in rows"
 msgstr "Ikonoak errenkadetan ipintzen ditu aldatze-dataren arabera antolatuta"
 
@@ -7364,7 +7344,7 @@ msgstr "Ikonoak errenkadetan ipintzen ditu aldatze-dataren arabera antolatuta"
 msgid "by _Emblems"
 msgstr "_Ikurren arabera"
 
-#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1790
+#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1780
 msgid "Keep icons sorted by emblems in rows"
 msgstr "Ikonoak errenkadetan ipintzen ditu ikurren arabera antolatuta"
 
@@ -7372,7 +7352,7 @@ msgstr "Ikonoak errenkadetan ipintzen ditu ikurren arabera antolatuta"
 msgid "by T_rash Time"
 msgstr "_Zakarrontziratze-dataren arabera"
 
-#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1796
+#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1786
 msgid "Keep icons sorted by trash time in rows"
 msgstr ""
 "Ikonoak errenkadetan ipintzen ditu zakarrontziratze-dataren arabera "
@@ -7386,148 +7366,148 @@ msgstr ""
 msgid "Keep icons sorted by reversed extension segments in rows"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:794
+#: src/file-manager/fm-icon-view.c:789
 msgid "_Organize Desktop by Name"
 msgstr "_Antolatu Mahaigaina izenaren arabera"
 
-#: src/file-manager/fm-icon-view.c:1709
+#: src/file-manager/fm-icon-view.c:1699
 msgid "Arran_ge Items"
 msgstr "Antolatu _elementuak"
 
-#: src/file-manager/fm-icon-view.c:1711
+#: src/file-manager/fm-icon-view.c:1701
 msgid "Resize Icon..."
 msgstr "Aldatu ikonoaren tamaina..."
 
-#: src/file-manager/fm-icon-view.c:1712
+#: src/file-manager/fm-icon-view.c:1702
 msgid "Make the selected icon resizable"
 msgstr "Hautatutako ikonoaren tamaina aldatzeko"
 
-#: src/file-manager/fm-icon-view.c:1716 src/file-manager/fm-icon-view.c:1935
+#: src/file-manager/fm-icon-view.c:1706 src/file-manager/fm-icon-view.c:1920
 msgid "Restore Icons' Original Si_zes"
 msgstr "Berrezarri ikonoen _jatorrizko tamaina"
 
-#: src/file-manager/fm-icon-view.c:1717
+#: src/file-manager/fm-icon-view.c:1707
 msgid "Restore each selected icon to its original size"
 msgstr "Hautatutako ikonoak jatorrizko tamainara leheneratzen ditu"
 
-#: src/file-manager/fm-icon-view.c:1721
+#: src/file-manager/fm-icon-view.c:1711
 msgid "_Organize by Name"
 msgstr "_Antolatu izenaren arabera"
 
-#: src/file-manager/fm-icon-view.c:1722
+#: src/file-manager/fm-icon-view.c:1712
 msgid "Reposition icons to better fit in the window and avoid overlapping"
 msgstr ""
 "Ikonoak antolatzen ditu leihoari hobeto egokitzeko eta elkarren gainean ez "
 "teilakatzeko"
 
-#: src/file-manager/fm-icon-view.c:1730
+#: src/file-manager/fm-icon-view.c:1720
 msgid "Compact _Layout"
 msgstr "Diseinu t_rinkoa"
 
-#: src/file-manager/fm-icon-view.c:1731
+#: src/file-manager/fm-icon-view.c:1721
 msgid "Toggle using a tighter layout scheme"
 msgstr "Diseinu-eskema estuagoa ezarri eta kentzen du"
 
-#: src/file-manager/fm-icon-view.c:1736
+#: src/file-manager/fm-icon-view.c:1726
 msgid "Re_versed Order"
 msgstr "Al_derantzizko ordena"
 
-#: src/file-manager/fm-icon-view.c:1737
+#: src/file-manager/fm-icon-view.c:1727
 msgid "Display icons in the opposite order"
 msgstr "Bistaratu ikonoak alderantzizko ordenan"
 
-#: src/file-manager/fm-icon-view.c:1742
+#: src/file-manager/fm-icon-view.c:1732
 msgid "_Keep Aligned"
 msgstr "Edu_ki lerrokatuta"
 
-#: src/file-manager/fm-icon-view.c:1743
+#: src/file-manager/fm-icon-view.c:1733
 msgid "Keep icons lined up on a grid"
 msgstr "Eduki ikonoak sareta batean lerrokatuta"
 
-#: src/file-manager/fm-icon-view.c:1753
+#: src/file-manager/fm-icon-view.c:1743
 msgid "_Manually"
 msgstr "_Eskuz"
 
-#: src/file-manager/fm-icon-view.c:1754
+#: src/file-manager/fm-icon-view.c:1744
 msgid "Leave icons wherever they are dropped"
 msgstr "Jaregiten zaien lekuan uzten ditu ikonoak"
 
-#: src/file-manager/fm-icon-view.c:1759
+#: src/file-manager/fm-icon-view.c:1749
 msgid "By _Name"
 msgstr "I_zenaren arabera"
 
-#: src/file-manager/fm-icon-view.c:1765
+#: src/file-manager/fm-icon-view.c:1755
 msgid "By _Size"
 msgstr "_Tamainaren arabera"
 
-#: src/file-manager/fm-icon-view.c:1771
+#: src/file-manager/fm-icon-view.c:1761
 msgid "By S_ize on Disk"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1777
+#: src/file-manager/fm-icon-view.c:1767
 msgid "By _Type"
 msgstr "_Motaren arabera"
 
-#: src/file-manager/fm-icon-view.c:1783
+#: src/file-manager/fm-icon-view.c:1773
 msgid "By Modification _Date"
 msgstr "Aldatze-_dataren arabera"
 
-#: src/file-manager/fm-icon-view.c:1789
+#: src/file-manager/fm-icon-view.c:1779
 msgid "By _Emblems"
 msgstr "_Ikurren arabera"
 
-#: src/file-manager/fm-icon-view.c:1795
+#: src/file-manager/fm-icon-view.c:1785
 msgid "By T_rash Time"
 msgstr "_Zakarrontziratze-dataren arabera"
 
-#: src/file-manager/fm-icon-view.c:1801
+#: src/file-manager/fm-icon-view.c:1791
 msgid "By E_xtension"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1802
+#: src/file-manager/fm-icon-view.c:1792
 msgid "Keep icons sorted by reverse extension segments in rows"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1936
+#: src/file-manager/fm-icon-view.c:1921
 msgid "Restore Icon's Original Si_ze"
 msgstr "Berrezarri ikonoen j_atorrizko tamaina"
 
-#: src/file-manager/fm-icon-view.c:2419
+#: src/file-manager/fm-icon-view.c:2403
 #, c-format
 msgid "pointing at \"%s\""
 msgstr "\"%s\" seinalatzen"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3438
+#: src/file-manager/fm-icon-view.c:3422
 msgid "_Icons"
 msgstr "_Ikonoak"
 
-#: src/file-manager/fm-icon-view.c:3439
+#: src/file-manager/fm-icon-view.c:3423
 msgid "The icon view encountered an error."
 msgstr "Ikono-ikuspegiak errorea aurkitu du."
 
-#: src/file-manager/fm-icon-view.c:3440
+#: src/file-manager/fm-icon-view.c:3424
 msgid "The icon view encountered an error while starting up."
 msgstr "Ikono-ikuspegiak errorea aurkitu du abiaraztean."
 
-#: src/file-manager/fm-icon-view.c:3441
+#: src/file-manager/fm-icon-view.c:3425
 msgid "Display this location with the icon view."
 msgstr "Bistaratu helbidea ikono-ikuspegiarekin"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3453
+#: src/file-manager/fm-icon-view.c:3437
 msgid "_Compact"
 msgstr "_Trinkoa"
 
-#: src/file-manager/fm-icon-view.c:3454
+#: src/file-manager/fm-icon-view.c:3438
 msgid "The compact view encountered an error."
 msgstr "Ikuspegi trinkoak errorea aurkitu du."
 
-#: src/file-manager/fm-icon-view.c:3455
+#: src/file-manager/fm-icon-view.c:3439
 msgid "The compact view encountered an error while starting up."
 msgstr "Ikuspegi trinkoak errorea aurkitu du abiaraztean."
 
-#: src/file-manager/fm-icon-view.c:3456
+#: src/file-manager/fm-icon-view.c:3440
 msgid "Display this location with the compact view."
 msgstr "Bistaratu helbidea ikuspegi trinkoarekin."
 
@@ -7535,311 +7515,312 @@ msgstr "Bistaratu helbidea ikuspegi trinkoarekin."
 msgid "(Empty)"
 msgstr "(Hutsa)"
 
-#: src/file-manager/fm-list-view.c:2558
+#: src/file-manager/fm-list-view.c:2563
 #, c-format
 msgid "%s Visible Columns"
 msgstr "%s zutabe ikusgaiak"
 
-#: src/file-manager/fm-list-view.c:2582
+#: src/file-manager/fm-list-view.c:2587
 msgid "Choose the order of information to appear in this folder:"
 msgstr "Aukeratu informazioaren ordena, karpeta honetan agertzeko:"
 
-#: src/file-manager/fm-list-view.c:2636
+#: src/file-manager/fm-list-view.c:2641
 msgid "Visible _Columns..."
 msgstr "_Zutabe ikusgaiak..."
 
-#: src/file-manager/fm-list-view.c:2637
+#: src/file-manager/fm-list-view.c:2642
 msgid "Select the columns visible in this folder"
 msgstr "Hautatu zutabe ikusgaiak karpeta honetan"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-list-view.c:3500
+#: src/file-manager/fm-list-view.c:3503
 msgid "_List"
 msgstr "_Zerrenda"
 
-#: src/file-manager/fm-list-view.c:3501
+#: src/file-manager/fm-list-view.c:3504
 msgid "The list view encountered an error."
 msgstr "Zerrenda-ikuspegiak errorea aurkitu du."
 
-#: src/file-manager/fm-list-view.c:3502
+#: src/file-manager/fm-list-view.c:3505
 msgid "The list view encountered an error while starting up."
 msgstr "Zerrenda-ikuspegiak errorea aurkitu du abiaraztean."
 
-#: src/file-manager/fm-list-view.c:3503
+#: src/file-manager/fm-list-view.c:3506
 msgid "Display this location with the list view."
 msgstr "Bistaratu helbidea zerrenda-ikuspegiarekin."
 
-#: src/file-manager/fm-properties-window.c:514
+#: src/file-manager/fm-properties-window.c:511
 msgid "You cannot assign more than one custom icon at a time!"
 msgstr ""
 "Ezin dituzu ikono pertsonalizatu bat baino gehiago aldi berean esleitu."
 
-#: src/file-manager/fm-properties-window.c:648
+#: src/file-manager/fm-properties-window.c:645
 msgid "_Name:"
 msgid_plural "_Names:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-properties-window.c:1004
+#: src/file-manager/fm-properties-window.c:1001
 msgid "Properties"
 msgstr "Propietateak"
 
-#: src/file-manager/fm-properties-window.c:1016
+#: src/file-manager/fm-properties-window.c:1013
 #, c-format
 msgid "%s Properties"
 msgstr "%s-ren propietateak"
 
-#: src/file-manager/fm-properties-window.c:1346
+#: src/file-manager/fm-properties-window.c:1343
 #, c-format
 msgctxt "MIME type description (MIME type)"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/file-manager/fm-properties-window.c:1554
+#: src/file-manager/fm-properties-window.c:1551
 msgid "Cancel Group Change?"
 msgstr "Talde-aldaketa bertan behera utzi?"
 
-#: src/file-manager/fm-properties-window.c:1969
+#: src/file-manager/fm-properties-window.c:1966
 msgid "Cancel Owner Change?"
 msgstr "Jabe-aldaketa bertan behera utzi?"
 
-#: src/file-manager/fm-properties-window.c:2296
+#: src/file-manager/fm-properties-window.c:2293
 msgid "nothing"
 msgstr "ezer ere ez"
 
-#: src/file-manager/fm-properties-window.c:2298
+#: src/file-manager/fm-properties-window.c:2295
 msgid "unreadable"
 msgstr "irakurtezina"
 
-#: src/file-manager/fm-properties-window.c:2317
+#: src/file-manager/fm-properties-window.c:2314
 #, c-format
 msgid "%'d item, with size %s (%s on disk)"
 msgid_plural "%'d items, totalling %s (%s on disk)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-properties-window.c:2327
+#: src/file-manager/fm-properties-window.c:2324
 msgid "(some contents unreadable)"
 msgstr "(eduki batzuk irakurtezinak)"
 
-#: src/file-manager/fm-properties-window.c:2344
+#: src/file-manager/fm-properties-window.c:2341
 msgid "Contents:"
 msgstr "Edukia:"
 
 #. Translators: "used" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3120
+#: src/file-manager/fm-properties-window.c:3117
 msgid "used"
 msgstr "erabilita"
 
 #. Translators: "free" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3131
+#: src/file-manager/fm-properties-window.c:3128
 msgid "free"
 msgstr "libre"
 
-#: src/file-manager/fm-properties-window.c:3135
+#: src/file-manager/fm-properties-window.c:3132
 msgid "Total capacity:"
 msgstr "Edukiera guztira:"
 
-#: src/file-manager/fm-properties-window.c:3149
+#: src/file-manager/fm-properties-window.c:3146
 msgid "Filesystem type:"
 msgstr "Fitxategi-sistema mota:"
 
-#: src/file-manager/fm-properties-window.c:3234
+#: src/file-manager/fm-properties-window.c:3231
 msgid "Basic"
 msgstr "Oinarrizkoa"
 
-#: src/file-manager/fm-properties-window.c:3296
+#: src/file-manager/fm-properties-window.c:3293
 msgid "Link target:"
 msgstr "Estekaren helburua:"
 
-#: src/file-manager/fm-properties-window.c:3310
+#: src/file-manager/fm-properties-window.c:3307
 msgid "Size on Disk:"
 msgstr "Tamaina diskoan:"
 
-#: src/file-manager/fm-properties-window.c:3325
+#: src/file-manager/fm-properties-window.c:3322
 msgid "Volume:"
 msgstr "Bolumena:"
 
-#: src/file-manager/fm-properties-window.c:3334
+#: src/file-manager/fm-properties-window.c:3331
 msgid "Accessed:"
 msgstr "Atzitze-data:"
 
-#: src/file-manager/fm-properties-window.c:3338
+#: src/file-manager/fm-properties-window.c:3335
 msgid "Modified:"
 msgstr "Aldatuta:"
 
-#: src/file-manager/fm-properties-window.c:3347
+#: src/file-manager/fm-properties-window.c:3344
 msgid "Free space:"
 msgstr "Leku librea:"
 
-#: src/file-manager/fm-properties-window.c:3875
+#: src/file-manager/fm-properties-window.c:3869
 msgid "_Read"
 msgstr "_Irakurri"
 
-#: src/file-manager/fm-properties-window.c:3877
+#: src/file-manager/fm-properties-window.c:3871
 msgid "_Write"
 msgstr "_Idatzi"
 
-#: src/file-manager/fm-properties-window.c:3879
+#: src/file-manager/fm-properties-window.c:3873
 msgid "E_xecute"
 msgstr "E_xekutatu"
 
 #. Translators: this gets concatenated to "no read",
 #. * "no access", etc. (see following strings)
-#: src/file-manager/fm-properties-window.c:4147
-#: src/file-manager/fm-properties-window.c:4158
-#: src/file-manager/fm-properties-window.c:4170
+#.
+#: src/file-manager/fm-properties-window.c:4141
+#: src/file-manager/fm-properties-window.c:4152
+#: src/file-manager/fm-properties-window.c:4164
 msgid "no "
 msgstr "ez "
 
-#: src/file-manager/fm-properties-window.c:4150
+#: src/file-manager/fm-properties-window.c:4144
 msgid "list"
 msgstr "zerrenda"
 
-#: src/file-manager/fm-properties-window.c:4152
+#: src/file-manager/fm-properties-window.c:4146
 msgid "read"
 msgstr "irakurri"
 
-#: src/file-manager/fm-properties-window.c:4161
+#: src/file-manager/fm-properties-window.c:4155
 msgid "create/delete"
 msgstr "sortu/ezabatu"
 
-#: src/file-manager/fm-properties-window.c:4163
+#: src/file-manager/fm-properties-window.c:4157
 msgid "write"
 msgstr "idatzi"
 
-#: src/file-manager/fm-properties-window.c:4172
+#: src/file-manager/fm-properties-window.c:4166
 msgid "access"
 msgstr "sarbidetu"
 
-#: src/file-manager/fm-properties-window.c:4220
+#: src/file-manager/fm-properties-window.c:4214
 msgid "Access:"
 msgstr "Sarbidetu:"
 
-#: src/file-manager/fm-properties-window.c:4222
+#: src/file-manager/fm-properties-window.c:4216
 msgid "Folder access:"
 msgstr "Karpetaren sarbidea:"
 
-#: src/file-manager/fm-properties-window.c:4224
+#: src/file-manager/fm-properties-window.c:4218
 msgid "File access:"
 msgstr "Fitxategiaren sarbidea:"
 
-#: src/file-manager/fm-properties-window.c:4242
+#: src/file-manager/fm-properties-window.c:4236
 msgid "List files only"
 msgstr "Zerrendatu fitxategiak soilik"
 
-#: src/file-manager/fm-properties-window.c:4244
+#: src/file-manager/fm-properties-window.c:4238
 msgid "Access files"
 msgstr "Sarbidetu fitxategiak"
 
-#: src/file-manager/fm-properties-window.c:4246
+#: src/file-manager/fm-properties-window.c:4240
 msgid "Create and delete files"
 msgstr "Sortu eta ezabatu fitxategiak"
 
-#: src/file-manager/fm-properties-window.c:4253
+#: src/file-manager/fm-properties-window.c:4247
 msgid "Read-only"
 msgstr "Irakurtzeko soilik"
 
-#: src/file-manager/fm-properties-window.c:4255
+#: src/file-manager/fm-properties-window.c:4249
 msgid "Read and write"
 msgstr "Irakurri eta idatzi"
 
-#: src/file-manager/fm-properties-window.c:4320
+#: src/file-manager/fm-properties-window.c:4314
 msgid "Special flags:"
 msgstr "Bandera bereziak:"
 
-#: src/file-manager/fm-properties-window.c:4322
+#: src/file-manager/fm-properties-window.c:4316
 msgid "Set _user ID"
 msgstr "Ezarri _erabiltzailearen IDa"
 
-#: src/file-manager/fm-properties-window.c:4323
+#: src/file-manager/fm-properties-window.c:4317
 msgid "Set gro_up ID"
 msgstr "Ezarri _taldearen IDa"
 
-#: src/file-manager/fm-properties-window.c:4324
+#: src/file-manager/fm-properties-window.c:4318
 msgid "_Sticky"
 msgstr "Itsas_korra"
 
-#: src/file-manager/fm-properties-window.c:4399
-#: src/file-manager/fm-properties-window.c:4591
+#: src/file-manager/fm-properties-window.c:4393
+#: src/file-manager/fm-properties-window.c:4585
 msgid "_Owner:"
 msgstr "_Jabea:"
 
-#: src/file-manager/fm-properties-window.c:4407
-#: src/file-manager/fm-properties-window.c:4497
-#: src/file-manager/fm-properties-window.c:4600
+#: src/file-manager/fm-properties-window.c:4401
+#: src/file-manager/fm-properties-window.c:4491
+#: src/file-manager/fm-properties-window.c:4594
 msgid "Owner:"
 msgstr "Jabea:"
 
-#: src/file-manager/fm-properties-window.c:4431
-#: src/file-manager/fm-properties-window.c:4615
+#: src/file-manager/fm-properties-window.c:4425
+#: src/file-manager/fm-properties-window.c:4609
 msgid "_Group:"
 msgstr "_Taldea:"
 
-#: src/file-manager/fm-properties-window.c:4439
-#: src/file-manager/fm-properties-window.c:4498
-#: src/file-manager/fm-properties-window.c:4623
+#: src/file-manager/fm-properties-window.c:4433
+#: src/file-manager/fm-properties-window.c:4492
+#: src/file-manager/fm-properties-window.c:4617
 msgid "Group:"
 msgstr "Taldea:"
 
-#: src/file-manager/fm-properties-window.c:4463
+#: src/file-manager/fm-properties-window.c:4457
 msgid "Others"
 msgstr "Besterik"
 
-#: src/file-manager/fm-properties-window.c:4478
+#: src/file-manager/fm-properties-window.c:4472
 msgid "Execute:"
 msgstr "Exekutatu:"
 
-#: src/file-manager/fm-properties-window.c:4481
+#: src/file-manager/fm-properties-window.c:4475
 msgid "Allow _executing file as program"
 msgstr "Baimendu fitxategia programa bezala _exekutatzea"
 
-#: src/file-manager/fm-properties-window.c:4499
+#: src/file-manager/fm-properties-window.c:4493
 msgid "Others:"
 msgstr "Besterik:"
 
-#: src/file-manager/fm-properties-window.c:4639
+#: src/file-manager/fm-properties-window.c:4633
 msgid "Folder Permissions:"
 msgstr "Karpetaren baimenak:"
 
-#: src/file-manager/fm-properties-window.c:4646
+#: src/file-manager/fm-properties-window.c:4640
 msgid "File Permissions:"
 msgstr "Fitxategiaren baimenak:"
 
-#: src/file-manager/fm-properties-window.c:4655
+#: src/file-manager/fm-properties-window.c:4649
 msgid "Text view:"
 msgstr "Testu-ikuspegia:"
 
-#: src/file-manager/fm-properties-window.c:4803
+#: src/file-manager/fm-properties-window.c:4797
 msgid "You are not the owner, so you cannot change these permissions."
 msgstr "Ez zara jabea, beraz ezin dituzu baimen hauek aldatu."
 
-#: src/file-manager/fm-properties-window.c:4823
+#: src/file-manager/fm-properties-window.c:4817
 msgid "SELinux context:"
 msgstr "SELinux testuingurua:"
 
-#: src/file-manager/fm-properties-window.c:4828
+#: src/file-manager/fm-properties-window.c:4822
 msgid "Last changed:"
 msgstr "Azken aldaketa:"
 
-#: src/file-manager/fm-properties-window.c:4841
+#: src/file-manager/fm-properties-window.c:4835
 msgid "Apply Permissions to Enclosed Files"
 msgstr "Aplikatu baimenak fitxategi inguratuei"
 
-#: src/file-manager/fm-properties-window.c:4855
+#: src/file-manager/fm-properties-window.c:4849
 #, c-format
 msgid "The permissions of \"%s\" could not be determined."
 msgstr "Ezin izan dira \"%s\"(r)en baimenak zehaztu."
 
-#: src/file-manager/fm-properties-window.c:4858
+#: src/file-manager/fm-properties-window.c:4852
 msgid "The permissions of the selected file could not be determined."
 msgstr "Ezin izan dira hautatutako fitxategiaren baimenak zehaztu."
 
-#: src/file-manager/fm-properties-window.c:5448
+#: src/file-manager/fm-properties-window.c:5442
 msgid "Creating Properties window."
 msgstr "Propietateen leihoa sortzen."
 
-#: src/file-manager/fm-properties-window.c:5743
+#: src/file-manager/fm-properties-window.c:5738
 msgid "Select Custom Icon"
 msgstr "Hautatu ikono pertsonalizatua"
 

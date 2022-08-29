@@ -2,7 +2,7 @@
 # Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Alexander Jansen <bornxlo@gmail.com>, 2018
 # Kenneth Jenssen <kennethjenssen@yahoo.com>, 2018
@@ -11,19 +11,20 @@
 # b84df44fb72862b85bae7a669218c6c2, 2019
 # Kim Malmo <berencamlost@msn.com>, 2019
 # Kjell Cato Heskjestad <cato@heskjestad.xyz>, 2020
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: baul 1.23.2\n"
 "Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
-"POT-Creation-Date: 2020-01-10 11:11+0100\n"
+"POT-Creation-Date: 2022-08-29 14:25+0200\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Kjell Cato Heskjestad <cato@heskjestad.xyz>, 2020\n"
-"Language-Team: Norwegian Bokmål (https://www.transifex.com/cafe/teams/13566/nb/)\n"
+"Language-Team: Norwegian Bokmål (https://www.transifex.com/cafe/teams/13566/"
+"nb/)\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/browser.xml.in:5
@@ -290,15 +291,15 @@ msgstr "_Emblemer"
 msgid "Drag an emblem to an object to add it to the object"
 msgstr "Dra et emblem til et objekt for å legge det til objektet"
 
-#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:1000
-#: src/baul-property-browser.c:1963
+#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:995
+#: src/baul-property-browser.c:1959
 msgid "Erase"
 msgstr "Slett"
 
 #: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:3
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
-#: src/baul-spatial-window.c:399 src/baul-window.c:167
-#: src/baul-window-menus.c:574
+#: src/baul-spatial-window.c:403 src/baul-window.c:167
+#: src/baul-window-menus.c:562
 msgid "Baul"
 msgstr "Baul"
 
@@ -309,8 +310,8 @@ msgstr "Filhåndtering for CAFE-skrivebordsmiljøet"
 #: data/baul.appdata.xml.in:10
 msgid ""
 "Baul is the official file manager for the CAFE desktop. It allows for "
-"browsing directories, as well as previewing files and launching applications"
-" associated with them. It is also responsible for handling the icons on the "
+"browsing directories, as well as previewing files and launching applications "
+"associated with them. It is also responsible for handling the icons on the "
 "CAFE desktop. It works on local and remote file systems."
 msgstr ""
 "Baul er den offisielle filbehandleren for CAFE-skrivebordet. Det gir "
@@ -330,12 +331,6 @@ msgstr ""
 msgid "Autorun Prompt"
 msgstr "Dialog for automatisk kjøring"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-autorun-software.desktop.in.in:7
-msgid "application-x-executable"
-msgstr "application-x-executable"
-
 #: data/baul-browser.desktop.in.in:4
 msgid "File Browser"
 msgstr "Filutforsker"
@@ -344,15 +339,7 @@ msgstr "Filutforsker"
 msgid "Browse the file system with the file manager"
 msgstr "Bla gjennom filsystemet med filhåndtereren"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-browser.desktop.in.in:9 data/baul.desktop.in.in:7
-#: data/baul-file-management-properties.desktop.in.in:7
-msgid "system-file-manager"
-msgstr "system-file-manager"
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
 msgid "files;browser;manager;CAFE;"
 msgstr "filer;utforsker;behandler;CAFE;"
@@ -362,21 +349,14 @@ msgstr "filer;utforsker;behandler;CAFE;"
 msgid "Computer"
 msgstr "Datamaskin"
 
-#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:940
+#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:925
 msgid ""
 "Browse all local and remote disks and folders accessible from this computer"
 msgstr ""
 "Bla gjennom alle lokale og eksterne disker og mapper som kan nås fra denne "
 "datamaskinen"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-computer.desktop.in.in:8
-msgid "computer"
-msgstr "datamaskin"
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
 msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr "utforske;disker;mapper;lokal;ekstern;datamaskin;CAFE;"
@@ -393,8 +373,7 @@ msgstr "Filhåndtering"
 msgid "Change the behaviour and appearance of file manager windows"
 msgstr "Endre oppførsel og utseende for filhåndterervinduer"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
 msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr "fil;behandler;endre;egenskaper;oppførsel;utseende;vinduer;CAFE;"
@@ -403,29 +382,16 @@ msgstr "fil;behandler;endre;egenskaper;oppførsel;utseende;vinduer;CAFE;"
 msgid "Open Folder"
 msgstr "Åpne mappe"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-folder-handler.desktop.in.in:10
-msgid "folder-open"
-msgstr "folder-open"
-
 #: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1421
 msgid "Home Folder"
 msgstr "Hjemmemappe"
 
 #: data/baul-home.desktop.in.in:4 src/baul-places-sidebar.c:527
-#: src/baul-window-menus.c:935
+#: src/baul-window-menus.c:920
 msgid "Open your personal folder"
 msgstr "Åpne din personlige mappe"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-home.desktop.in.in:8
-msgid "user-home"
-msgstr "user-home"
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
 msgid "home;personal;folder;open;CAFE;"
 msgstr "hjemmemappe;personlig;mappe;åpne;CAFE;"
@@ -438,18 +404,11 @@ msgstr "Lagret søk"
 msgid "Network"
 msgstr "Nettverk"
 
-#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:930
 msgid "Browse bookmarked and local network locations"
 msgstr "Bla gjennom nettverksplasseringer i bokmerker og lokalt"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/cafe-network-scheme.desktop.in.in:11
-msgid "network-workgroup"
-msgstr "network-workgroup"
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
 msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr "bokmerker;utforsk;lokal;nettverk;plasseringer;CAFE;"
@@ -509,22 +468,22 @@ msgid ""
 "The position of the opposite end of the selection from the cursor in chars."
 msgstr "Posisjonen for motsatt ende av utvalget fra pekeren målt i tegn."
 
-#: eel/eel-editable-label.c:3092 libbaul-private/baul-clipboard.c:464
-#: src/file-manager/fm-directory-view.c:7451
-#: src/file-manager/fm-directory-view.c:7618
+#: eel/eel-editable-label.c:3092 libbaul-private/baul-clipboard.c:456
+#: src/file-manager/fm-directory-view.c:7409
+#: src/file-manager/fm-directory-view.c:7576
 #: src/file-manager/fm-tree-view.c:1311
 msgid "Cu_t"
 msgstr "Klipp u_t"
 
-#: eel/eel-editable-label.c:3094 libbaul-private/baul-clipboard.c:469
-#: src/file-manager/fm-directory-view.c:7455
-#: src/file-manager/fm-directory-view.c:7622
+#: eel/eel-editable-label.c:3094 libbaul-private/baul-clipboard.c:461
+#: src/file-manager/fm-directory-view.c:7413
+#: src/file-manager/fm-directory-view.c:7580
 #: src/file-manager/fm-tree-view.c:1320
 msgid "_Copy"
 msgstr "_Kopier"
 
-#: eel/eel-editable-label.c:3096 libbaul-private/baul-clipboard.c:474
-#: src/file-manager/fm-directory-view.c:7459
+#: eel/eel-editable-label.c:3096 libbaul-private/baul-clipboard.c:466
+#: src/file-manager/fm-directory-view.c:7417
 msgid "_Paste"
 msgstr "_Lim inn"
 
@@ -545,19 +504,19 @@ msgstr "Vis flere _detaljer"
 #: libbaul-private/baul-mime-actions.c:1743
 #: libbaul-private/baul-open-with-dialog.c:972
 #: src/baul-connect-server-dialog.c:1119 src/baul-emblem-sidebar.c:293
-#: src/baul-emblem-sidebar.c:552 src/baul-location-dialog.c:197
+#: src/baul-emblem-sidebar.c:547 src/baul-location-dialog.c:197
 #: src/baul-property-browser.c:1117 src/baul-property-browser.c:1197
-#: src/file-manager/fm-directory-view.c:1219
-#: src/file-manager/fm-directory-view.c:1370
-#: src/file-manager/fm-directory-view.c:7099
-#: src/file-manager/fm-directory-view.c:10490
+#: src/file-manager/fm-directory-view.c:1215
+#: src/file-manager/fm-directory-view.c:1366
+#: src/file-manager/fm-directory-view.c:7057
+#: src/file-manager/fm-directory-view.c:10394
 msgid "_Cancel"
 msgstr "_Avbryt"
 
 #: eel/eel-stock-dialogs.c:240 libbaul-private/baul-open-with-dialog.c:988
 #: src/baul-location-dialog.c:202 src/baul-places-sidebar.c:2697
-#: src/file-manager/fm-directory-view.c:7415
-#: src/file-manager/fm-directory-view.c:8975
+#: src/file-manager/fm-directory-view.c:7373
+#: src/file-manager/fm-directory-view.c:8899
 #: src/file-manager/fm-tree-view.c:1271
 msgid "_Open"
 msgstr "_Åpne"
@@ -573,9 +532,9 @@ msgstr "Du kan stoppe denne operasjonen ved å trykke avbryt."
 #: eel/eel-stock-dialogs.c:296 eel/eel-stock-dialogs.c:452
 #: eel/eel-stock-dialogs.c:656 libbaul-private/baul-autorun.c:1159
 #: libbaul-private/baul-mime-actions.c:1386 src/baul-emblem-sidebar.c:298
-#: src/baul-emblem-sidebar.c:557 src/baul-property-browser.c:1122
+#: src/baul-emblem-sidebar.c:552 src/baul-property-browser.c:1122
 #: src/baul-property-browser.c:1202 src/baul-query-editor.c:776
-#: src/file-manager/fm-directory-view.c:1224
+#: src/file-manager/fm-directory-view.c:1220
 msgid "_OK"
 msgstr "_Ok"
 
@@ -688,39 +647,39 @@ msgid "_Always perform this action"
 msgstr "_Alltid utfør denne handlingen"
 
 #: libbaul-private/baul-autorun.c:1168 src/baul-places-sidebar.c:2754
-#: src/file-manager/fm-directory-view.c:7542
-#: src/file-manager/fm-directory-view.c:7570
-#: src/file-manager/fm-directory-view.c:7651
+#: src/file-manager/fm-directory-view.c:7500
+#: src/file-manager/fm-directory-view.c:7528
+#: src/file-manager/fm-directory-view.c:7609
 #: src/file-manager/fm-tree-view.c:1369
 msgid "_Eject"
 msgstr "Løs _ut"
 
 #: libbaul-private/baul-autorun.c:1183 src/baul-places-sidebar.c:2747
-#: src/file-manager/fm-directory-view.c:7538
-#: src/file-manager/fm-directory-view.c:7566
-#: src/file-manager/fm-directory-view.c:7647
+#: src/file-manager/fm-directory-view.c:7496
+#: src/file-manager/fm-directory-view.c:7524
+#: src/file-manager/fm-directory-view.c:7605
 #: src/file-manager/fm-tree-view.c:1360
 msgid "_Unmount"
 msgstr "_Avmonter"
 
-#: libbaul-private/baul-clipboard.c:465
+#: libbaul-private/baul-clipboard.c:457
 msgid "Cut the selected text to the clipboard"
 msgstr "Klipp ut valgt tekst til utklippstavlen"
 
-#: libbaul-private/baul-clipboard.c:470
+#: libbaul-private/baul-clipboard.c:462
 msgid "Copy the selected text to the clipboard"
 msgstr "Kopier valgt tekst til utklippstavlen"
 
-#: libbaul-private/baul-clipboard.c:475
+#: libbaul-private/baul-clipboard.c:467
 msgid "Paste the text stored on the clipboard"
 msgstr "Lim inn tekst som er lagret på utklippstavlen"
 
-#: libbaul-private/baul-clipboard.c:479
-#: src/file-manager/fm-directory-view.c:7471
+#: libbaul-private/baul-clipboard.c:471
+#: src/file-manager/fm-directory-view.c:7429
 msgid "Select _All"
 msgstr "Velg _alt"
 
-#: libbaul-private/baul-clipboard.c:480
+#: libbaul-private/baul-clipboard.c:472
 msgid "Select all the text in a text field"
 msgstr "Marker all tekst i et tekstfelt"
 
@@ -738,7 +697,7 @@ msgstr "Bruk _forvalg"
 
 #: libbaul-private/baul-column-utilities.c:46
 #: libbaul-private/baul-mime-application-chooser.c:276
-#: src/file-manager/fm-list-view.c:1802
+#: src/file-manager/fm-list-view.c:1807
 msgid "Name"
 msgstr "Navn"
 
@@ -804,7 +763,7 @@ msgid "The group of the file."
 msgstr "Filens gruppe."
 
 #: libbaul-private/baul-column-utilities.c:108
-#: src/file-manager/fm-properties-window.c:4788
+#: src/file-manager/fm-properties-window.c:4782
 msgid "Permissions"
 msgstr "Rettigheter"
 
@@ -873,7 +832,7 @@ msgstr "Opprinnelig plassering for filen før den ble flyttet til papirkurven"
 #: libbaul-private/baul-customization-data.c:435
 #: libbaul-private/baul-file-conflict-dialog.c:622
 #: libbaul-private/baul-mime-application-chooser.c:444
-#: src/baul-property-browser.c:2010
+#: src/baul-property-browser.c:2006
 msgid "Reset"
 msgstr "Tilbakestill"
 
@@ -889,6 +848,7 @@ msgstr "på skrivebordet"
 #. * warning, put "%.0s" somewhere in the string, which will
 #. * match the user name string passed by the C code, but not
 #. * put the user name in the final string.
+#.
 #: libbaul-private/baul-desktop-link.c:111
 #, c-format
 msgid "%s's Home"
@@ -1144,7 +1104,7 @@ msgstr "Ingen tilgang til å sette gruppe"
 msgid "Specified group '%s' doesn't exist"
 msgstr "Oppgitt gruppe «%s» finnes ikke"
 
-#: libbaul-private/baul-file.c:6199 src/file-manager/fm-directory-view.c:2397
+#: libbaul-private/baul-file.c:6199 src/file-manager/fm-directory-view.c:2393
 #, c-format
 msgid "%'u item"
 msgid_plural "%'u items"
@@ -1191,7 +1151,7 @@ msgid "unknown MIME type"
 msgstr "ukjent MIME-type"
 
 #: libbaul-private/baul-file.c:6702
-#: src/file-manager/fm-properties-window.c:1302
+#: src/file-manager/fm-properties-window.c:1299
 msgid "unknown"
 msgstr "ukjent"
 
@@ -1204,7 +1164,7 @@ msgid "link"
 msgstr "lenke"
 
 #: libbaul-private/baul-file.c:6778 libbaul-private/baul-file-operations.c:406
-#: src/file-manager/fm-directory-view.c:10736
+#: src/file-manager/fm-directory-view.c:10640
 #, c-format
 msgid "Link to %s"
 msgstr "Lenke til %s"
@@ -1294,14 +1254,14 @@ msgstr "Originalfil"
 
 #: libbaul-private/baul-file-conflict-dialog.c:277
 #: libbaul-private/baul-file-conflict-dialog.c:316
-#: src/file-manager/fm-properties-window.c:3306
+#: src/file-manager/fm-properties-window.c:3303
 msgid "Size:"
 msgstr "Størrelse:"
 
 #: libbaul-private/baul-file-conflict-dialog.c:282
 #: libbaul-private/baul-file-conflict-dialog.c:321
 #: src/baul-connect-server-dialog.c:927
-#: src/file-manager/fm-properties-window.c:3288
+#: src/file-manager/fm-properties-window.c:3285
 msgid "Type:"
 msgstr "Type:"
 
@@ -1370,9 +1330,9 @@ msgid "_Retry"
 msgstr "_Prøv igjen"
 
 #: libbaul-private/baul-file-operations.c:187 src/baul-emblem-sidebar.c:378
-#: src/file-manager/fm-directory-view.c:7503
-#: src/file-manager/fm-directory-view.c:7635
-#: src/file-manager/fm-directory-view.c:9136
+#: src/file-manager/fm-directory-view.c:7461
+#: src/file-manager/fm-directory-view.c:7593
+#: src/file-manager/fm-directory-view.c:9051
 #: src/file-manager/fm-tree-view.c:1349
 msgid "_Delete"
 msgstr "_Slett"
@@ -1438,6 +1398,7 @@ msgstr "En annen lenke til %s"
 #. Translators: Feel free to leave out the "st" suffix
 #. * if there's no way to do that nicely for a
 #. * particular language.
+#.
 #: libbaul-private/baul-file-operations.c:426
 #, c-format
 msgid "%'dst link to %s"
@@ -1461,6 +1422,7 @@ msgstr "%'dde lenke til %s"
 #. Translators:
 #. * Feel free to leave out the st, nd, rd and th suffix or
 #. * make some or all of them match.
+#.
 #. Translators: tag used to detect the first copy of a file
 #: libbaul-private/baul-file-operations.c:477
 msgid " (copy)"
@@ -1521,11 +1483,10 @@ msgstr "%s (en annen kopi)%s"
 msgid "%s (%'dth copy)%s"
 msgstr "%s (%'dde kopi)%s"
 
-#. Translators: if in your language there's no difference between 1st, 2nd,
-#. 3rd and nth
-#. * plurals, you can leave the st, nd, rd suffixes out and just make all the
-#. translated
+#. Translators: if in your language there's no difference between 1st, 2nd, 3rd and nth
+#. * plurals, you can leave the st, nd, rd suffixes out and just make all the translated
 #. * strings look like "%s (copy %'d)%s".
+#.
 #. Translators: appended to x1st file copy
 #: libbaul-private/baul-file-operations.c:527
 #, c-format
@@ -1619,8 +1580,7 @@ msgstr[1] ""
 #: libbaul-private/baul-file-operations.c:1491
 msgid "Items moved to the trash may be recovered until the trash is emptied."
 msgstr ""
-"Oppføringer flyttet til papirkurven kan gjenopprettes fram til den blir "
-"tømt."
+"Oppføringer flyttet til papirkurven kan gjenopprettes fram til den blir tømt."
 
 #: libbaul-private/baul-file-operations.c:1494
 msgid "Move to _Trash"
@@ -1638,8 +1598,8 @@ msgid "Deleting files"
 msgstr "Sletter filer"
 
 #. Translators: %T will expand to a time like "2 minutes".
-#. * The singular/plural form will be used depending on the remaining time
-#. (i.e. the %T argument).
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
+#.
 #: libbaul-private/baul-file-operations.c:1547
 msgid "%T left"
 msgid_plural "%T left"
@@ -1916,20 +1876,17 @@ msgid_plural "Duplicating %'d files"
 msgstr[0] "Dupliserer %'d fil"
 msgstr[1] "Dupliserer %'d filer"
 
-#. Translators: %S will expand to a size like "2 bytes" or "3 MB", so
-#. something like "4 kb of 4 MB"
+#. Translators: %S will expand to a size like "2 bytes" or "3 MB", so something like "4 kb of 4 MB"
 #: libbaul-private/baul-file-operations.c:3100
 #, c-format
 msgid "%S of %S"
 msgstr "%S av %S"
 
-#. Translators: %S will expand to a size like "2 bytes" or "3 MB", %T to a
-#. time duration like
-#. * "2 minutes". So the whole thing will be something like "2 kb of 4 MB -- 2
-#. hours left (4kb/sec)"
+#. Translators: %S will expand to a size like "2 bytes" or "3 MB", %T to a time duration like
+#. * "2 minutes". So the whole thing will be something like "2 kb of 4 MB -- 2 hours left (4kb/sec)"
 #. *
-#. * The singular/plural form will be used depending on the remaining time
-#. (i.e. the %T argument).
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
+#.
 #: libbaul-private/baul-file-operations.c:3113
 msgid "%S of %S — %T left (%S/sec)"
 msgid_plural "%S of %S — %T left (%S/sec)"
@@ -2126,7 +2083,7 @@ msgstr "Kunne ikke bestemme opprinnelig plassering for «%s»"
 msgid "The item cannot be restored from trash"
 msgstr "Oppføringen kan ikke gjenopprettes fra papirkurven"
 
-#: libbaul-private/baul-icon-container.c:2933
+#: libbaul-private/baul-icon-container.c:2926
 msgid "The selection rectangle"
 msgstr "Utvalgsrektangelet"
 
@@ -2150,10 +2107,10 @@ msgid "This link cannot be used, because its target \"%s\" doesn't exist."
 msgstr "Denne lenken kan ikke brukes fordi målet, «%s», ikke finnes."
 
 #: libbaul-private/baul-mime-actions.c:751
-#: src/file-manager/fm-directory-view.c:7499
-#: src/file-manager/fm-directory-view.c:7631
-#: src/file-manager/fm-directory-view.c:8770
-#: src/file-manager/fm-directory-view.c:9114
+#: src/file-manager/fm-directory-view.c:7457
+#: src/file-manager/fm-directory-view.c:7589
+#: src/file-manager/fm-directory-view.c:8698
+#: src/file-manager/fm-directory-view.c:9030
 #: src/file-manager/fm-tree-view.c:1340
 msgid "Mo_ve to Trash"
 msgstr "Fl_ytt til papirkurven"
@@ -2199,10 +2156,10 @@ msgid_plural "This will open %d separate windows."
 msgstr[0] "Dette vil åpne %d separat vindu."
 msgstr[1] "Dette vil åpne %d separate vinduer."
 
-#: libbaul-private/baul-mime-actions.c:1277
-#: src/baul-window-manage-views.c:2134 src/baul-window-manage-views.c:2142
-#: src/baul-window-manage-views.c:2162 src/baul-window-manage-views.c:2176
-#: src/baul-window-manage-views.c:2182 src/baul-window-manage-views.c:2209
+#: libbaul-private/baul-mime-actions.c:1277 src/baul-window-manage-views.c:2132
+#: src/baul-window-manage-views.c:2140 src/baul-window-manage-views.c:2160
+#: src/baul-window-manage-views.c:2174 src/baul-window-manage-views.c:2180
+#: src/baul-window-manage-views.c:2207
 #, c-format
 msgid "Could not display \"%s\"."
 msgstr "Kunne ikke vise «%s»."
@@ -2260,12 +2217,12 @@ msgstr "Merk med _tillit"
 
 #: libbaul-private/baul-mime-actions.c:2038
 #: libbaul-private/baul-mime-actions.c:2348
-#: src/file-manager/fm-directory-view.c:6475
+#: src/file-manager/fm-directory-view.c:6433
 msgid "Unable to mount location"
 msgstr "Kan ikke montere plasseringen"
 
 #: libbaul-private/baul-mime-actions.c:2436
-#: src/file-manager/fm-directory-view.c:6649
+#: src/file-manager/fm-directory-view.c:6607
 msgid "Unable to start location"
 msgstr "Kan ikke starte plassering"
 
@@ -2369,7 +2326,7 @@ msgid "Select an Application"
 msgstr "Velg et program"
 
 #: libbaul-private/baul-open-with-dialog.c:868
-#: src/file-manager/fm-properties-window.c:5122
+#: src/file-manager/fm-properties-window.c:5116
 msgid "Open With"
 msgstr "Åpne med"
 
@@ -2438,10 +2395,12 @@ msgstr "Åpning mislyktes. Vil du velge et annet program?"
 #: libbaul-private/baul-program-choosing.c:81
 #: libbaul-private/baul-program-choosing.c:121
 #, c-format
-msgid "\"%s\" cannot open \"%s\" because \"%s\" cannot access files at \"%s\" locations."
+msgid ""
+"\"%s\" cannot open \"%s\" because \"%s\" cannot access files at \"%s\" "
+"locations."
 msgstr ""
-"«%s» kan ikke åpne «%s» fordi «%s» ikke kan aksessere filer i "
-"«%s»-plasseringer."
+"«%s» kan ikke åpne «%s» fordi «%s» ikke kan aksessere filer i «%s»-"
+"plasseringer."
 
 #: libbaul-private/baul-program-choosing.c:88
 msgid "Open Failed, would you like to choose another action?"
@@ -2459,16 +2418,16 @@ msgstr ""
 
 #: libbaul-private/baul-program-choosing.c:124
 msgid ""
-"No other applications are available to view this file. If you copy this file"
-" onto your computer, you may be able to open it."
+"No other applications are available to view this file. If you copy this file "
+"onto your computer, you may be able to open it."
 msgstr ""
 "Ingen andre programmer er tilgjengelig for å vise denne filen. Hvis du "
 "kopierer denne filen til din datamaskin vil du kanskje kunne åpne den."
 
 #: libbaul-private/baul-program-choosing.c:132
 msgid ""
-"No other actions are available to view this file. If you copy this file onto"
-" your computer, you may be able to open it."
+"No other actions are available to view this file. If you copy this file onto "
+"your computer, you may be able to open it."
 msgstr ""
 "Ingen andre handlinger er tilgjengelige for å vise denne filen. Hvis du "
 "kopierer denne filen til din datamaskin vil du kanskje kunne åpne den."
@@ -2493,19 +2452,18 @@ msgstr "Mål for slipp støtter kun lokale filer."
 
 #: libbaul-private/baul-program-choosing.c:507
 msgid ""
-"To open non-local files copy them to a local folder and then drop them "
-"again."
+"To open non-local files copy them to a local folder and then drop them again."
 msgstr ""
-"For å åpne eksterne filer må du kopiere dem til en lokal mappe og slippe dem"
-" igjen."
+"For å åpne eksterne filer må du kopiere dem til en lokal mappe og slippe dem "
+"igjen."
 
 #: libbaul-private/baul-program-choosing.c:520
 msgid ""
 "To open non-local files copy them to a local folder and then drop them "
 "again. The local files you dropped have already been opened."
 msgstr ""
-"For å åpne eksterne filer må du kopiere dem til en lokal mappe og slippe dem"
-" igjen. De lokale filene du slapp er allerede åpnet."
+"For å åpne eksterne filer må du kopiere dem til en lokal mappe og slippe dem "
+"igjen. De lokale filene du slapp er allerede åpnet."
 
 #: libbaul-private/baul-program-choosing.c:545
 msgid "Details: "
@@ -2953,12 +2911,12 @@ msgstr "Hvor nyåpnede faner skal plasseres i leservinduer."
 #: libbaul-private/org.cafe.baul.gschema.xml:77
 msgid ""
 "If set to \"after-current-tab\", then new tabs are inserted after the "
-"current tab. If set to \"end\", then new tabs are appended to the end of the"
-" tab list."
+"current tab. If set to \"end\", then new tabs are appended to the end of the "
+"tab list."
 msgstr ""
 "Hvis denne settes til \"after_current_tab\", vil nye faner bli satt inn "
-"etter gjeldende fane. Hvis satt til \"end\", vil nye faner vises på enden av"
-" fanelisten."
+"etter gjeldende fane. Hvis satt til \"end\", vil nye faner vises på enden av "
+"fanelisten."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:81
 msgid "Switch tabs with [ctrl] + [tab]"
@@ -2995,8 +2953,8 @@ msgid ""
 "Nautilus used to behave before version 2.6, and some people prefer this "
 "behavior."
 msgstr ""
-"Hvis denne settes til «true» vil alle Baul-vinduer være utforskningsvinduer."
-" Dette var forvalgt operasjonsmodus i Nautilus før versjon 2.6, og noen "
+"Hvis denne settes til «true» vil alle Baul-vinduer være utforskningsvinduer. "
+"Dette var forvalgt operasjonsmodus i Nautilus før versjon 2.6, og noen "
 "foretrekker denne oppførselen."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:96
@@ -3033,11 +2991,11 @@ msgstr ""
 
 #: libbaul-private/org.cafe.baul.gschema.xml:107
 msgid ""
-"If set to true, then Baul will ask for confirmation when you attempt to move"
-" files to the Trash."
+"If set to true, then Baul will ask for confirmation when you attempt to move "
+"files to the Trash."
 msgstr ""
-"Skru på dette for å få Baul til å spørre om bekreftelse på flytting av filer"
-" til papirkurven."
+"Skru på dette for å få Baul til å spørre om bekreftelse på flytting av filer "
+"til papirkurven."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:111
 msgid "Whether to enable immediate deletion"
@@ -3081,8 +3039,8 @@ msgid ""
 "server. If set to \"local-only\" then only show counts for local file "
 "systems. If set to \"never\" then never bother to compute item counts."
 msgstr ""
-"Hastighetskompromiss ved visning av antall element i ei mappe. Hvis satt til"
-" \"always\" vil antallet alltid vises, selv når mappa er på en fjerntjener. "
+"Hastighetskompromiss ved visning av antall element i ei mappe. Hvis satt til "
+"\"always\" vil antallet alltid vises, selv når mappa er på en fjerntjener. "
 "Hvis det er satt til \"local-only\" vises bare antallet på lokale "
 "filsystemer. Hvis satt til \"never\" vil man aldri bry seg med å talle "
 "elementer."
@@ -3096,8 +3054,8 @@ msgid ""
 "Possible values are \"single\" to launch files on a single click, or "
 "\"double\" to launch them on a double click."
 msgstr ""
-"Mulige verdier er «single» for å starte filer ved enkeltklikk eller «double»"
-" for å starte dem med dobbeltklikk."
+"Mulige verdier er «single» for å starte filer ved enkeltklikk eller «double» "
+"for å starte dem med dobbeltklikk."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:133
 msgid "What to do with executable text files when activated"
@@ -3144,9 +3102,9 @@ msgstr "Museknapp som aktiverer «Fremover»-kommandoen i et utforskningsvindu"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:149
 msgid ""
-"For users with mice that have buttons for \"Forward\" and \"Back\", this key"
-" will set which button activates the \"Forward\" command in a browser "
-"window. Possible values range between 6 and 14."
+"For users with mice that have buttons for \"Forward\" and \"Back\", this key "
+"will set which button activates the \"Forward\" command in a browser window. "
+"Possible values range between 6 and 14."
 msgstr ""
 "For brukere med mus som har \"framover\"- og \"tilbake\"-knapper, bestemmer "
 "denne nøkkelen hvilken kanpp som aktiverer \"framover\"-kommandoen i et "
@@ -3158,8 +3116,8 @@ msgstr "Museknapp som aktiverer «Tilbake»-kommando i utforskningsvindu"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:154
 msgid ""
-"For users with mice that have buttons for \"Forward\" and \"Back\", this key"
-" will set which button activates the \"Back\" command in a browser window. "
+"For users with mice that have buttons for \"Forward\" and \"Back\", this key "
+"will set which button activates the \"Back\" command in a browser window. "
 "Possible values range between 6 and 14."
 msgstr ""
 "For brukere med mus som har \"framover\"- og \"tilbake\"-knapper, bestemmer "
@@ -3180,10 +3138,10 @@ msgid ""
 msgstr ""
 "Hastighetskompromiss ved visning av et bilde som miniatyrbilde. Hvis satt "
 "til \"always\" vil miniatyrbilder alltid bli vist, selv når mappen er på en "
-"fjerntjener. Hvis satt til \"local-only\" vil visning av miniatyrbilder bare"
-" finne sted for lokale filsystemer. Hvis satt til \"aldri\" vil man aldri "
-"bry seg med å generere miniatyrbildet, og et generisk miniatyrbilde vil "
-"finnes i deres plass."
+"fjerntjener. Hvis satt til \"local-only\" vil visning av miniatyrbilder bare "
+"finne sted for lokale filsystemer. Hvis satt til \"aldri\" vil man aldri bry "
+"seg med å generere miniatyrbildet, og et generisk miniatyrbilde vil finnes i "
+"deres plass."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:164
 msgid "Maximum image size for thumbnailing"
@@ -3196,8 +3154,8 @@ msgid ""
 "load or use lots of memory."
 msgstr ""
 "Bilder over denne størrelsen (i byte) vil ikke få miniatyrbilder. Formålet "
-"med denne innstillingen er å unngå å lage miniatyrbilder av store bilder som"
-" kan ta lang tid å laste eller bruke mye minne."
+"med denne innstillingen er å unngå å lage miniatyrbilder av store bilder som "
+"kan ta lang tid å laste eller bruke mye minne."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:170
 msgid "Whether to preview sounds when mousing over an icon"
@@ -3257,9 +3215,9 @@ msgstr "Omvendt sorteringsrekkefølge i nye vinduer"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:194
 msgid ""
-"If true, files in new windows will be sorted in reverse order. ie, if sorted"
-" by name, then instead of sorting the files from \"a\" to \"z\", they will "
-"be sorted from \"z\" to \"a\"; if sorted by size, instead of being "
+"If true, files in new windows will be sorted in reverse order. ie, if sorted "
+"by name, then instead of sorting the files from \"a\" to \"z\", they will be "
+"sorted from \"z\" to \"a\"; if sorted by size, instead of being "
 "incrementally they will be sorted decrementally."
 msgstr ""
 "Filer i nye vinduer vil sorteres i omvendt rekkefølge hvis satt til «true». "
@@ -3273,8 +3231,8 @@ msgstr "Baul bruker brukerens hjemmemappe som skrivebord"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:199
 msgid ""
-"If set to true, then Baul will use the user's home folder as the desktop. If"
-" it is false, then it will use ~/Desktop as the desktop."
+"If set to true, then Baul will use the user's home folder as the desktop. If "
+"it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
 "Baul bruker brukerens hjemmemappe som skrivebord hvis satt til «true». Hvis "
 "den settes til «false» brukes ~/Desktop som skrivebord."
@@ -3293,8 +3251,7 @@ msgstr "Forvalgt bakgrunnsfarge"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:209
 msgid ""
-"Color for the default folder background. Only used if background_set is "
-"true."
+"Color for the default folder background. Only used if background_set is true."
 msgstr ""
 "Farge for forvalgt bakgrunn for en mappe. Brukes kun hvis background_set er "
 "satt til «true»."
@@ -3456,8 +3413,7 @@ msgstr "Plasser etiketter ved siden av ikoner"
 msgid ""
 "If true, labels will be placed beside icons rather than underneath them."
 msgstr ""
-"Hvis sann vil etiketter plasseres ved siden av ikoner i stedet for under "
-"dem."
+"Hvis sann vil etiketter plasseres ved siden av ikoner i stedet for under dem."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:296
 msgid "Default icon zoom level"
@@ -3530,8 +3486,8 @@ msgid ""
 "If this preference is set, all columns in the compact view have the same "
 "width. Otherwise, the width of each column is determined seperately."
 msgstr ""
-"Hvis dette brukervalget er satt vil alle kolonner i kompakt visning ha samme"
-" bredde. Ellers vil bredden for hver kolonne bestemmes separat."
+"Hvis dette brukervalget er satt vil alle kolonner i kompakt visning ha samme "
+"bredde. Ellers vil bredden for hver kolonne bestemmes separat."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:345
 msgid "Default list zoom level"
@@ -3563,8 +3519,8 @@ msgstr "Vis kun mapper i treet i sidelinjen"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:368
 msgid ""
-"If set to true, Baul will only show folders in the tree side pane. Otherwise"
-" it will show both folders and files."
+"If set to true, Baul will only show folders in the tree side pane. Otherwise "
+"it will show both folders and files."
 msgstr ""
 "Baul viser kun kataloger i trevisningen i sidepanelet hvis satt til «true». "
 "Ellers vises både kataloger og filer."
@@ -3595,8 +3551,8 @@ msgstr "Datamaskinikon vises på skrivebordet"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:386
 msgid ""
-"If this is set to true, an icon linking to the computer location will be put"
-" on the desktop."
+"If this is set to true, an icon linking to the computer location will be put "
+"on the desktop."
 msgstr ""
 "Et ikon med en lenke til datamaskinen plasseres på skrivebordet hvis denne "
 "settes til «true»."
@@ -3683,9 +3639,9 @@ msgstr ""
 
 #: libbaul-private/org.cafe.baul.gschema.xml:426
 msgid ""
-"An integer specifying how parts of overlong file names should be replaced by"
-" ellipses on the desktop. If the number is larger than 0, the file name will"
-" not exceed the given number of lines. If the number is 0 or smaller, no "
+"An integer specifying how parts of overlong file names should be replaced by "
+"ellipses on the desktop. If the number is larger than 0, the file name will "
+"not exceed the given number of lines. If the number is 0 or smaller, no "
 "limit is imposed on the number of displayed lines."
 msgstr ""
 "Et heltall som angir hvordan deler av for lange filnavn skal erstattes med "
@@ -3699,8 +3655,8 @@ msgstr "Geometristreng for et navigeringsvindu."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:434
 msgid ""
-"A string containing the saved geometry and coordinates string for navigation"
-" windows."
+"A string containing the saved geometry and coordinates string for navigation "
+"windows."
 msgstr ""
 "En streng som inneholder lagret geometri og koordinatstreng for "
 "navigasjonsvinduer."
@@ -3822,8 +3778,8 @@ msgid ""
 "application in the preference capplet. The preferred application for the "
 "given type will be started on insertion on media matching these types."
 msgstr ""
-"Liste av x-content/*-typer for de brukerne som har valgt å starte et program"
-" i preference-capplet. Det foretrukne program for den gitte typen vil bli "
+"Liste av x-content/*-typer for de brukerne som har valgt å starte et program "
+"i preference-capplet. Det foretrukne program for den gitte typen vil bli "
 "startet ved innsettelse av media som samsvarer med disse typene."
 
 #: libbaul-private/org.cafe.media-handling.gschema.xml:25
@@ -3836,8 +3792,8 @@ msgid ""
 "the preference capplet. No prompt will be shown nor will any matching "
 "application be started on insertion of media matching these types."
 msgstr ""
-"Liste av x-content/*-typer for de brukerne som har valgt \"Ikke gjør noe\" i"
-" preference capplet. Ingen forespørsel vil vises, ei heller vil noen "
+"Liste av x-content/*-typer for de brukerne som har valgt \"Ikke gjør noe\" i "
+"preference capplet. Ingen forespørsel vil vises, ei heller vil noen "
 "tilsvarende programmer startes ved innsettelse av media som samsvarer med "
 "disse typene."
 
@@ -3880,8 +3836,7 @@ msgstr "Kjenner ikke igjen oppstartsalternativ: %d"
 
 #: libegg/eggdesktopfile.c:1373
 msgid "Can't pass document URIs to a 'Type=Link' desktop entry"
-msgstr ""
-"Kan ikke gi URIer til dokumenter til en oppføring av type «Types=Link»"
+msgstr "Kan ikke gi URIer til dokumenter til en oppføring av type «Types=Link»"
 
 #: libegg/eggdesktopfile.c:1392
 msgid "Not a launchable item"
@@ -4044,16 +3999,18 @@ msgstr ""
 #: src/baul-autorun-software.c:218
 #, c-format
 msgid ""
-"The software will run directly from the medium \"%s\". You should never run software that you don't trust.\n"
+"The software will run directly from the medium \"%s\". You should never run "
+"software that you don't trust.\n"
 "\n"
 "If in doubt, press Cancel."
 msgstr ""
-"Programvaren vil kjøre direkte fra medie «%s». Du bør aldri kjøre programmer du ikke stoler på.\n"
+"Programvaren vil kjøre direkte fra medie «%s». Du bør aldri kjøre programmer "
+"du ikke stoler på.\n"
 "\n"
 "Trykk Avbryt hvis du er i tvil."
 
 #: src/baul-bookmarks-window.c:163 src/baul-file-management-properties.c:249
-#: src/baul-property-browser.c:1688 src/baul-window-menus.c:629
+#: src/baul-property-browser.c:1688 src/baul-window-menus.c:618
 #, c-format
 msgid ""
 "There was an error displaying help: \n"
@@ -4071,11 +4028,11 @@ msgid "Edit Bookmarks"
 msgstr "Rediger bokmerker"
 
 #: src/baul-bookmarks-window.ui:45 src/baul-connect-server-dialog.c:1114
-#: src/baul-emblem-sidebar.c:303 src/baul-emblem-sidebar.c:562
+#: src/baul-emblem-sidebar.c:303 src/baul-emblem-sidebar.c:557
 #: src/baul-file-management-properties.ui:305 src/baul-location-dialog.c:192
-#: src/baul-property-browser.c:389 src/baul-window-menus.c:852
-#: src/file-manager/fm-directory-view.c:1214
-#: src/file-manager/fm-properties-window.c:5233
+#: src/baul-property-browser.c:389 src/baul-window-menus.c:837
+#: src/file-manager/fm-directory-view.c:1210
+#: src/file-manager/fm-properties-window.c:5227
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -4084,9 +4041,9 @@ msgid "_Jump to"
 msgstr "_Gå til"
 
 #: src/baul-bookmarks-window.ui:93 src/baul-file-management-properties.ui:321
-#: src/baul-property-browser.c:397 src/baul-window-menus.c:854
-#: src/file-manager/fm-list-view.c:2567
-#: src/file-manager/fm-properties-window.c:5238
+#: src/baul-property-browser.c:397 src/baul-window-menus.c:839
+#: src/file-manager/fm-list-view.c:2572
+#: src/file-manager/fm-properties-window.c:5232
 msgid "_Close"
 msgstr "_Lukk"
 
@@ -4165,8 +4122,8 @@ msgid "Continue"
 msgstr "Fortsett"
 
 #: src/baul-connect-server-dialog.c:717 src/baul-location-dialog.c:105
-#: src/file-manager/fm-directory-view.c:1188
-#: src/file-manager/fm-properties-window.c:5475
+#: src/file-manager/fm-directory-view.c:1184
+#: src/file-manager/fm-properties-window.c:5469
 msgid "There was an error displaying help."
 msgstr "Det oppsto en feil under visning av hjelp."
 
@@ -4238,7 +4195,7 @@ msgstr ""
 "\n"
 "Legg til «Koble til tjener»-montering"
 
-#: src/baul-desktop-window.c:126 src/baul-desktop-window.c:319
+#: src/baul-desktop-window.c:124 src/baul-desktop-window.c:205
 #: src/baul-pathbar.c:1453 src/baul-places-sidebar.c:542
 msgid "Desktop"
 msgstr "Skrivebord"
@@ -4250,8 +4207,8 @@ msgstr "Kunne ikke fjerne emblem med navn  «%s»."
 
 #: src/baul-emblem-sidebar.c:227 src/baul-emblem-sidebar.c:269
 msgid ""
-"This is probably because the emblem is a permanent one, and not one that you"
-" added yourself."
+"This is probably because the emblem is a permanent one, and not one that you "
+"added yourself."
 msgstr ""
 "Sannsynligvis fordi emblemet er permanent og ikke ett du har lagt til selv."
 
@@ -4272,11 +4229,11 @@ msgstr "Oppgi et nytt navn for vist emblem:"
 msgid "Rename"
 msgstr "Endre navn"
 
-#: src/baul-emblem-sidebar.c:548
+#: src/baul-emblem-sidebar.c:543
 msgid "Add Emblems..."
 msgstr "Legg til emblemer …"
 
-#: src/baul-emblem-sidebar.c:572
+#: src/baul-emblem-sidebar.c:567
 msgid ""
 "Enter a descriptive name next to each emblem.  This name will be used in "
 "other places to identify the emblem."
@@ -4284,7 +4241,7 @@ msgstr ""
 "Oppgi et beskrivende navn ved siden av emblemet. Dette navnet vil bli brukt "
 "andre steder for å identifisere emblemet."
 
-#: src/baul-emblem-sidebar.c:576
+#: src/baul-emblem-sidebar.c:571
 msgid ""
 "Enter a descriptive name next to the emblem.  This name will be used in "
 "other places to identify the emblem."
@@ -4292,45 +4249,46 @@ msgstr ""
 "Oppgi et beskrivende navn ved siden av emblemet. Dette navnet vil bli brukt "
 "andre steder for å identifisere emblemet."
 
-#: src/baul-emblem-sidebar.c:818
+#: src/baul-emblem-sidebar.c:813
 msgid "Some of the files could not be added as emblems."
 msgstr "Noen av filene kunne ikke legges til som emblemer."
 
-#: src/baul-emblem-sidebar.c:818 src/baul-emblem-sidebar.c:822
+#: src/baul-emblem-sidebar.c:813 src/baul-emblem-sidebar.c:817
 msgid "The emblems do not appear to be valid images."
 msgstr "Emblemene ser ikke ut til å være gyldige bilder."
 
-#: src/baul-emblem-sidebar.c:822
+#: src/baul-emblem-sidebar.c:817
 msgid "None of the files could be added as emblems."
 msgstr "Ingen av filene kunne legges til som emblemer."
 
-#: src/baul-emblem-sidebar.c:867 src/baul-emblem-sidebar.c:929
+#: src/baul-emblem-sidebar.c:862 src/baul-emblem-sidebar.c:924
 #, c-format
 msgid "The file '%s' does not appear to be a valid image."
 msgstr "Filen «%s» ser ikke ut til å være et gyldig bilde."
 
-#: src/baul-emblem-sidebar.c:871
+#: src/baul-emblem-sidebar.c:866
 msgid "The dragged file does not appear to be a valid image."
 msgstr "Filen som ble dratt hit ser ikke ut til å være et gyldig bilde."
 
-#: src/baul-emblem-sidebar.c:873 src/baul-emblem-sidebar.c:930
+#: src/baul-emblem-sidebar.c:868 src/baul-emblem-sidebar.c:925
 msgid "The emblem cannot be added."
 msgstr "Emblemet kan ikke legges til."
 
-#: src/baul-emblem-sidebar.c:1102 src/file-manager/fm-properties-window.c:3463
+#: src/baul-emblem-sidebar.c:1097 src/file-manager/fm-properties-window.c:3460
 msgid "Emblems"
 msgstr "Emblemer"
 
-#: src/baul-emblem-sidebar.c:1108
+#: src/baul-emblem-sidebar.c:1103
 msgid "Show Emblems"
 msgstr "Vis emblemer"
 
 #. Translators: this is referred to captions under icons.
 #. Translators: this is referred to the permissions
 #. * the user has in a directory.
+#.
 #: src/baul-file-management-properties.c:342
-#: src/file-manager/fm-properties-window.c:4239
-#: src/file-manager/fm-properties-window.c:4250
+#: src/file-manager/fm-properties-window.c:4233
+#: src/file-manager/fm-properties-window.c:4244
 msgid "None"
 msgstr "Ingen"
 
@@ -4342,21 +4300,21 @@ msgstr "Om utvidelse"
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:44
 #: src/file-manager/fm-icon-container.c:623
-#: src/file-manager/fm-icon-view.c:3436
+#: src/file-manager/fm-icon-view.c:3420
 msgid "Icon View"
 msgstr "Ikonvisning"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:47
-#: src/file-manager/fm-list-view.c:1861 src/file-manager/fm-list-view.c:3498
+#: src/file-manager/fm-list-view.c:1866 src/file-manager/fm-list-view.c:3501
 msgid "List View"
 msgstr "Listevisning"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:50
-#: src/file-manager/fm-icon-view.c:3451
+#: src/file-manager/fm-icon-view.c:3435
 msgid "Compact View"
 msgstr "Kompakt visning"
 
@@ -4922,24 +4880,20 @@ msgstr "Bruk _forvalgt bakgrunn"
 msgid "You cannot assign more than one custom icon at a time."
 msgstr "Du kan ikke tilegne mer enn ett egendefinert ikon om gangen."
 
-#: src/baul-information-panel.c:527
-#: src/file-manager/fm-properties-window.c:515
+#: src/baul-information-panel.c:527 src/file-manager/fm-properties-window.c:512
 msgid "Please drag just one image to set a custom icon."
 msgstr "Dra kun ett bilde for å sette egendefinert ikon."
 
-#: src/baul-information-panel.c:554
-#: src/file-manager/fm-properties-window.c:526
+#: src/baul-information-panel.c:554 src/file-manager/fm-properties-window.c:523
 msgid "The file that you dropped is not local."
 msgstr "Filen du slapp er ikke lokal."
 
-#: src/baul-information-panel.c:555
-#: src/file-manager/fm-properties-window.c:527
-#: src/file-manager/fm-properties-window.c:533
+#: src/baul-information-panel.c:555 src/file-manager/fm-properties-window.c:524
+#: src/file-manager/fm-properties-window.c:530
 msgid "You can only use local images as custom icons."
 msgstr "Du kan kun bruke lokale bilder som egendefinerte ikoner."
 
-#: src/baul-information-panel.c:562
-#: src/file-manager/fm-properties-window.c:532
+#: src/baul-information-panel.c:562 src/file-manager/fm-properties-window.c:529
 msgid "The file that you dropped is not an image."
 msgstr "Filen du slapp er ikke et bilde."
 
@@ -4947,12 +4901,12 @@ msgstr "Filen du slapp er ikke et bilde."
 msgid "You can only use images as custom icons."
 msgstr "Du kan kun bruke bilder som egendefinerte ikoner."
 
-#: src/baul-information-panel.c:748 src/file-manager/fm-directory-view.c:4515
+#: src/baul-information-panel.c:748 src/file-manager/fm-directory-view.c:4507
 #, c-format
 msgid "Open With %s"
 msgstr "Åpne med %s"
 
-#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3319
+#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3316
 msgid "Location:"
 msgstr "Plassering:"
 
@@ -4975,11 +4929,11 @@ msgstr "Åpne plassering"
 msgid "_Location:"
 msgstr "_Plassering:"
 
-#: src/baul-navigation-action.c:147
+#: src/baul-navigation-action.c:145
 msgid "folder removed"
 msgstr "mappe fjernet"
 
-#: src/baul-navigation-window.c:801
+#: src/baul-navigation-window.c:794
 #, c-format
 msgid "%s - File Browser"
 msgstr "%s - Bla gjennom filer"
@@ -4989,230 +4943,228 @@ msgid "Are you sure you want to clear the list of locations you have visited?"
 msgstr ""
 "Er du sikker på at du ønsker å tømme listen over stedene du har besøkt?"
 
-#: src/baul-navigation-window-menus.c:424 src/baul-window-bookmarks.c:85
+#: src/baul-navigation-window-menus.c:410 src/baul-window-bookmarks.c:85
 #, c-format
 msgid "The location \"%s\" does not exist."
 msgstr "Plasseringen «%s» finnes ikke."
 
-#: src/baul-navigation-window-menus.c:426
+#: src/baul-navigation-window-menus.c:412
 msgid "The history location doesn't exist."
 msgstr "Plasseringen «%s» finnes ikke i historikken."
 
-#: src/baul-navigation-window-menus.c:827
+#: src/baul-navigation-window-menus.c:805
 msgid "_Go"
 msgstr "_Gå til"
 
-#: src/baul-navigation-window-menus.c:828
+#: src/baul-navigation-window-menus.c:806
 msgid "_Bookmarks"
 msgstr "_Bokmerker"
 
-#: src/baul-navigation-window-menus.c:829
+#: src/baul-navigation-window-menus.c:807
 msgid "_Tabs"
 msgstr "_Faner"
 
-#: src/baul-navigation-window-menus.c:830
+#: src/baul-navigation-window-menus.c:808
 msgid "New _Window"
 msgstr "Nytt _vindu"
 
-#: src/baul-navigation-window-menus.c:831
+#: src/baul-navigation-window-menus.c:809
 msgid "Open another Baul window for the displayed location"
 msgstr "Åpne et nytt Baul-vindu for denne plasseringen"
 
-#: src/baul-navigation-window-menus.c:834
+#: src/baul-navigation-window-menus.c:812
 msgid "New _Tab"
 msgstr "Ny _fane"
 
-#: src/baul-navigation-window-menus.c:835
+#: src/baul-navigation-window-menus.c:813
 msgid "Open another tab for the displayed location"
 msgstr "Åpne en ny fane for denne plasseringen"
 
-#: src/baul-navigation-window-menus.c:838
+#: src/baul-navigation-window-menus.c:816
 msgid "Open Folder W_indow"
 msgstr "Åpne mappev_indu"
 
-#: src/baul-navigation-window-menus.c:839
+#: src/baul-navigation-window-menus.c:817
 msgid "Open a folder window for the displayed location"
 msgstr "Åpne et mappevindu for vist plassering"
 
-#: src/baul-navigation-window-menus.c:842
+#: src/baul-navigation-window-menus.c:820
 msgid "Close _All Windows"
 msgstr "Lukk _alle vinduer"
 
-#: src/baul-navigation-window-menus.c:843
+#: src/baul-navigation-window-menus.c:821
 msgid "Close all Navigation windows"
 msgstr "Lukk alle navigeringsvinduer"
 
-#: src/baul-navigation-window-menus.c:846
+#: src/baul-navigation-window-menus.c:824
 msgid "_Location..."
 msgstr "P_lassering …"
 
-#: src/baul-navigation-window-menus.c:847 src/baul-spatial-window.c:923
+#: src/baul-navigation-window-menus.c:825 src/baul-spatial-window.c:925
 msgid "Specify a location to open"
 msgstr "Oppgi en plassering som skal åpnes"
 
-#: src/baul-navigation-window-menus.c:850
+#: src/baul-navigation-window-menus.c:828
 msgid "Clea_r History"
 msgstr "Tøm histo_rikk"
 
-#: src/baul-navigation-window-menus.c:851
+#: src/baul-navigation-window-menus.c:829
 msgid "Clear contents of Go menu and Back/Forward lists"
 msgstr "Tøm innhold av Go-menyen og fram/tilbake- listene"
 
-#: src/baul-navigation-window-menus.c:854
+#: src/baul-navigation-window-menus.c:832
 msgid "S_witch to Other Pane"
 msgstr "B_ytt til det andre området"
 
-#: src/baul-navigation-window-menus.c:855
+#: src/baul-navigation-window-menus.c:833
 msgid "Move focus to the other pane in a split view window"
 msgstr "Flytt fokus til det andre området i det delte vinduet"
 
-#: src/baul-navigation-window-menus.c:858
+#: src/baul-navigation-window-menus.c:836
 msgid "Sa_me Location as Other Pane"
 msgstr "Sa_mme plassering som det andre området"
 
-#: src/baul-navigation-window-menus.c:859
+#: src/baul-navigation-window-menus.c:837
 msgid "Go to the same location as in the extra pane"
 msgstr "Gå til samme plassering som vises i det andre området"
 
-#: src/baul-navigation-window-menus.c:862 src/baul-spatial-window.c:936
+#: src/baul-navigation-window-menus.c:840 src/baul-spatial-window.c:938
 msgid "_Add Bookmark"
 msgstr "_Legg til bokmerke"
 
-#: src/baul-navigation-window-menus.c:863 src/baul-spatial-window.c:937
+#: src/baul-navigation-window-menus.c:841 src/baul-spatial-window.c:939
 msgid "Add a bookmark for the current location to this menu"
 msgstr "Legg til et bokmerke for nåværende adresse i denne menyen"
 
-#: src/baul-navigation-window-menus.c:866 src/baul-spatial-window.c:940
+#: src/baul-navigation-window-menus.c:844 src/baul-spatial-window.c:942
 msgid "_Edit Bookmarks..."
 msgstr "R_ediger bokmerker …"
 
-#: src/baul-navigation-window-menus.c:867 src/baul-spatial-window.c:941
+#: src/baul-navigation-window-menus.c:845 src/baul-spatial-window.c:943
 msgid "Display a window that allows editing the bookmarks in this menu"
 msgstr "Vis et vindu som tillater redigering av bokmerkene i denne menyen"
 
-#: src/baul-navigation-window-menus.c:871
+#: src/baul-navigation-window-menus.c:849
 msgid "_Previous Tab"
 msgstr "_Forrige fane"
 
-#: src/baul-navigation-window-menus.c:872
+#: src/baul-navigation-window-menus.c:850
 msgid "Activate previous tab"
 msgstr "Aktiver forrige fane"
 
-#: src/baul-navigation-window-menus.c:876
+#: src/baul-navigation-window-menus.c:854
 msgid "_Next Tab"
 msgstr "_Neste fane"
 
-#: src/baul-navigation-window-menus.c:877
+#: src/baul-navigation-window-menus.c:855
 msgid "Activate next tab"
 msgstr "Aktiver neste fane"
 
-#: src/baul-navigation-window-menus.c:881
-#: src/baul-navigation-window-pane.c:389
+#: src/baul-navigation-window-menus.c:859 src/baul-navigation-window-pane.c:389
 msgid "Move Tab _Left"
 msgstr "Flytt fane til _venstre"
 
-#: src/baul-navigation-window-menus.c:882
+#: src/baul-navigation-window-menus.c:860
 msgid "Move current tab to left"
 msgstr "Flytt aktiv fane til venstre"
 
-#: src/baul-navigation-window-menus.c:886
-#: src/baul-navigation-window-pane.c:397
+#: src/baul-navigation-window-menus.c:864 src/baul-navigation-window-pane.c:397
 msgid "Move Tab _Right"
 msgstr "Flytt fane til høy_re"
 
-#: src/baul-navigation-window-menus.c:887
+#: src/baul-navigation-window-menus.c:865
 msgid "Move current tab to right"
 msgstr "Flytt aktiv fane til høyre"
 
-#: src/baul-navigation-window-menus.c:891
+#: src/baul-navigation-window-menus.c:869
 msgid "S_how Search"
 msgstr "_Vis søk"
 
-#: src/baul-navigation-window-menus.c:892
+#: src/baul-navigation-window-menus.c:870
 msgid "Show search"
 msgstr "Vis søk"
 
-#: src/baul-navigation-window-menus.c:900
+#: src/baul-navigation-window-menus.c:878
 msgid "_Main Toolbar"
 msgstr "_Hovedverktøylinje"
 
-#: src/baul-navigation-window-menus.c:901
+#: src/baul-navigation-window-menus.c:879
 msgid "Change the visibility of this window's main toolbar"
 msgstr "Endre synligheten for dette vinduets hovedverktøylinje"
 
-#: src/baul-navigation-window-menus.c:906
+#: src/baul-navigation-window-menus.c:884
 msgid "_Side Pane"
 msgstr "_Sidepanel"
 
-#: src/baul-navigation-window-menus.c:907
+#: src/baul-navigation-window-menus.c:885
 msgid "Change the visibility of this window's side pane"
 msgstr "Endre synligheten for dette vinduets sidelinje"
 
-#: src/baul-navigation-window-menus.c:912
+#: src/baul-navigation-window-menus.c:890
 msgid "Location _Bar"
 msgstr "A_dresselinje"
 
-#: src/baul-navigation-window-menus.c:913
+#: src/baul-navigation-window-menus.c:891
 msgid "Change the visibility of this window's location bar"
 msgstr "Endre synligheten for dette vinduets adresselinje"
 
-#: src/baul-navigation-window-menus.c:918
+#: src/baul-navigation-window-menus.c:896
 msgid "St_atusbar"
 msgstr "St_atuslinje"
 
-#: src/baul-navigation-window-menus.c:919
+#: src/baul-navigation-window-menus.c:897
 msgid "Change the visibility of this window's statusbar"
 msgstr "Endre synligheten for dette vinduets statuslinje"
 
-#: src/baul-navigation-window-menus.c:924 src/baul-spatial-window.c:944
+#: src/baul-navigation-window-menus.c:902 src/baul-spatial-window.c:946
 msgid "_Search for Files..."
 msgstr "_Søk etter filer …"
 
-#: src/baul-navigation-window-menus.c:926
+#: src/baul-navigation-window-menus.c:904
 msgid "Search documents and folders by name"
 msgstr "Søk etter dokumenter og mapper etter navn"
 
-#: src/baul-navigation-window-menus.c:932
+#: src/baul-navigation-window-menus.c:910
 msgid "E_xtra Pane"
 msgstr "E_kstra område"
 
-#: src/baul-navigation-window-menus.c:933
+#: src/baul-navigation-window-menus.c:911
 msgid "Open an extra folder view side-by-side"
 msgstr "Åpne en ekstra mappevisning ved siden av eksisterende"
 
-#: src/baul-navigation-window-menus.c:960
+#: src/baul-navigation-window-menus.c:937
 msgid "_Back"
 msgstr "_Tilbake"
 
-#: src/baul-navigation-window-menus.c:962
+#: src/baul-navigation-window-menus.c:939
 msgid "Go to the previous visited location"
 msgstr "Gå til forrige besøkte plassering"
 
-#: src/baul-navigation-window-menus.c:963
+#: src/baul-navigation-window-menus.c:940
 msgid "Back history"
 msgstr "Tilbake"
 
-#: src/baul-navigation-window-menus.c:977
+#: src/baul-navigation-window-menus.c:954
 msgid "_Forward"
 msgstr "_Fremover"
 
-#: src/baul-navigation-window-menus.c:979
+#: src/baul-navigation-window-menus.c:956
 msgid "Go to the next visited location"
 msgstr "Gå til neste besøkte plassering"
 
-#: src/baul-navigation-window-menus.c:980
+#: src/baul-navigation-window-menus.c:957
 msgid "Forward history"
 msgstr "Fremover"
 
-#: src/baul-navigation-window-menus.c:995
+#: src/baul-navigation-window-menus.c:972
 msgid "_Zoom"
 msgstr "_Forstørr"
 
-#: src/baul-navigation-window-menus.c:1005
+#: src/baul-navigation-window-menus.c:982
 msgid "_View As"
 msgstr "_Vis som"
 
-#: src/baul-navigation-window-menus.c:1044
+#: src/baul-navigation-window-menus.c:1017
 msgid "_Search"
 msgstr "_Søk"
 
@@ -5278,25 +5230,25 @@ msgid "Browse the contents of the network"
 msgstr "Bla gjennom innholdet på nettverket"
 
 #: src/baul-places-sidebar.c:1813 src/baul-places-sidebar.c:2775
-#: src/file-manager/fm-directory-view.c:7550
-#: src/file-manager/fm-directory-view.c:7578
-#: src/file-manager/fm-directory-view.c:7659
-#: src/file-manager/fm-directory-view.c:8360
-#: src/file-manager/fm-directory-view.c:8364
-#: src/file-manager/fm-directory-view.c:8454
-#: src/file-manager/fm-directory-view.c:8458
-#: src/file-manager/fm-directory-view.c:8566
-#: src/file-manager/fm-directory-view.c:8570
+#: src/file-manager/fm-directory-view.c:7508
+#: src/file-manager/fm-directory-view.c:7536
+#: src/file-manager/fm-directory-view.c:7617
+#: src/file-manager/fm-directory-view.c:8303
+#: src/file-manager/fm-directory-view.c:8307
+#: src/file-manager/fm-directory-view.c:8395
+#: src/file-manager/fm-directory-view.c:8399
+#: src/file-manager/fm-directory-view.c:8505
+#: src/file-manager/fm-directory-view.c:8509
 msgid "_Start"
 msgstr "_Start"
 
 #: src/baul-places-sidebar.c:1814 src/baul-places-sidebar.c:2782
-#: src/baul-window-menus.c:879 src/file-manager/fm-directory-view.c:7554
-#: src/file-manager/fm-directory-view.c:7582
-#: src/file-manager/fm-directory-view.c:7663
-#: src/file-manager/fm-directory-view.c:8389
-#: src/file-manager/fm-directory-view.c:8483
-#: src/file-manager/fm-directory-view.c:8595
+#: src/baul-window-menus.c:864 src/file-manager/fm-directory-view.c:7512
+#: src/file-manager/fm-directory-view.c:7540
+#: src/file-manager/fm-directory-view.c:7621
+#: src/file-manager/fm-directory-view.c:8332
+#: src/file-manager/fm-directory-view.c:8424
+#: src/file-manager/fm-directory-view.c:8534
 msgid "_Stop"
 msgstr "_Stopp"
 
@@ -5304,9 +5256,9 @@ msgstr "_Stopp"
 msgid "_Power On"
 msgstr "_Slå på"
 
-#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8393
-#: src/file-manager/fm-directory-view.c:8487
-#: src/file-manager/fm-directory-view.c:8599
+#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8336
+#: src/file-manager/fm-directory-view.c:8428
+#: src/file-manager/fm-directory-view.c:8538
 msgid "_Safely Remove Drive"
 msgstr "_Fjern lagringsenhet på en trygg måte"
 
@@ -5326,14 +5278,14 @@ msgstr "_Start enhet med flere disker"
 msgid "_Stop Multi-disk Device"
 msgstr "_Stopp enhet med flere disker"
 
-#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8470
-#: src/file-manager/fm-directory-view.c:8582
+#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8411
+#: src/file-manager/fm-directory-view.c:8521
 msgid "_Unlock Drive"
 msgstr "Lås _opp lagringsenhet"
 
-#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8405
-#: src/file-manager/fm-directory-view.c:8499
-#: src/file-manager/fm-directory-view.c:8611
+#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8348
+#: src/file-manager/fm-directory-view.c:8440
+#: src/file-manager/fm-directory-view.c:8550
 msgid "_Lock Drive"
 msgstr "_Lås lagringsenhet"
 
@@ -5352,16 +5304,16 @@ msgstr "Kan ikke sjekke %s for bytte av medie"
 msgid "Unable to stop %s"
 msgstr "Kan ikke stoppe %s"
 
-#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7427
-#: src/file-manager/fm-directory-view.c:7608
-#: src/file-manager/fm-directory-view.c:8709
-#: src/file-manager/fm-directory-view.c:9056
+#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7385
+#: src/file-manager/fm-directory-view.c:7566
+#: src/file-manager/fm-directory-view.c:8643
+#: src/file-manager/fm-directory-view.c:8976
 #: src/file-manager/fm-tree-view.c:1280
 msgid "Open in New _Tab"
 msgstr "Åpne i ny _fane"
 
-#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8684
-#: src/file-manager/fm-directory-view.c:9015
+#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8620
+#: src/file-manager/fm-directory-view.c:8937
 #: src/file-manager/fm-tree-view.c:1289
 msgid "Open in New _Window"
 msgstr "Åpne i nytt _vindu"
@@ -5374,21 +5326,21 @@ msgstr "Fjern"
 msgid "Rename..."
 msgstr "Endre navn …"
 
-#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7534
-#: src/file-manager/fm-directory-view.c:7562
-#: src/file-manager/fm-directory-view.c:7643
+#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7492
+#: src/file-manager/fm-directory-view.c:7520
+#: src/file-manager/fm-directory-view.c:7601
 msgid "_Mount"
 msgstr "_Monter"
 
-#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7558
-#: src/file-manager/fm-directory-view.c:7586
-#: src/file-manager/fm-directory-view.c:7667
+#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7516
+#: src/file-manager/fm-directory-view.c:7544
+#: src/file-manager/fm-directory-view.c:7625
 msgid "_Detect Media"
 msgstr "_Gjenkjenn media"
 
-#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7546
-#: src/file-manager/fm-directory-view.c:7574
-#: src/file-manager/fm-directory-view.c:7655
+#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7504
+#: src/file-manager/fm-directory-view.c:7532
+#: src/file-manager/fm-directory-view.c:7613
 msgid "_Format"
 msgstr "_Forcafer"
 
@@ -5502,59 +5454,59 @@ msgstr "Beklager, men «%s» er ikke en brukbar bildefil."
 msgid "The file is not an image."
 msgstr "Filen er ikke et bilde."
 
-#: src/baul-property-browser.c:2311
+#: src/baul-property-browser.c:2307
 msgid "Select a Category:"
 msgstr "Velg en kategori:"
 
-#: src/baul-property-browser.c:2325
+#: src/baul-property-browser.c:2321
 msgid "C_ancel Remove"
 msgstr "_Avbryt fjerning"
 
-#: src/baul-property-browser.c:2334
+#: src/baul-property-browser.c:2330
 msgid "_Add a New Pattern..."
 msgstr "_Legg til et nytt mønster …"
 
-#: src/baul-property-browser.c:2337
+#: src/baul-property-browser.c:2333
 msgid "_Add a New Color..."
 msgstr "_Legg til en ny farge …"
 
-#: src/baul-property-browser.c:2340
+#: src/baul-property-browser.c:2336
 msgid "_Add a New Emblem..."
 msgstr "_Legg til et nytt emblem …"
 
-#: src/baul-property-browser.c:2366
+#: src/baul-property-browser.c:2362
 msgid "Click on a pattern to remove it"
 msgstr "Klikk på et mønster for å fjerne det"
 
-#: src/baul-property-browser.c:2369
+#: src/baul-property-browser.c:2365
 msgid "Click on a color to remove it"
 msgstr "Klikk på en farge for å fjerne den"
 
-#: src/baul-property-browser.c:2372
+#: src/baul-property-browser.c:2368
 msgid "Click on an emblem to remove it"
 msgstr "Klikk på et emblem for å fjerne det"
 
-#: src/baul-property-browser.c:2384
+#: src/baul-property-browser.c:2380
 msgid "Patterns:"
 msgstr "Mønstre:"
 
-#: src/baul-property-browser.c:2387
+#: src/baul-property-browser.c:2383
 msgid "Colors:"
 msgstr "Farger:"
 
-#: src/baul-property-browser.c:2390
+#: src/baul-property-browser.c:2386
 msgid "Emblems:"
 msgstr "Emblemer:"
 
-#: src/baul-property-browser.c:2412
+#: src/baul-property-browser.c:2408
 msgid "_Remove a Pattern..."
 msgstr "Fje_rn et mønster …"
 
-#: src/baul-property-browser.c:2415
+#: src/baul-property-browser.c:2411
 msgid "_Remove a Color..."
 msgstr "Fje_rn en farge …"
 
-#: src/baul-property-browser.c:2418
+#: src/baul-property-browser.c:2414
 msgid "_Remove an Emblem..."
 msgstr "Fje_rn et emblem …"
 
@@ -5769,37 +5721,37 @@ msgstr "Søk:"
 msgid "Close the side pane"
 msgstr "Lukk sidepanelet"
 
-#: src/baul-spatial-window.c:920
+#: src/baul-spatial-window.c:922
 msgid "_Places"
 msgstr "_Steder"
 
-#: src/baul-spatial-window.c:922
+#: src/baul-spatial-window.c:924
 msgid "Open _Location..."
 msgstr "Åpne _plassering …"
 
-#: src/baul-spatial-window.c:927
+#: src/baul-spatial-window.c:929
 msgid "Close P_arent Folders"
 msgstr "Lukk opph_avsmapper"
 
-#: src/baul-spatial-window.c:928
+#: src/baul-spatial-window.c:930
 msgid "Close this folder's parents"
 msgstr "Lukk denne mappens opphav"
 
-#: src/baul-spatial-window.c:932
+#: src/baul-spatial-window.c:934
 msgid "Clos_e All Folders"
 msgstr "Lukk all_e mapper"
 
-#: src/baul-spatial-window.c:933
+#: src/baul-spatial-window.c:935
 msgid "Close all folder windows"
 msgstr "Lukk alle mappevinduer"
 
-#: src/baul-spatial-window.c:945
+#: src/baul-spatial-window.c:947
 msgid "Locate documents and folders on this computer by name or content"
 msgstr ""
 "Finn dokumenter og mapper på denne datamaskinen etter navn eller innhold"
 
-#: src/baul-trash-bar.c:202 src/file-manager/fm-desktop-icon-view.c:785
-#: src/file-manager/fm-directory-view.c:7448
+#: src/baul-trash-bar.c:202 src/file-manager/fm-desktop-icon-view.c:779
+#: src/file-manager/fm-directory-view.c:7406
 msgid "Delete all items in the Trash"
 msgstr "Slett alle oppføringer i papirkurven"
 
@@ -5813,8 +5765,8 @@ msgstr "Gjenopprett valgte oppføringer til sin opprinnelige posisjon"
 
 #: src/baul-window-bookmarks.c:83
 msgid ""
-"Do you want to remove any bookmarks with the non-existing location from your"
-" list?"
+"Do you want to remove any bookmarks with the non-existing location from your "
+"list?"
 msgstr ""
 "Ønsker du å fjerne alle bokmerker med denne plasseringen fra din liste?"
 
@@ -5830,61 +5782,61 @@ msgstr "Du kan velge en annen visning eller gå til en annen plassering."
 msgid "The location cannot be displayed with this viewer."
 msgstr "Plasseringen kan ikke ses i denne visningen."
 
-#: src/baul-window-manage-views.c:1444
+#: src/baul-window-manage-views.c:1442
 msgid "Content View"
 msgstr "Innholdsvisning"
 
-#: src/baul-window-manage-views.c:1445
+#: src/baul-window-manage-views.c:1443
 msgid "View of the current folder"
 msgstr "Visning for aktiv mappe"
 
-#: src/baul-window-manage-views.c:2137
+#: src/baul-window-manage-views.c:2135
 msgid "Baul has no installed viewer capable of displaying the folder."
 msgstr "Baul har ingen installerte visningsprogrammer som kan vise mappen."
 
-#: src/baul-window-manage-views.c:2145
+#: src/baul-window-manage-views.c:2143
 msgid "The location is not a folder."
 msgstr "Plasseringen er ikke en mappe."
 
-#: src/baul-window-manage-views.c:2154
+#: src/baul-window-manage-views.c:2152
 #, c-format
 msgid "Could not find \"%s\"."
 msgstr "Kunne ikke finne «%s»."
 
-#: src/baul-window-manage-views.c:2157
+#: src/baul-window-manage-views.c:2155
 msgid "Please check the spelling and try again."
 msgstr "Sjekk stavingen og prøv igjen."
 
-#: src/baul-window-manage-views.c:2166
+#: src/baul-window-manage-views.c:2164
 #, c-format
 msgid "Baul cannot handle \"%s\" locations."
 msgstr "Baul ikke kan håndtere %s-plasseringer."
 
-#: src/baul-window-manage-views.c:2171
+#: src/baul-window-manage-views.c:2169
 msgid "Baul cannot handle this kind of location."
 msgstr "Baul ikke kan håndtere denne typen plassering."
 
-#: src/baul-window-manage-views.c:2178
+#: src/baul-window-manage-views.c:2176
 msgid "Unable to mount the location."
 msgstr "Kan ikke montere plasseringen."
 
-#: src/baul-window-manage-views.c:2184
+#: src/baul-window-manage-views.c:2182
 msgid "Access was denied."
 msgstr "Tilgang ble nektet."
 
-#: src/baul-window-manage-views.c:2193
+#: src/baul-window-manage-views.c:2191
 #, c-format
 msgid "Could not display \"%s\", because the host could not be found."
 msgstr "Kunne ikke vise «%s» fordi verten ikke ble funnet."
 
-#: src/baul-window-manage-views.c:2195
+#: src/baul-window-manage-views.c:2193
 msgid ""
 "Check that the spelling is correct and that your proxy settings are correct."
 msgstr ""
 "Sjekk at stavingen er korrekt og at mellomtjenings-innstillingene er "
 "korrekte."
 
-#: src/baul-window-manage-views.c:2211
+#: src/baul-window-manage-views.c:2209
 #, c-format
 msgid ""
 "Error: %s\n"
@@ -5893,11 +5845,11 @@ msgstr ""
 "Feil: %s\n"
 "Velg et annet visningsprogram og prøv igjen."
 
-#: src/baul-window-menus.c:199
+#: src/baul-window-menus.c:198
 msgid "Go to the location specified by this bookmark"
 msgstr "Gå til plasseringen oppgitt i dette bokmerket"
 
-#: src/baul-window-menus.c:535
+#: src/baul-window-menus.c:523
 msgid ""
 "Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -5906,10 +5858,10 @@ msgid ""
 msgstr ""
 "Baul er fri programvare. Du kan redistribuere og/eller endre programmet "
 "under betingelsene gitt i GNU General Public License som utgitt av Free "
-"Software Foundation; enten versjon 2 av lisensen, eller (hvis du ønsker det)"
-" enhver senere versjon."
+"Software Foundation; enten versjon 2 av lisensen, eller (hvis du ønsker det) "
+"enhver senere versjon."
 
-#: src/baul-window-menus.c:539
+#: src/baul-window-menus.c:527
 msgid ""
 "Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -5920,36 +5872,38 @@ msgstr ""
 "ikke engang implisitt garanti om at det er SALGBART eller PASSER ET BESTEMT "
 "FORMÅL. Se GNU General Public License for detaljer."
 
-#: src/baul-window-menus.c:543
+#: src/baul-window-menus.c:531
 msgid ""
-"You should have received a copy of the GNU General Public License along with"
-" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"You should have received a copy of the GNU General Public License along with "
+"Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "Du skal ha mottatt en kopi av GNU General Public License sammen med Baul. "
 "Hvis dette ikke er tilfelle, kan du skrive til Free Software Foundation, "
 "Inc. 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
-#: src/baul-window-menus.c:575
+#: src/baul-window-menus.c:563
 msgid "About Baul"
 msgstr "Om Baul"
 
-#: src/baul-window-menus.c:577
+#: src/baul-window-menus.c:565
 msgid ""
 "Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
 "Baul lar deg organisere filer og mapper både å din datamaskin og via "
 "nettverket."
 
-#: src/baul-window-menus.c:580
+#: src/baul-window-menus.c:568
+#, fuzzy
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Baul authors"
+"Copyright © 2011-2020 The Caja authors\n"
+"Copyright © 2022 Pablo Barciela"
 msgstr ""
 "Opphavsrett © 1999-2009 Nautilus-forfatterne\n"
 "Opphavsrett © 2011-2020 Baul-forfatterne"
 
-#: src/baul-window-menus.c:586
+#: src/baul-window-menus.c:575
 msgid "translator-credits"
 msgstr ""
 "Send en e-post om du finner feil eller mangler i oversettelsen.\n"
@@ -5963,166 +5917,166 @@ msgstr ""
 "\n"
 "Av totalt 11597 tekststrenger."
 
-#: src/baul-window-menus.c:589
+#: src/baul-window-menus.c:578
 msgid "CAFE Web Site"
 msgstr "CAFE-hjemmeside"
 
-#: src/baul-window-menus.c:849
+#: src/baul-window-menus.c:834
 msgid "_File"
 msgstr "_Fil"
 
-#: src/baul-window-menus.c:850
+#: src/baul-window-menus.c:835
 msgid "_Edit"
 msgstr "_Rediger"
 
-#: src/baul-window-menus.c:851
+#: src/baul-window-menus.c:836
 msgid "_View"
 msgstr "_Vis"
 
-#: src/baul-window-menus.c:855
+#: src/baul-window-menus.c:840
 msgid "Close this folder"
 msgstr "Lukk denne mappen"
 
-#: src/baul-window-menus.c:860
+#: src/baul-window-menus.c:845
 msgid "_Backgrounds and Emblems..."
 msgstr "_Bakgrunner og emblemer …"
 
-#: src/baul-window-menus.c:861
+#: src/baul-window-menus.c:846
 msgid ""
 "Display patterns, colors, and emblems that can be used to customize "
 "appearance"
 msgstr ""
 "Vis bakgrunner, farger og emblemer som kan brukes til å tilpasse utseendet"
 
-#: src/baul-window-menus.c:866
+#: src/baul-window-menus.c:851
 msgid "Prefere_nces"
 msgstr "_Brukervalg"
 
-#: src/baul-window-menus.c:867
+#: src/baul-window-menus.c:852
 msgid "Edit Baul preferences"
 msgstr "Rediger brukervalg for Baul"
 
-#: src/baul-window-menus.c:870
+#: src/baul-window-menus.c:855
 msgid "Open _Parent"
 msgstr "Åpne o_pphav"
 
-#: src/baul-window-menus.c:871
+#: src/baul-window-menus.c:856
 msgid "Open the parent folder"
 msgstr "Lagre opphavsmappe"
 
-#: src/baul-window-menus.c:880
+#: src/baul-window-menus.c:865
 msgid "Stop loading the current location"
 msgstr "Stopp lasting av aktiv plassering"
 
-#: src/baul-window-menus.c:884
+#: src/baul-window-menus.c:869
 msgid "_Reload"
 msgstr "L_es på nytt"
 
-#: src/baul-window-menus.c:885
+#: src/baul-window-menus.c:870
 msgid "Reload the current location"
 msgstr "Last aktiv plassering på nytt"
 
-#: src/baul-window-menus.c:889
+#: src/baul-window-menus.c:874
 msgid "_Contents"
 msgstr "_Innhold"
 
-#: src/baul-window-menus.c:890
+#: src/baul-window-menus.c:875
 msgid "Display Baul help"
 msgstr "Vis hjelp for Baul"
 
-#: src/baul-window-menus.c:894
+#: src/baul-window-menus.c:879
 msgid "_About"
 msgstr "Om"
 
-#: src/baul-window-menus.c:895
+#: src/baul-window-menus.c:880
 msgid "Display credits for the creators of Baul"
 msgstr "Vis informasjon om dem som laget Baul"
 
-#: src/baul-window-menus.c:899
+#: src/baul-window-menus.c:884
 msgid "Zoom _In"
 msgstr "For_størr"
 
-#: src/baul-window-menus.c:900 src/baul-zoom-control.c:99
+#: src/baul-window-menus.c:885 src/baul-zoom-control.c:99
 #: src/baul-zoom-control.c:312
 msgid "Increase the view size"
 msgstr "Øk visningsstørrelse"
 
-#: src/baul-window-menus.c:914
+#: src/baul-window-menus.c:899
 msgid "Zoom _Out"
 msgstr "For_minsk"
 
-#: src/baul-window-menus.c:915 src/baul-zoom-control.c:100
+#: src/baul-window-menus.c:900 src/baul-zoom-control.c:100
 #: src/baul-zoom-control.c:257
 msgid "Decrease the view size"
 msgstr "Mindre visningsstørrelse"
 
-#: src/baul-window-menus.c:924
+#: src/baul-window-menus.c:909
 msgid "Normal Si_ze"
 msgstr "Normal st_ørrelse"
 
-#: src/baul-window-menus.c:925 src/baul-zoom-control.c:101
+#: src/baul-window-menus.c:910 src/baul-zoom-control.c:101
 #: src/baul-zoom-control.c:273
 msgid "Use the normal view size"
 msgstr "Bruk normal visningsstørrelse"
 
-#: src/baul-window-menus.c:929
+#: src/baul-window-menus.c:914
 msgid "Connect to _Server..."
 msgstr "Koble til _tjener …"
 
-#: src/baul-window-menus.c:930
+#: src/baul-window-menus.c:915
 msgid "Connect to a remote computer or shared disk"
 msgstr "Koble til en ekstern datamaskin eller delt disk"
 
-#: src/baul-window-menus.c:934 src/file-manager/fm-directory-view.c:7683
-#: src/file-manager/fm-directory-view.c:7687
+#: src/baul-window-menus.c:919 src/file-manager/fm-directory-view.c:7641
+#: src/file-manager/fm-directory-view.c:7645
 msgid "_Home Folder"
 msgstr "_Hjemmemappe"
 
-#: src/baul-window-menus.c:939
+#: src/baul-window-menus.c:924
 msgid "_Computer"
 msgstr "_Datamaskin"
 
-#: src/baul-window-menus.c:944
+#: src/baul-window-menus.c:929
 msgid "_Network"
 msgstr "_Nettverk"
 
-#: src/baul-window-menus.c:949
+#: src/baul-window-menus.c:934
 msgid "T_emplates"
 msgstr "_Maler"
 
-#: src/baul-window-menus.c:950
+#: src/baul-window-menus.c:935
 msgid "Open your personal templates folder"
 msgstr "Åpne din personlige malmappe"
 
-#: src/baul-window-menus.c:954
+#: src/baul-window-menus.c:939
 msgid "_Trash"
 msgstr "_Papirkurv"
 
-#: src/baul-window-menus.c:955
+#: src/baul-window-menus.c:940
 msgid "Open your personal trash folder"
 msgstr "Åpne din personlige papirkurv"
 
-#: src/baul-window-menus.c:963
+#: src/baul-window-menus.c:948
 msgid "Show _Hidden Files"
 msgstr "Vis skjulte _filer"
 
-#: src/baul-window-menus.c:964
+#: src/baul-window-menus.c:949
 msgid "Toggle the display of hidden files in the current window"
 msgstr "Slå av/på visning av skjulte filer i dette vinduet"
 
-#: src/baul-window-menus.c:969
+#: src/baul-window-menus.c:954
 msgid "Show Bac_kup Files"
 msgstr "Vis _reservekopier"
 
-#: src/baul-window-menus.c:970
+#: src/baul-window-menus.c:955
 msgid "Toggle the display of backup files in the current window"
 msgstr "Slår av eller på visning av reservekopier i gjeldende vindu"
 
-#: src/baul-window-menus.c:1003
+#: src/baul-window-menus.c:987
 msgid "_Up"
 msgstr "_Opp"
 
-#: src/baul-window-menus.c:1006
+#: src/baul-window-menus.c:990
 msgid "_Home"
 msgstr "_Hjem"
 
@@ -6200,55 +6154,55 @@ msgstr "Sett forstørrelsesnivå for aktiv visning"
 msgid "Background"
 msgstr "Bakgrunn"
 
-#: src/file-manager/fm-desktop-icon-view.c:749
-#: src/file-manager/fm-directory-view.c:7447
-#: src/file-manager/fm-directory-view.c:9186
+#: src/file-manager/fm-desktop-icon-view.c:745
+#: src/file-manager/fm-directory-view.c:7405
+#: src/file-manager/fm-directory-view.c:9099
 msgid "E_mpty Trash"
 msgstr "Tø_m papirkurv"
 
-#: src/file-manager/fm-desktop-icon-view.c:765
-#: src/file-manager/fm-directory-view.c:7411
+#: src/file-manager/fm-desktop-icon-view.c:759
+#: src/file-manager/fm-directory-view.c:7369
 msgid "Create L_auncher..."
 msgstr "Opprett oppst_arter …"
 
-#: src/file-manager/fm-desktop-icon-view.c:767
-#: src/file-manager/fm-directory-view.c:7412
+#: src/file-manager/fm-desktop-icon-view.c:761
+#: src/file-manager/fm-directory-view.c:7370
 msgid "Create a new launcher"
 msgstr "Lag en ny oppstarter"
 
-#: src/file-manager/fm-desktop-icon-view.c:774
+#: src/file-manager/fm-desktop-icon-view.c:768
 msgid "Change Desktop _Background"
 msgstr "Endre skrivebords_bakgrunn"
 
-#: src/file-manager/fm-desktop-icon-view.c:776
+#: src/file-manager/fm-desktop-icon-view.c:770
 msgid ""
 "Show a window that lets you set your desktop background's pattern or color"
 msgstr ""
 "Vis et vindu som lar deg velge mønster eller farge for skrivebordsbakgrunnen"
 
-#: src/file-manager/fm-desktop-icon-view.c:783
+#: src/file-manager/fm-desktop-icon-view.c:777
 msgid "Empty Trash"
 msgstr "Tøm papirkurv"
 
-#: src/file-manager/fm-desktop-icon-view.c:886
+#: src/file-manager/fm-desktop-icon-view.c:878
 msgid "Desktop View"
 msgstr "Skrivebordsvisning"
 
-#: src/file-manager/fm-desktop-icon-view.c:887
-#: src/file-manager/fm-directory-view.c:7691
-#: src/file-manager/fm-directory-view.c:7695
+#: src/file-manager/fm-desktop-icon-view.c:879
+#: src/file-manager/fm-directory-view.c:7649
+#: src/file-manager/fm-directory-view.c:7653
 msgid "_Desktop"
 msgstr "_Skrivebord"
 
-#: src/file-manager/fm-desktop-icon-view.c:888
+#: src/file-manager/fm-desktop-icon-view.c:880
 msgid "The desktop view encountered an error."
 msgstr "Visning av skrivebord ble utsatt for en feil."
 
-#: src/file-manager/fm-desktop-icon-view.c:889
+#: src/file-manager/fm-desktop-icon-view.c:881
 msgid "The desktop view encountered an error while starting up."
 msgstr "Visning av skrivebord ble utsatt for en feil under oppstart."
 
-#: src/file-manager/fm-desktop-icon-view.c:890
+#: src/file-manager/fm-desktop-icon-view.c:882
 msgid "Display this location with the desktop view."
 msgstr "Skrivebordsvisning for denne plasseringen."
 
@@ -6266,75 +6220,74 @@ msgid_plural "This will open %'d separate windows."
 msgstr[0] "Dette vil åpne %'d separat vindu."
 msgstr[1] "Dette vil åpne %'d separate vinduer."
 
-#: src/file-manager/fm-directory-view.c:1209
+#: src/file-manager/fm-directory-view.c:1205
 msgid "Select Items Matching"
 msgstr "Velg oppføringer med treff"
 
-#: src/file-manager/fm-directory-view.c:1233
+#: src/file-manager/fm-directory-view.c:1229
 msgid "_Pattern:"
 msgstr "Mø_nster:"
 
-#: src/file-manager/fm-directory-view.c:1240
+#: src/file-manager/fm-directory-view.c:1236
 msgid "Examples: "
 msgstr "Eksempler: "
 
-#: src/file-manager/fm-directory-view.c:1366
+#: src/file-manager/fm-directory-view.c:1362
 msgid "Save Search as"
 msgstr "Lagre søk som"
 
-#: src/file-manager/fm-directory-view.c:1374
+#: src/file-manager/fm-directory-view.c:1370
 msgid "_Save"
 msgstr "_Lagre"
 
-#: src/file-manager/fm-directory-view.c:1393
+#: src/file-manager/fm-directory-view.c:1389
 msgid "Search _name:"
 msgstr "_Navn på søk:"
 
-#: src/file-manager/fm-directory-view.c:1409
+#: src/file-manager/fm-directory-view.c:1405
 msgid "_Folder:"
 msgstr "_Mappe:"
 
-#: src/file-manager/fm-directory-view.c:1414
+#: src/file-manager/fm-directory-view.c:1410
 msgid "Select Folder to Save Search In"
 msgstr "Velg mappe for lagring av søk"
 
-#: src/file-manager/fm-directory-view.c:2310
-#: src/file-manager/fm-directory-view.c:2347
+#: src/file-manager/fm-directory-view.c:2306
+#: src/file-manager/fm-directory-view.c:2343
 #, c-format
 msgid "\"%s\" selected"
 msgstr "«%s» valgt"
 
-#: src/file-manager/fm-directory-view.c:2312
+#: src/file-manager/fm-directory-view.c:2308
 #, c-format
 msgid "%'d folder selected"
 msgid_plural "%'d folders selected"
 msgstr[0] "%'d mappe valgt"
 msgstr[1] "%'d mapper valgt"
 
-#: src/file-manager/fm-directory-view.c:2322
+#: src/file-manager/fm-directory-view.c:2318
 #, c-format
 msgid " (containing %'d item)"
 msgid_plural " (containing %'d items)"
 msgstr[0] " (inneholder %'d oppføring)"
 msgstr[1] " (inneholder %'d oppføringer)"
 
-#. Translators: this is preceded with a string of form 'N folders' (N more
-#. than 1)
-#: src/file-manager/fm-directory-view.c:2333
+#. Translators: this is preceded with a string of form 'N folders' (N more than 1)
+#: src/file-manager/fm-directory-view.c:2329
 #, c-format
 msgid " (containing a total of %'d item)"
 msgid_plural " (containing a total of %'d items)"
 msgstr[0] " (med totalt %'d oppføring)"
 msgstr[1] " (med totalt %'d oppføringer)"
 
-#: src/file-manager/fm-directory-view.c:2350
+#: src/file-manager/fm-directory-view.c:2346
 #, c-format
 msgid "%'d item selected"
 msgid_plural "%'d items selected"
 msgstr[0] "%'d oppføring valgt"
 msgstr[1] "%'d oppføringer valgt"
 
-#: src/file-manager/fm-directory-view.c:2357
+#: src/file-manager/fm-directory-view.c:2353
 #, c-format
 msgid "%'d other item selected"
 msgid_plural "%'d other items selected"
@@ -6345,83 +6298,89 @@ msgstr[1] "%'d andre oppføringer valgt"
 #. * needs to use something other than parentheses. The
 #. * first message gives the number of items selected;
 #. * the message in parentheses the size of those items.
-#: src/file-manager/fm-directory-view.c:2376
+#.
+#: src/file-manager/fm-directory-view.c:2372
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/file-manager/fm-directory-view.c:2389
+#: src/file-manager/fm-directory-view.c:2385
 #, c-format
 msgid "Free space: %s"
 msgstr "Ledig plass: %s"
 
-#: src/file-manager/fm-directory-view.c:2400
+#: src/file-manager/fm-directory-view.c:2396
 #, c-format
 msgid "%s, Free space: %s"
 msgstr "%s, ledig plass: %s"
 
-#: src/file-manager/fm-directory-view.c:2415
+#: src/file-manager/fm-directory-view.c:2411
 #, c-format
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: src/file-manager/fm-directory-view.c:2434
-#: src/file-manager/fm-directory-view.c:2448
+#: src/file-manager/fm-directory-view.c:2430
+#: src/file-manager/fm-directory-view.c:2444
 #, c-format
 msgid "%s%s, %s"
 msgstr "%s%s, %s"
 
-#: src/file-manager/fm-directory-view.c:2461
+#: src/file-manager/fm-directory-view.c:2457
 #, c-format
 msgid "%s%s, %s, %s"
 msgstr "%s%s, %s, %s"
 
-#: src/file-manager/fm-directory-view.c:4517
+#: src/file-manager/fm-directory-view.c:4509
 #, c-format
 msgid "Use \"%s\" to open the selected item"
 msgid_plural "Use \"%s\" to open the selected items"
 msgstr[0] "Bruk «%s» til å åpne valgt oppføring"
 msgstr[1] "Bruk «%s» til å åpne valgte oppføringer"
 
-#: src/file-manager/fm-directory-view.c:4612
+#: src/file-manager/fm-directory-view.c:4598
 msgid "Open parent location"
 msgstr "Åpne rot-mappe"
 
-#: src/file-manager/fm-directory-view.c:4613
+#: src/file-manager/fm-directory-view.c:4599
 msgid "Open parent location for the selected item"
 msgstr "Åpne rot-mappe for valgt oppføring"
 
-#: src/file-manager/fm-directory-view.c:5490
+#: src/file-manager/fm-directory-view.c:5460
 #, c-format
 msgid "Run \"%s\" on any selected items"
 msgstr "Kjør «%s» på valgte oppføringer"
 
-#: src/file-manager/fm-directory-view.c:5748
+#: src/file-manager/fm-directory-view.c:5712
 #, c-format
 msgid "Create Document from template \"%s\""
 msgstr "Opprett dokument fra mal «%s»"
 
-#: src/file-manager/fm-directory-view.c:6006
+#: src/file-manager/fm-directory-view.c:5964
 msgid "All executable files in this folder will appear in the Scripts menu."
 msgstr "Alle kjørbare filer i denne mappen vil vises i Skript-menyen."
 
-#: src/file-manager/fm-directory-view.c:6008
+#: src/file-manager/fm-directory-view.c:5966
 msgid ""
-"Choosing a script from the menu will run that script with any selected items"
-" as input."
+"Choosing a script from the menu will run that script with any selected items "
+"as input."
 msgstr ""
 "Ved å velge et skript fra denne menyen vil du kjøre dette skriptet med "
 "eventuelle markerte oppføringer som inndata."
 
-#: src/file-manager/fm-directory-view.c:6010
+#: src/file-manager/fm-directory-view.c:5968
 msgid ""
-"All executable files in this folder will appear in the Scripts menu. Choosing a script from the menu will run that script.\n"
+"All executable files in this folder will appear in the Scripts menu. "
+"Choosing a script from the menu will run that script.\n"
 "\n"
-"When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
+"When executed from a local folder, scripts will be passed the selected file "
+"names. When executed from a remote folder (e.g. a folder showing web or ftp "
+"content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which "
+"the scripts may use:\n"
 "\n"
-"BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
+"BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files "
+"(only if local)\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_URIS: newline-delimited URIs for selected files\n"
 "\n"
@@ -6429,20 +6388,27 @@ msgid ""
 "\n"
 "BAUL_SCRIPT_WINDOW_GEOMETRY: position and size of current window\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: newline-delimited paths for selected files in the inactive pane of a split-view window (only if local)\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: newline-delimited paths for "
+"selected files in the inactive pane of a split-view window (only if local)\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: newline-delimited URIs for selected files in the inactive pane of a split-view window\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: newline-delimited URIs for selected "
+"files in the inactive pane of a split-view window\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI for current location in the inactive pane of a split-view window"
+"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI for current location in the inactive "
+"pane of a split-view window"
 msgstr ""
 "Alle kjørbare filer i denne mappen vil vises i Skript-menyen.\n"
 "Valg av et skript fra menyen vil kjøre dette skriptet.\n"
 "\n"
-"Når skriptet kjøres fra en lokal mappe vil dette bli gitt valgte filer som argument. Når det kjøres fra en ekstern mappe (f.eks. en mappe som viser web- eller ftp-innhold), vil ikke skriptet få noen parametere.\n"
+"Når skriptet kjøres fra en lokal mappe vil dette bli gitt valgte filer som "
+"argument. Når det kjøres fra en ekstern mappe (f.eks. en mappe som viser "
+"web- eller ftp-innhold), vil ikke skriptet få noen parametere.\n"
 "\n"
-"I alle tilfeller vil Baul sette følgende miljøvariabler som skriptet kan bruke:\n"
+"I alle tilfeller vil Baul sette følgende miljøvariabler som skriptet kan "
+"bruke:\n"
 "\n"
-"BAUL_SCRIPT_SELECTED_FILE_PATHS: stier for valgte filer adskilt med linjeskift (kun lokalt)\n"
+"BAUL_SCRIPT_SELECTED_FILE_PATHS: stier for valgte filer adskilt med "
+"linjeskift (kun lokalt)\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_URIS: URIer for valgte filer adskilt med linjeskift\n"
 "\n"
@@ -6450,25 +6416,28 @@ msgstr ""
 "\n"
 "BAUL_SCRIPT_WINDOW_GEOMETRY: posisjon og størrelse for aktivt vindu\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: sti til valgte filer i inaktivt område i et delt vindu adskilt med linjeskift (kun lokalt)\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: sti til valgte filer i inaktivt "
+"område i et delt vindu adskilt med linjeskift (kun lokalt)\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: URI for valgte filer i inaktivt område i et delt vindu adskilt med linjeskift\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: URI for valgte filer i inaktivt område "
+"i et delt vindu adskilt med linjeskift\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI for aktiv plassering i inaktivt område av et delt vindu"
+"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI for aktiv plassering i inaktivt "
+"område av et delt vindu"
 
-#: src/file-manager/fm-directory-view.c:6080
+#: src/file-manager/fm-directory-view.c:6038
 #: src/file-manager/fm-tree-view.c:1014
 #, c-format
 msgid "\"%s\" will be moved if you select the Paste command"
 msgstr "«%s» vil bli flyttet hvis du velger kommandoen «Lim inn filer»"
 
-#: src/file-manager/fm-directory-view.c:6084
+#: src/file-manager/fm-directory-view.c:6042
 #: src/file-manager/fm-tree-view.c:1020
 #, c-format
 msgid "\"%s\" will be copied if you select the Paste command"
 msgstr "«%s» vil bli kopiert hvis du velger kommandoen «Lim inn filer»"
 
-#: src/file-manager/fm-directory-view.c:6091
+#: src/file-manager/fm-directory-view.c:6049
 #, c-format
 msgid "The %'d selected item will be moved if you select the Paste command"
 msgid_plural ""
@@ -6478,7 +6447,7 @@ msgstr[0] ""
 msgstr[1] ""
 "%'d valgte oppføringer vil flyttes hvis du velger kommandoen «Lim inn filer»"
 
-#: src/file-manager/fm-directory-view.c:6098
+#: src/file-manager/fm-directory-view.c:6056
 #, c-format
 msgid "The %'d selected item will be copied if you select the Paste command"
 msgid_plural ""
@@ -6486,156 +6455,155 @@ msgid_plural ""
 msgstr[0] ""
 "%'d valgt oppføring vil kopieres hvis du velger kommandoen «Lim inn filer»"
 msgstr[1] ""
-"%'d valgte oppføringer vil kopieres hvis du velger kommandoen «Lim inn "
-"filer»"
+"%'d valgte oppføringer vil kopieres hvis du velger kommandoen «Lim inn filer»"
 
-#: src/file-manager/fm-directory-view.c:6278
+#: src/file-manager/fm-directory-view.c:6236
 #: src/file-manager/fm-tree-view.c:1060
 msgid "There is nothing on the clipboard to paste."
 msgstr "Ingenting å lime inn fra utklippstavlen."
 
-#: src/file-manager/fm-directory-view.c:6496
+#: src/file-manager/fm-directory-view.c:6454
 msgid "Unable to unmount location"
 msgstr "Kan ikke avmontere plassering"
 
-#: src/file-manager/fm-directory-view.c:6517
+#: src/file-manager/fm-directory-view.c:6475
 msgid "Unable to eject location"
 msgstr "Kan ikke løse ut plassering"
 
-#: src/file-manager/fm-directory-view.c:6532
+#: src/file-manager/fm-directory-view.c:6490
 msgid "Unable to stop drive"
 msgstr "Kan ikke stoppe lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:7092
+#: src/file-manager/fm-directory-view.c:7050
 #, c-format
 msgid "Connect to Server %s"
 msgstr "Koble til tjener %s"
 
-#: src/file-manager/fm-directory-view.c:7104
-#: src/file-manager/fm-directory-view.c:8368
-#: src/file-manager/fm-directory-view.c:8462
-#: src/file-manager/fm-directory-view.c:8574
+#: src/file-manager/fm-directory-view.c:7062
+#: src/file-manager/fm-directory-view.c:8311
+#: src/file-manager/fm-directory-view.c:8403
+#: src/file-manager/fm-directory-view.c:8513
 msgid "_Connect"
 msgstr "_Koble til"
 
-#: src/file-manager/fm-directory-view.c:7118
+#: src/file-manager/fm-directory-view.c:7076
 msgid "Link _name:"
 msgstr "_Navn på lenke:"
 
-#: src/file-manager/fm-directory-view.c:7389
+#: src/file-manager/fm-directory-view.c:7347
 msgid "Create _Document"
 msgstr "Opprett _dokument"
 
-#: src/file-manager/fm-directory-view.c:7390
+#: src/file-manager/fm-directory-view.c:7348
 msgid "Open Wit_h"
 msgstr "Åpne me_d"
 
-#: src/file-manager/fm-directory-view.c:7391
+#: src/file-manager/fm-directory-view.c:7349
 msgid "Choose a program with which to open the selected item"
 msgstr "Velg et program du vil åpne valgte oppføring med"
 
-#: src/file-manager/fm-directory-view.c:7393
-#: src/file-manager/fm-directory-view.c:7672
+#: src/file-manager/fm-directory-view.c:7351
+#: src/file-manager/fm-directory-view.c:7630
 #: src/file-manager/fm-tree-view.c:1382
 msgid "_Properties"
 msgstr "_Egenskaper"
 
-#: src/file-manager/fm-directory-view.c:7394
-#: src/file-manager/fm-directory-view.c:9173
+#: src/file-manager/fm-directory-view.c:7352
+#: src/file-manager/fm-directory-view.c:9086
 msgid "View or modify the properties of each selected item"
 msgstr "Vis eller modifiser egenskapene for hver av de valgte oppføringene"
 
-#: src/file-manager/fm-directory-view.c:7401
+#: src/file-manager/fm-directory-view.c:7359
 #: src/file-manager/fm-tree-view.c:1300
 msgid "Create _Folder"
 msgstr "Opprett _mappe"
 
-#: src/file-manager/fm-directory-view.c:7402
+#: src/file-manager/fm-directory-view.c:7360
 msgid "Create a new empty folder inside this folder"
 msgstr "Lag en ny tom mappe i denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7404
+#: src/file-manager/fm-directory-view.c:7362
 msgid "No templates installed"
 msgstr "Ingen maler er installert"
 
 #. Translators: this is used to indicate that a file doesn't contain anything
 #. label, accelerator
-#: src/file-manager/fm-directory-view.c:7407
+#: src/file-manager/fm-directory-view.c:7365
 msgid "_Empty File"
 msgstr "_Tom fil"
 
-#: src/file-manager/fm-directory-view.c:7408
+#: src/file-manager/fm-directory-view.c:7366
 msgid "Create a new empty file inside this folder"
 msgstr "Lag en ny tom fil i denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7416
+#: src/file-manager/fm-directory-view.c:7374
 msgid "Open the selected item in this window"
 msgstr "Åpne valgt oppføring i dette vinduet"
 
-#: src/file-manager/fm-directory-view.c:7423
-#: src/file-manager/fm-directory-view.c:7604
+#: src/file-manager/fm-directory-view.c:7381
+#: src/file-manager/fm-directory-view.c:7562
 msgid "Open in Navigation Window"
 msgstr "Åpne i et navigeringsvindu"
 
-#: src/file-manager/fm-directory-view.c:7424
+#: src/file-manager/fm-directory-view.c:7382
 msgid "Open each selected item in a navigation window"
 msgstr "Åpne hver valgt oppføring i et navigeringsvindu"
 
-#: src/file-manager/fm-directory-view.c:7428
+#: src/file-manager/fm-directory-view.c:7386
 msgid "Open each selected item in a new tab"
 msgstr "Åpne hver valgt oppføring i en ny fane"
 
-#: src/file-manager/fm-directory-view.c:7431
-#: src/file-manager/fm-directory-view.c:7613
+#: src/file-manager/fm-directory-view.c:7389
+#: src/file-manager/fm-directory-view.c:7571
 msgid "Open in _Folder Window"
 msgstr "Åpne i _mappevindu"
 
-#: src/file-manager/fm-directory-view.c:7432
+#: src/file-manager/fm-directory-view.c:7390
 msgid "Open each selected item in a folder window"
 msgstr "Åpne hver valgt oppføring i et mappevindu"
 
-#: src/file-manager/fm-directory-view.c:7435
+#: src/file-manager/fm-directory-view.c:7393
 msgid "Other _Application..."
 msgstr "_Annet program …"
 
-#: src/file-manager/fm-directory-view.c:7436
-#: src/file-manager/fm-directory-view.c:7440
+#: src/file-manager/fm-directory-view.c:7394
+#: src/file-manager/fm-directory-view.c:7398
 msgid "Choose another application with which to open the selected item"
 msgstr "Velg et annet program du vil åpne valgt oppføring med"
 
-#: src/file-manager/fm-directory-view.c:7439
+#: src/file-manager/fm-directory-view.c:7397
 msgid "Open With Other _Application..."
 msgstr "Åpne med et annet _program …"
 
-#: src/file-manager/fm-directory-view.c:7443
+#: src/file-manager/fm-directory-view.c:7401
 msgid "_Open Scripts Folder"
 msgstr "_Åpne skript-mappe"
 
-#: src/file-manager/fm-directory-view.c:7444
+#: src/file-manager/fm-directory-view.c:7402
 msgid "Show the folder containing the scripts that appear in this menu"
 msgstr "Vis mappen som inneholder skriptene som vises i denne menyen"
 
-#: src/file-manager/fm-directory-view.c:7452
+#: src/file-manager/fm-directory-view.c:7410
 msgid "Prepare the selected files to be moved with a Paste command"
 msgstr "Gjør klar valgte filer for flytting med kommandoen «Lim inn filer»"
 
-#: src/file-manager/fm-directory-view.c:7456
+#: src/file-manager/fm-directory-view.c:7414
 msgid "Prepare the selected files to be copied with a Paste command"
 msgstr "Gjør klar valgte filer for kopiering med kommandoen «Lim inn filer»"
 
-#: src/file-manager/fm-directory-view.c:7460
+#: src/file-manager/fm-directory-view.c:7418
 msgid "Move or copy files previously selected by a Cut or Copy command"
 msgstr ""
 "Flytt eller kopier filer som er valgt tidligere med kommandoene «Klipp ut "
 "filer» eller «Kopier filer»"
 
-#: src/file-manager/fm-directory-view.c:7465
-#: src/file-manager/fm-directory-view.c:7626
+#: src/file-manager/fm-directory-view.c:7423
+#: src/file-manager/fm-directory-view.c:7584
 #: src/file-manager/fm-tree-view.c:1329
 msgid "_Paste Into Folder"
 msgstr "_Lim filer inn i mappe"
 
-#: src/file-manager/fm-directory-view.c:7466
+#: src/file-manager/fm-directory-view.c:7424
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into the "
 "selected folder"
@@ -6643,207 +6611,207 @@ msgstr ""
 "Flytt eller kopier filer som er valgt tidligere med kommandoene «Klipp ut "
 "filer» eller «Kopier filer» til valgt mappe"
 
-#: src/file-manager/fm-directory-view.c:7468
+#: src/file-manager/fm-directory-view.c:7426
 msgid "Cop_y to"
 msgstr "Kop_ier til"
 
-#: src/file-manager/fm-directory-view.c:7469
+#: src/file-manager/fm-directory-view.c:7427
 msgid "M_ove to"
 msgstr "Fl_ytt til"
 
-#: src/file-manager/fm-directory-view.c:7472
+#: src/file-manager/fm-directory-view.c:7430
 msgid "Select all items in this window"
 msgstr "Velg alle oppføringer i dette vinduet"
 
-#: src/file-manager/fm-directory-view.c:7475
+#: src/file-manager/fm-directory-view.c:7433
 msgid "Select I_tems Matching..."
 msgstr "Velg oppføringer med _treff …"
 
-#: src/file-manager/fm-directory-view.c:7476
+#: src/file-manager/fm-directory-view.c:7434
 msgid "Select items in this window matching a given pattern"
 msgstr "Velg oppføringer i dette vinduet som passer et gitt mønster"
 
-#: src/file-manager/fm-directory-view.c:7479
+#: src/file-manager/fm-directory-view.c:7437
 msgid "_Invert Selection"
 msgstr "_Reverser om valg"
 
-#: src/file-manager/fm-directory-view.c:7480
+#: src/file-manager/fm-directory-view.c:7438
 msgid "Select all and only the items that are not currently selected"
 msgstr "Velg alle oppføringer som ikke er valgt nå"
 
-#: src/file-manager/fm-directory-view.c:7483
+#: src/file-manager/fm-directory-view.c:7441
 msgid "D_uplicate"
 msgstr "D_upliser"
 
-#: src/file-manager/fm-directory-view.c:7484
+#: src/file-manager/fm-directory-view.c:7442
 msgid "Duplicate each selected item"
 msgstr "Dupliser alle valgte oppføringer"
 
-#: src/file-manager/fm-directory-view.c:7487
-#: src/file-manager/fm-directory-view.c:9156
+#: src/file-manager/fm-directory-view.c:7445
+#: src/file-manager/fm-directory-view.c:9070
 msgid "Ma_ke Link"
 msgid_plural "Ma_ke Links"
 msgstr[0] "Opprett len_ke"
 msgstr[1] "Opprett len_ker"
 
-#: src/file-manager/fm-directory-view.c:7488
+#: src/file-manager/fm-directory-view.c:7446
 msgid "Create a symbolic link for each selected item"
 msgstr "Opprett en symbolsk lenke for hver valgt oppføring"
 
-#: src/file-manager/fm-directory-view.c:7491
+#: src/file-manager/fm-directory-view.c:7449
 msgid "_Rename..."
 msgstr "Gi _nytt navn …"
 
-#: src/file-manager/fm-directory-view.c:7492
+#: src/file-manager/fm-directory-view.c:7450
 msgid "Rename selected item"
 msgstr "Endre navn på valgt oppføring"
 
-#: src/file-manager/fm-directory-view.c:7500
-#: src/file-manager/fm-directory-view.c:9115
+#: src/file-manager/fm-directory-view.c:7458
+#: src/file-manager/fm-directory-view.c:9031
 msgid "Move each selected item to the Trash"
 msgstr "Flytt hver valgt oppføring til papirkurven"
 
-#: src/file-manager/fm-directory-view.c:7504
+#: src/file-manager/fm-directory-view.c:7462
 msgid "Delete each selected item, without moving to the Trash"
 msgstr "Slett hver valgt oppføring, uten å flytte dem til papirkurven"
 
-#: src/file-manager/fm-directory-view.c:7507
-#: src/file-manager/fm-directory-view.c:7639
+#: src/file-manager/fm-directory-view.c:7465
+#: src/file-manager/fm-directory-view.c:7597
 msgid "_Restore"
 msgstr "Gjenopp_rett"
 
-#: src/file-manager/fm-directory-view.c:7511
+#: src/file-manager/fm-directory-view.c:7469
 msgid "_Undo"
 msgstr "A_ngre"
 
-#: src/file-manager/fm-directory-view.c:7512
-#: src/file-manager/fm-directory-view.c:11345
+#: src/file-manager/fm-directory-view.c:7470
+#: src/file-manager/fm-directory-view.c:11247
 msgid "Undo the last action"
 msgstr "Angre siste handling"
 
-#: src/file-manager/fm-directory-view.c:7515
+#: src/file-manager/fm-directory-view.c:7473
 msgid "_Redo"
 msgstr "_Gjenta"
 
-#: src/file-manager/fm-directory-view.c:7516
-#: src/file-manager/fm-directory-view.c:11365
+#: src/file-manager/fm-directory-view.c:7474
+#: src/file-manager/fm-directory-view.c:11265
 msgid "Redo the last undone action"
 msgstr "Gjenta forrige angrede handling"
 
-#: src/file-manager/fm-directory-view.c:7526
+#: src/file-manager/fm-directory-view.c:7484
 msgid "Reset View to _Defaults"
 msgstr "_Sett visning til forvalg"
 
-#: src/file-manager/fm-directory-view.c:7527
+#: src/file-manager/fm-directory-view.c:7485
 msgid "Reset sorting order and zoom level to match preferences for this view"
 msgstr ""
-"Nullstill sorteringsrekkefølge og forstørrelsesnivå til brukervalg for denne"
-" visningen"
+"Nullstill sorteringsrekkefølge og forstørrelsesnivå til brukervalg for denne "
+"visningen"
 
-#: src/file-manager/fm-directory-view.c:7530
+#: src/file-manager/fm-directory-view.c:7488
 msgid "Connect To This Server"
 msgstr "Koble til denne tjeneren"
 
-#: src/file-manager/fm-directory-view.c:7531
+#: src/file-manager/fm-directory-view.c:7489
 msgid "Make a permanent connection to this server"
 msgstr "Opprett en permanent tilkobling til denne tjeneren"
 
-#: src/file-manager/fm-directory-view.c:7535
+#: src/file-manager/fm-directory-view.c:7493
 msgid "Mount the selected volume"
 msgstr "Monter valgt volum"
 
-#: src/file-manager/fm-directory-view.c:7539
+#: src/file-manager/fm-directory-view.c:7497
 msgid "Unmount the selected volume"
 msgstr "Avmonter valgt volum"
 
-#: src/file-manager/fm-directory-view.c:7543
+#: src/file-manager/fm-directory-view.c:7501
 msgid "Eject the selected volume"
 msgstr "Løs ut valgt volum"
 
-#: src/file-manager/fm-directory-view.c:7547
+#: src/file-manager/fm-directory-view.c:7505
 msgid "Format the selected volume"
 msgstr "Forcafer valgt volum"
 
-#: src/file-manager/fm-directory-view.c:7551
+#: src/file-manager/fm-directory-view.c:7509
 msgid "Start the selected volume"
 msgstr "Start valgt volum"
 
-#: src/file-manager/fm-directory-view.c:7555
-#: src/file-manager/fm-directory-view.c:8596
+#: src/file-manager/fm-directory-view.c:7513
+#: src/file-manager/fm-directory-view.c:8535
 msgid "Stop the selected volume"
 msgstr "Stopp valgt volum"
 
-#: src/file-manager/fm-directory-view.c:7559
-#: src/file-manager/fm-directory-view.c:7587
-#: src/file-manager/fm-directory-view.c:7668
+#: src/file-manager/fm-directory-view.c:7517
+#: src/file-manager/fm-directory-view.c:7545
+#: src/file-manager/fm-directory-view.c:7626
 msgid "Detect media in the selected drive"
 msgstr "Gjenkjenn media i valgt lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:7563
+#: src/file-manager/fm-directory-view.c:7521
 msgid "Mount the volume associated with the open folder"
 msgstr "Monter volum som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:7567
+#: src/file-manager/fm-directory-view.c:7525
 msgid "Unmount the volume associated with the open folder"
 msgstr "Avmonter volum som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:7571
+#: src/file-manager/fm-directory-view.c:7529
 msgid "Eject the volume associated with the open folder"
 msgstr "Løs ut volum assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:7575
+#: src/file-manager/fm-directory-view.c:7533
 msgid "Format the volume associated with the open folder"
 msgstr "Forcafer volume assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:7579
+#: src/file-manager/fm-directory-view.c:7537
 msgid "Start the volume associated with the open folder"
 msgstr "Start volume assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:7583
+#: src/file-manager/fm-directory-view.c:7541
 msgid "Stop the volume associated with the open folder"
 msgstr "Stopp volum som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:7590
+#: src/file-manager/fm-directory-view.c:7548
 msgid "Open File and Close window"
 msgstr "Åpne fil og lukk vindu"
 
-#: src/file-manager/fm-directory-view.c:7594
+#: src/file-manager/fm-directory-view.c:7552
 msgid "Sa_ve Search"
 msgstr "La_gre søk"
 
-#: src/file-manager/fm-directory-view.c:7595
+#: src/file-manager/fm-directory-view.c:7553
 msgid "Save the edited search"
 msgstr "Lagre redigert søk"
 
-#: src/file-manager/fm-directory-view.c:7598
+#: src/file-manager/fm-directory-view.c:7556
 msgid "Sa_ve Search As..."
 msgstr "L_agre søk som …"
 
-#: src/file-manager/fm-directory-view.c:7599
+#: src/file-manager/fm-directory-view.c:7557
 msgid "Save the current search as a file"
 msgstr "Lagre dette søket som en fil"
 
-#: src/file-manager/fm-directory-view.c:7605
+#: src/file-manager/fm-directory-view.c:7563
 msgid "Open this folder in a navigation window"
 msgstr "Åpne mappen i et navigeringsvindu"
 
-#: src/file-manager/fm-directory-view.c:7609
+#: src/file-manager/fm-directory-view.c:7567
 msgid "Open this folder in a new tab"
 msgstr "Åpne denne mappen i en ny fane"
 
-#: src/file-manager/fm-directory-view.c:7614
+#: src/file-manager/fm-directory-view.c:7572
 msgid "Open this folder in a folder window"
 msgstr "Åpne denne mappen i et mappevindu"
 
-#: src/file-manager/fm-directory-view.c:7619
+#: src/file-manager/fm-directory-view.c:7577
 msgid "Prepare this folder to be moved with a Paste command"
 msgstr "Gjør klar den åpne mappen til å bli flyttet med kommandoen «Lim inn»"
 
-#: src/file-manager/fm-directory-view.c:7623
+#: src/file-manager/fm-directory-view.c:7581
 msgid "Prepare this folder to be copied with a Paste command"
 msgstr "Gjør klar den åpne mappen til å bli kopiert med kommandoen «Lim inn»"
 
-#: src/file-manager/fm-directory-view.c:7627
+#: src/file-manager/fm-directory-view.c:7585
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into this "
 "folder"
@@ -6851,350 +6819,351 @@ msgstr ""
 "Flytt eller kopier filer som er valgt tidligere med kommandoene «Klipp ut "
 "filer» eller «Kopier filer» til denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7632
+#: src/file-manager/fm-directory-view.c:7590
 msgid "Move this folder to the Trash"
 msgstr "Flytt denne mappen til papirkurven"
 
-#: src/file-manager/fm-directory-view.c:7636
+#: src/file-manager/fm-directory-view.c:7594
 msgid "Delete this folder, without moving to the Trash"
 msgstr "Slett dennne mappen uten å flytte den til papirkurven"
 
-#: src/file-manager/fm-directory-view.c:7644
+#: src/file-manager/fm-directory-view.c:7602
 msgid "Mount the volume associated with this folder"
 msgstr "Monter volum som er assosiert med denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7648
+#: src/file-manager/fm-directory-view.c:7606
 msgid "Unmount the volume associated with this folder"
 msgstr "Avmonter volum som er assosiert med denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7652
+#: src/file-manager/fm-directory-view.c:7610
 msgid "Eject the volume associated with this folder"
 msgstr "Løs ut volum assosiert med denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7656
+#: src/file-manager/fm-directory-view.c:7614
 msgid "Format the volume associated with this folder"
 msgstr "Forcafer volume assosiert med denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7660
+#: src/file-manager/fm-directory-view.c:7618
 msgid "Start the volume associated with this folder"
 msgstr "Start volume som er assosiert med denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7664
+#: src/file-manager/fm-directory-view.c:7622
 msgid "Stop the volume associated with this folder"
 msgstr "Stopp volum som er assosiert med denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7673
+#: src/file-manager/fm-directory-view.c:7631
 msgid "View or modify the properties of this folder"
 msgstr "Vis eller endre egenskaper for denne mappen"
 
-#: src/file-manager/fm-directory-view.c:7676
-#: src/file-manager/fm-directory-view.c:7679
+#: src/file-manager/fm-directory-view.c:7634
+#: src/file-manager/fm-directory-view.c:7637
 msgid "_Other pane"
 msgstr "_Annet område"
 
-#: src/file-manager/fm-directory-view.c:7677
+#: src/file-manager/fm-directory-view.c:7635
 msgid "Copy the current selection to the other pane in the window"
 msgstr "Kopier aktivt utvalg til det andre området i dette vinduet"
 
-#: src/file-manager/fm-directory-view.c:7680
+#: src/file-manager/fm-directory-view.c:7638
 msgid "Move the current selection to the other pane in the window"
 msgstr "Flytt aktivt utvalg til det andre området i dette vinduet"
 
-#: src/file-manager/fm-directory-view.c:7684
+#: src/file-manager/fm-directory-view.c:7642
 msgid "Copy the current selection to the home folder"
 msgstr "Kopier aktivt utvalg til hjemmemappen"
 
-#: src/file-manager/fm-directory-view.c:7688
+#: src/file-manager/fm-directory-view.c:7646
 msgid "Move the current selection to the home folder"
 msgstr "Flytt aktivt utvalg til hjemmemappen"
 
-#: src/file-manager/fm-directory-view.c:7692
+#: src/file-manager/fm-directory-view.c:7650
 msgid "Copy the current selection to the desktop"
 msgstr "Kopier aktivt utvalg til skrivebordet"
 
-#: src/file-manager/fm-directory-view.c:7696
+#: src/file-manager/fm-directory-view.c:7654
 msgid "Move the current selection to the desktop"
 msgstr "Flytt aktivt utvalg til skrivebordet"
 
 #. Translators: %s is a directory
-#: src/file-manager/fm-directory-view.c:7786
+#: src/file-manager/fm-directory-view.c:7740
 #, c-format
 msgid "Run or manage scripts from %s"
 msgstr "Kjør eller håndter skript fra %s"
 
-#: src/file-manager/fm-directory-view.c:7789
+#: src/file-manager/fm-directory-view.c:7742
 msgid "_Scripts"
 msgstr "_Skript"
 
-#: src/file-manager/fm-directory-view.c:8205
+#: src/file-manager/fm-directory-view.c:8151
 #, c-format
 msgid "Move the open folder out of the trash to \"%s\""
 msgstr "Flytt åpen mappe ut av papirkurven til «%s»"
 
-#: src/file-manager/fm-directory-view.c:8208
+#: src/file-manager/fm-directory-view.c:8154
 #, c-format
 msgid "Move the selected folder out of the trash to \"%s\""
 msgid_plural "Move the selected folders out of the trash to \"%s\""
 msgstr[0] "Flytt valgt mappe ut av papirkurven til «%s»"
 msgstr[1] "Flytt valgte mapper ut av papirkurven til «%s»"
 
-#: src/file-manager/fm-directory-view.c:8212
+#: src/file-manager/fm-directory-view.c:8158
 msgid "Move the selected folder out of the trash"
 msgid_plural "Move the selected folders out of the trash"
 msgstr[0] "Flytt valgt mappe ut av papirkurven"
 msgstr[1] "Flytt valgte mapper ut av papirkurven"
 
-#: src/file-manager/fm-directory-view.c:8218
+#: src/file-manager/fm-directory-view.c:8164
 #, c-format
 msgid "Move the selected file out of the trash to \"%s\""
 msgid_plural "Move the selected files out of the trash to \"%s\""
 msgstr[0] "Flytt valgt fil ut av papirkurven til «%s»"
 msgstr[1] "Flytt valgte filer ut av papirkurven til «%s»"
 
-#: src/file-manager/fm-directory-view.c:8222
+#: src/file-manager/fm-directory-view.c:8168
 msgid "Move the selected file out of the trash"
 msgid_plural "Move the selected files out of the trash"
 msgstr[0] "Flytt valgt fil ut av papirkurven"
 msgstr[1] "Flytt valgte filer ut av papirkurven"
 
-#: src/file-manager/fm-directory-view.c:8228
+#: src/file-manager/fm-directory-view.c:8174
 #, c-format
 msgid "Move the selected item out of the trash to \"%s\""
 msgid_plural "Move the selected items out of the trash to \"%s\""
 msgstr[0] "Flytt valgt oppføring ut av papirkurven til «%s»"
 msgstr[1] "Flytt valgte oppføringer ut av papirkurven til «%s»"
 
-#: src/file-manager/fm-directory-view.c:8232
+#: src/file-manager/fm-directory-view.c:8178
 msgid "Move the selected item out of the trash"
 msgid_plural "Move the selected items out of the trash"
 msgstr[0] "Flytt valgt oppføring ut av papirkurven"
 msgstr[1] "Flytt valgte oppføringer ut av papirkurven"
 
-#: src/file-manager/fm-directory-view.c:8361
-#: src/file-manager/fm-directory-view.c:8365
-#: src/file-manager/fm-directory-view.c:8567
-#: src/file-manager/fm-directory-view.c:8571
+#: src/file-manager/fm-directory-view.c:8304
+#: src/file-manager/fm-directory-view.c:8308
+#: src/file-manager/fm-directory-view.c:8506
+#: src/file-manager/fm-directory-view.c:8510
 msgid "Start the selected drive"
 msgstr "Start valgt lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:8369
-#: src/file-manager/fm-directory-view.c:8575
+#: src/file-manager/fm-directory-view.c:8312
+#: src/file-manager/fm-directory-view.c:8514
 msgid "Connect to the selected drive"
 msgstr "Koble til valgt lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:8372
-#: src/file-manager/fm-directory-view.c:8466
-#: src/file-manager/fm-directory-view.c:8578
+#: src/file-manager/fm-directory-view.c:8315
+#: src/file-manager/fm-directory-view.c:8407
+#: src/file-manager/fm-directory-view.c:8517
 msgid "_Start Multi-disk Drive"
 msgstr "_Start lagringsenhet med flere disker"
 
-#: src/file-manager/fm-directory-view.c:8373
-#: src/file-manager/fm-directory-view.c:8579
+#: src/file-manager/fm-directory-view.c:8316
+#: src/file-manager/fm-directory-view.c:8518
 msgid "Start the selected multi-disk drive"
 msgstr "Start valgt lagringsenhet med flere disker"
 
-#: src/file-manager/fm-directory-view.c:8376
+#: src/file-manager/fm-directory-view.c:8319
 msgid "U_nlock Drive"
 msgstr "_Lås opp lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:8377
-#: src/file-manager/fm-directory-view.c:8583
+#: src/file-manager/fm-directory-view.c:8320
+#: src/file-manager/fm-directory-view.c:8522
 msgid "Unlock the selected drive"
 msgstr "Lås opp valgt lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:8390
+#: src/file-manager/fm-directory-view.c:8333
 msgid "Stop the selected drive"
 msgstr "Stopp valgt lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:8394
-#: src/file-manager/fm-directory-view.c:8600
+#: src/file-manager/fm-directory-view.c:8337
+#: src/file-manager/fm-directory-view.c:8539
 msgid "Safely remove the selected drive"
 msgstr "Fjern valgt lagringsenhet på en trygg måte"
 
-#: src/file-manager/fm-directory-view.c:8397
-#: src/file-manager/fm-directory-view.c:8491
-#: src/file-manager/fm-directory-view.c:8603
+#: src/file-manager/fm-directory-view.c:8340
+#: src/file-manager/fm-directory-view.c:8432
+#: src/file-manager/fm-directory-view.c:8542
 msgid "_Disconnect"
 msgstr "_Koble fra"
 
-#: src/file-manager/fm-directory-view.c:8398
-#: src/file-manager/fm-directory-view.c:8604
+#: src/file-manager/fm-directory-view.c:8341
+#: src/file-manager/fm-directory-view.c:8543
 msgid "Disconnect the selected drive"
 msgstr "Koble fra valgt lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:8401
-#: src/file-manager/fm-directory-view.c:8495
-#: src/file-manager/fm-directory-view.c:8607
+#: src/file-manager/fm-directory-view.c:8344
+#: src/file-manager/fm-directory-view.c:8436
+#: src/file-manager/fm-directory-view.c:8546
 msgid "_Stop Multi-disk Drive"
 msgstr "_Stopp lagringsenhet med flere disker"
 
-#: src/file-manager/fm-directory-view.c:8402
-#: src/file-manager/fm-directory-view.c:8608
+#: src/file-manager/fm-directory-view.c:8345
+#: src/file-manager/fm-directory-view.c:8547
 msgid "Stop the selected multi-disk drive"
 msgstr "Stopp valgt lagringsenhet med flere disker"
 
-#: src/file-manager/fm-directory-view.c:8406
-#: src/file-manager/fm-directory-view.c:8612
+#: src/file-manager/fm-directory-view.c:8349
+#: src/file-manager/fm-directory-view.c:8551
 msgid "Lock the selected drive"
 msgstr "Lås valgt lagringsenhet"
 
-#: src/file-manager/fm-directory-view.c:8455
-#: src/file-manager/fm-directory-view.c:8459
+#: src/file-manager/fm-directory-view.c:8396
+#: src/file-manager/fm-directory-view.c:8400
 msgid "Start the drive associated with the open folder"
 msgstr "Start lagringsenhet assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:8463
+#: src/file-manager/fm-directory-view.c:8404
 msgid "Connect to the drive associated with the open folder"
 msgstr "Koble til lagringsenhet som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:8467
+#: src/file-manager/fm-directory-view.c:8408
 msgid "Start the multi-disk drive associated with the open folder"
 msgstr ""
 "Start lagringsenhet med flere disker som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:8471
+#: src/file-manager/fm-directory-view.c:8412
 msgid "Unlock the drive associated with the open folder"
 msgstr "Lås opp lagringsenhet som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:8484
+#: src/file-manager/fm-directory-view.c:8425
 msgid "_Stop the drive associated with the open folder"
 msgstr "_Stopp lagringsenhet som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:8488
+#: src/file-manager/fm-directory-view.c:8429
 msgid "Safely remove the drive associated with the open folder"
 msgstr "Fjern lagringsenhet assosiert med den åpne mappen på en trygg måte"
 
-#: src/file-manager/fm-directory-view.c:8492
+#: src/file-manager/fm-directory-view.c:8433
 msgid "Disconnect the drive associated with the open folder"
 msgstr "Koble fra lagringsenhet som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:8496
+#: src/file-manager/fm-directory-view.c:8437
 msgid "Stop the multi-disk drive associated with the open folder"
 msgstr ""
 "Stopp lagringsenhet med flere disker som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:8500
+#: src/file-manager/fm-directory-view.c:8441
 msgid "Lock the drive associated with the open folder"
 msgstr "Lås lagringsenhet som er assosiert med den åpne mappen"
 
-#: src/file-manager/fm-directory-view.c:8686
-#: src/file-manager/fm-directory-view.c:9024
+#: src/file-manager/fm-directory-view.c:8622
+#: src/file-manager/fm-directory-view.c:8946
 msgid "Browse in New _Window"
 msgstr "Bla gjennom i nytt _vindu"
 
-#: src/file-manager/fm-directory-view.c:8692
-#: src/file-manager/fm-directory-view.c:9034
+#: src/file-manager/fm-directory-view.c:8628
+#: src/file-manager/fm-directory-view.c:8956
 msgid "_Browse Folder"
 msgid_plural "_Browse Folders"
 msgstr[0] "_Bla gjennom mappe"
 msgstr[1] "_Bla gjennom mapper"
 
-#: src/file-manager/fm-directory-view.c:8711
-#: src/file-manager/fm-directory-view.c:9065
+#: src/file-manager/fm-directory-view.c:8645
+#: src/file-manager/fm-directory-view.c:8985
 msgid "Browse in New _Tab"
 msgstr "Bla gjennom i ny _fane"
 
-#: src/file-manager/fm-directory-view.c:8766
-#: src/file-manager/fm-directory-view.c:9110
+#: src/file-manager/fm-directory-view.c:8694
+#: src/file-manager/fm-directory-view.c:9026
 msgid "_Delete Permanently"
 msgstr "_Slett permanent"
 
-#: src/file-manager/fm-directory-view.c:8767
+#: src/file-manager/fm-directory-view.c:8695
 msgid "Delete the open folder permanently"
 msgstr "Slett åpen mappe permanent"
 
-#: src/file-manager/fm-directory-view.c:8771
+#: src/file-manager/fm-directory-view.c:8699
 msgid "Move the open folder to the Trash"
 msgstr "Flytt åpen mappe til papirkurv"
 
-#: src/file-manager/fm-directory-view.c:8962
+#: src/file-manager/fm-directory-view.c:8886
 #, c-format
 msgid "_Open With %s"
 msgstr "_Åpne med %s"
 
-#: src/file-manager/fm-directory-view.c:9017
+#: src/file-manager/fm-directory-view.c:8939
 #, c-format
 msgid "Open in %'d New _Window"
 msgid_plural "Open in %'d New _Windows"
 msgstr[0] "Åpne i %'d nytt _vindu"
 msgstr[1] "Åpne i %'d nye _vinduer"
 
-#: src/file-manager/fm-directory-view.c:9026
+#: src/file-manager/fm-directory-view.c:8948
 #, c-format
 msgid "Browse in %'d New _Window"
 msgid_plural "Browse in %'d New _Windows"
 msgstr[0] "Bla gjennom i %'d nytt _vindu"
 msgstr[1] "Bla gjennom i %'d nye _vinduer"
 
-#: src/file-manager/fm-directory-view.c:9058
+#: src/file-manager/fm-directory-view.c:8978
 #, c-format
 msgid "Open in %'d New _Tab"
 msgid_plural "Open in %'d New _Tabs"
 msgstr[0] "Åpne i %'d ny _fane"
 msgstr[1] "Åpne i %'d nye _faner"
 
-#: src/file-manager/fm-directory-view.c:9067
+#: src/file-manager/fm-directory-view.c:8987
 #, c-format
 msgid "Browse in %'d New _Tab"
 msgid_plural "Browse in %'d New _Tabs"
 msgstr[0] "Bla gjennom i %'d ny _fane"
 msgstr[1] "Bla gjennom i %'d nye _faner"
 
-#: src/file-manager/fm-directory-view.c:9111
+#: src/file-manager/fm-directory-view.c:9027
 msgid "Delete all selected items permanently"
 msgstr "Slett alle valgte oppføringer permanent"
 
-#: src/file-manager/fm-directory-view.c:9171
+#: src/file-manager/fm-directory-view.c:9084
 msgid "View or modify the properties of the open folder"
 msgstr "Vis eller endre egenskaper for åpen mappe"
 
-#: src/file-manager/fm-directory-view.c:10481
+#: src/file-manager/fm-directory-view.c:10385
 msgid "Download location?"
 msgstr "Last ned plassering?"
 
-#: src/file-manager/fm-directory-view.c:10484
+#: src/file-manager/fm-directory-view.c:10388
 msgid "You can download it or make a link to it."
 msgstr "Du kan ikke laste den ned eller lage en lenke til den."
 
-#: src/file-manager/fm-directory-view.c:10487
+#: src/file-manager/fm-directory-view.c:10391
 msgid "Make a _Link"
 msgstr "Opprett _lenke"
 
-#: src/file-manager/fm-directory-view.c:10494
+#: src/file-manager/fm-directory-view.c:10398
 msgid "_Download"
 msgstr "Last ne_d"
 
-#: src/file-manager/fm-directory-view.c:10651
-#: src/file-manager/fm-directory-view.c:10710
-#: src/file-manager/fm-directory-view.c:10823
+#: src/file-manager/fm-directory-view.c:10555
+#: src/file-manager/fm-directory-view.c:10614
+#: src/file-manager/fm-directory-view.c:10727
 msgid "Drag and drop is not supported."
 msgstr "Dra-og-slipp er ikke støttet."
 
-#: src/file-manager/fm-directory-view.c:10652
+#: src/file-manager/fm-directory-view.c:10556
 msgid "Drag and drop is only supported on local file systems."
 msgstr "Dra-og-slipp er kun støttet for lokale filsystemer."
 
-#: src/file-manager/fm-directory-view.c:10711
-#: src/file-manager/fm-directory-view.c:10824
+#: src/file-manager/fm-directory-view.c:10615
+#: src/file-manager/fm-directory-view.c:10728
 msgid "An invalid drag type was used."
 msgstr "En ugyldig type ble brukt for draoperasjon."
 
 #. Translators: This is the filename used for when you dnd text to a directory
-#: src/file-manager/fm-directory-view.c:10901
+#: src/file-manager/fm-directory-view.c:10805
 msgid "dropped text.txt"
 msgstr "slapp tekst.txt"
 
 #. Translators: This is the filename used for when you dnd raw
 #. * data to a directory, if the source didn't supply a name.
-#: src/file-manager/fm-directory-view.c:10947
+#.
+#: src/file-manager/fm-directory-view.c:10851
 msgid "dropped data"
 msgstr "data som ble sluppet"
 
-#: src/file-manager/fm-directory-view.c:11344
+#: src/file-manager/fm-directory-view.c:11246
 msgid "Undo"
 msgstr "Angre"
 
-#: src/file-manager/fm-directory-view.c:11364
+#: src/file-manager/fm-directory-view.c:11264
 msgid "Redo"
 msgstr "Gjenta"
 
@@ -7228,7 +7197,8 @@ msgstr "Tom visning for denne plasseringen."
 
 #: src/file-manager/fm-error-reporting.c:72
 #, c-format
-msgid "You do not have the permissions necessary to view the contents of \"%s\"."
+msgid ""
+"You do not have the permissions necessary to view the contents of \"%s\"."
 msgstr "Du har ikke nødvendige rettigheter til å vise innholdet av «%s»."
 
 #: src/file-manager/fm-error-reporting.c:76
@@ -7253,7 +7223,8 @@ msgstr "Navnet «%s» er allerede i bruk i denne mappen. Bruk et annet navn."
 
 #: src/file-manager/fm-error-reporting.c:125
 #, c-format
-msgid "There is no \"%s\" in this folder. Perhaps it was just moved or deleted?"
+msgid ""
+"There is no \"%s\" in this folder. Perhaps it was just moved or deleted?"
 msgstr ""
 "«%s» finnes ikke i denne mappen. Kanskje den er flyttet eller slettet nylig?"
 
@@ -7265,8 +7236,8 @@ msgstr "Du har ikke nødvendige rettigheter til å endre navn på «%s»."
 #: src/file-manager/fm-error-reporting.c:136
 #, c-format
 msgid ""
-"The name \"%s\" is not valid because it contains the character \"/\". Please"
-" use a different name."
+"The name \"%s\" is not valid because it contains the character \"/\". Please "
+"use a different name."
 msgstr ""
 "Navnet «%s» er ikke gyldig fordi det inneholder tegnet «/». Bruk et annet "
 "navn."
@@ -7287,7 +7258,8 @@ msgstr "Oppføringen kunne ikke gis nytt navn."
 
 #: src/file-manager/fm-error-reporting.c:191
 #, c-format
-msgid "You do not have the permissions necessary to change the group of \"%s\"."
+msgid ""
+"You do not have the permissions necessary to change the group of \"%s\"."
 msgstr "Du har ikke nødvendige rettigheter til å endre gruppen for «%s»."
 
 #: src/file-manager/fm-error-reporting.c:205
@@ -7326,7 +7298,7 @@ msgstr "Endrer navn fra «%s» til «%s»."
 msgid "by _Name"
 msgstr "etter _navn"
 
-#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1760
+#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1750
 msgid "Keep icons sorted by name in rows"
 msgstr "Behold ikoner sortert etter navn i rader"
 
@@ -7334,7 +7306,7 @@ msgstr "Behold ikoner sortert etter navn i rader"
 msgid "by _Size"
 msgstr "etter _størrelse"
 
-#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1766
+#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1756
 msgid "Keep icons sorted by size in rows"
 msgstr "Behold ikoner sortert etter størrelse i rader"
 
@@ -7342,7 +7314,7 @@ msgstr "Behold ikoner sortert etter størrelse i rader"
 msgid "by S_ize on Disk"
 msgstr "Etter st_ørrelse på disk"
 
-#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1772
+#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1762
 msgid "Keep icons sorted by disk usage in rows"
 msgstr "Behold ikoner sortert etter diskbruk i rader"
 
@@ -7350,7 +7322,7 @@ msgstr "Behold ikoner sortert etter diskbruk i rader"
 msgid "by _Type"
 msgstr "etter _type"
 
-#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1778
+#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1768
 msgid "Keep icons sorted by type in rows"
 msgstr "Behold ikoner sortert etter type i rader"
 
@@ -7358,7 +7330,7 @@ msgstr "Behold ikoner sortert etter type i rader"
 msgid "by Modification _Date"
 msgstr "etter endrings_dato"
 
-#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1784
+#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1774
 msgid "Keep icons sorted by modification date in rows"
 msgstr "Behold ikoner sortert etter endringsdato i rader"
 
@@ -7366,7 +7338,7 @@ msgstr "Behold ikoner sortert etter endringsdato i rader"
 msgid "by _Emblems"
 msgstr "etter _emblemer"
 
-#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1790
+#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1780
 msgid "Keep icons sorted by emblems in rows"
 msgstr "Behold ikoner sortert etter emblemer i rader"
 
@@ -7374,7 +7346,7 @@ msgstr "Behold ikoner sortert etter emblemer i rader"
 msgid "by T_rash Time"
 msgstr "etter tid den ble lagt i papi_rkurven"
 
-#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1796
+#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1786
 msgid "Keep icons sorted by trash time in rows"
 msgstr "Behold ikoner sortert etter tiden den ble lagt i papirkurven"
 
@@ -7386,148 +7358,148 @@ msgstr "Etter filt_ype"
 msgid "Keep icons sorted by reversed extension segments in rows"
 msgstr "Behold ikoner sortert etter omvendt filetternavn i rader"
 
-#: src/file-manager/fm-icon-view.c:794
+#: src/file-manager/fm-icon-view.c:789
 msgid "_Organize Desktop by Name"
 msgstr "_Organiser skrivebordet etter navn"
 
-#: src/file-manager/fm-icon-view.c:1709
+#: src/file-manager/fm-icon-view.c:1699
 msgid "Arran_ge Items"
 msgstr "_Plasser oppføringer"
 
-#: src/file-manager/fm-icon-view.c:1711
+#: src/file-manager/fm-icon-view.c:1701
 msgid "Resize Icon..."
 msgstr "Endre størrelse på ikon …"
 
-#: src/file-manager/fm-icon-view.c:1712
+#: src/file-manager/fm-icon-view.c:1702
 msgid "Make the selected icon resizable"
 msgstr "Gjør det mulig å endre størrelse på valgt ikon"
 
-#: src/file-manager/fm-icon-view.c:1716 src/file-manager/fm-icon-view.c:1935
+#: src/file-manager/fm-icon-view.c:1706 src/file-manager/fm-icon-view.c:1920
 msgid "Restore Icons' Original Si_zes"
 msgstr "G_jenopprett ikonenes opprinnelige størrelser"
 
-#: src/file-manager/fm-icon-view.c:1717
+#: src/file-manager/fm-icon-view.c:1707
 msgid "Restore each selected icon to its original size"
 msgstr "Gjenopprett original størrelse for alle valgte ikoner"
 
-#: src/file-manager/fm-icon-view.c:1721
+#: src/file-manager/fm-icon-view.c:1711
 msgid "_Organize by Name"
 msgstr "_Organiser etter navn"
 
-#: src/file-manager/fm-icon-view.c:1722
+#: src/file-manager/fm-icon-view.c:1712
 msgid "Reposition icons to better fit in the window and avoid overlapping"
 msgstr ""
 "Plasser ikonene på nytt slik at de passer bedre til vinduene og unngår "
 "overlapping"
 
-#: src/file-manager/fm-icon-view.c:1730
+#: src/file-manager/fm-icon-view.c:1720
 msgid "Compact _Layout"
 msgstr "Tettere p_lassering"
 
-#: src/file-manager/fm-icon-view.c:1731
+#: src/file-manager/fm-icon-view.c:1721
 msgid "Toggle using a tighter layout scheme"
 msgstr "Slå av/på bruk av tettere plassering"
 
-#: src/file-manager/fm-icon-view.c:1736
+#: src/file-manager/fm-icon-view.c:1726
 msgid "Re_versed Order"
 msgstr "Om_vendt rekkefølge"
 
-#: src/file-manager/fm-icon-view.c:1737
+#: src/file-manager/fm-icon-view.c:1727
 msgid "Display icons in the opposite order"
 msgstr "Vis ikoner i omvendt rekkefølge"
 
-#: src/file-manager/fm-icon-view.c:1742
+#: src/file-manager/fm-icon-view.c:1732
 msgid "_Keep Aligned"
 msgstr "_Behold justert"
 
-#: src/file-manager/fm-icon-view.c:1743
+#: src/file-manager/fm-icon-view.c:1733
 msgid "Keep icons lined up on a grid"
 msgstr "Behold ikoner justert i et rutenett"
 
-#: src/file-manager/fm-icon-view.c:1753
+#: src/file-manager/fm-icon-view.c:1743
 msgid "_Manually"
 msgstr "_Manuelt"
 
-#: src/file-manager/fm-icon-view.c:1754
+#: src/file-manager/fm-icon-view.c:1744
 msgid "Leave icons wherever they are dropped"
 msgstr "La ikoner bli hvor de slippes"
 
-#: src/file-manager/fm-icon-view.c:1759
+#: src/file-manager/fm-icon-view.c:1749
 msgid "By _Name"
 msgstr "Etter _navn"
 
-#: src/file-manager/fm-icon-view.c:1765
+#: src/file-manager/fm-icon-view.c:1755
 msgid "By _Size"
 msgstr "Etter _størrelse"
 
-#: src/file-manager/fm-icon-view.c:1771
+#: src/file-manager/fm-icon-view.c:1761
 msgid "By S_ize on Disk"
 msgstr "Etter st_ørrelse på disk"
 
-#: src/file-manager/fm-icon-view.c:1777
+#: src/file-manager/fm-icon-view.c:1767
 msgid "By _Type"
 msgstr "Etter _type"
 
-#: src/file-manager/fm-icon-view.c:1783
+#: src/file-manager/fm-icon-view.c:1773
 msgid "By Modification _Date"
 msgstr "Etter endrings_dato"
 
-#: src/file-manager/fm-icon-view.c:1789
+#: src/file-manager/fm-icon-view.c:1779
 msgid "By _Emblems"
 msgstr "Etter _emblemer"
 
-#: src/file-manager/fm-icon-view.c:1795
+#: src/file-manager/fm-icon-view.c:1785
 msgid "By T_rash Time"
 msgstr "Etter når den ble lagt i papi_rkurven"
 
-#: src/file-manager/fm-icon-view.c:1801
+#: src/file-manager/fm-icon-view.c:1791
 msgid "By E_xtension"
 msgstr "Etter filt_ype"
 
-#: src/file-manager/fm-icon-view.c:1802
+#: src/file-manager/fm-icon-view.c:1792
 msgid "Keep icons sorted by reverse extension segments in rows"
 msgstr "Behold ikoner sortert etter omvendt filetternavn i rader"
 
-#: src/file-manager/fm-icon-view.c:1936
+#: src/file-manager/fm-icon-view.c:1921
 msgid "Restore Icon's Original Si_ze"
 msgstr "G_jenopprett ikonets opprinnelige størrelse"
 
-#: src/file-manager/fm-icon-view.c:2419
+#: src/file-manager/fm-icon-view.c:2403
 #, c-format
 msgid "pointing at \"%s\""
 msgstr "peker til «%s»"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3438
+#: src/file-manager/fm-icon-view.c:3422
 msgid "_Icons"
 msgstr "_Ikoner"
 
-#: src/file-manager/fm-icon-view.c:3439
+#: src/file-manager/fm-icon-view.c:3423
 msgid "The icon view encountered an error."
 msgstr "Ikonvisningen ble utsatt for en feil."
 
-#: src/file-manager/fm-icon-view.c:3440
+#: src/file-manager/fm-icon-view.c:3424
 msgid "The icon view encountered an error while starting up."
 msgstr "Ikonvisningen ble utsatt for en feil under oppstart."
 
-#: src/file-manager/fm-icon-view.c:3441
+#: src/file-manager/fm-icon-view.c:3425
 msgid "Display this location with the icon view."
 msgstr "Ikonvisning for denne plasseringen."
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3453
+#: src/file-manager/fm-icon-view.c:3437
 msgid "_Compact"
 msgstr "_Kompakt"
 
-#: src/file-manager/fm-icon-view.c:3454
+#: src/file-manager/fm-icon-view.c:3438
 msgid "The compact view encountered an error."
 msgstr "Kompakt visning ble utsatt for en feil."
 
-#: src/file-manager/fm-icon-view.c:3455
+#: src/file-manager/fm-icon-view.c:3439
 msgid "The compact view encountered an error while starting up."
 msgstr "Kompakt visning ble utsatt for en feil under oppstart."
 
-#: src/file-manager/fm-icon-view.c:3456
+#: src/file-manager/fm-icon-view.c:3440
 msgid "Display this location with the compact view."
 msgstr "Kompakt visning for denne plasseringen."
 
@@ -7535,310 +7507,311 @@ msgstr "Kompakt visning for denne plasseringen."
 msgid "(Empty)"
 msgstr "(Tom)"
 
-#: src/file-manager/fm-list-view.c:2558
+#: src/file-manager/fm-list-view.c:2563
 #, c-format
 msgid "%s Visible Columns"
 msgstr "%s synlige kolonner"
 
-#: src/file-manager/fm-list-view.c:2582
+#: src/file-manager/fm-list-view.c:2587
 msgid "Choose the order of information to appear in this folder:"
 msgstr "Velg rekkefølgen for informasjonen som skal vises i denne mappen"
 
-#: src/file-manager/fm-list-view.c:2636
+#: src/file-manager/fm-list-view.c:2641
 msgid "Visible _Columns..."
 msgstr "Synlige _kolonner …"
 
-#: src/file-manager/fm-list-view.c:2637
+#: src/file-manager/fm-list-view.c:2642
 msgid "Select the columns visible in this folder"
 msgstr "Velg synlige kolonner i denne mappen"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-list-view.c:3500
+#: src/file-manager/fm-list-view.c:3503
 msgid "_List"
 msgstr "_Liste"
 
-#: src/file-manager/fm-list-view.c:3501
+#: src/file-manager/fm-list-view.c:3504
 msgid "The list view encountered an error."
 msgstr "Listevisningen ble utsatt for en feil."
 
-#: src/file-manager/fm-list-view.c:3502
+#: src/file-manager/fm-list-view.c:3505
 msgid "The list view encountered an error while starting up."
 msgstr "Listevisningen ble utsatt for en feil under oppstart."
 
-#: src/file-manager/fm-list-view.c:3503
+#: src/file-manager/fm-list-view.c:3506
 msgid "Display this location with the list view."
 msgstr "Listevisning for denne plasseringen."
 
-#: src/file-manager/fm-properties-window.c:514
+#: src/file-manager/fm-properties-window.c:511
 msgid "You cannot assign more than one custom icon at a time!"
 msgstr "Du kan ikke tilegne mer enn ett egendefinert ikon om gangen!"
 
-#: src/file-manager/fm-properties-window.c:648
+#: src/file-manager/fm-properties-window.c:645
 msgid "_Name:"
 msgid_plural "_Names:"
 msgstr[0] "_Navn:"
 msgstr[1] "_Navn:"
 
-#: src/file-manager/fm-properties-window.c:1004
+#: src/file-manager/fm-properties-window.c:1001
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: src/file-manager/fm-properties-window.c:1016
+#: src/file-manager/fm-properties-window.c:1013
 #, c-format
 msgid "%s Properties"
 msgstr "Egenskaper for %s"
 
-#: src/file-manager/fm-properties-window.c:1346
+#: src/file-manager/fm-properties-window.c:1343
 #, c-format
 msgctxt "MIME type description (MIME type)"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/file-manager/fm-properties-window.c:1554
+#: src/file-manager/fm-properties-window.c:1551
 msgid "Cancel Group Change?"
 msgstr "Avbryt endring av gruppe?"
 
-#: src/file-manager/fm-properties-window.c:1969
+#: src/file-manager/fm-properties-window.c:1966
 msgid "Cancel Owner Change?"
 msgstr "Avbryt endring av eier?"
 
-#: src/file-manager/fm-properties-window.c:2296
+#: src/file-manager/fm-properties-window.c:2293
 msgid "nothing"
 msgstr "ingenting"
 
-#: src/file-manager/fm-properties-window.c:2298
+#: src/file-manager/fm-properties-window.c:2295
 msgid "unreadable"
 msgstr "ulesbar"
 
-#: src/file-manager/fm-properties-window.c:2317
+#: src/file-manager/fm-properties-window.c:2314
 #, c-format
 msgid "%'d item, with size %s (%s on disk)"
 msgid_plural "%'d items, totalling %s (%s on disk)"
 msgstr[0] "%'d oppføring, totalt %s (%s på disk)"
 msgstr[1] "%'d oppføringer, totalt %s (%s på disk)"
 
-#: src/file-manager/fm-properties-window.c:2327
+#: src/file-manager/fm-properties-window.c:2324
 msgid "(some contents unreadable)"
 msgstr "(noe innhold ikke lesbart)"
 
-#: src/file-manager/fm-properties-window.c:2344
+#: src/file-manager/fm-properties-window.c:2341
 msgid "Contents:"
 msgstr "Innhold:"
 
 #. Translators: "used" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3120
+#: src/file-manager/fm-properties-window.c:3117
 msgid "used"
 msgstr "brukt"
 
 #. Translators: "free" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3131
+#: src/file-manager/fm-properties-window.c:3128
 msgid "free"
 msgstr "ledig"
 
-#: src/file-manager/fm-properties-window.c:3135
+#: src/file-manager/fm-properties-window.c:3132
 msgid "Total capacity:"
 msgstr "Total kapasitet:"
 
-#: src/file-manager/fm-properties-window.c:3149
+#: src/file-manager/fm-properties-window.c:3146
 msgid "Filesystem type:"
 msgstr "Type filsystem:"
 
-#: src/file-manager/fm-properties-window.c:3234
+#: src/file-manager/fm-properties-window.c:3231
 msgid "Basic"
 msgstr "Grunnleggende"
 
-#: src/file-manager/fm-properties-window.c:3296
+#: src/file-manager/fm-properties-window.c:3293
 msgid "Link target:"
 msgstr "Lenkemål:"
 
-#: src/file-manager/fm-properties-window.c:3310
+#: src/file-manager/fm-properties-window.c:3307
 msgid "Size on Disk:"
 msgstr "Størrelse på disk:"
 
-#: src/file-manager/fm-properties-window.c:3325
+#: src/file-manager/fm-properties-window.c:3322
 msgid "Volume:"
 msgstr "Volum:"
 
-#: src/file-manager/fm-properties-window.c:3334
+#: src/file-manager/fm-properties-window.c:3331
 msgid "Accessed:"
 msgstr "Aksessert:"
 
-#: src/file-manager/fm-properties-window.c:3338
+#: src/file-manager/fm-properties-window.c:3335
 msgid "Modified:"
 msgstr "Endret:"
 
-#: src/file-manager/fm-properties-window.c:3347
+#: src/file-manager/fm-properties-window.c:3344
 msgid "Free space:"
 msgstr "Ledig plass:"
 
-#: src/file-manager/fm-properties-window.c:3875
+#: src/file-manager/fm-properties-window.c:3869
 msgid "_Read"
 msgstr "_Les"
 
-#: src/file-manager/fm-properties-window.c:3877
+#: src/file-manager/fm-properties-window.c:3871
 msgid "_Write"
 msgstr "_Skriv"
 
-#: src/file-manager/fm-properties-window.c:3879
+#: src/file-manager/fm-properties-window.c:3873
 msgid "E_xecute"
 msgstr "_Kjør"
 
 #. Translators: this gets concatenated to "no read",
 #. * "no access", etc. (see following strings)
-#: src/file-manager/fm-properties-window.c:4147
-#: src/file-manager/fm-properties-window.c:4158
-#: src/file-manager/fm-properties-window.c:4170
+#.
+#: src/file-manager/fm-properties-window.c:4141
+#: src/file-manager/fm-properties-window.c:4152
+#: src/file-manager/fm-properties-window.c:4164
 msgid "no "
 msgstr "nei"
 
-#: src/file-manager/fm-properties-window.c:4150
+#: src/file-manager/fm-properties-window.c:4144
 msgid "list"
 msgstr "liste"
 
-#: src/file-manager/fm-properties-window.c:4152
+#: src/file-manager/fm-properties-window.c:4146
 msgid "read"
 msgstr "les"
 
-#: src/file-manager/fm-properties-window.c:4161
+#: src/file-manager/fm-properties-window.c:4155
 msgid "create/delete"
 msgstr "opprett/slett"
 
-#: src/file-manager/fm-properties-window.c:4163
+#: src/file-manager/fm-properties-window.c:4157
 msgid "write"
 msgstr "skriv"
 
-#: src/file-manager/fm-properties-window.c:4172
+#: src/file-manager/fm-properties-window.c:4166
 msgid "access"
 msgstr "tilgang"
 
-#: src/file-manager/fm-properties-window.c:4220
+#: src/file-manager/fm-properties-window.c:4214
 msgid "Access:"
 msgstr "Tilgang:"
 
-#: src/file-manager/fm-properties-window.c:4222
+#: src/file-manager/fm-properties-window.c:4216
 msgid "Folder access:"
 msgstr "Mappetilgang:"
 
-#: src/file-manager/fm-properties-window.c:4224
+#: src/file-manager/fm-properties-window.c:4218
 msgid "File access:"
 msgstr "Filtilgang:"
 
-#: src/file-manager/fm-properties-window.c:4242
+#: src/file-manager/fm-properties-window.c:4236
 msgid "List files only"
 msgstr "Vis kun filer"
 
-#: src/file-manager/fm-properties-window.c:4244
+#: src/file-manager/fm-properties-window.c:4238
 msgid "Access files"
 msgstr "Aksesser filer"
 
-#: src/file-manager/fm-properties-window.c:4246
+#: src/file-manager/fm-properties-window.c:4240
 msgid "Create and delete files"
 msgstr "Opprett og slett filer"
 
-#: src/file-manager/fm-properties-window.c:4253
+#: src/file-manager/fm-properties-window.c:4247
 msgid "Read-only"
 msgstr "Skrivebeskyttet"
 
-#: src/file-manager/fm-properties-window.c:4255
+#: src/file-manager/fm-properties-window.c:4249
 msgid "Read and write"
 msgstr "Skriv og les"
 
-#: src/file-manager/fm-properties-window.c:4320
+#: src/file-manager/fm-properties-window.c:4314
 msgid "Special flags:"
 msgstr "Spesielle flagg:"
 
-#: src/file-manager/fm-properties-window.c:4322
+#: src/file-manager/fm-properties-window.c:4316
 msgid "Set _user ID"
 msgstr "Sett br_uker-ID"
 
-#: src/file-manager/fm-properties-window.c:4323
+#: src/file-manager/fm-properties-window.c:4317
 msgid "Set gro_up ID"
 msgstr "Sett gr_uppe-ID"
 
-#: src/file-manager/fm-properties-window.c:4324
+#: src/file-manager/fm-properties-window.c:4318
 msgid "_Sticky"
 msgstr "K_lebrig"
 
-#: src/file-manager/fm-properties-window.c:4399
-#: src/file-manager/fm-properties-window.c:4591
+#: src/file-manager/fm-properties-window.c:4393
+#: src/file-manager/fm-properties-window.c:4585
 msgid "_Owner:"
 msgstr "_Eier:"
 
-#: src/file-manager/fm-properties-window.c:4407
-#: src/file-manager/fm-properties-window.c:4497
-#: src/file-manager/fm-properties-window.c:4600
+#: src/file-manager/fm-properties-window.c:4401
+#: src/file-manager/fm-properties-window.c:4491
+#: src/file-manager/fm-properties-window.c:4594
 msgid "Owner:"
 msgstr "Eier:"
 
-#: src/file-manager/fm-properties-window.c:4431
-#: src/file-manager/fm-properties-window.c:4615
+#: src/file-manager/fm-properties-window.c:4425
+#: src/file-manager/fm-properties-window.c:4609
 msgid "_Group:"
 msgstr "_Gruppe:"
 
-#: src/file-manager/fm-properties-window.c:4439
-#: src/file-manager/fm-properties-window.c:4498
-#: src/file-manager/fm-properties-window.c:4623
+#: src/file-manager/fm-properties-window.c:4433
+#: src/file-manager/fm-properties-window.c:4492
+#: src/file-manager/fm-properties-window.c:4617
 msgid "Group:"
 msgstr "Gruppe:"
 
-#: src/file-manager/fm-properties-window.c:4463
+#: src/file-manager/fm-properties-window.c:4457
 msgid "Others"
 msgstr "Andre"
 
-#: src/file-manager/fm-properties-window.c:4478
+#: src/file-manager/fm-properties-window.c:4472
 msgid "Execute:"
 msgstr "Kjør:"
 
-#: src/file-manager/fm-properties-window.c:4481
+#: src/file-manager/fm-properties-window.c:4475
 msgid "Allow _executing file as program"
 msgstr "Tillat _kjøring av filen som et program"
 
-#: src/file-manager/fm-properties-window.c:4499
+#: src/file-manager/fm-properties-window.c:4493
 msgid "Others:"
 msgstr "Andre:"
 
-#: src/file-manager/fm-properties-window.c:4639
+#: src/file-manager/fm-properties-window.c:4633
 msgid "Folder Permissions:"
 msgstr "Rettigheter for mappe:"
 
-#: src/file-manager/fm-properties-window.c:4646
+#: src/file-manager/fm-properties-window.c:4640
 msgid "File Permissions:"
 msgstr "Rettigheter for fil:"
 
-#: src/file-manager/fm-properties-window.c:4655
+#: src/file-manager/fm-properties-window.c:4649
 msgid "Text view:"
 msgstr "Tekstvisning:"
 
-#: src/file-manager/fm-properties-window.c:4803
+#: src/file-manager/fm-properties-window.c:4797
 msgid "You are not the owner, so you cannot change these permissions."
 msgstr "Du er ikke eier og kan derfor ikke endre disse rettighetene."
 
-#: src/file-manager/fm-properties-window.c:4823
+#: src/file-manager/fm-properties-window.c:4817
 msgid "SELinux context:"
 msgstr "SELinux-kontekst:"
 
-#: src/file-manager/fm-properties-window.c:4828
+#: src/file-manager/fm-properties-window.c:4822
 msgid "Last changed:"
 msgstr "Sist endret:"
 
-#: src/file-manager/fm-properties-window.c:4841
+#: src/file-manager/fm-properties-window.c:4835
 msgid "Apply Permissions to Enclosed Files"
 msgstr "Bruk rettigheter for underliggende filer"
 
-#: src/file-manager/fm-properties-window.c:4855
+#: src/file-manager/fm-properties-window.c:4849
 #, c-format
 msgid "The permissions of \"%s\" could not be determined."
 msgstr "Rettighetene for «%s» kunne ikke bestemmes."
 
-#: src/file-manager/fm-properties-window.c:4858
+#: src/file-manager/fm-properties-window.c:4852
 msgid "The permissions of the selected file could not be determined."
 msgstr "Rettigheter for «%s» kunne ikke bestemmes."
 
-#: src/file-manager/fm-properties-window.c:5448
+#: src/file-manager/fm-properties-window.c:5442
 msgid "Creating Properties window."
 msgstr "Oppretter egenskaper-vindu."
 
-#: src/file-manager/fm-properties-window.c:5743
+#: src/file-manager/fm-properties-window.c:5738
 msgid "Select Custom Icon"
 msgstr "Velg egendefinert ikon"
 
@@ -7869,3 +7842,21 @@ msgstr "Skjermelementvisningen ble utsatt for en feil under oppstart."
 #: src/file-manager/fm-widget-view.c:447
 msgid "Display this location with the widget view."
 msgstr "Skjermelementvisning for denne plasseringen."
+
+#~ msgid "application-x-executable"
+#~ msgstr "application-x-executable"
+
+#~ msgid "system-file-manager"
+#~ msgstr "system-file-manager"
+
+#~ msgid "computer"
+#~ msgstr "datamaskin"
+
+#~ msgid "folder-open"
+#~ msgstr "folder-open"
+
+#~ msgid "user-home"
+#~ msgstr "user-home"
+
+#~ msgid "network-workgroup"
+#~ msgstr "network-workgroup"

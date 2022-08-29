@@ -2,25 +2,27 @@
 # Copyright (C) YEAR CAFE Desktop Environment team
 # This file is distributed under the same license as the baul package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Martin Wimpress <code@flexion.org>, 2018
 # Ivan Pejić <ipejic@gmail.com>, 2018
 # Stefano Karapetsas <stefano@karapetsas.com>, 2019
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: baul 1.23.2\n"
 "Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
-"POT-Creation-Date: 2020-01-10 11:11+0100\n"
+"POT-Creation-Date: 2022-08-29 14:25+0200\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
-"Language-Team: Serbian (Latin) (https://www.transifex.com/cafe/teams/13566/sr@latin/)\n"
+"Language-Team: Serbian (Latin) (https://www.transifex.com/cafe/teams/13566/"
+"sr@latin/)\n"
+"Language: sr@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sr@latin\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: data/browser.xml.in:5
 msgid "_Patterns"
@@ -286,15 +288,15 @@ msgstr "_Obeležja"
 msgid "Drag an emblem to an object to add it to the object"
 msgstr "Prevucite obeležje na objekat da mu ga dodate"
 
-#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:1000
-#: src/baul-property-browser.c:1963
+#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:995
+#: src/baul-property-browser.c:1959
 msgid "Erase"
 msgstr "Obriši"
 
 #: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:3
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
-#: src/baul-spatial-window.c:399 src/baul-window.c:167
-#: src/baul-window-menus.c:574
+#: src/baul-spatial-window.c:403 src/baul-window.c:167
+#: src/baul-window-menus.c:562
 msgid "Baul"
 msgstr "Baul"
 
@@ -305,8 +307,8 @@ msgstr ""
 #: data/baul.appdata.xml.in:10
 msgid ""
 "Baul is the official file manager for the CAFE desktop. It allows for "
-"browsing directories, as well as previewing files and launching applications"
-" associated with them. It is also responsible for handling the icons on the "
+"browsing directories, as well as previewing files and launching applications "
+"associated with them. It is also responsible for handling the icons on the "
 "CAFE desktop. It works on local and remote file systems."
 msgstr ""
 
@@ -320,12 +322,6 @@ msgstr ""
 msgid "Autorun Prompt"
 msgstr "Automatsko pokretanje"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-autorun-software.desktop.in.in:7
-msgid "application-x-executable"
-msgstr ""
-
 #: data/baul-browser.desktop.in.in:4
 msgid "File Browser"
 msgstr "Preglednik datoteka"
@@ -334,15 +330,7 @@ msgstr "Preglednik datoteka"
 msgid "Browse the file system with the file manager"
 msgstr "Razgledajte sistem datoteka pomoću upravljača datotekama"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-browser.desktop.in.in:9 data/baul.desktop.in.in:7
-#: data/baul-file-management-properties.desktop.in.in:7
-msgid "system-file-manager"
-msgstr ""
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-browser.desktop.in.in:15
 msgid "files;browser;manager;CAFE;"
 msgstr ""
@@ -352,21 +340,13 @@ msgstr ""
 msgid "Computer"
 msgstr "Računar"
 
-#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:940
+#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:925
 msgid ""
 "Browse all local and remote disks and folders accessible from this computer"
 msgstr ""
-"Razgledaj sve lokalne i udaljene diskove i fascikle dostupne sa ovog "
-"računara"
+"Razgledaj sve lokalne i udaljene diskove i fascikle dostupne sa ovog računara"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-computer.desktop.in.in:8
-msgid "computer"
-msgstr ""
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-computer.desktop.in.in:14
 msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr ""
@@ -383,8 +363,7 @@ msgstr "Upravljanje datotekama"
 msgid "Change the behaviour and appearance of file manager windows"
 msgstr "Izmeni ponašanje i izgled prozora upravljača datoteka"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-file-management-properties.desktop.in.in:13
 msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
@@ -393,29 +372,16 @@ msgstr ""
 msgid "Open Folder"
 msgstr "Otvori fasciklu"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-folder-handler.desktop.in.in:10
-msgid "folder-open"
-msgstr ""
-
 #: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1421
 msgid "Home Folder"
 msgstr "Lična fascikla"
 
 #: data/baul-home.desktop.in.in:4 src/baul-places-sidebar.c:527
-#: src/baul-window-menus.c:935
+#: src/baul-window-menus.c:920
 msgid "Open your personal folder"
 msgstr "Otvorite svoju ličnu fasciklu"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/baul-home.desktop.in.in:8
-msgid "user-home"
-msgstr ""
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/baul-home.desktop.in.in:14
 msgid "home;personal;folder;open;CAFE;"
 msgstr ""
@@ -428,18 +394,11 @@ msgstr "Sačuvana pretraga"
 msgid "Network"
 msgstr "Mreža"
 
-#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:945
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:930
 msgid "Browse bookmarked and local network locations"
 msgstr "Razgleda ranije obeležena i lokalna mrežna mesta"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon
-#. file name)!
-#: data/cafe-network-scheme.desktop.in.in:11
-msgid "network-workgroup"
-msgstr ""
-
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/cafe-network-scheme.desktop.in.in:14
 msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
@@ -471,8 +430,8 @@ msgid ""
 "CtkMisc::xalign for that."
 msgstr ""
 "Poravnanje linija teksta oznake u međusobnom odnosu. Ovo ne utiče na "
-"poravnanje oznake na njoj dodeljenom prostoru. Pogledajte CtkMisc::xalign za"
-" to."
+"poravnanje oznake na njoj dodeljenom prostoru. Pogledajte CtkMisc::xalign za "
+"to."
 
 #: eel/eel-editable-label.c:351
 msgid "Line wrap"
@@ -500,22 +459,22 @@ msgid ""
 "The position of the opposite end of the selection from the cursor in chars."
 msgstr "Pozicija suprotnog kraja izbora kao broj znakova od kurzora."
 
-#: eel/eel-editable-label.c:3092 libbaul-private/baul-clipboard.c:464
-#: src/file-manager/fm-directory-view.c:7451
-#: src/file-manager/fm-directory-view.c:7618
+#: eel/eel-editable-label.c:3092 libbaul-private/baul-clipboard.c:456
+#: src/file-manager/fm-directory-view.c:7409
+#: src/file-manager/fm-directory-view.c:7576
 #: src/file-manager/fm-tree-view.c:1311
 msgid "Cu_t"
 msgstr "_Iseci"
 
-#: eel/eel-editable-label.c:3094 libbaul-private/baul-clipboard.c:469
-#: src/file-manager/fm-directory-view.c:7455
-#: src/file-manager/fm-directory-view.c:7622
+#: eel/eel-editable-label.c:3094 libbaul-private/baul-clipboard.c:461
+#: src/file-manager/fm-directory-view.c:7413
+#: src/file-manager/fm-directory-view.c:7580
 #: src/file-manager/fm-tree-view.c:1320
 msgid "_Copy"
 msgstr "_Umnoži"
 
-#: eel/eel-editable-label.c:3096 libbaul-private/baul-clipboard.c:474
-#: src/file-manager/fm-directory-view.c:7459
+#: eel/eel-editable-label.c:3096 libbaul-private/baul-clipboard.c:466
+#: src/file-manager/fm-directory-view.c:7417
 msgid "_Paste"
 msgstr "U_baci"
 
@@ -536,19 +495,19 @@ msgstr "Prikaži još _detalja"
 #: libbaul-private/baul-mime-actions.c:1743
 #: libbaul-private/baul-open-with-dialog.c:972
 #: src/baul-connect-server-dialog.c:1119 src/baul-emblem-sidebar.c:293
-#: src/baul-emblem-sidebar.c:552 src/baul-location-dialog.c:197
+#: src/baul-emblem-sidebar.c:547 src/baul-location-dialog.c:197
 #: src/baul-property-browser.c:1117 src/baul-property-browser.c:1197
-#: src/file-manager/fm-directory-view.c:1219
-#: src/file-manager/fm-directory-view.c:1370
-#: src/file-manager/fm-directory-view.c:7099
-#: src/file-manager/fm-directory-view.c:10490
+#: src/file-manager/fm-directory-view.c:1215
+#: src/file-manager/fm-directory-view.c:1366
+#: src/file-manager/fm-directory-view.c:7057
+#: src/file-manager/fm-directory-view.c:10394
 msgid "_Cancel"
 msgstr "_Otkaži"
 
 #: eel/eel-stock-dialogs.c:240 libbaul-private/baul-open-with-dialog.c:988
 #: src/baul-location-dialog.c:202 src/baul-places-sidebar.c:2697
-#: src/file-manager/fm-directory-view.c:7415
-#: src/file-manager/fm-directory-view.c:8975
+#: src/file-manager/fm-directory-view.c:7373
+#: src/file-manager/fm-directory-view.c:8899
 #: src/file-manager/fm-tree-view.c:1271
 msgid "_Open"
 msgstr "_Otvori"
@@ -564,9 +523,9 @@ msgstr "Možete zaustaviti ovu operaciju pritiskom na „otkaži“."
 #: eel/eel-stock-dialogs.c:296 eel/eel-stock-dialogs.c:452
 #: eel/eel-stock-dialogs.c:656 libbaul-private/baul-autorun.c:1159
 #: libbaul-private/baul-mime-actions.c:1386 src/baul-emblem-sidebar.c:298
-#: src/baul-emblem-sidebar.c:557 src/baul-property-browser.c:1122
+#: src/baul-emblem-sidebar.c:552 src/baul-property-browser.c:1122
 #: src/baul-property-browser.c:1202 src/baul-query-editor.c:776
-#: src/file-manager/fm-directory-view.c:1224
+#: src/file-manager/fm-directory-view.c:1220
 msgid "_OK"
 msgstr ""
 
@@ -679,39 +638,39 @@ msgid "_Always perform this action"
 msgstr "_Uvek izvrši ovu radnju"
 
 #: libbaul-private/baul-autorun.c:1168 src/baul-places-sidebar.c:2754
-#: src/file-manager/fm-directory-view.c:7542
-#: src/file-manager/fm-directory-view.c:7570
-#: src/file-manager/fm-directory-view.c:7651
+#: src/file-manager/fm-directory-view.c:7500
+#: src/file-manager/fm-directory-view.c:7528
+#: src/file-manager/fm-directory-view.c:7609
 #: src/file-manager/fm-tree-view.c:1369
 msgid "_Eject"
 msgstr "I_zbaci"
 
 #: libbaul-private/baul-autorun.c:1183 src/baul-places-sidebar.c:2747
-#: src/file-manager/fm-directory-view.c:7538
-#: src/file-manager/fm-directory-view.c:7566
-#: src/file-manager/fm-directory-view.c:7647
+#: src/file-manager/fm-directory-view.c:7496
+#: src/file-manager/fm-directory-view.c:7524
+#: src/file-manager/fm-directory-view.c:7605
 #: src/file-manager/fm-tree-view.c:1360
 msgid "_Unmount"
 msgstr "_Demontiraj"
 
-#: libbaul-private/baul-clipboard.c:465
+#: libbaul-private/baul-clipboard.c:457
 msgid "Cut the selected text to the clipboard"
 msgstr "Iseca izabrani tekst i smešta ga među isečke"
 
-#: libbaul-private/baul-clipboard.c:470
+#: libbaul-private/baul-clipboard.c:462
 msgid "Copy the selected text to the clipboard"
 msgstr "Ubacuje izabrani tekst među isečke"
 
-#: libbaul-private/baul-clipboard.c:475
+#: libbaul-private/baul-clipboard.c:467
 msgid "Paste the text stored on the clipboard"
 msgstr "Ubacuje tekst iz spiska isečaka"
 
-#: libbaul-private/baul-clipboard.c:479
-#: src/file-manager/fm-directory-view.c:7471
+#: libbaul-private/baul-clipboard.c:471
+#: src/file-manager/fm-directory-view.c:7429
 msgid "Select _All"
 msgstr "Izaberi _sve"
 
-#: libbaul-private/baul-clipboard.c:480
+#: libbaul-private/baul-clipboard.c:472
 msgid "Select all the text in a text field"
 msgstr "Bira sav tekst iz polja"
 
@@ -729,7 +688,7 @@ msgstr "Koristi podra_zumevano"
 
 #: libbaul-private/baul-column-utilities.c:46
 #: libbaul-private/baul-mime-application-chooser.c:276
-#: src/file-manager/fm-list-view.c:1802
+#: src/file-manager/fm-list-view.c:1807
 msgid "Name"
 msgstr "Ime"
 
@@ -795,7 +754,7 @@ msgid "The group of the file."
 msgstr "Grupa datoteke."
 
 #: libbaul-private/baul-column-utilities.c:108
-#: src/file-manager/fm-properties-window.c:4788
+#: src/file-manager/fm-properties-window.c:4782
 msgid "Permissions"
 msgstr "Ovlašćenja"
 
@@ -864,7 +823,7 @@ msgstr "Prvobitna putanja do datoteke pre nego što je premeštena u Smeće."
 #: libbaul-private/baul-customization-data.c:435
 #: libbaul-private/baul-file-conflict-dialog.c:622
 #: libbaul-private/baul-mime-application-chooser.c:444
-#: src/baul-property-browser.c:2010
+#: src/baul-property-browser.c:2006
 msgid "Reset"
 msgstr "Ponovo postavi"
 
@@ -880,6 +839,7 @@ msgstr "na radnoj površini"
 #. * warning, put "%.0s" somewhere in the string, which will
 #. * match the user name string passed by the C code, but not
 #. * put the user name in the final string.
+#.
 #: libbaul-private/baul-desktop-link.c:111
 #, c-format
 msgid "%s's Home"
@@ -1133,7 +1093,7 @@ msgstr "Necafe dozvolu da postavite grupu"
 msgid "Specified group '%s' doesn't exist"
 msgstr "Izabrana grupa „%s“ ne postoji"
 
-#: libbaul-private/baul-file.c:6199 src/file-manager/fm-directory-view.c:2397
+#: libbaul-private/baul-file.c:6199 src/file-manager/fm-directory-view.c:2393
 #, c-format
 msgid "%'u item"
 msgid_plural "%'u items"
@@ -1183,7 +1143,7 @@ msgid "unknown MIME type"
 msgstr "nepoznat MIME tip"
 
 #: libbaul-private/baul-file.c:6702
-#: src/file-manager/fm-properties-window.c:1302
+#: src/file-manager/fm-properties-window.c:1299
 msgid "unknown"
 msgstr "nepoznati"
 
@@ -1196,7 +1156,7 @@ msgid "link"
 msgstr "veza"
 
 #: libbaul-private/baul-file.c:6778 libbaul-private/baul-file-operations.c:406
-#: src/file-manager/fm-directory-view.c:10736
+#: src/file-manager/fm-directory-view.c:10640
 #, c-format
 msgid "Link to %s"
 msgstr "Veza na %s"
@@ -1284,14 +1244,14 @@ msgstr "Izvorna datoteka"
 
 #: libbaul-private/baul-file-conflict-dialog.c:277
 #: libbaul-private/baul-file-conflict-dialog.c:316
-#: src/file-manager/fm-properties-window.c:3306
+#: src/file-manager/fm-properties-window.c:3303
 msgid "Size:"
 msgstr "Veličina:"
 
 #: libbaul-private/baul-file-conflict-dialog.c:282
 #: libbaul-private/baul-file-conflict-dialog.c:321
 #: src/baul-connect-server-dialog.c:927
-#: src/file-manager/fm-properties-window.c:3288
+#: src/file-manager/fm-properties-window.c:3285
 msgid "Type:"
 msgstr "Vrsta:"
 
@@ -1360,9 +1320,9 @@ msgid "_Retry"
 msgstr "_Probaj ponovo"
 
 #: libbaul-private/baul-file-operations.c:187 src/baul-emblem-sidebar.c:378
-#: src/file-manager/fm-directory-view.c:7503
-#: src/file-manager/fm-directory-view.c:7635
-#: src/file-manager/fm-directory-view.c:9136
+#: src/file-manager/fm-directory-view.c:7461
+#: src/file-manager/fm-directory-view.c:7593
+#: src/file-manager/fm-directory-view.c:9051
 #: src/file-manager/fm-tree-view.c:1349
 msgid "_Delete"
 msgstr "_Ukloni"
@@ -1432,6 +1392,7 @@ msgstr "Dopunska veza na %s"
 #. Translators: Feel free to leave out the "st" suffix
 #. * if there's no way to do that nicely for a
 #. * particular language.
+#.
 #: libbaul-private/baul-file-operations.c:426
 #, c-format
 msgid "%'dst link to %s"
@@ -1455,6 +1416,7 @@ msgstr "%'d. veza na %s"
 #. Translators:
 #. * Feel free to leave out the st, nd, rd and th suffix or
 #. * make some or all of them match.
+#.
 #. Translators: tag used to detect the first copy of a file
 #: libbaul-private/baul-file-operations.c:477
 msgid " (copy)"
@@ -1515,11 +1477,10 @@ msgstr "%s (drugi umnožak)%s"
 msgid "%s (%'dth copy)%s"
 msgstr "%s (%'d. umnožak)%s"
 
-#. Translators: if in your language there's no difference between 1st, 2nd,
-#. 3rd and nth
-#. * plurals, you can leave the st, nd, rd suffixes out and just make all the
-#. translated
+#. Translators: if in your language there's no difference between 1st, 2nd, 3rd and nth
+#. * plurals, you can leave the st, nd, rd suffixes out and just make all the translated
 #. * strings look like "%s (copy %'d)%s".
+#.
 #. Translators: appended to x1st file copy
 #: libbaul-private/baul-file-operations.c:527
 #, c-format
@@ -1630,8 +1591,8 @@ msgid "Deleting files"
 msgstr "Uklanjam datoteke"
 
 #. Translators: %T will expand to a time like "2 minutes".
-#. * The singular/plural form will be used depending on the remaining time
-#. (i.e. the %T argument).
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
+#.
 #: libbaul-private/baul-file-operations.c:1547
 msgid "%T left"
 msgid_plural "%T left"
@@ -1917,20 +1878,17 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#. Translators: %S will expand to a size like "2 bytes" or "3 MB", so
-#. something like "4 kb of 4 MB"
+#. Translators: %S will expand to a size like "2 bytes" or "3 MB", so something like "4 kb of 4 MB"
 #: libbaul-private/baul-file-operations.c:3100
 #, c-format
 msgid "%S of %S"
 msgstr "%S od %S"
 
-#. Translators: %S will expand to a size like "2 bytes" or "3 MB", %T to a
-#. time duration like
-#. * "2 minutes". So the whole thing will be something like "2 kb of 4 MB -- 2
-#. hours left (4kb/sec)"
+#. Translators: %S will expand to a size like "2 bytes" or "3 MB", %T to a time duration like
+#. * "2 minutes". So the whole thing will be something like "2 kb of 4 MB -- 2 hours left (4kb/sec)"
 #. *
-#. * The singular/plural form will be used depending on the remaining time
-#. (i.e. the %T argument).
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
+#.
 #: libbaul-private/baul-file-operations.c:3113
 msgid "%S of %S — %T left (%S/sec)"
 msgid_plural "%S of %S — %T left (%S/sec)"
@@ -2130,7 +2088,7 @@ msgstr "Ne mogu da odredim prvobitnu putanju za „%s“ "
 msgid "The item cannot be restored from trash"
 msgstr "Ne mogu da vratim stavku iz smeća"
 
-#: libbaul-private/baul-icon-container.c:2933
+#: libbaul-private/baul-icon-container.c:2926
 msgid "The selection rectangle"
 msgstr "Pravougaonik izbora"
 
@@ -2154,10 +2112,10 @@ msgid "This link cannot be used, because its target \"%s\" doesn't exist."
 msgstr "Ne možete koristiti vezu zato što njeno odredište „%s“ ne postoji."
 
 #: libbaul-private/baul-mime-actions.c:751
-#: src/file-manager/fm-directory-view.c:7499
-#: src/file-manager/fm-directory-view.c:7631
-#: src/file-manager/fm-directory-view.c:8770
-#: src/file-manager/fm-directory-view.c:9114
+#: src/file-manager/fm-directory-view.c:7457
+#: src/file-manager/fm-directory-view.c:7589
+#: src/file-manager/fm-directory-view.c:8698
+#: src/file-manager/fm-directory-view.c:9030
 #: src/file-manager/fm-tree-view.c:1340
 msgid "Mo_ve to Trash"
 msgstr "Ba_ci u smeće"
@@ -2205,10 +2163,10 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: libbaul-private/baul-mime-actions.c:1277
-#: src/baul-window-manage-views.c:2134 src/baul-window-manage-views.c:2142
-#: src/baul-window-manage-views.c:2162 src/baul-window-manage-views.c:2176
-#: src/baul-window-manage-views.c:2182 src/baul-window-manage-views.c:2209
+#: libbaul-private/baul-mime-actions.c:1277 src/baul-window-manage-views.c:2132
+#: src/baul-window-manage-views.c:2140 src/baul-window-manage-views.c:2160
+#: src/baul-window-manage-views.c:2174 src/baul-window-manage-views.c:2180
+#: src/baul-window-manage-views.c:2207
 #, c-format
 msgid "Could not display \"%s\"."
 msgstr "Ne mogu da prikažem „%s“."
@@ -2253,8 +2211,8 @@ msgid ""
 "The application launcher \"%s\" has not been marked as trusted. If you do "
 "not know the source of this file, launching it may be unsafe."
 msgstr ""
-"Pokretač programa „%s“ je označen kao poverljiv. Ukoliko ne znate odakle vam"
-" ova datoteka možda nije bezbedno da je pokrenete."
+"Pokretač programa „%s“ je označen kao poverljiv. Ukoliko ne znate odakle vam "
+"ova datoteka možda nije bezbedno da je pokrenete."
 
 #: libbaul-private/baul-mime-actions.c:1735
 msgid "_Launch Anyway"
@@ -2266,12 +2224,12 @@ msgstr "_Označi kao poverljivo"
 
 #: libbaul-private/baul-mime-actions.c:2038
 #: libbaul-private/baul-mime-actions.c:2348
-#: src/file-manager/fm-directory-view.c:6475
+#: src/file-manager/fm-directory-view.c:6433
 msgid "Unable to mount location"
 msgstr "Me mogu da montiram putanju"
 
 #: libbaul-private/baul-mime-actions.c:2436
-#: src/file-manager/fm-directory-view.c:6649
+#: src/file-manager/fm-directory-view.c:6607
 msgid "Unable to start location"
 msgstr "Me mogu da pokrenem putanju"
 
@@ -2376,7 +2334,7 @@ msgid "Select an Application"
 msgstr "Izaberite program"
 
 #: libbaul-private/baul-open-with-dialog.c:868
-#: src/file-manager/fm-properties-window.c:5122
+#: src/file-manager/fm-properties-window.c:5116
 msgid "Open With"
 msgstr "Otvori pomoću"
 
@@ -2445,7 +2403,9 @@ msgstr "Neuspešno otvaranje, želite li da izaberete drugi program?"
 #: libbaul-private/baul-program-choosing.c:81
 #: libbaul-private/baul-program-choosing.c:121
 #, c-format
-msgid "\"%s\" cannot open \"%s\" because \"%s\" cannot access files at \"%s\" locations."
+msgid ""
+"\"%s\" cannot open \"%s\" because \"%s\" cannot access files at \"%s\" "
+"locations."
 msgstr ""
 "„%s“ ne može da otvori „%s“ zato što „%s“ ne može da pristupi datotekama na "
 "„%s“ putanjama."
@@ -2466,16 +2426,16 @@ msgstr ""
 
 #: libbaul-private/baul-program-choosing.c:124
 msgid ""
-"No other applications are available to view this file. If you copy this file"
-" onto your computer, you may be able to open it."
+"No other applications are available to view this file. If you copy this file "
+"onto your computer, you may be able to open it."
 msgstr ""
 "Nema drugih programa koji mogu da pregledaju ovu datoteku.  Ukoliko je "
 "prebacite na vaš računar, možda ćete moći da je otvorite."
 
 #: libbaul-private/baul-program-choosing.c:132
 msgid ""
-"No other actions are available to view this file. If you copy this file onto"
-" your computer, you may be able to open it."
+"No other actions are available to view this file. If you copy this file onto "
+"your computer, you may be able to open it."
 msgstr ""
 "Nema drugih radnji za ovaj tip datoteka.  Ukoliko je prebacite na vaš "
 "računar, možda ćete moći da je otvorite."
@@ -2500,8 +2460,7 @@ msgstr "Ovo odredište prevlačenja podržava samo lokalne datoteke."
 
 #: libbaul-private/baul-program-choosing.c:507
 msgid ""
-"To open non-local files copy them to a local folder and then drop them "
-"again."
+"To open non-local files copy them to a local folder and then drop them again."
 msgstr ""
 "Da biste otvorili udaljene datoteke, prebacite ih u lokalnu fasciklu, i "
 "prevucite ih ponovo."
@@ -2987,8 +2946,8 @@ msgstr "Gde smestiti nove listove u prozoru razgledača."
 #: libbaul-private/org.cafe.baul.gschema.xml:77
 msgid ""
 "If set to \"after-current-tab\", then new tabs are inserted after the "
-"current tab. If set to \"end\", then new tabs are appended to the end of the"
-" tab list."
+"current tab. If set to \"end\", then new tabs are appended to the end of the "
+"tab list."
 msgstr ""
 
 #: libbaul-private/org.cafe.baul.gschema.xml:81
@@ -3033,8 +2992,7 @@ msgid ""
 "entry for the location toolbar, instead of the pathbar."
 msgstr ""
 "Ukoliko je postavljeno na „true“, razgledački prozori Baula će uvek "
-"koristiti tekstualno polje za unos putanje umesto trake sa dugmićima "
-"putanje."
+"koristiti tekstualno polje za unos putanje umesto trake sa dugmićima putanje."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:101
 msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
@@ -3054,8 +3012,8 @@ msgstr ""
 
 #: libbaul-private/org.cafe.baul.gschema.xml:107
 msgid ""
-"If set to true, then Baul will ask for confirmation when you attempt to move"
-" files to the Trash."
+"If set to true, then Baul will ask for confirmation when you attempt to move "
+"files to the Trash."
 msgstr ""
 
 #: libbaul-private/org.cafe.baul.gschema.xml:111
@@ -3106,8 +3064,8 @@ msgid ""
 "Possible values are \"single\" to launch files on a single click, or "
 "\"double\" to launch them on a double click."
 msgstr ""
-"Dozvoljene vrednosti su „single“ za pokretanje datoteka pomoću jednog klika,"
-" ili „double“ za pokretanje pomoću dvostrukog klika."
+"Dozvoljene vrednosti su „single“ za pokretanje datoteka pomoću jednog klika, "
+"ili „double“ za pokretanje pomoću dvostrukog klika."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:133
 msgid "What to do with executable text files when activated"
@@ -3153,12 +3111,12 @@ msgstr "Dugme miša za radnju „Napred“ u pregledniku"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:149
 msgid ""
-"For users with mice that have buttons for \"Forward\" and \"Back\", this key"
-" will set which button activates the \"Forward\" command in a browser "
-"window. Possible values range between 6 and 14."
+"For users with mice that have buttons for \"Forward\" and \"Back\", this key "
+"will set which button activates the \"Forward\" command in a browser window. "
+"Possible values range between 6 and 14."
 msgstr ""
-"Određuje koje dugme miša izvršava neredbu „Napred“ unutar pregledača. Moguće"
-" su vrednosti od 6 do 14."
+"Određuje koje dugme miša izvršava neredbu „Napred“ unutar pregledača. Moguće "
+"su vrednosti od 6 do 14."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:153
 msgid "Mouse button to activate the \"Back\" command in browser window"
@@ -3166,12 +3124,12 @@ msgstr "Dugme miša za radnju „Nazad“ u pregledniku"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:154
 msgid ""
-"For users with mice that have buttons for \"Forward\" and \"Back\", this key"
-" will set which button activates the \"Back\" command in a browser window. "
+"For users with mice that have buttons for \"Forward\" and \"Back\", this key "
+"will set which button activates the \"Back\" command in a browser window. "
 "Possible values range between 6 and 14."
 msgstr ""
-"Određuje koje dugme miša izvršava neredbu „Nazad“ unutar preglednika. Moguće"
-" su vrednosti od 6 do 14."
+"Određuje koje dugme miša izvršava neredbu „Nazad“ unutar preglednika. Moguće "
+"su vrednosti od 6 do 14."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:159
 msgid "When to show thumbnails of image files"
@@ -3253,9 +3211,9 @@ msgstr "Obrni uređenje u novim prozorima"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:194
 msgid ""
-"If true, files in new windows will be sorted in reverse order. ie, if sorted"
-" by name, then instead of sorting the files from \"a\" to \"z\", they will "
-"be sorted from \"z\" to \"a\"; if sorted by size, instead of being "
+"If true, files in new windows will be sorted in reverse order. ie, if sorted "
+"by name, then instead of sorting the files from \"a\" to \"z\", they will be "
+"sorted from \"z\" to \"a\"; if sorted by size, instead of being "
 "incrementally they will be sorted decrementally."
 msgstr ""
 "Ukoliko je postavljeno na „true“, datoteke u novim prozorima će biti "
@@ -3269,12 +3227,12 @@ msgstr "Baul koristi ličnu fasciklu korisnika za radnu površinu"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:199
 msgid ""
-"If set to true, then Baul will use the user's home folder as the desktop. If"
-" it is false, then it will use ~/Desktop as the desktop."
+"If set to true, then Baul will use the user's home folder as the desktop. If "
+"it is false, then it will use ~/Desktop as the desktop."
 msgstr ""
-"Ukoliko je postavljeno na „true“, Baul će koristiti ličnu fasciklu korisnika"
-" za radnu površinu. Ukoliko nije postavljeno, onda će koristiti ~/Desktop za"
-" radnu površinu."
+"Ukoliko je postavljeno na „true“, Baul će koristiti ličnu fasciklu korisnika "
+"za radnu površinu. Ukoliko nije postavljeno, onda će koristiti ~/Desktop za "
+"radnu površinu."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:203
 msgid "Custom Background"
@@ -3290,8 +3248,7 @@ msgstr "Podrazumevana boja pozadine"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:209
 msgid ""
-"Color for the default folder background. Only used if background_set is "
-"true."
+"Color for the default folder background. Only used if background_set is true."
 msgstr ""
 "Boja za uobičajenu pozadinu fascikle. Koristi se jedino ako je postavljeno "
 "background_set."
@@ -3539,11 +3496,11 @@ msgstr "Prikaži samo fascikle u bočnoj površi"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:368
 msgid ""
-"If set to true, Baul will only show folders in the tree side pane. Otherwise"
-" it will show both folders and files."
+"If set to true, Baul will only show folders in the tree side pane. Otherwise "
+"it will show both folders and files."
 msgstr ""
-"Ukoliko je postavljeno na „true“, Baul će prikazati jedino fascikle u bočnoj"
-" površi. Inače, prikazivaće i fascikle i datoteke."
+"Ukoliko je postavljeno na „true“, Baul će prikazati jedino fascikle u bočnoj "
+"površi. Inače, prikazivaće i fascikle i datoteke."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:375
 msgid "Desktop font"
@@ -3562,8 +3519,8 @@ msgid ""
 "If this is set to true, an icon linking to the home folder will be put on "
 "the desktop."
 msgstr ""
-"Ukoliko je ovo postavljeno na „true“, ikonica koja ukazuje na ličnu fasciklu"
-" će biti stavljena na radnu površinu."
+"Ukoliko je ovo postavljeno na „true“, ikonica koja ukazuje na ličnu fasciklu "
+"će biti stavljena na radnu površinu."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:385
 msgid "Computer icon visible on desktop"
@@ -3571,8 +3528,8 @@ msgstr "Ikonica računara prikazana na radnoj površini"
 
 #: libbaul-private/org.cafe.baul.gschema.xml:386
 msgid ""
-"If this is set to true, an icon linking to the computer location will be put"
-" on the desktop."
+"If this is set to true, an icon linking to the computer location will be put "
+"on the desktop."
 msgstr ""
 "Ukoliko je ovo postavljeno na „true“, ikonica koja ukazuje na putanju "
 "računara će biti stavljena na radnu površinu."
@@ -3622,8 +3579,8 @@ msgid ""
 "This name can be set if you want a custom name for the computer icon on the "
 "desktop."
 msgstr ""
-"Ovo ime se može postaviti ukoliko želite prilagođeno ime za ikonicu računara"
-" na radnoj površini."
+"Ovo ime se može postaviti ukoliko želite prilagođeno ime za ikonicu računara "
+"na radnoj površini."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:410
 msgid "Desktop home icon name"
@@ -3634,8 +3591,8 @@ msgid ""
 "This name can be set if you want a custom name for the home icon on the "
 "desktop."
 msgstr ""
-"Ovo ime se može postaviti ukoliko želite prilagođeno ime za ličnu ikonicu na"
-" radnoj površini."
+"Ovo ime se može postaviti ukoliko želite prilagođeno ime za ličnu ikonicu na "
+"radnoj površini."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:415
 msgid "Desktop trash icon name"
@@ -3663,9 +3620,9 @@ msgstr ""
 
 #: libbaul-private/org.cafe.baul.gschema.xml:426
 msgid ""
-"An integer specifying how parts of overlong file names should be replaced by"
-" ellipses on the desktop. If the number is larger than 0, the file name will"
-" not exceed the given number of lines. If the number is 0 or smaller, no "
+"An integer specifying how parts of overlong file names should be replaced by "
+"ellipses on the desktop. If the number is larger than 0, the file name will "
+"not exceed the given number of lines. If the number is 0 or smaller, no "
 "limit is imposed on the number of displayed lines."
 msgstr ""
 "Celi broj koji određuje kako će biti skraćena imena datoteka koja se "
@@ -3678,10 +3635,9 @@ msgstr "Niska sa veličinom upravljačkog prozora."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:434
 msgid ""
-"A string containing the saved geometry and coordinates string for navigation"
-" windows."
-msgstr ""
-"Niska koja sadrži sačuvanu veličinu i koordinate upravljačkih prozora."
+"A string containing the saved geometry and coordinates string for navigation "
+"windows."
+msgstr "Niska koja sadrži sačuvanu veličinu i koordinate upravljačkih prozora."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:438
 msgid "Whether the navigation window should be maximized."
@@ -3706,8 +3662,8 @@ msgstr "Prikaži glavne alatke u novim prozorima"
 #: libbaul-private/org.cafe.baul.gschema.xml:449
 msgid "If set to true, newly opened windows will have toolbars visible."
 msgstr ""
-"Ukoliko je postavljeno na „true“, u novotvorenim prozorima će se prikazivati"
-" glavne alatke."
+"Ukoliko je postavljeno na „true“, u novotvorenim prozorima će se prikazivati "
+"glavne alatke."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:453
 msgid "Show location bar in new windows"
@@ -3717,8 +3673,8 @@ msgstr "Prikaži polje za adresu u novim prozorima"
 msgid ""
 "If set to true, newly opened windows will have the location bar visible."
 msgstr ""
-"Ukoliko je postavljeno na „true“, u novotvorenim prozorima će se prikazivati"
-" polje za unos adrese."
+"Ukoliko je postavljeno na „true“, u novotvorenim prozorima će se prikazivati "
+"polje za unos adrese."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:458
 msgid "Show status bar in new windows"
@@ -3727,8 +3683,8 @@ msgstr "Prikaži liniju sa stanjem u novim prozorima"
 #: libbaul-private/org.cafe.baul.gschema.xml:459
 msgid "If set to true, newly opened windows will have the status bar visible."
 msgstr ""
-"Ukoliko je postavljeno na „true“, u novotvorenim prozorima će se prikazivati"
-" stanje u podnožju."
+"Ukoliko je postavljeno na „true“, u novotvorenim prozorima će se prikazivati "
+"stanje u podnožju."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:463
 msgid "Show side pane in new windows"
@@ -3737,8 +3693,8 @@ msgstr "Prikaži bočnu površ u novim prozorima"
 #: libbaul-private/org.cafe.baul.gschema.xml:464
 msgid "If set to true, newly opened windows will have the side pane visible."
 msgstr ""
-"Ukoliko je postavljeno na „true“, u novotvorenim prozorima će se prikazivati"
-" površ postrance."
+"Ukoliko je postavljeno na „true“, u novotvorenim prozorima će se prikazivati "
+"površ postrance."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:484
 msgid "Side pane view"
@@ -4028,16 +3984,18 @@ msgstr ""
 #: src/baul-autorun-software.c:218
 #, c-format
 msgid ""
-"The software will run directly from the medium \"%s\". You should never run software that you don't trust.\n"
+"The software will run directly from the medium \"%s\". You should never run "
+"software that you don't trust.\n"
 "\n"
 "If in doubt, press Cancel."
 msgstr ""
-"Ovaj program će se sam pokrenuti sa medijuma „%s“. Nemojte pokretati programe u koje necafe poverenja.\n"
+"Ovaj program će se sam pokrenuti sa medijuma „%s“. Nemojte pokretati "
+"programe u koje necafe poverenja.\n"
 "\n"
 "Ukoliko se dvoumite izaberite „Odustani“."
 
 #: src/baul-bookmarks-window.c:163 src/baul-file-management-properties.c:249
-#: src/baul-property-browser.c:1688 src/baul-window-menus.c:629
+#: src/baul-property-browser.c:1688 src/baul-window-menus.c:618
 #, c-format
 msgid ""
 "There was an error displaying help: \n"
@@ -4055,11 +4013,11 @@ msgid "Edit Bookmarks"
 msgstr "Uredi obeleživače"
 
 #: src/baul-bookmarks-window.ui:45 src/baul-connect-server-dialog.c:1114
-#: src/baul-emblem-sidebar.c:303 src/baul-emblem-sidebar.c:562
+#: src/baul-emblem-sidebar.c:303 src/baul-emblem-sidebar.c:557
 #: src/baul-file-management-properties.ui:305 src/baul-location-dialog.c:192
-#: src/baul-property-browser.c:389 src/baul-window-menus.c:852
-#: src/file-manager/fm-directory-view.c:1214
-#: src/file-manager/fm-properties-window.c:5233
+#: src/baul-property-browser.c:389 src/baul-window-menus.c:837
+#: src/file-manager/fm-directory-view.c:1210
+#: src/file-manager/fm-properties-window.c:5227
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -4068,9 +4026,9 @@ msgid "_Jump to"
 msgstr ""
 
 #: src/baul-bookmarks-window.ui:93 src/baul-file-management-properties.ui:321
-#: src/baul-property-browser.c:397 src/baul-window-menus.c:854
-#: src/file-manager/fm-list-view.c:2567
-#: src/file-manager/fm-properties-window.c:5238
+#: src/baul-property-browser.c:397 src/baul-window-menus.c:839
+#: src/file-manager/fm-list-view.c:2572
+#: src/file-manager/fm-properties-window.c:5232
 msgid "_Close"
 msgstr "_Zatvori"
 
@@ -4147,8 +4105,8 @@ msgid "Continue"
 msgstr ""
 
 #: src/baul-connect-server-dialog.c:717 src/baul-location-dialog.c:105
-#: src/file-manager/fm-directory-view.c:1188
-#: src/file-manager/fm-properties-window.c:5475
+#: src/file-manager/fm-directory-view.c:1184
+#: src/file-manager/fm-properties-window.c:5469
 msgid "There was an error displaying help."
 msgstr "Došlo je do greške pri prikazivanju pomoći."
 
@@ -4220,7 +4178,7 @@ msgstr ""
 "\n"
 "Dodaj vezu sa montiranim diskom sa servera"
 
-#: src/baul-desktop-window.c:126 src/baul-desktop-window.c:319
+#: src/baul-desktop-window.c:124 src/baul-desktop-window.c:205
 #: src/baul-pathbar.c:1453 src/baul-places-sidebar.c:542
 msgid "Desktop"
 msgstr "Radna površ"
@@ -4232,11 +4190,11 @@ msgstr "Ne mogu da uklonim obeležje „%s“."
 
 #: src/baul-emblem-sidebar.c:227 src/baul-emblem-sidebar.c:269
 msgid ""
-"This is probably because the emblem is a permanent one, and not one that you"
-" added yourself."
+"This is probably because the emblem is a permanent one, and not one that you "
+"added yourself."
 msgstr ""
-"Razlog ovome je verovatno to što je obeležje trajno, a ne neko koje ste sami"
-" dodali."
+"Razlog ovome je verovatno to što je obeležje trajno, a ne neko koje ste sami "
+"dodali."
 
 #: src/baul-emblem-sidebar.c:268
 #, c-format
@@ -4255,11 +4213,11 @@ msgstr "Unesite novo ime za prikazano obeležje:"
 msgid "Rename"
 msgstr "Preimenuj"
 
-#: src/baul-emblem-sidebar.c:548
+#: src/baul-emblem-sidebar.c:543
 msgid "Add Emblems..."
 msgstr "Dodaj obeležja..."
 
-#: src/baul-emblem-sidebar.c:572
+#: src/baul-emblem-sidebar.c:567
 msgid ""
 "Enter a descriptive name next to each emblem.  This name will be used in "
 "other places to identify the emblem."
@@ -4267,53 +4225,54 @@ msgstr ""
 "Unesite opisno ime pored svakog obeležja. Ovo ime će se koristiti na drugim "
 "mestima za prepoznavanje obeležja."
 
-#: src/baul-emblem-sidebar.c:576
+#: src/baul-emblem-sidebar.c:571
 msgid ""
 "Enter a descriptive name next to the emblem.  This name will be used in "
 "other places to identify the emblem."
 msgstr ""
-"Unesite opisno ime pored obeležja. Ovo ime će se koristiti na drugim mestima"
-" za prepoznavanje obeležja."
+"Unesite opisno ime pored obeležja. Ovo ime će se koristiti na drugim mestima "
+"za prepoznavanje obeležja."
 
-#: src/baul-emblem-sidebar.c:818
+#: src/baul-emblem-sidebar.c:813
 msgid "Some of the files could not be added as emblems."
 msgstr "Ne mogu da dodam neke datoteke kao obeležja."
 
-#: src/baul-emblem-sidebar.c:818 src/baul-emblem-sidebar.c:822
+#: src/baul-emblem-sidebar.c:813 src/baul-emblem-sidebar.c:817
 msgid "The emblems do not appear to be valid images."
 msgstr "Izgleda da obeležja nisu ispravne slike."
 
-#: src/baul-emblem-sidebar.c:822
+#: src/baul-emblem-sidebar.c:817
 msgid "None of the files could be added as emblems."
 msgstr "Nijedna od datoteka nije dodata kao obeležje."
 
-#: src/baul-emblem-sidebar.c:867 src/baul-emblem-sidebar.c:929
+#: src/baul-emblem-sidebar.c:862 src/baul-emblem-sidebar.c:924
 #, c-format
 msgid "The file '%s' does not appear to be a valid image."
 msgstr "Datoteka „%s“ nije ispravna slika."
 
-#: src/baul-emblem-sidebar.c:871
+#: src/baul-emblem-sidebar.c:866
 msgid "The dragged file does not appear to be a valid image."
 msgstr "Prevučena datoteka nije ispravna slika."
 
-#: src/baul-emblem-sidebar.c:873 src/baul-emblem-sidebar.c:930
+#: src/baul-emblem-sidebar.c:868 src/baul-emblem-sidebar.c:925
 msgid "The emblem cannot be added."
 msgstr "Ne mogu da dodam obeležje."
 
-#: src/baul-emblem-sidebar.c:1102 src/file-manager/fm-properties-window.c:3463
+#: src/baul-emblem-sidebar.c:1097 src/file-manager/fm-properties-window.c:3460
 msgid "Emblems"
 msgstr "Obeležja"
 
-#: src/baul-emblem-sidebar.c:1108
+#: src/baul-emblem-sidebar.c:1103
 msgid "Show Emblems"
 msgstr "Prikaži obeležja"
 
 #. Translators: this is referred to captions under icons.
 #. Translators: this is referred to the permissions
 #. * the user has in a directory.
+#.
 #: src/baul-file-management-properties.c:342
-#: src/file-manager/fm-properties-window.c:4239
-#: src/file-manager/fm-properties-window.c:4250
+#: src/file-manager/fm-properties-window.c:4233
+#: src/file-manager/fm-properties-window.c:4244
 msgid "None"
 msgstr "Ništa"
 
@@ -4325,21 +4284,21 @@ msgstr ""
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:44
 #: src/file-manager/fm-icon-container.c:623
-#: src/file-manager/fm-icon-view.c:3436
+#: src/file-manager/fm-icon-view.c:3420
 msgid "Icon View"
 msgstr "Prikaži kao ikone"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:47
-#: src/file-manager/fm-list-view.c:1861 src/file-manager/fm-list-view.c:3498
+#: src/file-manager/fm-list-view.c:1866 src/file-manager/fm-list-view.c:3501
 msgid "List View"
 msgstr "Pregled u spisku"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:50
-#: src/file-manager/fm-icon-view.c:3451
+#: src/file-manager/fm-icon-view.c:3435
 msgid "Compact View"
 msgstr "Prikaži zbijeno"
 
@@ -4907,24 +4866,20 @@ msgstr "Koristi podrazu_mevanu pozadinu"
 msgid "You cannot assign more than one custom icon at a time."
 msgstr "Ne možete dodeliti više od jedne proizvoljne ikonice."
 
-#: src/baul-information-panel.c:527
-#: src/file-manager/fm-properties-window.c:515
+#: src/baul-information-panel.c:527 src/file-manager/fm-properties-window.c:512
 msgid "Please drag just one image to set a custom icon."
 msgstr "Prevucite samo jednu sliku da biste postavili ikonicu."
 
-#: src/baul-information-panel.c:554
-#: src/file-manager/fm-properties-window.c:526
+#: src/baul-information-panel.c:554 src/file-manager/fm-properties-window.c:523
 msgid "The file that you dropped is not local."
 msgstr "Datoteka koju ste pustili nije lokalna."
 
-#: src/baul-information-panel.c:555
-#: src/file-manager/fm-properties-window.c:527
-#: src/file-manager/fm-properties-window.c:533
+#: src/baul-information-panel.c:555 src/file-manager/fm-properties-window.c:524
+#: src/file-manager/fm-properties-window.c:530
 msgid "You can only use local images as custom icons."
 msgstr "Možete koristiti samo lokalne slike za ikonice."
 
-#: src/baul-information-panel.c:562
-#: src/file-manager/fm-properties-window.c:532
+#: src/baul-information-panel.c:562 src/file-manager/fm-properties-window.c:529
 msgid "The file that you dropped is not an image."
 msgstr "Datoteka koju ste pustili nije slika."
 
@@ -4932,12 +4887,12 @@ msgstr "Datoteka koju ste pustili nije slika."
 msgid "You can only use images as custom icons."
 msgstr "Možete koristiti slike samo za proizvoljne ikonice."
 
-#: src/baul-information-panel.c:748 src/file-manager/fm-directory-view.c:4515
+#: src/baul-information-panel.c:748 src/file-manager/fm-directory-view.c:4507
 #, c-format
 msgid "Open With %s"
 msgstr "Otvori pomoću %s"
 
-#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3319
+#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3316
 msgid "Location:"
 msgstr "Mesto:"
 
@@ -4961,11 +4916,11 @@ msgstr "Otvori putanju"
 msgid "_Location:"
 msgstr "_Mesto:"
 
-#: src/baul-navigation-action.c:147
+#: src/baul-navigation-action.c:145
 msgid "folder removed"
 msgstr ""
 
-#: src/baul-navigation-window.c:801
+#: src/baul-navigation-window.c:794
 #, c-format
 msgid "%s - File Browser"
 msgstr "%s — Razgledač datoteka"
@@ -4974,230 +4929,228 @@ msgstr "%s — Razgledač datoteka"
 msgid "Are you sure you want to clear the list of locations you have visited?"
 msgstr "Sigurno želite da očistite spisak posećenih putanja?"
 
-#: src/baul-navigation-window-menus.c:424 src/baul-window-bookmarks.c:85
+#: src/baul-navigation-window-menus.c:410 src/baul-window-bookmarks.c:85
 #, c-format
 msgid "The location \"%s\" does not exist."
 msgstr "Putanja „%s“ više ne postoji."
 
-#: src/baul-navigation-window-menus.c:426
+#: src/baul-navigation-window-menus.c:412
 msgid "The history location doesn't exist."
 msgstr "Putanja istorijata više ne postoji."
 
-#: src/baul-navigation-window-menus.c:827
+#: src/baul-navigation-window-menus.c:805
 msgid "_Go"
 msgstr "_Idi"
 
-#: src/baul-navigation-window-menus.c:828
+#: src/baul-navigation-window-menus.c:806
 msgid "_Bookmarks"
 msgstr "_Obeleživači"
 
-#: src/baul-navigation-window-menus.c:829
+#: src/baul-navigation-window-menus.c:807
 msgid "_Tabs"
 msgstr "_Listovi"
 
-#: src/baul-navigation-window-menus.c:830
+#: src/baul-navigation-window-menus.c:808
 msgid "New _Window"
 msgstr "Novi _prozor"
 
-#: src/baul-navigation-window-menus.c:831
+#: src/baul-navigation-window-menus.c:809
 msgid "Open another Baul window for the displayed location"
 msgstr "Otvara novi prozor Baula za prikazanu putanju"
 
-#: src/baul-navigation-window-menus.c:834
+#: src/baul-navigation-window-menus.c:812
 msgid "New _Tab"
 msgstr "Novi _list"
 
-#: src/baul-navigation-window-menus.c:835
+#: src/baul-navigation-window-menus.c:813
 msgid "Open another tab for the displayed location"
 msgstr "Otvara dodatni list za prikazanu putanju"
 
-#: src/baul-navigation-window-menus.c:838
+#: src/baul-navigation-window-menus.c:816
 msgid "Open Folder W_indow"
 msgstr "Otvori prozor _fascikle"
 
-#: src/baul-navigation-window-menus.c:839
+#: src/baul-navigation-window-menus.c:817
 msgid "Open a folder window for the displayed location"
 msgstr "Otvara prikazanu putanju u prozoru razgledača"
 
-#: src/baul-navigation-window-menus.c:842
+#: src/baul-navigation-window-menus.c:820
 msgid "Close _All Windows"
 msgstr "Zatvori _sve prozore"
 
-#: src/baul-navigation-window-menus.c:843
+#: src/baul-navigation-window-menus.c:821
 msgid "Close all Navigation windows"
 msgstr "Zatvara sve upravljačke prozore"
 
-#: src/baul-navigation-window-menus.c:846
+#: src/baul-navigation-window-menus.c:824
 msgid "_Location..."
 msgstr "P_utanja..."
 
-#: src/baul-navigation-window-menus.c:847 src/baul-spatial-window.c:923
+#: src/baul-navigation-window-menus.c:825 src/baul-spatial-window.c:925
 msgid "Specify a location to open"
 msgstr "Otvara navedenu putanju"
 
-#: src/baul-navigation-window-menus.c:850
+#: src/baul-navigation-window-menus.c:828
 msgid "Clea_r History"
 msgstr "O_čisti istorijat"
 
-#: src/baul-navigation-window-menus.c:851
+#: src/baul-navigation-window-menus.c:829
 msgid "Clear contents of Go menu and Back/Forward lists"
 msgstr "Čisti sadržaj Idi menija i spiska za Napred/Nazad"
 
-#: src/baul-navigation-window-menus.c:854
+#: src/baul-navigation-window-menus.c:832
 msgid "S_witch to Other Pane"
 msgstr "Preba_ci se na drugu površ"
 
-#: src/baul-navigation-window-menus.c:855
+#: src/baul-navigation-window-menus.c:833
 msgid "Move focus to the other pane in a split view window"
 msgstr "Aktivira drugu površ podeljenog prozora"
 
-#: src/baul-navigation-window-menus.c:858
+#: src/baul-navigation-window-menus.c:836
 msgid "Sa_me Location as Other Pane"
 msgstr "Puta_nja iz drugog prozora"
 
-#: src/baul-navigation-window-menus.c:859
+#: src/baul-navigation-window-menus.c:837
 msgid "Go to the same location as in the extra pane"
 msgstr "Ide na istu putanju koja je otvorena u dodatnoj površi"
 
-#: src/baul-navigation-window-menus.c:862 src/baul-spatial-window.c:936
+#: src/baul-navigation-window-menus.c:840 src/baul-spatial-window.c:938
 msgid "_Add Bookmark"
 msgstr "_Dodaj obeleživač"
 
-#: src/baul-navigation-window-menus.c:863 src/baul-spatial-window.c:937
+#: src/baul-navigation-window-menus.c:841 src/baul-spatial-window.c:939
 msgid "Add a bookmark for the current location to this menu"
 msgstr "Dodaje obeleživač za trenutnu putanju u ovaj meni"
 
-#: src/baul-navigation-window-menus.c:866 src/baul-spatial-window.c:940
+#: src/baul-navigation-window-menus.c:844 src/baul-spatial-window.c:942
 msgid "_Edit Bookmarks..."
 msgstr "_Uredi obeleživače..."
 
-#: src/baul-navigation-window-menus.c:867 src/baul-spatial-window.c:941
+#: src/baul-navigation-window-menus.c:845 src/baul-spatial-window.c:943
 msgid "Display a window that allows editing the bookmarks in this menu"
 msgstr "Prikazuje prozor za uređivanje obeleživača iz priloženog meniju"
 
-#: src/baul-navigation-window-menus.c:871
+#: src/baul-navigation-window-menus.c:849
 msgid "_Previous Tab"
 msgstr "Pret_hodni list"
 
-#: src/baul-navigation-window-menus.c:872
+#: src/baul-navigation-window-menus.c:850
 msgid "Activate previous tab"
 msgstr "Ide na prethodni list"
 
-#: src/baul-navigation-window-menus.c:876
+#: src/baul-navigation-window-menus.c:854
 msgid "_Next Tab"
 msgstr "_Sledeći list"
 
-#: src/baul-navigation-window-menus.c:877
+#: src/baul-navigation-window-menus.c:855
 msgid "Activate next tab"
 msgstr "Ide na naredni list"
 
-#: src/baul-navigation-window-menus.c:881
-#: src/baul-navigation-window-pane.c:389
+#: src/baul-navigation-window-menus.c:859 src/baul-navigation-window-pane.c:389
 msgid "Move Tab _Left"
 msgstr "Premesti list u_levo"
 
-#: src/baul-navigation-window-menus.c:882
+#: src/baul-navigation-window-menus.c:860
 msgid "Move current tab to left"
 msgstr "Pomera tekući list ulevo"
 
-#: src/baul-navigation-window-menus.c:886
-#: src/baul-navigation-window-pane.c:397
+#: src/baul-navigation-window-menus.c:864 src/baul-navigation-window-pane.c:397
 msgid "Move Tab _Right"
 msgstr "Premesti list u_desno"
 
-#: src/baul-navigation-window-menus.c:887
+#: src/baul-navigation-window-menus.c:865
 msgid "Move current tab to right"
 msgstr "Pomera tekući list udesno"
 
-#: src/baul-navigation-window-menus.c:891
+#: src/baul-navigation-window-menus.c:869
 msgid "S_how Search"
 msgstr "Prika_ži pretragu"
 
-#: src/baul-navigation-window-menus.c:892
+#: src/baul-navigation-window-menus.c:870
 msgid "Show search"
 msgstr "Prikaži pretragu"
 
-#: src/baul-navigation-window-menus.c:900
+#: src/baul-navigation-window-menus.c:878
 msgid "_Main Toolbar"
 msgstr "_Glavne alatke"
 
-#: src/baul-navigation-window-menus.c:901
+#: src/baul-navigation-window-menus.c:879
 msgid "Change the visibility of this window's main toolbar"
 msgstr "Menja vidljivost glavnih alatki u ovom prozoru"
 
-#: src/baul-navigation-window-menus.c:906
+#: src/baul-navigation-window-menus.c:884
 msgid "_Side Pane"
 msgstr "_Bočna površ"
 
-#: src/baul-navigation-window-menus.c:907
+#: src/baul-navigation-window-menus.c:885
 msgid "Change the visibility of this window's side pane"
 msgstr "Menja vidljivost bočnog okvira u ovom prozoru"
 
-#: src/baul-navigation-window-menus.c:912
+#: src/baul-navigation-window-menus.c:890
 msgid "Location _Bar"
 msgstr "Polje sa _putanjom"
 
-#: src/baul-navigation-window-menus.c:913
+#: src/baul-navigation-window-menus.c:891
 msgid "Change the visibility of this window's location bar"
 msgstr "Menja vidljivost polja sa adresom u ovom prozoru"
 
-#: src/baul-navigation-window-menus.c:918
+#: src/baul-navigation-window-menus.c:896
 msgid "St_atusbar"
 msgstr "_Statusna linija"
 
-#: src/baul-navigation-window-menus.c:919
+#: src/baul-navigation-window-menus.c:897
 msgid "Change the visibility of this window's statusbar"
 msgstr "Menja vidljivost stanja u podnožju ovog prozora"
 
-#: src/baul-navigation-window-menus.c:924 src/baul-spatial-window.c:944
+#: src/baul-navigation-window-menus.c:902 src/baul-spatial-window.c:946
 msgid "_Search for Files..."
 msgstr "_Traži datoteke..."
 
-#: src/baul-navigation-window-menus.c:926
+#: src/baul-navigation-window-menus.c:904
 msgid "Search documents and folders by name"
 msgstr "Traži dokumente i fascikle na osnovu imena"
 
-#: src/baul-navigation-window-menus.c:932
+#: src/baul-navigation-window-menus.c:910
 msgid "E_xtra Pane"
 msgstr "_Dodatna površ"
 
-#: src/baul-navigation-window-menus.c:933
+#: src/baul-navigation-window-menus.c:911
 msgid "Open an extra folder view side-by-side"
 msgstr "Otvara dodatni pregled fascikle pored trenutnog"
 
-#: src/baul-navigation-window-menus.c:960
+#: src/baul-navigation-window-menus.c:937
 msgid "_Back"
 msgstr "_Nazad"
 
-#: src/baul-navigation-window-menus.c:962
+#: src/baul-navigation-window-menus.c:939
 msgid "Go to the previous visited location"
 msgstr "Idi na prethodno posećeno mesto"
 
-#: src/baul-navigation-window-menus.c:963
+#: src/baul-navigation-window-menus.c:940
 msgid "Back history"
 msgstr "Nazad u istorijatu"
 
-#: src/baul-navigation-window-menus.c:977
+#: src/baul-navigation-window-menus.c:954
 msgid "_Forward"
 msgstr "Na_pred"
 
-#: src/baul-navigation-window-menus.c:979
+#: src/baul-navigation-window-menus.c:956
 msgid "Go to the next visited location"
 msgstr "Idi na sledeće posećeno mesto"
 
-#: src/baul-navigation-window-menus.c:980
+#: src/baul-navigation-window-menus.c:957
 msgid "Forward history"
 msgstr "Napred u istorijatu"
 
-#: src/baul-navigation-window-menus.c:995
+#: src/baul-navigation-window-menus.c:972
 msgid "_Zoom"
 msgstr "_Uvećaj"
 
-#: src/baul-navigation-window-menus.c:1005
+#: src/baul-navigation-window-menus.c:982
 msgid "_View As"
 msgstr "Pre_gledaj kao"
 
-#: src/baul-navigation-window-menus.c:1044
+#: src/baul-navigation-window-menus.c:1017
 msgid "_Search"
 msgstr "_Pretraga"
 
@@ -5263,25 +5216,25 @@ msgid "Browse the contents of the network"
 msgstr "Razgleda sadržaj na mreži"
 
 #: src/baul-places-sidebar.c:1813 src/baul-places-sidebar.c:2775
-#: src/file-manager/fm-directory-view.c:7550
-#: src/file-manager/fm-directory-view.c:7578
-#: src/file-manager/fm-directory-view.c:7659
-#: src/file-manager/fm-directory-view.c:8360
-#: src/file-manager/fm-directory-view.c:8364
-#: src/file-manager/fm-directory-view.c:8454
-#: src/file-manager/fm-directory-view.c:8458
-#: src/file-manager/fm-directory-view.c:8566
-#: src/file-manager/fm-directory-view.c:8570
+#: src/file-manager/fm-directory-view.c:7508
+#: src/file-manager/fm-directory-view.c:7536
+#: src/file-manager/fm-directory-view.c:7617
+#: src/file-manager/fm-directory-view.c:8303
+#: src/file-manager/fm-directory-view.c:8307
+#: src/file-manager/fm-directory-view.c:8395
+#: src/file-manager/fm-directory-view.c:8399
+#: src/file-manager/fm-directory-view.c:8505
+#: src/file-manager/fm-directory-view.c:8509
 msgid "_Start"
 msgstr "_Pokreni"
 
 #: src/baul-places-sidebar.c:1814 src/baul-places-sidebar.c:2782
-#: src/baul-window-menus.c:879 src/file-manager/fm-directory-view.c:7554
-#: src/file-manager/fm-directory-view.c:7582
-#: src/file-manager/fm-directory-view.c:7663
-#: src/file-manager/fm-directory-view.c:8389
-#: src/file-manager/fm-directory-view.c:8483
-#: src/file-manager/fm-directory-view.c:8595
+#: src/baul-window-menus.c:864 src/file-manager/fm-directory-view.c:7512
+#: src/file-manager/fm-directory-view.c:7540
+#: src/file-manager/fm-directory-view.c:7621
+#: src/file-manager/fm-directory-view.c:8332
+#: src/file-manager/fm-directory-view.c:8424
+#: src/file-manager/fm-directory-view.c:8534
 msgid "_Stop"
 msgstr "_Zaustavi"
 
@@ -5289,9 +5242,9 @@ msgstr "_Zaustavi"
 msgid "_Power On"
 msgstr "_Uključi"
 
-#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8393
-#: src/file-manager/fm-directory-view.c:8487
-#: src/file-manager/fm-directory-view.c:8599
+#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8336
+#: src/file-manager/fm-directory-view.c:8428
+#: src/file-manager/fm-directory-view.c:8538
 msgid "_Safely Remove Drive"
 msgstr "_Bezbedno ukloni uređaj"
 
@@ -5311,14 +5264,14 @@ msgstr "Po_kreni uređaj sa više diskova"
 msgid "_Stop Multi-disk Device"
 msgstr "_Zaustavi uređaj sa više diskova"
 
-#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8470
-#: src/file-manager/fm-directory-view.c:8582
+#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8411
+#: src/file-manager/fm-directory-view.c:8521
 msgid "_Unlock Drive"
 msgstr "O_tključaj uređaj"
 
-#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8405
-#: src/file-manager/fm-directory-view.c:8499
-#: src/file-manager/fm-directory-view.c:8611
+#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8348
+#: src/file-manager/fm-directory-view.c:8440
+#: src/file-manager/fm-directory-view.c:8550
 msgid "_Lock Drive"
 msgstr "_Zaključaj uređaj"
 
@@ -5337,16 +5290,16 @@ msgstr "Ne mogu da pratim promene na %s"
 msgid "Unable to stop %s"
 msgstr "Ne mogu da zaustavim %s"
 
-#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7427
-#: src/file-manager/fm-directory-view.c:7608
-#: src/file-manager/fm-directory-view.c:8709
-#: src/file-manager/fm-directory-view.c:9056
+#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7385
+#: src/file-manager/fm-directory-view.c:7566
+#: src/file-manager/fm-directory-view.c:8643
+#: src/file-manager/fm-directory-view.c:8976
 #: src/file-manager/fm-tree-view.c:1280
 msgid "Open in New _Tab"
 msgstr "Otvori u novom _listu"
 
-#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8684
-#: src/file-manager/fm-directory-view.c:9015
+#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8620
+#: src/file-manager/fm-directory-view.c:8937
 #: src/file-manager/fm-tree-view.c:1289
 msgid "Open in New _Window"
 msgstr "Otvori novi _prozor"
@@ -5359,21 +5312,21 @@ msgstr "Ukloni"
 msgid "Rename..."
 msgstr "Preimenuj..."
 
-#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7534
-#: src/file-manager/fm-directory-view.c:7562
-#: src/file-manager/fm-directory-view.c:7643
+#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7492
+#: src/file-manager/fm-directory-view.c:7520
+#: src/file-manager/fm-directory-view.c:7601
 msgid "_Mount"
 msgstr "_Montiraj"
 
-#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7558
-#: src/file-manager/fm-directory-view.c:7586
-#: src/file-manager/fm-directory-view.c:7667
+#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7516
+#: src/file-manager/fm-directory-view.c:7544
+#: src/file-manager/fm-directory-view.c:7625
 msgid "_Detect Media"
 msgstr "Pro_nađi medijum"
 
-#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7546
-#: src/file-manager/fm-directory-view.c:7574
-#: src/file-manager/fm-directory-view.c:7655
+#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7504
+#: src/file-manager/fm-directory-view.c:7532
+#: src/file-manager/fm-directory-view.c:7613
 msgid "_Format"
 msgstr "_Formatiraj"
 
@@ -5485,59 +5438,59 @@ msgstr "Nažalost, „%s“ nije upotrebljiva slika."
 msgid "The file is not an image."
 msgstr "Ova datoteka nije slika."
 
-#: src/baul-property-browser.c:2311
+#: src/baul-property-browser.c:2307
 msgid "Select a Category:"
 msgstr "Izaberite kategoriju:"
 
-#: src/baul-property-browser.c:2325
+#: src/baul-property-browser.c:2321
 msgid "C_ancel Remove"
 msgstr "Odustani od _uklanjanja"
 
-#: src/baul-property-browser.c:2334
+#: src/baul-property-browser.c:2330
 msgid "_Add a New Pattern..."
 msgstr "_Dodaj novi obrazac..."
 
-#: src/baul-property-browser.c:2337
+#: src/baul-property-browser.c:2333
 msgid "_Add a New Color..."
 msgstr "_Dodaj novu boju..."
 
-#: src/baul-property-browser.c:2340
+#: src/baul-property-browser.c:2336
 msgid "_Add a New Emblem..."
 msgstr "_Dodaj novo obeležje"
 
-#: src/baul-property-browser.c:2366
+#: src/baul-property-browser.c:2362
 msgid "Click on a pattern to remove it"
 msgstr "Kliknite na obrazac da ga uklonite"
 
-#: src/baul-property-browser.c:2369
+#: src/baul-property-browser.c:2365
 msgid "Click on a color to remove it"
 msgstr "Kliknite na boju da je uklonite"
 
-#: src/baul-property-browser.c:2372
+#: src/baul-property-browser.c:2368
 msgid "Click on an emblem to remove it"
 msgstr "Kliknite na obeležje da ga uklonite"
 
-#: src/baul-property-browser.c:2384
+#: src/baul-property-browser.c:2380
 msgid "Patterns:"
 msgstr "Obrasci:"
 
-#: src/baul-property-browser.c:2387
+#: src/baul-property-browser.c:2383
 msgid "Colors:"
 msgstr "Boje:"
 
-#: src/baul-property-browser.c:2390
+#: src/baul-property-browser.c:2386
 msgid "Emblems:"
 msgstr "Obeležja:"
 
-#: src/baul-property-browser.c:2412
+#: src/baul-property-browser.c:2408
 msgid "_Remove a Pattern..."
 msgstr "_Uklonite obrazac..."
 
-#: src/baul-property-browser.c:2415
+#: src/baul-property-browser.c:2411
 msgid "_Remove a Color..."
 msgstr "_Uklonite boju..."
 
-#: src/baul-property-browser.c:2418
+#: src/baul-property-browser.c:2414
 msgid "_Remove an Emblem..."
 msgstr "_Uklonite obeležje..."
 
@@ -5750,37 +5703,37 @@ msgstr "Traži:"
 msgid "Close the side pane"
 msgstr "Ukloni bočnu površ"
 
-#: src/baul-spatial-window.c:920
+#: src/baul-spatial-window.c:922
 msgid "_Places"
 msgstr "_Mesta"
 
-#: src/baul-spatial-window.c:922
+#: src/baul-spatial-window.c:924
 msgid "Open _Location..."
 msgstr "Otvori _putanju..."
 
-#: src/baul-spatial-window.c:927
+#: src/baul-spatial-window.c:929
 msgid "Close P_arent Folders"
 msgstr "Zatvori _nadfascikle"
 
-#: src/baul-spatial-window.c:928
+#: src/baul-spatial-window.c:930
 msgid "Close this folder's parents"
 msgstr "Zatvara nadfascikle ove fascikle"
 
-#: src/baul-spatial-window.c:932
+#: src/baul-spatial-window.c:934
 msgid "Clos_e All Folders"
 msgstr "Zatvori _sve fascikle"
 
-#: src/baul-spatial-window.c:933
+#: src/baul-spatial-window.c:935
 msgid "Close all folder windows"
 msgstr "Zatvara sve prozore razgledača"
 
-#: src/baul-spatial-window.c:945
+#: src/baul-spatial-window.c:947
 msgid "Locate documents and folders on this computer by name or content"
 msgstr ""
 "Pronaći dokumente ili direktorijume na računaru pomiću imena ili sadržaja"
 
-#: src/baul-trash-bar.c:202 src/file-manager/fm-desktop-icon-view.c:785
-#: src/file-manager/fm-directory-view.c:7448
+#: src/baul-trash-bar.c:202 src/file-manager/fm-desktop-icon-view.c:779
+#: src/file-manager/fm-directory-view.c:7406
 msgid "Delete all items in the Trash"
 msgstr "Izbacuje sve stavke iz smeća"
 
@@ -5794,11 +5747,10 @@ msgstr "Vraća sve izabrane ikonice na njihovo prvobitno mesto"
 
 #: src/baul-window-bookmarks.c:83
 msgid ""
-"Do you want to remove any bookmarks with the non-existing location from your"
-" list?"
+"Do you want to remove any bookmarks with the non-existing location from your "
+"list?"
 msgstr ""
-"Želite li da uklonite sve obeleživače sa nepostojeće putanje iz vašeg "
-"spiska?"
+"Želite li da uklonite sve obeleživače sa nepostojeće putanje iz vašeg spiska?"
 
 #: src/baul-window-bookmarks.c:88
 msgid "Bookmark for Nonexistent Location"
@@ -5812,61 +5764,61 @@ msgstr "Možete da izaberete neki drugi pregled ili da odete na drugu putanju."
 msgid "The location cannot be displayed with this viewer."
 msgstr "Putanja se ne može prikazati ovim pregledačem."
 
-#: src/baul-window-manage-views.c:1444
+#: src/baul-window-manage-views.c:1442
 msgid "Content View"
 msgstr "Pregled sadržaja"
 
-#: src/baul-window-manage-views.c:1445
+#: src/baul-window-manage-views.c:1443
 msgid "View of the current folder"
 msgstr "Pregled tekuće fascikle"
 
-#: src/baul-window-manage-views.c:2137
+#: src/baul-window-manage-views.c:2135
 msgid "Baul has no installed viewer capable of displaying the folder."
 msgstr "Baul nema postavljen pregledač za prikazivanje ove fascikle."
 
-#: src/baul-window-manage-views.c:2145
+#: src/baul-window-manage-views.c:2143
 msgid "The location is not a folder."
 msgstr "Putanja nije fascikla."
 
-#: src/baul-window-manage-views.c:2154
+#: src/baul-window-manage-views.c:2152
 #, c-format
 msgid "Could not find \"%s\"."
 msgstr "Ne mogu da nađem „%s“."
 
-#: src/baul-window-manage-views.c:2157
+#: src/baul-window-manage-views.c:2155
 msgid "Please check the spelling and try again."
 msgstr "Proverite da li ste dobro ukucali i pokušajte ponovo."
 
-#: src/baul-window-manage-views.c:2166
+#: src/baul-window-manage-views.c:2164
 #, c-format
 msgid "Baul cannot handle \"%s\" locations."
 msgstr "Baul ne podržava „%s“ mesta."
 
-#: src/baul-window-manage-views.c:2171
+#: src/baul-window-manage-views.c:2169
 msgid "Baul cannot handle this kind of location."
 msgstr "Baul ne podržava ovaj tip mesta."
 
-#: src/baul-window-manage-views.c:2178
+#: src/baul-window-manage-views.c:2176
 msgid "Unable to mount the location."
 msgstr "Ne mogu da montiram mesto."
 
-#: src/baul-window-manage-views.c:2184
+#: src/baul-window-manage-views.c:2182
 msgid "Access was denied."
 msgstr "Pristup odbijen."
 
-#: src/baul-window-manage-views.c:2193
+#: src/baul-window-manage-views.c:2191
 #, c-format
 msgid "Could not display \"%s\", because the host could not be found."
 msgstr "Ne mogu da prikažem „%s“ zato što nije pronađen domaćin."
 
-#: src/baul-window-manage-views.c:2195
+#: src/baul-window-manage-views.c:2193
 msgid ""
 "Check that the spelling is correct and that your proxy settings are correct."
 msgstr ""
 "Proverite da li ste dobro ukucali i da li su postavke vašeg posrednika "
 "ispravne. "
 
-#: src/baul-window-manage-views.c:2211
+#: src/baul-window-manage-views.c:2209
 #, c-format
 msgid ""
 "Error: %s\n"
@@ -5875,11 +5827,11 @@ msgstr ""
 "Greška: %s\n"
 "Izaberite neki drugi pregledač i pokušajte ponovo."
 
-#: src/baul-window-menus.c:199
+#: src/baul-window-menus.c:198
 msgid "Go to the location specified by this bookmark"
 msgstr "Idi na putanju navedenu u ovom obeleživaču"
 
-#: src/baul-window-menus.c:535
+#: src/baul-window-menus.c:523
 msgid ""
 "Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -5888,10 +5840,10 @@ msgid ""
 msgstr ""
 "Baul je slobodan softver; možete ga raspodeljivati i/ili ga menjati pod "
 "uslovima GNU Opšte Javne Licence (GNU GPL) kako je objavljuje Zadužbina za "
-"Slobodni Softver (FSF); bilo verzije 2 te Licence, bilo (po vašem nahođenju)"
-" bilo koje novije verzije."
+"Slobodni Softver (FSF); bilo verzije 2 te Licence, bilo (po vašem nahođenju) "
+"bilo koje novije verzije."
 
-#: src/baul-window-menus.c:539
+#: src/baul-window-menus.c:527
 msgid ""
 "Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -5902,199 +5854,200 @@ msgstr ""
 "GARANCIJA; čak i bez podrazumevane garancije KORISNOSTI ili PRILAGOĐENOSTI "
 "ODREĐENOJ NAMENI.  Vidite GNU Opštu Javnu Licencu za više detalja."
 
-#: src/baul-window-menus.c:543
+#: src/baul-window-menus.c:531
 msgid ""
-"You should have received a copy of the GNU General Public License along with"
-" Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"You should have received a copy of the GNU General Public License along with "
+"Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 msgstr ""
 "Trebali ste da primite primerak GNU Opšte Javne Licence uz Baul; ako niste, "
 "pišite Zadužbini za Slobodni Softver (Free Software Foundation, Inc.), 51 "
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
-#: src/baul-window-menus.c:575
+#: src/baul-window-menus.c:563
 msgid "About Baul"
 msgstr ""
 
-#: src/baul-window-menus.c:577
+#: src/baul-window-menus.c:565
 msgid ""
 "Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
 "Baul vam dozvoljava da organizujete datoteke i fascikle, bilo na vašem "
 "računaru ili na Internetu."
 
-#: src/baul-window-menus.c:580
+#: src/baul-window-menus.c:568
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
-"Copyright © 2011-2020 The Baul authors"
+"Copyright © 2011-2020 The Caja authors\n"
+"Copyright © 2022 Pablo Barciela"
 msgstr ""
 
-#: src/baul-window-menus.c:586
+#: src/baul-window-menus.c:575
 msgid "translator-credits"
 msgstr ""
 "Slobodan D. Sredojević <slobo@akrep.be>\n"
 "Danilo Šegan <danilo@prevod.org>\n"
 "Ivan Pejić <ipejic@gmail.com>"
 
-#: src/baul-window-menus.c:589
+#: src/baul-window-menus.c:578
 msgid "CAFE Web Site"
 msgstr ""
 
-#: src/baul-window-menus.c:849
+#: src/baul-window-menus.c:834
 msgid "_File"
 msgstr "_Datoteka"
 
-#: src/baul-window-menus.c:850
+#: src/baul-window-menus.c:835
 msgid "_Edit"
 msgstr "_Uređivanje"
 
-#: src/baul-window-menus.c:851
+#: src/baul-window-menus.c:836
 msgid "_View"
 msgstr "P_regled"
 
-#: src/baul-window-menus.c:855
+#: src/baul-window-menus.c:840
 msgid "Close this folder"
 msgstr "Zatvara ovu fasciklu"
 
-#: src/baul-window-menus.c:860
+#: src/baul-window-menus.c:845
 msgid "_Backgrounds and Emblems..."
 msgstr "Pozadine i obe_ležja..."
 
-#: src/baul-window-menus.c:861
+#: src/baul-window-menus.c:846
 msgid ""
 "Display patterns, colors, and emblems that can be used to customize "
 "appearance"
 msgstr "Prikzuje obrasce, boje i obeležja kojima se može prilagoditi izgled"
 
-#: src/baul-window-menus.c:866
+#: src/baul-window-menus.c:851
 msgid "Prefere_nces"
 msgstr "Pos_tavke"
 
-#: src/baul-window-menus.c:867
+#: src/baul-window-menus.c:852
 msgid "Edit Baul preferences"
 msgstr "Uređuje postavke za Baul"
 
-#: src/baul-window-menus.c:870
+#: src/baul-window-menus.c:855
 msgid "Open _Parent"
 msgstr "Ot_vori nadfasciklu"
 
-#: src/baul-window-menus.c:871
+#: src/baul-window-menus.c:856
 msgid "Open the parent folder"
 msgstr "Otvori nadfasciklu"
 
-#: src/baul-window-menus.c:880
+#: src/baul-window-menus.c:865
 msgid "Stop loading the current location"
 msgstr "Prekida učitavanje tekuće putanje"
 
-#: src/baul-window-menus.c:884
+#: src/baul-window-menus.c:869
 msgid "_Reload"
 msgstr "_Osveži"
 
-#: src/baul-window-menus.c:885
+#: src/baul-window-menus.c:870
 msgid "Reload the current location"
 msgstr "Osvežava tekuću putanju"
 
-#: src/baul-window-menus.c:889
+#: src/baul-window-menus.c:874
 msgid "_Contents"
 msgstr "Sad_ržaj"
 
-#: src/baul-window-menus.c:890
+#: src/baul-window-menus.c:875
 msgid "Display Baul help"
 msgstr "Prikazuje Baulovu pomoć"
 
-#: src/baul-window-menus.c:894
+#: src/baul-window-menus.c:879
 msgid "_About"
 msgstr "_O programu"
 
-#: src/baul-window-menus.c:895
+#: src/baul-window-menus.c:880
 msgid "Display credits for the creators of Baul"
 msgstr "Prikazuje zasluge za tvorce Baula"
 
-#: src/baul-window-menus.c:899
+#: src/baul-window-menus.c:884
 msgid "Zoom _In"
 msgstr "U_većaj"
 
-#: src/baul-window-menus.c:900 src/baul-zoom-control.c:99
+#: src/baul-window-menus.c:885 src/baul-zoom-control.c:99
 #: src/baul-zoom-control.c:312
 msgid "Increase the view size"
 msgstr "Povećava pregled"
 
-#: src/baul-window-menus.c:914
+#: src/baul-window-menus.c:899
 msgid "Zoom _Out"
 msgstr "U_manji"
 
-#: src/baul-window-menus.c:915 src/baul-zoom-control.c:100
+#: src/baul-window-menus.c:900 src/baul-zoom-control.c:100
 #: src/baul-zoom-control.c:257
 msgid "Decrease the view size"
 msgstr "Umanjuje pregled"
 
-#: src/baul-window-menus.c:924
+#: src/baul-window-menus.c:909
 msgid "Normal Si_ze"
 msgstr "_Uobičajena veličina"
 
-#: src/baul-window-menus.c:925 src/baul-zoom-control.c:101
+#: src/baul-window-menus.c:910 src/baul-zoom-control.c:101
 #: src/baul-zoom-control.c:273
 msgid "Use the normal view size"
 msgstr "Vraća pregled na uobičajenu veličinu"
 
-#: src/baul-window-menus.c:929
+#: src/baul-window-menus.c:914
 msgid "Connect to _Server..."
 msgstr "Po_veži se na server..."
 
-#: src/baul-window-menus.c:930
+#: src/baul-window-menus.c:915
 msgid "Connect to a remote computer or shared disk"
 msgstr "Poveži se sa udaljenim serverom ili deljenim diskom"
 
-#: src/baul-window-menus.c:934 src/file-manager/fm-directory-view.c:7683
-#: src/file-manager/fm-directory-view.c:7687
+#: src/baul-window-menus.c:919 src/file-manager/fm-directory-view.c:7641
+#: src/file-manager/fm-directory-view.c:7645
 msgid "_Home Folder"
 msgstr "_Lična fascikla"
 
-#: src/baul-window-menus.c:939
+#: src/baul-window-menus.c:924
 msgid "_Computer"
 msgstr "_Računar"
 
-#: src/baul-window-menus.c:944
+#: src/baul-window-menus.c:929
 msgid "_Network"
 msgstr "M_reža"
 
-#: src/baul-window-menus.c:949
+#: src/baul-window-menus.c:934
 msgid "T_emplates"
 msgstr "_Šabloni"
 
-#: src/baul-window-menus.c:950
+#: src/baul-window-menus.c:935
 msgid "Open your personal templates folder"
 msgstr "Otvara fasciklu sa šablonima"
 
-#: src/baul-window-menus.c:954
+#: src/baul-window-menus.c:939
 msgid "_Trash"
 msgstr "_Smeće"
 
-#: src/baul-window-menus.c:955
+#: src/baul-window-menus.c:940
 msgid "Open your personal trash folder"
 msgstr "Otvara fasciklu sa smećem"
 
-#: src/baul-window-menus.c:963
+#: src/baul-window-menus.c:948
 msgid "Show _Hidden Files"
 msgstr "Prikaži _skrivene datoteke"
 
-#: src/baul-window-menus.c:964
+#: src/baul-window-menus.c:949
 msgid "Toggle the display of hidden files in the current window"
 msgstr "Određuje da li da se prikazuju skrivene datoteke u tekućem prozoru"
 
-#: src/baul-window-menus.c:969
+#: src/baul-window-menus.c:954
 msgid "Show Bac_kup Files"
 msgstr ""
 
-#: src/baul-window-menus.c:970
+#: src/baul-window-menus.c:955
 msgid "Toggle the display of backup files in the current window"
 msgstr ""
 
-#: src/baul-window-menus.c:1003
+#: src/baul-window-menus.c:987
 msgid "_Up"
 msgstr "_Gore"
 
-#: src/baul-window-menus.c:1006
+#: src/baul-window-menus.c:990
 msgid "_Home"
 msgstr "_Lični"
 
@@ -6172,56 +6125,56 @@ msgstr "Postavi nivo uvećanja tekućeg pregleda"
 msgid "Background"
 msgstr "Pozadina"
 
-#: src/file-manager/fm-desktop-icon-view.c:749
-#: src/file-manager/fm-directory-view.c:7447
-#: src/file-manager/fm-directory-view.c:9186
+#: src/file-manager/fm-desktop-icon-view.c:745
+#: src/file-manager/fm-directory-view.c:7405
+#: src/file-manager/fm-directory-view.c:9099
 msgid "E_mpty Trash"
 msgstr "Iz_baci smeće"
 
-#: src/file-manager/fm-desktop-icon-view.c:765
-#: src/file-manager/fm-directory-view.c:7411
+#: src/file-manager/fm-desktop-icon-view.c:759
+#: src/file-manager/fm-directory-view.c:7369
 msgid "Create L_auncher..."
 msgstr "Novi _pokretač..."
 
-#: src/file-manager/fm-desktop-icon-view.c:767
-#: src/file-manager/fm-directory-view.c:7412
+#: src/file-manager/fm-desktop-icon-view.c:761
+#: src/file-manager/fm-directory-view.c:7370
 msgid "Create a new launcher"
 msgstr "Napravi novi pokretač"
 
-#: src/file-manager/fm-desktop-icon-view.c:774
+#: src/file-manager/fm-desktop-icon-view.c:768
 msgid "Change Desktop _Background"
 msgstr "Iz_meni pozadinu"
 
-#: src/file-manager/fm-desktop-icon-view.c:776
+#: src/file-manager/fm-desktop-icon-view.c:770
 msgid ""
 "Show a window that lets you set your desktop background's pattern or color"
 msgstr ""
 "Prikazuje prozor koji omogućava da izbor obrasca za popunjavanja pozadine "
 "ili boju"
 
-#: src/file-manager/fm-desktop-icon-view.c:783
+#: src/file-manager/fm-desktop-icon-view.c:777
 msgid "Empty Trash"
 msgstr "Izbaci smeće"
 
-#: src/file-manager/fm-desktop-icon-view.c:886
+#: src/file-manager/fm-desktop-icon-view.c:878
 msgid "Desktop View"
 msgstr ""
 
-#: src/file-manager/fm-desktop-icon-view.c:887
-#: src/file-manager/fm-directory-view.c:7691
-#: src/file-manager/fm-directory-view.c:7695
+#: src/file-manager/fm-desktop-icon-view.c:879
+#: src/file-manager/fm-directory-view.c:7649
+#: src/file-manager/fm-directory-view.c:7653
 msgid "_Desktop"
 msgstr "_Radna površ"
 
-#: src/file-manager/fm-desktop-icon-view.c:888
+#: src/file-manager/fm-desktop-icon-view.c:880
 msgid "The desktop view encountered an error."
 msgstr "Pregled radne površi je naišao na grešku."
 
-#: src/file-manager/fm-desktop-icon-view.c:889
+#: src/file-manager/fm-desktop-icon-view.c:881
 msgid "The desktop view encountered an error while starting up."
 msgstr "Pregled radne površi je naišao na grešku pri pokretanju."
 
-#: src/file-manager/fm-desktop-icon-view.c:890
+#: src/file-manager/fm-desktop-icon-view.c:882
 msgid "Display this location with the desktop view."
 msgstr ""
 
@@ -6241,45 +6194,45 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:1209
+#: src/file-manager/fm-directory-view.c:1205
 msgid "Select Items Matching"
 msgstr "Označi stavke po uslovu"
 
-#: src/file-manager/fm-directory-view.c:1233
+#: src/file-manager/fm-directory-view.c:1229
 msgid "_Pattern:"
 msgstr "M_ustra:"
 
-#: src/file-manager/fm-directory-view.c:1240
+#: src/file-manager/fm-directory-view.c:1236
 msgid "Examples: "
 msgstr "Primeri:"
 
-#: src/file-manager/fm-directory-view.c:1366
+#: src/file-manager/fm-directory-view.c:1362
 msgid "Save Search as"
 msgstr "Sačuvaj pretragu kao"
 
-#: src/file-manager/fm-directory-view.c:1374
+#: src/file-manager/fm-directory-view.c:1370
 msgid "_Save"
 msgstr "_Sačuvaj"
 
-#: src/file-manager/fm-directory-view.c:1393
+#: src/file-manager/fm-directory-view.c:1389
 msgid "Search _name:"
 msgstr "Ime za p_retragu:"
 
-#: src/file-manager/fm-directory-view.c:1409
+#: src/file-manager/fm-directory-view.c:1405
 msgid "_Folder:"
 msgstr "_Direktorijum:"
 
-#: src/file-manager/fm-directory-view.c:1414
+#: src/file-manager/fm-directory-view.c:1410
 msgid "Select Folder to Save Search In"
 msgstr "Izaberite fasciklu za čuvanje pretrage"
 
-#: src/file-manager/fm-directory-view.c:2310
-#: src/file-manager/fm-directory-view.c:2347
+#: src/file-manager/fm-directory-view.c:2306
+#: src/file-manager/fm-directory-view.c:2343
 #, c-format
 msgid "\"%s\" selected"
 msgstr "„%s“ izabran"
 
-#: src/file-manager/fm-directory-view.c:2312
+#: src/file-manager/fm-directory-view.c:2308
 #, c-format
 msgid "%'d folder selected"
 msgid_plural "%'d folders selected"
@@ -6287,7 +6240,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:2322
+#: src/file-manager/fm-directory-view.c:2318
 #, c-format
 msgid " (containing %'d item)"
 msgid_plural " (containing %'d items)"
@@ -6295,9 +6248,8 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#. Translators: this is preceded with a string of form 'N folders' (N more
-#. than 1)
-#: src/file-manager/fm-directory-view.c:2333
+#. Translators: this is preceded with a string of form 'N folders' (N more than 1)
+#: src/file-manager/fm-directory-view.c:2329
 #, c-format
 msgid " (containing a total of %'d item)"
 msgid_plural " (containing a total of %'d items)"
@@ -6305,7 +6257,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:2350
+#: src/file-manager/fm-directory-view.c:2346
 #, c-format
 msgid "%'d item selected"
 msgid_plural "%'d items selected"
@@ -6313,7 +6265,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:2357
+#: src/file-manager/fm-directory-view.c:2353
 #, c-format
 msgid "%'d other item selected"
 msgid_plural "%'d other items selected"
@@ -6325,38 +6277,39 @@ msgstr[2] ""
 #. * needs to use something other than parentheses. The
 #. * first message gives the number of items selected;
 #. * the message in parentheses the size of those items.
-#: src/file-manager/fm-directory-view.c:2376
+#.
+#: src/file-manager/fm-directory-view.c:2372
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/file-manager/fm-directory-view.c:2389
+#: src/file-manager/fm-directory-view.c:2385
 #, c-format
 msgid "Free space: %s"
 msgstr "Slobodan prostor: %s"
 
-#: src/file-manager/fm-directory-view.c:2400
+#: src/file-manager/fm-directory-view.c:2396
 #, c-format
 msgid "%s, Free space: %s"
 msgstr "%s, slobodan prostor: %s"
 
-#: src/file-manager/fm-directory-view.c:2415
+#: src/file-manager/fm-directory-view.c:2411
 #, c-format
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: src/file-manager/fm-directory-view.c:2434
-#: src/file-manager/fm-directory-view.c:2448
+#: src/file-manager/fm-directory-view.c:2430
+#: src/file-manager/fm-directory-view.c:2444
 #, c-format
 msgid "%s%s, %s"
 msgstr "%s%s, %s"
 
-#: src/file-manager/fm-directory-view.c:2461
+#: src/file-manager/fm-directory-view.c:2457
 #, c-format
 msgid "%s%s, %s, %s"
 msgstr "%s%s, %s, %s"
 
-#: src/file-manager/fm-directory-view.c:4517
+#: src/file-manager/fm-directory-view.c:4509
 #, c-format
 msgid "Use \"%s\" to open the selected item"
 msgid_plural "Use \"%s\" to open the selected items"
@@ -6364,46 +6317,51 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:4612
+#: src/file-manager/fm-directory-view.c:4598
 msgid "Open parent location"
 msgstr ""
 
-#: src/file-manager/fm-directory-view.c:4613
+#: src/file-manager/fm-directory-view.c:4599
 msgid "Open parent location for the selected item"
 msgstr ""
 
-#: src/file-manager/fm-directory-view.c:5490
+#: src/file-manager/fm-directory-view.c:5460
 #, c-format
 msgid "Run \"%s\" on any selected items"
 msgstr "Pokreni „%s“ na svakoj izabranoj stavci"
 
-#: src/file-manager/fm-directory-view.c:5748
+#: src/file-manager/fm-directory-view.c:5712
 #, c-format
 msgid "Create Document from template \"%s\""
 msgstr "Napravi dokument prema šablonu „%s“"
 
-#: src/file-manager/fm-directory-view.c:6006
+#: src/file-manager/fm-directory-view.c:5964
 msgid "All executable files in this folder will appear in the Scripts menu."
 msgstr ""
 "Sve izvršne datoteke u ovoj fascikli će se pojaviti u meniju „Skripte“."
 
-#: src/file-manager/fm-directory-view.c:6008
+#: src/file-manager/fm-directory-view.c:5966
 msgid ""
-"Choosing a script from the menu will run that script with any selected items"
-" as input."
+"Choosing a script from the menu will run that script with any selected items "
+"as input."
 msgstr ""
 "Izborom skripte iz menija se ona pokreće, a sve izabrane stavke će joj biti "
 "ulaz."
 
-#: src/file-manager/fm-directory-view.c:6010
+#: src/file-manager/fm-directory-view.c:5968
 msgid ""
-"All executable files in this folder will appear in the Scripts menu. Choosing a script from the menu will run that script.\n"
+"All executable files in this folder will appear in the Scripts menu. "
+"Choosing a script from the menu will run that script.\n"
 "\n"
-"When executed from a local folder, scripts will be passed the selected file names. When executed from a remote folder (e.g. a folder showing web or ftp content), scripts will be passed no parameters.\n"
+"When executed from a local folder, scripts will be passed the selected file "
+"names. When executed from a remote folder (e.g. a folder showing web or ftp "
+"content), scripts will be passed no parameters.\n"
 "\n"
-"In all cases, the following environment variables will be set by Baul, which the scripts may use:\n"
+"In all cases, the following environment variables will be set by Baul, which "
+"the scripts may use:\n"
 "\n"
-"BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files (only if local)\n"
+"BAUL_SCRIPT_SELECTED_FILE_PATHS: newline-delimited paths for selected files "
+"(only if local)\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_URIS: newline-delimited URIs for selected files\n"
 "\n"
@@ -6411,19 +6369,27 @@ msgid ""
 "\n"
 "BAUL_SCRIPT_WINDOW_GEOMETRY: position and size of current window\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: newline-delimited paths for selected files in the inactive pane of a split-view window (only if local)\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: newline-delimited paths for "
+"selected files in the inactive pane of a split-view window (only if local)\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: newline-delimited URIs for selected files in the inactive pane of a split-view window\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: newline-delimited URIs for selected "
+"files in the inactive pane of a split-view window\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI for current location in the inactive pane of a split-view window"
+"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI for current location in the inactive "
+"pane of a split-view window"
 msgstr ""
-"Sve izvršne datoteke u ovoj fascikli će se pojaviti u meniju za Skripte. Izborom željene skripte iz menija možete je pokrenuti.\n"
+"Sve izvršne datoteke u ovoj fascikli će se pojaviti u meniju za Skripte. "
+"Izborom željene skripte iz menija možete je pokrenuti.\n"
 "\n"
-"Kada se izvrše iz lokalne fascikle, skripte dobijaju imena izabranih datoteka kao parametre. Kada se izvrše iz udaljenih fascikli (npr. veb ili ftp), skripte ne dobijaju nikakve parametre.\n"
+"Kada se izvrše iz lokalne fascikle, skripte dobijaju imena izabranih "
+"datoteka kao parametre. Kada se izvrše iz udaljenih fascikli (npr. veb ili "
+"ftp), skripte ne dobijaju nikakve parametre.\n"
 "\n"
-"U svim slučajevima, Baul će postaviti sledeće promenljive okruženja, koje skripte mogu koristiti:\n"
+"U svim slučajevima, Baul će postaviti sledeće promenljive okruženja, koje "
+"skripte mogu koristiti:\n"
 "\n"
-"BAUL_SCRIPT_SELECTED_FILE_PATHS: putanje izabranih datoteka u zasebnim redovima (samo ako je lokalno)\n"
+"BAUL_SCRIPT_SELECTED_FILE_PATHS: putanje izabranih datoteka u zasebnim "
+"redovima (samo ako je lokalno)\n"
 "\n"
 "BAUL_SCRIPT_SELECTED_URIS: adrese izabranih datoteka u zasebnim redovima\n"
 "\n"
@@ -6431,25 +6397,29 @@ msgstr ""
 "\n"
 "BAUL_SCRIPT_WINDOW_GEOMETRY: mesto i veličina tekućeg prozora\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: putanje za izabrane datoteke iz neaktivne površi podeljenog prozora u zasebnim redovima (samo ako je lokalno)\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_FILE_PATHS: putanje za izabrane datoteke iz "
+"neaktivne površi podeljenog prozora u zasebnim redovima (samo ako je "
+"lokalno)\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: adrese izabranih datoteka iz neaktivne površi podeljenog prozora u zasebnim redovima\n"
+"BAUL_SCRIPT_NEXT_PANE_SELECTED_URIS: adrese izabranih datoteka iz neaktivne "
+"površi podeljenog prozora u zasebnim redovima\n"
 "\n"
-"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: adresa trenutne putanje u neaktivnoj površi podeljenog prozora"
+"BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: adresa trenutne putanje u neaktivnoj "
+"površi podeljenog prozora"
 
-#: src/file-manager/fm-directory-view.c:6080
+#: src/file-manager/fm-directory-view.c:6038
 #: src/file-manager/fm-tree-view.c:1014
 #, c-format
 msgid "\"%s\" will be moved if you select the Paste command"
 msgstr "„%s“ će biti premešten ukoliko izaberete naredbu Ubaci"
 
-#: src/file-manager/fm-directory-view.c:6084
+#: src/file-manager/fm-directory-view.c:6042
 #: src/file-manager/fm-tree-view.c:1020
 #, c-format
 msgid "\"%s\" will be copied if you select the Paste command"
 msgstr "„%s“ će biti umnožen ukoliko izaberete naredbu Ubaci"
 
-#: src/file-manager/fm-directory-view.c:6091
+#: src/file-manager/fm-directory-view.c:6049
 #, c-format
 msgid "The %'d selected item will be moved if you select the Paste command"
 msgid_plural ""
@@ -6458,7 +6428,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:6098
+#: src/file-manager/fm-directory-view.c:6056
 #, c-format
 msgid "The %'d selected item will be copied if you select the Paste command"
 msgid_plural ""
@@ -6467,358 +6437,358 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:6278
+#: src/file-manager/fm-directory-view.c:6236
 #: src/file-manager/fm-tree-view.c:1060
 msgid "There is nothing on the clipboard to paste."
 msgstr "Nema ništa u spisku isečaka za ubacivanje."
 
-#: src/file-manager/fm-directory-view.c:6496
+#: src/file-manager/fm-directory-view.c:6454
 msgid "Unable to unmount location"
 msgstr "Me mogu da demontiram putanju"
 
-#: src/file-manager/fm-directory-view.c:6517
+#: src/file-manager/fm-directory-view.c:6475
 msgid "Unable to eject location"
 msgstr "Me mogu da izbacim putanju"
 
-#: src/file-manager/fm-directory-view.c:6532
+#: src/file-manager/fm-directory-view.c:6490
 msgid "Unable to stop drive"
 msgstr "Ne mogu da zaustavim uređaj"
 
-#: src/file-manager/fm-directory-view.c:7092
+#: src/file-manager/fm-directory-view.c:7050
 #, c-format
 msgid "Connect to Server %s"
 msgstr "Poveži se na server %s"
 
-#: src/file-manager/fm-directory-view.c:7104
-#: src/file-manager/fm-directory-view.c:8368
-#: src/file-manager/fm-directory-view.c:8462
-#: src/file-manager/fm-directory-view.c:8574
+#: src/file-manager/fm-directory-view.c:7062
+#: src/file-manager/fm-directory-view.c:8311
+#: src/file-manager/fm-directory-view.c:8403
+#: src/file-manager/fm-directory-view.c:8513
 msgid "_Connect"
 msgstr "_Poveži se"
 
-#: src/file-manager/fm-directory-view.c:7118
+#: src/file-manager/fm-directory-view.c:7076
 msgid "Link _name:"
 msgstr "_Ime veze:"
 
-#: src/file-manager/fm-directory-view.c:7389
+#: src/file-manager/fm-directory-view.c:7347
 msgid "Create _Document"
 msgstr "Napravi do_kument"
 
-#: src/file-manager/fm-directory-view.c:7390
+#: src/file-manager/fm-directory-view.c:7348
 msgid "Open Wit_h"
 msgstr "Otvori po_moću"
 
-#: src/file-manager/fm-directory-view.c:7391
+#: src/file-manager/fm-directory-view.c:7349
 msgid "Choose a program with which to open the selected item"
 msgstr "Izaberi program kojim da otvorim izabranu stavku"
 
-#: src/file-manager/fm-directory-view.c:7393
-#: src/file-manager/fm-directory-view.c:7672
+#: src/file-manager/fm-directory-view.c:7351
+#: src/file-manager/fm-directory-view.c:7630
 #: src/file-manager/fm-tree-view.c:1382
 msgid "_Properties"
 msgstr "_Osobine"
 
-#: src/file-manager/fm-directory-view.c:7394
-#: src/file-manager/fm-directory-view.c:9173
+#: src/file-manager/fm-directory-view.c:7352
+#: src/file-manager/fm-directory-view.c:9086
 msgid "View or modify the properties of each selected item"
 msgstr "Pogledajte ili izmenite osobine svake izabrane stavke"
 
-#: src/file-manager/fm-directory-view.c:7401
+#: src/file-manager/fm-directory-view.c:7359
 #: src/file-manager/fm-tree-view.c:1300
 msgid "Create _Folder"
 msgstr "Napravi _fasciklu"
 
-#: src/file-manager/fm-directory-view.c:7402
+#: src/file-manager/fm-directory-view.c:7360
 msgid "Create a new empty folder inside this folder"
 msgstr "Obrazuje praznu fasciklu unutar tekuće fascikle"
 
-#: src/file-manager/fm-directory-view.c:7404
+#: src/file-manager/fm-directory-view.c:7362
 msgid "No templates installed"
 msgstr "Nisu instalirani šabloni"
 
 #. Translators: this is used to indicate that a file doesn't contain anything
 #. label, accelerator
-#: src/file-manager/fm-directory-view.c:7407
+#: src/file-manager/fm-directory-view.c:7365
 msgid "_Empty File"
 msgstr "Pr_azna datoteka"
 
-#: src/file-manager/fm-directory-view.c:7408
+#: src/file-manager/fm-directory-view.c:7366
 msgid "Create a new empty file inside this folder"
 msgstr "Obrazuje novu praznu datoteku unutar tekuće fascikle"
 
-#: src/file-manager/fm-directory-view.c:7416
+#: src/file-manager/fm-directory-view.c:7374
 msgid "Open the selected item in this window"
 msgstr "Otvara izabranu stavku u ovom prozoru"
 
-#: src/file-manager/fm-directory-view.c:7423
-#: src/file-manager/fm-directory-view.c:7604
+#: src/file-manager/fm-directory-view.c:7381
+#: src/file-manager/fm-directory-view.c:7562
 msgid "Open in Navigation Window"
 msgstr "Otvori u upravljačkom prozoru"
 
-#: src/file-manager/fm-directory-view.c:7424
+#: src/file-manager/fm-directory-view.c:7382
 msgid "Open each selected item in a navigation window"
 msgstr "Otvara svaku izabranu stavku u upravljačkom prozoru"
 
-#: src/file-manager/fm-directory-view.c:7428
+#: src/file-manager/fm-directory-view.c:7386
 msgid "Open each selected item in a new tab"
 msgstr "Otvara svaku izabranu stavku u novom listu"
 
-#: src/file-manager/fm-directory-view.c:7431
-#: src/file-manager/fm-directory-view.c:7613
+#: src/file-manager/fm-directory-view.c:7389
+#: src/file-manager/fm-directory-view.c:7571
 msgid "Open in _Folder Window"
 msgstr "Otvori u _novom prozoru"
 
-#: src/file-manager/fm-directory-view.c:7432
+#: src/file-manager/fm-directory-view.c:7390
 msgid "Open each selected item in a folder window"
 msgstr "Otvara svaku izabranu stavku u novom prozoru"
 
-#: src/file-manager/fm-directory-view.c:7435
+#: src/file-manager/fm-directory-view.c:7393
 msgid "Other _Application..."
 msgstr "Otvori drugim _programom..."
 
-#: src/file-manager/fm-directory-view.c:7436
-#: src/file-manager/fm-directory-view.c:7440
+#: src/file-manager/fm-directory-view.c:7394
+#: src/file-manager/fm-directory-view.c:7398
 msgid "Choose another application with which to open the selected item"
 msgstr "Omogućava izbor nekog drugog programa za otvaranje izabrane stavke"
 
-#: src/file-manager/fm-directory-view.c:7439
+#: src/file-manager/fm-directory-view.c:7397
 msgid "Open With Other _Application..."
 msgstr "Otvori nekim drugim _programom..."
 
-#: src/file-manager/fm-directory-view.c:7443
+#: src/file-manager/fm-directory-view.c:7401
 msgid "_Open Scripts Folder"
 msgstr "_Otvori fasciklu sa skriptama"
 
-#: src/file-manager/fm-directory-view.c:7444
+#: src/file-manager/fm-directory-view.c:7402
 msgid "Show the folder containing the scripts that appear in this menu"
 msgstr "Prikazuje fasciklu koji sadrži skripte iz ovog menija"
 
-#: src/file-manager/fm-directory-view.c:7452
+#: src/file-manager/fm-directory-view.c:7410
 msgid "Prepare the selected files to be moved with a Paste command"
 msgstr "Priprema izabrane datoteke za premeštanje pomoću naredbe Ubaci"
 
-#: src/file-manager/fm-directory-view.c:7456
+#: src/file-manager/fm-directory-view.c:7414
 msgid "Prepare the selected files to be copied with a Paste command"
 msgstr "Priprema izabrane datoteke za umnožavanje pomoću naredbe Ubaci"
 
-#: src/file-manager/fm-directory-view.c:7460
+#: src/file-manager/fm-directory-view.c:7418
 msgid "Move or copy files previously selected by a Cut or Copy command"
 msgstr "Premešta ili umnožava datoteke izabrane naredbom Iseci ili Umnoži"
 
-#: src/file-manager/fm-directory-view.c:7465
-#: src/file-manager/fm-directory-view.c:7626
+#: src/file-manager/fm-directory-view.c:7423
+#: src/file-manager/fm-directory-view.c:7584
 #: src/file-manager/fm-tree-view.c:1329
 msgid "_Paste Into Folder"
 msgstr "U_baci datoteke u fasciklu"
 
-#: src/file-manager/fm-directory-view.c:7466
+#: src/file-manager/fm-directory-view.c:7424
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into the "
 "selected folder"
 msgstr ""
-"Premešta ili umnožava datoteke izabrane naredbom Iseci ili Umnoži u izabranu"
-" fasciklu"
+"Premešta ili umnožava datoteke izabrane naredbom Iseci ili Umnoži u izabranu "
+"fasciklu"
 
-#: src/file-manager/fm-directory-view.c:7468
+#: src/file-manager/fm-directory-view.c:7426
 msgid "Cop_y to"
 msgstr "Umno_ži u"
 
-#: src/file-manager/fm-directory-view.c:7469
+#: src/file-manager/fm-directory-view.c:7427
 msgid "M_ove to"
 msgstr "Preme_sti u"
 
-#: src/file-manager/fm-directory-view.c:7472
+#: src/file-manager/fm-directory-view.c:7430
 msgid "Select all items in this window"
 msgstr "Bira sve stavke u ovom prozoru"
 
-#: src/file-manager/fm-directory-view.c:7475
+#: src/file-manager/fm-directory-view.c:7433
 msgid "Select I_tems Matching..."
 msgstr "Označi s_tavke po uslovu..."
 
-#: src/file-manager/fm-directory-view.c:7476
+#: src/file-manager/fm-directory-view.c:7434
 msgid "Select items in this window matching a given pattern"
 msgstr "Pravi izbor od stavki koje odgovaraju datom obrascu u tekućem prozoru"
 
-#: src/file-manager/fm-directory-view.c:7479
+#: src/file-manager/fm-directory-view.c:7437
 msgid "_Invert Selection"
 msgstr "O_brni izbor"
 
-#: src/file-manager/fm-directory-view.c:7480
+#: src/file-manager/fm-directory-view.c:7438
 msgid "Select all and only the items that are not currently selected"
 msgstr "Pravi izbor od svih stavki osim onih koje su trenutno izabrane"
 
-#: src/file-manager/fm-directory-view.c:7483
+#: src/file-manager/fm-directory-view.c:7441
 msgid "D_uplicate"
 msgstr "U_dvostruči"
 
-#: src/file-manager/fm-directory-view.c:7484
+#: src/file-manager/fm-directory-view.c:7442
 msgid "Duplicate each selected item"
 msgstr "Udvostručava svaku izabranu stavku"
 
-#: src/file-manager/fm-directory-view.c:7487
-#: src/file-manager/fm-directory-view.c:9156
+#: src/file-manager/fm-directory-view.c:7445
+#: src/file-manager/fm-directory-view.c:9070
 msgid "Ma_ke Link"
 msgid_plural "Ma_ke Links"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:7488
+#: src/file-manager/fm-directory-view.c:7446
 msgid "Create a symbolic link for each selected item"
 msgstr "Obrazuje simboličku vezu za svaku izabranu stavku"
 
-#: src/file-manager/fm-directory-view.c:7491
+#: src/file-manager/fm-directory-view.c:7449
 msgid "_Rename..."
 msgstr "Preimenu_j..."
 
-#: src/file-manager/fm-directory-view.c:7492
+#: src/file-manager/fm-directory-view.c:7450
 msgid "Rename selected item"
 msgstr "Menja naziv izabrane stavke"
 
-#: src/file-manager/fm-directory-view.c:7500
-#: src/file-manager/fm-directory-view.c:9115
+#: src/file-manager/fm-directory-view.c:7458
+#: src/file-manager/fm-directory-view.c:9031
 msgid "Move each selected item to the Trash"
 msgstr "Premešta svaku izabranu stavku u smeće"
 
-#: src/file-manager/fm-directory-view.c:7504
+#: src/file-manager/fm-directory-view.c:7462
 msgid "Delete each selected item, without moving to the Trash"
 msgstr "Uklanja izabranu stavku, bez premeštanja u smeće"
 
-#: src/file-manager/fm-directory-view.c:7507
-#: src/file-manager/fm-directory-view.c:7639
+#: src/file-manager/fm-directory-view.c:7465
+#: src/file-manager/fm-directory-view.c:7597
 msgid "_Restore"
 msgstr "_Vrati"
 
-#: src/file-manager/fm-directory-view.c:7511
+#: src/file-manager/fm-directory-view.c:7469
 msgid "_Undo"
 msgstr "Opo_zovi"
 
-#: src/file-manager/fm-directory-view.c:7512
-#: src/file-manager/fm-directory-view.c:11345
+#: src/file-manager/fm-directory-view.c:7470
+#: src/file-manager/fm-directory-view.c:11247
 msgid "Undo the last action"
 msgstr "Opozovi poslednju radnju"
 
-#: src/file-manager/fm-directory-view.c:7515
+#: src/file-manager/fm-directory-view.c:7473
 msgid "_Redo"
 msgstr "_Ponovi"
 
-#: src/file-manager/fm-directory-view.c:7516
-#: src/file-manager/fm-directory-view.c:11365
+#: src/file-manager/fm-directory-view.c:7474
+#: src/file-manager/fm-directory-view.c:11265
 msgid "Redo the last undone action"
 msgstr "Ponovi poslednju opozvanu radnju"
 
-#: src/file-manager/fm-directory-view.c:7526
+#: src/file-manager/fm-directory-view.c:7484
 msgid "Reset View to _Defaults"
 msgstr "Postavi pregle_d na podrazumevano"
 
-#: src/file-manager/fm-directory-view.c:7527
+#: src/file-manager/fm-directory-view.c:7485
 msgid "Reset sorting order and zoom level to match preferences for this view"
 msgstr "Vraća poredak i uvećanje prema postavkama za ovaj pregled"
 
-#: src/file-manager/fm-directory-view.c:7530
+#: src/file-manager/fm-directory-view.c:7488
 msgid "Connect To This Server"
 msgstr "Poveži se na ovaj server"
 
-#: src/file-manager/fm-directory-view.c:7531
+#: src/file-manager/fm-directory-view.c:7489
 msgid "Make a permanent connection to this server"
 msgstr "Pravi trajnu vezu sa ovim serverom"
 
-#: src/file-manager/fm-directory-view.c:7535
+#: src/file-manager/fm-directory-view.c:7493
 msgid "Mount the selected volume"
 msgstr "Montira izabrani disk"
 
-#: src/file-manager/fm-directory-view.c:7539
+#: src/file-manager/fm-directory-view.c:7497
 msgid "Unmount the selected volume"
 msgstr "Demontira izabrani disk"
 
-#: src/file-manager/fm-directory-view.c:7543
+#: src/file-manager/fm-directory-view.c:7501
 msgid "Eject the selected volume"
 msgstr "Izbacuje izabrani disk"
 
-#: src/file-manager/fm-directory-view.c:7547
+#: src/file-manager/fm-directory-view.c:7505
 msgid "Format the selected volume"
 msgstr "Formatira izabrani disk"
 
-#: src/file-manager/fm-directory-view.c:7551
+#: src/file-manager/fm-directory-view.c:7509
 msgid "Start the selected volume"
 msgstr "Pokreće izabrani disk"
 
-#: src/file-manager/fm-directory-view.c:7555
-#: src/file-manager/fm-directory-view.c:8596
+#: src/file-manager/fm-directory-view.c:7513
+#: src/file-manager/fm-directory-view.c:8535
 msgid "Stop the selected volume"
 msgstr "Zaustavlja izabrani disk"
 
-#: src/file-manager/fm-directory-view.c:7559
-#: src/file-manager/fm-directory-view.c:7587
-#: src/file-manager/fm-directory-view.c:7668
+#: src/file-manager/fm-directory-view.c:7517
+#: src/file-manager/fm-directory-view.c:7545
+#: src/file-manager/fm-directory-view.c:7626
 msgid "Detect media in the selected drive"
 msgstr "Pronalazi medijume izabranog uređaja"
 
-#: src/file-manager/fm-directory-view.c:7563
+#: src/file-manager/fm-directory-view.c:7521
 msgid "Mount the volume associated with the open folder"
 msgstr "Montira disk koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7567
+#: src/file-manager/fm-directory-view.c:7525
 msgid "Unmount the volume associated with the open folder"
 msgstr "Demontira disk koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7571
+#: src/file-manager/fm-directory-view.c:7529
 msgid "Eject the volume associated with the open folder"
 msgstr "Izbacuje disk koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7575
+#: src/file-manager/fm-directory-view.c:7533
 msgid "Format the volume associated with the open folder"
 msgstr "Formatira disk koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7579
+#: src/file-manager/fm-directory-view.c:7537
 msgid "Start the volume associated with the open folder"
 msgstr "Pokreće disk koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7583
+#: src/file-manager/fm-directory-view.c:7541
 msgid "Stop the volume associated with the open folder"
 msgstr "Zaustavlja disk koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7590
+#: src/file-manager/fm-directory-view.c:7548
 msgid "Open File and Close window"
 msgstr "Otvori datoteku i zatvori prozor"
 
-#: src/file-manager/fm-directory-view.c:7594
+#: src/file-manager/fm-directory-view.c:7552
 msgid "Sa_ve Search"
 msgstr "_Sačuvaj pretragu"
 
-#: src/file-manager/fm-directory-view.c:7595
+#: src/file-manager/fm-directory-view.c:7553
 msgid "Save the edited search"
 msgstr "Čuva izmenjenu pretragu"
 
-#: src/file-manager/fm-directory-view.c:7598
+#: src/file-manager/fm-directory-view.c:7556
 msgid "Sa_ve Search As..."
 msgstr "_Sačuvaj pretragu kao..."
 
-#: src/file-manager/fm-directory-view.c:7599
+#: src/file-manager/fm-directory-view.c:7557
 msgid "Save the current search as a file"
 msgstr "Čuva tekuću pretragu kao datoteku"
 
-#: src/file-manager/fm-directory-view.c:7605
+#: src/file-manager/fm-directory-view.c:7563
 msgid "Open this folder in a navigation window"
 msgstr "Otvara ovu fasciklu u upravljačkom prozoru"
 
-#: src/file-manager/fm-directory-view.c:7609
+#: src/file-manager/fm-directory-view.c:7567
 msgid "Open this folder in a new tab"
 msgstr "Otvara fasciklu u novom listu"
 
-#: src/file-manager/fm-directory-view.c:7614
+#: src/file-manager/fm-directory-view.c:7572
 msgid "Open this folder in a folder window"
 msgstr "Otvara fasciklu u novom prozoru"
 
-#: src/file-manager/fm-directory-view.c:7619
+#: src/file-manager/fm-directory-view.c:7577
 msgid "Prepare this folder to be moved with a Paste command"
 msgstr "Priprema ovu fasciklu za premeštanje pomoću naredbe Ubaci"
 
-#: src/file-manager/fm-directory-view.c:7623
+#: src/file-manager/fm-directory-view.c:7581
 msgid "Prepare this folder to be copied with a Paste command"
 msgstr "Priprema ovu fasciklu za umnožavanje pomoću naredbe Ubaci"
 
-#: src/file-manager/fm-directory-view.c:7627
+#: src/file-manager/fm-directory-view.c:7585
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into this "
 "folder"
@@ -6826,87 +6796,87 @@ msgstr ""
 "Premešta ili umnožava datoteke izabrane pomoću naredbe Iseci ili Umnoži u "
 "ovu fasciklu"
 
-#: src/file-manager/fm-directory-view.c:7632
+#: src/file-manager/fm-directory-view.c:7590
 msgid "Move this folder to the Trash"
 msgstr "Premešta ovu fasciklu u Smeće"
 
-#: src/file-manager/fm-directory-view.c:7636
+#: src/file-manager/fm-directory-view.c:7594
 msgid "Delete this folder, without moving to the Trash"
 msgstr "Briše ovu fasciklu, bez premeštanja u smeće"
 
-#: src/file-manager/fm-directory-view.c:7644
+#: src/file-manager/fm-directory-view.c:7602
 msgid "Mount the volume associated with this folder"
 msgstr "Montira disk koji je pridružen ovoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7648
+#: src/file-manager/fm-directory-view.c:7606
 msgid "Unmount the volume associated with this folder"
 msgstr "Demontira disk koji je pridružen ovoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7652
+#: src/file-manager/fm-directory-view.c:7610
 msgid "Eject the volume associated with this folder"
 msgstr "Izbacuje disk koji je pridružen ovoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7656
+#: src/file-manager/fm-directory-view.c:7614
 msgid "Format the volume associated with this folder"
 msgstr "Formatira disk koji je pridružen ovoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7660
+#: src/file-manager/fm-directory-view.c:7618
 msgid "Start the volume associated with this folder"
 msgstr "Pokreće disk koji je pridružen ovoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7664
+#: src/file-manager/fm-directory-view.c:7622
 msgid "Stop the volume associated with this folder"
 msgstr "Zaustavlja disk koji je pridružen ovoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:7673
+#: src/file-manager/fm-directory-view.c:7631
 msgid "View or modify the properties of this folder"
 msgstr "Prikazuje ili menja osobine ove fascikle"
 
-#: src/file-manager/fm-directory-view.c:7676
-#: src/file-manager/fm-directory-view.c:7679
+#: src/file-manager/fm-directory-view.c:7634
+#: src/file-manager/fm-directory-view.c:7637
 msgid "_Other pane"
 msgstr "_Druga površ"
 
-#: src/file-manager/fm-directory-view.c:7677
+#: src/file-manager/fm-directory-view.c:7635
 msgid "Copy the current selection to the other pane in the window"
 msgstr "Umnožava izabrano u drugu površ prozora"
 
-#: src/file-manager/fm-directory-view.c:7680
+#: src/file-manager/fm-directory-view.c:7638
 msgid "Move the current selection to the other pane in the window"
 msgstr "Premešta izabrano u drugu površ prozora"
 
-#: src/file-manager/fm-directory-view.c:7684
+#: src/file-manager/fm-directory-view.c:7642
 msgid "Copy the current selection to the home folder"
 msgstr "Umnožava izabrano u ličnu fasciklu"
 
-#: src/file-manager/fm-directory-view.c:7688
+#: src/file-manager/fm-directory-view.c:7646
 msgid "Move the current selection to the home folder"
 msgstr "Premešta izabrano u ličnu fasciklu"
 
-#: src/file-manager/fm-directory-view.c:7692
+#: src/file-manager/fm-directory-view.c:7650
 msgid "Copy the current selection to the desktop"
 msgstr "Umnožava izabrano na radnu površinu"
 
-#: src/file-manager/fm-directory-view.c:7696
+#: src/file-manager/fm-directory-view.c:7654
 msgid "Move the current selection to the desktop"
 msgstr "Premešta izabrano na radnu površinu"
 
 #. Translators: %s is a directory
-#: src/file-manager/fm-directory-view.c:7786
+#: src/file-manager/fm-directory-view.c:7740
 #, c-format
 msgid "Run or manage scripts from %s"
 msgstr "Pokreni ili upravljaj skriptama iz %s"
 
-#: src/file-manager/fm-directory-view.c:7789
+#: src/file-manager/fm-directory-view.c:7742
 msgid "_Scripts"
 msgstr "_Skripte"
 
-#: src/file-manager/fm-directory-view.c:8205
+#: src/file-manager/fm-directory-view.c:8151
 #, c-format
 msgid "Move the open folder out of the trash to \"%s\""
 msgstr "Premesti otvorenu fasciklu iz smeća u „%s“"
 
-#: src/file-manager/fm-directory-view.c:8208
+#: src/file-manager/fm-directory-view.c:8154
 #, c-format
 msgid "Move the selected folder out of the trash to \"%s\""
 msgid_plural "Move the selected folders out of the trash to \"%s\""
@@ -6914,14 +6884,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:8212
+#: src/file-manager/fm-directory-view.c:8158
 msgid "Move the selected folder out of the trash"
 msgid_plural "Move the selected folders out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:8218
+#: src/file-manager/fm-directory-view.c:8164
 #, c-format
 msgid "Move the selected file out of the trash to \"%s\""
 msgid_plural "Move the selected files out of the trash to \"%s\""
@@ -6929,14 +6899,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:8222
+#: src/file-manager/fm-directory-view.c:8168
 msgid "Move the selected file out of the trash"
 msgid_plural "Move the selected files out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:8228
+#: src/file-manager/fm-directory-view.c:8174
 #, c-format
 msgid "Move the selected item out of the trash to \"%s\""
 msgid_plural "Move the selected items out of the trash to \"%s\""
@@ -6944,156 +6914,155 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:8232
+#: src/file-manager/fm-directory-view.c:8178
 msgid "Move the selected item out of the trash"
 msgid_plural "Move the selected items out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:8361
-#: src/file-manager/fm-directory-view.c:8365
-#: src/file-manager/fm-directory-view.c:8567
-#: src/file-manager/fm-directory-view.c:8571
+#: src/file-manager/fm-directory-view.c:8304
+#: src/file-manager/fm-directory-view.c:8308
+#: src/file-manager/fm-directory-view.c:8506
+#: src/file-manager/fm-directory-view.c:8510
 msgid "Start the selected drive"
 msgstr "Pokreni izabrani uređaj"
 
-#: src/file-manager/fm-directory-view.c:8369
-#: src/file-manager/fm-directory-view.c:8575
+#: src/file-manager/fm-directory-view.c:8312
+#: src/file-manager/fm-directory-view.c:8514
 msgid "Connect to the selected drive"
 msgstr "Povezuje se na izabrani uređaj"
 
-#: src/file-manager/fm-directory-view.c:8372
-#: src/file-manager/fm-directory-view.c:8466
-#: src/file-manager/fm-directory-view.c:8578
+#: src/file-manager/fm-directory-view.c:8315
+#: src/file-manager/fm-directory-view.c:8407
+#: src/file-manager/fm-directory-view.c:8517
 msgid "_Start Multi-disk Drive"
 msgstr "_Pokreni uređaj sa više diskova"
 
-#: src/file-manager/fm-directory-view.c:8373
-#: src/file-manager/fm-directory-view.c:8579
+#: src/file-manager/fm-directory-view.c:8316
+#: src/file-manager/fm-directory-view.c:8518
 msgid "Start the selected multi-disk drive"
 msgstr "Pokreće izabrani uređaj sa više diskova"
 
-#: src/file-manager/fm-directory-view.c:8376
+#: src/file-manager/fm-directory-view.c:8319
 msgid "U_nlock Drive"
 msgstr "_Otključaj uređaj"
 
-#: src/file-manager/fm-directory-view.c:8377
-#: src/file-manager/fm-directory-view.c:8583
+#: src/file-manager/fm-directory-view.c:8320
+#: src/file-manager/fm-directory-view.c:8522
 msgid "Unlock the selected drive"
 msgstr "Otključava izabrani uređaj"
 
-#: src/file-manager/fm-directory-view.c:8390
+#: src/file-manager/fm-directory-view.c:8333
 msgid "Stop the selected drive"
 msgstr "Zaustavlja izabrani uređaj"
 
-#: src/file-manager/fm-directory-view.c:8394
-#: src/file-manager/fm-directory-view.c:8600
+#: src/file-manager/fm-directory-view.c:8337
+#: src/file-manager/fm-directory-view.c:8539
 msgid "Safely remove the selected drive"
 msgstr "Bezbedno uklanja izabrani uređaj"
 
-#: src/file-manager/fm-directory-view.c:8397
-#: src/file-manager/fm-directory-view.c:8491
-#: src/file-manager/fm-directory-view.c:8603
+#: src/file-manager/fm-directory-view.c:8340
+#: src/file-manager/fm-directory-view.c:8432
+#: src/file-manager/fm-directory-view.c:8542
 msgid "_Disconnect"
 msgstr "_Prekini vezu"
 
-#: src/file-manager/fm-directory-view.c:8398
-#: src/file-manager/fm-directory-view.c:8604
+#: src/file-manager/fm-directory-view.c:8341
+#: src/file-manager/fm-directory-view.c:8543
 msgid "Disconnect the selected drive"
 msgstr "Prekida vezu sa izabranim uređajem"
 
-#: src/file-manager/fm-directory-view.c:8401
-#: src/file-manager/fm-directory-view.c:8495
-#: src/file-manager/fm-directory-view.c:8607
+#: src/file-manager/fm-directory-view.c:8344
+#: src/file-manager/fm-directory-view.c:8436
+#: src/file-manager/fm-directory-view.c:8546
 msgid "_Stop Multi-disk Drive"
 msgstr "Zaustavi uređaj sa više diska"
 
-#: src/file-manager/fm-directory-view.c:8402
-#: src/file-manager/fm-directory-view.c:8608
+#: src/file-manager/fm-directory-view.c:8345
+#: src/file-manager/fm-directory-view.c:8547
 msgid "Stop the selected multi-disk drive"
 msgstr "Zaustavlja izabrani uređaj sa više diska"
 
-#: src/file-manager/fm-directory-view.c:8406
-#: src/file-manager/fm-directory-view.c:8612
+#: src/file-manager/fm-directory-view.c:8349
+#: src/file-manager/fm-directory-view.c:8551
 msgid "Lock the selected drive"
 msgstr "Zaključava izabrani uređaj"
 
-#: src/file-manager/fm-directory-view.c:8455
-#: src/file-manager/fm-directory-view.c:8459
+#: src/file-manager/fm-directory-view.c:8396
+#: src/file-manager/fm-directory-view.c:8400
 msgid "Start the drive associated with the open folder"
 msgstr "Pokreće uređaj koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8463
+#: src/file-manager/fm-directory-view.c:8404
 msgid "Connect to the drive associated with the open folder"
 msgstr "Povezuje uređaj koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8467
+#: src/file-manager/fm-directory-view.c:8408
 msgid "Start the multi-disk drive associated with the open folder"
 msgstr "Pokreće uređaj sa više diskova koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8471
+#: src/file-manager/fm-directory-view.c:8412
 msgid "Unlock the drive associated with the open folder"
 msgstr "Otključava uređaj koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8484
+#: src/file-manager/fm-directory-view.c:8425
 msgid "_Stop the drive associated with the open folder"
 msgstr "Zaustavlja uređaj koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8488
+#: src/file-manager/fm-directory-view.c:8429
 msgid "Safely remove the drive associated with the open folder"
 msgstr "Bezbedno uklanja uređaj koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8492
+#: src/file-manager/fm-directory-view.c:8433
 msgid "Disconnect the drive associated with the open folder"
 msgstr "Prekida vezu sa uređajem koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8496
+#: src/file-manager/fm-directory-view.c:8437
 msgid "Stop the multi-disk drive associated with the open folder"
-msgstr ""
-"Zaustavlja uređaj sa više diskova koji je pridružen otvorenoj fascikli"
+msgstr "Zaustavlja uređaj sa više diskova koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8500
+#: src/file-manager/fm-directory-view.c:8441
 msgid "Lock the drive associated with the open folder"
 msgstr "Zaključava uređaj koji je pridružen otvorenoj fascikli"
 
-#: src/file-manager/fm-directory-view.c:8686
-#: src/file-manager/fm-directory-view.c:9024
+#: src/file-manager/fm-directory-view.c:8622
+#: src/file-manager/fm-directory-view.c:8946
 msgid "Browse in New _Window"
 msgstr "_Razgledaj u novom prozoru"
 
-#: src/file-manager/fm-directory-view.c:8692
-#: src/file-manager/fm-directory-view.c:9034
+#: src/file-manager/fm-directory-view.c:8628
+#: src/file-manager/fm-directory-view.c:8956
 msgid "_Browse Folder"
 msgid_plural "_Browse Folders"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:8711
-#: src/file-manager/fm-directory-view.c:9065
+#: src/file-manager/fm-directory-view.c:8645
+#: src/file-manager/fm-directory-view.c:8985
 msgid "Browse in New _Tab"
 msgstr "Razgledaj u novom _listu"
 
-#: src/file-manager/fm-directory-view.c:8766
-#: src/file-manager/fm-directory-view.c:9110
+#: src/file-manager/fm-directory-view.c:8694
+#: src/file-manager/fm-directory-view.c:9026
 msgid "_Delete Permanently"
 msgstr "_Trajno obriši"
 
-#: src/file-manager/fm-directory-view.c:8767
+#: src/file-manager/fm-directory-view.c:8695
 msgid "Delete the open folder permanently"
 msgstr "Trajno briše otvorenu fasciklu"
 
-#: src/file-manager/fm-directory-view.c:8771
+#: src/file-manager/fm-directory-view.c:8699
 msgid "Move the open folder to the Trash"
 msgstr "Premešta otvorenu fasciklu u Smeće"
 
-#: src/file-manager/fm-directory-view.c:8962
+#: src/file-manager/fm-directory-view.c:8886
 #, c-format
 msgid "_Open With %s"
 msgstr "O_tvori pomoću %s"
 
-#: src/file-manager/fm-directory-view.c:9017
+#: src/file-manager/fm-directory-view.c:8939
 #, c-format
 msgid "Open in %'d New _Window"
 msgid_plural "Open in %'d New _Windows"
@@ -7101,7 +7070,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:9026
+#: src/file-manager/fm-directory-view.c:8948
 #, c-format
 msgid "Browse in %'d New _Window"
 msgid_plural "Browse in %'d New _Windows"
@@ -7109,7 +7078,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:9058
+#: src/file-manager/fm-directory-view.c:8978
 #, c-format
 msgid "Open in %'d New _Tab"
 msgid_plural "Open in %'d New _Tabs"
@@ -7117,7 +7086,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:9067
+#: src/file-manager/fm-directory-view.c:8987
 #, c-format
 msgid "Browse in %'d New _Tab"
 msgid_plural "Browse in %'d New _Tabs"
@@ -7125,61 +7094,62 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-directory-view.c:9111
+#: src/file-manager/fm-directory-view.c:9027
 msgid "Delete all selected items permanently"
 msgstr "Trajno obriši sve izabrane stavke"
 
-#: src/file-manager/fm-directory-view.c:9171
+#: src/file-manager/fm-directory-view.c:9084
 msgid "View or modify the properties of the open folder"
 msgstr "Pogledajte ili izmenite osobine otvorene fascikle"
 
-#: src/file-manager/fm-directory-view.c:10481
+#: src/file-manager/fm-directory-view.c:10385
 msgid "Download location?"
 msgstr "Putanja za preuzeto?"
 
-#: src/file-manager/fm-directory-view.c:10484
+#: src/file-manager/fm-directory-view.c:10388
 msgid "You can download it or make a link to it."
 msgstr "Možete ga preuzeti ili napraviti vezu do njega."
 
-#: src/file-manager/fm-directory-view.c:10487
+#: src/file-manager/fm-directory-view.c:10391
 msgid "Make a _Link"
 msgstr "Napravi _vezu"
 
-#: src/file-manager/fm-directory-view.c:10494
+#: src/file-manager/fm-directory-view.c:10398
 msgid "_Download"
 msgstr "Preu_zmi"
 
-#: src/file-manager/fm-directory-view.c:10651
-#: src/file-manager/fm-directory-view.c:10710
-#: src/file-manager/fm-directory-view.c:10823
+#: src/file-manager/fm-directory-view.c:10555
+#: src/file-manager/fm-directory-view.c:10614
+#: src/file-manager/fm-directory-view.c:10727
 msgid "Drag and drop is not supported."
 msgstr "Prevlačenje i puštanje nije podržano."
 
-#: src/file-manager/fm-directory-view.c:10652
+#: src/file-manager/fm-directory-view.c:10556
 msgid "Drag and drop is only supported on local file systems."
 msgstr "Prevlačenje i puštanje je podržano samo za lokalne sisteme datoteka."
 
-#: src/file-manager/fm-directory-view.c:10711
-#: src/file-manager/fm-directory-view.c:10824
+#: src/file-manager/fm-directory-view.c:10615
+#: src/file-manager/fm-directory-view.c:10728
 msgid "An invalid drag type was used."
 msgstr "Upotrebljena je neispravna vrsta prevlačenja."
 
 #. Translators: This is the filename used for when you dnd text to a directory
-#: src/file-manager/fm-directory-view.c:10901
+#: src/file-manager/fm-directory-view.c:10805
 msgid "dropped text.txt"
 msgstr "Prevučeno.txt"
 
 #. Translators: This is the filename used for when you dnd raw
 #. * data to a directory, if the source didn't supply a name.
-#: src/file-manager/fm-directory-view.c:10947
+#.
+#: src/file-manager/fm-directory-view.c:10851
 msgid "dropped data"
 msgstr "Prevučeni podaci"
 
-#: src/file-manager/fm-directory-view.c:11344
+#: src/file-manager/fm-directory-view.c:11246
 msgid "Undo"
 msgstr "Opozovi"
 
-#: src/file-manager/fm-directory-view.c:11364
+#: src/file-manager/fm-directory-view.c:11264
 msgid "Redo"
 msgstr ""
 
@@ -7213,7 +7183,8 @@ msgstr ""
 
 #: src/file-manager/fm-error-reporting.c:72
 #, c-format
-msgid "You do not have the permissions necessary to view the contents of \"%s\"."
+msgid ""
+"You do not have the permissions necessary to view the contents of \"%s\"."
 msgstr "Niste ovlašćeni da pregledate sadržaj „%s“."
 
 #: src/file-manager/fm-error-reporting.c:76
@@ -7238,7 +7209,8 @@ msgstr "Već je u upotrebi ime „%s“ u ovoj fascikli. Uzmite neko drugo ime."
 
 #: src/file-manager/fm-error-reporting.c:125
 #, c-format
-msgid "There is no \"%s\" in this folder. Perhaps it was just moved or deleted?"
+msgid ""
+"There is no \"%s\" in this folder. Perhaps it was just moved or deleted?"
 msgstr ""
 "Ne postoji „%s“ u ovoj fascikli. Možda je upravo premešteno ili obrisano?"
 
@@ -7250,8 +7222,8 @@ msgstr "Niste ovlašćeni da preimenujete „%s“."
 #: src/file-manager/fm-error-reporting.c:136
 #, c-format
 msgid ""
-"The name \"%s\" is not valid because it contains the character \"/\". Please"
-" use a different name."
+"The name \"%s\" is not valid because it contains the character \"/\". Please "
+"use a different name."
 msgstr ""
 "Ime „%s“ je neispravno zato što sadrži znak „/“. Koristite neko drugo ime."
 
@@ -7271,7 +7243,8 @@ msgstr "Stavka se ne može preimenovati."
 
 #: src/file-manager/fm-error-reporting.c:191
 #, c-format
-msgid "You do not have the permissions necessary to change the group of \"%s\"."
+msgid ""
+"You do not have the permissions necessary to change the group of \"%s\"."
 msgstr "Niste ovlašćeni da promenite grupu za „%s“."
 
 #: src/file-manager/fm-error-reporting.c:205
@@ -7310,7 +7283,7 @@ msgstr "Preimenujem „%s“ u „%s“."
 msgid "by _Name"
 msgstr "po _imenu"
 
-#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1760
+#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1750
 msgid "Keep icons sorted by name in rows"
 msgstr "Ikonice uređene prema imenu u redovima"
 
@@ -7318,7 +7291,7 @@ msgstr "Ikonice uređene prema imenu u redovima"
 msgid "by _Size"
 msgstr "po _veličini"
 
-#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1766
+#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1756
 msgid "Keep icons sorted by size in rows"
 msgstr "Ikonice uređene prema veličini u redovima"
 
@@ -7326,7 +7299,7 @@ msgstr "Ikonice uređene prema veličini u redovima"
 msgid "by S_ize on Disk"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1772
+#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1762
 msgid "Keep icons sorted by disk usage in rows"
 msgstr ""
 
@@ -7334,7 +7307,7 @@ msgstr ""
 msgid "by _Type"
 msgstr "prema v_rsti"
 
-#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1778
+#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1768
 msgid "Keep icons sorted by type in rows"
 msgstr "Ikonice uređene prema vrsti u redovima"
 
@@ -7342,7 +7315,7 @@ msgstr "Ikonice uređene prema vrsti u redovima"
 msgid "by Modification _Date"
 msgstr "Prema _datumu izmene"
 
-#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1784
+#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1774
 msgid "Keep icons sorted by modification date in rows"
 msgstr "Ikonice uređene prema datumu izmene u redovima"
 
@@ -7350,7 +7323,7 @@ msgstr "Ikonice uređene prema datumu izmene u redovima"
 msgid "by _Emblems"
 msgstr "prema _obeležjima"
 
-#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1790
+#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1780
 msgid "Keep icons sorted by emblems in rows"
 msgstr "Ikonice uređene prema obeležjima u redovima"
 
@@ -7358,7 +7331,7 @@ msgstr "Ikonice uređene prema obeležjima u redovima"
 msgid "by T_rash Time"
 msgstr "prema _datumu brisanja"
 
-#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1796
+#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1786
 msgid "Keep icons sorted by trash time in rows"
 msgstr "Ikonice uređene prema datumu brisanja u redovima"
 
@@ -7370,146 +7343,146 @@ msgstr ""
 msgid "Keep icons sorted by reversed extension segments in rows"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:794
+#: src/file-manager/fm-icon-view.c:789
 msgid "_Organize Desktop by Name"
 msgstr "P_osredi prema imenu datoteka"
 
-#: src/file-manager/fm-icon-view.c:1709
+#: src/file-manager/fm-icon-view.c:1699
 msgid "Arran_ge Items"
 msgstr "Po_ređaj stavke"
 
-#: src/file-manager/fm-icon-view.c:1711
+#: src/file-manager/fm-icon-view.c:1701
 msgid "Resize Icon..."
 msgstr "Rastegni ikonicu..."
 
-#: src/file-manager/fm-icon-view.c:1712
+#: src/file-manager/fm-icon-view.c:1702
 msgid "Make the selected icon resizable"
 msgstr "Omogućava promenu veličine izabrane ikonice"
 
-#: src/file-manager/fm-icon-view.c:1716 src/file-manager/fm-icon-view.c:1935
+#: src/file-manager/fm-icon-view.c:1706 src/file-manager/fm-icon-view.c:1920
 msgid "Restore Icons' Original Si_zes"
 msgstr "Vrati izvorne veličine ikona"
 
-#: src/file-manager/fm-icon-view.c:1717
+#: src/file-manager/fm-icon-view.c:1707
 msgid "Restore each selected icon to its original size"
 msgstr "Vraća sve izabrane ikonice na izvornu veličinu"
 
-#: src/file-manager/fm-icon-view.c:1721
+#: src/file-manager/fm-icon-view.c:1711
 msgid "_Organize by Name"
 msgstr "Pore_đaj prema imenu"
 
-#: src/file-manager/fm-icon-view.c:1722
+#: src/file-manager/fm-icon-view.c:1712
 msgid "Reposition icons to better fit in the window and avoid overlapping"
 msgstr "Ređa ikonice tako da bolje stanu u prozor i izbegavaj preklapanje"
 
-#: src/file-manager/fm-icon-view.c:1730
+#: src/file-manager/fm-icon-view.c:1720
 msgid "Compact _Layout"
 msgstr "Prikaži _gušće"
 
-#: src/file-manager/fm-icon-view.c:1731
+#: src/file-manager/fm-icon-view.c:1721
 msgid "Toggle using a tighter layout scheme"
 msgstr "Koristi zbijeniji raspored stavki"
 
-#: src/file-manager/fm-icon-view.c:1736
+#: src/file-manager/fm-icon-view.c:1726
 msgid "Re_versed Order"
 msgstr "O_brni redosled"
 
-#: src/file-manager/fm-icon-view.c:1737
+#: src/file-manager/fm-icon-view.c:1727
 msgid "Display icons in the opposite order"
 msgstr "Prikazuje ikonice u suprotnom poretku"
 
-#: src/file-manager/fm-icon-view.c:1742
+#: src/file-manager/fm-icon-view.c:1732
 msgid "_Keep Aligned"
 msgstr "Ču_vaj raspored"
 
-#: src/file-manager/fm-icon-view.c:1743
+#: src/file-manager/fm-icon-view.c:1733
 msgid "Keep icons lined up on a grid"
 msgstr "Raspoređuje ikonice u zamišljenu mrežu"
 
-#: src/file-manager/fm-icon-view.c:1753
+#: src/file-manager/fm-icon-view.c:1743
 msgid "_Manually"
 msgstr "_Ručno"
 
-#: src/file-manager/fm-icon-view.c:1754
+#: src/file-manager/fm-icon-view.c:1744
 msgid "Leave icons wherever they are dropped"
 msgstr "Postavlja ikonice gde god su spuštene"
 
-#: src/file-manager/fm-icon-view.c:1759
+#: src/file-manager/fm-icon-view.c:1749
 msgid "By _Name"
 msgstr "Prema _imenu"
 
-#: src/file-manager/fm-icon-view.c:1765
+#: src/file-manager/fm-icon-view.c:1755
 msgid "By _Size"
 msgstr "Prema _veličini"
 
-#: src/file-manager/fm-icon-view.c:1771
+#: src/file-manager/fm-icon-view.c:1761
 msgid "By S_ize on Disk"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1777
+#: src/file-manager/fm-icon-view.c:1767
 msgid "By _Type"
 msgstr "Prema vr_sti"
 
-#: src/file-manager/fm-icon-view.c:1783
+#: src/file-manager/fm-icon-view.c:1773
 msgid "By Modification _Date"
 msgstr "Prema _datumu izmene"
 
-#: src/file-manager/fm-icon-view.c:1789
+#: src/file-manager/fm-icon-view.c:1779
 msgid "By _Emblems"
 msgstr "Prema _obeležjima"
 
-#: src/file-manager/fm-icon-view.c:1795
+#: src/file-manager/fm-icon-view.c:1785
 msgid "By T_rash Time"
 msgstr "Prema datumu _brisanja"
 
-#: src/file-manager/fm-icon-view.c:1801
+#: src/file-manager/fm-icon-view.c:1791
 msgid "By E_xtension"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1802
+#: src/file-manager/fm-icon-view.c:1792
 msgid "Keep icons sorted by reverse extension segments in rows"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1936
+#: src/file-manager/fm-icon-view.c:1921
 msgid "Restore Icon's Original Si_ze"
 msgstr "Vrati izvornu veličinu ikonice"
 
-#: src/file-manager/fm-icon-view.c:2419
+#: src/file-manager/fm-icon-view.c:2403
 #, c-format
 msgid "pointing at \"%s\""
 msgstr "pokazuje na „%s“"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3438
+#: src/file-manager/fm-icon-view.c:3422
 msgid "_Icons"
 msgstr "_Ikonice"
 
-#: src/file-manager/fm-icon-view.c:3439
+#: src/file-manager/fm-icon-view.c:3423
 msgid "The icon view encountered an error."
 msgstr "Prikaz ikonica je naišao na grešku."
 
-#: src/file-manager/fm-icon-view.c:3440
+#: src/file-manager/fm-icon-view.c:3424
 msgid "The icon view encountered an error while starting up."
 msgstr "Prikaz ikonica je naišao na grešku pri pokretanju."
 
-#: src/file-manager/fm-icon-view.c:3441
+#: src/file-manager/fm-icon-view.c:3425
 msgid "Display this location with the icon view."
 msgstr "Otvori ovu putanju u prikazu pomoću ikonica."
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3453
+#: src/file-manager/fm-icon-view.c:3437
 msgid "_Compact"
 msgstr "Zbij_eno"
 
-#: src/file-manager/fm-icon-view.c:3454
+#: src/file-manager/fm-icon-view.c:3438
 msgid "The compact view encountered an error."
 msgstr "Zbijeni prikaz je naišao na grešku."
 
-#: src/file-manager/fm-icon-view.c:3455
+#: src/file-manager/fm-icon-view.c:3439
 msgid "The compact view encountered an error while starting up."
 msgstr "Zbijeni prikaz je naišao na grešku pri pokretanju."
 
-#: src/file-manager/fm-icon-view.c:3456
+#: src/file-manager/fm-icon-view.c:3440
 msgid "Display this location with the compact view."
 msgstr "Otvori ovu putanju u zbijenom prikazu."
 
@@ -7517,83 +7490,83 @@ msgstr "Otvori ovu putanju u zbijenom prikazu."
 msgid "(Empty)"
 msgstr "(Prazno)"
 
-#: src/file-manager/fm-list-view.c:2558
+#: src/file-manager/fm-list-view.c:2563
 #, c-format
 msgid "%s Visible Columns"
 msgstr "%s prikazanih kolona"
 
-#: src/file-manager/fm-list-view.c:2582
+#: src/file-manager/fm-list-view.c:2587
 msgid "Choose the order of information to appear in this folder:"
 msgstr "Izaberite dodatne podatke za prikaz u u ovoj fascikli:"
 
-#: src/file-manager/fm-list-view.c:2636
+#: src/file-manager/fm-list-view.c:2641
 msgid "Visible _Columns..."
 msgstr "Prikazane _kolone..."
 
-#: src/file-manager/fm-list-view.c:2637
+#: src/file-manager/fm-list-view.c:2642
 msgid "Select the columns visible in this folder"
 msgstr "Bira kolone prikazane u ovoj fascikli"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-list-view.c:3500
+#: src/file-manager/fm-list-view.c:3503
 msgid "_List"
 msgstr "Spis_ak"
 
-#: src/file-manager/fm-list-view.c:3501
+#: src/file-manager/fm-list-view.c:3504
 msgid "The list view encountered an error."
 msgstr "Prikaz spiska je naišao na grešku."
 
-#: src/file-manager/fm-list-view.c:3502
+#: src/file-manager/fm-list-view.c:3505
 msgid "The list view encountered an error while starting up."
 msgstr "Prikaz spiska je naišao na grešku pri pokretanju."
 
-#: src/file-manager/fm-list-view.c:3503
+#: src/file-manager/fm-list-view.c:3506
 msgid "Display this location with the list view."
 msgstr "Otvori ovu putanju u prikazu pomoću spiska."
 
-#: src/file-manager/fm-properties-window.c:514
+#: src/file-manager/fm-properties-window.c:511
 msgid "You cannot assign more than one custom icon at a time!"
 msgstr "Ne možete u isto vreme dodeliti više od jedne proizvoljne ikonice!"
 
-#: src/file-manager/fm-properties-window.c:648
+#: src/file-manager/fm-properties-window.c:645
 msgid "_Name:"
 msgid_plural "_Names:"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-properties-window.c:1004
+#: src/file-manager/fm-properties-window.c:1001
 msgid "Properties"
 msgstr "Osobine"
 
-#: src/file-manager/fm-properties-window.c:1016
+#: src/file-manager/fm-properties-window.c:1013
 #, c-format
 msgid "%s Properties"
 msgstr "Osobine za %s"
 
-#: src/file-manager/fm-properties-window.c:1346
+#: src/file-manager/fm-properties-window.c:1343
 #, c-format
 msgctxt "MIME type description (MIME type)"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/file-manager/fm-properties-window.c:1554
+#: src/file-manager/fm-properties-window.c:1551
 msgid "Cancel Group Change?"
 msgstr "Odustani od izmene grupe?"
 
-#: src/file-manager/fm-properties-window.c:1969
+#: src/file-manager/fm-properties-window.c:1966
 msgid "Cancel Owner Change?"
 msgstr "Odustani od izmene vlasnika?"
 
-#: src/file-manager/fm-properties-window.c:2296
+#: src/file-manager/fm-properties-window.c:2293
 msgid "nothing"
 msgstr "ništa"
 
-#: src/file-manager/fm-properties-window.c:2298
+#: src/file-manager/fm-properties-window.c:2295
 msgid "unreadable"
 msgstr "nečitljiv"
 
-#: src/file-manager/fm-properties-window.c:2317
+#: src/file-manager/fm-properties-window.c:2314
 #, c-format
 msgid "%'d item, with size %s (%s on disk)"
 msgid_plural "%'d items, totalling %s (%s on disk)"
@@ -7601,228 +7574,229 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/file-manager/fm-properties-window.c:2327
+#: src/file-manager/fm-properties-window.c:2324
 msgid "(some contents unreadable)"
 msgstr "(deo sadržaja nečitljiv)"
 
-#: src/file-manager/fm-properties-window.c:2344
+#: src/file-manager/fm-properties-window.c:2341
 msgid "Contents:"
 msgstr "Sadržaj:"
 
 #. Translators: "used" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3120
+#: src/file-manager/fm-properties-window.c:3117
 msgid "used"
 msgstr "zauzeto"
 
 #. Translators: "free" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3131
+#: src/file-manager/fm-properties-window.c:3128
 msgid "free"
 msgstr "slobodno"
 
-#: src/file-manager/fm-properties-window.c:3135
+#: src/file-manager/fm-properties-window.c:3132
 msgid "Total capacity:"
 msgstr "Ukupan kapacitet:"
 
-#: src/file-manager/fm-properties-window.c:3149
+#: src/file-manager/fm-properties-window.c:3146
 msgid "Filesystem type:"
 msgstr "Sistem datoteka:"
 
-#: src/file-manager/fm-properties-window.c:3234
+#: src/file-manager/fm-properties-window.c:3231
 msgid "Basic"
 msgstr "Osnovno"
 
-#: src/file-manager/fm-properties-window.c:3296
+#: src/file-manager/fm-properties-window.c:3293
 msgid "Link target:"
 msgstr "Meta veze:"
 
-#: src/file-manager/fm-properties-window.c:3310
+#: src/file-manager/fm-properties-window.c:3307
 msgid "Size on Disk:"
 msgstr ""
 
-#: src/file-manager/fm-properties-window.c:3325
+#: src/file-manager/fm-properties-window.c:3322
 msgid "Volume:"
 msgstr "Disk:"
 
-#: src/file-manager/fm-properties-window.c:3334
+#: src/file-manager/fm-properties-window.c:3331
 msgid "Accessed:"
 msgstr "Poslednji pristup:"
 
-#: src/file-manager/fm-properties-window.c:3338
+#: src/file-manager/fm-properties-window.c:3335
 msgid "Modified:"
 msgstr "Izmenjen:"
 
-#: src/file-manager/fm-properties-window.c:3347
+#: src/file-manager/fm-properties-window.c:3344
 msgid "Free space:"
 msgstr "Slobodan prostor:"
 
-#: src/file-manager/fm-properties-window.c:3875
+#: src/file-manager/fm-properties-window.c:3869
 msgid "_Read"
 msgstr "_Čitanje"
 
-#: src/file-manager/fm-properties-window.c:3877
+#: src/file-manager/fm-properties-window.c:3871
 msgid "_Write"
 msgstr "_Upis"
 
-#: src/file-manager/fm-properties-window.c:3879
+#: src/file-manager/fm-properties-window.c:3873
 msgid "E_xecute"
 msgstr "_Izvršavanje"
 
 #. Translators: this gets concatenated to "no read",
 #. * "no access", etc. (see following strings)
-#: src/file-manager/fm-properties-window.c:4147
-#: src/file-manager/fm-properties-window.c:4158
-#: src/file-manager/fm-properties-window.c:4170
+#.
+#: src/file-manager/fm-properties-window.c:4141
+#: src/file-manager/fm-properties-window.c:4152
+#: src/file-manager/fm-properties-window.c:4164
 msgid "no "
 msgstr "zabranjeno "
 
-#: src/file-manager/fm-properties-window.c:4150
+#: src/file-manager/fm-properties-window.c:4144
 msgid "list"
 msgstr "listanje"
 
-#: src/file-manager/fm-properties-window.c:4152
+#: src/file-manager/fm-properties-window.c:4146
 msgid "read"
 msgstr "čitanje"
 
-#: src/file-manager/fm-properties-window.c:4161
+#: src/file-manager/fm-properties-window.c:4155
 msgid "create/delete"
 msgstr "stvaranje/brisanje"
 
-#: src/file-manager/fm-properties-window.c:4163
+#: src/file-manager/fm-properties-window.c:4157
 msgid "write"
 msgstr "upis"
 
-#: src/file-manager/fm-properties-window.c:4172
+#: src/file-manager/fm-properties-window.c:4166
 msgid "access"
 msgstr "pristupanje"
 
-#: src/file-manager/fm-properties-window.c:4220
+#: src/file-manager/fm-properties-window.c:4214
 msgid "Access:"
 msgstr "Dozvole:"
 
-#: src/file-manager/fm-properties-window.c:4222
+#: src/file-manager/fm-properties-window.c:4216
 msgid "Folder access:"
 msgstr "Dozvole za fasciklu:"
 
-#: src/file-manager/fm-properties-window.c:4224
+#: src/file-manager/fm-properties-window.c:4218
 msgid "File access:"
 msgstr "Dozvole za datoteku:"
 
-#: src/file-manager/fm-properties-window.c:4242
+#: src/file-manager/fm-properties-window.c:4236
 msgid "List files only"
 msgstr "Samo prikaz liste datoteka"
 
-#: src/file-manager/fm-properties-window.c:4244
+#: src/file-manager/fm-properties-window.c:4238
 msgid "Access files"
 msgstr "Pristup datotekama"
 
-#: src/file-manager/fm-properties-window.c:4246
+#: src/file-manager/fm-properties-window.c:4240
 msgid "Create and delete files"
 msgstr "Stvaranje i brisanje datoteka"
 
-#: src/file-manager/fm-properties-window.c:4253
+#: src/file-manager/fm-properties-window.c:4247
 msgid "Read-only"
 msgstr "Samo čitanje"
 
-#: src/file-manager/fm-properties-window.c:4255
+#: src/file-manager/fm-properties-window.c:4249
 msgid "Read and write"
 msgstr "Čitanje i upisivanje"
 
-#: src/file-manager/fm-properties-window.c:4320
+#: src/file-manager/fm-properties-window.c:4314
 msgid "Special flags:"
 msgstr "Naročite oznake:"
 
-#: src/file-manager/fm-properties-window.c:4322
+#: src/file-manager/fm-properties-window.c:4316
 msgid "Set _user ID"
 msgstr "Postavi _IB korisnika (SUID)"
 
-#: src/file-manager/fm-properties-window.c:4323
+#: src/file-manager/fm-properties-window.c:4317
 msgid "Set gro_up ID"
 msgstr "Postavi IB _grupe (SGID)"
 
-#: src/file-manager/fm-properties-window.c:4324
+#: src/file-manager/fm-properties-window.c:4318
 msgid "_Sticky"
 msgstr "_Lepljiv"
 
-#: src/file-manager/fm-properties-window.c:4399
-#: src/file-manager/fm-properties-window.c:4591
+#: src/file-manager/fm-properties-window.c:4393
+#: src/file-manager/fm-properties-window.c:4585
 msgid "_Owner:"
 msgstr "_Vlasnik:"
 
-#: src/file-manager/fm-properties-window.c:4407
-#: src/file-manager/fm-properties-window.c:4497
-#: src/file-manager/fm-properties-window.c:4600
+#: src/file-manager/fm-properties-window.c:4401
+#: src/file-manager/fm-properties-window.c:4491
+#: src/file-manager/fm-properties-window.c:4594
 msgid "Owner:"
 msgstr "Vlasnik:"
 
-#: src/file-manager/fm-properties-window.c:4431
-#: src/file-manager/fm-properties-window.c:4615
+#: src/file-manager/fm-properties-window.c:4425
+#: src/file-manager/fm-properties-window.c:4609
 msgid "_Group:"
 msgstr "_Grupa:"
 
-#: src/file-manager/fm-properties-window.c:4439
-#: src/file-manager/fm-properties-window.c:4498
-#: src/file-manager/fm-properties-window.c:4623
+#: src/file-manager/fm-properties-window.c:4433
+#: src/file-manager/fm-properties-window.c:4492
+#: src/file-manager/fm-properties-window.c:4617
 msgid "Group:"
 msgstr "Grupa:"
 
-#: src/file-manager/fm-properties-window.c:4463
+#: src/file-manager/fm-properties-window.c:4457
 msgid "Others"
 msgstr "Ostali"
 
-#: src/file-manager/fm-properties-window.c:4478
+#: src/file-manager/fm-properties-window.c:4472
 msgid "Execute:"
 msgstr "Pokretanje:"
 
-#: src/file-manager/fm-properties-window.c:4481
+#: src/file-manager/fm-properties-window.c:4475
 msgid "Allow _executing file as program"
 msgstr "Dozvoli _pokretanje datoteke kao programa"
 
-#: src/file-manager/fm-properties-window.c:4499
+#: src/file-manager/fm-properties-window.c:4493
 msgid "Others:"
 msgstr "Ostali:"
 
-#: src/file-manager/fm-properties-window.c:4639
+#: src/file-manager/fm-properties-window.c:4633
 msgid "Folder Permissions:"
 msgstr "Ovlašćenja nad fasciklom:"
 
-#: src/file-manager/fm-properties-window.c:4646
+#: src/file-manager/fm-properties-window.c:4640
 msgid "File Permissions:"
 msgstr "Ovlašćenja nad datotekom:"
 
-#: src/file-manager/fm-properties-window.c:4655
+#: src/file-manager/fm-properties-window.c:4649
 msgid "Text view:"
 msgstr "Tekstualni pregled:"
 
-#: src/file-manager/fm-properties-window.c:4803
+#: src/file-manager/fm-properties-window.c:4797
 msgid "You are not the owner, so you cannot change these permissions."
 msgstr "Niste vlasnik, pa ne možete izmeniti ova ovlašćenja."
 
-#: src/file-manager/fm-properties-window.c:4823
+#: src/file-manager/fm-properties-window.c:4817
 msgid "SELinux context:"
 msgstr "SELinuks kontekst:"
 
-#: src/file-manager/fm-properties-window.c:4828
+#: src/file-manager/fm-properties-window.c:4822
 msgid "Last changed:"
 msgstr "Poslednja promena:"
 
-#: src/file-manager/fm-properties-window.c:4841
+#: src/file-manager/fm-properties-window.c:4835
 msgid "Apply Permissions to Enclosed Files"
 msgstr "Primeni ovlašćenja na sve sadržane datoteke"
 
-#: src/file-manager/fm-properties-window.c:4855
+#: src/file-manager/fm-properties-window.c:4849
 #, c-format
 msgid "The permissions of \"%s\" could not be determined."
 msgstr "Ne može utvrditi ovlašćenja za „%s“."
 
-#: src/file-manager/fm-properties-window.c:4858
+#: src/file-manager/fm-properties-window.c:4852
 msgid "The permissions of the selected file could not be determined."
 msgstr "Ne može utvrditi ovlašćenja za izabranu datoteku."
 
-#: src/file-manager/fm-properties-window.c:5448
+#: src/file-manager/fm-properties-window.c:5442
 msgid "Creating Properties window."
 msgstr "Obrazujem prozor sa osobinama."
 
-#: src/file-manager/fm-properties-window.c:5743
+#: src/file-manager/fm-properties-window.c:5738
 msgid "Select Custom Icon"
 msgstr "Izaberite vašu ikonicu"
 
