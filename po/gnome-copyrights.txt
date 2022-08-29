@@ -118,7 +118,7 @@
 ========== be@latin.po ==========
 # Biełaruski pierakład Baula.
 # Copyright (C) 2007 THE Baul'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the marco.cafe package.
+# This file is distributed under the same license as the croma.cafe package.
 # Alaksandar Navicki <zolak@lacinka.org> & Łacinka.org 2007.
 #
 
