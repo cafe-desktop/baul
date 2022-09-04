@@ -1386,13 +1386,7 @@ lay_down_icons_horizontal (BaulIconContainer *container,
     }
     else
     {
-        int num_columns;
-
-        num_columns = floor(canvas_width / STANDARD_ICON_GRID_WIDTH);
-        num_columns = fmax(num_columns, 1);
-        /* Minimum of one column */
-        grid_width = canvas_width / num_columns - 1;
-        /* -1 prevents jitter */
+        grid_width = STANDARD_ICON_GRID_WIDTH;
     }
 
     gridded_layout = !baul_icon_container_is_tighter_layout (container);
