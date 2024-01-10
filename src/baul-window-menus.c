@@ -567,7 +567,7 @@ action_about_baul_callback (CtkAction *action,
                                          "your computer and online."),
                            "copyright", _("Copyright \xC2\xA9 1999-2009 The Nautilus authors\n"
                                           "Copyright \xC2\xA9 2011-2020 The Caja authors\n"
-                                          "Copyright \xC2\xA9 2022 Pablo Barciela"),
+                                          "Copyright \xC2\xA9 2022-2024 Pablo Barciela"),
                            "license", license_trans,
                            "wrap-license", TRUE,
                            "authors", authors,
