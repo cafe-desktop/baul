@@ -113,13 +113,13 @@
     </key>
     <key name="show-icon-text" enum="org.cafe.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
-      <default>'local-only'</default>
+      <default>'never'</default>
       <summary>When to show preview text in icons</summary>
       <description>Speed tradeoff for when to show a preview of text file contents in the file's icon. If set to "always" then always show previews,  even if the folder is on a remote server. If set to "local-only" then only show previews for local file systems. If set to "never" then never bother to read preview data.</description>
     </key>
     <key name="show-directory-item-counts"  enum="org.cafe.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
-      <default>'local-only'</default>
+      <default>'never'</default>
       <summary>When to show number of items in a folder</summary>
       <description>Speed tradeoff for when to show the number of items in a  folder. If set to "always" then always show item counts,  even if the folder is on a remote server.  If set to "local-only" then only show counts for local file systems. If set to "never" then never bother to compute item counts.</description>
     </key>
@@ -155,7 +155,7 @@
     </key>
     <key name="show-image-thumbnails" enum="org.cafe.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
-      <default>'local-only'</default>
+      <default>'never'</default>
       <summary>When to show thumbnails of image files</summary>
       <description>Speed tradeoff for when to show an image file as a thumbnail. If set to "always" then always thumbnail,  even if the folder is on a remote server. If set to "local-only" then only show thumbnails for local file systems. If set to "never" then never bother to thumbnail images, just use a generic icon.</description>
     </key>
@@ -166,7 +166,7 @@
     </key>
     <key name="preview-sound" enum="org.cafe.baul.SpeedTradeoff">
       <aliases><alias value='local_only' target='local-only'/></aliases>
-      <default>'local-only'</default>
+      <default>'never'</default>
       <summary>Whether to preview sounds when mousing over an icon</summary>
       <description>Speed tradeoff for when to preview a sound file when mousing over a files icon. If set to "always" then always plays the sound,  even if the file is on a remote server. If set to "local-only" then only plays previews on local file systems. If set to "never" then it never previews sound.</description>
     </key>
