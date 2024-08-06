@@ -1,0 +1,4 @@
+GFileInfo: Fix make check
+
+based in caja commit:
+https://github.com/mate-desktop/caja/commit/1096ea06a10a68071ae304727a81a73375bfcee4

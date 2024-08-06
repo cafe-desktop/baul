@@ -1,0 +1,7 @@
+baul gschema: disable previews:
+
+set default to 'never':
+show-icon-text
+show-directory-item-counts
+show-image-thumbnails
+preview-sound
