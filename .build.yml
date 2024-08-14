@@ -18,6 +18,8 @@ requires:
     - gtk-doc-tools
     - intltool
     - iso-codes
+    - libatk-bridge2.0-dev
+    - libatk1.0-dev
     - libdconf-dev
     - libexempi-dev
     - libexif-dev
