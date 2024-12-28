@@ -40,7 +40,7 @@
  */
 
 static void
-baul_info_provider_base_init (gpointer g_class)
+baul_info_provider_base_init (gpointer g_class G_GNUC_UNUSED)
 {
 }
 
