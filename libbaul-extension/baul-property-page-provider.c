@@ -39,7 +39,7 @@
  */
 
 static void
-baul_property_page_provider_base_init (gpointer g_class)
+baul_property_page_provider_base_init (gpointer g_class G_GNUC_UNUSED)
 {
 }
 
