@@ -99,9 +99,9 @@ eel_wrap_table_finalize (GObject *object)
 
 static void
 eel_wrap_table_set_property (GObject      *object,
-                             guint         property_id,
-                             const GValue *value,
-                             GParamSpec   *pspec)
+			     guint         property_id,
+			     const GValue *value,
+			     GParamSpec   *pspec G_GNUC_UNUSED)
 {
     EelWrapTable *wrap_table;
 
@@ -138,9 +138,9 @@ eel_wrap_table_set_property (GObject      *object,
 
 static void
 eel_wrap_table_get_property (GObject    *object,
-                             guint       property_id,
-                             GValue     *value,
-                             GParamSpec *pspec)
+			     guint       property_id,
+			     GValue     *value,
+			     GParamSpec *pspec G_GNUC_UNUSED)
 {
     EelWrapTable *wrap_table;
 
@@ -393,9 +393,9 @@ eel_wrap_table_remove (CtkContainer *container,
 
 static void
 eel_wrap_table_forall (CtkContainer *container,
-                       gboolean include_internals,
-                       CtkCallback callback,
-                       gpointer callback_data)
+		       gboolean      include_internals G_GNUC_UNUSED,
+		       CtkCallback   callback,
+		       gpointer      callback_data)
 {
     EelWrapTable *wrap_table;
     GList *node;
@@ -415,7 +415,7 @@ eel_wrap_table_forall (CtkContainer *container,
 }
 
 static GType
-eel_wrap_table_child_type (CtkContainer   *container)
+eel_wrap_table_child_type (CtkContainer *container G_GNUC_UNUSED)
 {
     return CTK_TYPE_WIDGET;
 }
@@ -757,9 +757,9 @@ wrap_table_child_visible_in (CtkWidget *child, CtkWidget *scrolled)
 }
 
 static gboolean
-wrap_table_child_focus_in (CtkWidget *widget,
-                           CdkEventFocus *event,
-                           gpointer data)
+wrap_table_child_focus_in (CtkWidget     *widget,
+			   CdkEventFocus *event G_GNUC_UNUSED,
+			   gpointer       data G_GNUC_UNUSED)
 {
     gint x, y;
     CtkWidget *container, *viewport = NULL;
