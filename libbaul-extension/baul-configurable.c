@@ -38,7 +38,7 @@
  */
 
 static void
-baul_configurable_base_init (gpointer g_class)
+baul_configurable_base_init (gpointer g_class G_GNUC_UNUSED)
 {
 }
 
