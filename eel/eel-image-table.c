@@ -181,7 +181,7 @@ eel_image_table_remove (CtkContainer *container,
 }
 
 static GType
-eel_image_table_child_type (CtkContainer *container)
+eel_image_table_child_type (CtkContainer *container G_GNUC_UNUSED)
 {
     return EEL_TYPE_LABELED_IMAGE;
 }
