@@ -482,8 +482,8 @@ init_fade (EelBackground *self)
 }
 
 static void
-on_fade_finished (CafeBGCrossfade *fade,
-                  CdkWindow       *window,
+on_fade_finished (CafeBGCrossfade *fade G_GNUC_UNUSED,
+		  CdkWindow       *window,
 		  gpointer         user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
@@ -572,8 +572,8 @@ background_changed_cb (EelBackground *self)
 }
 
 static void
-widget_queue_background_change (CtkWidget *widget,
-                                gpointer   user_data)
+widget_queue_background_change (CtkWidget *widget G_GNUC_UNUSED,
+				gpointer   user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
 
@@ -597,8 +597,8 @@ widget_style_updated_cb (CtkWidget *widget,
 }
 
 static void
-eel_background_changed (CafeBG *bg,
-                        gpointer user_data)
+eel_background_changed (CafeBG  *bg G_GNUC_UNUSED,
+			gpointer user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
 
@@ -607,7 +607,8 @@ eel_background_changed (CafeBG *bg,
 }
 
 static void
-eel_background_transitioned (CafeBG *bg, gpointer user_data)
+eel_background_transitioned (CafeBG  *bg G_GNUC_UNUSED,
+			     gpointer user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
 
@@ -616,7 +617,8 @@ eel_background_transitioned (CafeBG *bg, gpointer user_data)
 }
 
 static void
-screen_size_changed (CdkScreen *screen, EelBackground *background)
+screen_size_changed (CdkScreen     *screen G_GNUC_UNUSED,
+		     EelBackground *background)
 {
     int w, h;
 
@@ -692,7 +694,7 @@ widget_unrealize_cb (CtkWidget *widget,
 }
 
 static void
-on_widget_destroyed (CtkWidget *widget,
+on_widget_destroyed (CtkWidget *widget G_GNUC_UNUSED,
                      gpointer   user_data)
 {
     EelBackground *self = EEL_BACKGROUND (user_data);
