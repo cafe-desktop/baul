@@ -384,7 +384,10 @@ get_file_path_for_mode (const BaulCustomizationData *data,
 
 /* utility to make an attractive pattern image by compositing with a frame */
 GdkPixbuf*
-baul_customization_make_pattern_chit (GdkPixbuf *pattern_tile, GdkPixbuf *frame, gboolean dragging, gboolean is_reset)
+baul_customization_make_pattern_chit (GdkPixbuf *pattern_tile,
+				      GdkPixbuf *frame,
+				      gboolean   dragging,
+				      gboolean   is_reset G_GNUC_UNUSED)
 {
     GdkPixbuf *pixbuf, *temp_pixbuf;
     int frame_width, frame_height;
