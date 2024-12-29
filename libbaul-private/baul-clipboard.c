@@ -103,29 +103,29 @@ text_view_select_all_callback (gpointer target)
 }
 
 static void
-action_cut_callback (CtkAction *action,
-                     gpointer callback_data)
+action_cut_callback (CtkAction *action G_GNUC_UNUSED,
+		     gpointer   callback_data)
 {
     cut_callback (callback_data);
 }
 
 static void
-action_copy_callback (CtkAction *action,
-                      gpointer callback_data)
+action_copy_callback (CtkAction *action G_GNUC_UNUSED,
+		      gpointer   callback_data)
 {
     copy_callback (callback_data);
 }
 
 static void
-action_paste_callback (CtkAction *action,
-                       gpointer callback_data)
+action_paste_callback (CtkAction *action G_GNUC_UNUSED,
+		       gpointer callback_data)
 {
     paste_callback (callback_data);
 }
 
 static void
-action_select_all_callback (CtkAction *action,
-                            gpointer callback_data)
+action_select_all_callback (CtkAction *action G_GNUC_UNUSED,
+			    gpointer   callback_data)
 {
     TargetCallbackData *target_data;
 
@@ -138,9 +138,9 @@ action_select_all_callback (CtkAction *action,
 }
 
 static void
-received_clipboard_contents (CtkClipboard     *clipboard,
-                             CtkSelectionData *selection_data,
-                             gpointer          data)
+received_clipboard_contents (CtkClipboard     *clipboard G_GNUC_UNUSED,
+			     CtkSelectionData *selection_data,
+			     gpointer          data)
 {
     CtkActionGroup *action_group;
     CtkAction *action;
@@ -262,18 +262,18 @@ text_buffer_update_sensitivity (CtkTextBuffer *buffer,
 
 static void
 text_buffer_delete_range (CtkTextBuffer *buffer,
-                          CtkTextIter   *iter1,
-                          CtkTextIter   *iter2,
-                          TargetCallbackData *target_data)
+			  CtkTextIter   *iter1 G_GNUC_UNUSED,
+			  CtkTextIter   *iter2 G_GNUC_UNUSED,
+			  TargetCallbackData *target_data)
 {
     text_buffer_update_sensitivity (buffer, target_data);
 }
 
 static void
-text_buffer_mark_set (CtkTextBuffer *buffer,
-                      CtkTextIter *iter,
-                      CtkTextMark *mark,
-                      TargetCallbackData *target_data)
+text_buffer_mark_set (CtkTextBuffer      *buffer,
+		      CtkTextIter        *iter G_GNUC_UNUSED,
+		      CtkTextMark        *mark,
+		      TargetCallbackData *target_data)
 {
     /* anonymous marks with NULL names refer to cursor moves */
     if (ctk_text_mark_get_name (mark) != NULL)
@@ -371,9 +371,9 @@ merge_out_clipboard_menu_items (GObject *widget_as_object,
 }
 
 static gboolean
-focus_changed_callback (CtkWidget *widget,
-                        CdkEventAny *event,
-                        gpointer callback_data)
+focus_changed_callback (CtkWidget   *widget,
+			CdkEventAny *event G_GNUC_UNUSED,
+			gpointer     callback_data)
 {
     /* Connect the component to the container if the widget has focus. */
     if (ctk_widget_has_focus (widget))
@@ -419,9 +419,9 @@ selection_changed_callback (CtkWidget *widget,
 }
 
 static void
-owner_change_callback (CtkClipboard        *clipboard,
-                       CdkEventOwnerChange *event,
-                       gpointer callback_data)
+owner_change_callback (CtkClipboard        *clipboard G_GNUC_UNUSED,
+		       CdkEventOwnerChange *event G_GNUC_UNUSED,
+		       gpointer             callback_data)
 {
     TargetCallbackData *target_data;
 
