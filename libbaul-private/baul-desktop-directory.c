@@ -285,9 +285,9 @@ merged_monitor_destroy (MergedMonitor *monitor)
 }
 
 static void
-build_merged_callback_list (BaulDirectory *directory,
-                            GList *file_list,
-                            gpointer callback_data)
+build_merged_callback_list (BaulDirectory *directory G_GNUC_UNUSED,
+			    GList         *file_list,
+			    gpointer       callback_data)
 {
     GList **merged_list;
 
@@ -452,25 +452,25 @@ desktop_finalize (GObject *object)
 }
 
 static void
-done_loading_callback (BaulDirectory *real_directory,
-                       BaulDesktopDirectory *desktop)
+done_loading_callback (BaulDirectory        *real_directory G_GNUC_UNUSED,
+		       BaulDesktopDirectory *desktop)
 {
     baul_directory_emit_done_loading (BAUL_DIRECTORY (desktop));
 }
 
 
 static void
-forward_files_added_cover (BaulDirectory *real_directory,
-                           GList *files,
-                           gpointer callback_data)
+forward_files_added_cover (BaulDirectory *real_directory G_GNUC_UNUSED,
+			   GList         *files,
+			   gpointer       callback_data)
 {
     baul_directory_emit_files_added (BAUL_DIRECTORY (callback_data), files);
 }
 
 static void
-forward_files_changed_cover (BaulDirectory *real_directory,
-                             GList *files,
-                             gpointer callback_data)
+forward_files_changed_cover (BaulDirectory *real_directory G_GNUC_UNUSED,
+			     GList         *files,
+			     gpointer       callback_data)
 {
     baul_directory_emit_files_changed (BAUL_DIRECTORY (callback_data), files);
 }
