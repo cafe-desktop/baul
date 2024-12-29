@@ -204,26 +204,26 @@ remove_mount_link (BaulDesktopLinkMonitor *monitor,
 
 
 static void
-mount_added_callback (GVolumeMonitor *volume_monitor,
-                      GMount *mount,
-                      BaulDesktopLinkMonitor *monitor)
+mount_added_callback (GVolumeMonitor         *volume_monitor G_GNUC_UNUSED,
+		      GMount                 *mount,
+		      BaulDesktopLinkMonitor *monitor)
 {
     create_mount_link (monitor, mount);
 }
 
 
 static void
-mount_removed_callback (GVolumeMonitor *volume_monitor,
-                        GMount *mount,
-                        BaulDesktopLinkMonitor *monitor)
+mount_removed_callback (GVolumeMonitor         *volume_monitor G_GNUC_UNUSED,
+			GMount                 *mount,
+			BaulDesktopLinkMonitor *monitor)
 {
     remove_mount_link (monitor, mount);
 }
 
 static void
-mount_changed_callback (GVolumeMonitor *volume_monitor,
-                        GMount *mount,
-                        BaulDesktopLinkMonitor *monitor)
+mount_changed_callback (GVolumeMonitor         *volume_monitor G_GNUC_UNUSED,
+			GMount                 *mount,
+			BaulDesktopLinkMonitor *monitor)
 {
     /* TODO: update the mount with other details */
 
@@ -235,10 +235,10 @@ mount_changed_callback (GVolumeMonitor *volume_monitor,
 }
 
 static void
-update_link_visibility (BaulDesktopLinkMonitor *monitor,
-                        BaulDesktopLink       **link_ref,
-                        BaulDesktopLinkType     link_type,
-                        const char                 *preference_key)
+update_link_visibility (BaulDesktopLinkMonitor *monitor G_GNUC_UNUSED,
+			BaulDesktopLink       **link_ref,
+			BaulDesktopLinkType     link_type,
+			const char             *preference_key)
 {
     if (g_settings_get_boolean (baul_desktop_preferences, preference_key))
     {
@@ -360,7 +360,8 @@ create_link_and_add_preference (BaulDesktopLink   **link_ref,
 }
 
 static void
-baul_desktop_link_monitor_init (gpointer object, gpointer klass)
+baul_desktop_link_monitor_init (gpointer object,
+				gpointer klass G_GNUC_UNUSED)
 {
     BaulDesktopLinkMonitor *monitor;
     GList *l, *mounts;
@@ -432,10 +433,10 @@ baul_desktop_link_monitor_init (gpointer object, gpointer klass)
 }
 
 static void
-remove_link_and_preference (BaulDesktopLink       **link_ref,
-                            const char             *preference_key,
-                            GCallback               callback,
-                            gpointer                callback_data)
+remove_link_and_preference (BaulDesktopLink **link_ref,
+			    const char       *preference_key G_GNUC_UNUSED,
+			    GCallback         callback,
+			    gpointer          callback_data)
 {
     if (*link_ref != NULL)
     {
