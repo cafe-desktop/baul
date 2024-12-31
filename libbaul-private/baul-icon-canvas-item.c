@@ -359,10 +359,10 @@ baul_icon_canvas_item_invalidate_label_size (BaulIconCanvasItem *item)
 
 /* Set property handler for the icon item. */
 static void
-baul_icon_canvas_item_set_property (GObject        *object,
-                                    guint           property_id,
-                                    const GValue   *value,
-                                    GParamSpec     *pspec)
+baul_icon_canvas_item_set_property (GObject      *object,
+				    guint         property_id,
+				    const GValue *value,
+				    GParamSpec   *pspec G_GNUC_UNUSED)
 {
     BaulIconCanvasItem *item;
     BaulIconCanvasItemPrivate *details;
@@ -464,10 +464,10 @@ baul_icon_canvas_item_set_property (GObject        *object,
 
 /* Get property handler for the icon item */
 static void
-baul_icon_canvas_item_get_property (GObject        *object,
-                                    guint           property_id,
-                                    GValue         *value,
-                                    GParamSpec     *pspec)
+baul_icon_canvas_item_get_property (GObject    *object,
+				    guint       property_id,
+				    GValue     *value,
+				    GParamSpec *pspec G_GNUC_UNUSED)
 {
     BaulIconCanvasItemPrivate *details;
 
@@ -1905,9 +1905,9 @@ draw_embedded_text (BaulIconCanvasItem *item,
 
 /* Draw the icon item for non-anti-aliased mode. */
 static void
-baul_icon_canvas_item_draw (EelCanvasItem *item,
-                            cairo_t *cr,
-                            cairo_region_t *region)
+baul_icon_canvas_item_draw (EelCanvasItem  *item,
+			    cairo_t        *cr,
+			    cairo_region_t *region G_GNUC_UNUSED)
 {
     BaulIconContainer *container;
     BaulIconCanvasItem *icon_item;
@@ -2288,8 +2288,12 @@ hit_test (BaulIconCanvasItem *icon_item, EelIRect canvas_rect)
 
 /* Point handler for the icon canvas item. */
 static double
-baul_icon_canvas_item_point (EelCanvasItem *item, double x, double y, int cx, int cy,
-                             EelCanvasItem **actual_item)
+baul_icon_canvas_item_point (EelCanvasItem  *item,
+			     double          x G_GNUC_UNUSED,
+			     double          y G_GNUC_UNUSED,
+			     int             cx,
+			     int             cy,
+			     EelCanvasItem **actual_item)
 {
     EelIRect canvas_rect;
 
@@ -2975,14 +2979,14 @@ baul_icon_canvas_item_accessible_do_action (AtkAction *accessible, int i)
 }
 
 static int
-baul_icon_canvas_item_accessible_get_n_actions (AtkAction *accessible)
+baul_icon_canvas_item_accessible_get_n_actions (AtkAction *accessible G_GNUC_UNUSED)
 {
     return LAST_ACTION;
 }
 
 static const char *
 baul_icon_canvas_item_accessible_action_get_description (AtkAction *accessible,
-        int i)
+							 int        i)
 {
     BaulIconCanvasItemAccessiblePrivate *priv;
 
@@ -3000,7 +3004,8 @@ baul_icon_canvas_item_accessible_action_get_description (AtkAction *accessible,
 }
 
 static const char *
-baul_icon_canvas_item_accessible_action_get_name (AtkAction *accessible, int i)
+baul_icon_canvas_item_accessible_action_get_name (AtkAction *accessible G_GNUC_UNUSED,
+						  int        i)
 {
     g_assert (i < LAST_ACTION);
 
@@ -3008,8 +3013,8 @@ baul_icon_canvas_item_accessible_action_get_name (AtkAction *accessible, int i)
 }
 
 static const char *
-baul_icon_canvas_item_accessible_action_get_keybinding (AtkAction *accessible,
-        int i)
+baul_icon_canvas_item_accessible_action_get_keybinding (AtkAction *accessible G_GNUC_UNUSED,
+							int        i)
 {
     g_assert (i < LAST_ACTION);
 
@@ -3603,7 +3608,7 @@ baul_icon_canvas_item_accessible_class_init (BaulIconCanvasItemAccessibleClass *
 }
 
 static void
-baul_icon_canvas_item_accessible_init (BaulIconCanvasItemAccessible *self)
+baul_icon_canvas_item_accessible_init (BaulIconCanvasItemAccessible *self G_GNUC_UNUSED)
 {
 }
 
@@ -3653,7 +3658,7 @@ baul_icon_canvas_item_accessible_factory_get_accessible_type (void)
 }
 
 static void
-baul_icon_canvas_item_accessible_factory_init (BaulIconCanvasItemAccessibleFactory *self)
+baul_icon_canvas_item_accessible_factory_init (BaulIconCanvasItemAccessibleFactory *self G_GNUC_UNUSED)
 {
 }
 
@@ -3663,4 +3668,3 @@ baul_icon_canvas_item_accessible_factory_class_init (BaulIconCanvasItemAccessibl
 	klass->create_accessible = baul_icon_canvas_item_accessible_factory_create_accessible;
 	klass->get_accessible_type = baul_icon_canvas_item_accessible_factory_get_accessible_type;
 }
-
