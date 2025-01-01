@@ -320,12 +320,12 @@ each_icon_get_data_binder (BaulDragEachSelectedItemDataGet iteratee,
 
 /* Called when the data for drag&drop is needed */
 static void
-drag_data_get_callback (CtkWidget *widget,
-                        CdkDragContext *context,
-                        CtkSelectionData *selection_data,
-                        guint info,
-                        guint32 time,
-                        gpointer data)
+drag_data_get_callback (CtkWidget        *widget,
+			CdkDragContext   *context,
+			CtkSelectionData *selection_data,
+			guint             info,
+			guint32           time,
+			gpointer          data G_GNUC_UNUSED)
 {
     g_assert (widget != NULL);
     g_assert (BAUL_IS_ICON_CONTAINER (widget));
@@ -546,9 +546,9 @@ baul_icon_container_ensure_drag_data (BaulIconContainer *container,
 }
 
 static void
-drag_end_callback (CtkWidget *widget,
-                   CdkDragContext *context,
-                   gpointer data)
+drag_end_callback (CtkWidget      *widget,
+		   CdkDragContext *context G_GNUC_UNUSED,
+		   gpointer        data G_GNUC_UNUSED)
 {
     BaulIconContainer *container;
     BaulIconDndInfo *dnd_info;
@@ -1098,10 +1098,11 @@ handle_nonlocal_move (BaulIconContainer *container,
 
 static char *
 baul_icon_container_find_drop_target (BaulIconContainer *container,
-                                      CdkDragContext *context,
-                                      int x, int y,
-                                      gboolean *icon_hit,
-                                      gboolean rewrite_desktop)
+				      CdkDragContext    *context G_GNUC_UNUSED,
+				      int                x,
+				      int                y,
+				      gboolean          *icon_hit,
+				      gboolean           rewrite_desktop)
 {
     BaulIcon *drop_target_icon;
     double world_x, world_y;
@@ -1410,8 +1411,9 @@ set_drop_target (BaulIconContainer *container,
 
 static void
 baul_icon_dnd_update_drop_target (BaulIconContainer *container,
-                                  CdkDragContext *context,
-                                  int x, int y)
+				  CdkDragContext    *context G_GNUC_UNUSED,
+				  int                x,
+				  int                y)
 {
     BaulIcon *icon;
     double world_x, world_y;
@@ -1481,10 +1483,10 @@ baul_icon_container_free_drag_data (BaulIconContainer *container)
 }
 
 static void
-drag_leave_callback (CtkWidget *widget,
-                     CdkDragContext *context,
-                     guint32 time,
-                     gpointer data)
+drag_leave_callback (CtkWidget      *widget,
+		     CdkDragContext *context G_GNUC_UNUSED,
+		     guint32         time G_GNUC_UNUSED,
+		     gpointer        data G_GNUC_UNUSED)
 {
     BaulIconDndInfo *dnd_info;
 
@@ -1502,8 +1504,8 @@ drag_leave_callback (CtkWidget *widget,
 
 static void
 drag_begin_callback (CtkWidget      *widget,
-                     CdkDragContext *context,
-                     gpointer        data)
+		     CdkDragContext *context,
+		     gpointer        data G_GNUC_UNUSED)
 {
     BaulIconContainer *container;
     cairo_surface_t *surface;
@@ -1570,8 +1572,8 @@ baul_icon_dnd_begin_drag (BaulIconContainer *container,
 
 static gboolean
 drag_highlight_draw (CtkWidget *widget,
-                     cairo_t   *cr,
-                     gpointer   user_data)
+		     cairo_t   *cr,
+		     gpointer   user_data G_GNUC_UNUSED)
 {
     gint width, height;
     CdkWindow *window;
@@ -1703,12 +1705,12 @@ drag_motion_callback (CtkWidget *widget,
 }
 
 static gboolean
-drag_drop_callback (CtkWidget *widget,
-                    CdkDragContext *context,
-                    int x,
-                    int y,
-                    guint32 time,
-                    gpointer data)
+drag_drop_callback (CtkWidget      *widget,
+		    CdkDragContext *context,
+		    int             x,
+		    int             y,
+		    guint32         time,
+		    gpointer        data G_GNUC_UNUSED)
 {
     BaulIconDndInfo *dnd_info;
 
@@ -1750,14 +1752,14 @@ baul_icon_dnd_end_drag (BaulIconContainer *container)
 */
 
 static void
-drag_data_received_callback (CtkWidget *widget,
-                             CdkDragContext *context,
-                             int x,
-                             int y,
-                             CtkSelectionData *data,
-                             guint info,
-                             guint32 time,
-                             gpointer user_data)
+drag_data_received_callback (CtkWidget        *widget,
+			     CdkDragContext   *context,
+			     int               x,
+			     int               y,
+			     CtkSelectionData *data,
+			     guint             info,
+			     guint32           time,
+			     gpointer          user_data G_GNUC_UNUSED)
 {
     BaulDragInfo *drag_info;
     gboolean success;
