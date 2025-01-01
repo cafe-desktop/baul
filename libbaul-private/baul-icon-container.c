@@ -1562,8 +1562,8 @@ get_max_icon_dimensions (GList *icon_start,
 /* column-wise layout. At the moment, this only works with label-beside-icon (used by "Compact View"). */
 static void
 lay_down_icons_vertical (BaulIconContainer *container,
-                         GList *icons,
-                         double start_y)
+			 GList             *icons,
+			 double             start_y G_GNUC_UNUSED)
 {
     GList *p, *line_start;
     double x, canvas_height;
@@ -2658,8 +2658,8 @@ baul_icon_container_move_icon (BaulIconContainer *container,
 /* Implementation of rubberband selection.  */
 static void
 rubberband_select (BaulIconContainer *container,
-                   const EelDRect *previous_rect,
-                   const EelDRect *current_rect)
+		   const EelDRect    *previous_rect G_GNUC_UNUSED,
+		   const EelDRect    *current_rect)
 {
     GList *p;
     gboolean selection_changed, is_in, canvas_rect_calculated;
@@ -3242,10 +3242,10 @@ compare_icons_vertical_first (BaulIconContainer *container,
 
 static gboolean
 leftmost_in_top_row (BaulIconContainer *container,
-                     BaulIcon *start_icon,
-                     BaulIcon *best_so_far,
-                     BaulIcon *candidate,
-                     void *data)
+		     BaulIcon          *start_icon G_GNUC_UNUSED,
+		     BaulIcon          *best_so_far,
+		     BaulIcon          *candidate,
+		     void              *data G_GNUC_UNUSED)
 {
     if (best_so_far == NULL)
     {
@@ -3256,10 +3256,10 @@ leftmost_in_top_row (BaulIconContainer *container,
 
 static gboolean
 rightmost_in_top_row (BaulIconContainer *container,
-                      BaulIcon *start_icon,
-                      BaulIcon *best_so_far,
-                      BaulIcon *candidate,
-                      void *data)
+		      BaulIcon          *start_icon G_GNUC_UNUSED,
+		      BaulIcon          *best_so_far,
+		      BaulIcon          *candidate,
+		      void              *data G_GNUC_UNUSED)
 {
     if (best_so_far == NULL)
     {
@@ -3271,10 +3271,10 @@ rightmost_in_top_row (BaulIconContainer *container,
 
 static gboolean
 rightmost_in_bottom_row (BaulIconContainer *container,
-                         BaulIcon *start_icon,
-                         BaulIcon *best_so_far,
-                         BaulIcon *candidate,
-                         void *data)
+			 BaulIcon          *start_icon G_GNUC_UNUSED,
+			 BaulIcon          *best_so_far,
+			 BaulIcon          *candidate,
+			 void              *data G_GNUC_UNUSED)
 {
     if (best_so_far == NULL)
     {
@@ -3323,10 +3323,10 @@ compare_with_start_column (BaulIconContainer *container,
 
 static gboolean
 same_row_right_side_leftmost (BaulIconContainer *container,
-                              BaulIcon *start_icon,
-                              BaulIcon *best_so_far,
-                              BaulIcon *candidate,
-                              void *data)
+			      BaulIcon          *start_icon,
+			      BaulIcon          *best_so_far,
+			      BaulIcon          *candidate,
+			      void              *data G_GNUC_UNUSED)
 {
     /* Candidates not on the start row do not qualify. */
     if (compare_with_start_row (container, candidate) != 0)
@@ -3358,10 +3358,10 @@ same_row_right_side_leftmost (BaulIconContainer *container,
 
 static gboolean
 same_row_left_side_rightmost (BaulIconContainer *container,
-                              BaulIcon *start_icon,
-                              BaulIcon *best_so_far,
-                              BaulIcon *candidate,
-                              void *data)
+			      BaulIcon          *start_icon,
+			      BaulIcon          *best_so_far,
+			      BaulIcon          *candidate,
+			      void              *data G_GNUC_UNUSED)
 {
     /* Candidates not on the start row do not qualify. */
     if (compare_with_start_row (container, candidate) != 0)
@@ -3393,10 +3393,10 @@ same_row_left_side_rightmost (BaulIconContainer *container,
 
 static gboolean
 next_row_leftmost (BaulIconContainer *container,
-                   BaulIcon *start_icon,
-                   BaulIcon *best_so_far,
-                   BaulIcon *candidate,
-                   void *data)
+		   BaulIcon          *start_icon G_GNUC_UNUSED,
+		   BaulIcon          *best_so_far,
+		   BaulIcon          *candidate,
+		   void              *data G_GNUC_UNUSED)
 {
     /* sort out icons that are not below the current row */
     if (compare_with_start_row (container, candidate) >= 0)
@@ -3427,10 +3427,10 @@ next_row_leftmost (BaulIconContainer *container,
 
 static gboolean
 next_row_rightmost (BaulIconContainer *container,
-                    BaulIcon *start_icon,
-                    BaulIcon *best_so_far,
-                    BaulIcon *candidate,
-                    void *data)
+		    BaulIcon          *start_icon G_GNUC_UNUSED,
+		    BaulIcon          *best_so_far,
+		    BaulIcon          *candidate,
+		    void              *data G_GNUC_UNUSED)
 {
     /* sort out icons that are not below the current row */
     if (compare_with_start_row (container, candidate) >= 0)
@@ -3461,10 +3461,10 @@ next_row_rightmost (BaulIconContainer *container,
 
 static gboolean
 next_column_bottommost (BaulIconContainer *container,
-                        BaulIcon *start_icon,
-                        BaulIcon *best_so_far,
-                        BaulIcon *candidate,
-                        void *data)
+			BaulIcon          *start_icon G_GNUC_UNUSED,
+			BaulIcon          *best_so_far,
+			BaulIcon          *candidate,
+			void              *data G_GNUC_UNUSED)
 {
     /* sort out icons that are not on the right of the current column */
     if (compare_with_start_column (container, candidate) >= 0)
@@ -3495,10 +3495,10 @@ next_column_bottommost (BaulIconContainer *container,
 
 static gboolean
 previous_row_rightmost (BaulIconContainer *container,
-                        BaulIcon *start_icon,
-                        BaulIcon *best_so_far,
-                        BaulIcon *candidate,
-                        void *data)
+			BaulIcon          *start_icon G_GNUC_UNUSED,
+			BaulIcon          *best_so_far,
+			BaulIcon          *candidate,
+			void              *data G_GNUC_UNUSED)
 {
     /* sort out icons that are not above the current row */
     if (compare_with_start_row (container, candidate) <= 0)
@@ -3529,10 +3529,10 @@ previous_row_rightmost (BaulIconContainer *container,
 
 static gboolean
 same_column_above_lowest (BaulIconContainer *container,
-                          BaulIcon *start_icon,
-                          BaulIcon *best_so_far,
-                          BaulIcon *candidate,
-                          void *data)
+			  BaulIcon          *start_icon,
+			  BaulIcon          *best_so_far,
+			  BaulIcon          *candidate,
+			  void              *data G_GNUC_UNUSED)
 {
     /* Candidates not on the start column do not qualify. */
     if (compare_with_start_column (container, candidate) != 0)
@@ -3564,10 +3564,10 @@ same_column_above_lowest (BaulIconContainer *container,
 
 static gboolean
 same_column_below_highest (BaulIconContainer *container,
-                           BaulIcon *start_icon,
-                           BaulIcon *best_so_far,
-                           BaulIcon *candidate,
-                           void *data)
+			   BaulIcon *start_icon,
+			   BaulIcon *best_so_far,
+			   BaulIcon *candidate,
+			   void *data G_GNUC_UNUSED)
 {
     /* Candidates not on the start column do not qualify. */
     if (compare_with_start_column (container, candidate) != 0)
@@ -3599,10 +3599,10 @@ same_column_below_highest (BaulIconContainer *container,
 
 static gboolean
 previous_column_highest (BaulIconContainer *container,
-                         BaulIcon *start_icon,
-                         BaulIcon *best_so_far,
-                         BaulIcon *candidate,
-                         void *data)
+			 BaulIcon          *start_icon G_GNUC_UNUSED,
+			 BaulIcon          *best_so_far,
+			 BaulIcon          *candidate,
+			 void              *data G_GNUC_UNUSED)
 {
     /* sort out icons that are not before the current column */
     if (compare_with_start_column (container, candidate) <= 0)
@@ -3634,10 +3634,10 @@ previous_column_highest (BaulIconContainer *container,
 
 static gboolean
 next_column_highest (BaulIconContainer *container,
-                     BaulIcon *start_icon,
-                     BaulIcon *best_so_far,
-                     BaulIcon *candidate,
-                     void *data)
+		     BaulIcon          *start_icon G_GNUC_UNUSED,
+		     BaulIcon          *best_so_far,
+		     BaulIcon          *candidate,
+		     void              *data G_GNUC_UNUSED)
 {
     /* sort out icons that are not after the current column */
     if (compare_with_start_column (container, candidate) >= 0)
@@ -3668,10 +3668,10 @@ next_column_highest (BaulIconContainer *container,
 
 static gboolean
 previous_column_lowest (BaulIconContainer *container,
-                        BaulIcon *start_icon,
-                        BaulIcon *best_so_far,
-                        BaulIcon *candidate,
-                        void *data)
+			BaulIcon          *start_icon G_GNUC_UNUSED,
+			BaulIcon          *best_so_far,
+			BaulIcon          *candidate,
+			void              *data G_GNUC_UNUSED)
 {
     /* sort out icons that are not before the current column */
     if (compare_with_start_column (container, candidate) <= 0)
@@ -3702,10 +3702,10 @@ previous_column_lowest (BaulIconContainer *container,
 
 static gboolean
 last_column_lowest (BaulIconContainer *container,
-                    BaulIcon *start_icon,
-                    BaulIcon *best_so_far,
-                    BaulIcon *candidate,
-                    void *data)
+		    BaulIcon          *start_icon G_GNUC_UNUSED,
+		    BaulIcon          *best_so_far,
+		    BaulIcon          *candidate,
+		    void              *data G_GNUC_UNUSED)
 {
     if (best_so_far == NULL)
     {
@@ -3716,10 +3716,10 @@ last_column_lowest (BaulIconContainer *container,
 
 static gboolean
 closest_in_90_degrees (BaulIconContainer *container,
-                       BaulIcon *start_icon,
-                       BaulIcon *best_so_far,
-                       BaulIcon *candidate,
-                       void *data)
+		       BaulIcon          *start_icon G_GNUC_UNUSED,
+		       BaulIcon          *best_so_far,
+		       BaulIcon          *candidate,
+		       void              *data)
 {
     EelDRect world_rect;
     int x, y;
@@ -4511,7 +4511,7 @@ size_allocate (CtkWidget *widget,
 }
 
 static CtkSizeRequestMode
-get_request_mode (CtkWidget *widget)
+get_request_mode (CtkWidget *widget G_GNUC_UNUSED)
 {
     /* Don't trade size at all, since we get whatever we get anyway. */
     return CTK_SIZE_REQUEST_CONSTANT_SIZE;
@@ -5316,8 +5316,8 @@ baul_icon_container_real_search_enable_popdown (gpointer data)
 }
 
 static void
-baul_icon_container_search_enable_popdown (CtkWidget *widget,
-        gpointer   data)
+baul_icon_container_search_enable_popdown (CtkWidget *widget G_GNUC_UNUSED,
+					   gpointer   data)
 {
     BaulIconContainer *container = (BaulIconContainer *) data;
 
@@ -5326,9 +5326,9 @@ baul_icon_container_search_enable_popdown (CtkWidget *widget,
 }
 
 static void
-baul_icon_container_search_disable_popdown (CtkEntry *entry,
-        CtkMenu  *menu,
-        gpointer  data)
+baul_icon_container_search_disable_popdown (CtkEntry *entry G_GNUC_UNUSED,
+					    CtkMenu  *menu,
+					    gpointer  data)
 {
     BaulIconContainer *container = (BaulIconContainer *) data;
 
@@ -5402,9 +5402,9 @@ baul_icon_container_search_entry_flush_timeout (BaulIconContainer *container)
  * callback.
  */
 static void
-baul_icon_container_search_preedit_changed (CtkEntry *entry,
-        gchar *preedit,
-        BaulIconContainer *container)
+baul_icon_container_search_preedit_changed (CtkEntry          *entry G_GNUC_UNUSED,
+					    gchar             *preedit G_GNUC_UNUSED,
+					    BaulIconContainer *container)
 {
     container->details->imcontext_changed = 1;
     if (container->details->typeselect_flush_timeout)
@@ -5418,8 +5418,8 @@ baul_icon_container_search_preedit_changed (CtkEntry *entry,
 }
 
 static void
-baul_icon_container_search_activate (CtkEntry *entry,
-                                     BaulIconContainer *container)
+baul_icon_container_search_activate (CtkEntry          *entry G_GNUC_UNUSED,
+				     BaulIconContainer *container)
 {
     baul_icon_container_search_dialog_hide (container->details->search_window,
                                             container);
@@ -5428,9 +5428,9 @@ baul_icon_container_search_activate (CtkEntry *entry,
 }
 
 static gboolean
-baul_icon_container_search_delete_event (CtkWidget *widget,
-        CdkEventAny *event,
-        BaulIconContainer *container)
+baul_icon_container_search_delete_event (CtkWidget         *widget,
+					 CdkEventAny       *event G_GNUC_UNUSED,
+					 BaulIconContainer *container)
 {
     g_assert (CTK_IS_WIDGET (widget));
 
@@ -5555,9 +5555,9 @@ baul_icon_container_search_iter (BaulIconContainer *container,
 }
 
 static void
-baul_icon_container_search_move (CtkWidget *window,
-                                 BaulIconContainer *container,
-                                 gboolean up)
+baul_icon_container_search_move (CtkWidget         *window G_GNUC_UNUSED,
+				 BaulIconContainer *container,
+				 gboolean           up)
 {
     gboolean ret;
     gint len;
@@ -5866,8 +5866,8 @@ baul_icon_container_start_interactive_search (BaulIconContainer *container)
 
 static gboolean
 handle_popups (BaulIconContainer *container,
-               CdkEventKey           *event,
-               const char            *signal)
+	       CdkEventKey       *event G_GNUC_UNUSED,
+	       const char        *signal)
 {
     CdkEventButton button_event = { 0 };
 
@@ -6117,8 +6117,8 @@ popup_menu (CtkWidget *widget)
 }
 
 static void
-draw_canvas_background (EelCanvas *canvas,
-                        cairo_t   *cr)
+draw_canvas_background (EelCanvas *canvas G_GNUC_UNUSED,
+			cairo_t   *cr G_GNUC_UNUSED)
 {
     /* Don't chain up to the parent to avoid clearing and redrawing */
 }
@@ -6618,7 +6618,9 @@ update_selected (BaulIconContainer *container)
 }
 
 static gboolean
-handle_focus_in_event (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
+handle_focus_in_event (CtkWidget     *widget,
+		       CdkEventFocus *event G_GNUC_UNUSED,
+		       gpointer       user_data G_GNUC_UNUSED)
 {
     update_selected (BAUL_ICON_CONTAINER (widget));
 
@@ -6626,7 +6628,9 @@ handle_focus_in_event (CtkWidget *widget, CdkEventFocus *event, gpointer user_da
 }
 
 static gboolean
-handle_focus_out_event (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
+handle_focus_out_event (CtkWidget     *widget,
+			CdkEventFocus *event G_GNUC_UNUSED,
+			gpointer       user_data G_GNUC_UNUSED)
 {
     /* End renaming and commit change. */
     end_renaming_mode (BAUL_ICON_CONTAINER (widget), TRUE);
@@ -6637,8 +6641,8 @@ handle_focus_out_event (CtkWidget *widget, CdkEventFocus *event, gpointer user_d
 
 static void
 handle_scale_factor_changed (GObject    *object,
-                             GParamSpec *pspec,
-                             gpointer    user_data)
+			     GParamSpec *pspec G_GNUC_UNUSED,
+			     gpointer    user_data G_GNUC_UNUSED)
 {
     invalidate_labels (BAUL_ICON_CONTAINER (object));
     baul_icon_container_request_update_all (BAUL_ICON_CONTAINER (object));
@@ -6699,7 +6703,7 @@ static const char * zoom_level_names[] = {
 };
 
 static void
-text_ellipsis_limit_changed_callback (gpointer callback_data)
+text_ellipsis_limit_changed_callback (gpointer callback_data G_GNUC_UNUSED)
 {
     char **pref;
     unsigned int i;
@@ -6727,7 +6731,7 @@ text_ellipsis_limit_changed_callback (gpointer callback_data)
 }
 
 static void
-desktop_text_ellipsis_limit_changed_callback (gpointer callback_data)
+desktop_text_ellipsis_limit_changed_callback (gpointer callback_data G_GNUC_UNUSED)
 {
     int pref;
 
@@ -7486,8 +7490,8 @@ baul_icon_container_update_visible_icons (BaulIconContainer *container)
 }
 
 static void
-handle_vadjustment_changed (CtkAdjustment *adjustment,
-                            BaulIconContainer *container)
+handle_vadjustment_changed (CtkAdjustment     *adjustment G_GNUC_UNUSED,
+			    BaulIconContainer *container)
 {
     if (!baul_icon_container_is_layout_vertical (container))
     {
@@ -7496,8 +7500,8 @@ handle_vadjustment_changed (CtkAdjustment *adjustment,
 }
 
 static void
-handle_hadjustment_changed (CtkAdjustment *adjustment,
-                            BaulIconContainer *container)
+handle_hadjustment_changed (CtkAdjustment     *adjustment G_GNUC_UNUSED,
+			    BaulIconContainer *container)
 {
     if (baul_icon_container_is_layout_vertical (container))
     {
@@ -8098,8 +8102,8 @@ baul_icon_container_invert_selection (BaulIconContainer *container)
 
 /* Returns an array of CdkPoints of locations of the icons. */
 static GArray *
-baul_icon_container_get_icon_locations (BaulIconContainer *container,
-                                        GList *icons)
+baul_icon_container_get_icon_locations (BaulIconContainer *container G_GNUC_UNUSED,
+					GList             *icons)
 {
     GArray *result;
     GList *node;
@@ -9422,7 +9426,7 @@ baul_icon_container_accessible_do_action (AtkAction *accessible, int i)
 }
 
 static int
-baul_icon_container_accessible_get_n_actions (AtkAction *accessible)
+baul_icon_container_accessible_get_n_actions (AtkAction *accessible G_GNUC_UNUSED)
 {
     return LAST_ACTION;
 }
@@ -9448,7 +9452,8 @@ baul_icon_container_accessible_action_get_description (AtkAction *accessible,
 }
 
 static const char *
-baul_icon_container_accessible_action_get_name (AtkAction *accessible, int i)
+baul_icon_container_accessible_action_get_name (AtkAction *accessible G_GNUC_UNUSED,
+						int        i)
 {
     g_assert (i < LAST_ACTION);
 
@@ -9456,8 +9461,8 @@ baul_icon_container_accessible_action_get_name (AtkAction *accessible, int i)
 }
 
 static const char *
-baul_icon_container_accessible_action_get_keybinding (AtkAction *accessible,
-        int i)
+baul_icon_container_accessible_action_get_keybinding (AtkAction *accessible G_GNUC_UNUSED,
+						      int        i)
 {
     g_assert (i < LAST_ACTION);
 
@@ -9529,8 +9534,8 @@ baul_icon_container_accessible_update_selection (AtkObject *accessible)
 }
 
 static void
-baul_icon_container_accessible_selection_changed_cb (BaulIconContainer *container,
-        gpointer data)
+baul_icon_container_accessible_selection_changed_cb (BaulIconContainer *container G_GNUC_UNUSED,
+						     gpointer           data)
 {
     g_signal_emit_by_name (data, "selection_changed");
 }
@@ -9588,8 +9593,8 @@ baul_icon_container_accessible_icon_removed_cb (BaulIconContainer *container,
 }
 
 static void
-baul_icon_container_accessible_cleared_cb (BaulIconContainer *container,
-        gpointer data)
+baul_icon_container_accessible_cleared_cb (BaulIconContainer *container G_GNUC_UNUSED,
+					   gpointer           data)
 {
     g_signal_emit_by_name (data, "children_changed", 0, NULL, NULL);
 }
@@ -9935,7 +9940,7 @@ G_DEFINE_TYPE_WITH_CODE (BaulIconContainerAccessible,
                                                 baul_icon_container_accessible_selection_interface_init));
 
 static void
-baul_icon_container_accessible_init (BaulIconContainerAccessible *accessible)
+baul_icon_container_accessible_init (BaulIconContainerAccessible *accessible G_GNUC_UNUSED)
 {
 }
 
