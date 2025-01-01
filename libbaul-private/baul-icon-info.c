@@ -185,9 +185,9 @@ static guint reap_cache_timeout = 0;
 static guint time_now;
 
 static gboolean
-reap_old_icon (gpointer  key,
-               gpointer  value,
-               gpointer  user_info)
+reap_old_icon (gpointer  key G_GNUC_UNUSED,
+	       gpointer  value,
+	       gpointer  user_info)
 {
     BaulIconInfo *icon = value;
     gboolean *reapable_icons_left = user_info;
@@ -210,7 +210,7 @@ reap_old_icon (gpointer  key,
 }
 
 static gboolean
-reap_cache (gpointer data)
+reap_cache (gpointer data G_GNUC_UNUSED)
 {
     gboolean reapable_icons_left;
 
@@ -285,8 +285,8 @@ icon_key_equal (const IconKey *a,
 
 static IconKey *
 icon_key_new (GIcon *icon,
-              int scale,
-              int    size)
+	      int    scale G_GNUC_UNUSED,
+	      int    size)
 {
     IconKey *key;
 
