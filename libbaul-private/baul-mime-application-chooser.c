@@ -116,9 +116,9 @@ baul_mime_application_chooser_class_init (BaulMimeApplicationChooserClass *class
 }
 
 static void
-default_toggled_cb (CtkCellRendererToggle *renderer,
-                    const char *path_str,
-                    gpointer user_data)
+default_toggled_cb (CtkCellRendererToggle *renderer G_GNUC_UNUSED,
+		    const char            *path_str,
+		    gpointer               user_data)
 {
     BaulMimeApplicationChooser *chooser;
     CtkTreeIter iter;
@@ -201,8 +201,8 @@ get_selected_application (BaulMimeApplicationChooser *chooser)
 }
 
 static void
-selection_changed_cb (CtkTreeSelection *selection,
-                      gpointer user_data)
+selection_changed_cb (CtkTreeSelection *selection G_GNUC_UNUSED,
+		      gpointer          user_data)
 {
     BaulMimeApplicationChooser *chooser;
     GAppInfo *info;
@@ -289,8 +289,8 @@ create_tree_view (BaulMimeApplicationChooser *chooser)
 }
 
 static void
-add_clicked_cb (CtkButton *button,
-                gpointer user_data)
+add_clicked_cb (CtkButton *button G_GNUC_UNUSED,
+		gpointer   user_data)
 {
     BaulMimeApplicationChooser *chooser;
     CtkWidget *dialog;
@@ -313,8 +313,8 @@ add_clicked_cb (CtkButton *button,
 }
 
 static void
-remove_clicked_cb (CtkButton *button,
-                   gpointer user_data)
+remove_clicked_cb (CtkButton *button G_GNUC_UNUSED,
+		   gpointer   user_data)
 {
     BaulMimeApplicationChooser *chooser;
     GError *error;
@@ -344,8 +344,8 @@ remove_clicked_cb (CtkButton *button,
 }
 
 static void
-reset_clicked_cb (CtkButton *button,
-                  gpointer   user_data)
+reset_clicked_cb (CtkButton *button G_GNUC_UNUSED,
+		  gpointer   user_data)
 {
     BaulMimeApplicationChooser *chooser;
 
@@ -358,8 +358,8 @@ reset_clicked_cb (CtkButton *button,
 }
 
 static void
-mime_type_data_changed_cb (GObject *signaller,
-                           gpointer user_data)
+mime_type_data_changed_cb (GObject *signaller G_GNUC_UNUSED,
+			   gpointer user_data)
 {
     BaulMimeApplicationChooser *chooser;
 
