@@ -66,7 +66,7 @@ baul_signaller_get_current (void)
 }
 
 static void
-baul_signaller_init (BaulSignaller *signaller)
+baul_signaller_init (BaulSignaller *signaller G_GNUC_UNUSED)
 {
 }
 
