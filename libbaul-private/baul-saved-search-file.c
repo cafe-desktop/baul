@@ -30,7 +30,7 @@ G_DEFINE_TYPE(BaulSavedSearchFile, baul_saved_search_file, BAUL_TYPE_VFS_FILE)
 
 
 static void
-baul_saved_search_file_init (BaulSavedSearchFile *search_file)
+baul_saved_search_file_init (BaulSavedSearchFile *search_file G_GNUC_UNUSED)
 {
 }
 
