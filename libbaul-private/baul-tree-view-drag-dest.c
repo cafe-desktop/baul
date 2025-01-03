@@ -191,7 +191,7 @@ remove_expand_timeout (BaulTreeViewDragDest *dest)
 static gboolean
 highlight_draw (CtkWidget *widget,
 		cairo_t   *cr,
-                gpointer data)
+		gpointer   data G_GNUC_UNUSED)
 {
     CdkWindow *bin_window;
     int width;
@@ -602,10 +602,10 @@ drag_motion_callback (CtkWidget *widget,
 }
 
 static void
-drag_leave_callback (CtkWidget *widget,
-                     CdkDragContext *context,
-                     guint32 time,
-                     gpointer data)
+drag_leave_callback (CtkWidget      *widget G_GNUC_UNUSED,
+		     CdkDragContext *context G_GNUC_UNUSED,
+		     guint32         time G_GNUC_UNUSED,
+		     gpointer        data)
 {
     BaulTreeViewDragDest *dest;
 
@@ -828,8 +828,9 @@ receive_dropped_netscape_url (BaulTreeViewDragDest *dest,
 
 static void
 receive_dropped_keyword (BaulTreeViewDragDest *dest,
-                         CdkDragContext *context,
-                         int x, int y)
+			 CdkDragContext       *context G_GNUC_UNUSED,
+			 int                   x,
+			 int                   y)
 {
     char *drop_target_uri;
     BaulFile *drop_target_file;
@@ -856,10 +857,11 @@ receive_dropped_keyword (BaulTreeViewDragDest *dest,
 
 static gboolean
 receive_xds (BaulTreeViewDragDest *dest,
-             CtkWidget *widget,
-             guint32 time,
-             CdkDragContext *context,
-             int x, int y)
+	     CtkWidget            *widget,
+	     guint32               time,
+	     CdkDragContext       *context,
+	     int                   x G_GNUC_UNUSED,
+	     int                   y G_GNUC_UNUSED)
 {
     GFile *location;
     const guchar *selection_data;
@@ -1069,12 +1071,12 @@ set_direct_save_uri (BaulTreeViewDragDest *dest,
 }
 
 static gboolean
-drag_drop_callback (CtkWidget *widget,
-                    CdkDragContext *context,
-                    int x,
-                    int y,
-                    guint32 time,
-                    gpointer data)
+drag_drop_callback (CtkWidget      *widget G_GNUC_UNUSED,
+		    CdkDragContext *context,
+		    int             x,
+		    int             y,
+		    guint32         time,
+		    gpointer        data)
 {
     BaulTreeViewDragDest *dest;
     guint info;
@@ -1116,7 +1118,7 @@ drag_drop_callback (CtkWidget *widget,
 
 static void
 tree_view_weak_notify (gpointer user_data,
-                       GObject *object)
+		       GObject *object G_GNUC_UNUSED)
 {
     BaulTreeViewDragDest *dest;
 
