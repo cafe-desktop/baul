@@ -266,7 +266,9 @@ search_monitor_remove (BaulDirectory *directory,
 }
 
 static void
-cancel_call_when_ready (gpointer key, gpointer value, gpointer user_data)
+cancel_call_when_ready (gpointer key,
+			gpointer value G_GNUC_UNUSED,
+			gpointer user_data)
 {
     SearchCallback *search_callback;
     BaulFile *file;
@@ -495,8 +497,9 @@ search_cancel_callback (BaulDirectory *directory,
 
 
 static void
-search_engine_hits_added (BaulSearchEngine *engine, GList *hits,
-                          BaulSearchDirectory *search)
+search_engine_hits_added (BaulSearchEngine    *engine G_GNUC_UNUSED,
+			  GList               *hits,
+			  BaulSearchDirectory *search)
 {
     GList *hit_list;
     GList *file_list;
@@ -543,8 +546,9 @@ search_engine_hits_added (BaulSearchEngine *engine, GList *hits,
 }
 
 static void
-search_engine_hits_subtracted (BaulSearchEngine *engine, GList *hits,
-                               BaulSearchDirectory *search)
+search_engine_hits_subtracted (BaulSearchEngine    *engine G_GNUC_UNUSED,
+			       GList               *hits,
+			       BaulSearchDirectory *search)
 {
     GList *hit_list;
     GList *monitor_list;
@@ -595,7 +599,9 @@ search_callback_add_pending_file_callbacks (SearchCallback *callback)
 }
 
 static void
-search_engine_error (BaulSearchEngine *engine, const char *error_message, BaulSearchDirectory *search)
+search_engine_error (BaulSearchEngine    *engine G_GNUC_UNUSED,
+		     const char          *error_message,
+		     BaulSearchDirectory *search)
 {
     GError *error;
 
@@ -607,7 +613,8 @@ search_engine_error (BaulSearchEngine *engine, const char *error_message, BaulSe
 }
 
 static void
-search_engine_finished (BaulSearchEngine *engine, BaulSearchDirectory *search)
+search_engine_finished (BaulSearchEngine    *engine G_GNUC_UNUSED,
+			BaulSearchDirectory *search)
 {
     search->details->search_finished = TRUE;
 
@@ -688,7 +695,7 @@ search_get_file_list (BaulDirectory *directory)
 
 
 static gboolean
-search_is_editable (BaulDirectory *directory)
+search_is_editable (BaulDirectory *directory G_GNUC_UNUSED)
 {
     return FALSE;
 }
