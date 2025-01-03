@@ -165,11 +165,11 @@ schedule_update_info (BaulTrashMonitor *trash_monitor)
 }
 
 static void
-file_changed (GFileMonitor* monitor,
-              GFile *child,
-              GFile *other_file,
-              GFileMonitorEvent event_type,
-              gpointer user_data)
+file_changed (GFileMonitor     *monitor G_GNUC_UNUSED,
+	      GFile            *child G_GNUC_UNUSED,
+	      GFile            *other_file G_GNUC_UNUSED,
+	      GFileMonitorEvent event_type G_GNUC_UNUSED,
+	      gpointer          user_data)
 {
     BaulTrashMonitor *trash_monitor;
 
