@@ -205,9 +205,9 @@ finalize (GObject *object)
 }
 
 static void
-beagle_hits_added (BeagleQuery *query,
-                   BeagleHitsAddedResponse *response,
-                   BaulSearchEngineBeagle *engine)
+beagle_hits_added (BeagleQuery             *query G_GNUC_UNUSED,
+		   BeagleHitsAddedResponse *response,
+		   BaulSearchEngineBeagle  *engine)
 {
     GSList *hits, *list;
     GList *hit_uris;
@@ -238,9 +238,9 @@ beagle_hits_added (BeagleQuery *query,
 }
 
 static void
-beagle_hits_subtracted (BeagleQuery *query,
-                        BeagleHitsSubtractedResponse *response,
-                        BaulSearchEngineBeagle *engine)
+beagle_hits_subtracted (BeagleQuery                  *query G_GNUC_UNUSED,
+			BeagleHitsSubtractedResponse *response,
+			BaulSearchEngineBeagle       *engine)
 {
     GSList *uris, *list;
     GList *hit_uris;
@@ -259,9 +259,9 @@ beagle_hits_subtracted (BeagleQuery *query,
 }
 
 static void
-beagle_finished (BeagleQuery *query,
-                 BeagleFinishedResponse *response,
-                 BaulSearchEngineBeagle *engine)
+beagle_finished (BeagleQuery            *query G_GNUC_UNUSED,
+		 BeagleFinishedResponse *response G_GNUC_UNUSED,
+		 BaulSearchEngineBeagle *engine)
 {
     /* For some reason we keep getting finished events,
      * only emit finished once */
@@ -275,9 +275,9 @@ beagle_finished (BeagleQuery *query,
 }
 
 static void
-beagle_error (BeagleQuery *query,
-              GError *error,
-              BaulSearchEngineBeagle *engine)
+beagle_error (BeagleQuery            *query G_GNUC_UNUSED,
+	      GError                 *error,
+	      BaulSearchEngineBeagle *engine)
 {
     baul_search_engine_error (BAUL_SEARCH_ENGINE (engine), error->message);
 }
@@ -362,7 +362,7 @@ baul_search_engine_beagle_stop (BaulSearchEngine *engine)
 }
 
 static gboolean
-baul_search_engine_beagle_is_indexed (BaulSearchEngine *engine)
+baul_search_engine_beagle_is_indexed (BaulSearchEngine *engine G_GNUC_UNUSED)
 {
     return TRUE;
 }
