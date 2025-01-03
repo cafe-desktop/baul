@@ -206,16 +206,16 @@ baul_progress_info_class_init (BaulProgressInfoClass *klass)
 }
 
 static gboolean
-delete_event (CtkWidget *widget,
-              CdkEventAny *event)
+delete_event (CtkWidget   *widget,
+	      CdkEventAny *event G_GNUC_UNUSED)
 {
     ctk_widget_hide (widget);
     return TRUE;
 }
 
 static void
-status_icon_activate_cb (CtkStatusIcon *icon,
-                         CtkWidget *progress_window)
+status_icon_activate_cb (CtkStatusIcon *icon G_GNUC_UNUSED,
+			 CtkWidget     *progress_window)
 {
     if (ctk_widget_get_visible (progress_window))
     {
@@ -688,7 +688,7 @@ cancel_clicked (CtkWidget *button,
 }
 
 static void
-progress_widget_invalid_state (ProgressWidgetData *data)
+progress_widget_invalid_state (ProgressWidgetData *data G_GNUC_UNUSED)
 {
     // TODO give more info: current state, buttons
     g_warning ("Invalid ProgressWidgetState");
@@ -725,8 +725,8 @@ baul_progress_info_get_ready (BaulProgressInfo *info)
 }
 
 static void
-start_clicked (CtkWidget *startbt,
-               ProgressWidgetData *data)
+start_clicked (CtkWidget          *startbt G_GNUC_UNUSED,
+	       ProgressWidgetData *data)
 {
     switch (data->state) {
         case STATE_RUNNING:
@@ -744,8 +744,8 @@ start_clicked (CtkWidget *startbt,
 }
 
 static void
-queue_clicked (CtkWidget *queuebt,
-               ProgressWidgetData *data)
+queue_clicked (CtkWidget          *queuebt G_GNUC_UNUSED,
+	       ProgressWidgetData *data)
 {
     switch (data->state) {
         case STATE_RUNNING:
