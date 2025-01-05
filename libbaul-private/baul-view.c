@@ -35,7 +35,7 @@ enum
 static guint baul_view_signals[LAST_SIGNAL] = { 0 };
 
 static void
-baul_view_base_init (gpointer g_class)
+baul_view_base_init (gpointer g_class G_GNUC_UNUSED)
 {
     static gboolean initialized = FALSE;
 
