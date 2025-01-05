@@ -757,7 +757,8 @@ vfs_file_poll_for_media (BaulFile *file)
 }
 
 static void
-baul_vfs_file_init (gpointer object, gpointer klass)
+baul_vfs_file_init (gpointer object G_GNUC_UNUSED,
+		    gpointer klass G_GNUC_UNUSED)
 {
 }
 
