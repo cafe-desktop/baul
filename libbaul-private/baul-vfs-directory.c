@@ -40,7 +40,8 @@ EEL_CLASS_BOILERPLATE (BaulVFSDirectory,
                        BAUL_TYPE_DIRECTORY)
 
 static void
-baul_vfs_directory_init (gpointer object, gpointer klass)
+baul_vfs_directory_init (gpointer object G_GNUC_UNUSED,
+			 gpointer klass G_GNUC_UNUSED)
 {
 }
 
