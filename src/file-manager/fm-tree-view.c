@@ -143,9 +143,9 @@ G_DEFINE_TYPE_WITH_CODE (FMTreeViewProvider, fm_tree_view_provider, G_TYPE_OBJEC
                                  sidebar_provider_iface_init));
 
 static void
-notify_clipboard_info (BaulClipboardMonitor *monitor,
-                       BaulClipboardInfo *info,
-                       FMTreeView *view)
+notify_clipboard_info (BaulClipboardMonitor *monitor G_GNUC_UNUSED,
+		       BaulClipboardInfo    *info,
+		       FMTreeView           *view)
 {
     if (info != NULL && info->cut)
     {
@@ -309,9 +309,9 @@ schedule_select_and_show_location (FMTreeView *view, char *location)
 }
 
 static void
-row_loaded_callback (CtkTreeModel     *tree_model,
-                     CtkTreeIter      *iter,
-                     FMTreeView *view)
+row_loaded_callback (CtkTreeModel *tree_model G_GNUC_UNUSED,
+		     CtkTreeIter  *iter,
+		     FMTreeView   *view)
 {
     BaulFile *file, *tmp_file, *selection_file;
 
@@ -489,8 +489,10 @@ cancel_activation (FMTreeView *view)
 }
 
 static void
-row_activated_callback (CtkTreeView *treeview, CtkTreePath *path,
-                        CtkTreeViewColumn *column, FMTreeView *view)
+row_activated_callback (CtkTreeView       *treeview G_GNUC_UNUSED,
+			CtkTreePath       *path,
+			CtkTreeViewColumn *column G_GNUC_UNUSED,
+			FMTreeView        *view)
 {
     if (ctk_tree_view_row_expanded (view->details->tree_widget, path))
     {
@@ -539,8 +541,8 @@ selection_changed_timer_callback(FMTreeView *view)
 }
 
 static void
-selection_changed_callback (CtkTreeSelection *selection,
-                            FMTreeView *view)
+selection_changed_callback (CtkTreeSelection *selection G_GNUC_UNUSED,
+			    FMTreeView       *view)
 {
     CdkEvent *event;
     gboolean is_keyboard;
@@ -572,7 +574,10 @@ selection_changed_callback (CtkTreeSelection *selection,
 }
 
 static int
-compare_rows (CtkTreeModel *model, CtkTreeIter *a, CtkTreeIter *b, gpointer callback_data)
+compare_rows (CtkTreeModel *model,
+	      CtkTreeIter  *a,
+	      CtkTreeIter  *b,
+	      gpointer      callback_data G_GNUC_UNUSED)
 {
     BaulFile *file_a, *file_b;
     int result;
@@ -624,17 +629,17 @@ compare_rows (CtkTreeModel *model, CtkTreeIter *a, CtkTreeIter *b, gpointer call
 
 
 static char *
-get_root_uri_callback (BaulTreeViewDragDest *dest,
-                       gpointer user_data)
+get_root_uri_callback (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+		       gpointer              user_data G_GNUC_UNUSED)
 {
     /* Don't allow drops on background */
     return NULL;
 }
 
 static BaulFile *
-get_file_for_path_callback (BaulTreeViewDragDest *dest,
-                            CtkTreePath *path,
-                            gpointer user_data)
+get_file_for_path_callback (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+			    CtkTreePath          *path,
+			    gpointer              user_data)
 {
     FMTreeView *view;
 
@@ -644,13 +649,13 @@ get_file_for_path_callback (BaulTreeViewDragDest *dest,
 }
 
 static void
-move_copy_items_callback (BaulTreeViewDragDest *dest,
-                          const GList *item_uris,
-                          const char *target_uri,
-                          CdkDragAction action,
-                          int x,
-                          int y,
-                          gpointer user_data)
+move_copy_items_callback (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+			  const GList          *item_uris,
+			  const char           *target_uri,
+			  CdkDragAction         action,
+			  int                   x G_GNUC_UNUSED,
+			  int                   y G_GNUC_UNUSED,
+			  gpointer              user_data)
 {
     FMTreeView *view;
 
@@ -695,17 +700,17 @@ add_root_for_mount (FMTreeView *view,
 }
 
 static void
-mount_added_callback (GVolumeMonitor *volume_monitor,
-                      GMount *mount,
-                      FMTreeView *view)
+mount_added_callback (GVolumeMonitor *volume_monitor G_GNUC_UNUSED,
+		      GMount         *mount,
+		      FMTreeView     *view)
 {
     add_root_for_mount (view, mount);
 }
 
 static void
-mount_removed_callback (GVolumeMonitor *volume_monitor,
-                        GMount *mount,
-                        FMTreeView *view)
+mount_removed_callback (GVolumeMonitor *volume_monitor G_GNUC_UNUSED,
+			GMount         *mount,
+			FMTreeView     *view)
 {
     GFile *root;
     char *mount_uri;
@@ -719,9 +724,9 @@ mount_removed_callback (GVolumeMonitor *volume_monitor,
 }
 
 static void
-clipboard_contents_received_callback (CtkClipboard     *clipboard,
-                                      CtkSelectionData *selection_data,
-                                      gpointer          data)
+clipboard_contents_received_callback (CtkClipboard     *clipboard G_GNUC_UNUSED,
+				      CtkSelectionData *selection_data,
+				      gpointer          data)
 {
     FMTreeView *view;
 
@@ -920,22 +925,22 @@ fm_tree_view_activate_file (FMTreeView *view,
 }
 
 static void
-fm_tree_view_open_cb (CtkWidget *menu_item,
-                      FMTreeView *view)
+fm_tree_view_open_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+		      FMTreeView *view)
 {
     fm_tree_view_activate_file (view, view->details->popup_file, 0);
 }
 
 static void
-fm_tree_view_open_in_new_tab_cb (CtkWidget *menu_item,
-                                 FMTreeView *view)
+fm_tree_view_open_in_new_tab_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+				 FMTreeView *view)
 {
     fm_tree_view_activate_file (view, view->details->popup_file, BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
 }
 
 static void
-fm_tree_view_open_in_new_window_cb (CtkWidget *menu_item,
-                                    FMTreeView *view)
+fm_tree_view_open_in_new_window_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+				    FMTreeView *view)
 {
     /* fm_tree_view_activate_file (view, view->details->popup_file, BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW); */
 
@@ -963,8 +968,8 @@ new_folder_done (GFile *new_folder, gpointer data)
 }
 
 static void
-fm_tree_view_create_folder_cb (CtkWidget *menu_item,
-                               FMTreeView *view)
+fm_tree_view_create_folder_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+			       FMTreeView *view)
 {
     char *parent_uri;
 
@@ -1029,15 +1034,15 @@ copy_or_cut_files (FMTreeView *view,
 }
 
 static void
-fm_tree_view_cut_cb (CtkWidget *menu_item,
-                     FMTreeView *view)
+fm_tree_view_cut_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+		     FMTreeView *view)
 {
     copy_or_cut_files (view, TRUE);
 }
 
 static void
-fm_tree_view_copy_cb (CtkWidget *menu_item,
-                      FMTreeView *view)
+fm_tree_view_copy_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+		      FMTreeView *view)
 {
     copy_or_cut_files (view, FALSE);
 }
@@ -1078,9 +1083,9 @@ paste_clipboard_data (FMTreeView *view,
 }
 
 static void
-paste_into_clipboard_received_callback (CtkClipboard     *clipboard,
-                                        CtkSelectionData *selection_data,
-                                        gpointer          data)
+paste_into_clipboard_received_callback (CtkClipboard     *clipboard G_GNUC_UNUSED,
+					CtkSelectionData *selection_data,
+					gpointer          data)
 {
     FMTreeView *view;
     char *directory_uri;
@@ -1095,8 +1100,8 @@ paste_into_clipboard_received_callback (CtkClipboard     *clipboard,
 }
 
 static void
-fm_tree_view_paste_cb (CtkWidget *menu_item,
-                       FMTreeView *view)
+fm_tree_view_paste_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+		       FMTreeView *view)
 {
     ctk_clipboard_request_contents (baul_clipboard_get (CTK_WIDGET (view->details->tree_widget)),
                                     copied_files_atom,
@@ -1120,8 +1125,8 @@ fm_tree_view_get_containing_window (FMTreeView *view)
 }
 
 static void
-fm_tree_view_trash_cb (CtkWidget *menu_item,
-                       FMTreeView *view)
+fm_tree_view_trash_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+		       FMTreeView *view)
 {
     GList *list;
 
@@ -1140,8 +1145,8 @@ fm_tree_view_trash_cb (CtkWidget *menu_item,
 }
 
 static void
-fm_tree_view_delete_cb (CtkWidget *menu_item,
-                        FMTreeView *view)
+fm_tree_view_delete_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+			FMTreeView *view)
 {
     GList *location_list;
 
@@ -1158,8 +1163,8 @@ fm_tree_view_delete_cb (CtkWidget *menu_item,
 }
 
 static void
-fm_tree_view_properties_cb (CtkWidget *menu_item,
-                            FMTreeView *view)
+fm_tree_view_properties_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+			    FMTreeView *view)
 {
     GList *list;
 
@@ -1171,8 +1176,8 @@ fm_tree_view_properties_cb (CtkWidget *menu_item,
 }
 
 static void
-fm_tree_view_unmount_cb (CtkWidget *menu_item,
-                         FMTreeView *view)
+fm_tree_view_unmount_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+			 FMTreeView *view)
 {
     BaulFile *file = view->details->popup_file;
     GMount *mount;
@@ -1192,8 +1197,8 @@ fm_tree_view_unmount_cb (CtkWidget *menu_item,
 }
 
 static void
-fm_tree_view_eject_cb (CtkWidget *menu_item,
-                       FMTreeView *view)
+fm_tree_view_eject_cb (CtkWidget  *menu_item G_GNUC_UNUSED,
+		       FMTreeView *view)
 {
     BaulFile *file = view->details->popup_file;
     GMount *mount;
@@ -1229,7 +1234,8 @@ free_popup_file_in_idle_cb (gpointer data)
 }
 
 static void
-popup_menu_deactivated (CtkMenuShell *menu_shell, gpointer data)
+popup_menu_deactivated (CtkMenuShell *menu_shell G_GNUC_UNUSED,
+			gpointer      data)
 {
     FMTreeView *view;
 
@@ -1533,9 +1539,9 @@ update_filtering_from_preferences (FMTreeView *view)
 }
 
 static void
-parent_set_callback (CtkWidget        *widget,
-                     CtkWidget        *previous_parent,
-                     gpointer          callback_data)
+parent_set_callback (CtkWidget *widget,
+		     CtkWidget *previous_parent G_GNUC_UNUSED,
+		     gpointer   callback_data)
 {
     FMTreeView *view;
 
@@ -1555,9 +1561,9 @@ filtering_changed_callback (gpointer callback_data)
 }
 
 static void
-loading_uri_callback (BaulWindowInfo *window,
-                      char *location,
-                      gpointer callback_data)
+loading_uri_callback (BaulWindowInfo *window G_GNUC_UNUSED,
+		      char           *location,
+		      gpointer        callback_data)
 {
     FMTreeView *view;
 
@@ -1701,39 +1707,39 @@ fm_tree_view_class_init (FMTreeViewClass *class)
 }
 
 static const char *
-fm_tree_view_get_sidebar_id (BaulSidebar *sidebar)
+fm_tree_view_get_sidebar_id (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return TREE_SIDEBAR_ID;
 }
 
 static char *
-fm_tree_view_get_tab_label (BaulSidebar *sidebar)
+fm_tree_view_get_tab_label (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Tree"));
 }
 
 static char *
-fm_tree_view_get_tab_tooltip (BaulSidebar *sidebar)
+fm_tree_view_get_tab_tooltip (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Show Tree"));
 }
 
 static GdkPixbuf *
-fm_tree_view_get_tab_icon (BaulSidebar *sidebar)
+fm_tree_view_get_tab_icon (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return NULL;
 }
 
 static void
-fm_tree_view_is_visible_changed (BaulSidebar *sidebar,
-                                 gboolean         is_visible)
+fm_tree_view_is_visible_changed (BaulSidebar *sidebar G_GNUC_UNUSED,
+				 gboolean     is_visible G_GNUC_UNUSED)
 {
     /* Do nothing */
 }
 
 static void
-hidden_files_mode_changed_callback (BaulWindowInfo *window,
-                                    FMTreeView *view)
+hidden_files_mode_changed_callback (BaulWindowInfo *window G_GNUC_UNUSED,
+				    FMTreeView     *view)
 {
     update_filtering_from_preferences (view);
 }
@@ -1771,8 +1777,8 @@ fm_tree_view_set_parent_window (FMTreeView *sidebar,
 }
 
 static BaulSidebar *
-fm_tree_view_create (BaulSidebarProvider *provider,
-                     BaulWindowInfo *window)
+fm_tree_view_create (BaulSidebarProvider *provider G_GNUC_UNUSED,
+		     BaulWindowInfo      *window)
 {
     FMTreeView *sidebar;
 
@@ -1790,12 +1796,12 @@ sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 }
 
 static void
-fm_tree_view_provider_init (FMTreeViewProvider *sidebar)
+fm_tree_view_provider_init (FMTreeViewProvider *sidebar G_GNUC_UNUSED)
 {
 }
 
 static void
-fm_tree_view_provider_class_init (FMTreeViewProviderClass *class)
+fm_tree_view_provider_class_init (FMTreeViewProviderClass *class G_GNUC_UNUSED)
 {
 }
 
