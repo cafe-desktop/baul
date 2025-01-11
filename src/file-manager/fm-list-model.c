@@ -143,7 +143,7 @@ file_entry_free (FileEntry *file_entry)
 }
 
 static CtkTreeModelFlags
-fm_list_model_get_flags (CtkTreeModel *tree_model)
+fm_list_model_get_flags (CtkTreeModel *tree_model G_GNUC_UNUSED)
 {
     return CTK_TREE_MODEL_ITERS_PERSIST;
 }
@@ -688,9 +688,9 @@ dir_to_iters (struct GetIters *data,
 }
 
 static void
-file_to_iter_cb (gpointer  key,
-                 gpointer  value,
-                 gpointer  user_data)
+file_to_iter_cb (gpointer key G_GNUC_UNUSED,
+		 gpointer value,
+		 gpointer user_data)
 {
     struct GetIters *data;
     FileEntry *dir_file_entry;
@@ -931,13 +931,14 @@ fm_list_model_set_sort_column_id (CtkTreeSortable *sortable, gint sort_column_id
 }
 
 static gboolean
-fm_list_model_has_default_sort_func (CtkTreeSortable *sortable)
+fm_list_model_has_default_sort_func (CtkTreeSortable *sortable G_GNUC_UNUSED)
 {
     return FALSE;
 }
 
 static gboolean
-fm_list_model_multi_row_draggable (EggTreeMultiDragSource *drag_source, GList *path_list)
+fm_list_model_multi_row_draggable (EggTreeMultiDragSource *drag_source G_GNUC_UNUSED,
+				   GList                  *path_list G_GNUC_UNUSED)
 {
     return TRUE;
 }
@@ -1033,7 +1034,8 @@ fm_list_model_multi_drag_data_get (EggTreeMultiDragSource *drag_source,
 }
 
 static gboolean
-fm_list_model_multi_drag_data_delete (EggTreeMultiDragSource *drag_source, GList *path_list)
+fm_list_model_multi_drag_data_delete (EggTreeMultiDragSource *drag_source G_GNUC_UNUSED,
+				      GList                  *path_list G_GNUC_UNUSED)
 {
     return TRUE;
 }
