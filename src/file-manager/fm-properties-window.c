@@ -483,10 +483,13 @@ reset_icon (FMPropertiesWindow *properties_window)
 
 
 static void
-fm_properties_window_drag_data_received (CtkWidget *widget, CdkDragContext *context,
-					 int x, int y,
+fm_properties_window_drag_data_received (CtkWidget        *widget,
+					 CdkDragContext   *context G_GNUC_UNUSED,
+					 int               x G_GNUC_UNUSED,
+					 int               y G_GNUC_UNUSED,
 					 CtkSelectionData *selection_data,
-					 guint info, guint time)
+					 guint             info,
+					 guint             time G_GNUC_UNUSED)
 {
 	char **uris;
 	gboolean exactly_one;
@@ -731,7 +734,10 @@ name_field_restore_original_name (BaulEntry *name_field)
 }
 
 static void
-rename_callback (BaulFile *file, GFile *res_loc, GError *error, gpointer callback_data)
+rename_callback (BaulFile *file,
+		 GFile    *res_loc G_GNUC_UNUSED,
+		 GError   *error,
+		 gpointer  callback_data)
 {
 	FMPropertiesWindow *window;
 
@@ -805,9 +811,9 @@ name_field_done_editing (BaulEntry *name_field, FMPropertiesWindow *window)
 }
 
 static gboolean
-name_field_focus_out (BaulEntry *name_field,
-		      CdkEventFocus *event,
-		      gpointer callback_data)
+name_field_focus_out (BaulEntry     *name_field,
+		      CdkEventFocus *event G_GNUC_UNUSED,
+		      gpointer       callback_data)
 {
 	g_assert (FM_IS_PROPERTIES_WINDOW (callback_data));
 
@@ -1484,9 +1490,9 @@ attach_ellipsizing_value_field (FMPropertiesWindow *window,
 }
 
 static void
-group_change_callback (BaulFile *file,
-		       GFile *res_loc,
-		       GError *error,
+group_change_callback (BaulFile           *file,
+		       GFile              *res_loc G_GNUC_UNUSED,
+		       GError             *error,
 		       FMPropertiesWindow *window)
 {
 	char *group;
@@ -1815,25 +1821,25 @@ synch_groups_combo_box (CtkComboBox *combo_box, BaulFile *file)
 static gboolean
 combo_box_row_separator_func (CtkTreeModel *model,
 			      CtkTreeIter  *iter,
-			      gpointer      data)
+			      gpointer      data G_GNUC_UNUSED)
 {
-  	gchar *text;
+	gchar *text;
 	gboolean ret;
 
-  	ctk_tree_model_get (model, iter, 0, &text, -1);
+	ctk_tree_model_get (model, iter, 0, &text, -1);
 
 	if (text == NULL) {
 		return FALSE;
 	}
 
-  	if (strcmp (text, "-") == 0) {
-    		ret = TRUE;
+	if (strcmp (text, "-") == 0) {
+		ret = TRUE;
 	} else {
 		ret = FALSE;
 	}
 
-  	g_free (text);
-  	return ret;
+	g_free (text);
+	return ret;
 }
 
 static CtkComboBox *
@@ -1899,9 +1905,9 @@ attach_group_combo_box (CtkGrid *grid,
 }
 
 static void
-owner_change_callback (BaulFile *file,
-                       GFile 	    *result_location,
-		       GError        *error,
+owner_change_callback (BaulFile           *file,
+                       GFile              *result_location G_GNUC_UNUSED,
+		       GError             *error,
 		       FMPropertiesWindow *window)
 {
 	char *owner;
@@ -3541,9 +3547,9 @@ end_long_operation (FMPropertiesWindow *window)
 
 static void
 permission_change_callback (BaulFile *file,
-			    GFile *res_loc,
-			    GError *error,
-			    gpointer callback_data)
+			    GFile    *res_loc G_GNUC_UNUSED,
+			    GError   *error,
+			    gpointer  callback_data)
 {
 	FMPropertiesWindow *window;
 	g_assert (callback_data != NULL);
@@ -4664,7 +4670,7 @@ set_recursive_permissions_done (gpointer callback_data)
 
 
 static void
-apply_recursive_clicked (CtkWidget *recursive_button,
+apply_recursive_clicked (CtkWidget          *recursive_button G_GNUC_UNUSED,
 			 FMPropertiesWindow *window)
 {
 	guint32 file_permission, file_permission_mask;
@@ -5314,7 +5320,7 @@ parent_widget_destroyed_callback (CtkWidget *widget, gpointer callback_data)
 
 static void
 cancel_call_when_ready_callback (gpointer key,
-				 gpointer value,
+				 gpointer value G_GNUC_UNUSED,
 				 gpointer user_data)
 {
 	baul_file_cancel_call_when_ready
@@ -5646,8 +5652,8 @@ set_icon (const char* icon_uri, FMPropertiesWindow *properties_window)
 }
 
 static void
-update_preview_callback (CtkFileChooser *icon_chooser,
-			 FMPropertiesWindow *window)
+update_preview_callback (CtkFileChooser     *icon_chooser,
+			 FMPropertiesWindow *window G_GNUC_UNUSED)
 {
 	GdkPixbuf *pixbuf, *scaled_pixbuf;
 	char *filename;
@@ -5718,7 +5724,7 @@ custom_icon_file_chooser_response_cb (CtkDialog *dialog,
 }
 
 static void
-select_image_button_callback (CtkWidget *widget,
+select_image_button_callback (CtkWidget          *widget G_GNUC_UNUSED,
 			      FMPropertiesWindow *window)
 {
 	CtkWidget *dialog;
