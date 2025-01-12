@@ -63,7 +63,7 @@ desktop_get_attributes (AtkObject *accessible)
 }
 
 static void
-baul_desktop_window_accessible_init (BaulDesktopWindowAccessible *window)
+baul_desktop_window_accessible_init (BaulDesktopWindowAccessible *window G_GNUC_UNUSED)
 {
 }
 
@@ -126,7 +126,7 @@ baul_desktop_window_init (BaulDesktopWindow *window)
 }
 
 static gint
-baul_desktop_window_delete_event (BaulDesktopWindow *window)
+baul_desktop_window_delete_event (BaulDesktopWindow *window G_GNUC_UNUSED)
 {
     /* Returning true tells CTK+ not to delete the window. */
     return TRUE;
@@ -314,8 +314,8 @@ draw (CtkWidget *widget,
 }
 
 static BaulIconInfo *
-real_get_icon (BaulWindow *window,
-               BaulWindowSlot *slot)
+real_get_icon (BaulWindow     *window,
+	       BaulWindowSlot *slot G_GNUC_UNUSED)
 {
     gint scale = ctk_widget_get_scale_factor (CTK_WIDGET (window));
     return baul_icon_info_lookup_from_name (BAUL_ICON_DESKTOP, 48, scale);
