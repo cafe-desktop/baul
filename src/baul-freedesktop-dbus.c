@@ -181,17 +181,17 @@ bus_acquired_cb (GDBusConnection *conn,
 }
 
 static void
-name_acquired_cb (GDBusConnection *connection,
-                  const gchar     *name,
-                  gpointer         user_data)
+name_acquired_cb (GDBusConnection *connection G_GNUC_UNUSED,
+		  const gchar     *name,
+		  gpointer         user_data G_GNUC_UNUSED)
 {
     baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER, "Acquired the name %s on the session message bus\n", name);
 }
 
 static void
-name_lost_cb (GDBusConnection *connection,
-              const gchar     *name,
-              gpointer         user_data)
+name_lost_cb (GDBusConnection *connection G_GNUC_UNUSED,
+	      const gchar     *name,
+	      gpointer         user_data G_GNUC_UNUSED)
 {
     baul_debug_log (FALSE, BAUL_DEBUG_LOG_DOMAIN_USER, "Lost (or failed to acquire) the name %s on the session message bus\n", name);
 }
