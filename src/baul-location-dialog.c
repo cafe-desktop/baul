@@ -79,8 +79,8 @@ open_current_location (BaulLocationDialog *dialog)
 
 static void
 response_callback (BaulLocationDialog *dialog,
-                   int response_id,
-                   gpointer data)
+		   int                 response_id,
+		   gpointer            data G_GNUC_UNUSED)
 {
     GError *error;
 
@@ -113,8 +113,8 @@ response_callback (BaulLocationDialog *dialog,
 }
 
 static void
-entry_activate_callback (CtkEntry *entry,
-                         gpointer user_data)
+entry_activate_callback (CtkEntry *entry G_GNUC_UNUSED,
+			 gpointer  user_data)
 {
     BaulLocationDialog *dialog;
 
@@ -133,7 +133,9 @@ baul_location_dialog_class_init (BaulLocationDialogClass *class)
 }
 
 static void
-entry_text_changed (GObject *object, GParamSpec *spec, gpointer user_data)
+entry_text_changed (GObject    *object G_GNUC_UNUSED,
+		    GParamSpec *spec G_GNUC_UNUSED,
+		    gpointer    user_data)
 {
     BaulLocationDialog *dialog;
 
