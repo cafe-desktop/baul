@@ -147,14 +147,14 @@ emit_location_changed (BaulLocationBar *bar)
 }
 
 static void
-drag_data_received_callback (CtkWidget *widget,
-                             CdkDragContext *context,
-                             int x,
-                             int y,
-                             CtkSelectionData *data,
-                             guint info,
-                             guint32 time,
-                             gpointer callback_data)
+drag_data_received_callback (CtkWidget        *widget,
+			     CdkDragContext   *context,
+			     int               x G_GNUC_UNUSED,
+			     int               y G_GNUC_UNUSED,
+			     CtkSelectionData *data,
+			     guint             info G_GNUC_UNUSED,
+			     guint32           time,
+			     gpointer          callback_data)
 {
     char **names;
     int name_count;
@@ -247,12 +247,12 @@ drag_data_received_callback (CtkWidget *widget,
 }
 
 static void
-drag_data_get_callback (CtkWidget *widget,
-                        CdkDragContext *context,
-                        CtkSelectionData *selection_data,
-                        guint info,
-                        guint32 time,
-                        gpointer callback_data)
+drag_data_get_callback (CtkWidget        *widget G_GNUC_UNUSED,
+			CdkDragContext   *context G_GNUC_UNUSED,
+			CtkSelectionData *selection_data,
+			guint             info,
+			guint32           time G_GNUC_UNUSED,
+			gpointer          callback_data)
 {
     BaulLocationBar *self;
     char *entry_text;
@@ -284,7 +284,8 @@ drag_data_get_callback (CtkWidget *widget,
    we are imitating here. */
 
 static void
-style_set_handler (CtkWidget *widget, CtkStyleContext *previous_style)
+style_set_handler (CtkWidget       *widget,
+		   CtkStyleContext *previous_style G_GNUC_UNUSED)
 {
     PangoLayout *layout;
     int width, width2;
@@ -396,8 +397,8 @@ baul_location_bar_update_label (BaulLocationBar *bar)
 }
 
 static void
-editable_changed_callback (CtkEntry *entry,
-                           gpointer user_data)
+editable_changed_callback (CtkEntry *entry G_GNUC_UNUSED,
+			   gpointer  user_data)
 {
     baul_location_bar_update_label (BAUL_LOCATION_BAR (user_data));
 }
