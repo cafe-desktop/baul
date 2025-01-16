@@ -208,8 +208,8 @@ position_and_selection_are_at_end (CtkEditable *editable)
 }
 
 static void
-got_completion_data_callback (GFilenameCompleter *completer,
-                              BaulLocationEntry *entry)
+got_completion_data_callback (GFilenameCompleter *completer G_GNUC_UNUSED,
+			      BaulLocationEntry  *entry)
 {
     if (entry->details->idle_id)
     {
@@ -311,7 +311,7 @@ destroy (CtkWidget *object)
 
 static void
 baul_location_entry_text_changed (BaulLocationEntry *entry,
-                                  GParamSpec            *pspec)
+				  GParamSpec        *pspec G_GNUC_UNUSED)
 {
     if (entry->details->setting_special_text)
     {
@@ -322,10 +322,10 @@ baul_location_entry_text_changed (BaulLocationEntry *entry,
 }
 
 static void
-baul_location_entry_icon_release (CtkEntry *gentry,
-                                  CtkEntryIconPosition position,
-                                  CdkEvent *event,
-                                  gpointer unused)
+baul_location_entry_icon_release (CtkEntry            *gentry,
+				  CtkEntryIconPosition position G_GNUC_UNUSED,
+				  CdkEvent            *event G_GNUC_UNUSED,
+				  gpointer             unused G_GNUC_UNUSED)
 {
     switch (BAUL_LOCATION_ENTRY (gentry)->details->secondary_action)
     {
