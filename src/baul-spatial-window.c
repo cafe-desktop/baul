@@ -261,8 +261,8 @@ baul_spatial_window_save_geometry (BaulSpatialWindow *window,
 }
 
 static void
-baul_spatial_window_save_scroll_position (BaulSpatialWindow *window,
-					  BaulWindowSlot *slot)
+baul_spatial_window_save_scroll_position (BaulSpatialWindow *window G_GNUC_UNUSED,
+					  BaulWindowSlot    *slot)
 {
     char *scroll_string;
 
@@ -348,15 +348,15 @@ baul_spatial_window_show (CtkWidget *widget)
 }
 
 static void
-action_close_parent_folders_callback (CtkAction *action,
-                                      gpointer user_data)
+action_close_parent_folders_callback (CtkAction *action G_GNUC_UNUSED,
+				      gpointer   user_data)
 {
     baul_application_close_parent_windows (BAUL_SPATIAL_WINDOW (user_data));
 }
 
 static void
-action_close_all_folders_callback (CtkAction *action,
-                                   gpointer user_data)
+action_close_all_folders_callback (CtkAction *action G_GNUC_UNUSED,
+				   gpointer   user_data G_GNUC_UNUSED)
 {
     baul_application_close_all_spatial_windows ();
 }
@@ -422,8 +422,9 @@ real_sync_title (BaulWindow *window,
 }
 
 static void
-real_get_min_size (BaulWindow *window,
-                   guint *min_width, guint *min_height)
+real_get_min_size (BaulWindow *window G_GNUC_UNUSED,
+		   guint      *min_width,
+		   guint      *min_height)
 {
     if (min_width)
     {
@@ -436,8 +437,9 @@ real_get_min_size (BaulWindow *window,
 }
 
 static void
-real_get_default_size (BaulWindow *window,
-                       guint *default_width, guint *default_height)
+real_get_default_size (BaulWindow *window G_GNUC_UNUSED,
+		       guint      *default_width,
+		       guint      *default_height)
 {
     if (default_width)
     {
@@ -450,8 +452,8 @@ real_get_default_size (BaulWindow *window,
 }
 
 static void
-real_sync_allow_stop (BaulWindow *window,
-                      BaulWindowSlot *slot)
+real_sync_allow_stop (BaulWindow     *window G_GNUC_UNUSED,
+		      BaulWindowSlot *slot G_GNUC_UNUSED)
 {
 }
 
@@ -471,8 +473,8 @@ real_set_allow_up (BaulWindow *window, gboolean allow)
 }
 
 static BaulWindowSlot *
-real_open_slot (BaulWindowPane *pane,
-                BaulWindowOpenSlotFlags flags)
+real_open_slot (BaulWindowPane         *pane,
+		BaulWindowOpenSlotFlags flags G_GNUC_UNUSED)
 {
     BaulWindowSlot *slot;
     GList *slots;
@@ -590,8 +592,8 @@ location_menu_item_activated_callback (CtkWidget *menu_item,
 }
 
 static void
-menu_deactivate_callback (CtkWidget *menu,
-                          gpointer   data)
+menu_deactivate_callback (CtkWidget *menu G_GNUC_UNUSED,
+			  gpointer   data)
 {
     GMainLoop *loop;
 
@@ -604,9 +606,9 @@ menu_deactivate_callback (CtkWidget *menu,
 }
 
 static gboolean
-location_button_pressed_callback (CtkWidget      *widget,
-                                  CdkEventButton *event,
-                                  BaulWindow *window)
+location_button_pressed_callback (CtkWidget      *widget G_GNUC_UNUSED,
+				  CdkEventButton *event,
+				  BaulWindow     *window)
 {
 	BaulWindowSlot *slot;
     BaulView *view;
@@ -869,8 +871,8 @@ baul_spatial_window_set_location_button  (BaulSpatialWindow *window,
 }
 
 static void
-action_go_to_location_callback (CtkAction *action,
-                                gpointer user_data)
+action_go_to_location_callback (CtkAction *action G_GNUC_UNUSED,
+				gpointer   user_data)
 {
     BaulWindow *window;
 
@@ -880,8 +882,8 @@ action_go_to_location_callback (CtkAction *action,
 }
 
 static void
-action_add_bookmark_callback (CtkAction *action,
-                              gpointer user_data)
+action_add_bookmark_callback (CtkAction *action G_GNUC_UNUSED,
+			      gpointer   user_data)
 {
     BaulWindow *window;
 
@@ -894,15 +896,15 @@ action_add_bookmark_callback (CtkAction *action,
 }
 
 static void
-action_edit_bookmarks_callback (CtkAction *action,
-                                gpointer user_data)
+action_edit_bookmarks_callback (CtkAction *action G_GNUC_UNUSED,
+				gpointer   user_data)
 {
     baul_window_edit_bookmarks (BAUL_WINDOW (user_data));
 }
 
 static void
-action_search_callback (CtkAction *action,
-                        gpointer user_data)
+action_search_callback (CtkAction *action G_GNUC_UNUSED,
+			gpointer   user_data)
 {
     BaulWindow *window;
     char *uri;
