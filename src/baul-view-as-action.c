@@ -1,5 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
  *  Baul
  *
@@ -226,10 +224,10 @@ baul_view_as_action_finalize (GObject *object)
 }
 
 static void
-baul_view_as_action_set_property (GObject *object,
-                                  guint prop_id,
-                                  const GValue *value,
-                                  GParamSpec *pspec)
+baul_view_as_action_set_property (GObject      *object,
+				  guint         prop_id,
+				  const GValue *value,
+				  GParamSpec   *pspec G_GNUC_UNUSED)
 {
     BaulViewAsAction *zoom;
 
@@ -244,10 +242,10 @@ baul_view_as_action_set_property (GObject *object,
 }
 
 static void
-baul_view_as_action_get_property (GObject *object,
-                                  guint prop_id,
-                                  GValue *value,
-                                  GParamSpec *pspec)
+baul_view_as_action_get_property (GObject    *object,
+				  guint       prop_id,
+				  GValue     *value,
+				  GParamSpec *pspec G_GNUC_UNUSED)
 {
     BaulViewAsAction *zoom;
 
