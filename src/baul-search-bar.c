@@ -120,16 +120,17 @@ entry_has_text (BaulSearchBar *bar)
 }
 
 static void
-entry_icon_release_cb (CtkEntry *entry,
-                       CtkEntryIconPosition position,
-                       CdkEvent *event,
-                       BaulSearchBar *bar)
+entry_icon_release_cb (CtkEntry            *entry,
+		       CtkEntryIconPosition position G_GNUC_UNUSED,
+		       CdkEvent            *event G_GNUC_UNUSED,
+		       BaulSearchBar       *bar G_GNUC_UNUSED)
 {
     g_signal_emit_by_name (entry, "activate", 0);
 }
 
 static void
-entry_activate_cb (CtkWidget *entry, BaulSearchBar *bar)
+entry_activate_cb (CtkWidget     *entry G_GNUC_UNUSED,
+		   BaulSearchBar *bar)
 {
     if (entry_has_text (bar) && !bar->details->entry_borrowed)
     {
@@ -138,9 +139,9 @@ entry_activate_cb (CtkWidget *entry, BaulSearchBar *bar)
 }
 
 static gboolean
-focus_in_event_callback (CtkWidget *widget,
-                         CdkEventFocus *event,
-                         gpointer user_data)
+focus_in_event_callback (CtkWidget     *widget G_GNUC_UNUSED,
+			 CdkEventFocus *event G_GNUC_UNUSED,
+			 gpointer       user_data)
 {
     BaulSearchBar *bar;
 
