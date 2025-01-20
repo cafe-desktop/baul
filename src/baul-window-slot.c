@@ -48,10 +48,10 @@ G_DEFINE_TYPE_WITH_CODE (BaulWindowSlot,
 #define parent_class baul_window_slot_parent_class
 
 static void
-query_editor_changed_callback (BaulSearchBar *bar,
-                               BaulQuery *query,
-                               gboolean reload,
-                               BaulWindowSlot *slot)
+query_editor_changed_callback (BaulSearchBar  *bar G_GNUC_UNUSED,
+			       BaulQuery      *query,
+			       gboolean        reload,
+			       BaulWindowSlot *slot)
 {
     BaulDirectory *directory;
 
