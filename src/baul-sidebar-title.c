@@ -332,7 +332,8 @@ baul_sidebar_title_select_text_color (BaulSidebarTitle *sidebar_title,
 }
 
 static char*
-get_property_from_component (BaulSidebarTitle *sidebar_title, const char *property)
+get_property_from_component (BaulSidebarTitle *sidebar_title G_GNUC_UNUSED,
+			     const char       *property G_GNUC_UNUSED)
 {
     /* There used to be a way to get icon and summary_text from main view,
      *  but its not used right now, so this sas stubbed out for now
