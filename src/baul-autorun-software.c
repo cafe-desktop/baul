@@ -57,7 +57,8 @@ autorun_software_dialog_destroy (AutorunSoftwareDialogData *data)
 }
 
 static void
-autorun_software_dialog_mount_unmounted (GMount *mount, AutorunSoftwareDialogData *data)
+autorun_software_dialog_mount_unmounted (GMount                    *mount G_GNUC_UNUSED,
+					 AutorunSoftwareDialogData *data)
 {
     autorun_software_dialog_destroy (data);
 }
