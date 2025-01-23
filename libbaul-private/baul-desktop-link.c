@@ -127,9 +127,9 @@ baul_desktop_link_ensure_display_name (BaulDesktopLink *link)
 }
 
 static void
-trash_state_changed_callback (BaulTrashMonitor *trash_monitor,
-                              gboolean state,
-                              gpointer callback_data)
+trash_state_changed_callback (BaulTrashMonitor *trash_monitor G_GNUC_UNUSED,
+			      gboolean          state G_GNUC_UNUSED,
+			      gpointer          callback_data)
 {
     BaulDesktopLink *link;
 
@@ -392,9 +392,9 @@ baul_desktop_link_get_activation_uri (BaulDesktopLink *link)
 
 
 gboolean
-baul_desktop_link_get_date (BaulDesktopLink *link,
-                            BaulDateType     date_type,
-                            time_t               *date)
+baul_desktop_link_get_date (BaulDesktopLink *link G_GNUC_UNUSED,
+			    BaulDateType     date_type G_GNUC_UNUSED,
+			    time_t          *date G_GNUC_UNUSED)
 {
     return FALSE;
 }

@@ -1895,8 +1895,8 @@ eel_editable_label_button_press (CtkWidget      *widget,
 }
 
 static gint
-eel_editable_label_button_release (CtkWidget      *widget,
-                                   CdkEventButton *event)
+eel_editable_label_button_release (CtkWidget      *widget G_GNUC_UNUSED,
+				   CdkEventButton *event)
 
 {
     if (event->button != 1)
@@ -1936,10 +1936,10 @@ eel_editable_label_motion (CtkWidget      *widget,
 }
 
 static void
-get_text_callback (CtkClipboard     *clipboard,
-                   CtkSelectionData *selection_data,
-                   guint             info,
-                   gpointer          user_data_or_owner)
+get_text_callback (CtkClipboard     *clipboard G_GNUC_UNUSED,
+		   CtkSelectionData *selection_data,
+		   guint             info G_GNUC_UNUSED,
+		   gpointer          user_data_or_owner)
 {
     EelEditableLabel *label;
 
@@ -1971,8 +1971,8 @@ get_text_callback (CtkClipboard     *clipboard,
 }
 
 static void
-clear_text_callback (CtkClipboard     *clipboard,
-                     gpointer          user_data_or_owner)
+clear_text_callback (CtkClipboard *clipboard G_GNUC_UNUSED,
+		     gpointer      user_data_or_owner)
 {
     EelEditableLabel *label;
 
@@ -2176,13 +2176,13 @@ eel_editable_label_get_layout_offsets (EelEditableLabel *label,
 }
 
 static void
-eel_editable_label_pend_cursor_blink (EelEditableLabel *label)
+eel_editable_label_pend_cursor_blink (EelEditableLabel *label G_GNUC_UNUSED)
 {
     /* TODO */
 }
 
 static void
-eel_editable_label_check_cursor_blink (EelEditableLabel *label)
+eel_editable_label_check_cursor_blink (EelEditableLabel *label G_GNUC_UNUSED)
 {
     /* TODO */
 }
@@ -2226,15 +2226,15 @@ eel_editable_label_key_release (CtkWidget   *widget,
 }
 
 static void
-eel_editable_label_keymap_direction_changed (CdkKeymap *keymap,
-        EelEditableLabel  *label)
+eel_editable_label_keymap_direction_changed (CdkKeymap        *keymap G_GNUC_UNUSED,
+					     EelEditableLabel *label)
 {
     ctk_widget_queue_draw (CTK_WIDGET (label));
 }
 
 static gint
 eel_editable_label_focus_in (CtkWidget     *widget,
-                             CdkEventFocus *event)
+			     CdkEventFocus *event G_GNUC_UNUSED)
 {
     EelEditableLabel *label = EEL_EDITABLE_LABEL (widget);
 
@@ -2254,7 +2254,7 @@ eel_editable_label_focus_in (CtkWidget     *widget,
 
 static gint
 eel_editable_label_focus_out (CtkWidget     *widget,
-                              CdkEventFocus *event)
+			      CdkEventFocus *event G_GNUC_UNUSED)
 {
     EelEditableLabel *label = EEL_EDITABLE_LABEL (widget);
 
@@ -2395,16 +2395,16 @@ eel_editable_label_enter_text (EelEditableLabel *label,
  */
 
 static void
-eel_editable_label_commit_cb (CtkIMContext *context,
-                              const gchar  *str,
-                              EelEditableLabel  *label)
+eel_editable_label_commit_cb (CtkIMContext     *context G_GNUC_UNUSED,
+                              const gchar      *str,
+                              EelEditableLabel *label)
 {
     eel_editable_label_enter_text (label, str);
 }
 
 static void
-eel_editable_label_preedit_changed_cb (CtkIMContext *context,
-                                       EelEditableLabel  *label)
+eel_editable_label_preedit_changed_cb (CtkIMContext     *context G_GNUC_UNUSED,
+				       EelEditableLabel *label)
 {
     gchar *preedit_string;
     gint cursor_pos;
@@ -2434,10 +2434,10 @@ eel_editable_label_retrieve_surrounding_cb (CtkIMContext *context,
 }
 
 static gboolean
-eel_editable_label_delete_surrounding_cb (CtkIMContext *slave,
-        gint          offset,
-        gint          n_chars,
-        EelEditableLabel  *label)
+eel_editable_label_delete_surrounding_cb (CtkIMContext     *slave G_GNUC_UNUSED,
+					  gint              offset,
+					  gint              n_chars,
+					  EelEditableLabel *label)
 {
     gint current_pos;
 
@@ -2450,8 +2450,8 @@ eel_editable_label_delete_surrounding_cb (CtkIMContext *slave,
 }
 
 static gboolean
-eel_editable_label_focus (CtkWidget         *widget,
-                          CtkDirectionType   direction)
+eel_editable_label_focus (CtkWidget        *widget G_GNUC_UNUSED,
+			  CtkDirectionType  direction G_GNUC_UNUSED)
 {
     /* We never want to be in the tab chain */
     return FALSE;
@@ -2464,9 +2464,9 @@ eel_editable_label_focus (CtkWidget         *widget,
  */
 static void
 get_better_cursor (EelEditableLabel *label,
-                   gint      index,
-                   gint      *x,
-                   gint      *y)
+		   gint              index G_GNUC_UNUSED,
+		   gint             *x,
+		   gint             *y)
 {
     CtkTextDirection keymap_direction =
         (cdk_keymap_get_direction (cdk_keymap_get_for_display (ctk_widget_get_display (CTK_WIDGET (label)))) == PANGO_DIRECTION_LTR) ?
@@ -2958,7 +2958,7 @@ eel_editable_label_cut_clipboard (EelEditableLabel *label)
 }
 
 static void
-paste_received (CtkClipboard *clipboard,
+paste_received (CtkClipboard *clipboard G_GNUC_UNUSED,
                 const gchar  *text,
                 gpointer      data)
 {
@@ -3034,7 +3034,7 @@ append_action_signal (EelEditableLabel     *label,
 
 static void
 popup_menu_detach (CtkWidget *attach_widget,
-                   CtkMenu   *menu)
+		   CtkMenu   *menu G_GNUC_UNUSED)
 {
     EelEditableLabel *label;
     label = EEL_EDITABLE_LABEL (attach_widget);
@@ -3057,9 +3057,9 @@ typedef struct
 } PopupInfo;
 
 static void
-popup_targets_received (CtkClipboard     *clipboard,
-                        CtkSelectionData *data,
-                        gpointer          user_data)
+popup_targets_received (CtkClipboard     *clipboard G_GNUC_UNUSED,
+			CtkSelectionData *data,
+			gpointer          user_data)
 {
     gboolean have_selection;
     gboolean clipboard_contains_text;
@@ -3955,9 +3955,9 @@ eel_editable_label_accessible_delete_text (AtkEditableText *text,
 }
 
 static void
-eel_editable_label_accessible_paste_received (CtkClipboard *clipboard,
-        const gchar  *text,
-        gpointer     data)
+eel_editable_label_accessible_paste_received (CtkClipboard *clipboard G_GNUC_UNUSED,
+					      const gchar  *text,
+					      gpointer      data)
 {
     EelEditableLabelAccessiblePaste* paste_struct = (EelEditableLabelAccessiblePaste *)data;
 
@@ -4033,9 +4033,9 @@ eel_editable_label_accessible_idle_notify_insert (gpointer data)
  */
 static void
 eel_editable_label_accessible_insert_text_cb (EelEditableLabel *label,
-        gchar            *arg1,
-        gint             arg2,
-        gpointer         arg3)
+					      gchar            *arg1 G_GNUC_UNUSED,
+					      gint              arg2,
+					      gpointer          arg3)
 {
     AtkObject *accessible;
     EelEditableLabelAccessiblePrivate *priv;
@@ -4261,6 +4261,6 @@ eel_editable_label_accessible_class_init (EelEditableLabelAccessibleClass *klass
 }
 
 static void
-eel_editable_label_accessible_init (EelEditableLabelAccessible *accessible)
+eel_editable_label_accessible_init (EelEditableLabelAccessible *accessible G_GNUC_UNUSED)
 {
 }

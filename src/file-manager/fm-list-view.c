@@ -208,7 +208,8 @@ get_default_sort_order (BaulFile *file, gboolean *reversed)
 }
 
 static void
-list_selection_changed_callback (CtkTreeSelection *selection, gpointer user_data)
+list_selection_changed_callback (CtkTreeSelection *selection G_GNUC_UNUSED,
+				 gpointer          user_data)
 {
     FMDirectoryView *view;
 
@@ -220,10 +221,10 @@ list_selection_changed_callback (CtkTreeSelection *selection, gpointer user_data
 /* Move these to eel? */
 
 static void
-tree_selection_foreach_set_boolean (CtkTreeModel *model,
-                                    CtkTreePath *path,
-                                    CtkTreeIter *iter,
-                                    gpointer callback_data)
+tree_selection_foreach_set_boolean (CtkTreeModel *model G_GNUC_UNUSED,
+				    CtkTreePath  *path G_GNUC_UNUSED,
+				    CtkTreeIter  *iter G_GNUC_UNUSED,
+				    gpointer      callback_data)
 {
     * (gboolean *) callback_data = TRUE;
 }
@@ -372,11 +373,11 @@ fm_list_view_did_not_drag (FMListView *view,
 }
 
 static void
-drag_data_get_callback (CtkWidget *widget,
-                        CdkDragContext *context,
-                        CtkSelectionData *selection_data,
-                        guint info,
-                        guint time)
+drag_data_get_callback (CtkWidget        *widget,
+			CdkDragContext   *context,
+			CtkSelectionData *selection_data,
+			guint             info G_GNUC_UNUSED,
+			guint             time G_GNUC_UNUSED)
 {
     CtkTreeView *tree_view;
     CtkTreeModel *model;
@@ -596,9 +597,9 @@ motion_notify_callback (CtkWidget *widget,
 }
 
 static gboolean
-leave_notify_callback (CtkWidget *widget,
-                       CdkEventCrossing *event,
-                       gpointer callback_data)
+leave_notify_callback (CtkWidget        *widget G_GNUC_UNUSED,
+		       CdkEventCrossing *event G_GNUC_UNUSED,
+		       gpointer          callback_data)
 {
     FMListView *view;
 
@@ -909,9 +910,9 @@ button_press_callback (CtkWidget *widget, CdkEventButton *event, gpointer callba
 }
 
 static gboolean
-button_release_callback (CtkWidget *widget,
-                         CdkEventButton *event,
-                         gpointer callback_data)
+button_release_callback (CtkWidget      *widget G_GNUC_UNUSED,
+			 CdkEventButton *event,
+			 gpointer        callback_data)
 {
     FMListView *view;
 
@@ -948,7 +949,10 @@ subdirectory_done_loading_callback (BaulDirectory *directory, FMListView *view)
 }
 
 static void
-row_expanded_callback (CtkTreeView *treeview, CtkTreeIter *iter, CtkTreePath *path, gpointer callback_data)
+row_expanded_callback (CtkTreeView *treeview G_GNUC_UNUSED,
+		       CtkTreeIter *iter G_GNUC_UNUSED,
+		       CtkTreePath *path,
+		       gpointer     callback_data)
 {
     FMListView *view;
     BaulDirectory *directory;
@@ -1033,7 +1037,10 @@ unload_file_timeout (gpointer data)
 }
 
 static void
-row_collapsed_callback (CtkTreeView *treeview, CtkTreeIter *iter, CtkTreePath *path, gpointer callback_data)
+row_collapsed_callback (CtkTreeView *treeview G_GNUC_UNUSED,
+			CtkTreeIter *iter,
+			CtkTreePath *path G_GNUC_UNUSED,
+			gpointer     callback_data)
 {
     FMListView *view;
     BaulFile *file;
@@ -1079,8 +1086,10 @@ row_collapsed_callback (CtkTreeView *treeview, CtkTreeIter *iter, CtkTreePath *p
 }
 
 static void
-row_activated_callback (CtkTreeView *treeview, CtkTreePath *path,
-                        CtkTreeViewColumn *column, FMListView *view)
+row_activated_callback (CtkTreeView       *treeview G_GNUC_UNUSED,
+			CtkTreePath       *path G_GNUC_UNUSED,
+			CtkTreeViewColumn *column G_GNUC_UNUSED,
+			FMListView        *view)
 {
     activate_selected_items (view);
 }
@@ -1335,10 +1344,10 @@ sort_column_changed_callback (CtkTreeSortable *sortable,
 }
 
 static void
-cell_renderer_editing_started_cb (CtkCellRenderer *renderer,
-                                  CtkCellEditable *editable,
-                                  const gchar *path_str,
-                                  FMListView *list_view)
+cell_renderer_editing_started_cb (CtkCellRenderer *renderer G_GNUC_UNUSED,
+				  CtkCellEditable *editable,
+				  const gchar     *path_str G_GNUC_UNUSED,
+				  FMListView      *list_view)
 {
     CtkEntry *entry;
 
@@ -1357,8 +1366,8 @@ cell_renderer_editing_started_cb (CtkCellRenderer *renderer,
 }
 
 static void
-cell_renderer_editing_canceled (CtkCellRendererText *cell,
-                                FMListView          *view)
+cell_renderer_editing_canceled (CtkCellRendererText *cell G_GNUC_UNUSED,
+				FMListView          *view)
 {
     view->details->editable_widget = NULL;
 
@@ -1366,10 +1375,10 @@ cell_renderer_editing_canceled (CtkCellRendererText *cell,
 }
 
 static void
-cell_renderer_edited (CtkCellRendererText *cell,
-                      const char          *path_str,
-                      const char          *new_text,
-                      FMListView          *view)
+cell_renderer_edited (CtkCellRendererText *cell G_GNUC_UNUSED,
+		      const char          *path_str,
+		      const char          *new_text,
+		      FMListView          *view)
 {
     CtkTreePath *path;
     BaulFile *file;
@@ -1422,8 +1431,8 @@ cell_renderer_edited (CtkCellRendererText *cell,
 }
 
 static char *
-get_root_uri_callback (BaulTreeViewDragDest *dest,
-                       gpointer user_data)
+get_root_uri_callback (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+		       gpointer              user_data)
 {
     FMListView *view;
 
@@ -1433,9 +1442,9 @@ get_root_uri_callback (BaulTreeViewDragDest *dest,
 }
 
 static BaulFile *
-get_file_for_path_callback (BaulTreeViewDragDest *dest,
-                            CtkTreePath *path,
-                            gpointer user_data)
+get_file_for_path_callback (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+			    CtkTreePath          *path,
+			    gpointer              user_data)
 {
     FMListView *view;
 
@@ -1446,35 +1455,54 @@ get_file_for_path_callback (BaulTreeViewDragDest *dest,
 
 /* Handles an URL received from Mozilla */
 static void
-list_view_handle_netscape_url (BaulTreeViewDragDest *dest, const char *encoded_url,
-                               const char *target_uri, CdkDragAction action, int x, int y, FMListView *view)
+list_view_handle_netscape_url (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+			       const char           *encoded_url,
+			       const char           *target_uri,
+			       CdkDragAction         action,
+			       int                   x,
+			       int                   y,
+			       FMListView           *view)
 {
     fm_directory_view_handle_netscape_url_drop (FM_DIRECTORY_VIEW (view),
             encoded_url, target_uri, action, x, y);
 }
 
 static void
-list_view_handle_uri_list (BaulTreeViewDragDest *dest, const char *item_uris,
-                           const char *target_uri,
-                           CdkDragAction action, int x, int y, FMListView *view)
+list_view_handle_uri_list (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+			   const char           *item_uris,
+			   const char           *target_uri,
+			   CdkDragAction         action,
+			   int                   x,
+			   int                   y,
+			   FMListView           *view)
 {
     fm_directory_view_handle_uri_list_drop (FM_DIRECTORY_VIEW (view),
                                             item_uris, target_uri, action, x, y);
 }
 
 static void
-list_view_handle_text (BaulTreeViewDragDest *dest, const char *text,
-                       const char *target_uri,
-                       CdkDragAction action, int x, int y, FMListView *view)
+list_view_handle_text (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+		       const char           *text,
+		       const char           *target_uri,
+		       CdkDragAction         action,
+		       int                   x,
+		       int                   y,
+		       FMListView           *view)
 {
     fm_directory_view_handle_text_drop (FM_DIRECTORY_VIEW (view),
                                         text, target_uri, action, x, y);
 }
 
 static void
-list_view_handle_raw (BaulTreeViewDragDest *dest, const char *raw_data,
-                      int length, const char *target_uri, const char *direct_save_uri,
-                      CdkDragAction action, int x, int y, FMListView *view)
+list_view_handle_raw (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+		      const char           *raw_data,
+		      int                   length,
+		      const char           *target_uri,
+		      const char           *direct_save_uri,
+		      CdkDragAction         action,
+		      int                   x,
+		      int                   y,
+		      FMListView           *view)
 {
     fm_directory_view_handle_raw_drop (FM_DIRECTORY_VIEW (view),
                                        raw_data, length, target_uri, direct_save_uri,
@@ -1482,13 +1510,13 @@ list_view_handle_raw (BaulTreeViewDragDest *dest, const char *raw_data,
 }
 
 static void
-move_copy_items_callback (BaulTreeViewDragDest *dest,
-                          const GList *item_uris,
-                          const char *target_uri,
-                          guint action,
-                          int x,
-                          int y,
-                          gpointer user_data)
+move_copy_items_callback (BaulTreeViewDragDest *dest G_GNUC_UNUSED,
+			  const GList          *item_uris,
+			  const char           *target_uri,
+			  guint                 action,
+			  int                   x,
+			  int                   y,
+			  gpointer              user_data)
 
 {
     FMDirectoryView *view = user_data;
@@ -1593,11 +1621,11 @@ apply_columns_settings (FMListView *list_view,
 }
 
 static void
-filename_cell_data_func (CtkTreeViewColumn *column,
-                         CtkCellRenderer   *renderer,
-                         CtkTreeModel      *model,
-                         CtkTreeIter       *iter,
-                         FMListView        *view)
+filename_cell_data_func (CtkTreeViewColumn *column G_GNUC_UNUSED,
+			 CtkCellRenderer   *renderer,
+			 CtkTreeModel      *model,
+			 CtkTreeIter       *iter,
+			 FMListView        *view)
 {
     char *text;
     PangoUnderline underline;
@@ -1637,7 +1665,9 @@ filename_cell_data_func (CtkTreeViewColumn *column,
 }
 
 static gboolean
-focus_in_event_callback (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
+focus_in_event_callback (CtkWidget     *widget G_GNUC_UNUSED,
+			 CdkEventFocus *event G_GNUC_UNUSED,
+			 gpointer       user_data)
 {
     BaulWindowSlotInfo *slot_info;
     FMListView *list_view = FM_LIST_VIEW (user_data);
@@ -1650,8 +1680,8 @@ focus_in_event_callback (CtkWidget *widget, CdkEventFocus *event, gpointer user_
 }
 
 static gint
-get_icon_scale_callback (FMListModel *model,
-                         FMListView  *view)
+get_icon_scale_callback (FMListModel *model G_GNUC_UNUSED,
+			 FMListView  *view)
 {
     return ctk_widget_get_scale_factor (CTK_WIDGET (view->details->tree_view));
 }
@@ -2009,9 +2039,9 @@ set_sort_order_from_metadata_and_preferences (FMListView *list_view)
 
 static gboolean
 list_view_changed_foreach (CtkTreeModel *model,
-                           CtkTreePath  *path,
-                           CtkTreeIter  *iter,
-                           gpointer      data)
+			   CtkTreePath  *path,
+			   CtkTreeIter  *iter,
+			   gpointer      data G_GNUC_UNUSED)
 {
     ctk_tree_model_row_changed (model, path, iter);
     return FALSE;
@@ -2097,10 +2127,10 @@ fm_list_view_clear (FMDirectoryView *view)
 }
 
 static void
-fm_list_view_rename_callback (BaulFile *file,
-                              GFile *result_location,
-                              GError *error,
-                              gpointer callback_data)
+fm_list_view_rename_callback (BaulFile *file G_GNUC_UNUSED,
+			      GFile    *result_location G_GNUC_UNUSED,
+			      GError   *error,
+			      gpointer  callback_data)
 {
     FMListView *view;
 
@@ -2166,7 +2196,10 @@ fm_list_view_get_background_widget (FMDirectoryView *view)
 }
 
 static void
-fm_list_view_get_selection_foreach_func (CtkTreeModel *model, CtkTreePath *path, CtkTreeIter *iter, gpointer data)
+fm_list_view_get_selection_foreach_func (CtkTreeModel *model,
+					 CtkTreePath  *path G_GNUC_UNUSED,
+					 CtkTreeIter  *iter,
+					 gpointer      data)
 {
     GList **list;
     BaulFile *file;
@@ -2197,7 +2230,10 @@ fm_list_view_get_selection (FMDirectoryView *view)
 }
 
 static void
-fm_list_view_get_selection_for_file_transfer_foreach_func (CtkTreeModel *model, CtkTreePath *path, CtkTreeIter *iter, gpointer data)
+fm_list_view_get_selection_for_file_transfer_foreach_func (CtkTreeModel *model,
+							   CtkTreePath  *path G_GNUC_UNUSED,
+							   CtkTreeIter  *iter,
+							   gpointer      data)
 {
     BaulFile *file;
     struct SelectionForeachData *selection_data;
@@ -2429,8 +2465,8 @@ fm_list_view_select_all (FMDirectoryView *view)
 
 static void
 column_editor_response_callback (CtkWidget *dialog,
-                                 int response_id,
-                                 gpointer user_data)
+				 int        response_id G_GNUC_UNUSED,
+				 gpointer   user_data G_GNUC_UNUSED)
 {
     ctk_widget_destroy (CTK_WIDGET (dialog));
 }
@@ -2615,8 +2651,8 @@ create_column_editor (FMListView *view)
 }
 
 static void
-action_visible_columns_callback (CtkAction *action,
-                                 gpointer callback_data)
+action_visible_columns_callback (CtkAction *action G_GNUC_UNUSED,
+				 gpointer   callback_data)
 {
     FMListView *list_view;
 
@@ -2904,8 +2940,8 @@ fm_list_view_can_zoom_out (FMDirectoryView *view)
 
 static void
 fm_list_view_start_renaming_file (FMDirectoryView *view,
-                                  BaulFile *file,
-                                  gboolean select_all)
+				  BaulFile        *file,
+				  gboolean         select_all G_GNUC_UNUSED)
 {
     FMListView *list_view;
     CtkTreeIter iter;
@@ -3264,9 +3300,9 @@ list_view_scroll_to_file (BaulView *view,
 }
 
 static void
-list_view_notify_clipboard_info (BaulClipboardMonitor *monitor,
-                                 BaulClipboardInfo *info,
-                                 FMListView *view)
+list_view_notify_clipboard_info (BaulClipboardMonitor *monitor G_GNUC_UNUSED,
+				 BaulClipboardInfo    *info,
+				 FMListView           *view)
 {
     /* this could be called as a result of _end_loading() being
      * called after _dispose(), where the model is cleared.
@@ -3288,7 +3324,7 @@ list_view_notify_clipboard_info (BaulClipboardMonitor *monitor,
 
 static void
 fm_list_view_end_loading (FMDirectoryView *view,
-                          gboolean all_files_seen)
+			  gboolean         all_files_seen G_GNUC_UNUSED)
 {
     BaulClipboardMonitor *monitor;
     BaulClipboardInfo *info;
@@ -3397,7 +3433,7 @@ fm_list_view_class_init (FMListViewClass *class)
 }
 
 static const char *
-fm_list_view_get_id (BaulView *view)
+fm_list_view_get_id (BaulView *view G_GNUC_UNUSED)
 {
     return FM_LIST_VIEW_ID;
 }

@@ -1,5 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
-
+/*
    baul-directory.c: Baul directory model.
 
    Copyright (C) 1999, 2000, 2001 Eazel, Inc.
@@ -220,7 +219,9 @@ emit_change_signals_for_all_files (BaulDirectory *directory)
 }
 
 static void
-collect_all_directories (gpointer key, gpointer value, gpointer callback_data)
+collect_all_directories (gpointer key G_GNUC_UNUSED,
+			 gpointer value,
+			 gpointer callback_data)
 {
     BaulDirectory *directory;
     GList **dirs;
@@ -1532,7 +1533,7 @@ real_get_file_list (BaulDirectory *directory)
 }
 
 static gboolean
-real_is_editable (BaulDirectory *directory)
+real_is_editable (BaulDirectory *directory G_GNUC_UNUSED)
 {
     return TRUE;
 }

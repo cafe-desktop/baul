@@ -1,5 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
  *  Baul
  *
@@ -290,9 +288,9 @@ notes_load_metainfo (BaulNotesViewer *notes)
 }
 
 static void
-loading_uri_callback (BaulWindowInfo *window,
-                      const char *location,
-                      BaulNotesViewer *notes)
+loading_uri_callback (BaulWindowInfo  *window G_GNUC_UNUSED,
+		      const char      *location,
+		      BaulNotesViewer *notes)
 {
     if (strcmp (notes->details->uri, location) != 0)
     {
@@ -304,9 +302,9 @@ loading_uri_callback (BaulWindowInfo *window,
 }
 
 static gboolean
-on_text_field_focus_out_event (CtkWidget *widget,
-                               CdkEventFocus *event,
-                               gpointer callback_data)
+on_text_field_focus_out_event (CtkWidget     *widget G_GNUC_UNUSED,
+			       CdkEventFocus *event G_GNUC_UNUSED,
+			       gpointer       callback_data)
 {
     BaulNotesViewer *notes;
 
@@ -316,7 +314,8 @@ on_text_field_focus_out_event (CtkWidget *widget,
 }
 
 static void
-on_changed (CtkEditable *editable, BaulNotesViewer *notes)
+on_changed (CtkEditable     *editable G_GNUC_UNUSED,
+	    BaulNotesViewer *notes)
 {
     schedule_save (notes);
 }
@@ -391,19 +390,19 @@ baul_notes_viewer_class_init (BaulNotesViewerClass *class)
 }
 
 static const char *
-baul_notes_viewer_get_sidebar_id (BaulSidebar *sidebar)
+baul_notes_viewer_get_sidebar_id (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return BAUL_NOTES_SIDEBAR_ID;
 }
 
 static char *
-baul_notes_viewer_get_tab_label (BaulSidebar *sidebar)
+baul_notes_viewer_get_tab_label (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Notes"));
 }
 
 static char *
-baul_notes_viewer_get_tab_tooltip (BaulSidebar *sidebar)
+baul_notes_viewer_get_tab_tooltip (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Show Notes"));
 }
@@ -425,8 +424,8 @@ baul_notes_viewer_get_tab_icon (BaulSidebar *sidebar)
 }
 
 static void
-baul_notes_viewer_is_visible_changed (BaulSidebar *sidebar,
-                                      gboolean         is_visible)
+baul_notes_viewer_is_visible_changed (BaulSidebar *sidebar G_GNUC_UNUSED,
+				      gboolean     is_visible G_GNUC_UNUSED)
 {
     /* Do nothing */
 }
@@ -462,8 +461,8 @@ baul_notes_viewer_set_parent_window (BaulNotesViewer *sidebar,
 }
 
 static BaulSidebar *
-baul_notes_viewer_create_sidebar (BaulSidebarProvider *provider,
-                                  BaulWindowInfo *window)
+baul_notes_viewer_create_sidebar (BaulSidebarProvider *provider G_GNUC_UNUSED,
+				  BaulWindowInfo      *window)
 {
     BaulNotesViewer *sidebar;
 
@@ -475,8 +474,8 @@ baul_notes_viewer_create_sidebar (BaulSidebarProvider *provider,
 }
 
 static GList *
-get_property_pages (BaulPropertyPageProvider *provider,
-                    GList *files)
+get_property_pages (BaulPropertyPageProvider *provider G_GNUC_UNUSED,
+		    GList                    *files)
 {
     GList *pages;
     BaulPropertyPage *page;
@@ -523,12 +522,12 @@ sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 }
 
 static void
-baul_notes_viewer_provider_init (BaulNotesViewerProvider *sidebar)
+baul_notes_viewer_provider_init (BaulNotesViewerProvider *sidebar G_GNUC_UNUSED)
 {
 }
 
 static void
-baul_notes_viewer_provider_class_init (BaulNotesViewerProviderClass *class)
+baul_notes_viewer_provider_class_init (BaulNotesViewerProviderClass *class G_GNUC_UNUSED)
 {
 }
 
@@ -537,4 +536,3 @@ baul_notes_viewer_register (void)
 {
     baul_module_add_type (baul_notes_viewer_provider_get_type ());
 }
-

@@ -138,7 +138,7 @@ baul_module_finalize (GObject *object)
 }
 
 static void
-baul_module_init (BaulModule *module)
+baul_module_init (BaulModule *module G_GNUC_UNUSED)
 {
 }
 
@@ -151,7 +151,8 @@ baul_module_class_init (BaulModuleClass *class)
 }
 
 static void
-module_object_weak_notify (gpointer user_data, GObject *object)
+module_object_weak_notify (gpointer user_data G_GNUC_UNUSED,
+			   GObject *object)
 {
     module_objects = g_list_remove (module_objects, object);
 }

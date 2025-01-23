@@ -62,11 +62,11 @@ fill_details_async_cb (GObject *source,
 }
 
 static void
-baul_connect_server_operation_ask_password (GMountOperation *op,
-						const gchar *message,
-						const gchar *default_user,
-						const gchar *default_domain,
-						GAskPasswordFlags flags)
+baul_connect_server_operation_ask_password (GMountOperation  *op,
+					    const gchar      *message G_GNUC_UNUSED,
+					    const gchar      *default_user,
+					    const gchar      *default_domain,
+					    GAskPasswordFlags flags)
 {
 	BaulConnectServerOperation *self;
 

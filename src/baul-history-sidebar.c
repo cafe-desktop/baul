@@ -135,8 +135,8 @@ update_history (BaulHistorySidebar *sidebar)
 }
 
 static void
-history_changed_callback (GObject *signaller,
-                          BaulHistorySidebar *sidebar)
+history_changed_callback (GObject            *signaller G_GNUC_UNUSED,
+			  BaulHistorySidebar *sidebar)
 {
     update_history (sidebar);
 }
@@ -173,10 +173,10 @@ open_selected_item (BaulHistorySidebar *sidebar,
 }
 
 static void
-row_activated_callback (CtkTreeView *tree_view,
-                        CtkTreePath *path,
-                        CtkTreeViewColumn *column,
-                        gpointer user_data)
+row_activated_callback (CtkTreeView       *tree_view,
+			CtkTreePath       *path,
+			CtkTreeViewColumn *column G_GNUC_UNUSED,
+			gpointer           user_data)
 {
     BaulHistorySidebar *sidebar;
 
@@ -330,32 +330,32 @@ baul_history_sidebar_class_init (BaulHistorySidebarClass *class)
 }
 
 static const char *
-baul_history_sidebar_get_sidebar_id (BaulSidebar *sidebar)
+baul_history_sidebar_get_sidebar_id (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return BAUL_HISTORY_SIDEBAR_ID;
 }
 
 static char *
-baul_history_sidebar_get_tab_label (BaulSidebar *sidebar)
+baul_history_sidebar_get_tab_label (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("History"));
 }
 
 static char *
-baul_history_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
+baul_history_sidebar_get_tab_tooltip (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Show History"));
 }
 
 static GdkPixbuf *
-baul_history_sidebar_get_tab_icon (BaulSidebar *sidebar)
+baul_history_sidebar_get_tab_icon (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return NULL;
 }
 
 static void
-baul_history_sidebar_is_visible_changed (BaulSidebar *sidebar,
-        gboolean         is_visible)
+baul_history_sidebar_is_visible_changed (BaulSidebar *sidebar G_GNUC_UNUSED,
+					 gboolean     is_visible G_GNUC_UNUSED)
 {
     /* Do nothing */
 }
@@ -389,8 +389,8 @@ baul_history_sidebar_style_updated (CtkWidget *widget)
 }
 
 static BaulSidebar *
-baul_history_sidebar_create (BaulSidebarProvider *provider,
-                             BaulWindowInfo *window)
+baul_history_sidebar_create (BaulSidebarProvider *provider G_GNUC_UNUSED,
+			     BaulWindowInfo      *window)
 {
     BaulHistorySidebar *sidebar;
 
@@ -408,12 +408,12 @@ sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 }
 
 static void
-baul_history_sidebar_provider_init (BaulHistorySidebarProvider *sidebar)
+baul_history_sidebar_provider_init (BaulHistorySidebarProvider *sidebar G_GNUC_UNUSED)
 {
 }
 
 static void
-baul_history_sidebar_provider_class_init (BaulHistorySidebarProviderClass *class)
+baul_history_sidebar_provider_class_init (BaulHistorySidebarProviderClass *class G_GNUC_UNUSED)
 {
 }
 

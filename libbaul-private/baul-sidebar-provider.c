@@ -26,7 +26,7 @@
 #include "baul-sidebar-provider.h"
 
 static void
-baul_sidebar_provider_base_init (gpointer g_class)
+baul_sidebar_provider_base_init (gpointer g_class G_GNUC_UNUSED)
 {
 }
 

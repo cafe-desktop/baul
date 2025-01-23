@@ -477,7 +477,7 @@ baul_search_engine_tracker_stop (BaulSearchEngine *engine)
 }
 
 static gboolean
-baul_search_engine_tracker_is_indexed (BaulSearchEngine *engine)
+baul_search_engine_tracker_is_indexed (BaulSearchEngine *engine G_GNUC_UNUSED)
 {
     return TRUE;
 }

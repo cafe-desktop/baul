@@ -3,7 +3,8 @@
 #include <libbaul-private/baul-search-engine.h>
 
 static void
-hits_added_cb (BaulSearchEngine *engine, GSList *hits)
+hits_added_cb (BaulSearchEngine *engine G_GNUC_UNUSED,
+	       GSList           *hits)
 {
 	g_print ("hits added\n");
 	while (hits) {
@@ -13,7 +14,8 @@ hits_added_cb (BaulSearchEngine *engine, GSList *hits)
 }
 
 static void
-hits_subtracted_cb (BaulSearchEngine *engine, GSList *hits)
+hits_subtracted_cb (BaulSearchEngine *engine G_GNUC_UNUSED,
+		    GSList           *hits)
 {
 	g_print ("hits subtracted\n");
 	while (hits) {
@@ -23,7 +25,7 @@ hits_subtracted_cb (BaulSearchEngine *engine, GSList *hits)
 }
 
 static void
-finished_cb (BaulSearchEngine *engine)
+finished_cb (BaulSearchEngine *engine G_GNUC_UNUSED)
 {
 	g_print ("finished!\n");
 //	ctk_main_quit ();

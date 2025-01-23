@@ -129,8 +129,8 @@ fm_icon_container_get_icon_images (BaulIconContainer *container,
 }
 
 static char *
-fm_icon_container_get_icon_description (BaulIconContainer *container,
-                                        BaulIconData      *data)
+fm_icon_container_get_icon_description (BaulIconContainer *container G_GNUC_UNUSED,
+					BaulIconData      *data)
 {
     BaulFile *file;
     char *mime_type;
@@ -151,10 +151,10 @@ fm_icon_container_get_icon_description (BaulIconContainer *container,
 }
 
 static void
-fm_icon_container_start_monitor_top_left (BaulIconContainer *container,
-        BaulIconData      *data,
-        gconstpointer          client,
-        gboolean               large_text)
+fm_icon_container_start_monitor_top_left (BaulIconContainer *container G_GNUC_UNUSED,
+					  BaulIconData      *data,
+					  gconstpointer      client,
+					  gboolean           large_text)
 {
     BaulFile *file;
     BaulFileAttributes attributes;
@@ -172,9 +172,9 @@ fm_icon_container_start_monitor_top_left (BaulIconContainer *container,
 }
 
 static void
-fm_icon_container_stop_monitor_top_left (BaulIconContainer *container,
-        BaulIconData      *data,
-        gconstpointer          client)
+fm_icon_container_stop_monitor_top_left (BaulIconContainer *container G_GNUC_UNUSED,
+					 BaulIconData      *data,
+					 gconstpointer      client)
 {
     BaulFile *file;
 
@@ -186,8 +186,8 @@ fm_icon_container_stop_monitor_top_left (BaulIconContainer *container,
 }
 
 static void
-fm_icon_container_prioritize_thumbnailing (BaulIconContainer *container,
-        BaulIconData      *data)
+fm_icon_container_prioritize_thumbnailing (BaulIconContainer *container G_GNUC_UNUSED,
+					   BaulIconData      *data)
 {
     BaulFile *file;
 
@@ -539,9 +539,9 @@ fm_icon_container_compare_icons (BaulIconContainer *container,
 }
 
 static int
-fm_icon_container_compare_icons_by_name (BaulIconContainer *container,
-        BaulIconData      *icon_a,
-        BaulIconData      *icon_b)
+fm_icon_container_compare_icons_by_name (BaulIconContainer *container G_GNUC_UNUSED,
+					 BaulIconData      *icon_a,
+					 BaulIconData      *icon_b)
 {
     return baul_file_compare_for_sort
            (BAUL_FILE (icon_a),

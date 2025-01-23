@@ -80,9 +80,9 @@ labeled_image_new (const char *text,
 
 
 static void
-image_table_child_enter_callback (CtkWidget *image_table,
-			       CtkWidget *item,
-			       gpointer callback_data)
+image_table_child_enter_callback (CtkWidget *image_table G_GNUC_UNUSED,
+				  CtkWidget *item G_GNUC_UNUSED,
+				  gpointer   callback_data G_GNUC_UNUSED)
 {
 #if 0
 	char *text;
@@ -97,9 +97,9 @@ image_table_child_enter_callback (CtkWidget *image_table,
 }
 
 static void
-image_table_child_leave_callback (CtkWidget *image_table,
-			       CtkWidget *item,
-			       gpointer callback_data)
+image_table_child_leave_callback (CtkWidget *image_table G_GNUC_UNUSED,
+				  CtkWidget *item G_GNUC_UNUSED,
+				  gpointer   callback_data G_GNUC_UNUSED)
 {
 #if 0
 	char *text;
@@ -115,8 +115,8 @@ image_table_child_leave_callback (CtkWidget *image_table,
 
 static void
 image_table_child_pressed_callback (CtkWidget *image_table,
-			       CtkWidget *item,
-			       gpointer callback_data)
+				    CtkWidget *item,
+				    gpointer   callback_data G_GNUC_UNUSED)
 {
 	char *text;
 
@@ -130,8 +130,8 @@ image_table_child_pressed_callback (CtkWidget *image_table,
 
 static void
 image_table_child_released_callback (CtkWidget *image_table,
-				  CtkWidget *item,
-				  gpointer callback_data)
+				     CtkWidget *item,
+				     gpointer   callback_data G_GNUC_UNUSED)
 {
 	char *text;
 
@@ -145,8 +145,8 @@ image_table_child_released_callback (CtkWidget *image_table,
 
 static void
 image_table_child_clicked_callback (CtkWidget *image_table,
-				 CtkWidget *item,
-				 gpointer callback_data)
+				    CtkWidget *item,
+				    gpointer   callback_data G_GNUC_UNUSED)
 {
 	char *text;
 

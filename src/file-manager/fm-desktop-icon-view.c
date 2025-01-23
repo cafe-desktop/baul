@@ -95,7 +95,7 @@ static char *desktop_directory;
 static time_t desktop_dir_modify_time;
 
 static void
-desktop_directory_changed_callback (gpointer callback_data)
+desktop_directory_changed_callback (gpointer callback_data G_GNUC_UNUSED)
 {
     g_free (desktop_directory);
     desktop_directory = baul_get_desktop_directory ();
@@ -319,8 +319,8 @@ fm_desktop_icon_view_class_init (FMDesktopIconViewClass *class)
 
 static void
 fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
-        CdkEventButton *event,
-        FMDesktopIconView *desktop_icon_view)
+					  CdkEventButton    *event,
+					  FMDesktopIconView *desktop_icon_view G_GNUC_UNUSED)
 {
     XButtonEvent x_event;
     CdkDevice *keyboard = NULL, *pointer = NULL;
@@ -371,7 +371,8 @@ fm_desktop_icon_view_handle_middle_click (BaulIconContainer *icon_container,
 }
 
 static void
-unrealized_callback (CtkWidget *widget, FMDesktopIconView *desktop_icon_view)
+unrealized_callback (CtkWidget         *widget G_GNUC_UNUSED,
+		     FMDesktopIconView *desktop_icon_view)
 {
     g_return_if_fail (desktop_icon_view->priv->root_window != NULL);
 
@@ -484,7 +485,7 @@ do_desktop_rescan (gpointer data)
 }
 
 static void
-done_loading (BaulDirectory *model,
+done_loading (BaulDirectory     *model G_GNUC_UNUSED,
 	      FMDesktopIconView *desktop_icon_view)
 {
     struct stat buf;
@@ -639,7 +640,8 @@ fm_desktop_icon_view_init (FMDesktopIconView *desktop_icon_view)
 }
 
 static void
-action_new_launcher_callback (CtkAction *action, gpointer data)
+action_new_launcher_callback (CtkAction *action G_GNUC_UNUSED,
+			      gpointer   data)
 {
     char *desktop_directory;
 
@@ -657,8 +659,8 @@ action_new_launcher_callback (CtkAction *action, gpointer data)
 }
 
 static void
-action_change_background_callback (CtkAction *action,
-                                   gpointer data)
+action_change_background_callback (CtkAction *action G_GNUC_UNUSED,
+				   gpointer   data)
 {
     g_assert (FM_DIRECTORY_VIEW (data));
 
@@ -670,8 +672,8 @@ action_change_background_callback (CtkAction *action,
 }
 
 static void
-action_empty_trash_conditional_callback (CtkAction *action,
-        gpointer data)
+action_empty_trash_conditional_callback (CtkAction *action G_GNUC_UNUSED,
+					 gpointer   data)
 {
     g_assert (FM_IS_DIRECTORY_VIEW (data));
 
@@ -812,7 +814,7 @@ real_merge_menus (FMDirectoryView *view)
 }
 
 static gboolean
-real_supports_auto_layout (FMIconView *view)
+real_supports_auto_layout (FMIconView *view G_GNUC_UNUSED)
 {
     /* Can't use auto-layout on the desktop, because doing so
      * would cause all sorts of complications involving the
@@ -822,25 +824,25 @@ real_supports_auto_layout (FMIconView *view)
 }
 
 static gboolean
-real_supports_scaling (FMIconView *view)
+real_supports_scaling (FMIconView *view G_GNUC_UNUSED)
 {
     return TRUE;
 }
 
 static gboolean
-real_supports_keep_aligned (FMIconView *view)
+real_supports_keep_aligned (FMIconView *view G_GNUC_UNUSED)
 {
     return TRUE;
 }
 
 static gboolean
-real_supports_labels_beside_icons (FMIconView *view)
+real_supports_labels_beside_icons (FMIconView *view G_GNUC_UNUSED)
 {
     return FALSE;
 }
 
 static gboolean
-real_supports_zooming (FMDirectoryView *view)
+real_supports_zooming (FMDirectoryView *view G_GNUC_UNUSED)
 {
     /* Can't zoom on the desktop, because doing so would cause all
      * sorts of complications involving the fixed-size window.
@@ -861,8 +863,8 @@ fm_desktop_icon_view_create (BaulWindowSlotInfo *slot)
 
 static gboolean
 fm_desktop_icon_view_supports_uri (const char *uri,
-                                   GFileType file_type,
-                                   const char *mime_type)
+				   GFileType   file_type G_GNUC_UNUSED,
+				   const char *mime_type G_GNUC_UNUSED)
 {
     if (g_str_has_prefix (uri, EEL_DESKTOP_URI))
     {

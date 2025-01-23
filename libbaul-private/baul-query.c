@@ -229,12 +229,12 @@ typedef struct
 } ParserInfo;
 
 static void
-start_element_cb (GMarkupParseContext *ctx,
-                  const char *element_name,
-                  const char **attribute_names,
-                  const char **attribute_values,
-                  gpointer user_data,
-                  GError **err)
+start_element_cb (GMarkupParseContext *ctx G_GNUC_UNUSED,
+		  const char          *element_name,
+		  const char         **attribute_names G_GNUC_UNUSED,
+		  const char         **attribute_values G_GNUC_UNUSED,
+		  gpointer             user_data,
+		  GError             **err G_GNUC_UNUSED)
 {
     ParserInfo *info;
 
@@ -255,10 +255,10 @@ start_element_cb (GMarkupParseContext *ctx,
 }
 
 static void
-end_element_cb (GMarkupParseContext *ctx,
-                const char *element_name,
-                gpointer user_data,
-                GError **err)
+end_element_cb (GMarkupParseContext *ctx G_GNUC_UNUSED,
+		const char          *element_name,
+		gpointer             user_data,
+		GError             **err G_GNUC_UNUSED)
 {
     ParserInfo *info;
 
@@ -279,11 +279,11 @@ end_element_cb (GMarkupParseContext *ctx,
 }
 
 static void
-text_cb (GMarkupParseContext *ctx,
-         const char *text,
-         gsize text_len,
-         gpointer user_data,
-         GError **err)
+text_cb (GMarkupParseContext *ctx G_GNUC_UNUSED,
+	 const char          *text,
+	 gsize                text_len,
+	 gpointer             user_data,
+	 GError             **err G_GNUC_UNUSED)
 {
     ParserInfo *info;
     char *t, *uri;
@@ -316,9 +316,9 @@ text_cb (GMarkupParseContext *ctx,
 }
 
 static void
-error_cb (GMarkupParseContext *ctx,
-          GError *err,
-          gpointer user_data)
+error_cb (GMarkupParseContext *ctx G_GNUC_UNUSED,
+	  GError              *err G_GNUC_UNUSED,
+	  gpointer             user_data G_GNUC_UNUSED)
 {
 }
 

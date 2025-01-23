@@ -1,5 +1,3 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
-
 /*
  *  Baul
  *
@@ -126,9 +124,9 @@ baul_application_get_spatial_window_list (void)
 }
 
 static void
-startup_volume_mount_cb (GObject *source_object,
-                         GAsyncResult *res,
-                         gpointer user_data)
+startup_volume_mount_cb (GObject      *source_object,
+			 GAsyncResult *res,
+			 gpointer      user_data G_GNUC_UNUSED)
 {
     g_volume_mount_finish (G_VOLUME (source_object), res, NULL);
 }
@@ -173,9 +171,9 @@ automount_all_volumes (BaulApplication *application)
 }
 
 static void
-smclient_save_state_cb (EggSMClient   *client,
-                        GKeyFile      *state_file,
-                        BaulApplication *application)
+smclient_save_state_cb (EggSMClient     *client G_GNUC_UNUSED,
+			GKeyFile        *state_file,
+			BaulApplication *application)
 {
     char *data;
     data = baul_application_get_session_data (application);
@@ -191,8 +189,8 @@ smclient_save_state_cb (EggSMClient   *client,
 }
 
 static void
-smclient_quit_cb (EggSMClient   *client,
-                  BaulApplication *application)
+smclient_quit_cb (EggSMClient     *client G_GNUC_UNUSED,
+		  BaulApplication *application)
 {
     baul_application_quit (application);
 }
@@ -402,10 +400,10 @@ baul_application_open (GApplication *app,
 
 void
 baul_application_open_location (BaulApplication *application,
-                                GFile *location,
-                                GFile *selection,
-                                const char *startup_id,
-                                const gboolean open_in_tabs)
+				GFile           *location,
+				GFile           *selection,
+				const char      *startup_id G_GNUC_UNUSED,
+				const gboolean   open_in_tabs)
 {
     BaulWindow *window;
     GList *sel_list = NULL;
@@ -582,7 +580,9 @@ check_required_directories (BaulApplication *application)
 }
 
 static void
-menu_provider_items_updated_handler (BaulMenuProvider *provider, CtkWidget* parent_window, gpointer data)
+menu_provider_items_updated_handler (BaulMenuProvider *provider G_GNUC_UNUSED,
+				     CtkWidget        *parent_window G_GNUC_UNUSED,
+				     gpointer          data G_GNUC_UNUSED)
 {
 
     g_signal_emit_by_name (baul_signaller_get_current (),
@@ -621,10 +621,10 @@ automount_all_volumes_idle_cb (gpointer data)
 }
 
 static void
-selection_get_cb (CtkWidget          *widget,
-                  CtkSelectionData   *selection_data,
-                  guint               info,
-                  guint               time)
+selection_get_cb (CtkWidget        *widget G_GNUC_UNUSED,
+		  CtkSelectionData *selection_data G_GNUC_UNUSED,
+		  guint             info G_GNUC_UNUSED,
+		  guint             time G_GNUC_UNUSED)
 {
     /* No extra targets atm */
 }
@@ -669,16 +669,16 @@ get_desktop_manager_selection (CdkDisplay *display)
 }
 
 static void
-desktop_unrealize_cb (CtkWidget        *widget,
-                      CtkWidget        *selection_widget)
+desktop_unrealize_cb (CtkWidget *widget G_GNUC_UNUSED,
+		      CtkWidget *selection_widget)
 {
     ctk_widget_destroy (selection_widget);
 }
 
 static gboolean
-selection_clear_event_cb (CtkWidget	        *widget,
-                          CdkEventSelection     *event,
-                          BaulDesktopWindow *window)
+selection_clear_event_cb (CtkWidget         *widget G_GNUC_UNUSED,
+			  CdkEventSelection *event G_GNUC_UNUSED,
+			  BaulDesktopWindow *window)
 {
     ctk_widget_destroy (CTK_WIDGET (window));
 
@@ -912,8 +912,8 @@ baul_application_close_all_spatial_windows (void)
 
 static gboolean
 baul_window_delete_event_callback (CtkWidget *widget,
-                                   CdkEvent *event,
-                                   gpointer user_data)
+				   CdkEvent  *event G_GNUC_UNUSED,
+				   gpointer   user_data G_GNUC_UNUSED)
 {
     BaulWindow *window;
 
@@ -953,7 +953,8 @@ create_window (BaulApplication *application,
 }
 
 static void
-spatial_window_destroyed_callback (void *user_data, GObject *window)
+spatial_window_destroyed_callback (void    *user_data G_GNUC_UNUSED,
+				   GObject *window)
 {
     baul_application_spatial_window_list = g_list_remove (baul_application_spatial_window_list, window);
 
@@ -961,11 +962,11 @@ spatial_window_destroyed_callback (void *user_data, GObject *window)
 
 BaulWindow *
 baul_application_get_spatial_window (BaulApplication *application,
-                                    BaulWindow      *requesting_window,
-                                    const char      *startup_id,
-                                    GFile           *location,
-                                    CdkScreen       *screen,
-                                    gboolean        *existing)
+				     BaulWindow      *requesting_window,
+				     const char      *startup_id G_GNUC_UNUSED,
+				     GFile           *location,
+				     CdkScreen       *screen,
+				     gboolean        *existing)
 {
     BaulWindow *window;
     gchar *uri;
@@ -1113,9 +1114,9 @@ check_screen_lock_and_mount (BaulApplication *application,
 }
 
 static void
-volume_removed_callback (GVolumeMonitor *monitor,
-                         GVolume *volume,
-                         BaulApplication *application)
+volume_removed_callback (GVolumeMonitor  *monitor G_GNUC_UNUSED,
+			 GVolume         *volume,
+			 BaulApplication *application)
 {
         g_debug ("Volume %p removed, removing from the queue", volume);
 
@@ -1125,9 +1126,9 @@ volume_removed_callback (GVolumeMonitor *monitor,
 }
 
 static void
-volume_added_callback (GVolumeMonitor *monitor,
-                       GVolume *volume,
-                       BaulApplication *application)
+volume_added_callback (GVolumeMonitor  *monitor G_GNUC_UNUSED,
+		       GVolume         *volume,
+		       BaulApplication *application)
 {
     if (g_settings_get_boolean (baul_media_preferences, BAUL_PREFERENCES_MEDIA_AUTOMOUNT) &&
             g_volume_should_automount (volume) &&
@@ -1146,9 +1147,9 @@ volume_added_callback (GVolumeMonitor *monitor,
 }
 
 static void
-drive_eject_cb (GObject *source_object,
-                GAsyncResult *res,
-                gpointer user_data)
+drive_eject_cb (GObject      *source_object,
+		GAsyncResult *res,
+		gpointer      user_data G_GNUC_UNUSED)
 {
     GError *error;
     error = NULL;
@@ -1173,8 +1174,8 @@ drive_eject_cb (GObject *source_object,
 }
 
 static void
-drive_eject_button_pressed (GDrive *drive,
-                            BaulApplication *application)
+drive_eject_button_pressed (GDrive          *drive,
+			    BaulApplication *application G_GNUC_UNUSED)
 {
     GMountOperation *mount_op;
 
@@ -1193,9 +1194,9 @@ drive_listen_for_eject_button (GDrive *drive, BaulApplication *application)
 }
 
 static void
-drive_connected_callback (GVolumeMonitor *monitor,
-                          GDrive *drive,
-                          BaulApplication *application)
+drive_connected_callback (GVolumeMonitor  *monitor G_GNUC_UNUSED,
+			  GDrive          *drive,
+			  BaulApplication *application)
 {
     drive_listen_for_eject_button (drive, application);
 }
@@ -1230,9 +1231,9 @@ autorun_show_window (GMount *mount, gpointer user_data)
 }
 
 static void
-mount_added_callback (GVolumeMonitor *monitor,
-              GMount *mount,
-              BaulApplication *application)
+mount_added_callback (GVolumeMonitor  *monitor G_GNUC_UNUSED,
+		      GMount          *mount,
+		      BaulApplication *application)
 {
     BaulDirectory *directory;
     GFile *root;
@@ -1291,9 +1292,9 @@ should_close_slot_with_mount (BaulWindow *window,
  * This is also called on pre_unmount.
  */
 static void
-mount_removed_callback (GVolumeMonitor *monitor,
-                        GMount *mount,
-                        BaulApplication *application)
+mount_removed_callback (GVolumeMonitor  *monitor G_GNUC_UNUSED,
+			GMount          *mount,
+			BaulApplication *application)
 {
     GList *window_list, *node, *close_list;
     BaulWindow *window;
@@ -1780,10 +1781,10 @@ baul_application_load_session (BaulApplication *application)
 
 static gboolean
 do_cmdline_sanity_checks (BaulApplication *self,
-              gboolean perform_self_check,
-              gboolean version,
-              gboolean kill_shell,
-              gchar **remaining)
+			  gboolean         perform_self_check,
+			  gboolean         version G_GNUC_UNUSED,
+			  gboolean         kill_shell,
+			  gchar          **remaining)
 {
     gboolean retval = FALSE;
 
@@ -2130,7 +2131,7 @@ init_desktop (BaulApplication *self)
 }
 
 static gboolean
-baul_application_save_accel_map (gpointer data)
+baul_application_save_accel_map (gpointer data G_GNUC_UNUSED)
 {
     if (save_of_accel_map_requested) {
         char *accel_map_filename;
@@ -2146,9 +2147,11 @@ baul_application_save_accel_map (gpointer data)
 }
 
 static void
-queue_accel_map_save_callback (CtkAccelMap *object, gchar *accel_path,
-        guint accel_key, CdkModifierType accel_mods,
-        gpointer user_data)
+queue_accel_map_save_callback (CtkAccelMap    *object G_GNUC_UNUSED,
+			       gchar          *accel_path G_GNUC_UNUSED,
+			       guint           accel_key G_GNUC_UNUSED,
+			       CdkModifierType accel_mods G_GNUC_UNUSED,
+			       gpointer        user_data G_GNUC_UNUSED)
 {
     if (!save_of_accel_map_requested) {
         save_of_accel_map_requested = TRUE;

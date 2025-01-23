@@ -68,8 +68,8 @@ G_DEFINE_TYPE_WITH_PRIVATE (BaulFileConflictDialog,
                             CTK_TYPE_DIALOG);
 
 static void
-file_icons_changed (BaulFile *file,
-                    BaulFileConflictDialog *fcd)
+file_icons_changed (BaulFile               *file G_GNUC_UNUSED,
+		    BaulFileConflictDialog *fcd)
 {
     cairo_surface_t *surface;
 
@@ -499,8 +499,8 @@ checkbox_toggled_cb (CtkToggleButton *t,
 }
 
 static void
-reset_button_clicked_cb (CtkButton *w,
-                         BaulFileConflictDialog *dialog)
+reset_button_clicked_cb (CtkButton              *w G_GNUC_UNUSED,
+			 BaulFileConflictDialog *dialog)
 {
     BaulFileConflictDialogPrivate *details;
     int start_pos, end_pos;
@@ -518,8 +518,8 @@ reset_button_clicked_cb (CtkButton *w,
 }
 
 static void
-diff_button_clicked_cb (CtkButton *w,
-                        BaulFileConflictDialog *dialog)
+diff_button_clicked_cb (CtkButton              *w G_GNUC_UNUSED,
+			BaulFileConflictDialog *dialog)
 {
     BaulFileConflictDialogPrivate *details;
     details = dialog->details;

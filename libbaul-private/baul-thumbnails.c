@@ -158,7 +158,7 @@ get_thumbnail_factory (void)
    so that it doesn't delay showing the directory in the icon/list views.
    We want to show the files in the directory as quickly as possible. */
 static gboolean
-thumbnail_thread_starter_cb (gpointer data)
+thumbnail_thread_starter_cb (gpointer data G_GNUC_UNUSED)
 {
     GTask *task;
 
@@ -479,10 +479,10 @@ baul_create_thumbnail (BaulFile *file)
 
 /* thumbnail_thread is invoked as a separate thread to to make thumbnails. */
 static void
-thumbnail_thread_func (GTask        *task,
-                       gpointer      source_object,
-                       gpointer      task_data,
-                       GCancellable *cancellable)
+thumbnail_thread_func (GTask        *task G_GNUC_UNUSED,
+		       gpointer      source_object G_GNUC_UNUSED,
+		       gpointer      task_data G_GNUC_UNUSED,
+		       GCancellable *cancellable G_GNUC_UNUSED)
 {
     BaulThumbnailInfo *info = NULL;
     GdkPixbuf *pixbuf;

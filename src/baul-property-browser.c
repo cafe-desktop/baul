@@ -489,8 +489,8 @@ baul_property_browser_show (CdkScreen *screen)
 
 static gboolean
 baul_property_browser_delete_event_callback (CtkWidget *widget,
-        CdkEvent  *event,
-        gpointer   user_data)
+					     CdkEvent  *event G_GNUC_UNUSED,
+					     gpointer   user_data G_GNUC_UNUSED)
 {
     /* Hide but don't destroy */
     ctk_widget_hide(widget);
@@ -499,7 +499,7 @@ baul_property_browser_delete_event_callback (CtkWidget *widget,
 
 static void
 baul_property_browser_hide_callback (CtkWidget *widget,
-                                     gpointer   user_data)
+				     gpointer   user_data G_GNUC_UNUSED)
 {
     BaulPropertyBrowser *property_browser;
 
@@ -585,11 +585,11 @@ baul_property_browser_drag_begin (CtkWidget *widget,
 /* drag and drop data get handler */
 
 static void
-baul_property_browser_drag_data_get (CtkWidget *widget,
-                                     CdkDragContext *context,
-                                     CtkSelectionData *selection_data,
-                                     guint info,
-                                     guint32 time)
+baul_property_browser_drag_data_get (CtkWidget        *widget,
+				     CdkDragContext   *context,
+				     CtkSelectionData *selection_data,
+				     guint             info,
+				     guint32           time G_GNUC_UNUSED)
 {
     char  *image_file_name, *image_file_uri;
     gboolean is_reset;
@@ -677,7 +677,8 @@ baul_property_browser_drag_data_get (CtkWidget *widget,
 /* drag and drop end handler, where we destroy ourselves, since the transaction is complete */
 
 static void
-baul_property_browser_drag_end (CtkWidget *widget, CdkDragContext *context)
+baul_property_browser_drag_end (CtkWidget      *widget,
+				CdkDragContext *context G_GNUC_UNUSED)
 {
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER(widget);
     if (!property_browser->details->keep_around)
@@ -1060,8 +1061,8 @@ update_preview_cb (CtkFileChooser *fc,
 }
 
 static void
-icon_button_clicked_cb (CtkButton *b,
-                        BaulPropertyBrowser *browser)
+icon_button_clicked_cb (CtkButton           *b G_GNUC_UNUSED,
+			BaulPropertyBrowser *browser)
 {
     CtkWidget *dialog;
     CtkFileFilter *filter;
@@ -1417,7 +1418,9 @@ add_color_to_file (BaulPropertyBrowser *property_browser, const char *color_spec
 
 /* handle the OK button being pushed on the color selection dialog */
 static void
-add_color_to_browser (CtkWidget *widget, gint which_button, gpointer data)
+add_color_to_browser (CtkWidget *widget G_GNUC_UNUSED,
+		      gint       which_button,
+		      gpointer   data)
 {
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
 
@@ -1455,7 +1458,8 @@ add_color_to_browser (CtkWidget *widget, gint which_button, gpointer data)
 
 /* create the color selection dialog, pre-set with the color that was just selected */
 static void
-show_color_selection_window (CtkWidget *widget, gpointer data)
+show_color_selection_window (CtkWidget *widget G_GNUC_UNUSED,
+			     gpointer   data)
 {
     CdkColor color;
     BaulPropertyBrowser *property_browser = BAUL_PROPERTY_BROWSER (data);
@@ -1634,7 +1638,8 @@ cancel_remove_mode (BaulPropertyBrowser *property_browser)
 /* handle the add_new button */
 
 static void
-add_new_button_callback(CtkWidget *widget, BaulPropertyBrowser *property_browser)
+add_new_button_callback (CtkWidget           *widget G_GNUC_UNUSED,
+			 BaulPropertyBrowser *property_browser)
 {
     /* handle remove mode, where we act as a cancel button */
     if (property_browser->details->remove_mode)
@@ -1661,7 +1666,8 @@ add_new_button_callback(CtkWidget *widget, BaulPropertyBrowser *property_browser
 
 /* handle the "done" button */
 static void
-done_button_callback (CtkWidget *widget, CtkWidget *property_browser)
+done_button_callback (CtkWidget *widget G_GNUC_UNUSED,
+		      CtkWidget *property_browser)
 {
     cancel_remove_mode (BAUL_PROPERTY_BROWSER (property_browser));
     ctk_widget_hide (property_browser);
@@ -1669,7 +1675,8 @@ done_button_callback (CtkWidget *widget, CtkWidget *property_browser)
 
 /* handle the "help" button */
 static void
-help_button_callback (CtkWidget *widget, CtkWidget *property_browser)
+help_button_callback (CtkWidget *widget G_GNUC_UNUSED,
+		      CtkWidget *property_browser)
 {
     GError *error = NULL;
 
@@ -1699,7 +1706,8 @@ help_button_callback (CtkWidget *widget, CtkWidget *property_browser)
 
 /* handle the "remove" button */
 static void
-remove_button_callback(CtkWidget *widget, BaulPropertyBrowser *property_browser)
+remove_button_callback (CtkWidget           *widget G_GNUC_UNUSED,
+			BaulPropertyBrowser *property_browser)
 {
     if (property_browser->details->remove_mode)
     {
@@ -1785,9 +1793,9 @@ labeled_image_configure (EelLabeledImage *labeled_image)
 /* Make a color tile for a property */
 static CtkWidget *
 labeled_image_new (const char *text,
-                   GdkPixbuf *pixbuf,
-                   const char *property_name,
-                   double scale_factor)
+		   GdkPixbuf  *pixbuf,
+		   const char *property_name,
+		   double      scale_factor G_GNUC_UNUSED)
 {
     CtkWidget *labeled_image;
 
@@ -2090,7 +2098,11 @@ make_properties_from_xml_node (BaulPropertyBrowser *property_browser,
 
 /* make_category generates widgets corresponding all of the objects in the passed in directory */
 static void
-make_category(BaulPropertyBrowser *property_browser, const char* path, const char* mode, xmlNodePtr node, const char *description)
+make_category(BaulPropertyBrowser *property_browser,
+	      const char          *path G_GNUC_UNUSED,
+	      const char          *mode,
+	      xmlNodePtr           node,
+	      const char          *description)
 {
 
     /* set up the description in the help label */
@@ -2489,8 +2501,8 @@ baul_property_browser_set_path (BaulPropertyBrowser *property_browser,
 }
 
 static void
-emblems_changed_callback (GObject *signaller,
-                          BaulPropertyBrowser *property_browser)
+emblems_changed_callback (GObject             *signaller G_GNUC_UNUSED,
+			  BaulPropertyBrowser *property_browser)
 {
     baul_property_browser_update_contents (property_browser);
 }

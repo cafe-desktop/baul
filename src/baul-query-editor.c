@@ -289,7 +289,8 @@ baul_query_editor_class_init (BaulQueryEditorClass *class)
 }
 
 static void
-entry_activate_cb (CtkWidget *entry, BaulQueryEditor *editor)
+entry_activate_cb (CtkWidget       *entry G_GNUC_UNUSED,
+		   BaulQueryEditor *editor)
 {
     if (editor->details->typing_timeout_id)
     {
@@ -317,7 +318,8 @@ typing_timeout_cb (gpointer user_data)
 #define TYPING_TIMEOUT 750
 
 static void
-entry_changed_cb (CtkWidget *entry, BaulQueryEditor *editor)
+entry_changed_cb (CtkWidget       *entry G_GNUC_UNUSED,
+		  BaulQueryEditor *editor)
 {
     if (editor->details->change_frozen)
     {
@@ -336,7 +338,8 @@ entry_changed_cb (CtkWidget *entry, BaulQueryEditor *editor)
 }
 
 static void
-edit_clicked (CtkButton *button, BaulQueryEditor *editor)
+edit_clicked (CtkButton       *button G_GNUC_UNUSED,
+	      BaulQueryEditor *editor)
 {
     baul_query_editor_set_visible (editor, TRUE);
     baul_query_editor_grab_focus (editor);
@@ -387,7 +390,7 @@ location_row_add_to_query (BaulQueryEditorRow *row,
 }
 
 static void
-location_row_free_data (BaulQueryEditorRow *row)
+location_row_free_data (BaulQueryEditorRow *row G_GNUC_UNUSED)
 {
 }
 
@@ -421,7 +424,8 @@ location_add_rows_from_query (BaulQueryEditor    *editor,
 
 /* Tags */
 static void
-tags_entry_changed_cb (CtkWidget *entry, gpointer *data)
+tags_entry_changed_cb (CtkWidget *entry,
+		       gpointer  *data G_GNUC_UNUSED)
 {
   /* remove commas from string */
   const gchar *text = ctk_entry_get_text ( CTK_ENTRY (entry));
@@ -481,7 +485,7 @@ tags_row_add_to_query (BaulQueryEditorRow *row,
 }
 
 static void
-tags_row_free_data (BaulQueryEditorRow *row)
+tags_row_free_data (BaulQueryEditorRow *row G_GNUC_UNUSED)
 {
 }
 
@@ -530,9 +534,9 @@ tags_add_rows_from_query (BaulQueryEditor *editor,
 /* Type */
 
 static gboolean
-type_separator_func (CtkTreeModel      *model,
-                     CtkTreeIter       *iter,
-                     gpointer           data)
+type_separator_func (CtkTreeModel *model,
+		     CtkTreeIter  *iter,
+		     gpointer      data G_GNUC_UNUSED)
 {
     char *text;
     gboolean res;
@@ -926,7 +930,7 @@ type_row_add_to_query (BaulQueryEditorRow *row,
 }
 
 static void
-type_row_free_data (BaulQueryEditorRow *row)
+type_row_free_data (BaulQueryEditorRow *row G_GNUC_UNUSED)
 {
 }
 
@@ -1187,11 +1191,12 @@ static void modtime_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
     baul_query_set_timestamp(query, is_greater ? timestamp: -timestamp);
 }
 
-static void modtime_row_free_data(BaulQueryEditorRow *row)
+static void modtime_row_free_data (BaulQueryEditorRow *row G_GNUC_UNUSED)
 {
 }
 
-static void modtime_add_rows_from_query(BaulQueryEditor *editor, BaulQuery *query)
+static void modtime_add_rows_from_query (BaulQueryEditor *editor G_GNUC_UNUSED,
+					 BaulQuery       *query G_GNUC_UNUSED)
 {
 }
 
@@ -1330,11 +1335,12 @@ static void size_row_add_to_query(BaulQueryEditorRow *row, BaulQuery *query)
     baul_query_set_size(query, is_greater ? size : -size);
 }
 
-static void size_row_free_data(BaulQueryEditorRow *row)
+static void size_row_free_data (BaulQueryEditorRow *row G_GNUC_UNUSED)
 {
 }
 
-static void size_add_rows_from_query(BaulQueryEditor *editor, BaulQuery *query)
+static void size_add_rows_from_query (BaulQueryEditor *editor G_GNUC_UNUSED,
+				      BaulQuery       *query G_GNUC_UNUSED)
 {
 }
 
@@ -1365,12 +1371,13 @@ contained_text_row_add_to_query (BaulQueryEditorRow *row, BaulQuery *query)
 }
 
 static void
-contained_text_row_free_data (BaulQueryEditorRow *row)
+contained_text_row_free_data (BaulQueryEditorRow *row G_GNUC_UNUSED)
 {
 }
 
 static void
-contained_text_add_rows_from_query (BaulQueryEditor *editor, BaulQuery *query)
+contained_text_add_rows_from_query (BaulQueryEditor *editor G_GNUC_UNUSED,
+				    BaulQuery       *query G_GNUC_UNUSED)
 {
 }
 
@@ -1404,7 +1411,8 @@ get_next_free_type (BaulQueryEditor *editor)
 }
 
 static void
-remove_row_cb (CtkButton *clicked_button, BaulQueryEditorRow *row)
+remove_row_cb (CtkButton          *clicked_button G_GNUC_UNUSED,
+	       BaulQueryEditorRow *row)
 {
     BaulQueryEditor *editor;
 
@@ -1508,13 +1516,15 @@ baul_query_editor_add_row (BaulQueryEditor *editor,
 }
 
 static void
-go_search_cb (CtkButton *clicked_button, BaulQueryEditor *editor)
+go_search_cb (CtkButton       *clicked_button G_GNUC_UNUSED,
+	      BaulQueryEditor *editor)
 {
     baul_query_editor_changed_force (editor, TRUE);
 }
 
 static void
-add_new_row_cb (CtkButton *clicked_button, BaulQueryEditor *editor)
+add_new_row_cb (CtkButton       *clicked_button G_GNUC_UNUSED,
+		BaulQueryEditor *editor)
 {
     baul_query_editor_add_row (editor, get_next_free_type (editor));
     baul_query_editor_changed (editor);

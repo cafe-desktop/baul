@@ -248,11 +248,11 @@ baul_bookmark_list_class_init (BaulBookmarkListClass *class)
 }
 
 static void
-bookmark_monitor_changed_cb (GFileMonitor      *monitor,
-                             GFile             *child,
-                             GFile             *other_file,
-                             GFileMonitorEvent  eflags,
-                             gpointer           user_data)
+bookmark_monitor_changed_cb (GFileMonitor      *monitor G_GNUC_UNUSED,
+			     GFile             *child G_GNUC_UNUSED,
+			     GFile             *other_file G_GNUC_UNUSED,
+			     GFileMonitorEvent  eflags,
+			     gpointer           user_data)
 {
     if (eflags == G_FILE_MONITOR_EVENT_CHANGED ||
             eflags == G_FILE_MONITOR_EVENT_CREATED)
@@ -459,7 +459,7 @@ baul_bookmark_list_delete_items_with_uri (BaulBookmarkList *bookmarks,
  * no window geometry has yet been saved for this bookmark list.
  **/
 const char *
-baul_bookmark_list_get_window_geometry (BaulBookmarkList *bookmarks)
+baul_bookmark_list_get_window_geometry (BaulBookmarkList *bookmarks G_GNUC_UNUSED)
 {
     return window_geometry;
 }

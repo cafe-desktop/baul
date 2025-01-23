@@ -102,10 +102,10 @@ baul_navigation_window_slot_clear_back_list (BaulNavigationWindowSlot *slot)
 }
 
 static void
-query_editor_changed_callback (BaulSearchBar *bar,
-                               BaulQuery *query,
-                               gboolean reload,
-                               BaulWindowSlot *slot)
+query_editor_changed_callback (BaulSearchBar  *bar G_GNUC_UNUSED,
+			       BaulQuery      *query,
+			       gboolean        reload,
+			       BaulWindowSlot *slot)
 {
     BaulDirectory *directory;
 
@@ -223,7 +223,7 @@ baul_navigation_window_slot_dispose (GObject *object)
 }
 
 static void
-baul_navigation_window_slot_init (BaulNavigationWindowSlot *slot)
+baul_navigation_window_slot_init (BaulNavigationWindowSlot *slot G_GNUC_UNUSED)
 {
 }
 
@@ -235,4 +235,3 @@ baul_navigation_window_slot_class_init (BaulNavigationWindowSlotClass *class)
 
     G_OBJECT_CLASS (class)->dispose = baul_navigation_window_slot_dispose;
 }
-

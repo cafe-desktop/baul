@@ -408,7 +408,10 @@ eel_canvas_item_unmap (EelCanvasItem *item)
 
 /* Update handler for canvas items */
 static void
-eel_canvas_item_update (EelCanvasItem *item, double i2w_dx, double i2w_dy, int flags)
+eel_canvas_item_update (EelCanvasItem *item,
+			double         i2w_dx G_GNUC_UNUSED,
+			double         i2w_dy G_GNUC_UNUSED,
+			int            flags G_GNUC_UNUSED)
 {
     item->flags &= ~(EEL_CANVAS_ITEM_NEED_UPDATE);
     item->flags &= ~(EEL_CANVAS_ITEM_NEED_DEEP_UPDATE);
@@ -869,9 +872,9 @@ eel_canvas_item_hide (EelCanvasItem *item)
  * Prepare the window for grabbing, i.e. show it.
  */
 static void
-seat_grab_prepare_window (CdkSeat *seat,
+seat_grab_prepare_window (CdkSeat   *seat G_GNUC_UNUSED,
 			  CdkWindow *window,
-			  gpointer user_data)
+			  gpointer   user_data G_GNUC_UNUSED)
 {
 	cdk_window_show (window);
 }
@@ -1888,9 +1891,9 @@ eel_canvas_get_type (void)
 
 static void
 eel_canvas_get_property (GObject    *object,
-                         guint       prop_id,
-                         GValue     *value,
-                         GParamSpec *pspec)
+			 guint       prop_id,
+			 GValue     *value G_GNUC_UNUSED,
+			 GParamSpec *pspec)
 {
     switch (prop_id)
     {
@@ -1902,9 +1905,9 @@ eel_canvas_get_property (GObject    *object,
 
 static void
 eel_canvas_set_property (GObject      *object,
-                         guint         prop_id,
-                         const GValue *value,
-                         GParamSpec   *pspec)
+			 guint         prop_id,
+			 const GValue *value G_GNUC_UNUSED,
+			 GParamSpec   *pspec)
 {
     switch (prop_id)
     {
@@ -1915,8 +1918,8 @@ eel_canvas_set_property (GObject      *object,
 }
 
 static void
-eel_canvas_accessible_adjustment_changed (CtkAdjustment *adjustment,
-        gpointer       data)
+eel_canvas_accessible_adjustment_changed (CtkAdjustment *adjustment G_GNUC_UNUSED,
+					  gpointer       data)
 {
     AtkObject *atk_obj;
 
@@ -2021,7 +2024,7 @@ eel_canvas_accessible_class_init (EelCanvasAccessibleClass *klass)
 }
 
 static void
-eel_canvas_accessible_init (EelCanvasAccessible *accessible)
+eel_canvas_accessible_init (EelCanvasAccessible *accessible G_GNUC_UNUSED)
 {
 }
 
@@ -3630,10 +3633,10 @@ eel_canvas_world_to_window (EelCanvas *canvas, double worldx, double worldy,
 }
 
 static gboolean
-boolean_handled_accumulator (GSignalInvocationHint *ihint,
+boolean_handled_accumulator (GSignalInvocationHint *ihint G_GNUC_UNUSED,
                              GValue                *return_accu,
                              const GValue          *handler_return,
-                             gpointer               dummy)
+                             gpointer               dummy G_GNUC_UNUSED)
 {
     gboolean continue_emission;
     gboolean signal_handled;
@@ -3934,7 +3937,7 @@ eel_canvas_item_accessible_class_init (EelCanvasItemAccessibleClass *klass)
 }
 
 static void
-eel_canvas_item_accessible_init (EelCanvasItemAccessible *accessible)
+eel_canvas_item_accessible_init (EelCanvasItemAccessible *accessible G_GNUC_UNUSED)
 {
 }
 
@@ -3992,7 +3995,7 @@ eel_canvas_item_accessible_factory_class_init (AtkObjectFactoryClass *klass)
 }
 
 static void
-eel_canvas_item_accessible_factory_init (EelCanvasItemAccessibleFactory *accessible)
+eel_canvas_item_accessible_factory_init (EelCanvasItemAccessibleFactory *accessible G_GNUC_UNUSED)
 {
 }
 

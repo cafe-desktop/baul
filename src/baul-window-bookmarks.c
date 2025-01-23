@@ -190,10 +190,10 @@ remove_bookmarks_menu_items (BaulWindow *window)
 }
 
 static void
-connect_proxy_cb (CtkActionGroup *action_group,
-                  CtkAction *action,
-                  CtkWidget *proxy,
-                  gpointer dummy)
+connect_proxy_cb (CtkActionGroup *action_group G_GNUC_UNUSED,
+		  CtkAction      *action G_GNUC_UNUSED,
+		  CtkWidget      *proxy,
+		  gpointer        dummy G_GNUC_UNUSED)
 {
     CtkLabel *label;
 

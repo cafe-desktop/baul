@@ -134,9 +134,9 @@ find_tab_num_at_pos (BaulNotebook *notebook, gint abs_x, gint abs_y)
 }
 
 static gboolean
-button_press_cb (BaulNotebook *notebook,
-                 CdkEventButton *event,
-                 gpointer data)
+button_press_cb (BaulNotebook   *notebook,
+		 CdkEventButton *event,
+		 gpointer        data G_GNUC_UNUSED)
 {
     int tab_clicked;
 
@@ -251,8 +251,8 @@ baul_notebook_sync_tab_label (BaulNotebook *notebook,
 }
 
 static void
-close_button_clicked_cb (CtkWidget *widget,
-                         BaulWindowSlot *slot)
+close_button_clicked_cb (CtkWidget      *widget G_GNUC_UNUSED,
+			 BaulWindowSlot *slot)
 {
     CtkWidget *notebook;
 
@@ -264,7 +264,8 @@ close_button_clicked_cb (CtkWidget *widget,
 }
 
 static CtkWidget *
-build_tab_label (BaulNotebook *nb, BaulWindowSlot *slot)
+build_tab_label (BaulNotebook   *nb G_GNUC_UNUSED,
+		 BaulWindowSlot *slot)
 {
     BaulDragSlotProxyInfo *drag_info;
     CtkWidget *hbox, *label, *close_button, *image, *spinner, *icon;

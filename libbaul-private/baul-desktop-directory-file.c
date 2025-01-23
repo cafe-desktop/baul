@@ -107,8 +107,8 @@ desktop_callback_equal (gconstpointer desktop_callback_as_pointer,
 
 
 static void
-real_file_changed_callback (BaulFile *real_file,
-                            gpointer callback_data)
+real_file_changed_callback (BaulFile *real_file G_GNUC_UNUSED,
+			    gpointer  callback_data)
 {
     BaulDesktopDirectoryFile *desktop_file;
 
@@ -453,7 +453,7 @@ desktop_directory_file_get_date (BaulFile *file,
 }
 
 static char *
-desktop_directory_file_get_where_string (BaulFile *file)
+desktop_directory_file_get_where_string (BaulFile *file G_GNUC_UNUSED)
 {
     return g_strdup (_("on the desktop"));
 }
@@ -470,23 +470,24 @@ monitor_destroy (gpointer data)
 }
 
 static void
-baul_desktop_directory_file_set_metadata (BaulFile           *file,
-        const char             *key,
-        const char             *value)
+baul_desktop_directory_file_set_metadata (BaulFile   *file,
+					  const char *key,
+					  const char *value)
 {
     baul_desktop_set_metadata_string (file, "directory", key, value);
 }
 
 static void
-baul_desktop_directory_file_set_metadata_as_list (BaulFile           *file,
-        const char             *key,
-        char                  **value)
+baul_desktop_directory_file_set_metadata_as_list (BaulFile   *file,
+						  const char *key,
+						  char      **value)
 {
     baul_desktop_set_metadata_stringv (file, "directory", key, (const gchar **) value);
 }
 
 static void
-baul_desktop_directory_file_init (gpointer object, gpointer klass)
+baul_desktop_directory_file_init (gpointer object,
+				  gpointer klass G_GNUC_UNUSED)
 {
     BaulDesktopDirectoryFile *desktop_file;
     BaulDesktopDirectory *desktop_directory;
@@ -517,9 +518,9 @@ baul_desktop_directory_file_init (gpointer object, gpointer klass)
 
 
 static void
-desktop_callback_remove_file_cover (gpointer key,
-                                    gpointer value,
-                                    gpointer callback_data)
+desktop_callback_remove_file_cover (gpointer key G_GNUC_UNUSED,
+				    gpointer value,
+				    gpointer callback_data)
 {
     desktop_callback_remove_file
     (value, BAUL_FILE (callback_data));

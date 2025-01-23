@@ -776,7 +776,8 @@ verify_printf (const char *format, ...)
 }
 
 static char *
-custom1_to_string (char *format, va_list va)
+custom1_to_string (char   *format G_GNUC_UNUSED,
+		   va_list va)
 {
     int i;
 
@@ -792,7 +793,8 @@ custom1_skip (va_list *va)
 }
 
 static char *
-custom2_to_string (char *format, va_list va)
+custom2_to_string (char   *format G_GNUC_UNUSED,
+		   va_list va)
 {
     char *s;
 

@@ -527,7 +527,9 @@ eel_canvas_set_source_color (cairo_t *cr,
 #define DASH_ON 0.8
 #define DASH_OFF 1.7
 static void
-eel_canvas_rect_draw (EelCanvasItem *item, cairo_t *cr, cairo_region_t *region)
+eel_canvas_rect_draw (EelCanvasItem *item,
+		      cairo_t *cr,
+		      cairo_region_t *region G_GNUC_UNUSED)
 {
     EelCanvasRE *re;
     double x1, y1, x2, y2;
@@ -591,7 +593,12 @@ eel_canvas_rect_draw (EelCanvasItem *item, cairo_t *cr, cairo_region_t *region)
 }
 
 static double
-eel_canvas_rect_point (EelCanvasItem *item, double x, double y, int cx, int cy, EelCanvasItem **actual_item)
+eel_canvas_rect_point (EelCanvasItem  *item,
+		       double          x,
+		       double          y,
+		       int             cx G_GNUC_UNUSED,
+		       int             cy G_GNUC_UNUSED,
+		       EelCanvasItem **actual_item)
 {
     EelCanvasRE *re;
     double x1, y1, x2, y2;

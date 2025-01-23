@@ -204,9 +204,9 @@ desktop_location_changed_callback (gpointer user_data)
 }
 
 static void
-trash_state_changed_cb (BaulTrashMonitor *monitor,
-                        gboolean state,
-                        BaulPathBar *path_bar)
+trash_state_changed_cb (BaulTrashMonitor *monitor G_GNUC_UNUSED,
+			gboolean          state G_GNUC_UNUSED,
+			BaulPathBar      *path_bar)
 {
     GFile *file;
     GList *list;
@@ -259,11 +259,11 @@ slider_timeout (gpointer user_data)
 
 static void
 baul_path_bar_slider_drag_motion (CtkWidget      *widget,
-                                  CdkDragContext *context,
-                                  int             x,
-                                  int             y,
-                                  unsigned int    time,
-                                  gpointer        user_data)
+				  CdkDragContext *context G_GNUC_UNUSED,
+				  int             x G_GNUC_UNUSED,
+				  int             y G_GNUC_UNUSED,
+				  unsigned int    time G_GNUC_UNUSED,
+				  gpointer        user_data)
 {
     BaulPathBar *path_bar;
     unsigned int timeout;
@@ -288,10 +288,10 @@ baul_path_bar_slider_drag_motion (CtkWidget      *widget,
 }
 
 static void
-baul_path_bar_slider_drag_leave (CtkWidget      *widget,
-                                 CdkDragContext *context,
-                                 unsigned int    time,
-                                 gpointer        user_data)
+baul_path_bar_slider_drag_leave (CtkWidget      *widget G_GNUC_UNUSED,
+				 CdkDragContext *context G_GNUC_UNUSED,
+				 unsigned int    time G_GNUC_UNUSED,
+				 gpointer        user_data)
 {
     BaulPathBar *path_bar;
 
@@ -989,9 +989,9 @@ baul_path_bar_remove (CtkContainer *container,
 
 static void
 baul_path_bar_forall (CtkContainer *container,
-                      gboolean      include_internals,
-                      CtkCallback   callback,
-                      gpointer      callback_data)
+		      gboolean      include_internals G_GNUC_UNUSED,
+		      CtkCallback   callback,
+		      gpointer      callback_data)
 {
     BaulPathBar *path_bar;
     GList *children;
@@ -1212,9 +1212,9 @@ baul_path_bar_slider_button_press (CtkWidget       *widget,
 }
 
 static gboolean
-baul_path_bar_slider_button_release (CtkWidget      *widget,
-                                     CdkEventButton *event,
-                                     BaulPathBar     *path_bar)
+baul_path_bar_slider_button_release (CtkWidget      *widget G_GNUC_UNUSED,
+				     CdkEventButton *event,
+				     BaulPathBar    *path_bar)
 {
     if (event->type != CDK_BUTTON_RELEASE)
     {
@@ -1239,7 +1239,7 @@ baul_path_bar_grab_notify (CtkWidget *widget,
 
 static void
 baul_path_bar_state_changed (CtkWidget    *widget,
-                             CtkStateType  previous_state)
+			     CtkStateType  previous_state G_GNUC_UNUSED)
 {
     if (!ctk_widget_get_sensitive (widget))
     {
@@ -1277,9 +1277,9 @@ change_icon_theme (BaulPathBar *path_bar)
 
 /* Callback used when a CtkSettings value changes */
 static void
-settings_notify_cb (GObject    *object,
-                    GParamSpec *pspec,
-                    BaulPathBar *path_bar)
+settings_notify_cb (GObject     *object G_GNUC_UNUSED,
+		    GParamSpec  *pspec,
+		    BaulPathBar *path_bar)
 {
     const char *name;
 
@@ -1376,9 +1376,9 @@ button_event_cb (CtkWidget *button,
 }
 
 static void
-button_drag_begin_cb (CtkWidget *widget,
-		      CdkDragContext *drag_context,
-		      gpointer user_data)
+button_drag_begin_cb (CtkWidget      *widget,
+		      CdkDragContext *drag_context G_GNUC_UNUSED,
+		      gpointer        user_data G_GNUC_UNUSED)
 {
 	g_object_set_data (G_OBJECT (widget), "handle-button-release",
 			   GINT_TO_POINTER (FALSE));
@@ -1695,12 +1695,12 @@ setup_button_type (ButtonData       *button_data,
 }
 
 static void
-button_drag_data_get_cb (CtkWidget          *widget,
-                         CdkDragContext     *context,
-                         CtkSelectionData   *selection_data,
-                         guint               info,
-                         guint               time_,
-                         gpointer            user_data)
+button_drag_data_get_cb (CtkWidget        *widget G_GNUC_UNUSED,
+			 CdkDragContext   *context G_GNUC_UNUSED,
+			 CtkSelectionData *selection_data,
+			 guint             info,
+			 guint             time_ G_GNUC_UNUSED,
+			 gpointer          user_data)
 {
     ButtonData *button_data;
     char *uri_list[2];
@@ -2055,8 +2055,8 @@ baul_path_bar_check_parent_path (BaulPathBar *path_bar,
 
 static gboolean
 baul_path_bar_update_path (BaulPathBar *path_bar,
-                           GFile *file_path,
-                           gboolean emit_signal)
+			   GFile       *file_path,
+			   gboolean     emit_signal G_GNUC_UNUSED)
 {
     BaulFile *file, *parent_file;
     gboolean first_directory, last_directory;

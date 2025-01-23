@@ -816,7 +816,7 @@ report_current_content_view_failure_to_user (BaulWindowSlot *slot)
 
 static void
 report_nascent_content_view_failure_to_user (BaulWindowSlot *slot,
-        BaulView *view)
+					     BaulView       *view G_GNUC_UNUSED)
 {
     BaulWindow *window;
     char *message;
@@ -2103,8 +2103,10 @@ baul_window_report_view_failed (BaulWindow *window,
 }
 
 static void
-display_view_selection_failure (BaulWindow *window, BaulFile *file,
-                                GFile *location, GError *error)
+display_view_selection_failure (BaulWindow *window G_GNUC_UNUSED,
+				BaulFile   *file,
+				GFile      *location,
+				GError     *error)
 {
     char *full_uri_for_display;
     char *uri_for_display;
@@ -2284,8 +2286,8 @@ baul_window_slot_set_content_view (BaulWindowSlot *slot,
 }
 
 void
-baul_window_manage_views_close_slot (BaulWindowPane *pane,
-                                     BaulWindowSlot *slot)
+baul_window_manage_views_close_slot (BaulWindowPane *pane G_GNUC_UNUSED,
+				     BaulWindowSlot *slot)
 {
     if (slot->content_view != NULL)
     {

@@ -121,7 +121,8 @@ baul_zoom_control_finalize (GObject *object)
 }
 
 static void
-zoom_button_clicked (CtkButton *button, BaulZoomControl *zoom_control)
+zoom_button_clicked (CtkButton       *button G_GNUC_UNUSED,
+		     BaulZoomControl *zoom_control)
 {
     g_signal_emit (zoom_control, signals[ZOOM_TO_DEFAULT], 0);
 }
@@ -183,8 +184,8 @@ baul_zoom_control_button_press_event (CtkWidget *widget,
 }
 
 static void
-zoom_out_clicked (CtkButton *button,
-                  BaulZoomControl *zoom_control)
+zoom_out_clicked (CtkButton       *button G_GNUC_UNUSED,
+		  BaulZoomControl *zoom_control)
 {
     if (baul_zoom_control_can_zoom_out (zoom_control))
     {
@@ -193,8 +194,8 @@ zoom_out_clicked (CtkButton *button,
 }
 
 static void
-zoom_in_clicked (CtkButton *button,
-                 BaulZoomControl *zoom_control)
+zoom_in_clicked (CtkButton       *button G_GNUC_UNUSED,
+		 BaulZoomControl *zoom_control)
 {
     if (baul_zoom_control_can_zoom_in (zoom_control))
     {
@@ -220,9 +221,9 @@ set_label_size (BaulZoomControl *zoom_control)
 }
 
 static void
-label_style_set_callback (CtkWidget *label,
-                          CtkStyleContext *style,
-                          gpointer user_data)
+label_style_set_callback (CtkWidget       *label G_GNUC_UNUSED,
+			  CtkStyleContext *style G_GNUC_UNUSED,
+			  gpointer         user_data)
 {
     set_label_size (BAUL_ZOOM_CONTROL (user_data));
 }
@@ -703,20 +704,22 @@ baul_zoom_control_accessible_do_action (AtkAction *accessible, int i)
 }
 
 static int
-baul_zoom_control_accessible_get_n_actions (AtkAction *accessible)
+baul_zoom_control_accessible_get_n_actions (AtkAction *accessible G_GNUC_UNUSED)
 {
 
     return NUM_ACTIONS;
 }
 
-static const char* baul_zoom_control_accessible_action_get_description(AtkAction* accessible, int i)
+static const char* baul_zoom_control_accessible_action_get_description (AtkAction *accessible G_GNUC_UNUSED,
+									int        i)
 {
     g_assert(i >= 0 && i < NUM_ACTIONS);
 
     return _(baul_zoom_control_accessible_action_descriptions[i]);
 }
 
-static const char* baul_zoom_control_accessible_action_get_name(AtkAction* accessible, int i)
+static const char* baul_zoom_control_accessible_action_get_name (AtkAction *accessible G_GNUC_UNUSED,
+								 int        i)
 {
     g_assert (i >= 0 && i < NUM_ACTIONS);
 
@@ -847,12 +850,12 @@ baul_zoom_control_accessible_value_interface_init (AtkValueIface *iface)
     iface->set_current_value = baul_zoom_control_accessible_set_current_value;
 }
 
-static const char* baul_zoom_control_accessible_get_name(AtkObject* accessible)
+static const char* baul_zoom_control_accessible_get_name (AtkObject* accessible G_GNUC_UNUSED)
 {
     return _("Zoom");
 }
 
-static const char* baul_zoom_control_accessible_get_description(AtkObject* accessible)
+static const char* baul_zoom_control_accessible_get_description (AtkObject* accessible G_GNUC_UNUSED)
 {
     return _("Set the zoom level of the current view");
 }
@@ -900,7 +903,7 @@ baul_zoom_control_accessible_class_init (BaulZoomControlAccessibleClass *klass)
 }
 
 static void
-baul_zoom_control_accessible_init (BaulZoomControlAccessible *accessible)
+baul_zoom_control_accessible_init (BaulZoomControlAccessible *accessible G_GNUC_UNUSED)
 {
 }
 

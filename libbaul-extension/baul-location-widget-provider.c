@@ -38,7 +38,7 @@
  */
 
 static void
-baul_location_widget_provider_base_init (gpointer g_class)
+baul_location_widget_provider_base_init (gpointer g_class G_GNUC_UNUSED)
 {
 }
 

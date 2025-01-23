@@ -185,9 +185,9 @@ list_changed (BaulColumnChooser *chooser)
 }
 
 static void
-visible_toggled_callback (CtkCellRendererToggle *cell,
-                          char *path_string,
-                          gpointer user_data)
+visible_toggled_callback (CtkCellRendererToggle *cell G_GNUC_UNUSED,
+			  char                  *path_string,
+			  gpointer               user_data)
 {
     BaulColumnChooser *chooser;
     CtkTreePath *path;
@@ -208,15 +208,16 @@ visible_toggled_callback (CtkCellRendererToggle *cell,
 }
 
 static void
-selection_changed_callback (CtkTreeSelection *selection, gpointer user_data)
+selection_changed_callback (CtkTreeSelection *selection G_GNUC_UNUSED,
+			    gpointer          user_data)
 {
     update_buttons (BAUL_COLUMN_CHOOSER (user_data));
 }
 
 static void
-row_deleted_callback (CtkTreeModel *model,
-                      CtkTreePath *path,
-                      gpointer user_data)
+row_deleted_callback (CtkTreeModel *model G_GNUC_UNUSED,
+		      CtkTreePath  *path G_GNUC_UNUSED,
+		      gpointer      user_data)
 {
     list_changed (BAUL_COLUMN_CHOOSER (user_data));
 }
@@ -287,7 +288,8 @@ add_tree_view (BaulColumnChooser *chooser)
 }
 
 static void
-move_up_clicked_callback (CtkWidget *button, gpointer user_data)
+move_up_clicked_callback (CtkWidget *button G_GNUC_UNUSED,
+			  gpointer   user_data)
 {
     BaulColumnChooser *chooser;
     CtkTreeIter iter;
@@ -317,7 +319,8 @@ move_up_clicked_callback (CtkWidget *button, gpointer user_data)
 }
 
 static void
-move_down_clicked_callback (CtkWidget *button, gpointer user_data)
+move_down_clicked_callback (CtkWidget *button G_GNUC_UNUSED,
+			    gpointer   user_data)
 {
     BaulColumnChooser *chooser;
     CtkTreeIter iter;
@@ -345,7 +348,8 @@ move_down_clicked_callback (CtkWidget *button, gpointer user_data)
 }
 
 static void
-use_default_clicked_callback (CtkWidget *button, gpointer user_data)
+use_default_clicked_callback (CtkWidget *button G_GNUC_UNUSED,
+			      gpointer   user_data)
 {
     g_signal_emit (BAUL_COLUMN_CHOOSER (user_data),
                    signals[USE_DEFAULT], 0);

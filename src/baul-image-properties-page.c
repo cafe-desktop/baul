@@ -528,10 +528,10 @@ file_read_callback (GObject      *object,
 }
 
 static void
-size_prepared_callback (GdkPixbufLoader *loader,
-                        int              width,
-                        int              height,
-                        gpointer         callback_data)
+size_prepared_callback (GdkPixbufLoader *loader G_GNUC_UNUSED,
+			int              width,
+			int              height,
+			gpointer         callback_data)
 {
     BaulImagePropertiesPage *page;
 
@@ -660,8 +660,8 @@ baul_image_properties_page_init (BaulImagePropertiesPage *page)
 }
 
 static GList *
-get_property_pages (BaulPropertyPageProvider *provider,
-                    GList *files)
+get_property_pages (BaulPropertyPageProvider *provider G_GNUC_UNUSED,
+		    GList                    *files)
 {
     GList *pages;
     BaulPropertyPage *real_page;
@@ -720,12 +720,12 @@ property_page_provider_iface_init (BaulPropertyPageProviderIface *iface)
 
 
 static void
-baul_image_properties_page_provider_init (BaulImagePropertiesPageProvider *sidebar)
+baul_image_properties_page_provider_init (BaulImagePropertiesPageProvider *sidebar G_GNUC_UNUSED)
 {
 }
 
 static void
-baul_image_properties_page_provider_class_init (BaulImagePropertiesPageProviderClass *class)
+baul_image_properties_page_provider_class_init (BaulImagePropertiesPageProviderClass *class G_GNUC_UNUSED)
 {
 }
 

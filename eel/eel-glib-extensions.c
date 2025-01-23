@@ -329,7 +329,9 @@ eel_g_list_partition (GList *list,
 }
 
 static void
-print_key_string (gpointer key, gpointer value, gpointer callback_data)
+print_key_string (gpointer key,
+		  gpointer value G_GNUC_UNUSED,
+		  gpointer callback_data)
 {
     g_assert (callback_data == NULL);
 

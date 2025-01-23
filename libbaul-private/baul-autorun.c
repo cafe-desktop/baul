@@ -193,8 +193,8 @@ baul_autorun_set_preferences (const char *x_content_type,
 
 static gboolean
 combo_box_separator_func (CtkTreeModel *model,
-                          CtkTreeIter *iter,
-                          gpointer data)
+			  CtkTreeIter  *iter,
+			  gpointer      data G_GNUC_UNUSED)
 {
     char *str;
 
@@ -238,9 +238,9 @@ baul_autorun_combobox_data_destroy (BaulAutorunComboBoxData *data)
 }
 
 static void
-other_application_selected (BaulOpenWithDialog *dialog,
-                            GAppInfo *app_info,
-                            BaulAutorunComboBoxData *data)
+other_application_selected (BaulOpenWithDialog      *dialog G_GNUC_UNUSED,
+			    GAppInfo                *app_info,
+			    BaulAutorunComboBoxData *data)
 {
     if (data->changed_cb != NULL)
     {
@@ -270,16 +270,16 @@ handle_dialog_closure (BaulAutorunComboBoxData *data)
 }
 
 static void
-dialog_response_cb (CtkDialog *dialog,
-                    gint response,
-                    BaulAutorunComboBoxData *data)
+dialog_response_cb (CtkDialog               *dialog G_GNUC_UNUSED,
+		    gint                     response G_GNUC_UNUSED,
+		    BaulAutorunComboBoxData *data)
 {
     handle_dialog_closure (data);
 }
 
 static void
-dialog_destroy_cb (CtkWidget *object,
-                   BaulAutorunComboBoxData *data)
+dialog_destroy_cb (CtkWidget               *object G_GNUC_UNUSED,
+		   BaulAutorunComboBoxData *data)
 {
     handle_dialog_closure (data);
 }
@@ -840,7 +840,8 @@ autorun_dialog_destroy (AutorunDialogData *data)
 }
 
 static void
-autorun_dialog_mount_unmounted (GMount *mount, AutorunDialogData *data)
+autorun_dialog_mount_unmounted (GMount            *mount G_GNUC_UNUSED,
+				AutorunDialogData *data)
 {
     /* remove the dialog if the media is unmounted */
     autorun_dialog_destroy (data);
@@ -899,11 +900,11 @@ autorun_dialog_response (CtkDialog *dialog, gint response, AutorunDialogData *da
 }
 
 static void
-autorun_combo_changed (gboolean selected_ask,
-                       gboolean selected_ignore,
-                       gboolean selected_open_folder,
-                       GAppInfo *selected_app,
-                       gpointer user_data)
+autorun_combo_changed (gboolean  selected_ask G_GNUC_UNUSED,
+		       gboolean  selected_ignore,
+		       gboolean  selected_open_folder,
+		       GAppInfo *selected_app,
+		       gpointer  user_data)
 {
     AutorunDialogData *data = user_data;
 
@@ -924,7 +925,9 @@ autorun_always_toggled (CtkToggleButton *togglebutton, AutorunDialogData *data)
 }
 
 static gboolean
-combo_box_enter_ok (CtkWidget *togglebutton, CdkEventKey *event, CtkDialog *dialog)
+combo_box_enter_ok (CtkWidget   *togglebutton G_GNUC_UNUSED,
+		    CdkEventKey *event,
+		    CtkDialog   *dialog)
 {
     if (event->keyval == CDK_KEY_KP_Enter || event->keyval == CDK_KEY_Return)
     {

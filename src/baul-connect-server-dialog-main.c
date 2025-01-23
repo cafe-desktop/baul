@@ -42,8 +42,8 @@
 static GSimpleAsyncResult *display_location_res = NULL;
 
 static void
-main_dialog_destroyed (CtkWidget *widget,
-                       gpointer   user_data)
+main_dialog_destroyed (CtkWidget *widget G_GNUC_UNUSED,
+		       gpointer   user_data G_GNUC_UNUSED)
 {
     /* this only happens when user clicks "cancel"
      * on the main dialog or when we are all done.
@@ -52,9 +52,9 @@ main_dialog_destroyed (CtkWidget *widget,
 }
 
 gboolean
-baul_connect_server_dialog_display_location_finish (BaulConnectServerDialog *self,
-						    GAsyncResult *res,
-						    GError **error)
+baul_connect_server_dialog_display_location_finish (BaulConnectServerDialog *self G_GNUC_UNUSED,
+						    GAsyncResult            *res,
+						    GError                 **error)
 {
     if (g_simple_async_result_propagate_error (G_SIMPLE_ASYNC_RESULT (res), error)) {
     	return FALSE;
@@ -65,10 +65,10 @@ baul_connect_server_dialog_display_location_finish (BaulConnectServerDialog *sel
 
 void
 baul_connect_server_dialog_display_location_async (BaulConnectServerDialog *self,
-						   BaulApplication *application,
-						   GFile *location,
-						   GAsyncReadyCallback callback,
-						   gpointer user_data)
+						   BaulApplication         *application G_GNUC_UNUSED,
+						   GFile                   *location,
+						   GAsyncReadyCallback      callback,
+						   gpointer                 user_data)
 {
     GError *error;
     CdkAppLaunchContext *launch_context;

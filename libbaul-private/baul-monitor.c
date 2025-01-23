@@ -1,5 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
-
+/*
    baul-monitor.c: file and directory change monitoring for baul
 
    Copyright (C) 2000, 2001 Eazel, Inc.
@@ -69,7 +68,7 @@ baul_monitor_active (void)
 static gboolean call_consume_changes_idle_id = 0;
 
 static gboolean
-call_consume_changes_idle_cb (gpointer not_used)
+call_consume_changes_idle_cb (gpointer not_used G_GNUC_UNUSED)
 {
     baul_file_changes_consume_changes (TRUE);
     call_consume_changes_idle_id = 0;
@@ -86,9 +85,9 @@ schedule_call_consume_changes (void)
 }
 
 static void
-mount_removed (GVolumeMonitor *volume_monitor,
-               GMount *mount,
-               gpointer user_data)
+mount_removed (GVolumeMonitor *volume_monitor G_GNUC_UNUSED,
+	       GMount         *mount,
+	       gpointer        user_data)
 {
     BaulMonitor *monitor = user_data;
     if (mount == monitor->mount) {
@@ -98,11 +97,11 @@ mount_removed (GVolumeMonitor *volume_monitor,
 }
 
 static void
-dir_changed (GFileMonitor* monitor,
-             GFile *child,
-             GFile *other_file,
-             GFileMonitorEvent event_type,
-             gpointer user_data)
+dir_changed (GFileMonitor     *monitor G_GNUC_UNUSED,
+	     GFile            *child,
+	     GFile            *other_file,
+	     GFileMonitorEvent event_type,
+	     gpointer          user_data G_GNUC_UNUSED)
 {
     char *uri, *to_uri;
 

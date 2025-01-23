@@ -1,5 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*-
-
+/*
    baul-search-directory-file.c: Subclass of BaulFile to help implement the
    searches
 
@@ -48,9 +47,9 @@ G_DEFINE_TYPE(BaulSearchDirectoryFile, baul_search_directory_file, BAUL_TYPE_FIL
 
 
 static void
-search_directory_file_monitor_add (BaulFile *file,
-                                   gconstpointer client,
-                                   BaulFileAttributes attributes)
+search_directory_file_monitor_add (BaulFile          *file,
+				   gconstpointer      client G_GNUC_UNUSED,
+				   BaulFileAttributes attributes G_GNUC_UNUSED)
 {
     /* No need for monitoring, we always emit changed when files
        are added/removed, and no other metadata changes */
@@ -60,17 +59,17 @@ search_directory_file_monitor_add (BaulFile *file,
 }
 
 static void
-search_directory_file_monitor_remove (BaulFile *file,
-                                      gconstpointer client)
+search_directory_file_monitor_remove (BaulFile     *file G_GNUC_UNUSED,
+				      gconstpointer client G_GNUC_UNUSED)
 {
     /* Do nothing here, we don't have any monitors */
 }
 
 static void
-search_directory_file_call_when_ready (BaulFile *file,
-                                       BaulFileAttributes file_attributes,
-                                       BaulFileCallback callback,
-                                       gpointer callback_data)
+search_directory_file_call_when_ready (BaulFile          *file,
+				       BaulFileAttributes file_attributes G_GNUC_UNUSED,
+				       BaulFileCallback   callback,
+				       gpointer           callback_data)
 
 {
     /* Update display name, in case this didn't happen yet */
@@ -81,24 +80,24 @@ search_directory_file_call_when_ready (BaulFile *file,
 }
 
 static void
-search_directory_file_cancel_call_when_ready (BaulFile *file,
-        BaulFileCallback callback,
-        gpointer callback_data)
+search_directory_file_cancel_call_when_ready (BaulFile        *file G_GNUC_UNUSED,
+					      BaulFileCallback callback G_GNUC_UNUSED,
+					      gpointer         callback_data G_GNUC_UNUSED)
 {
     /* Do nothing here, we don't have any pending calls */
 }
 
 static gboolean
-search_directory_file_check_if_ready (BaulFile *file,
-                                      BaulFileAttributes attributes)
+search_directory_file_check_if_ready (BaulFile          *file G_GNUC_UNUSED,
+				      BaulFileAttributes attributes G_GNUC_UNUSED)
 {
     return TRUE;
 }
 
 static gboolean
 search_directory_file_get_item_count (BaulFile *file,
-                                      guint *count,
-                                      gboolean *count_unreadable)
+				      guint    *count,
+				      gboolean *count_unreadable G_GNUC_UNUSED)
 {
     if (count)
     {
@@ -173,7 +172,7 @@ search_directory_file_get_deep_counts (BaulFile *file,
 }
 
 static char *
-search_directory_file_get_where_string (BaulFile *file)
+search_directory_file_get_where_string (BaulFile *file G_GNUC_UNUSED)
 {
     return g_strdup (_("Search"));
 }

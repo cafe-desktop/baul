@@ -799,7 +799,8 @@ has_invalid_xml_char (char *str)
 
 
 static char *
-custom_full_name_to_string (char *format, va_list va)
+custom_full_name_to_string (char   *format G_GNUC_UNUSED,
+			    va_list va)
 {
 	GFile *file;
 
@@ -815,7 +816,8 @@ custom_full_name_skip (va_list *va)
 }
 
 static char *
-custom_basename_to_string (char *format, va_list va)
+custom_basename_to_string (char   *format G_GNUC_UNUSED,
+			   va_list va)
 {
 	GFile *file;
 	GFileInfo *info;
@@ -871,7 +873,8 @@ custom_basename_skip (va_list *va)
 
 
 static char *
-custom_size_to_string (char *format, va_list va)
+custom_size_to_string (char   *format G_GNUC_UNUSED,
+		       va_list va)
 {
 	goffset size;
 
@@ -890,7 +893,8 @@ custom_size_skip (va_list *va)
 }
 
 static char *
-custom_time_to_string (char *format, va_list va)
+custom_time_to_string (char   *format G_GNUC_UNUSED,
+		       va_list va)
 {
 	int secs;
 
@@ -905,7 +909,8 @@ custom_time_skip (va_list *va)
 }
 
 static char *
-custom_mount_to_string (char *format, va_list va)
+custom_mount_to_string (char   *format G_GNUC_UNUSED,
+			va_list va)
 {
 	GMount *mount;
 
@@ -1569,11 +1574,12 @@ static void delete_file (CommonJob *job, GFile *file,
 			 gboolean toplevel);
 
 static void
-delete_dir (CommonJob *job, GFile *dir,
-	    gboolean *skipped_file,
-	    SourceInfo *source_info,
+delete_dir (CommonJob    *job,
+	    GFile        *dir,
+	    gboolean     *skipped_file,
+	    SourceInfo   *source_info,
 	    TransferInfo *transfer_info,
-	    gboolean toplevel)
+	    gboolean      toplevel G_GNUC_UNUSED)
 {
 	GFileInfo *info;
 	GError *error;
@@ -1979,8 +1985,8 @@ delete_job_done (gpointer user_data)
 
 static gboolean
 delete_job (GIOSchedulerJob *io_job,
-	    GCancellable *cancellable,
-	    gpointer user_data)
+	    GCancellable    *cancellable G_GNUC_UNUSED,
+	    gpointer         user_data)
 {
 	DeleteJob *job = user_data;
 	GList *to_trash_files;
@@ -2432,7 +2438,7 @@ baul_file_operations_unmount_mount (CtkWindow                      *parent_windo
 
 static void
 mount_callback_data_notify (gpointer data,
-			    GObject *object)
+			    GObject *object G_GNUC_UNUSED)
 {
 	GMountOperation *mount_op;
 
@@ -3213,11 +3219,11 @@ make_file_name_valid_for_dest_fs (char *filename,
 }
 
 static GFile *
-get_unique_target_file (GFile *src,
-			GFile *dest_dir,
-			gboolean same_fs,
+get_unique_target_file (GFile      *src,
+			GFile      *dest_dir,
+			gboolean    same_fs G_GNUC_UNUSED,
 			const char *dest_fs_type,
-			int count)
+			int         count)
 {
 	char *new_name;
 	GFileInfo *info;
@@ -3903,8 +3909,8 @@ typedef struct {
 } ProgressData;
 
 static void
-copy_file_progress_callback (goffset current_num_bytes,
-			     goffset total_num_bytes,
+copy_file_progress_callback (goffset  current_num_bytes,
+			     goffset  total_num_bytes G_GNUC_UNUSED,
 			     gpointer user_data)
 {
 	ProgressData *pdata;
@@ -4649,8 +4655,8 @@ copy_job_done (gpointer user_data)
 
 static gboolean
 copy_job (GIOSchedulerJob *io_job,
-	  GCancellable *cancellable,
-	  gpointer user_data)
+	  GCancellable    *cancellable G_GNUC_UNUSED,
+	  gpointer         user_data)
 {
 	CopyMoveJob *job;
 	CommonJob *common;
@@ -4775,7 +4781,9 @@ baul_file_operations_copy (GList *files,
 }
 
 static void
-report_move_progress (CopyMoveJob *move_job, int total, int left)
+report_move_progress (CopyMoveJob *move_job,
+		      int          total G_GNUC_UNUSED,
+		      int          left)
 {
 	CommonJob *job;
 
@@ -5193,8 +5201,8 @@ move_job_done (gpointer user_data)
 
 static gboolean
 move_job (GIOSchedulerJob *io_job,
-	  GCancellable *cancellable,
-	  gpointer user_data)
+	  GCancellable    *cancellable G_GNUC_UNUSED,
+	  gpointer         user_data)
 {
 	CopyMoveJob *job;
 	CommonJob *common;
@@ -5527,8 +5535,8 @@ link_job_done (gpointer user_data)
 
 static gboolean
 link_job (GIOSchedulerJob *io_job,
-	  GCancellable *cancellable,
-	  gpointer user_data)
+	  GCancellable    *cancellable G_GNUC_UNUSED,
+	  gpointer         user_data)
 {
 	CopyMoveJob *job;
 	CommonJob *common;
@@ -5780,8 +5788,8 @@ set_permissions_file (SetPermissionsJob *job,
 
 static gboolean
 set_permissions_job (GIOSchedulerJob *io_job,
-		     GCancellable *cancellable,
-		     gpointer user_data)
+		     GCancellable    *cancellable G_GNUC_UNUSED,
+		     gpointer         user_data)
 {
 	SetPermissionsJob *job = user_data;
 	CommonJob *common;
@@ -5864,8 +5872,8 @@ typedef struct {
 } MoveTrashCBData;
 
 static void
-callback_for_move_to_trash (GHashTable *debuting_uris,
-			    gboolean user_cancelled,
+callback_for_move_to_trash (GHashTable      *debuting_uris,
+			    gboolean         user_cancelled G_GNUC_UNUSED,
 			    MoveTrashCBData *data)
 {
 	if (data->real_callback)
@@ -6002,8 +6010,8 @@ create_job_done (gpointer user_data)
 
 static gboolean
 create_job (GIOSchedulerJob *io_job,
-	    GCancellable *cancellable,
-	    gpointer user_data)
+	    GCancellable    *cancellable G_GNUC_UNUSED,
+	    gpointer         user_data)
 {
 	CreateJob *job;
 	CommonJob *common;
@@ -6464,8 +6472,8 @@ empty_trash_job_done (gpointer user_data)
 
 static gboolean
 empty_trash_job (GIOSchedulerJob *io_job,
-		 GCancellable *cancellable,
-		 gpointer user_data)
+		 GCancellable    *cancellable G_GNUC_UNUSED,
+		 gpointer         user_data)
 {
 	EmptyTrashJob *job = user_data;
 	CommonJob *common;

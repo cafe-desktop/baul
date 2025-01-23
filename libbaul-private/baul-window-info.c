@@ -38,7 +38,7 @@ enum
 static guint baul_window_info_signals[LAST_SIGNAL] = { 0 };
 
 static void
-baul_window_info_base_init (gpointer g_class)
+baul_window_info_base_init (gpointer g_class G_GNUC_UNUSED)
 {
     static gboolean initialized = FALSE;
 

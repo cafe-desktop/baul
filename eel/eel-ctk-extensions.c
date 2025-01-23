@@ -368,9 +368,9 @@ eel_ctk_label_make_bold (CtkLabel *label)
 }
 
 static gboolean
-tree_view_button_press_callback (CtkWidget *tree_view,
-                                 CdkEventButton *event,
-                                 gpointer data)
+tree_view_button_press_callback (CtkWidget      *tree_view,
+				 CdkEventButton *event,
+				 gpointer        data G_GNUC_UNUSED)
 {
     CtkTreePath *path;
     CtkTreeViewColumn *column;
@@ -508,7 +508,9 @@ eel_image_menu_item_new_from_surface (cairo_surface_t *icon_surface,
 }
 
 gboolean
-eel_dialog_page_scroll_event_callback (CtkWidget *widget, CdkEventScroll *event, CtkWindow *window)
+eel_dialog_page_scroll_event_callback (CtkWidget      *widget,
+				       CdkEventScroll *event,
+				       CtkWindow      *window G_GNUC_UNUSED)
 {
     CtkNotebook *notebook = CTK_NOTEBOOK (widget);
     CtkWidget *child, *event_widget, *action_widget;

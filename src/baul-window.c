@@ -609,10 +609,10 @@ baul_window_constructed (GObject *self)
 }
 
 static void
-baul_window_set_property (GObject *object,
-                          guint arg_id,
-                          const GValue *value,
-                          GParamSpec *pspec)
+baul_window_set_property (GObject      *object,
+			  guint         arg_id,
+			  const GValue *value,
+			  GParamSpec   *pspec G_GNUC_UNUSED)
 {
     BaulWindow *window;
 
@@ -627,10 +627,10 @@ baul_window_set_property (GObject *object,
 }
 
 static void
-baul_window_get_property (GObject *object,
-                          guint arg_id,
-                          GValue *value,
-                          GParamSpec *pspec)
+baul_window_get_property (GObject    *object,
+			  guint       arg_id,
+			  GValue     *value,
+			  GParamSpec *pspec G_GNUC_UNUSED)
 {
     switch (arg_id)
     {
@@ -1399,8 +1399,8 @@ load_view_as_menu (BaulWindow *window)
 }
 
 static void
-load_view_as_menus_callback (BaulFile *file,
-                             gpointer callback_data)
+load_view_as_menus_callback (BaulFile *file G_GNUC_UNUSED,
+			     gpointer  callback_data)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -1537,8 +1537,8 @@ baul_window_sync_zoom_widgets (BaulWindow *window)
 }
 
 static void
-zoom_level_changed_callback (BaulView *view,
-                             BaulWindow *window)
+zoom_level_changed_callback (BaulView   *view G_GNUC_UNUSED,
+			     BaulWindow *window)
 {
     g_assert (BAUL_IS_WINDOW (window));
 
@@ -1919,7 +1919,7 @@ baul_get_history_list (void)
 }
 
 static GList *
-baul_window_get_history (BaulWindow *window)
+baul_window_get_history (BaulWindow *window G_GNUC_UNUSED)
 {
     return g_list_copy_deep (history_list, (GCopyFunc) g_object_ref, NULL);
 }
