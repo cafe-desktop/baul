@@ -447,7 +447,9 @@ struct domains_dump_closure
 };
 
 static void
-domains_foreach_dump_cb (gpointer key, gpointer value, gpointer data)
+domains_foreach_dump_cb (gpointer key,
+			 gpointer value G_GNUC_UNUSED,
+			 gpointer data)
 {
     struct domains_dump_closure *closure;
     char *domain;

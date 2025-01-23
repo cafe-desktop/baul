@@ -153,32 +153,32 @@ G_DEFINE_TYPE_WITH_CODE (BaulInformationPanelProvider, baul_information_panel_pr
 
 
 static const char *
-baul_information_panel_get_sidebar_id (BaulSidebar *sidebar)
+baul_information_panel_get_sidebar_id (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return BAUL_INFORMATION_PANEL_ID;
 }
 
 static char *
-baul_information_panel_get_tab_label (BaulSidebar *sidebar)
+baul_information_panel_get_tab_label (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Information"));
 }
 
 static char *
-baul_information_panel_get_tab_tooltip (BaulSidebar *sidebar)
+baul_information_panel_get_tab_tooltip (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Show Information"));
 }
 
 static GdkPixbuf *
-baul_information_panel_get_tab_icon (BaulSidebar *sidebar)
+baul_information_panel_get_tab_icon (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return NULL;
 }
 
 static void
-baul_information_panel_is_visible_changed (BaulSidebar *sidebar,
-        gboolean         is_visible)
+baul_information_panel_is_visible_changed (BaulSidebar *sidebar G_GNUC_UNUSED,
+					   gboolean     is_visible G_GNUC_UNUSED)
 {
     /* Do nothing */
 }
@@ -317,7 +317,8 @@ baul_information_panel_finalize (GObject *object)
 
 /* callback to handle resetting the background */
 static void
-reset_background_callback (CtkWidget *menu_item, CtkWidget *information_panel)
+reset_background_callback (CtkWidget *menu_item G_GNUC_UNUSED,
+			   CtkWidget *information_panel)
 {
     EelBackground *background;
 
@@ -408,9 +409,9 @@ baul_information_panel_read_defaults (BaulInformationPanel *information_panel)
 /* handler for handling theme changes */
 
 static void
-baul_information_panel_theme_changed (GSettings   *settings,
-                                      const gchar *key,
-                                      gpointer user_data)
+baul_information_panel_theme_changed (GSettings   *settings G_GNUC_UNUSED,
+				      const gchar *key G_GNUC_UNUSED,
+				      gpointer     user_data)
 {
     BaulInformationPanel *information_panel;
 
@@ -621,8 +622,9 @@ receive_dropped_color (BaulInformationPanel *information_panel,
 
 static void
 receive_dropped_keyword (BaulInformationPanel *information_panel,
-                         int x, int y,
-                         CtkSelectionData *selection_data)
+			 int                   x G_GNUC_UNUSED,
+			 int                   y G_GNUC_UNUSED,
+			 CtkSelectionData     *selection_data)
 {
     baul_drag_file_receive_dropped_keyword (information_panel->details->file,
                                             ctk_selection_data_get_data (selection_data));
@@ -632,10 +634,13 @@ receive_dropped_keyword (BaulInformationPanel *information_panel,
 }
 
 static void
-baul_information_panel_drag_data_received (CtkWidget *widget, CdkDragContext *context,
-        int x, int y,
-        CtkSelectionData *selection_data,
-        guint info, guint time)
+baul_information_panel_drag_data_received (CtkWidget        *widget,
+					   CdkDragContext   *context,
+					   int               x,
+					   int               y,
+					   CtkSelectionData *selection_data,
+					   guint             info,
+					   guint             time G_GNUC_UNUSED)
 {
     BaulInformationPanel *information_panel;
     EelBackground *background;
@@ -729,7 +734,8 @@ command_button_callback (CtkWidget *button, GAppInfo *application)
    a shell to handle general ones */
 /* for now, we don't have any of these */
 static void
-metadata_button_callback (CtkWidget *button, const char *command_str)
+metadata_button_callback (CtkWidget  *button G_GNUC_UNUSED,
+			  const char *command_str G_GNUC_UNUSED)
 {
     //BaulInformationPanel *self = BAUL_INFORMATION_PANEL (g_object_get_data (G_OBJECT (button), "user_data"));
 }
@@ -948,9 +954,9 @@ baul_information_panel_set_uri (BaulInformationPanel *information_panel,
 }
 
 static void
-title_changed_callback (BaulWindowInfo *window,
-                        char               *new_title,
-                        BaulInformationPanel *panel)
+title_changed_callback (BaulWindowInfo       *window G_GNUC_UNUSED,
+			char                 *new_title,
+			BaulInformationPanel *panel)
 {
     baul_sidebar_title_set_text (panel->details->title,
                                  new_title);
@@ -1051,8 +1057,8 @@ baul_information_panel_set_parent_window (BaulInformationPanel *panel,
 }
 
 static BaulSidebar *
-baul_information_panel_create (BaulSidebarProvider *provider,
-                               BaulWindowInfo *window)
+baul_information_panel_create (BaulSidebarProvider *provider G_GNUC_UNUSED,
+			       BaulWindowInfo      *window)
 {
     BaulInformationPanel *panel;
 
@@ -1070,12 +1076,12 @@ sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 }
 
 static void
-baul_information_panel_provider_init (BaulInformationPanelProvider *sidebar)
+baul_information_panel_provider_init (BaulInformationPanelProvider *sidebar G_GNUC_UNUSED)
 {
 }
 
 static void
-baul_information_panel_provider_class_init (BaulInformationPanelProviderClass *class)
+baul_information_panel_provider_class_init (BaulInformationPanelProviderClass *class G_GNUC_UNUSED)
 {
 }
 

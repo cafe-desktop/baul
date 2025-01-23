@@ -120,16 +120,16 @@ baul_ui_string_get (const char *filename)
 }
 
 static void
-extension_action_callback (CtkAction *action,
-                           gpointer callback_data)
+extension_action_callback (CtkAction *action G_GNUC_UNUSED,
+			   gpointer   callback_data)
 {
     baul_menu_item_activate (BAUL_MENU_ITEM (callback_data));
 }
 
 static void
 extension_action_sensitive_callback (BaulMenuItem *item,
-                                     GParamSpec *arg1,
-                                     gpointer user_data)
+				     GParamSpec   *arg1 G_GNUC_UNUSED,
+				     gpointer      user_data)
 {
     gboolean value;
 

@@ -110,7 +110,8 @@ bookmark_holder_free (BookmarkHolder *bookmark_holder)
 }
 
 static void
-bookmark_holder_free_cover (gpointer callback_data, GClosure *closure)
+bookmark_holder_free_cover (gpointer  callback_data,
+			    GClosure *closure G_GNUC_UNUSED)
 {
     bookmark_holder_free (callback_data);
 }
@@ -139,7 +140,8 @@ should_open_in_new_tab (void)
 }
 
 static void
-activate_bookmark_in_menu_item (CtkAction *action, gpointer user_data)
+activate_bookmark_in_menu_item (CtkAction *action G_GNUC_UNUSED,
+				gpointer   user_data)
 {
     BookmarkHolder *holder;
 
@@ -232,8 +234,8 @@ baul_menus_append_bookmark_to_menu (BaulWindow *window,
 }
 
 static void
-action_close_window_slot_callback (CtkAction *action,
-                                   gpointer user_data)
+action_close_window_slot_callback (CtkAction *action G_GNUC_UNUSED,
+				   gpointer   user_data)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -245,8 +247,8 @@ action_close_window_slot_callback (CtkAction *action,
 }
 
 static void
-action_connect_to_server_callback (CtkAction *action,
-                                   gpointer user_data)
+action_connect_to_server_callback (CtkAction *action G_GNUC_UNUSED,
+				   gpointer   user_data)
 {
     BaulWindow *window = BAUL_WINDOW (user_data);
     CtkWidget *dialog;
@@ -257,8 +259,8 @@ action_connect_to_server_callback (CtkAction *action,
 }
 
 static void
-action_stop_callback (CtkAction *action,
-                      gpointer user_data)
+action_stop_callback (CtkAction *action G_GNUC_UNUSED,
+		      gpointer   user_data)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -270,8 +272,8 @@ action_stop_callback (CtkAction *action,
 }
 
 static void
-action_home_callback (CtkAction *action,
-                      gpointer user_data)
+action_home_callback (CtkAction *action G_GNUC_UNUSED,
+		      gpointer   user_data)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -284,8 +286,8 @@ action_home_callback (CtkAction *action,
 }
 
 static void
-action_go_to_computer_callback (CtkAction *action,
-                                gpointer user_data)
+action_go_to_computer_callback (CtkAction *action G_GNUC_UNUSED,
+				gpointer   user_data)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -302,8 +304,8 @@ action_go_to_computer_callback (CtkAction *action,
 }
 
 static void
-action_go_to_network_callback (CtkAction *action,
-                               gpointer user_data)
+action_go_to_network_callback (CtkAction *action G_GNUC_UNUSED,
+			       gpointer   user_data)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -320,8 +322,8 @@ action_go_to_network_callback (CtkAction *action,
 }
 
 static void
-action_go_to_templates_callback (CtkAction *action,
-                                 gpointer user_data)
+action_go_to_templates_callback (CtkAction *action G_GNUC_UNUSED,
+				 gpointer   user_data)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -341,8 +343,8 @@ action_go_to_templates_callback (CtkAction *action,
 }
 
 static void
-action_go_to_trash_callback (CtkAction *action,
-                             gpointer user_data)
+action_go_to_trash_callback (CtkAction *action G_GNUC_UNUSED,
+			     gpointer   user_data)
 {
     BaulWindow *window;
     BaulWindowSlot *slot;
@@ -359,29 +361,29 @@ action_go_to_trash_callback (CtkAction *action,
 }
 
 static void
-action_reload_callback (CtkAction *action,
-                        gpointer user_data)
+action_reload_callback (CtkAction *action G_GNUC_UNUSED,
+			gpointer   user_data)
 {
     baul_window_reload (BAUL_WINDOW (user_data));
 }
 
 static void
-action_zoom_in_callback (CtkAction *action,
-                         gpointer user_data)
+action_zoom_in_callback (CtkAction *action G_GNUC_UNUSED,
+			 gpointer   user_data)
 {
     baul_window_zoom_in (BAUL_WINDOW (user_data));
 }
 
 static void
-action_zoom_out_callback (CtkAction *action,
-                          gpointer user_data)
+action_zoom_out_callback (CtkAction *action G_GNUC_UNUSED,
+			  gpointer   user_data)
 {
     baul_window_zoom_out (BAUL_WINDOW (user_data));
 }
 
 static void
-action_zoom_normal_callback (CtkAction *action,
-                             gpointer user_data)
+action_zoom_normal_callback (CtkAction *action G_GNUC_UNUSED,
+			     gpointer   user_data)
 {
     baul_window_zoom_to_default (BAUL_WINDOW (user_data));
 }
@@ -490,8 +492,8 @@ preferences_respond_callback (CtkDialog *dialog,
 }
 
 static void
-action_preferences_callback (CtkAction *action,
-                             gpointer user_data)
+action_preferences_callback (CtkAction *action G_GNUC_UNUSED,
+			     gpointer   user_data)
 {
     CtkWindow *window;
 
@@ -501,8 +503,8 @@ action_preferences_callback (CtkAction *action,
 }
 
 static void
-action_backgrounds_and_emblems_callback (CtkAction *action,
-        gpointer user_data)
+action_backgrounds_and_emblems_callback (CtkAction *action G_GNUC_UNUSED,
+					 gpointer   user_data)
 {
     CtkWindow *window;
 
@@ -515,8 +517,8 @@ action_backgrounds_and_emblems_callback (CtkAction *action,
 #define EMAILIFY(string) (g_strdelimit ((string), "%", '@'))
 
 static void
-action_about_baul_callback (CtkAction *action,
-                            gpointer user_data)
+action_about_baul_callback (CtkAction *action G_GNUC_UNUSED,
+			    gpointer   user_data)
 {
     const gchar *license[] =
     {
@@ -585,15 +587,15 @@ action_about_baul_callback (CtkAction *action,
 }
 
 static void
-action_up_callback (CtkAction *action,
-                    gpointer user_data)
+action_up_callback (CtkAction *action G_GNUC_UNUSED,
+		    gpointer   user_data)
 {
     baul_window_go_up (BAUL_WINDOW (user_data), FALSE, should_open_in_new_tab ());
 }
 
 static void
-action_baul_manual_callback (CtkAction *action,
-                             gpointer user_data)
+action_baul_manual_callback (CtkAction *action G_GNUC_UNUSED,
+			     gpointer   user_data)
 {
     BaulWindow *window;
     GError *error;
@@ -647,8 +649,8 @@ menu_item_select_cb (CtkMenuItem *proxy,
 }
 
 static void
-menu_item_deselect_cb (CtkMenuItem *proxy,
-                       BaulWindow *window)
+menu_item_deselect_cb (CtkMenuItem *proxy G_GNUC_UNUSED,
+		       BaulWindow  *window)
 {
     ctk_statusbar_pop (CTK_STATUSBAR (window->details->statusbar),
                        window->details->help_message_cid);
@@ -692,9 +694,9 @@ get_event_widget (CtkWidget *proxy)
 }
 
 static gboolean
-proxy_button_press_event_cb (CtkButton *button,
-                             CdkEventButton *event,
-                             gpointer user_data)
+proxy_button_press_event_cb (CtkButton      *button,
+			     CdkEventButton *event,
+			     gpointer        user_data G_GNUC_UNUSED)
 {
     if (event->button == 2)
     {
@@ -705,9 +707,9 @@ proxy_button_press_event_cb (CtkButton *button,
 }
 
 static gboolean
-proxy_button_release_event_cb (CtkButton *button,
-                               CdkEventButton *event,
-                               gpointer user_data)
+proxy_button_release_event_cb (CtkButton      *button,
+			       CdkEventButton *event,
+			       gpointer        user_data G_GNUC_UNUSED)
 {
     if (event->button == 2)
     {
@@ -718,10 +720,10 @@ proxy_button_release_event_cb (CtkButton *button,
 }
 
 static void
-disconnect_proxy_cb (CtkUIManager *manager,
-                     CtkAction *action,
-                     CtkWidget *proxy,
-                     BaulWindow *window)
+disconnect_proxy_cb (CtkUIManager *manager G_GNUC_UNUSED,
+		     CtkAction    *action,
+		     CtkWidget    *proxy,
+		     BaulWindow   *window)
 {
     CtkWidget *widget;
 
@@ -747,10 +749,10 @@ disconnect_proxy_cb (CtkUIManager *manager,
 }
 
 static void
-connect_proxy_cb (CtkUIManager *manager,
-                  CtkAction *action,
-                  CtkWidget *proxy,
-                  BaulWindow *window)
+connect_proxy_cb (CtkUIManager *manager G_GNUC_UNUSED,
+		  CtkAction    *action,
+		  CtkWidget    *proxy,
+		  BaulWindow   *window)
 {
     cairo_surface_t *icon;
     CtkWidget *widget;
@@ -796,9 +798,9 @@ connect_proxy_cb (CtkUIManager *manager,
 }
 
 static void
-trash_state_changed_cb (BaulTrashMonitor *monitor,
-                        gboolean state,
-                        BaulWindow *window)
+trash_state_changed_cb (BaulTrashMonitor *monitor G_GNUC_UNUSED,
+			gboolean          state G_GNUC_UNUSED,
+			BaulWindow       *window)
 {
     CtkActionGroup *action_group;
     CtkAction *action;

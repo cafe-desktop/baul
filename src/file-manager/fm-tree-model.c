@@ -137,7 +137,7 @@ G_DEFINE_TYPE_WITH_CODE (FMTreeModel, fm_tree_model, G_TYPE_OBJECT,
                                  fm_tree_model_tree_model_init));
 
 static CtkTreeModelFlags
-fm_tree_model_get_flags (CtkTreeModel *tree_model)
+fm_tree_model_get_flags (CtkTreeModel *tree_model G_GNUC_UNUSED)
 {
     return CTK_TREE_MODEL_ITERS_PERSIST;
 }
@@ -1074,9 +1074,9 @@ process_file_change (FMTreeModelRoot *root,
 }
 
 static void
-files_changed_callback (BaulDirectory *directory,
-                        GList *changed_files,
-                        gpointer callback_data)
+files_changed_callback (BaulDirectory *directory G_GNUC_UNUSED,
+			GList         *changed_files,
+			gpointer       callback_data)
 {
     FMTreeModelRoot *root;
     GList *node;
@@ -1207,13 +1207,14 @@ start_monitoring_directory (FMTreeModel *model, TreeNode *node)
 }
 
 static int
-fm_tree_model_get_n_columns (CtkTreeModel *model)
+fm_tree_model_get_n_columns (CtkTreeModel *model G_GNUC_UNUSED)
 {
     return FM_TREE_MODEL_NUM_COLUMNS;
 }
 
 static GType
-fm_tree_model_get_column_type (CtkTreeModel *model, int index)
+fm_tree_model_get_column_type (CtkTreeModel *model G_GNUC_UNUSED,
+			       int           index)
 {
     switch (index)
     {

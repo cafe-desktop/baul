@@ -1,5 +1,3 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
-
 /*
    eel-open-with-dialog.c: an open-with dialog
 
@@ -325,8 +323,8 @@ emit_application_selected (BaulOpenWithDialog *dialog,
 
 static void
 response_cb (BaulOpenWithDialog *dialog,
-             int response_id,
-             gpointer data)
+	     int                 response_id,
+	     gpointer            data G_GNUC_UNUSED)
 {
     switch (response_id)
     {
@@ -445,8 +443,8 @@ chooser_response_cb (CtkFileChooser *chooser,
 }
 
 static void
-browse_clicked_cb (CtkWidget *button,
-                   gpointer user_data)
+browse_clicked_cb (CtkWidget *button G_GNUC_UNUSED,
+		   gpointer   user_data)
 {
     BaulOpenWithDialog *dialog;
     CtkWidget *chooser;
@@ -476,8 +474,8 @@ browse_clicked_cb (CtkWidget *button,
 }
 
 static void
-entry_changed_cb (CtkWidget *entry,
-                  BaulOpenWithDialog *dialog)
+entry_changed_cb (CtkWidget          *entry G_GNUC_UNUSED,
+		  BaulOpenWithDialog *dialog)
 {
     /* We are writing in the entry, so we are not using a known appinfo anymore */
     if (dialog->details->selected_app_info != NULL)
@@ -614,10 +612,10 @@ baul_open_with_dialog_add_icon_idle (BaulOpenWithDialog *dialog)
 
 static gboolean
 baul_open_with_search_equal_func (CtkTreeModel *model,
-                                  int column,
-                                  const char *key,
-                                  CtkTreeIter *iter,
-                                  gpointer user_data)
+				  int           column G_GNUC_UNUSED,
+				  const char   *key,
+				  CtkTreeIter  *iter,
+				  gpointer      user_data G_GNUC_UNUSED)
 {
     char *name;
     char *path;
@@ -820,10 +818,10 @@ program_list_selection_changed (CtkTreeSelection  *selection,
 }
 
 static void
-program_list_selection_activated (CtkTreeView       *view,
-                                  CtkTreePath       *path,
-                                  CtkTreeViewColumn *column,
-                                  BaulOpenWithDialog *dialog)
+program_list_selection_activated (CtkTreeView        *view G_GNUC_UNUSED,
+				  CtkTreePath        *path G_GNUC_UNUSED,
+				  CtkTreeViewColumn  *column G_GNUC_UNUSED,
+				  BaulOpenWithDialog *dialog)
 {
     CtkTreeSelection *selection;
 

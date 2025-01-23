@@ -1746,7 +1746,8 @@ get_redo_label (BaulUndoStackActionData * action)
 
 /** ---------------------------------------------------------------- */
 static void
-undo_redo_done_transfer_callback (GHashTable * debuting_uris, gpointer data)
+undo_redo_done_transfer_callback (GHashTable *debuting_uris G_GNUC_UNUSED,
+				  gpointer    data)
 {
   BaulUndoStackActionData *action;
 
@@ -1768,15 +1769,17 @@ undo_redo_done_transfer_callback (GHashTable * debuting_uris, gpointer data)
 
 /** ---------------------------------------------------------------- */
 static void
-undo_redo_done_delete_callback (GHashTable *
-    debuting_uris, gboolean user_cancel, gpointer callback_data)
+undo_redo_done_delete_callback (GHashTable *debuting_uris,
+				gboolean    user_cancel G_GNUC_UNUSED,
+				gpointer    callback_data)
 {
   undo_redo_done_transfer_callback (debuting_uris, callback_data);
 }
 
 /** ---------------------------------------------------------------- */
 static void
-undo_redo_done_create_callback (GFile * new_file, gpointer callback_data)
+undo_redo_done_create_callback (GFile   *new_file G_GNUC_UNUSED,
+				gpointer callback_data)
 {
   undo_redo_done_transfer_callback (NULL, callback_data);
 }
@@ -1790,15 +1793,18 @@ undo_redo_op_callback (gpointer callback_data)
 
 /** ---------------------------------------------------------------- */
 static void
-undo_redo_done_rename_callback (BaulFile * file,
-    GFile * result_location, GError * error, gpointer callback_data)
+undo_redo_done_rename_callback (BaulFile *file G_GNUC_UNUSED,
+				GFile    *result_location G_GNUC_UNUSED,
+				GError   *error G_GNUC_UNUSED,
+				gpointer  callback_data)
 {
   undo_redo_done_transfer_callback (NULL, callback_data);
 }
 
 /** ---------------------------------------------------------------- */
 static void
-free_undostack_action (gpointer data, gpointer user_data)
+free_undostack_action (gpointer data,
+		       gpointer user_data G_GNUC_UNUSED)
 {
   BaulUndoStackActionData *action = (BaulUndoStackActionData *) data;
 

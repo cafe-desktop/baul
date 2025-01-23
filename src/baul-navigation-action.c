@@ -193,9 +193,9 @@ show_menu_callback (CtkMenuToolButton *button,
 }
 
 static gboolean
-proxy_button_press_event_cb (CtkButton *button,
-                             CdkEventButton *event,
-                             gpointer user_data)
+proxy_button_press_event_cb (CtkButton      *button,
+			     CdkEventButton *event,
+			     gpointer        user_data G_GNUC_UNUSED)
 {
     if (event->button == 2)
     {
@@ -206,9 +206,9 @@ proxy_button_press_event_cb (CtkButton *button,
 }
 
 static gboolean
-proxy_button_release_event_cb (CtkButton *button,
-                               CdkEventButton *event,
-                               gpointer user_data)
+proxy_button_release_event_cb (CtkButton      *button,
+			       CdkEventButton *event,
+			       gpointer        user_data G_GNUC_UNUSED)
 {
     if (event->button == 2)
     {
@@ -279,10 +279,10 @@ baul_navigation_action_finalize (GObject *object)
 }
 
 static void
-baul_navigation_action_set_property (GObject *object,
-                                     guint prop_id,
-                                     const GValue *value,
-                                     GParamSpec *pspec)
+baul_navigation_action_set_property (GObject      *object,
+				     guint         prop_id,
+				     const GValue *value,
+				     GParamSpec   *pspec G_GNUC_UNUSED)
 {
     BaulNavigationAction *nav;
 
@@ -304,10 +304,10 @@ baul_navigation_action_set_property (GObject *object,
 }
 
 static void
-baul_navigation_action_get_property (GObject *object,
-                                     guint prop_id,
-                                     GValue *value,
-                                     GParamSpec *pspec)
+baul_navigation_action_get_property (GObject    *object,
+				     guint       prop_id,
+				     GValue     *value,
+				     GParamSpec *pspec G_GNUC_UNUSED)
 {
     BaulNavigationAction *nav;
 

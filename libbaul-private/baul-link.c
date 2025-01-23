@@ -383,7 +383,7 @@ baul_link_local_get_text (const char *path)
 }
 
 char *
-baul_link_local_get_additional_text (const char *path)
+baul_link_local_get_additional_text (const char *path G_GNUC_UNUSED)
 {
     /* The comment field of current .desktop files is often bad.
      * It just contains a copy of the name. This is probably because the

@@ -214,8 +214,8 @@ baul_clipboard_monitor_get_clipboard_info (BaulClipboardMonitor *monitor)
 }
 
 void
-baul_clear_clipboard_callback (CtkClipboard *clipboard,
-                               gpointer      user_data)
+baul_clear_clipboard_callback (CtkClipboard *clipboard G_GNUC_UNUSED,
+			       gpointer      user_data G_GNUC_UNUSED)
 {
     baul_clipboard_monitor_set_clipboard_info
     (baul_clipboard_monitor_get (), NULL);
@@ -283,10 +283,10 @@ convert_file_list_to_string (BaulClipboardInfo *info,
 }
 
 void
-baul_get_clipboard_callback (CtkClipboard     *clipboard,
-                             CtkSelectionData *selection_data,
-                             guint             info,
-                             gpointer          user_data)
+baul_get_clipboard_callback (CtkClipboard     *clipboard G_GNUC_UNUSED,
+			     CtkSelectionData *selection_data,
+			     guint             info G_GNUC_UNUSED,
+			     gpointer          user_data G_GNUC_UNUSED)
 {
     GList *l;
     BaulClipboardInfo *clipboard_info;

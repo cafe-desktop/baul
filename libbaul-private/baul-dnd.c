@@ -1,5 +1,3 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
-
 /* baul-dnd.c - Common Drag & drop handling code shared by the icon container
    and the list view.
 
@@ -675,7 +673,12 @@ add_one_compatible_uri (const char *uri, int x, int y, int w, int h, gpointer da
 #endif
 
 static void
-add_one_uri (const char *uri, int x, int y, int w, int h, gpointer data)
+add_one_uri (const char *uri,
+	     int         x G_GNUC_UNUSED,
+	     int         y G_GNUC_UNUSED,
+	     int         w G_GNUC_UNUSED,
+	     int         h G_GNUC_UNUSED,
+	     gpointer    data)
 {
     GString *result;
 
@@ -688,13 +691,13 @@ add_one_uri (const char *uri, int x, int y, int w, int h, gpointer data)
 /* Common function for drag_data_get_callback calls.
  * Returns FALSE if it doesn't handle drag data */
 gboolean
-baul_drag_drag_data_get (CtkWidget *widget,
-                         CdkDragContext *context,
-                         CtkSelectionData *selection_data,
-                         guint info,
-                         guint32 time,
-                         gpointer container_context,
-                         BaulDragEachSelectedItemIterator each_selected_item_iterator)
+baul_drag_drag_data_get (CtkWidget *widget G_GNUC_UNUSED,
+			 CdkDragContext *context G_GNUC_UNUSED,
+			 CtkSelectionData *selection_data,
+			 guint info,
+			 guint32 time G_GNUC_UNUSED,
+			 gpointer container_context,
+			 BaulDragEachSelectedItemIterator each_selected_item_iterator)
 {
     GString *result;
 
@@ -730,8 +733,8 @@ typedef struct
 } DropActionMenuData;
 
 static void
-menu_deactivate_callback (CtkWidget *menu,
-                          gpointer   data)
+menu_deactivate_callback (CtkWidget *menu G_GNUC_UNUSED,
+			  gpointer   data)
 {
     DropActionMenuData *damd;
 
@@ -1059,11 +1062,11 @@ baul_drag_selection_includes_special_link (GList *selection_list)
 
 static gboolean
 slot_proxy_drag_motion (CtkWidget          *widget,
-                        CdkDragContext     *context,
-                        int                 x,
-                        int                 y,
-                        unsigned int        time,
-                        gpointer            user_data)
+			CdkDragContext     *context,
+			int                 x G_GNUC_UNUSED,
+			int                 y G_GNUC_UNUSED,
+			unsigned int        time,
+			gpointer            user_data)
 {
     BaulDragSlotProxyInfo *drag_info;
     BaulWindowSlotInfo *target_slot;
@@ -1184,9 +1187,9 @@ out:
 
 static void
 slot_proxy_drag_leave (CtkWidget          *widget,
-                       CdkDragContext     *context,
-                       unsigned int        time,
-                       gpointer            user_data)
+		       CdkDragContext     *context G_GNUC_UNUSED,
+		       unsigned int        time G_GNUC_UNUSED,
+		       gpointer            user_data)
 {
     BaulDragSlotProxyInfo *drag_info;
 
@@ -1198,11 +1201,11 @@ slot_proxy_drag_leave (CtkWidget          *widget,
 
 static gboolean
 slot_proxy_drag_drop (CtkWidget          *widget,
-                      CdkDragContext     *context,
-                      int                 x,
-                      int                 y,
-                      unsigned int        time,
-                      gpointer            user_data)
+		      CdkDragContext     *context,
+		      int                 x G_GNUC_UNUSED,
+		      int                 y G_GNUC_UNUSED,
+		      unsigned int        time,
+		      gpointer            user_data)
 {
     CdkAtom target;
     BaulDragSlotProxyInfo *drag_info;
@@ -1316,13 +1319,13 @@ slot_proxy_handle_drop (CtkWidget                *widget,
 
 static void
 slot_proxy_drag_data_received (CtkWidget          *widget,
-                               CdkDragContext     *context,
-                               int                 x,
-                               int                 y,
-                               CtkSelectionData   *data,
-                               unsigned int        info,
-                               unsigned int        time,
-                               gpointer            user_data)
+			       CdkDragContext     *context,
+			       int                 x G_GNUC_UNUSED,
+			       int                 y G_GNUC_UNUSED,
+			       CtkSelectionData   *data,
+			       unsigned int        info,
+			       unsigned int        time,
+			       gpointer            user_data)
 {
     BaulDragSlotProxyInfo *drag_info;
     char **uris;

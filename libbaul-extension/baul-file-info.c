@@ -77,7 +77,7 @@ baul_file_info_list_free (GList *files)
 }
 
 static void
-baul_file_info_base_init (gpointer g_class)
+baul_file_info_base_init (gpointer g_class G_GNUC_UNUSED)
 {
 }
 

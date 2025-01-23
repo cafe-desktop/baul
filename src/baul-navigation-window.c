@@ -231,7 +231,7 @@ always_use_browser_changed (gpointer callback_data)
 #define UPPER_MOUSE_LIMIT 14
 
 static void
-mouse_back_button_changed (gpointer callback_data)
+mouse_back_button_changed (gpointer callback_data G_GNUC_UNUSED)
 {
     int new_back_button;
 
@@ -245,7 +245,7 @@ mouse_back_button_changed (gpointer callback_data)
 }
 
 static void
-mouse_forward_button_changed (gpointer callback_data)
+mouse_forward_button_changed (gpointer callback_data G_GNUC_UNUSED)
 {
     int new_forward_button;
 
@@ -259,7 +259,7 @@ mouse_forward_button_changed (gpointer callback_data)
 }
 
 static void
-use_extra_mouse_buttons_changed (gpointer callback_data)
+use_extra_mouse_buttons_changed (gpointer callback_data G_GNUC_UNUSED)
 {
     mouse_extra_buttons = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_MOUSE_USE_EXTRA_BUTTONS);
 }
@@ -349,8 +349,8 @@ baul_navigation_window_restore_focus_widget (BaulNavigationWindow *window)
 }
 
 static void
-side_pane_close_requested_callback (CtkWidget *widget,
-                                    gpointer user_data)
+side_pane_close_requested_callback (CtkWidget *widget G_GNUC_UNUSED,
+				    gpointer   user_data)
 {
     BaulNavigationWindow *window;
 
@@ -416,9 +416,9 @@ set_current_side_panel (BaulNavigationWindow *window,
 }
 
 static void
-side_pane_switch_page_callback (BaulSidePane *side_pane,
-                                CtkWidget *widget,
-                                BaulNavigationWindow *window)
+side_pane_switch_page_callback (BaulSidePane         *side_pane G_GNUC_UNUSED,
+				CtkWidget            *widget,
+				BaulNavigationWindow *window)
 {
     const char *id;
     BaulSidebar *sidebar;
@@ -1204,8 +1204,9 @@ real_window_close (BaulWindow *window)
 }
 
 static void
-real_get_min_size (BaulWindow *window,
-                   guint *min_width, guint *min_height)
+real_get_min_size (BaulWindow *window G_GNUC_UNUSED,
+		   guint      *min_width,
+		   guint      *min_height)
 {
     if (min_width)
     {
@@ -1218,8 +1219,9 @@ real_get_min_size (BaulWindow *window,
 }
 
 static void
-real_get_default_size (BaulWindow *window,
-                       guint *default_width, guint *default_height)
+real_get_default_size (BaulWindow *window G_GNUC_UNUSED,
+		       guint      *default_width,
+		       guint      *default_height)
 {
     if (default_width)
     {

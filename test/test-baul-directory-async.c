@@ -18,8 +18,8 @@ quit_cb (gpointer data)
 #endif
 
 static void
-files_added (BaulDirectory *directory,
-	     GList *added_files)
+files_added (BaulDirectory *directory G_GNUC_UNUSED,
+	     GList         *added_files)
 {
 #if 0
 	GList *list;
@@ -36,8 +36,8 @@ files_added (BaulDirectory *directory,
 }
 
 static void
-files_changed (BaulDirectory *directory,
-	       GList *changed_files)
+files_changed (BaulDirectory *directory G_GNUC_UNUSED,
+	       GList         *changed_files)
 {
 #if 0
 	GList *list;

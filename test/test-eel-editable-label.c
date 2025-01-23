@@ -7,7 +7,8 @@
 #include <eel/eel-editable-label.h>
 
 static void
-quit (CtkWidget *widget, gpointer data)
+quit (CtkWidget *widget G_GNUC_UNUSED,
+      gpointer   data G_GNUC_UNUSED)
 {
 	ctk_main_quit ();
 }

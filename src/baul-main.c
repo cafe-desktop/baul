@@ -72,7 +72,9 @@ static void dump_debug_log (void)
 
 static int debug_log_pipes[2];
 
-static gboolean debug_log_io_cb (GIOChannel *io, GIOCondition condition, gpointer data)
+static gboolean debug_log_io_cb (GIOChannel  *io G_GNUC_UNUSED,
+				 GIOCondition condition G_GNUC_UNUSED,
+				 gpointer     data G_GNUC_UNUSED)
 {
     char a;
 
@@ -86,7 +88,7 @@ static gboolean debug_log_io_cb (GIOChannel *io, GIOCondition condition, gpointe
     return FALSE;
 }
 
-static void sigusr1_handler (int sig)
+static void sigusr1_handler (int sig G_GNUC_UNUSED)
 {
     while (write (debug_log_pipes[1], "a", 1) != 1)
         ;

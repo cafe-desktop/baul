@@ -98,9 +98,9 @@ desktop_icon_file_check_if_ready (BaulFile *file,
 }
 
 static gboolean
-desktop_icon_file_get_item_count (BaulFile *file,
-                                  guint *count,
-                                  gboolean *count_unreadable)
+desktop_icon_file_get_item_count (BaulFile *file G_GNUC_UNUSED,
+				  guint    *count,
+				  gboolean *count_unreadable)
 {
     if (count != NULL)
     {
@@ -114,12 +114,12 @@ desktop_icon_file_get_item_count (BaulFile *file,
 }
 
 static BaulRequestStatus
-desktop_icon_file_get_deep_counts (BaulFile *file,
-                                   guint *directory_count,
-                                   guint *file_count,
-                                   guint *unreadable_directory_count,
-                                   goffset *total_size,
-                                   goffset *total_size_on_disk)
+desktop_icon_file_get_deep_counts (BaulFile *file G_GNUC_UNUSED,
+				   guint    *directory_count,
+				   guint    *file_count,
+				   guint    *unreadable_directory_count,
+				   goffset  *total_size,
+				   goffset  *total_size_on_disk)
 {
     if (directory_count != NULL)
     {
@@ -159,7 +159,7 @@ desktop_icon_file_get_date (BaulFile *file,
 }
 
 static char *
-desktop_icon_file_get_where_string (BaulFile *file)
+desktop_icon_file_get_where_string (BaulFile *file G_GNUC_UNUSED)
 {
     return g_strdup (_("on the desktop"));
 }
@@ -322,11 +322,11 @@ baul_desktop_icon_file_get_link (BaulDesktopIconFile *icon_file)
 }
 
 static void
-baul_desktop_icon_file_unmount (BaulFile                   *file,
-                                GMountOperation                *mount_op,
-                                GCancellable                   *cancellable,
-                                BaulFileOperationCallback   callback,
-                                gpointer                        callback_data)
+baul_desktop_icon_file_unmount (BaulFile                 *file,
+				GMountOperation          *mount_op G_GNUC_UNUSED,
+				GCancellable             *cancellable G_GNUC_UNUSED,
+				BaulFileOperationCallback callback G_GNUC_UNUSED,
+				gpointer                  callback_data G_GNUC_UNUSED)
 {
     BaulDesktopIconFile *desktop_file;
 
@@ -345,11 +345,11 @@ baul_desktop_icon_file_unmount (BaulFile                   *file,
 }
 
 static void
-baul_desktop_icon_file_eject (BaulFile                   *file,
-                              GMountOperation                *mount_op,
-                              GCancellable                   *cancellable,
-                              BaulFileOperationCallback   callback,
-                              gpointer                        callback_data)
+baul_desktop_icon_file_eject (BaulFile                 *file,
+			      GMountOperation          *mount_op G_GNUC_UNUSED,
+			      GCancellable             *cancellable G_GNUC_UNUSED,
+			      BaulFileOperationCallback callback G_GNUC_UNUSED,
+			      gpointer                  callback_data G_GNUC_UNUSED)
 {
     BaulDesktopIconFile *desktop_file;
 

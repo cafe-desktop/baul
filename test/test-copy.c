@@ -4,14 +4,15 @@
 #include "test.h"
 
 static void
-copy_done (GHashTable *debuting_uris, gpointer data)
+copy_done (GHashTable *debuting_uris G_GNUC_UNUSED,
+	   gpointer    data G_GNUC_UNUSED)
 {
 	g_print ("Copy done\n");
 }
 
 static void
 changed_cb (BaulProgressInfo *info,
-	    gpointer data)
+	    gpointer          data G_GNUC_UNUSED)
 {
 	g_print ("Changed: %s -- %s\n",
 		 baul_progress_info_get_status (info),
@@ -20,15 +21,15 @@ changed_cb (BaulProgressInfo *info,
 
 static void
 progress_changed_cb (BaulProgressInfo *info,
-		     gpointer data)
+		     gpointer          data G_GNUC_UNUSED)
 {
 	g_print ("Progress changed: %f\n",
 		 baul_progress_info_get_progress (info));
 }
 
 static void
-finished_cb (BaulProgressInfo *info,
-	     gpointer data)
+finished_cb (BaulProgressInfo *info G_GNUC_UNUSED,
+	     gpointer          data G_GNUC_UNUSED)
 {
 	g_print ("Finished\n");
 	ctk_main_quit ();

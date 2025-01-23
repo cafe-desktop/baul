@@ -343,10 +343,10 @@ xdg_dir_changed (BaulFile *file,
 }
 
 static void
-xdg_dir_cache_changed_cb (GFileMonitor  *monitor,
-                          GFile *file,
-                          GFile *other_file,
-                          GFileMonitorEvent event_type)
+xdg_dir_cache_changed_cb (GFileMonitor     *monitor G_GNUC_UNUSED,
+			  GFile            *file G_GNUC_UNUSED,
+			  GFile            *other_file G_GNUC_UNUSED,
+			  GFileMonitorEvent event_type)
 {
     if (event_type == G_FILE_MONITOR_EVENT_CHANGED ||
             event_type == G_FILE_MONITOR_EVENT_CREATED)
@@ -358,7 +358,7 @@ xdg_dir_cache_changed_cb (GFileMonitor  *monitor,
 static int user_dirs_changed_tag = 0;
 
 static gboolean
-emit_user_dirs_changed_idle (gpointer data)
+emit_user_dirs_changed_idle (gpointer data G_GNUC_UNUSED)
 {
     g_signal_emit_by_name (baul_signaller_get_current (),
                            "user_dirs_changed");
@@ -654,7 +654,7 @@ desktop_dir_changed (void)
 }
 
 static void
-desktop_dir_changed_callback (gpointer callback_data)
+desktop_dir_changed_callback (gpointer callback_data G_GNUC_UNUSED)
 {
     desktop_dir_changed ();
 }

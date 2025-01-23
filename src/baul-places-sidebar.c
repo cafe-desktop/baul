@@ -906,73 +906,73 @@ update_places (BaulPlacesSidebar *sidebar)
 }
 
 static void
-mount_added_callback (GVolumeMonitor *volume_monitor,
-                      GMount *mount,
-                      BaulPlacesSidebar *sidebar)
+mount_added_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+		      GMount            *mount G_GNUC_UNUSED,
+		      BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
 
 static void
-mount_removed_callback (GVolumeMonitor *volume_monitor,
-                        GMount *mount,
-                        BaulPlacesSidebar *sidebar)
+mount_removed_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+			GMount            *mount G_GNUC_UNUSED,
+			BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
 
 static void
-mount_changed_callback (GVolumeMonitor *volume_monitor,
-                        GMount *mount,
-                        BaulPlacesSidebar *sidebar)
+mount_changed_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+			GMount            *mount G_GNUC_UNUSED,
+			BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
 
 static void
-volume_added_callback (GVolumeMonitor *volume_monitor,
-                       GVolume *volume,
-                       BaulPlacesSidebar *sidebar)
+volume_added_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+		       GVolume           *volume G_GNUC_UNUSED,
+		       BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
 
 static void
-volume_removed_callback (GVolumeMonitor *volume_monitor,
-                         GVolume *volume,
-                         BaulPlacesSidebar *sidebar)
+volume_removed_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+			 GVolume           *volume G_GNUC_UNUSED,
+			 BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
 
 static void
-volume_changed_callback (GVolumeMonitor *volume_monitor,
-                         GVolume *volume,
-                         BaulPlacesSidebar *sidebar)
+volume_changed_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+			 GVolume           *volume G_GNUC_UNUSED,
+			 BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
 
 static void
-drive_disconnected_callback (GVolumeMonitor *volume_monitor,
-                             GDrive         *drive,
-                             BaulPlacesSidebar *sidebar)
+drive_disconnected_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+			     GDrive            *drive G_GNUC_UNUSED,
+			     BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
 
 static void
-drive_connected_callback (GVolumeMonitor *volume_monitor,
-                          GDrive         *drive,
-                          BaulPlacesSidebar *sidebar)
+drive_connected_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+			  GDrive            *drive G_GNUC_UNUSED,
+			  BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
 
 static void
-drive_changed_callback (GVolumeMonitor *volume_monitor,
-                        GDrive         *drive,
-                        BaulPlacesSidebar *sidebar)
+drive_changed_callback (GVolumeMonitor    *volume_monitor G_GNUC_UNUSED,
+			GDrive            *drive G_GNUC_UNUSED,
+			BaulPlacesSidebar *sidebar)
 {
     update_places (sidebar);
 }
@@ -1065,9 +1065,9 @@ desktop_location_changed_callback (gpointer user_data)
 }
 
 static void
-loading_uri_callback (BaulWindowInfo *window,
-                      char *location,
-                      BaulPlacesSidebar *sidebar)
+loading_uri_callback (BaulWindowInfo    *window G_GNUC_UNUSED,
+		      char              *location,
+		      BaulPlacesSidebar *sidebar)
 {
     CtkTreeIter       iter;
     gboolean          valid;
@@ -1337,10 +1337,10 @@ drag_motion_callback (CtkTreeView *tree_view,
 }
 
 static void
-drag_leave_callback (CtkTreeView *tree_view,
-                     CdkDragContext *context,
-                     unsigned int time,
-                     BaulPlacesSidebar *sidebar)
+drag_leave_callback (CtkTreeView       *tree_view,
+		     CdkDragContext    *context G_GNUC_UNUSED,
+		     unsigned int       time G_GNUC_UNUSED,
+		     BaulPlacesSidebar *sidebar)
 {
     free_drag_data (sidebar);
     ctk_tree_view_set_drag_dest_row (tree_view, NULL, CTK_TREE_VIEW_DROP_BEFORE);
@@ -1641,12 +1641,12 @@ out:
 }
 
 static gboolean
-drag_drop_callback (CtkTreeView *tree_view,
-                    CdkDragContext *context,
-                    int x,
-                    int y,
-                    unsigned int time,
-                    BaulPlacesSidebar *sidebar)
+drag_drop_callback (CtkTreeView       *tree_view,
+		    CdkDragContext    *context,
+		    int                x G_GNUC_UNUSED,
+		    int                y G_GNUC_UNUSED,
+		    unsigned int       time,
+		    BaulPlacesSidebar *sidebar)
 {
     gboolean retval = FALSE;
     sidebar->drop_occured = TRUE;
@@ -1658,7 +1658,7 @@ drag_drop_callback (CtkTreeView *tree_view,
 /* Callback used when the file list's popup menu is detached */
 static void
 bookmarks_popup_menu_detach_cb (CtkWidget *attach_widget,
-                                CtkMenu   *menu)
+				CtkMenu   *menu G_GNUC_UNUSED)
 {
     BaulPlacesSidebar *sidebar;
 
@@ -1848,8 +1848,8 @@ bookmarks_check_popup_sensitivity (BaulPlacesSidebar *sidebar)
 
 /* Callback used when the selection in the shortcuts tree changes */
 static void
-bookmarks_selection_changed_cb (CtkTreeSelection      *selection,
-                                BaulPlacesSidebar *sidebar)
+bookmarks_selection_changed_cb (CtkTreeSelection  *selection G_GNUC_UNUSED,
+				BaulPlacesSidebar *sidebar)
 {
     bookmarks_check_popup_sensitivity (sidebar);
 }
@@ -1901,8 +1901,8 @@ volume_mounted_cb (GVolume *volume,
 
 static void
 drive_start_from_bookmark_cb (GObject      *source_object,
-                              GAsyncResult *res,
-                              gpointer      user_data)
+			      GAsyncResult *res,
+			      gpointer      user_data G_GNUC_UNUSED)
 {
     GError *error;
 
@@ -2036,22 +2036,22 @@ open_shortcut_from_menu (BaulPlacesSidebar   *sidebar,
 }
 
 static void
-open_shortcut_cb (CtkMenuItem       *item,
-                  BaulPlacesSidebar *sidebar)
+open_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		  BaulPlacesSidebar *sidebar)
 {
     open_shortcut_from_menu (sidebar, 0);
 }
 
 static void
-open_shortcut_in_new_window_cb (CtkMenuItem       *item,
-                                BaulPlacesSidebar *sidebar)
+open_shortcut_in_new_window_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+				BaulPlacesSidebar *sidebar)
 {
     open_shortcut_from_menu (sidebar, BAUL_WINDOW_OPEN_FLAG_NEW_WINDOW);
 }
 
 static void
-open_shortcut_in_new_tab_cb (CtkMenuItem       *item,
-                             BaulPlacesSidebar *sidebar)
+open_shortcut_in_new_tab_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+			     BaulPlacesSidebar *sidebar)
 {
     open_shortcut_from_menu (sidebar, BAUL_WINDOW_OPEN_FLAG_NEW_TAB);
 }
@@ -2082,8 +2082,8 @@ rename_selected_bookmark (BaulPlacesSidebar *sidebar)
 }
 
 static void
-rename_shortcut_cb (CtkMenuItem           *item,
-                    BaulPlacesSidebar *sidebar)
+rename_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		    BaulPlacesSidebar *sidebar)
 {
     rename_selected_bookmark (sidebar);
 }
@@ -2118,15 +2118,15 @@ remove_selected_bookmarks (BaulPlacesSidebar *sidebar)
 }
 
 static void
-remove_shortcut_cb (CtkMenuItem           *item,
-                    BaulPlacesSidebar *sidebar)
+remove_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		    BaulPlacesSidebar *sidebar)
 {
     remove_selected_bookmarks (sidebar);
 }
 
 static void
-mount_shortcut_cb (CtkMenuItem           *item,
-                   BaulPlacesSidebar *sidebar)
+mount_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		   BaulPlacesSidebar *sidebar)
 {
     CtkTreeIter iter;
     GVolume *volume;
@@ -2193,8 +2193,8 @@ do_unmount_selection (BaulPlacesSidebar *sidebar)
 }
 
 static void
-unmount_shortcut_cb (CtkMenuItem           *item,
-                     BaulPlacesSidebar *sidebar)
+unmount_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		     BaulPlacesSidebar *sidebar)
 {
     do_unmount_selection (sidebar);
 }
@@ -2338,8 +2338,8 @@ do_eject (GMount *mount,
 }
 
 static void
-eject_shortcut_cb (CtkMenuItem           *item,
-                   BaulPlacesSidebar *sidebar)
+eject_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		   BaulPlacesSidebar *sidebar)
 {
     CtkTreeIter iter;
     GMount *mount;
@@ -2438,9 +2438,9 @@ eject_or_unmount_selection (BaulPlacesSidebar *sidebar)
 }
 
 static void
-drive_poll_for_media_cb (GObject *source_object,
-                         GAsyncResult *res,
-                         gpointer user_data)
+drive_poll_for_media_cb (GObject      *source_object,
+			 GAsyncResult *res,
+			 gpointer      user_data G_GNUC_UNUSED)
 {
     GError *error;
 
@@ -2465,8 +2465,8 @@ drive_poll_for_media_cb (GObject *source_object,
 }
 
 static void
-rescan_shortcut_cb (CtkMenuItem           *item,
-                    BaulPlacesSidebar *sidebar)
+rescan_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		    BaulPlacesSidebar *sidebar)
 {
     CtkTreeIter iter;
     GDrive  *drive;
@@ -2488,16 +2488,16 @@ rescan_shortcut_cb (CtkMenuItem           *item,
 }
 
 static void
-format_shortcut_cb (CtkMenuItem           *item,
-                    BaulPlacesSidebar *sidebar)
+format_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		    BaulPlacesSidebar *sidebar G_GNUC_UNUSED)
 {
     g_spawn_command_line_async ("gfloppy", NULL);
 }
 
 static void
 drive_start_cb (GObject      *source_object,
-                GAsyncResult *res,
-                gpointer      user_data)
+		GAsyncResult *res,
+		gpointer      user_data G_GNUC_UNUSED)
 {
     GError *error;
 
@@ -2522,8 +2522,8 @@ drive_start_cb (GObject      *source_object,
 }
 
 static void
-start_shortcut_cb (CtkMenuItem           *item,
-                   BaulPlacesSidebar *sidebar)
+start_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		   BaulPlacesSidebar *sidebar)
 {
     CtkTreeIter iter;
     GDrive  *drive;
@@ -2583,8 +2583,8 @@ drive_stop_cb (GObject *source_object,
 }
 
 static void
-stop_shortcut_cb (CtkMenuItem           *item,
-                  BaulPlacesSidebar *sidebar)
+stop_shortcut_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		  BaulPlacesSidebar *sidebar)
 {
     CtkTreeIter iter;
     GDrive  *drive;
@@ -2612,17 +2612,17 @@ stop_shortcut_cb (CtkMenuItem           *item,
 }
 
 static void
-empty_trash_cb (CtkMenuItem           *item,
-                BaulPlacesSidebar *sidebar)
+empty_trash_cb (CtkMenuItem       *item G_GNUC_UNUSED,
+		BaulPlacesSidebar *sidebar)
 {
     baul_file_operations_empty_trash (CTK_WIDGET (sidebar->window));
 }
 
 /* Handler for CtkWidget::key-press-event on the shortcuts list */
 static gboolean
-bookmarks_key_press_event_cb (CtkWidget             *widget,
-                              CdkEventKey           *event,
-                              BaulPlacesSidebar *sidebar)
+bookmarks_key_press_event_cb (CtkWidget         *widget G_GNUC_UNUSED,
+			      CdkEventKey       *event,
+			      BaulPlacesSidebar *sidebar)
 {
     guint modifiers;
     CtkTreePath *path;
@@ -2815,8 +2815,8 @@ bookmarks_popup_menu (BaulPlacesSidebar *sidebar,
 
 /* Callback used for the CtkWidget::popup-menu signal of the shortcuts list */
 static gboolean
-bookmarks_popup_menu_cb (CtkWidget *widget,
-                         BaulPlacesSidebar *sidebar)
+bookmarks_popup_menu_cb (CtkWidget         *widget G_GNUC_UNUSED,
+			 BaulPlacesSidebar *sidebar)
 {
     bookmarks_popup_menu (sidebar, NULL);
     return TRUE;
@@ -2943,9 +2943,9 @@ update_eject_buttons (BaulPlacesSidebar *sidebar,
 }
 
 static gboolean
-bookmarks_motion_event_cb (CtkWidget             *widget,
-                           CdkEventMotion        *event,
-                           BaulPlacesSidebar *sidebar)
+bookmarks_motion_event_cb (CtkWidget         *widget G_GNUC_UNUSED,
+			   CdkEventMotion    *event,
+			   BaulPlacesSidebar *sidebar)
 {
     CtkTreePath *path;
 
@@ -3040,16 +3040,16 @@ bookmarks_edited (CtkCellRenderer       *cell,
 }
 
 static void
-bookmarks_editing_canceled (CtkCellRenderer       *cell,
-                            BaulPlacesSidebar *sidebar)
+bookmarks_editing_canceled (CtkCellRenderer   *cell,
+			    BaulPlacesSidebar *sidebar G_GNUC_UNUSED)
 {
     g_object_set (cell, "editable", FALSE, NULL);
 }
 
 static void
-trash_state_changed_cb (BaulTrashMonitor    *trash_monitor,
-                        gboolean             state,
-                        gpointer             data)
+trash_state_changed_cb (BaulTrashMonitor *trash_monitor G_GNUC_UNUSED,
+			gboolean          state G_GNUC_UNUSED,
+			gpointer          data)
 {
     BaulPlacesSidebar *sidebar;
 
@@ -3062,11 +3062,11 @@ trash_state_changed_cb (BaulTrashMonitor    *trash_monitor,
 }
 
 static gboolean
-tree_selection_func (CtkTreeSelection *selection,
-                     CtkTreeModel *model,
-                     CtkTreePath *path,
-                     gboolean path_currently_selected,
-                     gpointer user_data)
+tree_selection_func (CtkTreeSelection *selection G_GNUC_UNUSED,
+		     CtkTreeModel     *model,
+		     CtkTreePath      *path,
+		     gboolean          path_currently_selected G_GNUC_UNUSED,
+		     gpointer          user_data G_GNUC_UNUSED)
 {
     CtkTreeIter iter;
     PlaceType row_type;
@@ -3084,11 +3084,11 @@ tree_selection_func (CtkTreeSelection *selection,
 }
 
 static void
-icon_cell_renderer_func (CtkTreeViewColumn *column,
-                         CtkCellRenderer *cell,
-                         CtkTreeModel *model,
-                         CtkTreeIter *iter,
-                         gpointer user_data)
+icon_cell_renderer_func (CtkTreeViewColumn *column G_GNUC_UNUSED,
+			 CtkCellRenderer   *cell,
+			 CtkTreeModel      *model,
+			 CtkTreeIter       *iter,
+			 gpointer           user_data G_GNUC_UNUSED)
 {
     PlaceType type;
 
@@ -3108,11 +3108,11 @@ icon_cell_renderer_func (CtkTreeViewColumn *column,
 }
 
 static void
-padding_cell_renderer_func (CtkTreeViewColumn *column,
-                            CtkCellRenderer *cell,
-                            CtkTreeModel *model,
-                            CtkTreeIter *iter,
-                            gpointer user_data)
+padding_cell_renderer_func (CtkTreeViewColumn *column G_GNUC_UNUSED,
+			    CtkCellRenderer   *cell,
+			    CtkTreeModel      *model,
+			    CtkTreeIter       *iter,
+			    gpointer           user_data G_GNUC_UNUSED)
 {
     PlaceType type;
 
@@ -3136,11 +3136,11 @@ padding_cell_renderer_func (CtkTreeViewColumn *column,
 }
 
 static void
-heading_cell_renderer_func (CtkTreeViewColumn *column,
-                        CtkCellRenderer *cell,
-                        CtkTreeModel *model,
-                        CtkTreeIter *iter,
-                        gpointer user_data)
+heading_cell_renderer_func (CtkTreeViewColumn *column G_GNUC_UNUSED,
+			    CtkCellRenderer   *cell,
+			    CtkTreeModel      *model,
+			    CtkTreeIter       *iter,
+			    gpointer           user_data G_GNUC_UNUSED)
 {
     PlaceType type;
 
@@ -3403,32 +3403,32 @@ baul_places_sidebar_class_init (BaulPlacesSidebarClass *class)
 }
 
 static const char *
-baul_places_sidebar_get_sidebar_id (BaulSidebar *sidebar)
+baul_places_sidebar_get_sidebar_id (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return BAUL_PLACES_SIDEBAR_ID;
 }
 
 static char *
-baul_places_sidebar_get_tab_label (BaulSidebar *sidebar)
+baul_places_sidebar_get_tab_label (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Places"));
 }
 
 static char *
-baul_places_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
+baul_places_sidebar_get_tab_tooltip (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Show Places"));
 }
 
 static GdkPixbuf *
-baul_places_sidebar_get_tab_icon (BaulSidebar *sidebar)
+baul_places_sidebar_get_tab_icon (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return NULL;
 }
 
 static void
-baul_places_sidebar_is_visible_changed (BaulSidebar *sidebar,
-                                        gboolean         is_visible)
+baul_places_sidebar_is_visible_changed (BaulSidebar *sidebar G_GNUC_UNUSED,
+					gboolean     is_visible G_GNUC_UNUSED)
 {
     /* Do nothing */
 }
@@ -3497,8 +3497,8 @@ baul_places_sidebar_style_updated (CtkWidget *widget)
 }
 
 static BaulSidebar *
-baul_places_sidebar_create (BaulSidebarProvider *provider,
-                            BaulWindowInfo *window)
+baul_places_sidebar_create (BaulSidebarProvider *provider G_GNUC_UNUSED,
+			    BaulWindowInfo      *window)
 {
     BaulPlacesSidebar *sidebar;
 
@@ -3516,12 +3516,12 @@ sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 }
 
 static void
-baul_places_sidebar_provider_init (BaulPlacesSidebarProvider *sidebar)
+baul_places_sidebar_provider_init (BaulPlacesSidebarProvider *sidebar G_GNUC_UNUSED)
 {
 }
 
 static void
-baul_places_sidebar_provider_class_init (BaulPlacesSidebarProviderClass *class)
+baul_places_sidebar_provider_class_init (BaulPlacesSidebarProviderClass *class G_GNUC_UNUSED)
 {
 }
 
@@ -3534,7 +3534,7 @@ baul_places_sidebar_register (void)
 /* Drag and drop interfaces */
 
 static void
-_baul_shortcuts_model_filter_class_init (BaulShortcutsModelFilterClass *class)
+_baul_shortcuts_model_filter_class_init (BaulShortcutsModelFilterClass *class G_GNUC_UNUSED)
 {
 }
 

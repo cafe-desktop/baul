@@ -51,13 +51,13 @@ enum
 G_DEFINE_TYPE_WITH_PRIVATE (BaulZoomAction, baul_zoom_action, CTK_TYPE_ACTION)
 
 static void
-zoom_changed_callback (BaulWindow *window,
-                       BaulZoomLevel zoom_level,
-                       gboolean supports_zooming,
-                       gboolean can_zoom,
-                       gboolean can_zoom_in,
-                       gboolean can_zoom_out,
-                       CtkWidget *zoom_control)
+zoom_changed_callback (BaulWindow   *window G_GNUC_UNUSED,
+		       BaulZoomLevel zoom_level,
+		       gboolean      supports_zooming,
+		       gboolean      can_zoom,
+		       gboolean      can_zoom_in G_GNUC_UNUSED,
+		       gboolean      can_zoom_out G_GNUC_UNUSED,
+		       CtkWidget    *zoom_control)
 {
     if (supports_zooming)
     {
@@ -138,10 +138,10 @@ baul_zoom_action_finalize (GObject *object)
 }
 
 static void
-baul_zoom_action_set_property (GObject *object,
-                               guint prop_id,
-                               const GValue *value,
-                               GParamSpec *pspec)
+baul_zoom_action_set_property (GObject      *object,
+			       guint         prop_id,
+			       const GValue *value,
+			       GParamSpec   *pspec G_GNUC_UNUSED)
 {
     BaulZoomAction *zoom;
 
@@ -156,10 +156,10 @@ baul_zoom_action_set_property (GObject *object,
 }
 
 static void
-baul_zoom_action_get_property (GObject *object,
-                               guint prop_id,
-                               GValue *value,
-                               GParamSpec *pspec)
+baul_zoom_action_get_property (GObject    *object,
+			       guint       prop_id,
+			       GValue     *value,
+			       GParamSpec *pspec G_GNUC_UNUSED)
 {
     BaulZoomAction *zoom;
 

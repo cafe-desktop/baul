@@ -67,8 +67,8 @@ static void                  schedule_refresh_go_menu                      (Baul
 
 
 static void
-action_close_all_windows_callback (CtkAction *action,
-                                   gpointer user_data)
+action_close_all_windows_callback (CtkAction *action G_GNUC_UNUSED,
+				   gpointer   user_data G_GNUC_UNUSED)
 {
     BaulApplication *app;
 
@@ -100,23 +100,25 @@ should_open_in_new_tab (void)
 }
 
 static void
-action_back_callback (CtkAction *action,
-                      gpointer user_data)
+action_back_callback (CtkAction *action G_GNUC_UNUSED,
+		      gpointer   user_data)
 {
     baul_navigation_window_back_or_forward (BAUL_NAVIGATION_WINDOW (user_data),
                                             TRUE, 0, should_open_in_new_tab ());
 }
 
 static void
-action_forward_callback (CtkAction *action,
-                         gpointer user_data)
+action_forward_callback (CtkAction *action G_GNUC_UNUSED,
+			 gpointer   user_data)
 {
     baul_navigation_window_back_or_forward (BAUL_NAVIGATION_WINDOW (user_data),
                                             FALSE, 0, should_open_in_new_tab ());
 }
 
 static void
-forget_history_if_yes (CtkDialog *dialog, int response, gpointer callback_data)
+forget_history_if_yes (CtkDialog *dialog,
+		       int        response,
+		       gpointer   callback_data G_GNUC_UNUSED)
 {
     if (response == RESPONSE_FORGET)
     {
@@ -146,22 +148,22 @@ forget_history_if_confirmed (BaulWindow *window)
 }
 
 static void
-action_clear_history_callback (CtkAction *action,
-                               gpointer user_data)
+action_clear_history_callback (CtkAction *action G_GNUC_UNUSED,
+			       gpointer   user_data)
 {
     forget_history_if_confirmed (BAUL_WINDOW (user_data));
 }
 
 static void
-action_split_view_switch_next_pane_callback(CtkAction *action,
-        gpointer user_data)
+action_split_view_switch_next_pane_callback(CtkAction *action G_GNUC_UNUSED,
+					    gpointer   user_data)
 {
     baul_window_pane_switch_to (baul_window_get_next_pane (BAUL_WINDOW (user_data)));
 }
 
 static void
-action_split_view_same_location_callback (CtkAction *action,
-        gpointer user_data)
+action_split_view_same_location_callback (CtkAction *action G_GNUC_UNUSED,
+					  gpointer   user_data)
 {
     BaulWindow *window;
     BaulWindowPane *next_pane;
@@ -353,15 +355,15 @@ baul_navigation_window_update_spatial_menu_item (BaulNavigationWindow *window)
 }
 
 static void
-action_add_bookmark_callback (CtkAction *action,
-                              gpointer user_data)
+action_add_bookmark_callback (CtkAction *action G_GNUC_UNUSED,
+			      gpointer   user_data)
 {
     baul_window_add_bookmark_for_current_location (BAUL_WINDOW (user_data));
 }
 
 static void
-action_edit_bookmarks_callback (CtkAction *action,
-                                gpointer user_data)
+action_edit_bookmarks_callback (CtkAction *action G_GNUC_UNUSED,
+				gpointer   user_data)
 {
     baul_window_edit_bookmarks (BAUL_WINDOW (user_data));
 }
@@ -419,10 +421,10 @@ show_bogus_history_window (BaulWindow *window,
 }
 
 static void
-connect_proxy_cb (CtkActionGroup *action_group,
-                  CtkAction *action,
-                  CtkWidget *proxy,
-                  gpointer dummy)
+connect_proxy_cb (CtkActionGroup *action_group G_GNUC_UNUSED,
+		  CtkAction      *action G_GNUC_UNUSED,
+		  CtkWidget      *proxy,
+		  gpointer        dummy G_GNUC_UNUSED)
 {
     CtkLabel *label;
 
@@ -585,8 +587,8 @@ baul_navigation_window_update_split_view_actions_sensitivity (BaulNavigationWind
 }
 
 static void
-action_new_window_callback (CtkAction *action,
-                            gpointer user_data)
+action_new_window_callback (CtkAction *action G_GNUC_UNUSED,
+			    gpointer   user_data)
 {
     BaulWindow *current_window;
 
@@ -596,8 +598,8 @@ action_new_window_callback (CtkAction *action,
 
 
 static void
-action_new_tab_callback (CtkAction *action,
-                         gpointer user_data)
+action_new_tab_callback (CtkAction *action G_GNUC_UNUSED,
+			 gpointer   user_data)
 {
     BaulWindow *window;
 
@@ -606,8 +608,8 @@ action_new_tab_callback (CtkAction *action,
 }
 
 static void
-action_folder_window_callback (CtkAction *action,
-                               gpointer user_data)
+action_folder_window_callback (CtkAction *action G_GNUC_UNUSED,
+			       gpointer   user_data)
 {
     BaulWindow *current_window, *window;
     BaulWindowSlot *slot;
@@ -633,8 +635,8 @@ action_folder_window_callback (CtkAction *action,
 }
 
 static void
-action_go_to_location_callback (CtkAction *action,
-                                gpointer user_data)
+action_go_to_location_callback (CtkAction *action G_GNUC_UNUSED,
+				gpointer   user_data)
 {
     BaulWindow *window;
 
@@ -646,8 +648,8 @@ action_go_to_location_callback (CtkAction *action,
 /* The ctrl-f Keyboard shortcut always enables, rather than toggles
    the search mode */
 static void
-action_show_search_callback (CtkAction *action,
-                             gpointer user_data)
+action_show_search_callback (CtkAction *action G_GNUC_UNUSED,
+			     gpointer   user_data)
 {
     CtkAction *search_action;
     BaulNavigationWindow *window;
@@ -739,8 +741,8 @@ action_show_hide_search_callback (CtkAction *action,
 }
 
 static void
-action_tabs_previous_callback (CtkAction *action,
-                               gpointer user_data)
+action_tabs_previous_callback (CtkAction *action G_GNUC_UNUSED,
+			       gpointer   user_data)
 {
     BaulNavigationWindowPane *pane;
 
@@ -749,8 +751,8 @@ action_tabs_previous_callback (CtkAction *action,
 }
 
 static void
-action_tabs_next_callback (CtkAction *action,
-                           gpointer user_data)
+action_tabs_next_callback (CtkAction *action G_GNUC_UNUSED,
+			   gpointer   user_data)
 {
     BaulNavigationWindowPane *pane;
 
@@ -759,8 +761,8 @@ action_tabs_next_callback (CtkAction *action,
 }
 
 static void
-action_tabs_move_left_callback (CtkAction *action,
-                                gpointer user_data)
+action_tabs_move_left_callback (CtkAction *action G_GNUC_UNUSED,
+				gpointer   user_data)
 {
     BaulNavigationWindowPane *pane;
 
@@ -769,8 +771,8 @@ action_tabs_move_left_callback (CtkAction *action,
 }
 
 static void
-action_tabs_move_right_callback (CtkAction *action,
-                                 gpointer user_data)
+action_tabs_move_right_callback (CtkAction *action G_GNUC_UNUSED,
+				 gpointer   user_data)
 {
     BaulNavigationWindowPane *pane;
 

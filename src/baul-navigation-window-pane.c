@@ -66,7 +66,9 @@ real_set_active (BaulWindowPane *pane, gboolean is_active)
 }
 
 static gboolean
-navigation_bar_focus_in_callback (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
+navigation_bar_focus_in_callback (CtkWidget     *widget G_GNUC_UNUSED,
+				  CdkEventFocus *event G_GNUC_UNUSED,
+				  gpointer       user_data)
 {
     BaulWindowPane *pane;
     pane = BAUL_WINDOW_PANE (user_data);
@@ -101,16 +103,16 @@ bookmark_list_get_uri_index (GList *list, GFile *location)
 }
 
 static void
-search_bar_focus_in_callback (BaulSearchBar *bar,
-                              BaulWindowPane *pane)
+search_bar_focus_in_callback (BaulSearchBar  *bar G_GNUC_UNUSED,
+			      BaulWindowPane *pane)
 {
     baul_window_set_active_pane (pane->window, pane);
 }
 
 
 static void
-search_bar_activate_callback (BaulSearchBar *bar,
-                              BaulNavigationWindowPane *pane)
+search_bar_activate_callback (BaulSearchBar            *bar G_GNUC_UNUSED,
+			      BaulNavigationWindowPane *pane)
 {
     char *uri;
     BaulDirectory *directory;
@@ -151,8 +153,8 @@ search_bar_activate_callback (BaulSearchBar *bar,
 }
 
 static void
-search_bar_cancel_callback (CtkWidget *widget,
-                            BaulNavigationWindowPane *pane)
+search_bar_cancel_callback (CtkWidget                *widget G_GNUC_UNUSED,
+			    BaulNavigationWindowPane *pane)
 {
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
     {
@@ -161,8 +163,8 @@ search_bar_cancel_callback (CtkWidget *widget,
 }
 
 static void
-navigation_bar_cancel_callback (CtkWidget *widget,
-                                BaulNavigationWindowPane *pane)
+navigation_bar_cancel_callback (CtkWidget                *widget G_GNUC_UNUSED,
+				BaulNavigationWindowPane *pane)
 {
     if (baul_navigation_window_pane_hide_temporary_bars (pane))
     {
@@ -171,9 +173,9 @@ navigation_bar_cancel_callback (CtkWidget *widget,
 }
 
 static void
-navigation_bar_location_changed_callback (CtkWidget *widget,
-        const char *uri,
-        BaulNavigationWindowPane *pane)
+navigation_bar_location_changed_callback (CtkWidget                *widget G_GNUC_UNUSED,
+					  const char               *uri,
+					  BaulNavigationWindowPane *pane)
 {
     GFile *location;
 
@@ -188,9 +190,9 @@ navigation_bar_location_changed_callback (CtkWidget *widget,
 }
 
 static void
-path_bar_location_changed_callback (CtkWidget *widget,
-                                    GFile *location,
-                                    BaulNavigationWindowPane *pane)
+path_bar_location_changed_callback (CtkWidget                *widget G_GNUC_UNUSED,
+				    GFile                    *location,
+				    BaulNavigationWindowPane *pane)
 {
     BaulNavigationWindowSlot *slot;
     BaulWindowPane *win_pane;
@@ -218,7 +220,7 @@ path_bar_location_changed_callback (CtkWidget *widget,
 }
 
 static gboolean
-location_button_should_be_active (BaulNavigationWindowPane *pane)
+location_button_should_be_active (BaulNavigationWindowPane *pane G_GNUC_UNUSED)
 {
     return g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
 }
@@ -263,10 +265,10 @@ location_button_create (BaulNavigationWindowPane *pane)
 }
 
 static gboolean
-path_bar_path_event_callback (BaulPathBar *path_bar,
-                   GFile *location,
-                   CdkEventButton *event,
-                   BaulWindowPane *pane)
+path_bar_path_event_callback (BaulPathBar    *path_bar G_GNUC_UNUSED,
+			      GFile          *location,
+			      CdkEventButton *event,
+			      BaulWindowPane *pane)
 
 {
     BaulWindowSlot *slot;
@@ -317,8 +319,8 @@ path_bar_path_event_callback (BaulPathBar *path_bar,
 }
 
 static void
-notebook_popup_menu_new_tab_cb (CtkMenuItem *menuitem,
-    			gpointer user_data)
+notebook_popup_menu_new_tab_cb (CtkMenuItem *menuitem G_GNUC_UNUSED,
+				gpointer     user_data)
 {
     BaulWindowPane *pane;
 
@@ -327,8 +329,8 @@ notebook_popup_menu_new_tab_cb (CtkMenuItem *menuitem,
 }
 
 static void
-notebook_popup_menu_move_left_cb (CtkMenuItem *menuitem,
-                                  gpointer user_data)
+notebook_popup_menu_move_left_cb (CtkMenuItem *menuitem G_GNUC_UNUSED,
+				  gpointer     user_data)
 {
     BaulNavigationWindowPane *pane;
 
@@ -337,8 +339,8 @@ notebook_popup_menu_move_left_cb (CtkMenuItem *menuitem,
 }
 
 static void
-notebook_popup_menu_move_right_cb (CtkMenuItem *menuitem,
-                                   gpointer user_data)
+notebook_popup_menu_move_right_cb (CtkMenuItem *menuitem G_GNUC_UNUSED,
+				   gpointer     user_data)
 {
     BaulNavigationWindowPane *pane;
 
@@ -347,8 +349,8 @@ notebook_popup_menu_move_right_cb (CtkMenuItem *menuitem,
 }
 
 static void
-notebook_popup_menu_close_cb (CtkMenuItem *menuitem,
-                              gpointer user_data)
+notebook_popup_menu_close_cb (CtkMenuItem *menuitem G_GNUC_UNUSED,
+			      gpointer     user_data)
 {
     BaulWindowPane *pane;
     BaulWindowSlot *slot;
@@ -425,17 +427,17 @@ notebook_popup_menu_show (BaulNavigationWindowPane *pane,
 
 /* emitted when the user clicks the "close" button of tabs */
 static void
-notebook_tab_close_requested (BaulNotebook *notebook,
-                              BaulWindowSlot *slot,
-                              BaulWindowPane *pane)
+notebook_tab_close_requested (BaulNotebook   *notebook G_GNUC_UNUSED,
+			      BaulWindowSlot *slot,
+			      BaulWindowPane *pane)
 {
     baul_window_pane_slot_close (pane, slot);
 }
 
 static gboolean
-notebook_button_press_cb (CtkWidget *widget,
-                          CdkEventButton *event,
-                          gpointer user_data)
+notebook_button_press_cb (CtkWidget      *widget G_GNUC_UNUSED,
+			  CdkEventButton *event,
+			  gpointer        user_data)
 {
     BaulNavigationWindowPane *pane;
 
@@ -461,8 +463,8 @@ notebook_button_press_cb (CtkWidget *widget,
 }
 
 static gboolean
-notebook_popup_menu_cb (CtkWidget *widget,
-                        gpointer user_data)
+notebook_popup_menu_cb (CtkWidget *widget G_GNUC_UNUSED,
+			gpointer   user_data)
 {
     BaulNavigationWindowPane *pane;
 
@@ -472,10 +474,10 @@ notebook_popup_menu_cb (CtkWidget *widget,
 }
 
 static gboolean
-notebook_switch_page_cb (CtkNotebook *notebook,
-                         CtkWidget *page,
-                         unsigned int page_num,
-                         BaulNavigationWindowPane *pane)
+notebook_switch_page_cb (CtkNotebook              *notebook G_GNUC_UNUSED,
+			 CtkWidget                *page G_GNUC_UNUSED,
+			 unsigned int              page_num,
+			 BaulNavigationWindowPane *pane)
 {
     BaulWindowSlot *slot;
     CtkWidget *widget;
@@ -887,7 +889,7 @@ baul_navigation_window_pane_location_bar_showing (BaulNavigationWindowPane *pane
 }
 
 static void
-baul_navigation_window_pane_init (BaulNavigationWindowPane *pane)
+baul_navigation_window_pane_init (BaulNavigationWindowPane *pane G_GNUC_UNUSED)
 {
 }
 

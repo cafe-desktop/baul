@@ -1,4 +1,3 @@
-/* vi: set sw=4 ts=4 wrap ai: */
 /*
  * fm-widget-view.c: This file is part of baul.
  *
@@ -130,7 +129,9 @@ fm_widget_view_clear (FMDirectoryView *view)
 }
 
 static void
-fm_widget_view_file_changed (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
+fm_widget_view_file_changed (FMDirectoryView *view G_GNUC_UNUSED,
+			     BaulFile        *file G_GNUC_UNUSED,
+			     BaulDirectory   *directory G_GNUC_UNUSED)
 {
 }
 
@@ -141,13 +142,13 @@ fm_widget_view_get_background_widget (FMDirectoryView *view)
 }
 
 static GList *
-fm_widget_view_get_selection (FMDirectoryView *view)
+fm_widget_view_get_selection (FMDirectoryView *view G_GNUC_UNUSED)
 {
     return NULL;
 }
 
 static GList *
-fm_widget_view_get_selection_for_file_transfer (FMDirectoryView *view)
+fm_widget_view_get_selection_for_file_transfer (FMDirectoryView *view G_GNUC_UNUSED)
 {
     return NULL;
 }
@@ -177,28 +178,31 @@ fm_widget_view_is_empty (FMDirectoryView *view)
 }
 
 static void
-fm_widget_view_end_file_changes (FMDirectoryView *view)
+fm_widget_view_end_file_changes (FMDirectoryView *view G_GNUC_UNUSED)
 {
 }
 
 static void
-fm_widget_view_remove_file (FMDirectoryView *view, BaulFile *file, BaulDirectory *directory)
+fm_widget_view_remove_file (FMDirectoryView *view G_GNUC_UNUSED,
+			    BaulFile        *file G_GNUC_UNUSED,
+			    BaulDirectory   *directory G_GNUC_UNUSED)
 {
 }
 
 static void
-fm_widget_view_set_selection (FMDirectoryView *view, GList *selection)
+fm_widget_view_set_selection (FMDirectoryView *view,
+			      GList           *selection G_GNUC_UNUSED)
 {
     fm_directory_view_notify_selection_changed (view);
 }
 
 static void
-fm_widget_view_select_all (FMDirectoryView *view)
+fm_widget_view_select_all (FMDirectoryView *view G_GNUC_UNUSED)
 {
 }
 
 static void
-fm_widget_view_reveal_selection (FMDirectoryView *view)
+fm_widget_view_reveal_selection (FMDirectoryView *view G_GNUC_UNUSED)
 {
 }
 
@@ -216,58 +220,61 @@ fm_widget_view_update_menus (FMDirectoryView *view)
 
 /* Reset sort criteria and zoom level to match defaults */
 static void
-fm_widget_view_reset_to_defaults (FMDirectoryView *view)
+fm_widget_view_reset_to_defaults (FMDirectoryView *view G_GNUC_UNUSED)
 {
 }
 
 static void
-fm_widget_view_bump_zoom_level (FMDirectoryView *view, int zoom_increment)
+fm_widget_view_bump_zoom_level (FMDirectoryView *view G_GNUC_UNUSED,
+				int              zoom_increment G_GNUC_UNUSED)
 {
 }
 
 static BaulZoomLevel
-fm_widget_view_get_zoom_level (FMDirectoryView *view)
+fm_widget_view_get_zoom_level (FMDirectoryView *view G_GNUC_UNUSED)
 {
     return BAUL_ZOOM_LEVEL_STANDARD;
 }
 
 static void
-fm_widget_view_zoom_to_level (FMDirectoryView *view,
-                              BaulZoomLevel zoom_level)
+fm_widget_view_zoom_to_level (FMDirectoryView *view G_GNUC_UNUSED,
+			      BaulZoomLevel    zoom_level G_GNUC_UNUSED)
 {
 }
 
 static void
-fm_widget_view_restore_default_zoom_level (FMDirectoryView *view)
+fm_widget_view_restore_default_zoom_level (FMDirectoryView *view G_GNUC_UNUSED)
 {
 }
 
 static gboolean
-fm_widget_view_can_zoom_in (FMDirectoryView *view)
+fm_widget_view_can_zoom_in (FMDirectoryView *view G_GNUC_UNUSED)
 {
     return FALSE;
 }
 
 static gboolean
-fm_widget_view_can_zoom_out (FMDirectoryView *view)
+fm_widget_view_can_zoom_out (FMDirectoryView *view G_GNUC_UNUSED)
 {
     return FALSE;
 }
 
 static void
-fm_widget_view_start_renaming_file (FMDirectoryView *view,
-                                    BaulFile *file,
-                                    gboolean select_all)
+fm_widget_view_start_renaming_file (FMDirectoryView *view G_GNUC_UNUSED,
+				    BaulFile        *file G_GNUC_UNUSED,
+				    gboolean         select_all G_GNUC_UNUSED)
 {
 }
 
 static void
-fm_widget_view_click_policy_changed (FMDirectoryView *directory_view)
+fm_widget_view_click_policy_changed (FMDirectoryView *directory_view G_GNUC_UNUSED)
 {
 }
 
 static int
-fm_widget_view_compare_files (FMDirectoryView *view, BaulFile *file1, BaulFile *file2)
+fm_widget_view_compare_files (FMDirectoryView *view G_GNUC_UNUSED,
+			      BaulFile        *file1,
+			      BaulFile        *file2)
 {
     if (file1 < file2)
     {
@@ -283,14 +290,14 @@ fm_widget_view_compare_files (FMDirectoryView *view, BaulFile *file1, BaulFile *
 }
 
 static gboolean
-fm_widget_view_using_manual_layout (FMDirectoryView *view)
+fm_widget_view_using_manual_layout (FMDirectoryView *view G_GNUC_UNUSED)
 {
     return FALSE;
 }
 
 static void
-fm_widget_view_end_loading (FMDirectoryView *view,
-                           gboolean all_files_seen)
+fm_widget_view_end_loading (FMDirectoryView *view G_GNUC_UNUSED,
+			    gboolean         all_files_seen G_GNUC_UNUSED)
 {
 }
 
@@ -301,7 +308,7 @@ fm_widget_view_finalize (GObject *object)
 }
 
 static void
-fm_widget_view_emblems_changed (FMDirectoryView *directory_view)
+fm_widget_view_emblems_changed (FMDirectoryView *directory_view G_GNUC_UNUSED)
 {
 }
 
@@ -318,7 +325,8 @@ fm_widget_view_get_first_visible_file (BaulView *view)
 }
 
 static void
-fm_widget_view_scroll_to_file (BaulView *view, const char *uri)
+fm_widget_view_scroll_to_file (BaulView   *view G_GNUC_UNUSED,
+			       const char *uri G_GNUC_UNUSED)
 {
 }
 
@@ -329,7 +337,7 @@ fm_widget_view_grab_focus (BaulView *view)
 }
 
 static void
-fm_widget_view_sort_directories_first_changed (FMDirectoryView *view)
+fm_widget_view_sort_directories_first_changed (FMDirectoryView *view G_GNUC_UNUSED)
 {
 }
 
@@ -375,7 +383,7 @@ fm_widget_view_class_init (FMWidgetViewClass *class)
 }
 
 static const char *
-fm_widget_view_get_id (BaulView *view)
+fm_widget_view_get_id (BaulView *view G_GNUC_UNUSED)
 {
     return FM_WIDGET_VIEW_ID;
 }

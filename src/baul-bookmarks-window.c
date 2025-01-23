@@ -142,8 +142,8 @@ static void	update_bookmark_from_text		    (void);
 
 static void
 baul_bookmarks_window_response_callback (CtkDialog *dialog,
-        int response_id,
-        gpointer callback_data)
+					 int        response_id,
+					 gpointer   callback_data G_GNUC_UNUSED)
 {
     if (response_id == CTK_RESPONSE_HELP)
     {
@@ -231,8 +231,8 @@ bookmarks_set_empty (gboolean empty)
 }
 
 static void
-edit_bookmarks_dialog_reset_signals (gpointer data,
-                                     GObject *obj)
+edit_bookmarks_dialog_reset_signals (gpointer data G_GNUC_UNUSED,
+				     GObject *obj G_GNUC_UNUSED)
 {
     g_signal_handler_disconnect (jump_button,
                                  jump_button_signal_id);
@@ -530,7 +530,8 @@ baul_bookmarks_window_save_geometry (CtkWindow *window)
 }
 
 static void
-on_bookmark_list_changed (BaulBookmarkList *bookmarks, gpointer data)
+on_bookmark_list_changed (BaulBookmarkList *bookmarks,
+			  gpointer          data G_GNUC_UNUSED)
 {
     g_return_if_fail (BAUL_IS_BOOKMARK_LIST (bookmarks));
 
@@ -539,8 +540,8 @@ on_bookmark_list_changed (BaulBookmarkList *bookmarks, gpointer data)
 }
 
 static void
-on_name_field_changed (CtkEditable *editable,
-                       gpointer     user_data)
+on_name_field_changed (CtkEditable *editable G_GNUC_UNUSED,
+		       gpointer     user_data G_GNUC_UNUSED)
 {
     CtkTreeIter   iter;
     g_return_if_fail(CTK_IS_TREE_VIEW(bookmark_list_widget));
@@ -667,8 +668,8 @@ bookmarks_delete_bookmark (void)
 }
 
 static void
-on_remove_button_clicked (CtkButton *button,
-                          gpointer   user_data)
+on_remove_button_clicked (CtkButton *button G_GNUC_UNUSED,
+			  gpointer   user_data G_GNUC_UNUSED)
 {
     bookmarks_delete_bookmark ();
 }
@@ -680,9 +681,9 @@ on_remove_button_clicked (CtkButton *button,
    list. */
 static void
 on_row_changed (CtkListStore *store,
-                CtkTreePath *path,
-                CtkTreeIter *iter,
-                gpointer user_data)
+		CtkTreePath  *path,
+		CtkTreeIter  *iter,
+		gpointer      user_data G_GNUC_UNUSED)
 {
     BaulBookmark *bookmark = NULL;
     gint *indices, row;
@@ -741,9 +742,9 @@ on_row_changed (CtkListStore *store,
  */
 
 static gboolean
-on_button_pressed (CtkTreeView *view,
-                   CdkEventButton *event,
-                   gpointer user_data)
+on_button_pressed (CtkTreeView    *view G_GNUC_UNUSED,
+		   CdkEventButton *event G_GNUC_UNUSED,
+		   gpointer        user_data G_GNUC_UNUSED)
 {
     update_bookmark_from_text ();
 
@@ -751,9 +752,9 @@ on_button_pressed (CtkTreeView *view,
 }
 
 static gboolean
-on_key_pressed (CtkTreeView *view,
-                CdkEventKey *event,
-                gpointer user_data)
+on_key_pressed (CtkTreeView *view G_GNUC_UNUSED,
+		CdkEventKey *event,
+		gpointer     user_data G_GNUC_UNUSED)
 {
     if (event->keyval == CDK_KEY_Delete || event->keyval == CDK_KEY_KP_Delete)
     {
@@ -768,9 +769,9 @@ on_key_pressed (CtkTreeView *view,
 
 static void
 on_row_activated (CtkTreeView       *view,
-                  CtkTreePath       *path,
-                  CtkTreeViewColumn *column,
-                  gpointer           user_data)
+		  CtkTreePath       *path G_GNUC_UNUSED,
+		  CtkTreeViewColumn *column G_GNUC_UNUSED,
+		  gpointer           user_data)
 {
     CdkScreen *screen;
 
@@ -779,9 +780,9 @@ on_row_activated (CtkTreeView       *view,
 }
 
 static void
-on_row_deleted (CtkListStore *store,
-                CtkTreePath *path,
-                gpointer user_data)
+on_row_deleted (CtkListStore *store G_GNUC_UNUSED,
+		CtkTreePath  *path,
+		gpointer      user_data G_GNUC_UNUSED)
 {
     gint *indices, row;
 
@@ -794,8 +795,8 @@ on_row_deleted (CtkListStore *store,
 }
 
 static void
-on_selection_changed (CtkTreeSelection *treeselection,
-                      gpointer user_data)
+on_selection_changed (CtkTreeSelection *treeselection G_GNUC_UNUSED,
+		      gpointer          user_data G_GNUC_UNUSED)
 {
     BaulBookmark *selected;
     char *name = NULL, *entry_text = NULL;
@@ -909,9 +910,9 @@ update_bookmark_from_text (void)
 }
 
 static gboolean
-on_text_field_focus_out_event (CtkWidget *widget,
-                               CdkEventFocus *event,
-                               gpointer user_data)
+on_text_field_focus_out_event (CtkWidget     *widget,
+			       CdkEventFocus *event G_GNUC_UNUSED,
+			       gpointer       user_data G_GNUC_UNUSED)
 {
     g_assert (BAUL_IS_ENTRY (widget));
 
@@ -929,8 +930,8 @@ name_or_uri_field_activate (BaulEntry *entry)
 }
 
 static void
-on_uri_field_changed (CtkEditable *editable,
-                      gpointer user_data)
+on_uri_field_changed (CtkEditable *editable G_GNUC_UNUSED,
+		      gpointer     user_data G_GNUC_UNUSED)
 {
     /* Remember that user has changed text so we
      * update real bookmark later.
@@ -940,8 +941,8 @@ on_uri_field_changed (CtkEditable *editable,
 
 static gboolean
 on_window_delete_event (CtkWidget *widget,
-                        CdkEvent *event,
-                        gpointer user_data)
+			CdkEvent  *event G_GNUC_UNUSED,
+			gpointer   user_data G_GNUC_UNUSED)
 {
     ctk_widget_hide (widget);
     return TRUE;
@@ -960,7 +961,7 @@ restore_geometry (gpointer data)
 
 static void
 on_window_hide_event (CtkWidget *widget,
-                      gpointer user_data)
+		      gpointer   user_data G_GNUC_UNUSED)
 {
     baul_bookmarks_window_save_geometry (CTK_WINDOW (widget));
 
@@ -970,7 +971,7 @@ on_window_hide_event (CtkWidget *widget,
 
 static void
 on_window_destroy_event (CtkWidget *widget,
-                         gpointer user_data)
+			 gpointer   user_data G_GNUC_UNUSED)
 {
     g_object_unref (bookmark_list_store);
     g_object_unref (bookmark_empty_list_store);

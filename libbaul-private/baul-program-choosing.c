@@ -58,10 +58,10 @@
  * @parent_window: A window to use as the parent for any error dialogs.
  *  */
 static void
-application_cannot_open_location (GAppInfo *application,
-                                  BaulFile *file,
-                                  const char *uri_scheme,
-                                  CtkWindow *parent_window)
+application_cannot_open_location (GAppInfo   *application G_GNUC_UNUSED,
+				  BaulFile   *file G_GNUC_UNUSED,
+				  const char *uri_scheme G_GNUC_UNUSED,
+				  CtkWindow  *parent_window G_GNUC_UNUSED)
 {
 #ifdef NEW_MIME_COMPLETE
     char *prompt;
@@ -171,9 +171,9 @@ baul_launch_application (GAppInfo *application,
 }
 
 static void
-dummy_child_watch (GPid     pid,
-                   gint     status,
-                   gpointer user_data)
+dummy_child_watch (GPid     pid G_GNUC_UNUSED,
+		   gint     status G_GNUC_UNUSED,
+		   gpointer user_data G_GNUC_UNUSED)
 {
   /* Nothing, this is just to ensure we don't double fork
    * and break pkexec:
@@ -182,9 +182,9 @@ dummy_child_watch (GPid     pid,
 }
 
 static void
-gather_pid_callback (GDesktopAppInfo *appinfo,
-                     GPid            pid,
-                     gpointer        data)
+gather_pid_callback (GDesktopAppInfo *appinfo G_GNUC_UNUSED,
+		     GPid             pid,
+		     gpointer         data G_GNUC_UNUSED)
 {
     g_child_watch_add(pid, dummy_child_watch, NULL);
 }
@@ -311,10 +311,10 @@ baul_launch_application_by_uri (GAppInfo *application,
  */
 void
 baul_launch_application_from_command (CdkScreen  *screen,
-                                      const char *name,
-                                      const char *command_string,
-                                      gboolean use_terminal,
-                                      ...)
+				      const char *name G_GNUC_UNUSED,
+				      const char *command_string,
+				      gboolean    use_terminal,
+				      ...)
 {
     char *full_command, *tmp;
     char *parameter;
@@ -378,11 +378,11 @@ baul_launch_application_from_command (CdkScreen  *screen,
  * @parameters: Passed as parameters to the application after quoting each of them.
  */
 void
-baul_launch_application_from_command_array (CdkScreen  *screen,
-        const char *name,
-        const char *command_string,
-        gboolean use_terminal,
-        const char * const * parameters)
+baul_launch_application_from_command_array (CdkScreen          *screen,
+					    const char         *name G_GNUC_UNUSED,
+					    const char         *command_string,
+					    gboolean            use_terminal,
+					    const char * const *parameters)
 {
     char *full_command, *tmp;
 
@@ -434,10 +434,10 @@ baul_launch_application_from_command_array (CdkScreen  *screen,
 }
 
 void
-baul_launch_desktop_file (CdkScreen   *screen,
-                          const char  *desktop_file_uri,
-                          const GList *parameter_uris,
-                          CtkWindow   *parent_window)
+baul_launch_desktop_file (CdkScreen   *screen G_GNUC_UNUSED,
+			  const char  *desktop_file_uri,
+			  const GList *parameter_uris,
+			  CtkWindow   *parent_window)
 {
     GError *error;
     char *desktop_file_path;

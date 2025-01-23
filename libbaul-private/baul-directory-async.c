@@ -259,7 +259,9 @@ istr_set_insert (GHashTable *table, const char *istr)
 }
 
 static void
-add_istr_to_list (gpointer key, gpointer value, gpointer callback_data)
+add_istr_to_list (gpointer key,
+		  gpointer value G_GNUC_UNUSED,
+		  gpointer callback_data)
 {
     GList **list;
 
@@ -369,7 +371,7 @@ baul_directory_verify_request_counts (BaulDirectory *directory)
  */
 static gboolean
 async_job_start (BaulDirectory *directory,
-                 const char *job)
+		 const char    *job G_GNUC_UNUSED)
 {
 #ifdef DEBUG_ASYNC_JOBS
     char *key;
@@ -425,8 +427,8 @@ async_job_start (BaulDirectory *directory,
 
 /* End a job. */
 static void
-async_job_end (BaulDirectory *directory,
-               const char *job)
+async_job_end (BaulDirectory *directory G_GNUC_UNUSED,
+	       const char    *job G_GNUC_UNUSED)
 {
 #ifdef DEBUG_ASYNC_JOBS
     char *key;
@@ -465,7 +467,9 @@ async_job_end (BaulDirectory *directory,
 
 /* Helper to get one value from a hash table. */
 static void
-get_one_value_callback (gpointer key, gpointer value, gpointer callback_data)
+get_one_value_callback (gpointer key G_GNUC_UNUSED,
+			gpointer value,
+			gpointer callback_data)
 {
     gpointer *returned_value;
 
@@ -781,7 +785,8 @@ baul_directory_set_up_request (BaulFileAttributes file_attributes)
 }
 
 static void
-mime_db_changed_callback (GObject *ignore, BaulDirectory *dir)
+mime_db_changed_callback (GObject       *ignore G_GNUC_UNUSED,
+			  BaulDirectory *dir)
 {
     BaulFileAttributes attrs;
 
@@ -898,13 +903,14 @@ set_file_unconfirmed (BaulFile *file, gboolean unconfirmed)
 static gboolean show_hidden_files = TRUE;
 
 static void
-show_hidden_files_changed_callback (gpointer callback_data)
+show_hidden_files_changed_callback (gpointer callback_data G_GNUC_UNUSED)
 {
     show_hidden_files = g_settings_get_boolean (baul_preferences, BAUL_PREFERENCES_SHOW_HIDDEN_FILES);
 }
 
 static gboolean
-should_skip_file (BaulDirectory *directory, GFileInfo *info)
+should_skip_file (BaulDirectory *directory G_GNUC_UNUSED,
+		  GFileInfo     *info)
 {
     static gboolean show_hidden_files_changed_callback_installed = FALSE;
 
@@ -2187,9 +2193,9 @@ directory_load_state_free (DirectoryLoadState *state)
 }
 
 static void
-more_files_callback (GObject *source_object,
-                     GAsyncResult *res,
-                     gpointer user_data)
+more_files_callback (GObject      *source_object G_GNUC_UNUSED,
+		     GAsyncResult *res,
+		     gpointer      user_data)
 {
     DirectoryLoadState *state;
     BaulDirectory *directory;
@@ -2618,9 +2624,9 @@ directory_count_state_free (DirectoryCountState *state)
 }
 
 static void
-count_more_files_callback (GObject *source_object,
-                           GAsyncResult *res,
-                           gpointer user_data)
+count_more_files_callback (GObject      *source_object G_GNUC_UNUSED,
+			   GAsyncResult *res,
+			   gpointer      user_data)
 {
     DirectoryCountState *state;
     BaulDirectory *directory;
@@ -2959,9 +2965,9 @@ deep_count_next_dir (DeepCountState *state)
 }
 
 static void
-deep_count_more_files_callback (GObject *source_object,
-                                GAsyncResult *res,
-                                gpointer user_data)
+deep_count_more_files_callback (GObject      *source_object G_GNUC_UNUSED,
+				GAsyncResult *res,
+				gpointer      user_data)
 {
     DeepCountState *state;
     BaulDirectory *directory;
@@ -3289,9 +3295,9 @@ mime_list_one (MimeListState *state,
 }
 
 static void
-mime_list_callback (GObject *source_object,
-                    GAsyncResult *res,
-                    gpointer user_data)
+mime_list_callback (GObject      *source_object G_GNUC_UNUSED,
+		    GAsyncResult *res,
+		    gpointer      user_data)
 {
     MimeListState *state;
     BaulDirectory *directory;
@@ -3931,15 +3937,19 @@ link_info_done (BaulDirectory *directory,
     baul_directory_async_state_changed (directory);
 }
 
+#ifdef READ_LOCAL_LINKS_SYNC
 static gboolean
 should_read_link_info_sync (BaulFile *file)
 {
-#ifdef READ_LOCAL_LINKS_SYNC
     return (baul_file_is_local (file) && !baul_file_is_directory (file));
-#else
-    return FALSE;
-#endif
 }
+#else
+static gboolean
+should_read_link_info_sync (BaulFile *file G_GNUC_UNUSED)
+{
+    return FALSE;
+}
+#endif
 
 static void
 link_info_stop (BaulDirectory *directory)
@@ -4233,9 +4243,9 @@ extern int cached_thumbnail_size;
 /* scale very large images down to the max. size we need */
 static void
 thumbnail_loader_size_prepared (GdkPixbufLoader *loader,
-                                int width,
-                                int height,
-                                gpointer user_data)
+				int              width,
+				int              height,
+				gpointer         user_data G_GNUC_UNUSED)
 {
     int max_thumbnail_size;
     double aspect_ratio;

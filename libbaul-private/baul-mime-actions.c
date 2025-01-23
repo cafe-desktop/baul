@@ -684,9 +684,9 @@ baul_mime_get_applications_for_files (GList *files)
 }
 
 static void
-trash_or_delete_files (CtkWindow *parent_window,
-                       const GList *files,
-                       gboolean delete_if_all_already_in_trash)
+trash_or_delete_files (CtkWindow   *parent_window,
+		       const GList *files,
+		       gboolean     delete_if_all_already_in_trash G_GNUC_UNUSED)
 {
     GList *locations;
     const GList *node;
@@ -1154,9 +1154,9 @@ unpause_activation_timed_cancel (ActivateParameters *parameters)
 
 
 static void
-activate_mount_op_active (CtkMountOperation *operation,
-                          GParamSpec *pspec,
-                          ActivateParameters *parameters)
+activate_mount_op_active (CtkMountOperation  *operation,
+			  GParamSpec         *pspec G_GNUC_UNUSED,
+			  ActivateParameters *parameters)
 {
     gboolean is_active;
 
@@ -1513,9 +1513,9 @@ delete_cb (CtkDialog *dialog)
 }
 
 static void
-pk_proxy_appeared_cb (GObject *source,
-                      GAsyncResult *res,
-                      gpointer user_data)
+pk_proxy_appeared_cb (GObject      *source G_GNUC_UNUSED,
+		      GAsyncResult *res,
+		      gpointer      user_data)
 {
     ActivateParametersInstall *parameters_install = user_data;
     char *mime_type;
@@ -2118,7 +2118,8 @@ activation_mount_not_mounted (ActivateParameters *parameters)
 
 
 static void
-activate_callback (GList *files, gpointer callback_data)
+activate_callback (GList   *files G_GNUC_UNUSED,
+		   gpointer callback_data)
 {
     ActivateParameters *parameters = callback_data;
     GList *l, *next;
@@ -2168,8 +2169,8 @@ activate_callback (GList *files, gpointer callback_data)
 }
 
 static void
-activate_activation_uris_ready_callback (GList *files_ignore,
-        gpointer callback_data)
+activate_activation_uris_ready_callback (GList   *files_ignore G_GNUC_UNUSED,
+					 gpointer callback_data)
 {
     ActivateParameters *parameters = callback_data;
     GList *l, *next, *files;
@@ -2389,10 +2390,10 @@ activation_mount_mountables (ActivateParameters *parameters)
 
 
 static void
-activation_mountable_started (BaulFile  *file,
-                              GFile         *gfile_of_file,
-                              GError        *error,
-                              gpointer       callback_data)
+activation_mountable_started (BaulFile *file,
+			      GFile    *gfile_of_file G_GNUC_UNUSED,
+			      GError   *error,
+			      gpointer  callback_data)
 {
     ActivateParameters *parameters = callback_data;
     LaunchLocation *location;

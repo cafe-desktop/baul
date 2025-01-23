@@ -103,9 +103,9 @@ baul_background_settings_notify_cb (BaulFile *file,
 
 /* handle the theme changing */
 static void
-baul_background_theme_notify_cb (GSettings   *settings,
-                                 const gchar *key,
-                                 gpointer     user_data)
+baul_background_theme_notify_cb (GSettings   *settings G_GNUC_UNUSED,
+				 const gchar *key G_GNUC_UNUSED,
+				 gpointer     user_data)
 {
     BaulFile *file;
     EelBackground *background = EEL_BACKGROUND (user_data);
@@ -313,8 +313,8 @@ baul_connect_background_to_file_metadata (CtkWidget     *widget,
 /* handle the desktop background "settings_changed" signal */
 static void
 desktop_background_changed_cb (EelBackground *background,
-                               CdkDragAction  action,
-                               gpointer       user_data)
+			       CdkDragAction  action G_GNUC_UNUSED,
+			       gpointer       user_data G_GNUC_UNUSED)
 {
     eel_bg_save_to_gsettings (background,
                               cafe_background_preferences);
@@ -341,7 +341,7 @@ desktop_background_prefs_change_event_idle_cb (EelBackground *background)
 /* handle the desktop background "reset" signal: reset to schema's defaults */
 static void
 desktop_background_reset_cb (EelBackground *background,
-                             gpointer       user_data)
+			     gpointer       user_data G_GNUC_UNUSED)
 {
     /* Reset to defaults, and save */
     eel_bg_load_from_system_gsettings (background,
@@ -354,10 +354,10 @@ desktop_background_reset_cb (EelBackground *background,
 
 /* handle the desktop GSettings "change-event" (batch changes) signal */
 static gboolean
-desktop_background_prefs_change_event_cb (GSettings *settings,
-                                          gpointer   keys,
-                                          gint       n_keys,
-                                          gpointer   user_data)
+desktop_background_prefs_change_event_cb (GSettings *settings G_GNUC_UNUSED,
+					  gpointer   keys G_GNUC_UNUSED,
+					  gint       n_keys G_GNUC_UNUSED,
+					  gpointer   user_data)
 {
     EelBackground *background = user_data;
 
@@ -371,8 +371,8 @@ desktop_background_prefs_change_event_cb (GSettings *settings,
 }
 
 static void
-desktop_background_weak_notify (gpointer data,
-                                GObject *object)
+desktop_background_weak_notify (gpointer data G_GNUC_UNUSED,
+				GObject *object)
 {
     g_signal_handlers_disconnect_by_func (cafe_background_preferences,
                                           G_CALLBACK (desktop_background_prefs_change_event_cb),

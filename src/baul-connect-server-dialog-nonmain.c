@@ -37,9 +37,9 @@
 static GSimpleAsyncResult *display_location_res = NULL;
 
 static void
-window_go_to_cb (BaulWindow *window,
-		 GError *error,
-		 gpointer user_data)
+window_go_to_cb (BaulWindow *window G_GNUC_UNUSED,
+		 GError     *error,
+		 gpointer    user_data G_GNUC_UNUSED)
 {
     if (error != NULL) {
     	g_simple_async_result_set_from_error (display_location_res, error);
@@ -52,9 +52,9 @@ window_go_to_cb (BaulWindow *window,
 }
 
 gboolean
-baul_connect_server_dialog_display_location_finish (BaulConnectServerDialog *self,
-						    GAsyncResult *res,
-						    GError **error)
+baul_connect_server_dialog_display_location_finish (BaulConnectServerDialog *self G_GNUC_UNUSED,
+						    GAsyncResult            *res,
+						    GError                 **error)
 {
     if (g_simple_async_result_propagate_error (G_SIMPLE_ASYNC_RESULT (res), error)) {
     	return FALSE;

@@ -164,11 +164,14 @@ item_entry_free (ItemEntry *entry)
 }
 
 static void
-fm_ditem_page_url_drag_data_received (CtkWidget *widget, CdkDragContext *context,
-                                      int x, int y,
-                                      CtkSelectionData *selection_data,
-                                      guint info, guint time,
-                                      CtkEntry *entry)
+fm_ditem_page_url_drag_data_received (CtkWidget        *widget G_GNUC_UNUSED,
+				      CdkDragContext   *context G_GNUC_UNUSED,
+				      int               x G_GNUC_UNUSED,
+				      int               y G_GNUC_UNUSED,
+				      CtkSelectionData *selection_data,
+				      guint             info G_GNUC_UNUSED,
+				      guint             time G_GNUC_UNUSED,
+				      CtkEntry         *entry)
 {
     char **uris;
     gboolean exactly_one;
@@ -198,11 +201,14 @@ fm_ditem_page_url_drag_data_received (CtkWidget *widget, CdkDragContext *context
 }
 
 static void
-fm_ditem_page_exec_drag_data_received (CtkWidget *widget, CdkDragContext *context,
-                                       int x, int y,
-                                       CtkSelectionData *selection_data,
-                                       guint info, guint time,
-                                       CtkEntry *entry)
+fm_ditem_page_exec_drag_data_received (CtkWidget        *widget G_GNUC_UNUSED,
+				       CdkDragContext   *context G_GNUC_UNUSED,
+				       int               x G_GNUC_UNUSED,
+				       int               y G_GNUC_UNUSED,
+				       CtkSelectionData *selection_data,
+				       guint             info G_GNUC_UNUSED,
+				       guint             time G_GNUC_UNUSED,
+				       CtkEntry         *entry)
 {
     char **uris;
     gboolean exactly_one;
@@ -309,9 +315,9 @@ entry_activate_cb (CtkWidget *entry,
 }
 
 static gboolean
-entry_focus_out_cb (CtkWidget *entry,
-                    CdkEventFocus *event,
-                    CtkWidget *container)
+entry_focus_out_cb (CtkWidget     *entry,
+		    CdkEventFocus *event G_GNUC_UNUSED,
+		    CtkWidget     *container)
 {
     const char *uri;
     GKeyFile *key_file;

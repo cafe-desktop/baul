@@ -277,9 +277,9 @@ baul_file_clear_display_name (BaulFile *file)
 }
 
 static gboolean
-foreach_metadata_free (gpointer  key,
-		       gpointer  value,
-		       gpointer  user_data)
+foreach_metadata_free (gpointer key,
+		       gpointer value,
+		       gpointer user_data G_GNUC_UNUSED)
 {
 	guint id;
 
@@ -4994,13 +4994,13 @@ static BaulSpeedTradeoffValue show_directory_item_count;
 static BaulSpeedTradeoffValue show_text_in_icons;
 
 static void
-show_text_in_icons_changed_callback (gpointer callback_data)
+show_text_in_icons_changed_callback (gpointer callback_data G_GNUC_UNUSED)
 {
 	show_text_in_icons = g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_SHOW_TEXT_IN_ICONS);
 }
 
 static void
-show_directory_item_count_changed_callback (gpointer callback_data)
+show_directory_item_count_changed_callback (gpointer callback_data G_GNUC_UNUSED)
 {
 	show_directory_item_count = g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_SHOW_DIRECTORY_ITEM_COUNTS);
 }
@@ -7107,7 +7107,7 @@ baul_file_get_mount (BaulFile *file)
 }
 
 static void
-file_mount_unmounted (GMount *mount,
+file_mount_unmounted (GMount  *mount G_GNUC_UNUSED,
 		      gpointer data)
 {
 	BaulFile *file;
@@ -8515,7 +8515,7 @@ baul_extract_top_left_text (const char *text,
 }
 
 static void
-thumbnail_limit_changed_callback (gpointer user_data)
+thumbnail_limit_changed_callback (gpointer user_data G_GNUC_UNUSED)
 {
 	g_settings_get (baul_preferences,
 					BAUL_PREFERENCES_IMAGE_FILE_THUMBNAIL_LIMIT,
@@ -8529,7 +8529,7 @@ thumbnail_limit_changed_callback (gpointer user_data)
 }
 
 static void
-thumbnail_size_changed_callback (gpointer user_data)
+thumbnail_size_changed_callback (gpointer user_data G_GNUC_UNUSED)
 {
 	cached_thumbnail_size = g_settings_get_int (baul_icon_view_preferences, BAUL_PREFERENCES_ICON_VIEW_THUMBNAIL_SIZE);
 
@@ -8541,7 +8541,7 @@ thumbnail_size_changed_callback (gpointer user_data)
 }
 
 static void
-show_thumbnails_changed_callback (gpointer user_data)
+show_thumbnails_changed_callback (gpointer user_data G_GNUC_UNUSED)
 {
 	show_image_thumbs = g_settings_get_enum (baul_preferences, BAUL_PREFERENCES_SHOW_IMAGE_FILE_THUMBNAILS);
 
@@ -8553,7 +8553,8 @@ show_thumbnails_changed_callback (gpointer user_data)
 }
 
 static void
-mime_type_data_changed_callback (GObject *signaller, gpointer user_data)
+mime_type_data_changed_callback (GObject *signaller G_GNUC_UNUSED,
+				 gpointer user_data G_GNUC_UNUSED)
 {
 	/* Tell the world that icons might have changed. We could invent a narrower-scope
 	 * signal to mean only "thumbnails might have changed" if this ends up being slow
@@ -8563,8 +8564,8 @@ mime_type_data_changed_callback (GObject *signaller, gpointer user_data)
 }
 
 static void
-icon_theme_changed_callback (CtkIconTheme *icon_theme,
-			     gpointer user_data)
+icon_theme_changed_callback (CtkIconTheme *icon_theme G_GNUC_UNUSED,
+			     gpointer      user_data G_GNUC_UNUSED)
 {
 	/* Clear all pixmap caches as the icon => pixmap lookup changed */
 	baul_icon_info_clear_caches ();

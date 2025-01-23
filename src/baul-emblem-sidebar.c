@@ -120,12 +120,12 @@ G_DEFINE_TYPE_WITH_CODE (BaulEmblemSidebarProvider, baul_emblem_sidebar_provider
                                  sidebar_provider_iface_init));
 
 static void
-baul_emblem_sidebar_drag_data_get_cb (CtkWidget *widget,
-                                      CdkDragContext *context,
-                                      CtkSelectionData *data,
-                                      guint info,
-                                      guint time,
-                                      BaulEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_drag_data_get_cb (CtkWidget         *widget,
+				      CdkDragContext    *context G_GNUC_UNUSED,
+				      CtkSelectionData  *data,
+				      guint              info G_GNUC_UNUSED,
+				      guint              time G_GNUC_UNUSED,
+				      BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED)
 {
     char *keyword;
 
@@ -139,8 +139,8 @@ baul_emblem_sidebar_drag_data_get_cb (CtkWidget *widget,
 }
 
 static void
-baul_emblem_sidebar_enter_notify_cb (CtkWidget *widget,
-                                     BaulEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_enter_notify_cb (CtkWidget         *widget,
+				     BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED)
 {
     GdkPixbuf *pixbuf;
     EelLabeledImage *image;
@@ -152,8 +152,8 @@ baul_emblem_sidebar_enter_notify_cb (CtkWidget *widget,
 }
 
 static void
-baul_emblem_sidebar_leave_notify_cb (CtkWidget *widget,
-                                     BaulEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_leave_notify_cb (CtkWidget         *widget,
+				     BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED)
 {
     GdkPixbuf *pixbuf;
     EelLabeledImage *image;
@@ -205,15 +205,15 @@ send_emblems_changed (void)
 }
 
 static void
-emblems_changed_callback (GObject *signaller,
-                          BaulEmblemSidebar *emblem_sidebar)
+emblems_changed_callback (GObject           *signaller G_GNUC_UNUSED,
+			  BaulEmblemSidebar *emblem_sidebar)
 {
     baul_emblem_sidebar_refresh (emblem_sidebar);
 }
 
 static void
-baul_emblem_sidebar_delete_cb (CtkWidget *menu_item,
-                               BaulEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_delete_cb (CtkWidget         *menu_item G_GNUC_UNUSED,
+			       BaulEmblemSidebar *emblem_sidebar)
 {
     if (baul_emblem_remove_emblem (emblem_sidebar->details->popup_emblem_keyword))
     {
@@ -231,8 +231,9 @@ baul_emblem_sidebar_delete_cb (CtkWidget *menu_item,
 }
 
 static void
-rename_dialog_response_cb (CtkWidget *dialog, int response,
-                           BaulEmblemSidebar *emblem_sidebar)
+rename_dialog_response_cb (CtkWidget         *dialog,
+			   int                response,
+			   BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED)
 {
     CtkWidget *entry;
     char *keyword, *name;
@@ -276,9 +277,10 @@ rename_dialog_response_cb (CtkWidget *dialog, int response,
 }
 
 static CtkWidget *
-create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar,
-                             const char *keyword, const char *orig_name,
-                             GdkPixbuf *pixbuf)
+create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED,
+			     const char        *keyword,
+			     const char        *orig_name,
+			     GdkPixbuf         *pixbuf)
 {
     CtkWidget *dialog, *label, *image, *entry, *hbox;
 
@@ -340,8 +342,8 @@ create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar,
 }
 
 static void
-baul_emblem_sidebar_rename_cb (CtkWidget *menu_item,
-                               BaulEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_rename_cb (CtkWidget         *menu_item G_GNUC_UNUSED,
+			       BaulEmblemSidebar *emblem_sidebar)
 {
     CtkWidget *dialog;
 
@@ -486,7 +488,8 @@ emblem_name_entry_changed_cb (CtkWidget *entry, Emblem *emblem)
 
 
 static void
-destroy_emblem (Emblem *emblem, gpointer user_data)
+destroy_emblem (Emblem  *emblem,
+		gpointer user_data G_GNUC_UNUSED)
 {
     g_return_if_fail (emblem != NULL);
 
@@ -526,8 +529,8 @@ destroy_emblem_list (GSList *list)
 }
 
 static CtkWidget *
-create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
-                           GSList *emblems)
+create_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED,
+			   GSList            *emblems)
 {
     CtkWidget *dialog, *label, *table;
     CtkWidget *first_entry, *entry, *scroller;
@@ -651,8 +654,9 @@ baul_emblem_sidebar_refresh (BaulEmblemSidebar *emblem_sidebar)
 }
 
 static void
-add_emblems_dialog_response_cb (CtkWidget *dialog, int response,
-                                BaulEmblemSidebar *emblem_sidebar)
+add_emblems_dialog_response_cb (CtkWidget         *dialog,
+				int                response,
+				BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED)
 {
     Emblem *emblem;
     GSList *emblems;
@@ -737,14 +741,14 @@ show_add_emblems_dialog (BaulEmblemSidebar *emblem_sidebar,
 }
 
 static void
-baul_emblem_sidebar_drag_received_cb (CtkWidget *widget,
-                                      CdkDragContext *drag_context,
-                                      gint x,
-                                      gint y,
-                                      CtkSelectionData *data,
-                                      guint info,
-                                      guint time,
-                                      BaulEmblemSidebar *emblem_sidebar)
+baul_emblem_sidebar_drag_received_cb (CtkWidget         *widget G_GNUC_UNUSED,
+				      CdkDragContext    *drag_context G_GNUC_UNUSED,
+				      gint               x G_GNUC_UNUSED,
+				      gint               y G_GNUC_UNUSED,
+				      CtkSelectionData  *data,
+				      guint              info,
+				      guint              time G_GNUC_UNUSED,
+				      BaulEmblemSidebar *emblem_sidebar)
 {
     GSList *emblems;
     Emblem *emblem;
@@ -1086,32 +1090,32 @@ baul_emblem_sidebar_class_init (BaulEmblemSidebarClass *object_klass)
 }
 
 static const char *
-baul_emblem_sidebar_get_sidebar_id (BaulSidebar *sidebar)
+baul_emblem_sidebar_get_sidebar_id (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return BAUL_EMBLEM_SIDEBAR_ID;
 }
 
 static char *
-baul_emblem_sidebar_get_tab_label (BaulSidebar *sidebar)
+baul_emblem_sidebar_get_tab_label (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Emblems"));
 }
 
 static char *
-baul_emblem_sidebar_get_tab_tooltip (BaulSidebar *sidebar)
+baul_emblem_sidebar_get_tab_tooltip (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return g_strdup (_("Show Emblems"));
 }
 
 static GdkPixbuf *
-baul_emblem_sidebar_get_tab_icon (BaulSidebar *sidebar)
+baul_emblem_sidebar_get_tab_icon (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return NULL;
 }
 
 static void
-baul_emblem_sidebar_is_visible_changed (BaulSidebar *sidebar,
-                                        gboolean         is_visible)
+baul_emblem_sidebar_is_visible_changed (BaulSidebar *sidebar G_GNUC_UNUSED,
+					gboolean     is_visible G_GNUC_UNUSED)
 {
     /* Do nothing */
 }
@@ -1134,8 +1138,8 @@ baul_emblem_sidebar_set_parent_window (BaulEmblemSidebar *sidebar,
 }
 
 static BaulSidebar *
-baul_emblem_sidebar_create (BaulSidebarProvider *provider,
-                            BaulWindowInfo *window)
+baul_emblem_sidebar_create (BaulSidebarProvider *provider G_GNUC_UNUSED,
+			    BaulWindowInfo      *window)
 {
     BaulEmblemSidebar *sidebar;
 
@@ -1153,12 +1157,12 @@ sidebar_provider_iface_init (BaulSidebarProviderIface *iface)
 }
 
 static void
-baul_emblem_sidebar_provider_init (BaulEmblemSidebarProvider *sidebar)
+baul_emblem_sidebar_provider_init (BaulEmblemSidebarProvider *sidebar G_GNUC_UNUSED)
 {
 }
 
 static void
-baul_emblem_sidebar_provider_class_init (BaulEmblemSidebarProviderClass *class)
+baul_emblem_sidebar_provider_class_init (BaulEmblemSidebarProviderClass *class G_GNUC_UNUSED)
 {
 }
 

@@ -449,9 +449,9 @@ connect_dialog_request_additional_details (BaulConnectServerDialog *self,
 }
 
 static void
-display_location_async_cb (GObject *source,
+display_location_async_cb (GObject      *source,
 			   GAsyncResult *res,
-			   gpointer user_data)
+			   gpointer      user_data G_GNUC_UNUSED)
 {
 	BaulConnectServerDialog *dialog;
 	GError *error;
@@ -505,8 +505,8 @@ mount_enclosing_ready_cb (GObject *source,
 
 static void
 connect_dialog_present_uri_async (BaulConnectServerDialog *self,
-				  BaulApplication *application,
-				  GFile *location)
+				  BaulApplication         *application G_GNUC_UNUSED,
+				  GFile                   *location)
 {
 	GMountOperation *op;
 
@@ -692,8 +692,8 @@ connect_dialog_destroy (BaulConnectServerDialog *dialog)
 
 static void
 connect_dialog_response_cb (BaulConnectServerDialog *dialog,
-			    int response_id,
-			    gpointer data)
+			    int                      response_id,
+			    gpointer                 data G_GNUC_UNUSED)
 {
     GError *error;
 
@@ -826,9 +826,9 @@ sensitive_entry_changed_callback (CtkEditable *editable,
 }
 
 static void
-bind_visibility (BaulConnectServerDialog *dialog,
-		 CtkWidget *source,
-		 CtkWidget *dest)
+bind_visibility (BaulConnectServerDialog *dialog G_GNUC_UNUSED,
+		 CtkWidget               *source,
+		 CtkWidget               *dest)
 {
     g_object_bind_property (source,
     			"visible",
@@ -1186,8 +1186,8 @@ baul_connect_server_dialog_new (BaulWindow *window)
 }
 
 gboolean
-baul_connect_server_dialog_fill_details_finish (BaulConnectServerDialog *self,
-						    GAsyncResult *result)
+baul_connect_server_dialog_fill_details_finish (BaulConnectServerDialog *self G_GNUC_UNUSED,
+						GAsyncResult            *result)
 {
 	return g_simple_async_result_get_op_res_gboolean (G_SIMPLE_ASYNC_RESULT (result));
 }

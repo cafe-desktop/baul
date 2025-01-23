@@ -402,8 +402,8 @@ clear_sort_criterion (FMIconView *icon_view)
 }
 
 static void
-action_stretch_callback (CtkAction *action,
-                         gpointer callback_data)
+action_stretch_callback (CtkAction *action G_GNUC_UNUSED,
+			 gpointer   callback_data)
 {
     g_assert (FM_IS_ICON_VIEW (callback_data));
 
@@ -412,8 +412,8 @@ action_stretch_callback (CtkAction *action,
 }
 
 static void
-action_unstretch_callback (CtkAction *action,
-                           gpointer callback_data)
+action_unstretch_callback (CtkAction *action G_GNUC_UNUSED,
+			   gpointer   callback_data)
 {
     g_assert (FM_IS_ICON_VIEW (callback_data));
 
@@ -448,7 +448,8 @@ fm_icon_view_real_clean_up (FMIconView *icon_view)
 }
 
 static void
-action_clean_up_callback (CtkAction *action, gpointer callback_data)
+action_clean_up_callback (CtkAction *action G_GNUC_UNUSED,
+			  gpointer   callback_data)
 {
     fm_icon_view_clean_up (FM_ICON_VIEW (callback_data));
 }
@@ -490,9 +491,9 @@ fm_icon_view_using_tighter_layout (FMIconView *icon_view)
 }
 
 static void
-action_sort_radio_callback (CtkAction *action,
-                            CtkRadioAction *current,
-                            FMIconView *view)
+action_sort_radio_callback (CtkAction      *action G_GNUC_UNUSED,
+			    CtkRadioAction *current,
+			    FMIconView     *view)
 {
     BaulFileSortType sort_type;
 
@@ -522,7 +523,8 @@ list_covers (BaulIconData *data, gpointer callback_data)
 }
 
 static void
-unref_cover (BaulIconData *data, gpointer callback_data)
+unref_cover (BaulIconData *data,
+	     gpointer      callback_data G_GNUC_UNUSED)
 {
     baul_file_unref (BAUL_FILE (data));
 }
@@ -850,8 +852,8 @@ get_default_sort_order (BaulFile *file, gboolean *reversed)
 }
 
 static char *
-fm_icon_view_real_get_directory_sort_by (FMIconView *icon_view,
-        BaulFile *file)
+fm_icon_view_real_get_directory_sort_by (FMIconView *icon_view G_GNUC_UNUSED,
+					 BaulFile   *file)
 {
     const SortCriterion *default_sort_criterion;
     default_sort_criterion = get_sort_criterion_by_sort_type (get_default_sort_order (file, NULL));
@@ -877,9 +879,9 @@ fm_icon_view_set_directory_sort_by (FMIconView *icon_view,
 }
 
 static void
-fm_icon_view_real_set_directory_sort_by (FMIconView *icon_view,
-        BaulFile *file,
-        const char *sort_by)
+fm_icon_view_real_set_directory_sort_by (FMIconView *icon_view G_GNUC_UNUSED,
+					 BaulFile   *file,
+					 const char *sort_by)
 {
     const SortCriterion *default_sort_criterion;
     default_sort_criterion = get_sort_criterion_by_sort_type (get_default_sort_order (file, NULL));
@@ -906,8 +908,8 @@ fm_icon_view_get_directory_sort_reversed (FMIconView *icon_view,
 }
 
 static gboolean
-fm_icon_view_real_get_directory_sort_reversed (FMIconView *icon_view,
-        BaulFile *file)
+fm_icon_view_real_get_directory_sort_reversed (FMIconView *icon_view G_GNUC_UNUSED,
+					       BaulFile   *file)
 {
     gboolean reversed;
 
@@ -934,9 +936,9 @@ fm_icon_view_set_directory_sort_reversed (FMIconView *icon_view,
 }
 
 static void
-fm_icon_view_real_set_directory_sort_reversed (FMIconView *icon_view,
-        BaulFile *file,
-        gboolean sort_reversed)
+fm_icon_view_real_set_directory_sort_reversed (FMIconView *icon_view G_GNUC_UNUSED,
+					       BaulFile   *file,
+					       gboolean    sort_reversed)
 {
     gboolean reversed;
 
@@ -1004,8 +1006,8 @@ fm_icon_view_get_directory_auto_layout (FMIconView *icon_view,
 }
 
 static gboolean
-fm_icon_view_real_get_directory_auto_layout (FMIconView *icon_view,
-        BaulFile *file)
+fm_icon_view_real_get_directory_auto_layout (FMIconView *icon_view G_GNUC_UNUSED,
+					     BaulFile   *file)
 {
 
 
@@ -1364,9 +1366,9 @@ fm_icon_view_begin_loading (FMDirectoryView *view)
 }
 
 static void
-icon_view_notify_clipboard_info (BaulClipboardMonitor *monitor,
-                                 BaulClipboardInfo *info,
-                                 FMIconView *icon_view)
+icon_view_notify_clipboard_info (BaulClipboardMonitor *monitor G_GNUC_UNUSED,
+				 BaulClipboardInfo    *info,
+				 FMIconView           *icon_view)
 {
     GList *icon_data;
 
@@ -1545,8 +1547,8 @@ fm_icon_view_get_selection (FMDirectoryView *view)
 }
 
 static void
-count_item (BaulIconData *icon_data,
-            gpointer callback_data)
+count_item (BaulIconData *icon_data G_GNUC_UNUSED,
+	    gpointer      callback_data)
 {
     guint *count;
 
@@ -2178,9 +2180,9 @@ get_preview_argv (char *uri)
 }
 
 static void
-audio_child_died (GPid     pid,
-                  gint     status,
-                  gpointer data)
+audio_child_died (GPid     pid G_GNUC_UNUSED,
+		  gint     status G_GNUC_UNUSED,
+		  gpointer data)
 {
     FMIconView *icon_view;
 
@@ -2370,10 +2372,10 @@ should_preview_sound (BaulFile *file)
 }
 
 static int
-icon_container_preview_callback (BaulIconContainer *container,
-                                 BaulFile *file,
-                                 gboolean start_flag,
-                                 FMIconView *icon_view)
+icon_container_preview_callback (BaulIconContainer *container G_GNUC_UNUSED,
+				 BaulFile          *file,
+				 gboolean           start_flag,
+				 FMIconView        *icon_view)
 {
     int result;
 
@@ -2417,9 +2419,9 @@ icon_container_preview_callback (BaulIconContainer *container,
 }
 
 static void
-renaming_icon_callback (BaulIconContainer *container,
-                        CtkWidget *widget,
-                        gpointer callback_data)
+renaming_icon_callback (BaulIconContainer *container G_GNUC_UNUSED,
+			CtkWidget         *widget,
+			gpointer           callback_data)
 {
     FMDirectoryView *directory_view;
 
@@ -2562,8 +2564,8 @@ icon_container_context_click_selection_callback (BaulIconContainer *container,
 
 static void
 icon_container_context_click_background_callback (BaulIconContainer *container,
-        CdkEventButton *event,
-        FMIconView *icon_view)
+						  CdkEventButton    *event G_GNUC_UNUSED,
+						  FMIconView        *icon_view)
 {
     g_assert (BAUL_IS_ICON_CONTAINER (container));
     g_assert (FM_IS_ICON_VIEW (icon_view));
@@ -2644,10 +2646,10 @@ icon_position_changed_callback (BaulIconContainer *container,
 
 /* Attempt to change the filename to the new text.  Notify user if operation fails. */
 static void
-fm_icon_view_icon_text_changed_callback (BaulIconContainer *container,
-        BaulFile *file,
-        char *new_name,
-        FMIconView *icon_view)
+fm_icon_view_icon_text_changed_callback (BaulIconContainer *container G_GNUC_UNUSED,
+					 BaulFile          *file,
+					 char              *new_name,
+					 FMIconView        *icon_view G_GNUC_UNUSED)
 {
     g_assert (BAUL_IS_FILE (file));
 
@@ -2862,29 +2864,30 @@ fm_icon_view_sort_directories_first_changed (FMDirectoryView *directory_view)
 }
 
 static gboolean
-icon_view_can_accept_item (BaulIconContainer *container,
-                           BaulFile *target_item,
-                           const char *item_uri,
-                           FMDirectoryView *view)
+icon_view_can_accept_item (BaulIconContainer *container G_GNUC_UNUSED,
+			   BaulFile          *target_item,
+			   const char        *item_uri,
+			   FMDirectoryView   *view)
 {
     return fm_directory_view_can_accept_item (target_item, item_uri, view);
 }
 
 static char *
-icon_view_get_container_uri (BaulIconContainer *container,
-                             FMDirectoryView *view)
+icon_view_get_container_uri (BaulIconContainer *container G_GNUC_UNUSED,
+			     FMDirectoryView   *view)
 {
     return fm_directory_view_get_uri (view);
 }
 
 static void
-icon_view_move_copy_items (BaulIconContainer *container,
-                           const GList *item_uris,
-                           GArray *relative_item_points,
-                           const char *target_dir,
-                           int copy_action,
-                           int x, int y,
-                           FMDirectoryView *view)
+icon_view_move_copy_items (BaulIconContainer *container G_GNUC_UNUSED,
+			   const GList       *item_uris,
+			   GArray            *relative_item_points,
+			   const char        *target_dir,
+			   int                copy_action,
+			   int                x,
+			   int                y,
+			   FMDirectoryView   *view)
 {
     baul_clipboard_clear_if_colliding_uris (CTK_WIDGET (view),
                                             item_uris,
@@ -2909,10 +2912,10 @@ fm_icon_view_update_click_mode (FMIconView *icon_view)
 }
 
 static gboolean
-get_stored_layout_timestamp (BaulIconContainer *container,
-                             BaulIconData *icon_data,
-                             time_t *timestamp,
-                             FMIconView *view)
+get_stored_layout_timestamp (BaulIconContainer *container G_GNUC_UNUSED,
+			     BaulIconData      *icon_data,
+			     time_t            *timestamp,
+			     FMIconView        *view)
 {
     if (icon_data == NULL)
     {
@@ -2941,10 +2944,10 @@ get_stored_layout_timestamp (BaulIconContainer *container,
 }
 
 static gboolean
-store_layout_timestamp (BaulIconContainer *container,
-                        BaulIconData *icon_data,
-                        const time_t *timestamp,
-                        FMIconView *view)
+store_layout_timestamp (BaulIconContainer *container G_GNUC_UNUSED,
+			BaulIconData      *icon_data,
+			const time_t      *timestamp,
+			FMIconView        *view)
 {
     if (icon_data == NULL)
     {
@@ -2975,7 +2978,9 @@ store_layout_timestamp (BaulIconContainer *container,
 }
 
 static gboolean
-focus_in_event_callback (CtkWidget *widget, CdkEventFocus *event, gpointer user_data)
+focus_in_event_callback (CtkWidget     *widget G_GNUC_UNUSED,
+			 CdkEventFocus *event G_GNUC_UNUSED,
+			 gpointer       user_data)
 {
     BaulWindowSlotInfo *slot_info;
     FMIconView *icon_view = FM_ICON_VIEW (user_data);
@@ -3059,36 +3064,54 @@ create_icon_container (FMIconView *icon_view)
 
 /* Handles an URL received from Mozilla */
 static void
-icon_view_handle_netscape_url (BaulIconContainer *container, const char *encoded_url,
-                               const char *target_uri,
-                               CdkDragAction action, int x, int y, FMIconView *view)
+icon_view_handle_netscape_url (BaulIconContainer *container G_GNUC_UNUSED,
+			       const char        *encoded_url,
+			       const char        *target_uri,
+			       CdkDragAction      action,
+			       int                x,
+			       int                y,
+			       FMIconView        *view)
 {
     fm_directory_view_handle_netscape_url_drop (FM_DIRECTORY_VIEW (view),
             encoded_url, target_uri, action, x, y);
 }
 
 static void
-icon_view_handle_uri_list (BaulIconContainer *container, const char *item_uris,
-                           const char *target_uri,
-                           CdkDragAction action, int x, int y, FMIconView *view)
+icon_view_handle_uri_list (BaulIconContainer *container G_GNUC_UNUSED,
+			   const char        *item_uris,
+			   const char        *target_uri,
+			   CdkDragAction      action,
+			   int                x,
+			   int                y,
+			   FMIconView        *view)
 {
     fm_directory_view_handle_uri_list_drop (FM_DIRECTORY_VIEW (view),
                                             item_uris, target_uri, action, x, y);
 }
 
 static void
-icon_view_handle_text (BaulIconContainer *container, const char *text,
-                       const char *target_uri,
-                       CdkDragAction action, int x, int y, FMIconView *view)
+icon_view_handle_text (BaulIconContainer *container G_GNUC_UNUSED,
+		       const char        *text,
+		       const char        *target_uri,
+		       CdkDragAction      action,
+		       int                x,
+		       int                y,
+		       FMIconView        *view)
 {
     fm_directory_view_handle_text_drop (FM_DIRECTORY_VIEW (view),
                                         text, target_uri, action, x, y);
 }
 
 static void
-icon_view_handle_raw (BaulIconContainer *container, const char *raw_data,
-                      int length, const char *target_uri, const char *direct_save_uri,
-                      CdkDragAction action, int x, int y, FMIconView *view)
+icon_view_handle_raw (BaulIconContainer *container G_GNUC_UNUSED,
+		      const char        *raw_data,
+		      int                length,
+		      const char        *target_uri,
+		      const char        *direct_save_uri,
+		      CdkDragAction      action,
+		      int                x,
+		      int                y,
+		      FMIconView        *view)
 {
     fm_directory_view_handle_raw_drop (FM_DIRECTORY_VIEW (view),
                                        raw_data, length, target_uri, direct_save_uri, action, x, y);

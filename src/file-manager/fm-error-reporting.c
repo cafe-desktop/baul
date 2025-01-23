@@ -274,8 +274,10 @@ fm_rename_data_free (FMRenameData *data)
 }
 
 static void
-rename_callback (BaulFile *file, GFile *result_location,
-                 GError *error, gpointer callback_data)
+rename_callback (BaulFile *file,
+		 GFile    *result_location G_GNUC_UNUSED,
+		 GError   *error,
+		 gpointer  callback_data)
 {
     FMRenameData *data;
 

@@ -302,7 +302,7 @@ baul_file_management_properties_dialog_response_cb (CtkDialog *parent,
 
 static void
 columns_changed_callback (BaulColumnChooser *chooser,
-                          gpointer callback_data)
+			  gpointer           callback_data G_GNUC_UNUSED)
 {
     char **visible_columns;
     char **column_order;
@@ -373,8 +373,8 @@ create_icon_caption_combo_box_items (CtkComboBoxText *combo_box,
 }
 
 static void
-icon_captions_changed_callback (CtkComboBox *combo_box,
-                                gpointer user_data)
+icon_captions_changed_callback (CtkComboBox *combo_box G_GNUC_UNUSED,
+				gpointer     user_data)
 {
     GPtrArray *captions;
     CtkBuilder *builder;
@@ -557,7 +557,7 @@ set_columns_from_settings (BaulColumnChooser *chooser)
 
 static void
 use_default_callback (BaulColumnChooser *chooser,
-                      gpointer user_data)
+		      gpointer           user_data G_GNUC_UNUSED)
 {
     g_settings_reset (baul_list_view_preferences,
                       BAUL_PREFERENCES_LIST_VIEW_DEFAULT_VISIBLE_COLUMNS);
@@ -631,7 +631,8 @@ static gulong extension_about_id = 0;
 static gulong extension_configure_id = 0;
 
 static void
-extension_about_clicked (CtkButton *button, Extension *ext)
+extension_about_clicked (CtkButton *button G_GNUC_UNUSED,
+			 Extension *ext)
 {
     CtkAboutDialog *extension_about_dialog;
 
@@ -663,7 +664,8 @@ static int extension_configure_check (Extension *ext)
 }
 
 static void
-extension_configure_clicked (CtkButton *button, Extension *ext)
+extension_configure_clicked (CtkButton *button G_GNUC_UNUSED,
+			     Extension *ext)
 {
     if (extension_configure_check(ext)) {
         baul_configurable_run_config(BAUL_CONFIGURABLE(ext->module));
@@ -995,8 +997,8 @@ enum_get_mapping (GValue             *value,
 
 static GVariant *
 enum_set_mapping (const GValue       *value,
-                  const GVariantType *expected_type,
-                  gpointer            user_data)
+		  const GVariantType *expected_type G_GNUC_UNUSED,
+		  gpointer            user_data)
 {
     const char **enum_values = user_data;
 
@@ -1045,8 +1047,8 @@ uint_enum_get_mapping (GValue             *value,
 
 static GVariant *
 uint_enum_set_mapping (const GValue       *value,
-               const GVariantType *expected_type,
-               gpointer            user_data)
+		       const GVariantType *expected_type G_GNUC_UNUSED,
+		       gpointer            user_data)
 {
     UIntEnumBinding *binding = user_data;
 
@@ -1076,9 +1078,9 @@ bind_builder_uint_enum (CtkBuilder *builder,
 }
 
 static GVariant *
-radio_mapping_set (const GValue *gvalue,
-                   const GVariantType *expected_type,
-                   gpointer user_data)
+radio_mapping_set (const GValue       *gvalue,
+		   const GVariantType *expected_type G_GNUC_UNUSED,
+		   gpointer            user_data)
 {
     const gchar *widget_value = user_data;
     GVariant *retval = NULL;
@@ -1289,9 +1291,9 @@ baul_file_management_properties_dialog_setup (CtkBuilder *builder, CtkWindow *wi
 }
 
 static gboolean
-delete_event_callback (CtkWidget       *widget,
-                       CdkEventAny     *event,
-                       gpointer         data)
+delete_event_callback (CtkWidget   *widget,
+		       CdkEventAny *event G_GNUC_UNUSED,
+		       gpointer     data)
 {
     void (*response_callback) (CtkDialog *dialog,
                                gint response_id);

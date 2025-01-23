@@ -41,7 +41,7 @@ eel_background_box_draw (CtkWidget *widget,
 }
 
 static void
-eel_background_box_init (EelBackgroundBox *box)
+eel_background_box_init (EelBackgroundBox *box G_GNUC_UNUSED)
 {
 }
 

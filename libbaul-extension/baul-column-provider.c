@@ -38,7 +38,7 @@
  */
 
 static void
-baul_column_provider_base_init (gpointer g_class)
+baul_column_provider_base_init (gpointer g_class G_GNUC_UNUSED)
 {
 }
 

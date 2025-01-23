@@ -132,9 +132,9 @@ baul_trash_bar_finalize (GObject *obj)
 }
 
 static void
-baul_trash_bar_trash_state_changed (BaulTrashMonitor *trash_monitor,
-                                    gboolean              state,
-                                    gpointer              data)
+baul_trash_bar_trash_state_changed (BaulTrashMonitor *trash_monitor G_GNUC_UNUSED,
+				    gboolean          state G_GNUC_UNUSED,
+				    gpointer          data)
 {
     BaulTrashBar *bar;
 
@@ -166,7 +166,8 @@ baul_trash_bar_class_init (BaulTrashBarClass *klass)
 }
 
 static void
-empty_trash_callback (CtkWidget *button, gpointer data)
+empty_trash_callback (CtkWidget *button,
+		      gpointer   data G_GNUC_UNUSED)
 {
     CtkWidget *window;
 

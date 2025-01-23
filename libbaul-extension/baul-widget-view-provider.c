@@ -35,7 +35,7 @@
  */
 
 static void
-baul_widget_view_provider_base_init (gpointer g_class)
+baul_widget_view_provider_base_init (gpointer g_class G_GNUC_UNUSED)
 {
 }
 

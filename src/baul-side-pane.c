@@ -94,10 +94,10 @@ side_panel_free (SidePanel *panel)
 }
 
 static void
-switch_page_callback (CtkWidget *notebook,
-                      CtkWidget *page,
-                      guint page_num,
-                      gpointer user_data)
+switch_page_callback (CtkWidget *notebook G_GNUC_UNUSED,
+		      CtkWidget *page G_GNUC_UNUSED,
+		      guint      page_num,
+		      gpointer   user_data)
 {
     BaulSidePane *side_pane;
     SidePanel *panel;
@@ -237,8 +237,8 @@ select_button_key_press_callback (CtkWidget *widget,
 }
 
 static void
-close_clicked_callback (CtkWidget *widget,
-                        gpointer user_data)
+close_clicked_callback (CtkWidget *widget G_GNUC_UNUSED,
+			gpointer   user_data)
 {
     BaulSidePane *side_pane;
 
@@ -248,8 +248,8 @@ close_clicked_callback (CtkWidget *widget,
 }
 
 static void
-menu_deactivate_callback (CtkWidget *widget,
-                          gpointer user_data)
+menu_deactivate_callback (CtkWidget *widget G_GNUC_UNUSED,
+			  gpointer   user_data)
 {
     CtkWidget *menu_button;
 
@@ -260,7 +260,7 @@ menu_deactivate_callback (CtkWidget *widget,
 
 static void
 menu_detach_callback (CtkWidget *widget,
-                      CtkMenu *menu)
+		      CtkMenu   *menu G_GNUC_UNUSED)
 {
     BaulSidePane *side_pane;
 

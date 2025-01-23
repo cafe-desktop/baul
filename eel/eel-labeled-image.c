@@ -148,9 +148,9 @@ eel_labeled_image_destroy (CtkWidget *object)
 /* GObjectClass methods */
 static void
 eel_labeled_image_set_property (GObject      *object,
-                                guint         property_id,
-                                const GValue *value,
-                                GParamSpec   *pspec)
+				guint         property_id,
+				const GValue *value,
+				GParamSpec   *pspec G_GNUC_UNUSED)
 {
     EelLabeledImage *labeled_image;
 
@@ -220,9 +220,9 @@ eel_labeled_image_set_property (GObject      *object,
 
 static void
 eel_labeled_image_get_property (GObject    *object,
-                                guint       property_id,
-                                GValue     *value,
-                                GParamSpec *pspec)
+				guint       property_id,
+				GValue     *value,
+				GParamSpec *pspec G_GNUC_UNUSED)
 {
     EelLabeledImage *labeled_image;
 
@@ -1981,7 +1981,7 @@ eel_labeled_image_radio_button_new_from_file_name (const char *text,
  */
 static void
 button_leave_callback (CtkWidget *widget,
-                       gpointer callback_data)
+		       gpointer   callback_data G_GNUC_UNUSED)
 {
     g_assert (CTK_IS_WIDGET (widget));
 
@@ -2006,9 +2006,9 @@ button_leave_callback (CtkWidget *widget,
 }
 
 static gint
-button_focus_out_event_callback (CtkWidget *widget,
-                                 CdkEventFocus *event,
-                                 gpointer callback_data)
+button_focus_out_event_callback (CtkWidget     *widget,
+				 CdkEventFocus *event G_GNUC_UNUSED,
+				 gpointer       callback_data)
 {
     g_assert (CTK_IS_WIDGET (widget));
 
@@ -2283,12 +2283,12 @@ eel_labeled_image_accessible_class_init (EelLabeledImageAccessibleClass *klass)
 }
 
 static void
-eel_labeled_image_accessible_init (EelLabeledImageAccessible *accessible)
+eel_labeled_image_accessible_init (EelLabeledImageAccessible *accessible G_GNUC_UNUSED)
 {
 }
 
 static void
-eel_labeled_image_button_class_init (CtkWidgetClass *klass)
+eel_labeled_image_button_class_init (CtkWidgetClass *klass G_GNUC_UNUSED)
 {
 }
 

@@ -275,7 +275,8 @@ baul_x_content_bar_class_init (BaulXContentBarClass *klass)
 }
 
 static void
-button_clicked_callback (CtkWidget *button, BaulXContentBar *bar)
+button_clicked_callback (CtkWidget       *button G_GNUC_UNUSED,
+			 BaulXContentBar *bar)
 {
     GAppInfo *default_app;
 
