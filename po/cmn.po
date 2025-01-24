@@ -8,13 +8,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: baul 1.23.2\n"
+"Project-Id-Version: baul 2.0.0\n"
 "Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
-"POT-Creation-Date: 2022-08-29 14:25+0200\n"
+"POT-Creation-Date: 2025-01-24 09:42+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: 趙惟倫 <bluebat@member.fsf.org>, 2019\n"
-"Language-Team: Chinese (Mandarin) (https://www.transifex.com/cafe/"
-"teams/13566/cmn/)\n"
+"Language-Team: Chinese (Mandarin) (https://www.transifex.com/cafe/teams/"
+"13566/cmn/)\n"
 "Language: cmn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -285,15 +285,15 @@ msgstr "圖章(_E)"
 msgid "Drag an emblem to an object to add it to the object"
 msgstr "將圖章拖曳到物件上可以將它加入物件裡"
 
-#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:995
-#: src/baul-property-browser.c:1959
+#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:999
+#: src/baul-property-browser.c:1967
 msgid "Erase"
 msgstr "移除圖章"
 
 #: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:3
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:403 src/baul-window.c:167
-#: src/baul-window-menus.c:562
+#: src/baul-window-menus.c:564
 msgid "Baul"
 msgstr "Baul"
 
@@ -337,7 +337,7 @@ msgstr ""
 msgid "Computer"
 msgstr "電腦"
 
-#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:925
+#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:927
 msgid ""
 "Browse all local and remote disks and folders accessible from this computer"
 msgstr "從本電腦瀏覽所有本機及遠端磁碟及資料夾"
@@ -368,12 +368,12 @@ msgstr ""
 msgid "Open Folder"
 msgstr "開啟資料夾"
 
-#: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1421
+#: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1427
 msgid "Home Folder"
 msgstr "家目錄"
 
 #: data/baul-home.desktop.in.in:4 src/baul-places-sidebar.c:527
-#: src/baul-window-menus.c:920
+#: src/baul-window-menus.c:922
 msgid "Open your personal folder"
 msgstr "開啟您的個人資料夾"
 
@@ -390,7 +390,7 @@ msgstr "已儲存搜尋"
 msgid "Network"
 msgstr "網路"
 
-#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:930
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:932
 msgid "Browse bookmarked and local network locations"
 msgstr "瀏覽已記錄及本地網路的位置"
 
@@ -399,11 +399,11 @@ msgstr "瀏覽已記錄及本地網路的位置"
 msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
 
-#: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
+#: eel/eel-canvas.c:1313 eel/eel-canvas.c:1314
 msgid "X"
 msgstr "X"
 
-#: eel/eel-canvas.c:1317 eel/eel-canvas.c:1318
+#: eel/eel-canvas.c:1320 eel/eel-canvas.c:1321
 msgid "Y"
 msgstr "Y"
 
@@ -454,21 +454,21 @@ msgid ""
 msgstr "從游標位置至選擇區域末端之間的字元數目。"
 
 #: eel/eel-editable-label.c:3092 libbaul-private/baul-clipboard.c:456
-#: src/file-manager/fm-directory-view.c:7409
-#: src/file-manager/fm-directory-view.c:7576
-#: src/file-manager/fm-tree-view.c:1311
+#: src/file-manager/fm-directory-view.c:7422
+#: src/file-manager/fm-directory-view.c:7589
+#: src/file-manager/fm-tree-view.c:1317
 msgid "Cu_t"
 msgstr "剪下(_T)"
 
 #: eel/eel-editable-label.c:3094 libbaul-private/baul-clipboard.c:461
-#: src/file-manager/fm-directory-view.c:7413
-#: src/file-manager/fm-directory-view.c:7580
-#: src/file-manager/fm-tree-view.c:1320
+#: src/file-manager/fm-directory-view.c:7426
+#: src/file-manager/fm-directory-view.c:7593
+#: src/file-manager/fm-tree-view.c:1326
 msgid "_Copy"
 msgstr "拷貝(_C)"
 
 #: eel/eel-editable-label.c:3096 libbaul-private/baul-clipboard.c:466
-#: src/file-manager/fm-directory-view.c:7417
+#: src/file-manager/fm-directory-view.c:7430
 msgid "_Paste"
 msgstr "貼上(_P)"
 
@@ -480,50 +480,50 @@ msgstr "全部選取"
 msgid "Show more _details"
 msgstr "顯示更多訊息(_D)"
 
-#: eel/eel-stock-dialogs.c:238 eel/eel-stock-dialogs.c:294
-#: eel/eel-stock-dialogs.c:450 eel/eel-stock-dialogs.c:651
-#: libbaul-private/baul-autorun.c:1154
+#: eel/eel-stock-dialogs.c:239 eel/eel-stock-dialogs.c:295
+#: eel/eel-stock-dialogs.c:451 eel/eel-stock-dialogs.c:652
+#: libbaul-private/baul-autorun.c:1157
 #: libbaul-private/baul-file-conflict-dialog.c:653
 #: libbaul-private/baul-file-operations.c:183
 #: libbaul-private/baul-mime-actions.c:826
 #: libbaul-private/baul-mime-actions.c:1743
-#: libbaul-private/baul-open-with-dialog.c:972
-#: src/baul-connect-server-dialog.c:1119 src/baul-emblem-sidebar.c:293
-#: src/baul-emblem-sidebar.c:547 src/baul-location-dialog.c:197
-#: src/baul-property-browser.c:1117 src/baul-property-browser.c:1197
+#: libbaul-private/baul-open-with-dialog.c:970
+#: src/baul-connect-server-dialog.c:1119 src/baul-emblem-sidebar.c:295
+#: src/baul-emblem-sidebar.c:550 src/baul-location-dialog.c:199
+#: src/baul-property-browser.c:1118 src/baul-property-browser.c:1198
 #: src/file-manager/fm-directory-view.c:1215
 #: src/file-manager/fm-directory-view.c:1366
-#: src/file-manager/fm-directory-view.c:7057
-#: src/file-manager/fm-directory-view.c:10394
+#: src/file-manager/fm-directory-view.c:7070
+#: src/file-manager/fm-directory-view.c:10409
 msgid "_Cancel"
 msgstr ""
 
-#: eel/eel-stock-dialogs.c:240 libbaul-private/baul-open-with-dialog.c:988
-#: src/baul-location-dialog.c:202 src/baul-places-sidebar.c:2697
-#: src/file-manager/fm-directory-view.c:7373
-#: src/file-manager/fm-directory-view.c:8899
-#: src/file-manager/fm-tree-view.c:1271
+#: eel/eel-stock-dialogs.c:241 libbaul-private/baul-open-with-dialog.c:986
+#: src/baul-location-dialog.c:204 src/baul-places-sidebar.c:2697
+#: src/file-manager/fm-directory-view.c:7386
+#: src/file-manager/fm-directory-view.c:8913
+#: src/file-manager/fm-tree-view.c:1277
 msgid "_Open"
 msgstr "開啟(_O)"
 
-#: eel/eel-stock-dialogs.c:242
+#: eel/eel-stock-dialogs.c:243
 msgid "_Revert"
 msgstr "還原(_R)"
 
-#: eel/eel-stock-dialogs.c:290
+#: eel/eel-stock-dialogs.c:291
 msgid "You can stop this operation by clicking cancel."
 msgstr "您可以按下取消來停止這次操作。"
 
-#: eel/eel-stock-dialogs.c:296 eel/eel-stock-dialogs.c:452
-#: eel/eel-stock-dialogs.c:656 libbaul-private/baul-autorun.c:1159
-#: libbaul-private/baul-mime-actions.c:1386 src/baul-emblem-sidebar.c:298
-#: src/baul-emblem-sidebar.c:552 src/baul-property-browser.c:1122
-#: src/baul-property-browser.c:1202 src/baul-query-editor.c:776
+#: eel/eel-stock-dialogs.c:297 eel/eel-stock-dialogs.c:453
+#: eel/eel-stock-dialogs.c:657 libbaul-private/baul-autorun.c:1162
+#: libbaul-private/baul-mime-actions.c:1386 src/baul-emblem-sidebar.c:300
+#: src/baul-emblem-sidebar.c:555 src/baul-property-browser.c:1123
+#: src/baul-property-browser.c:1203 src/baul-query-editor.c:780
 #: src/file-manager/fm-directory-view.c:1220
 msgid "_OK"
 msgstr ""
 
-#: eel/eel-stock-dialogs.c:658
+#: eel/eel-stock-dialogs.c:659
 msgid "_Clear"
 msgstr ""
 
@@ -552,73 +552,73 @@ msgstr "開啟 %s"
 msgid "Open with other Application..."
 msgstr "以其他程式開啟…"
 
-#: libbaul-private/baul-autorun.c:1048
+#: libbaul-private/baul-autorun.c:1051
 msgid "You have just inserted an Audio CD."
 msgstr "您剛剛放入了音樂 CD。"
 
-#: libbaul-private/baul-autorun.c:1052
+#: libbaul-private/baul-autorun.c:1055
 msgid "You have just inserted an Audio DVD."
 msgstr "您剛剛放入了音樂 DVD。"
 
-#: libbaul-private/baul-autorun.c:1056
+#: libbaul-private/baul-autorun.c:1059
 msgid "You have just inserted a Video DVD."
 msgstr "您剛剛放入了影片 DVD。"
 
-#: libbaul-private/baul-autorun.c:1060
+#: libbaul-private/baul-autorun.c:1063
 msgid "You have just inserted a Video CD."
 msgstr "您剛剛放入了影片 CD。"
 
-#: libbaul-private/baul-autorun.c:1064
+#: libbaul-private/baul-autorun.c:1067
 msgid "You have just inserted a Super Video CD."
 msgstr "您剛剛放入了 SVCD。"
 
-#: libbaul-private/baul-autorun.c:1068
+#: libbaul-private/baul-autorun.c:1071
 msgid "You have just inserted a blank CD."
 msgstr "您剛剛放入了空白 CD。"
 
-#: libbaul-private/baul-autorun.c:1072
+#: libbaul-private/baul-autorun.c:1075
 msgid "You have just inserted a blank DVD."
 msgstr "您剛剛放入了空白 DVD。"
 
-#: libbaul-private/baul-autorun.c:1076
+#: libbaul-private/baul-autorun.c:1079
 msgid "You have just inserted a blank Blu-Ray disc."
 msgstr "您剛剛放入了空白藍光碟片。"
 
-#: libbaul-private/baul-autorun.c:1080
+#: libbaul-private/baul-autorun.c:1083
 msgid "You have just inserted a blank HD DVD."
 msgstr "您剛剛放入了空白 HD DVD。"
 
-#: libbaul-private/baul-autorun.c:1084
+#: libbaul-private/baul-autorun.c:1087
 msgid "You have just inserted a Photo CD."
 msgstr "您剛剛放入了相片 CD。"
 
-#: libbaul-private/baul-autorun.c:1088
+#: libbaul-private/baul-autorun.c:1091
 msgid "You have just inserted a Picture CD."
 msgstr "您剛剛放入了照片 CD。"
 
-#: libbaul-private/baul-autorun.c:1092
+#: libbaul-private/baul-autorun.c:1095
 msgid "You have just inserted a medium with digital photos."
 msgstr "您剛剛放入了內含數位相片的媒體。"
 
-#: libbaul-private/baul-autorun.c:1096
+#: libbaul-private/baul-autorun.c:1099
 msgid "You have just inserted a digital audio player."
 msgstr "您剛剛連接了數位音樂播放機。"
 
-#: libbaul-private/baul-autorun.c:1100
+#: libbaul-private/baul-autorun.c:1103
 msgid ""
 "You have just inserted a medium with software intended to be automatically "
 "started."
 msgstr "您剛剛放入了內含自動執行程式的媒體。"
 
-#: libbaul-private/baul-autorun.c:1105
+#: libbaul-private/baul-autorun.c:1108
 msgid "You have just inserted a medium."
 msgstr "您剛剛放入了媒體。"
 
-#: libbaul-private/baul-autorun.c:1107
+#: libbaul-private/baul-autorun.c:1110
 msgid "Choose what application to launch."
 msgstr "選擇要執行的應用程式。"
 
-#: libbaul-private/baul-autorun.c:1117
+#: libbaul-private/baul-autorun.c:1120
 #, c-format
 msgid ""
 "Select how to open \"%s\" and whether to perform this action in the future "
@@ -626,23 +626,23 @@ msgid ""
 msgstr ""
 "選擇要如何開啟「%s」以及未來其他類型為「%s」的類型是否同樣執行這個動作。"
 
-#: libbaul-private/baul-autorun.c:1145
+#: libbaul-private/baul-autorun.c:1148
 msgid "_Always perform this action"
 msgstr "永遠執行這個動作(_A)"
 
-#: libbaul-private/baul-autorun.c:1168 src/baul-places-sidebar.c:2754
-#: src/file-manager/fm-directory-view.c:7500
-#: src/file-manager/fm-directory-view.c:7528
-#: src/file-manager/fm-directory-view.c:7609
-#: src/file-manager/fm-tree-view.c:1369
+#: libbaul-private/baul-autorun.c:1171 src/baul-places-sidebar.c:2754
+#: src/file-manager/fm-directory-view.c:7513
+#: src/file-manager/fm-directory-view.c:7541
+#: src/file-manager/fm-directory-view.c:7622
+#: src/file-manager/fm-tree-view.c:1375
 msgid "_Eject"
 msgstr "退出(_E)"
 
-#: libbaul-private/baul-autorun.c:1183 src/baul-places-sidebar.c:2747
-#: src/file-manager/fm-directory-view.c:7496
-#: src/file-manager/fm-directory-view.c:7524
-#: src/file-manager/fm-directory-view.c:7605
-#: src/file-manager/fm-tree-view.c:1360
+#: libbaul-private/baul-autorun.c:1186 src/baul-places-sidebar.c:2747
+#: src/file-manager/fm-directory-view.c:7509
+#: src/file-manager/fm-directory-view.c:7537
+#: src/file-manager/fm-directory-view.c:7618
+#: src/file-manager/fm-tree-view.c:1366
 msgid "_Unmount"
 msgstr "卸載(_U)"
 
@@ -659,7 +659,7 @@ msgid "Paste the text stored on the clipboard"
 msgstr "貼上存於剪貼簿內的文字"
 
 #: libbaul-private/baul-clipboard.c:471
-#: src/file-manager/fm-directory-view.c:7429
+#: src/file-manager/fm-directory-view.c:7442
 msgid "Select _All"
 msgstr "全部選取(_A)"
 
@@ -667,21 +667,21 @@ msgstr "全部選取(_A)"
 msgid "Select all the text in a text field"
 msgstr "選取在文字欄位中的所有文字"
 
-#: libbaul-private/baul-column-chooser.c:378
+#: libbaul-private/baul-column-chooser.c:382
 msgid "Move _Up"
 msgstr "上移(_U)"
 
-#: libbaul-private/baul-column-chooser.c:388
+#: libbaul-private/baul-column-chooser.c:392
 msgid "Move Dow_n"
 msgstr "移下(_N)"
 
-#: libbaul-private/baul-column-chooser.c:401
+#: libbaul-private/baul-column-chooser.c:405
 msgid "Use De_fault"
 msgstr "使用預設值(_F)"
 
 #: libbaul-private/baul-column-utilities.c:46
 #: libbaul-private/baul-mime-application-chooser.c:276
-#: src/file-manager/fm-list-view.c:1807
+#: src/file-manager/fm-list-view.c:1837
 msgid "Name"
 msgstr "Name"
 
@@ -747,7 +747,7 @@ msgid "The group of the file."
 msgstr "檔案所屬的群組。"
 
 #: libbaul-private/baul-column-utilities.c:108
-#: src/file-manager/fm-properties-window.c:4782
+#: src/file-manager/fm-properties-window.c:4788
 msgid "Permissions"
 msgstr "權限"
 
@@ -813,10 +813,10 @@ msgstr "原始位置"
 msgid "Original location of file before moved to the Trash"
 msgstr "檔案移到回收筒之前的原始位置"
 
-#: libbaul-private/baul-customization-data.c:435
+#: libbaul-private/baul-customization-data.c:438
 #: libbaul-private/baul-file-conflict-dialog.c:622
 #: libbaul-private/baul-mime-application-chooser.c:444
-#: src/baul-property-browser.c:2006
+#: src/baul-property-browser.c:2014
 msgid "Reset"
 msgstr "重設"
 
@@ -843,37 +843,37 @@ msgid "Network Servers"
 msgstr "網路伺服器"
 
 #: libbaul-private/baul-desktop-link.c:120 src/baul-places-sidebar.c:617
-#: src/baul-trash-bar.c:188 src/file-manager/fm-tree-view.c:1428
+#: src/baul-trash-bar.c:189 src/file-manager/fm-tree-view.c:1434
 msgid "Trash"
 msgstr "回收筒"
 
-#: libbaul-private/baul-dnd.c:798
+#: libbaul-private/baul-dnd.c:801
 msgid "_Move Here"
 msgstr "移至此(_M)"
 
-#: libbaul-private/baul-dnd.c:803
+#: libbaul-private/baul-dnd.c:806
 msgid "_Copy Here"
 msgstr "拷貝至此(_C)"
 
-#: libbaul-private/baul-dnd.c:808
+#: libbaul-private/baul-dnd.c:811
 msgid "_Link Here"
 msgstr "鏈結至此(_L)"
 
-#: libbaul-private/baul-dnd.c:813
+#: libbaul-private/baul-dnd.c:816
 msgid "Set as _Background"
 msgstr "設為背景(_B)"
 
-#: libbaul-private/baul-dnd.c:820 libbaul-private/baul-dnd.c:873
+#: libbaul-private/baul-dnd.c:823 libbaul-private/baul-dnd.c:876
 #: libbaul-private/baul-progress-info.c:849
 #: libbaul-private/baul-progress-info.c:850
 msgid "Cancel"
 msgstr "取消"
 
-#: libbaul-private/baul-dnd.c:861
+#: libbaul-private/baul-dnd.c:864
 msgid "Set as background for _all folders"
 msgstr "設定為所有資料夾的背景圖案(_A)"
 
-#: libbaul-private/baul-dnd.c:866
+#: libbaul-private/baul-dnd.c:869
 msgid "Set as background for _this folder"
 msgstr "設定為本資料夾的背景圖案(_T)"
 
@@ -952,203 +952,203 @@ msgstr "無法重新命名桌面圖示"
 msgid "Unable to rename desktop file"
 msgstr "無法重新命名桌面檔案"
 
-#: libbaul-private/baul-file.c:4757
+#: libbaul-private/baul-file.c:4759
 msgid "today at 00:00:00 PM"
 msgstr "今天凌晨 00:00:00"
 
-#: libbaul-private/baul-file.c:4758 src/baul-file-management-properties.c:532
+#: libbaul-private/baul-file.c:4760 src/baul-file-management-properties.c:532
 msgid "today at %-I:%M:%S %p"
 msgstr "今天 %p %-I:%M:%S"
 
-#: libbaul-private/baul-file.c:4760
+#: libbaul-private/baul-file.c:4762
 msgid "today at 00:00 PM"
 msgstr "今天凌晨 00:00"
 
-#: libbaul-private/baul-file.c:4761
+#: libbaul-private/baul-file.c:4763
 msgid "today at %-I:%M %p"
 msgstr "今天 %p %-I:%M"
 
-#: libbaul-private/baul-file.c:4763
+#: libbaul-private/baul-file.c:4765
 msgid "today, 00:00 PM"
 msgstr "今天凌晨 00:00"
 
-#: libbaul-private/baul-file.c:4764
+#: libbaul-private/baul-file.c:4766
 msgid "today, %-I:%M %p"
 msgstr "今天 %p %-I:%M"
 
-#: libbaul-private/baul-file.c:4766 libbaul-private/baul-file.c:4767
+#: libbaul-private/baul-file.c:4768 libbaul-private/baul-file.c:4769
 msgid "today"
 msgstr "今天"
 
-#: libbaul-private/baul-file.c:4776
+#: libbaul-private/baul-file.c:4778
 msgid "yesterday at 00:00:00 PM"
 msgstr "昨天凌晨 00:00:00"
 
-#: libbaul-private/baul-file.c:4777
+#: libbaul-private/baul-file.c:4779
 msgid "yesterday at %-I:%M:%S %p"
 msgstr "昨天 %p %-I:%M:%S"
 
-#: libbaul-private/baul-file.c:4779
+#: libbaul-private/baul-file.c:4781
 msgid "yesterday at 00:00 PM"
 msgstr "昨天凌晨 00:00"
 
-#: libbaul-private/baul-file.c:4780
+#: libbaul-private/baul-file.c:4782
 msgid "yesterday at %-I:%M %p"
 msgstr "昨天 %p %-I:%M"
 
-#: libbaul-private/baul-file.c:4782
+#: libbaul-private/baul-file.c:4784
 msgid "yesterday, 00:00 PM"
 msgstr "昨天凌晨 00:00"
 
-#: libbaul-private/baul-file.c:4783
+#: libbaul-private/baul-file.c:4785
 msgid "yesterday, %-I:%M %p"
 msgstr "昨天 %p %-I:%M"
 
-#: libbaul-private/baul-file.c:4785 libbaul-private/baul-file.c:4786
+#: libbaul-private/baul-file.c:4787 libbaul-private/baul-file.c:4788
 msgid "yesterday"
 msgstr "昨天"
 
-#: libbaul-private/baul-file.c:4797
+#: libbaul-private/baul-file.c:4799
 msgid "Wednesday, September 00 0000 at 00:00:00 PM"
 msgstr "0000 年 00 月 00 日(週三) 下午 00 時 00 分 00 秒"
 
-#: libbaul-private/baul-file.c:4798
+#: libbaul-private/baul-file.c:4800
 msgid "%A, %B %-d %Y at %-I:%M:%S %p"
 msgstr "%Y 年 %m 月 %-d 日(%A) %p %-I 時 %M 分 %S 秒"
 
-#: libbaul-private/baul-file.c:4800
+#: libbaul-private/baul-file.c:4802
 msgid "Mon, Oct 00 0000 at 00:00:00 PM"
 msgstr "0000 年 00 月 00 日(一) 下午 00:00:00"
 
-#: libbaul-private/baul-file.c:4801
+#: libbaul-private/baul-file.c:4803
 msgid "%a, %b %-d %Y at %-I:%M:%S %p"
 msgstr "%Y 年 %m 月 %-d 日(%a) %p %-I:%M:%S"
 
-#: libbaul-private/baul-file.c:4803
+#: libbaul-private/baul-file.c:4805
 msgid "Mon, Oct 00 0000 at 00:00 PM"
 msgstr "0000 年 00 月 00 日(週一) 下午 00:00"
 
-#: libbaul-private/baul-file.c:4804
+#: libbaul-private/baul-file.c:4806
 msgid "%a, %b %-d %Y at %-I:%M %p"
 msgstr "%Y 年 %m 月 %-d 日(%a) %p %-I:%M"
 
-#: libbaul-private/baul-file.c:4806
+#: libbaul-private/baul-file.c:4808
 msgid "Oct 00 0000 at 00:00 PM"
 msgstr "0000 年 00 月 00 日下午 00:00"
 
-#: libbaul-private/baul-file.c:4807
+#: libbaul-private/baul-file.c:4809
 msgid "%b %-d %Y at %-I:%M %p"
 msgstr "%Y 年 %m 月 %-d 日 %p %-I:%M"
 
-#: libbaul-private/baul-file.c:4809
+#: libbaul-private/baul-file.c:4811
 msgid "Oct 00 0000, 00:00 PM"
 msgstr "0000 年 00 月 00 日下午 00:00"
 
-#: libbaul-private/baul-file.c:4810
+#: libbaul-private/baul-file.c:4812
 msgid "%b %-d %Y, %-I:%M %p"
 msgstr "%Y 年 %m 月 %-d 日 %p %-I:%M"
 
-#: libbaul-private/baul-file.c:4812
+#: libbaul-private/baul-file.c:4814
 msgid "00/00/00, 00:00 PM"
 msgstr "00-00-00 下午 00:00"
 
-#: libbaul-private/baul-file.c:4813
+#: libbaul-private/baul-file.c:4815
 msgid "%m/%-d/%y, %-I:%M %p"
 msgstr "%y-%m-%-d %p %-I:%M"
 
-#: libbaul-private/baul-file.c:4815
+#: libbaul-private/baul-file.c:4817
 msgid "00/00/00"
 msgstr "00-00-00"
 
-#: libbaul-private/baul-file.c:4816
+#: libbaul-private/baul-file.c:4818
 msgid "%m/%d/%y"
 msgstr "%y-%m-%d"
 
-#: libbaul-private/baul-file.c:5453
+#: libbaul-private/baul-file.c:5455
 msgid "Not allowed to set permissions"
 msgstr "不允許設定權限"
 
-#: libbaul-private/baul-file.c:5747
+#: libbaul-private/baul-file.c:5749
 msgid "Not allowed to set owner"
 msgstr "不允許設定擁有者"
 
-#: libbaul-private/baul-file.c:5765
+#: libbaul-private/baul-file.c:5767
 #, c-format
 msgid "Specified owner '%s' doesn't exist"
 msgstr "指定的擁有者「%s」不存在"
 
-#: libbaul-private/baul-file.c:6027
+#: libbaul-private/baul-file.c:6029
 msgid "Not allowed to set group"
 msgstr "不允許設定群組"
 
-#: libbaul-private/baul-file.c:6045
+#: libbaul-private/baul-file.c:6047
 #, c-format
 msgid "Specified group '%s' doesn't exist"
 msgstr "指定的群組「%s」不存在"
 
-#: libbaul-private/baul-file.c:6199 src/file-manager/fm-directory-view.c:2393
+#: libbaul-private/baul-file.c:6201 src/file-manager/fm-directory-view.c:2393
 #, c-format
 msgid "%'u item"
 msgid_plural "%'u items"
 msgstr[0] ""
 
-#: libbaul-private/baul-file.c:6200
+#: libbaul-private/baul-file.c:6202
 #, c-format
 msgid "%'u folder"
 msgid_plural "%'u folders"
 msgstr[0] ""
 
-#: libbaul-private/baul-file.c:6201
+#: libbaul-private/baul-file.c:6203
 #, c-format
 msgid "%'u file"
 msgid_plural "%'u files"
 msgstr[0] ""
 
-#: libbaul-private/baul-file.c:6305
+#: libbaul-private/baul-file.c:6307
 msgid "%"
 msgstr "%"
 
-#: libbaul-private/baul-file.c:6306
+#: libbaul-private/baul-file.c:6308
 #, c-format
 msgid "%s (%s bytes)"
 msgstr "%s (%s 位元組)"
 
-#: libbaul-private/baul-file.c:6656 libbaul-private/baul-file.c:6680
+#: libbaul-private/baul-file.c:6658 libbaul-private/baul-file.c:6682
 msgid "? items"
 msgstr "？ 個項目"
 
-#: libbaul-private/baul-file.c:6662 libbaul-private/baul-file.c:6670
+#: libbaul-private/baul-file.c:6664 libbaul-private/baul-file.c:6672
 msgid "? bytes"
 msgstr "？ 個位元組"
 
-#: libbaul-private/baul-file.c:6685
+#: libbaul-private/baul-file.c:6687
 msgid "unknown type"
 msgstr "類型不詳"
 
-#: libbaul-private/baul-file.c:6688
+#: libbaul-private/baul-file.c:6690
 msgid "unknown MIME type"
 msgstr "MIME 類型不詳"
 
-#: libbaul-private/baul-file.c:6702
-#: src/file-manager/fm-properties-window.c:1299
+#: libbaul-private/baul-file.c:6704
+#: src/file-manager/fm-properties-window.c:1305
 msgid "unknown"
 msgstr "不明"
 
-#: libbaul-private/baul-file.c:6752
+#: libbaul-private/baul-file.c:6754
 msgid "program"
 msgstr "程式"
 
-#: libbaul-private/baul-file.c:6772
+#: libbaul-private/baul-file.c:6774
 msgid "link"
 msgstr "鏈結"
 
-#: libbaul-private/baul-file.c:6778 libbaul-private/baul-file-operations.c:406
-#: src/file-manager/fm-directory-view.c:10640
+#: libbaul-private/baul-file.c:6780 libbaul-private/baul-file-operations.c:406
+#: src/file-manager/fm-directory-view.c:10655
 #, c-format
 msgid "Link to %s"
 msgstr "鏈結至 %s"
 
-#: libbaul-private/baul-file.c:6794
+#: libbaul-private/baul-file.c:6796
 msgid "link (broken)"
 msgstr "鏈結（目標不存在）"
 
@@ -1232,14 +1232,14 @@ msgstr "原始檔案"
 
 #: libbaul-private/baul-file-conflict-dialog.c:277
 #: libbaul-private/baul-file-conflict-dialog.c:316
-#: src/file-manager/fm-properties-window.c:3303
+#: src/file-manager/fm-properties-window.c:3309
 msgid "Size:"
 msgstr "大小："
 
 #: libbaul-private/baul-file-conflict-dialog.c:282
 #: libbaul-private/baul-file-conflict-dialog.c:321
 #: src/baul-connect-server-dialog.c:927
-#: src/file-manager/fm-properties-window.c:3285
+#: src/file-manager/fm-properties-window.c:3291
 msgid "Type:"
 msgstr "類型："
 
@@ -1307,11 +1307,11 @@ msgstr "略過全部(_K)"
 msgid "_Retry"
 msgstr "重試(_R)"
 
-#: libbaul-private/baul-file-operations.c:187 src/baul-emblem-sidebar.c:378
-#: src/file-manager/fm-directory-view.c:7461
-#: src/file-manager/fm-directory-view.c:7593
-#: src/file-manager/fm-directory-view.c:9051
-#: src/file-manager/fm-tree-view.c:1349
+#: libbaul-private/baul-file-operations.c:187 src/baul-emblem-sidebar.c:380
+#: src/file-manager/fm-directory-view.c:7474
+#: src/file-manager/fm-directory-view.c:7606
+#: src/file-manager/fm-directory-view.c:9065
+#: src/file-manager/fm-tree-view.c:1355
 msgid "_Delete"
 msgstr "刪除(_D)"
 
@@ -1490,11 +1490,11 @@ msgstr " ("
 msgid " (%'d"
 msgstr " (第 %'d 個"
 
-#: libbaul-private/baul-file-operations.c:1370
+#: libbaul-private/baul-file-operations.c:1375
 msgid "Are you sure you want to permanently delete \"%B\" from the trash?"
 msgstr "確定要將「%B」從回收筒中永久刪除嗎？"
 
-#: libbaul-private/baul-file-operations.c:1373
+#: libbaul-private/baul-file-operations.c:1378
 #, c-format
 msgid ""
 "Are you sure you want to permanently delete the %'d selected item from the "
@@ -1504,322 +1504,322 @@ msgid_plural ""
 "trash?"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:1383
-#: libbaul-private/baul-file-operations.c:1449
+#: libbaul-private/baul-file-operations.c:1388
+#: libbaul-private/baul-file-operations.c:1454
 msgid "If you delete an item, it will be permanently lost."
 msgstr "如果直接刪除本項目，它會無法還原。"
 
-#: libbaul-private/baul-file-operations.c:1403
+#: libbaul-private/baul-file-operations.c:1408
 msgid "Empty all items from Trash?"
 msgstr "要清除回收筒中所有的項目？"
 
-#: libbaul-private/baul-file-operations.c:1407
+#: libbaul-private/baul-file-operations.c:1412
 msgid "All items in the Trash will be permanently deleted."
 msgstr "回收筒中所有的項目會永遠刪除。"
 
-#: libbaul-private/baul-file-operations.c:1410
-#: libbaul-private/baul-file-operations.c:2347 src/baul-places-sidebar.c:2791
-#: src/baul-trash-bar.c:195
+#: libbaul-private/baul-file-operations.c:1415
+#: libbaul-private/baul-file-operations.c:2353 src/baul-places-sidebar.c:2791
+#: src/baul-trash-bar.c:196
 msgid "Empty _Trash"
 msgstr "清理回收筒(_T)"
 
-#: libbaul-private/baul-file-operations.c:1437
+#: libbaul-private/baul-file-operations.c:1442
 msgid "Are you sure you want to permanently delete \"%B\"?"
 msgstr "確定要將「%B」永久地刪除嗎？"
 
-#: libbaul-private/baul-file-operations.c:1440
+#: libbaul-private/baul-file-operations.c:1445
 #, c-format
 msgid "Are you sure you want to permanently delete the %'d selected item?"
 msgid_plural ""
 "Are you sure you want to permanently delete the %'d selected items?"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:1479
+#: libbaul-private/baul-file-operations.c:1484
 msgid "Are you sure you want to trash \"%B\"?"
 msgstr ""
 
-#: libbaul-private/baul-file-operations.c:1482
+#: libbaul-private/baul-file-operations.c:1487
 #, c-format
 msgid "Are you sure you want to trash the %'d selected item?"
 msgid_plural "Are you sure you want to trash the %'d selected items?"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:1491
+#: libbaul-private/baul-file-operations.c:1496
 msgid "Items moved to the trash may be recovered until the trash is emptied."
 msgstr ""
 
-#: libbaul-private/baul-file-operations.c:1494
+#: libbaul-private/baul-file-operations.c:1499
 msgid "Move to _Trash"
 msgstr "移至回收筒(_T)"
 
-#: libbaul-private/baul-file-operations.c:1524
+#: libbaul-private/baul-file-operations.c:1529
 #, c-format
 msgid "%'d file left to delete"
 msgid_plural "%'d files left to delete"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:1530
+#: libbaul-private/baul-file-operations.c:1535
 msgid "Deleting files"
 msgstr "正在刪除檔案"
 
 #. Translators: %T will expand to a time like "2 minutes".
 #. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
 #.
-#: libbaul-private/baul-file-operations.c:1547
+#: libbaul-private/baul-file-operations.c:1552
 msgid "%T left"
 msgid_plural "%T left"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:1614
-#: libbaul-private/baul-file-operations.c:1648
-#: libbaul-private/baul-file-operations.c:1687
-#: libbaul-private/baul-file-operations.c:1764
-#: libbaul-private/baul-file-operations.c:2593
+#: libbaul-private/baul-file-operations.c:1620
+#: libbaul-private/baul-file-operations.c:1654
+#: libbaul-private/baul-file-operations.c:1693
+#: libbaul-private/baul-file-operations.c:1770
+#: libbaul-private/baul-file-operations.c:2599
 msgid "Error while deleting."
 msgstr "刪除時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:1618
+#: libbaul-private/baul-file-operations.c:1624
 msgid ""
 "Files in the folder \"%B\" cannot be deleted because you do not have "
 "permissions to see them."
 msgstr "無法刪除資料夾「%B」中的檔案，因為您沒有權限讀取它們。"
 
-#: libbaul-private/baul-file-operations.c:1621
-#: libbaul-private/baul-file-operations.c:2653
-#: libbaul-private/baul-file-operations.c:3648
+#: libbaul-private/baul-file-operations.c:1627
+#: libbaul-private/baul-file-operations.c:2659
+#: libbaul-private/baul-file-operations.c:3654
 msgid ""
 "There was an error getting information about the files in the folder \"%B\"."
 msgstr "在取得資料夾「%s」中檔案的相關資訊時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:1630
-#: libbaul-private/baul-file-operations.c:3657
+#: libbaul-private/baul-file-operations.c:1636
+#: libbaul-private/baul-file-operations.c:3663
 msgid "_Skip files"
 msgstr "略過檔案(_S)"
 
-#: libbaul-private/baul-file-operations.c:1651
+#: libbaul-private/baul-file-operations.c:1657
 msgid ""
 "The folder \"%B\" cannot be deleted because you do not have permissions to "
 "read it."
 msgstr "無法刪除資料夾「%B」，因為您沒有權限讀取它。"
 
-#: libbaul-private/baul-file-operations.c:1654
-#: libbaul-private/baul-file-operations.c:2692
-#: libbaul-private/baul-file-operations.c:3693
+#: libbaul-private/baul-file-operations.c:1660
+#: libbaul-private/baul-file-operations.c:2698
+#: libbaul-private/baul-file-operations.c:3699
 msgid "There was an error reading the folder \"%B\"."
 msgstr "讀取資料夾「%B」時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:1688
+#: libbaul-private/baul-file-operations.c:1694
 msgid "Could not remove the folder %B."
 msgstr "無法移除資料夾 %B。"
 
-#: libbaul-private/baul-file-operations.c:1765
+#: libbaul-private/baul-file-operations.c:1771
 msgid "There was an error deleting %B."
 msgstr "刪除 %B 時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:1845
+#: libbaul-private/baul-file-operations.c:1851
 msgid "Moving files to trash"
 msgstr "將檔案丟進回收筒"
 
-#: libbaul-private/baul-file-operations.c:1847
+#: libbaul-private/baul-file-operations.c:1853
 #, c-format
 msgid "%'d file left to trash"
 msgid_plural "%'d files left to trash"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:1904
+#: libbaul-private/baul-file-operations.c:1910
 msgid "Cannot move file to trash, do you want to delete immediately?"
 msgstr "不能將檔案移到回收筒。要立刻刪除嗎？"
 
-#: libbaul-private/baul-file-operations.c:1905
+#: libbaul-private/baul-file-operations.c:1911
 msgid "The file \"%B\" cannot be moved to the trash."
 msgstr "檔案「%B」不能移至回收筒。"
 
-#: libbaul-private/baul-file-operations.c:2090
+#: libbaul-private/baul-file-operations.c:2096
 msgid "Trashing Files"
 msgstr "正將檔案移至回收筒"
 
-#: libbaul-private/baul-file-operations.c:2092
+#: libbaul-private/baul-file-operations.c:2098
 msgid "Deleting Files"
 msgstr "正在刪除檔案"
 
-#: libbaul-private/baul-file-operations.c:2157 src/baul-places-sidebar.c:2266
+#: libbaul-private/baul-file-operations.c:2163 src/baul-places-sidebar.c:2266
 #: src/baul-places-sidebar.c:2302
 msgid "It is now safe to remove the drive"
 msgstr ""
 
-#: libbaul-private/baul-file-operations.c:2170
+#: libbaul-private/baul-file-operations.c:2176
 msgid "Unable to eject %V"
 msgstr "無法退出 %V"
 
-#: libbaul-private/baul-file-operations.c:2172
+#: libbaul-private/baul-file-operations.c:2178
 msgid "Unable to unmount %V"
 msgstr "無法卸載 %V"
 
-#: libbaul-private/baul-file-operations.c:2208 src/baul-places-sidebar.c:2336
+#: libbaul-private/baul-file-operations.c:2214 src/baul-places-sidebar.c:2336
 msgid "Writing data to the drive -- do not unplug"
 msgstr ""
 
-#: libbaul-private/baul-file-operations.c:2332
+#: libbaul-private/baul-file-operations.c:2338
 msgid "Do you want to empty the trash before you unmount?"
 msgstr "卸載前是否要清空回收筒？"
 
-#: libbaul-private/baul-file-operations.c:2334
+#: libbaul-private/baul-file-operations.c:2340
 msgid ""
 "In order to regain the free space on this volume the trash must be emptied. "
 "All trashed items on the volume will be permanently lost."
 msgstr "要恢復此裝置的空間，必須清空回收筒。所有在回收筒的東面將會永久地刪除。"
 
-#: libbaul-private/baul-file-operations.c:2341
+#: libbaul-private/baul-file-operations.c:2347
 msgid "Do _not Empty Trash"
 msgstr "不要清空回收筒(_N)"
 
-#: libbaul-private/baul-file-operations.c:2462
+#: libbaul-private/baul-file-operations.c:2468
 #, c-format
 msgid "Unable to mount %s"
 msgstr "無法掛載 %s"
 
-#: libbaul-private/baul-file-operations.c:2540
+#: libbaul-private/baul-file-operations.c:2546
 #, c-format
 msgid "Preparing to copy %'d file (%S)"
 msgid_plural "Preparing to copy %'d files (%S)"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:2546
+#: libbaul-private/baul-file-operations.c:2552
 #, c-format
 msgid "Preparing to move %'d file (%S)"
 msgid_plural "Preparing to move %'d files (%S)"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:2552
+#: libbaul-private/baul-file-operations.c:2558
 #, c-format
 msgid "Preparing to delete %'d file (%S)"
 msgid_plural "Preparing to delete %'d files (%S)"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:2558
+#: libbaul-private/baul-file-operations.c:2564
 #, c-format
 msgid "Preparing to trash %'d file"
 msgid_plural "Preparing to trash %'d files"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:2589
-#: libbaul-private/baul-file-operations.c:3500
-#: libbaul-private/baul-file-operations.c:3640
-#: libbaul-private/baul-file-operations.c:3685
+#: libbaul-private/baul-file-operations.c:2595
+#: libbaul-private/baul-file-operations.c:3506
+#: libbaul-private/baul-file-operations.c:3646
+#: libbaul-private/baul-file-operations.c:3691
 msgid "Error while copying."
 msgstr "拷貝時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:2591
-#: libbaul-private/baul-file-operations.c:3638
-#: libbaul-private/baul-file-operations.c:3683
+#: libbaul-private/baul-file-operations.c:2597
+#: libbaul-private/baul-file-operations.c:3644
+#: libbaul-private/baul-file-operations.c:3689
 msgid "Error while moving."
 msgstr "移動時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:2595
+#: libbaul-private/baul-file-operations.c:2601
 msgid "Error while moving files to trash."
 msgstr "移動檔案至回收筒時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:2650
+#: libbaul-private/baul-file-operations.c:2656
 msgid ""
 "Files in the folder \"%B\" cannot be handled because you do not have "
 "permissions to see them."
 msgstr "無法處理資料夾「%B」中的檔案，因為您沒有權限讀取它們。"
 
-#: libbaul-private/baul-file-operations.c:2689
+#: libbaul-private/baul-file-operations.c:2695
 msgid ""
 "The folder \"%B\" cannot be handled because you do not have permissions to "
 "read it."
 msgstr "無法處理資料夾「%B」，因為您沒有權限讀取它。"
 
-#: libbaul-private/baul-file-operations.c:2767
+#: libbaul-private/baul-file-operations.c:2773
 msgid ""
 "The file \"%B\" cannot be handled because you do not have permissions to "
 "read it."
 msgstr "無法處理檔案「%B」，因為您沒有權限讀取它。"
 
-#: libbaul-private/baul-file-operations.c:2770
+#: libbaul-private/baul-file-operations.c:2776
 msgid "There was an error getting information about \"%B\"."
 msgstr "取得關於「%B」的資訊時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:2870
-#: libbaul-private/baul-file-operations.c:2912
-#: libbaul-private/baul-file-operations.c:2945
-#: libbaul-private/baul-file-operations.c:2975
+#: libbaul-private/baul-file-operations.c:2876
+#: libbaul-private/baul-file-operations.c:2918
+#: libbaul-private/baul-file-operations.c:2951
+#: libbaul-private/baul-file-operations.c:2981
 msgid "Error while copying to \"%B\"."
 msgstr "拷貝至「%B」時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:2874
+#: libbaul-private/baul-file-operations.c:2880
 msgid "You do not have permissions to access the destination folder."
 msgstr "您沒有存取目的端資料夾的權限。"
 
-#: libbaul-private/baul-file-operations.c:2876
+#: libbaul-private/baul-file-operations.c:2882
 msgid "There was an error getting information about the destination."
 msgstr "取得關於目的地的資訊時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:2913
+#: libbaul-private/baul-file-operations.c:2919
 msgid "The destination is not a folder."
 msgstr "該目的地並非資料夾。"
 
-#: libbaul-private/baul-file-operations.c:2946
+#: libbaul-private/baul-file-operations.c:2952
 msgid ""
 "There is not enough space on the destination. Try to remove files to make "
 "space."
 msgstr "目的地空間不足。請試著移除檔案以挪出空間。"
 
-#: libbaul-private/baul-file-operations.c:2948
+#: libbaul-private/baul-file-operations.c:2954
 #, c-format
 msgid "There is %S available, but %S is required."
 msgstr "這裡有 %S，但需要 %S。"
 
-#: libbaul-private/baul-file-operations.c:2976
+#: libbaul-private/baul-file-operations.c:2982
 msgid "The destination is read-only."
 msgstr "目的地的磁碟是唯讀的。"
 
-#: libbaul-private/baul-file-operations.c:3034
+#: libbaul-private/baul-file-operations.c:3040
 msgid "Moving \"%B\" to \"%B\""
 msgstr "正將「%B」移動到「%B」。"
 
-#: libbaul-private/baul-file-operations.c:3035
+#: libbaul-private/baul-file-operations.c:3041
 msgid "Copying \"%B\" to \"%B\""
 msgstr "正將「%B」拷貝到「%B」。"
 
-#: libbaul-private/baul-file-operations.c:3040
+#: libbaul-private/baul-file-operations.c:3046
 msgid "Duplicating \"%B\""
 msgstr "正在複製「%B」"
 
-#: libbaul-private/baul-file-operations.c:3048
+#: libbaul-private/baul-file-operations.c:3054
 msgid "Moving %'d file (in \"%B\") to \"%B\""
 msgid_plural "Moving %'d files (in \"%B\") to \"%B\""
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:3052
+#: libbaul-private/baul-file-operations.c:3058
 msgid "Copying %'d file (in \"%B\") to \"%B\""
 msgid_plural "Copying %'d files (in \"%B\") to \"%B\""
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:3060
+#: libbaul-private/baul-file-operations.c:3066
 msgid "Duplicating %'d file (in \"%B\")"
 msgid_plural "Duplicating %'d files (in \"%B\")"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:3070
+#: libbaul-private/baul-file-operations.c:3076
 msgid "Moving %'d file to \"%B\""
 msgid_plural "Moving %'d files to \"%B\""
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:3074
+#: libbaul-private/baul-file-operations.c:3080
 msgid "Copying %'d file to \"%B\""
 msgid_plural "Copying %'d files to \"%B\""
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:3080
+#: libbaul-private/baul-file-operations.c:3086
 #, c-format
 msgid "Duplicating %'d file"
 msgid_plural "Duplicating %'d files"
 msgstr[0] ""
 
 #. Translators: %S will expand to a size like "2 bytes" or "3 MB", so something like "4 kb of 4 MB"
-#: libbaul-private/baul-file-operations.c:3100
+#: libbaul-private/baul-file-operations.c:3106
 #, c-format
 msgid "%S of %S"
 msgstr "%S / %S"
@@ -1829,182 +1829,182 @@ msgstr "%S / %S"
 #. *
 #. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
 #.
-#: libbaul-private/baul-file-operations.c:3113
+#: libbaul-private/baul-file-operations.c:3119
 msgid "%S of %S — %T left (%S/sec)"
 msgid_plural "%S of %S — %T left (%S/sec)"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:3504
+#: libbaul-private/baul-file-operations.c:3510
 msgid ""
 "The folder \"%B\" cannot be copied because you do not have permissions to "
 "create it in the destination."
 msgstr "無法拷貝資料夾「%B」，因為您沒有權限在目的地建立它。"
 
-#: libbaul-private/baul-file-operations.c:3507
+#: libbaul-private/baul-file-operations.c:3513
 msgid "There was an error creating the folder \"%B\"."
 msgstr "建立資料夾「%B」時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:3645
+#: libbaul-private/baul-file-operations.c:3651
 msgid ""
 "Files in the folder \"%B\" cannot be copied because you do not have "
 "permissions to see them."
 msgstr "無法拷貝資料夾「%B」中的檔案，因為您沒有權限讀取它們。"
 
-#: libbaul-private/baul-file-operations.c:3690
+#: libbaul-private/baul-file-operations.c:3696
 msgid ""
 "The folder \"%B\" cannot be copied because you do not have permissions to "
 "read it."
 msgstr "無法拷貝資料夾「%B」，因為您沒有權限讀取它。"
 
-#: libbaul-private/baul-file-operations.c:3735
-#: libbaul-private/baul-file-operations.c:4436
-#: libbaul-private/baul-file-operations.c:5029
+#: libbaul-private/baul-file-operations.c:3741
+#: libbaul-private/baul-file-operations.c:4442
+#: libbaul-private/baul-file-operations.c:5037
 msgid "Error while moving \"%B\"."
 msgstr "移動「%B」時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:3736
+#: libbaul-private/baul-file-operations.c:3742
 msgid "Could not remove the source folder."
 msgstr "無法移除來源資料夾。"
 
-#: libbaul-private/baul-file-operations.c:3821
-#: libbaul-private/baul-file-operations.c:3862
-#: libbaul-private/baul-file-operations.c:4438
-#: libbaul-private/baul-file-operations.c:4510
+#: libbaul-private/baul-file-operations.c:3827
+#: libbaul-private/baul-file-operations.c:3868
+#: libbaul-private/baul-file-operations.c:4444
+#: libbaul-private/baul-file-operations.c:4516
 msgid "Error while copying \"%B\"."
 msgstr "拷貝「%B」時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:3822
+#: libbaul-private/baul-file-operations.c:3828
 #, c-format
 msgid "Could not remove files from the already existing folder %F."
 msgstr "無法自既存的資料夾 %F 移除檔案。"
 
-#: libbaul-private/baul-file-operations.c:3863
+#: libbaul-private/baul-file-operations.c:3869
 #, c-format
 msgid "Could not remove the already existing file %F."
 msgstr "無法移除既存的檔案 %F。"
 
-#: libbaul-private/baul-file-operations.c:4182
-#: libbaul-private/baul-file-operations.c:4875
+#: libbaul-private/baul-file-operations.c:4188
+#: libbaul-private/baul-file-operations.c:4883
 msgid "You cannot move a folder into itself."
 msgstr "不可將資料夾移至資料夾本身之內。"
 
-#: libbaul-private/baul-file-operations.c:4183
-#: libbaul-private/baul-file-operations.c:4876
+#: libbaul-private/baul-file-operations.c:4189
+#: libbaul-private/baul-file-operations.c:4884
 msgid "You cannot copy a folder into itself."
 msgstr "不可將資料夾拷貝至資料夾本身之內。"
 
-#: libbaul-private/baul-file-operations.c:4184
-#: libbaul-private/baul-file-operations.c:4877
+#: libbaul-private/baul-file-operations.c:4190
+#: libbaul-private/baul-file-operations.c:4885
 msgid "The destination folder is inside the source folder."
 msgstr "目的地資料夾在原始資料夾內。"
 
-#: libbaul-private/baul-file-operations.c:4215
+#: libbaul-private/baul-file-operations.c:4221
 msgid "You cannot move a file over itself."
 msgstr "不可將檔案拷貝至同一位置之上。"
 
-#: libbaul-private/baul-file-operations.c:4216
+#: libbaul-private/baul-file-operations.c:4222
 msgid "You cannot copy a file over itself."
 msgstr "不可將檔案拷貝至同一位置之上。"
 
-#: libbaul-private/baul-file-operations.c:4217
+#: libbaul-private/baul-file-operations.c:4223
 msgid "The source file would be overwritten by the destination."
 msgstr "來源檔案會被目的端覆蓋。"
 
-#: libbaul-private/baul-file-operations.c:4440
+#: libbaul-private/baul-file-operations.c:4446
 #, c-format
 msgid "Could not remove the already existing file with the same name in %F."
 msgstr "無法移除既存與 %F 中的檔案同名的檔案。"
 
-#: libbaul-private/baul-file-operations.c:4511
+#: libbaul-private/baul-file-operations.c:4517
 #, c-format
 msgid "There was an error copying the file into %F."
 msgstr "拷貝檔案到 %F 時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:4758
+#: libbaul-private/baul-file-operations.c:4764
 msgid "Copying Files"
 msgstr "正在拷貝檔案"
 
-#: libbaul-private/baul-file-operations.c:4785
+#: libbaul-private/baul-file-operations.c:4793
 msgid "Preparing to Move to \"%B\""
 msgstr "準備移動至「%B」"
 
-#: libbaul-private/baul-file-operations.c:4789
+#: libbaul-private/baul-file-operations.c:4797
 #, c-format
 msgid "Preparing to move %'d file"
 msgid_plural "Preparing to move %'d files"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:5030
+#: libbaul-private/baul-file-operations.c:5038
 #, c-format
 msgid "There was an error moving the file into %F."
 msgstr "移動檔案到 %F 時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:5301
+#: libbaul-private/baul-file-operations.c:5309
 msgid "Moving Files"
 msgstr "正在移動檔案"
 
-#: libbaul-private/baul-file-operations.c:5332
+#: libbaul-private/baul-file-operations.c:5340
 msgid "Creating links in \"%B\""
 msgstr "正在「%B」中建立鏈結"
 
-#: libbaul-private/baul-file-operations.c:5336
+#: libbaul-private/baul-file-operations.c:5344
 #, c-format
 msgid "Making link to %'d file"
 msgid_plural "Making links to %'d files"
 msgstr[0] ""
 
-#: libbaul-private/baul-file-operations.c:5468
+#: libbaul-private/baul-file-operations.c:5476
 msgid "Error while creating link to %B."
 msgstr "建立鏈結 「%B」 時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:5470
+#: libbaul-private/baul-file-operations.c:5478
 msgid "Symbolic links only supported for local files"
 msgstr "符號鏈結只支援本地端檔案"
 
-#: libbaul-private/baul-file-operations.c:5473
+#: libbaul-private/baul-file-operations.c:5481
 msgid "The target doesn't support symbolic links."
 msgstr "目標不支援符號鏈結。"
 
-#: libbaul-private/baul-file-operations.c:5476
+#: libbaul-private/baul-file-operations.c:5484
 #, c-format
 msgid "There was an error creating the symlink in %F."
 msgstr "在 %F 建立符號鏈結時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:5793
+#: libbaul-private/baul-file-operations.c:5801
 msgid "Setting permissions"
 msgstr "設定權限"
 
 #. Translators: the initial name of a new folder
-#: libbaul-private/baul-file-operations.c:6054
+#: libbaul-private/baul-file-operations.c:6062
 msgid "untitled folder"
 msgstr "未命名資料夾"
 
 #. Translators: the initial name of a new empty file
-#: libbaul-private/baul-file-operations.c:6062
+#: libbaul-private/baul-file-operations.c:6070
 msgid "new file"
 msgstr "新檔案"
 
-#: libbaul-private/baul-file-operations.c:6234
+#: libbaul-private/baul-file-operations.c:6242
 msgid "Error while creating directory %B."
 msgstr "建立目錄 %B 時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:6236
+#: libbaul-private/baul-file-operations.c:6244
 msgid "Error while creating file %B."
 msgstr "建立檔案 %B 時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:6238
+#: libbaul-private/baul-file-operations.c:6246
 #, c-format
 msgid "There was an error creating the directory in %F."
 msgstr "在 %F 中建立目錄時發生錯誤。"
 
-#: libbaul-private/baul-file-operations.c:6517
+#: libbaul-private/baul-file-operations.c:6525
 msgid "Emptying Trash"
 msgstr "正在清理回收筒"
 
-#: libbaul-private/baul-file-operations.c:6566
-#: libbaul-private/baul-file-operations.c:6607
-#: libbaul-private/baul-file-operations.c:6642
-#: libbaul-private/baul-file-operations.c:6677
+#: libbaul-private/baul-file-operations.c:6574
+#: libbaul-private/baul-file-operations.c:6615
+#: libbaul-private/baul-file-operations.c:6650
+#: libbaul-private/baul-file-operations.c:6685
 msgid "Unable to mark launcher trusted (executable)"
 msgstr "無法標記啟動圖示為受信任的（可執行的）"
 
@@ -2017,7 +2017,7 @@ msgstr "無法決定「%s」的原始位置"
 msgid "The item cannot be restored from trash"
 msgstr "此項目不能自回收筒還原。"
 
-#: libbaul-private/baul-icon-container.c:2926
+#: libbaul-private/baul-icon-container.c:2920
 msgid "The selection rectangle"
 msgstr "矩形選擇區域"
 
@@ -2041,11 +2041,11 @@ msgid "This link cannot be used, because its target \"%s\" doesn't exist."
 msgstr "鏈結無法使用，因為它的目標位置「%s」不存在。"
 
 #: libbaul-private/baul-mime-actions.c:751
-#: src/file-manager/fm-directory-view.c:7457
-#: src/file-manager/fm-directory-view.c:7589
-#: src/file-manager/fm-directory-view.c:8698
-#: src/file-manager/fm-directory-view.c:9030
-#: src/file-manager/fm-tree-view.c:1340
+#: src/file-manager/fm-directory-view.c:7470
+#: src/file-manager/fm-directory-view.c:7602
+#: src/file-manager/fm-directory-view.c:8711
+#: src/file-manager/fm-directory-view.c:9044
+#: src/file-manager/fm-tree-view.c:1346
 msgid "Mo_ve to Trash"
 msgstr "丟進回收筒(_V)"
 
@@ -2067,7 +2067,7 @@ msgstr "在終端機中執行(_T)"
 msgid "_Display"
 msgstr "顯示(_D)"
 
-#: libbaul-private/baul-mime-actions.c:830 src/baul-autorun-software.c:253
+#: libbaul-private/baul-mime-actions.c:830 src/baul-autorun-software.c:254
 msgid "_Run"
 msgstr "執行(_R)"
 
@@ -2088,10 +2088,10 @@ msgid "This will open %d separate window."
 msgid_plural "This will open %d separate windows."
 msgstr[0] ""
 
-#: libbaul-private/baul-mime-actions.c:1277 src/baul-window-manage-views.c:2132
-#: src/baul-window-manage-views.c:2140 src/baul-window-manage-views.c:2160
-#: src/baul-window-manage-views.c:2174 src/baul-window-manage-views.c:2180
-#: src/baul-window-manage-views.c:2207
+#: libbaul-private/baul-mime-actions.c:1277 src/baul-window-manage-views.c:2134
+#: src/baul-window-manage-views.c:2142 src/baul-window-manage-views.c:2162
+#: src/baul-window-manage-views.c:2176 src/baul-window-manage-views.c:2182
+#: src/baul-window-manage-views.c:2209
 #, c-format
 msgid "Could not display \"%s\"."
 msgstr "無法顯示「%s」。"
@@ -2148,35 +2148,35 @@ msgid "Mark as _Trusted"
 msgstr "標記成受信任的(_T)"
 
 #: libbaul-private/baul-mime-actions.c:2038
-#: libbaul-private/baul-mime-actions.c:2348
-#: src/file-manager/fm-directory-view.c:6433
+#: libbaul-private/baul-mime-actions.c:2349
+#: src/file-manager/fm-directory-view.c:6446
 msgid "Unable to mount location"
 msgstr "無法掛載位置"
 
-#: libbaul-private/baul-mime-actions.c:2436
-#: src/file-manager/fm-directory-view.c:6607
+#: libbaul-private/baul-mime-actions.c:2437
+#: src/file-manager/fm-directory-view.c:6620
 msgid "Unable to start location"
 msgstr "無法開啟位置"
 
-#: libbaul-private/baul-mime-actions.c:2530
+#: libbaul-private/baul-mime-actions.c:2531
 #, c-format
 msgid "Opening \"%s\"."
 msgstr "正在開啟「%s」。"
 
-#: libbaul-private/baul-mime-actions.c:2535
+#: libbaul-private/baul-mime-actions.c:2536
 #, c-format
 msgid "Opening %d item."
 msgid_plural "Opening %d items."
 msgstr[0] ""
 
 #: libbaul-private/baul-mime-application-chooser.c:164
-#: libbaul-private/baul-open-with-dialog.c:305
+#: libbaul-private/baul-open-with-dialog.c:303
 #, c-format
 msgid "Could not set application as the default: %s"
 msgstr "無法將應用程式設為預設值：%s"
 
 #: libbaul-private/baul-mime-application-chooser.c:165
-#: libbaul-private/baul-open-with-dialog.c:306
+#: libbaul-private/baul-open-with-dialog.c:304
 msgid "Could not set as default application"
 msgstr "無法設定為預設的應用程式"
 
@@ -2193,12 +2193,12 @@ msgid "Could not remove application"
 msgstr "無法移除應用程式"
 
 #: libbaul-private/baul-mime-application-chooser.c:422
-#: libbaul-private/baul-open-with-dialog.c:1145
+#: libbaul-private/baul-open-with-dialog.c:1143
 msgid "_Add"
 msgstr "加入(_A)"
 
 #: libbaul-private/baul-mime-application-chooser.c:432
-#: libbaul-private/baul-open-with-dialog.c:963 src/baul-bookmarks-window.ui:77
+#: libbaul-private/baul-open-with-dialog.c:961 src/baul-bookmarks-window.ui:77
 msgid "_Remove"
 msgstr "移除(_R)"
 
@@ -2212,7 +2212,7 @@ msgid "%s document"
 msgstr "%s 文件"
 
 #: libbaul-private/baul-mime-application-chooser.c:601
-#: libbaul-private/baul-open-with-dialog.c:1104
+#: libbaul-private/baul-open-with-dialog.c:1102
 msgid "Unknown"
 msgstr "不明"
 
@@ -2226,96 +2226,96 @@ msgstr "選擇用來開啟 %s 及其他檔案類型為「%s」的應用程式"
 msgid "Open all files of type \"%s\" with:"
 msgstr "以此開啟所有類型為「%s」的檔案："
 
-#: libbaul-private/baul-open-with-dialog.c:153
+#: libbaul-private/baul-open-with-dialog.c:151
 msgid "Could not run application"
 msgstr "無法執行應用程式"
 
-#: libbaul-private/baul-open-with-dialog.c:166
+#: libbaul-private/baul-open-with-dialog.c:164
 #, c-format
 msgid "Could not find '%s'"
 msgstr "找不到「%s」"
 
-#: libbaul-private/baul-open-with-dialog.c:169
+#: libbaul-private/baul-open-with-dialog.c:167
 msgid "Could not find application"
 msgstr "找不到應用程式"
 
-#: libbaul-private/baul-open-with-dialog.c:253
+#: libbaul-private/baul-open-with-dialog.c:251
 #, c-format
 msgid "Could not add application to the application database: %s"
 msgstr "無法將程式加入應用程式資料庫：%s"
 
-#: libbaul-private/baul-open-with-dialog.c:253
+#: libbaul-private/baul-open-with-dialog.c:251
 msgid "Unknown error"
 msgstr "不明的錯誤"
 
-#: libbaul-private/baul-open-with-dialog.c:254
+#: libbaul-private/baul-open-with-dialog.c:252
 msgid "Could not add application"
 msgstr "無法加入應用程式"
 
-#: libbaul-private/baul-open-with-dialog.c:456
+#: libbaul-private/baul-open-with-dialog.c:454
 msgid "Select an Application"
 msgstr "選擇一個應用程式"
 
-#: libbaul-private/baul-open-with-dialog.c:868
-#: src/file-manager/fm-properties-window.c:5116
+#: libbaul-private/baul-open-with-dialog.c:866
+#: src/file-manager/fm-properties-window.c:5122
 msgid "Open With"
 msgstr "以此開啟"
 
-#: libbaul-private/baul-open-with-dialog.c:906
+#: libbaul-private/baul-open-with-dialog.c:904
 msgid "Select an application to view its description."
 msgstr "選取應用程式後可以顯示有關該程式的說明。"
 
-#: libbaul-private/baul-open-with-dialog.c:932
+#: libbaul-private/baul-open-with-dialog.c:930
 msgid "_Use a custom command"
 msgstr "使用自訂指令(_U)"
 
-#: libbaul-private/baul-open-with-dialog.c:949
+#: libbaul-private/baul-open-with-dialog.c:947
 msgid "_Browse..."
 msgstr "瀏覽(_B)…"
 
 #. Translators: first %s is a filename and second %s is a file extension
-#: libbaul-private/baul-open-with-dialog.c:1072
+#: libbaul-private/baul-open-with-dialog.c:1070
 #, c-format
 msgid "Open %s and other %s document with:"
 msgstr "以此開啟 %s 及其他 %s 文件："
 
 #. Translators: the %s here is a file name
 #. Translators: %s is a filename
-#: libbaul-private/baul-open-with-dialog.c:1078
-#: libbaul-private/baul-open-with-dialog.c:1120
+#: libbaul-private/baul-open-with-dialog.c:1076
+#: libbaul-private/baul-open-with-dialog.c:1118
 #, c-format
 msgid "Open %s with:"
 msgstr "以此開啟 %s："
 
-#: libbaul-private/baul-open-with-dialog.c:1079
+#: libbaul-private/baul-open-with-dialog.c:1077
 #, c-format
 msgid "_Remember this application for %s documents"
 msgstr "記住這個應用程式用於 %s 文件(_R)"
 
-#: libbaul-private/baul-open-with-dialog.c:1090
+#: libbaul-private/baul-open-with-dialog.c:1088
 #, c-format
 msgid "Open all %s documents with:"
 msgstr "以此開啟所有 %s 文件："
 
 #. Translators: First %s is a filename, second is a description
 #. * of the type, eg "plain text document"
-#: libbaul-private/baul-open-with-dialog.c:1114
+#: libbaul-private/baul-open-with-dialog.c:1112
 #, c-format
 msgid "Open %s and other \"%s\" files with:"
 msgstr "以此開啟 %s 及其他「%s」檔案："
 
 #. Translators: %s is a file type description
-#: libbaul-private/baul-open-with-dialog.c:1122
+#: libbaul-private/baul-open-with-dialog.c:1120
 #, c-format
 msgid "_Remember this application for \"%s\" files"
 msgstr "記住這個應用程式用於 %s 檔案(_R)"
 
-#: libbaul-private/baul-open-with-dialog.c:1133
+#: libbaul-private/baul-open-with-dialog.c:1131
 #, c-format
 msgid "Open all \"%s\" files with:"
 msgstr "以此開啟所有「%s」檔案："
 
-#: libbaul-private/baul-open-with-dialog.c:1146
+#: libbaul-private/baul-open-with-dialog.c:1144
 msgid "Add Application"
 msgstr "加入應用程式"
 
@@ -2447,9 +2447,9 @@ msgid "Preparing"
 msgstr "正在準備"
 
 #: libbaul-private/baul-query.c:164
-#: libbaul-private/baul-search-directory-file.c:178
-#: libbaul-private/baul-search-directory-file.c:208
-#: libbaul-private/baul-search-directory-file.c:241
+#: libbaul-private/baul-search-directory-file.c:177
+#: libbaul-private/baul-search-directory-file.c:207
+#: libbaul-private/baul-search-directory-file.c:240
 msgid "Search"
 msgstr "搜尋"
 
@@ -3699,12 +3699,12 @@ msgstr "作業階段管理選項："
 msgid "Show session management options"
 msgstr "顯示作業階段管理選項"
 
-#: src/baul-application.c:554
+#: src/baul-application.c:552
 #, c-format
 msgid "Baul could not create the required folder \"%s\"."
 msgstr "Baul 無法建立所需的資料夾「%s」。"
 
-#: src/baul-application.c:556
+#: src/baul-application.c:554
 msgid ""
 "Before running Baul, please create the following folder, or set permissions "
 "such that Baul can create it."
@@ -3712,12 +3712,12 @@ msgstr ""
 "執行 Baul 之前，請自行建立以下資料夾，或是設定正確的權限使 Baul 可以建立這些"
 "資料夾。"
 
-#: src/baul-application.c:561
+#: src/baul-application.c:559
 #, c-format
 msgid "Baul could not create the following required folders: %s."
 msgstr "Baul 無法新增以下的資料夾：%s。"
 
-#: src/baul-application.c:563
+#: src/baul-application.c:561
 msgid ""
 "Before running Baul, please create these folders, or set permissions such "
 "that Baul can create them."
@@ -3725,73 +3725,73 @@ msgstr ""
 "執行 Baul 之前，請自行建立這些資料夾，或是設定正確的權限使 Baul 可以建立這些"
 "資料夾。"
 
-#: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
+#: src/baul-application.c:1165 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
 #, c-format
 msgid "Unable to eject %s"
 msgstr "無法退出 %s"
 
-#: src/baul-application.c:1792
+#: src/baul-application.c:1793
 msgid "--check cannot be used with other options."
 msgstr ""
 
-#: src/baul-application.c:1798
+#: src/baul-application.c:1799
 msgid "--quit cannot be used with URIs."
 msgstr ""
 
-#: src/baul-application.c:1805
+#: src/baul-application.c:1806
 msgid "--geometry cannot be used with more than one URI."
 msgstr ""
 
-#: src/baul-application.c:1869
+#: src/baul-application.c:1870
 msgid "Perform a quick set of self-check tests."
 msgstr "執行快速自動檢查測試。"
 
-#: src/baul-application.c:1872
+#: src/baul-application.c:1873
 msgid "Show the version of the program."
 msgstr "顯示此程式的版本。"
 
-#: src/baul-application.c:1874
+#: src/baul-application.c:1875
 msgid "Create the initial window with the given geometry."
 msgstr "以指定尺寸顯示初始視窗。"
 
-#: src/baul-application.c:1874
+#: src/baul-application.c:1875
 msgid "GEOMETRY"
 msgstr "位置大小"
 
-#: src/baul-application.c:1876
+#: src/baul-application.c:1877
 msgid "Only create windows for explicitly specified URIs."
 msgstr "只有特別指定 URI 時才會開啟新的視窗。"
 
-#: src/baul-application.c:1878
+#: src/baul-application.c:1879
 msgid ""
 "Do not manage the desktop (ignore the preference set in the preferences "
 "dialog)."
 msgstr "不管理桌面（會忽略偏好設定對話盒中的設定）。"
 
-#: src/baul-application.c:1880
+#: src/baul-application.c:1881
 msgid ""
 "Manage the desktop regardless of set preferences or environment (on new "
 "startup only)"
 msgstr ""
 
-#: src/baul-application.c:1882
+#: src/baul-application.c:1883
 msgid "Open URIs in tabs."
 msgstr ""
 
-#: src/baul-application.c:1884
+#: src/baul-application.c:1885
 msgid "Open a browser window."
 msgstr ""
 
-#: src/baul-application.c:1886
+#: src/baul-application.c:1887
 msgid "Quit Baul."
 msgstr "離開 Baul。"
 
-#: src/baul-application.c:1887
+#: src/baul-application.c:1888
 msgid "[URI...]"
 msgstr "[URI…]"
 
-#: src/baul-application.c:1898
+#: src/baul-application.c:1899
 msgid ""
 "\n"
 "\n"
@@ -3801,26 +3801,26 @@ msgstr ""
 "\n"
 "使用檔案總管瀏覽檔案系統"
 
-#: src/baul-autorun-software.c:163 src/baul-autorun-software.c:166
+#: src/baul-autorun-software.c:164 src/baul-autorun-software.c:167
 #, c-format
 msgid "Error starting autorun program: %s"
 msgstr "啟動自動執行程式時發生錯誤：%s"
 
-#: src/baul-autorun-software.c:169
+#: src/baul-autorun-software.c:170
 msgid "Cannot find the autorun program"
 msgstr "找不到自動執行的程式"
 
-#: src/baul-autorun-software.c:190
+#: src/baul-autorun-software.c:191
 msgid "<big><b>Error autorunning software</b></big>"
 msgstr "<big><b>自動執行軟體錯誤</b></big>"
 
-#: src/baul-autorun-software.c:216
+#: src/baul-autorun-software.c:217
 msgid ""
 "<big><b>This medium contains software intended to be automatically started. "
 "Would you like to run it?</b></big>"
 msgstr "<big><b>這個媒體包含了要求自動執行的軟體。是否要執行它？</b></big>"
 
-#: src/baul-autorun-software.c:218
+#: src/baul-autorun-software.c:219
 #, c-format
 msgid ""
 "The software will run directly from the medium \"%s\". You should never run "
@@ -3833,7 +3833,7 @@ msgstr ""
 "如果懷疑，請按「取消」。"
 
 #: src/baul-bookmarks-window.c:163 src/baul-file-management-properties.c:249
-#: src/baul-property-browser.c:1688 src/baul-window-menus.c:618
+#: src/baul-property-browser.c:1695 src/baul-window-menus.c:620
 #, c-format
 msgid ""
 "There was an error displaying help: \n"
@@ -3851,11 +3851,11 @@ msgid "Edit Bookmarks"
 msgstr "修改書籤"
 
 #: src/baul-bookmarks-window.ui:45 src/baul-connect-server-dialog.c:1114
-#: src/baul-emblem-sidebar.c:303 src/baul-emblem-sidebar.c:557
-#: src/baul-file-management-properties.ui:305 src/baul-location-dialog.c:192
-#: src/baul-property-browser.c:389 src/baul-window-menus.c:837
+#: src/baul-emblem-sidebar.c:305 src/baul-emblem-sidebar.c:560
+#: src/baul-file-management-properties.ui:305 src/baul-location-dialog.c:194
+#: src/baul-property-browser.c:389 src/baul-window-menus.c:839
 #: src/file-manager/fm-directory-view.c:1210
-#: src/file-manager/fm-properties-window.c:5227
+#: src/file-manager/fm-properties-window.c:5233
 msgid "_Help"
 msgstr "求助(_H)"
 
@@ -3864,9 +3864,9 @@ msgid "_Jump to"
 msgstr ""
 
 #: src/baul-bookmarks-window.ui:93 src/baul-file-management-properties.ui:321
-#: src/baul-property-browser.c:397 src/baul-window-menus.c:839
-#: src/file-manager/fm-list-view.c:2572
-#: src/file-manager/fm-properties-window.c:5232
+#: src/baul-property-browser.c:397 src/baul-window-menus.c:841
+#: src/file-manager/fm-list-view.c:2608
+#: src/file-manager/fm-properties-window.c:5238
 msgid "_Close"
 msgstr "關閉(_C)"
 
@@ -3946,7 +3946,7 @@ msgstr "繼續"
 
 #: src/baul-connect-server-dialog.c:717 src/baul-location-dialog.c:105
 #: src/file-manager/fm-directory-view.c:1184
-#: src/file-manager/fm-properties-window.c:5469
+#: src/file-manager/fm-properties-window.c:5475
 msgid "There was an error displaying help."
 msgstr "顯示說明文件時發生錯誤。"
 
@@ -4028,75 +4028,75 @@ msgstr "桌面"
 msgid "Could not remove emblem with name '%s'."
 msgstr "無法移除名為「%s」的圖章。"
 
-#: src/baul-emblem-sidebar.c:227 src/baul-emblem-sidebar.c:269
+#: src/baul-emblem-sidebar.c:227 src/baul-emblem-sidebar.c:270
 msgid ""
 "This is probably because the emblem is a permanent one, and not one that you "
 "added yourself."
 msgstr "這可能因為它是內置的圖章，而不是您自行加上的。"
 
-#: src/baul-emblem-sidebar.c:268
+#: src/baul-emblem-sidebar.c:269
 #, c-format
 msgid "Could not rename emblem with name '%s'."
 msgstr "無法將名稱為「%s」的圖章重新命名。"
 
-#: src/baul-emblem-sidebar.c:289
+#: src/baul-emblem-sidebar.c:291
 msgid "Rename Emblem"
 msgstr "圖章重新命名"
 
-#: src/baul-emblem-sidebar.c:315
+#: src/baul-emblem-sidebar.c:317
 msgid "Enter a new name for the displayed emblem:"
 msgstr "請為目前顯示的圖章輸入新的名稱："
 
-#: src/baul-emblem-sidebar.c:368
+#: src/baul-emblem-sidebar.c:370
 msgid "Rename"
 msgstr "重新命名"
 
-#: src/baul-emblem-sidebar.c:543
+#: src/baul-emblem-sidebar.c:546
 msgid "Add Emblems..."
 msgstr "加入圖章…"
 
-#: src/baul-emblem-sidebar.c:567
+#: src/baul-emblem-sidebar.c:570
 msgid ""
 "Enter a descriptive name next to each emblem.  This name will be used in "
 "other places to identify the emblem."
 msgstr "請在每個圖章旁輸入適當的名稱。該名稱會在其他地方作為識別圖章之用。"
 
-#: src/baul-emblem-sidebar.c:571
+#: src/baul-emblem-sidebar.c:574
 msgid ""
 "Enter a descriptive name next to the emblem.  This name will be used in "
 "other places to identify the emblem."
 msgstr "請在圖章旁輸入適當的名稱。該名稱會在其他地方作為識別圖章之用。"
 
-#: src/baul-emblem-sidebar.c:813
+#: src/baul-emblem-sidebar.c:817
 msgid "Some of the files could not be added as emblems."
 msgstr "有一部分的檔案無法加入成為圖章。"
 
-#: src/baul-emblem-sidebar.c:813 src/baul-emblem-sidebar.c:817
+#: src/baul-emblem-sidebar.c:817 src/baul-emblem-sidebar.c:821
 msgid "The emblems do not appear to be valid images."
 msgstr "該圖章似乎不是有效的圖形檔。"
 
-#: src/baul-emblem-sidebar.c:817
+#: src/baul-emblem-sidebar.c:821
 msgid "None of the files could be added as emblems."
 msgstr "沒有任何檔案可以加入作為圖章。"
 
-#: src/baul-emblem-sidebar.c:862 src/baul-emblem-sidebar.c:924
+#: src/baul-emblem-sidebar.c:866 src/baul-emblem-sidebar.c:928
 #, c-format
 msgid "The file '%s' does not appear to be a valid image."
 msgstr "檔案「%s」似乎不是有效的圖形檔。"
 
-#: src/baul-emblem-sidebar.c:866
+#: src/baul-emblem-sidebar.c:870
 msgid "The dragged file does not appear to be a valid image."
 msgstr "您正在拖曳的檔案似乎不是有效的圖片檔。"
 
-#: src/baul-emblem-sidebar.c:868 src/baul-emblem-sidebar.c:925
+#: src/baul-emblem-sidebar.c:872 src/baul-emblem-sidebar.c:929
 msgid "The emblem cannot be added."
 msgstr "圖章無法加入。"
 
-#: src/baul-emblem-sidebar.c:1097 src/file-manager/fm-properties-window.c:3460
+#: src/baul-emblem-sidebar.c:1101 src/file-manager/fm-properties-window.c:3466
 msgid "Emblems"
 msgstr "圖章"
 
-#: src/baul-emblem-sidebar.c:1103
+#: src/baul-emblem-sidebar.c:1107
 msgid "Show Emblems"
 msgstr "顯示圖章"
 
@@ -4105,12 +4105,12 @@ msgstr "顯示圖章"
 #. * the user has in a directory.
 #.
 #: src/baul-file-management-properties.c:342
-#: src/file-manager/fm-properties-window.c:4233
-#: src/file-manager/fm-properties-window.c:4244
+#: src/file-manager/fm-properties-window.c:4239
+#: src/file-manager/fm-properties-window.c:4250
 msgid "None"
 msgstr "沒有"
 
-#: src/baul-file-management-properties.c:646
+#: src/baul-file-management-properties.c:647
 msgid "About Extension"
 msgstr ""
 
@@ -4118,21 +4118,21 @@ msgstr ""
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:44
 #: src/file-manager/fm-icon-container.c:623
-#: src/file-manager/fm-icon-view.c:3420
+#: src/file-manager/fm-icon-view.c:3443
 msgid "Icon View"
 msgstr "圖示檢視"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:47
-#: src/file-manager/fm-list-view.c:1866 src/file-manager/fm-list-view.c:3501
+#: src/file-manager/fm-list-view.c:1896 src/file-manager/fm-list-view.c:3537
 msgid "List View"
 msgstr "列表顯示"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:50
-#: src/file-manager/fm-icon-view.c:3435
+#: src/file-manager/fm-icon-view.c:3458
 msgid "Compact View"
 msgstr "精簡檢視"
 
@@ -4239,15 +4239,15 @@ msgstr "200%"
 msgid "400%"
 msgstr "400%"
 
-#: src/baul-file-management-properties.ui:237 src/baul-query-editor.c:1263
+#: src/baul-file-management-properties.ui:237 src/baul-query-editor.c:1268
 msgid "100 KB"
 msgstr "100 KB"
 
-#: src/baul-file-management-properties.ui:240 src/baul-query-editor.c:1265
+#: src/baul-file-management-properties.ui:240 src/baul-query-editor.c:1270
 msgid "500 KB"
 msgstr "500 KB"
 
-#: src/baul-file-management-properties.ui:243 src/baul-query-editor.c:1267
+#: src/baul-file-management-properties.ui:243 src/baul-query-editor.c:1272
 msgid "1 MB"
 msgstr "1 MB"
 
@@ -4255,27 +4255,27 @@ msgstr "1 MB"
 msgid "3 MB"
 msgstr "3 MB"
 
-#: src/baul-file-management-properties.ui:249 src/baul-query-editor.c:1269
+#: src/baul-file-management-properties.ui:249 src/baul-query-editor.c:1274
 msgid "5 MB"
 msgstr "5 MB"
 
-#: src/baul-file-management-properties.ui:252 src/baul-query-editor.c:1271
+#: src/baul-file-management-properties.ui:252 src/baul-query-editor.c:1276
 msgid "10 MB"
 msgstr "10 MB"
 
-#: src/baul-file-management-properties.ui:255 src/baul-query-editor.c:1273
+#: src/baul-file-management-properties.ui:255 src/baul-query-editor.c:1278
 msgid "100 MB"
 msgstr "100 MB"
 
-#: src/baul-file-management-properties.ui:258 src/baul-query-editor.c:1277
+#: src/baul-file-management-properties.ui:258 src/baul-query-editor.c:1282
 msgid "1 GB"
 msgstr "1 GB"
 
-#: src/baul-file-management-properties.ui:261 src/baul-query-editor.c:1279
+#: src/baul-file-management-properties.ui:261 src/baul-query-editor.c:1284
 msgid "2 GB"
 msgstr "2 GB"
 
-#: src/baul-file-management-properties.ui:264 src/baul-query-editor.c:1281
+#: src/baul-file-management-properties.ui:264 src/baul-query-editor.c:1286
 msgid "4 GB"
 msgstr "4 GB"
 
@@ -4629,8 +4629,8 @@ msgstr "焦距"
 msgid "Software"
 msgstr "軟體"
 
-#: src/baul-image-properties-page.c:368 src/file-manager/fm-ditem-page.c:446
-#: src/file-manager/fm-ditem-page.c:458
+#: src/baul-image-properties-page.c:368 src/file-manager/fm-ditem-page.c:452
+#: src/file-manager/fm-ditem-page.c:464
 msgid "Description"
 msgstr "描述"
 
@@ -4686,41 +4686,41 @@ msgstr "資訊"
 msgid "Show Information"
 msgstr "顯示資訊"
 
-#: src/baul-information-panel.c:360
+#: src/baul-information-panel.c:361
 msgid "Use _Default Background"
 msgstr "使用預設背景(_D)"
 
-#: src/baul-information-panel.c:526
+#: src/baul-information-panel.c:527
 msgid "You cannot assign more than one custom icon at a time."
 msgstr "不可以同時分配一個以上的自訂圖示。"
 
-#: src/baul-information-panel.c:527 src/file-manager/fm-properties-window.c:512
+#: src/baul-information-panel.c:528 src/file-manager/fm-properties-window.c:515
 msgid "Please drag just one image to set a custom icon."
 msgstr "請只拖曳一個圖片檔作為自選圖示。"
 
-#: src/baul-information-panel.c:554 src/file-manager/fm-properties-window.c:523
+#: src/baul-information-panel.c:555 src/file-manager/fm-properties-window.c:526
 msgid "The file that you dropped is not local."
 msgstr "所拖放的檔案並非本地的檔案。"
 
-#: src/baul-information-panel.c:555 src/file-manager/fm-properties-window.c:524
-#: src/file-manager/fm-properties-window.c:530
+#: src/baul-information-panel.c:556 src/file-manager/fm-properties-window.c:527
+#: src/file-manager/fm-properties-window.c:533
 msgid "You can only use local images as custom icons."
 msgstr "只可以使用本機的圖示作為自選圖示。"
 
-#: src/baul-information-panel.c:562 src/file-manager/fm-properties-window.c:529
+#: src/baul-information-panel.c:563 src/file-manager/fm-properties-window.c:532
 msgid "The file that you dropped is not an image."
 msgstr "所拖放的檔案並非圖型檔。"
 
-#: src/baul-information-panel.c:563
+#: src/baul-information-panel.c:564
 msgid "You can only use images as custom icons."
 msgstr "只可以使用圖片作為自選圖示。"
 
-#: src/baul-information-panel.c:748 src/file-manager/fm-directory-view.c:4507
+#: src/baul-information-panel.c:754 src/file-manager/fm-directory-view.c:4512
 #, c-format
 msgid "Open With %s"
 msgstr "以 %s 開啟"
 
-#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3316
+#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3322
 msgid "Location:"
 msgstr "位置："
 
@@ -4734,11 +4734,11 @@ msgid "Do you want to view %d location?"
 msgid_plural "Do you want to view %d locations?"
 msgstr[0] ""
 
-#: src/baul-location-dialog.c:160
+#: src/baul-location-dialog.c:162
 msgid "Open Location"
 msgstr "開啟位置"
 
-#: src/baul-location-dialog.c:170
+#: src/baul-location-dialog.c:172
 msgid "_Location:"
 msgstr "位置(_L):"
 
@@ -4751,256 +4751,256 @@ msgstr ""
 msgid "%s - File Browser"
 msgstr "%s - 檔案瀏覽器"
 
-#: src/baul-navigation-window-menus.c:133
+#: src/baul-navigation-window-menus.c:135
 msgid "Are you sure you want to clear the list of locations you have visited?"
 msgstr "是否確定清除所有曾經瀏覽的位置的紀錄？"
 
-#: src/baul-navigation-window-menus.c:410 src/baul-window-bookmarks.c:85
+#: src/baul-navigation-window-menus.c:412 src/baul-window-bookmarks.c:85
 #, c-format
 msgid "The location \"%s\" does not exist."
 msgstr "位置「%s」不存在。"
 
-#: src/baul-navigation-window-menus.c:412
+#: src/baul-navigation-window-menus.c:414
 msgid "The history location doesn't exist."
 msgstr "瀏覽紀錄位置不存在。"
 
-#: src/baul-navigation-window-menus.c:805
+#: src/baul-navigation-window-menus.c:807
 msgid "_Go"
 msgstr "前往(_G)"
 
-#: src/baul-navigation-window-menus.c:806
+#: src/baul-navigation-window-menus.c:808
 msgid "_Bookmarks"
 msgstr "書籤(_B)"
 
-#: src/baul-navigation-window-menus.c:807
+#: src/baul-navigation-window-menus.c:809
 msgid "_Tabs"
 msgstr "分頁(_T)"
 
-#: src/baul-navigation-window-menus.c:808
+#: src/baul-navigation-window-menus.c:810
 msgid "New _Window"
 msgstr "開新視窗(_W)"
 
-#: src/baul-navigation-window-menus.c:809
+#: src/baul-navigation-window-menus.c:811
 msgid "Open another Baul window for the displayed location"
 msgstr "在已顯示的位置中開啟另一個 Baul 視窗"
 
-#: src/baul-navigation-window-menus.c:812
+#: src/baul-navigation-window-menus.c:814
 msgid "New _Tab"
 msgstr "新增分頁(_T)"
 
-#: src/baul-navigation-window-menus.c:813
+#: src/baul-navigation-window-menus.c:815
 msgid "Open another tab for the displayed location"
 msgstr "在已顯示的位置中開啟另一個分頁"
 
-#: src/baul-navigation-window-menus.c:816
+#: src/baul-navigation-window-menus.c:818
 msgid "Open Folder W_indow"
 msgstr "開啟資料夾視窗(_I)"
 
-#: src/baul-navigation-window-menus.c:817
+#: src/baul-navigation-window-menus.c:819
 msgid "Open a folder window for the displayed location"
 msgstr "在已顯示的位置中開啟另一個資料夾視窗"
 
-#: src/baul-navigation-window-menus.c:820
+#: src/baul-navigation-window-menus.c:822
 msgid "Close _All Windows"
 msgstr "關閉所有視窗(_A)"
 
-#: src/baul-navigation-window-menus.c:821
+#: src/baul-navigation-window-menus.c:823
 msgid "Close all Navigation windows"
 msgstr "關閉所有導航視窗"
 
-#: src/baul-navigation-window-menus.c:824
+#: src/baul-navigation-window-menus.c:826
 msgid "_Location..."
 msgstr "位置(_L)…"
 
-#: src/baul-navigation-window-menus.c:825 src/baul-spatial-window.c:925
+#: src/baul-navigation-window-menus.c:827 src/baul-spatial-window.c:927
 msgid "Specify a location to open"
 msgstr "指定一個位置來開啟"
 
-#: src/baul-navigation-window-menus.c:828
+#: src/baul-navigation-window-menus.c:830
 msgid "Clea_r History"
 msgstr "清除紀錄(_R)"
 
-#: src/baul-navigation-window-menus.c:829
+#: src/baul-navigation-window-menus.c:831
 msgid "Clear contents of Go menu and Back/Forward lists"
 msgstr "清除「前往」選單及「上一頁/下一頁」列表的內容"
 
-#: src/baul-navigation-window-menus.c:832
+#: src/baul-navigation-window-menus.c:834
 msgid "S_witch to Other Pane"
 msgstr "切換至其他窗格(_W)"
 
-#: src/baul-navigation-window-menus.c:833
+#: src/baul-navigation-window-menus.c:835
 msgid "Move focus to the other pane in a split view window"
 msgstr "將焦移至分離檢視視窗的其他窗格中"
 
-#: src/baul-navigation-window-menus.c:836
+#: src/baul-navigation-window-menus.c:838
 msgid "Sa_me Location as Other Pane"
 msgstr "與其他窗格同樣的位置(_M)"
 
-#: src/baul-navigation-window-menus.c:837
+#: src/baul-navigation-window-menus.c:839
 msgid "Go to the same location as in the extra pane"
 msgstr "前往與額外窗格中同樣的位置"
 
-#: src/baul-navigation-window-menus.c:840 src/baul-spatial-window.c:938
+#: src/baul-navigation-window-menus.c:842 src/baul-spatial-window.c:940
 msgid "_Add Bookmark"
 msgstr "加入書籤(_A)"
 
-#: src/baul-navigation-window-menus.c:841 src/baul-spatial-window.c:939
+#: src/baul-navigation-window-menus.c:843 src/baul-spatial-window.c:941
 msgid "Add a bookmark for the current location to this menu"
 msgstr "將目前的位置加入書籤中"
 
-#: src/baul-navigation-window-menus.c:844 src/baul-spatial-window.c:942
+#: src/baul-navigation-window-menus.c:846 src/baul-spatial-window.c:944
 msgid "_Edit Bookmarks..."
 msgstr "編輯書籤(_E)…"
 
-#: src/baul-navigation-window-menus.c:845 src/baul-spatial-window.c:943
+#: src/baul-navigation-window-menus.c:847 src/baul-spatial-window.c:945
 msgid "Display a window that allows editing the bookmarks in this menu"
 msgstr "顯示可修改書籤的視窗"
 
-#: src/baul-navigation-window-menus.c:849
+#: src/baul-navigation-window-menus.c:851
 msgid "_Previous Tab"
 msgstr "上一個分頁(_P)"
 
-#: src/baul-navigation-window-menus.c:850
+#: src/baul-navigation-window-menus.c:852
 msgid "Activate previous tab"
 msgstr "使用上一個分頁"
 
-#: src/baul-navigation-window-menus.c:854
+#: src/baul-navigation-window-menus.c:856
 msgid "_Next Tab"
 msgstr "下一個分頁(_N)"
 
-#: src/baul-navigation-window-menus.c:855
+#: src/baul-navigation-window-menus.c:857
 msgid "Activate next tab"
 msgstr "使用下一個分頁"
 
-#: src/baul-navigation-window-menus.c:859 src/baul-navigation-window-pane.c:389
+#: src/baul-navigation-window-menus.c:861 src/baul-navigation-window-pane.c:391
 msgid "Move Tab _Left"
 msgstr "將分頁左移(_L)"
 
-#: src/baul-navigation-window-menus.c:860
+#: src/baul-navigation-window-menus.c:862
 msgid "Move current tab to left"
 msgstr "將目前的分頁向左移動"
 
-#: src/baul-navigation-window-menus.c:864 src/baul-navigation-window-pane.c:397
+#: src/baul-navigation-window-menus.c:866 src/baul-navigation-window-pane.c:399
 msgid "Move Tab _Right"
 msgstr "將分頁右移(_R)"
 
-#: src/baul-navigation-window-menus.c:865
+#: src/baul-navigation-window-menus.c:867
 msgid "Move current tab to right"
 msgstr "將目前的分頁向右移動"
 
-#: src/baul-navigation-window-menus.c:869
+#: src/baul-navigation-window-menus.c:871
 msgid "S_how Search"
 msgstr "顯示搜尋(_H)"
 
-#: src/baul-navigation-window-menus.c:870
+#: src/baul-navigation-window-menus.c:872
 msgid "Show search"
 msgstr "顯示搜尋"
 
-#: src/baul-navigation-window-menus.c:878
+#: src/baul-navigation-window-menus.c:880
 msgid "_Main Toolbar"
 msgstr "主工具列(_M)"
 
-#: src/baul-navigation-window-menus.c:879
+#: src/baul-navigation-window-menus.c:881
 msgid "Change the visibility of this window's main toolbar"
 msgstr "顯示或隱藏本視窗的主工具列"
 
-#: src/baul-navigation-window-menus.c:884
+#: src/baul-navigation-window-menus.c:886
 msgid "_Side Pane"
 msgstr "側面窗格(_S)"
 
-#: src/baul-navigation-window-menus.c:885
+#: src/baul-navigation-window-menus.c:887
 msgid "Change the visibility of this window's side pane"
 msgstr "顯示或隱藏本視窗的側面窗格"
 
-#: src/baul-navigation-window-menus.c:890
+#: src/baul-navigation-window-menus.c:892
 msgid "Location _Bar"
 msgstr "位置列(_B)"
 
-#: src/baul-navigation-window-menus.c:891
+#: src/baul-navigation-window-menus.c:893
 msgid "Change the visibility of this window's location bar"
 msgstr "顯示或隱藏本視窗的位置列"
 
-#: src/baul-navigation-window-menus.c:896
+#: src/baul-navigation-window-menus.c:898
 msgid "St_atusbar"
 msgstr "狀態列(_A)"
 
-#: src/baul-navigation-window-menus.c:897
+#: src/baul-navigation-window-menus.c:899
 msgid "Change the visibility of this window's statusbar"
 msgstr "顯示或隱藏本視窗的狀態列"
 
-#: src/baul-navigation-window-menus.c:902 src/baul-spatial-window.c:946
+#: src/baul-navigation-window-menus.c:904 src/baul-spatial-window.c:948
 msgid "_Search for Files..."
 msgstr "搜尋檔案(_S)…"
 
-#: src/baul-navigation-window-menus.c:904
+#: src/baul-navigation-window-menus.c:906
 msgid "Search documents and folders by name"
 msgstr "根據名稱搜尋文件和資料夾"
 
-#: src/baul-navigation-window-menus.c:910
+#: src/baul-navigation-window-menus.c:912
 msgid "E_xtra Pane"
 msgstr "額外窗格(_X)"
 
-#: src/baul-navigation-window-menus.c:911
+#: src/baul-navigation-window-menus.c:913
 msgid "Open an extra folder view side-by-side"
 msgstr "開啟額外資料夾檢視"
 
-#: src/baul-navigation-window-menus.c:937
+#: src/baul-navigation-window-menus.c:939
 msgid "_Back"
 msgstr "上一頁(_B)"
 
-#: src/baul-navigation-window-menus.c:939
+#: src/baul-navigation-window-menus.c:941
 msgid "Go to the previous visited location"
 msgstr "回到上一個已造訪位置"
 
-#: src/baul-navigation-window-menus.c:940
+#: src/baul-navigation-window-menus.c:942
 msgid "Back history"
 msgstr "上一頁紀錄"
 
-#: src/baul-navigation-window-menus.c:954
+#: src/baul-navigation-window-menus.c:956
 msgid "_Forward"
 msgstr "下一頁(_F)"
 
-#: src/baul-navigation-window-menus.c:956
+#: src/baul-navigation-window-menus.c:958
 msgid "Go to the next visited location"
 msgstr "前往下一個已造訪位置"
 
-#: src/baul-navigation-window-menus.c:957
+#: src/baul-navigation-window-menus.c:959
 msgid "Forward history"
 msgstr "上一頁紀錄"
 
-#: src/baul-navigation-window-menus.c:972
+#: src/baul-navigation-window-menus.c:974
 msgid "_Zoom"
 msgstr "縮放(_Z)"
 
-#: src/baul-navigation-window-menus.c:982
+#: src/baul-navigation-window-menus.c:984
 msgid "_View As"
 msgstr "顯示方式(_V)"
 
-#: src/baul-navigation-window-menus.c:1017
+#: src/baul-navigation-window-menus.c:1019
 msgid "_Search"
 msgstr "搜尋(_S)"
 
-#: src/baul-navigation-window-pane.c:258
+#: src/baul-navigation-window-pane.c:260
 msgid "Toggle between button and text-based location bar"
 msgstr "於按鈕和基於文字的位置列間切換"
 
-#: src/baul-navigation-window-pane.c:379
+#: src/baul-navigation-window-pane.c:381
 msgid "_New Tab"
 msgstr "新分頁(_N)"
 
-#: src/baul-navigation-window-pane.c:408
+#: src/baul-navigation-window-pane.c:410
 msgid "_Close Tab"
 msgstr "關閉分頁(_C)"
 
-#: src/baul-notebook.c:311
+#: src/baul-notebook.c:312
 msgid "Close tab"
 msgstr "關閉分頁"
 
-#: src/baul-notes-viewer.c:402 src/baul-notes-viewer.c:506
+#: src/baul-notes-viewer.c:401 src/baul-notes-viewer.c:505
 msgid "Notes"
 msgstr "備註"
 
-#: src/baul-notes-viewer.c:408
+#: src/baul-notes-viewer.c:407
 msgid "Show Notes"
 msgstr "顯示備忘"
 
@@ -5016,7 +5016,7 @@ msgstr "書籤"
 msgid "Open the contents of your desktop in a folder"
 msgstr "以資料夾形式開啟桌面中的東西"
 
-#: src/baul-places-sidebar.c:558 src/file-manager/fm-tree-view.c:1425
+#: src/baul-places-sidebar.c:558 src/file-manager/fm-tree-view.c:1431
 msgid "File System"
 msgstr "檔案系統"
 
@@ -5042,25 +5042,25 @@ msgid "Browse the contents of the network"
 msgstr "瀏覽網路的內容"
 
 #: src/baul-places-sidebar.c:1813 src/baul-places-sidebar.c:2775
-#: src/file-manager/fm-directory-view.c:7508
-#: src/file-manager/fm-directory-view.c:7536
-#: src/file-manager/fm-directory-view.c:7617
-#: src/file-manager/fm-directory-view.c:8303
-#: src/file-manager/fm-directory-view.c:8307
-#: src/file-manager/fm-directory-view.c:8395
-#: src/file-manager/fm-directory-view.c:8399
-#: src/file-manager/fm-directory-view.c:8505
-#: src/file-manager/fm-directory-view.c:8509
+#: src/file-manager/fm-directory-view.c:7521
+#: src/file-manager/fm-directory-view.c:7549
+#: src/file-manager/fm-directory-view.c:7630
+#: src/file-manager/fm-directory-view.c:8316
+#: src/file-manager/fm-directory-view.c:8320
+#: src/file-manager/fm-directory-view.c:8408
+#: src/file-manager/fm-directory-view.c:8412
+#: src/file-manager/fm-directory-view.c:8518
+#: src/file-manager/fm-directory-view.c:8522
 msgid "_Start"
 msgstr "開啟(_S)"
 
 #: src/baul-places-sidebar.c:1814 src/baul-places-sidebar.c:2782
-#: src/baul-window-menus.c:864 src/file-manager/fm-directory-view.c:7512
-#: src/file-manager/fm-directory-view.c:7540
-#: src/file-manager/fm-directory-view.c:7621
-#: src/file-manager/fm-directory-view.c:8332
-#: src/file-manager/fm-directory-view.c:8424
-#: src/file-manager/fm-directory-view.c:8534
+#: src/baul-window-menus.c:866 src/file-manager/fm-directory-view.c:7525
+#: src/file-manager/fm-directory-view.c:7553
+#: src/file-manager/fm-directory-view.c:7634
+#: src/file-manager/fm-directory-view.c:8345
+#: src/file-manager/fm-directory-view.c:8437
+#: src/file-manager/fm-directory-view.c:8547
 msgid "_Stop"
 msgstr "停止(_S)"
 
@@ -5068,9 +5068,9 @@ msgstr "停止(_S)"
 msgid "_Power On"
 msgstr "電源開啟(_P)"
 
-#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8336
-#: src/file-manager/fm-directory-view.c:8428
-#: src/file-manager/fm-directory-view.c:8538
+#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8349
+#: src/file-manager/fm-directory-view.c:8441
+#: src/file-manager/fm-directory-view.c:8551
 msgid "_Safely Remove Drive"
 msgstr "安全的移除裝置(_S)"
 
@@ -5090,14 +5090,14 @@ msgstr "開啟多磁碟裝置(_S)"
 msgid "_Stop Multi-disk Device"
 msgstr "關閉多磁碟裝置(_S)"
 
-#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8411
-#: src/file-manager/fm-directory-view.c:8521
+#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8424
+#: src/file-manager/fm-directory-view.c:8534
 msgid "_Unlock Drive"
 msgstr "解鎖裝置"
 
-#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8348
-#: src/file-manager/fm-directory-view.c:8440
-#: src/file-manager/fm-directory-view.c:8550
+#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8361
+#: src/file-manager/fm-directory-view.c:8453
+#: src/file-manager/fm-directory-view.c:8563
 msgid "_Lock Drive"
 msgstr "鎖定裝置(_L)"
 
@@ -5116,17 +5116,17 @@ msgstr "無法監測 %s 的媒體變更"
 msgid "Unable to stop %s"
 msgstr "無法關閉 %s"
 
-#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7385
-#: src/file-manager/fm-directory-view.c:7566
-#: src/file-manager/fm-directory-view.c:8643
-#: src/file-manager/fm-directory-view.c:8976
-#: src/file-manager/fm-tree-view.c:1280
+#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7398
+#: src/file-manager/fm-directory-view.c:7579
+#: src/file-manager/fm-directory-view.c:8656
+#: src/file-manager/fm-directory-view.c:8990
+#: src/file-manager/fm-tree-view.c:1286
 msgid "Open in New _Tab"
 msgstr "在新的分頁中開啟(_T)"
 
-#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8620
-#: src/file-manager/fm-directory-view.c:8937
-#: src/file-manager/fm-tree-view.c:1289
+#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8633
+#: src/file-manager/fm-directory-view.c:8951
+#: src/file-manager/fm-tree-view.c:1295
 msgid "Open in New _Window"
 msgstr "在新的視窗中開啟(_W)"
 
@@ -5138,21 +5138,21 @@ msgstr "移除"
 msgid "Rename..."
 msgstr "重新命名…"
 
-#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7492
-#: src/file-manager/fm-directory-view.c:7520
-#: src/file-manager/fm-directory-view.c:7601
+#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7505
+#: src/file-manager/fm-directory-view.c:7533
+#: src/file-manager/fm-directory-view.c:7614
 msgid "_Mount"
 msgstr "掛載(_M)"
 
-#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7516
-#: src/file-manager/fm-directory-view.c:7544
-#: src/file-manager/fm-directory-view.c:7625
+#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7529
+#: src/file-manager/fm-directory-view.c:7557
+#: src/file-manager/fm-directory-view.c:7638
 msgid "_Detect Media"
 msgstr "偵測媒體(_D)"
 
-#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7504
-#: src/file-manager/fm-directory-view.c:7532
-#: src/file-manager/fm-directory-view.c:7613
+#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7517
+#: src/file-manager/fm-directory-view.c:7545
+#: src/file-manager/fm-directory-view.c:7626
 msgid "_Format"
 msgstr "格式(_F)"
 
@@ -5176,147 +5176,147 @@ msgstr "移除(_R)…"
 msgid "Add new..."
 msgstr "加入新的…"
 
-#: src/baul-property-browser.c:979
+#: src/baul-property-browser.c:980
 #, c-format
 msgid "Sorry, but pattern %s could not be deleted."
 msgstr "抱歉，無法刪除胚騰 %s。"
 
-#: src/baul-property-browser.c:980
+#: src/baul-property-browser.c:981
 msgid "Check that you have permission to delete the pattern."
 msgstr "請檢查您有沒有權限刪除胚騰。"
 
-#: src/baul-property-browser.c:996
+#: src/baul-property-browser.c:997
 #, c-format
 msgid "Sorry, but emblem %s could not be deleted."
 msgstr "抱歉，無法刪除圖章 %s。"
 
-#: src/baul-property-browser.c:997
+#: src/baul-property-browser.c:998
 msgid "Check that you have permission to delete the emblem."
 msgstr "請檢查您有沒有權限刪除圖章。"
 
-#: src/baul-property-browser.c:1071
+#: src/baul-property-browser.c:1072
 msgid "Select an Image File for the New Emblem"
 msgstr "選取新的圖章的圖形檔"
 
-#: src/baul-property-browser.c:1113
+#: src/baul-property-browser.c:1114
 msgid "Create a New Emblem"
 msgstr "建立新的圖章"
 
-#: src/baul-property-browser.c:1141
+#: src/baul-property-browser.c:1142
 msgid "_Keyword:"
 msgstr "名稱(_K):"
 
-#: src/baul-property-browser.c:1160
+#: src/baul-property-browser.c:1161
 msgid "_Image:"
 msgstr "圖片(_I):"
 
-#: src/baul-property-browser.c:1193
+#: src/baul-property-browser.c:1194
 msgid "Create a New Color:"
 msgstr "新增顏色："
 
-#: src/baul-property-browser.c:1214
+#: src/baul-property-browser.c:1215
 msgid "Color _name:"
 msgstr "顏色名稱(_N):"
 
-#: src/baul-property-browser.c:1230
+#: src/baul-property-browser.c:1231
 msgid "Color _value:"
 msgstr "顏色數值(_V):"
 
-#: src/baul-property-browser.c:1266
+#: src/baul-property-browser.c:1267
 msgid "Sorry, but you cannot replace the reset image."
 msgstr "抱歉，不可以替換用來重設的圖片。"
 
-#: src/baul-property-browser.c:1267
+#: src/baul-property-browser.c:1268
 msgid "Reset is a special image that cannot be deleted."
 msgstr "「重設」是一個特殊的圖片，不可以刪除。"
 
-#: src/baul-property-browser.c:1297
+#: src/baul-property-browser.c:1298
 #, c-format
 msgid "Sorry, but the pattern %s could not be installed."
 msgstr "抱歉，無法安裝 %s 胚騰。"
 
-#: src/baul-property-browser.c:1329
+#: src/baul-property-browser.c:1330
 msgid "Select an Image File to Add as a Pattern"
 msgstr "請選取要加入為胚騰的圖形檔"
 
-#: src/baul-property-browser.c:1409 src/baul-property-browser.c:1438
+#: src/baul-property-browser.c:1410 src/baul-property-browser.c:1441
 msgid "The color cannot be installed."
 msgstr "顏色不能安裝。"
 
-#: src/baul-property-browser.c:1410
+#: src/baul-property-browser.c:1411
 msgid "Sorry, but you must specify an unused color name for the new color."
 msgstr "抱歉，但您必須給新的顏色指定一個未使用色彩名稱。"
 
-#: src/baul-property-browser.c:1439
+#: src/baul-property-browser.c:1442
 msgid "Sorry, but you must specify a non-blank name for the new color."
 msgstr "抱歉，新的顏色名稱不可以是空白字串。"
 
-#: src/baul-property-browser.c:1499
+#: src/baul-property-browser.c:1503
 msgid "Select a Color to Add"
 msgstr "請選要加入的顏色"
 
-#: src/baul-property-browser.c:1545 src/baul-property-browser.c:1563
+#: src/baul-property-browser.c:1549 src/baul-property-browser.c:1567
 #, c-format
 msgid "Sorry, but \"%s\" is not a usable image file."
 msgstr "抱歉，「%s」不是可以使用的圖形檔。"
 
-#: src/baul-property-browser.c:1546 src/baul-property-browser.c:1564
+#: src/baul-property-browser.c:1550 src/baul-property-browser.c:1568
 msgid "The file is not an image."
 msgstr "該檔案不是圖形檔。"
 
-#: src/baul-property-browser.c:2307
+#: src/baul-property-browser.c:2319
 msgid "Select a Category:"
 msgstr "選擇類別："
 
-#: src/baul-property-browser.c:2321
+#: src/baul-property-browser.c:2333
 msgid "C_ancel Remove"
 msgstr "取消移除(_A)"
 
-#: src/baul-property-browser.c:2330
+#: src/baul-property-browser.c:2342
 msgid "_Add a New Pattern..."
 msgstr "新增胚騰(_A)…"
 
-#: src/baul-property-browser.c:2333
+#: src/baul-property-browser.c:2345
 msgid "_Add a New Color..."
 msgstr "新增顏色(_A)…"
 
-#: src/baul-property-browser.c:2336
+#: src/baul-property-browser.c:2348
 msgid "_Add a New Emblem..."
 msgstr "新增圖章(_A)…"
 
-#: src/baul-property-browser.c:2362
+#: src/baul-property-browser.c:2374
 msgid "Click on a pattern to remove it"
 msgstr "按下準備移除的胚騰"
 
-#: src/baul-property-browser.c:2365
+#: src/baul-property-browser.c:2377
 msgid "Click on a color to remove it"
 msgstr "按下準備移除的顏色"
 
-#: src/baul-property-browser.c:2368
+#: src/baul-property-browser.c:2380
 msgid "Click on an emblem to remove it"
 msgstr "按下準備移除的圖章"
 
-#: src/baul-property-browser.c:2380
+#: src/baul-property-browser.c:2392
 msgid "Patterns:"
 msgstr "胚騰："
 
-#: src/baul-property-browser.c:2383
+#: src/baul-property-browser.c:2395
 msgid "Colors:"
 msgstr "顏色："
 
-#: src/baul-property-browser.c:2386
+#: src/baul-property-browser.c:2398
 msgid "Emblems:"
 msgstr "圖章："
 
-#: src/baul-property-browser.c:2408
+#: src/baul-property-browser.c:2420
 msgid "_Remove a Pattern..."
 msgstr "移除胚騰(_R)…"
 
-#: src/baul-property-browser.c:2411
+#: src/baul-property-browser.c:2423
 msgid "_Remove a Color..."
 msgstr "移除顏色(_R)…"
 
-#: src/baul-property-browser.c:2414
+#: src/baul-property-browser.c:2426
 msgid "_Remove an Emblem..."
 msgstr "移除圖章(_R)…"
 
@@ -5336,192 +5336,192 @@ msgstr ""
 msgid "Contained text"
 msgstr ""
 
-#: src/baul-query-editor.c:352
+#: src/baul-query-editor.c:355
 msgid "Select folder to search in"
 msgstr "選取在哪個資料夾中搜尋"
 
-#: src/baul-query-editor.c:448 src/baul-query-editor.c:452
+#: src/baul-query-editor.c:452 src/baul-query-editor.c:456
 msgid ""
 "Tags separated by spaces. Matches files that contains ALL specified tags."
 msgstr ""
 
-#: src/baul-query-editor.c:555
+#: src/baul-query-editor.c:559
 msgid "Documents"
 msgstr "文件"
 
-#: src/baul-query-editor.c:575
+#: src/baul-query-editor.c:579
 msgid "Music"
 msgstr "音樂"
 
-#: src/baul-query-editor.c:591
+#: src/baul-query-editor.c:595
 msgid "Video"
 msgstr "影音檔"
 
-#: src/baul-query-editor.c:609
+#: src/baul-query-editor.c:613
 msgid "Picture"
 msgstr "照片"
 
-#: src/baul-query-editor.c:631
+#: src/baul-query-editor.c:635
 msgid "Illustration"
 msgstr "繪圖/圖表"
 
-#: src/baul-query-editor.c:647
+#: src/baul-query-editor.c:651
 msgid "Spreadsheet"
 msgstr "試算表"
 
-#: src/baul-query-editor.c:665
+#: src/baul-query-editor.c:669
 msgid "Presentation"
 msgstr "簡報"
 
-#: src/baul-query-editor.c:676
+#: src/baul-query-editor.c:680
 msgid "Pdf / Postscript"
 msgstr "Pdf / Postscript"
 
-#: src/baul-query-editor.c:686
+#: src/baul-query-editor.c:690
 msgid "Text File"
 msgstr "文字檔"
 
-#: src/baul-query-editor.c:772
+#: src/baul-query-editor.c:776
 msgid "Select type"
 msgstr "選擇類型"
 
-#: src/baul-query-editor.c:864
+#: src/baul-query-editor.c:868
 msgid "Any"
 msgstr "任何"
 
-#: src/baul-query-editor.c:880
+#: src/baul-query-editor.c:884
 msgid "Other Type..."
 msgstr "其他類型…"
 
-#: src/baul-query-editor.c:1082 src/baul-query-editor.c:1221
+#: src/baul-query-editor.c:1086 src/baul-query-editor.c:1226
 msgid "Less than or equal to"
 msgstr ""
 
-#: src/baul-query-editor.c:1084 src/baul-query-editor.c:1223
+#: src/baul-query-editor.c:1088 src/baul-query-editor.c:1228
 msgid "Greater than or equal to"
 msgstr ""
 
-#: src/baul-query-editor.c:1097
+#: src/baul-query-editor.c:1101
 msgid "1 Hour"
 msgstr ""
 
-#: src/baul-query-editor.c:1099
+#: src/baul-query-editor.c:1103
 msgid "1 Day"
 msgstr ""
 
-#: src/baul-query-editor.c:1101
+#: src/baul-query-editor.c:1105
 msgid "1 Week"
 msgstr ""
 
-#: src/baul-query-editor.c:1103
+#: src/baul-query-editor.c:1107
 msgid "1 Month"
 msgstr ""
 
-#: src/baul-query-editor.c:1105
+#: src/baul-query-editor.c:1109
 msgid "6 Months"
 msgstr "6 個月"
 
-#: src/baul-query-editor.c:1107
+#: src/baul-query-editor.c:1111
 msgid "1 Year"
 msgstr "1 年"
 
-#: src/baul-query-editor.c:1238
+#: src/baul-query-editor.c:1243
 msgid "10 KiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1240
+#: src/baul-query-editor.c:1245
 msgid "100 KiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1242
+#: src/baul-query-editor.c:1247
 msgid "500 KiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1244
+#: src/baul-query-editor.c:1249
 msgid "1 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1246
+#: src/baul-query-editor.c:1251
 msgid "5 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1248
+#: src/baul-query-editor.c:1253
 msgid "10 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1250
+#: src/baul-query-editor.c:1255
 msgid "100 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1252
+#: src/baul-query-editor.c:1257
 msgid "500 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1254
+#: src/baul-query-editor.c:1259
 msgid "1 GiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1256
+#: src/baul-query-editor.c:1261
 msgid "2 GiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1258
+#: src/baul-query-editor.c:1263
 msgid "4 GiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1261
+#: src/baul-query-editor.c:1266
 msgid "10 KB"
 msgstr ""
 
-#: src/baul-query-editor.c:1275
+#: src/baul-query-editor.c:1280
 msgid "500 MB"
 msgstr ""
 
-#: src/baul-query-editor.c:1346 src/baul-query-editor.c:1349
+#: src/baul-query-editor.c:1352 src/baul-query-editor.c:1355
 msgid "Matches files that contains specified text."
 msgstr ""
 
-#: src/baul-query-editor.c:1503
+#: src/baul-query-editor.c:1511
 msgid "Remove this criterion from the search"
 msgstr "移除此搜尋條件"
 
-#: src/baul-query-editor.c:1550
+#: src/baul-query-editor.c:1560
 msgid "Search Folder"
 msgstr "搜尋資料夾"
 
-#: src/baul-query-editor.c:1556
+#: src/baul-query-editor.c:1566
 msgid "Edit"
 msgstr "編輯"
 
-#: src/baul-query-editor.c:1564
+#: src/baul-query-editor.c:1574
 msgid "Edit the saved search"
 msgstr "編輯已儲存的搜尋"
 
-#: src/baul-query-editor.c:1596
+#: src/baul-query-editor.c:1606
 msgid "Add a new criterion to this search"
 msgstr "加入新的搜尋條件"
 
-#: src/baul-query-editor.c:1602
+#: src/baul-query-editor.c:1612
 msgid "Go"
 msgstr "前往"
 
-#: src/baul-query-editor.c:1606
+#: src/baul-query-editor.c:1616
 msgid "Reload"
 msgstr "重新載入"
 
-#: src/baul-query-editor.c:1611
+#: src/baul-query-editor.c:1621
 msgid "Perform or update the search"
 msgstr "進行或更新搜尋"
 
-#: src/baul-query-editor.c:1632
+#: src/baul-query-editor.c:1642
 msgid "_Search for:"
 msgstr "搜尋(_S):"
 
-#: src/baul-query-editor.c:1661
+#: src/baul-query-editor.c:1671
 msgid "Search results"
 msgstr "搜尋結果"
 
-#: src/baul-search-bar.c:174
+#: src/baul-search-bar.c:175
 msgid "Search:"
 msgstr "搜尋:"
 
@@ -5529,44 +5529,44 @@ msgstr "搜尋:"
 msgid "Close the side pane"
 msgstr "關閉側面窗格"
 
-#: src/baul-spatial-window.c:922
+#: src/baul-spatial-window.c:924
 msgid "_Places"
 msgstr "位置(_P)"
 
-#: src/baul-spatial-window.c:924
+#: src/baul-spatial-window.c:926
 msgid "Open _Location..."
 msgstr "開啟位置(_L)…"
 
-#: src/baul-spatial-window.c:929
+#: src/baul-spatial-window.c:931
 msgid "Close P_arent Folders"
 msgstr "關閉上一層的資料夾(_A)"
 
-#: src/baul-spatial-window.c:930
+#: src/baul-spatial-window.c:932
 msgid "Close this folder's parents"
 msgstr "關閉資料夾的上一層"
 
-#: src/baul-spatial-window.c:934
+#: src/baul-spatial-window.c:936
 msgid "Clos_e All Folders"
 msgstr "關閉所有資料夾(_E)"
 
-#: src/baul-spatial-window.c:935
+#: src/baul-spatial-window.c:937
 msgid "Close all folder windows"
 msgstr "關閉所有資料夾視窗"
 
-#: src/baul-spatial-window.c:947
+#: src/baul-spatial-window.c:949
 msgid "Locate documents and folders on this computer by name or content"
 msgstr "以名稱或內容尋找此電腦中的文件及資料夾"
 
-#: src/baul-trash-bar.c:202 src/file-manager/fm-desktop-icon-view.c:779
-#: src/file-manager/fm-directory-view.c:7406
+#: src/baul-trash-bar.c:203 src/file-manager/fm-desktop-icon-view.c:781
+#: src/file-manager/fm-directory-view.c:7419
 msgid "Delete all items in the Trash"
 msgstr "清理回收筒所有項目"
 
-#: src/baul-trash-bar.c:209
+#: src/baul-trash-bar.c:210
 msgid "Restore Selected Items"
 msgstr "還原選取的項目"
 
-#: src/baul-trash-bar.c:215
+#: src/baul-trash-bar.c:216
 msgid "Restore selected items to their original position"
 msgstr "還原選取的項目到它們原來的位置"
 
@@ -5596,51 +5596,51 @@ msgstr "內容顯示模式"
 msgid "View of the current folder"
 msgstr "顯示目前的資料夾"
 
-#: src/baul-window-manage-views.c:2135
+#: src/baul-window-manage-views.c:2137
 msgid "Baul has no installed viewer capable of displaying the folder."
 msgstr "Baul 沒有一個已安裝的檢示程式能顯示這資料夾"
 
-#: src/baul-window-manage-views.c:2143
+#: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
 msgstr "該位置並非資料夾。"
 
-#: src/baul-window-manage-views.c:2152
+#: src/baul-window-manage-views.c:2154
 #, c-format
 msgid "Could not find \"%s\"."
 msgstr "找不到「%s」。"
 
-#: src/baul-window-manage-views.c:2155
+#: src/baul-window-manage-views.c:2157
 msgid "Please check the spelling and try again."
 msgstr "請檢查拼字是否正確並再試一次。"
 
-#: src/baul-window-manage-views.c:2164
+#: src/baul-window-manage-views.c:2166
 #, c-format
 msgid "Baul cannot handle \"%s\" locations."
 msgstr "Baul 無法處理「%s」的位置。"
 
-#: src/baul-window-manage-views.c:2169
+#: src/baul-window-manage-views.c:2171
 msgid "Baul cannot handle this kind of location."
 msgstr "Baul 無法處理此類型的位置。"
 
-#: src/baul-window-manage-views.c:2176
+#: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
 msgstr "無法掛載該位置。"
 
-#: src/baul-window-manage-views.c:2182
+#: src/baul-window-manage-views.c:2184
 msgid "Access was denied."
 msgstr "存取被禁止。"
 
-#: src/baul-window-manage-views.c:2191
+#: src/baul-window-manage-views.c:2193
 #, c-format
 msgid "Could not display \"%s\", because the host could not be found."
 msgstr "無法顯示「%s」，因為找不到主機。"
 
-#: src/baul-window-manage-views.c:2193
+#: src/baul-window-manage-views.c:2195
 msgid ""
 "Check that the spelling is correct and that your proxy settings are correct."
 msgstr "請檢查是否有錯字而且代理伺服程式設定是否正確。"
 
-#: src/baul-window-manage-views.c:2209
+#: src/baul-window-manage-views.c:2211
 #, c-format
 msgid ""
 "Error: %s\n"
@@ -5649,11 +5649,11 @@ msgstr ""
 "錯誤：%s\n"
 "請選擇另一種顯示模式並再嘗試。"
 
-#: src/baul-window-menus.c:198
+#: src/baul-window-menus.c:200
 msgid "Go to the location specified by this bookmark"
 msgstr "前往該書籤指定的位置"
 
-#: src/baul-window-menus.c:523
+#: src/baul-window-menus.c:525
 msgid ""
 "Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -5664,7 +5664,7 @@ msgstr ""
 "條款規定，就本程式再為散布與／或修改；無論您依據的是本授權的第二版或\n"
 "（您自行選擇的）任一日後發行的版本。"
 
-#: src/baul-window-menus.c:527
+#: src/baul-window-menus.c:529
 msgid ""
 "Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -5674,7 +5674,7 @@ msgstr ""
 "Baul 係基於使用目的而加以散布，然而不負任何擔保責任；亦無對適售性\n"
 "或特定目的適用性所為的默示性擔保。詳情請參照 GNU 通用公共授權。"
 
-#: src/baul-window-menus.c:531
+#: src/baul-window-menus.c:533
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
@@ -5684,193 +5684,193 @@ msgstr ""
 "Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA "
 "02110-1301 USA"
 
-#: src/baul-window-menus.c:563
+#: src/baul-window-menus.c:565
 msgid "About Baul"
 msgstr ""
 
-#: src/baul-window-menus.c:565
+#: src/baul-window-menus.c:567
 msgid ""
 "Baul lets you organize files and folders, both on your computer and online."
 msgstr "Baul 讓您組織檔案和資料夾，不管是在您的電腦或是在網路上。"
 
-#: src/baul-window-menus.c:568
+#: src/baul-window-menus.c:570
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
 "Copyright © 2011-2020 The Caja authors\n"
-"Copyright © 2022 Pablo Barciela"
+"Copyright © 2022-2025 Pablo Barciela"
 msgstr ""
 
-#: src/baul-window-menus.c:575
+#: src/baul-window-menus.c:577
 msgid "translator-credits"
 msgstr ""
 "Woodman Tuen <wmtuen@gmail.com>, 2005-06\n"
 "Abel Cheung <abel@oaka.org>, 2003-04\n"
 "趙惟倫 <bluebat@member.fsf.org>, 2013"
 
-#: src/baul-window-menus.c:578
+#: src/baul-window-menus.c:580
 msgid "CAFE Web Site"
 msgstr "CAFE 網站"
 
-#: src/baul-window-menus.c:834
+#: src/baul-window-menus.c:836
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: src/baul-window-menus.c:835
+#: src/baul-window-menus.c:837
 msgid "_Edit"
 msgstr "編輯(_E)"
 
-#: src/baul-window-menus.c:836
+#: src/baul-window-menus.c:838
 msgid "_View"
 msgstr "檢視(_V)"
 
-#: src/baul-window-menus.c:840
+#: src/baul-window-menus.c:842
 msgid "Close this folder"
 msgstr "關閉本資料夾"
 
-#: src/baul-window-menus.c:845
+#: src/baul-window-menus.c:847
 msgid "_Backgrounds and Emblems..."
 msgstr "背景及圖章(_B)…"
 
-#: src/baul-window-menus.c:846
+#: src/baul-window-menus.c:848
 msgid ""
 "Display patterns, colors, and emblems that can be used to customize "
 "appearance"
 msgstr "顯示自選外觀時所用的胚騰、色彩及圖章"
 
-#: src/baul-window-menus.c:851
+#: src/baul-window-menus.c:853
 msgid "Prefere_nces"
 msgstr "偏好設定(_N)"
 
-#: src/baul-window-menus.c:852
+#: src/baul-window-menus.c:854
 msgid "Edit Baul preferences"
 msgstr "修改 Baul 偏好設定"
 
-#: src/baul-window-menus.c:855
+#: src/baul-window-menus.c:857
 msgid "Open _Parent"
 msgstr "開啟上一層(_P)"
 
-#: src/baul-window-menus.c:856
+#: src/baul-window-menus.c:858
 msgid "Open the parent folder"
 msgstr "開啟主資料夾"
 
-#: src/baul-window-menus.c:865
+#: src/baul-window-menus.c:867
 msgid "Stop loading the current location"
 msgstr "停止載入目前的位置"
 
-#: src/baul-window-menus.c:869
+#: src/baul-window-menus.c:871
 msgid "_Reload"
 msgstr "重新載入(_R)"
 
-#: src/baul-window-menus.c:870
+#: src/baul-window-menus.c:872
 msgid "Reload the current location"
 msgstr "重新載入目前的位置"
 
-#: src/baul-window-menus.c:874
+#: src/baul-window-menus.c:876
 msgid "_Contents"
 msgstr "內容(_C)"
 
-#: src/baul-window-menus.c:875
+#: src/baul-window-menus.c:877
 msgid "Display Baul help"
 msgstr "顯示 Baul 說明文件"
 
-#: src/baul-window-menus.c:879
+#: src/baul-window-menus.c:881
 msgid "_About"
 msgstr "關於(_A)"
 
-#: src/baul-window-menus.c:880
+#: src/baul-window-menus.c:882
 msgid "Display credits for the creators of Baul"
 msgstr "顯示鳴謝 Baul 開發者的列表"
 
-#: src/baul-window-menus.c:884
+#: src/baul-window-menus.c:886
 msgid "Zoom _In"
 msgstr "拉近(_I)"
 
-#: src/baul-window-menus.c:885 src/baul-zoom-control.c:99
-#: src/baul-zoom-control.c:312
+#: src/baul-window-menus.c:887 src/baul-zoom-control.c:99
+#: src/baul-zoom-control.c:313
 msgid "Increase the view size"
 msgstr "增加檢視的大小"
 
-#: src/baul-window-menus.c:899
+#: src/baul-window-menus.c:901
 msgid "Zoom _Out"
 msgstr "拉遠(_O)"
 
-#: src/baul-window-menus.c:900 src/baul-zoom-control.c:100
-#: src/baul-zoom-control.c:257
+#: src/baul-window-menus.c:902 src/baul-zoom-control.c:100
+#: src/baul-zoom-control.c:258
 msgid "Decrease the view size"
 msgstr "減少檢視的大小"
 
-#: src/baul-window-menus.c:909
+#: src/baul-window-menus.c:911
 msgid "Normal Si_ze"
 msgstr "原來大小(_Z)"
 
-#: src/baul-window-menus.c:910 src/baul-zoom-control.c:101
-#: src/baul-zoom-control.c:273
+#: src/baul-window-menus.c:912 src/baul-zoom-control.c:101
+#: src/baul-zoom-control.c:274
 msgid "Use the normal view size"
 msgstr "使用一般的檢視大小"
 
-#: src/baul-window-menus.c:914
+#: src/baul-window-menus.c:916
 msgid "Connect to _Server..."
 msgstr "連接伺服器(_S)…"
 
-#: src/baul-window-menus.c:915
+#: src/baul-window-menus.c:917
 msgid "Connect to a remote computer or shared disk"
 msgstr "連接遠端電腦或磁碟共享"
 
-#: src/baul-window-menus.c:919 src/file-manager/fm-directory-view.c:7641
-#: src/file-manager/fm-directory-view.c:7645
+#: src/baul-window-menus.c:921 src/file-manager/fm-directory-view.c:7654
+#: src/file-manager/fm-directory-view.c:7658
 msgid "_Home Folder"
 msgstr "個人資料夾(_H)"
 
-#: src/baul-window-menus.c:924
+#: src/baul-window-menus.c:926
 msgid "_Computer"
 msgstr "電腦(_C)"
 
-#: src/baul-window-menus.c:929
+#: src/baul-window-menus.c:931
 msgid "_Network"
 msgstr "網路(_N)"
 
-#: src/baul-window-menus.c:934
+#: src/baul-window-menus.c:936
 msgid "T_emplates"
 msgstr "樣板(_E)"
 
-#: src/baul-window-menus.c:935
+#: src/baul-window-menus.c:937
 msgid "Open your personal templates folder"
 msgstr "開啟個人樣板資料夾"
 
-#: src/baul-window-menus.c:939
+#: src/baul-window-menus.c:941
 msgid "_Trash"
 msgstr "回收筒(_T)"
 
-#: src/baul-window-menus.c:940
+#: src/baul-window-menus.c:942
 msgid "Open your personal trash folder"
 msgstr "開啟個人回收筒資料夾"
 
-#: src/baul-window-menus.c:948
+#: src/baul-window-menus.c:950
 msgid "Show _Hidden Files"
 msgstr "顯示隱藏檔(_H)"
 
-#: src/baul-window-menus.c:949
+#: src/baul-window-menus.c:951
 msgid "Toggle the display of hidden files in the current window"
 msgstr "在目前視窗中切換隱藏檔的顯示"
 
-#: src/baul-window-menus.c:954
+#: src/baul-window-menus.c:956
 msgid "Show Bac_kup Files"
 msgstr ""
 
-#: src/baul-window-menus.c:955
+#: src/baul-window-menus.c:957
 msgid "Toggle the display of backup files in the current window"
 msgstr ""
 
-#: src/baul-window-menus.c:987
+#: src/baul-window-menus.c:989
 msgid "_Up"
 msgstr "上層(_U)"
 
-#: src/baul-window-menus.c:990
+#: src/baul-window-menus.c:992
 msgid "_Home"
 msgstr "個人資料夾(_H)"
 
 #: src/baul-window-slot.c:209 src/file-manager/fm-list-model.c:487
-#: src/file-manager/fm-tree-model.c:1380
+#: src/file-manager/fm-tree-model.c:1381
 msgid "Loading..."
 msgstr "載入中…"
 
@@ -5931,66 +5931,66 @@ msgstr "拉遠"
 msgid "Zoom to Default"
 msgstr "預設的縮放"
 
-#: src/baul-zoom-control.c:852
+#: src/baul-zoom-control.c:855
 msgid "Zoom"
 msgstr "縮放"
 
-#: src/baul-zoom-control.c:857
+#: src/baul-zoom-control.c:860
 msgid "Set the zoom level of the current view"
 msgstr "設定本顯示模式的縮放倍率"
 
-#: src/file-manager/fm-desktop-icon-view.c:666
+#: src/file-manager/fm-desktop-icon-view.c:668
 msgid "Background"
 msgstr "背景"
 
-#: src/file-manager/fm-desktop-icon-view.c:745
-#: src/file-manager/fm-directory-view.c:7405
-#: src/file-manager/fm-directory-view.c:9099
+#: src/file-manager/fm-desktop-icon-view.c:747
+#: src/file-manager/fm-directory-view.c:7418
+#: src/file-manager/fm-directory-view.c:9113
 msgid "E_mpty Trash"
 msgstr "清理回收筒(_M)"
 
-#: src/file-manager/fm-desktop-icon-view.c:759
-#: src/file-manager/fm-directory-view.c:7369
+#: src/file-manager/fm-desktop-icon-view.c:761
+#: src/file-manager/fm-directory-view.c:7382
 msgid "Create L_auncher..."
 msgstr "新增啟動圖示(_A)…"
 
-#: src/file-manager/fm-desktop-icon-view.c:761
-#: src/file-manager/fm-directory-view.c:7370
+#: src/file-manager/fm-desktop-icon-view.c:763
+#: src/file-manager/fm-directory-view.c:7383
 msgid "Create a new launcher"
 msgstr "新增啟動圖示"
 
-#: src/file-manager/fm-desktop-icon-view.c:768
+#: src/file-manager/fm-desktop-icon-view.c:770
 msgid "Change Desktop _Background"
 msgstr "更改桌面背景(_B)"
 
-#: src/file-manager/fm-desktop-icon-view.c:770
+#: src/file-manager/fm-desktop-icon-view.c:772
 msgid ""
 "Show a window that lets you set your desktop background's pattern or color"
 msgstr "顯示一個可設定桌面背景胚騰或顏色的視窗"
 
-#: src/file-manager/fm-desktop-icon-view.c:777
+#: src/file-manager/fm-desktop-icon-view.c:779
 msgid "Empty Trash"
 msgstr "清理回收筒"
 
-#: src/file-manager/fm-desktop-icon-view.c:878
+#: src/file-manager/fm-desktop-icon-view.c:880
 msgid "Desktop View"
 msgstr ""
 
-#: src/file-manager/fm-desktop-icon-view.c:879
-#: src/file-manager/fm-directory-view.c:7649
-#: src/file-manager/fm-directory-view.c:7653
+#: src/file-manager/fm-desktop-icon-view.c:881
+#: src/file-manager/fm-directory-view.c:7662
+#: src/file-manager/fm-directory-view.c:7666
 msgid "_Desktop"
 msgstr "桌面(_D)"
 
-#: src/file-manager/fm-desktop-icon-view.c:880
+#: src/file-manager/fm-desktop-icon-view.c:882
 msgid "The desktop view encountered an error."
 msgstr "桌面顯示模式發生錯誤。"
 
-#: src/file-manager/fm-desktop-icon-view.c:881
+#: src/file-manager/fm-desktop-icon-view.c:883
 msgid "The desktop view encountered an error while starting up."
 msgstr "啟動桌面顯示模式時發生錯誤。"
 
-#: src/file-manager/fm-desktop-icon-view.c:882
+#: src/file-manager/fm-desktop-icon-view.c:884
 msgid "Display this location with the desktop view."
 msgstr ""
 
@@ -6111,42 +6111,42 @@ msgstr "%s%s，%s"
 msgid "%s%s, %s, %s"
 msgstr "%s%s，%s，%s"
 
-#: src/file-manager/fm-directory-view.c:4509
+#: src/file-manager/fm-directory-view.c:4514
 #, c-format
 msgid "Use \"%s\" to open the selected item"
 msgid_plural "Use \"%s\" to open the selected items"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:4598
+#: src/file-manager/fm-directory-view.c:4603
 msgid "Open parent location"
 msgstr ""
 
-#: src/file-manager/fm-directory-view.c:4599
+#: src/file-manager/fm-directory-view.c:4604
 msgid "Open parent location for the selected item"
 msgstr ""
 
-#: src/file-manager/fm-directory-view.c:5460
+#: src/file-manager/fm-directory-view.c:5466
 #, c-format
 msgid "Run \"%s\" on any selected items"
 msgstr "針對所有選定的項目執行「%s」"
 
-#: src/file-manager/fm-directory-view.c:5712
+#: src/file-manager/fm-directory-view.c:5719
 #, c-format
 msgid "Create Document from template \"%s\""
 msgstr "以樣板「%s」建立文件"
 
-#: src/file-manager/fm-directory-view.c:5964
+#: src/file-manager/fm-directory-view.c:5971
 msgid "All executable files in this folder will appear in the Scripts menu."
 msgstr "所有此資料夾的可執行檔都會在「指令稿」選單中出現。"
 
-#: src/file-manager/fm-directory-view.c:5966
+#: src/file-manager/fm-directory-view.c:5973
 msgid ""
 "Choosing a script from the menu will run that script with any selected items "
 "as input."
 msgstr ""
 "在選單中選取其中一個指令稿會以所有已選取的項目作為輸入資料來執行該指令稿。"
 
-#: src/file-manager/fm-directory-view.c:5968
+#: src/file-manager/fm-directory-view.c:5975
 msgid ""
 "All executable files in this folder will appear in the Scripts menu. "
 "Choosing a script from the menu will run that script.\n"
@@ -6201,745 +6201,745 @@ msgstr ""
 "\n"
 "BAUL_SCRIPT_NEXT_PANE_CURRENT_URI：目前位置在分離檢視視窗未使用窗格的 URI"
 
-#: src/file-manager/fm-directory-view.c:6038
-#: src/file-manager/fm-tree-view.c:1014
+#: src/file-manager/fm-directory-view.c:6045
+#: src/file-manager/fm-tree-view.c:1019
 #, c-format
 msgid "\"%s\" will be moved if you select the Paste command"
 msgstr "選取「貼上」指令則會移動「%s」"
 
-#: src/file-manager/fm-directory-view.c:6042
-#: src/file-manager/fm-tree-view.c:1020
+#: src/file-manager/fm-directory-view.c:6049
+#: src/file-manager/fm-tree-view.c:1025
 #, c-format
 msgid "\"%s\" will be copied if you select the Paste command"
 msgstr "選取「貼上」指令則會拷貝「%s」"
 
-#: src/file-manager/fm-directory-view.c:6049
+#: src/file-manager/fm-directory-view.c:6056
 #, c-format
 msgid "The %'d selected item will be moved if you select the Paste command"
 msgid_plural ""
 "The %'d selected items will be moved if you select the Paste command"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:6056
+#: src/file-manager/fm-directory-view.c:6063
 #, c-format
 msgid "The %'d selected item will be copied if you select the Paste command"
 msgid_plural ""
 "The %'d selected items will be copied if you select the Paste command"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:6236
-#: src/file-manager/fm-tree-view.c:1060
+#: src/file-manager/fm-directory-view.c:6249
+#: src/file-manager/fm-tree-view.c:1065
 msgid "There is nothing on the clipboard to paste."
 msgstr "剪貼簿中沒有內容可供貼上。"
 
-#: src/file-manager/fm-directory-view.c:6454
+#: src/file-manager/fm-directory-view.c:6467
 msgid "Unable to unmount location"
 msgstr "無法卸載位置"
 
-#: src/file-manager/fm-directory-view.c:6475
+#: src/file-manager/fm-directory-view.c:6488
 msgid "Unable to eject location"
 msgstr "無法退出位置"
 
-#: src/file-manager/fm-directory-view.c:6490
+#: src/file-manager/fm-directory-view.c:6503
 msgid "Unable to stop drive"
 msgstr "無法停止裝置"
 
-#: src/file-manager/fm-directory-view.c:7050
+#: src/file-manager/fm-directory-view.c:7063
 #, c-format
 msgid "Connect to Server %s"
 msgstr "連接伺服器 %s"
 
-#: src/file-manager/fm-directory-view.c:7062
-#: src/file-manager/fm-directory-view.c:8311
-#: src/file-manager/fm-directory-view.c:8403
-#: src/file-manager/fm-directory-view.c:8513
+#: src/file-manager/fm-directory-view.c:7075
+#: src/file-manager/fm-directory-view.c:8324
+#: src/file-manager/fm-directory-view.c:8416
+#: src/file-manager/fm-directory-view.c:8526
 msgid "_Connect"
 msgstr "連接(_C)"
 
-#: src/file-manager/fm-directory-view.c:7076
+#: src/file-manager/fm-directory-view.c:7089
 msgid "Link _name:"
 msgstr "鏈結名稱(_N):"
 
-#: src/file-manager/fm-directory-view.c:7347
+#: src/file-manager/fm-directory-view.c:7360
 msgid "Create _Document"
 msgstr "新增文件(_D)"
 
-#: src/file-manager/fm-directory-view.c:7348
+#: src/file-manager/fm-directory-view.c:7361
 msgid "Open Wit_h"
 msgstr "以其他方式開啟(_H)"
 
-#: src/file-manager/fm-directory-view.c:7349
+#: src/file-manager/fm-directory-view.c:7362
 msgid "Choose a program with which to open the selected item"
 msgstr "請選取程式來開啟選定的項目"
 
-#: src/file-manager/fm-directory-view.c:7351
-#: src/file-manager/fm-directory-view.c:7630
-#: src/file-manager/fm-tree-view.c:1382
+#: src/file-manager/fm-directory-view.c:7364
+#: src/file-manager/fm-directory-view.c:7643
+#: src/file-manager/fm-tree-view.c:1388
 msgid "_Properties"
 msgstr "屬性(_P)"
 
-#: src/file-manager/fm-directory-view.c:7352
-#: src/file-manager/fm-directory-view.c:9086
+#: src/file-manager/fm-directory-view.c:7365
+#: src/file-manager/fm-directory-view.c:9100
 msgid "View or modify the properties of each selected item"
 msgstr "顯示或修改所有選定項目的屬性"
 
-#: src/file-manager/fm-directory-view.c:7359
-#: src/file-manager/fm-tree-view.c:1300
+#: src/file-manager/fm-directory-view.c:7372
+#: src/file-manager/fm-tree-view.c:1306
 msgid "Create _Folder"
 msgstr "建立資料夾(_F)"
 
-#: src/file-manager/fm-directory-view.c:7360
+#: src/file-manager/fm-directory-view.c:7373
 msgid "Create a new empty folder inside this folder"
 msgstr "在本資料夾中新增空白資料夾"
 
-#: src/file-manager/fm-directory-view.c:7362
+#: src/file-manager/fm-directory-view.c:7375
 msgid "No templates installed"
 msgstr "沒有安裝任何樣板"
 
 #. Translators: this is used to indicate that a file doesn't contain anything
 #. label, accelerator
-#: src/file-manager/fm-directory-view.c:7365
+#: src/file-manager/fm-directory-view.c:7378
 msgid "_Empty File"
 msgstr "空白檔案(_E)"
 
-#: src/file-manager/fm-directory-view.c:7366
+#: src/file-manager/fm-directory-view.c:7379
 msgid "Create a new empty file inside this folder"
 msgstr "在本資料夾中新增空白的文件"
 
-#: src/file-manager/fm-directory-view.c:7374
+#: src/file-manager/fm-directory-view.c:7387
 msgid "Open the selected item in this window"
 msgstr "在本視窗中開啟選定的項目"
 
-#: src/file-manager/fm-directory-view.c:7381
-#: src/file-manager/fm-directory-view.c:7562
+#: src/file-manager/fm-directory-view.c:7394
+#: src/file-manager/fm-directory-view.c:7575
 msgid "Open in Navigation Window"
 msgstr "在視窗中開啟"
 
-#: src/file-manager/fm-directory-view.c:7382
+#: src/file-manager/fm-directory-view.c:7395
 msgid "Open each selected item in a navigation window"
 msgstr "用新的視窗分別開啟每個選定的項目"
 
-#: src/file-manager/fm-directory-view.c:7386
+#: src/file-manager/fm-directory-view.c:7399
 msgid "Open each selected item in a new tab"
 msgstr "在新的分頁分別開啟每個選取的項目"
 
-#: src/file-manager/fm-directory-view.c:7389
-#: src/file-manager/fm-directory-view.c:7571
+#: src/file-manager/fm-directory-view.c:7402
+#: src/file-manager/fm-directory-view.c:7584
 msgid "Open in _Folder Window"
 msgstr "在資料夾視窗開啟(_F)"
 
-#: src/file-manager/fm-directory-view.c:7390
+#: src/file-manager/fm-directory-view.c:7403
 msgid "Open each selected item in a folder window"
 msgstr "用資料夾視窗分別開啟每個選定的項目"
 
-#: src/file-manager/fm-directory-view.c:7393
+#: src/file-manager/fm-directory-view.c:7406
 msgid "Other _Application..."
 msgstr "其他應用程式(_A)…"
 
-#: src/file-manager/fm-directory-view.c:7394
-#: src/file-manager/fm-directory-view.c:7398
+#: src/file-manager/fm-directory-view.c:7407
+#: src/file-manager/fm-directory-view.c:7411
 msgid "Choose another application with which to open the selected item"
 msgstr "請選取其他程式來開啟選定的項目"
 
-#: src/file-manager/fm-directory-view.c:7397
+#: src/file-manager/fm-directory-view.c:7410
 msgid "Open With Other _Application..."
 msgstr "以其他應用程式開啟(_A)…"
 
-#: src/file-manager/fm-directory-view.c:7401
+#: src/file-manager/fm-directory-view.c:7414
 msgid "_Open Scripts Folder"
 msgstr "開啟指令稿資料夾(_O)"
 
-#: src/file-manager/fm-directory-view.c:7402
+#: src/file-manager/fm-directory-view.c:7415
 msgid "Show the folder containing the scripts that appear in this menu"
 msgstr "顯示載有本選單中出現的指令稿的資料夾"
 
-#: src/file-manager/fm-directory-view.c:7410
+#: src/file-manager/fm-directory-view.c:7423
 msgid "Prepare the selected files to be moved with a Paste command"
 msgstr "以「貼上」指令來準備移動選定的檔案"
 
-#: src/file-manager/fm-directory-view.c:7414
+#: src/file-manager/fm-directory-view.c:7427
 msgid "Prepare the selected files to be copied with a Paste command"
 msgstr "以「貼上」指令來準備拷貝選定的檔案"
 
-#: src/file-manager/fm-directory-view.c:7418
+#: src/file-manager/fm-directory-view.c:7431
 msgid "Move or copy files previously selected by a Cut or Copy command"
 msgstr "將剛才以「剪下」或「拷貝」指令選取的檔案移動或拷貝"
 
-#: src/file-manager/fm-directory-view.c:7423
-#: src/file-manager/fm-directory-view.c:7584
-#: src/file-manager/fm-tree-view.c:1329
+#: src/file-manager/fm-directory-view.c:7436
+#: src/file-manager/fm-directory-view.c:7597
+#: src/file-manager/fm-tree-view.c:1335
 msgid "_Paste Into Folder"
 msgstr "貼上至資料夾內(_P)"
 
-#: src/file-manager/fm-directory-view.c:7424
+#: src/file-manager/fm-directory-view.c:7437
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into the "
 "selected folder"
 msgstr "將剛才以「剪下」或「拷貝」指令選取的檔案移動或拷貝至選定的資料夾"
 
-#: src/file-manager/fm-directory-view.c:7426
+#: src/file-manager/fm-directory-view.c:7439
 msgid "Cop_y to"
 msgstr "拷貝到(_Y)"
 
-#: src/file-manager/fm-directory-view.c:7427
+#: src/file-manager/fm-directory-view.c:7440
 msgid "M_ove to"
 msgstr "移動到(_O)"
 
-#: src/file-manager/fm-directory-view.c:7430
+#: src/file-manager/fm-directory-view.c:7443
 msgid "Select all items in this window"
 msgstr "選取本視窗中所有項目"
 
-#: src/file-manager/fm-directory-view.c:7433
+#: src/file-manager/fm-directory-view.c:7446
 msgid "Select I_tems Matching..."
 msgstr "選擇項目比對(_T)…"
 
-#: src/file-manager/fm-directory-view.c:7434
+#: src/file-manager/fm-directory-view.c:7447
 msgid "Select items in this window matching a given pattern"
 msgstr "選取本視窗中所有符合指定胚騰的項目"
 
-#: src/file-manager/fm-directory-view.c:7437
+#: src/file-manager/fm-directory-view.c:7450
 msgid "_Invert Selection"
 msgstr "反向選擇(_I)"
 
-#: src/file-manager/fm-directory-view.c:7438
+#: src/file-manager/fm-directory-view.c:7451
 msgid "Select all and only the items that are not currently selected"
 msgstr "選擇所有目前尚未被選取的項目"
 
-#: src/file-manager/fm-directory-view.c:7441
+#: src/file-manager/fm-directory-view.c:7454
 msgid "D_uplicate"
 msgstr "拷貝(_U)"
 
-#: src/file-manager/fm-directory-view.c:7442
+#: src/file-manager/fm-directory-view.c:7455
 msgid "Duplicate each selected item"
 msgstr "複製所有選定的項目"
 
-#: src/file-manager/fm-directory-view.c:7445
-#: src/file-manager/fm-directory-view.c:9070
+#: src/file-manager/fm-directory-view.c:7458
+#: src/file-manager/fm-directory-view.c:9084
 msgid "Ma_ke Link"
 msgid_plural "Ma_ke Links"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:7446
+#: src/file-manager/fm-directory-view.c:7459
 msgid "Create a symbolic link for each selected item"
 msgstr "為所有選定的項目建立鏈結"
 
-#: src/file-manager/fm-directory-view.c:7449
+#: src/file-manager/fm-directory-view.c:7462
 msgid "_Rename..."
 msgstr "重新命名(_R)…"
 
-#: src/file-manager/fm-directory-view.c:7450
+#: src/file-manager/fm-directory-view.c:7463
 msgid "Rename selected item"
 msgstr "將選定的項目重新命名"
 
-#: src/file-manager/fm-directory-view.c:7458
-#: src/file-manager/fm-directory-view.c:9031
+#: src/file-manager/fm-directory-view.c:7471
+#: src/file-manager/fm-directory-view.c:9045
 msgid "Move each selected item to the Trash"
 msgstr "將每個選定的項目丟進回收筒"
 
-#: src/file-manager/fm-directory-view.c:7462
+#: src/file-manager/fm-directory-view.c:7475
 msgid "Delete each selected item, without moving to the Trash"
 msgstr "將所有選定的項目直接刪除而不丟進回收筒"
 
-#: src/file-manager/fm-directory-view.c:7465
-#: src/file-manager/fm-directory-view.c:7597
+#: src/file-manager/fm-directory-view.c:7478
+#: src/file-manager/fm-directory-view.c:7610
 msgid "_Restore"
 msgstr "還原(_R)"
 
-#: src/file-manager/fm-directory-view.c:7469
+#: src/file-manager/fm-directory-view.c:7482
 msgid "_Undo"
 msgstr "復原(_U)"
 
-#: src/file-manager/fm-directory-view.c:7470
-#: src/file-manager/fm-directory-view.c:11247
+#: src/file-manager/fm-directory-view.c:7483
+#: src/file-manager/fm-directory-view.c:11264
 msgid "Undo the last action"
 msgstr "復原最後一個動作"
 
-#: src/file-manager/fm-directory-view.c:7473
+#: src/file-manager/fm-directory-view.c:7486
 msgid "_Redo"
 msgstr "取消復原(_R)"
 
-#: src/file-manager/fm-directory-view.c:7474
-#: src/file-manager/fm-directory-view.c:11265
+#: src/file-manager/fm-directory-view.c:7487
+#: src/file-manager/fm-directory-view.c:11282
 msgid "Redo the last undone action"
 msgstr "取消上一個復原動作"
 
-#: src/file-manager/fm-directory-view.c:7484
+#: src/file-manager/fm-directory-view.c:7497
 msgid "Reset View to _Defaults"
 msgstr "重新設定顯示模式(_D)"
 
-#: src/file-manager/fm-directory-view.c:7485
+#: src/file-manager/fm-directory-view.c:7498
 msgid "Reset sorting order and zoom level to match preferences for this view"
 msgstr "重設此顯示模式的排列次序及縮放倍率以配合偏好設定"
 
-#: src/file-manager/fm-directory-view.c:7488
+#: src/file-manager/fm-directory-view.c:7501
 msgid "Connect To This Server"
 msgstr "連接此伺服器"
 
-#: src/file-manager/fm-directory-view.c:7489
+#: src/file-manager/fm-directory-view.c:7502
 msgid "Make a permanent connection to this server"
 msgstr "永遠地連接到此伺服器"
 
-#: src/file-manager/fm-directory-view.c:7493
+#: src/file-manager/fm-directory-view.c:7506
 msgid "Mount the selected volume"
 msgstr "掛載選定的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7497
+#: src/file-manager/fm-directory-view.c:7510
 msgid "Unmount the selected volume"
 msgstr "卸載選定的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7501
+#: src/file-manager/fm-directory-view.c:7514
 msgid "Eject the selected volume"
 msgstr "退出選定的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7505
+#: src/file-manager/fm-directory-view.c:7518
 msgid "Format the selected volume"
 msgstr "將選定的檔案系統格式化"
 
-#: src/file-manager/fm-directory-view.c:7509
+#: src/file-manager/fm-directory-view.c:7522
 msgid "Start the selected volume"
 msgstr "開啟選取的儲存區"
 
-#: src/file-manager/fm-directory-view.c:7513
-#: src/file-manager/fm-directory-view.c:8535
+#: src/file-manager/fm-directory-view.c:7526
+#: src/file-manager/fm-directory-view.c:8548
 msgid "Stop the selected volume"
 msgstr "關閉選取的儲存區"
 
-#: src/file-manager/fm-directory-view.c:7517
-#: src/file-manager/fm-directory-view.c:7545
-#: src/file-manager/fm-directory-view.c:7626
+#: src/file-manager/fm-directory-view.c:7530
+#: src/file-manager/fm-directory-view.c:7558
+#: src/file-manager/fm-directory-view.c:7639
 msgid "Detect media in the selected drive"
 msgstr "偵測在選取光碟機中的媒體"
 
-#: src/file-manager/fm-directory-view.c:7521
+#: src/file-manager/fm-directory-view.c:7534
 msgid "Mount the volume associated with the open folder"
 msgstr "掛載與所開啟資料夾相關聯的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7525
+#: src/file-manager/fm-directory-view.c:7538
 msgid "Unmount the volume associated with the open folder"
 msgstr "卸載與所開啟資料夾相關聯的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7529
+#: src/file-manager/fm-directory-view.c:7542
 msgid "Eject the volume associated with the open folder"
 msgstr "退出與所開啟資料夾相關聯的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7533
+#: src/file-manager/fm-directory-view.c:7546
 msgid "Format the volume associated with the open folder"
 msgstr "格式化與所開啟資料夾相關聯的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7537
+#: src/file-manager/fm-directory-view.c:7550
 msgid "Start the volume associated with the open folder"
 msgstr "掛載與所開啟資料夾相關聯的儲存區"
 
-#: src/file-manager/fm-directory-view.c:7541
+#: src/file-manager/fm-directory-view.c:7554
 msgid "Stop the volume associated with the open folder"
 msgstr "卸載與所開啟資料夾相關聯的儲存區"
 
-#: src/file-manager/fm-directory-view.c:7548
+#: src/file-manager/fm-directory-view.c:7561
 msgid "Open File and Close window"
 msgstr "開啟檔案及關閉視窗"
 
-#: src/file-manager/fm-directory-view.c:7552
+#: src/file-manager/fm-directory-view.c:7565
 msgid "Sa_ve Search"
 msgstr "儲存搜尋(_V)"
 
-#: src/file-manager/fm-directory-view.c:7553
+#: src/file-manager/fm-directory-view.c:7566
 msgid "Save the edited search"
 msgstr "儲存已編輯搜尋"
 
-#: src/file-manager/fm-directory-view.c:7556
+#: src/file-manager/fm-directory-view.c:7569
 msgid "Sa_ve Search As..."
 msgstr "另存搜尋為(_V)…"
 
-#: src/file-manager/fm-directory-view.c:7557
+#: src/file-manager/fm-directory-view.c:7570
 msgid "Save the current search as a file"
 msgstr "另存目前的搜尋為檔案"
 
-#: src/file-manager/fm-directory-view.c:7563
+#: src/file-manager/fm-directory-view.c:7576
 msgid "Open this folder in a navigation window"
 msgstr "在導航視窗中開啟本資料夾"
 
-#: src/file-manager/fm-directory-view.c:7567
+#: src/file-manager/fm-directory-view.c:7580
 msgid "Open this folder in a new tab"
 msgstr "在新的分頁中開啟本資料夾"
 
-#: src/file-manager/fm-directory-view.c:7572
+#: src/file-manager/fm-directory-view.c:7585
 msgid "Open this folder in a folder window"
 msgstr "在資料夾視窗中開啟本資料夾"
 
-#: src/file-manager/fm-directory-view.c:7577
+#: src/file-manager/fm-directory-view.c:7590
 msgid "Prepare this folder to be moved with a Paste command"
 msgstr "以「貼上」指令來準備移動本資料夾"
 
-#: src/file-manager/fm-directory-view.c:7581
+#: src/file-manager/fm-directory-view.c:7594
 msgid "Prepare this folder to be copied with a Paste command"
 msgstr "以「貼上」指令來準備拷貝本資料夾"
 
-#: src/file-manager/fm-directory-view.c:7585
+#: src/file-manager/fm-directory-view.c:7598
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into this "
 "folder"
 msgstr "將剛才以「剪下」或「拷貝」指令選取的檔案移動或拷貝至這個資料夾"
 
-#: src/file-manager/fm-directory-view.c:7590
+#: src/file-manager/fm-directory-view.c:7603
 msgid "Move this folder to the Trash"
 msgstr "將本資料夾丟進回收筒"
 
-#: src/file-manager/fm-directory-view.c:7594
+#: src/file-manager/fm-directory-view.c:7607
 msgid "Delete this folder, without moving to the Trash"
 msgstr "直接刪除本資料夾，毋需丟進回收筒"
 
-#: src/file-manager/fm-directory-view.c:7602
+#: src/file-manager/fm-directory-view.c:7615
 msgid "Mount the volume associated with this folder"
 msgstr "掛載與這個資料夾相關聯的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7606
+#: src/file-manager/fm-directory-view.c:7619
 msgid "Unmount the volume associated with this folder"
 msgstr "卸載與這個資料夾相關聯的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7610
+#: src/file-manager/fm-directory-view.c:7623
 msgid "Eject the volume associated with this folder"
 msgstr "退出與這個資料夾相關聯的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7614
+#: src/file-manager/fm-directory-view.c:7627
 msgid "Format the volume associated with this folder"
 msgstr "格式化與這個資料夾相關聯的檔案系統"
 
-#: src/file-manager/fm-directory-view.c:7618
+#: src/file-manager/fm-directory-view.c:7631
 msgid "Start the volume associated with this folder"
 msgstr "掛載與這個資料夾相關聯的儲存區"
 
-#: src/file-manager/fm-directory-view.c:7622
+#: src/file-manager/fm-directory-view.c:7635
 msgid "Stop the volume associated with this folder"
 msgstr "卸載與這個資料夾相關聯的儲存區"
 
-#: src/file-manager/fm-directory-view.c:7631
+#: src/file-manager/fm-directory-view.c:7644
 msgid "View or modify the properties of this folder"
 msgstr "顯示或修改這個資料夾的屬性"
 
-#: src/file-manager/fm-directory-view.c:7634
-#: src/file-manager/fm-directory-view.c:7637
+#: src/file-manager/fm-directory-view.c:7647
+#: src/file-manager/fm-directory-view.c:7650
 msgid "_Other pane"
 msgstr "其他窗格(_O)"
 
-#: src/file-manager/fm-directory-view.c:7635
+#: src/file-manager/fm-directory-view.c:7648
 msgid "Copy the current selection to the other pane in the window"
 msgstr "將目前的選擇區域拷貝到視窗中的其他窗格"
 
-#: src/file-manager/fm-directory-view.c:7638
+#: src/file-manager/fm-directory-view.c:7651
 msgid "Move the current selection to the other pane in the window"
 msgstr "將目前的選擇區域移動到視窗中的其他窗格"
 
-#: src/file-manager/fm-directory-view.c:7642
+#: src/file-manager/fm-directory-view.c:7655
 msgid "Copy the current selection to the home folder"
 msgstr "將目前的選擇區域拷貝到家目錄"
 
-#: src/file-manager/fm-directory-view.c:7646
+#: src/file-manager/fm-directory-view.c:7659
 msgid "Move the current selection to the home folder"
 msgstr "將目前的選擇區域移動到家目錄"
 
-#: src/file-manager/fm-directory-view.c:7650
+#: src/file-manager/fm-directory-view.c:7663
 msgid "Copy the current selection to the desktop"
 msgstr "將目前的選擇區域拷貝到桌面"
 
-#: src/file-manager/fm-directory-view.c:7654
+#: src/file-manager/fm-directory-view.c:7667
 msgid "Move the current selection to the desktop"
 msgstr "將目前的選擇區域移動到桌面"
 
 #. Translators: %s is a directory
-#: src/file-manager/fm-directory-view.c:7740
+#: src/file-manager/fm-directory-view.c:7753
 #, c-format
 msgid "Run or manage scripts from %s"
 msgstr "執行或管理 %s 中的指令稿"
 
-#: src/file-manager/fm-directory-view.c:7742
+#: src/file-manager/fm-directory-view.c:7755
 msgid "_Scripts"
 msgstr "指令稿(_S)"
 
-#: src/file-manager/fm-directory-view.c:8151
+#: src/file-manager/fm-directory-view.c:8164
 #, c-format
 msgid "Move the open folder out of the trash to \"%s\""
 msgstr "將開啟的資料夾自回收筒移至「%s」"
 
-#: src/file-manager/fm-directory-view.c:8154
+#: src/file-manager/fm-directory-view.c:8167
 #, c-format
 msgid "Move the selected folder out of the trash to \"%s\""
 msgid_plural "Move the selected folders out of the trash to \"%s\""
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8158
+#: src/file-manager/fm-directory-view.c:8171
 msgid "Move the selected folder out of the trash"
 msgid_plural "Move the selected folders out of the trash"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8164
+#: src/file-manager/fm-directory-view.c:8177
 #, c-format
 msgid "Move the selected file out of the trash to \"%s\""
 msgid_plural "Move the selected files out of the trash to \"%s\""
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8168
+#: src/file-manager/fm-directory-view.c:8181
 msgid "Move the selected file out of the trash"
 msgid_plural "Move the selected files out of the trash"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8174
+#: src/file-manager/fm-directory-view.c:8187
 #, c-format
 msgid "Move the selected item out of the trash to \"%s\""
 msgid_plural "Move the selected items out of the trash to \"%s\""
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8178
+#: src/file-manager/fm-directory-view.c:8191
 msgid "Move the selected item out of the trash"
 msgid_plural "Move the selected items out of the trash"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8304
-#: src/file-manager/fm-directory-view.c:8308
-#: src/file-manager/fm-directory-view.c:8506
-#: src/file-manager/fm-directory-view.c:8510
+#: src/file-manager/fm-directory-view.c:8317
+#: src/file-manager/fm-directory-view.c:8321
+#: src/file-manager/fm-directory-view.c:8519
+#: src/file-manager/fm-directory-view.c:8523
 msgid "Start the selected drive"
 msgstr "開啟選擇的裝置"
 
-#: src/file-manager/fm-directory-view.c:8312
-#: src/file-manager/fm-directory-view.c:8514
+#: src/file-manager/fm-directory-view.c:8325
+#: src/file-manager/fm-directory-view.c:8527
 msgid "Connect to the selected drive"
 msgstr "連接到選取的裝置"
 
-#: src/file-manager/fm-directory-view.c:8315
-#: src/file-manager/fm-directory-view.c:8407
-#: src/file-manager/fm-directory-view.c:8517
+#: src/file-manager/fm-directory-view.c:8328
+#: src/file-manager/fm-directory-view.c:8420
+#: src/file-manager/fm-directory-view.c:8530
 msgid "_Start Multi-disk Drive"
 msgstr "開啟多磁碟裝置(_S)"
 
-#: src/file-manager/fm-directory-view.c:8316
-#: src/file-manager/fm-directory-view.c:8518
+#: src/file-manager/fm-directory-view.c:8329
+#: src/file-manager/fm-directory-view.c:8531
 msgid "Start the selected multi-disk drive"
 msgstr "開啟選取的多磁碟裝置"
 
-#: src/file-manager/fm-directory-view.c:8319
+#: src/file-manager/fm-directory-view.c:8332
 msgid "U_nlock Drive"
 msgstr "解鎖裝置(_N)"
 
-#: src/file-manager/fm-directory-view.c:8320
-#: src/file-manager/fm-directory-view.c:8522
+#: src/file-manager/fm-directory-view.c:8333
+#: src/file-manager/fm-directory-view.c:8535
 msgid "Unlock the selected drive"
 msgstr "解鎖選取的裝置"
 
-#: src/file-manager/fm-directory-view.c:8333
+#: src/file-manager/fm-directory-view.c:8346
 msgid "Stop the selected drive"
 msgstr "關閉選擇的裝置"
 
-#: src/file-manager/fm-directory-view.c:8337
-#: src/file-manager/fm-directory-view.c:8539
+#: src/file-manager/fm-directory-view.c:8350
+#: src/file-manager/fm-directory-view.c:8552
 msgid "Safely remove the selected drive"
 msgstr "安全的移除選取的裝置"
 
-#: src/file-manager/fm-directory-view.c:8340
-#: src/file-manager/fm-directory-view.c:8432
-#: src/file-manager/fm-directory-view.c:8542
+#: src/file-manager/fm-directory-view.c:8353
+#: src/file-manager/fm-directory-view.c:8445
+#: src/file-manager/fm-directory-view.c:8555
 msgid "_Disconnect"
 msgstr "斷線(_D)"
 
-#: src/file-manager/fm-directory-view.c:8341
-#: src/file-manager/fm-directory-view.c:8543
+#: src/file-manager/fm-directory-view.c:8354
+#: src/file-manager/fm-directory-view.c:8556
 msgid "Disconnect the selected drive"
 msgstr "中斷選取的裝置"
 
-#: src/file-manager/fm-directory-view.c:8344
-#: src/file-manager/fm-directory-view.c:8436
-#: src/file-manager/fm-directory-view.c:8546
+#: src/file-manager/fm-directory-view.c:8357
+#: src/file-manager/fm-directory-view.c:8449
+#: src/file-manager/fm-directory-view.c:8559
 msgid "_Stop Multi-disk Drive"
 msgstr "關閉多磁碟裝置(_S)"
 
-#: src/file-manager/fm-directory-view.c:8345
-#: src/file-manager/fm-directory-view.c:8547
+#: src/file-manager/fm-directory-view.c:8358
+#: src/file-manager/fm-directory-view.c:8560
 msgid "Stop the selected multi-disk drive"
 msgstr "關閉選取的多磁碟裝置"
 
-#: src/file-manager/fm-directory-view.c:8349
-#: src/file-manager/fm-directory-view.c:8551
+#: src/file-manager/fm-directory-view.c:8362
+#: src/file-manager/fm-directory-view.c:8564
 msgid "Lock the selected drive"
 msgstr "鎖定選取的裝置"
 
-#: src/file-manager/fm-directory-view.c:8396
-#: src/file-manager/fm-directory-view.c:8400
+#: src/file-manager/fm-directory-view.c:8409
+#: src/file-manager/fm-directory-view.c:8413
 msgid "Start the drive associated with the open folder"
 msgstr "掛載與所開啟資料夾相關聯的裝置"
 
-#: src/file-manager/fm-directory-view.c:8404
+#: src/file-manager/fm-directory-view.c:8417
 msgid "Connect to the drive associated with the open folder"
 msgstr "卸載與所開啟資料夾相關聯的裝置"
 
-#: src/file-manager/fm-directory-view.c:8408
+#: src/file-manager/fm-directory-view.c:8421
 msgid "Start the multi-disk drive associated with the open folder"
 msgstr "掛載與所開啟資料夾相關聯的多磁碟裝置"
 
-#: src/file-manager/fm-directory-view.c:8412
+#: src/file-manager/fm-directory-view.c:8425
 msgid "Unlock the drive associated with the open folder"
 msgstr "解鎖與所開啟資料夾相關聯的裝置"
 
-#: src/file-manager/fm-directory-view.c:8425
+#: src/file-manager/fm-directory-view.c:8438
 msgid "_Stop the drive associated with the open folder"
 msgstr "卸載與所開啟資料夾相關聯的裝置(_S)"
 
-#: src/file-manager/fm-directory-view.c:8429
+#: src/file-manager/fm-directory-view.c:8442
 msgid "Safely remove the drive associated with the open folder"
 msgstr "安全的移除與所開啟資料夾相關聯的裝置"
 
-#: src/file-manager/fm-directory-view.c:8433
+#: src/file-manager/fm-directory-view.c:8446
 msgid "Disconnect the drive associated with the open folder"
 msgstr "中斷與所開啟資料夾相關聯裝置的連線"
 
-#: src/file-manager/fm-directory-view.c:8437
+#: src/file-manager/fm-directory-view.c:8450
 msgid "Stop the multi-disk drive associated with the open folder"
 msgstr "卸載與所開啟資料夾相關聯的多磁碟裝置"
 
-#: src/file-manager/fm-directory-view.c:8441
+#: src/file-manager/fm-directory-view.c:8454
 msgid "Lock the drive associated with the open folder"
 msgstr "鎖定與所開啟資料夾相關聯的裝置"
 
-#: src/file-manager/fm-directory-view.c:8622
-#: src/file-manager/fm-directory-view.c:8946
+#: src/file-manager/fm-directory-view.c:8635
+#: src/file-manager/fm-directory-view.c:8960
 msgid "Browse in New _Window"
 msgstr "用新的視窗瀏覽(_W)"
 
-#: src/file-manager/fm-directory-view.c:8628
-#: src/file-manager/fm-directory-view.c:8956
+#: src/file-manager/fm-directory-view.c:8641
+#: src/file-manager/fm-directory-view.c:8970
 msgid "_Browse Folder"
 msgid_plural "_Browse Folders"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8645
-#: src/file-manager/fm-directory-view.c:8985
+#: src/file-manager/fm-directory-view.c:8658
+#: src/file-manager/fm-directory-view.c:8999
 msgid "Browse in New _Tab"
 msgstr "用新的分頁瀏覽(_T)"
 
-#: src/file-manager/fm-directory-view.c:8694
-#: src/file-manager/fm-directory-view.c:9026
+#: src/file-manager/fm-directory-view.c:8707
+#: src/file-manager/fm-directory-view.c:9040
 msgid "_Delete Permanently"
 msgstr "永久刪除(_D)"
 
-#: src/file-manager/fm-directory-view.c:8695
+#: src/file-manager/fm-directory-view.c:8708
 msgid "Delete the open folder permanently"
 msgstr "永久刪除開啟的資料夾"
 
-#: src/file-manager/fm-directory-view.c:8699
+#: src/file-manager/fm-directory-view.c:8712
 msgid "Move the open folder to the Trash"
 msgstr "將開啟的資料夾丟進回收筒"
 
-#: src/file-manager/fm-directory-view.c:8886
+#: src/file-manager/fm-directory-view.c:8900
 #, c-format
 msgid "_Open With %s"
 msgstr "以 %s 開啟(_O)"
 
-#: src/file-manager/fm-directory-view.c:8939
+#: src/file-manager/fm-directory-view.c:8953
 #, c-format
 msgid "Open in %'d New _Window"
 msgid_plural "Open in %'d New _Windows"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8948
+#: src/file-manager/fm-directory-view.c:8962
 #, c-format
 msgid "Browse in %'d New _Window"
 msgid_plural "Browse in %'d New _Windows"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8978
+#: src/file-manager/fm-directory-view.c:8992
 #, c-format
 msgid "Open in %'d New _Tab"
 msgid_plural "Open in %'d New _Tabs"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:8987
+#: src/file-manager/fm-directory-view.c:9001
 #, c-format
 msgid "Browse in %'d New _Tab"
 msgid_plural "Browse in %'d New _Tabs"
 msgstr[0] ""
 
-#: src/file-manager/fm-directory-view.c:9027
+#: src/file-manager/fm-directory-view.c:9041
 msgid "Delete all selected items permanently"
 msgstr "永久刪除所有選定的項目"
 
-#: src/file-manager/fm-directory-view.c:9084
+#: src/file-manager/fm-directory-view.c:9098
 msgid "View or modify the properties of the open folder"
 msgstr "顯示或修改開啟的資料夾的屬性"
 
-#: src/file-manager/fm-directory-view.c:10385
+#: src/file-manager/fm-directory-view.c:10400
 msgid "Download location?"
 msgstr "下載位置？"
 
-#: src/file-manager/fm-directory-view.c:10388
+#: src/file-manager/fm-directory-view.c:10403
 msgid "You can download it or make a link to it."
 msgstr "您可以將它下載或給它建立鏈結。"
 
-#: src/file-manager/fm-directory-view.c:10391
+#: src/file-manager/fm-directory-view.c:10406
 msgid "Make a _Link"
 msgstr "建立鏈結(_L)"
 
-#: src/file-manager/fm-directory-view.c:10398
+#: src/file-manager/fm-directory-view.c:10413
 msgid "_Download"
 msgstr "下載(_D)"
 
-#: src/file-manager/fm-directory-view.c:10555
-#: src/file-manager/fm-directory-view.c:10614
-#: src/file-manager/fm-directory-view.c:10727
+#: src/file-manager/fm-directory-view.c:10570
+#: src/file-manager/fm-directory-view.c:10629
+#: src/file-manager/fm-directory-view.c:10742
 msgid "Drag and drop is not supported."
 msgstr "不支援拖放圖示。"
 
-#: src/file-manager/fm-directory-view.c:10556
+#: src/file-manager/fm-directory-view.c:10571
 msgid "Drag and drop is only supported on local file systems."
 msgstr "拖放圖示只在本機的檔案系統之間適用。"
 
-#: src/file-manager/fm-directory-view.c:10615
-#: src/file-manager/fm-directory-view.c:10728
+#: src/file-manager/fm-directory-view.c:10630
+#: src/file-manager/fm-directory-view.c:10743
 msgid "An invalid drag type was used."
 msgstr "拖曳方式不正確。"
 
 #. Translators: This is the filename used for when you dnd text to a directory
-#: src/file-manager/fm-directory-view.c:10805
+#: src/file-manager/fm-directory-view.c:10820
 msgid "dropped text.txt"
 msgstr "拖放的 text.txt"
 
 #. Translators: This is the filename used for when you dnd raw
 #. * data to a directory, if the source didn't supply a name.
 #.
-#: src/file-manager/fm-directory-view.c:10851
+#: src/file-manager/fm-directory-view.c:10866
 msgid "dropped data"
 msgstr "拖放的資料"
 
-#: src/file-manager/fm-directory-view.c:11246
+#: src/file-manager/fm-directory-view.c:11263
 msgid "Undo"
 msgstr "復原"
 
-#: src/file-manager/fm-directory-view.c:11264
+#: src/file-manager/fm-directory-view.c:11281
 msgid "Redo"
 msgstr "重做"
 
-#: src/file-manager/fm-ditem-page.c:440 src/file-manager/fm-ditem-page.c:452
+#: src/file-manager/fm-ditem-page.c:446 src/file-manager/fm-ditem-page.c:458
 msgid "Comment"
 msgstr "Comment"
 
-#: src/file-manager/fm-ditem-page.c:443
+#: src/file-manager/fm-ditem-page.c:449
 msgid "URL"
 msgstr "URL"
 
-#: src/file-manager/fm-ditem-page.c:455
+#: src/file-manager/fm-ditem-page.c:461
 msgid "Command"
 msgstr "指令"
 
-#: src/file-manager/fm-empty-view.c:397 src/file-manager/fm-empty-view.c:399
+#: src/file-manager/fm-empty-view.c:407 src/file-manager/fm-empty-view.c:409
 msgid "Empty View"
 msgstr ""
 
-#: src/file-manager/fm-empty-view.c:398
+#: src/file-manager/fm-empty-view.c:408
 msgid "_Empty"
 msgstr ""
 
-#: src/file-manager/fm-empty-view.c:400
+#: src/file-manager/fm-empty-view.c:410
 msgid "The empty view encountered an error."
 msgstr ""
 
-#: src/file-manager/fm-empty-view.c:401
+#: src/file-manager/fm-empty-view.c:411
 msgid "Display this location with the empty view."
 msgstr ""
 
@@ -7034,7 +7034,7 @@ msgstr "抱歉，無法更改「%s」的權限：%s"
 msgid "The permissions could not be changed."
 msgstr "無法更改權限。"
 
-#: src/file-manager/fm-error-reporting.c:366
+#: src/file-manager/fm-error-reporting.c:368
 #, c-format
 msgid "Renaming \"%s\" to \"%s\"."
 msgstr "將「%s」重新命名為「%s」。"
@@ -7043,7 +7043,7 @@ msgstr "將「%s」重新命名為「%s」。"
 msgid "by _Name"
 msgstr "依名稱(_N)"
 
-#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1750
+#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1752
 msgid "Keep icons sorted by name in rows"
 msgstr "以名稱排列圖示"
 
@@ -7051,7 +7051,7 @@ msgstr "以名稱排列圖示"
 msgid "by _Size"
 msgstr "依大小(_S)"
 
-#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1756
+#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1758
 msgid "Keep icons sorted by size in rows"
 msgstr "以大小排列圖示"
 
@@ -7059,7 +7059,7 @@ msgstr "以大小排列圖示"
 msgid "by S_ize on Disk"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1762
+#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1764
 msgid "Keep icons sorted by disk usage in rows"
 msgstr ""
 
@@ -7067,7 +7067,7 @@ msgstr ""
 msgid "by _Type"
 msgstr "以檔案類型(_T)"
 
-#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1768
+#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1770
 msgid "Keep icons sorted by type in rows"
 msgstr "以檔案類型排列圖示"
 
@@ -7075,7 +7075,7 @@ msgstr "以檔案類型排列圖示"
 msgid "by Modification _Date"
 msgstr "以修改日期(_D)"
 
-#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1774
+#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1776
 msgid "Keep icons sorted by modification date in rows"
 msgstr "以修改日期排列圖示"
 
@@ -7083,7 +7083,7 @@ msgstr "以修改日期排列圖示"
 msgid "by _Emblems"
 msgstr "以圖章(_E)"
 
-#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1780
+#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1782
 msgid "Keep icons sorted by emblems in rows"
 msgstr "以圖章的次序排列圖示"
 
@@ -7091,7 +7091,7 @@ msgstr "以圖章的次序排列圖示"
 msgid "by T_rash Time"
 msgstr "以回收筒時刻(_R)"
 
-#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1786
+#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1788
 msgid "Keep icons sorted by trash time in rows"
 msgstr "以回收筒時刻排列圖示"
 
@@ -7103,483 +7103,483 @@ msgstr ""
 msgid "Keep icons sorted by reversed extension segments in rows"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:789
+#: src/file-manager/fm-icon-view.c:791
 msgid "_Organize Desktop by Name"
 msgstr "以名稱組織桌面(_O)"
 
-#: src/file-manager/fm-icon-view.c:1699
+#: src/file-manager/fm-icon-view.c:1701
 msgid "Arran_ge Items"
 msgstr "項目排列方式(_G)"
 
-#: src/file-manager/fm-icon-view.c:1701
+#: src/file-manager/fm-icon-view.c:1703
 msgid "Resize Icon..."
 msgstr "改變圖示大小…"
 
-#: src/file-manager/fm-icon-view.c:1702
+#: src/file-manager/fm-icon-view.c:1704
 msgid "Make the selected icon resizable"
 msgstr "將選取的圖示設為可改變大小"
 
-#: src/file-manager/fm-icon-view.c:1706 src/file-manager/fm-icon-view.c:1920
+#: src/file-manager/fm-icon-view.c:1708 src/file-manager/fm-icon-view.c:1922
 msgid "Restore Icons' Original Si_zes"
 msgstr "還原圖示大小(_Z)"
 
-#: src/file-manager/fm-icon-view.c:1707
+#: src/file-manager/fm-icon-view.c:1709
 msgid "Restore each selected icon to its original size"
 msgstr "還原所有選定圖示的大小"
 
-#: src/file-manager/fm-icon-view.c:1711
+#: src/file-manager/fm-icon-view.c:1713
 msgid "_Organize by Name"
 msgstr "以名稱組織(_O)"
 
-#: src/file-manager/fm-icon-view.c:1712
+#: src/file-manager/fm-icon-view.c:1714
 msgid "Reposition icons to better fit in the window and avoid overlapping"
 msgstr "重新排列圖示以符合視窗及避免重疊"
 
-#: src/file-manager/fm-icon-view.c:1720
+#: src/file-manager/fm-icon-view.c:1722
 msgid "Compact _Layout"
 msgstr "緊密排列(_L)"
 
-#: src/file-manager/fm-icon-view.c:1721
+#: src/file-manager/fm-icon-view.c:1723
 msgid "Toggle using a tighter layout scheme"
 msgstr "切換是否使用較緊密的排列方式"
 
-#: src/file-manager/fm-icon-view.c:1726
+#: src/file-manager/fm-icon-view.c:1728
 msgid "Re_versed Order"
 msgstr "相反次序(_V)"
 
-#: src/file-manager/fm-icon-view.c:1727
+#: src/file-manager/fm-icon-view.c:1729
 msgid "Display icons in the opposite order"
 msgstr "以相反次序顯示圖示"
 
-#: src/file-manager/fm-icon-view.c:1732
+#: src/file-manager/fm-icon-view.c:1734
 msgid "_Keep Aligned"
 msgstr "保持整齊排列(_K)"
 
-#: src/file-manager/fm-icon-view.c:1733
+#: src/file-manager/fm-icon-view.c:1735
 msgid "Keep icons lined up on a grid"
 msgstr "令圖示貼齊格線"
 
-#: src/file-manager/fm-icon-view.c:1743
+#: src/file-manager/fm-icon-view.c:1745
 msgid "_Manually"
 msgstr "手動(_M)"
 
-#: src/file-manager/fm-icon-view.c:1744
+#: src/file-manager/fm-icon-view.c:1746
 msgid "Leave icons wherever they are dropped"
 msgstr "拖放圖示後不自動編排圖示的位置"
 
-#: src/file-manager/fm-icon-view.c:1749
+#: src/file-manager/fm-icon-view.c:1751
 msgid "By _Name"
 msgstr "依名稱(_N)"
 
-#: src/file-manager/fm-icon-view.c:1755
+#: src/file-manager/fm-icon-view.c:1757
 msgid "By _Size"
 msgstr "依大小(_S)"
 
-#: src/file-manager/fm-icon-view.c:1761
+#: src/file-manager/fm-icon-view.c:1763
 msgid "By S_ize on Disk"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1767
+#: src/file-manager/fm-icon-view.c:1769
 msgid "By _Type"
 msgstr "依類型(_T)"
 
-#: src/file-manager/fm-icon-view.c:1773
+#: src/file-manager/fm-icon-view.c:1775
 msgid "By Modification _Date"
 msgstr "依修改日期(_D)"
 
-#: src/file-manager/fm-icon-view.c:1779
+#: src/file-manager/fm-icon-view.c:1781
 msgid "By _Emblems"
 msgstr "依圖章(_E)"
 
-#: src/file-manager/fm-icon-view.c:1785
+#: src/file-manager/fm-icon-view.c:1787
 msgid "By T_rash Time"
 msgstr "以回收筒時刻(_R)"
 
-#: src/file-manager/fm-icon-view.c:1791
+#: src/file-manager/fm-icon-view.c:1793
 msgid "By E_xtension"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1792
+#: src/file-manager/fm-icon-view.c:1794
 msgid "Keep icons sorted by reverse extension segments in rows"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1921
+#: src/file-manager/fm-icon-view.c:1923
 msgid "Restore Icon's Original Si_ze"
 msgstr "還原圖示大小(_Z)"
 
-#: src/file-manager/fm-icon-view.c:2403
+#: src/file-manager/fm-icon-view.c:2405
 #, c-format
 msgid "pointing at \"%s\""
 msgstr "目標為「%s」"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3422
+#: src/file-manager/fm-icon-view.c:3445
 msgid "_Icons"
 msgstr "圖示(_I)"
 
-#: src/file-manager/fm-icon-view.c:3423
+#: src/file-manager/fm-icon-view.c:3446
 msgid "The icon view encountered an error."
 msgstr "圖示顯示模式發生錯誤。"
 
-#: src/file-manager/fm-icon-view.c:3424
+#: src/file-manager/fm-icon-view.c:3447
 msgid "The icon view encountered an error while starting up."
 msgstr "啟動圖示顯示模式時發生錯誤。"
 
-#: src/file-manager/fm-icon-view.c:3425
+#: src/file-manager/fm-icon-view.c:3448
 msgid "Display this location with the icon view."
 msgstr "以圖示顯示模式來顯示本位置。"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3437
+#: src/file-manager/fm-icon-view.c:3460
 msgid "_Compact"
 msgstr "精簡(_C)"
 
-#: src/file-manager/fm-icon-view.c:3438
+#: src/file-manager/fm-icon-view.c:3461
 msgid "The compact view encountered an error."
 msgstr "精簡顯示模式發生錯誤。"
 
-#: src/file-manager/fm-icon-view.c:3439
+#: src/file-manager/fm-icon-view.c:3462
 msgid "The compact view encountered an error while starting up."
 msgstr "啟動精簡顯示模式時發生錯誤。"
 
-#: src/file-manager/fm-icon-view.c:3440
+#: src/file-manager/fm-icon-view.c:3463
 msgid "Display this location with the compact view."
 msgstr "以精簡顯示模式來顯示本位置。"
 
-#: src/file-manager/fm-list-model.c:483 src/file-manager/fm-tree-model.c:1380
+#: src/file-manager/fm-list-model.c:483 src/file-manager/fm-tree-model.c:1381
 msgid "(Empty)"
 msgstr "（空的）"
 
-#: src/file-manager/fm-list-view.c:2563
+#: src/file-manager/fm-list-view.c:2599
 #, c-format
 msgid "%s Visible Columns"
 msgstr "%s 可視欄位"
 
-#: src/file-manager/fm-list-view.c:2587
+#: src/file-manager/fm-list-view.c:2623
 msgid "Choose the order of information to appear in this folder:"
 msgstr "請選擇這個資料夾顯示資訊的次序："
 
-#: src/file-manager/fm-list-view.c:2641
+#: src/file-manager/fm-list-view.c:2677
 msgid "Visible _Columns..."
 msgstr "可視欄位(_C)…"
 
-#: src/file-manager/fm-list-view.c:2642
+#: src/file-manager/fm-list-view.c:2678
 msgid "Select the columns visible in this folder"
 msgstr "請選擇本資料夾中會顯示甚麼欄位"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-list-view.c:3503
+#: src/file-manager/fm-list-view.c:3539
 msgid "_List"
 msgstr "列表(_L)"
 
-#: src/file-manager/fm-list-view.c:3504
+#: src/file-manager/fm-list-view.c:3540
 msgid "The list view encountered an error."
 msgstr "列表顯示模式發生錯誤。"
 
-#: src/file-manager/fm-list-view.c:3505
+#: src/file-manager/fm-list-view.c:3541
 msgid "The list view encountered an error while starting up."
 msgstr "啟動列表顯示模式時發生錯誤。"
 
-#: src/file-manager/fm-list-view.c:3506
+#: src/file-manager/fm-list-view.c:3542
 msgid "Display this location with the list view."
 msgstr "以列表顯示模式來顯示本位置。"
 
-#: src/file-manager/fm-properties-window.c:511
+#: src/file-manager/fm-properties-window.c:514
 msgid "You cannot assign more than one custom icon at a time!"
 msgstr "不可以同時分配一個以上的自選圖示！"
 
-#: src/file-manager/fm-properties-window.c:645
+#: src/file-manager/fm-properties-window.c:648
 msgid "_Name:"
 msgid_plural "_Names:"
 msgstr[0] ""
 
-#: src/file-manager/fm-properties-window.c:1001
+#: src/file-manager/fm-properties-window.c:1007
 msgid "Properties"
 msgstr "屬性"
 
-#: src/file-manager/fm-properties-window.c:1013
+#: src/file-manager/fm-properties-window.c:1019
 #, c-format
 msgid "%s Properties"
 msgstr "%s 屬性"
 
-#: src/file-manager/fm-properties-window.c:1343
+#: src/file-manager/fm-properties-window.c:1349
 #, c-format
 msgctxt "MIME type description (MIME type)"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/file-manager/fm-properties-window.c:1551
+#: src/file-manager/fm-properties-window.c:1557
 msgid "Cancel Group Change?"
 msgstr "取消更改群組？"
 
-#: src/file-manager/fm-properties-window.c:1966
+#: src/file-manager/fm-properties-window.c:1972
 msgid "Cancel Owner Change?"
 msgstr "取消更改擁有者？"
 
-#: src/file-manager/fm-properties-window.c:2293
+#: src/file-manager/fm-properties-window.c:2299
 msgid "nothing"
 msgstr "沒有"
 
-#: src/file-manager/fm-properties-window.c:2295
+#: src/file-manager/fm-properties-window.c:2301
 msgid "unreadable"
 msgstr "無法讀取"
 
-#: src/file-manager/fm-properties-window.c:2314
+#: src/file-manager/fm-properties-window.c:2320
 #, c-format
 msgid "%'d item, with size %s (%s on disk)"
 msgid_plural "%'d items, totalling %s (%s on disk)"
 msgstr[0] ""
 
-#: src/file-manager/fm-properties-window.c:2324
+#: src/file-manager/fm-properties-window.c:2330
 msgid "(some contents unreadable)"
 msgstr "（無法讀取某部分內容）"
 
-#: src/file-manager/fm-properties-window.c:2341
+#: src/file-manager/fm-properties-window.c:2347
 msgid "Contents:"
 msgstr "內容："
 
 #. Translators: "used" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3117
+#: src/file-manager/fm-properties-window.c:3123
 msgid "used"
 msgstr "已使用"
 
 #. Translators: "free" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3128
+#: src/file-manager/fm-properties-window.c:3134
 msgid "free"
 msgstr "可用空間"
 
-#: src/file-manager/fm-properties-window.c:3132
+#: src/file-manager/fm-properties-window.c:3138
 msgid "Total capacity:"
 msgstr "總容量:"
 
-#: src/file-manager/fm-properties-window.c:3146
+#: src/file-manager/fm-properties-window.c:3152
 msgid "Filesystem type:"
 msgstr "檔案系統類型:"
 
-#: src/file-manager/fm-properties-window.c:3231
+#: src/file-manager/fm-properties-window.c:3237
 msgid "Basic"
 msgstr "基本"
 
-#: src/file-manager/fm-properties-window.c:3293
+#: src/file-manager/fm-properties-window.c:3299
 msgid "Link target:"
 msgstr "鏈結目標："
 
-#: src/file-manager/fm-properties-window.c:3307
+#: src/file-manager/fm-properties-window.c:3313
 msgid "Size on Disk:"
 msgstr ""
 
-#: src/file-manager/fm-properties-window.c:3322
+#: src/file-manager/fm-properties-window.c:3328
 msgid "Volume:"
 msgstr "檔案系統："
 
-#: src/file-manager/fm-properties-window.c:3331
+#: src/file-manager/fm-properties-window.c:3337
 msgid "Accessed:"
 msgstr "存取時間："
 
-#: src/file-manager/fm-properties-window.c:3335
+#: src/file-manager/fm-properties-window.c:3341
 msgid "Modified:"
 msgstr "修改時間："
 
-#: src/file-manager/fm-properties-window.c:3344
+#: src/file-manager/fm-properties-window.c:3350
 msgid "Free space:"
 msgstr "可用空間："
 
-#: src/file-manager/fm-properties-window.c:3869
+#: src/file-manager/fm-properties-window.c:3875
 msgid "_Read"
 msgstr "讀(_R)"
 
-#: src/file-manager/fm-properties-window.c:3871
+#: src/file-manager/fm-properties-window.c:3877
 msgid "_Write"
 msgstr "寫(_W)"
 
-#: src/file-manager/fm-properties-window.c:3873
+#: src/file-manager/fm-properties-window.c:3879
 msgid "E_xecute"
 msgstr "執行(_X)"
 
 #. Translators: this gets concatenated to "no read",
 #. * "no access", etc. (see following strings)
 #.
-#: src/file-manager/fm-properties-window.c:4141
-#: src/file-manager/fm-properties-window.c:4152
-#: src/file-manager/fm-properties-window.c:4164
+#: src/file-manager/fm-properties-window.c:4147
+#: src/file-manager/fm-properties-window.c:4158
+#: src/file-manager/fm-properties-window.c:4170
 msgid "no "
 msgstr "不能"
 
-#: src/file-manager/fm-properties-window.c:4144
+#: src/file-manager/fm-properties-window.c:4150
 msgid "list"
 msgstr "列出"
 
-#: src/file-manager/fm-properties-window.c:4146
+#: src/file-manager/fm-properties-window.c:4152
 msgid "read"
 msgstr "讀取"
 
-#: src/file-manager/fm-properties-window.c:4155
+#: src/file-manager/fm-properties-window.c:4161
 msgid "create/delete"
 msgstr "建立/刪除"
 
-#: src/file-manager/fm-properties-window.c:4157
+#: src/file-manager/fm-properties-window.c:4163
 msgid "write"
 msgstr "寫入"
 
-#: src/file-manager/fm-properties-window.c:4166
+#: src/file-manager/fm-properties-window.c:4172
 msgid "access"
 msgstr "存取"
 
-#: src/file-manager/fm-properties-window.c:4214
+#: src/file-manager/fm-properties-window.c:4220
 msgid "Access:"
 msgstr "存取："
 
-#: src/file-manager/fm-properties-window.c:4216
+#: src/file-manager/fm-properties-window.c:4222
 msgid "Folder access:"
 msgstr "資料夾存取:"
 
-#: src/file-manager/fm-properties-window.c:4218
+#: src/file-manager/fm-properties-window.c:4224
 msgid "File access:"
 msgstr "檔案存取:"
 
-#: src/file-manager/fm-properties-window.c:4236
+#: src/file-manager/fm-properties-window.c:4242
 msgid "List files only"
 msgstr "只能列出檔案"
 
-#: src/file-manager/fm-properties-window.c:4238
+#: src/file-manager/fm-properties-window.c:4244
 msgid "Access files"
 msgstr "存取檔案"
 
-#: src/file-manager/fm-properties-window.c:4240
+#: src/file-manager/fm-properties-window.c:4246
 msgid "Create and delete files"
 msgstr "建立及刪除檔案"
 
-#: src/file-manager/fm-properties-window.c:4247
+#: src/file-manager/fm-properties-window.c:4253
 msgid "Read-only"
 msgstr "唯讀"
 
-#: src/file-manager/fm-properties-window.c:4249
+#: src/file-manager/fm-properties-window.c:4255
 msgid "Read and write"
 msgstr "讀寫"
 
-#: src/file-manager/fm-properties-window.c:4314
+#: src/file-manager/fm-properties-window.c:4320
 msgid "Special flags:"
 msgstr "特殊屬性："
 
-#: src/file-manager/fm-properties-window.c:4316
+#: src/file-manager/fm-properties-window.c:4322
 msgid "Set _user ID"
 msgstr "Set _user ID"
 
-#: src/file-manager/fm-properties-window.c:4317
+#: src/file-manager/fm-properties-window.c:4323
 msgid "Set gro_up ID"
 msgstr "Set gro_up ID"
 
-#: src/file-manager/fm-properties-window.c:4318
+#: src/file-manager/fm-properties-window.c:4324
 msgid "_Sticky"
 msgstr "_Sticky"
 
-#: src/file-manager/fm-properties-window.c:4393
-#: src/file-manager/fm-properties-window.c:4585
+#: src/file-manager/fm-properties-window.c:4399
+#: src/file-manager/fm-properties-window.c:4591
 msgid "_Owner:"
 msgstr "擁有者(_O):"
 
-#: src/file-manager/fm-properties-window.c:4401
-#: src/file-manager/fm-properties-window.c:4491
-#: src/file-manager/fm-properties-window.c:4594
+#: src/file-manager/fm-properties-window.c:4407
+#: src/file-manager/fm-properties-window.c:4497
+#: src/file-manager/fm-properties-window.c:4600
 msgid "Owner:"
 msgstr "擁有者："
 
-#: src/file-manager/fm-properties-window.c:4425
-#: src/file-manager/fm-properties-window.c:4609
+#: src/file-manager/fm-properties-window.c:4431
+#: src/file-manager/fm-properties-window.c:4615
 msgid "_Group:"
 msgstr "群組(_G):"
 
-#: src/file-manager/fm-properties-window.c:4433
-#: src/file-manager/fm-properties-window.c:4492
-#: src/file-manager/fm-properties-window.c:4617
+#: src/file-manager/fm-properties-window.c:4439
+#: src/file-manager/fm-properties-window.c:4498
+#: src/file-manager/fm-properties-window.c:4623
 msgid "Group:"
 msgstr "群組:"
 
-#: src/file-manager/fm-properties-window.c:4457
+#: src/file-manager/fm-properties-window.c:4463
 msgid "Others"
 msgstr "其他"
 
-#: src/file-manager/fm-properties-window.c:4472
+#: src/file-manager/fm-properties-window.c:4478
 msgid "Execute:"
 msgstr "執行："
 
-#: src/file-manager/fm-properties-window.c:4475
+#: src/file-manager/fm-properties-window.c:4481
 msgid "Allow _executing file as program"
 msgstr "允許檔案作為程式執行(_E)"
 
-#: src/file-manager/fm-properties-window.c:4493
+#: src/file-manager/fm-properties-window.c:4499
 msgid "Others:"
 msgstr "其他："
 
-#: src/file-manager/fm-properties-window.c:4633
+#: src/file-manager/fm-properties-window.c:4639
 msgid "Folder Permissions:"
 msgstr "資料夾權限："
 
-#: src/file-manager/fm-properties-window.c:4640
+#: src/file-manager/fm-properties-window.c:4646
 msgid "File Permissions:"
 msgstr "檔案權限："
 
-#: src/file-manager/fm-properties-window.c:4649
+#: src/file-manager/fm-properties-window.c:4655
 msgid "Text view:"
 msgstr "文字顯示模式："
 
-#: src/file-manager/fm-properties-window.c:4797
+#: src/file-manager/fm-properties-window.c:4803
 msgid "You are not the owner, so you cannot change these permissions."
 msgstr "您並非擁有者，所以無法更改這些權限。"
 
-#: src/file-manager/fm-properties-window.c:4817
+#: src/file-manager/fm-properties-window.c:4823
 msgid "SELinux context:"
 msgstr "SELinux 安全性內容:"
 
-#: src/file-manager/fm-properties-window.c:4822
+#: src/file-manager/fm-properties-window.c:4828
 msgid "Last changed:"
 msgstr "最後修改時間："
 
-#: src/file-manager/fm-properties-window.c:4835
+#: src/file-manager/fm-properties-window.c:4841
 msgid "Apply Permissions to Enclosed Files"
 msgstr "當中的檔案套用相同的權限"
 
-#: src/file-manager/fm-properties-window.c:4849
+#: src/file-manager/fm-properties-window.c:4855
 #, c-format
 msgid "The permissions of \"%s\" could not be determined."
 msgstr "無法得知「%s」的權限。"
 
-#: src/file-manager/fm-properties-window.c:4852
+#: src/file-manager/fm-properties-window.c:4858
 msgid "The permissions of the selected file could not be determined."
 msgstr "無法得知選定的檔案的權限。"
 
-#: src/file-manager/fm-properties-window.c:5442
+#: src/file-manager/fm-properties-window.c:5448
 msgid "Creating Properties window."
 msgstr "正在建立屬性視窗。"
 
-#: src/file-manager/fm-properties-window.c:5738
+#: src/file-manager/fm-properties-window.c:5744
 msgid "Select Custom Icon"
 msgstr "選擇自訂圖示"
 
-#: src/file-manager/fm-tree-view.c:1712
+#: src/file-manager/fm-tree-view.c:1718
 msgid "Tree"
 msgstr "目錄樹"
 
-#: src/file-manager/fm-tree-view.c:1718
+#: src/file-manager/fm-tree-view.c:1724
 msgid "Show Tree"
 msgstr "顯示樹"
 
-#: src/file-manager/fm-widget-view.c:443
+#: src/file-manager/fm-widget-view.c:451
 msgid "Widget View"
 msgstr ""
 
-#: src/file-manager/fm-widget-view.c:444
+#: src/file-manager/fm-widget-view.c:452
 msgid "_Widget View"
 msgstr ""
 
-#: src/file-manager/fm-widget-view.c:445
+#: src/file-manager/fm-widget-view.c:453
 msgid "The widget view encountered an error."
 msgstr ""
 
-#: src/file-manager/fm-widget-view.c:446
+#: src/file-manager/fm-widget-view.c:454
 msgid "The widget view encountered an error while starting up."
 msgstr ""
 
-#: src/file-manager/fm-widget-view.c:447
+#: src/file-manager/fm-widget-view.c:455
 msgid "Display this location with the widget view."
 msgstr ""

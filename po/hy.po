@@ -10,9 +10,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: baul 1.23.2\n"
+"Project-Id-Version: baul 2.0.0\n"
 "Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
-"POT-Creation-Date: 2022-08-29 14:25+0200\n"
+"POT-Creation-Date: 2025-01-24 09:42+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
 "Language-Team: Armenian (https://www.transifex.com/cafe/teams/13566/hy/)\n"
@@ -286,15 +286,15 @@ msgstr "_Խորհրդանիշ"
 msgid "Drag an emblem to an object to add it to the object"
 msgstr "Քաշեք էմբլեմը առարկայի վրա` այն առարկային ավելացնելու համար"
 
-#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:995
-#: src/baul-property-browser.c:1959
+#: data/browser.xml.in:73 src/baul-emblem-sidebar.c:999
+#: src/baul-property-browser.c:1967
 msgid "Erase"
 msgstr "Ջնջել"
 
 #: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:3
 #: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
 #: src/baul-spatial-window.c:403 src/baul-window.c:167
-#: src/baul-window-menus.c:562
+#: src/baul-window-menus.c:564
 msgid "Baul"
 msgstr "Նաուտիլիուս"
 
@@ -338,7 +338,7 @@ msgstr ""
 msgid "Computer"
 msgstr "Համակարգիչ"
 
-#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:925
+#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:927
 msgid ""
 "Browse all local and remote disks and folders accessible from this computer"
 msgstr ""
@@ -371,12 +371,12 @@ msgstr ""
 msgid "Open Folder"
 msgstr "Բացել թղթապանակ"
 
-#: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1421
+#: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1427
 msgid "Home Folder"
 msgstr "Տուն Թղթապանակ"
 
 #: data/baul-home.desktop.in.in:4 src/baul-places-sidebar.c:527
-#: src/baul-window-menus.c:920
+#: src/baul-window-menus.c:922
 msgid "Open your personal folder"
 msgstr "Բացել անձնական պանակը"
 
@@ -393,7 +393,7 @@ msgstr "Պահպանված որոնում"
 msgid "Network"
 msgstr "Ցանց"
 
-#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:930
+#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:932
 msgid "Browse bookmarked and local network locations"
 msgstr "Փնտրել էջանշված և տեղական ցանցային վայրերը"
 
@@ -402,11 +402,11 @@ msgstr "Փնտրել էջանշված և տեղական ցանցային վայ�
 msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
 
-#: eel/eel-canvas.c:1310 eel/eel-canvas.c:1311
+#: eel/eel-canvas.c:1313 eel/eel-canvas.c:1314
 msgid "X"
 msgstr "X"
 
-#: eel/eel-canvas.c:1317 eel/eel-canvas.c:1318
+#: eel/eel-canvas.c:1320 eel/eel-canvas.c:1321
 msgid "Y"
 msgstr "Y"
 
@@ -458,21 +458,21 @@ msgid ""
 msgstr "Հնադիպակաց դիրքի վերջի ընտրությունը կուրսորի համար սիմվոլների մեջ։ "
 
 #: eel/eel-editable-label.c:3092 libbaul-private/baul-clipboard.c:456
-#: src/file-manager/fm-directory-view.c:7409
-#: src/file-manager/fm-directory-view.c:7576
-#: src/file-manager/fm-tree-view.c:1311
+#: src/file-manager/fm-directory-view.c:7422
+#: src/file-manager/fm-directory-view.c:7589
+#: src/file-manager/fm-tree-view.c:1317
 msgid "Cu_t"
 msgstr "Կտրել"
 
 #: eel/eel-editable-label.c:3094 libbaul-private/baul-clipboard.c:461
-#: src/file-manager/fm-directory-view.c:7413
-#: src/file-manager/fm-directory-view.c:7580
-#: src/file-manager/fm-tree-view.c:1320
+#: src/file-manager/fm-directory-view.c:7426
+#: src/file-manager/fm-directory-view.c:7593
+#: src/file-manager/fm-tree-view.c:1326
 msgid "_Copy"
 msgstr "_Պատճեն"
 
 #: eel/eel-editable-label.c:3096 libbaul-private/baul-clipboard.c:466
-#: src/file-manager/fm-directory-view.c:7417
+#: src/file-manager/fm-directory-view.c:7430
 msgid "_Paste"
 msgstr "Փակցնել"
 
@@ -484,50 +484,50 @@ msgstr "Ընտրել բոլորը"
 msgid "Show more _details"
 msgstr "Ցույց տալ ավելի շատ _մանրամասներ"
 
-#: eel/eel-stock-dialogs.c:238 eel/eel-stock-dialogs.c:294
-#: eel/eel-stock-dialogs.c:450 eel/eel-stock-dialogs.c:651
-#: libbaul-private/baul-autorun.c:1154
+#: eel/eel-stock-dialogs.c:239 eel/eel-stock-dialogs.c:295
+#: eel/eel-stock-dialogs.c:451 eel/eel-stock-dialogs.c:652
+#: libbaul-private/baul-autorun.c:1157
 #: libbaul-private/baul-file-conflict-dialog.c:653
 #: libbaul-private/baul-file-operations.c:183
 #: libbaul-private/baul-mime-actions.c:826
 #: libbaul-private/baul-mime-actions.c:1743
-#: libbaul-private/baul-open-with-dialog.c:972
-#: src/baul-connect-server-dialog.c:1119 src/baul-emblem-sidebar.c:293
-#: src/baul-emblem-sidebar.c:547 src/baul-location-dialog.c:197
-#: src/baul-property-browser.c:1117 src/baul-property-browser.c:1197
+#: libbaul-private/baul-open-with-dialog.c:970
+#: src/baul-connect-server-dialog.c:1119 src/baul-emblem-sidebar.c:295
+#: src/baul-emblem-sidebar.c:550 src/baul-location-dialog.c:199
+#: src/baul-property-browser.c:1118 src/baul-property-browser.c:1198
 #: src/file-manager/fm-directory-view.c:1215
 #: src/file-manager/fm-directory-view.c:1366
-#: src/file-manager/fm-directory-view.c:7057
-#: src/file-manager/fm-directory-view.c:10394
+#: src/file-manager/fm-directory-view.c:7070
+#: src/file-manager/fm-directory-view.c:10409
 msgid "_Cancel"
 msgstr "_Չեղարկել "
 
-#: eel/eel-stock-dialogs.c:240 libbaul-private/baul-open-with-dialog.c:988
-#: src/baul-location-dialog.c:202 src/baul-places-sidebar.c:2697
-#: src/file-manager/fm-directory-view.c:7373
-#: src/file-manager/fm-directory-view.c:8899
-#: src/file-manager/fm-tree-view.c:1271
+#: eel/eel-stock-dialogs.c:241 libbaul-private/baul-open-with-dialog.c:986
+#: src/baul-location-dialog.c:204 src/baul-places-sidebar.c:2697
+#: src/file-manager/fm-directory-view.c:7386
+#: src/file-manager/fm-directory-view.c:8913
+#: src/file-manager/fm-tree-view.c:1277
 msgid "_Open"
 msgstr "_Բացել"
 
-#: eel/eel-stock-dialogs.c:242
+#: eel/eel-stock-dialogs.c:243
 msgid "_Revert"
 msgstr "_Հետշրջել"
 
-#: eel/eel-stock-dialogs.c:290
+#: eel/eel-stock-dialogs.c:291
 msgid "You can stop this operation by clicking cancel."
 msgstr "Դուք կարող եք դադարեցնել այս գործողությունը, սեղմելով չեղյալ."
 
-#: eel/eel-stock-dialogs.c:296 eel/eel-stock-dialogs.c:452
-#: eel/eel-stock-dialogs.c:656 libbaul-private/baul-autorun.c:1159
-#: libbaul-private/baul-mime-actions.c:1386 src/baul-emblem-sidebar.c:298
-#: src/baul-emblem-sidebar.c:552 src/baul-property-browser.c:1122
-#: src/baul-property-browser.c:1202 src/baul-query-editor.c:776
+#: eel/eel-stock-dialogs.c:297 eel/eel-stock-dialogs.c:453
+#: eel/eel-stock-dialogs.c:657 libbaul-private/baul-autorun.c:1162
+#: libbaul-private/baul-mime-actions.c:1386 src/baul-emblem-sidebar.c:300
+#: src/baul-emblem-sidebar.c:555 src/baul-property-browser.c:1123
+#: src/baul-property-browser.c:1203 src/baul-query-editor.c:780
 #: src/file-manager/fm-directory-view.c:1220
 msgid "_OK"
 msgstr ""
 
-#: eel/eel-stock-dialogs.c:658
+#: eel/eel-stock-dialogs.c:659
 msgid "_Clear"
 msgstr ""
 
@@ -556,59 +556,59 @@ msgstr "Բացել %s"
 msgid "Open with other Application..."
 msgstr "Բացել մեկ այլ Ծրագիր..."
 
-#: libbaul-private/baul-autorun.c:1048
+#: libbaul-private/baul-autorun.c:1051
 msgid "You have just inserted an Audio CD."
 msgstr "Դուք պետք է պարզապես տեղադրեք Աուդիո CD."
 
-#: libbaul-private/baul-autorun.c:1052
+#: libbaul-private/baul-autorun.c:1055
 msgid "You have just inserted an Audio DVD."
 msgstr "Դուք պետք է պարզապես տեղադրեք Աուդիո DVD."
 
-#: libbaul-private/baul-autorun.c:1056
+#: libbaul-private/baul-autorun.c:1059
 msgid "You have just inserted a Video DVD."
 msgstr "Դուք պետք է պարզապես տեղադրեք Վիդեո DVD."
 
-#: libbaul-private/baul-autorun.c:1060
+#: libbaul-private/baul-autorun.c:1063
 msgid "You have just inserted a Video CD."
 msgstr "Դուք պարզապես պետք է տեղադրեք Վիդեո CD."
 
-#: libbaul-private/baul-autorun.c:1064
+#: libbaul-private/baul-autorun.c:1067
 msgid "You have just inserted a Super Video CD."
 msgstr "Դուք պարզապես պետք է տեղադրեք Սուպեր Վիդեո CD."
 
-#: libbaul-private/baul-autorun.c:1068
+#: libbaul-private/baul-autorun.c:1071
 msgid "You have just inserted a blank CD."
 msgstr "Դուք պարզապես պետք է տեղադրեք դատարկ CD."
 
-#: libbaul-private/baul-autorun.c:1072
+#: libbaul-private/baul-autorun.c:1075
 msgid "You have just inserted a blank DVD."
 msgstr "Դուք պարզապես պետք է տեղադրեք դատարկ DVD."
 
-#: libbaul-private/baul-autorun.c:1076
+#: libbaul-private/baul-autorun.c:1079
 msgid "You have just inserted a blank Blu-Ray disc."
 msgstr "Դուք պարզապես պետք է տեղադրեք դատարկ Blu-Ray սկավառակը․"
 
-#: libbaul-private/baul-autorun.c:1080
+#: libbaul-private/baul-autorun.c:1083
 msgid "You have just inserted a blank HD DVD."
 msgstr "Դուք պարզապես պետք է տեղադրեք դատարկ HD DVD."
 
-#: libbaul-private/baul-autorun.c:1084
+#: libbaul-private/baul-autorun.c:1087
 msgid "You have just inserted a Photo CD."
 msgstr "Դուք պարզապես պետք է տեղադրեք լուսանկար CD."
 
-#: libbaul-private/baul-autorun.c:1088
+#: libbaul-private/baul-autorun.c:1091
 msgid "You have just inserted a Picture CD."
 msgstr "Դուք պարզապես պետք է տեղադրեք նկար CD."
 
-#: libbaul-private/baul-autorun.c:1092
+#: libbaul-private/baul-autorun.c:1095
 msgid "You have just inserted a medium with digital photos."
 msgstr "Դուք պարզապես պետք է տեղադրեք կրիչը թվային նկարի հետ։"
 
-#: libbaul-private/baul-autorun.c:1096
+#: libbaul-private/baul-autorun.c:1099
 msgid "You have just inserted a digital audio player."
 msgstr "Դուք պետք է պարզապես տեղադրեք թվային աուդիո նվագարկիչը։"
 
-#: libbaul-private/baul-autorun.c:1100
+#: libbaul-private/baul-autorun.c:1103
 msgid ""
 "You have just inserted a medium with software intended to be automatically "
 "started."
@@ -616,15 +616,15 @@ msgstr ""
 "Դուք պարզապես պետք է դեղադրեք կրիչը նախատեսված ծրագրային ապահովման հետ "
 "ինքնաբերաբար սկսված։"
 
-#: libbaul-private/baul-autorun.c:1105
+#: libbaul-private/baul-autorun.c:1108
 msgid "You have just inserted a medium."
 msgstr "Դուք պետք է պարզապես տեղադրեք միջավայրը։"
 
-#: libbaul-private/baul-autorun.c:1107
+#: libbaul-private/baul-autorun.c:1110
 msgid "Choose what application to launch."
 msgstr "Ընտրեք գործարկելու ինչ որ դիմում։"
 
-#: libbaul-private/baul-autorun.c:1117
+#: libbaul-private/baul-autorun.c:1120
 #, c-format
 msgid ""
 "Select how to open \"%s\" and whether to perform this action in the future "
@@ -633,23 +633,23 @@ msgstr ""
 "Ընտրեք, թե ինչպես պետք է բացել \"%s\" և արդյոք այս գործողությունը կատարել "
 "ապագայում այլ միջոցների համար տիպի \"%s\"."
 
-#: libbaul-private/baul-autorun.c:1145
+#: libbaul-private/baul-autorun.c:1148
 msgid "_Always perform this action"
 msgstr "_Միշտ կատարել այս գործողությունը"
 
-#: libbaul-private/baul-autorun.c:1168 src/baul-places-sidebar.c:2754
-#: src/file-manager/fm-directory-view.c:7500
-#: src/file-manager/fm-directory-view.c:7528
-#: src/file-manager/fm-directory-view.c:7609
-#: src/file-manager/fm-tree-view.c:1369
+#: libbaul-private/baul-autorun.c:1171 src/baul-places-sidebar.c:2754
+#: src/file-manager/fm-directory-view.c:7513
+#: src/file-manager/fm-directory-view.c:7541
+#: src/file-manager/fm-directory-view.c:7622
+#: src/file-manager/fm-tree-view.c:1375
 msgid "_Eject"
 msgstr "_Դուրս բերում"
 
-#: libbaul-private/baul-autorun.c:1183 src/baul-places-sidebar.c:2747
-#: src/file-manager/fm-directory-view.c:7496
-#: src/file-manager/fm-directory-view.c:7524
-#: src/file-manager/fm-directory-view.c:7605
-#: src/file-manager/fm-tree-view.c:1360
+#: libbaul-private/baul-autorun.c:1186 src/baul-places-sidebar.c:2747
+#: src/file-manager/fm-directory-view.c:7509
+#: src/file-manager/fm-directory-view.c:7537
+#: src/file-manager/fm-directory-view.c:7618
+#: src/file-manager/fm-tree-view.c:1366
 msgid "_Unmount"
 msgstr "_Ապամոնտաժում"
 
@@ -666,7 +666,7 @@ msgid "Paste the text stored on the clipboard"
 msgstr "Տեքստը տեղադրել տվյալների փոխանակության բուֆերում և պահել։"
 
 #: libbaul-private/baul-clipboard.c:471
-#: src/file-manager/fm-directory-view.c:7429
+#: src/file-manager/fm-directory-view.c:7442
 msgid "Select _All"
 msgstr "Ընտրել _Ամբողջը"
 
@@ -674,21 +674,21 @@ msgstr "Ընտրել _Ամբողջը"
 msgid "Select all the text in a text field"
 msgstr "ԸՆտրել տեքստի դաշտի ամբողջ տեքստը։"
 
-#: libbaul-private/baul-column-chooser.c:378
+#: libbaul-private/baul-column-chooser.c:382
 msgid "Move _Up"
 msgstr "Տեղափոխել _Վերև"
 
-#: libbaul-private/baul-column-chooser.c:388
+#: libbaul-private/baul-column-chooser.c:392
 msgid "Move Dow_n"
 msgstr "Տեղափոխել ներքև"
 
-#: libbaul-private/baul-column-chooser.c:401
+#: libbaul-private/baul-column-chooser.c:405
 msgid "Use De_fault"
 msgstr "Օգտագործել դե_ֆոլտ"
 
 #: libbaul-private/baul-column-utilities.c:46
 #: libbaul-private/baul-mime-application-chooser.c:276
-#: src/file-manager/fm-list-view.c:1807
+#: src/file-manager/fm-list-view.c:1837
 msgid "Name"
 msgstr "Անուն"
 
@@ -754,7 +754,7 @@ msgid "The group of the file."
 msgstr "Ֆայլի խումբը"
 
 #: libbaul-private/baul-column-utilities.c:108
-#: src/file-manager/fm-properties-window.c:4782
+#: src/file-manager/fm-properties-window.c:4788
 msgid "Permissions"
 msgstr "Թույլտվություններ"
 
@@ -820,10 +820,10 @@ msgstr "Բնօրինակ Տեզադրություն"
 msgid "Original location of file before moved to the Trash"
 msgstr "Ֆայլի բնօրինակ տեղադրությունը մինչև թափոնների մեջ տեղափոխելը"
 
-#: libbaul-private/baul-customization-data.c:435
+#: libbaul-private/baul-customization-data.c:438
 #: libbaul-private/baul-file-conflict-dialog.c:622
 #: libbaul-private/baul-mime-application-chooser.c:444
-#: src/baul-property-browser.c:2006
+#: src/baul-property-browser.c:2014
 msgid "Reset"
 msgstr "Վերամիացնել"
 
@@ -850,37 +850,37 @@ msgid "Network Servers"
 msgstr "Ցանցային Սերվերներ"
 
 #: libbaul-private/baul-desktop-link.c:120 src/baul-places-sidebar.c:617
-#: src/baul-trash-bar.c:188 src/file-manager/fm-tree-view.c:1428
+#: src/baul-trash-bar.c:189 src/file-manager/fm-tree-view.c:1434
 msgid "Trash"
 msgstr "Թափոնի զամբյուղ"
 
-#: libbaul-private/baul-dnd.c:798
+#: libbaul-private/baul-dnd.c:801
 msgid "_Move Here"
 msgstr "_Տեղափոխել այստեղ"
 
-#: libbaul-private/baul-dnd.c:803
+#: libbaul-private/baul-dnd.c:806
 msgid "_Copy Here"
 msgstr "_Պատճենել այստեղ"
 
-#: libbaul-private/baul-dnd.c:808
+#: libbaul-private/baul-dnd.c:811
 msgid "_Link Here"
 msgstr "_Հղել այստեղ"
 
-#: libbaul-private/baul-dnd.c:813
+#: libbaul-private/baul-dnd.c:816
 msgid "Set as _Background"
 msgstr "Սահմանել որպես _հետին պլան "
 
-#: libbaul-private/baul-dnd.c:820 libbaul-private/baul-dnd.c:873
+#: libbaul-private/baul-dnd.c:823 libbaul-private/baul-dnd.c:876
 #: libbaul-private/baul-progress-info.c:849
 #: libbaul-private/baul-progress-info.c:850
 msgid "Cancel"
 msgstr "Չեղարկել"
 
-#: libbaul-private/baul-dnd.c:861
+#: libbaul-private/baul-dnd.c:864
 msgid "Set as background for _all folders"
 msgstr "Սահմանել որպես հետին պլան _բոլոր պանակների համար"
 
-#: libbaul-private/baul-dnd.c:866
+#: libbaul-private/baul-dnd.c:869
 msgid "Set as background for _this folder"
 msgstr "Սահմանել որպես հետին պլան _այս պանակի համար։ "
 
@@ -961,206 +961,206 @@ msgstr "Աշխատասեղանի պատկերը անհնար է վերանվան
 msgid "Unable to rename desktop file"
 msgstr "Աշխատասեղանին ֆայլը անհնար է վերանվանել "
 
-#: libbaul-private/baul-file.c:4757
+#: libbaul-private/baul-file.c:4759
 msgid "today at 00:00:00 PM"
 msgstr "այսօր ժամը 00:00:00 PM "
 
-#: libbaul-private/baul-file.c:4758 src/baul-file-management-properties.c:532
+#: libbaul-private/baul-file.c:4760 src/baul-file-management-properties.c:532
 msgid "today at %-I:%M:%S %p"
 msgstr "այսօր ժամը %-I:%M:%S %p"
 
-#: libbaul-private/baul-file.c:4760
+#: libbaul-private/baul-file.c:4762
 msgid "today at 00:00 PM"
 msgstr "այսօր ժամը 00:00 PM "
 
-#: libbaul-private/baul-file.c:4761
+#: libbaul-private/baul-file.c:4763
 msgid "today at %-I:%M %p"
 msgstr "այսօր ժամը %-I:%M %p"
 
-#: libbaul-private/baul-file.c:4763
+#: libbaul-private/baul-file.c:4765
 msgid "today, 00:00 PM"
 msgstr "այսօր, 00:00 PM "
 
-#: libbaul-private/baul-file.c:4764
+#: libbaul-private/baul-file.c:4766
 msgid "today, %-I:%M %p"
 msgstr "այսօր, %-I:%M %p "
 
-#: libbaul-private/baul-file.c:4766 libbaul-private/baul-file.c:4767
+#: libbaul-private/baul-file.c:4768 libbaul-private/baul-file.c:4769
 msgid "today"
 msgstr "այսօր"
 
-#: libbaul-private/baul-file.c:4776
+#: libbaul-private/baul-file.c:4778
 msgid "yesterday at 00:00:00 PM"
 msgstr "երեկ ժամը 00:00:00 PM "
 
-#: libbaul-private/baul-file.c:4777
+#: libbaul-private/baul-file.c:4779
 msgid "yesterday at %-I:%M:%S %p"
 msgstr "երեկ ժամը %-I:%M:%S %p "
 
-#: libbaul-private/baul-file.c:4779
+#: libbaul-private/baul-file.c:4781
 msgid "yesterday at 00:00 PM"
 msgstr "երեկ ժամը 00:00 PM"
 
-#: libbaul-private/baul-file.c:4780
+#: libbaul-private/baul-file.c:4782
 msgid "yesterday at %-I:%M %p"
 msgstr "երեկ ժամը %-I:%M %p "
 
-#: libbaul-private/baul-file.c:4782
+#: libbaul-private/baul-file.c:4784
 msgid "yesterday, 00:00 PM"
 msgstr "երեկ, ժամը 00:00 PM "
 
-#: libbaul-private/baul-file.c:4783
+#: libbaul-private/baul-file.c:4785
 msgid "yesterday, %-I:%M %p"
 msgstr "երեկ, %-I:%M %p"
 
-#: libbaul-private/baul-file.c:4785 libbaul-private/baul-file.c:4786
+#: libbaul-private/baul-file.c:4787 libbaul-private/baul-file.c:4788
 msgid "yesterday"
 msgstr "երեկ"
 
-#: libbaul-private/baul-file.c:4797
+#: libbaul-private/baul-file.c:4799
 msgid "Wednesday, September 00 0000 at 00:00:00 PM"
 msgstr "Չորեքշաբթի, 00 սեպտեմբերի 0000, ժամը 00:00:00 PM"
 
-#: libbaul-private/baul-file.c:4798
+#: libbaul-private/baul-file.c:4800
 msgid "%A, %B %-d %Y at %-I:%M:%S %p"
 msgstr "%A, %B %-d %Y at %-I:%M:%S %p"
 
-#: libbaul-private/baul-file.c:4800
+#: libbaul-private/baul-file.c:4802
 msgid "Mon, Oct 00 0000 at 00:00:00 PM"
 msgstr "Երկուշաբթի, 00 հոկտեմբերի, ժամը 00:00:00 PM"
 
-#: libbaul-private/baul-file.c:4801
+#: libbaul-private/baul-file.c:4803
 msgid "%a, %b %-d %Y at %-I:%M:%S %p"
 msgstr "%a, %b %-d %Y at %-I:%M:%S %p"
 
-#: libbaul-private/baul-file.c:4803
+#: libbaul-private/baul-file.c:4805
 msgid "Mon, Oct 00 0000 at 00:00 PM"
 msgstr "Երկուշաբթի, 00 հոկտեմբերի, ժամը 00:00 PM"
 
-#: libbaul-private/baul-file.c:4804
+#: libbaul-private/baul-file.c:4806
 msgid "%a, %b %-d %Y at %-I:%M %p"
 msgstr "%a, %b %-d %Y at %-I:%M %p"
 
-#: libbaul-private/baul-file.c:4806
+#: libbaul-private/baul-file.c:4808
 msgid "Oct 00 0000 at 00:00 PM"
 msgstr "00 հոկտեմբերի, ժամը 00:00 PM"
 
-#: libbaul-private/baul-file.c:4807
+#: libbaul-private/baul-file.c:4809
 msgid "%b %-d %Y at %-I:%M %p"
 msgstr "%b %-d %Y at %-I:%M %p"
 
-#: libbaul-private/baul-file.c:4809
+#: libbaul-private/baul-file.c:4811
 msgid "Oct 00 0000, 00:00 PM"
 msgstr "00 հոկտեմբերի, ժամը 00:00 PM"
 
-#: libbaul-private/baul-file.c:4810
+#: libbaul-private/baul-file.c:4812
 msgid "%b %-d %Y, %-I:%M %p"
 msgstr "%b %-d %Y, %-I:%M %p"
 
-#: libbaul-private/baul-file.c:4812
+#: libbaul-private/baul-file.c:4814
 msgid "00/00/00, 00:00 PM"
 msgstr "00/00/00, 00:00 PM"
 
-#: libbaul-private/baul-file.c:4813
+#: libbaul-private/baul-file.c:4815
 msgid "%m/%-d/%y, %-I:%M %p"
 msgstr "%m/%-d/%y, %-I:%M %p"
 
-#: libbaul-private/baul-file.c:4815
+#: libbaul-private/baul-file.c:4817
 msgid "00/00/00"
 msgstr "00/00/00"
 
-#: libbaul-private/baul-file.c:4816
+#: libbaul-private/baul-file.c:4818
 msgid "%m/%d/%y"
 msgstr "%m/%d/%y"
 
-#: libbaul-private/baul-file.c:5453
+#: libbaul-private/baul-file.c:5455
 msgid "Not allowed to set permissions"
 msgstr "Չի թույլատրվում է սահմանել թույլտվությունները"
 
-#: libbaul-private/baul-file.c:5747
+#: libbaul-private/baul-file.c:5749
 msgid "Not allowed to set owner"
 msgstr "Չի թույլատրվում է սահմանել սեփականատեր"
 
-#: libbaul-private/baul-file.c:5765
+#: libbaul-private/baul-file.c:5767
 #, c-format
 msgid "Specified owner '%s' doesn't exist"
 msgstr "Նշված սեփականատեր '%s' գոյություն չունի"
 
-#: libbaul-private/baul-file.c:6027
+#: libbaul-private/baul-file.c:6029
 msgid "Not allowed to set group"
 msgstr "Չի թույլատրվում սահմանել խումբ"
 
-#: libbaul-private/baul-file.c:6045
+#: libbaul-private/baul-file.c:6047
 #, c-format
 msgid "Specified group '%s' doesn't exist"
 msgstr "Նշված խումբ '%s'  գոյություն չունի"
 
-#: libbaul-private/baul-file.c:6199 src/file-manager/fm-directory-view.c:2393
+#: libbaul-private/baul-file.c:6201 src/file-manager/fm-directory-view.c:2393
 #, c-format
 msgid "%'u item"
 msgid_plural "%'u items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file.c:6200
+#: libbaul-private/baul-file.c:6202
 #, c-format
 msgid "%'u folder"
 msgid_plural "%'u folders"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file.c:6201
+#: libbaul-private/baul-file.c:6203
 #, c-format
 msgid "%'u file"
 msgid_plural "%'u files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file.c:6305
+#: libbaul-private/baul-file.c:6307
 msgid "%"
 msgstr "%"
 
-#: libbaul-private/baul-file.c:6306
+#: libbaul-private/baul-file.c:6308
 #, c-format
 msgid "%s (%s bytes)"
 msgstr "%s (%s բայթեր)"
 
-#: libbaul-private/baul-file.c:6656 libbaul-private/baul-file.c:6680
+#: libbaul-private/baul-file.c:6658 libbaul-private/baul-file.c:6682
 msgid "? items"
 msgstr "? տարրեր"
 
-#: libbaul-private/baul-file.c:6662 libbaul-private/baul-file.c:6670
+#: libbaul-private/baul-file.c:6664 libbaul-private/baul-file.c:6672
 msgid "? bytes"
 msgstr "? բայթեր"
 
-#: libbaul-private/baul-file.c:6685
+#: libbaul-private/baul-file.c:6687
 msgid "unknown type"
 msgstr "անհայտ տեսակ"
 
-#: libbaul-private/baul-file.c:6688
+#: libbaul-private/baul-file.c:6690
 msgid "unknown MIME type"
 msgstr "անհայտ MIME տեսակ"
 
-#: libbaul-private/baul-file.c:6702
-#: src/file-manager/fm-properties-window.c:1299
+#: libbaul-private/baul-file.c:6704
+#: src/file-manager/fm-properties-window.c:1305
 msgid "unknown"
 msgstr "անհայտ"
 
-#: libbaul-private/baul-file.c:6752
+#: libbaul-private/baul-file.c:6754
 msgid "program"
 msgstr "ծրագիր"
 
-#: libbaul-private/baul-file.c:6772
+#: libbaul-private/baul-file.c:6774
 msgid "link"
 msgstr "հղում"
 
-#: libbaul-private/baul-file.c:6778 libbaul-private/baul-file-operations.c:406
-#: src/file-manager/fm-directory-view.c:10640
+#: libbaul-private/baul-file.c:6780 libbaul-private/baul-file-operations.c:406
+#: src/file-manager/fm-directory-view.c:10655
 #, c-format
 msgid "Link to %s"
 msgstr "Հղում դեպի %s"
 
-#: libbaul-private/baul-file.c:6794
+#: libbaul-private/baul-file.c:6796
 msgid "link (broken)"
 msgstr "հղում (կոտրված)"
 
@@ -1245,14 +1245,14 @@ msgstr "Ֆայլի Բնօրինակ"
 
 #: libbaul-private/baul-file-conflict-dialog.c:277
 #: libbaul-private/baul-file-conflict-dialog.c:316
-#: src/file-manager/fm-properties-window.c:3303
+#: src/file-manager/fm-properties-window.c:3309
 msgid "Size:"
 msgstr "Չափ։"
 
 #: libbaul-private/baul-file-conflict-dialog.c:282
 #: libbaul-private/baul-file-conflict-dialog.c:321
 #: src/baul-connect-server-dialog.c:927
-#: src/file-manager/fm-properties-window.c:3285
+#: src/file-manager/fm-properties-window.c:3291
 msgid "Type:"
 msgstr "Տիպ։"
 
@@ -1320,11 +1320,11 @@ msgstr "Բաց թողնել բոլորը"
 msgid "_Retry"
 msgstr "_Կրկին փորձել"
 
-#: libbaul-private/baul-file-operations.c:187 src/baul-emblem-sidebar.c:378
-#: src/file-manager/fm-directory-view.c:7461
-#: src/file-manager/fm-directory-view.c:7593
-#: src/file-manager/fm-directory-view.c:9051
-#: src/file-manager/fm-tree-view.c:1349
+#: libbaul-private/baul-file-operations.c:187 src/baul-emblem-sidebar.c:380
+#: src/file-manager/fm-directory-view.c:7474
+#: src/file-manager/fm-directory-view.c:7606
+#: src/file-manager/fm-directory-view.c:9065
+#: src/file-manager/fm-tree-view.c:1355
 msgid "_Delete"
 msgstr "_Հեռացնել"
 
@@ -1507,11 +1507,11 @@ msgstr " ("
 msgid " (%'d"
 msgstr " (%'d"
 
-#: libbaul-private/baul-file-operations.c:1370
+#: libbaul-private/baul-file-operations.c:1375
 msgid "Are you sure you want to permanently delete \"%B\" from the trash?"
 msgstr "Դուք համոզվա՞ծ եք, որ ցանկանում եք մշտապես ջնջել «% B» զամբյուղից"
 
-#: libbaul-private/baul-file-operations.c:1373
+#: libbaul-private/baul-file-operations.c:1378
 #, c-format
 msgid ""
 "Are you sure you want to permanently delete the %'d selected item from the "
@@ -1522,30 +1522,30 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:1383
-#: libbaul-private/baul-file-operations.c:1449
+#: libbaul-private/baul-file-operations.c:1388
+#: libbaul-private/baul-file-operations.c:1454
 msgid "If you delete an item, it will be permanently lost."
 msgstr "Եթե դուք հեռացնեք տարրը, այն վերջնականապես կկորչի"
 
-#: libbaul-private/baul-file-operations.c:1403
+#: libbaul-private/baul-file-operations.c:1408
 msgid "Empty all items from Trash?"
 msgstr "Դատարկե՞լ զամբյուղի բոլոր տարրերը։"
 
-#: libbaul-private/baul-file-operations.c:1407
+#: libbaul-private/baul-file-operations.c:1412
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Բոլոր տարրերը Զամբյուզից ընդմիշտ կջնջվեն."
 
-#: libbaul-private/baul-file-operations.c:1410
-#: libbaul-private/baul-file-operations.c:2347 src/baul-places-sidebar.c:2791
-#: src/baul-trash-bar.c:195
+#: libbaul-private/baul-file-operations.c:1415
+#: libbaul-private/baul-file-operations.c:2353 src/baul-places-sidebar.c:2791
+#: src/baul-trash-bar.c:196
 msgid "Empty _Trash"
 msgstr "Դատարկել _թափոն զամբյուղը"
 
-#: libbaul-private/baul-file-operations.c:1437
+#: libbaul-private/baul-file-operations.c:1442
 msgid "Are you sure you want to permanently delete \"%B\"?"
 msgstr "Դուք համոզվա՞ծ եք, որ ցանկանում եք մշտապես ջնջել «% B»."
 
-#: libbaul-private/baul-file-operations.c:1440
+#: libbaul-private/baul-file-operations.c:1445
 #, c-format
 msgid "Are you sure you want to permanently delete the %'d selected item?"
 msgid_plural ""
@@ -1553,54 +1553,54 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:1479
+#: libbaul-private/baul-file-operations.c:1484
 msgid "Are you sure you want to trash \"%B\"?"
 msgstr ""
 
-#: libbaul-private/baul-file-operations.c:1482
+#: libbaul-private/baul-file-operations.c:1487
 #, c-format
 msgid "Are you sure you want to trash the %'d selected item?"
 msgid_plural "Are you sure you want to trash the %'d selected items?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:1491
+#: libbaul-private/baul-file-operations.c:1496
 msgid "Items moved to the trash may be recovered until the trash is emptied."
 msgstr ""
 
-#: libbaul-private/baul-file-operations.c:1494
+#: libbaul-private/baul-file-operations.c:1499
 msgid "Move to _Trash"
 msgstr "Տեղափոխել Թափոն զամբյուղի մեջ"
 
-#: libbaul-private/baul-file-operations.c:1524
+#: libbaul-private/baul-file-operations.c:1529
 #, c-format
 msgid "%'d file left to delete"
 msgid_plural "%'d files left to delete"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:1530
+#: libbaul-private/baul-file-operations.c:1535
 msgid "Deleting files"
 msgstr "Ֆայլերի հեռացում։"
 
 #. Translators: %T will expand to a time like "2 minutes".
 #. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
 #.
-#: libbaul-private/baul-file-operations.c:1547
+#: libbaul-private/baul-file-operations.c:1552
 msgid "%T left"
 msgid_plural "%T left"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:1614
-#: libbaul-private/baul-file-operations.c:1648
-#: libbaul-private/baul-file-operations.c:1687
-#: libbaul-private/baul-file-operations.c:1764
-#: libbaul-private/baul-file-operations.c:2593
+#: libbaul-private/baul-file-operations.c:1620
+#: libbaul-private/baul-file-operations.c:1654
+#: libbaul-private/baul-file-operations.c:1693
+#: libbaul-private/baul-file-operations.c:1770
+#: libbaul-private/baul-file-operations.c:2599
 msgid "Error while deleting."
 msgstr "Հեռացման սխալ"
 
-#: libbaul-private/baul-file-operations.c:1618
+#: libbaul-private/baul-file-operations.c:1624
 msgid ""
 "Files in the folder \"%B\" cannot be deleted because you do not have "
 "permissions to see them."
@@ -1608,21 +1608,21 @@ msgstr ""
 "\"%B\" թղթապանակում ֆայլերը չեն կարող ջնջվել, որովհոտև դուք չունեք "
 "թույլտվություններ դրանք տեսնելու համար։"
 
-#: libbaul-private/baul-file-operations.c:1621
-#: libbaul-private/baul-file-operations.c:2653
-#: libbaul-private/baul-file-operations.c:3648
+#: libbaul-private/baul-file-operations.c:1627
+#: libbaul-private/baul-file-operations.c:2659
+#: libbaul-private/baul-file-operations.c:3654
 msgid ""
 "There was an error getting information about the files in the folder \"%B\"."
 msgstr ""
 "Տեղի է ունեցել սխալ \"%B\" թղթապանակում ֆայլերի մասին տեղեկատվություն "
 "ստանալու ժամանակ։"
 
-#: libbaul-private/baul-file-operations.c:1630
-#: libbaul-private/baul-file-operations.c:3657
+#: libbaul-private/baul-file-operations.c:1636
+#: libbaul-private/baul-file-operations.c:3663
 msgid "_Skip files"
 msgstr "_Բաց թողնել ֆայլերը"
 
-#: libbaul-private/baul-file-operations.c:1651
+#: libbaul-private/baul-file-operations.c:1657
 msgid ""
 "The folder \"%B\" cannot be deleted because you do not have permissions to "
 "read it."
@@ -1630,71 +1630,71 @@ msgstr ""
 " \"%B\" թղթապանակը չի կարող ջնջվել, որովհետև դուք այն կարդալու "
 "թույլտվություն չունեք։"
 
-#: libbaul-private/baul-file-operations.c:1654
-#: libbaul-private/baul-file-operations.c:2692
-#: libbaul-private/baul-file-operations.c:3693
+#: libbaul-private/baul-file-operations.c:1660
+#: libbaul-private/baul-file-operations.c:2698
+#: libbaul-private/baul-file-operations.c:3699
 msgid "There was an error reading the folder \"%B\"."
 msgstr "Տեղի է ունեցել ֆայլի ընթերցման սխալ \"%B\"։"
 
-#: libbaul-private/baul-file-operations.c:1688
+#: libbaul-private/baul-file-operations.c:1694
 msgid "Could not remove the folder %B."
 msgstr "Չհաջողվեց հեռացնել թղթապանակը %B."
 
-#: libbaul-private/baul-file-operations.c:1765
+#: libbaul-private/baul-file-operations.c:1771
 msgid "There was an error deleting %B."
 msgstr "Ոչնչացման ընթացքում սխալ կար %B."
 
-#: libbaul-private/baul-file-operations.c:1845
+#: libbaul-private/baul-file-operations.c:1851
 msgid "Moving files to trash"
 msgstr "Տեղափոխել ֆայլերը դեպի աղբարկղ"
 
-#: libbaul-private/baul-file-operations.c:1847
+#: libbaul-private/baul-file-operations.c:1853
 #, c-format
 msgid "%'d file left to trash"
 msgid_plural "%'d files left to trash"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:1904
+#: libbaul-private/baul-file-operations.c:1910
 msgid "Cannot move file to trash, do you want to delete immediately?"
 msgstr ""
 "Չի հաջողվել ֆայլը թափոն զամբյուղ տեղափոխել, դուք ցանկանու՞մ եք հեռացնել այն "
 "անմիջապես։"
 
-#: libbaul-private/baul-file-operations.c:1905
+#: libbaul-private/baul-file-operations.c:1911
 msgid "The file \"%B\" cannot be moved to the trash."
 msgstr "\"%B\" ֆայլը չեն կարող տեղափոխվել թափոնների զամբյուղի մեջ։"
 
-#: libbaul-private/baul-file-operations.c:2090
+#: libbaul-private/baul-file-operations.c:2096
 msgid "Trashing Files"
 msgstr "Ֆայլերի Խոտանում"
 
-#: libbaul-private/baul-file-operations.c:2092
+#: libbaul-private/baul-file-operations.c:2098
 msgid "Deleting Files"
 msgstr "ֆայլերի ջնջում"
 
-#: libbaul-private/baul-file-operations.c:2157 src/baul-places-sidebar.c:2266
+#: libbaul-private/baul-file-operations.c:2163 src/baul-places-sidebar.c:2266
 #: src/baul-places-sidebar.c:2302
 msgid "It is now safe to remove the drive"
 msgstr ""
 
-#: libbaul-private/baul-file-operations.c:2170
+#: libbaul-private/baul-file-operations.c:2176
 msgid "Unable to eject %V"
 msgstr "Անհնար է դուրս հանել %V"
 
-#: libbaul-private/baul-file-operations.c:2172
+#: libbaul-private/baul-file-operations.c:2178
 msgid "Unable to unmount %V"
 msgstr "Անհնար է ապամոնտաժել %V"
 
-#: libbaul-private/baul-file-operations.c:2208 src/baul-places-sidebar.c:2336
+#: libbaul-private/baul-file-operations.c:2214 src/baul-places-sidebar.c:2336
 msgid "Writing data to the drive -- do not unplug"
 msgstr ""
 
-#: libbaul-private/baul-file-operations.c:2332
+#: libbaul-private/baul-file-operations.c:2338
 msgid "Do you want to empty the trash before you unmount?"
 msgstr "Ցանկանու՞մ եք դատարկել զաբյուղը մինչ ձեր հեռանալը։"
 
-#: libbaul-private/baul-file-operations.c:2334
+#: libbaul-private/baul-file-operations.c:2340
 msgid ""
 "In order to regain the free space on this volume the trash must be emptied. "
 "All trashed items on the volume will be permanently lost."
@@ -1702,61 +1702,61 @@ msgstr ""
 "Որպեսզի վերականգնել ազատ տարածությունը այս ծավալի վրա աղբը պետք է դատարկել։ "
 "Բոլոր Խոտանված տարրերը ծավալի վրա ընդմիշտ պետք է կորչեն։"
 
-#: libbaul-private/baul-file-operations.c:2341
+#: libbaul-private/baul-file-operations.c:2347
 msgid "Do _not Empty Trash"
 msgstr "Ոչ դատարկ Զամբյուզ"
 
-#: libbaul-private/baul-file-operations.c:2462
+#: libbaul-private/baul-file-operations.c:2468
 #, c-format
 msgid "Unable to mount %s"
 msgstr "Հնարավոր չէ %s–ը տեղադրել"
 
-#: libbaul-private/baul-file-operations.c:2540
+#: libbaul-private/baul-file-operations.c:2546
 #, c-format
 msgid "Preparing to copy %'d file (%S)"
 msgid_plural "Preparing to copy %'d files (%S)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:2546
+#: libbaul-private/baul-file-operations.c:2552
 #, c-format
 msgid "Preparing to move %'d file (%S)"
 msgid_plural "Preparing to move %'d files (%S)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:2552
+#: libbaul-private/baul-file-operations.c:2558
 #, c-format
 msgid "Preparing to delete %'d file (%S)"
 msgid_plural "Preparing to delete %'d files (%S)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:2558
+#: libbaul-private/baul-file-operations.c:2564
 #, c-format
 msgid "Preparing to trash %'d file"
 msgid_plural "Preparing to trash %'d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:2589
-#: libbaul-private/baul-file-operations.c:3500
-#: libbaul-private/baul-file-operations.c:3640
-#: libbaul-private/baul-file-operations.c:3685
+#: libbaul-private/baul-file-operations.c:2595
+#: libbaul-private/baul-file-operations.c:3506
+#: libbaul-private/baul-file-operations.c:3646
+#: libbaul-private/baul-file-operations.c:3691
 msgid "Error while copying."
 msgstr "Պատճենման սխալ"
 
-#: libbaul-private/baul-file-operations.c:2591
-#: libbaul-private/baul-file-operations.c:3638
-#: libbaul-private/baul-file-operations.c:3683
+#: libbaul-private/baul-file-operations.c:2597
+#: libbaul-private/baul-file-operations.c:3644
+#: libbaul-private/baul-file-operations.c:3689
 msgid "Error while moving."
 msgstr "Տեղափոխման սխալ"
 
-#: libbaul-private/baul-file-operations.c:2595
+#: libbaul-private/baul-file-operations.c:2601
 msgid "Error while moving files to trash."
 msgstr "Սխալ, մինչ ֆայլի տեղափոխումը թափոնների զամբյուղ։"
 
-#: libbaul-private/baul-file-operations.c:2650
+#: libbaul-private/baul-file-operations.c:2656
 msgid ""
 "Files in the folder \"%B\" cannot be handled because you do not have "
 "permissions to see them."
@@ -1764,7 +1764,7 @@ msgstr ""
 "\"%B\" թղթապանակում ֆայլերը չեն կարող կառավարվել, որովհետև դուք դրանք "
 "տեսնելու թույլտվություններ չունեք։"
 
-#: libbaul-private/baul-file-operations.c:2689
+#: libbaul-private/baul-file-operations.c:2695
 msgid ""
 "The folder \"%B\" cannot be handled because you do not have permissions to "
 "read it."
@@ -1772,7 +1772,7 @@ msgstr ""
 "\"%B\" թղթապանակը չի կարող կառավարվել, որովհետև դուք դրանք կարդալու "
 "թույլտվություններ չունեք։"
 
-#: libbaul-private/baul-file-operations.c:2767
+#: libbaul-private/baul-file-operations.c:2773
 msgid ""
 "The file \"%B\" cannot be handled because you do not have permissions to "
 "read it."
@@ -1780,31 +1780,31 @@ msgstr ""
 "\"%B\"  ֆայլը չի կարող կառավարվել, որովհետև դուք դա կարդալու "
 "թույլտվություններ չունեք։"
 
-#: libbaul-private/baul-file-operations.c:2770
+#: libbaul-private/baul-file-operations.c:2776
 msgid "There was an error getting information about \"%B\"."
 msgstr "Տեղեկություններ ստանալու մասին սխալ կա \"%B\"."
 
-#: libbaul-private/baul-file-operations.c:2870
-#: libbaul-private/baul-file-operations.c:2912
-#: libbaul-private/baul-file-operations.c:2945
-#: libbaul-private/baul-file-operations.c:2975
+#: libbaul-private/baul-file-operations.c:2876
+#: libbaul-private/baul-file-operations.c:2918
+#: libbaul-private/baul-file-operations.c:2951
+#: libbaul-private/baul-file-operations.c:2981
 msgid "Error while copying to \"%B\"."
 msgstr "Սխալ մինչ պատճենահանումը դեպի \"%B\"։"
 
-#: libbaul-private/baul-file-operations.c:2874
+#: libbaul-private/baul-file-operations.c:2880
 msgid "You do not have permissions to access the destination folder."
 msgstr "Դուք չունեք թույլտվություններ նպատակային թղթապանակ ներգործելու համար։"
 
-#: libbaul-private/baul-file-operations.c:2876
+#: libbaul-private/baul-file-operations.c:2882
 msgid "There was an error getting information about the destination."
 msgstr ""
 "Տեղի է ունեցել սխալ նպատակային վայրի մասին տեղեկություն ստանալու ժամանակ։"
 
-#: libbaul-private/baul-file-operations.c:2913
+#: libbaul-private/baul-file-operations.c:2919
 msgid "The destination is not a folder."
 msgstr "Նպատակային վայրը թղթապանակ չէ։"
 
-#: libbaul-private/baul-file-operations.c:2946
+#: libbaul-private/baul-file-operations.c:2952
 msgid ""
 "There is not enough space on the destination. Try to remove files to make "
 "space."
@@ -1812,58 +1812,58 @@ msgstr ""
 "Չկա ոչ բավարար տարածք նպատակակետի վրա: Փորձեք հեռացնել ֆայլերը, որպեսզի "
 "ազատեք տարածք։"
 
-#: libbaul-private/baul-file-operations.c:2948
+#: libbaul-private/baul-file-operations.c:2954
 #, c-format
 msgid "There is %S available, but %S is required."
 msgstr "%S հասանելի է, իսկ %S պահանջվում է։"
 
-#: libbaul-private/baul-file-operations.c:2976
+#: libbaul-private/baul-file-operations.c:2982
 msgid "The destination is read-only."
 msgstr "Նախատեսված վերջնակետը միայն ընթերցվող է:"
 
-#: libbaul-private/baul-file-operations.c:3034
+#: libbaul-private/baul-file-operations.c:3040
 msgid "Moving \"%B\" to \"%B\""
 msgstr "Տեղափոխում \"%B\" դեպի \"%B\""
 
-#: libbaul-private/baul-file-operations.c:3035
+#: libbaul-private/baul-file-operations.c:3041
 msgid "Copying \"%B\" to \"%B\""
 msgstr "Պատճենում \"%B\" դեպի \"%B\""
 
-#: libbaul-private/baul-file-operations.c:3040
+#: libbaul-private/baul-file-operations.c:3046
 msgid "Duplicating \"%B\""
 msgstr "Բազմացնող \"%B\""
 
-#: libbaul-private/baul-file-operations.c:3048
+#: libbaul-private/baul-file-operations.c:3054
 msgid "Moving %'d file (in \"%B\") to \"%B\""
 msgid_plural "Moving %'d files (in \"%B\") to \"%B\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:3052
+#: libbaul-private/baul-file-operations.c:3058
 msgid "Copying %'d file (in \"%B\") to \"%B\""
 msgid_plural "Copying %'d files (in \"%B\") to \"%B\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:3060
+#: libbaul-private/baul-file-operations.c:3066
 msgid "Duplicating %'d file (in \"%B\")"
 msgid_plural "Duplicating %'d files (in \"%B\")"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:3070
+#: libbaul-private/baul-file-operations.c:3076
 msgid "Moving %'d file to \"%B\""
 msgid_plural "Moving %'d files to \"%B\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:3074
+#: libbaul-private/baul-file-operations.c:3080
 msgid "Copying %'d file to \"%B\""
 msgid_plural "Copying %'d files to \"%B\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:3080
+#: libbaul-private/baul-file-operations.c:3086
 #, c-format
 msgid "Duplicating %'d file"
 msgid_plural "Duplicating %'d files"
@@ -1871,7 +1871,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: %S will expand to a size like "2 bytes" or "3 MB", so something like "4 kb of 4 MB"
-#: libbaul-private/baul-file-operations.c:3100
+#: libbaul-private/baul-file-operations.c:3106
 #, c-format
 msgid "%S of %S"
 msgstr "%S  %S"
@@ -1881,13 +1881,13 @@ msgstr "%S  %S"
 #. *
 #. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
 #.
-#: libbaul-private/baul-file-operations.c:3113
+#: libbaul-private/baul-file-operations.c:3119
 msgid "%S of %S — %T left (%S/sec)"
 msgid_plural "%S of %S — %T left (%S/sec)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:3504
+#: libbaul-private/baul-file-operations.c:3510
 msgid ""
 "The folder \"%B\" cannot be copied because you do not have permissions to "
 "create it in the destination."
@@ -1895,11 +1895,11 @@ msgstr ""
 "\"%B\" թղթապանակը չի կարող պատճենահանվել, քանի որ դուք այս վայրում ստեղծելու "
 "թույլտվություններ չունեք։"
 
-#: libbaul-private/baul-file-operations.c:3507
+#: libbaul-private/baul-file-operations.c:3513
 msgid "There was an error creating the folder \"%B\"."
 msgstr "Սխալ է տեղի ունեցել \"%B\" թղթապանակի ստեղծման ժամանակ։"
 
-#: libbaul-private/baul-file-operations.c:3645
+#: libbaul-private/baul-file-operations.c:3651
 msgid ""
 "Files in the folder \"%B\" cannot be copied because you do not have "
 "permissions to see them."
@@ -1907,7 +1907,7 @@ msgstr ""
 "\"%B\" թղթապանակում ֆայլերը չեն կարող պատճենահանվել, քանի որ դուք դրանք "
 "տեսնելու թույլտվություններ չունեք։"
 
-#: libbaul-private/baul-file-operations.c:3690
+#: libbaul-private/baul-file-operations.c:3696
 msgid ""
 "The folder \"%B\" cannot be copied because you do not have permissions to "
 "read it."
@@ -1915,157 +1915,157 @@ msgstr ""
 "\"%B\" թղթապանակը չի կարող պատճենահանվել, քանի որ դուք չունեք "
 "թույլտվություններ դրանք կարդալու։"
 
-#: libbaul-private/baul-file-operations.c:3735
-#: libbaul-private/baul-file-operations.c:4436
-#: libbaul-private/baul-file-operations.c:5029
+#: libbaul-private/baul-file-operations.c:3741
+#: libbaul-private/baul-file-operations.c:4442
+#: libbaul-private/baul-file-operations.c:5037
 msgid "Error while moving \"%B\"."
 msgstr "Սխալ մինչև տեղափոխումը \"%B\"։"
 
-#: libbaul-private/baul-file-operations.c:3736
+#: libbaul-private/baul-file-operations.c:3742
 msgid "Could not remove the source folder."
 msgstr "Չհաջողվեց հեռացնել աղբյուրի թղթապանակը։"
 
-#: libbaul-private/baul-file-operations.c:3821
-#: libbaul-private/baul-file-operations.c:3862
-#: libbaul-private/baul-file-operations.c:4438
-#: libbaul-private/baul-file-operations.c:4510
+#: libbaul-private/baul-file-operations.c:3827
+#: libbaul-private/baul-file-operations.c:3868
+#: libbaul-private/baul-file-operations.c:4444
+#: libbaul-private/baul-file-operations.c:4516
 msgid "Error while copying \"%B\"."
 msgstr "Սխալ մինչ պատճենահանումը \"%B\"."
 
-#: libbaul-private/baul-file-operations.c:3822
+#: libbaul-private/baul-file-operations.c:3828
 #, c-format
 msgid "Could not remove files from the already existing folder %F."
 msgstr "Չի կարող հեռացվել ֆայլերը արդեն գոյություն ունեցող թզթապանակից %F։"
 
-#: libbaul-private/baul-file-operations.c:3863
+#: libbaul-private/baul-file-operations.c:3869
 #, c-format
 msgid "Could not remove the already existing file %F."
 msgstr "Չլ կարող հեռացնել արդեն գոյություն ունեցող ֆայլը  %F։"
 
-#: libbaul-private/baul-file-operations.c:4182
-#: libbaul-private/baul-file-operations.c:4875
+#: libbaul-private/baul-file-operations.c:4188
+#: libbaul-private/baul-file-operations.c:4883
 msgid "You cannot move a folder into itself."
 msgstr "Դուք չեք կարող պանակը տեղափոխել իր մեջ։"
 
-#: libbaul-private/baul-file-operations.c:4183
-#: libbaul-private/baul-file-operations.c:4876
+#: libbaul-private/baul-file-operations.c:4189
+#: libbaul-private/baul-file-operations.c:4884
 msgid "You cannot copy a folder into itself."
 msgstr "Դուք չեք կարող պատճենել պանակը իր մեջ։"
 
-#: libbaul-private/baul-file-operations.c:4184
-#: libbaul-private/baul-file-operations.c:4877
+#: libbaul-private/baul-file-operations.c:4190
+#: libbaul-private/baul-file-operations.c:4885
 msgid "The destination folder is inside the source folder."
 msgstr "Նշանակման վայրի պանակը հիմնական պանակի մեջ է։"
 
-#: libbaul-private/baul-file-operations.c:4215
+#: libbaul-private/baul-file-operations.c:4221
 msgid "You cannot move a file over itself."
 msgstr "Դուք չեք կարող տեղափոխել ինքն իր վրայով։"
 
-#: libbaul-private/baul-file-operations.c:4216
+#: libbaul-private/baul-file-operations.c:4222
 msgid "You cannot copy a file over itself."
 msgstr "Դուք չեք կարող պատճենել ֆայլը իր վրայով։"
 
-#: libbaul-private/baul-file-operations.c:4217
+#: libbaul-private/baul-file-operations.c:4223
 msgid "The source file would be overwritten by the destination."
 msgstr "Աղբյուր ֆայլը կլինի վերագրված ըստ նշանակման վայրի։"
 
-#: libbaul-private/baul-file-operations.c:4440
+#: libbaul-private/baul-file-operations.c:4446
 #, c-format
 msgid "Could not remove the already existing file with the same name in %F."
 msgstr "Չի կարող հեռացնել արդեն գոյություն ունեցող ֆայլը նույն անունով %F։"
 
-#: libbaul-private/baul-file-operations.c:4511
+#: libbaul-private/baul-file-operations.c:4517
 #, c-format
 msgid "There was an error copying the file into %F."
 msgstr "Մինչ ընդրված ֆայլի պատճենահանումը %F մեջ։"
 
-#: libbaul-private/baul-file-operations.c:4758
+#: libbaul-private/baul-file-operations.c:4764
 msgid "Copying Files"
 msgstr "ՖայլերիՊատճենում "
 
-#: libbaul-private/baul-file-operations.c:4785
+#: libbaul-private/baul-file-operations.c:4793
 msgid "Preparing to Move to \"%B\""
 msgstr "Նախապատրաստվում է տեղափոխել \"%B\""
 
-#: libbaul-private/baul-file-operations.c:4789
+#: libbaul-private/baul-file-operations.c:4797
 #, c-format
 msgid "Preparing to move %'d file"
 msgid_plural "Preparing to move %'d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:5030
+#: libbaul-private/baul-file-operations.c:5038
 #, c-format
 msgid "There was an error moving the file into %F."
 msgstr "Մինչ ֆայլի տեղափոխումը սխալ կա %F մեջ։"
 
-#: libbaul-private/baul-file-operations.c:5301
+#: libbaul-private/baul-file-operations.c:5309
 msgid "Moving Files"
 msgstr "Ֆայլերի Տեղափոխում "
 
-#: libbaul-private/baul-file-operations.c:5332
+#: libbaul-private/baul-file-operations.c:5340
 msgid "Creating links in \"%B\""
 msgstr "Հղումների Ստեղծում \"%B\""
 
-#: libbaul-private/baul-file-operations.c:5336
+#: libbaul-private/baul-file-operations.c:5344
 #, c-format
 msgid "Making link to %'d file"
 msgid_plural "Making links to %'d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file-operations.c:5468
+#: libbaul-private/baul-file-operations.c:5476
 msgid "Error while creating link to %B."
 msgstr "Սխալ մինչ %B հղման ստեղծումը։"
 
-#: libbaul-private/baul-file-operations.c:5470
+#: libbaul-private/baul-file-operations.c:5478
 msgid "Symbolic links only supported for local files"
 msgstr "Խորհրդանշական հղումները ապահովվում է միայն տեղական ֆայլերի համար"
 
-#: libbaul-private/baul-file-operations.c:5473
+#: libbaul-private/baul-file-operations.c:5481
 msgid "The target doesn't support symbolic links."
 msgstr "Թիրախը չի աջակցում խորհրդանշական հղումները։"
 
-#: libbaul-private/baul-file-operations.c:5476
+#: libbaul-private/baul-file-operations.c:5484
 #, c-format
 msgid "There was an error creating the symlink in %F."
 msgstr "Տեղի է ունեցել symlink ստեղծման սխալ, %F մեջ։"
 
-#: libbaul-private/baul-file-operations.c:5793
+#: libbaul-private/baul-file-operations.c:5801
 msgid "Setting permissions"
 msgstr " Թույլտվությունների կարգաբերում"
 
 #. Translators: the initial name of a new folder
-#: libbaul-private/baul-file-operations.c:6054
+#: libbaul-private/baul-file-operations.c:6062
 msgid "untitled folder"
 msgstr "Անվերնագիր պանակ։"
 
 #. Translators: the initial name of a new empty file
-#: libbaul-private/baul-file-operations.c:6062
+#: libbaul-private/baul-file-operations.c:6070
 msgid "new file"
 msgstr "Նոր ֆայլ"
 
-#: libbaul-private/baul-file-operations.c:6234
+#: libbaul-private/baul-file-operations.c:6242
 msgid "Error while creating directory %B."
 msgstr "Սխալ մինչ %B թղթապանակի ստեղծումը։"
 
-#: libbaul-private/baul-file-operations.c:6236
+#: libbaul-private/baul-file-operations.c:6244
 msgid "Error while creating file %B."
 msgstr "Սխալ մինչ %B ֆայլի ստեղծումը։"
 
-#: libbaul-private/baul-file-operations.c:6238
+#: libbaul-private/baul-file-operations.c:6246
 #, c-format
 msgid "There was an error creating the directory in %F."
 msgstr "Տեղի է ունեցել թղթապանակի ստեղծման սխալ, %F մեջ։"
 
-#: libbaul-private/baul-file-operations.c:6517
+#: libbaul-private/baul-file-operations.c:6525
 msgid "Emptying Trash"
 msgstr "Թափոնների զամբյուղի դատարկում"
 
-#: libbaul-private/baul-file-operations.c:6566
-#: libbaul-private/baul-file-operations.c:6607
-#: libbaul-private/baul-file-operations.c:6642
-#: libbaul-private/baul-file-operations.c:6677
+#: libbaul-private/baul-file-operations.c:6574
+#: libbaul-private/baul-file-operations.c:6615
+#: libbaul-private/baul-file-operations.c:6650
+#: libbaul-private/baul-file-operations.c:6685
 msgid "Unable to mark launcher trusted (executable)"
 msgstr "Անհնար է պիտակը նշել վստահված (գործարկվող)"
 
@@ -2078,7 +2078,7 @@ msgstr "Չի կարող որոշել բնօրինակի դիրքը \"%s\""
 msgid "The item cannot be restored from trash"
 msgstr "Տարրը չի կարող վերականգնվել զամբյուղից"
 
-#: libbaul-private/baul-icon-container.c:2926
+#: libbaul-private/baul-icon-container.c:2920
 msgid "The selection rectangle"
 msgstr "Ընտրության ուղղանկյուն"
 
@@ -2104,11 +2104,11 @@ msgstr ""
 "չունի."
 
 #: libbaul-private/baul-mime-actions.c:751
-#: src/file-manager/fm-directory-view.c:7457
-#: src/file-manager/fm-directory-view.c:7589
-#: src/file-manager/fm-directory-view.c:8698
-#: src/file-manager/fm-directory-view.c:9030
-#: src/file-manager/fm-tree-view.c:1340
+#: src/file-manager/fm-directory-view.c:7470
+#: src/file-manager/fm-directory-view.c:7602
+#: src/file-manager/fm-directory-view.c:8711
+#: src/file-manager/fm-directory-view.c:9044
+#: src/file-manager/fm-tree-view.c:1346
 msgid "Mo_ve to Trash"
 msgstr "Տե_ղափոխել թափոնների զամբյուղ"
 
@@ -2131,7 +2131,7 @@ msgstr "Գործարկել _տերմինալում"
 msgid "_Display"
 msgstr "-Ցույց տալ"
 
-#: libbaul-private/baul-mime-actions.c:830 src/baul-autorun-software.c:253
+#: libbaul-private/baul-mime-actions.c:830 src/baul-autorun-software.c:254
 msgid "_Run"
 msgstr "_Գործարկել"
 
@@ -2154,10 +2154,10 @@ msgid_plural "This will open %d separate windows."
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-mime-actions.c:1277 src/baul-window-manage-views.c:2132
-#: src/baul-window-manage-views.c:2140 src/baul-window-manage-views.c:2160
-#: src/baul-window-manage-views.c:2174 src/baul-window-manage-views.c:2180
-#: src/baul-window-manage-views.c:2207
+#: libbaul-private/baul-mime-actions.c:1277 src/baul-window-manage-views.c:2134
+#: src/baul-window-manage-views.c:2142 src/baul-window-manage-views.c:2162
+#: src/baul-window-manage-views.c:2176 src/baul-window-manage-views.c:2182
+#: src/baul-window-manage-views.c:2209
 #, c-format
 msgid "Could not display \"%s\"."
 msgstr "Չհաջողվեց ցուցադրել \"%s\"."
@@ -2214,22 +2214,22 @@ msgid "Mark as _Trusted"
 msgstr "Նշել որպես _Վստահված"
 
 #: libbaul-private/baul-mime-actions.c:2038
-#: libbaul-private/baul-mime-actions.c:2348
-#: src/file-manager/fm-directory-view.c:6433
+#: libbaul-private/baul-mime-actions.c:2349
+#: src/file-manager/fm-directory-view.c:6446
 msgid "Unable to mount location"
 msgstr "Անհնար է տեղակայել դիրքը"
 
-#: libbaul-private/baul-mime-actions.c:2436
-#: src/file-manager/fm-directory-view.c:6607
+#: libbaul-private/baul-mime-actions.c:2437
+#: src/file-manager/fm-directory-view.c:6620
 msgid "Unable to start location"
 msgstr "Անհնար է սկսել դիրքը"
 
-#: libbaul-private/baul-mime-actions.c:2530
+#: libbaul-private/baul-mime-actions.c:2531
 #, c-format
 msgid "Opening \"%s\"."
 msgstr "Բացում \"%s\""
 
-#: libbaul-private/baul-mime-actions.c:2535
+#: libbaul-private/baul-mime-actions.c:2536
 #, c-format
 msgid "Opening %d item."
 msgid_plural "Opening %d items."
@@ -2237,13 +2237,13 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: libbaul-private/baul-mime-application-chooser.c:164
-#: libbaul-private/baul-open-with-dialog.c:305
+#: libbaul-private/baul-open-with-dialog.c:303
 #, c-format
 msgid "Could not set application as the default: %s"
 msgstr "Չհաջողվեց սահմանել դիմումը որպես հիմնական: %s"
 
 #: libbaul-private/baul-mime-application-chooser.c:165
-#: libbaul-private/baul-open-with-dialog.c:306
+#: libbaul-private/baul-open-with-dialog.c:304
 msgid "Could not set as default application"
 msgstr "Չհաջողվեց սահմանել որպես հիմնական դիմում"
 
@@ -2260,12 +2260,12 @@ msgid "Could not remove application"
 msgstr "Չհաջողվեց հեռացնել դիմումը"
 
 #: libbaul-private/baul-mime-application-chooser.c:422
-#: libbaul-private/baul-open-with-dialog.c:1145
+#: libbaul-private/baul-open-with-dialog.c:1143
 msgid "_Add"
 msgstr "_Ավելացնել"
 
 #: libbaul-private/baul-mime-application-chooser.c:432
-#: libbaul-private/baul-open-with-dialog.c:963 src/baul-bookmarks-window.ui:77
+#: libbaul-private/baul-open-with-dialog.c:961 src/baul-bookmarks-window.ui:77
 msgid "_Remove"
 msgstr ""
 
@@ -2279,7 +2279,7 @@ msgid "%s document"
 msgstr "%s փաստաթուղթ"
 
 #: libbaul-private/baul-mime-application-chooser.c:601
-#: libbaul-private/baul-open-with-dialog.c:1104
+#: libbaul-private/baul-open-with-dialog.c:1102
 msgid "Unknown"
 msgstr "Անհայտ"
 
@@ -2293,96 +2293,96 @@ msgstr "Ընտրել դիմումը բացելու համար %s և այլ ֆա�
 msgid "Open all files of type \"%s\" with:"
 msgstr "Բացել բոլոր ֆայլերը \"%s\" տիպով։"
 
-#: libbaul-private/baul-open-with-dialog.c:153
+#: libbaul-private/baul-open-with-dialog.c:151
 msgid "Could not run application"
 msgstr "Հնարավոր չէ գործարկել ծրագիրը"
 
-#: libbaul-private/baul-open-with-dialog.c:166
+#: libbaul-private/baul-open-with-dialog.c:164
 #, c-format
 msgid "Could not find '%s'"
 msgstr "Հնարավոր չէ գտնել '%s'"
 
-#: libbaul-private/baul-open-with-dialog.c:169
+#: libbaul-private/baul-open-with-dialog.c:167
 msgid "Could not find application"
 msgstr "Հնարավոր չէ գտնել դիմումը"
 
-#: libbaul-private/baul-open-with-dialog.c:253
+#: libbaul-private/baul-open-with-dialog.c:251
 #, c-format
 msgid "Could not add application to the application database: %s"
 msgstr "Չհաջողվեց ավելացնել դիմում դիմումի բազայում: %s"
 
-#: libbaul-private/baul-open-with-dialog.c:253
+#: libbaul-private/baul-open-with-dialog.c:251
 msgid "Unknown error"
 msgstr "Անհայտ սխալ"
 
-#: libbaul-private/baul-open-with-dialog.c:254
+#: libbaul-private/baul-open-with-dialog.c:252
 msgid "Could not add application"
 msgstr "Հնարավոր չէ ավելացնել դիմում"
 
-#: libbaul-private/baul-open-with-dialog.c:456
+#: libbaul-private/baul-open-with-dialog.c:454
 msgid "Select an Application"
 msgstr "Ընտրել Դիմումը"
 
-#: libbaul-private/baul-open-with-dialog.c:868
-#: src/file-manager/fm-properties-window.c:5116
+#: libbaul-private/baul-open-with-dialog.c:866
+#: src/file-manager/fm-properties-window.c:5122
 msgid "Open With"
 msgstr "Բացել ծրագրով"
 
-#: libbaul-private/baul-open-with-dialog.c:906
+#: libbaul-private/baul-open-with-dialog.c:904
 msgid "Select an application to view its description."
 msgstr "Ընտրել ծրագիրը նկարագրությունը տեսնելու համար։"
 
-#: libbaul-private/baul-open-with-dialog.c:932
+#: libbaul-private/baul-open-with-dialog.c:930
 msgid "_Use a custom command"
 msgstr "_Օգտագործել գործարկողի հրամանը"
 
-#: libbaul-private/baul-open-with-dialog.c:949
+#: libbaul-private/baul-open-with-dialog.c:947
 msgid "_Browse..."
 msgstr "_Զննել․․․"
 
 #. Translators: first %s is a filename and second %s is a file extension
-#: libbaul-private/baul-open-with-dialog.c:1072
+#: libbaul-private/baul-open-with-dialog.c:1070
 #, c-format
 msgid "Open %s and other %s document with:"
 msgstr "Բաց %s այլ %s փաստաթուղթը հետ:"
 
 #. Translators: the %s here is a file name
 #. Translators: %s is a filename
-#: libbaul-private/baul-open-with-dialog.c:1078
-#: libbaul-private/baul-open-with-dialog.c:1120
+#: libbaul-private/baul-open-with-dialog.c:1076
+#: libbaul-private/baul-open-with-dialog.c:1118
 #, c-format
 msgid "Open %s with:"
 msgstr "Բացել %s հետ։"
 
-#: libbaul-private/baul-open-with-dialog.c:1079
+#: libbaul-private/baul-open-with-dialog.c:1077
 #, c-format
 msgid "_Remember this application for %s documents"
 msgstr "_Հիշել այս դիմումը %s փաստաթղթերի համար"
 
-#: libbaul-private/baul-open-with-dialog.c:1090
+#: libbaul-private/baul-open-with-dialog.c:1088
 #, c-format
 msgid "Open all %s documents with:"
 msgstr "Բացել բոլորը %s փաստաթղթերի հետ:"
 
 #. Translators: First %s is a filename, second is a description
 #. * of the type, eg "plain text document"
-#: libbaul-private/baul-open-with-dialog.c:1114
+#: libbaul-private/baul-open-with-dialog.c:1112
 #, c-format
 msgid "Open %s and other \"%s\" files with:"
 msgstr "Բացել %s և այլ \"%s\" փաստաթղթի հետ:"
 
 #. Translators: %s is a file type description
-#: libbaul-private/baul-open-with-dialog.c:1122
+#: libbaul-private/baul-open-with-dialog.c:1120
 #, c-format
 msgid "_Remember this application for \"%s\" files"
 msgstr "_Հիշել այս դիմումը \"%s\" ֆայլերի  համար"
 
-#: libbaul-private/baul-open-with-dialog.c:1133
+#: libbaul-private/baul-open-with-dialog.c:1131
 #, c-format
 msgid "Open all \"%s\" files with:"
 msgstr "Բացել բոլորը \"%s\" ֆայլերի հետ:"
 
-#: libbaul-private/baul-open-with-dialog.c:1146
+#: libbaul-private/baul-open-with-dialog.c:1144
 msgid "Add Application"
 msgstr "Ավելացնել Դիմում"
 
@@ -2517,9 +2517,9 @@ msgid "Preparing"
 msgstr "Պատրաստում"
 
 #: libbaul-private/baul-query.c:164
-#: libbaul-private/baul-search-directory-file.c:178
-#: libbaul-private/baul-search-directory-file.c:208
-#: libbaul-private/baul-search-directory-file.c:241
+#: libbaul-private/baul-search-directory-file.c:177
+#: libbaul-private/baul-search-directory-file.c:207
+#: libbaul-private/baul-search-directory-file.c:240
 msgid "Search"
 msgstr "Որոնել"
 
@@ -3868,12 +3868,12 @@ msgstr "Սեսիայի կառավարման տարբերակներ․"
 msgid "Show session management options"
 msgstr "Ցույց տալ սեսիայի կառավարման ընտրացանկը"
 
-#: src/baul-application.c:554
+#: src/baul-application.c:552
 #, c-format
 msgid "Baul could not create the required folder \"%s\"."
 msgstr "Նաուտիլիուսը չկարողացավ կերտել պահանջվող պանակը \"%s\""
 
-#: src/baul-application.c:556
+#: src/baul-application.c:554
 msgid ""
 "Before running Baul, please create the following folder, or set permissions "
 "such that Baul can create it."
@@ -3881,12 +3881,12 @@ msgstr ""
 "Նախքան նաուտիլիուսի գործարկումը խնդրվում է կերտել հետևյալ պանակը կամ "
 "սահմանել թույտվությունները, այնպես որ նաուտիլիուսը կարողանա դրանք կերտել"
 
-#: src/baul-application.c:561
+#: src/baul-application.c:559
 #, c-format
 msgid "Baul could not create the following required folders: %s."
 msgstr "Նաուտիլիուսը չկարողացավ կերտել հետևյալ պահանջվող պանակները %s "
 
-#: src/baul-application.c:563
+#: src/baul-application.c:561
 msgid ""
 "Before running Baul, please create these folders, or set permissions such "
 "that Baul can create them."
@@ -3894,45 +3894,45 @@ msgstr ""
 "Նախքան նաուտիլիուսի գործարկումը խնդրվում է կերտել այս պանակները, սահմանել "
 "թույլտվությունները, այնպես որ նաուտիիուսը կարողանա կերտել դրանք"
 
-#: src/baul-application.c:1164 src/baul-places-sidebar.c:2223
+#: src/baul-application.c:1165 src/baul-places-sidebar.c:2223
 #: src/baul-places-sidebar.c:2255 src/baul-places-sidebar.c:2291
 #, c-format
 msgid "Unable to eject %s"
 msgstr "Անհնար է մերժել %s"
 
-#: src/baul-application.c:1792
+#: src/baul-application.c:1793
 msgid "--check cannot be used with other options."
 msgstr ""
 
-#: src/baul-application.c:1798
+#: src/baul-application.c:1799
 msgid "--quit cannot be used with URIs."
 msgstr ""
 
-#: src/baul-application.c:1805
+#: src/baul-application.c:1806
 msgid "--geometry cannot be used with more than one URI."
 msgstr ""
 
-#: src/baul-application.c:1869
+#: src/baul-application.c:1870
 msgid "Perform a quick set of self-check tests."
 msgstr "Կատարել ինքնաստուգման արագ տեստ"
 
-#: src/baul-application.c:1872
+#: src/baul-application.c:1873
 msgid "Show the version of the program."
 msgstr "Ցույց տալ ծրագրի տարբերակը։"
 
-#: src/baul-application.c:1874
+#: src/baul-application.c:1875
 msgid "Create the initial window with the given geometry."
 msgstr "Կերտել նախնական պատուհան տրված երկրաչափությամբ"
 
-#: src/baul-application.c:1874
+#: src/baul-application.c:1875
 msgid "GEOMETRY"
 msgstr "ԵՐԿՐԱՉԱՓՈՒԹՅՈՒՆ"
 
-#: src/baul-application.c:1876
+#: src/baul-application.c:1877
 msgid "Only create windows for explicitly specified URIs."
 msgstr "Միայն կերտել պատուհաններ ճշգրիտ սահմանված URI–ներով"
 
-#: src/baul-application.c:1878
+#: src/baul-application.c:1879
 msgid ""
 "Do not manage the desktop (ignore the preference set in the preferences "
 "dialog)."
@@ -3940,29 +3940,29 @@ msgstr ""
 "Աշխատասեղանը չկառավարել (բաց թողնելով պարամետրերի կարգադրվածքը պարամետրերի "
 "դիալոգում)"
 
-#: src/baul-application.c:1880
+#: src/baul-application.c:1881
 msgid ""
 "Manage the desktop regardless of set preferences or environment (on new "
 "startup only)"
 msgstr ""
 
-#: src/baul-application.c:1882
+#: src/baul-application.c:1883
 msgid "Open URIs in tabs."
 msgstr ""
 
-#: src/baul-application.c:1884
+#: src/baul-application.c:1885
 msgid "Open a browser window."
 msgstr ""
 
-#: src/baul-application.c:1886
+#: src/baul-application.c:1887
 msgid "Quit Baul."
 msgstr "Հեռացնել նաուտիլիուսը"
 
-#: src/baul-application.c:1887
+#: src/baul-application.c:1888
 msgid "[URI...]"
 msgstr "[URI...]"
 
-#: src/baul-application.c:1898
+#: src/baul-application.c:1899
 msgid ""
 "\n"
 "\n"
@@ -3972,20 +3972,20 @@ msgstr ""
 "\n"
 "Ֆայլային համակարգը աչքի անցկացնել ֆայլային մենեջերի միջոցով։"
 
-#: src/baul-autorun-software.c:163 src/baul-autorun-software.c:166
+#: src/baul-autorun-software.c:164 src/baul-autorun-software.c:167
 #, c-format
 msgid "Error starting autorun program: %s"
 msgstr "Ինքնագործարկվող ծրագրի մեկնարկման սխալ: %s"
 
-#: src/baul-autorun-software.c:169
+#: src/baul-autorun-software.c:170
 msgid "Cannot find the autorun program"
 msgstr "Հնարավոր չէ գտնել ինքնագործարկվող ծրագիրը"
 
-#: src/baul-autorun-software.c:190
+#: src/baul-autorun-software.c:191
 msgid "<big><b>Error autorunning software</b></big>"
 msgstr "<big><b>Ծրագրի ինքնագործարկման սխալ</b></big>"
 
-#: src/baul-autorun-software.c:216
+#: src/baul-autorun-software.c:217
 msgid ""
 "<big><b>This medium contains software intended to be automatically started. "
 "Would you like to run it?</b></big>"
@@ -3993,7 +3993,7 @@ msgstr ""
 "<big><b> Այս կրիչը պարունակում է ծրագիր նախատեսված ավտոմանտ մեկնարկվելու "
 "համար։ Ցանկանու՞մ եք գործարկել այն։</b></big>"
 
-#: src/baul-autorun-software.c:218
+#: src/baul-autorun-software.c:219
 #, c-format
 msgid ""
 "The software will run directly from the medium \"%s\". You should never run "
@@ -4007,7 +4007,7 @@ msgstr ""
 "Եթե կասկածում եք, սեղմեք Չեղարկել։"
 
 #: src/baul-bookmarks-window.c:163 src/baul-file-management-properties.c:249
-#: src/baul-property-browser.c:1688 src/baul-window-menus.c:618
+#: src/baul-property-browser.c:1695 src/baul-window-menus.c:620
 #, c-format
 msgid ""
 "There was an error displaying help: \n"
@@ -4025,11 +4025,11 @@ msgid "Edit Bookmarks"
 msgstr "Խմբագրել էջանշանները"
 
 #: src/baul-bookmarks-window.ui:45 src/baul-connect-server-dialog.c:1114
-#: src/baul-emblem-sidebar.c:303 src/baul-emblem-sidebar.c:557
-#: src/baul-file-management-properties.ui:305 src/baul-location-dialog.c:192
-#: src/baul-property-browser.c:389 src/baul-window-menus.c:837
+#: src/baul-emblem-sidebar.c:305 src/baul-emblem-sidebar.c:560
+#: src/baul-file-management-properties.ui:305 src/baul-location-dialog.c:194
+#: src/baul-property-browser.c:389 src/baul-window-menus.c:839
 #: src/file-manager/fm-directory-view.c:1210
-#: src/file-manager/fm-properties-window.c:5227
+#: src/file-manager/fm-properties-window.c:5233
 msgid "_Help"
 msgstr "_Օգնություն"
 
@@ -4038,9 +4038,9 @@ msgid "_Jump to"
 msgstr ""
 
 #: src/baul-bookmarks-window.ui:93 src/baul-file-management-properties.ui:321
-#: src/baul-property-browser.c:397 src/baul-window-menus.c:839
-#: src/file-manager/fm-list-view.c:2572
-#: src/file-manager/fm-properties-window.c:5232
+#: src/baul-property-browser.c:397 src/baul-window-menus.c:841
+#: src/file-manager/fm-list-view.c:2608
+#: src/file-manager/fm-properties-window.c:5238
 msgid "_Close"
 msgstr "_Փակել"
 
@@ -4120,7 +4120,7 @@ msgstr "Շարունակել"
 
 #: src/baul-connect-server-dialog.c:717 src/baul-location-dialog.c:105
 #: src/file-manager/fm-directory-view.c:1184
-#: src/file-manager/fm-properties-window.c:5469
+#: src/file-manager/fm-properties-window.c:5475
 msgid "There was an error displaying help."
 msgstr "Տեղի է ունեցել օգնությունը ցուցադրելու սխալ։"
 
@@ -4202,7 +4202,7 @@ msgstr "Աշխատանքային սեղան"
 msgid "Could not remove emblem with name '%s'."
 msgstr "Չհաջողվեց ջնջել խորհրդանշանը անունով '%s'։"
 
-#: src/baul-emblem-sidebar.c:227 src/baul-emblem-sidebar.c:269
+#: src/baul-emblem-sidebar.c:227 src/baul-emblem-sidebar.c:270
 msgid ""
 "This is probably because the emblem is a permanent one, and not one that you "
 "added yourself."
@@ -4210,28 +4210,28 @@ msgstr ""
 "Դրա պատճառը հավանաբար այն է, որ էմբլեմը մշտական է, և ոչ այն որ դուք ինքներդ "
 "եք ավելացրել"
 
-#: src/baul-emblem-sidebar.c:268
+#: src/baul-emblem-sidebar.c:269
 #, c-format
 msgid "Could not rename emblem with name '%s'."
 msgstr "Չհաջողվեց վերանվանել խորհրդանշանը անունով '%s'։"
 
-#: src/baul-emblem-sidebar.c:289
+#: src/baul-emblem-sidebar.c:291
 msgid "Rename Emblem"
 msgstr "Էմբլեմը վերանվանել"
 
-#: src/baul-emblem-sidebar.c:315
+#: src/baul-emblem-sidebar.c:317
 msgid "Enter a new name for the displayed emblem:"
 msgstr "Մուտքագրել նոր անուն պատկերակված էմբլեմի համար"
 
-#: src/baul-emblem-sidebar.c:368
+#: src/baul-emblem-sidebar.c:370
 msgid "Rename"
 msgstr "Վերանվանել"
 
-#: src/baul-emblem-sidebar.c:543
+#: src/baul-emblem-sidebar.c:546
 msgid "Add Emblems..."
 msgstr "Ավելացնել էմբլեմներ..."
 
-#: src/baul-emblem-sidebar.c:567
+#: src/baul-emblem-sidebar.c:570
 msgid ""
 "Enter a descriptive name next to each emblem.  This name will be used in "
 "other places to identify the emblem."
@@ -4239,7 +4239,7 @@ msgstr ""
 "Յուրաքանչյուր էմբլեմի կողքին ավելացնել նկարագրական անուն։ Այս անունը "
 "կօգտագործվի այլ տեղերում էմբլեմը ճանաչելու համար։"
 
-#: src/baul-emblem-sidebar.c:571
+#: src/baul-emblem-sidebar.c:574
 msgid ""
 "Enter a descriptive name next to the emblem.  This name will be used in "
 "other places to identify the emblem."
@@ -4247,36 +4247,36 @@ msgstr ""
 "Յուրաքանչյուր էմբլեմի կողքին ավելացնել նկարագրական անուն։ Այս անունը "
 "կօգտագործվի այլ տեղերում էմբլեմը ճանաչելու համար։"
 
-#: src/baul-emblem-sidebar.c:813
+#: src/baul-emblem-sidebar.c:817
 msgid "Some of the files could not be added as emblems."
 msgstr "Ֆայլերից մի քանիսը հնարավոր չէ ավելացնել որպես էմբլեմներ"
 
-#: src/baul-emblem-sidebar.c:813 src/baul-emblem-sidebar.c:817
+#: src/baul-emblem-sidebar.c:817 src/baul-emblem-sidebar.c:821
 msgid "The emblems do not appear to be valid images."
 msgstr "Էմբլեմները համապատասխան պատկերներ չեն"
 
-#: src/baul-emblem-sidebar.c:817
+#: src/baul-emblem-sidebar.c:821
 msgid "None of the files could be added as emblems."
 msgstr "Ֆայլերից ոչ մեկը հնարավոր չէ ավելացնել որպես էմբլեմներ"
 
-#: src/baul-emblem-sidebar.c:862 src/baul-emblem-sidebar.c:924
+#: src/baul-emblem-sidebar.c:866 src/baul-emblem-sidebar.c:928
 #, c-format
 msgid "The file '%s' does not appear to be a valid image."
 msgstr "'%s' ֆայլը համապատասխան պատկեր չէ"
 
-#: src/baul-emblem-sidebar.c:866
+#: src/baul-emblem-sidebar.c:870
 msgid "The dragged file does not appear to be a valid image."
 msgstr "Տեղափոխված ֆայլը համապատասխան պատկեր չէ"
 
-#: src/baul-emblem-sidebar.c:868 src/baul-emblem-sidebar.c:925
+#: src/baul-emblem-sidebar.c:872 src/baul-emblem-sidebar.c:929
 msgid "The emblem cannot be added."
 msgstr "Էմբլեմը հնարավոր չէ ավելացնել"
 
-#: src/baul-emblem-sidebar.c:1097 src/file-manager/fm-properties-window.c:3460
+#: src/baul-emblem-sidebar.c:1101 src/file-manager/fm-properties-window.c:3466
 msgid "Emblems"
 msgstr "Էմբլեմներ"
 
-#: src/baul-emblem-sidebar.c:1103
+#: src/baul-emblem-sidebar.c:1107
 msgid "Show Emblems"
 msgstr "Ցույց տալ էմբլեմները"
 
@@ -4285,12 +4285,12 @@ msgstr "Ցույց տալ էմբլեմները"
 #. * the user has in a directory.
 #.
 #: src/baul-file-management-properties.c:342
-#: src/file-manager/fm-properties-window.c:4233
-#: src/file-manager/fm-properties-window.c:4244
+#: src/file-manager/fm-properties-window.c:4239
+#: src/file-manager/fm-properties-window.c:4250
 msgid "None"
 msgstr "Ոչինչ"
 
-#: src/baul-file-management-properties.c:646
+#: src/baul-file-management-properties.c:647
 msgid "About Extension"
 msgstr "Ընդարձակման Մասին"
 
@@ -4298,21 +4298,21 @@ msgstr "Ընդարձակման Մասին"
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:44
 #: src/file-manager/fm-icon-container.c:623
-#: src/file-manager/fm-icon-view.c:3420
+#: src/file-manager/fm-icon-view.c:3443
 msgid "Icon View"
 msgstr "Պատկերակների տեսաբերում"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:47
-#: src/file-manager/fm-list-view.c:1866 src/file-manager/fm-list-view.c:3501
+#: src/file-manager/fm-list-view.c:1896 src/file-manager/fm-list-view.c:3537
 msgid "List View"
 msgstr "Ցանկի Տեսաբերում"
 
 #. Translators: this is used in the view selection dropdown
 #. * of navigation windows and in the preferences dialog
 #: src/baul-file-management-properties.ui:50
-#: src/file-manager/fm-icon-view.c:3435
+#: src/file-manager/fm-icon-view.c:3458
 msgid "Compact View"
 msgstr "_Հակիրճ տեսք"
 
@@ -4419,15 +4419,15 @@ msgstr "200%"
 msgid "400%"
 msgstr "400%"
 
-#: src/baul-file-management-properties.ui:237 src/baul-query-editor.c:1263
+#: src/baul-file-management-properties.ui:237 src/baul-query-editor.c:1268
 msgid "100 KB"
 msgstr "100 ԿԲ"
 
-#: src/baul-file-management-properties.ui:240 src/baul-query-editor.c:1265
+#: src/baul-file-management-properties.ui:240 src/baul-query-editor.c:1270
 msgid "500 KB"
 msgstr "500 ԿԲ"
 
-#: src/baul-file-management-properties.ui:243 src/baul-query-editor.c:1267
+#: src/baul-file-management-properties.ui:243 src/baul-query-editor.c:1272
 msgid "1 MB"
 msgstr "1 MB"
 
@@ -4435,27 +4435,27 @@ msgstr "1 MB"
 msgid "3 MB"
 msgstr "3 MB"
 
-#: src/baul-file-management-properties.ui:249 src/baul-query-editor.c:1269
+#: src/baul-file-management-properties.ui:249 src/baul-query-editor.c:1274
 msgid "5 MB"
 msgstr "5 MB"
 
-#: src/baul-file-management-properties.ui:252 src/baul-query-editor.c:1271
+#: src/baul-file-management-properties.ui:252 src/baul-query-editor.c:1276
 msgid "10 MB"
 msgstr "10 MB"
 
-#: src/baul-file-management-properties.ui:255 src/baul-query-editor.c:1273
+#: src/baul-file-management-properties.ui:255 src/baul-query-editor.c:1278
 msgid "100 MB"
 msgstr "100 MB"
 
-#: src/baul-file-management-properties.ui:258 src/baul-query-editor.c:1277
+#: src/baul-file-management-properties.ui:258 src/baul-query-editor.c:1282
 msgid "1 GB"
 msgstr "1 ԳԲ"
 
-#: src/baul-file-management-properties.ui:261 src/baul-query-editor.c:1279
+#: src/baul-file-management-properties.ui:261 src/baul-query-editor.c:1284
 msgid "2 GB"
 msgstr "2 ԳԲ"
 
-#: src/baul-file-management-properties.ui:264 src/baul-query-editor.c:1281
+#: src/baul-file-management-properties.ui:264 src/baul-query-editor.c:1286
 msgid "4 GB"
 msgstr "4 ԳԲ"
 
@@ -4812,8 +4812,8 @@ msgstr "Ֆոկուսի երկարությունը"
 msgid "Software"
 msgstr "Համակարգչային ծրագիր"
 
-#: src/baul-image-properties-page.c:368 src/file-manager/fm-ditem-page.c:446
-#: src/file-manager/fm-ditem-page.c:458
+#: src/baul-image-properties-page.c:368 src/file-manager/fm-ditem-page.c:452
+#: src/file-manager/fm-ditem-page.c:464
 msgid "Description"
 msgstr "Նկարագրություն"
 
@@ -4871,44 +4871,44 @@ msgstr "Տեղեկատվություն"
 msgid "Show Information"
 msgstr "Ցույց տալ տեղեկատվությունը"
 
-#: src/baul-information-panel.c:360
+#: src/baul-information-panel.c:361
 msgid "Use _Default Background"
 msgstr "Օգտագործել _նախնական հետին պլան"
 
-#: src/baul-information-panel.c:526
+#: src/baul-information-panel.c:527
 msgid "You cannot assign more than one custom icon at a time."
 msgstr "Դուք չեք կարող վերագրել մեկից ավելի գործարկողի պատկերանշան միաժամանակ։"
 
-#: src/baul-information-panel.c:527 src/file-manager/fm-properties-window.c:512
+#: src/baul-information-panel.c:528 src/file-manager/fm-properties-window.c:515
 msgid "Please drag just one image to set a custom icon."
 msgstr ""
 "Խնդրվում է քաշել միայն մեկ պատկեր գործարկողի պատկերակ սահմանելու համար "
 
-#: src/baul-information-panel.c:554 src/file-manager/fm-properties-window.c:523
+#: src/baul-information-panel.c:555 src/file-manager/fm-properties-window.c:526
 msgid "The file that you dropped is not local."
 msgstr "Ֆայլը, որը դուք նետել եք տեղային ֆայլ չէ"
 
-#: src/baul-information-panel.c:555 src/file-manager/fm-properties-window.c:524
-#: src/file-manager/fm-properties-window.c:530
+#: src/baul-information-panel.c:556 src/file-manager/fm-properties-window.c:527
+#: src/file-manager/fm-properties-window.c:533
 msgid "You can only use local images as custom icons."
 msgstr ""
 "Դուք կարող եք օգտագործել միայն տեղային պատկերները որպես գործարկողի "
 "պատկերակներ"
 
-#: src/baul-information-panel.c:562 src/file-manager/fm-properties-window.c:529
+#: src/baul-information-panel.c:563 src/file-manager/fm-properties-window.c:532
 msgid "The file that you dropped is not an image."
 msgstr "Ֆայլը, որը դուք նետել եք պատկեր չէ"
 
-#: src/baul-information-panel.c:563
+#: src/baul-information-panel.c:564
 msgid "You can only use images as custom icons."
 msgstr "Դուք կարող եք պատկերները միայն օգտագործել որպես գործարկողի պատկերակներ"
 
-#: src/baul-information-panel.c:748 src/file-manager/fm-directory-view.c:4507
+#: src/baul-information-panel.c:754 src/file-manager/fm-directory-view.c:4512
 #, c-format
 msgid "Open With %s"
 msgstr "Բացել միասին %s"
 
-#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3316
+#: src/baul-location-bar.c:60 src/file-manager/fm-properties-window.c:3322
 msgid "Location:"
 msgstr "Տեղադրությունը։"
 
@@ -4923,11 +4923,11 @@ msgid_plural "Do you want to view %d locations?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/baul-location-dialog.c:160
+#: src/baul-location-dialog.c:162
 msgid "Open Location"
 msgstr "Բացել տեղակայությունը"
 
-#: src/baul-location-dialog.c:170
+#: src/baul-location-dialog.c:172
 msgid "_Location:"
 msgstr "_Տեղակայություն։"
 
@@ -4940,260 +4940,260 @@ msgstr ""
 msgid "%s - File Browser"
 msgstr "%s – ֆայլի զննիչ"
 
-#: src/baul-navigation-window-menus.c:133
+#: src/baul-navigation-window-menus.c:135
 msgid "Are you sure you want to clear the list of locations you have visited?"
 msgstr ""
 "Դուք համոզվա՞ծ եք, որ ցանկանում եք ջնջել տեղակայությունների ցանկը, որոնք "
 "դուք այցելել եք"
 
-#: src/baul-navigation-window-menus.c:410 src/baul-window-bookmarks.c:85
+#: src/baul-navigation-window-menus.c:412 src/baul-window-bookmarks.c:85
 #, c-format
 msgid "The location \"%s\" does not exist."
 msgstr "\"%s\" տեղակայությունը գոյություն չունի"
 
-#: src/baul-navigation-window-menus.c:412
+#: src/baul-navigation-window-menus.c:414
 msgid "The history location doesn't exist."
 msgstr "Տեղակայությունների պատմությունը գոյություն չունի"
 
-#: src/baul-navigation-window-menus.c:805
+#: src/baul-navigation-window-menus.c:807
 msgid "_Go"
 msgstr "_Գնալ"
 
-#: src/baul-navigation-window-menus.c:806
+#: src/baul-navigation-window-menus.c:808
 msgid "_Bookmarks"
 msgstr "_Էջանշաններ"
 
-#: src/baul-navigation-window-menus.c:807
+#: src/baul-navigation-window-menus.c:809
 msgid "_Tabs"
 msgstr "_Թերթեր"
 
-#: src/baul-navigation-window-menus.c:808
+#: src/baul-navigation-window-menus.c:810
 msgid "New _Window"
 msgstr "Նոր _Պատուհան"
 
-#: src/baul-navigation-window-menus.c:809
+#: src/baul-navigation-window-menus.c:811
 msgid "Open another Baul window for the displayed location"
 msgstr "Բացել այլ նաուտիլիուս պատուհան պատկերակված տեղակայության համար"
 
-#: src/baul-navigation-window-menus.c:812
+#: src/baul-navigation-window-menus.c:814
 msgid "New _Tab"
 msgstr "Նոր  _Թերթ"
 
-#: src/baul-navigation-window-menus.c:813
+#: src/baul-navigation-window-menus.c:815
 msgid "Open another tab for the displayed location"
 msgstr "Բացեք մեկ այլ էջանիշ ցուցաբերված վայրում"
 
-#: src/baul-navigation-window-menus.c:816
+#: src/baul-navigation-window-menus.c:818
 msgid "Open Folder W_indow"
 msgstr "Բացել Թղթապանակի Պատուհանը"
 
-#: src/baul-navigation-window-menus.c:817
+#: src/baul-navigation-window-menus.c:819
 msgid "Open a folder window for the displayed location"
 msgstr "Բացել թղթապանակի պատուհանը ցուցաբերված վայրում"
 
-#: src/baul-navigation-window-menus.c:820
+#: src/baul-navigation-window-menus.c:822
 msgid "Close _All Windows"
 msgstr "Փակել _բոլոր պատուհանները"
 
-#: src/baul-navigation-window-menus.c:821
+#: src/baul-navigation-window-menus.c:823
 msgid "Close all Navigation windows"
 msgstr "Փակել բոլոր նավիգացիոն պատուհանները"
 
-#: src/baul-navigation-window-menus.c:824
+#: src/baul-navigation-window-menus.c:826
 msgid "_Location..."
 msgstr "_Տեղակայություն"
 
-#: src/baul-navigation-window-menus.c:825 src/baul-spatial-window.c:925
+#: src/baul-navigation-window-menus.c:827 src/baul-spatial-window.c:927
 msgid "Specify a location to open"
 msgstr "Նշել տեղակայությունը բացելու համար"
 
-#: src/baul-navigation-window-menus.c:828
+#: src/baul-navigation-window-menus.c:830
 msgid "Clea_r History"
 msgstr "Մաքրե_լ պատմությունը"
 
-#: src/baul-navigation-window-menus.c:829
+#: src/baul-navigation-window-menus.c:831
 msgid "Clear contents of Go menu and Back/Forward lists"
 msgstr "Մաքրել Գնալ ցանկի բովանդակությունը և Հետ/Առաջ ցուցակը"
 
-#: src/baul-navigation-window-menus.c:832
+#: src/baul-navigation-window-menus.c:834
 msgid "S_witch to Other Pane"
 msgstr "Անցնել Այլ Վահանակ"
 
-#: src/baul-navigation-window-menus.c:833
+#: src/baul-navigation-window-menus.c:835
 msgid "Move focus to the other pane in a split view window"
 msgstr ""
 "Տեղափոխել կիզակետը դեպի ուրիշ ենթապատուհան բաժանված տեսքի պատուհանի մեջ"
 
-#: src/baul-navigation-window-menus.c:836
+#: src/baul-navigation-window-menus.c:838
 msgid "Sa_me Location as Other Pane"
 msgstr "Նույն Դիրքը ինչպես Այլ Վահանակում"
 
-#: src/baul-navigation-window-menus.c:837
+#: src/baul-navigation-window-menus.c:839
 msgid "Go to the same location as in the extra pane"
 msgstr "Գնալ նույն դիրքը ինչպես լրացուցիչ վահանակում"
 
-#: src/baul-navigation-window-menus.c:840 src/baul-spatial-window.c:938
+#: src/baul-navigation-window-menus.c:842 src/baul-spatial-window.c:940
 msgid "_Add Bookmark"
 msgstr "_Ավելացնել Էջանշան"
 
-#: src/baul-navigation-window-menus.c:841 src/baul-spatial-window.c:939
+#: src/baul-navigation-window-menus.c:843 src/baul-spatial-window.c:941
 msgid "Add a bookmark for the current location to this menu"
 msgstr "Այս ցանկի մեջ ավելացնել էջանշան ընթացիկ տեղակայության համար"
 
-#: src/baul-navigation-window-menus.c:844 src/baul-spatial-window.c:942
+#: src/baul-navigation-window-menus.c:846 src/baul-spatial-window.c:944
 msgid "_Edit Bookmarks..."
 msgstr "_Խմբագրել Էջանիշեր..."
 
-#: src/baul-navigation-window-menus.c:845 src/baul-spatial-window.c:943
+#: src/baul-navigation-window-menus.c:847 src/baul-spatial-window.c:945
 msgid "Display a window that allows editing the bookmarks in this menu"
 msgstr ""
 "Պատկերակել պատուհանը, որը թույլ է տալիս խմբագրել էջանշանները այս ցանկի մեջ"
 
-#: src/baul-navigation-window-menus.c:849
+#: src/baul-navigation-window-menus.c:851
 msgid "_Previous Tab"
 msgstr "_Նախորդ Թերթ"
 
-#: src/baul-navigation-window-menus.c:850
+#: src/baul-navigation-window-menus.c:852
 msgid "Activate previous tab"
 msgstr "Ակտիվացնել նախորդ էջանշանը"
 
-#: src/baul-navigation-window-menus.c:854
+#: src/baul-navigation-window-menus.c:856
 msgid "_Next Tab"
 msgstr "_Հաջորդ Թերթ"
 
-#: src/baul-navigation-window-menus.c:855
+#: src/baul-navigation-window-menus.c:857
 msgid "Activate next tab"
 msgstr "Ակտիվացնել հաջորդ թերթը"
 
-#: src/baul-navigation-window-menus.c:859 src/baul-navigation-window-pane.c:389
+#: src/baul-navigation-window-menus.c:861 src/baul-navigation-window-pane.c:391
 msgid "Move Tab _Left"
 msgstr "Տեղափոխել Թերթը _Ձախ"
 
-#: src/baul-navigation-window-menus.c:860
+#: src/baul-navigation-window-menus.c:862
 msgid "Move current tab to left"
 msgstr "Ընթացիկ թերթը տեղափոխել ձախ"
 
-#: src/baul-navigation-window-menus.c:864 src/baul-navigation-window-pane.c:397
+#: src/baul-navigation-window-menus.c:866 src/baul-navigation-window-pane.c:399
 msgid "Move Tab _Right"
 msgstr "Տեղափոխել Թերթը _Աջ"
 
-#: src/baul-navigation-window-menus.c:865
+#: src/baul-navigation-window-menus.c:867
 msgid "Move current tab to right"
 msgstr "Ընթացիկ թերթը տեղափոխել աջ"
 
-#: src/baul-navigation-window-menus.c:869
+#: src/baul-navigation-window-menus.c:871
 msgid "S_how Search"
 msgstr "Ցույց_տալ Որոնումը"
 
-#: src/baul-navigation-window-menus.c:870
+#: src/baul-navigation-window-menus.c:872
 msgid "Show search"
 msgstr "Ցույց տալ որոնումը"
 
-#: src/baul-navigation-window-menus.c:878
+#: src/baul-navigation-window-menus.c:880
 msgid "_Main Toolbar"
 msgstr "_Հիմնական գործիքների վահանակ "
 
-#: src/baul-navigation-window-menus.c:879
+#: src/baul-navigation-window-menus.c:881
 msgid "Change the visibility of this window's main toolbar"
 msgstr "Փոխել այս պատուհանի հիմնական գործիքների վահանակի տեսանելիությունը"
 
-#: src/baul-navigation-window-menus.c:884
+#: src/baul-navigation-window-menus.c:886
 msgid "_Side Pane"
 msgstr "_Կողային վահանակ"
 
-#: src/baul-navigation-window-menus.c:885
+#: src/baul-navigation-window-menus.c:887
 msgid "Change the visibility of this window's side pane"
 msgstr "Փոխել այս պատուհանի կողմնակի վահանակի տեսանելիությունը"
 
-#: src/baul-navigation-window-menus.c:890
+#: src/baul-navigation-window-menus.c:892
 msgid "Location _Bar"
 msgstr "Տեղակայության _վահանակ"
 
-#: src/baul-navigation-window-menus.c:891
+#: src/baul-navigation-window-menus.c:893
 msgid "Change the visibility of this window's location bar"
 msgstr "Փոխել այս պատուհանի տեղակայության վահանակի տեսանելիությունը"
 
-#: src/baul-navigation-window-menus.c:896
+#: src/baul-navigation-window-menus.c:898
 msgid "St_atusbar"
 msgstr "Կարգավիճակի վահանակ"
 
-#: src/baul-navigation-window-menus.c:897
+#: src/baul-navigation-window-menus.c:899
 msgid "Change the visibility of this window's statusbar"
 msgstr "Փոխել այս պատուհանի կարգավիճակի վահանակի տեսանելիությունը"
 
-#: src/baul-navigation-window-menus.c:902 src/baul-spatial-window.c:946
+#: src/baul-navigation-window-menus.c:904 src/baul-spatial-window.c:948
 msgid "_Search for Files..."
 msgstr "_Որոնել Ֆայլեր․․․"
 
-#: src/baul-navigation-window-menus.c:904
+#: src/baul-navigation-window-menus.c:906
 msgid "Search documents and folders by name"
 msgstr "Որոնել փաստաթղթեր և թղթապանակներ ըստ անվանման"
 
-#: src/baul-navigation-window-menus.c:910
+#: src/baul-navigation-window-menus.c:912
 msgid "E_xtra Pane"
 msgstr "Հ_ավելյալ Վահանակ"
 
-#: src/baul-navigation-window-menus.c:911
+#: src/baul-navigation-window-menus.c:913
 msgid "Open an extra folder view side-by-side"
 msgstr "Բացել լրացուցիչ թղթապանակը կողք-կողքի"
 
-#: src/baul-navigation-window-menus.c:937
+#: src/baul-navigation-window-menus.c:939
 msgid "_Back"
 msgstr "_Հետ"
 
-#: src/baul-navigation-window-menus.c:939
+#: src/baul-navigation-window-menus.c:941
 msgid "Go to the previous visited location"
 msgstr "Գնալ դեպի նախորդ այցելած տեղակայությունը"
 
-#: src/baul-navigation-window-menus.c:940
+#: src/baul-navigation-window-menus.c:942
 msgid "Back history"
 msgstr "Պատմությունը հետ պտտել"
 
-#: src/baul-navigation-window-menus.c:954
+#: src/baul-navigation-window-menus.c:956
 msgid "_Forward"
 msgstr "_Առաջ"
 
-#: src/baul-navigation-window-menus.c:956
+#: src/baul-navigation-window-menus.c:958
 msgid "Go to the next visited location"
 msgstr "Գնալ դեպի այն տեղակայությունը, որը այցելել եք հաջորդը"
 
-#: src/baul-navigation-window-menus.c:957
+#: src/baul-navigation-window-menus.c:959
 msgid "Forward history"
 msgstr "Պատմությունը առաջ պտտել"
 
-#: src/baul-navigation-window-menus.c:972
+#: src/baul-navigation-window-menus.c:974
 msgid "_Zoom"
 msgstr "_Խոշորացում"
 
-#: src/baul-navigation-window-menus.c:982
+#: src/baul-navigation-window-menus.c:984
 msgid "_View As"
 msgstr "_Դիտել Որպես"
 
-#: src/baul-navigation-window-menus.c:1017
+#: src/baul-navigation-window-menus.c:1019
 msgid "_Search"
 msgstr "_Փնտրել"
 
-#: src/baul-navigation-window-pane.c:258
+#: src/baul-navigation-window-pane.c:260
 msgid "Toggle between button and text-based location bar"
 msgstr "Փոխանջատել կոճակի և տեքստի վրա հիմնված գտնվելու բարի միջև"
 
-#: src/baul-navigation-window-pane.c:379
+#: src/baul-navigation-window-pane.c:381
 msgid "_New Tab"
 msgstr "_Նոր Էջ"
 
-#: src/baul-navigation-window-pane.c:408
+#: src/baul-navigation-window-pane.c:410
 msgid "_Close Tab"
 msgstr "_Փակել Էջը"
 
-#: src/baul-notebook.c:311
+#: src/baul-notebook.c:312
 msgid "Close tab"
 msgstr "Փակել Էջը"
 
-#: src/baul-notes-viewer.c:402 src/baul-notes-viewer.c:506
+#: src/baul-notes-viewer.c:401 src/baul-notes-viewer.c:505
 msgid "Notes"
 msgstr "Նշումներ"
 
-#: src/baul-notes-viewer.c:408
+#: src/baul-notes-viewer.c:407
 msgid "Show Notes"
 msgstr "Ցույց տալ նշումները"
 
@@ -5209,7 +5209,7 @@ msgstr "Էջանշաններ"
 msgid "Open the contents of your desktop in a folder"
 msgstr "Բացել աշխատասեղանի պարունակությունը պանակի մեջ"
 
-#: src/baul-places-sidebar.c:558 src/file-manager/fm-tree-view.c:1425
+#: src/baul-places-sidebar.c:558 src/file-manager/fm-tree-view.c:1431
 msgid "File System"
 msgstr "Ֆայլին Համակարգ"
 
@@ -5235,25 +5235,25 @@ msgid "Browse the contents of the network"
 msgstr "Աչքի անցկացնել քոմփյութերային ցանցի բովանդակությունները"
 
 #: src/baul-places-sidebar.c:1813 src/baul-places-sidebar.c:2775
-#: src/file-manager/fm-directory-view.c:7508
-#: src/file-manager/fm-directory-view.c:7536
-#: src/file-manager/fm-directory-view.c:7617
-#: src/file-manager/fm-directory-view.c:8303
-#: src/file-manager/fm-directory-view.c:8307
-#: src/file-manager/fm-directory-view.c:8395
-#: src/file-manager/fm-directory-view.c:8399
-#: src/file-manager/fm-directory-view.c:8505
-#: src/file-manager/fm-directory-view.c:8509
+#: src/file-manager/fm-directory-view.c:7521
+#: src/file-manager/fm-directory-view.c:7549
+#: src/file-manager/fm-directory-view.c:7630
+#: src/file-manager/fm-directory-view.c:8316
+#: src/file-manager/fm-directory-view.c:8320
+#: src/file-manager/fm-directory-view.c:8408
+#: src/file-manager/fm-directory-view.c:8412
+#: src/file-manager/fm-directory-view.c:8518
+#: src/file-manager/fm-directory-view.c:8522
 msgid "_Start"
 msgstr "_Սկիզբ"
 
 #: src/baul-places-sidebar.c:1814 src/baul-places-sidebar.c:2782
-#: src/baul-window-menus.c:864 src/file-manager/fm-directory-view.c:7512
-#: src/file-manager/fm-directory-view.c:7540
-#: src/file-manager/fm-directory-view.c:7621
-#: src/file-manager/fm-directory-view.c:8332
-#: src/file-manager/fm-directory-view.c:8424
-#: src/file-manager/fm-directory-view.c:8534
+#: src/baul-window-menus.c:866 src/file-manager/fm-directory-view.c:7525
+#: src/file-manager/fm-directory-view.c:7553
+#: src/file-manager/fm-directory-view.c:7634
+#: src/file-manager/fm-directory-view.c:8345
+#: src/file-manager/fm-directory-view.c:8437
+#: src/file-manager/fm-directory-view.c:8547
 msgid "_Stop"
 msgstr "_Կանգառ"
 
@@ -5261,9 +5261,9 @@ msgstr "_Կանգառ"
 msgid "_Power On"
 msgstr "_Միացնել"
 
-#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8336
-#: src/file-manager/fm-directory-view.c:8428
-#: src/file-manager/fm-directory-view.c:8538
+#: src/baul-places-sidebar.c:1822 src/file-manager/fm-directory-view.c:8349
+#: src/file-manager/fm-directory-view.c:8441
+#: src/file-manager/fm-directory-view.c:8551
 msgid "_Safely Remove Drive"
 msgstr "_Ապահով կերպով Հեռացնել Սարքը"
 
@@ -5283,14 +5283,14 @@ msgstr "_Մեկնարկել Բազմասկավառակային Սարքը"
 msgid "_Stop Multi-disk Device"
 msgstr "_Կանգնեցնել Բազմասկավառակային Սարքը"
 
-#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8411
-#: src/file-manager/fm-directory-view.c:8521
+#: src/baul-places-sidebar.c:1834 src/file-manager/fm-directory-view.c:8424
+#: src/file-manager/fm-directory-view.c:8534
 msgid "_Unlock Drive"
 msgstr "_Բաց Սկավառակատար"
 
-#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8348
-#: src/file-manager/fm-directory-view.c:8440
-#: src/file-manager/fm-directory-view.c:8550
+#: src/baul-places-sidebar.c:1835 src/file-manager/fm-directory-view.c:8361
+#: src/file-manager/fm-directory-view.c:8453
+#: src/file-manager/fm-directory-view.c:8563
 msgid "_Lock Drive"
 msgstr "_Արգելափակել Սկավառակատարը"
 
@@ -5309,17 +5309,17 @@ msgstr "Անհնար է հավաքել %s լրատվամիջոցների փոփ�
 msgid "Unable to stop %s"
 msgstr "Անկարող է դադարեցնել %s"
 
-#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7385
-#: src/file-manager/fm-directory-view.c:7566
-#: src/file-manager/fm-directory-view.c:8643
-#: src/file-manager/fm-directory-view.c:8976
-#: src/file-manager/fm-tree-view.c:1280
+#: src/baul-places-sidebar.c:2704 src/file-manager/fm-directory-view.c:7398
+#: src/file-manager/fm-directory-view.c:7579
+#: src/file-manager/fm-directory-view.c:8656
+#: src/file-manager/fm-directory-view.c:8990
+#: src/file-manager/fm-tree-view.c:1286
 msgid "Open in New _Tab"
 msgstr "Բացել նոր _էջանիշ"
 
-#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8620
-#: src/file-manager/fm-directory-view.c:8937
-#: src/file-manager/fm-tree-view.c:1289
+#: src/baul-places-sidebar.c:2711 src/file-manager/fm-directory-view.c:8633
+#: src/file-manager/fm-directory-view.c:8951
+#: src/file-manager/fm-tree-view.c:1295
 msgid "Open in New _Window"
 msgstr "Բացել Նոր _Պատուհան"
 
@@ -5331,21 +5331,21 @@ msgstr "Հեռացնել"
 msgid "Rename..."
 msgstr "Վերանվանում․․․"
 
-#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7492
-#: src/file-manager/fm-directory-view.c:7520
-#: src/file-manager/fm-directory-view.c:7601
+#: src/baul-places-sidebar.c:2740 src/file-manager/fm-directory-view.c:7505
+#: src/file-manager/fm-directory-view.c:7533
+#: src/file-manager/fm-directory-view.c:7614
 msgid "_Mount"
 msgstr "_Տեղակայել"
 
-#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7516
-#: src/file-manager/fm-directory-view.c:7544
-#: src/file-manager/fm-directory-view.c:7625
+#: src/baul-places-sidebar.c:2761 src/file-manager/fm-directory-view.c:7529
+#: src/file-manager/fm-directory-view.c:7557
+#: src/file-manager/fm-directory-view.c:7638
 msgid "_Detect Media"
 msgstr "_Հայտնաբերել Մեդիա"
 
-#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7504
-#: src/file-manager/fm-directory-view.c:7532
-#: src/file-manager/fm-directory-view.c:7613
+#: src/baul-places-sidebar.c:2768 src/file-manager/fm-directory-view.c:7517
+#: src/file-manager/fm-directory-view.c:7545
+#: src/file-manager/fm-directory-view.c:7626
 msgid "_Format"
 msgstr "_Ֆորմատ"
 
@@ -5369,150 +5369,150 @@ msgstr "_Հեռացնել"
 msgid "Add new..."
 msgstr "Ավելացնել նորը․․․"
 
-#: src/baul-property-browser.c:979
+#: src/baul-property-browser.c:980
 #, c-format
 msgid "Sorry, but pattern %s could not be deleted."
 msgstr "Կներեք, բայց %s ձևանմուշը չի կարող ջնջվել։"
 
-#: src/baul-property-browser.c:980
+#: src/baul-property-browser.c:981
 msgid "Check that you have permission to delete the pattern."
 msgstr "Ստուգել ունե՞ք արդյոք թույտվություններ նմուշը ոչնչացնելու համար"
 
-#: src/baul-property-browser.c:996
+#: src/baul-property-browser.c:997
 #, c-format
 msgid "Sorry, but emblem %s could not be deleted."
 msgstr "Կներեք, բայց %s խորհրդանշանը չի կարող ջնջվել։"
 
-#: src/baul-property-browser.c:997
+#: src/baul-property-browser.c:998
 msgid "Check that you have permission to delete the emblem."
 msgstr "Ստուգել արդյո՞ք դուք ունեք թույլտվություններ էմբլեմը ոչնչացնելու համար"
 
-#: src/baul-property-browser.c:1071
+#: src/baul-property-browser.c:1072
 msgid "Select an Image File for the New Emblem"
 msgstr "Ընտրել Պատկերի ֆայլը Նոր Խորհրդանշանի համար"
 
-#: src/baul-property-browser.c:1113
+#: src/baul-property-browser.c:1114
 msgid "Create a New Emblem"
 msgstr "Ստեղծել Նոր Խորհրդանշան"
 
-#: src/baul-property-browser.c:1141
+#: src/baul-property-browser.c:1142
 msgid "_Keyword:"
 msgstr "_Առանցքային բառ"
 
-#: src/baul-property-browser.c:1160
+#: src/baul-property-browser.c:1161
 msgid "_Image:"
 msgstr "_Պատկեր"
 
-#: src/baul-property-browser.c:1193
+#: src/baul-property-browser.c:1194
 msgid "Create a New Color:"
 msgstr "Կերտել նոր գույն"
 
-#: src/baul-property-browser.c:1214
+#: src/baul-property-browser.c:1215
 msgid "Color _name:"
 msgstr "Գույնի _անունը։"
 
-#: src/baul-property-browser.c:1230
+#: src/baul-property-browser.c:1231
 msgid "Color _value:"
 msgstr "Գույն _արժեք"
 
-#: src/baul-property-browser.c:1266
+#: src/baul-property-browser.c:1267
 msgid "Sorry, but you cannot replace the reset image."
 msgstr "Ներողություն, բայց դուք չեք կարող փոխարինել վերականգնված պատկերը։"
 
-#: src/baul-property-browser.c:1267
+#: src/baul-property-browser.c:1268
 msgid "Reset is a special image that cannot be deleted."
 msgstr "Վերամիացումը հատուկ պատկեր է, որը չի կարող ոչնչացվել"
 
-#: src/baul-property-browser.c:1297
+#: src/baul-property-browser.c:1298
 #, c-format
 msgid "Sorry, but the pattern %s could not be installed."
 msgstr "Կներեք, բայց %s ձևանմուշը չի կարող տեղադրվել։"
 
-#: src/baul-property-browser.c:1329
+#: src/baul-property-browser.c:1330
 msgid "Select an Image File to Add as a Pattern"
 msgstr "Ընտրել Պատկերի ֆայլը ավելացնել որպես Նմուշ"
 
-#: src/baul-property-browser.c:1409 src/baul-property-browser.c:1438
+#: src/baul-property-browser.c:1410 src/baul-property-browser.c:1441
 msgid "The color cannot be installed."
 msgstr "Գույնը տեղակայել հնարավոր չէ"
 
-#: src/baul-property-browser.c:1410
+#: src/baul-property-browser.c:1411
 msgid "Sorry, but you must specify an unused color name for the new color."
 msgstr ""
 "Ներողություն, դուք պետք է մասնավորեցնեք չօգտագործված գույնի անունը նոր "
 "գույնի համար"
 
-#: src/baul-property-browser.c:1439
+#: src/baul-property-browser.c:1442
 msgid "Sorry, but you must specify a non-blank name for the new color."
 msgstr ""
 "Ներողություն, դուք պետք է մասնավորեցնեք ոչ–դատարկ անուն նոր գույնի համար"
 
-#: src/baul-property-browser.c:1499
+#: src/baul-property-browser.c:1503
 msgid "Select a Color to Add"
 msgstr "Ընտրել Ավելացնելու Գույն"
 
-#: src/baul-property-browser.c:1545 src/baul-property-browser.c:1563
+#: src/baul-property-browser.c:1549 src/baul-property-browser.c:1567
 #, c-format
 msgid "Sorry, but \"%s\" is not a usable image file."
 msgstr "Ներողություն, \"%s\"–ը օգտագործելի պատկերային ֆայլ չէ"
 
-#: src/baul-property-browser.c:1546 src/baul-property-browser.c:1564
+#: src/baul-property-browser.c:1550 src/baul-property-browser.c:1568
 msgid "The file is not an image."
 msgstr "Ֆայլը պատկեր չէ"
 
-#: src/baul-property-browser.c:2307
+#: src/baul-property-browser.c:2319
 msgid "Select a Category:"
 msgstr "Ընտրել կատեգորիան"
 
-#: src/baul-property-browser.c:2321
+#: src/baul-property-browser.c:2333
 msgid "C_ancel Remove"
 msgstr "Հ_եռացնելը ոչնչացնել"
 
-#: src/baul-property-browser.c:2330
+#: src/baul-property-browser.c:2342
 msgid "_Add a New Pattern..."
 msgstr "_Ավելացնել նոր նմուշ"
 
-#: src/baul-property-browser.c:2333
+#: src/baul-property-browser.c:2345
 msgid "_Add a New Color..."
 msgstr "_Ավելացնել նոր գույն"
 
-#: src/baul-property-browser.c:2336
+#: src/baul-property-browser.c:2348
 msgid "_Add a New Emblem..."
 msgstr "_Ավելացնել նոր էմբլեմ"
 
-#: src/baul-property-browser.c:2362
+#: src/baul-property-browser.c:2374
 msgid "Click on a pattern to remove it"
 msgstr "Կտտացնել նմուշի վրա այն հեռացնելու համար"
 
-#: src/baul-property-browser.c:2365
+#: src/baul-property-browser.c:2377
 msgid "Click on a color to remove it"
 msgstr "Կտտացնել գույնի վրա այն հեռացնելու համար"
 
-#: src/baul-property-browser.c:2368
+#: src/baul-property-browser.c:2380
 msgid "Click on an emblem to remove it"
 msgstr "Կտտացնել էմբլեմի վրա այն հեռացնելու համար"
 
-#: src/baul-property-browser.c:2380
+#: src/baul-property-browser.c:2392
 msgid "Patterns:"
 msgstr "Նմուշներ"
 
-#: src/baul-property-browser.c:2383
+#: src/baul-property-browser.c:2395
 msgid "Colors:"
 msgstr "Գույներ"
 
-#: src/baul-property-browser.c:2386
+#: src/baul-property-browser.c:2398
 msgid "Emblems:"
 msgstr "Էմբլեմներ"
 
-#: src/baul-property-browser.c:2408
+#: src/baul-property-browser.c:2420
 msgid "_Remove a Pattern..."
 msgstr "_Հեռացնել նմուշը"
 
-#: src/baul-property-browser.c:2411
+#: src/baul-property-browser.c:2423
 msgid "_Remove a Color..."
 msgstr "_Հեռացնել գույնը "
 
-#: src/baul-property-browser.c:2414
+#: src/baul-property-browser.c:2426
 msgid "_Remove an Emblem..."
 msgstr "_Հեռացնել էմբլեմը"
 
@@ -5532,192 +5532,192 @@ msgstr ""
 msgid "Contained text"
 msgstr ""
 
-#: src/baul-query-editor.c:352
+#: src/baul-query-editor.c:355
 msgid "Select folder to search in"
 msgstr "Ընտրել որոնելու թղթապանակ"
 
-#: src/baul-query-editor.c:448 src/baul-query-editor.c:452
+#: src/baul-query-editor.c:452 src/baul-query-editor.c:456
 msgid ""
 "Tags separated by spaces. Matches files that contains ALL specified tags."
 msgstr ""
 
-#: src/baul-query-editor.c:555
+#: src/baul-query-editor.c:559
 msgid "Documents"
 msgstr "Փաստաթղթեր"
 
-#: src/baul-query-editor.c:575
+#: src/baul-query-editor.c:579
 msgid "Music"
 msgstr "Երաժշտություն"
 
-#: src/baul-query-editor.c:591
+#: src/baul-query-editor.c:595
 msgid "Video"
 msgstr "Տեսանյութ"
 
-#: src/baul-query-editor.c:609
+#: src/baul-query-editor.c:613
 msgid "Picture"
 msgstr "Նկար"
 
-#: src/baul-query-editor.c:631
+#: src/baul-query-editor.c:635
 msgid "Illustration"
 msgstr "Պատկերազարդում"
 
-#: src/baul-query-editor.c:647
+#: src/baul-query-editor.c:651
 msgid "Spreadsheet"
 msgstr "Աղյուսակներ"
 
-#: src/baul-query-editor.c:665
+#: src/baul-query-editor.c:669
 msgid "Presentation"
 msgstr "Ներկայացում"
 
-#: src/baul-query-editor.c:676
+#: src/baul-query-editor.c:680
 msgid "Pdf / Postscript"
 msgstr "Pdf / Postscript"
 
-#: src/baul-query-editor.c:686
+#: src/baul-query-editor.c:690
 msgid "Text File"
 msgstr "Տեքստային ֆայլ"
 
-#: src/baul-query-editor.c:772
+#: src/baul-query-editor.c:776
 msgid "Select type"
 msgstr "Ընտրել տիպը"
 
-#: src/baul-query-editor.c:864
+#: src/baul-query-editor.c:868
 msgid "Any"
 msgstr "Ցանկացածը"
 
-#: src/baul-query-editor.c:880
+#: src/baul-query-editor.c:884
 msgid "Other Type..."
 msgstr "Աիլ Տիպ․․․"
 
-#: src/baul-query-editor.c:1082 src/baul-query-editor.c:1221
+#: src/baul-query-editor.c:1086 src/baul-query-editor.c:1226
 msgid "Less than or equal to"
 msgstr ""
 
-#: src/baul-query-editor.c:1084 src/baul-query-editor.c:1223
+#: src/baul-query-editor.c:1088 src/baul-query-editor.c:1228
 msgid "Greater than or equal to"
 msgstr ""
 
-#: src/baul-query-editor.c:1097
+#: src/baul-query-editor.c:1101
 msgid "1 Hour"
 msgstr ""
 
-#: src/baul-query-editor.c:1099
+#: src/baul-query-editor.c:1103
 msgid "1 Day"
 msgstr ""
 
-#: src/baul-query-editor.c:1101
+#: src/baul-query-editor.c:1105
 msgid "1 Week"
 msgstr ""
 
-#: src/baul-query-editor.c:1103
+#: src/baul-query-editor.c:1107
 msgid "1 Month"
 msgstr ""
 
-#: src/baul-query-editor.c:1105
+#: src/baul-query-editor.c:1109
 msgid "6 Months"
 msgstr "6 ամիս"
 
-#: src/baul-query-editor.c:1107
+#: src/baul-query-editor.c:1111
 msgid "1 Year"
 msgstr "1 տարի"
 
-#: src/baul-query-editor.c:1238
+#: src/baul-query-editor.c:1243
 msgid "10 KiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1240
+#: src/baul-query-editor.c:1245
 msgid "100 KiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1242
+#: src/baul-query-editor.c:1247
 msgid "500 KiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1244
+#: src/baul-query-editor.c:1249
 msgid "1 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1246
+#: src/baul-query-editor.c:1251
 msgid "5 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1248
+#: src/baul-query-editor.c:1253
 msgid "10 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1250
+#: src/baul-query-editor.c:1255
 msgid "100 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1252
+#: src/baul-query-editor.c:1257
 msgid "500 MiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1254
+#: src/baul-query-editor.c:1259
 msgid "1 GiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1256
+#: src/baul-query-editor.c:1261
 msgid "2 GiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1258
+#: src/baul-query-editor.c:1263
 msgid "4 GiB"
 msgstr ""
 
-#: src/baul-query-editor.c:1261
+#: src/baul-query-editor.c:1266
 msgid "10 KB"
 msgstr ""
 
-#: src/baul-query-editor.c:1275
+#: src/baul-query-editor.c:1280
 msgid "500 MB"
 msgstr ""
 
-#: src/baul-query-editor.c:1346 src/baul-query-editor.c:1349
+#: src/baul-query-editor.c:1352 src/baul-query-editor.c:1355
 msgid "Matches files that contains specified text."
 msgstr ""
 
-#: src/baul-query-editor.c:1503
+#: src/baul-query-editor.c:1511
 msgid "Remove this criterion from the search"
 msgstr "Հեռացնել այս չափանիշը որոնումից"
 
-#: src/baul-query-editor.c:1550
+#: src/baul-query-editor.c:1560
 msgid "Search Folder"
 msgstr "Փնտրել Թղթապանակ"
 
-#: src/baul-query-editor.c:1556
+#: src/baul-query-editor.c:1566
 msgid "Edit"
 msgstr "Խմբագրել"
 
-#: src/baul-query-editor.c:1564
+#: src/baul-query-editor.c:1574
 msgid "Edit the saved search"
 msgstr "Խմբագրել պահպանված որոնումը"
 
-#: src/baul-query-editor.c:1596
+#: src/baul-query-editor.c:1606
 msgid "Add a new criterion to this search"
 msgstr "Ավելացնել նոր չափանիշ այս որոնմանը"
 
-#: src/baul-query-editor.c:1602
+#: src/baul-query-editor.c:1612
 msgid "Go"
 msgstr "Գնալ"
 
-#: src/baul-query-editor.c:1606
+#: src/baul-query-editor.c:1616
 msgid "Reload"
 msgstr "Վերբեռնել "
 
-#: src/baul-query-editor.c:1611
+#: src/baul-query-editor.c:1621
 msgid "Perform or update the search"
 msgstr "Կատարել կամ թարմացնել որոնումը"
 
-#: src/baul-query-editor.c:1632
+#: src/baul-query-editor.c:1642
 msgid "_Search for:"
 msgstr "_Փնտրել․"
 
-#: src/baul-query-editor.c:1661
+#: src/baul-query-editor.c:1671
 msgid "Search results"
 msgstr "Որոնման արդյունքներ"
 
-#: src/baul-search-bar.c:174
+#: src/baul-search-bar.c:175
 msgid "Search:"
 msgstr "Որոնել:"
 
@@ -5725,44 +5725,44 @@ msgstr "Որոնել:"
 msgid "Close the side pane"
 msgstr "Փակել կողային վահանակը"
 
-#: src/baul-spatial-window.c:922
+#: src/baul-spatial-window.c:924
 msgid "_Places"
 msgstr "_Տեղեր"
 
-#: src/baul-spatial-window.c:924
+#: src/baul-spatial-window.c:926
 msgid "Open _Location..."
 msgstr "Բացել _տեղակայությունը"
 
-#: src/baul-spatial-window.c:929
+#: src/baul-spatial-window.c:931
 msgid "Close P_arent Folders"
 msgstr "Փակել հ_իմնադրվածք պանակները"
 
-#: src/baul-spatial-window.c:930
+#: src/baul-spatial-window.c:932
 msgid "Close this folder's parents"
 msgstr "Փակել այս պանակի հիմնադրվածքները"
 
-#: src/baul-spatial-window.c:934
+#: src/baul-spatial-window.c:936
 msgid "Clos_e All Folders"
 msgstr "Փակե_լ բոլոր պանակները"
 
-#: src/baul-spatial-window.c:935
+#: src/baul-spatial-window.c:937
 msgid "Close all folder windows"
 msgstr "Փակել բոլոր պանակների պատուհանները"
 
-#: src/baul-spatial-window.c:947
+#: src/baul-spatial-window.c:949
 msgid "Locate documents and folders on this computer by name or content"
 msgstr "Դասավորել փաստաթղթերն ու պանակները ըստ անվան կամ պարունակության"
 
-#: src/baul-trash-bar.c:202 src/file-manager/fm-desktop-icon-view.c:779
-#: src/file-manager/fm-directory-view.c:7406
+#: src/baul-trash-bar.c:203 src/file-manager/fm-desktop-icon-view.c:781
+#: src/file-manager/fm-directory-view.c:7419
 msgid "Delete all items in the Trash"
 msgstr "Հեռացնել թափոն զամբյուղի բոլոր տարրերը։"
 
-#: src/baul-trash-bar.c:209
+#: src/baul-trash-bar.c:210
 msgid "Restore Selected Items"
 msgstr "Վերականգնել Ընտրված Տարրերը"
 
-#: src/baul-trash-bar.c:215
+#: src/baul-trash-bar.c:216
 msgid "Restore selected items to their original position"
 msgstr "Վերականգնել ընտրված տարրերը իրենց բնօրինակ դիրքորոշման"
 
@@ -5795,53 +5795,53 @@ msgstr "Տեսապատկերի բովանդակությունը"
 msgid "View of the current folder"
 msgstr "Ընթացիկ պանակի տեսապատկերը"
 
-#: src/baul-window-manage-views.c:2135
+#: src/baul-window-manage-views.c:2137
 msgid "Baul has no installed viewer capable of displaying the folder."
 msgstr ""
 "Նաուտիլիուսը չունի տեղակայված տեսապատկերիչ, որն ընդունակ է ցույց տալ պանակը"
 
-#: src/baul-window-manage-views.c:2143
+#: src/baul-window-manage-views.c:2145
 msgid "The location is not a folder."
 msgstr "Տեղակայությունը պանակ չէ"
 
-#: src/baul-window-manage-views.c:2152
+#: src/baul-window-manage-views.c:2154
 #, c-format
 msgid "Could not find \"%s\"."
 msgstr "Հնարավոր չէ գտնել  \"%s\"."
 
-#: src/baul-window-manage-views.c:2155
+#: src/baul-window-manage-views.c:2157
 msgid "Please check the spelling and try again."
 msgstr "Խնդրվում է կրկին ստուգել ուղղագրությունը և փորձել կրկին։"
 
-#: src/baul-window-manage-views.c:2164
+#: src/baul-window-manage-views.c:2166
 #, c-format
 msgid "Baul cannot handle \"%s\" locations."
 msgstr "Baul֊ն չի կարող կարգավորել \"%s\" տեղակայություններ։"
 
-#: src/baul-window-manage-views.c:2169
+#: src/baul-window-manage-views.c:2171
 msgid "Baul cannot handle this kind of location."
 msgstr "Baul֊ն չի կարող կարգավորել այս տեսակի տեղակայությունը։"
 
-#: src/baul-window-manage-views.c:2176
+#: src/baul-window-manage-views.c:2178
 msgid "Unable to mount the location."
 msgstr "Անկարող է տեղակայությունը տեղադրել։"
 
-#: src/baul-window-manage-views.c:2182
+#: src/baul-window-manage-views.c:2184
 msgid "Access was denied."
 msgstr "Մուտքը արգելվում է"
 
-#: src/baul-window-manage-views.c:2191
+#: src/baul-window-manage-views.c:2193
 #, c-format
 msgid "Could not display \"%s\", because the host could not be found."
 msgstr "Չհաջողվեց ցուցադրել \"%s\",, քանի որ ընդունող չկարողացավ գտնել։"
 
-#: src/baul-window-manage-views.c:2193
+#: src/baul-window-manage-views.c:2195
 msgid ""
 "Check that the spelling is correct and that your proxy settings are correct."
 msgstr ""
 "Ստուգեք, որպեսզի ուղղագրությունը ճիշտ լինի և որ ձեր ––––––––––ճիշտ լինեն։"
 
-#: src/baul-window-manage-views.c:2209
+#: src/baul-window-manage-views.c:2211
 #, c-format
 msgid ""
 "Error: %s\n"
@@ -5850,11 +5850,11 @@ msgstr ""
 "Սխալ: %s\n"
 "Խնդրում ենք ընտրել մեկ այլ դիտող և կրկին փորձեք:"
 
-#: src/baul-window-menus.c:198
+#: src/baul-window-menus.c:200
 msgid "Go to the location specified by this bookmark"
 msgstr "Գնալ այս էջանշանի մասնավորեցրած տեղակայությունը"
 
-#: src/baul-window-menus.c:523
+#: src/baul-window-menus.c:525
 msgid ""
 "Baul is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -5866,7 +5866,7 @@ msgstr ""
 "հրապարակվել է Ազատ Ծրագրային Ապահովության Հիմնադրամում, կամ տարբերակ 2 "
 "լիցենզիայի, կամ (ձեր ընտրությամբ) ցանկացած ավելի ուշ տարբերակը։ "
 
-#: src/baul-window-menus.c:527
+#: src/baul-window-menus.c:529
 msgid ""
 "Baul is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -5878,7 +5878,7 @@ msgstr ""
 "ՈՐԱԿԸ կամ ՈՐՈՇ ՆՊԱՏԱԿՈՎ ԿԻՐԱՌԵԼԻՈՒԹՅՈՒՆԸ։ Մանրամասները տեսեք GNU "
 "համընդհանուր հանրային արտոնագրի մեջ։"
 
-#: src/baul-window-menus.c:531
+#: src/baul-window-menus.c:533
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Baul; if not, write to the Free Software Foundation, Inc., 51 Franklin "
@@ -5888,53 +5888,53 @@ msgstr ""
 "համատեղ, եթե ոչ, ապա գրեք Ազատ Ծրագրային Ապահովման Հիմնադրամ, Inc., 51 "
 "Franklin փողոց, Հինգերորդ հարկ, Boston, MA 02110-1301 USA"
 
-#: src/baul-window-menus.c:563
+#: src/baul-window-menus.c:565
 msgid "About Baul"
 msgstr ""
 
-#: src/baul-window-menus.c:565
+#: src/baul-window-menus.c:567
 msgid ""
 "Baul lets you organize files and folders, both on your computer and online."
 msgstr ""
 "Baul֊ն Ձեզ հնարավորություն է տալիս կազմակերպել ֆայլերը և թղթապանակները, "
 "երկուսն էլ Ձեր համակարգչի վրա և օնլայն։"
 
-#: src/baul-window-menus.c:568
+#: src/baul-window-menus.c:570
 msgid ""
 "Copyright © 1999-2009 The Nautilus authors\n"
 "Copyright © 2011-2020 The Caja authors\n"
-"Copyright © 2022 Pablo Barciela"
+"Copyright © 2022-2025 Pablo Barciela"
 msgstr ""
 
-#: src/baul-window-menus.c:575
+#: src/baul-window-menus.c:577
 msgid "translator-credits"
 msgstr "թարգմանչի կրեդիտներ"
 
-#: src/baul-window-menus.c:578
+#: src/baul-window-menus.c:580
 msgid "CAFE Web Site"
 msgstr "CAFE Վեբ Կայք"
 
-#: src/baul-window-menus.c:834
+#: src/baul-window-menus.c:836
 msgid "_File"
 msgstr "_Ֆայլ"
 
-#: src/baul-window-menus.c:835
+#: src/baul-window-menus.c:837
 msgid "_Edit"
 msgstr "_Խմբագրել"
 
-#: src/baul-window-menus.c:836
+#: src/baul-window-menus.c:838
 msgid "_View"
 msgstr "_Դիտել"
 
-#: src/baul-window-menus.c:840
+#: src/baul-window-menus.c:842
 msgid "Close this folder"
 msgstr "Փակել այս պանակ"
 
-#: src/baul-window-menus.c:845
+#: src/baul-window-menus.c:847
 msgid "_Backgrounds and Emblems..."
 msgstr "_Հետին պլան և էմբլեմներ"
 
-#: src/baul-window-menus.c:846
+#: src/baul-window-menus.c:848
 msgid ""
 "Display patterns, colors, and emblems that can be used to customize "
 "appearance"
@@ -5942,140 +5942,140 @@ msgstr ""
 "Պատկերակել նմուշները, գույները և էմբլեմները, որոնք կարող են օգտագործվել "
 "գործարկողի բնութագրիչ տեսքի համար"
 
-#: src/baul-window-menus.c:851
+#: src/baul-window-menus.c:853
 msgid "Prefere_nces"
 msgstr "Պարամետր_եր"
 
-#: src/baul-window-menus.c:852
+#: src/baul-window-menus.c:854
 msgid "Edit Baul preferences"
 msgstr "Խմբագրել նաուտիլիուսի պարամետրերը"
 
-#: src/baul-window-menus.c:855
+#: src/baul-window-menus.c:857
 msgid "Open _Parent"
 msgstr "Բացել _հիմնադրվածքը"
 
-#: src/baul-window-menus.c:856
+#: src/baul-window-menus.c:858
 msgid "Open the parent folder"
 msgstr "Բացել հիմնադրվածք պանակը"
 
-#: src/baul-window-menus.c:865
+#: src/baul-window-menus.c:867
 msgid "Stop loading the current location"
 msgstr "Դադարեցնել ընթացիկ դիրքի բեռնումը"
 
-#: src/baul-window-menus.c:869
+#: src/baul-window-menus.c:871
 msgid "_Reload"
 msgstr "_Վերբեռնում"
 
-#: src/baul-window-menus.c:870
+#: src/baul-window-menus.c:872
 msgid "Reload the current location"
 msgstr "Վերբեռնել ընթացիկ տեղակայությունը"
 
-#: src/baul-window-menus.c:874
+#: src/baul-window-menus.c:876
 msgid "_Contents"
 msgstr "_Բովանդակություն"
 
-#: src/baul-window-menus.c:875
+#: src/baul-window-menus.c:877
 msgid "Display Baul help"
 msgstr "Ցույց տալ նաուտիլիուսի ձեռնարկը"
 
-#: src/baul-window-menus.c:879
+#: src/baul-window-menus.c:881
 msgid "_About"
 msgstr "_Մասին"
 
-#: src/baul-window-menus.c:880
+#: src/baul-window-menus.c:882
 msgid "Display credits for the creators of Baul"
 msgstr "Ցուցադրել նաուտիլիուսի կերտողների անունները"
 
-#: src/baul-window-menus.c:884
+#: src/baul-window-menus.c:886
 msgid "Zoom _In"
 msgstr "Մեծացնել մասշտաբը"
 
-#: src/baul-window-menus.c:885 src/baul-zoom-control.c:99
-#: src/baul-zoom-control.c:312
+#: src/baul-window-menus.c:887 src/baul-zoom-control.c:99
+#: src/baul-zoom-control.c:313
 msgid "Increase the view size"
 msgstr "Մեծացնել տեսքի չափը"
 
-#: src/baul-window-menus.c:899
+#: src/baul-window-menus.c:901
 msgid "Zoom _Out"
 msgstr "Փոքրացնել _Մասշտաբը"
 
-#: src/baul-window-menus.c:900 src/baul-zoom-control.c:100
-#: src/baul-zoom-control.c:257
+#: src/baul-window-menus.c:902 src/baul-zoom-control.c:100
+#: src/baul-zoom-control.c:258
 msgid "Decrease the view size"
 msgstr "Նվազեցնել տեսքի չափը"
 
-#: src/baul-window-menus.c:909
+#: src/baul-window-menus.c:911
 msgid "Normal Si_ze"
 msgstr "Նորմալ չա_փս"
 
-#: src/baul-window-menus.c:910 src/baul-zoom-control.c:101
-#: src/baul-zoom-control.c:273
+#: src/baul-window-menus.c:912 src/baul-zoom-control.c:101
+#: src/baul-zoom-control.c:274
 msgid "Use the normal view size"
 msgstr "Օգտագործել տեսքի նորմալ չափը"
 
-#: src/baul-window-menus.c:914
+#: src/baul-window-menus.c:916
 msgid "Connect to _Server..."
 msgstr "Միանալ _սերվերին"
 
-#: src/baul-window-menus.c:915
+#: src/baul-window-menus.c:917
 msgid "Connect to a remote computer or shared disk"
 msgstr "Միացեք հեռադիր քոմփյութերին կամ բաժանված սկավառակին"
 
-#: src/baul-window-menus.c:919 src/file-manager/fm-directory-view.c:7641
-#: src/file-manager/fm-directory-view.c:7645
+#: src/baul-window-menus.c:921 src/file-manager/fm-directory-view.c:7654
+#: src/file-manager/fm-directory-view.c:7658
 msgid "_Home Folder"
 msgstr "_Տուն Թղթապանակ"
 
-#: src/baul-window-menus.c:924
+#: src/baul-window-menus.c:926
 msgid "_Computer"
 msgstr "_Համակարգիչ"
 
-#: src/baul-window-menus.c:929
+#: src/baul-window-menus.c:931
 msgid "_Network"
 msgstr "_Ցանց"
 
-#: src/baul-window-menus.c:934
+#: src/baul-window-menus.c:936
 msgid "T_emplates"
 msgstr "Շ_աբլոններ"
 
-#: src/baul-window-menus.c:935
+#: src/baul-window-menus.c:937
 msgid "Open your personal templates folder"
 msgstr "Բացեք Ձեր անձնական կաղապարների թղթապանակը"
 
-#: src/baul-window-menus.c:939
+#: src/baul-window-menus.c:941
 msgid "_Trash"
 msgstr "_Թափոն զամբյուղ"
 
-#: src/baul-window-menus.c:940
+#: src/baul-window-menus.c:942
 msgid "Open your personal trash folder"
 msgstr "Բացեք Ձեր անձնական աղբարկղի թղթապանակը"
 
-#: src/baul-window-menus.c:948
+#: src/baul-window-menus.c:950
 msgid "Show _Hidden Files"
 msgstr "Ցույց տալ _թաքնված ֆայլերը"
 
-#: src/baul-window-menus.c:949
+#: src/baul-window-menus.c:951
 msgid "Toggle the display of hidden files in the current window"
 msgstr "Ցույց տալ թաքնված ֆայլերը ընթացիկ պատուհանում"
 
-#: src/baul-window-menus.c:954
+#: src/baul-window-menus.c:956
 msgid "Show Bac_kup Files"
 msgstr ""
 
-#: src/baul-window-menus.c:955
+#: src/baul-window-menus.c:957
 msgid "Toggle the display of backup files in the current window"
 msgstr ""
 
-#: src/baul-window-menus.c:987
+#: src/baul-window-menus.c:989
 msgid "_Up"
 msgstr "_Վերև"
 
-#: src/baul-window-menus.c:990
+#: src/baul-window-menus.c:992
 msgid "_Home"
 msgstr "_Սեփական տուն"
 
 #: src/baul-window-slot.c:209 src/file-manager/fm-list-model.c:487
-#: src/file-manager/fm-tree-model.c:1380
+#: src/file-manager/fm-tree-model.c:1381
 msgid "Loading..."
 msgstr "Բեռնում..."
 
@@ -6136,69 +6136,69 @@ msgstr "Փոքրացնել"
 msgid "Zoom to Default"
 msgstr "Նախնականի մասշտաբը մեծացնել"
 
-#: src/baul-zoom-control.c:852
+#: src/baul-zoom-control.c:855
 msgid "Zoom"
 msgstr "Պատկերման մասշտաբ"
 
-#: src/baul-zoom-control.c:857
+#: src/baul-zoom-control.c:860
 msgid "Set the zoom level of the current view"
 msgstr "Սահմանել ընթացիկ տեսապատկերման մասշտաբը "
 
-#: src/file-manager/fm-desktop-icon-view.c:666
+#: src/file-manager/fm-desktop-icon-view.c:668
 msgid "Background"
 msgstr "Ֆոն"
 
-#: src/file-manager/fm-desktop-icon-view.c:745
-#: src/file-manager/fm-directory-view.c:7405
-#: src/file-manager/fm-directory-view.c:9099
+#: src/file-manager/fm-desktop-icon-view.c:747
+#: src/file-manager/fm-directory-view.c:7418
+#: src/file-manager/fm-directory-view.c:9113
 msgid "E_mpty Trash"
 msgstr "Դ_ատարկ թափոն զամբյուղ"
 
-#: src/file-manager/fm-desktop-icon-view.c:759
-#: src/file-manager/fm-directory-view.c:7369
+#: src/file-manager/fm-desktop-icon-view.c:761
+#: src/file-manager/fm-directory-view.c:7382
 msgid "Create L_auncher..."
 msgstr "Կերտել գ_ործարկիչ"
 
-#: src/file-manager/fm-desktop-icon-view.c:761
-#: src/file-manager/fm-directory-view.c:7370
+#: src/file-manager/fm-desktop-icon-view.c:763
+#: src/file-manager/fm-directory-view.c:7383
 msgid "Create a new launcher"
 msgstr "Ստեղծել նոր գործարկիչ"
 
-#: src/file-manager/fm-desktop-icon-view.c:768
+#: src/file-manager/fm-desktop-icon-view.c:770
 msgid "Change Desktop _Background"
 msgstr "Փոխել աշխատասեղանի _հետին պլանը"
 
-#: src/file-manager/fm-desktop-icon-view.c:770
+#: src/file-manager/fm-desktop-icon-view.c:772
 msgid ""
 "Show a window that lets you set your desktop background's pattern or color"
 msgstr ""
 "Ցույց տալ պատուհանը, որը ձեզ թույլ է տալիս սահմանել ձեր աշխատանքային սեղանի "
 "հետին պլանի նկարը և գույնը։"
 
-#: src/file-manager/fm-desktop-icon-view.c:777
+#: src/file-manager/fm-desktop-icon-view.c:779
 msgid "Empty Trash"
 msgstr "Դատարկ Աղբարկղ"
 
-#: src/file-manager/fm-desktop-icon-view.c:878
+#: src/file-manager/fm-desktop-icon-view.c:880
 msgid "Desktop View"
 msgstr ""
 
-#: src/file-manager/fm-desktop-icon-view.c:879
-#: src/file-manager/fm-directory-view.c:7649
-#: src/file-manager/fm-directory-view.c:7653
+#: src/file-manager/fm-desktop-icon-view.c:881
+#: src/file-manager/fm-directory-view.c:7662
+#: src/file-manager/fm-directory-view.c:7666
 msgid "_Desktop"
 msgstr "_Աշխատանքային սեղան"
 
-#: src/file-manager/fm-desktop-icon-view.c:880
+#: src/file-manager/fm-desktop-icon-view.c:882
 msgid "The desktop view encountered an error."
 msgstr "Աշխատանքային սեղանի տեսաբերման պրոցեսում սխալ է կատարվել"
 
-#: src/file-manager/fm-desktop-icon-view.c:881
+#: src/file-manager/fm-desktop-icon-view.c:883
 msgid "The desktop view encountered an error while starting up."
 msgstr ""
 "Աշխատանքային սեղանի տեսաբերման պրոցեսում, միացման ժամանակ սխալ է կատարվել"
 
-#: src/file-manager/fm-desktop-icon-view.c:882
+#: src/file-manager/fm-desktop-icon-view.c:884
 msgid "Display this location with the desktop view."
 msgstr ""
 
@@ -6326,44 +6326,44 @@ msgstr "%s%s, %s"
 msgid "%s%s, %s, %s"
 msgstr "%s%s, %s, %s"
 
-#: src/file-manager/fm-directory-view.c:4509
+#: src/file-manager/fm-directory-view.c:4514
 #, c-format
 msgid "Use \"%s\" to open the selected item"
 msgid_plural "Use \"%s\" to open the selected items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:4598
+#: src/file-manager/fm-directory-view.c:4603
 msgid "Open parent location"
 msgstr "Բացել հիմնադրվածք տեղակայությունը"
 
-#: src/file-manager/fm-directory-view.c:4599
+#: src/file-manager/fm-directory-view.c:4604
 msgid "Open parent location for the selected item"
 msgstr "Բացել ընտրված տարրի հիմնադրվածք տեղակայությունը"
 
-#: src/file-manager/fm-directory-view.c:5460
+#: src/file-manager/fm-directory-view.c:5466
 #, c-format
 msgid "Run \"%s\" on any selected items"
 msgstr "Գործարկել \"%s\"–ը ցանկացած ընտրված տարրի համար"
 
-#: src/file-manager/fm-directory-view.c:5712
+#: src/file-manager/fm-directory-view.c:5719
 #, c-format
 msgid "Create Document from template \"%s\""
 msgstr "Կերտել փաստաթուղթ շաբլոնից \"%s\""
 
-#: src/file-manager/fm-directory-view.c:5964
+#: src/file-manager/fm-directory-view.c:5971
 msgid "All executable files in this folder will appear in the Scripts menu."
 msgstr ""
 "Այս պանակի բոլոր գործարկվող ֆայլերը կհայտնվեն Scripts, սցենարներ ցանկի մեջ"
 
-#: src/file-manager/fm-directory-view.c:5966
+#: src/file-manager/fm-directory-view.c:5973
 msgid ""
 "Choosing a script from the menu will run that script with any selected items "
 "as input."
 msgstr ""
 "Ցանկից ընտրելով սցենարները այդ սցենարը կգործարկվի որևէ այլ ընտրված տարրի հետ "
 
-#: src/file-manager/fm-directory-view.c:5968
+#: src/file-manager/fm-directory-view.c:5975
 msgid ""
 "All executable files in this folder will appear in the Scripts menu. "
 "Choosing a script from the menu will run that script.\n"
@@ -6423,19 +6423,19 @@ msgstr ""
 "BAUL_SCRIPT_NEXT_PANE_CURRENT_URI: URI ընթացիկ դիրքի համար բաժանել֊տեսք "
 "պատուհանի ոչ ակտիվ ենթապատուհանի մեջ"
 
-#: src/file-manager/fm-directory-view.c:6038
-#: src/file-manager/fm-tree-view.c:1014
+#: src/file-manager/fm-directory-view.c:6045
+#: src/file-manager/fm-tree-view.c:1019
 #, c-format
 msgid "\"%s\" will be moved if you select the Paste command"
 msgstr "\"%s\" կտեղափոխվի եթե ըտրեք Փակցնել հրամանը"
 
-#: src/file-manager/fm-directory-view.c:6042
-#: src/file-manager/fm-tree-view.c:1020
+#: src/file-manager/fm-directory-view.c:6049
+#: src/file-manager/fm-tree-view.c:1025
 #, c-format
 msgid "\"%s\" will be copied if you select the Paste command"
 msgstr "\"%s\"-ը կպատճենահանվի, եթե դուք ընտրեք զետեղել հրահանգը"
 
-#: src/file-manager/fm-directory-view.c:6049
+#: src/file-manager/fm-directory-view.c:6056
 #, c-format
 msgid "The %'d selected item will be moved if you select the Paste command"
 msgid_plural ""
@@ -6443,7 +6443,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:6056
+#: src/file-manager/fm-directory-view.c:6063
 #, c-format
 msgid "The %'d selected item will be copied if you select the Paste command"
 msgid_plural ""
@@ -6451,153 +6451,153 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:6236
-#: src/file-manager/fm-tree-view.c:1060
+#: src/file-manager/fm-directory-view.c:6249
+#: src/file-manager/fm-tree-view.c:1065
 msgid "There is nothing on the clipboard to paste."
 msgstr "Տվյալների փոխանակման բուֆերում զետեղելու ոչինչ չկա"
 
-#: src/file-manager/fm-directory-view.c:6454
+#: src/file-manager/fm-directory-view.c:6467
 msgid "Unable to unmount location"
 msgstr "Անհնար է չտեղակայել դիրքը"
 
-#: src/file-manager/fm-directory-view.c:6475
+#: src/file-manager/fm-directory-view.c:6488
 msgid "Unable to eject location"
 msgstr "Անհնար է հեռացնել տեղակայությունը"
 
-#: src/file-manager/fm-directory-view.c:6490
+#: src/file-manager/fm-directory-view.c:6503
 msgid "Unable to stop drive"
 msgstr "Անհնար է գործարկումը դադարեցնել"
 
-#: src/file-manager/fm-directory-view.c:7050
+#: src/file-manager/fm-directory-view.c:7063
 #, c-format
 msgid "Connect to Server %s"
 msgstr "Միացնել սերվերին %s"
 
-#: src/file-manager/fm-directory-view.c:7062
-#: src/file-manager/fm-directory-view.c:8311
-#: src/file-manager/fm-directory-view.c:8403
-#: src/file-manager/fm-directory-view.c:8513
+#: src/file-manager/fm-directory-view.c:7075
+#: src/file-manager/fm-directory-view.c:8324
+#: src/file-manager/fm-directory-view.c:8416
+#: src/file-manager/fm-directory-view.c:8526
 msgid "_Connect"
 msgstr "_Միացնել"
 
-#: src/file-manager/fm-directory-view.c:7076
+#: src/file-manager/fm-directory-view.c:7089
 msgid "Link _name:"
 msgstr "Հղում _անուն:"
 
-#: src/file-manager/fm-directory-view.c:7347
+#: src/file-manager/fm-directory-view.c:7360
 msgid "Create _Document"
 msgstr "Ստեղծել _Փաստաթուղթ"
 
-#: src/file-manager/fm-directory-view.c:7348
+#: src/file-manager/fm-directory-view.c:7361
 msgid "Open Wit_h"
 msgstr "Բացել Միասի_ն"
 
-#: src/file-manager/fm-directory-view.c:7349
+#: src/file-manager/fm-directory-view.c:7362
 msgid "Choose a program with which to open the selected item"
 msgstr "Ընտրել ծրագիրը, որով պետք է բացել ընտրված տարրը"
 
-#: src/file-manager/fm-directory-view.c:7351
-#: src/file-manager/fm-directory-view.c:7630
-#: src/file-manager/fm-tree-view.c:1382
+#: src/file-manager/fm-directory-view.c:7364
+#: src/file-manager/fm-directory-view.c:7643
+#: src/file-manager/fm-tree-view.c:1388
 msgid "_Properties"
 msgstr "_Հատկություններ"
 
-#: src/file-manager/fm-directory-view.c:7352
-#: src/file-manager/fm-directory-view.c:9086
+#: src/file-manager/fm-directory-view.c:7365
+#: src/file-manager/fm-directory-view.c:9100
 msgid "View or modify the properties of each selected item"
 msgstr "Տեսաբերել կամ փոփոխել յուրաքանչյուր ընտրված տարրի հատկությունները"
 
-#: src/file-manager/fm-directory-view.c:7359
-#: src/file-manager/fm-tree-view.c:1300
+#: src/file-manager/fm-directory-view.c:7372
+#: src/file-manager/fm-tree-view.c:1306
 msgid "Create _Folder"
 msgstr "Կերտել _պանակ"
 
-#: src/file-manager/fm-directory-view.c:7360
+#: src/file-manager/fm-directory-view.c:7373
 msgid "Create a new empty folder inside this folder"
 msgstr "Այս պանակի մեջ կերտել նոր դատարկ պանակ"
 
-#: src/file-manager/fm-directory-view.c:7362
+#: src/file-manager/fm-directory-view.c:7375
 msgid "No templates installed"
 msgstr "Չտեղադրված կաղապարներ"
 
 #. Translators: this is used to indicate that a file doesn't contain anything
 #. label, accelerator
-#: src/file-manager/fm-directory-view.c:7365
+#: src/file-manager/fm-directory-view.c:7378
 msgid "_Empty File"
 msgstr "_Դատարկ ֆայլ"
 
-#: src/file-manager/fm-directory-view.c:7366
+#: src/file-manager/fm-directory-view.c:7379
 msgid "Create a new empty file inside this folder"
 msgstr "Կերտել նոր դատարկ ֆայլ այս պանակի մեջ"
 
-#: src/file-manager/fm-directory-view.c:7374
+#: src/file-manager/fm-directory-view.c:7387
 msgid "Open the selected item in this window"
 msgstr "Այս պատուհանում բացել ընտրված տարրը"
 
-#: src/file-manager/fm-directory-view.c:7381
-#: src/file-manager/fm-directory-view.c:7562
+#: src/file-manager/fm-directory-view.c:7394
+#: src/file-manager/fm-directory-view.c:7575
 msgid "Open in Navigation Window"
 msgstr "Բացել նավիգացիոն պատուհանը"
 
-#: src/file-manager/fm-directory-view.c:7382
+#: src/file-manager/fm-directory-view.c:7395
 msgid "Open each selected item in a navigation window"
 msgstr "Յուրաքանչյուր ընտրված տարր բացել նավիգացիոն պատուհանում"
 
-#: src/file-manager/fm-directory-view.c:7386
+#: src/file-manager/fm-directory-view.c:7399
 msgid "Open each selected item in a new tab"
 msgstr "Յուրաքանչյուր ընտրված տարր բացել նոր էջում"
 
-#: src/file-manager/fm-directory-view.c:7389
-#: src/file-manager/fm-directory-view.c:7571
+#: src/file-manager/fm-directory-view.c:7402
+#: src/file-manager/fm-directory-view.c:7584
 msgid "Open in _Folder Window"
 msgstr "Բացել _Թղթապանակի Պատուհանի մեջ"
 
-#: src/file-manager/fm-directory-view.c:7390
+#: src/file-manager/fm-directory-view.c:7403
 msgid "Open each selected item in a folder window"
 msgstr "Բացել յուրաքանչյուր ընտրված տարրը մի թղթապանակի պատուհանից"
 
-#: src/file-manager/fm-directory-view.c:7393
+#: src/file-manager/fm-directory-view.c:7406
 msgid "Other _Application..."
 msgstr "Այլ _Դիմում ..."
 
-#: src/file-manager/fm-directory-view.c:7394
-#: src/file-manager/fm-directory-view.c:7398
+#: src/file-manager/fm-directory-view.c:7407
+#: src/file-manager/fm-directory-view.c:7411
 msgid "Choose another application with which to open the selected item"
 msgstr "Ընտրել այլ կիրառական ծրագիր,որով բացել ընտրված տարրը"
 
-#: src/file-manager/fm-directory-view.c:7397
+#: src/file-manager/fm-directory-view.c:7410
 msgid "Open With Other _Application..."
 msgstr "Բացել մեկ այլ _Ծրագիր..."
 
-#: src/file-manager/fm-directory-view.c:7401
+#: src/file-manager/fm-directory-view.c:7414
 msgid "_Open Scripts Folder"
 msgstr "_Բացել սցենարների պանակը"
 
-#: src/file-manager/fm-directory-view.c:7402
+#: src/file-manager/fm-directory-view.c:7415
 msgid "Show the folder containing the scripts that appear in this menu"
 msgstr "Ցույց տալ այս ցանկի մեջ հայտնվող սցենարները պարունակող պանակը"
 
-#: src/file-manager/fm-directory-view.c:7410
+#: src/file-manager/fm-directory-view.c:7423
 msgid "Prepare the selected files to be moved with a Paste command"
 msgstr "Պատրաստել ընտրված ֆայլերը, որոնք պետք է տեղափոխել զետեղել հրահանգով"
 
-#: src/file-manager/fm-directory-view.c:7414
+#: src/file-manager/fm-directory-view.c:7427
 msgid "Prepare the selected files to be copied with a Paste command"
 msgstr "Պատրաստել ընտրված ֆայլերը, որոնք պետք է պատճենել զետեղել հրահանգով"
 
-#: src/file-manager/fm-directory-view.c:7418
+#: src/file-manager/fm-directory-view.c:7431
 msgid "Move or copy files previously selected by a Cut or Copy command"
 msgstr ""
 "Տեղափոխել կամ պատճենել ֆայլերը, որոնք նախկինում ընտրվել են կտրել կամ "
 "պատճենել հրահանգներով"
 
-#: src/file-manager/fm-directory-view.c:7423
-#: src/file-manager/fm-directory-view.c:7584
-#: src/file-manager/fm-tree-view.c:1329
+#: src/file-manager/fm-directory-view.c:7436
+#: src/file-manager/fm-directory-view.c:7597
+#: src/file-manager/fm-tree-view.c:1335
 msgid "_Paste Into Folder"
 msgstr "_Զետեղել պանակի մեջ"
 
-#: src/file-manager/fm-directory-view.c:7424
+#: src/file-manager/fm-directory-view.c:7437
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into the "
 "selected folder"
@@ -6605,208 +6605,208 @@ msgstr ""
 "Տեղափոխել կամ պատճենել ֆայլերը, որոնք նախկինում ընտրվել են կտրել կամ "
 "պատճենել հրահանգներով ընտրված պանակների մեջ"
 
-#: src/file-manager/fm-directory-view.c:7426
+#: src/file-manager/fm-directory-view.c:7439
 msgid "Cop_y to"
 msgstr "Պատճենել"
 
-#: src/file-manager/fm-directory-view.c:7427
+#: src/file-manager/fm-directory-view.c:7440
 msgid "M_ove to"
 msgstr "Տեղափոխել"
 
-#: src/file-manager/fm-directory-view.c:7430
+#: src/file-manager/fm-directory-view.c:7443
 msgid "Select all items in this window"
 msgstr "Ընտրել այս պատուհանի բոլոր տարրերը"
 
-#: src/file-manager/fm-directory-view.c:7433
+#: src/file-manager/fm-directory-view.c:7446
 msgid "Select I_tems Matching..."
 msgstr "Ընտրել համապատասխան Տարրերը..."
 
-#: src/file-manager/fm-directory-view.c:7434
+#: src/file-manager/fm-directory-view.c:7447
 msgid "Select items in this window matching a given pattern"
 msgstr "Ընտրել տարրը այս պատուհանում, որը համաատասխանում է տվյալ նմուշին"
 
-#: src/file-manager/fm-directory-view.c:7437
+#: src/file-manager/fm-directory-view.c:7450
 msgid "_Invert Selection"
 msgstr "_Շրջել Ընտրությունը"
 
-#: src/file-manager/fm-directory-view.c:7438
+#: src/file-manager/fm-directory-view.c:7451
 msgid "Select all and only the items that are not currently selected"
 msgstr "Ընտրել բոլոր և միայն այն տարրերը որոնք ներկայումս ընտրված չեն"
 
-#: src/file-manager/fm-directory-view.c:7441
+#: src/file-manager/fm-directory-view.c:7454
 msgid "D_uplicate"
 msgstr "կրկն_օրինակել"
 
-#: src/file-manager/fm-directory-view.c:7442
+#: src/file-manager/fm-directory-view.c:7455
 msgid "Duplicate each selected item"
 msgstr "Կրկնօրինակել յուրաքանչյուր ընտրված տարր"
 
-#: src/file-manager/fm-directory-view.c:7445
-#: src/file-manager/fm-directory-view.c:9070
+#: src/file-manager/fm-directory-view.c:7458
+#: src/file-manager/fm-directory-view.c:9084
 msgid "Ma_ke Link"
 msgid_plural "Ma_ke Links"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:7446
+#: src/file-manager/fm-directory-view.c:7459
 msgid "Create a symbolic link for each selected item"
 msgstr "Կերտել սիմվոլիկ հղում յուրաքանչյուր ընտրված տարրի համար"
 
-#: src/file-manager/fm-directory-view.c:7449
+#: src/file-manager/fm-directory-view.c:7462
 msgid "_Rename..."
 msgstr "_Վերանվանել"
 
-#: src/file-manager/fm-directory-view.c:7450
+#: src/file-manager/fm-directory-view.c:7463
 msgid "Rename selected item"
 msgstr "Վերանվանել ընտրված տարրը"
 
-#: src/file-manager/fm-directory-view.c:7458
-#: src/file-manager/fm-directory-view.c:9031
+#: src/file-manager/fm-directory-view.c:7471
+#: src/file-manager/fm-directory-view.c:9045
 msgid "Move each selected item to the Trash"
 msgstr "Տեղափոխել յուրաքանչյուր ընտրված տարր թափոն զամբյուղի մեջ"
 
-#: src/file-manager/fm-directory-view.c:7462
+#: src/file-manager/fm-directory-view.c:7475
 msgid "Delete each selected item, without moving to the Trash"
 msgstr ""
 "Հեռացնել յուրաքանչյուր ընտրված տարր առանց թափոն զամբյուղի մեջ տեղափոխելու"
 
-#: src/file-manager/fm-directory-view.c:7465
-#: src/file-manager/fm-directory-view.c:7597
+#: src/file-manager/fm-directory-view.c:7478
+#: src/file-manager/fm-directory-view.c:7610
 msgid "_Restore"
 msgstr "_Վերականգնել"
 
-#: src/file-manager/fm-directory-view.c:7469
+#: src/file-manager/fm-directory-view.c:7482
 msgid "_Undo"
 msgstr "_Հետադարձել"
 
-#: src/file-manager/fm-directory-view.c:7470
-#: src/file-manager/fm-directory-view.c:11247
+#: src/file-manager/fm-directory-view.c:7483
+#: src/file-manager/fm-directory-view.c:11264
 msgid "Undo the last action"
 msgstr "Հետադարձել վերջին գործողությունը"
 
-#: src/file-manager/fm-directory-view.c:7473
+#: src/file-manager/fm-directory-view.c:7486
 msgid "_Redo"
 msgstr "_Կրկնել"
 
-#: src/file-manager/fm-directory-view.c:7474
-#: src/file-manager/fm-directory-view.c:11265
+#: src/file-manager/fm-directory-view.c:7487
+#: src/file-manager/fm-directory-view.c:11282
 msgid "Redo the last undone action"
 msgstr "Կրկնել վերջին չարված գործողությունը"
 
-#: src/file-manager/fm-directory-view.c:7484
+#: src/file-manager/fm-directory-view.c:7497
 msgid "Reset View to _Defaults"
 msgstr "Տեսաբերումը կրկնակի միացնել ըստ _նախնականի"
 
-#: src/file-manager/fm-directory-view.c:7485
+#: src/file-manager/fm-directory-view.c:7498
 msgid "Reset sorting order and zoom level to match preferences for this view"
 msgstr ""
 "Տեսակավորման կարգը և պատկերման մասշտաբի մակարդակը համապատասպանեցնել այս "
 "տեսաբերման պարամետրերին։"
 
-#: src/file-manager/fm-directory-view.c:7488
+#: src/file-manager/fm-directory-view.c:7501
 msgid "Connect To This Server"
 msgstr "Միանալ այս սերվերին"
 
-#: src/file-manager/fm-directory-view.c:7489
+#: src/file-manager/fm-directory-view.c:7502
 msgid "Make a permanent connection to this server"
 msgstr "Կատարել մշտական միացում այս սերվերի հետ"
 
-#: src/file-manager/fm-directory-view.c:7493
+#: src/file-manager/fm-directory-view.c:7506
 msgid "Mount the selected volume"
 msgstr "Միացնել ընտրված հատորը"
 
-#: src/file-manager/fm-directory-view.c:7497
+#: src/file-manager/fm-directory-view.c:7510
 msgid "Unmount the selected volume"
 msgstr "Անջատել ընտրված հատորը"
 
-#: src/file-manager/fm-directory-view.c:7501
+#: src/file-manager/fm-directory-view.c:7514
 msgid "Eject the selected volume"
 msgstr "Դուրս բերել ընտրված հատորը"
 
-#: src/file-manager/fm-directory-view.c:7505
+#: src/file-manager/fm-directory-view.c:7518
 msgid "Format the selected volume"
 msgstr "Ընտրված հատորի Ֆորմատը"
 
-#: src/file-manager/fm-directory-view.c:7509
+#: src/file-manager/fm-directory-view.c:7522
 msgid "Start the selected volume"
 msgstr "Սկսել ընտրված ուժգնությունը"
 
-#: src/file-manager/fm-directory-view.c:7513
-#: src/file-manager/fm-directory-view.c:8535
+#: src/file-manager/fm-directory-view.c:7526
+#: src/file-manager/fm-directory-view.c:8548
 msgid "Stop the selected volume"
 msgstr "Դադարեցնել ընտրված ուժգնությունը"
 
-#: src/file-manager/fm-directory-view.c:7517
-#: src/file-manager/fm-directory-view.c:7545
-#: src/file-manager/fm-directory-view.c:7626
+#: src/file-manager/fm-directory-view.c:7530
+#: src/file-manager/fm-directory-view.c:7558
+#: src/file-manager/fm-directory-view.c:7639
 msgid "Detect media in the selected drive"
 msgstr "Հայտնաբերել լրատվամիջոցները ընտրված սարքում"
 
-#: src/file-manager/fm-directory-view.c:7521
+#: src/file-manager/fm-directory-view.c:7534
 msgid "Mount the volume associated with the open folder"
 msgstr "Տեղադրել ծավալի հետ կապված բաց թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7525
+#: src/file-manager/fm-directory-view.c:7538
 msgid "Unmount the volume associated with the open folder"
 msgstr "Ապամոնտաժել ծավալի հետ կապված բաց թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7529
+#: src/file-manager/fm-directory-view.c:7542
 msgid "Eject the volume associated with the open folder"
 msgstr "Խմբագրել ծավալի հետ կապված բաց թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7533
+#: src/file-manager/fm-directory-view.c:7546
 msgid "Format the volume associated with the open folder"
 msgstr "Ֆորմատավորել ծավալի հետ կապված բաց թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7537
+#: src/file-manager/fm-directory-view.c:7550
 msgid "Start the volume associated with the open folder"
 msgstr "Սկսել ծավալի հետ կապված բաց թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7541
+#: src/file-manager/fm-directory-view.c:7554
 msgid "Stop the volume associated with the open folder"
 msgstr "Դադարեցնել ծավալի հետ կապված բաց թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7548
+#: src/file-manager/fm-directory-view.c:7561
 msgid "Open File and Close window"
 msgstr "Բացել ֆայլը և փակել պատուհանը"
 
-#: src/file-manager/fm-directory-view.c:7552
+#: src/file-manager/fm-directory-view.c:7565
 msgid "Sa_ve Search"
 msgstr "Պա_հպանել Որոնումը"
 
-#: src/file-manager/fm-directory-view.c:7553
+#: src/file-manager/fm-directory-view.c:7566
 msgid "Save the edited search"
 msgstr "Պահպանել խմբագրված որոնումը"
 
-#: src/file-manager/fm-directory-view.c:7556
+#: src/file-manager/fm-directory-view.c:7569
 msgid "Sa_ve Search As..."
 msgstr "Պահպանել Որոնումը Որպես..."
 
-#: src/file-manager/fm-directory-view.c:7557
+#: src/file-manager/fm-directory-view.c:7570
 msgid "Save the current search as a file"
 msgstr "Պահպանել ներկայիս որոնումը որպես ֆայլ"
 
-#: src/file-manager/fm-directory-view.c:7563
+#: src/file-manager/fm-directory-view.c:7576
 msgid "Open this folder in a navigation window"
 msgstr "Բացել այս պանակը նավիգացիոն պատուհանում"
 
-#: src/file-manager/fm-directory-view.c:7567
+#: src/file-manager/fm-directory-view.c:7580
 msgid "Open this folder in a new tab"
 msgstr "Բացել այս թղթապանակը նոր էջանիշից"
 
-#: src/file-manager/fm-directory-view.c:7572
+#: src/file-manager/fm-directory-view.c:7585
 msgid "Open this folder in a folder window"
 msgstr "Բացել այս թղթապանակը թղթապանակի պատուհանից"
 
-#: src/file-manager/fm-directory-view.c:7577
+#: src/file-manager/fm-directory-view.c:7590
 msgid "Prepare this folder to be moved with a Paste command"
 msgstr "Պատրաստել այս պանակը, որը պետք է հեռացվի զետեղել հրահանգով"
 
-#: src/file-manager/fm-directory-view.c:7581
+#: src/file-manager/fm-directory-view.c:7594
 msgid "Prepare this folder to be copied with a Paste command"
 msgstr "Պատրաստել այս պանակը, որը պետք է պատճենվի զետեղել հրահանգով"
 
-#: src/file-manager/fm-directory-view.c:7585
+#: src/file-manager/fm-directory-view.c:7598
 msgid ""
 "Move or copy files previously selected by a Cut or Copy command into this "
 "folder"
@@ -6814,377 +6814,377 @@ msgstr ""
 "Տեղափոխել կամ պատճենել ֆայլերը, որոնք նախկինում ընտրվել են կտրել կամ "
 "պատճենել հրահանգներով ընտրված պանակների մեջ"
 
-#: src/file-manager/fm-directory-view.c:7590
+#: src/file-manager/fm-directory-view.c:7603
 msgid "Move this folder to the Trash"
 msgstr "Տեղափոխել այս պանակը թափոն զամբյուղի մեջ"
 
-#: src/file-manager/fm-directory-view.c:7594
+#: src/file-manager/fm-directory-view.c:7607
 msgid "Delete this folder, without moving to the Trash"
 msgstr "Հեռացնել այս պանակը առանց տեղափոխելու թափոն զամբյուղի մեջ"
 
-#: src/file-manager/fm-directory-view.c:7602
+#: src/file-manager/fm-directory-view.c:7615
 msgid "Mount the volume associated with this folder"
 msgstr "Տեղադրել ձայնի հետ կապված այս թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7606
+#: src/file-manager/fm-directory-view.c:7619
 msgid "Unmount the volume associated with this folder"
 msgstr "Ապատեղադրել ձայնի հետ կապված այս թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7610
+#: src/file-manager/fm-directory-view.c:7623
 msgid "Eject the volume associated with this folder"
 msgstr "Մերժել ձայնի հետ կապված այս թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7614
+#: src/file-manager/fm-directory-view.c:7627
 msgid "Format the volume associated with this folder"
 msgstr "Ֆորմատավորել ձայնի հետ կապված այս թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7618
+#: src/file-manager/fm-directory-view.c:7631
 msgid "Start the volume associated with this folder"
 msgstr "Սկսել ձայնի հետ կապված այս թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7622
+#: src/file-manager/fm-directory-view.c:7635
 msgid "Stop the volume associated with this folder"
 msgstr "Դադարեցնել ձայնի հետ կապված այս թղթապանակը"
 
-#: src/file-manager/fm-directory-view.c:7631
+#: src/file-manager/fm-directory-view.c:7644
 msgid "View or modify the properties of this folder"
 msgstr "Դիտել կամ փոփոխել այս թղթապանակի հատկությունները"
 
-#: src/file-manager/fm-directory-view.c:7634
-#: src/file-manager/fm-directory-view.c:7637
+#: src/file-manager/fm-directory-view.c:7647
+#: src/file-manager/fm-directory-view.c:7650
 msgid "_Other pane"
 msgstr "_Այլ վահանակ"
 
-#: src/file-manager/fm-directory-view.c:7635
+#: src/file-manager/fm-directory-view.c:7648
 msgid "Copy the current selection to the other pane in the window"
 msgstr "Պատճենել ընթացիկ ընտրությունը դեպի այլ վահանակ պատուհանի մեջ"
 
-#: src/file-manager/fm-directory-view.c:7638
+#: src/file-manager/fm-directory-view.c:7651
 msgid "Move the current selection to the other pane in the window"
 msgstr "Տեղափոխել ընթացիկ ընտրությունը դեպի այլ վահանակ պատուհանի մեջ"
 
-#: src/file-manager/fm-directory-view.c:7642
+#: src/file-manager/fm-directory-view.c:7655
 msgid "Copy the current selection to the home folder"
 msgstr "Պատճենել ընթացիկ ընտրությունը դեպի տուն թղթապանակ"
 
-#: src/file-manager/fm-directory-view.c:7646
+#: src/file-manager/fm-directory-view.c:7659
 msgid "Move the current selection to the home folder"
 msgstr "Տեղափոխել ընթացիկ ընտրությունը դեպի տուն թղթապանակ"
 
-#: src/file-manager/fm-directory-view.c:7650
+#: src/file-manager/fm-directory-view.c:7663
 msgid "Copy the current selection to the desktop"
 msgstr "Պատճենել ընթացիկ ընտրությունը աշխատասեղանի վրա"
 
-#: src/file-manager/fm-directory-view.c:7654
+#: src/file-manager/fm-directory-view.c:7667
 msgid "Move the current selection to the desktop"
 msgstr "Տեզափոխել է ընթացիկ ընտրությունը աշխատասեղանի վրա"
 
 #. Translators: %s is a directory
-#: src/file-manager/fm-directory-view.c:7740
+#: src/file-manager/fm-directory-view.c:7753
 #, c-format
 msgid "Run or manage scripts from %s"
 msgstr "Գործարկել կամ կառավարել %s–օ սցենարները"
 
-#: src/file-manager/fm-directory-view.c:7742
+#: src/file-manager/fm-directory-view.c:7755
 msgid "_Scripts"
 msgstr "_Սցենարներ"
 
-#: src/file-manager/fm-directory-view.c:8151
+#: src/file-manager/fm-directory-view.c:8164
 #, c-format
 msgid "Move the open folder out of the trash to \"%s\""
 msgstr "Տեղափոխել բաց թղթապանակը զամբյուղից դեպի \"%s\""
 
-#: src/file-manager/fm-directory-view.c:8154
+#: src/file-manager/fm-directory-view.c:8167
 #, c-format
 msgid "Move the selected folder out of the trash to \"%s\""
 msgid_plural "Move the selected folders out of the trash to \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8158
+#: src/file-manager/fm-directory-view.c:8171
 msgid "Move the selected folder out of the trash"
 msgid_plural "Move the selected folders out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8164
+#: src/file-manager/fm-directory-view.c:8177
 #, c-format
 msgid "Move the selected file out of the trash to \"%s\""
 msgid_plural "Move the selected files out of the trash to \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8168
+#: src/file-manager/fm-directory-view.c:8181
 msgid "Move the selected file out of the trash"
 msgid_plural "Move the selected files out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8174
+#: src/file-manager/fm-directory-view.c:8187
 #, c-format
 msgid "Move the selected item out of the trash to \"%s\""
 msgid_plural "Move the selected items out of the trash to \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8178
+#: src/file-manager/fm-directory-view.c:8191
 msgid "Move the selected item out of the trash"
 msgid_plural "Move the selected items out of the trash"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8304
-#: src/file-manager/fm-directory-view.c:8308
-#: src/file-manager/fm-directory-view.c:8506
-#: src/file-manager/fm-directory-view.c:8510
+#: src/file-manager/fm-directory-view.c:8317
+#: src/file-manager/fm-directory-view.c:8321
+#: src/file-manager/fm-directory-view.c:8519
+#: src/file-manager/fm-directory-view.c:8523
 msgid "Start the selected drive"
 msgstr "Սկսել ընտրված սարքը"
 
-#: src/file-manager/fm-directory-view.c:8312
-#: src/file-manager/fm-directory-view.c:8514
+#: src/file-manager/fm-directory-view.c:8325
+#: src/file-manager/fm-directory-view.c:8527
 msgid "Connect to the selected drive"
 msgstr "Միացնել ընտրված սարքը"
 
-#: src/file-manager/fm-directory-view.c:8315
-#: src/file-manager/fm-directory-view.c:8407
-#: src/file-manager/fm-directory-view.c:8517
+#: src/file-manager/fm-directory-view.c:8328
+#: src/file-manager/fm-directory-view.c:8420
+#: src/file-manager/fm-directory-view.c:8530
 msgid "_Start Multi-disk Drive"
 msgstr "_Սկսել Բազմասկավառակ Սարքը"
 
-#: src/file-manager/fm-directory-view.c:8316
-#: src/file-manager/fm-directory-view.c:8518
+#: src/file-manager/fm-directory-view.c:8329
+#: src/file-manager/fm-directory-view.c:8531
 msgid "Start the selected multi-disk drive"
 msgstr "Սկսել ընտրված բազմասկավառակ սարքը"
 
-#: src/file-manager/fm-directory-view.c:8319
+#: src/file-manager/fm-directory-view.c:8332
 msgid "U_nlock Drive"
 msgstr "Ապաարգելափակել Սարքը"
 
-#: src/file-manager/fm-directory-view.c:8320
-#: src/file-manager/fm-directory-view.c:8522
+#: src/file-manager/fm-directory-view.c:8333
+#: src/file-manager/fm-directory-view.c:8535
 msgid "Unlock the selected drive"
 msgstr "Ապաարգելափակել ընտրված սարքը"
 
-#: src/file-manager/fm-directory-view.c:8333
+#: src/file-manager/fm-directory-view.c:8346
 msgid "Stop the selected drive"
 msgstr "Դադարեցնել ընտրված սարքը"
 
-#: src/file-manager/fm-directory-view.c:8337
-#: src/file-manager/fm-directory-view.c:8539
+#: src/file-manager/fm-directory-view.c:8350
+#: src/file-manager/fm-directory-view.c:8552
 msgid "Safely remove the selected drive"
 msgstr "Ապահով կերպով հեռացնել ընտրված սարքը"
 
-#: src/file-manager/fm-directory-view.c:8340
-#: src/file-manager/fm-directory-view.c:8432
-#: src/file-manager/fm-directory-view.c:8542
+#: src/file-manager/fm-directory-view.c:8353
+#: src/file-manager/fm-directory-view.c:8445
+#: src/file-manager/fm-directory-view.c:8555
 msgid "_Disconnect"
 msgstr "_Անջատել"
 
-#: src/file-manager/fm-directory-view.c:8341
-#: src/file-manager/fm-directory-view.c:8543
+#: src/file-manager/fm-directory-view.c:8354
+#: src/file-manager/fm-directory-view.c:8556
 msgid "Disconnect the selected drive"
 msgstr "Անջատել ընդրված սարքը"
 
-#: src/file-manager/fm-directory-view.c:8344
-#: src/file-manager/fm-directory-view.c:8436
-#: src/file-manager/fm-directory-view.c:8546
+#: src/file-manager/fm-directory-view.c:8357
+#: src/file-manager/fm-directory-view.c:8449
+#: src/file-manager/fm-directory-view.c:8559
 msgid "_Stop Multi-disk Drive"
 msgstr "_Կանգնեցնել Բազմասկավառակային Սարքը"
 
-#: src/file-manager/fm-directory-view.c:8345
-#: src/file-manager/fm-directory-view.c:8547
+#: src/file-manager/fm-directory-view.c:8358
+#: src/file-manager/fm-directory-view.c:8560
 msgid "Stop the selected multi-disk drive"
 msgstr "Դադարեցնել ընտրված բազմասկավառակ սկավառակատարը"
 
-#: src/file-manager/fm-directory-view.c:8349
-#: src/file-manager/fm-directory-view.c:8551
+#: src/file-manager/fm-directory-view.c:8362
+#: src/file-manager/fm-directory-view.c:8564
 msgid "Lock the selected drive"
 msgstr "Արգելափակել ընտրված սկավառակատարը"
 
-#: src/file-manager/fm-directory-view.c:8396
-#: src/file-manager/fm-directory-view.c:8400
+#: src/file-manager/fm-directory-view.c:8409
+#: src/file-manager/fm-directory-view.c:8413
 msgid "Start the drive associated with the open folder"
 msgstr "Սկսել ասոցացված սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8404
+#: src/file-manager/fm-directory-view.c:8417
 msgid "Connect to the drive associated with the open folder"
 msgstr "Միացնել բազմասկավառակ ասոցացված սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8408
+#: src/file-manager/fm-directory-view.c:8421
 msgid "Start the multi-disk drive associated with the open folder"
 msgstr "Սկսել բազմասկավառակ ասոցացված սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8412
+#: src/file-manager/fm-directory-view.c:8425
 msgid "Unlock the drive associated with the open folder"
 msgstr "Բացել ասոցացված սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8425
+#: src/file-manager/fm-directory-view.c:8438
 msgid "_Stop the drive associated with the open folder"
 msgstr "_Կանգնեցնել ասոցացված սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8429
+#: src/file-manager/fm-directory-view.c:8442
 msgid "Safely remove the drive associated with the open folder"
 msgstr "Ապահով կերպով հեռացնել ասոցացված սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8433
+#: src/file-manager/fm-directory-view.c:8446
 msgid "Disconnect the drive associated with the open folder"
 msgstr "Անջատել ասոցացված սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8437
+#: src/file-manager/fm-directory-view.c:8450
 msgid "Stop the multi-disk drive associated with the open folder"
 msgstr "Կանգնեցնել ասոցացված բազմասկավառակ սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8441
+#: src/file-manager/fm-directory-view.c:8454
 msgid "Lock the drive associated with the open folder"
 msgstr "Արգելափակել ասոցացված սկավառակատարը բաց թղթապանակով"
 
-#: src/file-manager/fm-directory-view.c:8622
-#: src/file-manager/fm-directory-view.c:8946
+#: src/file-manager/fm-directory-view.c:8635
+#: src/file-manager/fm-directory-view.c:8960
 msgid "Browse in New _Window"
 msgstr "Փնտրել նոր _Պատուհանում"
 
-#: src/file-manager/fm-directory-view.c:8628
-#: src/file-manager/fm-directory-view.c:8956
+#: src/file-manager/fm-directory-view.c:8641
+#: src/file-manager/fm-directory-view.c:8970
 msgid "_Browse Folder"
 msgid_plural "_Browse Folders"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8645
-#: src/file-manager/fm-directory-view.c:8985
+#: src/file-manager/fm-directory-view.c:8658
+#: src/file-manager/fm-directory-view.c:8999
 msgid "Browse in New _Tab"
 msgstr "Փնտրել Նոր _Էջ"
 
-#: src/file-manager/fm-directory-view.c:8694
-#: src/file-manager/fm-directory-view.c:9026
+#: src/file-manager/fm-directory-view.c:8707
+#: src/file-manager/fm-directory-view.c:9040
 msgid "_Delete Permanently"
 msgstr "_Ջնջել մշտապես"
 
-#: src/file-manager/fm-directory-view.c:8695
+#: src/file-manager/fm-directory-view.c:8708
 msgid "Delete the open folder permanently"
 msgstr "Հեռացնել բաց պանակը շարունակաբար"
 
-#: src/file-manager/fm-directory-view.c:8699
+#: src/file-manager/fm-directory-view.c:8712
 msgid "Move the open folder to the Trash"
 msgstr "Տեղափոխել բաց պանակը թափոն զամբյուղի մեջ"
 
-#: src/file-manager/fm-directory-view.c:8886
+#: src/file-manager/fm-directory-view.c:8900
 #, c-format
 msgid "_Open With %s"
 msgstr "_Բացել Միասին %s"
 
-#: src/file-manager/fm-directory-view.c:8939
+#: src/file-manager/fm-directory-view.c:8953
 #, c-format
 msgid "Open in %'d New _Window"
 msgid_plural "Open in %'d New _Windows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8948
+#: src/file-manager/fm-directory-view.c:8962
 #, c-format
 msgid "Browse in %'d New _Window"
 msgid_plural "Browse in %'d New _Windows"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8978
+#: src/file-manager/fm-directory-view.c:8992
 #, c-format
 msgid "Open in %'d New _Tab"
 msgid_plural "Open in %'d New _Tabs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:8987
+#: src/file-manager/fm-directory-view.c:9001
 #, c-format
 msgid "Browse in %'d New _Tab"
 msgid_plural "Browse in %'d New _Tabs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-directory-view.c:9027
+#: src/file-manager/fm-directory-view.c:9041
 msgid "Delete all selected items permanently"
 msgstr "Բոլոր ընտրված տարրերը շարունակաբար հեռացնել"
 
-#: src/file-manager/fm-directory-view.c:9084
+#: src/file-manager/fm-directory-view.c:9098
 msgid "View or modify the properties of the open folder"
 msgstr "Տեսաբերել կամ փոփոխել բաց պանակի հատկությունները"
 
-#: src/file-manager/fm-directory-view.c:10385
+#: src/file-manager/fm-directory-view.c:10400
 msgid "Download location?"
 msgstr "Ներբեռնե՞լ տեղակայությունը"
 
-#: src/file-manager/fm-directory-view.c:10388
+#: src/file-manager/fm-directory-view.c:10403
 msgid "You can download it or make a link to it."
 msgstr "Դուք կարող եք ներբեռնել այն կամ հղում կատարել դրան"
 
-#: src/file-manager/fm-directory-view.c:10391
+#: src/file-manager/fm-directory-view.c:10406
 msgid "Make a _Link"
 msgstr "Կերտել _հղում"
 
-#: src/file-manager/fm-directory-view.c:10398
+#: src/file-manager/fm-directory-view.c:10413
 msgid "_Download"
 msgstr "_Ներբեռնում"
 
-#: src/file-manager/fm-directory-view.c:10555
-#: src/file-manager/fm-directory-view.c:10614
-#: src/file-manager/fm-directory-view.c:10727
+#: src/file-manager/fm-directory-view.c:10570
+#: src/file-manager/fm-directory-view.c:10629
+#: src/file-manager/fm-directory-view.c:10742
 msgid "Drag and drop is not supported."
 msgstr "Քաշել և նետելը աջակցում չունի"
 
-#: src/file-manager/fm-directory-view.c:10556
+#: src/file-manager/fm-directory-view.c:10571
 msgid "Drag and drop is only supported on local file systems."
 msgstr "Քաշել և նետելը աջակցում ունի միայն տեղային ֆայլերի համակարգում"
 
-#: src/file-manager/fm-directory-view.c:10615
-#: src/file-manager/fm-directory-view.c:10728
+#: src/file-manager/fm-directory-view.c:10630
+#: src/file-manager/fm-directory-view.c:10743
 msgid "An invalid drag type was used."
 msgstr "Ահնամապատասխան քաշել տեսակ է օգտագործվել"
 
 #. Translators: This is the filename used for when you dnd text to a directory
-#: src/file-manager/fm-directory-view.c:10805
+#: src/file-manager/fm-directory-view.c:10820
 msgid "dropped text.txt"
 msgstr "Կրճատված text.txt"
 
 #. Translators: This is the filename used for when you dnd raw
 #. * data to a directory, if the source didn't supply a name.
 #.
-#: src/file-manager/fm-directory-view.c:10851
+#: src/file-manager/fm-directory-view.c:10866
 msgid "dropped data"
 msgstr "Կրճատված տվյալներ"
 
-#: src/file-manager/fm-directory-view.c:11246
+#: src/file-manager/fm-directory-view.c:11263
 msgid "Undo"
 msgstr "Ետ շրջել"
 
-#: src/file-manager/fm-directory-view.c:11264
+#: src/file-manager/fm-directory-view.c:11281
 msgid "Redo"
 msgstr "Կրկնել"
 
-#: src/file-manager/fm-ditem-page.c:440 src/file-manager/fm-ditem-page.c:452
+#: src/file-manager/fm-ditem-page.c:446 src/file-manager/fm-ditem-page.c:458
 msgid "Comment"
 msgstr "Մեկնաբանություն"
 
-#: src/file-manager/fm-ditem-page.c:443
+#: src/file-manager/fm-ditem-page.c:449
 msgid "URL"
 msgstr "URL"
 
-#: src/file-manager/fm-ditem-page.c:455
+#: src/file-manager/fm-ditem-page.c:461
 msgid "Command"
 msgstr "Հրահանգ"
 
-#: src/file-manager/fm-empty-view.c:397 src/file-manager/fm-empty-view.c:399
+#: src/file-manager/fm-empty-view.c:407 src/file-manager/fm-empty-view.c:409
 msgid "Empty View"
 msgstr ""
 
-#: src/file-manager/fm-empty-view.c:398
+#: src/file-manager/fm-empty-view.c:408
 msgid "_Empty"
 msgstr ""
 
-#: src/file-manager/fm-empty-view.c:400
+#: src/file-manager/fm-empty-view.c:410
 msgid "The empty view encountered an error."
 msgstr ""
 
-#: src/file-manager/fm-empty-view.c:401
+#: src/file-manager/fm-empty-view.c:411
 msgid "Display this location with the empty view."
 msgstr ""
 
@@ -7287,7 +7287,7 @@ msgstr "Ներեցեք, հնաչրավոր չէ փոխել թույլտվութ�
 msgid "The permissions could not be changed."
 msgstr "Թույլտվությունները փոխել հնարավոր չէ"
 
-#: src/file-manager/fm-error-reporting.c:366
+#: src/file-manager/fm-error-reporting.c:368
 #, c-format
 msgid "Renaming \"%s\" to \"%s\"."
 msgstr "Վերանվանում \"%s\"ից \"%s\"–ի"
@@ -7296,7 +7296,7 @@ msgstr "Վերանվանում \"%s\"ից \"%s\"–ի"
 msgid "by _Name"
 msgstr "Ըստ _անվան"
 
-#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1750
+#: src/file-manager/fm-icon-view.c:131 src/file-manager/fm-icon-view.c:1752
 msgid "Keep icons sorted by name in rows"
 msgstr "Պատկերակները պահել տողերով՝ տեսակավորված ըստ անվան"
 
@@ -7304,7 +7304,7 @@ msgstr "Պատկերակները պահել տողերով՝ տեսակավոր�
 msgid "by _Size"
 msgstr "Ըստ _չափսի"
 
-#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1756
+#: src/file-manager/fm-icon-view.c:138 src/file-manager/fm-icon-view.c:1758
 msgid "Keep icons sorted by size in rows"
 msgstr "Պատկերակները պահել տողերով՝ տեսակավորված ըստ չափսի"
 
@@ -7312,7 +7312,7 @@ msgstr "Պատկերակները պահել տողերով՝ տեսակավոր�
 msgid "by S_ize on Disk"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1762
+#: src/file-manager/fm-icon-view.c:145 src/file-manager/fm-icon-view.c:1764
 msgid "Keep icons sorted by disk usage in rows"
 msgstr ""
 
@@ -7320,7 +7320,7 @@ msgstr ""
 msgid "by _Type"
 msgstr "Ըստ _տեսակի"
 
-#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1768
+#: src/file-manager/fm-icon-view.c:152 src/file-manager/fm-icon-view.c:1770
 msgid "Keep icons sorted by type in rows"
 msgstr "Պատկերակները պահել տողերով՝ տեսակավորված ըստ տեսակի"
 
@@ -7328,7 +7328,7 @@ msgstr "Պատկերակները պահել տողերով՝ տեսակավոր�
 msgid "by Modification _Date"
 msgstr "Ըստ մոդիֆիկացիաների _ամսաթիվ"
 
-#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1774
+#: src/file-manager/fm-icon-view.c:159 src/file-manager/fm-icon-view.c:1776
 msgid "Keep icons sorted by modification date in rows"
 msgstr "Պատկերակները պահել տողերով՝ տեսակավորված ըստ մոդիֆիկացիաների"
 
@@ -7336,7 +7336,7 @@ msgstr "Պատկերակները պահել տողերով՝ տեսակավոր�
 msgid "by _Emblems"
 msgstr "Ըստ _էմբլեմների"
 
-#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1780
+#: src/file-manager/fm-icon-view.c:166 src/file-manager/fm-icon-view.c:1782
 msgid "Keep icons sorted by emblems in rows"
 msgstr "Պատկերակները պահել տողերով՝ տեսակավորված ըստ էմբլեմների"
 
@@ -7344,7 +7344,7 @@ msgstr "Պատկերակները պահել տողերով՝ տեսակավոր�
 msgid "by T_rash Time"
 msgstr "Ըստ Վնասված Ժամանակի"
 
-#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1786
+#: src/file-manager/fm-icon-view.c:173 src/file-manager/fm-icon-view.c:1788
 msgid "Keep icons sorted by trash time in rows"
 msgstr "Պահել պատկերանշանները տեսակավորված, ըստ զամբյուղի ժամանակի տողերի մեջ"
 
@@ -7356,489 +7356,489 @@ msgstr ""
 msgid "Keep icons sorted by reversed extension segments in rows"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:789
+#: src/file-manager/fm-icon-view.c:791
 msgid "_Organize Desktop by Name"
 msgstr " _Կազմակերպել Աշխատանքային էկրանը ըստ Անունի"
 
-#: src/file-manager/fm-icon-view.c:1699
+#: src/file-manager/fm-icon-view.c:1701
 msgid "Arran_ge Items"
 msgstr "Դասավո_րել տարրերը"
 
-#: src/file-manager/fm-icon-view.c:1701
+#: src/file-manager/fm-icon-view.c:1703
 msgid "Resize Icon..."
 msgstr "Չափափոխել Պատկերակը ..."
 
-#: src/file-manager/fm-icon-view.c:1702
+#: src/file-manager/fm-icon-view.c:1704
 msgid "Make the selected icon resizable"
 msgstr "Ընտրված պատկերանշանը դարձնել չափափոխելի"
 
-#: src/file-manager/fm-icon-view.c:1706 src/file-manager/fm-icon-view.c:1920
+#: src/file-manager/fm-icon-view.c:1708 src/file-manager/fm-icon-view.c:1922
 msgid "Restore Icons' Original Si_zes"
 msgstr "Վերականգնել պատկերակների նախնական չա_փսը"
 
-#: src/file-manager/fm-icon-view.c:1707
+#: src/file-manager/fm-icon-view.c:1709
 msgid "Restore each selected icon to its original size"
 msgstr "Վերականգնել յուրաքանչյուր ընտրված պատկերակ իր նախնական չափսին"
 
-#: src/file-manager/fm-icon-view.c:1711
+#: src/file-manager/fm-icon-view.c:1713
 msgid "_Organize by Name"
 msgstr "_Կազմակերպել ըստ անվան"
 
-#: src/file-manager/fm-icon-view.c:1712
+#: src/file-manager/fm-icon-view.c:1714
 msgid "Reposition icons to better fit in the window and avoid overlapping"
 msgstr ""
 "Պատկերակները վերադասավորել դրանք պատուհանների մեջ տեղավորելու և համընկնումից "
 "խուսափելու համար"
 
-#: src/file-manager/fm-icon-view.c:1720
+#: src/file-manager/fm-icon-view.c:1722
 msgid "Compact _Layout"
 msgstr "Խտացված _դասավորություն"
 
-#: src/file-manager/fm-icon-view.c:1721
+#: src/file-manager/fm-icon-view.c:1723
 msgid "Toggle using a tighter layout scheme"
 msgstr "Փոխարկել օգտագործելով առավել խիտ սխեմա"
 
-#: src/file-manager/fm-icon-view.c:1726
+#: src/file-manager/fm-icon-view.c:1728
 msgid "Re_versed Order"
 msgstr "Հա_կադարձ կարգ"
 
-#: src/file-manager/fm-icon-view.c:1727
+#: src/file-manager/fm-icon-view.c:1729
 msgid "Display icons in the opposite order"
 msgstr "Պատկերակները ցույց տալ հակառակ կարգով"
 
-#: src/file-manager/fm-icon-view.c:1732
+#: src/file-manager/fm-icon-view.c:1734
 msgid "_Keep Aligned"
 msgstr "_Պահպանել շարքը"
 
-#: src/file-manager/fm-icon-view.c:1733
+#: src/file-manager/fm-icon-view.c:1735
 msgid "Keep icons lined up on a grid"
 msgstr "Պատկերակները պահել ցանցի վրա՝ շարքով"
 
-#: src/file-manager/fm-icon-view.c:1743
+#: src/file-manager/fm-icon-view.c:1745
 msgid "_Manually"
 msgstr "_Ձեռքով կառավարվող"
 
-#: src/file-manager/fm-icon-view.c:1744
+#: src/file-manager/fm-icon-view.c:1746
 msgid "Leave icons wherever they are dropped"
 msgstr "Թողնել պատկերակները այնտեղ որտեղ դրված են"
 
-#: src/file-manager/fm-icon-view.c:1749
+#: src/file-manager/fm-icon-view.c:1751
 msgid "By _Name"
 msgstr "Ըստ _անվան"
 
-#: src/file-manager/fm-icon-view.c:1755
+#: src/file-manager/fm-icon-view.c:1757
 msgid "By _Size"
 msgstr "Ըստ _չափսի"
 
-#: src/file-manager/fm-icon-view.c:1761
+#: src/file-manager/fm-icon-view.c:1763
 msgid "By S_ize on Disk"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1767
+#: src/file-manager/fm-icon-view.c:1769
 msgid "By _Type"
 msgstr "Ըստ _տեսակի"
 
-#: src/file-manager/fm-icon-view.c:1773
+#: src/file-manager/fm-icon-view.c:1775
 msgid "By Modification _Date"
 msgstr "Ըստ մոդիֆիկացիայի _ամսաթվի"
 
-#: src/file-manager/fm-icon-view.c:1779
+#: src/file-manager/fm-icon-view.c:1781
 msgid "By _Emblems"
 msgstr "Ըստ _էմբլեմների"
 
-#: src/file-manager/fm-icon-view.c:1785
+#: src/file-manager/fm-icon-view.c:1787
 msgid "By T_rash Time"
 msgstr "Վնասված ժամանակով"
 
-#: src/file-manager/fm-icon-view.c:1791
+#: src/file-manager/fm-icon-view.c:1793
 msgid "By E_xtension"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1792
+#: src/file-manager/fm-icon-view.c:1794
 msgid "Keep icons sorted by reverse extension segments in rows"
 msgstr ""
 
-#: src/file-manager/fm-icon-view.c:1921
+#: src/file-manager/fm-icon-view.c:1923
 msgid "Restore Icon's Original Si_ze"
 msgstr "Վերականգնել պատկերակի նախնական չա_փսը"
 
-#: src/file-manager/fm-icon-view.c:2403
+#: src/file-manager/fm-icon-view.c:2405
 #, c-format
 msgid "pointing at \"%s\""
 msgstr "ցույց է տալիս \"%s\""
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3422
+#: src/file-manager/fm-icon-view.c:3445
 msgid "_Icons"
 msgstr "_Պատկերակներ"
 
-#: src/file-manager/fm-icon-view.c:3423
+#: src/file-manager/fm-icon-view.c:3446
 msgid "The icon view encountered an error."
 msgstr "Պատկերակի տեսաբերման ժամանակ սխալ է կատարվել"
 
-#: src/file-manager/fm-icon-view.c:3424
+#: src/file-manager/fm-icon-view.c:3447
 msgid "The icon view encountered an error while starting up."
 msgstr "Գործարկման պահին պատկերակի տեսաբերումը  սխալ կատարվեց"
 
-#: src/file-manager/fm-icon-view.c:3425
+#: src/file-manager/fm-icon-view.c:3448
 msgid "Display this location with the icon view."
 msgstr "Այս տեղակայությունը ցույց տալ պատկերակի տեսաբերմամբ"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-icon-view.c:3437
+#: src/file-manager/fm-icon-view.c:3460
 msgid "_Compact"
 msgstr "_Հակիրճ"
 
-#: src/file-manager/fm-icon-view.c:3438
+#: src/file-manager/fm-icon-view.c:3461
 msgid "The compact view encountered an error."
 msgstr "Կոմպակտ տեսքի հանդիպած սխալ։"
 
-#: src/file-manager/fm-icon-view.c:3439
+#: src/file-manager/fm-icon-view.c:3462
 msgid "The compact view encountered an error while starting up."
 msgstr "Կոմպակտ տեսքի հանդիպած սխալ, իսկ սկսումը։"
 
-#: src/file-manager/fm-icon-view.c:3440
+#: src/file-manager/fm-icon-view.c:3463
 msgid "Display this location with the compact view."
 msgstr "Ցուցադրել այս դիրքը կոմպակտ տեսքով։"
 
-#: src/file-manager/fm-list-model.c:483 src/file-manager/fm-tree-model.c:1380
+#: src/file-manager/fm-list-model.c:483 src/file-manager/fm-tree-model.c:1381
 msgid "(Empty)"
 msgstr "(Դատարկ)"
 
-#: src/file-manager/fm-list-view.c:2563
+#: src/file-manager/fm-list-view.c:2599
 #, c-format
 msgid "%s Visible Columns"
 msgstr "%s տեսանելի շարքեր"
 
-#: src/file-manager/fm-list-view.c:2587
+#: src/file-manager/fm-list-view.c:2623
 msgid "Choose the order of information to appear in this folder:"
 msgstr "Ընտրել այս թղթապանակում ինֆորմացիայի հայտնվելու կարգը․"
 
-#: src/file-manager/fm-list-view.c:2641
+#: src/file-manager/fm-list-view.c:2677
 msgid "Visible _Columns..."
 msgstr "Տեսանելի _շարքեր"
 
-#: src/file-manager/fm-list-view.c:2642
+#: src/file-manager/fm-list-view.c:2678
 msgid "Select the columns visible in this folder"
 msgstr "Ընտրել այս պանակի մեջ տեսանելի շարքերը"
 
 #. Translators: this is used in the view menu
-#: src/file-manager/fm-list-view.c:3503
+#: src/file-manager/fm-list-view.c:3539
 msgid "_List"
 msgstr "_Ցուցակ"
 
-#: src/file-manager/fm-list-view.c:3504
+#: src/file-manager/fm-list-view.c:3540
 msgid "The list view encountered an error."
 msgstr "Ցուցակի տեսաբերումը սխալ է կատարվել"
 
-#: src/file-manager/fm-list-view.c:3505
+#: src/file-manager/fm-list-view.c:3541
 msgid "The list view encountered an error while starting up."
 msgstr "Գործարկման պահին ցուցակի տեսաբերումը  սխալ կատարվեց"
 
-#: src/file-manager/fm-list-view.c:3506
+#: src/file-manager/fm-list-view.c:3542
 msgid "Display this location with the list view."
 msgstr "Ցույց տալ այս տեղակայությունը ցուցակի տեսաբերմամբ"
 
-#: src/file-manager/fm-properties-window.c:511
+#: src/file-manager/fm-properties-window.c:514
 msgid "You cannot assign more than one custom icon at a time!"
 msgstr ""
 "Դուք չեք կարող վերագրել ավելի քան մեկ գործարկողի պատկերանշան միաժամանակ։"
 
-#: src/file-manager/fm-properties-window.c:645
+#: src/file-manager/fm-properties-window.c:648
 msgid "_Name:"
 msgid_plural "_Names:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-properties-window.c:1001
+#: src/file-manager/fm-properties-window.c:1007
 msgid "Properties"
 msgstr "Հատկություններ"
 
-#: src/file-manager/fm-properties-window.c:1013
+#: src/file-manager/fm-properties-window.c:1019
 #, c-format
 msgid "%s Properties"
 msgstr "%s Հատկություններ"
 
-#: src/file-manager/fm-properties-window.c:1343
+#: src/file-manager/fm-properties-window.c:1349
 #, c-format
 msgctxt "MIME type description (MIME type)"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/file-manager/fm-properties-window.c:1551
+#: src/file-manager/fm-properties-window.c:1557
 msgid "Cancel Group Change?"
 msgstr "Ոչնչացնե՞լ խմբի փոփոխությունը"
 
-#: src/file-manager/fm-properties-window.c:1966
+#: src/file-manager/fm-properties-window.c:1972
 msgid "Cancel Owner Change?"
 msgstr "Ոչնչացնե՞լ սեփականատիրոջ փոփոխումը"
 
-#: src/file-manager/fm-properties-window.c:2293
+#: src/file-manager/fm-properties-window.c:2299
 msgid "nothing"
 msgstr "ոչինչ"
 
-#: src/file-manager/fm-properties-window.c:2295
+#: src/file-manager/fm-properties-window.c:2301
 msgid "unreadable"
 msgstr "անընթեռելի"
 
-#: src/file-manager/fm-properties-window.c:2314
+#: src/file-manager/fm-properties-window.c:2320
 #, c-format
 msgid "%'d item, with size %s (%s on disk)"
 msgid_plural "%'d items, totalling %s (%s on disk)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/file-manager/fm-properties-window.c:2324
+#: src/file-manager/fm-properties-window.c:2330
 msgid "(some contents unreadable)"
 msgstr "(որոշ անընթեռնելի բովանդակություններ)"
 
-#: src/file-manager/fm-properties-window.c:2341
+#: src/file-manager/fm-properties-window.c:2347
 msgid "Contents:"
 msgstr "Բովանդակություն"
 
 #. Translators: "used" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3117
+#: src/file-manager/fm-properties-window.c:3123
 msgid "used"
 msgstr "օգտագործված"
 
 #. Translators: "free" refers to the capacity of the filesystem
-#: src/file-manager/fm-properties-window.c:3128
+#: src/file-manager/fm-properties-window.c:3134
 msgid "free"
 msgstr "ազատ"
 
-#: src/file-manager/fm-properties-window.c:3132
+#: src/file-manager/fm-properties-window.c:3138
 msgid "Total capacity:"
 msgstr "Ընդհանուր տարողություն։"
 
-#: src/file-manager/fm-properties-window.c:3146
+#: src/file-manager/fm-properties-window.c:3152
 msgid "Filesystem type:"
 msgstr "Ֆայլային համակարգի տեսակը։"
 
-#: src/file-manager/fm-properties-window.c:3231
+#: src/file-manager/fm-properties-window.c:3237
 msgid "Basic"
 msgstr "Հիմնական"
 
-#: src/file-manager/fm-properties-window.c:3293
+#: src/file-manager/fm-properties-window.c:3299
 msgid "Link target:"
 msgstr "Հղման նշանակետ"
 
-#: src/file-manager/fm-properties-window.c:3307
+#: src/file-manager/fm-properties-window.c:3313
 msgid "Size on Disk:"
 msgstr ""
 
-#: src/file-manager/fm-properties-window.c:3322
+#: src/file-manager/fm-properties-window.c:3328
 msgid "Volume:"
 msgstr "Ծավալ"
 
-#: src/file-manager/fm-properties-window.c:3331
+#: src/file-manager/fm-properties-window.c:3337
 msgid "Accessed:"
 msgstr "Մատչելի"
 
-#: src/file-manager/fm-properties-window.c:3335
+#: src/file-manager/fm-properties-window.c:3341
 msgid "Modified:"
 msgstr "Մոդիֆիկացված։"
 
-#: src/file-manager/fm-properties-window.c:3344
+#: src/file-manager/fm-properties-window.c:3350
 msgid "Free space:"
 msgstr "Ազատ տարածություն"
 
-#: src/file-manager/fm-properties-window.c:3869
+#: src/file-manager/fm-properties-window.c:3875
 msgid "_Read"
 msgstr "Ընթերցում"
 
-#: src/file-manager/fm-properties-window.c:3871
+#: src/file-manager/fm-properties-window.c:3877
 msgid "_Write"
 msgstr "Գրել"
 
-#: src/file-manager/fm-properties-window.c:3873
+#: src/file-manager/fm-properties-window.c:3879
 msgid "E_xecute"
 msgstr "Կ_ատարել"
 
 #. Translators: this gets concatenated to "no read",
 #. * "no access", etc. (see following strings)
 #.
-#: src/file-manager/fm-properties-window.c:4141
-#: src/file-manager/fm-properties-window.c:4152
-#: src/file-manager/fm-properties-window.c:4164
+#: src/file-manager/fm-properties-window.c:4147
+#: src/file-manager/fm-properties-window.c:4158
+#: src/file-manager/fm-properties-window.c:4170
 msgid "no "
 msgstr "ոչ"
 
-#: src/file-manager/fm-properties-window.c:4144
+#: src/file-manager/fm-properties-window.c:4150
 msgid "list"
 msgstr "ցուցակ"
 
-#: src/file-manager/fm-properties-window.c:4146
+#: src/file-manager/fm-properties-window.c:4152
 msgid "read"
 msgstr "կարդալ"
 
-#: src/file-manager/fm-properties-window.c:4155
+#: src/file-manager/fm-properties-window.c:4161
 msgid "create/delete"
 msgstr "ստեզծել/ջնջել"
 
-#: src/file-manager/fm-properties-window.c:4157
+#: src/file-manager/fm-properties-window.c:4163
 msgid "write"
 msgstr "գրել"
 
-#: src/file-manager/fm-properties-window.c:4166
+#: src/file-manager/fm-properties-window.c:4172
 msgid "access"
 msgstr "մուտք"
 
-#: src/file-manager/fm-properties-window.c:4214
+#: src/file-manager/fm-properties-window.c:4220
 msgid "Access:"
 msgstr "Մուտք։"
 
-#: src/file-manager/fm-properties-window.c:4216
+#: src/file-manager/fm-properties-window.c:4222
 msgid "Folder access:"
 msgstr "Թղթապանակի մուտք:"
 
-#: src/file-manager/fm-properties-window.c:4218
+#: src/file-manager/fm-properties-window.c:4224
 msgid "File access:"
 msgstr "Ֆայլի մուտք։"
 
-#: src/file-manager/fm-properties-window.c:4236
+#: src/file-manager/fm-properties-window.c:4242
 msgid "List files only"
 msgstr "Միայն ֆայլերի ցուցակը"
 
-#: src/file-manager/fm-properties-window.c:4238
+#: src/file-manager/fm-properties-window.c:4244
 msgid "Access files"
 msgstr "Ֆայլերի մուտք"
 
-#: src/file-manager/fm-properties-window.c:4240
+#: src/file-manager/fm-properties-window.c:4246
 msgid "Create and delete files"
 msgstr "Ստեղծել և ջնջել ֆայլերը"
 
-#: src/file-manager/fm-properties-window.c:4247
+#: src/file-manager/fm-properties-window.c:4253
 msgid "Read-only"
 msgstr "Կարդալ միայն"
 
-#: src/file-manager/fm-properties-window.c:4249
+#: src/file-manager/fm-properties-window.c:4255
 msgid "Read and write"
 msgstr "Կարդալ և գրել"
 
-#: src/file-manager/fm-properties-window.c:4314
+#: src/file-manager/fm-properties-window.c:4320
 msgid "Special flags:"
 msgstr "Հատուկ դրոշներ"
 
-#: src/file-manager/fm-properties-window.c:4316
+#: src/file-manager/fm-properties-window.c:4322
 msgid "Set _user ID"
 msgstr "Սահմանել _գործարկողի իդենտիֆիկացիան"
 
-#: src/file-manager/fm-properties-window.c:4317
+#: src/file-manager/fm-properties-window.c:4323
 msgid "Set gro_up ID"
 msgstr "Սահմանել խմբ_ի իդենտիֆիկացիան"
 
-#: src/file-manager/fm-properties-window.c:4318
+#: src/file-manager/fm-properties-window.c:4324
 msgid "_Sticky"
 msgstr "_Կպչուն"
 
-#: src/file-manager/fm-properties-window.c:4393
-#: src/file-manager/fm-properties-window.c:4585
+#: src/file-manager/fm-properties-window.c:4399
+#: src/file-manager/fm-properties-window.c:4591
 msgid "_Owner:"
 msgstr "_Սեփականատեր:"
 
-#: src/file-manager/fm-properties-window.c:4401
-#: src/file-manager/fm-properties-window.c:4491
-#: src/file-manager/fm-properties-window.c:4594
+#: src/file-manager/fm-properties-window.c:4407
+#: src/file-manager/fm-properties-window.c:4497
+#: src/file-manager/fm-properties-window.c:4600
 msgid "Owner:"
 msgstr "Սեփականատեր"
 
-#: src/file-manager/fm-properties-window.c:4425
-#: src/file-manager/fm-properties-window.c:4609
+#: src/file-manager/fm-properties-window.c:4431
+#: src/file-manager/fm-properties-window.c:4615
 msgid "_Group:"
 msgstr "_Խումբ"
 
-#: src/file-manager/fm-properties-window.c:4433
-#: src/file-manager/fm-properties-window.c:4492
-#: src/file-manager/fm-properties-window.c:4617
+#: src/file-manager/fm-properties-window.c:4439
+#: src/file-manager/fm-properties-window.c:4498
+#: src/file-manager/fm-properties-window.c:4623
 msgid "Group:"
 msgstr "Խումբ"
 
-#: src/file-manager/fm-properties-window.c:4457
+#: src/file-manager/fm-properties-window.c:4463
 msgid "Others"
 msgstr "Մյուսները"
 
-#: src/file-manager/fm-properties-window.c:4472
+#: src/file-manager/fm-properties-window.c:4478
 msgid "Execute:"
 msgstr "Կատարել:"
 
-#: src/file-manager/fm-properties-window.c:4475
+#: src/file-manager/fm-properties-window.c:4481
 msgid "Allow _executing file as program"
 msgstr "Թույլ տալ _իրականացնել ֆայլը որպես ծրագիր"
 
-#: src/file-manager/fm-properties-window.c:4493
+#: src/file-manager/fm-properties-window.c:4499
 msgid "Others:"
 msgstr "Այլ"
 
-#: src/file-manager/fm-properties-window.c:4633
+#: src/file-manager/fm-properties-window.c:4639
 msgid "Folder Permissions:"
 msgstr "Թղթապանակի Թույլտվություններ։"
 
-#: src/file-manager/fm-properties-window.c:4640
+#: src/file-manager/fm-properties-window.c:4646
 msgid "File Permissions:"
 msgstr "Ֆայլի Թույլտվություններ"
 
-#: src/file-manager/fm-properties-window.c:4649
+#: src/file-manager/fm-properties-window.c:4655
 msgid "Text view:"
 msgstr "Տեքստի տեսաբերում"
 
-#: src/file-manager/fm-properties-window.c:4797
+#: src/file-manager/fm-properties-window.c:4803
 msgid "You are not the owner, so you cannot change these permissions."
 msgstr ""
 "Դուք սեփականատերը չեք, այնպես որ դուք չեք կարող փոխել այդ թույլտվությունները։"
 
-#: src/file-manager/fm-properties-window.c:4817
+#: src/file-manager/fm-properties-window.c:4823
 msgid "SELinux context:"
 msgstr "SELinux կոնտեքստ։"
 
-#: src/file-manager/fm-properties-window.c:4822
+#: src/file-manager/fm-properties-window.c:4828
 msgid "Last changed:"
 msgstr "Վերջին փոփոխությունը"
 
-#: src/file-manager/fm-properties-window.c:4835
+#: src/file-manager/fm-properties-window.c:4841
 msgid "Apply Permissions to Enclosed Files"
 msgstr "Գործածել Կից Ֆայլերի Թույլատվությունները"
 
-#: src/file-manager/fm-properties-window.c:4849
+#: src/file-manager/fm-properties-window.c:4855
 #, c-format
 msgid "The permissions of \"%s\" could not be determined."
 msgstr "\"%s\"–ի փոփոխությունները հնարավոր չէ հայտնաբերել"
 
-#: src/file-manager/fm-properties-window.c:4852
+#: src/file-manager/fm-properties-window.c:4858
 msgid "The permissions of the selected file could not be determined."
 msgstr "Ընտրված ֆայլի թույտվությունները հնարավոր չէ հայտնաբերել"
 
-#: src/file-manager/fm-properties-window.c:5442
+#: src/file-manager/fm-properties-window.c:5448
 msgid "Creating Properties window."
 msgstr "Կերտել հատկությունների պատուհան"
 
-#: src/file-manager/fm-properties-window.c:5738
+#: src/file-manager/fm-properties-window.c:5744
 msgid "Select Custom Icon"
 msgstr "Ընտրել Գործարկողի պատկերակը"
 
-#: src/file-manager/fm-tree-view.c:1712
+#: src/file-manager/fm-tree-view.c:1718
 msgid "Tree"
 msgstr "Ծառ"
 
-#: src/file-manager/fm-tree-view.c:1718
+#: src/file-manager/fm-tree-view.c:1724
 msgid "Show Tree"
 msgstr "Ցույց տալ ծառը"
 
-#: src/file-manager/fm-widget-view.c:443
+#: src/file-manager/fm-widget-view.c:451
 msgid "Widget View"
 msgstr ""
 
-#: src/file-manager/fm-widget-view.c:444
+#: src/file-manager/fm-widget-view.c:452
 msgid "_Widget View"
 msgstr ""
 
-#: src/file-manager/fm-widget-view.c:445
+#: src/file-manager/fm-widget-view.c:453
 msgid "The widget view encountered an error."
 msgstr ""
 
-#: src/file-manager/fm-widget-view.c:446
+#: src/file-manager/fm-widget-view.c:454
 msgid "The widget view encountered an error while starting up."
 msgstr ""
 
-#: src/file-manager/fm-widget-view.c:447
+#: src/file-manager/fm-widget-view.c:455
 msgid "Display this location with the widget view."
 msgstr ""
