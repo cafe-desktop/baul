@@ -1,3 +1,16 @@
+### baul 2.0.0
+
+  * baul-icon-container: Fix rename files/folders
+  * ci: some improvements
+  * build: GLib 2.67.3 required
+  * GFileInfo: Fix make check
+  * baul gschema:
+    - set 'confirm-move-to-trash' default 'true'
+    - disable previews
+  * add G_GNUC_UNUSED in unused parameters
+  * baul-window-menus: update copyright to 2025
+  * update translations
+
 ### baul 1.25.0
 
   * initial commit: caja 1.24.0 fork
