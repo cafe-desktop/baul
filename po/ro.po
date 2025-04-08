@@ -3009,7 +3009,7 @@ msgstr ""
 "Dacă este activat, Baul va ieși atunci când toate ferestrele sunt închise. "
 "Aceasta este configurarea implicită. Dacă nu este activat, poate fi pornit "
 "fără nicio fereastră, în acest caz putând servi ca un serviciu de "
-"monitorizare a montării autocafe de medii de stocare sau sarcini similare."
+"monitorizare a montării automate de medii de stocare sau sarcini similare."
 
 #: libbaul-private/org.cafe.baul.gschema.xml:91
 msgid "Enables the classic Baul behavior, where all windows are browsers"
