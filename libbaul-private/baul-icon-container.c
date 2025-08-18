@@ -1387,6 +1387,7 @@ lay_down_icons_horizontal (BaulIconContainer *container,
     else
     {
         grid_width = STANDARD_ICON_GRID_WIDTH;
+        ctk_widget_queue_resize (CTK_WIDGET (container));
     }
 
     gridded_layout = !baul_icon_container_is_tighter_layout (container);
