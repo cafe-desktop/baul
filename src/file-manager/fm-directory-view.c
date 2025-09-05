@@ -7479,11 +7479,11 @@ static const CtkActionEntry directory_view_entries[] = {
 				 NULL,
                                  G_CALLBACK (action_restore_from_trash_callback) },
   /* name, icon name */		  { FM_ACTION_UNDO, "edit-undo",
-  /* label, accelerator */		 N_("_Undo"), "<control>Z",
+  /* label, accelerator */		 N_("_Undo"), NULL,
   /* tooltip */ 				 	 N_("Undo the last action"),
 								 G_CALLBACK (action_undo_callback) },
   /* name, icon name */		  { FM_ACTION_REDO, "edit-redo",
-  /* label, accelerator */	     N_("_Redo"), "<control>Y",
+  /* label, accelerator */	     N_("_Redo"), NULL,
   /* tooltip */     			 	 N_("Redo the last undone action"),
 								 G_CALLBACK (action_redo_callback) },
 
