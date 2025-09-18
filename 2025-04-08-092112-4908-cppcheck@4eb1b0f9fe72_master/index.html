@@ -1,0 +1,893 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cppcheck - HTML report - baul (cppcheck 2.17.1-1+b1)</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+    <script>
+      function getStyle(el, styleProp) {
+        var y;
+
+        if (el.currentStyle) {
+          y = el.currentStyle[styleProp];
+        } else if (window.getComputedStyle) {
+          y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+        }
+
+        return y;
+      }
+
+      function toggle() {
+        var el = this.expandable_content;
+        var mark = this.expandable_marker;
+
+        if (el.style.display === "block") {
+          el.style.display = "none";
+          mark.textContent = "[+]";
+        } else {
+          el.style.display = "block";
+          mark.textContent = "[-]";
+        }
+      }
+
+      function initExpandables() {
+        var elements = document.querySelectorAll(".expandable");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var el = elements[i];
+          var clickable = el.querySelector("span");
+          var marker = clickable.querySelector(".marker");
+          var content = el.querySelector(".content");
+          var width = clickable.clientWidth - parseInt(getStyle(content, "padding-left")) - parseInt(getStyle(content, "padding-right"));
+          content.style.width = width + "px";
+          clickable.expandable_content = content;
+          clickable.expandable_marker = marker;
+          clickable.addEventListener("click", toggle);
+        }
+      }
+
+      function toggleDisplay(cb) {
+        var elements = document.querySelectorAll("." + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("id-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleSeverity(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+        var elements = document.querySelectorAll(".sev_" + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("severity-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleTool(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+
+        var elements;
+        if (cb.id == "clang-tidy")
+            elements = document.querySelectorAll("[class^=clang-tidy-]");
+        else
+            elements = document.querySelectorAll(".issue:not([class^=clang-tidy-])");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("tool-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleAll() {
+        var elements = document.querySelectorAll(".idToggle");
+
+        // starting from 1 since 0 is the "toggle all" input
+        for (var i = 1, len = elements.length; i < len; i++) {
+          var changed = elements[i].checked != elements[0].checked;
+          if (changed) {
+            elements[i].checked = elements[0].checked;
+            toggleDisplay(elements[i]);
+          }
+        }
+      }
+
+      function filterFile(filter) {
+        var elements = document.querySelectorAll(".fileEntry");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = elements[i].querySelector("tr").querySelector("td").textContent.toLowerCase().includes(filter.toLowerCase());
+          elements[i].classList.toggle("text-filtered", !visible);
+        }
+      }
+
+      function filterText(text) {
+        filter = text.toLowerCase();
+        var elements = document.querySelectorAll(".issue");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = false;
+          var fields = elements[i].querySelectorAll("td");
+          for (var n = 0, num = fields.length; n < num; n++) {
+            if (fields[n].textContent.toLowerCase().includes(filter)) {
+              visible = true;
+              break;
+            }
+          }
+          elements[i].classList.toggle("text-filtered", !visible);
+        }
+
+        updateFileRows();
+      }
+
+      function updateFileRows(element) {
+        var elements = document.querySelectorAll(".fileEntry");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = elements[i].querySelector(".issue:not(.id-filtered):not(.severity-filtered):not(.tool-filtered):not(.text-filtered)");
+          elements[i].classList.toggle("file-filtered", !visible);
+        }
+      }
+
+      window.addEventListener("load", initExpandables);
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="header" class="header">
+      <h1>Cppcheck report - baul (cppcheck 2.17.1-1+b1)</h1>
+      <div id="filters">
+
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="error"checked/>error</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="warning"checked/>warning</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="portability"disabled/>portability</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="performance"disabled/>performance</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="style"checked/>style</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="information"checked/>information</label>
+        | 
+        <label class="checkBtn"><input type="checkbox" onclick="toggleTool(this)" id="cppcheck"checked/>cppcheck</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleTool(this)" id="clang-tidy"disabled/>clang-tidy</label>
+        | 
+        <label class="severityHeader">File: <input type="search" oninput="filterFile(this.value)"/></label>
+        <label class="severityHeader">Filter: <input type="search" oninput="filterText(this.value)"/></label>
+      </div>
+
+    </div>
+
+    <div id="menu_index">
+     <p><a href="index.html">Defect summary</a> </p>
+
+       <label><input type="checkbox" class="idToggle" onclick="toggleAll()" checked> Toggle all</label>
+       <table>
+           <tr><th>Show</th><th>#</th><th>Defect ID</th></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="staticFunction" name="staticFunction" checked></td><td>110</td><td>staticFunction</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="constParameterCallback" name="constParameterCallback" checked></td><td>78</td><td>constParameterCallback</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="constVariablePointer" name="constVariablePointer" checked></td><td>71</td><td>constVariablePointer</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="constParameterPointer" name="constParameterPointer" checked></td><td>49</td><td>constParameterPointer</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="unknownMacro" name="unknownMacro" checked></td><td>49</td><td>unknownMacro</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="unusedStructMember" name="unusedStructMember" checked></td><td>14</td><td>unusedStructMember</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="variableScope" name="variableScope" checked></td><td>7</td><td>variableScope</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="selfAssignment" name="selfAssignment" checked></td><td>5</td><td>selfAssignment</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="knownConditionTrueFalse" name="knownConditionTrueFalse" checked></td><td>4</td><td>knownConditionTrueFalse</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="redundantAssignment" name="redundantAssignment" checked></td><td>4</td><td>redundantAssignment</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="nullPointerRedundantCheck" name="nullPointerRedundantCheck" checked></td><td>3</td><td>nullPointerRedundantCheck</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="unreadVariable" name="unreadVariable" checked></td><td>3</td><td>unreadVariable</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="shadowVariable" name="shadowVariable" checked></td><td>2</td><td>shadowVariable</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="checkersReport" name="checkersReport" checked></td><td>1</td><td>checkersReport</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="clarifyCalculation" name="clarifyCalculation" checked></td><td>1</td><td>clarifyCalculation</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="constParameter" name="constParameter" checked></td><td>1</td><td>constParameter</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="nullPointer" name="nullPointer" checked></td><td>1</td><td>nullPointer</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="unreachableCode" name="unreachableCode" checked></td><td>1</td><td>unreachableCode</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="unusedVariable" name="unusedVariable" checked></td><td>1</td><td>unusedVariable</td></tr>
+           <tr><td></td><td>405</td><td>total</td></tr>
+       </table>
+       <p><a href="stats.html">Statistics</a></p>
+    </div>
+    <div id="content_index">
+
+       <table class="summaryTable">
+       <tr><th>Line</th><th>Id</th><th>CWE</th><th>Severity</th><th>Message</th></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="139.html"></a></td></tr>
+         <tr class="checkersReport sev_information issue"><td></td><td>checkersReport</td><td></td><td>information</td><td>Active checkers: There was critical errors (use --checkers-report=&lt;filename&gt; to see details)</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="0.html">eel/check-program.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="0.html#line-37">37</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;argv&apos; can be declared as const array</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="0.html#line-45">45</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ctk_init&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="108.html">eel/eel-accessibility.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="108.html#line-70">70</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_accessibility_for_object&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="108.html#line-88">88</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_accessibility_get_gobject&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="108.html#line-213">213</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_accessible_text_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="109.html">eel/eel-art-extensions.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="109.html#line-40">40</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_irect_copy&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="109.html#line-71">71</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_irect_intersect&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="1.html">eel/eel-background-box.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="1.html#line-30">30</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="2.html">eel/eel-background.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="2.html#line-83">83</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="110.html">eel/eel-cafe-extensions.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="110.html#line-167">167</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_cafe_make_terminal_command&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="3.html">eel/eel-canvas-rect-ellipse.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="3.html#line-90">90</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_canvas_re_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="3.html#line-266">266</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;color&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="3.html#line-281">281</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;color&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="3.html#line-417">417</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;re&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="3.html#line-603">603</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;re&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="3.html#line-688">688</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;update_rect&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="3.html#line-709">709</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;re&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="4.html">eel/eel-canvas.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="4.html#line-2013">2013</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="111.html">eel/eel-cdk-extensions.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-52">52</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_new&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-81">81</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_is_gradient&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-121">121</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_parse_one_color_spec&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-184">184</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_get_start_color_spec&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-197">197</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_get_end_color_spec&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-252">252</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_set_left_color_spec&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-270">270</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_set_top_color_spec&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-288">288</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_set_right_color_spec&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-306">306</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gradient_set_bottom_color_spec&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-324">324</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_cdk_rgba_parse_with_white_default&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-350">350</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_rgb16_to_rgb&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="111.html#line-387">387</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_cdk_rgb_to_rgba&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="112.html">eel/eel-ctk-extensions.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="112.html#line-158">158</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_ctk_window_set_initial_geometry&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="112.html#line-309">309</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_ctk_menu_insert_separator&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="5.html">eel/eel-debug.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="5.html#line-45">45</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_stop_in_debugger&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="unreachableCode sev_style issue"><td><a href="5.html#line-51">51</a></td><td>unreachableCode</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>Statements following noreturn function &apos;raise()&apos; will never be executed.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="6.html">eel/eel-editable-label.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="6.html#line-4244">4244</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_IMPLEMENT_INTERFACE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="113.html">eel/eel-gdk-pixbuf-extensions.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="113.html#line-101">101</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_gdk_pixbuf_load_from_stream_at_size&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="113.html#line-165">165</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_cdk_scale_to_fit_factor&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="113.html#line-222">222</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_cdk_scale_to_min_factor&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="7.html">eel/eel-glib-extensions.c</a></td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="7.html#line-55">55</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="7.html#line-69">69</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="7.html#line-86">86</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;p&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="7.html#line-86">86</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;q&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="7.html#line-108">108</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_g_str_list_equal&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="7.html#line-110">110</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;p&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="7.html#line-110">110</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;q&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="7.html#line-142">142</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;l&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="7.html#line-282">282</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_g_list_partition&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="8.html">eel/eel-graphic-effects.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="8.html#line-163">163</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;pixsrc&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="8.html#line-191">191</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;color&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="8.html#line-225">225</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;pixsrc&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="8.html#line-284">284</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_stretch_frame_image&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="9.html">eel/eel-image-table.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="9.html#line-88">88</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="10.html">eel/eel-labeled-image.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="10.html#line-107">107</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="114.html">eel/eel-self-checks.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="114.html#line-55">55</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_report_check_failure&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="114.html#line-98">98</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_after_check&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="11.html">eel/eel-string.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="11.html#line-69">69</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_str_has_prefix&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="11.html#line-118">118</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_str_get_prefix&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="11.html#line-121">121</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;prefix_start&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="11.html#line-144">144</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_str_double_underscores&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="11.html#line-183">183</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_str_capitalize&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="11.html#line-256">256</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_str_strip_substring_and_after&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="11.html#line-280">280</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_str_replace_substring&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="11.html#line-412">412</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;custom_handlers&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="11.html#line-524">524</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;types&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="11.html#line-536">536</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_strdup_vprintf_with_custom&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="11.html#line-779">779</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;custom1_to_string&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="12.html">eel/eel-wrap-table.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="12.html#line-73">73</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="115.html">eel/eel-xml-extensions.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="115.html#line-36">36</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_xml_get_children&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="115.html#line-46">46</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;eel_xml_get_child_by_name_and_property&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="116.html">libbaul-extension/baul-column-provider.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="116.html#line-46">46</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_column_provider_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="117.html">libbaul-extension/baul-configurable.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="117.html#line-46">46</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_configurable_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="118.html">libbaul-extension/baul-file-info.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="118.html#line-328">328</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_file_info_lookup&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="118.html#line-340">340</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_file_info_create&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="119.html">libbaul-extension/baul-info-provider.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="119.html#line-48">48</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_info_provider_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="120.html">libbaul-extension/baul-location-widget-provider.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="120.html#line-46">46</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_location_widget_provider_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="121.html">libbaul-extension/baul-menu-item.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="121.html#line-322">322</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_menu_item_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="122.html">libbaul-extension/baul-menu-provider.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="122.html#line-60">60</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_menu_provider_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="123.html">libbaul-extension/baul-property-page-provider.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="123.html#line-47">47</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_property_page_provider_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="124.html">libbaul-extension/baul-property-page.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="124.html#line-225">225</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_property_page_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="125.html">libbaul-extension/baul-widget-view-provider.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="125.html#line-43">43</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_widget_view_provider_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="13.html">libbaul-private/baul-autorun.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="13.html#line-71">71</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_autorun_get_preferences&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="13.html#line-152">152</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_autorun_set_preferences&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="13.html#line-806">806</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_autorun_launch_for_mount&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="13.html#line-929">929</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;combo_box_enter_ok&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="126.html">libbaul-private/baul-clipboard-monitor.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="126.html#line-96">96</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_clipboard_monitor_emit_changed&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="127.html">libbaul-private/baul-column-utilities.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="127.html#line-248">248</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_column_list_copy&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="14.html">libbaul-private/baul-customization-data.c</a></td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="14.html#line-296">296</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;data&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="14.html#line-387">387</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_customization_make_pattern_chit&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="15.html">libbaul-private/baul-debug-log.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="15.html#line-150">150</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_debug_logv&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="15.html#line-229">229</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;p&apos; is assigned a value that is never used.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="15.html#line-365">365</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_debug_log_enable_domains&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="15.html#line-430">430</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_debug_log_is_domain_enabled&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="15.html#line-523">523</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;data&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="15.html#line-675">675</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_debug_log_set_max_lines&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="16.html">libbaul-private/baul-desktop-directory-file.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="16.html#line-81">81</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_CLASS_BOILERPLATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="17.html">libbaul-private/baul-desktop-directory.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="17.html#line-358">358</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;monitor&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="18.html">libbaul-private/baul-desktop-icon-file.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="18.html#line-49">49</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="19.html">libbaul-private/baul-desktop-link-monitor.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="19.html#line-67">67</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_CLASS_BOILERPLATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="20.html">libbaul-private/baul-desktop-link.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="20.html#line-57">57</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="128.html">libbaul-private/baul-desktop-metadata.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="128.html#line-233">233</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_desktop_update_metadata_from_keyfile&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="21.html">libbaul-private/baul-directory-async.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="21.html#line-2794">2794</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="23.html">libbaul-private/baul-dnd.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="23.html#line-124">124</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_drag_uri_list_from_selection_list&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="23.html#line-144">144</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_drag_uri_list_from_array&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="nullPointerRedundantCheck sev_warning issue"><td><a href="23.html#line-203">203</a></td><td>nullPointerRedundantCheck</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td><td>warning</td><td class="warning">Either the condition &apos;p==0&apos; is redundant or there is possible null pointer dereference: p.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="23.html#line-904">904</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_drag_autoscroll_in_scroll_region&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="129.html">libbaul-private/baul-emblem-utils.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="129.html#line-74">74</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_emblem_get_icon_name_from_keyword&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="24.html">libbaul-private/baul-entry.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="24.html#line-97">97</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;entry&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="24.html#line-306">306</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;entry&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="24.html#line-324">324</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;entry&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="130.html">libbaul-private/baul-file-dnd.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="130.html#line-76">76</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_drag_can_accept_item&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="130.html#line-89">89</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_drag_can_accept_items&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="25.html">libbaul-private/baul-file-queue.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="25.html#line-92">92</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_file_queue_remove&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="25.html#line-119">119</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_file_queue_head&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="25.html#line-130">130</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;queue&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="26.html">libbaul-private/baul-icon-canvas-item.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="26.html#line-202">202</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_ADD_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="27.html">libbaul-private/baul-icon-dnd.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="27.html#line-105">105</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;p&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="27.html#line-141">141</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;item&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="27.html#line-281">281</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;container&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="27.html#line-538">538</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;dnd_info&apos; can be declared as pointer to const</td></tr>
+         <tr class="redundantAssignment sev_style issue"><td><a href="27.html#line-634">634</a></td><td>redundantAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;result&apos; is reassigned a value before the old one has been used.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="27.html#line-957">957</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;item&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="27.html#line-1320">1320</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;icon&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="27.html#line-1605">1605</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;dnd_info&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="27.html#line-1734">1734</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;dnd_info&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="28.html">libbaul-private/baul-icon-info.c</a></td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="28.html#line-63">63</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;icon&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="28.html#line-122">122</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_icon_info_new_for_pixbuf&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="28.html#line-192">192</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;icon&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="28.html#line-450">450</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_icon_info_get_pixbuf_nodefault&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="28.html#line-488">488</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_icon_info_get_pixbuf&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="28.html#line-621">621</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;icon&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="29.html">libbaul-private/baul-keep-last-vertical-box.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="29.html#line-32">32</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="22.html">libbaul-private/baul-lib-self-check-functions.h</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="22.html#line-50">50</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_SELF_CHECK_FUNCTION_PROTOTYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="30.html">libbaul-private/baul-mime-actions.c</a></td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="30.html#line-184">184</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="30.html#line-186">186</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;l&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="30.html#line-302">302</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_mime_actions_get_required_file_attributes&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="30.html#line-337">337</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_mime_get_default_application_for_file&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="30.html#line-447">447</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_mime_get_applications_for_file&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="30.html#line-873">873</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_mime_file_opens_in_view&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="30.html#line-1059">1059</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;error&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="30.html#line-1071">1071</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;error&apos; can be declared as pointer to const</td></tr>
+         <tr class="knownConditionTrueFalse sev_style issue"><td><a href="30.html#line-2473">2473</a></td><td>knownConditionTrueFalse</td><td><a href="https://cwe.mitre.org/data/definitions/571.html">571</a></td><td>style</td><td>Condition &apos;parameters-&gt;start_mountables==NULL&apos; is always true</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="30.html#line-2487">2487</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_mime_activate_files&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="30.html#line-2497">2497</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;l&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="30.html#line-2498">2498</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;location&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="31.html">libbaul-private/baul-mime-application-chooser.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="31.html#line-55">55</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;_BaulMimeApplicationChooserDetails::entry&apos; is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="32.html">libbaul-private/baul-module.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="32.html#line-232">232</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;filename&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="33.html">libbaul-private/baul-monitor.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="33.html#line-89">89</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;mount&apos; can be declared as pointer to const. However it seems that &apos;mount_removed&apos; is a callback function, if &apos;mount&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="34.html">libbaul-private/baul-program-choosing.c</a></td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="34.html#line-61">61</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="34.html#line-64">64</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="35.html">libbaul-private/baul-progress-info.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="35.html#line-104">104</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="36.html">libbaul-private/baul-query.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="36.html#line-110">110</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_query_set_location&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="36.html#line-130">130</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_query_add_mime_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="36.html#line-150">150</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_query_add_tag&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="36.html#line-289">289</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;uri&apos; can be reduced.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="36.html#line-319">319</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="36.html#line-320">320</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="37.html">libbaul-private/baul-saved-search-file.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="37.html#line-29">29</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="38.html">libbaul-private/baul-search-directory-file.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="38.html#line-43">43</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;BaulSearchDirectoryFileDetails::search_directory&apos; is never used.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="38.html#line-184">184</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;display_name&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="39.html">libbaul-private/baul-search-directory.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="39.html#line-52">52</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;BaulSearchDirectoryDetails::file_hash&apos; is never used.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="39.html#line-114">114</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="39.html#line-189">189</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="39.html#line-220">220</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;search&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="39.html#line-222">222</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="39.html#line-326">326</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="39.html#line-344">344</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;search&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="39.html#line-346">346</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="39.html#line-364">364</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;search&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="39.html#line-366">366</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="39.html#line-563">563</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;uri&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="39.html#line-913">913</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_search_directory_save_to_file&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="40.html">libbaul-private/baul-search-engine-beagle.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="40.html#line-279">279</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;error&apos; can be declared as pointer to const. However it seems that &apos;beagle_error&apos; is a callback function, if &apos;error&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="41.html">libbaul-private/baul-search-engine-simple.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="41.html#line-459">459</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="42.html">libbaul-private/baul-search-engine-tracker.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="42.html#line-318">318</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;mimes&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="43.html">libbaul-private/baul-search-engine.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="43.html#line-35">35</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;BaulSearchEngineDetails::none&apos; is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="131.html">libbaul-private/baul-sidebar-provider.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="131.html#line-34">34</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_sidebar_provider_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="132.html">libbaul-private/baul-sidebar.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="132.html#line-59">59</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_sidebar_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="44.html">libbaul-private/baul-thumbnails.c</a></td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="44.html#line-145">145</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;thumbnail_factory&apos; shadows outer variable</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="45.html">libbaul-private/baul-trash-monitor.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="45.html#line-55">55</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="46.html">libbaul-private/baul-tree-view-drag-dest.c</a></td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="46.html#line-682">682</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;action&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="46.html#line-866">866</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;location&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="133.html">libbaul-private/baul-ui-utilities.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="133.html#line-78">78</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_ui_file&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="47.html">libbaul-private/baul-undostack-manager.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="47.html#line-2046">2046</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_FILE_ATTRIBUTE_TIME_MODIFIED is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="48.html">libbaul-private/baul-vfs-directory.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="48.html#line-38">38</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_CLASS_BOILERPLATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="49.html">libbaul-private/baul-vfs-file.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="49.html#line-42">42</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_CLASS_BOILERPLATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="50.html">libbaul-private/baul-view-factory.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="50.html#line-42">42</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;l&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="134.html">libbaul-private/baul-window-slot-info.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="134.html#line-65">65</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_window_slot_info_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="51.html">libegg/eggdesktopfile.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="51.html#line-57">57</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;egg_desktop_file_new&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="51.html#line-155">155</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;egg_desktop_file_new_from_key_file&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="51.html#line-312">312</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;egg_desktop_file_free&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="51.html#line-330">330</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;desktop_file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="51.html#line-344">344</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;desktop_file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="51.html#line-358">358</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;desktop_file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="51.html#line-379">379</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;desktop_file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="51.html#line-568">568</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;desktop_file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="51.html#line-587">587</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;desktop_file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="51.html#line-603">603</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;desktop_file&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="51.html#line-603">603</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;egg_desktop_file_accepts_uris&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="51.html#line-642">642</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;desktop_file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="51.html#line-650">650</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;doc&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="51.html#line-1402">1402</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;egg_desktop_file_error_quark&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="52.html">libegg/eggsmclient-xsmp.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="52.html#line-174">174</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="53.html">libegg/eggsmclient.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="53.html#line-49">49</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="54.html">libegg/eggtreemultidnd.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="54.html#line-46">46</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;_TreeViewDragInfo::source_target_list&apos; is never used.</td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="54.html#line-49">49</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;_TreeViewDragInfo::dest_target_list&apos; is never used.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="54.html#line-57">57</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;egg_tree_multi_drag_source_get_type&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="54.html#line-95">95</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;egg_tree_multi_drag_source_row_draggable&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="54.html#line-254">254</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;di&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="55.html">src/baul-application.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="55.html#line-1928">1928</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If PACKAGE_VERSION is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="56.html">src/baul-bookmark-list.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="56.html#line-57">57</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="57.html">src/baul-bookmarks-window.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="57.html#line-458">458</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;indices&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="57.html#line-636">636</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;indices&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="57.html#line-671">671</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;on_remove_button_clicked&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="57.html#line-689">689</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;indices&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="57.html#line-704">704</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;bookmark_in_list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="57.html#line-745">745</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;on_button_pressed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="57.html#line-746">746</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;on_button_pressed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="57.html#line-755">755</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;on_key_pressed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="57.html#line-756">756</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;on_key_pressed&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="57.html#line-787">787</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;indices&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="57.html#line-933">933</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;on_uri_field_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="57.html#line-1048">1048</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;path&apos; shadows outer variable</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="57.html#line-1086">1086</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;handle_close_accelerator&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="58.html">src/baul-connect-server-dialog-main.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="58.html#line-45">45</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;main_dialog_destroyed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="59.html">src/baul-connect-server-dialog.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="59.html#line-82">82</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="135.html">src/baul-desktop-window.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="135.html#line-136">136</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_desktop_window_update_directory&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="60.html">src/baul-emblem-sidebar.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="60.html#line-1093">1093</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_emblem_sidebar_get_sidebar_id&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="60.html#line-1111">1111</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_emblem_sidebar_get_tab_icon&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="60.html#line-1117">1117</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_emblem_sidebar_is_visible_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="61.html">src/baul-file-management-properties-main.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="61.html#line-36">36</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_file_management_properties_main_close_callback&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="62.html">src/baul-file-management-properties.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="62.html#line-269">269</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;section&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="62.html#line-460">460</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;data&apos; can be declared as pointer to const</td></tr>
+         <tr class="knownConditionTrueFalse sev_style issue"><td><a href="62.html#line-745">745</a></td><td>knownConditionTrueFalse</td><td><a href="https://cwe.mitre.org/data/definitions/571.html">571</a></td><td>style</td><td>Condition &apos;&amp;iter!=NULL&apos; is always true</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="62.html#line-1033">1033</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;binding&apos; can be declared as pointer to const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="62.html#line-1085">1085</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;widget_value&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="63.html">src/baul-history-sidebar.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="63.html#line-176">176</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;tree_view&apos; can be declared as pointer to const. However it seems that &apos;row_activated_callback&apos; is a callback function, if &apos;tree_view&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="63.html#line-333">333</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_history_sidebar_get_sidebar_id&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="63.html#line-351">351</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_history_sidebar_get_tab_icon&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="63.html#line-357">357</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_history_sidebar_is_visible_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="64.html">src/baul-image-properties-page.c</a></td></tr>
+         <tr class="knownConditionTrueFalse sev_style issue"><td><a href="64.html#line-498">498</a></td><td>knownConditionTrueFalse</td><td><a href="https://cwe.mitre.org/data/definitions/570.html">570</a></td><td>style</td><td>Condition &apos;exif_still_loading==1&apos; is always false</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="65.html">src/baul-information-panel.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="65.html#line-146">146</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_ADD_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="66.html">src/baul-location-bar.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="66.html#line-351">351</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;self&apos; can be reduced.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="66.html#line-419">419</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;last_location&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="66.html#line-560">560</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_location_bar_set_location&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="67.html">src/baul-location-entry.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="67.html#line-74">74</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_CLASS_BOILERPLATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="68.html">src/baul-main.c</a></td></tr>
+         <tr class="unusedVariable sev_style issue"><td><a href="68.html#line-228">228</a></td><td>unusedVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Unused variable: application</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="69.html">src/baul-navigation-action.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="69.html#line-56">56</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="136.html">src/baul-navigation-window-menus.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="136.html#line-312">312</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_navigation_window_update_show_hide_menu_items&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="136.html#line-345">345</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_navigation_window_update_spatial_menu_item&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="136.html#line-372">372</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_navigation_window_remove_go_menu_callback&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="136.html#line-382">382</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_navigation_window_remove_go_menu_items&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="136.html#line-531">531</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_navigation_window_update_split_view_actions_sensitivity&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="70.html">src/baul-navigation-window-pane.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="70.html#line-42">42</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="71.html">src/baul-navigation-window-slot.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="71.html#line-36">36</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="72.html">src/baul-navigation-window.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="72.html#line-95">95</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="137.html">src/baul-notebook.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="137.html#line-181">181</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_notebook_sync_loading&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="137.html#line-219">219</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_notebook_sync_tab_label&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="137.html#line-479">479</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_notebook_can_reorder_current_child_relative&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="137.html#line-488">488</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_notebook_can_set_current_page_relative&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="73.html">src/baul-notes-viewer.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="73.html#line-81">81</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_CODE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="74.html">src/baul-pathbar.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="74.html#line-908">908</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;baul_path_bar_scroll&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="74.html#line-1176">1176</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;baul_path_bar_slider_button_press&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="74.html#line-1216">1216</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;baul_path_bar_slider_button_release&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="74.html#line-1328">1328</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;button_list&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="74.html#line-1353">1353</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;button_list&apos; can be declared as pointer to const</td></tr>
+         <tr class="nullPointerRedundantCheck sev_warning issue"><td><a href="74.html#line-1590">1590</a></td><td>nullPointerRedundantCheck</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td><td>warning</td><td class="warning">Either the condition &apos;button_data&apos; is redundant or there is possible null pointer dereference: button_data.</td></tr>
+         <tr class="nullPointerRedundantCheck sev_warning issue"><td><a href="74.html#line-1596">1596</a></td><td>nullPointerRedundantCheck</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td><td>warning</td><td class="warning">Either the condition &apos;button_data&apos; is redundant or there is possible null pointer dereference: button_data.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="74.html#line-2027">2027</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;button_data&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="74.html#line-2126">2126</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_path_bar_set_path&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="75.html">src/baul-places-sidebar.c</a></td></tr>
+         <tr class="redundantAssignment sev_style issue"><td><a href="75.html#line-523">523</a></td><td>redundantAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;last_iter&apos; is reassigned a value before the old one has been used.</td></tr>
+         <tr class="redundantAssignment sev_style issue"><td><a href="75.html#line-885">885</a></td><td>redundantAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;last_iter&apos; is reassigned a value before the old one has been used.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="75.html#line-1115">1115</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;sidebar&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="75.html#line-2624">2624</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;bookmarks_key_press_event_cb&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="clarifyCalculation sev_style issue"><td><a href="75.html#line-3000">3000</a></td><td>clarifyCalculation</td><td><a href="https://cwe.mitre.org/data/definitions/783.html">783</a></td><td>style</td><td>Clarify calculation precedence for &apos;&amp;&apos; and &apos;?&apos;.</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="75.html#line-3406">3406</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_places_sidebar_get_sidebar_id&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="75.html#line-3424">3424</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_places_sidebar_get_tab_icon&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="75.html#line-3430">3430</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;baul_places_sidebar_is_visible_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="76.html">src/baul-property-browser.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="76.html#line-200">200</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="77.html">src/baul-query-editor.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="77.html#line-214">214</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_CLASS_BOILERPLATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="78.html">src/baul-search-bar.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="78.html#line-55">55</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_CLASS_BOILERPLATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="79.html">src/baul-side-pane.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="79.html#line-68">68</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="80.html">src/baul-sidebar-title.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="80.html#line-102">102</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="81.html">src/baul-spatial-window.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="81.html#line-93">93</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="82.html">src/baul-window-manage-views.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="82.html#line-313">313</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_window_update_up_button&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="82.html#line-531">531</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;l&apos; can be declared as pointer to const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="82.html#line-2115">2115</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;scheme_string&apos; can be reduced.</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="82.html#line-2364">2364</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_window_slot_reload&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="83.html">src/baul-window-menus.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="83.html#line-698">698</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;proxy_button_press_event_cb&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="83.html#line-711">711</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const. However it seems that &apos;proxy_button_release_event_cb&apos; is a callback function, if &apos;event&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="84.html">src/baul-window-pane.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="84.html#line-34">34</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="85.html">src/baul-window-slot.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="85.html#line-42">42</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_CODE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="138.html">src/baul-window-toolbars.c</a></td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="138.html#line-80">80</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;baul_navigation_window_activate_spinner&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="86.html">src/baul-window.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="86.html#line-106">106</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_ADD_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="87.html">src/baul-x-content-bar.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="87.html#line-52">52</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="88.html">src/baul-zoom-action.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="88.html#line-51">51</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="89.html">src/baul-zoom-control.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="89.html#line-890">890</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_IMPLEMENT_INTERFACE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="90.html">src/file-manager/fm-desktop-icon-view.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="90.html#line-92">92</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_DEFINE_TYPE_WITH_PRIVATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="91.html">src/file-manager/fm-directory-view.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="91.html#line-418">418</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If EEL_CLASS_BOILERPLATE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="92.html">src/file-manager/fm-empty-view.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="92.html#line-96">96</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_empty_view_file_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="92.html#line-97">97</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_empty_view_file_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="92.html#line-218">218</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_empty_view_start_renaming_file&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="92.html#line-231">231</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;file1&apos; can be declared as pointer to const. However it seems that &apos;fm_empty_view_compare_files&apos; is a callback function, if &apos;file1&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="92.html#line-232">232</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;file2&apos; can be declared as pointer to const. However it seems that &apos;fm_empty_view_compare_files&apos; is a callback function, if &apos;file2&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="92.html#line-276">276</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_empty_view_get_first_visible_file&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="92.html#line-282">282</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_empty_view_scroll_to_file&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="92.html#line-340">340</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_empty_view_get_id&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="selfAssignment sev_style issue"><td><a href="92.html#line-419">419</a></td><td>selfAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Redundant assignment of &apos;fm_empty_view.id&apos; to itself.</td></tr>
+         <tr class="selfAssignment sev_style issue"><td><a href="92.html#line-420">420</a></td><td>selfAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Redundant assignment of &apos;fm_empty_view.view_combo_label&apos; to itself.</td></tr>
+         <tr class="selfAssignment sev_style issue"><td><a href="92.html#line-421">421</a></td><td>selfAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Redundant assignment of &apos;fm_empty_view.view_menu_label_with_mnemonic&apos; to itself.</td></tr>
+         <tr class="selfAssignment sev_style issue"><td><a href="92.html#line-422">422</a></td><td>selfAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Redundant assignment of &apos;fm_empty_view.error_label&apos; to itself.</td></tr>
+         <tr class="selfAssignment sev_style issue"><td><a href="92.html#line-423">423</a></td><td>selfAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Redundant assignment of &apos;fm_empty_view.display_location_label&apos; to itself.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="93.html">src/file-manager/fm-error-reporting.c</a></td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="93.html#line-282">282</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;data&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="94.html">src/file-manager/fm-icon-container.c</a></td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="94.html#line-254">254</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;attributes&apos; can be declared as pointer to const</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="94.html#line-615">615</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;fm_icon_container_construct&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="95.html">src/file-manager/fm-icon-view.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="95.html#line-83">83</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;SortCriterion::menu_label&apos; is never used.</td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="95.html#line-84">84</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;SortCriterion::menu_hint&apos; is never used.</td></tr>
+         <tr class="nullPointer sev_warning issue"><td><a href="95.html#line-377">377</a></td><td>nullPointer</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td><td>warning</td><td class="warning">Possible null pointer dereference: sort</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-606">606</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;directory&apos; can be declared as pointer to const. However it seems that &apos;fm_icon_view_add_file&apos; is a callback function, if &apos;directory&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-1650">1650</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;container&apos; can be declared as pointer to const. However it seems that &apos;layout_changed_callback&apos; is a callback function, if &apos;container&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-2040">2040</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;container&apos; can be declared as pointer to const. However it seems that &apos;icon_container_activate_callback&apos; is a callback function, if &apos;container&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-2054">2054</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;container&apos; can be declared as pointer to const. However it seems that &apos;icon_container_activate_alternate_callback&apos; is a callback function, if &apos;container&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="95.html#line-2080">2080</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;button_event&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="95.html#line-2088">2088</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;key_event&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-2118">2118</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;container&apos; can be declared as pointer to const. However it seems that &apos;band_select_started_callback&apos; is a callback function, if &apos;container&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-2128">2128</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;container&apos; can be declared as pointer to const. However it seems that &apos;band_select_ended_callback&apos; is a callback function, if &apos;container&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-2544">2544</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;container&apos; can be declared as pointer to const. However it seems that &apos;selection_changed_callback&apos; is a callback function, if &apos;container&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-2601">2601</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;container&apos; can be declared as pointer to const. However it seems that &apos;icon_position_changed_callback&apos; is a callback function, if &apos;container&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="95.html#line-2651">2651</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;new_name&apos; can be declared as pointer to const. However it seems that &apos;fm_icon_view_icon_text_changed_callback&apos; is a callback function, if &apos;new_name&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="96.html">src/file-manager/fm-list-model.c</a></td></tr>
+         <tr class="unknownMacro sev_error issue"><td><a href="96.html#line-110">110</a></td><td>unknownMacro</td><td></td><td>error</td><td class="error">There is an unknown macro here somewhere. Configuration is required. If G_IMPLEMENT_INTERFACE is a macro then please configure it.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="97.html">src/file-manager/fm-list-view.c</a></td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="97.html#line-323">323</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;event&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="97.html#line-413">413</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;iter&apos; can be declared as pointer to const. However it seems that &apos;filtered_selection_foreach&apos; is a callback function, if &apos;iter&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="97.html#line-1263">1263</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;ihint&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="97.html#line-2101">2101</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;column&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="97.html#line-2132">2132</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;error&apos; can be declared as pointer to const. However it seems that &apos;fm_list_view_rename_callback&apos; is a callback function, if &apos;error&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="97.html#line-2735">2735</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;list_view&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="97.html#line-3436">3436</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_list_view_get_id&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="97.html#line-3560">3560</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;fm_list_view_get_tree_view&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="98.html">src/file-manager/fm-properties-window.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="98.html#line-101">101</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;_FMPropertiesWindowPrivate::name_row&apos; is never used.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-238">238</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;window&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-258">258</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;window&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-466">466</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;properties_window&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="98.html#line-842">842</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;word&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="98.html#line-964">964</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;name&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-1108">1108</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;a&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-1108">1108</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;b&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-1122">1122</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;window&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="98.html#line-1330">1330</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;inconsistent_string&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="98.html#line-1666">1666</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;l&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="98.html#line-2045">2045</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;new_owner&apos; can be declared as pointer to const</td></tr>
+         <tr class="redundantAssignment sev_style issue"><td><a href="98.html#line-2959">2959</a></td><td>redundantAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;*l&apos; is assigned an expression that holds the same value.</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-3015">3015</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;a&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-3391">3391</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;window&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-3408">3408</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;window&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="98.html#line-3428">3428</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;window&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="98.html#line-5314">5314</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;widget&apos; can be declared as pointer to const. However it seems that &apos;parent_widget_destroyed_callback&apos; is a callback function, if &apos;widget&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="99.html">src/file-manager/fm-tree-model.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="99.html#line-124">124</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;DoneLoadingParameters::directory&apos; is never used.</td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="99.html#line-125">125</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;DoneLoadingParameters::model&apos; is never used.</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="99.html#line-140">140</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_tree_model_get_flags&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-461">461</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;node&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-472">472</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;child&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="99.html#line-1210">1210</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_tree_model_get_n_columns&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="99.html#line-1216">1216</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_tree_model_get_column_type&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-1237">1237</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;model&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="99.html#line-1476">1476</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;iter&apos; can be declared as pointer to const. However it seems that &apos;fm_tree_model_iter_has_child&apos; is a callback function, if &apos;iter&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="99.html#line-1479">1479</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;node&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-1760">1760</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;model&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-1760">1760</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;file&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-1911">1911</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;iter_a&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-1912">1912</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;iter_b&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="99.html#line-1914">1914</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;a&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="99.html#line-1914">1914</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;b&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-1946">1946</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;iter&apos; can be declared as pointer to const</td></tr>
+         <tr class="constVariablePointer sev_style issue"><td><a href="99.html#line-1948">1948</a></td><td>constVariablePointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;node&apos; can be declared as pointer to const</td></tr>
+         <tr class="constParameterPointer sev_style issue"><td><a href="99.html#line-1964">1964</a></td><td>constParameterPointer</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;model&apos; can be declared as pointer to const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="100.html">src/file-manager/fm-tree-view.c</a></td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="100.html#line-105">105</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;FMTreeViewDetails::popup_rename&apos; is never used.</td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="100.html#line-120">120</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;PrependURIParameters::uris&apos; is never used.</td></tr>
+         <tr class="unusedStructMember sev_style issue"><td><a href="100.html#line-121">121</a></td><td>unusedStructMember</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>struct member &apos;PrependURIParameters::view&apos; is never used.</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="100.html#line-632">632</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;get_root_uri_callback&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="100.html#line-1710">1710</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_tree_view_get_sidebar_id&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="100.html#line-1728">1728</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_tree_view_get_tab_icon&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="100.html#line-1734">1734</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_tree_view_is_visible_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="101.html">src/file-manager/fm-widget-view.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-133">133</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_file_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-134">134</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_file_changed&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-187">187</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_remove_file&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-188">188</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_remove_file&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-264">264</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_start_renaming_file&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-276">276</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;file1&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_compare_files&apos; is a callback function, if &apos;file1&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-277">277</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;file2&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_compare_files&apos; is a callback function, if &apos;file2&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-328">328</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_scroll_to_file&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="101.html#line-386">386</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;fm_widget_view_get_id&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="102.html">test/test-baul-search-engine.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="102.html#line-28">28</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;finished_cb&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="103.html">test/test-copy.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="103.html#line-7">7</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;copy_done&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="103.html#line-31">31</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;finished_cb&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="103.html#line-44">44</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;source&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="104.html">test/test-eel-editable-label.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="104.html#line-10">10</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;quit&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="105.html">test/test-eel-image-table.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="105.html#line-83">83</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;image_table_child_enter_callback&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="105.html#line-84">84</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;image_table_child_enter_callback&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="105.html#line-100">100</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;image_table_child_leave_callback&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="105.html#line-101">101</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;image_table_child_leave_callback&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="105.html#line-179">179</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;allocation&apos; can be declared as pointer to const. However it seems that &apos;image_table_size_allocate&apos; is a callback function, if &apos;allocation&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="106.html">test/test-eel-labeled-image.c</a></td></tr>
+         <tr class="knownConditionTrueFalse sev_style issue"><td><a href="106.html#line-72">72</a></td><td>knownConditionTrueFalse</td><td><a href="https://cwe.mitre.org/data/definitions/570.html">570</a></td><td>style</td><td>Condition &apos;labeled_image_window&apos; is always false</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="107.html">test/test.c</a></td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="107.html#line-25">25</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;test_delete_event&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+         <tr class="staticFunction sev_style issue"><td><a href="107.html#line-25">25</a></td><td>staticFunction</td><td></td><td>style</td><td>The function &apos;test_delete_event&apos; should have static linkage since it is not used outside of its translation unit.</td></tr>
+         <tr class="constParameterCallback sev_style issue"><td><a href="107.html#line-26">26</a></td><td>constParameterCallback</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;G_GNUC_UNUSED&apos; can be declared as pointer to const. However it seems that &apos;test_delete_event&apos; is a callback function, if &apos;G_GNUC_UNUSED&apos; is declared with const you might also need to cast function pointer(s).</td></tr>
+      </tbody>
+       </table>
+    </div>
+    <div id="footer" class="footer">
+      <p>
+        Created by Cppcheck 2.17.1 (<a href="https://cppcheck.sourceforge.io">Sourceforge</a>, <a href="irc://irc.freenode.net/cppcheck">IRC</a>)
+      </p>
+    </div>
+    </div>
+  </body>
+</html>
