@@ -450,9 +450,9 @@ visit_directory (GFile *dir, SearchThreadData *data)
     GList *l;
     const char *id;
     gboolean visited;
-    GTimeVal result;
     gchar *attributes;
     GString *attr_string;
+    GDateTime *mod_dt = NULL;
     gchar *filepath = NULL;
     gboolean odt2txt_available = FALSE;
 
@@ -464,8 +464,7 @@ visit_directory (GFile *dir, SearchThreadData *data)
         g_string_append (attr_string, "," G_FILE_ATTRIBUTE_XATTR_XDG_TAGS);
     }
     if (data->timestamp != 0) {
-        g_string_append (attr_string, "," G_FILE_ATTRIBUTE_TIME_MODIFIED ","
-                         G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC);
+        g_string_append (attr_string, "," G_FILE_ATTRIBUTE_TIME_MODIFIED);
     }
     if (data->size != 0) {
         g_string_append (attr_string, "," G_FILE_ATTRIBUTE_STANDARD_SIZE);
@@ -534,13 +533,21 @@ visit_directory (GFile *dir, SearchThreadData *data)
         }
 
         if (hit && data->timestamp != 0) {
-            g_file_info_get_modification_time (info, &result);
-            if (data->timestamp > 0) {
-                if (data->timestamp < result.tv_sec)
-                    hit = FALSE;
+            mod_dt = g_file_info_get_modification_date_time (info);
+            if (mod_dt) {
+                gint64 mod_sec = g_date_time_to_unix (mod_dt);
+
+                if (data->timestamp > 0) {
+                    if (data->timestamp < mod_sec)
+                        hit = FALSE;
+                } else {
+                    if (mod_sec < llabs (data->timestamp))
+                        hit = FALSE;
+                }
+                g_date_time_unref (mod_dt);
+                mod_dt = NULL;
             } else {
-                if (result.tv_sec < ABS(data->timestamp))
-                    hit = FALSE;
+                hit = FALSE;
             }
         }
 
