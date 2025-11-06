@@ -19,9 +19,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: baul 2.0.0\n"
+"Project-Id-Version: baul 2.1.0\n"
 "Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
-"POT-Creation-Date: 2025-01-24 09:42+0100\n"
+"POT-Creation-Date: 2025-11-06 11:07+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Alessandro Volturno <alelvb@inwind.it>, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/cafe/teams/13566/it/)\n"
@@ -300,8 +300,8 @@ msgstr "Per aggiungere un simbolo trascinarne uno su un oggetto"
 msgid "Erase"
 msgstr "Cancella"
 
-#: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:3
-#: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
+#: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:2
+#: data/baul.desktop.in.in:2 data/baul-folder-handler.desktop.in.in:2
 #: src/baul-spatial-window.c:403 src/baul-window.c:167
 #: src/baul-window-menus.c:564
 msgid "Baul"
@@ -331,29 +331,29 @@ msgstr ""
 "Le funzionalità di Baul possono essere aumentate tramite i plugin, così come "
 "in GNOME Nautilus di cui Baul deriva."
 
-#: data/baul-autorun-software.desktop.in.in:3
+#: data/baul-autorun-software.desktop.in.in:2
 msgid "Autorun Prompt"
 msgstr "Conferma esecuzione automatica"
 
-#: data/baul-browser.desktop.in.in:4
+#: data/baul-browser.desktop.in.in:3
 msgid "File Browser"
 msgstr "Esploratore File"
 
-#: data/baul-browser.desktop.in.in:5
+#: data/baul-browser.desktop.in.in:4
 msgid "Browse the file system with the file manager"
 msgstr "Esplora il file system con il file manager"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-browser.desktop.in.in:15
+#: data/baul-browser.desktop.in.in:14
 msgid "files;browser;manager;CAFE;"
 msgstr "file;browser;manager;CAFE;"
 
-#: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
+#: data/baul-computer.desktop.in.in:2 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
 msgid "Computer"
 msgstr "Computer"
 
-#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:927
+#: data/baul-computer.desktop.in.in:3 src/baul-window-menus.c:927
 msgid ""
 "Browse all local and remote disks and folders accessible from this computer"
 msgstr ""
@@ -361,42 +361,42 @@ msgstr ""
 "computer"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-computer.desktop.in.in:14
+#: data/baul-computer.desktop.in.in:13
 msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr "browse;dischi;cartelle;locale;remote;computer;CAFE;"
 
-#: data/baul.desktop.in.in:4
+#: data/baul.desktop.in.in:3
 msgid "File Manager"
 msgstr "File manager"
 
-#: data/baul-file-management-properties.desktop.in.in:3
+#: data/baul-file-management-properties.desktop.in.in:2
 msgid "File Management"
 msgstr "Gestione file"
 
-#: data/baul-file-management-properties.desktop.in.in:4
+#: data/baul-file-management-properties.desktop.in.in:3
 msgid "Change the behaviour and appearance of file manager windows"
 msgstr "Cambia il comportamento e l'aspetto delle finestre del file manager"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-file-management-properties.desktop.in.in:13
+#: data/baul-file-management-properties.desktop.in.in:12
 msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr "file;gestore;modifica;proprieta;comportamento;aspetto;finestre;CAFE;"
 
-#: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
+#: data/baul-folder-handler.desktop.in.in:3 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
 msgstr "Apertura cartella"
 
-#: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1427
+#: data/baul-home.desktop.in.in:2 src/file-manager/fm-tree-view.c:1427
 msgid "Home Folder"
 msgstr "Cartella home"
 
-#: data/baul-home.desktop.in.in:4 src/baul-places-sidebar.c:527
+#: data/baul-home.desktop.in.in:3 src/baul-places-sidebar.c:527
 #: src/baul-window-menus.c:922
 msgid "Open your personal folder"
 msgstr "Apre la propria cartella personale"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-home.desktop.in.in:14
+#: data/baul-home.desktop.in.in:13
 msgid "home;personal;folder;open;CAFE;"
 msgstr "home;personale;cartella;apri;CAFE;"
 
@@ -404,16 +404,16 @@ msgstr "home;personale;cartella;apri;CAFE;"
 msgid "Saved search"
 msgstr "Ricerca salvata"
 
-#: data/cafe-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
+#: data/cafe-network-scheme.desktop.in.in:2 src/baul-places-sidebar.c:855
 msgid "Network"
 msgstr "Rete"
 
-#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:932
+#: data/cafe-network-scheme.desktop.in.in:3 src/baul-window-menus.c:932
 msgid "Browse bookmarked and local network locations"
 msgstr "Esplora le posizioni di rete locali e nei segnalibri"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/cafe-network-scheme.desktop.in.in:14
+#: data/cafe-network-scheme.desktop.in.in:13
 msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr "segnalibri;gestore;locale;rete;unita;CAFE;"
 
@@ -978,206 +978,206 @@ msgstr "Impossibile rinominare l'icona desktop"
 msgid "Unable to rename desktop file"
 msgstr "Impossibile rinominare il file desktop"
 
-#: libbaul-private/baul-file.c:4759
+#: libbaul-private/baul-file.c:4765
 msgid "today at 00:00:00 PM"
 msgstr "oggi alle 00.00.00"
 
-#: libbaul-private/baul-file.c:4760 src/baul-file-management-properties.c:532
+#: libbaul-private/baul-file.c:4766 src/baul-file-management-properties.c:532
 msgid "today at %-I:%M:%S %p"
 msgstr "oggi alle %-H.%M.%S"
 
-#: libbaul-private/baul-file.c:4762
+#: libbaul-private/baul-file.c:4768
 msgid "today at 00:00 PM"
 msgstr "oggi alle 00.00"
 
-#: libbaul-private/baul-file.c:4763
+#: libbaul-private/baul-file.c:4769
 msgid "today at %-I:%M %p"
 msgstr "oggi alle %-H.%M"
 
-#: libbaul-private/baul-file.c:4765
+#: libbaul-private/baul-file.c:4771
 msgid "today, 00:00 PM"
 msgstr "oggi, 00.00"
 
-#: libbaul-private/baul-file.c:4766
+#: libbaul-private/baul-file.c:4772
 msgid "today, %-I:%M %p"
 msgstr "oggi, %-H.%M"
 
-#: libbaul-private/baul-file.c:4768 libbaul-private/baul-file.c:4769
+#: libbaul-private/baul-file.c:4774 libbaul-private/baul-file.c:4775
 msgid "today"
 msgstr "oggi"
 
-#: libbaul-private/baul-file.c:4778
+#: libbaul-private/baul-file.c:4784
 msgid "yesterday at 00:00:00 PM"
 msgstr "ieri alle 00.00.00"
 
-#: libbaul-private/baul-file.c:4779
+#: libbaul-private/baul-file.c:4785
 msgid "yesterday at %-I:%M:%S %p"
 msgstr "ieri alle %-H.%M.%S"
 
-#: libbaul-private/baul-file.c:4781
+#: libbaul-private/baul-file.c:4787
 msgid "yesterday at 00:00 PM"
 msgstr "ieri alle 00.00"
 
-#: libbaul-private/baul-file.c:4782
+#: libbaul-private/baul-file.c:4788
 msgid "yesterday at %-I:%M %p"
 msgstr "ieri alle %-H.%M"
 
-#: libbaul-private/baul-file.c:4784
+#: libbaul-private/baul-file.c:4790
 msgid "yesterday, 00:00 PM"
 msgstr "ieri, 00.00"
 
-#: libbaul-private/baul-file.c:4785
+#: libbaul-private/baul-file.c:4791
 msgid "yesterday, %-I:%M %p"
 msgstr "ieri, %-H.%M"
 
-#: libbaul-private/baul-file.c:4787 libbaul-private/baul-file.c:4788
+#: libbaul-private/baul-file.c:4793 libbaul-private/baul-file.c:4794
 msgid "yesterday"
 msgstr "ieri"
 
-#: libbaul-private/baul-file.c:4799
+#: libbaul-private/baul-file.c:4805
 msgid "Wednesday, September 00 0000 at 00:00:00 PM"
 msgstr "Mercoledì, 00 settembre 0000 alle 00.00.00"
 
-#: libbaul-private/baul-file.c:4800
+#: libbaul-private/baul-file.c:4806
 msgid "%A, %B %-d %Y at %-I:%M:%S %p"
 msgstr "%A, %d/%m/%Y, %-H.%M"
 
-#: libbaul-private/baul-file.c:4802
+#: libbaul-private/baul-file.c:4808
 msgid "Mon, Oct 00 0000 at 00:00:00 PM"
 msgstr "Lun, 00 ott 0000 alle 00.00.00"
 
-#: libbaul-private/baul-file.c:4803
+#: libbaul-private/baul-file.c:4809
 msgid "%a, %b %-d %Y at %-I:%M:%S %p"
 msgstr "%a, %-d %b %Y alle %-H.%M.%S"
 
-#: libbaul-private/baul-file.c:4805
+#: libbaul-private/baul-file.c:4811
 msgid "Mon, Oct 00 0000 at 00:00 PM"
 msgstr "Lun, 00 ott 0000 alle 00.00"
 
-#: libbaul-private/baul-file.c:4806
+#: libbaul-private/baul-file.c:4812
 msgid "%a, %b %-d %Y at %-I:%M %p"
 msgstr "%a, %-d %b %Y alle %-H.%M"
 
-#: libbaul-private/baul-file.c:4808
+#: libbaul-private/baul-file.c:4814
 msgid "Oct 00 0000 at 00:00 PM"
 msgstr "00 ott 0000 alle 00.00"
 
-#: libbaul-private/baul-file.c:4809
+#: libbaul-private/baul-file.c:4815
 msgid "%b %-d %Y at %-I:%M %p"
 msgstr "%-d %b %Y alle %-H.%M"
 
-#: libbaul-private/baul-file.c:4811
+#: libbaul-private/baul-file.c:4817
 msgid "Oct 00 0000, 00:00 PM"
 msgstr "00 ott 0000, 00.00"
 
-#: libbaul-private/baul-file.c:4812
+#: libbaul-private/baul-file.c:4818
 msgid "%b %-d %Y, %-I:%M %p"
 msgstr "%-d %b %Y, %-H.%M"
 
-#: libbaul-private/baul-file.c:4814
+#: libbaul-private/baul-file.c:4820
 msgid "00/00/00, 00:00 PM"
 msgstr "00/00/00, 00.00"
 
-#: libbaul-private/baul-file.c:4815
+#: libbaul-private/baul-file.c:4821
 msgid "%m/%-d/%y, %-I:%M %p"
 msgstr "%-d/%m/%y, %-H.%M"
 
-#: libbaul-private/baul-file.c:4817
+#: libbaul-private/baul-file.c:4823
 msgid "00/00/00"
 msgstr "00/00/00"
 
-#: libbaul-private/baul-file.c:4818
+#: libbaul-private/baul-file.c:4824
 msgid "%m/%d/%y"
 msgstr "%d/%m/%y"
 
-#: libbaul-private/baul-file.c:5455
+#: libbaul-private/baul-file.c:5461
 msgid "Not allowed to set permissions"
 msgstr "Non è consentito impostare i permessi"
 
-#: libbaul-private/baul-file.c:5749
+#: libbaul-private/baul-file.c:5755
 msgid "Not allowed to set owner"
 msgstr "Non è consentito impostare il proprietario"
 
-#: libbaul-private/baul-file.c:5767
+#: libbaul-private/baul-file.c:5773
 #, c-format
 msgid "Specified owner '%s' doesn't exist"
 msgstr "L'utente «%s» specificato non esiste"
 
-#: libbaul-private/baul-file.c:6029
+#: libbaul-private/baul-file.c:6035
 msgid "Not allowed to set group"
 msgstr "Non è consentito impostare il gruppo"
 
-#: libbaul-private/baul-file.c:6047
+#: libbaul-private/baul-file.c:6053
 #, c-format
 msgid "Specified group '%s' doesn't exist"
 msgstr "Il gruppo «%s» specificato non esiste"
 
-#: libbaul-private/baul-file.c:6201 src/file-manager/fm-directory-view.c:2393
+#: libbaul-private/baul-file.c:6207 src/file-manager/fm-directory-view.c:2393
 #, c-format
 msgid "%'u item"
 msgid_plural "%'u items"
 msgstr[0] "%'u oggetto"
 msgstr[1] "%'u oggetti"
 
-#: libbaul-private/baul-file.c:6202
+#: libbaul-private/baul-file.c:6208
 #, c-format
 msgid "%'u folder"
 msgid_plural "%'u folders"
 msgstr[0] "%'u cartella"
 msgstr[1] "%'u cartelle"
 
-#: libbaul-private/baul-file.c:6203
+#: libbaul-private/baul-file.c:6209
 #, c-format
 msgid "%'u file"
 msgid_plural "%'u files"
 msgstr[0] "%'u file"
 msgstr[1] "%'u file"
 
-#: libbaul-private/baul-file.c:6307
+#: libbaul-private/baul-file.c:6313
 msgid "%"
 msgstr "%"
 
-#: libbaul-private/baul-file.c:6308
+#: libbaul-private/baul-file.c:6314
 #, c-format
 msgid "%s (%s bytes)"
 msgstr "%s (%s byte)"
 
-#: libbaul-private/baul-file.c:6658 libbaul-private/baul-file.c:6682
+#: libbaul-private/baul-file.c:6664 libbaul-private/baul-file.c:6688
 msgid "? items"
 msgstr "? oggetti"
 
-#: libbaul-private/baul-file.c:6664 libbaul-private/baul-file.c:6672
+#: libbaul-private/baul-file.c:6670 libbaul-private/baul-file.c:6678
 msgid "? bytes"
 msgstr "? byte"
 
-#: libbaul-private/baul-file.c:6687
+#: libbaul-private/baul-file.c:6693
 msgid "unknown type"
 msgstr "tipo sconosciuto"
 
-#: libbaul-private/baul-file.c:6690
+#: libbaul-private/baul-file.c:6696
 msgid "unknown MIME type"
 msgstr "tipo MIME sconosciuto"
 
-#: libbaul-private/baul-file.c:6704
+#: libbaul-private/baul-file.c:6710
 #: src/file-manager/fm-properties-window.c:1305
 msgid "unknown"
 msgstr "Sconosciuta"
 
-#: libbaul-private/baul-file.c:6754
+#: libbaul-private/baul-file.c:6760
 msgid "program"
 msgstr "programma"
 
-#: libbaul-private/baul-file.c:6774
+#: libbaul-private/baul-file.c:6780
 msgid "link"
 msgstr "collegamento"
 
-#: libbaul-private/baul-file.c:6780 libbaul-private/baul-file-operations.c:406
+#: libbaul-private/baul-file.c:6786 libbaul-private/baul-file-operations.c:406
 #: src/file-manager/fm-directory-view.c:10655
 #, c-format
 msgid "Link to %s"
 msgstr "Collegamento a %s"
 
-#: libbaul-private/baul-file.c:6796
+#: libbaul-private/baul-file.c:6802
 msgid "link (broken)"
 msgstr "collegamento (interrotto)"
 
@@ -2096,7 +2096,7 @@ msgstr "Impossibile determinare la posizione originale di «%s»"
 msgid "The item cannot be restored from trash"
 msgstr "Impossibile ripristinare l'oggetto dal cestino"
 
-#: libbaul-private/baul-icon-container.c:2920
+#: libbaul-private/baul-icon-container.c:2921
 msgid "The selection rectangle"
 msgstr "Il rettangolo di selezione"
 

@@ -21,9 +21,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: baul 2.0.0\n"
+"Project-Id-Version: baul 2.1.0\n"
 "Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
-"POT-Creation-Date: 2025-01-24 09:42+0100\n"
+"POT-Creation-Date: 2025-11-06 11:07+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
 "Language-Team: Persian (https://www.transifex.com/cafe/teams/13566/fa/)\n"
@@ -302,8 +302,8 @@ msgstr "یک نماد را تا شیئی بکشید تا آن را به شیء �
 msgid "Erase"
 msgstr "پاک کردن"
 
-#: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:3
-#: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
+#: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:2
+#: data/baul.desktop.in.in:2 data/baul-folder-handler.desktop.in.in:2
 #: src/baul-spatial-window.c:403 src/baul-window.c:167
 #: src/baul-window-menus.c:564
 msgid "Baul"
@@ -327,29 +327,29 @@ msgid ""
 "Nautilus, of which Baul is a fork."
 msgstr ""
 
-#: data/baul-autorun-software.desktop.in.in:3
+#: data/baul-autorun-software.desktop.in.in:2
 msgid "Autorun Prompt"
 msgstr "درخواست اجرای خودکار"
 
-#: data/baul-browser.desktop.in.in:4
+#: data/baul-browser.desktop.in.in:3
 msgid "File Browser"
 msgstr "مرورگر پرونده"
 
-#: data/baul-browser.desktop.in.in:5
+#: data/baul-browser.desktop.in.in:4
 msgid "Browse the file system with the file manager"
 msgstr "مرور سیستم پرونده‌ها با مدیر پرونده‌ها"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-browser.desktop.in.in:15
+#: data/baul-browser.desktop.in.in:14
 msgid "files;browser;manager;CAFE;"
 msgstr ""
 
-#: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
+#: data/baul-computer.desktop.in.in:2 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
 msgid "Computer"
 msgstr "رایانه"
 
-#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:927
+#: data/baul-computer.desktop.in.in:3 src/baul-window-menus.c:927
 msgid ""
 "Browse all local and remote disks and folders accessible from this computer"
 msgstr ""
@@ -357,42 +357,42 @@ msgstr ""
 "می‌باشند."
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-computer.desktop.in.in:14
+#: data/baul-computer.desktop.in.in:13
 msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr ""
 
-#: data/baul.desktop.in.in:4
+#: data/baul.desktop.in.in:3
 msgid "File Manager"
 msgstr "مدیر پرونده‌ها"
 
-#: data/baul-file-management-properties.desktop.in.in:3
+#: data/baul-file-management-properties.desktop.in.in:2
 msgid "File Management"
 msgstr "مدیریت پرونده‌ها"
 
-#: data/baul-file-management-properties.desktop.in.in:4
+#: data/baul-file-management-properties.desktop.in.in:3
 msgid "Change the behaviour and appearance of file manager windows"
 msgstr "تغییر رفتار و ظاهر پنجره‌های نرم‌افزار مدیریت فایل"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-file-management-properties.desktop.in.in:13
+#: data/baul-file-management-properties.desktop.in.in:12
 msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
 
-#: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
+#: data/baul-folder-handler.desktop.in.in:3 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
 msgstr "باز کردن پوشه"
 
-#: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1427
+#: data/baul-home.desktop.in.in:2 src/file-manager/fm-tree-view.c:1427
 msgid "Home Folder"
 msgstr "پوشه‌ی آغازه"
 
-#: data/baul-home.desktop.in.in:4 src/baul-places-sidebar.c:527
+#: data/baul-home.desktop.in.in:3 src/baul-places-sidebar.c:527
 #: src/baul-window-menus.c:922
 msgid "Open your personal folder"
 msgstr "باز کردن پوشه‌ی شخصی شما"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-home.desktop.in.in:14
+#: data/baul-home.desktop.in.in:13
 msgid "home;personal;folder;open;CAFE;"
 msgstr ""
 
@@ -400,16 +400,16 @@ msgstr ""
 msgid "Saved search"
 msgstr "جستجوی ذخیره شده"
 
-#: data/cafe-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
+#: data/cafe-network-scheme.desktop.in.in:2 src/baul-places-sidebar.c:855
 msgid "Network"
 msgstr "شبکه"
 
-#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:932
+#: data/cafe-network-scheme.desktop.in.in:3 src/baul-window-menus.c:932
 msgid "Browse bookmarked and local network locations"
 msgstr ""
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/cafe-network-scheme.desktop.in.in:14
+#: data/cafe-network-scheme.desktop.in.in:13
 msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
 
@@ -967,206 +967,206 @@ msgstr ""
 msgid "Unable to rename desktop file"
 msgstr ""
 
-#: libbaul-private/baul-file.c:4759
+#: libbaul-private/baul-file.c:4765
 msgid "today at 00:00:00 PM"
 msgstr "امروز ساعت ۰۰:۰۰:۰۰ "
 
-#: libbaul-private/baul-file.c:4760 src/baul-file-management-properties.c:532
+#: libbaul-private/baul-file.c:4766 src/baul-file-management-properties.c:532
 msgid "today at %-I:%M:%S %p"
 msgstr "امروز ساعت %-OH:%OM:%OS"
 
-#: libbaul-private/baul-file.c:4762
+#: libbaul-private/baul-file.c:4768
 msgid "today at 00:00 PM"
 msgstr "امروز ساعت ۰۰:۰۰ "
 
-#: libbaul-private/baul-file.c:4763
+#: libbaul-private/baul-file.c:4769
 msgid "today at %-I:%M %p"
 msgstr "امروز در %-OH:%OM"
 
-#: libbaul-private/baul-file.c:4765
+#: libbaul-private/baul-file.c:4771
 msgid "today, 00:00 PM"
 msgstr "امروز، ۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4766
+#: libbaul-private/baul-file.c:4772
 msgid "today, %-I:%M %p"
 msgstr "امروز، %-OH:%OM"
 
-#: libbaul-private/baul-file.c:4768 libbaul-private/baul-file.c:4769
+#: libbaul-private/baul-file.c:4774 libbaul-private/baul-file.c:4775
 msgid "today"
 msgstr "امروز"
 
-#: libbaul-private/baul-file.c:4778
+#: libbaul-private/baul-file.c:4784
 msgid "yesterday at 00:00:00 PM"
 msgstr "دیروز ساعت ۰۰:۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4779
+#: libbaul-private/baul-file.c:4785
 msgid "yesterday at %-I:%M:%S %p"
 msgstr "دیروز ساعت %-OH:%OM:%OS"
 
-#: libbaul-private/baul-file.c:4781
+#: libbaul-private/baul-file.c:4787
 msgid "yesterday at 00:00 PM"
 msgstr "دیروز ساعت ۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4782
+#: libbaul-private/baul-file.c:4788
 msgid "yesterday at %-I:%M %p"
 msgstr "دیروز در %-OH:%OM"
 
-#: libbaul-private/baul-file.c:4784
+#: libbaul-private/baul-file.c:4790
 msgid "yesterday, 00:00 PM"
 msgstr "دیروز، ۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4785
+#: libbaul-private/baul-file.c:4791
 msgid "yesterday, %-I:%M %p"
 msgstr "دیروز، %-OH:%OM"
 
-#: libbaul-private/baul-file.c:4787 libbaul-private/baul-file.c:4788
+#: libbaul-private/baul-file.c:4793 libbaul-private/baul-file.c:4794
 msgid "yesterday"
 msgstr "دیروز"
 
-#: libbaul-private/baul-file.c:4799
+#: libbaul-private/baul-file.c:4805
 msgid "Wednesday, September 00 0000 at 00:00:00 PM"
 msgstr "چهارشنبه، ۰۰ سپتامبر ۰۰۰۰ ساعت ۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4800
+#: libbaul-private/baul-file.c:4806
 msgid "%A, %B %-d %Y at %-I:%M:%S %p"
 msgstr "%a، %-Od %B %OY در %-OH:%OM:%OS"
 
-#: libbaul-private/baul-file.c:4802
+#: libbaul-private/baul-file.c:4808
 msgid "Mon, Oct 00 0000 at 00:00:00 PM"
 msgstr "دوشنبه، ۰۰ اکتبر ۰۰۰۰ ساعت ۰۰:۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4803
+#: libbaul-private/baul-file.c:4809
 msgid "%a, %b %-d %Y at %-I:%M:%S %p"
 msgstr "%A، %-Od %b %Oy ساعت %-OH:%OM:%OS"
 
-#: libbaul-private/baul-file.c:4805
+#: libbaul-private/baul-file.c:4811
 msgid "Mon, Oct 00 0000 at 00:00 PM"
 msgstr "دوشنبه، ۰۰ اکتبر ۰۰۰۰ ساعت ۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4806
+#: libbaul-private/baul-file.c:4812
 msgid "%a, %b %-d %Y at %-I:%M %p"
 msgstr "%A، %-Od %B %Oy ساعت %-OH:%OM"
 
-#: libbaul-private/baul-file.c:4808
+#: libbaul-private/baul-file.c:4814
 msgid "Oct 00 0000 at 00:00 PM"
 msgstr "۰۰ اکتبر ۰۰۰۰ ساعت ۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4809
+#: libbaul-private/baul-file.c:4815
 msgid "%b %-d %Y at %-I:%M %p"
 msgstr "%-Od %B %Oy ساعت %-OH:%OM"
 
-#: libbaul-private/baul-file.c:4811
+#: libbaul-private/baul-file.c:4817
 msgid "Oct 00 0000, 00:00 PM"
 msgstr "۰۰ اکتبر ۰۰۰۰، ۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4812
+#: libbaul-private/baul-file.c:4818
 msgid "%b %-d %Y, %-I:%M %p"
 msgstr "%-Od %B %Oy ساعت %-OH%OM"
 
-#: libbaul-private/baul-file.c:4814
+#: libbaul-private/baul-file.c:4820
 msgid "00/00/00, 00:00 PM"
 msgstr "۰۰/۰۰/۰۰، ۰۰:۰۰"
 
-#: libbaul-private/baul-file.c:4815
+#: libbaul-private/baul-file.c:4821
 msgid "%m/%-d/%y, %-I:%M %p"
 msgstr "%Oy/%Om/%-Od، %-OH:%OM"
 
-#: libbaul-private/baul-file.c:4817
+#: libbaul-private/baul-file.c:4823
 msgid "00/00/00"
 msgstr "۰۰/۰۰/۰۰"
 
-#: libbaul-private/baul-file.c:4818
+#: libbaul-private/baul-file.c:4824
 msgid "%m/%d/%y"
 msgstr "%Oy/%Om/%Od"
 
-#: libbaul-private/baul-file.c:5455
+#: libbaul-private/baul-file.c:5461
 msgid "Not allowed to set permissions"
 msgstr ""
 
-#: libbaul-private/baul-file.c:5749
+#: libbaul-private/baul-file.c:5755
 msgid "Not allowed to set owner"
 msgstr ""
 
-#: libbaul-private/baul-file.c:5767
+#: libbaul-private/baul-file.c:5773
 #, c-format
 msgid "Specified owner '%s' doesn't exist"
 msgstr ""
 
-#: libbaul-private/baul-file.c:6029
+#: libbaul-private/baul-file.c:6035
 msgid "Not allowed to set group"
 msgstr ""
 
-#: libbaul-private/baul-file.c:6047
+#: libbaul-private/baul-file.c:6053
 #, c-format
 msgid "Specified group '%s' doesn't exist"
 msgstr ""
 
-#: libbaul-private/baul-file.c:6201 src/file-manager/fm-directory-view.c:2393
+#: libbaul-private/baul-file.c:6207 src/file-manager/fm-directory-view.c:2393
 #, c-format
 msgid "%'u item"
 msgid_plural "%'u items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file.c:6202
+#: libbaul-private/baul-file.c:6208
 #, c-format
 msgid "%'u folder"
 msgid_plural "%'u folders"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file.c:6203
+#: libbaul-private/baul-file.c:6209
 #, c-format
 msgid "%'u file"
 msgid_plural "%'u files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: libbaul-private/baul-file.c:6307
+#: libbaul-private/baul-file.c:6313
 msgid "%"
 msgstr ""
 
-#: libbaul-private/baul-file.c:6308
+#: libbaul-private/baul-file.c:6314
 #, c-format
 msgid "%s (%s bytes)"
 msgstr ""
 
-#: libbaul-private/baul-file.c:6658 libbaul-private/baul-file.c:6682
+#: libbaul-private/baul-file.c:6664 libbaul-private/baul-file.c:6688
 msgid "? items"
 msgstr "؟ مورد"
 
-#: libbaul-private/baul-file.c:6664 libbaul-private/baul-file.c:6672
+#: libbaul-private/baul-file.c:6670 libbaul-private/baul-file.c:6678
 msgid "? bytes"
 msgstr "؟ بایت"
 
-#: libbaul-private/baul-file.c:6687
+#: libbaul-private/baul-file.c:6693
 msgid "unknown type"
 msgstr "نوع نامعلوم"
 
-#: libbaul-private/baul-file.c:6690
+#: libbaul-private/baul-file.c:6696
 msgid "unknown MIME type"
 msgstr "نوع MIME نامعلوم"
 
-#: libbaul-private/baul-file.c:6704
+#: libbaul-private/baul-file.c:6710
 #: src/file-manager/fm-properties-window.c:1305
 msgid "unknown"
 msgstr "نامعلوم"
 
-#: libbaul-private/baul-file.c:6754
+#: libbaul-private/baul-file.c:6760
 msgid "program"
 msgstr "برنامه"
 
-#: libbaul-private/baul-file.c:6774
+#: libbaul-private/baul-file.c:6780
 msgid "link"
 msgstr "پیوند"
 
-#: libbaul-private/baul-file.c:6780 libbaul-private/baul-file-operations.c:406
+#: libbaul-private/baul-file.c:6786 libbaul-private/baul-file-operations.c:406
 #: src/file-manager/fm-directory-view.c:10655
 #, c-format
 msgid "Link to %s"
 msgstr "پیوند به %s"
 
-#: libbaul-private/baul-file.c:6796
+#: libbaul-private/baul-file.c:6802
 msgid "link (broken)"
 msgstr "پیوند (خراب)‏"
 
@@ -2062,7 +2062,7 @@ msgstr ""
 msgid "The item cannot be restored from trash"
 msgstr ""
 
-#: libbaul-private/baul-icon-container.c:2920
+#: libbaul-private/baul-icon-container.c:2921
 msgid "The selection rectangle"
 msgstr "مستطیل انتخاب"
 

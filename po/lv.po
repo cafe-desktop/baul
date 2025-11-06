@@ -13,9 +13,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: baul 2.0.0\n"
+"Project-Id-Version: baul 2.1.0\n"
 "Report-Msgid-Bugs-To: https://cafe-desktop.org\n"
-"POT-Creation-Date: 2025-01-24 09:42+0100\n"
+"POT-Creation-Date: 2025-11-06 11:07+0100\n"
 "PO-Revision-Date: 2018-03-11 14:48+0000\n"
 "Last-Translator: Stefano Karapetsas <stefano@karapetsas.com>, 2019\n"
 "Language-Team: Latvian (https://www.transifex.com/cafe/teams/13566/lv/)\n"
@@ -295,8 +295,8 @@ msgstr "Metiet emblēmu uz objekta, lai pievienotu to tam"
 msgid "Erase"
 msgstr "Dzēšana"
 
-#: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:3
-#: data/baul.desktop.in.in:3 data/baul-folder-handler.desktop.in.in:3
+#: data/baul.appdata.xml.in:7 data/baul-browser.desktop.in.in:2
+#: data/baul.desktop.in.in:2 data/baul-folder-handler.desktop.in.in:2
 #: src/baul-spatial-window.c:403 src/baul-window.c:167
 #: src/baul-window-menus.c:564
 msgid "Baul"
@@ -320,29 +320,29 @@ msgid ""
 "Nautilus, of which Baul is a fork."
 msgstr ""
 
-#: data/baul-autorun-software.desktop.in.in:3
+#: data/baul-autorun-software.desktop.in.in:2
 msgid "Autorun Prompt"
 msgstr "Automātiskās palaišanas uzvedne"
 
-#: data/baul-browser.desktop.in.in:4
+#: data/baul-browser.desktop.in.in:3
 msgid "File Browser"
 msgstr "Failu Pārlūks"
 
-#: data/baul-browser.desktop.in.in:5
+#: data/baul-browser.desktop.in.in:4
 msgid "Browse the file system with the file manager"
 msgstr "Pārlūkot failu sistēmu ar failu pārvaldnieku"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-browser.desktop.in.in:15
+#: data/baul-browser.desktop.in.in:14
 msgid "files;browser;manager;CAFE;"
 msgstr ""
 
-#: data/baul-computer.desktop.in.in:3 libbaul-private/baul-desktop-link.c:114
+#: data/baul-computer.desktop.in.in:2 libbaul-private/baul-desktop-link.c:114
 #: src/baul-places-sidebar.c:513
 msgid "Computer"
 msgstr "Dators"
 
-#: data/baul-computer.desktop.in.in:4 src/baul-window-menus.c:927
+#: data/baul-computer.desktop.in.in:3 src/baul-window-menus.c:927
 msgid ""
 "Browse all local and remote disks and folders accessible from this computer"
 msgstr ""
@@ -350,42 +350,42 @@ msgstr ""
 "mapes"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-computer.desktop.in.in:14
+#: data/baul-computer.desktop.in.in:13
 msgid "browse;disks;folders;local;remote;computer;CAFE;"
 msgstr ""
 
-#: data/baul.desktop.in.in:4
+#: data/baul.desktop.in.in:3
 msgid "File Manager"
 msgstr "Failu pārvaldnieks"
 
-#: data/baul-file-management-properties.desktop.in.in:3
+#: data/baul-file-management-properties.desktop.in.in:2
 msgid "File Management"
 msgstr "Failu pārvalde"
 
-#: data/baul-file-management-properties.desktop.in.in:4
+#: data/baul-file-management-properties.desktop.in.in:3
 msgid "Change the behaviour and appearance of file manager windows"
 msgstr "Izmainīt failu pārvaldnieka logu izskatu un izturēšanos"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-file-management-properties.desktop.in.in:13
+#: data/baul-file-management-properties.desktop.in.in:12
 msgid "file;manager;change;properties;behaviour;appearance;windows;CAFE;"
 msgstr ""
 
-#: data/baul-folder-handler.desktop.in.in:4 libbaul-private/baul-autorun.c:580
+#: data/baul-folder-handler.desktop.in.in:3 libbaul-private/baul-autorun.c:580
 msgid "Open Folder"
 msgstr "Atvērt mapi"
 
-#: data/baul-home.desktop.in.in:3 src/file-manager/fm-tree-view.c:1427
+#: data/baul-home.desktop.in.in:2 src/file-manager/fm-tree-view.c:1427
 msgid "Home Folder"
 msgstr "Mājas mape"
 
-#: data/baul-home.desktop.in.in:4 src/baul-places-sidebar.c:527
+#: data/baul-home.desktop.in.in:3 src/baul-places-sidebar.c:527
 #: src/baul-window-menus.c:922
 msgid "Open your personal folder"
 msgstr "Atvērt jūsu privāto mapi"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/baul-home.desktop.in.in:14
+#: data/baul-home.desktop.in.in:13
 msgid "home;personal;folder;open;CAFE;"
 msgstr ""
 
@@ -393,16 +393,16 @@ msgstr ""
 msgid "Saved search"
 msgstr "Saglabātais meklējums"
 
-#: data/cafe-network-scheme.desktop.in.in:3 src/baul-places-sidebar.c:855
+#: data/cafe-network-scheme.desktop.in.in:2 src/baul-places-sidebar.c:855
 msgid "Network"
 msgstr "Tīkls"
 
-#: data/cafe-network-scheme.desktop.in.in:4 src/baul-window-menus.c:932
+#: data/cafe-network-scheme.desktop.in.in:3 src/baul-window-menus.c:932
 msgid "Browse bookmarked and local network locations"
 msgstr "Pārlūkot grāmatzīmēs saglabātās vai lokālā tīkla vietas"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/cafe-network-scheme.desktop.in.in:14
+#: data/cafe-network-scheme.desktop.in.in:13
 msgid "bookmarks;browse;local;network;locations;CAFE;"
 msgstr ""
 
@@ -964,141 +964,141 @@ msgstr "Nevar pārsaukt darbvirsmas ikonu"
 msgid "Unable to rename desktop file"
 msgstr "Nevar pārsaukt darbvirsmas mapi"
 
-#: libbaul-private/baul-file.c:4759
+#: libbaul-private/baul-file.c:4765
 msgid "today at 00:00:00 PM"
 msgstr "šodien 00:00:00"
 
-#: libbaul-private/baul-file.c:4760 src/baul-file-management-properties.c:532
+#: libbaul-private/baul-file.c:4766 src/baul-file-management-properties.c:532
 msgid "today at %-I:%M:%S %p"
 msgstr "šodien %-H:%M:%S"
 
-#: libbaul-private/baul-file.c:4762
+#: libbaul-private/baul-file.c:4768
 msgid "today at 00:00 PM"
 msgstr "šodien 00:00"
 
-#: libbaul-private/baul-file.c:4763
+#: libbaul-private/baul-file.c:4769
 msgid "today at %-I:%M %p"
 msgstr "šodien %-H:%M"
 
-#: libbaul-private/baul-file.c:4765
+#: libbaul-private/baul-file.c:4771
 msgid "today, 00:00 PM"
 msgstr "šodien, 00:00"
 
-#: libbaul-private/baul-file.c:4766
+#: libbaul-private/baul-file.c:4772
 msgid "today, %-I:%M %p"
 msgstr "šodien, %-H:%M"
 
-#: libbaul-private/baul-file.c:4768 libbaul-private/baul-file.c:4769
+#: libbaul-private/baul-file.c:4774 libbaul-private/baul-file.c:4775
 msgid "today"
 msgstr "šodien"
 
-#: libbaul-private/baul-file.c:4778
+#: libbaul-private/baul-file.c:4784
 msgid "yesterday at 00:00:00 PM"
 msgstr "vakar 00:00:00"
 
-#: libbaul-private/baul-file.c:4779
+#: libbaul-private/baul-file.c:4785
 msgid "yesterday at %-I:%M:%S %p"
 msgstr "vakar %-H:%M:%S"
 
-#: libbaul-private/baul-file.c:4781
+#: libbaul-private/baul-file.c:4787
 msgid "yesterday at 00:00 PM"
 msgstr "vakar 00:00"
 
-#: libbaul-private/baul-file.c:4782
+#: libbaul-private/baul-file.c:4788
 msgid "yesterday at %-I:%M %p"
 msgstr "vakar %-H:%M"
 
-#: libbaul-private/baul-file.c:4784
+#: libbaul-private/baul-file.c:4790
 msgid "yesterday, 00:00 PM"
 msgstr "vakar, 00:00"
 
-#: libbaul-private/baul-file.c:4785
+#: libbaul-private/baul-file.c:4791
 msgid "yesterday, %-I:%M %p"
 msgstr "vakar, %-H:M"
 
-#: libbaul-private/baul-file.c:4787 libbaul-private/baul-file.c:4788
+#: libbaul-private/baul-file.c:4793 libbaul-private/baul-file.c:4794
 msgid "yesterday"
 msgstr "vakar"
 
-#: libbaul-private/baul-file.c:4799
+#: libbaul-private/baul-file.c:4805
 msgid "Wednesday, September 00 0000 at 00:00:00 PM"
 msgstr "Trešdiena, 0000. gada 0. septembris, 00:00:00"
 
-#: libbaul-private/baul-file.c:4800
+#: libbaul-private/baul-file.c:4806
 msgid "%A, %B %-d %Y at %-I:%M:%S %p"
 msgstr "%A, %-d %B %Y, %-H:%M:%S"
 
-#: libbaul-private/baul-file.c:4802
+#: libbaul-private/baul-file.c:4808
 msgid "Mon, Oct 00 0000 at 00:00:00 PM"
 msgstr "Pirm, 0000. gada 00. oktobris, 00:00:00"
 
-#: libbaul-private/baul-file.c:4803
+#: libbaul-private/baul-file.c:4809
 msgid "%a, %b %-d %Y at %-I:%M:%S %p"
 msgstr "%a, %Y. gada %-d. %B, %-H:%M:%S"
 
-#: libbaul-private/baul-file.c:4805
+#: libbaul-private/baul-file.c:4811
 msgid "Mon, Oct 00 0000 at 00:00 PM"
 msgstr "Pirm, 0000. gada 00. oktobris, 00:00"
 
-#: libbaul-private/baul-file.c:4806
+#: libbaul-private/baul-file.c:4812
 msgid "%a, %b %-d %Y at %-I:%M %p"
 msgstr "%a, %Y. gada %-d. %B, %-H:%M"
 
-#: libbaul-private/baul-file.c:4808
+#: libbaul-private/baul-file.c:4814
 msgid "Oct 00 0000 at 00:00 PM"
 msgstr "0000. gada 00. oktobris, 00:00"
 
-#: libbaul-private/baul-file.c:4809
+#: libbaul-private/baul-file.c:4815
 msgid "%b %-d %Y at %-I:%M %p"
 msgstr "%Y. gada %-d. %B, %-H:%M"
 
-#: libbaul-private/baul-file.c:4811
+#: libbaul-private/baul-file.c:4817
 msgid "Oct 00 0000, 00:00 PM"
 msgstr "0000. gada 00. oktobris, 00:00"
 
-#: libbaul-private/baul-file.c:4812
+#: libbaul-private/baul-file.c:4818
 msgid "%b %-d %Y, %-I:%M %p"
 msgstr "%Y. gada %-d. %B, %-H:%M"
 
-#: libbaul-private/baul-file.c:4814
+#: libbaul-private/baul-file.c:4820
 msgid "00/00/00, 00:00 PM"
 msgstr "00/00/00, 00:00"
 
-#: libbaul-private/baul-file.c:4815
+#: libbaul-private/baul-file.c:4821
 msgid "%m/%-d/%y, %-I:%M %p"
 msgstr "%m/%-d/%y, %-H:%M"
 
-#: libbaul-private/baul-file.c:4817
+#: libbaul-private/baul-file.c:4823
 msgid "00/00/00"
 msgstr "00/00/00"
 
-#: libbaul-private/baul-file.c:4818
+#: libbaul-private/baul-file.c:4824
 msgid "%m/%d/%y"
 msgstr "%d/%m/%y"
 
-#: libbaul-private/baul-file.c:5455
+#: libbaul-private/baul-file.c:5461
 msgid "Not allowed to set permissions"
 msgstr "Nav tiesību iestatīt atļaujas"
 
-#: libbaul-private/baul-file.c:5749
+#: libbaul-private/baul-file.c:5755
 msgid "Not allowed to set owner"
 msgstr "Nav tiesību iestatīt īpašnieku"
 
-#: libbaul-private/baul-file.c:5767
+#: libbaul-private/baul-file.c:5773
 #, c-format
 msgid "Specified owner '%s' doesn't exist"
 msgstr "Norādītais īpašnieks '%s' neeksistē"
 
-#: libbaul-private/baul-file.c:6029
+#: libbaul-private/baul-file.c:6035
 msgid "Not allowed to set group"
 msgstr "Nav tiesību iestatīt grupu"
 
-#: libbaul-private/baul-file.c:6047
+#: libbaul-private/baul-file.c:6053
 #, c-format
 msgid "Specified group '%s' doesn't exist"
 msgstr "Norādītā grupa '%s' neeksistē"
 
-#: libbaul-private/baul-file.c:6201 src/file-manager/fm-directory-view.c:2393
+#: libbaul-private/baul-file.c:6207 src/file-manager/fm-directory-view.c:2393
 #, c-format
 msgid "%'u item"
 msgid_plural "%'u items"
@@ -1106,7 +1106,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: libbaul-private/baul-file.c:6202
+#: libbaul-private/baul-file.c:6208
 #, c-format
 msgid "%'u folder"
 msgid_plural "%'u folders"
@@ -1114,7 +1114,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: libbaul-private/baul-file.c:6203
+#: libbaul-private/baul-file.c:6209
 #, c-format
 msgid "%'u file"
 msgid_plural "%'u files"
@@ -1122,51 +1122,51 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: libbaul-private/baul-file.c:6307
+#: libbaul-private/baul-file.c:6313
 msgid "%"
 msgstr "%"
 
-#: libbaul-private/baul-file.c:6308
+#: libbaul-private/baul-file.c:6314
 #, c-format
 msgid "%s (%s bytes)"
 msgstr "%s (%s baiti)"
 
-#: libbaul-private/baul-file.c:6658 libbaul-private/baul-file.c:6682
+#: libbaul-private/baul-file.c:6664 libbaul-private/baul-file.c:6688
 msgid "? items"
 msgstr "? vienības"
 
-#: libbaul-private/baul-file.c:6664 libbaul-private/baul-file.c:6672
+#: libbaul-private/baul-file.c:6670 libbaul-private/baul-file.c:6678
 msgid "? bytes"
 msgstr "? baiti"
 
-#: libbaul-private/baul-file.c:6687
+#: libbaul-private/baul-file.c:6693
 msgid "unknown type"
 msgstr "nezināmais tips"
 
-#: libbaul-private/baul-file.c:6690
+#: libbaul-private/baul-file.c:6696
 msgid "unknown MIME type"
 msgstr "nezināms MIME tips"
 
-#: libbaul-private/baul-file.c:6704
+#: libbaul-private/baul-file.c:6710
 #: src/file-manager/fm-properties-window.c:1305
 msgid "unknown"
 msgstr "nezināms"
 
-#: libbaul-private/baul-file.c:6754
+#: libbaul-private/baul-file.c:6760
 msgid "program"
 msgstr "programma"
 
-#: libbaul-private/baul-file.c:6774
+#: libbaul-private/baul-file.c:6780
 msgid "link"
 msgstr "saite"
 
-#: libbaul-private/baul-file.c:6780 libbaul-private/baul-file-operations.c:406
+#: libbaul-private/baul-file.c:6786 libbaul-private/baul-file-operations.c:406
 #: src/file-manager/fm-directory-view.c:10655
 #, c-format
 msgid "Link to %s"
 msgstr "Saite uz %s"
 
-#: libbaul-private/baul-file.c:6796
+#: libbaul-private/baul-file.c:6802
 msgid "link (broken)"
 msgstr "saite (nedarbojas)"
 
@@ -2096,7 +2096,7 @@ msgstr "Neizdevās noteikt sākotnējo \"%s\" atrašanās vietu "
 msgid "The item cannot be restored from trash"
 msgstr "Vienību nevar atjaunot no miskastes"
 
-#: libbaul-private/baul-icon-container.c:2920
+#: libbaul-private/baul-icon-container.c:2921
 msgid "The selection rectangle"
 msgstr "Izvēles taisnstūris"
 
