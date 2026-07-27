@@ -319,7 +319,7 @@ baul_icon_canvas_item_finalize (GObject *object)
 static gboolean
 pixbuf_is_acceptable (GdkPixbuf *pixbuf)
 {
-    return cdk_pixbuf_get_colorspace (pixbuf) == GDK_COLORSPACE_RGB
+    return cdk_pixbuf_get_colorspace (pixbuf) == CDK_COLORSPACE_RGB
            && ((!cdk_pixbuf_get_has_alpha (pixbuf)
                 && cdk_pixbuf_get_n_channels (pixbuf) == 3)
                || (cdk_pixbuf_get_has_alpha (pixbuf)
@@ -1768,7 +1768,7 @@ real_map_surface (BaulIconCanvasItem *icon_item)
                  cdk_pixbuf_get_height (audio_pixbuf),
                  0, 0,
                  1.0, 1.0,
-                 GDK_INTERP_BILINEAR, 0xFF);
+                 CDK_INTERP_BILINEAR, 0xFF);
 
                 g_object_unref (audio_pixbuf);
             }

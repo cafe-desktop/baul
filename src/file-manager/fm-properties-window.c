@@ -5681,7 +5681,7 @@ update_preview_callback (CtkFileChooser     *icon_chooser,
 				(pixbuf,
 				 PREVIEW_IMAGE_WIDTH,
 				 scale * PREVIEW_IMAGE_WIDTH,
-				 GDK_INTERP_HYPER);
+				 CDK_INTERP_HYPER);
 			g_object_unref (pixbuf);
 			pixbuf = scaled_pixbuf;
 		}
