@@ -109,7 +109,7 @@ struct _BaulFilePrivate
     GIcon *icon;
 
     char *thumbnail_path;
-    GdkPixbuf *thumbnail;
+    CdkPixbuf *thumbnail;
     time_t thumbnail_mtime;
 
     GList *mime_list; /* If this is a directory, the list of MIME types in it. */

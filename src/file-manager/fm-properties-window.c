@@ -365,7 +365,7 @@ add_prompt_and_separator (CtkWidget *vbox, const char *prompt_text)
 static void
 get_image_for_properties_window (FMPropertiesWindow *window,
 				 char **icon_name,
-				 GdkPixbuf **icon_pixbuf)
+				 CdkPixbuf **icon_pixbuf)
 {
 	BaulIconInfo *icon, *new_icon;
 	GList *l;
@@ -418,7 +418,7 @@ get_image_for_properties_window (FMPropertiesWindow *window,
 static void
 update_properties_window_icon (FMPropertiesWindow *window)
 {
-	GdkPixbuf *pixbuf;
+	CdkPixbuf *pixbuf;
 	cairo_surface_t *surface;
 	char *name;
 
@@ -443,7 +443,7 @@ update_properties_window_icon (FMPropertiesWindow *window)
 static gboolean
 uri_is_local_image (const char *uri)
 {
-	GdkPixbuf *pixbuf;
+	CdkPixbuf *pixbuf;
 	char *image_path;
 
 	image_path = g_filename_from_uri (uri, NULL, NULL);
@@ -3446,7 +3446,7 @@ static void
 create_emblems_page (FMPropertiesWindow *window)
 {
 	CtkWidget *emblems_table, *button, *scroller;
-	GdkPixbuf *pixbuf;
+	CdkPixbuf *pixbuf;
 	char *label;
 	GList *icons, *l;
 	BaulIconInfo *info;
@@ -5655,7 +5655,7 @@ static void
 update_preview_callback (CtkFileChooser     *icon_chooser,
 			 FMPropertiesWindow *window G_GNUC_UNUSED)
 {
-	GdkPixbuf *pixbuf, *scaled_pixbuf;
+	CdkPixbuf *pixbuf, *scaled_pixbuf;
 	char *filename;
 
 	pixbuf = NULL;

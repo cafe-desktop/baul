@@ -93,7 +93,7 @@ struct _BaulNotesViewerDetails
     BaulFile *file;
     guint save_timeout_id;
     char *previous_saved_text;
-    GdkPixbuf *icon;
+    CdkPixbuf *icon;
 };
 
 static gboolean
@@ -407,7 +407,7 @@ baul_notes_viewer_get_tab_tooltip (BaulSidebar *sidebar G_GNUC_UNUSED)
     return g_strdup (_("Show Notes"));
 }
 
-static GdkPixbuf *
+static CdkPixbuf *
 baul_notes_viewer_get_tab_icon (BaulSidebar *sidebar)
 {
     BaulNotesViewer *notes;

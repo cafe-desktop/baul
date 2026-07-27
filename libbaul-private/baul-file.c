@@ -4550,7 +4550,7 @@ baul_file_get_icon (BaulFile *file,
 {
 	BaulIconInfo *icon;
 	GIcon *gicon;
-	GdkPixbuf *scaled_pixbuf;
+	CdkPixbuf *scaled_pixbuf;
 
 	if (file == NULL) {
 		return NULL;
@@ -4558,7 +4558,7 @@ baul_file_get_icon (BaulFile *file,
 
 	gicon = get_custom_icon (file);
 	if (gicon) {
-		GdkPixbuf *pixbuf;
+		CdkPixbuf *pixbuf;
 
 		icon = baul_icon_info_lookup (gicon, size, scale);
 		g_object_unref (gicon);
@@ -4590,7 +4590,7 @@ baul_file_get_icon (BaulFile *file,
 		if (file->details->thumbnail) {
 			int w, h, s;
 			double thumb_scale;
-			GdkPixbuf *raw_pixbuf;
+			CdkPixbuf *raw_pixbuf;
 
 			raw_pixbuf = g_object_ref (file->details->thumbnail);
 
@@ -6969,7 +6969,7 @@ baul_file_get_emblem_pixbufs (BaulFile *file,
 {
 	GList *icons, *l;
 	GList *pixbufs;
-	GdkPixbuf *pixbuf;
+	CdkPixbuf *pixbuf;
 	GIcon *icon = NULL;
 	BaulIconInfo *icon_info = NULL;
 
