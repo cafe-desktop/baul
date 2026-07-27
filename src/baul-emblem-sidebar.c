@@ -61,7 +61,7 @@ struct BaulEmblemSidebarDetails
 
     char *popup_emblem_keyword;
     char *popup_emblem_display_name;
-    GdkPixbuf *popup_emblem_pixbuf;
+    CdkPixbuf *popup_emblem_pixbuf;
 };
 
 #define ERASE_EMBLEM_KEYWORD			"erase"
@@ -95,7 +95,7 @@ static const CtkTargetEntry dest_types[] =
 
 typedef struct _Emblem
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     char *uri;
     char *name;
     char *keyword;
@@ -142,7 +142,7 @@ static void
 baul_emblem_sidebar_enter_notify_cb (CtkWidget         *widget,
 				     BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     EelLabeledImage *image;
 
     pixbuf = g_object_get_data (G_OBJECT (widget), "prelight-pixbuf");
@@ -155,7 +155,7 @@ static void
 baul_emblem_sidebar_leave_notify_cb (CtkWidget         *widget,
 				     BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     EelLabeledImage *image;
 
     pixbuf = g_object_get_data (G_OBJECT (widget), "original-pixbuf");
@@ -170,7 +170,7 @@ baul_emblem_sidebar_button_press_cb (CtkWidget *widget,
                                      BaulEmblemSidebar *emblem_sidebar)
 {
     char *keyword, *name;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
 
     if (event->button == 3)
     {
@@ -280,7 +280,7 @@ static CtkWidget *
 create_rename_emblem_dialog (BaulEmblemSidebar *emblem_sidebar G_GNUC_UNUSED,
 			     const char        *keyword,
 			     const char        *orig_name,
-			     GdkPixbuf         *pixbuf)
+			     CdkPixbuf         *pixbuf)
 {
     CtkWidget *dialog, *label, *image, *entry, *hbox;
 
@@ -393,10 +393,10 @@ static CtkWidget *
 create_emblem_widget_with_pixbuf (BaulEmblemSidebar *emblem_sidebar,
                                   const char *keyword,
                                   const char *display_name,
-                                  GdkPixbuf *pixbuf)
+                                  CdkPixbuf *pixbuf)
 {
     CtkWidget *image, *event_box;
-    GdkPixbuf *prelight_pixbuf;
+    CdkPixbuf *prelight_pixbuf;
 
     image = eel_labeled_image_new (display_name, pixbuf);
 
@@ -457,7 +457,7 @@ create_emblem_widget (BaulEmblemSidebar *emblem_sidebar,
     CtkWidget *ret;
     const char *display_name;
     char *keyword;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     BaulIconInfo *info;
 
     info = baul_icon_info_lookup_from_name (name, BAUL_ICON_SIZE_STANDARD, 1);
@@ -752,7 +752,7 @@ baul_emblem_sidebar_drag_received_cb (CtkWidget         *widget G_GNUC_UNUSED,
 {
     GSList *emblems;
     Emblem *emblem;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     char *uri, *error;
     char **uris;
     GFile *f;
@@ -981,7 +981,7 @@ baul_emblem_sidebar_populate (BaulEmblemSidebar *emblem_sidebar)
     GList *icons, *l, *widgets;
     CtkWidget *emblem_widget;
     char *path;
-    GdkPixbuf *erase_pixbuf;
+    CdkPixbuf *erase_pixbuf;
 
     erase_pixbuf = NULL;
 
@@ -1107,7 +1107,7 @@ baul_emblem_sidebar_get_tab_tooltip (BaulSidebar *sidebar G_GNUC_UNUSED)
     return g_strdup (_("Show Emblems"));
 }
 
-static GdkPixbuf *
+static CdkPixbuf *
 baul_emblem_sidebar_get_tab_icon (BaulSidebar *sidebar G_GNUC_UNUSED)
 {
     return NULL;

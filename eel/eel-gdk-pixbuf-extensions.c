@@ -42,10 +42,10 @@
 
 #define LOAD_BUFFER_SIZE 65536
 
-GdkPixbuf *
+CdkPixbuf *
 eel_cdk_pixbuf_load (const char *uri)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     GFile *file;
     GFileInputStream *stream;
 
@@ -69,14 +69,14 @@ eel_cdk_pixbuf_load (const char *uri)
     return pixbuf;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 eel_cdk_pixbuf_load_from_stream (GInputStream  *stream)
 {
     return eel_cdk_pixbuf_load_from_stream_at_size (stream, -1);
 }
 
 static void
-pixbuf_loader_size_prepared (GdkPixbufLoader *loader,
+pixbuf_loader_size_prepared (CdkPixbufLoader *loader,
                              int              width,
                              int              height,
                              gpointer         desired_size_ptr)
@@ -97,14 +97,14 @@ pixbuf_loader_size_prepared (GdkPixbufLoader *loader,
     }
 }
 
-GdkPixbuf *
+CdkPixbuf *
 eel_cdk_pixbuf_load_from_stream_at_size (GInputStream  *stream,
         int            size)
 {
     guchar buffer[LOAD_BUFFER_SIZE];
     gssize bytes_read;
-    GdkPixbufLoader *loader;
-    GdkPixbuf *pixbuf;
+    CdkPixbufLoader *loader;
+    CdkPixbuf *pixbuf;
     gboolean got_eos;
 
 
@@ -179,8 +179,8 @@ eel_cdk_scale_to_fit_factor (int width, int height,
 /* Returns a scaled copy of pixbuf, preserving aspect ratio. The copy will
  * be scaled as large as possible without exceeding the specified width and height.
  */
-GdkPixbuf *
-eel_cdk_pixbuf_scale_to_fit (GdkPixbuf *pixbuf, int max_width, int max_height)
+CdkPixbuf *
+eel_cdk_pixbuf_scale_to_fit (CdkPixbuf *pixbuf, int max_width, int max_height)
 {
     int scaled_width;
     int scaled_height;
@@ -196,8 +196,8 @@ eel_cdk_pixbuf_scale_to_fit (GdkPixbuf *pixbuf, int max_width, int max_height)
  * within the specified width and height. If it already fits, a copy of
  * the original, without scaling, is returned.
  */
-GdkPixbuf *
-eel_cdk_pixbuf_scale_down_to_fit (GdkPixbuf *pixbuf, int max_width, int max_height)
+CdkPixbuf *
+eel_cdk_pixbuf_scale_down_to_fit (CdkPixbuf *pixbuf, int max_width, int max_height)
 {
     int scaled_width;
     int scaled_height;
@@ -236,8 +236,8 @@ eel_cdk_scale_to_min_factor (int width, int height,
 /* Returns a scaled copy of pixbuf, preserving aspect ratio. The copy will
  * be scaled as small as possible without going under the specified width and height.
  */
-GdkPixbuf *
-eel_cdk_pixbuf_scale_to_min (GdkPixbuf *pixbuf, int min_width, int min_height)
+CdkPixbuf *
+eel_cdk_pixbuf_scale_to_min (CdkPixbuf *pixbuf, int min_width, int min_height)
 {
     int scaled_width;
     int scaled_height;
@@ -250,15 +250,15 @@ eel_cdk_pixbuf_scale_to_min (GdkPixbuf *pixbuf, int min_width, int min_height)
 }
 
 gboolean
-eel_cdk_pixbuf_save_to_file (const GdkPixbuf *pixbuf,
+eel_cdk_pixbuf_save_to_file (const CdkPixbuf *pixbuf,
                              const char *file_name)
 {
-    return cdk_pixbuf_save ((GdkPixbuf *) pixbuf,
+    return cdk_pixbuf_save ((CdkPixbuf *) pixbuf,
                             file_name, "png", NULL, NULL);
 }
 
 void
-eel_cdk_pixbuf_ref_if_not_null (GdkPixbuf *pixbuf_or_null)
+eel_cdk_pixbuf_ref_if_not_null (CdkPixbuf *pixbuf_or_null)
 {
     if (pixbuf_or_null != NULL)
     {
@@ -267,7 +267,7 @@ eel_cdk_pixbuf_ref_if_not_null (GdkPixbuf *pixbuf_or_null)
 }
 
 void
-eel_cdk_pixbuf_unref_if_not_null (GdkPixbuf *pixbuf_or_null)
+eel_cdk_pixbuf_unref_if_not_null (CdkPixbuf *pixbuf_or_null)
 {
     if (pixbuf_or_null != NULL)
     {
@@ -275,8 +275,8 @@ eel_cdk_pixbuf_unref_if_not_null (GdkPixbuf *pixbuf_or_null)
     }
 }
 
-GdkPixbuf *
-eel_cdk_pixbuf_scale_down (GdkPixbuf *pixbuf,
+CdkPixbuf *
+eel_cdk_pixbuf_scale_down (CdkPixbuf *pixbuf,
                            int dest_width,
                            int dest_height)
 {
@@ -290,7 +290,7 @@ eel_cdk_pixbuf_scale_down (GdkPixbuf *pixbuf,
     int n_pixels;
     gboolean has_alpha;
     guchar *dest, *src, *xsrc, *src_pixels;
-    GdkPixbuf *dest_pixbuf;
+    CdkPixbuf *dest_pixbuf;
     int pixel_stride;
     int source_rowstride, dest_rowstride;
 

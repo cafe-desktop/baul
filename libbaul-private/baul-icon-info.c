@@ -32,7 +32,7 @@ struct _BaulIconInfo
 
     gboolean sole_owner;
     gint64 last_use_time;
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
 
     gint n_attach_points;
     CdkPoint *attach_points;
@@ -119,7 +119,7 @@ baul_icon_info_class_init (BaulIconInfoClass *icon_info_class)
 }
 
 BaulIconInfo *
-baul_icon_info_new_for_pixbuf (GdkPixbuf *pixbuf,
+baul_icon_info_new_for_pixbuf (CdkPixbuf *pixbuf,
                                gint       scale)
 {
     BaulIconInfo *icon;
@@ -317,7 +317,7 @@ baul_icon_info_lookup (GIcon *icon,
     icon_theme = ctk_icon_theme_get_default ();
 
     if (G_IS_LOADABLE_ICON (icon)) {
-        GdkPixbuf *pixbuf;
+        CdkPixbuf *pixbuf;
         IconKey lookup_key;
         IconKey *key;
         GInputStream *stream;
@@ -446,10 +446,10 @@ baul_icon_info_lookup_from_path (const char *path,
     return info;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_icon_info_get_pixbuf_nodefault (BaulIconInfo  *icon)
 {
-    GdkPixbuf *res;
+    CdkPixbuf *res;
 
     if (icon->pixbuf == NULL)
     {
@@ -474,7 +474,7 @@ baul_icon_info_get_pixbuf_nodefault (BaulIconInfo  *icon)
 cairo_surface_t *
 baul_icon_info_get_surface_nodefault (BaulIconInfo *icon)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
     pixbuf = baul_icon_info_get_pixbuf_nodefault (icon);
@@ -484,10 +484,10 @@ baul_icon_info_get_surface_nodefault (BaulIconInfo *icon)
     return surface;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_icon_info_get_pixbuf (BaulIconInfo *icon)
 {
-    GdkPixbuf *res;
+    CdkPixbuf *res;
 
     res = baul_icon_info_get_pixbuf_nodefault (icon);
     if (res == NULL)
@@ -509,7 +509,7 @@ baul_icon_info_get_pixbuf (BaulIconInfo *icon)
 cairo_surface_t *
 baul_icon_info_get_surface (BaulIconInfo *icon)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
     pixbuf = baul_icon_info_get_pixbuf (icon);
@@ -519,11 +519,11 @@ baul_icon_info_get_surface (BaulIconInfo *icon)
     return surface;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
         gsize              forced_size)
 {
-    GdkPixbuf *pixbuf, *scaled_pixbuf;
+    CdkPixbuf *pixbuf, *scaled_pixbuf;
     int w, h, s;
     double scale;
 
@@ -552,7 +552,7 @@ cairo_surface_t *
 baul_icon_info_get_surface_nodefault_at_size (BaulIconInfo *icon,
                                               gsize         forced_size)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
     pixbuf = baul_icon_info_get_pixbuf_nodefault_at_size (icon, forced_size);
@@ -565,11 +565,11 @@ baul_icon_info_get_surface_nodefault_at_size (BaulIconInfo *icon,
     return surface;
 }
 
-GdkPixbuf *
+CdkPixbuf *
 baul_icon_info_get_pixbuf_at_size (BaulIconInfo  *icon,
                                    gsize              forced_size)
 {
-    GdkPixbuf *pixbuf, *scaled_pixbuf;
+    CdkPixbuf *pixbuf, *scaled_pixbuf;
     int w, h, s;
     double scale;
 
@@ -598,7 +598,7 @@ cairo_surface_t *
 baul_icon_info_get_surface_at_size (BaulIconInfo *icon,
                                     gsize         forced_size)
 {
-    GdkPixbuf *pixbuf;
+    CdkPixbuf *pixbuf;
     cairo_surface_t *surface;
 
     pixbuf = baul_icon_info_get_pixbuf_at_size (icon, forced_size);

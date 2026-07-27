@@ -33,7 +33,7 @@ gboolean   baul_emblem_should_show_in_list        (const char *emblem);
 gboolean   baul_emblem_verify_keyword             (CtkWindow *parent_window,
         const char *keyword,
         const char *display_name);
-void       baul_emblem_install_custom_emblem      (GdkPixbuf  *pixbuf,
+void       baul_emblem_install_custom_emblem      (CdkPixbuf  *pixbuf,
         const char *keyword,
         const char *display_name,
         CtkWindow  *parent_window);
@@ -42,7 +42,7 @@ gboolean   baul_emblem_remove_emblem              (const char *keyword);
 gboolean   baul_emblem_rename_emblem              (const char *keyword,
         const char *display_name);
 
-GdkPixbuf *baul_emblem_load_pixbuf_for_emblem     (GFile      *emblem);
+CdkPixbuf *baul_emblem_load_pixbuf_for_emblem     (GFile      *emblem);
 char *     baul_emblem_get_keyword_from_icon_name (const char *emblem);
 char *     baul_emblem_get_icon_name_from_keyword (const char *keyword);
 

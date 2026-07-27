@@ -674,7 +674,7 @@ baul_navigation_window_add_sidebar_panel (BaulNavigationWindow *window,
     char *label;
     char *tooltip;
     char *default_id;
-    GdkPixbuf *icon;
+    CdkPixbuf *icon;
 
     g_return_if_fail (BAUL_IS_NAVIGATION_WINDOW (window));
     g_return_if_fail (BAUL_IS_SIDEBAR (sidebar_panel));
@@ -907,7 +907,7 @@ side_panel_image_changed_callback (BaulSidebar *side_panel,
                                    gpointer callback_data)
 {
     BaulWindow *window;
-    GdkPixbuf *icon;
+    CdkPixbuf *icon;
 
     window = BAUL_WINDOW (callback_data);
 

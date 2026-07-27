@@ -40,6 +40,6 @@ void        baul_ui_prepare_merge_ui           (CtkUIManager      *ui_manager,
 CtkAction * baul_action_from_menu_item         (BaulMenuItem  *item, CtkWidget *parent_widget);
 CtkAction * baul_toolbar_action_from_menu_item (BaulMenuItem  *item, CtkWidget *parent_widget);
 const char *baul_ui_string_get                 (const char        *filename);
-void   baul_ui_frame_image                     (GdkPixbuf        **pixbuf);
+void   baul_ui_frame_image                     (CdkPixbuf        **pixbuf);
 
 #endif /* BAUL_UI_UTILITIES_H */
