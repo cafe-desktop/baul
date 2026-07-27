@@ -32,7 +32,7 @@
 #include <sys/stat.h>
 
 #include <eel/eel-accessibility.h>
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-cafe-extensions.h>
 #include <eel/eel-ctk-extensions.h>
@@ -451,7 +451,7 @@ uri_is_local_image (const char *uri)
 		return FALSE;
 	}
 
-	pixbuf = gdk_pixbuf_new_from_file (image_path, NULL);
+	pixbuf = cdk_pixbuf_new_from_file (image_path, NULL);
 	g_free (image_path);
 
 	if (pixbuf == NULL) {
@@ -5662,7 +5662,7 @@ update_preview_callback (CtkFileChooser     *icon_chooser,
 
 	filename = ctk_file_chooser_get_filename (icon_chooser);
 	if (filename != NULL) {
-		pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+		pixbuf = cdk_pixbuf_new_from_file (filename, NULL);
 	}
 
 	if (pixbuf != NULL) {
@@ -5671,13 +5671,13 @@ update_preview_callback (CtkFileChooser     *icon_chooser,
 		preview_widget = ctk_file_chooser_get_preview_widget (icon_chooser);
 		ctk_file_chooser_set_preview_widget_active (icon_chooser, TRUE);
 
-		if (gdk_pixbuf_get_width (pixbuf) > PREVIEW_IMAGE_WIDTH) {
+		if (cdk_pixbuf_get_width (pixbuf) > PREVIEW_IMAGE_WIDTH) {
 			double scale;
 
-			scale = (double)gdk_pixbuf_get_height (pixbuf) /
-				gdk_pixbuf_get_width (pixbuf);
+			scale = (double)cdk_pixbuf_get_height (pixbuf) /
+				cdk_pixbuf_get_width (pixbuf);
 
-			scaled_pixbuf = gdk_pixbuf_scale_simple
+			scaled_pixbuf = cdk_pixbuf_scale_simple
 				(pixbuf,
 				 PREVIEW_IMAGE_WIDTH,
 				 scale * PREVIEW_IMAGE_WIDTH,

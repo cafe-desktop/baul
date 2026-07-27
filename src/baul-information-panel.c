@@ -25,7 +25,7 @@
 
 #include <config.h>
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 #include <ctk/ctk.h>
 #include <glib/gi18n.h>
 
@@ -465,7 +465,7 @@ uri_is_local_image (const char *uri)
         return FALSE;
     }
 
-    pixbuf = gdk_pixbuf_new_from_file (image_path, NULL);
+    pixbuf = cdk_pixbuf_new_from_file (image_path, NULL);
     g_free (image_path);
 
     if (pixbuf == NULL)

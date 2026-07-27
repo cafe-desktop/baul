@@ -25,7 +25,7 @@
 #ifndef EEL_GRAPHIC_EFFECTS_H
 #define EEL_GRAPHIC_EFFECTS_H
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 #include <ctk/ctk.h>
 #include <cdk/cdk.h>
 
