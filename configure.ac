@@ -66,8 +66,10 @@ AC_PATH_PROG([GLA11Y], [gla11y], [true])
 
 AC_CHECK_LIB(m, floor)
 
+dnl gdk-pixbuf-2.0 is required for libnotify
 PKG_CHECK_MODULES(ALL, [
     cdk-pixbuf-2.0 >= cdk-pixbuf_minver
+    gdk-pixbuf-2.0
     glib-2.0 >= glib_minver
     cafe-desktop-2.0 >= cafe_desktop_minver
     gthread-2.0
@@ -231,7 +233,8 @@ AC_SUBST(LIBBAUL_EXTENSION_LIBS)
 
 dnl core baul
 PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])
-CORE_MODULES="glib-2.0 $GMODULE_ADD cafe-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 cail-3.0 libxml-2.0 $EXTRA_CORE_MODULES ctk+-3.0 x11"
+dnl gdk-pixbuf-2.0 is required for libnotify
+CORE_MODULES="glib-2.0 $GMODULE_ADD cafe-desktop-2.0 gthread-2.0 gio-2.0 gio-unix-2.0 cail-3.0 libxml-2.0 $EXTRA_CORE_MODULES ctk+-3.0 x11 gdk-pixbuf-2.0"
 CORE_CFLAGS="`$PKG_CONFIG --cflags $CORE_MODULES`"
 AC_SUBST(CORE_CFLAGS)
 CORE_LIBS="`$PKG_CONFIG --libs $CORE_MODULES`"
