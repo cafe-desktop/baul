@@ -45,7 +45,7 @@
 #include <cdk/cdk.h>
 #include <ctk/ctk.h>
 
-#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <cdk-pixbuf/cdk-pixbuf.h>
 
 #define CAFE_DESKTOP_USE_UNSTABLE_API
 #include <libcafe-desktop/cafe-bg.h>

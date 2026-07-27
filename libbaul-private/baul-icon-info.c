@@ -345,7 +345,7 @@ baul_icon_info_lookup (GIcon *icon,
                                        NULL, NULL, NULL);
         if (stream)
         {
-            pixbuf = gdk_pixbuf_new_from_stream_at_scale (stream,
+            pixbuf = cdk_pixbuf_new_from_stream_at_scale (stream,
                                                           size * scale, size * scale,
                                                           TRUE,
                                                           NULL, NULL);
@@ -492,7 +492,7 @@ baul_icon_info_get_pixbuf (BaulIconInfo *icon)
     res = baul_icon_info_get_pixbuf_nodefault (icon);
     if (res == NULL)
     {
-        res = gdk_pixbuf_new_from_data (baul_default_file_icon,
+        res = cdk_pixbuf_new_from_data (baul_default_file_icon,
                                         GDK_COLORSPACE_RGB,
                                         TRUE,
                                         8,
@@ -532,8 +532,8 @@ baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
     if (pixbuf == NULL)
         return NULL;
 
-    w = gdk_pixbuf_get_width (pixbuf) / icon->orig_scale;
-    h = gdk_pixbuf_get_height (pixbuf) / icon->orig_scale;
+    w = cdk_pixbuf_get_width (pixbuf) / icon->orig_scale;
+    h = cdk_pixbuf_get_height (pixbuf) / icon->orig_scale;
     s = MAX (w, h);
     if (s == forced_size)
     {
@@ -541,7 +541,7 @@ baul_icon_info_get_pixbuf_nodefault_at_size (BaulIconInfo  *icon,
     }
 
     scale = (double)forced_size / s;
-    scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
+    scaled_pixbuf = cdk_pixbuf_scale_simple (pixbuf,
                     w * scale, h * scale,
                     GDK_INTERP_BILINEAR);
     g_object_unref (pixbuf);
@@ -578,8 +578,8 @@ baul_icon_info_get_pixbuf_at_size (BaulIconInfo  *icon,
     if (pixbuf == NULL)
         return NULL;
 
-    w = gdk_pixbuf_get_width (pixbuf) / icon->orig_scale;
-    h = gdk_pixbuf_get_height (pixbuf) / icon->orig_scale;
+    w = cdk_pixbuf_get_width (pixbuf) / icon->orig_scale;
+    h = cdk_pixbuf_get_height (pixbuf) / icon->orig_scale;
     s = MAX (w, h);
     if (s == forced_size)
     {
@@ -587,7 +587,7 @@ baul_icon_info_get_pixbuf_at_size (BaulIconInfo  *icon,
     }
 
     scale = (double)forced_size / s;
-    scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
+    scaled_pixbuf = cdk_pixbuf_scale_simple (pixbuf,
                     w * scale, h * scale,
                     GDK_INTERP_BILINEAR);
     g_object_unref (pixbuf);

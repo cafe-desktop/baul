@@ -39,7 +39,7 @@
 #include <atk/atkrelationset.h>
 
 #include <eel/eel-cdk-extensions.h>
-#include <eel/eel-gdk-pixbuf-extensions.h>
+#include <eel/eel-cdk-pixbuf-extensions.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-image-table.h>
@@ -280,7 +280,7 @@ baul_property_browser_init (BaulPropertyBrowser *property_browser)
     temp_str = baul_pixmap_file ("chit_frame.png");
     if (temp_str != NULL)
     {
-        property_browser->details->property_chit = gdk_pixbuf_new_from_file (temp_str, NULL);
+        property_browser->details->property_chit = cdk_pixbuf_new_from_file (temp_str, NULL);
     }
     g_free (temp_str);
 
@@ -569,8 +569,8 @@ baul_property_browser_drag_begin (CtkWidget *widget,
     {
         int x_delta, y_delta;
 
-        x_delta = gdk_pixbuf_get_width (pixbuf) / 2;
-        y_delta = gdk_pixbuf_get_height (pixbuf) / 2;
+        x_delta = cdk_pixbuf_get_width (pixbuf) / 2;
+        y_delta = cdk_pixbuf_get_height (pixbuf) / 2;
 
         ctk_drag_set_icon_pixbuf
         (context,
@@ -734,7 +734,7 @@ make_drag_image (BaulPropertyBrowser *property_browser, const char* file_name)
             image_file_name = baul_pixmap_file (ERASE_OBJECT_NAME);
             if (image_file_name != NULL)
             {
-                pixbuf = gdk_pixbuf_new_from_file (image_file_name, NULL);
+                pixbuf = cdk_pixbuf_new_from_file (image_file_name, NULL);
             }
             g_free (image_file_name);
         }
@@ -772,7 +772,7 @@ make_drag_image (BaulPropertyBrowser *property_browser, const char* file_name)
         g_free (user_directory);
     }
 
-    orig_pixbuf = gdk_pixbuf_new_from_file_at_scale (image_file_name,
+    orig_pixbuf = cdk_pixbuf_new_from_file_at_scale (image_file_name,
                   MAX_ICON_WIDTH, MAX_ICON_HEIGHT,
                   TRUE,
                   NULL);
@@ -793,7 +793,7 @@ make_drag_image (BaulPropertyBrowser *property_browser, const char* file_name)
     }
     else
     {
-        pixbuf = eel_gdk_pixbuf_scale_down_to_fit (orig_pixbuf, MAX_ICON_WIDTH, MAX_ICON_HEIGHT);
+        pixbuf = eel_cdk_pixbuf_scale_down_to_fit (orig_pixbuf, MAX_ICON_WIDTH, MAX_ICON_HEIGHT);
     }
 
     g_object_unref (orig_pixbuf);
@@ -813,15 +813,15 @@ make_color_drag_image (BaulPropertyBrowser *property_browser, const char *color_
     char *pixels;
     CdkColor color;
 
-    color_square = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
+    color_square = cdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
 
     cdk_color_parse (color_spec, &color);
     color.red >>= 8;
     color.green >>= 8;
     color.blue >>= 8;
 
-    pixels = gdk_pixbuf_get_pixels (color_square);
-    stride = gdk_pixbuf_get_rowstride (color_square);
+    pixels = cdk_pixbuf_get_pixels (color_square);
+    stride = cdk_pixbuf_get_rowstride (color_square);
 
     /* loop through and set each pixel */
     for (row = 0; row < COLOR_SQUARE_SIZE; row++)
@@ -1046,7 +1046,7 @@ update_preview_cb (CtkFileChooser *fc,
     {
         GdkPixbuf *pixbuf;
 
-        pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+        pixbuf = cdk_pixbuf_new_from_file (filename, NULL);
 
         ctk_file_chooser_set_preview_widget_active (fc, pixbuf != NULL);
 
@@ -1961,7 +1961,7 @@ make_properties_from_directories (BaulPropertyBrowser *property_browser)
         path = baul_pixmap_file (ERASE_OBJECT_NAME);
         if (path != NULL)
         {
-            object_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+            object_pixbuf = cdk_pixbuf_new_from_file (path, NULL);
         }
         g_free (path);
         property_image = labeled_image_new (_("Erase"), object_pixbuf, "erase", PANGO_SCALE_LARGE);
@@ -2003,7 +2003,7 @@ add_reset_property (BaulPropertyBrowser *property_browser)
     reset_chit = NULL;
 
     reset_image_file_name = g_strdup_printf ("%s/%s/%s", BAUL_DATADIR, "patterns", RESET_IMAGE_NAME);
-    reset_pixbuf = gdk_pixbuf_new_from_file (reset_image_file_name, NULL);
+    reset_pixbuf = cdk_pixbuf_new_from_file (reset_image_file_name, NULL);
     if (reset_pixbuf != NULL && property_browser->details->property_chit != NULL)
     {
         reset_chit = baul_customization_make_pattern_chit (reset_pixbuf, property_browser->details->property_chit, FALSE, TRUE);

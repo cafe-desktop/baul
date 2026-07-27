@@ -381,7 +381,7 @@ load_finished (BaulImagePropertiesPage *page)
     ctk_widget_destroy (page->details->loading_label);
 
     if (page->details->loader != NULL) {
-        gdk_pixbuf_loader_close (page->details->loader, NULL);
+        cdk_pixbuf_loader_close (page->details->loader, NULL);
     }
 
     if (page->details->got_size)
@@ -392,10 +392,10 @@ load_finished (BaulImagePropertiesPage *page)
         ExifData *exif_data;
 #endif /*HAVE_EXIF*/
 
-        format = gdk_pixbuf_loader_get_format (page->details->loader);
+        format = cdk_pixbuf_loader_get_format (page->details->loader);
 
-        name = gdk_pixbuf_format_get_name (format);
-        desc = gdk_pixbuf_format_get_description (format);
+        name = cdk_pixbuf_format_get_name (format);
+        desc = cdk_pixbuf_format_get_description (format);
         append_label_take_str
         (page->details->vbox,
          g_strdup_printf ("<b>%s</b> %s (%s)",
@@ -485,7 +485,7 @@ file_read_callback (GObject      *object,
 
         if (page->details->pixbuf_still_loading)
         {
-            if (!gdk_pixbuf_loader_write (page->details->loader,
+            if (!cdk_pixbuf_loader_write (page->details->loader,
                                           page->details->buffer,
                                           count_read,
                                           NULL))
@@ -560,7 +560,7 @@ file_open_callback (GObject      *object,
     stream = g_file_read_finish (file, res, &error);
     if (stream)
     {
-        page->details->loader = gdk_pixbuf_loader_new ();
+        page->details->loader = cdk_pixbuf_loader_new ();
         page->details->pixbuf_still_loading = TRUE;
         page->details->width = 0;
         page->details->height = 0;

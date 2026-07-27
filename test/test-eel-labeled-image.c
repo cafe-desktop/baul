@@ -67,7 +67,7 @@ main (int argc, char* argv[])
 	if (1) pixbuf = test_pixbuf_new_named (pixbuf_name, 1.0);
 	if (1) labeled_image_button_window = labeled_image_button_window_new ("LabeledImage in CtkButton Test", pixbuf);
 
-	eel_gdk_pixbuf_unref_if_not_null (pixbuf);
+	eel_cdk_pixbuf_unref_if_not_null (pixbuf);
 
 	if (labeled_image_window) ctk_widget_show (labeled_image_window);
 	if (labeled_image_button_window) ctk_widget_show (labeled_image_button_window);
