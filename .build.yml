@@ -3,51 +3,12 @@
 ##########################################################
 requires:
   debian:
-    # Useful URL: https://github.com/cafe-desktop/debian-packages
-    # cafe B-D: libcail-3-dev libctk-3-dev libcafe-desktop-dev cafe-common
-    - aptitude
-    - autoconf-archive
-    - autopoint
-    - clang
-    - clang-tools
-    - cppcheck
-    - expect #required for unbuffer
-    - git
-    - gla11y
-    - gobject-introspection
-    - gtk-doc-tools
-    - intltool
-    - iso-codes
-    - libdconf-dev
-    - libexempi-dev
-    - libexif-dev
-    - libgirepository1.0-dev
-    - libglib2.0-dev
-    - libglib2.0-doc
-    - libnotify-dev
-    - libpango1.0-dev
-    - libselinux1-dev
-    - libstartup-notification0-dev
-    - libtool
-    - libx11-dev
-    - libxml2-dev
-    - meson
-    - python3-lxml
-    - quilt
-    - shared-mime-info
-    - wget
-    - xvfb
 
 before_scripts:
-  - ./html-cppcheck
-  - ./debrepo-install 'libctk-3-dev gir1.2-ctk-3.0 libctk-3-common libctk-3-0 libcail-3-0 libcail-3-dev'
-  - ./install-from-git https://github.com/cafe-desktop/cafe-common master
-  - ./install-from-git https://github.com/cafe-desktop/cafe-desktop master
+  - ./debrepo-install
 
 build_scripts:
-  - ./before-build
-  - ./make-scanbuild '--enable-empty-view --enable-compile-warnings=maximum'
-  - ./after-build
+  - ./build-debs https://github.com/cafe-desktop/debian-packages devel baul
 
 after_scripts:
   - ./gen-index -l 20 -i https://github.com/${OWNER_NAME}/cafe-icon-theme/raw/master/cafe/16x16/apps/system-file-manager.png
