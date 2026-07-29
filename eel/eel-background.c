@@ -1010,6 +1010,8 @@ eel_bg_load_from_gsettings (EelBackground *self,
         g_settings_set_string (settings, CAFE_BG_KEY_PICTURE_FILENAME, keyfile);
     }
 
+    g_free (keyfile);
+
     if (self->details->bg)
         cafe_bg_load_from_gsettings (self->details->bg,
         			     settings);
