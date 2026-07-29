@@ -1,3 +1,10 @@
+### baul 2.2.0
+
+  * port from GdkPixbuf to CdkPixbuf
+  * eel-background: Fix memory leak
+  * update translations
+
+
 ### baul 2.1.0
 
   * ci: add debian stable build
