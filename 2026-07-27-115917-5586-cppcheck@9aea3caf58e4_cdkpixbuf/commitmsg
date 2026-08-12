@@ -1,0 +1,3 @@
+build: add gdk-pixbuf-2.0 to CORE_MODULES
+
+required for libnotify
