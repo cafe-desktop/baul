@@ -1,0 +1,1 @@
+baul-monitor: remove duplicate g_signal_connect for ret->monitor
