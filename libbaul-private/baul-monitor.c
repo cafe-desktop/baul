@@ -99,19 +99,10 @@ mount_removed (GVolumeMonitor *volume_monitor G_GNUC_UNUSED,
 static void
 dir_changed (GFileMonitor     *monitor G_GNUC_UNUSED,
 	     GFile            *child,
-	     GFile            *other_file,
+	     GFile            *other_file G_GNUC_UNUSED,
 	     GFileMonitorEvent event_type,
 	     gpointer          user_data G_GNUC_UNUSED)
 {
-    char *uri, *to_uri;
-
-    uri = g_file_get_uri (child);
-    to_uri = NULL;
-    if (other_file)
-    {
-        to_uri = g_file_get_uri (other_file);
-    }
-
     switch (event_type)
     {
     default:
@@ -137,8 +128,6 @@ dir_changed (GFileMonitor     *monitor G_GNUC_UNUSED,
         break;
     }
 
-    g_free (uri);
-    g_free (to_uri);
     schedule_call_consume_changes ();
 }
 
