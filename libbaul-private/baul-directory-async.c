@@ -1023,11 +1023,30 @@ dequeue_pending_idle_callback (gpointer callback_data)
         }
         else
         {
-            /* new file, create a baul file object and add it to the list */
-            file = baul_file_new_from_info (directory, file_info);
-            baul_directory_add_file (directory, file);
-            file->details->is_added = TRUE;
-            added_files = g_list_prepend (added_files, file);
+            gboolean skip = FALSE;
+
+            if (baul_directory_has_recently_removed_name (directory, name))
+            {
+                GFile *child;
+
+                child = g_file_get_child (directory->details->location, name);
+                if (g_file_is_native (child) &&
+                    !g_file_query_exists (child, NULL))
+                {
+                    skip = TRUE;
+                    baul_directory_take_recently_removed_name (directory, name);
+                }
+                g_object_unref (child);
+            }
+
+            if (!skip)
+            {
+                /* new file, create a baul file object and add it to the list */
+                file = baul_file_new_from_info (directory, file_info);
+                baul_directory_add_file (directory, file);
+                file->details->is_added = TRUE;
+                added_files = g_list_prepend (added_files, file);
+            }
         }
     }
 

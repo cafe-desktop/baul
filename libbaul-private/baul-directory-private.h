@@ -112,6 +112,8 @@ struct _BaulDirectoryPrivate
 
     GList *new_files_in_progress; /* list of NewFilesState * */
 
+    GHashTable *recently_removed_names;
+
     DirectoryCountState *count_in_progress;
 
     BaulFile *deep_count_file;
@@ -204,6 +206,12 @@ void               emit_change_signals_for_all_files_in_all_directories (void);
 void               baul_directory_emit_done_loading               (BaulDirectory         *directory);
 void               baul_directory_emit_load_error                 (BaulDirectory         *directory,
         GError                    *error);
+void               baul_directory_add_recently_removed_name       (BaulDirectory         *directory,
+        const char                *name);
+gboolean           baul_directory_has_recently_removed_name       (BaulDirectory         *directory,
+        const char                *name);
+void               baul_directory_take_recently_removed_name      (BaulDirectory         *directory,
+        const char                *name);
 BaulDirectory *baul_directory_get_internal                    (GFile                     *location,
         gboolean                   create);
 char *             baul_directory_get_name_for_self_as_new_file   (BaulDirectory         *directory);

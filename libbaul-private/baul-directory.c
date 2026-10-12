@@ -197,6 +197,8 @@ baul_directory_finalize (GObject *object)
     g_assert (directory->details->count_in_progress == NULL);
     g_assert (directory->details->dequeue_pending_idle_id == 0);
     g_list_free_full (directory->details->pending_file_info, g_object_unref);
+    g_clear_pointer (&directory->details->recently_removed_names,
+                     g_hash_table_destroy);
 
     G_OBJECT_CLASS (baul_directory_parent_class)->finalize (object);
 }
@@ -1023,6 +1025,20 @@ baul_directory_notify_files_removed (GList *files)
                                      file->details->directory,
                                      baul_file_ref (file));
         }
+        else if (file == NULL)
+        {
+            directory = get_parent_directory_if_exists (location);
+            if (directory != NULL &&
+                baul_directory_is_file_list_monitored (directory))
+            {
+                char *name;
+
+                name = g_file_get_basename (location);
+                baul_directory_add_recently_removed_name (directory, name);
+                g_free (name);
+            }
+            baul_directory_unref (directory);
+        }
         baul_file_unref (file);
     }
     /* Now send out the changed signals. */
@@ -1032,6 +1048,51 @@ baul_directory_notify_files_removed (GList *files)
     /* Invalidate count for each parent directory. */
     g_hash_table_foreach (parent_directories, invalidate_count_and_unref, NULL);
     g_hash_table_destroy (parent_directories);
+}
+
+void
+baul_directory_add_recently_removed_name (BaulDirectory *directory,
+                                          const char    *name)
+{
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
+    g_return_if_fail (name != NULL);
+
+    if (directory->details->recently_removed_names == NULL)
+    {
+        directory->details->recently_removed_names =
+            g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+    }
+    g_hash_table_add (directory->details->recently_removed_names,
+                      g_strdup (name));
+}
+
+gboolean
+baul_directory_has_recently_removed_name (BaulDirectory *directory,
+                                          const char    *name)
+{
+    g_return_val_if_fail (BAUL_IS_DIRECTORY (directory), FALSE);
+    g_return_val_if_fail (name != NULL, FALSE);
+
+    if (directory->details->recently_removed_names == NULL)
+    {
+        return FALSE;
+    }
+    return g_hash_table_contains (directory->details->recently_removed_names,
+                                  name);
+}
+
+void
+baul_directory_take_recently_removed_name (BaulDirectory *directory,
+                                           const char    *name)
+{
+    g_return_if_fail (BAUL_IS_DIRECTORY (directory));
+    g_return_if_fail (name != NULL);
+
+    if (directory->details->recently_removed_names == NULL)
+    {
+        return;
+    }
+    g_hash_table_remove (directory->details->recently_removed_names, name);
 }
 
 static void
