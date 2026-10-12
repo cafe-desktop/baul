@@ -166,10 +166,6 @@ baul_monitor_directory (GFile *location)
                   G_CALLBACK (dir_changed), ret);
     }
 
-    if (ret->monitor) {
-        g_signal_connect (ret->monitor, "changed", (GCallback)dir_changed, ret);
-    }
-
     if (ret->volume_monitor != NULL) {
         g_signal_connect (ret->volume_monitor, "mount-removed",
                     G_CALLBACK (mount_removed), ret);
