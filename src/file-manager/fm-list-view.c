@@ -56,6 +56,7 @@
 #include <libbaul-private/baul-icon-dnd.h>
 #include <libbaul-private/baul-metadata.h>
 #include <libbaul-private/baul-module.h>
+#include <libbaul-private/baul-search-directory.h>
 #include <libbaul-private/baul-tree-view-drag-dest.h>
 #include <libbaul-private/baul-view-factory.h>
 #include <libbaul-private/baul-clipboard.h>
@@ -1679,6 +1680,68 @@ focus_in_event_callback (CtkWidget     *widget G_GNUC_UNUSED,
     return FALSE;
 }
 
+static gboolean
+tree_view_query_tooltip_callback (CtkWidget *widget,
+                                  gint x,
+                                  gint y,
+                                  gboolean keyboard_tip G_GNUC_UNUSED,
+                                  CtkTooltip *tooltip,
+                                  FMListView *list_view)
+{
+    CtkTreeView *tree_view;
+    CtkTreePath *path;
+    CtkTreeModel *model;
+    CtkTreeIter iter;
+    BaulFile *file;
+    char *location_text;
+
+    /* Only show tooltips in search directories */
+    if (!BAUL_IS_SEARCH_DIRECTORY (fm_directory_view_get_model (FM_DIRECTORY_VIEW (list_view))))
+    {
+        return FALSE;
+    }
+
+    tree_view = CTK_TREE_VIEW (widget);
+
+    /* Get the tree path at the cursor position */
+    if (!ctk_tree_view_get_path_at_pos (tree_view, x, y, &path, NULL, NULL, NULL))
+    {
+        return FALSE;
+    }
+
+    model = ctk_tree_view_get_model (tree_view);
+    if (!ctk_tree_model_get_iter (model, &iter, path))
+    {
+        ctk_tree_path_free (path);
+        return FALSE;
+    }
+
+    /* Get the file from the model */
+    ctk_tree_model_get (model, &iter, FM_LIST_MODEL_FILE_COLUMN, &file, -1);
+    if (file == NULL)
+    {
+        ctk_tree_path_free (path);
+        return FALSE;
+    }
+
+    /* Set the tooltip text with the file location */
+    location_text = baul_file_get_string_attribute_with_default (file, "location");
+    if (location_text == NULL || location_text[0] == '\0')
+    {
+        g_free (location_text);
+        baul_file_unref (file);
+        ctk_tree_path_free (path);
+        return FALSE;
+    }
+
+    ctk_tooltip_set_text (tooltip, location_text);
+    g_free (location_text);
+    baul_file_unref (file);
+    ctk_tree_path_free (path);
+
+    return TRUE;
+}
+
 static gint
 get_icon_scale_callback (FMListModel *model G_GNUC_UNUSED,
 			 FMListView  *view)
@@ -1702,6 +1765,7 @@ create_and_set_up_tree_view (FMListView *view)
                              (GDestroyNotify)g_free,
                              NULL);
     ctk_tree_view_set_enable_search (view->details->tree_view, TRUE);
+    ctk_widget_set_has_tooltip (CTK_WIDGET (view->details->tree_view), TRUE);
 
     /* Don't handle backspace key. It's used to open the parent folder. */
     binding_set = ctk_binding_set_by_class (CTK_WIDGET_GET_CLASS (view->details->tree_view));
@@ -1762,6 +1826,8 @@ create_and_set_up_tree_view (FMListView *view)
 
     g_signal_connect_object (view->details->tree_view, "focus_in_event",
                              G_CALLBACK(focus_in_event_callback), view, 0);
+    g_signal_connect_object (view->details->tree_view, "query-tooltip",
+                             G_CALLBACK (tree_view_query_tooltip_callback), view, 0);
 
     view->details->model = g_object_new (FM_TYPE_LIST_MODEL, NULL);
     ctk_tree_view_set_model (view->details->tree_view, CTK_TREE_MODEL (view->details->model));
