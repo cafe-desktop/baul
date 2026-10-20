@@ -38,6 +38,7 @@
 #include <sys/wait.h>
 
 #include <eel/eel-background.h>
+#include <eel/eel-canvas.h>
 #include <eel/eel-glib-extensions.h>
 #include <eel/eel-ctk-extensions.h>
 #include <eel/eel-ctk-macros.h>
@@ -52,10 +53,13 @@
 #include <libbaul-private/baul-file-utilities.h>
 #include <libbaul-private/baul-ui-utilities.h>
 #include <libbaul-private/baul-global-preferences.h>
+#include <libbaul-private/baul-icon-canvas-item.h>
 #include <libbaul-private/baul-icon-container.h>
 #include <libbaul-private/baul-icon-dnd.h>
+#include <libbaul-private/baul-icon-private.h>
 #include <libbaul-private/baul-link.h>
 #include <libbaul-private/baul-metadata.h>
+#include <libbaul-private/baul-search-directory.h>
 #include <libbaul-private/baul-view-factory.h>
 #include <libbaul-private/baul-clipboard.h>
 #include <libbaul-private/baul-desktop-icon-file.h>
@@ -2992,6 +2996,57 @@ focus_in_event_callback (CtkWidget     *widget G_GNUC_UNUSED,
     return FALSE;
 }
 
+static gboolean
+icon_container_query_tooltip_callback (CtkWidget *widget,
+                                       gint x,
+                                       gint y,
+                                       gboolean keyboard_tip G_GNUC_UNUSED,
+                                       CtkTooltip *tooltip,
+                                       FMIconView *icon_view)
+{
+    BaulIconContainer *icon_container;
+    EelCanvasItem *item;
+    BaulIcon *icon;
+    BaulFile *file;
+    char *location_text;
+
+    /* Only show tooltips in search directories */
+    if (!BAUL_IS_SEARCH_DIRECTORY (fm_directory_view_get_model (FM_DIRECTORY_VIEW (icon_view))))
+    {
+        return FALSE;
+    }
+
+    icon_container = BAUL_ICON_CONTAINER (widget);
+
+    /* Get the canvas item at the cursor position */
+    item = eel_canvas_get_item_at (EEL_CANVAS (icon_container), x, y);
+    if (item == NULL || !BAUL_IS_ICON_CANVAS_ITEM (item))
+    {
+        return FALSE;
+    }
+
+    /* Get the file from the canvas item's user_data */
+    icon = BAUL_ICON_CANVAS_ITEM (item)->user_data;
+    file = BAUL_FILE (icon->data);
+    if (file == NULL)
+    {
+        return FALSE;
+    }
+
+    /* Set the tooltip text with the file location */
+    location_text = baul_file_get_string_attribute_with_default (file, "location");
+    if (location_text == NULL || location_text[0] == '\0')
+    {
+        g_free (location_text);
+        return FALSE;
+    }
+
+    ctk_tooltip_set_text (tooltip, location_text);
+    g_free (location_text);
+
+    return TRUE;
+}
+
 static BaulIconContainer *
 create_icon_container (FMIconView *icon_view)
 {
@@ -3000,9 +3055,12 @@ create_icon_container (FMIconView *icon_view)
     icon_container = fm_icon_container_new (icon_view);
 
     ctk_widget_set_can_focus (CTK_WIDGET (icon_container), TRUE);
+    ctk_widget_set_has_tooltip (CTK_WIDGET (icon_container), TRUE);
 
     g_signal_connect_object (icon_container, "focus_in_event",
                              G_CALLBACK (focus_in_event_callback), icon_view, 0);
+    g_signal_connect_object (icon_container, "query-tooltip",
+                             G_CALLBACK (icon_container_query_tooltip_callback), icon_view, 0);
     g_signal_connect_object (icon_container, "activate",
                              G_CALLBACK (icon_container_activate_callback), icon_view, 0);
     g_signal_connect_object (icon_container, "activate_alternate",
