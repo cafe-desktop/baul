@@ -153,8 +153,7 @@ static GQuark attribute_name_q,
 	attribute_where_q,
 	attribute_link_target_q,
 	attribute_volume_q,
-	attribute_free_space_q,
-	attribute_location_q;
+	attribute_free_space_q;
 
 static void     baul_file_info_iface_init                (BaulFileInfoIface *iface);
 static char *   baul_file_get_owner_as_string            (BaulFile          *file,
@@ -6591,9 +6590,6 @@ baul_file_get_string_attribute_q (BaulFile *file, GQuark attribute_q)
 	if (attribute_q == attribute_link_target_q) {
 		return baul_file_get_symbolic_link_target_path (file);
 	}
-	if (attribute_q == attribute_location_q) {
-		return baul_file_get_parent_uri_for_display (file);
-	}
 	if (attribute_q == attribute_volume_q) {
 		return baul_file_get_volume_name (file);
 	}
@@ -8626,7 +8622,6 @@ baul_file_class_init (BaulFileClass *class)
 	attribute_link_target_q = g_quark_from_static_string ("link_target");
 	attribute_volume_q = g_quark_from_static_string ("volume");
 	attribute_free_space_q = g_quark_from_static_string ("free_space");
-	attribute_location_q = g_quark_from_static_string ("location");
 
 	G_OBJECT_CLASS (class)->finalize = finalize;
 	G_OBJECT_CLASS (class)->constructor = baul_file_constructor;

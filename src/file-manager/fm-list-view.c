@@ -56,7 +56,6 @@
 #include <libbaul-private/baul-icon-dnd.h>
 #include <libbaul-private/baul-metadata.h>
 #include <libbaul-private/baul-module.h>
-#include <libbaul-private/baul-search-directory.h>
 #include <libbaul-private/baul-tree-view-drag-dest.h>
 #include <libbaul-private/baul-view-factory.h>
 #include <libbaul-private/baul-clipboard.h>
@@ -1695,12 +1694,6 @@ tree_view_query_tooltip_callback (CtkWidget *widget,
     BaulFile *file;
     char *location_text;
 
-    /* Only show tooltips in search directories */
-    if (!BAUL_IS_SEARCH_DIRECTORY (fm_directory_view_get_model (FM_DIRECTORY_VIEW (list_view))))
-    {
-        return FALSE;
-    }
-
     tree_view = CTK_TREE_VIEW (widget);
 
     /* Get the tree path at the cursor position */
@@ -1724,8 +1717,9 @@ tree_view_query_tooltip_callback (CtkWidget *widget,
         return FALSE;
     }
 
-    /* Set the tooltip text with the file location */
-    location_text = baul_file_get_string_attribute_with_default (file, "location");
+    /* Only search results get a tooltip, with the path relative to the
+     * search location */
+    location_text = fm_directory_view_get_search_result_path_text (FM_DIRECTORY_VIEW (list_view), file);
     if (location_text == NULL || location_text[0] == '\0')
     {
         g_free (location_text);

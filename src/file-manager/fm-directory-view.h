@@ -421,6 +421,8 @@ void                fm_directory_view_notify_selection_changed         (FMDirect
 CtkUIManager *      fm_directory_view_get_ui_manager                   (FMDirectoryView  *view);
 char **             fm_directory_view_get_emblem_names_to_exclude      (FMDirectoryView  *view);
 BaulDirectory  *fm_directory_view_get_model                        (FMDirectoryView  *view);
+char *              fm_directory_view_get_search_result_path_text       (FMDirectoryView  *view,
+                                                                         BaulFile         *file);
 CtkWindow	   *fm_directory_view_get_containing_window	       (FMDirectoryView  *view);
 BaulFile       *fm_directory_view_get_directory_as_file            (FMDirectoryView  *view);
 EelBackground *     fm_directory_view_get_background                   (FMDirectoryView  *view);
