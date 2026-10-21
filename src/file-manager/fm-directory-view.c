@@ -57,6 +57,7 @@
 #include <libbaul-private/baul-desktop-icon-file.h>
 #include <libbaul-private/baul-desktop-directory.h>
 #include <libbaul-private/baul-extensions.h>
+#include <libbaul-private/baul-query.h>
 #include <libbaul-private/baul-search-directory.h>
 #include <libbaul-private/baul-directory-background.h>
 #include <libbaul-private/baul-directory.h>
@@ -3751,6 +3752,79 @@ fm_directory_view_get_model (FMDirectoryView *view)
 	g_return_val_if_fail (FM_IS_DIRECTORY_VIEW (view), NULL);
 
 	return view->details->model;
+}
+
+/**
+ * fm_directory_view_get_search_result_path_text:
+ *
+ * Get the path of @file relative to the location the search in @view
+ * was run from, so the containing directory is visible at a glance.
+ * Results that are not under the search base fall back to the
+ * absolute path (or URI).
+ *
+ * Return value: a newly allocated string, or NULL.
+ **/
+char *
+fm_directory_view_get_search_result_path_text (FMDirectoryView *view,
+					      BaulFile *file)
+{
+	BaulDirectory *model;
+	BaulQuery *query;
+	GFile *location;
+	GFile *search_base;
+	char *path;
+
+	g_return_val_if_fail (FM_IS_DIRECTORY_VIEW (view), NULL);
+	g_return_val_if_fail (BAUL_IS_FILE (file), NULL);
+
+	/* Only search results get a relative path */
+	model = fm_directory_view_get_model (view);
+	if (!BAUL_IS_SEARCH_DIRECTORY (model)) {
+		return NULL;
+	}
+
+	/* Get the location the search was run from */
+	search_base = NULL;
+	query = baul_search_directory_get_query (BAUL_SEARCH_DIRECTORY (model));
+	if (query != NULL) {
+		char *base_uri;
+
+		base_uri = baul_query_get_location (query);
+		if (base_uri != NULL && base_uri[0] != '\0') {
+			search_base = g_file_new_for_uri (base_uri);
+		}
+		g_free (base_uri);
+		g_object_unref (query);
+	}
+
+	location = baul_file_get_location (file);
+	if (location == NULL) {
+		if (search_base != NULL) {
+			g_object_unref (search_base);
+		}
+		return NULL;
+	}
+
+	path = NULL;
+	if (search_base != NULL) {
+		path = g_file_get_relative_path (search_base, location);
+	}
+
+	if (path == NULL || path[0] == '\0') {
+		g_free (path);
+		path = g_file_get_path (location);
+		if (path == NULL) {
+			path = g_file_get_uri (location);
+		}
+	}
+
+	g_object_unref (location);
+
+	if (search_base != NULL) {
+		g_object_unref (search_base);
+	}
+
+	return path;
 }
 
 CdkAtom
