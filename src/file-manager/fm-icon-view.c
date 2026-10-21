@@ -3026,8 +3026,8 @@ icon_container_query_tooltip_callback (CtkWidget *widget,
         return FALSE;
     }
 
-    /* Only search results get a tooltip, with the path relative to the
-     * search location */
+    /* Only search results get a tooltip, with the path of the directory
+     * that contains them, relative to the search location */
     location_text = fm_directory_view_get_search_result_path_text (FM_DIRECTORY_VIEW (icon_view), file);
     if (location_text == NULL || location_text[0] == '\0')
     {

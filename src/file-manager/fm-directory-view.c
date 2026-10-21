@@ -3757,10 +3757,12 @@ fm_directory_view_get_model (FMDirectoryView *view)
 /**
  * fm_directory_view_get_search_result_path_text:
  *
- * Get the path of @file relative to the location the search in @view
- * was run from, so the containing directory is visible at a glance.
- * Results that are not under the search base fall back to the
- * absolute path (or URI).
+ * Get the path of the directory that contains @file, relative to the
+ * location the search in @view was run from, so the source directory
+ * is visible at a glance without repeating the name of the result.
+ * Results found directly in the search location show "." and results
+ * that are not under the search base fall back to the absolute path
+ * (or URI) of their directory.
  *
  * Return value: a newly allocated string, or NULL.
  **/
@@ -3771,6 +3773,7 @@ fm_directory_view_get_search_result_path_text (FMDirectoryView *view,
 	BaulDirectory *model;
 	BaulQuery *query;
 	GFile *location;
+	GFile *directory;
 	GFile *search_base;
 	char *path;
 
@@ -3805,20 +3808,38 @@ fm_directory_view_get_search_result_path_text (FMDirectoryView *view,
 		return NULL;
 	}
 
-	path = NULL;
-	if (search_base != NULL) {
-		path = g_file_get_relative_path (search_base, location);
+	/* Show the directory that contains the result: the name of the
+	 * result is already visible in the view */
+	directory = g_file_get_parent (location);
+	g_object_unref (location);
+	if (directory == NULL) {
+		if (search_base != NULL) {
+			g_object_unref (search_base);
+		}
+		return NULL;
 	}
 
-	if (path == NULL || path[0] == '\0') {
-		g_free (path);
-		path = g_file_get_path (location);
-		if (path == NULL) {
-			path = g_file_get_uri (location);
+	path = NULL;
+	if (search_base != NULL) {
+		if (g_file_equal (search_base, directory)) {
+			/* The result is directly inside the search location.
+			 * g_file_get_relative_path() returns NULL, not an empty
+			 * string, when both GFiles are equal, so this case is
+			 * checked explicitly. */
+			path = g_strdup (".");
+		} else {
+			path = g_file_get_relative_path (search_base, directory);
 		}
 	}
 
-	g_object_unref (location);
+	if (path == NULL) {
+		path = g_file_get_path (directory);
+		if (path == NULL) {
+			path = g_file_get_uri (directory);
+		}
+	}
+
+	g_object_unref (directory);
 
 	if (search_base != NULL) {
 		g_object_unref (search_base);
