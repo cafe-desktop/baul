@@ -1692,12 +1692,22 @@ tree_view_query_tooltip_callback (CtkWidget *widget,
     CtkTreeModel *model;
     CtkTreeIter iter;
     BaulFile *file;
+    gint bin_x;
+    gint bin_y;
     char *location_text;
 
     tree_view = CTK_TREE_VIEW (widget);
 
+    /* query-tooltip reports coordinates relative to the widget, but
+     * ctk_tree_view_get_path_at_pos expects them relative to the bin
+     * window, which starts below the column headers. Without the
+     * conversion the hit test is shifted down by the header height,
+     * so it lands on the row below the cursor, and the last row
+     * (or a single-row list) never gets a tooltip */
+    ctk_tree_view_convert_widget_to_bin_window_coords (tree_view, x, y, &bin_x, &bin_y);
+
     /* Get the tree path at the cursor position */
-    if (!ctk_tree_view_get_path_at_pos (tree_view, x, y, &path, NULL, NULL, NULL))
+    if (!ctk_tree_view_get_path_at_pos (tree_view, bin_x, bin_y, &path, NULL, NULL, NULL))
     {
         return FALSE;
     }
