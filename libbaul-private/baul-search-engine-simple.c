@@ -62,6 +62,15 @@ struct BaulSearchEngineSimpleDetails
     SearchThreadData *active_search;
 
     gboolean query_finished;
+
+    /* Live updates: keep track of the current hits and monitor the
+     * directories containing them, so that files deleted and/or
+     * recreated by external programs (e.g. git) are removed from or
+     * restored to the results without restarting the search. */
+    GHashTable *hit_uris;          /* uri -> uri, current results */
+    GHashTable *removed_hit_uris;  /* uri -> uri, hits deleted, awaiting recreation */
+    GHashTable *monitored_dirs;    /* GFile dir -> GFileMonitor (NULL if not available) */
+    GHashTable *pending_restore_uris;  /* uri -> uri, recreated, awaiting a follow-up event */
 };
 
 G_DEFINE_TYPE (BaulSearchEngineSimple,
@@ -81,6 +90,30 @@ finalize (GObject *object)
     {
         g_object_unref (simple->details->query);
         simple->details->query = NULL;
+    }
+
+    if (simple->details->monitored_dirs != NULL)
+    {
+        g_hash_table_destroy (simple->details->monitored_dirs);
+        simple->details->monitored_dirs = NULL;
+    }
+
+    if (simple->details->hit_uris != NULL)
+    {
+        g_hash_table_destroy (simple->details->hit_uris);
+        simple->details->hit_uris = NULL;
+    }
+
+    if (simple->details->removed_hit_uris != NULL)
+    {
+        g_hash_table_destroy (simple->details->removed_hit_uris);
+        simple->details->removed_hit_uris = NULL;
+    }
+
+    if (simple->details->pending_restore_uris != NULL)
+    {
+        g_hash_table_destroy (simple->details->pending_restore_uris);
+        simple->details->pending_restore_uris = NULL;
     }
 
     g_free (simple->details);
@@ -173,6 +206,13 @@ typedef struct
     SearchThreadData *thread_data;
 } SearchHits;
 
+static void engine_register_hit (BaulSearchEngineSimple *engine,
+                                 const char             *uri);
+static void parent_dir_changed (GFileMonitor      *monitor,
+                                GFile             *child,
+                                GFile             *other_file,
+                                GFileMonitorEvent  event_type,
+                                gpointer           user_data);
 
 static gboolean
 search_thread_add_hits_idle (gpointer user_data)
@@ -183,6 +223,13 @@ search_thread_add_hits_idle (gpointer user_data)
 
     if (!g_cancellable_is_cancelled (hits->thread_data->cancellable))
     {
+        GList *l;
+
+        for (l = hits->uris; l != NULL; l = l->next)
+        {
+            engine_register_hit (hits->thread_data->engine, l->data);
+        }
+
         baul_search_engine_hits_added (BAUL_SEARCH_ENGINE (hits->thread_data->engine),
                                        hits->uris);
     }
@@ -208,6 +255,182 @@ send_batch (SearchThreadData *data)
         g_idle_add (search_thread_add_hits_idle, hits);
     }
     data->uri_hits = NULL;
+}
+
+static void
+monitor_value_free (gpointer data)
+{
+    if (data != NULL)
+    {
+        g_object_unref (data);
+    }
+}
+
+static void
+emit_hits_added (BaulSearchEngineSimple *engine, const char *uri)
+{
+    GList *hits;
+
+    hits = g_list_prepend (NULL, g_strdup (uri));
+    baul_search_engine_hits_added (BAUL_SEARCH_ENGINE (engine), hits);
+    g_list_free_full (hits, g_free);
+}
+
+static void
+emit_hits_subtracted (BaulSearchEngineSimple *engine, const char *uri)
+{
+    GList *hits;
+
+    hits = g_list_prepend (NULL, g_strdup (uri));
+    baul_search_engine_hits_subtracted (BAUL_SEARCH_ENGINE (engine), hits);
+    g_list_free_full (hits, g_free);
+}
+
+/* Make sure the directory containing a hit is monitored, so we get
+ * notified when one of the results is deleted or recreated. */
+static void
+engine_ensure_parent_monitor (BaulSearchEngineSimple *engine,
+                              GFile                  *hit)
+{
+    BaulSearchEngineSimpleDetails *details;
+    GFile *parent;
+    GFileMonitor *monitor;
+    gpointer key, value;
+
+    details = engine->details;
+
+    parent = g_file_get_parent (hit);
+    if (parent == NULL)
+    {
+        return;
+    }
+
+    if (g_hash_table_lookup_extended (details->monitored_dirs, parent, &key, &value))
+    {
+        /* Already monitored (or known to be unmonitorable) */
+        g_object_unref (parent);
+        return;
+    }
+
+    monitor = g_file_monitor_directory (parent, G_FILE_MONITOR_NONE, NULL, NULL);
+    if (monitor != NULL)
+    {
+        g_signal_connect (monitor, "changed",
+                          G_CALLBACK (parent_dir_changed), engine);
+    }
+
+    /* Store the monitor (or NULL, so we do not retry for every hit
+     * of the same directory) together with its parent. */
+    g_hash_table_insert (details->monitored_dirs, parent, monitor);
+}
+
+static void
+engine_register_hit (BaulSearchEngineSimple *engine, const char *uri)
+{
+    BaulSearchEngineSimpleDetails *details;
+    GFile *file;
+
+    details = engine->details;
+
+    if (g_hash_table_contains (details->hit_uris, uri))
+    {
+        return;
+    }
+
+    g_hash_table_remove (details->removed_hit_uris, uri);
+    g_hash_table_add (details->hit_uris, g_strdup (uri));
+
+    file = g_file_new_for_uri (uri);
+    engine_ensure_parent_monitor (engine, file);
+    g_object_unref (file);
+}
+
+static void
+parent_dir_changed (GFileMonitor      *monitor G_GNUC_UNUSED,
+                    GFile             *child,
+                    GFile             *other_file,
+                    GFileMonitorEvent  event_type,
+                    gpointer           user_data)
+{
+    BaulSearchEngineSimple *engine;
+    BaulSearchEngineSimpleDetails *details;
+    char *uri;
+
+    engine = BAUL_SEARCH_ENGINE_SIMPLE (user_data);
+    details = engine->details;
+
+    if (details->query == NULL)
+    {
+        return;
+    }
+
+    switch (event_type)
+    {
+    case G_FILE_MONITOR_EVENT_DELETED:
+    case G_FILE_MONITOR_EVENT_MOVED_OUT:
+        uri = g_file_get_uri (child);
+        /* One of our hits disappeared: remove it from the results and
+         * remember it, in case it gets recreated later (e.g. by git). */
+        g_hash_table_remove (details->pending_restore_uris, uri);
+        if (g_hash_table_remove (details->hit_uris, uri))
+        {
+            g_hash_table_add (details->removed_hit_uris, g_strdup (uri));
+            emit_hits_subtracted (engine, uri);
+        }
+        g_free (uri);
+        break;
+    case G_FILE_MONITOR_EVENT_CREATED:
+    case G_FILE_MONITOR_EVENT_MOVED_IN:
+        uri = g_file_get_uri (child);
+        /* A previously matched file came back. Do not restore it right
+         * away: the directory layer may not have processed the deletion
+         * yet, and baul_file_get_by_uri() could then return the old
+         * object, which is about to be marked gone (a gone object can
+         * never be revived). Park the uri instead; the next event for
+         * this file (git always writes the recreated file, so CHANGED
+         * follows CREATED) will perform the restore. */
+        if (g_hash_table_remove (details->removed_hit_uris, uri))
+        {
+            g_hash_table_add (details->pending_restore_uris, g_strdup (uri));
+        }
+        g_free (uri);
+        break;
+    case G_FILE_MONITOR_EVENT_RENAMED:
+        uri = g_file_get_uri (child);
+        if (g_hash_table_remove (details->hit_uris, uri))
+        {
+            g_hash_table_add (details->removed_hit_uris, g_strdup (uri));
+            emit_hits_subtracted (engine, uri);
+        }
+        g_free (uri);
+
+        if (other_file != NULL)
+        {
+            uri = g_file_get_uri (other_file);
+            if (g_hash_table_remove (details->removed_hit_uris, uri))
+            {
+                g_hash_table_add (details->pending_restore_uris, g_strdup (uri));
+            }
+            g_free (uri);
+        }
+        break;
+    default:
+        /* CHANGED, CHANGES_DONE_HINT, ATTRIBUTE_CHANGED, ... : the file
+         * still exists at the same name, so it still matches the query
+         * and the view is updated through the normal file-changed
+         * events. It is also the safe moment to restore a recreated
+         * hit: the directory layer has processed both the deletion and
+         * the recreation by now, so the file object we get below is
+         * fresh and alive. */
+        uri = g_file_get_uri (child);
+        if (g_hash_table_remove (details->pending_restore_uris, uri))
+        {
+            g_hash_table_add (details->hit_uris, g_strdup (uri));
+            emit_hits_added (engine, uri);
+        }
+        g_free (uri);
+        break;
+    }
 }
 
 #define G_FILE_ATTRIBUTE_XATTR_XDG_TAGS "xattr::xdg.tags"
@@ -704,6 +927,27 @@ baul_search_engine_simple_stop (BaulSearchEngine *engine)
         g_cancellable_cancel (simple->details->active_search->cancellable);
         simple->details->active_search = NULL;
     }
+
+    /* Drop the live-update state; it is rebuilt by the next search. */
+    if (simple->details->monitored_dirs != NULL)
+    {
+        g_hash_table_remove_all (simple->details->monitored_dirs);
+    }
+
+    if (simple->details->hit_uris != NULL)
+    {
+        g_hash_table_remove_all (simple->details->hit_uris);
+    }
+
+    if (simple->details->removed_hit_uris != NULL)
+    {
+        g_hash_table_remove_all (simple->details->removed_hit_uris);
+    }
+
+    if (simple->details->pending_restore_uris != NULL)
+    {
+        g_hash_table_remove_all (simple->details->pending_restore_uris);
+    }
 }
 
 static gboolean
@@ -754,6 +998,17 @@ static void
 baul_search_engine_simple_init (BaulSearchEngineSimple *engine)
 {
     engine->details = g_new0 (BaulSearchEngineSimpleDetails, 1);
+
+    engine->details->hit_uris =
+        g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+    engine->details->removed_hit_uris =
+        g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+    engine->details->monitored_dirs =
+        g_hash_table_new_full (g_file_hash, (GEqualFunc) g_file_equal,
+                               (GDestroyNotify) g_object_unref,
+                               monitor_value_free);
+    engine->details->pending_restore_uris =
+        g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 }
 
 

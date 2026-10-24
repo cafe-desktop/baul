@@ -175,7 +175,90 @@ file_changed (BaulFile *file, BaulSearchDirectory *search)
     list.data = file;
     list.next = NULL;
 
+    /* Let the view react to the object as it is now: for a really
+     * deleted file this drops the row, which is the historical
+     * behavior. */
     baul_directory_emit_files_changed (BAUL_DIRECTORY (search), &list);
+
+    if (baul_file_is_gone (file) &&
+        g_list_find (search->details->files, file) != NULL)
+    {
+        char *uri;
+        GFile *location;
+        BaulFile *fresh = NULL;
+        GList *monitor_list;
+        SearchMonitor *monitor;
+
+        /* The real directory just marked this object gone. When the file
+         * was deleted and recreated in one operation (git checkout/reset,
+         * editors saving through rename), a fresh BaulFile is registered
+         * for the same URI at this point: swap it into the result list so
+         * the row comes back. Without this, the restored row would point
+         * to an object that can never get its info back and the result
+         * would disappear for good. */
+        uri = baul_file_get_uri (file);
+        location = g_file_new_for_uri (uri);
+
+        if (g_file_query_exists (location, NULL))
+        {
+            fresh = baul_file_get_by_uri (uri);
+        }
+
+        g_object_unref (location);
+        g_free (uri);
+
+        /* Detach the gone object like hits-subtracted does. */
+        for (monitor_list = search->details->monitor_list; monitor_list;
+                monitor_list = monitor_list->next)
+        {
+            monitor = monitor_list->data;
+            baul_file_monitor_remove (file, monitor);
+        }
+
+        g_signal_handlers_disconnect_by_func (file, file_changed, search);
+
+        search->details->files = g_list_remove_all (search->details->files,
+                                                    file);
+        baul_file_unref (file);
+
+        if (fresh != NULL && fresh != file)
+        {
+            GList *added_list;
+
+            for (monitor_list = search->details->monitor_list; monitor_list;
+                    monitor_list = monitor_list->next)
+            {
+                monitor = monitor_list->data;
+                baul_file_monitor_add (fresh, monitor,
+                                       monitor->monitor_attributes);
+            }
+
+            g_signal_connect (fresh, "changed",
+                              G_CALLBACK (file_changed), search);
+
+            /* A fresh object may still lack its info. Fetch it now so the
+             * view can show the restored row without waiting on the async
+             * work queue. */
+            if (!baul_file_check_if_ready (fresh,
+                                           BAUL_FILE_ATTRIBUTES_FOR_ICON))
+            {
+                baul_file_refresh_info (fresh);
+            }
+
+            search->details->files = g_list_prepend (search->details->files,
+                                                     fresh);
+
+            added_list = g_list_prepend (NULL, fresh);
+            baul_directory_emit_files_added (BAUL_DIRECTORY (search),
+                                             added_list);
+            g_list_free (added_list);
+        }
+        else if (fresh != NULL)
+        {
+            /* Keep the reference taken above balanced. */
+            baul_file_unref (fresh);
+        }
+    }
 }
 
 static void
@@ -496,6 +579,30 @@ search_cancel_callback (BaulDirectory *directory,
 }
 
 
+static BaulFile *
+search_find_file_by_uri (GList *files, const char *uri)
+{
+    GList *list;
+
+    for (list = files; list != NULL; list = list->next)
+    {
+        BaulFile *file;
+        char *file_uri;
+
+        file = BAUL_FILE (list->data);
+
+        file_uri = baul_file_get_uri (file);
+        if (g_strcmp0 (file_uri, uri) == 0)
+        {
+            g_free (file_uri);
+            return baul_file_ref (file);
+        }
+        g_free (file_uri);
+    }
+
+    return NULL;
+}
+
 static void
 search_engine_hits_added (BaulSearchEngine    *engine G_GNUC_UNUSED,
 			  GList               *hits,
@@ -521,7 +628,25 @@ search_engine_hits_added (BaulSearchEngine    *engine G_GNUC_UNUSED,
             continue;
         }
 
+        /* Skip hits we are already showing (e.g. a file restored by a
+         * live update while the engine keeps re-reporting it). */
+        file = search_find_file_by_uri (search->details->files, uri);
+        if (file != NULL)
+        {
+            baul_file_unref (file);
+            continue;
+        }
+
         file = baul_file_get_by_uri (uri);
+
+        if (baul_file_is_gone (file))
+        {
+            /* A gone object can never get its info back, so the view
+             * would never show it. Skip it; the engine re-reports this
+             * hit on the next filesystem event for the file. */
+            baul_file_unref (file);
+            continue;
+        }
 
         for (monitor_list = search->details->monitor_list; monitor_list; monitor_list = monitor_list->next)
         {
@@ -532,6 +657,15 @@ search_engine_hits_added (BaulSearchEngine    *engine G_GNUC_UNUSED,
         }
 
         g_signal_connect (file, "changed", G_CALLBACK (file_changed), search);
+
+        /* A brand new BaulFile object starts without info. Fetch it now
+         * (synchronously, it is a local file) so the view can show the
+         * restored row immediately instead of waiting on the async work
+         * queue, which may never run for a file nobody is monitoring. */
+        if (!baul_file_check_if_ready (file, BAUL_FILE_ATTRIBUTES_FOR_ICON))
+        {
+            baul_file_refresh_info (file);
+        }
 
         file_list = g_list_prepend (file_list, file);
     }
@@ -563,7 +697,15 @@ search_engine_hits_subtracted (BaulSearchEngine    *engine G_GNUC_UNUSED,
         char *uri;
 
         uri = hit_list->data;
-        file = baul_file_get_by_uri (uri);
+
+        /* Prefer the file we are already tracking: for a file deleted
+         * on disk, baul_file_get_by_uri() would create a brand new
+         * object instead of dropping the stale one. */
+        file = search_find_file_by_uri (search->details->files, uri);
+        if (file == NULL)
+        {
+            file = baul_file_get_by_uri (uri);
+        }
 
         for (monitor_list = search->details->monitor_list; monitor_list;
                 monitor_list = monitor_list->next)
@@ -575,7 +717,7 @@ search_engine_hits_subtracted (BaulSearchEngine    *engine G_GNUC_UNUSED,
 
         g_signal_handlers_disconnect_by_func (file, file_changed, search);
 
-        search->details->files = g_list_remove (search->details->files, file);
+        search->details->files = g_list_remove_all (search->details->files, file);
 
         file_list = g_list_prepend (file_list, file);
     }
