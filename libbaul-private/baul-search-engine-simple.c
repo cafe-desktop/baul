@@ -33,25 +33,46 @@
 
 #define BATCH_SIZE 500
 
+/* Matching criteria for a query. They are shared by the search
+ * walk and by the live updates, so that a file added to the
+ * results while the search is active is consistent with a full
+ * re-run of the search. */
+typedef struct
+{
+    char **words;              /* query text, normalized and split */
+    GList *mime_types;
+    GList *tags;
+    gint64 timestamp;
+    gint64 size;
+    char *contained_text;
+    gboolean odt2txt_available;
+} SearchMatcher;
+
+static SearchMatcher *search_matcher_new (BaulQuery *query);
+static void search_matcher_free (SearchMatcher *matcher);
+static gboolean search_matcher_matches (SearchMatcher *matcher,
+                                        GFile         *file,
+                                        GFileInfo     *info);
+static void engine_monitor_visited_dirs (BaulSearchEngineSimple *engine,
+                                         GList                  *dirs);
+
 typedef struct
 {
     BaulSearchEngineSimple *engine;
     GCancellable *cancellable;
 
-    char *contained_text;
-    GList *mime_types;
-    GList *tags;
-    char **words;
     GList *found_list;
 
     GQueue *directories; /* GFiles */
 
     GHashTable *visited;
 
+    GList *visited_dirs; /* GFiles enumerated by the walk, for live updates */
+
     gint n_processed_files;
     GList *uri_hits;
-    gint64 timestamp;
-    gint64 size;
+
+    SearchMatcher *matcher;
 } SearchThreadData;
 
 
@@ -71,6 +92,10 @@ struct BaulSearchEngineSimpleDetails
     GHashTable *removed_hit_uris;  /* uri -> uri, hits deleted, awaiting recreation */
     GHashTable *monitored_dirs;    /* GFile dir -> GFileMonitor (NULL if not available) */
     GHashTable *pending_restore_uris;  /* uri -> uri, recreated, awaiting a follow-up event */
+
+    /* Criteria of the current query for the live updates; built
+     * lazily on the first filesystem event. */
+    SearchMatcher *matcher;
 };
 
 G_DEFINE_TYPE (BaulSearchEngineSimple,
@@ -116,6 +141,9 @@ finalize (GObject *object)
         simple->details->pending_restore_uris = NULL;
     }
 
+    search_matcher_free (simple->details->matcher);
+    simple->details->matcher = NULL;
+
     g_free (simple->details);
 
     EEL_CALL_PARENT (G_OBJECT_CLASS, finalize, (object));
@@ -126,7 +154,7 @@ search_thread_data_new (BaulSearchEngineSimple *engine,
                         BaulQuery *query)
 {
     SearchThreadData *data;
-    char *text, *lower, *normalized, *uri;
+    char *uri;
     GFile *location;
 
     data = g_new0 (SearchThreadData, 1);
@@ -147,19 +175,7 @@ search_thread_data_new (BaulSearchEngineSimple *engine,
     }
     g_queue_push_tail (data->directories, location);
 
-    text = baul_query_get_text (query);
-    normalized = g_utf8_normalize (text, -1, G_NORMALIZE_NFD);
-    lower = g_utf8_strdown (normalized, -1);
-    data->words = g_strsplit (lower, " ", -1);
-    g_free (text);
-    g_free (lower);
-    g_free (normalized);
-
-    data->tags = baul_query_get_tags (query);
-    data->mime_types = baul_query_get_mime_types (query);
-    data->timestamp = baul_query_get_timestamp (query);
-    data->size = baul_query_get_size (query);
-    data->contained_text = baul_query_get_contained_text (query);
+    data->matcher = search_matcher_new (query);
 
     data->cancellable = g_cancellable_new ();
 
@@ -173,12 +189,10 @@ search_thread_data_free (SearchThreadData *data)
                      (GFunc)g_object_unref, NULL);
     g_queue_free (data->directories);
     g_hash_table_destroy (data->visited);
+    g_list_free_full (data->visited_dirs, g_object_unref);
     g_object_unref (data->cancellable);
-    g_strfreev (data->words);
-    g_list_free_full (data->tags, g_free);
-    g_list_free_full (data->mime_types, g_free);
     g_list_free_full (data->uri_hits, g_free);
-    g_free (data->contained_text);
+    search_matcher_free (data->matcher);
     g_free (data);
 }
 
@@ -191,6 +205,12 @@ search_thread_done_idle (gpointer user_data)
 
     if (!g_cancellable_is_cancelled (data->cancellable))
     {
+        /* The walk is over: monitor every directory that was
+         * enumerated, so that files created from now on inside
+         * the searched tree are added to the results in real
+         * time. */
+        engine_monitor_visited_dirs (data->engine, data->visited_dirs);
+
         baul_search_engine_finished (BAUL_SEARCH_ENGINE (data->engine));
         data->engine->details->active_search = NULL;
     }
@@ -213,6 +233,11 @@ static void parent_dir_changed (GFileMonitor      *monitor,
                                 GFile             *other_file,
                                 GFileMonitorEvent  event_type,
                                 gpointer           user_data);
+static void engine_monitor_directory (BaulSearchEngineSimple *engine,
+                                      GFile                  *dir);
+static void engine_maybe_add_hit (BaulSearchEngineSimple *engine,
+                                  GFile                  *file,
+                                  const char             *uri);
 
 static gboolean
 search_thread_add_hits_idle (gpointer user_data)
@@ -378,6 +403,13 @@ parent_dir_changed (GFileMonitor      *monitor G_GNUC_UNUSED,
             emit_hits_subtracted (engine, uri);
         }
         g_free (uri);
+        /* If the deleted item was one of the monitored
+         * directories, drop its monitor (dead by now), so that a
+         * recreation of the directory gets a fresh one. */
+        if (g_hash_table_contains (details->monitored_dirs, child))
+        {
+            g_hash_table_remove (details->monitored_dirs, child);
+        }
         break;
     case G_FILE_MONITOR_EVENT_CREATED:
     case G_FILE_MONITOR_EVENT_MOVED_IN:
@@ -393,6 +425,13 @@ parent_dir_changed (GFileMonitor      *monitor G_GNUC_UNUSED,
         {
             g_hash_table_add (details->pending_restore_uris, g_strdup (uri));
         }
+        else
+        {
+            /* A brand new file appeared inside the monitored tree:
+             * add it to the results in real time if it matches the
+             * query. */
+            engine_maybe_add_hit (engine, child, uri);
+        }
         g_free (uri);
         break;
     case G_FILE_MONITOR_EVENT_RENAMED:
@@ -404,12 +443,24 @@ parent_dir_changed (GFileMonitor      *monitor G_GNUC_UNUSED,
         }
         g_free (uri);
 
+        /* A renamed directory keeps a monitor pointing at the old
+         * name; drop it. The new name gets a fresh monitor right
+         * below, the same way any other new file does. */
+        if (g_hash_table_contains (details->monitored_dirs, child))
+        {
+            g_hash_table_remove (details->monitored_dirs, child);
+        }
+
         if (other_file != NULL)
         {
             uri = g_file_get_uri (other_file);
             if (g_hash_table_remove (details->removed_hit_uris, uri))
             {
                 g_hash_table_add (details->pending_restore_uris, g_strdup (uri));
+            }
+            else
+            {
+                engine_maybe_add_hit (engine, other_file, uri);
             }
             g_free (uri);
         }
@@ -442,6 +493,108 @@ parent_dir_changed (GFileMonitor      *monitor G_GNUC_UNUSED,
 	G_FILE_ATTRIBUTE_STANDARD_TYPE "," \
 	G_FILE_ATTRIBUTE_ID_FILE
 
+
+/* Make sure a directory is monitored, so that files created inside it
+ * while the search is active can be added to the results in real
+ * time. The engine keeps one monitor per directory (or NULL for
+ * directories that cannot be monitored), shared between the parents
+ * of the hits and the directories visited by the walk. */
+static void
+engine_monitor_directory (BaulSearchEngineSimple *engine,
+                          GFile                  *dir)
+{
+    BaulSearchEngineSimpleDetails *details;
+    GFileMonitor *monitor;
+
+    details = engine->details;
+
+    if (g_hash_table_lookup_extended (details->monitored_dirs, dir, NULL, NULL))
+    {
+        /* Already monitored (or known to be unmonitorable) */
+        return;
+    }
+
+    monitor = g_file_monitor_directory (dir, G_FILE_MONITOR_NONE, NULL, NULL);
+    if (monitor != NULL)
+    {
+        g_signal_connect (monitor, "changed",
+                          G_CALLBACK (parent_dir_changed), engine);
+    }
+
+    g_hash_table_insert (details->monitored_dirs, g_object_ref (dir), monitor);
+}
+
+static void
+engine_monitor_visited_dirs (BaulSearchEngineSimple *engine,
+                             GList                  *dirs)
+{
+    GList *l;
+
+    for (l = dirs; l != NULL; l = l->next)
+    {
+        engine_monitor_directory (engine, G_FILE (l->data));
+    }
+}
+
+/* Attributes needed to evaluate a brand new file against the query,
+ * mirroring what the walk asks for. */
+#define LIVE_ATTRIBUTES \
+	G_FILE_ATTRIBUTE_STANDARD_NAME "," \
+	G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME "," \
+	G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN "," \
+	G_FILE_ATTRIBUTE_STANDARD_TYPE "," \
+	G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
+	G_FILE_ATTRIBUTE_XATTR_XDG_TAGS "," \
+	G_FILE_ATTRIBUTE_TIME_MODIFIED "," \
+	G_FILE_ATTRIBUTE_STANDARD_SIZE
+
+/* A brand new file appeared inside the monitored tree. If it matches
+ * the query, report it as a new hit right away; directories are
+ * monitored in addition, so that files created inside them later on
+ * are found too. */
+static void
+engine_maybe_add_hit (BaulSearchEngineSimple *engine,
+                      GFile                  *file,
+                      const char             *uri)
+{
+    BaulSearchEngineSimpleDetails *details;
+    GFileInfo *info;
+
+    details = engine->details;
+
+    if (g_hash_table_contains (details->hit_uris, uri) ||
+        g_hash_table_contains (details->pending_restore_uris, uri))
+    {
+        return;
+    }
+
+    if (details->matcher == NULL)
+    {
+        /* Built lazily, on the first new file to evaluate. */
+        details->matcher = search_matcher_new (details->query);
+    }
+
+    info = g_file_query_info (file, LIVE_ATTRIBUTES, 0, NULL, NULL);
+    if (info == NULL)
+    {
+        /* It vanished again before we could look at it. */
+        return;
+    }
+
+    if (!g_file_info_get_is_hidden (info) &&
+        search_matcher_matches (details->matcher, file, info))
+    {
+        engine_register_hit (engine, uri);
+        emit_hits_added (engine, uri);
+    }
+
+    if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY)
+    {
+        engine_monitor_directory (engine, file);
+    }
+
+    g_object_unref (info);
+}
 
 /* Stolen code
  * file: glocalfileinfo.c
@@ -660,41 +813,185 @@ is_file_has_str (
     return rc;
 }
 
+static SearchMatcher *
+search_matcher_new (BaulQuery *query)
+{
+    SearchMatcher *matcher;
+    char *text, *lower, *normalized;
+
+    matcher = g_new0 (SearchMatcher, 1);
+
+    text = baul_query_get_text (query);
+    normalized = g_utf8_normalize (text, -1, G_NORMALIZE_NFD);
+    lower = g_utf8_strdown (normalized, -1);
+    matcher->words = g_strsplit (lower, " ", -1);
+    g_free (text);
+    g_free (lower);
+    g_free (normalized);
+
+    matcher->tags = baul_query_get_tags (query);
+    matcher->mime_types = baul_query_get_mime_types (query);
+    matcher->timestamp = baul_query_get_timestamp (query);
+    matcher->size = baul_query_get_size (query);
+    matcher->contained_text = baul_query_get_contained_text (query);
+
+    if (matcher->contained_text != NULL)
+    {
+        matcher->odt2txt_available = check_odt2txt ();
+    }
+
+    return matcher;
+}
+
+static void
+search_matcher_free (SearchMatcher *matcher)
+{
+    if (matcher == NULL)
+    {
+        return;
+    }
+
+    g_strfreev (matcher->words);
+    g_list_free_full (matcher->tags, g_free);
+    g_list_free_full (matcher->mime_types, g_free);
+    g_free (matcher->contained_text);
+    g_free (matcher);
+}
+
+/* Decide whether a file matches the query. Every criterion of the
+ * search walk is evaluated here too, so a file added live is
+ * consistent with the results of a full re-run of the search. */
+static gboolean
+search_matcher_matches (SearchMatcher *matcher,
+                        GFile         *file,
+                        GFileInfo     *info)
+{
+    const char *mime_type, *display_name;
+    char *lower_name, *normalized;
+    gboolean hit;
+    int i;
+    GList *l;
+
+    display_name = g_file_info_get_display_name (info);
+    if (display_name == NULL)
+    {
+        return FALSE;
+    }
+
+    normalized = g_utf8_normalize (display_name, -1, G_NORMALIZE_NFD);
+    lower_name = g_utf8_strdown (normalized, -1);
+    g_free (normalized);
+
+    hit = TRUE;
+    for (i = 0; matcher->words[i] != NULL; i++)
+    {
+        if (strstr (lower_name, matcher->words[i]) == NULL)
+        {
+            hit = FALSE;
+            break;
+        }
+    }
+    g_free (lower_name);
+
+    if (hit && matcher->mime_types)
+    {
+        mime_type = g_file_info_get_content_type (info);
+        hit = FALSE;
+
+        for (l = matcher->mime_types; mime_type != NULL && l != NULL; l = l->next)
+        {
+            if (g_content_type_equals (mime_type, l->data))
+            {
+                hit = TRUE;
+                break;
+            }
+        }
+    }
+
+    if (hit && matcher->tags)
+    {
+        hit = file_has_all_tags (info, matcher->tags);
+    }
+
+    if (hit && matcher->timestamp != 0) {
+        GDateTime *mod_dt = g_file_info_get_modification_date_time (info);
+        if (mod_dt) {
+            gint64 mod_sec = g_date_time_to_unix (mod_dt);
+
+            if (matcher->timestamp > 0) {
+                if (matcher->timestamp < mod_sec)
+                    hit = FALSE;
+            } else {
+                if (mod_sec < llabs (matcher->timestamp))
+                    hit = FALSE;
+            }
+            g_date_time_unref (mod_dt);
+        } else {
+            hit = FALSE;
+        }
+    }
+
+    if (hit && matcher->size != 0) {
+        gint64 file_size = g_file_info_get_size (info);
+        if (matcher->size > 0) {
+            if (file_size < matcher->size)
+                hit = FALSE;
+        } else {
+            if (ABS(matcher->size) < file_size)
+                hit = FALSE;
+        }
+    }
+
+    if (hit && matcher->contained_text) {
+        mime_type = g_file_info_get_content_type (info);
+
+        if (g_content_type_is_mime_type (mime_type, "text/plain") ||
+            g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.text") ||
+            g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.text-template") ||
+            g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.spreadsheet") ||
+            g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.spreadsheet-template") ||
+            g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.presentation") ||
+            g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.presentation-template")
+        ) {
+            char *filepath;
+
+            filepath = g_file_get_path (file);
+            hit = is_file_has_str (filepath, matcher->contained_text,
+                                   mime_type, matcher->odt2txt_available);
+            g_free (filepath);
+        }
+        else {
+            hit = FALSE;
+        }
+    }
+
+    return hit;
+}
+
 static void
 visit_directory (GFile *dir, SearchThreadData *data)
 {
     GFileEnumerator *enumerator;
     GFileInfo *info;
     GFile *child;
-    const char *mime_type, *display_name;
-    char *lower_name, *normalized;
     gboolean hit;
-    int i;
-    GList *l;
     const char *id;
     gboolean visited;
     gchar *attributes;
     GString *attr_string;
-    GDateTime *mod_dt = NULL;
-    gchar *filepath = NULL;
-    gboolean odt2txt_available = FALSE;
 
     attr_string = g_string_new (STD_ATTRIBUTES);
-    if (data->mime_types != NULL || data->contained_text != NULL) {
+    if (data->matcher->mime_types != NULL || data->matcher->contained_text != NULL) {
         g_string_append (attr_string, "," G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE);
     }
-    if (data->tags != NULL) {
+    if (data->matcher->tags != NULL) {
         g_string_append (attr_string, "," G_FILE_ATTRIBUTE_XATTR_XDG_TAGS);
     }
-    if (data->timestamp != 0) {
+    if (data->matcher->timestamp != 0) {
         g_string_append (attr_string, "," G_FILE_ATTRIBUTE_TIME_MODIFIED);
     }
-    if (data->size != 0) {
+    if (data->matcher->size != 0) {
         g_string_append (attr_string, "," G_FILE_ATTRIBUTE_STANDARD_SIZE);
-    }
-
-    if (data->contained_text != NULL) {
-        odt2txt_available = check_odt2txt();
     }
 
     attributes = g_string_free (attr_string, FALSE);
@@ -707,6 +1004,12 @@ visit_directory (GFile *dir, SearchThreadData *data)
         return;
     }
 
+    /* The directory could be enumerated: remember it, so that once the
+     * walk is over it gets monitored and files created inside it show
+     * up in the results in real time. */
+    data->visited_dirs = g_list_prepend (data->visited_dirs,
+                                         g_object_ref (dir));
+
     while ((info = g_file_enumerator_next_file (enumerator, data->cancellable, NULL)) != NULL)
     {
         if (g_file_info_get_is_hidden (info))
@@ -714,98 +1017,14 @@ visit_directory (GFile *dir, SearchThreadData *data)
             goto next;
         }
 
-        display_name = g_file_info_get_display_name (info);
-        if (display_name == NULL)
+        if (g_file_info_get_display_name (info) == NULL)
         {
             goto next;
         }
 
-        normalized = g_utf8_normalize (display_name, -1, G_NORMALIZE_NFD);
-        lower_name = g_utf8_strdown (normalized, -1);
-        g_free (normalized);
-
-        hit = TRUE;
-        for (i = 0; data->words[i] != NULL; i++)
-        {
-            if (strstr (lower_name, data->words[i]) == NULL)
-            {
-                hit = FALSE;
-                break;
-            }
-        }
-        g_free (lower_name);
-
-        if (hit && data->mime_types)
-        {
-            mime_type = g_file_info_get_content_type (info);
-            hit = FALSE;
-
-            for (l = data->mime_types; mime_type != NULL && l != NULL; l = l->next)
-            {
-                if (g_content_type_equals (mime_type, l->data))
-                {
-                    hit = TRUE;
-                    break;
-                }
-            }
-        }
-
-        if (hit && data->tags)
-        {
-            hit = file_has_all_tags (info, data->tags);
-        }
-
-        if (hit && data->timestamp != 0) {
-            mod_dt = g_file_info_get_modification_date_time (info);
-            if (mod_dt) {
-                gint64 mod_sec = g_date_time_to_unix (mod_dt);
-
-                if (data->timestamp > 0) {
-                    if (data->timestamp < mod_sec)
-                        hit = FALSE;
-                } else {
-                    if (mod_sec < llabs (data->timestamp))
-                        hit = FALSE;
-                }
-                g_date_time_unref (mod_dt);
-                mod_dt = NULL;
-            } else {
-                hit = FALSE;
-            }
-        }
-
-        if (hit && data->size != 0) {
-            gint64 file_size = g_file_info_get_size (info);
-            if (data->size > 0) {
-                if (file_size < data->size)
-                    hit = FALSE;
-            } else {
-                if (ABS(data->size) < file_size)
-                    hit = FALSE;
-            }
-        }
-
         child = g_file_get_child (dir, g_file_info_get_name (info));
 
-        if (hit && data->contained_text) {
-            mime_type = g_file_info_get_content_type (info);
-
-            if (g_content_type_is_mime_type (mime_type, "text/plain") ||
-                g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.text") ||
-                g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.text-template") ||
-                g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.spreadsheet") ||
-                g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.spreadsheet-template") ||
-                g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.presentation") ||
-                g_content_type_equals (mime_type, "application/vnd.oasis.opendocument.presentation-template")
-            ) {
-                g_free (filepath);
-                filepath = g_file_get_path (child);
-                hit = is_file_has_str (filepath, data->contained_text, mime_type, odt2txt_available);
-            }
-            else {
-                hit = FALSE;
-            }
-        }
+        hit = search_matcher_matches (data->matcher, child, info);
 
         if (hit)
         {
@@ -846,7 +1065,6 @@ next:
         g_object_unref (info);
     }
 
-    g_free (filepath);
     g_object_unref (enumerator);
 }
 
@@ -906,6 +1124,11 @@ baul_search_engine_simple_start (BaulSearchEngine *engine)
     {
         return;
     }
+
+    /* Invalidate the matcher of the previous query; the live
+     * updates rebuild it lazily on the first filesystem event. */
+    search_matcher_free (simple->details->matcher);
+    simple->details->matcher = NULL;
 
     data = search_thread_data_new (simple, simple->details->query);
 
