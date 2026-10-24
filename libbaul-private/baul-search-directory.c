@@ -695,6 +695,7 @@ search_engine_hits_subtracted (BaulSearchEngine    *engine G_GNUC_UNUSED,
     for (hit_list = hits; hit_list != NULL; hit_list = hit_list->next)
     {
         char *uri;
+        gboolean was_tracked;
 
         uri = hit_list->data;
 
@@ -702,6 +703,7 @@ search_engine_hits_subtracted (BaulSearchEngine    *engine G_GNUC_UNUSED,
          * on disk, baul_file_get_by_uri() would create a brand new
          * object instead of dropping the stale one. */
         file = search_find_file_by_uri (search->details->files, uri);
+        was_tracked = (file != NULL);
         if (file == NULL)
         {
             file = baul_file_get_by_uri (uri);
@@ -718,6 +720,14 @@ search_engine_hits_subtracted (BaulSearchEngine    *engine G_GNUC_UNUSED,
         g_signal_handlers_disconnect_by_func (file, file_changed, search);
 
         search->details->files = g_list_remove_all (search->details->files, file);
+
+        if (was_tracked)
+        {
+            /* The result list owned a reference to the file
+             * (taken by hits-added): release it, or the object
+             * would leak after being removed from the list. */
+            baul_file_unref (file);
+        }
 
         file_list = g_list_prepend (file_list, file);
     }
