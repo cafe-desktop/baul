@@ -1179,6 +1179,51 @@ mount_not_mounted_callback (GObject *source_object,
     g_object_unref (cancellable);
 }
 
+/* Live searches are virtual directories: there is no file info for
+ * them, so the view chosen for one cannot be stored as directory
+ * metadata. Keep one session-scoped entry per search uri instead,
+ * with the view it last used; otherwise revisiting the search (e.g.
+ * with the back button) would inherit the view of whatever location
+ * the window was showing at that moment. */
+static GHashTable *live_search_view_ids = NULL;
+
+static void
+free_live_search_view_ids (void)
+{
+    if (live_search_view_ids != NULL)
+    {
+        g_hash_table_destroy (live_search_view_ids);
+        live_search_view_ids = NULL;
+    }
+}
+
+static char *
+lookup_live_search_view_id (const char *uri)
+{
+    if (live_search_view_ids == NULL)
+    {
+        return NULL;
+    }
+
+    return g_strdup (g_hash_table_lookup (live_search_view_ids, uri));
+}
+
+static void
+remember_live_search_view_id (const char *uri,
+                              const char *view_id)
+{
+    if (live_search_view_ids == NULL)
+    {
+        live_search_view_ids = g_hash_table_new_full (g_str_hash,
+                                                      g_str_equal,
+                                                      g_free, g_free);
+        eel_debug_call_at_shutdown (free_live_search_view_ids);
+    }
+
+    g_hash_table_replace (live_search_view_ids,
+                          g_strdup (uri), g_strdup (view_id));
+}
+
 static void
 got_file_info_for_view_selection_callback (BaulFile *file,
         gpointer callback_data)
@@ -1267,10 +1312,18 @@ got_file_info_for_view_selection_callback (BaulFile *file,
             char *uri;
             uri = baul_file_get_uri (file);
 
-            /* Use same view settings for search results as the current folder */
             if (eel_uri_is_search (uri))
             {
-                view_id = g_strdup (baul_view_get_view_id (slot->content_view));
+                /* Use the view this search last used, so revisiting
+                 * it (e.g. with the back button) keeps its own view
+                 * instead of the view of the location the window
+                 * was showing before. */
+                view_id = lookup_live_search_view_id (uri);
+                if (view_id == NULL)
+                {
+                    /* Use same view settings for search results as the current folder */
+                    view_id = g_strdup (baul_view_get_view_id (slot->content_view));
+                }
             }
             else
             {
@@ -1295,12 +1348,24 @@ got_file_info_for_view_selection_callback (BaulFile *file,
 
     if (view_id != NULL)
     {
+        char *search_uri;
+
         if (!ctk_widget_get_visible (CTK_WIDGET (window)) && BAUL_IS_SPATIAL_WINDOW (window))
         {
             /* We now have the metadata to set up the window position, etc */
             setup_new_spatial_window (slot, file);
         }
         create_content_view (slot, view_id);
+
+        search_uri = baul_file_get_uri (file);
+        if (eel_uri_is_search (search_uri))
+        {
+            /* Remember the view used for this search, so that it
+             * is restored when the search is revisited. */
+            remember_live_search_view_id (search_uri, view_id);
+        }
+        g_free (search_uri);
+
         g_free (view_id);
 
         report_callback (slot, NULL);
@@ -2283,6 +2348,17 @@ baul_window_slot_set_content_view (BaulWindowSlot *slot,
     slot->location_change_type = BAUL_LOCATION_CHANGE_RELOAD;
 
     create_content_view (slot, id);
+
+    uri = baul_window_slot_get_location_uri (slot);
+    if (eel_uri_is_search (uri))
+    {
+        /* Remember the view chosen for this search, so that it is
+         * restored when the search is revisited (e.g. going back);
+         * the metadata above cannot be used for that, because the
+         * search directory is a virtual location. */
+        remember_live_search_view_id (uri, id);
+    }
+    g_free (uri);
 }
 
 void
