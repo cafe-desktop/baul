@@ -1184,44 +1184,127 @@ mount_not_mounted_callback (GObject *source_object,
  * metadata. Keep one session-scoped entry per search uri instead,
  * with the view it last used; otherwise revisiting the search (e.g.
  * with the back button) would inherit the view of whatever location
- * the window was showing at that moment. */
+ * the window was showing at that moment.
+ *
+ * The memo is bounded in least-recently-used order, so its memory
+ * stays constant for the whole session no matter how many searches
+ * are run. The bound is well above the size of the history list,
+ * so every search still reachable from baul's history (or from a
+ * recent bookmark or the back/forward chains) keeps its memo. */
+
+#define MAX_LIVE_SEARCH_VIEW_IDS 100
+
+typedef struct
+{
+    char *uri;          /* hash table key (owned by the table) */
+    char *view_id;
+    GList *queue_link;  /* node in live_search_view_lru */
+} SearchViewMemoEntry;
+
 static GHashTable *live_search_view_ids = NULL;
+
+/* SearchViewMemoEntry items, most recently used first. */
+static GQueue *live_search_view_lru = NULL;
+
+static void
+memo_entry_free (gpointer data)
+{
+    SearchViewMemoEntry *entry = data;
+
+    /* entry->uri is the hash table key: freed by the table, not
+     * here. The queue node was already released by the caller. */
+    g_free (entry->view_id);
+    g_free (entry);
+}
 
 static void
 free_live_search_view_ids (void)
 {
     if (live_search_view_ids != NULL)
     {
+        /* Free the queue nodes first; the entries and the uri
+         * strings they alias are freed by the table below. */
+        g_queue_free (live_search_view_lru);
+        live_search_view_lru = NULL;
+
         g_hash_table_destroy (live_search_view_ids);
         live_search_view_ids = NULL;
     }
 }
 
+/* Move the entry back to the front of the LRU queue. */
+static void
+touch_live_search_view_memo (SearchViewMemoEntry *entry)
+{
+    g_queue_unlink (live_search_view_lru, entry->queue_link);
+    g_queue_push_head_link (live_search_view_lru, entry->queue_link);
+}
+
 static char *
 lookup_live_search_view_id (const char *uri)
 {
+    SearchViewMemoEntry *entry;
+
     if (live_search_view_ids == NULL)
     {
         return NULL;
     }
 
-    return g_strdup (g_hash_table_lookup (live_search_view_ids, uri));
+    entry = g_hash_table_lookup (live_search_view_ids, uri);
+    if (entry == NULL)
+    {
+        return NULL;
+    }
+
+    touch_live_search_view_memo (entry);
+
+    return g_strdup (entry->view_id);
 }
 
 static void
 remember_live_search_view_id (const char *uri,
                               const char *view_id)
 {
+    SearchViewMemoEntry *entry;
+
     if (live_search_view_ids == NULL)
     {
         live_search_view_ids = g_hash_table_new_full (g_str_hash,
                                                       g_str_equal,
-                                                      g_free, g_free);
+                                                      g_free,
+                                                      memo_entry_free);
+        live_search_view_lru = g_queue_new ();
         eel_debug_call_at_shutdown (free_live_search_view_ids);
     }
 
-    g_hash_table_replace (live_search_view_ids,
-                          g_strdup (uri), g_strdup (view_id));
+    entry = g_hash_table_lookup (live_search_view_ids, uri);
+    if (entry != NULL)
+    {
+        /* Memoized already: refresh the view and move the entry
+         * to the front of the LRU queue. The hash key (aliased
+         * by entry->uri) is left untouched. */
+        g_free (entry->view_id);
+        entry->view_id = g_strdup (view_id);
+        touch_live_search_view_memo (entry);
+        return;
+    }
+
+    entry = g_new0 (SearchViewMemoEntry, 1);
+    entry->uri = g_strdup (uri);
+    entry->view_id = g_strdup (view_id);
+    entry->queue_link = g_list_prepend (NULL, entry);
+    g_queue_push_head_link (live_search_view_lru, entry->queue_link);
+
+    g_hash_table_insert (live_search_view_ids, entry->uri, entry);
+
+    if (g_queue_get_length (live_search_view_lru) > MAX_LIVE_SEARCH_VIEW_IDS)
+    {
+        /* Evict the least recently used entry. Its queue node
+         * was already popped; the table frees the uri key and
+         * the entry itself. */
+        entry = g_queue_pop_tail (live_search_view_lru);
+        g_hash_table_remove (live_search_view_ids, entry->uri);
+    }
 }
 
 static void
