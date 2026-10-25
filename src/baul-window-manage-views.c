@@ -191,6 +191,29 @@ check_last_bookmark_location_matches_slot (BaulWindowSlot *slot)
                                      slot->location);
 }
 
+/* Maximum number of entries kept in each of the Back/Forward chains.
+ * When the cap is exceeded, the oldest entries (the tail of the chain,
+ * the first ones that were added) are dropped. This is a FIFO depth cap,
+ * not LRU: chain entries are never re-touched, they only move between
+ * both chains when navigating back and forward. Same value as
+ * MAX_LIVE_SEARCH_VIEW_IDS (the search view memo cap in this file). */
+
+#define MAX_BACK_FORWARD_ITEMS 100
+
+static void
+trim_back_or_forward_list (GList **list)
+{
+    while (g_list_length (*list) > MAX_BACK_FORWARD_ITEMS)
+    {
+        GList *link;
+
+        link = g_list_last (*list);
+        g_object_unref (link->data);
+        *list = g_list_remove_link (*list, link);
+        g_list_free_1 (link);
+    }
+}
+
 static void
 handle_go_back (BaulNavigationWindowSlot *navigation_slot,
                 GFile *location)
@@ -233,6 +256,8 @@ handle_go_back (BaulNavigationWindowSlot *navigation_slot,
     navigation_slot->back_list = g_list_remove_link (navigation_slot->back_list, link);
     g_object_unref (link->data);
     g_list_free_1 (link);
+
+    trim_back_or_forward_list (&navigation_slot->forward_list);
 }
 
 static void
@@ -276,6 +301,8 @@ handle_go_forward (BaulNavigationWindowSlot *navigation_slot,
     navigation_slot->forward_list = g_list_remove_link (navigation_slot->forward_list, link);
     g_object_unref (link->data);
     g_list_free_1 (link);
+
+    trim_back_or_forward_list (&navigation_slot->back_list);
 }
 
 static void
@@ -304,6 +331,7 @@ handle_go_elsewhere (BaulWindowSlot *slot, GFile *location)
                 navigation_slot->back_list = g_list_prepend (navigation_slot->back_list,
                                              slot->last_location_bookmark);
                 g_object_ref (navigation_slot->back_list->data);
+                trim_back_or_forward_list (&navigation_slot->back_list);
             }
         }
     }
