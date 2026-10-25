@@ -266,9 +266,9 @@ handle_go_forward (BaulNavigationWindowSlot *navigation_slot,
     {
         bookmark = BAUL_BOOKMARK (navigation_slot->forward_list->data);
         navigation_slot->forward_list =
-            g_list_remove (navigation_slot->back_list, bookmark);
+            g_list_remove (navigation_slot->forward_list, bookmark);
         navigation_slot->back_list =
-            g_list_prepend (navigation_slot->forward_list, bookmark);
+            g_list_prepend (navigation_slot->back_list, bookmark);
     }
 
     /* One bookmark falls out of back/forward lists and becomes viewed location */
