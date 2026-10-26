@@ -76,32 +76,6 @@ navigation_bar_focus_in_callback (CtkWidget     *widget G_GNUC_UNUSED,
     return FALSE;
 }
 
-static int
-bookmark_list_get_uri_index (GList *list, GFile *location)
-{
-    GList *l;
-    int i;
-    BaulBookmark *bookmark = NULL;
-    GFile *tmp = NULL;
-
-    g_return_val_if_fail (location != NULL, -1);
-
-    for (i = 0, l = list; l != NULL; i++, l = l->next)
-    {
-        bookmark = BAUL_BOOKMARK (l->data);
-
-        tmp = baul_bookmark_get_location (bookmark);
-        if (g_file_equal (location, tmp))
-        {
-            g_object_unref (tmp);
-            return i;
-        }
-        g_object_unref (tmp);
-    }
-
-    return -1;
-}
-
 static void
 search_bar_focus_in_callback (BaulSearchBar  *bar G_GNUC_UNUSED,
 			      BaulWindowPane *pane)
@@ -194,29 +168,19 @@ path_bar_location_changed_callback (CtkWidget                *widget G_GNUC_UNUS
 				    GFile                    *location,
 				    BaulNavigationWindowPane *pane)
 {
-    BaulNavigationWindowSlot *slot;
     BaulWindowPane *win_pane;
-    int i;
 
     g_assert (BAUL_IS_NAVIGATION_WINDOW_PANE (pane));
 
     win_pane = BAUL_WINDOW_PANE(pane);
 
-    slot = BAUL_NAVIGATION_WINDOW_SLOT (win_pane->active_slot);
-
     /* Make sure we are changing the location on the correct pane */
     baul_window_set_active_pane (BAUL_WINDOW_PANE (pane)->window, BAUL_WINDOW_PANE (pane));
 
-    /* check whether we already visited the target location */
-    i = bookmark_list_get_uri_index (slot->back_list, location);
-    if (i >= 0)
-    {
-        baul_navigation_window_back_or_forward (BAUL_NAVIGATION_WINDOW (win_pane->window), TRUE, i, FALSE);
-    }
-    else
-    {
-        baul_window_slot_go_to (win_pane->active_slot, location, FALSE);
-    }
+    /* Brand new navigation: clobbers the forward list and pushes the
+     * current location onto the back list, like any other way to
+     * navigate (location entry, tree sidebar or the Up button). */
+    baul_window_slot_go_to (win_pane->active_slot, location, FALSE);
 }
 
 static gboolean
