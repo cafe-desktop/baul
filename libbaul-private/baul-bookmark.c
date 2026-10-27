@@ -435,7 +435,12 @@ bookmark_file_changed_callback (BaulFile *file, BaulBookmark *bookmark)
     {
         display_name = baul_file_get_display_name (file);
 
-        if (g_strcmp0 (bookmark->details->name, display_name) != 0)
+        /* When the monitored file goes away, baul_file_get_display_name
+         * returns an empty string. Keep the last known name in that
+         * case, so the bookmark stays visible in the back/forward and
+         * Go menus instead of silently vanishing from them. */
+        if (display_name != NULL && display_name[0] != '\0' &&
+                g_strcmp0 (bookmark->details->name, display_name) != 0)
         {
             g_free (bookmark->details->name);
             bookmark->details->name = display_name;

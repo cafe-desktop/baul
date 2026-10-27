@@ -143,16 +143,11 @@ fill_menu (BaulNavigationWindow *window,
     {
         ctk_menu_shell_append (CTK_MENU_SHELL (menu),
                                eel_image_menu_item_new_from_icon ("dialog-error", _("folder removed")));
-        if (back)
-        {
-            baul_navigation_window_slot_clear_back_list (slot);
-            baul_navigation_window_allow_back (window, FALSE);
-        }
-        else
-        {
-            baul_navigation_window_slot_clear_forward_list (slot);
-            baul_navigation_window_allow_forward (window, FALSE);
-        }
+
+        /* Display-only: never clear the back/forward lists or touch the
+         * button sensitivity from a menu refresh callback; the lists are
+         * owned by the navigation code. Merely opening the dropdown used
+         * to wipe the whole list when nothing could be shown. */
     }
 }
 
