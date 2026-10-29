@@ -107,8 +107,7 @@ fill_menu (BaulNavigationWindow *window,
     BaulNavigationWindowSlot *slot;
     int index;
     GList *list;
-    gboolean list_void;
-    CtkWidget *menu_item = NULL;
+    CtkWidget *menu_item;
 
     g_assert (BAUL_IS_NAVIGATION_WINDOW (window));
 
@@ -116,38 +115,22 @@ fill_menu (BaulNavigationWindow *window,
 
     list = back ? slot->back_list : slot->forward_list;
     index = 0;
-    list_void = TRUE;
 
     while (list != NULL)
     {
         menu_item = baul_bookmark_menu_item_new (BAUL_BOOKMARK (list->data));
+        g_object_set_data (G_OBJECT (menu_item), "user_data", GINT_TO_POINTER (index));
+        ctk_widget_show (CTK_WIDGET (menu_item));
+        g_signal_connect_object (menu_item, "activate",
+                                 back
+                                 ? G_CALLBACK (activate_back_menu_item_callback)
+                                 : G_CALLBACK (activate_forward_menu_item_callback),
+                                 window, 0);
 
-        if (menu_item) {
-            list_void = FALSE;
-            g_object_set_data (G_OBJECT (menu_item), "user_data", GINT_TO_POINTER (index));
-            ctk_widget_show (CTK_WIDGET (menu_item));
-            g_signal_connect_object (menu_item, "activate",
-                                     back
-                                     ? G_CALLBACK (activate_back_menu_item_callback)
-                                     : G_CALLBACK (activate_forward_menu_item_callback),
-                                     window, 0);
-
-            ctk_menu_shell_append (CTK_MENU_SHELL (menu), menu_item);
-        }
+        ctk_menu_shell_append (CTK_MENU_SHELL (menu), menu_item);
 
         list = g_list_next (list);
         ++index;
-    }
-
-    if (list_void)
-    {
-        ctk_menu_shell_append (CTK_MENU_SHELL (menu),
-                               eel_image_menu_item_new_from_icon ("dialog-error", _("folder removed")));
-
-        /* Display-only: never clear the back/forward lists or touch the
-         * button sensitivity from a menu refresh callback; the lists are
-         * owned by the navigation code. Merely opening the dropdown used
-         * to wipe the whole list when nothing could be shown. */
     }
 }
 
