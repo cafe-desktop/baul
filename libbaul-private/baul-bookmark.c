@@ -685,6 +685,15 @@ baul_bookmark_menu_item_new (BaulBookmark *bookmark)
     menu_item = bookmark_image_menu_item_new_from_surface (image_cairo, label);
     g_free (label);
 
+    /* ctk_image_new_from_surface takes its own reference on the
+     * surface rather than adopting ours; drop the reference we got
+     * from baul_bookmark_get_surface, otherwise one cairo surface
+     * leaks per menu item on every rebuild of the dropdowns. */
+    if (image_cairo != NULL)
+    {
+        cairo_surface_destroy (image_cairo);
+    }
+
     return menu_item;
 }
 
