@@ -1,0 +1,34 @@
+baul-window-manage-views: Fix swapped lists in handle_go_forward
+
+The "Move extra links from Forward to Back list" loop removed the
+bookmark from the back list and prepended it to the forward list,
+exactly the opposite of what it must do (compare with the symmetric
+loop in handle_go_back).
+
+When jumping forward more than one step at once (Forward dropdown
+menu, distance >= 1), g_list_remove() fails to find the bookmark in
+the wrong list and returns that list unchanged, so both list heads
+end up aliasing the same chain: forward entries silently vanish,
+bookmarks leak, the jump lands on the wrong location, and one entry
+ends up listed in both chains while holding a single reference.
+Clearing the forward chain on the next navigation unrefs that entry
+while the back chain still points at it, leaving a dangling pointer
+behind.
+
+Steps to reproduce:
+
+  1. Open baul and navigate to 4 different folders (A -> B -> C -> D)
+  2. Press Back twice (you end up in B; Forward now holds C and D)
+  3. Open the Forward button dropdown and choose the second entry
+     (a 2-step jump): this corrupts the back/forward chains
+  4. Navigate to any new folder
+  5. Press Back (or open the Back dropdown): the dangling pointer
+     can take baul down
+
+Observed in practice: the window freezes and becomes unusable rather
+than crashing outright (use-after-free is undefined behavior; with
+gdb --args baul it is clearly visible, without a debugger it can go
+unnoticed or just show up as odd behavior in the menus).
+
+Swap the two lists so the loop really moves links from the forward
+list to the back list.
