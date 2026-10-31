@@ -651,44 +651,41 @@ bookmark_image_menu_item_new_from_surface (cairo_surface_t   *icon_surface,
  *
  * Return a menu item representing a bookmark.
  * @bookmark: The bookmark the menu item represents.
- * Return value: A newly-created bookmark, not yet shown.
+ * Return value: A newly-created menu item, not yet shown. It is never
+ * NULL and never has an empty label.
  **/
 CtkWidget *
 baul_bookmark_menu_item_new (BaulBookmark *bookmark)
 {
     cairo_surface_t *image_cairo;
-    char *fallback_name;
-    const char *label;
+    char *label;
+    CtkWidget *menu_item;
 
     image_cairo = create_image_cairo_for_bookmark (bookmark);
 
     /* The dropdown must always agree with the back/forward lists: an
      * entry may never vanish from the menu while it is still in the
-     * list. If the bookmark lost its name (a transient "gone" state of
-     * the monitored file), fall back to the location basename so the
-     * entry stays visible and clickable. */
-    fallback_name = NULL;
-    label = bookmark->details->name;
+     * list, and it may never be shown without a label. If the bookmark
+     * lost its name (a transient "gone" state of the monitored file),
+     * fall back to the location basename; the parse name is the last
+     * resort that always exists for any valid location. */
+    label = g_strdup (bookmark->details->name);
     if (label == NULL || label[0] == '\0')
     {
-        fallback_name = g_file_get_basename (bookmark->details->location);
-        label = fallback_name;
+        g_free (label);
+        label = g_file_get_basename (bookmark->details->location);
     }
 
-    if (strlen (label) > 0)
+    if (label == NULL || label[0] == '\0')
     {
-        CtkWidget *menu_item;
-
-        menu_item = bookmark_image_menu_item_new_from_surface (image_cairo, label);
-        g_free (fallback_name);
-
-        return menu_item;
+        g_free (label);
+        label = g_file_get_parse_name (bookmark->details->location);
     }
-    else
-    {
-        g_free (fallback_name);
-        return NULL;
-    }
+
+    menu_item = bookmark_image_menu_item_new_from_surface (image_cairo, label);
+    g_free (label);
+
+    return menu_item;
 }
 
 gboolean
