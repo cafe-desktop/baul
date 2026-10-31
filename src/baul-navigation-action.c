@@ -158,20 +158,21 @@ show_menu_callback (CtkMenuToolButton *button,
     BaulNavigationActionPrivate *p;
     BaulNavigationWindow *window;
     CtkWidget *menu;
-    GList *children;
-    GList *li;
 
     p = action->priv;
     window = action->priv->window;
 
-    menu = ctk_menu_tool_button_get_menu (button);
+    /* Rebuild the popup from scratch on every show. The toolbar button
+     * reuses a single CtkMenu for its whole life (cleared and refilled
+     * on every open) and once a chain had been huge the dropdown kept
+     * a stale size allocation: it opened taller than the screen with
+     * the scroll arrows and no visible entries, even with a single
+     * entry pending, while a brand new window (fresh menu) rendered
+     * the same chains fine. A fresh CtkMenu gets a clean realization
+     * every time. */
 
-    children = ctk_container_get_children (CTK_CONTAINER (menu));
-    for (li = children; li; li = li->next)
-    {
-        ctk_container_remove (CTK_CONTAINER (menu), li->data);
-    }
-    g_list_free (children);
+    menu = ctk_menu_new ();
+    ctk_menu_set_reserve_toggle_size (CTK_MENU (menu), FALSE);
 
     switch (p->direction)
     {
@@ -185,6 +186,16 @@ show_menu_callback (CtkMenuToolButton *button,
         g_assert_not_reached ();
         break;
     }
+
+    /* Hand the fresh menu over to the button. The menu it replaces is
+     * not ours to destroy: ctk_menu_tool_button_set_menu detaches it,
+     * which drops the reference ctk_menu_attach_to_widget took, and
+     * that reference is the only one the menu ever had, so the old
+     * menu is released by the toolkit right here. */
+
+    ctk_menu_tool_button_set_menu (button, menu);
+
+    ctk_widget_show_all (menu);
 }
 
 static gboolean
