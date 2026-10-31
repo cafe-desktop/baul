@@ -559,7 +559,12 @@ baul_bookmark_connect_file (BaulBookmark *bookmark)
             baul_file_check_if_ready (bookmark->details->file, BAUL_FILE_ATTRIBUTE_INFO))
     {
         display_name = baul_file_get_display_name (bookmark->details->file);
-        if (g_strcmp0 (bookmark->details->name, display_name) != 0)
+
+        /* Same reasoning as in bookmark_file_changed_callback: when the
+         * monitored file went away, the display name comes back empty;
+         * keep the last known name instead of blanking the bookmark. */
+        if (display_name != NULL && display_name[0] != '\0' &&
+                g_strcmp0 (bookmark->details->name, display_name) != 0)
         {
             g_free (bookmark->details->name);
             bookmark->details->name = display_name;
@@ -652,19 +657,38 @@ CtkWidget *
 baul_bookmark_menu_item_new (BaulBookmark *bookmark)
 {
     cairo_surface_t *image_cairo;
+    char *fallback_name;
+    const char *label;
 
     image_cairo = create_image_cairo_for_bookmark (bookmark);
 
-    if (strlen (bookmark->details->name) > 0)
+    /* The dropdown must always agree with the back/forward lists: an
+     * entry may never vanish from the menu while it is still in the
+     * list. If the bookmark lost its name (a transient "gone" state of
+     * the monitored file), fall back to the location basename so the
+     * entry stays visible and clickable. */
+    fallback_name = NULL;
+    label = bookmark->details->name;
+    if (label == NULL || label[0] == '\0')
+    {
+        fallback_name = g_file_get_basename (bookmark->details->location);
+        label = fallback_name;
+    }
+
+    if (strlen (label) > 0)
     {
         CtkWidget *menu_item;
 
-        menu_item = bookmark_image_menu_item_new_from_surface (image_cairo, bookmark->details->name);
+        menu_item = bookmark_image_menu_item_new_from_surface (image_cairo, label);
+        g_free (fallback_name);
 
         return menu_item;
     }
     else
+    {
+        g_free (fallback_name);
         return NULL;
+    }
 }
 
 gboolean

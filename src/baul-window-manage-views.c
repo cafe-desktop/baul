@@ -232,13 +232,40 @@ handle_go_back (BaulNavigationWindowSlot *navigation_slot,
                                      location);
     g_assert (slot->location != NULL);
 
-    /* Move current location to Forward list */
+    /* Move current location to Forward list.
+     *
+     * set_displayed_location runs before update_history, so normally
+     * last_location_bookmark is the bookmark of the location we are
+     * leaving. That is not true when the destination is the location
+     * already being displayed: set_displayed_location then skips the
+     * recreation, last_location_bookmark stays stale (it still points
+     * two locations back) and the bookmark for the location we are
+     * leaving is current_location_bookmark. Pushing the stale bookmark
+     * moved a foreign entry into the forward list, emitted a "bookmark
+     * uri is %s, but expected %s" warning and left the back chain
+     * empty; pick the bookmark that actually matches the displayed
+     * location. */
 
-    check_last_bookmark_location_matches_slot (slot);
+    bookmark = slot->last_location_bookmark;
+    if (slot->current_location_bookmark != NULL)
+    {
+        GFile *current_bookmark_location;
+
+        current_bookmark_location = baul_bookmark_get_location (slot->current_location_bookmark);
+        if (g_file_equal (current_bookmark_location, slot->location))
+        {
+            bookmark = slot->current_location_bookmark;
+        }
+        else
+        {
+            check_last_bookmark_location_matches_slot (slot);
+        }
+        g_object_unref (current_bookmark_location);
+    }
 
     /* Use the first bookmark in the history list rather than creating a new one. */
     navigation_slot->forward_list = g_list_prepend (navigation_slot->forward_list,
-                                    slot->last_location_bookmark);
+                                    bookmark);
     g_object_ref (navigation_slot->forward_list->data);
 
     /* Move extra links from Back to Forward list */
@@ -278,12 +305,31 @@ handle_go_forward (BaulNavigationWindowSlot *navigation_slot,
                                      location);
     g_assert (slot->location != NULL);
 
-    /* Move current location to Back list */
-    check_last_bookmark_location_matches_slot (slot);
+    /* Move current location to Back list
+     *
+     * same stale last_location_bookmark reasoning
+     * as in handle_go_back, with the lists swapped. */
+
+    bookmark = slot->last_location_bookmark;
+    if (slot->current_location_bookmark != NULL)
+    {
+        GFile *current_bookmark_location;
+
+        current_bookmark_location = baul_bookmark_get_location (slot->current_location_bookmark);
+        if (g_file_equal (current_bookmark_location, slot->location))
+        {
+            bookmark = slot->current_location_bookmark;
+        }
+        else
+        {
+            check_last_bookmark_location_matches_slot (slot);
+        }
+        g_object_unref (current_bookmark_location);
+    }
 
     /* Use the first bookmark in the history list rather than creating a new one. */
     navigation_slot->back_list = g_list_prepend (navigation_slot->back_list,
-                                 slot->last_location_bookmark);
+                                 bookmark);
     g_object_ref (navigation_slot->back_list->data);
 
     /* Move extra links from Forward to Back list */
