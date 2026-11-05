@@ -203,6 +203,8 @@ static GList *       baul_icon_container_get_selected_icons (BaulIconContainer *
 static void          baul_icon_container_update_visible_icons   (BaulIconContainer *container);
 static void          reveal_icon                                    (BaulIconContainer *container,
         BaulIcon *icon);
+static void          baul_icon_container_search_dialog_hide         (CtkWidget *search_dialog,
+        BaulIconContainer *container);
 
 static void	     baul_icon_container_set_rtl_positions (BaulIconContainer *container);
 static double	     get_mirror_x_position                     (BaulIconContainer *container,
@@ -4657,6 +4659,25 @@ button_press_event (CtkWidget *widget,
     gboolean clicked_on_icon;
 
     container = BAUL_ICON_CONTAINER (widget);
+
+    /* Hide the interactive search popup on any click in the container.
+     * The popup is not modal (see
+     * baul_icon_container_ensure_interactive_directory), so without this
+     * handler a click on the container would leave the popup open instead
+     * of dismissing it.
+     *
+     * The press must not be swallowed: the container detects double clicks
+     * on its own (handle_icon_button_press/handle_icon_double_click), it
+     * ignores the CDK_2BUTTON_PRESS synthesized by CDK and needs both
+     * presses of a double click to reach this handler, so consuming the
+     * press would break activating the item selected by the interactive
+     * search with a double click. */
+    if (container->details->search_window != NULL &&
+            ctk_widget_get_visible (container->details->search_window))
+    {
+        baul_icon_container_search_dialog_hide (container->details->search_window, container);
+    }
+
     container->details->button_down_time = event->time;
 
     /* Forget about the old keyboard selection now that we've started mousing. */
@@ -5753,7 +5774,12 @@ baul_icon_container_ensure_interactive_directory (BaulIconContainer *container)
 
     container->details->search_window = ctk_window_new (CTK_WINDOW_POPUP);
 
-    ctk_window_set_modal (CTK_WINDOW (container->details->search_window), TRUE);
+    /* The search popup is deliberately not modal.  If it were made modal,
+     * it would hold a grab on its CtkWindowGroup while mapped, and
+     * ctk_main_do_event() would silently drop the delete-event (WM Delete)
+     * of the toplevel, so the window could not be closed with the titlebar
+     * close button while the search popup is open.  Clicks on the container
+     * hide the popup in button_press_event(). */
     ctk_window_set_type_hint (CTK_WINDOW (container->details->search_window),
                               CDK_WINDOW_TYPE_HINT_COMBO);
 
@@ -5886,6 +5912,29 @@ key_press_event (CtkWidget *widget,
 
     container = BAUL_ICON_CONTAINER (widget);
     handled = FALSE;
+
+    /* While the interactive search popup is visible, forward every key
+     * event to the popup and keep the focus on the icon container, the
+     * same way ctk_tree_view_key_press() does for the CtkTreeView search
+     * popup.  Falling through to the typeahead dance below on every
+     * keystroke would hide the popup and re-enter
+     * real_start_interactive_search each time, arming duplicate
+     * repeating flush timeouts and breaking multi-character typeahead. */
+    if (container->details->search_window != NULL &&
+            ctk_widget_get_visible (container->details->search_window))
+    {
+        CdkEvent *search_event;
+
+        ctk_widget_realize (container->details->search_window);
+        search_event = cdk_event_copy ((CdkEvent *) event);
+        g_object_unref (((CdkEventKey *) search_event)->window);
+        ((CdkEventKey *) search_event)->window =
+                g_object_ref (ctk_widget_get_window (container->details->search_window));
+        ctk_widget_event (container->details->search_window, search_event);
+        cdk_event_free (search_event);
+
+        return TRUE;
+    }
 
     if (is_renaming (container) || is_renaming_pending (container))
     {
