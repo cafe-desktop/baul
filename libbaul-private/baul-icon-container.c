@@ -6123,6 +6123,10 @@ key_press_event (CtkWidget *widget,
         new_text = ctk_entry_get_text (CTK_ENTRY (container->details->search_entry));
         text_modified = strcmp (old_text, new_text) != 0;
         g_free (old_text);
+
+        ((CdkEventKey *) new_event)->window = window;
+        cdk_event_free (new_event);
+
         if (container->details->imcontext_changed ||    /* we're in a preedit */
                 (retval && text_modified))                  /* ...or the text was modified */
         {
@@ -6137,9 +6141,6 @@ key_press_event (CtkWidget *widget,
                 return FALSE;
             }
         }
-
-        ((CdkEventKey *) new_event)->window = window;
-        cdk_event_free (new_event);
     }
 
     return handled;
