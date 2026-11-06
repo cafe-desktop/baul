@@ -1,0 +1,3 @@
+baul-icon-container: Fix: make the interactive search popup non-modal
+
+Fixes closing the window with mouse while the popup is shown
