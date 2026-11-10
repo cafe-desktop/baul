@@ -1121,12 +1121,33 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
     gboolean handled;
     CtkTreeView *tree_view;
     CtkTreePath *path;
+    CtkWidget *toplevel;
 
     tree_view = CTK_TREE_VIEW (widget);
 
     view = FM_DIRECTORY_VIEW (callback_data);
     listview = FM_LIST_VIEW (view);
     handled = FALSE;
+
+    /* While the interactive search popup of the tree view is shown, the
+     * search owns the keyboard: the popup is not modal anymore, so the
+     * keys must reach ctk_tree_view_key_press(), which forwards them to
+     * the search popup before the key bindings.  Plain Return and
+     * KP_Enter go there too: the search entry's "activate" handler
+     * closes the popup and activates the selected row, like the icon
+     * view does.  Shift+Return and Shift+KP_Enter (open in a new
+     * tab/window) and Ctrl+F10 (background context menu) stay here. */
+    toplevel = ctk_widget_get_toplevel (widget);
+    if (CTK_IS_WINDOW (toplevel) &&
+        ctk_window_get_interactive_search_open (CTK_WINDOW (toplevel)) &&
+        !(event->keyval == CDK_KEY_Return &&
+          (event->state & CDK_SHIFT_MASK)) &&
+        !(event->keyval == CDK_KEY_KP_Enter &&
+          (event->state & CDK_SHIFT_MASK)) &&
+        !(event->keyval == CDK_KEY_F10 && (event->state & CDK_CONTROL_MASK)))
+    {
+        return FALSE;
+    }
 
     switch (event->keyval)
     {
