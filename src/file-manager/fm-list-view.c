@@ -1215,6 +1215,10 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
 	}
 	else
 	{
+	        /* Close the interactive search popup before activating:
+	         * Shift+Return stays here to open in a new tab/window,
+	         * like the icon view, which hides its popup first. */
+	        ctk_tree_view_stop_interactive_search (tree_view);
 	        if ((event->state & CDK_SHIFT_MASK) != 0)
 	        {
 	            activate_selected_items_alternate (FM_LIST_VIEW (view), NULL, TRUE);
