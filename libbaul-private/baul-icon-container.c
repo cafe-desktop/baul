@@ -6684,6 +6684,25 @@ handle_focus_out_event (CtkWidget     *widget,
 			CdkEventFocus *event G_GNUC_UNUSED,
 			gpointer       user_data G_GNUC_UNUSED)
 {
+    BaulIconContainer *container;
+
+    container = BAUL_ICON_CONTAINER (widget);
+
+    /* Dismiss the interactive search popup on focus loss, the same
+     * way CtkTreeView does in ctk_tree_view_focus_out().  Switching
+     * to another notebook tab, clicking the sidebar or another
+     * window all steal the focus from the container: without this
+     * the popup would stay visible floating over a view the user is
+     * no longer using.  The hide is a no-op with the popup closed,
+     * and the disable_popdown guard keeps it suppressed while the
+     * search entry's own context menu is open. */
+    if (container->details->search_window != NULL &&
+            ctk_widget_get_visible (container->details->search_window))
+    {
+        baul_icon_container_search_dialog_hide (container->details->search_window,
+                                                container);
+    }
+
     /* End renaming and commit change. */
     end_renaming_mode (BAUL_ICON_CONTAINER (widget), TRUE);
     update_selected (BAUL_ICON_CONTAINER (widget));
