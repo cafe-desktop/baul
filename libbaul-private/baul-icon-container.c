@@ -5926,6 +5926,23 @@ key_press_event (CtkWidget *widget,
     {
         CdkEvent *search_event;
 
+        /* Tab with Ctrl (Ctrl+Tab, Ctrl+Shift+Tab, Ctrl+KP_Tab) is not
+         * search input.  Dismiss the popup and leave the key press
+         * unhandled: baul switches tabs at the toplevel when the
+         * ctrl-tab gsettings key is enabled, and when it is not, the
+         * window move-focus bindings move the keyboard focus out of the
+         * view (to the tool bar, or back to the notebook tabs), which is
+         * what already happens without the popup open. */
+        if ((event->keyval == CDK_KEY_Tab ||
+                event->keyval == CDK_KEY_KP_Tab ||
+                event->keyval == CDK_KEY_ISO_Left_Tab) &&
+                (event->state & CDK_CONTROL_MASK))
+        {
+            baul_icon_container_search_dialog_hide (
+                    container->details->search_window, container);
+            return FALSE;
+        }
+
         ctk_widget_realize (container->details->search_window);
         search_event = cdk_event_copy ((CdkEvent *) event);
         g_object_unref (((CdkEventKey *) search_event)->window);
@@ -6011,6 +6028,14 @@ key_press_event (CtkWidget *widget,
 #ifndef TAB_NAVIGATION_DISABLED
         case CDK_KEY_Tab:
         case CDK_KEY_ISO_Left_Tab:
+            /* Tab with Ctrl is focus navigation, not icon selection:
+             * leave it unhandled so the window move-focus bindings move
+             * the keyboard focus out of the view. */
+            if (event->state & CDK_CONTROL_MASK)
+            {
+                break;
+            }
+
             select_previous_or_next_icon (container,
                                           (event->state & CDK_SHIFT_MASK) == 0, event);
             handled = TRUE;
