@@ -5468,6 +5468,16 @@ baul_icon_container_search_button_press_event (CtkWidget *widget,
 {
     g_assert (CTK_IS_WIDGET (widget));
 
+    /* Presses on the search entry itself are left to the entry, so that
+     * clicking to place the cursor or double-clicking to select part of
+     * the query works as in any other text entry.  Presses landing on
+     * the frame around the entry keep dismissing the popup. */
+    if (ctk_get_event_widget ((CdkEvent *) event)
+            == container->details->search_entry)
+    {
+        return FALSE;
+    }
+
     baul_icon_container_search_dialog_hide (widget, container);
 
     if (event->window == ctk_layout_get_bin_window (CTK_LAYOUT (container)))
