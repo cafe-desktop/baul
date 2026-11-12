@@ -5666,6 +5666,37 @@ baul_icon_container_search_scroll_event (CtkWidget *widget,
     return retval;
 }
 
+/* Button presses on the search entry count as search activity, even
+ * though the entry's multipress gesture claims them, so that plain
+ * clicks never reach ::button-press-event (the synthesized
+ * ::button-press-event with CDK_2BUTTON_PRESS/CDK_3BUTTON_PRESS does).
+ * The ::event signal is emitted for every event delivered to the
+ * entry, claimed or not.  Renew the flush timeout on any button press
+ * and return FALSE, leaving event handling untouched. */
+static gboolean
+baul_icon_container_search_entry_event (CtkWidget *entry G_GNUC_UNUSED,
+        CdkEventAny *event,
+        BaulIconContainer *container)
+{
+    if (event->type != CDK_BUTTON_PRESS &&
+            event->type != CDK_2BUTTON_PRESS &&
+            event->type != CDK_3BUTTON_PRESS)
+    {
+        return FALSE;
+    }
+
+    if (container->details->typeselect_flush_timeout)
+    {
+        g_source_remove (container->details->typeselect_flush_timeout);
+        container->details->typeselect_flush_timeout =
+            g_timeout_add_seconds (BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
+                                   (GSourceFunc) baul_icon_container_search_entry_flush_timeout,
+                                   container);
+    }
+
+    return FALSE;
+}
+
 static gboolean
 baul_icon_container_search_key_press_event (CtkWidget *widget,
         CdkEventKey *event,
@@ -5691,6 +5722,24 @@ baul_icon_container_search_key_press_event (CtkWidget *widget,
 
         activate_selected_items_alternate (container, NULL);
         return TRUE;
+    }
+
+    /* Every key press forwarded to the popup counts as search activity,
+     * whether it edits the query or not.  Keys like Left/Right or
+     * Home/End just move the entry cursor without changing its text and
+     * bare modifiers change nothing at all, so none of them renews the
+     * flush timeout through the "changed" signal, and the popup used to
+     * close while the user was still interacting with it.  Renew it here
+     * for every key that reaches the popup and is not a cancellation, so
+     * the popup stays open for a full timeout period counted from the
+     * last keystroke. */
+    if (container->details->typeselect_flush_timeout)
+    {
+        g_source_remove (container->details->typeselect_flush_timeout);
+        container->details->typeselect_flush_timeout =
+            g_timeout_add_seconds (BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
+                                   (GSourceFunc) baul_icon_container_search_entry_flush_timeout,
+                                   container);
     }
 
     /* select previous matching iter */
@@ -5719,16 +5768,6 @@ baul_icon_container_search_key_press_event (CtkWidget *widget,
     {
         baul_icon_container_search_move (widget, container, FALSE);
         retval = TRUE;
-    }
-
-    /* renew the flush timeout */
-    if (retval && container->details->typeselect_flush_timeout)
-    {
-        g_source_remove (container->details->typeselect_flush_timeout);
-        container->details->typeselect_flush_timeout =
-            g_timeout_add_seconds (BAUL_ICON_CONTAINER_SEARCH_DIALOG_TIMEOUT,
-                                   (GSourceFunc) baul_icon_container_search_entry_flush_timeout,
-                                   container);
     }
 
     return retval;
@@ -5829,6 +5868,9 @@ baul_icon_container_ensure_interactive_directory (BaulIconContainer *container)
     g_signal_connect (container->details->search_entry,
                       "preedit-changed",
                       G_CALLBACK (baul_icon_container_search_preedit_changed),
+                      container);
+    g_signal_connect (container->details->search_entry, "event",
+                      G_CALLBACK (baul_icon_container_search_entry_event),
                       container);
     ctk_container_add (CTK_CONTAINER (vbox), container->details->search_entry);
 
