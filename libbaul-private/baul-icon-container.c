@@ -5271,7 +5271,6 @@ baul_icon_container_search_position_func (BaulIconContainer *container,
     gint x, y;
     gint cont_x, cont_y;
     gint cont_width, cont_height;
-    gint scale;
     CdkWindow *cont_window;
     CdkScreen *screen;
     CtkRequisition requisition;
@@ -5280,12 +5279,11 @@ baul_icon_container_search_position_func (BaulIconContainer *container,
 
 
     cont_window = ctk_widget_get_window (CTK_WIDGET (container));
-    scale = ctk_widget_get_scale_factor (CTK_WIDGET (container));
     screen = cdk_window_get_screen (cont_window);
 
     monitor_num = cdk_display_get_monitor_at_window (cdk_screen_get_display (screen),
                                                      cont_window);
-    cdk_monitor_get_geometry (monitor_num, &monitor);
+    cdk_monitor_get_workarea (monitor_num, &monitor);
 
     ctk_widget_realize (search_dialog);
 
@@ -5296,26 +5294,41 @@ baul_icon_container_search_position_func (BaulIconContainer *container,
 
     ctk_widget_get_preferred_size (search_dialog, &requisition, NULL);
 
-    if (cont_x + cont_width - requisition.width > WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale)
+    /* Every coordinate used here is an application (logical) pixel
+     * coordinate: the origin and size of the container window, the
+     * preferred size of the popup and the monitor workarea are all
+     * reported with the same scale factor.  Mixing them with the raw
+     * X11 screen size (device pixels) breaks the comparisons whenever
+     * the scale factor is not 1. */
+
+    /* Right-align the popup with the container's right edge, clamped so
+     * it stays fully inside the monitor workarea. */
+    if (cont_x + cont_width > monitor.x + monitor.width)
     {
-        x = WidthOfScreen (cdk_x11_screen_get_xscreen (screen)) / scale - requisition.width;
+        x = monitor.x + monitor.width - requisition.width;
     }
-    else if (cont_x + cont_width - requisition.width < 0)
+    else if (cont_x + cont_width - requisition.width < monitor.x)
     {
-        x = 0;
+        x = monitor.x;
     }
     else
     {
         x = cont_x + cont_width - requisition.width;
     }
 
-    if (cont_y + cont_height > HeightOfScreen (cdk_x11_screen_get_xscreen (screen)))
+    /* Put the popup just below the container's bottom edge, clamped so it
+     * stays fully inside the monitor workarea.  On the desktop the icon
+     * container is the whole workarea, so its bottom edge is the workarea
+     * bottom; without the clamp the popup used to be moved entirely
+     * off-screen below it, leaving the interactive search running but
+     * invisible. */
+    if (cont_y + cont_height + requisition.height > monitor.y + monitor.height)
     {
-        y = HeightOfScreen (cdk_x11_screen_get_xscreen (screen)) - requisition.height;
+        y = monitor.y + monitor.height - requisition.height;
     }
-    else if (cont_y + cont_height < 0)     /* isn't really possible ... */
+    else if (cont_y + cont_height < monitor.y)
     {
-        y = 0;
+        y = monitor.y;
     }
     else
     {
