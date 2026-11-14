@@ -1160,6 +1160,14 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
              * "CDK_IS_WINDOW (rect_window)" assertion without showing the
              * menu.  The current event is the Ctrl+F10 key press itself, so
              * the menu lands at the pointer, like the icon view does. */
+#if CTK_CHECK_VERSION (3, 26, 0)
+            /* Close the interactive search popup first, like the Return
+             * case and like the icon view, so the background menu does
+             * not have to fight the search popup for the keyboard: the
+             * popup is gone before the menu pops up, instead of relying
+             * on the menu's grab hiding it through a focus-out event. */
+            ctk_tree_view_stop_interactive_search (tree_view);
+#endif
             fm_directory_view_pop_up_background_context_menu (view, NULL);
             handled = TRUE;
         }
