@@ -205,6 +205,8 @@ static void          reveal_icon                                    (BaulIconCon
         BaulIcon *icon);
 static void          baul_icon_container_search_dialog_hide         (CtkWidget *search_dialog,
         BaulIconContainer *container);
+static void          baul_icon_container_update_interactive_search (BaulIconContainer *container,
+        gboolean           open);
 
 static void	     baul_icon_container_set_rtl_positions (BaulIconContainer *container);
 static double	     get_mirror_x_position                     (BaulIconContainer *container,
@@ -4391,6 +4393,10 @@ destroy (CtkWidget *object)
     /* destroy interactive search dialog */
     if (container->details->search_window)
     {
+        /* Release the "search owns the keyboard" flag of the toplevel
+         * before the popup goes away, so accelerators keep working even
+         * if the view is destroyed with the popup still mapped. */
+        baul_icon_container_update_interactive_search (container, FALSE);
         ctk_widget_destroy (container->details->search_window);
         container->details->search_window = NULL;
         container->details->search_entry = NULL;
@@ -5398,6 +5404,27 @@ send_focus_change (CtkWidget *widget, gboolean in)
     cdk_event_free (fevent);
 }
 
+/* Marks the toplevel of @container as having the interactive search
+ * popup open (see ctk_window_set_interactive_search_open()): while the
+ * popup is mapped the search owns the keyboard, so toplevel accelerators
+ * and binding sets must not fire.  Without it, Ctrl+A with the popup
+ * open reaches ctk_window_activate_key() first and fires the window's
+ * "Select All" accelerator, selecting every icon in the view instead of
+ * the text in the search entry, the same way the modal grab that the
+ * popup held before it was made non-modal used to keep those keys away. */
+static void
+baul_icon_container_update_interactive_search (BaulIconContainer *container,
+                                               gboolean           open)
+{
+    CtkWidget *toplevel;
+
+    toplevel = ctk_widget_get_toplevel (CTK_WIDGET (container));
+    if (CTK_IS_WINDOW (toplevel))
+    {
+        ctk_window_set_interactive_search_open (CTK_WINDOW (toplevel), open);
+    }
+}
+
 static void
 baul_icon_container_search_dialog_hide (CtkWidget *search_dialog,
                                         BaulIconContainer *container)
@@ -5422,6 +5449,8 @@ baul_icon_container_search_dialog_hide (CtkWidget *search_dialog,
     /* send focus-in event */
     send_focus_change (CTK_WIDGET (container->details->search_entry), FALSE);
     ctk_widget_hide (search_dialog);
+    /* The popup is gone: the keyboard belongs to the toplevel again. */
+    baul_icon_container_update_interactive_search (container, FALSE);
     ctk_entry_set_text (CTK_ENTRY (container->details->search_entry), "");
 }
 
@@ -5923,6 +5952,11 @@ baul_icon_container_real_start_interactive_search (BaulIconContainer *container,
     /* done, show it */
     baul_icon_container_search_position_func (container, container->details->search_window);
     ctk_widget_show (container->details->search_window);
+    /* While the popup is mapped it owns the keyboard of the toplevel:
+     * window accelerators (Ctrl+A "Select All", ...) and binding sets
+     * must not fire while the user is editing the search text, exactly
+     * like the modal grab that the popup held when it was still modal. */
+    baul_icon_container_update_interactive_search (container, TRUE);
     if (container->details->search_entry_changed_id == 0)
     {
         container->details->search_entry_changed_id =
