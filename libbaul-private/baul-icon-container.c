@@ -6008,15 +6008,31 @@ key_press_event (CtkWidget *widget,
             return FALSE;
         }
 
-        ctk_widget_realize (container->details->search_window);
-        search_event = cdk_event_copy ((CdkEvent *) event);
-        g_object_unref (((CdkEventKey *) search_event)->window);
-        ((CdkEventKey *) search_event)->window =
-                g_object_ref (ctk_widget_get_window (container->details->search_window));
-        ctk_widget_event (container->details->search_window, search_event);
-        cdk_event_free (search_event);
+        /* Ctrl+F10 is the background context menu, not search input.
+         * Dismiss the popup and fall through to the switch below, whose
+         * F10 case pops the background menu with the popup already gone,
+         * exactly like it does with the popup closed.  (Return FALSE
+         * instead and the menu would never pop up: the switch below
+         * would not run at all, the key press would just propagate to
+         * the ancestors.) */
+        if (event->keyval == CDK_KEY_F10 &&
+                (event->state & CDK_CONTROL_MASK))
+        {
+            baul_icon_container_search_dialog_hide (
+                    container->details->search_window, container);
+        }
+        else
+        {
+            ctk_widget_realize (container->details->search_window);
+            search_event = cdk_event_copy ((CdkEvent *) event);
+            g_object_unref (((CdkEventKey *) search_event)->window);
+            ((CdkEventKey *) search_event)->window =
+                    g_object_ref (ctk_widget_get_window (container->details->search_window));
+            ctk_widget_event (container->details->search_window, search_event);
+            cdk_event_free (search_event);
 
-        return TRUE;
+            return TRUE;
+        }
     }
 
     if (is_renaming (container) || is_renaming_pending (container))

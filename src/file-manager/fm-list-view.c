@@ -1157,6 +1157,14 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
     case CDK_KEY_F10:
         if (event->state & CDK_CONTROL_MASK)
         {
+#if CTK_CHECK_VERSION (3, 27, 0)
+            /* Close the interactive search popup first, like the Return
+             * case and like the icon view, so the background menu does
+             * not have to fight the search popup for the keyboard: the
+             * popup is gone before the menu pops up, instead of relying
+             * on the menu's grab hiding it through a focus-out event. */
+            ctk_tree_view_stop_interactive_search (tree_view);
+#endif
             /* NULL, like the popup_menu path: ctk_menu_popup_at_pointer()
              * falls back to ctk_get_current_event() when it gets no event,
              * so the menu lands at the pointer, like the icon view does.
