@@ -1,0 +1,4 @@
+baul-icon-container: Fix leak of the copied key event in key_press_event
+
+Fixes leaking the CdkEvent copy and its reference to the original CdkWindow
+on the keystroke that opens the interactive search popup
