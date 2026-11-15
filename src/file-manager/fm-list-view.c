@@ -1117,7 +1117,6 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
 {
     FMDirectoryView *view;
     FMListView *listview;
-    CdkEventButton button_event = { 0 };
     gboolean handled;
     CtkTreeView *tree_view;
     CtkTreePath *path;
@@ -1158,7 +1157,14 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
     case CDK_KEY_F10:
         if (event->state & CDK_CONTROL_MASK)
         {
-            fm_directory_view_pop_up_background_context_menu (view, &button_event);
+            /* NULL, like the popup_menu path: ctk_menu_popup_at_pointer()
+             * falls back to ctk_get_current_event() when it gets no event,
+             * so the menu lands at the pointer, like the icon view does.
+             * An explicitly built CdkEventButton would need a valid window
+             * for ctk_menu_popup_at_rect(), which bails out on its
+             * "CDK_IS_WINDOW (rect_window)" assertion without showing the
+             * menu. */
+            fm_directory_view_pop_up_background_context_menu (view, NULL);
             handled = TRUE;
         }
         break;
