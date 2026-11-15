@@ -5474,11 +5474,6 @@ baul_icon_container_search_button_press_event (CtkWidget *widget,
 
     baul_icon_container_search_dialog_hide (widget, container);
 
-    if (event->window == ctk_layout_get_bin_window (CTK_LAYOUT (container)))
-    {
-        button_press_event (CTK_WIDGET (container), event);
-    }
-
     return TRUE;
 }
 
