@@ -54,7 +54,6 @@
 #include "baul-lib-self-check-functions.h"
 #include "baul-marshal.h"
 
-#define TAB_NAVIGATION_DISABLED
 
 /* Interval for updating the rubberband selection, in milliseconds.  */
 #define RUBBERBAND_TIMEOUT_INTERVAL 10
@@ -4296,55 +4295,6 @@ typedef struct
     int last_match_length;
 } BestNameMatch;
 
-#ifndef TAB_NAVIGATION_DISABLED
-static void
-select_previous_or_next_icon (BaulIconContainer *container,
-                              gboolean next,
-                              CdkEventKey *event)
-{
-    BaulIcon *icon;
-    const GList *item;
-
-    item = NULL;
-    /* Chose the icon to start with.
-     * If we have a keyboard focus, start with it.
-     * Otherwise, use the single selected icon.
-     */
-    icon = container->details->keyboard_focus;
-    if (icon == NULL)
-    {
-        icon = get_first_selected_icon (container);
-    }
-
-    if (icon != NULL)
-    {
-        /* must have at least @icon in the list */
-        g_assert (container->details->icons != NULL);
-        item = g_list_find (container->details->icons, icon);
-        g_assert (item != NULL);
-
-        item = next ? item->next : item->prev;
-        if (item == NULL)
-        {
-            item = next ? g_list_first (container->details->icons) : g_list_last (container->details->icons);
-        }
-
-    }
-    else if (container->details->icons != NULL)
-    {
-        /* no selection yet, pick the first or last item to select */
-        item = next ? g_list_first (container->details->icons) : g_list_last (container->details->icons);
-    }
-
-    icon = (item != NULL) ? item->data : NULL;
-
-    if (icon != NULL)
-    {
-        keyboard_move_to (container, icon, NULL, event);
-    }
-}
-#endif
-
 static void
 destroy (CtkWidget *object)
 {
@@ -6140,22 +6090,6 @@ key_press_event (CtkWidget *widget,
             keyboard_space (container, event);
             handled = TRUE;
             break;
-#ifndef TAB_NAVIGATION_DISABLED
-        case CDK_KEY_Tab:
-        case CDK_KEY_ISO_Left_Tab:
-            /* Tab with Ctrl is focus navigation, not icon selection:
-             * leave it unhandled so the window move-focus bindings move
-             * the keyboard focus out of the view. */
-            if (event->state & CDK_CONTROL_MASK)
-            {
-                break;
-            }
-
-            select_previous_or_next_icon (container,
-                                          (event->state & CDK_SHIFT_MASK) == 0, event);
-            handled = TRUE;
-            break;
-#endif
         case CDK_KEY_Return:
         case CDK_KEY_KP_Enter:
             if ((event->state & CDK_SHIFT_MASK) != 0)
