@@ -1,0 +1,1 @@
+baul-bookmark: Fix leak of the icon surface in baul_bookmark_menu_item_new
