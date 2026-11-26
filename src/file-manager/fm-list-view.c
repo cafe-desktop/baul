@@ -1138,7 +1138,8 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
      * KP_Enter go there too: the search entry's "activate" handler
      * closes the popup and activates the selected row, like the icon
      * view does.  Shift+Return and Shift+KP_Enter (open in a new
-     * tab/window) and Ctrl+F10 (background context menu) stay here. */
+     * tab/window), Ctrl+F10 (background context menu) and plain F2
+     * (start renaming the selected file) stay here. */
     toplevel = ctk_widget_get_toplevel (widget);
     if (CTK_IS_WINDOW (toplevel) &&
         ctk_window_get_interactive_search_open (CTK_WINDOW (toplevel)) &&
@@ -1146,7 +1147,9 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
           (event->state & CDK_SHIFT_MASK)) &&
         !(event->keyval == CDK_KEY_KP_Enter &&
           (event->state & CDK_SHIFT_MASK)) &&
-        !(event->keyval == CDK_KEY_F10 && (event->state & CDK_CONTROL_MASK)))
+        !(event->keyval == CDK_KEY_F10 && (event->state & CDK_CONTROL_MASK)) &&
+        !(event->keyval == CDK_KEY_F2 &&
+          (event->state & ctk_accelerator_get_default_mod_mask ()) == 0))
     {
         return FALSE;
     }
@@ -1176,6 +1179,22 @@ key_press_callback (CtkWidget *widget, CdkEventKey *event, gpointer callback_dat
             handled = TRUE;
         }
         break;
+#if CTK_CHECK_VERSION (3, 27, 0)
+    case CDK_KEY_F2:
+        /* Plain F2 while the interactive search popup is shown: close
+         * the popup and start renaming the selected file, like the
+         * Rename accelerator does without the popup.  Without the
+         * popup open the accelerator handles the key press first and
+         * this case is not reached. */
+        if (CTK_IS_WINDOW (toplevel) &&
+            ctk_window_get_interactive_search_open (CTK_WINDOW (toplevel)))
+        {
+            ctk_tree_view_stop_interactive_search (tree_view);
+            fm_directory_view_start_renaming_selected_file (view);
+            handled = TRUE;
+        }
+        break;
+#endif
     case CDK_KEY_Right:
         ctk_tree_view_get_cursor (tree_view, &path, NULL);
         if (path)

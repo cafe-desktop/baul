@@ -373,6 +373,7 @@ void                fm_directory_view_set_selection                    (FMDirect
         GList            *selection);
 GArray *            fm_directory_view_get_selected_icon_locations      (FMDirectoryView  *view);
 void                fm_directory_view_reveal_selection                 (FMDirectoryView  *view);
+void                fm_directory_view_start_renaming_selected_file     (FMDirectoryView  *view);
 gboolean            fm_directory_view_is_empty                         (FMDirectoryView  *view);
 gboolean            fm_directory_view_is_read_only                     (FMDirectoryView  *view);
 gboolean            fm_directory_view_supports_creating_files          (FMDirectoryView  *view);

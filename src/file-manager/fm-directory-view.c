@@ -6527,6 +6527,30 @@ action_rename_select_all_callback (CtkAction *action G_GNUC_UNUSED,
 	real_action_rename (FM_DIRECTORY_VIEW (callback_data), TRUE);
 }
 
+/**
+ * fm_directory_view_start_renaming_selected_file:
+ * @view: an #FMDirectoryView
+ *
+ * Starts the inline renaming of the first selected file of @view, the
+ * same way the "Rename" action (F2) does.  Unlike the action, nothing
+ * happens when the selection is empty.
+ **/
+void
+fm_directory_view_start_renaming_selected_file (FMDirectoryView *view)
+{
+	GList *selection;
+
+	g_return_if_fail (FM_IS_DIRECTORY_VIEW (view));
+
+	selection = fm_directory_view_get_selection (view);
+
+	if (selection != NULL) {
+		real_action_rename (view, FALSE);
+	}
+
+	baul_file_list_free (selection);
+}
+
 static void
 file_mount_callback (BaulFile *file G_GNUC_UNUSED,
 		     GFile    *result_location G_GNUC_UNUSED,
