@@ -5703,6 +5703,18 @@ baul_icon_container_search_key_press_event (CtkWidget *widget,
         return TRUE;
     }
 
+    /* F2: close the search and start renaming the selected item, the
+     * same thing the Rename accelerator (F2) of the file manager does
+     * while the popup is not shown.  The search popup owns the keyboard
+     * while it is mapped, so the accelerator never sees the key press. */
+    if (event->keyval == CDK_KEY_F2 &&
+            (event->state & ctk_accelerator_get_default_mod_mask ()) == 0)
+    {
+        baul_icon_container_search_dialog_hide (widget, container);
+        baul_icon_container_start_renaming_selected_item (container, FALSE);
+        return TRUE;
+    }
+
     /* close window and activate alternate */
     if (event->keyval == CDK_KEY_Return && event->state & CDK_SHIFT_MASK)
     {
